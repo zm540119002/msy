@@ -1,0 +1,73 @@
+<extend name="Public:base" />
+
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
+</block>
+<block name="content">
+    <article class="msh_product_picture f24">
+        <section class="purchase_certification">
+            <div class="weChat_avatar_info">
+                <if condition="$user.avatar neq '' ">
+                    <img src="UPLOAD_IMG/{$user.id_url}" alt="" class="weChat_avatar">
+                    <elseif condition="$wxUser.headimgurl neq '' "/>
+                    <img src="{$wxUser.headimgurl}" alt="" class="weChat_avatar">
+                    <else />
+                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="" class="weChat_avatar">
+                </if>
+                <div class="weChat_av_r">
+                    <if condition="$user.nickname neq '' ">
+                        <span>{$user.nickname}</span>
+                        <elseif condition="$wxUser.nickname neq '' "/>
+                        <span>{$wxUser.nickname}</span>
+                        <else /><span>nobody</span>
+                    </if>
+                    <if condition="$user.mobile_phone neq '' "><span>{$user.mobile_phone}</span></if>
+                </div>
+            </div>
+            <div class="certified_avatar_r">
+                <if condition="$company.auth_status eq 2">
+                    <i></i>
+                    <span>已认证</span>
+                    <else />
+                    <i class="not_certified"></i>
+                    <span>未认证</span>
+                </if>
+            </div>
+        </section>
+        <section class="purchase_order_management">
+            <ul>
+                <li>
+                    <a href="{:U('Cart/goodsManage')}">
+                        <span class="order_cart"></span>
+                        采购车商品管理
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Order/orderList',array('pay_status'=>20))}">
+                        <span class="order_pay"></span>
+                        已付款的采购单
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Order/orderList',array('pay_status'=>10))}">
+                        <span class="order_success"></span>
+                        待付款的采购单
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Order/orderList',array('pay_status'=>40))}">
+                        <span class="order_success"></span>
+                        已完成的采购单
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </article>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+        });
+    </script>
+</block>

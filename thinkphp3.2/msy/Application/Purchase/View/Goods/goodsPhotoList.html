@@ -1,0 +1,18 @@
+<volist name="goodsList" id="vo">
+    <li data-id="$vo['id']">
+        <a href="{:U('Goods/goodsDetail',array('goodsId'=>$vo['id']))}">
+            <div class="goods_img">
+                <empty name="vo.img">
+                    <img src="PUBLIC_IMG/common/default/goods_default.png" alt="" class="c_img">
+                <else/>
+                    <img src="UPLOADS_IMG/{$vo.img}" alt="" class="c_img">
+                </empty>
+            </div>
+            <p class="f24 commodity_name">{$vo.name}</p>
+        </a>
+        <div class="commodity_price f24">
+            <span class="price">￥<price>{$vo.price}</price></span>
+            <a href="javascript:void(0);" class="shopping_cart">购物车</a>
+        </div>
+    </li>
+</volist>

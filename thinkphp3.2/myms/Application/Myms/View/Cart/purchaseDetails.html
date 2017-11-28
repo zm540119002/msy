@@ -1,0 +1,36 @@
+<div id="areaMask" class="mask" data-show="0"></div>
+<section id="areaLayer" class="express-area-box cart" >
+    <div class="purchase_goods_module f24 goodsList">
+        <ul class="goods_list">
+            <li data-layer-id="{$goodsInfo.id}" data-layer-type="{$type}">
+                <div class="purchase_goods_detail">
+                    <notempty name="goodsInfo.main_img">
+                        <img class="purchase_gs_img" src="UPLOADS_IMG/{$goodsInfo.main_img}" alt=""  />
+                        <else />
+                        <img class="purchase_gs_img" src="PUBLIC_IMG/common/default/purchase40_default.jpg" alt="">
+                    </notempty>
+                    <div class="purchase_gs_r">
+                        <p>{$goodsInfo.name}</p>
+                        <div>
+                            <span class="real_price">￥<price>{$goodsInfo.real_price}</price></span>
+                            <del>￥<price>{$goodsInfo.price}</price></del>
+                        </div>
+                        <a href="javascript:void(0);" class="closeBtn">X</a>
+                    </div>
+                </div>
+                <div class="purchase_goods_detail">
+                    <p>产品规格</p>
+                    <p class="specification">{$goodsInfo.specification}</p>
+                </div>
+                <div class="purchase_goods_detail purchase_goods_num">
+                    <span>购买数量</span>
+                    <div class="quantity_wrapper">
+                        <a href="javascript:void(0);" class="greduce">-</a>
+                        <input type="text" value="1" class="f24 gshopping_count">
+                        <a href="javascript:void(0);" class="gplus">+</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

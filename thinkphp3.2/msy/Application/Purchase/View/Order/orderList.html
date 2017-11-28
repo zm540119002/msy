@@ -1,0 +1,22 @@
+<extend name="Public:base" />
+
+<block name="title">{$Think.get.pay_status|getPayStatusCN}的采购单列表</block>
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
+</block>
+<block name="content">
+    <article class="msh_product_picture f24">
+        <section class="purchase_order_list">
+            <ul>
+                <include file="orderListTpl" />
+            </ul>
+        </section>
+    </article>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+        });
+    </script>
+</block>
