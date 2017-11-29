@@ -84,7 +84,7 @@ class UnitModel extends Model {
     }
 
     //查询
-    public function selectUnit($where=[],$field=[],$join=[]){
+    public function selectUnit($where=[],$field=[],$join=[],$order=[]){
         $_where = array(
             'ut.status' => 0,
         );
@@ -93,11 +93,15 @@ class UnitModel extends Model {
         );
         $_join = array(
         );
+        $_order = array(
+            'ut.key','ut.id',
+        );
         $list = $this
             ->alias('ut')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
+            ->order(array_merge($_order,$order))
             ->select();
         return $list?:[];
     }
