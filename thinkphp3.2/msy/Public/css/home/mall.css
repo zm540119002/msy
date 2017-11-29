@@ -1251,6 +1251,131 @@ background-size:contain;
 .transfer_accounts_content{padding:1.8rem 0 0;}
 .transfer_amount{margin:0.8rem 0 0;font-size:0.48rem;}
 .transfer-accounts-box .dark_green{background:#0f9143;}
+.order_search_bar{
+    background: #f2f2f2;
+    padding:0.10rem;
+}
+.order_search_bar div{
+    width:100%;
+    border-radius:0.03rem;
+    box-sizing: border-box;
+}
+.order_search_text{
+    width:85%;
+    float:left;
+    background: #fff;
+    padding:0.12rem 0;
+    text-indent: 10px;
+}
+.order_search_btn{
+    width:15%;
+    background: #fff;
+    padding:0.12rem 0;
+    background:#fff url(../../img/common/search_btn.png) no-repeat center;
+    background-size:20px 23px;
+
+}
+.my_order_nav{
+    display:flex;
+    display:-webkit-flex;
+    border-bottom:6px solid #f2f2f2;
+    padding:0.15rem 0;
+}
+.my_order_nav li{
+    flex:1;
+    text-align:center;
+}
+.my_order_nav li a{
+    position:relative;
+    color:#333;
+}
+.my_order_nav a span{
+    position:absolute;
+    top:-14px;
+    right:-10px;
+    color:#ff1d25;
+}
+
+.pay_order_time i{
+    width: 0.3rem;
+    height:0.3rem;
+    display: inline-block;
+    background:url(../../img/common/pay_time.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    vertical-align: middle;
+}
+.my_order_nav li i{
+    width:32px;
+    height:32px;
+    display: block;
+    margin:0 auto;
+    background-image:url(../../img/common/my_order_ico.png);
+    background-repeat:no-repeat;
+    background-size:32px 400px;
+}
+.my_order_nav li i.w_pay{background-position:0 5px;}
+.my_order_nav li i.w_receipt{background-position:0 -30px;}
+.my_order_nav li i.w_commit{background-position:0 -65px;}
+.my_order_nav li i.w_finish{background-position:0 -100px;}
+.my_order_nav li i.w_service{background-position:0 -140px;}
+.my_order_nav li i.home{background-position:0 -178px;}
+.my_order_nav li a.active{color:#ff7bac;}
+.my_order_nav li .active i.w_pay{background-position:0 -212px;}
+.my_order_nav li .active i.w_receipt{background-position:0 -252px;}
+.my_order_nav li .active i.w_commit{background-position:0 -290px;}
+.my_order_nav li .active i.w_finish{background-position:0 -290px;}
+.order_pay_tipc{
+    background: #f2f2f2;
+    padding:0.12rem 0 0.12rem 0.15rem;
+}
+.no_order_detail{text-align:center;margin:0.15rem 0 0;}
+.order_flex{
+    font-size:0.20rem;
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    padding:0.15rem 0.12rem 0.15rem 0.12rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.order_flex_single{
+    border-bottom:1px solid #d9d9d9;
+    padding:0.15rem 0.12rem;
+}
+.order_detail_item{
+    border-bottom:8px solid #f2f2f2;
+}
+.orderDetail_list li{
+    padding:0.20rem 0.12rem 0.20rem 0.12rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.orderDetail_list li a{display:block;}
+.orderDetail_list li img{
+    display:block;
+    vertical-align: middle;
+    float:left;
+    max-width:1.5rem;
+}
+.orderDetail_list .orderDetail_r{margin:0 0 0 1.8rem;}
+.order_purchase_count{margin:0.12rem 0 0;}
+.pay_tag{
+    color:#ff1d25;
+}
+.pay_finish{color:#39b54a;}
+.order_pay_btn{
+    width:1.2rem;
+    height:0.5rem;
+    line-height:0.5rem;
+    text-align:center;
+    background: #39b54a;
+    color:#fff;
+    border-radius:0.05rem;
+}
+.edit_address{
+    width:1.5rem;
+    background:#ff7bac;
+    color:#fff;
+}
 /*对平台评分评论  */
 .seller_scoring_review{padding:0 0 0 0.25rem;margin:0 0 0.75rem 0;background: #fff;}
 .store_score_title,.store_score_star{display:flex;display:-webkit-flex;justify-content:space-between;padding:0.12rem 0.30rem 0.12rem 0;border-bottom:1px solid #d9d9d9;}
