@@ -28,7 +28,7 @@ class PersonalCenterController extends BaseController {
             if($this->user['id']){
                 $this->company = CompanyCache::get($this->user['id']);
             }
-            $this->display();
+            $this->display();       
         }
     }
 
