@@ -62,7 +62,7 @@ class UnitController extends BaseController {
         $join = array(
         );
 
-        $order = 'ut.id';
+        $order = 'ut.key,ut.id';
         $group = "";
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
 
