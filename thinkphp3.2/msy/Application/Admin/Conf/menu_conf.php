@@ -14,7 +14,7 @@ return array(
         'sub_menu'=>array(
             array('name' => '商品分类管理', 'act'=>'GoodsCategory', 'op'=>'goodsCategoryManage'),
             array('name' => '商品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
-            array('name' => '商品单位管理', 'act'=>'Unit', 'op'=>'unitManage'),
+            array('name' => '单位管理', 'act'=>'Unit', 'op'=>'unitManage'),
             array('name' => '代金券管理', 'act'=>'Coupons', 'op'=>'couponsManage'),
         ),
     ),
