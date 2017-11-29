@@ -10,6 +10,11 @@ class GoodsController extends BaseController {
         }else{
             //所有商品分类
             $this->allCategoryList = D('GoodsCategory')->selectGoodsCategory();
+            //单位
+//            $modelUnit = D('Unit');
+//            $unitList = $modelUnit->selectUnit();
+//            $this->assign('unitList',$unitList);
+
             $this->display();
         }
     }
@@ -42,7 +47,8 @@ class GoodsController extends BaseController {
         }
         $field = array(
             'g.id','g.name','g.category_id_1','g.category_id_2','g.category_id_3','g.inventory','g.sort',
-            'g.price','g.special_price','g.vip_price','g.senior_vip_price','g.gold_vip_price','g.unit',
+            'g.price','g.special_price','g.vip_price','g.senior_vip_price','g.gold_vip_price',
+            'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
             'gc1.id category_id_1','gc1.name category_name_1','gc2.id category_id_2',
             'gc2.name category_name_2','gc3.id category_id_3','gc3.name category_name_3',
         );
@@ -98,7 +104,8 @@ class GoodsController extends BaseController {
             }
             $field = array(
                 'g.id','g.name','g.category_id_1','g.category_id_2','g.category_id_3',
-                'g.on_off_line','g.inventory','g.sort','g.unit',
+                'g.on_off_line','g.inventory','g.sort',
+                'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
                 'gc1.id category_id_1','gc1.name category_name_1','gc2.id category_id_2',
                 'gc2.name category_name_2','gc3.id category_id_3','gc3.name category_name_3',
             );
@@ -207,7 +214,8 @@ class GoodsController extends BaseController {
                 $field = array(
                     'g.id','g.no','g.name','g.status','g.category_id_1','g.category_id_2','g.category_id_3','g.param','g.on_off_line',
                     'g.sort','g.specification','g.price','g.special_price','g.vip_price','g.senior_vip_price','g.gold_vip_price',
-                    'g.inventory','g.main_img','g.detail_img','g.create_time','g.intro','g.unit',
+                    'g.inventory','g.main_img','g.detail_img','g.create_time','g.intro',
+                    'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
                 );
                 $join = array(
                     ' left join goods g on g.id = pg.goods_id ',
