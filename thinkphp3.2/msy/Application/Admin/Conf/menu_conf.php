@@ -12,9 +12,9 @@ return array(
     'mall'=>array(
         'name'=>'采购商城','icon'=>'fa-book',
         'sub_menu'=>array(
-            array('name' => '项目产品分类', 'act'=>'GoodsCategory', 'op'=>'goodsCategoryManage'),
-            array('name' => '项目产品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
-            array('name' => '产品单位管理', 'act'=>'Unit', 'op'=>'unitManage'),
+            array('name' => '商品分类管理', 'act'=>'GoodsCategory', 'op'=>'goodsCategoryManage'),
+            array('name' => '商品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
+            array('name' => '单位管理', 'act'=>'Unit', 'op'=>'unitManage'),
             array('name' => '代金券管理', 'act'=>'Coupons', 'op'=>'couponsManage'),
             array('name' => '支付管理', 'act'=>'Plugin', 'op'=>'index'),
         ),

@@ -112,7 +112,8 @@ class GoodsModel extends Model {
         $_field = array(
             'g.id','g.no','g.name','g.status','g.category_id_1','g.category_id_2','g.category_id_3','g.on_off_line',
             'g.sort','g.specification','g.price','g.special_price','g.vip_price','g.senior_vip_price','g.gold_vip_price',
-            'g.inventory','g.main_img','g.detail_img','g.create_time','g.intro','g.notices','g.tag','g.unit',
+            'g.inventory','g.main_img','g.detail_img','g.create_time','g.intro','g.notices','g.tag',
+            'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
         );
         $_join = array(
         );
@@ -124,7 +125,6 @@ class GoodsModel extends Model {
             ->select();
         return $list?:[];
     }
-
 
     //减库存
     public function decGoodsNum($oGoods){

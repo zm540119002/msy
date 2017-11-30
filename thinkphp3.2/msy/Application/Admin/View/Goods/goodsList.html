@@ -12,7 +12,10 @@
                     <th>高级VIP价格</th>
                     <th>金牌VIP价格</th>
                     <th>特惠价</th>
-                    <th>单位</th>
+                    <th>单品规格</th>
+                    <th>包装数量</th>
+                    <th>包装单位</th>
+                    <th>采购单位</th>
                     <th>库存</th>
                     <th>操作</th>
                 </tr>
@@ -34,7 +37,10 @@
                         <td class="w5">{$vo.senior_vip_price}</td>
                         <td class="w5">{$vo.gold_vip_price}</td>
                         <td class="w5">{$vo.special_price}</td>
-                        <td class="w5">{$vo.unit|getUnitCN}</td>
+                        <td class="w5">{$vo.single_specification}</td>
+                        <td class="w5">{$vo.package_num}</td>
+                        <td class="w5">{$vo.package_unit|getUnitCN}</td>
+                        <td class="w5">{$vo.purchase_unit|getUnitCN}</td>
                         <td class="w5">{$vo.inventory}</td>
                         <td class="w96">
                             <a href="javascript:void(0);" class="editGoods">编辑</a>

@@ -74,9 +74,33 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>单位：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>单品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <select name="unit" class="selectbox">
+                            <input style="width: 200px; " class="inputboxadmin" name="single_specification" value="{$goodsInfo.single_specification}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>包装数量：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 200px; " class="inputboxadmin" name="package_num" value="{$goodsInfo.package_num}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>包装单位：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <select name="package_unit" class="selectbox">
+                                <notempty name="unitList">
+                                    <volist name="unitList" id="vo">
+                                        <option value="{$vo.key}">{$vo.value}</option>
+                                    </volist>
+                                </notempty>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>采购单位：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <select name="purchase_unit" class="selectbox">
                                 <notempty name="unitList">
                                     <volist name="unitList" id="vo">
                                         <option value="{$vo.key}">{$vo.value}</option>
@@ -204,9 +228,9 @@
             if(category_id_3){
                 $('[name=category_id_3]').val(category_id_3);
             }
-            var unit = '{$goodsInfo.unit}';
-            if(unit){
-                $('[name=unit]').val(unit);
+            var package_unit = '{$goodsInfo.package_unit}';
+            if(package_unit){
+                $('[name=package_unit]').val(package_unit);
             }
 
             //确定
