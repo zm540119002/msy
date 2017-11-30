@@ -20,6 +20,8 @@ define('APP_DEBUG',true);
 //域名根目录
 define('WEB_PATH',__DIR__.'/');
 
+define('SITE_URL','http://'.$_SERVER['HTTP_HOST']); // 网站域名
+
 //应用目录
 define('APP_PATH','./Application/');
 
