@@ -16,6 +16,7 @@ return array(
             array('name' => '项目产品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
             array('name' => '产品单位管理', 'act'=>'Unit', 'op'=>'unitManage'),
             array('name' => '代金券管理', 'act'=>'Coupons', 'op'=>'couponsManage'),
+            array('name' => '支付管理', 'act'=>'Plugin', 'op'=>'index'),
         ),
     ),
 );
