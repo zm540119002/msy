@@ -95,7 +95,7 @@ class GoodsController extends BaseController {
         }
         $this->goodsCategory2List = $goodsCategory2List;
 
-        $this ->display('categoryGoodsPhotoPage');
+        $this ->display('categoryGoodsPhotoList');
     }
 
     //商品列表-图形/列表形式

@@ -12,12 +12,16 @@
                 <a href="javascript:void(0);" class="order_del_btn goodsDel">删除</a>
             </if>
             <p>{$vo.name}</p>
-            <p>采购箱每箱含20单品盒 每盒装12g*20条</p>
+            <if condition="$vo.package_unit gt 1 ">
+                <p>采购{$vo.purchase_unit|getUnitCN}每{$vo.purchase_unit|getUnitCN}含{$vo.package_num}单品{$vo.package_unit|getUnitCN} 每{$vo.package_unit|getUnitCN}装{$vo.single_specification}</p>
+                <else/>
+                <p>每{$vo.package_unit|getUnitCN}装{$vo.single_specification}</p>
+            </if>
             <div>
-                <span class="purchase_price">￥<price>{$vo.price}</price>/箱</span>
+                <span class="purchase_price">￥<price>{$vo.price}</price>/{$vo.purchase_unit|getUnitCN}</span>
             </div>
             <div class="purchase_goods_num">
-                <span>采购数量(箱)</span>
+                <span>采购数量({$vo.purchase_unit|getUnitCN})</span>
                 <div class="quantity_wrapper">
                     <a href="javascript:void(0);" class="greduce">-</a>
                     <input type="text" value="{$vo.num|default='0'}" class="f24 gshopping_count">
