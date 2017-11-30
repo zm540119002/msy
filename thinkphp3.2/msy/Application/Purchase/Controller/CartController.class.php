@@ -35,7 +35,7 @@ class CartController extends BaseController {
                 );
                 $goodsList = $modelGoods->selectGoods($where);
                 $this->goodsList = GoodsNumMergeById($cart,$goodsList);
-                $this->display('Goods/goodsList');
+                $this->display('Goods/goodsListTpl');
             }
         }else{
             $this->display();
