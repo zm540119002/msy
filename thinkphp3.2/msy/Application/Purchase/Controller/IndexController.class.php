@@ -17,6 +17,11 @@ class IndexController extends BaseController
         $goodsCategoryList = $modelGoodsCategory->selectGoodsCategory($where);
         $this->goodsCategoryList = $goodsCategoryList;
 
+        //购物车配置开启的项
+        $unlockingArr = array('amount','add_cart','buy_now');
+        $unlockingFooterCart = unlockingFooterCartConfig($unlockingArr);
+        $this->assign('unlockingFooterCart',$unlockingFooterCart);
+
         $this->display();
     }
 }

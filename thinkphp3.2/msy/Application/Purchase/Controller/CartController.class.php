@@ -9,7 +9,8 @@ class CartController extends BaseController {
     public function jointPurchasing(){
         if(IS_POST){
         }else{
-            $this->cartType = 'withAdd';
+            $this->footerCartConfig = C('FOOTER_CART_CONFIG');
+            
             $this->display();
         }
     }

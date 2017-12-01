@@ -77,3 +77,18 @@ function getUnitCN($num){
     }
     return '';
 }
+
+/*开启底部购物车配置项
+ */
+function unlockingFooterCartConfig($arr){
+    $footerCartConfig = C('FOOTER_CART_CONFIG');
+    $tempArr = array();
+    foreach ($arr as $key => $val) {
+        foreach ($footerCartConfig as $k=>$v ){
+            if($val==$k){
+                $tempArr[$k] = $v;
+            }
+        }
+    }
+    return $tempArr;
+}
