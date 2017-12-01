@@ -59,7 +59,6 @@ class PaymentController extends Controller {
      *  提交支付方式
      */
     public function getCode(){
-        echo '111';exit;
             //C('TOKEN_ON',false); // 关闭 TOKEN_ON
             header("Content-type:text/html;charset=utf-8");            
             $order_id = I('order_id/d'); // 订单id
