@@ -109,7 +109,7 @@ class weixin
 		$input->SetOpenid($openId);					//用户openID
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$jsApiParameters = $tools->GetJsApiParameters($order2);
-	
+
 
         $html = <<<EOF
 	<script type="text/javascript">
@@ -153,8 +153,8 @@ EOF;
     
     function transfer($data){
     	//CA证书及支付信息
-    	$wxchat['appid'] = WxPayConfig::$appid;
-    	$wxchat['mchid'] = WxPayConfig::$smchid;
+    	$wxchat['appid'] = \WxPayConfig::$appid;
+    	$wxchat['mchid'] = \WxPayConfig::$smchid;
     	$wxchat['api_cert'] = './Component/payment/weixin/cert/apiclient_cert.pem';
     	$wxchat['api_key'] = './Component/payment/weixin/cert/apiclient_key.pem';
 //    	$wxchat['api_ca'] = './Component/payment/weixin/cert/rootca.pem';
