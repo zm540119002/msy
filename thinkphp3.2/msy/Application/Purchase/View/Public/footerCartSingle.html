@@ -1,52 +1,15 @@
 <section id="areaLayer" class="express-area-box cart" style="display:none;">
     <div class="purchase_goods_module f24 goodsList">
         <ul class="goods_list">
-            <li>
-                <div class="purchase_goods_detail">
-                    <img class="purchase_gs_img" src="PUBLIC_IMG/common/default/no_pic_40.jpg" alt="">
-                    <div class="purchase_gs_r">
-                        <p>台湾原装进口 真世酵素纤丽果冻  </p>
-                        <p>XXXXXXXXXXXXXXXXxxxxxxxxx</p>
-                        <a href="javascript:void(0);" class="closeBtn">X</a>
-                    </div>
-                </div>
-                <div class="purchase_goods_detail ">
-                    <div class="purchase_packing">
-                        <div>单品规格<span>12g*20条/盒</span></div>
-                        <div class="purchase_packing_r">
-                            <span class="market">￥<price>980.00</price></span>
-                            <del>￥2999.00</del>
-                        </div>
-                    </div>
-                    <div class="purchase_packing">
-                        <div>采购包装<span>10盒/箱(整箱采购)</span></div>
-                        <div class="purchase_packing_r">
-                            <span class="market">￥<price>1980.00</price></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="purchase_goods_detail purchase_goods_num">
-                    <span>采购数量(单位：箱)</span>
-                    <div class="quantity_wrapper">
-                        <a href="javascript:void(0);" class="greduce">-</a>
-                        <input type="text" value="0" class="f24 gshopping_count">
-                        <a href="javascript:void(0);" class="gplus">+</a>
-                    </div>
-                </div>
-            </li>
+            <include file="Goods/goodsListSingleTpl" />
         </ul>
     </div>
 </section>
 <div id="areaMask" class="mask" data-show="0"></div>
 <script type="text/javascript">
     $(function () {
+        //购物车点击
         $('body').on('click','.shopping_cart',function(){
-            var _li = $(this).parents('li');
-            $('ul.goods_list').find('li').data('id',_li.data('id'));
-            $('ul.goods_list').find('price').text(_li.find('price').text());
-            //先清空
-            $('.gshopping_count').val(0);
-            $('.goods_total_price').find('price').text(0);
             if(!$('.mask').data('show')){
                 $('html,body').css({"height":"100%","overflow":"hidden"});//动态阻止body页面滚动
                 $('.mask').show().css({position:'fixed'});
@@ -63,6 +26,12 @@
                 $('.mask').data('show',0);
                 $('.group_cart_nav').hide();
             }
+            var _li = $(this).parents('li');
+            $('ul.goods_list').find('li').data('id',_li.data('id'));
+            $('ul.goods_list').find('price').text(_li.find('price').text());
+            //先清空
+            $('.gshopping_count').val(0);
+            $('.goods_total_price').find('price').text(0);
         });
         $('.mask,.closeBtn').on('click',function(){
             $('html,body').css({"overflow":"auto"});

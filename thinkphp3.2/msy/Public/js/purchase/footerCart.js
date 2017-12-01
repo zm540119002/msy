@@ -53,6 +53,31 @@ $(function () {
             }
         });
     });
+
+    //加入购物车
+    $('body').on('click','.add_cart',function(){
+        var postData = assemblyData();
+        if(!postData.goodsList.length){
+            dialog.error('请选择商品');
+            return false;
+        }
+        var url = MODULE + '/Cart/addGoodsToCart';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }else {
+                    dialog.success(data.info);
+                }
+            }
+        });
+    });
 });
 
 //组装数据
