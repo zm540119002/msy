@@ -1233,6 +1233,9 @@ background-size:contain;
     border-bottom:1px solid #d9d9d9;
 }
 .purchase_gs_img{float:left;}
+.purchase_packing{display:flex;display:-webkit-flex;justify-content: space-between;}
+.purchase_packing .market{color:#ff0000;}
+.purchase_packing_r {width:2rem;text-align:left;}
 .purchase_gs_r{width:4.5rem;margin-left:0.8rem;}
 .closeBtn{
     position:absolute;

@@ -134,6 +134,28 @@ i{
 .bff1d25{background:#ff1d25;}
 .dark_green{background:#0f9143;}
 .goods_total_price{color:#ff6482;;padding-left: 0.18rem;font-size:0.32rem;}
+.group_cart_nav .share_column{
+            color:#0f9143;
+            position:relative;
+            border-right:1px solid #0f9143;
+        }
+        .group_cart_nav .shopping_cart_column{border-right:0;}
+        .group_cart_nav .share_column span{
+            width:28px;
+            height:40px;
+            display: inline-block;
+            background-image:url(../../img/common/share_ico.png);
+            background-repeat: no-repeat;
+            background-size:20px 49px;
+            vertical-align: middle;
+        }
+        .group_cart_nav .share_column span.s_i{ background-position:0 9px;}        
+        .group_cart_nav .share_column span.s_c{ background-position:0 -22px;position:relative;}
+        .group_cart_nav .share_column span.s_c i{
+            position:absolute;
+            top:-12px;
+            right:-2px;
+        }
 /*分享朋友圈*/
 .mcover {
     position: fixed;
