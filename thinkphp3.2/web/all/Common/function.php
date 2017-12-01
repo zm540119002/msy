@@ -525,3 +525,15 @@ function accountIsExist($name){
 function isReservedMobilePhone($mobile,$name){
     return (M('user')->where(array('name'=>trim($name),))->getField('mobile_phone') == trim($mobile)) ? true : false;
 }
+
+
+/**
+ * 过滤数组元素前后空格 (支持多维数组)
+ * @param $array 要过滤的数组
+ * @return array|string
+ */
+function trim_array_element($array){
+    if(!is_array($array))
+        return trim($array);
+    return array_map('trim_array_element',$array);
+}
