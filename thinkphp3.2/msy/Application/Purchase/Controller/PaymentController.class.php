@@ -74,17 +74,23 @@ class PaymentController extends Controller {
 //            $pay_radio = $_REQUEST['pay_radio'];
             //$config_value = get_url_param($pay_radio); // 类似于 pay_code=alipay&bank_code=CCB-DEBIT 参数
             //微信JS支付
-           if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
-               $order=array(
-                   'sn'=>147147,
-                   'actually_amount'=>0.01
-               );
-               $code_str = $this->payment->getJSAPI($order);
-               exit($code_str);
-           }else{
-
-           	//$code_str = $this->payment->get_code($order,$config_value);
-           }
+        $order=array(
+            'sn'=>147147,
+            'actually_amount'=>0.01
+        );
+        $code_str = $this->payment->getJSAPI($order);
+        exit($code_str);
+//           if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
+//               $order=array(
+//                   'sn'=>147147,
+//                   'actually_amount'=>0.01
+//               );
+//               $code_str = $this->payment->getJSAPI($order);
+//               exit($code_str);
+//           }else{
+//
+//           	//$code_str = $this->payment->get_code($order,$config_value);
+//           }
 //            $this->assign('code_str', $code_str);
 //            $this->assign('order_id', $order_id);
 //            return $this->fetch('payment');  // 分跳转 和不 跳转
