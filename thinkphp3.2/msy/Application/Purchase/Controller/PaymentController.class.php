@@ -24,14 +24,12 @@ class PaymentController extends Controller {
      */
     public function  __construct() {
 
-
-        
         parent::__construct();      
         //  订单支付提交
-        $pay_radio = $_REQUEST['pay_radio'];
-        $pay_radio = array(
-            'pay_code'=>'winxin'
-        );
+        //$pay_radio = $_REQUEST['pay_radio'];
+//        $pay_radio = array(
+//            'pay_code'=>'WeiXin'
+//        );
         if(!empty($pay_radio)) 
         {                         
             $pay_radio = get_url_param($pay_radio);
@@ -41,25 +39,27 @@ class PaymentController extends Controller {
         {            
             //$_GET = I('get.');            
             //file_put_contents('./a.html',$_GET,FILE_APPEND);    
-            $this->pay_code = I('get.pay_code');
-            $this->pay_code = 'winxin';
+            //$this->pay_code = I('get.pay_code');
+            $this->pay_code = 'weixin';
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }                        
         //获取通知的数据
         $xml = file_get_contents('php://input');    
-        if(empty($this->pay_code))
-            exit('pay_code 不能为空');        
+        if(empty($this->pay_code)){
+            exit('pay_code 不能为空');
+        }
         // 导入具体的支付类文件
         //   plugins/payment
-        include_once  "Component/payment/{$this->pay_code}/{$this->pay_code}.class.php"; // D:\wamp\www\svn_tpshop\www\plugins\payment\alipay\alipayPayment.class.php
-        $code = '\\'.$this->pay_code; // \alipay
-        $this->payment = new $code();
+//        include_once  "Component/payment/{$this->pay_code}/{$this->pay_code}.class.php"; // D:\wamp\www\svn_tpshop\www\plugins\payment\alipay\alipayPayment.class.php
+//        $code = '\\'.$this->pay_code; // \alipay
+        $this->payment = new \Component\payment\weixin\weixin();
     }
    
     /**
      *  提交支付方式
      */
     public function getCode(){
+
             //C('TOKEN_ON',false); // 关闭 TOKEN_ON
             header("Content-type:text/html;charset=utf-8");            
             $order_id = I('order_id/d'); // 订单id
@@ -74,7 +74,7 @@ class PaymentController extends Controller {
 //            $pay_radio = $_REQUEST['pay_radio'];
             //$config_value = get_url_param($pay_radio); // 类似于 pay_code=alipay&bank_code=CCB-DEBIT 参数
             //微信JS支付
-           if($this->pay_code == 'weixin' && $_SESSION['openid'] && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
+           if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
                $order=array(
                    'sn'=>147147,
                    'actually_amount'=>0.01
@@ -82,6 +82,7 @@ class PaymentController extends Controller {
                $code_str = $this->payment->getJSAPI($order);
                exit($code_str);
            }else{
+
            	//$code_str = $this->payment->get_code($order,$config_value);
            }
 //            $this->assign('code_str', $code_str);
@@ -114,7 +115,7 @@ class PaymentController extends Controller {
 //        		$payment_arr = M('Plugin')->where("`type` = 'payment'")->getField("code,name");
 //        		M('recharge')->where("order_id", $order_id)->save(array('pay_code'=>$this->pay_code,'pay_name'=>$payment_arr[$this->pay_code]));
 //        		//微信JS支付
-//        		if($this->pay_code == 'weixin' && $_SESSION['openid'] && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
+//        		if($this->pay_code == 'WeiXin' && $_SESSION['openid'] && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
 //        			$code_str = $this->payment->getJSAPI($order);
 //        			exit($code_str);
 //        		}else{

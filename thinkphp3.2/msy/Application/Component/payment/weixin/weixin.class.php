@@ -12,37 +12,35 @@
  * Author: IT宇宙人
  * Date: 2015-09-09
  */
-
-use think\Model; 
+namespace Component\payment\weixin;
 /**
  * 支付 逻辑定义
  * Class 
  * @package Home\Payment
  */
 
-class weixin extends Model
-{    
-    public $tableName = 'plugin'; // 插件表        
-	protected $connection = 'DB_CONFIG1';
-    
-    /**
-     * 析构流函数
-     */
-    public function  __construct() {   
-        parent::__construct();
-                
-        require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件         
-        require_once("example/WxPay.NativePay.php");
-        require_once("example/WxPay.JsApiPay.php");
+class weixin
+{
+	/**
+	 * 架构函数
+	 * @param array $totalRows  总的记录数
+	 * @param array $listRows  每页显示记录数
+	 * @param array $parameter  分页跳转的参数
+	 */
+	public function __construct() {
+		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
+		require_once("example/WxPay.NativePay.php");
+		require_once("example/WxPay.JsApiPay.php");
+		$paymentPlugin = D('Plugin')->where("code='weixin' and  type = 'payment' ")->find(); // 找到微信支付插件的配置
+		$config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
+		\WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
+		\WxPayConfig::$mchid = $config_value['mchid']; // * MCHID：商户号（必须配置，开户邮件中可查看）
+//		\WxPayConfig::$smchid = isset($config_value['smchid']) ? $config_value['smchid'] : ''; // * SMCHID：服务商商户号（必须配置，开户邮件中可查看）
+		\WxPayConfig::$key = $config_value['key']; // KEY：商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置）
+		\WxPayConfig::$appsecret = $config_value['appsecret']; // 公众帐号secert（仅JSAPI支付的时候需要配置)，
+	}
 
-        $paymentPlugin = D('Plugin')->where("code='weixin' and  type = 'payment' ")->find(); // 找到微信支付插件的配置
-        $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化        
-        WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
-        WxPayConfig::$mchid = $config_value['mchid']; // * MCHID：商户号（必须配置，开户邮件中可查看）
-        WxPayConfig::$smchid = isset($config_value['smchid']) ? $config_value['smchid'] : ''; // * SMCHID：服务商商户号（必须配置，开户邮件中可查看）
-        WxPayConfig::$key = $config_value['key']; // KEY：商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置）
-        WxPayConfig::$appsecret = $config_value['appsecret']; // 公众帐号secert（仅JSAPI支付的时候需要配置)，                                      
-    }    
+
     /**
      * 生成支付代码
      * @param   array   $order      订单信息
@@ -53,7 +51,7 @@ class weixin extends Model
             $notify_url = SITE_URL.'/index.php/Purchase/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
             //$notify_url = C('site_url').U('Home/Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
             //$notify_url = C('site_url')."/index.php?m=Home&c=Payment&a=notifyUrl&pay_code=weixin";
-            $input = new WxPayUnifiedOrder();
+            $input = new \WxPayUnifiedOrder();
             $input->SetBody("美尚云"); // 商品描述
             $input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
             $input->SetOut_trade_no($order['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
@@ -61,7 +59,7 @@ class weixin extends Model
             $input->SetNotify_url($notify_url); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
             $input->SetTrade_type("JSAPI"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
             $input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
-            $notify = new NativePay();
+            $notify = new \NativePay();
             $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
             $url2 = $result["code_url"];
             return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';        
@@ -73,7 +71,7 @@ class weixin extends Model
     function response()
     {                        
         require_once("example/notify.php");  
-        $notify = new PayNotifyCallBack();
+        $notify = new \PayNotifyCallBack();
         $notify->Handle(false);       
     }
     
@@ -266,13 +264,13 @@ EOF;
     //支付金额原路退还
     public function payment_refund($data){
     	if(!empty($data["transaction_id"])){
-    		$input = new WxPayRefund();
+    		$input = new \WxPayRefund();
     		$input->SetTransaction_id($data["transaction_id"]);
     		$input->SetTotal_fee($data["total_fee"]);
     		$input->SetRefund_fee($data["refund_fee"]);
-    		$input->SetOut_refund_no(WxPayConfig::MCHID.date("YmdHis"));
-    		$input->SetOp_user_id(WxPayConfig::MCHID);
-    		return WxPayApi::refund($input);
+    		$input->SetOut_refund_no(\WxPayConfig::MCHID.date("YmdHis"));
+    		$input->SetOp_user_id(\WxPayConfig::MCHID);
+    		return \WxPayApi::refund($input);
     	}else{
     		return false;
     	}
