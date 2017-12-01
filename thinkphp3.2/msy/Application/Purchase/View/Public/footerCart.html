@@ -1,47 +1,43 @@
 <footer class="f24 group_cart_nav">
-    <!--分享-->
-    <div class="group_btn50 group_btn30 bfff">
-        <a href="javascript:void(0);" class="share_column"><span class="s_i"></span>分享</a>
-    </div>
     <volist name="unlockingFooterCart" id="vo" key="k" >
-        <if condition="$k eq 'share' ">
+        <notempty name="vo.share">
             <!--分享-->
             <div class="group_btn50 group_btn30 bfff">
                 <a href="javascript:void(0);" class="share_column"><span class="s_i"></span>分享</a>
             </div>
-        </if>
-        <if condition="$k eq 'shopping_basket' ">
+        </notempty>
+        <notempty name="vo.shopping_basket">
             <!--购物篮-->
             <div class="group_btn50 group_btn30 bfff">
                 <a href="javascript:void(0);" class="share_column shopping_cart_column"><span class="s_c"><i>5</i></span></a>
             </div>
-        </if>
-        <if condition="$k eq 'amount' ">
+        </notempty>
+        <notempty name="vo.amount">
             <!--总价-->
             <div class="group_btn50 group_btn30 bfff">
                 <span class="goods_total_price amount">￥<price>0.00</price></span>
             </div>
-        </if>
-        <if condition="$k eq 'add_cart' ">
+        </notempty>
+        <notempty name="vo.add_cart">
             <!--加入购物车-->
             <a href="javascript:void(0);" class="bff6482 group_btn50">加入购物车</a>
-        </if>
-        <if condition="$k eq 'buy_now' ">
+        </notempty>
+        <notempty name="vo.buy_now">
             <!--立即结算-->
             <a href="javascript:void(0);" class="group_btn50 bff1d25"><i class="collect"></i>立即结算</a>
-        </if>
-        <if condition="$k eq 'pay_now' ">
+        </notempty>
+        <notempty name="vo.pay_now">
             <!--立即支付-->
             <a href="javascript:void(0);" class="group_btn50 bff1d25"><i class="collect"></i>立即支付</a>
-        </if>
-        <if condition="$k eq 'submit_orders' ">
+        </notempty>
+        <notempty name="vo.submit_orders">
             <!--提交订单-->
             <a href="javascript:void(0);" class="group_btn50 bff1d25"><i class="collect"></i>提交订单</a>
-        </if>
-        <if condition="$k eq 'go_to_purchase' ">
+        </notempty>
+        <notempty name="vo.go_to_purchase">
             <!--进入采购-->
             <a href="javascript:void(0);" class="bff6482 group_btn75">进入采购</a>
-        </if>
+        </notempty>
     </volist>
 </footer>
 <script type="text/javascript" src="PUBLIC_JS/purchase/settlement.js"></script>
