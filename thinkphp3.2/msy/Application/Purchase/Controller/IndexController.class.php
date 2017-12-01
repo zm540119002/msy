@@ -1,7 +1,6 @@
 <?php
 namespace Purchase\Controller;
 
-use  web\all\Lib\AuthUser;
 use  web\all\Controller\BaseController;
 use Think\Controller;
 
@@ -18,9 +17,7 @@ class IndexController extends BaseController
         $this->goodsCategoryList = $goodsCategoryList;
 
         //购物车配置开启的项
-        $unlockingArr = array(0,2,3);
-        $unlockingFooterCart = unlockingFooterCartConfig($unlockingArr);
-        $this->assign('unlockingFooterCart',$unlockingFooterCart);
+        $this->unlockingFooterCart = unlockingFooterCartConfig(array(0,2,4));
 
         $this->display();
     }
