@@ -95,6 +95,7 @@ class weixin
 //		$go_url = MODULE + '/recharge/payComplete';
 
 		$tools = new \JsApiPay();
+		var_dump($tools);exit;
 		$openId = $tools->GetOpenid();
 		var_dump($openId);exit;
 		$input = new \WxPayUnifiedOrder();
