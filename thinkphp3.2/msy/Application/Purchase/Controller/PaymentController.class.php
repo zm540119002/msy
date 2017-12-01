@@ -59,7 +59,7 @@ class PaymentController extends Controller {
      *  提交支付方式
      */
     public function getCode(){
-
+            echo "aa";exit;
             //C('TOKEN_ON',false); // 关闭 TOKEN_ON
             header("Content-type:text/html;charset=utf-8");            
             $order_id = I('order_id/d'); // 订单id
@@ -95,6 +95,7 @@ class PaymentController extends Controller {
 //            $this->assign('order_id', $order_id);
 //            return $this->fetch('payment');  // 分跳转 和不 跳转
     }
+
 
 //    public function getPay(){
 //    	//手机端在线充值
