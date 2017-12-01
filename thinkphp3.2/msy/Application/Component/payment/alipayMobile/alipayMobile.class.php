@@ -77,9 +77,9 @@ class alipayMobile extends Model
                         "payment_type"  => "1", // 支付类型 ，无需修改
                         "_input_charset"=> trim(strtolower($this->alipay_config['input_charset'])), //字符编码格式 目前支持 gbk 或 utf-8
                         "out_trade_no"	=> $order['order_sn'], //商户订单号
-                        "subject"       =>"美尚云", //订单名称，必填
-                        "total_fee"	=> $order['actually_amount'], //付款金额
-                        "show_url"	=> "http://msy.meishangyun.com", //收银台页面上，商品展示的超链接，必填
+                        "subject"       =>"TPshop订单", //订单名称，必填
+                        "total_fee"	=> $order['order_amount'], //付款金额
+                        "show_url"	=> "http://www.tp-shop.cn", //收银台页面上，商品展示的超链接，必填
                 
                     );
             //  如果是支付宝网银支付    
