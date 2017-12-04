@@ -31,3 +31,42 @@
         </div>
     </li>
 </volist>
+<notempty name="goodsInfo">
+    <div class="purchase_goods_module f24 goodsList">
+        <ul class="goods_list">
+            <li>
+                <div class="purchase_goods_detail">
+                    <img class="purchase_gs_img" src="PUBLIC_IMG/common/default/no_pic_40.jpg" alt="">
+                    <div class="purchase_gs_r">
+                        <p>{$goodsInfo.name}</p>
+                        <p>{$goodsInfo.remark} </p>
+                        <a href="javascript:void(0);" class="closeBtn">X</a>
+                    </div>
+                </div>
+                <div class="purchase_goods_detail">
+                    <div class="purchase_packing">
+                        <div>单品规格<span>{$goodsInfo.single_specification}/{$goodsInfo.package_unit|getUnitCN}</span></div>
+                        <div class="purchase_packing_r">
+                            <span class="market">￥<price>198.00</price></span>
+                            <del>￥2999.00</del>
+                        </div>
+                    </div>
+                    <div class="purchase_packing">
+                        <div>采购包装<span>10盒/箱(整箱采购)</span></div>
+                        <div class="purchase_packing_r">
+                            <span class="market">￥<price>1980.00</price></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="purchase_goods_detail purchase_goods_num">
+                    <span>采购数量(单位：箱)</span>
+                    <div class="quantity_wrapper">
+                        <a href="javascript:void(0);" class="greduce">-</a>
+                        <input type="text" value="0" class="f24 gshopping_count">
+                        <a href="javascript:void(0);" class="gplus">+</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</notempty>
