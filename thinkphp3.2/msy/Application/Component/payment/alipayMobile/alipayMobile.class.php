@@ -52,6 +52,7 @@ class alipayMobile
      */
     function get_code($order, $config_value)
     {
+        echo 'aa';exit;
              // 接口类型
             $service = array(             
                  1 => 'create_partner_trade_by_buyer', //使用担保交易接口
