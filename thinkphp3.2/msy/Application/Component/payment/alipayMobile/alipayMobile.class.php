@@ -13,17 +13,16 @@
  * Date: 2015-09-09
  */
 
-//namespace plugins\payment\alipay;
+namespace Component\payment\alipayMobile;
 
-use think\Model; 
-use think\Request;
+
 /**
  * 支付 逻辑定义
  * Class AlipayPayment
  * @package Home\Payment
  */
 
-class alipayMobile extends Model
+class alipayMobile
 {    
     public $tableName = 'plugin'; // 插件表        
     public $alipay_config = array();// 支付宝支付配置参数
@@ -31,22 +30,21 @@ class alipayMobile extends Model
     /**
      * 析构流函数
      */
-    public function  __construct() {   
-        parent::__construct();      
+    public function  __construct() {
         unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
         
-        $paymentPlugin = M('Plugin')->where("code='alipayMobile' and  type = 'payment' ")->find(); // 找到支付插件的配置
-        $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化        
+        $paymentPlugin = D('Plugin')->where("code='alipayMobile' and  type = 'payment' ")->find(); // 找到支付插件的配置
+        $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
         $this->alipay_config['alipay_pay_method']= $config_value['alipay_pay_method']; // 1 使用担保交易接口  2 使用即时到帐交易接口s
         $this->alipay_config['partner']       = $config_value['alipay_partner'];//合作身份者id，以2088开头的16位纯数字
         $this->alipay_config['seller_email']  = $config_value['alipay_account'];//收款支付宝账号，一般情况下收款账号就是签约账号
         $this->alipay_config['key']	      = $config_value['alipay_key'];//安全检验码，以数字和字母组成的32位字符
         $this->alipay_config['sign_type']     = strtoupper('MD5');//签名方式 不需修改
         $this->alipay_config['input_charset'] = strtolower('utf-8');//字符编码格式 目前支持 gbk 或 utf-8
-        $this->alipay_config['cacert']        = getcwd().'\\cacert.pem'; //ca证书路径地址，用于curl中ssl校验 //请保证cacert.pem文件在当前文件夹目录中
+        $this->alipay_config['cacert']        = getcwd().'\\Component\\payment\\alipayMobile\\cacert.pem'; //ca证书路径地址，用于curl中ssl校验 //请保证cacert.pem文件在当前文件夹目录中
         $this->alipay_config['transport']     = 'http';//访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
-        
+        var_dump($this->alipay_config);exit;
     }    
     /**
      * 生成支付代码
@@ -54,7 +52,7 @@ class alipayMobile extends Model
      * @param   array   $config_value    支付方式信息
      */
     function get_code($order, $config_value)
-    {         
+    {
              // 接口类型
             $service = array(             
                  1 => 'create_partner_trade_by_buyer', //使用担保交易接口
@@ -76,10 +74,10 @@ class alipayMobile extends Model
                         "service" => 'alipay.wap.create.direct.pay.by.user',   // // 产品类型，无需修改                
                         "payment_type"  => "1", // 支付类型 ，无需修改
                         "_input_charset"=> trim(strtolower($this->alipay_config['input_charset'])), //字符编码格式 目前支持 gbk 或 utf-8
-                        "out_trade_no"	=> $order['order_sn'], //商户订单号
-                        "subject"       =>"TPshop订单", //订单名称，必填
-                        "total_fee"	=> $order['order_amount'], //付款金额
-                        "show_url"	=> "http://www.tp-shop.cn", //收银台页面上，商品展示的超链接，必填
+                        "out_trade_no"	=> $order['sn'], //商户订单号
+                        "subject"       =>"美尚云", //订单名称，必填
+                        "total_fee"	=> $order['actually_amount'], //付款金额
+                        "show_url"	=> "http://msy.meishangyun.com", //收银台页面上，商品展示的超链接，必填
                 
                     );
             //  如果是支付宝网银支付    
@@ -91,7 +89,7 @@ class alipayMobile extends Model
             }        
             //建立请求
             require_once("lib/alipay_submit.class.php");            
-            $alipaySubmit = new AlipaySubmit($this->alipay_config);
+            $alipaySubmit = new \AlipaySubmit($this->alipay_config);
             $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
             return $html_text;         
     }
@@ -104,7 +102,7 @@ class alipayMobile extends Model
     {                
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
-        $alipayNotify = new AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
+        $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
         
             if($verify_result) //验证成功
@@ -138,7 +136,7 @@ class alipayMobile extends Model
     {
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
-        $alipayNotify = new AlipayNotify($this->alipay_config);
+        $alipayNotify = new \AlipayNotify($this->alipay_config);
         $verify_result = $alipayNotify->verifyReturn();
         
             if($verify_result) //验证成功

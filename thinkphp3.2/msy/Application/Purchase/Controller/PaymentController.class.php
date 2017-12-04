@@ -26,10 +26,7 @@ class PaymentController extends Controller {
 
         parent::__construct();      
         //  订单支付提交
-        //$pay_radio = $_REQUEST['pay_radio'];
-//        $pay_radio = array(
-//            'pay_code'=>'WeiXin'
-//        );
+       // $pay_radio = $_REQUEST['pay_radio'];
         if(!empty($pay_radio)) 
         {                         
             $pay_radio = get_url_param($pay_radio);
@@ -40,7 +37,7 @@ class PaymentController extends Controller {
             //$_GET = I('get.');            
             //file_put_contents('./a.html',$_GET,FILE_APPEND);    
             //$this->pay_code = I('get.pay_code');
-            $this->pay_code = 'weixin';
+            $this->pay_code = 'alipayMobile';
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }                        
         //获取通知的数据
@@ -52,7 +49,13 @@ class PaymentController extends Controller {
         //   plugins/payment
 //        include_once  "Component/payment/{$this->pay_code}/{$this->pay_code}.class.php"; // D:\wamp\www\svn_tpshop\www\plugins\payment\alipay\alipayPayment.class.php
 //        $code = '\\'.$this->pay_code; // \alipay
-        $this->payment = new \Component\payment\weixin\weixin();
+        if($this->pay_code == 'weixin'){
+            $this->payment = new \Component\payment\weixin\weixin();
+        }
+        if($this->pay_code == 'alipayMobile'){
+            $this->payment = new \Component\payment\alipayMobile\alipayMobile();
+        }
+
     }
    
     /**
@@ -72,24 +75,26 @@ class PaymentController extends Controller {
 //            // 订单支付提交
 //            $pay_radio = $_REQUEST['pay_radio'];
             //$config_value = get_url_param($pay_radio); // 类似于 pay_code=alipay&bank_code=CCB-DEBIT 参数
+           $config_value = "pay_code=alipay&bank_code=CCB-DEBIT";
+           $config_value = array(
+               'pay_code'=>'alipayMobile',
+               'bank_code'=>'CCB-DEBIT'
+           );
             //微信JS支付
-        $order=array(
-            'sn'=>147147,
-            'actually_amount'=>0.01
-        );
-        $code_str = $this->payment->getJSAPI($order);
-        exit($code_str);
-//           if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
-//               $order=array(
-//                   'sn'=>147147,
-//                   'actually_amount'=>0.01
-//               );
-//               $code_str = $this->payment->getJSAPI($order);
-//               exit($code_str);
-//           }else{
-//
-//           	//$code_str = $this->payment->get_code($order,$config_value);
-//           }
+           if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
+               $order=array(
+                   'sn'=>147147,
+                   'actually_amount'=>0.01
+               );
+               $code_str = $this->payment->getJSAPI($order);
+               exit($code_str);
+           }else{
+               $order=array(
+                   'sn'=>147147,
+                   'actually_amount'=>0.01
+               );
+           	$code_str = $this->payment->get_code($order,$config_value);
+           }
 //            $this->assign('code_str', $code_str);
 //            $this->assign('order_id', $order_id);
 //            return $this->fetch('payment');  // 分跳转 和不 跳转
