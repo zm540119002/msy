@@ -62,7 +62,6 @@ class GoodsController extends BaseController {
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
             $category_id_1 = I('get.category_id_1',0,'int');
         }
@@ -98,15 +97,33 @@ class GoodsController extends BaseController {
         $this ->display('categoryGoodsPhotoListTpl');
     }
 
-    //商品列表-图形/列表形式
+    //商品信息
+    public function goodsInfo(){
+        if(!IS_GET){
+            $this->ajaxReturn(errorMsg(C('NOT_GET')));
+        }
+        $modelGoods = D('Goods');
+        $where = array(
+            'g.status' => 0,
+            'g.on_off_line' => 1,
+        );
+        if(isset($_GET['goods_id']) && intval($_GET['goods_id'])){
+            $where['g.id'] = I('get.goods_id',0,'int');
+        }
+        $goodsInfo = $modelGoods->selectGoods($where);
+        $this->goodsInfo = $goodsInfo[0];
+        //级别价格
+        $this->levelPrice = getGoodsPirceByUserLevel($goodsInfo[0],$this->user['level']);
+        $this->display('goodsInfoTpl');
+    }
+
+    //商品列表
     public function goodsList(){
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-
         //二级分类下商品-分页查询
         $modelGoods = D('Goods');
-
         $where = array(
             'g.status' => 0,
             'g.on_off_line' => 1,
@@ -125,7 +142,6 @@ class GoodsController extends BaseController {
         $this->currentPage = (isset($_GET['p']) && intval($_GET['p'])) ? I('get.p',0,'int') : 1;
         $goodsList = page_query($modelGoods,$where,$field,$order,$join,$group,$pageSize,$alias='g');
         $this->goodsList = $goodsList['data'];
-
         $template_type = I('get.template_type','','string');
         if($template_type=='photo'){
             $this ->display('goodsPhotoListTpl');

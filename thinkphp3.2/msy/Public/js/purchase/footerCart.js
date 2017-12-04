@@ -33,6 +33,7 @@ $(function () {
                 $('.loading').show();
             },
             error:function(){
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success: function(data){
@@ -109,22 +110,14 @@ function assemblyData() {
 
 //计算商品列表总价
 function calculateTotalPrice(){
-    var lis = $('ul.goods_list').find('li');
-    var amount = 0.00;
-    var isInt = true;
-    $.each(lis,function(){
-        var _this = $(this);
-        var num = _this.find('.gshopping_count').val();
-        if(!isPosIntNumberOrZero(num)){
-            isInt = false;
-            return false;
-        }
-        amount += _this.find('price').text() * num;
-    });
-    if(!isInt){
+    var _thisLi = $('ul.goods_list').find('li');
+    var num = _thisLi.find('.gshopping_count').val();
+    if(!isPosIntNumberOrZero(num)){
         dialog.error('请输入正整数');
         return false;
     }
+    var amount = 0.00;
+    amount += _thisLi.find('span.purchase_price').find('price').text() * num;
     $('footer').find('price').html(amount.toFixed(2));
 }
 
