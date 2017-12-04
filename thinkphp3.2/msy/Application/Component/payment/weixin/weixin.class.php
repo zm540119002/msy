@@ -94,8 +94,10 @@ class weixin
 
 //		$go_url = MODULE + '/recharge/payComplete';
 
-		$tools = new \JsApiPay();
+		$tools = new JsApiPay();
+		var_dump($tools);exit;
 		$openId = $tools->GetOpenid();
+		var_dump($openId);exit;
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
@@ -109,8 +111,6 @@ class weixin
 		$input->SetOpenid($openId);					//用户openID
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$jsApiParameters = $tools->GetJsApiParameters($order2);
-	
-
         $html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
@@ -153,8 +153,8 @@ EOF;
     
     function transfer($data){
     	//CA证书及支付信息
-    	$wxchat['appid'] = WxPayConfig::$appid;
-    	$wxchat['mchid'] = WxPayConfig::$smchid;
+    	$wxchat['appid'] = \WxPayConfig::$appid;
+    	$wxchat['mchid'] = \WxPayConfig::$smchid;
     	$wxchat['api_cert'] = './Component/payment/weixin/cert/apiclient_cert.pem';
     	$wxchat['api_key'] = './Component/payment/weixin/cert/apiclient_key.pem';
 //    	$wxchat['api_ca'] = './Component/payment/weixin/cert/rootca.pem';
