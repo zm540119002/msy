@@ -23,9 +23,7 @@ class weixin
 {
 	/**
 	 * 架构函数
-	 * @param array $totalRows  总的记录数
-	 * @param array $listRows  每页显示记录数
-	 * @param array $parameter  分页跳转的参数
+	 * 
 	 */
 	public function __construct() {
 		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
@@ -62,7 +60,7 @@ class weixin
             $notify = new \NativePay();
             $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
             $url2 = $result["code_url"];
-            return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';        
+            echo '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
     }    
     /**
      * 服务器点对点响应操作给支付接口方调用
