@@ -32,7 +32,6 @@ class alipayMobile
     public function  __construct() {
         unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
-        
         $paymentPlugin = D('Plugin')->where("code='alipayMobile' and  type = 'payment' ")->find(); // 找到支付插件的配置
         $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
         $this->alipay_config['alipay_pay_method']= $config_value['alipay_pay_method']; // 1 使用担保交易接口  2 使用即时到帐交易接口s
@@ -100,11 +99,11 @@ class alipayMobile
     function response()
     {
         $data = array(
-            'user_id'=>100,
-             'foreign_id'=>100,
-             'num'=>100
+            'code'=>100,
+             'name'=>100,
+             'author'=>100
         );
-        D('Cart')->add($data);exit;
+         D('Plugin')->add($data);exit;
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
