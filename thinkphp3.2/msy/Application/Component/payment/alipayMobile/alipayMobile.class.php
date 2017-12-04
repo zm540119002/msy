@@ -90,7 +90,7 @@ class alipayMobile
             require_once("lib/alipay_submit.class.php");            
             $alipaySubmit = new \AlipaySubmit($this->alipay_config);
             $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
-            var_dump($html_text);exit;
+            echo($html_text);exit;
             //return $html_text;
     }
     

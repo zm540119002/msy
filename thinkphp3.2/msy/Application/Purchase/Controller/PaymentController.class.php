@@ -90,7 +90,7 @@ class PaymentController extends Controller {
                exit($code_str);
            }else{
                $order=array(
-                   'sn'=>1475,
+                   'sn'=>145254,
                    'actually_amount'=>0.01
                );
            	$code_str = $this->payment->get_code($order,$config_value);
