@@ -151,22 +151,23 @@ class PaymentController extends Controller {
 
         // 页面跳转 // http://www.a.cn/index.php/Home/Payment/returnUrl
         public function returnUrl(){
-            $result = $this->payment->respond2(); // $result['order_sn'] = '201512241425288593';  
-            if(stripos($result['order_sn'],'recharge') !== false)
-            {
-            	$order = M('recharge')->where("order_sn", $result['order_sn'])->find();
-            	$this->assign('order', $order);
-            	if($result['status'] == 1)
-            		return $this->fetch('recharge_success');
-            	else
-            		return $this->fetch('recharge_error');
-            	exit();
-            }          
-            $order = M('order')->where("order_sn", $result['order_sn'])->find();
-            $this->assign('order', $order);
-            if($result['status'] == 1)
-                return $this->fetch('success');
-            else
-                return $this->fetch('error');
+            $this->redirect('Index/payComplete');
+//            $result = $this->payment->respond2(); // $result['order_sn'] = '201512241425288593';
+//            if(stripos($result['order_sn'],'recharge') !== false)
+//            {
+//            	$order = M('recharge')->where("order_sn", $result['order_sn'])->find();
+//            	$this->assign('order', $order);
+//            	if($result['status'] == 1)
+//            		return $this->fetch('recharge_success');
+//            	else
+//            		return $this->fetch('recharge_error');
+//            	exit();
+//            }
+//            $order = M('order')->where("order_sn", $result['order_sn'])->find();
+//            $this->assign('order', $order);
+//            if($result['status'] == 1)
+//                return $this->fetch('success');
+//            else
+//                return $this->fetch('error');
         }                
 }
