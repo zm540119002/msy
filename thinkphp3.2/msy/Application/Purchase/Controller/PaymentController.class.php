@@ -83,7 +83,7 @@ class PaymentController extends Controller {
             //微信JS支付
            if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
                $order=array(
-                   'sn'=>147147,
+                   'sn'=>generateSN(),
                    'actually_amount'=>0.01
                );
                $code_str = $this->payment->getJSAPI($order);
