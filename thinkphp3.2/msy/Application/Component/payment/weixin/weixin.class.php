@@ -31,7 +31,7 @@ class weixin
 		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
 		require_once("example/WxPay.NativePay.php");
 		require_once("example/WxPay.JsApiPay.php");
-		require_once(dirname(dirname(__FILE__)) . '/Component/payment/example/WxPay.JsApiPay.php');
+		require_once(dirname(__FILE__).'/Component/payment/example/WxPay.JsApiPay.php');
 		$paymentPlugin = D('Plugin')->where("code='weixin' and  type = 'payment' ")->find(); // 找到微信支付插件的配置
 		$config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
 		\WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
