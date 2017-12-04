@@ -52,7 +52,6 @@ class alipayMobile
      */
     function get_code($order, $config_value)
     {
-        echo 'aa';exit;
              // 接口类型
             $service = array(             
                  1 => 'create_partner_trade_by_buyer', //使用担保交易接口
@@ -90,6 +89,7 @@ class alipayMobile
             //建立请求
             require_once("lib/alipay_submit.class.php");            
             $alipaySubmit = new \AlipaySubmit($this->alipay_config);
+        var_dump($alipaySubmit);exit;
             $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
             return $html_text;         
     }
