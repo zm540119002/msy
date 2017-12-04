@@ -95,9 +95,7 @@ class weixin
 //		$go_url = MODULE + '/recharge/payComplete';
 
 		$tools = new \JsApiPay();
-		var_dump($tools);exit;
 		$openId = $tools->GetOpenid();
-		var_dump($openId);exit;
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
@@ -121,7 +119,7 @@ class weixin
 			function(res){
 				//WeixinJSBridge.log(res.err_msg);
 				 if(res.err_msg == "get_brand_wcpay_request:ok") {
-				    location.href= MODULE + '/recharge/payComplete;
+
 				 }else{
 				 	alert(res.err_code+res.err_desc+res.err_msg);
 				   
