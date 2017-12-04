@@ -26,10 +26,7 @@ class PaymentController extends Controller {
 
         parent::__construct();      
         //  订单支付提交
-        //$pay_radio = $_REQUEST['pay_radio'];
-//        $pay_radio = array(
-//            'pay_code'=>'WeiXin'
-//        );
+       // $pay_radio = $_REQUEST['pay_radio'];
         if(!empty($pay_radio)) 
         {                         
             $pay_radio = get_url_param($pay_radio);
@@ -52,7 +49,13 @@ class PaymentController extends Controller {
         //   plugins/payment
 //        include_once  "Component/payment/{$this->pay_code}/{$this->pay_code}.class.php"; // D:\wamp\www\svn_tpshop\www\plugins\payment\alipay\alipayPayment.class.php
 //        $code = '\\'.$this->pay_code; // \alipay
-        $this->payment = new \Component\payment\weixin\weixin();
+        if($this->pay_code == 'weixin'){
+            $this->payment = new \Component\payment\weixin\weixin();
+        }
+        if($this->pay_code == 'alipayMobile'){
+            $this->payment = new \Component\payment\alipayMobile\alipayMobile();
+        }
+
     }
    
     /**
@@ -72,24 +75,26 @@ class PaymentController extends Controller {
 //            // 订单支付提交
 //            $pay_radio = $_REQUEST['pay_radio'];
             //$config_value = get_url_param($pay_radio); // 类似于 pay_code=alipay&bank_code=CCB-DEBIT 参数
+           $config_value = "pay_code=alipay&bank_code=CCB-DEBIT";
+           $config_value = array(
+               'pay_code'=>'alipayMobile',
+               'bank_code'=>'CCB-DEBIT'
+           );
             //微信JS支付
-        $order=array(
-            'sn'=>147147,
-            'actually_amount'=>0.01
-        );
-        $code_str = $this->payment->getJSAPI($order);
-        exit($code_str);
-//           if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
-//               $order=array(
-//                   'sn'=>147147,
-//                   'actually_amount'=>0.01
-//               );
-//               $code_str = $this->payment->getJSAPI($order);
-//               exit($code_str);
-//           }else{
-//
-//           	//$code_str = $this->payment->get_code($order,$config_value);
-//           }
+           if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
+               $order=array(
+                   'sn'=>generateSN(),
+                   'actually_amount'=>0.01
+               );
+               $code_str = $this->payment->getJSAPI($order);
+               exit($code_str);
+           }else{
+               $order=array(
+                   'sn'=>generateSN(),
+                   'actually_amount'=>0.01
+               );
+           	$code_str = $this->payment->get_code($order,$config_value);
+           }
 //            $this->assign('code_str', $code_str);
 //            $this->assign('order_id', $order_id);
 //            return $this->fetch('payment');  // 分跳转 和不 跳转
@@ -146,22 +151,23 @@ class PaymentController extends Controller {
 
         // 页面跳转 // http://www.a.cn/index.php/Home/Payment/returnUrl
         public function returnUrl(){
-            $result = $this->payment->respond2(); // $result['order_sn'] = '201512241425288593';  
-            if(stripos($result['order_sn'],'recharge') !== false)
-            {
-            	$order = M('recharge')->where("order_sn", $result['order_sn'])->find();
-            	$this->assign('order', $order);
-            	if($result['status'] == 1)
-            		return $this->fetch('recharge_success');
-            	else
-            		return $this->fetch('recharge_error');
-            	exit();
-            }          
-            $order = M('order')->where("order_sn", $result['order_sn'])->find();
-            $this->assign('order', $order);
-            if($result['status'] == 1)
-                return $this->fetch('success');
-            else
-                return $this->fetch('error');
+            $this->redirect('Index/payComplete');
+//            $result = $this->payment->respond2(); // $result['order_sn'] = '201512241425288593';
+//            if(stripos($result['order_sn'],'recharge') !== false)
+//            {
+//            	$order = M('recharge')->where("order_sn", $result['order_sn'])->find();
+//            	$this->assign('order', $order);
+//            	if($result['status'] == 1)
+//            		return $this->fetch('recharge_success');
+//            	else
+//            		return $this->fetch('recharge_error');
+//            	exit();
+//            }
+//            $order = M('order')->where("order_sn", $result['order_sn'])->find();
+//            $this->assign('order', $order);
+//            if($result['status'] == 1)
+//                return $this->fetch('success');
+//            else
+//                return $this->fetch('error');
         }                
 }

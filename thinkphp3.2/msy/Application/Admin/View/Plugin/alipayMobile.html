@@ -9,14 +9,14 @@
 <block name="content">
     <div class="plugin_title">手机网站支付宝配置</div>
     <div class="plugin_form_default">
-        <form>
+        <form id="form1">
             <div>
                 <dl class="row">
                     <dt class="tit">
                         <label for=""><span class="notic">*</span>支付宝帐户</label>
                     </dt>
                     <dd class="opt">
-                        <input type="text" name="" value="" class="input_text">
+                        <input type="text" name="alipay_account" value="" class="input_text">
                         <p>支付宝帐户</p>
                     </dd>
                 </dl>
@@ -25,7 +25,7 @@
                         <label for=""><span class="notic">*</span>交易安全校验码</label>
                     </dt>
                     <dd class="opt">
-                        <input type="text" name="" value="" class="input_text">
+                        <input type="text" name="alipay_key" value="" class="input_text">
                         <p>交易安全校验码</p>
                     </dd>
                 </dl>
@@ -34,7 +34,7 @@
                         <label for=""><span class="notic">*</span>合作者身份ID</label>
                     </dt>
                     <dd class="opt">
-                        <input type="text" name="" value="" class="input_text">
+                        <input type="text" name="alipay_partner" value="" class="input_text">
                         <p>合作者身份ID</p>
                     </dd>
                 </dl>
@@ -43,8 +43,8 @@
                         <label for=""><span class="notic">*</span>秘钥</label>
                     </dt>
                     <dd class="opt">
-                        <textarea rows="6" cols="90" class="" ></textarea>
-                        <p>合作者身份ID</p>
+                        <textarea rows="6" cols="90" class="" name="alipay_private_key" ></textarea>
+                        <p>秘钥</p>
                     </dd>
                 </dl>
                 <dl class="row">
@@ -52,7 +52,7 @@
                         <label for=""><span class="notic">*</span>选择接口类型</label>
                     </dt>
                     <dd class="opt">
-                        <select name="" class="select_opt">
+                        <select name="alipay_pay_method" class="select_opt">
                             <option value="0">使用担保交易接口</option>
                             <option value="1">使用即时到帐交易接口</option>
                         </select>
@@ -64,7 +64,7 @@
                         <label for=""><span class="notic">*</span>是否开通网银</label>
                     </dt>
                     <dd class="opt">
-                        <select name="" class="select_opt">
+                        <select name="is_bank" class="select_opt">
                             <option value="0">否</option>
                             <option value="1">是</option>
                         </select>
@@ -83,6 +83,13 @@
 
 <block name="script">
     <script type="text/javascript">
-
+        $('.submitBtn').on('click',function(){
+            var url = CONTROLLER + '/setting/type/payment/code/alipayMobile';
+            var config = $('#form1').serializeObject();
+            $.post(url,{config:config},function(msg){
+                dialog.msg(msg,'',function () {
+                });
+            },'JSON');
+        });
     </script>
 </block>

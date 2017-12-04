@@ -23,9 +23,7 @@ class weixin
 {
 	/**
 	 * 架构函数
-	 * @param array $totalRows  总的记录数
-	 * @param array $listRows  每页显示记录数
-	 * @param array $parameter  分页跳转的参数
+	 *
 	 */
 	public function __construct() {
 		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
@@ -57,12 +55,15 @@ class weixin
             $input->SetOut_trade_no($order['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
             $input->SetTotal_fee($order['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
             $input->SetNotify_url($notify_url); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
-            $input->SetTrade_type("JSAPI"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
+            $input->SetTrade_type("NATIVE"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
             $input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
+
             $notify = new \NativePay();
+		var_dump($notify);exit;
             $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
+		var_dump($result);exit;
             $url2 = $result["code_url"];
-            return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';        
+            echo '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
     }    
     /**
      * 服务器点对点响应操作给支付接口方调用
