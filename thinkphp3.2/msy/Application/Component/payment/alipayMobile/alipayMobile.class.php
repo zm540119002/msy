@@ -100,50 +100,30 @@ class alipayMobile
      */
     function response()
     {
-        $data = array(
-            'code'=>100,
-             'name'=>100,
-             'author'=>100
-        );
-         D('Plugin')->add($data);
-        $xml = file_get_contents('php://input');
-        file_put_contents('zhifu.text',$xml);exit;
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
+        if(!$verify_result){
+            echo "fail";exit;
+        }
+        $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号
+        $trade_no = $_POST['trade_no']; //支付宝交易号
+        $trade_status = $_POST['trade_status']; //交易状态
+        // 支付宝解释: 交易成功且结束，即不可再做任何操作。
+        if($trade_status == 'TRADE_FINISHED'){
+            //支付成功，做自己的逻辑
+            $xml = file_get_contents('php://input');
+            file_put_contents('zhifu.text',$xml);exit;
+        }
 
-//            if($verify_result) //验证成功
-//            {
-//
-//                $xml = file_get_contents('php://input');
-//                file_put_contents('a.text',$xml);exit;
-//                    $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号
-//                    $trade_no = $_POST['trade_no']; //支付宝交易号
-//                    $trade_status = $_POST['trade_status']; //交易状态
-//
-//                    // 支付宝解释: 交易成功且结束，即不可再做任何操作。
-//                    if($_POST['trade_status'] == 'TRADE_FINISHED')
-//                    {
-//                          update_pay_status($order_sn,array('transaction_id'=>$trade_no)); // 修改订单支付状态
-//                    }
-//                    //支付宝解释: 交易成功，且可对该交易做操作，如：多级分润、退款等。
-//                    elseif ($_POST['trade_status'] == 'TRADE_SUCCESS')
-//                    {
-//                            update_pay_status($order_sn,array('transaction_id'=>$trade_no)); // 修改订单支付状态
-//                    }
-//                    echo "success"; // 告诉支付宝处理成功
-//            }
-//            else
-//            {
-//                echo "fail"; //验证失败
-//            }
-
-//        if(!$verify_result){
-//            echo "fail";exit;
-//        }
-
-
+        //支付宝解释: 交易成功，且可对该交易做操作，如：多级分润、退款等。
+        elseif ($trade_status== 'TRADE_SUCCESS'){
+            //支付成功，做自己的逻辑
+            $xml = file_get_contents('php://input');
+            file_put_contents('zhifu2.text',$xml);exit;
+        }
+        echo "success"; // 告诉支付宝处理成功
 
     }
     
@@ -165,15 +145,15 @@ class alipayMobile
 
                     if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS')
                     {
-                       echo  array('status'=>1,'order_sn'=>$order_sn);//跳转至成功页面
+                       return  array('status'=>1,'order_sn'=>$order_sn);//跳转至成功页面
                     }
                     else {
-                       echo  array('status'=>0,'order_sn'=>$order_sn); //跳转至失败页面
+                        return  array('status'=>0,'order_sn'=>$order_sn); //跳转至失败页面
                     }
             }
             else
             {
-                echo  array('status'=>0,'order_sn'=>$_GET['out_trade_no']);//跳转至失败页面
+                return  array('status'=>0,'order_sn'=>$_GET['out_trade_no']);//跳转至失败页面
             }
     }
 
@@ -278,39 +258,27 @@ class alipayMobile
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的类和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
-        if($verify_result){
-            $xml = file_get_contents('php://input');
-            file_put_contents('tui2.text',$xml);exit;
-            $batch_no = $_POST['batch_no'];
-            //批量退款数据中转账成功的笔数
-            $success_num = $_POST['success_num'];
-            if(intval($success_num)>0)
-            {
-                //返回成功数据格式：2014040311001004370000361525^80^SUCCESS$jax_chuanhang@alipay.com^2088101003147483^0.01^SUCCESS
-                $result_details = $_POST['result_details'];
-                $res = explode('^', $result_details);
-                $batch_no =  $_POST['batch_no'];
-                $rec_id = substr($batch_no,12);
-                if($res[2] == 'SUCCESS'){
-                    $order_goods = M('order_goods')->where(array('rec_id'=>$rec_id))->find();
-                    if($order_goods){
-                        //修改订单商品状态
-                        M('order_goods')->where(array('rec_id'=>$rec_id))->save(array('is_send'=>3));
-                        $map = array('order_id'=>$order_goods['order_id'],'goods_id'=>$order_goods['goods_id']);
-                        //更新退款申请状态
-                        $updata = array('refund_type'=>2,'refund_time'=>time(),'status'=>3);
-                        M('return_goods')->where($map)->save($updata);//订单商品售后退款
-                    }else{
-                        //订单整单申请退款
-                        M('order')->where(array('order_id'=>$rec_id))->save(array('pay_status'=>3));
-                    }
-                }
-            }
-            echo "success"; //告诉支付宝处理成功
-        }else{
+
+        if(!$verify_result){
             $verify_result = print_r($verify_result);
             error_log($verify_result,3,'pay.log');
         }
+        $batch_no = $_POST['batch_no'];
+       //批量退款数据中转账成功的笔数
+        $success_num = $_POST['success_num'];
+        if(intval($success_num)>0){
+            $result_details = $_POST['result_details'];
+            $res = explode('^', $result_details);
+            $batch_no =  $_POST['batch_no'];
+            //$rec_id = substr($batch_no,12);
+            if($res[2] == 'SUCCESS'){
+                //退款成功，做自己的业务逻辑
+                $xml = file_get_contents('php://input');
+                file_put_contents('tui2.text',$xml);
+            }
+            echo "success"; //告诉支付宝处理成功
+        }
+
     }
     
 }
