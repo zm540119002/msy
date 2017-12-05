@@ -273,13 +273,14 @@ class alipayMobile
 
     //支付宝即时到账批量退款有密接口接口 异步回调
     public function  refund_respose(){
-        $xml = file_get_contents('php://input');
-        file_put_contents('tui.text',$xml);exit;
+
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的类和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
         if($verify_result){
+            $xml = file_get_contents('php://input');
+            file_put_contents('tui.text',$xml);exit;
             $batch_no = $_POST['batch_no'];
             //批量退款数据中转账成功的笔数
             $success_num = $_POST['success_num'];
