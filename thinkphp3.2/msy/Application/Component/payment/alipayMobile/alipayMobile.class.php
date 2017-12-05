@@ -98,21 +98,22 @@ class alipayMobile
      */
     function response()
     {
-        $xml = file_get_contents('php://input');
-        file_put_contents('a.text',$xml);
-        $data = array(
-            'code'=>100,
-             'name'=>100,
-             'author'=>100
-        );
-         D('Plugin')->add($data);exit;
+//        $data = array(
+//            'code'=>100,
+//             'name'=>100,
+//             'author'=>100
+//        );
+//         D('Plugin')->add($data);exit;
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
-        
+
             if($verify_result) //验证成功
             {
+
+                $xml = file_get_contents('php://input');
+                file_put_contents('a.text',$xml);exit;
                     $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号                    
                     $trade_no = $_POST['trade_no']; //支付宝交易号                   
                     $trade_status = $_POST['trade_status']; //交易状态
