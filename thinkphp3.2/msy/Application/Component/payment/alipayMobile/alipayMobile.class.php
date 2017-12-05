@@ -62,8 +62,10 @@ class alipayMobile
                         'seller_id'=> trim($this->alipay_config['partner']), //收款支付宝账号，以2088开头由16位纯数字组成的字符串，一般情况下收款账号就是签约账号
                         "key" => trim($this->alipay_config['key']), // MD5密钥，安全检验码，由数字和字母组成的32位字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
                         // "seller_email" => trim($this->alipay_config['seller_email']),                                            
-                        "notify_url"	=> SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'alipayMobile')) , //服务器异步通知页面路径 //必填，不能修改
-                        "return_url"	=> SITE_URL.U('Payment/returnUrl',array('pay_code'=>'alipayMobile')),  //页面跳转同步通知页面路径
+                       // "notify_url"	=> SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'alipayMobile')) , //服务器异步通知页面路径 //必填，不能修改
+                        "notify_url"	=> SITE_URL.U('Payment/notifyUrl') , //服务器异步通知页面路径 //必填，不能修改
+                        //"return_url"	=> SITE_URL.U('Payment/returnUrl',array('pay_code'=>'alipayMobile')),  //页面跳转同步通知页面路径
+                        "return_url"	=> SITE_URL.U('Payment/returnUrl'),  //页面跳转同步通知页面路径
                         "sign_type"     => strtoupper('MD5'), //签名方式
                         "input_charset" =>strtolower('utf-8'), //字符编码格式 目前支持utf-8
                         "cacert"	=>  getcwd().'\\cacert.pem',
@@ -131,21 +133,17 @@ class alipayMobile
 //                    echo "success"; // 告诉支付宝处理成功
 //            }
 //            else
-//            {                
+//            {
 //                echo "fail"; //验证失败
 //            }
 
-        if(!$verify_result){
-            echo "fail";exit;
-        }
-        if($_GET['pay_code'] == 'alipayMobile'){
-            $xml = file_get_contents('php://input');
-            file_put_contents('zhifu.text',$xml);exit;
-        }
-        if($_GET['pay_code'] == 'alipayMobile'){
-            $xml = file_get_contents('php://input');
-            file_put_contents('tui.text',$xml);exit;
-        }
+//        if(!$verify_result){
+//            echo "fail";exit;
+//        }
+
+        $xml = file_get_contents('php://input');
+        file_put_contents('zhifu.text',$xml);exit;
+
     }
     
     /**
@@ -256,7 +254,8 @@ class alipayMobile
         $parameter = array(
             "service" => 'refund_fastpay_by_platform_pwd',
             "partner" => $this->alipay_config['partner'],
-            "notify_url" => SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'refund_respose')),
+            //"notify_url" => SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'refund_respose')),
+            "notify_url" => SITE_URL.U('Payment/refundNotify'),
             "seller_user_id" => $this->alipay_config['partner'],
             "refund_date"	=> date("Y-m-d H:i:s",time()),
             "batch_no"	=> $data['batch_no'],
@@ -271,7 +270,10 @@ class alipayMobile
         echo $html_text;
     }
 
+    //支付宝即时到账批量退款有密接口接口 异步回调
     public function  refund_respose(){
+        $xml = file_get_contents('php://input');
+        file_put_contents('tui.text',$xml);exit;
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的类和方法 这里只是引用了一下 而已

@@ -144,7 +144,8 @@ class PaymentController extends Controller {
 //    }
 
         // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
-        public function notifyUrl(){            
+        public function notifyUrl(){
+            var_dump($_GET['pay_code']);exit;
             $this->payment->response();            
             exit();
         }
@@ -175,5 +176,9 @@ class PaymentController extends Controller {
         $detail_data = '2017120521001004170524409890'.'^'.'0.01'.'^'.'用户申请订单退款';
         $data = array('batch_no'=>date('YmdHi').'145','batch_num'=>1,'detail_data'=>$detail_data);
         $this->payment->payment_refund($data);
+    }
+    
+    public function refundNotify(){
+        $this->payment->refund_respose();
     }
 }
