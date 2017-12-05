@@ -109,31 +109,43 @@ class alipayMobile
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
 
-            if($verify_result) //验证成功
-            {
+//            if($verify_result) //验证成功
+//            {
+//
+//                $xml = file_get_contents('php://input');
+//                file_put_contents('a.text',$xml);exit;
+//                    $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号
+//                    $trade_no = $_POST['trade_no']; //支付宝交易号
+//                    $trade_status = $_POST['trade_status']; //交易状态
+//
+//                    // 支付宝解释: 交易成功且结束，即不可再做任何操作。
+//                    if($_POST['trade_status'] == 'TRADE_FINISHED')
+//                    {
+//                          update_pay_status($order_sn,array('transaction_id'=>$trade_no)); // 修改订单支付状态
+//                    }
+//                    //支付宝解释: 交易成功，且可对该交易做操作，如：多级分润、退款等。
+//                    elseif ($_POST['trade_status'] == 'TRADE_SUCCESS')
+//                    {
+//                            update_pay_status($order_sn,array('transaction_id'=>$trade_no)); // 修改订单支付状态
+//                    }
+//                    echo "success"; // 告诉支付宝处理成功
+//            }
+//            else
+//            {                
+//                echo "fail"; //验证失败
+//            }
 
-                $xml = file_get_contents('php://input');
-                file_put_contents('a.text',$xml);exit;
-                    $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号                    
-                    $trade_no = $_POST['trade_no']; //支付宝交易号                   
-                    $trade_status = $_POST['trade_status']; //交易状态
-                    
-                    // 支付宝解释: 交易成功且结束，即不可再做任何操作。
-                    if($_POST['trade_status'] == 'TRADE_FINISHED') 
-                    {                         
-                          update_pay_status($order_sn,array('transaction_id'=>$trade_no)); // 修改订单支付状态
-                    }
-                    //支付宝解释: 交易成功，且可对该交易做操作，如：多级分润、退款等。
-                    elseif ($_POST['trade_status'] == 'TRADE_SUCCESS') 
-                    { 
-                            update_pay_status($order_sn,array('transaction_id'=>$trade_no)); // 修改订单支付状态
-                    }
-                    echo "success"; // 告诉支付宝处理成功
-            }
-            else 
-            {                
-                echo "fail"; //验证失败                                
-            }
+        if(!$verify_result){
+            echo "fail";exit;
+        }
+        if($_GET['pay_code'] == 'alipayMobile'){
+            $xml = file_get_contents('php://input');
+            file_put_contents('zhifu.text',$xml);exit;
+        }
+        if($_GET['pay_code'] == 'alipayMobile'){
+            $xml = file_get_contents('php://input');
+            file_put_contents('tui.text',$xml);exit;
+        }
     }
     
     /**
