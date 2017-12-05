@@ -37,7 +37,7 @@ class PaymentController extends Controller {
             //$_GET = I('get.');            
             //file_put_contents('./a.html',$_GET,FILE_APPEND);    
             //$this->pay_code = I('get.pay_code');
-            $this->pay_code = 'weixin';
+            $this->pay_code = 'alipayMobile';
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }                        
         //获取通知的数据
