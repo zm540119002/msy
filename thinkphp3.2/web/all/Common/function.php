@@ -467,29 +467,29 @@ function arrayToXml($arr,$dom=null,$node=null,$root='xml',$cdata=false){
 
 
 
-///**
-// * 生成签名
-// * @return 签名，本函数不覆盖sign成员变量
-// */
+/**
+ * 生成签名
+ * @return 签名，本函数不覆盖sign成员变量
+ */
 //require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
-// function makeSign($data){
-//    //获取微信支付秘钥
-//    $key = C('WX_CONFIG')['KEY'];
-//    // 去空
-//    $data=array_filter($data);
-//    //签名步骤一：按字典序排序参数
-//    ksort($data);
-//    $string_a=http_build_query($data);
-//    $string_a=urldecode($string_a);
-//    //签名步骤二：在string后加入KEY
-//    //$config=$this->config;
-//    $string_sign_temp=$string_a."&key=".$key;
-//    //签名步骤三：MD5加密
-//    $sign = md5($string_sign_temp);
-//    // 签名步骤四：所有字符转为大写
-//    $result=strtoupper($sign);
-//    return $result;
-//}
+ function makeSign($data){
+    //获取微信支付秘钥
+    $key = C('WX_CONFIG')['KEY'];
+    // 去空
+    $data=array_filter($data);
+    //签名步骤一：按字典序排序参数
+    ksort($data);
+    $string_a=http_build_query($data);
+    $string_a=urldecode($string_a);
+    //签名步骤二：在string后加入KEY
+    //$config=$this->config;
+    $string_sign_temp=$string_a."&key=".$key;
+    //签名步骤三：MD5加密
+    $sign = md5($string_sign_temp);
+    // 签名步骤四：所有字符转为大写
+    $result=strtoupper($sign);
+    return $result;
+}
 
 /**
  * 是否为微信浏览器
@@ -502,10 +502,10 @@ function isWxBrowser(){
     return false;
 }
 
-/**生成订单编号（19位纯数字）
+/**生成编号（32位纯数字）
  * @return string
  */
-function generateSN($len = 18){
+function generateSN($len=18){
     return date('YmdHis',time()) . create_random_str($len);
 }
 

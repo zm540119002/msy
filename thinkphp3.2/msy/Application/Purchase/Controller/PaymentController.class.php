@@ -37,7 +37,7 @@ class PaymentController extends Controller {
             //$_GET = I('get.');            
             //file_put_contents('./a.html',$_GET,FILE_APPEND);    
             //$this->pay_code = I('get.pay_code');
-            $this->pay_code = 'weixin';
+            $this->pay_code = 'alipayMobile';
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }                        
         //获取通知的数据
@@ -144,7 +144,7 @@ class PaymentController extends Controller {
 //    }
 
         // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
-        public function notifyUrl(){            
+        public function notifyUrl(){
             $this->payment->response();            
             exit();
         }
@@ -169,5 +169,16 @@ class PaymentController extends Controller {
 //                return $this->fetch('success');
 //            else
 //                return $this->fetch('error');
-        }                
+        }
+
+    //退款
+    public function refund_back(){
+        $detail_data = '2017120521001004170524388308'.'^'.'0.01'.'^'.'用户申请订单退款';
+        $data = array('batch_no'=>date('YmdHi').'145','batch_num'=>1,'detail_data'=>$detail_data);
+        $this->payment->payment_refund($data);
+    }
+    //退款异步回调
+    public function refundNotify(){
+        $this->payment->refund_respose();
+    }
 }
