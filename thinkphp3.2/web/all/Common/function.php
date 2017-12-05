@@ -502,10 +502,10 @@ function isWxBrowser(){
     return false;
 }
 
-/**生成订单编号（19位纯数字）
+/**生成编号（32位纯数字）
  * @return string
  */
-function generateSN($len = 18){
+function generateSN($len=18){
     return date('YmdHis',time()) . create_random_str($len);
 }
 

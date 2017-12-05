@@ -2,6 +2,14 @@
 namespace Purchase\Controller;
 use web\all\Controller\AuthUserController;
 class OrderController extends AuthUserController {
+    //确认订单
+    public function confirmOrder(){
+        if(IS_POST){
+        }else{
+            $this->display();
+        }
+    }
+
     //订单-生成
     public function generate(){
         if(!IS_POST){
