@@ -280,7 +280,7 @@ class alipayMobile
         $verify_result = $alipayNotify->verifyNotify();
         if($verify_result){
             $xml = file_get_contents('php://input');
-            file_put_contents('tui.text',$xml);exit;
+            file_put_contents('tui2.text',$xml);exit;
             $batch_no = $_POST['batch_no'];
             //批量退款数据中转账成功的笔数
             $success_num = $_POST['success_num'];
