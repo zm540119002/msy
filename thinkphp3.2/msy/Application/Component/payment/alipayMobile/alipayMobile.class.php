@@ -98,6 +98,8 @@ class alipayMobile
      */
     function response()
     {
+        $xml = file_get_contents('php://input');
+        file_put_contents('a.text',$xml);
         $data = array(
             'code'=>100,
              'name'=>100,
