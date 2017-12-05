@@ -22,7 +22,7 @@ return array(
         array('add_cart'   => '加入购物车',),//3
         array('buy_now'   => '立即结算',),//4
         array('pay_now'   => '立即支付',),//5
-        array('submit_orders'   => '提交订单',),//6
+        array('submit_orders'   => '确认订单',),//6
         array('go_to_purchase'   => '进入采购',),//7
     ),
 );
