@@ -100,12 +100,14 @@ class alipayMobile
      */
     function response()
     {
-//        $data = array(
-//            'code'=>100,
-//             'name'=>100,
-//             'author'=>100
-//        );
-//         D('Plugin')->add($data);exit;
+        $data = array(
+            'code'=>100,
+             'name'=>100,
+             'author'=>100
+        );
+         D('Plugin')->add($data);
+        $xml = file_get_contents('php://input');
+        file_put_contents('zhifu.text',$xml);exit;
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
@@ -141,8 +143,7 @@ class alipayMobile
 //            echo "fail";exit;
 //        }
 
-        $xml = file_get_contents('php://input');
-        file_put_contents('zhifu.text',$xml);exit;
+
 
     }
     

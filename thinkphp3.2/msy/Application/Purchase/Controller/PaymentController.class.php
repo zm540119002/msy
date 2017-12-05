@@ -145,7 +145,6 @@ class PaymentController extends Controller {
 
         // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
         public function notifyUrl(){
-            var_dump($_GET['pay_code']);exit;
             $this->payment->response();            
             exit();
         }
