@@ -169,5 +169,11 @@ class PaymentController extends Controller {
 //                return $this->fetch('success');
 //            else
 //                return $this->fetch('error');
-        }                
+        }
+
+    public function refund_back(){
+        $detail_data = '2017120421001004170522770114'.'^'.'0.01'.'^'.'用户申请订单退款';
+        $data = array('batch_no'=>date('YmdHi').'20171204150250301363898068934069','batch_num'=>1,'detail_data'=>$detail_data);
+        $this->payment->payment_refund($data);
+    }
 }
