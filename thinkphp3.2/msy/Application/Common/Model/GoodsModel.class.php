@@ -125,18 +125,4 @@ class GoodsModel extends Model {
             ->select();
         return $list?:[];
     }
-
-    //减库存
-    public function decGoodsNum($oGoods){
-        foreach ( $oGoods as $v ) {
-            $where['id'] = $v['foreign_id'];
-            if($v['type'] == 1){//商品
-                $result = $this->lock(true) -> where($where) -> setDec('inventory',$v['num']);
-            }
-            if($v['type'] == 2){//项目
-                $result = M('project')->lock(true) -> where($where) -> setDec('inventory',$v['num']);
-            }
-        }
-        return $result;
-    }
 }

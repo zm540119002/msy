@@ -19,19 +19,6 @@ class PersonalCenterController extends BaseController {
         }
     }
 
-    //个人中心-采购订单
-    public function purchaseOrder(){
-        if(IS_POST){
-        }else{
-            //用户信息
-            $this->user = AuthUser::check();
-            if($this->user['id']){
-                $this->company = CompanyCache::get($this->user['id']);
-            }
-            $this->display();       
-        }
-    }
-
     //个人中心-升级VIP
     public function upgrade(){
         $modeLevel = D('Level');

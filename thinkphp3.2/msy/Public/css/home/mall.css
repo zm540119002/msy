@@ -1124,7 +1124,7 @@ background-size:contain;
     -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
     -ms-transform:translate(-70%) rotateZ(-45deg);
 }
-.purchase_order_management li span{
+.purchase_order_management li span:first-child{
     width:0.68rem;
     height:0.58rem;
     display:inline-block;
@@ -1134,10 +1134,10 @@ background-size:contain;
     background-size:37px 212px;
     
 }
-.usercenter_management li span{ 
+.usercenter_management li span:first-child{ 
     height:28px;
     background-image:url(../../img/common/ucenter_icon.png);
-    background-size:32px 350px;
+    background-size:32px 390px;
 }
 .usercenter_management li .regs_login{background-position:0 0px;}
 .usercenter_management li .orang{background-position:0 -34px;}
@@ -1149,6 +1149,9 @@ background-size:contain;
 .usercenter_management li .coupon{background-position:0 -218px;}
 .usercenter_management li .icome{background-position:0 -252px;}
 .usercenter_management li .management{background-position:0 -286px;}
+.usercenter_management li .purchase_cart{background-position:0 -356px;}
+.usercenter_management li .purchase_cart_count{position:relative;}
+.purchase_cart_count i{position:absolute;right:-12px;top:-8px;}
 .purchase_center{color:#0062cc;}
 .purchase_order_management li .order_cart{background-position:0 0px;}
 .purchase_order_management li .order_pay{background-position:0 -34px;}
