@@ -329,6 +329,14 @@ class OrderController extends AuthUserController {
         }
     }
 
+    //采购订单
+    public function purchaseOrder(){
+        if(IS_POST){
+        }else{
+            $this->display();
+        }
+    }
+
     //订单-详情页
     public function orderDetail(){
         $modelOrder = D('Order');
