@@ -313,8 +313,8 @@ class OrderController extends AuthUserController {
         }
     }
 
-    //订单-列表页
-    public function orderList(){
+    //采购订单
+    public function purchaseOrder(){
         $modelOrder = D('Order');
         if(IS_POST){
         }else{
@@ -325,14 +325,6 @@ class OrderController extends AuthUserController {
                 $where['o.pay_status'] = I('get.pay_status',0,'int');
             }
             $this->orderList = $modelOrder->selectOrder($where);
-            $this->display();
-        }
-    }
-
-    //采购订单
-    public function purchaseOrder(){
-        if(IS_POST){
-        }else{
             $this->display();
         }
     }

@@ -59,13 +59,15 @@
             </div>
         </div>
     </article>
-    <include file="Cart/footerGotoJoint" />
     <!-- 隐藏区 -->
     <div style="display:none">
         <div id="loading">
             <div class='loading'><img src='PUBLIC_IMG/home/loading.gif' alt='loading'></div>
         </div>
     </div>
+</block>
+<block name="footer">
+    <include file="Public/footerCartMenu" />
 </block>
 <block name="script">
     <script type="text/javascript" src="PUBLIC_JS/purchase/goodsList.js"></script>

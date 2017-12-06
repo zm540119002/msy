@@ -1,5 +1,4 @@
 <extend name="Public:base" />
-
 <block name="title">{$Think.get.pay_status|getPayStatusCN}的采购单</block>
 <block name="css-customize">
     <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
@@ -46,9 +45,10 @@
             </div>
         </section>
     </article>
+</block>
+<block name="footer">
     <include file="Public/footerCartMenu" />
 </block>
-<block name="footer"></block>
 <block name="script">
     <script type="text/javascript">
         $(function(){
