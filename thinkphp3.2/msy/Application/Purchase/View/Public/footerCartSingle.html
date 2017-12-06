@@ -1,7 +1,8 @@
 <section id="areaLayer" class="express-area-box cart" style="display:none;">
-    <include file="Goods/goodsListSingleTpl" />
+    <div class="purchase_goods_module f24 goodsInfo"></div>
 </section>
 <div id="areaMask" class="mask" data-show="0"></div>
+<include file="Public/footerCartMenu" />
 <script type="text/javascript">
     $(function () {
         //购物车点击
@@ -22,14 +23,34 @@
                 $('.mask').data('show',0);
                 $('.group_cart_nav').hide();
             }
-            var _li = $(this).parents('li');
-            $('ul.goods_list').find('li').data('id',_li.data('id'));
-            $('ul.goods_list').find('price').text(_li.find('price').text());
             //先清空
             $('.gshopping_count').val(0);
             $('.goods_total_price').find('price').text(0);
+            var _li = $(this).parents('li');
+            var url = MODULE + '/Goods/goodsInfo';
+            var postData = {};
+            postData.goods_id = _li.data('id');
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'get',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data){
+                        $('div.goodsInfo').html(data);
+                    }
+                }
+            });
         });
-        $('.mask,.closeBtn').on('click',function(){
+        //弹框关闭
+        $('body').on('click','.mask,.closeBtn',function(){
             $('html,body').css({"overflow":"auto"});
             $('.mask').hide();
             $('.group_cart_nav').hide();

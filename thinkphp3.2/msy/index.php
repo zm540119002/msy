@@ -17,6 +17,7 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
 define('APP_DEBUG',true);
 
+define('SITE_URL','http://'.$_SERVER['HTTP_HOST']); // 网站域名
 //域名根目录
 define('WEB_PATH',__DIR__.'/');
 

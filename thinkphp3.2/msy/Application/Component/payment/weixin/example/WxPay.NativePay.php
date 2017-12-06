@@ -11,6 +11,7 @@ require_once dirname(dirname(__FILE__))."/lib/WxPay.Api.php";
  */
 class NativePay
 {
+
 	/**
 	 * 
 	 * 生成扫描支付URL,模式一
@@ -49,6 +50,7 @@ class NativePay
 	 */
 	public function GetPayUrl($input)
 	{
+
 		if($input->GetTrade_type() == "NATIVE")
 		{
 			$result = WxPayApi::unifiedOrder($input);
