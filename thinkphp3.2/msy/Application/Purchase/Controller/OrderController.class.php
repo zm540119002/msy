@@ -12,7 +12,6 @@ class OrderController extends AuthUserController {
         if(!is_array($goodsList) || empty($goodsList)){
             $this->ajaxReturn(errorMsg('未提交数据'));
         }
-
         //查询商品信息
         $modelGoods = D('Goods');
         $amount = 0;
@@ -28,7 +27,6 @@ class OrderController extends AuthUserController {
         }
         //订单编号
         $orderSN = generateSN();
-
         //生成订单
         $modelOrder = D('Order');
         $modelOrder->startTrans();
@@ -44,7 +42,6 @@ class OrderController extends AuthUserController {
             $modelOrder->rollback();
             $this->ajaxReturn(errorMsg($res));
         }
-
         //生成订单明细
         $modelOrderDetail = D('OrderDetail');
         foreach ($goodsList as $item){
@@ -83,7 +80,6 @@ class OrderController extends AuthUserController {
             }
         }
         $modelOrder->commit();
-
         $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
     }
 
