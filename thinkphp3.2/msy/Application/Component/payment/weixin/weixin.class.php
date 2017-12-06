@@ -40,7 +40,7 @@ class weixin
 
 
     /**
-     * 生成支付代码
+     * 生成支付代码 扫码支付
      * @param   array   $order      订单信息
      * @param   array   $config_value    支付方式信息
      */
@@ -61,7 +61,38 @@ class weixin
 		$notify = new \NativePay();
 		$result = $notify->GetPayUrl($input); // 获取生成二维码的地址
 		$url2 = $result["code_url"];
-		return '<img alt="模式二扫码支付" src="http://paysdk.weixin.qq.com/example/qrcode.php?data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
+		return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
+	}
+
+	function h5_pay($order){
+		//统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
+		//使用统一支付接口
+
+		$input = new \WxPayUnifiedOrder();
+		$input->SetBody('美尚云');					//商品名称
+		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
+		$input->SetOut_trade_no($order['sn']);			//订单号
+		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
+		$input->SetTime_start(date("YmdHis"));		//支付发起时间
+		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
+		$input->SetGoods_tag("test3");
+		$input->SetNotify_url(SITE_URL.'/index.php/Purchase/Payment/notifyUrl/pay_code/weixin');//支付回调验证地址
+		$input->SetTrade_type("MWEB");				//支付类型
+		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
+		$url = $order2['mweb_url'];
+		header( "Location: $url" );
+//		$html = <<<EOF
+//		<script type="text/javascript">
+//         	<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
+//         	function h5pay(){
+//         		location.href = $url;
+//         	}
+//         	h5pay();
+//        </script>
+//EOF;
+
+		//return $html;
+
 	}
 
     /**
@@ -174,7 +205,7 @@ EOF;
     	}
     	sort($tarr);
     	$sign = implode($tarr, '&');
-    	$sign .= '&key='.WxPayConfig::$key;
+    	$sign .= '&key='.\WxPayConfig::$key;
     	$webdata['sign']=strtoupper(md5($sign));
     	$wget = $this->array2xml($webdata);
     	$pay_url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
@@ -224,7 +255,9 @@ EOF;
     	$s = preg_replace("/([\x01-\x08\x0b-\x0c\x0e-\x1f])+/", ' ', $s);
     	return $level == 1 ? $s."</xml>" : $s;
     }
-    
+
+
+
     function http_post($url, $param, $wxchat) {
     	$oCurl = curl_init();
     	if (stripos($url, "https://") !== FALSE) {
@@ -258,6 +291,18 @@ EOF;
     		return false;
     	}
     }
+
+	function http_post2($url, $data) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_HEADER,0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		$res = curl_exec($ch);
+		curl_close($ch);
+		return $res;
+	}
     
     //支付金额原路退还
     public function payment_refund($data){

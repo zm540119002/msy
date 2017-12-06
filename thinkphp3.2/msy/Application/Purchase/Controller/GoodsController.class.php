@@ -23,13 +23,13 @@ class GoodsController extends BaseController {
             );
             $goodsCategoryList = $modelGoodsCategory->selectGoodsCategory($where);
             $this->goodsCategory1Info = $goodsCategoryList[0];
-
             //查询一级分类下二级分类
             $where = array();
             $where['gc.parent_id_1'] = $this->category_id_1;
             $where['gc.level'] = 2;
             $this->goodsCategory2List = $modelGoodsCategory->selectGoodsCategory($where);
-
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(7));
             $this ->display();
         }
     }
@@ -52,7 +52,8 @@ class GoodsController extends BaseController {
             );
             $goodsCategoryList = $modelGoodsCategory->selectGoodsCategory($where);
             $this->goodsCategory1Info = $goodsCategoryList[0];
-
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this ->display();
         }
     }
@@ -65,7 +66,6 @@ class GoodsController extends BaseController {
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
             $category_id_1 = I('get.category_id_1',0,'int');
         }
-
         //查询一级分类下二级分类
         $modelGoodsCategory = D('GoodsCategory');
         $where = array();
@@ -74,7 +74,6 @@ class GoodsController extends BaseController {
             $where['gc.parent_id_1'] = $category_id_1;
         }
         $goodsCategory2List = $modelGoodsCategory->selectGoodsCategory($where);
-
         //二级分类下商品-分页查询
         $modelGoods = D('Goods');
         $field = array();
@@ -93,7 +92,6 @@ class GoodsController extends BaseController {
             $item['goodsList'] = $goodsList['data'];
         }
         $this->goodsCategory2List = $goodsCategory2List;
-
         $this ->display('categoryGoodsPhotoListTpl');
     }
 

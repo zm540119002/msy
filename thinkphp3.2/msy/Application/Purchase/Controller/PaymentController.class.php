@@ -49,7 +49,7 @@ class PaymentController extends Controller {
         //   plugins/payment
 //        include_once  "Component/payment/{$this->pay_code}/{$this->pay_code}.class.php"; // D:\wamp\www\svn_tpshop\www\plugins\payment\alipay\alipayPayment.class.php
 //        $code = '\\'.$this->pay_code; // \alipay
-        if($this->pay_code == 'weixin'){
+        if($this->pay_code == 'weixin'){;
             $this->payment = new \Component\payment\weixin\weixin();
         }
         if($this->pay_code == 'alipayMobile'){
@@ -82,6 +82,7 @@ class PaymentController extends Controller {
            );
             //微信JS支付
            if($this->pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
+
                $order=array(
                    'sn'=>generateSN(),
                    'actually_amount'=>0.01
@@ -89,11 +90,20 @@ class PaymentController extends Controller {
                $code_str = $this->payment->getJSAPI($order);
                exit($code_str);
            }else{
-               $order=array(
-                   'sn'=>generateSN(),
-                   'actually_amount'=>0.01
-               );
-           	$code_str = $this->payment->get_code($order,$config_value);
+               if($this->pay_code == 'weixin'){
+                   $order=array(
+                       'sn'=>generateSN(),
+                       'actually_amount'=>0.01
+                   );
+                   $code_str = $this->payment->h5_pay($order);
+               }else{
+                   $order=array(
+                       'sn'=>generateSN(),
+                       'actually_amount'=>0.01
+                   );
+                   $code_str = $this->payment->get_code($order,$config_value);
+               }
+
            }
 //            $this->assign('code_str', $code_str);
 //            $this->assign('order_id', $order_id);

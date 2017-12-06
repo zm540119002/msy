@@ -55,14 +55,15 @@
             <ul id="content"></ul>
         </div>
     </article>
-    <include file="Public/footerCartSingle" />
-    <include file="Cart/footerGotoJoint" />
     <!-- 隐藏区 -->
     <div style="display:none">
         <div id="loading">
             <div class='loading'><img src='PUBLIC_IMG/home/loading.gif' alt='loading'></div>
         </div>
     </div>
+</block>
+<block name="footer">
+    <include file="Public/footerCartSingle" />
 </block>
 <block name="script">
     <script type="text/javascript" src="PUBLIC_JS/purchase/goodsPhotoList.js"></script>
