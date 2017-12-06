@@ -1579,9 +1579,20 @@ background-size:contain;
     display:inline-block;
     background-image:url(../../img/common/home-pay-icon.png);
     background-repeat: no-repeat;
-    background-size:35px 564px;
-    background-position:0 -142px;
+    background-size:35px 140px;
     vertical-align: middle;
+}
+.purchase_weixin_icon span.wx{
+    background-position:0 0;
+   
+}
+.purchase_weixin_icon span.bank{
+    background-position:0 -90px;
+   
+}
+.purchase_weixin_icon span.zfb{
+    background-position:0 -40px;
+   
 }
 /*采购商会员*/
 .purchaser_member_module{
@@ -1633,4 +1644,22 @@ background-size:contain;
     font-size:0.36rem;
     padding:0.15rem 0;
     width:80%;
+}
+.account_details{
+    color:#39b54a;
+    display:block;
+    position:relative;
+}
+.account_details::after{
+    content:'';
+    display:inline-block;
+    position:absolute;
+    top:38%;
+    right:0.2rem;
+    width:.5em;
+    height:.5em;
+    border-bottom:.12em solid #39b54a;
+    border-left:.12em solid #39b54a;
+    -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
+    -ms-transform:translate(-70%) rotateZ(-45deg);
 }
