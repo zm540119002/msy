@@ -9,7 +9,8 @@ class CartController extends BaseController {
     public function jointPurchasing(){
         if(IS_POST){
         }else{
-            $this->footerCartConfig = C('FOOTER_CART_CONFIG');
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(7));
             
             $this->display();
         }

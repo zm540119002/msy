@@ -29,7 +29,7 @@ class GoodsController extends BaseController {
             $where['gc.level'] = 2;
             $this->goodsCategory2List = $modelGoodsCategory->selectGoodsCategory($where);
             //购物车配置开启的项
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(7));
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(0,7));
             $this ->display();
         }
     }
