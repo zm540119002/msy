@@ -91,7 +91,11 @@ class PaymentController extends Controller {
                exit($code_str);
            }else{
                if($this->pay_code == 'weixin'){
-                   $code_str = $this->payment->h5_pay();
+                   $order=array(
+                       'sn'=>generateSN(),
+                       'actually_amount'=>0.01
+                   );
+                   $code_str = $this->payment->h5_pay($order);
                }else{
                    $order=array(
                        'sn'=>generateSN(),

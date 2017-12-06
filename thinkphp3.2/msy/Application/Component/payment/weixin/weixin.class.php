@@ -64,41 +64,34 @@ class weixin
 		return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
 	}
 
-	function h5_pay(){
-		$money= 1;//充值金额
-		$userip = get_client_ip(); //获得用户设备IP 自己网上百度去
-		$appid = "wx9eee7ee8c2ae57dc";//微信给的
-		$mch_id = "1234887902";//微信官方的
-		$key = "Pq8YLYz7llOp09v9KdeFZ373cey37Iub";//自己设置的微信商家key
+	function h5_pay($order){
+		//统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
+		//使用统一支付接口
 
-		$rand = rand(00000,99999);
-		$out_trade_no = '20170804'.$rand;//平台内部订单号
-		$nonce_str=md5($out_trade_no);//随机字符串
-		$body = "H5充值";//内容
-		$total_fee = $money; //金额
-		$spbill_create_ip = $userip; //IP
-		$notify_url = SITE_URL.'/index.php/Purchase/Payment/notifyUrl/pay_code/weixin'; //回调地址
-		$trade_type = 'MWEB';//交易类型 具体看API 里面有详细介绍
-		$scene_info ='{"h5_info":{"type":"Wap","wap_url":"http://msy.meishangyun.com","wap_name":"支付"}}';//场景信息 必要参数
-		$signA ="appid=$appid&body=$body&mch_id=$mch_id&nonce_str=$nonce_str&notify_url=$notify_url&out_trade_no=$out_trade_no&scene_info=$scene_info&spbill_create_ip=$spbill_create_ip&total_fee=$total_fee&trade_type=$trade_type";
-		$strSignTmp = $signA."&key=$key"; //拼接字符串  注意顺序微信有个测试网址 顺序按照他的来 直接点下面的校正测试 包括下面XML  是否正确
-		$sign = strtoupper(md5($strSignTmp)); // MD5 后转换成大写
-		$post_data = "<xml>
-                        <appid>$appid</appid>
-                        <body>$body</body>
-                        <mch_id>$mch_id</mch_id>
-                        <nonce_str>$nonce_str</nonce_str>
-                        <notify_url>$notify_url</notify_url>
-                        <out_trade_no>$out_trade_no</out_trade_no>
-                        <scene_info>$scene_info</scene_info>
-                        <spbill_create_ip>$spbill_create_ip</spbill_create_ip>
-                        <total_fee>$total_fee</total_fee>
-                        <trade_type>$trade_type</trade_type>
-                        <sign>$sign</sign>
-                    </xml>";//拼接成XML 格式
-		$url = "https://api.mch.weixin.qq.com/pay/unifiedorder";//微信传参地址
-		$dataxml = $this->http_post2($url,$post_data); //后台POST微信传参地址  同时取得微信返回的参数    POST 方法我写下面了
-		$objectxml = (array)simplexml_load_string($dataxml, 'SimpleXMLElement', LIBXML_NOCDATA); //将微信返回的XML 转换成数组
+		$input = new \WxPayUnifiedOrder();
+		$input->SetBody('美尚云');					//商品名称
+		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
+		$input->SetOut_trade_no($order['sn']);			//订单号
+		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
+		$input->SetTime_start(date("YmdHis"));		//支付发起时间
+		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
+		$input->SetGoods_tag("test3");
+		$input->SetNotify_url(SITE_URL.'/index.php/Purchase/Payment/notifyUrl/pay_code/weixin');//支付回调验证地址
+		$input->SetTrade_type("MWEB");				//支付类型
+		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
+		$url = $order2['mweb_url'];
+		header( "Location: $url" );
+//		$html = <<<EOF
+//		<script type="text/javascript">
+//         	<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
+//         	function h5pay(){
+//         		location.href = $url;
+//         	}
+//         	h5pay();
+//        </script>
+//EOF;
+
+		//return $html;
 
 	}
 
