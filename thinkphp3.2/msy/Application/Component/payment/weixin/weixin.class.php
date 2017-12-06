@@ -40,7 +40,7 @@ class weixin
 
 
     /**
-     * 生成支付代码
+     * 生成支付代码 扫码支付
      * @param   array   $order      订单信息
      * @param   array   $config_value    支付方式信息
      */
@@ -61,7 +61,45 @@ class weixin
 		$notify = new \NativePay();
 		$result = $notify->GetPayUrl($input); // 获取生成二维码的地址
 		$url2 = $result["code_url"];
-		return '<img alt="模式二扫码支付" src="http://paysdk.weixin.qq.com/example/qrcode.php?data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
+		return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
+	}
+
+	function h5_pay(){
+		$money= 1;//充值金额
+		$userip = get_client_ip(); //获得用户设备IP 自己网上百度去
+		$appid = "wx9eee7ee8c2ae57dc";//微信给的
+		$mch_id = "1234887902";//微信官方的
+		$key = "Pq8YLYz7llOp09v9KdeFZ373cey37Iub";//自己设置的微信商家key
+
+		$rand = rand(00000,99999);
+		$out_trade_no = '20170804'.$rand;//平台内部订单号
+		$nonce_str=md5($out_trade_no);//随机字符串
+		$body = "H5充值";//内容
+		$total_fee = $money; //金额
+		$spbill_create_ip = $userip; //IP
+		$notify_url = SITE_URL.'/index.php/Purchase/Payment/notifyUrl/pay_code/weixin'; //回调地址
+		$trade_type = 'MWEB';//交易类型 具体看API 里面有详细介绍
+		$scene_info ='{"h5_info":{"type":"Wap","wap_url":"http://msy.meishangyun.com","wap_name":"支付"}}';//场景信息 必要参数
+		$signA ="appid=$appid&body=$body&mch_id=$mch_id&nonce_str=$nonce_str&notify_url=$notify_url&out_trade_no=$out_trade_no&scene_info=$scene_info&spbill_create_ip=$spbill_create_ip&total_fee=$total_fee&trade_type=$trade_type";
+		$strSignTmp = $signA."&key=$key"; //拼接字符串  注意顺序微信有个测试网址 顺序按照他的来 直接点下面的校正测试 包括下面XML  是否正确
+		$sign = strtoupper(md5($strSignTmp)); // MD5 后转换成大写
+		$post_data = "<xml>
+                        <appid>$appid</appid>
+                        <body>$body</body>
+                        <mch_id>$mch_id</mch_id>
+                        <nonce_str>$nonce_str</nonce_str>
+                        <notify_url>$notify_url</notify_url>
+                        <out_trade_no>$out_trade_no</out_trade_no>
+                        <scene_info>$scene_info</scene_info>
+                        <spbill_create_ip>$spbill_create_ip</spbill_create_ip>
+                        <total_fee>$total_fee</total_fee>
+                        <trade_type>$trade_type</trade_type>
+                        <sign>$sign</sign>
+                    </xml>";//拼接成XML 格式
+		$url = "https://api.mch.weixin.qq.com/pay/unifiedorder";//微信传参地址
+		$dataxml = $this->http_post2($url,$post_data); //后台POST微信传参地址  同时取得微信返回的参数    POST 方法我写下面了
+		$objectxml = (array)simplexml_load_string($dataxml, 'SimpleXMLElement', LIBXML_NOCDATA); //将微信返回的XML 转换成数组
+
 	}
 
     /**
@@ -174,7 +212,7 @@ EOF;
     	}
     	sort($tarr);
     	$sign = implode($tarr, '&');
-    	$sign .= '&key='.WxPayConfig::$key;
+    	$sign .= '&key='.\WxPayConfig::$key;
     	$webdata['sign']=strtoupper(md5($sign));
     	$wget = $this->array2xml($webdata);
     	$pay_url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
@@ -224,7 +262,9 @@ EOF;
     	$s = preg_replace("/([\x01-\x08\x0b-\x0c\x0e-\x1f])+/", ' ', $s);
     	return $level == 1 ? $s."</xml>" : $s;
     }
-    
+
+
+
     function http_post($url, $param, $wxchat) {
     	$oCurl = curl_init();
     	if (stripos($url, "https://") !== FALSE) {
@@ -258,6 +298,18 @@ EOF;
     		return false;
     	}
     }
+
+	function http_post2($url, $data) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_HEADER,0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		$res = curl_exec($ch);
+		curl_close($ch);
+		return $res;
+	}
     
     //支付金额原路退还
     public function payment_refund($data){
