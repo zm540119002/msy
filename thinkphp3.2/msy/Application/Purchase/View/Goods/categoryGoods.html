@@ -26,7 +26,7 @@
                 <i></i>
                 <div>
                     <p>本周联合采购结算日倒计时</p>
-                    <div id="countDownBox" class="count_down_box">
+                    <div class="countDownBox" class="count_down_box">
                         <span class="day"></span>天
                         <span class="hour"></span>小时
                         <span class="minute"></span>分
@@ -89,7 +89,7 @@
             console.log($('.five_star').getStar());
 
             //结算倒计时
-            countDown('{$settlementTime}',"#countDownBox");
+            countDown('{$settlementTime}',$(".countDownBox"));
         });
     </script>
 </block>

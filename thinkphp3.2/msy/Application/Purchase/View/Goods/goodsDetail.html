@@ -42,7 +42,7 @@
                 <i></i>
                 <div>
                     <p>本周联合采购结算日倒计时</p>
-                    <div id="countDownBox" class="">
+                    <div class="countDownBox" class="">
                         <span class="day"></span>天
                         <span class="hour"></span>小时
                         <span class="minute"></span>分
@@ -109,7 +109,7 @@
                 starRed:'PUBLIC_IMG/home/starred.png'
             });
             //console.log($('.five_star').getStar());
-            countDown('{$settlementTime}',"#countDownBox");
+            countDown('{$settlementTime}',$(".countDownBox"));
 
            //加入购物车
             $('.add_cart').click(function () {

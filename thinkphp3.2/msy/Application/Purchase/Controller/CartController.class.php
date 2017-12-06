@@ -16,7 +16,7 @@ class CartController extends BaseController {
     }
 
     //商品管理
-    public function goodsManage(){
+    public function index(){
         $modelGoods = D('Goods');
         $modelCart = D('Cart');
         if(IS_POST){

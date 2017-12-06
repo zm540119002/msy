@@ -2,14 +2,6 @@
 namespace Purchase\Controller;
 use web\all\Controller\AuthUserController;
 class OrderController extends AuthUserController {
-    //确认订单
-    public function confirmOrder(){
-        if(IS_POST){
-        }else{
-            $this->display();
-        }
-    }
-
     //订单-生成
     public function generate(){
         if(!IS_POST){
@@ -42,6 +34,7 @@ class OrderController extends AuthUserController {
         $modelOrder->startTrans();
         $_POST = [];
         $_POST['sn'] = $orderSN;
+        $_POST['status'] = 1;
         $_POST['user_id'] = $this->user['id'];
         $_POST['amount'] = $amount;
         $_POST['create_time'] = time();
@@ -94,7 +87,15 @@ class OrderController extends AuthUserController {
         $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
     }
 
-    //订单-结算
+    //确认订单
+    public function confirmOrder(){
+        if(IS_POST){
+        }else{
+            $this->display();
+        }
+    }
+
+    //订单-结算支付
     public function settlement(){
         $modelOrder = D('Order');
         $modelOrderDetail = D('OrderDetail');
@@ -115,12 +116,10 @@ class OrderController extends AuthUserController {
             if(!$orderInfo['id'] || $orderInfo['amount'] <= 0){
                 $this->ajaxReturn(errorMsg('订单信息有误！'));
             }
-
             $result = $modelOrder -> checkOrderStatus($orderInfo);
             if($result['status'] == 0){
                 $this ->ajaxReturn(errorMsg($result['message']));
             }
-
             //订单详情
             $where = array(
                 'order_sn' => $orderInfo['sn'],
@@ -130,14 +129,12 @@ class OrderController extends AuthUserController {
             if(isset($_POST['couponsId']) && intval($_POST['couponsId'])){
                 $couponsId = I('post.couponsId',0,'int');
             }
-
             $where = array(
                 'cr.id' => $couponsId,
                 'cr.user_id' => $this->user['id'],
             );
             $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
             $couponsInfo = $couponsInfo[0];
-
             //钱包信息
             $where = array(
                 'w.user_id' =>  $this->user['id'],
@@ -146,7 +143,6 @@ class OrderController extends AuthUserController {
             $walletInfo = $walletInfo[0];
             $this -> walletInfo = $walletInfo;
             $modelOrder->startTrans();//开启事务
-
             //代金券支付
             $unpaid = $orderInfo['amount'];
             if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
@@ -182,14 +178,12 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-
                     //减库存
                     $res = $modelGoods -> decGoodsNum($orderDetail);
                     if(!$res){
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('成功',array('wxPay'=>false)));
                 }else{
@@ -221,7 +215,6 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-
                     //更新代金券，已使用
                     if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
                         $_POST = [];
@@ -237,7 +230,6 @@ class OrderController extends AuthUserController {
                             $this->ajaxReturn(errorMsg($res));
                         }
                     }
-
                     //更新账户，$accountBalance-$unpaid
                     $_POST = [];
                     $_POST['amount'] = $accountBalance - $unpaid;
@@ -249,7 +241,6 @@ class OrderController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-
                     //增加账户记录
                     $_POST = [];
                     $_POST['user_id'] = $this->user['id'];
@@ -261,14 +252,6 @@ class OrderController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-
-                    //减库存
-                    $res = $modelGoods -> decGoodsNum($orderDetail);
-                    if(!$res){
-                        $modelOrder->rollback();
-                        $this->ajaxReturn(errorMsg($res));
-                    }
-
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('成功',array('wxPay'=>false)));
                 }else{
@@ -301,7 +284,6 @@ class OrderController extends AuthUserController {
                     $modelOrder->rollback();
                     $this->ajaxReturn(errorMsg($res));
                 }
-
                 $modelOrder->commit();//提交事务
                 $this->ajaxReturn(successMsg('成功',array('wxPay'=>true)));
             }
@@ -315,21 +297,18 @@ class OrderController extends AuthUserController {
             );
             $orderInfo = $modelOrder->selectOrder($where);
             $this->orderInfo = $orderInfo[0];
-
             //代金券
             $where = array(
                 'cr.user_id' => $this->user['id'],
             );
             $this->couponsList = $modelCouponsReceive->selectCouponsReceive($where);
             $this->couponsNum = count($this->couponsList);
-
             //钱包
             $where = array(
                 'w.user_id' => $this->user['id'],
             );
             $wallet = $modelWallet->selectWallet($where);
             $this->wallet = $wallet[0];
-
             $this->display();
         }
     }
@@ -346,6 +325,14 @@ class OrderController extends AuthUserController {
                 $where['o.pay_status'] = I('get.pay_status',0,'int');
             }
             $this->orderList = $modelOrder->selectOrder($where);
+            $this->display();
+        }
+    }
+
+    //采购订单
+    public function purchaseOrder(){
+        if(IS_POST){
+        }else{
             $this->display();
         }
     }
