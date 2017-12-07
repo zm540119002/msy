@@ -80,7 +80,7 @@ class weixin
 		$input->SetTrade_type("MWEB");				//支付类型
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$url = $order2['mweb_url'];
-		header( "Location: $url" );
+		return $url;
 //		$html = <<<EOF
 //		<script type="text/javascript">
 //         	<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
