@@ -27,8 +27,8 @@
                 <div class="purchase_weixin_icon">
                     <span class="wx"></span>微信支付
                 </div>
-                <input type="hidden" name="weixin" value="" />
-                <input type="hidden" name="weixin" value="" />
+                <input type="hidden" name="pay_code" value="weixin" />
+                <input type="hidden" class="pay_info" name="order_id" value="" />
                 <input type="submit" class="balance_pay weixin_pay" data-paycode="weixin" value="微信支付充值">
             </section>
         </form>
@@ -37,8 +37,8 @@
                 <div class="purchase_weixin_icon">
                     <span class="bank"></span>在线支付
                 </div>
-                <input type="hidden" name="online" value="" />
-                <input type="hidden" name="online" value="" />
+                <input type="hidden" name="pay_code" value="unionpay" />
+                <input type="hidden" class="pay_info" name="order_id" value="" />
                 <input type="submit" class="balance_pay weixin_pay" data-paycode="online" value="银联在线支付充值">
             </section>
         </form>
@@ -47,8 +47,8 @@
                 <div class="purchase_weixin_icon">
                     <span class="zfb"></span>支付宝支付
                 </div>
-                <input type="hidden" name="zfb" value="" />
-                <input type="hidden" name="zfb" value="" />
+                <input type="hidden" name="pay_code" value="alipayMobile" />
+                <input type="hidden"  class="pay_info" name="order_id" value="" />
                 <input type="submit" class="balance_pay weixin_pay" data-paycode="zfb" value="支付宝支付">
             </section>
         </form>
@@ -83,9 +83,9 @@
             $('.recharge_grade li').on('click',function(){
                 var rechargePrice=$(this).find('span').text();
                     $(this).addClass('active').siblings().removeClass('active');
-                    $('input[type="hidden"]').val(rechargePrice);
+                    $('input[class="pay_info"]').val(rechargePrice);
             })
-            
+
 
         });
     </script>
