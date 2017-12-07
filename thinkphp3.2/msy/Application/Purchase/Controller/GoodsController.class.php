@@ -92,7 +92,7 @@ class GoodsController extends BaseController {
             $item['goodsList'] = $goodsList['data'];
         }
         $this->goodsCategory2List = $goodsCategory2List;
-        $this ->display('categoryGoodsPhotoListTpl');
+        $this ->display('goodsPhotoList2Tpl');
     }
 
     //商品信息
