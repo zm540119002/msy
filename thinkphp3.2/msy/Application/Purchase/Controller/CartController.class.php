@@ -6,7 +6,7 @@ use web\all\Lib\AuthUser;
 
 class CartController extends BaseController {
     //联合采购
-    public function jointPurchasing(){
+    public function jointPurchase(){
         if(IS_POST){
         }else{
             //购物车配置开启的项

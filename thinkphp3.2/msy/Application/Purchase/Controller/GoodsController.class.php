@@ -145,8 +145,8 @@ class GoodsController extends BaseController {
             $this ->display('goodsPhotoListTpl');
         }else if($template_type=='list'){
             $this ->display('goodsListTpl');
-        }else if($template_type=='jointPurchasing'){
-            $this ->display('Cart/jointPurchasing');
+        }else if($template_type=='jointPurchase'){
+            $this ->display('Cart/jointPurchase');
         }
     }
 
