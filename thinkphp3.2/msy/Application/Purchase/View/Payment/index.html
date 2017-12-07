@@ -63,20 +63,6 @@
         </section>
     </article>
 
-
-    <form action="/index.php/Purchase/Payment/getCode" method="post">
-       <input type="text" name="price" value="10"/>
-        <input type="text" name="paycode" value="yin" />
-        <input type="text" name="paycode" value="wei" />
-
-        <input type="submit" value="yin" />
-        <input type="submit" value="wei" />
-    </form>
-    <!--<form action="/index.php/Purchase/Payment/getCode" method="post">-->
-        <!--<input type="text" name="fname" value="5"/>-->
-        <!--<input type="text" name="lname" value="wei" />-->
-        <!--<input type="submit" value="wei" />-->
-    <!--</form>-->
 </block>
 <block name="script">
     <script type="text/javascript">
@@ -99,30 +85,7 @@
                     $(this).addClass('active').siblings().removeClass('active');
                     $('input[type="hidden"]').val(rechargePrice);
             })
-
-//            $('.balance_pay').on('click',function () {
-//                var url = MODULE+'/Payment/getCode';
-//
-//                $.ajax({
-//                    type:'post',
-//                    url:url,
-//                    data:{
-//                        name:"Donald Duck",
-//                        city:"Duckburg"
-//                    },
-//                    success:function(data){
-//                        //$('#loading').hide();
-//                        if(data.status==0){
-//                            dialog.error(data.info);
-//                        }else if(data.status==1){
-//                            //location.href = MODULE + '/WxPay/rechargePayment/walletDetailId/' + data.id;
-//                        }
-//                    }
-//                });
-//                //var pay_code = $(this).data('paycode');
-//
-//
-//            })
+            
 
         });
     </script>
