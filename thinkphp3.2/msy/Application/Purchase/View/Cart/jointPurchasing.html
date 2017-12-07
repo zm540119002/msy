@@ -14,10 +14,10 @@
     </article>
 </block>
 <block name="footer">
-    <include file="Public/footerCart" />
+    <include file="Public/footerCartMenu" />
 </block>
 <block name="script">
-    <script type="text/javascript" src="PUBLIC_JS/purchase/singleCategoryGoodsList.js"></script>
+    <script type="text/javascript" src="PUBLIC_JS/purchase/goods.js"></script>
     <script type="text/javascript">
         $(function(){
             //获取单分类下商品-列表形式
@@ -25,12 +25,12 @@
             config.category_id_1 = '{$Think.get.category_id_1}';
             config.category_id_2 = '{$Think.get.category_id_2}';
             config.pageSize = 5;
-            getSingleCategoryList(config);
+            getSingleCategoryGoodsList(config);
 
             //上拉加载更多
             $(window).on('scroll',function(){
                 if($(document).scrollTop()+$(window).height()>=$(document).height()){
-                    getSingleCategoryList(config);
+                    getSingleCategoryGoodsList(config);
                 }
             });
         });

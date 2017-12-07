@@ -10,8 +10,7 @@ class CartController extends BaseController {
         if(IS_POST){
         }else{
             //购物车配置开启的项
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(7));
-            
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this->display();
         }
     }

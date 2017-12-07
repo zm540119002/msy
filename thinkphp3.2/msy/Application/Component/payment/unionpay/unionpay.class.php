@@ -11,27 +11,25 @@
  * Author: 奇闻科技
  * Date: 2016-05-11
  */
-use think\Model; 
-use think\Request;
+namespace Component\payment\unionpay;
 /**
  * 支付 逻辑定义
  * Class unionpayPayment
  * @package Home\Payment
  */
 
-class unionpay extends Model
-{    
-    public $tableName = 'plugin'; // 插件表        
+class unionpay
+{
     public $unionpay_config = array();// 银联支付配置参数
     
     /**
      * 析构流函数
      */
-    public function  __construct() {   
-        parent::__construct(); 
+    public function  __construct() {
+        parent::__construct();
         unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名        
-        $paymentPlugin = M('Plugin')->where("code='unionpay' and  type = 'payment' ")->find(); // 找到支付插件的配置
+        $paymentPlugin = D('Plugin')->where("code='unionpay' and  type = 'payment' ")->find(); // 找到支付插件的配置
         $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化 
 		    
         $this->unionpay_config['unionpay_mid']= $config_value['unionpay_mid']; // 商户号
