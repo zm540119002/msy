@@ -968,10 +968,15 @@ background-size:contain;
 }
 .public_arrow::after{top:40%;}
 .purchase_package_nav{width:100%;background: #efefef;overflow:hidden;}
-.purchase_package_nav ul{padding:0.15rem 0.4rem;overflow:hidden;}
+.purchase_package_nav ul{
+    padding:0.15rem 0.4rem;
+    overflow:hidden;
+    display: flex;
+    display:-webkit-flex;
+}
 .purchase_package_nav li{
     width: 1.2rem;
-    margin: 0 0.33rem;
+    margin: 0 0.12rem;
     float:left;
     text-align: center;
     box-sizing:border-box;
@@ -1679,4 +1684,8 @@ background-size:contain;
 .recharge_grade li.active{
     color:#fff;
     background:#39b54a;
+}
+.recharge_count{
+    display: block;
+    position:relative;
 }
