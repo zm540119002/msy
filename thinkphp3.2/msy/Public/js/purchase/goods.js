@@ -1,5 +1,5 @@
 //获取多分类下商品-列表形式
-function getMultiCategoryList(obj,opt_type) {
+function getMultiCategoryGoodsList(obj,opt_type) {
     var url = CONTROLLER+'/goodsList';
     var postData = {};
     postData.p = obj.data('current_page');
