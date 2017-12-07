@@ -68,11 +68,12 @@
 <block name="script">
     <script type="text/javascript" src="PUBLIC_JS/purchase/goodsPhotoList.js"></script>
     <script type="text/javascript">
+        var category_id_1 = '{$category_id_1}';
         $(function(){
             //初始化页面
             var config = {};
             config.url = CONTROLLER+'/goodsPage';
-            config.category_id_1 = '{$category_id_1}';
+            config.category_id_1 = category_id_1;
             getPage(config);
 
             //加载更多
