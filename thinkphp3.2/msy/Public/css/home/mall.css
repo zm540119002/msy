@@ -1611,6 +1611,7 @@ background-size:contain;
     text-align: center;
     padding:0.12rem 0;
     border-radius:0.08rem;
+    width:100%;
 }
 .bank_transfer_recharge{
     position:relative;
@@ -1662,4 +1663,20 @@ background-size:contain;
     border-left:.12em solid #39b54a;
     -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
     -ms-transform:translate(-70%) rotateZ(-45deg);
+}
+.recharge_title{margin:0 0 0.12rem 0;}
+.recharge_grade{
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap:wrap;
+}
+.recharge_grade li{
+    /*flex:1;*/
+    padding:0.05rem 0.15rem; 
+    margin:0 0.08rem 0.12rem 0;
+    border: 1px solid #39b54a;
+}
+.recharge_grade li.active{
+    color:#fff;
+    background:#39b54a;
 }
