@@ -23,6 +23,11 @@ class RechargeController extends AuthCompanyAuthoriseController {
         }
     }
 
+    //充值-首页
+    public function index2(){
+        $this->display();
+    }
+
     //充值-输入
     public function amount_input(){
         $modelWalletDetail = D('WalletDetail');
