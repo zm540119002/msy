@@ -1,0 +1,98 @@
+<extend name="Public:base" />
+<block name="title">联合采购</block>
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
+</block>
+<block name="content">
+    <!--<article class=" f24">-->
+        <!--<section class="purchaser_member_module">-->
+            <!--<div>我的采购账户余额为 <span>￥</span><price>100000.00</price></div>-->
+            <!--<a href="javascript:void(0);" class="account_details">查看我的采购账户明细</a>-->
+        <!--</section>-->
+
+        <!--<section class="purchaser_member_module">-->
+            <!--<div class="purchase_weixin_icon">-->
+                <!--<span class="wx"></span>微信支付-->
+            <!--</div>-->
+            <!--<a href="javascript:void(0);" class="balance_pay weixin_pay" data-paycode="weixin">微信支付充值</a>-->
+        <!--</section>-->
+        <!--<section class="purchaser_member_module">-->
+            <!--<div class="purchase_weixin_icon">-->
+                <!--<span class="bank"></span>在线支付-->
+            <!--</div>-->
+            <!--<a href="javascript:void(0);" class="balance_pay weixin_pay" data-paycode="unionpay">银联在线支付充值</a>-->
+        <!--</section>-->
+        <!--<section class="purchaser_member_module zfb_pay_module">-->
+            <!--<div class="purchase_weixin_icon">-->
+                <!--<span class="zfb"></span>支付宝支付-->
+            <!--</div>-->
+            <!--<a href="javascript:void(0);" class="balance_pay weixin_pay" data-paycode="alipayMobile">支付宝支付</a>-->
+        <!--</section>-->
+        <!--<section class="purchaser_member_module">-->
+            <!--<div>-->
+                <!--<p>[银行转账方式]</p>-->
+                <!--<div>收款单位：<span>广东美尚网络科技</span></div>-->
+                <!--<div>开户银行：<span>广州市华景新城支行</span></div>-->
+                <!--<div>银行账户：<span>XXXXXXXX</span></div>-->
+                <!--<a href="javascript:void(0);" class="bank_transfer_recharge right-arrow">银行转账支付后将凭证发给平台客服通知账户充值</a>-->
+            <!--</div>-->
+        <!--</section>-->
+    <!--</article>-->
+
+
+    <form action="/index.php/Purchase/Payment/getCode" method="post">
+       <input type="text" name="price" value="10"/>
+        <input type="text" name="paycode" value="yin" />
+        <input type="text" name="paycode" value="wei" />
+
+        <input type="submit" value="yin" />
+        <input type="submit" value="wei" />
+    </form>
+    <!--<form action="/index.php/Purchase/Payment/getCode" method="post">-->
+        <!--<input type="text" name="fname" value="5"/>-->
+        <!--<input type="text" name="lname" value="wei" />-->
+        <!--<input type="submit" value="wei" />-->
+    <!--</form>-->
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            if(isWeiXin()){
+                $('.zfb_pay_module').hide();
+            }
+            function isWeiXin(){
+                var ua = window.navigator.userAgent.toLowerCase();
+                if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+//            $('.balance_pay').on('click',function () {
+//                var url = MODULE+'/Payment/getCode';
+//
+//                $.ajax({
+//                    type:'post',
+//                    url:url,
+//                    data:{
+//                        name:"Donald Duck",
+//                        city:"Duckburg"
+//                    },
+//                    success:function(data){
+//                        //$('#loading').hide();
+//                        if(data.status==0){
+//                            dialog.error(data.info);
+//                        }else if(data.status==1){
+//                            //location.href = MODULE + '/WxPay/rechargePayment/walletDetailId/' + data.id;
+//                        }
+//                    }
+//                });
+//                //var pay_code = $(this).data('paycode');
+//
+//
+//            })
+
+        });
+    </script>
+</block>
