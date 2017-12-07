@@ -70,17 +70,18 @@
     <include file="Public/footerCartMenu" />
 </block>
 <block name="script">
-    <script type="text/javascript" src="PUBLIC_JS/purchase/goodsList.js"></script>
+    <script type="text/javascript" src="PUBLIC_JS/purchase/goods.js"></script>
     <script type="text/javascript">
+        var category_id_1 = '{$Think.get.category_id_1}';
         $(function(){
             //初始化页面
-            getMultiCategoryList($('.purchase_package_nav li:first'));
+            getMultiCategoryGoodsList($('.purchase_package_nav li:first'));
 
             //二级分类切换
             tab_down('.purchase_package_nav li','','click');
             $('body').on('click','.purchase_package_nav li',function () {
                 $(this).data('current_page',1).data('request_end',0);
-                getMultiCategoryList($(this));
+                getMultiCategoryGoodsList($(this));
                 $(document).scrollTop(300);
             });
             $('html,body').animate({scrollTop:0+'px'});
@@ -88,7 +89,7 @@
             //上拉加载更多
             $(window).on('scroll',function(){
                 if($(document).scrollTop()+$(window).height()>=$(document).height()){
-                    getMultiCategoryList($('.purchase_package_nav li.current'),'pull_up');
+                    getMultiCategoryGoodsList($('.purchase_package_nav li.current'),'pull_up');
                 }
             });
 
