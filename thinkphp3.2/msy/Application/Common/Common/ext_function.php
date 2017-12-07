@@ -81,7 +81,7 @@ function getUnitCN($num){
 /*开启底部购物车配置项
  */
 function unlockingFooterCartConfig($arr){
-    $footerCartConfig = C('FOOTER_CART_CONFIG');
+    $footerCartConfig = C('FOOTER_CART_MENU');
     $tempArr = array();
     foreach ($arr as $val) {
         $tempArr[] = $footerCartConfig[$val];

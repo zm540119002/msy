@@ -15,7 +15,7 @@ return array(
         '5'   => '五星',
     ),
     //底部购物车配置
-    'FOOTER_CART_CONFIG' => array(
+    'FOOTER_CART_MENU' => array(
         array('share'   => '分享',),//0
         array('shopping_basket'   => '购物篮',),//1
         array('amount'   => '总金额',),//2
