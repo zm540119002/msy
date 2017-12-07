@@ -11,23 +11,47 @@
         </section>
 
         <section class="purchaser_member_module">
-            <div class="purchase_weixin_icon">
-                <span class="wx"></span>微信支付
-            </div>
-            <a href="javascript:void(0);" class="balance_pay weixin_pay" data-paycode="weixin">微信支付充值</a>
+            <p class="recharge_title">账户充值</p>
+            <ul class="recharge_grade">
+                <li><span>1000</span>元</li>
+                <li><span>2000</span>元</li>
+                <li><span>3000</span>元</li>
+                <li><span>5000</span>元</li>
+                <li><span>8000</span>元</li>
+                <li><span>10000</span>元</li>
+            </ul>
+           
         </section>
-        <section class="purchaser_member_module">
-            <div class="purchase_weixin_icon">
-                <span class="bank"></span>在线支付
-            </div>
-            <a href="javascript:void(0);" class="balance_pay weixin_pay" data-paycode="unionpay">银联在线支付充值</a>
-        </section>
-        <section class="purchaser_member_module zfb_pay_module">
-            <div class="purchase_weixin_icon">
-                <span class="zfb"></span>支付宝支付
-            </div>
-            <a href="javascript:void(0);" class="balance_pay weixin_pay" data-paycode="alipayMobile">支付宝支付</a>
-        </section>
+        <form action="/index.php/Purchase/Payment/getCode" method="post">
+            <section class="purchaser_member_module">
+                <div class="purchase_weixin_icon">
+                    <span class="wx"></span>微信支付
+                </div>
+                <input type="hidden" name="weixin" value="" />
+                <input type="hidden" name="weixin" value="" />
+                <input type="submit" class="balance_pay weixin_pay" data-paycode="weixin" value="微信支付充值">
+            </section>
+        </form>
+        <form action="/index.php/Purchase/Payment/getCode" method="post">
+            <section class="purchaser_member_module">
+                <div class="purchase_weixin_icon">
+                    <span class="bank"></span>在线支付
+                </div>
+                <input type="hidden" name="online" value="" />
+                <input type="hidden" name="online" value="" />
+                <input type="submit" class="balance_pay weixin_pay" data-paycode="online" value="银联在线支付充值">
+            </section>
+        </form>
+        <form action="/index.php/Purchase/Payment/getCode" method="post">
+            <section class="purchaser_member_module zfb_pay_module">
+                <div class="purchase_weixin_icon">
+                    <span class="zfb"></span>支付宝支付
+                </div>
+                <input type="hidden" name="zfb" value="" />
+                <input type="hidden" name="zfb" value="" />
+                <input type="submit" class="balance_pay weixin_pay" data-paycode="zfb" value="支付宝支付">
+            </section>
+        </form>
         <section class="purchaser_member_module">
             <div>
                 <p>[银行转账方式]</p>
@@ -57,6 +81,7 @@
 <block name="script">
     <script type="text/javascript">
         $(function(){
+            //判断微信浏览器
             if(isWeiXin()){
                 $('.zfb_pay_module').hide();
             }
@@ -68,6 +93,12 @@
                     return false;
                 }
             }
+
+            $('.recharge_grade li').on('click',function(){
+                var rechargePrice=$(this).find('span').text();
+                    $(this).addClass('active').siblings().removeClass('active');
+                    $('input[type="hidden"]').val(rechargePrice);
+            })
 
 //            $('.balance_pay').on('click',function () {
 //                var url = MODULE+'/Payment/getCode';
