@@ -65,9 +65,9 @@ class PaymentController extends Controller {
             'actually_amount' => 0.01
         );
 
-        if($this->pay_code !== 'weixin'){
-            $code_str = $this->payment->get_code($order,$config_value='');
-        }
+//        if($this->pay_code !== 'weixin'){
+//            $code_str = $this->payment->get_code($order,$config_value='');
+//        }
         if ($this->pay_code == 'weixin' && strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false) {
             $code_str = $this->payment->h5_pay($order);
             $this->assign('code_str', $code_str);
