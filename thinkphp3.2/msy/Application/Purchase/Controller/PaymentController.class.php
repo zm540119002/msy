@@ -64,10 +64,10 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-
+        var_dump(strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger'));exit;
        // 手机端支付
             if(isPhoneSide()){
-                if ($this->pay_code == 'weixin' && !strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
+                if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
                     $code_str = $this->payment->h5_pay($order);
                     $this->assign('code_str', $code_str);
                     $this->display('wx_h5');
@@ -75,7 +75,7 @@ class PaymentController extends Controller {
                     $code_str = $this->payment->get_code($order, $config_value = '');
                 }
             }
-        
+
         $this->payment = new \Component\payment\weixin\weixin();
         $code_str = $this->payment->getJSAPI($order);
         exit($code_str);
