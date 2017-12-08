@@ -18,16 +18,15 @@ namespace Component\payment\weixin;
  * Class 
  * @package Home\Payment
  */
-use Think\Model;
+
 use Vendor\Qrcode\Qrcode;
-class weixin extends Model
+class weixin
 {
 	/**
 	 * 架构函数
 	 *
 	 */
 	public function __construct() {
-		parent::__construct();
 		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
 		require_once("example/WxPay.NativePay.php");
 		require_once("example/WxPay.JsApiPay.php");
