@@ -46,7 +46,7 @@ class weixin
      */
 	function get_code($order, $config_value)
 	{
-
+		var_dump(111);exit;
 		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		//$notify_url = C('site_url').U('Home/Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		//$notify_url = C('site_url')."/index.php?m=Home&c=Payment&a=notifyUrl&pay_code=weixin";
@@ -60,6 +60,7 @@ class weixin
 		$input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
 		$notify = new \NativePay();
 		$result = $notify->GetPayUrl($input); // 获取生成二维码的地址
+
 		$url2 = $result["code_url"];
 		$this->payQRcode($url2);
 //		return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
