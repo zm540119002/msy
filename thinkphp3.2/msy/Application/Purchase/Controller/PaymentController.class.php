@@ -80,6 +80,7 @@ class PaymentController extends Controller {
         }elseif($this->pay_code == 'weixin' && strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false){
             $code_str = $this->payment->h5_pay($order);
             $this->assign('code_str', $code_str);
+            $this->display('wx_h5');
         }else{
             $this->payment = new \Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
