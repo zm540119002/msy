@@ -60,7 +60,6 @@ class PaymentController extends Controller {
         //  订单支付提交
 
         header("Content-type:text/html;charset=utf-8");
-        $pay_code = $_POST['pay_code'];
         $order = array(
             'sn' => generateSN(),
             'actually_amount' => 0.01
@@ -68,10 +67,10 @@ class PaymentController extends Controller {
 //        if(IS_POST) {
 //            //手机端支付
 //            if(isPhoneSide()){
-//                if ($pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
+//                if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
 //                    $code_str = $this->payment->getJSAPI($order);
 //                    exit($code_str);
-//                }elseif ($pay_code == 'weixin'){
+//                }elseif ($this->pay_code == 'weixin'){
 //                    $code_str = $this->payment->h5_pay($order);
 //                    $this->assign('code_str', $code_str);
 //                    $this->display('wx_h5');
