@@ -164,7 +164,7 @@ class weixin
         $html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
-	console.log($jsApiParameters);return;
+
 	function jsApiCall()
 	{
 		WeixinJSBridge.invoke(
@@ -197,7 +197,7 @@ class weixin
 	callpay();
 	</script>
 EOF;
-        
+		var_dump(1111);exit;
     return $html;
 
     }
