@@ -46,7 +46,6 @@ class weixin
      */
 	function get_code($order, $config_value)
 	{
-		var_dump(111);exit;
 		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		//$notify_url = C('site_url').U('Home/Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		//$notify_url = C('site_url')."/index.php?m=Home&c=Payment&a=notifyUrl&pay_code=weixin";
@@ -90,7 +89,6 @@ class weixin
 	function h5_pay($order){
 		//统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
 		//使用统一支付接口
-
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
