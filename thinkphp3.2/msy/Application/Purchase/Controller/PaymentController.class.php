@@ -65,17 +65,22 @@ class PaymentController extends Controller {
             'actually_amount' => 0.01
         );
         if($this->pay_code == 'weixin' ){
-            if (!isPhoneSide()) {
+            if (!isPhoneSide()) {//扫码
                 $code_str = $this->payment->pc_pay($order,$config_value='');
-            }elseif($this->pay_code == 'weixin' && strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false){
+//            }elseif($this->pay_code == 'weixin' && strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false){
+//                //手机端浏览器
+//                $code_str = $this->payment->h5_pay($order);
+//                $this->assign('code_str', $code_str);
+//                $this->display('wx_h5');
+            }else{//手机端浏览器
+
                 $code_str = $this->payment->h5_pay($order);
                 $this->assign('code_str', $code_str);
                 $this->display('wx_h5');
-            }else{
-                $this->payment = new \Component\payment\weixin\weixin();
-                
-                $code_str = $this->payment->getJSAPI($order);
-                exit($code_str);
+//                $this->payment = new \Component\payment\weixin\weixin();
+//
+//                $code_str = $this->payment->getJSAPI($order);
+//                exit($code_str);
             }
         }
 
