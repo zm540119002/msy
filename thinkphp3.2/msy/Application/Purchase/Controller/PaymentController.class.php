@@ -43,8 +43,7 @@ class PaymentController extends Controller {
 
         // 导入具体的支付类文件
         if( $this->pay_code  == 'weixin'){
-            $this->payment = new \Component\payment\weixin\Pay();
-            var_dump( $this->payment);exit;
+            $this->payment = new \Component\payment\weixin\weixin();
         }
         if( $this->pay_code  == 'alipayMobile'){
             $this->payment = new \Component\payment\alipayMobile\alipayMobile();
@@ -64,12 +63,6 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-        $aa = 2;
-        if( 1 && $aa == '2'){
-            $code_str = $this->payment->getJSAPI($order);
-            exit($code_str);
-        }
-        exit;
         if (!isPhoneSide()) {//pc端微信扫码支付
             $code_str = $this->payment->pc_pay($order,$config_value='');
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
@@ -80,9 +73,7 @@ class PaymentController extends Controller {
             $code_str = $this->payment->getJSAPI($order);
             exit($code_str);
         }
-
-
-
+        
     }
 
     /**
