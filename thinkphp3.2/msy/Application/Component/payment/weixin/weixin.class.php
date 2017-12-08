@@ -137,7 +137,6 @@ class weixin
     }
 
     function getJSAPI($order){
-		require_once("example/WxPay.JsApiPay.php");
 //		if(stripos($order['order_sn'],'recharge') !== false){
 //			$go_url = U('Mobile/User/points',array('type'=>'recharge'));
 //			$back_url = U('Mobile/User/recharge',array('order_id'=>$order['order_id']));
@@ -163,7 +162,6 @@ class weixin
 		$input->SetOpenid($openId);					//用户openID
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$jsApiParameters = $tools->GetJsApiParameters($order2);
-		var_dump($jsApiParameters);exit;
         $html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
@@ -200,7 +198,7 @@ class weixin
 	</script>
 EOF;
 
-    return $html;
+    echo  $html;
 
     }
     
