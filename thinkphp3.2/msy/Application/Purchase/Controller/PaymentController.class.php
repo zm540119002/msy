@@ -64,24 +64,22 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-        if($this->pay_code == 'weixin' ){
-            if (!isPhoneSide()) {//扫码
-                $code_str = $this->payment->pc_pay($order,$config_value='');
-//            }elseif($this->pay_code == 'weixin' && strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false){
-//                //手机端浏览器
-//                $code_str = $this->payment->h5_pay($order);
-//                $this->assign('code_str', $code_str);
-//                $this->display('wx_h5');
-            }else{//手机端浏览器
-
-                $code_str = $this->payment->h5_pay($order);
-                $this->assign('code_str', $code_str);
-                $this->display('wx_h5');
-//                $this->payment = new \Component\payment\weixin\weixin();
-//
-//                $code_str = $this->payment->getJSAPI($order);
-//                exit($code_str);
-            }
+        if(1){
+            $this->payment = new \Component\payment\weixin\weixin();
+            $code_str = $this->payment->getJSAPI($order);
+            exit($code_str);
+        }
+        exit;
+        if (!isPhoneSide()) {//pc端微信扫码支付
+            $code_str = $this->payment->pc_pay($order,$config_value='');
+        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
+            $code_str = $this->payment->h5_pay($order);
+            $this->assign('code_str', $code_str);
+            $this->display('wx_h5');
+        }else{//微信浏览器
+            $this->payment = new \Component\payment\weixin\weixin();
+            $code_str = $this->payment->getJSAPI($order);
+            exit($code_str);
         }
 
 
