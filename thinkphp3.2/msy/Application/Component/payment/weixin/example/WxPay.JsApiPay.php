@@ -40,6 +40,7 @@ class JsApiPay
 	 */
 	public function GetOpenid()
 	{
+		echo 0;exit;
 		//通过code获得openid
 		if (!isset($_GET['code'])){
 			//触发微信返回code码
