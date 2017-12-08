@@ -64,7 +64,7 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-        var_dump(strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger'));exit;
+        var_dump(isWxBrowser());exit;
        // 手机端支付
             if(isPhoneSide()){
                 if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
