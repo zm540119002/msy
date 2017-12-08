@@ -51,7 +51,7 @@ class PaymentController extends Controller {
         if( $this->pay_code  == 'unionpay'){
             $this->payment = new \Component\payment\unionpay\unionpay();
         }
-        print_r($this->payment);exit;
+        print_r($this->payment );exit;
     }
     /**
      *  微信支付提交支付方式
