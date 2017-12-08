@@ -80,6 +80,7 @@ class PaymentController extends Controller {
 //                }
 //            }
 //        }
+        $this->payment = new \Component\payment\weixin\weixin();
         $code_str = $this->payment->getJSAPI($order);
         
         exit($code_str);
