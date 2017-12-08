@@ -64,6 +64,7 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
+        $code_str = $this->payment->get_code($order,$config_value='');
 
         if ($this->pay_code == 'weixin' && strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false) {
             $code_str = $this->payment->h5_pay($order);
@@ -74,8 +75,6 @@ class PaymentController extends Controller {
             $code_str = $this->payment->getJSAPI($order);
             exit($code_str);
         }
-        echo '00';exit;
-        $code_str = $this->payment->get_code($order,$config_value='');
 
 
     }
