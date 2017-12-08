@@ -146,6 +146,7 @@ class weixin
 //		}
 
 //		$go_url = MODULE + '/recharge/payComplete';
+		var_dump(11111);exit;
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
