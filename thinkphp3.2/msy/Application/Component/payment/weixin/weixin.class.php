@@ -199,7 +199,7 @@ class weixin
 	</script>
 EOF;
 
-    echo $html;
+    return $html;
 
     }
     

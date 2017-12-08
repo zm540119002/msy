@@ -69,8 +69,8 @@ class PaymentController extends Controller {
             //手机端支付
             if(isPhoneSide()){
                 if ($pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
-                    var_dump(111);;exit;
                     $code_str = $this->payment->getJSAPI($order);
+                    echo $code_str;exit;
                 }elseif ($pay_code == 'weixin'){
                     $code_str = $this->payment->h5_pay($order);
                     $this->assign('code_str', $code_str);
