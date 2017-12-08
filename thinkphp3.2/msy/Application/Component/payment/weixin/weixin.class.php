@@ -197,8 +197,7 @@ class weixin
 	callpay();
 	</script>
 EOF;
-		var_dump(1111);exit;
-    return $html;
+    echo  $html;
 
     }
     
