@@ -26,7 +26,7 @@ class PaymentController extends Controller {
     public function  __construct() {
         parent::__construct();
 
-        // tpshop 订单支付提交
+        // 订单支付提交
 
         if(IS_POST)
         {
