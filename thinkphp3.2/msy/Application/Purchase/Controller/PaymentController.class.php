@@ -64,7 +64,8 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-        if(1){
+        if( $this->pay_code == 'weixin'){
+            echo 1;exit;
             $this->payment = new \Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
             exit($code_str);
