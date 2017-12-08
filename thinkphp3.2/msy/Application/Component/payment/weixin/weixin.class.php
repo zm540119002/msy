@@ -148,7 +148,6 @@ class weixin
 //		$go_url = MODULE + '/recharge/payComplete';
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
-		var_dump($openId);exit;
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
@@ -162,6 +161,7 @@ class weixin
 		$input->SetOpenid($openId);					//用户openID
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$jsApiParameters = $tools->GetJsApiParameters($order2);
+		var_dump($jsApiParameters);exit;
         $html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
