@@ -28,7 +28,6 @@ class PaymentController extends Controller {
 
         // tpshop 订单支付提交
         $pay_code = $_POST['pay_code'];
-        var_dump($pay_code);exit;
 
         if(!empty($pay_code))
         {
@@ -49,6 +48,7 @@ class PaymentController extends Controller {
 //        }
         // 导入具体的支付类文件
         if($this->pay_code== 'weixin'){
+            var_dump(111);exit;
             $this->payment = new \Component\payment\weixin\weixin();
         }
         if($this->pay_code == 'alipayMobile'){
