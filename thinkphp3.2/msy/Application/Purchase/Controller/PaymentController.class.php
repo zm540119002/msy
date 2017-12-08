@@ -81,6 +81,7 @@ class PaymentController extends Controller {
             $this->display('wx_h5');
         }elseif(!isPhoneSide()){
             $code_str = $this->payment->get_code($order,$config_value='');
+
         }else{
             $this->payment = new \Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
