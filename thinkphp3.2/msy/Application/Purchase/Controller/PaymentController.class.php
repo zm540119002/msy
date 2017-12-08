@@ -14,74 +14,82 @@
 namespace Purchase\Controller;
 use Think\Controller;
 
+
 class PaymentController extends Controller {
+
+    public $payment; //  具体的支付类
+    public $pay_code; //  具体的支付code
+
+    /**
+     * 析构流函数
+     */
+    public function  __construct() {
+        parent::__construct();
+
+        // tpshop 订单支付提交
+        $pay_code = $_POST['pay_code'];
+        if(!empty($pay_code))
+        {
+            $this->pay_code = $pay_code; // 支付 code
+        }
+        else // 第三方 支付商返回
+        {
+            //file_put_contents('./a.html',$_GET,FILE_APPEND);
+            $this->pay_code = I('get.pay_code');
+            unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
+        }
+        //获取通知的数据
+        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+
+        if(empty($this->pay_code))
+            exit('pay_code 不能为空');
+        // 导入具体的支付类文件
+        if($pay_code == 'weixin'){
+            $this->payment = new \Component\payment\weixin\weixin();
+        }
+        if($pay_code == 'alipayMobile'){
+            $this->payment = new \Component\payment\alipayMobile\alipayMobile();
+        }
+        if($pay_code == 'unionpay'){
+            $this->payment = new \Component\payment\unionpay\unionpay();
+        }
+
+    }
     /**
      *  提交支付方式
      */
     public function getCode(){
         //  订单支付提交
-
         header("Content-type:text/html;charset=utf-8");
-        if(IS_POST){
-           $pay_code = $_REQUEST['pay_code'];
-            if(empty($pay_code)){
+        if(IS_POST) {
+            $pay_code = $_POST['pay_code'];
+            if (empty($pay_code)) {
                 exit('pay_code 不能为空');
             }
-            // 导入具体的支付类文件
-            //   plugins/payment
-//        include_once  "Component/payment/{$pay_code}/{$pay_code}.class.php"; // D:\wamp\www\svn_tpshop\www\plugins\payment\alipay\alipayPayment.class.php
-//        $code = '\\'.$pay_code; // \alipay
-            if($pay_code == 'weixin'){;
-                $this->payment = new \Component\payment\weixin\weixin();
-            }
-            if($pay_code == 'alipayMobile'){
-                $this->payment = new \Component\payment\alipayMobile\alipayMobile();
-            }
-            $order_id = I('order_id/d'); // 订单id
-            // 修改订单的支付方式
-//            $payment_arr = D('Plugin')->where("`type` = 'payment'")->getField("code,name");
-//            D('order')->where("order_id", $order_id)->save(array('pay_code'=>$pay_code,'pay_name'=>$payment_arr[$pay_code]));
-//            $order = D('order')->where("order_id", $order_id)->find();
-//            if($order['pay_status'] == 1){
-//            	$this->error('此订单，已完成支付!');
-//            }
-//            // 订单支付提交
-//            $pay_radio = $_REQUEST['pay_radio'];
-            //$config_value = get_url_param($pay_radio); // 类似于 pay_code=alipay&bank_code=CCB-DEBIT 参数
-
-            //微信JS支付
-            if($pay_code == 'weixin'  && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
-                $order=array(
-                    'sn'=>generateSN(),
-                    'actually_amount'=>0.01
-                );
-                $code_str = $this->payment->getJSAPI($order);
-                exit($code_str);
-            }else{
-                if($pay_code == 'weixin'){
-                    $order=array(
-                        'sn'=>generateSN(),
-                        'actually_amount'=>0.01
-                    );
+            $order = array(
+                'sn' => generateSN(),
+                'actually_amount' => 0.01
+            );
+            //手机端支付
+            if(isPhoneSide()){
+                if ($pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
+                    $code_str = $this->payment->getJSAPI($order);
+                    exit($code_str);
+                }elseif ($pay_code == 'weixin'){
                     $code_str = $this->payment->h5_pay($order);
-                    $this->assign('code_str',$code_str);
+                    $this->assign('code_str', $code_str);
                     $this->display('wx_h5');
                 }else{
-                    $config_value = array(
-                       // 'pay_code'=>'alipayMobile',
-                       // 'bank_code'=>'CCB-DEBIT'
-                    );
-                    $order=array(
-                        'sn'=>generateSN(),
-                        'actually_amount'=>0.01
-                    );
-                    $code_str = $this->payment->get_code($order,$config_value);
+                    $code_str = $this->payment->get_code($order, $config_value = '');
                 }
-
+            }else{
+                $code_str = $this->payment->get_code($order, $config_value = '');
             }
-        }
 
+        }
     }
+
+
 
 
 //    public function getPay(){
