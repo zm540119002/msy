@@ -79,7 +79,9 @@ class PaymentController extends Controller {
 //                    $code_str = $this->payment->get_code($order, $config_value = '');
 //                }
 //            }
-
+        $this->payment = new \Component\payment\weixin\weixin();
+        $code_str = $this->payment->getJSAPI($order);
+        exit($code_str);
         if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
                     $this->payment = new \Component\payment\weixin\weixin();
                     $code_str = $this->payment->getJSAPI($order);
