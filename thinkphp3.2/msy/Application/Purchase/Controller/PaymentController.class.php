@@ -73,6 +73,7 @@ class PaymentController extends Controller {
                 $this->display('wx_h5');
             }else{
                 $this->payment = new \Component\payment\weixin\weixin();
+                
                 $code_str = $this->payment->getJSAPI($order);
                 exit($code_str);
             }
