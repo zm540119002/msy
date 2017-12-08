@@ -28,6 +28,7 @@ class PaymentController extends Controller {
 
         // tpshop 订单支付提交
         $pay_code = $_POST['pay_code'];
+
         if(!empty($pay_code))
         {
             $this->pay_code = $pay_code; // 支付 code
@@ -38,6 +39,7 @@ class PaymentController extends Controller {
             $this->pay_code = I('get.pay_code');
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
+        $this->pay_code = 'weixin';
         //获取通知的数据
         $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
 //        if(empty($this->pay_code)){
@@ -62,31 +64,34 @@ class PaymentController extends Controller {
     public function getCode(){
         //  订单支付提交
         header("Content-type:text/html;charset=utf-8");
-        if(IS_POST) {
-//            if (empty($this->pay_code)) {
-//                exit('pay_code 不能为空');
+        $order = array(
+            'sn' => generateSN(),
+            'actually_amount' => 0.01
+        );
+//        if(IS_POST) {
+////            if (empty($this->pay_code)) {
+////                exit('pay_code 不能为空');
+////            }
+//
+//            //手机端支付
+//            if(isPhoneSide()){
+//                if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
+//                    $code_str = $this->payment->getJSAPI($order);
+//                    exit($code_str);
+//                }elseif ($this->pay_code == 'weixin'){
+//                    $code_str = $this->payment->h5_pay($order);
+//                    $this->assign('code_str', $code_str);
+//                    $this->display('wx_h5');
+//                }else{
+//                    $code_str = $this->payment->get_code($order, $config_value = '');
+//                }
+//            }else{
+//                $code_str = $this->payment->get_code($order, $config_value = '');
 //            }
-            $order = array(
-                'sn' => generateSN(),
-                'actually_amount' => 0.01
-            );
-            //手机端支付
-            if(isPhoneSide()){
-                if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
-                    $code_str = $this->payment->getJSAPI($order);
-                    exit($code_str);
-                }elseif ($this->pay_code == 'weixin'){
-                    $code_str = $this->payment->h5_pay($order);
-                    $this->assign('code_str', $code_str);
-                    $this->display('wx_h5');
-                }else{
-                    $code_str = $this->payment->get_code($order, $config_value = '');
-                }
-            }else{
-                $code_str = $this->payment->get_code($order, $config_value = '');
-            }
+//
+//        }
+        $code_str = $this->payment->getJSAPI($order);
 
-        }
     }
 
 
