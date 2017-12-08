@@ -54,7 +54,7 @@ class PaymentController extends Controller {
 
     }
     /**
-     *  提交支付方式
+     *  微信支付提交支付方式
      */
     public function getCode(){
         //  订单支付提交
@@ -73,15 +73,26 @@ class PaymentController extends Controller {
             $this->assign('code_str', $code_str);
             $this->display('wx_h5');
         }else{
-           
+            $this->payment = new \Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
             exit($code_str);
         }
 
-
     }
 
+    /**
+     *  微信支付提交支付方式
+     */
+    public function getCode2(){
+        //  订单支付提交
 
+        header("Content-type:text/html;charset=utf-8");
+        $order = array(
+            'sn' => generateSN(),
+            'actually_amount' => 0.01
+        );
+        $code_str = $this->payment->get_code($order,$config_value='');
+    }
 
 
 //    public function getPay(){
