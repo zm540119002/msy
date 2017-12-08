@@ -43,6 +43,7 @@ class PaymentController extends Controller {
 
         // 导入具体的支付类文件
         if( $this->pay_code  == 'weixin'){
+            var_dump(1111);exit;
             $this->payment = new \Component\payment\weixin\weixin();
         }
         if( $this->pay_code  == 'alipayMobile'){
