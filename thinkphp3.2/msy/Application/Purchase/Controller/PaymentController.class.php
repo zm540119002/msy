@@ -40,9 +40,9 @@ class PaymentController extends Controller {
         }
         //获取通知的数据
         $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-        if(empty($this->pay_code)){
-            exit('pay_code 不能为空');
-        }
+//        if(empty($this->pay_code)){
+//            exit('pay_code 不能为空');
+//        }
 
         // 导入具体的支付类文件
         if($this->pay_code== 'weixin'){
