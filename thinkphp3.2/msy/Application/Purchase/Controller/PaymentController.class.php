@@ -39,10 +39,8 @@ class PaymentController extends Controller {
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         //获取通知的数据
-        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+//        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
 
-        if(empty($this->pay_code))
-            exit('pay_code 不能为空');
         // 导入具体的支付类文件
         if($pay_code == 'weixin'){
             $this->payment = new \Component\payment\weixin\weixin();
@@ -64,9 +62,6 @@ class PaymentController extends Controller {
         header("Content-type:text/html;charset=utf-8");
         if(IS_POST) {
             $pay_code = $_POST['pay_code'];
-            if (empty($pay_code)) {
-                exit('pay_code 不能为空');
-            }
             $order = array(
                 'sn' => generateSN(),
                 'actually_amount' => 0.01
