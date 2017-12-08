@@ -26,22 +26,22 @@ class PaymentController extends Controller {
     public function  __construct() {
         parent::__construct();
 
-        // tpshop 订单支付提交
-        $pay_code = $_POST['pay_code'];
-
-        if(!empty($pay_code))
-        {
-            $this->pay_code = $pay_code; // 支付 code
-        }
-        else // 第三方 支付商返回
-        {
-            //file_put_contents('./a.html',$_GET,FILE_APPEND);
-            $this->pay_code = I('get.pay_code');
-            unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
-        }
+//        // tpshop 订单支付提交
+//        $pay_code = $_POST['pay_code'];
+//
+//        if(!empty($pay_code))
+//        {
+//            $this->pay_code = $pay_code; // 支付 code
+//        }
+//        else // 第三方 支付商返回
+//        {
+//            //file_put_contents('./a.html',$_GET,FILE_APPEND);
+//            $this->pay_code = I('get.pay_code');
+//            unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
+//        }
         $this->pay_code = 'weixin';
         //获取通知的数据
-        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+        //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
 //        if(empty($this->pay_code)){
 //            exit('pay_code 不能为空');
 //        }
