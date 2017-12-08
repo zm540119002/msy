@@ -30,25 +30,25 @@ class PaymentController extends Controller {
 
         if(IS_POST)
         {
-            $this->pay_code = $_POST['pay_code']; // 支付 code
+            $this->payCode = $_POST['pay_code']; // 支付 code
         }
         else // 第三方 支付商返回
         {
             //file_put_contents('./a.html',$_GET,FILE_APPEND);
-            $this->pay_code = I('get.pay_code');
+            $this->payCode = I('get.pay_code');
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         //获取通知的数据
 //        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
 
         // 导入具体的支付类文件
-        if( $this->pay_code  == 'weixin'){
+        if( $this->payCode  == 'weixin'){
             $this->payment = new \Component\payment\weixin\weixin();
         }
-        if( $this->pay_code  == 'alipayMobile'){
+        if( $this->payCode  == 'alipayMobile'){
             $this->payment = new \Component\payment\alipayMobile\alipayMobile();
         }
-        if( $this->pay_code  == 'unionpay'){
+        if( $this->payCode  == 'unionpay'){
             $this->payment = new \Component\payment\unionpay\unionpay();
         }
 
@@ -64,8 +64,7 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-        if( $this->pay_code == 'weixin'){
-            echo 1;exit;
+        if( $this->payCode == 'weixin'){
             $this->payment = new \Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
             exit($code_str);
@@ -73,7 +72,7 @@ class PaymentController extends Controller {
         exit;
         if (!isPhoneSide()) {//pc端微信扫码支付
             $code_str = $this->payment->pc_pay($order,$config_value='');
-        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
+        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->payCode == 'weixin'){//手机端非微信浏览器
             $code_str = $this->payment->h5_pay($order);
             $this->assign('code_str', $code_str);
             $this->display('wx_h5');
