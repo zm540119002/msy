@@ -4,9 +4,6 @@ namespace web\all\Lib;
 /**系统用户的登录/退出/是否登录判断
  */
 class Authuser{
-    public static function aa(){
-        echo 'aa';
-    }
     /**检查是否登录
      */
     public static function check(){

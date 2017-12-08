@@ -8,11 +8,11 @@
         <section class="purchase_certification">
             <div class="weChat_avatar_info">
                 <if condition="$user.avatar neq '' ">
-                    <img src="UPLOAD_IMG/{$user.id_url}" alt="" class="weChat_avatar">
-                <elseif condition="$wxUser.headimgurl neq '' "/>
-                    <img src="{$wxUser.headimgurl}" alt="" class="weChat_avatar">
+                    <img src="UPLOAD_IMG/{$user.id_url}" alt="" class="weChat_avatar" />
+                <elseif condition="$wxUser.headimgurl neq '' " />
+                    <img src="{$wxUser.headimgurl}" alt="" class="weChat_avatar" />
                 <else />
-                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="" class="weChat_avatar">
+                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="" class="weChat_avatar" />
                 </if>
                 <div class="weChat_av_r">
                     <h2 class="purchase_center">采购商用户中心</h2>

@@ -18,6 +18,8 @@ namespace Component\payment\weixin;
  * Class 
  * @package Home\Payment
  */
+use Vendor\Qrcode\Qrcode;
+
 
 class weixin
 {
@@ -33,7 +35,6 @@ class weixin
 		$config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
 		\WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
 		\WxPayConfig::$mchid = $config_value['mchid']; // * MCHID：商户号（必须配置，开户邮件中可查看）
-//		\WxPayConfig::$smchid = isset($config_value['smchid']) ? $config_value['smchid'] : ''; // * SMCHID：服务商商户号（必须配置，开户邮件中可查看）
 		\WxPayConfig::$key = $config_value['key']; // KEY：商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置）
 		\WxPayConfig::$appsecret = $config_value['appsecret']; // 公众帐号secert（仅JSAPI支付的时候需要配置)，
 	}
@@ -44,12 +45,9 @@ class weixin
      * @param   array   $order      订单信息
      * @param   array   $config_value    支付方式信息
      */
-	function get_code($order, $config_value)
+	function pc_pay($order, $config_value)
 	{
-
 		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
-		//$notify_url = C('site_url').U('Home/Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
-		//$notify_url = C('site_url')."/index.php?m=Home&c=Payment&a=notifyUrl&pay_code=weixin";
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody("美尚云"); // 商品描述
 		$input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
@@ -61,13 +59,26 @@ class weixin
 		$notify = new \NativePay();
 		$result = $notify->GetPayUrl($input); // 获取生成二维码的地址
 		$url2 = $result["code_url"];
-		return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
+		$this->payQRcode($url2);
+	}
+
+	//生成支付二维码
+	public function payQRcode($url){
+		//生成二维码图片
+		$object = new Qrcode();
+		$qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
+		$fileName = time().'.png';//保存文件名
+		$outFile = $qrcodePath.$fileName;
+		$level = 'L'; //容错级别
+		$size = 10; //生成图片大小
+		$frameSize = 2; //边框像素
+		$saveAndPrint = true;
+		$object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
 	}
 
 	function h5_pay($order){
 		//统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
 		//使用统一支付接口
-
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
@@ -81,17 +92,6 @@ class weixin
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$url = $order2['mweb_url'];
 		return $url;
-//		$html = <<<EOF
-//		<script type="text/javascript">
-//         	<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
-//         	function h5pay(){
-//         		location.href = $url;
-//         	}
-//         	h5pay();
-//        </script>
-//EOF;
-
-		//return $html;
 
 	}
 
@@ -115,16 +115,6 @@ class weixin
     }
 
     function getJSAPI($order){
-//		if(stripos($order['order_sn'],'recharge') !== false){
-//			$go_url = U('Mobile/User/points',array('type'=>'recharge'));
-//			$back_url = U('Mobile/User/recharge',array('order_id'=>$order['order_id']));
-//		}else{
-//			$go_url = U('Mobile/User/order_detail',array('id'=>$order['order_id']));
-//			$back_url = U('Mobile/Cart/cart4',array('order_id'=>$order['order_id']));
-//		}
-
-//		$go_url = MODULE + '/recharge/payComplete';
-
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
@@ -150,7 +140,7 @@ class weixin
 			function(res){
 				//WeixinJSBridge.log(res.err_msg);
 				 if(res.err_msg == "get_brand_wcpay_request:ok") {
-
+ 						location.href = '/index.php/Purchase/recharge/payComplete';
 				 }else{
 				 	alert(res.err_code+res.err_desc+res.err_msg);
 				   
@@ -175,8 +165,8 @@ class weixin
 	callpay();
 	</script>
 EOF;
-        
-    return $html;
+
+    echo  $html;
 
     }
     
@@ -191,7 +181,7 @@ EOF;
     			'mch_appid' => $wxchat['appid'],
     			'mchid'     => $wxchat['smchid'],
     			'nonce_str' => md5(time()),
-    			//'device_info' => '1000',
+
     			'partner_trade_no'=> $data['pay_code'], //商户订单号，需要唯一
     			'openid' => $data['openid'],//转账用户的openid
     			'check_name'=> 'NO_CHECK', //OPTION_CHECK不强制校验真实姓名, FORCE_CHECK：强制 NO_CHECK：

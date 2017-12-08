@@ -32,17 +32,7 @@
                 <input type="submit" class="balance_pay weixin_pay" data-paycode="weixin" value="微信支付充值">
             </section>
         </form>
-        <form action="/index.php/Purchase/Payment/getCode" method="post">
-            <section class="purchaser_member_module">
-                <div class="purchase_weixin_icon">
-                    <span class="bank"></span>在线支付
-                </div>
-                <input type="hidden" name="pay_code" value="unionpay" />
-                <input type="hidden" class="pay_info" name="order_id" value="" />
-                <input type="submit" class="balance_pay weixin_pay" data-paycode="online" value="银联在线支付充值">
-            </section>
-        </form>
-        <form action="/index.php/Purchase/Payment/getCode" method="post">
+        <form action="/index.php/Purchase/Payment/getCode2" method="post">
             <section class="purchaser_member_module zfb_pay_module">
                 <div class="purchase_weixin_icon">
                     <span class="zfb"></span>支付宝支付
@@ -52,6 +42,17 @@
                 <input type="submit" class="balance_pay weixin_pay" data-paycode="zfb" value="支付宝支付">
             </section>
         </form>
+        <form action="/index.php/Purchase/Payment/getCode2" method="post">
+            <section class="purchaser_member_module">
+                <div class="purchase_weixin_icon">
+                    <span class="bank"></span>在线支付
+                </div>
+                <input type="hidden" name="pay_code" value="unionpay" />
+                <input type="hidden" class="pay_info" name="order_id" value="" />
+                <input type="submit" class="balance_pay weixin_pay" data-paycode="online" value="银联在线支付充值">
+            </section>
+        </form>
+
         <section class="purchaser_member_module">
             <div>
                 <p>[银行转账方式]</p>
