@@ -29,7 +29,6 @@ class weixin
 		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
 		require_once("example/WxPay.NativePay.php");
 		require_once("example/WxPay.JsApiPay.php");
-        var_dump(111);exit;
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		var_dump($openId);exit;
