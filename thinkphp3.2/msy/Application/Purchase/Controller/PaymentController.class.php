@@ -28,7 +28,7 @@ class PaymentController extends Controller {
 
         // 订单支付提交
 
-        var_dump(  $this->payment = new \Component\payment\weixin\weixin());
+        var_dump(  $this->payment = new \Component\payment\weixin\weixin());exit;
 
         if(IS_POST)
         {
