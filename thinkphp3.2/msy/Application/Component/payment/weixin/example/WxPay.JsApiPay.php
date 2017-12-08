@@ -46,11 +46,13 @@ class JsApiPay
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
 			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 			$url = $this->__CreateOauthUrlForCode($baseUrl);
+			var_dump($url);exit;
 			Header("Location: $url");
 			exit();
 		} else {
 			//获取code码，以获取openid
 		    $code = $_GET['code'];
+			var_dump($code);exit;
 			$openid = $this->getOpenidFromMp($code);
 			var_dump($openid);exit;
 			return $openid;
