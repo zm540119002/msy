@@ -43,7 +43,6 @@ class PaymentController extends Controller {
 
         // 导入具体的支付类文件
         if( $this->pay_code  == 'weixin'){
-            var_dump(1111);exit;
             $this->payment = new \Component\payment\weixin\weixin();
         }
         if( $this->pay_code  == 'alipayMobile'){
@@ -80,6 +79,15 @@ class PaymentController extends Controller {
 //                    $code_str = $this->payment->get_code($order, $config_value = '');
 //                }
 //            }
+
+        //微信JS支付
+        if($this->pay_code == 'weixin' && $_SESSION['openid'] && strstr($_SERVER['HTTP_USER_AGENT'],'MicroMessenger')){
+            $code_str = $this->payment->getJSAPI($order);
+            exit($code_str);
+        }else{
+            $code_str = $this->payment->get_code($order,$config_value = '');
+        }
+
         $this->payment = new \Component\payment\weixin\weixin();
         $code_str = $this->payment->getJSAPI($order);
         exit($code_str);
