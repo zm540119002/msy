@@ -28,6 +28,7 @@ class PaymentController extends Controller {
 
         // tpshop 订单支付提交
         $pay_code = $_POST['pay_code'];
+        var_dump($pay_code);exit;
 
         if(!empty($pay_code))
         {
