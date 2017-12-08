@@ -136,7 +136,6 @@ class weixin
     }
 
     function getJSAPI($order){
-      var_dump(111);exit;
 //		if(stripos($order['order_sn'],'recharge') !== false){
 //			$go_url = U('Mobile/User/points',array('type'=>'recharge'));
 //			$back_url = U('Mobile/User/recharge',array('order_id'=>$order['order_id']));
@@ -148,6 +147,7 @@ class weixin
 //		$go_url = MODULE + '/recharge/payComplete';
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
+		var_dump($openId);exit;
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
