@@ -18,7 +18,7 @@ namespace Component\payment\weixin;
  * Class 
  * @package Home\Payment
  */
-use think\Model;
+use Think\Model;
 use Vendor\Qrcode\Qrcode;
 class weixin extends Model
 {
