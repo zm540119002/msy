@@ -44,7 +44,7 @@ class weixin
      * @param   array   $order      订单信息
      * @param   array   $config_value    支付方式信息
      */
-	function get_code($order, $config_value)
+	function pc_pay($order, $config_value)
 	{
 		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		//$notify_url = C('site_url').U('Home/Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
