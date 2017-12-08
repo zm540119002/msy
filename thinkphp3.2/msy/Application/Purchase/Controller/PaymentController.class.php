@@ -80,8 +80,8 @@ class PaymentController extends Controller {
 //                }
 //            }
 //        }
-        var_dump($this->payment);exit;
         $code_str = $this->payment->getJSAPI($order);
+        
         exit($code_str);
     }
 
