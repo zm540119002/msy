@@ -29,6 +29,10 @@ class weixin
 		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
 		require_once("example/WxPay.NativePay.php");
 		require_once("example/WxPay.JsApiPay.php");
+
+		$tools = new \JsApiPay();
+		$openId = $tools->GetOpenid();
+		var_dump($openId);exit;
 		$paymentPlugin = D('Plugin')->where("code='weixin' and  type = 'payment' ")->find(); // 找到微信支付插件的配置
 		$config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
 		\WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
@@ -149,7 +153,6 @@ class weixin
 //		$go_url = MODULE + '/recharge/payComplete';
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
-		ar_dump($openId);exit;
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
