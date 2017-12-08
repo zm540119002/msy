@@ -28,6 +28,8 @@ class PaymentController extends Controller {
 
         // 订单支付提交
 
+        var_dump(  $this->payment = new \Component\payment\weixin\weixin());
+
         if(IS_POST)
         {
             $this->pay_code = $_POST['pay_code']; // 支付 code
