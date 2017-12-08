@@ -40,7 +40,7 @@ class PaymentController extends Controller {
         }
         //获取通知的数据
         $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-
+        var_dump($this->pay_code);exit;
         if(empty($this->pay_code))
             exit('pay_code 不能为空');
         // 导入具体的支付类文件
