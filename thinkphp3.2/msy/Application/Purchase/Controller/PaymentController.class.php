@@ -26,26 +26,26 @@ class PaymentController extends Controller {
     public function  __construct() {
         parent::__construct();
 
-//        // tpshop 订单支付提交
-//        $pay_code = $_POST['pay_code'];
-//
-//        if(!empty($pay_code))
-//        {
-//            $this->pay_code = $pay_code; // 支付 code
-//        }
-//        else // 第三方 支付商返回
-//        {
-//            //file_put_contents('./a.html',$_GET,FILE_APPEND);
-//            $this->pay_code = I('get.pay_code');
-//            unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
-//        }
-        $this->pay_code = 'weixin';
+        // tpshop 订单支付提交
+        $pay_code = $_POST['pay_code'];
+
+        if(!empty($pay_code))
+        {
+            $this->pay_code = $pay_code; // 支付 code
+        }
+        else // 第三方 支付商返回
+        {
+
+        file_put_contents('./a.html',$_GET,FILE_APPEND);
+            $this->pay_code = I('get.pay_code');
+            unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
+        }
+        //$this->pay_code = 'weixin';
         //获取通知的数据
         //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
 //        if(empty($this->pay_code)){
 //            exit('pay_code 不能为空');
 //        }
-
         // 导入具体的支付类文件
         if($this->pay_code== 'weixin'){
             $this->payment = new \Component\payment\weixin\weixin();
@@ -68,29 +68,29 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-//        if(IS_POST) {
-////            if (empty($this->pay_code)) {
-////                exit('pay_code 不能为空');
-////            }
-//
-//            //手机端支付
-//            if(isPhoneSide()){
-//                if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
-//                    $code_str = $this->payment->getJSAPI($order);
-//                    exit($code_str);
-//                }elseif ($this->pay_code == 'weixin'){
-//                    $code_str = $this->payment->h5_pay($order);
-//                    $this->assign('code_str', $code_str);
-//                    $this->display('wx_h5');
-//                }else{
-//                    $code_str = $this->payment->get_code($order, $config_value = '');
-//                }
-//            }else{
-//                $code_str = $this->payment->get_code($order, $config_value = '');
+        if(IS_POST) {
+//            if (empty($this->pay_code)) {
+//                exit('pay_code 不能为空');
 //            }
-//
-//        }
-        $code_str = $this->payment->getJSAPI($order);
+
+            //手机端支付
+            if(isPhoneSide()){
+                if ($this->pay_code == 'weixin' && strstr($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')) {
+                    $code_str = $this->payment->getJSAPI($order);
+                    exit($code_str);
+                }elseif ($this->pay_code == 'weixin'){
+                    $code_str = $this->payment->h5_pay($order);
+                    $this->assign('code_str', $code_str);
+                    $this->display('wx_h5');
+                }else{
+                    $code_str = $this->payment->get_code($order, $config_value = '');
+                }
+            }else{
+                $code_str = $this->payment->get_code($order, $config_value = '');
+            }
+
+        }
+//        $code_str = $this->payment->getJSAPI($order);
 
     }
 
