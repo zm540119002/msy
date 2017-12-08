@@ -64,7 +64,7 @@ class PaymentController extends Controller {
             'sn' => generateSN(),
             'actually_amount' => 0.01
         );
-        var_dump($this->pay_code );exit;
+       
 //        if(IS_POST) {
 //            //手机端支付
 //            if(isPhoneSide()){
