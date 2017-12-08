@@ -137,7 +137,6 @@ class weixin
     }
 
     function getJSAPI($order){
-		var_dump(111);exit;
 //		if(stripos($order['order_sn'],'recharge') !== false){
 //			$go_url = U('Mobile/User/points',array('type'=>'recharge'));
 //			$back_url = U('Mobile/User/recharge',array('order_id'=>$order['order_id']));
