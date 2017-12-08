@@ -28,6 +28,7 @@ class weixin extends Model
 	 */
 	public function __construct() {
 		parent::__construct();
+		var_dump(111);exit;
 		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
 		require_once("example/WxPay.NativePay.php");
 		require_once("example/WxPay.JsApiPay.php");
