@@ -70,7 +70,7 @@ class PaymentController extends Controller {
             $code_str = $this->payment->h5_pay($order);
             $this->assign('code_str', $code_str);
             $this->display('wx_h5');
-        }else{
+        }elseif($this->pay_code == 'weixin'){
             $this->payment = new \Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
             exit($code_str);
