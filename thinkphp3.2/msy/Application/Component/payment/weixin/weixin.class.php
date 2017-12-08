@@ -172,7 +172,7 @@ class weixin
 			function(res){
 				//WeixinJSBridge.log(res.err_msg);
 				 if(res.err_msg == "get_brand_wcpay_request:ok") {
- 						location.href = MODULE + '/recharge/payComplete';
+ 						location.href = '/index.php/Purchase/recharge/payComplete';
 				 }else{
 				 	alert(res.err_code+res.err_desc+res.err_msg);
 				   
