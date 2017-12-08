@@ -161,10 +161,10 @@ class weixin
 		$input->SetOpenid($openId);					//用户openID
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$jsApiParameters = $tools->GetJsApiParameters($order2);
-		var_dump($jsApiParameters);exit;
         $html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
+	console.log($jsApiParameters);return;
 	function jsApiCall()
 	{
 		WeixinJSBridge.invoke(
