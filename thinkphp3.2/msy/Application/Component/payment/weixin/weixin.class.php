@@ -148,7 +148,7 @@ class weixin
 
 //		$go_url = MODULE + '/recharge/payComplete';
 		$tools = new \JsApiPay();
-		var_dump($tools);exit
+		var_dump($tools);exit;
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
