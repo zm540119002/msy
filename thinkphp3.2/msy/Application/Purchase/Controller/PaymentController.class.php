@@ -14,7 +14,8 @@ class PaymentController extends Controller {
     public function  __construct() {
         parent::__construct();
         // 订单支付提交
-        if(IS_POST)
+        $this->pay_code=$_POST['pay_code'];
+        if(!empty($this->pay_code))
         {
             $this->pay_code = $_POST['pay_code']; // 支付 code
         }
