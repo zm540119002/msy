@@ -93,7 +93,7 @@ class PaymentController extends Controller {
         $data = array(
             'code'=> $this->pay_code,
             'config'=>$a,
-            'name'=>'支付'
+            'name'=>'回调2'
         );
         D('Plugin')->add($data);
         $this->payment->response();
