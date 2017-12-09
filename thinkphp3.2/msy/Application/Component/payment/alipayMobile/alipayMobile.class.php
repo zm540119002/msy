@@ -91,6 +91,7 @@ class alipayMobile
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
         if(!$verify_result){
+            
             echo "fail";exit;
         }
         $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号
