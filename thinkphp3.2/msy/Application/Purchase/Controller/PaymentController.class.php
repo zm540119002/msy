@@ -14,6 +14,12 @@ class PaymentController extends Controller {
     public function  __construct() {
         parent::__construct();
         // 订单支付提交
+        $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+        $data = array(
+            'config'=>$a,
+            'name'=>1
+        );
+        D('Plugin')->add($data);
         $this->pay_code=$_POST['pay_code'];
         if(!empty($this->pay_code))
         {
@@ -21,6 +27,12 @@ class PaymentController extends Controller {
         }
         else // 第三方 支付商返回
         {
+            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+            $data = array(
+                'config'=>$a,
+                'name'=>2
+            );
+            D('Plugin')->add($data);
             $this->pay_code= get_url_param('pay_code');
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
