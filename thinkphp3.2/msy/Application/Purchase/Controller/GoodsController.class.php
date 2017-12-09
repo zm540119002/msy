@@ -15,7 +15,7 @@ class GoodsController extends BaseController {
 
             //单个一级分类信息
             if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-                $this->category_id_1 = I('get.category_id_1',0,'int');
+                    $this->category_id_1 = I('get.category_id_1',0,'int');
             }
             $where = array(
                 'gc.id' => $this->category_id_1,
@@ -58,7 +58,7 @@ class GoodsController extends BaseController {
         }
     }
 
-    //分类商品-主图形式-页面
+    //分类商品-一级分类下的商品
     public function goodsPage(){
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
@@ -95,27 +95,7 @@ class GoodsController extends BaseController {
         $this ->display('goodsPhotoList2Tpl');
     }
 
-    //商品信息
-    public function goodsInfo(){
-        if(!IS_GET){
-            $this->ajaxReturn(errorMsg(C('NOT_GET')));
-        }
-        $modelGoods = D('Goods');
-        $where = array(
-            'g.status' => 0,
-            'g.on_off_line' => 1,
-        );
-        if(isset($_GET['goods_id']) && intval($_GET['goods_id'])){
-            $where['g.id'] = I('get.goods_id',0,'int');
-        }
-        $goodsInfo = $modelGoods->selectGoods($where);
-        $this->goodsInfo = $goodsInfo[0];
-        //级别价格
-        $this->levelPrice = getGoodsPirceByUserLevel($goodsInfo[0],$this->user['level']);
-        $this->display('goodsInfoTpl');
-    }
-
-    //商品列表
+    //分下商品-二级分类下的商品
     public function goodsList(){
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
@@ -148,6 +128,26 @@ class GoodsController extends BaseController {
         }else if($template_type=='jointPurchase'){
             $this ->display('Cart/jointPurchase');
         }
+    }
+
+    //商品信息
+    public function goodsInfo(){
+        if(!IS_GET){
+            $this->ajaxReturn(errorMsg(C('NOT_GET')));
+        }
+        $modelGoods = D('Goods');
+        $where = array(
+            'g.status' => 0,
+            'g.on_off_line' => 1,
+        );
+        if(isset($_GET['goods_id']) && intval($_GET['goods_id'])){
+            $where['g.id'] = I('get.goods_id',0,'int');
+        }
+        $goodsInfo = $modelGoods->selectGoods($where);
+        $this->goodsInfo = $goodsInfo[0];
+        //级别价格
+        $this->levelPrice = getGoodsPirceByUserLevel($goodsInfo[0],$this->user['level']);
+        $this->display('goodsInfoTpl');
     }
 
     //商品详情页
