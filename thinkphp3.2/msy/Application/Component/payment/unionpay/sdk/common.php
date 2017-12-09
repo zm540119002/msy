@@ -1,33 +1,8 @@
 <?php
-namespace com\unionpay\acp\sdk;
-include_once 'log.class.php';
-include_once 'SDKConfig.php';
 header ( 'Content-type:text/html;charset=utf-8' );
-
-class LogUtil
-{
-	private static $_logger = null;
-	public static function getLogger()
-	{
-		if (LogUtil::$_logger == null ) {
-			$l = SDKConfig::getSDKConfig()->logLevel;
-			if("INFO" == strtoupper($l))
-				$level = PhpLog::INFO;
-			else if("DEBUG" == strtoupper($l))
-				$level = PhpLog::DEBUG;
-			else if("ERROR" == strtoupper($l))
-				$level = PhpLog::ERROR;
-			else if("WARN" == strtoupper($l))
-				$level = PhpLog::WARN;
-			else if("FATAL" == strtoupper($l))
-				$level = PhpLog::FATAL;
-			else
-				$level = PhpLog::OFF;
-			LogUtil::$_logger = new PhpLog ( SDKConfig::getSDKConfig()->logFilePath, "PRC", $level );
-		}
-		return self::$_logger;
-	}
-}
+// 初始化日志
+global $log;
+$log = new PhpLog ( SDK_LOG_FILE_PATH, "PRC", SDK_LOG_LEVEL );
 
 /**
  * key1=value1&key2=value2转array
@@ -50,15 +25,15 @@ function parseQString($str, $needUrlDecode=false){
 			if( $curChar == $openName){
 				$isOpen = false;
 			}
-			$temp .= $curChar;
+			$temp = $temp . $curChar;
 		} elseif ($curChar == "{"){
 			$isOpen = true;
 			$openName = "}";
-			$temp .= $curChar;
+			$temp = $temp . $curChar;
 		} elseif ($curChar == "["){
 			$isOpen = true;
 			$openName = "]";
-			$temp .= $curChar;
+			$temp = $temp . $curChar;
 		} elseif ($isKey && $curChar == "="){
 			$key = $temp;
 			$temp = "";
@@ -68,7 +43,7 @@ function parseQString($str, $needUrlDecode=false){
 			$temp = "";
 			$isKey = true;
 		} else {
-			$temp .= $curChar;
+			$temp = $temp . $curChar;
 		}
 	}
 	putKeyValueToDictionary($temp, $isKey, $key, $result, $needUrlDecode);
@@ -95,20 +70,6 @@ function putKeyValueToDictionary($temp, $isKey, $key, &$result, $needUrlDecode) 
 }
 
 /**
- * 取得备份文件名
- * 
- * Enter description here ...
- * @param $path
- */
-function getBackupFileName($path){
-	$i = strrpos($path, ".");
-	$leftFileName = substr($path, 0, $i);
-	$rightFileName = substr($path, $i + 1);
-	$newFileName = $leftFileName . '_backup.' . $rightFileName;
-	return $newFileName;
-}
-
-/**
  * 字符串转换为 数组
  *
  * @param unknown_type $str
@@ -124,9 +85,9 @@ function convertStringToArray($str) {
  * @param unknown_type $params        	
  */
 function deflate_file(&$params) {
-	$logger = LogUtil::getLogger();
+	global $log;
 	foreach ( $_FILES as $file ) {
-		$logger->LogInfo ( "---------处理文件---------" );
+		$log->LogInfo ( "---------处理文件---------" );
 		if (file_exists ( $file ['tmp_name'] )) {
 			$params ['fileName'] = $file ['name'];
 			
@@ -134,9 +95,9 @@ function deflate_file(&$params) {
 			$file_content_deflate = gzcompress ( $file_content );
 			
 			$params ['fileContent'] = base64_encode ( $file_content_deflate );
-			$logger->LogInfo ( "压缩后文件内容为>" . base64_encode ( $file_content_deflate ) );
+			$log->LogInfo ( "压缩后文件内容为>" . base64_encode ( $file_content_deflate ) );
 		} else {
-			$logger->LogInfo ( ">>>>文件上传失败<<<<<" );
+			$log->LogInfo ( ">>>>文件上传失败<<<<<" );
 		}
 	}
 }
@@ -180,17 +141,5 @@ function argSort($para) {
 	ksort ( $para );
 	reset ( $para );
 	return $para;
-}
-
-
-function getProjName(){
-	$dir = str_replace("\\","/", dirname(__FILE__));
-	$rootDir = str_replace("\\", "/", $_SERVER ['DOCUMENT_ROOT']);
-	if($rootDir[strlen($rootDir) - 1] != "/") $rootDir = $rootDir . "/";
-	$index = strlen($rootDir);
-	$dir = substr($dir, $index);
-	$index = strpos($dir, "/");
-	$projName = substr($dir, 0, $index);
-	return $projName;
 }
 

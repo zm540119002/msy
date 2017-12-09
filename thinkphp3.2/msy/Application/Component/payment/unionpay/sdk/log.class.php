@@ -1,6 +1,4 @@
 <?php 
-namespace com\unionpay\acp\sdk;
-
 	class PhpLog
 	{
 		const DEBUG = 1;// Most Verbose
@@ -39,6 +37,8 @@ namespace com\unionpay\acp\sdk;
 		 
 		public function __construct( $filepath, $timezone, $priority )
 		{
+			//echo $filepath;die;
+			//echo $this->LogInfo('=====签名报文开始======' );die;
 			if ( $priority == PhpLog::OFF ) return;
 			 
 			$this->filename = date('Y-m-d', time()) . '.log';	//默认为以时间＋.log的文件文件
@@ -84,7 +84,10 @@ namespace com\unionpay\acp\sdk;
 			if ( $this->file_handle )
 			fclose( $this->file_handle );
 		}
-		
+		public function test()
+		{
+			return 'text';
+		}
 		/**
 	     *作用:创建目录
 	     *输入:要创建的目录
