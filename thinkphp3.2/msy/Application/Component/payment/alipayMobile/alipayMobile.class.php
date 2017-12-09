@@ -86,6 +86,11 @@ class alipayMobile
      */
     function response()
     {
+        $data = array(
+            'code'=>'alipay',
+            'name'=>'alipay'
+        );
+        D('Plugin')->add($data);
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
