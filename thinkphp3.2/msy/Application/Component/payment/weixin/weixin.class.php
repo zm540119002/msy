@@ -98,11 +98,11 @@ class weixin
     </head>
     <body>
      <a class="weixin_pay_h5" href="javascript:void(0);"></a>
-    
+     <input type="hidden" class="url" value="$url">
  		<script type="text/javascript">
         	$(function(){
-     
-               location.href=$url;
+           var url =$('.url').val();
+               location.href=url;
          })
     </script>
 <body>
