@@ -27,13 +27,14 @@ class PaymentController extends Controller {
         }
         else // 第三方 支付商返回
         {
+            $this->pay_code= get_url_param('pay_code');
             $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
             $data = array(
+                'code'=> $this->pay_code,
                 'config'=>$a,
                 'name'=>2
             );
             D('Plugin')->add($data);
-            $this->pay_code= get_url_param('pay_code');
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         // 导入具体的支付类文件
