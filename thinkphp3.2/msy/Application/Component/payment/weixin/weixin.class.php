@@ -184,9 +184,7 @@ EOF;
 	callpay();
 	</script>
 EOF;
-
     echo  $html;
-
     }
     
     function transfer($data){

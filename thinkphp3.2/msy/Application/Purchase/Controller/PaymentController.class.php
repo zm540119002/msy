@@ -20,7 +20,6 @@ class PaymentController extends Controller {
         }
         else // 第三方 支付商返回
         {
-            //file_put_contents('./a.html',$_GET,FILE_APPEND);
             $this->pay_code = I('get.pay_code');
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
