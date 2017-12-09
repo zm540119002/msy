@@ -15,6 +15,7 @@ class unionpay
      * 析构流函数
      */
     public function  __construct() {
+        echo  '开发中';exit;
         unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
         $paymentPlugin = D('Plugin')->where("code='unionpay' and  type = 'payment' ")->find(); // 找到支付插件的配置
