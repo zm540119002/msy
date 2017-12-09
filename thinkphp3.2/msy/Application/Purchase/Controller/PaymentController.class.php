@@ -89,7 +89,7 @@ class PaymentController extends Controller {
 
     // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
     public function notifyUrl(){
-        $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+        $a=$_SERVER['QUERY_STRING'];
         $data = array(
             'code'=> $this->pay_code,
             'config'=>$a,
