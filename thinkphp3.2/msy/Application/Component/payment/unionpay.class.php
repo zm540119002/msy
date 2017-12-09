@@ -9,13 +9,15 @@ namespace Component\payment\unionpay;
 require_once(dirname(__FILE__) .'/sdk/acp_service.php');
 class unionpay
 {
+
     public $unionpay_config = array();// 银联支付配置参数
 
     /**
      * 析构流函数
      */
     public function  __construct() {
-       // unset($_GET['pay_code']);   // 删除掉 以免被进入签名
+        echo "开发中";exit;
+        unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
         $paymentPlugin = D('Plugin')->where("code='unionpay' and  type = 'payment' ")->find(); // 找到支付插件的配置
         $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
