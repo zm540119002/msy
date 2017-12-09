@@ -74,8 +74,8 @@ class PaymentController extends Controller {
     // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
     public function notifyUrl(){
         $data = array(
-            'code'=>'notify',
-            'name'=>'notify'
+            'code'=>$this->pay_code ,
+            'name'=>$this->pay_code
         );
         D('Plugin')->add($data);
         $this->payment->response();

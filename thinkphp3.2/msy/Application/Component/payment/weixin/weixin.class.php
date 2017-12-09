@@ -121,6 +121,7 @@ EOF;
      */
     function response()
     {
+		
 		$data = array(
 			'code'=>'weixin',
 			'name'=>'weixin'
