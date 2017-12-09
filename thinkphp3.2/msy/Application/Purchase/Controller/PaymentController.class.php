@@ -20,7 +20,7 @@ class PaymentController extends Controller {
         }
         else // 第三方 支付商返回
         {
-            $this->pay_code = I('get.pay_code');
+            $this->pay_code= get_url_param('pay_code');
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         // 导入具体的支付类文件
@@ -73,6 +73,11 @@ class PaymentController extends Controller {
 
     // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
     public function notifyUrl(){
+        $data = array(
+            'code'=>'refund',
+            'name'=>'refund'
+        );
+        D('Plugin')->add($data);
         $this->payment->response();
         exit();
     }

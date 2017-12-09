@@ -47,7 +47,8 @@ class weixin
      */
 	function pc_pay($order, $config_value)
 	{
-		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
+//		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
+		$notify_url = SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody("美尚云"); // 商品描述
 		$input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
@@ -121,8 +122,8 @@ EOF;
     function response()
     {
 		$data = array(
-			'code'=>'alipay',
-			'name'=>'alipay'
+			'code'=>'weixin',
+			'name'=>'weixin'
 		);
 		D('Plugin')->add($data);
         require_once("example/notify.php");  
