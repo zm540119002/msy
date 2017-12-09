@@ -90,15 +90,18 @@
             $('input[type="button"]').on('click',function(){
                 var oLi=$('.recharge_grade li');
                 var _This=$(this);
-                $.each(oLi,function(){
-                    var isActive=$(this).hasClass('active');
-                        if(isActive){
-                            _This.prop("type","submit");
-                            return false;
-                        }
-                        dialog.error('请选择充值金额');
-                        
-                })
+                var isNum=0;
+                    $.each(oLi,function(){
+                        var isActive=$(this).hasClass('active');
+                            if(isActive){
+                            isNum=1;
+                            }  
+                    })
+                    if(!isNum){
+                        dialog.error('请选择充值金额'); 
+                        return false;
+                    }
+                    _This.prop('type','submit');
             })
 
         });
