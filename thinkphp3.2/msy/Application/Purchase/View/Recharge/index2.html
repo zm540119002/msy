@@ -29,7 +29,7 @@
                 </div>
                 <input type="hidden" name="pay_code" value="weixin" />
                 <input type="hidden" class="pay_info" name="order_id" value="" />
-                <input type="submit" class="balance_pay weixin_pay" data-paycode="weixin" value="微信支付充值">
+                <input type="button" class="balance_pay weixin_pay" data-paycode="weixin" value="微信支付充值">
             </section>
         </form>
         <form action="/index.php/Purchase/Payment/getCode2" method="post">
@@ -39,7 +39,7 @@
                 </div>
                 <input type="hidden" name="pay_code" value="alipayMobile" />
                 <input type="hidden"  class="pay_info" name="order_id" value="" />
-                <input type="submit" class="balance_pay weixin_pay" data-paycode="zfb" value="支付宝支付">
+                <input type="button" class="balance_pay weixin_pay" data-paycode="zfb" value="支付宝支付">
             </section>
         </form>
         <form action="/index.php/Purchase/Payment/getCode2" method="post">
@@ -49,7 +49,7 @@
                 </div>
                 <input type="hidden" name="pay_code" value="unionpay" />
                 <input type="hidden" class="pay_info" name="order_id" value="" />
-                <input type="submit" class="balance_pay weixin_pay" data-paycode="online" value="银联在线支付充值">
+                <input type="button" class="balance_pay weixin_pay" data-paycode="online" value="银联在线支付充值">
             </section>
         </form>
 
@@ -86,7 +86,20 @@
                     $(this).addClass('active').siblings().removeClass('active');
                     $('input[class="pay_info"]').val(rechargePrice);
             })
-
+            //验证表单
+            $('input[type="button"]').on('click',function(){
+                var oLi=$('.recharge_grade li');
+                var _This=$(this);
+                $.each(oLi,function(){
+                    var isActive=$(this).hasClass('active');
+                        if(isActive){
+                            _This.prop("type","submit");
+                            return false;
+                        }
+                        dialog.error('请选择充值金额');
+                        
+                })
+            })
 
         });
     </script>
