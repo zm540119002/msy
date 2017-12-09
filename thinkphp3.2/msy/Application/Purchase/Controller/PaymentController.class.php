@@ -65,7 +65,8 @@ class PaymentController extends Controller {
         header("Content-type:text/html;charset=utf-8");
         $order = array(
             'sn' => generateSN(),
-            'actually_amount' => 0.01
+            'actually_amount' => 0.01,
+            'create_time'=>time()
         );
         $code_str = $this->payment->get_code($order,$config_value='');
     }
