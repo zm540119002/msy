@@ -93,11 +93,10 @@ class weixin
 		$url = $order2['mweb_url'];
 
 		$html = <<<EOF
-	<head>
+    <head>
 			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-
      <a class="weixin_pay_h5" href="javascript:void(0);"></a>
      <input type="hidden" class="url" value="$url">
  		<script type="text/javascript">
@@ -110,7 +109,6 @@ class weixin
 
 
 EOF;
-
 		echo  $html;
 		//return $url;
 
