@@ -15,15 +15,15 @@ class unionpay
      * 析构流函数
      */
     public function  __construct() {
-       // unset($_GET['pay_code']);   // 删除掉 以免被进入签名
+        unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
         $paymentPlugin = D('Plugin')->where("code='unionpay' and  type = 'payment' ")->find(); // 找到支付插件的配置
         $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
 
-        $this->unionpay_config['unionpay_mid']= $config_value['unionpay_mid']; // 商户号
-        $this->unionpay_config['unionpay_cer_password']       = $config_value['unionpay_cer_password'];// 商户私钥证书密码
-        $this->unionpay_config['unionpay_user']  = $config_value['unionpay_user'];//企业网银账号
-        $this->unionpay_config['unionpay_password']	      = $config_value['unionpay_password'];//企业网银密码
+        $this->unionpay_config['unionpay_mid']           = $config_value['unionpay_mid']; // 商户号
+        $this->unionpay_config['unionpay_cer_password']  = $config_value['unionpay_cer_password'];// 商户私钥证书密码
+        $this->unionpay_config['unionpay_user']          = $config_value['unionpay_user'];//企业网银账号
+        $this->unionpay_config['unionpay_password']	     = $config_value['unionpay_password'];//企业网银密码
 
     }
 
@@ -34,7 +34,7 @@ class unionpay
      */
     function get_code($order, $config_value)
     {
-        //dump($order);die;
+      
         $params = array(
 
             //以下信息非特殊情况不需要改动
@@ -52,9 +52,9 @@ class unionpay
 
             //TODO 以下信息需要填写
             'merId' => $this->unionpay_config['unionpay_mid'],		//商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
-            'orderId' => $order['order_sn'],	//商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
+            'orderId' => $order['sn'],	//商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
             'txnTime' => date('YmdHis',$order['add_time']),	//订单发送时间，格式为YYYYMMDDhhmmss，取北京时间，此处默认取demo演示页面传递的参数
-            'txnAmt' =>(int)( $order['order_amount']*100),	//交易金额，单位分，此处默认取demo演示页面传递的参数
+            'txnAmt' =>(int)( $order['actually_amount']*100),	//交易金额，单位分，此处默认取demo演示页面传递的参数
             // 		'reqReserved' =>'透传信息',        //请求方保留域，透传字段，查询、通知、对账文件中均会原样出现，如有需要请启用并修改自己希望透传的数据
 
             //TODO 其他特殊用法请查看 special_use_purchase.php
