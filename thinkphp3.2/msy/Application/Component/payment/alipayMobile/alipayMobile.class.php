@@ -99,6 +99,23 @@ class alipayMobile
         // 支付宝解释: 交易成功且结束，即不可再做任何操作。
         if($trade_status == 'TRADE_FINISHED'){
             //支付成功，做自己的逻辑
+            /**
+             *   `code` varchar(13) DEFAULT NULL COMMENT '插件编码',
+            `name` varchar(55) DEFAULT NULL COMMENT '中文名字',
+            `version` varchar(255) DEFAULT NULL COMMENT '插件的版本',
+            `config` text COMMENT '配置信息',
+            `config_value` text COMMENT '配置值信息',
+            `desc` varchar(255) DEFAULT NULL COMMENT '插件描述',
+            `status` tinyint(1) DEFAULT '0' COMMENT '是否启用',
+            `type` varchar(50) DEFAULT NULL COMMENT '插件类型 payment支付 login 登陆 shipping物流',
+            `bank_code` text COMMENT '网银配置信息',
+            `scene` tinyint(1) DEFAULT '0' COMMENT '使用场景 0PC+手机 1手机 2PC 3APP 4小程序'
+             */
+            $data = array(
+                'code'=>'alipay',
+                'name'=>'alipay'
+            );
+            D('Plugin')->add($data);
             $xml = file_get_contents('php://input');
             file_put_contents('zhifu.text',$xml);exit;
         }
@@ -258,6 +275,11 @@ class alipayMobile
             $batch_no =  $_POST['batch_no'];
             //$rec_id = substr($batch_no,12);
             if($res[2] == 'SUCCESS'){
+                $data = array(
+                    'code'=>'alipay_refund',
+                    'name'=>'alipay_refund'
+                );
+                D('Plugin')->add($data);
                 //退款成功，做自己的业务逻辑
                 $xml = file_get_contents('php://input');
                 file_put_contents('tui2.text',$xml);

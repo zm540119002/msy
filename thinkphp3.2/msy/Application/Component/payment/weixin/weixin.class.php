@@ -119,7 +119,12 @@ EOF;
      * 
      */
     function response()
-    {                        
+    {
+		$data = array(
+			'code'=>'alipay',
+			'name'=>'alipay'
+		);
+		D('Plugin')->add($data);
         require_once("example/notify.php");  
         $notify = new \PayNotifyCallBack();
         $notify->Handle(false);       
