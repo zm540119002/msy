@@ -14,25 +14,27 @@ class PaymentController extends Controller {
     public function  __construct() {
         parent::__construct();
         // 订单支付提交
-        $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
-        $data = array(
-            'config'=>$a,
-            'name'=>1
-        );
-        D('Plugin')->add($data);
         $this->pay_code=$_POST['pay_code'];
         if(!empty($this->pay_code))
         {
             $this->pay_code = $_POST['pay_code']; // 支付 code
+            $this->pay_code= get_url_param('pay_code');
+            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+            $data = array(
+                'code'=> $this->pay_code,
+                'config'=>$a,
+                'name'=>'支付'
+            );
+            D('Plugin')->add($data);
         }
         else // 第三方 支付商返回
         {
             $this->pay_code= get_url_param('pay_code');
-            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
             $data = array(
                 'code'=> $this->pay_code,
                 'config'=>$a,
-                'name'=>2
+                'name'=>'回调'
             );
             D('Plugin')->add($data);
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
@@ -87,9 +89,11 @@ class PaymentController extends Controller {
 
     // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
     public function notifyUrl(){
+        $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
         $data = array(
-            'code'=>1,
-            'name'=>$this->pay_code
+            'code'=> $this->pay_code,
+            'config'=>$a,
+            'name'=>'支付'
         );
         D('Plugin')->add($data);
         $this->payment->response();
