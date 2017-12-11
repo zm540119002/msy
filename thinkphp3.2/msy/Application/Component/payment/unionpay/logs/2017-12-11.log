@@ -1,0 +1,138 @@
+2017-12-11 15:37:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2017-12-11 15:37:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html&merId=&orderId=20171211153701279459455136742827&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171211153701&txnType=01&version=5.0.0 
+2017-12-11 15:37:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >8f23ad6484576c6a1bb63bcbcd8f2b854609ebd9 
+2017-12-11 15:37:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >Yj1OjezHsEkUikWoOx54OHQSYO5mbI3DsH/0NqIS41qQl5dJZrU6CbQ3NcfIyB94EimipMdkwY/u2+pJmTJGS3FY6rMsKI+Xq0YSgnBwS4R5GvkcE9BYJSOz4loj+3+QKgxo45H0hyLExZmrBChipmQHDlT+vJrJv/MuKhgeEyU= 
+2017-12-11 15:37:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2017-12-11 15:37:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="" />
+    <input type="hidden" name="orderId" id="orderId" value="20171211153701279459455136742827" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20171211153701" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="Yj1OjezHsEkUikWoOx54OHQSYO5mbI3DsH/0NqIS41qQl5dJZrU6CbQ3NcfIyB94EimipMdkwY/u2+pJmTJGS3FY6rMsKI+Xq0YSgnBwS4R5GvkcE9BYJSOz4loj+3+QKgxo45H0hyLExZmrBChipmQHDlT+vJrJv/MuKhgeEyU=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2017-12-11 15:37:10, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2017-12-11 15:37:10, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html&merId=&orderId=20171211153710630713644242508983&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171211153710&txnType=01&version=5.0.0 
+2017-12-11 15:37:10, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >3b149bcaaeb91448d3de1382d059504e60060d7e 
+2017-12-11 15:37:10, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >SGoe4RybcnYVU5egoxnkFVFei0+e24R+VZ5qgMZg6dhE2YUn7M0T3K+n0Fb8ktYmCsz6yK/UIEjkOtMtFiKYZe1gsOcKn+e9mgADln75Kgq8aIrEz23dyZD5MxPpFNZc+Bna3JBNgN/ENacnO+HxfXdbYfmYQPiEJZAd1Kot/dE= 
+2017-12-11 15:37:10, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2017-12-11 15:37:10, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="" />
+    <input type="hidden" name="orderId" id="orderId" value="20171211153710630713644242508983" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20171211153710" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="SGoe4RybcnYVU5egoxnkFVFei0+e24R+VZ5qgMZg6dhE2YUn7M0T3K+n0Fb8ktYmCsz6yK/UIEjkOtMtFiKYZe1gsOcKn+e9mgADln75Kgq8aIrEz23dyZD5MxPpFNZc+Bna3JBNgN/ENacnO+HxfXdbYfmYQPiEJZAd1Kot/dE=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2017-12-11 15:51:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2017-12-11 15:51:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html&merId=&orderId=20171211155106915831943805535600&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171211155106&txnType=01&version=5.0.0 
+2017-12-11 15:51:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >ce3c716ce7a3b2846be33d55647b2d12602bedd6 
+2017-12-11 15:51:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >YPP+1lFd+AQOb2m5Lu+JnY2Y63imK6P+/uQBfsZlDgcYPkcfJIQkwFfWghCt8GqKQrnoGkr7KaQXNhwnAywUyJlUWvx+D6to4I5WuyMetI3avak7W7AMnLk3wYx4LVwJE2pA6TLVe6q6F0MSDMPciAjw2V69xmsSjLBib8hIDmY= 
+2017-12-11 15:51:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2017-12-11 15:51:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="" />
+    <input type="hidden" name="orderId" id="orderId" value="20171211155106915831943805535600" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20171211155106" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="YPP+1lFd+AQOb2m5Lu+JnY2Y63imK6P+/uQBfsZlDgcYPkcfJIQkwFfWghCt8GqKQrnoGkr7KaQXNhwnAywUyJlUWvx+D6to4I5WuyMetI3avak7W7AMnLk3wYx4LVwJE2pA6TLVe6q6F0MSDMPciAjw2V69xmsSjLBib8hIDmY=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html&merId=&orderId=20171211160306719020831092026972&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171211160306&txnType=01&version=5.0.0 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >1b7e4b364c4449960ddd1f92c4692d2a978df4dd 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >DkpJFXCY1MRbeg/emN+eVC0hmac6dGqMh60a12EIZIY9+QtYlcUaq2iao8ey7KpJ7F0/5umc4mvebq8SbSxk0jjUKcb44Q/SP9i8rxUQAsNXT/XdiDFWnphd5K+ISD3MWZO8NeisQl9L5cCVD8AeKR59z6sQZbbj2foYTrUzi3s= 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html&merId=&orderId=20171211160306719020831092026972&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171211160306&txnType=01&version=5.0.0 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >1b7e4b364c4449960ddd1f92c4692d2a978df4dd 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >DkpJFXCY1MRbeg/emN+eVC0hmac6dGqMh60a12EIZIY9+QtYlcUaq2iao8ey7KpJ7F0/5umc4mvebq8SbSxk0jjUKcb44Q/SP9i8rxUQAsNXT/XdiDFWnphd5K+ISD3MWZO8NeisQl9L5cCVD8AeKR59z6sQZbbj2foYTrUzi3s= 
+2017-12-11 16:03:06, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2017-12-11 16:24:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2017-12-11 16:24:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html&merId=&orderId=20171211162401609193859866646326&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171211162401&txnType=01&version=5.0.0 
+2017-12-11 16:24:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >91347b68e1818dd27ed42413ee8439fd0ce5386b 
+2017-12-11 16:24:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >YxYh39CSacZPcXeA+CohaV5ou+z/1NdNoNDGa6UvnTO07WuUL1bhOYoPI3jjwJdMOLWX7LPjECFHNIAKhkjoxH/N2WG/KnoGvP7vPfhQf/1mjPgd1uc0sGIhlDFvq8zgZX5fRiK20ln13FLKnNHyiP9qrZyE6mUsUq/fvYA4E34= 
+2017-12-11 16:24:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2017-12-11 16:24:01, INFO, 127.0.0.1, File[ E:\web\thinkphp3.2\msy\Application\Component\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://gateway.test.95516.com/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://msy.zm.dev/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="" />
+    <input type="hidden" name="orderId" id="orderId" value="20171211162401609193859866646326" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20171211162401" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="YxYh39CSacZPcXeA+CohaV5ou+z/1NdNoNDGa6UvnTO07WuUL1bhOYoPI3jjwJdMOLWX7LPjECFHNIAKhkjoxH/N2WG/KnoGvP7vPfhQf/1mjPgd1uc0sGIhlDFvq8zgZX5fRiK20ln13FLKnNHyiP9qrZyE6mUsUq/fvYA4E34=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
