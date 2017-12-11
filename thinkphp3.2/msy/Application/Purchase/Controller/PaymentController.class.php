@@ -40,6 +40,7 @@ class PaymentController extends Controller {
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         // 导入具体的支付类文件
+        $this->pay_code = 'weixin';
         if( $this->pay_code  == 'weixin'){
             $this->payment = new \Component\payment\weixin\weixin();
         }
