@@ -15,8 +15,9 @@ const SDK_ENCRYPT_CERT_PATH = APP_PATH.'/Component/payment/unionpay/certs/acp_pr
 const SDK_VERIFY_CERT_DIR = APP_PATH.'/Component/payment/unionpay/certs/';
 
 // 前台请求地址
-const  SDK_FRONT_TRANS_URL = 'https://gateway.test.95516.com/gateway/api/frontTransReq.do';
+//const  SDK_FRONT_TRANS_URL = 'https://gateway.test.95516.com/gateway/api/frontTransReq.do';
 //const SDK_FRONT_TRANS_URL = 'https://101.231.204.80:5000/gateway/api/frontTransReq.do';
+const SDK_FRONT_TRANS_URL = 'https://gateway.95516.com/gateway/api/frontTransReq.do';
 
 // 后台请求地址
 const SDK_BACK_TRANS_URL = 'https://101.231.204.80:5000/gateway/api/backTransReq.do';
