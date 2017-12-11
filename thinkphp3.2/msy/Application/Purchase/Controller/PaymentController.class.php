@@ -31,27 +31,15 @@ class PaymentController extends Controller {
         {
             $this->pay_code= get_url_param('pay_code');
             $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
-
             $data = array(
                 'code'=> $this->pay_code,
                 'config'=>$a,
                 'name'=>'回调'
             );
             D('Plugin')->add($data);
-            if(strpos($_SERVER['HTTP_USER_AGENT'],'weixin') == true){
-                $this->pay_code = 'weixin';
-            }
-            if(strpos($_SERVER['HTTP_USER_AGENT'],'alipayMobile') == true){
-                $this->pay_code = 'alipayMobile';
-            }
-            if(strpos($_SERVER['HTTP_USER_AGENT'],'unionpay') == true){
-                $this->pay_code = 'unionpay';
-            }
-
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         // 导入具体的支付类文件
-
         if( $this->pay_code  == 'weixin'){
             $this->payment = new \Component\payment\weixin\weixin();
         }
