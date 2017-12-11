@@ -47,7 +47,8 @@ class weixin
      */
 	function pc_pay($order, $config_value)
 	{
-		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
+//		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
+		$notify_url = SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody("美尚云"); // 商品描述
 		$input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
@@ -91,7 +92,26 @@ class weixin
 		$input->SetTrade_type("MWEB");				//支付类型
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$url = $order2['mweb_url'];
-		return $url;
+
+		$html = <<<EOF
+    <head>
+			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
+    </head>
+    <body>
+     <a class="weixin_pay_h5" href="javascript:void(0);"></a>
+     <input type="hidden" class="url" value="$url">
+ 		<script type="text/javascript">
+        	$(function(){
+           var url =$('.url').val();
+               location.href=url;
+         })
+    </script>
+<body>
+
+
+EOF;
+		echo  $html;
+		//return $url;
 
 	}
 
@@ -100,7 +120,13 @@ class weixin
      * 
      */
     function response()
-    {                        
+    {
+		
+		$data = array(
+			'code'=>'weixin',
+			'name'=>'weixin'
+		);
+		D('Plugin')->add($data);
         require_once("example/notify.php");  
         $notify = new \PayNotifyCallBack();
         $notify->Handle(false);       
@@ -165,9 +191,7 @@ class weixin
 	callpay();
 	</script>
 EOF;
-
     echo  $html;
-
     }
     
     function transfer($data){

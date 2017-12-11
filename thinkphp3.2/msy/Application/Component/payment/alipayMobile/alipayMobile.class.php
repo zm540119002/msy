@@ -50,10 +50,8 @@ class alipayMobile
                         'seller_id'=> trim($this->alipay_config['partner']), //收款支付宝账号，以2088开头由16位纯数字组成的字符串，一般情况下收款账号就是签约账号
                         "key" => trim($this->alipay_config['key']), // MD5密钥，安全检验码，由数字和字母组成的32位字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
                         // "seller_email" => trim($this->alipay_config['seller_email']),                                            
-                       // "notify_url"	=> SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'alipayMobile')) , //服务器异步通知页面路径 //必填，不能修改
-                        "notify_url"	=> SITE_URL.U('Payment/notifyUrl') , //服务器异步通知页面路径 //必填，不能修改
-                        //"return_url"	=> SITE_URL.U('Payment/returnUrl',array('pay_code'=>'alipayMobile')),  //页面跳转同步通知页面路径
-                        "return_url"	=> SITE_URL.U('Payment/returnUrl'),  //页面跳转同步通知页面路径
+                        "notify_url"	=> SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'alipayMobile')) , //服务器异步通知页面路径 //必填，不能修改
+                        "return_url"	=> SITE_URL.U('Payment/returnUrl',array('pay_code'=>'alipayMobile')),  //页面跳转同步通知页面路径
                         "sign_type"     => strtoupper('MD5'), //签名方式
                         "input_charset" =>strtolower('utf-8'), //字符编码格式 目前支持utf-8
                         "cacert"	=>  getcwd().'\\cacert.pem',
@@ -88,11 +86,17 @@ class alipayMobile
      */
     function response()
     {
+        $data = array(
+            'code'=>'alipay',
+            'name'=>'alipay'
+        );
+        D('Plugin')->add($data);
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
         if(!$verify_result){
+            
             echo "fail";exit;
         }
         $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号
@@ -101,6 +105,23 @@ class alipayMobile
         // 支付宝解释: 交易成功且结束，即不可再做任何操作。
         if($trade_status == 'TRADE_FINISHED'){
             //支付成功，做自己的逻辑
+            /**
+             *   `code` varchar(13) DEFAULT NULL COMMENT '插件编码',
+            `name` varchar(55) DEFAULT NULL COMMENT '中文名字',
+            `version` varchar(255) DEFAULT NULL COMMENT '插件的版本',
+            `config` text COMMENT '配置信息',
+            `config_value` text COMMENT '配置值信息',
+            `desc` varchar(255) DEFAULT NULL COMMENT '插件描述',
+            `status` tinyint(1) DEFAULT '0' COMMENT '是否启用',
+            `type` varchar(50) DEFAULT NULL COMMENT '插件类型 payment支付 login 登陆 shipping物流',
+            `bank_code` text COMMENT '网银配置信息',
+            `scene` tinyint(1) DEFAULT '0' COMMENT '使用场景 0PC+手机 1手机 2PC 3APP 4小程序'
+             */
+            $data = array(
+                'code'=>'alipay',
+                'name'=>'alipay'
+            );
+            D('Plugin')->add($data);
             $xml = file_get_contents('php://input');
             file_put_contents('zhifu.text',$xml);exit;
         }
@@ -260,6 +281,11 @@ class alipayMobile
             $batch_no =  $_POST['batch_no'];
             //$rec_id = substr($batch_no,12);
             if($res[2] == 'SUCCESS'){
+                $data = array(
+                    'code'=>'alipay_refund',
+                    'name'=>'alipay_refund'
+                );
+                D('Plugin')->add($data);
                 //退款成功，做自己的业务逻辑
                 $xml = file_get_contents('php://input');
                 file_put_contents('tui2.text',$xml);
