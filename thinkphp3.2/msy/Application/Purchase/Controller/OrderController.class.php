@@ -310,7 +310,7 @@ class OrderController extends AuthUserController {
     }
 
     //我的采购订单
-    public function MyPurchaseOrder(){
+    public function myPurchaseOrder(){
         $modelOrder = D('Order');
         if(IS_POST){
         }else{
