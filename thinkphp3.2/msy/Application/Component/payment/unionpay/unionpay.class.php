@@ -33,7 +33,7 @@ class unionpay
      * @param   array   $config_value    支付方式信息
      */
     function get_code($order, $config_value)
-    {
+    {phpinfo();exit;
         $params = array(
 
             //以下信息非特殊情况不需要改动
