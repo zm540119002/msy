@@ -13,17 +13,17 @@
         </section>
         <nav>
             <ul class="my_order_nav">
-                <li>
-                    <a href="" class="active"><i class="w_pay"></i>待付款<span class="count">2</span></a>
+                <li class="active">
+                    <a href="javascript:void(0);"><i class="w_pay"></i>待付款<span class="count">2</span></a>
                 </li>
-                <li><a href=""><i class="w_receipt"></i>待收货<span class="count">2</span></a></li>
-                <li><a href=""><i class="w_commit"></i>待评价<span class="count">1</span></a></li>
-                <li><a href=""><i class="w_finish"></i>已完成<span></span></a></li>
-                <li><a href=""><i class="w_service"></i>客服</a></li>
+                <li><a href="javascript:void(0);"><i class="w_receipt"></i>待收货<span class="count">2</span></a></li>
+                <li><a href="javascript:void(0);"><i class="w_commit"></i>待评价<span class="count">1</span></a></li>
+                <li><a href="javascript:void(0);"><i class="w_finish"></i>已完成<span></span></a></li>
+                <li><a href="javascript:void(0);"><i class="w_service"></i>客服</a></li>
                 <li><a href=""><i class="home"></i>首页</a></li>
             </ul>
         </nav>
-        <section>
+        <section id="orderContent">
             <div class="order_pay_tipc">
                 提示：请尽快支付，超过3天未支付订单将被自动取消
             </div>
@@ -137,6 +137,9 @@
     <script type="text/javascript">
         $(function(){
             countDown("2017/11/29 15:25:00",$(".countDownBox"));
+            $('.my_order_nav li').on('click',function(){
+                $(this).addClass('active').siblings().removeClass('active');
+            })
         });
     </script>
 </block>
