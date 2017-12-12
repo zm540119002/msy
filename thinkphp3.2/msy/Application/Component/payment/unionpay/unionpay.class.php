@@ -15,7 +15,6 @@ class unionpay
      * 析构流函数
      */
     public function  __construct() {
-        echo  '开发中';exit;
         unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
         $paymentPlugin = D('Plugin')->where("code='unionpay' and  type = 'payment' ")->find(); // 找到支付插件的配置
@@ -35,7 +34,6 @@ class unionpay
      */
     function get_code($order, $config_value)
     {
-      
         $params = array(
 
             //以下信息非特殊情况不需要改动
@@ -63,7 +61,6 @@ class unionpay
         //建立请求
         //dump(SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'unionpay')));die;
         \AcpService::sign ( $params );
-
         $uri = SDK_FRONT_TRANS_URL;
         $html_form = \AcpService::createAutoFormHtml( $params, $uri );
         return $html_form;
@@ -104,8 +101,6 @@ class unionpay
      */
     function respond2()
     {
-
-
         //计算得出通知验证结果
         $unionpayNotify = new \AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($_POST);
