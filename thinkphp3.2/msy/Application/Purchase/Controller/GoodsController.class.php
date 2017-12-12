@@ -53,7 +53,7 @@ class GoodsController extends BaseController {
             $goodsCategoryList = $modelGoodsCategory->selectGoodsCategory($where);
             $this->goodsCategory1Info = $goodsCategoryList[0];
             //购物车配置开启的项
-            $this->unlockingFooterCartSingle = unlockingFooterCartConfig(array(0,2,4));
+            $this->unlockingFooterCartSingle = unlockingFooterCartConfig(array(2,3));
             $this ->display();
         }
     }
