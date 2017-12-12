@@ -5,16 +5,6 @@ use web\all\Controller\BaseController;
 use web\all\Lib\AuthUser;
 
 class CartController extends BaseController {
-    //联合采购
-    public function jointPurchase(){
-        if(IS_POST){
-        }else{
-            //购物车配置开启的项
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
-            $this->display();
-        }
-    }
-
     //商品管理
     public function index(){
         $modelGoods = D('Goods');
@@ -39,6 +29,16 @@ class CartController extends BaseController {
                 $this->display('Goods/goodsListTpl');
             }
         }else{
+            $this->display();
+        }
+    }
+
+    //联合采购
+    public function jointPurchase(){
+        if(IS_POST){
+        }else{
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this->display();
         }
     }
