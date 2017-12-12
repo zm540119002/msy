@@ -11,8 +11,8 @@
                 $('html,body').css({"height":"100%","overflow":"hidden"});//动态阻止body页面滚动
                 $('.mask').show().css({position:'fixed'});
                 $('.mask').data('show',1);
-                $('.group_cart_nav').css({display:'flex',zIndex:21});
-                $('.express-area-box').css({bottom:0+'px',display:'block',position:'fixed'});
+                $('.group_cart_toggle').css({display:'flex',zIndex:21});
+                $('.express-area-box').css({bottom:0+'px',display:'block',position:'fixed',zIndex:19});
                 if($('.shoppingCart_form ul').height()>420){
                     $('.shoppingCart_form ul').css({"max-height":4.5+'rem'});
                 }
@@ -21,7 +21,7 @@
                 $('.mask').hide();
                 $('.express-area-box').css({bottom:'-100%',display:'none'});
                 $('.mask').data('show',0);
-                $('.group_cart_nav').hide();
+                $('.group_cart_toggle').hide();
             }
             //先清空
             $('.gshopping_count').val(0);
@@ -53,7 +53,7 @@
         $('body').on('click','.mask,.closeBtn',function(){
             $('html,body').css({"overflow":"auto"});
             $('.mask').hide();
-            $('.group_cart_nav').hide();
+            $('.group_cart_toggle').hide();
             $('.express-area-box').css({bottom:'-100%',display:'none'});
             $('.mask').data('show',0);
         });

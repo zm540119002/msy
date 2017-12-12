@@ -3,6 +3,7 @@ namespace Purchase\Controller;
 
 use  web\all\Lib\Date;
 use  web\all\Controller\BaseController;
+use  web\all\Lib\AuthUser;
 
 class GoodsController extends BaseController {
     //所有一级分类下商品（默认显示第一个分类下商品）
@@ -104,6 +105,7 @@ class GoodsController extends BaseController {
             $item['goodsList'] = $goodsList['data'];
         }
         $this->goodsCategory2List = $goodsCategory2List;
+        $this->user = AuthUser::check();
         $this ->display('goodsPhotoList2Tpl');
     }
 
