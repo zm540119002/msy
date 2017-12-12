@@ -11,8 +11,13 @@
             <p class="f24 commodity_name">{$vo.name}</p>
         </a>
         <div class="commodity_price f24">
-            <span class="price">￥<price>{$vo.price}</price></span>
-            <a href="javascript:void(0);" class="shopping_cart">购物车</a>
+            <span class="price">
+                <empty name="user">仅限采购商
+                    <else />
+                    ￥<price>{$vo.price}</price>
+                    <a href="javascript:void(0);" class="shopping_cart">购物车</a>
+                </empty>
+            </span>
         </div>
     </li>
 </volist>
