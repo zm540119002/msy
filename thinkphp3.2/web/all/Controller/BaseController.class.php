@@ -12,8 +12,6 @@ class BaseController extends CommonController{
         $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         session('backUrl',$_SERVER['REQUEST_URI'] ? $host . $_SERVER['REQUEST_URI'] : $host . $_SERVER['HTTP_REFERER']);
-//        print_r(session('backUrl'));
-//        exit;
     }
 
     //返回图片临时相对路径
