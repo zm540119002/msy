@@ -8,12 +8,11 @@
             </empty>
         </a>
         <div class="orderDetail_r">
-            <if condition="$pageType eq 'goodsManage' ">
-                <a href="javascript:void(0);" class="order_del_btn goodsDel">删除</a>
-            </if>
             <p>{$vo.name}</p>
             <div>单品规格：<span>{$vo.single_specification}</span></div>
-            <div>采购包装：<span>{$vo.package_num}{$vo.package_unit|getUnitCN}/{$vo.purchase_unit|getUnitCN}(整{$vo.purchase_unit|getUnitCN}采购)</span></div>
+            <div>采购包装：
+                <span>{$vo.package_num}{$vo.package_unit|getUnitCN}/{$vo.purchase_unit|getUnitCN}(整{$vo.purchase_unit|getUnitCN}采购)</span>
+            </div>
             <div>采购单价(元/{$vo.package_unit|getUnitCN})：<span>￥{$vo.price}</span><del>￥{$vo.price}</del></div>
         </div>
         <div class="order_purchase_count">采购数量(单位:{$vo.purchase_unit|getUnitCN})：<span>{$vo.num|default='0'}</span></div>
@@ -25,7 +24,9 @@
                 <input type="text" value="{$vo.num|default='0'}" class="f24 gshopping_count">
                 <a href="javascript:void(0);" class="gplus">+</a>
             </div>
-            <a href="javascript:void(0);" class="detele_order">删除</a>
+            <if condition="$pageType eq 'goodsManage' ">
+                <a href="javascript:void(0);" class="detele_order goodsDel">删除</a>
+            </if>
         </div>
     </li>
 </volist>
