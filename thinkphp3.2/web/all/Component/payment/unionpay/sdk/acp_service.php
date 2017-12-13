@@ -162,7 +162,6 @@ eot;
 eot;
 		global $log;
 		$log->LogInfo ( "自动跳转html>" . $html );
-		echo 'aaa';exit;
 		echo $html;
 		return $html;
 	}
