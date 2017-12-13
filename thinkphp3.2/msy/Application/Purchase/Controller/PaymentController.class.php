@@ -47,7 +47,7 @@ class PaymentController extends Controller {
             $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
         }
         if( $this->pay_code  == 'unionpay'){
-            $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
+            $this->payment = new  \Component\payment\unionpay\unionpay();
         }
     }
     /**
@@ -66,7 +66,7 @@ class PaymentController extends Controller {
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
             $code_str = $this->payment->h5_pay($order);
         }else{//微信浏览器
-            $this->payment = new \Component\payment\weixin\weixin();
+            $this->payment = new \web\all\Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
             exit($code_str);
         }
