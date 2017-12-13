@@ -49,6 +49,30 @@
                             <input type="hidden" name="goodsId" value="{$goodsInfo.id}">
                         </td>
                     </tr>
+                    <tr class="radioProductType">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品类型：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <empty name="goodsInfo">
+                                <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1" checked="checked"><label for="">普通产品</label>
+                                <else />
+                                <if condition="$goodsInfo.buy_type eq 1">
+                                    <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1" checked="checked"><label for="">普通产品</label>
+                                    <else />
+                                    <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1"><label for="">普通产品</label>
+                                </if>
+                            </empty>
+                            <if condition="$goodsInfo.buy_type eq 2 ">
+                                <input type="radio" name="discount"  class="radioItem" value="促销产品" data-buy_type="2" checked="checked"><label for="">促销产品</label>
+                                <else />
+                                <input type="radio" name="discount"  class="radioItem" value="促销产品" data-buy_type="2"><label for="">促销产品</label>
+                            </if>
+                            <if condition="$goodsInfo.buy_type eq 3 ">
+                                <input type="radio" name="discount"  class="radioItem" value="微团购产品" data-buy_type="3" checked="checked"><label for="">微团购产品</label>
+                                <else />
+                                <input type="radio" name="discount"  class="radioItem" value="微团购产品" data-buy_type="3"><label for="">微团购产品</label>
+                            </if>
+                        </td>
+                    </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>普通价格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
