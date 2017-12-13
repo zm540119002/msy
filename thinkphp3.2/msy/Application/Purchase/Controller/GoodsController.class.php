@@ -30,6 +30,7 @@ class GoodsController extends BaseController {
             $where['gc.level'] = 2;
             $this->goodsCategory2List = $modelGoodsCategory->selectGoodsCategory($where);
             //购物车配置开启的项
+            $this->user = AuthUser::check();
             if($this->user){
                 $config = array(0,1,4);
             }else{
@@ -60,6 +61,7 @@ class GoodsController extends BaseController {
             $goodsCategoryList = $modelGoodsCategory->selectGoodsCategory($where);
             $this->goodsCategory1Info = $goodsCategoryList[0];
             //购物车配置开启的项
+            $this->user = AuthUser::check();
             if($this->user){
                 $config = array(0,1,4);
             }else{
@@ -136,6 +138,7 @@ class GoodsController extends BaseController {
         $this->goodsList = $goodsList['data'];
         $template_type = I('get.template_type','','string');
         if($template_type=='photo'){
+            $this->user = AuthUser::check();
             $this ->display('goodsPhotoListTpl');
         }else if($template_type=='list'){
             $this ->display('goodsListTpl');

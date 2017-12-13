@@ -43,7 +43,7 @@
     var userLoginForm=$('#userLoginForm').html();
     //登录触发
     var loginLayer = null;
-    function loginDialog(){
+    function loginDialog(func){
         loginLayer = layer.open({
             className:'loginLayer',
             content:userLoginForm,
@@ -90,10 +90,12 @@
                     error:function(xhr){},
                     success:function(data){
                         if(data.status==0){
-                            dialog.error(data.info);
+                            errorTipc(data.info);
                             return false;
                         }else if(data.status==1){
-                            errorTipc(data.info);
+                            if(func && $.isFunction(func)){
+                                func();
+                            }
                             layer.close(index);
                         }
                     }

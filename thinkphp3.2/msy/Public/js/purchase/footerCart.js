@@ -21,12 +21,40 @@ $(function () {
         calculateTotalPrice();
     });
 
-    //进入采购
+    //进入采购(验证登录)
     $('body').on('click','.go_to_purchase',function(){
         // var url = MODULE + '/Cart/jointPurchase';
         // url += '/category_id_1/'+category_id_1;
         // url += '/category_id_2/' + $('.purchase_package_nav').find('li.current').data('category_id_2');
         // location.href = url;
+        var postData = {};
+        var url = MODULE + '/Common/checkLogin';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status == 0){
+                    if(data.url){
+                        location.href = data.url;
+                    }else{
+                        dialog.error(data.info);
+                    }
+                }else if(data.status == 1){
+                    if(data.info=='isAjax'){
+                        loginDialog(flushPage);
+                    }
+                }
+            }
+        });
     });
 
     //立即结算

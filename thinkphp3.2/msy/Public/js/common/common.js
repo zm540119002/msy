@@ -410,3 +410,8 @@ function copyDataByName(fromObj,toObj) {
         val && $(this).val(val);
     });
 }
+
+//刷新页面
+function flushPage() {
+    location.reload();
+}
