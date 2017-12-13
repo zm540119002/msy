@@ -18,7 +18,7 @@
     var userForgetPasswdForm=$('#userForgetPasswdForm').html();
     //注册触发
     var forgetPasswdLayer = null;
-    function forgetPasswordDialog(){
+    function forgetPasswordDialog(func){
         forgetPasswdLayer = layer.open({
             className:'forgetPasswdLayer',
             content:userForgetPasswdForm,
@@ -63,7 +63,9 @@
                             errorTipc(data.info);
                             return false;
                         }else if(data.status==1){
-                            errorTipc(data.info);
+                            if(func && $.isFunction(func)){
+                                func();
+                            }
                             layer.close(index);
                         }
                     }
