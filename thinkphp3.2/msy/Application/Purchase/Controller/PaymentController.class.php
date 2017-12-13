@@ -47,7 +47,7 @@ class PaymentController extends Controller {
             $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
         }
         if( $this->pay_code  == 'unionpay'){
-            $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
+            $this->payment = new  \Component\payment\unionpay\unionpay();
         }
     }
     /**
