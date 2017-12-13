@@ -138,7 +138,6 @@ class AcpService {
 	}
 	
 	static function createAutoFormHtml($params, $reqUrl) {
-		echo ($reqUrl);exit;
 
 		// <body onload="javascript:document.pay_form.submit();">
 		$encodeType = isset ( $params ['encoding'] ) ? $params ['encoding'] : 'UTF-8';
