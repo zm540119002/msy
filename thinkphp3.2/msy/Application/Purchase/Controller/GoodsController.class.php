@@ -107,6 +107,7 @@ class GoodsController extends BaseController {
             $item['goodsList'] = $goodsList['data'];
         }
         $this->goodsCategory2List = $goodsCategory2List;
+        $this->user = AuthUser::check();
         $this ->display('goodsPhotoList2Tpl');
     }
 
@@ -137,6 +138,7 @@ class GoodsController extends BaseController {
         $this->goodsList = $goodsList['data'];
         $template_type = I('get.template_type','','string');
         if($template_type=='photo'){
+            $this->user = AuthUser::check();
             $this ->display('goodsPhotoListTpl');
         }else if($template_type=='list'){
             $this ->display('goodsListTpl');

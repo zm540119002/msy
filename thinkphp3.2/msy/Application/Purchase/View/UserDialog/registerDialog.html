@@ -21,7 +21,7 @@
     var userRegisterForm=$('#userRegisterForm').html();
     //注册触发
     var registerLayer = null;
-    function registerDialog(){
+    function registerDialog(func){
         registerLayer = layer.open({
             className:'registerLayer',
             content:userRegisterForm,
@@ -67,7 +67,9 @@
                             errorTipc(data.info);
                             return false;
                         }else if(data.status==1){
-                            errorTipc(data.info);
+                            if(func && $.isFunction(func)){
+                                func();
+                            }
                             layer.close(index);
                         }
                     }
