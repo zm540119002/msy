@@ -17,7 +17,6 @@ class AcpService {
 	 */
 	static function sign(&$params, $cert_path=SDK_SIGN_CERT_PATH, $cert_pwd=SDK_SIGN_CERT_PWD) {
 		$params ['certId'] = getSignCertId ($cert_path, $cert_pwd); //证书ID
-		
 		sign($params, $cert_path, $cert_pwd);
 	}
 	
@@ -139,8 +138,10 @@ class AcpService {
 	}
 	
 	static function createAutoFormHtml($params, $reqUrl) {
+
 		// <body onload="javascript:document.pay_form.submit();">
 		$encodeType = isset ( $params ['encoding'] ) ? $params ['encoding'] : 'UTF-8';
+
 		$html = <<<eot
 <html>
 <head>
@@ -161,6 +162,7 @@ eot;
 eot;
 		global $log;
 		$log->LogInfo ( "自动跳转html>" . $html );
+		echo 'aaa';exit;
 		echo $html;
 		return $html;
 	}
