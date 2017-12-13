@@ -104,6 +104,7 @@ class UserController extends CommonController {
         AuthUser::saveLastLoginTimeById($user['id']);
         //设置session
         AuthUser::setSession($user);
+        $this->ajaxReturn(successMsg(session('backUrl')));
         $this->ajaxReturn(successMsg(session('backUrl')?(is_ssl()?'https://':'http://').session('backUrl'):U('login')));
     }
 
