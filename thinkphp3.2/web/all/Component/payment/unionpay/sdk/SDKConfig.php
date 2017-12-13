@@ -3,16 +3,16 @@
 // ######(以下配置为PM环境：入网测试环境用，生产环境配置见文档说明)#######
 // 签名证书路径
 
-const SDK_SIGN_CERT_PATH = WEB.'/Component/payment/unionpay/certs/1039188986.pfx';
+const SDK_SIGN_CERT_PATH = WEB.'all/Component/payment/unionpay/certs/1039188986.pfx';
 
 // 签名证书密码
 const SDK_SIGN_CERT_PWD = '171212';
 
 // 密码加密证书（这条一般用不到的请随便配）
-const SDK_ENCRYPT_CERT_PATH = WEB.'/Component/payment/unionpay/certs/acp_prod_enc.cer';
+const SDK_ENCRYPT_CERT_PATH = WEB.'all/Component/payment/unionpay/certs/acp_prod_enc.cer';
 
 // 验签证书路径（请配到文件夹，不要配到具体文件）
-const SDK_VERIFY_CERT_DIR = WEB.'/Component/payment/unionpay/certs/';
+const SDK_VERIFY_CERT_DIR = WEB.'all/Component/payment/unionpay/certs/';
 
 // 前台请求地址
 //const  SDK_FRONT_TRANS_URL = 'https://gateway.test.95516.com/gateway/api/frontTransReq.do';
