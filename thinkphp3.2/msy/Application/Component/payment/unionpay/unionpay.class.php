@@ -64,7 +64,8 @@ class unionpay
         );
         //建立请求
         //dump(SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'unionpay')));die;
-        \AcpService::sign ( $params );
+       // \AcpService::sign ( $params );
+        echo  \AcpService::sign ( $params );exit;
         $uri = SDK_FRONT_TRANS_URL;
         $html_form = \AcpService::createAutoFormHtml( $params, $uri );
         return $html_form;

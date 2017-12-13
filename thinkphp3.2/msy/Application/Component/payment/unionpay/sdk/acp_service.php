@@ -17,7 +17,6 @@ class AcpService {
 	 */
 	static function sign(&$params, $cert_path=SDK_SIGN_CERT_PATH, $cert_pwd=SDK_SIGN_CERT_PWD) {
 		$params ['certId'] = getSignCertId ($cert_path, $cert_pwd); //证书ID
-		
 		sign($params, $cert_path, $cert_pwd);
 	}
 	
