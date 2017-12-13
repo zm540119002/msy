@@ -21,6 +21,9 @@ class unionpay
         $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
         $this->unionpay_config['unionpay_mid']           =  802440072770520;// 商户号
         $this->unionpay_config['unionpay_cer_password']  = 171212;// 商户私钥证书密码
+        $this->unionpay_config['unionpay_user']          = $config_value['unionpay_user'];//企业网银账号
+        $this->unionpay_config['unionpay_password']	     = $config_value['unionpay_password'];//企业网银密码
+
     }
 
     /**
