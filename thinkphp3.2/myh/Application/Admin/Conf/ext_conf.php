@@ -10,4 +10,5 @@ return array(
 
     'MENU' => @include_once(APP_PATH . 'Admin/Conf/menu_conf.php'),
     'ARR' => @include_once(APP_PATH . 'Admin/Conf/array_conf.php'),
+    'MENU1' => @include_once(APP_PATH . 'Admin/Conf/menu1_conf.php'),
 );
