@@ -26,7 +26,7 @@
     <script type="text/javascript" src="PUBLIC_JS/purchase/cart.js"></script>
     <script type="text/javascript">
         $(function(){
-            //从购物车里替换单个商品信息
+            //购物车列表
             $.post(ACTION,function(data){
                 if($(data).length){
                     $('#content').html(data);
