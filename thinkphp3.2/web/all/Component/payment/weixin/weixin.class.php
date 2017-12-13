@@ -12,7 +12,7 @@
  * Author: IT宇宙人
  * Date: 2015-09-09
  */
-namespace Component\payment\weixin;
+namespace web\all\Component\payment\weixin;
 /**
  * 支付 逻辑定义
  * Class 
