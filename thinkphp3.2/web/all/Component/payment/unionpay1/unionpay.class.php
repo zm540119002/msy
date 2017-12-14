@@ -6,8 +6,10 @@ namespace  web\all\Component\payment\unionpay1;
  * Date: 2017/12/9
  * Time: 10:16
  */
+require_once(dirname(__FILE__) .'/sdk/acp_service.php');
 use web\all\Component\payment\unionpay1\acp\sdk\AcpService;
-use  web\all\Component\payment\unionpay1\acp\sdk\SDKConfig;
+use web\all\Component\payment\unionpay1\acp\sdk\SDKConfig;
+require_once(dirname(__FILE__) .'/sdk/common.php');
 
 class unionpay
 {
@@ -269,37 +271,9 @@ class unionpay
     function printResult($url, $req, $resp) {
         echo "=============<br>\n";
         echo "地址：" . $url . "<br>\n";
-        echo "请求：" . str_replace ( "\n", "\n<br>", htmlentities ($this->createLinkString ( $req, false, true ) ) ) . "<br>\n";
-        echo "应答：" . str_replace ( "\n", "\n<br>", htmlentities ( $this->createLinkString ( $resp , false, false )) ) . "<br>\n";
+        echo "请求：" . str_replace ( "\n", "\n<br>", htmlentities (LogUtil::getLogger ( $req, false, true ) ) ) . "<br>\n";
+        echo "应答：" . str_replace ( "\n", "\n<br>", htmlentities ( com\unionpay\acp\sdk\createLinkString ( $resp , false, false )) ) . "<br>\n";
         echo "=============<br>\n";
-    }
-
-    /**
-     * 讲数组转换为string
-     *
-     * @param $para 数组
-     * @param $sort 是否需要排序
-     * @param $encode 是否需要URL编码
-     * @return string
-     */
-    function createLinkString($para, $sort, $encode) {
-        if($para == NULL || !is_array($para))
-            return "";
-
-        $linkString = "";
-        if ($sort) {
-            $para = argSort ( $para );
-        }
-        while ( list ( $key, $value ) = each ( $para ) ) {
-            if ($encode) {
-                $value = urlencode ( $value );
-            }
-            $linkString .= $key . "=" . $value . "&";
-        }
-        // 去掉最后一个&字符
-        $linkString = substr ( $linkString, 0, count ( $linkString ) - 2 );
-
-        return $linkString;
     }
 
 
