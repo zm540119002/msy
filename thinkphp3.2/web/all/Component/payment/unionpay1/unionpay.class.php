@@ -167,8 +167,6 @@ class unionpay
     public function payment_refund($order)
     {
         header('Content-type:text/html;charset=utf-8');
-        include_once $_SERVER ['DOCUMENT_ROOT'] . '/upacp_demo_b2c/sdk/acp_service.php';
-
         /**
          * 重要：联调测试时请仔细阅读注释！
          *
@@ -191,7 +189,6 @@ class unionpay
 
 
         $params = array(
-
             //以下信息非特殊情况不需要改动
             'version' => SDKConfig::getSDKConfig()->version,              //版本号
             'encoding' => 'utf-8',              //编码方式
@@ -228,11 +225,11 @@ class unionpay
 
         $result_arr = AcpService::post($params, $url);
         if (count($result_arr) <= 0) { //没收到200应答的情况
-            printResult($url, $params, "");
+            $this->printResult($url, $params, "");
             return;
         }
 
-        printResult($url, $params, $result_arr); //页面打印请求应答数据
+       $this->printResult($url, $params, $result_arr); //页面打印请求应答数据
 
         if (!AcpService::validate($result_arr)) {
             echo "应答报文验签失败<br>\n";
