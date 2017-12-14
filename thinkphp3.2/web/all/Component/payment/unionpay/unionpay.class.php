@@ -33,8 +33,6 @@ class unionpay
     {
 
         header ( 'Content-type:text/html;charset=utf-8' );
-        require_once(dirname(__FILE__) .'/sdk/acp_service.php');
-
         /**
          * 重要：联调测试时请仔细阅读注释！
          *
