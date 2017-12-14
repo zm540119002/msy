@@ -113,10 +113,10 @@ class PaymentController extends Controller {
 
         $this->payment = new  \web\all\Component\payment\unionpay1\unionpay();
         $data = array(
-            'orderId'=>'20171212135434572991016642830329 ',
+            'sn'=>'20171212135434572991016642830329 ',
             'origQryId'=>'631712121354340543158',
-            'txnTime'=> date('YmdHis'),
-            'txnAmt'=>1
+            'actually_amount'=> date('YmdHis'),
+            'txnAmt'=>0.01
         );
        
         $this->payment->payment_refund($data);
