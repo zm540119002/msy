@@ -9,7 +9,6 @@ namespace  web\all\Component\payment\unionpay1;
 require_once(dirname(__FILE__) .'/sdk/acp_service.php');
 use web\all\Component\payment\unionpay1\sdk\AcpService;
 use web\all\Component\payment\unionpay1\sdk\SDKConfig;
-require_once(dirname(__FILE__) .'/sdk/common.php');
 
 class unionpay
 {
