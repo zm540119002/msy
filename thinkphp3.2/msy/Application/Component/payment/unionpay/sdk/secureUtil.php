@@ -105,9 +105,8 @@ function getSignCertId($cert_path, $cert_pwd) {
 	$x509data = $certs ['cert'];
 	openssl_x509_read ( $x509data );
 	$certdata = openssl_x509_parse ( $x509data );
-	print_r($certdata);exit;
 	$cert_id = $certdata ['serialNumber'];
-
+    print_r($cert_id);exit;
 	return $cert_id;
 }
 
