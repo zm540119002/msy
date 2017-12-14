@@ -67,10 +67,10 @@ class unionpay
             'currencyCode' => '156',	          //交易币种，境内商户固定156
 
             //TODO 以下信息需要填写
-            'merId' => $_POST["merId"],		//商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
-            'orderId' => $_POST["orderId"],	//商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
-            'txnTime' => $_POST["txnTime"],	//订单发送时间，格式为YYYYMMDDhhmmss，取北京时间，此处默认取demo演示页面传递的参数
-            'txnAmt' => $_POST["txnAmt"],	//交易金额，单位分，此处默认取demo演示页面传递的参数
+            'merId' =>  $this->unionpay_config['unionpay_mid'] ,		//商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
+            'orderId' => $order["sn"],	//商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
+            'txnTime' => date('YmdHis',$order['create_time']),	//订单发送时间，格式为YYYYMMDDhhmmss，取北京时间，此处默认取demo演示页面传递的参数
+            'txnAmt' => $order["actually_amount"]*100,	//交易金额，单位分，此处默认取demo演示页面传递的参数
 
             // 订单超时时间。
             // 超过此时间后，除网银交易外，其他交易银联系统会拒绝受理，提示超时。 跳转银行网银交易如果超时后交易成功，会自动退款，大约5个工作日金额返还到持卡人账户。
