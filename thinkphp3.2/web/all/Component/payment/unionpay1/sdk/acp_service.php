@@ -1,5 +1,5 @@
 <?php
-namespace web\all\Component\payment\unionpay1\acp\sdk;
+namespace web\all\Component\payment\unionpay1\sdk;
 header ( 'Content-type:text/html;charset=utf-8' );
 include_once 'log.class.php';
 include_once 'SDKConfig.php';

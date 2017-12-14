@@ -7,8 +7,8 @@ namespace  web\all\Component\payment\unionpay1;
  * Time: 10:16
  */
 
-use web\all\Component\payment\unionpay1\acp\sdk\AcpService;
-use web\all\Component\payment\unionpay1\acp\sdk\SDKConfig;
+use web\all\Component\payment\unionpay1\sdk\AcpService;
+use web\all\Component\payment\unionpay1\sdk\SDKConfig;
 
 
 class unionpay
