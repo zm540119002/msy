@@ -180,7 +180,6 @@ class unionpay
             //    查询、通知等接口解析时使用base64_decode解base64后再对数据做后续解析。
             //    'reqReserved' => base64_encode('任意格式的信息都可以'),
         );
-        print_r($params);exit;
         //建立请求
         \AcpService::sign ( $params );
         $uri = SDK_BACK_TRANS_URL;
