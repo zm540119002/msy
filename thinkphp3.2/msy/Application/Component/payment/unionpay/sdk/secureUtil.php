@@ -18,6 +18,7 @@ function sign(&$params, $cert_path, $cert_pwd) {
 	}
 	// 转换成key=val&串
 	$params_str = createLinkString ( $params, true, false );
+	print_r($params_str);exit;
 	$log->LogInfo ( "签名key=val&...串 >" . $params_str );
 	
 	$params_sha1x16 = sha1 ( $params_str, FALSE );
