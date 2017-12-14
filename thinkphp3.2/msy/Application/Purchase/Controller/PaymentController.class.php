@@ -47,7 +47,7 @@ class PaymentController extends Controller {
             $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
         }
         if( $this->pay_code  == 'unionpay'){
-            $this->payment = new  \web\all\Component\payment\unionpay1\unionpay();
+            $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
         }
 
     }
@@ -111,7 +111,7 @@ class PaymentController extends Controller {
     public function refund_back(){
 
 
-        $this->payment = new  \web\all\Component\payment\unionpay1\unionpay();
+        $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
         $data = array(
             'sn'=>'20171212135434572991016642830329 ',
             'origQryId'=>'631712121354340543158',
