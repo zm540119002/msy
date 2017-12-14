@@ -18,17 +18,12 @@ function sign(&$params, $cert_path, $cert_pwd) {
 	}
 	// 转换成key=val&串
 	$params_str = createLinkString ( $params, true, false );
-	print_r($params_str);exit;
 	$log->LogInfo ( "签名key=val&...串 >" . $params_str );
-	
 	$params_sha1x16 = sha1 ( $params_str, FALSE );
 	$log->LogInfo ( "摘要sha1x16 >" . $params_sha1x16 );
-	
 	$private_key = getPrivateKey ( $cert_path, $cert_pwd );
-	print_r($private_key);exit;
 	// 签名
 	$sign_falg = openssl_sign ( $params_sha1x16, $signature, $private_key, OPENSSL_ALGO_SHA1 );
-    print_r($sign_falg);exit;
 	if ($sign_falg) {
 		$signature_base64 = base64_encode ( $signature );
 		$log->LogInfo ( "签名串为 >" . $signature_base64 );
