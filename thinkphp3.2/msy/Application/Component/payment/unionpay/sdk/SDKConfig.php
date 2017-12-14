@@ -13,7 +13,7 @@ const SDK_SIGN_CERT_PWD = '171212';
 const SDK_ENCRYPT_CERT_PATH = APP_PATH.'/Component/payment/unionpay/certs/acp_prod_enc.cer';
 
 // 验签证书路径（请配到文件夹，不要配到具体文件）
-const SDK_VERIFY_CERT_DIR = APP_PATH.'/Component/payment/unionpay/certs/';
+const SDK_VERIFY_CERT_DIR ='/yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/certs/';
 
 // 前台请求地址
 
