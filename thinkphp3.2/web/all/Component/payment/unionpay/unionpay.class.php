@@ -127,6 +127,7 @@ class unionpay
 
     //退款有密接口接口
     public function payment_refund($data){
+        var_dump(111);exit;
 
         /**
          * 重要：联调测试时请仔细阅读注释！
