@@ -28,6 +28,7 @@ class unionpay
      */
     function get_code($order, $config_value)
     {
+
         header ( 'Content-type:text/html;charset=utf-8' );
         require_once(dirname(__FILE__) .'/sdk/acp_service.php');
 
@@ -92,7 +93,6 @@ class unionpay
 
             //TODO 其他特殊用法请查看 special_use_purchase.php
         );
-
         \web\all\Component\payment\unionpay1\acp\sdk\AcpService::sign ( $params );
         $uri = \web\all\Component\payment\unionpay1\acp\sdk\SDKConfig::getSDKConfig()->frontTransUrl;
         $html_form = \web\all\Component\payment\unionpay1\acp\sdk\AcpService::createAutoFormHtml( $params, $uri );
