@@ -20,7 +20,7 @@ class unionpay
         unset($_GET['pay_code']);   // 删除掉 以免被进入签名
         unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
         $this->unionpay_config['unionpay_mid']           =  802440072770520;// 商户号
-        $this->unionpay_config['unionpay_cer_password']  = 171212;// 商户私钥证书密码
+//        $this->unionpay_config['unionpay_cer_password']  = 171212;// 商户私钥证书密码
     }
 
     /**
