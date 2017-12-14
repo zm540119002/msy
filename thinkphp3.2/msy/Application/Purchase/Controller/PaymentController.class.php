@@ -111,8 +111,8 @@ class PaymentController extends Controller {
 
         $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
         $data = array(
-            'orderId'=>'20171214123212043135617076515427',
-            'origQryId'=>'761712141232128600118',
+            'orderId'=>'20171212135434572991016642830329 ',
+            'origQryId'=>'631712121354340543158',
             'txnTime'=> date('YmdHis'),
             'txnAmt'=>1
         );
