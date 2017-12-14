@@ -163,7 +163,7 @@ class unionpay
 
             //TODO 以下信息需要填写
             'orderId' => $data["orderId"],	    //商户订单号，8-32位数字字母，不能含“-”或“_”，可以自行定制规则，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
-            'merId' => $data["merId"],	        //商户代码，请改成自己的测试商户号，此处默认取demo演示页面传递的参数
+            'merId' =>  $this->unionpay_config['unionpay_mid'],	    //商户代码，请改成自己的测试商户号，此处默认取demo演示页面传递的参数
             'origQryId' => $data["origQryId"], //原消费的queryId，可以从查询接口或者通知接口中获取，此处默认取demo演示页面传递的参数
             'txnTime' => $data["txnTime"],	    //订单发送时间，格式为YYYYMMDDhhmmss，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
             'txnAmt' => $data["txnAmt"],       //交易金额，退货总金额需要小于等于原消费

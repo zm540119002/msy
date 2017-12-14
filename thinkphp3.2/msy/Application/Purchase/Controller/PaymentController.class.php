@@ -107,8 +107,15 @@ class PaymentController extends Controller {
 
     //退款
     public function refund_back(){
-        $detail_data = '2017120521001004170524388308'.'^'.'0.01'.'^'.'用户申请订单退款';
-        $data = array('batch_no'=>date('YmdHi').'145','batch_num'=>1,'detail_data'=>$detail_data);
+
+
+        $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
+        $data = array(
+            'orderId'=>'20171214123212043135617076515427',
+            'origQryId'=>'761712141232128600118',
+            'txnTime'=> date('YmdHis'),
+            'txnAmt'=>1
+        );
         $this->payment->payment_refund($data);
     }
     //退款异步回调
