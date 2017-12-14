@@ -11,7 +11,7 @@ $log = new PhpLog ( SDK_LOG_FILE_PATH,"PRC",SDK_LOG_LEVEL );
  */
 function sign(&$params, $cert_path, $cert_pwd) {
 	global $log;
-	
+
 	$log->LogInfo ( '=====签名报文开始======' );
 	if(isset($params['signature'])){
 		unset($params['signature']);
@@ -26,6 +26,7 @@ function sign(&$params, $cert_path, $cert_pwd) {
 	$private_key = getPrivateKey ( $cert_path, $cert_pwd );
 	// 签名
 	$sign_falg = openssl_sign ( $params_sha1x16, $signature, $private_key, OPENSSL_ALGO_SHA1 );
+
 	if ($sign_falg) {
 		$signature_base64 = base64_encode ( $signature );
 		$log->LogInfo ( "签名串为 >" . $signature_base64 );
