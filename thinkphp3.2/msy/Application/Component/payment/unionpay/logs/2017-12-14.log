@@ -1,0 +1,31 @@
+2017-12-14 10:35:49, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/sdk/secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2017-12-14 10:35:49, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/sdk/secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://msy.meishangyun.com/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html&merId=802440072770520&orderId=20171214103549635649664282692770&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20171214103549&txnType=01&version=5.0.0 
+2017-12-14 10:35:49, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/sdk/secureUtil.php ], Line[24]------ 摘要sha1x16 >0dd0d1e6386714762a95bdd90b716ee262c511fa 
+2017-12-14 10:35:49, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/sdk/secureUtil.php ], Line[34]------ >>>>>签名失败<<<<<<< 
+2017-12-14 10:35:49, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/sdk/secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2017-12-14 10:35:49, INFO, 61.28.108.233, File[ /yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/sdk/acp_service.php ], Line[162]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://gateway.95516.com/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://msy.meishangyun.com/index.php/Purchase/Payment/returnUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://msy.meishangyun.com/index.php/Purchase/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="802440072770520" />
+    <input type="hidden" name="orderId" id="orderId" value="20171214103549635649664282692770" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20171214103549" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="1" />
+    <input type="hidden" name="certId" id="certId" value="" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
