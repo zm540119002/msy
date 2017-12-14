@@ -216,9 +216,9 @@ class unionpay
             //    'reqReserved' => base64_encode('任意格式的信息都可以'),
         );
         //建立请求
-        \AcpService::sign ( $params );
+        AcpService::sign ( $params );
         $url = SDK_BACK_TRANS_URL;
-        $result_arr = \AcpService::post( $params, $url );
+        $result_arr = AcpService::post( $params, $url );
         if(count($result_arr)<=0) { //没收到200应答的情况
            $this->printResult ( $url, $params, "" );
             return;
@@ -226,7 +226,7 @@ class unionpay
 
         $this->printResult ($url, $params, $result_arr ); //页面打印请求应答数据
 
-        if (!\AcpService::validate ($result_arr) ){
+        if (!AcpService::validate ($result_arr) ){
             echo "应答报文验签失败<br>\n";
             return;
         }
