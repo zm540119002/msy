@@ -3,8 +3,8 @@
 // ######(以下配置为PM环境：入网测试环境用，生产环境配置见文档说明)#######
 // 签名证书路径
 
-const SDK_SIGN_CERT_PATH = APP_PATH.'/Component/payment/unionpay/certs/1039188986.pfx';
-//const SDK_SIGN_CERT_PATH = '/yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/certs/1039188986.pfx';
+//const SDK_SIGN_CERT_PATH = APP_PATH.'/Component/payment/unionpay/certs/1039188986.pfx';
+const SDK_SIGN_CERT_PATH = '/yjdata/www/www/web/thinkphp3.2/msy/Application/Component/payment/unionpay/certs/1039188986.pfx';
 
 // 签名证书密码
 const SDK_SIGN_CERT_PWD = '171212';

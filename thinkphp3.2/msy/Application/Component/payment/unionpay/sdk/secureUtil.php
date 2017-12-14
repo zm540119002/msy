@@ -11,9 +11,7 @@ $log = new PhpLog ( SDK_LOG_FILE_PATH,"PRC",SDK_LOG_LEVEL );
  */
 function sign(&$params, $cert_path, $cert_pwd) {
 	global $log;
-
-
-
+	
 	$log->LogInfo ( '=====签名报文开始======' );
 	echo $params.'.......'.$cert_path.'.....'.$cert_pwd;exit;
 	if(isset($params['signature'])){
