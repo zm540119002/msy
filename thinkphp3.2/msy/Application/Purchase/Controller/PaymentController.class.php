@@ -47,8 +47,9 @@ class PaymentController extends Controller {
             $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
         }
         if( $this->pay_code  == 'unionpay'){
-            $this->payment = new  \Component\payment\unionpay\unionpay();
+            $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
         }
+
     }
     /**
      *  微信支付提交支付方式
@@ -84,6 +85,7 @@ class PaymentController extends Controller {
             'actually_amount' => 0.01,
             'create_time'=>time()
         );
+
         $code_str = $this->payment->get_code($order,$config_value='');
     }
 
@@ -107,8 +109,16 @@ class PaymentController extends Controller {
 
     //退款
     public function refund_back(){
-        $detail_data = '2017120521001004170524388308'.'^'.'0.01'.'^'.'用户申请订单退款';
-        $data = array('batch_no'=>date('YmdHi').'145','batch_num'=>1,'detail_data'=>$detail_data);
+
+
+        $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
+        $data = array(
+            'sn'=>'20171212135434572991016642830329 ',
+            'origQryId'=>'631712121354340543158',
+            'actually_amount'=> date('YmdHis'),
+            'txnAmt'=>0.01
+        );
+       
         $this->payment->payment_refund($data);
     }
     //退款异步回调
