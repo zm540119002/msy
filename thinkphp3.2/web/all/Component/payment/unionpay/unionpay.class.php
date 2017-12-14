@@ -107,7 +107,7 @@ class unionpay
     function response()
     {
         //计算得出通知验证结果
-        $unionpayNotify = new \AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
+        $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($_POST);
 
         if($verify_result) //验证成功
@@ -121,7 +121,7 @@ class unionpay
             {
                 // 修改订单支付状态
             }
-            // header("Location:".SITE_URL.U('User/order_detail',array('id'=>$order['order_id'])));
+           
             echo "success"; // 处理成功
         }
         else
@@ -136,7 +136,7 @@ class unionpay
     function respond2()
     {
         //计算得出通知验证结果
-        $unionpayNotify = new \AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
+        $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($_POST);
 
         if($verify_result) //验证成功
@@ -147,15 +147,15 @@ class unionpay
 
             if($_POST['respMsg'] == 'success')
             {
-                return array('status'=>1,'order_sn'=>$order_sn);//跳转至成功页面
+                //跳转至成功页面
             }
             else {
-                return array('status'=>0,'order_sn'=>$order_sn); //跳转至失败页面
+                //跳转至失败页面
             }
         }
         else
         {
-            return array('status'=>0,'order_sn'=>$_POST['orderId']);//跳转至失败页面
+           //跳转至失败页面
         }
     }
 
