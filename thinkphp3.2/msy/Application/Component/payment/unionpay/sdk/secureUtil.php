@@ -13,6 +13,7 @@ function sign(&$params, $cert_path, $cert_pwd) {
 	global $log;
 	
 	$log->LogInfo ( '=====签名报文开始======' );
+	print_r($params);
 	echo $params.'.......'.$cert_path.'.....'.$cert_pwd;exit;
 	if(isset($params['signature'])){
 		unset($params['signature']);
