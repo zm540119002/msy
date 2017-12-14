@@ -127,7 +127,6 @@ class unionpay
 
     //退款有密接口接口
     public function payment_refund($data){
-        var_dump(111);exit;
 
         /**
          * 重要：联调测试时请仔细阅读注释！
@@ -154,7 +153,7 @@ class unionpay
             //以下信息非特殊情况不需要改动
             'version' => '5.0.0',		      //版本号
             'encoding' => 'utf-8',		      //编码方式
-            'signMethod' => 01,		      //签名方法
+            'signMethod' => '01',		      //签名方法
             'txnType' => '04',		          //交易类型
             'txnSubType' => '00',		      //交易子类
             'bizType' => '000201',		      //业务类型
@@ -181,6 +180,7 @@ class unionpay
             //    查询、通知等接口解析时使用base64_decode解base64后再对数据做后续解析。
             //    'reqReserved' => base64_encode('任意格式的信息都可以'),
         );
+        print_r($params);exit;
         //建立请求
         \AcpService::sign ( $params );
         $uri = SDK_BACK_TRANS_URL;

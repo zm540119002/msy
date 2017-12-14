@@ -116,6 +116,7 @@ class PaymentController extends Controller {
             'txnTime'=> date('YmdHis'),
             'txnAmt'=>1
         );
+       
         $this->payment->payment_refund($data);
     }
     //退款异步回调
