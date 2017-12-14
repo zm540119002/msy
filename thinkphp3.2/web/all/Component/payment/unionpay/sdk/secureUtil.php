@@ -102,7 +102,7 @@ function getPulbicKeyByCertId($certId) {
  * @return unknown
  */
 function getSignCertId($cert_path, $cert_path) {
-	echo $cert_path."...".$cert_path;exit;
+	//echo $cert_path."...".$cert_path;exit;
 	$pkcs12certdata = file_get_contents ( $cert_path );
 	openssl_pkcs12_read ( $pkcs12certdata, $certs, $cert_pwd );
 	$x509data = $certs ['cert'];
