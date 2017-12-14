@@ -183,7 +183,7 @@ class unionpay
         //建立请求
         \AcpService::sign ( $params );
         $uri = SDK_BACK_TRANS_URL;
-        $html_form = \AcpService::createAutoFormHtml( $params, $uri );
+        $html_form = \AcpService::post( $params, $uri );
         return $html_form;
     }
 
