@@ -86,6 +86,7 @@ class PaymentController extends Controller {
             'actually_amount' => 0.01,
             'create_time'=>time()
         );
+        $this->payment = new \web\all\Component\payment\unionpay1\unionpay();
         $code_str = $this->payment->get_code($order,$config_value='');
     }
 

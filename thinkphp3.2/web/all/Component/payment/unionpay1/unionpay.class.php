@@ -96,7 +96,7 @@ class unionpay
         \web\all\Component\payment\unionpay1\acp\sdk\AcpService::sign ( $params );
         $uri = \web\all\Component\payment\unionpay1\acp\sdk\SDKConfig::getSDKConfig()->frontTransUrl;
         $html_form = \web\all\Component\payment\unionpay1\acp\sdk\AcpService::createAutoFormHtml( $params, $uri );
-        echo $html_form;
+        echo  $html_form;
     }
 
     /**
