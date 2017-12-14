@@ -182,9 +182,45 @@ class unionpay
         );
         //建立请求
         \AcpService::sign ( $params );
-        $uri = SDK_BACK_TRANS_URL;
-        $html_form = \AcpService::post( $params, $uri );
-        return $html_form;
+        $url = SDK_BACK_TRANS_URL;
+        $result_arr = \AcpService::post( $params, $url );
+        if(count($result_arr)<=0) { //没收到200应答的情况
+           $this->printResult ( $url, $params, "" );
+            return;
+        }
+
+        $this->printResult ($url, $params, $result_arr ); //页面打印请求应答数据
+
+        if (!\AcpService::validate ($result_arr) ){
+            echo "应答报文验签失败<br>\n";
+            return;
+        }
+
+        echo "应答报文验签成功<br>\n";
+        if ($result_arr["respCode"] == "00"){
+            //交易已受理，等待接收后台通知更新订单状态，如果通知长时间未收到也可发起交易状态查询
+            //TODO
+            echo "受理成功。<br>\n";
+        } else if ($result_arr["respCode"] == "03"
+            || $result_arr["respCode"] == "04"
+            || $result_arr["respCode"] == "05" ){
+            //后续需发起交易状态查询交易确定交易状态
+            //TODO
+            echo "处理超时，请稍微查询。<br>\n";
+        } else {
+            //其他应答码做以失败处理
+            //TODO
+            echo "失败：" . $result_arr["respMsg"] . "。<br>\n";
+        }
+    }
+
+
+    function printResult($url, $req, $resp) {
+        echo "=============<br>\n";
+        echo "地址：" . $url . "<br>\n";
+        echo "请求：" . str_replace ( "\n", "\n<br>", htmlentities (createLinkString ( $req, false, true ) ) ) . "<br>\n";
+        echo "应答：" . str_replace ( "\n", "\n<br>", htmlentities (createLinkString ( $resp , false, false )) ) . "<br>\n";
+        echo "=============<br>\n";
     }
 
 
