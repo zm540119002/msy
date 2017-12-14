@@ -8,48 +8,48 @@ class PaymentController extends Controller {
     public $payment; //  具体的支付类
     public $pay_code; //  具体的支付code
 
-    /**
-     * 析构流函数
-     */
-    public function  __construct() {
-        parent::__construct();
-        // 订单支付提交
-        $this->pay_code=$_POST['pay_code'];
-        if(!empty($this->pay_code))
-        {
-            $this->pay_code = $_POST['pay_code']; // 支付 code
-            $this->pay_code= get_url_param('pay_code');
-            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
-            $data = array(
-                'code'=> $this->pay_code,
-                'config'=>$a,
-                'name'=>'支付'
-            );
-            D('Plugin')->add($data);
-        }
-        else // 第三方 支付商返回
-        {
-            $this->pay_code= get_url_param('pay_code');
-            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
-            $data = array(
-                'code'=> $this->pay_code,
-                'config'=>$a,
-                'name'=>'回调'
-            );
-            D('Plugin')->add($data);
-            unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
-        }
-        // 导入具体的支付类文件
-        if( $this->pay_code  == 'weixin'){
-            $this->payment = new \web\all\Component\payment\weixin\weixin();
-        }
-        if( $this->pay_code  == 'alipayMobile'){
-            $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
-        }
-        if( $this->pay_code  == 'unionpay'){
-            $this->payment = new  \Component\payment\unionpay\unionpay();
-        }
-    }
+//    /**
+//     * 析构流函数
+//     */
+//    public function  __construct() {
+//        parent::__construct();
+//        // 订单支付提交
+//        $this->pay_code=$_POST['pay_code'];
+//        if(!empty($this->pay_code))
+//        {
+//            $this->pay_code = $_POST['pay_code']; // 支付 code
+//            $this->pay_code= get_url_param('pay_code');
+//            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+//            $data = array(
+//                'code'=> $this->pay_code,
+//                'config'=>$a,
+//                'name'=>'支付'
+//            );
+//            D('Plugin')->add($data);
+//        }
+//        else // 第三方 支付商返回
+//        {
+//            $this->pay_code= get_url_param('pay_code');
+//            $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+//            $data = array(
+//                'code'=> $this->pay_code,
+//                'config'=>$a,
+//                'name'=>'回调'
+//            );
+//            D('Plugin')->add($data);
+//            unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
+//        }
+//        // 导入具体的支付类文件
+//        if( $this->pay_code  == 'weixin'){
+//            $this->payment = new \web\all\Component\payment\weixin\weixin();
+//        }
+//        if( $this->pay_code  == 'alipayMobile'){
+//            $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
+//        }
+//        if( $this->pay_code  == 'unionpay'){
+//            $this->payment = new  \Component\payment\unionpay\unionpay();
+//        }
+//    }
     /**
      *  微信支付提交支付方式
      */
@@ -84,6 +84,7 @@ class PaymentController extends Controller {
             'actually_amount' => 0.01,
             'create_time'=>time()
         );
+        $this->payment = new  \Component\payment\unionpay\unionpay();
         $code_str = $this->payment->get_code($order,$config_value='');
     }
 
