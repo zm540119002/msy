@@ -24,6 +24,7 @@ function sign(&$params, $cert_path, $cert_pwd) {
 	$log->LogInfo ( "摘要sha1x16 >" . $params_sha1x16 );
 	
 	$private_key = getPrivateKey ( $cert_path, $cert_pwd );
+	print_r($private_key);exit;
 	// 签名
 	$sign_falg = openssl_sign ( $params_sha1x16, $signature, $private_key, OPENSSL_ALGO_SHA1 );
     print_r($sign_falg);exit;
