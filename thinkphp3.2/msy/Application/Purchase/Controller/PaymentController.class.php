@@ -46,11 +46,7 @@ class PaymentController extends Controller {
         if( $this->pay_code  == 'alipayMobile'){
             $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
         }
-        if( $this->pay_code  == 'unionpay'){
 
-            $this->payment = new  \web\all\Component\payment\unionpay1\unionpay();
-          
-        }
     }
     /**
      *  微信支付提交支付方式
@@ -86,7 +82,9 @@ class PaymentController extends Controller {
             'actually_amount' => 0.01,
             'create_time'=>time()
         );
-        $this->payment = new \web\all\Component\payment\unionpay1\unionpay();
+        if( $this->pay_code  == 'unionpay'){
+            $this->payment = new  \web\all\Component\payment\unionpay1\unionpay();
+        }
         $code_str = $this->payment->get_code($order,$config_value='');
     }
 
