@@ -1,5 +1,5 @@
 <?php
-namespace  web\all\Component\payment\unionpay;
+namespace  web\all\Component\payment\unionpay1;
 /**
  * Created by PhpStorm.
  * User: Administrator
