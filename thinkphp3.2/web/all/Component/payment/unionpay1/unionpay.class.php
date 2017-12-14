@@ -7,6 +7,8 @@ namespace  web\all\Component\payment\unionpay1;
  * Time: 10:16
  */
 require_once(dirname(__FILE__) .'/sdk/acp_service.php');
+use web\all\Component\payment\unionpay1\acp\sdk\AcpService;
+use  web\all\Component\payment\unionpay1\acp\sdk\SDKConfig;
 class unionpay
 {
     public $unionpay_config = array();// 银联支付配置参数
@@ -55,14 +57,14 @@ class unionpay
         $params = array(
 
             //以下信息非特殊情况不需要改动
-            'version' => \web\all\Component\payment\unionpay1\acp\sdk\SDKConfig::getSDKConfig()->version,                 //版本号
+            'version' => SDKConfig::getSDKConfig()->version,                 //版本号
             'encoding' => 'utf-8',				  //编码方式
             'txnType' => '01',				      //交易类型
             'txnSubType' => '01',				  //交易子类
             'bizType' => '000201',				  //业务类型
-            'frontUrl' => \web\all\Component\payment\unionpay1\acp\sdk\SDKConfig::getSDKConfig()->frontUrl,  //前台通知地址
-            'backUrl' => \web\all\Component\payment\unionpay1\acp\sdk\SDKConfig::getSDKConfig()->backUrl,	  //后台通知地址
-            'signMethod' => \web\all\Component\payment\unionpay1\acp\sdk\SDKConfig::getSDKConfig()->signMethod,	              //签名方法
+            'frontUrl' => SDKConfig::getSDKConfig()->frontUrl,  //前台通知地址
+            'backUrl' =>SDKConfig::getSDKConfig()->backUrl,	  //后台通知地址
+            'signMethod' => SDKConfig::getSDKConfig()->signMethod,	              //签名方法
             'channelType' => '08',	              //渠道类型，07-PC，08-手机
             'accessType' => '0',		          //接入类型
             'currencyCode' => '156',	          //交易币种，境内商户固定156
@@ -93,9 +95,9 @@ class unionpay
 
             //TODO 其他特殊用法请查看 special_use_purchase.php
         );
-        \web\all\Component\payment\unionpay1\acp\sdk\AcpService::sign ( $params );
-        $uri = \web\all\Component\payment\unionpay1\acp\sdk\SDKConfig::getSDKConfig()->frontTransUrl;
-        $html_form = \web\all\Component\payment\unionpay1\acp\sdk\AcpService::createAutoFormHtml( $params, $uri );
+        AcpService::sign ( $params );
+        $uri = SDKConfig::getSDKConfig()->frontTransUrl;
+        $html_form = AcpService::createAutoFormHtml( $params, $uri );
         echo  $html_form;
     }
 
