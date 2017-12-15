@@ -60,9 +60,9 @@ class PaymentController extends AuthCompanyAuthoriseController {
         $order1 = $this->getOrderInfoByOrderType();
         $order = array(
             'sn' => $order1['sn'],
-            'actually_amount' => $order1['actually_amount'],
-            'create_time'=>$order1['create_time'],
-            'notify_url'=>$order1['notify_url']
+            'actually_amount' => 0.01,
+            'create_time'=>time(),
+            'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.order'))
         );
         if (!isPhoneSide()) {//pc端微信扫码支付
             $code_str = $this->payment->pc_pay($order);
