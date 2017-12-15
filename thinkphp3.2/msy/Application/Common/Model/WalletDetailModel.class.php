@@ -32,6 +32,7 @@ class WalletDetailModel extends Model {
 
     //修改
     public function saveWalletDetail($where=array()){
+
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -84,7 +85,8 @@ class WalletDetailModel extends Model {
             'wd.status' => 0,
         );
         $_field = array(
-            'wd.id','wd.type','wd.amount','wd.create_time','wd.user_id','wd.sn',
+            'wd.id','wd.type','wd.amount','wd.create_time','wd.user_id',
+            'wd.sn','wd.recharge_status','payment_code','wd.payment_code'
         );
         $_join = array(
         );

@@ -45,7 +45,6 @@ class alipayMobile
                  );
             //构造要请求的参数数组，无需改动
             $parameter = array(
-                        
                         "partner" => trim($this->alipay_config['partner']), //合作身份者ID，签约账号，以2088开头由16位纯数字组成的字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
                         'seller_id'=> trim($this->alipay_config['partner']), //收款支付宝账号，以2088开头由16位纯数字组成的字符串，一般情况下收款账号就是签约账号
                         "key" => trim($this->alipay_config['key']), // MD5密钥，安全检验码，由数字和字母组成的32位字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
@@ -86,11 +85,6 @@ class alipayMobile
      */
     function response()
     {
-        $data = array(
-            'code'=>'alipay',
-            'name'=>'alipay'
-        );
-        D('Plugin')->add($data);
         require_once("lib/alipay_notify.class.php");  // 请求返回
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
