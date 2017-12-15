@@ -116,7 +116,11 @@ EOF;
     }
 
     function getJSAPI($order){
-		var_dump($order);exit;
+		var_dump($order);
+		echo  $order['sn'];
+		echo $order['actually_amount'];
+		echo $order['notify_url'];
+		exit;
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
