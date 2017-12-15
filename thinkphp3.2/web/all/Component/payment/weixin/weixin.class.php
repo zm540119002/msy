@@ -119,6 +119,7 @@ EOF;
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
+		var_dump($input);exit;
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
 		$input->SetOut_trade_no("$order_sn");			//订单号
