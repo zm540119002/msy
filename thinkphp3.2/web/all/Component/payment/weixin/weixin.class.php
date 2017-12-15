@@ -45,7 +45,7 @@ class weixin
 		$input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
 		$input->SetOut_trade_no($order['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
 //		$input->SetTotal_fee($order['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
-		$input->SetTotal_fee('0.01'); // 订单总金额，单位为分，详见支付金额
+		$input->SetTotal_fee(1); // 订单总金额，单位为分，详见支付金额
 		$input->SetNotify_url($order['notify_url']); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		$input->SetTrade_type("NATIVE"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
 		$input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
@@ -78,7 +78,7 @@ class weixin
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
 		$input->SetOut_trade_no($order['sn']);			//订单号
 //		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
-		$input->SetTotal_fee('0.01');			//支付金额,单位:分
+		$input->SetTotal_fee(1);			//支付金额,单位:分
 		$input->SetTime_start(date("YmdHis"));		//支付发起时间
 		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
 		$input->SetGoods_tag("test3");
@@ -141,7 +141,7 @@ EOF;
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
 		$input->SetOut_trade_no($order['sn']);			//订单号
 //		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
-		$input->SetTotal_fee('0.01');			//支付金额,单位:分
+		$input->SetTotal_fee(1);			//支付金额,单位:分
 		$input->SetTime_start(date("YmdHis"));		//支付发起时间
 		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
 		$input->SetGoods_tag("test3");
