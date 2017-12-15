@@ -71,6 +71,7 @@ class PaymentController extends AuthCompanyAuthoriseController {
         }else{//微信浏览器
             $this->payment = new \web\all\Component\payment\weixin\weixin();
             $order = $this->getOrderInfoByOrderType();
+            var_dump($order);exit;
             $code_str = $this->payment->getJSAPI($order);
         }
 
