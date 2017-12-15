@@ -5,15 +5,9 @@ use Think\Controller;
 
 class CallBackController extends Controller {
     //微信支付回调-充值
-    public function rechargeCallBack(){
-        $a=$_SERVER['QUERY_STRING'];
-        $data = array(
-            'config'=>$a,
-            'name'=>'回调3'
-        );
-        D('Plugin')->add($data);
-        $xml = file_get_contents('php://input');
-        $data = xmlToArray($xml);
+    public function rechargeCallBack($data){
+//        $xml = file_get_contents('php://input');
+//        $data = xmlToArray($xml);
         //保存微信服务器返回的签名sign
         $data_sign = $data['sign'];
         //sign不参与签名算法
@@ -216,21 +210,11 @@ class CallBackController extends Controller {
 
 
     public function notifyUrl(){
-        $a=$_SERVER['QUERY_STRING'];
-        $data = array(
-            'config'=>$a,
-            'name'=>'回调'
-        );
-        D('Plugin')->add($data);
+        $xml = file_get_contents('php://input');
+        $data = xmlToArray($xml);
         if(strpos($_SERVER['QUERY_STRING'],'weixin.recharge') == true)
         {
-            $a=$_SERVER['QUERY_STRING'];
-            $data = array(
-                'config'=>$a,
-                'name'=>'回调2'
-            );
-            D('Plugin')->add($data);
-            $this->rechargeCallBack();
+            $this->rechargeCallBack($data);
         }
         if(strpos($_SERVER['QUERY_STRING'],'weixin.order') == true){
             $this->orderCallBack();
