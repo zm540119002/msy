@@ -9,13 +9,13 @@
     </section>
     <form id="form1">
         <div id="wizard" class="page-bd">
-            <nav class="sign_nav">
-                <ul id="status " class="status f24 weui-flex">
-                    <li class="weui-flex-item active"><span class="base_info"></span><em></em>基本资料</li>
-                    <li class="weui-flex-item"><span class="base_s_address"></span><em></em>收货人地址</li>
-                    <li class="weui-flex-item"><span class="base_s_finish"></span>登记完成</li>
-                </ul>
-            </nav>
+            <!--<nav class="sign_nav">-->
+                <!--<ul id="status " class="status f24 weui-flex">-->
+                    <!--<li class="weui-flex-item active"><span class="base_info"></span><em></em>基本资料</li>-->
+                    <!--<li class="weui-flex-item"><span class="base_s_address"></span><em></em>收货人地址</li>-->
+                    <!--<li class="weui-flex-item"><span class="base_s_finish"></span>登记完成</li>-->
+                <!--</ul>-->
+            <!--</nav>-->
             <div class="login-items">
                 <div class="register_info">
                     <div class="weui_cells msy_cells">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="weui_btn_area">
-                        <a class="weui_btn weui_btn_primary" href="javascript:void(0);" data-id="{$company.id}">下一步</a>
+                        <a class="weui_btn weui_btn_primary" href="javascript:void(0);" data-id="{$company.id}">确定</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
 <block name="script">
     <script type="text/javascript">
         $(function(){
-            //下一步
+            //确定
             $('.weui_btn').on('click',function(){
                 var content='';
                 var beautyQc=$('.beauty_agency').val();
@@ -82,14 +82,12 @@
                     });
                     return false;
                 }
-
                 var postData = $('#form1').serializeObject();
                 var companyId = $(this).data('id');
                 if(companyId){
                     postData.companyId = companyId;
                 }
                 $.post(ACTION,postData,function(msg){
-                    return;
                     if(msg.status == 0){
                         layer.open({
                             content:msg.info,
@@ -97,8 +95,7 @@
                         });
                         return false;
                     }else if(msg.status == 1){
-                        var url = APP + '/Purchase/ConsigneeAddress/registerAddressEdit';
-                        dialog.success(msg.info,url);
+                        dialog.success(msg.info,msg.returnUrl);
                     }
                 });
             });

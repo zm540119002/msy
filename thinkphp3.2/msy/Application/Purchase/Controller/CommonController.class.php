@@ -1,12 +1,11 @@
 <?php
 namespace Purchase\Controller;
-use web\all\Controller\AuthUserController;
-class CommonController extends AuthUserController {
-    //验证登录
-    public function checkLogin(){
-        if(!IS_POST){
-            $this->ajaxReturn(errorMsg(C('NOT_POST')));
-        }
-        $this->ajaxReturn(successMsg('已登录'));
+use think\Controller;
+use web\all\Controller\AuthCompanyAuthoriseController;
+class CommonController extends AuthCompanyAuthoriseController {
+    //验证机构登记
+    public function checkCompanyAuthorise(){
+        $returnUrl = session('returnUrl');
+        header('Location:'.$returnUrl);
     }
 }
