@@ -114,7 +114,7 @@ EOF;
     }
 
     function getJSAPI($order){
-		var_dump($order);exit;
+		var_dump($order);
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
@@ -128,6 +128,7 @@ EOF;
 		$input->SetNotify_url($order['notify_url']);//支付回调验证地址
 		$input->SetTrade_type("JSAPI");				//支付类型
 		$input->SetOpenid($openId);					//用户openID
+		var_dump($input);exit;
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 //
 //		$tools = new \JsApiPay();
