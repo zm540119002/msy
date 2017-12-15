@@ -2,17 +2,17 @@
 namespace Home\Controller;
 
 use web\all\Cache\CompanyCache;
-use web\all\Controller\AuthCompanyRegisterController;
+use web\all\Controller\AuthUserController;
 
-class CompanyAuthoriseController extends AuthCompanyRegisterController {
+class CompanyAuthoriseController extends AuthUserController {
     //机构认证-首页
     public function index(){
         if(IS_POST){
         }else{
-            if($this->company['auth_status'] == 1){//已登记
-                $this->display();
-            }else if($this->company['auth_status'] == 2){//已认证
+            if($this->company['auth_status'] == 2){//已认证
                 $this->display('authorizeComplete');
+            }else{//未认证
+                $this->display();
             }
         }
     }
@@ -40,15 +40,21 @@ class CompanyAuthoriseController extends AuthCompanyRegisterController {
                 array('registrant','require','申请人姓名必须！'),
                 array('registrant_mobile','isMobile','请输入正确的手机号码',0,'function'),
             );
-            $_POST['companyId'] = $this->company['id'];
-            $where = array(
-                'user_id' => $this->user['id'],
-            );
-            $res = $modelCompany->saveCompany($where,$rules);
-            CompanyCache::remove($this->user['id']);
+            if(isset($_POST['companyId']) && intval($_POST['companyId'])){//修改
+                $where = array(
+                    'user_id' => $this->user['id'],
+                );
+                $res = $modelCompany->saveCompany($where,$rules);
+                CompanyCache::remove($this->user['id']);
+            }else{//新增
+                $_POST['user_id'] = $this->user['id'];
+                $_POST['create_time'] = time();
+                $res = $modelCompany->addCompany($rules);
+            }
             $this->ajaxReturn($res);
         }else{
-            $this->assign('company',$this->company);
+            $company = CompanyCache::get($this->user['id']);
+            $this->assign('company',$company);
             $this->display();
         }
     }
@@ -63,6 +69,7 @@ class CompanyAuthoriseController extends AuthCompanyRegisterController {
                 );
                 $companyInfo = $modelCompany->selectCompany($where);
                 $companyInfo = $companyInfo[0];
+
                 $sign = false;//更新数据库标志
                 foreach ($_POST as $key => &$val) {
                     if($val){
@@ -86,7 +93,8 @@ class CompanyAuthoriseController extends AuthCompanyRegisterController {
                 $this->ajaxReturn(successMsg('成功'));
             }
         }else{
-            $this->assign('company',$this->company);
+            $company = CompanyCache::get($this->user['id']);
+            $this->assign('company',$company);
             $this->display();
         }
     }
@@ -117,10 +125,12 @@ class CompanyAuthoriseController extends AuthCompanyRegisterController {
         );
         $_POST['auth_status'] = 2;
         $res = $modelCompany->saveCompany($where);
-        if(!$res['status']){
-            $this->ajaxReturn(errorMsg($res['info']));
+        if($res['status']==0){
+            $this->ajaxReturn(errorMsg($res));
         }
         CompanyCache::remove($this->user['id']);
-        $this->ajaxReturn(successMsg($res['info']));
+        $res = array();
+        $res['returnUrl'] = session('returnUrl');
+        $this->ajaxReturn(successMsg($res));
     }
 }

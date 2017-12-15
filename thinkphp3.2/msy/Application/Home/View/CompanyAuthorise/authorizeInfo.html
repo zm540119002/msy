@@ -85,6 +85,7 @@
                 }
 
                 var postData = $('#form1').serializeObject();
+                postData.companyId = '{$company.id}';
                 $.post('authorizeInfo',postData,function(msg){
                     if(msg.status == 0){
                         layer.open({

@@ -137,8 +137,8 @@ class GoodsController extends BaseController {
         $goodsList = page_query($modelGoods,$where,$field,$order,$join,$group,$pageSize,$alias='g');
         $this->goodsList = $goodsList['data'];
         $template_type = I('get.template_type','','string');
+        $this->user = AuthUser::check();
         if($template_type=='photo'){
-            $this->user = AuthUser::check();
             $this ->display('goodsPhotoListTpl');
         }else if($template_type=='list'){
             $this ->display('goodsListTpl');

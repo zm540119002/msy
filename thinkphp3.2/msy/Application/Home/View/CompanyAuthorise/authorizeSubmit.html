@@ -31,6 +31,7 @@
 
 <block name="script">
     <script type="text/javascript">
+        //确定
         $('.weui_btn_primary').on('click',function(){
             $.post(ACTION,function(msg){
                 if(msg.status ==0){
@@ -40,7 +41,7 @@
                     });
                     return false;
                 }else if(msg.status ==1){
-                    location.href = APP + '/Home/Index/index';
+                    location.href = msg.info.returnUrl;
                 }
             },'json');
         });

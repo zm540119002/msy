@@ -6,7 +6,7 @@ use web\all\Cache\CompanyCache;
 /**机构登记的控制器基类
  */
 class AuthCompanyRegisterController extends AuthUserController{
-    protected $company = null;  //分公司
+    protected $company = null;
     protected $companyRegisterUrl = 'Home/CompanyRegister/registerInfo';//机构登记URL
 
     public function __construct(){

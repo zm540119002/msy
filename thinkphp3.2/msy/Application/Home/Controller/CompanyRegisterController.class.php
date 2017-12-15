@@ -16,6 +16,8 @@ class CompanyRegisterController extends AuthUserController {
                 array('registrant_mobile','require','您的手机号必须！'),
                 array('registrant_mobile','isMobile','请输入正确的手机号码',0,'function'),
             );
+            //认证状态为登记状态
+            $_POST['auth_status'] = 1;
             if( isset($_POST['companyId']) && intval($_POST['companyId']) ){
                 $where = array(
                     'user_id' => $this->user['id'],
@@ -27,11 +29,11 @@ class CompanyRegisterController extends AuthUserController {
                 $_POST['create_time'] = time();
                 $res = $modelCompany->addCompany($rules);
             }
+            $res['returnUrl'] = session('returnUrl');
             $this->ajaxReturn($res);
         }else{
             $company = CompanyCache::get($this->user['id']);
             $this->assign('company',$company);
-
             $this->display();
         }
     }
