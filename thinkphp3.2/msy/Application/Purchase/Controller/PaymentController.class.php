@@ -57,8 +57,8 @@ class PaymentController extends AuthCompanyAuthoriseController {
     public function getCode(){
         //  订单支付提交
         header("Content-type:text/html;charset=utf-8");
-        $order1 = $this->getOrderInfoByOrderType();
-        $order = array(
+        $order = $this->getOrderInfoByOrderType();
+        $order1 = array(
             'sn' => generateSN(),
             'actually_amount' => 0.01,
             'create_time'=>time(),
@@ -70,7 +70,7 @@ class PaymentController extends AuthCompanyAuthoriseController {
             $code_str = $this->payment->h5_pay($order);
         }else{//微信浏览器
             $this->payment = new \web\all\Component\payment\weixin\weixin();
-            $code_str = $this->payment->getJSAPI($order);
+            $code_str = $this->payment->getJSAPI($order1);
         }
 
     }
