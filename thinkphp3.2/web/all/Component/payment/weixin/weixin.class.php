@@ -69,7 +69,7 @@ class weixin
 		$object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
 	}
 
-	function h5_pay($order,$notify_url){
+	function h5_pay($order){
 		//统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
 		//使用统一支付接口
 		$input = new \WxPayUnifiedOrder();
@@ -131,7 +131,7 @@ EOF;
         // 微信扫码支付这里没有页面返回
     }
 
-    function getJSAPI($order,$notify_url){
+    function getJSAPI($order){
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
