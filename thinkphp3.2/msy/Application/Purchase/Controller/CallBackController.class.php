@@ -6,6 +6,12 @@ use Think\Controller;
 class CallBackController extends Controller {
     //微信支付回调-充值
     public function rechargeCallBack(){
+        $data = array(
+            'code'=> 111,
+            'config'=>222,
+            'name'=>'回调2'
+        );
+        D('Plugin')->add($data);
         $xml = file_get_contents('php://input');
         $data = xmlToArray($xml);
         //保存微信服务器返回的签名sign
