@@ -127,7 +127,7 @@ EOF;
 		$input->SetTime_start(date("YmdHis"));		//支付发起时间
 		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
 		$input->SetGoods_tag("test3");
-		$input->SetNotify_url($notify_url);//支付回调验证地址
+		$input->SetNotify_url("$notify_url");//支付回调验证地址
 		$input->SetTrade_type("JSAPI");				//支付类型
 		$input->SetOpenid($openId);					//用户openID
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
