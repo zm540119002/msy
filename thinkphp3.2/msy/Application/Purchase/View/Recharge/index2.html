@@ -18,7 +18,7 @@
                 <li><span>3000</span>元</li>
                 <li><span>5000</span>元</li>
                 <li><span>8000</span>元</li>
-                <li><span>10000</span>元</li>
+                <li><span>0.01</span>元</li>
             </ul>
            
         </section>
@@ -28,7 +28,7 @@
                     <span class="wx"></span>微信支付
                 </div>
                 <input type="hidden" name="pay_code" value="weixin" />
-                <input type="hidden" class="pay_info" name="order_id" value="" />
+                <input type="hidden" class="pay_info" name="amount" value="" />
                 <input type="button" class="balance_pay weixin_pay" data-paycode="weixin" value="微信支付充值">
             </section>
         </form>
@@ -38,7 +38,7 @@
                     <span class="zfb"></span>支付宝支付
                 </div>
                 <input type="hidden" name="pay_code" value="alipayMobile" />
-                <input type="hidden"  class="pay_info" name="order_id" value="" />
+                <input type="hidden"  class="pay_info" name="amount" value="" />
                 <input type="button" class="balance_pay weixin_pay" data-paycode="zfb" value="支付宝支付">
             </section>
         </form>
@@ -48,7 +48,7 @@
                     <span class="bank"></span>在线支付
                 </div>
                 <input type="hidden" name="pay_code" value="unionpay" />
-                <input type="hidden" class="pay_info" name="order_id" value="" />
+                <input type="hidden" class="pay_info" name="amount" value="" />
                 <input type="button" class="balance_pay weixin_pay" data-paycode="online" value="银联在线支付充值">
             </section>
         </form>
