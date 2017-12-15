@@ -114,7 +114,6 @@ EOF;
     }
 
     function getJSAPI($order){
-		var_dump($order);
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
