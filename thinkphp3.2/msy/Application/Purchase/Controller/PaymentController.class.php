@@ -63,6 +63,7 @@ class PaymentController extends AuthCompanyAuthoriseController {
 //            'actually_amount' => 0.01
 //        );
         $order = $this->getOrderInfoByOrderType();
+        print_r($order);
         if (!isPhoneSide()) {//pc端微信扫码支付
             $code_str = $this->payment->pc_pay($order);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
