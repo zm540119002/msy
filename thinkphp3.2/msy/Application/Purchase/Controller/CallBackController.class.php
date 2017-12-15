@@ -204,6 +204,12 @@ class CallBackController extends Controller {
 
 
     public function notifyUrl(){
+        $a=$_SERVER['QUERY_STRING'];
+        $data = array(
+            'config'=>$a,
+            'name'=>'回调'
+        );
+        D('Plugin')->add($data);
         if(strpos($_SERVER['QUERY_STRING'],'weixin.recharge') == true)
         {
             $this->rechargeCallBack();
