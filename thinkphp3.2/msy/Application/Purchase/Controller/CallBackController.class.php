@@ -69,6 +69,12 @@ class CallBackController extends Controller {
                 }
             }
             $modelWalletDetail->commit();//提交事务
+            $a=$_SERVER['QUERY_STRING'];
+            $data = array(
+                'config'=>$a,
+                'name'=>'回调4'
+            );
+            D('Plugin')->add($data);
             //返回状态给微信服务器
             $this->successReturn($dataWalletSn);
         }
