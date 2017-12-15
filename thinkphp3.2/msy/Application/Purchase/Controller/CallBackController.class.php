@@ -204,6 +204,13 @@ class CallBackController extends Controller {
 
 
     public function notifyUrl(){
-        
+        $pay_code= get_url_param('pay_code');
+        $a='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+        $data = array(
+            'code'=> $pay_code,
+            'config'=>$a,
+            'name'=>'回调'
+        );
+        D('Plugin')->add($data);
     }
 }
