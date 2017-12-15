@@ -212,6 +212,12 @@ class CallBackController extends Controller {
         D('Plugin')->add($data);
         if(strpos($_SERVER['QUERY_STRING'],'weixin.recharge') == true)
         {
+            $a=$_SERVER['QUERY_STRING'];
+            $data = array(
+                'config'=>$a,
+                'name'=>'回调2'
+            );
+            D('Plugin')->add($data);
             $this->rechargeCallBack();
         }
         if(strpos($_SERVER['QUERY_STRING'],'weixin.order') == true){
