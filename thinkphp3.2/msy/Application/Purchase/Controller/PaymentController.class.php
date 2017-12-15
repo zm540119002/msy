@@ -1,9 +1,9 @@
 <?php
 namespace Purchase\Controller;
 use Think\Controller;
+use web\all\Controller\AuthCompanyAuthoriseController;
 
-
-class PaymentController extends Controller {
+class PaymentController extends AuthCompanyAuthoriseController {
 
     public $payment; //  具体的支付类
     public $pay_code; //  具体的支付code
@@ -55,21 +55,21 @@ class PaymentController extends Controller {
      *  微信支付提交支付方式
      */
     public function getCode(){
-
         //  订单支付提交
         header("Content-type:text/html;charset=utf-8");
-        $order = array(
-            'sn' => generateSN(),
-            'actually_amount' => 0.01
-        );
+
+//        $order = array(
+//            'sn' => generateSN(),
+//            'actually_amount' => 0.01
+//        );
+        $order = $this->getOrderInfoByOrderType();
         if (!isPhoneSide()) {//pc端微信扫码支付
-            $code_str = $this->payment->pc_pay($order,$config_value='');
+            $code_str = $this->payment->pc_pay($order);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
             $code_str = $this->payment->h5_pay($order);
         }else{//微信浏览器
             $this->payment = new \web\all\Component\payment\weixin\weixin();
             $code_str = $this->payment->getJSAPI($order);
-            exit($code_str);
         }
 
     }
@@ -85,8 +85,7 @@ class PaymentController extends Controller {
             'actually_amount' => 0.01,
             'create_time'=>time()
         );
-
-        $code_str = $this->payment->get_code($order,$config_value='');
+        $code_str = $this->payment->get_code($order);
     }
 
     // 服务器点对点 // http://www.a.cn/index.php/Home/Payment/notifyUrl
@@ -124,5 +123,60 @@ class PaymentController extends Controller {
     //退款异步回调
     public function refundNotify(){
         $this->payment->refund_respose();
+    }
+
+    /**
+     * @return array
+     * 按照订单类型获取支付订单信息
+     */
+    public function getOrderInfoByOrderType(){
+
+        //订单支付信息
+        if(isset($_POST['orderId']) && !empty($_POST['orderId'])){
+            $modelOrder = D('Order');
+            $orderId = $_GET['orderId'];
+            $where = array(
+                'o.user_id' => $this->user['id'],
+                'o.id' => $orderId,
+            );
+            $orderInfo = $modelOrder -> selectOrder($where);
+            $orderInfo = $orderInfo[0];
+            $this -> orderInfo = $orderInfo;
+            $totalFee = $orderInfo['actually_amount'];
+            //检查订单状态
+            $result = $modelOrder->checkOrderStatus($orderInfo);
+            if($result['status'] == 0){
+                $this ->error($result['message']);
+            }
+            $order = array(
+                'sn' => $orderInfo['sn'],
+                'actually_amount' => $totalFee,
+                'create_time'=>time(),
+                'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.order'))
+            );
+
+        }
+
+
+        //充值信息
+        $this->amount = floatval($_POST['amount']);
+        if(isset($_POST['amount']) && $this->amount>0) {
+            $_POST['user_id'] = $this->user['id'];
+            $_POST['create_time'] = time();
+            $_POST['amount'] = $this->amount;
+            $_POST['sn'] = generateSN();
+            $res = D('WalletDetail')->addWalletDetail();
+            if(!$res){
+                $this->error('充值订单无法生成');
+            }
+            $order = array(
+                'sn' => $_POST['sn'],
+                'actually_amount' => $this->amount,
+                'create_time'=>time(),
+                'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.recharge'))
+            );
+        }
+        return $order;
+
     }
 }
