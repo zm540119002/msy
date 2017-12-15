@@ -72,7 +72,6 @@ class weixin
 	function h5_pay($order){
 		//统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
 		//使用统一支付接口
-
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
@@ -106,22 +105,7 @@ EOF;
 		echo  $html;
 	}
 
-    /**
-     * 服务器点对点响应操作给支付接口方调用
-     * 
-     */
-    function response()
-    {
-		
-		$data = array(
-			'code'=>'weixin',
-			'name'=>'weixin'
-		);
-		D('Plugin')->add($data);
-        require_once("example/notify.php");  
-        $notify = new \PayNotifyCallBack();
-        $notify->Handle(false);       
-    }
+
     
     /**
      * 页面跳转响应操作给支付接口方调用
@@ -145,6 +129,7 @@ EOF;
 		$input->SetNotify_url($order['notify_url']);//支付回调验证地址
 		$input->SetTrade_type("JSAPI");				//支付类型
 		$input->SetOpenid($openId);					//用户openID
+		var_dump($input);exit;
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$jsApiParameters = $tools->GetJsApiParameters($order2);
         $html = <<<EOF
@@ -184,7 +169,24 @@ EOF;
 EOF;
     echo  $html;
     }
-    
+
+	/**
+	 * 服务器点对点响应操作给支付接口方调用
+	 *
+	 */
+	function response()
+	{
+
+		$data = array(
+			'code'=>'weixin',
+			'name'=>'weixin'
+		);
+		D('Plugin')->add($data);
+		require_once("example/notify.php");
+		$notify = new \PayNotifyCallBack();
+		$notify->Handle(false);
+	}
+
     function transfer($data){
     	//CA证书及支付信息
     	$wxchat['appid'] = \WxPayConfig::$appid;
