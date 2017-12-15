@@ -115,26 +115,20 @@ EOF;
         // 微信扫码支付这里没有页面返回
     }
 
-    function getJSAPI($order){
-		var_dump('111'.$order);
-		echo  $order['sn'];
-		echo $order['actually_amount'];
-		echo $order['notify_url'];
-
+    function getJSAPI($order_sn,$actually_amount,$notify_url){
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
-		$input->SetOut_trade_no($order['sn']);			//订单号
-		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
+		$input->SetOut_trade_no($order_sn);			//订单号
+		$input->SetTotal_fee($actually_amount *100);			//支付金额,单位:分
 		$input->SetTime_start(date("YmdHis"));		//支付发起时间
 		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
 		$input->SetGoods_tag("test3");
-		$input->SetNotify_url($order['notify_url']);//支付回调验证地址
+		$input->SetNotify_url($notify_url);//支付回调验证地址
 		$input->SetTrade_type("JSAPI");				//支付类型
 		$input->SetOpenid($openId);					//用户openID
-		var_dump($input);exit;
 		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
 		$jsApiParameters = $tools->GetJsApiParameters($order2);
         $html = <<<EOF

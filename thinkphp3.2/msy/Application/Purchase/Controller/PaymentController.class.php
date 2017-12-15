@@ -63,13 +63,16 @@ class PaymentController extends AuthCompanyAuthoriseController {
 //            'actually_amount' => 0.01
 //        );
         $order1 = $this->getOrderInfoByOrderType();
+        $order_sn=$order1['sn'];
+        $actually_amount=$order1['actually_amount'];
+        $notify_url=$order1['notify_url'];
         if (!isPhoneSide()) {//pc端微信扫码支付
             $code_str = $this->payment->pc_pay($order1);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
             $code_str = $this->payment->h5_pay($order1);
         }else{//微信浏览器
             $this->payment = new \web\all\Component\payment\weixin\weixin();
-            $code_str = $this->payment->getJSAPI($order1);
+            $code_str = $this->payment->getJSAPI($order_sn,$actually_amount,$notify_url);
         }
 
     }
