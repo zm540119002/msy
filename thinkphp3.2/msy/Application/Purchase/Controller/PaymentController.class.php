@@ -59,7 +59,7 @@ class PaymentController extends AuthCompanyAuthoriseController {
         header("Content-type:text/html;charset=utf-8");
         $order1 = $this->getOrderInfoByOrderType();
         $order = array(
-            'sn' => $order1['sn'],
+            'sn' => generateSN(),
             'actually_amount' => 0.01,
             'create_time'=>time(),
             'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.order'))
