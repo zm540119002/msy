@@ -58,12 +58,18 @@ class PaymentController extends AuthCompanyAuthoriseController {
         //  订单支付提交
         header("Content-type:text/html;charset=utf-8");
         $order = $this->getOrderInfoByOrderType();
+        $order = array(
+            'sn' => generateSN(),
+            'actually_amount' => 0.01,
+            'create_time'=>time()
+        );
         if (!isPhoneSide()) {//pc端微信扫码支付
             $code_str = $this->payment->pc_pay($order);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
             $code_str = $this->payment->h5_pay($order);
         }else{//微信浏览器
             $this->payment = new \web\all\Component\payment\weixin\weixin();
+
             $code_str = $this->payment->getJSAPI($order);
         }
 
@@ -78,7 +84,8 @@ class PaymentController extends AuthCompanyAuthoriseController {
         $order = array(
             'sn' => generateSN(),
             'actually_amount' => 0.01,
-            'create_time'=>time()
+            'create_time'=>time(),
+            'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.recharge'))
         );
         $code_str = $this->payment->get_code($order);
     }
