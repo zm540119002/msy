@@ -1,9 +1,9 @@
 <?php
 namespace Purchase\Controller;
 use Think\Controller;
+use web\all\Controller\AuthCompanyAuthoriseController;
 
-
-class PaymentController extends Controller {
+class PaymentController extends AuthCompanyAuthoriseController {
 
     public $payment; //  具体的支付类
     public $pay_code; //  具体的支付code
@@ -111,7 +111,7 @@ class PaymentController extends Controller {
     public function refund_back(){
 
 
-        $this->payment = new  \web\all\Component\payment\unionpay\unionpay();
+        $this->payment = new \web\all\Component\payment\unionpay\unionpay();
         $data = array(
             'sn'=>'20171212135434572991016642830329 ',
             'origQryId'=>'631712121354340543158',
@@ -153,7 +153,7 @@ class PaymentController extends Controller {
                 'sn' => $orderInfo['sn'],
                 'actually_amount' => $totalFee,
                 'create_time'=>time(),
-                'notify_url'=>SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'weixin.order'))
+                'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.order'))
             );
 
         }
@@ -174,7 +174,7 @@ class PaymentController extends Controller {
                 'sn' => $_POST['sn'],
                 'actually_amount' => $this->amount,
                 'create_time'=>time(),
-                'notify_url'=>SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'weixin.recharge'))
+                'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.recharge'))
             );
         }
         return $order;

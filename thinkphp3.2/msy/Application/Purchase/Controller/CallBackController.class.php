@@ -201,4 +201,9 @@ class CallBackController extends Controller {
         echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
         return false;
     }
+
+
+    public function notifyUrl(){
+        
+    }
 }
