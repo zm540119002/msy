@@ -13,7 +13,7 @@
             <div>采购包装：
                 <span>{$vo.package_num}{$vo.package_unit|getUnitCN}/{$vo.purchase_unit|getUnitCN}(整{$vo.purchase_unit|getUnitCN}采购)</span>
             </div>
-            <div>采购单价(元/{$vo.package_unit|getUnitCN})：
+            <div class="commodity_purchaser f24">采购单价(元/{$vo.package_unit|getUnitCN})：
                 <empty name="user"><span class="price">仅限采购商</span>
                     <else /><span>￥{$vo.price}</span><del>￥{$vo.price}</del>
                 </empty>
