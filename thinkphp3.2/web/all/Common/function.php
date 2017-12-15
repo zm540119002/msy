@@ -505,7 +505,7 @@ function isWxBrowser(){
 /**生成编号（32位纯数字）
  * @return string
  */
-function generateSN($len=10){
+function generateSN($len=18){
     return date('YmdHis',time()) . create_random_str($len);
 }
 
