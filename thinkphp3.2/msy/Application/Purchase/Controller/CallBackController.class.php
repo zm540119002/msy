@@ -152,6 +152,12 @@ class CallBackController extends Controller {
     }
 
     private function rechargeHandle($parameter){
+        $data1 = array(
+            'code'=> 'rechargeHandle',
+            'name'=>'回调3'
+        );
+        D('Plugin')->add($data1);
+
         $modelWalletDetail = D('WalletDetail');
         $where = array(
             'wd.sn'=> $parameter['order_sn'],
