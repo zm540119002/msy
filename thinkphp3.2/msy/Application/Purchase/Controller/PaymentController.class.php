@@ -57,12 +57,12 @@ class PaymentController extends AuthCompanyAuthoriseController {
     public function getCode(){
         //  订单支付提交
         header("Content-type:text/html;charset=utf-8");
-        $order = $this->getOrderInfoByOrderType();
+        $order1 = $this->getOrderInfoByOrderType();
         $order = array(
-            'sn' => generateSN(),
-            'actually_amount' => 0.01,
-            'create_time'=>time(),
-            'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.order'))
+            'sn' => $order1['sn'],
+            'actually_amount' => $order1['actually_amount'],
+            'create_time'=>$order1['create_time'],
+            'notify_url'=>$order1['notify_url']
         );
         if (!isPhoneSide()) {//pc端微信扫码支付
             $code_str = $this->payment->pc_pay($order);
