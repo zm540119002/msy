@@ -120,7 +120,7 @@ EOF;
 		echo  $order['sn'];
 		echo $order['actually_amount'];
 		echo $order['notify_url'];
-		exit;
+		
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
