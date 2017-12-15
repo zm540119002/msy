@@ -6,8 +6,8 @@ use Think\Controller;
 class CallBackController extends Controller {
     //微信支付回调-充值
     public function rechargeCallBack($data){
-//        $xml = file_get_contents('php://input');
-//        $data = xmlToArray($xml);
+        $xml = file_get_contents('php://input');
+        $data = xmlToArray($xml);
         //保存微信服务器返回的签名sign
         $data_sign = $data['sign'];
         //sign不参与签名算法
@@ -63,9 +63,8 @@ class CallBackController extends Controller {
                 }
             }
             $modelWalletDetail->commit();//提交事务
-            $a=$_SERVER['QUERY_STRING'];
+
             $data = array(
-                'config'=>$a,
                 'name'=>'回调4'
             );
             D('Plugin')->add($data);
