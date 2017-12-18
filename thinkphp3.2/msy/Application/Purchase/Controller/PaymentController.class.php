@@ -82,6 +82,7 @@ class PaymentController extends AuthCompanyAuthoriseController {
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             $code_str =Pay::h5_pay($payInfo);
         }else{//微信浏览器
+            echo 'aa';exit;
             $code_str =Pay::wxPay($payInfo);
 //            $this->payment = new \web\all\Component\payment\weixin\weixin();
 //            $code_str = $this->payment->getJSAPI($order1);
