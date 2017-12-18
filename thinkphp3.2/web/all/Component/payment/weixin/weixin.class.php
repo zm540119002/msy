@@ -104,14 +104,17 @@ EOF;
 	}
 
 
-    function aa($order){
-		print_r($order);
-		print_r($order['sn']);
-		print_r($order['actually_amount']);
-		print_r($order['notify_url']);
 
-		exit;
+	/**
+	 * 微信支付
+	 * @param  string   $openId 	openid
+	 * @param  string   $goods 		商品名称
+	 * @param  string   $attach 	附加参数,我们可以选择传递一个参数,比如订单ID
+	 * @param  string   $order_sn	订单号
+	 * @param  string   $total_fee  金额
+	 */
 
+	public static function wxPay($order){
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
@@ -125,8 +128,8 @@ EOF;
 		$input->SetNotify_url($order['notify_url']);//支付回调验证地址
 		$input->SetTrade_type("JSAPI");				//支付类型
 		$input->SetOpenid($openId);					//用户openID
-		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
-		$jsApiParameters = $tools->GetJsApiParameters($order2);
+		$order = \WxPayApi::unifiedOrder($input);	//统一下单
+		$jsApiParameters = $tools->GetJsApiParameters($order);
 		$html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
@@ -162,8 +165,7 @@ EOF;
 	callpay();
 	</script>
 EOF;
-		return  $html;
-
+		echo  $html;
 	}
 
 

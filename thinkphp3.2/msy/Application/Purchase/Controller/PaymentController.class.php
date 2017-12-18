@@ -2,6 +2,7 @@
 namespace Purchase\Controller;
 use Think\Controller;
 use web\all\Controller\AuthCompanyAuthoriseController;
+use web\all\Component\payment\weixin\weixin;
 
 class PaymentController extends AuthCompanyAuthoriseController {
 
@@ -51,6 +52,9 @@ class PaymentController extends AuthCompanyAuthoriseController {
         }
 
     }
+    
+    
+    
     /**
      *  微信支付提交支付方式
      */
@@ -69,7 +73,7 @@ class PaymentController extends AuthCompanyAuthoriseController {
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
             $code_str = $this->payment->h5_pay($order);
         }else{//微信浏览器
-            $this->payment->aa($order1);
+            weixin::wxPay($order);
             //$code_str = $this->payment->getJSAPI($order1);
         }
 
