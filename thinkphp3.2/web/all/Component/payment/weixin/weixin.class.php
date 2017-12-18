@@ -105,6 +105,7 @@ EOF;
 
 
     function aa($order){
+		print_r($order);exit;
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
@@ -156,7 +157,7 @@ EOF;
 	</script>
 EOF;
 		echo  $html;
-		print_r($order);exit;
+
 	}
 
 
