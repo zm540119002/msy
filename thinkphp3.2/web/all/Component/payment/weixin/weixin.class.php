@@ -44,8 +44,7 @@ class weixin
 		$input->SetBody("美尚云"); // 商品描述
 		$input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
 		$input->SetOut_trade_no($order['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
-//		$input->SetTotal_fee($order['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
-		$input->SetTotal_fee(1); // 订单总金额，单位为分，详见支付金额
+		$input->SetTotal_fee($order['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
 		$input->SetNotify_url($order['notify_url']); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
 		$input->SetTrade_type("NATIVE"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
 		$input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
@@ -72,13 +71,11 @@ class weixin
 	function h5_pay($order){
 		//统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
 		//使用统一支付接口
-
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
 		$input->SetOut_trade_no($order['sn']);			//订单号
-//		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
-		$input->SetTotal_fee(1);			//支付金额,单位:分
+		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
 		$input->SetTime_start(date("YmdHis"));		//支付发起时间
 		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
 		$input->SetGoods_tag("test3");
@@ -106,30 +103,69 @@ EOF;
 		echo  $html;
 	}
 
-    /**
-     * 服务器点对点响应操作给支付接口方调用
-     * 
-     */
-    function response()
-    {
-		
-		$data = array(
-			'code'=>'weixin',
-			'name'=>'weixin'
+
+    function aa($order){
+		print_r($order);
+		print_r($order['sn']);
+		print_r($order['actually_amount']);
+		print_r($order['notify_url']);
+
+		exit;
+
+		$tools = new \JsApiPay();
+		$openId = $tools->GetOpenid();
+		$input = new \WxPayUnifiedOrder();
+		$input->SetBody('美尚云');					//商品名称
+		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
+		$input->SetOut_trade_no($order['sn']);			//订单号
+		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
+		$input->SetTime_start(date("YmdHis"));		//支付发起时间
+		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
+		$input->SetGoods_tag("test3");
+		$input->SetNotify_url($order['notify_url']);//支付回调验证地址
+		$input->SetTrade_type("JSAPI");				//支付类型
+		$input->SetOpenid($openId);					//用户openID
+		$order2 = \WxPayApi::unifiedOrder($input);	//统一下单
+		$jsApiParameters = $tools->GetJsApiParameters($order2);
+		$html = <<<EOF
+	<script type="text/javascript">
+	//调用微信JS api 支付
+	function jsApiCall()
+	{
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',$jsApiParameters,
+			function(res){
+				//WeixinJSBridge.log(res.err_msg);
+				 if(res.err_msg == "get_brand_wcpay_request:ok") {
+ 						location.href = '/index.php/Purchase/recharge/payComplete';
+				 }else{
+				 	alert(res.err_code+res.err_desc+res.err_msg);
+				   
+				 }
+			}
 		);
-		D('Plugin')->add($data);
-        require_once("example/notify.php");  
-        $notify = new \PayNotifyCallBack();
-        $notify->Handle(false);       
-    }
-    
-    /**
-     * 页面跳转响应操作给支付接口方调用
-     */
-    function respond2()
-    {
-        // 微信扫码支付这里没有页面返回
-    }
+	}
+
+	function callpay()
+	{
+		if (typeof WeixinJSBridge == "undefined"){
+		    if( document.addEventListener ){
+		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		    }else if (document.attachEvent){
+		        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		    }
+		}else{
+		    jsApiCall();
+		}
+	}
+	callpay();
+	</script>
+EOF;
+		echo  $html;
+
+	}
+
 
     function getJSAPI($order){
 		$tools = new \JsApiPay();
@@ -184,7 +220,34 @@ EOF;
 EOF;
     echo  $html;
     }
-    
+
+	/**
+	 * 服务器点对点响应操作给支付接口方调用
+	 *
+	 */
+	function response()
+	{
+
+		$data = array(
+			'code'=>'weixin',
+			'name'=>'weixin'
+		);
+		D('Plugin')->add($data);
+		require_once("example/notify.php");
+		$notify = new \PayNotifyCallBack();
+		$notify->Handle(false);
+	}
+
+
+	/**
+	 * 页面跳转响应操作给支付接口方调用
+	 */
+	function respond2()
+	{
+		// 微信扫码支付这里没有页面返回
+	}
+
+
     function transfer($data){
     	//CA证书及支付信息
     	$wxchat['appid'] = \WxPayConfig::$appid;
