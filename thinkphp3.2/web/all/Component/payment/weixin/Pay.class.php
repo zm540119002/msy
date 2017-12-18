@@ -41,7 +41,7 @@ class Pay
 
     public static function wxPay($order){
         $tools = new \JsApiPay();
-        print_r($tools);exit;
+       
         $openId = $tools->GetOpenid();
         print_r($openId);exit;
         $input = new \WxPayUnifiedOrder();
