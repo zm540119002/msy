@@ -162,7 +162,7 @@ EOF;
 	callpay();
 	</script>
 EOF;
-		echo  $html;
+		return  $html;
 
 	}
 
