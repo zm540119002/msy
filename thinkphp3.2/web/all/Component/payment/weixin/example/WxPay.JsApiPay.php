@@ -41,7 +41,6 @@ class JsApiPay
 	public function GetOpenid()
 	{
 		//通过code获得openid
-		echo '111';exit;
 		if (!isset($_GET['code'])){
 			//触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
@@ -94,6 +93,7 @@ class JsApiPay
 	 */
 	public function GetOpenidFromMp($code)
 	{
+		echo 'aaa';exit;
 		$url = $this->__CreateOauthUrlForOpenid($code);
 		//初始化curl
 		$ch = curl_init();
