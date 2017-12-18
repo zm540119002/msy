@@ -2,6 +2,7 @@
 namespace Purchase\Controller;
 use Think\Controller;
 use web\all\Controller\AuthCompanyAuthoriseController;
+use web\all\Lib\Pay;
 
 class PaymentController extends AuthCompanyAuthoriseController {
 
@@ -40,9 +41,9 @@ class PaymentController extends AuthCompanyAuthoriseController {
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         // 导入具体的支付类文件
-        if( $this->pay_code  == 'weixin'){
-            $this->payment = new \web\all\Component\payment\weixin\weixin();
-        }
+//        if( $this->pay_code  == 'weixin'){
+//            $this->payment = new \web\all\Component\payment\weixin\weixin();
+//        }
         if( $this->pay_code  == 'alipayMobile'){
             $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
         }
@@ -51,26 +52,39 @@ class PaymentController extends AuthCompanyAuthoriseController {
         }
 
     }
+    
+    
+    
     /**
      *  微信支付提交支付方式
      */
     public function getCode(){
         //  订单支付提交
-        header("Content-type:text/html;charset=utf-8");
-        $order = $this->getOrderInfoByOrderType();
+//        header("Content-type:text/html;charset=utf-8");
+        $payInfo = $this->getOrderInfoByOrderType();
         $order1 = array(
             'sn' => generateSN(),
             'actually_amount' => 0.01,
             'create_time'=>time(),
             'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.order'))
         );
+//        if (!isPhoneSide()) {//pc端微信扫码支付
+//            $code_str = $this->payment->pc_pay($order);
+//        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
+//            $code_str = $this->payment->h5_pay($order);
+//        }else{//微信浏览器
+//            Pay::wxPay($order);
+////            $this->payment = new \web\all\Component\payment\weixin\weixin();
+////            $code_str = $this->payment->getJSAPI($order1);
+//        }
         if (!isPhoneSide()) {//pc端微信扫码支付
-            $code_str = $this->payment->pc_pay($order);
-        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
-            $code_str = $this->payment->h5_pay($order);
+            $code_str = $this->payment->pc_pay($payInfo);
+        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
+            $code_str =Pay::h5_pay($payInfo);
         }else{//微信浏览器
-            $this->payment->aa($order1);
-            //$code_str = $this->payment->getJSAPI($order1);
+            $code_str =Pay::wxPay($payInfo);
+//            $this->payment = new \web\all\Component\payment\weixin\weixin();
+//            $code_str = $this->payment->getJSAPI($order1);
         }
 
     }

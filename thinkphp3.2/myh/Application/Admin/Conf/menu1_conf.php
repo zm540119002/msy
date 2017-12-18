@@ -4,8 +4,9 @@ return array(
         array('name' => '商品管理',
             'sub_menu' => array(
                 array('name'=>'分类管理','act'=>'GoodsCategory','op'=>'goodsCategoryManage'),
-                array('name' => '商品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
                 array('name' => '单位管理', 'act'=>'Unit', 'op'=>'unitManage'),
+                array('name' => '商品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
+
         )),
 
         array('name' => '订单管理',
