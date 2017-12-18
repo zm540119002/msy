@@ -105,7 +105,13 @@ EOF;
 
 
     function aa($order){
-		print_r($order);exit;
+		print_r($order);
+		print_r($order['sn']);
+		print_r($order['actually_amount']);
+		print_r($order['notify_url']);
+
+		exit;
+
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
