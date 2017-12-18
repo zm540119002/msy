@@ -49,6 +49,12 @@
                             <input type="hidden" name="goodsId" value="{$goodsInfo.id}">
                         </td>
                     </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品零售价：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 200px; " class="inputboxadmin" name="price" value="{$goodsInfo.price}">
+                        </td>
+                    </tr>
                     <tr class="radioProductType">
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品类型：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -73,30 +79,36 @@
                             </if>
                         </td>
                     </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>普通价格：</td>
+                    <tr class="radioTypeOption first">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品优惠价：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="price" value="{$goodsInfo.price}">
+                            <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
                         </td>
                     </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>普通VIP价格：</td>
+                    <tr class="radioTypeOption">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>促销价：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="vip_price" value="{$goodsInfo.vip_price}">
+                            <input style="width: 200px;" class="inputboxadmin" name="special_price" value="{$goodsInfo.special_price}">
                         </td>
                     </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>高级VIP价格：</td>
+                    <tr class="radioTypeOption">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>微团价：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="senior_vip_price" value="{$goodsInfo.senior_vip_price}">
+                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
                         </td>
                     </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>金牌VIP价格：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="gold_vip_price" value="{$goodsInfo.gold_vip_price}">
-                        </td>
-                    </tr>
+                    <!--<tr>-->
+                        <!--<td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>高级VIP价格：</td>-->
+                        <!--<td class=dotted_bottom_gray width="89%" align=left>-->
+                            <!--<input style="width: 200px; " class="inputboxadmin" name="senior_vip_price" value="{$goodsInfo.senior_vip_price}">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>金牌VIP价格：</td>-->
+                        <!--<td class=dotted_bottom_gray width="89%" align=left>-->
+                            <!--<input style="width: 200px; " class="inputboxadmin" name="gold_vip_price" value="{$goodsInfo.gold_vip_price}">-->
+                        <!--</td>-->
+                    <!--</tr>-->
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>单品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -131,12 +143,6 @@
                                     </volist>
                                 </notempty>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>特惠价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="special_price" value="{$goodsInfo.special_price}">
                         </td>
                     </tr>
                     <tr>
@@ -237,6 +243,69 @@
     <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/uploadImgToTemp.js"></script>
     <script type="text/javascript">
         $(function(){
+            //单选商品类型
+            $('.radioItem').change(function(){
+                if($(this).is(":checked")){
+                    var radioValue=$(this).val();
+                    switch(radioValue){
+                        case '普通产品':
+                            $('.radioTypeOption').hide();
+                            $('.radioTypeOption:first').show();
+                            break;
+                        case '促销产品':
+                            $('.radioTypeOption').hide();
+                            $('.radioTypeOption:eq(1)').show();
+                            break;
+                        case '微团购产品':
+                            $('.radioTypeOption').hide();
+                            $('.radioTypeOption:last').show();
+                            break;
+                    }
+                }
+            });
+
+//            $('input[name="discount"]').each(function () {
+//                if($(this).is(":checked")){
+//                    var radioValue=$(this).val();
+//                    switch(radioValue){
+//                        case '普通产品':
+//                            $('.radioTypeOption').hide();
+//                            $('.radioTypeOption:first').show();
+//                            break;
+//                        case '促销产品':
+//                            $('.radioTypeOption').hide();
+//                            $('.radioTypeOption:eq(1)').show();
+//                            break;
+//                        case '微团购产品':
+//                            $('.radioTypeOption').hide();
+//                            $('.radioTypeOption:last').show();
+//                            break;
+//                    }
+//                }
+//            })
+
+            $('input[name="discount"]').each(function () {
+                if($(this).is(":checked")){
+                    var radioValue=$('input[type="radio"]:checked').data('buy_type');
+                    alert(radioValue);
+                    switch(radioValue){
+                        case '1':
+                            $('.radioTypeOption').hide();
+                            $('.radioTypeOption:first').show();
+                            break;
+                        case '2':
+                            $('.radioTypeOption').hide();
+                            $('.radioTypeOption:eq(1)').show();
+                            break;
+                        case '3':
+                            $('.radioTypeOption').hide();
+                            $('.radioTypeOption:last').show();
+                            break;
+                    }
+                }
+            })
+
+
             //页面初始化
             var category_id_1 = '{$goodsInfo.category_id_1}';
             if(category_id_1){
@@ -260,6 +329,10 @@
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
+                if($('input[name=discount]').is(":checked")){
+                    postData.buy_type = $('input[type="radio"]:checked').data('buy_type');
+                }
+                console.log(postData.buy_type);return;
                 //主图
                 postData.main_img = $("#img").attr('src');
                 //详情图
