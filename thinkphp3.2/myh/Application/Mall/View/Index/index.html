@@ -3,123 +3,76 @@
     <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
 </block>
 <block name="content">
-    <include file="Public/slider" />
+    <!-- 美悦会商城首页 -->
+    <section>
+        <img src=""/>
+    </section>
     <nav class="mall_function_menu f24">
-        <a href="{:U('Recharge/index')}">
+        <a href="">
+            <span class="project_class"></span>
+            商城首页
+        </a>
+        <a href="">
             <span class="purchaser_register"></span>
-            账户充值
+            微团购
         </a>
-        <a href="{:U('Goods/allCategoryGoods',array('category_id_1'=> $goodsCategoryList[0]['id']))}">
+        <a href="">
             <span class="vip"></span>
-            生活美容
+            推客分享
         </a>
-        <a href="javascript:void(0);">
+        <a href="">
             <span class="recharge"></span>
-            医学美容
+            购物车
         </a>
-        <a href="{:U('PersonalCenter/index')}">
+        <a href="">
             <span class="order_manage"></span>
-            会员中心
+            个人中心
         </a>
     </nav>
-    <!-- 暂只显示四大类 -->
-    <div class="promotion_mode_type f24">
-        <div class="platform_purchase">
-            <div class="platform_toker">
-                <notempty name="goodsCategoryList[0]">
-                    <a href="{:U('Goods/categoryGoods',array('category_id_1'=> $goodsCategoryList[0]['id']))}">
-                        <notempty name="goodsCategoryList[0]['img']">
-                            <img src="UPLOADS_IMG/{$goodsCategoryList[0]['img']}">
-                            <else />
-                            <div class='category-right-top'>
-                                {$goodsCategoryList[0]['name']}
-                            </div>
-                        </notempty>
-                    </a>
-                <else />
-                    <a href="javascript:void(0);"></a>
-                </notempty>
-            </div>
-            <div class="platform_theme">
-                <div class="theme_purchase">
-                    <notempty name="goodsCategoryList[1]">
-                        <a href="{:U('Goods/categoryGoods',array('category_id_1'=> $goodsCategoryList[1]['id']))}">
-                            <notempty name="goodsCategoryList[1]['img']">
-                                <img src="UPLOADS_IMG/{$goodsCategoryList[1]['img']}">
-                                <else />
-                                <div class='category-right-l'>
-                                    {$goodsCategoryList[1]['name']}
-                                </div>
-                            </notempty>
-                        </a>
-                    <else />
-                        <a href="javascript:void(0);"></a>
-                    </notempty>
-                </div>
-                <div class="theme_purchase">
-                    <notempty name="goodsCategoryList[2]">
-                        <a href="{:U('Goods/categoryGoods',array('category_id_1'=> $goodsCategoryList[2]['id']))}">
-                            <notempty name="goodsCategoryList[2]['img']">
-                                <img src="UPLOADS_IMG/{$goodsCategoryList[2]['img']}">
-                            <else />
-                                <div class='category-right-r'>
-                                    {$goodsCategoryList[2]['name']}
-                                </div>
-                            </notempty>
-                        </a>
-                    <else />
-                        <a href="javascript:void(0);"></a>
-                    </notempty>
-                </div>
-            </div>
-        </div>
-        <div class="platform_mode">
-            <notempty name="goodsCategoryList[3]">
-                <a href="{:U('Goods/categoryGoods',array('category_id_1'=> $goodsCategoryList[3]['id']))}">
-                    <notempty name="goodsCategoryList[3]['img']">
-                        <img src="UPLOADS_IMG/{$goodsCategoryList[3]['img']}">
-                        <else />
-                        <div class='category-left'>
-                            {$goodsCategoryList[3]['name']}
-                        </div>
-                    </notempty>
+    <section class="f24">
+        <ul class="business_product_module">
+            <li>
+                <a>
+                    <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
                 </a>
-            <else />
-                <a href="javascript:void(0);"></a>
-            </notempty>
-        </div>
-    </div>
-    <div class="cash_coupon_module">
-        <a href="javascript:void(0);" class="cash_coupon_l">
-            <span class="vouchers_l_price">500元</span>
-            <span class="vouchers_type">产品代金券领取</span>
-        </a>
-        <a href="javascript:void(0);" class="cash_coupon_r">
-            <span class="vouchers_r_price">500元</span>
-            <span class="vouchers_type">仪器代金券领取</span>
-        </a>
-    </div>
-    <div id="content"></div>
+                <p>pppppppppppppppp</p>
+                <div class="business_pdetail">
+                    <div class="b_f">
+                        <span class="market_price">￥900.00</span>
+                    </div>
+                    <div class="b_f">
+                        <del>￥1999.00</del>
+                    </div>
+                    <div class="b_f commodity_price">
+                        <a href="javascript:void(0);" class="shopping_cart">购物车</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a>
+                    <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
+                </a>
+                <p>pppppppppppppppp</p>
+                <div class="business_pdetail">
+                    <div class="b_f">
+                        <span class="market_price">￥900.00</span>
+                    </div>
+                    <div class="b_f">
+                        <del>￥1999.00</del>
+                    </div>
+                    <div class="b_f commodity_price">
+                        <a href="javascript:void(0);" class="shopping_cart">购物车</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <!-- 美悦会商城首页-end -->
 </block>
-<block name="footer">
-    <include file="Cart/footerCartSingle" />
-    <include file="Cart/footerCartMenu" />
-</block>
+<block name="footer"></block>
 <block name="script">
-    <script type="text/javascript" src="PUBLIC_JS/purchase/goods.js"></script>
     <script type="text/javascript">
         $(function(){
-            //初始化页面
-            var config = {};
-            config.url = MODULE + '/Goods/goodsPage';
-            getPage(config);
-            $('.group_cart_nav').hide();
-
-            //加载更多
-            $('body').on('click','.view_more',function () {
-                var url = MODULE + '/Goods/goodsList';
-                getPhotoList($(this),url);
-            });
         });
     </script>
 </block>
