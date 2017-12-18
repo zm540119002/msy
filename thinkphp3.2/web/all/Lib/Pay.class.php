@@ -119,7 +119,7 @@ EOF;
         $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
     }
 
-    function h5_pay($order){
+    public static function h5_pay($order){
         //统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
         //使用统一支付接口
         $input = new \WxPayUnifiedOrder();
