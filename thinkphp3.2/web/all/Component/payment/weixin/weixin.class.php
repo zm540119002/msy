@@ -115,6 +115,7 @@ EOF;
 	 */
 
 	public static function wxPay($order){
+		var_dump($order);exit;
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
 		$input = new \WxPayUnifiedOrder();
