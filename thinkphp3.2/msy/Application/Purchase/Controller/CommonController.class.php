@@ -7,5 +7,6 @@ class CommonController extends AuthCompanyAuthoriseController {
     public function checkCompanyAuthorise(){
         $returnUrl = session('returnUrl');
         header('Location:'.$returnUrl);
+        exit();
     }
 }

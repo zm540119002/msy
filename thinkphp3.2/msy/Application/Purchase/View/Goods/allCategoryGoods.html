@@ -67,6 +67,7 @@
     </div>
 </block>
 <block name="footer">
+    <include file="Cart/footerCartSingle" />
     <include file="Cart/footerCartMenu" />
 </block>
 <block name="script">
@@ -76,7 +77,6 @@
         $(function(){
             //初始化页面
             getMultiCategoryGoodsList($('.purchase_package_nav li:first'));
-
             //二级分类切换
             tab_down('.purchase_package_nav li','','click');
             $('body').on('click','.purchase_package_nav li',function () {
@@ -85,21 +85,18 @@
                 $(document).scrollTop(300);
             });
             $('html,body').animate({scrollTop:0+'px'});
-
             //上拉加载更多
             $(window).on('scroll',function(){
                 if($(document).scrollTop()+$(window).height()>=$(document).height()){
                     getMultiCategoryGoodsList($('.purchase_package_nav li.current'),'pull_up');
                 }
             });
-
             //星星评分等级
             $('.five_star').setStar({
                 getFractionValue:3.9,
                 star:'PUBLIC_IMG/home/star.png',
                 starRed:'PUBLIC_IMG/home/starred.png'
             });
-
             //结算倒计时
             countDown('{$settlementTime}',$(".countDownBox"));
         });
