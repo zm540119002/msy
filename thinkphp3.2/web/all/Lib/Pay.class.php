@@ -24,13 +24,13 @@ class Pay
      */
 
     public static function wxPay($payInfo){
-        print_r($payInfo);exit;
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
+        print_r($input);exit;
         $input->SetTotal_fee($payInfo['actually_amount'] *100);			//支付金额,单位:分
         $input->SetTime_start(date("YmdHis"));		//支付发起时间
         $input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
