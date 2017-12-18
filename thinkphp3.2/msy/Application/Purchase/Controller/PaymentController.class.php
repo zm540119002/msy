@@ -61,7 +61,8 @@ class PaymentController extends AuthCompanyAuthoriseController {
     public function getCode(){
         //  订单支付提交
         header("Content-type:text/html;charset=utf-8");
-        $order = $this->getOrderInfoByOrderType();
+        $order=[];
+        $order[] = $this->getOrderInfoByOrderType();
         $order1 = array(
             'sn' => generateSN(),
             'actually_amount' => 0.01,
