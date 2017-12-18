@@ -176,8 +176,8 @@ EOF;
 		$openId = $tools->GetOpenid();
 		print_r($openId);
 		$input = new \WxPayUnifiedOrder();
-		var_dump($input);exit;
 		$input->SetBody('美尚云');					//商品名称
+		print_r($input);exit;
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
 		$input->SetOut_trade_no($order['sn']);			//订单号
 		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
