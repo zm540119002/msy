@@ -55,7 +55,6 @@ class WxPayController extends AuthCompanyAuthoriseController {
                     'actually_amount'=>$this->amount,
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_RECHARGE']
                 );
-//                $jsApiParameters =Pay::wxPay($this->amount,C('WX_CONFIG')['CALL_BACK_URL_RECHARGE'],$walletDetailInfo['sn']);
                $jsApiParameters =Pay::wxPay($payInfo);
                 $this->assign(array(
                     'data' => $jsApiParameters,
