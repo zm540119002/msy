@@ -63,6 +63,7 @@ class PaymentController extends AuthCompanyAuthoriseController {
         header("Content-type:text/html;charset=utf-8");
         $order=[];
         $order[] = $this->getOrderInfoByOrderType();
+        print_r($order);exit;
         $order1 = array(
             'sn' => generateSN(),
             'actually_amount' => 0.01,
