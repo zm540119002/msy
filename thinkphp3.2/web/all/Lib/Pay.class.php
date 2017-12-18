@@ -7,10 +7,6 @@
  */
 
 namespace web\all\Lib;
-use web\all\Component\UnionPay\SDKConfig;
-use web\all\Component\UnionPay\AcpService;
-use web\all\Component\UnionPay\LogUtil;
-
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.JsApiPay.php');
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/log.php');

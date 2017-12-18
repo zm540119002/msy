@@ -2,7 +2,7 @@
 namespace Purchase\Controller;
 use Think\Controller;
 use web\all\Controller\AuthCompanyAuthoriseController;
-use web\all\Component\payment\weixin\weixin;
+use web\all\Component\payment\weixin\Pay;
 
 class PaymentController extends AuthCompanyAuthoriseController {
 
@@ -41,9 +41,9 @@ class PaymentController extends AuthCompanyAuthoriseController {
             unset($_GET['pay_code']); // 用完之后删除, 以免进入签名判断里面去 导致错误
         }
         // 导入具体的支付类文件
-        if( $this->pay_code  == 'weixin'){
-            $this->payment = new \web\all\Component\payment\weixin\weixin();
-        }
+//        if( $this->pay_code  == 'weixin'){
+//            $this->payment = new \web\all\Component\payment\weixin\weixin();
+//        }
         if( $this->pay_code  == 'alipayMobile'){
             $this->payment = new \web\all\Component\payment\alipayMobile\alipayMobile();
         }
@@ -73,9 +73,9 @@ class PaymentController extends AuthCompanyAuthoriseController {
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
             $code_str = $this->payment->h5_pay($order);
         }else{//微信浏览器
-           // weixin::wxPay($order);
-            $this->payment = new \web\all\Component\payment\weixin\weixin();
-            $code_str = $this->payment->getJSAPI($order);
+            Pay::wxPay($order);
+//            $this->payment = new \web\all\Component\payment\weixin\weixin();
+//            $code_str = $this->payment->getJSAPI($order1);
         }
 
     }
