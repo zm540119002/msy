@@ -40,9 +40,9 @@ class Pay
      */
 
     public static function wxPay($order){
-        print_r($order);exit;
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
+        print_r($openId);exit;
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
