@@ -9,4 +9,10 @@ return array(
     'coupons_scene'=>array(
         '1'=>'采购商城',
     ),
+
+    'goods_type'=>array(
+        '1'=>'正常',
+        '2'=>'促销',
+        '3'=>'微团购'
+    )
 );

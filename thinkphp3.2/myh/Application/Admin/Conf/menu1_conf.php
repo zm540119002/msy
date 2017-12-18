@@ -9,11 +9,11 @@ return array(
 
         )),
 
-        array('name' => '订单管理',
-            'sub_menu' => array(
-                 array('name'=>'分类管理','act'=>'GoodsCategory','op'=>'goodsCategoryManage'),
-                 array('name' => '商品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
-        )),
+//        array('name' => '订单管理',
+//            'sub_menu' => array(
+//                 array('name'=>'分类管理','act'=>'GoodsCategory','op'=>'goodsCategoryManage'),
+//                 array('name' => '商品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
+//        )),
 
     
     
