@@ -55,7 +55,16 @@ class WxPayController extends AuthCompanyAuthoriseController {
                     'actually_amount'=>$this->amount,
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_RECHARGE']
                 );
-               $jsApiParameters =Pay::wxPay($payInfo);
+                if (!isPhoneSide()) {//pc端微信扫码支付
+                    $code_str = $this->payment->pc_pay($payInfo);
+                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false && $this->pay_code == 'weixin'){//手机端非微信浏览器
+                    $code_str =Pay::h5_pay($payInfo);
+                }else{//微信浏览器
+                    $code_str =Pay::wxPay($payInfo);
+//            $this->payment = new \web\all\Component\payment\weixin\weixin();
+//            $code_str = $this->payment->getJSAPI($order1);
+                }
+
 //                $this->assign(array(
 //                    'data' => $jsApiParameters,
 //                ));
