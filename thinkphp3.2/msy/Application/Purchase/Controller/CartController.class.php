@@ -29,6 +29,8 @@ class CartController extends BaseController {
                 $this->display('Goods/goodsListTpl');
             }
         }else{
+            //商品列表操作类型
+            $this->goodsListOptionType = 'withPurchaseNumAndDel';
             $this->display();
         }
     }

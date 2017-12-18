@@ -19,20 +19,27 @@
                 </empty>
             </div>
         </div>
-        <notempty name="user">
-            <a href="javascript:void(0);" class="shopping_cart">购物车</a>
-        </notempty>
-        <!--<div class="order_purchase_count">采购数量(单位:{$vo.purchase_unit|getUnitCN})：<span>{$vo.num|default='0'}</span></div>-->
-        <!--<div class="purchase_goods_num">-->
-            <!--<span>采购数量({$vo.purchase_unit|getUnitCN})</span>-->
-            <!--<div class="quantity_wrapper">-->
-                <!--<a href="javascript:void(0);" class="greduce">-</a>-->
-                <!--<input type="text" value="{$vo.num|default='0'}" class="f24 gshopping_count">-->
-                <!--<a href="javascript:void(0);" class="gplus">+</a>-->
-            <!--</div>-->
-            <!--<if condition="$pageType eq 'goodsManage' ">-->
-                <!--<a href="javascript:void(0);" class="detele_order goodsDel">删除</a>-->
-            <!--</if>-->
-        <!--</div>-->
+        <switch name="goodsListOptionType" >
+            <case value="withCart">
+                <notempty name="user">
+                    <a href="javascript:void(0);" class="shopping_cart">购物车</a>
+                </notempty>
+            </case>
+            <case value="withPurchaseNumAndDel">
+                <div class="purchase_goods_num">
+                    <span>采购数量({$vo.purchase_unit|getUnitCN})</span>
+                    <div class="quantity_wrapper">
+                        <a href="javascript:void(0);" class="greduce">-</a>
+                        <input type="text" value="{$vo.num|default='0'}" class="f24 gshopping_count">
+                        <a href="javascript:void(0);" class="gplus">+</a>
+                    </div>
+                    <a href="javascript:void(0);" class="detele_order goodsDel">删除</a>
+                </div>
+            </case>
+            <case value="withPurchaseNum">
+                <div class="order_purchase_count">采购数量(单位:{$vo.purchase_unit|getUnitCN})：<span>{$vo.num|default='0'}</span></div>
+            </case>
+            <default />
+        </switch>
     </li>
 </volist>

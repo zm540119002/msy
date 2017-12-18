@@ -38,6 +38,8 @@ class GoodsController extends BaseController {
             }
             $this->unlockingFooterCart = unlockingFooterCartConfig($config);
             $this->unlockingFooterCartSingle = unlockingFooterCartConfig(array(2,3));
+            //商品列表操作类型
+            $this->goodsListOptionType = 'withCart';
             $this ->display();
         }
     }
