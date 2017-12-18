@@ -11,7 +11,7 @@ namespace web\all\Component\payment\weixin;
  */
 use Vendor\Qrcode\Qrcode;
 require_once(dirname(__FILE__).'/lib/WxPay.Api.php');
-require_once(dirname(__FILE__).'/example/WxPay.JsApiPay.php');
+require_once(dirname(__FILE__).'/WxPay.JsApiPay.php');
 require_once(dirname(__FILE__).'/example/log.php');
 
 class weixin
@@ -117,10 +117,9 @@ EOF;
 	 */
 
 	public static function wxPay($order){
-		$tools = new \JsApiPay();
+		$tools = new \web\all\Component\payment\weixin\JsApiPay();
 		var_dump($tools);exit;
 		$openId = $tools->GetOpenid();
-		var_dump($openId);exit;
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
