@@ -7,29 +7,29 @@
  */
 
 namespace  web\all\Component\payment\weixin;
-require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
-require_once(dirname(__FILE__) . '/example/WxPay.JsApiPay.php');
-require_once(dirname(__FILE__) . '/example/log.php');
+require_once(dirname(__FILE__) . '/lib1/WxPay.Api.php');
+require_once(dirname(__FILE__) . '/example1/WxPay.JsApiPay.php');
+require_once(dirname(__FILE__) . '/example1/log.php');
 
 class Pay
 {
 
 
-    /**
-     * 架构函数
-     *
-     */
-    public function __construct() {
-//		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
-//		require_once("example/WxPay.NativePay.php");
-//		require_once("example/WxPay.JsApiPay.php");
-        $paymentPlugin = D('Plugin')->where("code='weixin' and  type = 'payment' ")->find(); // 找到微信支付插件的配置
-        $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
-        \WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
-        \WxPayConfig::$mchid = $config_value['mchid']; // * MCHID：商户号（必须配置，开户邮件中可查看）
-        \WxPayConfig::$key = $config_value['key']; // KEY：商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置）
-        \WxPayConfig::$appsecret = $config_value['appsecret']; // 公众帐号secert（仅JSAPI支付的时候需要配置)，
-    }
+//    /**
+//     * 架构函数
+//     *
+//     */
+//    public function __construct() {
+////		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
+////		require_once("example/WxPay.NativePay.php");
+////		require_once("example/WxPay.JsApiPay.php");
+//        $paymentPlugin = D('Plugin')->where("code='weixin' and  type = 'payment' ")->find(); // 找到微信支付插件的配置
+//        $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
+//        \WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
+//        \WxPayConfig::$mchid = $config_value['mchid']; // * MCHID：商户号（必须配置，开户邮件中可查看）
+//        \WxPayConfig::$key = $config_value['key']; // KEY：商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置）
+//        \WxPayConfig::$appsecret = $config_value['appsecret']; // 公众帐号secert（仅JSAPI支付的时候需要配置)，
+//    }
     /**
      * 微信支付
      * @param  string   $openId 	openid
@@ -41,9 +41,7 @@ class Pay
 
     public static function wxPay($order){
         $tools = new \JsApiPay();
-       
         $openId = $tools->GetOpenid();
-        print_r($openId);exit;
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
