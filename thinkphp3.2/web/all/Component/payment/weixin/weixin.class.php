@@ -110,7 +110,7 @@ EOF;
 		print_r($order['actually_amount']);
 		print_r($order['notify_url']);
 
-		exit;
+		
 
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
