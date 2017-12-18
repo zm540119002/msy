@@ -2,7 +2,7 @@
 namespace Purchase\Controller;
 use Think\Controller;
 use web\all\Controller\AuthCompanyAuthoriseController;
-use web\all\Component\payment\weixin\Pay;
+use web\all\Lib\Pay;
 
 class PaymentController extends AuthCompanyAuthoriseController {
 

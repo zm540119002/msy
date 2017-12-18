@@ -10,9 +10,7 @@ namespace web\all\Component\payment\weixin;
  * @package Home\Payment
  */
 use Vendor\Qrcode\Qrcode;
-require_once(dirname(__FILE__).'/lib/WxPay.Api.php');
-require_once(dirname(__FILE__).'/example/WxPay.JsApiPay.php');
-require_once(dirname(__FILE__).'/example/log.php');
+
 
 class weixin
 {
@@ -21,9 +19,9 @@ class weixin
 	 *
 	 */
 	public function __construct() {
-//		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
-//		require_once("example/WxPay.NativePay.php");
-//		require_once("example/WxPay.JsApiPay.php");
+		require_once("lib/WxPay.Api.php"); // 微信扫码支付demo 中的文件
+		require_once("example/WxPay.NativePay.php");
+		require_once("example/WxPay.JsApiPay.php");
 		$paymentPlugin = D('Plugin')->where("code='weixin' and  type = 'payment' ")->find(); // 找到微信支付插件的配置
 		$config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
 		\WxPayConfig::$appid = $config_value['appid']; // * APPID：绑定支付的APPID（必须配置，开户邮件中可查看）
@@ -105,82 +103,14 @@ EOF;
 		echo  $html;
 	}
 
-
-
-	/**
-	 * 微信支付
-	 * @param  string   $openId 	openid
-	 * @param  string   $goods 		商品名称
-	 * @param  string   $attach 	附加参数,我们可以选择传递一个参数,比如订单ID
-	 * @param  string   $order_sn	订单号
-	 * @param  string   $total_fee  金额
-	 */
-
-	public static function wxPay($order){
-		$tools = new \JsApiPay();
-		$openId = $tools->GetOpenid();
-		$input = new \WxPayUnifiedOrder();
-		$input->SetBody('美尚云');					//商品名称
-		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
-		$input->SetOut_trade_no($order['sn']);			//订单号
-		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
-		$input->SetTime_start(date("YmdHis"));		//支付发起时间
-		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
-		$input->SetGoods_tag("test3");
-		$input->SetNotify_url($order['notify_url']);//支付回调验证地址
-		$input->SetTrade_type("JSAPI");				//支付类型
-		$input->SetOpenid($openId);					//用户openID
-		$order = \WxPayApi::unifiedOrder($input);	//统一下单
-		$jsApiParameters = $tools->GetJsApiParameters($order);
-		$html = <<<EOF
-	<script type="text/javascript">
-	//调用微信JS api 支付
-	function jsApiCall()
-	{
-		WeixinJSBridge.invoke(
-			'getBrandWCPayRequest',$jsApiParameters,
-			function(res){
-				//WeixinJSBridge.log(res.err_msg);
-				 if(res.err_msg == "get_brand_wcpay_request:ok") {
- 						location.href = '/index.php/Purchase/recharge/payComplete';
-				 }else{
-				 	alert(res.err_code+res.err_desc+res.err_msg);
-				   
-				 }
-			}
-		);
-	}
-
-	function callpay()
-	{
-		if (typeof WeixinJSBridge == "undefined"){
-		    if( document.addEventListener ){
-		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-		    }else if (document.attachEvent){
-		        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-		    }
-		}else{
-		    jsApiCall();
-		}
-	}
-	callpay();
-	</script>
-EOF;
-		echo  $html;
-	}
-
-
+	
     function getJSAPI($order){
-		var_dump($order);
 		$tools = new \JsApiPay();
 		$openId = $tools->GetOpenid();
-		print_r($openId);
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody('美尚云');					//商品名称
 		$input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
 		$input->SetOut_trade_no($order['sn']);			//订单号
-		print_r($input);exit;
 		$input->SetTotal_fee($order['actually_amount'] *100);			//支付金额,单位:分
 		$input->SetTime_start(date("YmdHis"));		//支付发起时间
 		$input->SetTime_expire(date("YmdHis", time() + 600));//支付超时

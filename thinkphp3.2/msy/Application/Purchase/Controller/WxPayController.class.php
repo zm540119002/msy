@@ -25,6 +25,8 @@ class WxPayController extends AuthCompanyAuthoriseController {
                 }
                 //检查商品库存
                 $notifyUrl = C('WX_CONFIG')['CALL_BACK_URL_ORDER'];
+
+
                 $jsApiParameters = Pay::wxPay($totalFee,$notifyUrl,$orderInfo['sn']);
                 $this->assign(array(
                     'data' => $jsApiParameters,
@@ -48,7 +50,13 @@ class WxPayController extends AuthCompanyAuthoriseController {
                 $walletDetailInfo = $walletDetailInfo[0];
                 $this->amount = $walletDetailInfo['amount'];
 
-                $jsApiParameters =Pay::wxPay($this->amount,C('WX_CONFIG')['CALL_BACK_URL_RECHARGE'],$walletDetailInfo['sn']);
+                $payInfo = array(
+                    'sn'=>$walletDetailInfo['sn'],
+                    'actually_amount'=>$this->amount,
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_RECHARGE']
+                );
+//                $jsApiParameters =Pay::wxPay($this->amount,C('WX_CONFIG')['CALL_BACK_URL_RECHARGE'],$walletDetailInfo['sn']);
+               $jsApiParameters =Pay::wxPay($payInfo);
                 $this->assign(array(
                     'data' => $jsApiParameters,
                 ));
