@@ -1,0 +1,279 @@
+<extend name="Public:base" />
+
+<block name="css-customize">
+    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/common/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/common/skin.css" />
+</block>
+
+<block name="content">
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:U('Goods/goodsManage')}" ><span>管理</span></a></li>
+                    <li><a href="{:U('Goods/goodsEdit')}" ><span>编辑</span></a></li>
+                    <li><a href="{:U('Goods/setPurchaseType')}" class="current" ><span>设置产品购买类型</span></a></li></li>
+                    <li><a href="{:U('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
+                    <li><a href="{:U('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:15px;">
+            <form id="form1">
+                <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
+                    <tbody>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>库存：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 100px; " class="inputboxadmin" name="inventory" value="{$projectInfo.inventory}">
+                        </td>
+                    </tr>
+                    <tr class="radioProductType">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品类型：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <empty name="goodsInfo">
+                                <input type="radio" name="discount"  class="radioItem" value="促销" data-buy_type="1" checked="checked"><label for="">促销</label>
+                                <else />
+                                <if condition="$goodsInfo.buy_type eq 1">
+                                    <input type="radio" name="discount"  class="radioItem" value="促销" data-buy_type="1" checked="checked"><label for="">促销</label>
+                                    <else />
+                                    <input type="radio" name="discount"  class="radioItem" value="促销" data-buy_type="1"><label for="">促销</label>
+                                </if>
+                            </empty>
+
+                            <if condition="$goodsInfo.buy_type eq 3 ">
+                                <input type="radio" name="discount"  class="radioItem" value="微团购" data-buy_type="2" checked="checked"><label for="">微团购</label>
+                                <else />
+                                <input type="radio" name="discount"  class="radioItem" value="微团购" data-buy_type="2"><label for="">微团购</label>
+                            </if>
+                            <if condition="$goodsInfo.buy_type eq 3 ">
+                                <input type="radio" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" checked="checked"><label for="">城市合伙人</label>
+                                <else />
+                                <input type="radio" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3"><label for="">城市合伙人</label>
+                            </if>
+                            <if condition="$goodsInfo.buy_type eq 3 ">
+                                <input type="radio" name="discount"  class="radioItem" value="代理商" data-buy_type="4" checked="checked"><label for="">代理商</label>
+                                <else />
+                                <input type="radio" name="discount"  class="radioItem" value="代理商" data-buy_type="4"><label for="">代理商</label>
+                            </if>
+                        </td>
+                    </tr>
+                    <tr class="radioTypeOption first">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品优惠价：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
+                        </td>
+                    </tr>
+
+                    <tr class="radioTypeOption">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>微团价：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                        </td>
+                    </tr>
+
+                    <tr class="radioTypeOption">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>城市合伙人价格</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                        </td>
+                    </tr>
+
+
+                    <tr class="radioTypeOption">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>代理商价格：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+
+            <tr>
+                <td width="11%"></td>
+                <td height=60 width="50%" align=center>
+                    <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
+                    &nbsp;&nbsp;
+                    <input class="button_save_black" name="add0" value="返回" type="button">
+                </td>
+            </tr>
+        </div>
+    </div>
+</block>
+
+
+
+<block name="script">
+
+    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/categoryLinkage.js"></script>
+    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/goodsCategoryLinkage.js"></script>
+    <script type="text/javascript">
+        //商品列表
+        function getPage(currentPage) {
+            $("#goodsList").html($('#loading').html());
+            var url = CONTROLLER +'/goodsPhotoList';
+            var postData = {};
+            postData.category_id_1 = $('[name=goods_category_id_1]').val();
+            postData.category_id_2 = $('[name=goods_category_id_2]').val();
+            postData.category_id_3 = $('[name=goods_category_id_3]').val();
+            postData.keyword = $('[name=keyword]').val();
+            postData.p = currentPage ? currentPage : 1;
+            postData.pageSize = 10;
+
+            $.get(url, postData , function(data){
+                $('#goodsList').html(data);
+            });
+        }
+
+        $(function(){
+            //获取首页
+            getPage();
+            //搜索
+            $('#searchGoods').click(function(){
+                getPage();
+            });
+            //产品添加
+            $('body').on('click','.add-goods',function () {
+                var goodsIds = [];
+                $(".checked_good").each(function(){
+                    goodsIds.push($(this).data('goodsid'));
+                });
+                var _this = $(this);
+                var _thisLi = _this.parents('li');
+                var goodsId = _thisLi.data('goodsid');
+                if(goodsIds.indexOf(goodsId)!= -1){
+                    dialog.error('已选择此产品');
+                    return false;
+                }
+
+                $.post(MODULE+'/Goods/goodsProjectList',{goodsId:goodsId},function(msg){
+                    $('.ncsc-default-table').append(msg)
+                });
+            });
+
+            //移除产品
+            $('body').on('click','.goods_del',function () {
+                var _this = $(this);
+                var _thisTr = _this.parent().parent().parent('tr');
+                _thisTr.remove();
+            });
+
+            var projectId= $('[name=projectId]').val();
+            if(projectId){
+                $.post(MODULE+'/Goods/goodsProjectList',{projectId:projectId},function(msg){
+                    $('.ncsc-default-table').append(msg)
+                });
+            }
+
+            //初始化所属分类
+            var category_id_1 = '{$projectInfo.category_id_1}';
+            if(category_id_1){
+                $('[name=category_id_1]').val(category_id_1);
+                $('[name=category_id_1]').change();
+            }
+            var category_id_2 = '{$projectInfo.category_id_2}';
+            if(category_id_2){
+                $('[name=category_id_2]').val(category_id_2);
+                $('[name=category_id_2]').change();
+            }
+            var category_id_3 = '{$projectInfo.category_id_3}';
+            if(category_id_3){
+                $('[name=category_id_3]').val(category_id_3);
+            }
+
+            // 选择图片
+            $('#img').on('change',function(){
+                var img = event.target.files[0];
+                // 判断是否图片
+                if(!img){
+                    return false;
+                }
+                // 判断图片格式
+                if(!(img.type.indexOf('image')==0 && img.type && /\.(?:jpg|png|gif|jpeg)$/.test(img.name)) ){
+                    dialog.error('图片只能是jpg,jpeg,gif,png');
+                    return false;
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(img);
+
+                reader.onload = function(e){
+                    $(".main_img").attr("src",e.target.result);
+                    //提交
+                    $.post(CONTROLLER + '/uploadImgToTemp',{ img: e.target.result},function(msg){
+                        if(msg.status == 1){
+                            $(".main_img").attr("src",UPLOAD + msg.info)
+                        }else{
+                            parent.layer.open({
+                                content:msg.info,
+                                time:2
+                            });
+                            return false;
+                        }
+                    },'json');
+                }
+            });
+
+            //单选项目管理
+            $('.radioItem').change(function(){  
+                 if($(this).is(":checked")){ 
+                     var radioValue=$(this).val();  
+                     switch(radioValue){
+                        case '普通项目':
+                        $('.radioTypeOption').hide();
+                        $('.radioTypeOption:first').show();
+                        break;
+                        case '闺蜜行项目':
+                        $('.radioTypeOption').hide();
+                        $('.radioTypeOption:last').show();
+                        break;
+                     }
+                 }
+            });
+            //确定
+            $('.button_save_black_4').on('click',function(){
+                var postData = $('#form1').serializeObject();
+                postData.goods = [];
+                var goodsEveryObj={};
+                $(".checked_good").each(function(){
+                    goodsEveryObj={
+                        goodsId:$(this).data('goodsid'),
+                        goodsNum:$(this).find('.goodsNum').val()
+                    };
+                    postData.goods.push(goodsEveryObj);
+                });
+                //主图
+                postData.main_img = $('img.main_img').attr('src');
+                //说明图
+                postData.explain_img = '';
+                $.each($('#explain').find('iframe').contents().find('.view img'),function(){
+                    postData.explain_img += $(this).attr('src') + ',';
+
+                });
+                //流程图
+                postData.flow_img = '';
+                $.each($('#flow').find('iframe').contents().find('.view img'),function(){
+                    postData.flow_img += $(this).attr('src') + ',';
+
+                });
+                //详情图
+                postData.detail_img = '';
+                $.each($('#detail').find('iframe').contents().find('.view img'),function(){
+                    postData.detail_img += $(this).attr('src') + ',';
+
+                });
+                //简介
+                postData.intro = ueIntro.getContent();
+                $.post(ACTION,postData,function(msg){
+
+                    dialog.msg(msg);
+                },'JSON');
+            });
+
+            //返回
+            $('.button_save_black').click(function(){
+                location.href = CONTROLLER + '/projectManage';
+            });
+        });
+    </script>
+</block>

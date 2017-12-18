@@ -12,6 +12,7 @@
                 <ul class="tab-base">
                     <li><a href="{:U('Goods/goodsManage')}" ><span>管理</span></a></li>
                     <li><a href="{:U('Goods/goodsEdit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:U('Goods/setPurchaseType')}"><span>设置产品购买类型</span></a></li></li>
                     <li><a href="{:U('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
                     <li><a href="{:U('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
                 </ul>
@@ -264,46 +265,45 @@
                 }
             });
 
-//            $('input[name="discount"]').each(function () {
-//                if($(this).is(":checked")){
-//                    var radioValue=$(this).val();
-//                    switch(radioValue){
-//                        case '普通产品':
-//                            $('.radioTypeOption').hide();
-//                            $('.radioTypeOption:first').show();
-//                            break;
-//                        case '促销产品':
-//                            $('.radioTypeOption').hide();
-//                            $('.radioTypeOption:eq(1)').show();
-//                            break;
-//                        case '微团购产品':
-//                            $('.radioTypeOption').hide();
-//                            $('.radioTypeOption:last').show();
-//                            break;
-//                    }
-//                }
-//            })
-
             $('input[name="discount"]').each(function () {
                 if($(this).is(":checked")){
-                    var radioValue=$('input[type="radio"]:checked').data('buy_type');
-                    alert(radioValue);
+                    var radioValue=$(this).val();
                     switch(radioValue){
-                        case '1':
+                        case '普通产品':
                             $('.radioTypeOption').hide();
                             $('.radioTypeOption:first').show();
                             break;
-                        case '2':
+                        case '促销产品':
                             $('.radioTypeOption').hide();
                             $('.radioTypeOption:eq(1)').show();
                             break;
-                        case '3':
+                        case '微团购产品':
                             $('.radioTypeOption').hide();
                             $('.radioTypeOption:last').show();
                             break;
                     }
                 }
             })
+
+//            $('input[name="discount"]').each(function () {
+//                if($(this).is(":checked")){
+//                    var radioValue=$('input[type="radio"]:checked').data('buy_type');
+//                    switch(radioValue){
+//                        case '1':
+//                            $('.radioTypeOption').hide();
+//                            $('.radioTypeOption:first').show();
+//                            break;
+//                        case '2':
+//                            $('.radioTypeOption').hide();
+//                            $('.radioTypeOption:eq(1)').show();
+//                            break;
+//                        case '3':
+//                            $('.radioTypeOption').hide();
+//                            $('.radioTypeOption:last').show();
+//                            break;
+//                    }
+//                }
+//            })
 
 
             //页面初始化
