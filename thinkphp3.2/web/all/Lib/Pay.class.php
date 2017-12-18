@@ -25,7 +25,6 @@ class Pay
      */
 
     public static function wxPay($payInfo){
-        print_r($payInfo);exit;
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
@@ -41,6 +40,7 @@ class Pay
         $input->SetOpenid($openId);					//用户openID
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
+        print_r($jsApiParameters);exit;
         $html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
