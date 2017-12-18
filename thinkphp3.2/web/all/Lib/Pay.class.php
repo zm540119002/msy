@@ -24,7 +24,7 @@ class Pay
      * @param  string   $total_fee  金额
      */
 
-    public static function wxPay($payInfo){
+    public static function getJSAPI($payInfo){
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
@@ -38,10 +38,8 @@ class Pay
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("JSAPI");				//支付类型
         $input->SetOpenid($openId);					//用户openID
-        print_r($input);exit;
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
-        print_r($jsApiParameters);exit;
         $html = <<<EOF
 	<script type="text/javascript">
 	//调用微信JS api 支付
@@ -89,7 +87,7 @@ EOF;
      * @param   array   $order      订单信息
      * @param   array   $config_value    支付方式信息
      */
-    function pc_pay($order)
+    public static function pc_pay($order)
     {
 //		$notify_url = SITE_URL.'/index.php/Home/Payment/notifyUrl/pay_code/weixin'; // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
         //$notify_url = SITE_URL.U('Payment/notifyUrl',array('pay_code'=>'weixin')); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
@@ -104,11 +102,11 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
-        $this->payQRcode($url2);
+        Pay::payQRcode($url2);
     }
 
     //生成支付二维码
-    public function payQRcode($url){
+    public static function payQRcode($url){
         //生成二维码图片
         $object = new Qrcode();
         $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径

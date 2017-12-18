@@ -17,17 +17,21 @@ class WxPayController extends AuthCompanyAuthoriseController {
                 $orderInfo = $modelOrder -> selectOrder($where);
                 $orderInfo = $orderInfo[0];
                 $this -> orderInfo = $orderInfo;
-                $totalFee = $orderInfo['actually_amount'];
+//                $totalFee = $orderInfo['actually_amount'];
                 //检查订单状态
                 $result = $modelOrder->checkOrderStatus($orderInfo);
                 if($result['status'] == 0){
                     $this ->error($result['message']);
                 }
                 //检查商品库存
-                $notifyUrl = C('WX_CONFIG')['CALL_BACK_URL_ORDER'];
+//                $notifyUrl = C('WX_CONFIG')['CALL_BACK_URL_ORDER'];
+                $payInfo = array(
+                    'sn'=>$orderInfo['sn'],
+                    'actually_amount'=>$orderInfo['actually_amount'],
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_ORDER']
+                );
 
-
-                $jsApiParameters = Pay::wxPay($totalFee,$notifyUrl,$orderInfo['sn']);
+                $jsApiParameters = Pay::getJSAPI($payInfo);
                 $this->assign(array(
                     'data' => $jsApiParameters,
                 ));
@@ -60,7 +64,7 @@ class WxPayController extends AuthCompanyAuthoriseController {
                 }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
                     $code_str =Pay::h5_pay($payInfo);
                 }else{//微信浏览器
-                    $code_str =Pay::wxPay($payInfo);
+                    $code_str =Pay::getJSAPI($payInfo);
 //            $this->payment = new \web\all\Component\payment\weixin\weixin();
 //            $code_str = $this->payment->getJSAPI($order1);
                 }
