@@ -68,6 +68,23 @@ class GoodsController extends BaseController {
         $this->display();
     }
 
+
+    //设置
+    public function setPurchaseType(){
+
+        if(IS_POST){
+
+        }else{
+            //所有商品分类
+            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
+                $where['id'] = intval($_GET['goodsId']);
+                $goodsBaseInfo = D('GoodsBase')->where($where)->field('id,name,price')->find();
+                $this->goodsBaseInfo =$goodsBaseInfo;
+            }
+            $this->display();
+        }
+    }
+
     //上下架
     public function goodsOnoffLine(){
         if(IS_POST){
