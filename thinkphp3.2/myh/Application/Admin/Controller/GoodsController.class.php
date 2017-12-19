@@ -73,6 +73,7 @@ class GoodsController extends BaseController {
     public function setPurchaseType1(){
 
         if(IS_POST){
+            exit;
             $info = array(
                 '0'=>array(
                     'goods_base_id' =>87,
@@ -104,15 +105,17 @@ class GoodsController extends BaseController {
                 $this->goodsBaseInfo =$goodsBaseInfo;
                 $where1['goods_base_id'] = intval($_GET['goodsBaseId']);
                 $goodsInfo = D('Goods')->where($where1)->select();
+                echo D('Goods')->getLastSql();
                 $buyTypeArray=[];
                 foreach ($goodsInfo as $item) {
                     $buyTypeArray[]= $item['buy_type'];
                 }
+                print_r($buyTypeArray);
                 $buyTypeArrayAll=array(1,2,3,4);
                 $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
                 $this->noBuyTypeArray=$noBuyTypeArray;
+                print_r($noBuyTypeArray);
                 $this->goodsInfo =$goodsInfo;
-
 
             }
 
