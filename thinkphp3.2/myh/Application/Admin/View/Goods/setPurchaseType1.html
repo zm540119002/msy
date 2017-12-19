@@ -222,11 +222,13 @@
                     var _this=$(this);
                     var optionCheck=_this.prev().find('.radioItem');
                     var promotionPrice=parseFloat(_this.find('.promotion_price').val());
+                    var goods_Id=_this.find('input[name="goods_id"]').val();
                     if(optionCheck.is(":checked")){
                         var buyType=optionCheck.data('buy_type');
                         sigleArr={
                             typeVal:buyType,
-                            priceVal:promotionPrice
+                            priceVal:promotionPrice,
+                            goodsId:goods_Id
                         }
                         postData.push(sigleArr);
                         console.log(postData);
