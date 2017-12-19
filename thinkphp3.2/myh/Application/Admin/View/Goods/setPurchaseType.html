@@ -29,36 +29,93 @@
                         </td>
                     </tr>
                     <tr class="radioProductType">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品类型：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
+                        <td class="dotted_bottom_gray product_type_field" height=40 width="11%" align=right>
+                                <font color="#FF0000">*</font>商品类型：
+                        </td>
+                        <td class="dotted_bottom_gray city_part_module" width="89%" align=left>
                             <empty name="goodsInfo">
-                                <input type="radio" name="discount"  class="radioItem" value="促销" data-buy_type="1" checked="checked"><label for="">促销</label>
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" ><label for="">促销</label>
+                                </div>
+                                <div class="productPrice_type_item">
+                                    <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
+                                    <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
+                                </div>
                                 <else />
                                 <if condition="$goodsInfo.buy_type eq 1">
-                                    <input type="radio" name="discount"  class="radioItem" value="促销" data-buy_type="1" checked="checked"><label for="">促销</label>
+                                    <div>
+                                        <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" ><label for="">促销</label>
+                                    </div>
+                                    <div class="productPrice_type_item">
+                                        <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
+                                        <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
+                                    </div>
                                     <else />
-                                    <input type="radio" name="discount"  class="radioItem" value="促销" data-buy_type="1"><label for="">促销</label>
+                                    <div>
+                                        <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1"><label for="">促销</label>
+                                    </div>
+                                    <div class="productPrice_type_item">
+                                        <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
+                                        <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
+                                    </div>
                                 </if>
+                                
                             </empty>
 
                             <if condition="$goodsInfo.buy_type eq 3 ">
-                                <input type="radio" name="discount"  class="radioItem" value="微团购" data-buy_type="2" checked="checked"><label for="">微团购</label>
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2" ><label for="">微团购</label>
+                                </div>
+                                <div class="productPrice_type_item">
+                                    <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                                </div>
                                 <else />
-                                <input type="radio" name="discount"  class="radioItem" value="微团购" data-buy_type="2"><label for="">微团购</label>
+                                <div >
+                                    <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2"><label for="">微团购</label>
+                                </div>
+                                <div class="productPrice_type_item">
+                                    <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                                </div>
                             </if>
                             <if condition="$goodsInfo.buy_type eq 3 ">
-                                <input type="radio" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" checked="checked"><label for="">城市合伙人</label>
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" ><label for="">城市合伙人</label>
+                                </div>
+                                <div class="productPrice_type_item">
+                                    <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                                </div>
                                 <else />
-                                <input type="radio" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3"><label for="">城市合伙人</label>
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3"><label for="">城市合伙人</label>
+                                </div>
+                                <div class="productPrice_type_item">
+                                    <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                                </div>
                             </if>
                             <if condition="$goodsInfo.buy_type eq 3 ">
-                                <input type="radio" name="discount"  class="radioItem" value="代理商" data-buy_type="4" checked="checked"><label for="">代理商</label>
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4" ><label for="">代理商</label>
+                                </div>
+                                <div class="productPrice_type_item">
+                                    <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                                </div>
                                 <else />
-                                <input type="radio" name="discount"  class="radioItem" value="代理商" data-buy_type="4"><label for="">代理商</label>
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4"><label for="">代理商</label>
+                                </div>
+                                <div class="productPrice_type_item">
+                                    <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                                </div>
                             </if>
                         </td>
                     </tr>
-                    <tr class="radioTypeOption first">
+                    <!--<tr class="radioTypeOption first">
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品优惠价：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
@@ -85,7 +142,7 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
                         </td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
             </form>
@@ -93,9 +150,11 @@
             <tr>
                 <td width="11%"></td>
                 <td height=60 width="50%" align=center>
-                    <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
-                    &nbsp;&nbsp;
-                    <input class="button_save_black" name="add0" value="返回" type="button">
+                    <div class="upload_finish_btn">
+                        <input class="button_save_black_4" value="确定" type="button">
+                        &nbsp;&nbsp;
+                        <input class="button_save_black" name="add0" value="返回" type="button">
+                    </div>
                 </td>
             </tr>
         </div>
@@ -214,20 +273,15 @@
                 }
             });
 
-            //单选项目管理
+            //多选项目管理
             $('.radioItem').change(function(){  
+                 var _this=$(this);  
+                 var nextSiblings= _this.parent().next();
                  if($(this).is(":checked")){ 
-                     var radioValue=$(this).val();  
-                     switch(radioValue){
-                        case '普通项目':
-                        $('.radioTypeOption').hide();
-                        $('.radioTypeOption:first').show();
-                        break;
-                        case '闺蜜行项目':
-                        $('.radioTypeOption').hide();
-                        $('.radioTypeOption:last').show();
-                        break;
-                     }
+                     nextSiblings.show();
+                     nextSiblings.find('input').val();
+                 }else{
+                     nextSiblings.hide();
                  }
             });
             //确定
