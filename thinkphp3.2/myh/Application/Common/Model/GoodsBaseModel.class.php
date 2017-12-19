@@ -4,8 +4,8 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class GoodsModel extends Model {
-    protected $tableName = 'goods';
+class GoodsBaseModel extends Model {
+    protected $tableName = 'goods_base';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG1';
 
@@ -16,7 +16,7 @@ class GoodsModel extends Model {
     );
 
     //新增
-    public function addGoods(){
+    public function addGoodsBase(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -41,7 +41,7 @@ class GoodsModel extends Model {
     }
 
     //修改
-    public function saveGoods($where=array()){
+    public function saveGoodsBase($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -76,7 +76,7 @@ class GoodsModel extends Model {
     }
 
     //标记删除
-    public function delGoods($where=array()){
+    public function delGoodsBase($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -105,20 +105,20 @@ class GoodsModel extends Model {
     }
 
     //查询
-    public function selectGoods($where=[],$field=[],$join=[]){
+    public function selectGoodsBase($where=[],$field=[],$join=[]){
         $_where = array(
-            'g.status' => 0,
+            'gb.status' => 0,
         );
         $_field = array(
-            'g.id','g.no','g.name','g.status','g.category_id_1','g.category_id_2','g.category_id_3','g.on_off_line',
-            'g.sort','g.specification','g.price','g.special_price','g.vip_price','g.senior_vip_price','g.gold_vip_price',
-            'g.inventory','g.main_img','g.detail_img','g.create_time','g.intro','g.notices','g.tag'
-            ,'g.package_num','g.package_unit','g.purchase_unit',
+            'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line',
+            'gb.sort','gb.specification','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro','gb.notices','gb.tag'
+        ,'gb.package_num','gb.package_unit','gb.purchase_unit',
+
         );
         $_join = array(
         );
         $list = $this
-            ->alias('g')
+            ->alias('gb')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

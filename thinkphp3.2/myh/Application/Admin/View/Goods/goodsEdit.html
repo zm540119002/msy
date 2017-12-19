@@ -12,6 +12,7 @@
                 <ul class="tab-base">
                     <li><a href="{:U('Goods/goodsManage')}" ><span>管理</span></a></li>
                     <li><a href="{:U('Goods/goodsEdit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:U('Goods/setPurchaseType')}"><span>设置产品购买类型</span></a></li></li>
                     <li><a href="{:U('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
                     <li><a href="{:U('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
                 </ul>
@@ -55,60 +56,7 @@
                             <input style="width: 200px; " class="inputboxadmin" name="price" value="{$goodsInfo.price}">
                         </td>
                     </tr>
-                    <tr class="radioProductType">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品类型：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <empty name="goodsInfo">
-                                <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1" checked="checked"><label for="">普通产品</label>
-                                <else />
-                                <if condition="$goodsInfo.buy_type eq 1">
-                                    <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1" checked="checked"><label for="">普通产品</label>
-                                    <else />
-                                    <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1"><label for="">普通产品</label>
-                                </if>
-                            </empty>
-                            <if condition="$goodsInfo.buy_type eq 2 ">
-                                <input type="radio" name="discount"  class="radioItem" value="促销产品" data-buy_type="2" checked="checked"><label for="">促销产品</label>
-                                <else />
-                                <input type="radio" name="discount"  class="radioItem" value="促销产品" data-buy_type="2"><label for="">促销产品</label>
-                            </if>
-                            <if condition="$goodsInfo.buy_type eq 3 ">
-                                <input type="radio" name="discount"  class="radioItem" value="微团购产品" data-buy_type="3" checked="checked"><label for="">微团购产品</label>
-                                <else />
-                                <input type="radio" name="discount"  class="radioItem" value="微团购产品" data-buy_type="3"><label for="">微团购产品</label>
-                            </if>
-                        </td>
-                    </tr>
-                    <tr class="radioTypeOption first">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品优惠价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
-                        </td>
-                    </tr>
-                    <tr class="radioTypeOption">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>促销价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="special_price" value="{$goodsInfo.special_price}">
-                        </td>
-                    </tr>
-                    <tr class="radioTypeOption">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>微团价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
-                        </td>
-                    </tr>
-                    <!--<tr>-->
-                        <!--<td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>高级VIP价格：</td>-->
-                        <!--<td class=dotted_bottom_gray width="89%" align=left>-->
-                            <!--<input style="width: 200px; " class="inputboxadmin" name="senior_vip_price" value="{$goodsInfo.senior_vip_price}">-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>金牌VIP价格：</td>-->
-                        <!--<td class=dotted_bottom_gray width="89%" align=left>-->
-                            <!--<input style="width: 200px; " class="inputboxadmin" name="gold_vip_price" value="{$goodsInfo.gold_vip_price}">-->
-                        <!--</td>-->
-                    <!--</tr>-->
+
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>单品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -243,68 +191,6 @@
     <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/uploadImgToTemp.js"></script>
     <script type="text/javascript">
         $(function(){
-            //单选商品类型
-            $('.radioItem').change(function(){
-                if($(this).is(":checked")){
-                    var radioValue=$(this).val();
-                    switch(radioValue){
-                        case '普通产品':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:first').show();
-                            break;
-                        case '促销产品':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:eq(1)').show();
-                            break;
-                        case '微团购产品':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:last').show();
-                            break;
-                    }
-                }
-            });
-
-//            $('input[name="discount"]').each(function () {
-//                if($(this).is(":checked")){
-//                    var radioValue=$(this).val();
-//                    switch(radioValue){
-//                        case '普通产品':
-//                            $('.radioTypeOption').hide();
-//                            $('.radioTypeOption:first').show();
-//                            break;
-//                        case '促销产品':
-//                            $('.radioTypeOption').hide();
-//                            $('.radioTypeOption:eq(1)').show();
-//                            break;
-//                        case '微团购产品':
-//                            $('.radioTypeOption').hide();
-//                            $('.radioTypeOption:last').show();
-//                            break;
-//                    }
-//                }
-//            })
-
-            $('input[name="discount"]').each(function () {
-                if($(this).is(":checked")){
-                    var radioValue=$('input[type="radio"]:checked').data('buy_type');
-                    alert(radioValue);
-                    switch(radioValue){
-                        case '1':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:first').show();
-                            break;
-                        case '2':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:eq(1)').show();
-                            break;
-                        case '3':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:last').show();
-                            break;
-                    }
-                }
-            })
-
 
             //页面初始化
             var category_id_1 = '{$goodsInfo.category_id_1}';
@@ -332,7 +218,6 @@
                 if($('input[name=discount]').is(":checked")){
                     postData.buy_type = $('input[type="radio"]:checked').data('buy_type');
                 }
-                console.log(postData.buy_type);return;
                 //主图
                 postData.main_img = $("#img").attr('src');
                 //详情图
@@ -345,7 +230,6 @@
                 postData.param = ueParam.getContent();
                 postData.usage = ueUsage.getContent();
                 postData.notices = ueNotices.getContent();
-
                 $.post(ACTION,postData,function(msg){
                     dialog.msg(msg,'',function () {
                         location.href = CONTROLLER + '/goodsEdit';
