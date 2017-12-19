@@ -107,6 +107,13 @@
                 });
             });
 
+            //编辑
+            $('body').on('click','.setPurchaseType',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  CONTROLLER + '/setPurchaseType/goodsId/' + _thisTr.data('id');
+                location.href = url;
+            });
+
             //批量删除
             $('body').on('click','.batchDel',function(){
             });
