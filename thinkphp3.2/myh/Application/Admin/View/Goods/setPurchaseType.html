@@ -220,6 +220,7 @@
                 var editArr={};
                 var addData=[];
                 var addArr={};
+                var delData=[];
                 var goodsBaseId=$('.goods_base_id').val();
                 $.each($('.productPrice_type_item'),function(i,val){
                     var _this=$(this);
@@ -246,6 +247,8 @@
                             addData.push(addArr);
                         }
 
+                    }else{
+                        delData.push(goods_Id);
                     }
                 });
                 $.post(CONTROLLER + '/setPurchaseType',{addData:addData,editData:editData},function(msg){
