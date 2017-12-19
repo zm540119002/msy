@@ -73,6 +73,7 @@ class GoodsController extends BaseController {
     public function setPurchaseType1(){
 
         if(IS_POST){
+             print_r(I());exit;
             exit;
             $info = array(
                 '0'=>array(
@@ -110,11 +111,9 @@ class GoodsController extends BaseController {
                 foreach ($goodsInfo as $item) {
                     $buyTypeArray[]= $item['buy_type'];
                 }
-                print_r($buyTypeArray);
                 $buyTypeArrayAll=array(1,2,3,4);
                 $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
                 $this->noBuyTypeArray=$noBuyTypeArray;
-                print_r($noBuyTypeArray);
                 $this->goodsInfo =$goodsInfo;
 
             }
