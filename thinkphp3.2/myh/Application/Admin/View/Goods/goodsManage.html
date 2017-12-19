@@ -110,7 +110,7 @@
             //编辑
             $('body').on('click','.setPurchaseType',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  CONTROLLER + '/setPurchaseType1/goodsBaseId/' + _thisTr.data('id');
+                var url =  CONTROLLER + '/setPurchaseType/goodsBaseId/' + _thisTr.data('id');
                 location.href = url;
             });
 

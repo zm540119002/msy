@@ -232,7 +232,7 @@
                 postData.notices = ueNotices.getContent();
                 $.post(ACTION,postData,function(msg){
                     dialog.msg(msg,'',function () {
-                        location.href = CONTROLLER + '/goodsManage.';
+                        location.href = CONTROLLER + '/goodsManage';
                     });
                 },'JSON');
             });

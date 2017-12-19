@@ -70,33 +70,29 @@ class GoodsController extends BaseController {
 
 
     //设置
-    public function setPurchaseType1(){
+    public function setPurchaseType(){
 
         if(IS_POST){
-             print_r(I());exit;
-            exit;
-            $info = array(
-                '0'=>array(
-                    'goods_base_id' =>87,
-                    'buy_type' => 1,
-                    'sale_price'=>500
-                ),
-                '1'=>array(
-                    'goods_base_id' =>87,
-                    'buy_type' => 2,
-                    'sale_price'=>500
-                ),
-                '3'=>array(
-                    'goods_base_id' =>87,
-                    'buy_type' => 3,
-                    'sale_price'=>500
-                )
-            );
-            if(isset($_POST['goodsId'])){
-
-            }else{
-                $return =  D('goods')->addAll($info);
+            if(isset($_POST['addData'])){
+                $addData=$_POST['addData'];
+                $return =  D('goods')->addAll($addData);
+                if(!$return){
+                    $this->ajaxReturn(errorMsg('增加失败'));
+                }
             }
+
+            if(isset($_POST['editData'])){
+                $addData=$_POST['editData'];
+                foreach ($addData as $item) {
+                    $where['id']=$item['goods_id'];
+                    $return =  D('goods')->where($where)->save($item);
+                    if(false===$return){
+                        $this->ajaxReturn(errorMsg('修改失败'));
+                    }
+                }
+            }
+
+            $this->ajaxReturn(successMsg('成功'));
 
         }else{
             //所有商品分类
@@ -106,7 +102,6 @@ class GoodsController extends BaseController {
                 $this->goodsBaseInfo =$goodsBaseInfo;
                 $where1['goods_base_id'] = intval($_GET['goodsBaseId']);
                 $goodsInfo = D('Goods')->where($where1)->select();
-                echo D('Goods')->getLastSql();
                 $buyTypeArray=[];
                 foreach ($goodsInfo as $item) {
                     $buyTypeArray[]= $item['buy_type'];
@@ -115,7 +110,6 @@ class GoodsController extends BaseController {
                 $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
                 $this->noBuyTypeArray=$noBuyTypeArray;
                 $this->goodsInfo =$goodsInfo;
-
             }
 
             $this->display();
