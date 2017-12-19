@@ -249,14 +249,14 @@
                     }
                 });
                 $.post(CONTROLLER + '/setPurchaseType',{addData:addData,editData:editData},function(msg){
-//                    if(!msg.status){
-//
-//                    }else{
-//
-//                    }
-                    alert(1)
-                    var url = CONTROLLER + '/goodsManage';
-                    dialog.success('成功',url);
+                    if(!msg.status){
+
+                    }else{
+                        var url = CONTROLLER + '/goodsManage';
+                        dialog.success('成功',url);
+                    }
+
+
 
                 },'JSON');
             });
