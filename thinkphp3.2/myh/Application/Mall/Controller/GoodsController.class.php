@@ -1,5 +1,5 @@
 <?php
-namespace Purchase\Controller;
+namespace Mall\Controller;
 
 use  web\all\Lib\Date;
 use  web\all\Controller\BaseController;

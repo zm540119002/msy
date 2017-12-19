@@ -30,6 +30,7 @@
             var url = MODULE + '/Goods/goodsInfo';
             var postData = {};
             postData.goods_id = _li.data('id');
+            console.log(postData);
             $.ajax({
                 url: url,
                 data: postData,

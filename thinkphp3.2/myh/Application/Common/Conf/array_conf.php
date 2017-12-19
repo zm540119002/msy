@@ -20,9 +20,9 @@ return array(
         array('shopping_basket'   => '购物篮',),//1
         array('amount'   => '总金额',),//2
         array('add_cart'   => '加入购物车',),//3
-        array('buy_now'   => '立即结算',),//4
-        array('pay_now'   => '立即支付',),//5
-        array('submit_orders'   => '确认订单',),//6
-        array('go_to_purchase'   => '进入采购',),//7
+        array('buy_now'   => '立即购买',),//4
+        array('clearing_now'   => '立即结算',),//5
+        array('pay_now'   => '立即支付',),//6
+        array('determine_order'   => '确定订单',),//7
     ),
 );
