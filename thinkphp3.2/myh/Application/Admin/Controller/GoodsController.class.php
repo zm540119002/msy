@@ -25,44 +25,43 @@ class GoodsController extends BaseController {
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
 
-        $model = D('Goods');
+        $model = D('GoodsBase');
         $where = array(
-            'g.status' => 0,
-            'g.on_off_line' => 1,
+            'gb.status' => 0,
+            'gb.on_off_line' => 1,
         );
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where['g.category_id_1'] = I('get.category_id_1',0,'int');
+            $where['gb.category_id_1'] = I('get.category_id_1',0,'int');
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where['g.category_id_2'] = I('get.category_id_2',0,'int');
+            $where['gb.category_id_2'] = I('get.category_id_2',0,'int');
         }
         if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where['g.category_id_3'] = I('get.category_id_3',0,'int');
+            $where['gb.category_id_3'] = I('get.category_id_3',0,'int');
         }
         $keyword = I('get.keyword','','string');
         if($keyword){
             $where['_complex'] = array(
-                'g.name' => array('like', '%' . trim($keyword) . '%'),
+                'gb.name' => array('like', '%' . trim($keyword) . '%'),
             );
         }
         $field = array(
-            'g.id','g.name','g.category_id_1','g.category_id_2','g.category_id_3','g.inventory','g.sort',
-            'g.price','g.special_price','g.vip_price','g.senior_vip_price','g.gold_vip_price',
-            'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
+            'gb.id','gb.name','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.inventory','gb.sort', 'gb.price',
+            'gb.single_specification','gb.package_num','gb.package_unit','gb.purchase_unit',
             'gc1.id category_id_1','gc1.name category_name_1','gc2.id category_id_2',
             'gc2.name category_name_2','gc3.id category_id_3','gc3.name category_name_3',
         );
         $join = array(
-            ' left join goods_category gc1 on gc1.id = g.category_id_1 ',
-            ' left join goods_category gc2 on gc2.id = g.category_id_2 ',
-            ' left join goods_category gc3 on gc3.id = g.category_id_3 ',
+            ' left join goods_category gc1 on gc1.id = gb.category_id_1 ',
+            ' left join goods_category gc2 on gc2.id = gb.category_id_2 ',
+            ' left join goods_category gc3 on gc3.id = gb.category_id_3 ',
         );
 
-        $order = 'g.sort';
+        $order = 'gb.sort';
         $group = "";
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
 
-        $goodsList = page_query($model,$where,$field,$order,$join,$group,$pageSize,$alias='g');
+        $goodsList = page_query($model,$where,$field,$order,$join,$group,$pageSize,$alias='gb');
 
         $this->goodsList = $goodsList['data'];
         $this->pageList = $goodsList['pageList'];
@@ -131,7 +130,7 @@ class GoodsController extends BaseController {
 
     //商品编辑
     public function goodsEdit(){
-        $model = D('Goods');
+        $model = D('GoodsBase');
         if(IS_POST){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = $this->moveImgFromTemp(C('GOODS_MAIN_IMG'),basename($_POST['main_img']));
@@ -148,9 +147,9 @@ class GoodsController extends BaseController {
             }
             if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
                 $where = array(
-                    'g.id' => I('post.goodsId',0,'int'),
+                    'gb.id' => I('post.goodsId',0,'int'),
                 );
-                $goodsInfo = $model->selectGoods($where);
+                $goodsInfo = $model->selectGoodsBase($where);
                 $goodsInfo = $goodsInfo[0];
                 //删除商品主图
                 if($goodsInfo['main_img']){
@@ -163,10 +162,10 @@ class GoodsController extends BaseController {
                     $this->delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $_POST['update_time'] = time();
-                $res = $model->saveGoods();
+                $res = $model->saveGoodsBase();
             }else{//新增
                 $_POST['create_time'] = time();
-                $res = $model->addGoods();
+                $res = $model->addGoodsBaseBase();
             }
             $this->ajaxReturn($res);
         }else{
@@ -175,9 +174,9 @@ class GoodsController extends BaseController {
             //要修改的商品
             if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
                 $where = array(
-                    'g.id' => I('get.goodsId',0,'int'),
+                    'gb.id' => I('get.goodsId',0,'int'),
                 );
-                $goodsInfo = $model->selectGoods($where);
+                $goodsInfo = $model->selectGoodsBase($where);
                 $this->assign('goodsInfo',$goodsInfo[0]);
             }
             //单位
@@ -195,7 +194,7 @@ class GoodsController extends BaseController {
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
         $model = D('Goods');
-        $res = $model->delGoods();
+        $res = $model->delGoodsBase();
         $this->ajaxReturn($res);
     }
 
@@ -205,7 +204,7 @@ class GoodsController extends BaseController {
             if(isset($_POST['goodsId']) && $_POST['goodsId']){
                 $goodsId = I('post.goodsId',0,'int');
                 $where['id']  = $goodsId;
-                $addGoodsList = D('Goods')->selectGoods($where);
+                $addGoodsList = D('GoodsBase')->selectGoodsBase($where);
                 $this->addGoodsList = $addGoodsList;
             }
             if(isset($_POST['projectId']) && $_POST['projectId']){
@@ -213,7 +212,7 @@ class GoodsController extends BaseController {
                 $where['project_id']  = $projectId;
                 $field = array(
                     'g.id','g.no','g.name','g.status','g.category_id_1','g.category_id_2','g.category_id_3','g.param','g.on_off_line',
-                    'g.sort','g.specification','g.price','g.special_price','g.vip_price','g.senior_vip_price','g.gold_vip_price',
+                    'g.sort','g.specification','g.price',
                     'g.inventory','g.main_img','g.detail_img','g.create_time','g.intro',
                     'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
                 );

@@ -9,7 +9,7 @@ return array(
     //默认链接
     'DB_TYPE'   => 'mysql', // 数据库类型
     'DB_HOST'   => '127.0.0.1', // 服务器地址
-    'DB_NAME'   => 'msy', // 数据库名
+    'DB_NAME'   => 'myh', // 数据库名
     'DB_USER'   => 'root', // 用户名
     'DB_PWD'    => 'msy', // 密码
     'DB_PORT'   =>  3306, // 端口
