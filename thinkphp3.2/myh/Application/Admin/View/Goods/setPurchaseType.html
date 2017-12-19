@@ -109,17 +109,6 @@
 
 
         $(function(){
-            //多选项目管理
-            $('.radioItem').change(function(){
-                 var _this=$(this);
-                 var nextSiblings= _this.parent().next();
-                 if($(this).is(":checked")){
-                     nextSiblings.show();
-                     nextSiblings.find('input').val();
-                 }else{
-                     nextSiblings.hide();
-                 }
-            });
             $('.promotion_price').on('keyup',function(){
                 var _this=$(this);
                 var promotionPrice=parseFloat($(this).val());
