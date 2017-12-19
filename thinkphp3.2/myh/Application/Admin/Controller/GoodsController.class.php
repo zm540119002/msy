@@ -94,12 +94,12 @@ class GoodsController extends BaseController {
                 }
             }
             //删除
-            if(isset($_POST['deleteData'])){
-                $addData=$_POST['deleteData'];
+            if(isset($_POST['delData'])){
+                $addData=$_POST['delData'];
                 foreach ($addData as $item) {
                     $where['id']=$item;
                     $return =  D('goods')->where($where)->delete();
-                    if(false===$return){
+                    if(!$return){
                         $this->ajaxReturn(errorMsg('删除失败'));
                     }
                 }
