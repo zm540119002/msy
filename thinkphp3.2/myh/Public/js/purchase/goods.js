@@ -1,6 +1,6 @@
 //获取多分类下商品-列表形式
 function getMultiCategoryGoodsList(obj,opt_type) {
-    var url = CONTROLLER+'/goodsList';
+    var url = CONTROLLER+'/goodsBaseList';
     var postData = {};
     postData.p = obj.data('current_page');
     postData.category_id_2 = obj.data('category_id_2');
@@ -47,7 +47,7 @@ function getMultiCategoryGoodsList(obj,opt_type) {
 var currentPage = 1;//记录当前页
 var requestEnd = false;//请求结束标志
 function getSingleCategoryGoodsList(config) {
-    var url = MODULE + '/Goods/goodsList';
+    var url = MODULE + '/Goods/goodsBaseList';
     var postData = {};
     postData.p = currentPage?currentPage:1;
     postData.pageSize = config.pageSize?config.pageSize:2;

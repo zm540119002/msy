@@ -20,25 +20,147 @@
         </div>
         <div style="margin-top:15px;">
             <form id="form1">
+                <div>
+                    {$goodsBaseInfo.name}  产品的购买类型
+                    <span class="opt_type"><font color="#FF0000">*</font>零售价格：{$goodsBaseInfo.price}</span>
+                </div>
+
+                <input type="text" value="{$goodsBaseInfo.id}">
                 <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                     <tbody>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>库存：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="inventory" value="{$projectInfo.inventory}">
+                    <tr class="radioProductType">
+                        <td class="dotted_bottom_gray product_type_field" height=40 width="11%" align=right>
+                                <font color="#FF0000">*</font>商品购买类型设置：
                         </td>
-                    </tr>
-                    <tr class="checkboxProductType">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品类型：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input type="checkbox" name="discount"  class="checkboxItem" value="促销" data-buy_type="1" ><label for="">促销</label>
-                                  商品优惠价：<input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
-                            <input type="checkbox" name="discount"  class="checkboxItem" value="微团购" data-buy_type="2"><label for="">微团购</label>
-                                    微团价：<input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
-                            <input type="checkbox" name="discount"  class="checkboxItem" value="城市合伙人" data-buy_type="3"><label for="">城市合伙人</label>
-                            城市合伙人价格：<input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
-                            <input type="checkbox" name="discount"  class="checkboxItem" value="代理商" data-buy_type="4" ><label for="">代理商</label>
-                            代理商价格：<input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
+                        <td class="dotted_bottom_gray city_part_module" width="89%" align=left>
+                            <!--商品还没有设置类型-->
+                            <empty name="goodsInfo">
+
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" ><label for="">促销</label>
+                                </div>
+                                <div class="productPrice_type_item1">
+                                    <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
+                                    <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="">
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2" ><label for="">微团购</label>
+                                </div>
+                                <div class="productPrice_type_item1">
+                                    <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="">
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" ><label for="">城市合伙人</label>
+                                </div>
+                                <div class="productPrice_type_item1">
+                                    <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="">
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4" ><label for="">代理商</label>
+                                </div>
+                                <div class="productPrice_type_item1">
+                                    <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
+                                    <input style="width: 200px;" class="inputboxadmin" name="group_price" value="">
+                                </div>
+                                <else />
+                                <!--设置的类型-->
+                                      <volist name="goodsInfo" id="vo">
+                                          <if condition="$vo.buy_type eq 1">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" ><label for="">促销</label>
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
+                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
+                                                  <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$vo.sale_price}">
+                                              </div>
+                                          </if>
+
+                                          <if condition="$vo.buy_type eq 2">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2" ><label for="">微团购</label>
+
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
+                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
+                                                  <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$vo.sale_price}">
+                                              </div>
+                                          </if>
+
+                                          <if condition="$vo.buy_type eq 3">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" ><label for="">城市合伙人</label>
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
+                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
+                                                  <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$vo.sale_price}">
+                                              </div>
+                                          </if>
+
+                                          <if condition="$vo.buy_type eq 4">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4" ><label for="">代理商</label>
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
+                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
+                                                  <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$vo.sale_price}">
+                                              </div>
+                                          </if>
+                                      </volist>
+
+                                    <!--没有设置的类型-->
+                                      <volist name="noBuyTypeArray" id="vv">
+                                          <span class=""><font color="#FF0000">*</font>没有设置购买类型</span>
+                                          <if condition="$vv eq 1">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" ><label for="">促销</label>
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
+                                                  <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="">
+                                              </div>
+                                          </if>
+
+                                          <if condition="$vv eq 2">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2" ><label for="">微团购</label>
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
+                                                  <input style="width: 200px;" class="inputboxadmin" name="group_price" value="">
+                                              </div>
+                                          </if>
+
+                                          <if condition="$vv eq 3">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" ><label for="">城市合伙人</label>
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
+                                                  <input style="width: 200px;" class="inputboxadmin" name="group_price" value="">
+                                              </div>
+                                          </if>
+
+                                          <if condition="$vv eq 4">
+                                              <div>
+                                                  <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4" ><label for="">代理商</label>
+                                              </div>
+                                              <div class="productPrice_type_item1">
+                                                  <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
+                                                  <input style="width: 200px;" class="inputboxadmin" name="group_price" value="">
+                                              </div>
+                                          </if>
+                                      </volist>
+                            </empty>
+
                         </td>
                     </tr>
 
@@ -49,9 +171,11 @@
             <tr>
                 <td width="11%"></td>
                 <td height=60 width="50%" align=center>
-                    <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
-                    &nbsp;&nbsp;
-                    <input class="button_save_black" name="add0" value="返回" type="button">
+                    <div class="upload_finish_btn">
+                        <input class="button_save_black_4" value="确定" type="button">
+                        &nbsp;&nbsp;
+                        <input class="button_save_black" name="add0" value="返回" type="button">
+                    </div>
                 </td>
             </tr>
         </div>
@@ -62,9 +186,20 @@
 
 <block name="script">
 
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/categoryLinkage.js"></script>
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/goodsCategoryLinkage.js"></script>
     <script type="text/javascript">
+        $(function(){
+            //确定
+            $('.button_save_black_4').on('click',function(){
 
+                $.post(ACTION,postData,function(msg){
+
+                },'JSON');
+            });
+
+            //返回
+            $('.button_save_black').click(function(){
+                location.href = CONTROLLER + '/goodsManage';
+            });
+        });
     </script>
 </block>

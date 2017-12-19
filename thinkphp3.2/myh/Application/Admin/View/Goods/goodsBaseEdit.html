@@ -11,7 +11,7 @@
             <div class="item-title">
                 <ul class="tab-base">
                     <li><a href="{:U('Goods/goodsManage')}" ><span>管理</span></a></li>
-                    <li><a href="{:U('Goods/goodsEdit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:U('Goods/goodsBaseEdit')}" class="current"><span>编辑</span></a></li>
                     <li><a href="{:U('Goods/setPurchaseType')}"><span>设置产品购买类型</span></a></li></li>
                     <li><a href="{:U('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
                     <li><a href="{:U('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
@@ -33,7 +33,7 @@
                             <empty name="goodsInfo.main_img">
                                 <img class="img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
                                 <else />
-                                <img class="img" src="UPLOADS_IMG/{$goodsInfo.main_img}">
+                                <img class="img" src="UPLOADS_IMG/{$goodsBaseInfo.main_img}">
                             </empty>
                         </td>
                     </tr>
@@ -46,27 +46,27 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品名称：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="name" value="{$goodsInfo.name}">
-                            <input type="hidden" name="goodsId" value="{$goodsInfo.id}">
+                            <input style="width: 200px; " class="inputboxadmin" name="name" value="{$goodsBaseInfo.name}">
+                            <input type="hidden" name="goodsBaseId" value="{$goodsBaseInfo.id}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品零售价：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="price" value="{$goodsInfo.price}">
+                            <input style="width: 200px; " class="inputboxadmin" name="price" value="{$goodsBaseInfo.price}">
                         </td>
                     </tr>
 
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>单品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="single_specification" value="{$goodsInfo.single_specification}">
+                            <input style="width: 200px; " class="inputboxadmin" name="single_specification" value="{$goodsBaseInfo.single_specification}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>包装数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="package_num" value="{$goodsInfo.package_num}">
+                            <input style="width: 200px; " class="inputboxadmin" name="package_num" value="{$goodsBaseInfo.package_num}">
                         </td>
                     </tr>
                     <tr>
@@ -96,25 +96,25 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="specification" value="{$goodsInfo.specification}">
+                            <input style="width: 200px;" class="inputboxadmin" name="specification" value="{$goodsBaseInfo.specification}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品库存：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class=inputboxadmin name="inventory"  value="{$goodsInfo.inventory}" >
+                            <input style="width: 200px; " class=inputboxadmin name="inventory"  value="{$goodsBaseInfo.inventory}" >
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$goodsInfo.sort}">
+                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$goodsBaseInfo.sort}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$goodsInfo.tag}">
+                            <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$goodsBaseInfo.tag}">
                             多个标签请用逗号分隔，例如：正品保障,纳晶水光
                         </td>
                     </tr>
@@ -123,7 +123,7 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
                             <script id="intro" type="text/plain">
-                                {$goodsInfo.intro|htmlspecialchars_decode}
+                                {$goodsBaseInfo.intro|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -131,7 +131,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品参数：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="param" type="text/plain">
-                                {$goodsInfo.param|htmlspecialchars_decode}
+                                {$goodsBaseInfo.param|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -139,14 +139,14 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品详情图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                              <script id="detail" type="text/plain">
-                                {$goodsInfo.detail_img|formatImg}
+                                {$goodsBaseInfo.detail_img|formatImg}
                             </script>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>使用说明：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="usage" type="text/plain">
-                                {$goodsInfo.usage|htmlspecialchars_decode}
+                                {$goodsBaseInfo.usage|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -154,7 +154,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>注意事项：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="notices" type="text/plain">
-                                {$goodsInfo.notices|htmlspecialchars_decode}
+                                {$goodsBaseInfo.notices|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -193,21 +193,21 @@
         $(function(){
 
             //页面初始化
-            var category_id_1 = '{$goodsInfo.category_id_1}';
+            var category_id_1 = '{$goodsBaseInfo.category_id_1}';
             if(category_id_1){
                 $('[name=category_id_1]').val(category_id_1);
                 $('[name=category_id_1]').change();
             }
-            var category_id_2 = '{$goodsInfo.category_id_2}';
+            var category_id_2 = '{$goodsBaseInfo.category_id_2}';
             if(category_id_2){
                 $('[name=category_id_2]').val(category_id_2);
                 $('[name=category_id_2]').change();
             }
-            var category_id_3 = '{$goodsInfo.category_id_3}';
+            var category_id_3 = '{$goodsBaseInfo.category_id_3}';
             if(category_id_3){
                 $('[name=category_id_3]').val(category_id_3);
             }
-            var package_unit = '{$goodsInfo.package_unit}';
+            var package_unit = '{$goodsBaseInfo.package_unit}';
             if(package_unit){
                 $('[name=package_unit]').val(package_unit);
             }
@@ -232,7 +232,7 @@
                 postData.notices = ueNotices.getContent();
                 $.post(ACTION,postData,function(msg){
                     dialog.msg(msg,'',function () {
-                        location.href = CONTROLLER + '/goodsEdit';
+                        location.href = CONTROLLER + '/goodsManage.';
                     });
                 },'JSON');
             });
