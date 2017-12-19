@@ -251,7 +251,7 @@
                         delData.push(goods_Id);
                     }
                 });
-                $.post(CONTROLLER + '/setPurchaseType',{addData:addData,editData:editData},function(msg){
+                $.post(CONTROLLER + '/setPurchaseType',{addData:addData,editData:editData,delData:delData},function(msg){
                     if(!msg.status){
 
                     }else{
