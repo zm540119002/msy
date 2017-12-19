@@ -73,6 +73,7 @@ class GoodsController extends BaseController {
     public function setPurchaseType(){
 
         if(IS_POST){
+            //增加
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
                 $return =  D('goods')->addAll($addData);
@@ -80,9 +81,20 @@ class GoodsController extends BaseController {
                     $this->ajaxReturn(errorMsg('增加失败'));
                 }
             }
-
+            //修改
             if(isset($_POST['editData'])){
                 $addData=$_POST['editData'];
+                foreach ($addData as $item) {
+                    $where['id']=$item['goods_id'];
+                    $return =  D('goods')->where($where)->save($item);
+                    if(false===$return){
+                        $this->ajaxReturn(errorMsg('修改失败'));
+                    }
+                }
+            }
+            //删除
+            if(isset($_POST['deleteData'])){
+                $addData=$_POST['deleteData'];
                 foreach ($addData as $item) {
                     $where['id']=$item['goods_id'];
                     $return =  D('goods')->where($where)->save($item);
