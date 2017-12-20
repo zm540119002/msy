@@ -6,6 +6,8 @@ return array(
                 array('name'=>'分类管理','act'=>'GoodsCategory','op'=>'goodsCategoryManage'),
                 array('name' => '单位管理', 'act'=>'Unit', 'op'=>'unitManage'),
                 array('name' => '商品管理', 'act'=>'Goods', 'op'=>'goodsManage'),
+                array('name' => '商品上下架管理', 'act'=>'Goods', 'op'=>'goodsOnoffLine'),
+                array('name' => '商品公共图片管理', 'act'=>'Goods', 'op'=>'commonImageEdit'),
 
         )),
 
