@@ -393,7 +393,7 @@ font-size:0.20rem;
 .goods_star_score{display: flex;display: -webkit-flex;padding:0.15rem 0;justify-content:space-between;}
 .five_star img,.five_star1 img{width:18px;}
 .five_star .star_img,.star_img1{float:left;}
-.five_star .fraction{width:42px;display:inline-block;text-align:center;margin-top:0.04rem;}
+.five_star .fraction{width:42px;display:inline-block;text-align:center;}
 .goods_star_score .comment_num{color:#f5911e;position:relative;margin-right:0.25rem;}
 .goods_star_score .comment_num::after{
     content:'';
@@ -1812,6 +1812,9 @@ background-size:contain;
     z-index: 999;
 }
 /*美悦会详情页*/
+.goods_detail_banner img{
+    width:100%;
+}
 .myh_detail_item{
     padding:0.15rem 0;
     border-bottom:1px solid #d9d9d9;
@@ -1835,18 +1838,53 @@ background-size:contain;
 .myh_detail_intro h2{
     font-weight:normal;
     color:#0066cc;
+    border-bottom:1px solid #d9d9d9;
+    padding:0.15rem 0 0.12rem 0;
+}
+.notice_events{
+    border:1px solid #0062cc;
+    margin:0.12rem 0 0.15rem;
+    position:relative;
+}
+.notice_events dt{
+    background: #0066cc;
+    color:#fff;
+    display: inline-block;
+}
+.notice_events dd{
+    padding:0.12rem 0 0.10rem 0.30rem;
 }
 .group_purchase li{
     flex:1;
 }
 .group_purchase li img{
-    max-width:1.5rem;
+    max-width:1.2rem;
     margin:0 auto;
-    width:1.5rem;
+    width:1.2rem;
     display: block;
     border-radius:100%;
 }
 .group_purchase li span{
     display: block;
     text-align: center;
+    margin:5px 0 0;
+}
+.header_banner img{
+    width:100%;
+}
+.wt_count_down{
+    border:none;
+}
+.commodity_price .save_money,.commodity_price span{
+    color:#f5911e;
+}
+.count_down_module{
+    display: flex;
+    justify-content: space-between;
+}
+.wt_ct:last-child{
+    margin:20px 12px 0 0;
+}
+.wt_detail_intro{
+    color:#eb6100;
 }

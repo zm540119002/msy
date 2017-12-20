@@ -34,12 +34,17 @@ class GoodsController extends BaseController {
         $modelGoods = D('Goods');
         $where = array(
             'g.status' => 0,
-            'g.on_off_line' => 1,
+            'gb.on_off_line' => 1,
         );
-        $field = array();
-        $join = array();
+        $field = array(
+            'g.id','g.buy_type','g.sale_price',
+            'gb.price','gb.main_img',
+        );
+        $join = array(
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+        );
         $group = "";
-        $order = 'g.sort';
+        $order = 'gb.sort';
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
         $this->currentPage = (isset($_GET['p']) && intval($_GET['p'])) ? I('get.p',0,'int') : 1;
         $goodsList = page_query($modelGoods,$where,$field,$order,$join,$group,$pageSize,$alias='g');
@@ -56,17 +61,20 @@ class GoodsController extends BaseController {
     public function goodsDetail(){
         if(IS_POST){
         }else{
-            //结算时间
-            $this->settlementTime = Date::getSettlementTime();
             $modelGoods = D('Goods');
             $where = array(
-                'g.status' => 0,
-                'g.on_off_line' => 1,
+                'gb.on_off_line' => 1,
             );
             if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
                 $where['g.id'] = I('get.goodsId',0,'int');
             }
-            $goodsInfo = $modelGoods->selectGoods($where);
+            $field = array(
+                'gb.price','gb.main_img',
+            );
+            $join = array(
+                ' left join goods_base gb on g.goods_base_id = gb.id ',
+            );
+            $goodsInfo = $modelGoods->selectGoods($where,$field,$join);
             $this->goodsInfo = $goodsInfo[0];
             $this ->display();
         }

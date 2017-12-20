@@ -1,133 +1,127 @@
 <extend name="Public:base" />
-
 <block name="css-customize">
     <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
 </block>
 <block name="content">
-    <article class="msh_product_picture">
+    <article class="f24">
         <section class="goods_picture goods_detail_banner" >
             <empty name="goodsInfo.main_img">
                 <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
                 <else/>
                 <img src="UPLOADS_IMG/{$goodsInfo.main_img}" alt="">
             </empty>
-
         </section>
-        <section class="hot_detail f24">
-            <div class="hot_detail_info">
-                <div class="hot_title">
-                    <p>{$goodsInfo.name}</p>
+        <section class="bottomLine">
+            <div class="myh_detail_item">
+                <p>全息原液</p>
+                <p>15mlX6瓶/盒</p>
+            </div>
+            <div class="myh_detail_item myh_product_intro">
+                XXXXXXXXXXXXXX
+            </div>
+            <div class="myh_detail_item myh_detail_price">
+                <div>优惠价:
+                    <price>￥333.00</price>
                 </div>
-                <div class="hot_tags_type">
-                    <volist name="goodsInfo.tag" id="vo">
-                        <span>{$vo}</span>
-                    </volist>
-                    <a href="javascript:void(0);" class="collection_product">收藏商品</a>
+                <div>零售价:
+                    <del>￥333.00</del>
+                </div>
+                <div>节省:
+                    <price>￥333.00</price>
                 </div>
             </div>
-            <div class="hot_detail_info">
-                <div class="packing_specification">
-                    <span>商品规格：</span>
-                    <span>{$goodsInfo.specification|htmlspecialchars_decode}</span>
+            <div class="myh_detail_item myh_detail_price">
+                <span>购买数量</span>
+                <div class="quantity_wrapper business_count">
+                    <a href="javascript:void(0);" class="greduce">-</a>
+                    <input type="text" value="0" class="f24 gshopping_count">
+                    <a href="javascript:void(0);" class="gplus">+</a>
                 </div>
-                <div class="purchasing_price">
-                    <span>价格：</span>
-                        <span>{$goodsInfo.price}</span>
-                </div>
-            </div>
-            <div class="purchasing_intro_text">{$goodsInfo.intro|htmlspecialchars_decode}</div>
-        </section>
-        <section class="hot_detail hot_countdown_detail f24">
-            <div class="hot_count_down">
-                <i></i>
-                <div>
-                    <p>本周联合采购结算日倒计时</p>
-                    <div class="countDownBox" class="">
-                        <span class="day"></span>天
-                        <span class="hour"></span>小时
-                        <span class="minute"></span>分
-                        <span class="second"></span>秒
-                    </div>
-                </div>
-            </div>
-            <div class="hot_detail_info">
-                <p>提示：采购商可随时参与每周联合采购活动，联合采购结算日为每周四晚上12：00，平台核准订单后进行备货发货。</p>
             </div>
             <div class="goods_star_score">
                 <div class="five_star">
                     <div class="star_img">
-                        <img src="PUBLIC_IMG/home/star.png">
-                        <img src="PUBLIC_IMG/home/star.png">
-                        <img src="PUBLIC_IMG/home/star.png">
-                        <img src="PUBLIC_IMG/home/star.png">
-                        <img src="PUBLIC_IMG/home/star.png">
+                        <img src="PUBLIC_IMG/common/starred.png" id="0">
+                        <img src="PUBLIC_IMG/common/starred.png" id="1">
+                        <img src="PUBLIC_IMG/common/starred.png" id="2">
+                        <img src="PUBLIC_IMG/common/star.png" id="3">
+                        <img src="PUBLIC_IMG/common/star.png" id="4">
                     </div>
-                    <span class="fraction" data-score="{$goodsInfo.evaluation_good_stars}"></span>
+                    <span class="fraction" data-score="3.9">3.9分</span>
                 </div>
-                <a href="javascript:void(0);" class="comment_num">2人评论</a>
+                <a href="javascript:void(0);" class="comment_num">145人评论</a>
             </div>
         </section>
-        <section class="hot_detail f24">
+        <section class="bottomLine myh_detail_intro">
             <h2>商品参数</h2>
-            <div class="commodity_parameter">
-                {$goodsInfo.param|htmlspecialchars_decode}
-            </div>
+            <div></div>
         </section>
-        <section class="hot_detail f24">
-            <h2>商品详情</h2>
-            <ul>
+        <section class="bottomLine">
+            <div>
+                <img src="" alt="">
+            </div>
+            <ul class="group_purchase">
                 <li>
-                    <volist name="goodsInfo.detail_img" id="vo">
-                        <p>
-                            <notempty name="vo">
-                                <img src="UPLOADS_IMG/{$vo}" alt="">
-                            </notempty>
-                        </p>
-                </volist>
+                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                    <span>团长</span>
+                </li>
+                <li>
+                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                    <span>成员</span>
+                </li>
+                <li>
+                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                    <span>成员</span>
                 </li>
             </ul>
         </section>
+        <section class="myh_detail_intro detail_common_module">
+            <h2>商品详情</h2>
+            <div>
+                <p></p>
+            </div>
+            <div class="detail_intro_common">
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_01.jpg" alt="">
+                </p>
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_02.jpg" alt="">
+                </p>
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_03.jpg" alt="">
+                </p>
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_04.jpg" alt="">
+                </p>
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_05.jpg" alt="">
+                </p>
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_06.jpg" alt="">
+                </p>
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_07.jpg" alt="">
+                </p>
+            </div>
+            <div>
+                <h2>使用方法</h2>
+                <p>每次结肤后挤压适量原液，均匀涂抹于护理部位，轻拍至吸收即可，建议每天使用2-3次</p>
+                <dl class="notice_events">
+                    <dt>注意事项</dt>
+                    <dd>1、因个体差异，人体皮肤对不同成分适应性不相同建议初次使用本产品前，请先在耳后试用。如有不适应情况请立即停止使用。</dd>
+                    <dd>2、产品富含活性成分，请避免暴晒和高温</dd>
+                </dl>
+            </div>
+        </section>
     </article>
-
-    <footer class="shopping_nav f24">
-        <a href="javascript:void(0);"><i class="smile_face"></i>客服</a>
-        <a href="{:U('Cart/myCart')}">
-            <i class="commodity_quantity cart_d_num">{$goodsCount}</i>
-        </a>
-        <a class="add_cart" href="javascript:void(0);">加入购物车</a>
-        <input class="goods_id" name="" type="hidden" value="{$goodsInfo.id}">
-        <a href="{:U('Order/addOrder',array('goodsId'=>$goodsInfo['id']))}" class="buyNow">立即购买</a>
-    </footer>
 </block>
+<block name="footer"></block>
 <block name="script">
     <script type="text/javascript">
         $(function(){
             //星星评分等级
-            $('.five_star').setStar({
-                getFractionValue:3,
-                star:'PUBLIC_IMG/home/star.png',
-                starRed:'PUBLIC_IMG/home/starred.png'
-            });
-            //console.log($('.five_star').getStar());
-            countDown('{$settlementTime}',$(".countDownBox"));
-
-           //加入购物车
-            $('.add_cart').click(function () {
-                var goodsId = $('.goods_id').val();
-                $.post(MODULE + '/Cart/addCart', {id: goodsId}, function (msg) {
-                    if(msg.status == 0){
-                        var url = APP+'/UserCenter/User/login';
-                        dialog.confirm(msg.info,url);
-
-                    }
-                    if (msg.status == -1) {
-                        dialog.error(msg.info);
-                    }
-                    if (msg.status == 1) {
-                        $('.commodity_quantity').text(msg.info.count);
-                    }
-                }, 'json')
-            });
+            var getFractionValue=3;
+            $('.five_star').setStar(getFractionValue);
         });
     </script>
 </block>
