@@ -110,16 +110,10 @@ class GoodsBaseModel extends Model {
             'gb.status' => 0,
         );
         $_field = array(
-<<<<<<< HEAD
             'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line','gb.param','gb.usage',
             'gb.sort','gb.specification','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro','gb.notices','gb.tag'
-        ,'gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification','gb.thumb_img'
+        ,   'gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification','gb.thumb_img'
 
-=======
-            'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line','gb.param',
-            'gb.usage','gb.sort','gb.specification','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro',
-            'gb.notices','gb.tag','gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification',
->>>>>>> 463ecf18ef58740f1fd18dc8a589b67ce152ed0f
         );
         $_join = array(
         );
