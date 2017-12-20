@@ -2,10 +2,13 @@
 namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
+use  web\all\Lib\AuthUser;
 
 class IndexController extends BaseController{
     //商城-首页
     public function index(){
+        //购物车配置开启的项
+        $this->unlockingFooterCartSingle = unlockingFooterCartConfig(array(2,3,4));
         $this->display();
     }
 }

@@ -29,7 +29,7 @@
             var _li = $(this).parents('li');
             var url = MODULE + '/Goods/goodsInfo';
             var postData = {};
-            postData.goods_id = _li.data('id');
+            postData.goodsId = _li.data('id');
             $.ajax({
                 url: url,
                 data: postData,
