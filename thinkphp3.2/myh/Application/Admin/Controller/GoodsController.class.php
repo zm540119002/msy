@@ -254,7 +254,7 @@ class GoodsController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $model = D('Goods');
+        $model = D('GoodsBase');
         $res = $model->delGoodsBase();
         $this->ajaxReturn($res);
     }

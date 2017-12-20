@@ -96,7 +96,7 @@
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
                 postData.goodsBaseId = _thisTr.data('id');
-                var url =  CONTROLLER + '/goodsBaseId';
+                var url =  CONTROLLER + '/goodsBaseDel';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function(){
                         _thisTr.remove();
