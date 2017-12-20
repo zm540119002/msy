@@ -393,7 +393,7 @@ font-size:0.20rem;
 .goods_star_score{display: flex;display: -webkit-flex;padding:0.15rem 0;justify-content:space-between;}
 .five_star img,.five_star1 img{width:18px;}
 .five_star .star_img,.star_img1{float:left;}
-.five_star .fraction{width:42px;display:inline-block;text-align:center;margin-top:0.04rem;}
+.five_star .fraction{width:42px;display:inline-block;text-align:center;}
 .goods_star_score .comment_num{color:#f5911e;position:relative;margin-right:0.25rem;}
 .goods_star_score .comment_num::after{
     content:'';
@@ -1812,6 +1812,9 @@ background-size:contain;
     z-index: 999;
 }
 /*美悦会详情页*/
+.goods_detail_banner img{
+    width:100%;
+}
 .myh_detail_item{
     padding:0.15rem 0;
     border-bottom:1px solid #d9d9d9;
