@@ -20,7 +20,7 @@ class GoodsController extends BaseController {
     }
 
     //商品列表
-    public function goodsList(){
+    public function goodsBaseList(){
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
@@ -72,21 +72,65 @@ class GoodsController extends BaseController {
     //设置
     public function setPurchaseType(){
 
+
         if(IS_POST){
+            //增加
+            if(isset($_POST['addData'])){
+                $addData=$_POST['addData'];
+                $return =  D('goods')->addAll($addData);
+                if(!$return){
+                    $this->ajaxReturn(errorMsg('增加失败'));
+                }
+            }
+            //修改
+            if(isset($_POST['editData'])){
+                $addData=$_POST['editData'];
+                foreach ($addData as $item) {
+                    $where['id']=$item['goods_id'];
+                    $return =  D('goods')->where($where)->save($item);
+                    if(false===$return){
+                        $this->ajaxReturn(errorMsg('修改失败'));
+                    }
+                }
+            }
+            //删除
+            if(isset($_POST['delData'])){
+                $addData=$_POST['delData'];
+                foreach ($addData as $item) {
+                    $where['id']=$item;
+                    $return =  D('goods')->where($where)->delete();
+                    if(!$return){
+                        $this->ajaxReturn(errorMsg('删除失败'));
+                    }
+                }
+            }
+
+            $this->ajaxReturn(successMsg('成功'));
 
         }else{
             //所有商品分类
-            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
-                $where['id'] = intval($_GET['goodsId']);
+            if(isset($_GET['goodsBaseId']) && intval($_GET['goodsBaseId'])){
+                $where['id'] = intval($_GET['goodsBaseId']);
                 $goodsBaseInfo = D('GoodsBase')->where($where)->field('id,name,price')->find();
                 $this->goodsBaseInfo =$goodsBaseInfo;
+                $where1['goods_base_id'] = intval($_GET['goodsBaseId']);
+                $goodsInfo = D('Goods')->where($where1)->select();
+                $buyTypeArray=[];
+                foreach ($goodsInfo as $item) {
+                    $buyTypeArray[]= $item['buy_type'];
+                }
+                $buyTypeArrayAll=array(1,2,3,4);
+                $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
+                $this->noBuyTypeArray=$noBuyTypeArray;
+                $this->goodsInfo =$goodsInfo;
             }
+
             $this->display();
         }
     }
 
     //上下架
-    public function goodsOnoffLine(){
+    public function goodsBaseOnoffLine(){
         if(IS_POST){
         }else{
             //所有商品分类
@@ -96,7 +140,7 @@ class GoodsController extends BaseController {
     }
 
     //上下架-商品列表
-    public function goodsOnoffLineList(){
+    public function goodsBaseOnoffLineList(){
         $model = D('Goods');
         if(IS_POST){
         }else{
@@ -146,7 +190,7 @@ class GoodsController extends BaseController {
     }
 
     //商品编辑
-    public function goodsEdit(){
+    public function goodsBaseEdit(){
         $model = D('GoodsBase');
         if(IS_POST){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
@@ -182,19 +226,19 @@ class GoodsController extends BaseController {
                 $res = $model->saveGoodsBase();
             }else{//新增
                 $_POST['create_time'] = time();
-                $res = $model->addGoodsBaseBase();
+                $res = $model->addGoodsBase();
             }
             $this->ajaxReturn($res);
         }else{
             //所有商品分类
             $this->allCategoryList = D('GoodsCategory')->selectGoodsCategory();
             //要修改的商品
-            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
+            if(isset($_GET['goodsBaseId']) && intval($_GET['goodsBaseId'])){
                 $where = array(
-                    'gb.id' => I('get.goodsId',0,'int'),
+                    'gb.id' => I('get.goodsBaseId',0,'int'),
                 );
-                $goodsInfo = $model->selectGoodsBase($where);
-                $this->assign('goodsInfo',$goodsInfo[0]);
+                $goodsBaseInfo = $model->selectGoodsBase($where);
+                $this->assign('goodsBaseInfo',$goodsBaseInfo[0]);
             }
             //单位
             $modelUnit = D('Unit');
@@ -206,7 +250,7 @@ class GoodsController extends BaseController {
     }
 
     //商品删除
-    public function goodsDel(){
+    public function goodsBaseDel(){
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
@@ -215,33 +259,7 @@ class GoodsController extends BaseController {
         $this->ajaxReturn($res);
     }
 
-   //项目产品
-    public function goodsProjectList(){
-        if(IS_POST){
-            if(isset($_POST['goodsId']) && $_POST['goodsId']){
-                $goodsId = I('post.goodsId',0,'int');
-                $where['id']  = $goodsId;
-                $addGoodsList = D('GoodsBase')->selectGoodsBase($where);
-                $this->addGoodsList = $addGoodsList;
-            }
-            if(isset($_POST['projectId']) && $_POST['projectId']){
-                $projectId = I('post.projectId',0,'int');
-                $where['project_id']  = $projectId;
-                $field = array(
-                    'g.id','g.no','g.name','g.status','g.category_id_1','g.category_id_2','g.category_id_3','g.param','g.on_off_line',
-                    'g.sort','g.specification','g.price',
-                    'g.inventory','g.main_img','g.detail_img','g.create_time','g.intro',
-                    'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
-                );
-                $join = array(
-                    ' left join goods g on g.id = pg.goods_id ',
-                );
-                $addGoodsList = D('Project')->selectProjectGoods($where,$field,$join);
-                $this->addGoodsList = $addGoodsList;
-            }
-            $this->display();
-        }
-    }
+
 
     //公共图片编辑
     public function commonImageEdit(){
