@@ -11,7 +11,7 @@
                 <ul class="tab-base">
                     <li><a href="{:U('Goods/goodsManage')}" class="current"><span>管理</span></a></li>
                     <li><a href="{:U('Goods/goodsBaseEdit')}" ><span>编辑</span></a></li>
-                    <li><a href="{:U('Goods/setPurchaseType')}" ><span>设置产品购买类型</span></a></li></li>
+                    <li><a href="javascript:void(0);" class="current" ><span>设置产品购买类型</span></a></li></li>
                     <li><a href="{:U('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
                     <li><a href="{:U('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
                 </ul>
@@ -95,10 +95,10 @@
             });
 
             //删除
-            $('body').on('click','.delGoodsBase',function(){
+            $('body').on('click','.delGoods',function(){
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
-                postData.goodsId = _thisTr.data('id');
+                postData.goodsBaseId = _thisTr.data('id');
                 var url =  CONTROLLER + '/goodsBaseId';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function(){

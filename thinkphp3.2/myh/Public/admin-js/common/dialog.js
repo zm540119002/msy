@@ -13,8 +13,8 @@ var dialog = {
     success : function(message,url) {
         layer.open({
             content : message?message:'成功',
-            time : 5,
-            skin: 'msg',
+            time : 2500,
+            // skin: 'msg',
             end : function(){
                 if(url){
                     location.href=url;
