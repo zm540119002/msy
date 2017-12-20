@@ -206,7 +206,7 @@ class GoodsController extends BaseController {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
-            if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
+            if(isset($_POST['goodsBaseId']) && intval($_POST['goodsBaseId'])){//修改
                 $where = array(
                     'gb.id' => I('post.goodsId',0,'int'),
                 );
@@ -254,7 +254,7 @@ class GoodsController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $model = D('Goods');
+        $model = D('GoodsBase');
         $res = $model->delGoodsBase();
         $this->ajaxReturn($res);
     }

@@ -47,9 +47,9 @@ class GoodsBaseModel extends Model {
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsId',0,'int');
+        $id = I('post.goodsBaseId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsId');
+            return errorMsg('确少参数goodsBaseId');
         }
 
         $res = $this->create();
@@ -82,9 +82,9 @@ class GoodsBaseModel extends Model {
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsId',0,'int');
+        $id = I('post.goodsBaseId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsId');
+            return errorMsg('确少参数goodsBaseId');
         }
 
         $_where = array(
@@ -110,10 +110,9 @@ class GoodsBaseModel extends Model {
             'gb.status' => 0,
         );
         $_field = array(
-            'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line','gb.param','gb.usage',
-            'gb.sort','gb.specification','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro','gb.notices','gb.tag'
-        ,'gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification'
-
+            'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line','gb.param',
+            'gb.usage','gb.sort','gb.specification','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro',
+            'gb.notices','gb.tag','gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification',
         );
         $_join = array(
         );
