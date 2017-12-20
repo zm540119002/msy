@@ -1853,3 +1853,22 @@ background-size:contain;
     display: block;
     text-align: center;
 }
+.header_banner img{
+    width:100%;
+}
+.wt_count_down{
+    border:none;
+}
+.commodity_price .save_money,.commodity_price span{
+    color:#f5911e;
+}
+.count_down_module{
+    display: flex;
+    justify-content: space-between;
+}
+.wt_ct:last-child{
+    margin:20px 12px 0 0;
+}
+.wt_detail_intro{
+    color:#eb6100;
+}
