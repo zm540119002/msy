@@ -21,14 +21,6 @@ $(function () {
         calculateTotalPrice();
     });
 
-    //进入采购
-    $('body').on('click','.go_to_purchase',function(){
-        // var url = MODULE + '/Cart/jointPurchase';
-        // url += '/category_id_1/'+category_id_1;
-        // url += '/category_id_2/' + $('.purchase_package_nav').find('li.current').data('category_id_2');
-        // location.href = url;
-    });
-
     //立即结算
     $('body').on('click','.buy_now',function(){
         var postData = assemblyData();
