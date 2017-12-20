@@ -3,11 +3,22 @@
     <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/common/mall.css">
 </block>
 <block name="content">
+<<<<<<< HEAD
     <article class="f24">
         <section class="">
             <div>
                 <img src="PUBLIC_IMG/common/" alt="">
             </div>
+=======
+    <article class="msh_product_picture">
+        <section class="goods_picture goods_detail_banner" >
+            <empty name="goodsInfo.main_img">
+                <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
+                <else/>
+                <img src="UPLOADS_IMG/{$goodsInfo.main_img}" alt="">
+            </empty>
+
+>>>>>>> 055afb37c56c5ba49d06fb34ccb42b47613b8afa
         </section>
         <section class="bottomLine">
             <div class="myh_detail_item">

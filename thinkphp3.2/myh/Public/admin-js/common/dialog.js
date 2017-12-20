@@ -13,7 +13,7 @@ var dialog = {
     success : function(message,url) {
         layer.open({
             content : message?message:'成功',
-            time : 2500,
+            time : 1000,
             // skin: 'msg',
             end : function(){
                 if(url){
