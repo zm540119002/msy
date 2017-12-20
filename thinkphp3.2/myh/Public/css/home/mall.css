@@ -1811,3 +1811,42 @@ background-size:contain;
     top: 14px;
     z-index: 999;
 }
+/*美悦会详情页*/
+.myh_detail_item{
+    padding:0.15rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.myh_detail_price{
+    display: flex;
+    display:-webkit-flex;
+}
+.myh_detail_price div,.myh_detail_price span{
+    flex:1;
+}
+.myh_product_intro{
+    color:#0066cc;
+}
+.group_purchase{
+    display: flex;
+    display:-webkit-flex;
+    background: #e39433;
+    padding:0.25rem 0 0.25rem 0.15rem;
+}
+.myh_detail_intro h2{
+    font-weight:normal;
+    color:#0066cc;
+}
+.group_purchase li{
+    flex:1;
+}
+.group_purchase li img{
+    max-width:1.5rem;
+    margin:0 auto;
+    width:1.5rem;
+    display: block;
+    border-radius:100%;
+}
+.group_purchase li span{
+    display: block;
+    text-align: center;
+}
