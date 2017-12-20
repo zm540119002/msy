@@ -47,9 +47,9 @@ class GoodsBaseModel extends Model {
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsId',0,'int');
+        $id = I('post.goodsBaseId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsId');
+            return errorMsg('确少参数goodsBaseId');
         }
 
         $res = $this->create();
@@ -82,9 +82,9 @@ class GoodsBaseModel extends Model {
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsId',0,'int');
+        $id = I('post.goodsBaseId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsId');
+            return errorMsg('确少参数goodsBaseId');
         }
 
         $_where = array(

@@ -194,7 +194,6 @@ class GoodsController extends BaseController {
         $model = D('GoodsBase');
         if(IS_POST){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                echo 111;
                 $_POST['main_img'] = $this->moveImgFromTemp(C('GOODS_MAIN_IMG'),basename($_POST['main_img']));
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
@@ -207,7 +206,7 @@ class GoodsController extends BaseController {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
-            if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
+            if(isset($_POST['goodsBaseId']) && intval($_POST['goodsBaseId'])){//修改
                 $where = array(
                     'gb.id' => I('post.goodsId',0,'int'),
                 );
