@@ -39,129 +39,45 @@
                         <td class="dotted_bottom_gray city_part_module set_product_type" width="89%" align=left>
                             <!--商品还没有设置类型-->
                             <empty name="goodsInfo">
-
-                                <div>
-                                    <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" ><label for="">促销</label>
-                                </div>
-                                <div class="productPrice_type_item">
-                                    <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
-                                    <input style="width: 200px; " class="inputboxadmin promotion_price" name="discount_price" value="">
-                                </div>
-
-                                <div>
-                                    <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2" ><label for="">微团购</label>
-                                </div>
-                                <div class="productPrice_type_item">
-                                    <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
-                                    <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="">
-                                </div>
-
-                                <div>
-                                    <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" ><label for="">城市合伙人</label>
-                                </div>
-                                <div class="productPrice_type_item">
-                                    <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
-                                    <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="">
-                                </div>
-
-                                <div>
-                                    <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4" ><label for="">代理商</label>
-                                </div>
-                                <div class="productPrice_type_item">
-                                    <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
-                                    <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="">
-                                </div>
+                                <foreach name="Think.config.BUY_TYPE" item="vo"  key="k">
+                                    <div>
+                                        <input type="checkbox" name="discount"  class="radioItem" value="{$vo.name}" data-buy_type="{$vo.buy_type}" ><label for="">{$vo.name}</label>
+                                    </div>
+                                    <div class="productPrice_type_item">
+                                        <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
+                                        <input style="width: 200px; " class="inputboxadmin promotion_price" name="discount_price" value="">
+                                    </div>
+                                </foreach>
                                 <else />
                                 <!--设置的类型-->
-                                      <volist name="goodsInfo" id="vo">
-                                          <if condition="$vo.buy_type eq 1">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" checked=""><label for="">促销</label>
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
-                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
-                                                  <input style="width: 200px; " class="inputboxadmin promotion_price" name="discount_price" value="{$vo.sale_price}">
-                                              </div>
-                                          </if>
-
-                                          <if condition="$vo.buy_type eq 2">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2" checked=""><label for="">微团购</label>
-
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
-                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
-                                                  <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="{$vo.sale_price}">
-                                              </div>
-                                          </if>
-
-                                          <if condition="$vo.buy_type eq 3">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" checked=""><label for="">城市合伙人</label>
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
-                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
-                                                  <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="{$vo.sale_price}">
-                                              </div>
-                                          </if>
-
-                                          <if condition="$vo.buy_type eq 4">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4" checked="" ><label for="">代理商</label>
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
-                                                  <input type="hidden" name="goods_id" value="{$vo.id}">
-                                                  <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="{$vo.sale_price}">
-                                              </div>
-                                          </if>
-                                      </volist>
-
+                                    <foreach name="goodsInfo" item="vo">
+                                        <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
+                                            <if condition="$vo.buy_type eq ($vv['buy_type'])">
+                                                <div>
+                                                    <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" checked=""><label for="">{$vv['name']}</label>
+                                                </div>
+                                                <div class="productPrice_type_item">
+                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
+                                                    <input type="hidden" name="goods_id" value="{$vo.id}">
+                                                    <input style="width: 200px; " class="inputboxadmin promotion_price" name="discount_price" value="{$vo.sale_price}">
+                                                </div>
+                                            </if>
+                                        </foreach>
+                                    </foreach>
                                     <!--没有设置的类型-->
-                                      <volist name="noBuyTypeArray" id="vv">
+                                      <volist name="noBuyTypeArray" id="vo">
                                           <span class=""><font color="#FF0000">*</font>没有设置购买类型</span>
-                                          <if condition="$vv eq 1">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="促销" data-buy_type="1" ><label for="">促销</label>
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>商品优惠价：</span>
-                                                  <input style="width: 200px; " class="inputboxadmin promotion_price" name="discount_price" value="">
-                                              </div>
-                                          </if>
-
-                                          <if condition="$vv eq 2">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="微团购" data-buy_type="2" ><label for="">微团购</label>
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>微团价：</span>
-                                                  <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="">
-                                              </div>
-                                          </if>
-
-                                          <if condition="$vv eq 3">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="城市合伙人" data-buy_type="3" ><label for="">城市合伙人</label>
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>城市合伙人价格:</span>
-                                                  <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="">
-                                              </div>
-                                          </if>
-
-                                          <if condition="$vv eq 4">
-                                              <div>
-                                                  <input type="checkbox" name="discount"  class="radioItem" value="代理商" data-buy_type="4" ><label for="">代理商</label>
-                                              </div>
-                                              <div class="productPrice_type_item">
-                                                  <span class="opt_type"><font color="#FF0000">*</font>代理商价格：</span>
-                                                  <input style="width: 200px;" class="inputboxadmin promotion_price" name="group_price" value="">
-                                              </div>
-                                          </if>
+                                          <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
+                                              <if condition="$vo eq ($vv['buy_type'])">
+                                                  <div>
+                                                      <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" ><label for="">{$vv['name']}</label>
+                                                  </div>
+                                                  <div class="productPrice_type_item">
+                                                      <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
+                                                      <input style="width: 200px; " class="inputboxadmin promotion_price" name="discount_price" value="">
+                                                  </div>
+                                              </if>
+                                          </foreach>
                                       </volist>
                             </empty>
 
