@@ -76,12 +76,12 @@ class GoodsController extends BaseController {
         if(IS_POST){
             //增加
             if(isset($_POST['addData'])){
-                $addData=$_POST['editData'];
+                $addData=$_POST['addData'];
                 foreach ($addData as $item) {
                     $where['id']=$item['goods_id'];
-                    $return =  D('goods')->where($where)->save($item);
-                    if(false===$return){
-                        $this->ajaxReturn(errorMsg('修改失败'));
+                    $return =  D('goods')->add($item);
+                    if(!$return){
+                        $this->ajaxReturn(errorMsg('增加失败'));
                     }
                 }
             }
