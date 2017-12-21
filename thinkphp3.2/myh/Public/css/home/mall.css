@@ -1854,7 +1854,7 @@ background-size:contain;
     display: inline-block;
 }
 .notice_events dd{
-    padding:0.12rem 0 0.10rem 0.30rem;
+    padding:0.12rem 0.12rem 0.10rem 0.30rem;
 }
 .group_purchase li{
     flex:1;
