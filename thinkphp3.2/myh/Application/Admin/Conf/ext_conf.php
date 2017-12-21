@@ -14,5 +14,4 @@ return array(
 
     'ARR' => @include_once(APP_PATH . 'Admin/Conf/array_conf.php'),
     'MENU' => @include_once(APP_PATH . 'Admin/Conf/menu_conf.php'),
-    'BUY_TYPE' => @include_once(APP_PATH . 'Common/Conf/buy_type_conf.php'),
 );

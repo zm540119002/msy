@@ -70,13 +70,18 @@ class GoodsController extends BaseController {
             }
             $field = array(
                 'g.id','g.buy_type','g.sale_price',
-                'gb.no','gb.name','gb.price','gb.main_img','gb.single_specification','gb.param','gb.intro','gb.usage','gb.notices',
+                'gb.no','gb.name','gb.price','gb.main_img','gb.single_specification','gb.param','gb.intro',
+                'gb.usage','gb.notices','gb.detail_img',
             );
             $join = array(
                 ' left join goods_base gb on g.goods_base_id = gb.id ',
             );
             $goodsInfo = $modelGoods->selectGoods($where,$field,$join);
             $this->goodsInfo = $goodsInfo[0];
+            //公共图片
+            $modelCommonImg = D('CommonImages');
+            $commonImg = $modelCommonImg->selectCommonImages();
+            $this->commonImg = $commonImg[0]['common_img'];
             $this ->display();
         }
     }

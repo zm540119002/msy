@@ -74,7 +74,6 @@ class GoodsController extends BaseController {
 
 
         if(IS_POST){
-            print_r(I());exit;
             //增加
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
@@ -130,66 +129,7 @@ class GoodsController extends BaseController {
         }
     }
 
-    //上下架
-    public function goodsBaseOnoffLine(){
-        if(IS_POST){
-        }else{
-            //所有商品分类
-            $this->allCategoryList = D('GoodsCategory')->selectGoodsCategory();
-            $this->display();
-        }
-    }
-
-    //上下架-商品列表
-    public function goodsBaseOnoffLineList(){
-        $model = D('Goods');
-        if(IS_POST){
-        }else{
-            $where = array(
-                'g.status' => 0,
-            );
-            if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-                $where['g.category_id_1'] = I('get.category_id_1',0,'int');
-            }
-            if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-                $where['g.category_id_2'] = I('get.category_id_2',0,'int');
-            }
-            if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-                $where['g.category_id_3'] = I('get.category_id_3',0,'int');
-            }
-            $keyword = I('get.keyword','','string');
-            if($keyword){
-                $where['_complex'] = array(
-                    'g.name' => array('like', '%' . trim($keyword) . '%'),
-                );
-            }
-            $field = array(
-                'g.id','g.name','g.category_id_1','g.category_id_2','g.category_id_3',
-                'g.on_off_line','g.inventory','g.sort',
-                'g.single_specification','g.package_num','g.package_unit','g.purchase_unit',
-                'gc1.id category_id_1','gc1.name category_name_1','gc2.id category_id_2',
-                'gc2.name category_name_2','gc3.id category_id_3','gc3.name category_name_3',
-            );
-            $join = array(
-                ' left join goods_category gc1 on gc1.id = g.category_id_1 ',
-                ' left join goods_category gc2 on gc2.id = g.category_id_2 ',
-                ' left join goods_category gc3 on gc3.id = g.category_id_3 ',
-            );
-
-            $order = 'g.sort';
-            $group = "";
-            $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
-            $alias='g';
-
-            $goodsList = page_query($model,$where,$field,$order,$join,$group,$pageSize,$alias);
-
-            $this->goodsList = $goodsList['data'];
-            $this->pageList = $goodsList['pageList'];
-
-            $this->display();
-        }
-    }
-
+    
     //商品编辑
     public function goodsBaseEdit(){
         $model = D('GoodsBase');
