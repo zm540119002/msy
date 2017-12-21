@@ -119,7 +119,7 @@ class GoodsController extends BaseController {
                 foreach ($goodsInfo as $item) {
                     $buyTypeArray[]= $item['buy_type'];
                 }
-                $buyTypeArrayAll=array(1,2,3,4);
+                $buyTypeArrayAll=array(1,2,3,4,5);
                 $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
                 $this->noBuyTypeArray=$noBuyTypeArray;
                 $this->goodsInfo =$goodsInfo;
