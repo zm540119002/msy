@@ -244,12 +244,14 @@
                 postData.param = ueParam.getContent();
                 postData.usage = ueUsage.getContent();
                 postData.notices = ueNotices.getContent();
+                console.log(postData);return;
                 $.post(ACTION,postData,function(msg){
                     dialog.msg(msg,'',function () {
                         location.href = CONTROLLER + '/goodsManage';
                     });
                 },'JSON');
             });
+
 
             //返回
             $('.button_save_black').click(function(){
