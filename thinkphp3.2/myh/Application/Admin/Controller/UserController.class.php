@@ -145,7 +145,7 @@ class UserController extends BaseController {
     }
 
 
-    public function verify_c(){
+    public function verify(){
         $Verify = new \Think\Verify();
         $Verify->fontSize = 18;
         $Verify->length   = 4;

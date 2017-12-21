@@ -30,7 +30,7 @@
                 <div class="row cl">
                     <div class="formControls col-xs-8 col-xs-offset-3">
                         <input class="input-text size-L" type="text" placeholder="验证码"  name="code" value="" style="width:150px;">
-                        <img src="{:U('Admin/User/verify_c')}" alt="验证码" onclick="reloadcode(this)" title="点击刷新"/>
+                        <img src="{:U('Admin/User/verify')}" alt="验证码" onclick="reloadcode(this)" title="点击刷新"/>
                     </div>
 
                 </div>
@@ -59,7 +59,7 @@
     <script type="text/javascript">
         // 刷新验证码
         function reloadcode(obj) {
-            obj.src="{:U('Admin/User/verify_c')}";
+            obj.src="{:U('Admin/User/verify')}";
         }
     </script>
 </block>
