@@ -163,7 +163,7 @@
                     $('.error_tipc_txt').remove();
                     if(promotionPrice>retailPrice){
                         // alert(123);
-                        _this.after('<span class="error_tipc_txt">输入的价格不能大于零售价</span');
+                        _this.after('<span class="error_tipc_txt">输入的价格不能大于零售价</span>');
                         return false;
                     }else{
                         $('.error_tipc_txt').remove();
@@ -187,7 +187,9 @@
                     var optionCheck=_this.prev().find('.radioItem');
                     var promotionPrice=parseFloat(_this.find('.discount_price').val());
                     var goods_Id=_this.find('input[name="goods_id"]').val();
-                    var commissionPrice =_this.find('input[name="commission_price"]').val();
+                    var commissionPrice =parseFloat(_this.find('input[name="commission_price"]').val());
+                    var big_order_price =parseFloat(_this.find('input[name="big_order_price"]').val());
+                    var small_order_price =parseFloat(_this.find('input[name="small_order_price"]').val());
                     if(optionCheck.is(":checked")){
                         var buyType=optionCheck.data('buy_type');
                         if(goods_Id){
@@ -196,7 +198,9 @@
                                 buy_type:buyType,
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
-                                commission_price:commissionPrice
+                                commission:commissionPrice,
+                                big_order_price:big_order_price,
+                                small_order_price:small_order_price
                             };
                             editData.push(editArr);
                         }else{
@@ -205,7 +209,9 @@
                                 buy_type:buyType,
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
-                                commission_price:commissionPrice
+                                commission:commissionPrice,
+                                big_order_price:big_order_price,
+                                small_order_price:small_order_price
                             };
                             addData.push(addArr);
                         }
@@ -214,6 +220,7 @@
                         delData.push(goods_Id);
                     }
                 });
+                console.log(addData);return;
                 $.post(CONTROLLER + '/setPurchaseType',{addData:addData,editData:editData,delData:delData},function(msg){
                     if(!msg.status){
 
