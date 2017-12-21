@@ -1813,8 +1813,9 @@ background-size:contain;
     z-index: 999;
 }
 /*美悦会详情页*/
-.goods_detail_banner img{
+.goods_detail_banner img,.header_banner img{
     width:100%;
+    vertical-align: middle;
 }
 .myh_detail_item{
     padding:0.15rem 0;
@@ -1869,9 +1870,6 @@ background-size:contain;
     display: block;
     text-align: center;
     margin:5px 0 0;
-}
-.header_banner img{
-    width:100%;
 }
 .wt_count_down{
     border:none;
