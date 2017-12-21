@@ -13,7 +13,7 @@
                 <div class="purchase_packing">
                     <div>单品规格：<span>{$goodsInfo.single_specification}/{$goodsInfo.package_unit|getUnitCN}</span></div>
                     <div class="purchase_packing_r">
-                        <span class="market level_price">￥<price>{$levelPrice}</price></span>
+                        <span class="market level_price">￥<price>{$goodsInfo.sale_price}</price></span>
                         <del>￥{$goodsInfo.price}</del>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div>采购包装：
                         <span>{$goodsInfo.package_num}{$goodsInfo.package_unit|getUnitCN}/{$goodsInfo.purchase_unit|getUnitCN}</span></div>
                     <div class="purchase_packing_r">
-                        <span class="market purchase_price">￥<price>{$goodsInfo['package_num']*$levelPrice}</price></span>
+                        <span class="market purchase_price">￥<price>{$goodsInfo['package_num']*$goodsInfo['sale_price']}</price></span>
                     </div>
                 </div>
             </div>
