@@ -74,6 +74,7 @@ class GoodsController extends BaseController {
 
 
         if(IS_POST){
+            print_r(I());exit;
             //增加
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
@@ -119,7 +120,7 @@ class GoodsController extends BaseController {
                 foreach ($goodsInfo as $item) {
                     $buyTypeArray[]= $item['buy_type'];
                 }
-                $buyTypeArrayAll=array(1,2,3,4);
+                $buyTypeArrayAll=array(1,2,3,4,5);
                 $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
                 $this->noBuyTypeArray=$noBuyTypeArray;
                 $this->goodsInfo =$goodsInfo;
@@ -196,6 +197,9 @@ class GoodsController extends BaseController {
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = $this->moveImgFromTemp(C('GOODS_MAIN_IMG'),basename($_POST['main_img']));
             }
+            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['thumb_img'] = $this->moveImgFromTemp(C('GOODS_THUMB_IMG'),basename($_POST['thumb_img']));
+            }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',I('post.detail_img','','string'));
                 $tempArr = array();
@@ -216,6 +220,10 @@ class GoodsController extends BaseController {
                 if($goodsInfo['main_img']){
                     $this->delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
                 }
+                if($goodsInfo['thumb_img']){
+                    $this->delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                }
+
                 if($goodsInfo['detail_img']){
                     //删除商品详情图
                     $oldImgArr = explode(',',$goodsInfo['detail_img']);

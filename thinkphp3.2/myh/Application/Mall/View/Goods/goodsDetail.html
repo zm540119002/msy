@@ -6,29 +6,27 @@
     <article class="f24">
         <section class="goods_picture goods_detail_banner" >
             <empty name="goodsInfo.main_img">
-                <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
+                <img src="PUBLIC_IMG/common/default/no_pic2_1000.jpg" alt="">
                 <else/>
                 <img src="UPLOADS_IMG/{$goodsInfo.main_img}" alt="">
             </empty>
         </section>
         <section class="bottomLine">
             <div class="myh_detail_item">
-                <p>全息原液</p>
-                <p>15mlX6瓶/盒</p>
+                <p>{$goodsInfo.name}</p>
+                <p>{$goodsInfo.single_specification}</p>
             </div>
             <div class="myh_detail_item myh_product_intro">
-                XXXXXXXXXXXXXX
+                {$goodsInfo.intro|htmlspecialchars_decode}
             </div>
             <div class="myh_detail_item myh_detail_price">
                 <div>优惠价:
-                    <price>￥333.00</price>
+                    ￥<price>{$goodsInfo.sale_price}</price>
                 </div>
                 <div>零售价:
-                    <del>￥333.00</del>
+                    <del>￥{$goodsInfo.price}</del>
                 </div>
-                <div>节省:
-                    <price>￥333.00</price>
-                </div>
+                <div>节省:￥{$goodsInfo['price']-$goodsInfo['sale_price']}</div>
             </div>
             <div class="myh_detail_item myh_detail_price">
                 <span>购买数量</span>
@@ -41,11 +39,11 @@
             <div class="goods_star_score">
                 <div class="five_star">
                     <div class="star_img">
-                        <img src="PUBLIC_IMG/common/starred.png" id="0">
-                        <img src="PUBLIC_IMG/common/starred.png" id="1">
-                        <img src="PUBLIC_IMG/common/starred.png" id="2">
-                        <img src="PUBLIC_IMG/common/star.png" id="3">
-                        <img src="PUBLIC_IMG/common/star.png" id="4">
+                        <img src="PUBLIC_IMG/common/starred.png">
+                        <img src="PUBLIC_IMG/common/starred.png">
+                        <img src="PUBLIC_IMG/common/starred.png">
+                        <img src="PUBLIC_IMG/common/star.png">
+                        <img src="PUBLIC_IMG/common/star.png">
                     </div>
                     <span class="fraction" data-score="3.9">3.9分</span>
                 </div>
@@ -54,7 +52,7 @@
         </section>
         <section class="bottomLine myh_detail_intro">
             <h2>商品参数</h2>
-            <div></div>
+            <div>{$goodsInfo.param|htmlspecialchars_decode}</div>
         </section>
         <section class="bottomLine">
             <div>
@@ -75,8 +73,25 @@
                 </li>
             </ul>
         </section>
-        <section class="myh_detail_intro">
-            <h2>商品参数</h2>
+        <section class="myh_detail_intro detail_common_module">
+            <h2>商品详情图</h2>
+            <div>
+                <p></p>
+            </div>
+            <div class="detail_intro_common">
+                <p>
+                    <img src="PUBLIC_IMG/common/gy_01.jpg" alt="">
+                </p>
+            </div>
+            <div>
+                <h2>使用方法</h2>
+                <p>每次结肤后挤压适量原液，均匀涂抹于护理部位，轻拍至吸收即可，建议每天使用2-3次</p>
+                <dl class="notice_events">
+                    <dt>注意事项</dt>
+                    <dd>1、因个体差异，人体皮肤对不同成分适应性不相同建议初次使用本产品前，请先在耳后试用。如有不适应情况请立即停止使用。</dd>
+                    <dd>2、产品富含活性成分，请避免暴晒和高温</dd>
+                </dl>
+            </div>
         </section>
     </article>
 </block>
@@ -86,7 +101,7 @@
         $(function(){
             //星星评分等级
             var getFractionValue=3;
-             $('.five_star').setStar(getFractionValue);
+            $('.five_star').setStar(getFractionValue);
         });
     </script>
 </block>

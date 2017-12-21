@@ -2,6 +2,7 @@
 return array(
     //上传路径
     'GOODS_MAIN_IMG' => 'myh/goods-main/',//商品主图
+    'GOODS_THUMB_IMG' => 'myh/goods-thumb/',//商品主图
     'GOODS_DETAIL_IMG' => 'myh/goods-detail/',//商品主图
     'GOODS_CATEGORY_IMG' => 'myh/goods-category/',//项目流程图
     'GOODS_COMMON_IMG' => 'myh/goods-common/',//商品公共图

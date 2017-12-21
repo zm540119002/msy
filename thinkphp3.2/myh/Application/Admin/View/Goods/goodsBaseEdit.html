@@ -28,10 +28,25 @@
                                 <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
                             </p>
                             <p class="showimg" id="showimg">图片上传大小请小于50k</p>
-                            <empty name="goodsInfo.main_img">
+                            <empty name="goodsBaseInfo.main_img">
                                 <img class="img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
                                 <else />
-                                <img class="img" src="UPLOADS_IMG/{$goodsBaseInfo.main_img}">
+                                <img class="img main_img" src="UPLOADS_IMG/{$goodsBaseInfo.main_img}">
+                            </empty>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>缩略图：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p>
+                                <input type="file" class="upload" id="">
+                                <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
+                            </p>
+                            <p class="showimg" >图片上传大小请小于50k</p>
+                            <empty name="goodsBaseInfo.thumb_img">
+                                <img class="img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
+                                <else />
+                                <img class="img thumb_img" src="UPLOADS_IMG/{$goodsBaseInfo.thumb_img}">
                             </empty>
                         </td>
                     </tr>
@@ -217,7 +232,8 @@
                     postData.buy_type = $('input[type="radio"]:checked').data('buy_type');
                 }
                 //主图
-                postData.main_img = $("#img").attr('src');
+                postData.main_img = $(".main_img").attr('src');
+                postData.thumb_img = $(".thumb_img").attr('src');
                 //详情图
                 postData.detail_img = '';
                 $.each($('iframe').contents().find('.view img'),function () {
