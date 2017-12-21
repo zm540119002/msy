@@ -3,7 +3,7 @@ namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
 
-class IndexController extends BaseController{
+class GroupBuyController extends BaseController{
     //商城-首页
     public function index(){
         //购物车配置开启的项

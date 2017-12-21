@@ -10,7 +10,7 @@ class GoodsController extends BaseController {
         $modelGoods = D('Goods');
         $where = array(
             'g.status' => 0,
-            'g.on_off_line' => 1,
+            'gb.on_off_line' => 1,
         );
         if(IS_POST){
             if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){
@@ -21,7 +21,14 @@ class GoodsController extends BaseController {
                 $where['g.id'] = I('get.goodsId',0,'int');
             }
         }
-        $goodsInfo = $modelGoods->selectGoods($where);
+        $field = array(
+            'g.id','g.buy_type','g.sale_price',
+            'gb.no','gb.name','gb.single_specification','gb.package_num','gb.package_unit','gb.purchase_unit','gb.price',
+        );
+        $join = array(
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+        );
+        $goodsInfo = $modelGoods->selectGoods($where,$field,$join);
         $this->goodsInfo = $goodsInfo[0];
         $this->display('goodsInfoTpl');
     }
@@ -48,6 +55,7 @@ class GoodsController extends BaseController {
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
         $this->currentPage = (isset($_GET['p']) && intval($_GET['p'])) ? I('get.p',0,'int') : 1;
         $goodsList = page_query($modelGoods,$where,$field,$order,$join,$group,$pageSize,$alias='g');
+        print_r($modelGoods->getLastSql());exit;
         $this->goodsList = $goodsList['data'];
         $templateType = I('get.templateType','','string');
         if($templateType=='photo'){
