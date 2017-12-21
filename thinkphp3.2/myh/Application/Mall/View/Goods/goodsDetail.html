@@ -13,22 +13,20 @@
         </section>
         <section class="bottomLine">
             <div class="myh_detail_item">
-                <p>全息原液</p>
-                <p>15mlX6瓶/盒</p>
+                <p>{$goodsInfo.name}</p>
+                <p>{$goodsInfo.single_specification|htmlspecialchars_decode}</p>
             </div>
             <div class="myh_detail_item myh_product_intro">
-                XXXXXXXXXXXXXX
+                {$goodsInfo.intro|htmlspecialchars_decode}
             </div>
             <div class="myh_detail_item myh_detail_price">
                 <div>优惠价:
-                    <price>￥333.00</price>
+                    ￥<price>{$goodsInfo.sale_price}</price>
                 </div>
                 <div>零售价:
-                    <del>￥333.00</del>
+                    <del>￥{$goodsInfo.price}</del>
                 </div>
-                <div>节省:
-                    <price>￥333.00</price>
-                </div>
+                <div>节省:￥{$goodsInfo['price']-$goodsInfo['sale_price']}</div>
             </div>
             <div class="myh_detail_item myh_detail_price">
                 <span>购买数量</span>
@@ -54,7 +52,7 @@
         </section>
         <section class="bottomLine myh_detail_intro">
             <h2>商品参数</h2>
-            <div></div>
+            <div>{$goodsInfo.param}</div>
         </section>
         <section class="bottomLine">
             <div>
