@@ -106,12 +106,7 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>商品规格：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="specification" value="{$goodsBaseInfo.specification}">
-                        </td>
-                    </tr>
+                   
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品库存：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -244,7 +239,6 @@
                 postData.param = ueParam.getContent();
                 postData.usage = ueUsage.getContent();
                 postData.notices = ueNotices.getContent();
-                console.log(postData);return;
                 $.post(ACTION,postData,function(msg){
                     dialog.msg(msg,'',function () {
                         location.href = CONTROLLER + '/goodsManage';
