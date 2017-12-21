@@ -56,7 +56,9 @@ function Hui_admin_tab(obj){
 		title = $(obj).attr("data-title"),
 		topWindow = $(window.parent.document),
 		show_navLi = topWindow.find("#min_title_list li"),
-		iframe_box = topWindow.find("#iframe_box");
+		iframe_box = topWindow.find("#iframe_box"),
+		aParent =$(obj).parent();
+		aParent.addClass('current').siblings().removeClass('current');
 	//console.log(topWindow);
 	if(!href||href==""){
 		alert("data-href不存在，v2.5版本之前用_href属性，升级后请改为data-href属性");
