@@ -12,7 +12,7 @@ class BaseAuthUserController extends BaseController{
         // 判定用户是否登录
         $isLogin = $this->isLogin();
         if(!$isLogin) {
-            return $this->redirect('login/index');
+            return $this->redirect('User/login');
         }
     }
 
@@ -24,13 +24,18 @@ class BaseAuthUserController extends BaseController{
      */
     public function isLogin() {
         //获取session
-        $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
-        if($user && $user->id) {
+        $user = session('admin.user');
+        if (($user && $user->id)) {
             return true;
         }
 
         return false;
     }
+
+ 
+
 }
+
+
 
 
