@@ -2,12 +2,13 @@
 .mall_function_menu,.mall_platform_entrance{display:flex;display:-webkit-flex;width:100%;padding:0.18rem 0;border-bottom:1px solid #d9d9d9;}
 .mall_function_menu a{width:25%;text-align:center;color:#555;}
 .mall_function_menu a span{width:60px;height:60px;margin:0 auto;background-image:url(../../img/home/myms_msc_type.png);background-repeat: no-repeat;background-size:60px 300px;display:block;}
-.mall_function_menu a span.project_class{background-position:0 0;}
+.navigation_module a span{background-image:url(../../img/home/myh_msc_type.png);}
+.mall_function_menu a span.project_class,.navigation_module a span.mall_home{background-position:0 0;}
+.mall_function_menu a span.purchaser_register,.navigation_module a span.wt_purchase{background-position:0 -60px;}
+.mall_function_menu a span.vip,.navigation_module a span.twitter_share{background-position:0 -120px;}
+.mall_function_menu a span.recharge,.navigation_module a span.buy_cart{background-position:0 -180px;}
 .mall_function_menu a span.purchaser_register{background-position:0 -60px;}
-.mall_function_menu a span.vip{background-position:0 -120px;}
-.mall_function_menu a span.recharge{background-position:0 -180px;}
-.mall_function_menu a span.purchaser_register{background-position:0 -60px;}
-.mall_function_menu a span.order_manage{background-position:0 -240px;}
+.mall_function_menu a span.order_manage,.navigation_module a span.person_center{background-position:0 -240px;}
 .mall_platform_entrance{    
     border-bottom: none;
     justify-content: space-between;
@@ -1812,8 +1813,9 @@ background-size:contain;
     z-index: 999;
 }
 /*美悦会详情页*/
-.goods_detail_banner img{
+.goods_detail_banner img,.header_banner img{
     width:100%;
+    vertical-align: middle;
 }
 .myh_detail_item{
     padding:0.15rem 0;
@@ -1869,9 +1871,6 @@ background-size:contain;
     text-align: center;
     margin:5px 0 0;
 }
-.header_banner img{
-    width:100%;
-}
 .wt_count_down{
     border:none;
 }
@@ -1887,4 +1886,7 @@ background-size:contain;
 }
 .wt_detail_intro{
     color:#eb6100;
+}
+.concessional_rate price,.concessional_rate span{
+    color:#e474a6;
 }

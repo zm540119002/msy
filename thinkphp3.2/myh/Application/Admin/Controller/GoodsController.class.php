@@ -196,6 +196,9 @@ class GoodsController extends BaseController {
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = $this->moveImgFromTemp(C('GOODS_MAIN_IMG'),basename($_POST['main_img']));
             }
+            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['thumb_img'] = $this->moveImgFromTemp(C('GOODS_THUMB_IMG'),basename($_POST['thumb_img']));
+            }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',I('post.detail_img','','string'));
                 $tempArr = array();
@@ -216,6 +219,10 @@ class GoodsController extends BaseController {
                 if($goodsInfo['main_img']){
                     $this->delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
                 }
+                if($goodsInfo['thumb_img']){
+                    $this->delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                }
+
                 if($goodsInfo['detail_img']){
                     //删除商品详情图
                     $oldImgArr = explode(',',$goodsInfo['detail_img']);
