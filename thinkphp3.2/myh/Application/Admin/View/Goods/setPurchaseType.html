@@ -183,13 +183,19 @@
                 var delData=[];
                 var goodsBaseId=$('.goods_base_id').val();
                 $.each($('.productPrice_type_item'),function(i,val){
+                    console.log(11111);
                     var _this=$(this);
                     var optionCheck=_this.prev().find('.radioItem');
-                    var promotionPrice=parseFloat(_this.find('.discount_price').val());
+                    var promotionPrice=_this.find('.discount_price').val();
                     var goods_Id=_this.find('input[name="goods_id"]').val();
-                    var commissionPrice =parseFloat(_this.find('input[name="commission_price"]').val());
-                    var big_order_price =parseFloat(_this.find('input[name="big_order_price"]').val());
-                    var small_order_price =parseFloat(_this.find('input[name="small_order_price"]').val());
+                    var commissionPrice =_this.find('input[name="commission_price"]').val();
+                    var big_order_price =_this.find('input[name="big_order_price"]').val();
+                    var small_order_price =_this.find('input[name="small_order_price"]').val();
+                    console.log(promotionPrice);return false;
+//                    console.log(goods_Id);
+//                    console.log(commissionPrice);
+//                    console.log(big_order_price);
+//                    console.log(small_order_price);return;
                     if(optionCheck.is(":checked")){
                         var buyType=optionCheck.data('buy_type');
                         if(goods_Id){
@@ -220,7 +226,7 @@
                         delData.push(goods_Id);
                     }
                 });
-                console.log(addData);return;
+                //console.log(addData);return;
                 $.post(CONTROLLER + '/setPurchaseType',{addData:addData,editData:editData,delData:delData},function(msg){
                     if(!msg.status){
 
