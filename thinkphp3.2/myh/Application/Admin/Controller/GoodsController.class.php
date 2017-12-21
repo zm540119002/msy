@@ -74,7 +74,7 @@ class GoodsController extends BaseController {
 
 
         if(IS_POST){
-            print_r(I());exit;
+           
             //增加
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
