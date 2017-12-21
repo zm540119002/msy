@@ -74,6 +74,7 @@ class GoodsController extends BaseController {
 
 
         if(IS_POST){
+            print_r(I());exit;
             //增加
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
@@ -119,7 +120,7 @@ class GoodsController extends BaseController {
                 foreach ($goodsInfo as $item) {
                     $buyTypeArray[]= $item['buy_type'];
                 }
-                $buyTypeArrayAll=array(1,2,3,4);
+                $buyTypeArrayAll=array(1,2,3,4,5);
                 $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
                 $this->noBuyTypeArray=$noBuyTypeArray;
                 $this->goodsInfo =$goodsInfo;
