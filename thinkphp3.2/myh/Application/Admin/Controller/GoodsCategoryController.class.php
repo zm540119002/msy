@@ -1,9 +1,9 @@
 <?php
 namespace Admin\Controller;
 
-use Admin\Controller\BaseAuthUserController;
+use web\all\Controller\BaseController;
 
-class GoodsCategoryController extends BaseAuthUserController {
+class GoodsCategoryController extends BaseController {
     /**商品分类-管理
      */
     public function goodsCategoryManage(){

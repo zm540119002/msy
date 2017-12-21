@@ -148,7 +148,7 @@ class UserController extends BaseController {
     public function verify_c(){
         $Verify = new \Think\Verify();
         $Verify->fontSize = 18;
-        $Verify->length   = 8;
+        $Verify->length   = 4;
         $Verify->useNoise = false;
         $Verify->imageW = 130;
         $Verify->imageH = 50;
