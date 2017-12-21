@@ -14,7 +14,7 @@
         <section class="bottomLine">
             <div class="myh_detail_item">
                 <p>{$goodsInfo.name}</p>
-                <p>{$goodsInfo.single_specification|htmlspecialchars_decode}</p>
+                <p>{$goodsInfo.single_specification}</p>
             </div>
             <div class="myh_detail_item myh_product_intro">
                 {$goodsInfo.intro|htmlspecialchars_decode}
@@ -39,11 +39,11 @@
             <div class="goods_star_score">
                 <div class="five_star">
                     <div class="star_img">
-                        <img src="PUBLIC_IMG/common/starred.png" id="0">
-                        <img src="PUBLIC_IMG/common/starred.png" id="1">
-                        <img src="PUBLIC_IMG/common/starred.png" id="2">
-                        <img src="PUBLIC_IMG/common/star.png" id="3">
-                        <img src="PUBLIC_IMG/common/star.png" id="4">
+                        <img src="PUBLIC_IMG/common/starred.png">
+                        <img src="PUBLIC_IMG/common/starred.png">
+                        <img src="PUBLIC_IMG/common/starred.png">
+                        <img src="PUBLIC_IMG/common/star.png">
+                        <img src="PUBLIC_IMG/common/star.png">
                     </div>
                     <span class="fraction" data-score="3.9">3.9分</span>
                 </div>
@@ -52,7 +52,7 @@
         </section>
         <section class="bottomLine myh_detail_intro">
             <h2>商品参数</h2>
-            <div>{$goodsInfo.param}</div>
+            <div>{$goodsInfo.param|htmlspecialchars_decode}</div>
         </section>
         <section class="bottomLine">
             <div>
@@ -74,31 +74,13 @@
             </ul>
         </section>
         <section class="myh_detail_intro detail_common_module">
-            <h2>商品详情</h2>
+            <h2>商品详情图</h2>
             <div>
                 <p></p>
             </div>
             <div class="detail_intro_common">
                 <p>
                     <img src="PUBLIC_IMG/common/gy_01.jpg" alt="">
-                </p>
-                <p>
-                    <img src="PUBLIC_IMG/common/gy_02.jpg" alt="">
-                </p>
-                <p>
-                    <img src="PUBLIC_IMG/common/gy_03.jpg" alt="">
-                </p>
-                <p>
-                    <img src="PUBLIC_IMG/common/gy_04.jpg" alt="">
-                </p>
-                <p>
-                    <img src="PUBLIC_IMG/common/gy_05.jpg" alt="">
-                </p>
-                <p>
-                    <img src="PUBLIC_IMG/common/gy_06.jpg" alt="">
-                </p>
-                <p>
-                    <img src="PUBLIC_IMG/common/gy_07.jpg" alt="">
                 </p>
             </div>
             <div>

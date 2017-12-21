@@ -29,7 +29,7 @@
                             </p>
                             <p class="showimg" id="showimg">图片上传大小请小于50k</p>
                             <empty name="goodsBaseInfo.main_img">
-                                <img class="img main_img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
+                                <img class="img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
                                 <else />
                                 <img class="img main_img" src="UPLOADS_IMG/{$goodsBaseInfo.main_img}">
                             </empty>
@@ -44,7 +44,7 @@
                             </p>
                             <p class="showimg" >图片上传大小请小于50k</p>
                             <empty name="goodsBaseInfo.thumb_img">
-                                <img class="img thumb_img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
+                                <img class="img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
                                 <else />
                                 <img class="img thumb_img" src="UPLOADS_IMG/{$goodsBaseInfo.thumb_img}">
                             </empty>
@@ -234,8 +234,6 @@
                 //主图
                 postData.main_img = $(".main_img").attr('src');
                 postData.thumb_img = $(".thumb_img").attr('src');
-
-
                 //详情图
                 postData.detail_img = '';
                 $.each($('iframe').contents().find('.view img'),function () {
