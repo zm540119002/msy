@@ -5,7 +5,7 @@
 <block name="content">
     <article class="msh_product_picture f24">
         <section class="purchase_certification">
-            <div class="weChat_avatar_info">
+            <div class="weChat_avatar_info Mall_person_center">
                 <div>
                     <if condition="$user.avatar neq '' ">
                         <img src="UPLOAD_IMG/{$user.id_url}" alt="" class="weChat_avatar" />
@@ -25,12 +25,14 @@
                         <if condition="$user.mobile_phone neq '' "><span>{$user.mobile_phone}</span></if>
                     </div>
                 </div>
-                <a><i></i><span>首页</span></a>
+                <div>
+                    <a><i></i><span>首页</span></a>
+                </div>
             </div>
         </section>
         <section class="person_center_list bottomLine">
             <div class="person_center_item">
-                <ul class="person_pending">
+                <ul class="person_pending buy_cart_pending">
                     <li>
                         <a>
                             <i class="cart"></i>
@@ -66,7 +68,7 @@
                     </li>
                     <li>
                         <a>
-                            <i class="cancle"></i>
+                            <i class="success"></i>
                             已完成
                         </a>
                     </li>
