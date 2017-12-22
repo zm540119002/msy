@@ -1097,7 +1097,9 @@ background-size:contain;
     border-radius:100%;
     float:left;
 }
-.weChat_avatar_info{width:4rem;}
+.weChat_avatar_info{
+    width:4rem;
+}
 .weChat_av_r{margin:0 0 0 1rem;margin:0 0 0 1.4rem;}
 .certified_avatar_r i{
     width:34px;
@@ -1899,22 +1901,30 @@ background-size:contain;
 .person_collect span{display: block;text-align: center;}
 .collect:last-child{margin:0 0.20rem 0 0;}
 .weChat_av_r .person{color:#0062cc;font-size: 0.28rem;}
-.person_pending li{margin:0 0.28rem 0 0;}
-.person_pending a{display: block;}
+.person_pending li{margin:0 0.28rem 0 0;flex:1;}
+.person_pending a{display: block;text-align: center;}
 .person_pending i{
-    width:0.6rem;
+    width:0.5rem;
     height:0.5rem;
     display: block;
-    background-image:url(../../img/common/person_icon.png);
+    background-image:url(../../img/common/person_icon1.png);
     background-repeat: no-repeat;
     background-size:35px 200px;
     margin:0 auto;
 }
-.person_pending i.pay{background-position:0 -32px;}
+.person_pending i.pay{
+    background-position:0 -32px;
+    width:36px;
+}
 .person_pending i.receipt{background-position:0 -67px;}
-.person_pending i.evaluate{background-position:0 -100px;}
+.person_pending i.evaluate{background-position:0 -134px;}
 .person_pending i.cancle{background-position:0 -134px;}
-.person_pending i.customer_service{background-position:0 -170px;}
+.person_pending i.success{background-position:0 -100px;}
+.person_pending i.customer_service{
+    background-position:0 -170px;
+    width:34px;
+    height:30px;
+}
 .msh_product_picture .weChat_avatar{
     max-width:1.2rem;
     height:1.2rem;
@@ -1926,10 +1936,11 @@ background-size:contain;
     width:4rem;
     display: flex;
     display:-webkit-flex;
+    justify-content: space-between;
 }
 .weChat_av_r{margin:0 0 0 1rem;margin:0 0 0 1.4rem;}
 .certified_avatar_r i{
-    width:0.58rem;
+    width:30px;
     height:0.58rem;
     display:block;
     background-image:url(../../img/common/purchase_order_icon.png);
@@ -1937,4 +1948,48 @@ background-size:contain;
     background-size:37px 212px;
     background-position:0 -98px;
     margin:0 auto 0.05rem;
+}
+.person_cart{
+    position:relative;
+
+}
+.person_cart em{
+    position:absolute;
+    right:-8px;
+    top:-10px;
+    color:#ff1d25;
+    font-style:normal;
+}
+.right-arrow{color:#333;position:relative;display:block;}
+.right-arrow::after{
+    content:'';
+    display:inline-block;
+    position:absolute;
+    top:35%;
+    right:0.15rem;
+    width:.5em;
+    height:.5em;
+    border-bottom:.12em solid #999;
+    border-left:.12em solid #999;
+    -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
+    -ms-transform:translate(-70%) rotateZ(-45deg);
+}
+.person_center_item span{
+    position:relative;
+}
+.person_center_item span em{
+    position:absolute;
+    right:-8px;
+    top:-8px;
+    color:#ff1d25;
+}
+.buy_cart_pending li i{
+    display: table-caption;
+    width:40px;
+}
+.buy_cart_pending li a{
+    text-align: left;
+}
+.Mall_person_center{
+    width:100%;
 }
