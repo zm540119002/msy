@@ -1938,3 +1938,37 @@ background-size:contain;
     background-position:0 -98px;
     margin:0 auto 0.05rem;
 }
+.person_cart{
+    position:relative;
+
+}
+.person_cart em{
+    position:absolute;
+    right:-8px;
+    top:-10px;
+    color:#ff1d25;
+    font-style:normal;
+}
+.right-arrow{color:#333;position:relative;display:block;}
+.right-arrow::after{
+    content:'';
+    display:inline-block;
+    position:absolute;
+    top:35%;
+    right:0.15rem;
+    width:.5em;
+    height:.5em;
+    border-bottom:.12em solid #999;
+    border-left:.12em solid #999;
+    -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
+    -ms-transform:translate(-70%) rotateZ(-45deg);
+}
+.person_center_item span{
+    position:relative;
+}
+.person_center_item span em{
+    position:absolute;
+    right:-8px;
+    top:-8px;
+    color:#ff1d25;
+}
