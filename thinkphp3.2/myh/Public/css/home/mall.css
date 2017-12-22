@@ -1090,6 +1090,9 @@ background-size:contain;
 .purchase_certification{background: #fff;margin:0 0 0.20rem 0;}
 .purchase_certification{padding:0.25rem;display:flex;display:-webkit-flex;justify-content: space-between;}
 .purchase_certification span{display:block;}
+.purchase_certification span.separation_line{
+    display: inline-block;
+}
 .msh_product_picture .weChat_avatar{
     max-width:1.2rem;
     height:1.2rem;
@@ -1101,6 +1104,9 @@ background-size:contain;
     width:4rem;
 }
 .weChat_av_r{margin:0 0 0 1rem;margin:0 0 0 1.4rem;}
+.weChat_av_r a{
+    color:#0066cc;
+}
 .certified_avatar_r i{
     width:34px;
     height:34px;

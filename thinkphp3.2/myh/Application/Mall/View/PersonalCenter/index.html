@@ -25,7 +25,9 @@
                             </if>
                             <if condition="$user.mobile_phone neq '' "><span>{$user.mobile_phone|substr_replace='****',3,4}</span></if>
                             <else/>
-                            登录|注册
+                            <a href="">登录</a>
+                            <span class="separation_line">|</span>
+                            <a href="">注册</a>
                         </notempty>
                     </div>
                 </div>
