@@ -55,7 +55,6 @@ class GoodsController extends BaseController {
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
         $this->currentPage = (isset($_GET['p']) && intval($_GET['p'])) ? I('get.p',0,'int') : 1;
         $goodsList = page_query($modelGoods,$where,$field,$order,$join,$group,$pageSize,$alias='g');
-        print_r($modelGoods->getLastSql());exit;
         $this->goodsList = $goodsList['data'];
         $templateType = I('get.templateType','','string');
         if($templateType=='photo'){
