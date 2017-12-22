@@ -16,13 +16,17 @@
                     </if>
                     <div class="weChat_av_r">
                         <h2 class="person">商城个人中心</h2>
-                        <if condition="$user.nickname neq '' ">
-                            <span>{$user.nickname}</span>
-                            <elseif condition="$wxUser.nickname neq '' "/>
-                            <span>{$wxUser.nickname}</span>
-                            <else /><span>nobody</span>
-                        </if>
-                        <if condition="$user.mobile_phone neq '' "><span>{$user.mobile_phone|substr_replace='****',3,4}</span></if>
+                        <notempty name="user">
+                            <if condition="$user.nickname neq '' ">
+                                <span>{$user.nickname}</span>
+                                <elseif condition="$wxUser.nickname neq '' "/>
+                                <span>{$wxUser.nickname}</span>
+                                <else /><span>nobody</span>
+                            </if>
+                            <if condition="$user.mobile_phone neq '' "><span>{$user.mobile_phone|substr_replace='****',3,4}</span></if>
+                            <else/>
+                            登录|注册
+                        </notempty>
                     </div>
                 </div>
                 <div>
@@ -93,11 +97,6 @@
             </div>
             <div class="person_center_item">
                 <a href="javascript:void(0);" class="pushing_income right-arrow"><span>我的推客收益<em>3</em></span></a>
-            </div>
-        </section>
-        <section class="person_center_list">
-            <div class="person_center_item">
-                <a href="javascript:void(0);" class="pushing_income right-arrow">登录账户管理</a>
             </div>
         </section>
     </article>
