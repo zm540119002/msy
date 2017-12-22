@@ -1,5 +1,5 @@
 <?php
-namespace Purchase\Controller;
+namespace Mall\Controller;
 
 use web\all\Controller\BaseController;
 use web\all\Cache\CompanyCache;
@@ -12,9 +12,6 @@ class PersonalCenterController extends BaseController {
         }else{
             //用户信息
             $this->user = AuthUser::check();
-            if($this->user['id']){
-                $this->company = CompanyCache::get($this->user['id']);
-            }
             $this->display();
         }
     }
