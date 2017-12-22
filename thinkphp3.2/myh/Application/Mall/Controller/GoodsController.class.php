@@ -10,7 +10,7 @@ class GoodsController extends BaseController {
         $modelGoods = D('Goods');
         $where = array(
             'g.status' => 0,
-            'g.on_off_line' => 1,
+            'gb.on_off_line' => 1,
         );
         if(IS_POST){
             if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){
@@ -21,7 +21,14 @@ class GoodsController extends BaseController {
                 $where['g.id'] = I('get.goodsId',0,'int');
             }
         }
-        $goodsInfo = $modelGoods->selectGoods($where);
+        $field = array(
+            'g.id','g.buy_type','g.sale_price',
+            'gb.no','gb.name','gb.single_specification','gb.package_num','gb.package_unit','gb.purchase_unit','gb.price',
+        );
+        $join = array(
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+        );
+        $goodsInfo = $modelGoods->selectGoods($where,$field,$join);
         $this->goodsInfo = $goodsInfo[0];
         $this->display('goodsInfoTpl');
     }
