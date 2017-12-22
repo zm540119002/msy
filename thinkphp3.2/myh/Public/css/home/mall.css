@@ -1928,7 +1928,7 @@ background-size:contain;
 .person_pending i.success{background-position:0 -100px;}
 .person_pending i.customer_service{
     background-position:0 -170px;
-    width:34px;
+    width:32px;
     height:30px;
 }
 .msh_product_picture .weChat_avatar{
@@ -1996,6 +1996,7 @@ background-size:contain;
 }
 .buy_cart_pending li a{
     text-align: left;
+    color:#333;
 }
 .Mall_person_center{
     width:100%;
