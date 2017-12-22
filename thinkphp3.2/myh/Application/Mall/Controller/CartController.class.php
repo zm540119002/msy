@@ -35,16 +35,6 @@ class CartController extends BaseController {
         }
     }
 
-    //联合采购
-    public function jointPurchase(){
-        if(IS_POST){
-        }else{
-            //购物车配置开启的项
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
-            $this->display();
-        }
-    }
-
     //加入购物车
     public function addGoodsToCart(){
         if(!IS_POST){

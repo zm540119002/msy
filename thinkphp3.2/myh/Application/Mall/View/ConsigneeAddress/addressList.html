@@ -63,10 +63,12 @@
             $('ul.consignee_wrapper').find('li').each(function(){
                 var _this = $(this);
                 var arr = [];
-                arr.push(_this.data('province'));
-                arr.push(_this.data('city'));
-                arr.push(_this.data('area'));
-                _this.find('.detailed_address').setArea(arr);
+                if(_this.data('province') && _this.data('city') && _this.data('area')){
+                    arr.push(_this.data('province'));
+                    arr.push(_this.data('city'));
+                    arr.push(_this.data('area'));
+                    _this.find('.detailed_address').setArea(arr);
+                }
             });
 
             //设为默认
