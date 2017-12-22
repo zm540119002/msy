@@ -12,7 +12,7 @@
             <span class="mall_home"></span>
             商城首页
         </a>
-        <a href="">
+        <a href="{:U('GroupBuy/index')}">
             <span class="wt_purchase"></span>
             微团购
         </a>
@@ -24,7 +24,7 @@
             <span class="buy_cart"></span>
             购物车
         </a>
-        <a href="">
+        <a href="{:U('PersonalCenter/index')}">
             <span class="person_center"></span>
             个人中心
         </a>
@@ -42,7 +42,8 @@
     <script type="text/javascript">
         $(function(){
             var config = {
-                pageSize:4
+                pageSize:4,
+                buyType:1
             };
             //初始化
             getGoodsList(config);

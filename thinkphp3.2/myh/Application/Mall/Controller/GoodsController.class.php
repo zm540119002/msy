@@ -43,6 +43,9 @@ class GoodsController extends BaseController {
             'g.status' => 0,
             'gb.on_off_line' => 1,
         );
+        if(isset($_GET['buyType']) && intval($_GET['buyType'])){
+            $where['g.buy_type'] = I('get.buyType',0,'int');
+        }
         $field = array(
             'g.id','g.buy_type','g.sale_price',
             'gb.name','gb.price','gb.main_img',
@@ -70,6 +73,7 @@ class GoodsController extends BaseController {
         }else{
             $modelGoods = D('Goods');
             $where = array(
+                'g.status' => 0,
                 'gb.on_off_line' => 1,
             );
             if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
