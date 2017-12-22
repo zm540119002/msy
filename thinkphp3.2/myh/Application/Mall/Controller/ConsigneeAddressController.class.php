@@ -17,7 +17,6 @@ class ConsigneeAddressController extends AuthUserController {
             );
             $consigneeAddressInfo = $modelConsigneeAddress->selectConsigneeAddress($where);
             $this->consigneeAddressInfo = $consigneeAddressInfo[0];
-
             $this->display();
         }
     }
