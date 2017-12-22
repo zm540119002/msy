@@ -1992,6 +1992,7 @@ background-size:contain;
 .buy_cart_pending li i{
     display: table-caption;
     width:40px;
+    height:34px;
 }
 .buy_cart_pending li a{
     text-align: left;
