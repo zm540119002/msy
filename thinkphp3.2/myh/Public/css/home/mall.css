@@ -2000,3 +2000,16 @@ background-size:contain;
 .Mall_person_center{
     width:100%;
 }
+.weChat_av_home i{
+    background-image:url(../../img/common/home_ico.png);
+    background-repeat: no-repeat;
+    background-size:35px 27px;
+    display: block;
+    width:34px;
+    height:28px;
+    margin:0 auto;
+}
+.weChat_av_home a,.weChat_av_home span{
+    text-align: center;
+    display: block;
+}
