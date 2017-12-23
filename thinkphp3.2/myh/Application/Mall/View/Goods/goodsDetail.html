@@ -21,14 +21,16 @@
             </div>
             <ul class="myh_detail_item myh_detail_price goods_list">
                 <li>
-                    <div>优惠价:
-                        ￥<price>{$goodsInfo.sale_price}</price>
+                    <div class="options">
+                        <div>优惠价:
+                            ￥<price>{$goodsInfo.sale_price}</price>
+                        </div>
+                        <div>零售价:
+                            <del>￥{$goodsInfo.price}</del>
+                        </div>
+                        <div>节省:￥{$goodsInfo['price']-$goodsInfo['sale_price']}</div>
                     </div>
-                    <div>零售价:
-                        <del>￥{$goodsInfo.price}</del>
-                    </div>
-                    <div>节省:￥{$goodsInfo['price']-$goodsInfo['sale_price']}</div>
-                    <div class="myh_detail_item myh_detail_price">
+                    <div class="myh_detail_item options">
                         <span>购买数量</span>
                         <div class="quantity_wrapper business_count">
                             <a href="javascript:void(0);" class="greduce">-</a>
