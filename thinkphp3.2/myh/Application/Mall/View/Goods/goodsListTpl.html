@@ -15,11 +15,6 @@
             </div>
         </div>
         <switch name="goodsListOptionType" >
-            <case value="withCart">
-                <notempty name="user">
-                    <a href="javascript:void(0);" class="shopping_cart">购物车</a>
-                </notempty>
-            </case>
             <case value="withDel">
                 <div class="purchase_goods_num purchase_cart_list">
                     <span>购买数量({$vo.package_unit|getUnitCN})</span>
