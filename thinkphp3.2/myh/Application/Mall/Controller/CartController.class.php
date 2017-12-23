@@ -35,7 +35,7 @@ class CartController extends BaseController {
                 //购物车配置开启的项
                 $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,5));
                 //商品列表操作类型
-                $this->goodsListOptionType = 'withDel';
+                $this->goodsListOptionType = 'withNum';
                 $this->display('Goods/goodsListTpl');
             }
         }else{
