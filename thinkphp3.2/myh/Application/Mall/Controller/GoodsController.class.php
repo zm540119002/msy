@@ -92,6 +92,8 @@ class GoodsController extends BaseController {
             $modelCommonImg = D('CommonImages');
             $commonImg = $modelCommonImg->selectCommonImages();
             $this->commonImg = $commonImg[0]['common_img'];
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this ->display();
         }
     }

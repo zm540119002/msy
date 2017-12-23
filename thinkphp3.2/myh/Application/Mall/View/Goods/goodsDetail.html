@@ -19,7 +19,7 @@
             <div class="myh_detail_item myh_product_intro">
                 {$goodsInfo.intro|htmlspecialchars_decode}
             </div>
-            <div class="myh_detail_item myh_detail_price">
+            <div class="myh_detail_item myh_detail_price goods_list">
                 <div>优惠价:
                     ￥<price>{$goodsInfo.sale_price}</price>
                 </div>
@@ -92,7 +92,9 @@
         </section>
     </article>
 </block>
-<block name="footer"></block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
+</block>
 <block name="script">
     <script type="text/javascript">
         $(function(){
