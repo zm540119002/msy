@@ -25,7 +25,7 @@ class CartController extends BaseController {
                     'g.id' => array('in',array_column($cart,'foreign_id')),
                 );
                 $field = array(
-                    'gb.name','gb.single_specification','gb.price',
+                    'gb.name','gb.single_specification','gb.price','gb.package_unit',
                 );
                 $join = array(
                     'left join goods_base gb on gb.id = g.goods_base_id '
@@ -35,7 +35,7 @@ class CartController extends BaseController {
                 //购物车配置开启的项
                 $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,5));
                 //商品列表操作类型
-                $this->goodsListOptionType = 'withDel';
+                $this->goodsListOptionType = 'withNum';
                 $this->display('Goods/goodsListTpl');
             }
         }else{
