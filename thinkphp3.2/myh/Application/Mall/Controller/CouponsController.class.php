@@ -1,7 +1,9 @@
 <?php
-namespace Purchase\Controller;
-use web\all\Controller\AuthCompanyAuthoriseController;
-class CouponsController extends AuthCompanyAuthoriseController {
+namespace Mall\Controller;
+
+use web\all\Controller\AuthUserController;
+
+class CouponsController extends AuthUserController {
     //代金券-列表页
     public function couponsList(){
         $modelCoupons = D('Coupons');

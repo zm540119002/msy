@@ -1,5 +1,5 @@
 <?php
-namespace Purchase\Controller;
+namespace Mall\Controller;
 
 use web\all\Controller\BaseController;
 use web\all\Lib\AuthUser;
@@ -24,23 +24,21 @@ class CartController extends BaseController {
                 $where = array(
                     'g.id' => array('in',array_column($cart,'foreign_id')),
                 );
-                $goodsList = $modelGoods->selectGoods($where);
+                $field = array(
+                    'gb.name','gb.single_specification','gb.price','gb.package_unit',
+                );
+                $join = array(
+                    'left join goods_base gb on gb.id = g.goods_base_id '
+                );
+                $goodsList = $modelGoods->selectGoods($where,$field,$join);
                 $this->goodsList = GoodsNumMergeById($cart,$goodsList);
+                //购物车配置开启的项
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,5));
+                //商品列表操作类型
+                $this->goodsListOptionType = 'withDel';
                 $this->display('Goods/goodsListTpl');
             }
         }else{
-            //商品列表操作类型
-            $this->goodsListOptionType = 'withPurchaseNumAndDel';
-            $this->display();
-        }
-    }
-
-    //联合采购
-    public function jointPurchase(){
-        if(IS_POST){
-        }else{
-            //购物车配置开启的项
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this->display();
         }
     }

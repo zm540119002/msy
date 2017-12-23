@@ -33,7 +33,7 @@
                     <i></i>
                     <div>
                         <p>美悦会精选微团购倒计时</p>
-                        <div class="countDownBox">
+                        <div class="count_down_box">
                             <span class="day">1</span>天
                             <span class="hour">09</span>小时
                             <span class="minute">01</span>分
@@ -52,7 +52,9 @@
         </section>
     </article>
 </block>
-<block name="footer"></block>
+<block name="footer">
+    <include file="Cart/footerCartSingle" />
+</block>
 <block name="script">
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
@@ -60,11 +62,12 @@
             //星星评分等级
             var getFractionValue=3;
             $('.five_star').setStar(getFractionValue);
-            countDown('2017/12/21 23:59:59',$(".countDownBox"));
+            countDown('2017/12/21 23:59:59',$(".count_down_box"));
 
             var config = {
                 pageSize:4,
-                buyType:2
+                buyType:2,
+                templateType:'photo'
             };
             //初始化
             getGoodsList(config);

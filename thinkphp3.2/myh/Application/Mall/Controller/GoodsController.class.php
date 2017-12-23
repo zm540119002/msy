@@ -1,7 +1,6 @@
 <?php
 namespace Mall\Controller;
 
-use  web\all\Lib\Date;
 use  web\all\Controller\BaseController;
 
 class GoodsController extends BaseController {

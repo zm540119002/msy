@@ -31,18 +31,6 @@ const URL_COMPAT        =   3;  // 兼容模式
 // 类文件后缀
 const EXT               =   '.class.php'; 
 
-//私有常量定义
-defined('DOMAIN_MSY')   or define('DOMAIN_MSY',     'meishangyun.com');
-//defined('DOMAIN_MSY')   or define('DOMAIN_MSY',     'zm.dev');
-
-defined('HOST_HEADER_UCENTER')               or define('HOST_HEADER_UCENTER','ucenter.');
-defined('HOST_HEADER_ADMIN')                 or define('HOST_HEADER_ADMIN','admin.');
-defined('HOST_HEADER_MSY')                   or define('HOST_HEADER_MSY','msy.');
-defined('HOST_HEADER_MYMS')                  or define('HOST_HEADER_MYMS','myms.');
-defined('HOST_HEADER_PURCHASE')              or define('HOST_HEADER_PURCHASE','purchase.msy.');
-defined('HOST_HEADER_SELLER_COMPANY')        or define('HOST_HEADER_SELLER_COMPANY','company.seller.');
-defined('HOST_HEADER_SELLER_PRACTITIONER')   or define('HOST_HEADER_SELLER_PRACTITIONER','practitioner.seller.');
-
 // 系统常量定义
 defined('THINK_PATH')   or define('THINK_PATH',     __DIR__.'/');
 defined('APP_PATH')     or define('APP_PATH',       dirname($_SERVER['SCRIPT_FILENAME']).'/');

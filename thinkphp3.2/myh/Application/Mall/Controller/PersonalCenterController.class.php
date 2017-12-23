@@ -2,7 +2,6 @@
 namespace Mall\Controller;
 
 use web\all\Controller\BaseController;
-use web\all\Cache\CompanyCache;
 use web\all\Lib\AuthUser;
 
 class PersonalCenterController extends BaseController {

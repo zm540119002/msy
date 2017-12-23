@@ -1,6 +1,8 @@
 <?php
-namespace Purchase\Controller;
+namespace Mall\Controller;
+
 use web\all\Controller\AuthUserController;
+
 class OrderController extends AuthUserController {
     //订单-生成
     public function generate(){

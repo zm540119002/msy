@@ -1,15 +1,9 @@
 <?php
-namespace Purchase\Controller;
-use web\all\Controller\AuthCompanyRegisterController;
-class ConsigneeAddressController extends AuthCompanyRegisterController {
-    //首页
-    public function index(){
-        if(IS_POST){
-        }else{
-            $this->display();
-        }
-    }
+namespace Mall\Controller;
 
+use web\all\Controller\AuthUserController;
+
+class ConsigneeAddressController extends AuthUserController {
     //机构登记-收货人地址编辑页
     public function registerAddressEdit(){
         $modelConsigneeAddress = D('ConsigneeAddress');
@@ -23,7 +17,6 @@ class ConsigneeAddressController extends AuthCompanyRegisterController {
             );
             $consigneeAddressInfo = $modelConsigneeAddress->selectConsigneeAddress($where);
             $this->consigneeAddressInfo = $consigneeAddressInfo[0];
-
             $this->display();
         }
     }

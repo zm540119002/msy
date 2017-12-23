@@ -258,8 +258,8 @@ color:#999;
     background-size:31px 75px;
     text-indent:-9999rem;
     background-position:0 0;
-    width:0.55rem;
-    /*height:0.44rem;*/
+    width:40px;
+    height:28px;
     display: block;
 }
 .commodity_category_s ul{    
@@ -998,7 +998,26 @@ background-size:contain;
 }
 .purchase_goods_info{margin:0 0 0 2rem;position:relative;}
 .quantity_wrapper{margin:0 0 0 0.35rem;}
-.purchase_goods_num{display:flex;display:-webkit-flex;}
+.purchase_goods_num{
+    display:flex;
+    display:-webkit-flex;
+  
+}
+.purchase_cart_list{
+    clear:both;
+    padding:0.15rem 0 0;
+}
+.detele_order{
+    background:#ff0000;
+    color:#fff;
+    border-radius:0.05rem;
+    height:24px;
+    padding:0 0.12rem;
+}
+.purchase_cart_list .detele_order{
+    margin-left:0.85rem;
+}
+.commodity_purchaser del{margin:0 0 0 0.12rem;}
 .purchase_goods_info .purchase_price{color:#ff6482}
 .purchase_goods_info del{color:#999;margin:0 0 0 0.15rem;}
 .hot_count_down i{
@@ -1090,6 +1109,9 @@ background-size:contain;
 .purchase_certification{background: #fff;margin:0 0 0.20rem 0;}
 .purchase_certification{padding:0.25rem;display:flex;display:-webkit-flex;justify-content: space-between;}
 .purchase_certification span{display:block;}
+.purchase_certification span.separation_line{
+    display: inline-block;
+}
 .msh_product_picture .weChat_avatar{
     max-width:1.2rem;
     height:1.2rem;
@@ -1097,8 +1119,13 @@ background-size:contain;
     border-radius:100%;
     float:left;
 }
-.weChat_avatar_info{width:4rem;}
+.weChat_avatar_info{
+    width:4rem;
+}
 .weChat_av_r{margin:0 0 0 1rem;margin:0 0 0 1.4rem;}
+.weChat_av_r a{
+    color:#0066cc;
+}
 .certified_avatar_r i{
     width:34px;
     height:34px;
@@ -1244,7 +1271,7 @@ background-size:contain;
 .purchase_gs_img{float:left;}
 .purchase_packing{display:flex;display:-webkit-flex;justify-content: space-between;}
 .purchase_packing .market{color:#ff0000;}
-.purchase_packing_r {width:2rem;text-align:left;}
+.purchase_packing_r {width:50%;text-align:left;}
 .purchase_gs_r{width:4.5rem;margin-left:0.8rem;}
 .closeBtn{
     position:absolute;
@@ -1372,7 +1399,7 @@ background-size:contain;
     float:left;
     max-width:1.5rem;
 }
-.orderDetail_list .orderDetail_r{margin:0 0 0 1.8rem;}
+.orderDetail_list .orderDetail_r,.orderDetail_r{margin:0 0 0 1.8rem;}
 .order_purchase_count{margin:0.12rem 0 0;}
 .pay_tag{
     color:#ff1d25;
@@ -1899,22 +1926,30 @@ background-size:contain;
 .person_collect span{display: block;text-align: center;}
 .collect:last-child{margin:0 0.20rem 0 0;}
 .weChat_av_r .person{color:#0062cc;font-size: 0.28rem;}
-.person_pending li{margin:0 0.28rem 0 0;}
-.person_pending a{display: block;}
+.person_pending li{margin:0 0.28rem 0 0;flex:1;}
+.person_pending a{display: block;text-align: center;}
 .person_pending i{
-    width:0.6rem;
+    width:0.5rem;
     height:0.5rem;
     display: block;
-    background-image:url(../../img/common/person_icon.png);
+    background-image:url(../../img/common/person_icon1.png);
     background-repeat: no-repeat;
     background-size:35px 200px;
     margin:0 auto;
 }
-.person_pending i.pay{background-position:0 -32px;}
+.person_pending i.pay{
+    background-position:0 -32px;
+    width:36px;
+}
 .person_pending i.receipt{background-position:0 -67px;}
-.person_pending i.evaluate{background-position:0 -100px;}
+.person_pending i.evaluate{background-position:0 -134px;}
 .person_pending i.cancle{background-position:0 -134px;}
-.person_pending i.customer_service{background-position:0 -170px;}
+.person_pending i.success{background-position:0 -100px;}
+.person_pending i.customer_service{
+    background-position:0 -170px;
+    width:32px;
+    height:30px;
+}
 .msh_product_picture .weChat_avatar{
     max-width:1.2rem;
     height:1.2rem;
@@ -1926,10 +1961,11 @@ background-size:contain;
     width:4rem;
     display: flex;
     display:-webkit-flex;
+    justify-content: space-between;
 }
 .weChat_av_r{margin:0 0 0 1rem;margin:0 0 0 1.4rem;}
 .certified_avatar_r i{
-    width:0.58rem;
+    width:30px;
     height:0.58rem;
     display:block;
     background-image:url(../../img/common/purchase_order_icon.png);
@@ -1937,4 +1973,63 @@ background-size:contain;
     background-size:37px 212px;
     background-position:0 -98px;
     margin:0 auto 0.05rem;
+}
+.person_cart{
+    position:relative;
+
+}
+.person_cart em{
+    position:absolute;
+    right:-8px;
+    top:-10px;
+    color:#ff1d25;
+    font-style:normal;
+}
+.right-arrow{color:#333;position:relative;display:block;}
+.right-arrow::after{
+    content:'';
+    display:inline-block;
+    position:absolute;
+    top:35%;
+    right:0.15rem;
+    width:.5em;
+    height:.5em;
+    border-bottom:.12em solid #999;
+    border-left:.12em solid #999;
+    -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
+    -ms-transform:translate(-70%) rotateZ(-45deg);
+}
+.person_center_item span{
+    position:relative;
+}
+.person_center_item span em{
+    position:absolute;
+    right:-8px;
+    top:-8px;
+    color:#ff1d25;
+}
+.buy_cart_pending li i{
+    display: table-caption;
+    width:40px;
+    height:34px;
+}
+.buy_cart_pending li a{
+    text-align: left;
+    color:#333;
+}
+.Mall_person_center{
+    width:100%;
+}
+.weChat_av_home i{
+    background-image:url(../../img/common/home_ico.png);
+    background-repeat: no-repeat;
+    background-size:35px 27px;
+    display: block;
+    width:34px;
+    height:28px;
+    margin:0 auto;
+}
+.weChat_av_home a,.weChat_av_home span{
+    text-align: center;
+    display: block;
 }

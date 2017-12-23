@@ -312,3 +312,11 @@ i{
 .save_money{
     color:#f5911e;
 }
+.separation_line{
+    margin: 0 0.10rem;
+    vertical-align: 1px;
+    color:#0066cc;
+}
+.pink{
+    color:#ff6482;
+}
