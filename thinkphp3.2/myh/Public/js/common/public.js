@@ -251,7 +251,7 @@ function countDown(time,id){
             $(second_elem).text(second<10?"0"+second:second);//计算秒
         } else {
             clearInterval(timer);
-            $('.countDownBox').html('<span>本次活动已结束</span>');
+            $('.count_down_box').html('<span>本次活动已结束</span>');
         }
     }, 1000);
 }
