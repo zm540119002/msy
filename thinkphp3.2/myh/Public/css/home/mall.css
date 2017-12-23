@@ -1873,6 +1873,9 @@ background-size:contain;
     background: #e39433;
     padding:0.25rem 0 0.25rem 0.15rem;
 }
+.wt_banner img{
+    vertical-align: middle;
+}
 .myh_detail_intro h2{
     font-weight:normal;
     color:#0066cc;
