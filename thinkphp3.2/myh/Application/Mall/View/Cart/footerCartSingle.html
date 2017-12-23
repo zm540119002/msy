@@ -1,5 +1,7 @@
 <section id="areaLayer" class="express-area-box cart" style="display:none;">
-    <div class="purchase_goods_module f24 goodsInfo"></div>
+    <div class="purchase_goods_module f24 goodsInfo">
+        <ul class="goods_list"></ul>
+    </div>
     <include file="Cart/footerCartMenuSingle" />
 </section>
 <div id="areaMask" class="mask" data-show="0"></div>
@@ -44,7 +46,7 @@
                 success: function(data){
                     $('.loading').hide();
                     if(data){
-                        $('div.goodsInfo').html(data);
+                        $('ul.goods_list').html(data);
                     }
                 }
             });

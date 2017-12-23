@@ -110,14 +110,23 @@ function assemblyData() {
 
 //计算商品列表总价
 function calculateTotalPrice(){
-    var _thisLi = $('ul.goods_list').find('li');
-    var num = _thisLi.find('.gshopping_count').val();
-    if(!isPosIntNumberOrZero(num)){
+    var _thisLis = $('ul.goods_list').find('li');
+    var num = _thisLis.find('.gshopping_count').val();
+    var isInt = true;
+    var amount = 0.00;
+    $.each(_thisLis,function(){
+        var _this = $(this);
+        var num = _this.find('.gshopping_count').val();
+        if(!isPosIntNumberOrZero(num)){
+            isInt = false;
+            return false;
+        }
+        amount += _this.find('price').text() * num;
+    });
+    if(!isInt){
         dialog.error('请输入正整数');
         return false;
     }
-    var amount = 0.00;
-    amount += _thisLi.find('span.purchase_price').find('price').text() * num;
     $('footer').find('price').html(amount.toFixed(2));
 }
 
