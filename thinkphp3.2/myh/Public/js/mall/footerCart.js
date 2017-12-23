@@ -113,7 +113,7 @@ function calculateTotalPrice(){
     var _thisLis = $('ul.goods_list').find('li');
     var num = _thisLis.find('.gshopping_count').val();
     var isInt = true;
-    var amount = 0.00;
+    var amount = 0;
     $.each(_thisLis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();

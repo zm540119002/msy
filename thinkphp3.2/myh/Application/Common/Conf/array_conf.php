@@ -25,7 +25,7 @@ return array(
         array('pay_now'   => '立即支付',),//6
         array('determine_order'   => '确定订单',),//7
     ),
-    
+    //商品购买类型
     'BUY_TYPE'=>array(
         '1'=>array(
             'buy_type' =>'1',

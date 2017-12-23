@@ -1,7 +1,11 @@
 <notempty name="goodsInfo">
     <li data-id="{$goodsInfo.id}">
         <div class="purchase_goods_detail">
-            <img class="purchase_gs_img" src="PUBLIC_IMG/common/default/no_pic_40.jpg" alt="">
+            <empty name="vo.main_img">
+                <img class="purchase_gs_img" src="PUBLIC_IMG/common/default/no_pic_40.jpg" alt="">
+                <else/>
+                <img src="UPLOAD_IMG/{$vo.main_img}" alt="">
+            </empty>
             <div class="purchase_gs_r">
                 <p>{$goodsInfo.name}</p>
                 <p>{$goodsInfo.remark}</p>

@@ -52,7 +52,9 @@
         </section>
     </article>
 </block>
-<block name="footer"></block>
+<block name="footer">
+    <include file="Cart/footerCartSingle" />
+</block>
 <block name="script">
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
@@ -64,7 +66,8 @@
 
             var config = {
                 pageSize:4,
-                buyType:2
+                buyType:2,
+                templateType:'photo'
             };
             //初始化
             getGoodsList(config);
