@@ -58,25 +58,27 @@
             <h2>商品参数</h2>
             <div>{$goodsInfo.param|htmlspecialchars_decode}</div>
         </section>
-        <section class="bottomLine">
-            <div>
-                <img src="" alt="">
-            </div>
-            <ul class="group_purchase">
-                <li>
-                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                    <span>团长</span>
-                </li>
-                <li>
-                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                    <span>成员</span>
-                </li>
-                <li>
-                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                    <span>成员</span>
-                </li>
-            </ul>
-        </section>
+        <if condition="$goodsInfo.buy_type eq 2">
+            <section class="bottomLine">
+                <div>
+                    <img src="" alt="">
+                </div>
+                <ul class="group_purchase">
+                    <li>
+                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <span>团长</span>
+                    </li>
+                    <li>
+                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <span>成员</span>
+                    </li>
+                    <li>
+                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <span>成员</span>
+                    </li>
+                </ul>
+            </section>
+        </if>
         <section class="myh_detail_intro detail_common_module">
             <h2>商品详情图</h2>
             <div>
