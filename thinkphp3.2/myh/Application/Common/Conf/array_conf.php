@@ -25,6 +25,9 @@ return array(
         array('pay_now'   => '立即支付',),//6
         array('determine_order'   => '确定订单',),//7
         array('initiate_group_buy'   => '支付并发起微团购',),//8
+        array('earnings'   => '收益',),//9
+        array('QR_codes'   => '我的二维码',),//10
+        array('forward'   => '一键分享转发',),//11
     ),
     //商品购买类型
     'BUY_TYPE'=>array(

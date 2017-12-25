@@ -100,7 +100,14 @@ class GoodsController extends BaseController {
             }else{
                 $conf = array(2,3,4);
             }
+
+            if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){
+               $conf = array(9,10,11);
+            }
+
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+          
+
             $this ->display();
         }
     }
