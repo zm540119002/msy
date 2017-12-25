@@ -133,9 +133,12 @@ class OrderController extends AuthUserController {
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
             );
+            //商品列表
             $this->goodsList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
             //商品列表操作类型
             $this->goodsListOptionType = 'withNum';
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,7));
             $this->display();
         }
     }

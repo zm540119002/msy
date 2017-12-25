@@ -11,17 +11,19 @@
                 <div class="order_flex_single">
                     <p>收货人姓名：<span>{$orderInfo.consignee_name}</span></p>
                     <p>收货人手机号：<span>{$orderInfo.consignee_mobile}</span></p>
-                    <p>收货人地址：<span>{$orderInfo.province}{$orderInfo.city}{$orderInfo.area}{$orderInfo.detailed_address}</span></p>
+                    <p>收货人地址：<span class="address"></span></p>
                 </div>
                 <a href="javascript:void(0);" class="select_address">收货人地址</a>
-                <ul class="orderDetail_list">
+                <ul class="orderDetail_list goods_list">
                     <include file="Goods/goodsListTpl" />
                 </ul>
             </div>
         </section>
     </article>
 </block>
-<block name="footer"></block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
+</block>
 <block name="script">
     <script src="PUBLIC_JS/common/jquery.area.js"></script>
     <script type="text/javascript">
@@ -34,45 +36,10 @@
             arr.push(province);
             arr.push(city);
             arr.push(area);
+            console.log(arr);
             if(arr['province'] && arr['city'] && arr['area']){
-                $('li.orderInfo').find('.detailConsigneeAddress').setArea(arr);
+                $('.address').setArea(arr);
             }
-
-            var consigneeInfoList=$('#consigneeInfoList').html();
-            $('body').on('click','.modify',function(){
-                var consigneeInfoObject={};
-                layer.open({
-                    btn:['确定','取消'],
-                    title:['指定收货人','border-bottom:1px solid #d9d9d9;'],
-                    className:'consigneeInfoList_layer',
-                    content:consigneeInfoList,
-                    success:function(){
-                        $('.consigneeList li').on('click',function(){
-                            $(this).addClass('current').siblings().removeClass('current');
-                            consigneeInfoObject={
-                                consigneeName:$(this).find('.consigneeName').text(),
-                                consigneePhone:$(this).find('.consigneePhone').text(),
-                                consigneeAddress:$(this).find('.consigneeAddress').text()
-                            };
-                            $(this).data('address',consigneeInfoObject);
-                            console.log(consigneeInfoObject);
-                        });
-                        $.each($('.consigneeList li'), function(i,val){
-                            // if(tBranchText==$(this).text()){
-                            //     $(this).addClass('current');
-                            //     $(this).parent().siblings().find('.branch_n_inpt').removeClass('current');
-                            //     return false;
-                            // }
-                        });
-                    },
-                    yes:function(index){
-                        $('.detailConsigneeName').text(consigneeInfoObject.consigneeName);
-                        $('.detailConsigneePhone').text(consigneeInfoObject.consigneePhone);
-                        $('.detailConsigneeAddress').text(consigneeInfoObject.consigneeAddress);
-                        layer.close(index);
-                    }
-                });
-            });
         });
     </script>
 </block>

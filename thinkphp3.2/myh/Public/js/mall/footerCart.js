@@ -1,4 +1,6 @@
 $(function () {
+    //计算商品列表总价
+    calculateTotalPrice();
     //加
     $('body').on('click','.gplus',function(){
         //单个商品数量自加
