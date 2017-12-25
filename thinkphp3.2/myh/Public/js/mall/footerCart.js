@@ -21,8 +21,8 @@ $(function () {
         calculateTotalPrice();
     });
 
-    //立即结算
-    $('body').on('click','.buy_now',function(){
+    //立即结算 立即购买
+    $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData();
         var url = MODULE + '/Order/generate';
         $.ajax({
