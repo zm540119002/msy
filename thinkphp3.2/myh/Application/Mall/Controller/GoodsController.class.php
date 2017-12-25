@@ -46,7 +46,7 @@ class GoodsController extends BaseController {
             $where['g.buy_type'] = I('get.buyType',0,'int');
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price',
+            'g.id','g.buy_type','g.sale_price','g.commission',
             'gb.name','gb.price','gb.main_img',
         );
         $join = array(
@@ -63,6 +63,8 @@ class GoodsController extends BaseController {
             $this ->display('goodsPhotoListTpl');
         }else if($templateType=='list'){
             $this ->display('goodsListTpl');
+        }else if($templateType=='share'){
+            $this ->display('goodsShareListTpl');
         }
     }
 
