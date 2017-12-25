@@ -1786,7 +1786,7 @@ background-size:contain;
     margin:0 0 0.10rem 0;
 }
 .business_count{
-    margin:0 0 0 0;
+    margin:0 0.15rem 0 0;
 }
 .business_pdetail .add_cart{
     background: #33cc33;
@@ -1848,12 +1848,21 @@ background-size:contain;
     padding:0.15rem 0;
     border-bottom:1px solid #d9d9d9;
 }
-.myh_detail_price{
+.myh_detail_price .options{
     display: flex;
     display:-webkit-flex;
+    justify-content: space-between;
+    width:100%;
+    padding:0 0 0.10rem 0;
 }
 .myh_detail_price div,.myh_detail_price span{
-    flex:1;
+    /*flex:1;*/
+    /*margin:0 0.18rem 0 0;*/
+}
+.myh_detail_price .options:last-child{
+    padding-top:0.12rem;
+    border-top:1px solid #d9d9d9;
+    border-bottom:0;
 }
 .myh_product_intro{
     color:#0066cc;
@@ -1863,6 +1872,9 @@ background-size:contain;
     display:-webkit-flex;
     background: #e39433;
     padding:0.25rem 0 0.25rem 0.15rem;
+}
+.wt_banner img{
+    vertical-align: middle;
 }
 .myh_detail_intro h2{
     font-weight:normal;

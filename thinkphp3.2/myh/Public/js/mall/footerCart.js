@@ -111,7 +111,6 @@ function assemblyData() {
 //计算商品列表总价
 function calculateTotalPrice(){
     var _thisLis = $('ul.goods_list').find('li');
-    var num = _thisLis.find('.gshopping_count').val();
     var isInt = true;
     var amount = 0;
     $.each(_thisLis,function(){

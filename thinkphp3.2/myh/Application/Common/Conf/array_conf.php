@@ -24,6 +24,7 @@ return array(
         array('clearing_now'   => '立即结算',),//5
         array('pay_now'   => '立即支付',),//6
         array('determine_order'   => '确定订单',),//7
+        array('initiate_group_buy'   => '支付并发起微团购',),//8
     ),
     //商品购买类型
     'BUY_TYPE'=>array(
