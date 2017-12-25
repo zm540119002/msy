@@ -15,14 +15,14 @@ $(function () {
         calculateTotalPrice();
     });
 
-    //失去焦点
+    //购买数量.失去焦点
     $('body').on('blur','.gshopping_count',function(){
         //计算商品列表总价
         calculateTotalPrice();
     });
 
-    //立即结算
-    $('body').on('click','.buy_now',function(){
+    //立即结算/立即购买
+    $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData();
         var url = MODULE + '/Order/generate';
         $.ajax({
