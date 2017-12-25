@@ -351,10 +351,10 @@ class OrderController extends AuthUserController {
             );
             $join = array(
                 ' left join goods g on g.id = od.foreign_id ',
+                ' left join goods_base gb on gb.id = g.goods_base_id ',
             );
             $field = array(
-                'g.id goods_id','g.name good_name','g.price','g.vip_price','g.senior_vip_price','g.gold_vip_price',
-                'g.special_price','g.unit',
+                'g.id goods_id','g.sale_price','gb.name good_name','gb.price','gb.package_unit',
             );
             $this->orderDetaiList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
             $this->display();
