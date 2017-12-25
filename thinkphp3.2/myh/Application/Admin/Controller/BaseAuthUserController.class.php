@@ -25,11 +25,11 @@ class BaseAuthUserController extends BaseController{
     public function isLogin() {
         //获取session
         $user = session('admin.user');
-        if (($user && $user->id)) {
+        if (($user && $user['id'])) {
             return true;
         }
-
         return false;
+
     }
 
  
