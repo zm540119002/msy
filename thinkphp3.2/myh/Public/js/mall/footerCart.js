@@ -1,8 +1,16 @@
 $(function () {
     //加减
-    $('body').on('click','.gplus,.greduce',function(){
+    $('body').on('click','.gplus',function(){
         //单个商品数量自加
         goodsNumPlus($(this));
+        //计算商品列表总价
+        calculateTotalPrice();
+    });
+
+    //减
+    $('body').on('click','.greduce',function(){
+        //单个商品数量自减
+        goodsNumReduce($(this));
         //计算商品列表总价
         calculateTotalPrice();
     });
