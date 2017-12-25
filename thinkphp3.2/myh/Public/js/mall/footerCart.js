@@ -48,7 +48,7 @@ $(function () {
                     if(data.info=='isAjax'){
                         loginDialog();
                     }else{
-                        location.href = MODULE + '/Order/confirmOrder/orderId/' + data.id;
+                        location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
                     }
                 }
             }

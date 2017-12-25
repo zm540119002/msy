@@ -34,13 +34,13 @@ class OrderController extends AuthUserController {
         $modelOrder->startTrans();
         $_POST = [];
         $_POST['sn'] = $orderSN;
-        $_POST['status'] = 1;
+        $_POST['pay_status'] = 1;
         $_POST['user_id'] = $this->user['id'];
         $_POST['amount'] = $amount;
         $_POST['create_time'] = time();
         $res = $modelOrder->addOrder();
         $orderId = $res['id'];
-        if(!$res['id']){
+        if(!$orderId){
             $modelOrder->rollback();
             $this->ajaxReturn(errorMsg($res));
         }
@@ -49,6 +49,7 @@ class OrderController extends AuthUserController {
         foreach ($goodsList as $item){
             $_POST = [];
             $_POST['order_sn'] = $orderSN;
+            $_POST['order_id'] = $orderId;
             $_POST['price'] = $item['price'];
             $_POST['num'] = $item['num'];
             $_POST['foreign_id'] = $item['foreign_id'];
@@ -85,10 +86,56 @@ class OrderController extends AuthUserController {
         $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
     }
 
-    //确认订单
-    public function confirmOrder(){
+    //我的订单
+    public function myOrder(){
+        $modelOrder = D('Order');
         if(IS_POST){
         }else{
+            $where = array(
+                'o.user_id' => $this->user['id'],
+            );
+            if(isset($_GET['pay_status']) && intval($_GET['pay_status'])){
+                $where['o.pay_status'] = I('get.pay_status',0,'int');
+            }
+            $this->orderList = $modelOrder->selectOrder($where);
+            $this->display();
+        }
+    }
+
+    //订单-详情页
+    public function orderDetail(){
+        $modelOrder = D('Order');
+        $modelOrderDetail = D('OrderDetail');
+        if(IS_POST){
+        }else{
+            $where = array(
+                'o.user_id' => $this->user['id'],
+            );
+            if(isset($_GET['orderId']) && intval($_GET['orderId'])){
+                $where['o.id'] = I('get.orderId',0,'int');
+            }
+            $where['o.pay_status'] = $_GET['payStatus']?I('get.payStatus',0,'int'):1;
+            $join = array(
+                ' left join consignee_address ca on o.address_id = ca.id ',
+            );
+            $field = array(
+                'ca.id','ca.consignee_name','ca.consignee_mobile','ca.province','ca.city','ca.area','ca.detailed_address',
+            );
+            $orderList = $modelOrder->selectOrder($where,$field,$join);
+            $this->orderInfo = $orderList[0];
+            $where = array(
+                'od.order_sn' => $this->orderInfo['sn'],
+            );
+            $join = array(
+                ' left join goods g on g.id = od.foreign_id ',
+                ' left join goods_base gb on gb.id = g.goods_base_id ',
+            );
+            $field = array(
+                'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
+            );
+            $this->goodsList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
+            //商品列表操作类型
+            $this->goodsListOptionType = 'withNum';
             $this->display();
         }
     }
@@ -307,56 +354,6 @@ class OrderController extends AuthUserController {
             );
             $wallet = $modelWallet->selectWallet($where);
             $this->wallet = $wallet[0];
-            $this->display();
-        }
-    }
-
-    //我的采购订单
-    public function myOrder(){
-        $modelOrder = D('Order');
-        if(IS_POST){
-        }else{
-            $where = array(
-                'o.user_id' => $this->user['id'],
-            );
-            if(isset($_GET['pay_status']) && intval($_GET['pay_status'])){
-                $where['o.pay_status'] = I('get.pay_status',0,'int');
-            }
-            $this->orderList = $modelOrder->selectOrder($where);
-            $this->display();
-        }
-    }
-
-    //订单-详情页
-    public function orderDetail(){
-        $modelOrder = D('Order');
-        $modelOrderDetail = D('OrderDetail');
-        if(IS_POST){
-        }else{
-            $where = array(
-                'o.user_id' => $this->user['id'],
-            );
-            $orderId = I('get.orderId',0,'int');
-            $where['o.id'] = $orderId;
-            $join = array(
-                ' left join consignee_address ca on o.address_id = ca.id ',
-            );
-            $field = array(
-                'ca.id','ca.consignee_name','ca.consignee_mobile','ca.province','ca.city','ca.area','ca.detailed_address',
-            );
-            $orderList = $modelOrder->selectOrder($where,$field,$join);
-            $this->orderInfo = $orderList[0];
-            $where = array(
-                'od.order_sn' => $this->orderInfo['sn'],
-            );
-            $join = array(
-                ' left join goods g on g.id = od.foreign_id ',
-                ' left join goods_base gb on gb.id = g.goods_base_id ',
-            );
-            $field = array(
-                'g.id goods_id','g.sale_price','gb.name good_name','gb.price','gb.package_unit',
-            );
-            $this->orderDetaiList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
             $this->display();
         }
     }
