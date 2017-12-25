@@ -404,10 +404,13 @@ font-size:0.20rem;
     right:-0.25rem;
     width:.5em;
     height:.5em;
-    border-bottom:.12em solid #f5911e;
-    border-left:.12em solid #f5911e;
+    border-bottom:.12em solid #009a3e;
+    border-left:.12em solid #009a3e;
     -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
     -ms-transform:translate(-70%) rotateZ(-45deg);
+}
+.comment_star_module .comment_num{
+    color:#009a3e;
 }
 .ex_gratia_intro{padding:0.15rem 0 0.12rem 0.15rem;}
 .ex_gratia_intro dt{float:left;}
@@ -1860,9 +1863,12 @@ background-size:contain;
     /*margin:0 0.18rem 0 0;*/
 }
 .myh_detail_price .options:last-child{
-    padding-top:0.12rem;
+    padding-top:0.28rem;
     border-top:1px solid #d9d9d9;
     border-bottom:0;
+}
+.myh_detail_price .options .save_money{
+    margin-right:0.25rem;
 }
 .myh_product_intro{
     color:#0066cc;
