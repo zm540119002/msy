@@ -1,27 +1,19 @@
 $(function () {
-    //加
-    $('body').on('click','.gplus',function(){
+    //加减
+    $('body').on('click','.gplus,.greduce',function(){
         //单个商品数量自加
         goodsNumPlus($(this));
         //计算商品列表总价
         calculateTotalPrice();
     });
 
-    //减
-    $('body').on('click','.greduce',function(){
-        //单个商品数量自减
-        goodsNumReduce($(this));
-        //计算商品列表总价
-        calculateTotalPrice();
-    });
-
-    //失去焦点
+    //购买数量.失去焦点
     $('body').on('blur','.gshopping_count',function(){
         //计算商品列表总价
         calculateTotalPrice();
     });
 
-    //立即结算 立即购买
+    //立即结算/立即购买
     $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData();
         var url = MODULE + '/Order/generate';

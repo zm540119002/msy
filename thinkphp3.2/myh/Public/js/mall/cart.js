@@ -1,9 +1,9 @@
 $(function () {
-    //加减
+    //购物车.加减
     $('body').on('click','.gplus,.greduce',function(){
         replaceOneGoodsToCart($(this));
     });
-    //失去焦点
+    //购买数量.失去焦点
     $('body').on('blur','.gshopping_count',function(){
         replaceOneGoodsToCart($(this));
     });
