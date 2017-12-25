@@ -609,3 +609,16 @@ function isPhoneSide()
     }
     return false;
 }
+
+
+/**
+ * @param        $value
+ * @param string $id
+ * @param array  $config
+ * @return bool
+ */
+function captcha_check($value, $id = "", $config = [])
+{
+    $captcha = new \Think\Verify($config);
+    return $captcha->check($value, $id);
+}

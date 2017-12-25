@@ -46,8 +46,8 @@ class GoodsController extends BaseController {
             $where['g.buy_type'] = I('get.buyType',0,'int');
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price',
-            'gb.name','gb.price','gb.main_img',
+            'g.id','g.buy_type','g.sale_price','g.commission',
+            'gb.name','gb.price','gb.main_img','gb.thumb_img',
         );
         $join = array(
             ' left join goods_base gb on g.goods_base_id = gb.id ',
@@ -63,6 +63,8 @@ class GoodsController extends BaseController {
             $this ->display('goodsPhotoListTpl');
         }else if($templateType=='list'){
             $this ->display('goodsListTpl');
+        }else if($templateType=='share'){
+            $this ->display('goodsShareListTpl');
         }
     }
 
@@ -79,7 +81,7 @@ class GoodsController extends BaseController {
                 $where['g.id'] = I('get.goodsId',0,'int');
             }
             $field = array(
-                'g.id','g.buy_type','g.sale_price',
+                'g.id','g.buy_type','g.sale_price','g.commission',
                 'gb.no','gb.name','gb.price','gb.main_img','gb.single_specification','gb.param','gb.intro',
                 'gb.usage','gb.notices','gb.detail_img',
             );
@@ -98,7 +100,14 @@ class GoodsController extends BaseController {
             }else{
                 $conf = array(2,3,4);
             }
+
+            if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){
+               $conf = array(9,10,11);
+            }
+
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+
+
             $this ->display();
         }
     }

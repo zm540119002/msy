@@ -1,15 +1,23 @@
 <?php
 namespace Admin\Controller;
-
 use web\all\Controller\BaseController;
+use Admin\Lib\AuthUser;
 class UserController extends BaseController {
     public function _initialize() {
     }
     //登录
     public function login(){
         if (IS_POST) {
-            var_dump(I());exit;
             $this->_login();
+        } else {
+            $this->display();
+        }
+    }
+    //注册
+    public function aaa(){
+        if (IS_POST) {
+            print_r(I());exit;
+            $this->_register();
         } else {
             $this->display();
         }
@@ -29,6 +37,14 @@ class UserController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
+        $captcha = I('post.captcha',0,'string');
+        if (!$captcha) {
+            $this->ajaxReturn(errorMsg('请输入验证码！'));
+        }
+        if (!captcha_check($captcha)) {
+            $this->error('验证码不正确');
+        }
+
         $name = I('post.name','','string');
         if (!$name) {
             $this->ajaxReturn(errorMsg('请输入账号！'));
@@ -37,16 +53,7 @@ class UserController extends BaseController {
         if (!$password) {
             $this->ajaxReturn(errorMsg('请输入密码！'));
         }
-        $mobile_phone = I('post.mobile_phone',0,'number_int');
-        if (!$mobile_phone) {
-            $this->ajaxReturn(errorMsg('请输入手机号码！'));
-        }
-        $captcha = I('post.captcha',0,'number_int');
-        if (!$captcha) {
-            $this->ajaxReturn(errorMsg('请输入验证码！'));
-        }
         $captcha_type = 'login';
-
         if ($name && $password) {//账号密码登录
             $user = AuthUser::getUser(array(
                 'name' => $name,
@@ -55,19 +62,6 @@ class UserController extends BaseController {
             if (!$user) {
                 $this->ajaxReturn(errorMsg('账号密码不正确，请重新输入'));
             }
-        }elseif($mobile_phone && $captcha){//短信验证码登录
-            if( !$this->_check_captcha($mobile_phone,$captcha,$captcha_type) ){
-                $this->ajaxReturn(errorMsg('验证码错误，请重新获取验证码！'));
-            }
-            $user = AuthUser::getUser(array(
-                'mobile_phone' => $mobile_phone,
-                'password' => $password,
-            ));
-            if (!$user) {
-                $this->ajaxReturn(errorMsg('不是预留手机号码！'));
-            }
-        }else{
-            $this->ajaxReturn(errorMsg('请输入完整的登录信息'));
         }
 
         //更新最后登录的时间
@@ -75,7 +69,7 @@ class UserController extends BaseController {
 
         //设置session
         AuthUser::setSession($user);
-        $this->ajaxReturn(successMsg(session('backUrl')?(is_ssl()?'https://':'http://').session('backUrl'):U('login')));
+        $this->redirect('Index/index');
     }
 
     private function _register(){

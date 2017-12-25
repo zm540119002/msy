@@ -1,0 +1,53 @@
+<extend name="Public:base" />
+<block name="title">订单明细</block>
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
+</block>
+<block name="content">
+    <article class="f24">
+        <section class="bottomLine">
+            <h2 class="header_title">订单明细</h2>
+        </section>
+        <section>
+            <div class="order_detail_item">
+                <div class="order_flex_single">
+                    <p>收货人姓名：<span>阿森纳</span></p>
+                    <p>收货人手机号：<span>13430393458</span></p>
+                    <p>收货人地址：<span>广州市</span></p>
+                </div>
+                <a href="javascript:void(0);" class="select_address">收货人地址管理</a>
+                <ul class="orderDetail_list">
+                    <li>
+                        <a>
+                            <img src="/Public/img/common/default/no_pic_100.jpg" alt="">
+                            <div class="orderDetail_r">
+                                <p>XXXXXXXXXXXXXXXX</p>
+                                <div>单品规格：<span>12g*20条/盒</span></div>
+                                <div>采购包装：<span>10盒/箱(整箱采购)</span></div>
+                                <div class="concessional_rate"><span>￥</span><price>198</price><del>￥980</del></div>
+                            </div>
+                            <div class="order_purchase_count">购买数量<span>100</span></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <p class="friend_tipc_text">*款项已按采购福利规则自动抵扣特划算代金券</p>
+    </article>
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            countDown("2017/11/29 15:25:00",$(".countDownBox"));
+            $('body').on('click','.notice_platform',function(){
+                layer.open({
+                    content:'通知平台<br/>我已收到订单货品',
+                    btn:'确定'
+                });
+            });
+        });
+    </script>
+</block>
