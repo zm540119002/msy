@@ -48,7 +48,7 @@ $(function () {
                     if(data.info=='isAjax'){
                         loginDialog();
                     }else{
-                        location.href = MODULE + '/Order/settlement/orderId/' + data.id;
+                        location.href = MODULE + '/Order/confirmOrder/orderId/' + data.id;
                     }
                 }
             }
@@ -94,15 +94,20 @@ function assemblyData() {
             isInt = false;
             return false;
         }
-        if(parseInt(num)){
+        var goodsId = _this.data('id');
+        if(parseInt(num) && goodsId){
             var tmp = {};
-            tmp.foreign_id = _this.data('id');
+            tmp.foreign_id = goodsId;
             tmp.num = num;
             postData.goodsList.push(tmp);
         }
     });
+    if(postData.goodsList.length == 0){
+        dialog.error('请输入选择商品');
+        return false;
+    }
     if(!isInt){
-        dialog.error('请输入正整数');
+        dialog.error('购买数量为正整数');
         return false;
     }
     return postData;
