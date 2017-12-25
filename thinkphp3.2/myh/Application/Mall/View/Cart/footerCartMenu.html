@@ -44,5 +44,21 @@
             <!--立即支付-->
             <a href="javascript:void(0);" class="group_btn100 bff1d25 pay_now"><i class="collect"></i>{$vo.pay_now}</a>
         </notempty>
+        <notempty name="vo.earnings">
+            <!--收益-->
+        <div class="group_btn100 bfff">
+            <span class="goods_total_price amount">￥<price>{$goodsInfo.commission}</price></span>
+        </div>
+        </notempty>
+        <notempty name="vo.QR_codes">
+            <!--我的二维码-->
+            <a href="javascript:void(0);" class="group_btn100 bff6482 QR_codes"><i class="collect"></i>{$vo.QR_codes}</a>
+        </notempty>
+        <notempty name="vo.forward">
+            <!--一键分享转发-->
+            <a href="javascript:void(0);" class="group_btn100 bff1d25 forward"><i class="collect"></i>{$vo.forward}</a>
+        </notempty>
+
+
     </volist>
 </footer>

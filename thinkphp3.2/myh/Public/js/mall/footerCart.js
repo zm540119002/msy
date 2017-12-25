@@ -1,4 +1,6 @@
 $(function () {
+    //计算商品列表总价
+    calculateTotalPrice();
     //加
     $('body').on('click','.gplus',function(){
         //单个商品数量自加
@@ -15,14 +17,14 @@ $(function () {
         calculateTotalPrice();
     });
 
-    //失去焦点
+    //购买数量.失去焦点
     $('body').on('blur','.gshopping_count',function(){
         //计算商品列表总价
         calculateTotalPrice();
     });
 
-    //立即结算
-    $('body').on('click','.buy_now',function(){
+    //立即结算/立即购买
+    $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData();
         var url = MODULE + '/Order/generate';
         $.ajax({
@@ -48,7 +50,7 @@ $(function () {
                     if(data.info=='isAjax'){
                         loginDialog();
                     }else{
-                        location.href = MODULE + '/Order/settlement/orderId/' + data.id;
+                        location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
                     }
                 }
             }
@@ -94,15 +96,20 @@ function assemblyData() {
             isInt = false;
             return false;
         }
-        if(parseInt(num)){
+        var goodsId = _this.data('id');
+        if(parseInt(num) && goodsId){
             var tmp = {};
-            tmp.foreign_id = _this.data('id');
+            tmp.foreign_id = goodsId;
             tmp.num = num;
             postData.goodsList.push(tmp);
         }
     });
+    if(postData.goodsList.length == 0){
+        dialog.error('请输入选择商品');
+        return false;
+    }
     if(!isInt){
-        dialog.error('请输入正整数');
+        dialog.error('购买数量为正整数');
         return false;
     }
     return postData;

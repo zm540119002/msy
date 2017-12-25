@@ -20,7 +20,7 @@
                 {$goodsInfo.intro|htmlspecialchars_decode}
             </div>
             <ul class="myh_detail_item myh_detail_price goods_list">
-                <li>
+                <li data-id="{$goodsInfo.id}">
                     <div class="options">
                         <div class="concessional_rate">优惠价:
                             <span>￥</span><price>{$goodsInfo.sale_price}</price>
@@ -40,7 +40,7 @@
                     </div>
                 </li>
             </ul>
-            <div class="goods_star_score">
+            <div class="goods_star_score comment_star_module">
                 <div class="five_star">
                     <div class="star_img">
                         <img src="PUBLIC_IMG/common/starred.png">
@@ -81,7 +81,7 @@
         </if>
         <section class="myh_detail_intro detail_common_module">
             <h2>商品详情图</h2>
-            <div>
+            <div class="detail_intro_common">
                 <p>{$goodsInfo.detail_img|formatImg}</p>
             </div>
             <div class="detail_intro_common">

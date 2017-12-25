@@ -28,17 +28,17 @@ class CartController extends BaseController {
                     'gb.name','gb.single_specification','gb.price','gb.package_unit',
                 );
                 $join = array(
-                    'left join goods_base gb on gb.id = g.goods_base_id '
+                    'left join goods_base gb on gb.id = g.goods_base_id ',
                 );
                 $goodsList = $modelGoods->selectGoods($where,$field,$join);
                 $this->goodsList = GoodsNumMergeById($cart,$goodsList);
-                //购物车配置开启的项
-                $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,5));
                 //商品列表操作类型
                 $this->goodsListOptionType = 'withDel';
                 $this->display('Goods/goodsListTpl');
             }
         }else{
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,5));
             $this->display();
         }
     }

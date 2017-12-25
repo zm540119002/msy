@@ -11,7 +11,7 @@
             <p>{$vo.name}</p>
             <div>商品规格：<span>{$vo.single_specification} / {$vo.package_unit|getUnitCN}</span></div>
             <div class="commodity_purchaser f24">
-                <span class="pink">￥{$vo.price}</span><del>￥{$vo.price}</del>
+                <span class="pink">￥<price>{$vo.sale_price}</price></span><del>￥{$vo.price}</del>
             </div>
         </div>
         <switch name="goodsListOptionType" >
@@ -28,7 +28,8 @@
             </case>
             <case value="withNum">
                 <div class="purchase_goods_num purchase_cart_list">
-                    购买数量(单位:{$vo.package_unit|getUnitCN})：<span>{$vo.num|default='0'}</span>
+                    购买数量(单位:{$vo.package_unit|getUnitCN})：
+                    <input type="text" value="{$vo.num|default='0'}" class="f24 gshopping_count">
                 </div>
             </case>
             <default />

@@ -317,6 +317,18 @@ i{
     vertical-align: 1px;
     color:#0066cc;
 }
+.bottomLine{
+    border-bottom:8px solid #f2f2f2;
+    padding:0 0 0 0.12rem;
+}
 .pink{
     color:#ff6482;
+}
+.header_title{
+    padding:0.15rem 0;
+    text-align:center;
+    font-weight:normal;
+}
+.friend_tipc_text{
+    margin:1.2rem 0 0 0.12rem;
 }
