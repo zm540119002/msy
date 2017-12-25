@@ -11,7 +11,7 @@
             <p>{$vo.name}</p>
             <div>商品规格：<span>{$vo.single_specification} / {$vo.package_unit|getUnitCN}</span></div>
             <div class="commodity_purchaser f24">
-                <span class="pink">￥{$vo.price}</span><del>￥{$vo.price}</del>
+                <span class="pink">￥{$vo.sale_price}</span><del>￥{$vo.price}</del>
             </div>
         </div>
         <switch name="goodsListOptionType" >
