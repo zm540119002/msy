@@ -2051,3 +2051,188 @@ background-size:contain;
     text-align: center;
     display: block;
 }
+/*推客分享*/
+.header_Adverti{
+    background: #fff;
+    padding:0.15rem 0.20rem;
+    color:#009a3e;
+}
+.twitter_product_intro{
+    width:2.8rem;
+    word-break: break-all;
+}
+.Mall_person_center{
+    width:100%;
+}
+.weChat_av_home i{
+    background-image:url(../../img/common/home_ico.png);
+    background-repeat: no-repeat;
+    background-size:35px 27px;
+    display: block;
+    width:34px;
+    height:32px;
+    margin:0 auto;
+}
+.weChat_av_home i.partner{
+    background-image:url(../../img/home/agent_icon.png);
+    background-repeat: no-repeat;
+    background-size:35px 140px;
+}
+.weChat_av_home a,.weChat_av_home span{
+    text-align: center;
+    display: block;
+}
+.person_center_item{
+    overflow: hidden;
+}
+.person_center_item span.icon,
+.agent_head_bar a i{
+    background-image:url(../../img/home/agent_icon.png);
+    background-repeat: no-repeat;
+    background-size:35px 140px;
+    width:36px;
+    height:36px;
+    display: inline-block;
+    vertical-align: middle;
+    float:left;
+}
+.purchase_certification span.sign_city{display:inline-block;}
+.agent_head_bar a i{
+    background-position:0 -108px;
+    margin-right:0;
+}
+.agent_purchase_list{
+    background: #fff;
+}
+.person_center_item span.give_agent{
+    background-position:0 -35px;
+}
+.person_center_item span.see_agent{
+    background-position:0 -72px;
+}
+.person_center_item .agent{
+    margin:8px 0 0 40px;
+}
+.agent_head_bar{
+    display: flex;
+    display:-webkit-flex;
+    padding:0.15rem 0.12rem 0.15rem 0.18rem;
+    justify-content: space-between;
+}
+.shopping_cart{
+    background-image:url(../../img/home/commodity_ico.png);
+    background-repeat: no-repeat;
+    background-size:31px 75px;
+    text-indent:-9999rem;
+    background-position:0 4px;
+    width:34px;
+    height:28px;
+    display: block;
+}
+.agent_purchase_list .shopping_cart{
+    display: inline-block;
+    margin:0 0 0 0.15rem;
+}
+/*编辑我的基本信息*/
+.multiple_options_module{
+    padding:0.25rem 0 0 0.12rem;
+}
+.multiple_options{
+    display: flex;
+    display: -webkit-flex;
+    margin:0.20rem 0 0;
+}
+.multiple_options li{
+    /*flex:1;*/
+    text-align:center;
+    border:1px solid #0f9143;
+    color:#0f9143;
+    padding:0.08rem 0;
+    border-radius:0.05rem;
+    width:1.5rem;
+    margin:0 12px 0 0;
+}
+.partner_info_item{
+    padding:0 0 0 0.12rem;
+    margin:0 0 0.50rem 0;
+}
+.partner_info_item .h_t{
+    display: block;
+    border-bottom:1px solid #d9d9d9;
+    padding:0.10rem 0 0.10rem 0;
+    color:#e05b19;
+    margin:0 0 0.15rem 0;
+}
+.platform_leader{
+    margin:0 0 0.20rem 0;
+}
+.bind_agent_info{
+    padding:0 0.12rem 0 0.12rem;
+}
+.bind_agent_info p{
+    margin:0.20rem 0 0;
+    padding:0 0 0.10rem 0;
+}
+.mobile_verification_code{
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+}
+.mobile_verification_code input,.mobile_verification_code a{
+    width:48%;
+}
+.mobile_verification_code .mesg_code{
+    background: #d9d9d9;
+    color:#333;
+    height:40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius:0.05rem;
+}
+.my_agent{
+    position:relative;
+    display: block;
+    padding:0.10rem 0;
+    border-top:1px solid #d9d9d9;
+    color:#39b54a;
+}
+.agent_places p{
+   padding:0.12rem 0 0.05rem;
+}
+.my_agent::after{
+    content:'';
+    display:inline-block;
+    position:absolute;
+    top:38%;
+    right:0.2rem;
+    width:.5em;
+    height:.5em;
+    border-bottom:.12em solid #39b54a;
+    border-left:.12em solid #39b54a;
+    -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
+    -ms-transform:translate(-70%) rotateZ(-45deg);
+}
+.agent_mobile{
+    display: flex;
+    display: -webkit-flex;
+}
+.agent_mobile span{
+    width: 28%;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.05rem 0 0 0.05rem;
+    height: 39px;
+    line-height: 39px;
+    border-right: 0;
+    text-align: center;
+}
+.agent_mobile input{
+    border-radius:0 0.05rem 0.05rem 0;
+}
+.agent_info_list ul{
+    border-top:1px solid #d9d9d9;
+    margin:0 0 0 0.20rem;
+}
+.agent_info_list li{
+    padding:0.18rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
