@@ -1,5 +1,5 @@
 $(function () {
-    //加减
+    //加
     $('body').on('click','.gplus',function(){
         //单个商品数量自加
         goodsNumPlus($(this));
