@@ -9,7 +9,7 @@ class ReferrerController extends BaseController{
         
        $this->display();
     }
-
+    //我的推客二维码
     public function myQRCodes(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
@@ -21,16 +21,17 @@ class ReferrerController extends BaseController{
         $logPath =  realpath('Public/img/home') . '/';
         $logo = $logPath.'logo.png';
         $newRelativePath = C('USER_LOGO');
-        $shareQRCodes = createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8);
+        $shareQRCodes = createLogoQRcode($url,$logo,$newRelativePath);
         $this->ajaxReturn($shareQRCodes);
     }
 
+    //删除我的推客二维码
     public function delMyQRCodes(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
 
-        $shareQRCodes = realpath(C('UPLOAD_PATH')) . '/' .$_POST['imgUrl'];
+        $shareQRCodes = WEB_PATH.$_POST['imgUrl'];
         if(!unlink($shareQRCodes)){
             $this->ajaxReturn(errorMsg('删除二维码图片失败！'));
         }else{
@@ -38,13 +39,6 @@ class ReferrerController extends BaseController{
         }
 
     }
-    public function aa(){
-        $url = 'https://www.baidu.com';
-        $newRelativePath = C('USER_LOGO');
-        $logPath =  realpath('Public/img/home') . '/';
-        $logo = $logPath.'logo.png';
-        $shareQRCodes = createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8);
-        echo $shareQRCodes;
-    }
+
 
 }
