@@ -124,7 +124,7 @@ class GoodsController extends BaseController {
             if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){//推客产品
                 $shareInfo['shareLink'] =  $shLinkBase.'/userId/'.$user['id'];
                 $shareInfo['title'] = $this->goodsInfo['name'];
-                $shareInfo['shareImgRelativeUrl']=$this->goodsInfo['main_img'];
+                $shareInfo['shareImgUrl']=$this->goodsInfo['main_img'];
                 $shareInfo['desc']='zzzzzz';
                 $shareInfo['backUrl']=$currentLink;
             }
