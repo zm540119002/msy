@@ -659,7 +659,7 @@ function createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerP
     if(!mk_dir($newPath)){
         $this->ajaxReturn(errorMsg('创建新目录失败'));
     }
-
+    
     $filename = time().'.png';
     $logoFilename = $newPath.$filename;
 

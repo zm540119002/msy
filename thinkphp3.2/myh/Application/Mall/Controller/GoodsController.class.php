@@ -72,7 +72,6 @@ class GoodsController extends BaseController {
     public function goodsDetail(){
         if(IS_POST){
         }else{
-            print_r(123);exit;
             $modelGoods = D('Goods');
             $where = array(
                 'g.status' => 0,
