@@ -1,16 +1,10 @@
 <?php
 namespace Mall\Controller;
 
-use  web\all\Controller\BaseController;
 use web\all\Controller\AuthUserController;
 
 
 class ReferrerController extends AuthUserController{
-    //推客分享首页
-    public function index(){
-        
-       $this->display();
-    }
     //我的推客二维码
     public function myQRCodes(){
         if(!IS_POST){
@@ -24,7 +18,7 @@ class ReferrerController extends AuthUserController{
         $logo = $logPath.'logo.png';
         $newRelativePath = C('USER_LOGO');
         $shareQRCodes = createLogoQRcode($url,$logo,$newRelativePath);
-        $this->ajaxReturn($shareQRCodes);
+        $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
     }
 
     //删除我的推客二维码
@@ -32,15 +26,11 @@ class ReferrerController extends AuthUserController{
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
-
         $shareQRCodes = WEB_PATH.$_POST['imgUrl'];
         if(!unlink($shareQRCodes)){
             $this->ajaxReturn(errorMsg('删除二维码图片失败！'));
         }else{
             $this->ajaxReturn(successMsg('删除二维码图片成功！'));
         }
-
     }
-
-
 }
