@@ -126,6 +126,14 @@ class OrderController extends AuthUserController {
         $modelOrderDetail = D('OrderDetail');
         if(IS_POST){
         }else{
+            //订单绑定地址
+            if(isset($_GET['orderId']) && intval($_GET['orderId']) &&
+                isset($_GET['consigneeAddressId']) && intval($_GET['consigneeAddressId'])){
+                $where['id'] = I('get.orderId',0,'int');
+                $_POST['address_id'] = I('get.consigneeAddressId',0,'int');
+                $modelOrder->saveOrder($where);
+            }
+            //订单信息查询
             $where = array(
                 'o.user_id' => $this->user['id'],
             );

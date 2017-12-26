@@ -624,7 +624,7 @@ function captcha_check($value, $id = "", $config = [])
 }
 
 
-//生成支付二维码
+//生成不带二维码
  function createQRcode($url){
     //生成二维码图片
     $object = new Vendor\Qrcode\Qrcode();
@@ -639,31 +639,47 @@ function captcha_check($value, $id = "", $config = [])
 }
 
 
-
-function createLogoQRcode($url,$logo,$filename,$eclevel = "H", $pixelPerPoint = 8){
-
+//生成带logo二维码
+function createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
     $QRcode = new Vendor\Qrcode\Qrcode();
-    $value= $url;
-    $errorCorrectionLevel = $eclevel;
-    $matrixPointSize = $pixelPerPoint;
-    $QRcode->png($value, 'xiangyang.png', $errorCorrectionLevel, $matrixPointSize, 2);
-    $logo1 = $logo;
-    $QR = 'xiangyang.png';
-    if($logo1 !== FALSE)
+    $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
+    if(!is_dir($uploadPath)){
+        if(!mk_dir($uploadPath)){
+            $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
+        }
+    }
+    //没有带logo二维码保存路径
+    $tempPath =$uploadPath.C('TEMP_PATH');
+    if(!mk_dir($tempPath)){
+        $this->ajaxReturn(errorMsg('创建新目录失败'));
+    }
+    $noLogoFilename = $tempPath.'nologo'.time().'.png';
+    //带二维码保存路径
+    $newPath = $uploadPath . $newRelativePath;
+    if(!mk_dir($newPath)){
+        $this->ajaxReturn(errorMsg('创建新目录失败'));
+    }
+
+    $filename = time().'.png';
+    $logoFilename = $newPath.$filename;
+
+    $QRcode->png($url, $noLogoFilename, $eclevel, $pixelPerPoint, 2);
+    if($logo !== FALSE)
     {
-        $QR = imagecreatefromstring(file_get_contents($QR));
-        $logo1 = imagecreatefromstring(file_get_contents($logo1));
+        $QR = imagecreatefromstring(file_get_contents($noLogoFilename));
+        $logo = imagecreatefromstring(file_get_contents($logo));
         $QR_width = imagesx($QR);
         $QR_height = imagesy($QR);
-        $logo_width = imagesx($logo1);
-        $logo_height = imagesy($logo1);
+        $logo_width = imagesx($logo);
+        $logo_height = imagesy($logo);
         $logo_qr_width = $QR_width / 5;
         $scale = $logo_width / $logo_qr_width;
         $logo_qr_height = $logo_height / $scale;
         $from_width = ($QR_width - $logo_qr_width) / 2;
-        imagecopyresampled($QR, $logo1, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+        imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
     }
-
-    imagepng($QR,$filename);
+    imagepng($QR,$logoFilename);
+    unlink($noLogoFilename);
+    return $newRelativePath.$filename;
 
 }
