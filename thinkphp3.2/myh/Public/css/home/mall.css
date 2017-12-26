@@ -2197,6 +2197,14 @@ background-size:contain;
     display: inline-block;
     margin:0 0 0 0.15rem;
 }
+.goodsListContent li a{
+    height:2.8rem;
+    display: block;
+}
+.goodsListContent a img{
+    max-width:2.8rem;
+   
+}
 /*编辑我的基本信息*/
 .multiple_options_module{
     padding:0.25rem 0 0 0.12rem;
