@@ -160,13 +160,12 @@
                         dialog.error('AJAX错误');
                     },
                     success: function(data){
-                         clockArea();
-                        // if(data.status == 1){
-                        //     clockArea();
-                        // }
-                        // if(data.status == 0){
-                        //     dialog.error(data.info)
-                        // }
+                         if(data.status == 1){
+                             clockArea();
+                         }
+                         if(data.status == 0){
+                             dialog.error(data.info)
+                         }
                     }
                 });
 

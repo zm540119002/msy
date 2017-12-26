@@ -21,7 +21,7 @@ class GoodsController extends BaseController {
             }
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price',
+            'g.id','g.buy_type','g.sale_price','g.commission',
             'gb.no','gb.name','gb.single_specification','gb.package_num','gb.package_unit','gb.purchase_unit','gb.price',
         );
         $join = array(
@@ -90,6 +90,7 @@ class GoodsController extends BaseController {
             );
             $goodsInfo = $modelGoods->selectGoods($where,$field,$join);
             $this->goodsInfo = $goodsInfo[0];
+           
             //公共图片
             $modelCommonImg = D('CommonImages');
             $commonImg = $modelCommonImg->selectCommonImages();
