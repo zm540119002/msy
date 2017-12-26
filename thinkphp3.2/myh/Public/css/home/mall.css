@@ -832,7 +832,7 @@ float:left;
 .express-code-box{
     width: 6rem;
     position: fixed;
-    top: 10%;
+    top: 6%;
     z-index: 15;
     margin-left: -3rem;
     left: 50%;
