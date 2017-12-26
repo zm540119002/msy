@@ -124,6 +124,7 @@
 
 
             $('body').on('click','.QR_codes',function(){
+//                $('.mask,.express-code-box').fadeIn();
                 var url = window.location.href;
                 $.ajax({
                     url: MODULE + '/Referrer/myQRCodes',
@@ -136,7 +137,8 @@
                         dialog.error('AJAX错误');
                     },
                     success: function(data){
-
+                     $('.mask,.express-code-box').fadeIn();
+                       $('.twitter_code_img img').attr('src','/Uploads/'+data);
                     }
                 });
 
@@ -144,13 +146,29 @@
             $('body').on('click','.forward',function(){
 
             });
-            //二维码弹窗
-            $('body').on('click','.QR_codes',function(){
-                $('.mask,.express-code-box').fadeIn();
-            });
 
             $("#areaMask,.closeBtn").click(function() {
-                clockArea();
+               var imgUrl = $('.twitter_code_img img').attr('src');
+                $.ajax({
+                    url: MODULE + '/Referrer/delMyQRCodes',
+                    data: {imgUrl:imgUrl},
+                    type: 'post',
+                    beforeSend: function(){
+
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        if(data.status == 1){
+                            clockArea();
+                        }
+                        if(data.status == 0){
+                            dialog.error(data.info)
+                        }
+                    }
+                });
+
             });
 
         });

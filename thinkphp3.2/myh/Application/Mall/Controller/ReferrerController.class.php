@@ -24,6 +24,20 @@ class ReferrerController extends BaseController{
         $shareQRCodes = createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8);
         $this->ajaxReturn($shareQRCodes);
     }
+
+    public function delMyQRCodes(){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
+
+        $shareQRCodes = realpath(C('UPLOAD_PATH')) . '/' .$_POST['imgUrl'];
+        if(!unlink($shareQRCodes)){
+            $this->ajaxReturn(errorMsg('删除二维码图片失败！'));
+        }else{
+            $this->ajaxReturn(successMsg('删除二维码图片成功！'));
+        }
+
+    }
     public function aa(){
         $url = 'https://www.baidu.com';
         $newRelativePath = C('USER_LOGO');
