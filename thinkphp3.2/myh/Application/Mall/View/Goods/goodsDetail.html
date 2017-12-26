@@ -111,6 +111,10 @@
         </div>
     </section>
     <div id="areaMask" class="mask QR_codes_mask"></div>
+    <div class="mcover">
+        <img src="PUBLIC_IMG/common/weixin_share.png" alt="">
+        <a href="javascript:void(0);" class="weixinShare_btn">X</a>
+    </div>
 </block>
 <block name="footer">
     <include file="Cart/footerCartMenu" />
@@ -143,9 +147,6 @@
                 });
 
             });
-            $('body').on('click','.forward',function(){
-
-            });
 
             $("#areaMask,.closeBtn").click(function() {
                var imgUrl = $('.twitter_code_img img').attr('src');
@@ -170,6 +171,14 @@
                 });
 
             });
+
+            //微信分享提示图
+            $('body').on('click','.forward',function(){
+                $('.mcover').show();
+            });
+            $('.weixinShare_btn').on('click',function(){
+                $('.mcover').hide();
+            })
 
         });
         function clockArea() {
