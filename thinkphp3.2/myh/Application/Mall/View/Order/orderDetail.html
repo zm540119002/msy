@@ -13,7 +13,7 @@
                     <p>收货人手机号：<span class="consignee_phone">{$orderInfo.consignee_mobile}</span></p>
                     <p>收货人地址：<span class="consignee_address"></span>{$orderInfo.detailed_address}</p>
                 </div>
-                <a href="javascript:void(0);" class="select_address">收货人地址</a>
+                <a class="select_address">收货人地址</a>
                 <ul class="orderDetail_list goods_list">
                     <include file="Goods/goodsListTpl" />
                 </ul>
@@ -39,6 +39,13 @@
                 arr.push(area);
                 $('.consignee_address').setArea(arr);
             }
+
+            //收货人地址
+            $('a.select_address').click(function () {
+                var url = MODULE + '/ConsigneeAddress/addressList?orderId='+ '{$orderInfo.id}' +
+                        '&returnUrl=' + encodeURIComponent(location.href);
+                location.href = url;
+            });
         });
     </script>
 </block>
