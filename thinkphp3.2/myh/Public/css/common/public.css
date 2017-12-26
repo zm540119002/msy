@@ -133,7 +133,7 @@ i{
 .bff6482{background: #ff6482;}
 .bff1d25{background:#ff1d25;}
 .dark_green{background:#0f9143;}
-.goods_total_price{color:#ff6482;;padding-left: 0.18rem;font-size:0.32rem;}
+.goods_total_price,.twitter_total_price{color:#ff6482;;padding-left: 0.18rem;font-size:0.32rem;}
 .group_cart_nav .share_column{
     color:#0f9143;
     position:relative;
