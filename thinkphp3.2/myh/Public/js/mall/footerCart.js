@@ -1,4 +1,6 @@
 $(function () {
+    //计算商品列表总价
+    calculateTotalPrice();
     //加
     $('body').on('click','.gplus',function(){
         //单个商品数量自加
@@ -24,6 +26,9 @@ $(function () {
     //立即结算/立即购买
     $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData();
+        if(!postData){
+            return false;
+        }
         var url = MODULE + '/Order/generate';
         $.ajax({
             url: url,
@@ -48,7 +53,7 @@ $(function () {
                     if(data.info=='isAjax'){
                         loginDialog();
                     }else{
-                        location.href = MODULE + '/Order/confirmOrder/orderId/' + data.id;
+                        location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
                     }
                 }
             }
@@ -58,8 +63,7 @@ $(function () {
     //加入购物车
     $('body').on('click','.add_cart',function(){
         var postData = assemblyData();
-        if(!postData.goodsList.length){
-            dialog.error('请选择商品');
+        if(!postData){
             return false;
         }
         var url = MODULE + '/Cart/addGoodsToCart';
@@ -75,6 +79,43 @@ $(function () {
                     dialog.error(data.info);
                 }else {
                     dialog.success(data.info);
+                }
+            }
+        });
+    });
+
+    //确认订单
+    $('body').on('click','.determine_order',function(){
+        var consigneeName=$('.consignee_name').text();
+        var consigneePhone=$('.consignee_phone').text();
+        var consigneeAddress=$('.consignee_address').text();
+        var content='';
+        if(!consigneeName || !isMobilePhone(consigneePhone) ||!consigneeAddress){
+            content="请选择收货人地址";
+        }
+        var orderId = $('section.orderInfo').data('id');
+        if(!orderId){
+            content="请确定订单是否正确";
+        }
+        if(content){
+            dialog.error(content);
+            return false;
+        }
+        var postData = {};
+        postData.orderId = orderId;
+        var url = MODULE + '/Order/confirmOrder';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }else {
+                    location.href = MODULE + '/Order/settlement/orderId/' + data.id;
                 }
             }
         });
@@ -102,8 +143,8 @@ function assemblyData() {
             postData.goodsList.push(tmp);
         }
     });
-    if(postData.goodsList.length == 0){
-        dialog.error('请输入选择商品');
+    if(postData.goodsList && postData.goodsList.length == 0){
+        dialog.error('请选择商品');
         return false;
     }
     if(!isInt){
@@ -128,7 +169,7 @@ function calculateTotalPrice(){
         amount += _this.find('price').text() * num;
     });
     if(!isInt){
-        dialog.error('请输入正整数');
+        dialog.error('购买数量为正整数');
         return false;
     }
     $('footer').find('price').html(amount.toFixed(2));
