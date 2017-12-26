@@ -1,18 +1,20 @@
 <volist name="goodsList" id="vo">
     <li data-buytype="" data-goodsid="{$vo.id}" data-categoryid="">
         <a href="{:U('Goods/goodsDetail',array('goodsId'=>$vo['id'],'footerType'=>'share'))}">
-            <empty name="$goodsList.main_img">
+            <empty name="vo.thumb_img">
                 <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="" class="c_img">
                 <else />
-                <img class="img main_img" src="UPLOADS_IMG/{$goodsList.main_img}">
+                <img class="img thumb_img" src="UPLOADS_IMG/{$vo.thumb_img}">
             </empty>
         </a>
         <p class="twitter_product_intro goods_name">{$vo.name}</p>
-        <div class="pink">
-            推客收益￥<price class="twitter_price">{$vo.commission}</price>
+        <p class="twitter_product_intro goods_name">{$vo.single_specification}</p>
+        <div class="commodity_purchaser f12">
+            ￥<price class="twitter_price">{$vo.sale_price}</price>   收益￥<price class="twitter_price">{$vo.commission}</price>
         </div>
-        <div class="commodity_purchaser f24">
-            <span class="pink">￥<price>{$vo.sale_price}</price></span><del>￥{$vo.price}</del>
-        </div>
+        <!--<div class="pink">-->
+            <!--收益￥<price class="twitter_price">{$vo.commission}</price>-->
+        <!--</div>-->
+
     </li>
 </volist>

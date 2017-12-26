@@ -622,3 +622,48 @@ function captcha_check($value, $id = "", $config = [])
     $captcha = new \Think\Verify($config);
     return $captcha->check($value, $id);
 }
+
+
+//生成支付二维码
+ function createQRcode($url){
+    //生成二维码图片
+    $object = new Vendor\Qrcode\Qrcode();
+    $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
+    $fileName = time().'.png';//保存文件名
+    $outFile = $qrcodePath.$fileName;
+    $level = 'L'; //容错级别
+    $size = 10; //生成图片大小
+    $frameSize = 2; //边框像素
+    $saveAndPrint = true;
+    $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
+}
+
+
+
+function createLogoQRcode($url,$logo,$filename,$eclevel = "H", $pixelPerPoint = 8){
+
+    $QRcode = new Vendor\Qrcode\Qrcode();
+    $value= $url;
+    $errorCorrectionLevel = $eclevel;
+    $matrixPointSize = $pixelPerPoint;
+    $QRcode->png($value, 'xiangyang.png', $errorCorrectionLevel, $matrixPointSize, 2);
+    $logo1 = $logo;
+    $QR = 'xiangyang.png';
+    if($logo1 !== FALSE)
+    {
+        $QR = imagecreatefromstring(file_get_contents($QR));
+        $logo1 = imagecreatefromstring(file_get_contents($logo1));
+        $QR_width = imagesx($QR);
+        $QR_height = imagesy($QR);
+        $logo_width = imagesx($logo1);
+        $logo_height = imagesy($logo1);
+        $logo_qr_width = $QR_width / 5;
+        $scale = $logo_width / $logo_qr_width;
+        $logo_qr_height = $logo_height / $scale;
+        $from_width = ($QR_width - $logo_qr_width) / 2;
+        imagecopyresampled($QR, $logo1, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+    }
+
+    imagepng($QR,$filename);
+
+}

@@ -107,6 +107,31 @@
             //星星评分等级
             var getFractionValue=3;
             $('.five_star').setStar(getFractionValue);
+
+
+            $('body').on('click','.QR_codes',function(){
+                var url = window.location.href;
+                $.ajax({
+                    url: MODULE + '/Referrer/myQRCodes',
+                    data: {url:url},
+                    type: 'post',
+                    beforeSend: function(){
+
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+
+                    }
+                });
+
+            });
+            $('body').on('click','.forward',function(){
+
+            });
+
         });
     </script>
+
 </block>
