@@ -22,7 +22,7 @@ class OrderController extends AuthUserController {
                 'g.id' => $goods['foreign_id'],
             );
             $goodsInfo = $modelGoods->selectGoods($where);
-            $goods['price'] = getGoodsPirceByUserLevel($goodsInfo[0],$this->user['level']);
+            $goods['price'] = $goodsInfo[0]['sale_price'];
             if($goods['num'] && $goods['price']){
                 $amount += number_format($goods['num'] * $goods['price'],2,'.','');
             }
