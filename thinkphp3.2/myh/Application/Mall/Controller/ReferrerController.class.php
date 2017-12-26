@@ -2,8 +2,10 @@
 namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
+use web\all\Controller\AuthUserController;
 
-class ReferrerController extends BaseController{
+
+class ReferrerController extends AuthUserController{
     //推客分享首页
     public function index(){
         
