@@ -102,6 +102,24 @@ class OrderController extends AuthUserController {
         }
     }
 
+    //确定订单
+    public function confirmOrder(){
+        $modelOrder = D('Order');
+        if(IS_POST){
+            $where = array(
+                'user_id' => $this->user['id'],
+            );
+            $_POST['pay_status'] = 10;
+            $res = $modelOrder->saveOrder($where);
+            if(!$res['id']){
+                $this->ajaxReturn(errorMsg('失败'));
+            }
+            $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
+        }else{
+            $this->display();
+        }
+    }
+
     //订单-详情页
     public function orderDetail(){
         $modelOrder = D('Order');
@@ -119,7 +137,7 @@ class OrderController extends AuthUserController {
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
             $field = array(
-                'ca.id','ca.consignee_name','ca.consignee_mobile','ca.province','ca.city','ca.area','ca.detailed_address',
+                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province','ca.city','ca.area','ca.detailed_address',
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $this->orderInfo = $orderList[0];
