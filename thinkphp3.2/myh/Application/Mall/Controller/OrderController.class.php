@@ -102,12 +102,38 @@ class OrderController extends AuthUserController {
         }
     }
 
+    //确定订单
+    public function confirmOrder(){
+        $modelOrder = D('Order');
+        if(IS_POST){
+            $where = array(
+                'user_id' => $this->user['id'],
+            );
+            $_POST['pay_status'] = 10;
+            $res = $modelOrder->saveOrder($where);
+            if(!$res['id']){
+                $this->ajaxReturn(errorMsg('失败'));
+            }
+            $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
+        }else{
+            $this->display();
+        }
+    }
+
     //订单-详情页
     public function orderDetail(){
         $modelOrder = D('Order');
         $modelOrderDetail = D('OrderDetail');
         if(IS_POST){
         }else{
+            //订单绑定地址
+            if(isset($_GET['orderId']) && intval($_GET['orderId']) &&
+                isset($_GET['consigneeAddressId']) && intval($_GET['consigneeAddressId'])){
+                $where['id'] = I('get.orderId',0,'int');
+                $_POST['address_id'] = I('get.consigneeAddressId',0,'int');
+                $modelOrder->saveOrder($where);
+            }
+            //订单信息查询
             $where = array(
                 'o.user_id' => $this->user['id'],
             );
@@ -119,7 +145,7 @@ class OrderController extends AuthUserController {
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
             $field = array(
-                'ca.id','ca.consignee_name','ca.consignee_mobile','ca.province','ca.city','ca.area','ca.detailed_address',
+                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province','ca.city','ca.area','ca.detailed_address',
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $this->orderInfo = $orderList[0];

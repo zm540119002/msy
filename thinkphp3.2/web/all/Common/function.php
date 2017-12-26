@@ -622,3 +622,64 @@ function captcha_check($value, $id = "", $config = [])
     $captcha = new \Think\Verify($config);
     return $captcha->check($value, $id);
 }
+
+
+//生成不带二维码
+ function createQRcode($url){
+    //生成二维码图片
+    $object = new Vendor\Qrcode\Qrcode();
+    $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
+    $fileName = time().'.png';//保存文件名
+    $outFile = $qrcodePath.$fileName;
+    $level = 'L'; //容错级别
+    $size = 10; //生成图片大小
+    $frameSize = 2; //边框像素
+    $saveAndPrint = true;
+    $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
+}
+
+
+//生成带logo二维码
+function createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
+    $QRcode = new Vendor\Qrcode\Qrcode();
+    $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
+    if(!is_dir($uploadPath)){
+        if(!mk_dir($uploadPath)){
+            $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
+        }
+    }
+    //没有带logo二维码保存路径
+    $tempPath =$uploadPath.C('TEMP_PATH');
+    if(!mk_dir($tempPath)){
+        $this->ajaxReturn(errorMsg('创建新目录失败'));
+    }
+    $noLogoFilename = $tempPath.'nologo'.time().'.png';
+    //带二维码保存路径
+    $newPath = $uploadPath . $newRelativePath;
+    if(!mk_dir($newPath)){
+        $this->ajaxReturn(errorMsg('创建新目录失败'));
+    }
+
+    $filename = time().'.png';
+    $logoFilename = $newPath.$filename;
+
+    $QRcode->png($url, $noLogoFilename, $eclevel, $pixelPerPoint, 2);
+    if($logo !== FALSE)
+    {
+        $QR = imagecreatefromstring(file_get_contents($noLogoFilename));
+        $logo = imagecreatefromstring(file_get_contents($logo));
+        $QR_width = imagesx($QR);
+        $QR_height = imagesy($QR);
+        $logo_width = imagesx($logo);
+        $logo_height = imagesy($logo);
+        $logo_qr_width = $QR_width / 5;
+        $scale = $logo_width / $logo_qr_width;
+        $logo_qr_height = $logo_height / $scale;
+        $from_width = ($QR_width - $logo_qr_width) / 2;
+        imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+    }
+    imagepng($QR,$logoFilename);
+    unlink($noLogoFilename);
+    return $newRelativePath.$filename;
+
+}

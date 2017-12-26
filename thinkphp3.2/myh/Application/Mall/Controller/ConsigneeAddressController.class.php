@@ -30,6 +30,11 @@ class ConsigneeAddressController extends AuthUserController {
                 'ca.user_id' => $this->user['id'],
             );
             $this->consigneeAddressList = $modelConsigneeAddress->selectConsigneeAddress($where);
+            //是否从订单页面跳转过来
+            if(isset($_GET['orderId']) && intval($_GET['orderId'])){
+                $this->orderId = I('get.orderId',0,'int');
+                $this->returnUrl = session('returnUrl');
+            }
             $this->display();
         }
     }

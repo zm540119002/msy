@@ -41,7 +41,9 @@ class OrderModel extends Model {
         $_where = array(
             'status' => 0,
         );
-        $id = I('post.orderId',0,'int');
+        if(isset($_POST['orderId']) && intval($_POST['orderId'])){
+            $id = I('post.orderId',0,'int');
+        }
         if($id){
             $_where['id'] = $id;
         }

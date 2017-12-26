@@ -2691,7 +2691,6 @@ class Qrcode {
 				ImagePng($image, $filename);
 			}
 		}
-            
 		ImageDestroy($image);
 	}
 
