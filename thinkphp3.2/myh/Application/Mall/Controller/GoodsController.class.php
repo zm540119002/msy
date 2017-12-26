@@ -47,7 +47,7 @@ class GoodsController extends BaseController {
         }
         $field = array(
             'g.id','g.buy_type','g.sale_price','g.commission',
-            'gb.name','gb.price','gb.main_img','gb.thumb_img',
+            'gb.name','gb.price','gb.main_img','gb.thumb_img','gb.single_specification'
         );
         $join = array(
             ' left join goods_base gb on g.goods_base_id = gb.id ',
