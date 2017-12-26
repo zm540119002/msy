@@ -2197,11 +2197,11 @@ background-size:contain;
     display: inline-block;
     margin:0 0 0 0.15rem;
 }
-.goodsListContent li a{
+.goods_share_List li a{
     height:2.8rem;
     display: block;
 }
-.goodsListContent a img{
+.goods_share_List a img{
     max-width:2.8rem;
    
 }

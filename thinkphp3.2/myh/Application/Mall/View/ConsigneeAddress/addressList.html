@@ -9,32 +9,8 @@
             <h2 class="address_list_title">收货人地址</h2>
         </section>
         <section>
-            <ul class="consignee_wrapper">
-                <notempty name="consigneeAddressList">
-                    <volist name="consigneeAddressList" id="vo">
-                        <li class="consignee_item" data-id="{$vo.id}" data-province="{$vo.province}" data-city="{$vo.city}" data-area="{$vo.area}">
-                            <p>收货人信息</p>
-                            <div class="c_w_item">
-                                姓名：<span>{$vo.consignee_name}</span>
-                            </div>
-                            <div class="c_w_item">
-                                手机号：<span>{$vo.consignee_mobile}</span>
-                            </div>
-                            <div class="c_w_item">
-                                地址：<span class="detailed_address"></span><span>{$vo.detailed_address}</span>
-                            </div>
-                            <div class="consignee_addr_btn">
-                                <if condition="$vo.type eq 1">
-                                    <a href="javascript:void(0);" class="set_default set_default_light">设为默认</a>
-                                    <else/>
-                                    <a href="javascript:void(0);" class="set_default">设为默认</a>
-                                </if>
-                                <a href="javascript:void(0);" class="modify_address">修改地址</a>
-                                <a href="javascript:void(0);" class="del_address">删除地址</a>
-                            </div>
-                        </li>
-                    </volist>
-                </notempty>
+            <ul class="consignee_wrapper address_list">
+                <include file="addressListTpl" />
             </ul>
         </section>
         <div class="pay-btn">
@@ -48,8 +24,7 @@
             <a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
         </header>
         <article id="areaBox">
-            <ul id="areaList" class="area-list">
-            </ul>
+            <ul id="areaList" class="area-list"></ul>
         </article>
     </section>
     <div id="areaMask" class="mask address_mask"></div>
@@ -60,7 +35,7 @@
     <script type="text/javascript">
         $(function(){
             //设置省市区
-            $('ul.consignee_wrapper').find('li').each(function(){
+            $('ul.address_list').find('li').each(function(){
                 var _this = $(this);
                 var arr = [];
                 if(_this.data('province') && _this.data('city') && _this.data('area')){
@@ -68,6 +43,15 @@
                     arr.push(_this.data('city'));
                     arr.push(_this.data('area'));
                     _this.find('.detailed_address').setArea(arr);
+                }
+            });
+
+            //选择了某个地址
+            $('body').on('click','ul.address_list a',function(){
+                var orderId = '{$orderId}';
+                var returnUrl = '{$returnUrl}';
+                if(orderId && returnUrl){
+                    location.href = returnUrl + '/consigneeAddressId/' + $(this).parents('li').data('id');
                 }
             });
 
