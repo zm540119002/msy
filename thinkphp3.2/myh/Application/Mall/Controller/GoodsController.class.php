@@ -122,11 +122,11 @@ class GoodsController extends BaseController {
             }
             //$title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl
             if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){//推客产品
-                $shareInfo['shareLink'] =  $shLinkBase.'/userId/'.$user['id'];
+                $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];
                 $shareInfo['title'] = $this->goodsInfo['name'];
-                $shareInfo['shareImgUrl']=$this->goodsInfo['main_img'];
-                $shareInfo['desc']='zzzzzz';
-                $shareInfo['backUrl']=$currentLink;
+                $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];
+                $shareInfo['desc'] = 'zzzzzz';
+                $shareInfo['backUrl'] = $currentLink;
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             $this -> signPackage = $this -> weiXinShareInit();
