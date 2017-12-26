@@ -10,7 +10,6 @@ class ReferrerController extends AuthUserController{
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
-//        $userId = 14;
         $userId = $this->user['id'];
         $avatarPath = $this->user['avatar'];
         $url = $_POST['url'];
@@ -33,4 +32,7 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(successMsg('删除二维码图片成功！'));
         }
     }
+    
+    
+    
 }
