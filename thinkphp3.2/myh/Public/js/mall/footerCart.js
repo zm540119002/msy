@@ -120,7 +120,76 @@ $(function () {
             }
         });
     });
+
+    //我的二维码
+    $('body').on('click','.QR_codes',function(){
+        var url = location.href;
+        $.ajax({
+            url: MODULE + '/Referrer/myQRCodes',
+            data: {url:url},
+            type: 'post',
+            beforeSend: function(){
+            },
+            error:function (xhr) {
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                if(data.status == 0){
+                    if(data.url){
+                        location.href = data.url;
+                    }else{
+                        dialog.error(data.info);
+                    }
+                }else if(data.status == 1){
+                    if(data.info=='isAjax'){
+                        loginDialog();
+                    }else{
+                        $('.mask,.express-code-box').fadeIn();
+                        $('.twitter_code_img img').attr('src','/Uploads/'+data.url);
+                    }
+                }
+            }
+        });
+    });
+
+
+    //关闭删除二维码
+    $("#areaMask,.closeBtn").click(function() {
+        var imgUrl = $('.twitter_code_img img').attr('src');
+        $.ajax({
+            url: MODULE + '/Referrer/delMyQRCodes',
+            data: {imgUrl:imgUrl},
+            type: 'post',
+            beforeSend: function(){
+
+            },
+            error:function (xhr) {
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                if(data.status == 1){
+                    clockArea();
+                }
+                if(data.status == 0){
+                    dialog.error(data.info)
+                }
+            }
+        });
+    });
 });
+//关闭二维码
+function clockArea() {
+    $("#areaMask,.express-code-box").fadeOut();
+}
+
+
+//一键分享转发 微信分享提示图
+$('body').on('click','.forward',function(){
+    $('.mcover').show();
+});
+$('.weixinShare_btn').on('click',function(){
+    $('.mcover').hide();
+})
 
 //组装数据
 function assemblyData() {

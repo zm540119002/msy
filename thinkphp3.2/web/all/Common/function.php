@@ -640,7 +640,7 @@ function captcha_check($value, $id = "", $config = [])
 
 
 //生成带logo二维码
-function createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
+function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
     $QRcode = new Vendor\Qrcode\Qrcode();
     $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
     if(!is_dir($uploadPath)){
@@ -648,6 +648,7 @@ function createLogoQRcode($url,$logo,$newRelativePath,$eclevel = "H", $pixelPerP
             $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
         }
     }
+    $logo = $uploadPath.$avatarPath;
     //没有带logo二维码保存路径
     $tempPath =$uploadPath.C('TEMP_PATH');
     if(!mk_dir($tempPath)){

@@ -111,52 +111,79 @@
         </div>
     </section>
     <div id="areaMask" class="mask QR_codes_mask"></div>
+    <div class="mcover">
+        <img src="PUBLIC_IMG/common/weixin_share.png" alt="">
+        <a href="javascript:void(0);" class="weixinShare_btn">X</a>
+    </div>
 </block>
 <block name="footer">
     <include file="Cart/footerCartMenu" />
 </block>
+<!--<include file="Public/weiXinShare" />-->
 <block name="script">
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript">
         $(function(){
             //星星评分等级
             var getFractionValue=3;
             $('.five_star').setStar(getFractionValue);
 
+        });
 
-            $('body').on('click','.QR_codes',function(){
-                var url = window.location.href;
-                $.ajax({
-                    url: MODULE + '/Referrer/myQRCodes',
-                    data: {url:url},
-                    type: 'post',
-                    beforeSend: function(){
 
-                    },
-                    error:function (xhr) {
-                        dialog.error('AJAX错误');
-                    },
-                    success: function(data){
 
-                    }
-                });
-
+        // 微信配置
+        wx.config({
+            debug: true,
+            appId: "{$signPackage['appId']}",  //公众号的唯一标识
+            timestamp: '{$signPackage["timestamp"]}',  //生成签名的时间戳
+            nonceStr: '{$signPackage["nonceStr"]}',   //生成签名的随机串
+            signature: '{$signPackage["signature"]}',  //签名
+            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','getLocation','openLocation'] // 功能列表，我们要使用JS-SDK的什么功能
+        });
+        wx.checkJsApi({
+            jsApiList: [
+                'onMenuShareTimeline','onMenuShareAppMessage','getLocation','openLocation'
+            ],
+            success: function (res) {
+                // alert(JSON.stringify(res));
+                // alert(JSON.stringify(res.checkResult.getLocation));
+                if (res.checkResult.getLocation == false) {
+                    dialog.error('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                    return;
+                }
+            }
+        });
+        wx.ready(function(){
+            // 获取"分享到朋友圈"按钮点击状态及自定义分享内容接口
+            wx.onMenuShareTimeline({
+                title: '{$shareInfo["title"]}', // 分享标题
+                link: '{$shareInfo["shareLink"]}',
+                desc: '{$shareInfo["desc"]}',
+                imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
+                success: function () {
+                    window.location.href='{$shareInfo["backUrl"]}';
+                },
+                cancel: function () {
+                    return false;
+                }
             });
-            $('body').on('click','.forward',function(){
 
-            });
-            //二维码弹窗
-            $('body').on('click','.QR_codes',function(){
-                $('.mask,.express-code-box').fadeIn();
-            });
-
-            $("#areaMask,.closeBtn").click(function() {
-                clockArea();
+            // 获取"分享给朋友"按钮点击状态及自定义分享内容接口
+            wx.onMenuShareAppMessage({
+                title: '{$shareInfo["title"]}', // 分享标题
+                link: '{$shareInfo["shareLink"]}',
+                desc: '{$shareInfo["desc"]}',
+                imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
+                success: function () {
+                    window.location.href='{$shareInfo["backUrl"]}';
+                },
+                cancel: function () {
+                    return false;
+                }
             });
 
         });
-        function clockArea() {
-            $("#areaMask,.express-code-box").fadeOut();
-        }
-    </script>
 
+    </script>
 </block>

@@ -2,6 +2,7 @@
 namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
+use  web\all\Lib\AuthUser;
 
 class GoodsController extends BaseController {
     //商品信息
@@ -21,7 +22,7 @@ class GoodsController extends BaseController {
             }
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price',
+            'g.id','g.buy_type','g.sale_price','g.commission',
             'gb.no','gb.name','gb.single_specification','gb.package_num','gb.package_unit','gb.purchase_unit','gb.price',
         );
         $join = array(
@@ -70,6 +71,7 @@ class GoodsController extends BaseController {
 
     //商品详情页
     public function goodsDetail(){
+        $user = Authuser::check();
         if(IS_POST){
         }else{
             $modelGoods = D('Goods');
@@ -90,6 +92,7 @@ class GoodsController extends BaseController {
             );
             $goodsInfo = $modelGoods->selectGoods($where,$field,$join);
             $this->goodsInfo = $goodsInfo[0];
+           
             //公共图片
             $modelCommonImg = D('CommonImages');
             $commonImg = $modelCommonImg->selectCommonImages();
@@ -106,8 +109,27 @@ class GoodsController extends BaseController {
             }
 
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+            //微信分享
+            $shareInfo = [];
+            $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+            $currentLink = (is_ssl()?'https://':'http://').$host.$_SERVER['REQUEST_URI'];
+            $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/footerType'));
 
 
+            if(intval($goodsInfo['buy_type']) == 2  ){//微团产品
+
+            }
+            //$title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl
+            if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){//推客产品
+                $shareInfo['shareLink'] =  $shLinkBase.'/userId/'.$user['id'];
+                $shareInfo['title'] = $this->goodsInfo['name'];
+                $shareInfo['shareImgRelativeUrl']=$this->goodsInfo['main_img'];
+                $shareInfo['desc']='zzzzzz';
+                $shareInfo['backUrl']=$currentLink;
+            }
+            $this -> shareInfo = $this -> weiXinShare($shareInfo);
+            $this -> signPackage = $this -> weiXinShareInit();
             $this ->display();
         }
     }

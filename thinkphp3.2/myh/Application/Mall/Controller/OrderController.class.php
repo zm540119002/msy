@@ -22,7 +22,7 @@ class OrderController extends AuthUserController {
                 'g.id' => $goods['foreign_id'],
             );
             $goodsInfo = $modelGoods->selectGoods($where);
-            $goods['price'] = getGoodsPirceByUserLevel($goodsInfo[0],$this->user['level']);
+            $goods['price'] = $goodsInfo[0]['sale_price'];
             if($goods['num'] && $goods['price']){
                 $amount += number_format($goods['num'] * $goods['price'],2,'.','');
             }
@@ -87,7 +87,7 @@ class OrderController extends AuthUserController {
     }
 
     //我的订单
-    public function myOrder(){
+    public function orderManage(){
         $modelOrder = D('Order');
         if(IS_POST){
         }else{
@@ -104,20 +104,19 @@ class OrderController extends AuthUserController {
 
     //确定订单
     public function confirmOrder(){
-        $modelOrder = D('Order');
-        if(IS_POST){
-            $where = array(
-                'user_id' => $this->user['id'],
-            );
-            $_POST['pay_status'] = 10;
-            $res = $modelOrder->saveOrder($where);
-            if(!$res['id']){
-                $this->ajaxReturn(errorMsg('失败'));
-            }
-            $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
-        }else{
-            $this->display();
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
+        $modelOrder = D('Order');
+        $where = array(
+            'user_id' => $this->user['id'],
+        );
+        $_POST['pay_status'] = 10;
+        $res = $modelOrder->saveOrder($where);
+        if(!$res['id']){
+            $this->ajaxReturn(errorMsg('失败'));
+        }
+        $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
     }
 
     //订单-详情页
