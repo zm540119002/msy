@@ -10,14 +10,14 @@ class ReferrerController extends AuthUserController{
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
-        $userId = 14;
+//        $userId = 14;
+        $userId = $this->user['id'];
+        $avatarPath = $this->user['avatar'];
         $url = $_POST['url'];
         $url = substr($url,0,strrpos($url,'/footerType/share.html'));
         $url = $url.'/userId/'.$userId;
-        $logPath =  realpath('Public/img/home') . '/';
-        $logo = $logPath.'logo.png';
         $newRelativePath = C('USER_LOGO');
-        $shareQRCodes = createLogoQRcode($url,$logo,$newRelativePath);
+        $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
         $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
     }
 

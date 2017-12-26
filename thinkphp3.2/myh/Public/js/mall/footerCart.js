@@ -152,12 +152,8 @@ $(function () {
         });
     });
 
-    //一键分享转发
-    $('body').on('click','.forward',function(){
 
-    });
-
-    //我的二维码弹出
+    //关闭删除二维码
     $("#areaMask,.closeBtn").click(function() {
         var imgUrl = $('.twitter_code_img img').attr('src');
         $.ajax({
@@ -181,10 +177,19 @@ $(function () {
         });
     });
 });
-
+//关闭二维码
 function clockArea() {
     $("#areaMask,.express-code-box").fadeOut();
 }
+
+
+//一键分享转发 微信分享提示图
+$('body').on('click','.forward',function(){
+    $('.mcover').show();
+});
+$('.weixinShare_btn').on('click',function(){
+    $('.mcover').hide();
+})
 
 //组装数据
 function assemblyData() {
