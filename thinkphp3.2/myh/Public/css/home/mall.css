@@ -824,6 +824,39 @@ float:left;
 /*@media (max-width: 720px) {
 	.mask { position: fixed; }
 }*/
+/*推客二维码*/
+.QR_codes_mask{position:fixed;}
+.express-code-box{
+    width: 6rem;
+    height: 5rem;
+    position: fixed;
+    top: 10%;
+    z-index: 15;
+    margin-left: -3rem;
+    left: 50%;
+    display: none;
+}
+.twitter_code_tipc{
+    text-align: center;
+    color:#fff;
+    position:relative;
+}
+.twitter_code_tipc .closeBtn{
+    width:42px;
+    height:100px;
+    display: block;
+    position:absolute;
+    right:15px;
+    top:0px;
+    background:url(../../img/common/close_btn.png) no-repeat; 
+    border:0;
+    border-radius:0;
+}
+.twitter_code_img{
+    background:#fff;
+    height:6.5rem;
+    margin:0.48rem 0 0;
+}
 .check-btn-total{width:100%;position:fixed;bottom:0;left:0;}
 .check-btn-total a{width:95%;margin:0 auto;display: block;height:0.65rem;background: #ff0000;color:#fff;line-height:.65rem;text-align:center;border-radius:0.05rem;}
 .invoice_info_wrapper{color:#333;padding:0.20rem 0;display:block;width:100%;position:relative;}
