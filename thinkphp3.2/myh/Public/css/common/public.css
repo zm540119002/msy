@@ -177,13 +177,13 @@ i{
 }
 .weixinShare_btn{
     position: fixed;
-    right: 0;
+    right:6px;
     top:-12px;
     color:#fff;
     font-size:0.62rem;
-    /*width: 20px;
-    height: 20px;
-    z-index: 999;*/
+    width: 20px;
+    height: 42px;
+    z-index: 999;
 }
 .weixin_pay_nav{background: #ff6482;}
 .loading{width:0.55rem;height:0.55rem;margin:1.5rem auto 0;}
