@@ -142,7 +142,7 @@ $(function () {
                     }
                 }else if(data.status == 1){
                     if(data.info=='isAjax'){
-                        loginDialog();
+                        loginDialog(flushPage);
                     }else{
                         $('.mask,.express-code-box').fadeIn();
                         $('.twitter_code_img img').attr('src','/Uploads/'+data.url);
