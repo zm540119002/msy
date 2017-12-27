@@ -2,7 +2,7 @@
 namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
-use web\all\Lib\pay;
+use  web\all\Lib\Pay;
 
 class IndexController extends BaseController{
     //商城-首页
@@ -25,6 +25,6 @@ class IndexController extends BaseController{
             'create_time'=>time(),
             'notify_url'=>SITE_URL.U('CallBack/notifyUrl',array('pay_code'=>'weixin.order'))
         );
-        pay::wxPay($order);
+        Pay::wxPay($order);
     }
 }
