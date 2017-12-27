@@ -47,7 +47,7 @@
             });
 
             //选择了某个地址
-            $('body').on('click','ul.address_list a',function(){
+            $('body').on('click','ul.address_list a.address',function(){
                 var orderId = '{$orderId}';
                 var returnUrl = '{$returnUrl}';
                 if(orderId && returnUrl){
