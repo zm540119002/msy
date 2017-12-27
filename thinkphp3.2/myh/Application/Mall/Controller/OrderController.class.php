@@ -31,6 +31,7 @@ class OrderController extends AuthUserController {
         $orderSN = generateSN();
         //生成订单
         $modelOrder = D('Order');
+        //开启事务
         $modelOrder->startTrans();
         $_POST = [];
         $_POST['sn'] = $orderSN;
@@ -144,7 +145,8 @@ class OrderController extends AuthUserController {
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
             $field = array(
-                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province','ca.city','ca.area','ca.detailed_address',
+                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
+                'ca.city','ca.area','ca.detailed_address',
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $this->orderInfo = $orderList[0];
