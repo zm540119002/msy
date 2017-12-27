@@ -5,6 +5,14 @@ use web\all\Controller\AuthUserController;
 use  web\all\Lib\Pay;
 
 class WxPayController extends AuthUserController {
+    /**
+     * 微信支付
+     */
+    public function wxPay1($payInfo){
+        Pay::wxPay($payInfo);
+    }
+    
+
     //订单支付
     public function orderPayment(){
         if(IS_POST){
@@ -18,26 +26,19 @@ class WxPayController extends AuthUserController {
                 );
                 $orderInfo = $modelOrder -> selectOrder($where);
                 $orderInfo = $orderInfo[0];
-                $this -> orderInfo = $orderInfo;
-//                $totalFee = $orderInfo['actually_amount'];
+                $this->orderInfo = $orderInfo;
                 //检查订单状态
                 $result = $modelOrder->checkOrderStatus($orderInfo);
                 if($result['status'] == 0){
-                    $this ->error($result['message']);
+                    $this->error($result['message']);
                 }
-                //检查商品库存
-//                $notifyUrl = C('WX_CONFIG')['CALL_BACK_URL_ORDER'];
                 $payInfo = array(
                     'sn'=>$orderInfo['sn'],
                     'actually_amount'=>$orderInfo['actually_amount'],
-                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_ORDER']
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_ORDER'],
                 );
-
-                $jsApiParameters = Pay::getJSAPI($payInfo);
-                $this->assign(array(
-                    'data' => $jsApiParameters,
-                ));
-                $this->display();
+                $this->wxPay1($payInfo);
+                //Pay::wxPay($payInfo);
             }
         }
     }

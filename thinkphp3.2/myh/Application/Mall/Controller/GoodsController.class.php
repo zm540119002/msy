@@ -118,7 +118,7 @@ class GoodsController extends BaseController {
             //分享的内容
             $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
             $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
-            $shareInfo['desc'] = html_entity_decode($this->goodsInfo['intro']);//分享的简介
+            $shareInfo['desc'] = htmlspecialchars_decode($this->goodsInfo['intro']);//分享的简介
             //微团产品
             if(intval($goodsInfo['buy_type']) == 2  ){
 
