@@ -13,6 +13,7 @@ class CommonController extends Controller{
     public function __construct(){
         parent::__construct();
         $this->_jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $this -> signPackage = $this -> weiXinShareInit();
         //获取微信用户信息
 //        $this->wxUser = $this->getWeiXinUserInfo();
     }

@@ -120,7 +120,7 @@ class GoodsController extends BaseController {
             if(intval($goodsInfo['buy_type']) == 2  ){//微团产品
 
             }
-            
+
             //$title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl
             if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){//推客产品
                 $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];
@@ -130,7 +130,7 @@ class GoodsController extends BaseController {
                 $shareInfo['backUrl'] = $currentLink;
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
-            $this -> signPackage = $this -> weiXinShareInit();
+            
             $this ->display();
         }
     }
