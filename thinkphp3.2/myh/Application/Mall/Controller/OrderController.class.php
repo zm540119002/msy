@@ -139,7 +139,7 @@ class OrderController extends AuthUserController {
             if(isset($_GET['orderId']) && intval($_GET['orderId'])){
                 $where['o.id'] = I('get.orderId',0,'int');
             }
-            $where['o.logistics_status'] = $_GET['logisticsStatus']?I('get.logisticsStatus',0,'int'):0;
+//            $where['o.logistics_status'] = $_GET['logisticsStatus']?I('get.logisticsStatus',0,'int'):0;
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
@@ -349,7 +349,6 @@ class OrderController extends AuthUserController {
                 $_POST['wallet_pay'] = $accountBalance;
                 $_POST['actually_amount'] = $unpaid;
                 $_POST['orderId'] = $orderId;
-                $_POST['logistics_status'] = 2;
                 $where = array(
                     'user_id' =>  $this->user['id'],
                     'id' => $orderId,

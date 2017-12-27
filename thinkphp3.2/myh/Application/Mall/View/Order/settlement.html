@@ -92,8 +92,13 @@
                     type:'post',
                     url:ACTION,
                     data:postData,
-                    beforeSend:function (xhr) {$('#loading').show();},
-                    error:function(){$('#loading').hide();},
+                    beforeSend:function (xhr) {
+                        $('#loading').show();
+                    },
+                    error:function(){
+                        $('#loading').hide();
+                        dialog.error('AJAX错误');
+                    },
                     success:function(data){
                         $('#loading').hide();
                         if(data.status==0){

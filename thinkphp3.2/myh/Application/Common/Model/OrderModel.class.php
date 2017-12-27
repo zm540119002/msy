@@ -109,7 +109,7 @@ class OrderModel extends Model {
                 'message' => '订单信息有误'
             );
         }
-        if($orderInfo['pay_status'] != '10'){
+        if($orderInfo['logistics_status'] != '1'){
             return $rst=array(
                 'status' => 0,
                 'message' => '订单已支付或已取消'
