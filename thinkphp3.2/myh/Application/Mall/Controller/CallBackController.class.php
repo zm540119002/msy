@@ -1,12 +1,10 @@
 <?php
-namespace Purchase\Controller;
+namespace Mall\Controller;
 
 use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
 class CallBackController extends Controller {
-    
-
     //支付回调
     public function notifyUrl(){
         if(strpos($_SERVER['QUERY_STRING'],'weixin.recharge') == true){
@@ -449,18 +447,4 @@ class CallBackController extends Controller {
         echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
         return false;
     }
-
-
-    public function a(){
-        $parameter=array(
-            'payment_code'=>'weixin',
-            'order_sn'=>'20171215140046832561256454694405',//微信回的商家订单号
-            'total_fee'=>1,//支付金额
-            'pay_sn'=>'124578145',//微信交易订单
-            'payment_time'=>'1475125'//支付时间
-        );
-        $this->rechargeHandle($parameter);
-    }
-
-
 }
