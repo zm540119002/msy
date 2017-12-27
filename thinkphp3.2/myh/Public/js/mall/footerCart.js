@@ -129,11 +129,14 @@ $(function () {
             data: {url:url},
             type: 'post',
             beforeSend: function(){
+                $('.loading').show();
             },
             error:function (xhr) {
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                $('.loading').hide();
                 if(data.status == 0){
                     if(data.url){
                         location.href = data.url;
@@ -161,12 +164,14 @@ $(function () {
             data: {imgUrl:imgUrl},
             type: 'post',
             beforeSend: function(){
-
+                $('.loading').show();
             },
             error:function (xhr) {
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                $('.loading').hide();
                 if(data.status == 1){
                     clockArea();
                 }
@@ -185,7 +190,34 @@ function clockArea() {
 
 //一键分享转发 微信分享提示图
 $('body').on('click','.forward',function(){
-    $('.mcover').show();
+    $.ajax({
+        url:MODULE + '/CommonAuthUser/checkLogin',
+        data:{},
+        dataType:'post',
+        beforeSend:function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success:function(data){
+            $('.loading').hide();
+            if(data.status == 0){
+                if(data.url){
+                    location.href = data.url;
+                }else{
+                    dialog.error(data.info);
+                }
+            }else if(data.status == 1){
+                if(data.info=='isAjax'){
+                    loginDialog(flushPage);
+                }else{
+                    $('.mcover').show();
+                }
+            }
+        }
+    });
 });
 $('.weixinShare_btn').on('click',function(){
     $('.mcover').hide();
