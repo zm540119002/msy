@@ -30,4 +30,6 @@ return array(
 //    'TMPL_ACTION_ERROR' => 'Public:error',// 默认错误跳转对应的模板文件
     //额外配置文件
     'LOAD_EXT_CONFIG' => 'ext_conf,db,wx_conf,array_conf',
+
+    'UPLOAD_PATH_PHP'=>'/Uploads/'
 );
