@@ -37,8 +37,7 @@ class WxPayController extends AuthUserController {
                     'actually_amount'=>$orderInfo['actually_amount'],
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_ORDER'],
                 );
-                $this->wxPay1($payInfo);
-                //Pay::wxPay($payInfo);
+                Pay::wxPay($payInfo);
             }
         }
     }
