@@ -50,13 +50,10 @@ class CommonController extends Controller{
     //微信分享信息
 //    public function weiXinShare($title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl){
     public function weiXinShare($shareInfo){
-        print_r($shareInfo);exit;
         $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH_PHP').$shareInfo['shareImgUrl'];
-        echo $shareImgUrl;
         $shareInfo['shareImgUrl'] = $shareImgUrl;
-        print_r($shareInfo);exit;
         return $shareInfo;
     }
 

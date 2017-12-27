@@ -129,6 +129,7 @@ class GoodsController extends BaseController {
                 $shareInfo['desc'] = $this->goodsInfo['intro'];
                 $shareInfo['backUrl'] = $currentLink;
             }
+            print_r($shareInfo);exit;
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             
             $this ->display();
