@@ -125,7 +125,7 @@ class GoodsController extends BaseController {
                 $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];
                 $shareInfo['title'] = $this->goodsInfo['name'];
                 $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];
-                $shareInfo['desc'] = 'zzzzzz';
+                $shareInfo['desc'] =$this->goodsInfo['intro'];
                 $shareInfo['backUrl'] = $currentLink;
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
