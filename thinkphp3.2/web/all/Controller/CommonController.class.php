@@ -52,7 +52,7 @@ class CommonController extends Controller{
     public function weiXinShare($shareInfo){
         $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-        $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH').$shareInfo['shareImgUrl'];
+        $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH').'/'.$shareInfo['shareImgUrl'];
         $shareInfo['shareImgUrl'] = $shareImgUrl;
         return $shareInfo;
     }
