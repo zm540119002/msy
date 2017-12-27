@@ -1602,7 +1602,7 @@ background-size:contain;
     display:flex;
     justify-content: space-between;
 }
-.consignee_addr_btn a{
+.consignee_wrapper .consignee_addr_btn a{
     color:#fff;
     padding:0.05rem 0.08rem;
     border-radius:0.05rem;
