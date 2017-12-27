@@ -41,7 +41,6 @@ class CallBackController extends Controller
         if ($payment_type = 'unionpay') {
             $this->unionpayBack($data, $order_type);
         }
-
     }
 
     //微信支付回调处理
@@ -51,7 +50,6 @@ class CallBackController extends Controller
         //sign不参与签名算法
         unset($data['sign']);
         $sign = makeSign($data);
-
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             $parameter = array(
@@ -67,7 +65,6 @@ class CallBackController extends Controller
             if ($order_type == 'order') {
                 $this->orderHandle($parameter);
             }
-
         } else {
             //返回状态给微信服务器
             $this->errorReturn($data['out_trade_no']);
@@ -87,7 +84,6 @@ class CallBackController extends Controller
             $order_sn = $out_trade_no = $data['orderId']; //商户订单号
             $queryId = $data['queryId']; //银联支付流水号
             $respMsg = $data['respMsg']; //交易状态
-
             // 解释: 交易成功且结束，即不可再做任何操作。
             if ($data['respMsg'] == 'Success!') {
                 // 修改订单支付状态
@@ -98,9 +94,7 @@ class CallBackController extends Controller
                 if ($order_type == 'order') {
                     $this->orderHandle($data);
                 }
-
             }
-
             echo "success"; // 处理成功
         } else {
             echo "fail"; //验证失败
@@ -110,12 +104,10 @@ class CallBackController extends Controller
     //支付宝支付回调处理
     private function alipayMobileBack($data, $order_type)
     {
-
         //计算得出通知验证结果
         $alipayNotify = new AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
         if (!$verify_result) {
-
             echo "fail";
             exit;
         }
@@ -129,7 +121,6 @@ class CallBackController extends Controller
         } //支付宝解释: 交易成功，且可对该交易做操作，如：多级分润、退款等。
         elseif ($trade_status == 'TRADE_SUCCESS') {
             //支付成功，做自己的逻辑
-
         }
         echo "success"; // 告诉支付宝处理成功
     }
