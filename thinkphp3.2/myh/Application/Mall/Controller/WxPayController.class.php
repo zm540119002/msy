@@ -5,6 +5,14 @@ use web\all\Controller\AuthUserController;
 use  web\all\Lib\Pay;
 
 class WxPayController extends AuthUserController {
+    /**
+     * 微信支付
+     */
+    public function wxPay($payInfo){
+        Pay::wxPay($payInfo);
+    }
+    
+
     //订单支付
     public function orderPayment(){
         if(IS_POST){
