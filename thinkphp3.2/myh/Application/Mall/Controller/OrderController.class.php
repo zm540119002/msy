@@ -139,7 +139,7 @@ class OrderController extends AuthUserController {
             if(isset($_GET['orderId']) && intval($_GET['orderId'])){
                 $where['o.id'] = I('get.orderId',0,'int');
             }
-            $where['o.logistics_status'] = $_GET['logisticsStatus']?I('get.logisticsStatus',0,'int'):1;
+            $where['o.logistics_status'] = $_GET['logisticsStatus']?I('get.logisticsStatus',0,'int'):0;
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
