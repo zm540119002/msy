@@ -35,7 +35,6 @@ class OrderController extends AuthUserController {
         $modelOrder->startTrans();
         $_POST = [];
         $_POST['sn'] = $orderSN;
-        $_POST['pay_status'] = 1;
         $_POST['user_id'] = $this->user['id'];
         $_POST['amount'] = $amount;
         $_POST['create_time'] = time();
@@ -112,7 +111,7 @@ class OrderController extends AuthUserController {
         $where = array(
             'user_id' => $this->user['id'],
         );
-        $_POST['pay_status'] = 10;
+        $_POST['pay_status'] = 1;
         $res = $modelOrder->saveOrder($where);
         if(!$res['id']){
             $this->ajaxReturn(errorMsg('失败'));
