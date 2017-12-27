@@ -13,6 +13,7 @@ class CommonController extends Controller{
     public function __construct(){
         parent::__construct();
         $this->_jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $this -> signPackage = $this -> weiXinShareInit();
         //获取微信用户信息
 //        $this->wxUser = $this->getWeiXinUserInfo();
     }
@@ -49,7 +50,6 @@ class CommonController extends Controller{
     //微信分享信息
 //    public function weiXinShare($title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl){
     public function weiXinShare($shareInfo){
-
         $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH_PHP').$shareInfo['shareImgUrl'];

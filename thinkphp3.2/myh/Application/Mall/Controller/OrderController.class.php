@@ -35,7 +35,6 @@ class OrderController extends AuthUserController {
         $modelOrder->startTrans();
         $_POST = [];
         $_POST['sn'] = $orderSN;
-        $_POST['pay_status'] = 1;
         $_POST['user_id'] = $this->user['id'];
         $_POST['amount'] = $amount;
         $_POST['create_time'] = time();
@@ -95,8 +94,8 @@ class OrderController extends AuthUserController {
             $where = array(
                 'o.user_id' => $this->user['id'],
             );
-            if(isset($_GET['pay_status']) && intval($_GET['pay_status'])){
-                $where['o.pay_status'] = I('get.pay_status',0,'int');
+            if(isset($_GET['logisticsStatus']) && intval($_GET['logisticsStatus'])){
+                $where['o.logistics_status'] = I('get.logisticsStatus',0,'int');
             }
             $this->orderList = $modelOrder->selectOrder($where);
             $this->display();
@@ -112,7 +111,7 @@ class OrderController extends AuthUserController {
         $where = array(
             'user_id' => $this->user['id'],
         );
-        $_POST['pay_status'] = 10;
+        $_POST['logistics_status'] = 1;
         $res = $modelOrder->saveOrder($where);
         if(!$res['id']){
             $this->ajaxReturn(errorMsg('失败'));
@@ -140,7 +139,7 @@ class OrderController extends AuthUserController {
             if(isset($_GET['orderId']) && intval($_GET['orderId'])){
                 $where['o.id'] = I('get.orderId',0,'int');
             }
-            $where['o.pay_status'] = $_GET['payStatus']?I('get.payStatus',0,'int'):1;
+            $where['o.logistics_status'] = $_GET['logisticsStatus']?I('get.logisticsStatus',0,'int'):0;
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
@@ -227,7 +226,7 @@ class OrderController extends AuthUserController {
                     //账户余额支付：0:
                     //实际支付：0
                     $_POST = [];
-                    $_POST['pay_status'] = 20;
+                    $_POST['logistics_status'] = 2;
                     $_POST['coupons_pay'] = $unpaid;
                     $_POST['orderId'] = $orderId;
                     $_POST['coupons_id'] = $couponsId;
@@ -278,7 +277,7 @@ class OrderController extends AuthUserController {
                         $_POST['coupons_pay'] = $couponsInfo['amount'];
                         $_POST['coupons_id'] = $couponsId;
                     }
-                    $_POST['pay_status'] = 20;
+                    $_POST['logistics_status'] = 2;
                     $_POST['wallet_pay'] = $unpaid;
                     $_POST['orderId'] = $orderId;
                     $where = array(
@@ -350,6 +349,7 @@ class OrderController extends AuthUserController {
                 $_POST['wallet_pay'] = $accountBalance;
                 $_POST['actually_amount'] = $unpaid;
                 $_POST['orderId'] = $orderId;
+                $_POST['logistics_status'] = 2;
                 $where = array(
                     'user_id' =>  $this->user['id'],
                     'id' => $orderId,
