@@ -8,7 +8,7 @@ class WxPayController extends AuthUserController {
     /**
      * 微信支付
      */
-    public function wxPay($payInfo){
+    public function wxPay1($payInfo){
         Pay::wxPay($payInfo);
     }
     
@@ -37,7 +37,7 @@ class WxPayController extends AuthUserController {
                     'actually_amount'=>$orderInfo['actually_amount'],
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_ORDER'],
                 );
-                $this->wxPay($payInfo);
+                $this->wxPay1($payInfo);
                 //Pay::wxPay($payInfo);
             }
         }
