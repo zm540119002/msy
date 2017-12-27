@@ -210,7 +210,7 @@ class CallBackController extends Controller
         $orderInfo = $modelOrder->selectOrder($where);
         $orderInfo = $orderInfo[0];
         $user_id = $orderInfo['user_id'];
-        if ($orderInfo['pay_status'] == 10) {//判定订单状态，如已处理过，直接返回true
+        if ($orderInfo['logistics_status'] != 1) {//判定订单状态，如已处理过，直接返回true
             if ($orderInfo['actually_amount'] * 100 != $totalFee) {//校验返回的订单金额是否与商户侧的订单金额一致
                 //返回状态给微信服务器
                 $this->errorReturn($dataOrderSn, '回调的金额和订单的金额不符，终止购买');
@@ -218,7 +218,7 @@ class CallBackController extends Controller
                 $modelOrder->startTrans();
                 //更新订单状态
                 $_POST = [];
-                $_POST['pay_status'] = 20;
+                $_POST['logistics_status'] = 2;
                 $_POST['payment_code'] = 0;
                 $_POST['pay_sn'] = $data['transaction_id'];
                 $_POST['payment_time'] = $data['time_end'];

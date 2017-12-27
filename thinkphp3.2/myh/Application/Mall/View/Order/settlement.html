@@ -106,7 +106,7 @@
                         }else if(data.status==1){
                             //去支付
                             if(data.wxPay){
-                                location.href = MODULE + '/WxPay/orderPayment/orderId/' + postData.orderId;
+                                location.href = MODULE + '/Payment/orderPayment/orderId/' + postData.orderId;
                             }else{
                                 location.href = CONTROLLER + '/payComplete';
                             }
