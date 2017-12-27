@@ -55,6 +55,7 @@ class CommonController extends Controller{
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH_PHP').$shareInfo['shareImgUrl'];
         $shareInfo['shareImgUrl'] = $shareImgUrl;
+        print_r($shareInfo);exit;
         return $shareInfo;
     }
 
