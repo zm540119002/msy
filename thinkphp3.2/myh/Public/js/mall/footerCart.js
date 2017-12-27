@@ -190,6 +190,7 @@ function clockArea() {
 
 //一键分享转发 微信分享提示图
 $('body').on('click','.forward',function(){
+    console.log(123);return;
     $.ajax({
         url:MODULE + '/CommonAuthUser/checkLogin',
         data:{},
