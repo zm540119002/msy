@@ -1,10 +1,8 @@
 <?php
 namespace Mall\Controller;
-
 use web\all\Controller\AuthUserController;
 use  web\all\Lib\Pay;
-
-class WxPayController extends AuthUserController {
+class PaymentController extends AuthUserController {
     //订单支付
     public function orderPayment(){
         if(IS_POST){
