@@ -213,6 +213,7 @@ $(function () {
             }
         });
     });
+    //关闭微信分享提示图
     $('.weixinShare_btn').on('click',function(){
         $('.mcover').hide();
     });
