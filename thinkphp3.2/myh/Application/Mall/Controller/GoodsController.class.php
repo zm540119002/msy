@@ -111,27 +111,25 @@ class GoodsController extends BaseController {
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
             //微信分享
             $shareInfo = [];
+            //获取当前url
             $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
                 (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
             $currentLink = (is_ssl()?'https://':'http://').$host.$_SERVER['REQUEST_URI'];
-            $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/footerType'));
-
-
-            if(intval($goodsInfo['buy_type']) == 2  ){//微团产品
+            //分享的内容
+            $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
+            $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
+            $shareInfo['desc'] = $this->goodsInfo['intro'];//分享的简介
+            //微团产品
+            if(intval($goodsInfo['buy_type']) == 2  ){
 
             }
-
-            //$title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl
-            if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){//推客产品
-                $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];
-                $shareInfo['title'] = $this->goodsInfo['name'];
-                $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];
-                $shareInfo['desc'] = $this->goodsInfo['intro'];
-                $shareInfo['backUrl'] = $currentLink;
+            //推客产品
+            if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){
+                $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/footerType'));
+                $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];//分享url
+                $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
             }
-            print_r($shareInfo);exit;
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
-            
             $this ->display();
         }
     }
