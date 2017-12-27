@@ -1,7 +1,7 @@
 <notempty name="consigneeAddressList">
     <volist name="consigneeAddressList" id="vo">
         <li class="consignee_item" data-id="{$vo.id}" data-province="{$vo.province}" data-city="{$vo.city}" data-area="{$vo.area}">
-            <area>
+            <a href="javascript:void(0);" class="address">
                 <p>收货人信息</p>
                 <div class="c_w_item">
                     姓名：<span>{$vo.consignee_name}</span>
@@ -12,7 +12,7 @@
                 <div class="c_w_item">
                     地址：<span class="detailed_address"></span><span>{$vo.detailed_address}</span>
                 </div>
-            </area>
+            </a>
             <div class="consignee_addr_btn">
                 <if condition="$vo.type eq 1">
                     <a href="javascript:void(0);" class="set_default set_default_light">设为默认</a>
