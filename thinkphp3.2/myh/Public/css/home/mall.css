@@ -1594,6 +1594,7 @@ background-size:contain;
 }
 .consignee_wrapper li a{
     display:block;
+    color:#333;
 }
 .c_w_item{margin:0 0 0.10rem 0;}
 .consignee_addr_btn{
