@@ -15,8 +15,7 @@ return array(
         'KEY' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 
         //TODO:公众号支付回调函数
-        'CALL_BACK_URL_ORDER'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Purchase/CallBack/orderCallBack",
-        'CALL_BACK_URL_RECHARGE'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Purchase/CallBack/rechargeCallBack",
+        'CALL_BACK_URL'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Mall/CallBack/notifyUrl",
         /**
          * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0
          * 本例程通过curl使用HTTP POST方法，此处可修改代理服务器，

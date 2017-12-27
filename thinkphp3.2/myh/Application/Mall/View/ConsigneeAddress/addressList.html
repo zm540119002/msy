@@ -56,7 +56,7 @@
             });
 
             //设为默认
-            $('.set_default').on('click',function(){
+            $('body').on('click','.set_default',function(){
                 $(this).addClass('set_default_light');
                 $(this).parents('.consignee_item').siblings().find('.set_default').removeClass('set_default_light');
                 var _this=$(this);

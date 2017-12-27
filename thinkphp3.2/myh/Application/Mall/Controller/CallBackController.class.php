@@ -1,12 +1,10 @@
 <?php
-namespace Purchase\Controller;
+namespace Mall\Controller;
 
 use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
 class CallBackController extends Controller {
-    
-
     //支付回调
     public function notifyUrl(){
         if(strpos($_SERVER['QUERY_STRING'],'weixin.recharge') == true){
@@ -311,7 +309,10 @@ class CallBackController extends Controller {
         echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
         return false;
     }
+<<<<<<< HEAD
     
 
 
+=======
+>>>>>>> 64936dedc9dfde940624225134edd94958e5c4c4
 }
