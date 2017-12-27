@@ -9,6 +9,7 @@
 namespace web\all\Lib;
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.JsApiPay.php');
+require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.NativePay.php');
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/log.php');
 use Vendor\Qrcode\Qrcode;
 
