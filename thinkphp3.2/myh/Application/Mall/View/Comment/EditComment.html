@@ -86,8 +86,9 @@
             $('.star_img').classStar({$aveScore});
             $.each($('div[data-id]'),function(i,obj){
                 var starParentId=$(this).data('id');
+                var percent=$(this).data('percent');
                 $(this).classStar(starParentId);
-                $(this).next().getProgressBar(starParentId);
+                $(this).next().getProgressBar(percent);
 
             });
             //点击星星评分
