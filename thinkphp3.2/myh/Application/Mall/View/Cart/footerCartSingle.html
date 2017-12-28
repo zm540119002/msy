@@ -13,9 +13,8 @@
                 $('html,body').css({"height":"100%","overflow":"hidden"});//动态阻止body页面滚动
                 $('.mask').show().css({position:'fixed'});
                 $('.mask').on('touchstart',function(e){
-                    alert(1);
                     e.preventDefault(); 
-                })
+                });
                 $('.mask').data('show',1);
                 $('.group_cart_toggle').css({display:'flex',zIndex:21});
                 $('.express-area-box').css({bottom:0+'px',display:'block',position:'fixed',zIndex:19});
