@@ -1379,7 +1379,7 @@ background-size:contain;
     right:-10px;
     color:#ff1d25;
 }
-
+.pay_order_time{margin:0.08rem 0 0;}
 .pay_order_time i{
     width: 0.3rem;
     height:0.3rem;
@@ -1387,7 +1387,7 @@ background-size:contain;
     background:url(../../img/common/pay_time.png);
     background-repeat: no-repeat;
     background-size:cover;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .my_order_nav li i{
     width:32px;
@@ -1419,9 +1419,9 @@ background-size:contain;
 .no_order_detail{text-align:center;margin:0.15rem 0 0;}
 .order_flex{
     font-size:0.20rem;
-    display:flex;
+    /*display:flex;
     display:-webkit-flex;
-    justify-content: space-between;
+    justify-content: space-between;*/
     padding:0.15rem 0.12rem 0.15rem 0.12rem;
     border-bottom:1px solid #d9d9d9;
 }
