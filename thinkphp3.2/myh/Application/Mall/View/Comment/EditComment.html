@@ -46,56 +46,19 @@
                     </div>
                     <span class="fraction" data-score=""></span>
                 </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="5">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="4.5">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
+                <volist name="scoreBase" id="vo">
+                    <div class="score_star_item">
+                        <div class="store_score_star five_star store_score_progress">
+                            <div class="star_img empty_star" data-id="{$vo.score}" data-percent="{$vo.percent}">
+                                <span class="real_star"></span>
+                            </div>
+                            <div class="star_progress_bar">
+                                <span class="real_star_progress"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="4">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="2.1">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="1.2">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
+                </volist>
+
             </div>
             <div>
                 <div class="store_score_title">
