@@ -101,4 +101,25 @@ class CartModel extends Model {
             ->select();
         return $list?:[];
     }
+
+    //购物车统计
+    public function cartCount($where){
+        $_where = array(
+            'ct.status' => 0,
+        );
+        $_field = array(
+            'ct.type','count(1) num',
+        );
+        $list = $this
+            ->alias('ct')
+            ->where(array_merge($_where,$where))
+            ->field($_field)
+            ->group('ct.type')
+            ->select();
+        $cartCount = array();
+        foreach ($list as $value){
+            $cartCount[$value['type']] = $value['num'];
+        }
+        return $cartCount?:[];
+    }
 }

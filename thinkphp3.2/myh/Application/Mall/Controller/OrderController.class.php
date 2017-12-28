@@ -112,16 +112,25 @@ class OrderController extends AuthUserController {
             $where = array(
                 'o.user_id' => $this->user['id'],
             );
+            //按订单状态分组统计
+            $this->orderStatusCount = $modelOrder->orderStatusCount($where);
             if(isset($_GET['s']) && intval($_GET['s'])){
                 $where['o.logistics_status'] = I('get.s',0,'int');
             }
-            $orderList = $modelOrder->selectOrder($where);
+            $field = array(
+                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
+                'ca.city','ca.area','ca.detailed_address',
+            );
+            $join = array(
+                ' left join consignee_address ca on o.address_id = ca.id ',
+            );
+            $orderList = $modelOrder->selectOrder($where,$field,$join);
+            $field = array(
+                'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
+            );
             $join = array(
                 ' left join goods g on g.id = od.foreign_id ',
                 ' left join goods_base gb on gb.id = g.goods_base_id ',
-            );
-            $field = array(
-                'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
             );
             foreach ($orderList as &$item) {
                 $where = array(
@@ -143,21 +152,36 @@ class OrderController extends AuthUserController {
         $modelOrderDetail = D('OrderDetail');
         if(IS_POST){
         }else{
+            if(!isset($_GET['orderId']) || !intval($_GET['orderId'])){
+                $this->error('缺少订单ID');
+            }
+            $orderId = I('get.orderId',0,'int');
             //订单绑定地址
-            if(isset($_GET['orderId']) && intval($_GET['orderId']) &&
-                isset($_GET['consigneeAddressId']) && intval($_GET['consigneeAddressId'])){
-                $where['id'] = I('get.orderId',0,'int');
+            if(isset($_GET['consigneeAddressId']) && intval($_GET['consigneeAddressId'])){
                 $_POST['address_id'] = I('get.consigneeAddressId',0,'int');
+            }else{
+                $modelConsigneeAddress = D('ConsigneeAddress');
+                $where = array(
+                    'ca.user_id' => $this->user['id'],
+                    'ca.type' => 1,
+                );
+                $consigneeAddress = $modelConsigneeAddress->selectConsigneeAddress($where);
+                $consigneeAddress = $consigneeAddress[0];
+                $_POST['address_id'] = $consigneeAddress['id'];
+            }
+            if($_POST['address_id']){
+                $where = array(
+                    'user_id' => $this->user['id'],
+                    'id' => $orderId,
+                );
                 $modelOrder->saveOrder($where);
             }
+
             //订单信息查询
             $where = array(
                 'o.user_id' => $this->user['id'],
+                'o.id' => $orderId,
             );
-            if(isset($_GET['orderId']) && intval($_GET['orderId'])){
-                $where['o.id'] = I('get.orderId',0,'int');
-            }
-//            $where['o.logistics_status'] = $_GET['s']?I('get.s',0,'int'):0;
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
@@ -167,7 +191,6 @@ class OrderController extends AuthUserController {
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $orderInfo = $orderList[0];
-
             $where = array(
                 'od.order_sn' => $orderInfo['sn'],
             );

@@ -97,6 +97,7 @@ class OrderModel extends Model {
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
+            ->order('o.id desc')
             ->select();
         return $list?:[];
     }
@@ -111,14 +112,38 @@ class OrderModel extends Model {
         }elseif($orderInfo['logistics_status'] != '1'){
             $res = array(
                 'status' => 0,
-                'message' => '订单已支付或已取消'
+                'message' => '订单已支付或已取消',
             );
         }else{
             $res = array(
                 'status' => 1,
-                'message' => '待支付'
+                'message' => '待支付',
             );
         }
         return $res;
+    }
+
+    //按订单状态分组统计
+    public function orderStatusCount($where){
+        $_where = array(
+            'o.status' => 0,
+        );
+        $_field = array(
+            'o.logistics_status','count(1) num',
+        );
+        $list = $this
+            ->alias('o')
+            ->where(array_merge($_where,$where))
+            ->field($_field)
+            ->group('o.logistics_status')
+            ->order('o.logistics_status asc')
+            ->select();
+        $orderStatusCount = array();
+        foreach ($list as $value){
+            if($value['logistics_status'] != 0){
+                $orderStatusCount[$value['logistics_status']] = $value['num'];
+            }
+        }
+        return $orderStatusCount?:[];
     }
 }
