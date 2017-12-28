@@ -24,16 +24,24 @@ function getCommentList(config) {
         },
         success: function(data){
             $('.loading').hide();
-            console.log(data);
             if(currentPage == 1){
                 $('.sales_comment_wrapper').append(data);
+                callBackScore();
             }else{
                 $('.sales_comment_wrapper .sales_comment_list:last').after(data);
+                callBackScore();
             }
             if($(data).length<postData.pageSize){
                 requestEnd = true;
             }
             currentPage ++;
         }
+    });
+}
+function callBackScore(){
+    $.each($('div[data-userscore]'),function(i,obj){
+        console.log($(this).data('userscore'));
+        var starParentId=$(this).data('userscore');
+        $(this).classStar(starParentId);
     });
 }
