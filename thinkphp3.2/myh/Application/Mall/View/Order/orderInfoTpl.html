@@ -9,7 +9,9 @@
             <a class="select_address">收货人地址</a>
         </if>
         <ul class="orderDetail_list goods_list">
-            <include file="Goods/goodsListTpl2" />
+            <volist name="orderInfo['goodsList']" id="vo">
+                <include file="Goods/goodsListTpl" />
+            </volist>
         </ul>
     </div>
 </notempty>
