@@ -14,11 +14,21 @@
                     <span class="my_scoring">请选择评分</span>
                     <div class="my_score_star">
                         <div class="star_score star_img">
-                            <img src="PUBLIC_IMG/common/star.png" />
-                            <img src="PUBLIC_IMG/common/star.png" />
-                            <img src="PUBLIC_IMG/common/star.png" />
-                            <img src="PUBLIC_IMG/common/star.png" />
-                            <img src="PUBLIC_IMG/common/star.png" />
+                            <a href="javascript:void(0);">
+                                <img src="PUBLIC_IMG/common/star.png" />
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="PUBLIC_IMG/common/star.png" />
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="PUBLIC_IMG/common/star.png" />
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="PUBLIC_IMG/common/star.png" />
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="PUBLIC_IMG/common/star.png" />
+                            </a>
                         </div>
                         <span class="fraction" data-score=""></span>
                     </div>
@@ -84,7 +94,7 @@
             });
             
             //点击星星评分
-            $('body').on('click','.star_score img',function(){
+            $('body').on('click','.star_score a',function(){
                 var star='PUBLIC_IMG/common/star.png';
                 var starRed='PUBLIC_IMG/common/starred.png';
                 var prompt=['1分','2分','3分','4分','5分'];
@@ -92,8 +102,8 @@
                 $.each($('.star_score img'),function(){
                     $(this).attr('src',star);//遍历img元素为空心星
                 })
-                $(this).attr('src',starRed);
-                $(this).prevAll().attr('src',starRed);
+                $(this).find('img').attr('src',starRed);
+                $(this).prevAll().find('img').attr('src',starRed);
                 $(this).parent().next('.fraction').text(prompt[starId]);
                 $(this).parent().next('.fraction').attr('data-score',starId+1);
             });
@@ -116,7 +126,7 @@
                     success: function(data){
                         $('.loading').hide();
                         if(data.status == 0){
-
+                            dialog.error(data.info);
                         }else if(data.status == 1){
 
                         }

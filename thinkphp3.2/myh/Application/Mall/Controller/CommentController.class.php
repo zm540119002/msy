@@ -14,9 +14,13 @@ class CommentController extends AuthUserController {
                 if(empty($_POST['title'])){
                     $_POST['title'] = '此用户没有填写标题';
                 }
-                if(empty($_POST['content'])){
-                    $_POST['content'] = '此用户没有填写评论';
+                if(empty($_POST['score'])){
+                    $this->ajaxReturn($this->error('请评分'));
                 }
+                if(empty($_POST['content'])){
+                    $this->ajaxReturn($this->error('请填写评价内容'));
+                }
+
                 $_POST['create_time'] = time();
                 $_POST['update_time'] = time();
                 $_POST['user_id'] = $this->user['id'];
