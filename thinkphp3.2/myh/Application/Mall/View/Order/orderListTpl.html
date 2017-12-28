@@ -1,28 +1,46 @@
 <notemtpy name="orderList">
     <volist name="orderList" id="orderInfo">
-        <li>
-            <a href="{:U('Order/orderDetail',array('pay_status'=>10,'orderId'=>$orderInfo['id']))}">
-                <div>
-                    订单号码：
-                    <span>{$orderInfo.sn}</span>
+        <div class="order_detail_item">
+            <div class="order_flex">
+                <div class="">订单号：<span>12346467979878</span></div>
+                <div class="pay_order_time"><i></i>支付剩余：
+                    <span class="count_down_box">
+                        <span class="day"></span>天
+                        <span class="hour"></span>小时
+                        <span class="minute"></span>分
+                        <span class="second"></span>秒
+                    </span>
                 </div>
+            </div>
+            <div class="order_flex">
                 <div>
-                    下单时间：
-                    <span>{$orderInfo.create_time|date='Y-m-d g:iA',###}</span>
+                    <p>状态：<span class="pay_tag">待支付</span></p>
+                    <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">88555</price></p>
                 </div>
+                <a class="order_pay_btn" href="">去支付</a>
+            </div>
+            <div class="order_flex">
                 <div>
-                    订单金额：
-                    <span>￥<price>{$orderInfo.amount}</price></span>
+                    <p>状态：<span class="pay_tag pay_finish">已完成</span></p>
+                    <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">88555</price></p>
                 </div>
+                <a class="order_pay_btn edit_address" href="">再次采购</a>
+            </div>
+            <div class="order_flex">
                 <div>
-                    订单状态：
-                    <span class="order_in_stock">{$orderInfo.pay_status|orderStatus}</span>
+                    <p>状态：<span class="pay_tag">备货中</span></p>
+                    <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">88555</price></p>
                 </div>
+                <a class="order_pay_btn edit_address" href="">修改收货人地址</a>
+            </div>
+            <div class="order_flex">
                 <div>
-                    订单说明：
-                    <span>{$orderInfo.remark}</span>
+                    <p>状态：<span class="pay_tag">待评价</span></p>
+                    <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">88555</price></p>
                 </div>
-            </a>
-        </li>
+                <a class="order_pay_btn edit_address" href="">去评分评论</a>
+            </div>
+            <include file="orderInfoTpl" />
+        </div>
     </volist>
 </notemtpy>
