@@ -2,7 +2,7 @@
     <volist name="orderList" id="orderInfo">
         <div class="order_detail_item">
             <if condition="$orderInfo.logistics_status eq 1">
-                <div class="order_flex">
+                <div class="order_flex ">
                     <div class="">订单号：<span>{$orderInfo.sn}</span></div>
                     <div class="pay_order_time"><i></i>支付剩余：
                     <span class="count_down_box">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </if>
-            <div class="order_flex">
+            <div class="order_flex order_flex_item">
                 <div>
                     <if condition="$orderInfo.logistics_status eq 1">
                         <p>状态：<span class="pay_tag">待支付</span></p>
