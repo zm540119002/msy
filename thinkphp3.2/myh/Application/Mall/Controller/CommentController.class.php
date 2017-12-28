@@ -3,7 +3,7 @@ namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 class CommentController extends AuthUserController {
     /**
-     *
+     *用户评论
      */
     public function EditComment(){
         $model = D('Comment');
@@ -11,6 +11,12 @@ class CommentController extends AuthUserController {
             if(isset($_POST['commentId']) && intval($_POST['commentId'])){//修改
                 $res = $model->saveComment();
             }else{//新增
+                if(empty($_POST['title'])){
+                    $_POST['title'] = '此用户没有填写标题';
+                }
+                if(empty($_POST['content'])){
+                    $_POST['content'] = '此用户没有填写评论';
+                }
                 $_POST['create_time'] = time();
                 $_POST['update_time'] = time();
                 $_POST['user_id'] = $this->user['id'];
@@ -42,7 +48,6 @@ class CommentController extends AuthUserController {
 
     //商品列表
     public function commentList(){
-
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
@@ -55,7 +60,6 @@ class CommentController extends AuthUserController {
             'c.create_time','c.update_time','c.user_name'
         );
         $join = array(
-
         );
         $group = "";
         $order = 'c.id';
@@ -67,7 +71,5 @@ class CommentController extends AuthUserController {
         if($templateType=='list'){
             $this ->display('commentListTpl');
         }
-
     }
-
 }

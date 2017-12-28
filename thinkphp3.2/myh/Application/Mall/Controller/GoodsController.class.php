@@ -85,7 +85,7 @@ class GoodsController extends BaseController {
             $field = array(
                 'g.id','g.buy_type','g.sale_price','g.commission',
                 'gb.no','gb.name','gb.price','gb.main_img','gb.single_specification','gb.param','gb.intro',
-                'gb.usage','gb.notices','gb.detail_img',
+                'gb.usage','gb.notices','gb.detail_img','g.share_intro'
             );
             $join = array(
                 ' left join goods_base gb on g.goods_base_id = gb.id ',
@@ -118,13 +118,13 @@ class GoodsController extends BaseController {
             //分享的内容
             $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
             $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
-            $shareInfo['desc'] = htmlspecialchars_decode($this->goodsInfo['intro']);//分享的简介
             //微团产品
             if(intval($goodsInfo['buy_type']) == 2  ){
 
             }
             //推客产品
             if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){
+                $shareInfo['desc'] = $this->goodsInfo['share_intro'];//分享的简介
                 $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/footerType'));
                 $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];//分享url
                 $shareInfo['backUrl'] = $currentLink;//分享完跳转的url

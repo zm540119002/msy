@@ -38,6 +38,7 @@ function getCommentList(config) {
         }
     });
 }
+//评分回显
 function callBackScore(){
     $.each($('div[data-userscore]'),function(i,obj){
         console.log($(this).data('userscore'));
