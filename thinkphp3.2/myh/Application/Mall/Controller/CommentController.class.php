@@ -20,13 +20,24 @@ class CommentController extends AuthUserController {
                 if(empty($_POST['content'])){
                     $this->ajaxReturn($this->error('请填写评价内容'));
                 }
-
                 $_POST['create_time'] = time();
                 $_POST['update_time'] = time();
                 $_POST['user_id'] = $this->user['id'];
                 $_POST['user_name'] = $this->user['name'];
-                $res = $model->addComment();
+                $model->startTrans();
+                $res = $model->addComment();//添加评论表
+                if (!$res['id']) {
+                    $model->rollback();
+                }
+                $_POST['logistics_status']=4;
+                $_POST['update_time']=time();
+                $where['id'] = $_POST['order_id'];
+                $res = D('Order')->where($where)->saveOrder();//添加评论表
+                if (!$res['id']) {
+                    $model->rollback();
+                }
             }
+            $model->commit();//提交事务
             $this->ajaxReturn($res);
         }else{
             $this->orderId = $_GET['orderId'];
