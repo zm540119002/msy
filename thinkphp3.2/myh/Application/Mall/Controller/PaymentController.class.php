@@ -1,9 +1,11 @@
 <?php
 namespace Mall\Controller;
-
 use web\all\Controller\AuthUserController;
 use  web\all\Lib\Pay;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9af4b1dc34eaa9d216d69d0be39dc144d98f07ca
 class PaymentController extends AuthUserController {
     //订单支付
     public function orderPayment(){
