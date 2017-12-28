@@ -14,23 +14,23 @@
                     <span class="my_scoring">请选择评分</span>
                     <div class="my_score_star">
                         <div class="star_score star_img">
-                            <a href="javascript:void(0);">
+                            <a href="javascript:void(0);" data-show="">
                                 <img src="PUBLIC_IMG/common/star.png" />
                             </a>
-                            <a href="javascript:void(0);">
+                            <a href="javascript:void(0);" data-show="">
                                 <img src="PUBLIC_IMG/common/star.png" />
                             </a>
-                            <a href="javascript:void(0);">
+                            <a href="javascript:void(0);" data-show="">
                                 <img src="PUBLIC_IMG/common/star.png" />
                             </a>
-                            <a href="javascript:void(0);">
+                            <a href="javascript:void(0);" data-show="">
                                 <img src="PUBLIC_IMG/common/star.png" />
                             </a>
-                            <a href="javascript:void(0);">
+                            <a href="javascript:void(0);" data-show="">
                                 <img src="PUBLIC_IMG/common/star.png" />
                             </a>
                         </div>
-                        <span class="fraction" data-score=""></span>
+                        <span class="fraction my_fraction" data-score=""></span>
                     </div>
                 </div>
                 <div class="score_review_item">
@@ -110,8 +110,19 @@
             //提交评论
             $('body').on('click','.rating_review',function(){
                 var postData = $('#form1').serializeObject();
-                postData.score = $('.fraction').data('score');
+                postData.score = $('.fraction').attr('data-score');
                 var url = MODULE + '/Comment/EditComment';
+                var commentext=$('.seller_comment_text').val();
+                var content='';
+                    if(!postData.score ){
+                        content='请选择评分';
+                        dialog.error(content);
+                        return false;
+                    }else if(!commentext){
+                        content='请评论内容';
+                        dialog.error(content);
+                        return false;
+                    }
                 $.ajax({
                     url: url,
                     data: postData,
