@@ -14,7 +14,8 @@
                 $('.mask').show().css({position:'fixed'});
                 $('.mask').on('touchstart',function(e){
                     console.log(e);
-                    e.preventDefault(); 
+                    //e.preventDefault(); 
+                    e.stopPropagation();
                 });
                 $('.mask').data('show',1);
                 $('.group_cart_toggle').css({display:'flex',zIndex:21});

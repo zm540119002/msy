@@ -1495,6 +1495,16 @@ background-size:contain;
     font-weight:normal;
 }
 /*对平台评分评论  */
+.rating_review{
+    width:2rem;
+    padding:0.05rem 0;
+    background:#ff7bac;
+    margin:0.12rem auto 0;
+    color:#fff;
+    display: block;
+    text-align: center;
+    border-radius:0.05rem;
+}
 .seller_scoring_review{padding:0 0 0 0.25rem;margin:0 0 0.75rem 0;background: #fff;}
 .store_score_title,.store_score_star{display:flex;display:-webkit-flex;justify-content:space-between;padding:0.12rem 0.30rem 0.12rem 0;border-bottom:1px solid #d9d9d9;}
 .store_score_progress{display: box;display:-webkit-box;}
