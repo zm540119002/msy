@@ -50,6 +50,10 @@
             btn:'登录',
             success:function(){
                 tab_down('.loginNav li','.loginTab .login_wrap','click');
+                $('html,body').animate({scrollTop: '0px'}, 100);
+                $('.layui-m-layershade').on('touchmove',function(e){
+                    event.preventDefault(); 
+                });
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -101,9 +105,6 @@
                     }
                 });
             }
-        });
-        $('.loginLayer').on('touchstart',function(e){
-            event.preventDefault(); 
         });
     }
     $(function(){
