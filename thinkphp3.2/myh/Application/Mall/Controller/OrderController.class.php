@@ -160,14 +160,16 @@ class OrderController extends AuthUserController {
             if(isset($_GET['consigneeAddressId']) && intval($_GET['consigneeAddressId'])){
                 $_POST['address_id'] = I('get.consigneeAddressId',0,'int');
             }else{
-//                $modelConsigneeAddress = D('ConsigneeAddress');
-//                $where = array(
-//                    'ca.user_id' => $this->user['id'],
-//                    'ca.type' => 1,
-//                );
-//                $consigneeAddress = $modelConsigneeAddress->selectConsigneeAddress($where);
-//                $consigneeAddress = $consigneeAddress[0];
-//                $_POST['address_id'] = $consigneeAddress['id'];
+                $modelConsigneeAddress = D('ConsigneeAddress');
+                $where = array(
+                    'ca.user_id' => $this->user['id'],
+                    'ca.type' => 1,
+                );
+                $consigneeAddress = $modelConsigneeAddress->selectConsigneeAddress($where);
+                $consigneeAddress = $consigneeAddress[0];
+                if($consigneeAddress['id']){
+                    $_POST['address_id'] = $consigneeAddress['id'];
+                }
             }
             if($_POST['address_id']){
                 $where = array(

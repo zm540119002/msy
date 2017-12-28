@@ -107,7 +107,7 @@
                 $(this).parent().next('.fraction').text(prompt[starId]);
                 $(this).parent().next('.fraction').attr('data-score',starId+1);
             });
-
+            //提交评论
             $('body').on('click','.rating_review',function(){
                 var postData = $('#form1').serializeObject();
                 postData.score = $('.fraction').data('score');
@@ -132,21 +132,20 @@
                         }
                     }
                 });
-            })
-
+            });
             var config = {
                 pageSize:4,
                 templateType:'list'
             };
             //初始化
             getCommentList(config);
+            $('html,body').animate({scrollTop: '0px'}, 100);
             //上拉加载更多
             $(window).on('scroll',function(){
                 if($(document).scrollTop()+$(window).height()>=$(document).height()){
                     getCommentList(config);
                 }
             });
-
         });
     </script>
 </block>

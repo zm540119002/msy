@@ -24,8 +24,10 @@ function getCommentList(config) {
         },
         success: function(data){
             $('.loading').hide();
+
             if(currentPage == 1){
-                $('.sales_comment_wrapper').append(data);
+                console.log(data)
+                $('.sales_comment_wrapper').empty().append(data);
                 callBackScore();
             }else{
                 $('.sales_comment_wrapper .sales_comment_list:last').after(data);
@@ -41,7 +43,6 @@ function getCommentList(config) {
 //评分回显
 function callBackScore(){
     $.each($('div[data-userscore]'),function(i,obj){
-        console.log($(this).data('userscore'));
         var starParentId=$(this).data('userscore');
         $(this).classStar(starParentId);
     });
