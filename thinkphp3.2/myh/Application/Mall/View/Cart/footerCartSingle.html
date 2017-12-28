@@ -13,6 +13,7 @@
                 $('html,body').css({"height":"100%","overflow":"hidden"});//动态阻止body页面滚动
                 $('.mask').show().css({position:'fixed'});
                 $('.mask').on('touchstart',function(e){
+                    console.log(e);
                     e.preventDefault(); 
                 });
                 $('.mask').data('show',1);
