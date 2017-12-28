@@ -88,13 +88,13 @@ class ConsigneeAddressController extends AuthUserController {
         $where = array(
             'user_id' => $this->user['id'],
         );
-        //先把机构下所有地址类型置为0
+        //先把所有地址类型置为0
         $_POST['type'] = 0;
         $res = $modelConsigneeAddress->saveConsigneeAddress($where);
         if($res['status']==0){
             $this->ajaxReturn(errorMsg($modelConsigneeAddress->getError()));
         }
-        //设置为默认地址
+        //再设置为默认地址
         $where['id'] = $id;
         $_POST['type'] = 1;
         $res = $modelConsigneeAddress->saveConsigneeAddress($where);
@@ -107,9 +107,9 @@ class ConsigneeAddressController extends AuthUserController {
     //编辑收货人地址
     private function editAddress(){
         $modelConsigneeAddress = D('ConsigneeAddress');
-        //如果有设置为默认地址，则需要先把本机构下所有收货地址type置为0
+        //如果有设置为默认地址，则需要先把所有收货地址type置为0
         if( isset($_POST['type']) && intval($_POST['type']) ){
-            $res = $modelConsigneeAddress->setTypeZeroByCompanyId($this->user['id']);
+            $res = $modelConsigneeAddress->setTypeZeroByUserId($this->user['id']);
             if($res['status']==0){
                 $this->ajaxReturn($res['info']);
             }

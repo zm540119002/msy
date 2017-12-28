@@ -112,14 +112,14 @@ class ConsigneeAddressModel extends Model {
     }
 
     //设置type为0
-    public function setTypeZeroByCompanyId($companyId){
+    public function setTypeZeroByUserId($userId){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
-        if(!$companyId){
-            return errorMsg('缺少参数companyId');
+        if(!$userId){
+            return errorMsg('缺少参数userId');
         }
-        $res = $this->where(array('user_id'=>$companyId))->setField('type',0);
+        $res = $this->where(array('user_id'=>$userId))->setField('type',0);
         if($res === false){
             return errorMsg($this->getError());
         }
