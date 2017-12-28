@@ -26,9 +26,9 @@ function getCommentList(config) {
             $('.loading').hide();
             console.log(data);
             if(currentPage == 1){
-
+                $('.sales_comment_wrapper').append(data);
             }else{
-              
+                $('.sales_comment_wrapper .sales_comment_list:last').after(data);
             }
             if($(data).length<postData.pageSize){
                 requestEnd = true;
