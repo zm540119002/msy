@@ -14,7 +14,9 @@ class CommentController extends AuthUserController {
                 if(empty($_POST['title'])){
                     $_POST['title'] = '此用户没有填写标题';
                 }
-                if(empty())
+                if(empty($_POST['score'])){
+                    $this->ajaxReturn($this->error('请评分'));
+                }
                 if(empty($_POST['content'])){
                     $this->ajaxReturn($this->error('请填写评价内容'));
                 }
