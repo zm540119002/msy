@@ -39,4 +39,35 @@ class CommentController extends AuthUserController {
             $this->display();
         }
     }
+
+    //商品列表
+    public function commentList(){
+
+        if(!IS_GET){
+            $this->ajaxReturn(errorMsg(C('NOT_GET')));
+        }
+        $model = D('Comment');
+        $where = array(
+            'c.status' => 0,
+        );
+        $field = array(
+            'c.id','c.user_id','c.score','c.order_id','c.title','c.content',
+            'c.create_time','c.update_time','c.user_name'
+        );
+        $join = array(
+
+        );
+        $group = "";
+        $order = 'c.id';
+        $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
+        $this->currentPage = (isset($_GET['p']) && intval($_GET['p'])) ? I('get.p',0,'int') : 1;
+        $commentList = page_query($model,$where,$field,$order,$join,$group,$pageSize,$alias='c');
+        $this->commentList = $commentList['data'];
+        $templateType = I('get.templateType','','string');
+        if($templateType=='list'){
+            $this ->display('commentListTpl');
+        }
+
+    }
+
 }

@@ -58,28 +58,19 @@
                         </div>
                     </div>
                 </volist>
-
             </div>
             <div>
                 <div class="store_score_title">
                     <span>购买用户评论</span>
                     <p><span>{$userCommentNum}</span>份购买用户评论</p>
                 </div>
-                <div class="sales_comment_list">
-                    <span class="thumbs_up">给这平台点个赞</span>
-                    <div class="store_score_star five_star">
-                        <div class="star_img empty_star">
-                            <span class="real_star"></span>
-                        </div>
-                        <div><span>李四</span><em>—</em><span>2017年3月XX日</span></div>
-                    </div>
-                    <p>该平台挺好的，体验好</p>
-                </div>
+
             </div>
         </section>
     </article>
 </block>
 <block name="script">
+    <script type="text/javascript" src="PUBLIC_JS/mall/comment.js"></script>
     <script type="text/javascript">
         $(function(){
             //星星评分等级(定位)
@@ -131,6 +122,20 @@
                     }
                 });
             })
+
+            var config = {
+                pageSize:4,
+                templateType:'list'
+            };
+            //初始化
+            getCommentList(config);
+            //上拉加载更多
+            $(window).on('scroll',function(){
+                if($(document).scrollTop()+$(window).height()>=$(document).height()){
+                    getCommentList(config);
+                }
+            });
+
 
         });
     </script>
