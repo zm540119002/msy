@@ -48,7 +48,9 @@
             </div>
         </section>
         <section class="f24">
-            <ul class="business_product_module goodsListContent"></ul>
+            <ul class="business_product_module goodsListContent">
+                <volist name="goodsList" id="vo"><include file="goodsListTpl" /></volist>
+            </ul>
         </section>
     </article>
 </block>
