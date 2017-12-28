@@ -112,7 +112,7 @@ class GoodsBaseModel extends Model {
         $_field = array(
             'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line','gb.param',
             'gb.usage','gb.sort','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro','gb.notices',
-            'gb.tag','gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification','gb.thumb_img','gb.notices',
+            'gb.tag','gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification','gb.thumb_img','gb.notices','gb.share_intro'
         );
         $_join = array(
         );

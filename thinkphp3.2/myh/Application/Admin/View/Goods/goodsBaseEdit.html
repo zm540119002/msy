@@ -23,14 +23,14 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品主图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <p>
-                                <input type="file" class="upload" id="img">
-                                <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
+                                <input type="file" class="upload" id="main_img">
+                                <label class="uploadbtn" for="main_img" title="JPG,GIF,PNG"></label>
                             </p>
                             <p class="showimg" id="showimg">图片上传大小请小于50k</p>
                             <empty name="goodsBaseInfo.main_img">
-                                <img class="img main_img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
+                                <img class="img main_img 1" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
                                 <else />
-                                <img class="img main_img" src="UPLOADS_IMG/{$goodsBaseInfo.main_img}">
+                                <img class="img main_img 2" src="UPLOADS_IMG/{$goodsBaseInfo.main_img}">
                             </empty>
                         </td>
                     </tr>
@@ -38,8 +38,8 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>缩略图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <p>
-                                <input type="file" class="upload" id="">
-                                <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
+                                <input type="file" class="upload" id="thumb_img">
+                                <label class="uploadbtn" for="thumb_img" title="JPG,GIF,PNG"></label>
                             </p>
                             <p class="showimg" >图片上传大小请小于50k</p>
                             <empty name="goodsBaseInfo.thumb_img">
@@ -125,6 +125,15 @@
                             多个标签请用逗号分隔，例如：正品保障,纳晶水光
                         </td>
                     </tr>
+
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>产品分享简介：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <textarea  class="textareaadmin"  name="share_intro">{$goodsBaseInfo.share_intro}</textarea>
+
+                        </td>
+                    </tr>
+
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品简介：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -226,9 +235,8 @@
                     postData.buy_type = $('input[type="radio"]:checked').data('buy_type');
                 }
                 //主图
-                postData.main_img = $(".main_img").attr('src');
-                postData.thumb_img = $(".thumb_img").attr('src');
-
+                postData.main_img = $("#main_img").attr('src');
+                postData.thumb_img = $("#thumb_img").attr('src');
                 //详情图
                 postData.detail_img = '';
                 $.each($('iframe').contents().find('.view img'),function () {

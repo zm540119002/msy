@@ -1,9 +1,6 @@
 <?php
 namespace Mall\Controller;
-
 use web\all\Controller\AuthUserController;
-
-
 class ReferrerController extends AuthUserController{
     //我的推客二维码
     public function myQRCodes(){

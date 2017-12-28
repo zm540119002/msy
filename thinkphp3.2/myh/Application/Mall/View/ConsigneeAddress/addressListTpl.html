@@ -1,7 +1,7 @@
 <notempty name="consigneeAddressList">
     <volist name="consigneeAddressList" id="vo">
         <li class="consignee_item" data-id="{$vo.id}" data-province="{$vo.province}" data-city="{$vo.city}" data-area="{$vo.area}">
-            <a>
+            <a href="javascript:void(0);" class="address">
                 <p>收货人信息</p>
                 <div class="c_w_item">
                     姓名：<span>{$vo.consignee_name}</span>

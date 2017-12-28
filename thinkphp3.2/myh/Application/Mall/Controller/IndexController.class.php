@@ -3,7 +3,7 @@ namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
 use  web\all\Lib\Pay;
-use web\all\Controller\AuthUserController;
+use  Mall\Controller\WxPayController;
 
 class IndexController extends BaseController{
     //商城-首页
