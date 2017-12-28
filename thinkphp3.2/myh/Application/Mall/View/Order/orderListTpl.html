@@ -3,7 +3,7 @@
         <div class="order_detail_item">
             <if condition="$orderInfo.logistics_status eq 1">
                 <div class="order_flex">
-                    <div class="">订单号：<span>{$orderInfo.sn}</span></div>
+                    <div class="">订单号：<span>{$orderInfo.sn|substr=0,15}</span></div>
                     <div class="pay_order_time"><i></i>支付剩余：
                     <span class="count_down_box">
                         <span class="day"></span>天
