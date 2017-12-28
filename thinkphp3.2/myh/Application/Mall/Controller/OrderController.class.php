@@ -86,22 +86,6 @@ class OrderController extends AuthUserController {
         $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
     }
 
-    //我的订单
-    public function orderManage(){
-        $modelOrder = D('Order');
-        if(IS_POST){
-        }else{
-            $where = array(
-                'o.user_id' => $this->user['id'],
-            );
-            if(isset($_GET['logisticsStatus']) && intval($_GET['logisticsStatus'])){
-                $where['o.logistics_status'] = I('get.logisticsStatus',0,'int');
-            }
-            $this->orderList = $modelOrder->selectOrder($where);
-            $this->display();
-        }
-    }
-
     //确定订单
     public function confirmOrder(){
         if(!IS_POST){
@@ -117,6 +101,40 @@ class OrderController extends AuthUserController {
             $this->ajaxReturn(errorMsg('失败'));
         }
         $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
+    }
+
+    //我的订单
+    public function orderManage(){
+        $modelOrder = D('Order');
+        $modelOrderDetail = D('OrderDetail');
+        if(IS_POST){
+        }else{
+            $where = array(
+                'o.user_id' => $this->user['id'],
+            );
+            if(isset($_GET['s']) && intval($_GET['s'])){
+                $where['o.logistics_status'] = I('get.s',0,'int');
+            }
+            $orderList = $modelOrder->selectOrder($where);
+            $join = array(
+                ' left join goods g on g.id = od.foreign_id ',
+                ' left join goods_base gb on gb.id = g.goods_base_id ',
+            );
+            $field = array(
+                'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
+            );
+            foreach ($orderList as &$item) {
+                $where = array(
+                    'od.order_sn' => $item['sn'],
+                );
+                //订单下商品列表
+                $item['goodsList'] = $goodsList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
+            }
+            $this->orderList = $orderList;
+            //商品列表操作类型
+            $this->goodsListOptionType = 'withNum';
+            $this->display();
+        }
     }
 
     //订单-详情页
@@ -139,7 +157,7 @@ class OrderController extends AuthUserController {
             if(isset($_GET['orderId']) && intval($_GET['orderId'])){
                 $where['o.id'] = I('get.orderId',0,'int');
             }
-//            $where['o.logistics_status'] = $_GET['logisticsStatus']?I('get.logisticsStatus',0,'int'):0;
+//            $where['o.logistics_status'] = $_GET['s']?I('get.s',0,'int'):0;
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
             );
@@ -148,9 +166,10 @@ class OrderController extends AuthUserController {
                 'ca.city','ca.area','ca.detailed_address',
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
-            $this->orderInfo = $orderList[0];
+            $orderInfo = $orderList[0];
+
             $where = array(
-                'od.order_sn' => $this->orderInfo['sn'],
+                'od.order_sn' => $orderInfo['sn'],
             );
             $join = array(
                 ' left join goods g on g.id = od.foreign_id ',
@@ -159,10 +178,14 @@ class OrderController extends AuthUserController {
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
             );
-            //商品列表
-            $this->goodsList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
+            //订单下商品列表
+            $goodsList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
+            $orderInfo['goodsList'] = $goodsList;
+            $this->orderInfo = $orderInfo;
             //商品列表操作类型
             $this->goodsListOptionType = 'withNum';
+            //订单详情页显示添加收货人地址
+            $this->addAddress = 'true';
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,7));
             $this->display();

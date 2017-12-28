@@ -1,23 +1,12 @@
 <extend name="Public:base" />
-
-<block name="title">{$Think.get.pay_status|getPayStatusCN}的采购单</block>
+<block name="title">我的订单管理</block>
 <block name="css-customize">
     <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
 </block>
 <block name="content">
     <article class="f24">
         <section class="orderInfo" data-id="{$orderInfo.id}">
-            <div class="order_detail_item">
-                <div class="order_flex_single">
-                    <p>收货人姓名：<span class="consignee_name">{$orderInfo.consignee_name}</span></p>
-                    <p>收货人手机号：<span class="consignee_phone">{$orderInfo.consignee_mobile}</span></p>
-                    <p>收货人地址：<span class="consignee_address"></span>{$orderInfo.detailed_address}</p>
-                </div>
-                <a class="select_address">收货人地址</a>
-                <ul class="orderDetail_list goods_list">
-                    <include file="Goods/goodsListTpl" />
-                </ul>
-            </div>
+            <include file="orderInfoTpl" />
         </section>
     </article>
 </block>
@@ -33,7 +22,7 @@
             var province = '{$orderInfo.province}';
             var city = '{$orderInfo.city}';
             var area = '{$orderInfo.area}';
-            if( province && city && area){
+            if( province && city && area ){
                 arr.push(province);
                 arr.push(city);
                 arr.push(area);
