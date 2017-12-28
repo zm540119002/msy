@@ -34,7 +34,7 @@ class CartController extends BaseController {
                 $this->goodsList = GoodsNumMergeById($cart,$goodsList);
                 //商品列表操作类型
                 $this->goodsListOptionType = 'withDel';
-                $this->display('Goods/goodsListTpl');
+                $this->display('Goods/goodsListTpl2');
             }
         }else{
             //购物车配置开启的项
