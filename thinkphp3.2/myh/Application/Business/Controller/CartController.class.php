@@ -26,7 +26,7 @@ class CartController extends BaseController {
                 );
                 $goodsList = $modelGoods->selectGoods($where);
                 $this->goodsList = GoodsNumMergeById($cart,$goodsList);
-                $this->display('Goods/goodsListTpl');
+                $this->display('Goods/goodsListTpl2');
             }
         }else{
             //商品列表操作类型

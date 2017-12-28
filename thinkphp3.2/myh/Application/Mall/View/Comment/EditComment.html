@@ -26,7 +26,7 @@
                 <div class="score_review_item">
                     <span class="my_scoring">我的评论（可不填）</span>
                     <form id="form1">
-                        <input type="hidden" name="order_id" value="{$order_id}"/>
+                        <input type="hidden" name="order_id" value="{$orderId}"/>
                         <input type="text" name="title" placeholder="评论标题" class="business_record_title seller_comment_title" value="">
                         <textarea name="content"  cols="30" rows="10" placeholder="评论内容" class="business_record_content seller_comment_text"></textarea>
                     </form>
@@ -38,7 +38,7 @@
             <div>
                 <div class="store_score_title">
                     <span>购买用户评分</span>
-                    <p><span>56</span>份购买用户评分</p>
+                    <p><span>{$userCommentNum}</span>份购买用户评分</p>
                 </div>
                 <div class="store_score_star five_star">
                     <div class="star_img empty_star">
@@ -46,89 +46,43 @@
                     </div>
                     <span class="fraction" data-score=""></span>
                 </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="5">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="4.5">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
+                <volist name="scoreBase" id="vo">
+                    <div class="score_star_item">
+                        <div class="store_score_star five_star store_score_progress">
+                            <div class="star_img empty_star" data-id="{$vo.score}" data-percent="{$vo.percent}">
+                                <span class="real_star"></span>
+                            </div>
+                            <div class="star_progress_bar">
+                                <span class="real_star_progress"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="3.5">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="2.1">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="score_star_item">
-                    <div class="store_score_star five_star store_score_progress">
-                        <div class="star_img empty_star" data-id="1.2">
-                            <span class="real_star"></span>
-                        </div>
-                        <div class="star_progress_bar">
-                            <span class="real_star_progress"></span>
-                        </div>
-                    </div>
-                </div>
+                </volist>
             </div>
             <div>
                 <div class="store_score_title">
                     <span>购买用户评论</span>
-                    <p><span>53</span>份购买用户评论</p>
+                    <p><span>{$userCommentNum}</span>份购买用户评论</p>
                 </div>
-                <div class="sales_comment_list">
-                    <span class="thumbs_up">给这平台点个赞</span>
-                    <div class="store_score_star five_star">
-                        <div class="star_img empty_star">
-                            <span class="real_star"></span>
-                        </div>
-                        <div><span>李四</span><em>—</em><span>2017年3月XX日</span></div>
-                    </div>
-                    <p>该平台挺好的，体验好</p>
-                </div>
+                <div class="sales_comment_wrapper"></div>
             </div>
         </section>
     </article>
 </block>
 <block name="script">
+    <script type="text/javascript" src="PUBLIC_JS/mall/comment.js"></script>
     <script type="text/javascript">
         $(function(){
-            $('.five_star').setStar(4.8);
-            console.log($('.five_star').getStar());
             //星星评分等级(定位)
-            $('.star_img').classStar(2.1);
+            $('.star_img').classStar({$aveScore});
             $.each($('div[data-id]'),function(i,obj){
                 var starParentId=$(this).data('id');
+                var percent=$(this).data('percent');
                 $(this).classStar(starParentId);
-                $(this).next().getProgressBar(starParentId);
+                $(this).next().getProgressBar(percent);
 
             });
+            
             //点击星星评分
             $('body').on('click','.star_score img',function(){
                 var star='PUBLIC_IMG/common/star.png';
@@ -145,10 +99,43 @@
             });
 
             $('body').on('click','.rating_review',function(){
-                console.log($('.five_star').getStar());
                 var postData = $('#form1').serializeObject();
-                console.log(postData)
+                postData.score = $('.fraction').data('score');
+                var url = MODULE + '/Comment/EditComment';
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status == 0){
+
+                        }else if(data.status == 1){
+
+                        }
+                    }
+                });
             })
+
+            var config = {
+                pageSize:4,
+                templateType:'list'
+            };
+            //初始化
+            getCommentList(config);
+            //上拉加载更多
+            $(window).on('scroll',function(){
+                if($(document).scrollTop()+$(window).height()>=$(document).height()){
+                    getCommentList(config);
+                }
+            });
 
         });
     </script>

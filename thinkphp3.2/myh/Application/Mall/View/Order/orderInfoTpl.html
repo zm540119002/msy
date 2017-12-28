@@ -1,6 +1,7 @@
 <notempty name="orderInfo">
     <div class="order_detail_item">
-        <div class="order_flex_single">
+        <div class="order_flex_single consignee_address" data-province="{$orderInfo.province}"
+             data-city="{$orderInfo.city}"  data-area="{$orderInfo.area}">
             <p>收货人姓名：<span class="consignee_name">{$orderInfo.consignee_name}</span></p>
             <p>收货人手机号：<span class="consignee_phone">{$orderInfo.consignee_mobile}</span></p>
             <p>收货人地址：<span class="consignee_address"></span>{$orderInfo.detailed_address}</p>

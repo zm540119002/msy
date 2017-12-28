@@ -4,8 +4,8 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class OrderModel extends Model {
-    protected $tableName = 'orders';
+class CommentModel extends Model {
+    protected $tableName = 'comment';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG1';
 
@@ -14,7 +14,7 @@ class OrderModel extends Model {
     );
 
     //新增
-    public function addOrder(){
+    public function addComment(){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -32,7 +32,7 @@ class OrderModel extends Model {
     }
 
     //修改
-    public function saveOrder($where=array()){
+    public function saveComment($where=array()){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -41,8 +41,8 @@ class OrderModel extends Model {
         $_where = array(
             'status' => 0,
         );
-        if(isset($_POST['orderId']) && intval($_POST['orderId'])){
-            $id = I('post.orderId',0,'int');
+        if(isset($_POST['CommentId']) && intval($_POST['CommentId'])){
+            $id = I('post.CommentId',0,'int');
         }
         if($id){
             $_where['id'] = $id;
@@ -59,12 +59,12 @@ class OrderModel extends Model {
     }
 
     //标记删除
-    public function delOrder($where=array()){
+    public function delComment($where=array()){
         unset($_POST['id']);
         $_where = array(
             'status' => 0,
         );
-        $id = I('post.orderId',0,'int');
+        $id = I('post.CommentId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -81,69 +81,43 @@ class OrderModel extends Model {
     }
 
     //查询
-    public function selectOrder($where=[],$field=[],$join=[]){
+    public function selectComment($where=[],$field=[],$join=[]){
         $_where = array(
             'o.status' => 0,
         );
+       
         $_field = array(
-            'o.id','o.sn','o.status','o.logistics_status','o.after_sale_status','o.payment_code',
-            'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
-            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time',
+           'c.id','c.user_id','c.score','c.order_id','c.title','c.content','c.create_time','c.update_time'
         );
         $_join = array(
         );
         $list = $this
-            ->alias('o')
+            ->alias('c')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
-            ->order('o.id desc')
             ->select();
         return $list?:[];
     }
     
     //检查订单状态
-    public function checkOrderStatus($orderInfo){
-        if(empty($orderInfo)){
+    public function checkCommentStatus($CommentInfo){
+        if(empty($CommentInfo)){
             $res = array(
                 'status' => 0,
                 'message' => '订单信息有误'
             );
-        }elseif($orderInfo['logistics_status'] != '1'){
+        }elseif($CommentInfo['logistics_status'] != '1'){
             $res = array(
                 'status' => 0,
-                'message' => '订单已支付或已取消',
+                'message' => '订单已支付或已取消'
             );
         }else{
             $res = array(
                 'status' => 1,
-                'message' => '待支付',
+                'message' => '待支付'
             );
         }
         return $res;
-    }
-
-    //按订单状态分组统计
-    public function orderStatusCount($where){
-        $_where = array(
-            'o.status' => 0,
-        );
-        $_field = array(
-            'o.logistics_status','count(1) num',
-        );
-        $list = $this
-            ->alias('o')
-            ->where(array_merge($_where,$where))
-            ->field($_field)
-            ->group('o.logistics_status')
-            ->order('o.logistics_status asc')
-            ->select();
-        $orderStatusCount = array();
-        foreach ($list as $value){
-            if($value['logistics_status'] != 0){
-                $orderStatusCount[$value['logistics_status']] = $value['num'];
-            }
-        }
-        return $orderStatusCount?:[];
     }
 }

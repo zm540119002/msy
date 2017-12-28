@@ -24,4 +24,33 @@ return [
         '3'   => '已签收',
         '4'   => '已取消',
     ],
+    
+    //评分数组
+    'COMMENT_ARRAY'=>[
+        '5'=>array(
+            'score'=>5,
+            'num'=>0,
+            'percent'=>0
+        ),
+        '4'=>array(
+            'score'=>4,
+            'num'=>0,
+            'percent'=>0
+        ),
+        '3'=>array(
+            'score'=>3,
+            'num'=>0,
+            'percent'=>0
+        ),
+        '2'=>array(
+            'score'=>2,
+            'num'=>0,
+            'percent'=>0
+        ),
+        '1'=>array(
+            'score'=>1,
+            'num'=>0,
+            'percent'=>0
+        ),
+    ]
 ];
