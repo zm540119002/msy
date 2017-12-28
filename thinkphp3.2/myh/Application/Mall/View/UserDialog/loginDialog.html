@@ -53,8 +53,14 @@
                 // $('.layui-m-layershade,.mask').on('touchstart',function(e){
                 //     e.preventDefault(); 
                 // });
-                $(window).off('scroll',function(){
-                    
+                $(document).on("touchmove",function(e) {
+                    var e = e || event,
+                　　　 target = e.target || e.srcElement;
+                    if(e.target.className.indexOf("layui-m-layershade") >= 0) {  
+                        e.preventDefault(); }
+                    else { 
+                        e.stopPropagation(); 
+                    } 
                 })
             },
             yes:function(index){
