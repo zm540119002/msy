@@ -50,8 +50,8 @@
             btn:'登录',
             success:function(){
                 tab_down('.loginNav li','.loginTab .login_wrap','click');
-                $('.loginLayer').on('touchmove',function(e){
-                    event.stopPropagation(); 
+                $('.layui-m-layershade').on('touchstart',function(e){
+                    event.preventDefault(); 
                 });
             },
             yes:function(index){
