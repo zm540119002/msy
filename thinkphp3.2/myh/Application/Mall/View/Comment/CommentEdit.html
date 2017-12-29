@@ -152,7 +152,7 @@
             getCommentList(config);
             $('html,body').animate({scrollTop:0+'px'});
             //上拉加载更多
-            $(window).on('scroll',function(){
+            $(window).on('touchmove',function(){
                 console.log($(document).scrollTop());
                 console.log($(window).height());
                 console.log($(document).height());
