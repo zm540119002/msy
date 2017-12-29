@@ -53,11 +53,6 @@
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
                 });
-                function preventDefault(e) {
-        e = e || window.event;
-        e.preventDefault && e.preventDefault();
-        e.returnValue = false;
-    }
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -110,6 +105,11 @@
                 });
             }
         });
+    }
+    function preventDefault(e) {
+        e = e || window.event;
+        e.preventDefault && e.preventDefault();
+        e.returnValue = false;
     }
     $(function(){
         //注册
