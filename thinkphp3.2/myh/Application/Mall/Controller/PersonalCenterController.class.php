@@ -24,6 +24,9 @@ class PersonalCenterController extends BaseController {
                     'ct.user_id' => $this->user['id'],
                 );
                 $this->cartCount = $modelCart->cartCount($where);
+            }else{
+                $cart = unserialize(cookie('cart'));
+                $this->cartCount = count($cart);
             }
             $this->display();
         }

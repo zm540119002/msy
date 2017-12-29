@@ -1,6 +1,5 @@
 <?php
 namespace Mall\Controller;
-
 use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
