@@ -144,27 +144,33 @@
                     }
                 });
             });
-            
+            var config = {
+                pageSize:4,
+                templateType:'list'
+            };
             //初始化
             getCommentList(config);
-            $('html,body').animate({scrollTop:0+'px'});
+            //$('html,body').animate({scrollTop:0+'px'});
             //上拉加载更多
-           
+            
         });
-        var config = {
-            pageSize:4,
-            templateType:'list'
-        };
         window.onload=function(){
-             $(window).on('scroll',function(){
-                console.log($(document).scrollTop());
-                console.log($(window).height());
-                console.log($(document).height());
-                if($(document).scrollTop()+$(window).height()==$(document).height()){
-                    console.log(1);
-                    getCommentList(config);
-                }
-            });
+            if(document.body.scrollTop>0){
+                console.log(1);
+                window.scrollTo(0,-1);
+                document.body.scrollTop=0;
+                $(window).on('scroll',function(){
+                    console.log($(document).scrollTop());
+                    console.log($(window).height());
+                    console.log($(document).height());
+                    if($(document).scrollTop()+$(window).height()==$(document).height()){
+                        console.log(1);
+                        getCommentList(config);
+                    }
+                });
+            }
+            window.scrollTo(0,-1);
+            document.body.scrollTop=0;
         }
     </script>
 </block>
