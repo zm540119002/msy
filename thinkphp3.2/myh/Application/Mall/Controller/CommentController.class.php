@@ -27,13 +27,14 @@ class CommentController extends AuthUserController {
                 $model->startTrans();
                 $res = $model->addComment();//添加评论表
                 if (!$res['id']) {
+                    echo 11;exit;
                     $model->rollback();
                 }
                 $_POST['logistics_status']=4;
                 $_POST['update_time']=time();
                 $where['id'] = $_POST['order_id'];
                 $res = D('Order')->where($where)->saveOrder();//添加评论表
-                if (!$res['id']) {
+                if ($res['status']!=1) {
                     $model->rollback();
                 }
             }
