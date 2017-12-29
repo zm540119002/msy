@@ -3,7 +3,7 @@ ol,ul,li,dd,dt,dl{ list-style:none;}
 img{border:0;}
 a{text-decoration: none;}
 input[type=button], input[type=submit], input[type=file], button { cursor: pointer;  }
-button,input,textarea{border: none;outline: none;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+button,input,textarea{border: none;outline: none;-webkit-tap-highlight-color:rgba(255,0,0,0);-webkit-appearance: none;}
 body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333;background: #fff;}
 .clearfix:after{content:"."; display:block; height:0; clear:both;visibility:hidden;}
 .f06c{color:#06c;}

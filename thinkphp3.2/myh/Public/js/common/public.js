@@ -128,7 +128,7 @@
             var opts=$.extend({},defaults,options); 
             var progressBox = $(opts.mainCell,_this);
             var getProgressValue=opts.getProgressValue;
-            var progressValue=parseInt(getProgressValue);
+            var progressValue=parseInt(getProgressValue)*2.1;
             progressBox.each(function(index){
                 // this.id=index;
                 $(this).css('width',progressValue+'px');
