@@ -2,8 +2,12 @@
 namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 class ReferrerController extends AuthUserController{
-    //我的推客二维码
-    public function myQRCodes(){
+    //推客分享首页
+    public function index(){
+        $this->display();
+    }
+    //我的带产品推客二维码
+    public function myQRCodesWithGoods(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -17,8 +21,8 @@ class ReferrerController extends AuthUserController{
         $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
     }
 
-    //删除我的推客二维码
-    public function delMyQRCodes(){
+    //删除我带产品的推客二维码
+    public function delMyQRCodesWithGoods(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }

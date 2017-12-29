@@ -83,7 +83,7 @@ class GoodsController extends BaseController {
             $field = array(
                 'g.id','g.buy_type','g.sale_price','g.commission',
                 'gb.no','gb.name','gb.price','gb.main_img','gb.single_specification','gb.param','gb.intro',
-                'gb.usage','gb.notices','gb.detail_img','gb.share_intro'
+                'gb.usage','gb.notices','gb.detail_img','gb.share_intro','gb.package_unit',
             );
             $join = array(
                 ' left join goods_base gb on g.goods_base_id = gb.id ',
@@ -107,9 +107,8 @@ class GoodsController extends BaseController {
             //微信分享
             $shareInfo = [];
             //获取当前url
-            $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-            $currentLink = (is_ssl()?'https://':'http://').$host.$_SERVER['REQUEST_URI'];
+
+            $currentLink = (is_ssl()?'https://':'http://').$this->host.$_SERVER['REQUEST_URI'];
             //分享的内容
             $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
             $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片

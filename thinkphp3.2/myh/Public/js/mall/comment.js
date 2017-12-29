@@ -26,7 +26,6 @@ function getCommentList(config) {
             $('.loading').hide();
 
             if(currentPage == 1){
-                console.log(data)
                 $('.sales_comment_wrapper').empty().append(data);
                 callBackScore();
             }else{
