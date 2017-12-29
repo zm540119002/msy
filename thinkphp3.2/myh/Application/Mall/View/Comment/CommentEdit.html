@@ -144,16 +144,17 @@
                     }
                 });
             });
-            var config = {
-                pageSize:4,
-                templateType:'list'
-            };
+           
             //初始化
             getCommentList(config);
             //$('html,body').animate({scrollTop:0+'px'});
             //上拉加载更多
             
         });
+         var config = {
+                pageSize:4,
+                templateType:'list'
+            };
         window.onload=function(){
             if(document.body.scrollTop>0){
                 console.log(1);
