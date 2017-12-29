@@ -9,15 +9,13 @@ use web\all\Component\WxpayAPI\Jssdk;
  */
 class CommonController extends Controller{
     private $_jssdk = null;
-    private $host;
+    protected $host;
     public function __construct(){
         parent::__construct();
         $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         $this->_jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
         $this -> signPackage = $this -> weiXinShareInit();
-        //获取微信用户信息
-//        $this->wxUser = $this->getWeiXinUserInfo();
     }
 
     //微信分享初始化
