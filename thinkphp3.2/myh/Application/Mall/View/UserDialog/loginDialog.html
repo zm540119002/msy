@@ -50,10 +50,14 @@
             btn:'登录',
             success:function(){
                 tab_down('.loginNav li','.loginTab .login_wrap','click');
-                $('html,body').animate({scrollTop: '0px'}, 100);
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
                 });
+                function preventDefault(e) {
+        e = e || window.event;
+        e.preventDefault && e.preventDefault();
+        e.returnValue = false;
+    }
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -118,5 +122,6 @@
         $('body').on('click','.forget_dialog',function(){
             forgetPasswordDialog();
         });
+        document.body.addEventListerner('touchmove',preventDefault,false);
     });
 </script>
