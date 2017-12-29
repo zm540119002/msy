@@ -14,7 +14,7 @@
         <section class="bottomLine">
             <div class="myh_detail_item">
                 <p>{$goodsInfo.name}</p>
-                <p>{$goodsInfo.single_specification}</p>
+                <p>{$goodsInfo.single_specification} / {$goodsInfo.package_unit|getUnitCN}</p>
             </div>
             <div class="myh_detail_item myh_product_intro">
                 {$goodsInfo.intro|htmlspecialchars_decode}
@@ -31,7 +31,7 @@
                         <div class="save_money">节省:￥{$goodsInfo['price']-$goodsInfo['sale_price']}</div>
                     </div>
                     <div class="myh_detail_item options">
-                        <span>购买数量</span>
+                        <span>购买数量：（{$goodsInfo.package_unit|getUnitCN}）</span>
                         <div class="quantity_wrapper business_count">
                             <a href="javascript:void(0);" class="greduce">-</a>
                             <input type="text" value="0" class="f24 gshopping_count">
