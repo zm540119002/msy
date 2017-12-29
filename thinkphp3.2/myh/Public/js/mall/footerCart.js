@@ -217,6 +217,12 @@ $(function () {
     $('.weixinShare_btn').on('click',function(){
         $('.mcover').hide();
     });
+
+    //支付并发起微团购
+    $('body').on('click','.initiate_group_buy',function(){
+        var postData = assemblyData();
+        console.log(postData);
+    });
 });
 //关闭二维码
 function clockArea() {

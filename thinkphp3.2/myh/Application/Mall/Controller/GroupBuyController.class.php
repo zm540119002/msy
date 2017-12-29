@@ -1,13 +1,17 @@
 <?php
 namespace Mall\Controller;
 
-use  web\all\Controller\BaseController;
+use  web\all\Controller\AuthUserController;
 
-class GroupBuyController extends BaseController{
-    //商城-首页
+class GroupBuyController extends AuthUserController{
     public function index(){
-        //购物车配置开启的项
-        $this->unlockingFooterCartSingle = unlockingFooterCartConfig(array(2,3,4));
         $this->display();
+    }
+
+    //发起微团购
+    public function send(){
+        if(IS_POST){
+        }else{
+        }
     }
 }
