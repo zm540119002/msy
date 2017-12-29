@@ -153,7 +153,7 @@
             $('html,body').animate({scrollTop:0+'px'});
             //上拉加载更多
             $(window).on('scroll',function(){
-                alert(1);
+                console.log(1);
                 if($(document).scrollTop()+$(window).height()==$(document).height()){
                     getCommentList(config);
                 }
