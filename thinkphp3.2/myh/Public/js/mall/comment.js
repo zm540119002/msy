@@ -47,22 +47,3 @@ function callBackScore(){
         $(this).classStar(starParentId);
     });
 }
-
-//滚动、滑动
-function slideTrigger(opt){
-    var lastTop=0;
-    var hasMore=true;
-    document.addEventListener('scroll', function (e) {
-        var clientHeight = document.documentElement.clientHeight;
-        var scrollHeight = document.documentElement.scrollHeight;
-        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
-        if (lastTop < scrollTop && scrollTop > scrollHeight - clientHeight - 20
-            || scrollTop == scrollHeight - clientHeight
-        ) {
-            hasMore && getCommentList(opt);
-        }
-
-        lastTop = scrollTop;
-    });
-}
