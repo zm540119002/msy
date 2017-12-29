@@ -125,7 +125,7 @@ $(function () {
     $('body').on('click','.QR_codes',function(){
         var url = location.href;
         $.ajax({
-            url: MODULE + '/Referrer/myQRCodes',
+            url: MODULE + '/Referrer/myQRCodesWithGoods',
             data: {url:url},
             type: 'post',
             beforeSend: function(){
@@ -160,7 +160,7 @@ $(function () {
     $("#areaMask,.closeBtn").click(function() {
         var imgUrl = $('.twitter_code_img img').attr('src');
         $.ajax({
-            url: MODULE + '/Referrer/delMyQRCodes',
+            url: MODULE + '/Referrer/delMyQRCodesWithGoods',
             data: {imgUrl:imgUrl},
             type: 'post',
             beforeSend: function(){
