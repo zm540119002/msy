@@ -4,88 +4,6 @@ namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 
 class OrderController extends AuthUserController {
-    //订单-生成
-    public function generate(){
-        if(!IS_POST){
-            $this->ajaxReturn(errorMsg(C('NOT_POST')));
-        }
-        //采购商品
-        $goodsList = $_POST['goodsList'];
-        if(!is_array($goodsList) || empty($goodsList)){
-            $this->ajaxReturn(errorMsg('未提交数据'));
-        }
-        //查询商品信息
-        $modelGoods = D('Goods');
-        $amount = 0;
-        foreach ($goodsList as &$goods){
-            $where = array(
-                'g.id' => $goods['foreign_id'],
-            );
-            $goodsInfo = $modelGoods->selectGoods($where);
-            $goods['price'] = $goodsInfo[0]['sale_price'];
-            if($goods['num'] && $goods['price']){
-                $amount += number_format($goods['num'] * $goods['price'],2,'.','');
-            }
-        }
-        //订单编号
-        $orderSN = generateSN();
-        //生成订单
-        $modelOrder = D('Order');
-        //开启事务
-        $modelOrder->startTrans();
-        $_POST = [];
-        $_POST['sn'] = $orderSN;
-        $_POST['user_id'] = $this->user['id'];
-        $_POST['amount'] = $amount;
-        $_POST['create_time'] = time();
-        $res = $modelOrder->addOrder();
-        $orderId = $res['id'];
-        if(!$orderId){
-            $modelOrder->rollback();
-            $this->ajaxReturn(errorMsg($res));
-        }
-        //生成订单明细
-        $modelOrderDetail = D('OrderDetail');
-        foreach ($goodsList as $item){
-            $_POST = [];
-            $_POST['order_sn'] = $orderSN;
-            $_POST['order_id'] = $orderId;
-            $_POST['price'] = $item['price'];
-            $_POST['num'] = $item['num'];
-            $_POST['foreign_id'] = $item['foreign_id'];
-            $_POST['user_id'] = $this->user['id'];
-            $res = $modelOrderDetail->addOrderDetail();
-            if(!$res['id']){
-                $modelOrder->rollback();
-                $this->ajaxReturn(errorMsg($res));
-            }
-        }
-        //禁用购物车
-        $modelCart = D('Cart');
-        $where = array(
-            'ct.user_id' => $this->user['id'],
-        );
-        $cartList = $modelCart->selectCart($where);
-        foreach ($goodsList as $item){
-            foreach ($cartList as $value){
-                if($item['foreign_id'] && $value['foreign_id'] && $item['foreign_id']==$value['foreign_id'])
-                {//提交的商品在购物车中，生成订单后禁用
-                    $where = array(
-                        'user_id' => $this->user['id'],
-                        'foreign_id' => $value['foreign_id'],
-                    );
-                    $res = $modelCart->where($where)->setField('status',1);
-                    if($res === false){
-                        $modelOrder->rollback();
-                        $this->ajaxReturn(errorMsg($this->getError()));
-                    }
-                }
-            }
-        }
-        $modelOrder->commit();
-        $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
-    }
-
     //确定订单
     public function confirmOrder(){
         if(!IS_POST){
@@ -215,6 +133,88 @@ class OrderController extends AuthUserController {
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,7));
             $this->display();
         }
+    }
+
+    //订单-生成
+    public function generate(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        //采购商品
+        $goodsList = $_POST['goodsList'];
+        if(!is_array($goodsList) || empty($goodsList)){
+            $this->ajaxReturn(errorMsg('未提交数据'));
+        }
+        //查询商品信息
+        $modelGoods = D('Goods');
+        $amount = 0;
+        foreach ($goodsList as &$goods){
+            $where = array(
+                'g.id' => $goods['foreign_id'],
+            );
+            $goodsInfo = $modelGoods->selectGoods($where);
+            $goods['price'] = $goodsInfo[0]['sale_price'];
+            if($goods['num'] && $goods['price']){
+                $amount += number_format($goods['num'] * $goods['price'],2,'.','');
+            }
+        }
+        //订单编号
+        $orderSN = generateSN();
+        //生成订单
+        $modelOrder = D('Order');
+        //开启事务
+        $modelOrder->startTrans();
+        $_POST = [];
+        $_POST['sn'] = $orderSN;
+        $_POST['user_id'] = $this->user['id'];
+        $_POST['amount'] = $amount;
+        $_POST['create_time'] = time();
+        $res = $modelOrder->addOrder();
+        $orderId = $res['id'];
+        if(!$orderId){
+            $modelOrder->rollback();
+            $this->ajaxReturn(errorMsg($res));
+        }
+        //生成订单明细
+        $modelOrderDetail = D('OrderDetail');
+        foreach ($goodsList as $item){
+            $_POST = [];
+            $_POST['order_sn'] = $orderSN;
+            $_POST['order_id'] = $orderId;
+            $_POST['price'] = $item['price'];
+            $_POST['num'] = $item['num'];
+            $_POST['foreign_id'] = $item['foreign_id'];
+            $_POST['user_id'] = $this->user['id'];
+            $res = $modelOrderDetail->addOrderDetail();
+            if(!$res['id']){
+                $modelOrder->rollback();
+                $this->ajaxReturn(errorMsg($res));
+            }
+        }
+        //禁用购物车
+        $modelCart = D('Cart');
+        $where = array(
+            'ct.user_id' => $this->user['id'],
+        );
+        $cartList = $modelCart->selectCart($where);
+        foreach ($goodsList as $item){
+            foreach ($cartList as $value){
+                if($item['foreign_id'] && $value['foreign_id'] && $item['foreign_id']==$value['foreign_id'])
+                {//提交的商品在购物车中，生成订单后禁用
+                    $where = array(
+                        'user_id' => $this->user['id'],
+                        'foreign_id' => $value['foreign_id'],
+                    );
+                    $res = $modelCart->where($where)->setField('status',1);
+                    if($res === false){
+                        $modelOrder->rollback();
+                        $this->ajaxReturn(errorMsg($this->getError()));
+                    }
+                }
+            }
+        }
+        $modelOrder->commit();
+        $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
     }
 
     //订单-结算支付
