@@ -4,9 +4,20 @@
 </block>
 <block name="content">
     <!-- 美悦会商城首页 -->
-    <section class="header_banner">
-        <img src="PUBLIC_IMG/common/home-banner.jpg"/>
-    </section>
+    <div id="slider">
+        <div class='swipe-wrap'>
+            <div><img src="PUBLIC_IMG/common/banner/home-banner.jpg" /></div>
+            <div><img src="PUBLIC_IMG/common/banner/home-banner1.jpg" /></div>
+            <div><img src="PUBLIC_IMG/common/banner/home-banner2.jpg" /></div>
+            <div><img src="PUBLIC_IMG/common/banner/home-banner3.jpg" /></div>
+        </div>
+        <ul class="position">
+            <li class="on"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
     <nav class="mall_function_menu navigation_module f24">
         <a href="">
             <span class="mall_home"></span>
@@ -42,6 +53,7 @@
     <include file="Cart/footerCartSingle" />
 </block>
 <block name="script">
+    <script type="text/javascript" src="PUBLIC_JS/common/swipe.js"></script>
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
         $(function(){
@@ -58,6 +70,10 @@
                     getGoodsList(config);
                 }
             });
+
+             //滑动轮播
+            var elem = document.getElementById('slider');
+                swipe(elem);
         });
     </script>
 </block>
