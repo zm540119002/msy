@@ -159,7 +159,11 @@
                 console.log(1);
                 window.scrollTo(0,-1);
                 document.body.scrollTop=0;
-                $(window).on('scroll',function(){
+                
+            }
+            window.scrollTo(0,-1);
+            document.body.scrollTop=0;
+            $(window).on('scroll',function(){
                     console.log($(document).scrollTop());
                     console.log($(window).height());
                     console.log($(document).height());
@@ -168,9 +172,6 @@
                         getCommentList(config);
                     }
                 });
-            }
-            window.scrollTo(0,-1);
-            document.body.scrollTop=0;
         }
     </script>
 </block>
