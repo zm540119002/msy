@@ -111,7 +111,7 @@
             $('body').on('click','.rating_review',function(){
                 var postData = $('#form1').serializeObject();
                 postData.score = $('.fraction').attr('data-score');
-                var url = MODULE + '/Comment/EditComment';
+                var url = MODULE + '/Comment/CommentEdit';
                 var commentext=$('.seller_comment_text').val();
                 var content='';
                     if(!postData.score ){

@@ -5,7 +5,7 @@ class CommentController extends AuthUserController {
     /**
      *用户评论
      */
-    public function EditComment(){
+    public function CommentEdit(){
         $model = D('Comment');
         if(IS_POST){
             if(isset($_POST['commentId']) && intval($_POST['commentId'])){//修改
