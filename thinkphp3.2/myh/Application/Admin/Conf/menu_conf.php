@@ -14,6 +14,7 @@ return array(
                 array('name'=>'发货订单','act'=>'Order','op'=>'deliveryList'),
                 array('name'=>'退款订单','act'=>'Order','op'=>'refundOrderList'),
                 array('name'=>'退换货订单','act'=>'Order','op'=>'returnList'),
+                array('name'=>'导出数据','act'=>'Inout','op'=>'index'),
         )),
 
 
