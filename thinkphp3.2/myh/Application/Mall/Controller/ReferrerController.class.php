@@ -21,7 +21,7 @@ class ReferrerController extends AuthUserController{
         $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
     }
 
-    //删除我带产品的推客二维码
+    //删除带产品我的推客二维码
     public function delMyQRCodesWithGoods(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
@@ -57,7 +57,6 @@ class ReferrerController extends AuthUserController{
         }else{
             $this->ajaxReturn(errorMsg('失败'));
         }
-
     }
     
     

@@ -1,34 +1,37 @@
-<volist name="orderList" id="vo">
-    <tr>
-        <td class="single_checkbox">
-            <input type="checkbox">
-        </td>
-        <td class="thead_order_num">
-            <div>{$vo.sn}</div>
-        </td>
-        <td class="thead_field">
-            <div>{$vo.create_time|date="Y-m-d H:i:s",###}2017-08-17 10:50</div>
-        </td>
-        <td class="thead_field">
-            <div>{$vo.user_id}</div>
-        </td>
-        <td class="thead_field">
-            <div>{$vo.amount}</div>
-        </td>
-        <td class="thead_field">
-            <div>备货中/待发货</div>
-            <a href="javascript:void(0);" class="opea_btn deliver_goods">去发货</a>
-        </td>
-        <td class="thead_field">
-            <div class="stay_payment">待收货确认</div>
-        </td>
-        <td class="thead_field">
-            <div >已付款</div>
-        </td>
-        <td class="thead_field">
-            <a href="" class="opea_btn">订单详情</a>
-            <span>|</span>
-            <a href="" class="opea_btn">删除</a>
-        </td>
-    </tr>
-</volist>
+<table class="ant-table-content" border="0" cellpadding="0" cellspacing="0">
+    <volist name="orderList" id="vo">
+        <tr>
+            <td class="single_checkbox">
+                <input type="checkbox">
+            </td>
+            <td class="thead_order_num">
+                <div>{$vo.sn}</div>
+            </td>
+            <td class="thead_field">
+                <div>{$vo.create_time|date="Y-m-d H:i:s",###}2017-08-17 10:50</div>
+            </td>
+            <td class="thead_field">
+                <div>{$vo.name}</div>
+            </td>
+            <td class="thead_field">
+                <div>{$vo.amount}</div>
+            </td>
+            <td class="thead_field">
+                <div>备货中/待发货</div>
+                <a href="javascript:void(0);" class="opea_btn deliver_goods">去发货</a>
+            </td>
+            <td class="thead_field">
+                <div class="stay_payment">待收货确认</div>
+            </td>
+            <td class="thead_field">
+                <div >已付款</div>
+            </td>
+            <td class="thead_field">
+                <a href="" class="opea_btn">订单详情</a>
+                <span>|</span>
+                <a href="" class="opea_btn">删除</a>
+            </td>
+        </tr>
+    </volist>
+</table>
+<div class="pager" style="text-align: center;margin:30px 0 0 0">{$pageList}</div>

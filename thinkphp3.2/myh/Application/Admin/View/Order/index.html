@@ -1,4 +1,4 @@
-<extend name="Public:base" />
+<extend name="Public:base" xmlns="http://www.w3.org/1999/html"/>
 
 <block name="css-customize">
     <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/common/fenlei.css" />
@@ -6,73 +6,180 @@
 </block>
 
 <block name="content">
-    <div class="page">
-        <div class="fixed-bar">
-            <div class="item-title">
-                <ul class="tab-base">
-                     <li><a href="javascript:void(0);" class="current" ><span>商品公共图片编辑</span></a></li></li>
-                </ul>
-            </div>
-        </div>
-        <div style="margin-top:15px;">
+    <!--订单状态-->
+    <div class="order_content">
+        <div class="order_header">
             <form id="form1">
-                <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
-                    <tbody>
-
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>公共图片：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                             <script id="common_img" type="text/plain">
-                                {$commonImg|formatImg}
-                            </script>
-                    </tr>
-                    <tr>
-                        <td width="11%"></td>
-                        <td height=60 width="50%" align=center>
-                            <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
-                            &nbsp;&nbsp;
-                            <input class="button_save_black" name="add0" value="返回" type="button">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="table_cell_l">
+                <div class="table_cell">
+                    <select class="multiselect" name="logistics_status">
+                        <volist name="Think.config.ORDER_TYPE" id="vo">
+                            <option value="{$vo.value}">{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="table_cell table_cell_input">
+                    <input type="text" placeholder="请输入订单号/客户名称" class="input_field order_text" name="keyword">
+                    <input type="button" class="input_field order_search" value="搜索">
+                </div>
+                <a href="javascript:void(0);" class="table_cell senior_search">高级搜索</a>
+            </div>
             </form>
         </div>
+        <div >
+            <table class="ant-table-header" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="all_checkbox">
+                        <input type="checkbox">
+                    </th>
+                    <th class="thead_field thead_order_num">
+                        <label for="">订单号</label>
+                    </th>
+                    <th class="thead_field">
+                        <span >下单时间</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >客户名称</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >金额</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >出库发货</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >状态</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >付款状态</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >操作</span>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="content" id="order_list">
+        </div>
     </div>
+    <!-- 隐藏区 -->
+    <div class="deliverLayerForm" style="display: none">
+        <form>
+            <div class="deliver_goods_item">
+                <span class="d_g">发货时间</span>
+                <input id="start_time" name="start_time" class="i_p_t text w130 hasDatepicker Wdate" readonly="readonly" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+            </div>
+            <div class="deliver_goods_item">
+                <span class="d_g">快递</span>
+                <select name="" id="">
+                    <volist name="Think.config.UNDERTAKE_COMPANY" id="vo">
+                    <option value="{$key}">{$vo}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="deliver_goods_item">
+                <span class="d_g">快递单号</span>
+                <input class="i_p_t" type="text" placeholder="请输入快递单号">
+            </div>
+            <div class="deliver_goods_item">
+                <span class="d_g">订单备注</span>
+                <textarea rows="" cols=""></textarea>
+            </div>
+        </form>
+    </div>
+
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='PUBLIC_ADMIN_IMG/common/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+
 </block>
 
 
 <block name="script">
-    <!-- 配置文件 -->
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/Ueditor/ueditor.config.js"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/Ueditor/ueditor.all.js"></script>
-    <script type="text/javascript" charset="utf-8" src="PUBLIC_ADMIN_JS/common/Ueditor/lang/zh-cn/zh-cn.js"></script>
-    <script src="http://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
-    <!-- 实例化编辑器 -->
+
     <script type="text/javascript">
-        var ueIntro = UE.getEditor('common_img');
-    </script>
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/categoryLinkage.js"></script>
-    <script type="text/javascript">
+        //商品列表
+        function getPage(currentPage) {
+            $("#order_list").html($('#loading').html());
+            var url = CONTROLLER+'/orderList';
+            var postData = $('#form1').serializeObject();
+            postData.p = currentPage ? currentPage : 1;
+            postData.pageSize = 10;
+            $.get(url, postData , function(data){
+                $('#order_list').html(data);
+            });
+        }
+
         $(function(){
-    //确定
-            $('.button_save_black_4').on('click',function(){
-                var common_img = '';
-                $.each($('iframe').contents().find('.view img'),function () {
-                    common_img += $(this).attr('src') + ',';
-                });
-                $.post(ACTION,{common_img:common_img},function(msg){
-                    dialog.msg(msg,'',function () {
-                        location.href = CONTROLLER + '/goodsManage';
-                    });
-                },'JSON');
+            var deliverLayerForm=$('.deliverLayerForm').html();
+            $('body').on('click','.deliver_goods',function(){
+                layer.open({
+                    area: ['600px', '360px'],
+                    title:'订单信息',
+                    content:deliverLayerForm,
+                    btn:['确定','取消']
+
+                })
+            })
+
+
+            //加载第一页
+            getPage();
+
+            //选择订单类型
+            $('body').on('change','.multiselect',function () {
+                getPage();
             });
 
-            //返回
-            $('.button_save_black').click(function(){
-                location.href = CONTROLLER + '/goodsManage';
+            //翻页
+            $('body').on('click','.pager a',function(){
+                getPage($(this).data('page'));
             });
+
+            //搜索
+            $('.order_search').click(function(){
+                getPage();
+            });
+
+
+
+
+            //编辑
+            $('body').on('click','.editGoods',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  CONTROLLER + '/goodsBaseEdit/goodsBaseId/' + _thisTr.data('id');
+                location.href = url;
+            });
+
+            //删除
+            $('body').on('click','.delGoods',function(){
+                var _thisTr = $(this).parents('tr');
+                var postData = {};
+                postData.goodsBaseId = _thisTr.data('id');
+                var url =  CONTROLLER + '/goodsBaseDel';
+                $.post(url,postData,function(msg){
+                    dialog.msg(msg,'',function(){
+                        _thisTr.remove();
+                    });
+                });
+            });
+
+            //编辑
+            $('body').on('click','.setPurchaseType',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  CONTROLLER + '/setPurchaseType/goodsBaseId/' + _thisTr.data('id');
+                location.href = url;
+            });
+
+            //批量删除
+            $('body').on('click','.batchDel',function(){
+            });
+
         });
     </script>
 </block>

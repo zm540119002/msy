@@ -56,13 +56,10 @@ class GoodsController extends BaseController {
             ' left join goods_category gc2 on gc2.id = gb.category_id_2 ',
             ' left join goods_category gc3 on gc3.id = gb.category_id_3 ',
         );
-
-        $order = 'gb.sort';
+        $order = 'gb.sort, gb.id desc';
         $group = "";
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
-
         $goodsList = page_query($model,$where,$field,$order,$join,$group,$pageSize,$alias='gb');
-
         $this->goodsList = $goodsList['data'];
         $this->pageList = $goodsList['pageList'];
         $this->display();
@@ -71,8 +68,6 @@ class GoodsController extends BaseController {
 
     //设置
     public function setPurchaseType(){
-
-
         if(IS_POST){
             //增加
             if(isset($_POST['addData'])){

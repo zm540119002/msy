@@ -7,17 +7,11 @@ class OrderController extends BaseController {
     /**单位-管理
      */
     public function index(){
-        $modelOrder = D('Order');
-        if(IS_POST){
-            $this->OrderList = $modelOrder->selectOrder();
-            $this->display('OrderList');
-        }else{
-            $this->OrderList = $modelOrder->selectOrder();
-            $this->display();
-        }
+        $this->display();
+
     }
 
-    /**单位-编辑
+    /**订单-编辑
      */
     public function OrderEdit(){
         $modelOrder = D('Order');
@@ -41,39 +35,48 @@ class OrderController extends BaseController {
         }
     }
 
-    //单位列表
+    //订单列表
     public function OrderList(){
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-
         $modelOrder = D('Order');
         $where = array(
-            'ut.status' => 0,
+            'o.status' => 0,
         );
+        $logistics_status = $_GET['logistics_status'];
+//        $logistics_status = 3;
+        if($logistics_status){
+            $_where=array(
+                'o.logistics_status' => $logistics_status,
+            );
+        }
+        $where =  array_merge($_where,$where);
         $keyword = I('get.keyword','','string');
         if($keyword){
             $where['_complex'] = array(
-                'ut.value' => array('like', '%' . trim($keyword) . '%'),
+                'o.sn' => array('like', '%' . trim($keyword) . '%'),
             );
+//            $where['_complex'] = array(
+//                'm.name' => array('like', '%' . trim($keyword) . '%'),
+//            );
         }
         $field = array(
         );
         $join = array(
+            ' left join member m on o.user_id = m.user_id ',
         );
 
-        $order = 'ut.key,ut.id';
+        $order = 'o.id desc';
         $group = "";
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
-
-        $OrderList = page_query($modelOrder,$where,$field,$order,$join,$group,$pageSize,$alias='ut');
-
-        $this->OrderList = $OrderList['data'];
-        $this->pageList = $OrderList['pageList'];
+        $orderList = page_query($modelOrder,$where,$field,$order,$join,$group,$pageSize,$alias='o');
+        $this->orderList = $orderList['data'];
+        $this->pageList = $orderList['pageList'];
         $this->display();
     }
 
-    /**单位-删除
+    /**订单-删除
      */
     public function delOrder(){
         if(!IS_POST){
