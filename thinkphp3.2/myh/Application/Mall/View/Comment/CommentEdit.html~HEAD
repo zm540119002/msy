@@ -151,13 +151,17 @@
             //初始化
             getCommentList(config);
             if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-            }else{
-                window.onunload= () => window.scrollTo(0,0);
-            }
+    history.scrollRestoration = 'manual';
+}else{
+    window.onunload= () => window.scrollTo(0,0);
+}
             //上拉加载更多
             $(window).on('scroll',function(){
+                console.log($(document).scrollTop());
+                console.log($(window).height());
+                console.log($(document).height());
                 if($(document).scrollTop()+$(window).height()==$(document).height()){
+                    console.log(1);
                     getCommentList(config);
                 }
             });

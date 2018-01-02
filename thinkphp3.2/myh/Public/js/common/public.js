@@ -226,10 +226,16 @@ function swipe(elemObj){
     window.mySwipe = Swipe(elemObj, {
         auto: 2500,
         callback: function(index,element){
+            //回调函数
+            $(".position li").eq(index).addClass("on").siblings().removeClass("on");
         }
     });
+     $(".position li").click(
+        function () {
+            mySwipe.slide($(this).index());
+        }
+    );
 }
-
 //活动倒计时
 function countDown(time,id){
     var day_elem = id.find('.day');
