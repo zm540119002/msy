@@ -53,6 +53,7 @@
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
                 });
+                document.body.addEventListener('touchmove',fScrollFix,false);
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -105,7 +106,11 @@
                 });
             }
         });
-    }
+    };
+    function fScrollFix(e){
+　　e.preventDefault();
+　　e.stopPropagation();
+}
     $(function(){
         //注册
         $('body').on('click','.register_dialog',function(){

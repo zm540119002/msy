@@ -13,5 +13,6 @@ tr[data-level="3"] td:nth-child(3) .editable{
     padding:0 0 0 70px;
     background:url(../../admin-img/purchase/arrow.png) no-repeat 40px center;
 }
-
+.fl{float:left;}
+.fr{float:right;}
 
