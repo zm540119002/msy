@@ -21,7 +21,7 @@ class ReferrerController extends AuthUserController{
         $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
     }
 
-    //删除我带产品的推客二维码
+    //删除带产品我的推客二维码
     public function delMyQRCodesWithGoods(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
@@ -33,7 +33,31 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(successMsg('删除二维码图片成功！'));
         }
     }
-    
+
+    //我的平台推客二维码
+    public function myQRCodes(){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
+        $userId = $this->user['id'];
+        $where['user_id'] = $userId;
+        $mode = D('member');
+        $memberInfo = $mode->where($where)->find();
+        if($memberInfo['qr_code']){
+            $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
+        }
+        $avatarPath = $this->user['avatar'];
+        $url =  $this->host.'index.php/Mall/Index/index/userId/'.$userId;
+        $newRelativePath = C('USER_LOGO');
+        $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
+        $data['qr_code'] = $shareQRCodes;
+        $res = $mode -> where($where)->save($data);
+        if($res){
+            $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
+        }else{
+            $this->ajaxReturn(errorMsg('失败'));
+        }
+    }
     
     
 }

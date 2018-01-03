@@ -1,0 +1,185 @@
+<extend name="Public:base" xmlns="http://www.w3.org/1999/html"/>
+
+<block name="css-customize">
+    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/common/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/common/skin.css" />
+</block>
+
+<block name="content">
+    <!--订单状态-->
+    <div class="order_content">
+        <div class="order_header">
+            <form id="form1">
+            <div class="table_cell_l">
+                <div class="table_cell">
+                    <select class="multiselect" name="logistics_status">
+                        <volist name="Think.config.ORDER_TYPE" id="vo">
+                            <option value="{$vo.value}">{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="table_cell table_cell_input">
+                    <input type="text" placeholder="请输入订单号/客户名称" class="input_field order_text" name="keyword">
+                    <input type="button" class="input_field order_search" value="搜索">
+                </div>
+                <a href="javascript:void(0);" class="table_cell senior_search">高级搜索</a>
+            </div>
+            </form>
+        </div>
+        <div >
+            <table class="ant-table-header" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="all_checkbox">
+                        <input type="checkbox">
+                    </th>
+                    <th class="thead_field thead_order_num">
+                        <label for="">订单号</label>
+                    </th>
+                    <th class="thead_field">
+                        <span >下单时间</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >客户名称</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >金额</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >出库发货</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >状态</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >付款状态</span>
+                    </th>
+                    <th class="thead_field">
+                        <span >操作</span>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="content" id="order_list">
+        </div>
+    </div>
+    <!-- 隐藏区 -->
+    <div class="deliverLayerForm" style="display: none">
+        <form>
+            <div class="deliver_goods_item">
+                <span class="d_g">发货时间</span>
+                <input id="start_time" name="start_time" class="i_p_t text w130 hasDatepicker Wdate" readonly="readonly" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+            </div>
+            <div class="deliver_goods_item">
+                <span class="d_g">快递</span>
+                <select name="" id="">
+                    <volist name="Think.config.UNDERTAKE_COMPANY" id="vo">
+                    <option value="{$key}">{$vo}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="deliver_goods_item">
+                <span class="d_g">快递单号</span>
+                <input class="i_p_t" type="text" placeholder="请输入快递单号">
+            </div>
+            <div class="deliver_goods_item">
+                <span class="d_g">订单备注</span>
+                <textarea rows="" cols=""></textarea>
+            </div>
+        </form>
+    </div>
+
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='PUBLIC_ADMIN_IMG/common/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+
+</block>
+
+
+<block name="script">
+
+    <script type="text/javascript">
+        //商品列表
+        function getPage(currentPage) {
+            $("#order_list").html($('#loading').html());
+            var url = CONTROLLER+'/orderList';
+            var postData = $('#form1').serializeObject();
+            postData.p = currentPage ? currentPage : 1;
+            postData.pageSize = 10;
+            $.get(url, postData , function(data){
+                $('#order_list').html(data);
+            });
+        }
+
+        $(function(){
+            var deliverLayerForm=$('.deliverLayerForm').html();
+            $('body').on('click','.deliver_goods',function(){
+                layer.open({
+                    area: ['600px', '360px'],
+                    title:'订单信息',
+                    content:deliverLayerForm,
+                    btn:['确定','取消']
+
+                })
+            })
+
+
+            //加载第一页
+            getPage();
+
+            //选择订单类型
+            $('body').on('change','.multiselect',function () {
+                getPage();
+            });
+
+            //翻页
+            $('body').on('click','.pager a',function(){
+                getPage($(this).data('page'));
+            });
+
+            //搜索
+            $('.order_search').click(function(){
+                getPage();
+            });
+
+
+
+
+            //编辑
+            $('body').on('click','.editGoods',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  CONTROLLER + '/goodsBaseEdit/goodsBaseId/' + _thisTr.data('id');
+                location.href = url;
+            });
+
+            //删除
+            $('body').on('click','.delGoods',function(){
+                var _thisTr = $(this).parents('tr');
+                var postData = {};
+                postData.goodsBaseId = _thisTr.data('id');
+                var url =  CONTROLLER + '/goodsBaseDel';
+                $.post(url,postData,function(msg){
+                    dialog.msg(msg,'',function(){
+                        _thisTr.remove();
+                    });
+                });
+            });
+
+            //编辑
+            $('body').on('click','.setPurchaseType',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  CONTROLLER + '/setPurchaseType/goodsBaseId/' + _thisTr.data('id');
+                location.href = url;
+            });
+
+            //批量删除
+            $('body').on('click','.batchDel',function(){
+            });
+
+        });
+    </script>
+</block>

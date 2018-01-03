@@ -59,64 +59,43 @@ class InoutController extends Controller {
 //            array_splice($xlsData[$k]['tid']);
 //        }
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
-            
     }
-    /**
-     *
-     * 显示导入页面 ...
-     */
 
-    /**实现导入excel
-     **/
-    function impUser(){
-        if (!empty($_FILES)) {
-            $upload = new \Think\Upload();// 实例化上传类
-            $filepath='./Public/Excle/';
-            if(!is_dir($filepath)){
-                $this->ajaxReturn(errorMsg('目录：'.$filepath.'不存在！'));
-            }
-            $upload->exts = array('xlsx','xls');// 设置附件上传类型
-            $upload->rootPath  =  $filepath; // 设置附件上传根目录
-            $upload->saveName  =     'time';
-            $upload->autoSub   =     false;
-            if (!$info=$upload->upload()) {
-                $this->error($upload->getError());
-            }
-            foreach ($info as $key => $value) {
-                unset($info);
-                $info[0]=$value;
-                $info[0]['savepath']=$filepath;
-            }
-            vendor("PHPExcel.PHPExcel");
-            $file_name=$info[0]['savepath'].$info[0]['savename'];
-            $objReader = \PHPExcel_IOFactory::createReader('Excel5');
-            $objPHPExcel = $objReader->load($file_name,$encode='utf-8');
-            $sheet = $objPHPExcel->getSheet(0);
-            $highestRow = $sheet->getHighestRow(); // 取得总行数
-            $highestColumn = $sheet->getHighestColumn(); // 取得总列数
-            $j=0;
-            for($i=3;$i<=$highestRow;$i++)
-            {
-                $data['name']= $objPHPExcel->getActiveSheet()->getCell("B".$i)->getValue();
-                $tname= $objPHPExcel->getActiveSheet()->getCell("C".$i)->getValue();
-                $data['tid']=Gettid($tname);
-                $data['danwei']= $objPHPExcel->getActiveSheet()->getCell("D".$i)->getValue();
-                $data['phone']= $objPHPExcel->getActiveSheet()->getCell("E".$i)->getValue();
-                // if(M('Contacts')->where("name='".$data['name']."' and phone=$data['phone']")->find()){
-                if(M('Contacts')->where("phone='".$data['phone']."'")->find()){
-                    //如果存在相同联系人。判断条件：电话 两项一致，上面注释的代码是用姓名/电话判断
-                }else{
-                    M('Contacts')->add($data);
-                    $j++;
+    function excelToArray(){
+        vendor("PHPExcel.PHPExcel");
+
+        //加载excel文件
+        $filename = dirname(__FILE__).'/result.xlsx';
+        $objPHPExcelReader = PHPExcel_IOFactory::load($filename);
+
+        $reader = $objPHPExcelReader->getWorksheetIterator();
+        //循环读取sheet
+        foreach($reader as $sheet) {
+            //读取表内容
+            $content = $sheet->getRowIterator();
+            //逐行处理
+            $res_arr = array();
+            foreach($content as $key => $items) {
+
+                $rows = $items->getRowIndex();              //行
+                $columns = $items->getCellIterator();       //列
+                $row_arr = array();
+                //确定从哪一行开始读取
+                if($rows < 2){
+                    continue;
                 }
+                //逐列读取
+                foreach($columns as $head => $cell) {
+                    //获取cell中数据
+                    $data = $cell->getValue();
+                    $row_arr[] = $data;
+                }
+                $res_arr[] = $row_arr;
             }
-            unlink($file_name);
-            User_log('批量导入联系人，数量：'.$j);
-            $this->success('导入成功！本次导入联系人数量：'.$j);
-        }else
-        {
-            $this->error("请选择上传的文件");
+
         }
+
+        return $res_arr;
     }
 }
 
