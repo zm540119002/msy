@@ -1,6 +1,6 @@
 <table class="ant-table-content" border="0" cellpadding="0" cellspacing="0">
     <volist name="orderList" id="vo">
-        <tr>
+        <tr data-order_id="{$vo.id}">
             <td class="single_checkbox">
                 <input type="checkbox">
             </td>
@@ -17,8 +17,22 @@
                 <div>{$vo.amount}</div>
             </td>
             <td class="thead_field">
-                <div>备货中/待发货</div>
-                <a href="javascript:void(0);" class="opea_btn deliver_goods">去发货</a>
+                <if condition="$vo.logistics_status eq 2">
+                    <div>备货中/待发货</div>
+                    <a href="javascript:void(0);" class="opea_btn deliver_goods">去发货</a>
+                </if>
+                <if condition="$vo.logistics_status eq 3">
+                    <div>已发货</div>
+                    <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
+                </if>
+                <if condition="$vo.logistics_status eq 4">
+                    <div>已完成</div>
+                    <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
+                </if>
+                <if condition="$vo.logistics_status eq 5">
+                    <div>已取消</div>
+                    <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
+                </if>
             </td>
             <td class="thead_field">
                 <div class="stay_payment">待收货确认</div>
@@ -27,7 +41,7 @@
                 <div >已付款</div>
             </td>
             <td class="thead_field">
-                <a href="" class="opea_btn">订单详情</a>
+                <a href="{:U('Order/orderDetail',array('order_id'=>$vo['id']))}" class="opea_btn">订单详情</a>
                 <span>|</span>
                 <a href="" class="opea_btn">删除</a>
             </td>
