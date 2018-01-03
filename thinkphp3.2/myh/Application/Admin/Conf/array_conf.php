@@ -31,5 +31,5 @@ return array(
             'name'=>'代理商',
             'price_name'=>'代理商价'
         ),
-    )
+    ),
 );
