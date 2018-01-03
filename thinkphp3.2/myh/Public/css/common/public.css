@@ -229,6 +229,8 @@ i{
 .username {
     width: 100%;
     padding: 0 .3rem 0 .6rem;
+    height:.8rem;
+    background:none;
 }
 .forgetPasswd_item .input_txt3,.login_item .input_txt3{padding-left:1rem;}
 .mesg_code {
