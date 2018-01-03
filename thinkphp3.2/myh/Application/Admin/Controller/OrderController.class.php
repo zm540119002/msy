@@ -55,6 +55,10 @@ class OrderController extends BaseController {
         }
 
         $field = array(
+            'o.id','o.sn','o.pay_sn','o.logistics_status','o.payment_code','o.amount',
+            'o.coupons_pay','o.wallet_pay','o.user_id',  'o.actually_amount','o.remark','o.address_id',
+            'o.logistics_id','o.create_time','o.payment_time','o.finished_time', 'u.name',
+
         );
         $join = array(
             ' left join ucenter.user u on o.user_id = u.id ',
@@ -77,5 +81,21 @@ class OrderController extends BaseController {
         $modelOrder = D('Order');
         $res = $modelOrder->delOrder();
         $this->ajaxReturn($res);
+    }
+
+    public function orderDetail(){
+        if(!isset($_GET['orderId']) || !intval($_GET['orderId'])){
+            $this->error('缺少订单ID');
+        }
+        $model = D('OrderDetail');
+        $where['od.id'] = intval($_GET['orderId']);
+        $field=['od.order_sn','od.type','od.status','od.price','od.num','od.foreign_id','od.user_id',
+
+        ];
+        $join=[ ' left join order_detail od on o.sn = od.order_sn ',
+            'left join goods od on o.sn = od.order_sn'];
+        $orderDetail = $model->selectOrderDetail($where,$field,$join);
+        print_r($orderDetail);
+        $this->display();
     }
 }

@@ -54,6 +54,7 @@ $(function(){
     //去发货提交
     var deliverLayerForm=$('.deliverLayerForm').html();
     $('body').on('click','.deliver_goods',function(){
+        var _this = $(this);
         layer.open({
             skin: 'remarksLayer',
             area: ['600px', '360px'],
@@ -66,9 +67,13 @@ $(function(){
             yes:function (index) {
                 var url = MODULE+'/Logistics/LogisticsEdit'
                 var postData = $('.remarksLayer #undertake').serializeObject();
-                console.log(postData);
+                postData.orderId = _this.parents('tr').data('order_id');
                 $.post(url,postData,function(msg){
-
+                    if(msg.status == 1){
+                        dialog.success('增加物流成功！');
+                    }else{
+                        dialog.error(msg.info)
+                    }
                 });
                 layer.close(index);
             }

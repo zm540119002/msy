@@ -110,6 +110,7 @@ class OrderDetailModel extends Model {
             'od.id','od.order_sn','od.type','od.status','od.price','od.num','od.foreign_id','od.user_id',
         );
         $_join = array(
+            
         );
         $list = $this
             ->alias('od')
