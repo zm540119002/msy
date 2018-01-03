@@ -64,9 +64,10 @@
         <div class="content" id="order_list">
         </div>
     </div>
-    <!-- 隐藏区 -->
+    <!-- 隐藏区 添加物流信息 -->
     <div class="deliverLayerForm" style="display: none">
         <form id="undertake">
+            <input type="hidden" name="order_id" value="{}" />
             <div class="deliver_goods_item">
                 <span class="d_g">发货时间</span>
                 <input id="start_time" name="delivery_time" class="i_p_t text w130 hasDatepicker Wdate" readonly="readonly" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
@@ -82,6 +83,10 @@
             <div class="deliver_goods_item">
                 <span class="d_g">快递单号</span>
                 <input name="sn" class="i_p_t" type="text" placeholder="请输入快递单号">
+            </div>
+            <div class="deliver_goods_item">
+                <span class="d_g">费用</span>
+                <input name="fee" class="i_p_t" type="text" placeholder="请输物流费用">
             </div>
             <div class="deliver_goods_item">
                 <span class="d_g">订单备注</span>

@@ -19,8 +19,19 @@ class LogisticsController extends BaseController {
             if(isset($_POST['LogisticsId']) && intval($_POST['LogisticsId'])){
                 $res = $modelLogistics->saveLogistics();
             }else{
+                $modelLogistics->startTrans();
                 $_POST['delivery_time'] = strtotime($_POST['delivery_time']);
                 $res = $modelLogistics->addLogistics();
+                if(!$res['id']){
+                    $modelLogistics->rollback();
+                }
+                $_POST['logistics_id'] = $res['id'];
+                $_POST['logistics_status'] = 3;
+                $res = D('Order')->saveOrder();
+                if(!$res['id']){
+                    $modelLogistics->rollback();
+                }
+                $modelLogistics->commit();
             }
             $this->ajaxReturn($res);
         }else{
