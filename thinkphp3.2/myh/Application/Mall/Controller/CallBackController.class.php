@@ -70,7 +70,7 @@ class CallBackController extends Controller
                 $this->orderHandle($parameter);
             }
             if ($order_type == 'group_buy') {
-                $this->groupHandle($parameter);
+                $this->groupBuyHandle($parameter);
             }
         } else {
             //返回状态给微信服务器
@@ -132,9 +132,8 @@ class CallBackController extends Controller
         echo "success"; // 告诉支付宝处理成功
     }
 
-    /**
+    /**充值支付回调
      * @param $parameter
-     *充值支付后自己的业务逻辑处理
      */
     private function rechargeHandle($parameter)
     {
@@ -188,16 +187,16 @@ class CallBackController extends Controller
         }
     }
 
-    /**团购支付回调
+    /**团购订单支付回调
      * @param $parameter
      */
-    private function groupHandle($parameter){
-
+    private function groupBuyHandle($parameter){
+        $this->errorReturn($parameter['order_sn'], 'aa', 'aaa');
     }
 
     /**
      * @param $data
-     * 订单支付后自己的业务逻辑处理
+     * 普通订单支付回调
      */
     private function orderHandle($data)
     {
