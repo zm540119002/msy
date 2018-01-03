@@ -65,11 +65,11 @@
             //初始化
             getGoodsList(config);
             //上拉加载更多
-            // $(window).on('scroll',function(){
-            //     if($(document).scrollTop()+$(window).height()>=$(document).height()){
-            //         getGoodsList(config);
-            //     }
-            // });
+            document.addEventListener('scroll',function(){
+                if($(document).scrollTop()+$(window).height()>=$(document).height()){
+                    getGoodsList(config);
+                }
+            });
 
              //滑动轮播
             var elem = document.getElementById('slider');
