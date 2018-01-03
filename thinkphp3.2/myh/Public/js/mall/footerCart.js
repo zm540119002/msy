@@ -218,10 +218,31 @@ $(function () {
         $('.mcover').hide();
     });
 
-    //支付并发起微团购
+    //发起微团购并支付
     $('body').on('click','.initiate_group_buy',function(){
         var postData = assemblyData();
-        console.log(postData);
+        var url = MODULE + '/GroupBuy/send';
+        postData.returnUrl = url;
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend:function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }else{
+                    location.href = MODULE + '/Payment/orderPayment/orderId/' + data.orderId;
+                }
+            }
+        });
     });
 });
 //关闭二维码

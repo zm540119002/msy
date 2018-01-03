@@ -136,7 +136,7 @@ class OrderController extends AuthUserController {
     }
 
     //订单-生成
-    public function generate(){
+    public function generate($return=false,$data=array()){
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
@@ -165,6 +165,7 @@ class OrderController extends AuthUserController {
         //开启事务
         $modelOrder->startTrans();
         $_POST = [];
+        $_POST = array_merge($_POST,$data);
         $_POST['sn'] = $orderSN;
         $_POST['user_id'] = $this->user['id'];
         $_POST['amount'] = $amount;
@@ -214,6 +215,9 @@ class OrderController extends AuthUserController {
             }
         }
         $modelOrder->commit();
+        if($return){
+            return array('id'=>$orderId);
+        }
         $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
     }
 

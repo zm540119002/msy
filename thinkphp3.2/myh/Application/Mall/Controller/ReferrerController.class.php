@@ -43,7 +43,7 @@ class ReferrerController extends AuthUserController{
         $where['user_id'] = $userId;
         $mode = D('member');
         $memberInfo = $mode->where($where)->find();
-        if($memberInfo['qr_code']){
+        if(!empty($memberInfo) && $memberInfo['qr_code']){
             $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
         }
         $avatarPath = $this->user['avatar'];
@@ -51,7 +51,13 @@ class ReferrerController extends AuthUserController{
         $newRelativePath = C('USER_LOGO');
         $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
         $data['qr_code'] = $shareQRCodes;
-        $res = $mode -> where($where)->save($data);
+        $data['user_id'] = $this->user['id'];
+        if(empty($memberInfo)){
+            $res = $mode -> add($data);
+        }
+        if(!empty($memberInfo) && empty($memberInfo['qr_code'])){
+            $res = $mode -> where($where)->save($data);
+        }
         if($res){
             $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
         }else{

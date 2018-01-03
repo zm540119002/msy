@@ -13,6 +13,10 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 .f20{font-size:0.20rem;}
 .f24{font-size:0.24rem;}
 .f28{font-size:0.28rem;}
+body.modal-show {
+  position: fixed;
+  width: 100%;
+}
 /*头部样式*/
 .header{
     width: 100%;
@@ -229,6 +233,8 @@ i{
 .username {
     width: 100%;
     padding: 0 .3rem 0 .6rem;
+    height:.8rem;
+    background:#fff;
 }
 .forgetPasswd_item .input_txt3,.login_item .input_txt3{padding-left:1rem;}
 .mesg_code {
