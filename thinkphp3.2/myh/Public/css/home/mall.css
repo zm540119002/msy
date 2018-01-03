@@ -2113,8 +2113,9 @@ background-size:contain;
     position:relative;
 }
 .person_center_item span em{
+    width:0;
     position:absolute;
-    right:-8px;
+    right:0px;
     top:-8px;
     color:#ff1d25;
 }
