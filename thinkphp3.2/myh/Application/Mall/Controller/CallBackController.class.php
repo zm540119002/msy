@@ -18,6 +18,11 @@ class CallBackController extends Controller
             $data = xmlToArray($xml);
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'order');
         }
+        if (strpos($_SERVER['QUERY_STRING'], 'weixin.group_buy') == true) {
+            $xml = file_get_contents('php://input');
+            $data = xmlToArray($xml);
+            $this->callBack($data, $payment_type = 'weixin', $order_type = 'group_buy');
+        }
         if (strpos($_SERVER['QUERY_STRING'], 'alipayMobile.recharge') == true) {
             $data = $_POST;
             $this->callBack($data, $payment_type = 'alipayMobile', $order_type = 'recharge');
@@ -63,6 +68,9 @@ class CallBackController extends Controller
             }
             if ($order_type == 'order') {
                 $this->orderHandle($parameter);
+            }
+            if ($order_type == 'group_buy') {
+                $this->groupHandle($parameter);
             }
         } else {
             //返回状态给微信服务器
@@ -180,6 +188,13 @@ class CallBackController extends Controller
         }
     }
 
+    /**团购支付回调
+     * @param $parameter
+     */
+    private function groupHandle($parameter){
+
+    }
+
     /**
      * @param $data
      * 订单支付后自己的业务逻辑处理
@@ -190,7 +205,6 @@ class CallBackController extends Controller
         $totalFee = $data['total_fee'];
         $modelOrder = D('Order');
         $modelOrderDetail = D('OrderDetail');
-        $modelGoods = D('Goods');
         $modelCoupons = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
@@ -273,17 +287,6 @@ class CallBackController extends Controller
                         $this->errorReturn($dataOrderSn, $modelOrderDetail->getLastSql());
                     }
                 }
-                //减库存
-                $where = array(
-                    'order_sn' => $orderInfo['sn'],
-                );
-                $orderDetail = $modelOrderDetail->selectOrderDetail($where);
-                $res = $modelGoods->decGoodsNum($orderDetail);
-                if ($res['status'] == 0) {
-                    $modelWallet->rollback();
-                    //返回状态给微信服务器
-                    $this->errorReturn($dataOrderSn, $modelOrderDetail->getLastSql());
-                }
                 $modelOrder->commit();//提交事务
                 //返回状态给微信服务器
                 $this->successReturn($dataOrderSn);
@@ -292,15 +295,13 @@ class CallBackController extends Controller
     }
 
     //成功返回
-    private function successReturn()
-    {
+    private function successReturn(){
         echo '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
         return true;
     }
 
     //失败返回
-    private function errorReturn($dataSn = '', $error = '签名错误', $type = '订单')
-    {
+    private function errorReturn($dataSn = '', $error = '签名错误', $type = '订单'){
         \Think\Log::write($type . '支付失败：' . $dataSn . "\r\n失败原因：" . $error, 'NOTIC');
         echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
         return false;
