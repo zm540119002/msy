@@ -53,7 +53,7 @@
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
                 });
-                document.body.addEventListener('touchmove',fScrollFix,false);
+                disable_scroll();
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -107,10 +107,14 @@
             }
         });
     };
-    function fScrollFix(e){
-　　e.preventDefault();
-　　e.stopPropagation();
-}
+    function disable_scroll(){
+       wsctop=$(window).scrollTop();  //记住滚动条的位置
+       $("body").addClass("modal-show");
+    };
+    function enable_scroll(){
+        $("body").removeClass("modal-show");
+        $(window).scrollTop(wsctop);//弹框关闭时，启动滚动条，并滚动到原来的位置
+    }
     $(function(){
         //注册
         $('body').on('click','.register_dialog',function(){
