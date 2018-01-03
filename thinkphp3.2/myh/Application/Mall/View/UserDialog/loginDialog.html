@@ -53,9 +53,6 @@
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
                 });
-                $('.loginLayer').on('touchstart',function(){
-                    stopBodyScroll(true);
-                })
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -109,21 +106,6 @@
             }
         });
     };
-    var bodyEl = document.body;
-var top = 0;
-    function stopBodyScroll (isFixed) {
-  if (isFixed) {
-    top = window.scrollY
-
-    bodyEl.style.position = 'fixed'
-    bodyEl.style.top = -top + 'px'
-  } else {
-    bodyEl.style.position = ''
-    bodyEl.style.top = ''
-
-    window.scrollTo(0, top) // 回到原先的top
-  }
-};
     $(function(){
         //注册
         $('body').on('click','.register_dialog',function(){
