@@ -11,7 +11,7 @@ class BaseController extends CommonController{
         //登录验证后跳转回原验证发起页
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
-        session('returnUrl',I('get.returnUrl','','string'));
+        session('returnUrl',I('get.returnUrl','','string')?:I('post.returnUrl','','string'));
     }
 
     //返回图片临时相对路径

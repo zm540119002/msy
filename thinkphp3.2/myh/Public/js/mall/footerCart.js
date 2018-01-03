@@ -222,6 +222,7 @@ $(function () {
     $('body').on('click','.initiate_group_buy',function(){
         var postData = assemblyData();
         var url = MODULE + '/GroupBuy/send';
+        postData.returnUrl = url;
         $.ajax({
             url: url,
             data: postData,
