@@ -2111,10 +2111,13 @@ background-size:contain;
 }
 .person_center_item span{
     position:relative;
+    display: block;
 }
 .person_center_item span em{
+    width:100%;
+    text-align: left;
     position:absolute;
-    right:-8px;
+    right:-48px;
     top:-8px;
     color:#ff1d25;
 }
