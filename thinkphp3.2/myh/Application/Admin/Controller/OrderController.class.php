@@ -41,32 +41,24 @@ class OrderController extends BaseController {
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
         $modelOrder = D('Order');
-        $where = array(
-            'o.status' => 0,
-        );
+        $where['o.status'] = 0;
         $logistics_status = $_GET['logistics_status'];
-//        $logistics_status = 3;
         if($logistics_status){
-            $_where=array(
-                'o.logistics_status' => $logistics_status,
-            );
+            $where['o.logistics_status'] = $logistics_status;
         }
-        $where =  array_merge($_where,$where);
         $keyword = I('get.keyword','','string');
         if($keyword){
-            $where['_complex'] = array(
-                'o.sn' => array('like', '%' . trim($keyword) . '%'),
-            );
-//            $where['_complex'] = array(
-//                'm.name' => array('like', '%' . trim($keyword) . '%'),
-//            );
+            $_where['o.sn']  = array('like', '%' . trim($keyword) . '%');
+            $_where['u.name']  = array('like', '%' . trim($keyword) . '%');
+            $_where['_logic'] = 'or';
+            $where['_complex'] = $_where;
         }
+
         $field = array(
         );
         $join = array(
-            ' left join member m on o.user_id = m.user_id ',
+            ' left join ucenter.user u on o.user_id = u.id ',
         );
-
         $order = 'o.id desc';
         $group = "";
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
