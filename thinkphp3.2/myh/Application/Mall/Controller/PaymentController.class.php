@@ -25,7 +25,8 @@ class PaymentController extends AuthUserController {
                 $payInfo = array(
                     'sn'=>$orderInfo['sn'],
                     'actually_amount'=>$orderInfo['actually_amount'],
-                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_ORDER'].($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
+                        ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
                 Pay::wxPay($payInfo);
             }
@@ -49,7 +50,7 @@ class PaymentController extends AuthUserController {
                 $payInfo = array(
                     'sn'=>$walletDetailInfo['sn'],
                     'actually_amount'=>$this->amount,
-                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_RECHARGE'].'/weixin.recharge',
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'].'/weixin.recharge',
                 );
                 Pay::wxPay($payInfo);
             }

@@ -88,7 +88,7 @@ class OrderModel extends Model {
         $_field = array(
             'o.id','o.sn','o.status','o.logistics_status','o.after_sale_status','o.payment_code',
             'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
-            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time',
+            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time','o.type',
         );
         $_join = array(
         );
