@@ -207,7 +207,6 @@
     <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/uploadImgToTemp.js"></script>
     <script type="text/javascript">
         $(function(){
-
             //页面初始化
             var category_id_1 = '{$goodsBaseInfo.category_id_1}';
             if(category_id_1){
@@ -226,6 +225,10 @@
             var package_unit = '{$goodsBaseInfo.package_unit}';
             if(package_unit){
                 $('[name=package_unit]').val(package_unit);
+            }
+            var purchase_unit = '{$goodsBaseInfo.purchase_unit}';
+            if(package_unit){
+                $('[name=purchase_unit]').val(purchase_unit);
             }
 
             //确定
@@ -253,8 +256,6 @@
                     });
                 },'JSON');
             });
-
-
             //返回
             $('.button_save_black').click(function(){
                 location.href = CONTROLLER + '/goodsManage';
