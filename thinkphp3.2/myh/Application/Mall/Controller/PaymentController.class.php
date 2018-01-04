@@ -3,7 +3,7 @@ namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 use  web\all\Lib\Pay;
 class PaymentController extends AuthUserController {
-    //订单支付
+    //订单-支付
     public function orderPayment(){
         if(IS_POST){
         }else{
@@ -24,7 +24,7 @@ class PaymentController extends AuthUserController {
                 }
                 $payInfo = array(
                     'sn'=>$orderInfo['sn'],
-                    'actually_amount'=>$orderInfo['actually_amount'],
+                    'actually_amount'=>$orderInfo['amount'],
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
@@ -33,7 +33,7 @@ class PaymentController extends AuthUserController {
         }
     }
 
-    //充值支付
+    //充值-支付
     public function rechargePayment(){
         $modelWalletDetail = D('WalletDetail');
         if(IS_POST){
