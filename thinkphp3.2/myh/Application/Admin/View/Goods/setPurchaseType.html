@@ -42,8 +42,8 @@
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
                                             <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
                                         <if condition="$vo.buy_type eq 2">
-                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.group_name}：</span>
-                                            <input style="width: 200px; " class="inputboxadmin group_name" name="group_price" value="">
+                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.cash_back}：</span>
+                                            <input style="width: 200px; " class="inputboxadmin cash_back" name="cash_back" value="">
                                         </if>
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.commission}：</span>
                                             <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="">
@@ -67,8 +67,8 @@
                                                             <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
                                                             <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="{$vo.sale_price}">
                                                         <if condition="$vo.buy_type eq 2">
-                                                            <span class="opt_type"><font color="#FF0000">*</font>{$vv['group_name']}：</span>
-                                                            <input style="width: 200px; " class="inputboxadmin group_name" name="group_price" value="{$vo.group_price}">
+                                                            <span class="opt_type"><font color="#FF0000">*</font>{$vv['cash_back']}：</span>
+                                                            <input style="width: 200px; " class="inputboxadmin cash_back" name="cash_back" value="{$vo.cash_back}">
                                                         </if>
                                                             <span class="opt_type"><font color="#FF0000">*</font>{$vv['commission']}：</span>
                                                             <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="{$vo.commission}">
@@ -92,8 +92,8 @@
                                                         <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
                                                         <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
                                                     <if condition="$vo eq 2">
-                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['group_name']}：</span>
-                                                        <input style="width: 200px; " class="inputboxadmin group_name" name="group_price" value="">
+                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['cash_back']}：</span>
+                                                        <input style="width: 200px; " class="inputboxadmin cash_back" name="cash_back" value="">
                                                     </if>
                                                         <span class="opt_type"><font color="#FF0000">*</font>{$vv['commission']}：</span>
                                                         <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="{$vo.commission}">
@@ -174,7 +174,7 @@
                     var promotionPrice=_this.find('.discount_price').val();
                     var goods_Id=_this.find('input[name="goods_id"]').val();
                     var commissionPrice =_this.find('input[name="commission_price"]').val();
-                    var groupPrice =_this.find('input[name="group_price"]').val();
+                    var cashBack =_this.find('input[name="cash_back"]').val();
                     var big_order_price =_this.find('input[name="big_order_price"]').val();
                     var small_order_price =_this.find('input[name="small_order_price"]').val();
                     if(optionCheck.is(":checked")){
@@ -186,7 +186,7 @@
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
                                 commission:commissionPrice,
-                                group_price:groupPrice,
+                                cash_back:cashBack,
                                 big_order_price:big_order_price,
                                 small_order_price:small_order_price
                             };
@@ -198,7 +198,7 @@
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
                                 commission:commissionPrice,
-                                group_price:groupPrice,
+                                cash_back:cashBack,
                                 big_order_price:big_order_price,
                                 small_order_price:small_order_price
                             };
