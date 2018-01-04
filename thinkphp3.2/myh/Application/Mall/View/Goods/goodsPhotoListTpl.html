@@ -1,7 +1,7 @@
 <volist name="goodsList" id="vo">
     <li data-id="{$vo.id}">
         <a href="{:U('Goods/goodsDetail',array('goodsId'=>$vo['id']))}">
-            <empty name="vo.main_img">
+            <empty name="vo.thumb_img">
                 <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
                 <else/>
                 <img src="UPLOADS_IMG/{$vo.thumb_img}" alt="">
