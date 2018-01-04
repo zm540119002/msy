@@ -221,8 +221,11 @@ $(function () {
     //发起微团购并支付
     $('body').on('click','.initiate_group_buy',function(){
         var postData = assemblyData();
+        if(!postData){
+            return false;
+        }
         var url = MODULE + '/GroupBuy/send';
-        postData.returnUrl = url;
+        postData.returnUrl = location.href;
         $.ajax({
             url: url,
             data: postData,
