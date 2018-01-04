@@ -66,7 +66,7 @@ class GoodsController extends BaseController {
     }
 
 
-    //设置
+    //设置购买类型
     public function setPurchaseType(){
         if(IS_POST){
             //增加

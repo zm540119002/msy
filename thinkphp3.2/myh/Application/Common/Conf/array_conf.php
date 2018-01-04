@@ -43,7 +43,8 @@ return array(
         '2'=>array(
             'buy_type' =>'2',
             'name'=>'微团购',
-            'price_name'=>'微团价',
+            'price_name'=>'商品优惠价',
+            'group_name'=>'微团价',
             'commission'=>'提成',
         ),
         '3'=>array(
@@ -86,12 +87,7 @@ return array(
     ],
     //订单类型
     /**
-     * 全部订单</option>
-    <option value="" name="">待处理订单</option>
-    <option value="" name="">未完成订单</option>
-    <option value="" name="">已完成订单</option>
-    <option value="" name="">已作废订单</option>
-     *
+     * 订单类型
      * 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消',
      */
     'ORDER_TYPE' => [

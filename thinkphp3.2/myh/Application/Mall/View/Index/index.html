@@ -53,7 +53,6 @@
     <include file="Cart/footerCartSingle" />
 </block>
 <block name="script">
-    <script type="text/javascript" src="PUBLIC_JS/common/fastclick.js"></script>
     <script type="text/javascript" src="PUBLIC_JS/common/swipe.js"></script>
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
@@ -75,7 +74,7 @@
              //滑动轮播
             var elem = document.getElementById('slider');
                 swipe(elem);
-            FastClick.attach(document.body); 
+             smartScroll($('.loginLayer'), $('.loginTab'));
         });
     </script>
 </block>
