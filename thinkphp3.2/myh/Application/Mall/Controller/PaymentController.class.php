@@ -24,7 +24,7 @@ class PaymentController extends AuthUserController {
                 }
                 $payInfo = array(
                     'sn'=>$orderInfo['sn'],
-                    'actually_amount'=>$orderInfo['amount'],
+                    'actually_amount'=>$orderInfo['actually_amount'],
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );

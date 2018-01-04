@@ -108,7 +108,7 @@ class GoodsModel extends Model {
             'g.status' => 0,
         );
         $_field = array(
-            'g.id','g.goods_base_id','g.buy_type','g.sale_price','g.status',
+            'g.id','g.goods_base_id','g.buy_type','g.sale_price','g.status','g.group_price',
         );
         $_join = array(
         );
