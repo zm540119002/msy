@@ -41,6 +41,10 @@
                                             <input type="checkbox" name="discount"  class="radioItem" value="{$vo.name}" data-buy_type="{$vo.buy_type}" ><label for="">{$vo.name}</label>
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
                                             <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
+                                        <if condition="$vo.buy_type eq 2">
+                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.group_name}：</span>
+                                            <input style="width: 200px; " class="inputboxadmin group_name" name="group_price" value="">
+                                        </if>
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.commission}：</span>
                                             <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="">
                                         <if condition="$vo.buy_type eq 1">
@@ -48,7 +52,6 @@
                                             <input style="width: 200px; " class="inputboxadmin big_order_price" name="big_order_price" value="">
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.small_order_price}：</span>
                                             <input style="width: 200px; " class="inputboxadmin small_order_price" name="small_order_price" value="">
-
                                         </if>
                                     </div>
                                 </foreach>
@@ -57,11 +60,16 @@
                                     <foreach name="goodsInfo" item="vo">
                                          <div class="set_type_list">
                                             <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
-                                                    <if condition="$vo.buy_type eq ($vv['buy_type'])">                                                 
+
+                                                    <if condition="$vo.buy_type eq ($vv['buy_type'])">
+                                                        <input type="hidden" name="goods_id" value="{$vo.id}">
                                                             <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" checked=""><label for="">{$vv['name']}</label>
                                                             <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
-                                                            <input type="hidden" name="goods_id" value="{$vo.id}">
                                                             <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="{$vo.sale_price}">
+                                                        <if condition="$vo.buy_type eq 2">
+                                                            <span class="opt_type"><font color="#FF0000">*</font>{$vv['group_name']}：</span>
+                                                            <input style="width: 200px; " class="inputboxadmin group_name" name="group_price" value="{$vo.group_price}">
+                                                        </if>
                                                             <span class="opt_type"><font color="#FF0000">*</font>{$vv['commission']}：</span>
                                                             <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="{$vo.commission}">
                                                         <if condition="$vv['buy_type'] eq 1">
@@ -75,14 +83,18 @@
                                         </div>
                                     </foreach>
                                     <!--没有设置的类型-->
+                                <span class=""><font color="#FF0000">*</font>没有设置购买类型</span>
                                       <volist name="noBuyTypeArray" id="vo">
-                                          <span class=""><font color="#FF0000">*</font>没有设置购买类型</span>
                                           <div class="set_type_list">
                                           <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
                                                 <if condition="$vo eq ($vv['buy_type'])">
                                                         <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" ><label for="">{$vv['name']}</label>
                                                         <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
                                                         <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
+                                                    <if condition="$vo eq 2">
+                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['group_name']}：</span>
+                                                        <input style="width: 200px; " class="inputboxadmin group_name" name="group_price" value="">
+                                                    </if>
                                                         <span class="opt_type"><font color="#FF0000">*</font>{$vv['commission']}：</span>
                                                         <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="{$vo.commission}">
                                                     <if condition="$vo eq 1">
@@ -126,7 +138,6 @@
                 var _this=$(this);
                 var promotionPrice=parseFloat($(this).val());
                 var retailPrice=$('.retail_price').text();
-                // alert(typeof promotionPrice);
                 if(!isMoney(promotionPrice)){
                     if($('.error_tipc_txt').length>0){
                         return false;
@@ -138,7 +149,6 @@
                 }else {
                     $('.error_tipc_txt').remove();
                     if(promotionPrice>retailPrice){
-                        // alert(123);
                         _this.after('<span class="error_tipc_txt">输入的价格不能大于零售价</span>');
                         return false;
                     }else{
@@ -159,12 +169,12 @@
                 var delData=[];
                 var goodsBaseId=$('.goods_base_id').val();
                 $.each($('.set_type_list'),function(i,val){
-
                     var _this=$(this);
                     var optionCheck=_this.find('.radioItem');
                     var promotionPrice=_this.find('.discount_price').val();
                     var goods_Id=_this.find('input[name="goods_id"]').val();
                     var commissionPrice =_this.find('input[name="commission_price"]').val();
+                    var groupPrice =_this.find('input[name="group_price"]').val();
                     var big_order_price =_this.find('input[name="big_order_price"]').val();
                     var small_order_price =_this.find('input[name="small_order_price"]').val();
                     if(optionCheck.is(":checked")){
@@ -176,6 +186,7 @@
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
                                 commission:commissionPrice,
+                                group_price:groupPrice,
                                 big_order_price:big_order_price,
                                 small_order_price:small_order_price
                             };
@@ -187,13 +198,12 @@
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
                                 commission:commissionPrice,
+                                group_price:groupPrice,
                                 big_order_price:big_order_price,
                                 small_order_price:small_order_price
                             };
                             addData.push(addArr);
-                           
                         }
-
                     }else{
                         delData.push(goods_Id);
                     }
@@ -205,9 +215,6 @@
                         var url = CONTROLLER + '/goodsManage';
                         dialog.success('',url);
                     }
-
-
-
                 },'JSON');
             });
 

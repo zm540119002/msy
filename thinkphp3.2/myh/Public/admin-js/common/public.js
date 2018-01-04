@@ -224,3 +224,14 @@ $('body').on('click','.checkitem',function () {
     });
     $('.checkall').prop('checked',sign);
 });
+//设置省市区地址
+function getArea(province,city,area,object) {
+    //省市区初始化
+    var arr = [];
+    if( province && city && area){
+        arr.push(province);
+        arr.push(city);
+        arr.push(area);
+        $(object).setArea(arr);
+    }
+}
