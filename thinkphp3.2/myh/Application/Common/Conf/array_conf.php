@@ -44,7 +44,7 @@ return array(
             'buy_type' =>'2',
             'name'=>'微团购',
             'price_name'=>'商品优惠价',
-            'group_name'=>'微团价',
+            'cash_back'=>'团购返现',
             'commission'=>'提成',
         ),
         '3'=>array(
