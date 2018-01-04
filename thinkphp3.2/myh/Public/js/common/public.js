@@ -267,7 +267,7 @@ function errorTipc(info,time){
     $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
 }
 
-$.smartScroll = function(container, selectorScrollable) {
+function smartScroll(container, selectorScrollable) {
     // 如果没有滚动容器选择器，或者已经绑定了滚动时间，忽略
     if (!selectorScrollable || container.data('isBindScroll')) {
         return;
