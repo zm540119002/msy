@@ -166,31 +166,23 @@
             </div>
         </div>
     </div>
+    <a href="javascript:printDiv();" style="float:center" class="ncap-btn-big ncap-btn-green"><i class="fa fa-print"></i>打印订单</a>
 </block>
 
 <block name="script">
     <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/jquery.area.js" ></script>
     <script type="text/javascript">
+        function printDiv()
+        {
+            var oldStr = document.body.innerHTML;
+            $('.order_detail_nav').hide();
+            $('.ncap-btn-green').hide();
+            window.print();
+            document.body.innerHTML = oldStr;
+        }
+
+
         $(function(){
-            var remarksLayerForm=$('.remarksLayerForm').html();
-            $('body').on('click','.remarks',function(){
-                var _this=$(this);
-                layer.open({
-                    skin: 'remarksLayer',
-                    area: ['600px', '360px'],
-                    title:'备注信息',
-                    content:remarksLayerForm,
-                    btn:['确定','取消'],
-                    success:function(){
-                        //console.log(_this.parents('tr').data('id'));
-                    },
-                    yes:function(index){
-                        layer.close(index);
-                    }
-
-                })
-            });
-
             var totalPrice=0;
             $.each($('.ant-table-content tr'),function(i,val){
                 var _this=$(this);
@@ -202,19 +194,9 @@
                 _this.find('.total_price').text(totalPrice.toFixed(2));
             });
 
-            //省市区初始化
-            var arr = [];
-            var province = '{$orderDetail[0].province}';
-            var city = '{$orderDetail[0].city}';
-            var area = '{$orderDetail[0].area}';
-            if( province && city && area){
-                arr.push(province);
-                arr.push(city);
-                arr.push(area);
-                console.log(arr);
-                $('.detail_address').setArea(arr);
-            }
+            getArea('{$orderDetail[0].province}','{$orderDetail[0].city}','{$orderDetail[0].area}','.detail_address');
         })
+
 
     </script>
 </block>

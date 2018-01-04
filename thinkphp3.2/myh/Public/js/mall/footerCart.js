@@ -224,7 +224,7 @@ $(function () {
         if(!postData){
             return false;
         }
-        var url = MODULE + '/GroupBuy/send';
+        var url = MODULE + '/Order/generate';
         postData.returnUrl = location.href;
         $.ajax({
             url: url,
@@ -242,7 +242,7 @@ $(function () {
                 if(data.status==0){
                     dialog.error(data.info);
                 }else{
-                    location.href = MODULE + '/Payment/orderPayment/orderId/' + data.orderId;
+                    location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
                 }
             }
         });
