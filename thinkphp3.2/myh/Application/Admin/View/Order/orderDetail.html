@@ -69,130 +69,60 @@
         <div>
             <table class="ant-table-content" border="0" cellpadding="0" cellspacing="0">
                 <tbody>
-                <tr>
-                    <td class="thead_order_num order_d main_img">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>2</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>XXXXX</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>大</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="count">82</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="">瓶</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div >50</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="unit_price">100.00</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="amount">10000.00</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>
-                            <a href="javascript:void(0);" class="remarks">添加备注</a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="thead_order_num order_d main_img">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>3</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>XXXXX1111</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>小</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="count">5</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="">盒</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div >50</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="unit_price">100.00</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="amount">10000.00</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>
-                            <a href="javascript:void(0);" class="remarks">添加备注</a>
-                        </div>
-                    </td>
-                </tr>
-                <tr data-id="3">
-                    <td class="thead_order_num order_d main_img">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>3</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>XXXXX1111</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>小</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="count">13</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="">盒</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div >50</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="unit_price">100.00</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div class="amount">10000.00</div>
-                    </td>
-                    <td class="thead_field order_d">
-                        <div>
-                            <a href="javascript:void(0);" class="remarks">添加备注</a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="thead_order_num order_d main_img"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d"></td>
-                    <td class="thead_field order_d">
-                        <div class="total_price_box">
-                            商品总价:
-                            <price class="total_price">777</price>元
-                        </div>
-                    </td>
+                    <volist name="orderDetail" id="vo">
+                        <tr>
+                            <td class="thead_order_num order_d main_img">
+                                <div>
+                                    <img src="UPLOADS_IMG/{$vo.thumb_img}" alt="">
+                                </div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div>{$vo.goods_id}</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div>{$vo.goods_name}</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div>{$vo.single_specification}</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div class="count">{$vo.num}</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div class="">瓶</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div >50</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div class="unit_price">{$vo.price}</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div class="amount">0</div>
+                            </td>
+                            <td class="thead_field order_d">
+                                <div>
+                                    <a href="javascript:void(0);" class="remarks">添加备注</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                     <tr>
+                        <td class="thead_order_num order_d main_img"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d"></td>
+                        <td class="thead_field order_d">
+                            <div class="total_price_box">
+                                商品总价:
+                                <price class="total_price">0</price>元
+                            </div>
+                        </td>
                 </tr>
                 </tbody>
             </table>
@@ -201,40 +131,45 @@
             <div class="fl i_f">[支付信息]</div>
             <div class="fl info">
                 钱包:
-                <price>100.00</price>元
+                <price>{$orderDetail[0]['wallet_pay']}</price>元
             </div>
             <div class="fl info">
                 代金券:
-                <price>10.00</price>元
+                <price>{$orderDetail[0]['coupons_pay']}</price>元
             </div>
             <div class="fl info">
                 在线支付:
-                <price>1000.00</price>元
+                <price>{$orderDetail[0]['actually_amount']}</price>元
             </div>
             <div class="fl">
                 支付方式
-                <span>(微信)</span>
+                <if condition="$orderDetail[0]['payment_code'] eq 0">
+                    <span>(微信)</span>
+                </if>
+
             </div>
         </div>
         <div class="order_customer_info">
             <div class="fl i_f">[收货信息]</div>
             <div class="fl info">
                 收货人:
-                <span>张三</span>
+                <span>{$orderDetail[0]['consignee_name']}</span>
             </div>
             <div class="fl info">
                 联系方式:
-                <span>13430393576</span>
+                <span>{$orderDetail[0]['consignee_mobile']}</span>
             </div>
-            <div class="fl info">
+            <div class="fl info" >
                 收货地址:
-                <span>广州市天河区</span>
+                <span class="detail_address"></span>
+                <span class="">{$orderDetail[0]['detailed_address']}</span>
             </div>
         </div>
     </div>
 </block>
 
 <block name="script">
+    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/jquery.area.js" ></script>
     <script type="text/javascript">
         $(function(){
             var remarksLayerForm=$('.remarksLayerForm').html();
@@ -265,7 +200,20 @@
                 totalPrice=totalPrice+amount;
                 _this.find('.amount').text(amount);
                 _this.find('.total_price').text(totalPrice.toFixed(2));
-            })
+            });
+
+            //省市区初始化
+            var arr = [];
+            var province = '{$orderDetail[0].province}';
+            var city = '{$orderDetail[0].city}';
+            var area = '{$orderDetail[0].area}';
+            if( province && city && area){
+                arr.push(province);
+                arr.push(city);
+                arr.push(area);
+                console.log(arr);
+                $('.detail_address').setArea(arr);
+            }
         })
 
     </script>

@@ -88,14 +88,20 @@ class OrderController extends BaseController {
             $this->error('缺少订单ID');
         }
         $model = D('OrderDetail');
-        $where['od.id'] = intval($_GET['orderId']);
-        $field=['od.order_sn','od.type','od.status','od.price','od.num','od.foreign_id','od.user_id',
-
+        $where['od.order_id'] = intval($_GET['orderId']);
+        $field=[ 'o.id','o.sn','o.status as o_status','o.logistics_status','o.after_sale_status','o.payment_code',
+            'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
+            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time',
+            'g.id as goods_id','g.goods_base_id','g.buy_type','g.sale_price','g.status',
+            'gb.name as goods_name','gb.thumb_img', 'gb.main_img','gb.single_specification',
+            'ca.user_id','ca.province','ca.city','ca.area',
+            'ca.detailed_address','ca.consignee_name','ca.consignee_mobile',
         ];
-        $join=[ ' left join order_detail od on o.sn = od.order_sn ',
-            'left join goods od on o.sn = od.order_sn'];
-        $orderDetail = $model->selectOrderDetail($where,$field,$join);
-        print_r($orderDetail);
+        $join=[ ' left join orders o on od.order_id = o.id ',
+            ' left join goods g on od.foreign_id = g.id ',
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+            ' left join consignee_address ca on o.address_id = ca.id ',];
+        $this->orderDetail = $model->selectOrderDetail($where,$field,$join);
         $this->display();
     }
 }
