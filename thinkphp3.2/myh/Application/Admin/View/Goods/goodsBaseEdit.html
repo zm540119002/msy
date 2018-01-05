@@ -50,6 +50,12 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>产品列表标题：</td>
+                        <td class=dotted_bottom_gray width="100%" align=left>
+                            <textarea  class="textareaadmin textarea_text"  name="headlines">{$goodsBaseInfo.headlines}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>所属分类：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <include file="Public/categoryLinkage"/>
@@ -129,8 +135,13 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>产品分享简介：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <textarea  class="textareaadmin"  name="share_intro">{$goodsBaseInfo.share_intro}</textarea>
-
+                            <textarea  class="textareaadmin textarea_text"  name="share_intro">{$goodsBaseInfo.share_intro}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>产品团购分享简介：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <textarea  class="textareaadmin textarea_text"  name="group_share">{$goodsBaseInfo.group_share}</textarea>
                         </td>
                     </tr>
 

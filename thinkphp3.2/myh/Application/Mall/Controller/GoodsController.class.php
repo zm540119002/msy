@@ -20,7 +20,7 @@ class GoodsController extends BaseController {
             }
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price','g.commission',
+            'g.id','g.buy_type','g.sale_price','g.commission','g.cash_back',
             'gb.no','gb.name','gb.single_specification','gb.package_num','gb.package_unit','gb.purchase_unit','gb.price',
         );
         $join = array(
@@ -45,8 +45,8 @@ class GoodsController extends BaseController {
             $where['g.buy_type'] = I('get.buyType',0,'int');
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price','g.commission',
-            'gb.name','gb.price','gb.main_img','gb.thumb_img','gb.single_specification'
+            'g.id','g.buy_type','g.sale_price','g.commission','gb.name','gb.price','g.cash_back',
+            'gb.main_img','gb.thumb_img','gb.single_specification','gb.headlines',
         );
         $join = array(
             ' left join goods_base gb on g.goods_base_id = gb.id ',
@@ -81,9 +81,9 @@ class GoodsController extends BaseController {
                 $where['g.id'] = I('get.goodsId',0,'int');
             }
             $field = array(
-                'g.id','g.buy_type','g.sale_price','g.commission',
+                'g.id','g.buy_type','g.sale_price','g.commission','g.cash_back',
                 'gb.no','gb.name','gb.price','gb.main_img','gb.single_specification','gb.param','gb.intro',
-                'gb.usage','gb.notices','gb.detail_img','gb.share_intro','gb.package_unit',
+                'gb.usage','gb.notices','gb.detail_img','gb.share_intro','gb.package_unit','gb.headlines',
             );
             $join = array(
                 ' left join goods_base gb on g.goods_base_id = gb.id ',

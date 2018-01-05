@@ -2,7 +2,6 @@
 namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
-use  web\all\Lib\Pay;
 use  Mall\Controller\WxPayController;
 
 class IndexController extends BaseController{
@@ -13,6 +12,8 @@ class IndexController extends BaseController{
         $this->display();
     }
 
-
-   
+    //微团购-首页
+    public function groupBuyIndex(){
+        $this->display('GroupBuy/index');
+    }
 }

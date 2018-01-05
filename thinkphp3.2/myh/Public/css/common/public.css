@@ -10,6 +10,8 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 .fl{float:left;}
 .fr{float:right;}
 .f12{font-size:0.12rem;}
+.f14{font-size:0.14rem;}
+.f16{font-size:0.16rem;}
 .f20{font-size:0.20rem;}
 .f24{font-size:0.24rem;}
 .f28{font-size:0.28rem;}
@@ -340,4 +342,7 @@ i{
 }
 .scroll-x{
     overflow: hidden;
+}
+.headlines{
+    overflow:hidden;
 }

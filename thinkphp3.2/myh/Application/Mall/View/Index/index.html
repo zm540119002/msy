@@ -23,7 +23,7 @@
             <span class="mall_home"></span>
             商城首页
         </a>
-        <a href="{:U('GroupBuy/index')}">
+        <a href="{:U('groupBuyIndex')}">
             <span class="wt_purchase"></span>
             微团购
         </a>
@@ -56,21 +56,14 @@
     <script type="text/javascript" src="PUBLIC_JS/common/swipe.js"></script>
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
+        var config = {
+            pageSize:4,
+            buyType:1,
+            templateType:'photo'
+        };
         $(function(){
-            var config = {
-                pageSize:4,
-                buyType:1,
-                templateType:'photo'
-            };
             //初始化
             getGoodsList(config);
-            //上拉加载更多
-            $(window).on('scroll',function(){
-                if($(document).scrollTop()+$(window).height()>=$(document).height()){
-                    getGoodsList(config);
-                }
-            });
-
              //滑动轮播
             var elem = document.getElementById('slider');
                 swipe(elem);
