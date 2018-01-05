@@ -290,7 +290,6 @@ function calculateTotalPrice(){
     var _thisLis = $('ul.goods_list').find('li');
     var isInt = true;
     var amount = 0;
-    console.log(_thisLis);
     $.each(_thisLis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
@@ -298,12 +297,15 @@ function calculateTotalPrice(){
             isInt = false;
             return false;
         }
+        console.log(_this.find('price').text());
+        console.log(num);
         amount += _this.find('price').text() * num;
     });
     if(!isInt){
         dialog.error('购买数量为正整数');
         return false;
     }
+    console.log(amount);
     $('footer').find('price').html(amount.toFixed(2));
 }
 
