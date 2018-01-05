@@ -40,11 +40,6 @@ function getGoodsList(config) {
         }
     });
 }
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}else{
-    window.onunload= () => window.scrollTo(0,0);
-}
 var config = {
     pageSize:4,
     buyType:1,
