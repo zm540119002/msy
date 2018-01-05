@@ -45,6 +45,7 @@ $(window).on('scroll',function(){
     if($(document).scrollTop()+$(window).height()>=$(document).height()){
         isEnd = true;
         getGoodsList(config);
+        isEnd = false;
     }
 });
 
