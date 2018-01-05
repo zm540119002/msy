@@ -33,11 +33,18 @@ function getGoodsList(config) {
                 requestEnd = true;
             }
             currentPage ++;
+        },
+        complete:function(){
+            isEnd = false;
         }
     });
 }
 //上拉加载更多
+var isEnd = false;
 $(window).on('scroll',function(){
+    if(isEnd) {
+      return;
+    }
     if($(document).scrollTop()+$(window).height()>=$(document).height()){
         getGoodsList(config);
     }
