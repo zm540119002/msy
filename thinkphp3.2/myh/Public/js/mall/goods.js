@@ -35,7 +35,6 @@ function getGoodsList(config) {
             }
             if($(data).length<postData.pageSize){
                 requestEnd = true;
-                scrollEnd = true;
             }
             currentPage ++;
         }
