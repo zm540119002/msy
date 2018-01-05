@@ -54,7 +54,7 @@
                 <a href="javascript:void(0);" class="comment_num">145人评论</a>
             </div>
         </section>
-        <section class="bottomLine myh_detail_intro">
+        <section class="bottomLine myh_detail_intro scroll-x">
             <h2>商品参数</h2>
             <div>{$goodsInfo.param|htmlspecialchars_decode}</div>
         </section>
@@ -82,7 +82,7 @@
         <section class="myh_detail_intro detail_common_module">
             <h2>商品详情图</h2>
             <div class="detail_intro_common">
-                <p>{$goodsInfo.detail_img|formatImg}</p>
+                {$goodsInfo.detail_img|formatImg}
             </div>
             <div class="detail_intro_common">
                 <p>{$commonImg|formatImg}</p>

@@ -73,6 +73,11 @@
             };
             //初始化
             getGoodsList(config);
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }else{
+                window.onunload= () => window.scrollTo(0,0);
+            }
             //上拉加载更多
             $(window).on('scroll',function(){
                 if($(document).scrollTop()+$(window).height()>=$(document).height()){
