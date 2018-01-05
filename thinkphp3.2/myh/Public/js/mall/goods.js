@@ -40,11 +40,6 @@ function getGoodsList(config) {
         }
     });
 }
-var config = {
-    pageSize:4,
-    buyType:1,
-    templateType:'photo'
-};
 //上拉加载更多
 $(window).on('scroll',function(){
     if(scrollEnd && $(document).scrollTop()+$(window).height()>=$(document).height()){
