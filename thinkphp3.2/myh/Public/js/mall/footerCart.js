@@ -297,8 +297,8 @@ function calculateTotalPrice(){
             isInt = false;
             return false;
         }
-        // console.log(_thisLi.find('price').text());
-        console.log(num);
+        console.log(_thisLi.find('price').text());
+        // console.log(num);
         amount += _thisLi.find('price').text() * num;
     });
     if(!isInt){
