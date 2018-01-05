@@ -57,29 +57,11 @@
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
         $(function(){
-<<<<<<< HEAD
-            var config = {
-                pageSize:4,
-                buyType:1,
-                templateType:'photo',
-            };
-            //初始化
-            getGoodsList(config);
-            //上拉加载更多
-            $(window).on('scroll',function(){
-                if($(document).scrollTop()+$(window).height()>=$(document).height()){
-                    getGoodsList(config);
-                }
-            });
-
-=======
-            
             if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
             }else{
                 window.onunload= () => window.scrollTo(0,0);
             }
->>>>>>> f45a127d3951ba8f76db3c4e37563e85504b00a6
              //滑动轮播
             var elem = document.getElementById('slider');
                 swipe(elem);
