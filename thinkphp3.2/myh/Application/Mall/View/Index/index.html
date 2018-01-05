@@ -56,12 +56,12 @@
     <script type="text/javascript" src="PUBLIC_JS/common/swipe.js"></script>
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
+        var config = {
+            pageSize:4,
+            buyType:1,
+            templateType:'photo'
+        };
         $(function(){
-            var config = {
-                pageSize:4,
-                buyType:1,
-                templateType:'photo'
-            };
             //初始化
             getGoodsList(config);
              //滑动轮播
