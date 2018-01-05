@@ -51,9 +51,17 @@
                         <img src="PUBLIC_IMG/common/star.png">
                         <img src="PUBLIC_IMG/common/star.png">
                     </div>
-                    <span class="fraction" data-score="3.9">3.9分</span>
-                </div>
-                <a href="javascript:void(0);" class="comment_num">145人评论</a>
+                    <!--<notempty name="aveScore">-->
+                        <!--<else />-->
+                        <!--<span class="fraction" data-score="{$aveScore}">{$aveScore}分</span>-->
+                    <!--</notempty>-->
+                    <!--<span class="fraction" data-score="0">0分</span>-->
+                <!--</div>-->
+                <!--<notempty>-->
+                    <!--<else />-->
+                    <!--<a href="javascript:void(0);" class="comment_num">{$userCommentNum}人评论</a>-->
+                <!--</notempty>-->
+                <!--<a href="javascript:void(0);" class="comment_num">0人评论</a>-->
             </div>
         </section>
         <if condition="$goodsInfo.buy_type eq 2">
