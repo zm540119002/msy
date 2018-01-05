@@ -25,7 +25,7 @@ class CartController extends BaseController {
                     'g.id' => array('in',array_column($cart,'foreign_id')),
                 );
                 $field = array(
-                    'gb.name','gb.single_specification','gb.price','gb.package_unit',
+                    'gb.name','gb.single_specification','gb.price','gb.package_unit','gb.main_img',
                 );
                 $join = array(
                     'left join goods_base gb on gb.id = g.goods_base_id ',

@@ -13,7 +13,7 @@
         </section>
         <section class="bottomLine">
             <div class="myh_detail_item">
-                <p class="f24">{$goodsInfo.name}</p>
+                <p class="f24">{$goodsInfo.headlines}</p>
                 <p class="f14">{$goodsInfo.single_specification} / {$goodsInfo.package_unit|getUnitCN}</p>
             </div>
             <div class="myh_detail_item myh_product_intro">
@@ -28,7 +28,9 @@
                         <div>零售价:
                             <del>￥{$goodsInfo.price}</del>
                         </div>
-                        <div class="save_money">节省:￥{$goodsInfo['cash_back']}</div>
+                        <if condition="$goodsInfo.buy_type eq 2">
+                            <div class="save_money">返现:￥<price>{$goodsInfo.cash_back}</price></div>
+                        </if>
                     </div>
                     <div class="myh_detail_item options">
                         <span>购买数量：（{$goodsInfo.package_unit|getUnitCN}）</span>
