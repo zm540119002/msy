@@ -291,15 +291,15 @@ function calculateTotalPrice(){
     var isInt = true;
     var amount = 0;
     $.each(_thisLis,function(){
-        var _this = $(this);
-        var num = _this.find('.gshopping_count').val();
+        var _thisLi = $(this);
+        var num = _thisLi.find('.gshopping_count').val();
         if(!isPosIntNumberOrZero(num)){
             isInt = false;
             return false;
         }
-        console.log(_this.find('price').text());
+        console.log(_thisLi.find('price').text());
         console.log(num);
-        amount += _this.find('price').text() * num;
+        amount += _thisLi.find('price').text() * num;
     });
     if(!isInt){
         dialog.error('购买数量为正整数');
