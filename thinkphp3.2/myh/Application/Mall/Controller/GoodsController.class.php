@@ -20,7 +20,7 @@ class GoodsController extends BaseController {
             }
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price','g.commission','g.cash_back',
+            'g.id','g.buy_type','g.sale_price','g.commission',
             'gb.no','gb.name','gb.single_specification','gb.package_num','gb.package_unit',
             'gb.purchase_unit','gb.price','gb.main_img',
         );
