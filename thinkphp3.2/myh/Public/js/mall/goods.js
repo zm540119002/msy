@@ -23,8 +23,8 @@ function getGoodsList(config) {
             dialog.error('AJAX错误');
         },
         success: function(data){
-            finished=true;
-            console.log(finished);
+            //finished=true;
+            
             $('.loading').hide();
             if(currentPage == 1){
                 $('ul.goodsListContent').empty().append(data);
@@ -48,12 +48,13 @@ function getGoodsList(config) {
 //初始化
 getGoodsList(config);
 //上拉加载更多
-var finished=true;
+var finished=false;
 // function loadGoods(config){
 $(window).on('scroll',function(){
+    finished=true;
     if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
-        finished=false;
         getGoodsList(config);
+        finished=false;
         
     }
 });
