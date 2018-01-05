@@ -65,6 +65,19 @@
             var getFractionValue=3;
             $('.five_star').setStar(getFractionValue);
             countDown('2017/12/21 23:59:59',$(".count_down_box"));
+            var config = {
+                pageSize:4,
+                buyType:1,
+                templateType:'photo'
+            };
+            //初始化
+            getGoodsList(config);
+            //上拉加载更多
+            $(window).on('scroll',function(){
+                if($(document).scrollTop()+$(window).height()>=$(document).height()){
+                    getGoodsList(config);
+                }
+            });
         });
     </script>
 </block>
