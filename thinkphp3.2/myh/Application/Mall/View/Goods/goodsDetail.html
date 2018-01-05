@@ -66,10 +66,6 @@
 
             </div>
         </section>
-        <section class="bottomLine myh_detail_intro scroll-x">
-            <h2>商品参数</h2>
-            <div>{$goodsInfo.param|htmlspecialchars_decode}</div>
-        </section>
         <if condition="$goodsInfo.buy_type eq 2">
             <section class="bottomLine">
                 <div class="wt_banner">
@@ -91,6 +87,10 @@
                 </ul>
             </section>
         </if>
+        <section class="bottomLine myh_detail_intro scroll-x">
+            <h2>商品参数</h2>
+            <div>{$goodsInfo.param|htmlspecialchars_decode}</div>
+        </section>
         <section class="myh_detail_intro detail_common_module">
             <h2>商品详情图</h2>
             <div class="detail_intro_common">
