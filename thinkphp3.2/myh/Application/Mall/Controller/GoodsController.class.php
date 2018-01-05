@@ -1,7 +1,6 @@
 <?php
 namespace Mall\Controller;
 use  web\all\Controller\BaseController;
-use  web\all\Lib\AuthUser;
 class GoodsController extends BaseController {
     //商品信息
     public function goodsInfo(){

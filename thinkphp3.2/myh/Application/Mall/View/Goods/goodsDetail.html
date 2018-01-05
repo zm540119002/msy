@@ -28,13 +28,13 @@
                         <div>零售价:
                             <del>￥{$goodsInfo.price}</del>
                         </div>
-                        <div class="save_money">节省:￥{$goodsInfo['price']-$goodsInfo['sale_price']}</div>
+                        <div class="save_money">节省:￥{$goodsInfo['cash_back']}</div>
                     </div>
                     <div class="myh_detail_item options">
                         <span>购买数量：（{$goodsInfo.package_unit|getUnitCN}）</span>
                         <div class="quantity_wrapper business_count">
                             <a href="javascript:void(0);" class="greduce">-</a>
-                            <input type="text" value="0" class="f24 gshopping_count">
+                            <input type="text" value="1" class="f24 gshopping_count">
                             <a href="javascript:void(0);" class="gplus">+</a>
                         </div>
                     </div>
