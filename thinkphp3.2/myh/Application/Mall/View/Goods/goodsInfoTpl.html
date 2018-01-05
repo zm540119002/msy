@@ -1,10 +1,10 @@
 <notempty name="goodsInfo">
     <li data-id="{$goodsInfo.id}">
         <div class="purchase_goods_detail">
-            <empty name="vo.main_img">
+            <empty name="goodsInfo.main_img">
                 <img class="purchase_gs_img" src="PUBLIC_IMG/common/default/no_pic_40.jpg" alt="">
                 <else/>
-                <img src="UPLOAD_IMG/{$vo.main_img}" alt="">
+                <img src="UPLOAD_IMG/{$goodsInfo.main_img}" alt="">
             </empty>
             <div class="purchase_gs_r">
                 <p>{$goodsInfo.name}</p>
