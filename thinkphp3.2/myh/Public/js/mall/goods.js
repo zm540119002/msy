@@ -25,9 +25,9 @@ function getGoodsList(config) {
         success: function(data){
             $('.loading').hide();
             if(currentPage == 1){
-                $('ul.goodsListContent').empty().html(data);
+                $('ul.goodsListContent').empty().append(data);
             }else{
-                $('ul.goodsListContent').append(data);
+                $('ul.goodsListContent li:last').after(data);
             }
             if($(data).length<postData.pageSize){
                 requestEnd = true;
