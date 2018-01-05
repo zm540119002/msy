@@ -2020,6 +2020,9 @@ background-size:contain;
 .wt_ct:last-child{
     margin:20px 12px 0 0;
 }
+.wt_ct a{
+    color:#333;
+}
 .wt_detail_intro{
     color:#eb6100;
 }
