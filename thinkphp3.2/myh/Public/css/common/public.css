@@ -343,3 +343,6 @@ i{
 .scroll-x{
     overflow: hidden;
 }
+.headlines{
+    overflow:hidden;
+}
