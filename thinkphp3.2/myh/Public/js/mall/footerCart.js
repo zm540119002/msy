@@ -297,15 +297,12 @@ function calculateTotalPrice(){
             isInt = false;
             return false;
         }
-        console.log(_thisLi.find('price').text());
-        // console.log(num);
         amount += _thisLi.find('price').text() * num;
     });
     if(!isInt){
         dialog.error('购买数量为正整数');
         return false;
     }
-    console.log(amount);
     $('footer').find('price').html(amount.toFixed(2));
 }
 
