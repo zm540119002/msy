@@ -57,6 +57,7 @@ class GoodsController extends BaseController {
         $this->currentPage = (isset($_GET['p']) && intval($_GET['p'])) ? I('get.p',0,'int') : 1;
         $goodsList = page_query($modelGoods,$where,$field,$order,$join,$group,$pageSize,$alias='g');
         $this->goodsList = $goodsList['data'];
+        print_r($this->goodsList);exit;
         $templateType = I('get.templateType','','string');
         if($templateType=='photo'){
             $this ->display('goodsPhotoListTpl');
