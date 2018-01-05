@@ -58,6 +58,13 @@
     <include file="Cart/footerCartSingle" />
 </block>
 <block name="script">
+    <script type="text/javascript">
+        var config = {
+            pageSize:4,
+            buyType:2,
+            templateType:'photo'
+        };
+    </script>
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
         $(function(){
@@ -65,11 +72,6 @@
             var getFractionValue=3;
             $('.five_star').setStar(getFractionValue);
             countDown('2017/12/21 23:59:59',$(".count_down_box"));
-            var config = {
-                pageSize:4,
-                buyType:2,
-                templateType:'photo'
-            };
             //初始化
             getGoodsList(config);
         });
