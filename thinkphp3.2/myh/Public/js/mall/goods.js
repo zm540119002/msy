@@ -52,8 +52,8 @@ var config = {
 };
 //上拉加载更多
 $(window).on('scroll',function(){
-    if($(document).scrollTop()+$(window).height()>=$(document).height()){
+    if(scrollEnd && $(document).scrollTop()+$(window).height()>=$(document).height()){
         scrollEnd = false;
-        scrollEnd && getGoodsList(config);
+        getGoodsList(config);
     }
 });
