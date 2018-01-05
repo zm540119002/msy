@@ -23,16 +23,34 @@ function getGoodsList(config) {
             dialog.error('AJAX错误');
         },
         success: function(data){
+            finished=true;
+            console.log(finished);
             $('.loading').hide();
             if(currentPage == 1){
                 $('ul.goodsListContent').empty().append(data);
             }else{
                 $('ul.goodsListContent li:last').after(data);
+               
             }
             if($(data).length<postData.pageSize){
                 requestEnd = true;
             }
             currentPage ++;
+        }
+    });
+     
+}
+
+//上拉加载更多
+var finished=true;
+function loadGoods(config){
+   
+    $(window).on('scroll',function(){
+        
+        if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
+            finished=false;
+            getGoodsList(config);
+            
         }
     });
 }
