@@ -1,10 +1,8 @@
 <extend name="Public:base" />
-
 <block name="css-customize">
     <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/common/fenlei.css" />
     <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/common/skin.css" />
 </block>
-
 <block name="content">
     <div class="page">
         <div class="fixed-bar">
@@ -38,15 +36,15 @@
                             <empty name="goodsInfo">
                                 <foreach name="Think.config.BUY_TYPE" item="vo"  key="k">
                                     <div class="set_type_list">
-                                            <input type="checkbox" name="discount"  class="radioItem" value="{$vo.name}" data-buy_type="{$vo.buy_type}" ><label for="">{$vo.name}</label>
-                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
-                                            <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
+                                        <input type="checkbox" name="discount"  class="radioItem" value="{$vo.name}" data-buy_type="{$vo.buy_type}" ><label for="">{$vo.name}</label>
+                                        <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
+                                        <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
+                                        <span class="opt_type"><font color="#FF0000">*</font>{$vo.commission}：</span>
+                                        <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="">
                                         <if condition="$vo.buy_type eq 2">
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.cash_back}：</span>
                                             <input style="width: 200px; " class="inputboxadmin cash_back" name="cash_back" value="">
                                         </if>
-                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.commission}：</span>
-                                            <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="">
                                         <if condition="$vo.buy_type eq 1">
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.big_order_price}：</span>
                                             <input style="width: 200px; " class="inputboxadmin big_order_price" name="big_order_price" value="">
@@ -60,7 +58,6 @@
                                     <foreach name="goodsInfo" item="vo">
                                          <div class="set_type_list">
                                             <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
-
                                                     <if condition="$vo.buy_type eq ($vv['buy_type'])">
                                                         <input type="hidden" name="goods_id" value="{$vo.id}">
                                                             <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" checked=""><label for="">{$vv['name']}</label>
@@ -84,8 +81,8 @@
                                     </foreach>
                                     <!--没有设置的类型-->
                                 <span class=""><font color="#FF0000">*</font>没有设置购买类型</span>
-                                      <volist name="noBuyTypeArray" id="vo">
-                                          <div class="set_type_list">
+                                  <volist name="noBuyTypeArray" id="vo">
+                                      <div class="set_type_list">
                                           <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
                                                 <if condition="$vo eq ($vv['buy_type'])">
                                                         <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" ><label for="">{$vv['name']}</label>
@@ -105,15 +102,14 @@
                                                     </if>
                                                 </if>
                                           </foreach>
-                                          </div>
-                                      </volist>
+                                      </div>
+                                  </volist>
                             </empty>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </form>
-
             <tr>
                 <td width="11%"></td>
                 <td height=60 width="50%" align=center>
@@ -127,11 +123,7 @@
         </div>
     </div>
 </block>
-
-
-
 <block name="script">
-
     <script type="text/javascript">
         $(function(){
             $('.discount_price').on('keyup',function(){
@@ -158,10 +150,9 @@
             });
             $('.discount_price').on('blur',function(){
                 $('.error_tipc_txt').remove();
-            })
+            });
             //确定
             $('.button_save_black_4').on('click',function(){
-
                 var editData=[];
                 var editArr={};
                 var addData=[];
