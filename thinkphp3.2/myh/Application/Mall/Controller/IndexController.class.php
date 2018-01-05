@@ -14,6 +14,9 @@ class IndexController extends BaseController{
 
     //微团购-首页
     public function groupBuyIndex(){
+        $modelComment = D('Comment');
+        $this->aveScore = round($modelComment->avg('score'),1);//平均分数
+        $this->userCommentNum =$modelComment->count();//多少用户评价
         $this->display('GroupBuy/index');
     }
 }
