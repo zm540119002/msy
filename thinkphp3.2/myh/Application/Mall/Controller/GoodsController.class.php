@@ -45,8 +45,8 @@ class GoodsController extends BaseController {
             $where['g.buy_type'] = I('get.buyType',0,'int');
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price','g.commission',
-            'gb.name','gb.price','gb.main_img','gb.thumb_img','gb.single_specification'
+            'g.id','g.buy_type','g.sale_price','g.commission','gb.name','gb.price',
+            'gb.main_img','gb.thumb_img','gb.single_specification','gb.headlines',
         );
         $join = array(
             ' left join goods_base gb on g.goods_base_id = gb.id ',
