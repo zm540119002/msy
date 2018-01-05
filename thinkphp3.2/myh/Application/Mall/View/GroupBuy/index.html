@@ -79,8 +79,10 @@
                 window.onunload= () => window.scrollTo(0,0);
             }
             //上拉加载更多
+            var finished=true;
             $(window).on('scroll',function(){
-                if($(document).scrollTop()+$(window).height()>=$(document).height()){
+                if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
+                    finished=false;
                     getGoodsList(config);
                 }
             });
