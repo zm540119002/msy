@@ -50,7 +50,7 @@ document.addEventListener('scroll', function (e) {
     var scrollHeight = document.documentElement.scrollHeight;
     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 
-    if (lastTop < scrollTop && scrollTop > scrollHeight - clientHeight - 10
+    if (lastTop < scrollTop && scrollTop > scrollHeight - clientHeight - 5
         || scrollTop == scrollHeight - clientHeight
     ) {
         hasMore && getGoodsList(config);
