@@ -125,6 +125,9 @@ class GoodsController extends BaseController {
                 $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
+            $modelComment = D('Comment');
+            $this->aveScore = round($modelComment->avg('score'),1);//平均分数
+            $this->userCommentNum =$modelComment->count();//多少用户评价
             $this ->display();
         }
     }
