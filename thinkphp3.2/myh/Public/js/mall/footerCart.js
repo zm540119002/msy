@@ -157,7 +157,7 @@ $(function () {
 
 
     //关闭删除二维码
-    $("#areaMask,.closeBtn").click(function() {
+    $("#areaMask2,.closeBtn").click(function() {
         var imgUrl = $('.twitter_code_img img').attr('src');
         $.ajax({
             url: MODULE + '/Referrer/delMyQRCodesWithGoods',
