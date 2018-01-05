@@ -83,7 +83,7 @@
             $(window).on('scroll',function(){
                
                 if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
-                    //finished=false;
+                    finished=false;
                     getGoodsList(config);
                     
                 }
