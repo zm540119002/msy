@@ -82,8 +82,9 @@
             $(window).on('scroll',function(){
                 var finished=true;
                 if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
-                    finished=false;
+                    
                     getGoodsList(config);
+                    finished=false;
                 }
             });
         });
