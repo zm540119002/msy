@@ -15,9 +15,7 @@ class BaseAuthUserController extends BaseController{
             return $this->redirect('User/login');
         }
     }
-
-
-
+    
     /**
      * 判定是否登录
      * @return bool
