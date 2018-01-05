@@ -65,20 +65,6 @@
             var getFractionValue=3;
             $('.five_star').setStar(getFractionValue);
             countDown('2017/12/21 23:59:59',$(".count_down_box"));
-
-            // var config = {
-            //     pageSize:4,
-            //     buyType:2,
-            //     templateType:'photo'
-            // };
-            // //初始化
-            // getGoodsList(config);
-            if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-            }else{
-                window.onunload= () => window.scrollTo(0,0);
-            }
-            //loadGoods(config);
         });
     </script>
 </block>

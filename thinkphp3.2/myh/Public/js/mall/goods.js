@@ -26,7 +26,6 @@ function getGoodsList(config) {
         },
         success: function(data){
             finished=true;
-            
             $('.loading').hide();
             if(currentPage == 1){
                 $('ul.goodsListContent').empty().append(data);
@@ -52,13 +51,9 @@ function getGoodsList(config) {
 //初始化
 getGoodsList(config);
 //上拉加载更多
-
-// function loadGoods(config){
 $(window).on('scroll',function(){
-    console.log(finished);
     if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
         finished=false;
         getGoodsList(config); 
     }
 });
-// }
