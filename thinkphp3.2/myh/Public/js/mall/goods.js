@@ -28,7 +28,6 @@ function getGoodsList(config) {
                 $('ul.goodsListContent').empty().append(data);
             }else{
                 $('ul.goodsListContent li:last').after(data);
-               
             }
             if($(data).length<postData.pageSize){
                 requestEnd = true;
