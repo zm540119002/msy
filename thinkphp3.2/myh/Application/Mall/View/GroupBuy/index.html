@@ -23,9 +23,17 @@
                             <img src="PUBLIC_IMG/common/star.png" id="3">
                             <img src="PUBLIC_IMG/common/star.png" id="4">
                         </div>
-                        <span class="fraction" data-score="3">3分</span>
+                        <empty name="aveScore">
+                            <span class="fraction" data-score="0">0分</span>
+                            <else/>
+                            <span class="fraction" data-score=""></span>
+                        </empty>
                     </div>
-                    <a href="javascript:void(0);" class="comment_num">145人评论</a>
+                    <empty name="userCommentNum">
+                        <a href="javascript:void(0);" class="comment_num">0人评论</a>
+                        <else/>
+                        <a href="javascript:void(0);" class="comment_num">{$userCommentNum}人评论</a>
+                    </empty>
                 </div>
             </div>
             <div class="count_down_module">
@@ -66,7 +74,7 @@
         };
         $(function(){
             //星星评分等级
-            var getFractionValue=3;
+            var getFractionValue='{$aveScore}';
             $('.five_star').setStar(getFractionValue);
             countDown('2017/12/21 23:59:59',$(".count_down_box"));
             //初始化
