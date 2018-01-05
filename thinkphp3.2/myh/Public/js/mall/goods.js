@@ -37,26 +37,9 @@ function getGoodsList(config) {
     });
 }
 //上拉加载更多
-// $(window).on('scroll',function(){
-//     if($(document).scrollTop()+$(window).height()>=$(document).height()){
-//         getGoodsList(config);
-//     }
-// });
-var loadMoreWorking = false;
-var hasMore = true;
-var lastTop = 0;
-document.addEventListener('scroll', function (e) {
-    var clientHeight = document.documentElement.clientHeight;
-    var scrollHeight = document.documentElement.scrollHeight;
-    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    console.log(scrollTop);
-    console.log(scrollHeight);
-    console.log(clientHeight);
-    if (lastTop < scrollTop && scrollTop > scrollHeight - clientHeight - 5
-        || scrollTop == scrollHeight - clientHeight
-    ) {
-        hasMore && getGoodsList(config);
+$(window).on('scroll',function(){
+    if($(document).scrollTop()+$(window).height()>=$(document).height()){
+        getGoodsList(config);
     }
-
-    lastTop = scrollTop;
 });
+
