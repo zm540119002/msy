@@ -57,19 +57,19 @@
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
         $(function(){
-            var config = {
-                pageSize:4,
-                buyType:1,
-                templateType:'photo'
-            };
-            //初始化
-            getGoodsList(config);
-            //上拉加载更多
-            $(window).on('scroll',function(){
-                if($(document).scrollTop()+$(window).height()>=$(document).height()){
-                    getGoodsList(config);
-                }
-            });
+            // var config = {
+            //     pageSize:4,
+            //     buyType:1,
+            //     templateType:'photo'
+            // };
+            // //初始化
+            // getGoodsList(config);
+            // //上拉加载更多
+            // $(window).on('scroll',function(){
+            //     if($(document).scrollTop()+$(window).height()>=$(document).height()){
+            //         getGoodsList(config);
+            //     }
+            // });
 
              //滑动轮播
             var elem = document.getElementById('slider');
