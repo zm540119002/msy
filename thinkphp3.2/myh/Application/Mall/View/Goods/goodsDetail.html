@@ -54,7 +54,7 @@
                     <empty name="aveScore">
                         <span class="fraction" data-score="0">0分</span>
                         <else/>
-                        <span class="fraction" data-score="{$aveScore}">{$aveScore}分</span>
+                        <span class="fraction" data-score=""></span>
                     </empty>
                 </div>
                 <empty name="userCommentNum">
@@ -136,7 +136,7 @@
     <script type="text/javascript">
         $(function(){
             //星星评分等级
-            var getFractionValue=3;
+            var getFractionValue='{$aveScore}';
             $('.five_star').setStar(getFractionValue);
         });
     </script>
