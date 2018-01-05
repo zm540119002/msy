@@ -57,6 +57,7 @@
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
         $(function(){
+<<<<<<< HEAD
             var config = {
                 pageSize:4,
                 buyType:1,
@@ -70,6 +71,13 @@
                     getGoodsList(config);
                 }
             });
+=======
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }else{
+                window.onunload= () => window.scrollTo(0,0);
+            }
+>>>>>>> 4238d85f77c3198b6f60ca37784466d9d985839a
              //滑动轮播
             var elem = document.getElementById('slider');
                 swipe(elem);
