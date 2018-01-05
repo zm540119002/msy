@@ -2037,7 +2037,7 @@ background-size:contain;
 .collect:last-child{margin:0 0.20rem 0 0;}
 .weChat_av_r .person{color:#0062cc;font-size: 0.28rem;}
 .person_pending li{margin:0 0.28rem 0 0;flex:1;}
-.person_pending a{display: block;text-align: center;}
+.person_pending a{display: block;text-align: center;color:#333;}
 .person_pending i{
     width:0.5rem;
     height:0.5rem;
@@ -2143,6 +2143,7 @@ background-size:contain;
 .weChat_av_home a,.weChat_av_home span{
     text-align: center;
     display: block;
+    color:#333;
 }
 /*推客分享*/
 .header_Adverti{
@@ -2157,7 +2158,8 @@ background-size:contain;
 .Mall_person_center{
     width:100%;
 }
-.weChat_av_home i{
+.weChat_av_home i,
+.wt_ct:last-child i{
     background-image:url(../../img/common/home_ico.png);
     background-repeat: no-repeat;
     background-size:35px 27px;
