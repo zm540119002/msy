@@ -10,6 +10,7 @@ function getGoodsList(config) {
     //请求结束标志
     if(requestEnd){
         dialog.error('没有更多啦');
+        finished=true;
         return false;
     }
     $.ajax({
