@@ -10,7 +10,7 @@ function getGoodsList(config) {
     //请求结束标志
     if(requestEnd){
         dialog.error('没有更多啦');
-        //return false;
+        return false;
     }
     $.ajax({
         url: MODULE + '/Goods/goodsList',
@@ -33,8 +33,10 @@ function getGoodsList(config) {
                 $('ul.goodsListContent li:last').after(data);
                
             }
+            console.log($(data).length);
             if($(data).length<postData.pageSize){
                 requestEnd = true;
+                finished=true;
             }
             currentPage ++;
         }
@@ -55,9 +57,7 @@ $(window).on('scroll',function(){
     console.log(finished);
     if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
         finished=false;
-        getGoodsList(config);
-        
-        
+        getGoodsList(config); 
     }
 });
 // }
