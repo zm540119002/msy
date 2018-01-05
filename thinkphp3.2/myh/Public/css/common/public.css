@@ -338,3 +338,6 @@ i{
 .friend_tipc_text{
     margin:1.2rem 0 0 0.12rem;
 }
+.scroll-x{
+    overflow: hidden;
+}
