@@ -297,6 +297,8 @@ function calculateTotalPrice(){
             isInt = false;
             return false;
         }
+        console.log(_this.find('price').text());
+        console.log(num);
         amount += _this.find('price').text() * num;
     });
     if(!isInt){
