@@ -25,6 +25,7 @@ function getGoodsList(config) {
             dialog.error('AJAX错误');
         },
         success: function(data){
+            scrollEnd = true;
             $('.loading').hide();
             if(currentPage == 1){
                 $('ul.goodsListContent').empty().append(data);
