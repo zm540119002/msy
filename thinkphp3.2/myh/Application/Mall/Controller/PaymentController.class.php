@@ -44,7 +44,6 @@ class PaymentController extends AuthUserController {
             'cancel_back'=>'https://www.hao123.com/',
             'fail_back'=>'http://www.sina.com.cn/',
         ];
-        print_r($payInfo);exit;
         Pay::wxPay($payInfo,$backUrl);
     }
 
