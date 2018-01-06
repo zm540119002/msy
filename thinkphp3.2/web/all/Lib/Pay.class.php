@@ -68,7 +68,7 @@ class Pay
                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
                             dialog.success('取消支付！',"{$backUrl['cancel_back']}}");
                         }else{
-                           dialog.success('支付失败！',"{$backUrl['fail_back']}}");
+                           dialog.success('支付失败！',"Index/index");
                         }
 			}
 		);
