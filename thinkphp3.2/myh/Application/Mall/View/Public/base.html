@@ -14,7 +14,10 @@
 <body>
 <!-- 基础内容模块，子页面可覆盖 -->
 <block name="content"></block>
-
+<!-- 返回顶部-->
+<block name="backTop">
+	<a href="javascript:void(0);" class="f24 backTop">顶部</a>
+</block>
 <block name="UserDialog">
 	<include file="UserDialog/loginDialog" />
 	<include file="UserDialog/registerDialog" />
@@ -29,7 +32,7 @@
 	</footer>
 </block>
 
-<!------js基本插件-------->
+<!--js基本插件-->
 <script type="text/javascript" src="PUBLIC_JS/common/layer.mobile/layer.js"></script>
 <script type="text/javascript" src="PUBLIC_JS/common/public.js"></script>
 <script type="text/javascript" src="PUBLIC_JS/common/common.js"></script>

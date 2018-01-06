@@ -17,12 +17,20 @@
                 <div>{$vo.amount}</div>
             </td>
             <td class="thead_field">
+                <if condition="$vo.deliver_status eq 0 or $vo.deliver_status eq ''">
+                    <div class="stay_payment">备货中</div>
+                </if>
+            </td>
+            <td class="thead_field">
+                <if condition="$vo.logistics_status eq 1">
+                    <div>待付款</div>
+                </if>
                 <if condition="$vo.logistics_status eq 2">
-                    <div>备货中/待发货</div>
+                    <div>待收货</div>
                     <a href="javascript:void(0);" class="opea_btn deliver_goods">去发货</a>
                 </if>
                 <if condition="$vo.logistics_status eq 3">
-                    <div>已发货</div>
+                    <div>待评价</div>
                     <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
                 </if>
                 <if condition="$vo.logistics_status eq 4">
@@ -31,14 +39,15 @@
                 </if>
                 <if condition="$vo.logistics_status eq 5">
                     <div>已取消</div>
-                    <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
                 </if>
             </td>
             <td class="thead_field">
-                <div class="stay_payment">待收货确认</div>
-            </td>
-            <td class="thead_field">
-                <div >已付款</div>
+                <if condition="$vo.logistics_status eq 5 or $vo.logistics_status eq 1">
+                    <div>未付款</div>
+                    <else />
+                    <div >已付款</div>
+                </if>
+
             </td>
             <td class="thead_field">
                 <a href="{:U('Order/orderDetail',array('orderId'=>$vo['id']))}" class="opea_btn">订单详情</a>

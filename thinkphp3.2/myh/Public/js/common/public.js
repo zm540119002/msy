@@ -363,3 +363,16 @@ function smartScroll(container, selectorScrollable) {
     // 防止多次重复绑定
     container.data('isBindScroll', true);
 };
+
+//返回顶部
+$('body').on('click','.backTop',function(){
+    $('body,html').animate({scrollTop:0+'px'},500);
+});
+$(window).on('scroll',function(){
+    var scrolltop=$(document).scrollTop();
+    if(scrolltop>=200){
+        $('.backTop').show();
+    }else{
+        $('.backTop').hide();
+    }
+});

@@ -349,3 +349,18 @@ i{
     -webkit-line-clamp:2;
     overflow: hidden;
 }
+.backTop{
+    width:50px;
+    height:50px;
+    line-height:50px;
+    text-align: center;
+    position:fixed;
+    right:10px;
+    bottom:54px;
+    border:1px solid #d9d9d9;
+    color:#0066cc;
+    border-radius:100%;
+    z-index:18;
+    background:#fff;
+    display: none;
+}

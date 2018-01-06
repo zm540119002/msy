@@ -58,10 +58,11 @@ class OrderController extends BaseController {
             'o.id','o.sn','o.pay_sn','o.logistics_status','o.payment_code','o.amount',
             'o.coupons_pay','o.wallet_pay','o.user_id',  'o.actually_amount','o.remark','o.address_id',
             'o.logistics_id','o.create_time','o.payment_time','o.finished_time', 'u.name',
-
+            'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
         );
         $join = array(
             ' left join ucenter.user u on o.user_id = u.id ',
+            ' left join logistics l on o.logistics_id = l.id ',
         );
         $order = 'o.id desc';
         $group = "";

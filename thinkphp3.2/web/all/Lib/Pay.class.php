@@ -16,13 +16,13 @@ use Vendor\Qrcode\Qrcode;
 class Pay
 {
 
-    public static function wxPay($payInfo){
+    public static function wxPay($payInfo,$backUrl){
         if (!isPhoneSide()) {//pc端微信扫码支付
             Pay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             Pay::h5_pay($payInfo);
         }else{//微信浏览器
-            Pay::getJSAPI($payInfo);
+            Pay::getJSAPI($payInfo,$backUrl);
         }
     }
 
@@ -35,7 +35,7 @@ class Pay
      * @param  string   $total_fee  金额
      */
 
-    public static function getJSAPI($payInfo){
+    public static function getJSAPI($payInfo,$backUrl){
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
@@ -52,6 +52,9 @@ class Pay
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
+			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
+			<script type="text/javascript" src="/Public/js/common/layer.mobile/layer.js"></script>
+			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
 	<script type="text/javascript">
 	//调用微信JS api 支付
 	function jsApiCall()
@@ -59,13 +62,13 @@ class Pay
 		WeixinJSBridge.invoke(
 			'getBrandWCPayRequest',$jsApiParameters,
 			function(res){
-				//WeixinJSBridge.log(res.err_msg);
-				 if(res.err_msg == "get_brand_wcpay_request:ok") {
- 						location.href = '/index.php/Purchase/recharge/payComplete';
-				 }else{
-				 	alert(res.err_code+res.err_desc+res.err_msg);
-				   
-				 }
+				  if(res.err_msg == "get_brand_wcpay_request:ok"){
+				            dialog.success('支付成功！',"{$backUrl['success_back']}}");
+                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
+                            dialog.success('取消支付！',"{$backUrl['cancel_back']}}");
+                        }else{
+                           dialog.success('支付失败！',"{$backUrl['fail_back']}}");
+                        }
 			}
 		);
 	}
