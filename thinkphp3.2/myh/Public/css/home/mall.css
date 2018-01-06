@@ -2002,6 +2002,15 @@ background-size:contain;
     background-repeat: no-repeat;
     background-size:42px 131px;
 }
+.wt_tipc_item dt.person{
+    background-position:0 0;
+}
+.wt_tipc_item dt.time{
+    background-position:0 -45px;
+}
+.wt_tipc_item dt.money{
+    background-position:0 -89px;
+}
 .myh_detail_intro h2{
     font-weight:normal;
     color:#0066cc;
