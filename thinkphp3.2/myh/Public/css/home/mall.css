@@ -1967,8 +1967,23 @@ background-size:contain;
 .group_purchase{
     display: flex;
     display:-webkit-flex;
-    background: #e39433;
+    /*background: #e39433;*/
     padding:0.25rem 0 0.25rem 0.15rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.wt_banner,.wt_tipc_item{
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+}
+.wt_f_l{
+    background: #c6a952;
+    color:#fff;
+    width:50%;
+}
+.wt_f_l:last-child{
+    width:48%;
+    margin:0 0 0 2%;
 }
 .wt_banner img{
     vertical-align: middle;

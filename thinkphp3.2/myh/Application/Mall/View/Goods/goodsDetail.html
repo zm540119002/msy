@@ -42,6 +42,49 @@
                     </div>
                 </li>
             </ul>
+        </section>
+        <if condition="$goodsInfo.buy_type eq 2">
+            <section class="">
+                <div class="wt_banner">
+                    <div class="wt_f_l">
+                        <img src="" alt="">
+                        <div class="wt_tipc_item">
+                            <dl>
+                                <dt></dt>
+                                <dd>人数3+</dd>
+                            </dl>
+                            <dl>
+                                <dt></dt>
+                                <dd>限72小时</dd>
+                            </dl>
+                            <dl>
+                                <dt></dt>
+                                <dd>返现兑现</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="wt_f_l">
+                        <img src="" alt="">
+                        <span>长按二维码关注美悦会</span>
+                    </div>
+                </div>
+                <ul class="group_purchase">
+                    <li>
+                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <span>团长</span>
+                    </li>
+                    <li>
+                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <span>成员</span>
+                    </li>
+                    <li>
+                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <span>成员</span>
+                    </li>
+                </ul>
+            </section>
+        </if>
+        <section class="bottomLine">
             <div class="goods_star_score comment_star_module">
                 <div class="five_star">
                     <div class="star_img">
@@ -62,30 +105,8 @@
                     <else/>
                     <a href="javascript:void(0);" class="comment_num">{$userCommentNum}人评论</a>
                 </empty>
-
             </div>
         </section>
-        <if condition="$goodsInfo.buy_type eq 2">
-            <section class="bottomLine">
-                <div class="wt_banner">
-                    <img src="PUBLIC_IMG/common/wt_banner.jpg" alt="">
-                </div>
-                <ul class="group_purchase">
-                    <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                        <span>团长</span>
-                    </li>
-                    <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                        <span>成员</span>
-                    </li>
-                    <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                        <span>成员</span>
-                    </li>
-                </ul>
-            </section>
-        </if>
         <section class="bottomLine myh_detail_intro scroll-x">
             <h2>商品参数</h2>
             <div>{$goodsInfo.param|htmlspecialchars_decode}</div>
