@@ -29,15 +29,14 @@ class PaymentController extends AuthUserController {
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
                 $backUrl = array(
-                    'cancel_back' => 'payCancel',
-                    'fail_back' => 'payFail',
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
                 );
                 if($orderInfo['type']==0){
-                    $backUrl['success_back'] = 'payComplete';
+                    $backUrl['success_back'] = U('payComplete');
                 }elseif($orderInfo['type']==1){
                     $backUrl['success_back'] = session('returnUrl');
                 }
-
                 Pay::wxPay($payInfo,$backUrl);
             }
         }
