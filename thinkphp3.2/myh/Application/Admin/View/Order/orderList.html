@@ -67,12 +67,14 @@
             </td>
             <!--支付状态-->
             <td class="thead_field">
-                <if condition="$vo.logistics_status neq 5 and $vo.logistics_status neq 1">
+
+                <if condition="$vo.logistics_status neq 5 and $vo.logistics_status neq 1 ">
                     <div >已付款</div>
+                    <elseif condition="$vo.logistics_status eq 0"/>
+                    <div >无效订单</div>
                     <else />
                     <div >未付款</div>
                 </if>
-
             </td>
             <td class="thead_field">
                 <a href="{:U('Order/orderDetail',array('orderId'=>$vo['id']))}" class="opea_btn">订单详情</a>
