@@ -53,6 +53,7 @@ class Pay
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
 			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
+			<script type="text/javascript" src="/Public/js/common/layer.mobile/layer.js"></script>
 			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
 	<script type="text/javascript">
 	//调用微信JS api 支付
@@ -69,9 +70,8 @@ class Pay
                              window.location.href = "{$backUrl['cancel_back']}}";
                         }else{
                           alert('支付成功11！');
-                           dialog.error('支付失败！');
-                             alert('支付成功！');
-                             window.location.href = "{$backUrl['fail_back']}}";
+                           dialog.success('支付失败！',"{$backUrl['fail_back']}}");
+                         
                         }
 			}
 		);
