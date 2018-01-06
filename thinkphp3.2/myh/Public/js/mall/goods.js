@@ -82,7 +82,7 @@ function getScrollHeight() {
 
 $(window).on('scroll',function(){
     //监听事件内容
-    if(getDocumentTop() == getWindowHeight() + getScrollTop()){
+    if(getDocumentTop() == getWindowHeight() + getScrollHeight()){
         //当滚动条到底时,这里是触发内容
         //异步请求数据,局部刷新dom
         // ajax_function()
