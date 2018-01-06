@@ -35,7 +35,8 @@ class Pay
      * @param  string   $total_fee  金额
      */
 
-    public static function getJSAPI($payInfo,$backUrl){
+    public static function getJSAPI($payInfo,$backUrl=['success_back'=>'Index/index','cancel_back'=>'Index/index','fail_back'=>'Index/index']){
+
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
