@@ -348,6 +348,7 @@ i{
     -webkit-box-orient: vertical;
     -webkit-line-clamp:2;
     overflow: hidden;
+    font-size:0.20rem;
 }
 .backTop{
     width:50px;
