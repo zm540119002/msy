@@ -181,6 +181,7 @@ $(function () {
             return false;
         }
         postData.returnUrl = location.href;
+        postData.orderType = 1;
         generateOrder(postData,groupBuyCallBack);
     });
 });

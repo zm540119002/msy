@@ -128,6 +128,7 @@ class OrderController extends AuthUserController {
         if(!is_array($goodsList) || empty($goodsList)){
             $this->ajaxReturn(errorMsg('未提交数据'));
         }
+        $orderType = intval($_POST['orderType'])?:0;
         //查询商品信息
         $modelGoods = D('Goods');
         $amount = 0;
@@ -151,6 +152,7 @@ class OrderController extends AuthUserController {
         $_POST['sn'] = $orderSN;
         $_POST['user_id'] = $this->user['id'];
         $_POST['amount'] = $amount;
+        $_POST['type'] = $orderType;
         $_POST['create_time'] = time();
         $res = $modelOrder->addOrder();
         $orderId = $res['id'];
