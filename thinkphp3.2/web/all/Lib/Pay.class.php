@@ -36,9 +36,9 @@ class Pay
      */
 
     public static function getJSAPI($payInfo,$backUrl){
-        $backUrl['success_back'] = $backUrl['success_back']?:U('Index/index');
-        $backUrl['cancel_back'] = $backUrl['cancel_back']?:U('Index/index');
-        $backUrl['fail_back'] = $backUrl['fail_back']?:U('Index/index');
+        $backUrl['success_back'] = U($backUrl['success_back'])?:U('Index/index');
+        $backUrl['cancel_back'] = U($backUrl['cancel_back'])?:U('Index/index');
+        $backUrl['fail_back'] = U($backUrl['fail_back'])?:U('Index/index');
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();

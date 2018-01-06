@@ -28,7 +28,17 @@ class PaymentController extends AuthUserController {
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
-                Pay::wxPay($payInfo);
+                $backUrl = array(
+                    'cancel_back' => 'payCancel',
+                    'fail_back' => 'payFail',
+                );
+                if($orderInfo['type']==0){
+                    $backUrl['success_back'] = 'payComplete';
+                }elseif($orderInfo['type']==1){
+                    $backUrl['success_back'] = session('returnUrl');
+                }
+
+                Pay::wxPay($payInfo,$backUrl);
             }
         }
     }
