@@ -16,13 +16,13 @@ use Vendor\Qrcode\Qrcode;
 class Pay
 {
 
-    public static function wxPay($payInfo){
+    public static function wxPay($payInfo,$backUrl){
         if (!isPhoneSide()) {//pc端微信扫码支付
             Pay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             Pay::h5_pay($payInfo);
         }else{//微信浏览器
-            Pay::getJSAPI($payInfo);
+            Pay::getJSAPI($payInfo,$backUrl);
         }
     }
 
@@ -35,7 +35,7 @@ class Pay
      * @param  string   $total_fee  金额
      */
 
-    public static function getJSAPI($payInfo){
+    public static function getJSAPI($payInfo,$backUrl){
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
