@@ -42,7 +42,7 @@ class PaymentController extends AuthUserController {
             }
         }
     }
-    
+
     //充值-支付
     public function rechargePayment(){
         $modelWalletDetail = D('WalletDetail');
