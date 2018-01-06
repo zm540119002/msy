@@ -1979,7 +1979,12 @@ background-size:contain;
 .wt_f_l{
     background: #c6a952;
     color:#fff;
-    width:50%;
+    width:100%;
+    padding:20px;
+}
+.wt_f_l .txt{
+    display: block;
+    text-align: center;
 }
 .wt_f_l:last-child{
     width:48%;
@@ -1987,6 +1992,15 @@ background-size:contain;
 }
 .wt_banner img{
     vertical-align: middle;
+    width:100%;
+}
+.wt_tipc_item dl dt{
+    width:42px;
+    height:42px;
+    margin:0.35rem auto 0.08rem;
+    background-image:url(../../img/common/wt-icon.png);
+    background-repeat: no-repeat;
+    background-size:42px 131px;
 }
 .myh_detail_intro h2{
     font-weight:normal;
