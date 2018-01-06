@@ -369,8 +369,10 @@ $('body').on('click','.backTop',function(){
     $('body,html').animate({scrollTop:0+'px'},500);
 });
 $(window).on('scroll',function(){
-    if($(document).scrollTop()>200){
+    var scrolltop=$(document).scrollTop();
+    if(scrolltop>=200){
         $('.backTop').show();
+    }else{
+        $('.backTop').hide();
     }
-    $('.backTop').hide();
 });
