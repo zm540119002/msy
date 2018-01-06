@@ -49,8 +49,6 @@ $(function () {
                 $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
-                }else {
-                    dialog.success(data.info);
                 }
             }
         });
@@ -100,13 +98,8 @@ $(function () {
             url: MODULE + '/Referrer/myQRCodesWithGoods',
             data: {url:url},
             type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function (xhr) {
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
             success: function(data){
                 $('.loading').hide();
                 if(data.status == 0){
@@ -135,13 +128,8 @@ $(function () {
             url: MODULE + '/Referrer/delMyQRCodesWithGoods',
             data: {imgUrl:imgUrl},
             type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function (xhr) {
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
             success: function(data){
                 $('.loading').hide();
                 if(data.status == 1){
@@ -160,13 +148,8 @@ $(function () {
             url: MODULE + '/CommonAuthUser/checkLogin',
             data:{},
             type:'post',
-            beforeSend:function(xhr){
-                $('.loading').show();
-            },
-            error:function(xhr){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
             success:function(data){
                 $('.loading').hide();
                 if(data.status == 0){
@@ -228,7 +211,7 @@ function generateOrder(postData) {
                 if(data.info=='isAjax'){
                     loginDialog();
                 }else{
-                    location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
+                    location.href = MODULE + '/Order/orderDetail/orderId/' + data.orderId;
                 }
             }
         }

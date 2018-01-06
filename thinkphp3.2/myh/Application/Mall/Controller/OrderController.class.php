@@ -215,7 +215,7 @@ class OrderController extends AuthUserController {
         }
 
         $modelOrder->commit();
-        $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
+        $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
     }
 
     //订单-结算
