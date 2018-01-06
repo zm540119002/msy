@@ -67,8 +67,7 @@
             </td>
             <!--支付状态-->
             <td class="thead_field">
-
-                <if condition="$vo.logistics_status neq 5 and $vo.logistics_status neq 1 $vo.logistics_status neq 0">
+                <if condition="$vo.logistics_status neq 5 and $vo.logistics_status neq 1">
                     <div >已付款</div>
                     <else />
                     <div >未付款</div>
