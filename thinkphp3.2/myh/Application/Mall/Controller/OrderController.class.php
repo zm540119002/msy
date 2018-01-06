@@ -142,15 +142,29 @@ class OrderController extends AuthUserController {
                 $amount += number_format($goods['num'] * $goods['price'],2,'.','');
             }
         }
+        //物流编号
+        $logisticsSN = generateSN();
+        //生成订单
+        $modelLogistics = D('Logistics');
+        //开启事务
+        $modelLogistics->startTrans();
+        $_POST = [];
+        $_POST['sn'] = $logisticsSN;
+        $_POST['create_time'] = time();
+        $res = $modelLogistics->addLogistics();
+        $logisticsId = $res['id'];
+        if(!$logisticsId){
+            $modelLogistics->rollback();
+            $this->ajaxReturn(errorMsg($res));
+        }
         //订单编号
         $orderSN = generateSN();
         //生成订单
         $modelOrder = D('Order');
-        //开启事务
-        $modelOrder->startTrans();
         $_POST = [];
         $_POST['sn'] = $orderSN;
         $_POST['user_id'] = $this->user['id'];
+        $_POST['logistics_id'] = $logisticsId;
         $_POST['amount'] = $amount;
         $_POST['type'] = $orderType;
         $_POST['create_time'] = time();
@@ -172,7 +186,7 @@ class OrderController extends AuthUserController {
             $_POST['user_id'] = $this->user['id'];
             $res = $modelOrderDetail->addOrderDetail();
             if(!$res['id']){
-                $modelOrder->rollback();
+                $modelLogistics->rollback();
                 $this->ajaxReturn(errorMsg($res));
             }
         }
@@ -192,13 +206,13 @@ class OrderController extends AuthUserController {
                     );
                     $res = $modelCart->where($where)->setField('status',1);
                     if($res === false){
-                        $modelOrder->rollback();
+                        $modelLogistics->rollback();
                         $this->ajaxReturn(errorMsg($this->getError()));
                     }
                 }
             }
         }
-        $modelOrder->commit();
+        $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
     }
 
