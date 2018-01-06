@@ -394,7 +394,7 @@ font-size:0.20rem;
 .goods_star_score{display: flex;display: -webkit-flex;padding:0.15rem 0;justify-content:space-between;}
 .five_star img,.five_star1 img{width:18px;}
 .five_star .star_img,.star_img1{float:left;}
-.five_star .fraction{width:42px;display:inline-block;text-align:center;}
+.five_star .fraction{width:42px;display:inline-block;text-align:center;color:#f5911e;}
 .goods_star_score .comment_num{color:#f5911e;position:relative;margin-right:0.25rem;}
 .goods_star_score .comment_num::after{
     content:'';
@@ -404,13 +404,13 @@ font-size:0.20rem;
     right:-0.25rem;
     width:.5em;
     height:.5em;
-    border-bottom:.12em solid #009a3e;
-    border-left:.12em solid #009a3e;
+    border-bottom:.12em solid #f5911e;
+    border-left:.12em solid #f5911e;
     -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
     -ms-transform:translate(-70%) rotateZ(-45deg);
 }
 .comment_star_module .comment_num{
-    color:#009a3e;
+    /*color:#009a3e;*/
 }
 .ex_gratia_intro{padding:0.15rem 0 0.12rem 0.15rem;}
 .ex_gratia_intro dt{float:left;}
@@ -1990,6 +1990,10 @@ background-size:contain;
     width:48%;
     margin:0 0 0 2%;
 }
+.wt_banner .wt_home{
+    width:100%;
+    margin-left:0;
+}
 .wt_banner img{
     vertical-align: middle;
     width:100%;
@@ -2000,7 +2004,7 @@ background-size:contain;
     margin:0.35rem auto 0.08rem;
     background-image:url(../../img/common/wt-icon.png);
     background-repeat: no-repeat;
-    background-size:42px 131px;
+    background-size:42px 176px;
 }
 .wt_tipc_item dt.person{
     background-position:0 0;
@@ -2010,6 +2014,9 @@ background-size:contain;
 }
 .wt_tipc_item dt.money{
     background-position:0 -89px;
+}
+.wt_tipc_item dt.factory{
+    background-position:0 -134px;
 }
 .myh_detail_intro h2{
     font-weight:normal;
