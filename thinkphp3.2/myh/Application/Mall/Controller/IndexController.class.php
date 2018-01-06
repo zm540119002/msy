@@ -2,7 +2,7 @@
 namespace Mall\Controller;
 
 use  web\all\Controller\BaseController;
-use  Mall\Controller\WxPayController;
+use  web\all\Lib\Pay;
 
 class IndexController extends BaseController{
     //商城-首页
@@ -19,4 +19,6 @@ class IndexController extends BaseController{
         $this->userCommentNum =$modelComment->count();//多少用户评价
         $this->display('GroupBuy/index');
     }
+
+   
 }

@@ -83,21 +83,20 @@ class LogisticsModel extends Model {
     //查询
     public function selectLogistics($where=[],$field=[],$join=[]){
         $_where = array(
-            'o.status' => 0,
+            'l.status' => 0,
         );
         $_field = array(
-            'o.id','o.sn','o.status','o.logistics_status','o.after_sale_status','o.payment_code',
-            'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
-            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time',
+            'l.id','l.sn','l.status','l.undertake_company','l.delivery_time','l.fee',
+            'l.create_time','l.finished_time',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('o')
+            ->alias('l')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
-            ->Logistics('o.id desc')
+            ->Logistics('l.id desc')
             ->select();
         return $list?:[];
     }
@@ -126,17 +125,17 @@ class LogisticsModel extends Model {
     //按订单状态分组统计
     public function LogisticsStatusCount($where){
         $_where = array(
-            'o.status' => 0,
+            'l.status' => 0,
         );
         $_field = array(
-            'o.logistics_status','count(1) num',
+            'l.logistics_status','count(1) num',
         );
         $list = $this
             ->alias('o')
             ->where(array_merge($_where,$where))
             ->field($_field)
-            ->group('o.logistics_status')
-            ->Logistics('o.logistics_status asc')
+            ->group('l.logistics_status')
+            ->Logistics('l.logistics_status asc')
             ->select();
         $LogisticsStatusCount = array();
         foreach ($list as $value){

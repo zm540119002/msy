@@ -11,7 +11,6 @@ var dialog = {
 
     //成功弹出层
     success : function(message,url) {
-       
         layer.open({
             content : message?message:'成功',
             time : 1,

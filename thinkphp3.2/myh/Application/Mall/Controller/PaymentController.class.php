@@ -33,6 +33,20 @@ class PaymentController extends AuthUserController {
         }
     }
 
+    public function a(){
+        $payInfo = array(
+            'sn'=>1254845,
+            'actually_amount'=>0.01,
+            'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'],
+        );
+        $backUrl=[
+            'success_back'=>'https://www.baidu.com',
+            'cancel_back'=>'https://www.hao123.com/',
+            'fail_back'=>'http://www.sina.com.cn/',
+        ];
+        Pay::wxPay($payInfo,$backUrl);
+    }
+
     //充值-支付
     public function rechargePayment(){
         $modelWalletDetail = D('WalletDetail');

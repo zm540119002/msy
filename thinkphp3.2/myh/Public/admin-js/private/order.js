@@ -71,6 +71,7 @@ $(function(){
                 $.post(url,postData,function(msg){
                     if(msg.status == 1){
                         dialog.success('增加物流成功！');
+                        loginDialog(flushPage);
                     }else{
                         dialog.error(msg.info)
                     }
