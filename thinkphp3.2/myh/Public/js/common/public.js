@@ -366,5 +366,5 @@ function smartScroll(container, selectorScrollable) {
 
 //返回顶部
 $('body').on('click','.backTop',function(){
-    $('body').animate({scrollTop:0+'px'},500);
+    $('body,html').animate({scrollTop:0+'px'},500);
 })
