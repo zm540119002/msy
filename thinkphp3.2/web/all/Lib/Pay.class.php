@@ -35,7 +35,7 @@ class Pay
      * @param  string   $total_fee  金额
      */
 
-    public static function getJSAPI($payInfo,$backUrl=['success_back'=>'Index/index','cancel_back'=>'Index/index','fail_back'=>'Index/index']){
+    public static function getJSAPI($payInfo,$backUrl){
 
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
@@ -68,7 +68,7 @@ class Pay
                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
                             dialog.success('取消支付！',"{$backUrl['cancel_back']}}");
                         }else{
-                           dialog.success('支付失败！',U('Index/index'));
+                           dialog.success('支付失败！',"{$backUrl['fail_back']}}");
                         }
 			}
 		);
