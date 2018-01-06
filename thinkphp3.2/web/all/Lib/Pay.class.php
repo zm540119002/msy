@@ -16,13 +16,13 @@ use Vendor\Qrcode\Qrcode;
 class Pay
 {
 
-    public static function wxPay($payInfo,$backUrl=[]){
+    public static function wxPay($payInfo){
         if (!isPhoneSide()) {//pc端微信扫码支付
             Pay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             Pay::h5_pay($payInfo);
         }else{//微信浏览器
-            Pay::getJSAPI($payInfo.$backUrl);
+            Pay::getJSAPI($payInfo);
         }
     }
 
@@ -35,7 +35,7 @@ class Pay
      * @param  string   $total_fee  金额
      */
 
-    public static function getJSAPI($payInfo=[],$backUrl=[]){
+    public static function getJSAPI($payInfo){
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
@@ -52,7 +52,6 @@ class Pay
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
-//        <script type="text/javascript" src="/Public/js/common/dialog.js"></script>
 	<script type="text/javascript">
 	//调用微信JS api 支付
 	function jsApiCall()
@@ -61,14 +60,12 @@ class Pay
 			'getBrandWCPayRequest',$jsApiParameters,
 			function(res){
 				  if(res.err_msg == "get_brand_wcpay_request:ok"){
-				             location.href="{$backUrl['success_back']}";
-//                            dialog.success('支付成功!',"{$backUrl['success_back']}");                
+                            alert("支付成功!");
+                            window.location.href = url;
                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
-                        location.href="{$backUrl['cancel_back']}";
-//                            dialog.success('取消支付!',"{$backUrl['cancel_back']}");
+                            alert("用户取消支付!");
                         }else{
-                          location.href="{$backUrl['fail_back']}";
-//                            dialog.success('支付失败!',"{$backUrl['fail_back']}");
+                            alert("支付失败!");
                         }
 			}
 		);
@@ -91,6 +88,7 @@ class Pay
 	</script>
 EOF;
         echo  $html;
+        //return $jsApiParameters;
     }
 
 
