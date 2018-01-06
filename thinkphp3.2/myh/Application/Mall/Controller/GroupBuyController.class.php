@@ -7,6 +7,8 @@ class GroupBuyController extends AuthUserController{
     //发起微团购
     public function send(){
         if(IS_POST){
+            
+            exit;
             $goods = $_POST['goodsList'][0];
             $controllerOrder = A('Order');
             //订单类型为团购
