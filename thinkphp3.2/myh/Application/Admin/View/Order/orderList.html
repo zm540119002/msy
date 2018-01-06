@@ -42,11 +42,12 @@
                     <else />
                     <div >待确认</div>
                 </if>
-
-
             </td>
             <!--订单状态1:待付款 2:待收货 3:待评价 4:已完成 5:已取消',-->
             <td class="thead_field">
+                <if condition="$vo.logistics_status eq 0">
+                    <div>无效订单,去查原因</div>
+                </if>
                 <if condition="$vo.logistics_status eq 1">
                     <div>待付款</div>
                 </if>
