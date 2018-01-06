@@ -11,7 +11,7 @@ class LogisticsController extends BaseController {
 
     }
 
-    /**订单-编辑
+    /**促销-编辑
      */
     public function logisticsEdit(){
         $modelLogistics = D('Logistics');
@@ -21,10 +21,12 @@ class LogisticsController extends BaseController {
             }else{
                 $modelLogistics->startTrans();
                 $_POST['delivery_time'] = strtotime($_POST['delivery_time']);
+                $_POST['status'] = 1;
                 $res = $modelLogistics->addLogistics();
                 if(!$res['id']){
                     $modelLogistics->rollback();
                 }
+                unset( $_POST['status']);
                 $_POST['logistics_id'] = $res['id'];
                 $_POST['logistics_status'] = 3;
                 $res = D('Order')->saveOrder();

@@ -13,9 +13,11 @@ require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.NativePay.p
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/log.php');
 use Vendor\Qrcode\Qrcode;
 
-class Pay
-{
-
+class Pay{
+    /**支付端判断
+     * @param $payInfo
+     * @param $backUrl
+     */
     public static function wxPay($payInfo,$backUrl){
         if (!isPhoneSide()) {//pc端微信扫码支付
             Pay::pc_pay($payInfo);
@@ -26,15 +28,13 @@ class Pay
         }
     }
 
-    /**
-     * 微信公众号支付
+    /**微信公众号支付
      * @param  string   $openId 	openid
      * @param  string   $goods 		商品名称
      * @param  string   $attach 	附加参数,我们可以选择传递一个参数,比如订单ID
      * @param  string   $order_sn	订单号
      * @param  string   $total_fee  金额
      */
-
     public static function getJSAPI($payInfo,$backUrl){
         $backUrl['success_back'] = $backUrl['success_back']?:U('Index/index');
         $backUrl['cancel_back'] = $backUrl['cancel_back']?:U('Index/index');
@@ -58,48 +58,43 @@ class Pay
 			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
 			<script type="text/javascript" src="/Public/js/common/layer.mobile/layer.js"></script>
 			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
-	<script type="text/javascript">
-	//调用微信JS api 支付
-	function jsApiCall()
-	{
-		WeixinJSBridge.invoke(
-			'getBrandWCPayRequest',$jsApiParameters,
-			function(res){
-				  if(res.err_msg == "get_brand_wcpay_request:ok"){
-				            dialog.success('支付成功！',"{$backUrl['success_back']}");
-                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                            dialog.success('取消支付！',"{$backUrl['cancel_back']}");
-                        }else{
-                           dialog.success('支付失败！',"{$backUrl['fail_back']}");
+            <script type="text/javascript">
+                //调用微信JS api 支付
+                function jsApiCall()
+                {
+                    WeixinJSBridge.invoke(
+                        'getBrandWCPayRequest',$jsApiParameters,
+                        function(res){
+                            if(res.err_msg == "get_brand_wcpay_request:ok"){
+                                dialog.success('支付成功！',"{$backUrl['success_back']}");
+                            }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
+                                dialog.success('取消支付！',"{$backUrl['cancel_back']}");
+                            }else{
+                                dialog.success('支付失败！',"{$backUrl['fail_back']}");
+                            }
                         }
-			}
-		);
-	}
-
-	function callpay()
-	{
-		if (typeof WeixinJSBridge == "undefined"){
-		    if( document.addEventListener ){
-		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-		    }else if (document.attachEvent){
-		        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-		    }
-		}else{
-		    jsApiCall();
-		}
-	}
-	callpay();
-	</script>
+                    );
+                }
+                function callpay()
+                {
+                    if (typeof WeixinJSBridge == "undefined"){
+                        if( document.addEventListener ){
+                            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                        }else if (document.attachEvent){
+                            document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                        }
+                    }else{
+                        jsApiCall();
+                    }
+                }
+                callpay();
+            </script>
 EOF;
         echo  $html;
     }
 
-
-
-
-    /**
-     * 生成支付代码 扫码支付
+    /**生成支付代码 扫码支付
      * @param   array   $order      订单信息
      * @param   array   $config_value    支付方式信息
      */
@@ -155,29 +150,24 @@ EOF;
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
         $html = <<<EOF
-    <head>
-			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
-    </head>
-    <body>
-     <a class="weixin_pay_h5" href="javascript:void(0);"></a>
-     <input type="hidden" class="url" value="$url">
- 		<script type="text/javascript">
-        	$(function(){
-           var url =$('.url').val();
-               location.href=url;
-         })
-    </script>
-<body>
-
-
+            <head>
+                <script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>		
+            </head>
+            <body>
+                 <a class="weixin_pay_h5" href="javascript:void(0);"></a>
+                 <input type="hidden" class="url" value="$url">
+                    <script type="text/javascript">
+                        $(function(){
+                        var url =$('.url').val();
+                       location.href=url;
+                     });
+                </script>
+            <body>
 EOF;
         echo  $html;
     }
 
-
-
-    /**
-     * 微信退款
+    /**微信退款
      * @param  array   $refund 	订单ID
      * $refund 需传4个参数：
      * 'order_sn', 商家生成订单Sn
@@ -203,8 +193,4 @@ EOF;
         //file_put_contents(APP_ROOT.'/Api/wxpay/logs/log3.txt',arrayToXml($result),FILE_APPEND);
         return $result;
     }
-
-
-
-
 }

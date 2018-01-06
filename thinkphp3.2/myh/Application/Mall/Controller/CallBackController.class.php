@@ -3,8 +3,7 @@ namespace Mall\Controller;
 use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
-class CallBackController extends Controller
-{
+class CallBackController extends Controller{
     //支付回调
     public function notifyUrl()
     {
@@ -76,7 +75,6 @@ class CallBackController extends Controller
             //返回状态给微信服务器
             $this->errorReturn($data['out_trade_no']);
         }
-
     }
 
     //银联支付回调处理
@@ -85,7 +83,6 @@ class CallBackController extends Controller
         //计算得出通知验证结果
         $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($_POST);
-
         if ($verify_result) //验证成功
         {
             $order_sn = $out_trade_no = $data['orderId']; //商户订单号
@@ -95,7 +92,6 @@ class CallBackController extends Controller
             if ($data['respMsg'] == 'Success!') {
                 // 修改订单支付状态
                 if ($order_type == 'recharge') {
-
                     $this->rechargeHandle($data);
                 }
                 if ($order_type == 'order') {

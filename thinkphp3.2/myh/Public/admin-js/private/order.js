@@ -70,8 +70,7 @@ $(function(){
                 postData.orderId = _this.parents('tr').data('order_id');
                 $.post(url,postData,function(msg){
                     if(msg.status == 1){
-                        dialog.success('增加物流成功！');
-                        loginDialog(flushPage);
+                        location.reload();
                     }else{
                         dialog.error(msg.info)
                     }
