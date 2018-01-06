@@ -52,9 +52,9 @@ class Pay
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
-         <head>
+       
 			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
-    </head>
+    
 	<script type="text/javascript">
 	//调用微信JS api 支付
 	function jsApiCall()
