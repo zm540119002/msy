@@ -145,10 +145,10 @@ class OrderController extends AuthUserController {
                 $amount += number_format($goods['num'] * $goods['price'],2,'.','');
             }
         }
+        //生成物流
+        $modelLogistics = D('Logistics');
         //物流编号
         $logisticsSN = generateSN();
-        //生成订单
-        $modelLogistics = D('Logistics');
         //开启事务
         $modelLogistics->startTrans();
         $_POST = [];
