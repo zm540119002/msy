@@ -22,6 +22,7 @@
                 if($('.shoppingCart_form ul').height()>420){
                     $('.shoppingCart_form ul').css({"max-height":4.5+'rem'});
                 }
+                
             }else{
                 $('html,body').css({"overflow":"auto"});
                 $('.mask').hide();
@@ -30,8 +31,8 @@
                 $('.group_cart_toggle').hide();
             }
             //先清空
-            $('.gshopping_count').val(0);
-            $('.goods_total_price').find('price').text(0);
+            //$('.gshopping_count').val(0);
+            //$('.goods_total_price').find('price').text(0);
             var _li = $(this).parents('li');
             var url = MODULE + '/Goods/goodsInfo';
             var postData = {};
@@ -51,6 +52,7 @@
                     $('.loading').hide();
                     if(data){
                         $('ul.goods_list').html(data);
+                        calculateTotalPrice();
                     }
                 }
             });
