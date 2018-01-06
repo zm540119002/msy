@@ -193,7 +193,7 @@
                 _this.find('.amount').text(amount);
                 _this.find('.total_price').text(totalPrice.toFixed(2));
             });
-
+            //获得收货地址
             getArea('{$orderDetail[0].province}','{$orderDetail[0].city}','{$orderDetail[0].area}','.detail_address');
         })
 
