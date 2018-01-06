@@ -80,7 +80,7 @@ function getScrollHeight() {
     return scrollHeight;
 }
 
-window.onscroll = function () {
+$(window).on('scroll',function(){
     //监听事件内容
     if(getDocumentTop() == getWindowHeight() + getScrollTop()){
         //当滚动条到底时,这里是触发内容
@@ -88,4 +88,4 @@ window.onscroll = function () {
         // ajax_function()
         getGoodsList(config);
     }
-}
+})
