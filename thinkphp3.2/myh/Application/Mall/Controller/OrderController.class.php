@@ -21,9 +21,12 @@ class OrderController extends AuthUserController {
             $field = array(
                 'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
                 'ca.city','ca.area','ca.detailed_address',
+                'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
             );
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
+                ' left join logistics l on o.logistics_id = l.id ',
+
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
