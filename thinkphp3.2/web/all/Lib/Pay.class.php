@@ -22,7 +22,7 @@ class Pay
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             Pay::h5_pay($payInfo);
         }else{//微信浏览器
-            Pay::getJSAPI($payInfo.$backUrl=[]);
+            Pay::getJSAPI($payInfo.$backUrl);
         }
     }
 
