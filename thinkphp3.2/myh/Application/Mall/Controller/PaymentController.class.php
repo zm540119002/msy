@@ -32,17 +32,7 @@ class PaymentController extends AuthUserController {
             }
         }
     }
-
-    public function a(){
-        $payInfo = array(
-            'sn'=>generateSN(),
-            'actually_amount'=>0.01,
-            'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'],
-        );
-
-        Pay::wxPay($payInfo);
-    }
-
+    
     //充值-支付
     public function rechargePayment(){
         $modelWalletDetail = D('WalletDetail');
