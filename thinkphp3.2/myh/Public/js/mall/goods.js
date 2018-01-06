@@ -42,4 +42,3 @@ $(window).on('scroll',function(){
         getGoodsList(config);
     }
 });
-
