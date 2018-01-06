@@ -68,7 +68,9 @@ class Pay
                             alert('取消支付！');
                              window.location.href = "{$backUrl['cancel_back']}}";
                         }else{
+                          alert('支付成功11！');
                            dialog.error('支付失败！');
+                             alert('支付成功！');
                              window.location.href = "{$backUrl['fail_back']}}";
                         }
 			}
