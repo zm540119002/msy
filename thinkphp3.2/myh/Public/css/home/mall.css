@@ -2054,6 +2054,7 @@ background-size:contain;
 .count_down_module{
     display: flex;
     justify-content: space-between;
+    border-bottom:1px solid #d9d9d9;
 }
 .wt_ct:last-child{
     margin:20px 12px 0 0;
