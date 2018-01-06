@@ -93,7 +93,6 @@ class Pay
 	</script>
 EOF;
         echo  $html;
-        //return $jsApiParameters;
     }
 
 
