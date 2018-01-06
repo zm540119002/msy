@@ -16,38 +16,65 @@
             <td class="thead_field">
                 <div>{$vo.amount}</div>
             </td>
+            <!--发货状态 0：备货中 1：已发货 2：已送达 3:已签收 4：已取消',,-->
             <td class="thead_field">
-                <if condition="$vo.deliver_status eq 0 or $vo.deliver_status eq ''">
-                    <div class="stay_payment">备货中</div>
+                <if condition="$vo.logistics_status neq 5 and $vo.logistics_status neq 1 and $vo.logistics_status neq 0" >
+                    <if condition="$vo.deliver_status eq 0 or $vo.deliver_status eq ''">
+                        <div>备货中</div>
+                        <a href="javascript:void(0);" class="opea_btn deliver_goods">去发货</a>
+                    </if>
+                    <if condition="$vo.deliver_status eq 1">
+                        <div>已发货</div>
+                        <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
+                    </if>
+                    <if condition="$vo.deliver_status eq 2">
+                        <div>已送达</div>
+                        <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
+                    </if>
+                    <if condition="$vo.deliver_status eq 3">
+                        <div>已签收</div>
+                        <a href="javascript:void(0);" class="opea_btn deliver_goods">xxx</a>
+                    </if>
+                    <if condition="$vo.deliver_status eq 4">
+                        <div>已取消</div>
+                        <a href="javascript:void(0);" class="opea_btn deliver_goods">xx</a>
+                    </if>
+                    <else />
+                    <div >待确认</div>
                 </if>
             </td>
+            <!--订单状态1:待付款 2:待收货 3:待评价 4:已完成 5:已取消',-->
             <td class="thead_field">
+                <if condition="$vo.logistics_status eq 0">
+                    <div>无效订单,去查原因</div>
+                </if>
                 <if condition="$vo.logistics_status eq 1">
                     <div>待付款</div>
                 </if>
                 <if condition="$vo.logistics_status eq 2">
-                    <div>待收货</div>
-                    <a href="javascript:void(0);" class="opea_btn deliver_goods">去发货</a>
+                    <div>待发货</div>
                 </if>
                 <if condition="$vo.logistics_status eq 3">
-                    <div>待评价</div>
-                    <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
+                    <div>已发货</div>
                 </if>
                 <if condition="$vo.logistics_status eq 4">
                     <div>已完成</div>
-                    <a href="javascript:void(0);" class="opea_btn deliver_goods">查看物流信息</a>
                 </if>
                 <if condition="$vo.logistics_status eq 5">
                     <div>已取消</div>
                 </if>
-            </td>
-            <td class="thead_field">
-                <if condition="$vo.logistics_status eq 5 or $vo.logistics_status eq 1">
-                    <div>未付款</div>
-                    <else />
-                    <div >已付款</div>
-                </if>
 
+            </td>
+            <!--支付状态-->
+            <td class="thead_field">
+
+                <if condition="$vo.logistics_status neq 5 and $vo.logistics_status neq 1 ">
+                    <div >已付款</div>
+                    <elseif condition="$vo.logistics_status eq 0"/>
+                    <div >无效订单</div>
+                    <else />
+                    <div >未付款</div>
+                </if>
             </td>
             <td class="thead_field">
                 <a href="{:U('Order/orderDetail',array('orderId'=>$vo['id']))}" class="opea_btn">订单详情</a>
