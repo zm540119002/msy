@@ -1979,7 +1979,12 @@ background-size:contain;
 .wt_f_l{
     background: #c6a952;
     color:#fff;
-    width:50%;
+    width:100%;
+    padding:20px;
+}
+.wt_f_l .txt{
+    display: block;
+    text-align: center;
 }
 .wt_f_l:last-child{
     width:48%;
@@ -1987,6 +1992,24 @@ background-size:contain;
 }
 .wt_banner img{
     vertical-align: middle;
+    width:100%;
+}
+.wt_tipc_item dl dt{
+    width:42px;
+    height:42px;
+    margin:0.35rem auto 0.08rem;
+    background-image:url(../../img/common/wt-icon.png);
+    background-repeat: no-repeat;
+    background-size:42px 131px;
+}
+.wt_tipc_item dt.person{
+    background-position:0 0;
+}
+.wt_tipc_item dt.time{
+    background-position:0 -45px;
+}
+.wt_tipc_item dt.money{
+    background-position:0 -89px;
 }
 .myh_detail_intro h2{
     font-weight:normal;
@@ -2031,6 +2054,7 @@ background-size:contain;
 .count_down_module{
     display: flex;
     justify-content: space-between;
+    border-bottom:1px solid #d9d9d9;
 }
 .wt_ct:last-child{
     margin:20px 12px 0 0;
