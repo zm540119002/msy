@@ -35,7 +35,7 @@ class PaymentController extends AuthUserController {
                 if($orderInfo['type']==0){
                     $backUrl['success_back'] = U('payComplete');
                 }elseif($orderInfo['type']==1){
-                    $backUrl['success_back'] = session('returnUrl');
+                    $backUrl['success_back'] = session('returnUrl')?:U('payComplete');
                 }
                 Pay::wxPay($payInfo,$backUrl);
             }
