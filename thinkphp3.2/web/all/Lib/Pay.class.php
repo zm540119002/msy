@@ -52,6 +52,8 @@ class Pay
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
+			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
+			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
 	<script type="text/javascript">
 	//调用微信JS api 支付
 	function jsApiCall()
@@ -63,10 +65,10 @@ class Pay
 				            alert('支付成功！');
                             window.location.href = "{$backUrl['success_back']}}";
                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                 alert('取消支付！');
+                            alert('取消支付！');
                              window.location.href = "{$backUrl['cancel_back']}}";
                         }else{
-                           alert('支付失败！');
+                           dialog.error('支付失败！');
                              window.location.href = "{$backUrl['fail_back']}}";
                         }
 			}
