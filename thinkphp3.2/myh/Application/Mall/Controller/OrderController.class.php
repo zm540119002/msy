@@ -4,23 +4,6 @@ namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 
 class OrderController extends AuthUserController {
-    //确定订单
-    public function confirmOrder(){
-        if(!IS_POST){
-            $this->ajaxReturn(errorMsg(C('NOT_POST')));
-        }
-        $modelOrder = D('Order');
-        $where = array(
-            'user_id' => $this->user['id'],
-        );
-        $_POST['logistics_status'] = 1;
-        $res = $modelOrder->saveOrder($where);
-        if(!$res['id']){
-            $this->ajaxReturn(errorMsg('失败'));
-        }
-        $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
-    }
-
     //我的订单
     public function orderManage(){
         $modelOrder = D('Order');
@@ -216,6 +199,23 @@ class OrderController extends AuthUserController {
 
         $modelOrder->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
+    }
+
+    //确定订单
+    public function confirmOrder(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $modelOrder = D('Order');
+        $where = array(
+            'user_id' => $this->user['id'],
+        );
+        $_POST['logistics_status'] = 1;
+        $res = $modelOrder->saveOrder($where);
+        if(!$res['id']){
+            $this->ajaxReturn(errorMsg('失败'));
+        }
+        $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
     }
 
     //订单-结算

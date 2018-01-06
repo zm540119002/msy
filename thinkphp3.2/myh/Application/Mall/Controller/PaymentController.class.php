@@ -28,23 +28,19 @@ class PaymentController extends AuthUserController {
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
-                Pay::wxPay($payInfo);
+                $backUrl = array(
+                    'cancel_back' => 'payCancel',
+                    'fail_back' => 'payFail',
+                );
+                if($orderInfo['type']==0){
+                    $backUrl['success_back'] = 'payComplete';
+                }elseif($orderInfo['type']==1){
+                    $backUrl['success_back'] = session('returnUrl');
+                }
+
+                Pay::wxPay($payInfo,$backUrl);
             }
         }
-    }
-
-    public function a(){
-        $payInfo = array(
-            'sn'=>1254845,
-            'actually_amount'=>0.01,
-            'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'],
-        );
-        $backUrl=[
-            'success_back'=>'https://www.baidu.com',
-            'cancel_back'=>'https://www.hao123.com/',
-            'fail_back'=>'http://www.sina.com.cn/',
-        ];
-        Pay::wxPay($payInfo,$backUrl);
     }
 
     //充值-支付

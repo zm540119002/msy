@@ -16,13 +16,13 @@ use Vendor\Qrcode\Qrcode;
 class Pay
 {
 
-    public static function wxPay($payInfo,$backUrl=[]){
+    public static function wxPay($payInfo,$backUrl){
         if (!isPhoneSide()) {//pc端微信扫码支付
             Pay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             Pay::h5_pay($payInfo);
         }else{//微信浏览器
-            Pay::getJSAPI($payInfo.$backUrl=[]);
+            Pay::getJSAPI($payInfo,$backUrl);
         }
     }
 
@@ -35,7 +35,10 @@ class Pay
      * @param  string   $total_fee  金额
      */
 
-    public static function getJSAPI($payInfo=[],$backUrl=[]){
+    public static function getJSAPI($payInfo,$backUrl){
+        $backUrl['success_back'] = U($backUrl['success_back'])?:U('Index/index');
+        $backUrl['cancel_back'] = U($backUrl['cancel_back'])?:U('Index/index');
+        $backUrl['fail_back'] = U($backUrl['fail_back'])?:U('Index/index');
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
@@ -52,8 +55,9 @@ class Pay
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
-        <script type="text/javascript" src="/Public/js/common/dialog.js"></script>
-  
+			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
+			<script type="text/javascript" src="/Public/js/common/layer.mobile/layer.js"></script>
+			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
 	<script type="text/javascript">
 	//调用微信JS api 支付
 	function jsApiCall()
@@ -62,11 +66,11 @@ class Pay
 			'getBrandWCPayRequest',$jsApiParameters,
 			function(res){
 				  if(res.err_msg == "get_brand_wcpay_request:ok"){
-                            dialog.success('支付成功!',"{$backUrl['success_back']}");                
-                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
-                            dialog.success('取消支付!',"{$backUrl['cancel_back']}");
+				            dialog.success('支付成功！',"{$backUrl['success_back']}");
+                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
+                            dialog.success('取消支付！',"{$backUrl['cancel_back']}");
                         }else{
-                            dialog.success('支付失败!',"{$backUrl['fail_back']}");
+                           dialog.success('支付失败！',"{$backUrl['fail_back']}");
                         }
 			}
 		);

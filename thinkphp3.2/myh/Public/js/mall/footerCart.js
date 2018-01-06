@@ -29,7 +29,7 @@ $(function () {
         if(!postData){
             return false;
         }
-        generateOrder(postData);
+        generateOrder(postData,buyNowCallBack);
     });
 
     //加入购物车
@@ -181,24 +181,19 @@ $(function () {
             return false;
         }
         postData.returnUrl = location.href;
-        generateOrder(postData);
+        generateOrder(postData,groupBuyCallBack);
     });
 });
 
 //生成订单
-function generateOrder(postData) {
+function generateOrder(postData,callBack) {
     var url = MODULE + '/Order/generate';
     $.ajax({
         url: url,
         data: postData,
         type: 'post',
-        beforeSend:function(xhr){
-            $('.loading').show();
-        },
-        error:function(xhr){
-            $('.loading').hide();
-            dialog.error('AJAX错误');
-        },
+        beforeSend: function(){$('.loading').show();},
+        error:function(){$('.loading').hide();dialog.error('AJAX错误');},
         success: function(data){
             $('.loading').hide();
             if(data.status == 0){
@@ -209,13 +204,21 @@ function generateOrder(postData) {
                 }
             }else if(data.status == 1){
                 if(data.info=='isAjax'){
-                    loginDialog();
+                    loginDialog(callBack);
                 }else{
                     location.href = MODULE + '/Order/orderDetail/orderId/' + data.orderId;
                 }
             }
         }
     });
+}
+//立即购买回调
+function buyNowCallBack() {
+    $('.buy_now,.clearing_now').click();
+}
+//团购回调
+function groupBuyCallBack() {
+    $('.initiate_group_buy').click();
 }
 
 //关闭二维码
