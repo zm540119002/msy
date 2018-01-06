@@ -136,7 +136,7 @@ class OrderController extends AuthUserController {
     }
 
     //订单-生成
-    public function generate($return=false,$data=array()){
+    public function generate(){
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
@@ -165,7 +165,6 @@ class OrderController extends AuthUserController {
         //开启事务
         $modelOrder->startTrans();
         $_POST = [];
-        $_POST = array_merge($_POST,$data);
         $_POST['sn'] = $orderSN;
         $_POST['user_id'] = $this->user['id'];
         $_POST['amount'] = $amount;
@@ -192,36 +191,31 @@ class OrderController extends AuthUserController {
                 $this->ajaxReturn(errorMsg($res));
             }
         }
-        if(!$return){
-            //禁用购物车
-            $modelCart = D('Cart');
-            $where = array(
-                'ct.user_id' => $this->user['id'],
-            );
-            $cartList = $modelCart->selectCart($where);
-            foreach ($goodsList as $item){
-                foreach ($cartList as $value){
-                    if($item['foreign_id'] && $value['foreign_id'] && $item['foreign_id']==$value['foreign_id'])
-                    {//提交的商品在购物车中，生成订单后禁用
-                        $where = array(
-                            'user_id' => $this->user['id'],
-                            'foreign_id' => $value['foreign_id'],
-                        );
-                        $res = $modelCart->where($where)->setField('status',1);
-                        if($res === false){
-                            $modelOrder->rollback();
-                            $this->ajaxReturn(errorMsg($this->getError()));
-                        }
+        //禁用购物车
+        $modelCart = D('Cart');
+        $where = array(
+            'ct.user_id' => $this->user['id'],
+        );
+        $cartList = $modelCart->selectCart($where);
+        foreach ($goodsList as $item){
+            foreach ($cartList as $value){
+                if($item['foreign_id'] && $value['foreign_id'] && $item['foreign_id']==$value['foreign_id'])
+                {//提交的商品在购物车中，生成订单后禁用
+                    $where = array(
+                        'user_id' => $this->user['id'],
+                        'foreign_id' => $value['foreign_id'],
+                    );
+                    $res = $modelCart->where($where)->setField('status',1);
+                    if($res === false){
+                        $modelOrder->rollback();
+                        $this->ajaxReturn(errorMsg($this->getError()));
                     }
                 }
             }
         }
 
         $modelOrder->commit();
-        if($return){
-            return array('id'=>$orderId);
-        }
-        $this->ajaxReturn(successMsg('生成订单成功',array('id'=>$orderId)));
+        $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
     }
 
     //订单-结算

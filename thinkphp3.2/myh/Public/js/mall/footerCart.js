@@ -29,35 +29,7 @@ $(function () {
         if(!postData){
             return false;
         }
-        var url = MODULE + '/Order/generate';
-        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function(){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.status == 0){
-                    if(data.url){
-                        location.href = data.url;
-                    }else{
-                        dialog.error(data.info);
-                    }
-                }else if(data.status == 1){
-                    if(data.info=='isAjax'){
-                        loginDialog();
-                    }else{
-                        location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
-                    }
-                }
-            }
-        });
+        generateOrder(postData);
     });
 
     //加入购物车
@@ -77,8 +49,6 @@ $(function () {
                 $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
-                }else {
-                    dialog.success(data.info);
                 }
             }
         });
@@ -128,13 +98,8 @@ $(function () {
             url: MODULE + '/Referrer/myQRCodesWithGoods',
             data: {url:url},
             type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function (xhr) {
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
             success: function(data){
                 $('.loading').hide();
                 if(data.status == 0){
@@ -163,13 +128,8 @@ $(function () {
             url: MODULE + '/Referrer/delMyQRCodesWithGoods',
             data: {imgUrl:imgUrl},
             type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function (xhr) {
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
             success: function(data){
                 $('.loading').hide();
                 if(data.status == 1){
@@ -188,13 +148,8 @@ $(function () {
             url: MODULE + '/CommonAuthUser/checkLogin',
             data:{},
             type:'post',
-            beforeSend:function(xhr){
-                $('.loading').show();
-            },
-            error:function(xhr){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
+            beforeSend: function(){$('.loading').show();},
+            error:function(){$('.loading').hide();dialog.error('AJAX错误');},
             success:function(data){
                 $('.loading').hide();
                 if(data.status == 0){
@@ -213,8 +168,9 @@ $(function () {
             }
         });
     });
+
     //关闭微信分享提示图
-    $('.weixinShare_btn').on('click',function(){
+    $('body').on('click','.weixinShare_btn',function(){
         $('.mcover').hide();
     });
 
@@ -224,30 +180,44 @@ $(function () {
         if(!postData){
             return false;
         }
-        var url = MODULE + '/Order/generate';
         postData.returnUrl = location.href;
-        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend:function(xhr){
-                $('.loading').show();
-            },
-            error:function(xhr){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.status==0){
-                    dialog.error(data.info);
-                }else{
-                    location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
-                }
-            }
-        });
+        generateOrder(postData);
     });
 });
+
+//生成订单
+function generateOrder(postData) {
+    var url = MODULE + '/Order/generate';
+    $.ajax({
+        url: url,
+        data: postData,
+        type: 'post',
+        beforeSend:function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status == 0){
+                if(data.url){
+                    location.href = data.url;
+                }else{
+                    dialog.error(data.info);
+                }
+            }else if(data.status == 1){
+                if(data.info=='isAjax'){
+                    loginDialog();
+                }else{
+                    location.href = MODULE + '/Order/orderDetail/orderId/' + data.orderId;
+                }
+            }
+        }
+    });
+}
+
 //关闭二维码
 function clockArea() {
     $("#areaMask,.express-code-box").fadeOut();
