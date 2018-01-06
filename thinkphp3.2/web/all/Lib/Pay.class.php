@@ -60,14 +60,11 @@ class Pay
 			'getBrandWCPayRequest',$jsApiParameters,
 			function(res){
 				  if(res.err_msg == "get_brand_wcpay_request:ok"){
-                            alert("支付成功!");
                             window.location.href = "{$backUrl['cancel_back']}}";
                         }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
-                            alert("用户取消支付!");
                              window.location.href = "{$backUrl['cancel_back']}}";
                         }else{
                          window.location.href = "{$backUrl['cancel_back']}}";
-                            alert("支付失败!");
                         }
 			}
 		);
