@@ -362,5 +362,5 @@ i{
     border-radius:100%;
     z-index:18;
     background:#fff;
-
+    display: none;
 }

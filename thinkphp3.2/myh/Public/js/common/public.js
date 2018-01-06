@@ -367,4 +367,10 @@ function smartScroll(container, selectorScrollable) {
 //返回顶部
 $('body').on('click','.backTop',function(){
     $('body,html').animate({scrollTop:0+'px'},500);
-})
+});
+$(window).on('scroll',function(){
+    if($(document).scrollTop()>200){
+        $('.backTop').show();
+    }
+    $('.backTop').hide();
+});
