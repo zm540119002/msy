@@ -42,6 +42,7 @@ class OrderController extends BaseController {
         }
         $modelOrder = D('Order');
         $where['o.status'] = 0;
+        $where['o.logistics_status'] = array('gt',0);
         $logistics_status = $_GET['logistics_status'];
         if($logistics_status){
             $where['o.logistics_status'] = $logistics_status;
