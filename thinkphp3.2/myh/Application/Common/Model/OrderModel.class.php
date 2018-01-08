@@ -122,7 +122,7 @@ class OrderModel extends Model {
         }else{
             $res = array(
                 'status' => 0,
-                'message' => '临时订单',
+                'message' => '无效订单',
             );
         }
         return $res;
