@@ -49,6 +49,7 @@ var ticking = false;
 
 function doSomething(scroll_pos) {
   // do something with the scroll position
+  console.log(scroll_pos+$(window).height());
   console.log($(document).height());
   if(scroll_pos+$(window).height()>=$(document).height()){
     getGoodsList(config);
