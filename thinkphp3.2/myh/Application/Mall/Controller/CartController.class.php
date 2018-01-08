@@ -90,7 +90,7 @@ class CartController extends BaseController {
         }else{//未登录
             cookie('cart',serialize(goodsMergeById(unserialize(cookie('cart')),$_POST['goodsList'])));
         }
-        $this->ajaxReturn(successMsg('加入购物车成功'));
+        $this->ajaxReturn(successMsg('添加成功'));
     }
 
     //增减单个商品
@@ -129,6 +129,6 @@ class CartController extends BaseController {
             }
             cookie('cart',serialize($cart));
         }
-        $this->ajaxReturn(successMsg('加入购物车成功'));
+        $this->ajaxReturn(successMsg('添加成功'));
     }
 }

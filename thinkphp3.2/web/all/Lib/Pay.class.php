@@ -18,13 +18,13 @@ class Pay{
      * @param $payInfo
      * @param $backUrl
      */
-    public static function wxPay($payInfo,$backUrl){
+    public static function wxPay($payInfo){
         if (!isPhoneSide()) {//pc端微信扫码支付
             Pay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             Pay::h5_pay($payInfo);
-        }else{//微信浏览器
-            Pay::getJSAPI($payInfo,$backUrl);
+        }else{//微信浏览器(手机端)
+            Pay::getJSAPI($payInfo);
         }
     }
 
@@ -35,17 +35,17 @@ class Pay{
      * @param  string   $order_sn	订单号
      * @param  string   $total_fee  金额
      */
-    public static function getJSAPI($payInfo,$backUrl){
-        $backUrl['success_back'] = $backUrl['success_back']?:U('Index/index');
-        $backUrl['cancel_back'] = $backUrl['cancel_back']?:U('Index/index');
-        $backUrl['fail_back'] = $backUrl['fail_back']?:U('Index/index');
+    public static function getJSAPI($payInfo){
+        $payInfo['success_back'] = $payInfo['success_back']?:U('Index/index');
+        $payInfo['cancel_back'] = $payInfo['cancel_back']?:U('Index/index');
+        $payInfo['fail_back'] = $payInfo['fail_back']?:U('Index/index');
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
         $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
-        $input->SetTotal_fee($payInfo['actually_amount'] *100);			//支付金额,单位:分
+        $input->SetTotal_fee($payInfo['actually_amount'] * 100);			//支付金额,单位:分
         $input->SetTime_start(date("YmdHis"));		//支付发起时间
         $input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
         $input->SetGoods_tag("test3");
@@ -66,11 +66,11 @@ class Pay{
                         'getBrandWCPayRequest',$jsApiParameters,
                         function(res){
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
-                                dialog.success('支付成功！',"{$backUrl['success_back']}");
+                                dialog.success('支付成功！',"{$payInfo['success_back']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                dialog.success('取消支付！',"{$backUrl['cancel_back']}");
+                                dialog.success('取消支付！',"{$payInfo['cancel_back']}");
                             }else{
-                                dialog.success('支付失败！',"{$backUrl['fail_back']}");
+                                dialog.success('支付失败！',"{$payInfo['fail_back']}");
                             }
                         }
                     );
