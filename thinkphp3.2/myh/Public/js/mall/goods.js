@@ -37,9 +37,11 @@ function getGoodsList(config) {
     });
 }
 //上拉加载更多
+window.onload=function(){
 $(window).on('scroll',function(){
     if($(document).scrollTop()+$(window).height()>=$(document).height()){
         alert(1);
         // getGoodsList(config);
     }
 });
+}
