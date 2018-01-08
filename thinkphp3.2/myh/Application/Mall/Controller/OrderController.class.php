@@ -271,19 +271,12 @@ class OrderController extends AuthUserController {
             );
             $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
             $couponsInfo = $couponsInfo[0];
-            //钱包信息
-            $where = array(
-                'w.user_id' =>  $this->user['id'],
-            );
-            $walletInfo = $modelWallet->selectWallet($where);
-            $walletInfo = $walletInfo[0];
-            $this -> walletInfo = $walletInfo;
             $modelOrder->startTrans();//开启事务
             //代金券支付
             $unpaid = $orderInfo['amount'];
             if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
                 if($unpaid<=$couponsInfo['amount']){//代金券足够支付订单
-                    //更新订单(状态还是已支付)
+                    //更新订单状态(已支付)
                     //代金券支付：$unpaid
                     //账户余额支付：0:
                     //实际支付：0
@@ -303,7 +296,6 @@ class OrderController extends AuthUserController {
                     //更新代金券，已使用
                     $_POST = [];
                     $_POST['status'] = 1;
-                    $_POST['couponsId'] = $couponsId;
                     $where = array(
                         'user_id' => $this->user['id'],
                         'id' => $couponsId,
@@ -319,11 +311,16 @@ class OrderController extends AuthUserController {
                     $unpaid -= $couponsInfo['amount'];
                 }
             }
+            //钱包信息
+            $where = array(
+                'w.user_id' =>  $this->user['id'],
+            );
+            $walletInfo = $modelWallet->selectWallet($where);
+            $walletInfo = $walletInfo[0];
             //账户余额支付
-            $accountBalance = 0;//$walletInfo['amount'];
-            if($accountBalance>=0){
-                if($unpaid<=$accountBalance){//余额足够支付订单
-                    //更新订单(状态还是未支付)
+            if($walletInfo['amount'] && $walletInfo['amount']>0){
+                if($unpaid<=$walletInfo['amount']){//余额足够支付订单
+                    //更新订单状态(已支付)
                     //代金券支付：$couponsInfo['amount']
                     //账户余额支付：$unpaid:
                     //实际支付：0
@@ -357,9 +354,9 @@ class OrderController extends AuthUserController {
                             $this->ajaxReturn(errorMsg($res));
                         }
                     }
-                    //更新账户，$accountBalance-$unpaid
+                    //更新账户，$walletInfo['amount']-$unpaid
                     $_POST = [];
-                    $_POST['amount'] = $accountBalance - $unpaid;
+                    $_POST['amount'] = $walletInfo['amount'] - $unpaid;
                     $where = array(
                         'user_id' =>  $this->user['id'],
                     );
@@ -382,16 +379,12 @@ class OrderController extends AuthUserController {
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('成功',array('wxPay'=>false)));
                 }else{
-                    $unpaid -= $accountBalance;
+                    $unpaid -= $walletInfo['amount'];
                 }
             }
             if($unpaid>0){//转账支付
                 //更新订单(状态还是未支付)
-                //代金券支付：$couponsInfo['amount']
-                //账户余额支付：$accountBalance:
                 //实际支付：$unpaid
-                //更新代金券，已使用
-                //更新账户，0
                 $_POST = [];
                 if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
                     $_POST['coupons_pay'] = $couponsInfo['amount'];
@@ -399,7 +392,7 @@ class OrderController extends AuthUserController {
                 }else{
                     $_POST['coupons_pay'] = 0;
                 }
-                $_POST['wallet_pay'] = $accountBalance;
+                $_POST['wallet_pay'] = $walletInfo['amount'];
                 $_POST['actually_amount'] = $unpaid;
                 $where = array(
                     'user_id' =>  $this->user['id'],
