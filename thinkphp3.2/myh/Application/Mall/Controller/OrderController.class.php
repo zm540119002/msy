@@ -272,9 +272,8 @@ class OrderController extends AuthUserController {
             $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
             $couponsInfo = $couponsInfo[0];
             $modelOrder->startTrans();//开启事务
-            //代金券支付
             $unpaid = $orderInfo['amount'];
-            if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
+            if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){//代金券支付
                 if($unpaid<=$couponsInfo['amount']){//代金券足够支付订单
                     //更新订单状态(已支付)
                     //代金券支付：$unpaid
@@ -317,8 +316,7 @@ class OrderController extends AuthUserController {
             );
             $walletInfo = $modelWallet->selectWallet($where);
             $walletInfo = $walletInfo[0];
-            //账户余额支付
-            if($walletInfo['amount'] && $walletInfo['amount']>0){
+            if($walletInfo['amount'] && $walletInfo['amount']>0){//账户余额支付
                 if($unpaid<=$walletInfo['amount']){//余额足够支付订单
                     //更新订单状态(已支付)
                     //代金券支付：$couponsInfo['amount']
@@ -354,7 +352,7 @@ class OrderController extends AuthUserController {
                             $this->ajaxReturn(errorMsg($res));
                         }
                     }
-                    //更新账户，$walletInfo['amount']-$unpaid
+                    //更新余额
                     $_POST = [];
                     $_POST['amount'] = $walletInfo['amount'] - $unpaid;
                     $where = array(
@@ -365,7 +363,7 @@ class OrderController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-                    //增加账户记录
+                    //新增账户余额明细
                     $_POST = [];
                     $_POST['user_id'] = $this->user['id'];
                     $_POST['amount'] = $unpaid;
@@ -383,7 +381,7 @@ class OrderController extends AuthUserController {
                 }
             }
             if($unpaid>0){//转账支付
-                //更新订单(状态还是未支付)
+                //更新订单状态(还是未支付，去支付回调更新为支付状态)
                 //实际支付：$unpaid
                 $_POST = [];
                 if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
