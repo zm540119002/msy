@@ -255,7 +255,7 @@ class OrderController extends AuthUserController {
             $orderInfo = $modelOrder->selectOrder($where);
             $orderInfo = $orderInfo[0];
             if(!$orderInfo['id'] || $orderInfo['amount'] <= 0){
-                $this->ajaxReturn(errorMsg('订单信息有误！'));
+                $this->ajaxReturn(errorMsg('订单号：'.$orderInfo['sn'].'信息有误，请检查！'));
             }
             $result = $modelOrder -> checkOrderStatus($orderInfo);
             if($result['status'] == 0){
