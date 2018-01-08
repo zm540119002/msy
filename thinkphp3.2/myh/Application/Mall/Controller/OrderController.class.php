@@ -228,6 +228,9 @@ class OrderController extends AuthUserController {
             'user_id' => $this->user['id'],
         );
         $_POST['logistics_status'] = 1;
+        if(isset($_GET['orderId']) && intval($_GET['orderId'])){
+            $_POST['id'] = I('get.orderId',0,'int');
+        }
         $res = $modelOrder->saveOrder($where);
         if(!$res['id']){
             $this->ajaxReturn(errorMsg('失败'));
@@ -248,6 +251,7 @@ class OrderController extends AuthUserController {
             }
             $where = array(
                 'o.id' => $orderId,
+                'o.user_id' => $this->user['id'],
             );
             $orderInfo = $modelOrder->selectOrder($where);
             $orderInfo = $orderInfo[0];
@@ -257,20 +261,20 @@ class OrderController extends AuthUserController {
             if($orderInfo['amount'] <= 0){
                 $this->ajaxReturn(errorMsg('订单号：'.$orderInfo['sn'].'支付金额有误，请检查！'));
             }
-            $result = $modelOrder -> checkOrderLogisticsStatus($orderInfo);
+            $result = $modelOrder -> checkOrderLogisticsStatus($orderInfo['logistics_status']);
             if($result['status'] == 0){
                 $this ->ajaxReturn(errorMsg($result['message']));
             }
             //代金券信息
             if(isset($_POST['couponsId']) && intval($_POST['couponsId'])){
                 $couponsId = I('post.couponsId',0,'int');
+                $where = array(
+                    'cr.id' => $couponsId,
+                    'cr.user_id' => $this->user['id'],
+                );
+                $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
+                $couponsInfo = $couponsInfo[0];
             }
-            $where = array(
-                'cr.id' => $couponsId,
-                'cr.user_id' => $this->user['id'],
-            );
-            $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
-            $couponsInfo = $couponsInfo[0];
             $modelOrder->startTrans();//开启事务
             $unpaid = $orderInfo['amount'];
             if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){//代金券支付
@@ -283,9 +287,9 @@ class OrderController extends AuthUserController {
                     $_POST['logistics_status'] = 2;
                     $_POST['coupons_pay'] = $unpaid;
                     $_POST['coupons_id'] = $couponsId;
+                    $_POST['id'] = $orderId;
                     $where = array(
                         'user_id' =>  $this->user['id'],
-                        'id' => $orderId,
                     );
                     $res = $modelOrder->saveOrder($where);
                     if(!$res['id']){
@@ -295,9 +299,9 @@ class OrderController extends AuthUserController {
                     //更新代金券，已使用
                     $_POST = [];
                     $_POST['status'] = 1;
+                    $_POST['id'] = $couponsId;
                     $where = array(
                         'user_id' => $this->user['id'],
-                        'id' => $couponsId,
                     );
                     $res = $modelCouponsReceive->saveCouponsReceive($where);
                     if(!$res['id']){
@@ -329,9 +333,9 @@ class OrderController extends AuthUserController {
                     }
                     $_POST['logistics_status'] = 2;
                     $_POST['wallet_pay'] = $unpaid;
+                    $_POST['id'] = $orderId;
                     $where = array(
                         'user_id' =>  $this->user['id'],
-                        'id' => $orderId,
                     );
                     $res = $modelOrder->saveOrder($where);
                     if(!$res['id']){
@@ -342,7 +346,7 @@ class OrderController extends AuthUserController {
                     if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
                         $_POST = [];
                         $_POST['status'] = 1;
-                        $_POST['couponsId'] = $couponsId;
+                        $_POST['coupons_id'] = $couponsId;
                         $where = array(
                             'user_id' =>  $this->user['id'],
                         );
@@ -390,16 +394,16 @@ class OrderController extends AuthUserController {
                 }else{
                     $_POST['coupons_pay'] = 0;
                 }
-                $_POST['wallet_pay'] = $walletInfo['amount'];
+                $_POST['wallet_pay'] = $walletInfo['amount']?:0;
                 $_POST['actually_amount'] = $unpaid;
+                $_POST['id'] = $orderId;
                 $where = array(
                     'user_id' =>  $this->user['id'],
-                    'id' => $orderId,
                 );
                 $res = $modelOrder->saveOrder($where);
-                if(!$res['id']){
+                if(!$res['status']){
                     $modelOrder->rollback();
-                    $this->ajaxReturn(errorMsg($res));
+                    $this->ajaxReturn(errorMsg($res['info']));
                 }
                 $modelOrder->commit();//提交事务
                 $this->ajaxReturn(successMsg('成功',array('wxPay'=>true)));
