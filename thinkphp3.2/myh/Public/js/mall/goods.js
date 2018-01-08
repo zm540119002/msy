@@ -28,6 +28,7 @@ function getGoodsList(config) {
             $('.loading').hide();
             if(currentPage == 1){
                 $('ul.goodsListContent').empty().append(data);
+                console.log(123);
             }else{
                 $('ul.goodsListContent li:last').after(data);
             }
