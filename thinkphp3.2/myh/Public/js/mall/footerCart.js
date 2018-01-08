@@ -181,6 +181,7 @@ $(function () {
             return false;
         }
         postData.returnUrl = location.href;
+        postData.orderType = 1;
         generateOrder(postData,groupBuyCallBack);
     });
 });
@@ -192,13 +193,8 @@ function generateOrder(postData,callBack) {
         url: url,
         data: postData,
         type: 'post',
-        beforeSend:function(xhr){
-            $('.loading').show();
-        },
-        error:function(xhr){
-            $('.loading').hide();
-            dialog.error('AJAX错误');
-        },
+        beforeSend: function(){$('.loading').show();},
+        error:function(){$('.loading').hide();dialog.error('AJAX错误');},
         success: function(data){
             $('.loading').hide();
             if(data.status == 0){
