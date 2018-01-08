@@ -37,33 +37,9 @@ function getGoodsList(config) {
     });
 }
 //上拉加载更多
-// $(window).on('scroll',function(){
-//     if($(document).scrollTop()+$(window).height()>=$(document).height()){
-//         alert(1);
-//         // getGoodsList(config);
-//     }
-// });
-
-var last_known_scroll_position = 0;
-var ticking = false;
-
-function doSomething(scroll_pos) {
-  // do something with the scroll position
-  console.log(scroll_pos+$(window).height());
-  console.log($(document).height());
-  if(scroll_pos+$(window).height()>=$(document).height()){
-    getGoodsList(config);
-  }
-}
-
-window.addEventListener('scroll', function(e) {
-    console.log(window.scrollY);
-  last_known_scroll_position = window.scrollY;
-  if (!ticking) {
-        window.requestAnimationFrame(function() {
-       doSomething(last_known_scroll_position);
-        ticking = false;
-        });
-  }
-  ticking = true;
+$(window).on('scroll',function(){
+    if($(document).scrollTop()+$(window).height()>=$(document).height()){
+        alert(1);
+        // getGoodsList(config);
+    }
 });
