@@ -37,9 +37,24 @@ function getGoodsList(config) {
     });
 }
 //上拉加载更多
-$(window).on('scroll',function(){
-    if($(document).scrollTop()+$(window).height()>=$(document).height()){
-        // alert(1);
-        getGoodsList(config);
-    }
-});
+// $(window).on('scroll',function(){
+//     if($(document).scrollTop()+$(window).height()>=$(document).height()){
+//         // alert(1);
+//         getGoodsList(config);
+//     }
+// });
+
+
+document.addEventListener('scroll', function (e) {
+            var clientHeight = document.documentElement.clientHeight;
+            var scrollHeight = document.documentElement.scrollHeight;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+//lastTop < scrollTop && scrollTop > scrollHeight - clientHeight - 20|| 
+                
+            if (scrollTop == scrollHeight - clientHeight
+            ) {
+                getGoodsList(config);
+            }
+
+            //lastTop = scrollTop;
+        });
