@@ -37,30 +37,9 @@ function getGoodsList(config) {
     });
 }
 //上拉加载更多
-// $(window).on('scroll',function(){
-//     if($(document).scrollTop()+$(window).height()>=$(document).height()){
-//         // alert(1);
-//         getGoodsList(config);
-//     }
-// });
-
-var ticking = false; // rAF 触发锁
- 
-function onScroll(){
-  if(!ticking) {
-    requestAnimationFrame(realFunc);
-    ticking = true;
-  }
-}
- 
-function realFunc(){
-	// do something...
- if($(document).scrollTop()+$(window).height()>=$(document).height()){
+$(window).on('scroll',function(){
+    if($(document).scrollTop()+$(window).height()>=$(document).height()){
         // alert(1);
         getGoodsList(config);
     }
-	console.log("Success");
-	ticking = false;
-}
-// 滚动事件监听
-window.addEventListener('scroll', onScroll, false);
+});
