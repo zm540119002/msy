@@ -299,7 +299,7 @@ class OrderController extends AuthUserController {
                     //更新代金券，已使用
                     $_POST = [];
                     $_POST['status'] = 1;
-                    $_POST['id'] = $couponsId;
+                    $_POST['couponsId'] = $couponsId;
                     $where = array(
                         'user_id' => $this->user['id'],
                     );
