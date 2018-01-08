@@ -26,6 +26,7 @@ function getGoodsList(config) {
             $('.loading').hide();
             if(currentPage == 1){
                 $('ul.goodsListContent').empty().append(data);
+                setTimeout(function(){window.scrollTo(0,0);}, 50);
             }else{
                 $('ul.goodsListContent li:last').after(data);
             }
