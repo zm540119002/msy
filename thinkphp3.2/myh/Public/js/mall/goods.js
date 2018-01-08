@@ -51,7 +51,7 @@ document.addEventListener('scroll', function (e) {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 //lastTop < scrollTop && scrollTop > scrollHeight - clientHeight - 20|| 
                 
-            if (scrollTop == scrollHeight - clientHeight
+            if (scrollTop +clientHeight>= scrollHeight
             ) {
                 getGoodsList(config);
             }
