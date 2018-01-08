@@ -34,14 +34,17 @@ function getGoodsList(config) {
             if($(data).length<postData.pageSize){
                 requestEnd = true;
             }
+            finished=true;
             currentPage ++;
         }
     });
 }
 //上拉加载更多
+var finished=true;
 $(window).on('scroll',function(){
-    if($(document).scrollTop()+$(window).height()>=$(document).height()){
+    if(finished && $(document).scrollTop()+$(window).height()>=$(document).height()){
         // alert(1);
+        finished=false;
         getGoodsList(config);
     }
 });
