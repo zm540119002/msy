@@ -49,6 +49,8 @@ $(function () {
                 $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
+                }else if(data.status==1){
+                    dialog.success(data.info);
                 }
             }
         });

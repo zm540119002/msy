@@ -25,19 +25,16 @@ class PaymentController extends AuthUserController {
                 $payInfo = array(
                     'sn'=>$orderInfo['sn'],
                     'actually_amount'=>$orderInfo['actually_amount'],
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
+                    'success_back' => U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
-                $backUrl = array(
-                    'cancel_back' => U('payCancel'),
-                    'fail_back' => U('payFail'),
-                );
-                if($orderInfo['type']==0){
-                    $backUrl['success_back'] = U('payComplete');
-                }elseif($orderInfo['type']==1){
-                    $backUrl['success_back'] = session('returnUrl')?:U('payComplete');
+                if($orderInfo['type']==1){//团购订单
+                    session('returnUrl') && $payInfo['success_back'] = session('returnUrl');
                 }
-                Pay::wxPay($payInfo,$backUrl);
+                Pay::wxPay($payInfo);
             }
         }
     }
@@ -55,10 +52,12 @@ class PaymentController extends AuthUserController {
                 $walletDetailInfo = $modelWalletDetail->selectWalletDetail($where);
                 $walletDetailInfo = $walletDetailInfo[0];
                 $this->amount = $walletDetailInfo['amount'];
-
                 $payInfo = array(
                     'sn'=>$walletDetailInfo['sn'],
                     'actually_amount'=>$this->amount,
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
+                    'success_back' => U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'].'/weixin.recharge',
                 );
                 Pay::wxPay($payInfo);
