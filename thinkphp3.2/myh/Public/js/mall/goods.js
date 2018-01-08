@@ -54,7 +54,7 @@ document.addEventListener('scroll', function (e) {
                 
             if (scrollTop +clientHeight>= scrollHeight
             ) {
-                getGoodsList();
+                getGoodsList(config);
             }
 
             //lastTop = scrollTop;
