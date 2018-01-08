@@ -58,10 +58,7 @@ function doSomething(scroll_pos) {
 
 window.addEventListener('scroll', function(e) {
     console.log(window.scrollY);
-  if(window.scrollY>0){
-    window.scrollY=0;
-    last_known_scroll_position = window.scrollY;
-  }
+  last_known_scroll_position = window.scrollY;
   if (!ticking) {
         window.requestAnimationFrame(function() {
        doSomething(last_known_scroll_position);
