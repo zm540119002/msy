@@ -135,7 +135,9 @@ class GoodsController extends BaseController {
                     $shareInfo['shareLink'] = $shLinkBase;//分享url
                     $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
                 }
-
+            }
+            if(isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId'])){
+                $this -> groupBuyId = $_GET['groupBuyId'];
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             $modelComment = D('Comment');

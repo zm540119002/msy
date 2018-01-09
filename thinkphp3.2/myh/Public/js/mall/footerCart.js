@@ -184,6 +184,7 @@ $(function () {
         }
         postData.returnUrl = location.href;
         postData.orderType = 1;
+        postData.groupBuyId = $('.groupBuyId').val();
         generateOrder(postData,groupBuyCallBack);
     });
 });
