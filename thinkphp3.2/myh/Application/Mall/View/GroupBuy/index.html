@@ -87,6 +87,20 @@
             countDown('2017/12/21 23:59:59',$(".count_down_box"));
             //初始化
             getGoodsList(config);
+            //var isMore=false;
         });
+        window.onscroll=function(){
+    var height=document.body.clientHeight;
+    var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+    var windowH=window.innerHeight;
+        if(scrollTop+windowH>=height){
+            // if(!isMore){
+            //     isMore=true;
+                getGoodsList(config);
+           // }
+
+        }
+}
+
     </script>
 </block>
