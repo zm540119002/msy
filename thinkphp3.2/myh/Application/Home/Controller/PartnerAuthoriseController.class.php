@@ -13,7 +13,7 @@ class PartnerAuthoriseController extends AuthUserController {
                 $this->display('authorizeComplete');
             }else{//未认证
                 //购物车配置开启的项
-                $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,3,14));
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(14));
                 $this->display();
             }
         }

@@ -1,7 +1,6 @@
 <?php
 namespace web\all\Cache;
 
-
 class AgentCache{
     private static $_cache_key = 'cache_agent_';
 

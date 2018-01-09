@@ -1,7 +1,6 @@
 <?php
 namespace web\all\Cache;
 
-
 class PartnerCache{
     private static $_cache_key = 'cache_partner_';
     
