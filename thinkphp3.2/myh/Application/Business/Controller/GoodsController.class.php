@@ -1,5 +1,5 @@
 <?php
-namespace Mall\Controller;
+namespace Business\Controller;
 use  web\all\Controller\BaseController;
 use  web\all\Lib\AuthUser;
 class GoodsController extends BaseController {

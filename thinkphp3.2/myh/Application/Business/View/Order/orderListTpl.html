@@ -1,0 +1,51 @@
+<notemtpy name="orderList">
+    <volist name="orderList" id="orderInfo">
+        <div class="order_detail_item">
+            <div class="order_flex">
+                <div class="">订单号：<span>{$orderInfo.sn|substr=0,15}</span></div>
+            </div>
+            <if condition="$orderInfo.logistics_status eq 1">
+                <div class="pay_order_time"><i></i>支付剩余：
+                    <span class="count_down_box">
+                        <span class="day"></span>天
+                        <span class="hour"></span>小时
+                        <span class="minute"></span>分
+                        <span class="second"></span>秒
+                    </span>
+                </div>
+            </if>
+            <div class="order_flex order_flex_item">
+                <div>
+                    <if condition="$orderInfo.logistics_status eq 1">
+                        <p>状态：<span class="pay_tag">待支付</span></p>
+                    <elseif condition="$orderInfo.logistics_status eq 2"/>
+                        <if condition="$orderInfo.deliver_status eq 0 ">
+                            <p>状态：<span class="pay_tag">备货中</span></p>
+                            <elseif condition="$orderInfo.deliver_status eq 1"/>
+                            <p>状态：<span class="pay_tag pay_finish">已发货</span></p>
+                            <else />
+                        </if>
+                        <!--<p>状态：<span class="pay_tag">已发货</span></p>-->
+                    <elseif condition="$orderInfo.logistics_status eq 3"/>
+                        <p>状态：<span class="pay_tag">待评价</span></p>
+                    <elseif condition="$orderInfo.logistics_status eq 4"/>
+                        <p>状态：<span class="pay_tag pay_finish">已完成</span></p>
+                    <else />
+                    </if>
+                    <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">{$orderInfo.amount}</price></p>
+                </div>
+                <if condition="$orderInfo.logistics_status eq 1">
+                    <a class="order_pay_btn" href="">去支付</a>
+                    <elseif condition="$orderInfo.logistics_status eq 2"/>
+                    <a class="order_pay_btn edit_address" href="">修改收货人地址</a>
+                    <elseif condition="$orderInfo.logistics_status eq 3"/>
+                    <a class="order_pay_btn edit_address" href="{:U('Comment/CommentEdit',array('orderId'=>$orderInfo['id']))}">去评分评论</a>
+                    <elseif condition="$orderInfo.logistics_status eq 4"/>
+                        <a class="order_pay_btn edit_address" href="">再次采购</a>
+                    <else />
+                </if>
+            </div>
+            <include file="orderInfoTpl" />
+        </div>
+    </volist>
+</notemtpy>
