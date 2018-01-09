@@ -30,6 +30,7 @@ return array(
         array('forward'   => '一键分享转发',),//11
         array('forward_to_friends'   => '将本页转发微信好友',),//12
         array('goto_gift_purchase'   => '进入礼品采购',),//13
+        array('apply_partner'   => '申请美悦会城市合伙人',),//14
     ),
     //商品购买类型
     'BUY_TYPE'=>array(
