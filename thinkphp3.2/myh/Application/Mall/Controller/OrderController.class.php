@@ -263,7 +263,7 @@ class OrderController extends AuthUserController {
             if(!$orderInfo['id'] || $orderInfo['amount'] <= 0){
                 $this->ajaxReturn(errorMsg('订单号：'.$orderInfo['sn'].'信息有误，请检查！'));
             }
-            $result = $modelOrder -> checkOrderStatus($orderInfo);
+            $result = $modelOrder->checkOrderLogisticsStatus($orderInfo['logistics_status']);
             if($result['status'] == 0){
                 $this ->ajaxReturn(errorMsg($result['message']));
             }
@@ -312,11 +312,6 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-//                    if($orderInfo['type'] == 1){//团购
-//                        $modelGroupBuy->selectGroupBuy($where);
-//                    }
-
-
                     //更新代金券，已使用
                     $_POST = [];
                     $_POST['status'] = 1;
