@@ -45,6 +45,7 @@ class PaymentController extends AuthUserController {
                             '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
                     }
                 }
+                print_r($payInfo);exit;
                 Pay::wxPay($payInfo);
             }
         }
