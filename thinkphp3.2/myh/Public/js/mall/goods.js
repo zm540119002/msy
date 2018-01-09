@@ -30,7 +30,7 @@ function getGoodsList(config) {
             if(currentPage == 1){
                 
                 $('ul.goodsListContent').append(data);
-                console.log(123);
+                console.log('第一次');
             }else{
                 $('ul.goodsListContent li:last').after(data);
             }
