@@ -32,7 +32,9 @@ class PaymentController extends AuthUserController {
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
                 if($orderInfo['type']==1){//团购订单
-                    session('returnUrl') && $payInfo['success_back'] = session('returnUrl');
+                    $groupBuy = D('GroupBuy')->selectGroupBuy($where);
+                    session('returnUrl') && $payInfo['success_back'] = session('returnUrl').
+                        '/groupBuyId/'.$groupBuy[0]['id'].'/shareType/groupBuy';
                 }
                 print_r($orderInfo);exit;
                 Pay::wxPay($payInfo);

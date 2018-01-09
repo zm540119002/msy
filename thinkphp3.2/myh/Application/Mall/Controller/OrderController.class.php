@@ -197,6 +197,7 @@ class OrderController extends AuthUserController {
         $where = array(
             'ct.user_id' => $this->user['id'],
         );
+
         $cartList = $modelCart->selectCart($where);
         foreach ($goodsList as $item){
             foreach ($cartList as $value){
@@ -213,6 +214,9 @@ class OrderController extends AuthUserController {
                     }
                 }
             }
+        }
+        if($orderType == 1){//团购
+            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id']);
         }
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
@@ -244,6 +248,8 @@ class OrderController extends AuthUserController {
         $modelCouponsReceive = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
+        $modelGroupBuy = D('GroupBuy');
+        $modelGroupBuyDetail = D('GroupBuyDetail');
         if(IS_POST){
             //订单信息
             if(isset($_POST['orderId']) && intval($_POST['orderId'])){
@@ -275,6 +281,22 @@ class OrderController extends AuthUserController {
                 $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
                 $couponsInfo = $couponsInfo[0];
             }
+<<<<<<< HEAD
+            $where = array(
+                'cr.id' => $couponsId,
+                'cr.user_id' => $this->user['id'],
+            );
+            $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
+            $couponsInfo = $couponsInfo[0];
+            //钱包信息
+            $where = array(
+                'w.user_id' =>  $this->user['id'],
+            );
+            $walletInfo = $modelWallet->selectWallet($where);
+            $walletInfo = $walletInfo[0];
+//            $this -> walletInfo = $walletInfo;
+=======
+>>>>>>> ac1474f90442ebeebe2bacbda4938073e6a4fc99
             $modelOrder->startTrans();//开启事务
             $unpaid = $orderInfo['amount'];
             if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){//代金券支付
@@ -296,6 +318,11 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+                    if($orderDetail['type'] == 1){//团购
+                        $modelGroupBuy->selectGroupBuy($where);
+                    }
+
+
                     //更新代金券，已使用
                     $_POST = [];
                     $_POST['status'] = 1;
@@ -308,12 +335,29 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+<<<<<<< HEAD
+                    //减库存
+                    $res = $modelGoods -> decGoodsNum($orderDetail);
+
+                    if(!$res){
+                        $modelOrder->rollback();
+                        $this->ajaxReturn(errorMsg($res));
+                    }
+=======
+>>>>>>> ac1474f90442ebeebe2bacbda4938073e6a4fc99
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false)));
+                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
                     $unpaid -= $couponsInfo['amount'];
                 }
             }
+<<<<<<< HEAD
+            //账户余额支付
+            $accountBalance = $walletInfo['amount'];//$walletInfo['amount'];
+            if($accountBalance>=0){
+                if($unpaid<=$accountBalance){//余额足够支付订单
+                    //更新订单(状态还是未支付)
+=======
             //钱包信息
             $where = array(
                 'w.user_id' =>  $this->user['id'],
@@ -323,6 +367,7 @@ class OrderController extends AuthUserController {
             if($walletInfo['amount'] && $walletInfo['amount']>0){//账户余额支付
                 if($unpaid<=$walletInfo['amount']){//余额足够支付订单
                     //更新订单状态(已支付)
+>>>>>>> ac1474f90442ebeebe2bacbda4938073e6a4fc99
                     //代金券支付：$couponsInfo['amount']
                     //账户余额支付：$unpaid:
                     //实际支付：0
@@ -379,7 +424,7 @@ class OrderController extends AuthUserController {
                         $this->ajaxReturn(errorMsg($res));
                     }
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false)));
+                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
                     $unpaid -= $walletInfo['amount'];
                 }
@@ -433,4 +478,8 @@ class OrderController extends AuthUserController {
             $this->display();
         }
     }
+
+
+
+
 }
