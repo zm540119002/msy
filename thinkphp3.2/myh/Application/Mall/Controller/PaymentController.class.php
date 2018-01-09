@@ -38,13 +38,10 @@ class PaymentController extends AuthUserController {
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
                     if (strpos(session('returnUrl'), 'groupBuyId') == true) {
-                        print_r(session('returnUrl'));
                         $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
-                        print_r($shLinkBase);exit;
-                        session('returnUrl') && $payInfo['success_back'] = session('returnUrl').
+                        session('returnUrl') && $payInfo['success_back'] = $shLinkBase.
                             '/shareType/groupBuy';
                     }else{
-                        print_r(session('returnUrl'));exit;
                         session('returnUrl') && $payInfo['success_back'] = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html')).
                             '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
                     }
