@@ -43,6 +43,11 @@ function getGoodsList(config) {
         }
     });
 }
+ var config = {
+            pageSize:4,
+            buyType:2,
+            templateType:'photo'
+        };
 //初始化
             getGoodsList(config);
 //上拉加载更多
