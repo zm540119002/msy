@@ -43,6 +43,8 @@ function getGoodsList(config) {
         }
     });
 }
+//初始化
+            getGoodsList(config);
 //上拉加载更多
 $(window).on('scroll',function(){
     if($(document).scrollTop()+$(window).height()>=$(document).height()){
