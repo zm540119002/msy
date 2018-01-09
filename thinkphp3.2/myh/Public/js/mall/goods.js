@@ -26,8 +26,10 @@ function getGoodsList(config) {
         },
         success: function(data){
             $('.loading').hide();
+            console.log(currentPage);
             if(currentPage == 1){
-                $('ul.goodsListContent').empty().append(data);
+                
+                $('ul.goodsListContent').append(data);
                 console.log(123);
             }else{
                 $('ul.goodsListContent li:last').after(data);
@@ -36,12 +38,14 @@ function getGoodsList(config) {
                 requestEnd = true;
             }
             currentPage ++;
+           
         }
     });
 }
 //上拉加载更多
 $(window).on('scroll',function(){
     if($(document).scrollTop()+$(window).height()>=$(document).height()){
+         console.log(currentPage);
         getGoodsList(config);
     }
 });
