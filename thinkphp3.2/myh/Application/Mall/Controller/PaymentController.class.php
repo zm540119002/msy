@@ -37,7 +37,7 @@ class PaymentController extends AuthUserController {
                         'gbd.order_id' => $orderId,
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
-                    session('returnUrl') && $payInfo['success_back'] = session('returnUrl').
+                    session('returnUrl') && $payInfo['success_back'] = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html')).
                         '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
                 }
                 Pay::wxPay($payInfo);
