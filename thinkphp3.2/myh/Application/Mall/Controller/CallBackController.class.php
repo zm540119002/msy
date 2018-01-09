@@ -5,8 +5,7 @@ use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
 class CallBackController extends Controller{
     //支付回调
-    public function notifyUrl()
-    {
+    public function notifyUrl(){
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
@@ -33,8 +32,7 @@ class CallBackController extends Controller{
     }
 
     //支付完成，调用不同的支付的回调处理
-    private function callBack($data, $payment_type, $order_type)
-    {
+    private function callBack($data, $payment_type, $order_type){
         if ($payment_type == 'weixin') {
             $this->weixinBack($data, $order_type);
         }
@@ -47,8 +45,7 @@ class CallBackController extends Controller{
     }
 
     //微信支付回调处理
-    private function weixinBack($data, $order_type)
-    {
+    private function weixinBack($data, $order_type){
         $data_sign = $data['sign'];
         //sign不参与签名算法
         unset($data['sign']);
@@ -78,8 +75,7 @@ class CallBackController extends Controller{
     }
 
     //银联支付回调处理
-    private function unionpayBack($data, $order_type)
-    {
+    private function unionpayBack($data, $order_type){
         //计算得出通知验证结果
         $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($_POST);
@@ -105,8 +101,7 @@ class CallBackController extends Controller{
     }
 
     //支付宝支付回调处理
-    private function alipayMobileBack($data, $order_type)
-    {
+    private function alipayMobileBack($data, $order_type){
         //计算得出通知验证结果
         $alipayNotify = new AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $alipayNotify->verifyNotify();
@@ -131,8 +126,7 @@ class CallBackController extends Controller{
     /**充值支付回调
      * @param $parameter
      */
-    private function rechargeHandle($parameter)
-    {
+    private function rechargeHandle($parameter){
         $modelWalletDetail = D('WalletDetail');
         $where = array(
             'wd.sn' => $parameter['order_sn'],
@@ -194,9 +188,8 @@ class CallBackController extends Controller{
      * @param $data
      * 普通订单支付回调
      */
-    private function orderHandle($data)
-    {
-        $dataOrderSn = $data['out_trade_no'];
+    private function orderHandle($data){
+        $orderSn = $data['out_trade_no'];
         $totalFee = $data['total_fee'];
         $modelOrder = D('Order');
         $modelOrderDetail = D('OrderDetail');
@@ -204,15 +197,14 @@ class CallBackController extends Controller{
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
         $where = array(
-            'sn' => $dataOrderSn,
+            'sn' => $orderSn,
         );
         $orderInfo = $modelOrder->selectOrder($where);
         $orderInfo = $orderInfo[0];
-        $user_id = $orderInfo['user_id'];
         if ($orderInfo['logistics_status'] != 1) {//判定订单状态，如已处理过，直接返回true
             if ($orderInfo['actually_amount'] * 100 != $totalFee) {//校验返回的订单金额是否与商户侧的订单金额一致
                 //返回状态给微信服务器
-                $this->errorReturn($dataOrderSn, '回调的金额和订单的金额不符，终止购买');
+                $this->errorReturn($orderSn, '回调的金额和订单的金额不符，终止购买');
             } else {
                 $modelOrder->startTrans();
                 //更新订单状态
@@ -223,14 +215,14 @@ class CallBackController extends Controller{
                 $_POST['payment_time'] = $data['time_end'];
                 $_POST['orderId'] = $orderInfo['id'];
                 $where = array(
-                    'user_id' => $user_id,
-                    'sn' => $dataOrderSn,
+                    'user_id' => $orderInfo['user_id'],
+                    'sn' => $orderSn,
                 );
                 $returnData = $modelOrder->saveOrder($where);
                 if (!$returnData['id']) {
                     $modelOrder->rollback();
                     //返回状态给微信服务器
-                    $this->errorReturn($dataOrderSn, $modelOrderDetail->getLastSql());
+                    $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
                 }
                 //更新代金券，已使用
                 if ($orderInfo['coupons_id'] && $orderInfo['coupons_pay'] > 0) {
@@ -238,20 +230,20 @@ class CallBackController extends Controller{
                     $_POST['status'] = 1;
                     $_POST['couponsId'] = $orderInfo['coupons_id'];
                     $where = array(
-                        'user_id' => $user_id,
+                        'user_id' => $orderInfo['user_id'],
                     );
                     $res = $modelCoupons->saveCouponsReceive($where);
                     if ($res['status'] == 0) {
                         $modelOrder->rollback();
                         //返回状态给微信服务器
-                        $this->errorReturn($dataOrderSn, $modelOrderDetail->getLastSql());
+                        $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
                     }
                 }
                 //更新账户
                 if ($orderInfo['wallet_pay'] > 0) {
                     //钱包信息
                     $where = array(
-                        'w.user_id' => $user_id,
+                        'w.user_id' => $orderInfo['user_id'],
                     );
                     $walletInfo = $modelWallet->selectWallet($where);
                     $walletInfo = $walletInfo[0];
@@ -260,18 +252,18 @@ class CallBackController extends Controller{
                         $_POST = [];
                         $_POST['amount'] = $walletInfo['amount'] - $orderInfo['wallet_pay'];
                         $where = array(
-                            'user_id' => $user_id,
+                            'user_id' => $orderInfo['user_id'],
                         );
                         $res = $modelWallet->saveWallet($where);
                     }
                     if ($res['status'] == 0) {
                         $modelWallet->rollback();
                         //返回状态给微信服务器
-                        $this->errorReturn($dataOrderSn, $modelOrderDetail->getLastSql());
+                        $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
                     }
                     //增加账户记录
                     $_POST = [];
-                    $_POST['user_id'] = $user_id;
+                    $_POST['user_id'] = $orderInfo['user_id'];
                     $_POST['amount'] = $orderInfo['wallet_pay'];
                     $_POST['type'] = 2;
                     $_POST['create_time'] = time();
@@ -279,12 +271,12 @@ class CallBackController extends Controller{
                     if ($res['status'] == 0) {
                         $modelWallet->rollback();
                         //返回状态给微信服务器
-                        $this->errorReturn($dataOrderSn, $modelOrderDetail->getLastSql());
+                        $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
                     }
                 }
                 $modelOrder->commit();//提交事务
                 //返回状态给微信服务器
-                $this->successReturn($dataOrderSn);
+                $this->successReturn($orderSn);
             }
         }
     }

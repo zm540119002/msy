@@ -11,9 +11,7 @@ class InoutController extends Controller {
         $fileName = $expTitle.date('_YmdHis');//or $xlsTitle 文件名称可根据自己情况设定
         $cellNum = count($expCellName);
         $dataNum = count($expTableData);
-
         vendor("PHPExcel.PHPExcel");
-            
         $objPHPExcel = new \PHPExcel();
         $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
 
@@ -28,7 +26,6 @@ class InoutController extends Controller {
                 $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j].($i+3), $expTableData[$i][$expCellName[$j][0]]);
             }
         }
-
         header('pragma:public');
         header('Content-type:application/vnd.ms-excel;charset=utf-8;name="'.$xlsTitle.'.xls"');
         header("Content-Disposition:attachment;filename=$fileName.xls");//attachment新窗口打印inline本窗口打印
@@ -42,7 +39,6 @@ class InoutController extends Controller {
      * 导出Excel
      */
     function expUser(){//导出Excel
-
         $xlsName  = "comment";
         $xlsCell  = array(
         array('id','账号序列'),

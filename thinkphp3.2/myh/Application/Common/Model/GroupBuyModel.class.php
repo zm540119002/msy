@@ -99,4 +99,44 @@ class GroupBuyModel extends Model {
             ->select();
         return $list?:[];
     }
+
+    //加入团购表
+    public function joinGroupBuy($goods,$uid){
+        //插入团购记录
+        if(isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId'])){
+            $groupBuyId = $_GET['groupBuyId'];
+        }else{
+            $modelGroupBuy = D('GroupBuy');
+            $_POST = [];
+            $_POST['goods_id'] = $goods['foreign_id'];
+            $_POST['user_id'] = $uid;
+            $_POST['create_time'] = time();
+            $_POST['overdue_time'] = strtotime('+3 day');
+            $_POST['sn'] = generateSN();
+            $modelGroupBuy->startTrans();//开启事务
+            $res = $modelGroupBuy->addGroupBuy();
+            $groupBuyId = $res['id'];
+            if(!$groupBuyId){
+                $modelGroupBuy->rollback();//回滚事务
+                $this->ajaxReturn(errorMsg('发起团购失败'));
+            }
+        }
+
+        $modelGroupBuyDetail = D('GroupBuyDetail');
+        $_POST = [];
+        $_POST['goods_id'] = $goods['foreign_id'];
+        $_POST['num'] = $goods['num'];
+        $_POST['price'] = $goods['price'];
+        $_POST['user_id'] =$uid;
+        $_POST['order_id'] = $goods['order_id'];
+        $_POST['group_buy_id'] = $groupBuyId;
+        $res = $modelGroupBuyDetail->addGroupBuyDetail();
+        $groupBuyDetailId = $res['id'];
+        if(!$groupBuyDetailId){
+            $modelGroupBuy->rollback();//回滚事务
+            $this->ajaxReturn(errorMsg('发起团购失败'));
+        }
+    }
+
+
 }

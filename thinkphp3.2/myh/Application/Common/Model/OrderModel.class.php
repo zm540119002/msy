@@ -103,21 +103,26 @@ class OrderModel extends Model {
     }
     
     //检查订单状态
-    public function checkOrderStatus($orderInfo){
-        if(empty($orderInfo)){
-            $res = array(
-                'status' => 0,
-                'message' => '订单信息有误'
-            );
-        }elseif($orderInfo['logistics_status'] != '1'){
-            $res = array(
-                'status' => 0,
-                'message' => '订单已支付或已取消',
-            );
-        }else{
+    public function checkOrderLogisticsStatus($LogisticsStatus){
+        if($LogisticsStatus == 1){
             $res = array(
                 'status' => 1,
                 'message' => '待支付',
+            );
+        }elseif($LogisticsStatus == 2 || $LogisticsStatus == 3 || $LogisticsStatus == 4){
+            $res = array(
+                'status' => 0,
+                'message' => '订单已支付',
+            );
+        }elseif($LogisticsStatus == 5){
+            $res = array(
+                'status' => 0,
+                'message' => '订单已取消',
+            );
+        }else{
+            $res = array(
+                'status' => 0,
+                'message' => '无效订单',
             );
         }
         return $res;

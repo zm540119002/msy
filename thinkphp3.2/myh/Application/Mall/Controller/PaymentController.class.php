@@ -18,26 +18,26 @@ class PaymentController extends AuthUserController {
                 $orderInfo = $orderInfo[0];
                 $this->orderInfo = $orderInfo;
                 //检查订单状态
-                $result = $modelOrder->checkOrderStatus($orderInfo);
+                $result = $modelOrder->checkOrderLogisticsStatus($orderInfo['logistics_status']);
                 if($result['status'] == 0){
                     $this->error($result['message']);
                 }
                 $payInfo = array(
                     'sn'=>$orderInfo['sn'],
                     'actually_amount'=>$orderInfo['actually_amount'],
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
+                    'success_back' => U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
                         ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
                 );
-                $backUrl = array(
-                    'cancel_back' => U('payCancel'),
-                    'fail_back' => U('payFail'),
-                );
-                if($orderInfo['type']==0){
-                    $backUrl['success_back'] = U('payComplete');
-                }elseif($orderInfo['type']==1){
-                    $backUrl['success_back'] = session('returnUrl')?:U('payComplete');
+                if($orderInfo['type']==1){//团购订单
+                    $groupBuy = D('GroupBuy')->selectGroupBuy($where);
+                    session('returnUrl') && $payInfo['success_back'] = session('returnUrl').
+                        '/groupBuyId/'.$groupBuy[0]['id'].'/shareType/groupBuy';
                 }
-                Pay::wxPay($payInfo,$backUrl);
+                print_r($orderInfo);exit;
+                Pay::wxPay($payInfo);
             }
         }
     }
@@ -55,10 +55,12 @@ class PaymentController extends AuthUserController {
                 $walletDetailInfo = $modelWalletDetail->selectWalletDetail($where);
                 $walletDetailInfo = $walletDetailInfo[0];
                 $this->amount = $walletDetailInfo['amount'];
-
                 $payInfo = array(
                     'sn'=>$walletDetailInfo['sn'],
                     'actually_amount'=>$this->amount,
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
+                    'success_back' => U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'].'/weixin.recharge',
                 );
                 Pay::wxPay($payInfo);

@@ -19,7 +19,7 @@
                     <if condition="$orderInfo.logistics_status eq 1">
                         <p>状态：<span class="pay_tag">待支付</span></p>
                     <elseif condition="$orderInfo.logistics_status eq 2"/>
-                        <if condition="$orderInfo.deliver_status eq 0 or $orderInfo.deliver_status =''">
+                        <if condition="$orderInfo.deliver_status eq 0 ">
                             <p>状态：<span class="pay_tag">备货中</span></p>
                             <elseif condition="$orderInfo.deliver_status eq 1"/>
                             <p>状态：<span class="pay_tag pay_finish">已发货</span></p>
