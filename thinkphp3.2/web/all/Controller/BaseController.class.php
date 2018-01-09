@@ -12,6 +12,7 @@ class BaseController extends CommonController{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',I('get.returnUrl','','string')?:I('post.returnUrl','','string'));
+        echo  session('returnUrl');exit;
     }
 
     //返回图片临时相对路径
