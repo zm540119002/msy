@@ -225,8 +225,8 @@ class CallBackController extends Controller{
             $_POST = [];
             $_POST['logistics_status'] = 2;
             $_POST['payment_code'] = 0;
-            $_POST['pay_sn'] = $parameter['transaction_id'];
-            $_POST['payment_time'] = $parameter['time_end'];
+            $_POST['pay_sn'] = $parameter['pay_sn'];
+            $_POST['payment_time'] = $parameter['payment_time'];
             $_POST['orderId'] = $orderInfo['id'];
             $where = array(
                 'user_id' => $orderInfo['user_id'],
