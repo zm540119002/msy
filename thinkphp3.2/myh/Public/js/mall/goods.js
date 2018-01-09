@@ -56,7 +56,7 @@ window.onscroll=function(){
     var height=document.body.clientHeight;
     var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
     var windowH=window.innerHeight;
-        if(scrollTop+windowH>height-30){
+        if(scrollTop+windowH>=height){
             if(!isMore){
                 isMore=true;
                 getGoodsList(config);
