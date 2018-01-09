@@ -38,7 +38,7 @@ class PaymentController extends AuthUserController {
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
                     if (strpos(session('returnUrl'), 'groupBuyId') == true) {
-                        print_r(session('returnUrl'));
+                        print_r(session('returnUrl'));exit;
                         session('returnUrl') && $payInfo['success_back'] = session('returnUrl').
                             '/shareType/groupBuy';
                     }else{
@@ -47,7 +47,7 @@ class PaymentController extends AuthUserController {
                     }
                 }
 
-                print_r($payInfo);exit;
+
                 Pay::wxPay($payInfo);
             }
         }
