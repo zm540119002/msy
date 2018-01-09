@@ -1916,7 +1916,7 @@ background-size:contain;
     -webkit-flex: 1 1 0;
     flex: 1 1 0;
 }
-.page-bd .status .active{color:#0ccaf7;}
+.page-bd .status .active{color:#00993e;}
 .weui-flex-item span{display:block;height:0.6rem;}
 .weui-flex-item .base_info{background:#fff url(../../img/purchase/base_info.png) no-repeat center 0;background-size:40px auto;}
 .weui-flex-item .base_s_info{background:#fff url(../../img/purchase/base_s_info.png) no-repeat center 0;background-size:40px auto;}
@@ -1928,13 +1928,40 @@ background-size:contain;
 .weui-flex-item .certify_s_info{background:#fff url(../../img/purchase/certify_s_info.png) no-repeat center 0;background-size:40px auto;}
 
 .weui-flex-item em{position: absolute;
-    background: url(../../img/purchase/sign-ico.png) repeat-x;
+    background: url(../../img/common/sign-ico.png) repeat-x;
     left: 76%;
     height: 2px;
     display: block;
     width: 48%;
     top: 14px;
     z-index: 999;
+}
+.weui-flex-item .city_inquiries{background:#fff url(../../img/common/city_inquiries.png) no-repeat center 0;background-size:40px auto;}
+.weui-flex-item.active .city_inquiries{background:#fff url(../../img/common/city_active_inquiries.png) no-repeat center 0;background-size:40px auto;}
+.weui-flex-item .register_info{background:#fff url(../../img/common/register_info.png) no-repeat center 0;background-size:40px auto;}
+.weui-flex-item.active .register_info{background:#fff url(../../img/common/register_active_info.png) no-repeat center 0;background-size:40px auto;}
+.weui-flex-item .seat_deposit{background:#fff url(../../img/common/seat_deposit.png) no-repeat center 0;background-size:40px auto;}
+.weui-flex-item.active .seat_deposit{background:#fff url(../../img/common/seat_active_deposit.png) no-repeat center 0;background-size:40px auto;}
+.weui-flex-item .qualify_money{background:#fff url(../../img/common/qualify_money.png) no-repeat center 0;background-size:40px auto;}
+.weui-flex-item.active .qualify_money{background:#fff url(../../img/common/qualify_active_money.png) no-repeat center 0;background-size:40px auto;}
+.city_search_module p{
+    padding:0.20rem 0 0 0.12rem;
+}
+.city_search_module .register_data_item{
+    padding:0.20rem 0.12rem 0 0.12rem;
+}
+.register_data_item input{
+    border: 1px solid #d9d9d9;
+    padding:12px 0;
+    display: block;
+    width:100%;
+    margin:0 0 0.25rem 0;
+    text-indent: 8px;
+    border-radius:0.05rem;
+}
+.explain_intro{
+    color:#9e9f9f;
+    margin:0 0 0 0.12rem;
 }
 /*美悦会详情页*/
 .goods_detail_banner img,.header_banner img{
