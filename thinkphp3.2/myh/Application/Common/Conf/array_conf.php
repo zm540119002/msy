@@ -29,6 +29,7 @@ return array(
         array('QR_codes'   => '我的二维码',),//10
         array('forward'   => '一键分享转发',),//11
         array('forward_to_friends'   => '将本页转发微信好友',),//12
+        array('goto_gift_purchase'   => '进入礼品采购',),//13
     ),
     //商品购买类型
     'BUY_TYPE'=>array(

@@ -21,19 +21,19 @@
     <nav class="mall_function_menu navigation_module f24">
         <a href="">
             <span class="mall_home"></span>
-            商城首页
+            礼品采购
         </a>
         <a href="{:U('groupBuyIndex')}">
             <span class="wt_purchase"></span>
-            微团购
+            城市合伙人
         </a>
         <a href="{:U('Referrer/index')}">
             <span class="twitter_share"></span>
-            推客分享
+            实体店代理
         </a>
         <a href="{:U('Cart/index')}">
             <span class="buy_cart"></span>
-            购物车
+            微商代理
         </a>
         <a href="{:U('PersonalCenter/index')}">
             <span class="person_center"></span>
@@ -41,29 +41,17 @@
         </a>
     </nav>
     <section class="f24">
-        <ul class="business_product_module goodsListContent">
-            <volist name="goodsList" id="vo">
-                <include file="goodsListTpl" />
-            </volist>
-        </ul>
+        <ul class="business_product_module instructionContent"></ul>
     </section>
     <!-- 美悦会商城首页-end -->
 </block>
 <block name="footer">
-    <include file="Cart/footerCartSingle" />
+    <include file="Cart/footerCartMenu" />
 </block>
 <block name="script">
     <script type="text/javascript" src="PUBLIC_JS/common/swipe.js"></script>
-    <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
-        var config = {
-            pageSize:4,
-            buyType:1,
-            templateType:'photo'
-        };
         $(function(){
-            //初始化
-            getGoodsList(config);
              //滑动轮播
             var elem = document.getElementById('slider');
                 swipe(elem);
