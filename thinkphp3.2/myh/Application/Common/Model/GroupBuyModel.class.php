@@ -101,7 +101,7 @@ class GroupBuyModel extends Model {
     }
 
     //加入团购表
-    public function joinGroupBuy($goods,$uid){
+    public function joinGroupBuy($goods,$uid,$orderId){
         //插入团购记录
         if(isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId'])){
             $groupBuyId = $_GET['groupBuyId'];
@@ -128,7 +128,7 @@ class GroupBuyModel extends Model {
         $_POST['num'] = $goods['num'];
         $_POST['price'] = $goods['price'];
         $_POST['user_id'] =$uid;
-        $_POST['order_id'] = $goods['order_id'];
+        $_POST['order_id'] = $orderId;
         $_POST['group_buy_id'] = $groupBuyId;
         $res = $modelGroupBuyDetail->addGroupBuyDetail();
         $groupBuyDetailId = $res['id'];

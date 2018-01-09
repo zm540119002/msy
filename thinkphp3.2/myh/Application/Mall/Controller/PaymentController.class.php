@@ -33,8 +33,8 @@ class PaymentController extends AuthUserController {
                 );
                 if($orderInfo['type']==1){//团购订单
                     $where = array(
-                        'grb.user_id' => $this->user['id'],
-                        'grb.order_id' => $orderId,
+                        'gbd.user_id' => $this->user['id'],
+                        'gbd.order_id' => $orderId,
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
                     session('returnUrl') && $payInfo['success_back'] = session('returnUrl').

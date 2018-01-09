@@ -217,7 +217,7 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1){//团购
-            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id']);
+            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId);
         }
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
