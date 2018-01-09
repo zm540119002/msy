@@ -44,6 +44,7 @@ class PaymentController extends AuthUserController {
                         session('returnUrl') && $payInfo['success_back'] = session('returnUrl').
                             '/shareType/groupBuy';
                     }else{
+                        print_r(session('returnUrl'));exit;
                         session('returnUrl') && $payInfo['success_back'] = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html')).
                             '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
                     }
