@@ -88,20 +88,13 @@
                 templateType:'photo'
             };
             getGoodsList(config);
-            //var isMore=false;
-        });
-        window.onscroll=function(){
-        var height=document.body.clientHeight;
-        var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
-        var windowH=window.innerHeight;
-            if(scrollTop+windowH>=height){
-                // if(!isMore){
-                //     isMore=true;
+            $(window).on('scroll',function(){
+                if($(document).scrollTop()+$(window).height()>=$(document).height()){
+                    console.log('滚动开始');
                     getGoodsList(config);
-            // }
-
-        }
-}
+                }
+            });
+        });
 
     </script>
 </block>
