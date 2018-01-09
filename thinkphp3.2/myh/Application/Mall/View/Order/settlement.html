@@ -25,7 +25,7 @@
                 <span>可抵扣金额：</span>
                 <span class="voucherListValue">-￥<price>0</price></span>
             </div>
-            <div class="purchase_v_item">使用采购充值账户自动扣除
+            <div class="purchase_v_item">使用充值账户自动扣除
                 <span>(余额￥<price class="purchase_balance">{$wallet.amount}</price>)</span>
             </div>
             <div class="purchase_v_item purchase_v_discount">
@@ -108,7 +108,7 @@
                             if(data.wxPay){
                                 location.href = MODULE + '/Payment/orderPayment/orderId/' + postData.orderId;
                             }else{
-                                location.href = CONTROLLER + '/payComplete';
+                                location.href = MODULE + '/Payment/payComplete';
                             }
                         }
                     }

@@ -5,7 +5,7 @@
 function jsApiCall(data){
     WeixinJSBridge.invoke('getBrandWCPayRequest',data,function(res){
         if(res.err_msg == 'get_brand_wcpay_request:ok'){
-            location.href = MODULE + '/recharge/payComplete';
+            location.href = MODULE + '/Payment/payComplete';
         }else if(res.err_msg == 'get_brand_wcpay_request:cancel'){
             dialog.error('用户取消支付!');
         }else{

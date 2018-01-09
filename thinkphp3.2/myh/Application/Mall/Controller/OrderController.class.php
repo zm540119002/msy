@@ -126,7 +126,7 @@ class OrderController extends AuthUserController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        //采购商品
+        //提交的商品
         $goodsList = $_POST['goodsList'];
         if(!is_array($goodsList) || empty($goodsList)){
             $this->ajaxReturn(errorMsg('未提交数据'));
@@ -145,10 +145,9 @@ class OrderController extends AuthUserController {
                 $amount += number_format($goods['num'] * $goods['price'],2,'.','');
             }
         }
-        //生成物流
-        $modelLogistics = D('Logistics');
         //物流编号
         $logisticsSN = generateSN();
+        $modelLogistics = D('Logistics');
         //开启事务
         $modelLogistics->startTrans();
         $_POST = [];
@@ -233,6 +232,9 @@ class OrderController extends AuthUserController {
             'user_id' => $this->user['id'],
         );
         $_POST['logistics_status'] = 1;
+        if(isset($_GET['orderId']) && intval($_GET['orderId'])){
+            $_POST['id'] = I('get.orderId',0,'int');
+        }
         $res = $modelOrder->saveOrder($where);
         if(!$res['id']){
             $this->ajaxReturn(errorMsg('失败'));
@@ -243,8 +245,6 @@ class OrderController extends AuthUserController {
     //订单-结算
     public function settlement(){
         $modelOrder = D('Order');
-        $modelOrderDetail = D('OrderDetail');
-        $modelGoods = D('Goods');
         $modelCouponsReceive = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
@@ -257,25 +257,31 @@ class OrderController extends AuthUserController {
             }
             $where = array(
                 'o.id' => $orderId,
+                'o.user_id' => $this->user['id'],
             );
             $orderInfo = $modelOrder->selectOrder($where);
             $orderInfo = $orderInfo[0];
-            if(!$orderInfo['id'] || $orderInfo['amount'] <= 0){
-                $this->ajaxReturn(errorMsg('订单号：'.$orderInfo['sn'].'信息有误，请检查！'));
+            if(!$orderInfo['id']){
+                $this->ajaxReturn(errorMsg('订单号：'.$orderInfo['sn'].'不存在！'));
             }
-            $result = $modelOrder -> checkOrderStatus($orderInfo);
+            if($orderInfo['amount'] <= 0){
+                $this->ajaxReturn(errorMsg('订单号：'.$orderInfo['sn'].'支付金额有误，请检查！'));
+            }
+            $result = $modelOrder -> checkOrderLogisticsStatus($orderInfo['logistics_status']);
             if($result['status'] == 0){
                 $this ->ajaxReturn(errorMsg($result['message']));
             }
-            //订单详情
-            $where = array(
-                'order_sn' => $orderInfo['sn'],
-            );
-            $orderDetail = $modelOrderDetail -> selectOrderDetail($where);
             //代金券信息
             if(isset($_POST['couponsId']) && intval($_POST['couponsId'])){
                 $couponsId = I('post.couponsId',0,'int');
+                $where = array(
+                    'cr.id' => $couponsId,
+                    'cr.user_id' => $this->user['id'],
+                );
+                $couponsInfo = $modelCouponsReceive->selectCouponsReceive($where);
+                $couponsInfo = $couponsInfo[0];
             }
+<<<<<<< HEAD
             $where = array(
                 'cr.id' => $couponsId,
                 'cr.user_id' => $this->user['id'],
@@ -289,23 +295,23 @@ class OrderController extends AuthUserController {
             $walletInfo = $modelWallet->selectWallet($where);
             $walletInfo = $walletInfo[0];
 //            $this -> walletInfo = $walletInfo;
+=======
+>>>>>>> ac1474f90442ebeebe2bacbda4938073e6a4fc99
             $modelOrder->startTrans();//开启事务
-            //代金券支付
             $unpaid = $orderInfo['amount'];
-            if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
+            if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){//代金券支付
                 if($unpaid<=$couponsInfo['amount']){//代金券足够支付订单
-                    //更新订单(状态还是已支付)
+                    //更新订单状态(已支付)
                     //代金券支付：$unpaid
                     //账户余额支付：0:
                     //实际支付：0
                     $_POST = [];
                     $_POST['logistics_status'] = 2;
                     $_POST['coupons_pay'] = $unpaid;
-                    $_POST['orderId'] = $orderId;
                     $_POST['coupons_id'] = $couponsId;
+                    $_POST['id'] = $orderId;
                     $where = array(
                         'user_id' =>  $this->user['id'],
-                        'id' => $orderId,
                     );
                     $res = $modelOrder->saveOrder($where);
                     if(!$res['id']){
@@ -323,13 +329,13 @@ class OrderController extends AuthUserController {
                     $_POST['couponsId'] = $couponsId;
                     $where = array(
                         'user_id' => $this->user['id'],
-                        'id' => $couponsId,
                     );
                     $res = $modelCouponsReceive->saveCouponsReceive($where);
                     if(!$res['id']){
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+<<<<<<< HEAD
                     //减库存
                     $res = $modelGoods -> decGoodsNum($orderDetail);
 
@@ -337,17 +343,31 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+=======
+>>>>>>> ac1474f90442ebeebe2bacbda4938073e6a4fc99
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
                     $unpaid -= $couponsInfo['amount'];
                 }
             }
+<<<<<<< HEAD
             //账户余额支付
             $accountBalance = $walletInfo['amount'];//$walletInfo['amount'];
             if($accountBalance>=0){
                 if($unpaid<=$accountBalance){//余额足够支付订单
                     //更新订单(状态还是未支付)
+=======
+            //钱包信息
+            $where = array(
+                'w.user_id' =>  $this->user['id'],
+            );
+            $walletInfo = $modelWallet->selectWallet($where);
+            $walletInfo = $walletInfo[0];
+            if($walletInfo['amount'] && $walletInfo['amount']>0){//账户余额支付
+                if($unpaid<=$walletInfo['amount']){//余额足够支付订单
+                    //更新订单状态(已支付)
+>>>>>>> ac1474f90442ebeebe2bacbda4938073e6a4fc99
                     //代金券支付：$couponsInfo['amount']
                     //账户余额支付：$unpaid:
                     //实际支付：0
@@ -358,10 +378,9 @@ class OrderController extends AuthUserController {
                     }
                     $_POST['logistics_status'] = 2;
                     $_POST['wallet_pay'] = $unpaid;
-                    $_POST['orderId'] = $orderId;
+                    $_POST['id'] = $orderId;
                     $where = array(
                         'user_id' =>  $this->user['id'],
-                        'id' => $orderId,
                     );
                     $res = $modelOrder->saveOrder($where);
                     if(!$res['id']){
@@ -372,8 +391,7 @@ class OrderController extends AuthUserController {
                     if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
                         $_POST = [];
                         $_POST['status'] = 1;
-                        $_POST['couponsId'] = $couponsId;
-
+                        $_POST['coupons_id'] = $couponsId;
                         $where = array(
                             'user_id' =>  $this->user['id'],
                         );
@@ -383,9 +401,9 @@ class OrderController extends AuthUserController {
                             $this->ajaxReturn(errorMsg($res));
                         }
                     }
-                    //更新账户，$accountBalance-$unpaid
+                    //更新余额
                     $_POST = [];
-                    $_POST['amount'] = $accountBalance - $unpaid;
+                    $_POST['amount'] = $walletInfo['amount'] - $unpaid;
                     $where = array(
                         'user_id' =>  $this->user['id'],
                     );
@@ -394,7 +412,7 @@ class OrderController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-                    //增加账户记录
+                    //新增账户余额明细
                     $_POST = [];
                     $_POST['user_id'] = $this->user['id'];
                     $_POST['amount'] = $unpaid;
@@ -408,16 +426,12 @@ class OrderController extends AuthUserController {
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
-                    $unpaid -= $accountBalance;
+                    $unpaid -= $walletInfo['amount'];
                 }
             }
             if($unpaid>0){//转账支付
-                //更新订单(状态还是未支付)
-                //代金券支付：$couponsInfo['amount']
-                //账户余额支付：$accountBalance:
+                //更新订单状态(还是未支付，去支付回调更新为支付状态)
                 //实际支付：$unpaid
-                //更新代金券，已使用
-                //更新账户，0
                 $_POST = [];
                 if($couponsInfo['id'] && $couponsInfo['amount'] >= 0){
                     $_POST['coupons_pay'] = $couponsInfo['amount'];
@@ -425,17 +439,16 @@ class OrderController extends AuthUserController {
                 }else{
                     $_POST['coupons_pay'] = 0;
                 }
-                $_POST['wallet_pay'] = $accountBalance;
+                $_POST['wallet_pay'] = $walletInfo['amount']?:0;
                 $_POST['actually_amount'] = $unpaid;
-                $_POST['orderId'] = $orderId;
+                $_POST['id'] = $orderId;
                 $where = array(
                     'user_id' =>  $this->user['id'],
-                    'id' => $orderId,
                 );
                 $res = $modelOrder->saveOrder($where);
-                if(!$res['id']){
+                if(!$res['status']){
                     $modelOrder->rollback();
-                    $this->ajaxReturn(errorMsg($res));
+                    $this->ajaxReturn(errorMsg($res['info']));
                 }
                 $modelOrder->commit();//提交事务
                 $this->ajaxReturn(successMsg('成功',array('wxPay'=>true)));

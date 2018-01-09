@@ -18,7 +18,7 @@ class PaymentController extends AuthUserController {
                 $orderInfo = $orderInfo[0];
                 $this->orderInfo = $orderInfo;
                 //检查订单状态
-                $result = $modelOrder->checkOrderStatus($orderInfo);
+                $result = $modelOrder->checkOrderLogisticsStatus($orderInfo['logistics_status']);
                 if($result['status'] == 0){
                     $this->error($result['message']);
                 }
@@ -36,6 +36,7 @@ class PaymentController extends AuthUserController {
                     session('returnUrl') && $payInfo['success_back'] = session('returnUrl').
                         '/groupBuyId/'.$groupBuy[0]['id'].'/shareType/groupBuy';
                 }
+                print_r($orderInfo);exit;
                 Pay::wxPay($payInfo);
             }
         }
