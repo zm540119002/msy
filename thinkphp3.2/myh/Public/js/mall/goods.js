@@ -38,22 +38,29 @@ function getGoodsList(config) {
             if($(data).length<postData.pageSize){
                 requestEnd = true;
             }
+            isMore=false;
             currentPage ++;
            
         }
     });
 }
- var config = {
-            pageSize:4,
-            buyType:2,
-            templateType:'photo'
-        };
-//初始化
-            getGoodsList(config);
 //上拉加载更多
-$(window).on('scroll',function(){
-    if($(document).scrollTop()+$(window).height()>=$(document).height()){
-         console.log('滚动开始');
-        getGoodsList(config);
-    }
-});
+// $(window).on('scroll',function(){
+//     if($(document).scrollTop()+$(window).height()>=$(document).height()){
+//          console.log('滚动开始');
+//         getGoodsList(config);
+//     }
+// });
+var isMore=false;
+window.onscroll=function(){
+    var height=document.body.clientHeight;
+    var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+    var windowH=window.innerHeight;
+        if(scrollTop+windowH>height-30){
+            if(!isMore){
+                isMore=true;
+                getGoodsList(config);
+            }
+
+        }
+}
