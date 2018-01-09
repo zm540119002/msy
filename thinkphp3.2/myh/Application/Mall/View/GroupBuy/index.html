@@ -75,29 +75,30 @@
 <block name="script">
     <script type="text/javascript" src="PUBLIC_JS/mall/goods.js"></script>
     <script type="text/javascript">
-        var config = {
-            pageSize:4,
-            buyType:2,
-            templateType:'photo'
-        };
+       
         $(function(){
             //星星评分等级
             var getFractionValue='{$aveScore}';
             $('.five_star').setStar(getFractionValue);
             countDown('2017/12/21 23:59:59',$(".count_down_box"));
             //初始化
+             var config = {
+                pageSize:4,
+                buyType:2,
+                templateType:'photo'
+            };
             getGoodsList(config);
             //var isMore=false;
         });
         window.onscroll=function(){
-    var height=document.body.clientHeight;
-    var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
-    var windowH=window.innerHeight;
-        if(scrollTop+windowH>=height){
-            // if(!isMore){
-            //     isMore=true;
-                getGoodsList(config);
-           // }
+        var height=document.body.clientHeight;
+        var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+        var windowH=window.innerHeight;
+            if(scrollTop+windowH>=height){
+                // if(!isMore){
+                //     isMore=true;
+                    getGoodsList(config);
+            // }
 
         }
 }
