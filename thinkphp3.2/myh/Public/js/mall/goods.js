@@ -45,7 +45,7 @@ function getGoodsList(config) {
 //上拉加载更多
 $(window).on('scroll',function(){
     if($(document).scrollTop()+$(window).height()>=$(document).height()){
-         console.log(currentPage);
+         console.log('滚动开始');
         getGoodsList(config);
     }
 });
