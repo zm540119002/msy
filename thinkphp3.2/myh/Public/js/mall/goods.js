@@ -26,13 +26,14 @@ function getGoodsList(config) {
         },
         success: function(data){
             $('.loading').hide();
-            console.log(currentPage);
+            
             if(currentPage == 1){
                 
                 $('ul.goodsListContent').append(data);
                 console.log('第一次');
             }else{
                 $('ul.goodsListContent li:last').after(data);
+                console.log('第二次');
             }
             if($(data).length<postData.pageSize){
                 requestEnd = true;
