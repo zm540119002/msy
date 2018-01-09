@@ -87,7 +87,7 @@ class GroupBuyModel extends Model {
         );
         $_field = array(
             'grb.id','grb.sn','grb.user_id','grb.goods_id','grb.tag','grb.need_person','grb.create_time',
-            'grb.status','grb.overdue_time',
+            'grb.status','grb.overdue_time','grb.tag'
         );
         $_join = array(
         );

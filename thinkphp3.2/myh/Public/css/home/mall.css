@@ -2220,7 +2220,7 @@ background-size:contain;
 .weChat_av_home i.partner{
     background-image:url(../../img/home/agent_icon.png);
     background-repeat: no-repeat;
-    background-size:35px 140px;
+    background-size:35px 290px;
 }
 .weChat_av_home a,.weChat_av_home span{
     text-align: center;
@@ -2233,7 +2233,7 @@ background-size:contain;
 .agent_head_bar a i{
     background-image:url(../../img/home/agent_icon.png);
     background-repeat: no-repeat;
-    background-size:35px 140px;
+    background-size:35px 290px;
     width:36px;
     height:36px;
     display: inline-block;
@@ -2253,6 +2253,12 @@ background-size:contain;
 }
 .person_center_item span.see_agent{
     background-position:0 -72px;
+}
+.person_center_item span.my_business{
+    background-position:0 -140px;
+}
+.person_center_item span.see_service{
+    background-position:0 -178px;
 }
 .person_center_item .agent{
     margin:8px 0 0 40px;
@@ -2387,4 +2393,76 @@ background-size:contain;
 .agent_info_list li{
     padding:0.18rem 0;
     border-bottom:1px solid #d9d9d9;
+}
+
+/*礼品采购*/
+.readme_tipc{
+    display: flex;
+    display: -webkit-flex;
+    width:100%;
+    background: #c6a952;
+    color:#fff;
+    margin:0 0 0.15rem 0;
+}
+.readme_tipc .r_t{
+    border-right:1px solid #fff;
+    padding:12px;
+}
+.readme_tipc .r_t span{
+    display: block;
+    text-align: center;
+}
+.readme_tipc .r_t i{
+    background-image:url(../../img/home/agent_icon.png);
+    background-repeat: no-repeat;
+    background-size:35px 290px;
+    width:36px;
+    height:36px;
+    display: block;
+    vertical-align: middle;
+    margin:0 auto;
+}
+.readme_tipc .r_t i.ag{
+    background-position:0 -215px;
+}
+.readme_tipc .r_t i.am{
+    background-position:0 -251px;
+}
+.readme_tipc .r_t .th_r,
+.readme_tipc .r_t .th_p{
+     width:80px;
+     height:28px;
+     line-height:28px;
+     text-align: center;
+     border:1px solid #fff;
+     margin:2px auto 5px;
+     border-radius:5px;
+}
+.agent_list_item,.agent_list_c{
+    display: flex;
+    display: -webkit-flex;
+    width:100%;
+    justify-content: space-between;
+    margin:0 0 0.18rem 0;
+}
+.agent_list_c .a_c{
+    /*flex:1;*/
+}
+.agent_list_c .a_c:first-child{
+    width:75%;
+}
+.agent_list_wrapper{
+   
+}
+.agent_list_wrapper li{
+    border-bottom:1px solid #d9d9d9;
+    padding:0 0.12rem 0.20rem 0.12rem;
+    margin:0 0 0.20rem 0;
+}
+.agent_list_item .add_cart{
+    height:28px;
+    color:#fff;
+    background:#009a3e;
+    padding:0 0.15rem;
+    border-radius:5px;
 }

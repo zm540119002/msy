@@ -183,7 +183,138 @@ class CallBackController extends Controller{
      * @param $parameter
      */
     private function groupBuyHandle($parameter){
-        $this->errorReturn($parameter['order_sn'], 'aa', 'aaa');
+        $orderSn = $parameter['out_trade_no'];
+        $totalFee = $parameter['total_fee'];
+        $modelOrder = D('Order');
+        $modelOrderDetail = D('OrderDetail');
+        $modelCoupons = D('CouponsReceive');
+        $modelWallet = D('Wallet');
+        $modelWalletDetail = D('WalletDetail');
+        $modelGroupBuy = D('GroupBuy');
+        $modelGroupBuyDetail = D('GroupBuyDetail');
+        $where = array(
+            'sn' => $orderSn,
+        );
+        $orderInfo = $modelOrder->selectOrder($where);
+        $orderInfo = $orderInfo[0];
+        if ($orderInfo['logistics_status'] > 1) {
+            $this->successReturn();
+        }
+        if ($orderInfo['actually_amount'] * 100 != $totalFee) {//校验返回的订单金额是否与商户侧的订单金额一致
+            //返回状态给微信服务器
+            $this->errorReturn($orderSn, '回调的金额和订单的金额不符，终止购买');
+        } else {
+            $modelOrder->startTrans();
+            //更新订单状态
+            $_POST = [];
+            $_POST['logistics_status'] = 2;
+            $_POST['payment_code'] = 0;
+            $_POST['pay_sn'] = $parameter['pay_sn'];
+            $_POST['payment_time'] = $parameter['payment_time'];
+            $_POST['orderId'] = $orderInfo['id'];
+            $where = array(
+                'user_id' => $orderInfo['user_id'],
+                'sn' => $orderSn,
+            );
+            $returnData = $modelOrder->saveOrder($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+            }
+            //更新团购表和团购详情表
+            //1.先更新团购详情表
+            $_POST = [];
+            $_POST['pay_status'] = 2;
+            $_POST['pay_time'] = $parameter['payment_time'];
+            $where = [];
+            $where = array(
+                'user_id' => $orderInfo['user_id'],
+                'order_id' => $orderInfo['id'],
+            );
+            $returnData = $modelGroupBuyDetail-> saveGroupBuyDetail($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+            }
+            $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
+
+            //2.查看团购详情表此次团购有几人
+            $where = [];
+            $where = array(
+                'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+                'pay_status' => 2,
+            );
+            $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
+            if($groupBuyNum >= 3){//修改团购表
+                $_POST = [];
+                $_POST['tag'] = 1;
+                $where = [];
+                $where = array(
+                    'id' => $groupBuyDetail[0]['group_buy_id'],
+                );
+                $returnData = $modelGroupBuy-> saveGroupBuy($where);
+                if ($returnData['status'] == 0) {
+                    $modelOrder->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                }
+            }
+            //更新代金券，已使用
+            if ($orderInfo['coupons_id'] && $orderInfo['coupons_pay'] > 0) {
+                $_POST = [];
+                $_POST['status'] = 1;
+                $_POST['couponsId'] = $orderInfo['coupons_id'];
+                $where = array(
+                    'user_id' => $orderInfo['user_id'],
+                );
+                $res = $modelCoupons->saveCouponsReceive($where);
+                if ($res['status'] == 0) {
+                    $modelOrder->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                }
+            }
+            //更新账户
+            if ($orderInfo['wallet_pay'] > 0) {
+                //钱包信息
+                $where = array(
+                    'w.user_id' => $orderInfo['user_id'],
+                );
+                $walletInfo = $modelWallet->selectWallet($where);
+                $walletInfo = $walletInfo[0];
+                if ($walletInfo['amount'] >= $orderInfo['wallet_pay']) {
+                    //更新账户
+                    $_POST = [];
+                    $_POST['amount'] = $walletInfo['amount'] - $orderInfo['wallet_pay'];
+                    $where = array(
+                        'user_id' => $orderInfo['user_id'],
+                    );
+                    $res = $modelWallet->saveWallet($where);
+                }
+                if ($res['status'] == 0) {
+                    $modelWallet->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                }
+                //增加账户记录
+                $_POST = [];
+                $_POST['user_id'] = $orderInfo['user_id'];
+                $_POST['amount'] = $orderInfo['wallet_pay'];
+                $_POST['type'] = 2;
+                $_POST['create_time'] = time();
+                $res = $modelWalletDetail->addWalletDetail();
+                if ($res['status'] == 0) {
+                    $modelWallet->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                }
+            }
+            $modelOrder->commit();//提交事务
+            //返回状态给微信服务器
+            $this->successReturn();
+        }
     }
 
     /**
@@ -193,12 +324,12 @@ class CallBackController extends Controller{
     public function a(){
         $parameter = array(
             'payment_code' => 'weixin',
-            'out_trade_no' =>'20180109100535655410369933972755',//微信回的商家订单号
+            'out_trade_no' =>'20180109143750820555517602839937',//微信回的商家订单号
             'total_fee' => 20000,//支付金额
             'pay_sn' => 111,//微信交易订单
             'payment_time' => 3333//支付时间
         );
-        $this->orderHandle($parameter);
+        $this->groupBuyHandle($parameter);
     }
     private function orderHandle($parameter){
         $orderSn = $parameter['out_trade_no'];
