@@ -7,7 +7,7 @@
     <article class="f24">
         <section >
             <div class="header_banner">
-                <img src="Public/img/common/default/no_pic_1000.jpg" alt="">
+                <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
             </div>
             <div class="business_module_intro bottomLine page-bd">
                 <nav class="sign_nav">
@@ -21,13 +21,15 @@
             </div>
         </section>
     </article>
-
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
 </block>
 <block name="script">
     <script type="text/javascript">
         $(function(){
             $('.weui_btn').on('click',function(){
-                location.href = CONTROLLER + '/authorizeInfo';
+                location.href = CONTROLLER + '/register';
             });
         });
     </script>

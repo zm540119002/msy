@@ -1,38 +1,27 @@
 <?php
 namespace Home\Controller;
 
-use web\all\Cache\CompanyCache;
+use web\all\Cache\PartnerCache;
 use web\all\Controller\AuthUserController;
 
 class PartnerAuthoriseController extends AuthUserController {
-    //机构认证-首页
+    //合伙人认证-首页
     public function index(){
         if(IS_POST){
         }else{
             if($this->company['auth_status'] == 2){//已认证
                 $this->display('authorizeComplete');
             }else{//未认证
+                //购物车配置开启的项
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(14));
                 $this->display();
             }
         }
     }
 
-    //机构认证状态查询
-    public function authStatusSearch(){
-        $modelCompany = D('Company');
-        $where = array(
-            'id'=>$this->company['id']
-        );
-        $res = $modelCompany->where($where)->field('auth_status')->find();
-        if(!$res){
-            $this->ajaxReturn(errorMsg($modelCompany->getError()));
-        }
-        $this->ajaxReturn(successMsg($res));
-    }
-
-    //机构认证-基本资料
-    public function authorizeInfo(){
-        $modelCompany = D('Company');
+    //登记资料
+    public function register(){
+        $modelPartner = D('Partner');
         if(IS_POST){
             $rules = array(
                 array('name','require','美容机构完整名称必须！'),
@@ -44,16 +33,16 @@ class PartnerAuthoriseController extends AuthUserController {
                 $where = array(
                     'user_id' => $this->user['id'],
                 );
-                $res = $modelCompany->saveCompany($where,$rules);
-                CompanyCache::remove($this->user['id']);
+                $res = $modelPartner->savePartner($where,$rules);
+                PartnerCache::remove($this->user['id']);
             }else{//新增
                 $_POST['user_id'] = $this->user['id'];
                 $_POST['create_time'] = time();
-                $res = $modelCompany->addCompany($rules);
+                $res = $modelPartner->addPartner($rules);
             }
             $this->ajaxReturn($res);
         }else{
-            $company = CompanyCache::get($this->user['id']);
+            $company = PartnerCache::get($this->user['id']);
             $this->assign('company',$company);
             $this->display();
         }
@@ -63,11 +52,11 @@ class PartnerAuthoriseController extends AuthUserController {
     public function authorizeData(){
         if(IS_POST){
             if(count($_POST)){
-                $modelCompany = D('Company');
+                $modelPartner = D('Partner');
                 $where = array(
                     'user_id' => $this->user['id'],
                 );
-                $companyInfo = $modelCompany->selectCompany($where);
+                $companyInfo = $modelPartner->selectPartner($where);
                 $companyInfo = $companyInfo[0];
 
                 $sign = false;//更新数据库标志
@@ -84,16 +73,16 @@ class PartnerAuthoriseController extends AuthUserController {
                     }
                 }
                 if($sign){//有修改
-                    $res = $modelCompany->saveCompany($where);
+                    $res = $modelPartner->savePartner($where);
                     if(!$res['status']){
                         $this->ajaxReturn(errorMsg($res['info']));
                     }
-                    CompanyCache::remove($this->user['id']);
+                    PartnerCache::remove($this->user['id']);
                 }
                 $this->ajaxReturn(successMsg('成功'));
             }
         }else{
-            $company = CompanyCache::get($this->user['id']);
+            $company = PartnerCache::get($this->user['id']);
             $this->assign('company',$company);
             $this->display();
         }
@@ -119,16 +108,16 @@ class PartnerAuthoriseController extends AuthUserController {
 
     //机构认证成功
     public function companyAuthSuccess(){
-        $modelCompany = D('Company');
+        $modelPartner = D('Partner');
         $where =array(
             'user_id' => $this->user['id'],
         );
         $_POST['auth_status'] = 2;
-        $res = $modelCompany->saveCompany($where);
+        $res = $modelPartner->savePartner($where);
         if($res['status']==0){
             $this->ajaxReturn(errorMsg($res));
         }
-        CompanyCache::remove($this->user['id']);
+        PartnerCache::remove($this->user['id']);
         $res = array();
         $res['returnUrl'] = session('returnUrl');
         $this->ajaxReturn(successMsg($res));
