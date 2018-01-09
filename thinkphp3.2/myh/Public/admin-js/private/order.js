@@ -65,9 +65,10 @@ $(function(){
 
             },
             yes:function (index) {
-                var url = MODULE+'/Logistics/LogisticsEdit'
+                var url = MODULE+'/Logistics/LogisticsEdit';
                 var postData = $('.remarksLayer #undertake').serializeObject();
-                postData.orderId = _this.parents('tr').data('order_id');
+                postData.orderId = _this.parents('tr').data('orderid');
+                postData.logisticsId = _this.parents('tr').data('logisticsid');
                 $.post(url,postData,function(msg){
                     if(msg.status == 1){
                         location.reload();
@@ -79,5 +80,13 @@ $(function(){
             }
         })
     });
+
+    //导出数据到
+    $('body').on('click','.exportExce',function(){
+        var logistics_status = $('.multiselect  option:selected').val();
+        location.href = MODULE+'/Order/expOrderList/logistics_status/'+logistics_status;
+    });
+
+
    
 });

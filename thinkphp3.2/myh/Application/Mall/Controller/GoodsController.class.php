@@ -101,28 +101,40 @@ class GoodsController extends BaseController {
             }else{
                 $conf = array(2,3,4);
             }
-            if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){
-               $conf = array(9,10,11);
+            if(isset($_GET['shareType'])&&!empty($_GET['shareType'])){
+                $shareType = $_GET['shareType'];
+                if($shareType == 'referrer'){//推客分享
+                    $conf = array(9,10,11);
+                }
+                if($shareType == 'groupBuy'){//团购分享
+                    $conf = array(12);
+                }
             }
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
             //微信分享
             $shareInfo = [];
             //获取当前url
-
             $currentLink = (is_ssl()?'https://':'http://').$this->host.$_SERVER['REQUEST_URI'];
             //分享的内容
             $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
             $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
             //微团产品
-            if(intval($goodsInfo['buy_type']) == 2  ){
 
-            }
             //推客产品
-            if(isset($_GET['footerType'])&&!empty($_GET['footerType'])){
-                $shareInfo['desc'] = $this->goodsInfo['share_intro'];//分享的简介
-                $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/footerType'));
-                $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];//分享url
-                $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
+            if(isset($_GET['shareType'])&&!empty($_GET['shareType'])){
+                if($shareType == 'referrer'){//推客分享
+                    $shareInfo['desc'] = $this->goodsInfo['share_intro'];//分享的简介
+                    $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/shareType'));
+                    $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$user['id'];//分享url
+                    $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
+                }
+                if($shareType == 'groupBuy'){//团购分享
+                    $shareInfo['desc'] = $this->goodsInfo['group_share'];//分享的简介
+                    $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/shareType'));
+                    $shareInfo['shareLink'] = $shLinkBase;//分享url
+                    $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
+                }
+
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             $modelComment = D('Comment');
