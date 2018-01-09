@@ -132,6 +132,7 @@ class OrderController extends AuthUserController {
             $this->ajaxReturn(errorMsg('未提交数据'));
         }
         $orderType = intval($_POST['orderType'])?:0;
+        $groupBuyId = intval($_POST['groupBuyId'])?:0;
         //查询商品信息
         $modelGoods = D('Goods');
         $amount = 0;
@@ -217,7 +218,7 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1){//团购
-            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId);
+            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId);
         }
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
