@@ -88,7 +88,7 @@
                 templateType:'photo'
             };
             // getGoodsList(config);
-            $(window).on('scroll',function(){
+            $(window).on('touchmove',function(){
                 if($(document).scrollTop()+$(window).height()>=$(document).height()){
                     console.log('滚动开始');
                     getGoodsList(config);
