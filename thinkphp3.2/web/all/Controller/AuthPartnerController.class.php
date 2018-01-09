@@ -5,7 +5,7 @@ use web\all\Cache\CompanyCache;
 
 class AuthPartnerController extends AuthUserController{
     protected $company = null;
-    protected $companyRegisterUrl = 'Home/CompanyRegister/registerInfo';//机构登记URL
+    protected $companyRegisterUrl = 'Home/AgentAuthorise/index';//机构登记URL
 
     public function __construct(){
         parent::__construct();
