@@ -1,19 +1,19 @@
 <?php
 namespace web\all\Controller;
 
-use web\all\Cache\CompanyCache;
+use web\all\Cache\PartnerCache;
 
 class AuthPartnerController extends AuthUserController{
-    protected $company = null;
-    protected $companyRegisterUrl = 'Home/AgentAuthorise/index';//机构登记URL
+    protected $partner = null;
+    protected $partnerAuthoriseUrl = 'Home/PartnerAuthorise/index';//机构登记URL
 
     public function __construct(){
         parent::__construct();
-        CompanyCache::remove($this->user['id']);
-        $this->company = CompanyCache::get($this->user['id']);
+        PartnerCache::remove($this->user['id']);
+        $this->partner = PartnerCache::get($this->user['id']);
         //机构登记
-        if(!$this->company || $this->company['auth_status'] == 0){
-            $this->error(C('ERROR_COMPANY_REGISTER_REMIND'),U($this->companyRegisterUrl));
+        if(!$this->partner || $this->partner['auth_status'] == 0){
+            $this->error(C('ERROR_COMPANY_REGISTER_REMIND'),U($this->partnerAuthoriseUrl));
         }
     }
 }

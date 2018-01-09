@@ -1,10 +1,10 @@
 <?php
 namespace Business\Controller;
 
-use web\all\Controller\AuthAgentController;
+use web\all\Controller\AuthPartnerController;
 
-class PartnerController extends AuthAgentController {
-    //礼品采购-首页
+class PartnerController extends AuthPartnerController {
+    //城市合伙人-首页
     public function index(){
         //用户信息
         $this->assign('user',$this->user);

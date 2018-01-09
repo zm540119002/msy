@@ -1,0 +1,34 @@
+<extend name="Public:base" />
+<block name="title">美容机构实名认证</block>
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/purchase/storeSettings.css">
+</block>
+<block name="content">
+    <article class="f24">
+        <section >
+            <div class="header_banner">
+                <img src="Public/img/common/default/no_pic_1000.jpg" alt="">
+            </div>
+            <div class="business_module_intro bottomLine page-bd">
+                <nav class="sign_nav">
+                    <ul id="status " class="status f24 weui-flex">
+                        <li class="weui-flex-item active"><span class="city_inquiries"></span><em></em>城市查询</li>
+                        <li class="weui-flex-item"><span class="register_info"></span><em></em>登记资料</li>
+                        <li class="weui-flex-item"><span class="seat_deposit"></span><em></em>席位订金</li>
+                        <li class="weui-flex-item"><span class="qualify_money"></span>资格完款</li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+    </article>
+
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            $('.weui_btn').on('click',function(){
+                location.href = CONTROLLER + '/authorizeInfo';
+            });
+        });
+    </script>
+</block>

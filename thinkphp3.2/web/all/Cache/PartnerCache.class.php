@@ -12,12 +12,11 @@ class PartnerCache{
         if(!$partner){
             $where = array(
                 'user_id' => $user_id,
-                'type' => 0,
                 'status' => 0,
             );
             $modelPartner = D('Partner');
-            $partner = $modelPartner->selectPartner($where);
-            $partner = $partner[0];
+//            $partner = $modelPartner->selectPartner($where);
+//            $partner = $partner[0];
             S(PartnerCache::$_cache_key.$user_id, $partner, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
         }
         return $partner;
