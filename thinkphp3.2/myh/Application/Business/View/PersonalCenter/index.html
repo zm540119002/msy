@@ -4,38 +4,7 @@
 </block>
 <block name="content">
     <article class="msh_product_picture f24">
-        <section class="purchase_certification">
-            <div class="weChat_avatar_info Mall_person_center">
-                <div>
-                    <if condition="$user.avatar neq '' ">
-                        <img src="UPLOAD_IMG/{$user.id_url}" alt="" class="weChat_avatar" />
-                        <elseif condition="$wxUser.headimgurl neq '' " />
-                        <img src="{$wxUser.headimgurl}" alt="" class="weChat_avatar" />
-                        <else />
-                        <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="" class="weChat_avatar" />
-                    </if>
-                    <div class="weChat_av_r">
-                        <h2 class="person">商城个人中心</h2>
-                        <notempty name="user">
-                            <if condition="$user.nickname neq '' ">
-                                <span>{$user.nickname}</span>
-                                <elseif condition="$wxUser.nickname neq '' "/>
-                                <span>{$wxUser.nickname}</span>
-                                <else /><span>nobody</span>
-                            </if>
-                            <if condition="$user.mobile_phone neq '' "><span>{$user.mobile_phone|substr_replace='****',3,4}</span></if>
-                            <else/>
-                            <a href="{:U('Home/User/login')}">登录</a>
-                            <span class="separation_line">|</span>
-                            <a href="{:U('Home/User/register')}">注册</a>
-                        </notempty>
-                    </div>
-                </div>
-                <div class="weChat_av_home">
-                    <a href="{:U('Mall/Index/index')}"><i></i><span>首页</span></a>
-                </div>
-            </div>
-        </section>
+        <include file="PersonalCenter/loginTpl" />
         <section class="person_center_list bottomLine">
             <div class="person_center_item">
                 <ul class="person_pending buy_cart_pending">
