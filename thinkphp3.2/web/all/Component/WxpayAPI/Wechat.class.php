@@ -1235,6 +1235,7 @@ class Wechat
 		$code = isset($_GET['code'])?$_GET['code']:'';
 		if (!$code) return false;
 		$result = $this->http_get(self::OAUTH_TOKEN_PREFIX.self::OAUTH_TOKEN_URL.'appid='.$this->appid.'&secret='.$this->appsecret.'&code='.$code.'&grant_type=authorization_code');
+		print_r($result);exit;
 		if ($result)
 		{
 			$json = json_decode($result,true);
