@@ -147,7 +147,7 @@ class GoodsController extends BaseController {
         }
     }
 
-    public function a(){
+    public function wxLogin(){
         $options = array(
  			'token'=>'tokenaccesskey', //填写你设定的key
     		'appid'=>'wx9eee7ee8c2ae57dc', //填写高级调用功能的app id
@@ -173,8 +173,7 @@ class GoodsController extends BaseController {
                 return $userInfo;
             }
         }else{
-
-            //开始获取
+            //开始获取code
             if($scope == 'snsapi_userinfo'){
                 $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
                 $_SESSION['wx_redirect'] = $url;
