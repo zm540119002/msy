@@ -175,9 +175,8 @@ class GoodsController extends BaseController {
         }else{
             //开始获取
             if($scope == 'snsapi_userinfo'){
-                $url = $this->host .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'];
+                $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
                 $_SESSION['wx_redirect'] = $url;
-                print_r($url);exit;
             }else{
                 $url = $_SESSION['wx_redirect'];
             }
@@ -186,7 +185,6 @@ class GoodsController extends BaseController {
                 return false;
             }
             $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
-            print_r($oauto_url);exit;
             $this -> redirect($oauto_url);
         }
     }
