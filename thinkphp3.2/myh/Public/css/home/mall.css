@@ -2032,7 +2032,7 @@ background-size:contain;
 }
 .wt_tipc_item dl {
     margin-right: 32px;
-    flex:1;
+    /*flex:1;*/
 }
 .wt_tipc_item dl dt{
     width:42px;
