@@ -166,7 +166,6 @@ class GoodsController extends BaseController {
                 unset($_SESSION['wx_redirect']);
                 return false;
             }
-            print_r($josn);exit;
             $userInfo = $weObj -> getOauthUserinfo($josn);
             if(!$userInfo){
                 return false;
@@ -186,6 +185,7 @@ class GoodsController extends BaseController {
                 return false;
             }
             $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
+            print_r($oauto_url);exit;
             $this -> redirect($oauto_url);
         }
     }
