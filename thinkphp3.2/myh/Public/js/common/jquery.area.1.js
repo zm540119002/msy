@@ -5567,11 +5567,11 @@ var expressArea='',expressCity='',expressCounty='', areaCont, areaList = $("#are
 
 /*初始化省份*/
 function getCity(PROVINCE_CITY_AREA){
-    alert(typeof PROVINCE_CITY_AREA);
+    console.log(PROVINCE_CITY_AREA);
     function intProvince(){
         areaCont = "";
         $.each(PROVINCE_CITY_AREA, function (p_k,p_v) {
-            areaCont += "<li value='" + p_k + "' onClick='selectP(" + p_k + ")'>" + p_v.province_name + "</li>";
+            areaCont += "<li value='" + p_k + "' onClick='selectP(" + p_k + ")'>" + p_v.name + "</li>";
             areaList.html(areaCont);
             $("#areaBox").scrollTop(0);
             $("#backUp").removeAttr("onClick").hide();
@@ -5653,23 +5653,22 @@ function getCity(PROVINCE_CITY_AREA){
         $("#expressArea .area_address").html(expressArea);
         clockArea();
     }
-
-    /*关闭省市区选项*/
-    function clockArea() {
-        $("#areaMask").fadeOut();
-        $("#areaLayer").hide().animate({"bottom": "-100%"});
-        intProvince();
-    }
-
-    $(function() {
-        /*打开省市区选项*/
-        $("#expressArea").click(function() {
-            $("#areaMask").fadeIn();
-            $("#areaLayer").show().animate({"bottom": 0});
-        });
-        /*关闭省市区选项*/
-        $("#areaMask, #closeArea").click(function() {
-            clockArea();
-        });
-    });
 }
+ /*关闭省市区选项*/
+function clockArea() {
+    $("#areaMask").fadeOut();
+    $("#areaLayer").hide().animate({"bottom": "-100%"});
+    intProvince();
+}
+
+$(function() {
+    /*打开省市区选项*/
+    $("#expressArea").click(function() {
+        $("#areaMask").fadeIn();
+        $("#areaLayer").show().animate({"bottom": 0});
+    });
+    /*关闭省市区选项*/
+    $("#areaMask, #closeArea").click(function() {
+        clockArea();
+    });
+});
