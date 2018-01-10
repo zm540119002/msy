@@ -321,16 +321,7 @@ class CallBackController extends Controller{
      * @param $data
      * 普通订单支付回调
      */
-    public function a(){
-        $parameter = array(
-            'payment_code' => 'weixin',
-            'out_trade_no' =>'20180109143750820555517602839937',//微信回的商家订单号
-            'total_fee' => 20000,//支付金额
-            'pay_sn' => 111,//微信交易订单
-            'payment_time' => 3333//支付时间
-        );
-        $this->groupBuyHandle($parameter);
-    }
+  
     private function orderHandle($parameter){
         $orderSn = $parameter['out_trade_no'];
         $totalFee = $parameter['total_fee'];

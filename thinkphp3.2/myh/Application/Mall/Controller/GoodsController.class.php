@@ -119,9 +119,6 @@ class GoodsController extends BaseController {
             //分享的内容
             $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
             $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
-            //微团产品
-
-            //推客产品
             if(isset($_GET['shareType'])&&!empty($_GET['shareType'])){
                 if($shareType == 'referrer'){//推客分享
                     $shareInfo['desc'] = $this->goodsInfo['share_intro'];//分享的简介
@@ -143,6 +140,8 @@ class GoodsController extends BaseController {
             $modelComment = D('Comment');
             $this->aveScore = round($modelComment->avg('score'),1);//平均分数
             $this->userCommentNum =$modelComment->count();//多少用户评价
+            //授权获取微信信息
+            $wxUser = $this->getOAuthWeiXinUserInfo();
             $this ->display();
         }
     }

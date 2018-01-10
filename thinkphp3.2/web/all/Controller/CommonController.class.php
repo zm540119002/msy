@@ -1,6 +1,5 @@
 <?php
 namespace web\all\Controller;
-
 use Think\Controller;
 use web\all\Component\WxpayAPI\Jssdk;
 
