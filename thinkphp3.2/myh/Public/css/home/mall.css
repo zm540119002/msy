@@ -2062,7 +2062,7 @@ background-size:contain;
 }
 .wt_tipc_item dl dd{
     width:65px;
-    text-align:center;
+    /*text-align:center;*/
     /*box-sizing: border-box;*/
 }
 .myh_detail_intro h2{
