@@ -173,6 +173,7 @@ class GoodsController extends BaseController {
                 return $userInfo;
             }
         }else{
+
             //开始获取
             if($scope == 'snsapi_userinfo'){
                 $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
