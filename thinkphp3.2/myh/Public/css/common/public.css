@@ -192,7 +192,14 @@ i{
     z-index: 999;
 }
 .weixin_pay_nav{background: #ff6482;}
-.loading{width:0.55rem;height:0.55rem;margin:1.5rem auto 0;}
+.loading{
+    width:32px;
+    height:32px;
+    position:fixed;
+    left:50%;
+    top:88%;
+    margin:0 0 0 -16px;
+}
 /*登录方式*/
 .loginLayer .layui-m-layercont,
 .registerLayer .layui-m-layercont,
@@ -351,6 +358,11 @@ i{
     font-size:0.20rem;
 }
 .backTop{
+    border:1px solid #d9d9d9;
+    color:#0066cc;
+    border-radius:100%;
+}
+.right_sidebar{
     width:50px;
     height:50px;
     line-height:50px;
@@ -358,10 +370,7 @@ i{
     position:fixed;
     right:10px;
     bottom:54px;
-    border:1px solid #d9d9d9;
-    color:#0066cc;
-    border-radius:100%;
+    display: none;
     z-index:18;
     background:#fff;
-    display: none;
 }

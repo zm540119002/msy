@@ -370,9 +370,9 @@ $('body').on('click','.backTop',function(){
 });
 $(window).on('scroll',function(){
     var scrolltop=$(document).scrollTop();
-    if(scrolltop>=200){
-        $('.backTop').show();
+    if(scrolltop>=300){
+        $('.right_sidebar').show();
     }else{
-        $('.backTop').hide();
+        $('.right_sidebar').hide();
     }
 });
