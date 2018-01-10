@@ -2028,7 +2028,10 @@ background-size:contain;
 }
 .wt_banner img{
     vertical-align: middle;
-    width:100%;
+    width:80%;
+}
+.wt_tipc_item dl {
+    margin-right: 32px;
 }
 .wt_tipc_item dl dt{
     width:42px;
