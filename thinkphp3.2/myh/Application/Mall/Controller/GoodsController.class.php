@@ -142,7 +142,6 @@ class GoodsController extends BaseController {
             $this->userCommentNum =$modelComment->count();//多少用户评价
             //授权获取微信信息
             $wxUser = $this->getOAuthWeiXinUserInfo();
-            print_r($wxUser);exit;
             $this ->display();
         }
     }
