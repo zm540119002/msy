@@ -2032,6 +2032,7 @@ background-size:contain;
 }
 .wt_tipc_item dl {
     margin-right: 32px;
+    flex:1;
 }
 .wt_tipc_item dl dt{
     width:42px;
@@ -2052,6 +2053,12 @@ background-size:contain;
 }
 .wt_tipc_item dt.factory{
     background-position:0 -134px;
+}
+.wt_tipc_item dl dd{
+    width:75px;
+    text-align:center;
+    display: block;
+    box-sizing: border-box;
 }
 .myh_detail_intro h2{
     font-weight:normal;
