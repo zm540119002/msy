@@ -2007,7 +2007,9 @@ background-size:contain;
     justify-content: space-between;
 }
 .wt_f_l{
-    background: #c6a952;
+    background-image:url(../../img/home/wt_f_l.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
     color:#fff;
     width:100%;
     padding:20px;
