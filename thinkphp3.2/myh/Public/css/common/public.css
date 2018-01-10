@@ -358,19 +358,27 @@ i{
     font-size:0.20rem;
 }
 .backTop{
-    border:1px solid #d9d9d9;
-    color:#0066cc;
-    border-radius:100%;
+   
 }
 .right_sidebar{
     width:50px;
-    height:50px;
-    line-height:50px;
+    /*height:50px;
+    line-height:50px;*/
     text-align: center;
     position:fixed;
     right:10px;
     bottom:54px;
     display: none;
     z-index:18;
+}
+.right_sidebar a{
+    display: block;
+    width:50px;
+    height:40px;
+    line-height:40px;
+    margin:0 0 5px 0;
+    /*border:1px solid #d9d9d9;*/
+    color:#0066cc;
+    border-radius:100%;
     background:#fff;
 }
