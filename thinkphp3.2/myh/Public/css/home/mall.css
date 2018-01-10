@@ -2055,10 +2055,10 @@ background-size:contain;
     background-position:0 -134px;
 }
 .wt_tipc_item dl dd{
-    width:68px;
+    width:100%;
     text-align:center;
     display: block;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 }
 .myh_detail_intro h2{
     font-weight:normal;
