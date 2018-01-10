@@ -175,7 +175,7 @@ class GoodsController extends BaseController {
         }else{
             //开始获取
             if($scope == 'snsapi_userinfo'){
-                $url = $this->host . $_SERVER['REQUEST_URI'];
+                $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
                 $_SESSION['wx_redirect'] = $url;
                 print_r($url);exit;
             }else{
