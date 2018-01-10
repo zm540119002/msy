@@ -2056,7 +2056,7 @@ background-size:contain;
 }
 .wt_tipc_item dl dd{
     width:100%;
-    text-align:center;
+    /*text-align:center;*/
     display: block;
     /*box-sizing: border-box;*/
 }
