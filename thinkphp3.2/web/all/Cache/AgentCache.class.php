@@ -11,12 +11,11 @@ class AgentCache{
         if(!$agent){
             $where = array(
                 'user_id' => $user_id,
-                'type' => 0,
                 'status' => 0,
             );
             $modelAgent = D('Agent');
-            $agent = $modelAgent->selectAgent($where);
-            $agent = $agent[0];
+//            $agent = $modelAgent->selectAgent($where);
+//            $agent = $agent[0];
             S(AgentCache::$_cache_key.$user_id, $agent, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
         }
         return $agent;

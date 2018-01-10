@@ -1,9 +1,9 @@
 <?php
 namespace Business\Controller;
 
-use web\all\Controller\AuthUserController;
+use web\all\Controller\AuthAgentController;
 
-class GiftPurchaseController extends AuthUserController {
+class GiftPurchaseController extends AuthAgentController {
     //礼品采购-首页
     public function index(){
         //用户信息
