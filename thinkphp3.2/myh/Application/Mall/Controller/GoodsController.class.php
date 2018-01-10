@@ -162,14 +162,11 @@ class GoodsController extends BaseController {
         $code = isset($_GET['code'])?$_GET['code']:'';
         $scope = 'snsapi_userinfo';
         if($code){
-            echo 1;
             $josn = $weObj -> getOauthAccessToken();
-            print_r($josn);exit;
             if(!$josn){
                 unset($_SESSION['wx_redirect']);
                 return false;
             }
-            print_r($josn);exit;
             $userInfo = $weObj -> getOauthUserinfo($josn);
             if(!$userInfo){
                 return false;
@@ -189,7 +186,6 @@ class GoodsController extends BaseController {
                 return false;
             }
             $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
-            print_r($oauto_url);exit;
             $this -> redirect($oauto_url);
         }
 
