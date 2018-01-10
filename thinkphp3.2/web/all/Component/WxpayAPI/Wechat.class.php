@@ -1232,6 +1232,7 @@ class Wechat
 	 * @return array {access_token,expires_in,refresh_token,openid,scope}
 	 */
 	public function getOauthAccessToken(){
+		echo 'aa';exit;
 		$code = isset($_GET['code'])?$_GET['code']:'';
 		if (!$code) return false;
 		$result = $this->http_get(self::OAUTH_TOKEN_PREFIX.self::OAUTH_TOKEN_URL.'appid='.$this->appid.'&secret='.$this->appsecret.'&code='.$code.'&grant_type=authorization_code');
@@ -1655,5 +1656,5 @@ class Wechat
 		return false;
 	}
 
-	
+
 }
