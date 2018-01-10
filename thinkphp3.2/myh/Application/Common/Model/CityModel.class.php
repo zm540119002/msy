@@ -4,8 +4,8 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class CommentModel extends Model {
-    protected $tableName = 'comment';
+class CityModel extends Model {
+    protected $tableName = 'city';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG1';
 
@@ -13,14 +13,13 @@ class CommentModel extends Model {
     );
 
     //新增
-    public function addComment(){
+    public function addCity(){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
@@ -31,7 +30,7 @@ class CommentModel extends Model {
     }
 
     //修改
-    public function saveComment($where=array()){
+    public function saveCity($where=array()){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -40,8 +39,8 @@ class CommentModel extends Model {
         $_where = array(
             'status' => 0,
         );
-        if(isset($_POST['CommentId']) && intval($_POST['CommentId'])){
-            $id = I('post.CommentId',0,'int');
+        if(isset($_POST['cityId']) && intval($_POST['cityId'])){
+            $id = I('post.cityId',0,'int');
         }
         if($id){
             $_where['id'] = $id;
@@ -58,17 +57,16 @@ class CommentModel extends Model {
     }
 
     //标记删除
-    public function delComment($where=array()){
+    public function delCity($where=array()){
         unset($_POST['id']);
         $_where = array(
             'status' => 0,
         );
-        $id = I('post.CommentId',0,'int');
+        $id = I('post.CityId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
         $_where = array_merge($_where,$where);
-
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
@@ -80,18 +78,17 @@ class CommentModel extends Model {
     }
 
     //查询
-    public function selectComment($where=[],$field=[],$join=[]){
+    public function selectCity($where=[],$field=[],$join=[]){
         $_where = array(
-            'cm.status' => 0,
+            'ct.status' => 0,
         );
-       
         $_field = array(
-           'cm.id','cm.user_id','cm.score','cm.order_id','cm.title','cm.content','cm.create_time','cm.update_time'
+            'ct.id','ct.name','ct.type','ct.status','ct.province_id',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('cm')
+            ->alias('ct')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

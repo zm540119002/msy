@@ -4,8 +4,8 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class CommentModel extends Model {
-    protected $tableName = 'comment';
+class ProvinceModel extends Model {
+    protected $tableName = 'province';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG1';
 
@@ -13,7 +13,7 @@ class CommentModel extends Model {
     );
 
     //新增
-    public function addComment(){
+    public function addProvince(){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -31,7 +31,7 @@ class CommentModel extends Model {
     }
 
     //修改
-    public function saveComment($where=array()){
+    public function saveProvince($where=array()){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -40,8 +40,8 @@ class CommentModel extends Model {
         $_where = array(
             'status' => 0,
         );
-        if(isset($_POST['CommentId']) && intval($_POST['CommentId'])){
-            $id = I('post.CommentId',0,'int');
+        if(isset($_POST['provinceId']) && intval($_POST['provinceId'])){
+            $id = I('post.provinceId',0,'int');
         }
         if($id){
             $_where['id'] = $id;
@@ -58,12 +58,12 @@ class CommentModel extends Model {
     }
 
     //标记删除
-    public function delComment($where=array()){
+    public function delProvince($where=array()){
         unset($_POST['id']);
         $_where = array(
             'status' => 0,
         );
-        $id = I('post.CommentId',0,'int');
+        $id = I('post.ProvinceId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -80,18 +80,18 @@ class CommentModel extends Model {
     }
 
     //查询
-    public function selectComment($where=[],$field=[],$join=[]){
+    public function selectProvince($where=[],$field=[],$join=[]){
         $_where = array(
-            'cm.status' => 0,
+            'pv.status' => 0,
         );
        
         $_field = array(
-           'cm.id','cm.user_id','cm.score','cm.order_id','cm.title','cm.content','cm.create_time','cm.update_time'
+           'pv.id','pv.name','pv.type','pv.status',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('cm')
+            ->alias('pv')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

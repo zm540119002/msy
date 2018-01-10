@@ -14,6 +14,25 @@ return array(
         '4'   => '四星',
         '5'   => '五星',
     ),
+    //城市级别
+    'CITY_TYPE' => array(
+        array(
+            'key' => 1,
+            'value' => '一线',
+        ),array(
+            'key' => 2,
+            'value' => '二线',
+        ),array(
+            'key' => 3,
+            'value' => '三线',
+        ),array(
+            'key' => 4,
+            'value' => '四线',
+        ),array(
+            'key' => 5,
+            'value' => '五线',
+        ),
+    ),
     //底部购物车配置
     'FOOTER_CART_MENU' => array(
         array('share'   => '分享',),//0

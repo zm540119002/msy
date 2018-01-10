@@ -25,6 +25,17 @@ class PartnerAuthoriseController extends AuthUserController {
         }else{
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(15));
+            //省市数组
+            $modelProvince = D('Province');
+            $provinceList = $modelProvince->selectProvince();
+            $modelCity = D('City');
+            foreach ($provinceList as &$province){
+                $where = array(
+                    'ct.province_id' => $province['id'],
+                );
+                $province['city'] = $modelCity->selectCity($where);
+            }
+            $this->assign('provinceList',$provinceList);
             $this->display();
         }
     }
