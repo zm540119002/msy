@@ -157,6 +157,7 @@ class GoodsController extends BaseController {
  			'paysignkey'=>'' //商户签名密钥Key
         		);
  	     $weObj = new Wechat($options);
+        print_r($weObj);exit;
         $code = isset($_GET['code'])?$_GET['code']:'';
         $scope = 'snsapi_userinfo';
         if($code){
