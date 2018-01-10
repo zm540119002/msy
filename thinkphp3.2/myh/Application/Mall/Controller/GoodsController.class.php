@@ -2,6 +2,7 @@
 namespace Mall\Controller;
 use  web\all\Controller\BaseController;
 use  web\all\Lib\AuthUser;
+use  web\all\Component\WxpayAPI\Wechat;
 class GoodsController extends BaseController {
     //商品信息
     public function goodsInfo(){
@@ -143,6 +144,48 @@ class GoodsController extends BaseController {
             //授权获取微信信息
             $wxUser = $this -> getOAuthWeiXinUserInfo();
             $this -> display();
+        }
+    }
+
+    public function a(){
+        $options = array(
+ 			'token'=>'tokenaccesskey', //填写你设定的key
+    		'appid'=>'wx9eee7ee8c2ae57dc', //填写高级调用功能的app id
+ 			'appsecret'=>'00e0c9275fb24d6ca2a8dfe2a24cc2f6', //填写高级调用功能的密钥
+ 			'partnerid'=>'1234887902', //财付通商户身份标识
+ 			'partnerkey'=>'Pq8YLYz7llOp09v9KdeFZ373cey37Iub', //财付通商户权限密钥Key
+ 			'paysignkey'=>'' //商户签名密钥Key
+        		);
+ 	     $weObj = new Wechat($options);
+        $code = isset($_GET['code'])?$_GET['code']:'';
+        $scope = 'snsapi_userinfo';
+        if($code){
+            $josn = $weObj -> getOauthAccessToken();
+            if(!$josn){
+                unset($_SESSION['wx_redirect']);
+                return false;
+            }
+            print_r($josn);exit;
+            $userInfo = $weObj -> getOauthUserinfo($josn);
+            if(!$userInfo){
+                return false;
+            }else{
+                return $userInfo;
+            }
+        }else{
+            //开始获取
+            if($scope == 'snsapi_userinfo'){
+                $url = $this->host .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'];
+                $_SESSION['wx_redirect'] = $url;
+            }else{
+                $url = $_SESSION['wx_redirect'];
+            }
+            if(!$url){
+                unset($_SESSION['wx_redirect']);
+                return false;
+            }
+            $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
+            $this -> redirect($oauto_url);
         }
     }
 }

@@ -2,6 +2,7 @@
 namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 use  web\all\Lib\Pay;
+
 class PaymentController extends AuthUserController {
     //订单-支付
     public function orderPayment(){
