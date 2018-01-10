@@ -78,6 +78,33 @@ function getUnitCN($num){
     return '';
 }
 
+/**获取省份中文
+ * @param $num
+ * @return string
+ */
+function getProvinceCN($num,$provinceList){
+    foreach ($provinceList as $province) {
+        if($num == $province['id']){
+            return $province['name'];
+        }
+    }
+    return '';
+}
+
+/**获取城市类型中文
+ * @param $num
+ * @return string
+ */
+function getCityTypeCN($num){
+    $cityType = C('CITY_TYPE');
+    foreach ($cityType as $city) {
+        if($num == $city['key']){
+            return $city['value'];
+        }
+    }
+    return '';
+}
+
 /*开启底部购物车配置项
  */
 function unlockingFooterCartConfig($arr){

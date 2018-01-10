@@ -14,6 +14,25 @@ return array(
         '4'   => '四星',
         '5'   => '五星',
     ),
+    //城市级别
+    'CITY_TYPE' => array(
+        array(
+            'key' => 1,
+            'value' => '一线',
+        ),array(
+            'key' => 2,
+            'value' => '二线',
+        ),array(
+            'key' => 3,
+            'value' => '三线',
+        ),array(
+            'key' => 4,
+            'value' => '四线',
+        ),array(
+            'key' => 5,
+            'value' => '五线',
+        ),
+    ),
     //底部购物车配置
     'FOOTER_CART_MENU' => array(
         array('share'   => '分享',),//0
@@ -31,6 +50,8 @@ return array(
         array('forward_to_friends'   => '将本页转发微信好友',),//12
         array('goto_gift_purchase'   => '进入礼品采购',),//13
         array('apply_partner'   => '申请美悦会城市合伙人',),//14
+        array('city_search'   => '申请查询',),//15
+        array('next_step'   => '下一步',),//16
     ),
     //商品购买类型
     'BUY_TYPE'=>array(

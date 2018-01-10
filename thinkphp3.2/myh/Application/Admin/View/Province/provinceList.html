@@ -1,22 +1,20 @@
 <div class="search-result">
-    <notempty name='unitList'>
+    <notempty name='provinceList'>
         <table class="table tb-type2">
             <thead>
                 <tr class="thead">
                     <th></th>
-                    <th>键</th>
-                    <th>值</th>
+                    <th>省份名称</th>
                 </tr>
             </thead>
             <tbody>
-                <volist name="unitList" id="vo">
+                <volist name="provinceList" id="vo">
                     <tr class="hover edit" data-id="{$vo.id}">
                         <td class="w48"><input type="checkbox" class="checkitem">
-                        <td class="w50pre name"><span title="" class="editable ">{$vo.key}</span></td>
-                        <td class="w50pre name"><span title="" class="editable ">{$vo.value}</span></td>
+                        <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
                         <td class="w96">
-                            <a href="javascript:void(0);" class="editUnit">编辑</a>
-                            | <a href="javascript:void(0);" class="delUnit">删除</a>
+                            <a href="javascript:void(0);" class="editProvince">编辑</a>
+                            | <a href="javascript:void(0);" class="delProvince">删除</a>
                         </td>
                     </tr>
                 </volist>

@@ -5,9 +5,6 @@
 <block name="content">
     <article class="f24">
         <section >
-            <div class="header_banner">
-                <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="">
-            </div>
             <div class="business_module_intro bottomLine page-bd">
                 <nav class="sign_nav">
                     <ul id="status " class="status f24 weui-flex">
@@ -17,13 +14,32 @@
                             <a href="{:U('register')}"><span class="register_info"></span><em></em>登记资料</a></li>
                         <li class="weui-flex-item">
                             <a href="{:U('seatDeposit')}"><span class="seat_deposit"></span><em></em>席位订金</a></li>
-                        <li class="weui-flex-item">
+                        <li class="weui-flex-item active">
                             <a href="{:U('seniority')}"><span class="qualify_money"></span>资格完款</a></li>
                     </ul>
                 </nav>
             </div>
         </section>
+        <section class="city_search_module">
+            <p>你所申请的城市为:<span></span>线城市</p>
+            <p>城市合伙人资格门槛为:￥<price>1688.00</price></p>
+            <p>已交订金:￥<price>1680.00</price></p>
+            <p>需要补交城市合伙人资格款:￥<price>XXXXX</price></p>
+            <p class="explain_intro">
+                *城市合伙人资格款作为采购预存款用于采购进货结算
+            </p>
+        </section>
     </article>
+    <section id="areaLayer" class="express-area-box" style="display:none;">
+        <header>
+            <h3>选择地区</h3>
+            <a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+            <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+        </header>
+        <article id="areaBox">
+            <ul id="areaList" class="area-list"></ul>
+        </article>
+    </section>
 </block>
 <block name="footer">
     <include file="./Application/Business/View/Cart/footerCartMenu.html" />
@@ -31,9 +47,6 @@
 <block name="script">
     <script type="text/javascript">
         $(function(){
-            $('.weui_btn').on('click',function(){
-                location.href = CONTROLLER + '/register';
-            });
         });
     </script>
 </block>
