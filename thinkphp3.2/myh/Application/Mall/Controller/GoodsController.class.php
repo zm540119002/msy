@@ -2,7 +2,7 @@
 namespace Mall\Controller;
 use  web\all\Controller\BaseController;
 use  web\all\Lib\AuthUser;
-use  web\all\Component\WxpayAPI\Wxlogin;
+use  web\all\Component\WxpayAPI\Wechat;
 class GoodsController extends BaseController {
     //商品信息
     public function goodsInfo(){
@@ -186,6 +186,7 @@ class GoodsController extends BaseController {
                 return false;
             }
             $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
+            print_r($oauto_url);exit;
             $this -> redirect($oauto_url);
         }
 
