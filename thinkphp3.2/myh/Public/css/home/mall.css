@@ -2038,6 +2038,7 @@ background-size:contain;
 .wt_tipc_item dl {
     margin-right: 32px;
     /*flex:1;*/
+    width:80px;
 }
 .wt_tipc_item dl dt{
     width:42px;
@@ -2061,7 +2062,7 @@ background-size:contain;
 }
 .wt_tipc_item dl dd{
     width:100%;
-    /*text-align:center;*/
+    text-align:center;
     display: block;
     /*box-sizing: border-box;*/
 }
