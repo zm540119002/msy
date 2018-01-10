@@ -2046,7 +2046,7 @@ background-size:contain;
 .wt_tipc_item dl dt{
     width:42px;
     height:42px;
-    margin:0.35rem auto 0.08rem;
+    margin:10px auto 8px;
     background-image:url(../../img/common/wt-icon.png);
     background-repeat: no-repeat;
     background-size:42px 176px;
