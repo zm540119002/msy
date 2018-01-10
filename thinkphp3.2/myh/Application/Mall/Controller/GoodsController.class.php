@@ -186,7 +186,6 @@ class GoodsController extends BaseController {
                 return false;
             }
             $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
-            
             $this -> redirect($oauto_url);
         }
 
