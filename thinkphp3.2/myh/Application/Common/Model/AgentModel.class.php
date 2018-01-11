@@ -4,8 +4,8 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class PartnerModel extends Model {
-    protected $tableName = 'partner';
+class AgentModel extends Model {
+    protected $tableName = 'agent';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG1';
 
@@ -13,7 +13,7 @@ class PartnerModel extends Model {
     );
 
     //新增
-    public function addPartner(){
+    public function addAgent(){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -31,7 +31,7 @@ class PartnerModel extends Model {
     }
 
     //修改
-    public function savePartner($where=array()){
+    public function saveAgent($where=array()){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -40,8 +40,8 @@ class PartnerModel extends Model {
         $_where = array(
             'status' => 0,
         );
-        if(isset($_POST['partnerId']) && intval($_POST['partnerId'])){
-            $id = I('post.partnerId',0,'int');
+        if(isset($_POST['agentId']) && intval($_POST['agentId'])){
+            $id = I('post.agentId',0,'int');
         }
         if($id){
             $_where['id'] = $id;
@@ -58,12 +58,12 @@ class PartnerModel extends Model {
     }
 
     //标记删除
-    public function delPartner($where=array()){
+    public function delAgent($where=array()){
         unset($_POST['id']);
         $_where = array(
             'status' => 0,
         );
-        $id = I('post.partnerId',0,'int');
+        $id = I('post.agentId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -80,21 +80,22 @@ class PartnerModel extends Model {
     }
 
     //查询
-    public function selectPartner($where=[],$field=[],$join=[]){
+    public function selectAgent($where=[],$field=[],$join=[]){
         $_where = array(
-            'p.status' => 0,
+            'a.status' => 0,
         );
         $_field = array(
-            'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.user_id','p.create_time',
+            'a.id','a.name','a.status','a.mobile_phone','a.company_name','a.auth_status','a.province','a.city',
+            'a.partner_id','a.user_id','a.create_time',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('p')
+            ->alias('a')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
-            ->order('p.id desc')
+            ->order('a.id desc')
             ->select();
         return $list?:[];
     }

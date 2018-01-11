@@ -9,8 +9,8 @@ class PartnerCache{
         $partner = S(self::$_cache_key.$user_id);
         if(!$partner){
             $where = array(
-                'user_id' => $user_id,
-                'status' => 0,
+                'p.user_id' => $user_id,
+                'p.status' => 0,
             );
             $modelPartner = D('Partner');
             $partner = $modelPartner->selectPartner($where);

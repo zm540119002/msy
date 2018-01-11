@@ -1,7 +1,7 @@
 <?php
 namespace web\all\Controller;
 
-use web\all\Cache\PartnerCache;
+use web\all\Cache\AgentCache;
 
 class AuthPartnerController extends AuthUserController{
     protected $partner = null;
@@ -9,8 +9,8 @@ class AuthPartnerController extends AuthUserController{
 
     public function __construct(){
         parent::__construct();
-        PartnerCache::remove($this->user['id']);
-        $this->partner = PartnerCache::get($this->user['id']);
+        AgentCache::remove($this->user['id']);
+        $this->partner = AgentCache::get($this->user['id']);
         //机构登记
         if(!$this->partner || $this->partner['auth_status'] == 0){
             $this->error(C('ERROR_COMPANY_REGISTER_REMIND'),U($this->partnerAuthoriseUrl));
