@@ -188,7 +188,7 @@ class Jssdk {
   }
 
   //要授权取用户基本信息；
-  public function getUser()
+  public function getOauthUserInfo()
   {
     $data = $this -> GetAccessTokenAndOpenid();
     $access_token = $data['access_token'];
@@ -444,6 +444,18 @@ class Jssdk {
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
+
+  /**
+   * oauth 授权跳转接口
+   * @param string $callback 回调URI
+   * @return string
+   */
+  public function getOauthRedirect($callback,$state='',$scope='snsapi_userinfo'){
+    $url= 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->appId.'&redirect_uri='.urlencode($callback).'&response_type=code&scope='.$scope.'&state='.$state.'#wechat_redirect';
+    Header("Location: $url");
+    exit();
+  }
+
 
   //获取用户基本信息（全局Access Token 获取 已关注用户，注意和OAuth时的区别）
   /*
