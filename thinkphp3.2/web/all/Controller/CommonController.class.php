@@ -101,28 +101,7 @@ class CommonController extends Controller{
          */
         return  $this->_jssdk -> create_menu_raw($menu);
     }
-
-    //微信登录授权获取用户
-    public function wxLogin($url){
-        if(isWxBrowser()) {//判断是否为微信浏览器
-            $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-            $code = isset($_GET['code'])?$_GET['code']:'';
-            if($code){
-                $wxUser = $this -> getOAuthWeiXinUserInfo();
-                if(!$wxUser){
-                    return false;
-                }else{
-                    return $wxUser;
-                }
-            }else{
-                $wechat -> getOauthRedirect($url,"wxbase");
-            }
-        }
-
-    }
-
-
-
+    
 }
 
 
