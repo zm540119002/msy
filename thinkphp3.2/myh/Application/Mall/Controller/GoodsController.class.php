@@ -155,17 +155,16 @@ class GoodsController extends BaseController {
 //        $_SESSION['wx_redirect'] = $url;
 //        $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
 //        print_r($oauto_url);exit;
-        $josn = $wechat -> getOauthAccessToken();
-        print_r($josn);exit;
+
         $code = isset($_GET['code'])?$_GET['code']:'';
         $scope = 'snsapi_userinfo';
         if($code){
-            $josn = $wechat -> getOauthAccessToken();
-            if(!$josn){
-                unset($_SESSION['wx_redirect']);
-                return false;
-            }
-            $userInfo = $wechat -> getOauthUserinfo($josn);
+//            $josn = $wechat -> getOauthAccessToken();
+//            if(!$josn){
+//                unset($_SESSION['wx_redirect']);
+//                return false;
+//            }
+            $userInfo = $wechat -> getOauthUserinfo();
             if(!$userInfo){
                 return false;
             }else{
