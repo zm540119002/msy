@@ -151,9 +151,9 @@ class GoodsController extends BaseController {
 
     public function aa(){
         $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-        $url = 'http://'.$this->host . '/index.php/Mall/Index/index';
-        
-//      $url = urlencode('http://myh.meishangyun.com/index.php/Mall/Index/index');
+       // $url = 'http://'.$this->host . '/index.php/Mall/Index/index';
+
+      $url = 'http://myh.meishangyun.com/index.php/Mall/Index/index';
        // $_SESSION['wx_redirect'] = $url;
         $wechat -> getOauthRedirect($url,"wxbase");
 //        print_r($oauto_url);exit;
