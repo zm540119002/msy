@@ -69,7 +69,7 @@ var areaObject={
         $("#expressArea .province_city").html(expressArea);
         areaObject.provinceCityD=[];
         areaObject.provinceCityD.push(p,cId);
-        $('.detail_address').val(expressArea).data('key',areaObject.provinceCityD);
+        $('input.province_city').val(expressArea).data('key',areaObject.provinceCityD);
         areaCont = "";
         $("#areaBox").scrollTop(0);
         $("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
