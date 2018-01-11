@@ -53,14 +53,13 @@
     <script type="text/javascript">
         $(function(){
             var provinceList = {:json_encode($provinceList)};
-            $('div.province_city').cityInit(provinceList);
+            $('div.province_city').areaInit(provinceList);
 
             var areaArr=[];
             var province=2;
             var city=12;
             areaArr.push(province);
             areaArr.push(city);
-            console.log(areaArr);
             $('div.province_city').setArea(areaArr);
             var aaa=$('input.province_city').getArea();
             console.log(aaa);
