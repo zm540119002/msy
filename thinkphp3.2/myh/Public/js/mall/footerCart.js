@@ -192,6 +192,11 @@ $(function () {
         postData.groupBuyId = $('.groupBuyId').val();
         generateOrder(postData,groupBuyCallBack);
     });
+
+    //申请美悦会城市合伙人
+    $('body').on('click','.apply_partner',function () {
+        location.href = CONTROLLER + '/citySearch';
+    });
 });
 
 //生成订单
