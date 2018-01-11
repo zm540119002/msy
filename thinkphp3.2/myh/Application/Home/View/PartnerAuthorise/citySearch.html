@@ -54,7 +54,8 @@
         $(function(){
             var provinceList = {:json_encode($provinceList)};
             //console.log(provinceList);
-            $('.area_address').getArea(provinceList);
+            var aa=$('.area_address').areaInit(provinceList);
+           
             
             var areaArr=[];
             var province=0;
@@ -62,6 +63,7 @@
                 areaArr.push(province);
                 areaArr.push(city);
                 $('.area_address').setArea(areaArr);
+                console.log($('.detail_address').getArea());
            
             //登记资料
             $('body').on('click','.apply_query',function(){

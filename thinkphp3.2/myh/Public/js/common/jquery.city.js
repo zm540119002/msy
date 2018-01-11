@@ -6,10 +6,11 @@
 **/
 
 //获取省市数据
-var expressArea='',expressCity='',expressCounty='', areaCont,areaBackCont, areaList = $("#areaList"),arrKey=[];
+var expressArea='',expressCity='',expressCounty='', areaCont,areaBackCont, areaList = $("#areaList");
 	// , areaTop = areaList.offset().top;
 var areaObject={
     provinceCityD:[],
+    //获取数据
     getCity:function(areaData){
         PROVINCE_CITY_AREA=areaData;
         areaObject.intProvince(PROVINCE_CITY_AREA);
@@ -70,12 +71,13 @@ var areaObject={
         areaObject.provinceCityD=[];
         areaObject.provinceCityD.push(p,cId);
         $('.detail_address').val(expressArea).data('key',areaObject.provinceCityD);
-        //console.log($('.detail_address').data('key'));
+        //console.log(areaObject.provinceCityD);
         areaCont = "";
         $("#areaBox").scrollTop(0);
-        $("#backUp").attr("onClick", "selectP(" + p + ");");
+        $("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
+        // return areaObject.provinceCityD;
+        //areaObject.getArea(areaObject.provinceCityD);
         clockArea();
-        return areaObject.provinceCityD;
     },
      //设置省市
     setArea:function (optionArr){
@@ -104,11 +106,19 @@ var areaObject={
             }
         })
     },
-    getArea:function(json){
+    areaInit:function(json){
         areaObject.getCity(json);
         // console.log(areaObject.provinceCityD)
-        return $('.detail_address').data('key');
-    },
+    }
+    // ,
+    // getArea:function(a){
+    //     console.log(a);
+    //     // var arrKey=[];
+    //     //     arrKey.push(a,b);
+    //     //console.log(areaObject.provinceCityD);
+    //     //console.log('获取');
+    //     return a;
+    // }
 }
  /*关闭省市区选项*/
 function clockArea() {
@@ -128,12 +138,14 @@ $(function() {
         clockArea();
     });
     $.fn.extend({
-		getArea:function(opt){
-             areaObject.getArea(opt);
+		areaInit:function(opt){
+             areaObject.areaInit(opt);
         },
         setArea:function (options) {
             var address = areaObject.setArea(options);
             $(this).text(address);
         }
+        // ,
+        // getArea:areaObject.getArea
 	});
 });
