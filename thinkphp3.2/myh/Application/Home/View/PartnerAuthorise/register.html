@@ -64,10 +64,10 @@
                 }else if(!register.phoneCheck(partnerPhone)){
                     content = "请输入正确的手机号";
                 }
-                if(content){
-                    dialog.error(content);
-                    return false;
-                }
+//                if(content){
+//                    dialog.error(content);
+//                    return false;
+//                }
                 var postData = $('#form1').serializeObject();
                 postData.partnerId = '{$partnerInfo.id}';
                 var url = CONTROLLER + '/register';
@@ -81,6 +81,7 @@
                     },
                     success: function(data){
                         $('.loading').hide();
+                        return;
                         if(data.status == 0){
                             if(data.url){
                                 location.href = data.url;

@@ -44,6 +44,7 @@ class PartnerAuthoriseController extends AuthUserController {
     public function register(){
         $modelPartner = D('Partner');
         if(IS_POST){
+            print_r($_POST);exit;
             $rules = array(
                 array('name','require','姓名必须！'),
                 array('mobile_phone','isMobile','请输入正确的手机号码',0,'function'),
