@@ -63,10 +63,12 @@
                 areaArr.push(province);
                 areaArr.push(city);
                 $('.area_address').setArea(areaArr);
-                console.log($('.detail_address').getArea());
+               
            
             //登记资料
-            $('body').on('click','.apply_query',function(){
+            $('body').on('click','.city_search',function(){
+                var aaa=$('.detail_address').getArea();
+                    console.log(aaa);
                 var detailAddress=$('.detail_address').val();
                 var content='';
                 if(!detailAddress){
