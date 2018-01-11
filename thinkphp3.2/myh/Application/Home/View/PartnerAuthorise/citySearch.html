@@ -26,8 +26,8 @@
                 <div class="express-area ">
                     <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
                         <label class="form-label">所在地区：</label>
-                        <div class="area_address">省 &gt; 市 </div>
-                        <input type="hidden" value="" class="detail_address" data-key="" data-area="0">
+                        <div class="province_city">省 &gt; 市 </div>
+                        <input type="hidden" value="" class="province_city" data-key="" data-area="0">
                     </a>
                 </div>
             </form>
@@ -53,23 +53,20 @@
     <script type="text/javascript">
         $(function(){
             var provinceList = {:json_encode($provinceList)};
-            $('.area_address').areaInit(provinceList);
+            $('div.province_city').areaInit(provinceList);
 
-            var aaa=$('.detail_address').getArea();
-            console.log(aaa);
             var areaArr=[];
-            var province=0;
-            var city=3;
+            var province=1;
+            var city=11;
             areaArr.push(province);
             areaArr.push(city);
-            $('.area_address').setArea(areaArr);
-            aaa=$('.detail_address').getArea();
+            console.log(areaArr);
+            $('div.province_city').setArea(areaArr);
+            var aaa=$('input.province_city').getArea();
             console.log(aaa);
 
             //登记资料
             $('body').on('click','.city_search',function(){
-
-                var detailAddress=$('.detail_address').val();
                 var content='';
                 if(!detailAddress){
                     content="请选择申请城市";
