@@ -95,6 +95,7 @@ var areaObject={
                             areaBackCont+=val.city[k].name;
                             //console.log(areaBackCont);
                             $("#expressArea .area_address").html(areaBackCont);
+                            $('.detail_address').data('key',optionArr);
                             return false;
                         }
                     }
