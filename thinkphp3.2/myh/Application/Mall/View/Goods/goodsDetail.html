@@ -179,7 +179,8 @@
             $('.five_star').setStar(getFractionValue);
         });
         $(window).load(function() {
-            self.location=MODULE + 'Goods/aa';
+            var url = window.location.href;
+            self.location=MODULE + '/Goods/aa/?url='+url;
         });
 
     </script>

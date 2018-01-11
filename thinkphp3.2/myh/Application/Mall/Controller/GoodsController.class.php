@@ -149,7 +149,8 @@ class GoodsController extends BaseController {
     }
 
     public function aa(){
-        $wxUser = $this -> wxLogin();
+        $url = $_GET['url'];
+        $wxUser = $this -> wxLogin($url);
     }
     
     
