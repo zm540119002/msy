@@ -128,8 +128,10 @@ class CommonController extends Controller{
             }
             $wechat -> getOauthRedirect($url,"wxbase");
         }
-
     }
+
+   
+
 }
 
 

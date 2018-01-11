@@ -148,4 +148,5 @@ class GoodsController extends BaseController {
         $this -> display();
     }
     
+    
 }
