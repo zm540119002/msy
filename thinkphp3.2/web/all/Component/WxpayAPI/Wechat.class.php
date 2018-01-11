@@ -1655,5 +1655,5 @@ class Wechat
 		return false;
 	}
 
-	
+
 }

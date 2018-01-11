@@ -43,16 +43,18 @@
             <ul id="areaList" class="area-list"></ul>
         </article>
     </section>
+    <div id="areaMask" class="mask"></div>
 </block>
 <block name="footer">
     <include file="./Application/Business/View/Cart/footerCartMenu.html" />
 </block>
 <block name="script">
-    <script src="PUBLIC_JS/common/jquery.area.js"></script>
+    <script src="PUBLIC_JS/common/jquery.area.1.js"></script>
     <script type="text/javascript">
         $(function(){
             var provinceList = {:json_encode($provinceList)};
-            console.log(provinceList);
+            //console.log(provinceList);
+            getCity(provinceList);
             //登记资料
             $('body').on('click','.apply_query',function(){
                 var detailAddress=$('.detail_address').val();
