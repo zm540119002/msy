@@ -144,7 +144,6 @@ class GoodsController extends BaseController {
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
             //授权获取微信信息
             $wxUser = $this -> aa();
-            print_r($wxUser);
         }
         $this -> display();
     }
@@ -159,12 +158,12 @@ class GoodsController extends BaseController {
         $code = isset($_GET['code'])?$_GET['code']:'';
         $scope = 'snsapi_userinfo';
         if($code){
-            $wxUser = $this -> getOAuthWeiXinUserInfo();
-            if(!$wxUser){
-                return false;
-            }else{
-                return $wxUser;
-            }
+//            $wxUser = $this -> getOAuthWeiXinUserInfo();
+//            if(!$wxUser){
+//                return false;
+//            }else{
+//                return $wxUser;
+//            }
         }else{
             //开始获取code
             if($scope == 'snsapi_userinfo'){
