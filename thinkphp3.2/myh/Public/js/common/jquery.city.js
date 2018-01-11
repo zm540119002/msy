@@ -29,11 +29,9 @@ var areaObject={
     /*选择省份*/
     selectP:function(p) {
         //expressArea+=provinceValue;
-        console.log(p);
         var oLi=areaList.find('li');
         $.each(oLi,function(){
             if($(this).attr('value')==p){
-                //console.log($(this).text());
                 if(!expressArea){
                     expressArea+=$(this).text();
                     //return false;
@@ -48,7 +46,6 @@ var areaObject={
             
                 $.each(p_v.city, function (c_k, c_v) {
                     if(p==c_v.province_id){
-                        //console.log(c_v);
                         areaCont += "<li  province_id='"+c_v.province_id+"' value='" + c_v.id + "' onClick='areaObject.selectC(" + c_v.province_id + "," + c_v.id + ")'>" + c_v.name + "</li>";
                      }
              });
@@ -73,7 +70,6 @@ var areaObject={
         areaObject.provinceCityD=[];
         areaObject.provinceCityD.push(p,cId);
         $('.detail_address').val(expressArea).data('key',areaObject.provinceCityD);
-        //console.log(areaObject.provinceCityD);
         areaCont = "";
         $("#areaBox").scrollTop(0);
         $("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
@@ -81,10 +77,8 @@ var areaObject={
     },
      //设置省市
     setArea:function (optionArr){
-        console.log(PROVINCE_CITY_AREA);
         areaBackCont='';
         $.each(PROVINCE_CITY_AREA, function (i,val) {
-            //console.log(val);
             for(var j=0;j<optionArr.length;j++){
                 if(val.id==optionArr[j]){
                     areaBackCont+=val.name;
