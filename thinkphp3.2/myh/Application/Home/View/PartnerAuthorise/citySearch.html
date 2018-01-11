@@ -52,33 +52,32 @@
     <script src="PUBLIC_JS/common/jquery.city.js"></script>
     <script type="text/javascript">
         $(function(){
+            //初始化
             var provinceList = {:json_encode($provinceList)};
             $('div.province_city').areaInit(provinceList);
 
             var areaArr=[];
             var province=2;
-            var city=12;
+            var city=13;
             areaArr.push(province);
             areaArr.push(city);
-            $('div.province_city').setArea(areaArr);
-            var aaa=$('input.province_city').getArea();
-            console.log(aaa);
-
-            //登记资料
+//            $('div.province_city').setArea(areaArr);
+            //申请查询
             $('body').on('click','.city_search',function(){
                 var content='';
-                if(!detailAddress){
+                var province_city=$('input.province_city').getArea();
+                console.log(province_city);return;
+                if(!province_city){
                     content="请选择申请城市";
                 }
                 if(content){
                     dialog.error(content);
                     return false;
                 }
-            });
-
-            //申请查询
-            $('body').on('click','.city_search',function () {
-                location.href = CONTROLLER + '/register';
+                var url = CONTROLLER + '/register'
+                        + '/province/' + province_city[0]
+                        + '/city/' + province_city[1];
+                location.href = url;
             });
         });
     </script>
