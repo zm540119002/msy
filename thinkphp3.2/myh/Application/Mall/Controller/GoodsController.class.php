@@ -185,8 +185,8 @@ class GoodsController extends BaseController {
                 unset($_SESSION['wx_redirect']);
                 return false;
             }
+            $url = urlencode($url);
             $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
-            print_r($oauto_url);exit;
             $this -> redirect($oauto_url);
         }
 
@@ -209,6 +209,7 @@ class GoodsController extends BaseController {
     }
 
     public function loginTest(){
+        
         $this ->  display();
     }
 }
