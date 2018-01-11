@@ -9,7 +9,6 @@ use web\all\Component\WxpayAPI\Jssdk;
 class CommonController extends Controller{
     private $_jssdk = null;
     protected $host;
-    protected $signPackage;
     public function __construct(){
         parent::__construct();
         $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
@@ -44,8 +43,6 @@ class CommonController extends Controller{
             'desc' => $desc,
             'backUrl' => $backUrl,
         );
-
-
         return $shareInfo;
     }
 
@@ -56,63 +53,6 @@ class CommonController extends Controller{
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH_PHP').$shareInfo['shareImgUrl'];
         $shareInfo['shareImgUrl'] = $shareImgUrl;
-        $html = <<<EOF
-			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
-			<script type="text/javascript" src="/Public/js/common/layer.mobile/layer.js"></script>
-			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
-		    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-<script type="text/javascript">
-    // 微信配置
-    wx.config({
-        debug: false,
-        appId: "{$this -> signPackage ['appId']}",  //公众号的唯一标识
-        timestamp: '{$this -> signPackage ["timestamp"]}',  //生成签名的时间戳
-        nonceStr: '{$this -> signPackage ["nonceStr"]}',   //生成签名的随机串
-        signature: '{$this -> signPackage ["signature"]}',  //签名
-        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','getLocation','openLocation'] // 功能列表，我们要使用JS-SDK的什么功能
-    });
-    wx.checkJsApi({
-        jsApiList: [
-            'onMenuShareTimeline','onMenuShareAppMessage','getLocation','openLocation'
-        ],
-        success: function (res) {
-            if (res.checkResult.getLocation == false) {
-                dialog.error('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
-                return;
-            }
-        }
-    });
-    wx.ready(function(){
-        // 获取"分享到朋友圈"按钮点击状态及自定义分享内容接口
-        wx.onMenuShareTimeline({
-            title: '{$shareInfo["title"]}', // 分享标题
-            link: '{$shareInfo["shareLink"]}',
-            desc: '{$shareInfo["desc"]}',
-            imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
-            success: function () {
-                window.location.href='{$shareInfo["backUrl"]}';
-            },
-            cancel: function () {
-                return false;
-            }
-        });
-        // 获取"分享给朋友"按钮点击状态及自定义分享内容接口
-        wx.onMenuShareAppMessage({
-            title: '{$shareInfo["title"]}', // 分享标题
-            link: '{$shareInfo["shareLink"]}',
-            desc: '{$shareInfo["desc"]}',
-            imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
-            success: function () {
-                window.location.href='{$shareInfo["backUrl"]}';
-            },
-            cancel: function () {
-                return false;
-            }
-        });
-    });	
-         
-EOF;
-        echo  $html;
         return $shareInfo;
     }
 
