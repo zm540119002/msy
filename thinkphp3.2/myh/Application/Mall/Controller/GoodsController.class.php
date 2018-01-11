@@ -196,6 +196,7 @@ class GoodsController extends BaseController {
         }
             $wx_login = new Wxlogin();
             $userinfo = $wx_login->getUserInfo();
+            print_r(getUserInfo);exit;
 
             if($userinfo['openid']){
 
