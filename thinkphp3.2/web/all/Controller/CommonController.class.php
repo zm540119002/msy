@@ -101,6 +101,35 @@ class CommonController extends Controller{
          */
         return  $this->_jssdk -> create_menu_raw($menu);
     }
+
+    //微信登录授权获取用户
+    public function wxLogin(){
+        $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $code = isset($_GET['code'])?$_GET['code']:'';
+        $scope = 'snsapi_userinfo';
+        if($code){
+            $wxUser = $this -> getOAuthWeiXinUserInfo();
+            if(!$wxUser){
+                return false;
+            }else{
+                return $wxUser;
+            }
+        }else{
+            //开始获取code
+            if($scope == 'snsapi_userinfo'){
+                $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
+                $_SESSION['wx_redirect'] = $url;
+            }else{
+                $url = $_SESSION['wx_redirect'];
+            }
+            if(!$url){
+                unset($_SESSION['wx_redirect']);
+                return false;
+            }
+            $wechat -> getOauthRedirect($url,"wxbase");
+        }
+
+    }
 }
 
 
