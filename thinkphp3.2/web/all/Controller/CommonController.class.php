@@ -115,6 +115,7 @@ class CommonController extends Controller{
                     return $wxUser;
                 }
             }else{
+                echo $url;exit;
                 $wechat -> getOauthRedirect($url,"wxbase");
             }
         }
