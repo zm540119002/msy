@@ -20,7 +20,7 @@ class Wxlogin{
     //QQ登录页面
     private function get_wx_login_page()
     {
-        echo 1;exit;
+
         $state = md5(rand(1,1000));
         $query = [
             'appid' => $this->app_id,
@@ -32,7 +32,7 @@ class Wxlogin{
         $_SESSION['state'] = $state;//保存state验证
 
         $url= $this->login_page_url.http_build_query($query).'#wechat_redirect';
-
+        print_r($url);exit;
         header("Location:$url");
         exit;
     }
