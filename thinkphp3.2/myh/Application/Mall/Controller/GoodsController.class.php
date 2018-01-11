@@ -3,6 +3,7 @@ namespace Mall\Controller;
 use  web\all\Controller\BaseController;
 use  web\all\Lib\AuthUser;
 use  web\all\Component\WxpayAPI\Wechat;
+use web\all\Component\WxpayAPI\Jssdk;
 class GoodsController extends BaseController {
     //商品信息
     public function goodsInfo(){
@@ -149,15 +150,7 @@ class GoodsController extends BaseController {
 
 
     public function aa(){
-        $options = array(
-            'token'=>'tokenaccesskey', //填写你设定的key
-            'appid'=>'wx9eee7ee8c2ae57dc', //填写高级调用功能的app id
-            'appsecret'=>'00e0c9275fb24d6ca2a8dfe2a24cc2f6', //填写高级调用功能的密钥
-            'partnerid'=>'1234887902', //财付通商户身份标识
-            'partnerkey'=>'Pq8YLYz7llOp09v9KdeFZ373cey37Iub', //财付通商户权限密钥Key
-            'paysignkey'=>'' //商户签名密钥Key
-        );
-        $wechat = new Wechat($options);
+        $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
         $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
         $_SESSION['wx_redirect'] = $url;
         $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
