@@ -20,6 +20,7 @@ class Wxlogin{
     //QQ登录页面
     private function get_wx_login_page()
     {
+        echo 1;exit;
         $state = md5(rand(1,1000));
         $query = [
             'appid' => $this->app_id,
