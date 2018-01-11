@@ -151,43 +151,38 @@ class GoodsController extends BaseController {
 
     public function aa(){
         $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-//        $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
-//        $_SESSION['wx_redirect'] = $url;
-//        $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
+        $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
+       // $_SESSION['wx_redirect'] = $url;
+        $wechat -> getOauthRedirect($url,"wxbase");
 //        print_r($oauto_url);exit;
-
-        $code = isset($_GET['code'])?$_GET['code']:'';
-        $scope = 'snsapi_userinfo';
-        if($code){
+//        $code = isset($_GET['code'])?$_GET['code']:'';
+//        $scope = 'snsapi_userinfo';
+//        if($code){
 //            $josn = $wechat -> getOauthAccessToken();
 //            if(!$josn){
 //                unset($_SESSION['wx_redirect']);
 //                return false;
 //            }
-            $userInfo = $wechat -> getOauthUserinfo();
-            if(!$userInfo){
-                return false;
-            }else{
-                print_r($userInfo);exit;
-                return $userInfo;
-            }
-
-        }else{
-            //开始获取code
-            if($scope == 'snsapi_userinfo'){
-                $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
-                $_SESSION['wx_redirect'] = $url;
-            }else{
-                $url = $_SESSION['wx_redirect'];
-            }
-            if(!$url){
-                unset($_SESSION['wx_redirect']);
-                return false;
-            }
-            $url = urlencode('http://myh.meishangyun.com/index.php/Mall/Index/index');
-            $wechat -> getOauthRedirect($url,"wxbase");
-            
-        }
+//            $userInfo = $wechat -> getOauthUserinfo($josn);
+//            if(!$userInfo){
+//                return false;
+//            }else{
+//                return $userInfo;
+//            }
+//        }else{
+//            //开始获取code
+//            if($scope == 'snsapi_userinfo'){
+//                $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
+//                $_SESSION['wx_redirect'] = $url;
+//            }else{
+//                $url = $_SESSION['wx_redirect'];
+//            }
+//            if(!$url){
+//                unset($_SESSION['wx_redirect']);
+//                return false;
+//            }
+//            $wechat -> getOauthRedirect($url,"wxbase");
+//        }
 
     }
 }
