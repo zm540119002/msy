@@ -32,7 +32,6 @@ class Wxlogin{
         $_SESSION['state'] = $state;//保存state验证
 
         $url= $this->login_page_url.http_build_query($query).'#wechat_redirect';
-        print_r($url);exit;
         header("Location:$url");
         exit;
     }
