@@ -151,10 +151,44 @@ class GoodsController extends BaseController {
 
     public function aa(){
         $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-        $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
-        $_SESSION['wx_redirect'] = $url;
-        $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
-        print_r($oauto_url);exit;
+//        $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
+//        $_SESSION['wx_redirect'] = $url;
+//        $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
+//        print_r($oauto_url);exit;
+        $josn = $wechat -> getOauthAccessToken();
+        print_r($josn);exit;
+        $code = isset($_GET['code'])?$_GET['code']:'';
+        $scope = 'snsapi_userinfo';
+        if($code){
+            $josn = $wechat -> getOauthAccessToken();
+            if(!$josn){
+                unset($_SESSION['wx_redirect']);
+                return false;
+            }
+            $userInfo = $wechat -> getOauthUserinfo($josn);
+            if(!$userInfo){
+                return false;
+            }else{
+                return $userInfo;
+            }
+        }else{
+            //开始获取code
+            if($scope == 'snsapi_userinfo'){
+                $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
+                $_SESSION['wx_redirect'] = $url;
+            }else{
+                $url = $_SESSION['wx_redirect'];
+            }
+            if(!$url){
+                unset($_SESSION['wx_redirect']);
+                return false;
+            }
+            $url = urlencode('http://myh.meishangyun.com/index.php/Mall/Goods/goodsDetail');
+            $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
+            print_r($oauto_url);exit;
+            header("Location:$oauto_url");
+            exit;
+        }
 
     }
 }
