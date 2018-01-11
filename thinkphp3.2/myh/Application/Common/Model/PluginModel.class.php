@@ -105,15 +105,15 @@ class PluginModel extends Model {
     //查询
     public function selectCoupons($where=[],$field=[],$join=[]){
         $_where = array(
-            'c.status' => 0,
+            'pl.status' => 0,
         );
         $_field = array(
-            'c.id','c.name','c.status','c.type','c.amount','c.failure_time','c.scene','c.ceiling',
+            'pl.id','pl.name','pl.status','pl.type','pl.amount','pl.failure_time','pl.scene','pl.ceiling',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('c')
+            ->alias('pl')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

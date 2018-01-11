@@ -7,7 +7,7 @@ class AgentCache{
     /**从缓存中获取信息
      */
     public static function get($user_id){
-        $agent = S(AgentCache::$_cache_key.$user_id);
+        $agent = S(self::$_cache_key.$user_id);
         if(!$agent){
             $where = array(
                 'user_id' => $user_id,

@@ -75,7 +75,12 @@
                     dialog.error(content);
                     return false;
                 }
-            })
+            });
+
+            //申请查询
+            $('body').on('click','.city_search',function () {
+                location.href = CONTROLLER + '/register';
+            });
         });
     </script>
 </block>
