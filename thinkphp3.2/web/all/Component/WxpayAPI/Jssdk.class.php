@@ -458,7 +458,6 @@ class Jssdk {
    * @return string
    */
   public function getOauthRedirect($callback,$state='',$scope='snsapi_userinfo'){
-    echo $callback;exit;
     $url= 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->appId.'&redirect_uri='.urlencode($callback).'&response_type=code&scope='.$scope.'&state='.$state.'#wechat_redirect';
     Header("Location: $url");
     exit();
