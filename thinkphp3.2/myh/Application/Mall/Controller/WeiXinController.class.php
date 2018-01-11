@@ -17,6 +17,7 @@ class WeiXinController extends BaseController {
                     return $wxUser;
                 }
             }else{
+                echo $url;exit;
                 $wechat -> getOauthRedirect($url,"wxbase");
             }
         }
