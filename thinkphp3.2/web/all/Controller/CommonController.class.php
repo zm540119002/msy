@@ -2,8 +2,6 @@
 namespace web\all\Controller;
 use Think\Controller;
 use web\all\Component\WxpayAPI\Jssdk;
-
-
 /**公共基础控制器
  */
 class CommonController extends Controller{
