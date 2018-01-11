@@ -54,15 +54,14 @@
         $(function(){
             var provinceList = {:json_encode($provinceList)};
             //console.log(provinceList);
-            getCity(provinceList);
+            $('.area_address').getArea(provinceList);
             
-            // var area='';
-            // var province='广东省';
-            // var city='广州市';
-            // if( province && city ){
-            //     area=province+city;
-            //     setCity(area);
-            // }
+            var areaArr=[];
+            var province=0;
+            var city=3;
+                areaArr.push(province);
+                areaArr.push(city);
+                $('.area_address').setArea(areaArr);
            
             //登记资料
             $('body').on('click','.apply_query',function(){
