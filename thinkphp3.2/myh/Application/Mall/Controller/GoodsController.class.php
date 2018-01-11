@@ -143,7 +143,7 @@ class GoodsController extends BaseController {
             $this -> aveScore = round($modelComment -> avg('score'),1);//平均分数
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
             //授权获取微信信息
-            //$wxUser = $this -> aa();
+            $wxUser = $this -> aa();
         }
         $this -> display();
     }
