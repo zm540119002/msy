@@ -201,7 +201,7 @@ class GoodsController extends BaseController {
 
                 $_SESSION['openid'] =  $userinfo['openid'];
 
-                var_dump($userinfo);
+                var_dump($userinfo);exit;
 
             } else {
                 exit('授权失败');
