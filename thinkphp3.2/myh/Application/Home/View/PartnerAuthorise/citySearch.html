@@ -52,32 +52,17 @@
     <script src="PUBLIC_JS/common/jquery.city.js"></script>
     <script type="text/javascript">
         $(function(){
-<<<<<<< HEAD
-//            var provinceList = {:json_encode($provinceList)};
-//            //console.log(provinceList);
-//            $('.area_address').getArea(provinceList);
-//            var areaArr=[];
-//            var province=0;
-//            var city=3;
-//                areaArr.push(province);
-//                areaArr.push(city);
-//                $('.area_address').setArea(areaArr);
-//                console.log($('.detail_address').getArea());
-=======
             var provinceList = {:json_encode($provinceList)};
             //console.log(provinceList);
-            var aa=$('.area_address').areaInit(provinceList);
-           
-            
+            $('.area_address').getArea(provinceList);
             var areaArr=[];
             var province=0;
             var city=3;
                 areaArr.push(province);
                 areaArr.push(city);
                 $('.area_address').setArea(areaArr);
-               
->>>>>>> c317d5ca533e12120af38dd6183fdc874f164cb3
-           
+                console.log($('.detail_address').getArea());
+
             //登记资料
             $('body').on('click','.city_search',function(){
                 var aaa=$('.detail_address').getArea();
