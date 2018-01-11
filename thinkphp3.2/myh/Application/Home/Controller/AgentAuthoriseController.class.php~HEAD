@@ -4,7 +4,7 @@ namespace Home\Controller;
 use web\all\Cache\CompanyCache;
 use web\all\Controller\AuthUserController;
 
-class CompanyAuthoriseController extends AuthUserController {
+class AgentAuthoriseController extends AuthUserController {
     //机构认证-首页
     public function index(){
         if(IS_POST){
