@@ -148,6 +148,7 @@ class GoodsController extends BaseController {
     }
 
     public function getUser(){
+        echo 11;exit;
         $wxUser = $this -> getOAuthWeiXinUserInfo();
     }
 }
