@@ -143,8 +143,25 @@ class GoodsController extends BaseController {
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
             //授权获取微信信息
             $wxUser = $this -> getOAuthWeiXinUserInfo();
-            $this -> display();
         }
+        $this -> display();
     }
 
+
+    public function aa(){
+        $options = array(
+            'token'=>'tokenaccesskey', //填写你设定的key
+            'appid'=>'wx9eee7ee8c2ae57dc', //填写高级调用功能的app id
+            'appsecret'=>'00e0c9275fb24d6ca2a8dfe2a24cc2f6', //填写高级调用功能的密钥
+            'partnerid'=>'1234887902', //财付通商户身份标识
+            'partnerkey'=>'Pq8YLYz7llOp09v9KdeFZ373cey37Iub', //财付通商户权限密钥Key
+            'paysignkey'=>'' //商户签名密钥Key
+        );
+        $wechat = new Wechat($options);
+        $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
+        $_SESSION['wx_redirect'] = $url;
+        $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
+        print_r($oauto_url);exit;
+
+    }
 }
