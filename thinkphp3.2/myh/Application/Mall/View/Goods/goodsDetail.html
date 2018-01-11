@@ -173,10 +173,37 @@
 
 <block name="script">
     <script type="text/javascript">
+        function getUser() {
+            $.ajax({
+                url: MODULE + '/Goods/getUser',
+                type: 'get',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function (xhr) {
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(currentPage == 1){
+
+                    }else{
+
+                    }
+                }
+            });
+        }
         $(function(){
+            var a = "{$groupBuyId}";
+            if(a){
+                getUser();
+            }
             //星星评分等级
             var getFractionValue='{$aveScore}';
             $('.five_star').setStar(getFractionValue);
+
         });
+
     </script>
 </block>
