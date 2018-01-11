@@ -49,12 +49,21 @@
     <include file="./Application/Business/View/Cart/footerCartMenu.html" />
 </block>
 <block name="script">
-    <script src="PUBLIC_JS/common/jquery.area.1.js"></script>
+    <script src="PUBLIC_JS/common/jquery.city.js"></script>
     <script type="text/javascript">
         $(function(){
             var provinceList = {:json_encode($provinceList)};
             //console.log(provinceList);
             getCity(provinceList);
+            
+            // var area='';
+            // var province='广东省';
+            // var city='广州市';
+            // if( province && city ){
+            //     area=province+city;
+            //     setCity(area);
+            // }
+           
             //登记资料
             $('body').on('click','.apply_query',function(){
                 var detailAddress=$('.detail_address').val();
