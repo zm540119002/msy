@@ -184,7 +184,7 @@ class GoodsController extends BaseController {
                 unset($_SESSION['wx_redirect']);
                 return false;
             }
-            $url = urlencode('http://myh.meishangyun.com/index.php/Mall/Goods/goodsDetail');
+            $url = urlencode('http://myh.meishangyun.com/index.php/Mall/Index/index');
             $wechat -> getOauthRedirect($url,"wxbase");
             
         }
