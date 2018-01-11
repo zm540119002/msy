@@ -13,6 +13,7 @@ var areaObject={
     //获取数据
     getCity:function(areaData){
         PROVINCE_CITY_AREA=areaData;
+        console.log(PROVINCE_CITY_AREA);
         areaObject.intProvince(PROVINCE_CITY_AREA);
     },
     /*初始化省份*/
@@ -83,14 +84,23 @@ var areaObject={
     setArea:function (optionArr){
         console.log(PROVINCE_CITY_AREA);
         areaBackCont='';
+        // console.log(optionArr);
+        // console.log(PROVINCE_CITY_AREA);
+        //$("#expressArea .area_address").html(backData); +val.city[j].name
         $.each(PROVINCE_CITY_AREA, function (i,val) {
             //console.log(val);
             for(var j=0;j<optionArr.length;j++){
+                console.log(val.id);
                 if(val.id==optionArr[j]){
                     areaBackCont+=val.name;
+                    console.log(areaBackCont);
                     $.each(val.city,function(k,obj){
+                        
                         if(obj.id==optionArr[j+1]){
+                            //console.log(optionArr[j+1]);
+                            
                             areaBackCont+=obj.name;
+                            console.log(areaBackCont);
                             $("div.province_city").html(areaBackCont);
                             $('input.province_city').data('key',optionArr);
                             return false;

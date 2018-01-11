@@ -445,6 +445,13 @@ class Jssdk {
     return json_decode($res, true);
   }
 
+  //获得模板ID
+  public function getTemplateId(){
+    $url = "https://api.weixin.qq.com/cgi-bin/template/api_add_template?access_token=".$this->access_token;
+    $res = $this->http_request($url);
+    return json_decode($res, true);
+  }
+
   /**
    * oauth 授权跳转接口
    * @param string $callback 回调URI
