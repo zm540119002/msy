@@ -3,6 +3,7 @@ namespace Mall\Controller;
 use  web\all\Controller\BaseController;
 use  web\all\Lib\AuthUser;
 use  web\all\Component\WxpayAPI\Wechat;
+use web\all\Component\WxpayAPI\Jssdk;
 class GoodsController extends BaseController {
     //商品信息
     public function goodsInfo(){
@@ -143,8 +144,17 @@ class GoodsController extends BaseController {
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
             //授权获取微信信息
             $wxUser = $this -> getOAuthWeiXinUserInfo();
-            $this -> display();
         }
+        $this -> display();
     }
 
+
+    public function aa(){
+        $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $url = 'http://'.$this->host . $_SERVER['REQUEST_URI'];
+        $_SESSION['wx_redirect'] = $url;
+        $oauto_url = $wechat -> getOauthRedirect($url,"wxbase");
+        print_r($oauto_url);exit;
+
+    }
 }
