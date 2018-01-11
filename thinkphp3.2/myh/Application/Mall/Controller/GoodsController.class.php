@@ -185,7 +185,7 @@ class GoodsController extends BaseController {
                 unset($_SESSION['wx_redirect']);
                 return false;
             }
-            $url = urlencode($url);
+            $url = urlencode('http://myh.meishangyun.com/index.php/Mall/Goods/goodsDetail');
             $oauto_url = $weObj -> getOauthRedirect($url,"wxbase");
             header("Location:$oauto_url");
             exit;
