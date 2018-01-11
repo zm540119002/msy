@@ -7,6 +7,9 @@
                     <th>省份</th>
                     <th>城市</th>
                     <th>类型</th>
+                    <th>订金</th>
+                    <th>合伙人费用</th>
+                    <th>代理商费用</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +19,9 @@
                         <td class="w50pre name"><span title="" class="editable ">{$vo.province_id|getProvinceCN=$provinceList}</span></td>
                         <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
                         <td class="w50pre name"><span title="" class="editable ">{$vo.type|getCityTypeCN}</span></td>
+                        <td class="w50pre name"><span title="" class="editable ">{$vo.deposit}</span></td>
+                        <td class="w50pre name"><span title="" class="editable ">{$vo.partner_fee}</span></td>
+                        <td class="w50pre name"><span title="" class="editable ">{$vo.agent_fee}</span></td>
                         <td class="w96">
                             <a href="javascript:void(0);" class="editCity">编辑</a>
                             | <a href="javascript:void(0);" class="delCity">删除</a>

@@ -65,7 +65,7 @@ class CityController extends BaseController {
         );
         $join = array(
         );
-        $order = 'ct.province_id,ct.id';
+        $order = 'ct.province_id,ct.type,ct.id';
         $group = "";
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
         $cityList = page_query($modelCity,$where,$field,$order,$join,$group,$pageSize,$alias='ct');
