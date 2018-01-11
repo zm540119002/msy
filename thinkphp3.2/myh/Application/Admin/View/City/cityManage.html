@@ -50,11 +50,9 @@
         function getPage(currentPage) {
             $("#cityList").html($('#loading').html());
             var url = CONTROLLER+'/cityList';
-
             var postData = $('#form1').serializeObject();
             postData.p = currentPage ? currentPage : 1;
             postData.pageSize = 10;
-
             $.get(url, postData , function(data){
                 $('#cityList').html(data);
             });

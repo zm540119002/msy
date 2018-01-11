@@ -94,7 +94,7 @@ class PartnerModel extends Model {
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
-            ->partner('p.id desc')
+            ->order('p.id desc')
             ->select();
         return $list?:[];
     }

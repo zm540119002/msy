@@ -83,7 +83,7 @@ class CityModel extends Model {
             'ct.status' => 0,
         );
         $_field = array(
-            'ct.id','ct.name','ct.type','ct.status','ct.province_id',
+            'ct.id','ct.name','ct.type','ct.status','ct.province_id','ct.partner_fee',
         );
         $_join = array(
         );

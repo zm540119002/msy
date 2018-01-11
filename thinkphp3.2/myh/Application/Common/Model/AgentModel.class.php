@@ -4,119 +4,98 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class PluginModel extends Model {
-    protected $tableName = 'Plugin';
+class AgentModel extends Model {
+    protected $tableName = 'agent';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG1';
 
     protected $_validate = array(
-        array('sn','require','订单编号必须！'),
     );
 
     //新增
-    public function addCoupons(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addAgent(){
         unset($_POST['id']);
-
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-       
         $id = $this->add();
 
         if($id === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('新增成功',$returnArray);
     }
 
     //修改
-    public function saveCoupons($where=array()){
-//        if(!IS_POST){
-//            return errorMsg(C('NOT_POST'));
-//        }
+    public function saveAgent($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.couponsId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数couponsId');
-        }
-
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        if(isset($_POST['agentId']) && intval($_POST['agentId'])){
+            $id = I('post.agentId',0,'int');
+        }
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
-       
         $res = $this->where($_where)->save();
-        
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('修改成功',$returnArray);
     }
 
     //标记删除
-    public function delCoupons($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function delAgent($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.couponsId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数couponsId');
-        }
-
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        $id = I('post.agentId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
 
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('删除成功',$returnArray);
     }
 
     //查询
-    public function selectCoupons($where=[],$field=[],$join=[]){
+    public function selectAgent($where=[],$field=[],$join=[]){
         $_where = array(
-            'pl.status' => 0,
+            'a.status' => 0,
         );
         $_field = array(
-            'pl.id','pl.name','pl.status','pl.type','pl.amount','pl.failure_time','pl.scene','pl.ceiling',
+            'a.id','a.name','a.status','a.mobile_phone','a.company_name','a.auth_status','a.province','a.city',
+            'a.partner_id','a.user_id','a.create_time',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('pl')
+            ->alias('a')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
+            ->order('a.id desc')
             ->select();
         return $list?:[];
     }

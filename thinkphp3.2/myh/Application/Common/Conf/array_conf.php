@@ -18,19 +18,13 @@ return array(
     'CITY_TYPE' => array(
         array(
             'key' => 1,
-            'value' => '一线',
+            'value' => 'A类',
         ),array(
             'key' => 2,
-            'value' => '二线',
+            'value' => 'B类',
         ),array(
             'key' => 3,
-            'value' => '三线',
-        ),array(
-            'key' => 4,
-            'value' => '四线',
-        ),array(
-            'key' => 5,
-            'value' => '五线',
+            'value' => 'C类',
         ),
     ),
     //底部购物车配置

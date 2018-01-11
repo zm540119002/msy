@@ -52,21 +52,23 @@
     <script src="PUBLIC_JS/common/jquery.city.js"></script>
     <script type="text/javascript">
         $(function(){
-            var provinceList = {:json_encode($provinceList)};
-            //console.log(provinceList);
-            var aa=$('.area_address').areaInit(provinceList);
-           
-            
-            var areaArr=[];
-            var province=0;
-            var city=3;
-                areaArr.push(province);
-                areaArr.push(city);
-                $('.area_address').setArea(areaArr);
-                console.log($('.detail_address').getArea());
-           
+            var provinceList = {:json_encode($provinceList)};
+            $('.area_address').areaInit(provinceList);
+
+            var aaa=$('.detail_address').getArea();
+            console.log(aaa);
+            var areaArr=[];
+            var province=0;
+            var city=3;
+            areaArr.push(province);
+            areaArr.push(city);
+            $('.area_address').setArea(areaArr);
+            aaa=$('.detail_address').getArea();
+            console.log(aaa);
+
             //登记资料
-            $('body').on('click','.apply_query',function(){
+            $('body').on('click','.city_search',function(){
+
                 var detailAddress=$('.detail_address').val();
                 var content='';
                 if(!detailAddress){
@@ -76,7 +78,12 @@
                     dialog.error(content);
                     return false;
                 }
-            })
+            });
+
+            //申请查询
+            $('body').on('click','.city_search',function () {
+                location.href = CONTROLLER + '/register';
+            });
         });
     </script>
 </block>

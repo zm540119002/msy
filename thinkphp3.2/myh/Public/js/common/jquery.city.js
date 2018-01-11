@@ -75,8 +75,6 @@ var areaObject={
         areaCont = "";
         $("#areaBox").scrollTop(0);
         $("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
-        // return areaObject.provinceCityD;
-        //areaObject.getArea(areaObject.provinceCityD);
         clockArea();
     },
      //设置省市
@@ -97,6 +95,7 @@ var areaObject={
                             areaBackCont+=val.city[k].name;
                             //console.log(areaBackCont);
                             $("#expressArea .area_address").html(areaBackCont);
+                            $('.detail_address').data('key',optionArr);
                             return false;
                         }
                     }
@@ -108,17 +107,7 @@ var areaObject={
     },
     areaInit:function(json){
         areaObject.getCity(json);
-        // console.log(areaObject.provinceCityD)
     }
-    // ,
-    // getArea:function(a){
-    //     console.log(a);
-    //     // var arrKey=[];
-    //     //     arrKey.push(a,b);
-    //     //console.log(areaObject.provinceCityD);
-    //     //console.log('获取');
-    //     return a;
-    // }
 }
  /*关闭省市区选项*/
 function clockArea() {
@@ -144,8 +133,9 @@ $(function() {
         setArea:function (options) {
             var address = areaObject.setArea(options);
             $(this).text(address);
+        },
+        getArea:function(){
+            return $(this).data('key');
         }
-        // ,
-        // getArea:areaObject.getArea
 	});
 });
