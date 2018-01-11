@@ -21,10 +21,5 @@ class AuthUserController extends BaseController{
                 $this->error(C('ERROR_LOGIN_REMIND'),U($this->loginUrl));
             }
         }
-//        $auth = array(
-//            'id' => 16,
-//            'mobile' => '18664368697',
-//        );
-//        session('user', $auth);
     }
 }

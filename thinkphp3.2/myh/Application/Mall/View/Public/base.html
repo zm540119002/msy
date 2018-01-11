@@ -16,7 +16,10 @@
 <block name="content"></block>
 <!-- 返回顶部-->
 <block name="backTop">
-	<a href="javascript:void(0);" class="f24 backTop">顶部</a>
+	<div class="right_sidebar">
+		<a href="/index.php/Mall/Index/index.html" class="f24">首页</a>
+		<a href="javascript:void(0);" class="f24 backTop">顶部</a>
+	</div>
 </block>
 <block name="UserDialog">
 	<include file="UserDialog/loginDialog" />
@@ -24,7 +27,6 @@
 	<include file="UserDialog/forgetPasswdDialog" />
 	<include file="UserDialog/platformNotes" />
 </block>
-
 <!-- 基础页脚模块，子页面可覆盖 -->
 <block name="footer">
 	<footer class="f24">

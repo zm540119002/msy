@@ -2,6 +2,7 @@
 namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 use  web\all\Lib\Pay;
+
 class PaymentController extends AuthUserController {
     //订单-支付
     public function orderPayment(){
@@ -37,8 +38,21 @@ class PaymentController extends AuthUserController {
                         'gbd.order_id' => $orderId,
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
-                    session('returnUrl') && $payInfo['success_back'] = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html')).
-                        '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
+                    if (strpos(session('returnUrl'), 'groupBuyId') == true) {
+                        if(strpos(session('returnUrl'), '?') == true){
+                            $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
+                        }else{
+                            $shLinkBase =  session('returnUrl');
+                        }
+                        session('returnUrl') && $payInfo['success_back'] = $shLinkBase. '/shareType/groupBuy';
+                    }else{
+                        if (strpos(session('returnUrl'), 'html') == true){
+                            $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html'));
+                        }else{
+                            $shLinkBase = session('returnUrl');
+                        }
+                        session('returnUrl') && $payInfo['success_back'] = $shLinkBase. '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
+                    }
                 }
                 Pay::wxPay($payInfo);
             }

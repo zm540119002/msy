@@ -87,7 +87,7 @@ class GroupBuyModel extends Model {
         );
         $_field = array(
             'grb.id','grb.sn','grb.user_id','grb.goods_id','grb.tag','grb.need_person','grb.create_time',
-            'grb.status','grb.overdue_time',
+            'grb.status','grb.overdue_time','grb.tag'
         );
         $_join = array(
         );
@@ -101,11 +101,9 @@ class GroupBuyModel extends Model {
     }
 
     //加入团购表
-    public function joinGroupBuy($goods,$uid,$orderId){
+    public function joinGroupBuy($goods,$uid,$orderId,$groupBuyId){
         //插入团购记录
-        if(isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId'])){
-            $groupBuyId = $_GET['groupBuyId'];
-        }else{
+        if(!$groupBuyId){
             $modelGroupBuy = D('GroupBuy');
             $_POST = [];
             $_POST['goods_id'] = $goods['foreign_id'];
@@ -121,7 +119,6 @@ class GroupBuyModel extends Model {
                 $this->ajaxReturn(errorMsg('发起团购失败'));
             }
         }
-
         $modelGroupBuyDetail = D('GroupBuyDetail');
         $_POST = [];
         $_POST['goods_id'] = $goods['foreign_id'];
