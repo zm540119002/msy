@@ -168,8 +168,10 @@ class GoodsController extends BaseController {
             if(!$userInfo){
                 return false;
             }else{
+                print_r($userInfo);exit;
                 return $userInfo;
             }
+
         }else{
             //开始获取code
             if($scope == 'snsapi_userinfo'){
