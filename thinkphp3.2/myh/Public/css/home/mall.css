@@ -1893,6 +1893,9 @@ background-size:contain;
 }
 /*城市合伙人*/
 .sign_nav{padding: 0.20rem 0.4rem;}
+.sign_nav a{
+    color:#333;
+}
 .weui_cells{border:1px solid #d9d9d9;border-radius:0.06rem;}
 .login-items .weui_btn_primary{background-color: #F39800;}
 .login-items .weui_input{font-size:0.24rem;}
