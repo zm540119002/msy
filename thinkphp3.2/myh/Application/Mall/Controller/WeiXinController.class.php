@@ -20,13 +20,9 @@ class WeiXinController extends BaseController {
                 $wechat -> getOauthRedirect($url,"wxbase");
             }
         }
+
     }
 
-    //验证微信用户是否已验证过
-    public function checkWxUser(){
-        $wxUser = $this -> getOAuthWeiXinUserInfo();
-        print_r($wxUser);
-    }
 
 }
 
