@@ -109,6 +109,7 @@ class WeiXinModel extends Model {
                 if(!$wxUser){
                     return false;
                 }else{
+                    print_r($wxUser);exit;
                     return $wxUser;
                 }
             }
