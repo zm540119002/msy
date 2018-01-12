@@ -249,8 +249,6 @@ class OrderController extends AuthUserController {
         $modelCouponsReceive = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
-        $modelGroupBuy = D('GroupBuy');
-        $modelGroupBuyDetail = D('GroupBuyDetail');
         if(IS_POST){
             //订单信息
             if(isset($_POST['orderId']) && intval($_POST['orderId'])){

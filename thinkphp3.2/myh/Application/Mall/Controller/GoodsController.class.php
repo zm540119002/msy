@@ -138,10 +138,24 @@ class GoodsController extends BaseController {
             if(isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId'])){
                 $this -> groupBuyId = $_GET['groupBuyId'];
             }
+            if((isset($_GET['shareType'])&&!empty($_GET['shareType'])) || (isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId']))){
+                $model = D('GroupBuyDetail');
+                $_where['gbd.group_buy_id'] = intval($_GET['groupBuyId']);
+                $field=[   'wxu.id','wxu.openid','wxu.nickname','wxu.sex','wxu.country','wxu.province',
+                    'wxu.city','wxu.latitude','wxu.longitude','wxu.longitude','wxu.headimgurl','wxu.subscribe',
+                ];
+                $join=[ ' left join wx_user wxu on wxu.user_id = gbd.user_id ',];
+
+                $this->groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
+                echo $model->getLastSql();exit;
+                print_r( $this->groupBuyDetail);exit;
+            }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             $modelComment = D('Comment');
             $this -> aveScore = round($modelComment -> avg('score'),1);//平均分数
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
+            $user = D('WeiXin')->wxLogin();
+            
         }
         $this -> display();
     }

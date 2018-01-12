@@ -118,6 +118,9 @@ class GroupBuyModel extends Model {
                 $modelGroupBuy->rollback();//回滚事务
                 $this->ajaxReturn(errorMsg('发起团购失败'));
             }
+            $type = 2;//成员
+        }else{
+            $type = 1;//团长
         }
         $modelGroupBuyDetail = D('GroupBuyDetail');
         $_POST = [];
@@ -127,6 +130,7 @@ class GroupBuyModel extends Model {
         $_POST['user_id'] =$uid;
         $_POST['order_id'] = $orderId;
         $_POST['group_buy_id'] = $groupBuyId;
+        $_POST['type'] = $type;
         $res = $modelGroupBuyDetail->addGroupBuyDetail();
         $groupBuyDetailId = $res['id'];
         if(!$groupBuyDetailId){

@@ -44,12 +44,12 @@
     //登录触发
     var loginLayer = null;
     function loginDialog(func){
-        window.scrollTo(0,0);
         loginLayer = layer.open({
             className:'loginLayer',
             content:userLoginForm,
             btn:'登录',
             success:function(){
+                window.scrollTo(0,0);
                 tab_down('.loginNav li','.loginTab .login_wrap','click');
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
