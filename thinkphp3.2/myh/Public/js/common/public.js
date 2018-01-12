@@ -368,7 +368,10 @@ function isRolling(container){
     console.log(container);
     // 移动端touch重写
     var startX, startY;
-
+    container.find('input').on('click',function(){
+       console.log($(this));
+       $(this).focus();
+    })
     container.on('touchstart', function(e){
         //console.log(e.changedTouches[0]);
         // startX = e.changedTouches[0].pageX;
