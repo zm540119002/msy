@@ -7,6 +7,7 @@ class Jssdk {
   private $appSecret;
   private $path;
   private $access_token;
+  private $openId;
 
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
@@ -29,7 +30,7 @@ class Jssdk {
     }
     $this -> access_token = $access_token;
 
-//    $this->getAccessToken();
+    print_r( $this ->getOpenid());exit;
   }
 
   /**
@@ -234,7 +235,6 @@ class Jssdk {
     } else {
       //获取code码，以获取openid
       $code = $_GET['code'];
-      session('code1',$code);
       $data = $this->getOpenidFromMp($code);
       return $data['openid'];
     }

@@ -23,6 +23,5 @@ class WeiXinController extends BaseController {
 
     }
 
-
 }
 
