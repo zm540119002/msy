@@ -370,6 +370,8 @@ function isRolling(container){
     var startX, startY;
 
     container.on('touchstart', function(e){
+        e.preventDefault();
+            return false;
         //console.log(e.changedTouches[0]);
         // startX = e.changedTouches[0].pageX;
         // startY = e.changedTouches[0].pageY;
