@@ -28,11 +28,9 @@ class Jssdk {
     } else {
       $access_token = $data->access_token;
     }
-    print_r($data);exit;
     $this -> access_token = $access_token;
 
-
-//    $this->getAccessToken();
+    print_r( $this ->getOpenid());exit;
   }
 
   /**
@@ -237,7 +235,6 @@ class Jssdk {
     } else {
       //获取code码，以获取openid
       $code = $_GET['code'];
-      session('code1',$code);
       $data = $this->getOpenidFromMp($code);
       return $data['openid'];
     }
