@@ -27,7 +27,7 @@ class WeiXinController extends BaseController {
         $wxUser = $this -> getOAuthWeiXinUserInfo();
         $backUrl = substr($url,0,strrpos($url,'.html'));
         $url = $url.'/code';
-        header("Location: $backUrl");
+        header("Location: $url");
 
     }
 
