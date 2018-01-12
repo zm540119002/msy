@@ -387,3 +387,9 @@ i{
 .right_sidebar a.backTop{
    background: #3f3a39;
 }
+.scrollfixed{
+    position:fixed;
+    left:0;
+    top:0;
+    right:0;
+}
