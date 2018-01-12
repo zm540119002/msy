@@ -2,8 +2,6 @@
 namespace web\all\Controller;
 use Think\Controller;
 use web\all\Component\WxpayAPI\Jssdk;
-
-
 /**公共基础控制器
  */
 class CommonController extends Controller{
@@ -66,7 +64,7 @@ class CommonController extends Controller{
     //OAuth2 授权获取用户基本信息（OAuth2 授权的 Access Token 获取 未关注用户，Access Token为临时获取）
     public function getOAuthWeiXinUserInfo(){
         if(isWxBrowser()){//判断是否为微信浏览器
-            return  $this->_jssdk ->getUser();
+            return  $this->_jssdk ->getOauthUserInfo();
         }
     }
 
@@ -103,6 +101,7 @@ class CommonController extends Controller{
          */
         return  $this->_jssdk -> create_menu_raw($menu);
     }
+    
 }
 
 

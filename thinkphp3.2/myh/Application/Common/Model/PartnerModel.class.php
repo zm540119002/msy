@@ -85,7 +85,8 @@ class PartnerModel extends Model {
             'p.status' => 0,
         );
         $_field = array(
-            'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.user_id','p.create_time',
+            'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.province','p.city',
+            'p.user_id','p.create_time',
         );
         $_join = array(
         );
@@ -94,7 +95,7 @@ class PartnerModel extends Model {
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
-            ->partner('p.id desc')
+            ->order('p.id desc')
             ->select();
         return $list?:[];
     }

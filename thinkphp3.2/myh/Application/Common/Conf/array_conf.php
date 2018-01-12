@@ -18,19 +18,13 @@ return array(
     'CITY_TYPE' => array(
         array(
             'key' => 1,
-            'value' => '一线',
+            'value' => 'A类',
         ),array(
             'key' => 2,
-            'value' => '二线',
+            'value' => 'B类',
         ),array(
             'key' => 3,
-            'value' => '三线',
-        ),array(
-            'key' => 4,
-            'value' => '四线',
-        ),array(
-            'key' => 5,
-            'value' => '五线',
+            'value' => 'C类',
         ),
     ),
     //底部购物车配置
@@ -52,6 +46,7 @@ return array(
         array('apply_partner'   => '申请美悦会城市合伙人',),//14
         array('city_search'   => '申请查询',),//15
         array('next_step'   => '下一步',),//16
+        array('pay_deposit'   => '支付席位订金',),//17
     ),
     //商品购买类型
     'BUY_TYPE'=>array(

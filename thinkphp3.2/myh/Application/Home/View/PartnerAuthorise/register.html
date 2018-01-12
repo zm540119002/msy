@@ -21,15 +21,15 @@
             </div>
         </section>
         <section class="city_search_module">
-            <form>
+            <form id="form1">
                 <div class="register_data_item">
-                    <input type="text" name="" value="" placeholder="机构名称(如有请填写)" class="organization_name">
+                    <input type="text" name="registrant" value="{$partnerInfo.registrant}" placeholder="机构名称(如有请填写)" class="organization_name">
                 </div>
                 <div class="register_data_item">
-                    <input type="text" name="" value="" placeholder="你的姓名" class="partner_name">
+                    <input type="text" name="name" value="{$partnerInfo.name}" placeholder="你的姓名" class="partner_name">
                 </div>
                 <div class="register_data_item">
-                    <input type="tel" name="" value="" placeholder="手机号码" class="partner_phone">
+                    <input type="tel" name="mobile_phone" value="{$partnerInfo.mobile_phone}" placeholder="手机号码" class="partner_phone">
                 </div>
             </form>
         </section>
@@ -51,7 +51,7 @@
 <block name="script">
     <script type="text/javascript">
         $(function(){
-            //登记资料
+            //下一步
             $('body').on('click','.next_step',function(){
                 var organizationName=$('.organization_name').val();
                 var partnerName=$('.partner_name').val();
@@ -68,6 +68,28 @@
                     dialog.error(content);
                     return false;
                 }
+                var postData = $('#form1').serializeObject();
+                postData.partnerId = '{$partnerInfo.id}';
+                postData.province = '{$Think.get.province}';
+                postData.city = '{$Think.get.city}';
+                var url = CONTROLLER + '/register';
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){},
+                    error:function(){
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status == 0){
+                            dialog.error(data.info);
+                        }else if(data.status == 1){
+                            location.href = CONTROLLER + '/seatDeposit/partnerId/' + data.id;
+                        }
+                    }
+                });
             });
         });
     </script>

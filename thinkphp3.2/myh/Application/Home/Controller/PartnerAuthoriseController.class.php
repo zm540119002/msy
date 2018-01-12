@@ -57,6 +57,7 @@ class PartnerAuthoriseController extends AuthUserController {
             }else{//新增
                 $_POST['user_id'] = $this->user['id'];
                 $_POST['create_time'] = time();
+                $_POST['auth_status'] = 1;
                 $res = $modelPartner->addPartner($rules);
             }
             $this->ajaxReturn($res);
@@ -64,15 +65,27 @@ class PartnerAuthoriseController extends AuthUserController {
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(16));
             $partner = PartnerCache::get($this->user['id']);
-            $this->assign('partner',$partner);
+            $this->assign('partnerInfo',$partner);
             $this->display();
         }
     }
 
     //席位订金
     public function seatDeposit(){
+        $partner = PartnerCache::get($this->user['id']);
+        if($partner['id']){
+            $where = array(
+                'id' => $partner['city'],
+            );
+            $city = D('City')->selectCity($where);
+            $partner['city'] = $city[0];
+        }
         if(IS_POST){
         }else{
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,17));
+
+            $this->assign('partnerInfo',$partner);
             $this->display();
         }
     }
