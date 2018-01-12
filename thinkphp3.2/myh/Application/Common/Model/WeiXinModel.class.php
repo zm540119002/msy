@@ -108,15 +108,14 @@ class WeiXinModel extends Model {
                 );
                 $wxUserDatabase = $this -> selectWeiXinUser($where);
                 if(!$wxUserDatabase){
-                    $this -> add($wxUser);
+                    $res = $this -> add($wxUser);
+                    if(!$res){
+                        return errorMsg($this->getError());
+                    }
                 }else{
-                    print_r($wxUser);exit;
                     return $wxUser;
                 }
             }
-//            else{
-//                $wechat -> getOauthRedirect($url,"wxbase");
-//            }
         }
 
     }
