@@ -2039,12 +2039,19 @@ background-size:contain;
     vertical-align: middle;
     width:80%;
 }
+.wt_d_l img{
+    margin:0 auto;
+    display: block;
+}
 .wt_tipc_item dl {
     margin-right:28px;
     /*flex:1;*/
     /*width:80px;*/
     text-align:center;
     float:left;
+}
+.wt_detail_tipc dl{
+    margin-right:12px;
 }
 .wt_tipc_item dl dt{
     width:42px;
