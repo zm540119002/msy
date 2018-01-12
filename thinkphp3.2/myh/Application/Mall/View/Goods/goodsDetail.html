@@ -172,21 +172,22 @@
 </block>
 
 <block name="script">
+    <script type="text/javascript" src="PUBLIC_JS/common/weixin.js"></script>
     <script type="text/javascript">
         $(function(){
             //星星评分等级
             var getFractionValue='{$aveScore}';
             $('.five_star').setStar(getFractionValue);
         });
-        $(window).load(function() {
-            var url = window.location.href;
-            var ua = window.navigator.userAgent.toLowerCase();
-            if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-                if(url.indexOf("code=") <= 0 ) { //判断url地址中是否包含link字符串
-                    self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
-                }
-            }
-        });
+//        $(window).load(function() {
+//            var url = window.location.href;
+//            var ua = window.navigator.userAgent.toLowerCase();
+//            if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
+//                if(url.indexOf("code=") <= 0 ) { //code
+//                    self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
+//                }
+//            }
+//        });
 
     </script>
 </block>

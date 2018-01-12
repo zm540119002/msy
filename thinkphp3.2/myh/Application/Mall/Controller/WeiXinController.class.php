@@ -22,6 +22,10 @@ class WeiXinController extends BaseController {
         }
 
     }
+    public function checkWxUser(){
+        $wxUser = $this -> getOAuthWeiXinUserInfo();
+        print_r($wxUser);
+    }
 
 
 }
