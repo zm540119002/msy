@@ -180,7 +180,12 @@
         });
         $(window).load(function() {
             var url = window.location.href;
-            self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
+            var ua = window.navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+                if(url.indexOf("code=") <= 0 ) { //判断url地址中是否包含link字符串
+                    self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
+                }
+            }
         });
 
     </script>
