@@ -77,8 +77,11 @@
                     url: url,
                     data: postData,
                     type: 'post',
-                    beforeSend: function(){},
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
                     error:function(){
+                        $('.loading').hide();
                         dialog.error('AJAX错误');
                     },
                     success: function(data){
