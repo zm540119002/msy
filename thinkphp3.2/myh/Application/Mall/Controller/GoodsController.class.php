@@ -139,7 +139,15 @@ class GoodsController extends BaseController {
                 $this -> groupBuyId = $_GET['groupBuyId'];
             }
             if((isset($_GET['shareType'])&&!empty($_GET['shareType'])) || (isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId']))){
-                
+                $model = D('GroupBuyDetail');
+                $where['gbd.group_buy_id'] = intval($_GET['groupBuyId']);
+                $field=[   'wxu.id','wxu.openid','wxu.nickname','wxu.sex','wxu.country','wxu.province',
+                    'wxu.city','wxu.latitude','wxu.longitude','wxu.longitude','wxu.headimgurl','wxu.subscribe',
+                ];
+                $join=[ ' left join wx_user wxu on wxu.user_id = gbd.user_id ',];
+
+                $this->groupBuyDetail = $model->selectGroupBuyDetail($where,$field,$join);
+                print_r( $this->groupBuyDetail);exit;
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             $modelComment = D('Comment');
