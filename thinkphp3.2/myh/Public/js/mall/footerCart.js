@@ -209,8 +209,7 @@ function generateOrder(postData,callBack) {
             $('.loading').hide();
             if(data.status == 0){
                 if(data.url){
-                    console.log(data);return;
-                    //location.href = data.url;
+                    dialog.confirm(data.info,data.url);
                 }else{
                     dialog.error(data.info);
                 }

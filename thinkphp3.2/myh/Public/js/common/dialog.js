@@ -21,5 +21,20 @@ var dialog = {
                 }
             }
         });
+    },
+    confirm:function(message,url){
+        layer.open({
+            content : message?message:'成功',
+            btn:['确定','取消'],
+            end : function(){
+              
+            },
+            yes:function(index){
+                if(url){
+                    location.href=url;
+                }
+                layer.close(index)
+            }
+        })
     }
 };
