@@ -6,6 +6,7 @@ class WeiXinController extends BaseController {
     //微信登录
     public function wxLogin(){
         $wxUser = $this -> getOAuthWeiXinUserInfo();
+        print_r($wxUser);
 //        $url = $_GET['url'];
 //        if(isWxBrowser()) {//判断是否为微信浏览器
 //            $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
