@@ -138,6 +138,9 @@ class GoodsController extends BaseController {
             if(isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId'])){
                 $this -> groupBuyId = $_GET['groupBuyId'];
             }
+            if((isset($_GET['shareType'])&&!empty($_GET['shareType'])) || (isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId']))){
+                
+            }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             $modelComment = D('Comment');
             $this -> aveScore = round($modelComment -> avg('score'),1);//平均分数
