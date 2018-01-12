@@ -29,8 +29,9 @@ class Jssdk {
       $access_token = $data->access_token;
     }
     $this -> access_token = $access_token;
-
-    print_r( $this ->getOpenid());exit;
+    if(isWxBrowser()){
+      $this ->openId = $this->getOpenid();
+    }
   }
 
   /**
