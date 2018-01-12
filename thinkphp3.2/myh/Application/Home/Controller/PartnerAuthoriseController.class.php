@@ -84,7 +84,6 @@ class PartnerAuthoriseController extends AuthUserController {
         }else{
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,17));
-
             $this->assign('partnerInfo',$partner);
             $this->display();
         }
@@ -92,8 +91,19 @@ class PartnerAuthoriseController extends AuthUserController {
 
     //资格完款
     public function seniority(){
+        $partner = PartnerCache::get($this->user['id']);
+        if($partner['id']){
+            $where = array(
+                'id' => $partner['city'],
+            );
+            $city = D('City')->selectCity($where);
+            $partner['city'] = $city[0];
+        }
         if(IS_POST){
         }else{
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,18));
+            $this->assign('partnerInfo',$partner);
             $this->display();
         }
     }
