@@ -7,7 +7,6 @@ class Jssdk {
   private $appSecret;
   private $path;
   private $access_token;
-  private $openId;
 
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
@@ -29,9 +28,8 @@ class Jssdk {
       $access_token = $data->access_token;
     }
     $this -> access_token = $access_token;
-    if(isWxBrowser()){
-      $this ->openId = $this->getOpenid();
-    }
+
+//    $this->getAccessToken();
   }
 
   /**
@@ -236,6 +234,7 @@ class Jssdk {
     } else {
       //获取code码，以获取openid
       $code = $_GET['code'];
+      session('code1',$code);
       $data = $this->getOpenidFromMp($code);
       return $data['openid'];
     }
