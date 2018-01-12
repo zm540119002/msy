@@ -25,7 +25,7 @@ class WeiXinController extends BaseController {
     public function checkWxUser(){
         $url = $_GET['url'];
         $wxUser = $this -> getOAuthWeiXinUserInfo();
-        print_r($url);exit;
+        $url = $url.'/code';
         header("Location: $url");
 
     }
