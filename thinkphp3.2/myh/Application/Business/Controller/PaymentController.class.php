@@ -55,18 +55,25 @@ class PaymentController extends AuthUserController {
             }
             $modelCity = D('City');
             $where = array(
-                'ct.id' => $partner['id'],
+                'ct.id' => $partner['city'],
             );
             $city = $modelCity->selectCity($where);
             $city = $city[0];
             if(!$city['id']){
-                $this->error('城市合伙人信息有误！');
+                $this->error('合伙人城市信息有误！',session('returnUrl'));
             }
-            if(!intval($city['deposit'])){
-                $this->error('城市合伙人订金有误！');
+            if(!floatval($city['deposit'])){
+                $this->error('合伙人订金有误！',session('returnUrl'));
+            }
+            if(!$this->checkWallet()){
+                $this->error('钱包有误！',session('returnUrl'));
+            }
+            $SN = generateSN();
+            if(!saveWalletDetail($city['deposit'],$SN)){
+                $this->error('钱包充值出错！',session('returnUrl'));
             }
             $payInfo = array(
-                'sn'=>generateSN(),
+                'sn'=>$SN,
                 'actually_amount'=>$city['deposit'],
                 'cancel_back' => U('payCancel'),
                 'fail_back' => U('payFail'),
@@ -102,5 +109,47 @@ class PaymentController extends AuthUserController {
                 Pay::wxPay($payInfo);
             }
         }
+    }
+
+    /**钱包明细
+     * @param $amount
+     * @param int $type 1：充值 2：支付
+     * @return bool
+     */
+    private function saveWalletDetail($amount,$SN,$type=1){
+        $modelWalletDetail = D('WalletDetail');
+        if(floatval($amount)){
+            $_POST['user_id'] = $this->user['id'];
+            $_POST['type'] = $type;
+            $_POST['recharge_status'] = 0;
+            $_POST['create_time'] = time();
+            $_POST['amount'] = $amount;
+            $_POST['sn'] = $SN;
+            $res = $modelWalletDetail->addWalletDetail();
+            if($res['status']==1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //检查钱包记录是否存在
+    private function checkWallet(){
+        $modelWallet = D('Wallet');
+        $where = array(
+            'w.user_id' => $this->user['id'],
+        );
+        $walletInfo = $modelWallet->selectWallet($where);
+        $walletInfo = $walletInfo[0];
+        if($walletInfo){
+            return true;
+        }
+        $_POST = [];
+        $_POST['user_id'] = $this->user['id'];
+        $res = $modelWallet->saveWallet();
+        if($res['status']==1){
+            return true;
+        }
+        return false;
     }
 }

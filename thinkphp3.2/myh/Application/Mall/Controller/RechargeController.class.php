@@ -1,7 +1,7 @@
 <?php
 namespace Mall\Controller;
-use web\all\Controller\AuthCompanyAuthoriseController;
-class RechargeController extends AuthCompanyAuthoriseController {
+use web\all\Controller\AuthUserController;
+class RechargeController extends AuthUserController {
     //充值-首页
     public function index(){
         $modelWalletDetail = D('WalletDetail');
