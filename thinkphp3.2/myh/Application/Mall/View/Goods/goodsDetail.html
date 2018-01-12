@@ -70,27 +70,53 @@
                     </div>
                 </div>
                 <ul class="group_purchase">
-                    <volist name="groupBuyDetail" id="vo">
-                        <if condition="$vo.type eq 1 ">
-                            <li>
-                                <empty name="vo.headimgurl">
-                                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                                    <else />
-                                    <img src="{$vo.headimgurl}" alt="">
-                                </empty>
-                                <span>团长</span>
-                            </li>
+                    <!--<volist name="groupBuyDetail" id="vo">-->
+                        <!--<if condition="$vo.type eq 1 ">-->
+                            <!--<li>-->
+                                <!--<empty name="vo.headimgurl">-->
+                                    <!--<img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">-->
+                                    <!--<else />-->
+                                    <!--<img src="{$vo.headimgurl}" alt="">-->
+                                <!--</empty>-->
+                                <!--<span>团长</span>-->
+                            <!--</li>-->
+                            <!--<else />-->
+                            <!--<li>-->
+                                <!--<empty name="vo.headimgurl">-->
+                                    <!--<img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">-->
+                                    <!--<else />-->
+                                    <!--<img src="{$vo.headimgurl}" alt="">-->
+                                <!--</empty>-->
+                                <!--<span>成员</span>-->
+                            <!--</li>-->
+                        <!--</if>-->
+                    <!--</volist>-->
+
+                    <li>
+                        <empty name="groupBuyDetail[0].headimgurl">
+                            <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
                             <else />
-                            <li>
-                                <empty name="vo.headimgurl">
-                                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                                    <else />
-                                    <img src="{$vo.headimgurl}" alt="">
-                                </empty>
-                                <span>团长</span>
-                            </li>
-                        </if>
-                    </volist>
+                            <img src="{$groupBuyDetail[0].headimgurl}" alt="">
+                        </empty>
+                        <span>团长</span>
+                    </li>
+
+                    <li>
+                        <empty name="groupBuyDetail[1].headimgurl">
+                            <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                            <else />
+                            <img src="{$groupBuyDetail[1].headimgurl}" alt="">
+                        </empty>
+                        <span>成员</span>
+                    </li>
+                    <li>
+                        <empty name="groupBuyDetail[2].headimgurl">
+                            <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                            <else />
+                            <img src="{$groupBuyDetail[2].headimgurl}" alt="">
+                        </empty>
+                        <span>成员</span>
+                    </li>
                 </ul>
                 <div class="count_down_module">
                     <div class="hot_count_down wt_count_down wt_ct">

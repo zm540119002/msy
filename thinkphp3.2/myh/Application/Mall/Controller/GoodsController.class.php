@@ -153,9 +153,9 @@ class GoodsController extends BaseController {
             $this -> aveScore = round($modelComment -> avg('score'),1);//平均分数
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
             $user = D('WeiXin')->wxLogin();
-            
+
+            $this -> display();
         }
-        $this -> display();
     }
 
 
