@@ -23,7 +23,10 @@ class WeiXinController extends BaseController {
 
     }
     public function checkWxUser(){
+        $url = $_GET['url'];
         $wxUser = $this -> getOAuthWeiXinUserInfo();
+        $this->redirect($url);
+
     }
 
 
