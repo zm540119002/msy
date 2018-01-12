@@ -44,7 +44,6 @@ class PartnerAuthoriseController extends AuthUserController {
     public function register(){
         $modelPartner = D('Partner');
         if(IS_POST){
-            print_r($_POST);exit;
             $rules = array(
                 array('name','require','姓名必须！'),
                 array('mobile_phone','isMobile','请输入正确的手机号码',0,'function'),
@@ -58,6 +57,7 @@ class PartnerAuthoriseController extends AuthUserController {
             }else{//新增
                 $_POST['user_id'] = $this->user['id'];
                 $_POST['create_time'] = time();
+                $_POST['auth_status'] = 1;
                 $res = $modelPartner->addPartner($rules);
             }
             $this->ajaxReturn($res);
@@ -65,15 +65,27 @@ class PartnerAuthoriseController extends AuthUserController {
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(16));
             $partner = PartnerCache::get($this->user['id']);
-            $this->assign('partner',$partner);
+            $this->assign('partnerInfo',$partner);
             $this->display();
         }
     }
 
     //席位订金
     public function seatDeposit(){
+        $partner = PartnerCache::get($this->user['id']);
+        if($partner['id']){
+            $where = array(
+                'id' => $partner['city'],
+            );
+            $city = D('City')->selectCity($where);
+            $partner['city'] = $city[0];
+        }
         if(IS_POST){
         }else{
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,17));
+
+            $this->assign('partnerInfo',$partner);
             $this->display();
         }
     }

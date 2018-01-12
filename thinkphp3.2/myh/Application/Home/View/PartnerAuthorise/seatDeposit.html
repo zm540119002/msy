@@ -21,12 +21,12 @@
             </div>
         </section>
         <section class="city_search_module">
-            <p>恭喜：你所咨询的城市[城市名称]</p>
+            <p>恭喜：你所咨询的城市：[{$partnerInfo.city.name}]</p>
             <p>城市合伙人未签约，可以申请</p>
-            <p>请支付1680.00城市合伙人席位订金递交申请</p>
+            <p>请支付{$partnerInfo.city.deposit}城市合伙人席位订金递交申请</p>
             <dl class="explain_intro">
                 <dt>说明</dt>
-                <dd>1、如签约成功订金1680元转为合伙人款项，待补齐城市合伙人余款后正式成为城市合伙人；</dd>
+                <dd>1、如签约成功订金{$partnerInfo.city.deposit}元转为合伙人款项，待补齐城市合伙人余款后正式成为城市合伙人；</dd>
                 <dd>2、如在咨询期所申请的城市合伙人已被他人签约，其订金可申请原路无息退回，或者订金可转为代理商签约金；</dd>
                 <dd>3、城市合伙人和代理商资格款项作为采购预存款用于采购进货结算。</dd>
             </dl>
@@ -49,6 +49,28 @@
 <block name="script">
     <script type="text/javascript">
         $(function(){
+            var deposit = '{$partnerInfo.city.deposit}';
+            $('footer').find('price').text(deposit);
+            //支付席位订金
+            $('body').on('click','.pay_deposit',function(){
+                $.ajax({
+                    url: ACTION,
+                    data: {},
+                    type: 'post',
+                    beforeSend: function(){},
+                    error:function(){
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status == 0){
+                            dialog.error(data.info);
+                        }else if(data.status == 1){
+                            location.href = CONTROLLER + '/seatDeposit/partnerId/' + data.id;
+                        }
+                    }
+                });
+            });
         });
     </script>
 </block>

@@ -85,7 +85,8 @@ class PartnerModel extends Model {
             'p.status' => 0,
         );
         $_field = array(
-            'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.user_id','p.create_time',
+            'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.province','p.city',
+            'p.user_id','p.create_time',
         );
         $_join = array(
         );
