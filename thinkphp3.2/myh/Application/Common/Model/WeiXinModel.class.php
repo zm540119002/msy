@@ -98,14 +98,16 @@ class WeiXinModel extends Model {
 
     //微信登录
     public function wxLogin(){
-//        $url = $_GET['url'];
         if(isWxBrowser()) {//判断是否为微信浏览器
             $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
             $code = isset($_GET['code'])?$_GET['code']:'';
-            $url = 'http://'.$this->host .$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            $_SESSION['wx_redirect'] = $url;
             if($code){
                 $wxUser =$wechat ->getOauthUserInfo();
+                $where = array(
+                    'wxu.openid' => $wxUser['openid'],
+                );
+                $wxUserDatabase = $this -> selectWeiXinUser($where);
+                echo $this->getLastSql();exit;
                 if(!$wxUser){
                     return false;
                 }else{
