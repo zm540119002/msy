@@ -16,11 +16,6 @@ class CallBackController extends Controller{
             $data = xmlToArray($xml);
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'order');
         }
-        if (strpos($_SERVER['QUERY_STRING'], 'weixin.group_buy') == true) {
-            $xml = file_get_contents('php://input');
-            $data = xmlToArray($xml);
-            $this->callBack($data, $payment_type = 'weixin', $order_type = 'group_buy');
-        }
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.deposit') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
@@ -69,9 +64,6 @@ class CallBackController extends Controller{
             }
             if ($order_type == 'order') {
                 $this->orderHandle($parameter);
-            }
-            if ($order_type == 'group_buy') {
-                $this->groupBuyHandle($parameter);
             }
             if ($order_type == 'deposit') {
                 $this->depositHandle($parameter);
@@ -185,13 +177,6 @@ class CallBackController extends Controller{
         }
     }
 
-    /**团购订单支付回调
-     * @param $parameter
-     */
-    private function groupBuyHandle($parameter){
-        $this->errorReturn($parameter['order_sn'], 'aa', 'aaa');
-    }
-
     /**
      * @param $data
      * 普通订单支付回调
@@ -291,7 +276,58 @@ class CallBackController extends Controller{
 
     /**席位订金充值回调
      */
-    private function depositHandle(){
+    private function depositHandle($data){
+        $modelWallet = D('Wallet');
+        $modelWalletDetail = D('WalletDetail');
+        $where = array(
+            'wd.sn' => $data['out_trade_no'],
+        );
+        $WalletDetailInfo = $modelWalletDetail->selectWalletDetail($where);
+        $WalletDetailInfo = $WalletDetailInfo[0];
+        if ($WalletDetailInfo['recharge_status'] == 1) {//直接返回true
+            if ($WalletDetailInfo['amount'] * 100 != $data['total_fee']) {//校验返回的金额是否与商户侧的金额一致
+                //返回状态给微信服务器
+                $this->errorReturn($data['out_trade_no'], '回调的金额和订单的金额不符，终止购买');
+            } else {
+                $modelWalletDetail->startTrans();
+                //更新钱包明细
+                $_POST = [];
+                //充值状态已完成
+                $_POST['recharge_status'] = 1;
+                $_POST['wallerDetailId'] = $WalletDetailInfo['id'];
+                $where = array(
+                    'user_id' => $WalletDetailInfo['user_id'],
+                    'sn' => $data['out_trade_no'],
+                );
+                $returnData = $modelWalletDetail->saveWalletDetail($where);
+                if (!$returnData['id']) {
+                    $modelWalletDetail->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($data['out_trade_no'], $modelWalletDetail->getLastSql());
+                }
+                //钱包信息
+                $where = array(
+                    'w.user_id' => $WalletDetailInfo['user_id'],
+                );
+                $walletInfo = $modelWallet->selectWallet($where);
+                $walletInfo = $walletInfo[0];
+                //更新账户
+                $_POST = [];
+                $_POST['amount'] = $walletInfo['amount'] + $WalletDetailInfo['amount'];
+                $where = array(
+                    'user_id' => $WalletDetailInfo['user_id'],
+                );
+                $res = $modelWallet->saveWallet($where);
+                if ($res['status'] == 0) {
+                    $modelWallet->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($data['out_trade_no'], $modelWallet->getLastSql());
+                }
+                $modelWalletDetail->commit();//提交事务
+                //返回状态给微信服务器
+                $this->successReturn($data['out_trade_no']);
+            }
+        }
     }
 
     //成功返回

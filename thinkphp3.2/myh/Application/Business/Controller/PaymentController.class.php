@@ -65,11 +65,12 @@ class PaymentController extends AuthUserController {
             if(!floatval($city['deposit'])){
                 $this->error('合伙人订金有误！',session('returnUrl'));
             }
-            if(!$this->checkWallet()){
-                $this->error('钱包有误！',session('returnUrl'));
+            $res = $this->checkWallet();
+            if(!($res===true)){
+                $this->error($res,session('returnUrl'));
             }
             $SN = generateSN();
-            if(!saveWalletDetail($city['deposit'],$SN)){
+            if(!$this->saveWalletDetail($city['deposit'],$SN)){
                 $this->error('钱包充值出错！',session('returnUrl'));
             }
             $payInfo = array(
@@ -133,23 +134,34 @@ class PaymentController extends AuthUserController {
         return false;
     }
 
-    //检查钱包记录是否存在
-    private function checkWallet(){
+    /**检查钱包（1，钱包记录不存在，则新增记录；2，如果为支付，会检查余额是否足够）
+     * @param int $amount 金额
+     * @param int $type 1：充值 2：支付
+     * @return bool === true 表示通过
+     */
+    private function checkWallet($amount,$type=1){
+        $msg = '';
         $modelWallet = D('Wallet');
         $where = array(
             'w.user_id' => $this->user['id'],
         );
         $walletInfo = $modelWallet->selectWallet($where);
         $walletInfo = $walletInfo[0];
-        if($walletInfo){
-            return true;
+        if($walletInfo){//存在
+            if($type==2 && $walletInfo['amount']<$amount){
+                $msg = '余额不足';
+            }
+        }else{//不存在
+            if($type==2){
+                $msg = '余额不足';
+            }
+            $_POST = [];
+            $_POST['user_id'] = $this->user['id'];
+            $res = $modelWallet->addWallet();
+            if($res['status']==0){
+                $msg = $modelWallet->getLastSql();
+            }
         }
-        $_POST = [];
-        $_POST['user_id'] = $this->user['id'];
-        $res = $modelWallet->saveWallet();
-        if($res['status']==1){
-            return true;
-        }
-        return false;
+        return $msg?:true;
     }
 }
