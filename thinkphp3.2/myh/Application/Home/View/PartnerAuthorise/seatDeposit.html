@@ -9,13 +9,13 @@
                 <nav class="sign_nav">
                     <ul id="status " class="status f24 weui-flex">
                         <li class="weui-flex-item">
-                            <a href="{:U('citySearch')}"><span class="city_inquiries"></span><em></em>城市查询</a></li>
+                            <a href="javascript:void(0);"><span class="city_inquiries"></span><em></em>城市查询</a></li>
                         <li class="weui-flex-item">
-                            <a href="{:U('register')}"><span class="register_info"></span><em></em>登记资料</a></li>
+                            <a href="javascript:void(0);"><span class="register_info"></span><em></em>登记资料</a></li>
                         <li class="weui-flex-item active">
-                            <a href="{:U('seatDeposit')}"><span class="seat_deposit"></span><em></em>席位订金</a></li>
+                            <a href="javascript:void(0);"><span class="seat_deposit"></span><em></em>席位订金</a></li>
                         <li class="weui-flex-item">
-                            <a href="{:U('seniority')}"><span class="qualify_money"></span>资格完款</a></li>
+                            <a href="javascript:void(0);"><span class="qualify_money"></span>资格完款</a></li>
                     </ul>
                 </nav>
             </div>
@@ -53,12 +53,18 @@
             $('footer').find('price').text(deposit);
             //支付席位订金
             $('body').on('click','.pay_deposit',function(){
+                var url = APP + '/Business/Payment/depositPayment';
+                var postData = {};
+                postData.returnUrl = location.href;
                 $.ajax({
-                    url: ACTION,
-                    data: {},
+                    url: url,
+                    data: postData,
                     type: 'post',
-                    beforeSend: function(){},
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
                     error:function(){
+                        $('.loading').hide();
                         dialog.error('AJAX错误');
                     },
                     success: function(data){
@@ -66,7 +72,7 @@
                         if(data.status == 0){
                             dialog.error(data.info);
                         }else if(data.status == 1){
-                            location.href = CONTROLLER + '/seatDeposit/partnerId/' + data.id;
+                            location.href = CONTROLLER + '/seniority/partnerId/' + data.id;
                         }
                     }
                 });

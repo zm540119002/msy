@@ -182,7 +182,7 @@ EOF;
         $input = new \WxPayRefund();
         $input->SetOut_trade_no($refund['order_sn']);			//自己的订单号
         $input->SetTransaction_id($refund['transaction_id']);  	//微信官方生成的订单流水号，在支付成功中有返回
-        $input->SetOut_refund_no(generateOrderSN(10));			//退款单号
+        $input->SetOut_refund_no(generateSN(10));			//退款单号
         $input->SetTotal_fee($refund['total_price']);			//订单标价金额，单位为分
         $input->SetRefund_fee($refund['refund_amount']);			//退款总金额，订单总金额，单位为分，只能为整数
         $input->SetOp_user_id($merchid);

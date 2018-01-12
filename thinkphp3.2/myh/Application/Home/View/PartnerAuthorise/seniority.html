@@ -9,22 +9,22 @@
                 <nav class="sign_nav">
                     <ul id="status " class="status f24 weui-flex">
                         <li class="weui-flex-item">
-                            <a href="{:U('citySearch')}"><span class="city_inquiries"></span><em></em>城市查询</a></li>
+                            <a href="javascript:void(0);"><span class="city_inquiries"></span><em></em>城市查询</a></li>
                         <li class="weui-flex-item">
-                            <a href="{:U('register')}"><span class="register_info"></span><em></em>登记资料</a></li>
+                            <a href="javascript:void(0);"><span class="register_info"></span><em></em>登记资料</a></li>
                         <li class="weui-flex-item">
-                            <a href="{:U('seatDeposit')}"><span class="seat_deposit"></span><em></em>席位订金</a></li>
+                            <a href="javascript:void(0);"><span class="seat_deposit"></span><em></em>席位订金</a></li>
                         <li class="weui-flex-item active">
-                            <a href="{:U('seniority')}"><span class="qualify_money"></span>资格完款</a></li>
+                            <a href="javascript:void(0);"><span class="qualify_money"></span>资格完款</a></li>
                     </ul>
                 </nav>
             </div>
         </section>
         <section class="city_search_module">
-            <p>你所申请的城市为:<span></span>线城市</p>
-            <p>城市合伙人资格门槛为:￥<price>1688.00</price></p>
-            <p>已交订金:￥<price>1680.00</price></p>
-            <p>需要补交城市合伙人资格款:￥<price>XXXXX</price></p>
+            <p>你所申请的城市为:<span></span>{$partnerInfo.city.type|getCityTypeCN}</p>
+            <p>城市合伙人资格门槛为:￥<price>{$partnerInfo.city.partner_fee}</price></p>
+            <p>已交订金:￥<price>{$partnerInfo.city.deposit}</price></p>
+            <p>需要补交城市合伙人资格款:￥<price>{$partnerInfo.city.partner_fee}</price></p>
             <p class="explain_intro">
                 *城市合伙人资格款作为采购预存款用于采购进货结算
             </p>
@@ -47,6 +47,8 @@
 <block name="script">
     <script type="text/javascript">
         $(function(){
+            var partner_fee = '{$partnerInfo.city.partner_fee}';
+            $('footer').find('price').text(partner_fee);
         });
     </script>
 </block>

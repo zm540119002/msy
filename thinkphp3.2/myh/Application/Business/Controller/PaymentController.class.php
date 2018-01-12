@@ -1,7 +1,8 @@
 <?php
 namespace Business\Controller;
 use web\all\Controller\AuthUserController;
-use  web\all\Lib\Pay;
+use web\all\Lib\Pay;
+use web\all\Cache\PartnerCache;
 class PaymentController extends AuthUserController {
     //订单-支付
     public function orderPayment(){
@@ -42,6 +43,38 @@ class PaymentController extends AuthUserController {
                 }
                 Pay::wxPay($payInfo);
             }
+        }
+    }
+
+    //席位订金-支付
+    public function depositPayment(){
+        if(IS_POST){
+            $partner = PartnerCache::get($this->user['id']);
+            if(!$partner){
+                $this->error('合伙人未登记！');
+            }
+            $modelCity = D('City');
+            $where = array(
+                'ct.id' => $partner['id'],
+            );
+            $city = $modelCity->selectCity($where);
+            $city = $city[0];
+            if(!$city['id']){
+                $this->error('城市合伙人信息有误！');
+            }
+            if(!intval($city['deposit'])){
+                $this->error('城市合伙人订金有误！');
+            }
+            $payInfo = array(
+                'sn'=>generateSN(),
+                'actually_amount'=>$city['deposit'],
+                'cancel_back' => U('payCancel'),
+                'fail_back' => U('payFail'),
+                'success_back' => session('returnUrl')?:U('payComplete'),
+                'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .'/weixin.deposit',
+            );
+            Pay::wxPay($payInfo);
+        }else{
         }
     }
 
