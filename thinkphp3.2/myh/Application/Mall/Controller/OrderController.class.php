@@ -220,7 +220,6 @@ class OrderController extends AuthUserController {
         if($orderType == 1){//团购
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId);
         }
-
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
     }
@@ -231,28 +230,14 @@ class OrderController extends AuthUserController {
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
         $modelOrder = D('Order');
-        $modelOrder->startTrans();
         $where = array(
             'user_id' => $this->user['id'],
         );
         $_POST['logistics_status'] = 1;
         $res = $modelOrder->saveOrder($where);
         if(!$res['id']){
-            $modelOrder->rollback();
             $this->ajaxReturn(errorMsg('失败'));
         }
-
-        if(isWxBrowser()) {//判断是否为微信浏览器
-            $openid = $this -> getOpenid();
-            $_where = array('openid' => $openid);
-            $data = array('user_id'=>$this->user['id']);
-            $res =  D('WeiXin') -> where($_where)->save($data);
-            if(!$res){
-                $modelOrder->rollback();
-                $this->ajaxReturn(errorMsg($this->getError()));
-            }
-        }
-        $modelOrder->commit();
         $this->ajaxReturn(successMsg('成功',array('id'=>$res['id'])));
     }
 
