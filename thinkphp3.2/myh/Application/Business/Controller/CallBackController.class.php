@@ -21,6 +21,11 @@ class CallBackController extends Controller{
             $data = xmlToArray($xml);
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'group_buy');
         }
+        if (strpos($_SERVER['QUERY_STRING'], 'weixin.deposit') == true) {
+            $xml = file_get_contents('php://input');
+            $data = xmlToArray($xml);
+            $this->callBack($data, $payment_type = 'weixin', $order_type = 'deposit');
+        }
         if (strpos($_SERVER['QUERY_STRING'], 'alipayMobile.recharge') == true) {
             $data = $_POST;
             $this->callBack($data, $payment_type = 'alipayMobile', $order_type = 'recharge');
@@ -67,6 +72,9 @@ class CallBackController extends Controller{
             }
             if ($order_type == 'group_buy') {
                 $this->groupBuyHandle($parameter);
+            }
+            if ($order_type == 'deposit') {
+                $this->depositHandle($parameter);
             }
         } else {
             //返回状态给微信服务器
@@ -279,6 +287,11 @@ class CallBackController extends Controller{
                 $this->successReturn($orderSn);
             }
         }
+    }
+
+    /**席位订金充值回调
+     */
+    private function depositHandle(){
     }
 
     //成功返回
