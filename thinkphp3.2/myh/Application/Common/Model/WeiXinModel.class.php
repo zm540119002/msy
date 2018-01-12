@@ -111,9 +111,10 @@ class WeiXinModel extends Model {
                 }else{
                     return $wxUser;
                 }
-            }else{
-                $wechat -> getOauthRedirect($url,"wxbase");
             }
+//            else{
+//                $wechat -> getOauthRedirect($url,"wxbase");
+//            }
         }
 
     }
