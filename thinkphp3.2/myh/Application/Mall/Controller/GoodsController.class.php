@@ -143,23 +143,13 @@ class GoodsController extends BaseController {
             $this -> aveScore = round($modelComment -> avg('score'),1);//平均分数
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
             //授权获取微信信息
-            if($code){
-                $wxUser = $this -> getOAuthWeiXinUserInfo();
-                if(!$wxUser){
-                    return false;
-                }else{
-                    return $wxUser;
-                }
-            }
+
             //$wxUser = $this -> wxLogin();
         }
         $this -> display();
     }
 
-    public function aa(){
-        $url = $_GET['url'];
-        $wxUser = $this -> wxLogin($url);
-    }
+   
     
     
 }
