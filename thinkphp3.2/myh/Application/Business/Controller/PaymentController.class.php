@@ -49,6 +49,7 @@ class PaymentController extends AuthUserController {
     //席位订金-支付
     public function depositPayment(){
         if(IS_POST){
+        }else{
             $partner = PartnerCache::get($this->user['id']);
             if(!$partner){
                 $this->error('合伙人未登记！');
@@ -82,7 +83,6 @@ class PaymentController extends AuthUserController {
                 'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .'/weixin.deposit',
             );
             Pay::wxPay($payInfo);
-        }else{
         }
     }
 
