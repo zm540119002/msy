@@ -54,7 +54,8 @@
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
                 });
-               smartScroll($('.loginLayer'), $('.loginTab'));
+               //smartScroll($('.loginLayer'), $('.loginTab'));
+               isRolling($('.loginLayer'));
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
