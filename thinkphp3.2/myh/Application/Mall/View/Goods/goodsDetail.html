@@ -181,12 +181,11 @@
         $(window).load(function() {
             var url = window.location.href;
             var ua = window.navigator.userAgent.toLowerCase();
-            console.log(ua);return;
-//            if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
-//                if(url.indexOf("code=") <= 0 ) { //code
-//                    self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
-//                }
-//            }
+            if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
+                if(url.indexOf("code=") <= 0 ) { //code
+                    self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
+                }
+            }
         });
 
     </script>

@@ -7,6 +7,7 @@ class Jssdk {
   private $appSecret;
   private $path;
   private $access_token;
+  private $openId;
 
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
@@ -27,7 +28,9 @@ class Jssdk {
     } else {
       $access_token = $data->access_token;
     }
+    print_r($data);exit;
     $this -> access_token = $access_token;
+
 
 //    $this->getAccessToken();
   }
