@@ -147,6 +147,7 @@ class GoodsController extends BaseController {
                 $join=[ ' left join wx_user wxu on wxu.user_id = gbd.user_id ',];
 
                 $this->groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
+                echo $model->getLastSql();exit;
                 print_r( $this->groupBuyDetail);exit;
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
