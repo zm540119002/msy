@@ -368,8 +368,8 @@ function isRolling(container){
     console.log(container);
     // 移动端touch重写
     var startX, startY;
-    $('.username').addEventListener('touchstart',function(e){
-        $(this).focus();
+    container.addEventListener('touchstart',function(e){
+        $('.username').focus();
     })
     container.on('touchstart', function(e){
         //console.log(e.changedTouches[0]);
