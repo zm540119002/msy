@@ -225,7 +225,6 @@ class OrderController extends AuthUserController {
             $_where = array('openid' => $openid);
             $data = array('user_id'=>$this->user['id']);
             $res =  D('WeiXin') -> where($_where)->save($data);
-            echo D('WeiXin') ->getLastSql();exit;
             if(!$res){
                 $modelLogistics->rollback();
                 $this->ajaxReturn(errorMsg($this->getError()));
