@@ -226,6 +226,7 @@ class OrderController extends AuthUserController {
             $_POST = [];
             $_POST['user_id'] = $this->user['id'];
             $res =  D('WeiXin') -> saveWeiXinUser($where);
+            echo D('WeiXin') ->getLastSql();exit;
             if(!$res['status']){
                 $modelLogistics->rollback();
                 $this->ajaxReturn(errorMsg($this->getError()));
