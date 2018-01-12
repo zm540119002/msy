@@ -220,18 +220,17 @@ class OrderController extends AuthUserController {
         if($orderType == 1){//团购
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId);
         }
-//        if(isWxBrowser()) {//判断是否为微信浏览器
-//            $openid = $this -> getOpenid();
-//            $where = array('openid' => $openid);
-//            $_POST = [];
-//            $_POST['user_id'] = $this->user['id'];
-//            $res =  D('WeiXin') -> saveWeiXinUser($where);
-//            echo D('WeiXin') ->getLastSql();exit;
-//            if(!$res['status']){
-//                $modelLogistics->rollback();
-//                $this->ajaxReturn(errorMsg($this->getError()));
-//            }
-//        }
+        if(isWxBrowser()) {//判断是否为微信浏览器
+            $openid = $this -> getOpenid();
+            $_where = array('openid' => $openid);
+            $data = array('user_id'=>$this->user['id']);
+            $res =  D('WeiXin') -> where($_where)->save($data);
+            echo D('WeiXin') ->getLastSql();exit;
+            if(!$res){
+                $modelLogistics->rollback();
+                $this->ajaxReturn(errorMsg($this->getError()));
+            }
+        }
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
     }
