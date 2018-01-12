@@ -70,18 +70,27 @@
                     </div>
                 </div>
                 <ul class="group_purchase">
-                    <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                        <span>团长</span>
-                    </li>
-                    <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                        <span>成员</span>
-                    </li>
-                    <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
-                        <span>成员</span>
-                    </li>
+                    <volist name="groupBuyDetail" id="vo">
+                        <if condition="$vo.type eq 1 ">
+                            <li>
+                                <empty name="vo.headimgurl">
+                                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                                    <else />
+                                    <img src="{$vo.headimgurl}" alt="">
+                                </empty>
+                                <span>团长</span>
+                            </li>
+                            <else />
+                            <li>
+                                <empty name="vo.headimgurl">
+                                    <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                                    <else />
+                                    <img src="{$vo.headimgurl}" alt="">
+                                </empty>
+                                <span>团长</span>
+                            </li>
+                        </if>
+                    </volist>
                 </ul>
                 <div class="count_down_module">
                     <div class="hot_count_down wt_count_down wt_ct">
@@ -172,22 +181,11 @@
 </block>
 
 <block name="script">
-    <script type="text/javascript" src="PUBLIC_JS/common/weixin.js"></script>
     <script type="text/javascript">
         $(function(){
             //星星评分等级
             var getFractionValue='{$aveScore}';
             $('.five_star').setStar(getFractionValue);
         });
-//        $(window).load(function() {
-//            var url = window.location.href;
-//            var ua = window.navigator.userAgent.toLowerCase();
-//            if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
-//                if(url.indexOf("code=") <= 0 ) { //code
-//                    self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
-//                }
-//            }
-//        });
-
     </script>
 </block>
