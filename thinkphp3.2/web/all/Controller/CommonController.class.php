@@ -74,7 +74,7 @@ class CommonController extends Controller{
             return  $this->_jssdk ->getUserList();
         }
     }
-    //
+    //生成带参二维码
     public function getQRcode($scene_type, $scene_id){
         if(isWxBrowser()) {//判断是否为微信浏览器
             return  $this->_jssdk ->create_qrcode($scene_type, $scene_id);
@@ -100,6 +100,11 @@ class CommonController extends Controller{
         }';
          */
         return  $this->_jssdk -> create_menu_raw($menu);
+    }
+
+    //获取Openid
+    public function getOpenid(){
+        return  $this->_jssdk ->getOpenid();
     }
     
 }
