@@ -31,8 +31,8 @@ class IndexController extends BaseController{
         //团购成功通知
         unset($where);
         $where = array(
-            'type' => 1,
-            'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+            'gbd.type' => 1,
+            'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
         );
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname'
