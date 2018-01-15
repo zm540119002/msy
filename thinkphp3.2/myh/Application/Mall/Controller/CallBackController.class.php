@@ -315,20 +315,20 @@ class CallBackController extends CommonController{
             //团购成功通知
             unset($where);
             $where = array(
-                'type' => 1,
-                'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+                'gbd.type' => 1,
+                'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
             );
             $field=[ 'g.cash_back','g.goods_base_id','g.commission',
                 'gb.name','wxu.headimgurl','wxu.nickname'
             ];
-            $join=[ ' left join goods o on g.id = gbd.goods_id',
-                ' left join goods_base g on g.goods_base_id = gb.id ',
-                ' left join wx_user g on wxu.user_id = gbd.user_id'
+            $join=[ ' left join goods g on g.id = gbd.goods_id',
+                ' left join goods_base gb on g.goods_base_id = gb.id ',
+                ' left join wx_user wxu on wxu.user_id = gbd.user_id'
             ];
             $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
             $template = array(
-                'touser'=>'',
-                'template_id'=>$groupBuyDetail[0]['openid'],
+                'touser'=>$groupBuyDetail[0]['openid'],
+                'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
                 "url"=>$this->host.U('Goods/goodsDetail',array(
                         'goodsId'=>$groupBuyDetail[0]['goods_id'],
                         'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
@@ -351,7 +351,7 @@ class CallBackController extends CommonController{
 
             );
             $this->sendTemplateMessage($template);
-            
+
             $modelOrder->commit();//提交事务
             //返回状态给微信服务器
             $this->successReturn();
