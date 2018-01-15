@@ -47,3 +47,9 @@ $(window).on('scroll',function(){
         getGoodsList(config);
     }
 });
+
+$('body').on('click','.bomb_box .closeBtn',function(){
+    isMore=true;
+    $('.layui-m-layer').remove();
+})
+

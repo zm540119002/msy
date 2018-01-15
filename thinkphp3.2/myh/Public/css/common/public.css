@@ -391,9 +391,12 @@ i{
     position:relative;
 }
 .bomb_box .closeBtn{
-    right:-22px;
-    top:-16px;
+    right: -22px;
+    top: -16px;
     background: #fff;
-    color:#333;
-    border:1px solid transparent;
+    color: #999;
+    border: 1px solid transparent;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
 }

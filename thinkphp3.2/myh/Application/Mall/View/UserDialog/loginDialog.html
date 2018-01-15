@@ -49,6 +49,7 @@
         loginLayer = layer.open({
             className:'loginLayer',
             content:userLoginForm,
+            shadeClose:false,
             btn:'登录',
             success:function(){
                 window.scrollTo(0,0);
@@ -58,6 +59,9 @@
                 });
                //smartScroll($('.loginLayer'), $('.loginTab'));
                isRolling($('.loginLayer'));
+            },
+            end:function(){
+                isMore=true;
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
