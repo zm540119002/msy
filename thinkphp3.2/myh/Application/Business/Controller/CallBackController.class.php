@@ -283,7 +283,7 @@ class CallBackController extends Controller{
          * $data['time_end']//支付时间
          */
         $tradeAmount = $data['total_fee']/100;
-        if (!($tradeAmount>0)) {
+        if (!$tradeAmount) {
             //返回状态给微信服务器
             $this->errorReturn($data['transaction_id'],'交易金额错误！');
         }
