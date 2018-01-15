@@ -387,3 +387,16 @@ i{
 .right_sidebar a.backTop{
    background: #3f3a39;
 }
+.bomb_box{
+    position:relative;
+}
+.bomb_box .closeBtn{
+    right: -22px;
+    top: -16px;
+    background: #fff;
+    color: #999;
+    border: 1px solid transparent;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+}
