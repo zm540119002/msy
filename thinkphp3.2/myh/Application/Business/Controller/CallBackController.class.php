@@ -19,7 +19,6 @@ class CallBackController extends Controller{
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.deposit') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
-            \Think\Log::write('111');
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'deposit');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'alipayMobile.recharge') == true) {
@@ -295,14 +294,23 @@ class CallBackController extends Controller{
          * $data['transaction_id'],//微信交易订单
          * $data['time_end']//支付时间
          */
+        $modelWallet = D('Wallet');
+        $modelWalletDetail = D('WalletDetail');
+        $modelPartner = D('Partner');
+        $where = array(
+            'p.user_id' => $data['attach'],
+        );
+        $partnerInfo = $modelPartner->selectPartner($where);
+        $partnerInfo = $partnerInfo[0];
+        if($partnerInfo && $partnerInfo['auth_status'] ==2){
+            //返回状态给微信服务器
+            $this->successReturn($data['out_trade_no']);
+        }
         $tradeAmount = $data['total_fee']/100;
         if (!$tradeAmount) {
             //返回状态给微信服务器
             $this->errorReturn($data['transaction_id'],'交易金额错误！');
         }
-        $modelWallet = D('Wallet');
-        $modelWalletDetail = D('WalletDetail');
-        $modelPartner = D('Partner');
         $modelPartner->startTrans();//开启事务
         //更新合伙人认证状态为席位订金
         $_POST = [];
