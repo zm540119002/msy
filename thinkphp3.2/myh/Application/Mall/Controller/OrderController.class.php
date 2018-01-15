@@ -218,6 +218,8 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1){//团购
+            $openid =session('openid');
+            print_r($openid);exit;
             $_where = array(
                 'group_buy_id'=>$groupBuyId,
                 'pay_status'=>2,
@@ -227,8 +229,8 @@ class OrderController extends AuthUserController {
             if(in_array($this->user['id'],$userIdArray)){
                 $this->ajaxReturn(errorMsg('你有参加此团购，是否重新开团',array('url'=>U('Goods/goodsDetail/',array('goodsId'=>$goodsList[0]['foreign_id'])))));
             }
-            $openid = $this->getOpenid();
-            print_r($openid);exit;
+
+
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId,$openid);
         }
         $modelLogistics->commit();
