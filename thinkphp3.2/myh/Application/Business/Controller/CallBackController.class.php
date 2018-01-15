@@ -66,7 +66,7 @@ class CallBackController extends Controller{
                 $this->orderHandle($parameter);
             }
             if ($order_type == 'deposit') {
-                $this->depositHandle($parameter);
+                $this->depositHandle($data);
             }
         } else {
             //返回状态给微信服务器
@@ -277,57 +277,66 @@ class CallBackController extends Controller{
     /**席位订金充值回调
      */
     private function depositHandle($data){
+        /**$data['out_trade_no'],//微信回的商家订单号，此处为user.id
+         * $data['total_fee'],//支付金额，单位为分
+         * $data['transaction_id'],//微信交易订单
+         * $data['time_end']//支付时间
+         */
+        $tradeAmount = $data['total_fee']/100;
+        if (!($tradeAmount>0)) {
+            //返回状态给微信服务器
+            $this->errorReturn($data['transaction_id'],'交易金额错误！');
+        }
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
+        $modelPartner = D('Partner');
+        $modelPartner->startTrans();//开启事务
+        //更新合伙人认证状态为席位订金
+        $_POST = [];
+        $_POST['auth_status'] = 2;
         $where = array(
-            'wd.sn' => $data['out_trade_no'],
+            'p.user_id' => $data['out_trade_no'],
         );
-        $WalletDetailInfo = $modelWalletDetail->selectWalletDetail($where);
-        $WalletDetailInfo = $WalletDetailInfo[0];
-        if ($WalletDetailInfo['recharge_status'] == 1) {//直接返回true
-            if ($WalletDetailInfo['amount'] * 100 != $data['total_fee']) {//校验返回的金额是否与商户侧的金额一致
-                //返回状态给微信服务器
-                $this->errorReturn($data['out_trade_no'], '回调的金额和订单的金额不符，终止购买');
-            } else {
-                $modelWalletDetail->startTrans();
-                //更新钱包明细
-                $_POST = [];
-                //充值状态已完成
-                $_POST['recharge_status'] = 1;
-                $_POST['wallerDetailId'] = $WalletDetailInfo['id'];
-                $where = array(
-                    'user_id' => $WalletDetailInfo['user_id'],
-                    'sn' => $data['out_trade_no'],
-                );
-                $returnData = $modelWalletDetail->saveWalletDetail($where);
-                if (!$returnData['id']) {
-                    $modelWalletDetail->rollback();
-                    //返回状态给微信服务器
-                    $this->errorReturn($data['out_trade_no'], $modelWalletDetail->getLastSql());
-                }
-                //钱包信息
-                $where = array(
-                    'w.user_id' => $WalletDetailInfo['user_id'],
-                );
-                $walletInfo = $modelWallet->selectWallet($where);
-                $walletInfo = $walletInfo[0];
-                //更新账户
-                $_POST = [];
-                $_POST['amount'] = $walletInfo['amount'] + $WalletDetailInfo['amount'];
-                $where = array(
-                    'user_id' => $WalletDetailInfo['user_id'],
-                );
-                $res = $modelWallet->saveWallet($where);
-                if ($res['status'] == 0) {
-                    $modelWallet->rollback();
-                    //返回状态给微信服务器
-                    $this->errorReturn($data['out_trade_no'], $modelWallet->getLastSql());
-                }
-                $modelWalletDetail->commit();//提交事务
-                //返回状态给微信服务器
-                $this->successReturn($data['out_trade_no']);
-            }
+        $returnData = $modelPartner->savePartner($where);
+        if ($returnData['status'] == 0) {
+            $modelPartner->rollback();
+            //返回状态给微信服务器
+            $this->errorReturn($data['transaction_id'], '更新合伙人认证状态错误！');
         }
+        //更新钱包
+        $where = array(
+            'w.user_id' => $data['out_trade_no'],
+        );
+        $walletInfo = $modelWallet->selectWallet($where);
+        $walletInfo = $walletInfo[0];
+        $_POST = [];
+        $_POST['amount'] = $walletInfo['amount'] + $tradeAmount;
+        $where = array(
+            'user_id' => $data['out_trade_no'],
+        );
+        $returnData = $modelWallet->saveWallet($where);
+        if ($returnData['status'] == 0) {
+            $modelPartner->rollback();
+            //返回状态给微信服务器
+            $this->errorReturn($data['transaction_id'], '更新钱包错误！');
+        }
+        //新增钱包明细
+        $_POST = [];
+        $_POST['sn'] = generateSN();
+        $_POST['user_id'] = $data['out_trade_no'];
+        $_POST['type'] = 1;
+        $_POST['recharge_status'] = 1;
+        $_POST['amount'] = $tradeAmount;
+        $_POST['create_time'] = time();
+        $returnData = $modelWalletDetail->addWalletDetail();
+        if ($returnData['status'] == 0) {
+            $modelPartner->rollback();
+            //返回状态给微信服务器
+            $this->errorReturn($data['transaction_id'], '新增钱包明细错误！');
+        }
+        $modelWalletDetail->commit();//提交事务
+        //返回状态给微信服务器
+        $this->successReturn($data['transaction_id']);
     }
 
     //成功返回
