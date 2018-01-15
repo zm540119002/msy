@@ -19,7 +19,6 @@ class CallBackController extends Controller{
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.deposit') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
-            \Think\Log::write('111');
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'deposit');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'alipayMobile.recharge') == true) {
@@ -174,7 +173,7 @@ class CallBackController extends Controller{
             }
             $modelWalletDetail->commit();//提交事务
             //返回状态给微信服务器
-            $this->successReturn($parameter['order_sn']);
+            $this->successReturn();
         }
     }
 
@@ -270,7 +269,7 @@ class CallBackController extends Controller{
                 }
                 $modelOrder->commit();//提交事务
                 //返回状态给微信服务器
-                $this->successReturn($orderSn);
+                $this->successReturn();
             }
         }
     }
@@ -303,6 +302,16 @@ class CallBackController extends Controller{
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
         $modelPartner = D('Partner');
+        $where = array(
+            'p.user_id' => $data['attach'],
+        );
+        $partnerInfo = $modelPartner->selectPartner($where);
+        $partnerInfo = $partnerInfo[0];
+        if($partnerInfo && $partnerInfo['auth_status'] ==2){
+            //返回状态给微信服务器
+            $this->successReturn();
+            exit;
+        }
         $modelPartner->startTrans();//开启事务
         //更新合伙人认证状态为席位订金
         $_POST = [];
@@ -350,7 +359,7 @@ class CallBackController extends Controller{
         }
         $modelWalletDetail->commit();//提交事务
         //返回状态给微信服务器
-        $this->successReturn($data['transaction_id']);
+        $this->successReturn();
     }
 
     //成功返回
