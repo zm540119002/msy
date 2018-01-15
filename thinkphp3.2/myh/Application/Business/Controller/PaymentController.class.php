@@ -79,6 +79,7 @@ class PaymentController extends AuthUserController {
                 'success_back' => session('returnUrl')?:U('payComplete'),
                 'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .'/weixin.deposit',
             );
+            print_r($payInfo);exit;
             Pay::wxPay($payInfo);
         }
     }
