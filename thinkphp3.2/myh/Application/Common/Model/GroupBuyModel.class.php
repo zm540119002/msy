@@ -100,7 +100,7 @@ class GroupBuyModel extends Model {
     }
 
     //加入团购表
-    public function joinGroupBuy($goods,$uid,$orderId,$groupBuyId){
+    public function joinGroupBuy($goods,$uid,$orderId,$groupBuyId,$openid){
         //插入团购记录
         if(!$groupBuyId){
             $modelGroupBuy = D('GroupBuy');
@@ -130,7 +130,7 @@ class GroupBuyModel extends Model {
         $_POST['order_id'] = $orderId;
         $_POST['group_buy_id'] = $groupBuyId;
         $_POST['type'] = $type;
-//        $_POST['openid'] = $openid;
+        $_POST['openid'] = $openid;
         $res = $modelGroupBuyDetail->addGroupBuyDetail();
         $groupBuyDetailId = $res['id'];
         if(!$groupBuyDetailId){
