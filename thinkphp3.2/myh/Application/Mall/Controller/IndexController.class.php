@@ -43,7 +43,7 @@ class IndexController extends BaseController{
         ];
         $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
         $template = array(
-            'touser'=>'',
+            'touser'=>'oNalMuA6iE-T45TPb_ZeQYlJ3Jjk',
             'template_id'=>$groupBuyDetail[0]['openid'],
             "url"=>$this->host.U('Goods/goodsDetail',array(
                     'goodsId'=>$groupBuyDetail[0]['goods_id'],
