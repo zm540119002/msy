@@ -51,8 +51,8 @@
             $('footer').find('price').text(partner_fee);
             //支付-资格完款
             $('body').on('click','.pay_partner_fee',function(){
-                var url = APP + '/Business/Payment/depositPayment?returnUrl=' +
-                        encodeURIComponent(CONTROLLER + '/seniority');
+                var url = APP + '/Business/Payment/rechargePayment?payType=partner_fee&returnUrl=' +
+                        encodeURIComponent(APP + '/Business/Index/index');
                 location.href = url;
             });
         });
