@@ -33,13 +33,13 @@ class IndexController extends BaseController{
                 'first'=>array(
                     'value'=>'hello','color'=>'#173177',
                 ),
-                'pingou_productname'=>array(
+                'Pingou_ProductName'=>array(
                     'value'=>'hello','color'=>'#173177',
                 ),
-                'weixin_ID'=>array(
+                'Weixin_ID'=>array(
                     'value'=>'hello','color'=>'#173177',
                 ),
-                'remark'=>array(
+                'Remark'=>array(
                     'value'=>'hello','color'=>'#173177',
                 ),
               
