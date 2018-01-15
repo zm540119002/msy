@@ -195,7 +195,7 @@ class CallBackController extends CommonController{
      * @param $parameter
      */
     private function groupBuyHandle($parameter){
-        print_r($parameter);exit;
+
         $orderSn = $parameter['out_trade_no'];
         $totalFee = $parameter['total_fee'];
         $modelOrder = D('Order');
@@ -339,6 +339,7 @@ class CallBackController extends CommonController{
                 ' left join wx_user wxu on wxu.user_id = gbd.user_id'
             ];
             $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+            print_r($templateMessageInfo);exit;
             $template = array(
                 'touser'=>$groupBuyDetail[0]['openid'],
                 'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
