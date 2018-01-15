@@ -71,7 +71,8 @@ class PaymentController extends AuthUserController {
                 $this->error($res,session('returnUrl'));
             }
             $payInfo = array(
-                'sn'=>$this->user['id'],
+                'attach'=>$this->user['id'],
+                'sn'=> generateSN(),
                 'actually_amount'=>$city['deposit'],
                 'cancel_back' => U('payCancel'),
                 'fail_back' => U('payFail'),
@@ -111,7 +112,7 @@ class PaymentController extends AuthUserController {
     /**检查钱包（1，钱包记录不存在，则新增记录；2，如果为支付，会检查余额是否足够）
      * @param int $amount 金额
      * @param int $type 1：充值 2：支付
-     * @return bool === true 表示通过
+     * @return bool === true 表示通过，否则返回错误信息
      */
     private function checkWallet($amount,$type=1){
         $msg = '';

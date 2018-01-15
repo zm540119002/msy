@@ -277,7 +277,8 @@ class CallBackController extends Controller{
     /**席位订金充值回调
      */
     private function depositHandle($data){
-        /**$data['out_trade_no'],//微信回的商家订单号，此处为user.id
+        /**$data['out_trade_no'],//微信回的商家订单号
+         * $data['attach'],//user.id
          * $data['total_fee'],//支付金额，单位为分
          * $data['transaction_id'],//微信交易订单
          * $data['time_end']//支付时间
@@ -295,7 +296,7 @@ class CallBackController extends Controller{
         $_POST = [];
         $_POST['auth_status'] = 2;
         $where = array(
-            'p.user_id' => $data['out_trade_no'],
+            'p.user_id' => $data['attach'],
         );
         $returnData = $modelPartner->savePartner($where);
         if ($returnData['status'] == 0) {
@@ -305,14 +306,14 @@ class CallBackController extends Controller{
         }
         //更新钱包
         $where = array(
-            'w.user_id' => $data['out_trade_no'],
+            'w.user_id' => $data['attach'],
         );
         $walletInfo = $modelWallet->selectWallet($where);
         $walletInfo = $walletInfo[0];
         $_POST = [];
         $_POST['amount'] = $walletInfo['amount'] + $tradeAmount;
         $where = array(
-            'user_id' => $data['out_trade_no'],
+            'user_id' => $data['attach'],
         );
         $returnData = $modelWallet->saveWallet($where);
         if ($returnData['status'] == 0) {
@@ -322,8 +323,9 @@ class CallBackController extends Controller{
         }
         //新增钱包明细
         $_POST = [];
-        $_POST['sn'] = generateSN();
-        $_POST['user_id'] = $data['out_trade_no'];
+        $_POST['sn'] = $data['out_trade_no'];
+        $_POST['pay_sn'] = $data['transaction_id'];
+        $_POST['user_id'] = $data['attach'];
         $_POST['type'] = 1;
         $_POST['recharge_status'] = 1;
         $_POST['amount'] = $tradeAmount;
