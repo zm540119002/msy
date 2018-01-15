@@ -3,7 +3,8 @@ namespace Mall\Controller;
 use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
-class CallBackController extends Controller{
+use  web\all\Controller\CommonController;
+class CallBackController extends CommonController{
     //支付回调
     public function notifyUrl(){
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
@@ -227,7 +228,7 @@ class CallBackController extends Controller{
             $_POST = [];
             $_POST['pay_status'] = 2;
             $_POST['pay_time'] = $parameter['payment_time'];
-            $where = [];
+            unset($where);
             $where = array(
                 'user_id' => $orderInfo['user_id'],
                 'order_id' => $orderInfo['id'],
@@ -312,6 +313,48 @@ class CallBackController extends Controller{
                 }
             }
             $modelOrder->commit();//提交事务
+            //团购成功通知
+            /*
+$template = array('touser' => "owddJuAiiQpXZedAWxjpp3pkZTzU",
+                  'template_id' => "jD1Jfu0ElKcyEK0CfJ2JjTy4U1fjYI09l6eax9BBu9U",
+                  'url' => "",
+                  'topcolor' => "#7B68EE",
+                  'data' => array('first'    => array('value' => "您好，方倍，欢迎使用模版消息！",
+                                                     'color' => "#743A3A",
+                                                    ),
+                                  'product' => array('value' => "微信公众平台开发最佳实践",
+                                                     'color' => "#FF0000",
+                                                    ),
+                                   'price'     => array('value' => "69.00元",
+                                                     'color' => "#C4C400",
+                                                    ),
+                                   'time'     => array('value' => "2014年6月1日",
+                                                     'color' => "#0000FF",
+                                                    ),
+                                  'remark'     => array('value' => "\\n你的订单已提交，我们将尽快发货。祝您生活愉快！",
+                                                     'color' => "#008000",
+                                                    ),
+                                )
+);
+$weixin->send_template_message($template);
+*/
+            $template = array(
+                'touser'=>'',
+                'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+                "url"=>$this->host.U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuyDetail[0]['goods_id'],
+                        'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
+                        'shareType'=>'groupBuy' )),
+                'data'=>array(
+                    'first'=>'',
+                    'Pingou_ProductName'=>'',
+                    'Weixin_ID'=>'',
+                    'Remark'=>'',
+
+                ),
+
+            );
+            $this->sendTemplateMessage($template);
             //返回状态给微信服务器
             $this->successReturn();
         }

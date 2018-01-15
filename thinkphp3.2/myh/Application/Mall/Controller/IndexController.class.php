@@ -20,5 +20,24 @@ class IndexController extends BaseController{
         $this->display('GroupBuy/index');
     }
 
+
+    public function a(){
+        $template = array(
+            'touser'=>'oNalMuA6iE-T45TPb_ZeQYlJ3Jjk',
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+            "url"=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>72,
+                    'groupBuyId'=> 37,
+                    'shareType'=>'groupBuy' )),
+            'data'=>array(
+                'first'=>'你已团购',
+                'Pingou_ProductName'=>'南岸ABB啊',
+                'Weixin_ID'=>'巴阿罢罢罢',
+                'Remark'=>'暖暖暖暖暖那你呢',
+            ),
+
+        );
+        $this->sendTemplateMessage($template);
+    }
    
 }
