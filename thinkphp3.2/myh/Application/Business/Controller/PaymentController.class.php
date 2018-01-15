@@ -46,50 +46,44 @@ class PaymentController extends AuthUserController {
         }
     }
 
-    //席位订金-支付
-    public function depositPayment(){
-        if(IS_POST){
-        }else{
-            $partner = PartnerCache::get($this->user['id']);
-            if(!$partner){
-                $this->error('合伙人未登记！');
-            }
-            $modelCity = D('City');
-            $where = array(
-                'ct.id' => $partner['city'],
-            );
-            $city = $modelCity->selectCity($where);
-            $city = $city[0];
-            if(!$city['id']){
-                $this->error('合伙人城市信息有误！');
-            }
-            if(!floatval($city['deposit'])){
-                $this->error('合伙人订金有误！');
-            }
-            $res = $this->checkWallet();
-            if(!($res===true)){
-                $this->error($res);
-            }
-            $payInfo = array(
-                'attach'=>$this->user['id'],
-                'sn'=> generateSN(),
-                'actually_amount'=>$city['deposit'],
-                'cancel_back' => U('payCancel'),
-                'fail_back' => U('payFail'),
-                'success_back' => session('returnUrl')?:U('payComplete'),
-                'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.deposit',
-            );
-//            print_r($payInfo);exit;
-            Pay::wxPay($payInfo);
-        }
-    }
-
     //充值-支付
     public function rechargePayment(){
-        $modelWalletDetail = D('WalletDetail');
         if(IS_POST){
         }else{
+            if(isset($_GET['payType']) && $_GET['payType']=='deposit'){
+                $partner = PartnerCache::get($this->user['id']);
+                if(!$partner){
+                    $this->error('合伙人未登记！');
+                }
+                $modelCity = D('City');
+                $where = array(
+                    'ct.id' => $partner['city'],
+                );
+                $city = $modelCity->selectCity($where);
+                $city = $city[0];
+                if(!$city['id']){
+                    $this->error('合伙人城市信息有误！');
+                }
+                if(!floatval($city['deposit'])){
+                    $this->error('合伙人订金有误！');
+                }
+                $res = $this->checkWallet();
+                if(!($res===true)){
+                    $this->error($res);
+                }
+                $payInfo = array(
+                    'attach'=>$this->user['id'],
+                    'sn'=> generateSN(),
+                    'actually_amount'=>$city['deposit'],
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
+                    'success_back' => session('returnUrl')?:U('payComplete'),
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.deposit',
+                );
+                Pay::wxPay($payInfo);
+            }
             if(isset($_GET['walletDetailId']) && intval($_GET['walletDetailId'])){
+                $modelWalletDetail = D('WalletDetail');
                 $where = array(
                     'wd.id' => I('get.walletDetailId'),
                     'wd.user_id' => $this->user['id'],
