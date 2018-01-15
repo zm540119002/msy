@@ -44,6 +44,7 @@
     //登录触发
     var loginLayer = null;
     function loginDialog(func){
+        isMore=false;
         loginLayer = layer.open({
             className:'loginLayer',
             content:userLoginForm,
