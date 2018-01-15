@@ -821,7 +821,6 @@ class Jssdk {
     foreach ($template['data'] as  $k => &$item) {
       $item['value'] = urlencode($item['value']);
     }
-    print_r($template);exit;
     $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$this->access_token;
     $res = $this->http_request($url, urldecode(json_encode($template)));
     return json_decode($res, true);
