@@ -356,9 +356,8 @@ class CallBackController extends CommonController{
                         'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
                     ),
                     'Remark'=>array(
-                        'value'=>'您的已付款项将在3-5天内退至您的支付账户，请留意相关信息。','color'=>'#173177',
+                        'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
                     ),
-
                 ),
 
             );
