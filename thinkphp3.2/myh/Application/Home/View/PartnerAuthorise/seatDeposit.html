@@ -53,7 +53,8 @@
             $('footer').find('price').text(deposit);
             //支付席位订金
             $('body').on('click','.pay_deposit',function(){
-                var url = APP + '/Business/Payment/depositPayment?returnUrl=' + encodeURIComponent(location.href);
+                var url = APP + '/Business/Payment/depositPayment?returnUrl=' +
+                        encodeURIComponent(CONTROLLER + '/seniority');
                 location.href = url;
             });
         });
