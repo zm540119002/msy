@@ -42,7 +42,6 @@ class IndexController extends BaseController{
             ' left join wx_user wxu on wxu.user_id = gbd.user_id'
         ];
         $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        print_r($templateMessageInfo);exit;
         $template = array(
             'touser'=>$groupBuyDetail[0]['openid'],
             'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
