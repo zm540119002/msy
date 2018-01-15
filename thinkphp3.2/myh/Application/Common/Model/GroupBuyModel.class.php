@@ -130,7 +130,7 @@ class GroupBuyModel extends Model {
         $_POST['order_id'] = $orderId;
         $_POST['group_buy_id'] = $groupBuyId;
         $_POST['type'] = $type;
-        $_POST = $openid;
+        $_POST['openid'] = $openid;
         $res = $modelGroupBuyDetail->addGroupBuyDetail();
         $groupBuyDetailId = $res['id'];
         if(!$groupBuyDetailId){
