@@ -334,6 +334,9 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+                    if($orderInfo['type'] == 1){//团购订单处理
+                        $this -> groupBuyHandle($modelOrder,$orderInfo);
+                    }
                     //减库存
                     $res = $modelGoods -> decGoodsNum($orderDetail);
 
@@ -409,6 +412,11 @@ class OrderController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+
+                    if($orderInfo['type'] == 1){//团购订单处理
+                        $this -> groupBuyHandle($modelOrder,$orderInfo);
+                    }
+
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
@@ -468,6 +476,90 @@ class OrderController extends AuthUserController {
             $this->wallet = $wallet[0];
             $this->display();
         }
+    }
+
+
+    //团购订单处理
+    private function groupBuyHandle($modelOrder,$orderInfo){
+        $modelGroupBuy = D('GroupBuy');
+        $modelGroupBuyDetail = D('GroupBuyDetail');
+        //更新团购表和团购详情表
+        //1.先更新团购详情表
+        $_POST = [];
+        $_POST['pay_status'] = 2;
+        $_POST['pay_time'] = date('YmdHis');
+        $where = array(
+            'user_id' => $orderInfo['user_id'],
+            'order_id' => $orderInfo['id'],
+        );
+        $returnData = $modelGroupBuyDetail-> saveGroupBuyDetail($where);
+        if ($returnData['status'] == 0) {
+            $modelGroupBuy->rollback();
+            //返回状态给微信服务器
+            $this->errorReturn($orderInfo['sn'], $modelGroupBuyDetail->getLastSql());
+        }
+        $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
+        //2.查看团购详情表此次团购有几人
+        unset($where);
+        $where = array(
+            'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+            'pay_status' => 2,
+        );
+        $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
+        if($groupBuyNum >= 3){//修改团购表
+            $_POST = [];
+            $_POST['tag'] = 1;
+            unset($where);
+            $where = array(
+                'id' => $groupBuyDetail[0]['group_buy_id'],
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
+        }
+
+        //团购成功通知
+        unset($where);
+        $where = array(
+            'gbd.type' => 1,
+            'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+        );
+        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+            'gb.name','wxu.headimgurl','wxu.nickname'
+        ];
+        $join=[ ' left join goods g on g.id = gbd.goods_id',
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+            ' left join wx_user wxu on wxu.user_id = gbd.user_id'
+        ];
+        $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+        $template = array(
+            'touser'=>$groupBuyDetail[0]['openid'],
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+            "url"=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>$groupBuyDetail[0]['goods_id'],
+                    'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
+                    'shareType'=>'groupBuy' )),
+            'data'=>array(
+                'first'=>array(
+                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                ),
+                'Pingou_ProductName'=>array(
+                    'value'=>$templateMessageInfo[0]['name'],'color'=>'#173177',
+                ),
+                'Weixin_ID'=>array(
+                    'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
+                ),
+                'Remark'=>array(
+                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                ),
+            ),
+
+        );
+        $this->sendTemplateMessage($template);
+
     }
 
 
