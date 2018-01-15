@@ -20,5 +20,33 @@ class IndexController extends BaseController{
         $this->display('GroupBuy/index');
     }
 
+
+    public function a(){
+        $template = array(
+            'touser'=>'oNalMuA6iE-T45TPb_ZeQYlJ3Jjk',
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+            "url"=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>72,
+                    'groupBuyId'=> 37,
+                    'shareType'=>'groupBuy' )),
+            'data'=>array(
+                'first'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+                'Pingou_ProductName'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+                'Weixin_ID'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+                'Remark'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+              
+            ),
+
+        );
+        print_r($this->sendTemplateMessage($template));
+    }
    
 }
