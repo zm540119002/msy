@@ -199,6 +199,7 @@ i{
     left:50%;
     top:88%;
     margin:0 0 0 -16px;
+    z-index:16;
 }
 /*登录方式*/
 .loginLayer .layui-m-layercont,

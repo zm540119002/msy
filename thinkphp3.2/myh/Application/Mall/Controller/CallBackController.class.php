@@ -130,7 +130,7 @@ class CallBackController extends CommonController{
     private function rechargeHandle($parameter){
         $modelWalletDetail = D('WalletDetail');
         $where = array(
-            'wd.sn' => $parameter['order_sn'],
+            'wd.sn' => $parameter['out_trade_no'],
         );
         $walletDetailInfo = $modelWalletDetail->selectWalletDetail($where);
         $walletDetailInfo = $walletDetailInfo[0];
@@ -139,7 +139,7 @@ class CallBackController extends CommonController{
         }
         if ($walletDetailInfo['amount'] * 100 != $parameter['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
             //返回状态给微信服务器
-            $this->errorReturn($parameter['order_sn'], '回调的金额和充值的金额不符，终止交易', '充值');
+            $this->errorReturn($parameter['out_trade_no'], '回调的金额和充值的金额不符，终止交易', '充值');
         }
         $modelWalletDetail->startTrans();
         //更新-账户明细-充值状态
@@ -180,6 +180,17 @@ class CallBackController extends CommonController{
 
     }
 
+    public function test(){
+        $parameter = array(
+            'payment_code' => 'weixin',
+            'out_trade_no' =>'20180115133056462855292312274665',//微信回的商家订单号
+            'total_fee' => 1,//支付金额
+            'pay_sn' => '4200000056201801154355151125',//微信交易订单
+            'payment_time' => '20180109172730'//支付时间
+        );
+        $this->groupBuyHandle($parameter);
+    }
+
     /**团购订单支付回调
      * @param $parameter
      */
@@ -212,6 +223,7 @@ class CallBackController extends CommonController{
             $_POST['payment_code'] = 0;
             $_POST['pay_sn'] = $parameter['pay_sn'];
             $_POST['payment_time'] = $parameter['payment_time'];
+            $_POST['payment_code'] = $parameter['payment_code'];
             $_POST['orderId'] = $orderInfo['id'];
             $where = array(
                 'user_id' => $orderInfo['user_id'],
@@ -351,7 +363,6 @@ class CallBackController extends CommonController{
 
             );
             $this->sendTemplateMessage($template);
-
             $modelOrder->commit();//提交事务
             //返回状态给微信服务器
             $this->successReturn();
