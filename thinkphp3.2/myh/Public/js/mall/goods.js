@@ -48,8 +48,5 @@ $(window).on('scroll',function(){
     }
 });
 
-$('body').on('click','.bomb_box .closeBtn',function(){
-    isMore=true;
-    $('.layui-m-layer').remove();
-})
+
 

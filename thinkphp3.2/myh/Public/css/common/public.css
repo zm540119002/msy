@@ -390,7 +390,7 @@ i{
 .bomb_box{
     position:relative;
 }
-.bomb_box .closeBtn{
+.bomb_box .layer_close{
     right: -22px;
     top: -16px;
     background: #fff;
