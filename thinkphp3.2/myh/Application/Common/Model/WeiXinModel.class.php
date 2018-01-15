@@ -107,7 +107,7 @@ class WeiXinModel extends Model {
                     'wxu.openid' => $wxUser['openid'],
                 );
                 $wxUserDatabase = $this -> selectWeiXinUser($where);
-                if(!$wxUserDatabase){
+                if(empty($wxUserDatabase)){
                     $res = $this -> add($wxUser);
                     if(!$res){
                         return errorMsg($this->getError());
