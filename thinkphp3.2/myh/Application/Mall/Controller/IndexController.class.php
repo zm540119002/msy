@@ -42,6 +42,7 @@ class IndexController extends BaseController{
             ' left join wx_user wxu on wxu.user_id = gbd.user_id'
         ];
         $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+        echo $modelGroupBuyDetail->getLastSql();exit;
         print_r($templateMessageInfo);exit;
         $template = array(
             'touser'=>$groupBuyDetail[0]['openid'],
