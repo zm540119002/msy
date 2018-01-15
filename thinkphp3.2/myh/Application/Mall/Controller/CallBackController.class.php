@@ -237,7 +237,7 @@ class CallBackController extends CommonController{
         if ($returnData['status'] == 0) {
             $modelOrder->rollback();
             //返回状态给微信服务器
-            $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+            $this->errorReturn($orderSn, $modelOrder->getLastSql());
         }
         //更新团购表和团购详情表
         //1.先更新团购详情表
@@ -253,7 +253,7 @@ class CallBackController extends CommonController{
         if ($returnData['status'] == 0) {
             $modelOrder->rollback();
             //返回状态给微信服务器
-            $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+            $this->errorReturn($orderSn, $modelGroupBuyDetail->getLastSql());
         }
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
 
@@ -275,7 +275,7 @@ class CallBackController extends CommonController{
             if ($returnData['status'] == 0) {
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
         }
         //更新代金券，已使用
@@ -290,7 +290,7 @@ class CallBackController extends CommonController{
             if ($res['status'] == 0) {
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                $this->errorReturn($orderSn, $modelCoupons->getLastSql());
             }
         }
         //更新账户
@@ -325,7 +325,7 @@ class CallBackController extends CommonController{
             if ($res['status'] == 0) {
                 $modelWallet->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
         }
         //团购成功通知
@@ -415,7 +415,7 @@ class CallBackController extends CommonController{
         if (!$returnData['id']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
-            $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+            $this->errorReturn($orderSn, $modelOrder->getLastSql());
         }
         //更新代金券，已使用
         if ($orderInfo['coupons_id'] && $orderInfo['coupons_pay'] > 0) {
@@ -429,7 +429,7 @@ class CallBackController extends CommonController{
             if ($res['status'] == 0) {
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                $this->errorReturn($orderSn, $modelCoupons->getLastSql());
             }
         }
         //更新账户
@@ -450,9 +450,9 @@ class CallBackController extends CommonController{
                 $res = $modelWallet->saveWallet($where);
             }
             if ($res['status'] == 0) {
-                $modelWallet->rollback();
+                $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                $this->errorReturn($orderSn, $modelWallet->getLastSql());
             }
             //增加账户记录
             $_POST = [];
@@ -462,9 +462,9 @@ class CallBackController extends CommonController{
             $_POST['create_time'] = time();
             $res = $modelWalletDetail->addWalletDetail();
             if ($res['status'] == 0) {
-                $modelWallet->rollback();
+                $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
         }
         $modelOrder->commit();//提交事务
