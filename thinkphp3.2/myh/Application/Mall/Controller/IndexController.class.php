@@ -37,7 +37,6 @@ class IndexController extends BaseController{
             ),
 
         );
-        print_r($template);exit;
         $this->sendTemplateMessage($template);
     }
    
