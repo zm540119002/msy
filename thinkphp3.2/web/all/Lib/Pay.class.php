@@ -65,7 +65,7 @@ class Pay{
                     WeixinJSBridge.invoke(
                         'getBrandWCPayRequest',$jsApiParameters,
                         function(res){
-                        //return;
+                        return;
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
                                 dialog.success('支付成功！',"{$payInfo['success_back']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
