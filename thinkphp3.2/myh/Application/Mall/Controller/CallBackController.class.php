@@ -200,7 +200,6 @@ class CallBackController extends CommonController{
         $orderSn = $parameter['out_trade_no'];
         $totalFee = $parameter['total_fee'];
         $modelOrder = D('Order');
-        $modelOrderDetail = D('OrderDetail');
         $modelCoupons = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
@@ -313,7 +312,7 @@ class CallBackController extends CommonController{
             if ($res['status'] == 0) {
                 $modelWallet->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
+                $this->errorReturn($orderSn, $modelWallet->getLastSql());
             }
             //增加账户记录
             $_POST = [];
