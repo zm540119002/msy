@@ -173,7 +173,7 @@ class CallBackController extends Controller{
             }
             $modelWalletDetail->commit();//提交事务
             //返回状态给微信服务器
-            $this->successReturn($parameter['order_sn']);
+            $this->successReturn();
         }
     }
 
@@ -269,7 +269,7 @@ class CallBackController extends Controller{
                 }
                 $modelOrder->commit();//提交事务
                 //返回状态给微信服务器
-                $this->successReturn($orderSn);
+                $this->successReturn();
             }
         }
     }
@@ -294,6 +294,11 @@ class CallBackController extends Controller{
          * $data['transaction_id'],//微信交易订单
          * $data['time_end']//支付时间
          */
+        $tradeAmount = $data['total_fee']/100;
+        if (!$tradeAmount) {
+            //返回状态给微信服务器
+            $this->errorReturn($data['transaction_id'],'交易金额错误！');
+        }
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
         $modelPartner = D('Partner');
@@ -304,12 +309,8 @@ class CallBackController extends Controller{
         $partnerInfo = $partnerInfo[0];
         if($partnerInfo && $partnerInfo['auth_status'] ==2){
             //返回状态给微信服务器
-            $this->successReturn($data['out_trade_no']);
-        }
-        $tradeAmount = $data['total_fee']/100;
-        if (!$tradeAmount) {
-            //返回状态给微信服务器
-            $this->errorReturn($data['transaction_id'],'交易金额错误！');
+            $this->successReturn();
+            exit;
         }
         $modelPartner->startTrans();//开启事务
         //更新合伙人认证状态为席位订金
@@ -358,7 +359,7 @@ class CallBackController extends Controller{
         }
         $modelWalletDetail->commit();//提交事务
         //返回状态给微信服务器
-        $this->successReturn($data['transaction_id']);
+        $this->successReturn();
     }
 
     //成功返回
