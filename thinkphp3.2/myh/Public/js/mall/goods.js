@@ -48,7 +48,7 @@ $(window).on('scroll',function(){
     }
 });
 
-$('body').on('click','.bomb_box .closeBtn',function(){
+$('body').on('click','.layer_close',function(){
     isMore=true;
     $('.layui-m-layer').remove();
 })
