@@ -50,6 +50,7 @@ class PaymentController extends AuthUserController {
     public function rechargePayment(){
         if(IS_POST){
         }else{
+            //席位订金充值
             if(isset($_GET['payType']) && $_GET['payType']=='deposit'){
                 $partner = PartnerCache::get($this->user['id']);
                 if(!$partner){
@@ -79,6 +80,39 @@ class PaymentController extends AuthUserController {
                     'fail_back' => U('payFail'),
                     'success_back' => session('returnUrl')?:U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.deposit',
+                );
+                Pay::wxPay($payInfo);
+            }
+            //资格完款充值
+            if(isset($_GET['payType']) && $_GET['payType']=='partner_fee'){
+                $partner = PartnerCache::get($this->user['id']);
+                if(!$partner){
+                    $this->error('合伙人未登记！');
+                }
+                $modelCity = D('City');
+                $where = array(
+                    'ct.id' => $partner['city'],
+                );
+                $city = $modelCity->selectCity($where);
+                $city = $city[0];
+                if(!$city['id']){
+                    $this->error('合伙人城市信息有误！');
+                }
+                if(!floatval($city['partner_fee'])){
+                    $this->error('合伙人订金有误！');
+                }
+                $res = $this->checkWallet();
+                if(!($res===true)){
+                    $this->error($res);
+                }
+                $payInfo = array(
+                    'attach'=>$this->user['id'],
+                    'sn'=> generateSN(),
+                    'actually_amount'=>$city['partner_fee'],
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
+                    'success_back' => session('returnUrl')?:U('payComplete'),
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.partner_fee',
                 );
                 Pay::wxPay($payInfo);
             }
