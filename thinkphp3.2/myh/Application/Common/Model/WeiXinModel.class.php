@@ -113,6 +113,7 @@ class WeiXinModel extends Model {
                         return errorMsg($this->getError());
                     }
                 }else{
+                    session('openid',$wxUser['openid']);
                     return $wxUser;
                 }
             }
