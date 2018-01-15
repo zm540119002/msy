@@ -183,9 +183,9 @@ class CallBackController extends CommonController{
     public function test(){
         $parameter = array(
             'payment_code' => 'weixin',
-            'out_trade_no' =>'20180115141851636558583148268820',//微信回的商家订单号
+            'out_trade_no' =>'20180115133056462855292312274665',//微信回的商家订单号
             'total_fee' => 1,//支付金额
-            'pay_sn' => '4200000051201801154450125162',//微信交易订单
+            'pay_sn' => '4200000056201801154355151125',//微信交易订单
             'payment_time' => '20180109172730'//支付时间
         );
         $this->groupBuyHandle($parameter);
@@ -195,7 +195,6 @@ class CallBackController extends CommonController{
      * @param $parameter
      */
     private function groupBuyHandle($parameter){
-
         $orderSn = $parameter['out_trade_no'];
         $totalFee = $parameter['total_fee'];
         $modelOrder = D('Order');
@@ -339,8 +338,6 @@ class CallBackController extends CommonController{
                 ' left join wx_user wxu on wxu.user_id = gbd.user_id'
             ];
             $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-           echo  $modelGroupBuyDetail->getLastSql();
-            print_r($templateMessageInfo);exit;
             $template = array(
                 'touser'=>$groupBuyDetail[0]['openid'],
                 'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
@@ -365,7 +362,6 @@ class CallBackController extends CommonController{
                 ),
 
             );
-            print_r($template);exit;
             $rs=$this->sendTemplateMessage($template);
             print_r($rs);exit;
 

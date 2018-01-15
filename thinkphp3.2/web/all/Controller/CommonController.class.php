@@ -111,9 +111,7 @@ class CommonController extends Controller{
 
     //发送模版消息
     public function sendTemplateMessage($template){
-        if(isWxBrowser()) {//判断是否为微信浏览器
-            return  $this->_jssdk ->send_template_message($template);
-        }
+        return  $this->_jssdk ->send_template_message($template);
     }
 
     
