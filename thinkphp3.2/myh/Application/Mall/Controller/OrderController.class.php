@@ -414,11 +414,11 @@ class OrderController extends AuthUserController {
                     }
 
                     if($orderInfo['type'] == 1){//团购订单处理
-                        $this -> groupBuyHandle($modelOrder,$orderInfo);
+                        $successBackUrl = $this -> groupBuyHandle($modelOrder,$orderInfo);
                     }
 
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
+                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'successBackUrl'=>$successBackUrl)));
                 }else{
                     $unpaid -= $accountBalance;
                 }
@@ -520,7 +520,6 @@ class OrderController extends AuthUserController {
                 $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
             }
         }
-
         //团购成功通知
         unset($where);
         $where = array(
@@ -559,7 +558,22 @@ class OrderController extends AuthUserController {
 
         );
         $this->sendTemplateMessage($template);
-
+        if (strpos(session('returnUrl'), 'groupBuyId') == true) {
+            if(strpos(session('returnUrl'), '?') == true){
+                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
+            }else{
+                $shLinkBase =  session('returnUrl');
+            }
+            $successBackUrl = $shLinkBase. '/shareType/groupBuy';
+        }else{
+            if (strpos(session('returnUrl'), 'html') == true){
+                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html'));
+            }else{
+                $shLinkBase = session('returnUrl');
+            }
+            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyDetail[0]['group_buy_id'].'/shareType/groupBuy';
+        }
+        return $successBackUrl;
     }
 
 
