@@ -146,7 +146,7 @@ class CallBackController extends CommonController{
         $_POST = [];
         $_POST['recharge_status'] = 1;
         $_POST['pay_sn'] = $parameter['pay_sn'];
-        $_POST['payment_code'] = 'weixn';
+        $_POST['payment_code'] = $parameter['payment_code'];
         $_POST['payment_time'] = $parameter['payment_time'];
         $where = array(
             'user_id' => $walletDetailInfo['user_id'],
@@ -402,6 +402,7 @@ class CallBackController extends CommonController{
             $_POST['pay_sn'] = $parameter['pay_sn'];
             $_POST['payment_time'] = $parameter['payment_time'];
             $_POST['orderId'] = $orderInfo['id'];
+            $_POST['payment_code'] = $parameter['payment_code'];
             $where = array(
                 'user_id' => $orderInfo['user_id'],
                 'sn' => $orderSn,
