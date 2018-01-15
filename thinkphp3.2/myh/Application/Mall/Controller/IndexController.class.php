@@ -37,9 +37,9 @@ class IndexController extends BaseController{
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname'
         ];
-        $join=[ ' left join goods o on g.id = gbd.goods_id',
-            ' left join goods_base g on g.goods_base_id = gb.id ',
-            ' left join wx_user g on wxu.user_id = gbd.user_id'
+        $join=[ ' left join goods g on g.id = gbd.goods_id',
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+            ' left join wx_user wxu on wxu.user_id = gbd.user_id'
         ];
         $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
         $template = array(
