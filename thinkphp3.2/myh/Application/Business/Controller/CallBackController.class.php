@@ -19,6 +19,7 @@ class CallBackController extends Controller{
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.deposit') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
+            \Think\Log::write('111');
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'deposit');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'alipayMobile.recharge') == true) {
