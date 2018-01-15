@@ -339,6 +339,7 @@ class CallBackController extends CommonController{
                 ' left join wx_user wxu on wxu.user_id = gbd.user_id'
             ];
             $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+            $modelGroupBuyDetail->getLastSql();
             print_r($templateMessageInfo);exit;
             $template = array(
                 'touser'=>$groupBuyDetail[0]['openid'],
