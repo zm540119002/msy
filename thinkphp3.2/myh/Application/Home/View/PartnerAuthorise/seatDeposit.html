@@ -53,30 +53,8 @@
             $('footer').find('price').text(deposit);
             //支付席位订金
             $('body').on('click','.pay_deposit',function(){
-                var url = APP + '/Business/Payment/depositPayment/returnUrl/' +encodeURIComponent(location.href);
+                var url = APP + '/Business/Payment/depositPayment?returnUrl=' + encodeURIComponent(location.href);
                 location.href = url;
-//                var postData = {};
-//                postData.returnUrl = location.href;
-//                $.ajax({
-//                    url: url,
-//                    data: postData,
-//                    type: 'get',
-//                    beforeSend: function(){
-//                        $('.loading').show();
-//                    },
-//                    error:function(){
-//                        $('.loading').hide();
-//                        dialog.error('AJAX错误');
-//                    },
-//                    success: function(data){
-//                        $('.loading').hide();
-//                        if(data.status == 0){
-//                            dialog.error(data.info);
-//                        }else if(data.status == 1){
-//                            location.href = CONTROLLER + '/seniority/partnerId/' + data.id;
-//                        }
-//                    }
-//                });
             });
         });
     </script>

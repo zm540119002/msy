@@ -1,5 +1,5 @@
 <section id="userLoginForm" style="display:none;">
-    <div class="f24">
+    <div class="f24 bomb_box">
         <div class="ucenter_logo">
             <img src="PUBLIC_IMG/common/ucenter_logo.png" alt="">
             <p>已注册用户通行证登陆</p>
@@ -44,9 +44,11 @@
     //登录触发
     var loginLayer = null;
     function loginDialog(func){
+        isMore=false;
         loginLayer = layer.open({
             className:'loginLayer',
             content:userLoginForm,
+            shadeClose:false,
             btn:'登录',
             success:function(){
                 window.scrollTo(0,0);
@@ -56,6 +58,9 @@
                 });
                //smartScroll($('.loginLayer'), $('.loginTab'));
                isRolling($('.loginLayer'));
+            },
+            end:function(){
+                isMore=true;
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -102,6 +107,7 @@
                             if(func && $.isFunction(func)){
                                 func();
                             }
+                            isMore=true;
                             layer.close(index);
                         }
                     }

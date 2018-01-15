@@ -70,12 +70,8 @@ class PaymentController extends AuthUserController {
             if(!($res===true)){
                 $this->error($res,session('returnUrl'));
             }
-            $SN = generateSN();
-            if(!$this->saveWalletDetail($city['deposit'],$SN)){
-                $this->error('钱包充值出错！',session('returnUrl'));
-            }
             $payInfo = array(
-                'sn'=>$SN,
+                'sn'=>$this->user['id'],
                 'actually_amount'=>$city['deposit'],
                 'cancel_back' => U('payCancel'),
                 'fail_back' => U('payFail'),
@@ -110,28 +106,6 @@ class PaymentController extends AuthUserController {
                 Pay::wxPay($payInfo);
             }
         }
-    }
-
-    /**钱包明细
-     * @param $amount
-     * @param int $type 1：充值 2：支付
-     * @return bool
-     */
-    private function saveWalletDetail($amount,$SN,$type=1){
-        $modelWalletDetail = D('WalletDetail');
-        if(floatval($amount)){
-            $_POST['user_id'] = $this->user['id'];
-            $_POST['type'] = $type;
-            $_POST['recharge_status'] = 0;
-            $_POST['create_time'] = time();
-            $_POST['amount'] = $amount;
-            $_POST['sn'] = $SN;
-            $res = $modelWalletDetail->addWalletDetail();
-            if($res['status']==1){
-                return true;
-            }
-        }
-        return false;
     }
 
     /**检查钱包（1，钱包记录不存在，则新增记录；2，如果为支付，会检查余额是否足够）

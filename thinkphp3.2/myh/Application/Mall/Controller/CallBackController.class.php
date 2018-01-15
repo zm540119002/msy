@@ -3,7 +3,8 @@ namespace Mall\Controller;
 use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
-class CallBackController extends Controller{
+use  web\all\Controller\CommonController;
+class CallBackController extends CommonController{
     //支付回调
     public function notifyUrl(){
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
@@ -227,7 +228,7 @@ class CallBackController extends Controller{
             $_POST = [];
             $_POST['pay_status'] = 2;
             $_POST['pay_time'] = $parameter['payment_time'];
-            $where = [];
+            unset($where);
             $where = array(
                 'user_id' => $orderInfo['user_id'],
                 'order_id' => $orderInfo['id'],
@@ -311,6 +312,46 @@ class CallBackController extends Controller{
                     $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
                 }
             }
+            //团购成功通知
+            unset($where);
+            $where = array(
+                'type' => 1,
+                'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+            );
+            $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+                'gb.name','wxu.headimgurl','wxu.nickname'
+            ];
+            $join=[ ' left join goods o on g.id = gbd.goods_id',
+                ' left join goods_base g on g.goods_base_id = gb.id ',
+                ' left join wx_user g on wxu.user_id = gbd.user_id'
+            ];
+            $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+            $template = array(
+                'touser'=>'',
+                'template_id'=>$groupBuyDetail[0]['openid'],
+                "url"=>$this->host.U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuyDetail[0]['goods_id'],
+                        'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
+                        'shareType'=>'groupBuy' )),
+                'data'=>array(
+                    'first'=>array(
+                        'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                    ),
+                    'Pingou_ProductName'=>array(
+                        'value'=>$templateMessageInfo[0]['name'],'color'=>'#173177',
+                    ),
+                    'Weixin_ID'=>array(
+                        'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
+                    ),
+                    'Remark'=>array(
+                        'value'=>'您的已付款项将在3-5天内退至您的支付账户，请留意相关信息。','color'=>'#173177',
+                    ),
+
+                ),
+
+            );
+            $this->sendTemplateMessage($template);
+            
             $modelOrder->commit();//提交事务
             //返回状态给微信服务器
             $this->successReturn();
