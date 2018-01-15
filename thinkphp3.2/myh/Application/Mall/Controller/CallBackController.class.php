@@ -362,6 +362,7 @@ class CallBackController extends CommonController{
                 ),
 
             );
+            print_r($template);exit;
             $rs=$this->sendTemplateMessage($template);
             print_r($rs);exit;
 
