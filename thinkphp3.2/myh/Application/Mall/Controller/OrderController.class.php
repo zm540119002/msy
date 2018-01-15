@@ -227,8 +227,8 @@ class OrderController extends AuthUserController {
             if(in_array($this->user['id'],$userIdArray)){
                 $this->ajaxReturn(errorMsg('你有参加此团购，是否重新开团',array('url'=>U('Goods/goodsDetail/',array('goodsId'=>$goodsList[0]['foreign_id'])))));
             }
-//            $openid =session('openid');
-//            print_r($openid);exit;
+            $openid =session('openid');
+            print_r($openid);exit;
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId);
         }
         $modelLogistics->commit();
