@@ -1,9 +1,8 @@
 <?php
 namespace Common\Model;
-
 use Think\Model;
 use Think\Model\RelationModel;
-
+use web\all\Controller\CommonController;
 class GroupBuyModel extends Model {
     protected $tableName = 'group_buy';
     protected $tablePrefix = '';
@@ -101,7 +100,7 @@ class GroupBuyModel extends Model {
     }
 
     //加入团购表
-    public function joinGroupBuy($goods,$uid,$orderId,$groupBuyId){
+    public function joinGroupBuy($goods,$uid,$orderId,$groupBuyId,$openid){
         //插入团购记录
         if(!$groupBuyId){
             $modelGroupBuy = D('GroupBuy');
@@ -118,9 +117,9 @@ class GroupBuyModel extends Model {
                 $modelGroupBuy->rollback();//回滚事务
                 $this->ajaxReturn(errorMsg('发起团购失败'));
             }
-            $type = 2;//成员
-        }else{
             $type = 1;//团长
+        }else{
+            $type = 2;//成员
         }
         $modelGroupBuyDetail = D('GroupBuyDetail');
         $_POST = [];
@@ -131,6 +130,7 @@ class GroupBuyModel extends Model {
         $_POST['order_id'] = $orderId;
         $_POST['group_buy_id'] = $groupBuyId;
         $_POST['type'] = $type;
+        $_POST['openid'] = $openid;
         $res = $modelGroupBuyDetail->addGroupBuyDetail();
         $groupBuyDetailId = $res['id'];
         if(!$groupBuyDetailId){

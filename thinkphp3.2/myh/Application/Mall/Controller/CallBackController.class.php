@@ -312,49 +312,47 @@ class CallBackController extends CommonController{
                     $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
                 }
             }
-            $modelOrder->commit();//提交事务
             //团购成功通知
-            /*
-$template = array('touser' => "owddJuAiiQpXZedAWxjpp3pkZTzU",
-                  'template_id' => "jD1Jfu0ElKcyEK0CfJ2JjTy4U1fjYI09l6eax9BBu9U",
-                  'url' => "",
-                  'topcolor' => "#7B68EE",
-                  'data' => array('first'    => array('value' => "您好，方倍，欢迎使用模版消息！",
-                                                     'color' => "#743A3A",
-                                                    ),
-                                  'product' => array('value' => "微信公众平台开发最佳实践",
-                                                     'color' => "#FF0000",
-                                                    ),
-                                   'price'     => array('value' => "69.00元",
-                                                     'color' => "#C4C400",
-                                                    ),
-                                   'time'     => array('value' => "2014年6月1日",
-                                                     'color' => "#0000FF",
-                                                    ),
-                                  'remark'     => array('value' => "\\n你的订单已提交，我们将尽快发货。祝您生活愉快！",
-                                                     'color' => "#008000",
-                                                    ),
-                                )
-);
-$weixin->send_template_message($template);
-*/
+            unset($where);
+            $where = array(
+                'gbd.type' => 1,
+                'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+            );
+            $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+                'gb.name','wxu.headimgurl','wxu.nickname'
+            ];
+            $join=[ ' left join goods g on g.id = gbd.goods_id',
+                ' left join goods_base gb on g.goods_base_id = gb.id ',
+                ' left join wx_user wxu on wxu.user_id = gbd.user_id'
+            ];
+            $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
             $template = array(
-                'touser'=>'',
+                'touser'=>$groupBuyDetail[0]['openid'],
                 'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
                 "url"=>$this->host.U('Goods/goodsDetail',array(
                         'goodsId'=>$groupBuyDetail[0]['goods_id'],
                         'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
                         'shareType'=>'groupBuy' )),
                 'data'=>array(
-                    'first'=>'',
-                    'Pingou_ProductName'=>'',
-                    'Weixin_ID'=>'',
-                    'Remark'=>'',
+                    'first'=>array(
+                        'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                    ),
+                    'Pingou_ProductName'=>array(
+                        'value'=>$templateMessageInfo[0]['name'],'color'=>'#173177',
+                    ),
+                    'Weixin_ID'=>array(
+                        'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
+                    ),
+                    'Remark'=>array(
+                        'value'=>'您的已付款项将在3-5天内退至您的支付账户，请留意相关信息。','color'=>'#173177',
+                    ),
 
                 ),
 
             );
             $this->sendTemplateMessage($template);
+
+            $modelOrder->commit();//提交事务
             //返回状态给微信服务器
             $this->successReturn();
         }

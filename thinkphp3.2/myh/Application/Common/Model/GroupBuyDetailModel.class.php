@@ -86,7 +86,7 @@ class GroupBuyDetailModel extends Model {
             'gbd.status' => 0,
         );
         $_field = array(
-            'gbd.id','gbd.type','gbd.pay_status','gbd.num','gbd.group_buy_id','gbd.user_id','gbd.pay_time',
+            'gbd.id','gbd.type','gbd.pay_status','gbd.num','gbd.group_buy_id','gbd.user_id','gbd.pay_time','gbd.openid'
         );
         $_join = array(
         );
