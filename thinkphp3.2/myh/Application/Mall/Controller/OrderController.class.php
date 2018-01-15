@@ -123,6 +123,7 @@ class OrderController extends AuthUserController {
 
     //订单-生成
     public function generate(){
+        print_r(I());exit;
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
