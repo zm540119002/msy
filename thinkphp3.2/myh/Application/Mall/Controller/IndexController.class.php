@@ -30,10 +30,19 @@ class IndexController extends BaseController{
                     'groupBuyId'=> 37,
                     'shareType'=>'groupBuy' )),
             'data'=>array(
-                'first'=>'你已团购',
-                'Pingou_ProductName'=>'南岸ABB啊',
-                'Weixin_ID'=>'巴阿罢罢罢',
-                'Remark'=>'暖暖暖暖暖那你呢',
+                'first'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+                'pingou_productname'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+                'weixin_ID'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+                'remark'=>array(
+                    'value'=>'hello','color'=>'#173177',
+                ),
+              
             ),
 
         );
