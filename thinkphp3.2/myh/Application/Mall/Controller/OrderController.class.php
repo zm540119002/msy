@@ -334,6 +334,9 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+                    if($orderInfo['type'] == 1){//团购订单处理
+                        $this -> groupBuyHandle($modelOrder,$orderInfo);
+                    }
                     //减库存
                     $res = $modelGoods -> decGoodsNum($orderDetail);
 
@@ -410,10 +413,10 @@ class OrderController extends AuthUserController {
                         $this->ajaxReturn(errorMsg($res));
                     }
 
-                    if($orderInfo['type'] == 1){
+                    if($orderInfo['type'] == 1){//团购订单处理
                         $this -> groupBuyHandle($modelOrder,$orderInfo);
                     }
-                    
+
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
@@ -496,7 +499,6 @@ class OrderController extends AuthUserController {
             $this->errorReturn($orderInfo['sn'], $modelGroupBuyDetail->getLastSql());
         }
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
-
         //2.查看团购详情表此次团购有几人
         unset($where);
         $where = array(
