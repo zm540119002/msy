@@ -276,10 +276,10 @@ class CallBackController extends Controller{
 
     public function test(){
         $parameter = array(
-            'out_trade_no' =>'20180115133056462855292312274665',//微信回的商家订单号
+            'out_trade_no' =>'20180115133056462855292312274664',//微信回的商家订单号
             'total_fee' => 1,//支付金额
-            'transaction_id' => '4200000056201801154355151125',//微信交易订单
-            'time_end' => '20180109172730',//支付时间
+            'transaction_id' => '4200000056201801154355151127',//微信交易订单
+            'time_end' => '20180109172790',//支付时间
             'attach' => '4',//支付时间
         );
         $this->depositHandle($parameter);
