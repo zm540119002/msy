@@ -218,6 +218,15 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1){//团购
+            $_where = array(
+                'group_buy_id'=>$groupBuyId,
+                'pay_status'=>2,
+            );
+            //判断是否已团购
+            $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id',true);
+            if(in_array($this->user['id'],$userIdArray)){
+                $this->ajaxReturn(errorMsg('你有参加此团购，是否重新开团',array('url'=>U('Goods/goodsDetail/',array('goodsId'=>$goodsList[0]['foreign_id'])))));
+            }
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId);
         }
         $modelLogistics->commit();
@@ -249,8 +258,6 @@ class OrderController extends AuthUserController {
         $modelCouponsReceive = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
-        $modelGroupBuy = D('GroupBuy');
-        $modelGroupBuyDetail = D('GroupBuyDetail');
         if(IS_POST){
             //订单信息
             if(isset($_POST['orderId']) && intval($_POST['orderId'])){

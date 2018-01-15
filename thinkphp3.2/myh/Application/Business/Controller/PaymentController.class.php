@@ -1,7 +1,8 @@
 <?php
 namespace Business\Controller;
 use web\all\Controller\AuthUserController;
-use  web\all\Lib\Pay;
+use web\all\Lib\Pay;
+use web\all\Cache\PartnerCache;
 class PaymentController extends AuthUserController {
     //订单-支付
     public function orderPayment(){
@@ -45,6 +46,46 @@ class PaymentController extends AuthUserController {
         }
     }
 
+    //席位订金-支付
+    public function depositPayment(){
+        if(IS_POST){
+        }else{
+            $partner = PartnerCache::get($this->user['id']);
+            if(!$partner){
+                $this->error('合伙人未登记！');
+            }
+            $modelCity = D('City');
+            $where = array(
+                'ct.id' => $partner['city'],
+            );
+            $city = $modelCity->selectCity($where);
+            $city = $city[0];
+            if(!$city['id']){
+                $this->error('合伙人城市信息有误！',session('returnUrl'));
+            }
+            if(!floatval($city['deposit'])){
+                $this->error('合伙人订金有误！',session('returnUrl'));
+            }
+            $res = $this->checkWallet();
+            if(!($res===true)){
+                $this->error($res,session('returnUrl'));
+            }
+            $SN = generateSN();
+            if(!$this->saveWalletDetail($city['deposit'],$SN)){
+                $this->error('钱包充值出错！',session('returnUrl'));
+            }
+            $payInfo = array(
+                'sn'=>$SN,
+                'actually_amount'=>$city['deposit'],
+                'cancel_back' => U('payCancel'),
+                'fail_back' => U('payFail'),
+                'success_back' => session('returnUrl')?:U('payComplete'),
+                'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .'/weixin.deposit',
+            );
+            Pay::wxPay($payInfo);
+        }
+    }
+
     //充值-支付
     public function rechargePayment(){
         $modelWalletDetail = D('WalletDetail');
@@ -69,5 +110,58 @@ class PaymentController extends AuthUserController {
                 Pay::wxPay($payInfo);
             }
         }
+    }
+
+    /**钱包明细
+     * @param $amount
+     * @param int $type 1：充值 2：支付
+     * @return bool
+     */
+    private function saveWalletDetail($amount,$SN,$type=1){
+        $modelWalletDetail = D('WalletDetail');
+        if(floatval($amount)){
+            $_POST['user_id'] = $this->user['id'];
+            $_POST['type'] = $type;
+            $_POST['recharge_status'] = 0;
+            $_POST['create_time'] = time();
+            $_POST['amount'] = $amount;
+            $_POST['sn'] = $SN;
+            $res = $modelWalletDetail->addWalletDetail();
+            if($res['status']==1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**检查钱包（1，钱包记录不存在，则新增记录；2，如果为支付，会检查余额是否足够）
+     * @param int $amount 金额
+     * @param int $type 1：充值 2：支付
+     * @return bool === true 表示通过
+     */
+    private function checkWallet($amount,$type=1){
+        $msg = '';
+        $modelWallet = D('Wallet');
+        $where = array(
+            'w.user_id' => $this->user['id'],
+        );
+        $walletInfo = $modelWallet->selectWallet($where);
+        $walletInfo = $walletInfo[0];
+        if($walletInfo){//存在
+            if($type==2 && $walletInfo['amount']<$amount){
+                $msg = '余额不足';
+            }
+        }else{//不存在
+            if($type==2){
+                $msg = '余额不足';
+            }
+            $_POST = [];
+            $_POST['user_id'] = $this->user['id'];
+            $res = $modelWallet->addWallet();
+            if($res['status']==0){
+                $msg = $modelWallet->getLastSql();
+            }
+        }
+        return $msg?:true;
     }
 }

@@ -49,7 +49,7 @@
                 <div class="wt_banner">
                     <div class="wt_f_l">
                         <img src="PUBLIC_IMG/common/wt-banner.png" alt="">
-                        <div class="wt_tipc_item">
+                        <div class="wt_tipc_item wt_detail_tipc">
                             <dl>
                                 <dt class="person"></dt>
                                 <dd>人数3+</dd>
@@ -64,22 +64,57 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="wt_f_l">
+                    <div class="wt_f_l wt_d_l">
                         <img src="PUBLIC_IMG/common/wt-code.png" alt="">
                         <span class="txt">长按二维码关注美悦会</span>
                     </div>
                 </div>
                 <ul class="group_purchase">
+                    <!--<volist name="groupBuyDetail" id="vo">-->
+                        <!--<if condition="$vo.type eq 1 ">-->
+                            <!--<li>-->
+                                <!--<empty name="vo.headimgurl">-->
+                                    <!--<img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">-->
+                                    <!--<else />-->
+                                    <!--<img src="{$vo.headimgurl}" alt="">-->
+                                <!--</empty>-->
+                                <!--<span>团长</span>-->
+                            <!--</li>-->
+                            <!--<else />-->
+                            <!--<li>-->
+                                <!--<empty name="vo.headimgurl">-->
+                                    <!--<img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">-->
+                                    <!--<else />-->
+                                    <!--<img src="{$vo.headimgurl}" alt="">-->
+                                <!--</empty>-->
+                                <!--<span>成员</span>-->
+                            <!--</li>-->
+                        <!--</if>-->
+                    <!--</volist>-->
+
                     <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <empty name="groupBuyDetail[0].headimgurl">
+                            <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                            <else />
+                            <img src="{$groupBuyDetail[0].headimgurl}" alt="">
+                        </empty>
                         <span>团长</span>
                     </li>
+
                     <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <empty name="groupBuyDetail[1].headimgurl">
+                            <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                            <else />
+                            <img src="{$groupBuyDetail[1].headimgurl}" alt="">
+                        </empty>
                         <span>成员</span>
                     </li>
                     <li>
-                        <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                        <empty name="groupBuyDetail[2].headimgurl">
+                            <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="">
+                            <else />
+                            <img src="{$groupBuyDetail[2].headimgurl}" alt="">
+                        </empty>
                         <span>成员</span>
                     </li>
                 </ul>
@@ -178,15 +213,5 @@
             var getFractionValue='{$aveScore}';
             $('.five_star').setStar(getFractionValue);
         });
-        $(window).load(function() {
-            var url = window.location.href;
-            var ua = window.navigator.userAgent.toLowerCase();
-            if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-                if(url.indexOf("code=") <= 0 ) { //判断url地址中是否包含link字符串
-                    self.location=MODULE + '/WeiXin/wxLogin/?url='+url;
-                }
-            }
-        });
-
     </script>
 </block>

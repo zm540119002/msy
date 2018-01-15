@@ -241,7 +241,7 @@ class CallBackController extends Controller{
             $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
 
             //2.查看团购详情表此次团购有几人
-            $where = [];
+            unset($where);
             $where = array(
                 'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
                 'pay_status' => 2,
@@ -250,7 +250,7 @@ class CallBackController extends Controller{
             if($groupBuyNum >= 3){//修改团购表
                 $_POST = [];
                 $_POST['tag'] = 1;
-                $where = [];
+                unset($where);
                 $where = array(
                     'id' => $groupBuyDetail[0]['group_buy_id'],
                 );

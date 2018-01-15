@@ -3,24 +3,11 @@ namespace Mall\Controller;
 use  web\all\Controller\BaseController;
 use web\all\Component\WxpayAPI\Jssdk;
 class WeiXinController extends BaseController {
-    //微信登录
-    public function wxLogin(){
+    
+    public function checkWxUser(){
         $url = $_GET['url'];
-        if(isWxBrowser()) {//判断是否为微信浏览器
-            $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-            $code = isset($_GET['code'])?$_GET['code']:'';
-            if($code){
-                $wxUser = $this -> getOAuthWeiXinUserInfo();
-                if(!$wxUser){
-                    return false;
-                }else{
-                    return $wxUser;
-                }
-            }else{
-                $wechat -> getOauthRedirect($url,"wxbase");
-            }
-        }
-
+        $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $wechat -> getOauthRedirect($url,"wxbase");
     }
 
 
