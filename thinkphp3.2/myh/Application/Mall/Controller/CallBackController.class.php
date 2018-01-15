@@ -183,9 +183,9 @@ class CallBackController extends CommonController{
     public function test(){
         $parameter = array(
             'payment_code' => 'weixin',
-            'out_trade_no' =>'20180109172707963121088568718912',//微信回的商家订单号
+            'out_trade_no' =>'20180115141851636558583148268820',//微信回的商家订单号
             'total_fee' => 1,//支付金额
-            'pay_sn' => '4200000062201801091025498072',//微信交易订单
+            'pay_sn' => '4200000051201801154450125162',//微信交易订单
             'payment_time' => '20180109172730'//支付时间
         );
         $this->groupBuyHandle($parameter);
