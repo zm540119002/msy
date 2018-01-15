@@ -22,27 +22,47 @@ class IndexController extends BaseController{
 
 
     public function a(){
+        $modelGroupBuyDetail = D('GroupBuyDetail');
+        $where = array(
+            'user_id' => 4,
+            'order_id' => 315,
+        );
+        $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
+        //团购成功通知
+        unset($where);
+        $where = array(
+            'type' => 1,
+            'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+        );
+        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+            'gb.name','wxu.headimgurl','wxu.nickname'
+        ];
+        $join=[ ' left join goods o on g.id = gbd.goods_id',
+            ' left join goods_base g on g.goods_base_id = gb.id ',
+            ' left join wx_user g on wxu.user_id = gbd.user_id'
+        ];
+        $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
         $template = array(
-            'touser'=>'oNalMuA6iE-T45TPb_ZeQYlJ3Jjk',
-            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+            'touser'=>'',
+            'template_id'=>$groupBuyDetail[0]['openid'],
             "url"=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>72,
-                    'groupBuyId'=> 37,
+                    'goodsId'=>$groupBuyDetail[0]['goods_id'],
+                    'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
                     'shareType'=>'groupBuy' )),
             'data'=>array(
                 'first'=>array(
-                    'value'=>'hello','color'=>'#173177',
+                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
                 ),
                 'Pingou_ProductName'=>array(
-                    'value'=>'hello','color'=>'#173177',
+                    'value'=>$templateMessageInfo[0]['name'],'color'=>'#173177',
                 ),
                 'Weixin_ID'=>array(
-                    'value'=>'hello','color'=>'#173177',
+                    'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
                 ),
                 'Remark'=>array(
-                    'value'=>'hello','color'=>'#173177',
+                    'value'=>'您的已付款项将在3-5天内退至您的支付账户，请留意相关信息。','color'=>'#173177',
                 ),
-              
+
             ),
 
         );

@@ -312,7 +312,6 @@ class CallBackController extends CommonController{
                     $this->errorReturn($orderSn, $modelOrderDetail->getLastSql());
                 }
             }
-            $modelOrder->commit();//提交事务
             //团购成功通知
             unset($where);
             $where = array(
@@ -325,7 +324,7 @@ class CallBackController extends CommonController{
             $join=[ ' left join goods o on g.id = gbd.goods_id',
                 ' left join goods_base g on g.goods_base_id = gb.id ',
                 ' left join wx_user g on wxu.user_id = gbd.user_id'
-               ];
+            ];
             $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
             $template = array(
                 'touser'=>'',
@@ -352,6 +351,8 @@ class CallBackController extends CommonController{
 
             );
             $this->sendTemplateMessage($template);
+            
+            $modelOrder->commit();//提交事务
             //返回状态给微信服务器
             $this->successReturn();
         }
