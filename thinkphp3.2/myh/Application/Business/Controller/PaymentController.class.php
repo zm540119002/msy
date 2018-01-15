@@ -79,17 +79,16 @@ class PaymentController extends AuthUserController {
                 'success_back' => session('returnUrl')?:U('payComplete'),
                 'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.deposit',
             );
-//            print_r($payInfo);exit;
             Pay::wxPay($payInfo);
         }
     }
 
     //充值-支付
     public function rechargePayment(){
-        $modelWalletDetail = D('WalletDetail');
         if(IS_POST){
         }else{
             if(isset($_GET['walletDetailId']) && intval($_GET['walletDetailId'])){
+                $modelWalletDetail = D('WalletDetail');
                 $where = array(
                     'wd.id' => I('get.walletDetailId'),
                     'wd.user_id' => $this->user['id'],
