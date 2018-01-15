@@ -195,6 +195,7 @@ class CallBackController extends CommonController{
      * @param $parameter
      */
     private function groupBuyHandle($parameter){
+        print_r($parameter);exit;
         $orderSn = $parameter['out_trade_no'];
         $totalFee = $parameter['total_fee'];
         $modelOrder = D('Order');
