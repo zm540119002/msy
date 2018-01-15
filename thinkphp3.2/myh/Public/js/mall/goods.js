@@ -11,6 +11,7 @@ function getGoodsList(config) {
     if(requestEnd){
         dialog.error('没有更多啦');
         isMore=true;
+        requestEnd=false;
         return false;
     }
     $.ajax({
