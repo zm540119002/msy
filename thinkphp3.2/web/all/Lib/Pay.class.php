@@ -43,7 +43,7 @@ class Pay{
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
-        $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
+        $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
         $input->SetTotal_fee($payInfo['actually_amount'] * 100);			//支付金额,单位:分
         $input->SetTime_start(date("YmdHis"));		//支付发起时间
@@ -65,6 +65,7 @@ class Pay{
                     WeixinJSBridge.invoke(
                         'getBrandWCPayRequest',$jsApiParameters,
                         function(res){
+                        //return;
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
                                 dialog.success('支付成功！',"{$payInfo['success_back']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 

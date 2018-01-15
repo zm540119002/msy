@@ -130,7 +130,7 @@ class CallBackController extends CommonController{
     private function rechargeHandle($parameter){
         $modelWalletDetail = D('WalletDetail');
         $where = array(
-            'wd.sn' => $parameter['order_sn'],
+            'wd.sn' => $parameter['out_trade_no'],
         );
         $walletDetailInfo = $modelWalletDetail->selectWalletDetail($where);
         $walletDetailInfo = $walletDetailInfo[0];
@@ -139,14 +139,14 @@ class CallBackController extends CommonController{
         }
         if ($walletDetailInfo['amount'] * 100 != $parameter['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
             //返回状态给微信服务器
-            $this->errorReturn($parameter['order_sn'], '回调的金额和充值的金额不符，终止交易', '充值');
+            $this->errorReturn($parameter['out_trade_no'], '回调的金额和充值的金额不符，终止交易', '充值');
         }
         $modelWalletDetail->startTrans();
         //更新-账户明细-充值状态
         $_POST = [];
         $_POST['recharge_status'] = 1;
         $_POST['pay_sn'] = $parameter['pay_sn'];
-        $_POST['payment_code'] = 'weixn';
+        $_POST['payment_code'] = $parameter['payment_code'];
         $_POST['payment_time'] = $parameter['payment_time'];
         $where = array(
             'user_id' => $walletDetailInfo['user_id'],
@@ -178,6 +178,17 @@ class CallBackController extends CommonController{
         //返回状态给微信服务器
         $this->successReturn();
 
+    }
+
+    public function test(){
+        $parameter = array(
+            'payment_code' => 'weixin',
+            'out_trade_no' =>'20180115133056462855292312274665',//微信回的商家订单号
+            'total_fee' => 1,//支付金额
+            'pay_sn' => '4200000056201801154355151125',//微信交易订单
+            'payment_time' => '20180109172730'//支付时间
+        );
+        $this->groupBuyHandle($parameter);
     }
 
     /**团购订单支付回调
@@ -212,6 +223,7 @@ class CallBackController extends CommonController{
             $_POST['payment_code'] = 0;
             $_POST['pay_sn'] = $parameter['pay_sn'];
             $_POST['payment_time'] = $parameter['payment_time'];
+            $_POST['payment_code'] = $parameter['payment_code'];
             $_POST['orderId'] = $orderInfo['id'];
             $where = array(
                 'user_id' => $orderInfo['user_id'],
@@ -315,20 +327,20 @@ class CallBackController extends CommonController{
             //团购成功通知
             unset($where);
             $where = array(
-                'type' => 1,
-                'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+                'gbd.type' => 1,
+                'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
             );
             $field=[ 'g.cash_back','g.goods_base_id','g.commission',
                 'gb.name','wxu.headimgurl','wxu.nickname'
             ];
-            $join=[ ' left join goods o on g.id = gbd.goods_id',
-                ' left join goods_base g on g.goods_base_id = gb.id ',
-                ' left join wx_user g on wxu.user_id = gbd.user_id'
+            $join=[ ' left join goods g on g.id = gbd.goods_id',
+                ' left join goods_base gb on g.goods_base_id = gb.id ',
+                ' left join wx_user wxu on wxu.user_id = gbd.user_id'
             ];
             $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
             $template = array(
-                'touser'=>'',
-                'template_id'=>$groupBuyDetail[0]['openid'],
+                'touser'=>$groupBuyDetail[0]['openid'],
+                'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
                 "url"=>$this->host.U('Goods/goodsDetail',array(
                         'goodsId'=>$groupBuyDetail[0]['goods_id'],
                         'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
@@ -344,14 +356,12 @@ class CallBackController extends CommonController{
                         'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
                     ),
                     'Remark'=>array(
-                        'value'=>'您的已付款项将在3-5天内退至您的支付账户，请留意相关信息。','color'=>'#173177',
+                        'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
                     ),
-
                 ),
 
             );
             $this->sendTemplateMessage($template);
-            
             $modelOrder->commit();//提交事务
             //返回状态给微信服务器
             $this->successReturn();
@@ -391,6 +401,7 @@ class CallBackController extends CommonController{
             $_POST['pay_sn'] = $parameter['pay_sn'];
             $_POST['payment_time'] = $parameter['payment_time'];
             $_POST['orderId'] = $orderInfo['id'];
+            $_POST['payment_code'] = $parameter['payment_code'];
             $where = array(
                 'user_id' => $orderInfo['user_id'],
                 'sn' => $orderSn,
