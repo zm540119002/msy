@@ -61,14 +61,14 @@ class PaymentController extends AuthUserController {
             $city = $modelCity->selectCity($where);
             $city = $city[0];
             if(!$city['id']){
-                $this->error('合伙人城市信息有误！',session('returnUrl'));
+                $this->error('合伙人城市信息有误！');
             }
             if(!floatval($city['deposit'])){
-                $this->error('合伙人订金有误！',session('returnUrl'));
+                $this->error('合伙人订金有误！');
             }
             $res = $this->checkWallet();
             if(!($res===true)){
-                $this->error($res,session('returnUrl'));
+                $this->error($res);
             }
             $payInfo = array(
                 'attach'=>$this->user['id'],
