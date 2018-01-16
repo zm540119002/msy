@@ -33,11 +33,15 @@
                     <else />
                     </if>
                     <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">{$orderInfo.amount}</price></p>
+                    <if condition="$orderInfo.type eq 1 ">
+                        <p>订单类型：<span class="order_type">团购订单</span></p>
+                    </if>
                 </div>
                 <if condition="$orderInfo.logistics_status eq 1">
                     <a class="order_pay_btn" href="">去支付</a>
                     <elseif condition="$orderInfo.logistics_status eq 2"/>
                     <a class="order_pay_btn edit_address" href="">修改收货人地址</a>
+                    <a class="order_pay_btn edit_address" href="">去邀请朋友参加团购</a>
                     <elseif condition="$orderInfo.logistics_status eq 3"/>
                     <a class="order_pay_btn edit_address" href="{:U('Comment/CommentEdit',array('orderId'=>$orderInfo['id']))}">去评分评论</a>
                     <elseif condition="$orderInfo.logistics_status eq 4"/>
