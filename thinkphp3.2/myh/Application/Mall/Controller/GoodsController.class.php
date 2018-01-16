@@ -104,15 +104,6 @@ class GoodsController extends BaseController {
             }else{
                 $conf = array(2,3,4);
             }
-            if(isset($_GET['shareType'])&&!empty($_GET['shareType'])){
-                $shareType = $_GET['shareType'];
-                if($shareType == 'referrer'){//推客分享
-                    $conf = array(9,10,11);
-                }
-                if($shareType == 'groupBuy'){//团购分享
-                    $conf = array(12);
-                }
-            }
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
             //微信分享
             $shareInfo = [];
@@ -122,6 +113,14 @@ class GoodsController extends BaseController {
             $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
             $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
             if(isset($_GET['shareType'])&&!empty($_GET['shareType'])){
+                $shareType = $_GET['shareType'];
+                if($shareType == 'referrer'){//推客分享
+                    $conf = array(9,10,11);
+                }
+                if($shareType == 'groupBuy'){//团购分享
+                    $conf = array(12);
+                }
+                $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
                 if($shareType == 'referrer'){//推客分享
                     $shareInfo['desc'] = $this->goodsInfo['share_intro'];//分享的简介
                     $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/shareType'));
@@ -135,18 +134,26 @@ class GoodsController extends BaseController {
                     $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
                 }
             }
-            if(isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId'])){
-                $this -> groupBuyId = $_GET['groupBuyId'];
-            }
-            if((isset($_GET['shareType'])&&!empty($_GET['shareType'])) || (isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId']))){
+
+            if(((isset($_GET['shareType'])&& $_GET['shareType'] == 'groupBuy')) || (isset($_GET['groupBuyId']) && !empty($_GET['groupBuyId']))){
+                $this -> groupBuyId = intval($_GET['groupBuyId']);
                 $model = D('GroupBuyDetail');
-                $_where['gbd.group_buy_id'] = intval($_GET['groupBuyId']);
+                $_where['gbd.group_buy_id'] =  $this -> groupBuyId ;
                 $_where['gbd.pay_status'] = 2;
                 $field=['wxu.id','wxu.openid','wxu.nickname','wxu.sex','wxu.country','wxu.province',
                     'wxu.city','wxu.latitude','wxu.longitude','wxu.longitude','wxu.headimgurl','wxu.subscribe',
+                    'gb.overdue_time'
                 ];
-                $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',];
+                $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',
+                    'left join group_buy gb on gb.id = gbd.group_buy_id ',
+                ];
                 $this->groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
+                //判断团购是否已过期
+                if($this->groupBuyDetail[0]['overdue_time'] - time() < 0){
+                    $conf = array(20);
+                    $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+                    $this -> groupBuyEnd = 1;//团购结束标识位
+                }
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
             $modelComment = D('Comment');
