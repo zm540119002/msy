@@ -4,6 +4,7 @@ use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
 use  web\all\Controller\CommonController;
+use web\all\Component\WxpayAPI\Jssdk;
 class CallBackController extends CommonController{
     //支付回调
     public function notifyUrl(){
@@ -370,7 +371,8 @@ class CallBackController extends CommonController{
             ),
         );
         \Think\Log::write(json_encode($template), 'NOTIC');
-        $rst = $this->sendTemplateMessage($template);
+        $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $rst = $jssdk->send_template_message($template);
         if($rst['errmsg'] == 'ok'){
             \Think\Log::write('chengg', 'NOTIC');
         }
