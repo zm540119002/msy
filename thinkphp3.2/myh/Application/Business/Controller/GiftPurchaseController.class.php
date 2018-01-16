@@ -10,7 +10,6 @@ class GiftPurchaseController extends AuthAgentController {
         $this->assign('user',$this->user);
         //购物车配置开启的项
         $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
-        $agentType = session('agentType');
         $this->display();
     }
 }

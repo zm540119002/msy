@@ -11,6 +11,7 @@ class AuthAgentController extends AuthUserController{
 
     public function __construct(){
         parent::__construct();
+        $this->agentAuthoriseUrl .= '/agentType/' . I('get.agentType',0,'int');
         AgentCache::remove($this->user['id']);
         $this->agent = AgentCache::get($this->user['id']);
         //代理商认证
