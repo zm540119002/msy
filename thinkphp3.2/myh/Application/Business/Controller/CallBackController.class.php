@@ -480,7 +480,7 @@ class CallBackController extends Controller{
         if($agentInfo && $agentInfo['auth_status'] ==1){
             //返回状态给微信服务器
             $this->successReturn();
-            exit;
+            exit('已充值');
         }
         $modelAgent->startTrans();//开启事务
         //更新合伙人认证状态为席位订金

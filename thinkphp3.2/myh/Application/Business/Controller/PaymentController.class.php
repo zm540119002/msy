@@ -145,7 +145,6 @@ class PaymentController extends AuthUserController {
                     'success_back' => session('returnUrl')?:U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.agent_fee',
                 );
-                print_r($payInfo);exit;
                 Pay::wxPay($payInfo);
             }
             if(isset($_GET['walletDetailId']) && intval($_GET['walletDetailId'])){
