@@ -239,6 +239,7 @@ class CallBackController extends CommonController{
             //返回状态给微信服务器
             $this->errorReturn($orderSn, $modelOrder->getLastSql());
         }
+        \Think\Log::write('订单状态', 'NOTIC');
         //更新团购表和团购详情表
         //1.先更新团购详情表
         $_POST = [];
@@ -255,6 +256,7 @@ class CallBackController extends CommonController{
             //返回状态给微信服务器
             $this->errorReturn($orderSn, $modelGroupBuyDetail->getLastSql());
         }
+        \Think\Log::write('新团购详情表', 'NOTIC');
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
 
         //2.查看团购详情表此次团购有几人
@@ -278,6 +280,7 @@ class CallBackController extends CommonController{
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
         }
+        \Think\Log::write('新团购详情表', 'NOTIC');
         //更新代金券，已使用
         if ($orderInfo['coupons_id'] && $orderInfo['coupons_pay'] > 0) {
             $_POST = [];
@@ -315,6 +318,7 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelWallet->getLastSql());
             }
+            \Think\Log::write('更新账户', 'NOTIC');
             //增加账户记录
             $_POST = [];
             $_POST['user_id'] = $orderInfo['user_id'];
@@ -328,6 +332,7 @@ class CallBackController extends CommonController{
                 $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
         }
+        \Think\Log::write('增加账户记录', 'NOTIC');
         //团购成功通知
         unset($where);
         $where = array(
