@@ -7,12 +7,16 @@
         <include file="PersonalCenter/loginTpl" />
         <section class="person_center_list bottomLine">
             <div class="person_center_item">
-                <span class="give_agent icon"></span>
+                <span class="my_business icon"></span>
                 <a href="javascript:void(0);" class="agent right-arrow">完善我的商务档案</a>
             </div>
             <div class="person_center_item">
-                <span class="see_agent icon"></span>
-                <a href="javascript:void(0);" class="agent right-arrow">查看所在城市美悦会服务中心</a>
+                <span class="see_service icon"></span>
+                <a href="javascript:void(0);" class="agent right-arrow">授权我的代理商</a>
+            </div>
+            <div class="person_center_item">
+                <span class="see_service icon"></span>
+                <a href="javascript:void(0);" class="agent right-arrow">查看我的代理商</a>
             </div>
         </section>
         <section>
@@ -23,19 +27,19 @@
                 </div>
                 <div class="readme_tipc">
                     <div class="r_t">
-                        <i></i>
+                        <i class="ag"></i>
                         <span>按代理商采购价结算</span>
                     </div>
                     <div class="r_t">
-                        <span>3000+</span>
+                        <span class="th_r">3000+</span>
                         <span>每次采购额折后3000元起</span>
                     </div>
                     <div class="r_t">
-                        <span>产品赋码</span>
+                        <span class="th_p">产品赋码</span>
                         <span>每款产品赋码专属二维码标签</span>
                     </div>
                     <div class="r_t">
-                        <i></i>
+                        <i class="am"></i>
                         <span>享受代理商待遇推广返点</span>
                     </div>
                 </div>
@@ -44,12 +48,12 @@
                         <a href="">
                             <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="" class="c_img">
                         </a>
-                        <p class="twitter_product_intro">XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+                        <p class="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
                         <div class="agent_list_c">
                             <div class="a_c">
                                 <span class="pink">￥<price class="twitter_price">200.00</price></span>
                                 <del>￥888</del>
-                                <span>礼品券￥<price>50000</price></span>
+                                <span class="pink">礼品券￥<price>50000</price></span>
                             </div>
                             <div class="a_c">10盒起订</div>
                         </div>
@@ -60,19 +64,19 @@
                                 <input type="text" value="1" class="f24 gshopping_count">
                                 <a href="javascript:void(0);" class="gplus">+</a>
                             </div>
-                            <a href="javascript:void(0);">加入采购车</a>
+                            <a href="javascript:void(0);" class="add_cart">加入采购车</a>
                         </div>
                     </li>
                     <li>
                         <a href="">
                             <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="" class="c_img">
                         </a>
-                        <p class="twitter_product_intro">XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+                        <p class="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
                         <div class="agent_list_c">
                             <div class="a_c">
                                 <span class="pink">￥<price class="twitter_price">200.00</price></span>
                                 <del>￥888</del>
-                                <span>礼品券￥<price>50000</price></span>
+                                <span class="pink">礼品券￥<price>50000</price></span>
                             </div>
                             <div class="a_c">10盒起订</div>
                         </div>
@@ -83,7 +87,7 @@
                                 <input type="text" value="1" class="f24 gshopping_count">
                                 <a href="javascript:void(0);" class="gplus">+</a>
                             </div>
-                            <a href="javascript:void(0);">加入采购车</a>
+                            <a href="javascript:void(0);" class="add_cart">加入采购车</a>
                         </div>
                     </li>
                 </ul>
@@ -95,13 +99,8 @@
     <include file="Cart/footerCartMenu" />
 </block>
 <block name="script">
-    <script type="text/javascript" src="PUBLIC_JS/common/swipe.js"></script>
     <script type="text/javascript">
         $(function(){
-             //滑动轮播
-            var elem = document.getElementById('slider');
-                swipe(elem);
-             smartScroll($('.loginLayer'), $('.loginTab'));
         });
     </script>
 </block>
