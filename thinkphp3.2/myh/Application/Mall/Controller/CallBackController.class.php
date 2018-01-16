@@ -7,6 +7,30 @@ use  web\all\Controller\CommonController;
 class CallBackController extends CommonController{
     //支付回调
     public function notifyUrl(){
+        $template = array(
+            'touser'=>'oNalMuA6iE-T45TPb_ZeQYlJ3Jjk',
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+            "url"=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>72,
+                    'groupBuyId'=> 57,
+                    'shareType'=>'groupBuy' )),
+            'data'=>array(
+                'first'=>array(
+                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                ),
+                'Pingou_ProductName'=>array(
+                    'value'=>'好产品','color'=>'#173177',
+                ),
+                'Weixin_ID'=>array(
+                    'value'=>'养生','color'=>'#173177',
+                ),
+                'Remark'=>array(
+                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                ),
+            ),
+
+        );
+        $this->sendTemplateMessage($template);
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
@@ -18,30 +42,7 @@ class CallBackController extends CommonController{
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.group_buy') == true) {
-            $template = array(
-                'touser'=>'oNalMuA6iE-T45TPb_ZeQYlJ3Jjk',
-                'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
-                "url"=>$this->host.U('Goods/goodsDetail',array(
-                        'goodsId'=>72,
-                        'groupBuyId'=> 57,
-                        'shareType'=>'groupBuy' )),
-                'data'=>array(
-                    'first'=>array(
-                        'value'=>'亲，您已成功参加团购！','color'=>'#173177',
-                    ),
-                    'Pingou_ProductName'=>array(
-                        'value'=>'好产品','color'=>'#173177',
-                    ),
-                    'Weixin_ID'=>array(
-                        'value'=>'养生','color'=>'#173177',
-                    ),
-                    'Remark'=>array(
-                        'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
-                    ),
-                ),
 
-            );
-            $this->sendTemplateMessage($template);
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
             $this->callBack($data, $payment_type = 'weixin', $order_type = 'group_buy');
