@@ -290,17 +290,6 @@ class CallBackController extends Controller{
         }
     }
 
-    public function test(){
-        $parameter = array(
-            'out_trade_no' =>'20180115133056462855292312274664',//微信回的商家订单号
-            'total_fee' => 1,//支付金额
-            'transaction_id' => '4200000056201801154355151127',//微信交易订单
-            'time_end' => '20180109172790',//支付时间
-            'attach' => '4',//支付时间
-        );
-        $this->agentFeeHandle($parameter);
-    }
-
     /**席位订金充值回调
      */
     private function depositHandle($data){
@@ -455,6 +444,17 @@ class CallBackController extends Controller{
         $this->successReturn();
     }
 
+    public function test(){
+        $parameter = array(
+            'out_trade_no' =>'20180115133056462855292312274664',//微信回的商家订单号
+            'total_fee' => 1,//支付金额
+            'transaction_id' => '4200000056201801154355151127',//微信交易订单
+            'time_end' => '20180109172790',//支付时间
+            'attach' => '4',//支付时间
+        );
+        $this->agentFeeHandle($parameter);
+    }
+
     /**代理商资格款充值回调
      */
     private function agentFeeHandle($data){
@@ -473,7 +473,7 @@ class CallBackController extends Controller{
         $modelWalletDetail = D('WalletDetail');
         $modelAgent = D('Agent');
         $where = array(
-            'p.user_id' => $data['attach'],
+            'a.user_id' => $data['attach'],
         );
         $agentInfo = $modelAgent->selectAgent($where);
         $agentInfo = $agentInfo[0];

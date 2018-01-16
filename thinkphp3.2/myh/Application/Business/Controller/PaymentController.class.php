@@ -125,11 +125,12 @@ class PaymentController extends AuthUserController {
                 if(!$agent){
                     $_POST = [];
                     $_POST['user_id'] = $this->user['id'];
+                    $_POST['time'] = time();
                     $res = D('Agent')->addAgent();
                     if($res['status']==0){
                         $this->error('代理商信息有误！');
                     }
-                    $agent = AgentCache::get($this->user['id']);
+                    AgentCache::get($this->user['id']);
                 }
                 $res = $this->checkWallet();
                 if(!($res===true)){
@@ -144,6 +145,7 @@ class PaymentController extends AuthUserController {
                     'success_back' => session('returnUrl')?:U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.agent_fee',
                 );
+                print_r($payInfo);exit;
                 Pay::wxPay($payInfo);
             }
             if(isset($_GET['walletDetailId']) && intval($_GET['walletDetailId'])){
