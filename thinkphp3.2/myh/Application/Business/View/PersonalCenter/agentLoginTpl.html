@@ -28,7 +28,15 @@
         <div class="weChat_av_home">
             <a>
                 <i class="partner"></i>
-                <span>代理商</span>
+                <span>
+                    <if condition="$agentType eq '1' ">
+                        实体店代理商
+                    <elseif condition="$agentType eq '2' "/>
+                        微商代理商
+                    <elseif condition="$agentType eq '3' " />
+                        礼品采购代理商
+                    </if>
+                </span>
             </a>
         </div>
         <div class="weChat_av_home">
