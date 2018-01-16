@@ -30,7 +30,8 @@ class CallBackController extends CommonController{
             ),
 
         );
-        $this->sendTemplateMessage($template);
+        $rst= $this->sendTemplateMessage($template);
+        \Think\Log::write(json_encode($rst), 'NOTIC');
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
