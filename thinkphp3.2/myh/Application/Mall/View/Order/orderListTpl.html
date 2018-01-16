@@ -36,6 +36,10 @@
                     <if condition="$orderInfo.type eq 1 ">
                         <div class="group_flex group_flex_item">
                             <p>订单类型：<span class="order_type">团购订单</span></p>
+                            <a class="order_pay_btn edit_address"
+                               href="{:U('Goods/goodsDetail',array('goodsId'=>$orderInfo['goods_id'],'groupBuyId'=>$orderInfo['group_buy_id'],'shareType'=>'groupBuy'))}">
+                                去邀请朋友参加团购
+                            </a>
                         </div>
                     </if>
                    
@@ -44,7 +48,6 @@
                     <a class="order_pay_btn" href="">去支付</a>
                     <elseif condition="$orderInfo.logistics_status eq 2"/>
                     <a class="order_pay_btn edit_address" href="">修改收货人地址</a>
-                    <a class="order_pay_btn edit_address" href="">去邀请朋友参加团购</a>
                     <elseif condition="$orderInfo.logistics_status eq 3"/>
                     <a class="order_pay_btn edit_address" href="{:U('Comment/CommentEdit',array('orderId'=>$orderInfo['id']))}">去评分评论</a>
                     <elseif condition="$orderInfo.logistics_status eq 4"/>

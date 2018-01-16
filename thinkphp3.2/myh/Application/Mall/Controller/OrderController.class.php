@@ -22,11 +22,12 @@ class OrderController extends AuthUserController {
                 'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
                 'ca.city','ca.area','ca.detailed_address',
                 'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
+                'gbd.group_buy_id','gbd.goods_id'
             );
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
                 ' left join logistics l on o.logistics_id = l.id ',
-
+                ' left join group_buy_detail gbd on o.id = gbd.order_id ',
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
