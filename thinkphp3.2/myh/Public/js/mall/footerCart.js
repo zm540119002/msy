@@ -208,7 +208,7 @@ function generateOrder(postData,callBack) {
         success: function(data){
             $('.loading').hide();
             if(data.status == 0){
-                if(data.url){
+                if(data.joined){
                     layer.open({
                         content : data.info?data.info:'成功',
                         btn:['确定','取消'],
@@ -216,9 +216,7 @@ function generateOrder(postData,callBack) {
 
                         },
                         yes:function(index){
-                            console.log(postData);
                             delete(postData["groupBuyId"]);
-                            console.log(postData);return;
                             generateOrder(postData,groupBuyCallBack);
                             layer.close(index)
                         }
