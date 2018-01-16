@@ -10,4 +10,6 @@ return array(
     'BANK_ACCOUNT' => '3602861819100039907',
     //采购商城日志路径
     'LOG_PATH' => './Log/',
+    //代理商价格
+    'AGENT_FEE' => 0.01,
 );

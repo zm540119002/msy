@@ -11,12 +11,12 @@ class AgentAuthoriseController extends AuthUserController {
         }else{
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(19));
-            $agentType = I('get.agentType',0,'int');
-            if($agentType==1){//实体店
+            $this->agentType = I('get.agentType',0,'int');
+            if($this->agentType==1){//实体店代理商
                 $this->display('entityShop');
-            }elseif ($agentType==2){//微商代理商
+            }elseif ($this->agentType==2){//微商代理商
                 $this->display('wechatBusiness');
-            }elseif ($agentType==3){//礼品采购商
+            }elseif ($this->agentType==3){//礼品采购代理商
                 $this->display('giftPurchase');
             }
         }
