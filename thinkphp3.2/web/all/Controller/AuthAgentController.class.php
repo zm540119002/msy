@@ -7,7 +7,7 @@ use web\all\Cache\AgentCache;
  */
 class AuthAgentController extends AuthUserController{
     protected $agent = null;
-    protected $agentAuthoriseUrl = 'Home/AgentAuthorise/index';//机构登记URL
+    protected $agentAuthoriseUrl = 'Home/AgentAuthorise/index';
 
     public function __construct(){
         parent::__construct();
