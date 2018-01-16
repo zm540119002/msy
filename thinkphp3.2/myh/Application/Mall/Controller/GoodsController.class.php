@@ -145,7 +145,7 @@ class GoodsController extends BaseController {
                 $field=['wxu.id','wxu.openid','wxu.nickname','wxu.sex','wxu.country','wxu.province',
                     'wxu.city','wxu.latitude','wxu.longitude','wxu.longitude','wxu.headimgurl','wxu.subscribe',
                 ];
-                $join=[ 'left join wx_user wxu on wxu.user_id = gbd.user_id ',];
+                $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',];
                 $this->groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
             }
             $this -> shareInfo = $this -> weiXinShare($shareInfo);
@@ -153,6 +153,7 @@ class GoodsController extends BaseController {
             $this -> aveScore = round($modelComment -> avg('score'),1);//平均分数
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
             $user = D('WeiXin')->wxLogin();
+            session('openid',$user['openid']);
             $this -> display();
         }
     }

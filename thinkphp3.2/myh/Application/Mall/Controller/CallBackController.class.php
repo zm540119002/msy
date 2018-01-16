@@ -55,21 +55,14 @@ class CallBackController extends CommonController{
         $sign = makeSign($data);
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
-            $parameter = array(
-                'payment_code' => 'weixin',
-                'out_trade_no' => $data['out_trade_no'],//微信回的商家订单号
-                'total_fee' => $data['total_fee'],//支付金额
-                'pay_sn' => $data['transaction_id'],//微信交易订单
-                'payment_time' => $data['time_end']//支付时间
-            );
             if ($order_type == 'recharge') {
-                $this->rechargeHandle($parameter);
+                $this->rechargeHandle($data);
             }
             if ($order_type == 'order') {
-                $this->orderHandle($parameter);
+                $this->orderHandle($data);
             }
             if ($order_type == 'group_buy') {
-                $this->groupBuyHandle($parameter);
+                $this->groupBuyHandle($data);
             }
         } else {
             //返回状态给微信服务器
@@ -129,10 +122,11 @@ class CallBackController extends CommonController{
     /**充值支付回调
      * @param $parameter
      */
-    private function rechargeHandle($parameter){
+    private function rechargeHandle($data){
+
         $modelWalletDetail = D('WalletDetail');
         $where = array(
-            'wd.sn' => $parameter['out_trade_no'],
+            'wd.sn' => $data['out_trade_no'],
         );
         $walletDetailInfo = $modelWalletDetail->selectWalletDetail($where);
         $walletDetailInfo = $walletDetailInfo[0];
@@ -140,27 +134,27 @@ class CallBackController extends CommonController{
             $this->successReturn();
             exit;
         }
-        if ($walletDetailInfo['amount'] * 100 != $parameter['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
+        if ($walletDetailInfo['amount'] * 100 != $data['total_fee']) {//校验返回的订单金额是否与商户侧的订单金额一致
             //返回状态给微信服务器
-            $this->errorReturn($parameter['out_trade_no'], '回调的金额和充值的金额不符，终止交易', '充值');
+            $this->errorReturn($data['out_trade_no'], '回调的金额和充值的金额不符，终止交易', '充值');
             exit;
         }
         $modelWalletDetail->startTrans();
         //更新-账户明细-充值状态
         $_POST = [];
         $_POST['recharge_status'] = 1;
-        $_POST['pay_sn'] = $parameter['pay_sn'];
-        $_POST['payment_code'] = $parameter['payment_code'];
-        $_POST['payment_time'] = $parameter['payment_time'];
+        $_POST['pay_sn'] = $data['transaction_id'];
+        $_POST['payment_code'] = 'weixin';
+        $_POST['payment_time'] = $data['time_end'];
         $where = array(
             'user_id' => $walletDetailInfo['user_id'],
-            'sn' => $parameter['order_sn'],
+            'sn' => $data['out_trade_no'],
         );
         $res = $modelWalletDetail->saveWalletDetail($where);
         if ($res['status'] == 0) {
             $modelWalletDetail->rollback();
             //返回状态给微信服务器
-            $this->errorReturn($parameter['order_sn'], $modelWalletDetail->getLastSql(), '充值');
+            $this->errorReturn($data['out_trade_no'], $modelWalletDetail->getLastSql(), '充值');
         }
         //更新-账户-金额
         $modelWallet = D('Wallet');
@@ -175,7 +169,7 @@ class CallBackController extends CommonController{
             $res = $modelWallet->saveWallet($where);
             if ($res['status'] == 0) {
                 //返回状态给微信服务器
-                $this->errorReturn($parameter['order_sn'], $modelWallet->getLastSql(), '充值');
+                $this->errorReturn($data['out_trade_no'], $modelWallet->getLastSql(), '充值');
             }
         }
         $modelWalletDetail->commit();//提交事务
@@ -183,24 +177,13 @@ class CallBackController extends CommonController{
         $this->successReturn();
 
     }
-
-    public function test(){
-        $parameter = array(
-            'payment_code' => 'weixin',
-            'out_trade_no' =>'20180116095641605618838531266097',//微信回的商家订单号
-            'total_fee' => 1,//支付金额
-            'pay_sn' => '4200000075201801164962076005',//微信交易订单
-            'payment_time' => '20180109172730'//支付时间
-        );
-        $this->groupBuyHandle($parameter);
-    }
-
+    
     /**团购订单支付回调
      * @param $parameter
      */
-    private function groupBuyHandle($parameter){
-        $orderSn = $parameter['out_trade_no'];
-        $totalFee = $parameter['total_fee'];
+    private function groupBuyHandle($data){
+        $orderSn = $data['out_trade_no'];
+        $totalFee = $data['total_fee'];
         $modelOrder = D('Order');
         $modelCoupons = D('CouponsReceive');
         $modelWallet = D('Wallet');
@@ -226,9 +209,9 @@ class CallBackController extends CommonController{
         $_POST = [];
         $_POST['logistics_status'] = 2;
         $_POST['payment_code'] = 0;
-        $_POST['pay_sn'] = $parameter['pay_sn'];
-        $_POST['payment_time'] = $parameter['payment_time'];
-        $_POST['payment_code'] = $parameter['payment_code'];
+        $_POST['pay_sn'] = $data['transaction_id'];
+        $_POST['payment_time'] = $data['time_end'];
+        $_POST['payment_code'] = 'weixin';
         $_POST['orderId'] = $orderInfo['id'];
         $where = array(
             'user_id' => $orderInfo['user_id'],
@@ -245,7 +228,7 @@ class CallBackController extends CommonController{
         //1.先更新团购详情表
         $_POST = [];
         $_POST['pay_status'] = 2;
-        $_POST['pay_time'] = $parameter['payment_time'];
+        $_POST['pay_time'] = $data['time_end'];
         unset($where);
         $where = array(
             'user_id' => $orderInfo['user_id'],
@@ -370,13 +353,12 @@ class CallBackController extends CommonController{
                 ),
             ),
         );
-        \Think\Log::write(json_encode($template), 'NOTIC');
         $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
         $rst = $jssdk->send_template_message($template);
-        if($rst['errmsg'] == 'ok'){
-            \Think\Log::write('chengg', 'NOTIC');
+
+        if($rst['errmsg'] != 'ok'){
+            \Think\Log::write('发送团购通知失败', 'NOTIC');
         }
-        \Think\Log::write(json_encode($rst), 'NOTIC');
         $modelOrder->commit();//提交事务
         //返回状态给微信服务器
         $this->successReturn();
@@ -387,9 +369,9 @@ class CallBackController extends CommonController{
      * 普通订单支付回调
      */
   
-    private function orderHandle($parameter){
-        $orderSn = $parameter['out_trade_no'];
-        $totalFee = $parameter['total_fee'];
+    private function orderHandle($data){
+        $orderSn = $data['out_trade_no'];
+        $totalFee = $data['total_fee'];
         $modelOrder = D('Order');
         $modelOrderDetail = D('OrderDetail');
         $modelCoupons = D('CouponsReceive');
@@ -414,10 +396,10 @@ class CallBackController extends CommonController{
         $_POST = [];
         $_POST['logistics_status'] = 2;
         $_POST['payment_code'] = 0;
-        $_POST['pay_sn'] = $parameter['pay_sn'];
-        $_POST['payment_time'] = $parameter['payment_time'];
+        $_POST['pay_sn'] = $data['pay_sn'];
+        $_POST['payment_time'] = $data['transaction_id'];
         $_POST['orderId'] = $orderInfo['id'];
-        $_POST['payment_code'] = $parameter['payment_code'];
+        $_POST['payment_code'] = 'weixin';
         $where = array(
             'user_id' => $orderInfo['user_id'],
             'sn' => $orderSn,
