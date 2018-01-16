@@ -335,44 +335,45 @@ class CallBackController extends CommonController{
         }
         \Think\Log::write('增加账户记录', 'NOTIC');
         //团购成功通知
-        unset($where);
-        $where = array(
-            'gbd.type' => 1,
-            'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
-        );
-        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
-            'gb.name','wxu.headimgurl','wxu.nickname'
-        ];
-        $join=[ ' left join goods g on g.id = gbd.goods_id',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join wx_user wxu on wxu.user_id = gbd.user_id'
-        ];
-        $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        $template = array(
-            'touser'=>$groupBuyDetail[0]['openid'],
-            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
-            "url"=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>$groupBuyDetail[0]['goods_id'],
-                    'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
-                    'shareType'=>'groupBuy' )),
-            'data'=>array(
-                'first'=>array(
-                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+        if(isWxBrowser()){
+            unset($where);
+            $where = array(
+                'gbd.type' => 1,
+                'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+            );
+            $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+                'gb.name','wxu.headimgurl','wxu.nickname'
+            ];
+            $join=[ ' left join goods g on g.id = gbd.goods_id',
+                ' left join goods_base gb on g.goods_base_id = gb.id ',
+                ' left join wx_user wxu on wxu.user_id = gbd.user_id'
+            ];
+            $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+            $template = array(
+                'touser'=>$groupBuyDetail[0]['openid'],
+                'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+                "url"=>$this->host.U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuyDetail[0]['goods_id'],
+                        'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
+                        'shareType'=>'groupBuy' )),
+                'data'=>array(
+                    'first'=>array(
+                        'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                    ),
+                    'Pingou_ProductName'=>array(
+                        'value'=>$templateMessageInfo[0]['name'],'color'=>'#173177',
+                    ),
+                    'Weixin_ID'=>array(
+                        'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
+                    ),
+                    'Remark'=>array(
+                        'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                    ),
                 ),
-                'Pingou_ProductName'=>array(
-                    'value'=>$templateMessageInfo[0]['name'],'color'=>'#173177',
-                ),
-                'Weixin_ID'=>array(
-                    'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
-                ),
-                'Remark'=>array(
-                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
-                ),
-            ),
-        );
-        \Think\Log::write(json_encode($template), 'NOTIC');
-        $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-        $rst = $jssdk->send_template_message($template);
+            );
+            $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+            $rst = $jssdk->send_template_message($template);
+        }
         if($rst['errmsg'] == 'ok'){
             \Think\Log::write('chengg', 'NOTIC');
         }
