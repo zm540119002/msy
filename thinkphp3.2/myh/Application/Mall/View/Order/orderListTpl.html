@@ -26,22 +26,16 @@
                             <if condition="$orderInfo.type eq 1 ">
                                 <div class="group_flex group_flex_item">
                                     <p>订单类型：<span class="order_type">团购订单</span></p>
-                                    <a class="order_pay_btn edit_address"
-                                       href="{:U('Goods/goodsDetail',array('goodsId'=>$orderInfo['goods_id'],'groupBuyId'=>$orderInfo['group_buy_id'],'shareType'=>'groupBuy'))}">
-                                        去邀请朋友参加团购
-                                    </a>
+                                    <a class="order_pay_btn edit_address invite_group_buy"  href="javascript:void(0);">去邀请朋友参加团购 </a>
                                 </div>
                             </if>
                             <elseif condition="$orderInfo.deliver_status eq 1"/>
                             <p>状态：<span class="pay_tag">备货中</span></p>
                             <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">{$orderInfo.amount}</price></p>
                             <if condition="$orderInfo.type eq 1 ">
-                                <div class="group_flex group_flex_item">
+                                <div class="group_flex group_flex_item" >
                                     <p>订单类型：<span class="order_type">团购订单</span></p>
-                                    <a class="order_pay_btn edit_address"
-                                       href="{:U('Goods/goodsDetail',array('goodsId'=>$orderInfo['goods_id'],'groupBuyId'=>$orderInfo['group_buy_id'],'shareType'=>'groupBuy'))}">
-                                        去邀请朋友参加团购
-                                    </a>
+                                    <a class="order_pay_btn edit_address invite_group_buy"  href="javascript:void(0);">去邀请朋友参加团购 </a>
                                 </div>
                             </if>
                             <p>状态：<span class="pay_tag pay_finish">已发货</span></p>
@@ -72,3 +66,25 @@
         </div>
     </volist>
 </notemtpy>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            //邀请朋友
+            var current_time = "{$current_time}";
+            var overdue_time = "{$orderInfo.overdue_time}";
+            if((overdue_time - current_time)<0){
+                $('body').on('click','.invite_group_buy',function(){
+                    location.href = MODULE + '/Goods/goodsDetail/goodsId/'
+                            + "{$orderInfo.goods_id}"+'/groupBuyId/'+ "{$orderInfo.goods_id}"+'/shareType/groupBuy';
+                });
+            }else{
+                $('.invite_group_buy').text('本次团购已结束').addClass('group_buy_end');
+                $('body').on('click','.invite_group_buy',function(){
+                    var url = MODULE + '/Goods/goodsDetail/goodsId/' + "{$orderInfo.goods_id}";
+                    dialog.confirm('此次团购已结束，是否重新开团',url)
+                });
+            }
+
+        });
+    </script>
+</block>
