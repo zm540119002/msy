@@ -370,6 +370,9 @@ class CallBackController extends CommonController{
             ),
         );
         $rst = $this->sendTemplateMessage($template);
+        if($rst['errmsg'] == 'ok'){
+            \Think\Log::write('chengg', 'NOTIC');
+        }
         \Think\Log::write(json_encode($rst), 'NOTIC');
         $modelOrder->commit();//提交事务
         //返回状态给微信服务器
