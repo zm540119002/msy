@@ -5,7 +5,7 @@ use web\all\Cache\CompanyCache;
 use web\all\Controller\AuthUserController;
 
 class AgentAuthoriseController extends AuthUserController {
-    //认证-首页
+    //礼品采购代理商-认证
     public function index(){
         if(IS_POST){
         }else{
