@@ -818,6 +818,7 @@ class Jssdk {
   */
   public function send_template_message($template)
   {
+    \Think\Log::write('进来le', 'NOTIC');
     \Think\Log::write(json_encode($template), 'NOTIC');
     foreach ($template['data'] as  $k => &$item) {
       $item['value'] = urlencode($item['value']);

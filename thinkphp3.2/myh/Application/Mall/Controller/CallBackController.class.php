@@ -369,6 +369,7 @@ class CallBackController extends CommonController{
                 ),
             ),
         );
+        \Think\Log::write(json_encode($template), 'NOTIC');
         $rst = $this->sendTemplateMessage($template);
         if($rst['errmsg'] == 'ok'){
             \Think\Log::write('chengg', 'NOTIC');
