@@ -181,6 +181,8 @@ $(function () {
         $('.mcover').hide();
     });
 
+
+    var group_buy_end = "{$groupBuyEnd}";
     //发起微团购并支付
     $('body').on('click','.initiate_group_buy',function(){
         var postData = assemblyData();
@@ -190,6 +192,9 @@ $(function () {
         postData.returnUrl = location.href;
         postData.orderType = 1;
         postData.groupBuyId = $('.groupBuyId').val();
+        if(group_buy_end){ //重新开团
+            delete(postData["groupBuyId"]);
+        }
         generateOrder(postData,groupBuyCallBack);
     });
 });
