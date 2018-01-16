@@ -9,7 +9,7 @@
                 <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="" class="weChat_avatar" />
             </if>
             <div class="weChat_av_r">
-                <h2 class="person">商城个人中心</h2>
+                <h2 class="person">个人中心</h2>
                 <notempty name="user">
                     <if condition="$user.nickname neq '' ">
                         <span>{$user.nickname}</span>
@@ -26,7 +26,16 @@
             </div>
         </div>
         <div class="weChat_av_home">
-            <a href="{:U('Mall/Index/index')}"><i></i><span>首页</span></a>
+            <a>
+                <i class="partner"></i>
+                <span>合伙人</span>
+            </a>
+        </div>
+        <div class="weChat_av_home">
+            <a href="{:U('Index/index')}">
+                <i></i>
+                <span>首页</span>
+            </a>
         </div>
     </div>
 </section>
