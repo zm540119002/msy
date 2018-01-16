@@ -30,6 +30,7 @@ class CallBackController extends CommonController{
             ),
 
         );
+        print_r($template);
         $rst= $this->sendTemplateMessage($template);
         print_r($rst);exit;
         \Think\Log::write(json_encode($rst), 'NOTIC');
