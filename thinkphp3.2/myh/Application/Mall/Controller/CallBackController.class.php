@@ -391,7 +391,9 @@ class CallBackController extends CommonController{
             ),
 
         );
-        $this->sendTemplateMessage($template);
+        print_r($template);
+        $rst = $this->sendTemplateMessage($template);
+        print_r($rst);exit;
         $modelOrder->commit();//提交事务
         //返回状态给微信服务器
         $this->successReturn();
