@@ -1425,7 +1425,7 @@ background-size:contain;
     padding:0.15rem 0.12rem 0.15rem 0.12rem;
     border-bottom:1px solid #d9d9d9;
 }
-.order_flex_item{
+.order_flex_item,.group_flex{
     display:flex;
     display:-webkit-flex;
     justify-content: space-between;
