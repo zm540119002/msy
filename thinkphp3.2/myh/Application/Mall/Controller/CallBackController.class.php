@@ -32,7 +32,6 @@ class CallBackController extends CommonController{
         );
         print_r($template);
         $rst= $this->sendTemplateMessage($template);
-        print_r($rst);exit;
         \Think\Log::write(json_encode($rst), 'NOTIC');
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
             $xml = file_get_contents('php://input');
@@ -213,9 +212,9 @@ class CallBackController extends CommonController{
     public function test(){
         $parameter = array(
             'payment_code' => 'weixin',
-            'out_trade_no' =>'20180115133056462855292312274665',//微信回的商家订单号
+            'out_trade_no' =>'20180116095641605618838531266097',//微信回的商家订单号
             'total_fee' => 1,//支付金额
-            'pay_sn' => '4200000056201801154355151125',//微信交易订单
+            'pay_sn' => '4200000075201801164962076005',//微信交易订单
             'payment_time' => '20180109172730'//支付时间
         );
         $this->groupBuyHandle($parameter);
