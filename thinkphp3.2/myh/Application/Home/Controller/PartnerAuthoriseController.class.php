@@ -9,7 +9,7 @@ class PartnerAuthoriseController extends AuthUserController {
     public function index(){
         if(IS_POST){
         }else{
-            if($this->partner['auth_status'] == 2){//已认证
+            if($this->partner['auth_status'] == 3){//已认证
                 $this->display('authorizeComplete');
             }else{//未认证
                 //购物车配置开启的项
