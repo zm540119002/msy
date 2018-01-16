@@ -216,6 +216,7 @@ function generateOrder(postData,callBack) {
 
                         },
                         yes:function(index){
+                            console.log(postData);return;
                             delete(postData["groupBuyId"]);
                             console.log(postData);return;
                             generateOrder(postData,groupBuyCallBack);
