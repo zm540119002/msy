@@ -210,7 +210,7 @@ function generateOrder(postData,callBack) {
             if(data.status == 0){
                 if(data.url){
                     layer.open({
-                        content : message?message:'成功',
+                        content : data.info?data.info:'成功',
                         btn:['确定','取消'],
                         end : function(){
 
