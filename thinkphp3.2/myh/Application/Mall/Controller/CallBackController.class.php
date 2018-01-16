@@ -371,10 +371,10 @@ class CallBackController extends CommonController{
             ),
         );
         \Think\Log::write(json_encode($template), 'NOTIC');
-        if(isWxBrowser()){
-            $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-            $rst = $jssdk->send_template_message($template);
-        }
+
+        $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $rst = $jssdk->send_template_message($template);
+
         if($rst['errmsg'] == 'ok'){
             \Think\Log::write('chengg', 'NOTIC');
         }
