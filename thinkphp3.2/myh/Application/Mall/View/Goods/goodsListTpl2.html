@@ -1,5 +1,6 @@
 <volist name="goodsList" id="vo">
     <li data-id="{$vo['id']}">
+        <input type="checkbox" class="sigle_checkbox">
         <a  href="{:U('Goods/goodsDetail',array('goodsId'=>$vo['id']))}" class="purchase_goods_img">
             <empty name="vo.main_img">
                 <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="" class="c_img">
