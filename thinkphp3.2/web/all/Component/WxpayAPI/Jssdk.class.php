@@ -818,11 +818,13 @@ class Jssdk {
   */
   public function send_template_message($template)
   {
+    \Think\Log::write(json_encode($template), 'NOTIC');
     foreach ($template['data'] as  $k => &$item) {
       $item['value'] = urlencode($item['value']);
     }
     $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$this->access_token;
     $res = $this->http_request($url, urldecode(json_encode($template)));
+    \Think\Log::write(json_encode($res), 'NOTIC');
     return json_decode($res, true);
   }
 
