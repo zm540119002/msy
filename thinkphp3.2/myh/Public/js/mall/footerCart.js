@@ -216,6 +216,7 @@ function generateOrder(postData,callBack) {
 
                         },
                         yes:function(index){
+                            console.log(postData);return;
                             postData.splice(groupBuyId,1);
                             generateOrder(postData,groupBuyCallBack);
                             layer.close(index)
