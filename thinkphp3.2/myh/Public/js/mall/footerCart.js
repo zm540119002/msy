@@ -208,8 +208,20 @@ function generateOrder(postData,callBack) {
         success: function(data){
             $('.loading').hide();
             if(data.status == 0){
-                if(data.url){
-                    dialog.confirm(data.info,data.url);
+                if(data.joined){
+                    layer.open({
+                        content : data.info?data.info:'成功',
+                        btn:['确定','取消'],
+                        end : function(){
+
+                        },
+                        yes:function(index){
+                            delete(postData["groupBuyId"]);
+                            generateOrder(postData,groupBuyCallBack);
+                            layer.close(index)
+                        }
+                    });
+                    //dialog.confirm(data.info,data.url);
                 }else{
                     dialog.error(data.info);
                 }

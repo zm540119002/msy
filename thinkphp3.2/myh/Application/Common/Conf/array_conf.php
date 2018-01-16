@@ -48,6 +48,7 @@ return array(
         array('next_step'   => '下一步',),//16
         array('pay_deposit'   => '支付席位订金',),//17
         array('pay_partner_fee'   => '支付资格余款',),//18
+        array('pay_agent_fee'   => '支付代理商资格款',),//19
     ),
     //商品购买类型
     'BUY_TYPE'=>array(

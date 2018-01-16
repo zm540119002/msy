@@ -1,6 +1,7 @@
 <?php
 
 namespace web\all\Component\WxpayAPI;
+use Think\Controller;
 
 class Jssdk {
   private $appId;

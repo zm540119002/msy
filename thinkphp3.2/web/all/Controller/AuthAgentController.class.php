@@ -7,10 +7,11 @@ use web\all\Cache\AgentCache;
  */
 class AuthAgentController extends AuthUserController{
     protected $agent = null;
-    protected $agentAuthoriseUrl = 'Home/AgentAuthorise/index';//机构登记URL
+    protected $agentAuthoriseUrl = 'Home/AgentAuthorise/index';
 
     public function __construct(){
         parent::__construct();
+        $this->agentAuthoriseUrl .= '/agentType/' . I('get.agentType',0,'int');
         AgentCache::remove($this->user['id']);
         $this->agent = AgentCache::get($this->user['id']);
         //代理商认证

@@ -22,11 +22,13 @@ class OrderController extends AuthUserController {
                 'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
                 'ca.city','ca.area','ca.detailed_address',
                 'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
+                'gbd.group_buy_id','gbd.goods_id','gb.tag','gb.create_time as start_time','gb.overdue_time'
             );
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
                 ' left join logistics l on o.logistics_id = l.id ',
-
+                ' left join group_buy_detail gbd on o.id = gbd.order_id ',
+                ' left join group_buy gb on gb.id = gbd.group_buy_id ',
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
@@ -46,6 +48,7 @@ class OrderController extends AuthUserController {
             $this->orderList = $orderList;
             //商品列表操作类型
             $this->goodsListOptionType = 'withNum';
+            $this -> current_time = time();
             $this->display();
         }
     }
@@ -225,7 +228,7 @@ class OrderController extends AuthUserController {
             //判断是否已团购
             $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id',true);
             if(in_array($this->user['id'],$userIdArray)){
-                $this->ajaxReturn(errorMsg('你有参加此团购，是否重新开团',array('url'=>U('Goods/goodsDetail/',array('goodsId'=>$goodsList[0]['foreign_id'])))));
+                $this->ajaxReturn(errorMsg('你已参加此团购，不能再参加！是否重新开团',array('joined'=>1)));
             }
             $openid = session('openid');
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId,$openid);
