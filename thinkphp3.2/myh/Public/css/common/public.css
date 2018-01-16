@@ -402,5 +402,23 @@ i{
     line-height: 45px;
 }
 .invite_group_buy.group_buy_end{
-    background: #e5e5e5;
+    background: #727272;
+}
+.sigle_checkbox{
+    border:1px solid #d9d9d9;
+    -webkit-appearance:checkbox;
+    width:18px;
+    height:18px;
+    float:left;
+}
+.select_checkbox_box{
+    padding:0.20rem 0 0 0.15rem;
+}
+.clear_cart{
+    text-align: right;
+    color:#333;
+    display: block;
+    padding:10px 0 10px;
+    border-bottom:1px solid #d9d9d9;
+    color:#0066cc;
 }
