@@ -12,6 +12,8 @@ class BaseController extends CommonController{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',I('get.returnUrl','','string')?:I('post.returnUrl','','string'));
+        //代理商类型
+        session('agentType',I('get.agentType','','string')?:I('post.agentType','','string'));
     }
 
     //返回图片临时相对路径
@@ -171,18 +173,6 @@ class BaseController extends CommonController{
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
