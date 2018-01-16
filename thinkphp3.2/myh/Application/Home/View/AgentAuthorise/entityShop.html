@@ -18,8 +18,8 @@
         $(function(){
             //支付代理商资格款
             $('body').on('click','.pay_agent_fee',function () {
-                var url = APP + '/Business/Payment/rechargePayment?payType=agent_fee&returnUrl=' +
-                        encodeURIComponent(CONTROLLER + '/seniority');
+                var url = APP + '/Business/Payment/rechargePayment?payType=agent_fee&agentType=1&returnUrl=' +
+                        encodeURIComponent(APP + '/Business/Agent/index');
                 location.href = url;
             });
         });

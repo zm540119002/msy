@@ -1,8 +1,11 @@
 <?php
 namespace Business\Controller;
+
 use web\all\Controller\AuthUserController;
 use web\all\Lib\Pay;
 use web\all\Cache\PartnerCache;
+use web\all\Cache\AgentCache;
+
 class PaymentController extends AuthUserController {
     //订单-支付
     public function orderPayment(){
@@ -113,6 +116,33 @@ class PaymentController extends AuthUserController {
                     'fail_back' => U('payFail'),
                     'success_back' => session('returnUrl')?:U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.partner_fee',
+                );
+                Pay::wxPay($payInfo);
+            }
+            //代理商资格款充值
+            if(isset($_GET['payType']) && $_GET['payType']=='agent_fee'){
+                $agent = AgentCache::get($this->user['id']);
+                if(!$agent){
+                    $_POST = [];
+                    $_POST['user_id'] = $this->user['id'];
+                    $res = D('Agent')->addAgent();
+                    if($res['status']==0){
+                        $this->error('代理商信息有误！');
+                    }
+                    $agent = AgentCache::get($this->user['id']);
+                }
+                $res = $this->checkWallet();
+                if(!($res===true)){
+                    $this->error($res);
+                }
+                $payInfo = array(
+                    'attach'=>$this->user['id'],
+                    'sn'=> generateSN(),
+                    'actually_amount'=>C('AGENT_FEE'),
+                    'cancel_back' => U('payCancel'),
+                    'fail_back' => U('payFail'),
+                    'success_back' => session('returnUrl')?:U('payComplete'),
+                    'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL_BUSINESS'] .'/weixin.agent_fee',
                 );
                 Pay::wxPay($payInfo);
             }
