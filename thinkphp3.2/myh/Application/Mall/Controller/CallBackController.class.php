@@ -386,10 +386,9 @@ class CallBackController extends CommonController{
                     'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
                 ),
                 'Remark'=>array(
-                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
                 ),
             ),
-
         );
         print_r($template);
         $rst = $this->sendTemplateMessage($template);
