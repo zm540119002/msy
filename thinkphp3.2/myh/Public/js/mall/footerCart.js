@@ -209,7 +209,19 @@ function generateOrder(postData,callBack) {
             $('.loading').hide();
             if(data.status == 0){
                 if(data.url){
-                    dialog.confirm(data.info,data.url);
+                    layer.open({
+                        content : message?message:'成功',
+                        btn:['确定','取消'],
+                        end : function(){
+
+                        },
+                        yes:function(index){
+                            postData.groupBuyId = '',
+                            generateOrder(postData,groupBuyCallBack);
+                            layer.close(index)
+                        }
+                    });
+                    //dialog.confirm(data.info,data.url);
                 }else{
                     dialog.error(data.info);
                 }

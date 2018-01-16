@@ -177,7 +177,7 @@ class CallBackController extends CommonController{
         $this->successReturn();
 
     }
-    
+
     /**团购订单支付回调
      * @param $parameter
      */
@@ -296,12 +296,13 @@ class CallBackController extends CommonController{
                     'user_id' => $orderInfo['user_id'],
                 );
                 $res = $modelWallet->saveWallet($where);
+                if ($res['status'] == 0) {
+                    $modelWallet->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderSn, $modelWallet->getLastSql());
+                }
             }
-            if ($res['status'] == 0) {
-                $modelWallet->rollback();
-                //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelWallet->getLastSql());
-            }
+
             \Think\Log::write('更新账户', 'NOTIC');
             //增加账户记录
             $_POST = [];
