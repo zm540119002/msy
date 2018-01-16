@@ -72,7 +72,7 @@
             //邀请朋友
             var current_time = "{$current_time}";
             var overdue_time = "{$orderInfo.overdue_time}";
-            if((overdue_time - current_time)<0){
+            if((overdue_time - current_time)>0){
                 $('body').on('click','.invite_group_buy',function(){
                     location.href = MODULE + '/Goods/goodsDetail/goodsId/'
                             + "{$orderInfo.goods_id}"+'/groupBuyId/'+ "{$orderInfo.goods_id}"+'/shareType/groupBuy';
