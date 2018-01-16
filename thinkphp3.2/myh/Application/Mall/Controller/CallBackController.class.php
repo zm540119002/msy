@@ -4,33 +4,10 @@ use Think\Controller;
 use web\all\Component\payment\unionpay\sdk\AcpService;
 use web\all\Component\payment\alipayMobile\lib\AlipayNotify;
 use  web\all\Controller\CommonController;
+use web\all\Component\WxpayAPI\Jssdk;
 class CallBackController extends CommonController{
     //支付回调
     public function notifyUrl(){
-        $template = array(
-            'touser'=>'oNalMuA6iE-T45TPb_ZeQYlJ3Jjk',
-            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
-            "url"=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>72,
-                    'groupBuyId'=> 57,
-                    'shareType'=>'groupBuy' )),
-            'data'=>array(
-                'first'=>array(
-                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
-                ),
-                'Pingou_ProductName'=>array(
-                    'value'=>'好产品','color'=>'#173177',
-                ),
-                'Weixin_ID'=>array(
-                    'value'=>'养生','color'=>'#173177',
-                ),
-                'Remark'=>array(
-                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
-                ),
-            ),
-
-        );
-        $this->sendTemplateMessage($template);
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
             $xml = file_get_contents('php://input');
             $data = xmlToArray($xml);
@@ -210,9 +187,9 @@ class CallBackController extends CommonController{
     public function test(){
         $parameter = array(
             'payment_code' => 'weixin',
-            'out_trade_no' =>'20180115133056462855292312274665',//微信回的商家订单号
+            'out_trade_no' =>'20180116095641605618838531266097',//微信回的商家订单号
             'total_fee' => 1,//支付金额
-            'pay_sn' => '4200000056201801154355151125',//微信交易订单
+            'pay_sn' => '4200000075201801164962076005',//微信交易订单
             'payment_time' => '20180109172730'//支付时间
         );
         $this->groupBuyHandle($parameter);
@@ -263,6 +240,7 @@ class CallBackController extends CommonController{
             //返回状态给微信服务器
             $this->errorReturn($orderSn, $modelOrder->getLastSql());
         }
+        \Think\Log::write('订单状态', 'NOTIC');
         //更新团购表和团购详情表
         //1.先更新团购详情表
         $_POST = [];
@@ -279,6 +257,7 @@ class CallBackController extends CommonController{
             //返回状态给微信服务器
             $this->errorReturn($orderSn, $modelGroupBuyDetail->getLastSql());
         }
+        \Think\Log::write('新团购详情表', 'NOTIC');
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
 
         //2.查看团购详情表此次团购有几人
@@ -302,6 +281,7 @@ class CallBackController extends CommonController{
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
         }
+        \Think\Log::write('新团购详情表', 'NOTIC');
         //更新代金券，已使用
         if ($orderInfo['coupons_id'] && $orderInfo['coupons_pay'] > 0) {
             $_POST = [];
@@ -339,6 +319,7 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelWallet->getLastSql());
             }
+            \Think\Log::write('更新账户', 'NOTIC');
             //增加账户记录
             $_POST = [];
             $_POST['user_id'] = $orderInfo['user_id'];
@@ -352,6 +333,7 @@ class CallBackController extends CommonController{
                 $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
         }
+        \Think\Log::write('增加账户记录', 'NOTIC');
         //团购成功通知
         unset($where);
         $where = array(
@@ -384,12 +366,17 @@ class CallBackController extends CommonController{
                     'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
                 ),
                 'Remark'=>array(
-                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
                 ),
             ),
-
         );
-        $this->sendTemplateMessage($template);
+        \Think\Log::write(json_encode($template), 'NOTIC');
+        $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $rst = $jssdk->send_template_message($template);
+        if($rst['errmsg'] == 'ok'){
+            \Think\Log::write('chengg', 'NOTIC');
+        }
+        \Think\Log::write(json_encode($rst), 'NOTIC');
         $modelOrder->commit();//提交事务
         //返回状态给微信服务器
         $this->successReturn();
