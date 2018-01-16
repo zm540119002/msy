@@ -18,10 +18,32 @@
                 <div>
                     <if condition="$orderInfo.logistics_status eq 1">
                         <p>状态：<span class="pay_tag">待支付</span></p>
+                        <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">{$orderInfo.amount}</price></p>
                     <elseif condition="$orderInfo.logistics_status eq 2"/>
                         <if condition="$orderInfo.deliver_status eq 0 ">
                             <p>状态：<span class="pay_tag">备货中</span></p>
+                            <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">{$orderInfo.amount}</price></p>
+                            <if condition="$orderInfo.type eq 1 ">
+                                <div class="group_flex group_flex_item">
+                                    <p>订单类型：<span class="order_type">团购订单</span></p>
+                                    <a class="order_pay_btn edit_address"
+                                       href="{:U('Goods/goodsDetail',array('goodsId'=>$orderInfo['goods_id'],'groupBuyId'=>$orderInfo['group_buy_id'],'shareType'=>'groupBuy'))}">
+                                        去邀请朋友参加团购
+                                    </a>
+                                </div>
+                            </if>
                             <elseif condition="$orderInfo.deliver_status eq 1"/>
+                            <p>状态：<span class="pay_tag">备货中</span></p>
+                            <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">{$orderInfo.amount}</price></p>
+                            <if condition="$orderInfo.type eq 1 ">
+                                <div class="group_flex group_flex_item">
+                                    <p>订单类型：<span class="order_type">团购订单</span></p>
+                                    <a class="order_pay_btn edit_address"
+                                       href="{:U('Goods/goodsDetail',array('goodsId'=>$orderInfo['goods_id'],'groupBuyId'=>$orderInfo['group_buy_id'],'shareType'=>'groupBuy'))}">
+                                        去邀请朋友参加团购
+                                    </a>
+                                </div>
+                            </if>
                             <p>状态：<span class="pay_tag pay_finish">已发货</span></p>
                             <else />
                         </if>
@@ -31,16 +53,6 @@
                     <elseif condition="$orderInfo.logistics_status eq 4"/>
                         <p>状态：<span class="pay_tag pay_finish">已完成</span></p>
                     <else />
-                    </if>
-                    <p>总价：<span class="pay_tag">￥</span><price class="pay_tag">{$orderInfo.amount}</price></p>
-                    <if condition="$orderInfo.type eq 1 ">
-                        <div class="group_flex group_flex_item">
-                            <p>订单类型：<span class="order_type">团购订单</span></p>
-                            <a class="order_pay_btn edit_address"
-                               href="{:U('Goods/goodsDetail',array('goodsId'=>$orderInfo['goods_id'],'groupBuyId'=>$orderInfo['group_buy_id'],'shareType'=>'groupBuy'))}">
-                                去邀请朋友参加团购
-                            </a>
-                        </div>
                     </if>
                    
                 </div>
@@ -53,6 +65,7 @@
                     <elseif condition="$orderInfo.logistics_status eq 4"/>
                         <a class="order_pay_btn edit_address" href="">再次采购</a>
                     <else />
+                    <a class="order_pay_btn edit_address" href="">已取消</a>
                 </if>
             </div>
             <include file="orderInfoTpl" />
