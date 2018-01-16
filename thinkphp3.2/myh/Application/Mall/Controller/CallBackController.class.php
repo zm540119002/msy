@@ -182,8 +182,8 @@ class CallBackController extends CommonController{
         $data = array(
             'out_trade_no' =>'20180116095641605618838531266097',//微信回的商家订单号
             'total_fee' => 1,//支付金额
-            'pay_sn' => '4200000075201801164962076005',//微信交易订单
-            'payment_time' => '20180109172730'//支付时间
+            'transaction_id' => '4200000075201801164962076005',//微信交易订单
+            'time_end' => '20180109172730'//支付时间
         );
         $this->groupBuyHandle($data);
     }
