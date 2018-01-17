@@ -49,8 +49,12 @@ return array(
         array('pay_deposit'   => '支付席位订金',),//17
         array('pay_partner_fee'   => '支付资格余款',),//18
         array('pay_agent_fee'   => '支付代理商资格款',),//19
+<<<<<<< HEAD
         array('group_buy_end'   => '该团已结束，重新开团',),//20
         array('determine'   => '确定',),//21
+=======
+        array('group_buy_end'   => '重新开团',),//20
+>>>>>>> 08efad6b9357770a199b30a26342e0df88a0b3ab
     ),
     //商品购买类型
     'BUY_TYPE'=>array(
