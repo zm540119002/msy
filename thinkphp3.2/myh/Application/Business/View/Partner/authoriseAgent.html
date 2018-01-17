@@ -15,7 +15,7 @@
             <a href="{:U('viewAgent')}" class="my_agent">我的代理商</a>
         </section>
         <section class="bind_agent_info">
-            <form>
+            <form id="form1">
                 <div class="register_data_item">
                     <p>绑定代理商关系(为用户授权代理资格和绑定关系)</p>
                     <input type="text" name="" value="" placeholder="代理商姓名" class="agent_name">
@@ -30,7 +30,7 @@
                 <div class="register_data_item">
                     <p>请输入代理商发回的手机验证码(验证码15分钟有效)</p>
                     <div class="mobile_verification_code">
-                        <input type="text" name="" value="" placeholder="验证码" class="verification_code">
+                        <input type="text" name="captcha" value="" placeholder="验证码" class="verification_code">
                         <a href="javascript:void(0);" class="send_verify_code" >发送手机验证码</a>
                     </div>
                 </div>
@@ -84,8 +84,8 @@
                     dialog.error(content);
                     return false;
                 }
-                var postData = {};
-                var url = APP + '/Home/PartnerAuthorise/register';
+                var postData = $('#form1').serializeObject();
+                var url = ACTION;
                 $.ajax({
                     url: url,
                     data: postData,
