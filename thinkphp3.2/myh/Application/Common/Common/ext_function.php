@@ -115,3 +115,19 @@ function unlockingFooterCartConfig($arr){
     }
     return $tempArr;
 }
+
+/**获取省市
+ * @return array
+ */
+function getProvinceCity(){
+    $modelProvince = D('Province');
+    $provinceList = $modelProvince->selectProvince();
+    $modelCity = D('City');
+    foreach ($provinceList as &$province){
+        $where = array(
+            'ct.province_id' => $province['id'],
+        );
+        $province['city'] = $modelCity->selectCity($where);
+    }
+    return $provinceList?:[];
+}

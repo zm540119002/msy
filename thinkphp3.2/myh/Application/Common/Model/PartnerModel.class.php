@@ -86,7 +86,7 @@ class PartnerModel extends Model {
         );
         $_field = array(
             'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.province','p.city',
-            'p.user_id','p.create_time',
+            'p.user_id','p.create_time','p.agent_places','p.authorized_agent','p.telephone','p.detail_address',
         );
         $_join = array(
         );

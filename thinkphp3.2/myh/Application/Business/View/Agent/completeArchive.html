@@ -1,0 +1,111 @@
+<extend name="Public:base" />
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
+</block>
+<block name="content">
+    <article class="f24">
+        <section class="bottomLine">
+            <h2 class="header_title">完善我的商务档案</h2>
+        </section>
+        <section class="city_search_module">
+            <p>我的信息（填写）</p>
+            <form>
+                <div class="register_data_item">
+                    <input type="text" name="" value="" placeholder="姓名" class="agent_name">
+                </div>
+                <div class="register_data_item">
+                    <input type="tel" name="" value="" placeholder="手机号码" class="agent_phone">
+                </div>
+                <div class="register_data_item">
+                    <input type="text" name="" value="" placeholder="单位名称（如有请填写）" class="agent_company">
+                </div>
+                <div class="express-area ">
+                    <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+                        <label class="form-label">所在地区：</label>
+                        <div class="area_address">省 &gt; 市 &gt; 区/县</div>
+                        <input type="hidden" value="" class="area_address" data-key="">
+                    </a>
+                </div>
+                <div class="register_data_item">
+                    <input type="text" name="" value="" placeholder="详细地址" class="detail_address">
+                </div>
+                <div class="register_data_item">
+                    <div class="agent_mobile">
+                        <span>中国(+86)</span>
+                        <input type="tel" name="" value="" placeholder="固定电话号码" class="fixed_telephone">
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="multiple_options_module">
+            <p>我的类型（可多选）</p>
+            <ul class="multiple_options">
+                <li data-id="1">礼品采购商</li>
+                <li data-id="2">实体店代理商</li>
+                <li data-id="3">微商代理商</li>
+            </ul>
+        </section>
+    </article>
+    <section id="areaLayer" class="express-area-box" style="display:none;">
+        <header>
+            <h3>选择地区</h3>
+            <a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+            <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+        </header>
+        <article id="areaBox">
+            <ul id="areaList" class="area-list"></ul>
+        </article>
+    </section>
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            //初始化
+            var provinceList = {:json_encode($provinceList)};
+            $('div.province_city').areaInit(provinceList);
+            var areaArr=[];
+            areaArr.push('{$partnerInfo.province}');
+            areaArr.push('{$partnerInfo.city}');
+            $('div.province_city').setArea(areaArr);
+            //我的档案
+            $('body').on('click','.authorized_agent',function(){
+                var agentName=$('.agent_name').val();
+                var agentPhone=$('.agent_phone').val();
+                var areaAddress=$('.area_address').val();
+                var agentCompany=$('.agent_company').val();
+                var detailAddress=$('.detail_address').val();
+                var fixedTelephone=$('.fixed_telephone').val();
+                var content='';
+                if(!agentName){
+                    content='请输入代理商姓名';
+                }else if(!register.phoneCheck(agentPhone)){
+                    content='请输入正确的手机号码';
+                }else if(!areaAddress){
+                    content='请输入所在地区';
+                }else if(!detailAddress){
+                    content='请输入详细地址';
+                }else if(!agentCompany){
+                    content='请输入所在单位';
+                }
+                else if(!isPhone(fixedTelephone)){
+                    content='请输入正确固定电话';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+            });
+            var arrData=[];
+            $.each($('.multiple_options li'),function(){
+                var _this=$(this);
+                _this.on("click",function(){
+                    _this.addClass('active');
+                    arrData.push(_this.data('id'));
+                });
+            });
+        });
+    </script>
+</block>
