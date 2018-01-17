@@ -33,6 +33,7 @@ class OrderController extends AuthUserController {
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
+                'gb.main_img',
             );
             $join = array(
                 ' left join goods g on g.id = od.foreign_id ',
