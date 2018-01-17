@@ -8,11 +8,13 @@ $(window).load(function() {
         var group_buy_id =  _this.data('group_buy_id');
         if(group_buy_overdue_time){
             if((group_buy_overdue_time - current_time)>0){
-                _this.find('invite_group_buy').on('click',function(){
-                    location.href = MODULE + '/Goods/goodsDetail/goodsId/'
-                        + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
-                });
+                alert(1);
+                // _this.find('invite_group_buy').on('click',function(){
+                //     location.href = MODULE + '/Goods/goodsDetail/goodsId/'
+                //         + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
+                // });
             }else{
+                alert(1);
                 _this.find('invite_group_buy').text('本次团购已结束').addClass('group_buy_end');
                 _this.find('invite_group_buy').on('click',function(){
                     var url = MODULE + '/Goods/goodsDetail/goodsId/' + goods_id;
