@@ -81,8 +81,13 @@
     <script type="text/javascript">
         $(window).load(function() {
             var current_time = "{$current_time}";
+            //console.log(current_time);
+            $.each($(".order_info_list"),function(k,val){
             $(".order_info_list").each(function(){
                 var _this =$(this);
+                // console.log(k);
+                var obj=_this.find('.count_down_box');
+                //console.log(obj);
                 var group_buy_overdue_time = _this.data('group_buy_overdue_time');
                 var order_overdue_time =  _this.data('order_overdue_time');
                 var goods_id =  _this.data('goods_id');
@@ -104,6 +109,7 @@
                     }
                 }
                 if(logistics_status == 1){
+                    countDown2(order_overdue_time,current_time,obj);
                     countDown2(order_overdue_time,current_time,$(".countDownBox"));
                     if((order_overdue_time - current_time)>0){
                         _this.find('.order_pay_btn').on('click',function(){

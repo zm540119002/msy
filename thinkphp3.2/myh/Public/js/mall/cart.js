@@ -65,7 +65,7 @@ function replaceOneGoodsToCart(obj) {
 function delCart(postData,type,obj) {
     var url = CONTROLLER + '/delCart';
     layer.open({
-        content:'确定要删除此购物商品？',
+        content:'是否删除？',
         btn:['确定','取消'],
         yes:function(index){
             $.ajax({
@@ -90,9 +90,9 @@ function delCart(postData,type,obj) {
                         if(type == 'more'){
                             $.each(obj,function(){
                                 var _this=$(this);
-                                var foreign_id = _this.data('id');
+                                var cartId = _this.data('id');
                                 for(var i=0;i<postData.foreign_ids.length;i++){
-                                    if(foreign_id == postData.foreign_ids[i]){
+                                    if(cartId == postData.foreign_ids[i]){
                                         _this.remove();
                                     }
                                 }
