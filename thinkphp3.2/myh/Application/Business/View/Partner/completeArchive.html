@@ -97,8 +97,32 @@
                 });
             });
             var postData = $('#form1').serializeObject();
-            postData.province = $('input.province_city').getArea(areaArr);
-            console.log(postData);
+            var provinceCity = $('input.province_city').getArea(areaArr);
+            if(provinceCity){
+                postData.province = provinceCity[0];
+                postData.city = provinceCity[1];
+            }
+            var partnerId = '{$partnerInfo.id}';
+            if(partnerId){
+                postData.partnerId = partnerId;
+            }
+            $.ajax({
+                url: ACTION,
+                data: postData,
+                type: 'post',
+                beforeSend: function(){},
+                error:function(){
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    return;
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else {
+                        dialog.success('成功',CONTROLLER + '/index');
+                    }
+                }
+            });
         });
     </script>
 </block>
