@@ -2,7 +2,8 @@
     <volist name="orderList" id="orderInfo">
         <div class="order_detail_item order_info_list" data-group_buy_overdue_time="{$orderInfo.group_buy_overdue_time}"
              data-order_overdue_time="{$orderInfo.order_overdue_time}" data-goods_id="{$orderInfo.goods_id}"
-             data-group_buy_id="{$orderInfo.group_buy_id}" >
+             data-group_buy_id="{$orderInfo.group_buy_id}" data-logistics_status="{$orderInfo.logistics_status}"
+             data-orderid="{$orderInfo.id}">
             <div class="order_flex">
                 <div class="">订单号：<span>{$orderInfo.sn|substr=0,15}</span></div>
             </div>
@@ -56,7 +57,7 @@
                    
                 </div>
                 <if condition="$orderInfo.logistics_status eq 1">
-                    <a class="order_pay_btn" href="">去支付</a>
+                    <a class="order_pay_btn" href="javascript:void(0);">去支付</a>
                     <elseif condition="$orderInfo.logistics_status eq 2"/>
                     <a class="order_pay_btn edit_address" href="">修改收货人地址</a>
                     <if condition="$orderInfo.type eq 1 ">
@@ -86,13 +87,11 @@
                 var order_overdue_time =  _this.data('order_overdue_time');
                 var goods_id =  _this.data('goods_id');
                 var group_buy_id =  _this.data('group_buy_id');
-                console.log(group_buy_overdue_time);
+                var logistics_status = _this.data('logistics_status');
+                var orderid = _this.data('orderid');
                 if(group_buy_overdue_time){
-                    console.log(1);
                     if((group_buy_overdue_time - current_time)>0){
-                        console.log(2);
                         _this.find('.invite_group_buy').on('click',function(){
-                            alert(1);
                             location.href = MODULE + '/Goods/goodsDetail/goodsId/'
                                     + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
                         });
@@ -104,8 +103,21 @@
                         });
                     }
                 }
+                if(logistics_status == 1){
+                    countDown2(order_overdue_time,current_time,$(".countDownBox"));
+                    if((order_overdue_time - current_time)>0){
+                        _this.find('.order_pay_btn').on('click',function(){
+                            location.href = MODULE + '/Order/settlement/orderId/' + orderid;
+                        });
+                    }else{
+                        _this.find('.order_pay_btn').text('已取消');
+                        _this.find('.order_pay_btn').on('click',function(){
+                            var url = MODULE + '/Goods/goodsDetail/goodsId/' + goods_id;
+                            dialog.confirm('重新购买',url)
+                        });
+                    }
+                }
             });
         });
-
     </script>
 </block>
