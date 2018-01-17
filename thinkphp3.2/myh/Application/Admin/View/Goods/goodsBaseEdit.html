@@ -11,7 +11,8 @@
             <div class="item-title">
                 <ul class="tab-base">
                     <li><a href="{:U('Goods/goodsManage')}" ><span>管理</span></a></li>
-                    <li><a href="{:U('Goods/goodsBaseEdit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:U('Goods/goodsBaseEdit')}" class="current"><span>
+                        <empty name="goodsBaseInfo">新增<else />编辑</empty></span></a></li>
                 </ul>
             </div>
         </div>
