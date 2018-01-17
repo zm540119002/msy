@@ -86,9 +86,11 @@
                 var order_overdue_time =  _this.data('order_overdue_time');
                 var goods_id =  _this.data('goods_id');
                 var group_buy_id =  _this.data('group_buy_id');
-                console.log(group_buy_id);
+                console.log(group_buy_overdue_time);
                 if(group_buy_overdue_time){
+                    console.log(1);
                     if((group_buy_overdue_time - current_time)>0){
+                        console.log(2);
                         _this.find('invite_group_buy').on('click',function(){
                             location.href = MODULE + '/Goods/goodsDetail/goodsId/'
                                     + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
