@@ -43,11 +43,15 @@ $(function () {
             url: url,
             data: postData,
             type: 'post',
-            beforeSend: function(){},
+            beforeSend: function(){
+                $('.loading').show();
+            },
             error:function(){
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
                 }else if(data.status==1){
@@ -81,11 +85,15 @@ $(function () {
             url: url,
             data: postData,
             type: 'post',
-            beforeSend: function(){},
+            beforeSend: function(){
+                $('.loading').show();
+            },
             error:function(){
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                $('.loading').hide();
                 if(data.status==0){
                     dialog.error(data.info);
                 }else {
@@ -102,11 +110,15 @@ $(function () {
             url: MODULE + '/Referrer/myQRCodesWithGoods',
             data: {url:url},
             type: 'post',
-            beforeSend: function(){},
+            beforeSend: function(){
+                $('.loading').show();
+            },
             error:function(){
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                $('.loading').hide();
                 if(data.status == 0){
                     if(data.url){
                         location.href = data.url;
@@ -133,11 +145,15 @@ $(function () {
             url: MODULE + '/Referrer/delMyQRCodesWithGoods',
             data: {imgUrl:imgUrl},
             type: 'post',
-            beforeSend: function(){},
+            beforeSend: function(){
+                $('.loading').show();
+            },
             error:function(){
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                $('.loading').hide();
                 if(data.status == 1){
                     clockArea();
                 }
@@ -154,11 +170,15 @@ $(function () {
             url: MODULE + '/CommonAuthUser/checkLogin',
             data:{},
             type:'post',
-            beforeSend: function(){},
+            beforeSend: function(){
+                $('.loading').show();
+            },
             error:function(){
+                $('.loading').hide();
                 dialog.error('AJAX错误');
             },
             success:function(data){
+                $('.loading').hide();
                 if(data.status == 0){
                     if(data.url){
                         location.href = data.url;
@@ -209,8 +229,11 @@ function generateOrder(postData,callBack) {
         url: url,
         data: postData,
         type: 'post',
-        beforeSend: function(){},
+        beforeSend: function(){
+            $('.loading').show();
+        },
         error:function(){
+            $('.loading').hide();
             dialog.error('AJAX错误');
         },
         success: function(data){
