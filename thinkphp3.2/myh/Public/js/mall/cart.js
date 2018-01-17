@@ -65,7 +65,7 @@ function replaceOneGoodsToCart(obj) {
 function delCart(postData,type,obj) {
     var url = CONTROLLER + '/delCart';
     layer.open({
-        content:'确定要删除此购物商品？',
+        content:'是否删除？',
         btn:['确定','取消'],
         yes:function(index){
             $.ajax({
