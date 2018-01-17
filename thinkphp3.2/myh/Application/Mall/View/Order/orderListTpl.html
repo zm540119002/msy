@@ -117,8 +117,7 @@
                     }
                 }
             });
-        })
-            //倒计时
+             //倒计时
             $.each($(".pay_order_time"),function(k,val){
                 var _this =$(this);
                 var obj=_this.find('.count_down_box');
@@ -129,5 +128,7 @@
                     countDown2(order_overdue_time, current_time, obj);
                 }
             });
+        })
+           
     </script>
 </block>
