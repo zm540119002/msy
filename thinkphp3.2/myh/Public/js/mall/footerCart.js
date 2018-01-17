@@ -182,7 +182,10 @@ $(function () {
     });
 
 
-    var group_buy_end = "{$groupBuyEnd}";
+    var group_buy_end = $('.groupBuyEnd').val();
+    if(group_buy_end){ //重新开团
+       dialog.confirm('此团购已结束，是否重新开团')
+    }
     //发起微团购并支付
     $('body').on('click','.initiate_group_buy',function(){
         var postData = assemblyData();
