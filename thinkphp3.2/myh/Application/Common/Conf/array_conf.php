@@ -51,6 +51,7 @@ return array(
         array('pay_agent_fee'   => '支付代理商资格款',),//19
         array('group_buy_end'   => '该团已结束，重新开团',),//20
         array('determine'   => '确定',),//21
+        array('authorise_agent'   => '授权代理商',),//22
 
     ),
     //商品购买类型

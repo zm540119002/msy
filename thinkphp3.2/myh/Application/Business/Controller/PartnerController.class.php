@@ -32,6 +32,23 @@ class PartnerController extends AuthPartnerController {
     public function authoriseAgent(){
         if(IS_POST){
         }else{
+            echo date('Y-m-d H:i:s','1516010749');
+            echo "\n";
+            echo date('Y-m-d H:i:s','1516066425');
+            echo "\n";
+            echo date('Y-m-d H:i:s','1516010777');
+            echo "\n";
+            echo date('Y-m-d H:i:s','1516066463');
+            echo "\n";
+            echo date('Y-m-d H:i:s','1516091901');
+            echo "\n";
+            echo date('Y-m-d H:i:s','1516163740');
+            echo "\n";
+            exit;
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(22));
+            //合伙人信息
+            $this->partnerInfo = PartnerCache::get($this->user['id']);
             $this->display();
         }
     }

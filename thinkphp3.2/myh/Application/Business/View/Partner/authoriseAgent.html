@@ -9,10 +9,10 @@
         </section>
         <section class="bottomLine">
             <div class="agent_places">
-                <p>我可授权代理商名额剩余：<span>100</span>名</p>
-                <p>我已授权代理商：<span>40</span>名</p>
+                <p>我可授权代理商名额剩余：<span>{$partnerInfo.agent_places}</span>名</p>
+                <p>我已授权代理商：<span>{$partnerInfo.agent_places-$partnerInfo.authorized_agent||default="0"}</span>名</p>
             </div>
-            <a href="" class="my_agent">我的代理商</a>
+            <a href="{:U('viewAgent')}" class="my_agent">我的代理商</a>
         </section>
         <section class="bind_agent_info">
             <form>
