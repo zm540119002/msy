@@ -17,9 +17,6 @@ class PartnerController extends AuthPartnerController {
     //完善我的商务档案
     public function completeArchive(){
         if(IS_POST){
-            if(isset($_POST['partnerId']) && intval($_POST['partnerId'])){//修改
-            }else{//新增
-            }
         }else{
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(21));
