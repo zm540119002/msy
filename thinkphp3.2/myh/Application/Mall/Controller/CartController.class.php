@@ -32,6 +32,7 @@ class CartController extends BaseController {
                 );
                 $goodsList = $modelGoods->selectGoods($where,$field,$join);
                 $this->goodsList = GoodsNumMergeById($cart,$goodsList);
+
                 //商品列表操作类型
                 $this->goodsListOptionType = 'withDel';
                 $this->display('Goods/goodsListTpl2');
@@ -130,5 +131,40 @@ class CartController extends BaseController {
             cookie('cart',serialize($cart));
         }
         $this->ajaxReturn(successMsg('添加成功'));
+    }
+
+    //删除购物车信息
+    public function delCart(){
+        if(IS_POST){
+            $this->user = AuthUser::check();
+            //已登录
+            if(isset($user) && !empty($user)){
+                //删除单条购物车信息
+                if(isset($_POST['cartId']) && $_POST['cartId']){
+                    $where['user_id']  = $user['id'];
+                    $where['id']  = $_POST['cartId'];
+                    $result = M('cart') -> where($where)->delete();
+                }
+                if(isset($_POST['cartIds']) && $_POST['cartIds']){
+                    $where['user_id']  = $user['id'];
+                    $where['id']  = array('in',$_POST['cartIds']);
+                    $result = M('cart') -> where($where)->delete();
+                }
+                if(!$result){
+                    $this -> ajaxReturn(errorMsg('删除失败'));
+                }
+            }else{//未登录
+                $cart = unserialize(cookie('cart'));
+                $foreignIds =  $_POST['foreign_ids'];
+                foreach ($cart as $key => &$value){
+                    foreach ($foreignIds as $kk => &$vv)
+                    if($value['foreign_id'] == $vv){
+                        unset($cart[$key]);
+                    }
+                }
+                cookie('cart',serialize($cart));
+            }
+            $this -> ajaxReturn(successMsg('删除成功'));
+        }
     }
 }
