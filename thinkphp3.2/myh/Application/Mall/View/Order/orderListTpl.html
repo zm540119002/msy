@@ -81,8 +81,12 @@
     <script type="text/javascript">
         $(window).load(function() {
             var current_time = "{$current_time}";
+<<<<<<< HEAD
             //console.log(current_time);
             $.each($(".order_info_list"),function(k,val){
+=======
+            $(".order_info_list").each(function(){
+>>>>>>> 0169bed450e9d233f17ad8a14c7a4f6d9f2fd057
                 var _this =$(this);
                 // console.log(k);
                 var obj=_this.find('.count_down_box');
@@ -93,7 +97,6 @@
                 var group_buy_id =  _this.data('group_buy_id');
                 var logistics_status = _this.data('logistics_status');
                 var orderid = _this.data('orderid');
-                //console.log(order_overdue_time);
                 if(group_buy_overdue_time){
                     if((group_buy_overdue_time - current_time)>0){
                         _this.find('.invite_group_buy').on('click',function(){
@@ -109,7 +112,11 @@
                     }
                 }
                 if(logistics_status == 1){
+<<<<<<< HEAD
                     countDown2(order_overdue_time,current_time,obj);
+=======
+                    countDown2(order_overdue_time,current_time,$(".countDownBox"));
+>>>>>>> 0169bed450e9d233f17ad8a14c7a4f6d9f2fd057
                     if((order_overdue_time - current_time)>0){
                         _this.find('.order_pay_btn').on('click',function(){
                             location.href = MODULE + '/Order/settlement/orderId/' + orderid;

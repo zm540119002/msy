@@ -131,4 +131,35 @@ class CartController extends BaseController {
         }
         $this->ajaxReturn(successMsg('添加成功'));
     }
+
+    //删除购物车信息
+    public function delCart(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $this->user = AuthUser::check();
+        //已登录
+        if( $this->user['id']){
+            if(isset($_POST['foreign_ids']) && $_POST['foreign_ids']){
+                $where['user_id']  = $this->user['id'];
+                $where['foreign_id']  = array('in',$_POST['foreign_ids']);
+                $result = D('cart') -> where($where)->delete();
+            }
+            if(!$result){
+                $this -> ajaxReturn(errorMsg('删除失败'));
+            }
+            $this -> ajaxReturn(successMsg('删除成功'));
+        }
+        //未登录
+        $cart = unserialize(cookie('cart'));
+        $foreignIds =  $_POST['foreign_ids'];
+        foreach ($cart as $key => &$value){
+            foreach ($foreignIds as $kk => &$vv)
+                if($value['foreign_id'] == $vv){
+                    unset($cart[$key]);
+                }
+        }
+        cookie('cart',serialize($cart));
+        $this -> ajaxReturn(successMsg('删除成功'));
+    }
 }

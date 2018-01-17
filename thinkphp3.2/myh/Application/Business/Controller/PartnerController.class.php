@@ -32,6 +32,10 @@ class PartnerController extends AuthPartnerController {
     public function authoriseAgent(){
         if(IS_POST){
         }else{
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(22));
+            //合伙人信息
+            $this->partnerInfo = PartnerCache::get($this->user['id']);
             $this->display();
         }
     }

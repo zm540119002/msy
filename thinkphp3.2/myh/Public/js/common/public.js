@@ -263,8 +263,7 @@ function countDown(time,id){
 }
 
 //活动倒计时
-function countDown2(over_time,current_time,id){
-        console.log(current_time);
+function countDown2(over_time,current_time,id){        
         var day_elem = id.find('.day');
         var hour_elem = id.find('.hour');
         var minute_elem = id.find('.minute');
