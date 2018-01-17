@@ -19,10 +19,10 @@ class OrderController extends AuthUserController {
                 $where['o.logistics_status'] = I('get.s',0,'int');
             }
             $field = array(
-                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
+                'o.id','o.create_time as order_start_time','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
                 'ca.city','ca.area','ca.detailed_address',
                 'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
-                'gbd.group_buy_id','gbd.goods_id','gb.tag','gb.create_time as start_time','gb.overdue_time'
+                'gbd.group_buy_id','gbd.goods_id','gb.tag','gb.overdue_time as group_buy_overdue_time'
             );
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
@@ -33,12 +33,14 @@ class OrderController extends AuthUserController {
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
+                'gb.main_img',
             );
             $join = array(
                 ' left join goods g on g.id = od.foreign_id ',
                 ' left join goods_base gb on gb.id = g.goods_base_id ',
             );
-            foreach ($orderList as &$item) {
+            foreach ($orderList as $k=>&$item) {
+                $item['order_overdue_time'] = $item['order_start_time'] + 3*60*60*24;
                 $where = array(
                     'od.order_sn' => $item['sn'],
                 );

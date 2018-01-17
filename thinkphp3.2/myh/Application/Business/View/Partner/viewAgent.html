@@ -1,0 +1,80 @@
+<extend name="Public:base" />
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
+</block>
+<block name="content">
+    <article class="f24">
+        <section class="bottomLine">
+            <h2 class="header_title">查看我的代理商</h2>
+        </section>
+        <section class="search_bar">
+            <div class="search_agent_part ">
+                <input type="text" placeholder="请输入手机号码/姓名查询" class="search_epy search_text f24" value=""/>
+                <input type="button" class="search_btn"/>
+            </div>
+        </section>
+        <p>暂无代理商</p>
+        <div class="result_tipc">
+            <p >查询结果：</p>
+            <span>无数据</span>
+        </div>
+        <ul class="f24 agent_item_list" >
+            <li>
+                <div class="epy_item">
+                    <span class="epy_f_n ">姓名:</span>
+                    <span class=" agent-name">啊啊啊</span>
+                </div>
+                <div class="epy_item">
+                    <span class="epy_f_n">手机号码:</span>
+                    <span class=" agent-mobile">13533108579</span>
+                </div>
+                <div class="epy_item">
+                    <span class="epy_f_n">类型:</span>
+                    <span class=" agent-type">礼品采购商</span>
+                </div>
+            </li>
+            <li>
+                <div class="epy_item">
+                    <span class="epy_f_n ">姓名:</span>
+                    <span class=" agent-name">啊四</span>
+                </div>
+                <div class="epy_item">
+                    <span class="epy_f_n">手机号码:</span>
+                    <span class=" agent-mobile">13533105876</span>
+                </div>
+                <div class="epy_item">
+                    <span class="epy_f_n">类型:</span>
+                    <span class=" agent-type">实体店代理商</span>
+                </div>
+            </li>
+            <li>
+                <div class="epy_item">
+                    <span class="epy_f_n ">姓名:</span>
+                    <span class=" agent-name">王老五</span>
+                </div>
+                <div class="epy_item">
+                    <span class="epy_f_n">手机号码:</span>
+                    <span class=" agent-mobile">13533105876</span>
+                </div>
+                <div class="epy_item">
+                    <span class="epy_f_n">类型:</span>
+                    <span class=" agent-type">微商代理商</span>
+                </div>
+            </li>
+        </ul>
+    </article>
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            //查询代理商
+            $('.search_btn').on('click',function(){
+                var keyword =$('.search_text').val();
+                console.log(keyword);
+            });
+        });
+    </script>
+</block>

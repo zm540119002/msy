@@ -262,6 +262,34 @@ function countDown(time,id){
     }, 1000);
 }
 
+//活动倒计时
+function countDown2(over_time,current_time,id){
+    var day_elem = id.find('.day');
+    var hour_elem = id.find('.hour');
+    var minute_elem = id.find('.minute');
+    var second_elem = id.find('.second');
+    // var end_time = new Date(over_time).getTime(),//月份是实际月份-1
+        sys_second = (over_time-current_time);
+        // console.log(sys_second);
+    var timer = setInterval(function(){
+        if (sys_second > 1) {
+            sys_second -= 1;
+            var day = Math.floor((sys_second / 3600) / 24);
+            //console.log(day);
+            var hour = Math.floor((sys_second / 3600) % 24);
+            var minute = Math.floor((sys_second / 60) % 60);
+            var second = Math.floor(sys_second % 60);
+            day_elem && $(day_elem).text(day);//计算天
+            $(hour_elem).text(hour<10?"0"+hour:hour);//计算小时
+            $(minute_elem).text(minute<10?"0"+minute:minute);//计算分
+            $(second_elem).text(second<10?"0"+second:second);//计算秒
+        } else {
+            clearInterval(timer);
+            $('.count_down_box').html('<span>本次活动已结束</span>');
+        }
+    }, 1000);
+}
+
 //错误提示;默认1.2s
 function errorTipc(info,time){
     $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);

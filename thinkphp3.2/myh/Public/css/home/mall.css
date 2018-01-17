@@ -2399,7 +2399,7 @@ background-size:contain;
 .mobile_verification_code input,.mobile_verification_code a{
     width:48%;
 }
-.mobile_verification_code .mesg_code{
+.mobile_verification_code .send_verify_code{
     background: #d9d9d9;
     color:#333;
     height:40px;
@@ -2526,3 +2526,41 @@ background-size:contain;
     padding:0 0.15rem;
     border-radius:5px;
 }
+/*查看代理商*/
+.search_bar{
+    border-bottom:1px solid #d9d9d9;
+    padding:0.15rem 0.18rem 0.25rem;
+}
+.search_employee_part,.search_agent_part{
+    display: flex;
+    display: -webkit-flex;
+    background:#fff;
+    border:1px solid #d9d9d9;
+    border-radius:0.05rem;
+    -webkit-border-radius:0.05rem;
+}
+.search_employee_part .search_epy,.search_agent_part .search_epy{flex:4;padding:0.18rem 0 0.18rem 0.15rem;background:none;}
+.search_employee_part .search_btn,.search_agent_part .search_btn{
+    flex:1;
+    border-left:1px solid #d9d9d9;
+    border-radius:0;
+    background:none;background-image:url(../../img/common/search.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:30px 29px;
+}
+.check_n_person{display:block;padding:0.25rem 0 0 0.32rem;}
+.agent_item_list li{
+    padding:0.25rem 0.18rem 0.25rem 0.18rem;
+    border-bottom:1px solid #d9d9d9;
+    overflow:hidden;
+}
+.result_tipc{
+    display: none;
+    padding:0 0 0 0.18rem;
+}
+.result_tipc p{
+    padding:0.12rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.agent_item_list li .layer_epy_name.current,.agent_item_list li .layer_epy_phone.current{border-bottom:2px solid #0066cc;}
