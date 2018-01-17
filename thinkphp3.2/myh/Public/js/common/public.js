@@ -269,12 +269,13 @@ function countDown2(over_time,current_time,id){
     var minute_elem = id.find('.minute');
     var second_elem = id.find('.second');
     // var end_time = new Date(over_time).getTime(),//月份是实际月份-1
-        sys_second = (over_time-current_time)/1000;
+        sys_second = (over_time-current_time);
+        // console.log(sys_second);
     var timer = setInterval(function(){
         if (sys_second > 1) {
             sys_second -= 1;
             var day = Math.floor((sys_second / 3600) / 24);
-            console.log(day);
+            //console.log(day);
             var hour = Math.floor((sys_second / 3600) % 24);
             var minute = Math.floor((sys_second / 60) % 60);
             var second = Math.floor(sys_second % 60);
