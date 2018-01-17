@@ -31,7 +31,7 @@
                     <p>请输入代理商发回的手机验证码(验证码15分钟有效)</p>
                     <div class="mobile_verification_code">
                         <input type="text" name="" value="" placeholder="验证码" class="verification_code">
-                        <a href="javascript:void(0);" class="mesg_code" >发送手机验证码</a>
+                        <a href="javascript:void(0);" class="send_verify_code" >发送手机验证码</a>
                     </div>
                 </div>
             </form>
@@ -45,7 +45,7 @@
     <script type="text/javascript">
         $(function(){
             //验证码
-            $('body').on('click','.mesg_code',function(){
+            $('body').on('click','.send_verify_code',function(){
                 var _this=$(this);
                 if($(this).attr('disabled')){
                     return false;
