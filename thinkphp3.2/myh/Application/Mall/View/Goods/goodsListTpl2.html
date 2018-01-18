@@ -1,7 +1,7 @@
 <notempty name="goodsList">
     <volist name="goodsList" id="vo">
         <li data-id="{$vo['id']}">
-            <input type="checkbox" class="sigle_checkbox checkitem">
+            <!--<input type="checkbox" class="sigle_checkbox checkitem" >-->
             <a  href="{:U('Goods/goodsDetail',array('goodsId'=>$vo['id']))}" class="purchase_goods_img">
                 <empty name="vo.main_img">
                     <img src="PUBLIC_IMG/common/default/no_pic_100.jpg" alt="" class="c_img">
@@ -38,9 +38,9 @@
             </switch>
         </li>
     </volist>
-    <div class="select_checkbox_box">
-        <input type="checkbox" name="" value="" id="" class="sigle_checkbox checkall ">
-        <label for="">全选</label>
-        <a href="javascript:void(0);" class="detele_order goodsDel detele_carts">删除</a>
-    </div>
+    <!--<div class="select_checkbox_box">-->
+        <!--<input type="checkbox" name="" value="" id="" class="sigle_checkbox checkall ">-->
+        <!--<label for="">全选</label>-->
+        <!--<a href="javascript:void(0);" class="detele_order goodsDel detele_carts">删除</a>-->
+    <!--</div>-->
 </notempty>
