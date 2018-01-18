@@ -31,10 +31,20 @@ class PartnerController extends AuthPartnerController {
     public function authoriseAgent(){
         if(IS_POST){
             if(isset($_POST['mobile_phone']) && isMobile($_POST['mobile_phone'])){
-                $mobilePhone = I('post.mobile_phone','','str');
+                $mobilePhone = I('post.mobile_phone','','string');
                 if(checkAgentByMobilePhone($mobilePhone)){
                     $this->ajaxReturn(errorMsg('已经是代理商，请检查手机号码！'));
                 }
+                $modelAgent = D('Agent');
+                $_POST['partner_id'] = $this->partner['id'];
+                $_POST['type'] = 1;
+                $_POST['auth_status'] = 1;
+                $_POST['create_time'] = time();
+                $res = $modelAgent->addAgent();
+                if($res['status'] == 0){
+                    $this->ajaxReturn(errorMsg($modelAgent->getLastSql()));
+                }
+                $this->ajaxReturn(successMsg('授权成功'));
             }
         }else{
             //购物车配置开启的项

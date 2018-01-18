@@ -26,7 +26,7 @@ function orderStatus($num){
 function checkAgentByMobilePhone($mobilePhone){
     $modelAgent = D('Agent');
     $where = array(
-        'a.mobile_phone' => $mobilePhone,
+        'mobile_phone' => $mobilePhone,
     );
     $count = $modelAgent->where($where)->count('1');
     return $count?true:false;
