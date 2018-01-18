@@ -40,10 +40,21 @@ class PartnerController extends AuthPartnerController {
                 $_POST['type'] = 1;
                 $_POST['auth_status'] = 1;
                 $_POST['create_time'] = time();
+                $modelAgent->startTrans();//开启事务
                 $res = $modelAgent->addAgent();
                 if($res['status'] == 0){
+                    $modelAgent->rollback();//事务回滚
                     $this->ajaxReturn(errorMsg($modelAgent->getLastSql()));
                 }
+                $modelPartner = D('Partner');
+                $where = array(
+                    'id' => $this->partner['id'],
+                );
+                if(!$modelPartner->where($where)->setInc('authorized_agent')){
+                    $modelAgent->rollback();//事务回滚
+                    $this->ajaxReturn(errorMsg($modelPartner->getLastSql()));
+                }
+                $modelAgent->commit();//事务提交
                 $this->ajaxReturn(successMsg('授权成功'));
             }
         }else{
