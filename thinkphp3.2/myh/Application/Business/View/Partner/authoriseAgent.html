@@ -9,8 +9,8 @@
         </section>
         <section class="bottomLine">
             <div class="agent_places">
-                <p>我可授权代理商名额剩余：<span>{$partnerInfo.agent_places}</span>名</p>
-                <p>我已授权代理商：<span>{$partnerInfo.agent_places-$partnerInfo.authorized_agent||default="0"}</span>名</p>
+                <p>我可授权代理商名额剩余：<span>{$partnerInfo['agent_places']-$partnerInfo['authorized_agent']}</span>名</p>
+                <p>我已授权代理商：<span>{$partnerInfo.authorized_agent|default="0"}</span>名</p>
             </div>
             <a href="{:U('viewAgent')}" class="my_agent">我的代理商</a>
         </section>
@@ -18,13 +18,13 @@
             <form id="form1">
                 <div class="register_data_item">
                     <p>绑定代理商关系(为用户授权代理资格和绑定关系)</p>
-                    <input type="text" name="" value="" placeholder="代理商姓名" class="agent_name">
+                    <input type="text" name="name" value="" placeholder="代理商姓名" class="agent_name">
                 </div>
                 <div class="register_data_item">
                     <p>代理商的手机号码(请核对手机号码准确误会)</p>
                     <div class="agent_mobile">
                         <span>中国(+86)</span>
-                        <input type="tel" name="" value="" placeholder="代理商手机号码" class="agent_phone">
+                        <input type="tel" name="mobile_phone" value="" placeholder="代理商手机号码" class="agent_phone">
                     </div>
                 </div>
                 <div class="register_data_item">
@@ -102,7 +102,7 @@
                         if(data.status==0){
                             dialog.error(data.info);
                         }else {
-                            dialog.confirm('已成功授权代理商<br/>并绑定从属关系');
+                            dialog.confirm('已成功授权代理商<br/>并绑定从属关系',CONTROLLER + '/index');
                         }
                     }
                 });

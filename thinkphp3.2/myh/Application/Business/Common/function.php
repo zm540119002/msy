@@ -18,3 +18,16 @@ function getPayStatusCN($num){
 function orderStatus($num){
     return C('ORDER_STATUS')[$num]?:'保留';
 }
+
+/**检查是否代理商
+ * @param $mobilePhone
+ * @return bool true:是 false:否
+ */
+function checkAgentByMobilePhone($mobilePhone){
+    $modelAgent = D('Agent');
+    $where = array(
+        'mobile_phone' => $mobilePhone,
+    );
+    $count = $modelAgent->where($where)->count('1');
+    return $count?true:false;
+}
