@@ -17,4 +17,25 @@ class AgentController extends AuthAgentController {
         }
         $this->display();
     }
+
+    //代理商-列表
+    public function agentList(){
+        if(IS_POST){
+            $modelAgent = D('Agent');
+            $where = array(
+                'a.partner_id' => $this->partner['id'],
+            );
+            $keyword = I('get.keyword','','string');
+            if($keyword){
+                $where['_complex'] = array(
+                    '_logic' => 'or',
+                    'a.name' => array('like', '%' . trim($keyword) . '%'),
+                    'a.mobile_phone' => array('like', '%' . trim($keyword) . '%'),
+                );
+            }
+            $this->agentList = $modelAgent->selectAgent($where);
+            $this->display();
+        }else{
+        }
+    }
 }
