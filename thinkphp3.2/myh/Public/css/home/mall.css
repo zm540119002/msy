@@ -2556,7 +2556,7 @@ background-size:contain;
     overflow:hidden;
 }
 .result_tipc{
-    display: none;
+    /*display: none;*/
     padding:0 0 0 0.18rem;
 }
 .result_tipc p{
