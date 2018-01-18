@@ -68,12 +68,12 @@ class PartnerController extends AuthPartnerController {
     //查看我的代理商
     public function viewAgent(){
         if(IS_POST){
-        }else{
             $modelAgent = D('Agent');
             $where = array(
                 'a.partner_id' => $this->partner['id'],
             );
-            $keyword = I('get.keyword','','string');
+            $this->searchSign = I('post.searchSign','','string');
+            $keyword = I('post.keyword','','string');
             if($keyword){
                 $where['_complex'] = array(
                     '_logic' => 'or',
@@ -81,7 +81,9 @@ class PartnerController extends AuthPartnerController {
                     'a.mobile_phone' => array('like', '%' . trim($keyword) . '%'),
                 );
             }
-            $this->agentList = $modelAgent->selectAgent($where);
+//            $this->agentList = $modelAgent->selectAgent($where);
+            $this->display('Agent/agentListTpl');
+        }else{
             $this->display();
         }
     }

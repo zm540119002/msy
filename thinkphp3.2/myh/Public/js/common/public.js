@@ -263,36 +263,181 @@ function countDown(time,id){
 }
 
 //活动倒计时
-function countDown2(over_time,current_time,id){        
-        var day_elem = id.find('.day');
-        var hour_elem = id.find('.hour');
-        var minute_elem = id.find('.minute');
-        var second_elem = id.find('.second');
-        // var end_time = new Date(over_time).getTime(),//月份是实际月份-1
-            sys_second = (over_time-current_time);
-            console.log(sys_second);
-        var timer = setInterval(function(){
-            if (sys_second > 1) {
-                sys_second--;
-                var day = Math.floor((sys_second / 3600) / 24);
-                //console.log(day);
-                var hour = Math.floor((sys_second / 3600) % 24);
-                //console.log(hour);
-                var minute = Math.floor((sys_second / 60) % 60);
-                //console.log(minute);
-                var second = Math.floor(sys_second % 60);
-                //console.log(second);
-                //return false;
-                day_elem && $(day_elem).text(day);//计算天
-                $(hour_elem).text(hour<10?"0"+hour:hour);//计算小时
-                $(minute_elem).text(minute<10?"0"+minute:minute);//计算分
-                $(second_elem).text(second<10?"0"+second:second);//计算秒
-            } else {
-                clearInterval(timer);
-                $('.count_down_box').html('<span>本次活动已结束</span>');
+// function countDown2(over_time,current_time,id){        
+//         var day_elem = id.find('.day');
+//         var hour_elem = id.find('.hour');
+//         var minute_elem = id.find('.minute');
+//         var second_elem = id.find('.second');
+//         // var end_time = new Date(over_time).getTime(),//月份是实际月份-1
+//             sys_second = (over_time-current_time);
+//             console.log(sys_second);
+//         var timer = setInterval(function(){
+//             if (sys_second > 1) {
+//                 sys_second--;
+//                 var day = Math.floor((sys_second / 3600) / 24);
+//                 //console.log(day);
+//                 var hour = Math.floor((sys_second / 3600) % 24);
+//                 //console.log(hour);
+//                 var minute = Math.floor((sys_second / 60) % 60);
+//                 //console.log(minute);
+//                 var second = Math.floor(sys_second % 60);
+//                 //console.log(second);
+//                 //return false;
+//                 day_elem && $(day_elem).text(day);//计算天
+//                 $(hour_elem).text(hour<10?"0"+hour:hour);//计算小时
+//                 $(minute_elem).text(minute<10?"0"+minute:minute);//计算分
+//                 $(second_elem).text(second<10?"0"+second:second);//计算秒
+//             } else {
+//                 clearInterval(timer);
+//                 $('.count_down_box').html('<span>本次活动已结束</span>');
+//             }
+//         }, 1000);   
+// }
+
+     var addTimer = function(){
+         var list = [],callback,interval;
+            return function(id,timeStamp){
+                console.log(timeStamp);
+                if(!interval){
+                    interval = setInterval(go,1);
+                }
+                list.push(
+                    {
+                        ele:document.getElementById(id),
+                        time:timeStamp
+                    }
+                );
+                //console.log(list);
             }
-        }, 1000);   
-}
+
+            function go() {
+                console.log(1111);
+                for (var i = 0; i < list.length; i++) {
+                    //console.log(i);
+                    //list[i].ele.innerHTML = changeTimeStamp(list[i].time);
+                    callback = changeTimeStamp(list[i].time);
+                    for(var k=0;k<callback.length;k++){
+                        list[i].ele.children[k].innerHTML=callback[k];
+                    }
+                    if (!list[i].time){
+                        list.splice(i--, 1);
+                    }
+                }
+            }
+
+            //传入unix时间戳，得到倒计时
+            function changeTimeStamp(timeStamp){
+                var distancetime = new Date(timeStamp*1000).getTime() - new Date().getTime();
+                //var distancetime = s2-s1;
+                //var distancetime = timeStamp;
+                
+                if(distancetime > 0){
+                    //console.log(distancetime);
+        　　　　　　 //如果大于0.说明尚未到达截止时间
+                    //var ms = Math.floor(distancetime%1000);
+                    var sec = Math.floor(distancetime/1000%60);
+                    var min = Math.floor(distancetime/1000/60%60);
+                    var hour =Math.floor(distancetime/1000/60/60%24);
+                    var day = Math.floor(distancetime/1000000/60/60/24);
+
+                    // if(ms<100){
+                    //     ms = "0"+ ms;
+                    // }
+                    if(sec<10){
+                        sec = "0"+ sec;
+                    }
+                    if(min<10){
+                        min = "0"+ min;
+                    }
+                    if(hour<10){
+                        hour = "0"+ hour;
+                    }
+                    //return day + ":" +hour + ":" +min + ":" +sec + ":"+ms;
+                    return [day,hour,min,sec]
+                }else{
+　　　　　　　　　　　//若否，就是已经到截止时间了  
+
+                    return "戒指"
+                }
+            }
+      }();
+
+//       var addTimer = function(){
+//          var list = [],callback,interval;
+//             return function(id,c,o){
+//                 //console.log(s+'\n'+o);
+//                 if(!interval){
+//                     interval = setInterval(go,1000);
+//                 }
+//                 list.push(
+//                     {
+//                         ele:document.getElementById(id),
+//                         ctime:c,
+//                         otime:o
+//                     }
+//                 );
+//                 //console.log(list);
+//             }
+
+//             function go() {
+//                 console.log(1);
+//                 for (var i = 0; i < list.length; i++) {
+//                     console.log(i);
+//                     //console.log(list[i].ctime+'\n'+list[i].otime);
+//                     //list[i].ele.innerHTML = changeTimeStamp(list[i].time);
+//                     callback = changeTimeStamp(list[i].ctime,list[i].otime);
+//                     //console.log(callback);
+//                     //  if(!callback){
+//                     //         console.log(3);
+//                     //         $('.count_down_box').html('本次活动已经结束');
+//                     //         return false;
+//                     //     }
+//                     for(var k=0;k<callback.length;k++){
+//                         list[i].ele.children[k].innerHTML=callback[k];
+//                     }
+//                     if (!list[i].otime){
+//                         console.log('特使');
+//                         list.splice(i--, 1);
+//                         //console.log(list.length);
+//                     }
+//                 }
+//             }
+
+//             //传入unix时间戳，得到倒计时
+//             function changeTimeStamp(s1,s2){
+//                 //var distancetime = new Date(timeStamp*1000).getTime() - new Date().getTime();
+//                 var distancetime = s2-s1;
+                
+//                 if(distancetime > 0){
+//                     console.log(distancetime);
+//         　　　　　　 //如果大于0.说明尚未到达截止时间
+//                     //var ms = Math.floor(distancetime%1000);
+//                     var sec = Math.floor(distancetime%60);
+//                     var min = Math.floor(distancetime/60%60);
+//                     var hour =Math.floor(distancetime/60/60%24);
+//                     var day = Math.floor(distancetime/60/60/24);
+
+//                     // if(ms<100){
+//                     //     ms = "0"+ ms;
+//                     // }
+//                     if(sec<10){
+//                         sec = "0"+ sec;
+//                     }
+//                     if(min<10){
+//                         min = "0"+ min;
+//                     }
+//                     if(hour<10){
+//                         hour = "0"+ hour;
+//                     }
+//                     //return day + ":" +hour + ":" +min + ":" +sec + ":"+ms;
+//                     return [day,hour,min,sec]
+//                 }else{
+// 　　　　　　　　　　　//若否，就是已经到截止时间了  
+
+//                     return "戒指"
+//                 }
+//             }
+//       }();
 
 //错误提示;默认1.2s
 function errorTipc(info,time){
