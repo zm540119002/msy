@@ -37,7 +37,6 @@ class PartnerController extends AuthPartnerController {
                 }
                 $modelAgent = D('Agent');
                 $_POST['partner_id'] = $this->partner['id'];
-                $_POST['type'] = 1;
                 $_POST['auth_status'] = 1;
                 $_POST['create_time'] = time();
                 $modelAgent->startTrans();//开启事务
@@ -70,6 +69,19 @@ class PartnerController extends AuthPartnerController {
     public function viewAgent(){
         if(IS_POST){
         }else{
+            $modelAgent = D('Agent');
+            $where = array(
+                'a.partner_id' => $this->partner['id'],
+            );
+            $keyword = I('get.keyword','','string');
+            if($keyword){
+                $where['_complex'] = array(
+                    '_logic' => 'or',
+                    'a.name' => array('like', '%' . trim($keyword) . '%'),
+                    'a.mobile_phone' => array('like', '%' . trim($keyword) . '%'),
+                );
+            }
+            $this->agentList = $modelAgent->selectAgent($where);
             $this->display();
         }
     }
