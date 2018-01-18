@@ -180,8 +180,8 @@ class CallBackController extends CommonController{
 
     public function a(){
         $data = array(
-            'out_trade_no' => '20180118145032155747284781251163',
-            'total_fee' => 100,
+            'out_trade_no' => '20180118160105872689491098932765',
+            'total_fee' => 1,
             'transaction_id' => 125587,
             'time_end' => 125487,
         );
@@ -260,15 +260,17 @@ class CallBackController extends CommonController{
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
        \Think\Log::write( '团购人数：' . $groupBuyNum . "\r\n失败原因：" , 'NOTIC');
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
-            'gb.name','wxu.headimgurl','wxu.nickname'
+            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
         $join=[ ' left join goods g on g.id = gbd.goods_id',
             ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join wx_user wxu on wxu.openid = gbd.openid'
+            ' left join wx_user wxu on wxu.openid = gbd.openid',
+            ' left join orders o on o.id = gbd.order_id',
         ];
         $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
         $useIds = array();
-        $openids = array();
+        $templateMessageArray = array();
+        $orderSns = array();
         foreach ($templateMessageInfo as &$item){
             if($item['type'] == 1){
                 $header = $item['nickname'];//团长呢称
@@ -276,8 +278,8 @@ class CallBackController extends CommonController{
                 $cashBack =  $item['cash_back']; //团购完成后返现
             }
             $useIds[]  =   $item['user_id'];
-            $openids[] = $item['openid'];
-
+            $templateMessageArray['openid'] = $item['openid'];
+            $templateMessageArray['order_sn'] = $item['order_sn'];
         }
 
         //团购成功通知
@@ -350,27 +352,30 @@ class CallBackController extends CommonController{
                 }
             }
 
-            foreach ($openids as &$openid){
-                //团购成功通知
+            foreach ($templateMessageArray as &$template){
+                //返现通知
                 $template = array(
-                    'touser'=>$openid,
-                    'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+                    'touser'=>$template['openid'],
+                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
                     "url"=>$this->host.U('Goods/goodsDetail',array(
                             'goodsId'=>$groupBuyDetail['goods_id'],
                             'groupBuyId'=> $groupBuyDetail['group_buy_id'],
                             'shareType'=>'groupBuy' )),
                     'data'=>array(
                         'first'=>array(
-                            'value'=>'亲，您参加团购已成团！已返现','color'=>'#173177',
+                            'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
                         ),
-                        'Pingou_ProductName'=>array(
-                            'value'=>$goodsName,'color'=>'#173177',
+                        'keyword1'=>array(
+                            'value'=>$template['order_sn'],'color'=>'#173177',
                         ),
-                        'Weixin_ID'=>array(
-                            'value'=>$header,'color'=>'#173177',
+                        'keyword2'=>array(
+                            'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
+                        ),
+                        'keyword3'=>array(
+                            'value'=>$cashBack.'元','color'=>'#173177',
                         ),
                         'Remark'=>array(
-                            'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                            'value'=>'祝您购物愉快！','color'=>'#FF0000',
                         ),
                     ),
                 );
@@ -406,23 +411,26 @@ class CallBackController extends CommonController{
             }
             $template = array(
                 'touser'=>$groupBuyDetail['openid'],
-                'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
                 "url"=>$this->host.U('Goods/goodsDetail',array(
                         'goodsId'=>$groupBuyDetail['goods_id'],
                         'groupBuyId'=> $groupBuyDetail['group_buy_id'],
                         'shareType'=>'groupBuy' )),
                 'data'=>array(
                     'first'=>array(
-                        'value'=>'亲，您参加团购已成团！已返现','color'=>'#173177',
+                        'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
                     ),
-                    'Pingou_ProductName'=>array(
-                        'value'=>$goodsName,'color'=>'#173177',
+                    'keyword1'=>array(
+                        'value'=>$orderSn['order_sn'],'color'=>'#173177',
                     ),
-                    'Weixin_ID'=>array(
-                        'value'=>$header,'color'=>'#173177',
+                    'keyword2'=>array(
+                        'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
+                    ),
+                    'keyword3'=>array(
+                        'value'=>$cashBack.'元','color'=>'#173177',
                     ),
                     'Remark'=>array(
-                        'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                        'value'=>'祝您购物愉快！','color'=>'#FF0000',
                     ),
                 ),
             );
