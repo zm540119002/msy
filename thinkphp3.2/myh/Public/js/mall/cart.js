@@ -53,10 +53,8 @@ function replaceOneGoodsToCart(obj) {
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status==0){
+            if(data.status==0) {
                 dialog.error(data.info);
-            }else {
-                dialog.success(data.info);
             }
         }
     });
