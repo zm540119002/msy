@@ -30,11 +30,12 @@
             $.post(ACTION,function(data){
                 if($(data).length){
                     $('ul.goods_list').html(data);
-                    $('#no_data').remove();
+                    $('#no_data').hide();
                     //计算商品列表总价
                     calculateTotalPrice();
                 }
             });
+
         });
     </script>
 </block>
