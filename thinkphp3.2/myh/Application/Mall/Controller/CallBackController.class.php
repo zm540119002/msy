@@ -361,7 +361,7 @@ class CallBackController extends CommonController{
                             'shareType'=>'groupBuy' )),
                     'data'=>array(
                         'first'=>array(
-                            'value'=>'亲，您已成功参加团购！已返现','color'=>'#173177',
+                            'value'=>'亲，您参加团购已成团！已返现','color'=>'#173177',
                         ),
                         'Pingou_ProductName'=>array(
                             'value'=>$goodsName,'color'=>'#173177',
@@ -381,11 +381,6 @@ class CallBackController extends CommonController{
             }
         }
 
-
-        if($groupBuyNum == 3){
-
-
-        }
         if($groupBuyNum > 3){//只返现自己
             //更新账户
             unset($where);
@@ -409,7 +404,34 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
+            $template = array(
+                'touser'=>$groupBuyDetail['openid'],
+                'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+                "url"=>$this->host.U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuyDetail['goods_id'],
+                        'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                        'shareType'=>'groupBuy' )),
+                'data'=>array(
+                    'first'=>array(
+                        'value'=>'亲，您参加团购已成团！已返现','color'=>'#173177',
+                    ),
+                    'Pingou_ProductName'=>array(
+                        'value'=>$goodsName,'color'=>'#173177',
+                    ),
+                    'Weixin_ID'=>array(
+                        'value'=>$header,'color'=>'#173177',
+                    ),
+                    'Remark'=>array(
+                        'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                    ),
+                ),
+            );
+            $rst = $jssdk->send_template_message($template);
+            if($rst['errmsg'] != 'ok'){
+                \Think\Log::write('发送团购通知失败', 'NOTIC');
+            }
         }
+
         //更新代金券，已使用
         if ($orderInfo['coupons_id'] && $orderInfo['coupons_pay'] > 0) {
             $_POST = [];
