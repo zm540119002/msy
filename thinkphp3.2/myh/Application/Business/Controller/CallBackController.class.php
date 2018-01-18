@@ -312,7 +312,7 @@ class CallBackController extends Controller{
         );
         $partnerInfo = $modelPartner->selectPartner($where);
         $partnerInfo = $partnerInfo[0];
-        if($partnerInfo && $partnerInfo['auth_status'] !=2){
+        if($partnerInfo && $partnerInfo['auth_status'] ==1){
             $modelPartner->startTrans();//开启事务
             //更新合伙人认证状态为席位订金
             $_POST = [];
@@ -386,7 +386,7 @@ class CallBackController extends Controller{
         );
         $partnerInfo = $modelPartner->selectPartner($where);
         $partnerInfo = $partnerInfo[0];
-        if($partnerInfo && $partnerInfo['auth_status'] !=3){
+        if($partnerInfo && $partnerInfo['auth_status'] ==2){
             $modelPartner->startTrans();//开启事务
             //更新合伙人认证状态为席位订金
             $_POST = [];
@@ -471,7 +471,7 @@ class CallBackController extends Controller{
         );
         $agentInfo = $modelAgent->selectAgent($where);
         $agentInfo = $agentInfo[0];
-        if($agentInfo && $agentInfo['auth_status'] !=1){
+        if($agentInfo && $agentInfo['auth_status'] ==0){
             $modelAgent->startTrans();//开启事务
             //更新合伙人认证状态为席位订金
             $_POST = [];

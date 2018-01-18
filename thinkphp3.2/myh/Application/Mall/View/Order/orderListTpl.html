@@ -81,8 +81,7 @@
     <script type="text/javascript">
         $(window).load(function() {
             var current_time = "{$current_time}";
-            console.log(current_time);
-            $(".order_info_list").each(function(){
+            $.each($(".order_info_list"),function(k,val){
                 var _this =$(this);
                 var group_buy_overdue_time = _this.data('group_buy_overdue_time');
                 var order_overdue_time =  _this.data('order_overdue_time');
@@ -90,7 +89,6 @@
                 var group_buy_id =  _this.data('group_buy_id');
                 var logistics_status = _this.data('logistics_status');
                 var orderid = _this.data('orderid');
-                //console.log(order_overdue_time);
                 if(group_buy_overdue_time){
                     if((group_buy_overdue_time - current_time)>0){
                         _this.find('.invite_group_buy').on('click',function(){
@@ -106,9 +104,6 @@
                     }
                 }
                 if(logistics_status == 1){
-                    var obj=_this.find('.count_down_box');
-                    countDown2(order_overdue_time,current_time,obj);
-                console.log(obj.data('order_overdue_time'));
                     if((order_overdue_time - current_time)>0){
                         _this.find('.order_pay_btn').on('click',function(){
                             location.href = MODULE + '/Order/settlement/orderId/' + orderid;
@@ -122,6 +117,18 @@
                     }
                 }
             });
-        });
+             //倒计时
+            $.each($(".pay_order_time"),function(k,val){
+                var _this =$(this);
+                var obj=_this.find('.count_down_box');
+                var order_overdue_time =  _this.parents('.order_info_list').data('order_overdue_time');
+                var group_buy_id =  _this.parents('.order_info_list').data('group_buy_id');
+                var logistics_status = _this.parents('.order_info_list').data('logistics_status');
+                if(logistics_status == 1) {
+                    countDown2(order_overdue_time, current_time, obj);
+                }
+            });
+        })
+           
     </script>
 </block>
