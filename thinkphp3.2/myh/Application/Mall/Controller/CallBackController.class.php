@@ -323,15 +323,18 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
-        }
 
-        //返现
-        if($groupBuyNum == 3){//返现退三个
+            //返现 //返现退三个
             //更新账户
             unset($where);
             $where['user_id'] = array('in',$useIds);
             $where['status'] = 0;
             $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderSn, $modelWallet->getLastSql());
+            }
             //增加账户记录
             foreach ($useIds as &$useId){
                 $_POST = [];
@@ -376,6 +379,11 @@ class CallBackController extends CommonController{
                     \Think\Log::write('发送团购通知失败', 'NOTIC');
                 }
             }
+        }
+
+
+        if($groupBuyNum == 3){
+
 
         }
         if($groupBuyNum > 3){//只返现自己
@@ -383,8 +391,12 @@ class CallBackController extends CommonController{
             unset($where);
             $where['user_id'] = $orderInfo['user_id'];
             $where['status'] = 0;
-            $modelWallet->where($where)->setInc('amount',$cashBack);
-
+            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderSn, $modelWallet->getLastSql());
+            }
             //增加账户记录
             $_POST = [];
             $_POST['user_id'] = $orderInfo['user_id'];
