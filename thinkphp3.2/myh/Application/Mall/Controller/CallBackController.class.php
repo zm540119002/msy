@@ -180,8 +180,8 @@ class CallBackController extends CommonController{
 
     public function a(){
         $data = array(
-            'out_trade_no' => '20180118145032155747284781251163',
-            'total_fee' => 100,
+            'out_trade_no' => '20180118160105872689491098932765',
+            'total_fee' => 1,
             'transaction_id' => 125587,
             'time_end' => 125487,
         );
@@ -260,26 +260,26 @@ class CallBackController extends CommonController{
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
        \Think\Log::write( '团购人数：' . $groupBuyNum . "\r\n失败原因：" , 'NOTIC');
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
-            'gb.name','wxu.headimgurl','wxu.nickname'
+            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
         $join=[ ' left join goods g on g.id = gbd.goods_id',
             ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join wx_user wxu on wxu.openid = gbd.openid'
+            ' left join wx_user wxu on wxu.openid = gbd.openid',
+            ' left join orders o on o.id = gbd.order_id',
         ];
-        $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
         $useIds = array();
-        $openids = array();
-        foreach ($templateMessageInfo as &$item){
+        $templateMessageArray = array();
+        foreach ($templateMessageList as &$item){
             if($item['type'] == 1){
                 $header = $item['nickname'];//团长呢称
                 $goodsName = $item['name']; //产品名称
                 $cashBack =  $item['cash_back']; //团购完成后返现
             }
             $useIds[]  =   $item['user_id'];
-            $openids[] = $item['openid'];
-
+            $templateMessageArray['openid'] = $item['openid'];
+            $templateMessageArray['order_sn'] = $item['order_sn'];
         }
-
         //团购成功通知
         $template = array(
             'touser'=>$groupBuyDetail['openid'],
@@ -323,15 +323,18 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
-        }
 
-        //返现
-        if($groupBuyNum == 3){//返现退三个
+            //返现 //返现退三个
             //更新账户
             unset($where);
             $where['user_id'] = array('in',$useIds);
             $where['status'] = 0;
             $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderSn, $modelWallet->getLastSql());
+            }
             //增加账户记录
             foreach ($useIds as &$useId){
                 $_POST = [];
@@ -347,27 +350,30 @@ class CallBackController extends CommonController{
                 }
             }
 
-            foreach ($openids as &$openid){
-                //团购成功通知
+            foreach ($templateMessageArray as &$template){
+                //返现通知
                 $template = array(
-                    'touser'=>$openid,
-                    'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+                    'touser'=>$template['openid'],
+                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
                     "url"=>$this->host.U('Goods/goodsDetail',array(
                             'goodsId'=>$groupBuyDetail['goods_id'],
                             'groupBuyId'=> $groupBuyDetail['group_buy_id'],
                             'shareType'=>'groupBuy' )),
                     'data'=>array(
                         'first'=>array(
-                            'value'=>'亲，您已成功参加团购！已返现','color'=>'#173177',
+                            'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
                         ),
-                        'Pingou_ProductName'=>array(
-                            'value'=>$goodsName,'color'=>'#173177',
+                        'keyword1'=>array(
+                            'value'=>$template['order_sn'],'color'=>'#173177',
                         ),
-                        'Weixin_ID'=>array(
-                            'value'=>$header,'color'=>'#173177',
+                        'keyword2'=>array(
+                            'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
+                        ),
+                        'keyword3'=>array(
+                            'value'=>$cashBack.'元','color'=>'#173177',
                         ),
                         'Remark'=>array(
-                            'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                            'value'=>'祝您购物愉快！','color'=>'#FF0000',
                         ),
                     ),
                 );
@@ -376,15 +382,19 @@ class CallBackController extends CommonController{
                     \Think\Log::write('发送团购通知失败', 'NOTIC');
                 }
             }
-
         }
+
         if($groupBuyNum > 3){//只返现自己
             //更新账户
             unset($where);
             $where['user_id'] = $orderInfo['user_id'];
             $where['status'] = 0;
-            $modelWallet->where($where)->setInc('amount',$cashBack);
-
+            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderSn, $modelWallet->getLastSql());
+            }
             //增加账户记录
             $_POST = [];
             $_POST['user_id'] = $orderInfo['user_id'];
@@ -397,7 +407,37 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
+            $template = array(
+                'touser'=>$groupBuyDetail['openid'],
+                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
+                "url"=>$this->host.U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuyDetail['goods_id'],
+                        'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                        'shareType'=>'groupBuy' )),
+                'data'=>array(
+                    'first'=>array(
+                        'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
+                    ),
+                    'keyword1'=>array(
+                        'value'=>$orderSn,'color'=>'#173177',
+                    ),
+                    'keyword2'=>array(
+                        'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
+                    ),
+                    'keyword3'=>array(
+                        'value'=>$cashBack.'元','color'=>'#173177',
+                    ),
+                    'Remark'=>array(
+                        'value'=>'祝您购物愉快！','color'=>'#FF0000',
+                    ),
+                ),
+            );
+            $rst = $jssdk->send_template_message($template);
+            if($rst['errmsg'] != 'ok'){
+                \Think\Log::write('发送团购通知失败', 'NOTIC');
+            }
         }
+
         //更新代金券，已使用
         if ($orderInfo['coupons_id'] && $orderInfo['coupons_pay'] > 0) {
             $_POST = [];
@@ -569,25 +609,5 @@ class CallBackController extends CommonController{
         echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
         return false;
     }
-
-    public function ac(){
-        //团购成功通知
-        unset($where);
-        $model = D('OrderDetail');
-        $where['od.order_id'] = intval($_GET['orderId']);
-        $field=[ 'o.id','o.sn','o.status as o_status','o.logistics_status','o.after_sale_status','o.payment_code',
-            'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
-            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time',
-            'g.id as goods_id','g.goods_base_id','g.buy_type','g.sale_price','g.status',
-            'gb.name as goods_name','gb.thumb_img', 'gb.main_img','gb.single_specification',
-            'ca.user_id','ca.province','ca.city','ca.area',
-            'ca.detailed_address','ca.consignee_name','ca.consignee_mobile',
-        ];
-        $join=[ ' left join orders o on od.order_id = o.id ',
-            ' left join goods g on od.foreign_id = g.id ',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join consignee_address ca on o.address_id = ca.id ',];
-        $this->orderDetail = $model->selectOrderDetail($where,$field,$join);
-        echo  D('GroupBuyDetail')->getLastSql();
-    }
+    
 }
