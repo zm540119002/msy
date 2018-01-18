@@ -270,7 +270,6 @@ class CallBackController extends CommonController{
         $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
         $useIds = array();
         $templateMessageArray = array();
-        $orderSns = array();
         foreach ($templateMessageInfo as &$item){
             if($item['type'] == 1){
                 $header = $item['nickname'];//团长呢称
@@ -282,6 +281,7 @@ class CallBackController extends CommonController{
             $templateMessageArray['order_sn'] = $item['order_sn'];
         }
 
+        print_r($templateMessageArray);
         //团购成功通知
         $template = array(
             'touser'=>$groupBuyDetail['openid'],
@@ -421,7 +421,7 @@ class CallBackController extends CommonController{
                         'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
                     ),
                     'keyword1'=>array(
-                        'value'=>$orderSn['order_sn'],'color'=>'#173177',
+                        'value'=>$orderSn,'color'=>'#173177',
                     ),
                     'keyword2'=>array(
                         'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
