@@ -267,10 +267,10 @@ class CallBackController extends CommonController{
             ' left join wx_user wxu on wxu.openid = gbd.openid',
             ' left join orders o on o.id = gbd.order_id',
         ];
-        $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
         $useIds = array();
         $templateMessageArray = array();
-        foreach ($templateMessageInfo as &$item){
+        foreach ($templateMessageList as &$item){
             if($item['type'] == 1){
                 $header = $item['nickname'];//团长呢称
                 $goodsName = $item['name']; //产品名称
@@ -280,8 +280,6 @@ class CallBackController extends CommonController{
             $templateMessageArray['openid'] = $item['openid'];
             $templateMessageArray['order_sn'] = $item['order_sn'];
         }
-
-        print_r($templateMessageArray);
         //团购成功通知
         $template = array(
             'touser'=>$groupBuyDetail['openid'],
@@ -611,25 +609,5 @@ class CallBackController extends CommonController{
         echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
         return false;
     }
-
-    public function ac(){
-        //团购成功通知
-        unset($where);
-        $model = D('OrderDetail');
-        $where['od.order_id'] = intval($_GET['orderId']);
-        $field=[ 'o.id','o.sn','o.status as o_status','o.logistics_status','o.after_sale_status','o.payment_code',
-            'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
-            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time',
-            'g.id as goods_id','g.goods_base_id','g.buy_type','g.sale_price','g.status',
-            'gb.name as goods_name','gb.thumb_img', 'gb.main_img','gb.single_specification',
-            'ca.user_id','ca.province','ca.city','ca.area',
-            'ca.detailed_address','ca.consignee_name','ca.consignee_mobile',
-        ];
-        $join=[ ' left join orders o on od.order_id = o.id ',
-            ' left join goods g on od.foreign_id = g.id ',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join consignee_address ca on o.address_id = ca.id ',];
-        $this->orderDetail = $model->selectOrderDetail($where,$field,$join);
-        echo  D('GroupBuyDetail')->getLastSql();
-    }
+    
 }
