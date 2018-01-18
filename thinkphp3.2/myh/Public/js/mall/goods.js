@@ -1,7 +1,6 @@
 var currentPage = 1;//记录当前页
-var requestEnd = false;
-var isMore=false;
-//获取分类商品-图形形式-列表
+var requestEnd = false;//请求结束标记
+//获取商品-列表
 function getGoodsList(config) {
     var postData = $.extend({},config);
     postData.p = currentPage?currentPage:1;
@@ -10,7 +9,7 @@ function getGoodsList(config) {
     //请求结束标志
     if(requestEnd){
         dialog.error('没有更多啦');
-        isMore=true;
+        loadTrigger = true;
         return false;
     }
     $.ajax({
@@ -31,19 +30,20 @@ function getGoodsList(config) {
             }else{
                 $('ul.goodsListContent li:last').after(data);
             }
-            isMore=true;
             if($(data).length<postData.pageSize){
                 requestEnd = true;
             }
             currentPage ++;
-           
+            loadTrigger = true;
         }
     });
 }
+
 //上拉加载更多
+var loadTrigger = false;//加载触发器
 $(window).on('scroll',function(){
-    if(isMore && $(document).scrollTop()+$(window).height()>=$(document).height()){
-         isMore=false;
+    if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+        loadTrigger = false;
         getGoodsList(config);
     }
 });
