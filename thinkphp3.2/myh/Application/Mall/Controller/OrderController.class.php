@@ -41,6 +41,7 @@ class OrderController extends AuthUserController {
             );
             foreach ($orderList as $k=>&$item) {
                 $item['order_overdue_time'] = $item['order_start_time'] + 3*60*60*24;
+                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_start_time'] + 3*60*60*24);
                 $where = array(
                     'od.order_sn' => $item['sn'],
                 );
@@ -51,6 +52,7 @@ class OrderController extends AuthUserController {
             //商品列表操作类型
             $this->goodsListOptionType = 'withNum';
             $this -> current_time = time();
+            $this -> current_time1 = date("Y-m-d H:i:s");
             $this->display();
         }
     }
