@@ -352,7 +352,7 @@ class OrderController extends AuthUserController {
                         $this->ajaxReturn(errorMsg($res));
                     }
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
+                    $this->ajaxReturn(successMsg('支付成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
                     $unpaid -= $couponsInfo['amount'];
                 }
@@ -425,7 +425,7 @@ class OrderController extends AuthUserController {
                     }
 
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'successBackUrl'=>$successBackUrl)));
+                    $this->ajaxReturn(successMsg('支付成功',array('wxPay'=>false,'successBackUrl'=>$successBackUrl)));
                 }else{
                     $unpaid -= $accountBalance;
                 }
@@ -490,6 +490,8 @@ class OrderController extends AuthUserController {
     private function groupBuyHandle($modelOrder,$orderInfo){
         $modelGroupBuy = D('GroupBuy');
         $modelGroupBuyDetail = D('GroupBuyDetail');
+        $modelWallet = D('Wallet');
+        $modelWalletDetail = D('WalletDetail');
         //更新团购表和团购详情表
         //1.先更新团购详情表
         $_POST = [];
@@ -513,7 +515,55 @@ class OrderController extends AuthUserController {
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
-        if($groupBuyNum >= 3){//修改团购表
+
+
+        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
+        ];
+        $join=[ ' left join goods g on g.id = gbd.goods_id',
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+            ' left join wx_user wxu on wxu.openid = gbd.openid',
+            ' left join orders o on o.id = gbd.order_id',
+        ];
+        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+        $useIds = array();
+        $templateMessageArray = array();
+        foreach ($templateMessageList as &$item){
+            if($item['type'] == 1){
+                $header = $item['nickname'];//团长呢称
+                $goodsName = $item['name']; //产品名称
+                $cashBack =  $item['cash_back']; //团购完成后返现
+            }
+            $useIds[]  =   $item['user_id'];
+            $templateMessageArray['openid'] = $item['openid'];
+            $templateMessageArray['order_sn'] = $item['order_sn'];
+        }
+        //团购成功通知
+        $template = array(
+            'touser'=>$groupBuyDetail['openid'],
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+            "url"=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>$groupBuyDetail['goods_id'],
+                    'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                    'shareType'=>'groupBuy' )),
+            'data'=>array(
+                'first'=>array(
+                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                ),
+                'Pingou_ProductName'=>array(
+                    'value'=>$goodsName,'color'=>'#173177',
+                ),
+                'Weixin_ID'=>array(
+                    'value'=>$header,'color'=>'#173177',
+                ),
+                'Remark'=>array(
+                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                ),
+            ),
+        );
+        $this->sendTemplateMessage($template);
+
+        if($groupBuyNum == 3){//修改团购表
             $_POST = [];
             $_POST['tag'] = 1;
             unset($where);
@@ -526,45 +576,66 @@ class OrderController extends AuthUserController {
                 //返回状态给微信服务器
                 $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
             }
-        }
-        //团购成功通知
-        unset($where);
-        $where = array(
-            'gbd.type' => 1,
-            'gbd.group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
-        );
-        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
-            'gb.name','wxu.headimgurl','wxu.nickname'
-        ];
-        $join=[ ' left join goods g on g.id = gbd.goods_id',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join wx_user wxu on wxu.user_id = gbd.user_id'
-        ];
-        $templateMessageInfo = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        $template = array(
-            'touser'=>$groupBuyDetail[0]['openid'],
-            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
-            "url"=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>$groupBuyDetail[0]['goods_id'],
-                    'groupBuyId'=> $groupBuyDetail[0]['group_buy_id'],
-                    'shareType'=>'groupBuy' )),
-            'data'=>array(
-                'first'=>array(
-                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
-                ),
-                'Pingou_ProductName'=>array(
-                    'value'=>$templateMessageInfo[0]['name'],'color'=>'#173177',
-                ),
-                'Weixin_ID'=>array(
-                    'value'=>$templateMessageInfo[0]['nickname'],'color'=>'#173177',
-                ),
-                'Remark'=>array(
-                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限制哦，快点击详情，邀请好友参团','color'=>'#FF0000',
-                ),
-            ),
+            //返现 //返现退三个
+            //更新账户
+            unset($where);
+            $where['user_id'] = array('in',$useIds);
+            $where['status'] = 0;
+            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
+            }
+            //增加账户记录
+            foreach ($useIds as &$useId){
+                $_POST = [];
+                $_POST['user_id'] = $useId;
+                $_POST['amount'] = $cashBack;
+                $_POST['type'] = 3;
+                $_POST['create_time'] = time();
+                $res = $modelWalletDetail->addWalletDetail();
+                if ($res['status'] == 0) {
+                    $modelWallet->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
+                }
+            }
 
-        );
-        $this->sendTemplateMessage($template);
+            foreach ($templateMessageArray as &$template){
+                //返现通知
+                $template = array(
+                    'touser'=>$template['openid'],
+                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
+                    "url"=>$this->host.U('Goods/goodsDetail',array(
+                            'goodsId'=>$groupBuyDetail['goods_id'],
+                            'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                            'shareType'=>'groupBuy' )),
+                    'data'=>array(
+                        'first'=>array(
+                            'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
+                        ),
+                        'keyword1'=>array(
+                            'value'=>$template['order_sn'],'color'=>'#173177',
+                        ),
+                        'keyword2'=>array(
+                            'value'=> round( $orderInfo['amount'] / 100, 2).'元','color'=>'#173177',
+                        ),
+                        'keyword3'=>array(
+                            'value'=>$cashBack.'元','color'=>'#173177',
+                        ),
+                        'Remark'=>array(
+                            'value'=>'祝您购物愉快！','color'=>'#FF0000',
+                        ),
+                    ),
+                );
+                $rst =  $this->sendTemplateMessage($template);
+                if($rst['errmsg'] != 'ok'){
+                    \Think\Log::write('发送团购通知失败', 'NOTIC');
+                }
+            }
+        }
+
         if (strpos(session('returnUrl'), 'groupBuyId') == true) {
             if(strpos(session('returnUrl'), '?') == true){
                 $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));

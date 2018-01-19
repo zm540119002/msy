@@ -407,6 +407,7 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
+            //返现通知
             $template = array(
                 'touser'=>$groupBuyDetail['openid'],
                 'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
