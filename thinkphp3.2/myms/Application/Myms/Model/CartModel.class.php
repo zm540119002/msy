@@ -215,7 +215,7 @@ class CartModel extends Model {
 
     //获取购物车的总价、商品数和CartId
     public function getAllCartInfo(){
-        $user = AuthUser::getSession();
+        $this->user = AuthUser::check();
         if(isset($user)  && !empty($user)){
             $cartList = $this -> getCartList($user['id']);
             $cartIds = $this->getCartIds($user['id']);
@@ -228,9 +228,9 @@ class CartModel extends Model {
     }
     //登录或没有登录获取购物车列表
     public function cartList(){
-        $user = AuthUser::getSession();
-        if(isset($user) && !empty($user)){
-            $cartList = $this ->getCartList($user['id']);
+        $this->user = AuthUser::check();
+        if(isset($this->user) && !empty($this->user['id'])){
+            $cartList = $this ->getCartList($this->user['id']);
         }else{
             //没有登录
             $cartList = $this ->getCartListBySession();
