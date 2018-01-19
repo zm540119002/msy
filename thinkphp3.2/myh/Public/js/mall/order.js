@@ -51,7 +51,6 @@ $(window).load(function() {
         var group_buy_id =  _this.parents('.order_info_list').data('group_buy_id');
         var logistics_status = _this.parents('.order_info_list').data('logistics_status');
         if(logistics_status == 1) {
-            console.log(current_time1);
             addTimer(thisId,order_overdue_time1,current_time1);
         }
     });
