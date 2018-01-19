@@ -3,6 +3,7 @@
 .mall_function_menu a{width:25%;text-align:center;color:#555;}
 .mall_function_menu a span{width:60px;height:60px;margin:0 auto;background-image:url(../../img/home/myms_msc_type.png);background-repeat: no-repeat;background-size:60px 300px;display:block;}
 .navigation_module a span{background-image:url(../../img/home/myh_msc_type.png);}
+.business_navigation a span{background-image:url(../../img/home/myh_business_type.png);}
 .mall_function_menu a span.project_class,.navigation_module a span.mall_home{background-position:0 0;}
 .mall_function_menu a span.purchaser_register,.navigation_module a span.wt_purchase{background-position:0 -60px;}
 .mall_function_menu a span.vip,.navigation_module a span.twitter_share{background-position:0 -120px;}
@@ -2320,6 +2321,12 @@ background-size:contain;
 .person_center_item span.see_service{
     background-position:0 -178px;
 }
+.person_center_item span.author_agent{
+    background-position:0 -36px;
+}
+.person_center_item span.view_agent{
+    background-position:0 -72px;
+}
 .person_center_item .agent{
     margin:8px 0 0 40px;
 }
@@ -2369,6 +2376,10 @@ background-size:contain;
     border-radius:0.05rem;
     width:1.5rem;
     margin:0 12px 0 0;
+}
+.multiple_options li.active{
+    background: #0f9143;
+    color:#fff;
 }
 .partner_info_item{
     padding:0 0 0 0.12rem;
