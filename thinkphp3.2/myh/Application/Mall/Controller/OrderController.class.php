@@ -647,7 +647,7 @@ class OrderController extends AuthUserController {
             }else{
                 $shLinkBase = session('returnUrl');
             }
-            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyDetail[0]['group_buy_id'].'/shareType/groupBuy';
+            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyDetail['group_buy_id'].'/shareType/groupBuy';
         }
         return $successBackUrl;
     }
