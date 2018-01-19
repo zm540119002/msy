@@ -516,7 +516,6 @@ class OrderController extends AuthUserController {
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
-        print_r($groupBuyNum);
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
