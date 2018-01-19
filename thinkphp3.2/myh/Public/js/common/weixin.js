@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2018/1/12.
  */
+//授权登录跳转
 $(window).load(function() {
     var url = window.location.href;
     var ua = window.navigator.userAgent.toLowerCase();
