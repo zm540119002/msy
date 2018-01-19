@@ -1,18 +1,7 @@
 /**
  * Created by Administrator on 2018/1/12.
  */
-// setTimeout(function(){
-//     $(window).load(function() {
-//         alert(1);return;
-//         var url = window.location.href;
-//         var ua = window.navigator.userAgent.toLowerCase();
-//         if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
-//             if(url.indexOf("code=") <= 0 ) { //code
-//                 self.location=MODULE + 'checkWxUser';
-//             }
-//         }
-//     });
-// },1000);
+//授权登录跳转
 $(window).load(function() {
     var url = window.location.href;
     var ua = window.navigator.userAgent.toLowerCase();
