@@ -2321,6 +2321,12 @@ background-size:contain;
 .person_center_item span.see_service{
     background-position:0 -178px;
 }
+.person_center_item span.author_agent{
+    background-position:0 -36px;
+}
+.person_center_item span.view_agent{
+    background-position:0 -72px;
+}
 .person_center_item .agent{
     margin:8px 0 0 40px;
 }
