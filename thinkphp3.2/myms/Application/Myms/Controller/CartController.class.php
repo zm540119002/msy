@@ -7,10 +7,8 @@ class CartController extends BaseController {
     //加入购物车
     public function addCart(){
         if(IS_POST){
-
             $num = isset($_POST['num']) && intval($_POST['num']) ? $_POST['num'] : 1;
-            $user = AuthUser::getSession();
-            if(isset($_POST['goodsId']) && !empty($_POST['goodsId'])){//商品添加
+            if(AuthUser::check()){//商品添加
                 $foreignId = intval($_POST['goodsId']);
                 $type = 1;
             }
@@ -29,7 +27,7 @@ class CartController extends BaseController {
             //已登录
             if(AuthUser::check()){
                 $model = D('Cart');
-                $userId  = $user['id'];
+                $userId  =  $this->user['id'];
                 $cartInfo = $model -> getCartInfoByForeignId($userId,$foreignId,$type);
                 if(empty($cartInfo)){//添加
                     $result = $model -> addCart($userId,$addCartInfo);
@@ -114,9 +112,8 @@ class CartController extends BaseController {
 
     //购物车信息
     public function myCart(){
-        $user = AuthUser::getSession();
         if(AuthUser::check()){
-            $cartList = D('Cart') ->getCartList($user['id']);
+            $cartList = D('Cart') ->getCartList( $this->user['id']);
         }else{
             //没有登录
             $cartList = D('Cart') ->getCartListBySession();
@@ -129,17 +126,16 @@ class CartController extends BaseController {
     //删除购物车信息
     public function delCart(){
         if(IS_POST){
-            $user = AuthUser::getSession();
             //已登录
-            if(isset($user) && !empty($user)){
+            if(  $this->user = AuthUser::check()){
                 //删除单条购物车信息
                 if(isset($_POST['cartId']) && $_POST['cartId']){
-                    $where['user_id']  = $user['id'];
+                    $where['user_id']  =  $this->user['id'];
                     $where['id']  = $_POST['cartId'];
                     $result = M('cart') -> where($where)->delete();
                 }
                 if(isset($_POST['cartIds']) && $_POST['cartIds']){
-                    $where['user_id']  = $user['id'];
+                    $where['user_id']  =  $this->user['id'];
                     $where['id']  = array('in',$_POST['cartIds']);
                     $result = M('cart') -> where($where)->delete();
                 }

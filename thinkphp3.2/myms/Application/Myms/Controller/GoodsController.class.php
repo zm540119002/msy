@@ -59,8 +59,7 @@ class GoodsController extends BaseController {
     //商品详情页
     public function goodsInfo(){
         if(IS_GET){
-//            $user = AuthUser::getSession();
-//            $this -> user = $user;
+            $this->user = AuthUser::check();
             $goodsId   = intval($_GET['goodsId']);
             $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($goodsId);
             $tag                      = explode(',',$goodsInfo['tag']);

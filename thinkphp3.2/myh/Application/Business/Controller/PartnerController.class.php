@@ -32,8 +32,8 @@ class PartnerController extends AuthPartnerController {
         if(IS_POST){
             if(isset($_POST['mobile_phone']) && isMobile($_POST['mobile_phone'])){
                 $mobilePhone = I('post.mobile_phone','','string');
-                if(checkAgentByMobilePhone($mobilePhone)){
-                    $this->ajaxReturn(errorMsg('已经是代理商，请检查手机号码！'));
+                if(checkIsAgentByMobilePhone($mobilePhone)){
+                    $this->ajaxReturn(errorMsg('此号码已经是代理商，请更换号码！'));
                 }
                 $modelAgent = D('Agent');
                 $_POST['partner_id'] = $this->partner['id'];
@@ -81,7 +81,7 @@ class PartnerController extends AuthPartnerController {
                     'a.mobile_phone' => array('like', '%' . trim($keyword) . '%'),
                 );
             }
-//            $this->agentList = $modelAgent->selectAgent($where);
+            $this->agentList = $modelAgent->selectAgent($where);
             $this->display('Agent/agentListTpl');
         }else{
             $this->display();
