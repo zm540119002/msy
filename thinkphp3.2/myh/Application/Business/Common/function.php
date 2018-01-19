@@ -23,11 +23,19 @@ function orderStatus($num){
  * @param $mobilePhone
  * @return bool true:是 false:否
  */
-function checkAgentByMobilePhone($mobilePhone){
+function checkIsAgentByMobilePhone($mobilePhone){
     $modelAgent = D('Agent');
     $where = array(
-        'mobile_phone' => $mobilePhone,
+        'a.auth_status' => 1,
+        '_complex' => array(
+            'a.mobile_phone' => $mobilePhone,
+            'u.mobile_phone' => $mobilePhone,
+            '_logic' => 'or',
+        ),
     );
-    $count = $modelAgent->where($where)->count('1');
+    $join = array(
+        ' left join ucenter.user u on u.id = a.user_id ',
+    );
+    $count = $modelAgent->alias('a')->join($join)->where($where)->count('1');
     return $count?true:false;
 }

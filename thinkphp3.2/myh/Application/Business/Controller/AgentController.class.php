@@ -18,24 +18,32 @@ class AgentController extends AuthAgentController {
         $this->display();
     }
 
-    //代理商-列表
-    public function agentList(){
+    //完善我的商务档案
+    public function completeArchive(){
         if(IS_POST){
-            $modelAgent = D('Agent');
-            $where = array(
-                'a.partner_id' => $this->partner['id'],
-            );
-            $keyword = I('get.keyword','','string');
-            if($keyword){
-                $where['_complex'] = array(
-                    '_logic' => 'or',
-                    'a.name' => array('like', '%' . trim($keyword) . '%'),
-                    'a.mobile_phone' => array('like', '%' . trim($keyword) . '%'),
-                );
-            }
-            $this->agentList = $modelAgent->selectAgent($where);
-            $this->display();
         }else{
+            //购物车配置开启的项
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(21));
+            //代理商信息
+            $this->agentInfo = $this->agent;
+            //省市数组
+            $this->assign('provinceList',getProvinceCity());
+            $this->display();
+        }
+    }
+
+    //查看所在城市美悦会服务中心
+    public function viewPartner(){
+        if(IS_POST){
+        }else{
+            //合伙人信息
+            $modelPartner = D('Partner');
+            $where = array(
+                'p.id' => $this->agent['partner_id'],
+            );
+            $partnerInfo = $modelPartner->selectPartner($where);
+            $this->partnerInfo = $partnerInfo[0];
+            $this->display();
         }
     }
 }
