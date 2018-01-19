@@ -508,15 +508,15 @@ class OrderController extends AuthUserController {
             $this->errorReturn($orderInfo['sn'], $modelGroupBuyDetail->getLastSql());
         }
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
+        $groupBuyDetail = $groupBuyDetail[0];
         //2.查看团购详情表此次团购有几人
         unset($where);
         $where = array(
-            'group_buy_id' => $groupBuyDetail[0]['group_buy_id'],
+            'group_buy_id' => $groupBuyDetail['group_buy_id'],
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
-
-
+        print_r($groupBuyNum);
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
@@ -562,7 +562,6 @@ class OrderController extends AuthUserController {
             ),
         );
         $this->sendTemplateMessage($template);
-
         if($groupBuyNum == 3){//修改团购表
             $_POST = [];
             $_POST['tag'] = 1;
