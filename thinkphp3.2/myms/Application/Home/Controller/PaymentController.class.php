@@ -22,7 +22,7 @@ class PaymentController extends Controller {
             $this->assign('wxShareUrl' ,$wxShareUrl);
             if(!empty($payInfo[0])){
                 $orderSn   = $payInfo[0];
-                $user      = AuthUser::getSession();
+                $user      = AuthUser::check();
                 $model     = D('Payment');
                 $orderInfo = $model -> getOrderInfoByOrderNo($user['id'],$orderSn,$type);
                 $oGoods    = $model -> getOrderGoodsByOrderSn($orderSn,$type);
