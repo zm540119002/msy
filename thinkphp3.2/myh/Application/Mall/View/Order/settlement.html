@@ -108,7 +108,7 @@
                             if(data.wxPay){
                                 location.href = MODULE + '/Payment/orderPayment/orderId/' + postData.orderId;
                             }else if(data.successBackUrl){
-                                location.href = data.successBackUrl;
+                                dialog.success(data.info,data.successBackUrl);
                             }else {
                                 location.href = MODULE + '/Payment/payComplete';
                             }
