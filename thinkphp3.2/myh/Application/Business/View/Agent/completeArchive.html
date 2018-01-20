@@ -40,9 +40,9 @@
         <section class="multiple_options_module">
             <p>我的类型（可多选）</p>
             <ul class="multiple_options">
-                <li data-id="3">礼品采购商</li>
-                <li data-id="1">实体店代理商</li>
-                <li data-id="2">微商代理商</li>
+                <li data-agentType="3">礼品采购商</li>
+                <li data-agentType="1">实体店代理商</li>
+                <li data-agentType="2">微商代理商</li>
             </ul>
         </section>
     </article>
@@ -78,29 +78,34 @@
                 var agentCompany=$('.agent_company').val();
                 var detailAddress=$('.detail_address').val();
                 var fixedTelephone=$('.fixed_telephone').val();
+                var agentId = '{$agentInfo.id}';
+                var provinceCity = $('input.province_city').getArea(areaArr);
                 var content='';
                 if(!agentName){
                     content='请输入代理商姓名';
                 }else if(!register.phoneCheck(agentPhone)){
                     content='请输入正确的手机号码';
+                }else if(!provinceCity){
+                    content='请选择所在区域';
                 }else if(!detailAddress){
                     content='请输入详细地址';
                 }else if(!agentCompany){
                     content='请输入所在单位';
                 }else if(!isPhone(fixedTelephone)){
                     content='请输入正确固定电话';
+                }else if(!agentId){
+                    content='未取得代理商资格！';
                 }
                 if(content){
                     dialog.error(content);
                     return false;
                 }
                 var postData = $('#form1').serializeObject();
-                var provinceCity = $('input.province_city').getArea(areaArr);
+
                 if(provinceCity){
                     postData.province = provinceCity[0];
                     postData.city = provinceCity[1];
                 }
-                var agentId = '{$agentInfo.id}';
                 if(agentId){
                     postData.agentId = agentId;
                 }
