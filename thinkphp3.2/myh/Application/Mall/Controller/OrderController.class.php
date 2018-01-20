@@ -419,11 +419,9 @@ class OrderController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
-
                     if($orderInfo['type'] == 1){//团购订单处理
                         $successBackUrl = $this -> groupBuyHandle($modelOrder,$orderInfo);
                     }
-
                     $modelOrder->commit();//提交事务
                     $this->ajaxReturn(successMsg('支付成功',array('wxPay'=>false,'successBackUrl'=>$successBackUrl)));
                 }else{
@@ -617,7 +615,7 @@ class OrderController extends AuthUserController {
                             'value'=>$order_sn,'color'=>'#173177',
                         ),
                         'keyword2'=>array(
-                            'value'=> round( $orderInfo['amount'] / 100, 2).'元','color'=>'#173177',
+                            'value'=>$orderInfo['amount'].'元','color'=>'#173177',
                         ),
                         'keyword3'=>array(
                             'value'=>$cashBack.'元','color'=>'#173177',
@@ -673,7 +671,7 @@ class OrderController extends AuthUserController {
                         'value'=>$orderInfo['sn'],'color'=>'#173177',
                     ),
                     'keyword2'=>array(
-                        'value'=> round( $orderInfo['amount'] / 100, 2).'元','color'=>'#173177',
+                        'value'=>$orderInfo['amount'].'元','color'=>'#173177',
                     ),
                     'keyword3'=>array(
                         'value'=>$cashBack.'元','color'=>'#173177',

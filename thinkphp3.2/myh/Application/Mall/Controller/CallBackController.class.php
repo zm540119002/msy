@@ -308,8 +308,8 @@ class CallBackController extends CommonController{
         if($rst['errmsg'] != 'ok'){
             \Think\Log::write('发送团购通知失败', 'NOTIC');
         }
-
-        if($groupBuyNum == 3){//修改团购表
+        //修改团购表 已成团
+        if($groupBuyNum == 3){
             $_POST = [];
             $_POST['tag'] = 1;
             unset($where);
@@ -322,7 +322,6 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
-
             //返现 //返现退三个
             //更新账户
             unset($where);
@@ -348,7 +347,7 @@ class CallBackController extends CommonController{
                     $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
                 }
             }
-            //返现通知
+            //返现通知三人
             foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn => &$openid){
                 //返现通知
                 $template = array(
@@ -382,8 +381,8 @@ class CallBackController extends CommonController{
                 }
             }
         }
-
-        if($groupBuyNum > 3){//只返现自己
+        //只返现自己
+        if($groupBuyNum > 3){
             //更新账户
             unset($where);
             $where['user_id'] =$userId;
