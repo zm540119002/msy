@@ -509,10 +509,12 @@ class OrderController extends AuthUserController {
         }
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
         $groupBuyDetail = $groupBuyDetail[0];
+        $ownOpenid = $groupBuyDetail['openid'];//自己的openid
+        $groupBuyId = $groupBuyDetail['group_buy_id']; //团购ID
         //2.查看团购详情表此次团购有几人
         unset($where);
         $where = array(
-            'group_buy_id' => $groupBuyDetail['group_buy_id'],
+            'group_buy_id' => $groupBuyId,
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
@@ -525,25 +527,21 @@ class OrderController extends AuthUserController {
             ' left join orders o on o.id = gbd.order_id',
         ];
         $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        $useIds = [];
-        $templateMessageArray = [];
+        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
+        $goodsName = $templateMessageList[0]['name'];//产品名称
         foreach ($templateMessageList as &$item){
             if($item['type'] == 1){
                 $header = $item['nickname'];//团长呢称
-                $goodsName = $item['name']; //产品名称
-                $cashBack =  $item['cash_back']; //团购完成后返现
+                break;
             }
-            $useIds[]  =   $item['user_id'];
-            $templateMessageArray['openid'] = $item['openid'];
-            $templateMessageArray['order_sn'] = $item['order_sn'];
         }
         //团购成功通知
         $template = array(
-            'touser'=>$groupBuyDetail['openid'],
+            'touser'=>$ownOpenid,
             'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
             "url"=>$this->host.U('Goods/goodsDetail',array(
                     'goodsId'=>$groupBuyDetail['goods_id'],
-                    'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                    'groupBuyId'=> $groupBuyId,
                     'shareType'=>'groupBuy' )),
             'data'=>array(
                 'first'=>array(
@@ -560,13 +558,16 @@ class OrderController extends AuthUserController {
                 ),
             ),
         );
-        $this->sendTemplateMessage($template);
+        $rst =  $this->sendTemplateMessage($template);
+        if($rst['errmsg'] != 'ok'){
+            \Think\Log::write('团购成功通知失败', 'NOTIC');
+        }
         if($groupBuyNum == 3){//修改团购表
             $_POST = [];
             $_POST['tag'] = 1;
             unset($where);
             $where = array(
-                'id' => $groupBuyDetail['group_buy_id'],
+                'id' => $groupBuyId,
             );
             $returnData = $modelGroupBuy-> saveGroupBuy($where);
             if ($returnData['status'] == 0) {
@@ -577,7 +578,7 @@ class OrderController extends AuthUserController {
             //返现 //返现退三个
             //更新账户
             unset($where);
-            $where['user_id'] = array('in',$useIds);
+            $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
             $where['status'] = 0;
             $res = $modelWallet->where($where)->setInc('amount',$cashBack);
             if(!$res){
@@ -586,7 +587,7 @@ class OrderController extends AuthUserController {
                 $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
             }
             //增加账户记录
-            foreach ($useIds as &$useId){
+            foreach (array_column($templateMessageList,"user_id") as &$useId){
                 $_POST = [];
                 $_POST['user_id'] = $useId;
                 $_POST['amount'] = $cashBack;
@@ -599,21 +600,21 @@ class OrderController extends AuthUserController {
                     $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
                 }
             }
-            foreach ($templateMessageArray as &$template){
+            foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn =>&$openid){
                 //返现通知
                 $template = array(
-                    'touser'=>$template['openid'],
+                    'touser'=>$openid,
                     'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
                     "url"=>$this->host.U('Goods/goodsDetail',array(
                             'goodsId'=>$groupBuyDetail['goods_id'],
-                            'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                            'groupBuyId'=> $groupBuyId,
                             'shareType'=>'groupBuy' )),
                     'data'=>array(
                         'first'=>array(
                             'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
                         ),
                         'keyword1'=>array(
-                            'value'=>$template['order_sn'],'color'=>'#173177',
+                            'value'=>$order_sn,'color'=>'#173177',
                         ),
                         'keyword2'=>array(
                             'value'=> round( $orderInfo['amount'] / 100, 2).'元','color'=>'#173177',
@@ -658,11 +659,11 @@ class OrderController extends AuthUserController {
             }
             //返现通知
             $template = array(
-                'touser'=>$groupBuyDetail['openid'],
+                'touser'=>$ownOpenid,
                 'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
                 "url"=>$this->host.U('Goods/goodsDetail',array(
                         'goodsId'=>$groupBuyDetail['goods_id'],
-                        'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                        'groupBuyId'=> $groupBuyId,
                         'shareType'=>'groupBuy' )),
                 'data'=>array(
                     'first'=>array(
@@ -701,7 +702,7 @@ class OrderController extends AuthUserController {
             }else{
                 $shLinkBase = session('returnUrl');
             }
-            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyDetail['group_buy_id'].'/shareType/groupBuy';
+            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyId.'/shareType/groupBuy';
         }
         return $successBackUrl;
     }
