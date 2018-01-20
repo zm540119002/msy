@@ -31,7 +31,11 @@ var dialog = {
             },
             yes:function(index){
                 if(url){
-                    location.href=url;
+                    if($.isFunction(url)){
+                        url();
+                    }else{
+                        location.href=url;
+                    }
                 }
                 layer.close(index)
             }

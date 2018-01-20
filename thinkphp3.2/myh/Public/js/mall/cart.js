@@ -53,10 +53,8 @@ function replaceOneGoodsToCart(obj) {
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status==0){
+            if(data.status==0) {
                 dialog.error(data.info);
-            }else {
-                dialog.success(data.info);
             }
         }
     });
@@ -98,6 +96,13 @@ function delCart(postData,type,obj) {
                                 }
                             });
                         }
+                        if( $('.purchase_package_list li').length == 0){
+                            $('.select_checkbox_box').hide();
+                            $('#no_data').show();
+                        }else{
+                            $('.select_checkbox_box').show();
+                        }
+                        calculateTotalPrice();
                         dialog.success(data.info);
                     }
                 }
@@ -105,6 +110,7 @@ function delCart(postData,type,obj) {
             layer.close(index);
         }
     })
+
 
 
 

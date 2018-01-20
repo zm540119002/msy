@@ -5,21 +5,6 @@ use web\all\Controller\AuthUserController;
 
 
 class OrderController extends AuthUserController {
-    public function __construct(){
-        parent::__construct();
-        //团购订单 到七天后自动成团
-        $where = array(
-            'status' =>1,
-            'shipments' => 0,
-            'create_time' =>array(
-                'lt',time()- C('DEFAULT_GROUPBUY_ORDER_TIME')
-            ),
-        );
-        $data = array(
-            'shipments'=>1,
-        );
-        $result = M('groupbuy') -> where($where) ->save($data);
-    }
     //获取订单详情页面
     public function addOrder(){
         if(IS_POST){

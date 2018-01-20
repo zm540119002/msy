@@ -21,10 +21,33 @@ class AgentCache{
         return $agent;
     }
 
+    /**从缓存中获取信息
+     */
+    public static function getByMobilePhone($mobilePhone){
+        $agent = S(self::$_cache_key.$mobilePhone);
+        if(!$agent){
+            $where = array(
+                'mobile_phone' => $mobilePhone,
+                'status' => 0,
+            );
+            $modelAgent = D('Agent');
+            $agent = $modelAgent->selectAgent($where);
+            $agent = $agent[0];
+            S(self::$_cache_key.$mobilePhone, $agent, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
+        }
+        return $agent;
+    }
+
     /**删除缓存信息
      */
     public static function remove($id){
         S(self::$_cache_key.$id, null);
+    }
+
+    /**删除缓存信息
+     */
+    public static function removeByMobilePhone($mobilePhone){
+        S(self::$_cache_key.$mobilePhone, null);
     }
 }
 

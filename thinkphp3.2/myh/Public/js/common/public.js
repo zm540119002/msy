@@ -262,147 +262,86 @@ function countDown(time,id){
     }, 1000);
 }
 
-//活动倒计时
-function countDown2(over_time,current_time,id){        
-        var day_elem = id.find('.day');
-        var hour_elem = id.find('.hour');
-        var minute_elem = id.find('.minute');
-        var second_elem = id.find('.second');
-        // var end_time = new Date(over_time).getTime(),//月份是实际月份-1
-            sys_second = (over_time-current_time);
-            console.log(sys_second);
-        var timer = setInterval(function(){
-            if (sys_second > 1) {
-                sys_second--;
-                var day = Math.floor((sys_second / 3600) / 24);
-                //console.log(day);
-                var hour = Math.floor((sys_second / 3600) % 24);
-                //console.log(hour);
-                var minute = Math.floor((sys_second / 60) % 60);
-                //console.log(minute);
-                var second = Math.floor(sys_second % 60);
-                //console.log(second);
-                //return false;
-                day_elem && $(day_elem).text(day);//计算天
-                $(hour_elem).text(hour<10?"0"+hour:hour);//计算小时
-                $(minute_elem).text(minute<10?"0"+minute:minute);//计算分
-                $(second_elem).text(second<10?"0"+second:second);//计算秒
-            } else {
-                clearInterval(timer);
-                $('.count_down_box').html('<span>本次活动已结束</span>');
+var addTimer = function(){
+    var list = [],callback,interval,opt,unix;
+    return function(id,timeStamp1,timeStamp2){
+        unix=parseInt(new Date(timeStamp2).getTime());
+        if(!interval){
+            interval = setInterval(function(){
+                go(unix);
+            },1000);
+        }
+        
+        list.push(
+            {
+                ele:document.getElementById(id),
+                otime:timeStamp1,
+                ctime:timeStamp2
             }
-        }, 1000);   
-}
+        );
+    }
+
+    function go(opt) {
+        for (var i = 0; i < list.length; i++) {
+            //list[i].ele.innerHTML = changeTimeStamp(list[i].time);
+            callback = changeTimeStamp(list[i].otime,opt);
+            if(!callback){
+                $('.count_down_box').html('本次活动已经结束');
+                return false;
+            }
+            for(var k=0;k<callback.length;k++){
+                list[i].ele.children[k].innerHTML=callback[k];
+            }
+            // if (!list[i].time){
+            //     list.splice(i--, 1);
+            // }
+        }
+        unix=unix+1000;
+    }
+
+    //传入unix时间戳，得到倒计时
+    function changeTimeStamp(endTime,backCurrentTime){
+        var distancetime = new Date(endTime).getTime() - backCurrentTime;
+        if(distancetime > 0){
+　　　　　　 //如果大于0.说明尚未到达截止时间
+            //var ms = Math.floor(distancetime%1000);
+            var sec = Math.floor(distancetime/1000%60);
+            var min = Math.floor(distancetime/1000/60%60);
+            var hour =Math.floor(distancetime/1000/60/60%24);
+            var day = Math.floor(distancetime/1000/60/60/24);
+
+            // if(ms<100){
+            //     ms = "0"+ ms;
+            // }
+            if(sec<10){
+                sec = "0"+ sec;
+            }
+            if(min<10){
+                min = "0"+ min;
+            }
+            if(hour<10){
+                hour = "0"+ hour;
+            }
+            //return day + ":" +hour + ":" +min + ":" +sec + ":"+ms;
+            return [day,hour,min,sec]
+        }else{
+　　　　　　　　　　　//若否，就是已经到截止时间了  
+            return false
+        }
+    }
+}();
 
 //错误提示;默认1.2s
 function errorTipc(info,time){
     $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
 }
 
-//阻止弹窗滑动穿透
-// function smartScroll(container, selectorScrollable) {
-//     // 如果没有滚动容器选择器，或者已经绑定了滚动时间，忽略
-//     if (!selectorScrollable || container.data('isBindScroll')) {
-//         return;
-//     }
-
-//     // 是否是搓浏览器
-//     // 自己在这里添加判断和筛选
-//     var isSBBrowser;
-
-//     var data = {
-//         posY: 0,
-//         maxscroll: 0
-//     };
-
-//     // 事件处理
-//     container.on({
-//         touchstart: function (event) {
-//             var events = event.touches[0] || event;
-            
-//             // 先求得是不是滚动元素或者滚动元素的子元素
-//             var elTarget = $(event.target);
-            
-//             if (!elTarget.length) {
-//                 return;    
-//             }
-            
-//             var elScroll;
-            
-//             // 获取标记的滚动元素，自身或子元素皆可
-//             if (elTarget.is(selectorScrollable)) {
-//                 elScroll = elTarget;
-//             } else if ((elScroll = elTarget.parents(selectorScrollable)).length == 0) {
-//                 elScroll = null;
-//             }
-            
-//             if (!elScroll) {
-//                 return;
-//             }
-            
-//             // 当前滚动元素标记
-//             data.elScroll = elScroll;
-            
-//             // 垂直位置标记
-//             data.posY = events.pageY;
-//             data.scrollY = elScroll.scrollTop();
-//             // 是否可以滚动
-//             data.maxscroll = elScroll[0].scrollHeight - elScroll[0].clientHeight;
-//         },
-//         touchmove: function () {
-//             // 如果不足于滚动，则禁止触发整个窗体元素的滚动
-//             if (data.maxscroll <= 0 || isSBBrowser) {
-//                 // 禁止滚动
-//                 event.preventDefault();
-//             }
-//             // 滚动元素
-//             var elScroll = data.elScroll;
-//             // 当前的滚动高度
-//             var scrollTop = elScroll.scrollTop();
-    
-//             // 现在移动的垂直位置，用来判断是往上移动还是往下
-//             var events = event.touches[0] || event;
-//             // 移动距离
-//             var distanceY = events.pageY - data.posY;
-    
-//             if (isSBBrowser) {
-//                 elScroll.scrollTop(data.scrollY - distanceY);
-//                 elScroll.trigger('scroll');
-//                 return;
-//             }
-    
-//             // 上下边缘检测
-//             if (distanceY > 0 && scrollTop == 0) {
-//                 // 往上滑，并且到头
-//                 // 禁止滚动的默认行为
-//                 event.preventDefault();
-//                 return;
-//             }
-    
-//             // 下边缘检测
-//             if (distanceY < 0 && (scrollTop + 1 >= data.maxscroll)) {
-//                 // 往下滑，并且到头
-//                 // 禁止滚动的默认行为
-//                 event.preventDefault();
-//                 return;
-//             }
-//         },
-//         touchend: function () {
-//             data.maxscroll = 0;
-//         }    
-//     });
-
-//     // 防止多次重复绑定
-//     container.data('isBindScroll', true);
-// };
 //阻止弹窗滑动穿透2
 function isRolling(container){
-    console.log(container);
     // 移动端touch重写
     var startX, startY;
     var button=document.getElementById('formLogin');
     button.addEventListener('click',function(){
-       console.log($(this));
        $('input').focus();
     })
     container.on('touchstart', function(e){
