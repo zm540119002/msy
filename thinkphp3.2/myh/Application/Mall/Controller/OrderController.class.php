@@ -534,47 +534,47 @@ class OrderController extends AuthUserController {
             }
         }
         //团购成功通知
-        $templateBase = array(
-            'touser'=>$ownOpenid,
-            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
-            'url'=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>$groupBuyDetail['goods_id'],
-                    'groupBuyId'=> $groupBuyId,
-                    'shareType'=>'groupBuy' )),
-        );
-        $data = array(
-            'first'=>'亲，您已成功参加团购！',
-            'product_name'=>$goodsName,
-            'header'=>$header,
-            'remark'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团',
-        );
-        $this -> sendTemplateMessageGroupBuySuccess($templateBase,$data);
-//        $template = array(
+//        $templateBase = array(
 //            'touser'=>$ownOpenid,
-//            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
-//            "url"=>$this->host.U('Goods/goodsDetail',array(
+//            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+//            'url'=>$this->host.U('Goods/goodsDetail',array(
 //                    'goodsId'=>$groupBuyDetail['goods_id'],
 //                    'groupBuyId'=> $groupBuyId,
 //                    'shareType'=>'groupBuy' )),
-//            'data'=>array(
-//                'first'=>array(
-//                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
-//                ),
-//                'Pingou_ProductName'=>array(
-//                    'value'=>$goodsName,'color'=>'#173177',
-//                ),
-//                'Weixin_ID'=>array(
-//                    'value'=>$header,'color'=>'#173177',
-//                ),
-//                'Remark'=>array(
-//                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
-//                ),
-//            ),
 //        );
-//        $rst =  $this->sendTemplateMessage($template);
-//        if($rst['errmsg'] != 'ok'){
-//            \Think\Log::write('团购成功通知失败', 'NOTIC');
-//        }
+//        $data = array(
+//            'first'=>'亲，您已成功参加团购！',
+//            'product_name'=>$goodsName,
+//            'header'=>$header,
+//            'remark'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团',
+//        );
+//        $this -> sendTemplateMessageGroupBuySuccess($templateBase,$data);
+        $template = array(
+            'touser'=>$ownOpenid,
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+            "url"=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>$groupBuyDetail['goods_id'],
+                    'groupBuyId'=> $groupBuyId,
+                    'shareType'=>'groupBuy' )),
+            'data'=>array(
+                'first'=>array(
+                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                ),
+                'Pingou_ProductName'=>array(
+                    'value'=>$goodsName,'color'=>'#173177',
+                ),
+                'Weixin_ID'=>array(
+                    'value'=>$header,'color'=>'#173177',
+                ),
+                'Remark'=>array(
+                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+                ),
+            ),
+        );
+        $rst =  $this->sendTemplateMessage($template);
+        if($rst['errmsg'] != 'ok'){
+            \Think\Log::write('团购成功通知失败', 'NOTIC');
+        }
         if($groupBuyNum == 3){//修改团购表
             $_POST = [];
             $_POST['tag'] = 1;
@@ -616,52 +616,52 @@ class OrderController extends AuthUserController {
             foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn =>&$openid){
                 //返现通知
                 //团购成功通知
-                $templateBase = array(
-                    'touser'=>$openid,
-                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
-                    'url'=>$this->host.U('Goods/goodsDetail',array(
-                            'goodsId'=>$groupBuyDetail['goods_id'],
-                            'groupBuyId'=> $groupBuyId,
-                            'shareType'=>'groupBuy' )),
-                );
-                $data = array(
-                    'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
-                    'keyword1'=>$order_sn,
-                    'keyword2'=>$orderInfo['amount'],
-                    'keyword3'=>$cashBack,
-                    'remark'=>'祝您购物愉快！',
-                );
-                $this ->  sendTemplateMessageCashBack($templateBase,$data);
-
-//                $template = array(
+//                $templateBase = array(
 //                    'touser'=>$openid,
-//                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
-//                    "url"=>$this->host.U('Goods/goodsDetail',array(
+//                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+//                    'url'=>$this->host.U('Goods/goodsDetail',array(
 //                            'goodsId'=>$groupBuyDetail['goods_id'],
 //                            'groupBuyId'=> $groupBuyId,
 //                            'shareType'=>'groupBuy' )),
-//                    'data'=>array(
-//                        'first'=>array(
-//                            'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
-//                        ),
-//                        'keyword1'=>array(
-//                            'value'=>$order_sn,'color'=>'#173177',
-//                        ),
-//                        'keyword2'=>array(
-//                            'value'=>$orderInfo['amount'].'元','color'=>'#173177',
-//                        ),
-//                        'keyword3'=>array(
-//                            'value'=>$cashBack.'元','color'=>'#173177',
-//                        ),
-//                        'Remark'=>array(
-//                            'value'=>'祝您购物愉快！','color'=>'#FF0000',
-//                        ),
-//                    ),
 //                );
-//                $rst =  $this->sendTemplateMessage($template);
-//                if($rst['errmsg'] != 'ok'){
-//                    \Think\Log::write('发送团购通知失败', 'NOTIC');
-//                }
+//                $data = array(
+//                    'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+//                    'keyword1'=>$order_sn,
+//                    'keyword2'=>$orderInfo['amount'],
+//                    'keyword3'=>$cashBack,
+//                    'remark'=>'祝您购物愉快！',
+//                );
+//                $this ->  sendTemplateMessageCashBack($templateBase,$data);
+
+                $template = array(
+                    'touser'=>$openid,
+                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
+                    "url"=>$this->host.U('Goods/goodsDetail',array(
+                            'goodsId'=>$groupBuyDetail['goods_id'],
+                            'groupBuyId'=> $groupBuyId,
+                            'shareType'=>'groupBuy' )),
+                    'data'=>array(
+                        'first'=>array(
+                            'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
+                        ),
+                        'keyword1'=>array(
+                            'value'=>$order_sn,'color'=>'#173177',
+                        ),
+                        'keyword2'=>array(
+                            'value'=>$orderInfo['amount'].'元','color'=>'#173177',
+                        ),
+                        'keyword3'=>array(
+                            'value'=>$cashBack.'元','color'=>'#173177',
+                        ),
+                        'Remark'=>array(
+                            'value'=>'祝您购物愉快！','color'=>'#FF0000',
+                        ),
+                    ),
+                );
+                $rst =  $this->sendTemplateMessage($template);
+                if($rst['errmsg'] != 'ok'){
+                    \Think\Log::write('发送团购通知失败', 'NOTIC');
+                }
             }
         }
         //只返现自己
@@ -689,51 +689,51 @@ class OrderController extends AuthUserController {
                 $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
             }
             //返现通知
-            $templateBase = array(
-                'touser'=>$ownOpenid,
-                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
-                'url'=>$this->host.U('Goods/goodsDetail',array(
-                        'goodsId'=>$groupBuyDetail['goods_id'],
-                        'groupBuyId'=> $groupBuyId,
-                        'shareType'=>'groupBuy' )),
-            );
-            $data = array(
-                'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
-                'keyword1'=>$orderInfo['sn'],
-                'keyword2'=>$orderInfo['amount'],
-                'keyword3'=>$cashBack,
-                'remark'=>'祝您购物愉快！',
-            );
-            $this ->  sendTemplateMessageCashBack($templateBase,$data);
-//            $template = array(
+//            $templateBase = array(
 //                'touser'=>$ownOpenid,
-//                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
-//                "url"=>$this->host.U('Goods/goodsDetail',array(
+//                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+//                'url'=>$this->host.U('Goods/goodsDetail',array(
 //                        'goodsId'=>$groupBuyDetail['goods_id'],
 //                        'groupBuyId'=> $groupBuyId,
 //                        'shareType'=>'groupBuy' )),
-//                'data'=>array(
-//                    'first'=>array(
-//                        'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
-//                    ),
-//                    'keyword1'=>array(
-//                        'value'=>$orderInfo['sn'],'color'=>'#173177',
-//                    ),
-//                    'keyword2'=>array(
-//                        'value'=>$orderInfo['amount'].'元','color'=>'#173177',
-//                    ),
-//                    'keyword3'=>array(
-//                        'value'=>$cashBack.'元','color'=>'#173177',
-//                    ),
-//                    'Remark'=>array(
-//                        'value'=>'祝您购物愉快！','color'=>'#FF0000',
-//                    ),
-//                ),
 //            );
-//            $rst = $this->sendTemplateMessage($template);
-//            if($rst['errmsg'] != 'ok'){
-//                \Think\Log::write('发送返现通知失败', 'NOTIC');
-//            }
+//            $data = array(
+//                'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+//                'keyword1'=>$orderInfo['sn'],
+//                'keyword2'=>$orderInfo['amount'],
+//                'keyword3'=>$cashBack,
+//                'remark'=>'祝您购物愉快！',
+//            );
+//            $this ->  sendTemplateMessageCashBack($templateBase,$data);
+            $template = array(
+                'touser'=>$ownOpenid,
+                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
+                "url"=>$this->host.U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuyDetail['goods_id'],
+                        'groupBuyId'=> $groupBuyId,
+                        'shareType'=>'groupBuy' )),
+                'data'=>array(
+                    'first'=>array(
+                        'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
+                    ),
+                    'keyword1'=>array(
+                        'value'=>$orderInfo['sn'],'color'=>'#173177',
+                    ),
+                    'keyword2'=>array(
+                        'value'=>$orderInfo['amount'].'元','color'=>'#173177',
+                    ),
+                    'keyword3'=>array(
+                        'value'=>$cashBack.'元','color'=>'#173177',
+                    ),
+                    'Remark'=>array(
+                        'value'=>'祝您购物愉快！','color'=>'#FF0000',
+                    ),
+                ),
+            );
+            $rst = $this->sendTemplateMessage($template);
+            if($rst['errmsg'] != 'ok'){
+                \Think\Log::write('发送返现通知失败', 'NOTIC');
+            }
         }
 
         if (strpos(session('returnUrl'), 'groupBuyId') == true) {
