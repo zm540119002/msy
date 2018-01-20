@@ -11,12 +11,16 @@
             </div>
             <if condition="$orderInfo.logistics_status eq 1">
                 <div class="pay_order_time"><i></i>支付剩余：
-                    <span class="count_down_box" id="{$orderInfo.id}">
+                    <if condition="$orderInfo.order_overdue_time gt $current_time">
+                         <span class="count_down_box" id="{$orderInfo.id}">
                         <span class="day"></span>天
                         <span class="hour"></span>小时
                         <span class="minute"></span>分
                         <span class="second"></span>秒
                     </span>
+                        <else />
+                         <span class="count_down_box">已取消</span>
+                    </if>
                 </div>
             </if>
             <div class="order_flex order_flex_item">
@@ -59,7 +63,12 @@
                    
                 </div>
                 <if condition="$orderInfo.logistics_status eq 1">
-                    <a class="order_pay_btn" href="javascript:void(0);">去支付</a>
+                    <if condition="$orderInfo.order_overdue_time gt $current_time">
+                        <a class="order_pay_btn" href="javascript:void(0);">去支付</a>
+                        <else />
+                        <a class="order_cancel" href="javascript:void(0);">已取消</a>
+                    </if>
+
                     <elseif condition="$orderInfo.logistics_status eq 2"/>
                     <a class="order_pay_btn edit_address" href="">修改收货人地址</a>
                     <if condition="$orderInfo.type eq 1 ">
