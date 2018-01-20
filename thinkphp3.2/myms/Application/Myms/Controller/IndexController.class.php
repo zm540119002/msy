@@ -1,9 +1,6 @@
 <?php
 namespace Myms\Controller;
 use  web\all\Controller\BaseController;
-//use web\all\Component\WxpayAPI\Jssdk;
-//use web\all\Lib\Pay;
-//use web\all\Lib\AuthUser;
 
 class IndexController extends BaseController {
     //首页
@@ -16,8 +13,4 @@ class IndexController extends BaseController {
             $this->display();
         }
     }
-
-
-
-
 }

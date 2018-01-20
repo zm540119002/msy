@@ -2381,6 +2381,9 @@ background-size:contain;
     background: #0f9143;
     color:#fff;
 }
+.partner_info_module{
+    margin:0.12rem 0 0;
+}
 .partner_info_item{
     padding:0 0 0 0.12rem;
     margin:0 0 0.50rem 0;
