@@ -136,7 +136,7 @@ class CommonController extends Controller{
                     'value'=>$data['keyword3'].'元','color'=>'#173177',
                 ),
                 'Remark'=>array(
-                    'value'=>$data['Remark'],'color'=>'#FF0000',
+                    'value'=>$data['remark'],'color'=>'#FF0000',
                 ),
             ),
         );
@@ -164,7 +164,7 @@ class CommonController extends Controller{
                     'value'=>$data['header'],'color'=>'#173177',
                 ),
                 'Remark'=>array(
-                    'value'=>$data['Remark'],'color'=>'#FF0000',
+                    'value'=>$data['remark'],'color'=>'#FF0000',
                 ),
             ),
         );
