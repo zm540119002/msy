@@ -41,7 +41,7 @@ class OrderController extends AuthUserController {
             );
             foreach ($orderList as $k=>&$item) {
                 $item['order_overdue_time'] = $item['order_start_time'] + 60;
-                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_start_time'] + 60*20);
+                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_start_time'] + 60);
                 $where = array(
                     'od.order_sn' => $item['sn'],
                 );
