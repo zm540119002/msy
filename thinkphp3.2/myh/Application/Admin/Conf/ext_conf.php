@@ -9,9 +9,6 @@ return array(
     'PURCHASER_LEVEL_IMG' => 'purchase/purchaser-level/',//采购商级别图
     'ON_OFF_LINE' => array('保留','已上架','已下架'),
 
-
-
-
     'ARR' => @include_once(APP_PATH . 'Admin/Conf/array_conf.php'),
     'MENU' => @include_once(APP_PATH . 'Admin/Conf/menu_conf.php'),
 );
