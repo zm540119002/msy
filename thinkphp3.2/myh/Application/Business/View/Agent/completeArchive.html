@@ -17,7 +17,7 @@
                     <input type="tel" name="mobile_phone" value="{$agentInfo.mobile_phone}" placeholder="手机号码" class="agent_phone">
                 </div>
                 <div class="register_data_item">
-                    <input type="text" name="registrant" value="{$agentInfo.registrant}" placeholder="单位名称（如有请填写）" class="agent_company">
+                    <input type="text" name="company_name" value="{$agentInfo.registrant}" placeholder="单位名称（如有请填写）" class="agent_company">
                 </div>
                 <div class="express-area ">
                     <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
@@ -40,9 +40,9 @@
         <section class="multiple_options_module">
             <p>我的类型（可多选）</p>
             <ul class="multiple_options">
-                <li data-agentType="3">礼品采购商</li>
-                <li data-agentType="1">实体店代理商</li>
-                <li data-agentType="2">微商代理商</li>
+                <li data-agent_type="3" class="{$agentTypeList|agentType='3'}">礼品采购商</li>
+                <li data-agent_type="1" class="{$agentTypeList|agentType='1'}">实体店代理商</li>
+                <li data-agent_type="2" class="{$agentTypeList|agentType='2'}">微商代理商</li>
             </ul>
         </section>
     </article>
@@ -75,9 +75,6 @@
             $('body').on('click','.determine',function(){
                 var agentName=$('.agent_name').val();
                 var agentPhone=$('.agent_phone').val();
-                var agentCompany=$('.agent_company').val();
-                var detailAddress=$('.detail_address').val();
-                var fixedTelephone=$('.fixed_telephone').val();
                 var agentId = '{$agentInfo.id}';
                 var provinceCity = $('input.province_city').getArea(areaArr);
                 var content='';
@@ -87,12 +84,6 @@
                     content='请输入正确的手机号码';
                 }else if(!provinceCity){
                     content='请选择所在区域';
-                }else if(!detailAddress){
-                    content='请输入详细地址';
-                }else if(!agentCompany){
-                    content='请输入所在单位';
-                }else if(!isPhone(fixedTelephone)){
-                    content='请输入正确固定电话';
                 }else if(!agentId){
                     content='未取得代理商资格！';
                 }
@@ -101,7 +92,13 @@
                     return false;
                 }
                 var postData = $('#form1').serializeObject();
-
+                postData.agentType = [];
+                $.each($('.multiple_options li'),function(){
+                    var _this = $(this);
+                    if(_this.hasClass('active')){
+                        postData.agentType.push(_this.data('agent_type'));
+                    }
+                });
                 if(provinceCity){
                     postData.province = provinceCity[0];
                     postData.city = provinceCity[1];
@@ -109,7 +106,7 @@
                 if(agentId){
                     postData.agentId = agentId;
                 }
-                var url = APP + '/Home/AgentAuthorise/register';
+                var url = CONTROLLER + '/completeArchive';
                 $.ajax({
                     url: url,
                     data: postData,
@@ -126,7 +123,8 @@
                         if(data.status==0){
                             dialog.error(data.info);
                         }else {
-                            dialog.success('成功',CONTROLLER + '/index');
+                            var url = CONTROLLER + '/index';
+                            dialog.success('成功');
                         }
                     }
                 });

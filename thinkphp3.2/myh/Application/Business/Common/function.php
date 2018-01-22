@@ -19,6 +19,12 @@ function orderStatus($num){
     return C('ORDER_STATUS')[$num]?:'保留';
 }
 
+/**代理类型
+ */
+function agentType($agentTypeList,$num){
+    return in_array($num,array_column($agentTypeList,'type'))?'active':'';
+}
+
 /**检查是否代理商
  * @param $mobilePhone
  * @return bool true:是 false:否
