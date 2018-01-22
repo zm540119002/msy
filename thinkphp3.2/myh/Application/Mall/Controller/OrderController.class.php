@@ -680,6 +680,43 @@ class OrderController extends AuthUserController {
         return $successBackUrl;
     }
 
+    /**
+     * 确认收货
+     */
+    public function confirmReceive(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $modelLogistics = D('Logistics');
+        $modelOrder = D('Order');
+        $logisticsId = I('post.logisticsId',0);
+        if( $logisticsId){
+            $modelOrder->startTrans();//开启事务
+            $where['id'] = $logisticsId;
+            $_POST['status'] = 3;
+            $res = $modelLogistics->saveLogistics($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $_POST = [];
+            $_POST['logistics_status'] = 3;
+            $where = array(
+                'user_id' =>  $this->user['id'],
+                'logistics_id' => $logisticsId,
+            );
+            $res = $modelOrder->saveOrder($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $modelOrder->commit();//提交事务
+            $this->ajaxReturn(successMsg('已确认收货'));
+        }
+        $this->ajaxReturn($res);
+    }
 
 
 

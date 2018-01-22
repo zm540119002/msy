@@ -54,32 +54,39 @@ $(window).load(function() {
     //点击去评论按钮
     $('body').on('click','.order_comment',function(){
         var orderid =  $(this).parents('.order_info_list').data('orderid');
-        location.href = MODULE + '/Order/settlement/orderId/' + orderid;
+        location.href = MODULE + '/Comment/CommentEdit/orderId/' + orderid;
     });
 
     //确定收货
     $('body').on('click','.confirm_receive',function(){
         var logisticsId =  $(this).parents('.order_info_list').data('logistics_id');
-        var url = MODULE + '/Logistics/logisticsEdit';
-        $.ajax({
-            url: url,
-            data: {logisticsId:logisticsId},
-            type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function(){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.status==1) {
-                    dialog.success(data.info);
-                }
+        var url = MODULE + '/Order/confirmReceive';
+        layer.open({
+            content:'是否确认收货？',
+            btn:['确定','取消'],
+            yes:function(index){
+                $.ajax({
+                    url: url,
+                    data: {logisticsId:logisticsId},
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status==1) {
+                            var url = MODULE + '/Order/orderManage/s/3';
+                            dialog.success(data.info,url);
+                        }
+                    }
+                });
+                layer.close(index);
             }
         });
     });
 
-
-})
+});
