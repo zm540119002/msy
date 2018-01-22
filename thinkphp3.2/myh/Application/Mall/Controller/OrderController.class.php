@@ -549,32 +549,32 @@ class OrderController extends AuthUserController {
             'remark'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团',
         );
         $this -> sendTemplateMessageGroupBuySuccess($templateBase,$data);
-        $template = array(
-            'touser'=>$ownOpenid,
-            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
-            "url"=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>$groupBuyDetail['goods_id'],
-                    'groupBuyId'=> $groupBuyId,
-                    'shareType'=>'groupBuy' )),
-            'data'=>array(
-                'first'=>array(
-                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
-                ),
-                'Pingou_ProductName'=>array(
-                    'value'=>$goodsName,'color'=>'#173177',
-                ),
-                'Weixin_ID'=>array(
-                    'value'=>$header,'color'=>'#173177',
-                ),
-                'Remark'=>array(
-                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
-                ),
-            ),
-        );
-        $rst =  $this->sendTemplateMessage($template);
-        if($rst['errmsg'] != 'ok'){
-            \Think\Log::write('团购成功通知失败', 'NOTIC');
-        }
+//        $template = array(
+//            'touser'=>$ownOpenid,
+//            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
+//            "url"=>$this->host.U('Goods/goodsDetail',array(
+//                    'goodsId'=>$groupBuyDetail['goods_id'],
+//                    'groupBuyId'=> $groupBuyId,
+//                    'shareType'=>'groupBuy' )),
+//            'data'=>array(
+//                'first'=>array(
+//                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+//                ),
+//                'Pingou_ProductName'=>array(
+//                    'value'=>$goodsName,'color'=>'#173177',
+//                ),
+//                'Weixin_ID'=>array(
+//                    'value'=>$header,'color'=>'#173177',
+//                ),
+//                'Remark'=>array(
+//                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
+//                ),
+//            ),
+//        );
+//        $rst =  $this->sendTemplateMessage($template);
+//        if($rst['errmsg'] != 'ok'){
+//            \Think\Log::write('团购成功通知失败', 'NOTIC');
+//        }
         if($groupBuyNum == 3){//修改团购表
             $_POST = [];
             $_POST['tag'] = 1;
