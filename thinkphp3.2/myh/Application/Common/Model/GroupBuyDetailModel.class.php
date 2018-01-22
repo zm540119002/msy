@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class GroupBuyDetailModel extends Model {
     protected $tableName = 'group_buy_detail';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array();
 

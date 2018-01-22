@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class UnitModel extends Model {
     protected $tableName = 'unit';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array();
 

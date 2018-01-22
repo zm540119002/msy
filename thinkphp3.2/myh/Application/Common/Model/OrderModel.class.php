@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class OrderModel extends Model {
     protected $tableName = 'orders';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
         array('sn','require','订单编号必须！'),

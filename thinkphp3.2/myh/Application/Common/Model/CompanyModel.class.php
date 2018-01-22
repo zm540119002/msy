@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class CompanyModel extends Model {
     protected $tableName = 'company';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array();
 

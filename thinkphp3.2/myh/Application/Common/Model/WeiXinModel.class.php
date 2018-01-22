@@ -6,7 +6,7 @@ use web\all\Component\WxpayAPI\Jssdk;
 class WeiXinModel extends Model {
     protected $tableName = 'wx_user';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
     );
