@@ -302,9 +302,7 @@ class CallBackController extends CommonController{
                 ),
             ),
         );
-        $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-        $rst = $jssdk->send_template_message($template);
-
+        $rst = $this->sendTemplateMessage($template);
         if($rst['errmsg'] != 'ok'){
             \Think\Log::write('发送团购通知失败', 'NOTIC');
         }
@@ -375,7 +373,7 @@ class CallBackController extends CommonController{
                         ),
                     ),
                 );
-                $rst = $jssdk->send_template_message($template);
+                $rst = $this->sendTemplateMessage($template);
                 if($rst['errmsg'] != 'ok'){
                     \Think\Log::write('发送团购通知失败', 'NOTIC');
                 }
@@ -431,7 +429,7 @@ class CallBackController extends CommonController{
                     ),
                 ),
             );
-            $rst = $jssdk->send_template_message($template);
+            $rst = $this->sendTemplateMessage($template);
             if($rst['errmsg'] != 'ok'){
                 \Think\Log::write('发送团购通知失败', 'NOTIC');
             }
