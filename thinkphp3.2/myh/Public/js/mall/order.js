@@ -59,7 +59,7 @@ $(window).load(function() {
         //计算商品列表总价
         var goods_id =  $(this).parents('.order_info_list').data('goods_id');
         var group_buy_id =  $(this).parents('.order_info_list').data('group_buy_id');
-        ocation.href = MODULE + '/Goods/goodsDetail/goodsId/'
+        location.href = MODULE + '/Goods/goodsDetail/goodsId/'
             + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
 
     });
