@@ -6,7 +6,7 @@
  * Time: 17:23
  */
 return array(
-    //数据库连接配置1
+    //数据库连接配置-myh
     'DB_CONFIG_MALL' => array(
         'DB_TYPE'   => 'mysql', // 数据库类型
         'DB_HOST'   => '127.0.0.1', // 服务器地址
@@ -16,8 +16,8 @@ return array(
         'DB_PORT'   =>  3306, // 端口
         'DB_PREFIX' => '',  //数据库表前缀
     ),
-    //数据库连接配置2
-    'DB_CONFIG2' => array(
+    //数据库连接配置-ucenter
+    'DB_CONFIG_UCENTER' => array(
         'DB_TYPE'   => 'mysql', // 数据库类型
         'DB_HOST'   => '127.0.0.1', // 服务器地址
         'DB_NAME'   => 'ucenter', // 数据库名
@@ -26,7 +26,7 @@ return array(
         'DB_PORT'   =>  3306, // 端口
         'DB_PREFIX' => '',  //数据库表前缀
     ),
-    //数据库连接配置2
+    //数据库连接配置-myh_business
     'DB_CONFIG_BUSINESS' => array(
         'DB_TYPE'   => 'mysql', // 数据库类型
         'DB_HOST'   => '127.0.0.1', // 服务器地址
