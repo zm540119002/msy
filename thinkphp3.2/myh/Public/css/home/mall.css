@@ -1464,11 +1464,12 @@ background-size:contain;
     line-height:0.5rem;
     text-align:center;
     background: #39b54a;
-    color:#fff;
-    border-radius:0.05rem;
+    
 }
 .o_btn{
     background: #ff7bac;
+    color:#fff;
+    border-radius:0.05rem;
     height:0.5rem;
     line-height: 0.5rem;
 }
