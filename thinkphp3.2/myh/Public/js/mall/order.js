@@ -49,7 +49,7 @@ $(window).load(function() {
         var group_buy_id =  _this.parents('.order_info_list').data('group_buy_id');
         var logistics_status = _this.parents('.order_info_list').data('logistics_status');
         if(logistics_status == 1) {
-            if(order_overdue_time - current_time > 0){
+            if(order_overdue_time - current_time > 0 && _this.data('key')==1){
                 var thisId=(_this.attr('id')).toString();
                 addTimer(thisId,order_overdue_time1,current_time1);
             }

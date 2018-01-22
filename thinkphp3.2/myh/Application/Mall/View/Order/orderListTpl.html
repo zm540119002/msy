@@ -12,7 +12,7 @@
             <if condition="$orderInfo.logistics_status eq 1">
                 <div class="pay_order_time"><i></i>支付剩余：
                     <if condition="$orderInfo.order_overdue_time gt $current_time">
-                         <span class="count_down_box" id="{$orderInfo.id}">
+                         <span class="count_down_box" id="{$orderInfo.id}" data-key="1">
                         <span class="day"></span>天
                         <span class="hour"></span>小时
                         <span class="minute"></span>分
