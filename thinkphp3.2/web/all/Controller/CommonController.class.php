@@ -145,6 +145,7 @@ class CommonController extends Controller{
         if($rst['errmsg'] != 'ok'){
             \Think\Log::write('发送返现通知失败', 'NOTIC');
         }
+        
     }
 
     //发送团购成功模板信息

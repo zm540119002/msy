@@ -589,14 +589,10 @@ class OrderController extends AuthUserController {
             }
             foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn =>&$openid){
                 //返现通知
-                //团购成功通知
                 $templateBase = array(
                     'touser'=>$openid,
                     'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
-                    'url'=>$this->host.U('Goods/goodsDetail',array(
-                            'goodsId'=>$groupBuyDetail['goods_id'],
-                            'groupBuyId'=> $groupBuyId,
-                            'shareType'=>'groupBuy' )),
+                    'url'=>$this->host.U('Earnings/index'),
                 );
                 $data = array(
                     'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
@@ -636,10 +632,7 @@ class OrderController extends AuthUserController {
             $templateBase = array(
                 'touser'=>$ownOpenid,
                 'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
-                'url'=>$this->host.U('Goods/goodsDetail',array(
-                        'goodsId'=>$groupBuyDetail['goods_id'],
-                        'groupBuyId'=> $groupBuyId,
-                        'shareType'=>'groupBuy' )),
+                'url'=>$this->host.U('Earnings/index'),
             );
             $data = array(
                 'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
