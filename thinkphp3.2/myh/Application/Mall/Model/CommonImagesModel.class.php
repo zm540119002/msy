@@ -4,27 +4,23 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class LevelModel extends Model {
-    protected $tableName = 'level';
+class CommonImagesModel extends Model {
+    protected $tableName = 'common_images';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_UCENTER';
+    protected $connection = 'DB_CONFIG_MALL';
 
-    protected $_validate = array(
-    );
+    protected $_validate = array();
 
     //新增
-    public function addLevel(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addCommonImages($rules=array()){
         unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
 
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
@@ -35,27 +31,23 @@ class LevelModel extends Model {
     }
 
     //修改
-    public function saveLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function saveCommonImages($where=array(),$rules=array()){
         unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
 
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
+        $_where = array(
+        );
+        $id = I('post.commonImagesId',0,'int');
+        if($id){
+            $_where['id'] = $id;
         }
+        $_where = array_merge($_where,$where);
+
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-        $_where = array(
-            'id' => $id,
-        );
-        $_where = array_merge($_where,$where);
-       
         $res = $this->where($_where)->save();
-        
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -66,25 +58,23 @@ class LevelModel extends Model {
     }
 
     //标记删除
-    public function delLevel($where=array()){
+    public function delCommonImages($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
-        }
         $_where = array(
-            'id' => $id,
         );
+        $id = I('post.commonImagesId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
+
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
@@ -92,17 +82,16 @@ class LevelModel extends Model {
     }
 
     //查询
-    public function selectLevel($where=[],$field=[],$join=[]){
+    public function selectCommonImages($where=[],$field=[],$join=[]){
         $_where = array(
-            'l.status' => 0,
         );
         $_field = array(
-            'l.id','l.name','l.settlement_discount','l.fee','l.img','l.detail_img','l.star_img','l.star',
+            'ci.id','ci.common_img',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('l')
+            ->alias('ci')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

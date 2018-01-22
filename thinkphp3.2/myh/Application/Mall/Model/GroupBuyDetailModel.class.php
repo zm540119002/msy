@@ -4,27 +4,22 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class LevelModel extends Model {
-    protected $tableName = 'level';
+class GroupBuyDetailModel extends Model {
+    protected $tableName = 'group_buy_detail';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_UCENTER';
+    protected $connection = 'DB_CONFIG_MALL';
 
-    protected $_validate = array(
-    );
+    protected $_validate = array();
 
     //新增
-    public function addLevel(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addGroupBuyDetail($rules=array()){
         unset($_POST['id']);
-
+        $this->_validate = array_merge($this->_validate,$rules);
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
@@ -35,27 +30,22 @@ class LevelModel extends Model {
     }
 
     //修改
-    public function saveLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function saveGroupBuyDetail($where=array(),$rules=array()){
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
+        $this->_validate = array_merge($this->_validate,$rules);
+        $_where = array(
+            'status' => 0,
+        );
+        $id = I('post.groupBuyDetailId',0,'int');
+        if($id){
+            $_where['id'] = $id;
         }
+        $_where = array_merge($_where,$where);
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-        $_where = array(
-            'id' => $id,
-        );
-        $_where = array_merge($_where,$where);
-       
         $res = $this->where($_where)->save();
-        
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -66,25 +56,24 @@ class LevelModel extends Model {
     }
 
     //标记删除
-    public function delLevel($where=array()){
+    public function delGroupBuyDetail($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
-        }
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        $id = I('post.groupBuyDetailId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
+
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
@@ -92,17 +81,17 @@ class LevelModel extends Model {
     }
 
     //查询
-    public function selectLevel($where=[],$field=[],$join=[]){
+    public function selectGroupBuyDetail($where=[],$field=[],$join=[]){
         $_where = array(
-            'l.status' => 0,
+            'gbd.status' => 0,
         );
         $_field = array(
-            'l.id','l.name','l.settlement_discount','l.fee','l.img','l.detail_img','l.star_img','l.star',
+            'gbd.id','gbd.type','gbd.pay_status','gbd.num','gbd.group_buy_id','gbd.user_id','gbd.pay_time','gbd.openid'
         );
         $_join = array(
         );
         $list = $this
-            ->alias('l')
+            ->alias('gbd')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

@@ -4,83 +4,69 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class LevelModel extends Model {
-    protected $tableName = 'level';
+class WalletDetailModel extends Model {
+    protected $tableName = 'wallet_detail';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_UCENTER';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
     );
 
     //新增
-    public function addLevel(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addWalletDetail(){
         unset($_POST['id']);
-
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('新增成功',$returnArray);
     }
 
     //修改
-    public function saveLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function saveWalletDetail($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
-        }
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-        $_where = array(
-            'id' => $id,
-        );
-        $_where = array_merge($_where,$where);
-       
-        $res = $this->where($_where)->save();
-        
+        $_where = array();
+        $id = I('post.walletDetailId',0,'int');
+        if($id){
+            $_where = array(
+                'id' => $id,
+            );
+        }
+        $res = $this->where(array_merge($_where,$where))->save();
         if($res === false){
             return errorMsg($this->getError());
         }
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('修改成功',$returnArray);
     }
 
     //标记删除
-    public function delLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function delWalletDetail($where=array()){
         unset($_POST['id']);
 
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
+        $_where = array();
+        $id = I('post.walletDetailId',0,'int');
+        if($id){
+            $_where = array(
+                'id' => $id,
+            );
         }
-        $_where = array(
-            'id' => $id,
-        );
-        $_where = array_merge($_where,$where);
-        $res = $this->where($_where)->setField('status',2);
+        $res = $this->where(array_merge($_where,$where))->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -88,21 +74,22 @@ class LevelModel extends Model {
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('删除成功',$returnArray);
     }
 
     //查询
-    public function selectLevel($where=[],$field=[],$join=[]){
+    public function selectWalletDetail($where=[],$field=[],$join=[]){
         $_where = array(
-            'l.status' => 0,
+            'wd.status' => 0,
         );
         $_field = array(
-            'l.id','l.name','l.settlement_discount','l.fee','l.img','l.detail_img','l.star_img','l.star',
+            'wd.id','wd.type','wd.amount','wd.create_time','wd.user_id','wd.sn',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('l')
+            ->alias('wd')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

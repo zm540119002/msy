@@ -4,21 +4,17 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class LevelModel extends Model {
-    protected $tableName = 'level';
+class PartnerModel extends Model {
+    protected $tableName = 'partner';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_UCENTER';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
     );
 
     //新增
-    public function addLevel(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addPartner(){
         unset($_POST['id']);
-
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
@@ -35,27 +31,23 @@ class LevelModel extends Model {
     }
 
     //修改
-    public function saveLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function savePartner($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
-        }
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        if(isset($_POST['partnerId']) && intval($_POST['partnerId'])){
+            $id = I('post.partnerId',0,'int');
+        }
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
-       
         $res = $this->where($_where)->save();
-        
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -66,25 +58,21 @@ class LevelModel extends Model {
     }
 
     //标记删除
-    public function delLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function delPartner($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
-        }
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        $id = I('post.partnerId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
+
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
@@ -92,20 +80,22 @@ class LevelModel extends Model {
     }
 
     //查询
-    public function selectLevel($where=[],$field=[],$join=[]){
+    public function selectPartner($where=[],$field=[],$join=[]){
         $_where = array(
-            'l.status' => 0,
+            'p.status' => 0,
         );
         $_field = array(
-            'l.id','l.name','l.settlement_discount','l.fee','l.img','l.detail_img','l.star_img','l.star',
+            'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.province','p.city',
+            'p.user_id','p.create_time','p.agent_places','p.authorized_agent','p.telephone','p.detail_address',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('l')
+            ->alias('p')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
+            ->order('p.id desc')
             ->select();
         return $list?:[];
     }

@@ -4,21 +4,17 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class LevelModel extends Model {
-    protected $tableName = 'level';
+class CommentModel extends Model {
+    protected $tableName = 'comment';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_UCENTER';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
     );
 
     //新增
-    public function addLevel(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addComment(){
         unset($_POST['id']);
-
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
@@ -35,27 +31,23 @@ class LevelModel extends Model {
     }
 
     //修改
-    public function saveLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function saveComment($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
-        }
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        if(isset($_POST['CommentId']) && intval($_POST['CommentId'])){
+            $id = I('post.CommentId',0,'int');
+        }
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
-       
         $res = $this->where($_where)->save();
-        
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -66,25 +58,21 @@ class LevelModel extends Model {
     }
 
     //标记删除
-    public function delLevel($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function delComment($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.levelId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数levelId');
-        }
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        $id = I('post.CommentId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
+
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
@@ -92,17 +80,18 @@ class LevelModel extends Model {
     }
 
     //查询
-    public function selectLevel($where=[],$field=[],$join=[]){
+    public function selectComment($where=[],$field=[],$join=[]){
         $_where = array(
-            'l.status' => 0,
+            'cm.status' => 0,
         );
+       
         $_field = array(
-            'l.id','l.name','l.settlement_discount','l.fee','l.img','l.detail_img','l.star_img','l.star',
+           'cm.id','cm.user_id','cm.score','cm.order_id','cm.title','cm.content','cm.create_time','cm.update_time'
         );
         $_join = array(
         );
         $list = $this
-            ->alias('l')
+            ->alias('cm')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

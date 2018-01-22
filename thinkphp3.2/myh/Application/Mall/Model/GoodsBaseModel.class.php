@@ -4,16 +4,19 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class LevelModel extends Model {
-    protected $tableName = 'level';
+class GoodsBaseModel extends Model {
+    protected $tableName = 'goods_base';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_UCENTER';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
+        array('category_id_1','require','所属必须！'),
+        array('name','require','商品名称必须！'),
+        array('price','require','商品原价必须！'),
     );
 
     //新增
-    public function addLevel(){
+    public function addGoodsBase(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -23,32 +26,37 @@ class LevelModel extends Model {
         if(!$res){
             return errorMsg($this->getError());
         }
+       
         $id = $this->add();
 
         if($id === false){
             return errorMsg($this->getError());
         }
+
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('新增成功',$returnArray);
     }
 
     //修改
-    public function saveLevel($where=array()){
+    public function saveGoodsBase($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.levelId',0,'int');
+        $id = I('post.goodsBaseId',0,'int');
         if(!$id){
-            return errorMsg('确少参数levelId');
+            return errorMsg('确少参数goodsBaseId');
         }
+
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
+
         $_where = array(
             'id' => $id,
         );
@@ -59,27 +67,31 @@ class LevelModel extends Model {
         if($res === false){
             return errorMsg($this->getError());
         }
+
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('修改成功',$returnArray);
     }
 
     //标记删除
-    public function delLevel($where=array()){
+    public function delGoodsBase($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.levelId',0,'int');
+        $id = I('post.goodsBaseId',0,'int');
         if(!$id){
-            return errorMsg('确少参数levelId');
+            return errorMsg('确少参数goodsBaseId');
         }
+
         $_where = array(
             'id' => $id,
         );
         $_where = array_merge($_where,$where);
+
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
@@ -88,21 +100,25 @@ class LevelModel extends Model {
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('删除成功',$returnArray);
     }
 
     //查询
-    public function selectLevel($where=[],$field=[],$join=[]){
+    public function selectGoodsBase($where=[],$field=[],$join=[]){
         $_where = array(
-            'l.status' => 0,
+            'gb.status' => 0,
         );
         $_field = array(
-            'l.id','l.name','l.settlement_discount','l.fee','l.img','l.detail_img','l.star_img','l.star',
+            'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line','gb.param',
+            'gb.usage','gb.sort','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro','gb.notices',
+            'gb.tag','gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification','gb.thumb_img','gb.notices','gb.share_intro',
+            'gb.group_share','gb.headlines',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('l')
+            ->alias('gb')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
