@@ -284,13 +284,20 @@ var addTimer = function(){
     function go(opt) {
         for (var i = 0; i < list.length; i++) {
             //list[i].ele.innerHTML = changeTimeStamp(list[i].time);
-            callback = changeTimeStamp(list[i].otime,opt);
+            callback= changeTimeStamp(list[i].otime,opt);
             if(!callback){
-                $('.count_down_box').html('本次活动已经结束');
-                return false;
+                list[i].ele.innerHTML='订单已取消';
+                //clearInterval(interval);
+                //interval=0;
+                console.log(interval);
+                $(list[i].ele).parents('.order_info_list')
+                .find('a.order_pay_btn')
+                .removeClass('order_pay_btn')
+                .text('已取消')
+                .addClass('order_cancle');
             }
             for(var k=0;k<callback.length;k++){
-                list[i].ele.children[k].innerHTML=callback[k];
+                list[i].ele.children[k].innerHTML=callback[k];               
             }
             // if (!list[i].time){
             //     list.splice(i--, 1);

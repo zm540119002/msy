@@ -1458,7 +1458,7 @@ background-size:contain;
     color:#ff1d25;
 }
 .pay_finish{color:#39b54a;}
-.order_pay_btn{
+.order_pay_btn,.order_cancle{
     width:1.2rem;
     height:0.5rem;
     line-height:0.5rem;
@@ -1466,6 +1466,9 @@ background-size:contain;
     background: #39b54a;
     color:#fff;
     border-radius:0.05rem;
+}
+.order_cancle{
+    background: #757575;
 }
 .edit_address{
     width:1.5rem;
