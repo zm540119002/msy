@@ -495,6 +495,7 @@ class OrderController extends AuthUserController {
         $_POST = [];
         $_POST['pay_status'] = 2;
         $_POST['pay_time'] = date('YmdHis');
+        $_POST['overdue_time'] = strtotime('+3 day');
         $where = array(
             'user_id' => $orderInfo['user_id'],
             'order_id' => $orderInfo['id'],
@@ -549,7 +550,8 @@ class OrderController extends AuthUserController {
             'remark'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团',
         );
         $this -> sendTemplateMessageGroupBuySuccess($templateBase,$data);
-        if($groupBuyNum == 3){//修改团购表
+        //修改团购表
+        if($groupBuyNum == 3){
             $_POST = [];
             $_POST['tag'] = 1;
             unset($where);
@@ -562,7 +564,7 @@ class OrderController extends AuthUserController {
                 //返回状态给微信服务器
                 $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
             }
-            //返现 //返现退三个
+            //返现退三个
             //更新账户
             unset($where);
             $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
@@ -634,6 +636,7 @@ class OrderController extends AuthUserController {
                 'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
                 'url'=>$this->host.U('Earnings/index'),
             );
+            
             $data = array(
                 'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
                 'keyword1'=>$orderInfo['sn'],

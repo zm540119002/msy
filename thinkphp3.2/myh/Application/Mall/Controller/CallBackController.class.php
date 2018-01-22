@@ -238,6 +238,7 @@ class CallBackController extends CommonController{
         $_POST = [];
         $_POST['pay_status'] = 2;
         $_POST['pay_time'] = $data['time_end'];
+        $_POST['overdue_time'] = strtotime('+3 day');
         unset($where);
         $where = array(
             'user_id' =>$userId,
@@ -253,7 +254,7 @@ class CallBackController extends CommonController{
         $groupBuyDetail = $groupBuyDetail[0];
         $ownOpenid = $groupBuyDetail['openid'];//自己的openid
         $groupBuyId = $groupBuyDetail['group_buy_id']; //团购ID
-        $goodsId = $groupBuyDetail['goods_id'];//产品ID
+        $goodsId = $groupBuyDetail['goods_id'];//团购产品ID
         //2.查看团购详情表此次团购有几人
         unset($where);
         $where = array(
@@ -261,7 +262,6 @@ class CallBackController extends CommonController{
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
-       \Think\Log::write( '团购人数：' . $groupBuyNum . "\r\n失败原因：" , 'NOTIC');
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
@@ -284,7 +284,7 @@ class CallBackController extends CommonController{
             'touser'=>$ownOpenid,
             'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
             'url'=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>$groupBuyDetail['goods_id'],
+                    'goodsId'=>$goodsId,
                     'groupBuyId'=> $groupBuyId,
                     'shareType'=>'groupBuy' )),
         );
@@ -310,7 +310,7 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
-            //返现 //返现退三个
+            //返现退三个
             //更新账户
             unset($where);
             $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));

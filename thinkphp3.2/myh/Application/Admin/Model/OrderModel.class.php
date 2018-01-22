@@ -151,4 +151,28 @@ class OrderModel extends Model {
         }
         return $orderStatusCount?:[];
     }
+
+    //按订单状态分组统计
+    public function orderCount($where){
+        $_where = array(
+            'o.status' => 0,
+        );
+        $_field = array(
+            'o.logistics_status','count(1) num',
+        );
+        $list = $this
+            ->alias('o')
+            ->where(array_merge($_where,$where))
+            ->field($_field)
+            ->group('o.logistics_status')
+            ->order('o.logistics_status asc')
+            ->select();
+        $orderStatusCount = array();
+        foreach ($list as $value){
+            if($value['logistics_status'] != 0){
+                $orderStatusCount[$value['logistics_status']] = $value['num'];
+            }
+        }
+        return $orderStatusCount?:[];
+    }
 }
