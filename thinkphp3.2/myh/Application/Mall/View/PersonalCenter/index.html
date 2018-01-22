@@ -146,7 +146,7 @@
                             if(data.info=='isAjax'){
                                 loginDialog(flushPage);
                             }else{
-                                $('.mask,.express-code-box').show();
+                                $('.mask,.express-code-box').fadeIn();
                                 $('.twitter_code_img img').attr('src','/Uploads/'+data.url);
                             }
                         }
@@ -154,8 +154,8 @@
                 });
             });
             //关闭删除二维码
-            $("#areaMask2,.closeBtn").click(function() {
-                $("#areaMask2,.express-code-box").hide();
+            $("#areaMask,.closeBtn").click(function() {
+                $("#areaMask,.express-code-box").fadeOut();
             });
         });
     </script>
