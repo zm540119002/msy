@@ -65,7 +65,6 @@ class GoodsController extends BaseController {
         $this->display();
     }
 
-
     //设置购买类型
     public function setPurchaseType(){
         if(IS_POST){
@@ -102,7 +101,6 @@ class GoodsController extends BaseController {
                     }
                 }
             }
-
             $this->ajaxReturn(successMsg('成功'));
 
         }else{
@@ -122,12 +120,10 @@ class GoodsController extends BaseController {
                 $this->noBuyTypeArray=$noBuyTypeArray;
                 $this->goodsInfo =$goodsInfo;
             }
-
             $this->display();
         }
     }
 
-    
     //商品编辑
     public function goodsBaseEdit(){
         $model = D('GoodsBase');
@@ -205,11 +201,9 @@ class GoodsController extends BaseController {
         $this->ajaxReturn($res);
     }
 
-
-
     //公共图片编辑
     public function commonImageEdit(){
-        $model = M('common_images','','DB_CONFIG1');
+        $model = M('common_images','','DB_CONFIG_MALL');
         $commonImg = $model -> find();
         if(IS_POST) {
             if (isset($_POST['common_img']) && $_POST['common_img']) {

@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class GoodsModel extends Model {
     protected $tableName = 'goods';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
         array('price','require','商品原价必须！'),

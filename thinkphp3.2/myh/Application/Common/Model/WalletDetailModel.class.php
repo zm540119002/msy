@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class WalletDetailModel extends Model {
     protected $tableName = 'wallet_detail';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
     );

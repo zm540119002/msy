@@ -6,7 +6,7 @@ use Think\Model;
 class GoodsCategoryModel extends Model {
     protected $tableName = 'goods_category';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
         array('name','require','名称必须！'),
