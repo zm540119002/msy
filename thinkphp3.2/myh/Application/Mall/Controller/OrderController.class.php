@@ -495,7 +495,6 @@ class OrderController extends AuthUserController {
         $_POST = [];
         $_POST['pay_status'] = 2;
         $_POST['pay_time'] = date('YmdHis');
-        $_POST['overdue_time'] = strtotime('+3 day');
         $where = array(
             'user_id' => $orderInfo['user_id'],
             'order_id' => $orderInfo['id'],
