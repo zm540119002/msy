@@ -149,7 +149,6 @@ class GoodsController extends BaseController {
                 ];
                 $groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
                 $this->groupBuyDetail = $groupBuyDetail[0];
-                print_r($this->groupBuyDetail);exit;
                 //判断团购是否已过期
                 if($this->groupBuyDetail['overdue_time'] - time() < 0){
                     $conf = array(20);

@@ -278,6 +278,21 @@ class CallBackController extends CommonController{
                 break;
             }
         }
+        //修改团购表的过期时间
+        if($groupBuyNum == 1){
+            $_POST = [];
+            $_POST['overdue_time'] = strtotime('+3 day');
+            unset($where);
+            $where = array(
+                'id' => $groupBuyId,
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
+        }
         //团购成功通知
         $templateBase = array(
             'touser'=>$ownOpenid,

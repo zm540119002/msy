@@ -516,6 +516,24 @@ class OrderController extends AuthUserController {
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
+        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
+        ];
+        $join=[ ' left join goods g on g.id = gbd.goods_id',
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+            ' left join wx_user wxu on wxu.openid = gbd.openid',
+            ' left join orders o on o.id = gbd.order_id',
+        ];
+        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+
+        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
+        $goodsName = $templateMessageList[0]['name'];//产品名称
+        foreach ($templateMessageList as &$item){
+            if($item['type'] == 1){
+                $header = $item['nickname'];//团长呢称
+                break;
+            }
+        }
         //修改团购表的过期时间
         if($groupBuyNum == 1){
             $_POST = [];
@@ -529,23 +547,6 @@ class OrderController extends AuthUserController {
                 $modelOrder->rollback();
                 //返回状态给微信服务器
                 $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
-            }
-        }
-        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
-            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
-        ];
-        $join=[ ' left join goods g on g.id = gbd.goods_id',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join wx_user wxu on wxu.openid = gbd.openid',
-            ' left join orders o on o.id = gbd.order_id',
-        ];
-        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
-        $goodsName = $templateMessageList[0]['name'];//产品名称
-        foreach ($templateMessageList as &$item){
-            if($item['type'] == 1){
-                $header = $item['nickname'];//团长呢称
-                break;
             }
         }
         //团购成功通知
