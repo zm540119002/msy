@@ -12,7 +12,7 @@
             <if condition="$orderInfo.logistics_status eq 1">
                 <div class="pay_order_time"><i></i>支付剩余：
                     <if condition="$orderInfo.order_overdue_time gt $current_time">
-                         <span class="count_down_box" id="{$orderInfo.id}">
+                         <span class="count_down_box" id="{$orderInfo.id}" data-key="1">
                         <span class="day"></span>天
                         <span class="hour"></span>小时
                         <span class="minute"></span>分
@@ -70,18 +70,18 @@
                     </if>
 
                     <elseif condition="$orderInfo.logistics_status eq 2"/>
-                    <a class="order_pay_btn edit_address" href="">修改收货人地址</a>
+                    <a class="o_btn edit_address" href="">修改收货人地址</a>
                     <if condition="$orderInfo.type eq 1 ">
                         <div class="group_flex group_flex_item">
-                            <a class="order_pay_btn edit_address invite_group_buy"  href="javascript:void(0);">去邀请朋友参团 </a>
+                            <a class="o_btn invite_group_buy"  href="javascript:void(0);">去邀请朋友参团 </a>
                         </div>
                     </if>
                     <elseif condition="$orderInfo.logistics_status eq 3"/>
-                    <a class="order_pay_btn edit_address" href="{:U('Comment/CommentEdit',array('orderId'=>$orderInfo['id']))}">去评分评论</a>
+                    <a class="order_comment" href="{:U('Comment/CommentEdit',array('orderId'=>$orderInfo['id']))}">去评分评论</a>
                     <elseif condition="$orderInfo.logistics_status eq 4"/>
-                        <a class="order_pay_btn edit_address" href="">再次采购</a>
+                        <a class="order_completed" href="">已完成，再次采购</a>
                     <else />
-                    <a class="order_pay_btn edit_address" href="">已取消</a>
+                    <a class="order_cancle" href="">已取消</a>
                 </if>
             </div>
             <include file="orderInfoTpl" />

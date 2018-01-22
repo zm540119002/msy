@@ -111,15 +111,16 @@ class CommonController extends Controller{
 
     //发送模版消息
     public function sendTemplateMessage($template){
-        if(isWxBrowser()) {//判断是否为微信浏览器
-            return  $this->_jssdk ->send_template_message($template);
-        }
+//        if(isWxBrowser()) {//判断是否为微信浏览器
+//            return  $this->_jssdk ->send_template_message($template);
+//        }
+        return  $this->_jssdk ->send_template_message($template);
     }
     //发送返现模板信息
     public function sendTemplateMessageCashBack($templateBase,$data){
         //返现通知
         $template = array(
-            'touser'=>$templateBase['openid'],
+            'touser'=>$templateBase['touser'],
             'template_id'=>$templateBase['template_id'],//参加团购通知模板Id
             "url"=>$templateBase['url'],
             'data'=>array(
@@ -135,7 +136,7 @@ class CommonController extends Controller{
                 'keyword3'=>array(
                     'value'=>$data['keyword3'].'元','color'=>'#173177',
                 ),
-                'Remark'=>array(
+                'remark'=>array(
                     'value'=>$data['remark'],'color'=>'#FF0000',
                 ),
             ),
@@ -144,13 +145,14 @@ class CommonController extends Controller{
         if($rst['errmsg'] != 'ok'){
             \Think\Log::write('发送返现通知失败', 'NOTIC');
         }
+        
     }
 
     //发送团购成功模板信息
     public function sendTemplateMessageGroupBuySuccess($templateBase,$data){
         //返现通知
         $template = array(
-            'touser'=>$templateBase['openid'],
+            'touser'=>$templateBase['touser'],
             'template_id'=>$templateBase['template_id'],//参加团购通知模板Id
             "url"=>$templateBase['url'],
             'data'=>array(

@@ -30,26 +30,8 @@ class CartController extends BaseController {
                 $join = array(
                     'left join goods_base gb on gb.id = g.goods_base_id ',
                 );
-//                $_where =[];
-//                $_field =[];
-//                $_join  =[];
-//                if($this->user['id']){
-//                    $_where = array(
-//                        'ct.user_id' => $this->user['id'],
-//                    );
-//                    $_field = array(
-//                        'ct.create_time'
-//                    );
-//                    $_join = array(
-//                        'left join cart ct on ct.foreign_id = g.id ',
-//                    );
-//                }
-//                $where = array_merge($where,$_where);
-//                $field = array_merge($field,$_field);
-//                $join = array_merge($join,$_join);
                 $goodsList = $modelGoods->selectGoods($where,$field,$join);
                 $this->goodsList = GoodsNumMergeById($cart,$goodsList);
-                print_r( $this->goodsList);exit;
                 //商品列表操作类型
                 $this->goodsListOptionType = 'withDel';
                 $this->display('Goods/goodsListTpl2');

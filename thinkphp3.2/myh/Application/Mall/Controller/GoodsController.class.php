@@ -147,9 +147,10 @@ class GoodsController extends BaseController {
                 $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',
                     'left join group_buy gb on gb.id = gbd.group_buy_id ',
                 ];
-                $this->groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
+                $groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
+                $this->groupBuyDetail = $groupBuyDetail[0];
                 //判断团购是否已过期
-                if($this->groupBuyDetail[0]['overdue_time'] - time() < 0){
+                if($this->groupBuyDetail['overdue_time'] - time() < 0){
                     $conf = array(20);
                     $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
                     $this -> groupBuyEnd = 1;//团购结束标识位

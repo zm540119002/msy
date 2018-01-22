@@ -253,7 +253,7 @@ class CallBackController extends CommonController{
         $groupBuyDetail = $groupBuyDetail[0];
         $ownOpenid = $groupBuyDetail['openid'];//自己的openid
         $groupBuyId = $groupBuyDetail['group_buy_id']; //团购ID
-        $goodsId = $groupBuyDetail['goods_id'];//产品ID
+        $goodsId = $groupBuyDetail['goods_id'];//团购产品ID
         //2.查看团购详情表此次团购有几人
         unset($where);
         $where = array(
@@ -261,7 +261,6 @@ class CallBackController extends CommonController{
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
-       \Think\Log::write( '团购人数：' . $groupBuyNum . "\r\n失败原因：" , 'NOTIC');
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
@@ -279,36 +278,39 @@ class CallBackController extends CommonController{
                 break;
             }
         }
+        //修改团购表的过期时间
+        if($groupBuyNum == 1){
+            $_POST = [];
+            $_POST['overdue_time'] = strtotime('+3 day');
+            unset($where);
+            $where = array(
+                'id' => $groupBuyId,
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
+        }
         //团购成功通知
-        $template = array(
+        $templateBase = array(
             'touser'=>$ownOpenid,
-            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
-            "url"=>$this->host.U('Goods/goodsDetail',array(
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+            'url'=>$this->host.U('Goods/goodsDetail',array(
                     'goodsId'=>$goodsId,
                     'groupBuyId'=> $groupBuyId,
                     'shareType'=>'groupBuy' )),
-            'data'=>array(
-                'first'=>array(
-                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
-                ),
-                'Pingou_ProductName'=>array(
-                    'value'=>$goodsName,'color'=>'#173177',
-                ),
-                'Weixin_ID'=>array(
-                    'value'=>$header,'color'=>'#173177',
-                ),
-                'Remark'=>array(
-                    'value'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团','color'=>'#FF0000',
-                ),
-            ),
         );
-        $jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-        $rst = $jssdk->send_template_message($template);
+        $dataInfo = array(
+            'first'=>'亲，您已成功参加团购！',
+            'product_name'=>$goodsName,
+            'header'=>$header,
+            'remark'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团',
+        );
+        $this -> sendTemplateMessageGroupBuySuccess($templateBase,$dataInfo);
 
-        if($rst['errmsg'] != 'ok'){
-            \Think\Log::write('发送团购通知失败', 'NOTIC');
-        }
-        //修改团购表 已成团
+        //修改团购表 已成团 返现退三个
         if($groupBuyNum == 3){
             $_POST = [];
             $_POST['tag'] = 1;
@@ -322,7 +324,7 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
-            //返现 //返现退三个
+            //返现退三个
             //更新账户
             unset($where);
             $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
@@ -350,35 +352,19 @@ class CallBackController extends CommonController{
             //返现通知三人
             foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn => &$openid){
                 //返现通知
-                $template = array(
+                $templateBase = array(
                     'touser'=>$openid,
-                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
-                    "url"=>$this->host.U('Goods/goodsDetail',array(
-                            'goodsId'=>$goodsId,
-                            'groupBuyId'=> $groupBuyId,
-                            'shareType'=>'groupBuy' )),
-                    'data'=>array(
-                        'first'=>array(
-                            'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
-                        ),
-                        'keyword1'=>array(
-                            'value'=>$order_sn,'color'=>'#173177',
-                        ),
-                        'keyword2'=>array(
-                            'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
-                        ),
-                        'keyword3'=>array(
-                            'value'=>$cashBack.'元','color'=>'#173177',
-                        ),
-                        'Remark'=>array(
-                            'value'=>'祝您购物愉快！','color'=>'#FF0000',
-                        ),
-                    ),
+                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+                    'url'=>$this->host.U('Earnings/index'),
                 );
-                $rst = $jssdk->send_template_message($template);
-                if($rst['errmsg'] != 'ok'){
-                    \Think\Log::write('发送团购通知失败', 'NOTIC');
-                }
+                $dataInfo = array(
+                    'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+                    'keyword1'=>$order_sn,
+                    'keyword2'=>$orderInfo['amount'],
+                    'keyword3'=>$cashBack,
+                    'remark'=>'祝您购物愉快！',
+                );
+                $this ->  sendTemplateMessageCashBack($templateBase,$dataInfo);
             }
         }
         //只返现自己
@@ -406,35 +392,19 @@ class CallBackController extends CommonController{
                 $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
             }
             //返现通知
-            $template = array(
+            $templateBase = array(
                 'touser'=>$ownOpenid,
-                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
-                "url"=>$this->host.U('Goods/goodsDetail',array(
-                        'goodsId'=>$goodsId,
-                        'groupBuyId'=> $groupBuyId,
-                        'shareType'=>'groupBuy' )),
-                'data'=>array(
-                    'first'=>array(
-                        'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
-                    ),
-                    'keyword1'=>array(
-                        'value'=>$orderSn,'color'=>'#173177',
-                    ),
-                    'keyword2'=>array(
-                        'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
-                    ),
-                    'keyword3'=>array(
-                        'value'=>$cashBack.'元','color'=>'#173177',
-                    ),
-                    'Remark'=>array(
-                        'value'=>'祝您购物愉快！','color'=>'#FF0000',
-                    ),
-                ),
+                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+                'url'=>$this->host.U('Earnings/index'),
             );
-            $rst = $jssdk->send_template_message($template);
-            if($rst['errmsg'] != 'ok'){
-                \Think\Log::write('发送团购通知失败', 'NOTIC');
-            }
+            $data = array(
+                'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+                'keyword1'=>$orderInfo['sn'],
+                'keyword2'=>$orderInfo['amount'],
+                'keyword3'=>$cashBack,
+                'remark'=>'祝您购物愉快！',
+            );
+            $this ->  sendTemplateMessageCashBack($templateBase,$data);
         }
 
         //更新代金券，已使用
