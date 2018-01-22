@@ -40,8 +40,8 @@ class OrderController extends AuthUserController {
                 ' left join goods_base gb on gb.id = g.goods_base_id ',
             );
             foreach ($orderList as $k=>&$item) {
-                $item['order_overdue_time'] = $item['order_start_time'] + 60;
-                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_start_time'] + 60);
+                $item['order_overdue_time'] = $item['order_start_time'] + 3*24*60*60;
+                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_overdue_time']);
                 $where = array(
                     'od.order_sn' => $item['sn'],
                 );

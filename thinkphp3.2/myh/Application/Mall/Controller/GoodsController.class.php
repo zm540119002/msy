@@ -160,8 +160,8 @@ class GoodsController extends BaseController {
             $modelComment = D('Comment');
             $this -> aveScore = round($modelComment -> avg('score'),1);//平均分数
             $this -> userCommentNum = $modelComment -> count();//多少用户评价
-            $user = D('WeiXin')->wxLogin();
-            session('openid',$user['openid']);
+            $wxUser = D('WeiXin')->wxLogin();
+            session('openid',$wxUser['openid']);
             $this -> display();
         }
     }
