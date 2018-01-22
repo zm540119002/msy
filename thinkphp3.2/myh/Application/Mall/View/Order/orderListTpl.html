@@ -81,9 +81,9 @@
                         </div>
                     </if>
                     <elseif condition="$orderInfo.logistics_status eq 3"/>
-                    <a class="order_comment" href="{:U('Comment/CommentEdit',array('orderId'=>$orderInfo['id']))}">去评分评论</a>
+                    <a class="o_btn order_comment" href="javascript:void(0);">去评分评论</a>
                     <elseif condition="$orderInfo.logistics_status eq 4"/>
-                        <a class="order_completed" href="">已完成，再次采购</a>
+                        <a class="o_btn order_completed" href="">已完成，再次采购</a>
                     <else />
                     <a class="order_cancle" href="">已取消</a>
                 </if>

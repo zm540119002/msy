@@ -12,7 +12,7 @@ $(window).load(function() {
             //倒计时
             var countdownShow = _this.find('.count_down_box');
             if((order_overdue_time - current_time) > 0 && countdownShow.data('key')==1){
-                var countdownShowId=(countdownShow.attr('id')).toString();
+                var countdownShowId =(countdownShow.attr('id')).toString();
                 addTimer(countdownShowId,order_overdue_time1,current_time1);
             }
         }
@@ -25,7 +25,7 @@ $(window).load(function() {
         location.href = MODULE + '/Order/settlement/orderId/' + orderid;
     });
     //点击已取消按钮
-    $('body').on('click','.order_cancle',function(){
+    $('body').on('click','.order_cancle,.order_completed',function(){
         //计算商品列表总价
         var goods_id =  $(this).parents('.order_info_list').data('goods_id');
         if(goods_id){
@@ -50,6 +50,11 @@ $(window).load(function() {
         var goods_id =  $(this).parents('.order_info_list').data('goods_id');
         var url = MODULE + '/Goods/goodsDetail/goodsId/' + goods_id;
         dialog.confirm('此次团购已结束，是否重新开团',url);
+    });
+    //点击去评论按钮
+    $('body').on('click','.order_comment',function(){
+        var orderid =  $(this).parents('.order_info_list').data('orderid');
+        location.href = MODULE + '/Order/settlement/orderId/' + orderid;
     });
 
 
