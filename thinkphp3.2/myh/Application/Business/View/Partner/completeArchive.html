@@ -67,9 +67,6 @@
             $('body').on('click','.determine',function(){
                 var agentName=$('.agent_name').val();
                 var agentPhone=$('.agent_phone').val();
-                var agentCompany=$('.agent_company').val();
-                var detailAddress=$('.detail_address').val();
-                var fixedTelephone=$('.fixed_telephone').val();
                 var partnerId = '{$partnerInfo.id}';
                 var provinceCity = $('input.province_city').getArea(areaArr);
                 var content='';
@@ -79,12 +76,6 @@
                     content='请输入正确的手机号码';
                 }else if(!provinceCity){
                     content='请选择所在区域';
-                }else if(!detailAddress){
-                    content='请输入详细地址';
-                }else if(!agentCompany){
-                    content='请输入所在单位';
-                }else if(!isPhone(fixedTelephone)){
-                    content='请输入正确固定电话';
                 }else if(!partnerId){
                     content='未取得合伙人资格！';
                 }
