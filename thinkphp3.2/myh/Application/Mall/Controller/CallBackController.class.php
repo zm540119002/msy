@@ -262,7 +262,6 @@ class CallBackController extends CommonController{
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
-       \Think\Log::write( '团购人数：' . $groupBuyNum . "\r\n失败原因：" , 'NOTIC');
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
@@ -311,7 +310,7 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
-            //返现 //返现退三个
+            //返现退三个
             //更新账户
             unset($where);
             $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
