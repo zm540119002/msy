@@ -111,12 +111,70 @@ class CommonController extends Controller{
 
     //发送模版消息
     public function sendTemplateMessage($template){
-        if(isWxBrowser()) {//判断是否为微信浏览器
-            return  $this->_jssdk ->send_template_message($template);
+//        if(isWxBrowser()) {//判断是否为微信浏览器
+//            return  $this->_jssdk ->send_template_message($template);
+//        }
+        return  $this->_jssdk ->send_template_message($template);
+    }
+    //发送返现模板信息
+    public function sendTemplateMessageCashBack($templateBase,$data){
+        //返现通知
+        $template = array(
+            'touser'=>$templateBase['touser'],
+            'template_id'=>$templateBase['template_id'],//参加团购通知模板Id
+            "url"=>$templateBase['url'],
+            'data'=>array(
+                'first'=>array(
+                    'value'=>$data['first'],'color'=>'#173177',
+                ),
+                'keyword1'=>array(
+                    'value'=>$data['keyword1'],'color'=>'#173177',
+                ),
+                'keyword2'=>array(
+                    'value'=>$data['keyword2'].'元','color'=>'#173177',
+                ),
+                'keyword3'=>array(
+                    'value'=>$data['keyword3'].'元','color'=>'#173177',
+                ),
+                'remark'=>array(
+                    'value'=>$data['remark'],'color'=>'#FF0000',
+                ),
+            ),
+        );
+        $rst = $this->sendTemplateMessage($template);
+        if($rst['errmsg'] != 'ok'){
+            \Think\Log::write('发送返现通知失败', 'NOTIC');
         }
+        
     }
 
-    
+    //发送团购成功模板信息
+    public function sendTemplateMessageGroupBuySuccess($templateBase,$data){
+        //返现通知
+        $template = array(
+            'touser'=>$templateBase['touser'],
+            'template_id'=>$templateBase['template_id'],//参加团购通知模板Id
+            "url"=>$templateBase['url'],
+            'data'=>array(
+                'first'=>array(
+                    'value'=>'亲，您已成功参加团购！','color'=>'#173177',
+                ),
+                'Pingou_ProductName'=>array(
+                    'value'=>$data['product_name'],'color'=>'#173177',
+                ),
+                'Weixin_ID'=>array(
+                    'value'=>$data['header'],'color'=>'#173177',
+                ),
+                'Remark'=>array(
+                    'value'=>$data['remark'],'color'=>'#FF0000',
+                ),
+            ),
+        );
+        $rst = $this->sendTemplateMessage($template);
+        if($rst['errmsg'] != 'ok'){
+            \Think\Log::write('发送返现通知失败', 'NOTIC');
+        }
+    }
 }
 
 
