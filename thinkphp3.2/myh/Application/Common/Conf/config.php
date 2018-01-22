@@ -1,7 +1,7 @@
 <?php
 return array(
     //'配置项'=>'配置值'
-    'WEB_NAME' => '美悦会',
+    'WEB_NAME' => '美悦会.商城',
     'URL_CASE_INSENSITIVE' =>false,//URL区分大小写(true)
     'DEFAULT_EXPIRE' => 24 * 60 * 60, //默认有效时间
     'DEFAULT_PAGE_SIZE' => 5,//默认页数

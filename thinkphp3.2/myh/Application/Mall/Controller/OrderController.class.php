@@ -40,8 +40,8 @@ class OrderController extends AuthUserController {
                 ' left join goods_base gb on gb.id = g.goods_base_id ',
             );
             foreach ($orderList as $k=>&$item) {
-                $item['order_overdue_time'] = $item['order_start_time'] + 60;
-                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_start_time'] + 60);
+                $item['order_overdue_time'] = $item['order_start_time'] + 3*24*60*60;
+                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_overdue_time']);
                 $where = array(
                     'od.order_sn' => $item['sn'],
                 );
@@ -495,7 +495,6 @@ class OrderController extends AuthUserController {
         $_POST = [];
         $_POST['pay_status'] = 2;
         $_POST['pay_time'] = date('YmdHis');
-        $_POST['overdue_time'] = strtotime('+3 day');
         $where = array(
             'user_id' => $orderInfo['user_id'],
             'order_id' => $orderInfo['id'],
@@ -517,6 +516,24 @@ class OrderController extends AuthUserController {
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
+        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
+        ];
+        $join=[ ' left join goods g on g.id = gbd.goods_id',
+            ' left join goods_base gb on g.goods_base_id = gb.id ',
+            ' left join wx_user wxu on wxu.openid = gbd.openid',
+            ' left join orders o on o.id = gbd.order_id',
+        ];
+        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+
+        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
+        $goodsName = $templateMessageList[0]['name'];//产品名称
+        foreach ($templateMessageList as &$item){
+            if($item['type'] == 1){
+                $header = $item['nickname'];//团长呢称
+                break;
+            }
+        }
         //修改团购表的过期时间
         if($groupBuyNum == 1){
             $_POST = [];
@@ -530,23 +547,6 @@ class OrderController extends AuthUserController {
                 $modelOrder->rollback();
                 //返回状态给微信服务器
                 $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
-            }
-        }
-        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
-            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
-        ];
-        $join=[ ' left join goods g on g.id = gbd.goods_id',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
-            ' left join wx_user wxu on wxu.openid = gbd.openid',
-            ' left join orders o on o.id = gbd.order_id',
-        ];
-        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
-        $goodsName = $templateMessageList[0]['name'];//产品名称
-        foreach ($templateMessageList as &$item){
-            if($item['type'] == 1){
-                $header = $item['nickname'];//团长呢称
-                break;
             }
         }
         //团购成功通知
@@ -680,6 +680,43 @@ class OrderController extends AuthUserController {
         return $successBackUrl;
     }
 
+    /**
+     * 确认收货
+     */
+    public function confirmReceive(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $modelLogistics = D('Logistics');
+        $modelOrder = D('Order');
+        $logisticsId = I('post.logisticsId',0);
+        if( $logisticsId){
+            $modelOrder->startTrans();//开启事务
+            $where['id'] = $logisticsId;
+            $_POST['status'] = 3;
+            $res = $modelLogistics->saveLogistics($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $_POST = [];
+            $_POST['logistics_status'] = 3;
+            $where = array(
+                'user_id' =>  $this->user['id'],
+                'logistics_id' => $logisticsId,
+            );
+            $res = $modelOrder->saveOrder($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $modelOrder->commit();//提交事务
+            $this->ajaxReturn(successMsg('已确认收货'));
+        }
+        $this->ajaxReturn($res);
+    }
 
 
 

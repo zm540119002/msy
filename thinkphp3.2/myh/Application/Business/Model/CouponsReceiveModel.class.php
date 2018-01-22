@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class CouponsReceiveModel extends Model {
     protected $tableName = 'coupons_receive';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
         array('sn','require','订单编号必须！'),

@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class CommentModel extends Model {
     protected $tableName = 'comment';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
     );

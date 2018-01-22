@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class LogisticsModel extends Model {
     protected $tableName = 'logistics';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
         array('sn','require','物流编号必须！'),

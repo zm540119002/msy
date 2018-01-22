@@ -39,7 +39,7 @@ class LogisticsModel extends Model {
             return errorMsg($this->getError());
         }
         $_where = array(
-            'status' => 0,
+
         );
         if(isset($_POST['LogisticsId']) && intval($_POST['LogisticsId'])){
             $id = I('post.LogisticsId',0,'int');
@@ -62,7 +62,7 @@ class LogisticsModel extends Model {
     public function delLogistics($where=array()){
         unset($_POST['id']);
         $_where = array(
-            'status' => 0,
+
         );
         $id = I('post.LogisticsId',0,'int');
         if($id){
@@ -83,7 +83,7 @@ class LogisticsModel extends Model {
     //查询
     public function selectLogistics($where=[],$field=[],$join=[]){
         $_where = array(
-            'l.status' => 0,
+
         );
         $_field = array(
             'l.id','l.sn','l.status','l.undertake_company','l.delivery_time','l.fee',
@@ -101,48 +101,7 @@ class LogisticsModel extends Model {
         return $list?:[];
     }
     
-    //检查订单状态
-    public function checkLogisticsStatus($LogisticsInfo){
-        if(empty($LogisticsInfo)){
-            $res = array(
-                'status' => 0,
-                'message' => '订单信息有误'
-            );
-        }elseif($LogisticsInfo['logistics_status'] != '1'){
-            $res = array(
-                'status' => 0,
-                'message' => '订单已支付或已取消',
-            );
-        }else{
-            $res = array(
-                'status' => 1,
-                'message' => '待支付',
-            );
-        }
-        return $res;
-    }
+  
 
-    //按订单状态分组统计
-    public function LogisticsStatusCount($where){
-        $_where = array(
-            'l.status' => 0,
-        );
-        $_field = array(
-            'l.logistics_status','count(1) num',
-        );
-        $list = $this
-            ->alias('o')
-            ->where(array_merge($_where,$where))
-            ->field($_field)
-            ->group('l.logistics_status')
-            ->Logistics('l.logistics_status asc')
-            ->select();
-        $LogisticsStatusCount = array();
-        foreach ($list as $value){
-            if($value['logistics_status'] != 0){
-                $LogisticsStatusCount[$value['logistics_status']] = $value['num'];
-            }
-        }
-        return $LogisticsStatusCount?:[];
-    }
+
 }

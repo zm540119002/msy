@@ -3,34 +3,16 @@ $(window).load(function() {
     var current_time1 = $('.current_time1').val();//日期类型
     $.each($(".order_info_list"),function(k,val){
         var _this =$(this);
-        var group_buy_overdue_time = _this.data('group_buy_overdue_time');
         var order_overdue_time =  _this.data('order_overdue_time');//时间戳类型
         var order_overdue_time1 =  _this.data('order_overdue_time1');//日期类型
-        var goods_id =  _this.data('goods_id');
-        var group_buy_id =  _this.data('group_buy_id');
         var logistics_status = _this.data('logistics_status');
         var orderid = _this.data('orderid');
-        if(group_buy_overdue_time){
-            //团购订单是否过期
-            if((group_buy_overdue_time - current_time)>0){//
-                _this.find('.invite_group_buy').on('click',function(){
-                    location.href = MODULE + '/Goods/goodsDetail/goodsId/'
-                        + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
-                });
-            }else{//已过期
-                _this.find('.invite_group_buy').text('本次团购已结束').addClass('group_buy_end');
-                _this.find('.invite_group_buy').on('click',function(){
-                    var url = MODULE + '/Goods/goodsDetail/goodsId/' + goods_id;
-                    dialog.confirm('此次团购已结束，是否重新开团',url);
-                });
-            }
-        }
         //待支付订单是否过期
         if(logistics_status == 1){
             //倒计时
             var countdownShow = _this.find('.count_down_box');
             if((order_overdue_time - current_time) > 0 && countdownShow.data('key')==1){
-                var countdownShowId=(countdownShow.attr('id')).toString();
+                var countdownShowId =(countdownShow.attr('id')).toString();
                 addTimer(countdownShowId,order_overdue_time1,current_time1);
             }
         }
@@ -43,7 +25,7 @@ $(window).load(function() {
         location.href = MODULE + '/Order/settlement/orderId/' + orderid;
     });
     //点击已取消按钮
-    $('body').on('click','.order_cancle',function(){
+    $('body').on('click','.order_cancle,.order_completed',function(){
         //计算商品列表总价
         var goods_id =  $(this).parents('.order_info_list').data('goods_id');
         if(goods_id){
@@ -54,7 +36,7 @@ $(window).load(function() {
         }
 
     });
-    //点击已取消按钮
+    //点击去分享按钮
     $('body').on('click','.invite_group_buy',function(){
         //计算商品列表总价
         var goods_id =  $(this).parents('.order_info_list').data('goods_id');
@@ -63,5 +45,48 @@ $(window).load(function() {
             + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
 
     });
+    //点击本次团购已结束按钮
+    $('body').on('click','.group_buy_end',function(){
+        var goods_id =  $(this).parents('.order_info_list').data('goods_id');
+        var url = MODULE + '/Goods/goodsDetail/goodsId/' + goods_id;
+        dialog.confirm('此次团购已结束，是否重新开团',url);
+    });
+    //点击去评论按钮
+    $('body').on('click','.order_comment',function(){
+        var orderid =  $(this).parents('.order_info_list').data('orderid');
+        location.href = MODULE + '/Comment/CommentEdit/orderId/' + orderid;
+    });
 
-})
+    //确定收货
+    $('body').on('click','.confirm_receive',function(){
+        var logisticsId =  $(this).parents('.order_info_list').data('logistics_id');
+        var url = MODULE + '/Order/confirmReceive';
+        layer.open({
+            content:'是否确认收货？',
+            btn:['确定','取消'],
+            yes:function(index){
+                $.ajax({
+                    url: url,
+                    data: {logisticsId:logisticsId},
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status==1) {
+                            var url = MODULE + '/Order/orderManage/s/3';
+                            dialog.success(data.info,url);
+                        }
+                    }
+                });
+                layer.close(index);
+            }
+        });
+    });
+
+});
