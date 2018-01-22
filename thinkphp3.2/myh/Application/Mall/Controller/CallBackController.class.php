@@ -238,7 +238,6 @@ class CallBackController extends CommonController{
         $_POST = [];
         $_POST['pay_status'] = 2;
         $_POST['pay_time'] = $data['time_end'];
-        $_POST['overdue_time'] = strtotime('+3 day');
         unset($where);
         $where = array(
             'user_id' =>$userId,
