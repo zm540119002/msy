@@ -108,7 +108,6 @@ class GroupBuyModel extends Model {
             $_POST['goods_id'] = $goods['foreign_id'];
             $_POST['user_id'] = $uid;
             $_POST['create_time'] = time();
-            $_POST['overdue_time'] = strtotime('+3 day');
             $_POST['sn'] = generateSN();
             $modelGroupBuy->startTrans();//开启事务
             $res = $modelGroupBuy->addGroupBuy();

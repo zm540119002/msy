@@ -238,6 +238,7 @@ class CallBackController extends CommonController{
         $_POST = [];
         $_POST['pay_status'] = 2;
         $_POST['pay_time'] = $data['time_end'];
+        $_POST['overdue_time'] = strtotime('+3 day');
         unset($where);
         $where = array(
             'user_id' =>$userId,
@@ -253,7 +254,7 @@ class CallBackController extends CommonController{
         $groupBuyDetail = $groupBuyDetail[0];
         $ownOpenid = $groupBuyDetail['openid'];//自己的openid
         $groupBuyId = $groupBuyDetail['group_buy_id']; //团购ID
-        $goodsId = $groupBuyDetail['goods_id'];//产品ID
+        $goodsId = $groupBuyDetail['goods_id'];//团购产品ID
         //2.查看团购详情表此次团购有几人
         unset($where);
         $where = array(
@@ -284,7 +285,7 @@ class CallBackController extends CommonController{
             'touser'=>$ownOpenid,
             'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
             'url'=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>$groupBuyDetail['goods_id'],
+                    'goodsId'=>$goodsId,
                     'groupBuyId'=> $groupBuyId,
                     'shareType'=>'groupBuy' )),
         );
