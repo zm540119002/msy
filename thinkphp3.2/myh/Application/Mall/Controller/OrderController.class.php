@@ -495,7 +495,6 @@ class OrderController extends AuthUserController {
         $_POST = [];
         $_POST['pay_status'] = 2;
         $_POST['pay_time'] = date('YmdHis');
-        $_POST['overdue_time'] = strtotime('+3 day');
         $where = array(
             'user_id' => $orderInfo['user_id'],
             'order_id' => $orderInfo['id'],
@@ -517,8 +516,20 @@ class OrderController extends AuthUserController {
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
+        //修改团购表的过期时间
         if($groupBuyNum == 1){
-            
+            $_POST = [];
+            $_POST['overdue_time'] = strtotime('+3 day');
+            unset($where);
+            $where = array(
+                'id' => $groupBuyId,
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
         }
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'

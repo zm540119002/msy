@@ -1469,8 +1469,11 @@ background-size:contain;
 }
 .o_btn{
     background: #ff7bac;
+    color:#fff;
+    border-radius:0.05rem;
     height:0.5rem;
     line-height: 0.5rem;
+    text-align:center;
 }
 .order_cancle{
     background: #757575;
