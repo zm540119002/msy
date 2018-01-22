@@ -4,17 +4,17 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class OrderDetailModel extends Model {
-    protected $tableName = 'order_detail';
+class CouponsReceiveModel extends Model {
+    protected $tableName = 'coupons_receive';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
         array('sn','require','订单编号必须！'),
     );
 
     //新增
-    public function addOrderDetail(){
+    public function addCouponsReceive(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -39,15 +39,15 @@ class OrderDetailModel extends Model {
     }
 
     //修改
-    public function saveOrderDetail(){
+    public function saveCouponsReceive($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.orderDetailId',0,'int');
+        $id = I('post.couponsId',0,'int');
         if(!$id){
-            return errorMsg('确少参数orderDetailId');
+            return errorMsg('确少参数couponsId');
         }
 
         $res = $this->create();
@@ -55,11 +55,12 @@ class OrderDetailModel extends Model {
             return errorMsg($this->getError());
         }
 
-        $where = array(
+        $_where = array(
             'id' => $id,
         );
+        $_where = array_merge($_where,$where);
        
-        $res = $this->where($where)->save();
+        $res = $this->where($_where)->save();
         
         if($res === false){
             return errorMsg($this->getError());
@@ -73,15 +74,15 @@ class OrderDetailModel extends Model {
     }
 
     //标记删除
-    public function delOrderDetail($where=array()){
+    public function delCouponsReceive($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.orderDetailId',0,'int');
+        $id = I('post.couponsId',0,'int');
         if(!$id){
-            return errorMsg('确少参数orderDetailId');
+            return errorMsg('确少参数couponsId');
         }
 
         $_where = array(
@@ -102,18 +103,17 @@ class OrderDetailModel extends Model {
     }
 
     //查询
-    public function selectOrderDetail($where=[],$field=[],$join=[]){
+    public function selectCouponsReceive($where=[],$field=[],$join=[]){
         $_where = array(
-            'od.status' => 0,
+            'cr.status' => 0,
         );
         $_field = array(
-            'od.id','od.order_sn','od.type','od.status','od.price','od.num','od.foreign_id','od.user_id',
+            'cr.id','cr.user_id','cr.coupons_id','cr.type','cr.type','cr.amount','cr.failure_time','cr.acquire_time'
         );
         $_join = array(
-            
         );
         $list = $this
-            ->alias('od')
+            ->alias('cr')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

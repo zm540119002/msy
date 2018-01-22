@@ -4,94 +4,92 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class ProvinceModel extends Model {
-    protected $tableName = 'province';
+class WalletDetailModel extends Model {
+    protected $tableName = 'wallet_detail';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
     );
 
     //新增
-    public function addProvince(){
+    public function addWalletDetail(){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('新增成功',$returnArray);
     }
 
     //修改
-    public function saveProvince($where=array()){
+    public function saveWalletDetail($where=array()){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-        $_where = array(
-            'status' => 0,
-        );
-        if(isset($_POST['provinceId']) && intval($_POST['provinceId'])){
-            $id = I('post.provinceId',0,'int');
-        }
+        $_where = array();
+        $id = I('post.walletDetailId',0,'int');
         if($id){
-            $_where['id'] = $id;
+            $_where = array(
+                'id' => $id,
+            );
         }
-        $_where = array_merge($_where,$where);
-        $res = $this->where($_where)->save();
+        $res = $this->where(array_merge($_where,$where))->save();
         if($res === false){
             return errorMsg($this->getError());
         }
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('修改成功',$returnArray);
     }
 
     //标记删除
-    public function delProvince($where=array()){
+    public function delWalletDetail($where=array()){
         unset($_POST['id']);
-        $_where = array(
-            'status' => 0,
-        );
-        $id = I('post.ProvinceId',0,'int');
-        if($id){
-            $_where['id'] = $id;
-        }
-        $_where = array_merge($_where,$where);
 
-        $res = $this->where($_where)->setField('status',2);
+        $_where = array();
+        $id = I('post.walletDetailId',0,'int');
+        if($id){
+            $_where = array(
+                'id' => $id,
+            );
+        }
+        $res = $this->where(array_merge($_where,$where))->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
+
         $returnArray = array(
             'id' => $id,
         );
+
         return successMsg('删除成功',$returnArray);
     }
 
     //查询
-    public function selectProvince($where=[],$field=[],$join=[]){
+    public function selectWalletDetail($where=[],$field=[],$join=[]){
         $_where = array(
-            'pv.status' => 0,
+            'wd.status' => 0,
         );
-       
         $_field = array(
-           'pv.id','pv.name','pv.type','pv.status',
+            'wd.id','wd.type','wd.amount','wd.create_time','wd.user_id','wd.sn',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('pv')
+            ->alias('wd')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

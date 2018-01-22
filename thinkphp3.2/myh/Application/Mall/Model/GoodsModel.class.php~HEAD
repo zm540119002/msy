@@ -4,25 +4,33 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class WalletDetailModel extends Model {
-    protected $tableName = 'wallet_detail';
+class GoodsModel extends Model {
+    protected $tableName = 'goods';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array(
+        array('price','require','商品原价必须！'),
     );
 
     //新增
-    public function addWalletDetail(){
+    public function addGoods(){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
         unset($_POST['id']);
+
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
+
         $id = $this->add();
+
         if($id === false){
             return errorMsg($this->getError());
         }
+
         $returnArray = array(
             'id' => $id,
         );
@@ -31,23 +39,33 @@ class WalletDetailModel extends Model {
     }
 
     //修改
-    public function saveWalletDetail($where=array()){
+    public function saveGoods($where=array()){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
         unset($_POST['id']);
+
+        $id = I('post.goodsId',0,'int');
+        if(!$id){
+            return errorMsg('确少参数goodsId');
+        }
+
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-        $_where = array();
-        $id = I('post.walletDetailId',0,'int');
-        if($id){
-            $_where = array(
-                'id' => $id,
-            );
-        }
-        $res = $this->where(array_merge($_where,$where))->save();
+
+        $_where = array(
+            'id' => $id,
+        );
+        $_where = array_merge($_where,$where);
+
+        $res = $this->where($_where)->save();
+
         if($res === false){
             return errorMsg($this->getError());
         }
+
         $returnArray = array(
             'id' => $id,
         );
@@ -56,17 +74,23 @@ class WalletDetailModel extends Model {
     }
 
     //标记删除
-    public function delWalletDetail($where=array()){
+    public function delGoods($where=array()){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
         unset($_POST['id']);
 
-        $_where = array();
-        $id = I('post.walletDetailId',0,'int');
-        if($id){
-            $_where = array(
-                'id' => $id,
-            );
+        $id = I('post.goodsId',0,'int');
+        if(!$id){
+            return errorMsg('确少参数goodsId');
         }
-        $res = $this->where(array_merge($_where,$where))->setField('status',2);
+
+        $_where = array(
+            'id' => $id,
+        );
+        $_where = array_merge($_where,$where);
+
+        $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -79,17 +103,17 @@ class WalletDetailModel extends Model {
     }
 
     //查询
-    public function selectWalletDetail($where=[],$field=[],$join=[]){
+    public function selectGoods($where=[],$field=[],$join=[]){
         $_where = array(
-            'wd.status' => 0,
+            'g.status' => 0,
         );
         $_field = array(
-            'wd.id','wd.type','wd.amount','wd.create_time','wd.user_id','wd.sn',
+            'g.id','g.goods_base_id','g.buy_type','g.sale_price','g.status','g.cash_back',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('wd')
+            ->alias('g')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

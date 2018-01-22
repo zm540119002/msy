@@ -4,23 +4,22 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class PartnerModel extends Model {
-    protected $tableName = 'partner';
+class GroupBuyDetailModel extends Model {
+    protected $tableName = 'group_buy_detail';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
-    protected $_validate = array(
-    );
+    protected $_validate = array();
 
     //新增
-    public function addPartner(){
+    public function addGroupBuyDetail($rules=array()){
         unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
@@ -31,22 +30,21 @@ class PartnerModel extends Model {
     }
 
     //修改
-    public function savePartner($where=array()){
+    public function saveGroupBuyDetail($where=array(),$rules=array()){
         unset($_POST['id']);
-        $res = $this->create();
-        if(!$res){
-            return errorMsg($this->getError());
-        }
+        $this->_validate = array_merge($this->_validate,$rules);
         $_where = array(
             'status' => 0,
         );
-        if(isset($_POST['partnerId']) && intval($_POST['partnerId'])){
-            $id = I('post.partnerId',0,'int');
-        }
+        $id = I('post.groupBuyDetailId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
         $_where = array_merge($_where,$where);
+        $res = $this->create();
+        if(!$res){
+            return errorMsg($this->getError());
+        }
         $res = $this->where($_where)->save();
         if($res === false){
             return errorMsg($this->getError());
@@ -58,12 +56,15 @@ class PartnerModel extends Model {
     }
 
     //标记删除
-    public function delPartner($where=array()){
+    public function delGroupBuyDetail($where=array()){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
         unset($_POST['id']);
         $_where = array(
             'status' => 0,
         );
-        $id = I('post.partnerId',0,'int');
+        $id = I('post.groupBuyDetailId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -80,22 +81,20 @@ class PartnerModel extends Model {
     }
 
     //查询
-    public function selectPartner($where=[],$field=[],$join=[]){
+    public function selectGroupBuyDetail($where=[],$field=[],$join=[]){
         $_where = array(
-            'p.status' => 0,
+            'gbd.status' => 0,
         );
         $_field = array(
-            'p.id','p.name','p.status','p.mobile_phone','p.registrant','p.auth_status','p.province','p.city',
-            'p.user_id','p.create_time','p.agent_places','p.authorized_agent','p.telephone','p.detail_address',
+            'gbd.id','gbd.type','gbd.pay_status','gbd.num','gbd.group_buy_id','gbd.user_id','gbd.pay_time','gbd.openid'
         );
         $_join = array(
         );
         $list = $this
-            ->alias('p')
+            ->alias('gbd')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
-            ->order('p.id desc')
             ->select();
         return $list?:[];
     }

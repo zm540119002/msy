@@ -4,15 +4,15 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class CartModel extends Model {
-    protected $tableName = 'cart';
+class CommonImagesModel extends Model {
+    protected $tableName = 'common_images';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG1';
+    protected $connection = 'DB_CONFIG_MALL';
 
     protected $_validate = array();
 
     //新增
-    public function addCart($rules=array()){
+    public function addCommonImages($rules=array()){
         unset($_POST['id']);
         $this->_validate = array_merge($this->_validate,$rules);
 
@@ -31,14 +31,13 @@ class CartModel extends Model {
     }
 
     //修改
-    public function saveCart($where=array(),$rules=array()){
+    public function saveCommonImages($where=array(),$rules=array()){
         unset($_POST['id']);
         $this->_validate = array_merge($this->_validate,$rules);
 
         $_where = array(
-            'status' => 0,
         );
-        $id = I('post.cartId',0,'int');
+        $id = I('post.commonImagesId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -59,15 +58,14 @@ class CartModel extends Model {
     }
 
     //标记删除
-    public function delCart($where=array()){
+    public function delCommonImages($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
         $_where = array(
-            'status' => 0,
         );
-        $id = I('post.cartId',0,'int');
+        $id = I('post.commonImagesId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -84,42 +82,20 @@ class CartModel extends Model {
     }
 
     //查询
-    public function selectCart($where=[],$field=[],$join=[]){
+    public function selectCommonImages($where=[],$field=[],$join=[]){
         $_where = array(
-            'ct.status' => 0,
         );
         $_field = array(
-            'ct.id','ct.user_id','ct.type','ct.status','ct.foreign_id','ct.num','ct.create_time',
+            'ci.id','ci.common_img',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('ct')
+            ->alias('ci')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
             ->select();
         return $list?:[];
-    }
-
-    //购物车统计
-    public function cartCount($where){
-        $_where = array(
-            'ct.status' => 0,
-        );
-        $_field = array(
-            'ct.type','count(1) num',
-        );
-        $list = $this
-            ->alias('ct')
-            ->where(array_merge($_where,$where))
-            ->field($_field)
-            ->group('ct.type')
-            ->select();
-        $cartCount = array();
-        foreach ($list as $value){
-            $cartCount[$value['type']] = $value['num'];
-        }
-        return $cartCount?:[];
     }
 }
