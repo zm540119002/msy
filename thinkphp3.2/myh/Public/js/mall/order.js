@@ -1,7 +1,7 @@
 $(window).load(function() {
     var current_time = $('.current_time').val();
     var current_time1 = $('.current_time1').val();
-    console.log(current_time1)
+    console.log(current_time1);
     $.each($(".order_info_list"),function(k,val){
         var _this =$(this);
         var group_buy_overdue_time = _this.data('group_buy_overdue_time');
@@ -42,16 +42,18 @@ $(window).load(function() {
     });
     //活动倒计时
     $.each($(".count_down_box"),function(k,val){
-
         var _this =$(this);
-        var thisId=(_this.attr('id')).toString();
         var obj=_this.find('.count_down_box');
         var order_overdue_time =  _this.parents('.order_info_list').data('order_overdue_time');
         var order_overdue_time1 =  _this.parents('.order_info_list').data('order_overdue_time1');
         var group_buy_id =  _this.parents('.order_info_list').data('group_buy_id');
         var logistics_status = _this.parents('.order_info_list').data('logistics_status');
         if(logistics_status == 1) {
-            addTimer(thisId,order_overdue_time1,current_time1);
+            if(order_overdue_time - current_time > 0){
+                var thisId=(_this.attr('id')).toString();
+                addTimer(thisId,order_overdue_time1,current_time1);
+            }
+
         }
     });
 

@@ -157,4 +157,10 @@ return array(
         '1'   => '团购',
     ],
 
+    //订单和购物车相关的有效时间
+    'VALID_TIME'=>[
+        'order_pay_valid_time'=>60*60*24*3,//订单支付有效时间
+        'cart_valid_time'=>60*60*24*7,//购物车有效时间
+    ],
+
 );

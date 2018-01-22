@@ -144,7 +144,7 @@ class CallBackController extends CommonController{
         $_POST = [];
         $_POST['recharge_status'] = 1;
         $_POST['pay_sn'] = $data['transaction_id'];
-        $_POST['payment_code'] = 'weixin';
+        $_POST['payment_code'] = 0;
         $_POST['payment_time'] = $data['time_end'];
         $where = array(
             'user_id' => $walletDetailInfo['user_id'],
@@ -205,6 +205,7 @@ class CallBackController extends CommonController{
         );
         $orderInfo = $modelOrder->selectOrder($where);
         $orderInfo = $orderInfo[0];
+        $userId = $orderInfo['user_id'];
         if ($orderInfo['logistics_status'] > 1) {
             $this->successReturn();
             exit;
@@ -221,10 +222,9 @@ class CallBackController extends CommonController{
         $_POST['payment_code'] = 0;
         $_POST['pay_sn'] = $data['transaction_id'];
         $_POST['payment_time'] = $data['time_end'];
-        $_POST['payment_code'] = 'weixin';
         $_POST['orderId'] = $orderInfo['id'];
         $where = array(
-            'user_id' => $orderInfo['user_id'],
+            'user_id' =>$userId,
             'sn' => $orderSn,
         );
         $returnData = $modelOrder->saveOrder($where);
@@ -240,7 +240,7 @@ class CallBackController extends CommonController{
         $_POST['pay_time'] = $data['time_end'];
         unset($where);
         $where = array(
-            'user_id' => $orderInfo['user_id'],
+            'user_id' =>$userId,
             'order_id' => $orderInfo['id'],
         );
         $returnData = $modelGroupBuyDetail-> saveGroupBuyDetail($where);
@@ -251,10 +251,13 @@ class CallBackController extends CommonController{
         }
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
         $groupBuyDetail = $groupBuyDetail[0];
+        $ownOpenid = $groupBuyDetail['openid'];//自己的openid
+        $groupBuyId = $groupBuyDetail['group_buy_id']; //团购ID
+        $goodsId = $groupBuyDetail['goods_id'];//产品ID
         //2.查看团购详情表此次团购有几人
         unset($where);
         $where = array(
-            'group_buy_id' => $groupBuyDetail['group_buy_id'],
+            'group_buy_id' => $groupBuyId,
             'pay_status' => 2,
         );
         $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
@@ -268,25 +271,21 @@ class CallBackController extends CommonController{
             ' left join orders o on o.id = gbd.order_id',
         ];
         $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        $useIds = array();
-        $templateMessageArray = array();
+        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
+        $goodsName = $templateMessageList[0]['name'];//产品名称
         foreach ($templateMessageList as &$item){
             if($item['type'] == 1){
                 $header = $item['nickname'];//团长呢称
-                $goodsName = $item['name']; //产品名称
-                $cashBack =  $item['cash_back']; //团购完成后返现
+                break;
             }
-            $useIds[]  =   $item['user_id'];
-            $templateMessageArray['openid'] = $item['openid'];
-            $templateMessageArray['order_sn'] = $item['order_sn'];
         }
         //团购成功通知
         $template = array(
-            'touser'=>$groupBuyDetail['openid'],
+            'touser'=>$ownOpenid,
             'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',//参加团购通知模板Id
             "url"=>$this->host.U('Goods/goodsDetail',array(
-                    'goodsId'=>$groupBuyDetail['goods_id'],
-                    'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                    'goodsId'=>$goodsId,
+                    'groupBuyId'=> $groupBuyId,
                     'shareType'=>'groupBuy' )),
             'data'=>array(
                 'first'=>array(
@@ -309,13 +308,13 @@ class CallBackController extends CommonController{
         if($rst['errmsg'] != 'ok'){
             \Think\Log::write('发送团购通知失败', 'NOTIC');
         }
-
-        if($groupBuyNum == 3){//修改团购表
+        //修改团购表 已成团
+        if($groupBuyNum == 3){
             $_POST = [];
             $_POST['tag'] = 1;
             unset($where);
             $where = array(
-                'id' => $groupBuyDetail['group_buy_id'],
+                'id' => $groupBuyId,
             );
             $returnData = $modelGroupBuy-> saveGroupBuy($where);
             if ($returnData['status'] == 0) {
@@ -323,11 +322,10 @@ class CallBackController extends CommonController{
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelGroupBuy->getLastSql());
             }
-
             //返现 //返现退三个
             //更新账户
             unset($where);
-            $where['user_id'] = array('in',$useIds);
+            $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
             $where['status'] = 0;
             $res = $modelWallet->where($where)->setInc('amount',$cashBack);
             if(!$res){
@@ -336,7 +334,7 @@ class CallBackController extends CommonController{
                 $this->errorReturn($orderSn, $modelWallet->getLastSql());
             }
             //增加账户记录
-            foreach ($useIds as &$useId){
+            foreach (array_column($templateMessageList,"user_id") as &$useId){
                 $_POST = [];
                 $_POST['user_id'] = $useId;
                 $_POST['amount'] = $cashBack;
@@ -349,22 +347,22 @@ class CallBackController extends CommonController{
                     $this->errorReturn($orderSn, $modelWalletDetail->getLastSql());
                 }
             }
-
-            foreach ($templateMessageArray as &$template){
+            //返现通知三人
+            foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn => &$openid){
                 //返现通知
                 $template = array(
-                    'touser'=>$template['openid'],
+                    'touser'=>$openid,
                     'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
                     "url"=>$this->host.U('Goods/goodsDetail',array(
-                            'goodsId'=>$groupBuyDetail['goods_id'],
-                            'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                            'goodsId'=>$goodsId,
+                            'groupBuyId'=> $groupBuyId,
                             'shareType'=>'groupBuy' )),
                     'data'=>array(
                         'first'=>array(
                             'value'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户。','color'=>'#173177',
                         ),
                         'keyword1'=>array(
-                            'value'=>$template['order_sn'],'color'=>'#173177',
+                            'value'=>$order_sn,'color'=>'#173177',
                         ),
                         'keyword2'=>array(
                             'value'=> round( $totalFee / 100, 2).'元','color'=>'#173177',
@@ -383,11 +381,11 @@ class CallBackController extends CommonController{
                 }
             }
         }
-
-        if($groupBuyNum > 3){//只返现自己
+        //只返现自己
+        if($groupBuyNum > 3){
             //更新账户
             unset($where);
-            $where['user_id'] = $orderInfo['user_id'];
+            $where['user_id'] =$userId;
             $where['status'] = 0;
             $res = $modelWallet->where($where)->setInc('amount',$cashBack);
             if(!$res){
@@ -397,7 +395,7 @@ class CallBackController extends CommonController{
             }
             //增加账户记录
             $_POST = [];
-            $_POST['user_id'] = $orderInfo['user_id'];
+            $_POST['user_id'] =$userId;
             $_POST['amount'] = $cashBack;
             $_POST['type'] = 3;
             $_POST['create_time'] = time();
@@ -409,11 +407,11 @@ class CallBackController extends CommonController{
             }
             //返现通知
             $template = array(
-                'touser'=>$groupBuyDetail['openid'],
+                'touser'=>$ownOpenid,
                 'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',//参加团购通知模板Id
                 "url"=>$this->host.U('Goods/goodsDetail',array(
-                        'goodsId'=>$groupBuyDetail['goods_id'],
-                        'groupBuyId'=> $groupBuyDetail['group_buy_id'],
+                        'goodsId'=>$goodsId,
+                        'groupBuyId'=> $groupBuyId,
                         'shareType'=>'groupBuy' )),
                 'data'=>array(
                     'first'=>array(
@@ -445,7 +443,7 @@ class CallBackController extends CommonController{
             $_POST['status'] = 1;
             $_POST['couponsId'] = $orderInfo['coupons_id'];
             $where = array(
-                'user_id' => $orderInfo['user_id'],
+                'user_id' =>$userId,
             );
             $res = $modelCoupons->saveCouponsReceive($where);
             if ($res['status'] == 0) {
@@ -458,7 +456,7 @@ class CallBackController extends CommonController{
         if ($orderInfo['wallet_pay'] > 0) {
             //钱包信息
             $where = array(
-                'w.user_id' => $orderInfo['user_id'],
+                'w.user_id' =>$userId,
             );
             $walletInfo = $modelWallet->selectWallet($where);
             $walletInfo = $walletInfo[0];
@@ -467,7 +465,7 @@ class CallBackController extends CommonController{
                 $_POST = [];
                 $_POST['amount'] = $walletInfo['amount'] - $orderInfo['wallet_pay'];
                 $where = array(
-                    'user_id' => $orderInfo['user_id'],
+                    'user_id' =>$userId,
                 );
                 $res = $modelWallet->saveWallet($where);
                 if ($res['status'] == 0) {
@@ -479,7 +477,7 @@ class CallBackController extends CommonController{
 
             //增加账户记录
             $_POST = [];
-            $_POST['user_id'] = $orderInfo['user_id'];
+            $_POST['user_id'] =$userId;
             $_POST['amount'] = $orderInfo['wallet_pay'];
             $_POST['type'] = 2;
             $_POST['create_time'] = time();
@@ -514,6 +512,7 @@ class CallBackController extends CommonController{
         );
         $orderInfo = $modelOrder->selectOrder($where);
         $orderInfo = $orderInfo[0];
+        $userId = $orderInfo['user_id'];
         if ($orderInfo['logistics_status'] > 1) {
             $this->successReturn();
             exit;
@@ -531,9 +530,8 @@ class CallBackController extends CommonController{
         $_POST['pay_sn'] = $data['pay_sn'];
         $_POST['payment_time'] = $data['transaction_id'];
         $_POST['orderId'] = $orderInfo['id'];
-        $_POST['payment_code'] = 'weixin';
         $where = array(
-            'user_id' => $orderInfo['user_id'],
+            'user_id' =>$userId,
             'sn' => $orderSn,
         );
         $returnData = $modelOrder->saveOrder($where);
@@ -548,7 +546,7 @@ class CallBackController extends CommonController{
             $_POST['status'] = 1;
             $_POST['couponsId'] = $orderInfo['coupons_id'];
             $where = array(
-                'user_id' => $orderInfo['user_id'],
+                'user_id' =>$userId,
             );
             $res = $modelCoupons->saveCouponsReceive($where);
             if ($res['status'] == 0) {
@@ -561,7 +559,7 @@ class CallBackController extends CommonController{
         if ($orderInfo['wallet_pay'] > 0) {
             //钱包信息
             $where = array(
-                'w.user_id' => $orderInfo['user_id'],
+                'w.user_id' =>$userId,
             );
             $walletInfo = $modelWallet->selectWallet($where);
             $walletInfo = $walletInfo[0];
@@ -570,7 +568,7 @@ class CallBackController extends CommonController{
                 $_POST = [];
                 $_POST['amount'] = $walletInfo['amount'] - $orderInfo['wallet_pay'];
                 $where = array(
-                    'user_id' => $orderInfo['user_id'],
+                    'user_id' =>$userId,
                 );
                 $res = $modelWallet->saveWallet($where);
             }
@@ -581,7 +579,7 @@ class CallBackController extends CommonController{
             }
             //增加账户记录
             $_POST = [];
-            $_POST['user_id'] = $orderInfo['user_id'];
+            $_POST['user_id'] =$userId;
             $_POST['amount'] = $orderInfo['wallet_pay'];
             $_POST['type'] = 2;
             $_POST['create_time'] = time();
