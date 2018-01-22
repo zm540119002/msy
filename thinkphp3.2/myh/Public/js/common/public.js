@@ -263,7 +263,7 @@ function countDown(time,id){
 }
 
 var addTimer = function(){
-    var list = [],callback,interval,opt,unix;
+    var list = [],callback,interval,opt,unix,iStartUp=0;
     return function(id,timeStamp1,timeStamp2){
         unix=parseInt(new Date(timeStamp2).getTime());
         if(!interval){
@@ -287,21 +287,23 @@ var addTimer = function(){
             callback= changeTimeStamp(list[i].otime,opt);
             if(!callback){
                 list[i].ele.innerHTML='订单已取消';
-                //clearInterval(interval);
-                //interval=0;
-                console.log(interval);
+                $(list[i].ele).attr('data-key',0);
                 $(list[i].ele).parents('.order_info_list')
                 .find('a.order_pay_btn')
                 .removeClass('order_pay_btn')
                 .text('已取消')
                 .addClass('order_cancle');
+                $(list[i].ele).removeAttr('id');
+                //clearInterval(interval);
+                //interval=null;
+            }else{
+                for(var k=0;k<callback.length;k++){
+                    list[i].ele.children[k].innerHTML=callback[k];               
+                }
             }
-            for(var k=0;k<callback.length;k++){
-                list[i].ele.children[k].innerHTML=callback[k];               
+            if (new Date(list[i].otime).getTime()==opt){
+                list.splice(i, 1); 
             }
-            // if (!list[i].time){
-            //     list.splice(i--, 1);
-            // }
         }
         unix=unix+1000;
     }
@@ -332,7 +334,7 @@ var addTimer = function(){
             //return day + ":" +hour + ":" +min + ":" +sec + ":"+ms;
             return [day,hour,min,sec]
         }else{
-　　　　　　　　　　　//若否，就是已经到截止时间了  
+　　　　　　//若否，就是已经到截止时间了  
             return false
         }
     }
