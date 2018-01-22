@@ -136,7 +136,7 @@ class CommonController extends Controller{
                 'keyword3'=>array(
                     'value'=>$data['keyword3'].'元','color'=>'#173177',
                 ),
-                'Remark'=>array(
+                'remark'=>array(
                     'value'=>$data['remark'],'color'=>'#FF0000',
                 ),
             ),

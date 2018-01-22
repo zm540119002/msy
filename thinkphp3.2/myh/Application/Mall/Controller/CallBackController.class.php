@@ -308,7 +308,7 @@ class CallBackController extends CommonController{
         if($rst['errmsg'] != 'ok'){
             \Think\Log::write('发送团购通知失败', 'NOTIC');
         }
-        //修改团购表 已成团
+        //修改团购表 已成团 返现退三个
         if($groupBuyNum == 3){
             $_POST = [];
             $_POST['tag'] = 1;
@@ -370,7 +370,7 @@ class CallBackController extends CommonController{
                         'keyword3'=>array(
                             'value'=>$cashBack.'元','color'=>'#173177',
                         ),
-                        'Remark'=>array(
+                        'remark'=>array(
                             'value'=>'祝您购物愉快！','color'=>'#FF0000',
                         ),
                     ),
@@ -426,7 +426,7 @@ class CallBackController extends CommonController{
                     'keyword3'=>array(
                         'value'=>$cashBack.'元','color'=>'#173177',
                     ),
-                    'Remark'=>array(
+                    'remark'=>array(
                         'value'=>'祝您购物愉快！','color'=>'#FF0000',
                     ),
                 ),
