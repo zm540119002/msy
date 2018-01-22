@@ -57,5 +57,29 @@ $(window).load(function() {
         location.href = MODULE + '/Order/settlement/orderId/' + orderid;
     });
 
+    //确定收货
+    $('body').on('click','.confirm_receive',function(){
+        var logisticsId =  $(this).parents('.order_info_list').data('logistics_id');
+        var url = MODULE + '/Logistics/logisticsEdit';
+        $.ajax({
+            url: url,
+            data: {logisticsId:logisticsId},
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==1) {
+                    dialog.success(data.info);
+                }
+            }
+        });
+    });
+
 
 })
