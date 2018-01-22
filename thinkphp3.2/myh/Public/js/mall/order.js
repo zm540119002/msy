@@ -54,7 +54,7 @@ $(window).load(function() {
         }
 
     });
-    //点击已取消按钮
+    //点击去分享按钮
     $('body').on('click','.invite_group_buy',function(){
         //计算商品列表总价
         var goods_id =  $(this).parents('.order_info_list').data('goods_id');
@@ -63,5 +63,12 @@ $(window).load(function() {
             + goods_id+'/groupBuyId/'+ group_buy_id+'/shareType/groupBuy';
 
     });
+    //点击本次团购已结束按钮
+    $('body').on('click','.group_buy_end',function(){
+        var goods_id =  $(this).parents('.order_info_list').data('goods_id');
+        var url = MODULE + '/Goods/goodsDetail/goodsId/' + goods_id;
+        dialog.confirm('此次团购已结束，是否重新开团',url);
+    });
+
 
 })

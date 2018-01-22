@@ -73,7 +73,11 @@
                     <a class="o_btn edit_address" href="">修改收货人地址</a>
                     <if condition="$orderInfo.type eq 1 ">
                         <div class="group_flex group_flex_item">
-                            <a class="o_btn invite_group_buy"  href="javascript:void(0);">去邀请朋友参团 </a>
+                            <if condition="$orderInfo.group_buy_overdue_time gt $current_time">
+                                <a class="o_btn invite_group_buy"  href="javascript:void(0);">去邀请朋友参团 </a>
+                                <else />
+                                <a class="o_btn group_buy_end"  href="javascript:void(0);">本次团购已结束 </a>
+                            </if>
                         </div>
                     </if>
                     <elseif condition="$orderInfo.logistics_status eq 3"/>
