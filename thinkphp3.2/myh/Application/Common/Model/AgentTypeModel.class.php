@@ -4,8 +4,8 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class AgentModel extends Model {
-    protected $tableName = 'agent';
+class AgentTypeModel extends Model {
+    protected $tableName = 'agent_type';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG1';
 
@@ -13,14 +13,13 @@ class AgentModel extends Model {
     );
 
     //新增
-    public function addAgent(){
+    public function addAgentType(){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
@@ -31,7 +30,7 @@ class AgentModel extends Model {
     }
 
     //修改
-    public function saveAgent($where=array()){
+    public function saveAgentType($where=array()){
         unset($_POST['id']);
         $res = $this->create();
         if(!$res){
@@ -40,8 +39,8 @@ class AgentModel extends Model {
         $_where = array(
             'status' => 0,
         );
-        if(isset($_POST['agentId']) && intval($_POST['agentId'])){
-            $id = I('post.agentId',0,'int');
+        if(isset($_POST['agentTypeId']) && intval($_POST['agentTypeId'])){
+            $id = I('post.agentTypeId',0,'int');
         }
         if($id){
             $_where['id'] = $id;
@@ -58,18 +57,17 @@ class AgentModel extends Model {
     }
 
     //标记删除
-    public function delAgent($where=array()){
+    public function delAgentType($where=array()){
         unset($_POST['id']);
         $_where = array(
             'status' => 0,
         );
-        $id = I('post.agentId',0,'int');
+        $id = I('post.agentTypeId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
         $_where = array_merge($_where,$where);
-
-        $res = $this->where($_where)->setField('status',2);
+        $res = $this->where($_where)->delete();
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -80,22 +78,21 @@ class AgentModel extends Model {
     }
 
     //查询
-    public function selectAgent($where=[],$field=[],$join=[]){
+    public function selectAgentType($where=[],$field=[],$join=[]){
         $_where = array(
-            'a.status' => 0,
+            'at.status' => 0,
         );
         $_field = array(
-            'a.id','a.name','a.status','a.mobile_phone','a.company_name','a.auth_status','a.province','a.city',
-            'a.detail_address','a.user_id','a.partner_id','a.referee_id','a.create_time',
+            'at.id','at.type','at.status','at.agent_id',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('a')
+            ->alias('at')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
-            ->order('a.id desc')
+            ->order('at.id desc')
             ->select();
         return $list?:[];
     }
