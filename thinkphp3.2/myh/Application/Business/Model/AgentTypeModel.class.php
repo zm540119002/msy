@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class AgentTypeModel extends Model {
     protected $tableName = 'agent_type';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
     );

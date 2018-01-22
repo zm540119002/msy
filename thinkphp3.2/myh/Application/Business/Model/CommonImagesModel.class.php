@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class CommonImagesModel extends Model {
     protected $tableName = 'common_images';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array();
 

@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class PluginModel extends Model {
     protected $tableName = 'Plugin';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
         array('sn','require','订单编号必须！'),

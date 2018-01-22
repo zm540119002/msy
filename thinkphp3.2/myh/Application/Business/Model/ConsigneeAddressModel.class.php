@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class ConsigneeAddressModel extends Model {
     protected $tableName = 'consignee_address';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
         array('consignee','require','收货人姓名必须！'),
