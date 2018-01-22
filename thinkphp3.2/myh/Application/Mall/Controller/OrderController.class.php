@@ -636,6 +636,7 @@ class OrderController extends AuthUserController {
                 'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
                 'url'=>$this->host.U('Earnings/index'),
             );
+            
             $data = array(
                 'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
                 'keyword1'=>$orderInfo['sn'],
