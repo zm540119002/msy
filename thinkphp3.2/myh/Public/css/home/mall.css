@@ -1399,14 +1399,14 @@ background-size:contain;
     background-repeat:no-repeat;
     background-size:32px 400px;
 }
-.my_order_nav li i.w_pay{background-position:0 6px;}
+.my_order_nav li i.w_pay{background-position:0 4px;}
 .my_order_nav li i.w_receipt{background-position:0 -70px;}
 .my_order_nav li i.w_commit{background-position:0 -136px;}
 .my_order_nav li i.w_finish{background-position:0 -206px;}
 .my_order_nav li i.w_service{background-position:0 -280px;}
 .my_order_nav li i.home{background-position:0 -347px;}
 .my_order_nav li.active a{color:#ff7bac;}
-.my_order_nav li.active i.w_pay{background-position:0 -29px;}
+.my_order_nav li.active i.w_pay{background-position:0 -31px;}
 .my_order_nav li.active i.w_receipt{background-position:0 -105px;}
 .my_order_nav li.active i.w_commit{background-position:0 -171px;}
 .my_order_nav li.active i.w_finish{background-position:0 -241px;}
