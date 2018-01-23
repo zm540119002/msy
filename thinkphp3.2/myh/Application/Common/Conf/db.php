@@ -16,7 +16,7 @@ return array(
         'DB_PORT'   =>  3306, // 端口
         'DB_PREFIX' => '',  //数据库表前缀
     ),
-    //数据库连接配置-mall
+    //数据库连接配置-myh_mall
     'DB_CONFIG_MALL' => array(
         'DB_TYPE'   => 'mysql', // 数据库类型
         'DB_HOST'   => '127.0.0.1', // 服务器地址
