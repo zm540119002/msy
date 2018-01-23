@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class GoodsBaseModel extends Model {
     protected $tableName = 'goods_base';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_COMMON';
+    protected $connection = 'DB_CONFIG_MYH';
 
     protected $_validate = array(
         array('category_id_1','require','所属必须！'),
