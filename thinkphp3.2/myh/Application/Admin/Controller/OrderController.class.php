@@ -53,7 +53,7 @@ class OrderController extends BaseController {
             'l.status as deliver_status ',
         );
         $join = array(
-            ' left join ucenter.user u on o.user_id = u.id ',
+            ' left join common.user u on o.user_id = u.id ',
             ' left join logistics l on o.logistics_id = l.id ',
         );
         $order = 'o.id desc';
@@ -129,7 +129,7 @@ class OrderController extends BaseController {
             'l.status as deliver_status ',
         );
         $join = array(
-            ' left join ucenter.user u on o.user_id = u.id ',
+            ' left join common.user u on o.user_id = u.id ',
             ' left join logistics l on o.logistics_id = l.id ',
         );
         $xlsData = $model->selectOrder($where,$field,$join);

@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class LevelModel extends Model {
     protected $tableName = 'level';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_UCENTER';
+    protected $connection = 'DB_CONFIG_COMMON';
 
     protected $_validate = array(
     );

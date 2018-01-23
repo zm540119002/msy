@@ -2,19 +2,18 @@
 namespace Common\Model;
 
 use Think\Model;
-use Think\Model\RelationModel;
 
-class GoodsModel extends Model {
-    protected $tableName = 'goods';
+class GoodsCategoryModel extends Model {
+    protected $tableName = 'goods_category';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_BUSINESS';
+    protected $connection = 'DB_CONFIG_COMMON';
 
     protected $_validate = array(
-        array('price','require','商品原价必须！'),
+        array('name','require','名称必须！'),
     );
 
     //新增
-    public function addGoods(){
+    public function addGoodsCategory(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -26,7 +25,6 @@ class GoodsModel extends Model {
         }
 
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
@@ -39,15 +37,15 @@ class GoodsModel extends Model {
     }
 
     //修改
-    public function saveGoods($where=array()){
+    public function saveGoodsCategory($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsId',0,'int');
+        $id = I('post.goodsCategoryId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsId');
+            return errorMsg('确少参数goodsCategoryId');
         }
 
         $res = $this->create();
@@ -61,7 +59,6 @@ class GoodsModel extends Model {
         $_where = array_merge($_where,$where);
 
         $res = $this->where($_where)->save();
-
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -74,15 +71,15 @@ class GoodsModel extends Model {
     }
 
     //标记删除
-    public function delGoods($where=array()){
+    public function delGoodsCategory($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsId',0,'int');
+        $id = I('post.goodsCategoryId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsId');
+            return errorMsg('确少参数goodsCategoryId');
         }
 
         $_where = array(
@@ -103,20 +100,21 @@ class GoodsModel extends Model {
     }
 
     //查询
-    public function selectGoods($where=[],$field=[],$join=[]){
+    public function selectGoodsCategory($where=[],$field=[],$join=[]){
         $_where = array(
-            'g.status' => 0,
+            'gc.status' => 0,
         );
         $_field = array(
-            'g.id','g.goods_base_id','g.buy_type','g.sale_price','g.status','g.cash_back',
+            'gc.id','gc.name','gc.status','gc.level','gc.parent_id_1','gc.parent_id_2','gc.sort','gc.explain','gc.img'
         );
         $_join = array(
         );
         $list = $this
-            ->alias('g')
+            ->alias('gc')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
+            ->order('gc.sort asc')
             ->select();
         return $list?:[];
     }

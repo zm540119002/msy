@@ -40,7 +40,7 @@ function checkIsAgentByMobilePhone($mobilePhone){
         ),
     );
     $join = array(
-        ' left join ucenter.user u on u.id = a.user_id ',
+        ' left join common.user u on u.id = a.user_id ',
     );
     $count = $modelAgent->alias('a')->join($join)->where($where)->count('1');
     return $count?true:false;
