@@ -123,7 +123,6 @@ class CallBackController extends CommonController{
      * @param $parameter
      */
     private function rechargeHandle($data){
-
         $modelWalletDetail = D('WalletDetail');
         $where = array(
             'wd.sn' => $data['out_trade_no'],
