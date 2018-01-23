@@ -129,7 +129,7 @@ $(function () {
                     if(data.info=='isAjax'){
                         loginDialog(flushPage);
                     }else{
-                        $('.mask,.express-code-box').fadeIn();
+                        $('.mask,.express-code-box').show();
                         $('.twitter_code_img img').attr('src','/Uploads/'+data.url);
                     }
                 }
@@ -141,6 +141,7 @@ $(function () {
     //关闭删除二维码
     $("#areaMask2,.closeBtn").click(function() {
         var imgUrl = $('.twitter_code_img img').attr('src');
+        $("#areaMask2").hide();
         $.ajax({
             url: MODULE + '/Referrer/delMyQRCodesWithGoods',
             data: {imgUrl:imgUrl},

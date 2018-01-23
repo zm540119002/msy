@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class CityModel extends Model {
     protected $tableName = 'city';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
 
     protected $_validate = array(
     );
