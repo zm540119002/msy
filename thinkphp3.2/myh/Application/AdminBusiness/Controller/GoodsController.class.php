@@ -66,13 +66,13 @@ class GoodsController extends BaseController {
     }
 
     //设置购买类型
+    //设置购买类型
     public function setPurchaseType(){
         if(IS_POST){
             //增加
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
                 foreach ($addData as $item) {
-                    $where['id']=$item['goods_id'];
                     $return =  D('goods')->add($item);
                     if(!$return){
                         $this->ajaxReturn(errorMsg('增加失败'));
@@ -107,18 +107,18 @@ class GoodsController extends BaseController {
             //所有商品分类
             if(isset($_GET['goodsBaseId']) && intval($_GET['goodsBaseId'])){
                 $where['id'] = intval($_GET['goodsBaseId']);
-                $goodsBaseInfo = D('GoodsBase')->where($where)->field('id,name,price')->find();
-                $this->goodsBaseInfo =$goodsBaseInfo;
+                $goodsBaseInfo = D('GoodsBase')-> where($where) -> field('id,name,price') -> find();
+                $this->goodsBaseInfo = $goodsBaseInfo;
                 $where1['goods_base_id'] = intval($_GET['goodsBaseId']);
-                $goodsInfo = D('Goods')->where($where1)->select();
+                $goodsList = D('Goods') -> where($where1)->select();
                 $buyTypeArray=[];
-                foreach ($goodsInfo as $item) {
-                    $buyTypeArray[]= $item['buy_type'];
+                foreach ($goodsList as $item) {
+                    $buyTypeArray[] = $item['buy_type'];
                 }
-                $buyTypeArrayAll=array(1,2,3,4,5);
-                $noBuyTypeArray=array_diff($buyTypeArrayAll,$buyTypeArray);
-                $this->noBuyTypeArray=$noBuyTypeArray;
-                $this->goodsInfo =$goodsInfo;
+                $buyTypeArrayAll= array_column(C('BUY_TYPE'),"buy_type");
+                $noBuyTypeArray= array_diff($buyTypeArrayAll,$buyTypeArray);
+                $this -> noBuyTypeArray = $noBuyTypeArray;
+                $this -> goodsList = $goodsList;
             }
             $this->display();
         }
