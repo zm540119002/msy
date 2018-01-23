@@ -20,7 +20,7 @@ class GoodsController extends BaseController {
             }
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price','g.commission',
+            'g.id','g.buy_type','g.sale_price','g.referrer_commission','g.agency_commission','g.partner_commission','g.cash_back',
             'gb.no','gb.name','gb.single_specification','gb.package_num','gb.package_unit',
             'gb.purchase_unit','gb.price','gb.main_img',
         );
@@ -46,8 +46,8 @@ class GoodsController extends BaseController {
             $where['g.buy_type'] = I('get.buyType',0,'int');
         }
         $field = array(
-            'g.id','g.buy_type','g.sale_price','g.commission','gb.name','gb.price','g.cash_back',
-            'gb.main_img','gb.thumb_img','gb.single_specification','gb.headlines',
+            'g.id','g.buy_type','g.sale_price','g.referrer_commission','g.agency_commission','g.partner_commission','g.cash_back',
+            'gb.name','gb.price','gb.main_img','gb.thumb_img','gb.single_specification','gb.headlines',
         );
         $join = array(
             ' left join goods_base gb on g.goods_base_id = gb.id ',
@@ -57,6 +57,7 @@ class GoodsController extends BaseController {
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
         $this->currentPage = (isset($_GET['p']) && intval($_GET['p'])) ? I('get.p',0,'int') : 1;
         $goodsList = page_query($modelGoods,$where,$field,$order,$join,$group,$pageSize,$alias='g');
+        print_r($goodsList);exit;
         $this->goodsList = $goodsList['data'];
         $templateType = I('get.templateType','','string');
         if($templateType=='photo'){
@@ -78,10 +79,9 @@ class GoodsController extends BaseController {
                 $where['g.id'] = I('get.goodsId',0,'int');
             }
             $field = array(
-                'g.id','g.buy_type','g.sale_price','g.commission','g.cash_back',
+                'g.id','g.buy_type','g.sale_price','g.referrer_commission','g.agency_commission','g.partner_commission','g.cash_back',
                 'gb.no','gb.name','gb.price','gb.main_img','gb.single_specification','gb.param','gb.intro',
-                'gb.usage','gb.notices','gb.detail_img','gb.share_intro','gb.package_unit','gb.headlines',
-                'gb.group_share',
+                'gb.usage','gb.notices','gb.detail_img','gb.share_intro','gb.package_unit','gb.headlines','gb.group_share',
             );
             $join = array(
                 ' left join goods_base gb on g.goods_base_id = gb.id ',
