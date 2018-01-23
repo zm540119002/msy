@@ -25,11 +25,13 @@ function getGoodsList(config) {
         },
         success: function(data){
             $('.loading').hide();
-            if(currentPage == 1){ 
-                $('ul.goodsListContent').append(data);
+            if(currentPage == 1){
+                $('ul.goods_list').append(data);
             }else{
-                $('ul.goodsListContent li:last').after(data);
+                $('ul.goods_list li:last').after(data);
             }
+            //计算商品列表总价
+            calculateTotalPrice();
             if($(data).length<postData.pageSize){
                 requestEnd = true;
             }
