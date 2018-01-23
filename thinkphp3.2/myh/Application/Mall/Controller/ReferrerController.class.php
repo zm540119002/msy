@@ -2,10 +2,6 @@
 namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 class ReferrerController extends AuthUserController{
-    //推客分享首页
-    public function index(){
-        $this->display();
-    }
     //我的带产品推客二维码
     public function myQRCodesWithGoods(){
         if(!IS_POST){
