@@ -95,7 +95,7 @@ class UserController extends CommonController {
         }
         //cookie购物车入库
         if($user['id']){
-            $res = AuthUser::saveCookieCartToMysql($user['id'],'Mall');
+            $res = AuthUser::saveCookieCartToMysql($user['id']);
             if(!$res){
                 $this->ajaxReturn(errorMsg('购物车入库失败'));
             }
