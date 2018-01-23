@@ -82,7 +82,6 @@ return array(
             'buy_type' =>'4',
             'name'=>'礼品采购',
             'price_name'=>'礼品采购价',
-            'agency_commission'=>'代理商提成',
             'partner_commission'=>'城市合伙人提成',
         ),
         '5'=>array(
