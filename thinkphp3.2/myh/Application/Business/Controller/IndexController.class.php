@@ -2,7 +2,6 @@
 namespace Business\Controller;
 
 use  web\all\Controller\BaseController;
-use  web\all\Lib\Pay;
 
 class IndexController extends BaseController{
     //商务-首页
