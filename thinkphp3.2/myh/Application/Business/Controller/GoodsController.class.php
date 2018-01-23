@@ -61,10 +61,6 @@ class GoodsController extends BaseController {
         $templateType = I('get.templateType','','string');
         if($templateType=='photo'){
             $this ->display('goodsPhotoListTpl');
-        }else if($templateType=='list'){
-            $this ->display('goodsListTpl');
-        }else if($templateType=='share'){
-            $this ->display('goodsShareListTpl');
         }
     }
 
