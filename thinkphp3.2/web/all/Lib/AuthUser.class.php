@@ -85,8 +85,8 @@ class Authuser{
 
     /**购物车-cookie-商品-入库
      */
-    public static function saveCookieCartToMysql($userId){
-        $modelCart = D('Cart');
+    public static function saveCookieCartToMysql($userId,$moduleName){
+        $modelCart = D($moduleName.'Mall/Cart');
         $cookieCarts = unserialize(cookie('cart'));
         $time = time();
         $ret = true;
