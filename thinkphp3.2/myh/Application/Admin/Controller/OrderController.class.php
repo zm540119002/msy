@@ -94,8 +94,8 @@ class OrderController extends BaseController {
             'ca.detailed_address','ca.consignee_name','ca.consignee_mobile',
         ];
         $join=[ ' left join orders o on od.order_id = o.id ',
-            ' left join goods g on od.foreign_id = g.id ',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
+            ' left join myh.goods g on od.foreign_id = g.id ',
+            ' left join myh.goods_base gb on g.goods_base_id = gb.id ',
             ' left join consignee_address ca on o.address_id = ca.id ',];
         $this->orderDetail = $model->selectOrderDetail($where,$field,$join);
         $this->display();
