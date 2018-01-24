@@ -2,6 +2,7 @@
 namespace Business\Controller;
 
 use  web\all\Controller\BaseController;
+use web\all\Lib\AuthUser;
 
 class IndexController extends BaseController{
     //商务-首页
@@ -13,7 +14,8 @@ class IndexController extends BaseController{
 
     //代理商-首页
     public function agentIndex(){
-        //用户信息
+        //判断是否登录
+        $this->user = AuthUser::check();
         $this->assign('user',$this->user);
         //购物车配置开启的项
         $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
@@ -27,7 +29,8 @@ class IndexController extends BaseController{
 
     //合伙人-首页
     public function partnerIndex(){
-        //用户信息
+        //判断是否登录
+        $this->user = AuthUser::check();
         $this->assign('user',$this->user);
         //购物车配置开启的项
         $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
