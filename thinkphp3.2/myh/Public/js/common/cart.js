@@ -109,11 +109,7 @@ function delCart(postData,type,obj) {
             });
             layer.close(index);
         }
-    })
-
-
-
-
+    });
 }
 
 
