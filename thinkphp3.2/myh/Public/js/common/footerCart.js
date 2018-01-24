@@ -102,6 +102,33 @@ $(function () {
             }
         });
     });
+    //开通推客分享功能
+    $('body').on('click','.open_referrer',function(){
+        var url = MODULE + '/Referrer/openReferrer';
+        $.ajax({
+            url: url,
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+
+            }
+        });
+        // layer.open({
+        //     content:'是否开通？<br/>一键免费开通推客分享功能',
+        //     btn:['确定','取消'],
+        //     yes:function(index){
+        //
+        //         layer.close(index);
+        //     }
+        // })
+    });
 
     //我的二维码
     $('body').on('click','.QR_codes',function(){
@@ -136,7 +163,6 @@ $(function () {
             }
         });
     });
-
 
     //关闭删除二维码
     $("#areaMask2,.closeBtn").click(function() {
