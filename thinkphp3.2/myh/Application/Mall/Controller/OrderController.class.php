@@ -36,8 +36,8 @@ class OrderController extends AuthUserController {
                 'gb.main_img',
             );
             $join = array(
-                ' left join goods g on g.id = od.foreign_id ',
-                ' left join goods_base gb on gb.id = g.goods_base_id ',
+                ' left join myh.goods g on g.id = od.foreign_id ',
+                ' left join myh.goods_base gb on gb.id = g.goods_base_id ',
             );
             foreach ($orderList as $k=>&$item) {
                 $item['order_overdue_time'] = $item['order_start_time'] + 3*24*60*60;
@@ -108,8 +108,8 @@ class OrderController extends AuthUserController {
                 'od.order_sn' => $orderInfo['sn'],
             );
             $join = array(
-                ' left join goods g on g.id = od.foreign_id ',
-                ' left join goods_base gb on gb.id = g.goods_base_id ',
+                ' left join myh.goods g on g.id = od.foreign_id ',
+                ' left join myh.goods_base gb on gb.id = g.goods_base_id ',
             );
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
@@ -519,8 +519,8 @@ class OrderController extends AuthUserController {
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
-        $join=[ ' left join goods g on g.id = gbd.goods_id',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
+        $join=[ ' left join myh.goods g on g.id = gbd.goods_id',
+            ' left join myh.goods_base gb on g.goods_base_id = gb.id ',
             ' left join wx_user wxu on wxu.openid = gbd.openid',
             ' left join orders o on o.id = gbd.order_id',
         ];

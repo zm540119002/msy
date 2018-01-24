@@ -32,78 +32,91 @@
                     </tr>
                     <tr class="radioProductType">
                         <td class="dotted_bottom_gray city_part_module set_product_type" width="89%" align=left>
-                            <!--商品还没有设置类型-->
-                            <empty name="goodsInfo">
-                                <foreach name="Think.config.BUY_TYPE" item="vo"  key="k">
+                            <empty name="goodsList" id="vv">
+                                <volist name="Think.config.BUY_TYPE" id="vo">
                                     <div class="set_type_list">
                                         <input type="checkbox" name="discount"  class="radioItem" value="{$vo.name}" data-buy_type="{$vo.buy_type}" ><label for="">{$vo.name}</label>
                                         <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
-                                        <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
-                                        <span class="opt_type"><font color="#FF0000">*</font>{$vo.commission}：</span>
-                                        <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="">
-                                        <if condition="$vo.buy_type eq 2">
+                                        <input style="width: 120px; " class="inputboxadmin discount_price" name="discount_price" value="">
+
+                                        <notempty name="vo.referrer_commission">
+                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.referrer_commission}：</span>
+                                            <input style="width: 120px; " class="inputboxadmin referrer_commission" name="referrer_commission" value="">
+                                        </notempty>
+                                        <notempty name="vo.agency_commission">
+                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.agency_commission}：</span>
+                                            <input style="width: 120px; " class="inputboxadmin agency_commission" name="agency_commission" value="">
+                                        </notempty>
+                                        <notempty name="vo.partner_commission">
+                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.partner_commission}：</span>
+                                            <input style="width: 120px; " class="inputboxadmin partner_commission" name="partner_commission" value="">
+                                        </notempty>
+                                        <notempty name="vo.cash_back">
                                             <span class="opt_type"><font color="#FF0000">*</font>{$vo.cash_back}：</span>
-                                            <input style="width: 200px; " class="inputboxadmin cash_back" name="cash_back" value="">
-                                        </if>
-                                        <if condition="$vo.buy_type eq 1">
-                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.big_order_price}：</span>
-                                            <input style="width: 200px; " class="inputboxadmin big_order_price" name="big_order_price" value="">
-                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.small_order_price}：</span>
-                                            <input style="width: 200px; " class="inputboxadmin small_order_price" name="small_order_price" value="">
-                                        </if>
+                                            <input style="width: 120px; " class="inputboxadmin cash_back" name="cash_back" value="">
+                                        </notempty>
                                     </div>
-                                </foreach>
-                            <else />
+                                </volist>
+                                <else />
                                 <!--设置的类型-->
-                                <foreach name="goodsInfo" item="vo">
-                                     <div class="set_type_list">
-                                        <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
-                                                <if condition="$vo.buy_type eq ($vv['buy_type'])">
-                                                    <input type="hidden" name="goods_id" value="{$vo.id}">
-                                                    <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" checked=""><label for="">{$vv['name']}</label>
-                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
-                                                    <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="{$vo.sale_price}">
-                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vv['commission']}：</span>
-                                                    <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="{$vo.commission}">
-                                                    <if condition="$vo.buy_type eq 2">
-                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['cash_back']}：</span>
-                                                        <input style="width: 200px; " class="inputboxadmin cash_back" name="cash_back" value="{$vo.cash_back}">
-                                                    </if>
-                                                    <if condition="$vv['buy_type'] eq 1">
-                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['big_order_price']}：</span>
-                                                        <input style="width: 200px; " class="inputboxadmin big_order_price" name="big_order_price" value="{$vo.big_order_price}">
-                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['small_order_price']}：</span>
-                                                        <input style="width: 200px; " class="inputboxadmin small_order_price" name="small_order_price" value="{$vo.small_order_price}">
-                                                    </if>
-                                                </if>
-                                        </foreach>
-                                    </div>
-                                </foreach>
-                                <!--没有设置的类型-->
-                                <span class=""><font color="#FF0000">*</font>没有设置购买类型</span>
-                                    <volist name="noBuyTypeArray" id="vo">
+                                <volist name="goodsList" id="vv">
+                                    <volist name="Think.config.BUY_TYPE" id="vo">
+                                        <if condition="$vv.buy_type eq ($vo['buy_type'])">
                                         <div class="set_type_list">
-                                            <foreach name="Think.config.BUY_TYPE" item="vv"  key="kk">
-                                                <if condition="$vo eq ($vv['buy_type'])">
-                                                    <input type="checkbox" name="discount"  class="radioItem" value="{$vv['name']}" data-buy_type="{$vv['buy_type']}" ><label for="">{$vv['name']}</label>
-                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vv['price_name']}：</span>
-                                                    <input style="width: 200px; " class="inputboxadmin discount_price" name="discount_price" value="">
-                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vv['commission']}：</span>
-                                                    <input style="width: 200px; " class="inputboxadmin commission_price" name="commission_price" value="{$vo.commission}">
-                                                    <if condition="$vo eq 2">
-                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['cash_back']}：</span>
-                                                        <input style="width: 200px; " class="inputboxadmin cash_back" name="cash_back" value="">
-                                                    </if>
-                                                    <if condition="$vo eq 1">
-                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['big_order_price']}：</span>
-                                                        <input style="width: 200px; " class="inputboxadmin big_order_price" name="big_order_price" value="">
-                                                        <span class="opt_type"><font color="#FF0000">*</font>{$vv['small_order_price']}：</span>
-                                                        <input style="width: 200px; " class="inputboxadmin small_order_price" name="small_order_price" value="">
-                                                    </if>
-                                                </if>
-                                            </foreach>
+                                            <input type="hidden" name="goods_id" value="{$vv.id}"/>
+                                            <input type="checkbox" name="discount"  class="radioItem" value="{$vo.name}" data-buy_type="{$vo.buy_type}" checked="checked"><label for="">{$vo.name}</label>
+                                            <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
+                                            <input style="width: 120px; " class="inputboxadmin discount_price" name="discount_price" value="{$vv.sale_price}">
+
+                                            <notempty name="vo.referrer_commission">
+                                                <span class="opt_type"><font color="#FF0000">*</font>{$vo.referrer_commission}：</span>
+                                                <input style="width: 120px; " class="inputboxadmin referrer_commission" name="referrer_commission" value="{$vv.referrer_commission}">
+                                            </notempty>
+                                            <notempty name="vo.agency_commission">
+                                                <span class="opt_type"><font color="#FF0000">*</font>{$vo.agency_commission}：</span>
+                                                <input style="width: 120px; " class="inputboxadmin agency_commission" name="agency_commission" value="{$vv.agency_commission}">
+                                            </notempty>
+                                            <notempty name="vo.partner_commission">
+                                                <span class="opt_type"><font color="#FF0000">*</font>{$vo.partner_commission}：</span>
+                                                <input style="width: 120px; " class="inputboxadmin partner_commission" name="partner_commission" value="{$vv.partner_commission}">
+                                            </notempty>
+                                            <notempty name="vo.cash_back">
+                                                <span class="opt_type"><font color="#FF0000">*</font>{$vo.cash_back}：</span>
+                                                <input style="width: 120px; " class="inputboxadmin cash_back" name="cash_back" value="{$vv.cash_back}">
+                                            </notempty>
                                         </div>
+                                        </if>
                                     </volist>
+                                </volist>
+                                <!--没有设置的类型-->
+                                <volist name="noBuyTypeArray" id="vv">
+                                    <volist name="Think.config.BUY_TYPE" id="vo">
+                                        <if condition="$vv eq ($vo['buy_type'])">
+                                            <div class="set_type_list">
+                                                <input type="checkbox" name="discount"  class="radioItem" value="{$vo.name}" data-buy_type="{$vo.buy_type}"><label for="">{$vo.name}</label>
+                                                <span class="opt_type"><font color="#FF0000">*</font>{$vo.price_name}：</span>
+                                                <input style="width: 120px; " class="inputboxadmin discount_price" name="discount_price" value="">
+
+                                                <notempty name="vo.referrer_commission">
+                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vo.referrer_commission}：</span>
+                                                    <input style="width: 120px; " class="inputboxadmin referrer_commission" name="referrer_commission" value="">
+                                                </notempty>
+                                                <notempty name="vo.agency_commission">
+                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vo.agency_commission}：</span>
+                                                    <input style="width: 120px; " class="inputboxadmin agency_commission" name="agency_commission" value="">
+                                                </notempty>
+                                                <notempty name="vo.partner_commission">
+                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vo.partner_commission}：</span>
+                                                    <input style="width: 120px; " class="inputboxadmin partner_commission" name="partner_commission" value="">
+                                                </notempty>
+                                                <notempty name="vo.cash_back">
+                                                    <span class="opt_type"><font color="#FF0000">*</font>{$vo.cash_back}：</span>
+                                                    <input style="width: 120px; " class="inputboxadmin cash_back" name="cash_back" value="">
+                                                </notempty>
+                                            </div>
+                                        </if>
+                                    </volist>
+                                </volist>
                             </empty>
                         </td>
                     </tr>
@@ -162,12 +175,12 @@
                 $.each($('.set_type_list'),function(i,val){
                     var _this=$(this);
                     var optionCheck=_this.find('.radioItem');
-                    var promotionPrice=_this.find('.discount_price').val();
                     var goods_Id=_this.find('input[name="goods_id"]').val();
-                    var commissionPrice =_this.find('input[name="commission_price"]').val();
+                    var promotionPrice=_this.find('.discount_price').val();
+                    var referrer_commission =_this.find('input[name="referrer_commission"]').val();
+                    var agency_commission =_this.find('input[name="agency_commission"]').val();
+                    var partner_commission =_this.find('input[name="partner_commission"]').val();
                     var cashBack =_this.find('input[name="cash_back"]').val();
-                    var big_order_price =_this.find('input[name="big_order_price"]').val();
-                    var small_order_price =_this.find('input[name="small_order_price"]').val();
                     if(optionCheck.is(":checked")){
                         var buyType=optionCheck.data('buy_type');
                         if(goods_Id){
@@ -176,10 +189,10 @@
                                 buy_type:buyType,
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
-                                commission:commissionPrice,
-                                cash_back:cashBack,
-                                big_order_price:big_order_price,
-                                small_order_price:small_order_price
+                                referrer_commission:referrer_commission,
+                                agency_commission:agency_commission,
+                                partner_commission:partner_commission,
+                                cash_back:cashBack
                             };
                             editData.push(editArr);
                         }else{
@@ -188,10 +201,10 @@
                                 buy_type:buyType,
                                 sale_price:promotionPrice,
                                 goods_id:goods_Id,
-                                commission:commissionPrice,
-                                cash_back:cashBack,
-                                big_order_price:big_order_price,
-                                small_order_price:small_order_price
+                                referrer_commission:referrer_commission,
+                                agency_commission:agency_commission,
+                                partner_commission:partner_commission,
+                                cash_back:cashBack
                             };
                             addData.push(addArr);
                         }

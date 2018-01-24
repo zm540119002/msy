@@ -60,35 +60,48 @@ return array(
             'buy_type' =>'1',
             'name'=>'优惠价产品',
             'price_name'=>'商品优惠价',
-            'commission'=>'提成',
-            'big_order_price'=>'大宗采购价',
-            'small_order_price'=>'小宗采购价'
+            'referrer_commission'=>'推客提成',
+            'agency_commission'=>'代理商提成',
+            'partner_commission'=>'城市合伙人提成',
         ),
         '2'=>array(
             'buy_type' =>'2',
             'name'=>'微团购',
             'price_name'=>'商品优惠价',
+            'referrer_commission'=>'推客提成',
+            'agency_commission'=>'代理商提成',
+            'partner_commission'=>'城市合伙人提成',
             'cash_back'=>'团购返现',
-            'commission'=>'提成',
         ),
         '3'=>array(
             'buy_type' =>'3',
-            'name'=>'城市合伙人',
-            'price_name'=>'城市合伙人价',
-            'commission'=>'提成'
+            'name'=>'特价产品',
+            'price_name'=>'特价',
         ),
         '4'=>array(
             'buy_type' =>'4',
-            'name'=>'代理商',
-            'price_name'=>'代理商价',
-            'commission'=>'提成'
+            'name'=>'礼品采购',
+            'price_name'=>'礼品采购价',
+            'partner_commission'=>'城市合伙人提成',
         ),
         '5'=>array(
             'buy_type' =>'5',
-            'name'=>'特价产品',
-            'price_name'=>'特价',
-            'commission'=>'提成'
+            'name'=>'实体店代理商',
+            'price_name'=>'代理商价',
+            'partner_commission'=>'城市合伙人提成',
         ),
+        '6'=>array(
+            'buy_type' =>'6',
+            'name'=>'微商代理商',
+            'price_name'=>'代理商价',
+            'partner_commission'=>'城市合伙人提成',
+        ),
+        '7'=>array(
+            'buy_type' =>'7',
+            'name'=>'城市合伙人',
+            'price_name'=>'城市合伙人价',
+        ),
+
     ),
 
     //快递公司'承接公司：0：自有 1：顺丰 2：圆通 3:申通 4：韵达',
