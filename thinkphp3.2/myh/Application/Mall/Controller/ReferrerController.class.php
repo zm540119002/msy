@@ -7,12 +7,12 @@ class ReferrerController extends AuthUserController{
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
+        $mode = D('Member');
         $where['user_id'] = $this->user['id'];
-        $memberInfo = D('Member') -> selectMember($where);
-        $memberInfo = $memberInfo[0];
-
+        $_POST['referrer_status'] = 1;
+        $rst = $mode->saveMember($where=array(),$rules=array());
+        $this->ajaxReturn($rst);
     }
-
     //我的带产品推客二维码
     public function myQRCodesWithGoods(){
         if(!IS_POST){

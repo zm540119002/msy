@@ -105,29 +105,41 @@ $(function () {
     //开通推客分享功能
     $('body').on('click','.open_referrer',function(){
         var url = MODULE + '/Referrer/openReferrer';
-        $.ajax({
-            url: url,
-            type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function(){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-
+        layer.open({
+            content:'是否开通？<br/>一键免费开通推客分享功能',
+            btn:['确定','取消'],
+            yes:function(index){
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status == 0){
+                            if(data.url){
+                                location.href = data.url;
+                            }else{
+                                dialog.error(data.info);
+                            }
+                        }else if(data.status == 1){
+                            if(data.info=='isAjax'){
+                                loginDialog();
+                            }else{
+                                dialog.success('开通成功！');
+                                $('.open_referrer').hide();
+                            }
+                        }
+                    }
+                });
+                layer.close(index);
             }
-        });
-        // layer.open({
-        //     content:'是否开通？<br/>一键免费开通推客分享功能',
-        //     btn:['确定','取消'],
-        //     yes:function(index){
-        //
-        //         layer.close(index);
-        //     }
-        // })
+        })
     });
 
     //我的二维码
