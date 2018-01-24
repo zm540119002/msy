@@ -93,9 +93,12 @@ class UserController extends CommonController {
         }else{
             $this->ajaxReturn(errorMsg('请输入完整的登录信息'));
         }
+        $backUrl = session('backUrl');
+        $pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
+        preg_match ($pattern,$backUrl,$matches);
         //cookie购物车入库
         if($user['id']){
-            $res = AuthUser::saveCookieCartToMysql($user['id']);
+            $res = AuthUser::saveCookieCartToMysql($user['id'],$matches[1]);
             if(!$res){
                 $this->ajaxReturn(errorMsg('购物车入库失败'));
             }
@@ -104,7 +107,7 @@ class UserController extends CommonController {
         AuthUser::saveLastLoginTimeById($user['id']);
         //设置session
         AuthUser::setSession($user);
-        $this->ajaxReturn(successMsg(session('backUrl')?(is_ssl()?'https://':'http://').session('backUrl'):U('login')));
+        $this->ajaxReturn(successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:U('login')));
     }
 
     private function _register(){
