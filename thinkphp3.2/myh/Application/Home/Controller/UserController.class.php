@@ -207,7 +207,6 @@ class UserController extends CommonController {
             'MobileList'=>$group,
             'Content'=>$smsContent
         );
-
         try {
             $client->Sms_Send($param);
             $captcha_type = I('post.captcha_type','','string') ;
