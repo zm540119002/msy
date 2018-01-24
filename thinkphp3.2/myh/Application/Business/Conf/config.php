@@ -7,7 +7,7 @@ return array(
     //Cookie前缀 避免冲突
     'COOKIE_PREFIX' => 'business_',
     //session 前缀
-    'SESSION_PREFIX' => 'business_',
+//    'SESSION_PREFIX' => 'business_',
     //额外配置文件
     'LOAD_EXT_CONFIG' => 'ext_conf,array_conf',
 );

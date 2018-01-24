@@ -7,7 +7,7 @@ return array(
     //Cookie前缀 避免冲突
     'COOKIE_PREFIX' => 'mall_',
     //session 前缀
-    'SESSION_PREFIX' => 'mall_',
+//    'SESSION_PREFIX' => 'mall_',
     //额外配置文件
     'LOAD_EXT_CONFIG' => 'ext_conf,array_conf',
 );
