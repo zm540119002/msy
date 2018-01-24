@@ -4,19 +4,17 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class GoodsBaseModel extends Model {
-    protected $tableName = 'goods_base';
+class GoodsModel extends Model {
+    protected $tableName = 'goods';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_BUSINESS';
+    protected $connection = 'DB_CONFIG_MYH';
 
     protected $_validate = array(
-        array('category_id_1','require','所属必须！'),
-        array('name','require','商品名称必须！'),
         array('price','require','商品原价必须！'),
     );
 
     //新增
-    public function addGoodsBase(){
+    public function addGoods(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -26,7 +24,7 @@ class GoodsBaseModel extends Model {
         if(!$res){
             return errorMsg($this->getError());
         }
-       
+
         $id = $this->add();
 
         if($id === false){
@@ -41,15 +39,15 @@ class GoodsBaseModel extends Model {
     }
 
     //修改
-    public function saveGoodsBase($where=array()){
+    public function saveGoods($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsBaseId',0,'int');
+        $id = I('post.goodsId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsBaseId');
+            return errorMsg('确少参数goodsId');
         }
 
         $res = $this->create();
@@ -61,9 +59,9 @@ class GoodsBaseModel extends Model {
             'id' => $id,
         );
         $_where = array_merge($_where,$where);
-       
+
         $res = $this->where($_where)->save();
-        
+
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -76,15 +74,15 @@ class GoodsBaseModel extends Model {
     }
 
     //标记删除
-    public function delGoodsBase($where=array()){
+    public function delGoods($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
 
-        $id = I('post.goodsBaseId',0,'int');
+        $id = I('post.goodsId',0,'int');
         if(!$id){
-            return errorMsg('确少参数goodsBaseId');
+            return errorMsg('确少参数goodsId');
         }
 
         $_where = array(
@@ -105,20 +103,17 @@ class GoodsBaseModel extends Model {
     }
 
     //查询
-    public function selectGoodsBase($where=[],$field=[],$join=[]){
+    public function selectGoods($where=[],$field=[],$join=[]){
         $_where = array(
-            'gb.status' => 0,
+            'g.status' => 0,
         );
         $_field = array(
-            'gb.id','gb.no','gb.name','gb.status','gb.category_id_1','gb.category_id_2','gb.category_id_3','gb.on_off_line','gb.param',
-            'gb.usage','gb.sort','gb.price', 'gb.inventory','gb.main_img','gb.detail_img','gb.create_time','gb.intro','gb.notices',
-            'gb.tag','gb.package_num','gb.package_unit','gb.purchase_unit','gb.single_specification','gb.thumb_img','gb.notices','gb.share_intro',
-            'gb.group_share','gb.headlines',
+            'g.id','g.goods_base_id','g.buy_type','g.sale_price','g.status','g.cash_back',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('gb')
+            ->alias('g')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
