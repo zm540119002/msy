@@ -263,8 +263,8 @@ class CallBackController extends CommonController{
         $field=[ 'g.cash_back','g.goods_base_id','g.commission',
             'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
-        $join=[ ' left join goods g on g.id = gbd.goods_id',
-            ' left join goods_base gb on g.goods_base_id = gb.id ',
+        $join=[ ' left join myh.goods g on g.id = gbd.goods_id',
+            ' left join myh.goods_base gb on g.goods_base_id = gb.id ',
             ' left join wx_user wxu on wxu.openid = gbd.openid',
             ' left join orders o on o.id = gbd.order_id',
         ];
