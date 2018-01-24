@@ -2,6 +2,17 @@
 namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 class ReferrerController extends AuthUserController{
+    //开通推客分享功能
+    public function openReferrer(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $where['user_id'] = $this->user['id'];
+        $memberInfo = D('Member') -> selectMember($where);
+        $memberInfo = $memberInfo[0];
+
+    }
+
     //我的带产品推客二维码
     public function myQRCodesWithGoods(){
         if(!IS_POST){
