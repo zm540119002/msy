@@ -5,20 +5,6 @@ use web\all\Cache\AgentCache;
 use web\all\Controller\AuthAgentController;
 
 class AgentController extends AuthAgentController {
-    //代理商-首页
-    public function index(){
-        //用户信息
-        $this->assign('user',$this->user);
-        //购物车配置开启的项
-        $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
-        $this->agentType = I('get.agentType',0,'int');
-        if($this->agentType==1){//实体店代理商
-        }elseif ($this->agentType==2){//微商代理商
-        }elseif ($this->agentType==3){//礼品采购代理商
-        }
-        $this->display();
-    }
-
     //完善我的商务档案
     public function completeArchive(){
         if(IS_POST){
