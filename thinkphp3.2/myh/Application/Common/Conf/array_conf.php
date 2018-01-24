@@ -80,7 +80,7 @@ return array(
         ),
         '4'=>array(
             'buy_type' =>'4',
-            'name'=>'礼品采购',
+            'name'=>'礼品采购代理商',
             'price_name'=>'礼品采购价',
             'partner_commission'=>'城市合伙人提成',
         ),
@@ -101,7 +101,6 @@ return array(
             'name'=>'城市合伙人',
             'price_name'=>'城市合伙人价',
         ),
-
     ),
 
     //快递公司'承接公司：0：自有 1：顺丰 2：圆通 3:申通 4：韵达',
@@ -175,5 +174,4 @@ return array(
         'order_pay_valid_time'=>60*60*24*3,//订单支付有效时间
         'cart_valid_time'=>60*60*24*7,//购物车有效时间
     ],
-
 );
