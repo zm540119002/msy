@@ -123,7 +123,6 @@
         $(function(){
             //我的二维码
             $('body').on('click','.my_qrcodes',function(){
-                var url = location.href;
                 $.ajax({
                     url: MODULE + '/Referrer/myQRCodes',
                     type: 'post',
