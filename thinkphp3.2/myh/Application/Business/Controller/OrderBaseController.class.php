@@ -3,7 +3,7 @@ namespace Business\Controller;
 
 use web\all\Controller\AuthUserController;
 
-class OrderController extends AuthUserController {
+class OrderBaseController extends AuthUserController {
     //我的订单
     public function orderManage(){
         $modelOrder = D('Order');

@@ -25,7 +25,7 @@ class IndexController extends BaseController{
                 $this->agent = AgentCache::get($this->user['mobile_phone']);
                 if($this->agent){
                     //购物车配置开启的项
-                    $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+                    $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,24));
                 }
             }
         }
@@ -46,7 +46,7 @@ class IndexController extends BaseController{
             $this->partner = PartnerCache::get($this->user['id']);
             if($this->partner){
                 //购物车配置开启的项
-                $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,24));
             }
         }
         $this->display();

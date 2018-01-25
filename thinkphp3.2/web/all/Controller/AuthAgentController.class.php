@@ -5,7 +5,7 @@ use web\all\Cache\AgentCache;
 
 /**机构登记的控制器基类
  */
-class AuthAgentController extends AuthUserController{
+class AuthAgentController extends OrderBaseController{
     protected $agent = null;
     protected $agentAuthoriseUrl = 'Home/AgentAuthorise/index';
 
