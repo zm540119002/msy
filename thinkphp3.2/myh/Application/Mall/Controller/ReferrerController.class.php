@@ -43,12 +43,10 @@ class ReferrerController extends AuthUserController{
 
     //我的平台推客二维码
     public function myQRCodes(){
-//        if(!IS_POST){
-//            return errorMsg(C('NOT_POST'));
-//        }
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
         $userId = $this->user['id'];
-        $scene_type = 'QR_LIMIT_SCENE';
-        $res = $this -> getQRcode($scene_type, $userId);
         $where['user_id'] = $userId;
         $mode = D('member');
         $memberInfo = $mode->where($where)->find();
@@ -56,7 +54,7 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
         }
         $avatarPath = $this->user['avatar'];
-        $url =  $res['url'];
+        $url =  $this->host.'index.php/Mall/Index/index/userId/'.$userId;
         $newRelativePath = C('USER_LOGO');
         $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
         $data['qr_code'] = $shareQRCodes;
@@ -73,12 +71,6 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(errorMsg('失败'));
         }
     }
-
-    //我的推客收益
-    public function referrerEarnings(){
-        $userId = $this->user['id'];
-
-    }
-
+    
     
 }
