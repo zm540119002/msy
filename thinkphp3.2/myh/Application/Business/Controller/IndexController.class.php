@@ -28,7 +28,7 @@ class IndexController extends BaseController{
                 if($this->agent){
                     //购物车配置开启的项
                     $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,24));
-                    $this->goodsListOptionType = 'purchaserOnly';
+                    $this->goodsListOptionType = 'withCartMenu';
                 }
             }
         }
@@ -46,10 +46,12 @@ class IndexController extends BaseController{
         $this->user = AuthUser::check();
         if($this->user){
             $this->assign('user',$this->user);
+            PartnerCache::remove($this->user['id']);
             $this->partner = PartnerCache::get($this->user['id']);
             if($this->partner){
                 //购物车配置开启的项
                 $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,24));
+                $this->goodsListOptionType = 'withCartMenu';
             }
         }
         $this->display();
