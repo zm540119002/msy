@@ -1,8 +1,10 @@
 <?php
 namespace Business\Controller;
 
-use  web\all\Controller\BaseController;
+use web\all\Controller\BaseController;
 use web\all\Lib\AuthUser;
+use web\all\Cache\AgentCache;
+use web\all\Cache\PartnerCache;
 
 class IndexController extends BaseController{
     //商务-首页
@@ -16,9 +18,17 @@ class IndexController extends BaseController{
     public function agentIndex(){
         //判断是否登录
         $this->user = AuthUser::check();
-        $this->assign('user',$this->user);
-        //购物车配置开启的项
-        $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+        if($this->user){
+            $this->assign('user',$this->user);
+            $this->agent = AgentCache::get($this->user['id']);
+            if(!$this->agent){
+                $this->agent = AgentCache::get($this->user['mobile_phone']);
+                if($this->agent){
+                    //购物车配置开启的项
+                    $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+                }
+            }
+        }
         $this->agentType = I('get.agentType',0,'int');
         if($this->agentType==1){//实体店代理商
         }elseif ($this->agentType==2){//微商代理商
@@ -31,9 +41,14 @@ class IndexController extends BaseController{
     public function partnerIndex(){
         //判断是否登录
         $this->user = AuthUser::check();
-        $this->assign('user',$this->user);
-        //购物车配置开启的项
-        $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+        if($this->user){
+            $this->assign('user',$this->user);
+            $this->partner = PartnerCache::get($this->user['id']);
+            if($this->partner){
+                //购物车配置开启的项
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+            }
+        }
         $this->display();
     }
 }

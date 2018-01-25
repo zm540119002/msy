@@ -322,6 +322,9 @@ function clockArea() {
 //组装数据
 function assemblyData() {
     var lis = $('ul.goods_list').find('li');
+    if(!$('footer').find('price').length){
+        return false;
+    }
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
@@ -354,6 +357,9 @@ function assemblyData() {
 //计算商品列表总价
 function calculateTotalPrice(){
     var _thisLis = $('ul.goods_list').find('li');
+    if(!$('footer').find('price').length){
+        return false;
+    }
     var isInt = true;
     var amount = 0;
     $.each(_thisLis,function(){
