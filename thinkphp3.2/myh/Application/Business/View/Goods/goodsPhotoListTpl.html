@@ -17,13 +17,17 @@
             <div class="a_c">10盒起订</div>
         </div>
         <div class="agent_list_item">
-            <span>采购数量</span>
-            <div class="quantity_wrapper business_count">
-                <a href="javascript:void(0);" class="greduce">-</a>
-                <input type="text" value="1" class="f24 gshopping_count">
-                <a href="javascript:void(0);" class="gplus">+</a>
-            </div>
-            <a href="javascript:void(0);" class="add_cart">加入采购车</a>
+            <if condition="$purchseSign eq 'forbidden' ">
+                <span>仅限采购商</span>
+                <else/>
+                <span>采购数量</span>
+                <div class="quantity_wrapper business_count">
+                    <a href="javascript:void(0);" class="greduce">-</a>
+                    <input type="text" value="1" class="f24 gshopping_count">
+                    <a href="javascript:void(0);" class="gplus">+</a>
+                </div>
+                <a href="javascript:void(0);" class="add_cart">加入采购车</a>
+            </if>
         </div>
     </li>
 </volist>

@@ -12,7 +12,7 @@ class AgentCache{
             $where = array(
                 'user_id' => $user_id,
                 'status' => 0,
-                'auth_status' => 0,
+                'auth_status' => 1,
             );
             $modelAgent = D('Agent');
             $agent = $modelAgent->selectAgent($where);
@@ -30,7 +30,7 @@ class AgentCache{
             $where = array(
                 'mobile_phone' => $mobilePhone,
                 'status' => 0,
-                'auth_status' => 0,
+                'auth_status' => 1,
             );
             $modelAgent = D('Agent');
             $agent = $modelAgent->selectAgent($where);

@@ -20,15 +20,20 @@ class IndexController extends BaseController{
         $this->user = AuthUser::check();
         if($this->user){
             $this->assign('user',$this->user);
+            AgentCache::remove($this->user['id']);
             $this->agent = AgentCache::get($this->user['id']);
             if(!$this->agent){
+                AgentCache::removeByMobilePhone($this->user['mobile_phone']);
                 $this->agent = AgentCache::get($this->user['mobile_phone']);
                 if($this->agent){
                     //购物车配置开启的项
                     $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,24));
+                }else{
+                    $this->purchaseSign = 'forbidden';
                 }
             }
         }
+//        print_r($this->agent);exit;
         $this->agentType = I('get.agentType',0,'int');
         if($this->agentType==1){//实体店代理商
         }elseif ($this->agentType==2){//微商代理商
