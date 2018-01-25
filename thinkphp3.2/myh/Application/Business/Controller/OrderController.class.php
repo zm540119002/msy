@@ -1,6 +1,8 @@
 <?php
 namespace Business\Controller;
 
+use web\all\Controller\AuthUserController;
+
 class OrderController extends AuthUserController {
     //我的订单
     public function orderManage(){
@@ -17,23 +19,29 @@ class OrderController extends AuthUserController {
                 $where['o.logistics_status'] = I('get.s',0,'int');
             }
             $field = array(
-                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
+                'o.id','o.create_time as order_start_time','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
                 'ca.city','ca.area','ca.detailed_address',
                 'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
+                'gbd.group_buy_id','gbd.goods_id','gb.tag','gb.overdue_time as group_buy_overdue_time'
             );
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
                 ' left join logistics l on o.logistics_id = l.id ',
+                ' left join group_buy_detail gbd on o.id = gbd.order_id ',
+                ' left join group_buy gb on gb.id = gbd.group_buy_id ',
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
+                'gb.main_img',
             );
             $join = array(
-                ' left join goods g on g.id = od.foreign_id ',
-                ' left join goods_base gb on gb.id = g.goods_base_id ',
+                ' left join myh.goods g on g.id = od.foreign_id ',
+                ' left join myh.goods_base gb on gb.id = g.goods_base_id ',
             );
-            foreach ($orderList as &$item) {
+            foreach ($orderList as $k=>&$item) {
+                $item['order_overdue_time'] = $item['order_start_time'] + 3*24*60*60;
+                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_overdue_time']);
                 $where = array(
                     'od.order_sn' => $item['sn'],
                 );
@@ -43,6 +51,8 @@ class OrderController extends AuthUserController {
             $this->orderList = $orderList;
             //商品列表操作类型
             $this->goodsListOptionType = 'withNum';
+            $this -> current_time = time();
+            $this -> current_time1 = date("Y-m-d H:i:s");
             $this->display();
         }
     }
@@ -79,6 +89,7 @@ class OrderController extends AuthUserController {
                 );
                 $modelOrder->saveOrder($where);
             }
+
             //订单信息查询
             $where = array(
                 'o.user_id' => $this->user['id'],
@@ -97,8 +108,8 @@ class OrderController extends AuthUserController {
                 'od.order_sn' => $orderInfo['sn'],
             );
             $join = array(
-                ' left join goods g on g.id = od.foreign_id ',
-                ' left join goods_base gb on gb.id = g.goods_base_id ',
+                ' left join myh.goods g on g.id = od.foreign_id ',
+                ' left join myh.goods_base gb on gb.id = g.goods_base_id ',
             );
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
@@ -128,6 +139,7 @@ class OrderController extends AuthUserController {
             $this->ajaxReturn(errorMsg('未提交数据'));
         }
         $orderType = intval($_POST['orderType'])?:0;
+        $groupBuyId = intval($_POST['groupBuyId'])?:0;
         //查询商品信息
         $modelGoods = D('Goods');
         $amount = 0;
@@ -194,6 +206,7 @@ class OrderController extends AuthUserController {
         $where = array(
             'ct.user_id' => $this->user['id'],
         );
+
         $cartList = $modelCart->selectCart($where);
         foreach ($goodsList as $item){
             foreach ($cartList as $value){
@@ -212,7 +225,17 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1){//团购
-            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId);
+            $_where = array(
+                'group_buy_id'=>$groupBuyId,
+                'pay_status'=>2,
+            );
+            //判断是否已团购
+            $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id',true);
+            if(in_array($this->user['id'],$userIdArray)){
+                $this->ajaxReturn(errorMsg('你已参加此团购，不能再参加！是否重新开团',array('joined'=>1)));
+            }
+            $openid = session('openid');
+            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId,$openid);
         }
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
@@ -243,8 +266,6 @@ class OrderController extends AuthUserController {
         $modelCouponsReceive = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
-        $modelGroupBuy = D('GroupBuy');
-        $modelGroupBuyDetail = D('GroupBuyDetail');
         if(IS_POST){
             //订单信息
             if(isset($_POST['orderId']) && intval($_POST['orderId'])){
@@ -320,6 +341,9 @@ class OrderController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+                    if($orderInfo['type'] == 1){//团购订单处理
+                        $this -> groupBuyHandle($modelOrder,$orderInfo);
+                    }
                     //减库存
                     $res = $modelGoods -> decGoodsNum($orderDetail);
 
@@ -328,7 +352,7 @@ class OrderController extends AuthUserController {
                         $this->ajaxReturn(errorMsg($res));
                     }
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
+                    $this->ajaxReturn(successMsg('支付成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
                     $unpaid -= $couponsInfo['amount'];
                 }
@@ -395,8 +419,11 @@ class OrderController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+                    if($orderInfo['type'] == 1){//团购订单处理
+                        $successBackUrl = $this -> groupBuyHandle($modelOrder,$orderInfo);
+                    }
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
+                    $this->ajaxReturn(successMsg('支付成功',array('wxPay'=>false,'successBackUrl'=>$successBackUrl)));
                 }else{
                     $unpaid -= $accountBalance;
                 }
@@ -454,5 +481,240 @@ class OrderController extends AuthUserController {
             $this->wallet = $wallet[0];
             $this->display();
         }
+    }
+
+
+    //团购订单处理
+    private function groupBuyHandle($modelOrder,$orderInfo){
+        $modelGroupBuy = D('GroupBuy');
+        $modelGroupBuyDetail = D('GroupBuyDetail');
+        $modelWallet = D('Wallet');
+        $modelWalletDetail = D('WalletDetail');
+        //更新团购表和团购详情表
+        //1.先更新团购详情表
+        $_POST = [];
+        $_POST['pay_status'] = 2;
+        $_POST['pay_time'] = date('YmdHis');
+        $where = array(
+            'user_id' => $orderInfo['user_id'],
+            'order_id' => $orderInfo['id'],
+        );
+        $returnData = $modelGroupBuyDetail-> saveGroupBuyDetail($where);
+        if ($returnData['status'] == 0) {
+            $modelGroupBuy->rollback();
+            //返回状态给微信服务器
+            $this->errorReturn($orderInfo['sn'], $modelGroupBuyDetail->getLastSql());
+        }
+        $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
+        $groupBuyDetail = $groupBuyDetail[0];
+        $ownOpenid = $groupBuyDetail['openid'];//自己的openid
+        $groupBuyId = $groupBuyDetail['group_buy_id']; //团购ID
+        //2.查看团购详情表此次团购有几人
+        unset($where);
+        $where = array(
+            'group_buy_id' => $groupBuyId,
+            'pay_status' => 2,
+        );
+        $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
+        $field=[ 'g.cash_back','g.goods_base_id','g.commission',
+            'gb.name','wxu.headimgurl','wxu.nickname','o.sn as order_sn'
+        ];
+        $join=[ ' left join myh.goods g on g.id = gbd.goods_id',
+            ' left join myh.goods_base gb on g.goods_base_id = gb.id ',
+            ' left join wx_user wxu on wxu.openid = gbd.openid',
+            ' left join orders o on o.id = gbd.order_id',
+        ];
+        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+
+        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
+        $goodsName = $templateMessageList[0]['name'];//产品名称
+        foreach ($templateMessageList as &$item){
+            if($item['type'] == 1){
+                $header = $item['nickname'];//团长呢称
+                break;
+            }
+        }
+        //修改团购表的过期时间
+        if($groupBuyNum == 1){
+            $_POST = [];
+            $_POST['overdue_time'] = strtotime('+3 day');
+            unset($where);
+            $where = array(
+                'id' => $groupBuyId,
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
+        }
+        //团购成功通知
+        $templateBase = array(
+            'touser'=>$ownOpenid,
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+            'url'=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>$groupBuyDetail['goods_id'],
+                    'groupBuyId'=> $groupBuyId,
+                    'shareType'=>'groupBuy' )),
+        );
+        $data = array(
+            'first'=>'亲，您已成功参加团购！',
+            'product_name'=>$goodsName,
+            'header'=>$header,
+            'remark'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团',
+        );
+        $this -> sendTemplateMessageGroupBuySuccess($templateBase,$data);
+        //修改团购表
+        if($groupBuyNum == 3){
+            $_POST = [];
+            $_POST['tag'] = 1;
+            unset($where);
+            $where = array(
+                'id' => $groupBuyId,
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
+            //返现退三个
+            //更新账户
+            unset($where);
+            $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
+            $where['status'] = 0;
+            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
+            }
+            //增加账户记录
+            foreach (array_column($templateMessageList,"user_id") as &$useId){
+                $_POST = [];
+                $_POST['user_id'] = $useId;
+                $_POST['amount'] = $cashBack;
+                $_POST['type'] = 3;
+                $_POST['create_time'] = time();
+                $res = $modelWalletDetail->addWalletDetail();
+                if ($res['status'] == 0) {
+                    $modelWallet->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
+                }
+            }
+            foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn =>&$openid){
+                //返现通知
+                $templateBase = array(
+                    'touser'=>$openid,
+                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+                    'url'=>$this->host.U('Earnings/index'),
+                );
+                $data = array(
+                    'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+                    'keyword1'=>$order_sn,
+                    'keyword2'=>$orderInfo['amount'],
+                    'keyword3'=>$cashBack,
+                    'remark'=>'祝您购物愉快！',
+                );
+                $this ->  sendTemplateMessageCashBack($templateBase,$data);
+            }
+        }
+        //只返现自己
+        if($groupBuyNum > 3){
+            //更新账户
+            unset($where);
+            $where['user_id'] = $orderInfo['user_id'];
+            $where['status'] = 0;
+            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
+            }
+            //增加账户记录
+            $_POST = [];
+            $_POST['user_id'] = $orderInfo['user_id'];
+            $_POST['amount'] = $cashBack;
+            $_POST['type'] = 3;
+            $_POST['create_time'] = time();
+            $res = $modelWalletDetail->addWalletDetail();
+            if ($res['status'] == 0) {
+                $modelWallet->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
+            }
+            //返现通知
+            $templateBase = array(
+                'touser'=>$ownOpenid,
+                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+                'url'=>$this->host.U('Earnings/index'),
+            );
+
+            $data = array(
+                'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+                'keyword1'=>$orderInfo['sn'],
+                'keyword2'=>$orderInfo['amount'],
+                'keyword3'=>$cashBack,
+                'remark'=>'祝您购物愉快！',
+            );
+            $this ->  sendTemplateMessageCashBack($templateBase,$data);
+        }
+
+        if (strpos(session('returnUrl'), 'groupBuyId') == true) {
+            if(strpos(session('returnUrl'), '?') == true){
+                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
+            }else{
+                $shLinkBase =  session('returnUrl');
+            }
+            $successBackUrl = $shLinkBase. '/shareType/groupBuy';
+        }else{
+            if (strpos(session('returnUrl'), 'html') == true){
+                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html'));
+            }else{
+                $shLinkBase = session('returnUrl');
+            }
+            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyId.'/shareType/groupBuy';
+        }
+        return $successBackUrl;
+    }
+
+    /**
+     * 确认收货
+     */
+    public function confirmReceive(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $modelLogistics = D('Logistics');
+        $modelOrder = D('Order');
+        $logisticsId = I('post.logisticsId',0);
+        if( $logisticsId){
+            $modelOrder->startTrans();//开启事务
+            $where['id'] = $logisticsId;
+            $_POST['status'] = 3;
+            $res = $modelLogistics->saveLogistics($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $_POST = [];
+            $_POST['logistics_status'] = 3;
+            $where = array(
+                'user_id' =>  $this->user['id'],
+                'logistics_id' => $logisticsId,
+            );
+            $res = $modelOrder->saveOrder($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $modelOrder->commit();//提交事务
+            $this->ajaxReturn(successMsg('已确认收货'));
+        }
+        $this->ajaxReturn($res);
     }
 }
