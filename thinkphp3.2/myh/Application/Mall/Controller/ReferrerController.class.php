@@ -48,30 +48,30 @@ class ReferrerController extends AuthUserController{
         }
         $userId = $this->user['id'];
         $rst = $this -> getQRcode('QR_LIMIT_SCENE', $userId);
-        $this->ajaxReturn(successMsg('成功',array('url'=>$rst['url'])));
-//        $where['user_id'] = $userId;
-//        $mode = D('member');
-//        $memberInfo = $mode->where($where)->find();
-//        if(!empty($memberInfo) && $memberInfo['qr_code']){
-//            $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
-//        }
-//        $avatarPath = $this->user['avatar'];
-//        $url =  $this->host.'/index.php/Mall/Index/index/userId/'.$userId;
-//        $newRelativePath = C('USER_LOGO');
-//        $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
-//        $data['qr_code'] = $shareQRCodes;
-//        $data['user_id'] = $this->user['id'];
-//        if(empty($memberInfo)){
-//            $res = $mode -> add($data);
-//        }
-//        if(!empty($memberInfo) && empty($memberInfo['qr_code'])){
-//            $res = $mode -> where($where)->save($data);
-//        }
-//        if($res){
-//            $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
-//        }else{
-//            $this->ajaxReturn(errorMsg('失败'));
-//        }
+        $this->ajaxReturn(successMsg('成功',array('url'=>$rst['url'])));exit;
+        $where['user_id'] = $userId;
+        $mode = D('member');
+        $memberInfo = $mode->where($where)->find();
+        if(!empty($memberInfo) && $memberInfo['qr_code']){
+            $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
+        }
+        $avatarPath = $this->user['avatar'];
+        $url =  $rst['url'];
+        $newRelativePath = C('USER_LOGO');
+        $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
+        $data['qr_code'] = $shareQRCodes;
+        $data['user_id'] = $this->user['id'];
+        if(empty($memberInfo)){
+            $res = $mode -> add($data);
+        }
+        if(!empty($memberInfo) && empty($memberInfo['qr_code'])){
+            $res = $mode -> where($where)->save($data);
+        }
+        if($res){
+            $this->ajaxReturn(successMsg('成功',array('url'=>$shareQRCodes)));
+        }else{
+            $this->ajaxReturn(errorMsg('失败'));
+        }
     }
 
     
