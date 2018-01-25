@@ -136,20 +136,21 @@
                     },
                     success: function(data){
                         $('.loading').hide();
-                        if(data.status == 0){
-                            if(data.url){
-                                location.href = data.url;
-                            }else{
-                                dialog.error(data.info);
-                            }
-                        }else if(data.status == 1){
-                            if(data.info=='isAjax'){
-                                loginDialog(flushPage);
-                            }else{
-                                $('.mask,.express-code-box').fadeIn();
-                                $('.twitter_code_img img').attr('src','/Uploads/'+data.url);
-                            }
-                        }
+                        console.log(data);
+//                        if(data.status == 0){
+//                            if(data.url){
+//                                location.href = data.url;
+//                            }else{
+//                                dialog.error(data.info);
+//                            }
+//                        }else if(data.status == 1){
+//                            if(data.info=='isAjax'){
+//                                loginDialog(flushPage);
+//                            }else{
+//                                $('.mask,.express-code-box').fadeIn();
+//                                $('.twitter_code_img img').attr('src','/Uploads/'+data.url);
+//                            }
+//                        }
                     }
                 });
             });
