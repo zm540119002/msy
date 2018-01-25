@@ -26,7 +26,6 @@ class OrderController extends AuthUserController {
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
                 ' left join logistics l on o.logistics_id = l.id ',
-
             );
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
@@ -82,7 +81,6 @@ class OrderController extends AuthUserController {
                 );
                 $modelOrder->saveOrder($where);
             }
-
             //订单信息查询
             $where = array(
                 'o.user_id' => $this->user['id'],
@@ -198,7 +196,6 @@ class OrderController extends AuthUserController {
         $where = array(
             'ct.user_id' => $this->user['id'],
         );
-
         $cartList = $modelCart->selectCart($where);
         foreach ($goodsList as $item){
             foreach ($cartList as $value){
@@ -460,8 +457,4 @@ class OrderController extends AuthUserController {
             $this->display();
         }
     }
-
-
-
-
 }
