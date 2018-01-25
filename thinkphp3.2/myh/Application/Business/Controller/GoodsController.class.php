@@ -60,6 +60,8 @@ class GoodsController extends BaseController {
         $this->goodsList = $goodsList['data'];
         $templateType = I('get.templateType','','string');
         if($templateType=='photo'){
+            //商品列表操作类型
+            $this->goodsListOptionType = I('get.goodsListOptionType','','string');
             $this ->display('goodsPhotoListTpl');
         }
     }

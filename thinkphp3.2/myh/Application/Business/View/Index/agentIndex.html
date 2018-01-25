@@ -8,7 +8,7 @@
         <section class="person_center_list bottomLine">
             <div class="person_center_item">
                 <span class="my_business icon"></span>
-                <a href="{:U('Agent/completeArchive')}" class="agent right-arrow">完善我的商务档案</a>
+                <a href="{:U('Agent/completeArchive',array('agentType'=>$agentType))}" class="agent right-arrow">完善我的商务档案</a>
             </div>
             <div class="person_center_item">
                 <span class="see_service icon"></span>
@@ -55,6 +55,7 @@
             buyType:7,
             templateType:'photo'
         };
+        config.goodsListOptionType = '{$goodsListOptionType}';
         var agentType = '{$agentType}';
         if(agentType==1){
             config.buyType = 6;
