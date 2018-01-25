@@ -32,16 +32,6 @@ $(function () {
         generateOrder(postData,buyNowCallBack);
     });
 
-    //商务-立即结算
-    $('body').on('click','.business_agent_pay_now',function(){
-        var postData = assemblyData();
-        if(!postData){
-            return false;
-        }
-        postData.url = MODULE + '/OrderAgent/generate';
-        generateOrder(postData,buyNowCallBack);
-    });
-
     //加入购物车
     $('body').on('click','.add_cart',function(){
         var postData = assemblyData();

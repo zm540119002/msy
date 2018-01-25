@@ -53,7 +53,6 @@ return array(
         array('determine'   => '确定',),//21
         array('authorise_agent'   => '授权代理商',),//22
         array('open_referrer'   => '一键免费开通推客分享功能',),//23
-        array('business_agent_pay_now'   => '立即结算',),//24
 
     ),
     //商品购买类型
