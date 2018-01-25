@@ -47,6 +47,9 @@ class ReferrerController extends AuthUserController{
             return errorMsg(C('NOT_POST'));
         }
         $userId = $this->user['id'];
+        $scene_type = 'QR_LIMIT_SCENE';
+        $res = $this -> getQRcode($scene_type, $userId);
+        print_r($res);exit;
         $where['user_id'] = $userId;
         $mode = D('member');
         $memberInfo = $mode->where($where)->find();
@@ -71,6 +74,12 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(errorMsg('失败'));
         }
     }
-    
+
+    //我的推客收益
+    public function referrerEarnings(){
+        $userId = $this->user['id'];
+
+    }
+
     
 }

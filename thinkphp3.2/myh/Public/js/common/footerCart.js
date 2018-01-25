@@ -131,8 +131,17 @@ $(function () {
                             if(data.info=='isAjax'){
                                 loginDialog();
                             }else{
-                                dialog.success('开通成功！');
-                                $('.open_referrer').hide();
+                                layer.open({
+                                    content : '已免费开通！<br/>推客分享功能',
+                                    btn:['确定'],
+                                    end : function(){
+
+                                    },
+                                    yes:function(index){
+                                        $('.open_referrer').hide();
+                                        layer.close(index)
+                                    }
+                                })
                             }
                         }
                     }
@@ -207,7 +216,6 @@ $(function () {
     $('body').on('click','.forward',function(){
         $.ajax({
             url: MODULE + '/CommonAuthUser/checkLogin',
-            data:{},
             type:'post',
             beforeSend: function(){
                 $('.loading').show();
