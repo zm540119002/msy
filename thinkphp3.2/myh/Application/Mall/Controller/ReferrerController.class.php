@@ -43,9 +43,9 @@ class ReferrerController extends AuthUserController{
 
     //我的平台推客二维码
     public function myQRCodes(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+//        if(!IS_POST){
+//            return errorMsg(C('NOT_POST'));
+//        }
         $userId = $this->user['id'];
         $scene_type = 'QR_LIMIT_SCENE';
         echo $scene_type;exit;
