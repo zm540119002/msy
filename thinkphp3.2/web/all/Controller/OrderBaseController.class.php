@@ -1,7 +1,5 @@
 <?php
-namespace Business\Controller;
-
-use web\all\Controller\AuthUserController;
+namespace web\all\Controller;
 
 class OrderBaseController extends AuthUserController {
     //我的订单
