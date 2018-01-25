@@ -47,8 +47,8 @@ class ReferrerController extends AuthUserController{
             return errorMsg(C('NOT_POST'));
         }
         $userId = $this->user['id'];
-        $scene_type = 'QR_LIMIT_SCENE';
-        $res = $this -> getQRcode($scene_type, $userId);
+//        $scene_type = 'QR_LIMIT_SCENE';
+//        $res = $this -> getQRcode($scene_type, $userId);
         $where['user_id'] = $userId;
         $mode = D('member');
         $memberInfo = $mode->where($where)->find();
