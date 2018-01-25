@@ -123,9 +123,9 @@
         $(function(){
             //我的二维码
             $('body').on('click','.my_qrcodes',function(){
-                var url = location.href;
+                var url = MODULE + '/Referrer/myQRCodes';
                 $.ajax({
-                    url: MODULE + '/Referrer/myQRCodes',
+                    url:url,
                     type: 'post',
                     beforeSend: function(){
                         $('.loading').show();
