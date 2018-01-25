@@ -54,7 +54,7 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
         }
         $avatarPath = $this->user['avatar'];
-        $url =  $this->host.'index.php/Mall/Index/index/userId/'.$userId;
+        $url =  $this->host.'/index.php/Mall/Index/index/userId/'.$userId;
         $newRelativePath = C('USER_LOGO');
         $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
         $data['qr_code'] = $shareQRCodes;
@@ -71,6 +71,6 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(errorMsg('失败'));
         }
     }
-    
+
     
 }
