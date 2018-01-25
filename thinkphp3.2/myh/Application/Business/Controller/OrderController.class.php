@@ -1,7 +1,7 @@
 <?php
-namespace web\all\Controller;
+namespace Business\Controller;
 
-class OrderBaseController extends AuthUserController {
+class OrderController extends AuthUserController {
     //我的订单
     public function orderManage(){
         $modelOrder = D('Order');
