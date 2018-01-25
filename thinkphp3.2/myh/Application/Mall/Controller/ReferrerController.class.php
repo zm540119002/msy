@@ -47,8 +47,6 @@ class ReferrerController extends AuthUserController{
             return errorMsg(C('NOT_POST'));
         }
         $userId = $this->user['id'];
-        $rst = $this -> getQRcode('QR_LIMIT_SCENE', $userId);
-        $this->ajaxReturn(successMsg('成功',array('url'=>$rst['url'])));exit;
         $where['user_id'] = $userId;
         $mode = D('member');
         $memberInfo = $mode->where($where)->find();
@@ -56,6 +54,7 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
         }
         $avatarPath = $this->user['avatar'];
+        $rst = $this -> getQRcode('QR_LIMIT_SCENE', $userId);
         $url =  $rst['url'];
         $newRelativePath = C('USER_LOGO');
         $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
@@ -73,6 +72,8 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(errorMsg('失败'));
         }
     }
+
+    
 
     
 }
