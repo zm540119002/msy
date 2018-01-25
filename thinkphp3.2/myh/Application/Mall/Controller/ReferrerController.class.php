@@ -59,7 +59,6 @@ class ReferrerController extends AuthUserController{
         $url =  $res['url'];
         $newRelativePath = C('USER_LOGO');
         $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
-        print_r($shareQRCodes);exit;
         $data['qr_code'] = $shareQRCodes;
         $data['user_id'] = $this->user['id'];
         if(empty($memberInfo)){
