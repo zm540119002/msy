@@ -10,7 +10,7 @@ class ReferrerController extends AuthUserController{
         $mode = D('Member');
         $where['user_id'] = $this->user['id'];
         $_POST['referrer_status'] = 1;
-        $rst = $mode->saveMember($where=array(),$rules=array());
+        $rst = $mode->saveMember($where);
         $this->ajaxReturn($rst);
     }
     //我的带产品推客二维码
@@ -19,6 +19,12 @@ class ReferrerController extends AuthUserController{
             return errorMsg(C('NOT_POST'));
         }
         $userId = $this->user['id'];
+        $where['user_id'] = $userId;
+        $memberInfo = D('Member') -> selectMember($where);
+        $memberInfo = $memberInfo[0];
+        if(empty($memberInfo) || $memberInfo['referrer_status'] != 1) {
+            $this ->ajaxReturn(errorMsg('没有开通推客分享功能!'));
+        }
         $avatarPath = $this->user['avatar'];
         $url = $_POST['url'];
         $url = substr($url,0,strrpos($url,'/shareType'));
@@ -72,8 +78,22 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(errorMsg('失败'));
         }
     }
-
-    
+    //推客收益
+    public function referrerIncome(){
+        $walletModel = D('Wallet');
+        $where = array(
+            'w.user_id' => $this->user['id'],
+            'wd.recharge_status' => 1
+        );
+        $field = array(
+            'wd.sn', 'wd.pay_sn', 'wd.type', 'wd.amount as wallet_detail_amount', 'wd.create_time',
+        );
+        $join = array(
+            ' left join wallet_detail wd on wd.user_id = w.user_id ',
+        );
+        $walletList = $walletModel -> selectWallet($where,$field,$join);
+        print_r($walletList);
+    }
 
     
 }
