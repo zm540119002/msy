@@ -1,5 +1,5 @@
 <?php
-namespace Business\Model;
+namespace Common\Model;
 
 use Think\Model;
 use Think\Model\RelationModel;
@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class UnitModel extends Model {
     protected $tableName = 'unit';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_BUSINESS';
+    protected $connection = 'DB_CONFIG_COMMON';
 
     protected $_validate = array();
 

@@ -7,7 +7,7 @@ class GoodsCategoryController extends BaseController {
     /**商品分类-管理
      */
     public function goodsCategoryManage(){
-        $model = D('Business/GoodsCategory');
+        $model = D('GoodsCategory');
         if(IS_POST){
             $level = I('post.level',0,'int');
             $where = array();
@@ -33,7 +33,7 @@ class GoodsCategoryController extends BaseController {
     /**商品分类-编辑
      */
     public function goodsCategoryEdit(){
-        $model = D('Business/GoodsCategory');
+        $model = D('GoodsCategory');
         if(IS_POST){
             if( isset($_POST['img']) && $_POST['img'] ){
                 $_POST['img'] = $this->moveImgFromTemp(C('GOODS_CATEGORY_IMG'),basename($_POST['img']));
@@ -77,7 +77,7 @@ class GoodsCategoryController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $model = D('Business/GoodsCategory');
+        $model = D('GoodsCategory');
         $res = $model->delGoodsCategory();
         $this->ajaxReturn($res);
     }

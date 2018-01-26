@@ -11,7 +11,7 @@ class GoodsController extends BaseController {
             //所有商品分类
             $this->allCategoryList = D('GoodsCategory')->selectGoodsCategory();
             //单位
-            $modelUnit = D('Business/Unit');
+            $modelUnit = D('Unit');
             $unitList = $modelUnit->selectUnit();
             $this->assign('unitList',$unitList);
             $this->display();
@@ -181,7 +181,7 @@ class GoodsController extends BaseController {
                 $this->assign('goodsBaseInfo',$goodsBaseInfo[0]);
             }
             //单位
-            $modelUnit = D('Business/Unit');
+            $modelUnit = D('Unit');
             $unitList = $modelUnit->selectUnit();
             $this->assign('unitList',$unitList);
 

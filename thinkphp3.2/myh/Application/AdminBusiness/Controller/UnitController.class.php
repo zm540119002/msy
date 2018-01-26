@@ -7,7 +7,7 @@ class UnitController extends BaseController {
     /**单位-管理
      */
     public function unitManage(){
-        $modelUnit = D('Business/Unit');
+        $modelUnit = D('Unit');
         if(IS_POST){
             $this->unitList = $modelUnit->selectUnit();
             $this->display('unitList');
@@ -20,7 +20,7 @@ class UnitController extends BaseController {
     /**单位-编辑
      */
     public function unitEdit(){
-        $modelUnit = D('Business/Unit');
+        $modelUnit = D('Unit');
         if(IS_POST){
             if(isset($_POST['unitId']) && intval($_POST['unitId'])){
                 $res = $modelUnit->saveUnit();
@@ -47,7 +47,7 @@ class UnitController extends BaseController {
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
 
-        $modelUnit = D('Business/Unit');
+        $modelUnit = D('Unit');
         $where = array(
             'ut.status' => 0,
         );
@@ -79,7 +79,7 @@ class UnitController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $modelUnit = D('Business/Unit');
+        $modelUnit = D('Unit');
         $res = $modelUnit->delUnit();
         $this->ajaxReturn($res);
     }
