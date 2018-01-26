@@ -7,7 +7,7 @@ use Think\Model\RelationModel;
 class MemberModel extends Model {
     protected $tableName = 'member';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_BUSINESS';
     protected $_validate = array();
 
     //新增
