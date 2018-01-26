@@ -202,7 +202,7 @@ class GoodsController extends BaseController {
 
     //公共图片编辑
     public function commonImageEdit(){
-        $model = M('common_images','','DB_CONFIG_MALL');
+        $model = M('common_images','','DB_CONFIG_MYH');
         $commonImg = $model -> find();
         if(IS_POST) {
             if (isset($_POST['common_img']) && $_POST['common_img']) {
