@@ -73,7 +73,7 @@ class GoodsController extends BaseController {
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
                 foreach ($addData as $item) {
-                    $return =  D('goods')->add($item);
+                    $return =  D('Goods')->add($item);
                     if(!$return){
                         $this->ajaxReturn(errorMsg('增加失败'));
                     }
@@ -84,7 +84,7 @@ class GoodsController extends BaseController {
                 $editData=$_POST['editData'];
                 foreach ($editData as $item) {
                     $where['id']=$item['goods_id'];
-                    $return =  D('goods')->where($where)->save($item);
+                    $return =  D('Goods')->where($where)->save($item);
                     if(false===$return){
                         $this->ajaxReturn(errorMsg('修改失败'));
                     }
@@ -95,7 +95,7 @@ class GoodsController extends BaseController {
                 $addData=$_POST['delData'];
                 foreach ($addData as $item) {
                     $where['id']=$item;
-                    $return =  D('goods')->where($where)->delete();
+                    $return =  D('Goods')->where($where)->delete();
                     if(!$return){
                         $this->ajaxReturn(errorMsg('删除失败'));
                     }
@@ -183,7 +183,7 @@ class GoodsController extends BaseController {
                 $this->assign('goodsBaseInfo',$goodsBaseInfo[0]);
             }
             //单位
-            $modelUnit = D('Unit');
+            $modelUnit = D('Business/Unit');
             $unitList = $modelUnit->selectUnit();
             $this->assign('unitList',$unitList);
 
@@ -203,7 +203,7 @@ class GoodsController extends BaseController {
 
     //公共图片编辑
     public function commonImageEdit(){
-        $model = M('common_images','','DB_CONFIG_MALL');
+        $model = D('CommonImages');
         $commonImg = $model -> find();
         if(IS_POST) {
             if (isset($_POST['common_img']) && $_POST['common_img']) {
