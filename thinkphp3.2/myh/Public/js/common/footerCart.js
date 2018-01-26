@@ -370,6 +370,7 @@ function calculateTotalPrice(){
     }
     var isInt = true;
     var amount = 0;
+    var totalNum = 0;
     $.each(_thisLis,function(){
         var _thisLi = $(this);
         var num = _thisLi.find('.gshopping_count').val();
@@ -378,12 +379,14 @@ function calculateTotalPrice(){
             return false;
         }
         amount += _thisLi.find('price').text() * num;
+        totalNum += num;
     });
     if(!isInt){
         dialog.error('购买数量为正整数');
         return false;
     }
     $('footer').find('price').html(amount.toFixed(2));
+    $('footer').find('num').text(parseInt(totalNum));
 }
 
 //单个商品数量自减
