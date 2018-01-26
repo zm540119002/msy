@@ -282,11 +282,7 @@ $(function () {
 
 //生成订单
 function generateOrder(postData,callBack) {
-<<<<<<< HEAD
-    var url = postData.url?postData.url:MODULE + '/Order/generate';
-=======
     postData.url = postData.url?postData.url:MODULE + '/Order/generate';
->>>>>>> 15286bba6a6fb8517bf3ec048c88c9d84b5a63d9
     $.ajax({
         url: postData.url,
         data: postData,
