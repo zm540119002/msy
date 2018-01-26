@@ -1,5 +1,5 @@
 <?php
-namespace Mall\Model;
+namespace Business\Model;
 
 use Think\Model;
 use Think\Model\RelationModel;
