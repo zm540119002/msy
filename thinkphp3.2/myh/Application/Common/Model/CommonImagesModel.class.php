@@ -1,20 +1,21 @@
 <?php
-namespace Business\Model;
+namespace Common\Model;
 
 use Think\Model;
 use Think\Model\RelationModel;
 
-class WalletDetailModel extends Model {
-    protected $tableName = 'wallet_detail';
+class CommonImagesModel extends Model {
+    protected $tableName = 'common_images';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_BUSINESS';
+    protected $connection = 'DB_CONFIG_MYH';
 
-    protected $_validate = array(
-    );
+    protected $_validate = array();
 
     //新增
-    public function addWalletDetail(){
+    public function addCommonImages($rules=array()){
         unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
+
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
@@ -26,70 +27,71 @@ class WalletDetailModel extends Model {
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('新增成功',$returnArray);
     }
 
     //修改
-    public function saveWalletDetail($where=array()){
+    public function saveCommonImages($where=array(),$rules=array()){
         unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
+
+        $_where = array(
+        );
+        $id = I('post.commonImagesId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
+        $_where = array_merge($_where,$where);
+
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-        $_where = array();
-        $id = I('post.walletDetailId',0,'int');
-        if($id){
-            $_where = array(
-                'id' => $id,
-            );
-        }
-        $res = $this->where(array_merge($_where,$where))->save();
+        $res = $this->where($_where)->save();
         if($res === false){
             return errorMsg($this->getError());
         }
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('修改成功',$returnArray);
     }
 
     //标记删除
-    public function delWalletDetail($where=array()){
-        unset($_POST['id']);
-
-        $_where = array();
-        $id = I('post.walletDetailId',0,'int');
-        if($id){
-            $_where = array(
-                'id' => $id,
-            );
+    public function delCommonImages($where=array()){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
         }
-        $res = $this->where(array_merge($_where,$where))->setField('status',2);
+        unset($_POST['id']);
+        $_where = array(
+        );
+        $id = I('post.commonImagesId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
+        $_where = array_merge($_where,$where);
+
+        $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('删除成功',$returnArray);
     }
 
     //查询
-    public function selectWalletDetail($where=[],$field=[],$join=[]){
+    public function selectCommonImages($where=[],$field=[],$join=[]){
         $_where = array(
-            'wd.status' => 0,
         );
         $_field = array(
-            'wd.id','wd.type','wd.amount','wd.create_time','wd.user_id','wd.sn',
+            'ci.id','ci.common_img',
         );
         $_join = array(
         );
         $list = $this
-            ->alias('wd')
+            ->alias('ci')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

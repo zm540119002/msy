@@ -52,6 +52,7 @@ return array(
         array('group_buy_end'   => '该团已结束，重新开团',),//20
         array('determine'   => '确定',),//21
         array('authorise_agent'   => '授权代理商',),//22
+        array('open_referrer'   => '一键免费开通推客分享功能',),//23
 
     ),
     //商品购买类型
@@ -80,7 +81,7 @@ return array(
         ),
         '4'=>array(
             'buy_type' =>'4',
-            'name'=>'礼品采购',
+            'name'=>'礼品采购代理商',
             'price_name'=>'礼品采购价',
             'partner_commission'=>'城市合伙人提成',
         ),
@@ -101,7 +102,6 @@ return array(
             'name'=>'城市合伙人',
             'price_name'=>'城市合伙人价',
         ),
-
     ),
 
     //快递公司'承接公司：0：自有 1：顺丰 2：圆通 3:申通 4：韵达',
@@ -175,5 +175,4 @@ return array(
         'order_pay_valid_time'=>60*60*24*3,//订单支付有效时间
         'cart_valid_time'=>60*60*24*7,//购物车有效时间
     ],
-
 );

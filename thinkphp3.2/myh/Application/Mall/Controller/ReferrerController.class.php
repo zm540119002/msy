@@ -2,6 +2,17 @@
 namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 class ReferrerController extends AuthUserController{
+    //开通推客分享功能
+    public function openReferrer(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $mode = D('Member');
+        $where['user_id'] = $this->user['id'];
+        $_POST['referrer_status'] = 1;
+        $rst = $mode->saveMember($where=array(),$rules=array());
+        $this->ajaxReturn($rst);
+    }
     //我的带产品推客二维码
     public function myQRCodesWithGoods(){
         if(!IS_POST){
@@ -43,7 +54,8 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
         }
         $avatarPath = $this->user['avatar'];
-        $url =  $this->host.'index.php/Mall/Index/index/userId/'.$userId;
+        $rst = $this -> getQRcode('QR_LIMIT_SCENE', $userId);
+        $url =  $rst['url'];
         $newRelativePath = C('USER_LOGO');
         $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
         $data['qr_code'] = $shareQRCodes;
@@ -60,6 +72,8 @@ class ReferrerController extends AuthUserController{
             $this->ajaxReturn(errorMsg('失败'));
         }
     }
+
     
+
     
 }
