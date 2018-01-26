@@ -25,7 +25,7 @@ $(function () {
 
     //立即结算/立即购买
     $('body').on('click','.buy_now,.clearing_now',function(){
-        var postData = assemblyData();
+        var postData = assemblyData($('ul.goods_list').find('li'));
         if(!postData){
             return false;
         }
@@ -33,8 +33,14 @@ $(function () {
     });
 
     //加入购物车
-    $('body').on('click','.add_cart',function(){
-        var postData = assemblyData();
+    $('body').on('click','.add_cart,.add_purchase_cart',function(){
+        var lis = null;
+        if($($(this).context).hasClass('add_purchase_cart')){
+            lis = $(this).parents('li');
+        }else{
+            lis = $('ul.goods_list').find('li');
+        }
+        var postData = assemblyData(lis);
         if(!postData){
             return false;
         }
@@ -56,6 +62,11 @@ $(function () {
                     dialog.error(data.info);
                 }else if(data.status==1){
                     dialog.success(data.info);
+                    var num = 0;
+                    $.each(lis,function(){
+                        num += $(this).find('.gshopping_count').val();
+                    });
+                    $('footer').find('num').text(parseInt($('footer').find('num').text())+parseInt(num));
                 }
             }
         });
@@ -255,7 +266,7 @@ $(function () {
     }
     //发起微团购并支付
     $('body').on('click','.initiate_group_buy',function(){
-        var postData = assemblyData();
+        var postData = assemblyData($('ul.goods_list').find('li'));
         if(!postData){
             return false;
         }
@@ -328,8 +339,7 @@ function clockArea() {
 }
 
 //组装数据
-function assemblyData() {
-    var lis = $('ul.goods_list').find('li');
+function assemblyData(lis) {
     if(!$('footer').find('price').length){
         return false;
     }
