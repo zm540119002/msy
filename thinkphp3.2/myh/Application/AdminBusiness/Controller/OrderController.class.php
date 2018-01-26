@@ -7,7 +7,7 @@ class OrderController extends BaseController {
     /**订单-编辑
      */
     public function OrderEdit(){
-        $modelOrder = D('Order');
+        $modelOrder = D('Business/Order');
         if(IS_POST){
             if(isset($_POST['OrderId']) && intval($_POST['OrderId'])){
                 $res = $modelOrder->saveOrder();
@@ -33,7 +33,7 @@ class OrderController extends BaseController {
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-        $modelOrder = D('Order');
+        $modelOrder = D('Business/Order');
         $where['o.status'] = 0;
         $where['o.logistics_status'] = array('gt',0);
         $logistics_status = $_GET['logistics_status'];
@@ -71,7 +71,7 @@ class OrderController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $modelOrder = D('Order');
+        $modelOrder = D('Business/Order');
         $res = $modelOrder->delOrder();
         $this->ajaxReturn($res);
     }
@@ -83,7 +83,7 @@ class OrderController extends BaseController {
         if(!isset($_GET['orderId']) || !intval($_GET['orderId'])){
             $this->error('缺少订单ID');
         }
-        $model = D('OrderDetail');
+        $model = D('Business/OrderDetail');
         $where['od.order_id'] = intval($_GET['orderId']);
         $field=[ 'o.id','o.sn','o.status as o_status','o.logistics_status','o.after_sale_status','o.payment_code',
             'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
@@ -116,7 +116,7 @@ class OrderController extends BaseController {
             array('logistics_status','订单状态'),
             array('pay_status','支付状态'),
         );
-        $model = D('Order');
+        $model = D('Business/Order');
         $where['o.status'] = 0;
         $where['o.logistics_status'] = array('gt',0);
         $logistics_status = $_GET['logistics_status'];
