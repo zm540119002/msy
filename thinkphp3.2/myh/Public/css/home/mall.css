@@ -2545,7 +2545,7 @@ background-size:contain;
     padding:0 0.12rem 0.20rem 0.12rem;
     margin:0 0 0.20rem 0;
 }
-.agent_list_item .add_cart{
+.agent_list_item .add_cart,.add_purchase_cart{
     height:28px;
     color:#fff;
     background:#009a3e;

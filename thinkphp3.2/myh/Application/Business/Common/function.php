@@ -45,3 +45,24 @@ function checkIsAgentByMobilePhone($mobilePhone){
     $count = $modelAgent->alias('a')->join($join)->where($where)->count('1');
     return $count?true:false;
 }
+
+/**购物车统计
+ * @param $userId
+ * @return int
+ */
+function cartCountByUserId($userId){
+    $modelCart = D('Cart');
+    if($userId){//已登录
+        $where = array(
+            'ct.user_id' => $userId,
+        );
+        $cart = $modelCart->selectCart($where);
+    }else{//未登录
+        $cart = unserialize(cookie('cart'));
+    }
+    $cartCount = 0;
+    foreach ($cart as $value){
+        $cartCount += $value['num'];
+    }
+    return $cartCount;
+}

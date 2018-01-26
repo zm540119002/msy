@@ -10,7 +10,7 @@
             <!--购物篮-->
             <div class="group_btn25 bfff">
                 <a href="{:U('Cart/index')}" class="share_column shopping_cart_column shopping_basket">
-                    <span class="s_c"><i>5</i></span></a>
+                    <span class="s_c"><i><num>{$cartCount}</num></i></span></a>
             </div>
         </notempty><notempty name="vo.amount">
             <!--总价-->
@@ -23,9 +23,6 @@
         </notempty><notempty name="vo.clearing_now">
             <!--立即结算-->
             <a href="javascript:void(0);" class="group_btn50 bff1d25 clearing_now"><i class="collect"></i>{$vo.clearing_now}</a>
-        </notempty><notempty name="vo.business_agent_pay_now">
-            <!--商务-代理商-立即结算-->
-            <a href="javascript:void(0);" class="group_btn50 bff1d25 business_agent_pay_now"><i class="collect"></i>{$vo.business_agent_pay_now}</a>
         </notempty><notempty name="vo.buy_now">
             <!--立即购买-->
             <a href="javascript:void(0);" class="group_btn50 bff1d25 buy_now"><i class="collect"></i>{$vo.buy_now}</a>

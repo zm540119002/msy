@@ -19,13 +19,18 @@ class IndexController extends BaseController{
         //判断是否登录
         $this->user = AuthUser::check();
         if($this->user){
+            //购物车统计
+            $this->cartCount = cartCountByUserId($this->user['id']);
             $this->assign('user',$this->user);
+            AgentCache::remove($this->user['id']);
             $this->agent = AgentCache::get($this->user['id']);
             if(!$this->agent){
-                $this->agent = AgentCache::get($this->user['mobile_phone']);
+                AgentCache::removeByMobilePhone($this->user['mobile_phone']);
+                $this->agent = AgentCache::getByMobilePhone($this->user['mobile_phone']);
                 if($this->agent){
                     //购物车配置开启的项
-                    $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,24));
+                    $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+                    $this->goodsListOptionType = 'withCartMenu';
                 }
             }
         }
@@ -42,11 +47,15 @@ class IndexController extends BaseController{
         //判断是否登录
         $this->user = AuthUser::check();
         if($this->user){
+            //购物车统计
+            $this->cartCount = cartCountByUserId($this->user['id']);
             $this->assign('user',$this->user);
+            PartnerCache::remove($this->user['id']);
             $this->partner = PartnerCache::get($this->user['id']);
             if($this->partner){
                 //购物车配置开启的项
-                $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,24));
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(1,2,5));
+                $this->goodsListOptionType = 'withCartMenu';
             }
         }
         $this->display();

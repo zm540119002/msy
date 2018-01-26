@@ -3,7 +3,7 @@ namespace Business\Controller;
 
 use web\all\Controller\AuthUserController;
 
-class OrderBaseController extends AuthUserController {
+class OrderController extends AuthUserController {
     //我的订单
     public function orderManage(){
         $modelOrder = D('Order');
@@ -19,7 +19,7 @@ class OrderBaseController extends AuthUserController {
                 $where['o.logistics_status'] = I('get.s',0,'int');
             }
             $field = array(
-                'o.id','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
+                'o.id','o.create_time as order_start_time','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
                 'ca.city','ca.area','ca.detailed_address',
                 'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
             );
@@ -30,12 +30,15 @@ class OrderBaseController extends AuthUserController {
             $orderList = $modelOrder->selectOrder($where,$field,$join);
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
+                'gb.main_img',
             );
             $join = array(
-                ' left join goods g on g.id = od.foreign_id ',
-                ' left join goods_base gb on gb.id = g.goods_base_id ',
+                ' left join myh.goods g on g.id = od.foreign_id ',
+                ' left join myh.goods_base gb on gb.id = g.goods_base_id ',
             );
-            foreach ($orderList as &$item) {
+            foreach ($orderList as $k=>&$item) {
+                $item['order_overdue_time'] = $item['order_start_time'] + 3*24*60*60;
+                $item['order_overdue_time1'] =  date("Y-m-d H:i:s", $item['order_overdue_time']);
                 $where = array(
                     'od.order_sn' => $item['sn'],
                 );
@@ -45,6 +48,8 @@ class OrderBaseController extends AuthUserController {
             $this->orderList = $orderList;
             //商品列表操作类型
             $this->goodsListOptionType = 'withNum';
+            $this -> current_time = time();
+            $this -> current_time1 = date("Y-m-d H:i:s");
             $this->display();
         }
     }
@@ -81,6 +86,7 @@ class OrderBaseController extends AuthUserController {
                 );
                 $modelOrder->saveOrder($where);
             }
+
             //订单信息查询
             $where = array(
                 'o.user_id' => $this->user['id'],
@@ -99,8 +105,8 @@ class OrderBaseController extends AuthUserController {
                 'od.order_sn' => $orderInfo['sn'],
             );
             $join = array(
-                ' left join goods g on g.id = od.foreign_id ',
-                ' left join goods_base gb on gb.id = g.goods_base_id ',
+                ' left join myh.goods g on g.id = od.foreign_id ',
+                ' left join myh.goods_base gb on gb.id = g.goods_base_id ',
             );
             $field = array(
                 'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
@@ -130,6 +136,7 @@ class OrderBaseController extends AuthUserController {
             $this->ajaxReturn(errorMsg('未提交数据'));
         }
         $orderType = intval($_POST['orderType'])?:0;
+        $groupBuyId = intval($_POST['groupBuyId'])?:0;
         //查询商品信息
         $modelGoods = D('Goods');
         $amount = 0;
@@ -196,6 +203,7 @@ class OrderBaseController extends AuthUserController {
         $where = array(
             'ct.user_id' => $this->user['id'],
         );
+
         $cartList = $modelCart->selectCart($where);
         foreach ($goodsList as $item){
             foreach ($cartList as $value){
@@ -212,9 +220,6 @@ class OrderBaseController extends AuthUserController {
                     }
                 }
             }
-        }
-        if($orderType == 1){//团购
-            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId);
         }
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功',array('orderId'=>$orderId)));
@@ -245,8 +250,6 @@ class OrderBaseController extends AuthUserController {
         $modelCouponsReceive = D('CouponsReceive');
         $modelWallet = D('Wallet');
         $modelWalletDetail = D('WalletDetail');
-        $modelGroupBuy = D('GroupBuy');
-        $modelGroupBuyDetail = D('GroupBuyDetail');
         if(IS_POST){
             //订单信息
             if(isset($_POST['orderId']) && intval($_POST['orderId'])){
@@ -322,6 +325,9 @@ class OrderBaseController extends AuthUserController {
                         $modelOrder->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+                    if($orderInfo['type'] == 1){//团购订单处理
+                        $this -> groupBuyHandle($modelOrder,$orderInfo);
+                    }
                     //减库存
                     $res = $modelGoods -> decGoodsNum($orderDetail);
 
@@ -330,7 +336,7 @@ class OrderBaseController extends AuthUserController {
                         $this->ajaxReturn(errorMsg($res));
                     }
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
+                    $this->ajaxReturn(successMsg('支付成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
                 }else{
                     $unpaid -= $couponsInfo['amount'];
                 }
@@ -397,8 +403,11 @@ class OrderBaseController extends AuthUserController {
                         $modelWallet->rollback();
                         $this->ajaxReturn(errorMsg($res));
                     }
+                    if($orderInfo['type'] == 1){//团购订单处理
+                        $successBackUrl = $this -> groupBuyHandle($modelOrder,$orderInfo);
+                    }
                     $modelOrder->commit();//提交事务
-                    $this->ajaxReturn(successMsg('成功',array('wxPay'=>false,'buy_type'=>$orderDetail['type'])));
+                    $this->ajaxReturn(successMsg('支付成功',array('wxPay'=>false,'successBackUrl'=>$successBackUrl)));
                 }else{
                     $unpaid -= $accountBalance;
                 }
@@ -456,5 +465,43 @@ class OrderBaseController extends AuthUserController {
             $this->wallet = $wallet[0];
             $this->display();
         }
+    }
+
+    /**
+     * 确认收货
+     */
+    public function confirmReceive(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        $modelLogistics = D('Logistics');
+        $modelOrder = D('Order');
+        $logisticsId = I('post.logisticsId',0);
+        if( $logisticsId){
+            $modelOrder->startTrans();//开启事务
+            $where['id'] = $logisticsId;
+            $_POST['status'] = 3;
+            $res = $modelLogistics->saveLogistics($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $_POST = [];
+            $_POST['logistics_status'] = 3;
+            $where = array(
+                'user_id' =>  $this->user['id'],
+                'logistics_id' => $logisticsId,
+            );
+            $res = $modelOrder->saveOrder($where);
+            if($res['status'] == 0){
+                $modelLogistics->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn('确认收货失败！');
+            }
+            $modelOrder->commit();//提交事务
+            $this->ajaxReturn(successMsg('已确认收货'));
+        }
+        $this->ajaxReturn($res);
     }
 }

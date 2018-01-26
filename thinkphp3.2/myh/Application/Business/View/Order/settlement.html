@@ -107,7 +107,9 @@
                             //去支付
                             if(data.wxPay){
                                 location.href = MODULE + '/Payment/orderPayment/orderId/' + postData.orderId;
-                            }else{
+                            }else if(data.successBackUrl){
+                                dialog.success(data.info,data.successBackUrl);
+                            }else {
                                 location.href = MODULE + '/Payment/payComplete';
                             }
                         }

@@ -3,7 +3,7 @@ namespace web\all\Controller;
 
 use web\all\Cache\PartnerCache;
 
-class AuthPartnerController extends OrderBaseController{
+class AuthPartnerController extends AuthUserController{
     protected $partner = null;
     protected $partnerAuthoriseUrl = 'Home/PartnerAuthorise/index';
     protected $partnerSeatDepositUrl = 'Home/PartnerAuthorise/seatDeposit';

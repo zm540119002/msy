@@ -25,26 +25,22 @@ $(function () {
 
     //立即结算/立即购买
     $('body').on('click','.buy_now,.clearing_now',function(){
-        var postData = assemblyData();
+        var postData = assemblyData($('ul.goods_list').find('li'));
         if(!postData){
             return false;
         }
-        generateOrder(postData,buyNowCallBack);
-    });
-
-    //商务-立即结算
-    $('body').on('click','.business_agent_pay_now',function(){
-        var postData = assemblyData();
-        if(!postData){
-            return false;
-        }
-        postData.url = MODULE + '/OrderAgent/generate';
         generateOrder(postData,buyNowCallBack);
     });
 
     //加入购物车
-    $('body').on('click','.add_cart',function(){
-        var postData = assemblyData();
+    $('body').on('click','.add_cart,.add_purchase_cart',function(){
+        var lis = null;
+        if($($(this).context).hasClass('add_purchase_cart')){
+            lis = $(this).parents('li');
+        }else{
+            lis = $('ul.goods_list').find('li');
+        }
+        var postData = assemblyData(lis);
         if(!postData){
             return false;
         }
@@ -66,6 +62,11 @@ $(function () {
                     dialog.error(data.info);
                 }else if(data.status==1){
                     dialog.success(data.info);
+                    var num = 0;
+                    $.each(lis,function(){
+                        num += $(this).find('.gshopping_count').val();
+                    });
+                    $('footer').find('num').text(parseInt($('footer').find('num').text())+parseInt(num));
                 }
             }
         });
@@ -265,7 +266,7 @@ $(function () {
     }
     //发起微团购并支付
     $('body').on('click','.initiate_group_buy',function(){
-        var postData = assemblyData();
+        var postData = assemblyData($('ul.goods_list').find('li'));
         if(!postData){
             return false;
         }
@@ -281,9 +282,13 @@ $(function () {
 
 //生成订单
 function generateOrder(postData,callBack) {
+<<<<<<< HEAD
     var url = postData.url?postData.url:MODULE + '/Order/generate';
+=======
+    postData.url = postData.url?postData.url:MODULE + '/Order/generate';
+>>>>>>> 15286bba6a6fb8517bf3ec048c88c9d84b5a63d9
     $.ajax({
-        url: url,
+        url: postData.url,
         data: postData,
         type: 'post',
         beforeSend: function(){
@@ -338,8 +343,7 @@ function clockArea() {
 }
 
 //组装数据
-function assemblyData() {
-    var lis = $('ul.goods_list').find('li');
+function assemblyData(lis) {
     if(!$('footer').find('price').length){
         return false;
     }
