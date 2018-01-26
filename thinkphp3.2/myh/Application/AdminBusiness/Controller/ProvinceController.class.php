@@ -7,7 +7,7 @@ class ProvinceController extends BaseController {
     /**省份-管理
      */
     public function provinceManage(){
-        $modelProvince = D('Province');
+        $modelProvince = D('Business/Province');
         if(IS_POST){
             $this->provinceList = $modelProvince->selectProvince();
             $this->display('provinceList');
@@ -20,7 +20,7 @@ class ProvinceController extends BaseController {
     /**省份-编辑
      */
     public function provinceEdit(){
-        $modelProvince = D('Province');
+        $modelProvince = D('Business/Province');
         if(IS_POST){
             if(isset($_POST['provinceId']) && intval($_POST['provinceId'])){
                 $res = $modelProvince->saveProvince();
@@ -46,7 +46,7 @@ class ProvinceController extends BaseController {
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-        $modelProvince = D('Province');
+        $modelProvince = D('Business/Province');
         $where = array(
             'pv.status' => 0,
         );
@@ -75,7 +75,7 @@ class ProvinceController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $modelProvince = D('Province');
+        $modelProvince = D('Business/Province');
         $res = $modelProvince->delProvince();
         $this->ajaxReturn($res);
     }

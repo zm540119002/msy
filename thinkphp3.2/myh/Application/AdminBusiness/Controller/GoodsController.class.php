@@ -9,9 +9,9 @@ class GoodsController extends BaseController {
         if(IS_POST){
         }else{
             //所有商品分类
-            $this->allCategoryList = D('GoodsCategory')->selectGoodsCategory();
+            $this->allCategoryList = D('Business/GoodsCategory')->selectGoodsCategory();
             //单位
-//            $modelUnit = D('Unit');
+//            $modelUnit = D('Business/Unit');
 //            $unitList = $modelUnit->selectUnit();
 //            $this->assign('unitList',$unitList);
 
@@ -25,7 +25,7 @@ class GoodsController extends BaseController {
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
 
-        $model = D('GoodsBase');
+        $model = D('Business/GoodsBase');
         $where = array(
             'gb.status' => 0,
             'gb.on_off_line' => 1,
@@ -73,7 +73,7 @@ class GoodsController extends BaseController {
             if(isset($_POST['addData'])){
                 $addData=$_POST['addData'];
                 foreach ($addData as $item) {
-                    $return =  D('goods')->add($item);
+                    $return =  D('Business/goods')->add($item);
                     if(!$return){
                         $this->ajaxReturn(errorMsg('增加失败'));
                     }
@@ -84,7 +84,7 @@ class GoodsController extends BaseController {
                 $editData=$_POST['editData'];
                 foreach ($editData as $item) {
                     $where['id']=$item['goods_id'];
-                    $return =  D('goods')->where($where)->save($item);
+                    $return =  D('Business/goods')->where($where)->save($item);
                     if(false===$return){
                         $this->ajaxReturn(errorMsg('修改失败'));
                     }
@@ -95,7 +95,7 @@ class GoodsController extends BaseController {
                 $addData=$_POST['delData'];
                 foreach ($addData as $item) {
                     $where['id']=$item;
-                    $return =  D('goods')->where($where)->delete();
+                    $return =  D('Business/goods')->where($where)->delete();
                     if(!$return){
                         $this->ajaxReturn(errorMsg('删除失败'));
                     }
@@ -107,10 +107,10 @@ class GoodsController extends BaseController {
             //所有商品分类
             if(isset($_GET['goodsBaseId']) && intval($_GET['goodsBaseId'])){
                 $where['id'] = intval($_GET['goodsBaseId']);
-                $goodsBaseInfo = D('GoodsBase')-> where($where) -> field('id,name,price') -> find();
+                $goodsBaseInfo = D('Business/GoodsBase')-> where($where) -> field('id,name,price') -> find();
                 $this->goodsBaseInfo = $goodsBaseInfo;
                 $where1['goods_base_id'] = intval($_GET['goodsBaseId']);
-                $goodsList = D('Goods') -> where($where1)->select();
+                $goodsList = D('Business/Goods') -> where($where1)->select();
                 $buyTypeArray=[];
                 foreach ($goodsList as $item) {
                     $buyTypeArray[] = $item['buy_type'];
@@ -126,7 +126,7 @@ class GoodsController extends BaseController {
 
     //商品编辑
     public function goodsBaseEdit(){
-        $model = D('GoodsBase');
+        $model = D('Business/GoodsBase');
         if(IS_POST){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = $this->moveImgFromTemp(C('GOODS_MAIN_IMG'),basename($_POST['main_img']));
@@ -173,7 +173,7 @@ class GoodsController extends BaseController {
             $this->ajaxReturn($res);
         }else{
             //所有商品分类
-            $this->allCategoryList = D('GoodsCategory')->selectGoodsCategory();
+            $this->allCategoryList = D('Business/GoodsCategory')->selectGoodsCategory();
             //要修改的商品
             if(isset($_GET['goodsBaseId']) && intval($_GET['goodsBaseId'])){
                 $where = array(
@@ -183,7 +183,7 @@ class GoodsController extends BaseController {
                 $this->assign('goodsBaseInfo',$goodsBaseInfo[0]);
             }
             //单位
-            $modelUnit = D('Unit');
+            $modelUnit = D('Business/Unit');
             $unitList = $modelUnit->selectUnit();
             $this->assign('unitList',$unitList);
 
@@ -196,7 +196,7 @@ class GoodsController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $model = D('GoodsBase');
+        $model = D('Business/GoodsBase');
         $res = $model->delGoodsBase();
         $this->ajaxReturn($res);
     }
