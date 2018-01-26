@@ -11,10 +11,9 @@ class GoodsController extends BaseController {
             //所有商品分类
             $this->allCategoryList = D('GoodsCategory')->selectGoodsCategory();
             //单位
-//            $modelUnit = D('Unit');
-//            $unitList = $modelUnit->selectUnit();
-//            $this->assign('unitList',$unitList);
-
+            $modelUnit = D('Business/Unit');
+            $unitList = $modelUnit->selectUnit();
+            $this->assign('unitList',$unitList);
             $this->display();
         }
     }
@@ -24,7 +23,6 @@ class GoodsController extends BaseController {
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-
         $model = D('GoodsBase');
         $where = array(
             'gb.status' => 0,
