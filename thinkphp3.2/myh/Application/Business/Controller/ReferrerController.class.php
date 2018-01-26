@@ -54,7 +54,7 @@ class ReferrerController extends AuthUserController{
         }
         $userId = $this->user['id'];
         $where['user_id'] = $userId;
-        $mode = D('member');
+        $mode = D('Member');
         $memberInfo = $mode->where($where)->find();
         if(!empty($memberInfo) && $memberInfo['qr_code']){
             $this->ajaxReturn(successMsg('成功',array('url'=>$memberInfo['qr_code'])));
