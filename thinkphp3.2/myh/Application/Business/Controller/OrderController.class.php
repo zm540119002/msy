@@ -398,6 +398,8 @@ class OrderController extends AuthUserController {
                     $_POST['amount'] = $unpaid;
                     $_POST['type'] = 2;
                     $_POST['create_time'] = time();
+                    $_POST['sn'] = $orderInfo['sn'];
+                    $_POST['recharge_status'] = 1;
                     $res = $modelWalletDetail -> addWalletDetail();
                     if($res['status'] == 0){
                         $modelWallet->rollback();
