@@ -19,14 +19,7 @@ class PersonalCenterController extends BaseController {
                 $modelOrder = D('Order');
                 $this->orderStatusCount = $modelOrder->orderStatusCount($where);
                 //购物车统计
-                $modelCart = D('Cart');
-                $where = array(
-                    'ct.user_id' => $this->user['id'],
-                );
-                $this->cartCount = $modelCart->cartCount($where);
-            }else{
-                $cart = unserialize(cookie('cart'));
-                $this->cartCount = count($cart);
+                $this->cartCount = cartCountByUserId($this->user['id']);
             }
             $this->display();
         }
