@@ -38,7 +38,6 @@ $(function () {
         if(!postData){
             return false;
         }
-        console.log(postData);return;
         var url = MODULE + '/Cart/addGoodsToCart';
         $.ajax({
             url: url,
