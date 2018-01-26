@@ -8,22 +8,22 @@
         <section class="person_center_list bottomLine">
             <div class="person_center_item">
                 <span class="my_business icon"></span>
-                <a href="{:U('completeArchive')}" class="agent right-arrow">完善我的商务档案</a>
+                <a href="{:U('Partner/completeArchive')}" class="agent right-arrow">完善我的商务档案</a>
             </div>
             <div class="person_center_item">
                 <span class="author_agent icon"></span>
-                <a href="{:U('authoriseAgent')}" class="agent right-arrow">授权我的代理商</a>
+                <a href="{:U('Partner/authoriseAgent')}" class="agent right-arrow">授权我的代理商</a>
             </div>
             <div class="person_center_item">
                 <span class="view_agent icon"></span>
-                <a href="{:U('viewAgent')}" class="agent right-arrow">查看我的代理商</a>
+                <a href="{:U('Partner/viewAgent')}" class="agent right-arrow">查看我的代理商</a>
             </div>
         </section>
         <section>
             <div class="agent_purchase_list ">
                 <div class="agent_head_bar">
                     <span>城市合伙人进货采购专供</span>
-                    <a><i></i>采购车</a>
+                    <a href="{:U('Cart/index')}"><i></i>采购车</a>
                 </div>
                 <ul class="agent_list_wrapper goods_list"></ul>
             </div>
@@ -38,9 +38,10 @@
     <script type="text/javascript">
         var config = {
             pageSize:4,
-            buyType:1,
+            buyType:7,
             templateType:'photo'
         };
+        config.goodsListOptionType = '{$goodsListOptionType}';
         $(function(){
             //初始化
             getGoodsList(config);

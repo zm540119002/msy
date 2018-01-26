@@ -4,15 +4,14 @@ namespace Mall\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class CommonImagesModel extends Model {
-    protected $tableName = 'common_images';
+class MemberModel extends Model {
+    protected $tableName = 'member';
     protected $tablePrefix = '';
     protected $connection = 'DB_CONFIG_MALL';
-
     protected $_validate = array();
 
     //新增
-    public function addCommonImages($rules=array()){
+    public function addMember($rules=array()){
         unset($_POST['id']);
         $this->_validate = array_merge($this->_validate,$rules);
 
@@ -31,13 +30,13 @@ class CommonImagesModel extends Model {
     }
 
     //修改
-    public function saveCommonImages($where=array(),$rules=array()){
+    public function saveMember($where=array(),$rules=array()){
         unset($_POST['id']);
         $this->_validate = array_merge($this->_validate,$rules);
 
         $_where = array(
         );
-        $id = I('post.commonImagesId',0,'int');
+        $id = I('post.MemberId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -58,14 +57,14 @@ class CommonImagesModel extends Model {
     }
 
     //标记删除
-    public function delCommonImages($where=array()){
+    public function delMember($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
         $_where = array(
         );
-        $id = I('post.commonImagesId',0,'int');
+        $id = I('post.MemberId',0,'int');
         if($id){
             $_where['id'] = $id;
         }
@@ -82,16 +81,16 @@ class CommonImagesModel extends Model {
     }
 
     //查询
-    public function selectCommonImages($where=[],$field=[],$join=[]){
+    public function selectMember($where=[],$field=[],$join=[]){
         $_where = array(
         );
         $_field = array(
-            'ci.id','ci.common_img',
+            'm.id','m.user_id','m.qr_code','m.referrer_status'
         );
         $_join = array(
         );
         $list = $this
-            ->alias('ci')
+            ->alias('m')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))

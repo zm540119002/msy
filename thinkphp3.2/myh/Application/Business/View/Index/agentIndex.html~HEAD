@@ -8,18 +8,18 @@
         <section class="person_center_list bottomLine">
             <div class="person_center_item">
                 <span class="my_business icon"></span>
-                <a href="{:U('completeArchive')}" class="agent right-arrow">完善我的商务档案</a>
+                <a href="{:U('Agent/completeArchive',array('agentType'=>$agentType))}" class="agent right-arrow">完善我的商务档案</a>
             </div>
             <div class="person_center_item">
                 <span class="see_service icon"></span>
-                <a href="{:U('viewPartner')}" class="agent right-arrow">查看所在城市美悦会服务中心</a>
+                <a href="{:U('Agent/viewPartner')}" class="agent right-arrow">查看所在城市美悦会服务中心</a>
             </div>
         </section>
         <section>
             <div class="agent_purchase_list ">
                 <div class="agent_head_bar">
                     <span>优选适合礼品采购商的采购专供</span>
-                    <a><i></i>采购车</a>
+                    <a href="{:U('Cart/index')}"><i></i>采购车</a>
                 </div>
                 <div class="readme_tipc">
                     <div class="r_t">
@@ -39,31 +39,7 @@
                         <span>享受代理商待遇推广返点</span>
                     </div>
                 </div>
-                <ul class="agent_list_wrapper">
-                    <li>
-                        <a href="">
-                            <img src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="" class="c_img">
-                        </a>
-                        <p class="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-                        <div class="agent_list_c">
-                            <div class="a_c">
-                                <span class="pink">￥<price class="twitter_price">200.00</price></span>
-                                <del>￥888</del>
-                                <span class="pink">礼品券￥<price>50000</price></span>
-                            </div>
-                            <div class="a_c">10盒起订</div>
-                        </div>
-                        <div class="agent_list_item">
-                            <span>采购数量</span>
-                            <div class="quantity_wrapper business_count">
-                                <a href="javascript:void(0);" class="greduce">-</a>
-                                <input type="text" value="1" class="f24 gshopping_count">
-                                <a href="javascript:void(0);" class="gplus">+</a>
-                            </div>
-                            <a href="javascript:void(0);" class="add_cart">加入采购车</a>
-                        </div>
-                    </li>
-                </ul>
+                <ul class="agent_list_wrapper goods_list"></ul>
             </div>
         </section>
     </article>
@@ -72,9 +48,25 @@
     <include file="Cart/footerCartMenu" />
 </block>
 <block name="script">
+    <script type="text/javascript" src="PUBLIC_JS/business/goods.js"></script>
     <script type="text/javascript">
+        var config = {
+            pageSize:4,
+            buyType:7,
+            templateType:'photo'
+        };
+        config.goodsListOptionType = '{$goodsListOptionType}';
+        var agentType = '{$agentType}';
+        if(agentType==1){
+            config.buyType = 6;
+        }else if(agentType==2){
+            config.buyType = 5;
+        }else if(agentType==3){
+            config.buyType = 4;
+        }
         $(function(){
-            console.log('{$agentType}');
+            //初始化
+            getGoodsList(config);
         });
     </script>
 </block>
