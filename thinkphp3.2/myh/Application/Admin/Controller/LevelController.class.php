@@ -7,7 +7,7 @@ class LevelController extends BaseController {
     /**级别分类-管理
      */
     public function levelManage(){
-        $model = D('Level');
+        $model = D('Mall/Level');
         if(IS_POST){
             $this->levelList = $model->selectLevel();
             $this->display('levelList');
@@ -20,7 +20,7 @@ class LevelController extends BaseController {
     /**级别分类-编辑
      */
     public function levelEdit(){
-        $modelLevel = D('Level');
+        $modelLevel = D('Mall/Level');
         if(IS_POST){
             if(isset($_POST['levelId']) && intval($_POST['levelId'])){
                 //修改的情况，先判断数据库
@@ -71,7 +71,7 @@ class LevelController extends BaseController {
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
 
-        $modelLevel = D('Level');
+        $modelLevel = D('Mall/Level');
         $where = array(
             'l.status' => 0,
         );
@@ -101,7 +101,7 @@ class LevelController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $modelLevel = D('Level');
+        $modelLevel = D('Mall/Level');
         $res = $modelLevel->delLevel();
         $this->ajaxReturn($res);
     }

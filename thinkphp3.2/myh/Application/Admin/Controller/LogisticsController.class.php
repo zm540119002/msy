@@ -7,7 +7,7 @@ class LogisticsController extends BaseController {
     /**物流-编辑
      */
     public function logisticsEdit(){
-        $modelLogistics = D('Logistics');
+        $modelLogistics = D('Mall/Logistics');
         if(IS_POST){
             if(isset($_POST['logisticsId']) && intval($_POST['logisticsId'])){
                 $_POST['delivery_time'] = strtotime($_POST['delivery_time']);
@@ -34,7 +34,7 @@ class LogisticsController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $modelLogistics = D('Logistics');
+        $modelLogistics = D('Mall/Logistics');
         $res = $modelLogistics->delLogistics();
         $this->ajaxReturn($res);
     }
