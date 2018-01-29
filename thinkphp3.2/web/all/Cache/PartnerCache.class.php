@@ -12,7 +12,7 @@ class PartnerCache{
                 'p.user_id' => $user_id,
                 'p.status' => 0,
             );
-            $modelPartner = D('Partner');
+            $modelPartner = D('Business/Partner');
             $partner = $modelPartner->selectPartner($where);
             $partner = $partner[0];
             S(self::$_cache_key.$user_id, $partner, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
