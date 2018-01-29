@@ -4,119 +4,104 @@ namespace Common\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class OrderDetailModel extends Model {
-    protected $tableName = 'order_detail';
+class UnitModel extends Model {
+    protected $tableName = 'unit';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MALL';
+    protected $connection = 'DB_CONFIG_COMMON';
 
-    protected $_validate = array(
-        array('sn','require','订单编号必须！'),
-    );
+    protected $_validate = array();
 
     //新增
-    public function addOrderDetail(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addUnit($rules=array()){
         unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
 
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-       
         $id = $this->add();
-
         if($id === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('新增成功',$returnArray);
     }
 
     //修改
-    public function saveOrderDetail(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function saveUnit($where=array(),$rules=array()){
         unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
 
-        $id = I('post.orderDetailId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数orderDetailId');
+        $_where = array(
+            'status' => 0,
+        );
+        $id = I('post.unitId',0,'int');
+        if($id){
+            $_where['id'] = $id;
         }
+        $_where = array_merge($_where,$where);
 
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-
-        $where = array(
-            'id' => $id,
-        );
-       
-        $res = $this->where($where)->save();
-        
+        $res = $this->where($_where)->save();
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('修改成功',$returnArray);
     }
 
     //标记删除
-    public function delOrderDetail($where=array()){
+    public function delUnit($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
         unset($_POST['id']);
-
-        $id = I('post.orderDetailId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数orderDetailId');
-        }
-
         $_where = array(
-            'id' => $id,
+            'status' => 0,
         );
+        $id = I('post.unitId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
 
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('删除成功',$returnArray);
     }
 
     //查询
-    public function selectOrderDetail($where=[],$field=[],$join=[]){
+    public function selectUnit($where=[],$field=[],$join=[],$order=[]){
         $_where = array(
-            'od.status' => 0,
+            'ut.status' => 0,
         );
         $_field = array(
-            'od.id','od.order_sn','od.type','od.status','od.price','od.num','od.foreign_id','od.user_id',
+            'ut.id','ut.key','ut.value','ut.status',
         );
         $_join = array(
-            
+        );
+        $_order = array(
+            'ut.key','ut.id',
         );
         $list = $this
-            ->alias('od')
+            ->alias('ut')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
+            ->order(array_merge($_order,$order))
             ->select();
         return $list?:[];
     }
