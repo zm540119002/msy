@@ -120,7 +120,7 @@ function unlockingFooterCartConfig($arr){
  * @return array
  */
 function getProvinceCity(){
-    $modelProvince = D('Province');
+    $modelProvince = D('Business/Province');
     $provinceList = $modelProvince->selectProvince();
     $modelCity = D('City');
     foreach ($provinceList as &$province){
