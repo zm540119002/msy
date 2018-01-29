@@ -6,6 +6,7 @@ class PartnerCache{
     /**从缓存中获取信息
      */
     public static function get($user_id){
+        self::remove($user_id);
         $partner = S(self::$_cache_key.$user_id);
         if(!$partner){
             $where = array(
