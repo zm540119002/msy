@@ -59,6 +59,7 @@ class PartnerAuthoriseController extends AuthUserController {
 
     //席位订金
     public function seatDeposit(){
+        PartnerCache::remove($this->user['id']);
         $partner = PartnerCache::get($this->user['id']);
         if($partner['id']){
             $where = array(
@@ -71,7 +72,6 @@ class PartnerAuthoriseController extends AuthUserController {
         }else{
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,17));
-            print_r($partner);exit;
             $this->assign('partnerInfo',$partner);
             $this->display();
         }
