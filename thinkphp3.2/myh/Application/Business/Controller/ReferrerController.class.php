@@ -1,5 +1,5 @@
 <?php
-namespace Mall\Controller;
+namespace Business\Controller;
 use web\all\Controller\AuthUserController;
 class ReferrerController extends AuthUserController{
     //开通推客分享功能

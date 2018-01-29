@@ -22,7 +22,6 @@ class OrderController extends AuthUserController {
                 'o.id','o.create_time as order_start_time','ca.id consignee_id','ca.consignee_name','ca.consignee_mobile','ca.province',
                 'ca.city','ca.area','ca.detailed_address',
                 'l.status as deliver_status ','l.undertake_company','l.delivery_time','l.fee',
-                'gb.tag','gb.overdue_time as group_buy_overdue_time'
             );
             $join = array(
                 ' left join consignee_address ca on o.address_id = ca.id ',
@@ -399,6 +398,8 @@ class OrderController extends AuthUserController {
                     $_POST['amount'] = $unpaid;
                     $_POST['type'] = 2;
                     $_POST['create_time'] = time();
+                    $_POST['sn'] = $orderInfo['sn'];
+                    $_POST['recharge_status'] = 1;
                     $res = $modelWalletDetail -> addWalletDetail();
                     if($res['status'] == 0){
                         $modelWallet->rollback();

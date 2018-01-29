@@ -7,7 +7,7 @@ class CouponsController extends BaseController {
     /**代金券分类-管理
      */
     public function couponsManage(){
-        $model = D('Coupons');
+        $model = D('Mall/Coupons');
         if(IS_POST){
             $this->couponsList = $model->selectCoupons();
             $this->display('couponsList');
@@ -20,7 +20,7 @@ class CouponsController extends BaseController {
     /**代金券分类-编辑
      */
     public function couponsEdit(){
-        $model = D('Coupons');
+        $model = D('Mall/Coupons');
         if(IS_POST){
             //日期转时间戳
             if( isset($_POST['failure_time']) && $_POST['failure_time']){
@@ -60,7 +60,7 @@ class CouponsController extends BaseController {
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
 
-        $model = D('Coupons');
+        $model = D('Mall/Coupons');
         $where = array(
             'c.status' => 0,
         );
@@ -92,7 +92,7 @@ class CouponsController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $model = D('Coupons');
+        $model = D('Mall/Coupons');
         $res = $model->delCoupons();
         $this->ajaxReturn($res);
     }

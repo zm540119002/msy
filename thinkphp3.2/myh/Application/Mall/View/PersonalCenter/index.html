@@ -98,7 +98,7 @@
                 <a href="javascript:void(0);" class="pushing_income right-arrow my_qrcodes">我的推客二维码</a>
             </div>
             <div class="person_center_item">
-                <a href="javascript:void(0);" class="pushing_income right-arrow"><span>我的推客收益<em>3</em></span></a>
+                <a href="javascript:void(0);" class="pushing_income right-arrow referrer_income"><span>我的推客收益<em>3</em></span></a>
             </div>
         </section>
     </article>
@@ -158,6 +158,10 @@
             $("#areaMask,.closeBtn").click(function() {
                 $("#areaMask,.express-code-box").fadeOut();
             });
+            //我的推客收益
+            $('.referrer_income').click(function () {
+                location.href = MODULE  + '/Referrer/referrerIncome';
+            })
         });
     </script>
 </block>

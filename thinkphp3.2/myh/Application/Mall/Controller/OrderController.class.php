@@ -413,6 +413,7 @@ class OrderController extends AuthUserController {
                     $_POST['user_id'] = $this->user['id'];
                     $_POST['amount'] = $unpaid;
                     $_POST['type'] = 2;
+                    $_POST['recharge_status'] = 1;
                     $_POST['create_time'] = time();
                     $res = $modelWalletDetail -> addWalletDetail();
                     if($res['status'] == 0){
@@ -428,7 +429,7 @@ class OrderController extends AuthUserController {
                     $unpaid -= $accountBalance;
                 }
             }
-            if($unpaid>0){//转账支付
+            if($unpaid > 0){//转账支付
                 //更新订单(状态还是未支付)
                 //代金券支付：$couponsInfo['amount']
                 //账户余额支付：$accountBalance:
@@ -596,6 +597,7 @@ class OrderController extends AuthUserController {
                 $_POST['user_id'] = $useId;
                 $_POST['amount'] = $cashBack;
                 $_POST['type'] = 3;
+                $_POST['recharge_status'] = 1;
                 $_POST['create_time'] = time();
                 $res = $modelWalletDetail->addWalletDetail();
                 if ($res['status'] == 0) {
@@ -638,6 +640,7 @@ class OrderController extends AuthUserController {
             $_POST['user_id'] = $orderInfo['user_id'];
             $_POST['amount'] = $cashBack;
             $_POST['type'] = 3;
+            $_POST['recharge_status'] = 1;
             $_POST['create_time'] = time();
             $res = $modelWalletDetail->addWalletDetail();
             if ($res['status'] == 0) {

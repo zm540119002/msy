@@ -19,44 +19,8 @@ class PersonalCenterController extends BaseController {
                 $modelOrder = D('Order');
                 $this->orderStatusCount = $modelOrder->orderStatusCount($where);
                 //购物车统计
-                $modelCart = D('Cart');
-                $where = array(
-                    'ct.user_id' => $this->user['id'],
-                );
-                $this->cartCount = $modelCart->cartCount($where);
-            }else{
-                $cart = unserialize(cookie('cart'));
-                $this->cartCount = count($cart);
+                $this->cartCount = cartCountByUserId($this->user['id']);
             }
-            $this->display();
-        }
-    }
-
-    //个人中心-升级VIP
-    public function upgrade(){
-        $modeLevel = D('Level');
-        if(IS_POST){
-        }else{
-            $where = array(
-                'l.type' => 1,
-            );
-            $this->levelList = $modeLevel->selectLevel($where);
-            $this->display();
-        }
-    }
-
-    //个人中心-升级VIP-级别详情
-    public function levelDetail(){
-        $modeLevel = D('Level');
-        if(IS_POST){
-        }else{
-            $id = I('get.levelId',0,'int');
-            $where = array(
-                'l.type' => 1,
-                'l.id' => $id,
-            );
-            $levelInfo = $modeLevel->selectLevel($where);
-            $this->levelInfo = $levelInfo[0];
             $this->display();
         }
     }

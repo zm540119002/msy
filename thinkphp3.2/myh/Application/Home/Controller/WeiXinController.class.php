@@ -168,7 +168,7 @@ class WeiXinController extends CommonController {
                     $data['is_default'] = 1;
                     $result = M('studio_binding') -> add($data);
                 }
-                $content = $info['nickname']."您来啦，感谢您关注美尚云平台!";
+                $content = "您来啦，感谢您关注美尚云平台!";
                 $content .= "美尚云是广东美尚网络科技有限公司打造的中国美容业领先的采购平台，";
                 $content .= "聚焦医美抗衰和药妆美容项目产品的采购业务，";
                 $content .= "通过联合采购模式帮助全国中小型美容院减低采购成本，实行更好的利润规划；";

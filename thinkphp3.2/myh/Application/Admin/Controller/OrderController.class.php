@@ -7,7 +7,7 @@ class OrderController extends BaseController {
     /**订单-编辑
      */
     public function OrderEdit(){
-        $modelOrder = D('Order');
+        $modelOrder = D('Mall/Order');
         if(IS_POST){
             if(isset($_POST['OrderId']) && intval($_POST['OrderId'])){
                 $res = $modelOrder->saveOrder();
@@ -33,7 +33,7 @@ class OrderController extends BaseController {
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-        $modelOrder = D('Order');
+        $modelOrder = D('Mall/Order');
         $where['o.status'] = 0;
         $where['o.logistics_status'] = array('gt',0);
         $logistics_status = $_GET['logistics_status'];
@@ -71,7 +71,7 @@ class OrderController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $modelOrder = D('Order');
+        $modelOrder = D('Mall/Order');
         $res = $modelOrder->delOrder();
         $this->ajaxReturn($res);
     }
@@ -116,7 +116,7 @@ class OrderController extends BaseController {
             array('logistics_status','订单状态'),
             array('pay_status','支付状态'),
         );
-        $model = D('Order');
+        $model = D('Mall/Order');
         $where['o.status'] = 0;
         $where['o.logistics_status'] = array('gt',0);
         $logistics_status = $_GET['logistics_status'];

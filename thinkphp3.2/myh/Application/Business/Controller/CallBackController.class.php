@@ -275,6 +275,7 @@ class CallBackController extends Controller{
                     $_POST['user_id'] = $orderInfo['user_id'];
                     $_POST['amount'] = $orderInfo['wallet_pay'];
                     $_POST['type'] = 2;
+                    $_POST['sn'] = $orderInfo['sn'];
                     $_POST['create_time'] = time();
                     $res = $modelWalletDetail->addWalletDetail();
                     if ($res['status'] == 0) {

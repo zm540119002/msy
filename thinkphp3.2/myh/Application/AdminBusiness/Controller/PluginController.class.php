@@ -18,7 +18,7 @@ class PluginController extends BaseController {
         $condition['type'] = I('get.type');
         $condition['code'] = I('get.code');
 
-        $model = D('Plugin');
+        $model = D('Business/Plugin');
         $row = $model->where($condition)->find();
         $row['config'] = unserialize($row['config']);
 

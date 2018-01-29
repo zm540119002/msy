@@ -144,7 +144,8 @@ class CallBackController extends CommonController{
         $_POST['recharge_status'] = 1;
         $_POST['pay_sn'] = $data['transaction_id'];
         $_POST['payment_code'] = 0;
-        $_POST['payment_time'] = $data['time_end'];
+        $_POST['create_time'] = $data['time_end'];
+        $_POST['recharge_status'] = 1;
         $where = array(
             'user_id' => $walletDetailInfo['user_id'],
             'sn' => $data['out_trade_no'],
@@ -340,6 +341,7 @@ class CallBackController extends CommonController{
                 $_POST['user_id'] = $useId;
                 $_POST['amount'] = $cashBack;
                 $_POST['type'] = 3;
+                $_POST['recharge_status'] = 1;
                 $_POST['create_time'] = time();
                 $res = $modelWalletDetail->addWalletDetail();
                 if ($res['status'] == 0) {
@@ -383,6 +385,7 @@ class CallBackController extends CommonController{
             $_POST['user_id'] =$userId;
             $_POST['amount'] = $cashBack;
             $_POST['type'] = 3;
+            $_POST['recharge_status'] = 1;
             $_POST['create_time'] = time();
             $res = $modelWalletDetail->addWalletDetail();
             if ($res['status'] == 0) {
@@ -448,6 +451,7 @@ class CallBackController extends CommonController{
             $_POST = [];
             $_POST['user_id'] =$userId;
             $_POST['amount'] = $orderInfo['wallet_pay'];
+            $_POST['recharge_status'] = 1;
             $_POST['type'] = 2;
             $_POST['create_time'] = time();
             $res = $modelWalletDetail->addWalletDetail();
@@ -551,6 +555,7 @@ class CallBackController extends CommonController{
             $_POST['user_id'] =$userId;
             $_POST['amount'] = $orderInfo['wallet_pay'];
             $_POST['type'] = 2;
+            $_POST['recharge_status'] = 1;
             $_POST['create_time'] = time();
             $res = $modelWalletDetail->addWalletDetail();
             if ($res['status'] == 0) {

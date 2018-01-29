@@ -7,7 +7,7 @@ class CityController extends BaseController {
     /**城市-管理
      */
     public function cityManage(){
-        $modelCity = D('City');
+        $modelCity = D('Mall/City');
         if(IS_POST){
             $this->cityList = $modelCity->selectCity();
             $this->display('cityList');
@@ -20,7 +20,7 @@ class CityController extends BaseController {
     /**城市-编辑
      */
     public function cityEdit(){
-        $modelCity = D('City');
+        $modelCity = D('Mall/City');
         if(IS_POST){
             if(isset($_POST['cityId']) && intval($_POST['cityId'])){
                 $res = $modelCity->saveCity();
@@ -30,7 +30,7 @@ class CityController extends BaseController {
             $this->ajaxReturn($res);
         }else{
             //省份
-            $modelProvince = D('Province');
+            $modelProvince = D('Mall/Province');
             $this->provinceList = $modelProvince->selectProvince();
             //城市级别
             $this->cityType = C('CITY_TYPE');
@@ -51,7 +51,7 @@ class CityController extends BaseController {
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(C('NOT_GET')));
         }
-        $modelCity = D('City');
+        $modelCity = D('Mall/City');
         $where = array(
             'ct.status' => 0,
         );
@@ -72,7 +72,7 @@ class CityController extends BaseController {
         $this->cityList = $cityList['data'];
         $this->pageList = $cityList['pageList'];
         //所有省份
-        $modelProvince = D('Province');
+        $modelProvince = D('Mall/Province');
         $this->provinceList = $modelProvince->selectProvince();
         $this->display();
     }
@@ -83,7 +83,7 @@ class CityController extends BaseController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $modelCity = D('City');
+        $modelCity = D('Mall/City');
         $res = $modelCity->delCity();
         $this->ajaxReturn($res);
     }
