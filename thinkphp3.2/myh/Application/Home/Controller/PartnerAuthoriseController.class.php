@@ -71,6 +71,7 @@ class PartnerAuthoriseController extends AuthUserController {
         }else{
             //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,17));
+            PartnerCache::remove($this->user['id']);
             $this->assign('partnerInfo',$partner);
             $this->display();
         }
