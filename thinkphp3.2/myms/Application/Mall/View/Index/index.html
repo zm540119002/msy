@@ -213,11 +213,11 @@
                 postData.categoryId =$(obj).data('categoryid');
                 postData.buyType = $(obj).data('buytype');
             }
-            if(url == "/index.php/Myms/Project/projectList"){
+            if(url == "/index.php/Mall/Project/projectList"){
                 var content_obj = $('.project_content');
                 postData.position=$('.project_position').val();
             }
-            if(url == "/index.php/Myms/Goods/goodsList"){
+            if(url == "/index.php/Mall/Goods/goodsList"){
                 var content_obj = $('.goods_content');
                 postData.position=$('.goods_position').val();
             }
@@ -250,8 +250,6 @@
         }
 
         $(function(){
-            var link = location.href;
-            console.log(link);
             //初始化商品
             var goods_url = MODULE+'/Goods/goodsList';
             getPage(goods_url);

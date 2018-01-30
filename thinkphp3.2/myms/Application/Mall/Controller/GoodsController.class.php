@@ -121,7 +121,6 @@ class GoodsController extends BaseController {
         $pageSize = (isset($_GET['pageSize']) && $_GET['pageSize']) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
         $alias='g';
         $position = I('get.position');
-
         //初始化首页
         if($position === 'index' && $page == 1){
             $where['parent_id_1'] = 0;
@@ -138,7 +137,6 @@ class GoodsController extends BaseController {
                 }
             }
             $this -> catGoodsList = $catGoodsList;
-
 
             //产品工作室特惠
             $speWhere['buy_type'] = array('eq',2);
