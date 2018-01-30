@@ -4,13 +4,8 @@ use Think\Model;
 class OrderModel extends Model {
     protected $tableName = 'order';
     protected $tablePrefix = '';
-    protected $db;
-
-    public function __construct()
-    {
-        $this->db = M($this->tableName);
-    }
-
+    protected $connection = 'DB_MYMS';
+    
     /**
      * 添加一个订单
      * @param $user_id|用户id
@@ -40,7 +35,7 @@ class OrderModel extends Model {
             'create_time'     => time(), // 下单时间
             'user_note'       => $user_note, // 用户下单备注
         );
-         $orderId = $this->db->add($data);
+         $orderId =D('order')->add($data);
          return $orderId;
     }
 
@@ -89,14 +84,14 @@ class OrderModel extends Model {
     public function getOrderInfo($uid,$orderId){
         $where['user_id'] = $uid;
         $where['id'] = $orderId;
-        return $this->db -> where($where)->find();
+        return D('order') -> where($where)->find();
     }
 
     //获取订单详情
     public function getOrderInfoByOrderNo($orderSn){
 //        $where['user_id'] = $uid;
         $where['order_sn'] = $orderSn;
-        return $this->db -> where($where)->find();
+        return D('order') -> where($where)->find();
     }
     //获取订单详情
     public function getOrderInfoByOrderNoAndUid($orderSn,$uid){
@@ -104,7 +99,7 @@ class OrderModel extends Model {
             'user_id'=>$uid,
             'order_sn'=>$orderSn,
         );
-        return $this->db -> where($where)->find();
+        return D('order') -> where($where)->find();
     }
 
     //根据$orderSn获取订单商品详情
@@ -119,14 +114,14 @@ class OrderModel extends Model {
         $where['order_sn'] = $orderSn;
         $where['user_id'] = $uid;
         $data['address_id'] = $addressId;
-        return M('order') -> where($where)->save($data);
+        return D('order') -> where($where)->save($data);
     }
     //根据$orderSn修改订单状态
     public function updateOrderStatus($orderSn,$orderState,$uid){
         $where['order_sn'] = $orderSn;
         $where['user_id'] = $uid;
         $data['order_state'] = $orderState;
-        return M('order') -> where($where)->save($data);
+        return D('order') -> where($where)->save($data);
     }
     
 

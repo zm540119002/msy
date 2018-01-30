@@ -3,6 +3,9 @@ namespace Mall\Model;
 use Think\Model;
 use web\all\Lib\AuthUser;
 class CartModel extends Model {
+    protected $tableName = 'cart';
+    protected $tablePrefix = '';
+    protected $connection = 'DB_MYMS';
     //登录时加入购物车
     public function addCart($uid,$cartInfo){
         $data['user_id']       = $uid;
@@ -10,7 +13,7 @@ class CartModel extends Model {
         $data['foreign_id']    = $cartInfo['foreign_id'];
         $data['type']          = $cartInfo['type'];
         $data['create_time']   = time();
-        $result = M('cart') -> add($data);
+        $result = D('cart') -> add($data);
         return $result;
     }
 
@@ -27,10 +30,10 @@ class CartModel extends Model {
         $newCartList =[];
         foreach ($cartList as $k=>$v){
             if($v['type'] == 1){//商品
-                $goodsInfo =  D('Goods') ->getGoodsInfoByGoodsId($v['foreign_id']);
+                $goodsInfo =  D('Goods') -> getGoodsInfoByGoodsId($v['foreign_id']);
             }
             if($v['type'] == 2){//项目
-                $goodsInfo =  D('Project')->getProjectInfoByProjectId($v['foreign_id']);
+                $goodsInfo =  D('Project')-> getProjectInfoByProjectId($v['foreign_id']);
             }
             $cartInfo['id']           =  $v['id'];
             $cartInfo['foreign_id']   =  $goodsInfo['id'];
@@ -92,7 +95,7 @@ class CartModel extends Model {
 
     //获取购物车列表ids
     public function getCartIds($uid){
-        $cartIds = M('cart') -> where( array( 'user_id'=>$uid ) ) -> getField('id',true);
+        $cartIds = D('Cart') -> where( array( 'user_id'=>$uid ) ) -> getField('id',true);
         $cartIds = implode(',',$cartIds);
         return $cartIds;
     }
@@ -102,7 +105,7 @@ class CartModel extends Model {
             if(time() - intval($v['create_time']) >$delTime ) {
                 $where['id'] = $v['id'];
                 $where['user_id'] = $uid;
-                M('cart') ->where($where)-> delete();
+                D('Cart') ->where($where)-> delete();
 
             }
         }
@@ -127,7 +130,7 @@ class CartModel extends Model {
         $where['user_id']  = $uid;
         $where['foreign_id'] = $foreignId;
         $where['type'] = $type;
-        $cartInfo =  M('cart') -> where($where) -> find();
+        $cartInfo =  D('Cart') -> where($where) -> find();
         return $cartInfo;
     }
 
@@ -136,7 +139,7 @@ class CartModel extends Model {
         $where['user_id']  = $uid;
         $where['foreign_id'] = $foreignId;
         $where['type'] = $type;
-        $result= M('cart') -> where($where)->setField('num',$goods_num);
+        $result= D('Cart') -> where($where)->setField('num',$goods_num);
         return $result;
     }
 
@@ -146,14 +149,14 @@ class CartModel extends Model {
     public function getCartListByCartIds($uid,$cartIds){
         $where['user_id']  = $uid;
         $where['id'] = array('in',$cartIds);
-        $cartList =  M('cart') -> where($where) -> select();
+        $cartList =  D('Cart') -> where($where) -> select();
         return $cartList;
     }
     //查找24小时内客户添加购物车的商品信息
     public function getCartListByTime($uid){
         $where['user_id']  = $uid;
         $where['create_time'] =array(array('gt',time()-24*60*60),array('lt',time())) ;
-        $cartList =  M('cart') -> where($where) -> select();
+        $cartList =  D('Cart') -> where($where) -> select();
         return $cartList;
     }
 
@@ -161,7 +164,7 @@ class CartModel extends Model {
     public function delCartByCartIds($uid,$cartIds){
         $where['user_id'] = $uid;
         $where['id']      = array('in',$cartIds);
-        $result = M('cart')->where($where)->delete();
+        $result = D('Cart')->where($where)->delete();
         return $result;
     }
 
@@ -171,10 +174,10 @@ class CartModel extends Model {
         $cartList = [];
         foreach (session('cart') as $k=>$v){
             if($v['type'] == 1){//商品
-                $goodsInfo =  D('goods') ->getGoodsInfoByGoodsId($v['foreign_id']);
+                $goodsInfo =  D('Goods') ->getGoodsInfoByGoodsId($v['foreign_id']);
             }
             if($v['type'] == 2){//项目
-                $goodsInfo =  D('project')->getProjectInfoByProjectId($v['foreign_id']);
+                $goodsInfo =  D('Project')->getProjectInfoByProjectId($v['foreign_id']);
             }
             $cartInfo['foreign_id']   =  $goodsInfo['id'];
             $cartInfo['foreign_name'] =  $goodsInfo['name'];
