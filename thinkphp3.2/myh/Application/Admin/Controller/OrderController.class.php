@@ -83,7 +83,7 @@ class OrderController extends BaseController {
         if(!isset($_GET['orderId']) || !intval($_GET['orderId'])){
             $this->error('缺少订单ID');
         }
-        $model = D('OrderDetail');
+        $model = D('Mall/OrderDetail');
         $where['od.order_id'] = intval($_GET['orderId']);
         $field=[ 'o.id','o.sn','o.status as o_status','o.logistics_status','o.after_sale_status','o.payment_code',
             'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
@@ -100,28 +100,27 @@ class OrderController extends BaseController {
         $this->orderDetail = $model->selectOrderDetail($where,$field,$join);
         $this->display();
     }
-
     /**
      * 导出订单
      */
     function expOrderList(){//导出Excel
-        $xlsName  = "orderList";
-        $xlsCell  = array(
-            array('type','订单类型'),
-            array('sn','订单号'),
-            array('create_time','下单时间'),
-            array('name','客户名称'),
-            array('amount','金额'),
-            array('deliver_status','出货状态'),
-            array('logistics_status','订单状态'),
-            array('pay_status','支付状态'),
-        );
+        if(!isset($_GET['logistics_status'])){
+            $this->error('缺少订单ID');
+        }
+        $logistics_status = I('get.logistics_status', 0, 'int');
         $model = D('Mall/Order');
         $where['o.status'] = 0;
-        $where['o.logistics_status'] = array('gt',0);
-        $logistics_status = $_GET['logistics_status'];
-        if($logistics_status){
-            $where['o.logistics_status'] = $logistics_status;
+        if($logistics_status == 0){
+            $xlsName  = "全部订单";
+            $where['o.logistics_status'] = array('gt',0);
+        }else{
+            foreach (C('ORDER_STATUS') as $k2 => $v2){
+                //<!--订单状态1:待付款 2:待收货 3:待评价 4:已完成 5:已取消',-->
+                if($logistics_status == $k2){
+                    $xlsName  = $v2."订单";
+                    $where['o.logistics_status'] = $logistics_status;
+                }
+            }
         }
         $field = array(
             'o.id','o.sn','o.logistics_status','o.amount','o.type',
@@ -132,7 +131,7 @@ class OrderController extends BaseController {
             ' left join common.user u on o.user_id = u.id ',
             ' left join logistics l on o.logistics_id = l.id ',
         );
-        $xlsData = $model->selectOrder($where,$field,$join);
+        $xlsData = $model -> selectOrder($where,$field,$join);
         foreach ($xlsData as $k => $v)
         {
             $xlsData[$k]['sn'] = "'".$v['sn'];
@@ -159,6 +158,16 @@ class OrderController extends BaseController {
                 $xlsData[$k]['pay_status'] ='未支付';
             }
         }
+        $xlsCell  = array(
+            array('type','订单类型'),
+            array('sn','订单号'),
+            array('create_time','下单时间'),
+            array('name','客户名称'),
+            array('amount','金额'),
+            array('deliver_status','出货状态'),
+            array('logistics_status','订单状态'),
+            array('pay_status','支付状态'),
+        );
         exportExcel($xlsName,$xlsCell,$xlsData);
     }
 }

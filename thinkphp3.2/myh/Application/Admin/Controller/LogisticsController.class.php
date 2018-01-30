@@ -4,7 +4,7 @@ namespace Admin\Controller;
 use web\all\Controller\BaseController;
 
 class LogisticsController extends BaseController {
-    /**物流-编辑
+    /**物流-编辑 去发货
      */
     public function logisticsEdit(){
         $modelLogistics = D('Mall/Logistics');
