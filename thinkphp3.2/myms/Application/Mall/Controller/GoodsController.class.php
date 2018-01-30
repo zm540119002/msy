@@ -23,7 +23,7 @@ class GoodsController extends BaseController {
     public function studioSpeList(){
         $where['status']  = array('eq',0);
         $where['buy_type'] = array('eq',2);
-        $this->speGoodsList =  M('goods')->where($where)->order('id desc')->select();
+        $this->speGoodsList =  D('Goods')->where($where)->order('id desc')->select();
         //购物车信息
         $this-> cartInfo = D('Cart') -> getAllCartInfo();
         $this->cartList = D('Cart') -> cartList();
@@ -138,7 +138,7 @@ class GoodsController extends BaseController {
                 }
             }
             $this -> catGoodsList = $catGoodsList;
-            
+
 
             //产品工作室特惠
             $speWhere['buy_type'] = array('eq',2);

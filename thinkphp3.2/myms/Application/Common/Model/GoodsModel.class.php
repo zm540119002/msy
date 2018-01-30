@@ -126,7 +126,7 @@ class GoodsModel extends Model {
     //查找某件商品信息
     public function getGoodsInfoByGoodsId($goodsId){
         $where['id'] = $goodsId;
-        $goodsInfo = M('goods') -> where($where) -> find();
+        $goodsInfo = D('goods') -> where($where) -> find();
 
         if($goodsInfo['buy_type']=='1'){
             $goodsInfo['real_price'] = $goodsInfo['discount_price'];
