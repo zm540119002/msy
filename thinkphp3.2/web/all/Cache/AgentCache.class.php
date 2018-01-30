@@ -14,7 +14,7 @@ class AgentCache{
                 'status' => 0,
                 'auth_status' => 1,
             );
-            $modelAgent = D('Agent');
+            $modelAgent = D('Business/Agent');
             $agent = $modelAgent->selectAgent($where);
             $agent = $agent[0];
             S(self::$_cache_key.$user_id, $agent, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));

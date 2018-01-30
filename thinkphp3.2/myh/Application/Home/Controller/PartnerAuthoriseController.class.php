@@ -29,7 +29,7 @@ class PartnerAuthoriseController extends AuthUserController {
 
     //登记资料
     public function register(){
-        $modelPartner = D('Partner');
+        $modelPartner = D('Business/Partner');
         if(IS_POST){
             $rules = array(
                 array('name','require','姓名必须！'),
@@ -59,12 +59,13 @@ class PartnerAuthoriseController extends AuthUserController {
 
     //席位订金
     public function seatDeposit(){
+        PartnerCache::remove($this->user['id']);
         $partner = PartnerCache::get($this->user['id']);
         if($partner['id']){
             $where = array(
                 'id' => $partner['city'],
             );
-            $city = D('City')->selectCity($where);
+            $city = D('Business/City')->selectCity($where);
             $partner['city'] = $city[0];
         }
         if(IS_POST){
@@ -78,12 +79,13 @@ class PartnerAuthoriseController extends AuthUserController {
 
     //资格完款
     public function seniority(){
+        PartnerCache::remove($this->user['id']);
         $partner = PartnerCache::get($this->user['id']);
         if($partner['id']){
             $where = array(
                 'id' => $partner['city'],
             );
-            $city = D('City')->selectCity($where);
+            $city = D('Business/City')->selectCity($where);
             $partner['city'] = $city[0];
         }
         if(IS_POST){

@@ -447,7 +447,7 @@ class CallBackController extends Controller{
             'time_end' => '20180109172790',//支付时间
             'attach' => '4',//支付时间
         );
-        $this->agentFeeHandle($parameter);
+        $this->partnerFeeHandle($parameter);
     }
 
     /**代理商资格款充值回调
