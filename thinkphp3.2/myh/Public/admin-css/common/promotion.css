@@ -142,7 +142,9 @@ label.error i { margin-right: 4px;}
 .ncsc-path i { font-size: 12px; color: #999; margin: 0 6px;}
 /* 内容区域右侧默认内容 */
 .ncsc-layout-right .main-content { padding: 20px;}
-
+.main-content .content{
+    position:relative;
+}
 
 /* 商家中心首页相关
 ------------------------------------------- */

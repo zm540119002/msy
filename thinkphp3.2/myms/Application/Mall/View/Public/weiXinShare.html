@@ -1,0 +1,142 @@
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript">
+
+            // 微信配置
+            wx.config({
+                debug: false,
+                appId: "{$signPackage['appId']}",  //公众号的唯一标识
+                timestamp: '{$signPackage["timestamp"]}',  //生成签名的时间戳
+                nonceStr: '{$signPackage["nonceStr"]}',   //生成签名的随机串
+                signature: '{$signPackage["signature"]}',  //签名
+                jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','getLocation','openLocation'] // 功能列表，我们要使用JS-SDK的什么功能
+            });
+            wx.checkJsApi({
+                jsApiList: [
+                    'onMenuShareTimeline','onMenuShareAppMessage','getLocation','openLocation'
+                ],
+                success: function (res) {
+                    // alert(JSON.stringify(res));
+                    // alert(JSON.stringify(res.checkResult.getLocation));
+                    if (res.checkResult.getLocation == false) {
+                        dialog.error('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                        return;
+                    }
+                }
+            });
+            wx.ready(function(){
+                // 获取"分享到朋友圈"按钮点击状态及自定义分享内容接口
+                wx.onMenuShareTimeline({
+                    title: '{$shareInfo["title"]}', // 分享标题
+                    link: '{$shareInfo["shareLink"]}',
+                    desc: '{$shareInfo["desc"]}',
+                    imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
+                    success: function () {
+                        window.location.href='{$shareInfo["backUrl"]}';
+                    },
+                    cancel: function () {
+                        return false;
+                    }
+                });
+
+                // 获取"分享给朋友"按钮点击状态及自定义分享内容接口
+                wx.onMenuShareAppMessage({
+                    title: '{$shareInfo["title"]}', // 分享标题
+                    link: '{$shareInfo["shareLink"]}',
+                    desc: '{$shareInfo["desc"]}',
+                    imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
+                    success: function () {
+                        window.location.href='{$shareInfo["backUrl"]}';
+                    },
+                    cancel: function () {
+                        return false;
+                    }
+                });
+
+
+
+                wx.getLocation({
+                    type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                    success: function (res) {
+                        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                        var speed = res.speed; // 速度，以米/每秒计
+                        var accuracy = res.accuracy; // 位置精度
+                        console.log(res);
+
+
+//                        wx.openLocation({
+//                            latitude: latitude, // 纬度，浮点数，范围为90 ~ -90
+//                            longitude: longitude, // 经度，浮点数，范围为180 ~ -180。
+//                            name: '', // 位置名
+//                            address: '', // 地址详情说明
+//                            scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+//                            infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
+//                        });
+
+                        //百度地图的定位
+//                        $.ajax({
+////                            url: 'http://api.map.baidu.com/geocoder/v2/?ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv&callback=renderReverse&location=' + latitude + ',' + longitude + '&output=json&pois=1',
+//                            url: 'http://api.map.baidu.com/geocoder/v2/?ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv&callback=renderReverse&location=' + latitude + ',' + longitude + '&output=json&pois=1',
+//                            type: "get",
+//                            dataType: "jsonp",
+//                            jsonp: "callback",
+//                            success: function (data) {
+//                                console.log(data);
+//                                var name = (data.result.formatted_address);
+//                                console.log(name)
+//
+//
+//                                //var map=JSON.stringify(name);
+//                                //alert(map);die;
+//                                //var map1=map.substr(1);
+//                                //var map1=name(start,stop);
+//                                //alert(name);die;
+//
+//                                $("#txt_dw").val(name);
+//
+//                                if (typeof callback == "function") {
+
+//                                }
+//
+//                            }
+//                        });
+
+                    },
+
+                    cancel: function (res) {
+                        alert('用户拒绝授权获取地理位置');
+                    }
+                });
+
+            });
+
+            var link = location.href;
+            $.ajax({
+                url:"your_url",//后台给你提供的接口
+                type:"GET",
+                data:{"url":link},
+                async:true,
+                dataType:"json",
+                success:function (data){
+                    wx.config({
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
+                        appId: data.configMap.appId, // 必填，公众号的唯一标识
+                        timestamp: data.configMap.timestamp, // 必填，生成签名的时间戳
+                        nonceStr: data.configMap.nonceStr, // 必填，生成签名的随机串
+                        signature: data.configMap.signature,// 必填，签名，见附录1
+                        jsApiList: [
+                            "onMenuShareTimeline",
+                            "onMenuShareAppMessage"
+                        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                    wx.error(function (res) {
+                        alert(res);
+                    });
+                },
+                error:function (error){
+                    alert(error)
+                }
+            });
+
+</script>

@@ -1,0 +1,233 @@
+<extend name="Public:base" />
+
+<block name="css-customize">
+    <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
+</block>
+
+
+<block name="content">
+    <article class="msh_product_picture">
+        <section class="goods_picture goods_detail_banner" >
+            <notempty name="goodsInfo.main_img">
+                <img data-img="" data-isloaded="" src="UPLOADS_IMG/{$goodsInfo.main_img}" alt="" class="c_img" />
+                <else />
+                <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
+            </notempty>
+        </section>
+        <section class="hot_detail f24">
+            <p class="goodsinfo_name">{$goodsInfo.name}</p>
+            <div class="product_labeling hot_tags_type">
+                <volist name="goodsInfo.tag" id="vo">
+                    <span>{$vo}</span>
+                </volist>
+            </div>
+            <div class="purchasing_intro_text">{$goodsInfo.intro|htmlspecialchars_decode}</div>
+        </section>
+        <section class="hot_detail hot_countdown_detail f24">
+            <div class="quantity_purchased">
+                <div>
+                    <div class="concessional_rate">
+                        <if condition="$goodsInfo.buy_type eq '1'">
+                            <span>优惠价：</span>
+                        </if>
+                        <if condition="$goodsInfo.buy_type eq '2'">
+                            <span>工作室优惠价：</span>
+                        </if>
+                        <if condition="$goodsInfo.buy_type eq '3'">
+                            <span>微团价：</span>
+                        </if>
+                        <span>￥<i>{$goodsInfo.real_price}</i></span>
+                    </div>
+                    <div>
+                        <span>零售价：</span>
+                        <del>￥{$goodsInfo.price}</del>
+                    </div>
+                </div>
+                <div class="express_mode">
+                    <span class="current">到店领取</span>
+                    <span>快递邮寄</span>
+                </div>
+            </div>
+            <div class="quantity_purchased quantity_product_n">
+                <span class="num">购买数量</span>
+                <div class="quantity_wrapper">
+                    <a href="javascript:void(0);" class="greduce">-</a>
+                    <input type="text" value="1" class="f24 gshopping_count">
+                    <a href="javascript:void(0);" class="gplus">+</a>
+                </div>
+            </div>
+            <div class="goods_star_score">
+                <div class="five_star">
+                    <div class="star_img">
+                        <img src="__PUBLIC__/img/home/star.png" id="0">
+                        <img src="__PUBLIC__/img/home/star.png" id="1">
+                        <img src="__PUBLIC__/img/home/star.png" id="2">
+                        <img src="__PUBLIC__/img/home/star.png" id="3">
+                        <img src="__PUBLIC__/img/home/star.png" id="4">
+                    </div>
+                    <span class="fraction" data-score="{$goodsInfo.evaluation_good_stars}"></span>
+                </div>
+                <a href="javascript:void(0);" class="comment_num">{$goodsInfo.evaluation_count}人评论</a>
+            </div>
+        </section>
+        <section class="hot_detail f24">
+            <h2>商品参数</h2>
+            <div class="commodity_parameter">
+                {$goodsInfo.param|htmlspecialchars_decode}
+            </div>
+        </section>
+
+        <if condition="$buyType eq 3">
+            <section class="group_members_detail f24">
+                <div>
+                    <img src="PUBLIC_IMG/common/group_members_banner.png" alt="">
+                </div>
+                <div class="group_members">
+                    <div class="group_m_list">
+                        <empty name="userInfo">
+                            <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                            <else />
+                            <img src="{$userInfo.headimgurl}" alt="">
+                        </empty>
+                        <span>团长</span>
+                    </div>
+                    <div class="group_m_list">
+                        <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                        <span>团员</span>
+                    </div>
+                    <div class="group_m_list">
+                        <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                        <span>团员</span>
+                    </div>
+                </div>
+            </section>
+        </if>
+        <section class="hot_detail hot_goods_detail f24">
+            <h2>商品详情</h2>
+            <ul>
+                <li>
+                    <notempty name="detailImg[0]">
+                        <volist name="detailImg" id="vo">
+                            <p class="goods_detail_img">
+                                <img data-img="UPLOADS_IMG/{$vo}" data-isloaded="" src="" alt="" class="c_img" />
+                            </p>
+                        </volist>
+                        <else />
+                        <p class="goods_detail_img">
+                            <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="" />
+                        </p>
+                    </notempty>
+                </li>
+            </ul>
+        </section>
+        <section class="hot_detail hot_goods_detail f24">
+            <!--<h2>商品详情</h2>-->
+            <ul>
+                <li>
+                    <notempty name="commonImg[0]">
+                        <volist name="commonImg" id="vo">
+                            <p class="goods_detail_img">
+                                <img data-img="UPLOADS_IMG/{$vo}" data-isloaded="" src="" alt="" class="c_img" />
+                            </p>
+                        </volist>
+                        <else />
+                        <p class="goods_detail_img">
+                            <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="" />
+                        </p>
+                    </notempty>
+                </li>
+            </ul>
+        </section>
+        <section class="hot_detail hot_goods_detail f24">
+            <h2>使用方法</h2>
+            <div class="commodity_parameter">
+                {$goodsInfo.usage|htmlspecialchars_decode}
+            </div>
+        </section>
+        <section class="hot_detail matters_needing_attention f24">
+            <div class="attention_text">
+                <span class="at_text">注意事项</span>
+                <div class="commodity_parameter">
+                    {$goodsInfo.notices|htmlspecialchars_decode}
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <input class="id" name="" type="hidden" value="{$goodsInfo.id}">
+    <input class="type" name="" type="hidden" value="goods">
+    <input class="groupBuySn" name="" type="hidden" value="{$groupBuySn}">
+
+    <block name="footer">
+        <include file="Public/footerGoodsInfo" />
+    </block>
+    <include file="Public/weiXinShare" />
+</block>
+<block name="js-customize">
+    <script type="text/javascript" src="PUBLIC_JS/home/cart.js"></script>
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            //星星评分等级
+            $('.five_star').setStar({
+                getFractionValue:5,
+                star:'__PUBLIC__/img/home/star.png',
+                starRed:'__PUBLIC__/img/home/starred.png'
+            });
+
+            if($('.commodity_quantity').text() == 0){
+                $(".shop_cart").addClass("disabled");
+            }
+            var allPrice=0;
+            var shopNum=$('.gshopping_count').val();
+            $('.gplus').on('click',function(){
+                shopNum=$(this).siblings('.gshopping_count').val();
+                shopNum++;
+                totalPrice();
+            });
+            $('.greduce').on('click',function(){
+                shopNum=$(this).siblings('.gshopping_count').val();
+                if(shopNum < 2){
+                    return false;
+                }
+                shopNum--;
+                totalPrice();
+            });
+            $(window).on('scroll',function(){
+                checkShow($('.goods_detail_img .c_img'));
+            });
+            function totalPrice(){
+                var price=$('.concessional_rate i').text().replace(/[^\d.]/g,"");
+                var total= parseInt(shopNum) * price;
+                allPrice = parseFloat(total).toFixed(2);
+                $('.totalPrice').text('￥'+allPrice);
+            }
+            totalPrice();
+
+            //立即购买
+            $('body').on('click','.buyNow',function () {
+                var goodsId = $('.id').val();
+                var num = $('.gshopping_count').val();
+                var groupBuySn = $('.groupBuySn').val();
+                var url =  MODULE + '/Order/addOrder/goodsId/'+goodsId+'/num/'+num ;
+                if(groupBuySn){
+                    url += '/groupBuySn/' + groupBuySn ;
+                }
+                location.href = url;
+            });
+            //微信分享提示图
+            $('body').on('click','.forward_weChat',function(){
+                $('.mcover').show();
+            });
+            $('.weixinShare_btn').on('click',function(){
+                $('.mcover').hide();
+            })
+        });
+
+
+
+    </script>
+
+
+</block>
