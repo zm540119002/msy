@@ -1,5 +1,5 @@
 <?php
-namespace Myms\Controller;
+namespace Mall\Controller;
 use  web\all\Controller\BaseController;
 use web\all\Component\WxpayAPI\Jssdk;
 use web\all\Controller\CommonController;

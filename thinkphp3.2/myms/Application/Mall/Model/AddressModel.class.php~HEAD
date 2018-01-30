@@ -1,5 +1,5 @@
 <?php
-namespace Myms\Model;
+namespace Mall\Model;
 use Think\Model;
 class AddressModel extends Model {
 

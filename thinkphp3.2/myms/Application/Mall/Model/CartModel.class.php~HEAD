@@ -1,5 +1,5 @@
 <?php
-namespace Myms\Model;
+namespace Mall\Model;
 use Think\Model;
 use web\all\Lib\AuthUser;
 class CartModel extends Model {

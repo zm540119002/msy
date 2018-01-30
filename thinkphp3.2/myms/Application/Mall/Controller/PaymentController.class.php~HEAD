@@ -1,5 +1,5 @@
 <?php
-namespace Myms\Controller;
+namespace Mall\Controller;
 use Think\Controller;
 use web\all\Component\WxpayAPI;
 

@@ -1,9 +1,11 @@
 <?php
-namespace Myms\Model;
-use Think\Model;
-class IntroduceClientModel extends Model {
+namespace Mall\Model;
 
-    protected $tableName = 'coupons';
+use Think\Model;
+use Think\Model\RelationModel;
+
+class CouponsReceiveModel extends Model {
+    protected $tableName = 'coupons_receive';
     protected $tablePrefix = '';
     protected $connection = 'DB_MYMS';
 
@@ -12,7 +14,7 @@ class IntroduceClientModel extends Model {
     );
 
     //新增
-    public function addCoupons(){
+    public function addCouponsReceive(){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -22,8 +24,8 @@ class IntroduceClientModel extends Model {
         if(!$res){
             return errorMsg($this->getError());
         }
-        $_POST['failure_time'] = strtotime($_POST['failure_time']);
-        $id = $this->add($_POST);
+       
+        $id = $this->add();
 
         if($id === false){
             return errorMsg($this->getError());
@@ -37,7 +39,7 @@ class IntroduceClientModel extends Model {
     }
 
     //修改
-    public function saveCoupons($where=array()){
+    public function saveCouponsReceive($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -57,8 +59,9 @@ class IntroduceClientModel extends Model {
             'id' => $id,
         );
         $_where = array_merge($_where,$where);
-        $_POST['failure_time'] = strtotime($_POST['failure_time']);
-        $res = $this->where($_where)->save($_POST);
+       
+        $res = $this->where($_where)->save();
+        
         if($res === false){
             return errorMsg($this->getError());
         }
@@ -71,7 +74,7 @@ class IntroduceClientModel extends Model {
     }
 
     //标记删除
-    public function delCoupons($where=array()){
+    public function delCouponsReceive($where=array()){
         if(!IS_POST){
             return errorMsg(C('NOT_POST'));
         }
@@ -100,24 +103,22 @@ class IntroduceClientModel extends Model {
     }
 
     //查询
-    public function selectCoupons($where=[],$field=[],$join=[]){
+    public function selectCouponsReceive($where=[],$field=[],$join=[]){
+        
         $_where = array(
-            'c.status' => 0,
+            'cr.status' => 0,
         );
         $_field = array(
-            'c.id','c.name','c.status','c.type','c.amount','c.failure_time',
+            'cr.id','cr.user_id','cr.type','cr.coupons_id','cr.amount','cr.failure_time','cr.acquire_time'
         );
         $_join = array(
         );
         $list = $this
-            ->alias('c')
+            ->alias('cr')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
             ->select();
         return $list?:[];
     }
-
-        
-
 }

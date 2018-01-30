@@ -1,5 +1,5 @@
 <?php
-namespace Myms\Controller;
+namespace Mall\Controller;
 use web\all\Controller\AuthUserController;
 class AddressController extends AuthUserController {
     //增加修改地址页面

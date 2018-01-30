@@ -1,5 +1,5 @@
 <?php
-namespace Myms\Controller;
+namespace Mall\Controller;
 use  web\all\Controller\BaseController;
 
 class IndexController extends BaseController {
