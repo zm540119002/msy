@@ -79,6 +79,7 @@ class PartnerAuthoriseController extends AuthUserController {
 
     //资格完款
     public function seniority(){
+        PartnerCache::remove($this->user['id']);
         $partner = PartnerCache::get($this->user['id']);
         if($partner['id']){
             $where = array(
