@@ -608,7 +608,15 @@ filter:alpha(opacity:0);
 .all_select_checkbox{text-align: center;}
 /*body .demo-class .layui-layer{position:absolute !important;;top:0 !important;}*/
 .edit .up{color:#ff0000;}
-.loading img{width:40px;margin:0 auto;display:block;}
+.loading{
+	width: 40px;
+    /*margin: 0 auto 0;*/
+    position: absolute;
+    top: 308px;
+    left: 50%;
+    margin-left: -20px;
+}
+.loading img{display:block;}
 .wproduct_type{width:220px;}
 .goods_c_item .type_img_box{float:left;overflow:hidden;}
 .upload_img_box{width:190px;height:202px;}
