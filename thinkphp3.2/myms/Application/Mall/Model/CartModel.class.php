@@ -5,16 +5,120 @@ use web\all\Lib\AuthUser;
 class CartModel extends Model {
     protected $tableName = 'cart';
     protected $tablePrefix = '';
-    protected $connection = 'DB_MYMS';
-    //登录时加入购物车
-    public function addCart($uid,$cartInfo){
-        $data['user_id']       = $uid;
-        $data['num']           = $cartInfo['num'];
-        $data['foreign_id']    = $cartInfo['foreign_id'];
-        $data['type']          = $cartInfo['type'];
-        $data['create_time']   = time();
-        $result = D('cart') -> add($data);
-        return $result;
+    protected $connection = 'DB_CONFIG_MALL';
+
+    protected $_validate = array();
+
+    //新增
+    public function addCart($rules=array()){
+        unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
+
+        $res = $this->create();
+        if(!$res){
+            return errorMsg($this->getError());
+        }
+        $id = $this->add();
+        if($id === false){
+            return errorMsg($this->getError());
+        }
+        $returnArray = array(
+            'id' => $id,
+        );
+        return successMsg('新增成功',$returnArray);
+    }
+
+    //修改
+    public function saveCart($where=array(),$rules=array()){
+        unset($_POST['id']);
+        $this->_validate = array_merge($this->_validate,$rules);
+
+        $_where = array(
+            'status' => 0,
+        );
+        $id = I('post.cartId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
+        $_where = array_merge($_where,$where);
+
+        $res = $this->create();
+        if(!$res){
+            return errorMsg($this->getError());
+        }
+        $res = $this->where($_where)->save();
+        if($res === false){
+            return errorMsg($this->getError());
+        }
+        $returnArray = array(
+            'id' => $id,
+        );
+        return successMsg('修改成功',$returnArray);
+    }
+
+    //标记删除
+    public function delCart($where=array()){
+        if(!IS_POST){
+            return errorMsg(C('NOT_POST'));
+        }
+        unset($_POST['id']);
+        $_where = array(
+            'status' => 0,
+        );
+        $id = I('post.cartId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
+        $_where = array_merge($_where,$where);
+
+        $res = $this->where($_where)->setField('status',2);
+        if($res === false){
+            return errorMsg($this->getError());
+        }
+        $returnArray = array(
+            'id' => $id,
+        );
+        return successMsg('删除成功',$returnArray);
+    }
+
+    //查询
+    public function selectCart($where=[],$field=[],$join=[]){
+        $_where = array(
+            'ct.status' => 0,
+        );
+        $_field = array(
+            'ct.id','ct.user_id','ct.type','ct.status','ct.foreign_id','ct.num','ct.create_time',
+        );
+        $_join = array(
+        );
+        $list = $this
+            ->alias('ct')
+            ->where(array_merge($_where,$where))
+            ->field(array_merge($_field,$field))
+            ->join(array_merge($_join,$join))
+            ->select();
+        return $list?:[];
+    }
+
+    //购物车统计
+    public function cartCount($where){
+        $_where = array(
+            'ct.status' => 0,
+        );
+        $_field = array(
+            'ct.type','count(1) num',
+        );
+        $list = $this
+            ->alias('ct')
+            ->where(array_merge($_where,$where))
+            ->field($_field)
+            ->group('ct.type')
+            ->select();
+        $cartCount = array();
+        foreach ($list as $value){
+            $cartCount[$value['type']] = $value['num'];
+        }
+        return $cartCount?:[];
     }
 
     //登录后获取购物车列表
@@ -49,48 +153,41 @@ class CartModel extends Model {
     }
 
     //登录后，session的产品入库
-    public function addCartBySession($uid){
-        if(session('?cart') &&! empty(session('cart'))){
-            $where = array(
-                'user_id' =>$uid
-            );
-            $cartList = $this -> selectCart($where);
-            $allIds = array();//session存在的总goodsIds
-            $sameIds = array();//相同的ID
-            $cartIds = '';
-            foreach (session('cart') as $k=>$v){
-                $allIds[]= $k;
-                foreach ($cartList as $kk => $vv){
-                    if($v['id'] == $vv['foreign_id'] && $v['type'] == $vv['type']) {//修改数据库数量
-                        $sameIds[] = $k;
-                        $goodsNum = $v['num'] + $vv['num'];
-                        $this->updateGoodsNum($uid, $v['id'],$goodsNum,$v['type']);
-                        $cartId=  $v['id'];
-                        $cartIds=$cartId.','.$cartIds;
-                    }
+    public function addCartByCookie($cartList,$cookieCart,$uid){
+        $allIds = array();
+        $sameIds = array();
+        $cartIds = '';
+        foreach ($cookieCart as $k=>$v){
+            $allIds[]= $k;
+            foreach ($cartList as $kk => $vv){
+                if($v['foreign_id'] == $vv['foreign_id'] && $v['type'] == $vv['type']) {//修改数据库数量
+                    $sameIds[] = $k;
+                    $goodsNum = $v['num'] + $vv['num'];
+                    $_POST = [];
+                    $_POST['num'] = $goodsNum;
+                    $where = array(
+                        'user_id' => $uid,
+                        'id' => $vv['id'],
+                        'foreign_id' => $vv['foreign_id'],
+                    );
+                    $res = $this->saveCart($where);
                 }
             }
-            $addIds = array_diff($allIds,$sameIds);//不同goodsIds
-            foreach ($addIds as $k=>$v){//添加到数据库
-                foreach (session('cart') as $kk=>$vv){
-                    if($v == $kk){
-                        if($vv['type'] == 1){
-                            $addCartInfo = D('Goods')->getGoodsInfoByGoodsId($vv['id']);
-                        }
-                        if($vv['type'] == 2){
-                            $addCartInfo = D('Project')->getProjectInfoByProjectId($vv['id']);
-                        }
-                        $addCartInfo['num'] = $vv['num'];
-                        $addCartInfo['foreign_id'] = $vv['foreign_id'];
-                        $addCartInfo['type'] = $vv['type'];
-                        $cartId = $this ->addCart($uid,$addCartInfo);
-                        $cartIds=$cartId.','.$cartIds;
-                    }
-                }
-            }
-            session('cart',null);
-            return $cartIds;
         }
+        $addIds = array_diff($allIds,$sameIds);//不同goodsIds
+        foreach ($addIds as $k=>$v){//添加到数据库
+            foreach ($cookieCart as $kk=>$vv){
+                if($v == $kk){
+                    $_POST = [];
+                    $_POST['user_id'] = $uid;
+                    $_POST['foreign_id'] = $vv['foreign_id'];
+                    $_POST['num'] = $vv['num'];
+                    $_POST['create_time'] = time();
+                    $res = $this->addCart();
+                }
+            }
+        }
+        cookie('cart',null);
     }
 
     //获取购物车列表ids
@@ -134,17 +231,6 @@ class CartModel extends Model {
         return $cartInfo;
     }
 
-    //更新购物车数量
-    public function updateCartNum($uid,$foreignId,$goods_num,$type){
-        $where['user_id']  = $uid;
-        $where['foreign_id'] = $foreignId;
-        $where['type'] = $type;
-        $result= D('Cart') -> where($where)->setField('num',$goods_num);
-        return $result;
-    }
-
-
-
     //根据cartIds查找客户购物车的商品信息
     public function getCartListByCartIds($uid,$cartIds){
         $where['user_id']  = $uid;
@@ -170,14 +256,18 @@ class CartModel extends Model {
 
 
     //查询session上购物车列表
-    public function getCartListBySession(){
+    public function getCartListByCookie(){
         $cartList = [];
-        foreach (session('cart') as $k=>$v){
+        $cart = unserialize(cookie('cart'));
+        foreach ($cart as $k=>$v){
+
             if($v['type'] == 1){//商品
                 $goodsInfo =  D('Goods') ->getGoodsInfoByGoodsId($v['foreign_id']);
+                $goodsInfo = $goodsInfo[0];
             }
             if($v['type'] == 2){//项目
                 $goodsInfo =  D('Project')->getProjectInfoByProjectId($v['foreign_id']);
+                $goodsInfo = $goodsInfo[0];
             }
             $cartInfo['foreign_id']   =  $goodsInfo['id'];
             $cartInfo['foreign_name'] =  $goodsInfo['name'];
@@ -190,31 +280,6 @@ class CartModel extends Model {
         }
         return $cartList;
     }
-    
-    //查询购物车表
-    public function selectCart($where=[],$field=[],$join=[],$order=[],$limit=''){
-        $_where = array(
-
-        );
-        $_field = array(
-            'c.id','c.user_id','c.foreign_id','c.num','c.create_time','c.type',
-        );
-        $_join = array(
-
-        );
-        $_order = array(
-
-        );
-        $list = $this
-            ->alias('c')
-            ->where(array_merge($_where,$where))
-            ->field(array_merge($_field,$field))
-            ->join(array_merge($_join,$join))
-            ->order(array_merge($_order,$order))
-            ->limit($limit)
-            ->select();
-        return $list?:[];
-    }
 
     //获取购物车的总价、商品数和CartId
     public function getAllCartInfo(){
@@ -223,7 +288,7 @@ class CartModel extends Model {
             $cartList = $this -> getCartList($user['id']);
             $cartIds = $this->getCartIds($user['id']);
         }else{
-            $cartList = $this -> getCartListBySession();
+            $cartList = $this -> getCartListByCookie();
         }
         $cartInfo = $this -> getCartInfo($cartList);
         $cartInfo['cartIds'] = $cartIds;
@@ -236,7 +301,7 @@ class CartModel extends Model {
             $cartList = $this ->getCartList($this->user['id']);
         }else{
             //没有登录
-            $cartList = $this ->getCartListBySession();
+            $cartList = $this ->getCartListByCookie();
         }
         return $cartList;
 

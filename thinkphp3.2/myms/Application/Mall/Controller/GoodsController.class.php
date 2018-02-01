@@ -51,6 +51,7 @@ class GoodsController extends BaseController {
         $id = I('post.id',0,'int');
         $this -> type  = 'goods';
         $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($id);
+        $goodsInfo = $goodsInfo[0];
         $this->assign('goodsInfo',$goodsInfo);
         $this -> display('Cart/purchaseDetails');
 
@@ -62,6 +63,7 @@ class GoodsController extends BaseController {
             $this->user = AuthUser::check();
             $goodsId   = intval($_GET['goodsId']);
             $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($goodsId);
+            $goodsInfo = $goodsInfo[0];
             $tag                      = explode(',',$goodsInfo['tag']);
             $detailImg                 = explode(',',$goodsInfo['detail_img']);
             $goodsInfo['tag']         = $tag;
