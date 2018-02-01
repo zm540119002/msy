@@ -129,7 +129,7 @@ class CartModel extends Model {
         $cartList = $this -> selectCart($where);
         $delTime = C('DEFAULT_DUE_TIME');
         $this -> delCartByTime($cartList,$uid,$delTime);
-        $this->addCartBySession($uid);
+        $this->addCartByCookie($uid);
         $cartList = $this -> selectCart($where);
         $newCartList =[];
         foreach ($cartList as $k=>$v){

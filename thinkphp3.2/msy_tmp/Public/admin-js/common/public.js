@@ -183,7 +183,6 @@ function tab_down(tab_k, tab_con, tab_dz) {
 
 
 function checkShow(ele){
-    console.log(ele);
     var winH=$(window).height(),
         scrollH=$(window).scrollTop()
     ele.each(function(){

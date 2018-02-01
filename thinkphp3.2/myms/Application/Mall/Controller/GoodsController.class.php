@@ -66,7 +66,6 @@ class GoodsController extends BaseController {
             $this->user = AuthUser::check();
             $goodsId   = intval($_GET['goodsId']);
             $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($goodsId);
-            $goodsInfo = $goodsInfo[0];
             $tag                      = explode(',',$goodsInfo['tag']);
             $detailImg                 = explode(',',$goodsInfo['detail_img']);
             $goodsInfo['tag']         = $tag;
@@ -78,7 +77,7 @@ class GoodsController extends BaseController {
             $this->cartList = D('Cart') -> cartList();
             $this->groupBuySn = $_GET['groupBuySn'];
             $this->shareType = $_GET['shareType'];
-            $this -> cartInfo = D('Cart') -> getAllCartInfo();
+//            $this -> cartInfo = D('Cart') -> getAllCartInfo();
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             //获取用户基本资料
 //            $this->userInfo = $this -> getWeiXinUserInfo();

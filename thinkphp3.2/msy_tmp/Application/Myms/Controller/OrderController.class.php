@@ -145,7 +145,6 @@ class OrderController extends BaseAuthUserController {
                     $cartList = D('cart') -> getCartListByCartIds($userId,$cartIds);
 //                    $cartList = D('cart') -> getCartListByTime($userId);
                 }
-
                 if(empty($cartList)){
                     $this->error('你选中的商品已删除，请重新选择！');
                 }

@@ -156,7 +156,7 @@
     <input class="id" name="" type="hidden" value="{$goodsInfo.id}">
     <input class="type" name="" type="hidden" value="goods">
     <input class="groupBuySn" name="" type="hidden" value="{$groupBuySn}">
-    <include file="Public/weiXinShare" />
+    <!--<include file="Public/weiXinShare" />-->
 </block>
 <block name="footer">
     <include file="Cart/footerCartMenu" />
@@ -199,7 +199,7 @@
                 var price=$('.concessional_rate i').text().replace(/[^\d.]/g,"");
                 var total= parseInt(shopNum) * price;
                 allPrice = parseFloat(total).toFixed(2);
-                $('.totalPrice').text('￥'+allPrice);
+                $('.goods_total_price').text('￥'+allPrice);
             }
             totalPrice();
 //
