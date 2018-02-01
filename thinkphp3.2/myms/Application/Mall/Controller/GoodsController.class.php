@@ -16,6 +16,7 @@ class GoodsController extends BaseController {
             //购物车信息
             $this-> cartInfo = D('Cart') -> getAllCartInfo();
             $this->cartList = D('Cart') -> cartList();
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this->display();
         }
     }
@@ -27,6 +28,7 @@ class GoodsController extends BaseController {
         //购物车信息
         $this-> cartInfo = D('Cart') -> getAllCartInfo();
         $this->cartList = D('Cart') -> cartList();
+        $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
         $this->display();
     }
 
@@ -38,6 +40,7 @@ class GoodsController extends BaseController {
         //购物车信息
         $this-> cartInfo = D('Cart') -> getAllCartInfo();
         $this->cartList = D('Cart') -> cartList();
+        $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
         $this->display();
     }
 
@@ -76,6 +79,7 @@ class GoodsController extends BaseController {
             $this->groupBuySn = $_GET['groupBuySn'];
             $this->shareType = $_GET['shareType'];
             $this -> cartInfo = D('Cart') -> getAllCartInfo();
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             //获取用户基本资料
 //            $this->userInfo = $this -> getWeiXinUserInfo();
             //微信分享
@@ -95,8 +99,8 @@ class GoodsController extends BaseController {
                 session('baseShareUrl',$baseShareUrl);
                 $this -> shareInfo = $this -> weiXinShareInfo('微团购',$backLink,$goodsInfo['main_img'],'好友邀请你参加美妍美社微团购，三人成团即享特惠....');
                 $this -> signPackage = $this -> weiXinShareInit();
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
             }
-//
             $this -> display();
         }
     }
@@ -196,6 +200,7 @@ class GoodsController extends BaseController {
     public function categoryGoods(){
         if(IS_GET){
             $this -> categoryId = $_GET['categoryId'];
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this->display();
 ;        }
     }

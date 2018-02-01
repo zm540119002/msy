@@ -153,15 +153,13 @@
             </div>
         </section>
     </article>
-
     <input class="id" name="" type="hidden" value="{$goodsInfo.id}">
     <input class="type" name="" type="hidden" value="goods">
     <input class="groupBuySn" name="" type="hidden" value="{$groupBuySn}">
-
-    <block name="footer">
-        <include file="Public/footerGoodsInfo" />
-    </block>
     <include file="Public/weiXinShare" />
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
 </block>
 <block name="js-customize">
     <script type="text/javascript" src="PUBLIC_JS/home/cart.js"></script>
