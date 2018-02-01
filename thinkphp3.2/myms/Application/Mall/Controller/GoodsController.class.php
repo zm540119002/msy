@@ -51,7 +51,6 @@ class GoodsController extends BaseController {
         $id = I('post.id',0,'int');
         $this -> type  = 'goods';
         $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($id);
-        $goodsInfo = $goodsInfo[0];
         $this->assign('goodsInfo',$goodsInfo);
         $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
         if($goodsInfo['buy_type'] == 3){

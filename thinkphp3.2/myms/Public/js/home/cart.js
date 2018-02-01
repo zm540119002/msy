@@ -260,64 +260,7 @@ $(function(){
         $('.express-area-box').css({bottom:'-100%',display:'none'});
         $('.mask').data('show',0);
     });
-
-    //加入购物车
-    $('body').on('click','.add_cart',function(){
-        var type = $('.goods_list li').data('layer-type');
-        console.log(type);
-        var postData = {};
-        var url =  MODULE + '/Cart/addCart';
-        if(type == 'goods'){
-            postData.goodsId = $('.goods_list li').data('layer-id');
-        }
-        if(type == 'project'){
-            postData.projectId = $('.goods_list li').data('layer-id');
-        }
-        postData.num = $('.gshopping_count').val();
-        console.log(postData);
-        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(){
-            },
-            error:function(){
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                if(data.status==0){
-                    dialog.error(data.info);
-                }else {
-                    dialog.error(data.info);
-                }
-            },
-            complete:function(){
-                $('.group_cart_nav,.mask').hide();
-                $('.goodsInfo_footer_nav').show();
-                $('.express-area-box').css({bottom:'-100%',display:'none'});
-                $('html,body').css({"overflow":"auto"});
-            }
-        });
-    });
-
-    //立即购买
-    $('body').on('click','.buy_now',function () {
-        var type = $('.goods_list li').data('layer-type');
-        var url =  MODULE + '/Order/addOrder/';
-        if(type === 'goods'){
-            var goodsId = $('.goods_list li').data('layer-id');
-            var num = $('.gshopping_count').val();
-            url += 'goodsId/'+goodsId+'/num/'+num ;
-        }
-        if(type === 'project'){
-            var projectId = $('.goods_list li').data('layer-id');
-            var num = $('.gshopping_count').val();
-            url += 'projectId/'+projectId+'/num/'+num ;
-        }
-        location.href = url;
-    });
-
-
+    
     //购物车单个删除
     $('body').on('click','.edit_delete',function(){
         var _li = $(this).parents('li');

@@ -202,30 +202,19 @@
                 $('.totalPrice').text('￥'+allPrice);
             }
             totalPrice();
-
-            //立即购买
-            $('body').on('click','.buyNow',function () {
-                var goodsId = $('.id').val();
-                var num = $('.gshopping_count').val();
-                var groupBuySn = $('.groupBuySn').val();
-                var url =  MODULE + '/Order/addOrder/goodsId/'+goodsId+'/num/'+num ;
-                if(groupBuySn){
-                    url += '/groupBuySn/' + groupBuySn ;
-                }
-                location.href = url;
-            });
-            //微信分享提示图
-            $('body').on('click','.forward_weChat',function(){
-                $('.mcover').show();
-            });
-            $('.weixinShare_btn').on('click',function(){
-                $('.mcover').hide();
-            })
+//
+//            //立即购买
+//            $('body').on('click','.buyNow',function () {
+//                var goodsId = $('.id').val();
+//                var num = $('.gshopping_count').val();
+//                var groupBuySn = $('.groupBuySn').val();
+//                var url =  MODULE + '/Order/addOrder/goodsId/'+goodsId+'/num/'+num ;
+//                if(groupBuySn){
+//                    url += '/groupBuySn/' + groupBuySn ;
+//                }
+//                location.href = url;
+//            });
         });
 
-
-
     </script>
-
-
 </block>

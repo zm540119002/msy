@@ -700,7 +700,7 @@ class OrderController extends AuthUserController {
             $res = $modelLogistics->saveLogistics($where);
             if($res['status'] == 0){
                 $modelLogistics->rollback();
-                //返回状态给微信服务器
+                //返回状态
                 $this->errorReturn('确认收货失败！');
             }
             $_POST = [];
@@ -712,7 +712,7 @@ class OrderController extends AuthUserController {
             $res = $modelOrder->saveOrder($where);
             if($res['status'] == 0){
                 $modelLogistics->rollback();
-                //返回状态给微信服务器
+                //返回状态
                 $this->errorReturn('确认收货失败！');
             }
             $modelOrder->commit();//提交事务

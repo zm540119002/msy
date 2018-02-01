@@ -127,13 +127,14 @@ class GoodsModel extends Model {
     public function getGoodsInfoByGoodsId($goodsId){
         $where['id'] = $goodsId;
         $goodsInfo = D('Goods')->selectGoods($where);
-        if($goodsInfo['buy_type']=='1'){
+        $goodsInfo = $goodsInfo[0];
+        if($goodsInfo['buy_type']==1){
             $goodsInfo['real_price'] = $goodsInfo['discount_price'];
         }
-        if($goodsInfo['buy_type']=='2'){
+        if($goodsInfo['buy_type']==2){
             $goodsInfo['real_price'] = $goodsInfo['special_price'];
         }
-        if($goodsInfo['buy_type']=='3'){
+        if($goodsInfo['buy_type']==3){
             $goodsInfo['real_price'] = $goodsInfo['group_price'];
         }
         return $goodsInfo;
