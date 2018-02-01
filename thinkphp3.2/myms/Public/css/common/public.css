@@ -121,7 +121,7 @@ i{
     width:100%;
     display:flex;
     display:-webkit-flex;
-    display: none;
+    /*display: none;*/
     z-index:2;
 }
 .signShopping_nav{z-index:1;}
