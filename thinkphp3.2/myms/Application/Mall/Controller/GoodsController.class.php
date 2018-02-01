@@ -16,7 +16,6 @@ class GoodsController extends BaseController {
             //购物车信息
             $this-> cartInfo = D('Cart') -> getAllCartInfo();
             $this->cartList = D('Cart') -> cartList();
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this->display();
         }
     }
@@ -28,7 +27,6 @@ class GoodsController extends BaseController {
         //购物车信息
         $this-> cartInfo = D('Cart') -> getAllCartInfo();
         $this->cartList = D('Cart') -> cartList();
-        $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
         $this->display();
     }
 
@@ -40,7 +38,6 @@ class GoodsController extends BaseController {
         //购物车信息
         $this-> cartInfo = D('Cart') -> getAllCartInfo();
         $this->cartList = D('Cart') -> cartList();
-        $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
         $this->display();
     }
 
@@ -56,6 +53,10 @@ class GoodsController extends BaseController {
         $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($id);
         $goodsInfo = $goodsInfo[0];
         $this->assign('goodsInfo',$goodsInfo);
+        $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
+        if($goodsInfo['buy_type'] == 3){
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
+        }
         $this -> display('Cart/purchaseDetails');
 
     }
@@ -200,7 +201,6 @@ class GoodsController extends BaseController {
     public function categoryGoods(){
         if(IS_GET){
             $this -> categoryId = $_GET['categoryId'];
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             $this->display();
 ;        }
     }
