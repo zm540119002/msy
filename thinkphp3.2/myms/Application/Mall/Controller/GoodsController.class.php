@@ -150,19 +150,16 @@ class GoodsController extends BaseController {
             $groupWhere['buy_type'] = array('eq',3);
             $groupWhere = array_merge($_where,$groupWhere);
             $groupGoodsList = page_query($model,$groupWhere,$field,$order,$join,$group,$pageSize,$alias);
-            if($page == 1){
-                $this -> groupGoodsListInit = $groupGoodsList['data'];
-            }
-            if($page > 1){
+
                 $this -> groupGoodsListMore = $groupGoodsList['data'];
-            }
+
 
         }else if($position === 'speGoods' && $page == 1){
             //产品工作室特惠
             $speWhere['buy_type'] = array('eq',2);
             $speWhere = array_merge($_where,$speWhere);
             $speGoodsList = page_query($model,$speWhere,$field,$order,$join,$group,$pageSize,$alias);
-            $this -> speGoodsList = $speGoodsList['data'];
+            $this -> speGoodsListMore = $speGoodsList['data'];
         }
         else{
             if($page>1){

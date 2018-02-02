@@ -112,14 +112,14 @@ $(function () {
         $('html,body').css({"overflow":"auto"});
     });
 
-    //底层弹窗的加减
+    //底层弹窗的加
     $('body').on('click','.gplus',function(){
         shopNum = parseInt($(this).siblings('.gshopping_count').val());
         shopNum++;
         $(this).siblings('.gshopping_count').val(shopNum);
         allAmount(shopNum);
     });
-
+    //底层弹窗的减
     $('body').on('click','.greduce',function(){
         shopNum = parseInt($(this).siblings('.gshopping_count').val());
         shopNum--;
@@ -129,7 +129,7 @@ $(function () {
         $(this).siblings('.gshopping_count').val(shopNum);
         allAmount(shopNum);
     });
-
+    //计算总价
     function allAmount(singleNum){
         var allAmount=0;
         var goodsPrice=parseFloat($('.purchase_gs_r price').text());

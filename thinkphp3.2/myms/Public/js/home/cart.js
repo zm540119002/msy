@@ -89,42 +89,7 @@ $(function(){
             }
         })
     });
-
-    //产品详情的加减
-    $('body').on('click','.gplus',function(){
-         shopNum = parseInt($(this).siblings('.gshopping_count').val());
-        var foreignId = $(this).parents('li').data('foreignid');
-        var buyType = $(this).parents('li').data('buytype');
-        var type = $(this).parents('li').data('type');
-        var cartId =$(this).parents('li').data('cartid');
-        shopNum++;
-        $(this).siblings('.gshopping_count').val(shopNum);
-        allAmount(shopNum);
-    });
-
-    $('body').on('click','.greduce',function(){
-        shopNum = parseInt($(this).siblings('.gshopping_count').val());
-        var foreignId = $(this).parents('li').data('foreignid');
-        var buyType = $(this).parents('li').data('buytype');
-        var type = $(this).parents('li').data('type');
-        var cartId =$(this).parents('li').data('cartid');
-        shopNum--;
-        if(shopNum<1){
-            return false;
-        }
-        $(this).siblings('.gshopping_count').val(shopNum);
-        allAmount(shopNum);
-    });
-
-    function allAmount(singleNum){
-        var allAmount=0;
-        // var singleNum=parseInt(_this.find('.shopping_count').val());
-        var goodsPrice=parseFloat($('.purchase_gs_r price').text());
-        allAmount=singleNum*goodsPrice;
-        allAmount=parseFloat(allAmount).toFixed(2)
-        $('.goods_total_price price').text(allAmount);
-        return allAmount;
-    }
+    
     //计算总价
     function TotalPrice(){
         var allPrice=0;
