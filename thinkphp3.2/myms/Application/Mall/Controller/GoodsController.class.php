@@ -14,8 +14,6 @@ class GoodsController extends BaseController {
             $catList = D('GoodCategory')->selectGoodsCategory($where);
             $this -> catList = $catList;
             //购物车信息
-            $this-> cartInfo = D('Cart') -> getAllCartInfo();
-            $this->cartList = D('Cart') -> cartList();
             $this->display();
         }
     }
@@ -35,9 +33,6 @@ class GoodsController extends BaseController {
         $where['status']  = array('eq',0);
         $where['buy_type'] = array('eq',3);
         $this->groupGoodsList =  M('goods')->where($where)->order('id desc')->select();
-        //购物车信息
-        $this-> cartInfo = D('Cart') -> getAllCartInfo();
-        $this->cartList = D('Cart') -> cartList();
         $this->display();
     }
 
@@ -78,7 +73,7 @@ class GoodsController extends BaseController {
             $this->groupBuySn = $_GET['groupBuySn'];
             $this->shareType = $_GET['shareType'];
 //            $this -> cartInfo = D('Cart') -> getAllCartInfo();
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,24,4));
             //获取用户基本资料
 //            $this->userInfo = $this -> getWeiXinUserInfo();
             //微信分享
@@ -180,6 +175,7 @@ class GoodsController extends BaseController {
         //商品分类切换到每个单独分类
         if(isset($_GET['catId']) && intval($_GET['catId'])){
             $where['category_id_1'] = $_GET['catId'];
+            $where['buy_type'] = 1;
             $where = array_merge($_where,$where);
             $goodsList = page_query($model,$where,$field,$order,$join,$group,$pageSize,$alias);
             if($page == 1){
