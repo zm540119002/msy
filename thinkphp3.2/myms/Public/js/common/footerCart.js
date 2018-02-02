@@ -110,12 +110,35 @@ $(function () {
     $('body').on('click','.mask,.closeBtn',function(){
         $('.express-area-box,.mask').remove();
         $('html,body').css({"overflow":"auto"});
-        // $('.mask,signShopping_nav,.group_cart_nav').hide();
-        // $('.goodsInfo_footer_nav').show();
-        // $('.express-area-box').css({bottom:'-100%',display:'none'});
-        // $('.mask').data('show',0);
-        // $('.express-area-box price').text('');
     });
+
+    //底层弹窗的加减
+    $('body').on('click','.gplus',function(){
+        shopNum = parseInt($(this).siblings('.gshopping_count').val());
+        shopNum++;
+        $(this).siblings('.gshopping_count').val(shopNum);
+        allAmount(shopNum);
+    });
+
+    $('body').on('click','.greduce',function(){
+        shopNum = parseInt($(this).siblings('.gshopping_count').val());
+        shopNum--;
+        if(shopNum<1){
+            return false;
+        }
+        $(this).siblings('.gshopping_count').val(shopNum);
+        allAmount(shopNum);
+    });
+
+    function allAmount(singleNum){
+        var allAmount=0;
+        var goodsPrice=parseFloat($('.purchase_gs_r price').text());
+        allAmount=singleNum*goodsPrice;
+        allAmount=parseFloat(allAmount).toFixed(2)
+        $('.goods_total_price price').text(allAmount);
+        return allAmount;
+    }
+
 
 });
 //购物车弹窗详情
