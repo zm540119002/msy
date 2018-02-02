@@ -89,6 +89,7 @@ $(function () {
 
     //列表购物车弹窗
     $('body').on('click','.shopping_cart',function(){
+        alert(1)
         var _li = $(this).parents('li');
         var _this=$(this);
         //先清空

@@ -22,9 +22,6 @@ class GoodsController extends BaseController {
         $where['status']  = array('eq',0);
         $where['buy_type'] = array('eq',2);
         $this->speGoodsList =  D('Goods')->where($where)->order('id desc')->select();
-        //购物车信息
-        $this-> cartInfo = D('Cart') -> getAllCartInfo();
-        $this->cartList = D('Cart') -> cartList();
         $this->display();
     }
 
@@ -32,7 +29,7 @@ class GoodsController extends BaseController {
     public function goodsGroup(){
         $where['status']  = array('eq',0);
         $where['buy_type'] = array('eq',3);
-        $this->groupGoodsList =  M('goods')->where($where)->order('id desc')->select();
+        $this->groupGoodsList =  D('Goods')->where($where)->order('id desc')->select();
         $this->display();
     }
 
@@ -108,7 +105,7 @@ class GoodsController extends BaseController {
         $this->page = $page;
         //分页函数的参数
         $model = D('Goods');
-        $_where['g.status'] =0;
+        $_where['g.status'] = 0;
         $_where['g.on_off_line'] =1;
         $field = array(
             'g.id','g.name','g.category_id_1','g.category_id_2','g.category_id_3',
@@ -137,18 +134,37 @@ class GoodsController extends BaseController {
                 }
             }
             $this -> catGoodsList = $catGoodsList;
-
             //产品工作室特惠
             $speWhere['buy_type'] = array('eq',2);
             $speWhere = array_merge($_where,$speWhere);
-            $this->speGoodsList = page_query($model,$speWhere,$field,$order,$join,$group,$pageSize,$alias);
-
+            $speGoodsList = page_query($model,$speWhere,$field,$order,$join,$group,$pageSize,$alias);
+            $this -> speGoodsList = $speGoodsList['data'];
             //微团购
             $groupWhere['buy_type'] = array('eq',3);
             $groupWhere = array_merge($_where,$groupWhere);
-            $this->groupGoodsList = page_query($model,$groupWhere,$field,$order,$join,$group,$pageSize,$alias);
+            $groupGoodsList = page_query($model,$groupWhere,$field,$order,$join,$group,$pageSize,$alias);
+            $this -> groupGoodsList = $groupGoodsList['data'];
 
-        }else{
+        }else if($position === 'groupGoods'){
+            //微团购
+            $groupWhere['buy_type'] = array('eq',3);
+            $groupWhere = array_merge($_where,$groupWhere);
+            $groupGoodsList = page_query($model,$groupWhere,$field,$order,$join,$group,$pageSize,$alias);
+            if($page == 1){
+                $this -> groupGoodsListInit = $groupGoodsList['data'];
+            }
+            if($page > 1){
+                $this -> groupGoodsListMore = $groupGoodsList['data'];
+            }
+
+        }else if($position === 'speGoods' && $page == 1){
+            //产品工作室特惠
+            $speWhere['buy_type'] = array('eq',2);
+            $speWhere = array_merge($_where,$speWhere);
+            $speGoodsList = page_query($model,$speWhere,$field,$order,$join,$group,$pageSize,$alias);
+            $this -> speGoodsList = $speGoodsList['data'];
+        }
+        else{
             if($page>1){
                 $buyType = I('get.buyType',0,'int');
                 if($buyType == 1){//正常价产品
@@ -166,7 +182,7 @@ class GoodsController extends BaseController {
                 if(empty($goodsList['data'])){
                     $this->ajaxReturn(errorMsg('没有更多'));
                 }else{
-                    $this->goodsListLoad = $goodsList;
+                    $this->goodsListLoad = $goodsList['data'];
                 }
             }
 
@@ -184,7 +200,7 @@ class GoodsController extends BaseController {
                 if(empty($goodsList['data'])){
                     $this->ajaxReturn(errorMsg('没有更多'));
                 }else{
-                    $this->goodsListLoad = $goodsList;
+                    $this->goodsListLoad = $goodsList['data'];
                 }
             }
         }
