@@ -11,6 +11,7 @@ $(function () {
             postData.projectId = $('.goods_list li').data('layer-id');
         }
         postData.num = $('.gshopping_count').val();
+        console.log(1);
         $.ajax({
             url: url,
             data: postData,
@@ -26,7 +27,8 @@ $(function () {
                 }else {
                     dialog.error(data.info);
                 }
-            },
+            }
+            // ,
             // complete:function(){
             //     $('.group_cart_nav,.mask').hide();
             //     $('.goodsInfo_footer_nav').show();
