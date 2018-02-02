@@ -2,7 +2,6 @@ $(function () {
     //加入购物车
     $('body').on('click','.add_cart',function(){
         var type = $('.goods_list li').data('layer-type');
-        console.log(type);
         var postData = {};
         var url =  MODULE + '/Cart/addCart';
         if(type == 'goods'){
@@ -12,7 +11,6 @@ $(function () {
             postData.projectId = $('.goods_list li').data('layer-id');
         }
         postData.num = $('.gshopping_count').val();
-        console.log(postData);
         $.ajax({
             url: url,
             data: postData,
@@ -29,12 +27,12 @@ $(function () {
                     dialog.error(data.info);
                 }
             },
-            complete:function(){
-                $('.group_cart_nav,.mask').hide();
-                $('.goodsInfo_footer_nav').show();
-                $('.express-area-box').css({bottom:'-100%',display:'none'});
-                $('html,body').css({"overflow":"auto"});
-            }
+            // complete:function(){
+            //     $('.group_cart_nav,.mask').hide();
+            //     $('.goodsInfo_footer_nav').show();
+            //     $('.express-area-box').css({bottom:'-100%',display:'none'});
+            //     $('html,body').css({"overflow":"auto"});
+            // }
         });
     });
     //立即购买 和 发起微团
@@ -112,6 +110,6 @@ $(function () {
         $('.mcover').hide();
     })
     //初始化
-    
+
 });
 

@@ -238,7 +238,6 @@ $(function(){
         var buyType = _this.data('weituan');
         var position = 'list';
         getPurchaseDetails(id,type,buyType,position);
-        console.log( $('.gshopping_count'));
     });
     //详情购物车弹窗
     $('body').on('click','.info_shopping_cart',function(){
@@ -248,14 +247,15 @@ $(function(){
         var position = 'info';
         getPurchaseDetails(id,type,buyType,position);
     });
-
+   //关闭详情购物车弹窗
     $('body').on('click','.mask,.closeBtn',function(){
+        $('.express-area-box,.mask').remove();
         $('html,body').css({"overflow":"auto"});
-        $('.mask,signShopping_nav,.group_cart_nav').hide();
-        $('.goodsInfo_footer_nav').show();
-        $('.express-area-box').css({bottom:'-100%',display:'none'});
-        $('.mask').data('show',0);
-        $('.express-area-box price').text('');
+        // $('.mask,signShopping_nav,.group_cart_nav').hide();
+        // $('.goodsInfo_footer_nav').show();
+        // $('.express-area-box').css({bottom:'-100%',display:'none'});
+        // $('.mask').data('show',0);
+        // $('.express-area-box price').text('');
     });
     
     //购物车单个删除
