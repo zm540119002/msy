@@ -111,5 +111,7 @@ $(function () {
     $('.weixinShare_btn').on('click',function(){
         $('.mcover').hide();
     })
+    //初始化
+    
 });
 

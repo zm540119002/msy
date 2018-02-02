@@ -179,10 +179,7 @@ $(function(){
         }
         window.location.href = MODULE+'/Order/addOrder/cartIds/'+cartIds;
     });
-    //显示购物车
-    $('body').on('click','.shopping_cart',function(){
-        $('.shopping_cart_nav').show().css({display:'flex'});
-    });
+
    //购物车弹窗详情
     function getPurchaseDetails(id,type,buyType,position) {
         if(type === 'goods'){
@@ -229,20 +226,20 @@ $(function(){
             $('.group_cart_nav').hide();
         }
     }
-
-
     //列表购物车弹窗
     $('body').on('click','.shopping_cart',function(){
         var _li = $(this).parents('li');
         var _this=$(this);
+        console.log(_li.find('.price').text().replace(/[^\d.]/g,""));
         //先清空
-        $('.gshopping_count').val(1);
-        $('.goods_total_price price').text( _li.find('.price').text().replace(/[^\d.]/g,""));
         var type = _li.data('type');
         var id = _li.data('goodsid');
         var buyType = _this.data('weituan');
         var position = 'list';
         getPurchaseDetails(id,type,buyType,position);
+        $('.gshopping_count').val(1);
+        $('.goods_total_price price').text( _li.find('price').text().replace(/[^\d.]/g,""));
+        console.log( $('.gshopping_count'));
     });
     //详情购物车弹窗
     $('body').on('click','.info_shopping_cart',function(){
