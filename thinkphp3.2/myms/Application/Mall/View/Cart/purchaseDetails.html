@@ -3,6 +3,31 @@
     <div class="purchase_goods_module f24 goodsList">
         <ul class="goods_list">
             <li data-layer-id="{$goodsInfo.id}" data-layer-type="{$type}">
+                <if condition="$goodsInfo.buy_type eq 3">
+                    <section class="group_members_detail f24">
+                        <div>
+                            <img src="PUBLIC_IMG/common/group_members_banner.png" alt="">
+                        </div>
+                        <div class="group_members">
+                            <div class="group_m_list">
+                                <empty name="userInfo">
+                                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                    <else />
+                                    <img src="{$userInfo.headimgurl}" alt="">
+                                </empty>
+                                <span>团长</span>
+                            </div>
+                            <div class="group_m_list">
+                                <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                <span>团员</span>
+                            </div>
+                            <div class="group_m_list">
+                                <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                <span>团员</span>
+                            </div>
+                        </div>
+                    </section>
+                </if>
                 <div class="purchase_goods_detail">
                     <notempty name="goodsInfo.main_img">
                         <img class="purchase_gs_img" src="UPLOADS_IMG/{$goodsInfo.main_img}" alt=""  />
