@@ -151,27 +151,11 @@
                     </li>
                 </ul>
             </notempty>
-
-        </section>
-        <section class="outpay_price_items">
-            <div class="price_item">
-                <notempty name="cartInfo">
-                <span class="price_items_all">总价：<em>￥</em><i>{$cartInfo.total}</i></span>
-                </notempty>
-
-                <notempty name="goodsInfo">
-                    <span class="price_items_all">总价：<em>￥</em><i>{$goodsInfo.real_price}</i></span>
-                </notempty>
-                <notempty name="projectInfo">
-                    <span class="price_items_all">总价：<em>￥</em><i>{$projectInfo.real_price}</i></span>
-                </notempty>
-            </div>
-            <a href="javascript:void(0);" class="online_pay">
-                <div>立即下单</div>
-            </a>
         </section>
     </article>
-
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
 </block>
 <block name="js-customize">
     <script src="PUBLIC_JS/common/jquery.area.js"></script>
@@ -220,61 +204,6 @@
                 });
                 $('.price_items_all i').text(allPrice);
             }
-
-            //提交订单，跳转到支付页面
-            $('body').on('click','.online_pay',function () {
-                var area_address = $('#area_address').val();
-                if(area_address){
-                    var content='';
-                    var consignee=$('.recipient_name').val();
-                    var mobile=$('.recipient_mobile').val();
-                    var district=$('.area_address').text();
-                    var  address=$('.recipient_detail_address').val();
-                    if(!consignee){
-                        content='请填写收件人姓名';
-                    }else if(!register.phoneCheck(mobile)){
-                        content='请填写正确的手机号码';
-                    }else if(district=='省 > 市 > 区/县'){
-                        content='请选择地区';
-                    }else if(!address){
-                        content='请填写详细地址';
-                    }
-
-                    if(content){
-                        layer.open({
-                            content:content,
-                            time: 2,
-                        });
-                        return false;
-                    }
-                }
-
-
-                var addressId = $('#addressId').val();
-                var cartIds   = $('#cartIds').val();
-                var invoice_title  = $('#invoice_title').val();
-                var goodsId = $('#goodsId').val();
-                var projectId = $('.projectId').val();
-                var goodsNum = $(this).parents().find('.shopping_count').val();
-                var groupBuySn = $('.groupBuySn').val();
-                //提交订单，跳转到支付页面
-                $.post(CONTROLLER + '/addOrder',
-                        {
-                            addressId:addressId,cartIds:cartIds,invoice_title:invoice_title,
-                            consignee:consignee,mobile:mobile,district:district,address:address,
-                            goodsId:goodsId,projectId:projectId,goodsNum:goodsNum,groupBuySn:groupBuySn
-                        },
-                   function (msg) {
-                       if(msg.status == 0){
-                           dialog.error(msg.info);
-                       }
-                      if(msg.status == 1){
-//                        var url = MODULE + '/Payment/pay/payId/'+msg.info;
-                        var url = APP + '/Home/Payment/pay/payInfo/'+msg.info;
-                        dialog.success('提交订单成功',url)
-                      }
-                })
-            });
 
             //跳转到地址列表，更换地址
             $('body').on('click','.changeAddress',function () {

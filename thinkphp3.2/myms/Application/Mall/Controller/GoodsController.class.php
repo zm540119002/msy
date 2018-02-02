@@ -52,6 +52,10 @@ class GoodsController extends BaseController {
         $this -> type  = 'goods';
         $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($id);
         $this->assign('goodsInfo',$goodsInfo);
+        $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
+        if($goodsInfo['buy_type'] == 3){
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
+        }
         $this -> display('Cart/purchaseDetails');
 
     }
@@ -73,7 +77,8 @@ class GoodsController extends BaseController {
             $this->cartList = D('Cart') -> cartList();
             $this->groupBuySn = $_GET['groupBuySn'];
             $this->shareType = $_GET['shareType'];
-            $this -> cartInfo = D('Cart') -> getAllCartInfo();
+//            $this -> cartInfo = D('Cart') -> getAllCartInfo();
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             //获取用户基本资料
 //            $this->userInfo = $this -> getWeiXinUserInfo();
             //微信分享
@@ -93,8 +98,8 @@ class GoodsController extends BaseController {
                 session('baseShareUrl',$baseShareUrl);
                 $this -> shareInfo = $this -> weiXinShareInfo('微团购',$backLink,$goodsInfo['main_img'],'好友邀请你参加美妍美社微团购，三人成团即享特惠....');
                 $this -> signPackage = $this -> weiXinShareInit();
+                $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
             }
-//
             $this -> display();
         }
     }
@@ -121,7 +126,6 @@ class GoodsController extends BaseController {
         $pageSize = (isset($_GET['pageSize']) && $_GET['pageSize']) ? I('get.pageSize',0,'int') : C('DEFAULT_PAGE_SIZE');
         $alias='g';
         $position = I('get.position');
-
         //初始化首页
         if($position === 'index' && $page == 1){
             $where['parent_id_1'] = 0;
@@ -138,7 +142,6 @@ class GoodsController extends BaseController {
                 }
             }
             $this -> catGoodsList = $catGoodsList;
-
 
             //产品工作室特惠
             $speWhere['buy_type'] = array('eq',2);

@@ -24,7 +24,7 @@
             <li>美社预约</li>
         </ul>
     </nav>
-    <div class="common_contents">
+    <div class="common_contents f24">
         <div class="common_tablist_wrap">
             <nav class="mall_function_menu f24">
                 <a href="{:U('Goods/goodsIndex')}">
@@ -48,6 +48,34 @@
                     个人中心
                 </a>
             </nav>
+            <!--代金券-->
+            <section class="ms_cash_coupon">
+                <div class="top_bar">
+                    <span>代金券</span>
+                    <a href="">领券中心></a>
+                </div>
+                <ul class="cash_coupon_list">
+                    <li>
+                        <span>XX</span>
+                        <span>代金券</span>
+                        <span class="amount_money f32"><price>50</price>元</span>
+                        <a href="javascript:void(0);">领取></a>
+                    </li>
+                    <li>
+                        <span>XX</span>
+                        <span>代金券</span>
+                        <span class="amount_money f32"><price>50</price>元</span>
+                        <a href="javascript:void(0);">领取></a>
+                    </li>
+                    <li>
+                        <span>XX</span>
+                        <span>代金券</span>
+                        <span class="amount_money f32"><price>50</price>元</span>
+                        <a href="javascript:void(0);">领取></a>
+                    </li>
+                </ul>
+            </section>
+
             <div class="promotion_mode_type f24">
                 <div class="platform_mode">
                     <!--<h2>特色产品</h2>-->
@@ -129,60 +157,33 @@
                     我的预约
                 </a>
             </nav>
-            <div class="promotion_mode_type f24">
-                <div class="platform_mode">
-                    <!--<h2>问题管理</h2> -->
-                    <a href="{:U('Project/projectIndex',array('categoryId'=> $pCategoryList[0]['id']))}">
-                        <notempty name="pCategoryList[0]['img']">
-                            <img src="UPLOADS_IMG/{$pCategoryList[0]['img']}" alt="">
-                            <else />
-                            <div class='category-left'>
-                                {$pCategoryList[0]['name']}
-                            </div>
-                        </notempty>
-                    </a>
+            <!--代金券-->
+            <section class="ms_cash_coupon">
+                <div class="top_bar">
+                    <span>代金券</span>
+                    <a href="">领券中心></a>
                 </div>
-                <div class="platform_purchase">
-                    <div class="platform_toker">
-                        <!--<h2>基本护理</h2>-->
-                        <a href="{:U('Project/projectIndex',array('categoryId'=> $pCategoryList[1]['id']))}">
-                            <notempty name="pCategoryList[1]['img']">
-                                <img src="UPLOADS_IMG/{$pCategoryList[1]['img']}" alt="">
-                                <else />
-                                <div class='category-right-top'>
-                                    {$pCategoryList[1]['name']}
-                                </div>
-                            </notempty>
-                        </a>
-                    </div>
-                    <div class="platform_theme">
-                        <div class="theme_purchase">
-                            <!--<h2>身体护理</h2>-->
-                            <a href="{:U('Project/projectIndex',array('categoryId'=> $pCategoryList[2]['id']))}">
-                                <notempty name="pCategoryList[2]['img']">
-                                    <img src="UPLOADS_IMG/{$pCategoryList[2]['img']}" alt="">
-                                    <else />
-                                    <div class='category-right-l'>
-                                        {$pCategoryList[2]['name']}
-                                    </div>
-                                </notempty>
-                            </a>
-                        </div>
-                        <div class="theme_purchase">
-                            <!--<h2>皮肤档案</h2>-->
-                            <a href="{:U('Project/projectIndex',array('categoryId'=> $pCategoryList[3]['id']))}">
-                                <notempty name="pCategoryList[3]['img']">
-                                    <img src="UPLOADS_IMG/{$pCategoryList[3]['img']}" alt="">
-                                    <else />
-                                    <div class='category-right-r'>
-                                        {$pCategoryList[3]['name']}
-                                    </div>
-                                </notempty>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <ul class="cash_coupon_list">
+                    <li>
+                        <span>XX</span>
+                        <span>代金券</span>
+                        <span class="amount_money f32"><price>50</price>元</span>
+                        <a href="javascript:void(0);">领取></a>
+                    </li>
+                    <li>
+                        <span>XX</span>
+                        <span>代金券</span>
+                        <span class="amount_money f32"><price>50</price>元</span>
+                        <a href="javascript:void(0);">领取></a>
+                    </li>
+                    <li>
+                        <span>XX</span>
+                        <span>代金券</span>
+                        <span class="amount_money f32"><price>50</price>元</span>
+                        <a href="javascript:void(0);">领取></a>
+                    </li>
+                </ul>
+            </section>
             <input type="hidden" class="project_position" value="index">
             <div class="project_content" ></div>
         </div>
@@ -194,11 +195,7 @@
             <div class='loading'><img src='PUBLIC_IMG/home/loading.gif' alt='loading'></div>
         </div>
     </div>
-    <block name="footer">
-        <include file="Public/footerCartWithAdd" />
-    </block>
 </block>
-
 <block name="js-customize">
     <script type="text/javascript" src="PUBLIC_JS/home/cart.js"></script>
 </block>
@@ -213,11 +210,11 @@
                 postData.categoryId =$(obj).data('categoryid');
                 postData.buyType = $(obj).data('buytype');
             }
-            if(url == "/index.php/Myms/Project/projectList"){
+            if(url == "/index.php/Mall/Project/projectList"){
                 var content_obj = $('.project_content');
                 postData.position=$('.project_position').val();
             }
-            if(url == "/index.php/Myms/Goods/goodsList"){
+            if(url == "/index.php/Mall/Goods/goodsList"){
                 var content_obj = $('.goods_content');
                 postData.position=$('.goods_position').val();
             }
@@ -250,8 +247,6 @@
         }
 
         $(function(){
-            var link = location.href;
-            console.log(link);
             //初始化商品
             var goods_url = MODULE+'/Goods/goodsList';
             getPage(goods_url);

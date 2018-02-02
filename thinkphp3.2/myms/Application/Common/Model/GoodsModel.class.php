@@ -126,15 +126,15 @@ class GoodsModel extends Model {
     //查找某件商品信息
     public function getGoodsInfoByGoodsId($goodsId){
         $where['id'] = $goodsId;
-        $goodsInfo = D('goods') -> where($where) -> find();
-
-        if($goodsInfo['buy_type']=='1'){
+        $goodsInfo = D('Goods')->selectGoods($where);
+        $goodsInfo = $goodsInfo[0];
+        if($goodsInfo['buy_type']==1){
             $goodsInfo['real_price'] = $goodsInfo['discount_price'];
         }
-        if($goodsInfo['buy_type']=='2'){
+        if($goodsInfo['buy_type']==2){
             $goodsInfo['real_price'] = $goodsInfo['special_price'];
         }
-        if($goodsInfo['buy_type']=='3'){
+        if($goodsInfo['buy_type']==3){
             $goodsInfo['real_price'] = $goodsInfo['group_price'];
         }
         return $goodsInfo;
