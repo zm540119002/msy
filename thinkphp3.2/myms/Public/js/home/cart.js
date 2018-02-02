@@ -197,6 +197,8 @@ $(function(){
             success: function(data){
                 if(position === 'list'){
                     $('.common_contents').after(data);
+                    var realPrice=$('.real_price price').text();
+                    $('.goods_total_price price').text(realPrice);
                 }
                 if(position === 'info'){
                    $('.msh_product_picture').after(data);
@@ -256,6 +258,7 @@ $(function(){
         $('.goodsInfo_footer_nav').show();
         $('.express-area-box').css({bottom:'-100%',display:'none'});
         $('.mask').data('show',0);
+        $('.express-area-box price').text('');
     });
     
     //购物车单个删除
