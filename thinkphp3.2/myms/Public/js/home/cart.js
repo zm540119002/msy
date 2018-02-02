@@ -232,15 +232,12 @@ $(function(){
     $('body').on('click','.shopping_cart',function(){
         var _li = $(this).parents('li');
         var _this=$(this);
-        console.log(_li.find('.price').text().replace(/[^\d.]/g,""));
         //先清空
         var type = _li.data('type');
         var id = _li.data('goodsid');
         var buyType = _this.data('weituan');
         var position = 'list';
         getPurchaseDetails(id,type,buyType,position);
-        $('.gshopping_count').val(1);
-        $('.goods_total_price price').text( _li.find('price').text().replace(/[^\d.]/g,""));
         console.log( $('.gshopping_count'));
     });
     //详情购物车弹窗
