@@ -1007,12 +1007,27 @@ background-size:contain;
 .group_members_detail{margin:0 0 0.15rem 0;padding:0 0 0.15rem;background:#fff;}
 .group_members{display:flex;display:-webkit-flex;width:100%;}
 .group_m_list{width:25%;text-align: center;}
-.msh_product_picture .group_m_list img{
+.msh_product_picture .group_m_list img,
+.layer_group_members .group_m_list img{
     margin:0.15rem auto 0.08rem;
     width:1rem;
     height:1rem;
     display:block;
     border-radius:100%;
+}
+.layer_group_members{
+    border-bottom:1px solid #d9d9d9;
+}
+.layer_group_members .l_g_top{
+    position:relative;
+    border-bottom:1px solid #d9d9d9;
+}
+.l_g_top .closeBtn{
+    top:0;
+}
+.layer_group_members .group_m_list img,
+.layer_group_members .group_m_list span{
+    display: block;
 }
 /*可用代金卷*/
 .purchase_head_title{background:#fff;padding:0.20rem 0;margin:0 0 0.15rem 0;}
