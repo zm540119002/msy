@@ -153,15 +153,13 @@
             </div>
         </section>
     </article>
-
     <input class="id" name="" type="hidden" value="{$goodsInfo.id}">
     <input class="type" name="" type="hidden" value="goods">
     <input class="groupBuySn" name="" type="hidden" value="{$groupBuySn}">
-
-    <block name="footer">
-        <include file="Public/footerGoodsInfo" />
-    </block>
-    <include file="Public/weiXinShare" />
+    <!--<include file="Public/weiXinShare" />-->
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
 </block>
 <block name="js-customize">
     <script type="text/javascript" src="PUBLIC_JS/home/cart.js"></script>
@@ -201,33 +199,22 @@
                 var price=$('.concessional_rate i').text().replace(/[^\d.]/g,"");
                 var total= parseInt(shopNum) * price;
                 allPrice = parseFloat(total).toFixed(2);
-                $('.totalPrice').text('￥'+allPrice);
+                $('.goods_total_price').text('￥'+allPrice);
             }
             totalPrice();
-
-            //立即购买
-            $('body').on('click','.buyNow',function () {
-                var goodsId = $('.id').val();
-                var num = $('.gshopping_count').val();
-                var groupBuySn = $('.groupBuySn').val();
-                var url =  MODULE + '/Order/addOrder/goodsId/'+goodsId+'/num/'+num ;
-                if(groupBuySn){
-                    url += '/groupBuySn/' + groupBuySn ;
-                }
-                location.href = url;
-            });
-            //微信分享提示图
-            $('body').on('click','.forward_weChat',function(){
-                $('.mcover').show();
-            });
-            $('.weixinShare_btn').on('click',function(){
-                $('.mcover').hide();
-            })
+//
+//            //立即购买
+//            $('body').on('click','.buyNow',function () {
+//                var goodsId = $('.id').val();
+//                var num = $('.gshopping_count').val();
+//                var groupBuySn = $('.groupBuySn').val();
+//                var url =  MODULE + '/Order/addOrder/goodsId/'+goodsId+'/num/'+num ;
+//                if(groupBuySn){
+//                    url += '/groupBuySn/' + groupBuySn ;
+//                }
+//                location.href = url;
+//            });
         });
 
-
-
     </script>
-
-
 </block>

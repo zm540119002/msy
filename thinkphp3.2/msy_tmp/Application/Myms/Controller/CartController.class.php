@@ -54,11 +54,11 @@ class CartController extends BaseController {
                     }
                 }
                 //返回购物车的数量和总价
-                $cartList = $model -> getCartList($userId);
-                $cartIds  = $model -> getCartIds($userId);
-                $cartInfo = $model -> getCartInfo($cartList);
-                $cartInfo['info'] = $addCartInfo;
-                $cartInfo['cartIds'] = $cartIds;
+//                $cartList = $model -> getCartList($userId);
+//                $cartIds  = $model -> getCartIds($userId);
+//                $cartInfo = $model -> getCartInfo($cartList);
+//                $cartInfo['info'] = $addCartInfo;
+//                $cartInfo['cartIds'] = $cartIds;
                 $this -> ajaxReturn(successMsg($cartInfo));
 
             }else{ //没有登录

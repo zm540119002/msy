@@ -49,7 +49,7 @@ return array(
 //    'TMPL_ACTION_ERROR' => 'Public:error',// 默认错误跳转对应的模板文件
 
     //额外配置文件
-    'LOAD_EXT_CONFIG' => 'ext_conf,wx_conf',
+    'LOAD_EXT_CONFIG' => 'ext_conf,wx_conf,array_conf',
 
 
     'REDIS_HOST'=>'127.0.0.1',
