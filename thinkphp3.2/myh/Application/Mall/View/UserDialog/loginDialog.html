@@ -44,7 +44,7 @@
     //登录触发
     var loginLayer = null;
     function loginDialog(func){
-        isMore=false;
+        loadTrigger=false;
         loginLayer = layer.open({
             className:'loginLayer',
             content:userLoginForm,
@@ -59,7 +59,7 @@
                isRolling($('.loginLayer'));
             },
             end:function(){
-                isMore=true;
+                loadTrigger=true;
             },
             yes:function(index){
                 var $layer = $('.loginLayer').find('.active');
@@ -106,7 +106,7 @@
                             if(func && $.isFunction(func)){
                                 func();
                             }
-                            isMore=true;
+                            loadTrigger=true;
                             layer.close(index);
                         }
                     }
