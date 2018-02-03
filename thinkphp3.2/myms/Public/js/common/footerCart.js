@@ -145,19 +145,19 @@ $(function () {
         $(this).siblings('.gshopping_count').val(shopNum);
         allAmount(shopNum);
     });
-    //计算总价
-    function allAmount(singleNum){
-        //alert(singleNum);
-        var allAmount=0;
-        var goodsPrice=parseFloat($('.concessional_rate price').text());
-        allAmount=singleNum*goodsPrice;
-        allAmount=parseFloat(allAmount).toFixed(2)
-        $('.goods_total_price price').text(allAmount);
-        return allAmount;
-    }
+    
 
 
 });
+//计算总价
+function allAmount(singleNum){
+    var allAmount=0;
+    var goodsPrice=parseFloat($('.concessional_rate price').text());
+    allAmount=singleNum*goodsPrice;
+    allAmount=parseFloat(allAmount).toFixed(2)
+    $('.goods_total_price price').text(allAmount);
+    return allAmount;
+}
 //购物车弹窗详情
 function getPurchaseDetails(id,type,buyType,position) {
     if(type === 'goods'){
@@ -176,7 +176,8 @@ function getPurchaseDetails(id,type,buyType,position) {
             if(position === 'list'){
                 $('.common_contents').after(data);
                 var realPrice=$('.real_price price').text();
-                $('.goods_total_price price').text(realPrice);
+                //$('.goods_total_price price').text(realPrice);
+                allAmount(1);
             }
             if(position === 'info'){
                 $('.msh_product_picture').after(data);
