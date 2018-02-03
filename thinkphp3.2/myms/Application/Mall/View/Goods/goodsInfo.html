@@ -38,7 +38,7 @@
                                 <if condition="$goodsInfo.buy_type eq '3'">
                                     <span>微团价：</span>
                                 </if>
-                                <span>￥<i>{$goodsInfo.real_price}</i></span>
+                                <span>￥<price class="sales_price">{$goodsInfo.real_price}</price></span>
                             </div>
                             <div>
                                 <span>零售价：</span>
@@ -177,32 +177,32 @@
             if($('.commodity_quantity').text() == 0){
                 $(".shop_cart").addClass("disabled");
             }
-            var allPrice=0;
-            var shopNum=$('.gshopping_count').val();
-            $('.gplus').on('click',function(){
-                shopNum=$(this).siblings('.gshopping_count').val();
-                shopNum++;
-                totalPrice();
-            });
-            $('.greduce').on('click',function(){
-                shopNum=$(this).siblings('.gshopping_count').val();
-                if(shopNum < 2){
-                    return false;
-                }
-                shopNum--;
-                totalPrice();
-            });
-            $(window).on('scroll',function(){
-                checkShow($('.goods_detail_img .c_img'));
-            });
-            function totalPrice(){
-                var price=$('.concessional_rate i').text().replace(/[^\d.]/g,"");
-                var total= parseInt(shopNum) * price;
-                allPrice = parseFloat(total).toFixed(2);
-                console.log(typeof allPrice);
-                $('.amount price').text(allPrice);
-            }
-            totalPrice();
+            // var allPrice=0;
+            // var shopNum=$('.gshopping_count').val();
+            // $('.gplus').on('click',function(){
+            //     shopNum=$(this).siblings('.gshopping_count').val();
+            //     shopNum++;
+            //     totalPrice();
+            // });
+            // $('.greduce').on('click',function(){
+            //     shopNum=$(this).siblings('.gshopping_count').val();
+            //     if(shopNum < 2){
+            //         return false;
+            //     }
+            //     shopNum--;
+            //     totalPrice();
+            // });
+            // $(window).on('scroll',function(){
+            //     checkShow($('.goods_detail_img .c_img'));
+            // });
+            // function totalPrice(){
+            //     var price=$('.concessional_rate i').text().replace(/[^\d.]/g,"");
+            //     var total= parseInt(shopNum) * price;
+            //     allPrice = parseFloat(total).toFixed(2);
+            //     console.log(typeof allPrice);
+            //     $('.amount price').text(allPrice);
+            // }
+            // totalPrice();
 //
 //            //立即购买
 //            $('body').on('click','.buyNow',function () {

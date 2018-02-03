@@ -147,8 +147,9 @@ $(function () {
     });
     //计算总价
     function allAmount(singleNum){
+        //alert(singleNum);
         var allAmount=0;
-        var goodsPrice=parseFloat($('.purchase_gs_r price').text());
+        var goodsPrice=parseFloat($('.concessional_rate price').text());
         allAmount=singleNum*goodsPrice;
         allAmount=parseFloat(allAmount).toFixed(2)
         $('.goods_total_price price').text(allAmount);
