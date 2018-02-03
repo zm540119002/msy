@@ -1022,8 +1022,9 @@ background-size:contain;
     position:relative;
     border-bottom:1px solid #d9d9d9;
 }
-.l_g_top .closeBtn{
+.section ~ div{
     top:0;
+    color:#ff0000;
 }
 .layer_group_members .group_m_list img,
 .layer_group_members .group_m_list span{
