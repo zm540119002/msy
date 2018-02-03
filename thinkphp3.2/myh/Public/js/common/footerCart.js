@@ -26,6 +26,7 @@ $(function () {
     //立即结算/立即购买
     $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData($('ul.goods_list').find('li'));
+        
         if(!postData){
             return false;
         }
@@ -282,6 +283,7 @@ $(function () {
 
 //生成订单
 function generateOrder(postData,callBack) {
+    alert(11)
     postData.url = postData.url?postData.url:MODULE + '/Order/generate';
     $.ajax({
         url: postData.url,
