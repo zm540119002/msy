@@ -193,27 +193,31 @@ function addCart(data) {
 }
 //组装数据
 function assemblyData(lis) {
-    if(!$('footer').find('price').length){
-        return false;
-    }
+    // if(!$('footer').find('price').length){
+    //     return false;
+    // }
+    alert(1);
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
     $.each(lis,function(){
         var _this = $(this);
-        var num = _this.find('.gshopping_count').val();
-        if(!isPosIntNumber(num)){
-            isInt = false;
-            return false;
-        }
-        var id = _this.data('id');
-        var goods_type = _this.data('goods_type');
-        if(parseInt(num) && id){
-            var tmp = {};
-            tmp.foreign_id = id;
-            tmp.num = num;
-            tmp.goods_type = goods_type;
-            postData.goodsList.push(tmp);
+        var singleChecked=$('.single_select').is(':checked');
+        if(singleChecked){
+            var num = _this.find('.gshopping_count').val();
+            if(!isPosIntNumber(num)){
+                isInt = false;
+                return false;
+            }
+            var id = _this.data('id');
+            var goods_type = _this.data('goods_type');
+            if(parseInt(num) && id){
+                var tmp = {};
+                tmp.foreign_id = id;
+                tmp.num = num;
+                tmp.goods_type = goods_type;
+                postData.goodsList.push(tmp);
+            }
         }
     });
     if(postData.goodsList && postData.goodsList.length == 0){
