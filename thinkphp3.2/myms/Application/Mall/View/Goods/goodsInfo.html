@@ -24,51 +24,55 @@
             <div class="purchasing_intro_text">{$goodsInfo.intro|htmlspecialchars_decode}</div>
         </section>
         <section class="hot_detail hot_countdown_detail f24">
-            <div class="quantity_purchased">
-                <div>
-                    <div class="concessional_rate">
-                        <if condition="$goodsInfo.buy_type eq '1'">
-                            <span>优惠价：</span>
-                        </if>
-                        <if condition="$goodsInfo.buy_type eq '2'">
-                            <span>工作室优惠价：</span>
-                        </if>
-                        <if condition="$goodsInfo.buy_type eq '3'">
-                            <span>微团价：</span>
-                        </if>
-                        <span>￥<i>{$goodsInfo.real_price}</i></span>
+            <ul class="goods_list">
+                <li data-id="{$goodsInfo.id}" data-type="1">
+                    <div class="quantity_purchased">
+                        <div>
+                            <div class="concessional_rate">
+                                <if condition="$goodsInfo.buy_type eq '1'">
+                                    <span>优惠价：</span>
+                                </if>
+                                <if condition="$goodsInfo.buy_type eq '2'">
+                                    <span>工作室优惠价：</span>
+                                </if>
+                                <if condition="$goodsInfo.buy_type eq '3'">
+                                    <span>微团价：</span>
+                                </if>
+                                <span>￥<i>{$goodsInfo.real_price}</i></span>
+                            </div>
+                            <div>
+                                <span>零售价：</span>
+                                <del>￥{$goodsInfo.price}</del>
+                            </div>
+                        </div>
+                        <div class="express_mode">
+                            <span class="current">到店领取</span>
+                            <span>快递邮寄</span>
+                        </div>
                     </div>
-                    <div>
-                        <span>零售价：</span>
-                        <del>￥{$goodsInfo.price}</del>
+                    <div class="quantity_purchased quantity_product_n">
+                        <span class="num">购买数量</span>
+                        <div class="quantity_wrapper">
+                            <a href="javascript:void(0);" class="greduce">-</a>
+                            <input type="text" value="1" class="f24 gshopping_count">
+                            <a href="javascript:void(0);" class="gplus">+</a>
+                        </div>
                     </div>
-                </div>
-                <div class="express_mode">
-                    <span class="current">到店领取</span>
-                    <span>快递邮寄</span>
-                </div>
-            </div>
-            <div class="quantity_purchased quantity_product_n">
-                <span class="num">购买数量</span>
-                <div class="quantity_wrapper">
-                    <a href="javascript:void(0);" class="greduce">-</a>
-                    <input type="text" value="1" class="f24 gshopping_count">
-                    <a href="javascript:void(0);" class="gplus">+</a>
-                </div>
-            </div>
-            <div class="goods_star_score">
-                <div class="five_star">
-                    <div class="star_img">
-                        <img src="__PUBLIC__/img/home/star.png" id="0">
-                        <img src="__PUBLIC__/img/home/star.png" id="1">
-                        <img src="__PUBLIC__/img/home/star.png" id="2">
-                        <img src="__PUBLIC__/img/home/star.png" id="3">
-                        <img src="__PUBLIC__/img/home/star.png" id="4">
+                    <div class="goods_star_score">
+                        <div class="five_star">
+                            <div class="star_img">
+                                <img src="__PUBLIC__/img/home/star.png" id="0">
+                                <img src="__PUBLIC__/img/home/star.png" id="1">
+                                <img src="__PUBLIC__/img/home/star.png" id="2">
+                                <img src="__PUBLIC__/img/home/star.png" id="3">
+                                <img src="__PUBLIC__/img/home/star.png" id="4">
+                            </div>
+                            <span class="fraction" data-score="{$goodsInfo.evaluation_good_stars}"></span>
+                        </div>
+                        <a href="javascript:void(0);" class="comment_num">{$goodsInfo.evaluation_count}人评论</a>
                     </div>
-                    <span class="fraction" data-score="{$goodsInfo.evaluation_good_stars}"></span>
-                </div>
-                <a href="javascript:void(0);" class="comment_num">{$goodsInfo.evaluation_count}人评论</a>
-            </div>
+                </li>
+            </ul>
         </section>
         <section class="hot_detail f24">
             <h2>商品参数</h2>
@@ -160,9 +164,6 @@
 <block name="footer">
     <include file="Cart/footerCartMenu" />
 </block>
-<block name="js-customize">
-    <script type="text/javascript" src="PUBLIC_JS/home/cart.js"></script>
-</block>
 <block name="script">
     <script type="text/javascript">
         $(function(){
@@ -198,7 +199,8 @@
                 var price=$('.concessional_rate i').text().replace(/[^\d.]/g,"");
                 var total= parseInt(shopNum) * price;
                 allPrice = parseFloat(total).toFixed(2);
-                $('.goods_total_price').text('￥'+allPrice);
+                console.log(typeof allPrice);
+                $('.amount price').text(allPrice);
             }
             totalPrice();
 //

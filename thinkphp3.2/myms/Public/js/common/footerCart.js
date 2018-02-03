@@ -249,7 +249,8 @@ function assemblyData(lis) {
             isInt = false;
             return false;
         }
-        var goodsId = _this.data('layer-id');
+        var goodsId = _this.data('id');
+        console.log(goodsId);
         if(parseInt(num) && goodsId){
             var tmp = {};
             tmp.foreign_id = goodsId;
@@ -269,7 +270,6 @@ function assemblyData(lis) {
 }
 //生成订单
 function generateOrder(postData,callBack) {
-    alert(11)
     postData.url = postData.url?postData.url:MODULE + '/Order/generate';
     $.ajax({
         url: postData.url,

@@ -234,3 +234,63 @@ function swipe(elemObj){
 function errorTipc(info,time){
     $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
 }
+//阻止弹窗滑动穿透2
+function isRolling(container){
+    // 移动端touch重写
+    var startX, startY;
+    var button=document.getElementById('formLogin');
+    button.addEventListener('click',function(){
+        $('input').focus();
+    })
+    container.on('touchstart', function(e){
+        //console.log(e.changedTouches[0]);
+        // startX = e.changedTouches[0].pageX;
+        // startY = e.changedTouches[0].pageY;
+        startX = e.originalEvent.touches[0].pageX;
+        startY = e.originalEvent.touches[0].pageY;
+
+    });
+
+    // 仿innerScroll方法
+    container.on('touchmove', function(e){
+        e.stopPropagation();
+
+        var deltaX = e.originalEvent.touches[0].pageX - startX;
+        var deltaY = e.originalEvent.touches[0].pageY - startY;
+
+        // 只能纵向滚
+        if(Math.abs(deltaY) < Math.abs(deltaX)){
+            e.preventDefault();
+            return false;
+        }
+
+        var box = $(this).get(0);
+
+        if($(box).height() + box.scrollTop >= box.scrollHeight){
+            if(deltaY < 0) {
+                e.preventDefault();
+                return false;
+            }
+        }
+        if(box.scrollTop === 0){
+            if(deltaY > 0) {
+                e.preventDefault();
+                return false;
+            }
+        }
+        // 会阻止原生滚动
+        // return false;
+    });
+}
+//返回顶部
+$('body').on('click','.backTop',function(){
+    $('body,html').animate({scrollTop:0+'px'},500);
+});
+$(window).on('scroll',function(){
+    var scrolltop=$(document).scrollTop();
+    if(scrolltop>=300){
+        $('.right_sidebar').show();
+    }else{
+        $('.right_sidebar').hide();
+    }
+});
