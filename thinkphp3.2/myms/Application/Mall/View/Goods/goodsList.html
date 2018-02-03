@@ -11,7 +11,7 @@
         </div>
         <ul>
             <volist name="speGoodsList" id="vo">
-                <li data-goodsid="{$vo.id}" data-real-price="{$vo.real_price}" data-specification="{$vo.specification}" data-type="goods" >
+                <li data-id="{$vo.id}" data-real-price="{$vo.real_price}" data-specification="{$vo.specification}" data-goods_type='1' >
                     <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}">
                         <div class="goods_img">
                             <notempty name="vo.main_img">
@@ -29,7 +29,7 @@
                 </li>
             </volist>
         </ul>
-          <a class="view_more" href="javascript:void(0);" data-page="2" data-buytype="2" data-type="goods" data-categoryid="{$vo.category_id_1}">查看更多<i></i></a>
+          <a class="view_more" href="javascript:void(0);" data-page="2" data-buytype="2" data-goods_type='1' data-categoryid="{$vo.category_id_1}">查看更多<i></i></a>
     </div>
 </notempty>
 <notempty name="groupGoodsList">
@@ -40,7 +40,7 @@
         </div>
         <ul>
             <volist name="groupGoodsList" id="vo">
-                <li data-buytype="3" data-goodsid="{$vo.id}" data-type="goods">
+                <li data-buytype="3" data-id="{$vo.id}" data-goods_type='1'>
                     <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id'],'buyType'=>'3'))}">
                         <div class="goods_img">
                             <notempty name="vo.main_img">
@@ -58,7 +58,7 @@
                 </li>
             </volist>
         </ul>
-          <a class="view_more" href="javascript:void(0);" data-page="2" data-buytype="3" data-type="goods" data-categoryid="{$vo.category_id_1}">查看更多<i></i></a>
+          <a class="view_more" href="javascript:void(0);" data-page="2" data-buytype="3" data-goods_type='1' data-categoryid="{$vo.category_id_1}">查看更多<i></i></a>
     </div>
 </notempty>
 
@@ -69,7 +69,7 @@
     <div class="commodity_category commodity_category_s">
     <ul>
         <volist name="goodsList" id="vo">
-            <li data-goodsid="{$vo.id}" data-real-price="{$vo.real_price}" data-specification="{$vo.specification}" data-type="goods">
+            <li data-id="{$vo.id}" data-real-price="{$vo.real_price}" data-specification="{$vo.specification}" data-goods_type='1'>
                 <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}">
                     <div class="goods_img">
                         <notempty name="vo.main_img">
@@ -92,7 +92,7 @@
 <notempty name="goodsListLoad">
     <!--加载更多商品-->
     <volist name="goodsListLoad" id="vv" key="kk">
-        <li data-goodsid="{$vv.id}" data-real-price="{$vv.real_price}" data-specification="{$vv.specification}" data-type="goods">
+        <li data-id="{$vv.id}" data-real-price="{$vv.real_price}" data-specification="{$vv.specification}" data-goods_type='1'>
             <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vv['id']))}">
                 <div class="goods_img">
                     <notempty name="vv.main_img">
@@ -121,7 +121,7 @@
 <notempty name="groupGoodsListMore">
     <!--微团购列表-->
     <volist name="groupGoodsListMore" id="vo">
-        <li data-buytype="3" data-goodsid="{$vo.id}" data-type="goods">
+        <li data-buytype="3" data-id="{$vo.id}" data-goods_type='1'>
             <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id'],'buyType'=>'3'))}">
                 <div class="goods_img">
                     <notempty name="vo.main_img">
@@ -143,7 +143,7 @@
 <notempty name="speGoodsListMore">
     <!--微团购列表-->
     <volist name="speGoodsListMore" id="vo">
-        <li data-goodsid="{$vo.id}" data-real-price="{$vo.real_price}" data-specification="{$vo.specification}" data-type="goods" >
+        <li data-id="{$vo.id}" data-real-price="{$vo.real_price}" data-specification="{$vo.specification}" data-goods_type='1' >
             <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}">
                 <div class="goods_img">
                     <notempty name="vo.main_img">

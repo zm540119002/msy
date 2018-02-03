@@ -41,7 +41,6 @@ class GoodsController extends BaseController {
            $this -> ajaxReturn(errorMsg('非异步请求'));
        }
         $id = I('post.id',0,'int');
-        $this -> type  = 'goods';
         $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($id);
         $this->assign('goodsInfo',$goodsInfo);
         $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
@@ -70,7 +69,7 @@ class GoodsController extends BaseController {
             $this->groupBuySn = $_GET['groupBuySn'];
             $this->shareType = $_GET['shareType'];
 //            $this -> cartInfo = D('Cart') -> getAllCartInfo();
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,24,4));
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
             //获取用户基本资料
 //            $this->userInfo = $this -> getWeiXinUserInfo();
             //微信分享

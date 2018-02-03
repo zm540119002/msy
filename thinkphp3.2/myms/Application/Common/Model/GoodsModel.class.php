@@ -137,6 +137,7 @@ class GoodsModel extends Model {
         if($goodsInfo['buy_type']==3){
             $goodsInfo['real_price'] = $goodsInfo['group_price'];
         }
+        $goodsInfo['goods_type'] = 1;
         return $goodsInfo;
     }
 }
