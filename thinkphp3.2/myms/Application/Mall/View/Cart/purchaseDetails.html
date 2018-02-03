@@ -4,7 +4,7 @@
         <ul class="goods_list">
             <li data-layer-id="{$goodsInfo.id}" data-layer-type="{$type}">
                 <if condition="$goodsInfo.buy_type eq 3">
-                    <section class="group_members_detail layer_group_members f24">
+                    <div class="group_members_detail layer_group_members f24">
                         <div class="l_g_top">
                             <span></span>
                             <div>
@@ -30,7 +30,7 @@
                                 <span>团员</span>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </if>
                 <div class="purchase_goods_detail">
                     <notempty name="goodsInfo.main_img">
@@ -43,8 +43,7 @@
                         <div>
                             <span class="real_price">￥<price>{$goodsInfo.real_price}</price></span>
                             <del>￥<price>{$goodsInfo.price}</price></del>
-                        </div>
-                        <a href="javascript:void(0);" class="closeBtn">X</a>
+                        </div>                       
                     </div>
                 </div>
                 <div class="purchase_goods_detail">
@@ -59,6 +58,7 @@
                         <a href="javascript:void(0);" class="gplus">+</a>
                     </div>
                 </div>
+                <a href="javascript:void(0);" class="closeBtn">X</a>
             </li>
         </ul>
     </div>
