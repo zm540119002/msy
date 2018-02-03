@@ -1,17 +1,7 @@
 $(function () {
     //列表形式加入购物车
     $('body').on('click','.add_cart',function(){
-        // var type = $('.goods_list li').data('goods_type');
-        // var postData = {};
-        // if(type == 'goods'){
-        //     postData.goodsId = $('.goods_list li').data('id');
-        // }
-        // if(type == 'project'){
-        //     postData.projectId = $('.goods_list li').data('id');
-        // }
-        // postData.num = $('.gshopping_count').val();
         var postData = assemblyData($('ul.goods_list').find('li'));
-        console.log(postData);
         if(!postData){
             return false;
         }

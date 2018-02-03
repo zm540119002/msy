@@ -15,7 +15,7 @@
                 <volist name="cartList" id="vo">
                 <li  data-foreignid="{$vo.foreign_id}" data-type="{$vo.type}">
                     <input type="checkbox" class="single_select" checked="">
-                    <if condition="$vo['type'] eq 1">
+                    <if condition="$vo['goods_type'] eq 1">
                         <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}" class="shoppingcart_product_img">
                             <notempty name="vo.main_img">
                                 <img src="__ROOT__/Uploads/{$vo.main_img}" alt="" class="shopping_cart_img">
@@ -35,7 +35,7 @@
                         </if>
 
                     </if>
-                    <if condition="$vo['type'] eq 2">
+                    <if condition="$vo['goods_type'] eq 2">
                         <a href="{:U('Project/projectInfo',array('goodsId'=> $vo['id']))}" class="shoppingcart_product_img">
                             <notempty name="vo.img">
                                 <img src="__ROOT__/Uploads/{$vo.main_img}" alt="" class="shopping_cart_img">
@@ -73,8 +73,4 @@
 
 <block name="footer">
     <include file="Cart/footerCartMenu" />
-</block>
-
-<block name="js-customize">
-    <script type="text/javascript" src="PUBLIC_JS/home/cart.js"></script>
 </block>
