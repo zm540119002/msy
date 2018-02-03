@@ -571,7 +571,7 @@ var areaObject={
 				expressArea += sCity;
 			}
 		}
-		$("#backUp").attr("onClick", "selectP(" + p + ");");
+		$("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
 		return sCity;
 	},
 

@@ -816,8 +816,8 @@ float:left;
 	.express-area-box { position: fixed; left: 0; width: 100%; margin-left: 0; }
 }*/
 /*遮罩层*/
-.mask { position: absolute; top: 0; left: 0; z-index: 12; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); }
-.mask.address_mask{display: none;}
+.mask,.address_mask{ position: absolute; top: 0; left: 0; z-index: 12; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); }
+#areaMask.address_mask{display: none;}
 /*@media (max-width: 720px) {
 	.mask { position: fixed; }
 }*/
