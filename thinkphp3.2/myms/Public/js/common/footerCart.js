@@ -193,15 +193,17 @@ function addCart(data) {
 }
 //组装数据
 function assemblyData(lis) {
-    if(!$('footer').find('price').length){
-        return false;
-    }
+    // if(!$('footer').find('price').length){
+    //     return false;
+    // }
+    console.log(lis)
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
     $.each(lis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
+        console.log(num);
         if(!isPosIntNumber(num)){
             isInt = false;
             return false;
@@ -216,6 +218,7 @@ function assemblyData(lis) {
             postData.goodsList.push(tmp);
         }
     });
+    console.log(postData);return;
     if(postData.goodsList && postData.goodsList.length == 0){
         dialog.error('请选择商品');
         return false;

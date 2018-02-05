@@ -11,9 +11,9 @@
         <div class="shoppingCart_form">
             <notempty name="cartList">
             <a href="javascript:void(0);" class="empty_cart"><i></i>清空购物车</a>
-            <ul class="shopping_cart_list">
+            <ul class="shopping_cart_list goods_list">
                 <volist name="cartList" id="vo">
-                <li  data-foreignid="{$vo.foreign_id}" data-type="{$vo.type}">
+                <li  data-id="{$vo.id}" data-goods_type="{$vo.goods_type}">
                     <input type="checkbox" class="single_select" checked="">
                     <if condition="$vo['goods_type'] eq 1">
                         <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}" class="shoppingcart_product_img">
@@ -50,7 +50,7 @@
                     <div class="shop_product_num">
                         <input type="hidden" value="{$vo.id}" class="goodsId">
                         <a href="javascript:void(0);" class="reduce">-</a>
-                        <input type="text" value="{$vo.num}" class="shopping_count cart_count">
+                        <input type="text" value="{$vo.num}" class="gshopping_count cart_count">
                         <a href="javascript:void(0);" class="plus">+</a>
                     </div>
                     <div class="edit_goods_type">
