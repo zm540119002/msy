@@ -196,12 +196,16 @@ function assemblyData(lis) {
     // if(!$('footer').find('price').length){
     //     return false;
     // }
+<<<<<<< HEAD
     console.log(lis)
+=======
+>>>>>>> ed512dbd26e7fcd7199cd69081968ccd4cd9c44b
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
     $.each(lis,function(){
         var _this = $(this);
+<<<<<<< HEAD
         var num = _this.find('.gshopping_count').val();
         console.log(num);
         if(!isPosIntNumber(num)){
@@ -216,6 +220,24 @@ function assemblyData(lis) {
             tmp.num = num;
             tmp.goods_type = goods_type;
             postData.goodsList.push(tmp);
+=======
+        var singleChecked=$('.single_select').is(':checked');
+        if(singleChecked){
+            var num = _this.find('.gshopping_count').val();
+            if(!isPosIntNumber(num)){
+                isInt = false;
+                return false;
+            }
+            var id = _this.data('id');
+            var goods_type = _this.data('goods_type');
+            if(parseInt(num) && id){
+                var tmp = {};
+                tmp.foreign_id = id;
+                tmp.num = num;
+                tmp.goods_type = goods_type;
+                postData.goodsList.push(tmp);
+            }
+>>>>>>> ed512dbd26e7fcd7199cd69081968ccd4cd9c44b
         }
     });
     console.log(postData);return;

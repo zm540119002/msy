@@ -392,3 +392,16 @@ i{
     border-bottom:1px solid #d9d9d9;
     color:#0066cc;
 }
+.right-arrow::after{
+    content:'';
+    display:inline-block;
+    position:absolute;
+    top:35%;
+    right:0rem;
+    width:.5em;
+    height:.5em;
+    border-bottom:.12em solid #999;
+    border-left:.12em solid #999;
+    -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
+    -ms-transform:translate(-70%) rotateZ(-45deg);
+}
