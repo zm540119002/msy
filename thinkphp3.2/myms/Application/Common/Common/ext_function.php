@@ -52,6 +52,7 @@ function GoodsNumMergeById($old,$new){
             if($value['id'] == $val['foreign_id']){
                 $value['num'] = $val['num'];
                 $value['goods_type'] = $val['goods_type'];
+                $value['foreign_id'] = $val['foreign_id'];
                 break;
             }
         }

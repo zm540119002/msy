@@ -6,192 +6,218 @@ use web\all\Controller\AuthUserController;
 
 class OrderController extends AuthUserController {
     //获取订单详情页面
-    public function addOrder(){
-        if(IS_POST){
-            $orderModel = D('Order');
-            $uid = $this->user['id'];
-            //立即购买的商品信息
-            if(isset($_POST['goodsId'])){
-                $goodsInfo = D('Goods')->getGoodsInfoByGoodsId($_POST['goodsId']);
-                $goodsInfo['type'] = 1;
-                $goodsNum = intval($_POST['goodsNum']);
-                $totalPrice = $goodsInfo['real_price'] * $goodsNum;
-            }
-            if(isset($_POST['projectId']) && intval($_POST['projectId'])){
-                $goodsInfo = D('Project')->getProjectInfoByProjectId($_POST['projectId']);
-                $goodsInfo['type'] = 2;
-                $goodsNum = intval($_POST['goodsNum']);
-                $totalPrice = $goodsInfo['real_price'] * $goodsNum;
-            }
-            //订单类型
-            if($goodsInfo['buy_type'] == 3){
-                $orderType = 1;//页面需要分享
-            }else{
-                $orderType = 0;
-            }
-            // 选中购物车商品信息
-            if(isset($_POST['cartIds'])){
-                $cartIds = $_POST['cartIds'];
-                $this -> cartIds = $cartIds;
-                $cartIds = rtrim($cartIds, ',');
-                $cartIds = explode(',',$cartIds);
-                if(in_array('undefined',$cartIds) || in_array('',$cartIds)){
-                    $cartList = D('Cart')->getCartListBySession();
-                }else{
-                    $cartList = D('Cart') -> getCartListByCartIds($uid,$cartIds);
-                }
-                //检查库存
-                $this -> checkGoodsStock($cartList);
-                $cartInfo   = D('Cart') -> getCartInfo($cartList);
-                $totalPrice  = $cartInfo['total'];//商品总价格
-            }
-
-            //订单各类价格
-            $car_price['goods_amount']  = $totalPrice;//商品总价格
-            $car_price['shipping_fee']    = 0;//运费
-            $car_price['pd_amount']       = 0;//预存款支付金额
-            $car_price['coupon_price']    = 0;//优惠券
-            $car_price['coupon_id']       = 0;//优惠id
-            $car_price['order_amount']    = $car_price['goods_amount']+$car_price['shipping_fee'];//订单总价格
-            $car_price['actually_amount'] = $car_price['order_amount']-$car_price['pd_amount'];//实际价格
-            //开启事务
-            $orderModel -> startTrans();
-            try{
-                if(!isset($_POST['addressId'])){
-                    $data = array(
-                        'user_id'   => $uid,
-                        'consignee' => $_POST['consignee'],
-                        'district'  => $_POST['district'],
-                        'address'   => $_POST['address'],
-                        'mobile'    => $_POST['mobile'],
-                        'is_default'=> 1
-                    );
-                    $result = D('Address')->add($data);
-                    if(!$result){
-                        throw new \Exception($this ->ajaxReturn(errorMsg('增加地址失败')));
-                    }
-                }
-                $addressId = isset($_POST['addressId']) ? intval($_POST['addressId']) : $result;
-                $orderSn  = date('YmdHis') . rand(1000, 9999);
-                //加入订单
-                $orderId =$orderModel -> addOrder($orderSn,$orderType,$uid,$addressId,$car_price,$user_note='');
-                if(!$orderId){
-                    throw new \Exception( $this->ajaxReturn(errorMsg('增加订单失败')));
-                }
-                //加入订单商品
-                if(isset($_POST['cartIds'])){//购物车结算
-                    $orderGoodsId = $orderModel->addOrderGoods($uid,$cartList,$orderSn);
-                }
-                if(isset($_POST['goodsId']) || isset($_POST['projectId'])){//立即购买
-                    $orderGoodsId = $orderModel->directlyAddOrderGoods($uid,$goodsInfo,$orderSn,$goodsNum);
-                }
-
-                if(!$orderGoodsId){
-                    throw new \Exception( $this->ajaxReturn(errorMsg('增加订单商品失败')));
-                }
-                //删除购物车相对于商品
-                if(isset($_POST['cartIds'])){
-                    if((in_array('undefined',$cartIds) || in_array('',$cartIds)) === false){
-                        $result = D('cart')->delCartByCartIds($uid,$cartIds);
-                        if(!$result){
-                            throw new \Exception( $this->ajaxReturn(errorMsg('删除购物车失败')));
-                        }
-                    }
-                }
-
-                if($goodsInfo['buy_type'] == 3){//团购或闺蜜行
-                    if(isset($_POST['groupBuySn']) && !empty($_POST['groupBuySn'])){
-                        $groupBuySn = $_POST['groupBuySn'];
-                        session('groupBuySn',$groupBuySn);
-                        $where = array(
-                            'groupbuy_sn' => $groupBuySn,
-                            'status' => 1,
-                        );
-                        $groupBuyNum  =  M('groupbuy') -> where($where) -> count();
-                        //如果已有三人购买或团长的购买？？？？？？？？？？？？？？？？就重新开团
-                        if($groupBuyNum == $goodsInfo['groupbuy_num']){
-                            $groupBuySn = date('ymd').substr(time(),-5).substr(microtime(),2,5);
-                            session('groupBuySn',$groupBuySn);
-                        }
-                    }else{
-                        $groupBuySn = date('ymd').substr(time(),-5).substr(microtime(),2,5);
-                        session('groupBuySn',$groupBuySn);
-                    }
-
-                    $data = array(
-                        'user_id'  => $uid,
-                        'groupbuy_sn' => $groupBuySn,
-                        'order_sn' => $orderSn,
-                        'create_time'=> time(),
-                    );
-                    $result = M('groupbuy')->add($data);
-                    if(!$result){
-                        throw new \Exception( $this->ajaxReturn(errorMsg('增加团购失败')));
-                    }
-                }
-                
-                $orderModel->commit();
-                $this->ajaxReturn(successMsg($orderId));
-            }catch (Exception $e){
-                $orderModel->rollback();
-                $this->ajaxReturn($e->getMessage());
-            }
-        }else{
-            $userId = $this->user['id'];
-            //收货人地址
-            if(isset($_GET['addressId'])){
-                $addressId = $_GET['addressId'];
-                $address = D('Address')-> getUserAddressById($userId,$addressId);
-            }else{
-                $address = D('Address')-> getUserAddressByUid($userId);
-            }
-            $this -> address = $address;
-            //点击结算选中购物车商品信息
-            if(isset($_GET['cartIds'])){
-                $cartIds = $_GET['cartIds'];
-                $this -> cartIds = $cartIds;
-                $cartIds = rtrim($cartIds, ',');
-                $cartIds = explode(',',$cartIds);
-                if(in_array('undefined',$cartIds) || in_array('',$cartIds)){
-                    $cartList = D('Cart')->getCartListBySession();
-                }else{
-                    $cartList = D('Cart') -> getCartListByCartIds($userId,$cartIds);
-                }
-
-                if(empty($cartList)){
-                    $this->error('你选中的商品已删除，请重新选择！');
-                }
-                $this -> cartList = $cartList;
-                //订单总价
-                $cartInfo = D('Cart') -> getCartInfo($cartList);
-                $this -> cartInfo = $cartInfo;
-            }
-
-            //点击立即购买产品
-            $this->num = intval($_GET['num']);
-            $this-> groupBuySn = $_GET['groupBuySn'];
-            if(isset($_GET['goodsId'])){
-                if(empty($_GET['goodsId']) && intval($_GET['goodsId'])){
-                    $this->error('请选择你要购买的商品');
-                }
-                $goodsId = $_GET['goodsId'];
-                $this->goodsId = $goodsId;
-                $goodsInfo = D('Goods')-> getGoodsInfoByGoodsId($goodsId);
-                $this -> goodsInfo = $goodsInfo;
-            }
-            //点击立即购买项目
-            if(isset($_GET['projectId'])){
-                if(empty($_GET['projectId']) && intval($_GET['projectId'])){
-                    $this->error('请选择你要购买的商品');
-                }
-                $projectId = $_GET['projectId'];
-                $this->projectId = $projectId;
-                $projectInfo = D('Project')->getProjectInfoByProjectId($projectId);
-                $this -> projectInfo = $projectInfo;
-            }
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,7));
-            $this->display();
+    public function generate(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
+        $goodList = $_POST['goodsList'];
+        if(empty($goodList)){
+            $this->ajaxReturn(errorMsg('请求数据不能为空'));
+        }
+        //计算订单总价
+        $goodsTotalPrice = 0;
+        foreach ($goodList as $k=>&$v){
+            if($v['goods_type'] == 1){
+                $goodsInfo = D('Goods')->getGoodsInfoByGoodsId($v['foreign_id']);
+                $goodsNum = intval($v['num']);
+                $totalPrice = $goodsInfo['real_price'] * $goodsNum;
+            }
+            if($v['goods_type'] == 2){
+                $projectInfo = D('Project')->getProjectInfoByProjectId($v['foreign_id']);
+                $projectNum = intval($v['num']);
+                $totalPrice = $projectInfo['real_price'] * $projectNum;
+            }
+            $goodsTotalPrice += number_format($totalPrice,2,'.','');
+        }
+        $modelOrder = D('Order');
+        //开启事务
+        $modelOrder->startTrans();
+//        if(IS_POST){
+//            $orderModel = D('Order');
+//            $uid = $this->user['id'];
+//
+//            //立即购买的商品信息
+//            if(isset($_POST['goodsId'])){
+//                $goodsInfo = D('Goods')->getGoodsInfoByGoodsId($_POST['goodsId']);
+//                $goodsInfo['type'] = 1;
+//                $goodsNum = intval($_POST['goodsNum']);
+//                $totalPrice = $goodsInfo['real_price'] * $goodsNum;
+//            }
+//            if(isset($_POST['projectId']) && intval($_POST['projectId'])){
+//                $goodsInfo = D('Project')->getProjectInfoByProjectId($_POST['projectId']);
+//                $goodsInfo['type'] = 2;
+//                $goodsNum = intval($_POST['goodsNum']);
+//                $totalPrice = $goodsInfo['real_price'] * $goodsNum;
+//            }
+//            //订单类型
+//            if($goodsInfo['buy_type'] == 3){
+//                $orderType = 1;//页面需要分享
+//            }else{
+//                $orderType = 0;
+//            }
+//            // 选中购物车商品信息
+//            if(isset($_POST['cartIds'])){
+//                $cartIds = $_POST['cartIds'];
+//                $this -> cartIds = $cartIds;
+//                $cartIds = rtrim($cartIds, ',');
+//                $cartIds = explode(',',$cartIds);
+//                if(in_array('undefined',$cartIds) || in_array('',$cartIds)){
+//                    $cartList = D('Cart')->getCartListBySession();
+//                }else{
+//                    $cartList = D('Cart') -> getCartListByCartIds($uid,$cartIds);
+//                }
+//                //检查库存
+//                $this -> checkGoodsStock($cartList);
+//                $cartInfo   = D('Cart') -> getCartInfo($cartList);
+//                $totalPrice  = $cartInfo['total'];//商品总价格
+//            }
+//
+//            //订单各类价格
+//            $car_price['goods_amount']  = $totalPrice;//商品总价格
+//            $car_price['shipping_fee']    = 0;//运费
+//            $car_price['pd_amount']       = 0;//预存款支付金额
+//            $car_price['coupon_price']    = 0;//优惠券
+//            $car_price['coupon_id']       = 0;//优惠id
+//            $car_price['order_amount']    = $car_price['goods_amount']+$car_price['shipping_fee'];//订单总价格
+//            $car_price['actually_amount'] = $car_price['order_amount']-$car_price['pd_amount'];//实际价格
+//            //开启事务
+//            $orderModel -> startTrans();
+//            try{
+//                if(!isset($_POST['addressId'])){
+//                    $data = array(
+//                        'user_id'   => $uid,
+//                        'consignee' => $_POST['consignee'],
+//                        'district'  => $_POST['district'],
+//                        'address'   => $_POST['address'],
+//                        'mobile'    => $_POST['mobile'],
+//                        'is_default'=> 1
+//                    );
+//                    $result = D('Address')->add($data);
+//                    if(!$result){
+//                        throw new \Exception($this ->ajaxReturn(errorMsg('增加地址失败')));
+//                    }
+//                }
+//                $addressId = isset($_POST['addressId']) ? intval($_POST['addressId']) : $result;
+//                $orderSn  = date('YmdHis') . rand(1000, 9999);
+//                //加入订单
+//                $orderId =$orderModel -> addOrder($orderSn,$orderType,$uid,$addressId,$car_price,$user_note='');
+//                if(!$orderId){
+//                    throw new \Exception( $this->ajaxReturn(errorMsg('增加订单失败')));
+//                }
+//                //加入订单商品
+//                if(isset($_POST['cartIds'])){//购物车结算
+//                    $orderGoodsId = $orderModel->addOrderGoods($uid,$cartList,$orderSn);
+//                }
+//                if(isset($_POST['goodsId']) || isset($_POST['projectId'])){//立即购买
+//                    $orderGoodsId = $orderModel->directlyAddOrderGoods($uid,$goodsInfo,$orderSn,$goodsNum);
+//                }
+//
+//                if(!$orderGoodsId){
+//                    throw new \Exception( $this->ajaxReturn(errorMsg('增加订单商品失败')));
+//                }
+//                //删除购物车相对于商品
+//                if(isset($_POST['cartIds'])){
+//                    if((in_array('undefined',$cartIds) || in_array('',$cartIds)) === false){
+//                        $result = D('cart')->delCartByCartIds($uid,$cartIds);
+//                        if(!$result){
+//                            throw new \Exception( $this->ajaxReturn(errorMsg('删除购物车失败')));
+//                        }
+//                    }
+//                }
+//
+//                if($goodsInfo['buy_type'] == 3){//团购或闺蜜行
+//                    if(isset($_POST['groupBuySn']) && !empty($_POST['groupBuySn'])){
+//                        $groupBuySn = $_POST['groupBuySn'];
+//                        session('groupBuySn',$groupBuySn);
+//                        $where = array(
+//                            'groupbuy_sn' => $groupBuySn,
+//                            'status' => 1,
+//                        );
+//                        $groupBuyNum  =  M('groupbuy') -> where($where) -> count();
+//                        //如果已有三人购买或团长的购买？？？？？？？？？？？？？？？？就重新开团
+//                        if($groupBuyNum == $goodsInfo['groupbuy_num']){
+//                            $groupBuySn = date('ymd').substr(time(),-5).substr(microtime(),2,5);
+//                            session('groupBuySn',$groupBuySn);
+//                        }
+//                    }else{
+//                        $groupBuySn = date('ymd').substr(time(),-5).substr(microtime(),2,5);
+//                        session('groupBuySn',$groupBuySn);
+//                    }
+//
+//                    $data = array(
+//                        'user_id'  => $uid,
+//                        'groupbuy_sn' => $groupBuySn,
+//                        'order_sn' => $orderSn,
+//                        'create_time'=> time(),
+//                    );
+//                    $result = M('groupbuy')->add($data);
+//                    if(!$result){
+//                        throw new \Exception( $this->ajaxReturn(errorMsg('增加团购失败')));
+//                    }
+//                }
+//
+//                $orderModel->commit();
+//                $this->ajaxReturn(successMsg($orderId));
+//            }catch (Exception $e){
+//                $orderModel->rollback();
+//                $this->ajaxReturn($e->getMessage());
+//            }
+//        }else{
+//            $userId = $this->user['id'];
+//            //收货人地址
+//            if(isset($_GET['addressId'])){
+//                $addressId = $_GET['addressId'];
+//                $address = D('Address')-> getUserAddressById($userId,$addressId);
+//            }else{
+//                $address = D('Address')-> getUserAddressByUid($userId);
+//            }
+//            $this -> address = $address;
+//            //点击结算选中购物车商品信息
+//            if(isset($_GET['cartIds'])){
+//                $cartIds = $_GET['cartIds'];
+//                $this -> cartIds = $cartIds;
+//                $cartIds = rtrim($cartIds, ',');
+//                $cartIds = explode(',',$cartIds);
+//                if(in_array('undefined',$cartIds) || in_array('',$cartIds)){
+//                    $cartList = D('Cart')->getCartListBySession();
+//                }else{
+//                    $cartList = D('Cart') -> getCartListByCartIds($userId,$cartIds);
+//                }
+//
+//                if(empty($cartList)){
+//                    $this->error('你选中的商品已删除，请重新选择！');
+//                }
+//                $this -> cartList = $cartList;
+//                //订单总价
+//                $cartInfo = D('Cart') -> getCartInfo($cartList);
+//                $this -> cartInfo = $cartInfo;
+//            }
+//
+//            //点击立即购买产品
+//            $this->num = intval($_GET['num']);
+//            $this-> groupBuySn = $_GET['groupBuySn'];
+//            if(isset($_GET['goodsId'])){
+//                if(empty($_GET['goodsId']) && intval($_GET['goodsId'])){
+//                    $this->error('请选择你要购买的商品');
+//                }
+//                $goodsId = $_GET['goodsId'];
+//                $this->goodsId = $goodsId;
+//                $goodsInfo = D('Goods')-> getGoodsInfoByGoodsId($goodsId);
+//                $this -> goodsInfo = $goodsInfo;
+//            }
+//            //点击立即购买项目
+//            if(isset($_GET['projectId'])){
+//                if(empty($_GET['projectId']) && intval($_GET['projectId'])){
+//                    $this->error('请选择你要购买的商品');
+//                }
+//                $projectId = $_GET['projectId'];
+//                $this->projectId = $projectId;
+//                $projectInfo = D('Project')->getProjectInfoByProjectId($projectId);
+//                $this -> projectInfo = $projectInfo;
+//            }
+//            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,7));
+//            $this->display();
+//        }
     }
     //下单前检查订单商品库存
     public function checkGoodsStock($cartList){

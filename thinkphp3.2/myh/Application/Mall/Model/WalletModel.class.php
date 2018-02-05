@@ -78,7 +78,7 @@ class WalletModel extends Model {
             'w.status' => 0,
         );
         $_field = array(
-            'w.id','w.status','w.amount','w.user_id',
+            'w.id','w.status','w.acount_amount','w.earning_amount','w.user_id',
         );
         $_join = array(
         );

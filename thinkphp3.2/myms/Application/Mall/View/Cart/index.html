@@ -13,7 +13,7 @@
             <a href="javascript:void(0);" class="empty_cart"><i></i>清空购物车</a>
             <ul class="shopping_cart_list goods_list">
                 <volist name="cartList" id="vo">
-                <li  data-id="{$vo.id}" data-goods_type="{$vo.goods_type}">
+                <li  data-id="{$vo.foreign_id}" data-goods_type="{$vo.goods_type}">
                     <input type="checkbox" class="single_select" checked="">
                     <if condition="$vo['goods_type'] eq 1">
                         <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}" class="shoppingcart_product_img">
@@ -53,12 +53,7 @@
                         <input type="text" value="{$vo.num}" class="gshopping_count cart_count">
                         <a href="javascript:void(0);" class="plus">+</a>
                     </div>
-                    <div class="edit_goods_type">
-                        <a href="javascript:void(0);">关注</a>
-                        <a href="javascript:void(0);" class="edit_delete">删除</a>
-                        <a href="javascript:void(0);" class="edit_finish">完成</a>
-                    </div>
-                    <a href="javascript:void(0);" class="edit_goods">编辑</a>
+                    <a href="javascript:void(0);" class="edit_delete">删除</a>
                 </li>
                 </volist>
             </ul>
@@ -73,4 +68,10 @@
 
 <block name="footer">
     <include file="Cart/footerCartMenu" />
+</block>
+<block name="script">
+    <script type="text/javascript" src="PUBLIC_JS/mall/cart.js"></script>
+    <script type="text/javascript">
+    </script>
+
 </block>

@@ -56,7 +56,6 @@ class OrderController extends AuthUserController {
             $this->display();
         }
     }
-
     //订单-详情页
     public function orderDetail(){
         $modelOrder = D('Order');

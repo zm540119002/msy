@@ -100,12 +100,13 @@ class CartController extends BaseController {
                 //假定没找到
                 $find = false;
                 foreach ($carts as $cart){
-                    if($goods['foreign_id'] == $cart['foreign_id']){//找到了，则更新记录
+                    if($goods['foreign_id'] == $cart['foreign_id'] && $goods['goods_type'] == $cart['goods_type'] ){//找到了，则更新记录
                         $find = true;
                         $where = array(
                             'user_id' => $this->user['id'],
                             'id' => $cart['id'],
                             'foreign_id' => $cart['foreign_id'],
+                            'goods_type' => $cart['goods_type'],
                         );
                         $_POST['num'] = $goods['num'] + $cart['num'];
                         $res = $modelCart->saveCart($where);
@@ -131,47 +132,67 @@ class CartController extends BaseController {
         }
         $this->ajaxReturn(successMsg('添加成功'));
     }
-
-
-    //判断购物车是否存在相同商品
-    public function isExist($id,$num,$array,$type)
-    {
-        $isExist=false;
-        foreach($array as $key1=>$value)
-        {
-            if(intval($value['foreign_id']) == $id && intval($value['type'])==$type){
-                $num=$value["num"]+$num;
-                $isExist=$key1."/".$num;
-            }
+    //增减单个商品
+    public function replaceOneGoodsToCart(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        return $isExist;
+        //用户信息
+        $this->user = AuthUser::check();
+        $goods = $_POST;
+        if(empty($goods)){
+            $this->ajaxReturn(errorMsg('请求的数据不能为空'));
+        }
+        if($this->user['id']){//已登录
+            $modelCart = D('Cart');
+            $where = array(
+                'user_id' => $this->user['id'],
+                'foreign_id' => $goods['foreign_id'],
+                'goods_type' => $goods['goods_type'],
+            );
+            $res = $modelCart->saveCart($where);
+            if($res['status']== 0){
+                $this->ajaxReturn(errorMsg($res['info']));
+            }
+        }else{//未登录
+            $cart = unserialize(cookie('cart'));
+            foreach ($cart as &$value){
+                if($value['foreign_id'] == $goods['foreign_id'] && $value['goods_type'] == $goods['goods_type']){
+                    $value['num'] = $goods['num'];
+                }
+            }
+            cookie('cart',serialize($cart));
+        }
+        $this->ajaxReturn(successMsg('添加成功'));
     }
-
-
     //删除购物车信息
     public function delCart(){
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
         $this->user = AuthUser::check();
+        $goodsList = $_POST['goodsList'];
+        if(empty($goodsList)){
+            $this->ajaxReturn(errorMsg('请求的数据不能为空'));
+        }
         //已登录
         if( $this->user['id']){
-            if(isset($_POST['foreign_ids']) && $_POST['foreign_ids']){
+            foreach ($goodsList as $k=> &$v){
                 $where['user_id']  = $this->user['id'];
-                $where['foreign_id']  = array('in',$_POST['foreign_ids']);
+                $where['foreign_id']  = $v['foreign_id'];
+                $where['goods_type']  = $v['goods_type'];
                 $result = D('cart') -> where($where)->delete();
+                if(!$result){
+                    $this -> ajaxReturn(errorMsg('删除失败'));
+                }
+                $this -> ajaxReturn(successMsg('删除成功'));
             }
-            if(!$result){
-                $this -> ajaxReturn(errorMsg('删除失败'));
-            }
-            $this -> ajaxReturn(successMsg('删除成功'));
         }
         //未登录
         $cart = unserialize(cookie('cart'));
-        $foreignIds =  $_POST['foreign_ids'];
         foreach ($cart as $key => &$value){
-            foreach ($foreignIds as $kk => &$vv)
-                if($value['foreign_id'] == $vv){
+            foreach ($goodsList as $kk => &$vv)
+                if($value['foreign_id'] == $vv['foreign_id'] && $value['goods_type'] == $vv['goods_type'] ){
                     unset($cart[$key]);
                 }
         }
