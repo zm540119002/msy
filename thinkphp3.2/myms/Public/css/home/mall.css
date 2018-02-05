@@ -1296,7 +1296,12 @@ background-size:contain;
 .collect:last-child{margin:0 0.20rem 0 0;}
 .weChat_av_r .person{color:#0062cc;}
 .person_pending li{margin:0 0.28rem 0 0;}
-.person_pending a{display: block;}
+.person_pending a,
+.person_center_item a{
+    display: block;
+    color:#333;
+    position:relative;
+}
 .person_pending i{
     width:0.6rem;
     height:0.5rem;
