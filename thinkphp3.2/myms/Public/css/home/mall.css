@@ -212,8 +212,8 @@ display: none;
 .shopping_count{width:30%;float:left;font-size:0.24rem;text-align: center;margin:0.15rem 0 0;}
 .shop_product_num a{
 width:0.5rem;
-height:0.5rem;
-border-radius:100%;
+height:0.48rem;
+/*border-radius:100%;*/
 border:1px solid #d9d9d9;
 display: inline-block;
 float:left;
@@ -470,7 +470,8 @@ header.fixed { position: fixed; background: rgba(248,248,248,0.95); z-index: 9;}
 .express_mode span.current{background:#f5911e;color:#fff;}
 .project_payment_method span.current{background:#33cc33;color:#fff;}
 .project_products_name{text-align:left;padding:0.14rem 0;width:100%;}
-.quantity_wrapper input{
+.quantity_wrapper input,
+.gshopping_count{
 width:0.8rem;
 border:1px solid #d9d9d9;
 text-align: center;

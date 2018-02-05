@@ -196,7 +196,6 @@ function assemblyData(lis) {
     // if(!$('footer').find('price').length){
     //     return false;
     // }
-    alert(1);
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
