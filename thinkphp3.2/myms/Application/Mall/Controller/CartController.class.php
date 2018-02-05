@@ -38,10 +38,10 @@ class CartController extends BaseController {
                 'ct.goods_type' => 2,
             );
             $pField = array(
-                'g.name','g.discount_price','g.price','g.special_price','g.group_price','g.main_img','g.buy_type'
+                'p.name','p.discount_price','p.price','p.group_price','p.main_img',
             );
             $pJoin = array(
-                'left join goods g on g.id = ct.foreign_id ',
+                'left join project p on p.id = ct.foreign_id ',
             );
             $pCartList = $modelCart->selectCart($pWhere,$pField,$pJoin);
             //合并列表

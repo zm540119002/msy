@@ -4,120 +4,103 @@ namespace Mall\Model;
 use Think\Model;
 use Think\Model\RelationModel;
 
-class OrderDetailModel extends Model {
-    protected $tableName = 'order_detail';
+class LogisticsModel extends Model {
+    protected $tableName = 'logistics';
     protected $tablePrefix = '';
     protected $connection = 'DB_MYMS';
 
     protected $_validate = array(
-        array('sn','require','订单编号必须！'),
+        array('sn','require','物流编号必须！'),
     );
-
     //新增
-    public function addOrderDetail(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function addLogistics(){
         unset($_POST['id']);
-
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
-       
         $id = $this->add();
 
         if($id === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('新增成功',$returnArray);
     }
 
     //修改
-    public function saveOrderDetail(){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function saveLogistics($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.orderDetailId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数orderDetailId');
-        }
-
         $res = $this->create();
         if(!$res){
             return errorMsg($this->getError());
         }
+        $_where = array(
 
-        $where = array(
-            'id' => $id,
         );
-       
-        $res = $this->where($where)->save();
-        
+        if(isset($_POST['LogisticsId']) && intval($_POST['LogisticsId'])){
+            $id = I('post.LogisticsId',0,'int');
+        }
+        if($id){
+            $_where['id'] = $id;
+        }
+        $_where = array_merge($_where,$where);
+        $res = $this->where($_where)->save();
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('修改成功',$returnArray);
     }
 
     //标记删除
-    public function delOrderDetail($where=array()){
-        if(!IS_POST){
-            return errorMsg(C('NOT_POST'));
-        }
+    public function delLogistics($where=array()){
         unset($_POST['id']);
-
-        $id = I('post.orderDetailId',0,'int');
-        if(!$id){
-            return errorMsg('确少参数orderDetailId');
-        }
-
         $_where = array(
-            'id' => $id,
+
         );
+        $id = I('post.LogisticsId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
         $_where = array_merge($_where,$where);
 
         $res = $this->where($_where)->setField('status',2);
         if($res === false){
             return errorMsg($this->getError());
         }
-
         $returnArray = array(
             'id' => $id,
         );
-
         return successMsg('删除成功',$returnArray);
     }
 
     //查询
-    public function selectOrderDetail($where=[],$field=[],$join=[]){
+    public function selectLogistics($where=[],$field=[],$join=[]){
         $_where = array(
-            'od.status' => 0,
+
         );
         $_field = array(
-            'od.id','od.order_id','od.type','od.status','od.price','od.num','od.foreign_id','od.user_id','od.goods_type'
+            'l.id','l.sn','l.status','l.undertake_company','l.delivery_time','l.fee',
+            'l.create_time','l.finished_time',
         );
         $_join = array(
-            
         );
         $list = $this
-            ->alias('od')
+            ->alias('l')
             ->where(array_merge($_where,$where))
             ->field(array_merge($_field,$field))
             ->join(array_merge($_join,$join))
+            ->Logistics('l.id desc')
             ->select();
         return $list?:[];
     }
+    
+  
+
+
 }

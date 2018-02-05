@@ -2,128 +2,150 @@
 namespace Mall\Model;
 use Think\Model;
 class OrderModel extends Model {
-    protected $tableName = 'order';
+    protected $tableName = 'orders';
     protected $tablePrefix = '';
     protected $connection = 'DB_MYMS';
-    
-    /**
-     * 添加一个订单
-     * @param $user_id|用户id
-     * @param $address_id|地址id
-     * @param $shipping_code|物流编号
-     * @param $invoice_title|发票
-     * @param int $coupon_id|优惠券id
-     * @param $car_price|各种价格
-     * @param string $user_note|用户备注
-     * @return array
-     */
-    public function addOrder($orderSn,$orderType,$uid,$address_id,$car_price,$user_note='')
-    {
-        // 0插入订单 order
-        $data = array(
-            'order_sn'  => $orderSn, // 订单编号
-            'order_type' =>$orderType,
-            'user_id'   => $uid, // 用户id
-            'address_id'=> $address_id,
-            'goods_amount'    => $car_price['goods_amount'],//'商品价格',
-            'shipping_fee'    => $car_price['shipping_fee'],//'运费',
-            'pd_amount'       => $car_price['pd_amount'],//'预存款支付金额,
-            'coupon_price'    => $car_price['coupon_price'],//'使用优惠券',
-            'coupon_id'       => $car_price['coupon_id'],//'使用优惠券',
-            'order_amount'    => $car_price['order_amount'],//'订单总价格；
-            'actually_amount' => $car_price['actually_amount'],//'应付款金额',
-            'create_time'     => time(), // 下单时间
-            'user_note'       => $user_note, // 用户下单备注
-        );
-         $orderId =D('order')->add($data);
-         return $orderId;
-    }
 
-    // 从结算时插入order_goods 表
-    public function addOrderGoods($uid,$cartList,$orderSn){
-        $dataGoods = array();
-        foreach($cartList as $key => $val)
-        {
-            if($val['type'] == 2){
-                $data['service_date'] = $val['service_date'];
-                $data['service_time'] = $val['service_time'];
-            }
-            $data['order_sn']           = $orderSn; // 订单id
-            $data['buyer_id']           = $uid; // 用户id
-            $data['foreign_id']         = $val['foreign_id']; // 商品id
-            $data['foreign_name']       = $val['foreign_name']; // 商品名称
-            $data['num']                = $val['num']; // 购买数量
-            $data['price']              = $val['price']; // 商品价
-            $data['img']                = $val['img']; //,
-            $data['type']               = $val['type'];
-            $data['buy_type']           = $val['buy_type'];
-            $dataGoods[] = $data;
+    protected $_validate = array(
+        array('sn','require','订单编号必须！'),
+    );
+
+    //新增
+    public function addOrder(){
+        unset($_POST['id']);
+        $res = $this->create();
+        if(!$res){
+            return errorMsg($this->getError());
         }
-        $orderGoodsId  = M('order_details')->addAll($dataGoods);
-        return $orderGoodsId;
-    }
+        $id = $this->add();
 
-    //直接购买商品时，插入order_goods 表
-    public function directlyAddOrderGoods($uid,$goodsInfo,$orderSn,$goodsNum){
-
-        $data['order_sn']           = $orderSn; // 订单id
-        $data['buyer_id']           = $uid; // 用户id
-        $data['foreign_id']         = $goodsInfo['id']; // 商品id
-        $data['foreign_name']       = $goodsInfo['name']; // 商品名称
-        $data['num']                = $goodsNum; // 购买数量
-        $data['price']              = $goodsInfo['real_price']; // 市场价
-        $data['img']                = $goodsInfo['main_img']; //'',
-        $data['type']               = $goodsInfo['type'];
-        $data['buy_type']           = $goodsInfo['buy_type'];
-        $orderGoodsId               =  M('order_details')->add($data);
-        return $orderGoodsId;
-    }
-
-
-    //获取订单详情
-    public function getOrderInfo($uid,$orderId){
-        $where['user_id'] = $uid;
-        $where['id'] = $orderId;
-        return D('order') -> where($where)->find();
-    }
-
-    //获取订单详情
-    public function getOrderInfoByOrderNo($orderSn){
-//        $where['user_id'] = $uid;
-        $where['order_sn'] = $orderSn;
-        return D('order') -> where($where)->find();
-    }
-    //获取订单详情
-    public function getOrderInfoByOrderNoAndUid($orderSn,$uid){
-        $where =array(
-            'user_id'=>$uid,
-            'order_sn'=>$orderSn,
+        if($id === false){
+            return errorMsg($this->getError());
+        }
+        $returnArray = array(
+            'id' => $id,
         );
-        return D('order') -> where($where)->find();
+        return successMsg('新增成功',$returnArray);
     }
 
-    //根据$orderSn获取订单商品详情
-    public function getOrderGoodsByOrderSn($orderSn){
-        $where['order_sn'] = $orderSn;
-        return M('order_details') -> where($where)->select();
+    //修改
+    public function saveOrder($where=array()){
+        unset($_POST['id']);
+        $res = $this->create();
+        if(!$res){
+            return errorMsg($this->getError());
+        }
+        $_where = array(
+            'status' => 0,
+        );
+        if(isset($_POST['orderId']) && intval($_POST['orderId'])){
+            $id = I('post.orderId',0,'int');
+        }
+        if($id){
+            $_where['id'] = $id;
+        }
+        $_where = array_merge($_where,$where);
+        $res = $this->where($_where)->save();
+        if($res === false){
+            return errorMsg($this->getError());
+        }
+        $returnArray = array(
+            'id' => $id,
+        );
+        return successMsg('修改成功',$returnArray);
     }
 
+    //标记删除
+    public function delOrder($where=array()){
+        unset($_POST['id']);
+        $_where = array(
+            'status' => 0,
+        );
+        $id = I('post.orderId',0,'int');
+        if($id){
+            $_where['id'] = $id;
+        }
+        $_where = array_merge($_where,$where);
 
-    //根据$orderSn修改订单地址
-    public function updateOrderAddress($orderSn,$addressId,$uid){
-        $where['order_sn'] = $orderSn;
-        $where['user_id'] = $uid;
-        $data['address_id'] = $addressId;
-        return D('order') -> where($where)->save($data);
+        $res = $this->where($_where)->setField('status',2);
+        if($res === false){
+            return errorMsg($this->getError());
+        }
+        $returnArray = array(
+            'id' => $id,
+        );
+        return successMsg('删除成功',$returnArray);
     }
-    //根据$orderSn修改订单状态
-    public function updateOrderStatus($orderSn,$orderState,$uid){
-        $where['order_sn'] = $orderSn;
-        $where['user_id'] = $uid;
-        $data['order_state'] = $orderState;
-        return D('order') -> where($where)->save($data);
+
+    //查询
+    public function selectOrder($where=[],$field=[],$join=[]){
+        $_where = array(
+            'o.status' => 0,
+        );
+        $_field = array(
+            'o.id','o.sn','o.status','o.logistics_status','o.after_sale_status','o.payment_code',
+            'o.amount','o.coupons_pay','o.wallet_pay','o.actually_amount','o.create_time','o.payment_time',
+            'o.user_id','o.address_id','o.logistics_id','o.coupons_id','o.finished_time','o.type',
+        );
+        $_join = array(
+        );
+        $list = $this
+            ->alias('o')
+            ->where(array_merge($_where,$where))
+            ->field(array_merge($_field,$field))
+            ->join(array_merge($_join,$join))
+            ->order('o.id desc')
+            ->select();
+        return $list?:[];
     }
-    
 
+    //检查订单状态
+    public function checkOrderLogisticsStatus($LogisticsStatus){
+        if($LogisticsStatus == 1){
+            $res = array(
+                'status' => 1,
+                'message' => '待支付',
+            );
+        }elseif($LogisticsStatus == 2 || $LogisticsStatus == 3 || $LogisticsStatus == 4){
+            $res = array(
+                'status' => 0,
+                'message' => '订单已支付',
+            );
+        }elseif($LogisticsStatus == 5){
+            $res = array(
+                'status' => 0,
+                'message' => '订单已取消',
+            );
+        }else{
+            $res = array(
+                'status' => 0,
+                'message' => '无效订单',
+            );
+        }
+        return $res;
+    }
 
+    //按订单状态分组统计
+    public function orderStatusCount($where){
+        $_where = array(
+            'o.status' => 0,
+        );
+        $_field = array(
+            'o.logistics_status','count(1) num',
+        );
+        $list = $this
+            ->alias('o')
+            ->where(array_merge($_where,$where))
+            ->field($_field)
+            ->group('o.logistics_status')
+            ->order('o.logistics_status asc')
+            ->select();
+        $orderStatusCount = array();
+        foreach ($list as $value){
+            if($value['logistics_status'] != 0){
+                $orderStatusCount[$value['logistics_status']] = $value['num'];
+            }
+        }
+        return $orderStatusCount?:[];
+    }
 }

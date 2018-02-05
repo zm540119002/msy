@@ -209,7 +209,7 @@ class OrderController extends AuthUserController {
         $cartList = $modelCart->selectCart($where);
         foreach ($goodsList as $item){
             foreach ($cartList as $value){
-                if($item['foreign_id'] && $value['foreign_id'] && $item['foreign_id']==$value['foreign_id'])
+                if($item['foreign_id'] && $value['foreign_id'])
                 {//提交的商品在购物车中，生成订单后禁用
                     $where = array(
                         'user_id' => $this->user['id'],
