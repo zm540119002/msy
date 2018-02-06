@@ -7,6 +7,8 @@
             'APPSECRET'=>'21d1494ef2962d8a4c1af5d9bd8d2840',
             'MCHID' =>'',//商家号
             'KEY' => '',//支付key
+
+            'CALL_BACK_URL'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Mall/CallBack/notifyUrl",
             /**
              * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0
              * 本例程通过curl使用HTTP POST方法，此处可修改代理服务器，

@@ -16,57 +16,6 @@ $(function () {
         }
         generateOrder(postData,buyNowCallBack);
     });
-    //确认订单，跳转到结算页面
-    $('body').on('click','.determine_order',function () {
-        var area_address = $('#area_address').val();
-        if(area_address){
-            var content='';
-            var consignee=$('.recipient_name').val();
-            var mobile=$('.recipient_mobile').val();
-            var district=$('.area_address').text();
-            var  address=$('.recipient_detail_address').val();
-            if(!consignee){
-                content='请填写收件人姓名';
-            }else if(!register.phoneCheck(mobile)){
-                content='请填写正确的手机号码';
-            }else if(district=='省 > 市 > 区/县'){
-                content='请选择地区';
-            }else if(!address){
-                content='请填写详细地址';
-            }
-            if(content){
-                layer.open({
-                    content:content,
-                    time: 2,
-                });
-                return false;
-            }
-        }
-        var addressId = $('#addressId').val();
-        var cartIds   = $('#cartIds').val();
-        var invoice_title  = $('#invoice_title').val();
-        var goodsId = $('#goodsId').val();
-        var projectId = $('.projectId').val();
-        var goodsNum = $(this).parents().find('.shopping_count').val();
-        var groupBuySn = $('.groupBuySn').val();
-        //提交订单，跳转到支付页面
-        $.post(CONTROLLER + '/addOrder',
-            {
-                addressId:addressId,cartIds:cartIds,invoice_title:invoice_title,
-                consignee:consignee,mobile:mobile,district:district,address:address,
-                goodsId:goodsId,projectId:projectId,goodsNum:goodsNum,groupBuySn:groupBuySn
-            },
-            function (msg) {
-                if(msg.status == 0){
-                    dialog.error(msg.info);
-                }
-                if(msg.status == 1){
-                    var url = MODULE + '/Order/settlement/orderId/'+msg.info;
-                    dialog.success('提交订单成功',url)
-                }
-            })
-    });
-    
     //微信分享提示图
     $('body').on('click','.forward_weChat',function(){
         $('.mcover').show();
@@ -108,8 +57,63 @@ $(function () {
         $(this).siblings('.gshopping_count').val(shopNum);
         allAmount(shopNum);
     });
-    
-
+    //确认订单
+    $('body').on('click','.determine_order',function(){
+        var addressInfo = {};
+        var postData = {};
+        var addressId = $('.addressid').val();
+        if(!addressId){
+            var content='';
+            var consignee=$('.recipient_name').val();
+            var mobile=$('.recipient_mobile').val();
+            var area_address=$('.district_address').val();
+            var address=$('.recipient_detail_address').val();
+            if(!consignee){
+                content='请填写收货人姓名';
+            }else if(!register.phoneCheck(mobile)){
+                content='请填写正确的手机号码';
+            }else if(!area_address){
+                content='请选择地区';
+            }else if(!address){
+                content='请填写详细地址';
+            }
+            if(content){
+                dialog.error(content);
+                return false;
+            }
+            addressInfo.consignee = consignee;
+            addressInfo.mobile = mobile;
+            addressInfo.area_address = area_address;
+            addressInfo.address = address;
+            postData.addressInfo = addressInfo;
+        }else{
+            postData.addressId = addressId;
+        }
+        var orderId = $('.orderid').val();
+        postData.orderId = orderId;
+        var url = MODULE + '/Order/confirmOrder';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }
+                if(data.status==1){
+                    location.href = MODULE + '/Order/settlement/orderId/' + data.id;
+                }
+            }
+        });
+    });
 
 });
 //计算总价
@@ -139,7 +143,6 @@ function getPurchaseDetails(id,type,position) {
             if(position === 'list'){
                 $('.common_contents').after(data);
                 var realPrice=$('.real_price price').text();
-                //$('.goods_total_price price').text(realPrice);
                 allAmount(1);
             }
             if(position === 'info'){
@@ -164,6 +167,7 @@ function getPurchaseDetails(id,type,position) {
         $('.group_cart_nav').hide();
     }
 }
+//添加购物车
 function addCart(data) {
     var url =  MODULE + '/Cart/addCart';
     $.ajax({
@@ -182,13 +186,6 @@ function addCart(data) {
                 dialog.error(data.info);
             }
         }
-        // ,
-        // complete:function(){
-        //     $('.group_cart_nav,.mask').hide();
-        //     $('.goodsInfo_footer_nav').show();
-        //     $('.express-area-box').css({bottom:'-100%',display:'none'});
-        //     $('html,body').css({"overflow":"auto"});
-        // }
     });
 }
 //组装数据

@@ -24,7 +24,6 @@
                 <label class="form-label">联系电话：</label>
                 <input type="text" name="mobile" class="input-flex recipient_mobile" placeholder="请输入收件人电话" value="{$address.mobile}">
             </div>
-
             <div class="express-area ">
                 <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
                     <label class="form-label">选择地区：</label>
@@ -50,7 +49,6 @@
                     <div class="myswitch"  data-off="{$address.is_default}"></div>
                 </div>
             </if>
-
         </form>
     </section>
     <!--选择地区弹层-->
@@ -94,7 +92,6 @@
                 var recipientName=$('.recipient_name').val();
                 var recipientMobile=$('.recipient_mobile').val();
                 var areaAddress=$('.district_address').val();
-                console.log(areaAddress);
                 var detailAddress=$('.recipient_detail_address').val();
                 if(!recipientName){
                     content='请填写收货人姓名';
@@ -105,7 +102,6 @@
                 }else if(!detailAddress){
                     content='请填写详细地址';
                 }
-
                 if(content){
                     dialog.error(content);
                     return false;

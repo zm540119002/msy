@@ -40,6 +40,11 @@ class AddressController extends AuthUserController {
                 //开启事务
                 $addressModel -> startTrans();
                 try{
+                    $where['user_id'] = $uid;
+                    $addressList = $addressModel -> where($where)->select();
+                    if(empty($addressList)){
+                        $data['is_default'] = 1;
+                    }
                     $data['user_id'] = $uid;
                     $addressId = $addressModel->add($data);
                     if(!$addressId){

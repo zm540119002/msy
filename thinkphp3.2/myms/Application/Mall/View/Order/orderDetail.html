@@ -22,7 +22,7 @@
                             <i class="location-pic"></i>
                             <span id="address-where" class="address-where">{$address.district}{$address.address}</span>
                         </div>
-                        <input type="hidden" id="addressId" value="{$address.id}">
+                        <input type="hidden" class="addressid" value="{$address.id}">
                     </a>
                 </div>
             </section>
@@ -45,7 +45,7 @@
                                 <else />
                                 <div class="area_address"></div>
                             </empty>
-                            <input type="hidden" class="district_address" value="{$address.district}">
+                            <input type="hidden" class="district_address" value="">
                         </a>
                     </div>
                     <div class="form-group box-flex">
@@ -113,60 +113,15 @@
 <block name="script">
     <script type="text/javascript">
         $(function(){
-            $('.shopping_count').on('input propertychange',function(){
-                if(!$(this).val()){
-                    return false;
-                }
-                TotalPrice();
-            });
-
-            //商品数量加减
-            $.each($('.goods_order_item li'),function(){
-                var _this=$(this);
-                var shopNum=_this.find('.shopping_count').val();
-                _this.find('.plus').on('click',function(){
-                    shopNum=_this.find('.shopping_count').val();
-                    shopNum++;
-                    $(this).siblings('.shopping_count').val(shopNum);
-                    TotalPrice();
-
-                });
-                _this.find('.reduce').on('click',function(){
-
-                    shopNum=_this.find('.shopping_count').val();
-
-                    if(shopNum < 2){
-                        return false;
-                    }
-                    shopNum--;
-                    $(this).siblings('.shopping_count').val(shopNum);
-                    TotalPrice();
-                })
-            });
-            function TotalPrice(){
-                var allPrice=0;
-                $.each($('.goods_order_item li'),function(){
-                    var _this=$(this);
-                    var goodsNum=parseInt(_this.find('.shopping_count').val());
-                    var goodsPrice=_this.find('.cost_price').text().replace(/[^\d.]/g,"");
-                    var total=goodsNum*goodsPrice;
-                    allPrice +=total;
-                });
-                $('.price_items_all i').text(allPrice);
-            }
-
             //跳转到地址列表，更换地址
             $('body').on('click','.changeAddress',function () {
                 var orderId = $('.orderid').val();
-                var goodsId = $('#goodsId').val();
-                var projectId = $('#projectId').val();
                 var url = MODULE + '/Address/addressList';
                 if(orderId){
                     url += '/orderId/'+orderId;
                 }
                 location.href = url;
             });
-
         })
     </script>
 </block>
