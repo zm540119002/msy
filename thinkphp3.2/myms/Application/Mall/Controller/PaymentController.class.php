@@ -40,14 +40,16 @@ class PaymentController extends AuthUserController {
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
                     $groupBuy = $groupBuy[0];
                     if($groupBuy['goods_type'] == 1){
-                        $successBackUrl =  U('Goods/goodsInfo',array(
+                        $successBackUrl =  U('Goods/goodsInfo',
+                            array(
                             'goodsId'=>$groupBuy['foreign_id'],
                             'groupBuyId'=>$groupBuy['group_buy_id'],
                             'shareType'=>'groupBuy',
                         ));
                     }
                     if($groupBuy['goods_type'] == 2){
-                        $successBackUrl =  U('Project/projectInfo',array(
+                        $successBackUrl =  U('Project/projectInfo',
+                            array(
                                 'projectId'=>$groupBuy['foreign_id'],
                                 'groupBuyId'=>$groupBuy['group_buy_id'],
                                 'shareType'=>'groupBuy',
