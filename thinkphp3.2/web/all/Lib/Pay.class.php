@@ -52,6 +52,7 @@ class Pay{
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("JSAPI");				//支付类型
         $input->SetOpenid($openId);					//用户openID
+        print_r($input);exit;
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
