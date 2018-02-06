@@ -55,7 +55,6 @@ class PaymentController extends AuthUserController {
                     }
                     $payInfo['success_back'] = $successBackUrl;
                 }
-                print_r($payInfo);exit;
                 Pay::wxPay($payInfo);
             }
         }
