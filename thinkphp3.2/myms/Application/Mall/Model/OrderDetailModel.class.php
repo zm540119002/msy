@@ -107,7 +107,7 @@ class OrderDetailModel extends Model {
             'od.status' => 0,
         );
         $_field = array(
-            'od.id','od.order_id','od.type','od.status','od.price','od.num','od.foreign_id','od.user_id','od.goods_type'
+            'od.id','od.order_id','od.status','od.price','od.num','od.foreign_id','od.user_id','od.goods_type'
         );
         $_join = array(
             

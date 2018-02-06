@@ -61,6 +61,7 @@
             <!--结算显示商品页面-->
             <notempty name="orderList">
             <ul class="goods_order_item">
+                <input type="hidden" class="orderid" value="{$orderList[0]['order_id']}"/>
                 <volist name="orderList" id="vo">
                     {$vo.mian_img}
                     <li>
@@ -70,14 +71,18 @@
                             <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
                         </notempty>
                         <div class="g_order_r">
-                            <p>{$vo.foreign_name}</p>
+                            <p>{$vo.name}</p>
                             <div class="goods_price_num">
-                                <div class="cost_price"><span>￥</span>{$vo.discount_price}</div>
-                                <div class="quantity_wrapper">
-                                    <a href="javascript:void(0);" class="reduce">-</a>
-                                    <input type="text" value="{$vo.num}" class="f24 shopping_count">
-                                    <a href="javascript:void(0);" class="plus">+</a>
-                                </div>
+                                <if condition="$vo.buy_type eq 1">
+                                    <div class="cost_price"><span>￥</span>{$vo.discount_price}</div>
+                                </if>
+                                <if condition="$vo.buy_type eq 2">
+                                    <div class="cost_price"><span>￥</span>{$vo.special_price}</div>
+                                </if>
+                                <if condition="$vo.buy_type eq 3">
+                                    <div class="cost_price"><span>￥</span>{$vo.group_price}</div>
+                                </if>
+                                <div class="shopping_count">数量：<span>{$vo.num} </span></div>
                             </div>
                         </div>
                     </li>
@@ -133,7 +138,7 @@
 
                     shopNum=_this.find('.shopping_count').val();
 
-                    if(shopNum<2){
+                    if(shopNum < 2){
                         return false;
                     }
                     shopNum--;
@@ -155,18 +160,12 @@
 
             //跳转到地址列表，更换地址
             $('body').on('click','.changeAddress',function () {
-                var cartIds = $('#cartIds').val();
+                var orderId = $('.orderid').val();
                 var goodsId = $('#goodsId').val();
                 var projectId = $('#projectId').val();
                 var url = MODULE + '/Address/addressList';
-                if(cartIds){
-                    url += '/cartIds/'+cartIds;
-                }
-                if(goodsId){
-                    url += '/goodsId/'+goodsId;
-                }
-                if(projectId){
-                    url += '/projectId/'+projectId;
+                if(orderId){
+                    url += '/orderId/'+orderId;
                 }
                 location.href = url;
             });

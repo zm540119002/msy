@@ -152,10 +152,12 @@ class OrderController extends AuthUserController {
                 'od.order_id' => $orderId,
             );
             $gField = array(
-                'g.name','g.discount_price','g.price','g.special_price','g.group_price','g.main_img','g.buy_type'
+                'g.name','g.discount_price','g.price','g.special_price','g.group_price','g.main_img','g.buy_type',
+                'o.type','o.amount'
             );
             $gJoin = array(
                 'left join goods g on g.id = od.foreign_id ',
+                'left join orders o on o.id = od.order_id ',
             );
             $gOrderList = $modelOrderDetail->selectOrderDetail($gWhere,$gField,$gJoin);
             //查询项目列表
@@ -170,10 +172,9 @@ class OrderController extends AuthUserController {
             $pJoin = array(
                 'left join project p on p.id = od.foreign_id ',
             );
-            $pOrderList = $modelOrderDetail->selectOrderDetail($pWhere,$pField,$pJoin);
+            $pOrderList = $modelOrderDetail -> selectOrderDetail($pWhere,$pField,$pJoin);
             //合并列表
             $this -> orderList = array_merge($gOrderList,$pOrderList);
-            print_r(  $this -> orderList);
 
 //            $where = array(
 //                'od.order_sn' => $orderInfo['sn'],

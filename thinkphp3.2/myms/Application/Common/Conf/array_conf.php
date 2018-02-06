@@ -33,6 +33,9 @@ return array(
         array('determine'   => '确定',),//21
         array('authorise_agent'   => '授权代理商',),//22
         array('open_referrer'   => '一键免费开通推客分享功能',),//23
+        array('address_save'   => '保存',),//24
+        array('address_save_order_id'   => '保存并使用',),//25
+        array('address_add'   => '新建地址',),//26
     ),
     
 );
