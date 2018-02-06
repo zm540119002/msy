@@ -3,10 +3,10 @@
         //微信公众号配置
         'WX_CONFIG' => array(
             //TODO: 修改这里配置为您自己申请的商户信息
-            'APPID'=>'wx1e87a5919d7aff9d',
-            'APPSECRET'=>'21d1494ef2962d8a4c1af5d9bd8d2840',
-            'MCHID' =>'',//商家号
-            'KEY' => '',//支付key
+            'APPID'=>'wx9eee7ee8c2ae57dc',
+            'APPSECRET'=>'00e0c9275fb24d6ca2a8dfe2a24cc2f6',
+            'MCHID' =>'1234887902',
+            'KEY' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 
             'CALL_BACK_URL'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Mall/CallBack/notifyUrl",
             /**
