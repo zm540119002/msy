@@ -224,14 +224,16 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1){//团购
-            $_where = array(
-                'group_buy_id'=>$groupBuyId,
-                'pay_status'=>2,
-            );
-            //判断是否已团购
-            $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id',true);
-            if(in_array($this->user['id'],$userIdArray)){
-                $this->ajaxReturn(errorMsg('你已参加此团购，不能再参加！是否重新开团',array('joined'=>1)));
+            if($groupBuyId){
+                $_where = array(
+                    'group_buy_id'=>$groupBuyId,
+                    'pay_status'=>2,
+                );
+                //判断是否已团购
+                $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id',true);
+                if(in_array($this->user['id'],$userIdArray)){
+                    $this->ajaxReturn(errorMsg('你已参加此团购，不能再参加！是否重新开团',array('joined'=>1)));
+                }
             }
             $openid = session('openid');
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId,$openid);

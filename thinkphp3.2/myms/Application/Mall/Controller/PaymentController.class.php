@@ -38,6 +38,7 @@ class PaymentController extends AuthUserController {
                         'gbd.order_id' => $orderId,
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
+                    print_r( session('returnUrl') );
                     if (strpos(session('returnUrl'), 'groupBuyId') == true) {
                         if(strpos(session('returnUrl'), '?') == true){
                             $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
@@ -54,6 +55,8 @@ class PaymentController extends AuthUserController {
                         session('returnUrl') && $payInfo['success_back'] = $shLinkBase. '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
                     }
                 }
+                print_r( session('returnUrl'));
+                print_r($payInfo);exit;
                 Pay::wxPay($payInfo);
             }
         }

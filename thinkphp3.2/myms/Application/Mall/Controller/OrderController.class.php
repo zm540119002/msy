@@ -111,23 +111,25 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1) {//团购
-            $_where = array(
-                'group_buy_id' => $groupBuyId,
-                'pay_status' => 2,
-            );
-            //判断是否已团购
-            $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id', true);
-            if (in_array($this->user['id'], $userIdArray)) {
-                $openid = session('openid');
-                D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'], $orderId, $groupBuyId, $openid);
+            if($groupBuyId){
+                $_where = array(
+                    'group_buy_id' => $groupBuyId,
+                    'pay_status' => 2,
+                );
+                //判断是否已团购
+                $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id', true);
+                if (in_array($this->user['id'], $userIdArray)) {
+                    $this->ajaxReturn(errorMsg('你已参加此团，不能重复参加！'));
+                }
             }
+            $openid = session('openid');
+            D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'], $orderId, $groupBuyId, $openid);
         }
         $modelLogistics->commit();
         $this->ajaxReturn(successMsg('生成订单成功', array('orderId' => $orderId)));
     }
     //订单-详情页
     public function orderDetail(){
-        $modelOrder = D('Order');
         $modelOrderDetail = D('OrderDetail');
         if(IS_POST){
         }else{
@@ -175,24 +177,7 @@ class OrderController extends AuthUserController {
             $pOrderList = $modelOrderDetail -> selectOrderDetail($pWhere,$pField,$pJoin);
             //合并列表
             $this -> orderList = array_merge($gOrderList,$pOrderList);
-//            $where = array(
-//                'od.order_sn' => $orderInfo['sn'],
-//            );
-//            $join = array(
-//                ' left join myh.goods g on g.id = od.foreign_id ',
-//                ' left join myh.goods_base gb on gb.id = g.goods_base_id ',
-//            );
-//            $field = array(
-//                'g.id','g.sale_price','gb.name','gb.price','gb.package_unit','gb.single_specification',
-//            );
-//            //订单下商品列表
-//            $goodsList = $modelOrderDetail->selectOrderDetail($where,$field,$join);
-//            $orderInfo['goodsList'] = $goodsList;
-//            $this->orderInfo = $orderInfo;
-//            //商品列表操作类型
-//            $this->goodsListOptionType = 'withNum';
-//            //订单详情页显示添加收货人地址
-//            $this->addAddress = 'true';
+
 //            //购物车配置开启的项
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,7));
             $this->display();
