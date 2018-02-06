@@ -9,12 +9,31 @@ $(function () {
     });
 
     //立即结算/立即购买/发起微团
-    $('body').on('click','.buy_now,.clearing_now,.initiate_group_buy',function(){
+    $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData($('ul.goods_list').find('li'));
         if(!postData){
             return false;
         }
         generateOrder(postData,buyNowCallBack);
+    });
+
+    var group_buy_end = $('.groupBuyEnd').val();
+    if(group_buy_end){ //重新开团
+        dialog.confirm('此团购已结束，是否重新开团')
+    }
+    //发起微团购并支付
+    $('body').on('click','.initiate_group_buy',function(){
+        var postData = assemblyData($('ul.goods_list').find('li'));
+        if(!postData){
+            return false;
+        }
+        postData.returnUrl = location.href;
+        postData.orderType = 1;
+        postData.groupBuyId = $('.groupBuyId').val();
+        if(group_buy_end){ //重新开团
+            delete(postData["groupBuyId"]);
+        }
+        generateOrder(postData,groupBuyCallBack);
     });
     //微信分享提示图
     $('body').on('click','.forward_weChat',function(){
@@ -269,5 +288,9 @@ function generateOrder(postData,callBack) {
 //立即购买回调
 function buyNowCallBack() {
     $('.buy_now,.clearing_now').click();
+}
+//立即购买回调
+function groupBuyCallBack() {
+    $('.initiate_group_buy').click();
 }
 

@@ -259,8 +259,7 @@ $(function () {
     $('body').on('click','.weixinShare_btn',function(){
         $('.mcover').hide();
     });
-
-
+    
     var group_buy_end = $('.groupBuyEnd').val();
     if(group_buy_end){ //重新开团
        dialog.confirm('此团购已结束，是否重新开团')
