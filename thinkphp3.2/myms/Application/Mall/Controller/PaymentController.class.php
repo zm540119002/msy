@@ -40,13 +40,22 @@ class PaymentController extends AuthUserController {
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
                     $groupBuy = $groupBuy[0];
                     if($groupBuy['goods_type'] == 1){
-                        $successBackUrlBase =  U('Goods/goodsInfo').'/goodsId/'.$groupBuy['foreign_id'];
+                        $successBackUrl =  U('Goods/goodsInfo',array(
+                            'goodsId'=>$groupBuy['foreign_id'],
+                            'groupBuyId'=>$groupBuy['group_buy_id'],
+                            'shareType'=>'groupBuy',
+                        ));
                     }
                     if($groupBuy['goods_type'] == 2){
-                        $successBackUrlBase =  U('Project/projectInfo').'/projectId/'.$groupBuy['foreign_id'];
+                        $successBackUrl =  U('Project/projectInfo',array(
+                                'projectId'=>$groupBuy['foreign_id'],
+                                'groupBuyId'=>$groupBuy['group_buy_id'],
+                                'shareType'=>'groupBuy',
+                            ));
                     }
-                    $payInfo['success_back'] = $successBackUrlBase.'/groupBuyId/'.$groupBuy['group_buy_id'].'/shareType/groupBuy';
+                    $payInfo['success_back'] = $successBackUrl;
                 }
+                print_r($payInfo);exit;
                 Pay::wxPay($payInfo);
             }
         }
