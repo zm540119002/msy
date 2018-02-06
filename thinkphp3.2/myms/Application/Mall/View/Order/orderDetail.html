@@ -29,7 +29,6 @@
             <else />
             <section class="section-address bg-eae pt-5">
                 <form action='#' method="post" class="bg-fff address_form">
-                    <input type="hidden" id="area_address" value="area_address">
                     <div class="form-group box-flex clearfixed">
                         <label class="form-label">收件人：</label>
                         <input type="text" name="consignee" class="input-flex recipient_name " placeholder="请输入姓名" value="">
@@ -46,7 +45,7 @@
                                 <else />
                                 <div class="area_address"></div>
                             </empty>
-
+                            <input type="hidden" class="district_address" value="{$address.district}">
                         </a>
                     </div>
                     <div class="form-group box-flex">
@@ -72,18 +71,16 @@
                         </notempty>
                         <div class="g_order_r">
                             <p>{$vo.name}</p>
-                            <div class="goods_price_num">
-                                <if condition="$vo.buy_type eq 1">
-                                    <div class="cost_price"><span>￥</span>{$vo.discount_price}</div>
-                                </if>
-                                <if condition="$vo.buy_type eq 2">
-                                    <div class="cost_price"><span>￥</span>{$vo.special_price}</div>
-                                </if>
-                                <if condition="$vo.buy_type eq 3">
-                                    <div class="cost_price"><span>￥</span>{$vo.group_price}</div>
-                                </if>
-                                <div class="shopping_count">数量：<span>{$vo.num} </span></div>
-                            </div>
+                            <if condition="$vo.buy_type eq 1">
+                                <div class="cost_price"><span>￥</span>{$vo.discount_price}</div>
+                            </if>
+                            <if condition="$vo.buy_type eq 2">
+                                <div class="cost_price"><span>￥</span>{$vo.special_price}</div>
+                            </if>
+                            <if condition="$vo.buy_type eq 3">
+                                <div class="cost_price"><span>￥</span>{$vo.group_price}</div>
+                            </if>
+                            <div class="shopping_count order_count">数量：<span>{$vo.num} </span></div>
                         </div>
                     </li>
                 </volist>

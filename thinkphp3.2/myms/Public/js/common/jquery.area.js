@@ -586,14 +586,14 @@ var areaObject={
 			for(var i=0;i<arguments.length;i++){
 				areaObject.provinceCityD.push(arguments[i]);
 			}
-			$('.detail_address').val(expressArea).data('key',areaObject.provinceCityD);
+			$('.district_address').val(expressArea).data('key',areaObject.provinceCityD);
 			// return false;
 		}
 		areaObject.provinceCityD=[];
 		for(var i=0;i<arguments.length;i++){
 			areaObject.provinceCityD.push(arguments[i]);
 		}
-		$('.detail_address').val(expressArea).data('key',areaObject.provinceCityD);
+		$('.district_address').val(expressArea).data('key',areaObject.provinceCityD);
 		return expressArea;
 		
 	},

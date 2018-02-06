@@ -64,6 +64,7 @@ class AddressController extends AuthUserController {
                 $id = $_GET['addressId'];
                 $address = $addressModel -> getUserAddressById($uid,$id);
                 $this -> address = $address;
+        
             }
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(24));
             if(isset($_GET['orderId'])){

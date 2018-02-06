@@ -30,10 +30,10 @@
                     <label class="form-label">选择地区：</label>
                     <empty name="address">
                         <div class="area_address">省 &gt; 市 &gt; 区/县</div>
-                        <input type="hidden" value="{$address.address}" class="area_address">
                         <else />
                         <div class="area_address">{$address.district}</div>
                     </empty>
+                    <input type="hidden" value="{$address.district}" class="district_address">
                 </a>
             </div>
             <div class="form-group box-flex">
@@ -93,7 +93,8 @@
                 var content='';
                 var recipientName=$('.recipient_name').val();
                 var recipientMobile=$('.recipient_mobile').val();
-                var areaAddress=$('.detail_address').val();
+                var areaAddress=$('.district_address').val();
+                console.log(areaAddress);
                 var detailAddress=$('.recipient_detail_address').val();
                 if(!recipientName){
                     content='请填写收货人姓名';
@@ -111,9 +112,8 @@
                 }
                 //添加或修改地址
                 var is_default      = $('.myswitch').attr('data-off');
-                var area_address    = $('.area_address').text();
                 var postData        = $(".form").serializeObject();
-                postData.district   = area_address;
+                postData.district   = areaAddress;
                 postData.is_default = is_default;
                 var url = MODULE + '/Order/orderDetail/';
                 $.post(CONTROLLER+'/addAddress',postData,function (msg) {
