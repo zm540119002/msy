@@ -434,6 +434,7 @@ class OrderController extends AuthUserController {
             );
             $wallet = $modelWallet->selectWallet($where);
             $this->wallet = $wallet[0];
+            print_r($this->wallet);exit;
             $this->display();
         }
     }
