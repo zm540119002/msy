@@ -188,7 +188,7 @@ class OrderController extends AuthUserController {
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
-        $addressId = intval($_POST['orderType'])?:0;
+        $addressId = intval($_POST['addressId'])?:0;
         $modelOrder = D('Order');
         $modelOrder->startTrans();
         if(isset($_POST['addressInfo']) && !empty($_POST['addressInfo'])){
@@ -312,7 +312,7 @@ class OrderController extends AuthUserController {
                 }
             }
             //账户余额支付
-            $accountBalance = $walletInfo['amount'];//$walletInfo['amount'];
+            $accountBalance = $walletInfo['earning_amount'];//$walletInfo['amount'];
             if($accountBalance>=0){
                 if($unpaid<=$accountBalance){//余额足够支付订单
                     //更新订单(状态还是未支付)
@@ -353,7 +353,7 @@ class OrderController extends AuthUserController {
                     }
                     //更新账户，$accountBalance-$unpaid
                     $_POST = [];
-                    $_POST['amount'] = $accountBalance - $unpaid;
+                    $_POST['earning_amount'] = $accountBalance - $unpaid;
                     $where = array(
                         'user_id' =>  $this->user['id'],
                     );
@@ -434,9 +434,205 @@ class OrderController extends AuthUserController {
             );
             $wallet = $modelWallet->selectWallet($where);
             $this->wallet = $wallet[0];
-            print_r($this->wallet);exit;
             $this->display();
         }
+    }
+    //团购订单处理
+    private function groupBuyHandle($modelOrder,$orderInfo){
+        $modelGroupBuy = D('GroupBuy');
+        $modelGroupBuyDetail = D('GroupBuyDetail');
+        $modelWallet = D('Wallet');
+        $modelWalletDetail = D('WalletDetail');
+        //更新团购表和团购详情表
+        //1.先更新团购详情表
+        $_POST = [];
+        $_POST['pay_status'] = 2;
+        $_POST['pay_time'] = date('YmdHis');
+        $where = array(
+            'user_id' => $orderInfo['user_id'],
+            'order_id' => $orderInfo['id'],
+        );
+        $returnData = $modelGroupBuyDetail-> saveGroupBuyDetail($where);
+        if ($returnData['status'] == 0) {
+            $modelGroupBuy->rollback();
+            //返回状态给微信服务器
+            $this->errorReturn($orderInfo['sn'], $modelGroupBuyDetail->getLastSql());
+        }
+        $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
+        $groupBuyDetail = $groupBuyDetail[0];
+        $ownOpenid = $groupBuyDetail['openid'];//自己的openid
+        $groupBuyId = $groupBuyDetail['group_buy_id']; //团购ID
+        //2.查看团购详情表此次团购有几人
+        unset($where);
+        $where = array(
+            'group_buy_id' => $groupBuyId,
+            'pay_status' => 2,
+        );
+        $groupBuyNum = $modelGroupBuyDetail->where($where)->count();
+        $field=[ 'g.cash_back','g.id','g.name',
+            'wxu.headimgurl','wxu.nickname','o.sn as order_sn'
+        ];
+        $join=[ ' left join myh.goods g on g.id = gbd.goods_id',
+            ' left join myh.goods_base gb on g.goods_base_id = gb.id ',
+            ' left join wx_user wxu on wxu.openid = gbd.openid',
+            ' left join orders o on o.id = gbd.order_id',
+        ];
+        $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
+        $templateMessageList = $templateMessageList[0];
+        $cashBack = $templateMessageList['cash_back'];//团购完成后返现
+        $goodsName = $templateMessageList['name'];//产品名称
+        foreach ($templateMessageList as &$item){
+            if($item['role'] == 1){
+                $header = $item['nickname'];//团长呢称
+                break;
+            }
+        }
+        //修改团购表的过期时间
+        if($groupBuyNum == 1){
+            $_POST = [];
+            $_POST['overdue_time'] = strtotime('+3 day');
+            unset($where);
+            $where = array(
+                'id' => $groupBuyId,
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
+        }
+        //团购成功通知
+        $templateBase = array(
+            'touser'=>$ownOpenid,
+            'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
+            'url'=>$this->host.U('Goods/goodsDetail',array(
+                    'goodsId'=>$groupBuyDetail['goods_id'],
+                    'groupBuyId'=> $groupBuyId,
+                    'shareType'=>'groupBuy' )),
+        );
+        $data = array(
+            'first'=>'亲，您已成功参加团购！',
+            'product_name'=>$goodsName,
+            'header'=>$header,
+            'remark'=>'三人可以成团，团长发起团三天有效，团购人数不限哦，快点击详情，邀请好友参团',
+        );
+        $this -> sendTemplateMessageGroupBuySuccess($templateBase,$data);
+        //修改团购表
+        if($groupBuyNum == 3){
+            $_POST = [];
+            $_POST['tag'] = 1;
+            unset($where);
+            $where = array(
+                'id' => $groupBuyId,
+            );
+            $returnData = $modelGroupBuy-> saveGroupBuy($where);
+            if ($returnData['status'] == 0) {
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+            }
+            //返现退三个
+            //更新账户
+            unset($where);
+            $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
+            $where['status'] = 0;
+            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
+            }
+            //增加账户记录
+            foreach (array_column($templateMessageList,"user_id") as &$useId){
+                $_POST = [];
+                $_POST['user_id'] = $useId;
+                $_POST['amount'] = $cashBack;
+                $_POST['type'] = 3;
+                $_POST['recharge_status'] = 1;
+                $_POST['create_time'] = time();
+                $res = $modelWalletDetail->addWalletDetail();
+                if ($res['status'] == 0) {
+                    $modelWallet->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
+                }
+            }
+            foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn =>&$openid){
+                //返现通知
+                $templateBase = array(
+                    'touser'=>$openid,
+                    'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+                    'url'=>$this->host.U('Earnings/index'),
+                );
+                $data = array(
+                    'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+                    'keyword1'=>$order_sn,
+                    'keyword2'=>$orderInfo['amount'],
+                    'keyword3'=>$cashBack,
+                    'remark'=>'祝您购物愉快！',
+                );
+                $this ->  sendTemplateMessageCashBack($templateBase,$data);
+            }
+        }
+        //只返现自己
+        if($groupBuyNum > 3){
+            //更新账户
+            unset($where);
+            $where['user_id'] = $orderInfo['user_id'];
+            $where['status'] = 0;
+            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
+            if(!$res){
+                $modelOrder->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
+            }
+            //增加账户记录
+            $_POST = [];
+            $_POST['user_id'] = $orderInfo['user_id'];
+            $_POST['amount'] = $cashBack;
+            $_POST['type'] = 3;
+            $_POST['recharge_status'] = 1;
+            $_POST['create_time'] = time();
+            $res = $modelWalletDetail->addWalletDetail();
+            if ($res['status'] == 0) {
+                $modelWallet->rollback();
+                //返回状态给微信服务器
+                $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
+            }
+            //返现通知
+            $templateBase = array(
+                'touser'=>$ownOpenid,
+                'template_id'=>'IO1uGEVfncBlJMVHuDqG8FnE2vuxbnI3C_8Ke1v3Mnk',
+                'url'=>$this->host.U('Earnings/index'),
+            );
+
+            $data = array(
+                'first'=>'亲，您好，你有一笔团购返现金额已经充值到您的账户，请查收！',
+                'keyword1'=>$orderInfo['sn'],
+                'keyword2'=>$orderInfo['amount'],
+                'keyword3'=>$cashBack,
+                'remark'=>'祝您购物愉快！',
+            );
+            $this ->  sendTemplateMessageCashBack($templateBase,$data);
+        }
+
+        if (strpos(session('returnUrl'), 'groupBuyId') == true) {
+            if(strpos(session('returnUrl'), '?') == true){
+                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
+            }else{
+                $shLinkBase =  session('returnUrl');
+            }
+            $successBackUrl = $shLinkBase. '/shareType/groupBuy';
+        }else{
+            if (strpos(session('returnUrl'), 'html') == true){
+                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html'));
+            }else{
+                $shLinkBase = session('returnUrl');
+            }
+            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyId.'/shareType/groupBuy';
+        }
+        return $successBackUrl;
     }
     //订单列表
     public function orderList(){

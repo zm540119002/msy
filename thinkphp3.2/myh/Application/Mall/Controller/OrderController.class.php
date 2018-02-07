@@ -485,7 +485,6 @@ class OrderController extends AuthUserController {
         }
     }
 
-
     //团购订单处理
     private function groupBuyHandle($modelOrder,$orderInfo){
         $modelGroupBuy = D('GroupBuy');
