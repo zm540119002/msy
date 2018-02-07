@@ -111,7 +111,8 @@ class GoodsModel extends Model {
         $_field = array(
             'g.id','g.no','g.name','g.status','g.category_id_1','g.category_id_2','g.category_id_3','g.param','g.on_off_line',
             'g.sort','g.specification','g.price','g.group_price','g.discount_price','g.special_price','g.inventory','g.main_img','g.detail_img','g.create_time',
-            'g.intro','g.notices','g.usage','g.tag','g.buy_type','g.groupbuy_num'
+            'g.intro','g.notices','g.usage','g.tag','g.buy_type','g.referrer_commission','g.agency_commission',
+            'g.partner_commission','g.cash_back',
         );
         $_join = array(
         );
