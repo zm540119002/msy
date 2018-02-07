@@ -3,6 +3,7 @@
     <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
 </block>
 <block name="content">
+    <input type="hidden" class="groupBuyId" value="{$groupBuyId}"/>
     <article class="msh_product_picture">
         <section class="goods_picture goods_detail_banner" >
             <notempty name="goodsInfo.main_img">
@@ -23,28 +24,25 @@
         <section class="hot_detail hot_countdown_detail f24">
             <ul class="goods_list">
                 <li data-id="{$goodsInfo.id}" data-goods_type="1">
+                    <input type="checkbox" checked="true" class="single_select" style="display: none;">
                     <div class="quantity_purchased">
                         <div>
                             <div class="concessional_rate">
-                                <if condition="$goodsInfo.buy_type eq '1'">
+                                <if condition="$goodsInfo.buy_type eq 2">
+                                    <span>促销价：</span>
+                                    <else />
                                     <span>优惠价：</span>
                                 </if>
-                                <if condition="$goodsInfo.buy_type eq '2'">
-                                    <span>工作室优惠价：</span>
-                                </if>
-                                <if condition="$goodsInfo.buy_type eq '3'">
-                                    <span>微团价：</span>
-                                </if>
                                 <span>￥<price>{$goodsInfo.real_price}</price></span>
-                            </div>
-                            <div>
                                 <span>零售价：</span>
                                 <del>￥{$goodsInfo.price}</del>
                             </div>
-                        </div>
-                        <div class="express_mode">
-                            <span class="current">到店领取</span>
-                            <span>快递邮寄</span>
+                            <if condition="$goodsInfo.buy_type eq 3">
+                                <div>
+                                    <span>返现：</span>
+                                    <span>￥{$goodsInfo.cash_back}</span>
+                                </div>
+                            </if>
                         </div>
                     </div>
                     <div class="quantity_purchased quantity_product_n">
@@ -55,6 +53,31 @@
                             <a href="javascript:void(0);" class="gplus">+</a>
                         </div>
                     </div>
+                    <if condition="$goodsInfo.buy_type eq 3">
+                        <section class="group_members_detail f24">
+                            <div>
+                                <img src="PUBLIC_IMG/common/group_members_banner.png" alt="">
+                            </div>
+                            <div class="group_members">
+                                <div class="group_m_list">
+                                    <empty name="userInfo">
+                                        <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                        <else />
+                                        <img src="{$userInfo.headimgurl}" alt="">
+                                    </empty>
+                                    <span>团长</span>
+                                </div>
+                                <div class="group_m_list">
+                                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                    <span>团员</span>
+                                </div>
+                                <div class="group_m_list">
+                                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                    <span>团员</span>
+                                </div>
+                            </div>
+                        </section>
+                    </if>
                     <div class="goods_star_score">
                         <div class="five_star">
                             <div class="star_img">
@@ -77,31 +100,7 @@
                 {$goodsInfo.param|htmlspecialchars_decode}
             </div>
         </section>
-        <if condition="$goodsInfo.buy_type eq 3">
-            <section class="group_members_detail f24">
-                <div>
-                    <img src="PUBLIC_IMG/common/group_members_banner.png" alt="">
-                </div>
-                <div class="group_members">
-                    <div class="group_m_list">
-                        <empty name="userInfo">
-                            <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
-                            <else />
-                            <img src="{$userInfo.headimgurl}" alt="">
-                        </empty>
-                        <span>团长</span>
-                    </div>
-                    <div class="group_m_list">
-                        <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
-                        <span>团员</span>
-                    </div>
-                    <div class="group_m_list">
-                        <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
-                        <span>团员</span>
-                    </div>
-                </div>
-            </section>
-        </if>
+
         <section class="hot_detail hot_goods_detail f24">
             <h2>商品详情</h2>
             <ul>

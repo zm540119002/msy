@@ -14,7 +14,6 @@ class OrderController extends AuthUserController {
         if(empty($goodsList)){
             $this->ajaxReturn(errorMsg('请求数据不能为空'));
         }
-        $orderType = intval($_POST['orderType'])?:0;
         $groupBuyId = intval($_POST['groupBuyId'])?:0;
         //计算订单总价
         $amount = 0;
@@ -472,15 +471,13 @@ class OrderController extends AuthUserController {
         $field=[ 'g.cash_back','g.id','g.name',
             'wxu.headimgurl','wxu.nickname','o.sn as order_sn'
         ];
-        $join=[ ' left join myh.goods g on g.id = gbd.goods_id',
-            ' left join myh.goods_base gb on g.goods_base_id = gb.id ',
+        $join=[ ' left join goods g on g.id = gbd.foreign_id',
             ' left join wx_user wxu on wxu.openid = gbd.openid',
             ' left join orders o on o.id = gbd.order_id',
         ];
         $templateMessageList = $modelGroupBuyDetail->selectGroupBuyDetail($where,$field,$join);
-        $templateMessageList = $templateMessageList[0];
-        $cashBack = $templateMessageList['cash_back'];//团购完成后返现
-        $goodsName = $templateMessageList['name'];//产品名称
+        $cashBack = $templateMessageList[0]['cash_back'];//团购完成后返现
+        $goodsName = $templateMessageList[0]['name'];//产品名称
         foreach ($templateMessageList as &$item){
             if($item['role'] == 1){
                 $header = $item['nickname'];//团长呢称
@@ -617,20 +614,21 @@ class OrderController extends AuthUserController {
             $this ->  sendTemplateMessageCashBack($templateBase,$data);
         }
 
-        if (strpos(session('returnUrl'), 'groupBuyId') == true) {
-            if(strpos(session('returnUrl'), '?') == true){
-                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
-            }else{
-                $shLinkBase =  session('returnUrl');
-            }
-            $successBackUrl = $shLinkBase. '/shareType/groupBuy';
-        }else{
-            if (strpos(session('returnUrl'), 'html') == true){
-                $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html'));
-            }else{
-                $shLinkBase = session('returnUrl');
-            }
-            $successBackUrl = $shLinkBase. '/groupBuyId/'.$groupBuyId.'/shareType/groupBuy';
+        if($templateMessageList[0]['goods_type'] == 1){
+            $successBackUrl =  U('Goods/goodsInfo',
+                array(
+                    'goodsId'=>$templateMessageList[0]['foreign_id'],
+                    'groupBuyId'=>$templateMessageList[0]['group_buy_id'],
+                    'shareType'=>'groupBuy',
+                ));
+        }
+        if($templateMessageList[0]['goods_type'] == 2){
+            $successBackUrl =  U('Project/projectInfo',
+                array(
+                    'projectId'=>$templateMessageList[0]['foreign_id'],
+                    'groupBuyId'=>$templateMessageList[0]['group_buy_id'],
+                    'shareType'=>'groupBuy',
+                ));
         }
         return $successBackUrl;
     }

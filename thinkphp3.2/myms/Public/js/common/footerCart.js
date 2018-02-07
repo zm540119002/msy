@@ -27,8 +27,6 @@ $(function () {
         if(!postData){
             return false;
         }
-        postData.returnUrl = location.href;
-        postData.orderType = 1;
         postData.groupBuyId = $('.groupBuyId').val();
         if(group_buy_end){ //重新开团
             delete(postData["groupBuyId"]);

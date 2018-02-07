@@ -102,6 +102,9 @@ class GoodsController extends BaseController {
                 }
                 $this -> shareInfo = $this -> weiXinShare($shareInfo);
             }
+            if(isset($_GET['groupBuyId'])&&!empty($_GET['groupBuyId'])){
+                $this -> groupBuyId = $_GET['groupBuyId'];
+            }
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
             $this -> display();
         }
@@ -121,7 +124,7 @@ class GoodsController extends BaseController {
         $field = array(
             'g.id','g.name','g.category_id_1','g.category_id_2','g.category_id_3',
             'g.on_off_line','g.inventory','g.sort','g.main_img','g.price','g.discount_price','g.special_price',
-            'g.group_price','g.buy_type'
+            'g.group_price','g.buy_type','g.cash_back'
         );
         $join = '';
         $order = 'g.id';
@@ -161,10 +164,7 @@ class GoodsController extends BaseController {
             $groupWhere['buy_type'] = array('eq',3);
             $groupWhere = array_merge($_where,$groupWhere);
             $groupGoodsList = page_query($model,$groupWhere,$field,$order,$join,$group,$pageSize,$alias);
-
                 $this -> groupGoodsListMore = $groupGoodsList['data'];
-
-
         }else if($position === 'speGoods' && $page == 1){
             //产品工作室特惠
             $speWhere['buy_type'] = array('eq',2);
