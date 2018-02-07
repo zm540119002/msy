@@ -39,8 +39,8 @@ class PaymentController extends AuthUserController {
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
                     $groupBuy = $groupBuy[0];
-                    $successBackUrl =  U('Goods/goodsInfo',array(
-                        'goodsId'=>$groupBuy['foreign_id'],
+                    $successBackUrl =  U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuy['goods_id'],
                         'groupBuyId'=>$groupBuy['group_buy_id'],
                         'shareType'=>'groupBuy',
                     ));

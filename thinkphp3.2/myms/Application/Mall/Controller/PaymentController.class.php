@@ -30,7 +30,7 @@ class PaymentController extends AuthUserController {
                     'fail_back' => U('payFail'),
                     'success_back' => U('payComplete'),
                     'notify_url'=>C('WX_CONFIG')['CALL_BACK_URL'] .
-                        ($orderInfo['type']==0?'/weixin.order':'/weixin.group_buy'),
+                        ($orderInfo['type'] == 0?'/weixin.order':'/weixin.group_buy'),
                 );
                 if($orderInfo['type']==1){//团购订单
                     $where = array(

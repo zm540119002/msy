@@ -41,7 +41,7 @@
         <ul>
             <volist name="groupGoodsList" id="vo">
                 <li data-buytype="3" data-id="{$vo.id}" data-goods_type='1'>
-                    <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id'],'buyType'=>'3'))}">
+                    <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}">
                         <div class="goods_img">
                             <notempty name="vo.main_img">
                                 <img data-img="" data-isloaded="" src="UPLOADS_IMG/{$vo.main_img}" alt="" class="c_img" />
@@ -122,7 +122,7 @@
     <!--微团购列表-->
     <volist name="groupGoodsListMore" id="vo">
         <li data-buytype="3" data-id="{$vo.id}" data-goods_type='1'>
-            <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id'],'buyType'=>'3'))}">
+            <a href="{:U('Goods/goodsInfo',array('goodsId'=> $vo['id']))}">
                 <div class="goods_img">
                     <notempty name="vo.main_img">
                         <img data-img="" data-isloaded="" src="UPLOADS_IMG/{$vo.main_img}" alt="" class="c_img" />

@@ -65,32 +65,44 @@ class GoodsController extends BaseController {
             $commonImg = explode(',',$commonImg[0]['common_img']);
             $this->commonImg = $commonImg;
             $this -> goodsInfo   = $goodsInfo;
-            $this->cartList = D('Cart') -> cartList();
-            $this->groupBuySn = $_GET['groupBuySn'];
-            $this->shareType = $_GET['shareType'];
-//            $this -> cartInfo = D('Cart') -> getAllCartInfo();
             $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
-            //获取用户基本资料
-//            $this->userInfo = $this -> getWeiXinUserInfo();
-            //微信分享
-            if(intval($goodsInfo['buy_type']) == 3){
-                $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-                    (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-                $currentLink = (is_ssl()?'https://':'http://').$host.$_SERVER['REQUEST_URI'];
-                $backLink = substr($currentLink,0,strrpos($currentLink,'.html'));
-                if(isset($_GET['groupBuySn']) && !empty($_GET['groupBuySn'])){
-                    $baseShareUrl = substr($currentLink,0,strrpos($currentLink,'.groupBuySn'));
-                }else{
-                    $baseShareUrl = $backLink;
-                }
-                if(empty($backLink)){
-                    $backLink = $currentLink;
-                }
-                session('baseShareUrl',$baseShareUrl);
-                $this -> shareInfo = $this -> weiXinShareInfo('微团购',$backLink,$goodsInfo['main_img'],'好友邀请你参加美妍美社微团购，三人成团即享特惠....');
-                $this -> signPackage = $this -> weiXinShareInit();
-                $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
+            //购物车配置开启的项
+            if($this->goodsInfo['buy_type'] == 3){
+                $conf = array(2,8);
+            }else{
+                $conf = array(2,3,4);
             }
+            //微信分享
+            $shareInfo = [];
+            //获取当前url
+            $currentLink = (is_ssl()?'https://':'http://').$this->host.$_SERVER['REQUEST_URI'];
+            //分享的内容
+            $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
+            $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
+            if(isset($_GET['shareType'])&&!empty($_GET['shareType'])){
+                $shareType = $_GET['shareType'];
+                if($shareType == 'referrer'){//推客分享
+                    $conf = array(9,10,11);
+                }
+                if($shareType == 'groupBuy'){//团购分享
+                    $conf = array(12);
+                }
+                if($shareType == 'referrer'){//推客分享
+                    $shareInfo['desc'] = $this->goodsInfo['share_intro'];//分享的简介
+                    $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/shareType'));
+                    $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$this->user['id'];//分享url
+                    $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
+                }
+                if($shareType == 'groupBuy'){//团购分享
+//                    $shareInfo['desc'] = $this->goodsInfo['group_share'];//分享的简介
+                    $shareInfo['desc'] = '好友邀请你参加美妍美社微团购，三人成团即享特惠....';//分享的简介
+                    $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/shareType'));
+                    $shareInfo['shareLink'] = $shLinkBase;//分享url
+                    $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
+                }
+                $this -> shareInfo = $this -> weiXinShare($shareInfo);
+            }
+            $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
             $this -> display();
         }
     }
