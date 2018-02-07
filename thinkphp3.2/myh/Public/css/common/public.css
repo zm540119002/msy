@@ -193,13 +193,19 @@ i{
 }
 .weixin_pay_nav{background: #ff6482;}
 .loading{
-    width:32px;
+    width:100px;
     height:32px;
     position:fixed;
     left:50%;
-    top:88%;
-    margin:0 0 0 -16px;
+    bottom:6%;
+    margin:0 0 0 -50px;
     z-index:16;
+    color:#0066cc;
+}
+.loading img{
+    width:20px;
+    height:20px;
+    vertical-align:-5px;
 }
 /*登录方式*/
 .loginLayer .layui-m-layercont,
