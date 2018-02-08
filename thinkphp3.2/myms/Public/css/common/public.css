@@ -308,7 +308,7 @@ i{
     padding:0 0 0 0.12rem;
 }
 .pink{
-    color:#ff6482;
+    color:#ff7bac;
 }
 .header_title{
     padding:0.15rem 0;
@@ -404,4 +404,19 @@ i{
     border-left:.12em solid #999;
     -webkit-transform:translate(-70%) rotateZ(-133deg);-moz-transform:translate(-70%) rotateZ(-45deg);
     -ms-transform:translate(-70%) rotateZ(-45deg);
+}
+.loading{
+    width:100px;
+    height:32px;
+    position:fixed;
+    left:50%;
+    bottom:6%;
+    margin:0 0 0 -50px;
+    z-index:16;
+    color:#0066cc;
+}
+.loading img{
+    width:20px;
+    height:20px;
+    vertical-align:-5px;
 }
