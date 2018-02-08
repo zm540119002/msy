@@ -87,8 +87,6 @@ class GoodsController extends BaseController {
                     'left join group_buy gb on gb.id = gbd.group_buy_id ',
                 ];
                 $groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
-                $this->groupBuyDetail = $groupBuyDetail;
-              
                 $conf = array(2,27);
                 //判断团购是否已过期
                 if($this->groupBuyDetail[0]['overdue_time'] - time() < 0){
@@ -97,8 +95,9 @@ class GoodsController extends BaseController {
                     $this -> groupBuyEnd = 1;//团购结束标识位
                 }
             }else{
-                $this->groupBuyDetail[0]['headimgurl'] = $wxUser['headimgurl'];
+                $groupBuyDetail[0]['headimgurl'] = $wxUser['headimgurl'];
             }
+            $this->groupBuyDetail = $groupBuyDetail;
             //微信分享
             $shareInfo = [];
             //获取当前url
