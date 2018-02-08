@@ -72,6 +72,32 @@ class GoodsController extends BaseController {
             }else{
                 $conf = array(2,3,4);
             }
+
+            $wxUser = D('WeiXin') -> wxLogin();
+            session('openid',$wxUser['openid']);
+            if(isset($_GET['groupBuyId'])&&!empty($_GET['groupBuyId'])){
+                $this -> groupBuyId = $_GET['groupBuyId'];
+                $model = D('GroupBuyDetail');
+                $_where['gbd.group_buy_id'] =  $this -> groupBuyId ;
+                $_where['gbd.pay_status'] = 2;
+                $field=['wxu.id','wxu.openid','wxu.nickname',
+                    'wxu.headimgurl','gb.overdue_time'
+                ];
+                $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',
+                    'left join group_buy gb on gb.id = gbd.group_buy_id ',
+                ];
+                $groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
+                $this->groupBuyDetail = $groupBuyDetail;
+                $conf = array(2,27);
+                //判断团购是否已过期
+                if($this->groupBuyDetail[0]['overdue_time'] - time() < 0){
+                    $conf = array(20);
+                    $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+                    $this -> groupBuyEnd = 1;//团购结束标识位
+                }
+            }else{
+                $this->groupBuyDetail[0]['headimgurl'] = $wxUser['headimgurl'];
+            }
             //微信分享
             $shareInfo = [];
             //获取当前url
@@ -101,31 +127,6 @@ class GoodsController extends BaseController {
                     $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
                 }
                 $this -> shareInfo = $this -> weiXinShare($shareInfo);
-            }
-            $wxUser = D('WeiXin') -> wxLogin();
-            session('openid',$wxUser['openid']);
-            if(isset($_GET['groupBuyId'])&&!empty($_GET['groupBuyId'])){
-                $this -> groupBuyId = $_GET['groupBuyId'];
-                $model = D('GroupBuyDetail');
-                $_where['gbd.group_buy_id'] =  $this -> groupBuyId ;
-                $_where['gbd.pay_status'] = 2;
-                $field=['wxu.id','wxu.openid','wxu.nickname',
-                    'wxu.headimgurl','gb.overdue_time'
-                ];
-                $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',
-                    'left join group_buy gb on gb.id = gbd.group_buy_id ',
-                ];
-                $groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
-                $this->groupBuyDetail = $groupBuyDetail;
-                $conf = array(2,27);
-                //判断团购是否已过期
-                if($this->groupBuyDetail[0]['overdue_time'] - time() < 0){
-                    $conf = array(20);
-                    $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
-                    $this -> groupBuyEnd = 1;//团购结束标识位
-                }
-            }else{
-                $this->groupBuyDetail[0]['headimgurl'] = $wxUser['headimgurl'];
             }
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
 
