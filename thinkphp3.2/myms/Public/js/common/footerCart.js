@@ -31,7 +31,6 @@ $(function () {
     });
 
     var group_buy_end = $('.groupBuyEnd').val();
-    alert(group_buy_end);
     if(group_buy_end){ //重新开团
         dialog.confirm('此团购已结束，是否重新开团')
     }
