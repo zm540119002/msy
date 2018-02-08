@@ -36,6 +36,7 @@ return array(
         array('address_save'   => '保存',),//24
         array('address_save_order_id'   => '保存并使用',),//25
         array('address_add'   => '新建地址',),//26
+        array('join_group_buy'   => '确定参加微团购并支付',),//27
     ),
     
 );
