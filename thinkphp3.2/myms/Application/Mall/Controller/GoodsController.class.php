@@ -106,6 +106,8 @@ class GoodsController extends BaseController {
                 $this -> groupBuyId = $_GET['groupBuyId'];
             }
             $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+            $wxUser = D('WeiXin') -> wxLogin();
+            session('openid',$wxUser['openid']);
             $this -> display();
         }
     }
