@@ -123,7 +123,7 @@ class GoodsController extends BaseController {
                     $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
                     $this -> groupBuyEnd = 1;//团购结束标识位
                 }
-                $conf = array(27);
+                $conf = array(2,27);
             }else{
                 $this->groupBuyDetail[0]['headimgurl'] = $wxUser['headimgurl'];
             }
