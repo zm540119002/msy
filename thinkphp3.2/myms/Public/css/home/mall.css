@@ -1531,7 +1531,8 @@ background-size:contain;
 }
 .wt_f_l:last-child{
     width:48%;
-    margin:0 0 0 2%;
+    /*margin:0 0 0 2%;*/
+    border-left:6px solid #fff;
 }
 .wt_banner .wt_home{
     width:100%;
