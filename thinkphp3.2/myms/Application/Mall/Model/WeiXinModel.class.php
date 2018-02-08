@@ -103,6 +103,7 @@ class WeiXinModel extends Model {
             $code = isset($_GET['code']);
             if($code){
                 $wxUser = $wechat ->getOauthUserInfo();
+                print_r($wxUser);exit;
                 if(!empty($wxUser)){
                     $where = array(
                         'wxu.openid' => $wxUser['openid'],
