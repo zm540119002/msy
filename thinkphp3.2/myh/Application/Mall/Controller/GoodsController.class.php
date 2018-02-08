@@ -140,17 +140,14 @@ class GoodsController extends BaseController {
                 $model = D('GroupBuyDetail');
                 $_where['gbd.group_buy_id'] =  $this -> groupBuyId ;
                 $_where['gbd.pay_status'] = 2;
-                $field=['wxu.id','wxu.openid','wxu.nickname','wxu.sex','wxu.country','wxu.province',
-                    'wxu.city','wxu.latitude','wxu.longitude','wxu.longitude','wxu.headimgurl','wxu.subscribe',
-                    'gb.overdue_time'
-                ];
+                $field=['wxu.id','wxu.openid',   'wxu.headimgurl','gb.overdue_time' ];
                 $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',
                     'left join group_buy gb on gb.id = gbd.group_buy_id ',
                 ];
                 $groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
-                $this->groupBuyDetail = $groupBuyDetail[0];
+                $this->groupBuyDetail = $groupBuyDetail;
                 //判断团购是否已过期
-                if($this->groupBuyDetail['overdue_time'] - time() < 0){
+                if($this->groupBuyDetail[0]['overdue_time'] - time() < 0){
                     $conf = array(20);
                     $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
                     $this -> groupBuyEnd = 1;//团购结束标识位
