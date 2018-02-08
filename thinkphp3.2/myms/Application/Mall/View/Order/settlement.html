@@ -102,6 +102,7 @@
                     success:function(data){
                         $('#loading').hide();
                         if(data.status==0){
+                            console.log(data.info);
                             dialog.error(data.info);
                         }else if(data.status==1){
                             //去支付
