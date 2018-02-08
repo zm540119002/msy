@@ -23,7 +23,7 @@
                         <p class="f24 commodity_name">{$vo.name}</p>
                         <div class="commodity_price f24">
                             <span class="price">￥<price>{$vo.special_price}</price></span>
-                            <del class="price">￥<price>{$vo.price}</price></del>
+                            <del class="">￥<price>{$vo.price}</price></del>
                             <a href="javascript:void(0);" class="shopping_cart">购物车</a>
                         </div>
                     </a>
@@ -47,16 +47,16 @@
                             <notempty name="vo.main_img">
                                 <img data-img="" data-isloaded="" src="UPLOADS_IMG/{$vo.main_img}" alt="" class="c_img" />
                                 <else />
-                                <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
+                                <img data-img="" data-isloaded="" src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="" class="c_img" />
                             </notempty>
                         </div>
                     </a>
                     <p class="f24 commodity_name">{$vo.name}</p>
                     <div class="commodity_price f24">
-                        <span class="price">￥{$vo.special_price}</span>
-                        <del class="price">￥<price>{$vo.price}</price></del>
-                        节省<span class="price">￥{$vo.cash_back}</span>
-                        <a href="javascript:void(0);" class="shopping_cart wt_cart" data-weituan="1">购物车</a>
+                        <span class="price">￥<price class="price">{$vo.special_price}</price></span>
+                        <del>￥<price>{$vo.price}</price></del>
+                        <span class="pink">节省￥<price>{$vo.cash_back}</price></span>
+                        <a href="javascript:void(0);" class="shopping_cart wt_cart" data-weituan="1">发起微团购</a>
                     </div>
                 </li>
             </volist>
@@ -84,7 +84,7 @@
                     <p class="f24 commodity_name">{$vo.name}</p>
                     <div class="commodity_price f24">
                         <span class="price">￥<price>{$vo.discount_price}</price></span>
-                        <del class="price">￥<price>{$vo.price}</price></del>
+                        <del class="">￥<price>{$vo.price}</price></del>
                         <a href="javascript:void(0);" class="shopping_cart">购物车</a>
                     </div>
                 </a>
@@ -116,7 +116,7 @@
                     <if condition="$vv.buy_type eq 3">
                         <span class="price">￥<price>{$vv.discount_price}</price></span>
                     </if>
-                    <del class="price">￥<price>{$vo.price}</price></del>
+                    <del class="">￥<price>{$vo.price}</price></del>
                     <a href="javascript:void(0);" class="shopping_cart">购物车</a>
                 </div>
             </a>
@@ -132,15 +132,16 @@
                     <notempty name="vo.main_img">
                         <img data-img="" data-isloaded="" src="UPLOADS_IMG/{$vo.main_img}" alt="" class="c_img" />
                         <else />
-                        <img data-img="" data-isloaded="" src="PUBLIC_IMG/home/default/goods_default.png" alt="" class="c_img" />
+                        <img data-img="" data-isloaded="" src="PUBLIC_IMG/common/default/no_pic_1000.jpg" alt="" class="c_img" />
                     </notempty>
                 </div>
             </a>
             <p class="f24 commodity_name">{$vo.name}</p>
             <div class="commodity_price f24">
-                <span class="price">￥{$vo.discount_price}</span>
-                <del class="price">￥<price>{$vo.price}</price></del>
-                <a href="javascript:void(0);" class="shopping_cart" data-weituan="1">购物车</a>
+            <span class="price">￥<price class="price">{$vo.special_price}</price></span>
+            <del>￥<price>{$vo.price}</price></del>
+            <span class="pink">节省￥<price>{$vo.cash_back}</price></span>
+            <a href="javascript:void(0);" class="shopping_cart wt_cart" data-weituan="1">发起微团购</a>
             </div>
         </li>
     </volist>
@@ -161,7 +162,7 @@
                 <p class="f24 commodity_name">{$vo.name}</p>
                 <div class="commodity_price f24">
                     <span class="price">￥<price>{$vo.special_price}</price></span>
-                    <del class="price">￥<price>{$vo.price}</price></del>
+                    <del class="">￥<price>{$vo.price}</price></del>
                 </div>
             </a>
         </li>

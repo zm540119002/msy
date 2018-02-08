@@ -258,7 +258,7 @@ color:#999;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
-    min-height: 0.8rem;
+    min-height:36px;
     color:#555;
 }
 .commodity_price{display:flex;display:-webkit-flex;justify-content:space-between;}
@@ -273,6 +273,17 @@ color:#999;
     width:0.55rem;
     /*height:0.44rem;*/
     display: block;
+}
+.commodity_price .wt_cart{
+    color:#333;
+    width:120px;
+    background-image:url(../../img/common/wt-icon.png);
+    background-repeat: no-repeat;
+    background-size:42px 75px;
+    text-indent:42px;
+}
+.commodity_price del{
+    color:#777;
 }
 .commodity_category_s ul{    
     /*width: 100%;
@@ -1045,6 +1056,21 @@ background-size:contain;
 .layer_group_members .l_g_top{
     position:relative;
     border-bottom:1px solid #d9d9d9;
+    display: -webkit-flex;
+    display:flex;
+    padding:0.12rem 0 0;
+}
+.common_type_banner img{
+    width: 100%;
+    vertical-align: middle;   
+}
+.l_g_top .icon{
+    width:45px;
+    height:38px;
+    background-image:url(../../img/common/wt-icon.png);
+    background-repeat: no-repeat;
+    background-size:42px 75px;
+    background-position:0 -35px;
 }
 .section ~ div{
     top:0;

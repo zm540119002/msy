@@ -26,24 +26,19 @@
                 <li data-id="{$goodsInfo.id}" data-goods_type="1">
                     <input type="checkbox" checked="true" class="single_select" style="display: none;">
                     <div class="quantity_purchased">
-                        <div>
-                            <div class="concessional_rate">
-                                <if condition="$goodsInfo.buy_type eq 2">
-                                    <span>促销价：</span>
-                                    <else />
-                                    <span>优惠价：</span>
-                                </if>
-                                <span>￥<price>{$goodsInfo.real_price}</price></span>
-                                <span>零售价：</span>
-                                <del>￥{$goodsInfo.price}</del>
-                            </div>
-                            <if condition="$goodsInfo.buy_type eq 3">
-                                <div>
-                                    <span>返现：</span>
-                                    <span>￥{$goodsInfo.cash_back}</span>
-                                </div>
+                        <div class="concessional_rate">
+                            <if condition="$goodsInfo.buy_type eq 2">
+                                <span>促销价：￥<price>{$goodsInfo.real_price}</price></span>
+                                <else />
+                                <span >优惠价：￥<price class="pink">{$goodsInfo.real_price}</price></span>
                             </if>
+                            <span>零售价：<del>￥{$goodsInfo.price}</del></span>
                         </div>
+                    </div>
+                    <div>
+                        <if condition="$goodsInfo.buy_type eq 3">
+                            <span class="pink">返现：￥{$goodsInfo.cash_back}</span>
+                        </if>
                     </div>
                     <div class="quantity_purchased quantity_product_n">
                         <span class="num">购买数量</span>
