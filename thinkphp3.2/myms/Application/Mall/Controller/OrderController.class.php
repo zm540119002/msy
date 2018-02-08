@@ -153,7 +153,7 @@ class OrderController extends AuthUserController {
                 'od.order_id' => $orderId,
             );
             $gField = array(
-                'g.name','g.discount_price','g.price','g.special_price','g.group_price','g.main_img','g.buy_type',
+                'g.name','g.discount_price','g.price','g.special_price','g.main_img','g.buy_type',
                 'o.type','o.amount'
             );
             $gJoin = array(

@@ -71,14 +71,10 @@
                         </notempty>
                         <div class="g_order_r">
                             <p>{$vo.name}</p>
-                            <if condition="$vo.buy_type eq 1">
-                                <div class="cost_price"><span>￥</span>{$vo.discount_price}</div>
-                            </if>
                             <if condition="$vo.buy_type eq 2">
                                 <div class="cost_price"><span>￥</span>{$vo.special_price}</div>
-                            </if>
-                            <if condition="$vo.buy_type eq 3">
-                                <div class="cost_price"><span>￥</span>{$vo.group_price}</div>
+                                <else />
+                                <div class="cost_price"><span>￥</span>{$vo.discount_price}</div>
                             </if>
                             <div class="shopping_count order_count">数量：<span>{$vo.num} </span></div>
                         </div>

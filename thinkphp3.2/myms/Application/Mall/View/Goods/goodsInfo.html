@@ -153,8 +153,12 @@
         </section>
     </article>
     <input class="id" name="" type="hidden" value="{$goodsInfo.id}">
-    <input class="type" name="" type="hidden" value="goods">
     <input class="groupBuySn" name="" type="hidden" value="{$groupBuySn}">
+    <div id="areaMask2" class="mask QR_codes_mask"></div>
+    <div class="mcover">
+        <img src="PUBLIC_IMG/common/weixin_share.png" alt="">
+        <a href="javascript:void(0);" class="weixinShare_btn">X</a>
+    </div>
     <include file="Public/weiXinShare" />
 </block>
 <block name="footer">

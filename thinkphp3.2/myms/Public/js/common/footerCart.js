@@ -33,9 +33,35 @@ $(function () {
         }
         generateOrder(postData,groupBuyCallBack);
     });
-    //微信分享提示图
-    $('body').on('click','.forward_weChat',function(){
-        $('.mcover').show();
+    //一键分享转发 微信分享提示图
+    $('body').on('click','.forward',function(){
+        $.ajax({
+            url: MODULE + '/CommonAuthUser/checkLogin',
+            type:'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success:function(data){
+                $('.loading').hide();
+                if(data.status == 0){
+                    if(data.url){
+                        location.href = data.url;
+                    }else{
+                        dialog.error(data.info);
+                    }
+                }else if(data.status == 1){
+                    if(data.info=='isAjax'){
+                        loginDialog(flushPage);
+                    }else{
+                        $('.mcover').show();
+                    }
+                }
+            }
+        });
     });
     //关闭微信分享
     $('.weixinShare_btn').on('click',function(){
