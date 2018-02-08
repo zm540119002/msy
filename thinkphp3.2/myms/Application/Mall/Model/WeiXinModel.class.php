@@ -100,7 +100,6 @@ class WeiXinModel extends Model {
     public function wxLogin(){
         if(isWxBrowser()) {//判断是否为微信浏览器
             $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-            print_r(C('WX_CONFIG')['APPID']);exit;
             $code = isset($_GET['code'])?$_GET['code']:'';
             if($code){
                 $wxUser =$wechat ->getOauthUserInfo();
