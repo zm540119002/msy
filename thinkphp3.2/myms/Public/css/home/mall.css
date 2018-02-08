@@ -856,6 +856,11 @@ float:left;
 /*@media (max-width: 720px) {
 	.mask { position: fixed; }
 }*/
+.QR_codes_mask{
+    position:fixed;
+    z-index:20;
+    display: none;
+}
 .check-btn-total{width:100%;position:fixed;bottom:0;left:0;}
 .check-btn-total a{width:95%;margin:0 auto;display: block;height:0.65rem;background: #ff0000;color:#fff;line-height:.65rem;text-align:center;border-radius:0.05rem;}
 .invoice_info_wrapper{color:#333;padding:0.20rem 0;display:block;width:100%;position:relative;}
