@@ -33,6 +33,10 @@ $(function () {
         }
         generateOrder(postData,groupBuyCallBack);
     });
+    var group_buy_end = "{$groupBuyEnd}";
+    if(group_buy_end){ //重新开团
+        dialog.confirm('此团购已结束，是否重新开团')
+    }
     //一键分享转发 微信分享提示图
     $('body').on('click','.forward',function(){
         $.ajax({
