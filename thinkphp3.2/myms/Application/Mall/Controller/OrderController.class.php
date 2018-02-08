@@ -496,7 +496,7 @@ class OrderController extends AuthUserController {
             if ($returnData['status'] == 0) {
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+                $this->ajaxReturn(errorMsg($modelGroupBuy->getLastSql()));
             }
         }
         //团购成功通知
@@ -527,7 +527,7 @@ class OrderController extends AuthUserController {
             if ($returnData['status'] == 0) {
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderInfo['sn'], $modelGroupBuy->getLastSql());
+                $this->ajaxReturn(errorMsg($modelGroupBuy->getLastSql()));
             }
             //返现退三个
             //更新账户
@@ -538,7 +538,7 @@ class OrderController extends AuthUserController {
             if(!$res){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
+                $this->ajaxReturn(errorMsg($modelWallet->getLastSql()));
             }
             //增加账户记录
             foreach (array_column($templateMessageList,"user_id") as &$useId){
@@ -552,7 +552,7 @@ class OrderController extends AuthUserController {
                 if ($res['status'] == 0) {
                     $modelWallet->rollback();
                     //返回状态给微信服务器
-                    $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
+                    $this->ajaxReturn(errorMsg($modelWalletDetail->getLastSql()));
                 }
             }
             foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn =>&$openid){
@@ -582,7 +582,7 @@ class OrderController extends AuthUserController {
             if(!$res){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderInfo['sn'], $modelWallet->getLastSql());
+                $this->ajaxReturn(errorMsg($modelWallet->getLastSql()));
             }
             //增加账户记录
             $_POST = [];
@@ -595,7 +595,7 @@ class OrderController extends AuthUserController {
             if ($res['status'] == 0) {
                 $modelWallet->rollback();
                 //返回状态给微信服务器
-                $this->errorReturn($orderInfo['sn'], $modelWalletDetail->getLastSql());
+                $this->ajaxReturn(errorMsg($modelWalletDetail->getLastSql()));
             }
             //返现通知
             $templateBase = array(
