@@ -535,7 +535,7 @@ class OrderController extends AuthUserController {
             $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
             $where['status'] = 0;
             $res = $modelWallet->where($where)->setInc('earning_amount',$cashBack);
-            if(!$res){
+            if(false === $res){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
                 $this->ajaxReturn(errorMsg($modelWallet->getLastSql()));
@@ -579,7 +579,7 @@ class OrderController extends AuthUserController {
             $where['user_id'] = $orderInfo['user_id'];
             $where['status'] = 0;
             $res = $modelWallet->where($where)->setInc('earning_amount',$cashBack);
-            if(!$res){
+            if(false === $res){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
                 $this->ajaxReturn(errorMsg($modelWallet->getLastSql()));
