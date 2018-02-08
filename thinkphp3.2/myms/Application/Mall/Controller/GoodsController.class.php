@@ -122,6 +122,7 @@ class GoodsController extends BaseController {
                     $conf = array(20);
                     $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
                     $this -> groupBuyEnd = 1;//团购结束标识位
+                    print_r( $this -> groupBuyEnd);exit;
                 }
                 $conf = array(2,27);
             }else{
