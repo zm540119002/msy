@@ -76,6 +76,7 @@ class GoodsController extends BaseController {
             $wxUser = D('WeiXin') -> wxLogin();
             session('openid',$wxUser['openid']);
             if(isset($_GET['groupBuyId'])&&!empty($_GET['groupBuyId'])){
+                echo 11;exit;
                 $this -> groupBuyId = $_GET['groupBuyId'];
                 $model = D('GroupBuyDetail');
                 $_where['gbd.group_buy_id'] =  $this -> groupBuyId ;
