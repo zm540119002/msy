@@ -455,7 +455,7 @@ class OrderController extends AuthUserController {
         if ($returnData['status'] == 0) {
             $modelGroupBuy->rollback();
             //返回状态给微信服务器
-            $this->errorReturn($orderInfo['sn'], $modelGroupBuyDetail->getLastSql());
+            $this->ajaxReturn(errorMsg($modelGroupBuyDetail->getLastSql()));
         }
         $groupBuyDetail = $modelGroupBuyDetail->selectGroupBuyDetail($where);
         $groupBuyDetail = $groupBuyDetail[0];
