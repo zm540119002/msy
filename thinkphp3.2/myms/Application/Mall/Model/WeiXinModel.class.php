@@ -102,19 +102,21 @@ class WeiXinModel extends Model {
             $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
             $code = isset($_GET['code']);
             if($code){
-                $wxUser =$wechat ->getOauthUserInfo();
-                $where = array(
-                    'wxu.openid' => $wxUser['openid'],
-                );
-                $wxUserDatabase = $this -> selectWeiXinUser($where);
-                if(empty($wxUserDatabase)){
-                    $res = $this -> add($wxUser);
-                    if(!$res){
-                        return errorMsg($this->getError());
+                $wxUser = $wechat ->getOauthUserInfo();
+                if(!empty($wxUser)){
+                    $where = array(
+                        'wxu.openid' => $wxUser['openid'],
+                    );
+                    $wxUserDatabase = $this -> selectWeiXinUser($where);
+                    if(empty($wxUserDatabase)){
+                        $res = $this -> add($wxUser);
+                        if(!$res){
+                            return errorMsg($this->getError());
+                        }
+                    }else{
+                        session('openid',$wxUser['openid']);
+                        return $wxUser;
                     }
-                }else{
-                    session('openid',$wxUser['openid']);
-                    return $wxUser;
                 }
             }
         }
