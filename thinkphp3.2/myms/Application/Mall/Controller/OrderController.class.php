@@ -538,7 +538,7 @@ class OrderController extends AuthUserController {
             if(!$res){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                $this->ajaxReturn(errorMsg(1));
+                $this->ajaxReturn(errorMsg($modelWallet->getLastSql()));
             }
             //增加账户记录
             foreach (array_column($templateMessageList,"user_id") as &$useId){
