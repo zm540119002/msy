@@ -140,7 +140,7 @@ class GoodsController extends BaseController {
                 $model = D('GroupBuyDetail');
                 $_where['gbd.group_buy_id'] =  $this -> groupBuyId ;
                 $_where['gbd.pay_status'] = 2;
-                $field=['wxu.id','wxu.openid',   'wxu.headimgurl','gb.overdue_time' ];
+                $field=['wxu.id','wxu.openid','wxu.headimgurl','gb.overdue_time' ];
                 $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',
                     'left join group_buy gb on gb.id = gbd.group_buy_id ',
                 ];

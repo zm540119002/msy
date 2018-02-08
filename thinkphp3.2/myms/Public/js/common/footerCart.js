@@ -17,6 +17,10 @@ $(function () {
         generateOrder(postData,buyNowCallBack);
     });
 
+    var group_buy_end = $('.groupBuyEnd').val();
+    if(group_buy_end){ //重新开团
+        dialog.confirm('此团购已结束，是否重新开团')
+    }
     //发起微团购并支付
     $('body').on('click','.initiate_group_buy',function(){
         var postData = assemblyData($('ul.goods_list').find('li'));
@@ -24,16 +28,12 @@ $(function () {
             return false;
         }
         postData.groupBuyId = $('.groupBuyId').val();
+        var group_buy_end = $('.groupBuyEnd').val();
         if(group_buy_end){ //重新开团
             delete(postData["groupBuyId"]);
         }
         generateOrder(postData,groupBuyCallBack);
     });
-
-    var group_buy_end = $('.groupBuyEnd').val();
-    if(group_buy_end){ //重新开团
-        dialog.confirm('此团购已结束，是否重新开团')
-    }
 
     //一键分享转发 微信分享提示图
     $('body').on('click','.forward',function(){
