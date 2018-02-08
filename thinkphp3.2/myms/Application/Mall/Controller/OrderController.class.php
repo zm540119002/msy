@@ -499,7 +499,7 @@ class OrderController extends AuthUserController {
                 $this->ajaxReturn(errorMsg($modelGroupBuy->getLastSql()));
             }
         }
-        //团购成功通知
+        //团购成功通知信息
         $templateBase = array(
             'touser'=>$ownOpenid,
             'template_id'=>'u7WmSYx2RJkZb-5_wOqhOCYl5xUKOwM99iEz3ljliyY',
@@ -555,6 +555,8 @@ class OrderController extends AuthUserController {
                     $this->ajaxReturn(errorMsg($modelWalletDetail->getLastSql()));
                 }
             }
+
+
             foreach (array_column($templateMessageList,"openid","order_sn") as $order_sn =>&$openid){
                 //返现通知
                 $templateBase = array(
