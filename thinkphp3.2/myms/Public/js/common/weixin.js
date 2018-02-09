@@ -6,11 +6,12 @@ $(window).load(function() {
     var url = window.location.href;
     var ua = window.navigator.userAgent.toLowerCase();
     var wxUsered = $('.wxUsered').val();
+    console.log(wxUsered);
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
-        if(!wxUsered){
-            if(url.indexOf("code=") <= 0 ) { //code
-                self.location=MODULE + '/WeiXin/checkWxUser/?url='+url;
-            }
+        console.log(1);
+        if(wxUsered == 0){
+            console.log(2);
+            self.location=MODULE + '/WeiXin/checkWxUser/?url='+url;
         }
     }
 });
