@@ -400,7 +400,7 @@ function calculateTotalPrice(){
 function goodsNumReduce(obj) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
-    if(num<1){
+    if(num<2){
         return false;
     }
     _li.find('.gshopping_count').val(--num);
