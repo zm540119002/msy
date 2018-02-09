@@ -41,7 +41,6 @@ function getGoodsList(config) {
 //上拉加载更多
 var loadTrigger = false;//加载触发器
 $(window).on('scroll',function(){
-    console.log(loadTrigger);
     if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
         loadTrigger = false;
         getGoodsList(config);
