@@ -6,11 +6,11 @@ $(window).load(function() {
     var url = window.location.href;
     var ua = window.navigator.userAgent.toLowerCase();
     var wxUsered = $('.wxUsered').val();
-    alert(wxUsered)
+    console.log(wxUsered);
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
-        alert(1)
+        console.log(1);
         if(!wxUsered){
-            alert(2)
+            console.log(2);
             self.location=MODULE + '/WeiXin/checkWxUser/?url='+url;
         }
     }
