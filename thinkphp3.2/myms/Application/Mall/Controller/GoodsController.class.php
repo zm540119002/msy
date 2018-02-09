@@ -73,10 +73,12 @@ class GoodsController extends BaseController {
                 $conf = array(2,3,4);
             }
             $openid = $this ->getOpenid();
+            print_r($openid);
             $where = array(
                 'wxu.openid' => $openid,
             );
             $wxUserDatabase = D('WeiXin') -> selectWeiXinUser($where);
+            print_r($wxUserDatabase);exit;
             if(empty($wxUserDatabase)){
                 $wxUser = D('WeiXin') -> wxLogin();
             }else{
