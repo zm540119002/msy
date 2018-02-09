@@ -329,8 +329,8 @@ class CallBackController extends CommonController{
             unset($where);
             $where['user_id'] = array('in',array_column($templateMessageList,"user_id"));
             $where['status'] = 0;
-            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
-            if(!$res){
+            $res = $modelWallet->where($where)->setInc('earning_amount',$cashBack);
+            if(false === $res){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelWallet->getLastSql());
@@ -374,8 +374,8 @@ class CallBackController extends CommonController{
             unset($where);
             $where['user_id'] =$userId;
             $where['status'] = 0;
-            $res = $modelWallet->where($where)->setInc('amount',$cashBack);
-            if(!$res){
+            $res = $modelWallet->where($where)->setInc('earning_amount',$cashBack);
+            if(false === $res){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
                 $this->errorReturn($orderSn, $modelWallet->getLastSql());
