@@ -13,21 +13,30 @@
                                 <p>三人成团即亨特惠</p>
                             </div>
                         </div>
+                        {$groupBuyDetail[0].headimgurl}
                         <div class="group_members">
                             <div class="group_m_list">
-                                <empty name="userInfo">
+                                <empty name="groupBuyDetail[0].headimgurl">
                                     <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
                                     <else />
-                                    <img src="{$userInfo.headimgurl}" alt="">
+                                    <img src="{$groupBuyDetail[0].headimgurl}" alt="">
                                 </empty>
                                 <span>团长</span>
                             </div>
                             <div class="group_m_list">
-                                <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                <empty name="groupBuyDetail[1].headimgurl">
+                                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                    <else />
+                                    <img src="{$groupBuyDetail[1].headimgurl}" alt="">
+                                </empty>
                                 <span>团员</span>
                             </div>
                             <div class="group_m_list">
-                                <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                <empty name="groupBuyDetail[2].headimgurl">
+                                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                    <else />
+                                    <img src="{$groupBuyDetail[2].headimgurl}" alt="">
+                                </empty>
                                 <span>团员</span>
                             </div>
                         </div>
