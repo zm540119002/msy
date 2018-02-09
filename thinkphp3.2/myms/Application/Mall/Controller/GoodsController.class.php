@@ -72,9 +72,17 @@ class GoodsController extends BaseController {
             }else{
                 $conf = array(2,3,4);
             }
+            $openid = $this ->getOpenid();
+            $where = array(
+                'wxu.openid' => $openid,
+            );
+            $wxUserDatabase = $this -> selectWeiXinUser($where);
+            if(empty($wxUserDatabase)){
+                $wxUser = D('WeiXin') -> wxLogin();
+            }else{
+                $this -> wxUsered = 1;
+            }
 
-            $wxUser = D('WeiXin') -> wxLogin();
-            session('openid',$wxUser['openid']);
             if(isset($_GET['groupBuyId'])&&!empty($_GET['groupBuyId'])){
                 $this -> groupBuyId = $_GET['groupBuyId'];
                 $model = D('GroupBuyDetail');
