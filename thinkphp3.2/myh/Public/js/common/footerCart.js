@@ -402,11 +402,10 @@ function goodsNumReduce(obj) {
     var num = _li.find('.gshopping_count').val();
     if(num<1){
         return false;
-    }else{
-        alert(123);
-        num--;
-        _li.find('.gshopping_count').val(num);
     }
+    alert(123);
+    num--;
+    _li.find('.gshopping_count').val(num);
 }
 
 //单个商品数量自加
