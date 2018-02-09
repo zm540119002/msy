@@ -403,7 +403,7 @@ function goodsNumReduce(obj) {
     if(num<1){
         return false;
     }
-    _li.find('.gshopping_count').val(--num);
+    _li.find('.gshopping_count').val(num--);
 }
 
 //单个商品数量自加
