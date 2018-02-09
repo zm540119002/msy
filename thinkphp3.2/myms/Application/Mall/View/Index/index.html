@@ -15,7 +15,6 @@
             <li class="on"></li>
             <li></li>
             <li></li>
-            <li></li>
         </ul>
     </div>
     <nav class="f24">
@@ -195,6 +194,9 @@
         </div>
     </div>
 </block>
+<block name="backTop">
+    <include file="Public/rightSideBar" />
+</block>
 <block name="script">
     <script type="text/javascript">
         //加载商品列表
@@ -266,19 +268,9 @@
             //滑动轮播
             var textWidth=$('.beauty_title').width()+120;
             $('.beauty_title').css({width:textWidth/2+'px'});
+             //滑动轮播
             var elem = document.getElementById('slider');
-            window.mySwipe = Swipe(elem, {
-                auto: 2500,
-                callback: function(index,element){
-                    //回调函数
-                    $(".position li").eq(index).addClass("on").siblings().removeClass("on");
-                }
-            });
-            $(".position li").click(
-                function () {
-                    mySwipe.slide($(this).index());
-                }
-            );
+                swipe(elem);
             tab_down('.common_top_nav li','.common_contents .common_tablist_wrap','click');
 
         });
