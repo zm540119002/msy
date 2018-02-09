@@ -222,12 +222,20 @@ $('body').on('click','.checkitem',function () {
 });
 
 //滑动轮播
+//滑动轮播
 function swipe(elemObj){
     window.mySwipe = Swipe(elemObj, {
         auto: 2500,
         callback: function(index,element){
+            //回调函数
+            $(".position li").eq(index).addClass("on").siblings().removeClass("on");
         }
     });
+     $(".position li").click(
+        function () {
+            mySwipe.slide($(this).index());
+        }
+    );
 }
 
 //错误提示;默认1.2s

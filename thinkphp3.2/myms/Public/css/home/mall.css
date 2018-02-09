@@ -161,7 +161,9 @@
 .product_main_info .product_price span{color: #ff7bac;margin:0 0.20rem 0 0;font-weight: bold;font-size:0.28rem; }
 .product_main_info .product_price em{font-style:normal;}
 .product_main_info .product_price del{color:#999;}
-#shoppingCartList{margin:1.2rem 0 0;}
+#shoppingCartList{
+    /*margin:1.2rem 0 0;*/
+}
 .shoppingCartList_layer .layui-m-layercont{padding:0;text-align:left;}
 .shoppingCart_form{
     padding-bottom: 0.8rem;
@@ -239,6 +241,7 @@ color:#999;
     text-align: right;
     display: block;
     color: #333;
+    padding:0.10rem 0;
 }
 .edit_goods_type{display: none;position:absolute;right:0.15rem;bottom:0.15rem;}
 .edit_goods_type a{color:#333;}
@@ -1622,6 +1625,17 @@ background-size:contain;
     display: block;
     text-align: center;
     margin:5px 0 0;
+}
+.shopping_header_signs{background: #fff;padding:0.20rem 0;margin:0 0 0.15rem;}
+.shopping_header_signs span{
+    width:0.68rem;
+    height:0.58rem;
+    display:block;
+    background-image:url(../../img/common/purchase_order_icon.png);
+    background-repeat: no-repeat;
+    background-size:37px 212px;
+    background-position:0 -137px;
+    margin:0 auto;
 }
 
 
