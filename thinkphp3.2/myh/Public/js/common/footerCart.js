@@ -403,8 +403,9 @@ function goodsNumReduce(obj) {
     if(num<1){
         return false;
     }else{
-         num--;
-         _li.find('.gshopping_count').val(num);
+        alert(123);
+        num--;
+        _li.find('.gshopping_count').val(num);
     }
 }
 
