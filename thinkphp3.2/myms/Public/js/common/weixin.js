@@ -9,7 +9,7 @@ $(window).load(function() {
     console.log(wxUsered);
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
         console.log(1);
-        if(!wxUsered){
+        if(wxUsered == 0){
             console.log(2);
             self.location=MODULE + '/WeiXin/checkWxUser/?url='+url;
         }
