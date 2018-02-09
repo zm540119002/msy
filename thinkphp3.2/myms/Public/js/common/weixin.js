@@ -8,9 +8,7 @@ $(window).load(function() {
     var wxUsered = $('.wxUsered').val();
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
         if(!wxUsered){
-            if(url.indexOf("code=") <= 0 ) { //code
-                self.location=MODULE + '/WeiXin/checkWxUser/?url='+url;
-            }
+            self.location=MODULE + '/WeiXin/checkWxUser/?url='+url;
         }
     }
 });

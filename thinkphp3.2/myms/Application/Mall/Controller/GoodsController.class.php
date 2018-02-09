@@ -78,8 +78,8 @@ class GoodsController extends BaseController {
             );
             $wxUserDatabase = D('WeiXin') -> selectWeiXinUser($where);
             if(empty($wxUserDatabase)){
-                echo 1;exit;
                 $wxUser = D('WeiXin') -> wxLogin();
+                $this -> wxUsered = 0;
             }else{
                 $this -> wxUsered = 1;
             }
