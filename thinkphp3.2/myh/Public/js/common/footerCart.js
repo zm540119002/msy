@@ -400,12 +400,10 @@ function calculateTotalPrice(){
 function goodsNumReduce(obj) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
-    if(num<1){
+    if(num<2){
         return false;
     }
-    alert(123);
-    num--;
-    _li.find('.gshopping_count').val(num);
+    _li.find('.gshopping_count').val(--num);
 }
 
 //单个商品数量自加
