@@ -76,7 +76,7 @@ class GoodsController extends BaseController {
             $where = array(
                 'wxu.openid' => $openid,
             );
-            $wxUserDatabase = $this -> selectWeiXinUser($where);
+            $wxUserDatabase = D('WeiXin') -> selectWeiXinUser($where);
             if(empty($wxUserDatabase)){
                 $wxUser = D('WeiXin') -> wxLogin();
             }else{
