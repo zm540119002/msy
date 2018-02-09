@@ -5,13 +5,8 @@
 $(window).load(function() {
     var url = window.location.href;
     var ua = window.navigator.userAgent.toLowerCase();
-    var wxUsered = $('.wxUsered').val();
-    console.log(wxUsered);
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){//判断微信浏览器
-        console.log(1);
-        if(wxUsered == 0){
-            alert(1);
-            console.log(2);
+        if(url.indexOf("code=") <= 0 ) { //code
             self.location=MODULE + '/WeiXin/checkWxUser/?url='+url;
         }
     }
