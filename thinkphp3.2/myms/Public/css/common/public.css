@@ -420,3 +420,9 @@ i{
     height:20px;
     vertical-align:-5px;
 }
+.no_data{
+    padding:0 0 0 0.12rem;
+}
+.no_data:first-child{
+    padding-top:0.12rem;
+}
