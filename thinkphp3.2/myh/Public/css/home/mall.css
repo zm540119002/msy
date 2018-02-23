@@ -1377,13 +1377,13 @@ background-size:contain;
 .my_order_nav a span{
     position:absolute;
     top:-14px;
-    right:-10px;
+    /*right:-10px;*/
     color:#ff1d25;
 }
-.pay_order_time{margin:0.08rem 0 0;}
+.pay_order_time{margin:0.08rem 0 0 0.12rem;}
 .pay_order_time i{
-    width: 0.3rem;
-    height:0.3rem;
+    width: 18px;
+    height:18px;
     display: inline-block;
     background:url(../../img/common/pay_time.png);
     background-repeat: no-repeat;
