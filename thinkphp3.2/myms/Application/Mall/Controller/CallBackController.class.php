@@ -175,7 +175,6 @@ class CallBackController extends CommonController{
         $modelWalletDetail->commit();//提交事务
         //返回状态给微信服务器
         $this->successReturn();
-
     }
 
     public function a(){
@@ -466,12 +465,10 @@ class CallBackController extends CommonController{
         //返回状态给微信服务器
         $this->successReturn();
     }
-
     /**
      * @param $data
      * 普通订单支付回调
      */
-  
     private function orderHandle($data){
         $orderSn = $data['out_trade_no'];
         $totalFee = $data['total_fee'];
@@ -508,7 +505,7 @@ class CallBackController extends CommonController{
             'sn' => $orderSn,
         );
         $returnData = $modelOrder->saveOrder($where);
-        if (!$returnData['id']) {
+        if ($returnData['status'] == 0) {
             $modelOrder->rollback();
             //返回状态给微信服务器
             $this->errorReturn($orderSn, $modelOrder->getLastSql());
@@ -544,11 +541,11 @@ class CallBackController extends CommonController{
                     'user_id' =>$userId,
                 );
                 $res = $modelWallet->saveWallet($where);
-            }
-            if ($res['status'] == 0) {
-                $modelOrder->rollback();
-                //返回状态给微信服务器
-                $this->errorReturn($orderSn, $modelWallet->getLastSql());
+                if ($res['status'] == 0) {
+                    $modelOrder->rollback();
+                    //返回状态给微信服务器
+                    $this->errorReturn($orderSn, $modelWallet->getLastSql());
+                }
             }
             //增加账户记录
             $_POST = [];
