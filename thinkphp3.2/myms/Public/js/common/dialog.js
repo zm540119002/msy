@@ -24,14 +24,34 @@ var dialog = {
     },
 
     // 确认弹出层
-    confirm : function(message, callback) {
-        //询问框
-        layer.confirm(message, {
-            btn: ['确定','取消'] //按钮
-        }, function(){
-            $.isFunction(callback) && callback;
-        }, function(){
-        });
+    // confirm : function(message, callback) {
+    //     //询问框
+    //     layer.confirm(message, {
+    //         btn: ['确定','取消'] //按钮
+    //     }, function(){
+    //         $.isFunction(callback) && callback;
+    //     }, function(){
+    //     });
+    // },
+
+    confirm:function(message,url){
+        layer.open({
+            content : message?message:'成功',
+            btn:['确定','取消'],
+            end : function(){
+
+            },
+            yes:function(index){
+                if(url){
+                    if($.isFunction(url)){
+                        url();
+                    }else{
+                        location.href=url;
+                    }
+                }
+                layer.close(index)
+            }
+        })
     },
 
     //消息框

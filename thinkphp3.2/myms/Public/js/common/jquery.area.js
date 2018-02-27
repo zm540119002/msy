@@ -526,59 +526,87 @@ var expressArea, areaCont, areaList = $("#areaList")
 function intProvince() {
 	areaCont = "";
 	for (var i=0; i<province.length; i++) {
-		areaCont += '<li onClick="selectP(' + i + ');">' + province[i] + '</li>';
+		areaCont += '<li onClick="areaObject.selectP(' + i + ');">' + province[i] + '</li>';
 	}
 	areaList.html(areaCont);
 	$("#areaBox").scrollTop(0);
 	$("#backUp").removeAttr("onClick").hide();
 }
 intProvince();
-
-/*选择省份*/
-function selectP(p) {
-	areaCont = "";
-	areaList.html("");
-	for (var j=0; j<city[p].length; j++) {
-		areaCont += '<li onClick="selectC(' + p + ',' + j + ');">' + city[p][j] + '</li>';
-	}
-	areaList.html(areaCont);
-	$("#areaBox").scrollTop(0);
-	//expressArea = province[p] + " > ";
-	expressArea = province[p];
-	$("#backUp").attr("onClick", "intProvince();").show();
-}
-
-/*选择城市*/
-function selectC(p,c) {
-	areaCont = "";
-	for (var k=0; k<district[p][c].length; k++) {
-		areaCont += '<li onClick="selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
-	}
-	areaList.html(areaCont);
-	$("#areaBox").scrollTop(0);
-	var sCity = city[p][c];
-	if (sCity != "省直辖县级行政单位") {
-		if (sCity == "东莞市" || sCity == "中山市" || sCity == "儋州市" || sCity == "嘉峪关市") {
-			expressArea += sCity;
-			$("#expressArea dl dd").html(expressArea);
-			clockArea();
-		} else if (sCity == "市辖区" || sCity == "市辖县" || sCity == "香港岛" || sCity == "九龙半岛" || sCity == "新界" || sCity == "澳门半岛" || sCity == "离岛" || sCity == "无堂区划分区域") {
-			expressArea += "";
-		} else {
-			//expressArea += sCity + " > ";
-			expressArea += sCity;
+var areaObject={
+	provinceCityD:[],
+	/*选择省份*/
+	selectP:function(p) {
+		areaCont = "";
+		areaList.html("");
+		for (var j=0; j<city[p].length; j++) {
+			areaCont += '<li onClick="areaObject.selectC(' + p + ',' + j + ');">' + city[p][j] + '</li>';
 		}
+		areaList.html(areaCont);
+		$("#areaBox").scrollTop(0);
+		//expressArea = province[p] + " > ";
+		expressArea = province[p];
+		$("#backUp").attr("onClick", "intProvince();").show();
+		return expressArea;
+	},
+
+	/*选择城市*/
+	selectC:function(p,c) {
+		areaCont = "";
+		for (var k=0; k<district[p][c].length; k++) {
+			areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
+		}
+		areaList.html(areaCont);
+		$("#areaBox").scrollTop(0);
+		var sCity = city[p][c];
+		if (sCity != "省直辖县级行政单位") {
+			if (sCity == "东莞市" || sCity == "中山市" || sCity == "儋州市" || sCity == "嘉峪关市") {
+				expressArea += sCity;
+				$("#expressArea dl dd").html(expressArea);
+				clockArea();
+			} else if (sCity == "市辖区" || sCity == "市辖县" || sCity == "香港岛" || sCity == "九龙半岛" || sCity == "新界" || sCity == "澳门半岛" || sCity == "离岛" || sCity == "无堂区划分区域") {
+				expressArea += "";
+			} else {
+				//expressArea += sCity + " > ";
+				expressArea += sCity;
+			}
+		}
+		$("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
+		return sCity;
+	},
+
+	/*选择区县*/
+	selectD:function(p,c,d) {
+		var areaKey=$('.detail_address').data('key');
+		clockArea();
+		expressArea += district[p][c][d];
+		$("#expressArea .area_address").html(expressArea);
+		if(!areaObject.provinceCityD.length){
+			
+			for(var i=0;i<arguments.length;i++){
+				areaObject.provinceCityD.push(arguments[i]);
+			}
+			$('.district_address').val(expressArea).data('key',areaObject.provinceCityD);
+			// return false;
+		}
+		areaObject.provinceCityD=[];
+		for(var i=0;i<arguments.length;i++){
+			areaObject.provinceCityD.push(arguments[i]);
+		}
+		$('.district_address').val(expressArea).data('key',areaObject.provinceCityD);
+		return expressArea;
+		
+	},
+	setArea:function(optionArr){
+		var provinceName=areaObject.selectP(optionArr[0]);
+		var cityName=areaObject.selectC(optionArr[0],optionArr[1]);
+		var areaName=areaObject.selectD(optionArr[0],optionArr[1],optionArr[2]);
+		return areaName;
+	},
+	getArea:function(){
+		return areaObject.provinceCityD;
 	}
-	$("#backUp").attr("onClick", "selectP(" + p + ");");
 }
-
-/*选择区县*/
-function selectD(p,c,d) {
-	clockArea();
-	expressArea += district[p][c][d];
-	$("#expressArea .area_address").html(expressArea);
-}
-
 /*关闭省市区选项*/
 function clockArea() {
 	$("#areaMask").fadeOut();
@@ -595,5 +623,18 @@ $(function() {
 	/*关闭省市区选项*/
 	$("#areaMask, #closeArea").click(function() {
 		clockArea();
+	});
+	//加入到jquery对象空间下
+	/*示例：
+	var arr = [14,10,2];
+    $('.detail_address').setArea(arr);
+    $('.detail_address').getArea();
+    */
+	$.fn.extend({
+		getArea:areaObject.getArea,
+        setArea:function (options) {
+            var address = areaObject.setArea(options);
+            $(this).text(address);
+        }
 	});
 });

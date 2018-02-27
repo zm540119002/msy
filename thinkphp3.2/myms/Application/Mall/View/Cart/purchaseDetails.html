@@ -2,31 +2,45 @@
 <section id="areaLayer" class="express-area-box cart" >
     <div class="purchase_goods_module f24 goodsList">
         <ul class="goods_list">
-            <li data-layer-id="{$goodsInfo.id}" data-layer-type="{$type}">
+            <li data-id="{$goodsInfo.id}" data-goods_type="{$goodsInfo.goods_type}">
+                <input type="checkbox" checked="true" class="single_select" style="display: none;">
                 <if condition="$goodsInfo.buy_type eq 3">
-                    <section class="group_members_detail f24">
-                        <div>
-                            <img src="PUBLIC_IMG/common/group_members_banner.png" alt="">
+                    <div class="group_members_detail layer_group_members f24">
+                        <div class="l_g_top">
+                            <span class="icon"></span>
+                            <div>
+                                <p>美妍美社.微团购</p>
+                                <p>三人成团即亨特惠</p>
+                            </div>
                         </div>
+                        {$groupBuyDetail[0].headimgurl}
                         <div class="group_members">
                             <div class="group_m_list">
-                                <empty name="userInfo">
+                                <empty name="groupBuyDetail[0].headimgurl">
                                     <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
                                     <else />
-                                    <img src="{$userInfo.headimgurl}" alt="">
+                                    <img src="{$groupBuyDetail[0].headimgurl}" alt="">
                                 </empty>
                                 <span>团长</span>
                             </div>
                             <div class="group_m_list">
-                                <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                <empty name="groupBuyDetail[1].headimgurl">
+                                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                    <else />
+                                    <img src="{$groupBuyDetail[1].headimgurl}" alt="">
+                                </empty>
                                 <span>团员</span>
                             </div>
                             <div class="group_m_list">
-                                <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                <empty name="groupBuyDetail[2].headimgurl">
+                                    <img src="PUBLIC_IMG/common/default/wechat_header.png" alt="">
+                                    <else />
+                                    <img src="{$groupBuyDetail[2].headimgurl}" alt="">
+                                </empty>
                                 <span>团员</span>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </if>
                 <div class="purchase_goods_detail">
                     <notempty name="goodsInfo.main_img">
@@ -34,13 +48,12 @@
                         <else />
                         <img class="purchase_gs_img" src="PUBLIC_IMG/common/default/purchase40_default.jpg" alt="">
                     </notempty>
-                    <div class="purchase_gs_r">
+                    <div class="purchase_gs_r concessional_rate">
                         <p>{$goodsInfo.name}</p>
                         <div>
                             <span class="real_price">￥<price>{$goodsInfo.real_price}</price></span>
                             <del>￥<price>{$goodsInfo.price}</price></del>
-                        </div>
-                        <a href="javascript:void(0);" class="closeBtn">X</a>
+                        </div>                       
                     </div>
                 </div>
                 <div class="purchase_goods_detail">
@@ -55,6 +68,7 @@
                         <a href="javascript:void(0);" class="gplus">+</a>
                     </div>
                 </div>
+                <a href="javascript:void(0);" class="closeBtn">X</a>
             </li>
         </ul>
     </div>

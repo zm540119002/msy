@@ -35,6 +35,10 @@
             <!--支付并发起微团购-->
             <a href="javascript:void(0);" class="group_btn50 bff1d25 initiate_group_buy"><i class="collect"></i>{$vo.initiate_group_buy}</a>
         </notempty>
+        <notempty name="vo.join_group_buy">
+            <!--支付并发起微团购-->
+            <a href="javascript:void(0);" class="group_btn50 bff1d25 initiate_group_buy"><i class="collect"></i>{$vo.join_group_buy}</a>
+        </notempty>
         <notempty name="vo.determine_order">
             <!--确定订单-->
             <a href="javascript:void(0);" class="group_btn50 bff1d25 determine_order"><i class="collect"></i>{$vo.determine_order}</a>
@@ -62,16 +66,25 @@
             <a href="javascript:void(0);" class="group_btn100 bff1d25 forward"><i class="collect"></i>{$vo.forward_to_friends}</a>
         </notempty>
         <notempty name="vo.group_buy_end">
-            <!--将本页转发微信好友-->
+            <!--团购已结束-->
             <a href="javascript:void(0);" class="group_btn100 bff1d25 group_buy_end  initiate_group_buy"><i class="collect"></i>{$vo.group_buy_end}</a>
         </notempty>
         <notempty name="vo.open_referrer">
-            <!--将本页转发微信好友-->
+            <!--开通分享功能-->
             <a href="javascript:void(0);" class="group_btn100 bff1d25 open_referrer"><i class="collect"></i>{$vo.open_referrer}</a>
         </notempty>
-        <notempty name="vo.info_shopping_cart">
-            <!--将本页转发微信好友-->
-            <a href="javascript:void(0);" class="bff6482 group_btn50  info_shopping_cart"><i class="collect"></i>{$vo.info_shopping_cart}</a>
+        <notempty name="vo.address_save">
+            <!--地址保存-->
+            <a href="javascript:void(0);" class="group_btn100 bff1d25 address_save"><i class="collect"></i>{$vo.address_save}</a>
         </notempty>
+        <notempty name="vo.address_save_order_id">
+            <!--地址保存带orderid-->
+            <a href="javascript:void(0);" class="group_btn100 bff1d25 address_save"><i class="collect"></i>{$vo.address_save_order_id}</a>
+        </notempty>
+        <notempty name="vo.address_add">
+            <!--新建地址-->
+            <a href="javascript:void(0);" class="group_btn100 bff1d25 address_add"><i class="collect"></i>{$vo.address_add}</a>
+        </notempty>
+
     </volist>
 </footer>

@@ -7,6 +7,7 @@ class CartController extends BaseController {
     //购物车信息
     public function index(){
         $modelGoods = D('Goods');
+        $modelProject = D('Project');
         $modelCart = D('Cart');
         //用户信息
         $this->user = AuthUser::check();
@@ -19,24 +20,62 @@ class CartController extends BaseController {
             if(!empty($cookieCart)){
                 $modelCart->addCartByCookie($cartList,$cookieCart,$this->user['id']);
             }
-            $where = array(
+            //查询产品列表
+            $gWhere = array(
                 'ct.user_id' => $this->user['id'],
-                'ct.type' => 1,
+                'ct.goods_type' => 1,
             );
-            $field = array(
+            $gField = array(
                 'g.name','g.discount_price','g.price','g.special_price','g.group_price','g.main_img','g.buy_type'
             );
-            $join = array(
+            $gJoin = array(
                 'left join goods g on g.id = ct.foreign_id ',
             );
-            $this->cartList = $modelCart->selectCart($where,$field,$join);
+            $gCartList = $modelCart->selectCart($gWhere,$gField,$gJoin);
+            //查询项目列表
+            $pWhere = array(
+                'ct.user_id' => $this->user['id'],
+                'ct.goods_type' => 2,
+            );
+            $pField = array(
+                'p.name','p.discount_price','p.price','p.group_price','p.main_img',
+            );
+            $pJoin = array(
+                'left join project p on p.id = ct.foreign_id ',
+            );
+            $pCartList = $modelCart->selectCart($pWhere,$pField,$pJoin);
+            //合并列表
+            $this -> cartList = array_merge($gCartList,$pCartList);
         }else{//未登录
             if(!empty($cookieCart)){
-                $where = array(
-                    'g.id' => array('in',array_column($cookieCart,'foreign_id')),
-                );
-                $goodsList = $modelGoods->selectGoods($where);
-                $this->cartList = GoodsNumMergeById($cookieCart,$goodsList);
+                $gCartList =  [];
+                $pCartList =  [];
+                foreach ($cookieCart as $k => &$v){
+                   if($v['goods_type'] == 1){
+                       $gCartList[$k]['num'] = $v['num'];
+                       $gCartList[$k]['foreign_id'] = $v['foreign_id'];
+                   }
+                    if($v['goods_type'] == 2){
+                        $pCartList[$k]['num'] = $v['num'];
+                        $pCartList[$k]['foreign_id'] = $v['foreign_id'];
+                    }
+                }
+                $goodsList = [];
+                $projectList = [];
+                if(!empty($gCartList)){
+                    $gWhere = array(
+                        'g.id' => array('in',array_column($gCartList,'foreign_id')),
+                    );
+                    $goodsList = $modelGoods->selectGoods($gWhere);
+                }
+                if(!empty($pCartList)){
+                    $pWhere = array(
+                        'g.id' => array('in',array_column($pCartList,'foreign_id')),
+                    );
+                    $projectList = $modelProject->selectProject($pWhere);
+                }
+                $cartList = array_merge($goodsList,$projectList);
+                $this -> cartList = GoodsNumMergeById($cookieCart,$cartList);
             }
         }
         //购物车配置开启的项
@@ -45,128 +84,115 @@ class CartController extends BaseController {
     }
     //加入购物车
     public function addCart(){
-        if(IS_POST){
-            if(isset($_POST['goodsId']) && !empty($_POST['goodsId'])){//商品添加
-                $foreignId = intval($_POST['goodsId']);
-                $type = 1;
-            }
-            if(isset($_POST['projectId']) && !empty($_POST['projectId'])){//项目添加
-                $foreignId = intval($_POST['projectId']);
-                $type = 2;
-            }
-            $num = I('post.num',0,int);
-            if(isset($_POST['foreignId']) && !empty($_POST['foreignId'])){//购物车修改数量
-                $foreignId = intval($_POST['foreignId']);
-                $type =  intval($_POST['type']);
-            }
-            //已登录
-            $this -> user =  AuthUser::check();
-            if( $this -> user['id']){
-                $model = D('Cart');
-                $cartInfo = $model -> getCartInfoByForeignId($this->user['id'],$foreignId,$type);
-                if(empty($cartInfo)){//添加
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        //用户信息
+        $this->user = AuthUser::check();
+        if($this->user['id']){//已登录
+            $modelCart = D('Cart');
+            $where = array(
+                'ct.user_id' => $this->user['id'],
+            );
+            $carts = $modelCart->selectCart($where);
+            $goodsList = $_POST['goodsList'];
+            foreach ($goodsList as $goods){
+                //假定没找到
+                $find = false;
+                foreach ($carts as $cart){
+                    if($goods['foreign_id'] == $cart['foreign_id'] && $goods['goods_type'] == $cart['goods_type'] ){//找到了，则更新记录
+                        $find = true;
+                        $where = array(
+                            'user_id' => $this->user['id'],
+                            'id' => $cart['id'],
+                            'foreign_id' => $cart['foreign_id'],
+                            'goods_type' => $cart['goods_type'],
+                        );
+                        $_POST['num'] = $goods['num'] + $cart['num'];
+                        $res = $modelCart->saveCart($where);
+                        if($res['status']== 0){
+                            break 2;
+                        }
+                    }
+                }
+                if(!$find){//如果没找到，则新增
                     $_POST = [];
                     $_POST['user_id'] = $this->user['id'];
-                    $_POST['foreign_id'] = $foreignId;
-                    $_POST['num'] = $num;
+                    $_POST['foreign_id'] = $goods['foreign_id'];
+                    $_POST['num'] = $goods['num'];
                     $_POST['create_time'] = time();
-                    $res = $model->addCart();
-                }else{//修改
-                    if(isset($_POST['num22'])&& intval($_POST['num22'])){
-                        $num = intval($_POST['num11']);
-                    }else{
-                        $_POST['num'] = $cartInfo['num'] + $num;
-                    }
-                    $where = array(
-                        'user_id' => $this->user['id'],
-                        'id' => $cartInfo['id'],
-                        'foreign_id' => $cartInfo['foreign_id'],
-                    );
-                    $res = $model->saveCart($where);
-                }
-                $this->ajaxReturn(successMsg('加入购物车成功'));
-            }else{ //没有登录
-                if(isset($_POST['foreignId']) && intval($_POST['foreignId'])){//修改
-                    $curCartArray = unserialize(cookie('cart'));
-                    foreach ($curCartArray as $k =>$v){
-                        if(intval($v['foreign_id']) == $foreignId && intval($v['type']) == $type){
-                            $curCartArray[$k]['num'] = $_POST['num'];
-                            cookie('cart',serialize($curCartArray));
-                            $this -> ajaxReturn(successMsg('修改数量成功'));
-                        }
-                    }
-                }else{//添加
-                    $curCartArray = unserialize(cookie('cart'));
-                    if($curCartArray==""){
-                        $cartInfo[0]["foreign_id"]=$foreignId;//商品id保存到二维数组中
-                        $cartInfo[0]["num"]=$num;//商品数量保存到二维数组中
-                        $cartInfo[0]["type"]=$type;//商品数量保存到二维数组中
-                        cookie('cart',serialize($cartInfo));
-                    }else {
-                        //返回数组键名倒序取最大
-                        $ar_keys = array_keys($curCartArray);
-                        $len = count($ar_keys);
-                        $maxArrayKeyId = $ar_keys[$len - 1] + 1;
-                        $is_exist=$this->isExist($foreignId,$num,$curCartArray,$type);
-                        if($is_exist==false){
-                            $curCartArray[$maxArrayKeyId]["foreign_id"] = $foreignId;
-                            $curCartArray[$maxArrayKeyId]["num"] = $num;
-                            $curCartArray[$maxArrayKeyId]["type"] = $type;
-                            cookie('cart',serialize($curCartArray));
-                        }else{
-                            $arr_exist=explode("/",$is_exist);
-                            $id=$arr_exist[0];
-                            $num=$arr_exist[1];
-                            $curCartArray[$id]["num"]=$num;
-                            cookie('cart',serialize($curCartArray));
-                        }
+                    $res = $modelCart->addCart();
+                    if($res['status']== 0){
+                        break;
                     }
                 }
-                $this -> ajaxReturn(successMsg('加入购物车成功'));
             }
+        }else{//未登录
+            cookie('cart',serialize(goodsMergeById(unserialize(cookie('cart')),$_POST['goodsList'])));
         }
+        $this->ajaxReturn(successMsg('添加成功'));
     }
-
-
-    //判断购物车是否存在相同商品
-    public function isExist($id,$num,$array,$type)
-    {
-        $isExist=false;
-        foreach($array as $key1=>$value)
-        {
-            if(intval($value['foreign_id']) == $id && intval($value['type'])==$type){
-                $num=$value["num"]+$num;
-                $isExist=$key1."/".$num;
+    //增减单个商品
+    public function replaceOneGoodsToCart(){
+        if(!IS_POST){
+            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+        }
+        //用户信息
+        $this->user = AuthUser::check();
+        $goods = $_POST;
+        if(empty($goods)){
+            $this->ajaxReturn(errorMsg('请求的数据不能为空'));
+        }
+        if($this->user['id']){//已登录
+            $modelCart = D('Cart');
+            $where = array(
+                'user_id' => $this->user['id'],
+                'foreign_id' => $goods['foreign_id'],
+                'goods_type' => $goods['goods_type'],
+            );
+            $res = $modelCart->saveCart($where);
+            if($res['status']== 0){
+                $this->ajaxReturn(errorMsg($res['info']));
             }
+        }else{//未登录
+            $cart = unserialize(cookie('cart'));
+            foreach ($cart as &$value){
+                if($value['foreign_id'] == $goods['foreign_id'] && $value['goods_type'] == $goods['goods_type']){
+                    $value['num'] = $goods['num'];
+                }
+            }
+            cookie('cart',serialize($cart));
         }
-        return $isExist;
+        $this->ajaxReturn(successMsg('添加成功'));
     }
-
-
     //删除购物车信息
     public function delCart(){
         if(!IS_POST){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
         $this->user = AuthUser::check();
+        $goodsList = $_POST['goodsList'];
+        if(empty($goodsList)){
+            $this->ajaxReturn(errorMsg('请求的数据不能为空'));
+        }
         //已登录
         if( $this->user['id']){
-            if(isset($_POST['foreign_ids']) && $_POST['foreign_ids']){
+            foreach ($goodsList as $k=> &$v){
                 $where['user_id']  = $this->user['id'];
-                $where['foreign_id']  = array('in',$_POST['foreign_ids']);
+                $where['foreign_id']  = $v['foreign_id'];
+                $where['goods_type']  = $v['goods_type'];
                 $result = D('cart') -> where($where)->delete();
+                if(!$result){
+                    $this -> ajaxReturn(errorMsg('删除失败'));
+                }
+                $this -> ajaxReturn(successMsg('删除成功'));
             }
-            if(!$result){
-                $this -> ajaxReturn(errorMsg('删除失败'));
-            }
-            $this -> ajaxReturn(successMsg('删除成功'));
         }
         //未登录
         $cart = unserialize(cookie('cart'));
-        $foreignIds =  $_POST['foreign_ids'];
         foreach ($cart as $key => &$value){
-            foreach ($foreignIds as $kk => &$vv)
-                if($value['foreign_id'] == $vv){
+            foreach ($goodsList as $kk => &$vv)
+                if($value['foreign_id'] == $vv['foreign_id'] && $value['goods_type'] == $vv['goods_type'] ){
                     unset($cart[$key]);
                 }
         }

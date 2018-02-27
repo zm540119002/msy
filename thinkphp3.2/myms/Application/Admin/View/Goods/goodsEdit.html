@@ -46,11 +46,7 @@
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="name" value="{$goodsInfo.name}">
                             <input type="hidden" name="goodsId" value="{$goodsInfo.id}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品零售价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <span class="dotted_bottom_gray dotted_bottom_c">商品零售价：</span>
                             <input style="width: 200px; " class="inputboxadmin" name="price" value="{$goodsInfo.price}">
                         </td>
                     </tr>
@@ -91,20 +87,28 @@
                         </td>
                     </tr>
                     <tr class="radioTypeOption">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>团购价：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>商品优惠价：</td>
+                        <td class=dotted_bottom_gray width="25%" align=left>
+                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.discount_price}">
+                            <span class="dotted_bottom_gray dotted_bottom_c">团购返现：</span>
+                            <input style="width: 200px;" class="inputboxadmin" name="cash_back" value="{$goodsInfo.cash_back}">
+                        </td>
+                    </tr>
+                    <tr class="commission">
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>推客收益：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.group_price}">
+                            <input style="width: 200px;" class="inputboxadmin" name="referrer_commission" value="{$goodsInfo.referrer_commission}">
+                            <span class="dotted_bottom_gray dotted_bottom_c">代理收益：</span>
+                            <input style="width: 200px;" class="inputboxadmin" name="agency_commission" value="{$goodsInfo.agency_commission}">
+                            <span class="dotted_bottom_gray dotted_bottom_c">合伙人收益：</span>
+                            <input style="width: 200px;" class="inputboxadmin" name="partner_commission" value="{$goodsInfo.partner_commission}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 200px;" class="inputboxadmin" name="specification" value="{$goodsInfo.specification}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>商品库存：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <span class="dotted_bottom_gray dotted_bottom_c">商品库存：</span>
                             <input style="width: 200px; " class=inputboxadmin name="inventory"  value="{$goodsInfo.inventory}" >
                         </td>
                     </tr>
@@ -194,21 +198,21 @@
     <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
-
             //单选商品类型
             $('.radioItem').change(function(){  
                  if($(this).is(":checked")){
-                     var radioValue=$(this).val();  
+                     var radioValue=$(this).data('buy_type');  
+                     console.log(radioValue);
                      switch(radioValue){
-                        case '普通产品':
+                        case 1:
                         $('.radioTypeOption').hide();
                         $('.radioTypeOption:first').show();
                         break;
-                        case '促销产品':
+                        case 2:
                         $('.radioTypeOption').hide();
                         $('.radioTypeOption:eq(1)').show();
                         break;
-                        case '微团购产品':
+                        case 3:
                         $('.radioTypeOption').hide();
                         $('.radioTypeOption:last').show();
                         break;

@@ -10,9 +10,7 @@
     </section>
     <article class="f24">
         <section class="delivery_address">
-            <input type="hidden" value="{$cartIds}" class="cartIds">
-            <input type="hidden" value="{$goodsId}" class="goodsId">
-            <input type="hidden" value="{$projectId}" class="projectId">
+            <input type="hidden" value="{$orderId}" class="orderid">
             <volist name="addressList" id="vo">
             <div class="item_addr">
                 <div class="ia-l"></div>
@@ -34,10 +32,10 @@
             </div>
             </volist>
         </section>
-        <div class="pay-btn">
-            <a href="javascript:void(0);" class="btn1 tip-btn addAddress"><i class="plus">+</i>新建地址</a>
-        </div>
     </article>
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
 </block>
 <block name="js-customize">
 
@@ -58,57 +56,29 @@
             //跳转到地址列表
             $('.item_info').click(function () {
                var addressId = $(this).find('.addressId').val();
-               var cartIds = $(this).parents().find('.cartIds').val();
-               var goodsId = $(this).parents().find('.goodsId').val();
-                var projectId = $(this).parents().find('.projectId').val();
-                console.log(projectId);
-                if(cartIds){
-                   location.href = MODULE + '/Order/addOrder/cartIds/'+cartIds+'/addressId/'+addressId;
-                }
-                if(goodsId){
-                    location.href = MODULE + '/Order/addOrder/goodsId/'+goodsId+'/addressId/'+addressId;
-                }
-                if(projectId){
-                    location.href = MODULE + '/Order/addOrder/projectId/'+projectId+'/addressId/'+addressId;
+               var orderId = $(this).parents().find('.orderid').val();
+                if(orderId){
+                   location.href = MODULE + '/Order/orderDetail/orderId/'+orderId+'/addressId/'+addressId;
                 }
             });
 
             //新增地址
-            $('.addAddress').click(function () {
-                var cartIds = $(this).parents().find('.cartIds').val();
-                var goodsId = $(this).parents().find('.goodsId').val();
-                var projectId = $(this).parents().find('.projectId').val();
+            $('.address_add').click(function () {
+                var orderId = $(this).parents().find('.orderid').val();
                 var url = CONTROLLER + '/addAddress';
-                console.log(projectId);
-                if(cartIds){
-                    url += '/cartIds/'+cartIds;
-                }
-                if(goodsId){
-                    url += '/goodsId/'+goodsId;
-                }
-                if(projectId){
-                    url += '/projectId/'+projectId;
+                if(orderId){
+                    url += '/orderId/'+orderId;
                 }
                 location.href = url;
             });
-
 
             //修改地址
            $('body').on('click','.editAddress',function () {
                var addressId = $(this).parent().find('.addressId').val();
                var url = CONTROLLER + '/addAddress/addressId/'+addressId;
-               var cartIds = $(this).parents().find('.cartIds').val();
-               var goodsId = $(this).parents().find('.goodsId').val();
-               var projectId = $(this).parents().find('.projectId').val();
-               if(cartIds){
-                   url += '/cartIds/'+cartIds;
-               }
-               if(goodsId){
-                   url += '/goodsId/'+goodsId;
-               }
-               console.log(projectId);
-               if(projectId){
-                   url += '/projectId/'+projectId;
+               var orderId = $(this).parents().find('.orderid').val();
+               if(orderId){
+                   url += '/orderId/'+orderId;
                }
                location.href = url;
            });

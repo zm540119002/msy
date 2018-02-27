@@ -6,6 +6,12 @@ use web\all\Controller\CommonController;
 
 define("TOKEN", "meishangyun");
 class WeiXinController extends CommonController {
+    public function checkWxUser(){
+        $url = $_GET['url'];
+        $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $wechat -> getOauthRedirect($url,"wxbase");
+    }
+
     //启用并设置服务器配置后，用户发给公众号的消息以及开发者需要的事件推送，将被微信转发到该URL中
     public function valid()
     {

@@ -41,7 +41,6 @@ class GoodsController extends BaseController {
            $this -> ajaxReturn(errorMsg('非异步请求'));
        }
         $id = I('post.id',0,'int');
-        $this -> type  = 'goods';
         $goodsInfo = D('Goods') -> getGoodsInfoByGoodsId($id);
         $this->assign('goodsInfo',$goodsInfo);
         $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
@@ -66,32 +65,71 @@ class GoodsController extends BaseController {
             $commonImg = explode(',',$commonImg[0]['common_img']);
             $this->commonImg = $commonImg;
             $this -> goodsInfo   = $goodsInfo;
-            $this->cartList = D('Cart') -> cartList();
-            $this->groupBuySn = $_GET['groupBuySn'];
-            $this->shareType = $_GET['shareType'];
-//            $this -> cartInfo = D('Cart') -> getAllCartInfo();
-            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,24,4));
-            //获取用户基本资料
-//            $this->userInfo = $this -> getWeiXinUserInfo();
-            //微信分享
-            if(intval($goodsInfo['buy_type']) == 3){
-                $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-                    (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-                $currentLink = (is_ssl()?'https://':'http://').$host.$_SERVER['REQUEST_URI'];
-                $backLink = substr($currentLink,0,strrpos($currentLink,'.html'));
-                if(isset($_GET['groupBuySn']) && !empty($_GET['groupBuySn'])){
-                    $baseShareUrl = substr($currentLink,0,strrpos($currentLink,'.groupBuySn'));
-                }else{
-                    $baseShareUrl = $backLink;
-                }
-                if(empty($backLink)){
-                    $backLink = $currentLink;
-                }
-                session('baseShareUrl',$baseShareUrl);
-                $this -> shareInfo = $this -> weiXinShareInfo('微团购',$backLink,$goodsInfo['main_img'],'好友邀请你参加美妍美社微团购，三人成团即享特惠....');
-                $this -> signPackage = $this -> weiXinShareInit();
-                $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,8));
+            $this->unlockingFooterCart = unlockingFooterCartConfig(array(2,3,4));
+            //购物车配置开启的项
+            if($this->goodsInfo['buy_type'] == 3){
+                $conf = array(2,8);
+            }else{
+                $conf = array(2,3,4);
             }
+
+            $wxUser = D('WeiXin') -> wxLogin();
+            session('openid',$wxUser['openid']);
+            if(isset($_GET['groupBuyId'])&&!empty($_GET['groupBuyId'])){
+                $this -> groupBuyId = $_GET['groupBuyId'];
+                $model = D('GroupBuyDetail');
+                $_where['gbd.group_buy_id'] =  $this -> groupBuyId ;
+                $_where['gbd.pay_status'] = 2;
+                $field=['wxu.id','wxu.openid','wxu.nickname',
+                    'wxu.headimgurl','gb.overdue_time'
+                ];
+                $join=[ 'left join wx_user wxu on wxu.openid = gbd.openid ',
+                    'left join group_buy gb on gb.id = gbd.group_buy_id ',
+                ];
+                $groupBuyDetail = $model->selectGroupBuyDetail($_where,$field,$join);
+                $conf = array(2,27);
+                //判断团购是否已过期
+                if($groupBuyDetail[0]['overdue_time'] - time() < 0){
+                    $conf = array(20);
+                    $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+                    $this -> groupBuyEnd = 1;//团购结束标识位
+                }
+            }else{
+                $groupBuyDetail[0]['headimgurl'] = $wxUser['headimgurl'];
+            }
+            $this->groupBuyDetail = $groupBuyDetail;
+            //微信分享
+            $shareInfo = [];
+            //获取当前url
+            $currentLink = (is_ssl()?'https://':'http://').$this->host.$_SERVER['REQUEST_URI'];
+            //分享的内容
+            $shareInfo['title'] = $this->goodsInfo['name'];//分享的标题
+            $shareInfo['shareImgUrl'] = $this->goodsInfo['main_img'];//分享的图片
+            if(isset($_GET['shareType'])&&!empty($_GET['shareType'])){
+                $shareType = $_GET['shareType'];
+                if($shareType == 'referrer'){//推客分享
+                    $conf = array(9,10,11);
+                }
+                if($shareType == 'groupBuy'){//团购分享
+                    $conf = array(12);
+                }
+                if($shareType == 'referrer'){//推客分享
+                    $shareInfo['desc'] = $this->goodsInfo['share_intro'];//分享的简介
+                    $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/shareType'));
+                    $shareInfo['shareLink'] = $shLinkBase.'/userId/'.$this->user['id'];//分享url
+                    $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
+                }
+                if($shareType == 'groupBuy'){//团购分享
+//                    $shareInfo['desc'] = $this->goodsInfo['group_share'];//分享的简介
+                    $shareInfo['desc'] = '好友邀请你参加美妍美社微团购，三人成团即享特惠....';//分享的简介
+                    $shLinkBase = substr($currentLink,0,strrpos($currentLink,'/shareType'));
+                    $shareInfo['shareLink'] = $shLinkBase;//分享url
+                    $shareInfo['backUrl'] = $currentLink;//分享完跳转的url
+                }
+                $this -> shareInfo = $this -> weiXinShare($shareInfo);
+            }
+            $this->unlockingFooterCart = unlockingFooterCartConfig($conf);
+
             $this -> display();
         }
     }
@@ -110,7 +148,7 @@ class GoodsController extends BaseController {
         $field = array(
             'g.id','g.name','g.category_id_1','g.category_id_2','g.category_id_3',
             'g.on_off_line','g.inventory','g.sort','g.main_img','g.price','g.discount_price','g.special_price',
-            'g.group_price','g.buy_type'
+            'g.buy_type','g.cash_back'
         );
         $join = '';
         $order = 'g.id';
@@ -150,19 +188,13 @@ class GoodsController extends BaseController {
             $groupWhere['buy_type'] = array('eq',3);
             $groupWhere = array_merge($_where,$groupWhere);
             $groupGoodsList = page_query($model,$groupWhere,$field,$order,$join,$group,$pageSize,$alias);
-            if($page == 1){
-                $this -> groupGoodsListInit = $groupGoodsList['data'];
-            }
-            if($page > 1){
                 $this -> groupGoodsListMore = $groupGoodsList['data'];
-            }
-
         }else if($position === 'speGoods' && $page == 1){
             //产品工作室特惠
             $speWhere['buy_type'] = array('eq',2);
             $speWhere = array_merge($_where,$speWhere);
             $speGoodsList = page_query($model,$speWhere,$field,$order,$join,$group,$pageSize,$alias);
-            $this -> speGoodsList = $speGoodsList['data'];
+            $this -> speGoodsListMore = $speGoodsList['data'];
         }
         else{
             if($page>1){

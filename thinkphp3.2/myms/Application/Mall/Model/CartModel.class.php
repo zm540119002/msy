@@ -87,7 +87,7 @@ class CartModel extends Model {
             'ct.status' => 0,
         );
         $_field = array(
-            'ct.id','ct.user_id','ct.type','ct.status','ct.foreign_id','ct.num','ct.create_time',
+            'ct.id','ct.user_id','ct.goods_type','ct.status','ct.foreign_id','ct.num','ct.create_time',
         );
         $_join = array(
         );

@@ -15,8 +15,7 @@
     <section class="section-address bg-eae pt-5">
         <form action='#' method="post" class="bg-fff form">
             <input type="hidden" name="addressId" value="{$address.id}">
-            <input type="hidden" name="goodsId" value="{$goodsId}">
-            <input type="hidden" name="cartIds" value="{$cartIds}">
+            <input type="hidden" name="orderId" value="{$orderId}">
             <div class="form-group box-flex clearfixed">
                 <label class="form-label">收件人：</label>
                 <input type="text" name="consignee" class="input-flex recipient_name" placeholder="请输入姓名" value="{$address.consignee}">
@@ -25,17 +24,15 @@
                 <label class="form-label">联系电话：</label>
                 <input type="text" name="mobile" class="input-flex recipient_mobile" placeholder="请输入收件人电话" value="{$address.mobile}">
             </div>
-
             <div class="express-area ">
                 <a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
                     <label class="form-label">选择地区：</label>
                     <empty name="address">
                         <div class="area_address">省 &gt; 市 &gt; 区/县</div>
-                        <input type="hidden" value="" class="detail_address">
                         <else />
                         <div class="area_address">{$address.district}</div>
                     </empty>
-
+                    <input type="hidden" value="{$address.district}" class="district_address">
                 </a>
             </div>
             <div class="form-group box-flex">
@@ -52,12 +49,8 @@
                     <div class="myswitch"  data-off="{$address.is_default}"></div>
                 </div>
             </if>
-
         </form>
     </section>
-    <div class="check-btn-total">
-        <a href="javascript:;" class="f24 submit">保存并使用</a>
-    </div>
     <!--选择地区弹层-->
     <section id="areaLayer" class="express-area-box" style="display:none;">
         <header>
@@ -72,7 +65,10 @@
         </article>
     </section>
     <!--遮罩层-->
-    <div id="areaMask" class="mask address_mask"></div>
+    <div id="areaMask" class="address_mask"></div>
+</block>
+<block name="footer">
+    <include file="Cart/footerCartMenu" />
 </block>
 <block name="js-customize">
     <script src="PUBLIC_JS/common/jquery.area.js"></script>
@@ -91,13 +87,12 @@
             }
             });
 
-            $('body').on('click','.submit',function () {
+            $('body').on('click','.address_save',function () {
                 var content='';
                 var recipientName=$('.recipient_name').val();
                 var recipientMobile=$('.recipient_mobile').val();
-                var areaAddress=$('.detail_address').val();
+                var areaAddress=$('.district_address').val();
                 var detailAddress=$('.recipient_detail_address').val();
-
                 if(!recipientName){
                     content='请填写收货人姓名';
                 }else if(!register.phoneCheck(recipientMobile)){
@@ -107,28 +102,21 @@
                 }else if(!detailAddress){
                     content='请填写详细地址';
                 }
-
                 if(content){
                     dialog.error(content);
                     return false;
                 }
-
                 //添加或修改地址
                 var is_default      = $('.myswitch').attr('data-off');
-                var area_address    = $('.area_address').text();
                 var postData        = $(".form").serializeObject();
-                postData.district   = area_address;
+                postData.district   = areaAddress;
                 postData.is_default = is_default;
-                var url = CONTROLLER + '/addOrder/';
-
+                var url = MODULE + '/Order/orderDetail/';
                 $.post(CONTROLLER+'/addAddress',postData,function (msg) {
                     if(msg.status == 1){
                         var addressId = msg.data;
-                        if(postData.goodsId){
-                            url += 'addressId/'+addressId+'/goodsId/'+postData.goodsId;
-                            location.href = url;
-                        }else if(postData.cartIds){
-                            url += 'addressId/'+addressId+'/cartIds/'+postData.cartIds;
+                        if(postData.orderId){
+                            url += 'addressId/'+addressId+'/orderId/'+postData.orderId;
                             location.href = url;
                         }else{
                             dialog.success(msg.message,CONTROLLER + '/addressList');

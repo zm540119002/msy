@@ -26,6 +26,7 @@ $(function () {
     //立即结算/立即购买
     $('body').on('click','.buy_now,.clearing_now',function(){
         var postData = assemblyData($('ul.goods_list').find('li'));
+        
         if(!postData){
             return false;
         }
@@ -258,8 +259,7 @@ $(function () {
     $('body').on('click','.weixinShare_btn',function(){
         $('.mcover').hide();
     });
-
-
+    
     var group_buy_end = $('.groupBuyEnd').val();
     if(group_buy_end){ //重新开团
        dialog.confirm('此团购已结束，是否重新开团')
@@ -400,7 +400,7 @@ function calculateTotalPrice(){
 function goodsNumReduce(obj) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
-    if(num<1){
+    if(num<2){
         return false;
     }
     _li.find('.gshopping_count').val(--num);

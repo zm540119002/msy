@@ -38,21 +38,13 @@ class PaymentController extends AuthUserController {
                         'gbd.order_id' => $orderId,
                     );
                     $groupBuy = D('GroupBuyDetail')->selectGroupBuyDetail($where);
-                    if (strpos(session('returnUrl'), 'groupBuyId') == true) {
-                        if(strpos(session('returnUrl'), '?') == true){
-                            $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'?'));
-                        }else{
-                            $shLinkBase =  session('returnUrl');
-                        }
-                        session('returnUrl') && $payInfo['success_back'] = $shLinkBase. '/shareType/groupBuy';
-                    }else{
-                        if (strpos(session('returnUrl'), 'html') == true){
-                            $shLinkBase = substr(session('returnUrl'),0,strrpos(session('returnUrl'),'.html'));
-                        }else{
-                            $shLinkBase = session('returnUrl');
-                        }
-                        session('returnUrl') && $payInfo['success_back'] = $shLinkBase. '/groupBuyId/'.$groupBuy[0]['group_buy_id'].'/shareType/groupBuy';
-                    }
+                    $groupBuy = $groupBuy[0];
+                    $successBackUrl =  U('Goods/goodsDetail',array(
+                        'goodsId'=>$groupBuy['goods_id'],
+                        'groupBuyId'=>$groupBuy['group_buy_id'],
+                        'shareType'=>'groupBuy',
+                    ));
+                    $payInfo['success_back'] = $successBackUrl;
                 }
                 Pay::wxPay($payInfo);
             }

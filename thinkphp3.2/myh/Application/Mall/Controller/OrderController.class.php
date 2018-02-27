@@ -56,7 +56,6 @@ class OrderController extends AuthUserController {
             $this->display();
         }
     }
-
     //订单-详情页
     public function orderDetail(){
         $modelOrder = D('Order');
@@ -210,7 +209,7 @@ class OrderController extends AuthUserController {
         $cartList = $modelCart->selectCart($where);
         foreach ($goodsList as $item){
             foreach ($cartList as $value){
-                if($item['foreign_id'] && $value['foreign_id'] && $item['foreign_id']==$value['foreign_id'])
+                if($item['foreign_id'] && $value['foreign_id'])
                 {//提交的商品在购物车中，生成订单后禁用
                     $where = array(
                         'user_id' => $this->user['id'],
@@ -225,14 +224,16 @@ class OrderController extends AuthUserController {
             }
         }
         if($orderType == 1){//团购
-            $_where = array(
-                'group_buy_id'=>$groupBuyId,
-                'pay_status'=>2,
-            );
-            //判断是否已团购
-            $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id',true);
-            if(in_array($this->user['id'],$userIdArray)){
-                $this->ajaxReturn(errorMsg('你已参加此团购，不能再参加！是否重新开团',array('joined'=>1)));
+            if($groupBuyId){
+                $_where = array(
+                    'group_buy_id'=>$groupBuyId,
+                    'pay_status'=>2,
+                );
+                //判断是否已团购
+                $userIdArray = D('GroupBuyDetail')->where($_where)->getField('user_id',true);
+                if(in_array($this->user['id'],$userIdArray)){
+                    $this->ajaxReturn(errorMsg('你已参加此团购，不能再参加！是否重新开团',array('joined'=>1)));
+                }
             }
             $openid = session('openid');
             D('GroupBuy')->joinGroupBuy($goodsList[0], $this->user['id'],$orderId,$groupBuyId,$openid);
@@ -483,7 +484,6 @@ class OrderController extends AuthUserController {
             $this->display();
         }
     }
-
 
     //团购订单处理
     private function groupBuyHandle($modelOrder,$orderInfo){

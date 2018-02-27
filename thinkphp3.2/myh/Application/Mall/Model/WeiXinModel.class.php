@@ -100,21 +100,23 @@ class WeiXinModel extends Model {
     public function wxLogin(){
         if(isWxBrowser()) {//判断是否为微信浏览器
             $wechat= new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-            $code = isset($_GET['code'])?$_GET['code']:'';
+            $code = isset($_GET['code']);
             if($code){
-                $wxUser =$wechat ->getOauthUserInfo();
-                $where = array(
-                    'wxu.openid' => $wxUser['openid'],
-                );
-                $wxUserDatabase = $this -> selectWeiXinUser($where);
-                if(empty($wxUserDatabase)){
-                    $res = $this -> add($wxUser);
-                    if(!$res){
-                        return errorMsg($this->getError());
+                $wxUser = $wechat ->getOauthUserInfo();
+                if(!empty($wxUser['openid'])){
+                    $where = array(
+                        'wxu.openid' => $wxUser['openid'],
+                    );
+                    $wxUserDatabase = $this -> selectWeiXinUser($where);
+                    if(empty($wxUserDatabase)){
+                        $res = $this -> add($wxUser);
+                        if(!$res){
+                            return errorMsg($this->getError());
+                        }
+                    }else{
+                        session('openid',$wxUser['openid']);
+                        return $wxUser;
                     }
-                }else{
-                    session('openid',$wxUser['openid']);
-                    return $wxUser;
                 }
             }
         }

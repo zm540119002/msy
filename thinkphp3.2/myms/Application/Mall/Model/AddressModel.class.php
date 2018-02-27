@@ -4,7 +4,7 @@ use Think\Model;
 class AddressModel extends Model {
     protected $tableName = 'address';
     protected $tablePrefix = '';
-    protected $connection = 'DB_CONFIG_MYH';
+    protected $connection = 'DB_CONFIG_MALL';
 
   //根据Uid获取默认地址
     public function getUserAddressByUid($uid){
