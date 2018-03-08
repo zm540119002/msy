@@ -51,10 +51,8 @@ return [
         'VENDOR_JS' => Request::domain() .'/static/vendor/js',
         'VENDOR_CSS' => Request::domain() .'/static/vendor/css',
 
-        'VENDOR_ADMIN_IMG_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/img',
+        'VENDOR_ADMIN_IMG' => Request::domain() .'/static/vendor_admin/img',
         'VENDOR_ADMIN_JS' => Request::domain() .'/static/vendor_admin/js',
         'VENDOR_ADMIN_CSS' => Request::domain() .'/static/vendor_admin/css',
-
-
     ],
 ];
