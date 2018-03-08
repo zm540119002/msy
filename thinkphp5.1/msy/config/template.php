@@ -31,6 +31,10 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
+        'PUBLIC_IMG' => Request::domain() .'/public/static/common/img',
+        'PUBLIC_JS' => Request::root() .'/public/static/common/js',
+        'PUBLIC_CSS' => Request::domain() .'/public/static/common/css',
+
         'PUBLIC_IMG_INDEX' => Request::domain() .'/public/static/index/img',
         'PUBLIC_JS_INDEX' => Request::domain() .'/public/static/index/js',
         'PUBLIC_CSS_INDEX' => Request::domain() .'/public/static/index/css',
