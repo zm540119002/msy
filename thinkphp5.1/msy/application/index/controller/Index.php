@@ -11,9 +11,4 @@ class Index extends Controller
 //        return dump(config());
         return $this->fetch();
     }
-
-    public function hello()
-    {
-        return $this->fetch();
-    }
 }
