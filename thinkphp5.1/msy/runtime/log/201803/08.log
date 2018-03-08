@@ -1041,3 +1041,266 @@
 )
 [ info ] [ LOG ] INIT File
 [ error ] [4]语法错误: unexpected '<<' (T_SL)[E:\web\thinkphp5.1\msy\application\index\controller\Index.php:12]
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.026002s][吞吐率：38.46req/s] [内存消耗：1,261.15kb] [文件加载：61]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_CSS/common/public.css
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_CSS/common/public.css [运行时间：0.019001s][吞吐率：52.63req/s] [内存消耗：1,094.78kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => 'text/css,*/*;q=0.1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_CSS/common/weui.css
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_CSS/common/weui.css [运行时间：0.020002s][吞吐率：50.00req/s] [内存消耗：1,094.81kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => 'text/css,*/*;q=0.1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_CSS/home/mall.css
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_CSS/home/mall.css [运行时间：0.019001s][吞吐率：52.63req/s] [内存消耗：1,094.77kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => 'text/css,*/*;q=0.1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/layer.mobile/layer.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/layer.mobile/layer.js [运行时间：0.024002s][吞吐率：41.66req/s] [内存消耗：1,094.72kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/public.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/public.js [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,094.71kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/common.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/common.js [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,094.71kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/loginDialog.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/loginDialog.js [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,094.76kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/swipe.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/swipe.js [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,094.71kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/dialog.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/dialog.js [运行时间：0.021001s][吞吐率：47.62req/s] [内存消耗：1,094.71kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/Public/img/common/banner/home-banner1.jpg
+[ info ] msy.new.com/index.php/index/Index/Public/img/common/banner/home-banner1.jpg [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,094.91kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/loginDialog.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/loginDialog.js [运行时间：0.021001s][吞吐率：47.62req/s] [内存消耗：1,094.76kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T17:00:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/PUBLIC_JS/common/swipe.js
+[ info ] msy.new.com/index.php/index/Index/PUBLIC_JS/common/swipe.js [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,094.71kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.new.com/index.php/index/Index/index',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
