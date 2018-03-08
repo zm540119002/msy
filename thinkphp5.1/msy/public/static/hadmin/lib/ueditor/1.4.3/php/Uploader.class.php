@@ -338,7 +338,7 @@ class Uploader
     {
         return array(
             "state" => $this->stateInfo,
-            "url" => DOMAIN.$this->fullName,
+            "url" => $this->fullName,
             "title" => $this->fileName,
             "original" => $this->oriName,
             "type" => $this->fileType,

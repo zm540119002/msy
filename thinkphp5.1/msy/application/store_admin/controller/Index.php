@@ -8,6 +8,7 @@ class Index extends Controller
 {
     public function index()
     {
+//        return dump(config());
         return $this->fetch();
     }
 
