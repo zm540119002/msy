@@ -54,13 +54,8 @@ return [
         'VENDOR_ADMIN_IMG' => Request::domain() .'/static/vendor_admin/img',
         'VENDOR_ADMIN_JS' => Request::domain() .'/static/vendor_admin/js',
         'VENDOR_ADMIN_CSS' => Request::domain() .'/static/vendor_admin/css',
-<<<<<<< HEAD
 
         'PUBLIC_HUI_ADMIN' => Request::domain() .'/static/hadmin',
 
-
-
-=======
->>>>>>> 81a910d95ce5d9a0e8cf02d7daf5b8df08bc1a65
     ],
 ];

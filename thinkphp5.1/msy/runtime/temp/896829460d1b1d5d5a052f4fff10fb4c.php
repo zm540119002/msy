@@ -1,4 +1,4 @@
-<?php /*a:6:{s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html";i:1520498283;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\base.html";i:1501913354;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\meta.html";i:1520497090;s:70:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\header.html";i:1520504119;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\menu.html";i:1520504351;s:70:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\footer.html";i:1520503477;}*/ ?>
+<?php /*a:6:{s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html";i:1520498283;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\base.html";i:1501913354;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\meta.html";i:1520497090;s:70:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\header.html";i:1520504119;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\menu.html";i:1520504393;s:70:"E:\web\thinkphp5.1\msy\application/store_admin/view\public\footer.html";i:1520503477;}*/ ?>
 <!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -92,7 +92,6 @@
             <dt><i class="Hui-iconfont">&#xe62d;</i> 学生管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-
                     <li><a href="<?php echo url('student/studentList'); ?>" title="学生列表">学生列表</a></li>
                 </ul>
             </dd>
