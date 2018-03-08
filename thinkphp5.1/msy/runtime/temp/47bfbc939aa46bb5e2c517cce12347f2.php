@@ -1,4 +1,4 @@
-<?php /*a:3:{s:62:"E:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520499284;s:62:"E:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520499284;s:70:"E:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520494701;}*/ ?>
+<?php /*a:3:{s:62:"E:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520499284;s:62:"E:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520502331;s:70:"E:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520494701;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
 
 
-	<script type="text/javascript" src="http://msy.dev/public/static/index/js/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="PUBLIC_JS/common/jquery-1.9.1.min.js"></script>
 </head>
 
 <body>
