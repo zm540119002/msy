@@ -37,6 +37,7 @@ return [
         'PUBLIC_IMG_ADMIN' => Request::domain() .'/public/static/admin/img',
         'PUBLIC_JS_ADMIN' => Request::domain() .'/public/static/admin/js',
         'PUBLIC_CSS_ADMIN' => Request::domain() .'/public/static/admin/css',
-        'PUBLIC_HUI_ADMIN' => Request::domain() .'/public/static/hadmin',
+
+
     ],
 ];
