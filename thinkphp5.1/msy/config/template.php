@@ -35,30 +35,25 @@ return [
         'PUBLIC_JS' => Request::domain() .'/static/common/js',
         'PUBLIC_CSS' => Request::domain() .'/static/common/css',
 
-        'PUBLIC_IMG_INDEX' => Request::domain() .'/static/index/img',
-        'PUBLIC_JS_INDEX' => Request::domain() .'/static/index/js',
-        'PUBLIC_CSS_INDEX' => Request::domain() .'/static/index/css',
+        'INDEX_IMG' => Request::domain() .'/static/index/img',
+        'INDEX_JS' => Request::domain() .'/static/index/js',
+        'INDEX_CSS' => Request::domain() .'/static/index/css',
 
-        'PUBLIC_IMG_ADMIN' => Request::domain() .'/static/admin/img',
-        'PUBLIC_JS_ADMIN' => Request::domain() .'/static/admin/js',
-        'PUBLIC_CSS_ADMIN' => Request::domain() .'/static/admin/css',
-        'PUBLIC_HUI_ADMIN' => Request::domain() .'/static/hadmin',
+        'STORE_IMG' => Request::domain() .'/static/store/img',
+        'STORE_JS' => Request::domain() .'/static/store/js',
+        'STORE_CSS' => Request::domain() .'/static/store/css',
 
-        'PUBLIC_IMG_STORE' => Request::domain() .'/static/store/img',
-        'PUBLIC_JS_STORE' => Request::domain() .'/static/store/js',
-        'PUBLIC_CSS_STORE' => Request::domain() .'/static/store/css',
+        'STORE_ADMIN_IMG' => Request::domain() .'/static/store_admin/img',
+        'STORE_ADMIN_JS' => Request::domain() .'/static/store_admin/js',
+        'STORE_ADMIN_CSS' => Request::domain() .'/static/store_admin/css',
 
-        'PUBLIC_IMG_STORE_ADMIN' => Request::domain() .'/static/store_admin/img',
-        'PUBLIC_JS_STORE_ADMIN' => Request::domain() .'/static/store_admin/js',
-        'PUBLIC_CSS_STORE_ADMIN' => Request::domain() .'/static/store_admin/css',
+        'VENDOR_IMG' => Request::domain() .'/static/vendor/img',
+        'VENDOR_JS' => Request::domain() .'/static/vendor/js',
+        'VENDOR_CSS' => Request::domain() .'/static/vendor/css',
 
-        'PUBLIC_IMG_VENDOR' => Request::domain() .'/static/vendor/img',
-        'PUBLIC_JS_VENDOR' => Request::domain() .'/static/vendor/js',
-        'PUBLIC_CSS_VENDOR' => Request::domain() .'/static/vendor/css',
-
-        'PUBLIC_IMG_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/img',
-        'PUBLIC_JS_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/js',
-        'PUBLIC_CSS_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/css',
+        'VENDOR_ADMIN_IMG_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/img',
+        'VENDOR_ADMIN_JS' => Request::domain() .'/static/vendor_admin/js',
+        'VENDOR_ADMIN_CSS' => Request::domain() .'/static/vendor_admin/css',
 
 
     ],
