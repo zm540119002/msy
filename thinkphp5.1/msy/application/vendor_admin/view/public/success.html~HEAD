@@ -1,6 +1,0 @@
-
-<script type="text/javascript">
-	//直接跳转
-    location.href="<?php echo($jumpUrl); ?>"
-</script>
-
