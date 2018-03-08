@@ -12,7 +12,7 @@
 // +----------------------------------------------------------------------
 // | 模板设置
 // +----------------------------------------------------------------------
-
+//注意：模块不能覆盖
 return [
     // 模板引擎类型 支持 php think 支持扩展
     'type'         => 'Think',
@@ -31,11 +31,11 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        'MODULE' => Request::module(),
-        'CONTROLLER' => Request::controller(),
-        'ACTION' => Request::action(),
-        'PUBLIC_IMG' => Request::root() .'/public/static/img/',
-        'PUBLIC_JS' => Request::root() .'/public/static/js/',
-        'PUBLIC_CSS' => Request::root() .'/public/static/js/css/',
+        'PUBLIC_IMG_INDEX' => Request::domain() .'/public/static/index/img',
+        'PUBLIC_JS_INDEX' => Request::domain() .'/public/static/index/js',
+        'PUBLIC_CSS_INDEX' => Request::domain() .'/public/static/index/css',
+        'PUBLIC_IMG_ADMIN' => Request::domain() .'/public/static/admin/img',
+        'PUBLIC_JS_ADMIN' => Request::domain() .'/public/static/admin/js',
+        'PUBLIC_CSS_ADMIN' => Request::domain() .'/public/static/admin/css',
     ],
 ];
