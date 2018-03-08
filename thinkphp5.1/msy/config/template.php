@@ -31,34 +31,34 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        'PUBLIC_IMG' => Request::domain() .'/public/static/common/img',
-        'PUBLIC_JS' => Request::root() .'/public/static/common/js',
-        'PUBLIC_CSS' => Request::domain() .'/public/static/common/css',
+        'PUBLIC_IMG' => Request::domain() .'/static/common/img',
+        'PUBLIC_JS' => Request::domain() .'/static/common/js',
+        'PUBLIC_CSS' => Request::domain() .'/static/common/css',
 
-        'PUBLIC_IMG_INDEX' => Request::domain() .'/public/static/index/img',
-        'PUBLIC_JS_INDEX' => Request::domain() .'/public/static/index/js',
-        'PUBLIC_CSS_INDEX' => Request::domain() .'/public/static/index/css',
+        'PUBLIC_IMG_INDEX' => Request::domain() .'/static/index/img',
+        'PUBLIC_JS_INDEX' => Request::domain() .'/static/index/js',
+        'PUBLIC_CSS_INDEX' => Request::domain() .'/static/index/css',
 
-        'PUBLIC_IMG_ADMIN' => Request::domain() .'/public/static/admin/img',
-        'PUBLIC_JS_ADMIN' => Request::domain() .'/public/static/admin/js',
-        'PUBLIC_CSS_ADMIN' => Request::domain() .'/public/static/admin/css',
-        'PUBLIC_HUI_ADMIN' => Request::domain() .'/public/static/hadmin',
+        'PUBLIC_IMG_ADMIN' => Request::domain() .'/static/admin/img',
+        'PUBLIC_JS_ADMIN' => Request::domain() .'/static/admin/js',
+        'PUBLIC_CSS_ADMIN' => Request::domain() .'/static/admin/css',
+        'PUBLIC_HUI_ADMIN' => Request::domain() .'/static/hadmin',
 
-        'PUBLIC_IMG_STORE' => Request::domain() .'/public/static/store/img',
-        'PUBLIC_JS_STORE' => Request::domain() .'/public/static/store/js',
-        'PUBLIC_CSS_STORE' => Request::domain() .'/public/static/store/css',
+        'PUBLIC_IMG_STORE' => Request::domain() .'/static/store/img',
+        'PUBLIC_JS_STORE' => Request::domain() .'/static/store/js',
+        'PUBLIC_CSS_STORE' => Request::domain() .'/static/store/css',
 
-        'PUBLIC_IMG_STORE_ADMIN' => Request::domain() .'/public/static/store_admin/img',
-        'PUBLIC_JS_STORE_ADMIN' => Request::domain() .'/public/static/store_admin/js',
-        'PUBLIC_CSS_STORE_ADMIN' => Request::domain() .'/public/static/store_admin/css',
+        'PUBLIC_IMG_STORE_ADMIN' => Request::domain() .'/static/store_admin/img',
+        'PUBLIC_JS_STORE_ADMIN' => Request::domain() .'/static/store_admin/js',
+        'PUBLIC_CSS_STORE_ADMIN' => Request::domain() .'/static/store_admin/css',
 
-        'PUBLIC_IMG_VENDOR' => Request::domain() .'/public/static/vendor/img',
-        'PUBLIC_JS_VENDOR' => Request::domain() .'/public/static/vendor/js',
-        'PUBLIC_CSS_VENDOR' => Request::domain() .'/public/static/vendor/css',
+        'PUBLIC_IMG_VENDOR' => Request::domain() .'/static/vendor/img',
+        'PUBLIC_JS_VENDOR' => Request::domain() .'/static/vendor/js',
+        'PUBLIC_CSS_VENDOR' => Request::domain() .'/static/vendor/css',
 
-        'PUBLIC_IMG_VENDOR_ADMIN' => Request::domain() .'/public/static/vendor_admin/img',
-        'PUBLIC_JS_VENDOR_ADMIN' => Request::domain() .'/public/static/vendor_admin/js',
-        'PUBLIC_CSS_VENDOR_ADMIN' => Request::domain() .'/public/static/vendor_admin/css',
+        'PUBLIC_IMG_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/img',
+        'PUBLIC_JS_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/js',
+        'PUBLIC_CSS_VENDOR_ADMIN' => Request::domain() .'/static/vendor_admin/css',
 
 
     ],
