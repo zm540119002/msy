@@ -1,7 +1,8 @@
 <?php
-namespace app\admin\controller;
+namespace app\store_admin\controller;
 
 use think\Controller;
+use Request;
 
 class Index extends Controller
 {
@@ -10,7 +11,8 @@ class Index extends Controller
         return $this->fetch();
     }
 
-    public function welcome() {
-        return "hello api-admin";
+    public function hello()
+    {
+        return $this->fetch();
     }
 }
