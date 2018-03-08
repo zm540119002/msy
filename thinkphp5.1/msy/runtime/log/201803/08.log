@@ -84,12 +84,18 @@
 )
 [ info ] [ LOG ] INIT File
 ---------------------------------------------------------------
+<<<<<<< HEAD
 [ 2018-03-08T16:28:27+08:00 ] 127.0.0.1 GET /index.php/store_admin/Index/index
 [ info ] msy.new.com/index.php/store_admin/Index/index [运行时间：0.032001s][吞吐率：31.25req/s] [内存消耗：919.48kb] [文件加载：52]
+=======
+[ 2018-03-08T16:19:20+08:00 ] 127.0.0.1 GET /index.php
+[ info ] msy.dev/index.php [运行时间：0.119606s][吞吐率：8.36req/s] [内存消耗：1,315.39kb] [文件加载：57]
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
+<<<<<<< HEAD
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -97,6 +103,16 @@
   'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
+=======
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
   'content-length' => '',
   'content-type' => '',
 )
@@ -104,12 +120,190 @@
 )
 [ info ] [ LOG ] INIT File
 ---------------------------------------------------------------
-[ 2018-03-08T16:32:33+08:00 ] 127.0.0.1 GET /index.php/store_admin/Index/index
-[ info ] msy.new.com/index.php/store_admin/Index/index [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：919.79kb] [文件加载：52]
+[ 2018-03-08T16:19:46+08:00 ] 127.0.0.1 GET /index.php/Admin/
+[ info ] msy.dev/index.php/Admin/ [运行时间：0.107006s][吞吐率：9.35req/s] [内存消耗：1,028.01kb] [文件加载：48]
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:21:43+08:00 ] 127.0.0.1 GET /index.php/store_admin/
+[ info ] msy.dev/index.php/store_admin/ [运行时间：0.120006s][吞吐率：8.33req/s] [内存消耗：1,085.56kb] [文件加载：52]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:22:54+08:00 ] 127.0.0.1 GET /index.php/store_admin/
+[ info ] msy.dev/index.php/store_admin/ [运行时间：0.118007s][吞吐率：8.47req/s] [内存消耗：1,085.78kb] [文件加载：52]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:23:33+08:00 ] 127.0.0.1 GET /index.php/store_admin/index/index
+[ info ] msy.dev/index.php/store_admin/index/index [运行时间：0.128606s][吞吐率：7.78req/s] [内存消耗：1,085.63kb] [文件加载：52]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:24:22+08:00 ] 127.0.0.1 GET /index.php/store_admin/index/index
+[ info ] msy.dev/index.php/store_admin/index/index [运行时间：0.119007s][吞吐率：8.40req/s] [内存消耗：1,034.00kb] [文件加载：49]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:25:06+08:00 ] 127.0.0.1 GET /index.php/store_admin/index/index
+[ info ] msy.dev/index.php/store_admin/index/index [运行时间：0.118007s][吞吐率：8.47req/s] [内存消耗：1,034.00kb] [文件加载：49]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:25:12+08:00 ] 127.0.0.1 GET /index.php/
+[ info ] msy.dev/index.php/ [运行时间：0.101006s][吞吐率：9.90req/s] [内存消耗：1,315.27kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:26:14+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.112006s][吞吐率：8.93req/s] [内存消耗：1,033.63kb] [文件加载：49]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+<<<<<<< HEAD
+[ 2018-03-08T16:32:33+08:00 ] 127.0.0.1 GET /index.php/store_admin/Index/index
+[ info ] msy.new.com/index.php/store_admin/Index/index [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：919.79kb] [文件加载：52]
+=======
+[ 2018-03-08T16:28:54+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.101005s][吞吐率：9.90req/s] [内存消耗：1,314.91kb] [文件加载：55]
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+<<<<<<< HEAD
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -118,6 +312,17 @@
   'cache-control' => 'max-age=0',
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
+=======
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
   'content-length' => '',
   'content-type' => '',
 )
@@ -125,12 +330,18 @@
 )
 [ info ] [ LOG ] INIT File
 ---------------------------------------------------------------
+<<<<<<< HEAD
 [ 2018-03-08T16:32:39+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
 [ info ] msy.new.com/index.php/index/Index/index [运行时间：0.018001s][吞吐率：55.55req/s] [内存消耗：1,099.78kb] [文件加载：57]
+=======
+[ 2018-03-08T16:29:13+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.196011s][吞吐率：5.10req/s] [内存消耗：1,559.14kb] [文件加载：63]
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
+<<<<<<< HEAD
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -138,19 +349,50 @@
   'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
+=======
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
   'content-length' => '',
   'content-type' => '',
 )
 [ info ] [ PARAM ] array (
 )
+<<<<<<< HEAD
 [ info ] [ LOG ] INIT File
 ---------------------------------------------------------------
 [ 2018-03-08T16:32:46+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
 [ info ] msy.new.com/index.php/index/Index/index [运行时间：0.022001s][吞吐率：45.45req/s] [内存消耗：1,130.84kb] [文件加载：59]
+=======
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]Call to undefined method think\Request::instance()[E:\web\thinkphp5.1\msy\runtime\temp\896829460d1b1d5d5a052f4fff10fb4c.php:163]
+---------------------------------------------------------------
+[ 2018-03-08T16:30:25+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.168609s][吞吐率：5.93req/s] [内存消耗：1,405.54kb] [文件加载：61]
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
+<<<<<<< HEAD
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -159,21 +401,444 @@
   'cache-control' => 'max-age=0',
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
+=======
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
   'content-length' => '',
   'content-type' => '',
 )
 [ info ] [ PARAM ] array (
 )
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]Call to undefined method think\Request::instance()[E:\web\thinkphp5.1\msy\runtime\temp\896829460d1b1d5d5a052f4fff10fb4c.php:163]
+---------------------------------------------------------------
+[ 2018-03-08T16:30:57+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.097006s][吞吐率：10.31req/s] [内存消耗：1,161.04kb] [文件加载：49]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:31:38+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.099006s][吞吐率：10.10req/s] [内存消耗：1,315.30kb] [文件加载：55]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:32:04+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.106006s][吞吐率：9.43req/s] [内存消耗：1,315.31kb] [文件加载：55]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:32:51+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.166010s][吞吐率：6.02req/s] [内存消耗：1,405.66kb] [文件加载：61]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]Call to undefined method think\Request::instance()[E:\web\thinkphp5.1\msy\runtime\temp\896829460d1b1d5d5a052f4fff10fb4c.php:163]
+---------------------------------------------------------------
+[ 2018-03-08T16:35:06+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.100605s][吞吐率：9.94req/s] [内存消耗：1,161.04kb] [文件加载：49]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:36:03+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.199011s][吞吐率：5.02req/s] [内存消耗：1,558.75kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]Call to undefined method think\Request::instance()[E:\web\thinkphp5.1\msy\runtime\temp\896829460d1b1d5d5a052f4fff10fb4c.php:163]
+---------------------------------------------------------------
+[ 2018-03-08T16:36:22+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.200011s][吞吐率：5.00req/s] [内存消耗：1,558.75kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]Call to undefined method think\Request::instance()[E:\web\thinkphp5.1\msy\runtime\temp\896829460d1b1d5d5a052f4fff10fb4c.php:163]
+---------------------------------------------------------------
+[ 2018-03-08T16:36:38+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.202012s][吞吐率：4.95req/s] [内存消耗：1,559.78kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]Call to undefined method think\Request::instance()[E:\web\thinkphp5.1\msy\runtime\temp\896829460d1b1d5d5a052f4fff10fb4c.php:163]
+---------------------------------------------------------------
+[ 2018-03-08T16:36:40+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.173009s][吞吐率：5.78req/s] [内存消耗：1,405.45kb] [文件加载：61]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]Call to undefined method think\Request::instance()[E:\web\thinkphp5.1\msy\runtime\temp\896829460d1b1d5d5a052f4fff10fb4c.php:163]
+---------------------------------------------------------------
+[ 2018-03-08T16:36:58+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.160009s][吞吐率：6.25req/s] [内存消耗：1,490.17kb] [文件加载：60]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:36:58+08:00 ] 127.0.0.1 GET /index.php/favicon.ico
+[ info ] msy.dev/index.php/favicon.ico [运行时间：0.094402s][吞吐率：10.59req/s] [内存消耗：1,028.52kb] [文件加载：48]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://msy.dev/index.php/store_admin',
+  'accept' => 'image/webp,image/*,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.2.1.17116',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:37:01+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.142008s][吞吐率：7.04req/s] [内存消耗：1,342.97kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Mobile Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+<<<<<<< HEAD
 [ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
 ) ]
 [ info ] [ LOG ] INIT File
 ---------------------------------------------------------------
 [ 2018-03-08T16:32:46+08:00 ] 127.0.0.1 GET /index.php/index/Index/Public/img/common/banner/home-banner1.jpg
 [ info ] msy.new.com/index.php/index/Index/Public/img/common/banner/home-banner1.jpg [运行时间：0.021001s][吞吐率：47.62req/s] [内存消耗：1,094.86kb] [文件加载：57]
+=======
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:39:32+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.300017s][吞吐率：3.33req/s] [内存消耗：1,490.03kb] [文件加载：60]
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Mobile Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:40:46+08:00 ] 127.0.0.1 GET /index.php/store_admin
+[ info ] msy.dev/index.php/store_admin [运行时间：0.169010s][吞吐率：5.92req/s] [内存消耗：1,342.95kb] [文件加载：58]
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+<<<<<<< HEAD
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
@@ -181,9 +846,35 @@
   'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
+=======
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Mobile Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
   'content-length' => '',
   'content-type' => '',
 )
 [ info ] [ PARAM ] array (
 )
+<<<<<<< HEAD
+=======
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/store_admin/view\index\index.html [ array (
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+>>>>>>> 6615854c8ec22c65ea368037824fb73521853522
 [ info ] [ LOG ] INIT File
