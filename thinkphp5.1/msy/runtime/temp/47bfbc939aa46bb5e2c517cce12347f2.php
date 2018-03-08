@@ -1,4 +1,4 @@
-<?php /*a:3:{s:62:"E:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520413429;s:62:"E:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520490924;s:70:"E:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520413477;}*/ ?>
+<?php /*a:3:{s:62:"E:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520499284;s:62:"E:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520499284;s:70:"E:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520494701;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,12 +6,13 @@
 	<title><?php echo htmlentities(app('config')->get('WEB_NAME')); ?></title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="http://msy.new.com/public/static/js/css/common/public.css">
-	<link rel="stylesheet" href="http://msy.new.com/public/static/js/css/common/weui.css">
+	<link rel="stylesheet" href="PUBLIC_CSS/common/public.css">
+	<link rel="stylesheet" href="PUBLIC_CSS/common/weui.css">
 	
-<link rel="stylesheet" type="text/css" href="http://msy.new.com/public/static/js/css/home/mall.css">
+<link rel="stylesheet" type="text/css" href="PUBLIC_CSS/home/mall.css">
 
-	<script type="text/javascript" src="http://msy.new.com/public/static/js/common/jquery-1.9.1.min.js"></script>
+
+	<script type="text/javascript" src="http://msy.dev/public/static/index/js/1.9.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -122,14 +123,14 @@
 
 
 <!--js基本插件-->
-<script type="text/javascript" src="http://msy.new.com/public/static/js/common/layer.mobile/layer.js"></script>
-<script type="text/javascript" src="http://msy.new.com/public/static/js/common/public.js"></script>
-<script type="text/javascript" src="http://msy.new.com/public/static/js/common/common.js"></script>
-<script type="text/javascript" src="http://msy.new.com/public/static/js/common/dialog.js"></script>
-<script type="text/javascript" src="http://msy.new.com/public/static/js/common/loginDialog.js"></script>
+<script type="text/javascript" src="PUBLIC_JS/common/layer.mobile/layer.js"></script>
+<script type="text/javascript" src="PUBLIC_JS/common/public.js"></script>
+<script type="text/javascript" src="PUBLIC_JS/common/common.js"></script>
+<script type="text/javascript" src="PUBLIC_JS/common/dialog.js"></script>
+<script type="text/javascript" src="PUBLIC_JS/common/loginDialog.js"></script>
 
 
-<script type="text/javascript" src="http://msy.new.com/public/static/js/common/swipe.js"></script>
+<script type="text/javascript" src="PUBLIC_JS/common/swipe.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//滑动轮播

@@ -921,3 +921,101 @@
 [ info ] [ PARAM ] array (
 )
 [ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:53:18+08:00 ] 127.0.0.1 GET /index.php
+[ info ] msy.dev/index.php [运行时间：0.116007s][吞吐率：8.62req/s] [内存消耗：1,317.39kb] [文件加载：57]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Mobile Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:53:41+08:00 ] 127.0.0.1 GET /index.php
+[ info ] msy.dev/index.php [运行时间：0.152009s][吞吐率：6.58req/s] [内存消耗：1,487.97kb] [文件加载：61]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Mobile Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:54:15+08:00 ] 127.0.0.1 GET /index.php
+[ info ] msy.dev/index.php [运行时间：0.124007s][吞吐率：8.06req/s] [内存消耗：1,339.14kb] [文件加载：59]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Mobile Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:54:47+08:00 ] 127.0.0.1 GET /index.php
+[ info ] msy.dev/index.php [运行时间：0.141008s][吞吐率：7.09req/s] [内存消耗：1,487.75kb] [文件加载：61]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=5380433920; pgv_si=s5455643648; PHPSESSID=k4e3o1hjsggf9i37e8f7cs42q4',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Mobile Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'msy.dev',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
