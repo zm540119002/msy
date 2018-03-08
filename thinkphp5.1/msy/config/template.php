@@ -26,8 +26,16 @@ return [
     'tpl_begin'    => '{',
     // 模板引擎普通标签结束标记
     'tpl_end'      => '}',
-    // 标签库标签开始标记
     'taglib_begin' => '{',
+    // 标签库标签开始标记
     // 标签库标签结束标记
     'taglib_end'   => '}',
+    'tpl_replace_string' => [
+        'MODULE' => Request::module(),
+        'CONTROLLER' => Request::controller(),
+        'ACTION' => Request::action(),
+        'PUBLIC_IMG' => Request::root() .'/public/static/img/',
+        'PUBLIC_JS' => Request::root() .'/public/static/js/',
+        'PUBLIC_CSS' => Request::root() .'/public/static/js/css/',
+    ],
 ];
