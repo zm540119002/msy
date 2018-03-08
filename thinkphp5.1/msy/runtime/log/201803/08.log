@@ -1019,3 +1019,25 @@
 [ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
 ) ]
 [ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-08T16:59:03+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.019002s][吞吐率：52.63req/s] [内存消耗：890.37kb] [文件加载：51]
+[ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'msy.new.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4]语法错误: unexpected '<<' (T_SL)[E:\web\thinkphp5.1\msy\application\index\controller\Index.php:12]
