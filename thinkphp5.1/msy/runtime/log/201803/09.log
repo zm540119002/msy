@@ -1770,16 +1770,26 @@
 [ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
 ) ]
 [ info ] [ LOG ] INIT File
+<<<<<<< HEAD
 ---------------------------------------------------------------
 [ 2018-03-09T11:09:44+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
 [ info ] msy.new.com/index.php/index/Index/index [运行时间：0.033002s][吞吐率：30.30req/s] [内存消耗：1,260.85kb] [文件加载：61]
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+---------------------------------------------------------------
+[ 2018-03-09T11:05:33+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.021001s][吞吐率：47.62req/s] [内存消耗：1,264.38kb] [文件加载：61]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
@@ -2035,6 +2045,9 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2042,6 +2055,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2060,6 +2074,25 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:06:50+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.016001s][吞吐率：62.50req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2067,6 +2100,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2085,6 +2119,25 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:01+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.022001s][吞吐率：45.45req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2092,6 +2145,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2110,6 +2164,25 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:07+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.016001s][吞吐率：62.50req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2117,6 +2190,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2135,6 +2209,25 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:08+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.022001s][吞吐率：45.45req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2142,6 +2235,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2160,6 +2254,25 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:27+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.018001s][吞吐率：55.55req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2167,6 +2280,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2185,6 +2299,25 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:27+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.026002s][吞吐率：38.46req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2192,6 +2325,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2210,6 +2344,25 @@
   'referer' => 'http://msy.new.com/index.php/index/Index/index',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:27+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.028002s][吞吐率：35.71req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'no-cache',
   'pragma' => 'no-cache',
@@ -2217,6 +2370,7 @@
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2530,10 +2684,33 @@
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:28+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2545,16 +2722,38 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:28+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.024001s][吞吐率：41.67req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'upgrade-insecure-requests' => '1',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2566,17 +2765,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:28+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.027002s][吞吐率：37.03req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2587,17 +2808,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:28+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.028001s][吞吐率：35.71req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2608,17 +2851,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:28+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.027001s][吞吐率：37.04req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2629,17 +2894,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:26:29+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.024001s][吞吐率：41.66req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2650,17 +2937,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:56:03+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.021001s][吞吐率：47.62req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2671,17 +2980,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:56:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.024001s][吞吐率：41.67req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2692,17 +3023,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:56:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2713,17 +3066,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:56:04+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.022001s][吞吐率：45.45req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2735,17 +3110,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:56:05+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.024002s][吞吐率：41.66req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2756,16 +3153,38 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:56:06+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.020001s][吞吐率：50.00req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'upgrade-insecure-requests' => '1',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2776,17 +3195,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T11:56:07+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.030002s][吞吐率：33.33req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2797,17 +3238,39 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T14:00:02+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.024001s][吞吐率：41.66req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
   'cache-control' => 'max-age=0',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2820,16 +3283,38 @@
 [ info ] [ LANG ] E:\web\thinkphp5.1\framework/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T14:00:03+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.017001s][吞吐率：58.82req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
 [ info ] [ HEADER ] array (
   'accept-language' => 'zh-CN,zh;q=0.9',
   'accept-encoding' => 'gzip, deflate',
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+<<<<<<< HEAD
   'upgrade-insecure-requests' => '1',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+=======
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2849,10 +3334,33 @@
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T14:00:03+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.016001s][吞吐率：62.50req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
@@ -2872,13 +3380,44 @@
   'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
   'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
   'upgrade-insecure-requests' => '1',
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-03-09T14:00:08+08:00 ] 127.0.0.1 GET /index.php/index/Index/index
+[ info ] msy.new.com/index.php/index/Index/index [运行时间：0.021001s][吞吐率：47.62req/s] [内存消耗：1,134.12kb] [文件加载：59]
+[ info ] [ LANG ] D:\web\thinkphp5.1\framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
   'connection' => 'keep-alive',
   'host' => 'msy.new.com',
   'content-length' => '',
   'content-type' => '',
+<<<<<<< HEAD
 )
 [ info ] [ PARAM ] array (
 )
 [ info ] [ VIEW ] E:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
 ) ]
 [ info ] [ LOG ] INIT File
+=======
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] D:\web\thinkphp5.1\msy\application/index/view\index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+>>>>>>> bc80035d8e122857be5097a3e6280d9d5f8241c7
