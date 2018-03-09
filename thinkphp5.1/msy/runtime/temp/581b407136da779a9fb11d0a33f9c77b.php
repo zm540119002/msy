@@ -1,4 +1,4 @@
-<?php /*a:3:{s:62:"D:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520560124;s:62:"D:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520560283;s:70:"D:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520494155;}*/ ?>
+<?php /*a:3:{s:62:"D:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520561379;s:62:"D:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520560765;s:70:"D:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520494155;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link rel="stylesheet" href="http://msy.new.com/static/common/css/public.css">
-	<link rel="stylesheet" href="http://msy.new.com/static/common/css/weui.css">
 	
 <link rel="stylesheet" type="text/css" href="http://msy.new.com/static/common/css/public.css">
 
