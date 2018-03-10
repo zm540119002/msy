@@ -1,4 +1,4 @@
-<?php /*a:3:{s:62:"D:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520564689;s:62:"D:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520564630;s:70:"D:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520494155;}*/ ?>
+<?php /*a:3:{s:62:"D:\web\thinkphp5.1\msy\application/index/view\index\index.html";i:1520564732;s:62:"D:\web\thinkphp5.1\msy\application/index/view\public\base.html";i:1520564630;s:70:"D:\web\thinkphp5.1\msy\application/index/view\public\rightSideBar.html";i:1520494155;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
