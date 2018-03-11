@@ -131,7 +131,6 @@ function loginDialog(func){
 };
 
 $(function(){
-    $('.top_menu_list a').tab();
     //轮播
     var elem = document.getElementById('slider');
     swipe(elem);
