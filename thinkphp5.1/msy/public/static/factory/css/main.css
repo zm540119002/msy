@@ -33,14 +33,14 @@
 .account_entry{
     position:relative;
     display: block;
-    /*margin:0 0 0 0.35rem;
-    border-top:1px solid #d9d9d9;*/
+    margin:1.8rem 0 0 0.35rem;
+    border-top:1px solid #d9d9d9;
     padding:0.20rem 0;
-    text-align: center;
+    /*text-align: center;*/
 }
-/*.account_entry::after{
-    top:45%;
-}*/
+.account_entry::after{
+    top:38%;
+}
 .explain_nav{
     padding:0.15rem 0.20rem;
     background: #727171;
@@ -51,4 +51,50 @@
     margin:0 0 0.12rem 0;
     color:#fff;
     font-size:0.20rem;
+}
+.message-center-info{
+    padding:0.25rem 0 0.25rem 0.15rem;
+}
+.message-center-info p{
+    line-height: 24px;
+}
+.message-center-info p:last-child{
+    margin:20px 0 0;
+}
+.vendor-settled-list{
+    padding:0 0.15rem 0 0.15rem;
+}
+.vendor-settled-list li{
+    padding:0.12rem 0 0.12rem 0.15rem;
+    border:1px solid #ff7aab;
+    margin:0 0 0.15rem 0;
+    border-radius:3px;
+    background: #ff7aab;
+}
+.vendor-settled-list li a{
+    position:relative;
+    display: block;
+    color:#fff;
+}
+.relation-vendor{
+    display: block;
+    text-align:right;
+    margin:0.12rem 0.15rem 0 0;
+}
+.vendorInfoList{
+    height:3rem;
+    padding:0.15rem;
+    overflow:hidden;
+    overflow-y:scroll;
+}
+.vendorInfoList li{
+    margin:0 0 0.15rem 0;
+    padding:0.15rem 0;
+    border:1px solid #ff7aab;
+    border-radius:4px;
+    color:#ff7aab;
+}
+.vendorInfoList li.current{
+    background: #ff7aab;
+    color:#fff;
 }
