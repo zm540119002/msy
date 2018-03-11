@@ -283,3 +283,303 @@ i{
 .common_default_img{
     width:100%;
 }
+/*美尚云生态圈平台*/
+.top_nav_fixed{
+    /*height:94px;*/
+    /*position:fixed;
+    left:0;
+    top:0;*/
+    width:100%;
+    overflow:hidden;
+    z-index:2;
+}
+.top_bar{
+    background: #fff;
+    border-bottom:1px solid #9fa0a0;
+    padding:10px 0;
+}
+.top_bar a{
+    width:20px;
+    height:18px;
+    margin:0 auto;
+    background-image:url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size:18px 180px;
+    display:block;
+    text-indent:-9999rem;
+}
+.top_bar a.personal_center{
+    background-position:0 -102px;
+}
+.top_bar a.shopping_cart{
+    background-position:0 -121px;
+}
+.top_bar a.home{
+    background-position:0 -140px;
+}
+.top_search_module{
+    flex:5;
+    background: #efefef;
+    border-radius:6px;
+    padding:4px 0 2px;
+    margin:-4px 0 0;
+}
+.top_search_module input{
+    float:left;
+    display: block;
+    background:none;
+}
+.top_search_module .search_text{
+     font-size:0.18rem;
+     width:85%;
+     height:18px;
+     /*line-height:20px;*/
+}
+.top_search_module .search_btn{
+    width:15%;
+    background-image:url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size:18px 180px;
+    background-position:12px -159px;
+}
+.top_menu_box{
+    position:relative;
+    height:48px;
+    line-height:48px;
+    
+}
+.top_nav_fixed .top_menu_list{
+    width:100%;
+    background:#fff;
+    /*margin:0 auto;
+    text-align:left;*/
+    font-size:0;
+    overflow:hidden;
+    /*float:left;*/
+    /*display: inline;
+    white-space: nowrap;
+    overflow-x:scroll;
+    
+    overflow-y:hidden;*/
+    
+} 
+.top_menu_box a{
+    display:inline-block;
+    box-sizing:border-box;
+    padding:0 10px;
+    font-size:.24rem;
+    color:#333;
+    position:relative;
+}
+.top_menu_box a.current:before{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: -5px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: #e60012;
+    content: "";
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: center;
+    transition: all 0.5s;
+    margin-left: -15px;
+}
+/*.top_menu_box a.current{
+    border-bottom:1px solid #e60012;
+    color:#e60012;
+}*/
+.top_person_center{
+    position:absolute;
+    right:-44px;
+    top:-37px;
+}
+.slider_banner{
+    /*margin-top:94px;*/
+}
+.foot_nav_bar{
+    text-align:center;
+    padding:10px 0;
+}
+.foot_nav_bar a{
+    position:relative;
+    color:#898989;
+}
+.channel_nav{
+    padding:0.20rem 0 0.15rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.channel_nav a{
+    position:relative;
+}
+.channel_nav a{width:25%;text-align:center;color:#555;}
+.channel_nav a span{
+    display:block;
+    width:46px;
+    height:49px;
+    margin:0 auto;
+    background-image:url(../../img/home/store_purchase_type.png);
+    background-repeat: no-repeat;
+    background-size:46px 234px;
+}
+.channel_nav a span.union_purchase{background-position:0 2px;}
+.channel_nav a span.exclusive{background-position:0 -45px;}
+.channel_nav a span.classify{background-position:0 -93px;}
+.channel_nav a span.purchasers{background-position:0 -140px;}
+.channel_nav a span.recharge{background-position:0 -188px;}
+.channel_nav>a.current:before{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: -20px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: #ff7aab;
+    content: "";
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: center;
+    transition: all 0.5s;
+    margin-left: -15px;
+}
+ul>li:hover>a:before{
+transform: scale3d(1, 1, 1);
+color: #ed6d00;
+}
+.specific_type{
+    padding:0.15rem;
+}
+.specific_type .columns_flex{
+    flex-wrap: wrap;
+}
+.specific_type a{
+    width:20%;
+    box-sizing: border-box;
+    text-align:center;
+    margin:0 0 10px 0;
+    padding:4px 0;
+}
+.column_type{
+    /*float:left;
+    margin:0 10px;*/
+    
+}
+.column_type.current{
+    color:#ff7aab;
+    border:1px solid #ff7aab;
+    border-radius:5px;
+}
+.voucher_module{
+    padding:0.12rem 0.12rem 1rem;
+}
+.voucher_module .columns_flex{
+    justify-content: space-between;
+}
+.voucher_module .voucher_m_t{
+    padding:0 0 0.15rem;
+}
+.voucher_module .voucher_m_r{
+    color:#333;
+}
+.voucher_m_list li{
+    width:33%;
+    padding:0.25rem 0.35rem;
+    background-image:url(../../img/common/voucher_bg.png);
+    background-repeat: no-repeat;
+    background-size:100% auto;
+    margin:0 1% 0 0;
+}
+.voucher_m_list span,
+.voucher_m_list price,
+.voucher_m_list a{
+    display: block;
+    text-align:center;
+    margin:0 0 0.15rem 0;
+}
+.voucher_m_list .v_money{
+    font-weight:bold;
+    font-size:0.28rem;
+    color:#e60012;
+}
+.foot_nav_bar a span{
+    width:20px;
+    height:18px;
+    margin:0 auto;
+    background-image:url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size:18px 180px;
+    display:block;
+}
+.foot_nav_bar a span.store{
+    background-position:0 0;
+}
+.foot_nav_bar a span.practitioners{
+    background-position:0 -16px;
+}
+.foot_nav_bar a span.manufacturer{
+    background-position:0 -32px;
+}
+.foot_nav_bar .current a{
+    color:#ff7aab;
+}
+.foot_nav_bar .current a span.store{
+    background-position:0 -50px;
+}
+.foot_nav_bar .current a span.practitioners{
+    background-position:0 -67px;
+}
+.foot_nav_bar .current a span.manufacturer{
+    background-position:0 -83px;
+}
+/*美尚云从业人员*/
+
+.project_list li{
+    padding:0.12rem 0.15rem 0.15rem;
+    border-bottom:4px solid #efefef;
+
+}
+.project_list .columns_flex{
+    justify-content: space-between;
+}
+/*美尚云厂商入驻*/
+.manufacturer_nav a span{
+    background-image:url(../../vendor/img/manufacturer_type.png);
+}
+.vendor_logon{
+    padding:0.50rem 0.50rem 1rem;
+}
+.vendor_logon span{
+    display: block;
+    text-align:center;
+    margin:0 0 0.15rem 0;
+}
+.v_l_item{
+    margin:0 0 0.25rem 0;
+}
+.v_l_item input{
+    width:100%;
+    padding:8px 0;
+    border:1px solid #d9d9d9;
+    border-radius:5px;
+    text-align:center;
+}
+.vendor_logon .sign_in{
+    display: block;
+    width:120px;
+    margin:50px auto 0;
+    background: #ff7bac;
+    color:#fff;
+    text-align:center;
+    border-radius:3px;
+    padding:8px 0;
+}
+.account_entry{
+    position:relative;
+    margin:0 0 0 0.35rem;
+    border-top:1px solid #d9d9d9;
+    padding:0.20rem 0;
+}
+.account_entry::after{
+    top:45%;
+}
