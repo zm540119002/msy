@@ -4,12 +4,11 @@ namespace app\store_admin\controller;
 use think\Controller;
 use Request;
 
-class Index extends Controller
+class Goods extends Controller
 {
-    public function index()
+    public function goodsManage()
     {
 //        return dump(config());
-       // return dump(config('menu_conf.menu_array'));
         return $this->fetch();
     }
 
