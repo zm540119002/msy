@@ -55,7 +55,7 @@ return [
         'factory_admin_js' => Request::domain() .'/static/factory_admin/js',
         'factory_admin_css' => Request::domain() .'/static/factory_admin/css',
 
-        'public_hui_admin' => Request::domain() .'/static/hadmin',
+        'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
 
     ],
 ];
