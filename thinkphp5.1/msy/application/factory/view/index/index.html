@@ -4,47 +4,6 @@
 
 {/block}
 {block name="content"}
-<section id="userLoginForm" style="display:none;">
-	<div class="f24 bomb_box">
-		<div class="ucenter_logo">
-			<img src="public_img/ucenter_logo.png" alt="">
-			<p>已注册用户通行证登陆</p>
-		</div>
-		<ul class="loginNav">
-			<li class="current">短信验证码登陆</li>
-			<li>账号密码登录</li>
-		</ul>
-		<form class="loginTab" id="formLogin">
-			<div class="smsLogin login_wrap active">
-				<div class="login_item">
-					<span class="username_txt">手机号</span>
-					<input class="username user_phone" type="tel" placeholder="请输入手机号" name="mobile_phone">
-					<a href="javascript:void(0);" class="mesg_code">获取验证码</a>
-				</div>
-				<div class="login_item">
-					<span class="username_txt txt3">验证码</span>
-					<input type="text" class="tel_code username input_txt3" placeholder="请输入收到的验证码" name="captcha">
-				</div>
-			</div>
-			<div class="userLogin login_wrap hide">
-				<div class="login_item">
-					<span class="username_txt">手机号</span>
-					<input class="username user_name" type="text" placeholder="请输入手机号" name="name">
-				</div>
-				<div class="login_item">
-					<span class="password_txt">密码</span>
-					<input class="username password" type="password" placeholder="6-16数字或字母" name="password">
-				</div>
-			</div>
-
-			<input type="hidden" name="captcha_type" value="login" />
-		</form>
-		<div class="error_tipc" ></div>
-		<div class="friend_tipc">
-			<a href="javascript:void(0);" class="forget_dialog">忘记美尚通行证密码?重置密码</a>
-		</div>
-	</div>
-</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex">
@@ -137,6 +96,8 @@
 {block name="backTop"}
 {include file="public/rightSideBar" /}
 {/block}
+{block name="loginDialog"}
+{include file="template/loginDialog.html" /}{/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swipe.js"></script>
