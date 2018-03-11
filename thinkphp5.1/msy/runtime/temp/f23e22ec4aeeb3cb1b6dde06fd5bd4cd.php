@@ -1,4 +1,4 @@
-<?php /*a:2:{s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\login\index.html";i:1520732659;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\Public\base.html";i:1520494701;}*/ ?>
+<?php /*a:2:{s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\login\index.html";i:1520732659;s:68:"E:\web\thinkphp5.1\msy\application/store_admin/view\Public\base.html";i:1520733081;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,14 +6,14 @@
 	<title><?php echo htmlentities(app('config')->get('WEB_NAME')); ?></title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="PUBLIC_CSS/common/public.css">
-	<link rel="stylesheet" href="PUBLIC_CSS/common/weui.css">
+	<link rel="stylesheet" href="http://msy.dev/static/common/css/common/public.css">
+	<link rel="stylesheet" href="http://msy.dev/static/common/css/common/weui.css">
 	
 
   <link href="http://msy.dev/static/hadmin/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
 
 
-	<script type="text/javascript" src="PUBLIC_JS/common/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="http://msy.dev/static/common/js/common/jquery-1.9.1.min.js"></script>
 </head>
 
 <body>
@@ -75,11 +75,11 @@
 
 
 <!--js基本插件-->
-<script type="text/javascript" src="PUBLIC_JS/common/layer.mobile/layer.js"></script>
-<script type="text/javascript" src="PUBLIC_JS/common/public.js"></script>
-<script type="text/javascript" src="PUBLIC_JS/common/common.js"></script>
-<script type="text/javascript" src="PUBLIC_JS/common/dialog.js"></script>
-<script type="text/javascript" src="PUBLIC_JS/common/loginDialog.js"></script>
+<script type="text/javascript" src="http://msy.dev/static/common/js/common/layer.mobile/layer.js"></script>
+<script type="text/javascript" src="http://msy.dev/static/common/js/common/public.js"></script>
+<script type="text/javascript" src="http://msy.dev/static/common/js/common/common.js"></script>
+<script type="text/javascript" src="http://msy.dev/static/common/js/common/dialog.js"></script>
+<script type="text/javascript" src="http://msy.dev/static/common/js/common/loginDialog.js"></script>
 
 
   <script type="text/javascript">
