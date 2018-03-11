@@ -1,0 +1,54 @@
+/*美尚云厂商入驻*/
+.manufacturer_nav a span{
+    background-image:url(../../vendor/img/manufacturer_type.png);
+}
+.vendor_logon{
+    padding:0.50rem 0.50rem .1rem;
+}
+.vendor_logon span{
+    display: block;
+    text-align:center;
+    margin:0 0 0.15rem 0;
+}
+.v_l_item{
+    margin:0 0 0.25rem 0;
+}
+.v_l_item input{
+    width:100%;
+    padding:8px 0;
+    border:1px solid #d9d9d9;
+    border-radius:5px;
+    text-align:center;
+}
+.vendor_logon .sign_in{
+    display: block;
+    width:120px;
+    margin:50px auto 0;
+    background: #ff7bac;
+    color:#fff;
+    text-align:center;
+    border-radius:3px;
+    padding:8px 0;
+}
+.account_entry{
+    position:relative;
+    display: block;
+    /*margin:0 0 0 0.35rem;
+    border-top:1px solid #d9d9d9;*/
+    padding:0.20rem 0;
+    text-align: center;
+}
+/*.account_entry::after{
+    top:45%;
+}*/
+.explain_nav{
+    padding:0.15rem 0.20rem;
+    background: #727171;
+    margin:0 0 1rem 0;
+}
+.explain_nav a{
+    display: block;
+    margin:0 0 0.12rem 0;
+    color:#fff;
+    font-size:0.20rem;
+}

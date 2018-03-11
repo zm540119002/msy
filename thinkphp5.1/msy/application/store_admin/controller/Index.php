@@ -2,7 +2,7 @@
 namespace app\store_admin\controller;
 
 use think\Controller;
-use Request;
+use think\facade\Request ;
 
 class Index extends Controller
 {

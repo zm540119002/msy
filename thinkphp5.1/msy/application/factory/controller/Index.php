@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\factory\controller;
 
 use think\Controller;
 use Request;
@@ -7,12 +7,6 @@ use Request;
 class Index extends Controller
 {
     public function index()
-    {
-        return dump(config());
-        return $this->fetch();
-    }
-
-    public function hello()
     {
         return $this->fetch();
     }
