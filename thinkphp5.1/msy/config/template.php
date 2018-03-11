@@ -47,13 +47,13 @@ return [
         'store_admin_js' => Request::domain() .'/static/store_admin/js',
         'store_admin_css' => Request::domain() .'/static/store_admin/css',
 
-        'vendor_img' => Request::domain() .'/static/vendor/img',
-        'vendor_js' => Request::domain() .'/static/vendor/js',
-        'vendor_css' => Request::domain() .'/static/vendor/css',
+        'factory_img' => Request::domain() .'/static/factory/img',
+        'factory_js' => Request::domain() .'/static/factory/js',
+        'factory_css' => Request::domain() .'/static/factory/css',
 
-        'vendor_admin_img' => Request::domain() .'/static/vendor_admin/img',
-        'vendor_admin_js' => Request::domain() .'/static/vendor_admin/js',
-        'vendor_admin_css' => Request::domain() .'/static/vendor_admin/css',
+        'factory_admin_img' => Request::domain() .'/static/factory_admin/img',
+        'factory_admin_js' => Request::domain() .'/static/factory_admin/js',
+        'factory_admin_css' => Request::domain() .'/static/factory_admin/css',
 
         'public_hui_admin' => Request::domain() .'/static/hadmin',
 
