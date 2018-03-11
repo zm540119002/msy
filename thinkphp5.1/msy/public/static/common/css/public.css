@@ -274,11 +274,12 @@ i{
     flex:1;
 }
 .bottom_nav_fixed{
-    background: #efefef;
     position:fixed;
     left:0;
     bottom:0;
     width:100%;
+    font-size:0.24rem;
+    background: #efefef;
 }
 .common_default_img{
     width:100%;
