@@ -55,7 +55,7 @@ return [
         'vendor_admin_js' => Request::domain() .'/static/vendor_admin/js',
         'vendor_admin_css' => Request::domain() .'/static/vendor_admin/css',
 
-        'public_hui_admin' => Request::domain() .'/static/hadmin',
+        'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
 
     ],
 ];
