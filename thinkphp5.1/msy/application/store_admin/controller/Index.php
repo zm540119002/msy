@@ -10,7 +10,7 @@ class Index extends Controller
     {
 //        return dump(config());
        // return dump(config('menu_conf.menu_array'));
-        return $this->fetch();
+        return $this->fetch('error/error',['title' => '没有操作权限','msg' => '抱歉，您没有操作该页面的权限！']);
     }
 
     public function welcome()
