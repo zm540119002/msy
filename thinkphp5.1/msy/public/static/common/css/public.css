@@ -293,7 +293,6 @@ i{
     left:0;
     bottom:0;
     width:100%;
-    font-size:0.24rem;
 }
 .common_default_img{
     width:100%;
@@ -316,7 +315,7 @@ i{
 }
 .top_bar h2{
     text-align: center;
-    font-size: 0.22rem;
+    font-size: 0.24rem;
 }
 .top_bar a{
     width:20px;
@@ -808,3 +807,218 @@ color: #ed6d00;
     padding:0;
 }
 
+/*机构登记  background:url(../../images/sign-ico.png) repeat-x center 8px;*/
+.login-items{padding:0.30rem 0.28rem;border-top:1px solid #d9d9d9;}
+.msy_sign_title{background-color:#f7f8f8;padding: 0 0 0.15rem;}
+.msy_sign_title h2{text-align:center;background:#fff;padding:0.25rem 0;}
+.page-bd .status{}
+.apply-data-nav{padding:0.40rem 0.4rem;}
+.weui_cells{border:1px solid #d9d9d9;border-radius:0.06rem;}
+.login-items .weui_btn_primary{background-color: #F39800;}
+.login-items .weui_input{font-size:0.24rem;}
+.login-items .msy_cells:before,.login-items .msy_cells:after{border-top:none;border-bottom:none;}
+.page-bd .weui-flex {
+
+    align-items: center;
+    transition: all 0.3s ease 0s;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+}
+.page-bd .weui-flex-item {
+    position:relative;
+    -webkit-flex: 1 1 0;
+    flex: 1 1 0;
+    text-align:center;
+    color:#808080;
+}
+.weui_cell-bd {
+    -webkit-flex: 1 1 0;
+    flex: 1 1 0;
+}
+.page-bd .status .current{color:#0ccaf7;}
+.weui-flex-item span{display:block;height:0.6rem;}
+.weui-flex-item .base_info{
+    background:#fff url(../../common/img/base_s_info.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item.current .base_info{
+    background:#fff url(../../common/img/base_info.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item .base_address{
+    background:#fff url(../../common/img/base_address.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item .base_s_address{
+    background:#fff url(../../common/img/base_s_address.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item .opening{
+    background:#fff url(../../common/img/base_s_finish.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item.current .opening{
+    background:#fff url(../../common/img/base_finish.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item .upload-prove{
+    background:#fff url(../../common/img/certify_s_info.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item.current .upload-prove{
+    background:#fff url(../../common/img/certify_info.png) no-repeat center 0;
+    background-size:40px auto;
+}
+.weui-flex-item .certify_s_info{background:#fff url(../../common/img/certify_s_info.png) no-repeat center 0;background-size:40px auto;}
+
+.weui-flex-item em{position: absolute;
+    background: url(../../common/img/icons/sign-icons.png) repeat-x;
+    left: 76%;
+    height: 2px;
+    display: block;
+    width: 48%;
+    top: 14px;
+    z-index: 999;
+}
+
+/*用户入驻申请2018-3-11*/
+.apply-data-content{
+    padding:0.20rem 0.25rem;
+}
+.apply-module.hide{
+    display: none;
+}
+.apply-items{
+    margin:0 0 0.25rem 0;
+    padding:0 0 0 0.12rem;
+    border:1px solid #d9d9d9;
+    border-radius:5px;
+    box-sizing: border-box;
+}
+.apply-items input{
+    display: block;
+    width:100%;
+    padding:0.15rem 0;
+    background: none;
+}
+.step{
+    display: block;
+    width:4rem;
+    height:38px;
+    line-height: 38px;
+    margin:1rem auto 0.5rem;
+    background: #ff7aab;
+    color:#fff;
+    text-align: center;
+    border-radius:5px;
+}
+.next-step{
+    
+}
+.upload-data-explain{
+    line-height: 24px;
+    padding:0 0.20rem 0 0.20rem;
+}
+.success-tipc{
+    text-align:center;
+}
+/*图片上传2018-3-11*/
+.upload-picture-module{
+    display: flex;
+    display: -webkit-flex;
+    margin:0.20rem 0 0;
+    overflow: hidden;
+}
+.upload-picture-module li{
+    position:relative;
+    margin:0 2.5% 0;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+.upload-picture-module li p{
+    text-align: center;
+}
+.upload-picture-module .picture-module{
+    position:relative;
+    width:2.6rem;
+    height:2.6rem;
+    background: #e5e5e5;
+
+}
+.upload-picture-module .uploadImg {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.upload-picture-module .picture-module:after,
+.upload-picture-module .picture-module:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-color: #999;
+    z-index:2;
+}
+.upload-picture-module .picture-module.active:before,
+.upload-picture-module .picture-module.active:after{
+    width:auto;
+}
+/*.upload-picture-module .msy_image_map{position:relative;width:100%;height:3.5rem;background:#e5e5e5;}*/
+.upload-picture-module .pg_f_focus{height:4.5rem;}
+.upload-picture-module .picture-module:before {
+    width: 2px;
+    height: 39.5px;
+    top:45%;
+    
+}
+.upload-picture-module .picture-module:after {
+    width: 39.5px;
+    height: 2px;
+    top:45%;
+}
+.upload-picture-module .msy_image_map.active:before,
+.upload-picture-module .msy_image_map.active:after,
+.image_photo .upload_td.active:before,
+.image_photo .upload_td.active:after{
+    width:0;
+    height: 0;
+}
+
+
+.upload-picture-module .picture-module .uploadImg{z-index:4;}
+.upload-picture-module span{
+    position: absolute;
+    width:1rem ;
+    height:1rem ;
+    left:50%;
+    top:56%;
+    margin:-0.5rem 0 0 -0.5rem;
+    color:#999;
+    z-index:2;
+}
+.upload-picture-module .replace_tips{width:;}
+.upload-picture-module .upload_img{
+    display: block;
+    width:100%;
+    height:2.6rem;
+}
+.upload-picture-module .picture-module.active .upload_img{
+    /*position:absolute;*/
+    z-index:3;
+    width:100%;
+    height:auto;
+    overflow: hidden;
+}
+.upload-picture-module .picture-module.active span{z-index:1;}
+.friend-tipc{
+    color:#ff0000;
+}
