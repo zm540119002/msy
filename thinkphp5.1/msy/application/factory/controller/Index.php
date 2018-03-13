@@ -17,6 +17,7 @@ class Index extends Base
             if(!$validate->check($data)) {
                 $this->error($validate->getError());
             }
+            
             $this->success('1');
         }
 

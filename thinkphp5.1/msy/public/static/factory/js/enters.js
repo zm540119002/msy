@@ -64,6 +64,8 @@ $(function(){
                 $('.weui-flex-item:eq(2)').addClass('current');
                 $('.apply-module:eq(1)').hide();
                 $('.apply-module:eq(2)').show();
+                $('.weui-flex-item:eq(0)').addClass('disabled');
+                $('.weui-flex-item:eq(1)').addClass('disabled');
             }
 
         })
