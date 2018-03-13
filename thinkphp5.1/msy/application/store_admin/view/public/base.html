@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-	<meta charset="UTF-8">
-	<title>{block name="title"}{$Think.config.WEB_NAME}{/block}</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="public_css/common/public.css">
-	{block name="css-customize"}{/block}
-	<script type="text/javascript" src="public_js/common/jquery-1.9.1.min.js"></script>
+{include file='public/_meta' /}
+<title>H-ui.admin v3.1</title>
+<link rel="stylesheet" href="public_admin_common_js/layer.mobile/need/layer.css">
+{block name="css-customize"}{/block}
 </head>
 
 <body>
@@ -27,11 +21,12 @@
 {/block}
 
 <!--js基本插件-->
-<script type="text/javascript" src="public_js/common/layer.mobile/layer.js"></script>
-<script type="text/javascript" src="public_js/common/public.js"></script>
-<script type="text/javascript" src="public_js/common/common.js"></script>
-<script type="text/javascript" src="public_js/common/dialog.js"></script>
-<script type="text/javascript" src="public_js/common/loginDialog.js"></script>
+{include file='public/_footer' /}
+<script src="public_admin_common_js/public.js"></script>
+<script src="public_admin_common_js/common.js"></script>
+<script src="public_admin_common_js/dialog.js"></script>
+<script type="text/javascript" src="public_admin_common_js/layer.mobile/layer.js"></script>
+
 
 {block name="script"}{/block}
 </body></html>

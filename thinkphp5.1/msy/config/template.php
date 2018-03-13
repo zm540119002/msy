@@ -56,6 +56,9 @@ return [
         'factory_admin_css' => Request::domain() .'/static/factory_admin/css',
 
         'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
+        'public_admin_common_js' => Request::domain() .'/static/admin/common/js',
+        'public_admin_common_css' => Request::domain() .'/static/admin/common/css',
+        'public_admin_common_img' => Request::domain() .'/static/admin/common/img',
 
     ],
 ];

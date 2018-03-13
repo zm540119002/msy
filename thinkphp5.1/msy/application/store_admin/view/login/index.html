@@ -1,7 +1,8 @@
 {extend name="Public:base" /}
 
 {block name="css-customize"}
-<link rel="stylesheet" href="public/static/admin/common/css/user.css" type="text/css"/>
+<link rel="stylesheet" href="public_admin_common_css/base.css">
+<link rel="stylesheet" href="public_admin_common_css/user.css">
 {/block}
 {block name="content"}
 <article class="msy-bg">
@@ -17,7 +18,7 @@
                 <div class="userLogin login_wrap active">
                     <div class="login_item">
                         <span class="username_txt">手机号</span>
-                        <input class="username user_name" type="text" placeholder="请输入用户名(6-16位数字或者字母、下划线)" name="name">
+                        <input class="username user_name" type="text" placeholder="请输入手机号码" name="name">
                     </div>
                     <div class="login_item">
                         <span class="password_txt">密码</span>
@@ -48,11 +49,53 @@
 {/block}
 
 {block name="script"}
-<script type="text/javascript" src="public/static/admin/common/js/login.js"></script>
+<script type="text/javascript" src="public_admin_common_js/login.js"></script>
+
 <script type="text/javascript">
-    // 刷新验证码
-    function reloadcode(obj) {
-        obj.src = "{:url('Admin/User/verify')}";
-    }
+    $(function(){
+        tab_down('.loginNav li','.loginTab .login_wrap','click');
+        $('body').on('click','.loginBtn',function(){
+            var $layer = $('.loginTab').find('.active');
+            var _index =$('.loginTab').find('.login_wrap.active').index();
+            var content='';
+            //验证
+            switch(_index){
+                case 0:
+                    var userName=$layer.find('.user_name').val();
+                    var password=$layer.find('.password').val();
+                    if(!checkAccount(userName)){
+                        content='请输入正确用户名';
+                    }else if(!register.pswCheck(password)){
+                        content = "请输入6-16数字或字母的密码";
+                    }
+
+                    break;
+                case 1:
+                    var userPhone=$layer.find('.user_phone').val();
+                    var verifiCode=$layer.find('.tel_code').val();
+                    if(!register.phoneCheck(userPhone)){
+                        content='请输入正确手机号';
+                    }else if(!register.vfyCheck(verifiCode)){
+                        content = "请输入正确的验证码";
+                    }
+                    break;
+            }
+            if(content){
+                dialog.error(content);
+                return false;
+            }
+            var url = ACTION;
+            var postData = $('#formLogin').serializeObject();
+            $.post(url,postData,function (data) {
+                if(data.status==0){
+                    dialog.error(data.info);
+                    return false;
+                }else if(data.status==1){
+                    location.href = data.info;
+                }
+            });
+        });
+    });
+
 </script>
 {/block}
