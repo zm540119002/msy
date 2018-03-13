@@ -27,8 +27,12 @@ $(document).ready(function(){
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
             //提交
-            $.post("uploadImgToTemp",postData,function(){
-
+            $.post("uploadImgToTemp",postData,function(info){
+                if(info.code == 1){
+                    $(obj).find('.img').val(info.msg);
+                }else{
+                    dialog.error(info.msg)
+                }
             })
         }
 

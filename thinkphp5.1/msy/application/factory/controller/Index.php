@@ -11,16 +11,18 @@ class Index extends Base
     public function enters()
     {
         if($this->request->isPost()){
-            print_r(input());
-        }else{
-            return $this->fetch();
+            $validate = new \app\factory\validate\Factory;
+//            print_r($validate);exit;
+
+            if (!$validate::check($_POST)) {
+                echo 1;exit;
+                dump($validate->getError());
+            }
+            $this->success('1');
         }
-    }
-    public function a()
-    {
-        if($this->request->isPost()) {
-            print_r(input('img'));
-        }
+
+        return $this->fetch();
+
     }
 
 }
