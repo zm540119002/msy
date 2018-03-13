@@ -1,5 +1,5 @@
 $(function(){
-    tab_down('.apply-data-nav li','.apply-module','click');
+    tab_down('.apply-data-nav .switch-item','.apply-module','click');
     var factoryFullName,
         agentName,
         businessLicense,
@@ -46,48 +46,25 @@ $(function(){
             content='请上传代办人企业授权信照片';
         }
         postData={
-            factoryFullName:factoryFullName,
-            agentName:agentName,
-            businessLicense:businessLicense,
-            agentAuthorization:agentAuthorization
+            name:factoryFullName,
+            agent:agentName,
+            business_license:businessLicense,
+            auth_letter:agentAuthorization
         };
         if(content){
             dialog.error(content);
-        }else{
-            $.post("enters",{postData:postData},function(){
-
-            })
+            return false;
         }
-    })
+        $.post("enters",postData,function(info){
+            $('.weui-flex-item:eq(1)').removeClass('current');
+            $('.weui-flex-item:eq(2)').addClass('current');
+            $('.apply-module:eq(1)').hide();
+            $('.apply-module:eq(2)').show();
+        })
+    });
     //确定通过入驻
     $('body').on('click','.three-step',function(){
-        factoryFullName=$('.factoryFullName').val();
-        agentName=$('.agentName').val();
-        businessLicense=$('.business-license').val();
-        agentAuthorization=$('.agent-authorization').val();
-        var content='';
-        if(!factoryFullName){
-            content='请填写厂商全称';
-        }else if(!agentName){
-            content='请填写代办人姓名';
-        }else if(!businessLicense){
-            content='请上传企业营业执照照片';
-        }else if(!agentAuthorization){
-            content='请上传代办人企业授权信照片';
-        }
-
-        if(content){
-            dialog.error(content);
-        }
-        postData={
-            factoryFullName:factoryFullName,
-            agentName:agentName,
-            businessLicense:businessLicense,
-            agentAuthorization:agentAuthorization
-        };
-        $.post("index/enters",{postData:postData},function(){
-
-        })
+        
     })
 
 });

@@ -32,13 +32,15 @@ class BaseController extends Controller{
             $ext = '.png';
         }
         if(!$ext){
-            $this->ajaxReturn(errorMsg('只支持:jpeg,jpg,gif,png格式的图片'));
+            $this->error('只支持:jpeg,jpg,gif,png格式的图片');
+//            $this->ajaxReturn(errorMsg('只支持:jpeg,jpg,gif,png格式的图片'));
         }
         //上传公共路径
         $uploadPath = C('UPLOAD_PATH');
         if(!is_dir($uploadPath)){
             if(!mk_dir($uploadPath)){
-                $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
+                $this -> error('创建Uploads目录失败');
+//                $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
             }
         }
         $uploadPath = realpath($uploadPath);

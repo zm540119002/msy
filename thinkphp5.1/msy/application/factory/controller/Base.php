@@ -35,45 +35,49 @@ class Base extends Controller{
         }
         //上传公共路径
         $uploadPath = config('base.upload_path');
-        echo $uploadPath;exit;
-        if(!is_dir($uploadPath)){
-            if(!mk_dir($uploadPath)){
-                $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
-            }
-        }
+//        if(!is_dir($uploadPath)){
+//            if(!mk_dir($uploadPath)){
+//                $this->error('创建Uploads目录失败');
+//               // $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
+//            }
+//        }
+
         $uploadPath = realpath($uploadPath);
         if($uploadPath === false){
-            $this->ajaxReturn(errorMsg('获取Uploads实际路径失败'));
+            $this->error('获取Uploads实际路径失败');
+//            $this->ajaxReturn(errorMsg('获取Uploads实际路径失败'));
         }
         $uploadPath = $uploadPath . '/' ;
-
         //临时相对路径
-        $tempRelativePath = C('TEMP_PATH');
+        $tempRelativePath =  config('base.temp_path');
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
-            $this->ajaxReturn(errorMsg('创建临时目录失败'));
+            $this -> error('创建临时目录失败');
+//            $this->ajaxReturn(errorMsg('创建临时目录失败'));
         }
         //文件名
         $fileName = time() . $ext;
         //带存储路径的文件名
         $photo = $storePath . $fileName;
-
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
-        if(false === $returnData){
-            $this->ajaxReturn(errorMsg('保存文件失败'));
-        }
+//        if(false === $returnData){
+//            $this -> error('保存文件失败');
+////            $this->ajaxReturn(errorMsg('保存文件失败'));
+//        }
 
         //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
             $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
             $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
-            $image = new Image();
-            $image->open($photo);
-            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
+//            $image = \think\Image::open($photo);
+//// 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.png
+//            $image->thumb(150, 150)->save('./thumb.png');
+//            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
         }
-        $this->ajaxReturn(successMsg($tempRelativePath . $fileName));
+        $this -> success($tempRelativePath . $fileName);
+//        $this->ajaxReturn(successMsg($tempRelativePath . $fileName));
     }
 
     /**从临时目录里移动文件到新的目录
