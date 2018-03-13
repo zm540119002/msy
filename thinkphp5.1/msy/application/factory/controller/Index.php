@@ -10,13 +10,12 @@ class Index extends Base
     }
     public function enters()
     {
-        if($this->request->isPost()){
-            $validate = new \app\factory\validate\Factory;
-//            print_r($validate);exit;
-
-            if (!$validate::check($_POST)) {
-                echo 1;exit;
-                dump($validate->getError());
+        if(request()->isPost()){
+            $data = input('post.');
+            // validate
+            $validate = validate('Factory');
+            if(!$validate->check($data)) {
+                $this->error($validate->getError());
             }
             $this->success('1');
         }
