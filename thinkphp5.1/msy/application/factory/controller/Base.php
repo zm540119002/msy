@@ -15,7 +15,7 @@ class Base extends Controller{
 
     //返回图片临时相对路径
     public function uploadImgToTemp(){
-        $img = input('post.img');
+        $img = isset($_POST['img'])? $_POST['img'] : '';
         // 获取图片
         list($type, $data) = explode(',', $img);
         // 判断文件类型
