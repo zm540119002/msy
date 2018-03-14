@@ -56,10 +56,18 @@ $(function(){
             return false;
         }
         $.post("enters",postData,function(info){
-            $('.weui-flex-item:eq(1)').removeClass('current');
-            $('.weui-flex-item:eq(2)').addClass('current');
-            $('.apply-module:eq(1)').hide();
-            $('.apply-module:eq(2)').show();
+            if(info.code==0){
+                dialog.error(info.msg);
+            }
+            if(info.code==1){
+                $('.weui-flex-item:eq(1)').removeClass('current');
+                $('.weui-flex-item:eq(2)').addClass('current');
+                $('.apply-module:eq(1)').hide();
+                $('.apply-module:eq(2)').show();
+                $('.weui-flex-item:eq(0)').addClass('disabled');
+                $('.weui-flex-item:eq(1)').addClass('disabled');
+            }
+
         })
     });
     //确定通过入驻
