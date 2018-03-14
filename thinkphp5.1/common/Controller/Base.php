@@ -35,29 +35,27 @@ class Base extends Controller{
             $ext = '.png';
         }
         if(!$ext){
-            $this->error('只支持:jpeg,jpg,gif,png格式的图片');
-//            $this->ajaxReturn(errorMsg('只支持:jpeg,jpg,gif,png格式的图片'));
+            return errorMsg('只支持:jpeg,jpg,gif,png格式的图片');
         }
         //上传公共路径
-        $uploadPath = C('UPLOAD_PATH');
+        $uploadPath = config('uploadDir.upload_path');
         if(!is_dir($uploadPath)){
             if(!mk_dir($uploadPath)){
-                $this -> error('创建Uploads目录失败');
-//                $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
+                return  errorMsg('创建Uploads目录失败');
             }
         }
         $uploadPath = realpath($uploadPath);
         if($uploadPath === false){
-            $this->ajaxReturn(errorMsg('获取Uploads实际路径失败'));
+            return  errorMsg('获取Uploads实际路径失败');
         }
         $uploadPath = $uploadPath . '/' ;
 
         //临时相对路径
-        $tempRelativePath = C('TEMP_PATH');
+        $tempRelativePath = config('uploadDir.temp_path');
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
-            $this->ajaxReturn(errorMsg('创建临时目录失败'));
+            return errorMsg('创建临时目录失败');
         }
         //文件名
         $fileName = time() . $ext;
@@ -67,18 +65,18 @@ class Base extends Controller{
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
         if(false === $returnData){
-            $this->ajaxReturn(errorMsg('保存文件失败'));
+            return errorMsg('保存文件失败');
         }
 
         //压缩文件
-        if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
-            $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
-            $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
-            $image = new Image();
-            $image->open($photo);
-            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
-        }
-        $this->ajaxReturn(successMsg($tempRelativePath . $fileName));
+//        if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
+//            $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
+//            $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
+//            $image = new Image();
+//            $image->open($photo);
+//            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
+//        }
+        return successMsg($tempRelativePath . $fileName);
     }
 
     /**从临时目录里移动文件到新的目录
@@ -122,61 +120,7 @@ class Base extends Controller{
         return $newRelativePath . $filename;
     }
 
-    //新增图片对比数据库，删除不同的图片
-    public function delImgFromPaths($oldImgPaths,$newImgPaths){
-        //上传文件公共路径
-        $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
-        if(!is_dir($uploadPath)){
-            $this->ajaxReturn(errorMsg('目录：'.$uploadPath.'不存在！'));
-        }
-
-        if(is_string($oldImgPaths) && is_string($newImgPaths)){
-            if($oldImgPaths !== $newImgPaths){
-                if(!file_exists($uploadPath . $oldImgPaths)){
-                    $this->ajaxReturn(errorMsg('旧文件不存在！'));
-                }
-                if(!unlink($uploadPath . $oldImgPaths)){
-                    $this->ajaxReturn(errorMsg('删除旧文件失败！'));
-                }
-            }
-        }elseif(is_array($oldImgPaths) && is_array($newImgPaths)){
-            $delImgPaths = array_diff($oldImgPaths,$newImgPaths);
-            foreach ($delImgPaths as $delImgPath) {
-                if(!file_exists($uploadPath . $delImgPath)){
-                    $this->ajaxReturn(errorMsg('旧文件不存在！'));
-                }
-                if(!unlink($uploadPath . $delImgPath)){
-                    $this->ajaxReturn(errorMsg('删除旧文件失败！'));
-                }
-            }
-        }
-    }
-
-    //删除图片
-    public function delImg($imgPaths){
-        //上传文件公共路径
-        $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
-        if(!is_dir($uploadPath)){
-            $this->ajaxReturn(errorMsg('目录：'.$uploadPath.'不存在！'));
-        }
-        if(is_string($imgPaths)){
-            if(!file_exists($uploadPath . $imgPaths)){
-                $this->ajaxReturn(errorMsg('旧文件不存在！'));
-            }
-            if(!unlink($uploadPath . $imgPaths)){
-                $this->ajaxReturn(errorMsg('删除旧文件失败！'));
-            }
-        }elseif(is_array($imgPaths) ){
-            foreach ($imgPaths as $delImgPath) {
-                if(!file_exists($uploadPath . $delImgPath)){
-                    $this->ajaxReturn(errorMsg('文件不存在！'));
-                }
-                if(!unlink($uploadPath . $delImgPath)){
-                    $this->ajaxReturn(errorMsg('删除文件失败！'));
-                }
-            }
-        }
-    }
+   
 }
 
 

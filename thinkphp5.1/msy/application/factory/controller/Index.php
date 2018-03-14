@@ -2,6 +2,7 @@
 namespace app\factory\controller;
 use think\Controller;
 use app\common\model\Factory as M;
+use common\controller\Base;
 class Index extends Base
 {
     public function index()
