@@ -1,12 +1,12 @@
 <?php
-namespace common\Controller;
+namespace common\controller;
 
-use Think\Controller;
-use Think\Image;
+use think\Controller;
+use think\Image;
 
 /**公共基础控制器
  */
-class BaseController extends Controller{
+class Base extends Controller{
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
