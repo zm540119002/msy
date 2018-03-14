@@ -684,3 +684,15 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     return $newRelativePath.$filename;
 
 }
+
+
+
+
+/**
+ * 生成数据返回值
+ */
+function ajaxReturn($msg,$status = -1,$data = []){;
+    $rs = ['status'=>$status,'msg'=>$msg];
+    if(!empty($data))$rs['data'] = $data;
+    return $rs;
+}
