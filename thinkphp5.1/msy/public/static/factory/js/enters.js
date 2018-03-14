@@ -26,8 +26,8 @@ $(function(){
     });
     //验证是否上传图片 与 提交申请
     $('body').on('click','.two-step',function(){
-        factoryFullName=$('.factoryFullName').val();
-        agentName=$('.agentName').val();
+        factoryFullName=trim($('.factoryFullName').val(),'g');
+        agentName=trim($('.agentName').val(),'g');
         businessLicense=$('.business-license').val();
         agentAuthorization=$('.agent-authorization').val();
         var content='';
