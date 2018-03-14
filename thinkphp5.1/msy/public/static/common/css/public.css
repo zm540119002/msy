@@ -27,6 +27,7 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 .f20{font-size:0.20rem;}
 .f24{font-size:0.24rem;}
 .f28{font-size:0.28rem;}
+.disabled { pointer-events: none; }  
 /*头部样式*/
 .header{
     width: 100%;
