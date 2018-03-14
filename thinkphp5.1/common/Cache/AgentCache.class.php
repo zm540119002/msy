@@ -1,5 +1,5 @@
 <?php
-namespace common\Cache;
+namespace common\cache;
 
 class AgentCache{
     private static $_cache_key = 'cache_agent_';
