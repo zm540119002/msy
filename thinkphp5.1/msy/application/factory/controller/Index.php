@@ -14,8 +14,6 @@ class Index extends Base
             $m = new M();
             $rs = $m->add();
             return $rs;
-            
-            $this->success('1');
         }
         
         return $this->fetch();

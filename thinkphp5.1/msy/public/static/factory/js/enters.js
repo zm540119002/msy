@@ -50,12 +50,12 @@ $(function(){
             dialog.error(content);
             return false;
         }
-        $.post("enters",postData,function(info){
-            if(info.status == -1){
-                dialog.error(info.msg);
+        $.post("enters",postData,function(msg){
+            if(msg.status == 0){
+                dialog.error(msg.info);
             }
-            if(info.status == 1){
-                dialog.success(info.msg);
+            if(msg.status == 1){
+                dialog.success(msg.info);
                 $('.weui-flex-item:eq(1)').removeClass('current');
                 $('.weui-flex-item:eq(2)').addClass('current');
                 $('.apply-module:eq(1)').hide();

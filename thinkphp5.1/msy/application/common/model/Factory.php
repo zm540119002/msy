@@ -18,13 +18,15 @@ class Factory extends Model {
 		$data = input('post.');
 		$validate = validate('Factory');
 		if(!$result = $validate->scene('add')->check($data)) {
-			return ajaxReturn($validate->getError());
+			return errorMsg($validate->getError());
 		}
+		$data['business_license'] = moveImgFromTemp(config('uploadDir.factory_auto'),basename($data['business_license']));
+		$data['auth_letter'] = moveImgFromTemp(config('uploadDir.factory_auto'),basename($data['auth_letter']));
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
-			return ajaxReturn("已提交申请", 1);
+			return successMsg("已提交申请");
 		}else{
-			return ajaxReturn($this->getError(),-1);
+			return errorMsg($this->getError());
 		}
 	}
 }
