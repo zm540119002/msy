@@ -34,27 +34,24 @@ class Base extends Controller{
             $this->error('只支持:jpeg,jpg,gif,png格式的图片');
         }
         //上传公共路径
-        $uploadPath = config('base.upload_path');
-//        if(!is_dir($uploadPath)){
-//            if(!mk_dir($uploadPath)){
-//                $this->error('创建Uploads目录失败');
-//               // $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
-//            }
-//        }
+        $uploadPath = config('uploadDir.upload_path');
+        if(!is_dir($uploadPath)){
+            if(!mk_dir($uploadPath)){
+                return errorMsg('创建Uploads目录失败');
+            }
+        }
 
         $uploadPath = realpath($uploadPath);
         if($uploadPath === false){
-            $this->error('获取Uploads实际路径失败');
-//            $this->ajaxReturn(errorMsg('获取Uploads实际路径失败'));
+            return errorMsg('获取Uploads实际路径失败');
         }
         $uploadPath = $uploadPath . '/' ;
         //临时相对路径
-        $tempRelativePath =  config('base.temp_path');
+        $tempRelativePath =  config('uploadDir.temp_path');
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
-            $this -> error('创建临时目录失败');
-//            $this->ajaxReturn(errorMsg('创建临时目录失败'));
+            return errorMsg('创建临时目录失败');
         }
         //文件名
         $fileName = time() . $ext;
@@ -62,10 +59,9 @@ class Base extends Controller{
         $photo = $storePath . $fileName;
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
-//        if(false === $returnData){
-//            $this -> error('保存文件失败');
-////            $this->ajaxReturn(errorMsg('保存文件失败'));
-//        }
+        if(false === $returnData){
+            return errorMsg('保存文件失败');
+        }
 
         //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
@@ -76,8 +72,7 @@ class Base extends Controller{
 //            $image->thumb(150, 150)->save('./thumb.png');
 //            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
         }
-        $this -> success($tempRelativePath . $fileName);
-//        $this->ajaxReturn(successMsg($tempRelativePath . $fileName));
+        return successMsg($tempRelativePath . $fileName);
     }
 
     /**从临时目录里移动文件到新的目录

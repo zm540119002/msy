@@ -3,7 +3,6 @@ $(document).ready(function(){
     $('[type=file]').on('change',function(){
         var img = event.target.files[0];
         var obj=$(this).parent();
-        console.log(img);
         // 判断是否图片
         if(!img){
             return false;
@@ -27,11 +26,11 @@ $(document).ready(function(){
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
             //提交
-            $.post("uploadImgToTemp",postData,function(info){
-                if(info.code == 1){
-                    $(obj).find('.img').val(info.msg);
+            $.post("uploadImgToTemp",postData,function(msg){
+                if(msg.status == 1){
+                    $(obj).find('.img').val(msg.info);
                 }else{
-                    dialog.error(info.msg)
+                    dialog.error(msg.info)
                 }
             })
         }
