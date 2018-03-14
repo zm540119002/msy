@@ -1,11 +1,9 @@
 <?php
-namespace common\Controller;
-
-use common\Lib\AuthUser;
+namespace common\controller;
 
 /**登录验证控制器基类
  */
-class AuthUserController extends BaseController{
+class AuthUser extends Base{
     protected $user = null;
     protected $loginUrl = 'Home/User/login';//登录URL
 

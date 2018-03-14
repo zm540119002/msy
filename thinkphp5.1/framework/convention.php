@@ -21,7 +21,7 @@ return [
         'auto_bind_module'       => false,
         // 注册的根命名空间
         'root_namespace'         => [
-            'common'  => '../common/',
+            'common'  => '../../common/',
         ],
         // 默认输出类型
         'default_return_type'    => 'html',
