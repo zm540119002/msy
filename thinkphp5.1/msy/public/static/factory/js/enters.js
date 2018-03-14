@@ -28,8 +28,6 @@ $(function(){
     $('body').on('click','.two-step',function(){
         factoryFullName=trim($('.factoryFullName').val(),'g');
         agentName=trim($('.agentName').val(),'g');
-        console.log(factoryFullName);
-        console.log(agentName);
         businessLicense=$('.business-license').val();
         agentAuthorization=$('.agent-authorization').val();
         var content='';
