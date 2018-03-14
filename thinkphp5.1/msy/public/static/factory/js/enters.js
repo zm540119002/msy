@@ -24,12 +24,7 @@ $(function(){
             $('.apply-module:eq(1)').show();
         }
     });
-
-    // 上传图片资料
-    $('body').on('change','.uploadImg',function(){
-        
-    });
-    //验证是否上传图片
+    //验证是否上传图片 与 提交申请
     $('body').on('click','.two-step',function(){
         factoryFullName=$('.factoryFullName').val();
         agentName=$('.agentName').val();
@@ -56,10 +51,11 @@ $(function(){
             return false;
         }
         $.post("enters",postData,function(info){
-            if(info.code==0){
+            if(info.status == -1){
                 dialog.error(info.msg);
             }
-            if(info.code==1){
+            if(info.status == 1){
+                dialog.success(info.msg);
                 $('.weui-flex-item:eq(1)').removeClass('current');
                 $('.weui-flex-item:eq(2)').addClass('current');
                 $('.apply-module:eq(1)').hide();
