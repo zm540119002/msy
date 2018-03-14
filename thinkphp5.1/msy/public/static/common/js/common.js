@@ -417,3 +417,14 @@ function copyDataByName(fromObj,toObj) {
 function flushPage() {
     location.reload();
 }
+
+/**去除输入框空格 */
+function trim(str,is_global){
+    var result;
+        result = str.replace(/(^\s+)|(\s+$)/g,"");
+        if(is_global.toLowerCase()=="g")
+        {
+            result = result.replace(/\s/g,"");
+        }
+        return result;
+}
