@@ -1,8 +1,8 @@
 <?php
-namespace common\Controller;
+namespace common\controller;
 
-use Think\Controller;
-use Think\Image;
+use think\controller;
+use think\Image;
 
 /**公共基础控制器
  */
