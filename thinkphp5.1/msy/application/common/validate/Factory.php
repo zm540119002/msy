@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\validate;
+namespace app\common\validate;
 
 use think\Validate;
 
@@ -21,6 +21,11 @@ class Factory extends Validate
         'business_license.max'   => '营业执照存在地址过长',
         'auth_letter.require'   => '授权信必须上传',
         'auth_letter.max'   => '授权信存在地址最多不能超过25个字符',
+    ];
+    
+    protected $scene = [
+        'add'   =>  ['name','agent','business_license','auth_letter'],
+        'edit'  =>  ['name','agent','business_license','auth_letter'],
     ];
 
 
