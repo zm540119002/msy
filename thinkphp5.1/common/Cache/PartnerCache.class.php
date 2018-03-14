@@ -1,5 +1,5 @@
 <?php
-namespace common\Cache;
+namespace common\cache;
 
 class PartnerCache{
     private static $_cache_key = 'cache_partner_';
