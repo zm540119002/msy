@@ -5,7 +5,7 @@ use common\Component\WxpayAPI\Jssdk;
 
 /**公共基础控制器
  */
-class WXBaseController extends BaseController{
+class WXBase extends Base{
     private $_jssdk = null;
     protected $host;
     public function __construct(){
