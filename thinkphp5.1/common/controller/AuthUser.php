@@ -1,13 +1,13 @@
 <?php
 namespace common\controller;
 
-use \common\lib\User;
+use common\lib\User;
 
-/**登录验证控制器基类
+/**用户信息验证控制器基类
  */
-class AuthUser extends Base{
+class AuthUser extends WXBase{
     protected $user = null;
-    protected $loginUrl = 'Home/User/login';//登录URL
+    protected $loginUrl = 'index/User/login';//登录URL
 
     public function __construct(){
         parent::__construct();

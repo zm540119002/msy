@@ -20,7 +20,7 @@ class User{
 
     /**获取用户信息
      */
-    public static function getUser($data){
+    public static function get($data){
         $where = array(
             'status' => 0,
         );
