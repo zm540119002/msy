@@ -11,7 +11,7 @@ class Index extends Base
     }
     public function enters()
     {
-        if(requst()->isPost()){
+        if(request()->isPost()){
             $m = new M();
             $rs = $m->add();
             return $rs;
