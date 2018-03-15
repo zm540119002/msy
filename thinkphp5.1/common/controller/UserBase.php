@@ -14,11 +14,11 @@ class UserBase extends Base{
         //判断是否登录
         $this->user = UserAuth::check();
         if (!$this->user) {
-            if (IS_AJAX) {
+            if (request()->isAjax()) {
                 header('HTTP/1.1 200');
                 $this->ajaxReturn(successMsg('isAjax'));
             }else{
-                $this->error(C('ERROR_LOGIN_REMIND'),U($this->loginUrl));
+                $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
     }

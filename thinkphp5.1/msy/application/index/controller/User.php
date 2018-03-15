@@ -1,5 +1,5 @@
 <?php
-namespace index\controller;
+namespace app\index\controller;
 
 use think\Controller;
 use common\lib\UserAuth;
@@ -11,28 +11,28 @@ class User extends Controller{
 
     //登录
     public function login(){
-        if (IS_POST) {
+        if (request()->isPost()) {
             $this->_login();
         } else {
-            $this->display();
+            $this->fetch();
         }
     }
 
     //注册
     public function register(){
-        if (IS_POST) {
+        if (request()->isPost()) {
             $this->_register();
         } else {
-            $this->display();
+            $this->fetch();
         }
     }
 
     //忘记密码
     public function forget_password(){
-        if (IS_POST) {
+        if (request()->isPost()) {
             $this->_forget_password();
         } else {
-            $this->display();
+            $this->fetch();
         }
     }
 
@@ -50,7 +50,7 @@ class User extends Controller{
     }
 
     private function _login(){
-        if(!IS_POST){
+        if(!request()->isPost()){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
         $name = I('post.name','','string');
@@ -110,7 +110,7 @@ class User extends Controller{
     }
 
     private function _register(){
-        if(!IS_POST){
+        if(!request()->isPost()){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
@@ -136,7 +136,7 @@ class User extends Controller{
     }
 
     private function _forget_password(){
-        if(!IS_POST){
+        if(!request()->isPost()){
             $this->ajaxReturn(errorMsg(C('NOT_POST')));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
