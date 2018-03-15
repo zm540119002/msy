@@ -1,6 +1,8 @@
 <?php
 namespace common\controller;
 
+use \common\lib\User;
+
 /**登录验证控制器基类
  */
 class AuthUser extends Base{
@@ -10,7 +12,7 @@ class AuthUser extends Base{
     public function __construct(){
         parent::__construct();
         //判断是否登录
-        $this->user = AuthUser::check();
+        $this->user = User::check();
         if (!$this->user) {
             if (IS_AJAX) {
                 header('HTTP/1.1 200');
