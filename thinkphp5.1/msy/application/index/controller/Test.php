@@ -9,6 +9,5 @@ class Test extends Base
     {
         return $this->fetch();
 //        return dump(config());
-//        return dump(env());
     }
 }
