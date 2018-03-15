@@ -3,8 +3,6 @@ namespace common\Controller;
 
 use common\Component\WxpayAPI\Jssdk;
 
-/**公共基础控制器
- */
 class WXBase extends Base{
     private $_jssdk = null;
     protected $host;
