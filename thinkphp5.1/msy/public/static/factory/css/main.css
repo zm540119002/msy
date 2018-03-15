@@ -98,3 +98,126 @@
     background: #ff7aab;
     color:#fff;
 }
+.add-type-tag {
+    display: block;
+    padding:0.20rem 0 0.10rem 0;
+    margin:0 0 0.12rem 0.15rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.add-type-tag .add-icons{
+    display: block;
+    width:200px;
+    height:32px;
+    line-height:32px;
+    padding:0 0 0 38px;
+    background-image:url(../../common/img/icons/operate-icons.png);
+    background-repeat: no-repeat;
+    background-size:32px 175px;
+    color:#39b54a;
+
+}
+.set-tag-tipc{
+    padding:0 0 0 0.15rem;
+}
+.classify-label-content .tag-item:first-child{
+    border-top:1px solid #d9d9d9;
+}
+.classify-label-content .tag-item{
+    padding:0.12rem 0.10rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.classify-label-content .columns_flex{
+    justify-content: space-between;
+}
+.classify-operate-btn a{
+    display:inline-block;
+    width:32px;
+    height:32px;
+    margin:0 0 0 12px;
+    background-image:url(../../common/img/icons/operate-icons.png);
+    background-repeat: no-repeat;
+    background-size:32px 175px;
+    text-indent:-9999rem;
+}
+.classify-operate-btn a.add-icons{
+    background-position:0 0;
+}
+.classify-operate-btn a.edit-icons{
+    background-position:0 -35px;
+}
+.classify-operate-btn a.del-icons{
+    background-position:0 -71px;
+}
+.classify-operate-btn a.move-icons{
+    background-position:0 -106px;
+}
+.classify-operate-btn a.down-icons{
+    background-position:0 -142px;
+}
+.addTagLayer .layui-m-layercont{
+    padding:0.20rem;
+}
+.addTagLayer .classify-tag-name{
+    width:100%;
+    padding:10px 0;
+    background: #efefef;
+    border-radius:5px;
+    text-align:center;
+}
+.addProductContent {
+    padding:0.25rem 0.15rem 0;
+}
+.addProductContent .right-arrow{
+    position:relative;
+    display: block;
+    width:100%;
+    padding:0.18rem 0 0.18rem 0;
+    border-bottom:1px solid #d9d9d9;
+    color:#39b54a;
+}
+.addProductContent .right-arrow::after{
+    border-bottom: .12em solid #39b54a;
+    border-left: .12em solid #39b54a;
+    /*margin:0 0 0.15rem 0;*/
+}
+.price-flex{
+    display: inline-block;
+    width:48%;
+    border:1px solid #d9d9d9;
+    border-radius:3px;
+}
+.price-flex label,
+.price-flex input{
+    height:38px;
+    float:left;
+}
+.price-flex label{
+    line-height: 38px;
+    border-right:1px solid #d9d9d9;
+}
+.price-flex input{
+    width:100px;
+    box-sizing:border-box;
+    text-indent: 10px;
+}
+.editDetailLayer .layui-m-layercont{
+    height:6.5rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.editParameterLayer textarea{
+    width:100%;
+    box-sizing: border-box;
+}
+.delete-picture{
+    position:absolute;
+    right:0;
+    top:0;
+    z-index:5;
+    width:30px;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    background:#ff7aab;
+    color:#fff;
+}
