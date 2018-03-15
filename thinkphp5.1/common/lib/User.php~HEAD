@@ -1,9 +1,9 @@
 <?php
-namespace web\all\Lib;
+namespace common\lib;
 
 /**系统用户的登录/退出/是否登录判断
  */
-class Authuser{
+class User{
     /**检查是否登录
      */
     public static function check(){
