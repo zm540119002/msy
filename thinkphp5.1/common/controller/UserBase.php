@@ -5,7 +5,7 @@ use common\lib\UserAuth;
 
 /**用户信息验证控制器基类
  */
-class UserBase extends WXBase{
+class UserBase extends Base{
     protected $user = null;
     protected $loginUrl = 'index/User/login';//登录URL
 
