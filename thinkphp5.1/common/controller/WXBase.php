@@ -1,7 +1,7 @@
 <?php
-namespace common\Controller;
+namespace common\controller;
 
-use common\Component\WxpayAPI\Jssdk;
+use component\wx_pay_api\Jssdk;
 
 class WXBase extends Base{
     private $_jssdk = null;
