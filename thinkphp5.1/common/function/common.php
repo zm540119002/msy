@@ -704,7 +704,7 @@ function ajaxReturn($msg,$status = -1,$data = []){;
  */
 function moveImgFromTemp($newRelativePath,$filename){
     //上传文件公共路径
-    $uploadPath = realpath( config('uploadDir.upload_path')) . '/';
+    $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
             return errorMsg('创建Uploads目录失败');
@@ -712,7 +712,7 @@ function moveImgFromTemp($newRelativePath,$filename){
     }
 
     //临时相对路径
-    $tempRelativePath = config('uploadDir.temp_path');
+    $tempRelativePath = config('upload_dir.temp_path');
 
     //旧路径
     $tempPath = $uploadPath . $tempRelativePath;

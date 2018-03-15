@@ -38,7 +38,7 @@ class Base extends Controller{
             return errorMsg('只支持:jpeg,jpg,gif,png格式的图片');
         }
         //上传公共路径
-        $uploadPath = config('uploadDir.upload_path');
+        $uploadPath = config('upload_dir.upload_path');
         if(!is_dir($uploadPath)){
             if(!mk_dir($uploadPath)){
                 return  errorMsg('创建Uploads目录失败');
@@ -51,7 +51,7 @@ class Base extends Controller{
         $uploadPath = $uploadPath . '/' ;
 
         //临时相对路径
-        $tempRelativePath = config('uploadDir.temp_path');
+        $tempRelativePath = config('upload_dir.temp_path');
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
@@ -78,49 +78,6 @@ class Base extends Controller{
 //        }
         return successMsg($tempRelativePath . $fileName);
     }
-
-    /**从临时目录里移动文件到新的目录
-     * @param $newRelativePath 新相对路径
-     * @param $filename 文件名
-     * @return string 返回相对文件路径
-     */
-    public function moveImgFromTemp($newRelativePath,$filename){
-        //上传文件公共路径
-        $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
-        if(!is_dir($uploadPath)){
-            if(!mk_dir($uploadPath)){
-                $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
-            }
-        }
-
-        //临时相对路径
-        $tempRelativePath = C('TEMP_PATH');
-
-        //旧路径
-        $tempPath = $uploadPath . $tempRelativePath;
-        if(!is_dir($tempPath)){
-            $this->ajaxReturn(errorMsg('临时目录不存在！'));
-        }
-        //旧文件
-        $tempFile = $tempPath . $filename;
-
-        //新路径
-        $newPath = $uploadPath . $newRelativePath;
-        if(!mk_dir($newPath)){
-            $this->ajaxReturn(errorMsg('创建新目录失败'));
-        }
-        //新文件
-        $newFile = $newPath . $filename;
-        //重命名文件
-        if(file_exists($tempFile)){//临时文件存在则移动
-            if(!rename($tempFile,$newFile)){
-                $this->ajaxReturn(errorMsg('重命名文件失败'));
-            }
-        }
-        return $newRelativePath . $filename;
-    }
-
-   
 }
 
 
