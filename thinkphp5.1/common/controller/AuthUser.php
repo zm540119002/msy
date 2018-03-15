@@ -1,16 +1,18 @@
 <?php
 namespace common\controller;
 
-/**登录验证控制器基类
+use common\lib\User;
+
+/**用户信息验证控制器基类
  */
-class AuthUser extends Base{
+class AuthUser extends WXBase{
     protected $user = null;
-    protected $loginUrl = 'Home/User/login';//登录URL
+    protected $loginUrl = 'index/User/login';//登录URL
 
     public function __construct(){
         parent::__construct();
         //判断是否登录
-        $this->user = AuthUser::check();
+        $this->user = User::check();
         if (!$this->user) {
             if (IS_AJAX) {
                 header('HTTP/1.1 200');

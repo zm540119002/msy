@@ -6,7 +6,7 @@
  * Time: 15:42
  */
 
-namespace web\all\Lib;
+namespace common\lib;
 
 
 /**
