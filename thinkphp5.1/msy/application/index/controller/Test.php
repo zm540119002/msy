@@ -8,6 +8,6 @@ class Test extends Base
     public function index()
     {
         return $this->fetch();
-        return dump(config());
+//        return dump(config());
     }
 }
