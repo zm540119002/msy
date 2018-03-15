@@ -1,10 +1,10 @@
 <?php
 namespace index\controller;
 
-use common\controller\AuthUser;
-use common\lib\User;
+use think\Controller;
+use common\lib\UserAuth;
 
-class UserCenter extends AuthUser{
+class User extends Controller{
     public function __construct(){
         parent::__construct();
     }
@@ -38,7 +38,7 @@ class UserCenter extends AuthUser{
 
     //退出
     public function logout(){
-        User::removeLogin();
+        UserAuth::removeLogin();
         header('Content-type: text/html; charset=utf-8');
         echo '退出成功！';exit;
         $this->redirect('login');
@@ -64,7 +64,7 @@ class UserCenter extends AuthUser{
             if (!$password) {
                 $this->ajaxReturn(errorMsg('请输入密码！'));
             }
-            $user = User::get(array(
+            $user = UserAuth::get(array(
                 'name' => $name,
                 'password' => $password,
             ));
@@ -82,7 +82,7 @@ class UserCenter extends AuthUser{
             if(!$this->_check_captcha($mobile_phone,$captcha,$captcha_type)){
                 $this->ajaxReturn(errorMsg('验证码错误，请重新获取验证码！'));
             }
-            $user = User::get(array(
+            $user = UserAuth::get(array(
                 'mobile_phone' => $mobile_phone,
                 'password' => $password,
             ));
@@ -97,15 +97,15 @@ class UserCenter extends AuthUser{
         preg_match ($pattern,$backUrl,$matches);
         //cookie购物车入库
         if($user['id']){
-            $res = User::saveCookieCartToMysql($user['id'],$matches[1]);
+            $res = UserAuth::saveCookieCartToMysql($user['id'],$matches[1]);
             if(!$res){
                 $this->ajaxReturn(errorMsg('购物车入库失败'));
             }
         }
         //更新最后登录的时间
-        User::saveLastLoginTimeById($user['id']);
+        UserAuth::saveLastLoginTimeById($user['id']);
         //设置session
-        User::setSession($user);
+        UserAuth::setSession($user);
         $this->ajaxReturn(successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:U('login')));
     }
 
