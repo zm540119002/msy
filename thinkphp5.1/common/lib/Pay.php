@@ -6,7 +6,7 @@
  * Time: 14:45
  */
 
-namespace web\all\Lib;
+namespace common\lib;
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.JsApiPay.php');
 require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.NativePay.php');

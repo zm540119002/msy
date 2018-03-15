@@ -15,9 +15,9 @@
  *
  * @package framework
  */
-namespace web\all\Lib;
+namespace common\lib;
 
-class Validater
+class Validate
 {
     /**
      * The max count of args.
