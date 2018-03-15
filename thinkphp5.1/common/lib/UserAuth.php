@@ -3,7 +3,7 @@ namespace common\lib;
 
 /**系统用户的登录/退出/是否登录判断
  */
-class User{
+class UserAuth{
     /**检查是否登录
      */
     public static function check(){
