@@ -2,6 +2,7 @@
 namespace app\factory\controller;
 use think\Controller;
 use app\common\model\Factory as M;
+use common\controller\Base;
 class Index extends Base
 {
     public function index()
@@ -10,16 +11,12 @@ class Index extends Base
     }
     public function enters()
     {
-        if(request()->isPost()){
+        if(requst()->isPost()){
             $m = new M();
             $rs = $m->add();
             return $rs;
-            
-            $this->success('1');
         }
-        
         return $this->fetch();
-
     }
 
 }

@@ -9,7 +9,6 @@ class Index extends Controller
     {
 //        return dump(config());
 //        return $this->request->param('aa');
-        url();
         return $this->fetch();
     }
 }
