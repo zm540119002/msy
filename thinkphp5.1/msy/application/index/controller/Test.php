@@ -2,7 +2,6 @@
 namespace app\index\controller;
 
 use common\controller\Base;
-use Config;
 
 class Test extends Base
 {
