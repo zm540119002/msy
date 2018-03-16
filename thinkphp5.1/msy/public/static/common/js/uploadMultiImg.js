@@ -27,16 +27,12 @@ $(function(){
                 reader.onload = function(e){
                     var imgUrl=e.target.result;
                     imgArr.push(imgUrl);
-                    console.log(imgArr);
                     var img=  $('<img src="" class="upload_img">');
                     img.attr("src", imgUrl);
-                    console.log(imgUrl);
                     var imgAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg" name=""><span class="delete-picture">X</span></div></li>');
                     imgAdd.find('.picture-module').append(img);
                     imgContainer.append(imgAdd);             
                     }
-
-                
             };
         });
         //删除
@@ -82,10 +78,13 @@ $(function(){
                 }
                 var postDate = {};
                 postDate.imgs = layermultiImgAttr;
-                
-                $.post('uploadMultiImgToTemp',postDate,function(){
-
-
+                $.post('uploadMultiImgToTemp',postDate,function(info){
+                   if(info.status == 0){
+                       dialog.error(info.msg);
+                       return false;
+                   }
+                    $('.goods-detail1').data('src',layermultiImgAttr);
+                    layer.close(index);
                 })
             }
         })

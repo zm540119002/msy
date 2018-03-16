@@ -11,7 +11,7 @@
 				<div class="picture-module">
 					<input type="file" class="uploadImg uploadSingleImg" name="">
 					<img class="upload_img" src="" alt="">
-					<input type="hidden" class="layer-thumbnail-picture img" value=""/>
+					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
 				</div>
 				<!--<p>企业营业执照</p>-->
 			</div>
@@ -43,7 +43,7 @@
 			<div class="picture-module">
 				<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" >
 				<img class="upload_img" src="" alt="">
-				<input type="hidden" class="business-license img" value=""/>
+				<input type="hidden" class="business-license img"  value=""/>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
 				</li>
 				<li >
 					<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图</a>
-					<input type="hidden" class="thumbnail-picture" value="" name="thumbnailPicture">
+					<input type="hidden" class="hidden_img" value="" name="thumbnailPicture">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >编辑商品分类标签</a>
@@ -81,7 +81,7 @@
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图</a>
-					<input type="hidden" class="focus-picture" value="" name="focusPicture">
+					<input type="hidden" class="hidden_img" value="" name="focusPicture">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑商品参数</a>
@@ -90,6 +90,7 @@
 				<li class="">
 					<a href="javascript:void(0);" class="editDetail right-arrow">编辑商品详情</a>
 					<input type="hidden" class="goods-detail" data-src="" value="" name="goodsDetail">
+					<input type="hidden" class="goods-detail1" data-src="" value="" name="goodsDetail">
 				</li>
 			</ul>
 		</form>
