@@ -84,10 +84,10 @@ $(function(){
                 postDate.imgs = layermultiImgAttr;
                 comsole.log(postDate.imgs[0]);
 
-                // $.post('uploadMultiImgToTemp',postDate,function(){
-                //
-                //
-                // })
+                $.post('uploadMultiImgToTemp',postDate,function(){
+
+
+                })
             }
         })
     });
