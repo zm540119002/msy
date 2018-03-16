@@ -25,10 +25,12 @@ $(function(){
             postData.imgHeight = 100;
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
+            console.log(postData);
             //提交
             $.post("uploadImgToTemp",postData,function(msg){
                 if(msg.status == 1){
                     $(obj).find('.img').val(msg.info);
+                    $(obj).find('img').attr('src','/uploads/'+msg.info);
                 }else{
                     dialog.error(msg.info)
                 }

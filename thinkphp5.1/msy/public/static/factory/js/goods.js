@@ -1,23 +1,8 @@
 $(function(){
     //上传缩略图
-    var uploadThumbnail=$('#uploadThumbnail').html();
     $('body').on('click','.upload-thumbnail',function(){
-        layer.open({
-            title:['上传缩略图','border-bottom:1px solid #d9d9d9;'],
-            className:'uploadThumbnailLayer',
-            content:uploadThumbnail,
-            btn:['确定','取消'],
-            success:function(){
-                var thumbnailSrc=$('.thumbnail-picture').val();
-                $('.uploadThumbnailLayer img').attr('src',thumbnailSrc);
-
-            },
-            yes:function(index){
-                var layerThumbnailSrc=$('.uploadThumbnailLayer .img').val();
-                $('.thumbnail-picture').val(layerThumbnailSrc);
-                layer.close(index);
-            }
-        })
+        var _this = $(this);
+        uploadsImg(_this,'上传商品首焦图','uploadThumbnailLayer');
     });
     //选择商品分类标签
     var editGoodsLabel=$('#editGoodsLabel').html();
@@ -53,22 +38,8 @@ $(function(){
     });
     //上传首焦图
     $('body').on('click','.uploadFocusPicture',function(){
-        layer.open({
-            title:['上传商品首焦图'],
-            className:'uploadFocusLayer',
-            content:uploadThumbnail,
-            btn:['确定','取消'],
-            success:function(){
-                var focusPicture=$('.focus-picture').val();
-                $('.uploadFocusLayer img').attr('src',focusPicture);
-
-            },
-            yes:function(index){
-                var layerFocusSrc=$('.uploadFocusLayer .img').val();
-                $('.focus-picture').val(layerFocusSrc);
-                layer.close(index);
-            }
-        })
+        var _this = $(this);
+        uploadsImg(_this,'上传商品首焦图','uploadFocusLayer');
     })
 
     //编辑商品参数
@@ -93,11 +64,11 @@ $(function(){
     
     //增加商品
     $('body').on('click','.identifyNewGoods',function(){
-        var goodsDetail=$('.goods-detail').data('src');
+        var goodsDetail=$('.goods-detail1').data('src');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
         postData.goodsDetail=goodsDetail;
-        console.log(postData);
+
         var content='';
         if(!postData.goodsName){
             content='请填写商品名称';
@@ -127,4 +98,28 @@ $(function(){
     })
 
 });
+//弹窗单图片上传
+function uploadsImg(obj,tilt,className) {
+    var uploadSingleImgHtml=$('#uploadSingleImgHtml').html();
+    layer.open({
+        title:[tilt,'border-bottom:1px solid #d9d9d9;'],
+        className:className,
+        content:uploadSingleImgHtml,
+        btn:['确定','取消'],
+        success:function(){
+            var imgSrc=obj.siblings('.hidden_img').val();
+            $('.'+ className).find('img').attr('src',imgSrc);
+            $('.'+ className).find('.img').val(imgSrc);
+        },
+        yes:function(index){
+            var layerImgSrc= $('.'+ className).find('.img').val();
+            if(layerImgSrc.indexOf("uploads") == -1){
+                layerImgSrc= '/uploads/'+layerImgSrc;
+            }
+            obj.siblings('.hidden_img').val(layerImgSrc);
+            layer.close(index);
+        }
+    })
+}
+
 
