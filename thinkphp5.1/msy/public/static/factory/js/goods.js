@@ -1,6 +1,5 @@
 $(function(){
     //上传缩略图
-
     $('body').on('click','.upload-thumbnail',function(){
         var _this = $(this);
         uploadsImg(_this,'上传商品首焦图','uploadThumbnailLayer');
@@ -99,12 +98,13 @@ $(function(){
     })
 
 });
+//弹窗单图片上传
 function uploadsImg(obj,tilt,className) {
-    var uploadThumbnail=$('#uploadThumbnail').html();
+    var uploadSingleImgHtml=$('#uploadSingleImgHtml').html();
     layer.open({
         title:[tilt,'border-bottom:1px solid #d9d9d9;'],
         className:className,
-        content:uploadThumbnail,
+        content:uploadSingleImgHtml,
         btn:['确定','取消'],
         success:function(){
             var imgSrc=obj.siblings('.hidden_img').val();
