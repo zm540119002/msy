@@ -52,15 +52,17 @@ function uploadsMultiImg(){
             content:editDetail,
             btn:['确定','取消'],
             success:function(){
-                var html='';
-                html+='<li>';
-                html+='<div class="picture-module active">';
-                html+='<input type="file" class="uploadImg" name="">';
-                html+='<span class="delete-picture">X</span>';
-                html+='<img src="" class="upload_img">';
-                html+='</div>'
-                html+='</li>';
+                var html=$('#img_list').html();
+                // html+='<li>';
+                // html+='<div class="picture-module active">';
+                // html+='<input type="file" class="uploadImg" name="">';
+                // html+='<span class="delete-picture">X</span>';
+                // html+='<img src="" class="upload_img">';
+                // html+='</div>'
+                // html+='</li>';
+                
                 var multiImgAttr=$('.goods-detail').data('src');
+                console.log(multiImgAttr.length)
                 for(var i=0;i<multiImgAttr.length;i++){
                     $('.editDetailLayer .multi-picture-module').append(html);
                     $('.editDetailLayer .upload_img').eq(i).attr('src',multiImgAttr[i]);
