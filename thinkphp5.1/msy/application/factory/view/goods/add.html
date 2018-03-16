@@ -32,7 +32,22 @@
 		<textarea class="editGoodsText" name="" id="" cols="30" rows="10" val=""></textarea>
 	</div>
 </section>
-
+<!--编辑商品详情-->
+<section id="editDetail" style="display: none;">
+    <p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+    <form class="">
+        <ul class="upload-picture-module multi-picture-module f24"></ul>
+    </form>
+    <div class="upload-picture-module f24">
+        <div>
+            <div class="picture-module">
+                <input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" >
+                <img class="upload_img" src="" alt="">
+                <input type="hidden" class="business-license img"  value=""/>
+            </div>
+        </div>
+    </div>
+</section>
 <article class="f24">
 	<section>
 		<form class="addProductContent">
@@ -75,7 +90,7 @@
 				<li class="">
 					<a href="javascript:void(0);" class="editDetail right-arrow">编辑商品详情</a>
 					<input type="hidden" class="goods-detail" data-src="" value="" name="goodsDetail">
-					<input type="hidden" class="goods-detail1" data-src="" value="" name="goodsDetail">
+					<!--<input type="hidden" class="goods-detail1" data-src="" value="" name="goodsDetail">-->
 				</li>
 			</ul>
 		</form>
@@ -91,6 +106,7 @@
 {block name="script"}
 <script type="text/javascript" src="factory_js/goods.js"></script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
 <script type="text/javascript">
 </script>
 {/block}
