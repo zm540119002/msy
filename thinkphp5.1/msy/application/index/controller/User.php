@@ -14,7 +14,7 @@ class User extends Controller{
         if (request()->isPost()) {
             $this->_login();
         } else {
-            $this->fetch();
+            return $this->fetch();
         }
     }
 
@@ -23,7 +23,7 @@ class User extends Controller{
         if (request()->isPost()) {
             $this->_register();
         } else {
-            $this->fetch();
+            return $this->fetch();
         }
     }
 
@@ -32,7 +32,7 @@ class User extends Controller{
         if (request()->isPost()) {
             $this->_forget_password();
         } else {
-            $this->fetch();
+            return $this->fetch();
         }
     }
 
