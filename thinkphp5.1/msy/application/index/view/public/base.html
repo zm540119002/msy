@@ -27,5 +27,11 @@
 <script type="text/javascript" src="public_js/public.js"></script>
 <script type="text/javascript" src="public_js/common.js"></script>
 <script type="text/javascript" src="public_js/dialog.js"></script>
+<script type="text/javascript">
+	var domain = '{:request()->domain()}'+'/'+'index.php/';
+	var module_url = domain + '{:request()->module()}/';
+	var controller_url = module_url + '{:request()->controller()}/';
+	var action_url = controller_url + '{:request()->action()}';
+</script>
 {block name="script"}{/block}
 </body></html>
