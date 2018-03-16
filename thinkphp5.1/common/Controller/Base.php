@@ -140,9 +140,10 @@ class Base extends Controller{
 //            $image->open($photo);
 //            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
 //        }
+            $imgsNew = $imgsNew.$tempRelativePath . $fileName.',';
         }
 
-       // return successMsg($tempRelativePath . $fileName);
+       return successMsg($imgsNew);
     }
 }
 
