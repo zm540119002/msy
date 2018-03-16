@@ -1,16 +1,13 @@
 <?php
-namespace common\Controller;
+namespace common\controller;
 
-use common\Component\WxpayAPI\Jssdk;
+use component\wx_pay_api\Jssdk;
 
 class WXBase extends Base{
     private $_jssdk = null;
-    protected $host;
     public function __construct(){
         parent::__construct();
-        $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-        $this->_jssdk = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $this->_jssdk = new Jssdk(config('custom.wx_config')['APPID'], config('custom.wx_config')['APPSECRET']);
         $this -> signPackage = $this -> weiXinShareInit();
     }
 
@@ -27,9 +24,9 @@ class WXBase extends Base{
             $shLink = $shareLink;
         }
         $shareLink = $shLink.'.html';
-        $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+        $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-        $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH_PHP').$shareImgRelativeUrl;
+        $shareImgUrl = (is_ssl()?'https://':'http://').$this->host.config('upload_dir.upload_path').$shareImgRelativeUrl;
         if(empty($backUrl)){
             $backUrl = $shareLink;
         }
@@ -46,9 +43,9 @@ class WXBase extends Base{
     //微信分享信息
 //    public function weiXinShare($title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl){
     public function weiXinShare($shareInfo){
-        $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+        $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-        $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH_PHP').$shareInfo['shareImgUrl'];
+        $shareImgUrl = (is_ssl()?'https://':'http://').$this->host.config('upload_dir.upload_path').$shareInfo['shareImgUrl'];
         $shareInfo['shareImgUrl'] = $shareImgUrl;
         return $shareInfo;
     }

@@ -1,22 +1,23 @@
 <?php
 namespace app\factory\controller;
-use think\Controller;
-use app\common\model\Factory as M;
-use common\controller\Base;
-class Index extends Base
+
+use common\controller\UserBase;
+
+class Index extends UserBase
 {
+    /**首页
+     */
     public function index()
     {
         return $this->fetch();
     }
-    public function enters()
+
+    /**入驻登记
+     */
+    public function register()
     {
-        if(requst()->isPost()){
-            $m = new M();
-            $rs = $m->add();
-            return $rs;
+        if(request()->isPost()){
         }
         return $this->fetch();
     }
-
 }

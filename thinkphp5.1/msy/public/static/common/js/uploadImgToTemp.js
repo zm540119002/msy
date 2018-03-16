@@ -1,6 +1,6 @@
-$(document).ready(function(){
+$(function(){
     // 选择图片
-    $('[type=file]').on('change',function(){
+    $('body').on('change','.uploadSingleImg',function () {
         var img = event.target.files[0];
         var obj=$(this).parent();
         // 判断是否图片

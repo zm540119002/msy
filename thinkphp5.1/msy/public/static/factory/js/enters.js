@@ -55,7 +55,6 @@ $(function(){
                 dialog.error(msg.info);
             }
             if(msg.status == 1){
-                dialog.success(msg.info);
                 $('.weui-flex-item:eq(1)').removeClass('current');
                 $('.weui-flex-item:eq(2)').addClass('current');
                 $('.apply-module:eq(1)').hide();
