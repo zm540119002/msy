@@ -82,8 +82,7 @@ $(function(){
                 }
                 var postDate = {};
                 postDate.imgs = layermultiImgAttr;
-                comsole.log(postDate.imgs[0]);
-
+                
                 $.post('uploadMultiImgToTemp',postDate,function(){
 
 
