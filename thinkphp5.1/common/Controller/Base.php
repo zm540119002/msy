@@ -142,7 +142,6 @@ class Base extends Controller{
 //        }
             $imgsNew = $imgsNew.$tempRelativePath . $fileName.',';
         }
-
        return successMsg($imgsNew);
     }
 }
