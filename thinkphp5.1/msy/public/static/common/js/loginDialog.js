@@ -56,7 +56,7 @@ $('body').on('click','.mesg_code',function(){
 });
 
 var userLoginForm=$('#userLoginForm').html();
-//登录触发
+//弹窗登录触发
 var loginLayer = null;
 function loginDialog(func){
     loadTrigger=false;
@@ -131,9 +131,6 @@ function loginDialog(func){
 };
 
 $(function(){
-    //轮播
-    var elem = document.getElementById('slider');
-    swipe(elem);
     //登录
     $('body').on('click','.deployed-deployment,.order-management',function(){
         loginDialog();
@@ -147,5 +144,48 @@ $(function(){
     //忘记密码
     $('body').on('click','.forget_dialog',function(){
         forgetPasswordDialog();
+    });
+    //登录入口
+    tab_down('.loginNav li','.loginTab .login_wrap','click');
+    $('body').on('click','.loginBtn',function(){
+        var $layer = $('.loginTab').find('.active');
+        var _index =$('.loginTab').find('.login_wrap.active').index();
+        var content='';
+        //验证
+        switch(_index){
+            case 0:
+                var userPhone=$layer.find('.user_phone').val();
+                var verifiCode=$layer.find('.tel_code').val();
+                if(!register.phoneCheck(userPhone)){
+                    content='请输入正确手机号';
+                }else if(!register.vfyCheck(verifiCode)){
+                    content = "请输入正确的验证码";
+                }
+                break;
+            case 1:
+                var userName=$layer.find('.user_name').val();
+                var password=$layer.find('.password').val();
+                if(!checkAccount(userName)){
+                    content='请输入正确手机号';
+                }else if(!register.pswCheck(password)){
+                    content = "请输入6-16数字或字母的密码";
+                }
+
+                break;  
+        }
+        if(content){
+            dialog.error(content);
+            return false;
+        }
+        var url = ACTION;
+        var postData = $('#formLogin').serializeObject();
+        $.post(url,postData,function (data) {
+            if(data.status==0){
+                dialog.error(data.info);
+                return false;
+            }else if(data.status==1){
+                location.href = data.info;
+            }
+        });
     });
 })

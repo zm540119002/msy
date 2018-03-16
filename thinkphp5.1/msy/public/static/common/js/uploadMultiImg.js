@@ -63,7 +63,6 @@ $(function(){
                 html+='</div>'
                 html+='</li>';
                 var multiImgAttr=$('.goods-detail').data('src');
-                console.log(multiImgAttr.length);
                 for(var i=0;i<multiImgAttr.length;i++){
                     $('.editDetailLayer .multi-picture-module').append(html);
                     $('.editDetailLayer .upload_img').eq(i).attr('src',multiImgAttr[i]);
@@ -83,9 +82,9 @@ $(function(){
                 }
                 var postDate = {};
                 postDate.imgs = layermultiImgAttr;
-
+                
                 $.post('uploadMultiImgToTemp',postDate,function(){
-                    
+
 
                 })
             }
