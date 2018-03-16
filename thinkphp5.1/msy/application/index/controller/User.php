@@ -50,8 +50,10 @@ class User extends Controller{
     }
 
     private function _login(){
+        return dump($this->request->param());
         if(!request()->isPost()){
-            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+            $data = errorMsg(config('not_post'));
+            return response($data);
         }
         $name = I('post.name','','string');
         $password = I('post.password','','string');
@@ -59,38 +61,38 @@ class User extends Controller{
         $captcha = I('post.captcha',0,'number_int');
         if ($name && $password) {//账号密码登录
             if (!$name) {
-                $this->ajaxReturn(errorMsg('请输入账号！'));
+                return response(errorMsg('请输入账号！'));
             }
             if (!$password) {
-                $this->ajaxReturn(errorMsg('请输入密码！'));
+                return response(errorMsg('请输入密码！'));
             }
             $user = UserAuth::get(array(
                 'name' => $name,
                 'password' => $password,
             ));
             if (!$user) {
-                $this->ajaxReturn(errorMsg('账号密码不正确，请重新输入'));
+                return response(errorMsg('账号密码不正确，请重新输入'));
             }
         }elseif($mobile_phone && $captcha){//短信验证码登录
             if (!$mobile_phone) {
-                $this->ajaxReturn(errorMsg('请输入手机号码！'));
+                return response(errorMsg('请输入手机号码！'));
             }
             if (!$captcha) {
-                $this->ajaxReturn(errorMsg('请输入验证码！'));
+                return response(errorMsg('请输入验证码！'));
             }
             $captcha_type = 'login';
             if(!$this->_check_captcha($mobile_phone,$captcha,$captcha_type)){
-                $this->ajaxReturn(errorMsg('验证码错误，请重新获取验证码！'));
+                return response(errorMsg('验证码错误，请重新获取验证码！'));
             }
             $user = UserAuth::get(array(
                 'mobile_phone' => $mobile_phone,
                 'password' => $password,
             ));
             if (!$user) {
-                $this->ajaxReturn(errorMsg('不是预留手机号码！'));
+                return response(errorMsg('不是预留手机号码！'));
             }
         }else{
-            $this->ajaxReturn(errorMsg('请输入完整的登录信息'));
+            return response(errorMsg('请输入完整的登录信息'));
         }
         $backUrl = session('backUrl');
         $pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
@@ -99,26 +101,26 @@ class User extends Controller{
         if($user['id']){
             $res = UserAuth::saveCookieCartToMysql($user['id'],$matches[1]);
             if(!$res){
-                $this->ajaxReturn(errorMsg('购物车入库失败'));
+                return response(errorMsg('购物车入库失败'));
             }
         }
         //更新最后登录的时间
         UserAuth::saveLastLoginTimeById($user['id']);
         //设置session
         UserAuth::setSession($user);
-        $this->ajaxReturn(successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:U('login')));
+        return response(successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:U('login')));
     }
 
     private function _register(){
         if(!request()->isPost()){
-            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+            return response(errorMsg(C('NOT_POST')));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
         $name = I('post.name','','string');
         $captcha = I('post.captcha','','string');
         $captcha_type = 'register';
         if( !$this->_check_captcha($mobile_phone,$captcha,$captcha_type) ){
-            $this->ajaxReturn(errorMsg('验证码错误，请重新获取验证码！'));
+            return response(errorMsg('验证码错误，请重新获取验证码！'));
         }
         $modelUser = D('User');
         $_POST['salt'] = create_random_str(10,0);//盐值
@@ -129,26 +131,26 @@ class User extends Controller{
 
         $res = $modelUser->addUser();
         if($res['status'] == 1){
-            $this->ajaxReturn(successMsg('注册成功'));
+            return response(successMsg('注册成功'));
         }else{
-            $this->ajaxReturn(errorMsg($res));
+            return response(errorMsg($res));
         }
     }
 
     private function _forget_password(){
         if(!request()->isPost()){
-            $this->ajaxReturn(errorMsg(C('NOT_POST')));
+            return response(errorMsg(C('NOT_POST')));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
         $name = I('post.name','','string');
         if(!isReservedMobilePhone($mobile_phone,$name)){
-            $this->ajaxReturn(errorMsg('不是预留手机号码'));
+            return response(errorMsg('不是预留手机号码'));
         }
 
         $captcha = I('post.captcha','','string');
         $captcha_type = 'reset';
         if( !$this->_check_captcha($mobile_phone,$captcha,$captcha_type) ){
-            $this->ajaxReturn(errorMsg('验证码错误，请重新获取验证码！'));
+            return response(errorMsg('验证码错误，请重新获取验证码！'));
         }
 
         $modelUser = D('User');
@@ -159,9 +161,9 @@ class User extends Controller{
         $res = $modelUser->saveUser();
 
         if($res['status'] == 1){
-            $this->ajaxReturn(successMsg('重置密码成功'));
+            return response(successMsg('重置密码成功'));
         }else{
-            $this->ajaxReturn(errorMsg('重置密码失败'));
+            return response(errorMsg('重置密码失败'));
         }
     }
 
@@ -172,7 +174,7 @@ class User extends Controller{
     private function _send_sms(){
         $mobile_phone = I('post.mobile_phone',0,'number_int');
         if(!isMobile($mobile_phone)){
-            $this->ajaxReturn(errorMsg('无效的手机号码'));
+            return response(errorMsg('无效的手机号码'));
         }
         $url = 'http://sms3.mobset.com:8080/Cloud?wsdl';
         $client = new \SoapClient($url);
@@ -209,9 +211,9 @@ class User extends Controller{
             $captcha_type = ($captcha_type ? $captcha_type : 'login');
             $smsExpire = C('SMS_EXPIRE');
             session('captcha_'. $captcha_type . '_' . $mobile_phone,$captcha,$smsExpire);
-            $this->ajaxReturn(successMsg('验证码已发送至手机:'.$mobile_phone . '，请注意查收。'));
+            return response(successMsg('验证码已发送至手机:'.$mobile_phone . '，请注意查收。'));
         }catch (\SoapFault $fault){
-            $this->ajaxReturn(errorMsg('验证码发送失败,请稍候再试。。。'));
+            return response(errorMsg('验证码发送失败,请稍候再试。。。'));
         }
     }
 }

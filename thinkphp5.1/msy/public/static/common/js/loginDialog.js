@@ -78,7 +78,7 @@ function loginDialog(func){
         },
         yes:function(index){
             var $layer = $('.loginLayer').find('.active');
-            var _index =$('.loginLayer').find('.login_wrap.active').index();
+            var _index = $('.loginLayer').find('.login_wrap.active').index();
             var content='';
             //验证
             switch(_index){
@@ -128,7 +128,7 @@ function loginDialog(func){
             });
         }
     });
-};
+}
 
 $(function(){
     //登录
@@ -140,16 +140,15 @@ $(function(){
         platformNotesDialog();
         //registerDialog();
     });
-
     //忘记密码
     $('body').on('click','.forget_dialog',function(){
         forgetPasswordDialog();
     });
-    //登录入口
+    //登录
     tab_down('.loginNav li','.loginTab .login_wrap','click');
     $('body').on('click','.loginBtn',function(){
         var $layer = $('.loginTab').find('.active');
-        var _index =$('.loginTab').find('.login_wrap.active').index();
+        var _index = $('.loginTab').find('.login_wrap.active').index();
         var content='';
         //验证
         switch(_index){
@@ -170,16 +169,16 @@ $(function(){
                 }else if(!register.pswCheck(password)){
                     content = "请输入6-16数字或字母的密码";
                 }
-
-                break;  
+                break;
         }
-        if(content){
+        if(0 && content){
             dialog.error(content);
             return false;
         }
-        var url = ACTION;
+        var url = 'login';
         var postData = $('#formLogin').serializeObject();
         $.post(url,postData,function (data) {
+            console.log(data);return;
             if(data.status==0){
                 dialog.error(data.info);
                 return false;
@@ -188,4 +187,4 @@ $(function(){
             }
         });
     });
-})
+});
