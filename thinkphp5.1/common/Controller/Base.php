@@ -122,7 +122,7 @@ class Base extends Controller{
                 return errorMsg('创建临时目录失败');
             }
             //文件名
-            $fileName = time() . $ext;
+            $fileName = time().$k . $ext;
             //带存储路径的文件名
             $photo = $storePath . $fileName;
 
