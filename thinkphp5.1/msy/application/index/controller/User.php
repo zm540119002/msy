@@ -14,7 +14,7 @@ class User extends Controller{
         if (request()->isPost()) {
             $this->_login();
         } else {
-            return $this->fetch('template/login_page.html');
+            return $this->fetch();
         }
     }
 
