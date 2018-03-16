@@ -16,6 +16,8 @@
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
 	</script>
+	<!--前置自定义js-->
+	{block name="pre-script"}{/block}
 </head>
 <body>
 <!-- 内容模块 -->
@@ -33,5 +35,6 @@
 <script type="text/javascript" src="public_js/public.js"></script>
 <script type="text/javascript" src="public_js/common.js"></script>
 <script type="text/javascript" src="public_js/dialog.js"></script>
+<!--自定义js-->
 {block name="script"}{/block}
 </body></html>

@@ -175,7 +175,7 @@ $(function(){
             dialog.error(content);
             return false;
         }
-        var url = 'login';
+        var url = action;
         var postData = $('#formLogin').serializeObject();
         $.post(url,postData,function (data) {
             console.log(data);return;
