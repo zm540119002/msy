@@ -11,8 +11,8 @@ class User extends Controller{
 
     //登录
     public function login(){
-        if (request()->isPost()) {
-            $this->_login();
+        if (request()->isAjax()) {
+            return $this->_login();
         } else {
             return $this->fetch();
         }
@@ -20,8 +20,8 @@ class User extends Controller{
 
     //注册
     public function register(){
-        if (request()->isPost()) {
-            $this->_register();
+        if (request()->isAjax()) {
+            return $this->_register();
         } else {
             return $this->fetch();
         }
@@ -29,8 +29,8 @@ class User extends Controller{
 
     //忘记密码
     public function forget_password(){
-        if (request()->isPost()) {
-            $this->_forget_password();
+        if (request()->isAjax()) {
+            return $this->_forget_password();
         } else {
             return $this->fetch();
         }
@@ -41,7 +41,7 @@ class User extends Controller{
         UserAuth::removeLogin();
         header('Content-type: text/html; charset=utf-8');
         echo '退出成功！';exit;
-        $this->redirect('login');
+        return redirect('login');
     }
 
     //发送验证码
@@ -50,8 +50,8 @@ class User extends Controller{
     }
 
     private function _login(){
-        return dump($this->request->param());
-        if(!request()->isPost()){
+        return successMsg($this->request->param());
+        if(!request()->isAjax()){
             $data = errorMsg(config('not_post'));
             return response($data);
         }
@@ -112,7 +112,7 @@ class User extends Controller{
     }
 
     private function _register(){
-        if(!request()->isPost()){
+        if(!request()->isAjax()){
             return response(errorMsg(C('NOT_POST')));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
@@ -138,7 +138,7 @@ class User extends Controller{
     }
 
     private function _forget_password(){
-        if(!request()->isPost()){
+        if(!request()->isAjax()){
             return response(errorMsg(C('NOT_POST')));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
