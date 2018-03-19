@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => '',
+    'database'        => 'msy',
     // 用户名
     'username'        => 'root',
     // 密码
-    'password'        => '',
+    'password'        => 'msy',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
@@ -52,4 +52,22 @@ return [
     'sql_explain'     => false,
     // Query类
     'query'           => '\\think\\db\\Query',
+    //数据库配置-公共
+    'db_config_common' => [
+        'type'        => 'mysql',// 数据库类型
+        'hostname'    => '127.0.0.1',// 服务器地址
+        'database'    => 'common',// 数据库名
+        'username'    => 'root',// 数据库用户名
+        'password'    => 'msy',// 数据库密码
+        'charset'     => 'utf8',// 数据库编码默认采用utf8
+    ],
+    //数据库配置-厂商
+    'db_config_factory' => [
+        'type'        => 'mysql',// 数据库类型
+        'hostname'    => '127.0.0.1',// 服务器地址
+        'database'    => 'msy_factory',// 数据库名
+        'username'    => 'root',// 数据库用户名
+        'password'    => 'msy',// 数据库密码
+        'charset'     => 'utf8',// 数据库编码默认采用utf8
+    ],
 ];
