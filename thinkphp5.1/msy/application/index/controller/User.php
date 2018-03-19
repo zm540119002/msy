@@ -11,8 +11,8 @@ class User extends Controller{
 
     //登录
     public function login(){
-        if (request()->isPost()) {
-            $this->_login();
+        if (request()->isAjax()) {
+            return $this->_login();
         } else {
             return $this->fetch();
         }
@@ -20,8 +20,8 @@ class User extends Controller{
 
     //注册
     public function register(){
-        if (request()->isPost()) {
-            $this->_register();
+        if (request()->isAjax()) {
+            return $this->_register();
         } else {
             return $this->fetch();
         }
@@ -29,8 +29,8 @@ class User extends Controller{
 
     //忘记密码
     public function forget_password(){
-        if (request()->isPost()) {
-            $this->_forget_password();
+        if (request()->isAjax()) {
+            return $this->_forget_password();
         } else {
             return $this->fetch();
         }
@@ -41,7 +41,7 @@ class User extends Controller{
         UserAuth::removeLogin();
         header('Content-type: text/html; charset=utf-8');
         echo '退出成功！';exit;
-        $this->redirect('login');
+        return redirect('login');
     }
 
     //发送验证码
@@ -50,10 +50,8 @@ class User extends Controller{
     }
 
     private function _login(){
-        return dump($this->request->param());
-        if(!request()->isPost()){
-            $data = errorMsg(config('not_post'));
-            return response($data);
+        if(!request()->isAjax()){
+            return errorMsg(config('not_post'));
         }
         $name = I('post.name','','string');
         $password = I('post.password','','string');
@@ -61,38 +59,38 @@ class User extends Controller{
         $captcha = I('post.captcha',0,'number_int');
         if ($name && $password) {//账号密码登录
             if (!$name) {
-                return response(errorMsg('请输入账号！'));
+                return errorMsg('请输入账号！');
             }
             if (!$password) {
-                return response(errorMsg('请输入密码！'));
+                return errorMsg('请输入密码！');
             }
             $user = UserAuth::get(array(
                 'name' => $name,
                 'password' => $password,
             ));
             if (!$user) {
-                return response(errorMsg('账号密码不正确，请重新输入'));
+                return errorMsg('账号密码不正确，请重新输入');
             }
         }elseif($mobile_phone && $captcha){//短信验证码登录
             if (!$mobile_phone) {
-                return response(errorMsg('请输入手机号码！'));
+                return errorMsg('请输入手机号码！');
             }
             if (!$captcha) {
-                return response(errorMsg('请输入验证码！'));
+                return errorMsg('请输入验证码！');
             }
             $captcha_type = 'login';
             if(!$this->_check_captcha($mobile_phone,$captcha,$captcha_type)){
-                return response(errorMsg('验证码错误，请重新获取验证码！'));
+                return errorMsg('验证码错误，请重新获取验证码！');
             }
             $user = UserAuth::get(array(
                 'mobile_phone' => $mobile_phone,
                 'password' => $password,
             ));
             if (!$user) {
-                return response(errorMsg('不是预留手机号码！'));
+                return errorMsg('不是预留手机号码！');
             }
         }else{
-            return response(errorMsg('请输入完整的登录信息'));
+            return errorMsg('请输入完整的登录信息');
         }
         $backUrl = session('backUrl');
         $pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
@@ -101,26 +99,26 @@ class User extends Controller{
         if($user['id']){
             $res = UserAuth::saveCookieCartToMysql($user['id'],$matches[1]);
             if(!$res){
-                return response(errorMsg('购物车入库失败'));
+                return errorMsg('购物车入库失败');
             }
         }
         //更新最后登录的时间
         UserAuth::saveLastLoginTimeById($user['id']);
         //设置session
         UserAuth::setSession($user);
-        return response(successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:U('login')));
+        return successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:U('login'));
     }
 
     private function _register(){
-        if(!request()->isPost()){
-            return response(errorMsg(C('NOT_POST')));
+        if(!request()->isAjax()){
+            return errorMsg(C('NOT_POST'));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
         $name = I('post.name','','string');
         $captcha = I('post.captcha','','string');
         $captcha_type = 'register';
         if( !$this->_check_captcha($mobile_phone,$captcha,$captcha_type) ){
-            return response(errorMsg('验证码错误，请重新获取验证码！'));
+            return errorMsg('验证码错误，请重新获取验证码！');
         }
         $modelUser = D('User');
         $_POST['salt'] = create_random_str(10,0);//盐值
@@ -131,26 +129,26 @@ class User extends Controller{
 
         $res = $modelUser->addUser();
         if($res['status'] == 1){
-            return response(successMsg('注册成功'));
+            return successMsg('注册成功');
         }else{
-            return response(errorMsg($res));
+            return errorMsg($res);
         }
     }
 
     private function _forget_password(){
-        if(!request()->isPost()){
-            return response(errorMsg(C('NOT_POST')));
+        if(!request()->isAjax()){
+            return errorMsg(C('NOT_POST'));
         }
         $mobile_phone = I('post.mobile_phone',0,'number_int');
         $name = I('post.name','','string');
         if(!isReservedMobilePhone($mobile_phone,$name)){
-            return response(errorMsg('不是预留手机号码'));
+            return errorMsg('不是预留手机号码');
         }
 
         $captcha = I('post.captcha','','string');
         $captcha_type = 'reset';
         if( !$this->_check_captcha($mobile_phone,$captcha,$captcha_type) ){
-            return response(errorMsg('验证码错误，请重新获取验证码！'));
+            return errorMsg('验证码错误，请重新获取验证码！');
         }
 
         $modelUser = D('User');
@@ -161,9 +159,9 @@ class User extends Controller{
         $res = $modelUser->saveUser();
 
         if($res['status'] == 1){
-            return response(successMsg('重置密码成功'));
+            return successMsg('重置密码成功');
         }else{
-            return response(errorMsg('重置密码失败'));
+            return errorMsg('重置密码失败');
         }
     }
 
@@ -174,7 +172,7 @@ class User extends Controller{
     private function _send_sms(){
         $mobile_phone = I('post.mobile_phone',0,'number_int');
         if(!isMobile($mobile_phone)){
-            return response(errorMsg('无效的手机号码'));
+            return errorMsg('无效的手机号码');
         }
         $url = 'http://sms3.mobset.com:8080/Cloud?wsdl';
         $client = new \SoapClient($url);
@@ -211,9 +209,9 @@ class User extends Controller{
             $captcha_type = ($captcha_type ? $captcha_type : 'login');
             $smsExpire = C('SMS_EXPIRE');
             session('captcha_'. $captcha_type . '_' . $mobile_phone,$captcha,$smsExpire);
-            return response(successMsg('验证码已发送至手机:'.$mobile_phone . '，请注意查收。'));
+            return successMsg('验证码已发送至手机:'.$mobile_phone . '，请注意查收。');
         }catch (\SoapFault $fault){
-            return response(errorMsg('验证码发送失败,请稍候再试。。。'));
+            return errorMsg('验证码发送失败,请稍候再试。。。');
         }
     }
 }
