@@ -12,12 +12,12 @@ class User extends Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
-	/**新增
+	/**登录
 	 */
-	public function add(){
+	public function login(){
 		$data = input('post.');
 		$validate = new \common\validate\User;
-		if(!$result = $validate->scene('add')->check($data)) {
+		if(!$result = $validate->scene('login')->check($data)) {
 			return errorMsg($validate->getError());
 		}
 	}
