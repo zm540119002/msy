@@ -53,10 +53,15 @@ class User extends Controller{
         if(!request()->isAjax()){
             return errorMsg(config('not_post'));
         }
-        $name = I('post.name','','string');
-        $password = I('post.password','','string');
-        $mobile_phone = I('post.mobile_phone',0,'number_int');
-        $captcha = I('post.captcha',0,'number_int');
+
+        $modelUser = new \common\model\User();
+        return $modelUser::where('id','=',4)->select();
+
+        exit;
+        $name = input('post.name','','string');
+        $password = input('post.password','','string');
+        $mobile_phone = input('post.mobile_phone',0,'number_int');
+        $captcha = input('post.captcha',0,'number_int');
         if ($name && $password) {//账号密码登录
             if (!$name) {
                 return errorMsg('请输入账号！');
@@ -113,9 +118,9 @@ class User extends Controller{
         if(!request()->isAjax()){
             return errorMsg(C('NOT_POST'));
         }
-        $mobile_phone = I('post.mobile_phone',0,'number_int');
-        $name = I('post.name','','string');
-        $captcha = I('post.captcha','','string');
+        $mobile_phone = input('post.mobile_phone',0,'number_int');
+        $name = input('post.name','','string');
+        $captcha = input('post.captcha','','string');
         $captcha_type = 'register';
         if( !$this->_check_captcha($mobile_phone,$captcha,$captcha_type) ){
             return errorMsg('验证码错误，请重新获取验证码！');
@@ -139,13 +144,13 @@ class User extends Controller{
         if(!request()->isAjax()){
             return errorMsg(C('NOT_POST'));
         }
-        $mobile_phone = I('post.mobile_phone',0,'number_int');
-        $name = I('post.name','','string');
+        $mobile_phone = input('post.mobile_phone',0,'number_int');
+        $name = input('post.name','','string');
         if(!isReservedMobilePhone($mobile_phone,$name)){
             return errorMsg('不是预留手机号码');
         }
 
-        $captcha = I('post.captcha','','string');
+        $captcha = input('post.captcha','','string');
         $captcha_type = 'reset';
         if( !$this->_check_captcha($mobile_phone,$captcha,$captcha_type) ){
             return errorMsg('验证码错误，请重新获取验证码！');
@@ -170,7 +175,7 @@ class User extends Controller{
     }
 
     private function _send_sms(){
-        $mobile_phone = I('post.mobile_phone',0,'number_int');
+        $mobile_phone = input('post.mobile_phone',0,'number_int');
         if(!isMobile($mobile_phone)){
             return errorMsg('无效的手机号码');
         }
@@ -205,7 +210,7 @@ class User extends Controller{
         );
         try {
             $client->Sms_Send($param);
-            $captcha_type = I('post.captcha_type','','string') ;
+            $captcha_type = input('post.captcha_type','','string') ;
             $captcha_type = ($captcha_type ? $captcha_type : 'login');
             $smsExpire = C('SMS_EXPIRE');
             session('captcha_'. $captcha_type . '_' . $mobile_phone,$captcha,$smsExpire);
