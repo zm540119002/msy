@@ -12,7 +12,8 @@ class User extends Controller{
     //登录
     public function login(){
         if (request()->isAjax()) {
-            return $this->_login();
+            $modelUser = new \common\model\User();
+            return $modelUser->login();
         } else {
             return $this->fetch();
         }
@@ -53,11 +54,6 @@ class User extends Controller{
         if(!request()->isAjax()){
             return errorMsg(config('not_post'));
         }
-
-        $modelUser = new \common\model\User();
-        return $modelUser::where('id','=',4)->select();
-
-        exit;
         $name = input('post.name','','string');
         $password = input('post.password','','string');
         $mobile_phone = input('post.mobile_phone',0,'number_int');
@@ -83,10 +79,7 @@ class User extends Controller{
             if (!$captcha) {
                 return errorMsg('请输入验证码！');
             }
-            $captcha_type = 'login';
-            if(!$this->_check_captcha($mobile_phone,$captcha,$captcha_type)){
-                return errorMsg('验证码错误，请重新获取验证码！');
-            }
+
             $user = UserAuth::get(array(
                 'mobile_phone' => $mobile_phone,
                 'password' => $password,
@@ -168,10 +161,6 @@ class User extends Controller{
         }else{
             return errorMsg('重置密码失败');
         }
-    }
-
-    private function _check_captcha($mobile_phone,$captcha,$captcha_type='login'){
-        return session('captcha_' . $captcha_type . '_' . $mobile_phone) == $captcha ;
     }
 
     private function _send_sms(){
