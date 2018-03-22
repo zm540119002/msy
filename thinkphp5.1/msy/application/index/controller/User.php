@@ -13,6 +13,7 @@ class User extends Controller{
      */
     public function login(){
         if (request()->isAjax()) {
+            print_r(session('backUrl'));exit;
             $modelUser = new \common\model\User();
             return $modelUser->login();
         } else {

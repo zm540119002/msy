@@ -1,5 +1,6 @@
 <?php
 namespace app\factory\controller;
+
 use app\factory\model\Factory as M;
 use common\controller\UserBase;
 

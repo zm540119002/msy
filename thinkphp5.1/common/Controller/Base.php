@@ -6,7 +6,6 @@ use think\Image;
 /**基于公共基础控制器
  */
 class Base extends Common{
-    protected $host;
     public function __construct(){
         parent::__construct();
     }
