@@ -6,7 +6,7 @@ class Goods extends Base
 {
     public function index()
     {
-        return $this->fetch();
+        return $this->fetch('template/category_second_template.html');
     }
 
     public function add()
@@ -17,5 +17,7 @@ class Goods extends Base
         }
         return $this->fetch();
     }
+
+
 
 }
