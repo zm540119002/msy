@@ -847,7 +847,8 @@ color: #ed6d00;
 .editDetailLayer .layui-m-layercont,
 .editParameterLayer .layui-m-layercont,
 .uploadFocusLayer .layui-m-layercont,
-.editVideoLayer .layui-m-layercont{
+.editVideoLayer .layui-m-layercont,
+.categoryContentLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
