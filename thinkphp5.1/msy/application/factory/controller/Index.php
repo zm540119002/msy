@@ -1,6 +1,6 @@
 <?php
 namespace app\factory\controller;
-
+use app\factory\model\Factory as M;
 use common\controller\UserBase;
 
 class Index extends UserBase
@@ -17,6 +17,8 @@ class Index extends UserBase
     public function register()
     {
         if(request()->isPost()){
+            $model = new M();
+            return $model -> add();
         }
         return $this->fetch();
     }
