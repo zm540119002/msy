@@ -18,7 +18,7 @@ class User extends Model {
 		$data = input('post.');
 		$validateUser = new \common\validate\User;
 		if($data['mobile_phone'] && $data['captcha']){//验证码登录
-			if($this->_checkRegister($data['mobile_phone'])){//已注册，则登录
+			if($this->_checkAccountExist($data['mobile_phone'])){//账号存在，则登录
 				if(!$validateUser->scene('sceneLoginCaptcha')->check($data)) {
 					return errorMsg($validateUser->getError());
 				}
@@ -26,7 +26,7 @@ class User extends Model {
 //					return errorMsg('验证码错误，请重新获取验证码！');
 //				}
 				return $this->_login($data['mobile_phone']);
-			}else{//未注册，则注册
+			}else{//账号不存在，则先注册，再登录
 				if(!$validateUser->scene('register')->check($data)) {
 					return errorMsg($validateUser->getError());
 				}
@@ -48,16 +48,26 @@ class User extends Model {
 		}
 	}
 
-	public function setPassword($mobilePhone,$captcha){
+	public function setPassword(){
 		$data = input('post.');
 		$validateUser = new \common\validate\User;
+		if(!$validateUser->scene('setPassword')->check($data)){
+			return errorMsg($validateUser->getError());
+		}
 		if($data['mobile_phone'] && $data['captcha']){
 //			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'],'login')){
 //				return errorMsg('验证码错误，请重新获取验证码！');
 //			}
 			$data['salt'] = create_random_str(10,0);//盐值
 			$data['password'] = md5($_POST['salt'] . $_POST['pass_word']);//加密
+			$this->save($data);
+			if(!$this->id){
+				return errorMsg('修改密码失败！');
+			}
+			return successMsg('重置密码成功');
+			return $this->_login($data['mobile_phone']);
 		}
+		return errorMsg('资料缺失！');
 	}
 
 	/**登录
@@ -148,11 +158,11 @@ class User extends Model {
 		return session('captcha_' . $captcha_type . '_' . $mobilePhone) == $captcha ;
 	}
 
-	/**检查是否注册
+	/**检查账号是否存在
 	 * @param $mobilePhone
 	 * @return bool
 	 */
-	private function _checkRegister($mobilePhone){
+	private function _checkAccountExist($mobilePhone){
 		return count($this->where('mobile_phone','=',$mobilePhone)->select())?true:false;
 	}
 }

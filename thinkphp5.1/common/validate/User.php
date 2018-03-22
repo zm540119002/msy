@@ -43,6 +43,11 @@ class User extends Validate
         'register'  =>  [
             'mobile_phone',
         ],
+        //修改密码
+        'setPassword'  =>  [
+            'mobile_phone',
+            'captcha',
+        ],
     ];
     //loginCaptcha场景重定义
     public function sceneLoginCaptcha()
@@ -52,6 +57,12 @@ class User extends Validate
     }
     //loginPassword场景重定义
     public function sceneLoginPassword()
+    {
+        return $this->only(['mobile_phone','password',])
+            ->remove('mobile_phone','unique');
+    }
+    //setPassword场景重定义
+    public function sceneSetPassword()
     {
         return $this->only(['mobile_phone','password',])
             ->remove('mobile_phone','unique');
