@@ -18,6 +18,25 @@
 		</div>
 	</form>
 </section>
+<!--商品视频-->
+<section id="goodsVideoList" style="display: none;">
+    <p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传视频(格式为)</p>     
+    <form class="">
+        <ul class="upload-picture-module multi-picture-module f24"></ul>
+    </form>               
+    <form>
+        <div class="upload-picture-module f24">
+            <div>
+                <div class="picture-module">
+                    <input type="file" id="video" class="uploadImg " name="" accept="video/*" multiple="" >
+                    <img class="upload_img" src="" alt="">
+                    <input type="hidden" class="layer-thumbnail-picture" value=""/>
+                </div>
+                <!--<p>企业营业执照</p>-->
+            </div>
+        </div>
+    </form>    
+</section>
 <!--编辑分类标签-->
 <section id="editGoodsLabel" style="display:none;">
 	<ul class="vendorInfoList">
@@ -68,6 +87,10 @@
 					<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图</a>
 					<input type="hidden" class="hidden_img" value=""  name="main_img">
 				</li>
+				<li class="">
+                    <a href="javascript:void(0);" class="uploadGoodsVideo right-arrow">上传商品视频(可选项)</a>
+                    <input type="hidden" class="goods-video" value="" data-src="" name="goodsVideo">
+                </li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑商品参数</a>
 					<input type="hidden" class="goods-parameter" value="" name="parameters">
