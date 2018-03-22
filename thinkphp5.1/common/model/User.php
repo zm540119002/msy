@@ -45,7 +45,10 @@ class User extends Model {
 			'status' => 0,
 			'mobile_phone' => $mobilePhone,
 		);
-		$field = ' id,name,nickname,mobile_phone,status,type,password,avatar,sex,salt,birthday,last_login_time ';
+		$field = array(
+			'id','name','nickname','mobile_phone','status','type','password','avatar',
+			'sex','salt','birthday','last_login_time',
+		);
 		$user = $this
 			->field($field)
 			->where($where)
@@ -53,11 +56,12 @@ class User extends Model {
 		if(empty($user)) {
 			return false;
 		}
-		if($password && !slow_equals( $user['password'], md5($user['salt'] . $password))){
+		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
 			return false;
 		}
 		return $user;
 	}
+	
 	/**检查验证码
 	 * @param $mobilePhone
 	 * @param $captcha
