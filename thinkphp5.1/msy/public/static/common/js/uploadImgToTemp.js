@@ -38,7 +38,6 @@ $(function(){
         }
 
     });
-<<<<<<< HEAD
     // 选择单视频
     $('body').on('change','.uploadSingleVideo',function () {
         var img = event.target.files[0];
@@ -59,8 +58,10 @@ $(function(){
         reader.readAsDataURL(img);
         reader.onload = function(e){
             var videoUrl=e.target.result;
-=======
-
+             $(obj).find('video').attr('src',videoUrl);
+            $(obj).find('.img').val(videoUrl);
+        }
+    })
     // 修改单个图片
     $('body').on('change','.uploadSingleEditImg',function () {
         var img = event.target.files[0];
@@ -81,14 +82,11 @@ $(function(){
         reader.readAsDataURL(img);
         reader.onload = function(e){
             var imgUrl=e.target.result;
->>>>>>> 28a5ca022920c5f814d28e073b6d6026c2016ced
             $(obj).addClass('active');
             var postData = {img: e.target.result};
             postData.imgWidth = 145;
             postData.imgHeight = 100;
-<<<<<<< HEAD
-            $(obj).find('video').attr('src',videoUrl);
-            $(obj).find('.img').val(videoUrl);
+           
             console.log(postData);
             //提交
             // $.post("uploadImgToTemp",postData,function(msg){
@@ -99,10 +97,8 @@ $(function(){
             //         dialog.error(msg.info)
             //     }
             // })
-=======
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
->>>>>>> 28a5ca022920c5f814d28e073b6d6026c2016ced
         }
 
     });
