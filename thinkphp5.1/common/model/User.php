@@ -137,7 +137,7 @@ class User extends Model {
 		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
 			return false;
 		}
-		return $user;
+		return $user->toArray();
 	}
 
 	/**设置登录session

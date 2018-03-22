@@ -263,7 +263,7 @@ function nonNegativeInteger($int)
  */
 function create_random_str($len = 6, $type = 1, $prefixChars = "", $addChars = "")
 {
-    $range_code = Org\Util\String::randString($len, $type, $addChars);
+    $range_code = common\lib\String::randString($len, $type, $addChars);
     return $prefixChars ? $prefixChars . $range_code : $range_code;
 }
 
