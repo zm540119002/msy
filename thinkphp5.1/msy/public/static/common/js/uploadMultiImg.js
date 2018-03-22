@@ -90,6 +90,47 @@ $(function(){
     $('body').on('click','.delete-picture',function(){
         $(this).parents('li').remove();
     })
+
+    // 修改单个图片
+    $('body').on('change','.uploadSingleEditImg',function () {
+        var img = event.target.files[0];
+        var obj=$(this).parent();
+        // 判断是否图片
+        if(!img){
+            return false;
+        }
+        // 判断图片格式
+        var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
+        if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
+            layer.open({
+                content:'请上传：jpg、jpeg、png、gif格式图片',
+                time:2
+            }) ;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = function(e){
+            var imgUrl=e.target.result;
+            $(obj).addClass('active');
+            var postData = {img: e.target.result};
+            postData.imgWidth = 145;
+            postData.imgHeight = 100;
+
+            console.log(postData);
+            //提交
+            // $.post("uploadImgToTemp",postData,function(msg){
+            //     if(msg.status == 1){
+            //         $(obj).find('.img').val(msg.info);
+            //         $(obj).find('img').attr('src','/uploads/'+msg.info);
+            //     }else{
+            //         dialog.error(msg.info)
+            //     }
+            // })
+            $(obj).find('img').attr('src',imgUrl);
+            $(obj).find('.img').val(imgUrl);
+        }
+
+    });
 })
 //图片弹窗
 function uploadsMultiImg(content){
@@ -162,7 +203,6 @@ function uploadsMultiVideo(content){
             },
             yes:function(index){
                 var layermultiVideoAttr=[];
-                alert($('.editVideoLayer li').length);
                 $.each($('.editVideoLayer li'),function(i,val){
                     var _this=$(this);
                     var videoSrc=_this.find('video').attr('src');
@@ -170,23 +210,25 @@ function uploadsMultiVideo(content){
                 })
                 console.log(layermultiVideoAttr);
                 $('.goods-video').data('src',layermultiVideoAttr);
-                // if(layermultiVideoAttr.length==0){
-                //     layer.close(index);
-                //     return false;
-                // }
-                // var postDate = {};
-                // postDate.imgs = layermultiVideoAttr;
-                // $.post('uploadMultiImgToTemp',postDate,function(info){
-                //    if(info.status == 0){
-                //        dialog.error(info.msg);
-                //        return false;
-                //    }
-                //     $('.goods-detail1').data('src',layermultiVideoAttr);
-                //     layer.close(index);
-                // })
-                console.log($('.goods-video').data('src'));
-                layer.close(index);
+                if(layermultiVideoAttr.length==0){
+                    layer.close(index);
+                    return false;
+                }
+                var postDate = {};
+                postDate.imgs = layermultiVideoAttr;
+                $.post('uploadMultiImgToTemp',postDate,function(info){
+                   if(info.status == 0){
+                       dialog.error(info.msg);
+                       return false;
+                   }
+                    $('.goods-detail1').data('src',layermultiVideoAttr);
+                    layer.close(index);
+                });
+                // console.log($('.goods-video').data('src'));
+                // layer.close(index);
             }
         })
+
+
 }
 
