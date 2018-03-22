@@ -25,7 +25,7 @@ class User extends Model {
 //				if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'],'login')){
 //					return errorMsg('验证码错误，请重新获取验证码！');
 //				}
-
+				return $this->_login($data['mobile_phone']);
 			}else{//未注册，则注册
 				if(!$validateUser->scene('register')->check($data)) {
 					return errorMsg($validateUser->getError());
@@ -35,12 +35,53 @@ class User extends Model {
 			if(!$validateUser->scene('sceneLoginPassword')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
+			return $this->_login($data['mobile_phone'],$data['password']);
 		}else{
 			return errorMsg('登录信息不完善！');
 		}
 	}
 
-	private function _getInfo($mobilePhone,$password=''){
+	/**登录
+	 * @param $mobilePhone
+	 * @param string $password
+	 * @return array
+	 */
+	private function _login($mobilePhone,$password=''){
+		$user = $this->_get($mobilePhone,$password);
+		if(!$user){
+			return errorMsg('获取用户信息失败！');
+		}
+		//设置登录session
+		$this->_setSession($user);
+		//更新最后登录时间
+		$this->_setLastLoginTimeById($user['id']);
+		//返回发起页或平台首页
+		$backUrl = session('backUrl');
+		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
+		preg_match ($pattern,$backUrl,$matches);
+		return successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:url('login'));
+	}
+
+	private function _register(){
+		
+	}
+	/**更新最后登录时间
+	 */
+	private function _setLastLoginTimeById($userId){
+		$where = array(
+			'id' => $userId,
+		);
+		$this->where($where)->setField('last_login_time', time());
+	}
+	/**获取登录信息
+	 * @param string $mobilePhone 手机号码
+	 * @param string $password	密码
+	 * @return array|bool|null|\PDOStatement|string|Model
+	 */
+	private function _get($mobilePhone,$password=''){
+		if(!$mobilePhone) {
+			return false;
+		}
 		$where = array(
 			'status' => 0,
 			'mobile_phone' => $mobilePhone,
@@ -60,6 +101,14 @@ class User extends Model {
 			return false;
 		}
 		return $user;
+	}
+
+	/**设置登录session
+	 */
+	private function _setSession($user){
+		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
+		session('user', $user);
+		session('user_sign', data_auth_sign($user));
 	}
 	
 	/**检查验证码
