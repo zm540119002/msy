@@ -267,6 +267,19 @@ function create_random_str($len = 6, $type = 1, $prefixChars = "", $addChars = "
     return $prefixChars ? $prefixChars . $range_code : $range_code;
 }
 
+/**
+ * 判断是否SSL协议
+ * @return boolean
+ */
+function is_ssl() {
+    if(isset($_SERVER['HTTPS']) && ('1' == $_SERVER['HTTPS'] || 'on' == strtolower($_SERVER['HTTPS']))){
+        return true;
+    }elseif(isset($_SERVER['SERVER_PORT']) && ('443' == $_SERVER['SERVER_PORT'] )) {
+        return true;
+    }
+    return false;
+}
+
 /*
  *读取URL中传来的参数
  *@param string $variablename 参数的名称
