@@ -44,14 +44,14 @@ class User extends Controller{
     /*发送验证码
      */
     public function send_sms(){
-        if (!request()->isPost()) {
-            return errorMsg('not_post');
+        if (!(request()->isPost())) {
+            return config('custom.not_post');
         }
-        $this->_send_sms();
+        return $this->_send_sms();
     }
     private function _send_sms(){
-        $mobile_phone = input('post.mobile_phone',0,'number_int');
-        if(!isMobile($mobile_phone)){
+        $mobilePhone = input('post.mobile_phone',0);
+        if(!isMobile($mobilePhone)){
             return errorMsg('无效的手机号码');
         }
         $url = 'http://sms3.mobset.com:8080/Cloud?wsdl';
@@ -69,9 +69,9 @@ class User extends Controller{
         $strTimeStamp=GetTimeString();
         $strInput=$lCorpID.$strPasswd.$strTimeStamp;
         $strMd5=md5($strInput);
-        $group=$client-> ArrayOfMobileList[1];
+        $group = $client->ArrayOfMobileList[1];
         $group[0] =$client->MobileListGroup;
-        $group[0]->Mobile = $mobile_phone;
+        $group[0]->Mobile = $mobilePhone;
         $param = array(
             'CorpID'=>$lCorpID,
             'LoginName'=>$strLoginName,
@@ -87,9 +87,9 @@ class User extends Controller{
             $client->Sms_Send($param);
             $captcha_type = input('post.captcha_type','','string') ;
             $captcha_type = ($captcha_type ? $captcha_type : 'login');
-            $smsExpire = C('SMS_EXPIRE');
-            session('captcha_'. $captcha_type . '_' . $mobile_phone,$captcha,$smsExpire);
-            return successMsg('验证码已发送至手机:'.$mobile_phone . '，请注意查收。');
+            $smsExpire = config('custom.sms_expire');
+            session('captcha_'. $captcha_type . '_' . $mobilePhone,$captcha);
+            return successMsg('验证码已发送至手机:'.$mobilePhone . '，请注意查收。');
         }catch (\SoapFault $fault){
             return errorMsg('验证码发送失败,请稍候再试。。。');
         }

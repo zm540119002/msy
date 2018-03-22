@@ -32,7 +32,7 @@ class User extends Validate
         //验证码登录
         'loginCaptcha'  =>  [
             'mobile_phone',
-            'captcha',
+//            'captcha',
         ],
         //密码登录
         'loginPassword'  =>  [
@@ -46,7 +46,7 @@ class User extends Validate
         //修改密码
         'setPassword'  =>  [
             'mobile_phone',
-            'captcha',
+//            'captcha',
         ],
     ];
     //loginCaptcha场景重定义

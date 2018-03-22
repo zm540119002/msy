@@ -2,24 +2,23 @@ var timer;
 var requestSign = true;
 //获取验证码
 $('body').on('click','.mesg_code',function(){
+    errorTipc('暂未开通,不用验证！');
+    return false;
     if($(this).attr('disabled')){
         return false;
     }
     var _form = $(this).parents('form');
     var postData = {};
     postData.mobile_phone = _form.find('[name=mobile_phone]').val();
-    postData.captcha_type = _form.find('[name=captcha_type]').val();
     var userName=_form.find('.user_name').val();
     var userPhone=_form.find('.user_phone').val();
     if(!requestSign){
         return false;
     }
-    console.log(postData);
-    //requestSign = false;
     var time=60;
     var content='';
     if(!register.phoneCheck(userPhone)){
-        content='请输入正确手机号码';
+        // content='请输入正确手机号码';
     }
     if(content){
         errorTipc(content);
@@ -101,7 +100,7 @@ function loginDialog(func){
                     }
                     break;
             }
-            if(content){
+            if(0 && content){
                 errorTipc(content);
                 return false;
             }
@@ -134,11 +133,6 @@ $(function(){
     //登录
     $('body').on('click','.deployed-deployment,.order-management',function(){
         loginDialog();
-    });
-    //注册
-    $('body').on('click','.register_dialog',function(){
-        platformNotesDialog();
-        //registerDialog();
     });
     //忘记密码
     $('body').on('click','.forget_dialog',function(){
