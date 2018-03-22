@@ -263,7 +263,7 @@ function nonNegativeInteger($int)
  */
 function create_random_str($len = 6, $type = 1, $prefixChars = "", $addChars = "")
 {
-    $range_code = Org\Util\String::randString($len, $type, $addChars);
+    $range_code = common\lib\String::randString($len, $type, $addChars);
     return $prefixChars ? $prefixChars . $range_code : $range_code;
 }
 
@@ -344,7 +344,7 @@ function strlen_utf8($str)
  * $min:最小长度，
  * max:最大长度，
  */
-function checklength($str, $min = 6, $max = 10)
+function checkLength($str, $min = 6, $max = 10)
 {
     preg_match_all("/./u", $str, $matches);
     $len = count($matches[0]);
@@ -420,14 +420,6 @@ function xmlToArray($xml){
     }
     $result = json_decode(json_encode($xml_string),true);
     return $result;
-}
-
-/**验证密码格式
- * @param $passwd
- * @return bool
- */
-function checkPwd($passwd){
-    return true;
 }
 
 /**
@@ -508,24 +500,6 @@ function isWxBrowser(){
 function generateSN($len=18){
     return date('YmdHis',time()) . create_random_str($len);
 }
-
-/**验证账号是否存在
- * @param $name
- * @return bool
- */
-function accountIsExist($name){
-    return M('user')->where(array('name'=>$name,))->count()?true:false;
-}
-
-/**判断是否预留手机号码
- * @param $mobile
- * @param $name
- * @return bool
- */
-function isReservedMobilePhone($mobile,$name){
-    return (M('user')->where(array('name'=>trim($name),))->getField('mobile_phone') == trim($mobile)) ? true : false;
-}
-
 
 /**
  * 过滤数组元素前后空格 (支持多维数组)
@@ -610,20 +584,6 @@ function isPhoneSide()
     return false;
 }
 
-
-/**
- * @param        $value
- * @param string $id
- * @param array  $config
- * @return bool
- */
-function captcha_check($value, $id = "", $config = [])
-{
-    $captcha = new \Think\Verify($config);
-    return $captcha->check($value, $id);
-}
-
-
 //生成不带二维码
 function createQRcode($url){
     //生成二维码图片
@@ -684,9 +644,6 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     return $newRelativePath.$filename;
 
 }
-
-
-
 
 /**
  * 生成数据返回值
