@@ -1,7 +1,6 @@
 <?php
 namespace app\factory\controller;
-use think\Controller;
-use app\common\model\Factory as M;
+use app\factory\model\Goods as M;
 use common\controller\Base;
 class Goods extends Base
 {
@@ -12,6 +11,10 @@ class Goods extends Base
 
     public function add()
     {
+        if(request()->isPost()){
+            $model = new M();
+            return $model -> add();
+        }
         return $this->fetch();
     }
 
