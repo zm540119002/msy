@@ -8,20 +8,6 @@ class User extends Controller{
         parent::__construct();
     }
 
-    /**检查是否登录
-     */
-    public function check(){
-        $user = session('user');
-        $user_sign = session('user_sign');
-        if (!$user || !$user_sign) {
-            return false;
-        }
-        if ($user_sign != data_auth_sign($user)) {
-            return false;
-        }
-        return $user;
-    }
-
     /**登录
      * @return array|mixed
      */

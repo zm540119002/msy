@@ -5,7 +5,7 @@ use think\Controller;
 
 /**用户信息验证控制器基类
  */
-class Common extends Base{
+class Common extends Controller{
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
