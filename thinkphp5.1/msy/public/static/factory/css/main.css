@@ -200,7 +200,8 @@
     box-sizing:border-box;
     text-indent: 10px;
 }
-.editDetailLayer .layui-m-layercont{
+.editDetailLayer .layui-m-layercont,
+.editVideoLayer .layui-m-layercont{
     height:6.5rem;
     overflow: hidden;
     overflow-y: scroll;
