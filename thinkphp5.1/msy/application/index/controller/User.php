@@ -44,8 +44,8 @@ class User extends Controller{
     /*发送验证码
      */
     public function send_sms(){
-        if (!request()->isAjax()) {
-            return errorMsg('not_ajax');
+        if (!request()->isPost()) {
+            return errorMsg('not_post');
         }
         $this->_send_sms();
     }

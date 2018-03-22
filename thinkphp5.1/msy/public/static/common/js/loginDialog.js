@@ -38,7 +38,7 @@ $('body').on('click','.mesg_code',function(){
         }
         time--;
     }
-    var url = '/index.php/Home/User/send_sms';
+    var url = send_sms;
     $.post(url,postData,function(msg){
         requestSign = true;
         if(msg.status == 0){
@@ -106,7 +106,7 @@ function loginDialog(func){
                 return false;
             }
 
-            var url = '{:U("/Home/User/login")}';
+            var url = action;
             var postData = $('.loginLayer').find('#formLogin').serializeObject();
             $.ajax({
                 url:url,
@@ -171,7 +171,7 @@ $(function(){
                 }
                 break;
         }
-        if(0 && content){
+        if(content){
             dialog.error(content);
             return false;
         }
