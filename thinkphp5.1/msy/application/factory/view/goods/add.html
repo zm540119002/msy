@@ -1,4 +1,4 @@
-{extend name="public/base" /}
+{extend name="template/base.html" /}
 {block name="css-customize"}
 {/block}
 {block name="content"}
@@ -32,64 +32,7 @@
 		<textarea class="editGoodsText" name="" id="" cols="30" rows="10" val=""></textarea>
 	</div>
 </section>
-<!--设置商品的检索品类-->
-<section id="categoryContent" style="display:none;">
-    <div class="category-wrapper">
-        <div class="category-left-menu">
-            <ul class="category-tab">
-                <li class="current">
-                    <a href="javascript:void(0);">大类1</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类2</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类3</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类4</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类5</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类6</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类7</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类8</a>
-                </li>
-            </ul>
-        </div>
-        <div class="category-content-wrapper">
-            <!--<p>设置商品的检索品类标签<br/>方法：点击左边大类，右边</p>-->
-            <div class="category-content">
-                <ul class="category-type columns_flex">
-                    <li>
-                        <a>分类1111</a>
-                    </li>
-                    <li>
-                        <a>分类1111</a>
-                    </li>
-                    <li>
-                        <a>分类1111</a>
-                    </li>
-                    <li>
-                        <a>分类2222</a>
-                    </li>
-                    <li>
-                        <a>分类22222</a>
-                    </li>
-                    <li>
-                        <a>分类22222</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+
 <article class="f24">
 	<section>
 		<form class="addProductContent">
@@ -150,6 +93,7 @@
 {block name="common"}
 {include file="template/right_side_bar.html" /}
 {include file="template/upload-multi_img.html" /}
+{include file="template/category_template.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
