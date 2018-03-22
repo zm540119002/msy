@@ -30,6 +30,13 @@ class User extends Model {
 				if(!$validateUser->scene('register')->check($data)) {
 					return errorMsg($validateUser->getError());
 				}
+//				if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'],'register')){
+//					return errorMsg('验证码错误，请重新获取验证码！');
+//				}
+				if(!$this->_register($data['mobile_phone'])){
+					return errorMsg($this->getLastSql());
+				}
+				return $this->_login($data['mobile_phone']);
 			}
 		}elseif($data['mobile_phone'] && $data['password']){//密码登录
 			if(!$validateUser->scene('sceneLoginPassword')->check($data)) {
@@ -38,6 +45,18 @@ class User extends Model {
 			return $this->_login($data['mobile_phone'],$data['password']);
 		}else{
 			return errorMsg('登录信息不完善！');
+		}
+	}
+
+	public function setPassword($mobilePhone,$captcha){
+		$data = input('post.');
+		$validateUser = new \common\validate\User;
+		if($data['mobile_phone'] && $data['captcha']){
+//			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'],'login')){
+//				return errorMsg('验证码错误，请重新获取验证码！');
+//			}
+			$data['salt'] = create_random_str(10,0);//盐值
+			$data['password'] = md5($_POST['salt'] . $_POST['pass_word']);//加密
 		}
 	}
 
@@ -62,9 +81,17 @@ class User extends Model {
 		return successMsg($backUrl?(is_ssl()?'https://':'http://').$backUrl:url('login'));
 	}
 
-	private function _register(){
-		
+	/**注册
+	 * @param $mobilePhone
+	 * @return array
+	 */
+	private function _register($mobilePhone){
+		$data['mobile_phone'] = $mobilePhone;
+		$data['create_time'] = time();
+		$this->save($data);
+		return $this->id;
 	}
+
 	/**更新最后登录时间
 	 */
 	private function _setLastLoginTimeById($userId){
