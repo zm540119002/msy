@@ -22,8 +22,6 @@ $('body').on('click','.mesg_code',function(){
         errorTipc(content);
         return false;
     }
-    errorTipc('暂未开通,输入6个数字即可，例如：666888！');
-    return false;
     $('.tel_code').val('');
     clearInterval(timer);
     timer=setInterval(CountDown,1000);
