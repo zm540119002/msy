@@ -47,7 +47,10 @@ class User extends Controller{
         if (!(request()->isPost())) {
             return config('custom.not_post');
         }
-        
+        $response = \common\lib\Sms::sendSms();
+        echo "发送短信(sendSms)接口返回的结果:\n";
+        print_r($response);
+        exit;
         return $this->_send_sms();
     }
     private function _send_sms(){
