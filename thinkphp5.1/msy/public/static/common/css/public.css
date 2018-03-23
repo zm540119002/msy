@@ -635,6 +635,9 @@ color: #ed6d00;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+.forgetPasswdLayer h2{
+    text-align: center;
+}
 .login_item>span,
 .register_item>span,
 .forgetPasswd_item>span{

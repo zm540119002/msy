@@ -1,3 +1,4 @@
+
 $(function(){
     $('body').on('click','.forgetPasswordBtn',function(){
         var $layer=$('.forgetPasswd_wrap');

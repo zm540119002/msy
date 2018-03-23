@@ -34,8 +34,9 @@
 	<div class="error_tipc" ></div>
 	<a href="javascript:void(0);" class="loginBtn">登录</a>
 	<div class="friend_tipc">
-		<!--<a href="javascript:void(0);" class="register_dialog">注册</a>-->
-		<a href="{:url('forget_password')}" class="forget_dialog">忘记密码?</a>
+		<!--<a href="javascript:void(0);" class="register_dialog">注册</a>   {:url('forgetPassword')}-->
+		<a href="javascript:void(0);" class="forget_dialog">忘记密码?</a>
 	</div>
 </div>
-<script type="text/javascript" src="public_js/loginDialog.js"></script>
+{include file="template/forget_password_dialog.html" /}
+<script type="text/javascript" src="public_js/login.js"></script>
