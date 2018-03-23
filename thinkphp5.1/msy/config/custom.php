@@ -21,4 +21,6 @@ return [
     'not_post' => '请用POST方式访问！',//不是POST
     'not_get' => '请用GET方式访问！',//不是GET
     'sms_expire' => 60 * 10,//短信验证码过期时间
+    'sms_sign_name' => '美尚云',//短信签名名称（阿里云）
+    'sms_template_code' => 'SMS_127169884',//短信模板CODE（阿里云）
 ];

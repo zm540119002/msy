@@ -15,7 +15,7 @@ class Base extends Controller{
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
-        session('returnUrl',input('get.returnUrl','','string')?:input('post.returnUrl','','string'));
+        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
     }
 
     //返回图片临时相对路径
@@ -152,8 +152,20 @@ class Base extends Controller{
         }
        return successMsg($imgsNew);
     }
-    
 
+    /**检查是否登录
+     */
+    public function checkLogin(){
+        $user = session('user');
+        $user_sign = session('user_sign');
+        if (!$user || !$user_sign) {
+            return false;
+        }
+        if ($user_sign != data_auth_sign($user)) {
+            return false;
+        }
+        return $user;
+    }
 }
 
 
