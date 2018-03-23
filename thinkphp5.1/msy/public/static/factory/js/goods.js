@@ -9,12 +9,12 @@ $(function(){
         var _this = $(this);
         uploadsImg(_this,'上传商品首焦图','uploadFocusLayer');
     })
-    //选择商品分类标签
+    //归属店铺分类(系列)
     var editGoodsLabel=$('#editGoodsLabel').html();
     $('body').on('click','.editGoodsLabel',function(){
         var factoryLayerName,factoryLayerId;
         layer.open({
-            title:['商品分类标签','border-bottom:1px solid #d9d9d9'],
+            title:['归属店铺分类(系列)','border-bottom:1px solid #d9d9d9'],
             className:'editGoodsLayer',
             content:editGoodsLabel,
             btn:['确定','取消'],
@@ -42,7 +42,22 @@ $(function(){
         })
     });
 
+    //设置品类
+    var categoryContent=$('#categoryContent').html();
+    $('body').on('click','.set-category',function(){
+        layer.open({
+            title:['设置商品的检索品类','border-bottom:1px solid #d9d9d9'],
+            className:'categoryContentLayer',
+            content:categoryContent,
+            btn:['确定','取消'],
+            success:function(){
 
+            },
+            yes:function(index){
+                layer.close(index);
+            }
+        })
+    });
     //编辑商品参数
     var editGoodsParameter=$('#editGoodsParameter').html();
     $('body').on('click','.editGoodsParameter',function(){
@@ -102,7 +117,10 @@ $(function(){
             }
         })
     })
-
+    $('body').on('click','.category-tab li',function(){
+        var _this=$(this);
+        _this.addClass('current').siblings().removeClass('current');
+    })
 });
 //单图片上传的弹窗
 function uploadsImg(obj,tilt,className) {

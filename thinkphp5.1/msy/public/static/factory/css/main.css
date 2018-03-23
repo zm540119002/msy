@@ -222,3 +222,42 @@
     background:#ff7aab;
     color:#fff;
 }
+/*设置商品的检索品类*/
+.category-wrapper{
+    /*height:auto;*/
+    height:450px;
+    min-height:100%;
+}
+.category-left-menu{
+    float:left;
+    min-width:80px;
+    /*height:auto;*/
+    height:400px;
+    overflow-y:auto;
+    /*min-height:100%;*/
+    background: #f8f8f8;
+}
+.category-tab li{
+    height:46px;
+    line-height: 46px;
+    text-align:center;
+    position:relative;
+}
+.category-tab li.current{
+    background: #fff;
+}
+.category-tab li.current a{
+    color:#ff0000;
+}
+.category-content-wrapper{
+    padding:10px 20px;
+    margin:0 0 0 80px;
+}
+.category-type{
+    /*justify-content: space-between;*/
+    flex-wrap: wrap;
+}
+.category-type li{
+    width:30%;
+    margin:0 0 25px 0;
+}

@@ -4,7 +4,7 @@ namespace common\controller;
 use think\Controller;
 use think\Image;
 
-/**公共基础控制器
+/**基于公共基础控制器
  */
 class Base extends Controller{
     protected $host;
@@ -15,7 +15,7 @@ class Base extends Controller{
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
-//        session('returnUrl',I('get.returnUrl','','string')?:I('post.returnUrl','','string'));
+        session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
     }
 
     //返回图片临时相对路径
@@ -84,22 +84,23 @@ class Base extends Controller{
         //$img = isset($_POST['imgs'])? $_POST['imgs'] : '';
         $imgs = $_POST['imgs'];
         $imgsNew = [];
-
         foreach ($imgs as $k=>$img){
             //判断是否为base64编码图片
-            if(strpos($img,'data:image') !==false){
+            if(strpos($img,'data:image') !==false || strpos($img,'data:video') !== false){
                 // 获取图片
                 list($type, $data) = explode(',', $img);
                 // 判断文件类型
                 $ext = '';
                 if(strstr($type,'image/jpeg')!=''){
                     $ext = '.jpeg';
-                }elseif(strstr($type,'image/jpeg')!=''){
+                }elseif(strstr($type,'image/jpg')!=''){
                     $ext = '.jpg';
                 }elseif(strstr($type,'image/gif')!=''){
                     $ext = '.gif';
                 }elseif(strstr($type,'image/png')!=''){
                     $ext = '.png';
+                }elseif(strstr($type,'video/mp4')!=''){
+                    $ext = '.mp4';
                 }
                 if(!$ext){
                     return errorMsg('只支持:jpeg,jpg,gif,png格式的图片');
@@ -151,6 +152,7 @@ class Base extends Controller{
         }
        return successMsg($imgsNew);
     }
+    
 
 }
 

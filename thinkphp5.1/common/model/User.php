@@ -18,21 +18,18 @@ class User extends Model {
 		$data = input('post.');
 		$validateUser = new \common\validate\User;
 		if($data['mobile_phone'] && $data['captcha']){//验证码登录
+//			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'],'login')){
+//				return errorMsg('验证码错误，请重新获取验证码！');
+//			}
 			if($this->_checkAccountExist($data['mobile_phone'])){//账号存在，则登录
 				if(!$validateUser->scene('sceneLoginCaptcha')->check($data)) {
 					return errorMsg($validateUser->getError());
 				}
-//				if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'],'login')){
-//					return errorMsg('验证码错误，请重新获取验证码！');
-//				}
 				return $this->_login($data['mobile_phone']);
 			}else{//账号不存在，则先注册，再登录
 				if(!$validateUser->scene('register')->check($data)) {
 					return errorMsg($validateUser->getError());
 				}
-//				if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'],'register')){
-//					return errorMsg('验证码错误，请重新获取验证码！');
-//				}
 				if(!$this->_register($data['mobile_phone'])){
 					return errorMsg($this->getLastSql());
 				}
@@ -61,7 +58,7 @@ class User extends Model {
 			$data['salt'] = create_random_str(10,0);//盐值
 			$data['password'] = md5($_POST['salt'] . $_POST['pass_word']);//加密
 			$this->save($data);
-			if(!$this->id){
+			if(!$this->getAttr('id')){
 				return errorMsg('修改密码失败！');
 			}
 			return successMsg('重置密码成功');
@@ -99,7 +96,7 @@ class User extends Model {
 		$data['mobile_phone'] = $mobilePhone;
 		$data['create_time'] = time();
 		$this->save($data);
-		return $this->id;
+		return $this->getAttr('id');
 	}
 
 	/**更新最后登录时间

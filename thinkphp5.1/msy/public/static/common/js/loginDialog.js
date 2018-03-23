@@ -8,14 +8,11 @@ $('body').on('click','.mesg_code',function(){
     var _form = $(this).parents('form');
     var postData = {};
     postData.mobile_phone = _form.find('[name=mobile_phone]').val();
-    postData.captcha_type = _form.find('[name=captcha_type]').val();
     var userName=_form.find('.user_name').val();
     var userPhone=_form.find('.user_phone').val();
     if(!requestSign){
         return false;
     }
-    console.log(postData);
-    //requestSign = false;
     var time=60;
     var content='';
     if(!register.phoneCheck(userPhone)){
@@ -25,6 +22,8 @@ $('body').on('click','.mesg_code',function(){
         errorTipc(content);
         return false;
     }
+    errorTipc('暂未开通,输入6个数字即可，例如：666888！');
+    return false;
     $('.tel_code').val('');
     clearInterval(timer);
     timer=setInterval(CountDown,1000);
@@ -38,7 +37,7 @@ $('body').on('click','.mesg_code',function(){
         }
         time--;
     }
-    var url = '/index.php/Home/User/send_sms';
+    var url = send_sms;
     $.post(url,postData,function(msg){
         requestSign = true;
         if(msg.status == 0){
@@ -101,12 +100,12 @@ function loginDialog(func){
                     }
                     break;
             }
-            if(content){
+            if(0 && content){
                 errorTipc(content);
                 return false;
             }
 
-            var url = '{:U("/Home/User/login")}';
+            var url = action;
             var postData = $('.loginLayer').find('#formLogin').serializeObject();
             $.ajax({
                 url:url,
@@ -134,11 +133,6 @@ $(function(){
     //登录
     $('body').on('click','.deployed-deployment,.order-management',function(){
         loginDialog();
-    });
-    //注册
-    $('body').on('click','.register_dialog',function(){
-        platformNotesDialog();
-        //registerDialog();
     });
     //忘记密码
     $('body').on('click','.forget_dialog',function(){
@@ -171,14 +165,13 @@ $(function(){
                 }
                 break;
         }
-        if(0 && content){
+        if(content){
             dialog.error(content);
             return false;
         }
         var url = action;
         var postData = $('#formLogin').serializeObject();
         $.post(url,postData,function (data) {
-            console.log(data);return;
             if(data.status==0){
                 dialog.error(data.info);
                 return false;

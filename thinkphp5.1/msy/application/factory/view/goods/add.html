@@ -1,4 +1,4 @@
-{extend name="public/base" /}
+{extend name="template/base.html" /}
 {block name="css-customize"}
 {/block}
 {block name="content"}
@@ -18,26 +18,7 @@
 		</div>
 	</form>
 </section>
-<!--商品视频-->
-<section id="goodsVideoList" style="display: none;">
-    <p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传视频(格式为)</p>     
-    <form class="">
-        <ul class="upload-picture-module multi-picture-module f24"></ul>
-    </form>               
-    <form>
-        <div class="upload-picture-module f24">
-            <div>
-                <div class="picture-module">
-                    <input type="file" id="video" class="uploadImg " name="" accept="video/*" multiple="" >
-                    <img class="upload_img" src="" alt="">
-                    <input type="hidden" class="layer-thumbnail-picture" value=""/>
-                </div>
-                <!--<p>企业营业执照</p>-->
-            </div>
-        </div>
-    </form>    
-</section>
-<!--编辑分类标签-->
+
 <section id="editGoodsLabel" style="display:none;">
 	<ul class="vendorInfoList">
 		<li data-id="1">标签1</li>
@@ -80,16 +61,20 @@
 					<input type="hidden" class="hidden_img" value="" name="thumb_img">
 				</li>
 				<li class="">
-					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >编辑商品分类标签</a>
-					<input type="hidden" class="goods-tag" data-id="" value="" name="tag">
-				</li>
-				<li class="">
 					<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图</a>
 					<input type="hidden" class="hidden_img" value=""  name="main_img">
 				</li>
 				<li class="">
                     <a href="javascript:void(0);" class="uploadGoodsVideo right-arrow">上传商品视频(可选项)</a>
                     <input type="hidden" class="goods-video" value="" data-src="" name="goodsVideo">
+                </li>
+				<li class="">
+					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >归属店铺分类(系列)</a>
+					<input type="hidden" class="goods-tag" data-id="" value="" name="tag">
+				</li>
+				<li class="">
+                    <a href="javascript:void(0);" class="set-category right-arrow">设置检索品类</a>
+                    <input type="hidden" class="select-category" data-src="" value="" name="selectCategory">
                 </li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑商品参数</a>
@@ -108,6 +93,7 @@
 {block name="common"}
 {include file="template/right_side_bar.html" /}
 {include file="template/upload-multi_img.html" /}
+{include file="template/category_template.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}

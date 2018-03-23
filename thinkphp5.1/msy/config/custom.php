@@ -20,4 +20,5 @@ return [
     'not_ajax' => '请用AJAX方式访问！',//不是POST
     'not_post' => '请用POST方式访问！',//不是POST
     'not_get' => '请用GET方式访问！',//不是GET
+    'sms_expire' => 60 * 10,//短信验证码过期时间
 ];
