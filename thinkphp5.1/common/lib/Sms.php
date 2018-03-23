@@ -70,7 +70,7 @@ class Sms
      * 发送短信
      * @return stdClass
      */
-    public static function sendSms() {
+    public static function sendSms($config) {
 
         // 初始化SendSmsRequest实例用于设置发送短信的参数
         $request = new SendSmsRequest();
@@ -79,17 +79,17 @@ class Sms
         //$request->setProtocol("https");
 
         // 必填，设置短信接收号码
-        $request->setPhoneNumbers("18819362618");
+        $request->setPhoneNumbers($config['mobilePhone']);
 
         // 必填，设置签名名称，应严格按"签名名称"填写，请参考: https://dysms.console.aliyun.com/dysms.htm#/develop/sign
-        $request->setSignName("美尚云");
+        $request->setSignName($config['smsSignName']?:"美尚云");
 
         // 必填，设置模板CODE，应严格按"模板CODE"填写, 请参考: https://dysms.console.aliyun.com/dysms.htm#/develop/template
-        $request->setTemplateCode("SMS_127169884");
+        $request->setTemplateCode($config['smsTemplateCode']?:"SMS_127169884");
 
         // 可选，设置模板参数, 假如模板中存在变量需要替换则为必填项
         $request->setTemplateParam(json_encode(array(  // 短信模板中字段的值
-            "code"=>"12345",
+            "code"=>$config['captcha'],
             "product"=>"dsd"
         ), JSON_UNESCAPED_UNICODE));
 
