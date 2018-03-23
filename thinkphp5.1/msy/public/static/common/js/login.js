@@ -218,7 +218,7 @@ $(function(){
                 return false;
             }
 
-            var url = '{:U("/Home/User/forget_password")}';
+            var url = action;
             var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
             $.ajax({
                 url:url,
