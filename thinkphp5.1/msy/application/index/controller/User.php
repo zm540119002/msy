@@ -47,6 +47,7 @@ class User extends Controller{
         if (!(request()->isPost())) {
             return config('custom.not_post');
         }
+        
         return $this->_send_sms();
     }
     private function _send_sms(){
