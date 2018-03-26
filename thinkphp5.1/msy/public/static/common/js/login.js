@@ -154,7 +154,17 @@ $(function(){
     });
     //登录
     tab_down('.loginNav li','.loginTab .login_wrap','click');
+    $('body').on('click','.loginNav li',function(){
+        var _this=$(this);
+        if(_this.index()==0){
+            $('.login_item').find('.mesg_code').show();
+        }else{
+            $('.login_item').find('.mesg_code').hide();
+        }
+        
+    })
     $('body').on('click','.loginBtn',function(){
+         alert(1);
         var $layer = $('.loginTab').find('.active');
         var _index = $('.loginTab').find('.login_wrap.active').index();
         var content='';
@@ -170,8 +180,10 @@ $(function(){
                 }
                 break;
             case 1:
+                // $layer.prev('.login_item').find('.mesg_code').hide();
                 var userName=$layer.find('.user_name').val();
                 var password=$layer.find('.password').val();
+                $('.login_item').find('.mesg_code').hide();
                 if(!checkAccount(userName)){
                     content='请输入正确手机号';
                 }else if(!register.pswCheck(password)){
