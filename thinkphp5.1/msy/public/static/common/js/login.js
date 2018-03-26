@@ -197,45 +197,42 @@ $(function(){
     //弹窗重置密码
     $('body').on('click','.forgetPasswdLayer .forgetPasswordBtn',function(){
         var $layer=$('.forgetPasswdLayer').find('.forgetPasswd_wrap');
-            //验证
-            //var userName=$layer.find('.user_name').val();
-            var password=$layer.find('.password').val();
-            var newPassword=$layer.find('.cofirm_password').val();
-            var userPhone=$layer.find('.user_phone').val();
-            var verifiCode=$layer.find('.tel_code').val();
-            var content='';
-            if(!register.pswCheck(password)){
-                content = "请输入正确的密码";
-            }else if(password!=newPassword){
-                content = "两次密码输入不一致";
-            }else if(!register.phoneCheck(userPhone)){
-                content = "请输入正确的手机号码";
-            }else if(!register.vfyCheck(verifiCode)){
-                content = "请输入正确的验证码";
-            }
-            if(content){
-                errorTipc(content);
-                return false;
-            }
+        //验证
+        //var userName=$layer.find('.user_name').val();
+        var password=$layer.find('.password').val();
+        var newPassword=$layer.find('.cofirm_password').val();
+        var userPhone=$layer.find('.user_phone').val();
+        var verifiCode=$layer.find('.tel_code').val();
+        var content='';
+        if(!register.pswCheck(password)){
+            content = "请输入正确的密码";
+        }else if(password!=newPassword){
+            content = "两次密码输入不一致";
+        }else if(!register.phoneCheck(userPhone)){
+            content = "请输入正确的手机号码";
+        }else if(!register.vfyCheck(verifiCode)){
+            content = "请输入正确的验证码";
+        }
+        if(content){
+            errorTipc(content);
+            return false;
+        }
 
-            var url = action;
-            var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
-            $.ajax({
-                url:url,
-                type:'post',
-                data:postData,
-                error:function(xhr){},
-                success:function(data){
-                    if(data.status==0){
-                        errorTipc(data.info);
-                        return false;
-                    }else if(data.status==1){
-                        if(func && $.isFunction(func)){
-                            func();
-                        }
-                        layer.close(index);
-                    }
+        var url = action;
+        var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
+        $.ajax({
+            url:url,
+            type:'post',
+            data:postData,
+            error:function(xhr){},
+            success:function(data){
+                if(data.status==0){
+                    errorTipc(data.info);
+                    return false;
+                }else if(data.status==1){
+                    layer.close(index);
                 }
-            });
+            }
+        });
     });
 });

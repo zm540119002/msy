@@ -16,6 +16,7 @@ class User extends Model {
 	 */
 	public function login(){
 		$data = input('post.');
+		print_r($data);exit;
 		$validateUser = new \common\validate\User;
 		if($data['mobile_phone'] && $data['captcha']){//验证码登录
 			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
