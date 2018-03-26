@@ -11,16 +11,4 @@ class Index extends Controller
     {
         return $this->fetch();
     }
-
-    /**入驻登记
-     */
-    public function register()
-    {
-        if(request()->isAjax()){
-            $model = new \app\factory\model\Factory();
-            return $model -> add();
-        }else{
-            return $this->fetch();
-        }
-    }
 }
