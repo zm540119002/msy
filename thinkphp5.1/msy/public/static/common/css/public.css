@@ -635,9 +635,6 @@ color: #ed6d00;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.forgetPasswdLayer h2{
-    text-align: center;
-}
 .login_item>span,
 .register_item>span,
 .forgetPasswd_item>span{
@@ -850,8 +847,8 @@ color: #ed6d00;
 .editDetailLayer .layui-m-layercont,
 .editParameterLayer .layui-m-layercont,
 .uploadFocusLayer .layui-m-layercont,
-.editVideoLayer .layui-m-layercont,
-.categoryContentLayer .layui-m-layercont{
+.categoryContentLayer .layui-m-layercont,
+.trademarkTypeLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
@@ -883,7 +880,8 @@ color: #ed6d00;
 }
 .page-bd .status .current{color:#0ccaf7;}
 .weui-flex-item span{display:block;height:0.6rem;}
-.weui-flex-item .base_info{
+.weui-flex-item .base_info,
+.weui-flex-item .brand-name{
     background:#fff url(../../common/img/base_s_info.png) no-repeat center 0;
     background-size:40px auto;
 }
@@ -932,7 +930,7 @@ color: #ed6d00;
 .apply-items input{
     display: block;
     width:100%;
-    padding:0.15rem 0;
+    padding:0.18rem 0;
     background: none;
 }
 .step{
@@ -960,6 +958,7 @@ color: #ed6d00;
 .upload-picture-module{
     display: flex;
     display: -webkit-flex;
+    flex-wrap: wrap;
     margin:0.20rem 0 0;
     overflow: hidden;
 }
@@ -969,6 +968,10 @@ color: #ed6d00;
     -webkit-box-flex: 1;
     -webkit-flex: 1 1 auto;
     flex: 1 1 auto;
+}
+.brand-store-module li{
+    width:50%;
+    margin:0.15rem 0;
 }
 .upload-picture-module li p{
     text-align: center;
@@ -992,7 +995,9 @@ color: #ed6d00;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .upload-picture-module .picture-module:after,
-.upload-picture-module .picture-module:before {
+.upload-picture-module .picture-module:before,
+.logo-license .logo:after,
+.logo-license .logo:before{
     content: " ";
     position: absolute;
     top: 50%;
@@ -1013,8 +1018,19 @@ color: #ed6d00;
     top:45%;
     
 }
-.upload-picture-module .picture-module:after {
+.upload-picture-module .picture-module:after{
     width: 39.5px;
+    height: 2px;
+    top:45%;
+}
+.logo-license .logo:before{
+    width: 2px;
+    height: 25px;
+    top:45%;
+    
+}
+.logo-license .logo:after{
+    width: 25px;
     height: 2px;
     top:45%;
 }
@@ -1129,8 +1145,8 @@ color: #ed6d00;
     left:0;
     bottom:0;
     width:100%;
-    height:38px;
-    line-height: 38px;
+    height:40px;
+    line-height:40px;
     background: #ff7bac;
     color:#fff;
     text-align:center;
@@ -1140,96 +1156,309 @@ color: #ed6d00;
 
 /*h5一次多图片上传*/
 /*.container {
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            clear: both;
-        }*/
-        
-        .z_photo {
-            width: 5rem;
-            height: 5rem;
-            padding: 0.3rem;
-            overflow: auto;
-            clear: both;
-            margin: 1rem auto;
-            border: 1px solid #555;
-        }
-        
-        .z_photo img {
-            width: 1rem;
-            height: 1rem;
-        }
-        
-        .z_addImg {
-            float: left;
-            margin-right: 0.2rem;
-        }
-        
-        .z_file {
-            width: 1rem;
-            height: 1rem;
-            background: url(z_add.png) no-repeat;
-            background-size: 100% 100%;
-            float: left;
-            margin-right: 0.2rem;
-        }
-        
-        .z_file input::-webkit-file-upload-button {
-            width: 1rem;
-            height: 1rem;
-            border: none;
-            position: absolute;
-            outline: 0;
-            opacity: 0;
-        }
-        
-        .z_file input#file {
-            display: block;
-            width: auto;
-            border: 0;
-            vertical-align: middle;
-        }
-        /*遮罩层*/
-        
-        .z_mask {
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .5);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 999;
-            display: none;
-        }
-        
-        .z_alert {
-            width: 3rem;
-            height: 2rem;
-            border-radius: .2rem;
-            background: #fff;
-            font-size: .24rem;
-            text-align: center;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -1.5rem;
-            margin-top: -2rem;
-        }
-        
-        .z_alert p:nth-child(1) {
-            line-height: 1.5rem;
-        }
-        
-        .z_alert p:nth-child(2) span {
-            display: inline-block;
-            width: 49%;
-            height: .5rem;
-            line-height: .5rem;
-            float: left;
-            border-top: 1px solid #ddd;
-        }
-        
-        .z_cancel {
-            border-right: 1px solid #ddd;
-        }
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    clear: both;
+}*/
+
+.z_photo {
+    width: 5rem;
+    height: 5rem;
+    padding: 0.3rem;
+    overflow: auto;
+    clear: both;
+    margin: 1rem auto;
+    border: 1px solid #555;
+}
+
+.z_photo img {
+    width: 1rem;
+    height: 1rem;
+}
+
+.z_addImg {
+    float: left;
+    margin-right: 0.2rem;
+}
+
+.z_file {
+    width: 1rem;
+    height: 1rem;
+    background: url(z_add.png) no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    margin-right: 0.2rem;
+}
+
+.z_file input::-webkit-file-upload-button {
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    position: absolute;
+    outline: 0;
+    opacity: 0;
+}
+
+.z_file input#file {
+    display: block;
+    width: auto;
+    border: 0;
+    vertical-align: middle;
+}
+/*遮罩层*/
+
+.z_mask {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: none;
+}
+
+.z_alert {
+    width: 3rem;
+    height: 2rem;
+    border-radius: .2rem;
+    background: #fff;
+    font-size: .24rem;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -1.5rem;
+    margin-top: -2rem;
+}
+
+.z_alert p:nth-child(1) {
+    line-height: 1.5rem;
+}
+
+.z_alert p:nth-child(2) span {
+    display: inline-block;
+    width: 49%;
+    height: .5rem;
+    line-height: .5rem;
+    float: left;
+    border-top: 1px solid #ddd;
+}
+
+.z_cancel {
+    border-right: 1px solid #ddd;
+}
+
+/*上传头像*/
+.half > a {
+    position: relative;
+    width: 1.5rem;
+    display: block;
+    background: #efefef;
+    height: 1.5rem;
+    overflow:hidden;
+    /*left: 50%;*/
+    /*margin-left: -4rem*/
+}
+
+.half > a img {
+    width: 1rem;
+    height: 0.8rem;
+   margin:0.35rem auto 0;
+   display:block;
+}
+.half > a img.active{
+    width:100%;
+    height:100%;
+    margin:0;
+}
+
+.half > p {
+    position: relative;
+    color: #999;
+    padding:0.05rem 0 0 0.25rem;
+}
+
+.logo {
+    border-radius: 100%
+}
+
+.htmleaf-container{
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background: #000;
+    display: none;
+    z-index: 9999999;
+}
+.htmleaf-content {
+    font-size: 150%;
+    padding: 1em 0;
+}
+
+.htmleaf-content h2 {
+    margin: 0 0 2em;
+    opacity: 0.1;
+}
+
+.htmleaf-content p {
+    margin: 1em 0;
+    padding: 5em 0 0 0;
+    font-size: 0.65em;
+}
+
+/*button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+}*/
+
+button, input {
+    line-height: normal;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+button[disabled], html input[disabled] {
+    cursor: default;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#clipArea {
+    height: 90%;
+}
+
+
+/*上传图标*/
+#file{
+    /*float: left;
+    height: 100%;*/
+}
+#clipBtn{
+    width:36%;
+    display:block;
+    background: #18b4ed;
+    color:#fff;
+}
+.photoClip-close{
+    position: absolute;
+    right:0;
+    top:0;
+    display: block;
+    width:30px;
+    height:42px;
+    background: #fff;
+    font-size:30px;
+}
+.photoview{
+    background-color: rgb(102, 102, 102);
+    background-size: contain; 
+    background-position: 50% 50%; 
+    background-repeat: no-repeat;
+}
+.foot-use{
+    /*background: #fff;
+    height: 10%;
+    width: 100%;*/
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+}
+.uploader1 {
+     width:36%;
+     position: relative;
+}
+
+.uploader1 input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height:8rem;
+    width: 100%;
+    cursor: pointer;
+   border: solid 1px #ddd;
+    opacity: 0;
+}
+.uploader1 input[type=file] {
+  
+}
+input[type=button]::-moz-focus-inner {
+    padding: 0;
+    border: 0 none;
+    -moz-box-sizing: content-box;
+}
+
+input[type=button]::-webkit-focus-inner {
+    padding: 0;
+    border: 0 none;
+    -webkit-box-sizing: content-box;
+}
+
+input[type=text]::-webkit-focus-inner {
+    padding: 0;
+    border: 0 none;
+    -webkit-box-sizing: content-box;
+}
+
+.blue .button {
+    color: #fff;
+    background: #18b4ed;
+    width:100%;
+    height: 1.2rem;
+    display: block;
+
+}
+.photo-clip-mask{position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; pointer-events: none;}
+.photo-clip-mask-left{position: absolute; left: 0px; right: 50%; top: 50%; bottom: 50%; width: auto; height: 166px; margin-right: 99.5px; margin-top: -83px; margin-bottom: -83px; background-color: rgba(0, 0, 0, 0.498039);}
+.photo-clip-mask-right{position: absolute; left: 50%; right: 0px; top: 50%; bottom: 50%; margin-left: 99.5px; margin-top: -83px; margin-bottom: -83px; background-color: rgba(0, 0, 0, 0.498039);}
+.photo-clip-mask-top{position: absolute; left: 0px; right: 0px; top: 0px; bottom: 50%; margin-bottom: 83px; background-color: rgba(0, 0, 0, 0.498039);}
+.photo-clip-mask-bottom{position: absolute; left: 0px; right: 0px; top: 50%; bottom: 0px; margin-top: 83px; background-color: rgba(0, 0, 0, 0.498039);}
+.photo-clip-area{border: 1px dashed rgb(221, 221, 221); position: absolute; left: 50%; top: 50%; width: 199px; height: 166px; margin-left: -100.5px; margin-top: -84px;}
+.photo-clip-view{position: absolute; left: 50%; top: 50%; width: 199px; height: 166px; margin-left: -99.5px; margin-top: -83px;}
+.photo-clip-moveLayer{transform-origin: 0px 0px 0px; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px); touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}

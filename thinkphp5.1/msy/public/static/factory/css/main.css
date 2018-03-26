@@ -112,7 +112,7 @@
     padding:0 0 0 38px;
     background-image:url(../../common/img/icons/operate-icons.png);
     background-repeat: no-repeat;
-    background-size:32px 175px;
+    background-size:32px 250px;
     color:#39b54a;
 
 }
@@ -136,7 +136,7 @@
     margin:0 0 0 12px;
     background-image:url(../../common/img/icons/operate-icons.png);
     background-repeat: no-repeat;
-    background-size:32px 175px;
+    background-size:32px 250px;
     text-indent:-9999rem;
 }
 .classify-operate-btn a.add-icons{
@@ -149,20 +149,39 @@
     background-position:0 -71px;
 }
 .classify-operate-btn a.move-icons{
-    background-position:0 -106px;
+    background-position:0 -214px;
 }
 .classify-operate-btn a.down-icons{
+    background-position:0 -106px;
+}
+.classify-operate-btn a.move-disabled-icons{
     background-position:0 -142px;
+}
+.classify-operate-btn a.down-disabled-icons{
+    background-position:0 -178px;
 }
 .addTagLayer .layui-m-layercont{
     padding:0.20rem;
 }
-.addTagLayer .classify-tag-name{
+.addTagLayer .layui-m-layercont form{
+    display: -webkit-flex;
+    display:flex;
+    justify-content: space-between;
+}
+.addTagLayer form .layer-tag-num{
+    width:40%;
+    margin:0 20px 0 0;
+    background: #efefef;
+    border-radius:5px;
+    text-align:center;
+}
+.addTagLayer .layer-tag-name{
     width:100%;
     padding:10px 0;
     background: #efefef;
     border-radius:5px;
     text-align:center;
+    
 }
 .addProductContent {
     padding:0.25rem 0.15rem 0;
@@ -200,8 +219,7 @@
     box-sizing:border-box;
     text-indent: 10px;
 }
-.editDetailLayer .layui-m-layercont,
-.editVideoLayer .layui-m-layercont{
+.editDetailLayer .layui-m-layercont{
     height:6.5rem;
     overflow: hidden;
     overflow-y: scroll;
@@ -260,4 +278,38 @@
 .category-type li{
     width:30%;
     margin:0 0 25px 0;
+}
+.trademark-module{
+    padding:0 0 0 0.35rem;
+}
+.trademark-info li{
+    position:relative;
+    border-bottom:1px solid #d9d9d9;
+    padding:0.12rem 0;
+}
+.trademark-info .trade-logo{
+    max-width:50px;
+    vertical-align: middle;
+}
+.trademark-info .trade-name{
+    margin:0 0.50rem 0 0;
+}
+.trademark-info .recordation{
+    margin:0 0 0 1.5rem;
+}
+.trademark-type{
+    display: block;
+    padding:0 0 0.15rem 0;
+    margin:0.20rem 0 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.trademark-nav li:last-child em{
+    background:none;
+}
+.trademark-tipc{
+    width:90%;
+    margin:0 auto;
+}
+.trademarkTypeLayer .vendorInfoList li{
+    text-align: center;
 }
