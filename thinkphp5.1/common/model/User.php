@@ -49,7 +49,7 @@ class User extends Model {
 	/**重置密码
 	 * @return array
 	 */
-	public function setPassword(){
+	public function resetPassword(){
 		$data = input('post.');
 		$validateUser = new \common\validate\User;
 		if(!$validateUser->scene('setPassword')->check($data)){
