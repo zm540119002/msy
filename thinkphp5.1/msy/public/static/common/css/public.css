@@ -618,6 +618,9 @@ color: #ed6d00;
 .registerLayer .layui-m-layerbtn
 .forgetPasswdLayer .layui-m-layerbtn{border-top:none;}
 .login_wrap.hide{display:none;}
+.forgetPasswdLayer h2{
+    text-align: center;
+}
 .loginNav {height:.8rem;line-height:.8rem;border-bottom:1px solid #d9d9d9;}
 .loginNav li{width:50%;display:inline-block;float: left;text-align: center;}
 .loginNav li.current{border-bottom:2px solid #f23030;}
@@ -648,6 +651,13 @@ color: #ed6d00;
 .register_item>span.new_password,.forgetPasswd_item>span.new_password{width:1.6rem;}
 .register_item .n_pass,.forgetPasswd_item .n_pass{padding-left:.8rem;}
 .register_item .cofirm_password,.forgetPasswd_item .cofirm_password{padding-left:1.2rem;}
+.forgetPasswdLayer .forgetPasswd_item>span.txt3{
+    width:1.2rem;
+}
+.forgetPasswdLayer .forgetPasswd_item .n_pass,
+.forgetPasswdLayer .forgetPasswd_item .cofirm_password{
+    padding-left:1rem;
+}
 .username {
     width: 100%;
     padding: 0 .3rem 0 .6rem;
