@@ -44,7 +44,7 @@ class User extends Validate
             'mobile_phone',
         ],
         //修改密码
-        'setPassword'  =>  [
+        'resetPassword'  =>  [
             'mobile_phone',
 //            'captcha',
         ],
@@ -61,8 +61,8 @@ class User extends Validate
         return $this->only(['mobile_phone','password',])
             ->remove('mobile_phone','unique');
     }
-    //setPassword场景重定义
-    public function sceneSetPassword()
+    //resetPassword场景重定义
+    public function sceneResetPassword()
     {
         return $this->only(['mobile_phone','password',])
             ->remove('mobile_phone','unique');
