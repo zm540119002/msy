@@ -242,7 +242,7 @@ $(function(){
                     errorTipc(data.info);
                     return false;
                 }else if(data.status==1){
-                    layer.close(index);
+                    layer.close($layer);
                 }
             }
         });

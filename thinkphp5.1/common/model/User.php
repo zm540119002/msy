@@ -84,7 +84,7 @@ class User extends Model {
 	private function _login($mobilePhone,$password=''){
 		$user = $this->_get($mobilePhone,$password);
 		if(!$user){
-			return errorMsg('获取用户信息失败！');
+			return errorMsg('密码错误,请重置！');
 		}
 		//设置登录session
 		$this->_setSession($user);
