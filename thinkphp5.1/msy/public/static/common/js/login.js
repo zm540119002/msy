@@ -164,7 +164,6 @@ $(function(){
         
     })
     $('body').on('click','.loginBtn',function(){
-         alert(1);
         var $layer = $('.loginTab').find('.active');
         var _index = $('.loginTab').find('.login_wrap.active').index();
         var content='';
