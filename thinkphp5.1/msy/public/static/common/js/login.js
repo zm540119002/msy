@@ -196,6 +196,7 @@ $(function(){
         }
         var url = action;
         var postData = $('#formLogin').serializeObject();
+        postData.returnUrl = '';
         $.post(url,postData,function (data) {
             if(data.status==0){
                 dialog.error(data.info);
@@ -229,7 +230,7 @@ $(function(){
             return false;
         }
 
-        var url = action;
+        var url = controller + 'forgetPassword';
         var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
         $.ajax({
             url:url,

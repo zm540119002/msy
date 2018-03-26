@@ -24,8 +24,6 @@ class WXBase extends Base{
             $shLink = $shareLink;
         }
         $shareLink = $shLink.'.html';
-        $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         $shareImgUrl = (is_ssl()?'https://':'http://').$this->host.config('upload_dir.upload_path').$shareImgRelativeUrl;
         if(empty($backUrl)){
             $backUrl = $shareLink;
@@ -43,8 +41,6 @@ class WXBase extends Base{
     //微信分享信息
 //    public function weiXinShare($title,$shareLink,$shareImgRelativeUrl,$desc,$backUrl){
     public function weiXinShare($shareInfo){
-        $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
         $shareImgUrl = (is_ssl()?'https://':'http://').$this->host.config('upload_dir.upload_path').$shareInfo['shareImgUrl'];
         $shareInfo['shareImgUrl'] = $shareImgUrl;
         return $shareInfo;
