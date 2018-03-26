@@ -58,9 +58,12 @@ class User extends Model {
 			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
 			}
+			if(!$this->_checkAccountExist($data['mobile_phone'])){
+				return errorMsg('账号不存在！');
+			}
 			$data['salt'] = create_random_str(10,0);//盐值
-			$data['password'] = md5($_POST['salt'] . $_POST['pass_word']);//加密
-			$this->save($data);
+			$data['password'] = md5($_POST['salt'] . $data['password']);//加密
+			$this->where('mobile_phone','=',$data['mobile_phone'])->save($data);
 			if(!$this->getAttr('id')){
 				return errorMsg('重置失败！');
 			}
@@ -154,7 +157,6 @@ class User extends Model {
 	 * @return bool
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return true;
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 
