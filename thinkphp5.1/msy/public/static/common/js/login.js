@@ -98,11 +98,10 @@ function loginDialog(func){
                     }
                     break;
             }
-            if(0 && content){
+            if(content){
                 errorTipc(content);
                 return false;
             }
-
             var url = action;
             var postData = $('.loginLayer').find('#formLogin').serializeObject();
             $.ajax({
@@ -144,10 +143,6 @@ function forgetPasswordDialog(func){
 }
 
 $(function(){
-    //登录
-    $('body').on('click','.deployed-deployment,.order-management',function(){
-        loginDialog();
-    });
     //弹窗忘记密码
     $('body').on('click','.forget_dialog',function(){
         forgetPasswordDialog();
@@ -161,8 +156,7 @@ $(function(){
         }else{
             $('.login_item').find('.mesg_code').hide();
         }
-        
-    })
+    });
     $('body').on('click','.loginBtn',function(){
         var $layer = $('.loginTab').find('.active');
         var _index = $('.loginTab').find('.login_wrap.active').index();
@@ -229,7 +223,6 @@ $(function(){
             errorTipc(content);
             return false;
         }
-
         var url = controller + 'forgetPassword';
         var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
         $.ajax({

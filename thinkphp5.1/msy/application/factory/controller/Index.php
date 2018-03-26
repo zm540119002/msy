@@ -1,9 +1,9 @@
 <?php
 namespace app\factory\controller;
 
-use common\controller\UserBase;
+use think\Controller;
 
-class Index extends UserBase
+class Index extends Controller
 {
     /**首页
      */
