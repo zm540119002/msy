@@ -5,4 +5,5 @@ return [
     'temp_path' => 'temp/',//图片上传临时存放区
     'factory_auto' => 'factory_auto/',//图片上传临时存放区
     'factory_goods' => 'factory_goods/',//图片上传临时存放区
+    'factory_brand' => 'factory_brand/',//图片上传临时存放区
 ];
