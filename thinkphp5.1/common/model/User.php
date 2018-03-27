@@ -162,7 +162,6 @@ class User extends Model {
 	 * @return bool
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-//		return true;
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 
