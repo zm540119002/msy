@@ -4,16 +4,15 @@ namespace app\index_admin\controller;
 use think\Controller;
 use think\Request ;
 
-class Index extends Controller
+class Goods extends Controller
 {
-    public function index()
+    public function goodsManage()
     {
 //        return dump(config());
-       // return dump(config('menu_conf.menu_array'));
         return $this->fetch();
     }
 
-    public function welcome()
+    public function hello()
     {
         return $this->fetch();
     }
