@@ -1,22 +1,22 @@
 <?php
-namespace app\factory\model;
+namespace app\index_admin\model;
 use think\Model;
 use think\Db;
 /**
  * 基础模型器
  */
 
-class Series  extends Model {
+class Category extends Model {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'series';
-	// 设置当前模型的数据库连接
-//	protected $connection = 'db_factory';
+	protected $table = 'category';
+//	// 设置当前模型的数据库连接
+	protected $connection = 'db_msy';
 	/**
 	 * 新增
 	 */
 	public function add(){
 		$data = input('post.');
-		$validate = validate('Series');
+		$validate = validate('Brand');
 		if(!$result = $validate->scene('add')->check($data)) {
 			return errorMsg($validate->getError());
 		}
@@ -30,5 +30,11 @@ class Series  extends Model {
 		}else{
 			return errorMsg($this->getError());
 		}
+	}
+
+	public function select(){
+		//return $this->select();
+		 $specs = Db::name('msy.category')->where(['status'=>0,'parent_id_1'=>0])->field('id,name,img,level')->select();
+		return $specs;
 	}
 }

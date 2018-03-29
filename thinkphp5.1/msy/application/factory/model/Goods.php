@@ -29,6 +29,7 @@ class Goods extends Model {
 			}
 		}
 		$data['details_img'] = implode(',',$tempArr);
+		$data['create_time'] = time();
 		$result = $this -> allowField(true) -> save($data);
 		if(false !== $result){
 			return successMsg("添加成功！");

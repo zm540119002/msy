@@ -26,7 +26,7 @@ class User extends Controller{
     public function forgetPassword(){
         if (request()->isAjax()) {
             $modelUser = new \common\model\User();
-            return $modelUser->setPassword();
+            return $modelUser->resetPassword();
         } else {
             return $this->fetch();
         }

@@ -1,0 +1,18 @@
+<aside class="Hui-aside">
+
+	<div class="menu_dropdown bk_2">
+		{foreach $Think.config.menu_conf.menu_array as $key=>$vo  }
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> {$vo.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					{foreach $vo.sub_menu as $kk=>$vv }
+					<li><a data-href="{:url($vv.act.'/'.$vv.op)}" data-title="{$vv.name}" href="javascript:void(0)">{$vv.name}</a></li>
+					{/foreach}
+				</ul>
+			</dd>
+		</dl>
+		{/foreach}
+	</div>
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

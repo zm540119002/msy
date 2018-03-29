@@ -1,4 +1,5 @@
 $(function(){
+
     //上传缩略图
     $('body').on('click','.upload-thumbnail',function(){
         var _this = $(this);
@@ -8,7 +9,10 @@ $(function(){
     $('body').on('click','.uploadFocusPicture',function(){
         var _this = $(this);
         uploadsImg(_this,'上传商品首焦图','uploadFocusLayer');
-    })
+    });
+
+    //初始化
+    $('#categoryContent').find('li :first').addClass('current');
     //归属店铺分类(系列)
     var editGoodsLabel=$('#editGoodsLabel').html();
     $('body').on('click','.editGoodsLabel',function(){

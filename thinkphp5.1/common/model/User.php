@@ -48,20 +48,27 @@ class User extends Model {
 	/**重置密码
 	 * @return array
 	 */
-	public function setPassword(){
-		$data = input('post.');
+	public function resetPassword(){
+		$postData = input('post.');
 		$validateUser = new \common\validate\User;
-		if(!$validateUser->scene('setPassword')->check($data)){
+		if(!$validateUser->scene('resetPassword')->check($postData)){
 			return errorMsg($validateUser->getError());
 		}
-		if($data['mobile_phone'] && $data['captcha']){
-			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
+		if($postData['mobile_phone'] && $postData['captcha']){
+			if(!$this->_checkCaptcha($postData['mobile_phone'],$postData['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
 			}
-			$data['salt'] = create_random_str(10,0);//盐值
-			$data['password'] = md5($_POST['salt'] . $_POST['pass_word']);//加密
-			$this->save($data);
-			if(!$this->getAttr('id')){
+			if(!$this->_checkAccountExist($postData['mobile_phone'])){
+				return errorMsg('账号不存在！');
+			}
+			$saveData['salt'] = create_random_str(10,0);//盐值
+			$saveData['password'] = md5($saveData['salt'] . $postData['pass_word']);//加密
+			$where = array(
+				'status' => 0,
+				'mobile_phone' => $postData['mobile_phone'],
+			);
+			$response = $this::where($where)->update($saveData,$where);
+			if(!$response){
 				return errorMsg('重置失败！');
 			}
 			return successMsg('重置成功');
@@ -77,7 +84,7 @@ class User extends Model {
 	private function _login($mobilePhone,$password=''){
 		$user = $this->_get($mobilePhone,$password);
 		if(!$user){
-			return errorMsg('获取用户信息失败！');
+			return errorMsg('密码错误,请重置！');
 		}
 		//设置登录session
 		$this->_setSession($user);
@@ -130,13 +137,14 @@ class User extends Model {
 			->field($field)
 			->where($where)
 			->find();
+		$user = $user->toArray();
 		if(empty($user)) {
 			return false;
 		}
 		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
 			return false;
 		}
-		return $user->toArray();
+		return $user;
 	}
 
 	/**设置登录session
@@ -154,7 +162,6 @@ class User extends Model {
 	 * @return bool
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
-		return true;
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 

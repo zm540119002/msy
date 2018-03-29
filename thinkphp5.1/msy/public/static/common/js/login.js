@@ -98,11 +98,10 @@ function loginDialog(func){
                     }
                     break;
             }
-            if(0 && content){
+            if(content){
                 errorTipc(content);
                 return false;
             }
-
             var url = action;
             var postData = $('.loginLayer').find('#formLogin').serializeObject();
             $.ajax({
@@ -144,16 +143,20 @@ function forgetPasswordDialog(func){
 }
 
 $(function(){
-    //登录
-    $('body').on('click','.deployed-deployment,.order-management',function(){
-        loginDialog();
-    });
     //弹窗忘记密码
     $('body').on('click','.forget_dialog',function(){
         forgetPasswordDialog();
     });
     //登录
     tab_down('.loginNav li','.loginTab .login_wrap','click');
+    $('body').on('click','.loginNav li',function(){
+        var _this=$(this);
+        if(_this.index()==0){
+            $('.login_item').find('.mesg_code').show();
+        }else{
+            $('.login_item').find('.mesg_code').hide();
+        }
+    });
     $('body').on('click','.loginBtn',function(){
         var $layer = $('.loginTab').find('.active');
         var _index = $('.loginTab').find('.login_wrap.active').index();
@@ -170,8 +173,10 @@ $(function(){
                 }
                 break;
             case 1:
+                // $layer.prev('.login_item').find('.mesg_code').hide();
                 var userName=$layer.find('.user_name').val();
                 var password=$layer.find('.password').val();
+                $('.login_item').find('.mesg_code').hide();
                 if(!checkAccount(userName)){
                     content='请输入正确手机号';
                 }else if(!register.pswCheck(password)){
@@ -185,6 +190,7 @@ $(function(){
         }
         var url = action;
         var postData = $('#formLogin').serializeObject();
+        postData.returnUrl = '';
         $.post(url,postData,function (data) {
             if(data.status==0){
                 dialog.error(data.info);
@@ -197,45 +203,41 @@ $(function(){
     //弹窗重置密码
     $('body').on('click','.forgetPasswdLayer .forgetPasswordBtn',function(){
         var $layer=$('.forgetPasswdLayer').find('.forgetPasswd_wrap');
-            //验证
-            //var userName=$layer.find('.user_name').val();
-            var password=$layer.find('.password').val();
-            var newPassword=$layer.find('.cofirm_password').val();
-            var userPhone=$layer.find('.user_phone').val();
-            var verifiCode=$layer.find('.tel_code').val();
-            var content='';
-            if(!register.pswCheck(password)){
-                content = "请输入正确的密码";
-            }else if(password!=newPassword){
-                content = "两次密码输入不一致";
-            }else if(!register.phoneCheck(userPhone)){
-                content = "请输入正确的手机号码";
-            }else if(!register.vfyCheck(verifiCode)){
-                content = "请输入正确的验证码";
-            }
-            if(content){
-                errorTipc(content);
-                return false;
-            }
-
-            var url = action;
-            var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
-            $.ajax({
-                url:url,
-                type:'post',
-                data:postData,
-                error:function(xhr){},
-                success:function(data){
-                    if(data.status==0){
-                        errorTipc(data.info);
-                        return false;
-                    }else if(data.status==1){
-                        if(func && $.isFunction(func)){
-                            func();
-                        }
-                        layer.close(index);
-                    }
+        //验证
+        //var userName=$layer.find('.user_name').val();
+        var password=$layer.find('.password').val();
+        var newPassword=$layer.find('.cofirm_password').val();
+        var userPhone=$layer.find('.user_phone').val();
+        var verifiCode=$layer.find('.tel_code').val();
+        var content='';
+        if(!register.pswCheck(password)){
+            content = "请输入正确的密码";
+        }else if(password!=newPassword){
+            content = "两次密码输入不一致";
+        }else if(!register.phoneCheck(userPhone)){
+            content = "请输入正确的手机号码";
+        }else if(!register.vfyCheck(verifiCode)){
+            content = "请输入正确的验证码";
+        }
+        if(content){
+            errorTipc(content);
+            return false;
+        }
+        var url = controller + 'forgetPassword';
+        var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
+        $.ajax({
+            url:url,
+            type:'post',
+            data:postData,
+            error:function(xhr){},
+            success:function(data){
+                if(data.status==0){
+                    errorTipc(data.info);
+                    return false;
+                }else if(data.status==1){
+                    layer.close($layer);
                 }
-            });
+            }
+        });
     });
 });
