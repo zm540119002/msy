@@ -3,35 +3,16 @@
     <div class="category-wrapper">
         <div class="category-left-menu">
             <ul class="category-tab">
-                <li class="current">
-                    <a href="javascript:void(0);">大类1</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类2</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类3</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类4</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类5</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类6</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类7</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">大类8</a>
-                </li>
+                {volist name="platformCategory" id="vo"}
+                    <li class="">
+                        <a data-id="{$vo.id}" href="javascript:void(0);">{$vo.name}</a>
+                    </li>
+                {/volist}
             </ul>
         </div>
         <div class="category-content-wrapper">
             <!--<p>设置商品的检索品类标签<br/>方法：点击左边大类，右边</p>-->
-
+            {include file="template/category_second_template.html" /}
         </div>
     </div>
 </section>
