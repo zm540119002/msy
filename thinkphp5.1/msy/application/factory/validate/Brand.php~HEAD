@@ -3,7 +3,7 @@ namespace app\factory\validate;
 
 use think\Validate;
 
-class brand extends Validate
+class Brand extends Validate
 {
     /**
      * @var array

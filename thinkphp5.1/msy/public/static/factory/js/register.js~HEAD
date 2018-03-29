@@ -62,12 +62,9 @@ $(function(){
                 $('.weui-flex-item:eq(0)').addClass('disabled');
                 $('.weui-flex-item:eq(1)').addClass('disabled');
             }
-
-        })
+        });
     });
     //确定通过入驻
     $('body').on('click','.three-step',function(){
-        
     })
-
 });
