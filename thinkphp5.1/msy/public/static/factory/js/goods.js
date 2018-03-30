@@ -62,6 +62,26 @@ $(function(){
                 });
             },
             yes:function(index){
+                var categoryArr=[];
+                $.each($('.category-tab li'),function(){
+                    var _this=$(this);
+                    if(_this.hasClass('current')){
+                        var first_category_id=$('.categoryContentLayer .category-tab>li.current').find('a').data('id');
+                        console.log(first_category_id);
+                        categoryArr.push(first_category_id);
+                        return false;
+                    }
+                });
+                $.each($('.category-type li'),function(){
+                    var _this=$(this);
+                    if(_this.hasClass('current')){
+                        var second_category_id=$('.categoryContentLayer .category-type>li.current').find('a').data('id');
+                        categoryArr.push(second_category_id);
+                        return false;
+                    }
+                });
+                $('.select-category').data('category-id',categoryArr);
+                
                 layer.close(index);
             }
         })
@@ -125,7 +145,7 @@ $(function(){
             }
         })
     });
-    $('body').on('click','.category-tab li',function(){
+    $('body').on('click','.category-tab li,.category-type li',function(){
         var _this = $(this);
         _this.addClass('current').siblings().removeClass('current');
     });
