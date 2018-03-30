@@ -56,14 +56,33 @@ $(function(){
             btn:['确定','取消'],
             success:function(){
                 var cat_id_1 =  $('#categoryContent').find('li :first a').data('id');
-                $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
-                    $('.category-content-wrapper').empty();
-                    $('.category-content-wrapper').append(msg);
-                });
+                var categoryIdArr=$('.select-category').data('category-id');
+                //console.log(typeof categoryIdArr[0]);
+                // $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+                //     $('.category-content-wrapper').empty();
+                //     $('.category-content-wrapper').append(msg);
+                // });
 
-                var a = 25;
-                var b = 29;
-                $.each()
+                $.each($('.category-tab li'),function(){
+                    var _this=$(this);
+                    var _thisId=_this.find('a').data('id');
+                    console.log(_thisId);
+                    if(_thisId==categoryIdArr[0]){
+                        alert(1);
+                        _this.addClass('current');
+                        return false;
+                    }
+                });
+                // $.each($('.category-type li'),function(){
+                //     var _this=$(this);
+                //     var _thisId=_this.find('a').data('id');
+                //     alert(_thisId);
+                //     if(_thisId==categoryIdArr[1]){
+                //         alert(2);
+                //         _this.addClass('current').siblings().removeClass('current');
+                //        // return false;
+                //     }
+                // })
 
             },
             yes:function(index){
@@ -84,6 +103,7 @@ $(function(){
                         return false;
                     }
                 });
+                console.log(categoryArr);
                 $('.select-category').data('category-id',categoryArr);
                 layer.close(index);
             }
