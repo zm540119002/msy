@@ -7,9 +7,13 @@ class Goods extends Base
 {
     public function index()
     {
-        return $this->fetch('template/category_second_template.html');
+        return $this->fetch();
     }
 
+    /**
+     * @return array|mixed
+     * 
+     */
     public function add()
     {
         if(request()->isPost()){
@@ -19,6 +23,10 @@ class Goods extends Base
         $categoryModel = new CategoryModel();
         $platformCategory = $categoryModel->selectFirstCategory();
         $this->assign('platformCategory',$platformCategory);
+        if(request()->isGet()){
+            $model = new M();
+            return $model -> add();
+        }
         return $this->fetch();
     }
 
