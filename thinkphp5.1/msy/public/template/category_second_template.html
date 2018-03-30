@@ -1,22 +1,9 @@
 <div class="category-content">
     <ul class="category-type columns_flex">
-        <li>
-            <a>分类1111</a>
+        {volist name="secondCategory" id="vo"}
+        <li class="">
+            <a data-id="{$vo.id}" class="second_category" href="javascript:void(0);">{$vo.name}</a>
         </li>
-        <li>
-            <a>分类1111</a>
-        </li>
-        <li>
-            <a>分类1111</a>
-        </li>
-        <li>
-            <a>分类2222</a>
-        </li>
-        <li>
-            <a>分类22222</a>
-        </li>
-        <li>
-            <a>分类22222</a>
-        </li>
+        {/volist}
     </ul>
 </div>

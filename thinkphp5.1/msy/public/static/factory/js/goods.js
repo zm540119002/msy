@@ -55,9 +55,33 @@ $(function(){
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
-
+                var cat_id_1 =  $('#categoryContent').find('li :first a').data('id');
+                $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+                    $('.category-content-wrapper').empty();
+                    $('.category-content-wrapper').append(msg);
+                });
             },
             yes:function(index){
+                var categoryArr=[];
+                $.each($('.category-tab li'),function(){
+                    var _this=$(this);
+                    if(_this.hasClass('current')){
+                        var first_category_id=$('.categoryContentLayer .category-tab>li.current').find('a').data('id');
+                        console.log(first_category_id);
+                        categoryArr.push(first_category_id);
+                        return false;
+                    }
+                });
+                $.each($('.category-type li'),function(){
+                    var _this=$(this);
+                    if(_this.hasClass('current')){
+                        var second_category_id=$('.categoryContentLayer .category-type>li.current').find('a').data('id');
+                        categoryArr.push(second_category_id);
+                        return false;
+                    }
+                });
+                $('.select-category').data('category-id',categoryArr);
+                
                 layer.close(index);
             }
         })
@@ -120,11 +144,26 @@ $(function(){
                 dialog.success(msg.info);
             }
         })
-    })
-    $('body').on('click','.category-tab li',function(){
-        var _this=$(this);
+    });
+    $('body').on('click','.category-tab li,.category-type li',function(){
+        var _this = $(this);
         _this.addClass('current').siblings().removeClass('current');
+    });
+
+
+    //获取二级分类
+    $('body').on('click','.first_category',function () {
+        var _this = $(this);
+        var cat_id_1 = _this.data('id');
+        $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+            $('.category-content-wrapper').empty();
+           $('.category-content-wrapper').append(msg);
+        });
+
     })
+
+
+
 });
 //单图片上传的弹窗
 function uploadsImg(obj,tilt,className) {
