@@ -55,7 +55,7 @@ $(function(){
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
-                var cat_id_1 =  $('#categoryContent').find('li :first').data('id');
+                var cat_id_1 =  $('#categoryContent').find('li :first a').data('id');
                 $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
                     $('.category-content-wrapper').empty();
                     $('.category-content-wrapper').append(msg);
