@@ -33,7 +33,7 @@ $(function(){
                     if(factoryId==currentId){
                         $(this).addClass('current');
                     }
-                })
+                });
             },
             yes:function(index){
                 var isCurrent=$('.editGoodsLayer li.current');
@@ -56,10 +56,34 @@ $(function(){
             btn:['确定','取消'],
             success:function(){
                 var cat_id_1 =  $('#categoryContent').find('li :first a').data('id');
-                $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
-                    $('.category-content-wrapper').empty();
-                    $('.category-content-wrapper').append(msg);
+                var categoryIdArr=$('.select-category').data('category-id');
+                //console.log(typeof categoryIdArr[0]);
+                // $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+                //     $('.category-content-wrapper').empty();
+                //     $('.category-content-wrapper').append(msg);
+                // });
+
+                $.each($('.category-tab li'),function(){
+                    var _this=$(this);
+                    var _thisId=_this.find('a').data('id');
+                    console.log(_thisId);
+                    if(_thisId==categoryIdArr[0]){
+                        alert(1);
+                        _this.addClass('current');
+                        return false;
+                    }
                 });
+                // $.each($('.category-type li'),function(){
+                //     var _this=$(this);
+                //     var _thisId=_this.find('a').data('id');
+                //     alert(_thisId);
+                //     if(_thisId==categoryIdArr[1]){
+                //         alert(2);
+                //         _this.addClass('current').siblings().removeClass('current');
+                //        // return false;
+                //     }
+                // })
+
             },
             yes:function(index){
                 var categoryArr=[];
@@ -67,7 +91,6 @@ $(function(){
                     var _this=$(this);
                     if(_this.hasClass('current')){
                         var first_category_id=$('.categoryContentLayer .category-tab>li.current').find('a').data('id');
-                        console.log(first_category_id);
                         categoryArr.push(first_category_id);
                         return false;
                     }
@@ -80,8 +103,8 @@ $(function(){
                         return false;
                     }
                 });
+                console.log(categoryArr);
                 $('.select-category').data('category-id',categoryArr);
-                
                 layer.close(index);
             }
         })

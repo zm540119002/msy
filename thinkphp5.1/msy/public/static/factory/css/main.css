@@ -279,11 +279,6 @@
     width:30%;
     margin:0 0 25px 0;
 }
-.category-type li.current a{
-    background:#ff0000;
-    color:#fff;
-    border-radius:3px;
-}
 .trademark-module{
     padding:0 0 0 0.35rem;
 }
@@ -317,4 +312,113 @@
 }
 .trademarkTypeLayer .vendorInfoList li{
     text-align: center;
+}
+/*档案资质*/
+.qualificationContent{
+    padding:0 0 0.8rem 0;
+}
+.qualificationContent .upload-picture-module{
+    display: block;
+    margin:0;
+}
+.company-n{
+    margin:0.18rem 0;
+}
+.content-marginLeft .detail-address{
+    width:100%;
+    padding:0.15rem 0;
+    margin:0 0 0.15rem 0;
+    border-radius:4px;
+    border:1px solid #d9d9d9;
+    box-sizing: border-box;
+    text-indent: 0.15rem;
+}
+.editCompanyPicLayer .layui-m-layercont{
+    height:4.5rem;
+    overflow: hidden;
+    overflow-y:scroll;
+}
+.company-preview-top .columns_flex{
+    padding:0 0 0.15rem 0;
+    justify-content: space-between;
+}
+.company-preview-top .enter{
+    border-radius:3px;
+    background: #ff7bac;
+    color:#fff;
+}
+.address-label{
+    display: block;
+    float:left;
+}
+/*账号授权*/ 
+.admin-account-wrapper{
+    background: #efefef;
+}
+.admin-account-list li{
+    background: #fff;
+}
+.addAdminLayer form{
+    padding:0.20rem 0.35rem;
+}
+.account-field{
+    margin:0 0 0.20rem 0;
+    
+}
+.account-field input{
+    width:100%;
+    padding:0.12rem 0;
+    text-align: center;
+    border:1px solid #d9d9d9;
+    border-radius:4px;
+    box-sizing: border-box;
+}
+.account-item .select-role{
+    width:78%;
+    padding:0.15rem 0;
+    border-radius:4px;
+    border:1px solid #d9d9d9;
+    background:none;
+}
+.range-list li{
+    margin:0 0.20rem 0.15rem 0;
+    padding:0 0.10rem;
+    border:1px solid #ff7bac;
+    border-radius:4px;
+    color:#ff7bac;
+}
+.range-list .columns_flex{
+    flex-wrap: wrap;
+}
+.range-list li.current{
+    background: #ff7bac;
+    color:#fff;
+}
+.range-list .range-label{
+    display: block;
+    margin:0.20rem 0;
+}
+.responsible-area,
+.modify-role{
+    position:relative;
+    display: block;
+    padding:0 0 0.15rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.modify-role span{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    background-image:url(../../common/img/icons/arrow-icons.png);
+    background-repeat: no-repeat;
+    background-size:9px 25px;
+    background-position:0 0;
+}
+.signIn-wrapper{
+    padding:0.12rem 0 0 0.25rem;
+    overflow:hidden;
+    overflow-y:auto;
+}
+.addCcountLayer .signIn-wrapper{
+    
 }
