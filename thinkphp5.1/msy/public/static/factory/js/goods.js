@@ -55,7 +55,11 @@ $(function(){
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
-
+                var cat_id_1 =  $('#categoryContent').find('li :first').data('id');
+                $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+                    $('.category-content-wrapper').empty();
+                    $('.category-content-wrapper').append(msg);
+                });
             },
             yes:function(index){
                 layer.close(index);
@@ -120,11 +124,26 @@ $(function(){
                 dialog.success(msg.info);
             }
         })
-    })
+    });
     $('body').on('click','.category-tab li',function(){
-        var _this=$(this);
+        var _this = $(this);
         _this.addClass('current').siblings().removeClass('current');
+    });
+
+
+    //获取二级分类
+    $('body').on('click','.first_category',function () {
+        var _this = $(this);
+        var cat_id_1 = _this.data('id');
+        $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+            $('.category-content-wrapper').empty();
+           $('.category-content-wrapper').append(msg);
+        });
+
     })
+
+
+
 });
 //单图片上传的弹窗
 function uploadsImg(obj,tilt,className) {

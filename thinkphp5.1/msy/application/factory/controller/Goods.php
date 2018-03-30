@@ -17,7 +17,7 @@ class Goods extends Base
             return $model -> add();
         }
         $categoryModel = new CategoryModel();
-        $platformCategory = $categoryModel->select();
+        $platformCategory = $categoryModel->selectFirstCategory();
         $this->assign('platformCategory',$platformCategory);
         return $this->fetch();
     }

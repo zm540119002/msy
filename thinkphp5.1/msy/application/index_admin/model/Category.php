@@ -10,7 +10,7 @@ class Category extends Model {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'category';
 //	// 设置当前模型的数据库连接
-	protected $connection = 'db_msy';
+	protected $connection = 'db_config_msy';
 	/**
 	 * 新增
 	 */
@@ -32,9 +32,20 @@ class Category extends Model {
 		}
 	}
 
-	public function select(){
-		//return $this->select();
-		 $specs = Db::name('msy.category')->where(['status'=>0,'parent_id_1'=>0])->field('id,name,img,level')->select();
-		return $specs;
+	/**
+	 * @return array|mixed|\PDOStatement|string|\think\Collection
+	 * 获取第一级分类
+	 */
+	public function selectFirstCategory(){
+		return $this->where(['status'=>0,'parent_id_1'=>0])->field('id,name,img,level')->select();
+	}
+
+	/**
+	 * @param $id
+	 * @return array|\PDOStatement|string|\think\Collection
+	 * 根据第一级分类id查二级分类
+	 */
+	public function getSecondCategoryById($id){
+		return $this->where(['status'=>0,'parent_id_1'=>$id])->field('id,name,img,level')->select();
 	}
 }

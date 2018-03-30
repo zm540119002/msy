@@ -12,11 +12,20 @@ class Category extends Controller
     public function getFirstCategory()
     {
         $model = new M();
-        print_r($model ->select());exit;
+        return $model ->selectFirstCategory();
     }
 
-    public function hello()
+    //获取二级菜单
+    public function getSecondCategoryById()
     {
-        return $this->fetch();
+        if(request()->isGet()){
+            $cat_id_1 = (int)input('get.cat_id_1');
+            $model = new M();
+            $secondCategory = $model ->getSecondCategoryById($cat_id_1);
+            $this -> assign('secondCategory',$secondCategory);
+            return $this -> fetch('template/category_second_template.html');
+        }
+
     }
+    
 }
