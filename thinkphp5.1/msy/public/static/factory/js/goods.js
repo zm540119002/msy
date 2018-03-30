@@ -33,7 +33,7 @@ $(function(){
                     if(factoryId==currentId){
                         $(this).addClass('current');
                     }
-                })
+                });
             },
             yes:function(index){
                 var isCurrent=$('.editGoodsLayer li.current');
@@ -60,6 +60,11 @@ $(function(){
                     $('.category-content-wrapper').empty();
                     $('.category-content-wrapper').append(msg);
                 });
+
+                var a = 25;
+                var b = 29;
+                $.each()
+
             },
             yes:function(index){
                 var categoryArr=[];
@@ -67,7 +72,6 @@ $(function(){
                     var _this=$(this);
                     if(_this.hasClass('current')){
                         var first_category_id=$('.categoryContentLayer .category-tab>li.current').find('a').data('id');
-                        console.log(first_category_id);
                         categoryArr.push(first_category_id);
                         return false;
                     }
@@ -81,7 +85,6 @@ $(function(){
                     }
                 });
                 $('.select-category').data('category-id',categoryArr);
-                
                 layer.close(index);
             }
         })
