@@ -12,9 +12,9 @@ class Goods extends Base
 
     /**
      * @return array|mixed
-     * 
+     *商品编辑
      */
-    public function add()
+    public function edit()
     {
         if(request()->isPost()){
             $model = new M();
@@ -22,7 +22,7 @@ class Goods extends Base
         }
         $categoryModel = new CategoryModel();
         $platformCategory = $categoryModel->selectFirstCategory();
-        $this->assign('platformCategory',$platformCategory);
+        $this -> assign('platformCategory',$platformCategory);
         if(request()->isGet()){
             $model = new M();
             return $model -> add();

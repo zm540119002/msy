@@ -6,23 +6,23 @@ use think\Db;
  * 基础模型器
  */
 
-class Factory extends Model {
+class Series extends Model {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'factory';
-	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
-	protected $readonly = ['name'];
+	protected $table = 'series';
+//	// 设置当前模型的数据库连接
+	protected $connection = 'db_config_factory';
 	/**
 	 * 新增
 	 */
 	public function add(){
 		$data = input('post.');
-		$validate = validate('Factory');
+		$validate = validate('Series');
 		if(!$result = $validate->scene('add')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
-		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
+		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['Series_img']));
+		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['certificate']));
+		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['authorization']));
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
@@ -37,13 +37,13 @@ class Factory extends Model {
 	 */
 	public function edit(){
 		$data = input('post.');
-		$validate = validate('Factory');
+		$validate = validate('Series');
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['Factory_img'] = moveImgFromTemp(config('upload_dir.factory_Factory'),basename($data['Factory_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Factory'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Factory'),basename($data['authorization']));
+		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['Series_img']));
+		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['certificate']));
+		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['authorization']));
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
@@ -62,7 +62,7 @@ class Factory extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectFactory($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectSeries($where=[],$field=[],$order=[],$join=[],$limit=''){
 		$_where = array(
 			'b.status' => 0,
 		);
@@ -95,7 +95,7 @@ class Factory extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getFactory($where=[],$field=[],$join=[]){
+	public function getSeries($where=[],$field=[],$join=[]){
 		$_where = array(
 			'status' => 0,
 		);

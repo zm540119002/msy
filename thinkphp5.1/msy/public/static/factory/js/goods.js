@@ -159,7 +159,7 @@ $(function(){
             dialog.error(content);
             return false;
         }
-        $.post(controller+'add',postData,function(msg){
+        $.post(controller+'edit',postData,function(msg){
             if(msg.status == 0){
                 dialog.error(msg.info);
             }
