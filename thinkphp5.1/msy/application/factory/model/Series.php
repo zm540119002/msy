@@ -41,10 +41,10 @@ class Series extends Model {
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['Series_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['authorization']));
-		$data['create_time'] = time();
+		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['Series_img']));
+		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['certificate']));
+		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['authorization']));
+		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
 			return successMsg("已提交申请");

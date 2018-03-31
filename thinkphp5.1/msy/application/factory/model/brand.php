@@ -23,7 +23,7 @@ class Brand extends Model {
 		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
 		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
 		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
-		$data['create_time'] = time();
+		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
 			return successMsg("已提交申请");

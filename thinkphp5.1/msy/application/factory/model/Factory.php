@@ -41,10 +41,9 @@ class Factory extends Model {
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['Factory_img'] = moveImgFromTemp(config('upload_dir.factory_Factory'),basename($data['Factory_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Factory'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Factory'),basename($data['authorization']));
-		$data['create_time'] = time();
+		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
+		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
+		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
 			return successMsg("已提交申请");

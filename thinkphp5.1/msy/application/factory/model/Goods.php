@@ -47,10 +47,10 @@ class Goods extends Model {
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['Goods_img'] = moveImgFromTemp(config('upload_dir.factory_Goods'),basename($data['Goods_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Goods'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Goods'),basename($data['authorization']));
-		$data['create_time'] = time();
+		$data['Goods_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['Goods_img']));
+		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['certificate']));
+		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['authorization']));
+		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
 			return successMsg("已提交申请");
