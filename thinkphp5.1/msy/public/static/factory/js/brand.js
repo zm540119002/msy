@@ -87,7 +87,7 @@ $(function(){
         ok: "#clipBtn",
         clipFinish: function(img) {
             clipImg = img;
-            $.post("uploadImgToTemp", { img: clipImg , compress:false },function(msg){
+            $.post(controller+"uploadImgToTemp", { img: clipImg , compress:false },function(msg){
                 if(msg.status == 0){
                     layer.open({
                         content:msg.info,
@@ -140,7 +140,6 @@ $(function(){
                 dialog.success(msg.info);
                 location.href=controller+'index';
             }
-
         })
     })
 
