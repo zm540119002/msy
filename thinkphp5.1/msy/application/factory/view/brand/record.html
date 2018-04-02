@@ -56,15 +56,16 @@
 			<div class="apply-data-content">
 				<div class="apply-module">
 					<form class="trademarkform">
-						<input type="hidden" name="brand_id" value="{$brandInfo.id}">
+
+						<input type="hidden" name="brand_id" value="{$brandInfo.id|default=''}">
 						<div class="apply-items">
-							<input type="text" class="trademark-name" name="name" value="{$brandInfo.name}" placeholder="商标名称">
+							<input type="text" class="trademark-name" name="name" value="{$brandInfo.name|default=''}" placeholder="商标名称">
 						</div>
 						<div class="logo-license">
 							<div class="half">
 								<a class="logo" id="logox">
-									<img id="" src='public_uploads/{$brandInfo.brand_img}' />
-									<input type="hidden" class="logo-src" name="brand_img" value="{$brandInfo.brand_img}">
+									<img id="" src="public_uploads/{$brandInfo.brand_img|default=''}" />
+									<input type="hidden" class="logo-src" name="brand_img" value="{$brandInfo.brand_img|default=''}">
 								</a>
 								<p class="f24">上传商标</p>
 							</div>
@@ -72,7 +73,7 @@
 						</div>
 						<div class="">
 							<a href="javascript:void(0);" class="trademark-type right-arrow">商标所属分类</a>
-							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.cat_id_1}"/>
+							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.cat_id_1|default=''}"/>
 						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>
@@ -84,16 +85,16 @@
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
-									<img class="upload_img" src="public_uploads/{$brandInfo.certificate}" alt="">
-									<input type="hidden" class="trademark-certificate img" value="{$brandInfo.certificate}" name="certificate"/>
+									<img class="upload_img" src="public_uploads/{$brandInfo.certificate|default=''}" alt="">
+									<input type="hidden" class="trademark-certificate img" value="{$brandInfo.certificate|default=''}" name="certificate"/>
 								</div>
 								<p>商标证书</p>
 							</li>
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
-									<img class="upload_img" src="public_uploads/{$brandInfo.authorization}" alt="">
-									<input type="hidden" class="trademark-authorization img" value="{$brandInfo.authorization}" name="authorization"/>
+									<img class="upload_img" src="public_uploads/{$brandInfo.authorization|default=''}" alt="">
+									<input type="hidden" class="trademark-authorization img" value="{$brandInfo.authorization|default=''}" name="authorization"/>
 								</div>
 								<p>商标授权书<br/>(非所有权者需递交)</p>
 							</li>
