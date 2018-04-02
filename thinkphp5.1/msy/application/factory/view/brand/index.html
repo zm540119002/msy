@@ -18,17 +18,15 @@
 					<span class="trade-name">{$vo.name}</span>
 					{if  $vo.is_audit == 0}<span>待审核</span>
 					{elseif $vo.is_audit == 1 /}已备案
-					{elseif $vo.is_audit == 2 /}审核不通过<a href="{:url('brand/record')}" class="recordation">重新备案></a>
+					{elseif $vo.is_audit == 2 /}审核不通过<a href="{:url('brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
 					{else /}
 					{/if}
 				</li>
 			{/volist}
 		</ul>
 	</section>
-	<a href="http://192.168.1.101:8008/demo/trademark-upload-data.html" class="foot-btn f24">进行商标备案</a>
+	<a href="{:url('brand/record')}" class="foot-btn f24">进行商标备案</a>
 </article>
-
-
 {/block}
 {block name="common"}
 
