@@ -9,6 +9,8 @@ class Index extends Controller
      */
     public function index()
     {
+        print_r(config('node.'));
+        exit;
         return $this->fetch();
     }
 }
