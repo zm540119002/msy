@@ -25,7 +25,7 @@ class Goods extends Base
         $this -> assign('platformCategory',$platformCategory);
         if(request()->isGet()){
             $model = new M();
-            return $model -> add();
+            return $model -> edit();
         }
         return $this->fetch();
     }

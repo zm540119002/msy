@@ -44,7 +44,7 @@ class Factory extends Model {
 		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
 		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
 		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data);
+		$result = $this->allowField(true)->save($data,['id' => $data['factory_id']]);
 		if(false !== $result){
 			return successMsg("已提交申请");
 		}else{
