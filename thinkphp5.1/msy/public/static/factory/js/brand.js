@@ -38,6 +38,7 @@ $(function(){
             btn:['确定','取消'],
             success:function(){
                 var tardeMarkId=$('.trademark-info').data('trademark');
+                var tardeMarkIdArr=tardeMarkId.split(',');
                 $('.trademarkTypeLayer li').on('click',function(){
                     var _this=$(this);
                     var tradeMarkLen=$('.trademarkTypeLayer .current').length;
@@ -49,11 +50,11 @@ $(function(){
                     }
 
                 });
-                for(var i=0;i<tardeMarkId.length;i++){
+                for(var i=0;i<tardeMarkIdArr.length;i++){
                     $.each($('.trademarkTypeLayer li'),function(){
                         var _this=$(this);
                         var currentId=_this.data('id');
-                        if(tardeMarkId[i]==currentId){
+                        if(tardeMarkIdArr[i]==currentId){
                             _this.addClass('current');
                         }
 
