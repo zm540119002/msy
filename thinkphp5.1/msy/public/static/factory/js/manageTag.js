@@ -51,15 +51,15 @@ $(function(){
                 var postData = {};
                 postData.sort = layerTagNum;
                 postData.name = layerTagName;
-                $.post(controller+"edit",postData,function(msg){
-                    if(msg.status == 0){
-                        dialog.error(msg.info);
-                    }
-                    if(msg.status == 1){
-                        dialog.success(msg.info);
-                        location.href=controller+'edit';
-                    }
-                });
+                // $.post(controller+"edit",postData,function(msg){
+                //     if(msg.status == 0){
+                //         dialog.error(msg.info);
+                //     }
+                //     if(msg.status == 1){
+                //         dialog.success(msg.info);
+                //         location.href=controller+'edit';
+                //     }
+                // });
                 layer.close(index);
             }
         })
