@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="Bookmark" href="/favicon.ico" >
+	<link rel="Shortcut Icon" href="/favicon.ico" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="public_hui_admin/lib/html5shiv.js"></script>
+	<script type="text/javascript" src="public_hui_admin/lib/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui/css/H-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui.admin/css/H-ui.admin.css" />
+	<link rel="stylesheet" type="text/css" href="public_hui_admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
+	<link rel="stylesheet" type="text/css" href="public_hui_admin/static/h-ui.admin/css/style.css" />
+	<!--[if IE 6]>
+	<script type="text/javascript" src="public_hui_admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	{block name="css-customize"}{/block}
+	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		var domain = '{:request()->domain()}'+'/'+'index.php/';
+		var module = domain + '{:request()->module()}/';
+		var controller = module + '{:request()->controller()}/';
+		var action = controller + '{:request()->action()}';
+		var uploads = '{:request()->domain()}'+'/uploads/'
+	</script>
+	<!--前置自定义js-->
+	{block name="pre-script"}{/block}
+</head>
+<body>
+<!-- 内容模块 -->
+{block name="content"}{/block}
+<!-- 公共模块-->
+{block name="common"}{/block}
+<!-- 页脚模块-->
+{block name="footer"}
+<footer class="f24">
+	<span class="icp_icon">Copyright 2017 维雅生物科技 粤ICP备14021421号</span>
+</footer>
+{/block}
+<!--js基本插件-->
+<script type="text/javascript" src="public_js/layer.mobile/layer.js"></script>
+<script type="text/javascript" src="public_js/public.js"></script>
+<script type="text/javascript" src="public_js/common.js"></script>
+<script type="text/javascript" src="public_js/dialog.js"></script>
+<!--自定义js-->
+{block name="script"}{/block}
+</body></html>
