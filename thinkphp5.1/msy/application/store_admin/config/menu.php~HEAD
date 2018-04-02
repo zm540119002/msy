@@ -1,6 +1,6 @@
 <?php
 return [
-    'menu_array' => [
+    'menu' => [
         ['name' => '商品管理',
             'sub_menu' => [
                 ['name'=>'分类管理','act'=>'GoodsCategory','op'=>'goodsCategoryManage'],
