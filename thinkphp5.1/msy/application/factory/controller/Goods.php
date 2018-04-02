@@ -23,10 +23,10 @@ class Goods extends Base
         $categoryModel = new CategoryModel();
         $platformCategory = $categoryModel->selectFirstCategory();
         $this -> assign('platformCategory',$platformCategory);
-        if(request()->isGet()){
-            $model = new M();
-            return $model -> edit();
-        }
+//        if(request()->isGet()){
+//            $model = new M();
+//            return $model -> edit();
+//        }
         return $this->fetch();
     }
 
