@@ -8,9 +8,8 @@ class Index extends Controller
 {
     public function index()
     {
-//        return dump(config());
-       // return dump(config('menu_conf.menu_array'));
         return $this->fetch();
+//        return $this->fetch('template/base_admin.html');
     }
 
     public function welcome()

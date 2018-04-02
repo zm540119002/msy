@@ -56,6 +56,9 @@
 			<div class="apply-data-content">
 				<div class="apply-module">
 					<form class="trademarkform">
+						{notempty name = 'brandInfo'}
+
+						{/notempty}
 						<input type="hidden" name="brand_id" value="{$brandInfo.id}">
 						<div class="apply-items">
 							<input type="text" class="trademark-name" name="name" value="{$brandInfo.name}" placeholder="商标名称">

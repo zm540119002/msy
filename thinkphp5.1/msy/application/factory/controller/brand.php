@@ -9,7 +9,8 @@ class Brand extends Base
     public function index()
     {
         $model = new M();
-        return $model ->selectBrand([],[],['id'=>'desc'],[],'2,3');
+        $brandList =  $model ->selectBrand();
+        $this -> assign('brandList',$brandList);
         return $this->fetch();
     }
 
