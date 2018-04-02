@@ -1,0 +1,103 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="">
+		<nav class="columns_flex channel_nav manufacturer_nav supply-nav">
+			<a href="" class="current">
+				<span class="exclusive"></span>
+				采购供应联营
+			</a>
+			<a href="">
+				<span class="classify"></span>
+				分成供应联营
+			</a>
+			<a href="">
+				<span class="purchasers"></span>
+				零售供应联营
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex subNav3 f22">
+			<a >分类标签</a>
+			<a class="column_type current">商品管理</a>
+			<a>上架管理</a>
+		</div>
+	</section>
+	<section>
+		<div class="content-wrapper">
+			<div class="ctype-title">
+				<span class="line"></span>
+				<span class="txt f24">商品1</span>
+				<span class="line"></span>
+			</div>
+			<ul class="columns_flex flex-both-side">
+				<li>
+					<a class="product-square-box">
+						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
+					</a>
+					<p class="product-title">商品11111111111111111</p>
+					<div class="columns_flex two-flex">
+						<div class="pink">
+							￥<price>5.00</price>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a class="product-square-box">
+						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
+					</a>
+					<p class="product-title">商品22222222222222</p>
+					<div class="columns_flex two-flex">
+						<div class="pink">
+							￥<price>5.00</price>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="ctype-title">
+				<span class="line"></span>
+				<span class="txt f24">商品2</span>
+				<span class="line"></span>
+			</div>
+			<ul class="columns_flex flex-both-side">
+				<li>
+					<a class="product-square-box">
+						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
+					</a>
+					<p class="product-title">商品22222222222222222</p>
+					<div class="columns_flex two-flex">
+						<div class="pink">
+							￥<price>5.00</price>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a class="product-square-box">
+						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
+					</a>
+					<p class="product-title">商品333333333333333</p>
+					<div class="columns_flex two-flex">
+						<div class="pink">
+							￥<price>5.00</price>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+</article>
+<a href="http://192.168.1.101:8008/demo/joint-deployment.4.html" class="increase-commodity foot-btn f24">增加商品</a>
+
+{/block}
+{block name="common"}
+{include file="template/upload-multi_img.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
+<script type="text/javascript">
+</script>
+{/block}

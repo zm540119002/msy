@@ -115,17 +115,15 @@ $(function(){
             var postData = {img: e.target.result};
             postData.imgWidth = 145;
             postData.imgHeight = 100;
-
-            console.log(postData);
             //提交
-            // $.post("uploadImgToTemp",postData,function(msg){
-            //     if(msg.status == 1){
-            //         $(obj).find('.img').val(msg.info);
-            //         $(obj).find('img').attr('src','/uploads/'+msg.info);
-            //     }else{
-            //         dialog.error(msg.info)
-            //     }
-            // })
+            $.post(controller + "uploadImgToTemp",postData,function(msg){
+                if(msg.status == 1){
+                    $(obj).find('.img').val(msg.info);
+                    $(obj).find('img').attr('src','/uploads/'+msg.info);
+                }else{
+                    dialog.error(msg.info)
+                }
+            })
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
         }
@@ -162,7 +160,7 @@ function uploadsMultiImg(content){
                 }
                 var postDate = {};
                 postDate.imgs = layermultiImgAttr;
-                $.post('uploadMultiImgToTemp',postDate,function(info){
+                $.post(controller + 'uploadMultiImgToTemp',postDate,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
                        return false;
@@ -216,7 +214,7 @@ function uploadsMultiVideo(content){
                 }
                 var postDate = {};
                 postDate.imgs = layermultiVideoAttr;
-                $.post('uploadMultiImgToTemp',postDate,function(info){
+                $.post(controller + 'uploadMultiImgToTemp',postDate,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
                        return false;
@@ -224,8 +222,6 @@ function uploadsMultiVideo(content){
                     $('.goods-detail1').data('src',layermultiVideoAttr);
                     layer.close(index);
                 });
-                // console.log($('.goods-video').data('src'));
-                // layer.close(index);
             }
         })
 

@@ -6,9 +6,9 @@ use think\Db;
  * 基础模型器
  */
 
-class Brand extends Model {
+class Series extends Model {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'brand';
+	protected $table = 'series';
 //	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 	/**
@@ -16,14 +16,14 @@ class Brand extends Model {
 	 */
 	public function add(){
 		$data = input('post.');
-		$validate = validate('Brand');
+		$validate = validate('Series');
 		if(!$result = $validate->scene('add')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
-		$data['update_time'] = time();
+		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['Series_img']));
+		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['certificate']));
+		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['authorization']));
+		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
 			return successMsg("已提交申请");
@@ -37,14 +37,14 @@ class Brand extends Model {
 	 */
 	public function edit(){
 		$data = input('post.');
-		$validate = validate('Brand');
+		$validate = validate('Series');
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
-		$data['create_time'] = time();
+		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['Series_img']));
+		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['certificate']));
+		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['authorization']));
+		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
 			return successMsg("已提交申请");
@@ -62,7 +62,7 @@ class Brand extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectBrand($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectSeries($where=[],$field=[],$order=[],$join=[],$limit=''){
 		$_where = array(
 			'b.status' => 0,
 		);
@@ -70,7 +70,7 @@ class Brand extends Model {
 		);
 		$where = array_merge($_where, $where);
 		if($field){
-			$list = $this->alias('b')
+			$list = $this->alias('s')
 				->where($where)
 				->field($field)
 				->join(array_merge($_join,$join))
@@ -78,7 +78,7 @@ class Brand extends Model {
 				->limit($limit)
 				->select();
 		}else{
-			$list = $this->alias('b')
+			$list = $this->alias('s')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->order($order)
@@ -95,19 +95,23 @@ class Brand extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getBrand($where=[],$field=[],$join=[]){
+	public function getSeries($where=[],$field=[],$join=[]){
 		$_where = array(
 			'status' => 0,
 		);
 		$where = array_merge($_where, $where);
+		$_join = array(
+		);
 		if($field){
 			$info = $this
 				->field($field)
+				->join(array_merge($_join,$join))
 				->where($where)
 				->find();
 		}else{
 			$info = $this
 				->where($where)
+				->join(array_merge($_join,$join))
 				->find();
 		}
 		return $info;
