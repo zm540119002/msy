@@ -12,7 +12,7 @@ $(function(){
     });
 
     //初始化
-    $('#categoryContent').find('li :first').addClass('current');
+    
     //归属店铺分类(系列)
     var editGoodsLabel=$('#editGoodsLabel').html();
     $('body').on('click','.editGoodsLabel',function(){
@@ -55,34 +55,51 @@ $(function(){
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
-                var cat_id_1 =  $('#categoryContent').find('li :first a').data('id');
                 var categoryIdArr=$('.select-category').data('category-id');
-                //console.log(typeof categoryIdArr[0]);
-                // $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
-                //     $('.category-content-wrapper').empty();
-                //     $('.category-content-wrapper').append(msg);
-                // });
-
-                $.each($('.category-tab li'),function(){
-                    var _this=$(this);
-                    var _thisId=_this.find('a').data('id');
-                    console.log(_thisId);
-                    if(_thisId==categoryIdArr[0]){
-                        alert(1);
-                        _this.addClass('current');
-                        return false;
-                    }
+                var cat_id_1;
+                if(categoryIdArr.length==0){
+                    $('.categoryContentLayer').find('li:first').addClass('current');
+                    cat_id_1 =  $('.categoryContentLayer .category-tab').find('li:first a').data('id');
+                }else{
+                    // alert(2);
+                    cat_id_1=categoryIdArr[0];
+                }
+                $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+                    $('.category-content-wrapper').empty();
+                    $('.category-content-wrapper').append(msg);
                 });
-                // $.each($('.category-type li'),function(){
-                //     var _this=$(this);
-                //     var _thisId=_this.find('a').data('id');
-                //     alert(_thisId);
-                //     if(_thisId==categoryIdArr[1]){
-                //         alert(2);
-                //         _this.addClass('current').siblings().removeClass('current');
-                //        // return false;
-                //     }
-                // })
+
+                $.each($('.categoryContentLayer .category-tab li'),function(){
+                    var _this=$(this);
+                    var _thisId=_this.find('a.first_category').data('id');
+                    // for(var i=0;i<categoryIdArr.length;i++){
+                        // alert(i)
+                        if(_thisId==categoryIdArr[0]){
+                            _this.addClass('current').siblings().removeClass('current');
+                            return false;
+                        }
+                        
+                    // }
+                    
+                });
+                
+                $.each($('.category-type li'),function(){
+                    var _that=$(this);
+                    var _thatId=_that.find('a.second_category').data('id');
+                    console.log(_thatId);
+                    console.log(_that);
+                    
+                    // for(var i=0;i<categoryIdArr.length;i++){
+                        
+                        // alert(1)
+                        if(_thatId==categoryIdArr[1]){
+                             alert(_that.index());
+                            
+                        _that.addClass('current').siblings().removeClass('current');
+                            return false;
+                        }
+                    // }
+                })
 
             },
             yes:function(index){
@@ -103,7 +120,7 @@ $(function(){
                         return false;
                     }
                 });
-                console.log(categoryArr);
+                //console.log(categoryArr);
                 $('.select-category').data('category-id',categoryArr);
                 layer.close(index);
             }
