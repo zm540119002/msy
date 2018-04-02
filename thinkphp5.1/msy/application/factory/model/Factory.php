@@ -28,6 +28,7 @@ class Factory extends Model {
 		if(false !== $result){
 			return successMsg("已提交申请");
 		}else{
+			
 			return errorMsg($this->getError());
 		}
 	}
