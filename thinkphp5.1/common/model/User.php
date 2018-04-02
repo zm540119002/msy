@@ -66,7 +66,7 @@ class User extends Model {
 				'status' => 0,
 				'mobile_phone' => $postData['mobile_phone'],
 			);
-			$response = $this::where($where)->update($saveData,$where);
+			$response = $this->where($where)->update($saveData,$where);
 			if(!$response){
 				return errorMsg('重置失败！');
 			}
