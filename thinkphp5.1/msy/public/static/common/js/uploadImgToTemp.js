@@ -27,7 +27,7 @@ $(function(){
             $(obj).find('.img').val(imgUrl);
             console.log(postData);
             //提交
-            $.post("uploadImgToTemp",postData,function(msg){
+            $.post(controller+"uploadImgToTemp",postData,function(msg){
                 if(msg.status == 1){
                     $(obj).find('.img').val(msg.info);
                     $(obj).find('img').attr('src','/uploads/'+msg.info);

@@ -11,7 +11,7 @@ class Brand extends Validate
      */
     protected $rule = [
         'name'  =>  'require|max:18',
-        'brand_img' =>  'require|max:28',
+        'brand_img' =>  'require|max:50',
         'cat_id_1' =>  'require',
         'certificate' =>  'require',
     ];

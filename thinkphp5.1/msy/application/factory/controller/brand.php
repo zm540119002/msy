@@ -1,6 +1,7 @@
 <?php
 namespace app\factory\controller;
 use app\factory\model\Brand as M;
+use app\index_admin\model\Category as categoryModel;
 use common\controller\Base;
 class Brand extends Base
 {
@@ -8,23 +9,32 @@ class Brand extends Base
     public function index()
     {
         $model = new M();
-        print_r($model ->select());exit;
+        return $model ->selectBrand([],[],['id'=>'desc'],[],'2,3');
         return $this->fetch();
     }
 
     //备案
     public function record()
     {
+        $model = new M();
         if(request()->isPost()){
-            $model = new M();
-            return $model -> add();
+            if(input('?post.brand_id')){
+                return $model -> edit();
+            }else{
+                return $model -> add();
+            }
         }
-        $categoryList = [
-            0=>['id'=>1,'name'=>'美妆'],
-            1=>['id'=>2,'name'=>'美甲'],
-            2=>['id'=>3,'name'=>'微整形'],
-        ];
+        $categoryModel = new categoryModel;
+        $categoryList = $categoryModel -> selectFirstCategory();
         $this->assign('categoryList',$categoryList);
+        if(input('?brand_id')){
+            $brandId = input('brand_id');
+            $where = array(
+                'id' => $brandId,
+            );
+            $brandInfo =  $model -> getBrand($where);
+            $this -> assign('brandInfo',$brandInfo);
+        }
         return $this->fetch();
     }
 

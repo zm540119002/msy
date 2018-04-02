@@ -2,7 +2,6 @@
 namespace common\model;
 
 use think\Model;
-use think\Db;
 
 class User extends Model {
 	// 设置当前模型对应的完整数据表名称
@@ -67,7 +66,7 @@ class User extends Model {
 				'status' => 0,
 				'mobile_phone' => $postData['mobile_phone'],
 			);
-			$response = $this::where($where)->update($saveData,$where);
+			$response = $this->where($where)->update($saveData,$where);
 			if(!$response){
 				return errorMsg('重置失败！');
 			}

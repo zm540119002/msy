@@ -7,10 +7,14 @@ class Goods extends Base
 {
     public function index()
     {
-        return $this->fetch('template/category_second_template.html');
+        return $this->fetch();
     }
 
-    public function add()
+    /**
+     * @return array|mixed
+     *商品编辑
+     */
+    public function edit()
     {
         if(request()->isPost()){
             $model = new M();
@@ -18,7 +22,11 @@ class Goods extends Base
         }
         $categoryModel = new CategoryModel();
         $platformCategory = $categoryModel->selectFirstCategory();
-        $this->assign('platformCategory',$platformCategory);
+        $this -> assign('platformCategory',$platformCategory);
+        if(request()->isGet()){
+            $model = new M();
+            return $model -> edit();
+        }
         return $this->fetch();
     }
 
