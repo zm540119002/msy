@@ -279,6 +279,11 @@
     width:30%;
     margin:0 0 25px 0;
 }
+.category-type li.current a{
+    background:#ff0000;
+    color:#fff;
+    border-radius:3px;
+}
 .trademark-module{
     padding:0 0 0 0.35rem;
 }
