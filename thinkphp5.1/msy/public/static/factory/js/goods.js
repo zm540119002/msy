@@ -12,7 +12,7 @@ $(function(){
     });
 
     //初始化
-    $('#categoryContent').find('li :first').addClass('current');
+    
     //归属店铺分类(系列)
     var editGoodsLabel=$('#editGoodsLabel').html();
     $('body').on('click','.editGoodsLabel',function(){
@@ -55,34 +55,50 @@ $(function(){
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
-                var cat_id_1 =  $('#categoryContent').find('li :first a').data('id');
                 var categoryIdArr=$('.select-category').data('category-id');
-                //console.log(typeof categoryIdArr[0]);
-                // $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
-                //     $('.category-content-wrapper').empty();
-                //     $('.category-content-wrapper').append(msg);
-                // });
-
-                $.each($('.category-tab li'),function(){
-                    var _this=$(this);
-                    var _thisId=_this.find('a').data('id');
-                    console.log(_thisId);
-                    if(_thisId==categoryIdArr[0]){
-                        alert(1);
-                        _this.addClass('current');
-                        return false;
-                    }
+                var cat_id_1;
+                if(categoryIdArr.length==0){
+                    $('.categoryContentLayer').find('li:first').addClass('current');
+                    cat_id_1 =  $('.categoryContentLayer .category-tab').find('li:first a').data('id');
+                }else{
+                    cat_id_1=categoryIdArr[0];
+                }
+                $.ajax({
+                    url: domain+'index_admin/Category/getSecondCategoryById',
+                    data: {cat_id_1:cat_id_1},
+                    type: 'get',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(msg){
+                        $('.category-content-wrapper').empty();
+                        $('.category-content-wrapper').append(msg);
+                        $.each($('.categoryContentLayer .category-tab li'),function(){
+                            var _this=$(this);
+                            var _thisId=_this.find('a.first_category').data('id');
+                                if(_thisId==categoryIdArr[0]){
+                                    _this.addClass('current').siblings().removeClass('current');
+                                    return false;
+                                }
+                        });
+                        $.each($('.categoryContentLayer .category-type li'),function(){
+                            var _this=$(this);
+                            var _thisId=_this.find('a.second_category').data('id');
+                                if(_thisId==categoryIdArr[1]){
+                                    _this.addClass('current').siblings().removeClass('current');
+                                    return false;
+                                }
+                        })
+                    },
+                    complete:function(){
+                        
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
                 });
-                // $.each($('.category-type li'),function(){
-                //     var _this=$(this);
-                //     var _thisId=_this.find('a').data('id');
-                //     alert(_thisId);
-                //     if(_thisId==categoryIdArr[1]){
-                //         alert(2);
-                //         _this.addClass('current').siblings().removeClass('current');
-                //        // return false;
-                //     }
-                // })
+
+                
 
             },
             yes:function(index){
@@ -103,7 +119,6 @@ $(function(){
                         return false;
                     }
                 });
-                console.log(categoryArr);
                 $('.select-category').data('category-id',categoryArr);
                 layer.close(index);
             }
@@ -127,6 +142,16 @@ $(function(){
                 layer.close(index);
             }
         })
+    })
+    //获取二级分类
+    $('body').on('click','.first_category',function () {
+        var _this = $(this);
+        var cat_id_1 = _this.data('id');
+        $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+            $('.category-content-wrapper').empty();
+           $('.category-content-wrapper').append(msg);
+        });
+
     })
     
     //增加商品
@@ -172,18 +197,6 @@ $(function(){
         var _this = $(this);
         _this.addClass('current').siblings().removeClass('current');
     });
-
-
-    //获取二级分类
-    $('body').on('click','.first_category',function () {
-        var _this = $(this);
-        var cat_id_1 = _this.data('id');
-        $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
-            $('.category-content-wrapper').empty();
-           $('.category-content-wrapper').append(msg);
-        });
-
-    })
 
 
 

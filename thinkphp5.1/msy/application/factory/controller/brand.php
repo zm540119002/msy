@@ -18,7 +18,6 @@ class Brand extends Base
     {
         $model = new M();
         if(request()->isPost()){
-            return input();
             if(input('?post.brand_id')){
                 return $model -> edit();
             }else{
@@ -33,10 +32,7 @@ class Brand extends Base
             $where = array(
                 'id' => $brandId,
             );
-            $field = array(
-                'id'
-            );
-            $brandInfo =  $model -> getBrand($where,$field);
+            $brandInfo =  $model -> getBrand($where);
             $this -> assign('brandInfo',$brandInfo);
         }
         return $this->fetch();
