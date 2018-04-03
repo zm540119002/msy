@@ -146,8 +146,16 @@ var manageClassifyTag={
     editTag:function(editObj){
         layerTagName=$('.addTagLayer .layer-tag-name').val();
         layerTagNum=$('.addTagLayer .layer-tag-num').val();
+        var seriesId = editObj.siblings('.series_id').data('series-id');
         editObj.text(layerTagName);
         editObj.siblings('input').data('tag-id',layerTagNum);
+        var postData = {};
+        postData.series_id = seriesId;
+        postData.sort = layerTagNum;
+        postData.name = layerTagName;
+        $.post(controller+"edit",postData,function(msg){
+            
+        });
     },
     deleteTag:function(delObj){
         var tagListLen=$('.classify-label-content .tag-item').length;
@@ -186,6 +194,7 @@ var manageClassifyTag={
                 upperTagId.data('tag-id',currentTagId.data('tag-id')).attr('class','classifyTagInfo'+currentTagId.data('tag-id'));
                 currentTagId.data('tag-id',tempId).attr('class','classifyTagInfo'+tempId);
             }
+        
     },
     downTag:function(downObj){
         var currentIndex=downObj.parents('.tag-item').index();
