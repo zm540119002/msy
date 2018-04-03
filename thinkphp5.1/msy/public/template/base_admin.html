@@ -109,8 +109,8 @@
 </section>
 <div class="contextMenu" id="Huiadminmenu">
     <ul>
-        <li id="closethis">关闭当前 </li>
-        <li id="closeall">关闭全部 </li>
+        <li id="closeThis">关闭当前 </li>
+        <li id="closeAll">关闭全部 </li>
     </ul>
 </div>
 <script type="text/javascript" src="public_hui_admin/lib/jquery/1.9.1/jquery.min.js"></script>
@@ -122,13 +122,13 @@
     $(function(){
         $("#min_title_list li").contextMenu('Huiadminmenu', {
             bindings: {
-                'closethis': function(t) {
+                'closeThis': function(t) {
                     console.log(t);
                     if(t.find("i")){
                         t.find("i").trigger("click");
                     }
                 },
-                'closeall': function(t) {
+                'closeAll': function(t) {
                     alert('Trigger was '+t.id+'\nAction was Email');
                 }
              }
