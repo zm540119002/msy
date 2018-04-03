@@ -23,7 +23,7 @@ class Series extends Model {
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
-			return successMsg("已提交申请");
+			return successMsg("成功添加");
 		}else{
 			return errorMsg($this->getError());
 		}
@@ -38,13 +38,28 @@ class Series extends Model {
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['Series_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_series'),basename($data['authorization']));
 		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data);
+		$result = $this->allowField(true)->save($data,['id' => $data['series_id']]);
 		if(false !== $result){
-			return successMsg("已提交申请");
+			return successMsg("已修改");
+		}else{
+			return errorMsg($this->getError());
+		}
+	}
+
+	/**
+	 * 删除
+	 */
+	public function delete(){
+		$data = input('post.');
+		if(is_array($data['series_id'])){
+			$where['id']  = array('in',$data['series_id']);
+		}else{
+			$where['id'] = $data['series_id'];
+		}
+		$result = $this->where($where)->delete();;
+		if(false !== $result){
+			return successMsg("已删除");
 		}else{
 			return errorMsg($this->getError());
 		}

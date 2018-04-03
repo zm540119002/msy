@@ -2,7 +2,23 @@ $(function(){
     var addTagForm=$('#addTagForm').html();
     var layerTagNum;
     var layerTagName;
-    
+    var tagListLen=$('.classify-label-content .tag-item').length;
+        if(!tagListLen){
+            alert(1);
+            $('.classify-label-content .set-tag-tipc').hide();
+            $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+            $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
+        }else{
+            if(tagListLen>=1){
+                $('.classify-label-content div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.classify-label-content div').siblings().find('a:eq(3)').addClass('down-icons');
+                $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+                $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-icons');
+
+                $('.classify-label-content div').eq(tagListLen-1).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.classify-label-content div').eq(tagListLen-1).find('a:eq(3)').addClass('down-disabled-icons');
+            }
+        }
     //新增分类标签
     $('body').on('click','.add-type-tag',function(){
         layer.open({
@@ -13,36 +29,9 @@ $(function(){
             yes:function(index){
                 layerTagNum=$('.addTagLayer .layer-tag-num').val();
                 layerTagName=$('.addTagLayer .layer-tag-name').val();
-                var html='';
-                    html+='<div class="columns_flex tag-item first-tag">';
-                    html+='<span class="classify-tag-name">'+layerTagName+'</span>';
-                    html+='<span class="classify-operate-btn">';
-                    html+=' <a href="javascript:void(0);" class="edit-icons">编辑</a>';
-                    html+=' <a href="javascript:void(0);" class="del-icons">删除</a>';
-                    html+=' <a href="javascript:void(0);" class="move-btn">上移</a>';
-                    html+=' <a href="javascript:void(0);" class="down-btn">下移</a>';
-                    html+='</span>';
-                    html+='<input type="hidden" value="" class="classifyTagInfo'+layerTagNum+'" data-tag-id=""/>'
-                    html+='</div>';
-                    
-                var tagListLen=$('.classify-label-content .tag-item').length;
-                if(!tagListLen){
-                     $('.classify-label-content .set-tag-tipc').hide();
-                     $('.classify-label-content').append(html);
-                     $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
-                     $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons'); 
-                }else{
-                    $('.classify-label-content .tag-item:first').before(html);
-                    if(tagListLen>=1){
-                        $('.classify-label-content div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
-                        $('.classify-label-content div').siblings().find('a:eq(3)').addClass('down-icons');
-                        $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
-                        $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-icons');
 
-                        $('.classify-label-content div').eq(tagListLen).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
-                        $('.classify-label-content div').eq(tagListLen).find('a:eq(3)').addClass('down-disabled-icons');
-                    }
-                }
+
+
                 // tagData={
                 //     layerTagNum:layerTagNum,
                 //     layerTagName:layerTagName
@@ -51,15 +40,42 @@ $(function(){
                 var postData = {};
                 postData.sort = layerTagNum;
                 postData.name = layerTagName;
-                // $.post(controller+"edit",postData,function(msg){
-                //     if(msg.status == 0){
-                //         dialog.error(msg.info);
-                //     }
-                //     if(msg.status == 1){
-                //         dialog.success(msg.info);
-                //         location.href=controller+'edit';
-                //     }
-                // });
+                $.post(controller+"edit",postData,function(msg){
+                    if(msg.status == 0){
+                        dialog.error(msg.info);
+                    }
+                    if(msg.status == 1){
+                        var html='';
+                        html+='<div class="columns_flex tag-item first-tag">';
+                        html+='<span class="classify-tag-name">'+layerTagName+'</span>';
+                        html+='<span class="classify-operate-btn">';
+                        html+=' <a href="javascript:void(0);" class="edit-icons">编辑</a>';
+                        html+=' <a href="javascript:void(0);" class="del-icons">删除</a>';
+                        html+=' <a href="javascript:void(0);" class="move-btn">上移</a>';
+                        html+=' <a href="javascript:void(0);" class="down-btn">下移</a>';
+                        html+='</span>';
+                        html+='<input type="hidden" value="" class="classifyTagInfo'+layerTagNum+'" data-tag-id=""/>';
+                        html+='</div>';
+                        var tagListLen=$('.classify-label-content .tag-item').length;
+                        if(!tagListLen){
+                            $('.classify-label-content .set-tag-tipc').hide();
+                            $('.classify-label-content').append(html);
+                            $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+                            $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
+                        }else{
+                            $('.classify-label-content .tag-item:first').before(html);
+                            if(tagListLen>=1){
+                                $('.classify-label-content div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                                $('.classify-label-content div').siblings().find('a:eq(3)').addClass('down-icons');
+                                $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+                                $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-icons');
+
+                                $('.classify-label-content div').eq(tagListLen).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                                $('.classify-label-content div').eq(tagListLen).find('a:eq(3)').addClass('down-disabled-icons');
+                            }
+                        }
+                    }
+                });
                 layer.close(index);
             }
         })
@@ -75,7 +91,7 @@ $(function(){
     $('body').on('click','.del-icons',function(){
         var _this=$(this);
         var tagName=_this.parents('.classify-operate-btn').prev('.classify-tag-name');
-        manageClassifyTag.initLayer(addTagForm,tagName,'删除商品分类标签',_this);
+        manageClassifyTag.initLayer('你确定删除分类标签?',tagName,'删除商品分类标签',_this);
     })
     //上移
     $('body').on('click','.move-btn',function(){
@@ -130,8 +146,21 @@ var manageClassifyTag={
     editTag:function(editObj){
         layerTagName=$('.addTagLayer .layer-tag-name').val();
         layerTagNum=$('.addTagLayer .layer-tag-num').val();
+        var seriesId = editObj.siblings('.series_id').data('series-id');
         editObj.text(layerTagName);
         editObj.siblings('input').data('tag-id',layerTagNum);
+        var postData = {};
+        postData.series_id = seriesId;
+        postData.sort = layerTagNum;
+        postData.name = layerTagName;
+        $.post(controller+"edit",postData,function(msg){
+            if(msg.status == 0){
+                dialog.error(msg.info);
+            }
+            if(msg.status == 1){
+                dialog.success(msg.info);
+            }
+        });
     },
     deleteTag:function(delObj){
         var tagListLen=$('.classify-label-content .tag-item').length;
@@ -151,6 +180,15 @@ var manageClassifyTag={
         if(tagListLen==1){
             $('.classify-label-content .set-tag-tipc').show();
         }
+        var series_id = delObj.siblings('.series_id').data('series-id');
+        $.post(controller+"delete",{series_id:series_id},function(msg){
+            if(msg.status == 0){
+                dialog.error(msg.info);
+            }
+            if(msg.status == 1){
+                dialog.success(msg.info);
+            }
+        });
         delObj.parents('.tag-item').remove();
     },
     moveTag:function(moveObj){
@@ -170,6 +208,7 @@ var manageClassifyTag={
                 upperTagId.data('tag-id',currentTagId.data('tag-id')).attr('class','classifyTagInfo'+currentTagId.data('tag-id'));
                 currentTagId.data('tag-id',tempId).attr('class','classifyTagInfo'+tempId);
             }
+        
     },
     downTag:function(downObj){
         var currentIndex=downObj.parents('.tag-item').index();
