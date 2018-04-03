@@ -23,7 +23,7 @@ $(function(){
             content:editGoodsLabel,
             btn:['确定','取消'],
             success:function(){
-                var factoryId=$('.goods-tag').data('id');
+                var factoryId=$('.goods-tag').val();
                 $('.editGoodsLayer li').on('click',function(){
                     var _this=$(this);
                     _this.addClass('current').siblings().removeClass('current');
@@ -39,8 +39,8 @@ $(function(){
                 var isCurrent=$('.editGoodsLayer li.current');
                 goodsTagLayerName=isCurrent.text();
                 goodsTagLayerId  =isCurrent.data('id');
-                $('.goods-tag').val(goodsTagLayerName);
-                $('.goods-tag').data('id',goodsTagLayerId);
+                $('.goods-tag').val(goodsTagLayerId);
+                $('.goods-tag').data('name',goodsTagLayerName);
                 layer.close(index);
             }
         })
@@ -157,9 +157,12 @@ $(function(){
     //增加商品
     $('body').on('click','.identifyNewGoods',function(){
         var goodsDetail=$('.goods-detail').data('src');
+        var categoryArray=$('.select-category').data('category-id');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
         postData.details_img=goodsDetail;
+        postData.cat_id_1=categoryArray[0];
+        postData.cat_id_2=categoryArray[0];
         var content='';
         if(!postData.name){
             content='请填写商品名称';
@@ -177,7 +180,7 @@ $(function(){
             content='请上传首焦图';
         }else if(!postData.parameters){
             content='请填写商品参数';
-        }else if(!!postData.details_img){
+        }else if(!postData.details_img){
             content='请上传商品详情图';
         }
         if(content){
@@ -189,7 +192,7 @@ $(function(){
                 dialog.error(msg.info);
             }
             if(msg.status == 1){
-                dialog.success(msg.info);
+                dialog.success(msg.info,controller+'index');
             }
         })
     });

@@ -28,68 +28,35 @@
 	</section>
 	<section>
 		<div class="content-wrapper">
-			<div class="ctype-title">
-				<span class="line"></span>
-				<span class="txt f24">商品1</span>
-				<span class="line"></span>
-			</div>
-			<ul class="columns_flex flex-both-side">
-				<li>
-					<a class="product-square-box">
-						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
-					</a>
-					<p class="product-title">商品11111111111111111</p>
-					<div class="columns_flex two-flex">
-						<div class="pink">
-							￥<price>5.00</price>
-						</div>
-					</div>
-				</li>
-				<li>
-					<a class="product-square-box">
-						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
-					</a>
-					<p class="product-title">商品22222222222222</p>
-					<div class="columns_flex two-flex">
-						<div class="pink">
-							￥<price>5.00</price>
-						</div>
-					</div>
-				</li>
-			</ul>
-			<div class="ctype-title">
-				<span class="line"></span>
-				<span class="txt f24">商品2</span>
-				<span class="line"></span>
-			</div>
-			<ul class="columns_flex flex-both-side">
-				<li>
-					<a class="product-square-box">
-						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
-					</a>
-					<p class="product-title">商品22222222222222222</p>
-					<div class="columns_flex two-flex">
-						<div class="pink">
-							￥<price>5.00</price>
-						</div>
-					</div>
-				</li>
-				<li>
-					<a class="product-square-box">
-						<img src="public/static/common/img/default/no_pic_100.jpg" alt="" class="product-square-img">
-					</a>
-					<p class="product-title">商品333333333333333</p>
-					<div class="columns_flex two-flex">
-						<div class="pink">
-							￥<price>5.00</price>
-						</div>
-					</div>
-				</li>
-			</ul>
+			{volist name="seriesList" id="vo"}
+				<div class="ctype-title">
+					<span class="line"></span>
+					<span class="txt f24">{$vo.name}</span>
+					<span class="line"></span>
+				</div>
+				<ul class="columns_flex flex-both-side">
+					{volist name="goodsList" id="vv"}
+						{if ( $vo.id == $vv.tag) }
+							<li>
+								<a class="product-square-box" href="{:url('goods/preview',['goods_id' => $vv['id']])}">
+									<img src="public_uploads/{$vv.thumb_img}" alt="" class="product-square-img">
+								</a>
+								<p class="product-title">{$vv.name}</p>
+								<div class="columns_flex two-flex">
+									<div class="pink">
+										￥<price>{$vv.settle_price}</price>
+									</div>
+								</div>
+							</li>
+						{else /}
+						{/if}
+					{/volist}
+				</ul>
+			{/volist}
 		</div>
 	</section>
 </article>
-<a href="http://192.168.1.101:8008/demo/joint-deployment.4.html" class="increase-commodity foot-btn f24">增加商品</a>
+<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>
 
 {/block}
 {block name="common"}
