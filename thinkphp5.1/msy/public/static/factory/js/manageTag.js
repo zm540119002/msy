@@ -91,7 +91,7 @@ $(function(){
     $('body').on('click','.del-icons',function(){
         var _this=$(this);
         var tagName=_this.parents('.classify-operate-btn').prev('.classify-tag-name');
-        manageClassifyTag.initLayer(addTagForm,tagName,'删除商品分类标签',_this);
+        manageClassifyTag.initLayer('你确定删除分类标签?',tagName,'删除商品分类标签',_this);
     })
     //上移
     $('body').on('click','.move-btn',function(){
