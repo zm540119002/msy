@@ -138,8 +138,7 @@ $(function(){
                 dialog.error(msg.info);
             }
             if(msg.status == 1){
-                dialog.success(msg.info);
-                location.href=controller+'index';
+                dialog.success(msg.info,controller+'index');
             }
         })
     })

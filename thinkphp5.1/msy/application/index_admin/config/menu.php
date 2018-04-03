@@ -4,7 +4,7 @@ return [
         [
             'name' => '系统管理',
             'sub_menu' => [
-                ['name' => '权限管理', 'controller'=>'Permissions', 'action'=>'manage'],
+                ['name' => '节点管理', 'controller'=>'Node', 'action'=>'manage'],
                 ['name' => '角色管理', 'controller'=>'Role', 'action'=>'manage'],
                 ['name' => '用户管理', 'controller'=>'User', 'action'=>'manage'],
             ],
