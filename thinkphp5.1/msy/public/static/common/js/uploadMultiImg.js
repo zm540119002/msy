@@ -219,7 +219,14 @@ function uploadsMultiVideo(content){
                        dialog.error(info.msg);
                        return false;
                    }
-                    $('.goods-detail1').data('src',layermultiVideoAttr);
+                    var imgArray = [];
+                    $.each(info.info,function(index,img){
+                        if(img.indexOf("uploads") == -1 && img !=''){
+                            img = uploads+img;
+                        }
+                        imgArray.push(img);
+                    });
+                    $('.goods-detail').data('src',imgArray);
                     layer.close(index);
                 });
             }
