@@ -226,7 +226,7 @@ function uploadsMultiVideo(content){
                         }
                         imgArray.push(img);
                     });
-                    $('.goods-detail').data('src',imgArray);
+                    $('.goods-video').data('src',imgArray);
                     layer.close(index);
                 });
             }
