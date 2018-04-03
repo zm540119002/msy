@@ -10,16 +10,7 @@
 	</form>
 </section>
 <!--标签列表模板-->
-<div class="columns_flex tag-item first-tag">
-	<span class="classify-tag-name">{}</span>
-	<span class="classify-operate-btn">
-		<a href="javascript:void(0);" class="edit-icons">编辑</a> 
-		<a href="javascript:void(0);" class="del-icons">删除</a> 
-		<a href="javascript:void(0);" class="move-btn move-disabled-icons">上移</a> 
-		<a href="javascript:void(0);" class="down-btn down-disabled-icons">下移</a>
-	</span>
-	<input type="hidden" value="" class="classifyTagInfo1" data-tag-id="">
-</div>
+
 <article class="f24">
 	<section class="">
 		<nav class="columns_flex channel_nav manufacturer_nav supply-nav">
@@ -48,7 +39,24 @@
 		<div>
 			<a class="add-type-tag"><span class="add-icons">新建商品分类标签</span></a>
 			<div class="classify-label-content">
-				<p class="set-tag-tipc">未设置标签</p>
+				{empty name="seriesList"}
+					<p class="set-tag-tipc">未设置标签</p>
+				{else /}
+				{/empty}
+				{volist name="seriesList" id="vo"}
+					<div class="columns_flex tag-item first-tag">
+						<span class="classify-tag-name">{$vo.name}</span>
+						<span class="classify-operate-btn">
+							<a href="javascript:void(0);" class="edit-icons">编辑</a>
+							<a href="javascript:void(0);" class="del-icons">删除</a>
+							<a href="javascript:void(0);" class="move-btn ">上移</a>
+							<a href="javascript:void(0);" class="down-btn ">下移</a>
+						</span>
+						<input type="hidden" value="" class="classifyTagInfo1" data-tag-id="{$vo.sort}">
+						<input type="hidden" value="" class="series_id" data-series-id="{$vo.id}">
+					</div>
+				{/volist}
+
 			</div>
 		</div>
 	</section>
@@ -61,12 +69,8 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="factory_js/manageTag.js"></script>
-
 <script type="text/javascript">
 	$(function(){
-		//滑动轮播
-		var elem = document.getElementById('slider');
-		swipe(elem);
 	});
 </script>
 {/block}

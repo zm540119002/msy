@@ -2,7 +2,8 @@
 namespace app\factory\controller;
 use app\factory\model\Goods as M;
 use common\controller\Base;
-use app\index_admin\model\Category as CategoryModel;
+use app\index_admin\model\Category as categoryModel;
+use app\factory\model\Series as seriesModel;
 class Goods extends Base
 {
     public function index()
@@ -16,17 +17,24 @@ class Goods extends Base
      */
     public function edit()
     {
+        $model = new M();
         if(request()->isPost()){
-            $model = new M();
             return $model -> add();
         }
-        $categoryModel = new CategoryModel();
+        $categoryModel = new categoryModel();
         $platformCategory = $categoryModel->selectFirstCategory();
         $this -> assign('platformCategory',$platformCategory);
-//        if(request()->isGet()){
-//            $model = new M();
-//            return $model -> edit();
-//        }
+        $seriesModel = new seriesModel();
+        $seriesList = $seriesModel -> selectSeries([],[],['sort'=>'desc','id'=>'desc',]);
+        $this -> assign('seriesList',$seriesList);
+        if(input('?goods_id')){
+            $goodsId = (int)input('goods_id');
+            $where = array(
+                'id' => $goodsId,
+            );
+            $goodsInfo =  $model -> getGoods($where);
+            $this -> assign('goodsInfo',$goodsInfo);
+        }
         return $this->fetch();
     }
 

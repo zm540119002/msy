@@ -21,9 +21,9 @@
 
 <section id="editGoodsLabel" style="display:none;">
 	<ul class="vendorInfoList">
-		<li data-id="1">标签1</li>
-		<li data-id="2">标签2</li>
-		<li data-id="3">标签3</li>
+		{volist name="seriesList" id="vo"}
+			<li data-id="{$vo.id}">{$vo.name}</li>
+		{/volist}
 	</ul>
 </section>
 <!--编辑商品参数-->

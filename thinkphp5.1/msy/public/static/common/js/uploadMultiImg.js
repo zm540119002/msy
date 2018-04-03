@@ -140,7 +140,7 @@ function uploadsMultiImg(content){
             success:function(){
                 var html=$('#img_list').html();
                 var multiImgAttr=$('.goods-detail').data('src');
-                console.log(multiImgAttr)
+               console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     $('.editDetailLayer .multi-picture-module').append(html);
                     $('.editDetailLayer .upload_img').eq(i).attr('src',multiImgAttr[i]);
@@ -158,9 +158,9 @@ function uploadsMultiImg(content){
                     layer.close(index);
                     return false;
                 }
-                var postDate = {};
-                postDate.imgs = layermultiImgAttr;
-                $.post(controller + 'uploadMultiImgToTemp',postDate,function(info){
+                var postData = {};
+                postData.imgs = layermultiImgAttr;
+                $.post(controller + 'uploadMultiImgToTemp',postData,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
                        return false;
@@ -206,21 +206,42 @@ function uploadsMultiVideo(content){
                     var videoSrc=_this.find('video').attr('src');
                     layermultiVideoAttr.push(videoSrc);
                 })
-                console.log(layermultiVideoAttr);
+
                 $('.goods-video').data('src',layermultiVideoAttr);
                 if(layermultiVideoAttr.length==0){
                     layer.close(index);
                     return false;
                 }
-                var postDate = {};
-                postDate.imgs = layermultiVideoAttr;
-                $.post(controller + 'uploadMultiImgToTemp',postDate,function(info){
-                   if(info.status == 0){
-                       dialog.error(info.msg);
-                       return false;
-                   }
-                    $('.goods-detail1').data('src',layermultiVideoAttr);
-                    layer.close(index);
+                var postData = {};
+                postData.imgs = layermultiVideoAttr;
+                $.ajax({
+                    url: controller + 'uploadMultiImgToTemp',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
+                        }
+                        var imgArray = [];
+                        $.each(info.info,function(index,img){
+                            if(img.indexOf("uploads") == -1 && img !=''){
+                                img = uploads+img;
+                            }
+                            imgArray.push(img);
+                        });
+                            $('.goods-video').data('src',imgArray);
+                            layer.close(index);
+                    },
+                    complete:function(){
+                        
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
                 });
             }
         })
