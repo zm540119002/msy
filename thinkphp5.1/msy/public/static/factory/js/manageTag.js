@@ -2,7 +2,23 @@ $(function(){
     var addTagForm=$('#addTagForm').html();
     var layerTagNum;
     var layerTagName;
-    
+    var tagListLen=$('.classify-label-content .tag-item').length;
+        if(!tagListLen){
+            alert(1);
+            $('.classify-label-content .set-tag-tipc').hide();
+            $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+            $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
+        }else{
+            if(tagListLen>=1){
+                $('.classify-label-content div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.classify-label-content div').siblings().find('a:eq(3)').addClass('down-icons');
+                $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+                $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-icons');
+
+                $('.classify-label-content div').eq(tagListLen-1).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.classify-label-content div').eq(tagListLen-1).find('a:eq(3)').addClass('down-disabled-icons');
+            }
+        }
     //新增分类标签
     $('body').on('click','.add-type-tag',function(){
         layer.open({
@@ -38,7 +54,7 @@ $(function(){
                         html+=' <a href="javascript:void(0);" class="move-btn">上移</a>';
                         html+=' <a href="javascript:void(0);" class="down-btn">下移</a>';
                         html+='</span>';
-                        html+='<input type="hidden" value="" class="classifyTagInfo'+layerTagNum+'" data-tag-id=""/>'
+                        html+='<input type="hidden" value="" class="classifyTagInfo'+layerTagNum+'" data-tag-id=""/>';
                         html+='</div>';
                         var tagListLen=$('.classify-label-content .tag-item').length;
                         if(!tagListLen){
