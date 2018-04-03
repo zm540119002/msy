@@ -214,20 +214,34 @@ function uploadsMultiVideo(content){
                 }
                 var postData = {};
                 postData.imgs = layermultiVideoAttr;
-                $.post(controller + 'uploadMultiImgToTemp',postData,function(info){
-                   if(info.status == 0){
-                       dialog.error(info.msg);
-                       return false;
-                   }
-                    var imgArray = [];
-                    $.each(info.info,function(index,img){
-                        if(img.indexOf("uploads") == -1 && img !=''){
-                            img = uploads+img;
+                $.ajax({
+                    url: controller + 'uploadMultiImgToTemp',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
                         }
-                        imgArray.push(img);
-                    });
-                    $('.goods-video').data('src',imgArray);
-                    layer.close(index);
+                        var imgArray = [];
+                        $.each(info.info,function(index,img){
+                            if(img.indexOf("uploads") == -1 && img !=''){
+                                img = uploads+img;
+                            }
+                            imgArray.push(img);
+                        });
+                            $('.goods-video').data('src',imgArray);
+                            layer.close(index);
+                    },
+                    complete:function(){
+                        
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
                 });
             }
         })
