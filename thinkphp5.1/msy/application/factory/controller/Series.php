@@ -36,7 +36,7 @@ class Series extends Base
             $brandInfo =  $model -> getBrand($where,$field);
             $this -> assign('brandInfo',$brandInfo);
         }
-        $seriesList = $model -> selectSeries();
+        $seriesList = $model -> selectSeries([],[],['id'=>'desc']);
 //        return $seriesList;
         $this->assign('seriesList',$seriesList);
         return $this->fetch();
