@@ -154,7 +154,12 @@ var manageClassifyTag={
         postData.sort = layerTagNum;
         postData.name = layerTagName;
         $.post(controller+"edit",postData,function(msg){
-            
+            if(msg.status == 0){
+                dialog.error(msg.info);
+            }
+            if(msg.status == 1){
+                dialog.success(msg.info);
+            }
         });
     },
     deleteTag:function(delObj){
@@ -175,6 +180,15 @@ var manageClassifyTag={
         if(tagListLen==1){
             $('.classify-label-content .set-tag-tipc').show();
         }
+        var series_id = delObj.siblings('.series_id').data('series-id');
+        $.post(controller+"delete",{series_id:series_id},function(msg){
+            if(msg.status == 0){
+                dialog.error(msg.info);
+            }
+            if(msg.status == 1){
+                dialog.success(msg.info);
+            }
+        });
         delObj.parents('.tag-item').remove();
     },
     moveTag:function(moveObj){

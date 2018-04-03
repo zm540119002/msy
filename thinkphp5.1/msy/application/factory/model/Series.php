@@ -48,6 +48,24 @@ class Series extends Model {
 	}
 
 	/**
+	 * 删除
+	 */
+	public function delete(){
+		$data = input('post.');
+		if(is_array($data['series_id'])){
+			$where['id']  = array('in',$data['series_id']);
+		}else{
+			$where['id'] = $data['series_id'];
+		}
+		$result = $this->where($where)->delete();;
+		if(false !== $result){
+			return successMsg("已删除");
+		}else{
+			return errorMsg($this->getError());
+		}
+	}
+
+	/**
 	 * @param array $where
 	 * @param array $field
 	 * @param array $order
