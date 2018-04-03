@@ -20,9 +20,6 @@ class Series extends Model {
 		if(!$result = $validate->scene('add')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['Series_img'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['Series_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_Series'),basename($data['authorization']));
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
@@ -64,7 +61,7 @@ class Series extends Model {
 	 */
 	public function selectSeries($where=[],$field=[],$order=[],$join=[],$limit=''){
 		$_where = array(
-			'b.status' => 0,
+			's.status' => 0,
 		);
 		$_join = array(
 		);
