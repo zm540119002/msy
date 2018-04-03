@@ -70,13 +70,17 @@ class Goods extends Model {
 	 */
 	public function selectGoods($where=[],$field=[],$order=[],$join=[],$limit=''){
 		$_where = array(
-			'b.status' => 0,
+			'g.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
+		$_order = array(
+			'id'=>'desc',
+		);
+		$order = array_merge($_order, $order);
 		if($field){
-			$list = $this->alias('s')
+			$list = $this->alias('g')
 				->where($where)
 				->field($field)
 				->join(array_merge($_join,$join))
@@ -84,7 +88,7 @@ class Goods extends Model {
 				->limit($limit)
 				->select();
 		}else{
-			$list = $this->alias('s')
+			$list = $this->alias('g')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->order($order)

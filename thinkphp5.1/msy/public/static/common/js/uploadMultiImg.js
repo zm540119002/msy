@@ -240,7 +240,7 @@ function uploadsMultiVideo(content){
                         
                     },
                     error:function (xhr) {
-                        dialog.error('AJAX错误');
+                        dialog.error('AJAX错误'+xhr);
                     },
                 });
             }
