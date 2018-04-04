@@ -4,24 +4,21 @@ namespace app\index_admin\controller;
 use common\controller\Base;
 
 class Node extends Base {
-    /**代金券分类-管理
+    /**节点-管理
      */
     public function manage(){
-        $model = D('Mall/');
-        if(IS_POST){
-            $this->List = $model->select();
+        if(request()->isPost()){
             $this->fetch('nodeList');
         }else{
-            $this->List = $model->select();
-            $this->fetch();
+            return $this->fetch();
         }
     }
 
-    /**代金券分类-编辑
+    /**节点-编辑
      */
     public function edit(){
         $model = D('Mall/');
-        if(IS_POST){
+        if(request()->isPost()){
             //日期转时间戳
             if( isset($_POST['failure_time']) && $_POST['failure_time']){
                 $_POST['failure_time'] = strtotime($_POST['failure_time']);
@@ -56,10 +53,11 @@ class Node extends Base {
 
     //代金券列表
     public function nodeList(){
+//        $this->assign('list',array(array('name'=>'zhangmin'),array('name'=>'zhanglingjuan')));
+        return $this->fetch();
         if(!IS_GET){
             $this->ajaxReturn(errorMsg(config('not_get')));
         }
-
         $model = D('Mall/');
         $where = array(
             'c.status' => 0,
@@ -86,10 +84,10 @@ class Node extends Base {
         $this->fetch();
     }
 
-    /**代金券分类-删除
+    /**节点-删除
      */
     public function del(){
-        if(!IS_POST){
+        if(!request()->isPost()){
             $this->ajaxReturn(errorMsg(config('not_post')));
         }
         $model = D('Mall/');
