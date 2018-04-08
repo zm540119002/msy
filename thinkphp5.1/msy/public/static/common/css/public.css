@@ -299,6 +299,7 @@ i{
 }
 .common_default_img{
     width:100%;
+    vertical-align: middle;
 }
 /*美尚云生态圈平台*/
 .top_nav_fixed{
@@ -514,6 +515,7 @@ color: #ed6d00;
     margin:0 10px;*/
     
 }
+/*内容框*/
 .content-box{
     padding:0.20rem 0.15rem;
 }.content-box:last-child{
@@ -858,7 +860,8 @@ color: #ed6d00;
 .categoryContentLayer .layui-m-layercont,
 .trademarkTypeLayer .layui-m-layercont,
 .editCompanyPicLayer .layui-m-layercont,
-.addAdminLayer .layui-m-layercont{
+.addAdminLayer .layui-m-layercont,
+.editVideoLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }

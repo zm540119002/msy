@@ -618,20 +618,20 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
-            $this->ajaxReturn(errorMsg('创建Uploads目录失败'));
+            return (errorMsg('创建Uploads目录失败'));
         }
     }
     $logo = $uploadPath.$avatarPath;
     //没有带logo二维码保存路径
     $tempPath =$uploadPath.C('TEMP_PATH');
     if(!mk_dir($tempPath)){
-        $this->ajaxReturn(errorMsg('创建新目录失败'));
+        return (errorMsg('创建新目录失败'));
     }
     $noLogoFilename = $tempPath.'nologo'.time().'.png';
     //带二维码保存路径
     $newPath = $uploadPath . $newRelativePath;
     if(!mk_dir($newPath)){
-        $this->ajaxReturn(errorMsg('创建新目录失败'));
+        return (errorMsg('创建新目录失败'));
     }
 
     $filename = time().'.png';
@@ -680,10 +680,8 @@ function moveImgFromTemp($newRelativePath,$filename){
             return errorMsg('创建Uploads目录失败');
         }
     }
-
     //临时相对路径
     $tempRelativePath = config('upload_dir.temp_path');
-
     //旧路径
     $tempPath = $uploadPath . $tempRelativePath;
     if(!is_dir($tempPath)){
@@ -711,28 +709,28 @@ function moveImgFromTemp($newRelativePath,$filename){
 //新增图片对比数据库，删除不同的图片
 function delImgFromPaths($oldImgPaths,$newImgPaths){
     //上传文件公共路径
-    $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
+    $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
-        $this->ajaxReturn(errorMsg('目录：'.$uploadPath.'不存在！'));
+        return errorMsg('目录：'.$uploadPath.'不存在！');
     }
 
     if(is_string($oldImgPaths) && is_string($newImgPaths)){
         if($oldImgPaths !== $newImgPaths){
             if(!file_exists($uploadPath . $oldImgPaths)){
-                $this->ajaxReturn(errorMsg('旧文件不存在！'));
+                return errorMsg('旧文件不存在！');
             }
             if(!unlink($uploadPath . $oldImgPaths)){
-                $this->ajaxReturn(errorMsg('删除旧文件失败！'));
+                return errorMsg('删除旧文件失败！');
             }
         }
     }elseif(is_array($oldImgPaths) && is_array($newImgPaths)){
         $delImgPaths = array_diff($oldImgPaths,$newImgPaths);
         foreach ($delImgPaths as $delImgPath) {
             if(!file_exists($uploadPath . $delImgPath)){
-                $this->ajaxReturn(errorMsg('旧文件不存在！'));
+                return errorMsg('旧文件不存在！');
             }
             if(!unlink($uploadPath . $delImgPath)){
-                $this->ajaxReturn(errorMsg('删除旧文件失败！'));
+                return errorMsg('删除旧文件失败！');
             }
         }
     }
@@ -741,24 +739,24 @@ function delImgFromPaths($oldImgPaths,$newImgPaths){
 //删除图片
 function delImg($imgPaths){
     //上传文件公共路径
-    $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
+    $uploadPath = realpath(config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
-        $this->ajaxReturn(errorMsg('目录：'.$uploadPath.'不存在！'));
+        return (errorMsg('目录：'.$uploadPath.'不存在！'));
     }
     if(is_string($imgPaths)){
         if(!file_exists($uploadPath . $imgPaths)){
-            $this->ajaxReturn(errorMsg('旧文件不存在！'));
+            return (errorMsg('旧文件不存在！'));
         }
         if(!unlink($uploadPath . $imgPaths)){
-            $this->ajaxReturn(errorMsg('删除旧文件失败！'));
+            return (errorMsg('删除旧文件失败！'));
         }
     }elseif(is_array($imgPaths) ){
         foreach ($imgPaths as $delImgPath) {
             if(!file_exists($uploadPath . $delImgPath)){
-                $this->ajaxReturn(errorMsg('文件不存在！'));
+                return (errorMsg('文件不存在！'));
             }
             if(!unlink($uploadPath . $delImgPath)){
-                $this->ajaxReturn(errorMsg('删除文件失败！'));
+                return (errorMsg('删除文件失败！'));
             }
         }
     }

@@ -1,5 +1,6 @@
 <?php
 namespace app\factory\model;
+use GuzzleHttp\Psr7\Request;
 use think\Model;
 use think\Db;
 /**
@@ -22,13 +23,24 @@ class Goods extends Model {
 		}
 		$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		$data['main_img']  = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['main_img']));
-		$tempArr = array();
-		foreach ($data['details_img'] as $item) {
+		$goodsVideo = '';
+		$tempGoodsVideo = explode(",",$data['goods_video']);
+		array_pop($tempGoodsVideo);
+		foreach ($tempGoodsVideo as $item) {
 			if($item){
-				$tempArr[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item));
+				$goodsVideo = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$goodsVideo;
 			}
 		}
-		$data['details_img'] = implode(',',$tempArr);
+		$data['goods_video'] = $goodsVideo;
+		$detailsImg = '';
+		$tempArray = explode(",",$data['details_img']);
+		array_pop($tempArray);
+		foreach ($tempArray as $item) {
+			if($item){
+				$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+			}
+		}
+		$data['details_img'] = $detailsImg;
 		$data['create_time'] = time();
 		$result = $this -> allowField(true) -> save($data);
 		if(false !== $result){
@@ -47,13 +59,44 @@ class Goods extends Model {
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['Goods_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['Goods_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['authorization']));
+		$where['id'] = $data['goods_id'];
+		$file = array(
+			'thumb_img','main_img','details_img',
+		);
+		$oldGoodsInfo = $this -> getGoods($where,$file);
+		$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
+		$data['main_img']  = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['main_img']));
+		$goodsVideo = '';
+		$tempGoodsVideo = explode(",",$data['goods_video']);
+		array_pop($tempGoodsVideo);
+		foreach ($tempGoodsVideo as $item) {
+			if($item){
+				$goodsVideo = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$goodsVideo;
+			}
+		}
+		$data['goods_video'] = $goodsVideo;
+
+		$detailsImg = '';
+		$tempDetailsImg = explode(",",$data['details_img']);
+		array_pop($tempDetailsImg);
+		foreach ($tempDetailsImg as $item) {
+			if($item){
+				$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+			}
+		}
+		$data['details_img'] = $detailsImg;
 		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data);
+		$result = $this->allowField(true)->save($data, ['id' => $data['goods_id']]);
 		if(false !== $result){
-			return successMsg("已提交申请");
+			$newGoodsInfo = $this -> getGoods($where,$file);
+			delImgFromPaths($oldGoodsInfo['thumb_img'],$newGoodsInfo['thumb_img']);
+			delImgFromPaths($oldGoodsInfo['main_img'],$newGoodsInfo['main_img']);
+			$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
+			array_pop($oldDetailsImg);
+			$newDetailsImg = explode(",",$newGoodsInfo['details_img']);
+			array_pop($newDetailsImg);
+			delImgFromPaths($oldDetailsImg,$newDetailsImg);
+			return successMsg("修改成功");
 		}else{
 			return errorMsg($this->getError());
 		}

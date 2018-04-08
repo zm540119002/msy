@@ -55,9 +55,11 @@ $(function(){
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
-                var categoryIdArr=$('.select-category').data('category-id');
+                var categoryId=$('.select-category').data('category-id');
+                var categoryIdArr=categoryId.split(',');
                 var cat_id_1;
-                if(categoryIdArr.length==0){
+               console.log(categoryIdArr);
+                if(categoryIdArr.length==1){
                     $('.categoryContentLayer').find('li:first').addClass('current');
                     cat_id_1 =  $('.categoryContentLayer .category-tab').find('li:first a').data('id');
                 }else{
@@ -102,12 +104,12 @@ $(function(){
 
             },
             yes:function(index){
-                var categoryArr=[];
+                var categoryArr='';
                 $.each($('.category-tab li'),function(){
                     var _this=$(this);
                     if(_this.hasClass('current')){
                         var first_category_id=$('.categoryContentLayer .category-tab>li.current').find('a').data('id');
-                        categoryArr.push(first_category_id);
+                        categoryArr+=first_category_id+',';
                         return false;
                     }
                 });
@@ -115,11 +117,12 @@ $(function(){
                     var _this=$(this);
                     if(_this.hasClass('current')){
                         var second_category_id=$('.categoryContentLayer .category-type>li.current').find('a').data('id');
-                        categoryArr.push(second_category_id);
+                        categoryArr+=second_category_id;
                         return false;
                     }
                 });
                 $('.select-category').data('category-id',categoryArr);
+                console.log(categoryArr);
                 layer.close(index);
             }
         })
@@ -157,20 +160,23 @@ $(function(){
     //增加商品
     $('body').on('click','.identifyNewGoods',function(){
         var goodsDetail=$('.goods-detail').data('src');
-        var categoryArray=$('.select-category').data('category-id');
+        var goodsVideo=$('.goods-video').data('src');
+        var category=$('.select-category').data('category-id');
+        var categoryArray = category.split(',');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
         postData.details_img=goodsDetail;
+        postData.goods_video=goodsVideo;
         postData.cat_id_1=categoryArray[0];
-        postData.cat_id_2=categoryArray[0];
+        postData.cat_id_2=categoryArray[1];
         var content='';
         if(!postData.name){
             content='请填写商品名称';
         }else if(!postData.trait){
             content='请填写商品特点';
-        }else if(!isNumber(postData.settle_price)){
+        }else if(!postData.settle_price){
             content='请填写结算价';
-        }else if(!isNumber(postData.retail_price)){
+        }else if(!postData.sale_price){
             content='请填写零售价';
         }else if(!postData.thumb_img){
             content='请上传缩略图';
