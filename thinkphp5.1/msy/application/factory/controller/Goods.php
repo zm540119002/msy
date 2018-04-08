@@ -39,7 +39,7 @@ class Goods extends Base
                 'id' => $goodsId,
             );
             $goodsInfo =  $model -> getGoods($where);
-            $catArray= $goodsInfo['cat_id_1'].','.$goodsInfo['cat_id_2'].',';
+            $catArray= $goodsInfo['cat_id_1'].','.$goodsInfo['cat_id_2'];
             $goodsInfo['catArray'] = $catArray;
 //            return $goodsInfo;
             $this -> assign('goodsInfo',$goodsInfo);
