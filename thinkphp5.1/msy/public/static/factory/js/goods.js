@@ -176,7 +176,7 @@ $(function(){
             content='请填写商品特点';
         }else if(!postData.settle_price){
             content='请填写结算价';
-        }else if(!postData.retail_price){
+        }else if(!postData.sale_price){
             content='请填写零售价';
         }else if(!postData.thumb_img){
             content='请上传缩略图';
