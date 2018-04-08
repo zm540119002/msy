@@ -58,7 +58,8 @@ $(function(){
                 var categoryId=$('.select-category').data('category-id');
                 var categoryIdArr=categoryId.split(',');
                 var cat_id_1;
-                if(categoryIdArr.length==0){
+               console.log(categoryIdArr);
+                if(categoryIdArr.length==1){
                     $('.categoryContentLayer').find('li:first').addClass('current');
                     cat_id_1 =  $('.categoryContentLayer .category-tab').find('li:first a').data('id');
                 }else{
@@ -159,20 +160,23 @@ $(function(){
     //增加商品
     $('body').on('click','.identifyNewGoods',function(){
         var goodsDetail=$('.goods-detail').data('src');
-        var categoryArray=$('.select-category').data('category-id');
+        var goodsVideo=$('.goods-video').data('src');
+        var category=$('.select-category').data('category-id');
+        var categoryArray = category.split(',');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
         postData.details_img=goodsDetail;
+        postData.goods_video=goodsVideo;
         postData.cat_id_1=categoryArray[0];
-        postData.cat_id_2=categoryArray[0];
+        postData.cat_id_2=categoryArray[1];
         var content='';
         if(!postData.name){
             content='请填写商品名称';
         }else if(!postData.trait){
             content='请填写商品特点';
-        }else if(!isNumber(postData.settle_price)){
+        }else if(!postData.settle_price){
             content='请填写结算价';
-        }else if(!isNumber(postData.retail_price)){
+        }else if(!postData.sale_price){
             content='请填写零售价';
         }else if(!postData.thumb_img){
             content='请上传缩略图';

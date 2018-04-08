@@ -142,6 +142,9 @@ function uploadsMultiImg(content){
                 var multiImgSrc=$('.goods-detail').data('src');
                 var multiImgAttr=multiImgSrc.split(',');
                 for(var i=0;i<multiImgAttr.length-1;i++){
+                    if(multiImgAttr[i].indexOf("uploads") == -1 && multiImgAttr[i] !=''){
+                        multiImgAttr[i] = uploads+multiImgAttr[i];
+                    }
                     $('.editDetailLayer .multi-picture-module').append(html);
                     $('.editDetailLayer .upload_img').eq(i).attr('src',multiImgAttr[i]);
                 }

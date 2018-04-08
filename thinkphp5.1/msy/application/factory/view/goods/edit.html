@@ -37,6 +37,10 @@
 	<section>
 		<form class="addProductContent">
 			<ul>
+				{notempty name="$goodsInfo"}
+				<input type="hidden" class="goods_id" value="{$goodsInfo.id|default=''}"  name="goods_id">
+				{/notempty}
+
 				<li>
 					<span class="form-title">商品名称</span>
 					<input type="text" name="name" value="{$goodsInfo.name|default=''}" placeholder="商品名称,字数限18字" class="goods-name input-text">
@@ -53,7 +57,7 @@
                     </span>
                     <span class="price-flex">
                         <label for="">零售价￥</label>
-                        <input type="text" name="retail_price" value="{$goodsInfo.sale_price|default=''}" placeholder="688.00" class="retail-price">
+                        <input type="text" name="sale_price" value="{$goodsInfo.sale_price|default=''}" placeholder="688.00" class="retail-price">
                     </span>
 				</li>
 				<li >
@@ -66,7 +70,7 @@
 				</li>
 				<li class="">
                     <a href="javascript:void(0);" class="uploadGoodsVideo right-arrow">上传商品视频(可选项)</a>
-                    <input type="hidden" class="goods-video" value="" data-src="" name="goodsVideo">
+                    <input type="hidden" class="goods-video" value="" data-src="{$goodsInfo.goods_video|default=''}" name="goodsVideo">
                 </li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >归属店铺分类(系列)</a>
