@@ -55,7 +55,8 @@ $(function(){
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
-                var categoryIdArr=$('.select-category').data('category-id');
+                var categoryId=$('.select-category').data('category-id');
+                var categoryIdArr=categoryId.split(',');
                 var cat_id_1;
                 if(categoryIdArr.length==0){
                     $('.categoryContentLayer').find('li:first').addClass('current');
@@ -102,12 +103,12 @@ $(function(){
 
             },
             yes:function(index){
-                var categoryArr=[];
+                var categoryArr='';
                 $.each($('.category-tab li'),function(){
                     var _this=$(this);
                     if(_this.hasClass('current')){
                         var first_category_id=$('.categoryContentLayer .category-tab>li.current').find('a').data('id');
-                        categoryArr.push(first_category_id);
+                        categoryArr+=first_category_id+',';
                         return false;
                     }
                 });
@@ -115,11 +116,12 @@ $(function(){
                     var _this=$(this);
                     if(_this.hasClass('current')){
                         var second_category_id=$('.categoryContentLayer .category-type>li.current').find('a').data('id');
-                        categoryArr.push(second_category_id);
+                        categoryArr+=second_category_id;
                         return false;
                     }
                 });
                 $('.select-category').data('category-id',categoryArr);
+                console.log(categoryArr);
                 layer.close(index);
             }
         })
