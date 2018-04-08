@@ -24,7 +24,7 @@ class Goods extends Model {
 		$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		$data['main_img']  = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['main_img']));
 		$goodsVideo = '';
-		$tempGoodsVideo = explode(",",$data['details_img']);
+		$tempGoodsVideo = explode(",",$data['goods_video']);
 		array_pop($tempGoodsVideo);
 		foreach ($tempGoodsVideo as $item) {
 			if($item){
@@ -67,7 +67,7 @@ class Goods extends Model {
 		$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		$data['main_img']  = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['main_img']));
 		$goodsVideo = '';
-		$tempGoodsVideo = explode(",",$data['details_img']);
+		$tempGoodsVideo = explode(",",$data['goods_video']);
 		array_pop($tempGoodsVideo);
 		foreach ($tempGoodsVideo as $item) {
 			if($item){
