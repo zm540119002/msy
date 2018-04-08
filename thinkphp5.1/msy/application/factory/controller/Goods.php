@@ -4,6 +4,8 @@ use app\factory\model\Goods as M;
 use common\controller\Base;
 use app\index_admin\model\Category as categoryModel;
 use app\factory\model\Series as seriesModel;
+use GuzzleHttp\Psr7\Request;
+
 class Goods extends Base
 {
     public function index()
@@ -25,6 +27,9 @@ class Goods extends Base
     {
         $model = new M();
         if(request()->isPost()){
+            if(input('?post.goods_id') && !input('?post.goods_id') == ''){
+                return $model -> edit();
+            }
             return $model -> add();
         }
         $categoryModel = new categoryModel();
@@ -39,9 +44,11 @@ class Goods extends Base
                 'id' => $goodsId,
             );
             $goodsInfo =  $model -> getGoods($where);
+            if(empty($goodsInfo)){
+                $this->error('此产品已下架');
+            }
             $catArray= $goodsInfo['cat_id_1'].','.$goodsInfo['cat_id_2'];
             $goodsInfo['catArray'] = $catArray;
-//            return $goodsInfo;
             $this -> assign('goodsInfo',$goodsInfo);
         }
         return $this->fetch();

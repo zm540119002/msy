@@ -37,6 +37,10 @@
 	<section>
 		<form class="addProductContent">
 			<ul>
+				{notempty name="$goodsInfo"}
+				<input type="hidden" class="goods_id" value="{$goodsInfo.id|default=''}"  name="goods_id">
+				{/notempty}
+
 				<li>
 					<span class="form-title">商品名称</span>
 					<input type="text" name="name" value="{$goodsInfo.name|default=''}" placeholder="商品名称,字数限18字" class="goods-name input-text">
