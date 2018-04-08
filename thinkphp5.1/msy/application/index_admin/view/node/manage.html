@@ -51,7 +51,7 @@
             var url = controller+'/nodeList';
             var postData = $('#form1').serializeObject();
             postData.p = currentPage ? currentPage : 1;
-            postData.pageSize = 10;
+            postData.pageSize = 5;
             $.get(url, postData , function(data){
                 $('#list').html(data);
             });

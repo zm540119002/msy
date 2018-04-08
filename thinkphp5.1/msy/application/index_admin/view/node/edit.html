@@ -21,19 +21,19 @@
                             <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>名称：</td>
                             <td class=dotted_bottom_gray width="40%" align=left>
                                 <input style="width: 200px; " class="inputboxadmin" name="name" value="">
-                                <input type="hidden" name="nodeId" value="">
+                                <input type="hidden" name="id" value="">
                             </td>
                         </tr>
                         <tr>
                             <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>路径：</td>
                             <td class=dotted_bottom_gray width="89%" align=left>
-                                <input style="width: 200px; " class="inputboxadmin" name="amount" value="">
+                                <input style="width: 200px; " class="inputboxadmin" name="path" value="">
                             </td>
                         </tr>
                         <tr>
                             <td class=dotted_bottom_gray height=40 width="11%" align=right>备注：</td>
                             <td class=dotted_bottom_gray width="100%" align=left>
-                                <textarea  class="textareaadmin textarea_text"  name="headlines"></textarea>
+                                <textarea  class="textareaadmin textarea_text"  name="remark"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -54,26 +54,20 @@
     <script type="text/javascript">
         $(function(){
             //页面初始化
-            var type = '';
-            if(type){
-                $('[name=type]').val(type);
-            }
-            var scene = '';
-            if(scene){
-                $('[name=scene]').val(scene);
-            }
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
                 $.post(action,postData,function(msg){
+                    console.log(msg);
+                    return;
                     dialog.msg(msg,'',function () {
-                        location.href = controller + '/nodeEdit';
+                        location.href = controller + '/edit';
                     });
                 },'JSON');
             });
             //返回
             $('.button_save_black').click(function(){
-                location.href = controller + '/nodeManage';
+                location.href = controller + '/manage';
             });
         });
     </script>

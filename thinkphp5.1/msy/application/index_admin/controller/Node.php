@@ -1,15 +1,11 @@
 <?php
 namespace app\index_admin\controller;
 
-use common\controller\Base;
-
-class Node extends Base {
+class Node extends \common\controller\Base {
     /**节点-管理
      */
     public function manage(){
         if(request()->isPost()){
-            $modelNode = \common\model\Node();
-            $this->fetch('nodeList');
         }else{
             return $this->fetch();
         }
@@ -17,43 +13,29 @@ class Node extends Base {
     /**节点-编辑
      */
     public function edit(){
+        $modelNode = new \common\model\Node();
         if(request()->isPost()){
-            $modelNode = \common\model\Node();
-            return $modelNode;
+            return $modelNode->edit();
         }else{
+            $where = [
+                'status' => 0,
+                'id' => input('get.id'),
+            ];
             return $this->fetch();
         }
     }
     /**节点-列表
      */
     public function nodeList(){
-//        $this->assign('list',array(array('name'=>'zhangmin'),array('name'=>'zhanglingjuan')));
-        return $this->fetch();
         if(!request()->isGet()){
             return config('not_get');
         }
-        $modelNode = '';
-        $where = array(
-            'c.status' => 0,
-        );
-        $keyword = input('get.keyword','','string');
-        if($keyword){
-            $where['_complex'] = array(
-                'c.name' => array('like', '%' . trim($keyword) . '%'),
-            );
-        }
-        $field = array(
-        );
-        $join = array(
-        );
-        $order = 'c.id';
-        $group = "";
-        $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? input('get.pageSize',0,'int') : config('custom.default_page_size');
-        $List = page_query($modelNode,$where,$field,$order,$join,$group,$pageSize,$alias='c');
-
-        $this->List = $List['data'];
-        $this->pageList = $List['pageList'];
-        $this->fetch();
+        $modelNode = new \common\model\Node();
+        $list = $modelNode->pageQuery();
+        $this->assign('list',$list);
+        $page = $list->render();
+//        $this->assign('page',$page);
+        return $this->fetch('node_list');
     }
     /**节点-删除
      */
