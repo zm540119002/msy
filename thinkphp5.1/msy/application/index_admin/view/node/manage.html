@@ -1,4 +1,4 @@
-{extend name="template/base.html" /}
+{extend name="template/base_pc.html" /}
 {block name="css-customize"}
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
@@ -50,7 +50,7 @@
             $("#list").html($('#loading').html());
             var url = controller+'/nodeList';
             var postData = $('#form1').serializeObject();
-            postData.p = currentPage ? currentPage : 1;
+            postData.page = currentPage ? currentPage : 1;
             postData.pageSize = 5;
             $.get(url, postData , function(data){
                 $('#list').html(data);
@@ -59,10 +59,6 @@
         $(function () {
             //加载第一页
             getPage();
-            //翻页
-            $('body').on('click','.pager a',function(){
-                getPage($(this).data('page'));
-            });
             //搜索
             $('#searchNode').click(function(){
                 getPage();
@@ -70,15 +66,15 @@
             //编辑
             $('body').on('click','.edit',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  controller + '/edit/nodeId/' + _thisTr.data('id');
+                var url =  controller + 'edit/id/' + _thisTr.data('id');
                 location.href = url;
             });
             //删除
             $('body').on('click','.del',function(){
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
-                postData.nodeId = _thisTr.data('id');
-                var url =  controller + '/del';
+                postData.id = _thisTr.data('id');
+                var url =  controller + 'del';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function(){
                         _thisTr.remove();

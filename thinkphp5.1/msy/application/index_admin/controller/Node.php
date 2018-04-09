@@ -17,10 +17,15 @@ class Node extends \common\controller\Base {
         if(request()->isPost()){
             return $modelNode->edit();
         }else{
-            $where = [
-                'status' => 0,
-                'id' => input('get.id'),
-            ];
+            $id = input('id',0);
+            if($id){
+                $where = [
+                    'status' => 0,
+                    'id' => $id,
+                ];
+                $info = $modelNode->where($where)->find();
+                $this->assign('info',$info);
+            }
             return $this->fetch();
         }
     }
@@ -33,8 +38,6 @@ class Node extends \common\controller\Base {
         $modelNode = new \common\model\Node();
         $list = $modelNode->pageQuery();
         $this->assign('list',$list);
-        $page = $list->render();
-//        $this->assign('page',$page);
         return $this->fetch('node_list');
     }
     /**节点-删除

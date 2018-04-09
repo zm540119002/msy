@@ -21,7 +21,11 @@ class Node extends \think\Model {
 		if(!$validateNode->scene('edit')->check($postData)){
 			return errorMsg($validateNode->getError());
 		}
-		$this->save($postData);
+		if($postData['id'] && intval($postData['id'])){
+			$this->isUpdate(true)->save($postData);
+		}else{
+			$this->save($postData);
+		}
 		if(!$this->getAttr('id')){
 			return errorMsg('失败');
 		}
@@ -30,19 +34,18 @@ class Node extends \think\Model {
 	//分页查询
 	public function pageQuery(){
 		$where = [
-			'status' => 0,
+			['status', '=', 0],
 		];
-		$keyword = input('get.keyword','','string');
+		$keyword = input('get.keyword','');
 		if($keyword){
-			$where['_complex'] = array(
-				'name' => array('like', '%' . trim($keyword) . '%'),
-			);
+			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$field = array(
 			'id','name','path','remark',
 		);
 		$order = 'id';
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ? input('get.pageSize',0,'int') : config('custom.default_page_size');
+		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
 	}
 }
