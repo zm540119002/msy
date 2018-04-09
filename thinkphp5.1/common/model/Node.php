@@ -21,7 +21,11 @@ class Node extends \think\Model {
 		if(!$validateNode->scene('edit')->check($postData)){
 			return errorMsg($validateNode->getError());
 		}
-		$this->save($postData);
+		if($postData['id'] && intval($postData['id'])){
+			$this->isUpdate(true)->save($postData);
+		}else{
+			$this->save($postData);
+		}
 		if(!$this->getAttr('id')){
 			return errorMsg('失败');
 		}

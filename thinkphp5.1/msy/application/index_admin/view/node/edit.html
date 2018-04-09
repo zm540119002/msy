@@ -1,4 +1,4 @@
-{extend name="template/base.html" /}
+{extend name="template/base_pc.html" /}
 {block name="css-customize"}
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
@@ -20,20 +20,20 @@
                         <tr>
                             <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>名称：</td>
                             <td class=dotted_bottom_gray width="40%" align=left>
-                                <input style="width: 200px; " class="inputboxadmin" name="name" value="">
-                                <input type="hidden" name="id" value="">
+                                <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name|default=''}">
+                                <input type="hidden" name="id" value="{$info.id|default=0}">
                             </td>
                         </tr>
                         <tr>
                             <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>路径：</td>
                             <td class=dotted_bottom_gray width="89%" align=left>
-                                <input style="width: 200px; " class="inputboxadmin" name="path" value="">
+                                <input style="width: 200px;" class="inputboxadmin" name="path" value="{$info.path|default=''}">
                             </td>
                         </tr>
                         <tr>
                             <td class=dotted_bottom_gray height=40 width="11%" align=right>备注：</td>
                             <td class=dotted_bottom_gray width="100%" align=left>
-                                <textarea  class="textareaadmin textarea_text"  name="remark"></textarea>
+                                <textarea class="textareaadmin textarea_text" name="remark">{$info.remark|default=''}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -58,8 +58,6 @@
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
                 $.post(action,postData,function(msg){
-                    console.log(msg);
-                    return;
                     dialog.msg(msg,'',function () {
                         location.href = controller + '/edit';
                     });

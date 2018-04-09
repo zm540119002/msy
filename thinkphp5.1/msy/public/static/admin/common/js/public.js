@@ -1,7 +1,7 @@
 (function($){
-    // var deviceWidth=document.documentElement.clientWidth;
-    // var html =document.getElementsByTagName('html')[0];
-    // html.style.fontSize=deviceWidth/6.4+'px';
+    var deviceWidth=document.documentElement.clientWidth;
+    var html =document.getElementsByTagName('html')[0];
+    html.style.fontSize=deviceWidth/6.4+'px';
 
     $.fn.moreText = function(options){
         var defaults = {
@@ -153,9 +153,8 @@ var maximumWord =function(obj,max){
 
 //选项卡切换
 $.fn.tab = function(){
-    $(this).click(function(){
-        $(this).addClass("current").siblings().removeClass("current");
-    }) 
+    alert(1);
+    $(this).addClass("current").siblings().removeClass("current");
 };
 $('.top_menu_list a').on('click',function(){
     var index=$(this).index();
@@ -165,7 +164,6 @@ $('.top_menu_list a').on('click',function(){
 })
 //选项卡切换
 function tab_down(tab_k, tab_con, tab_dz) {
-    // alert(tab_k);
     var $div_li = $(tab_k);
     var timeout;
     if (tab_dz == "click") {
