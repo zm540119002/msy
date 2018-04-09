@@ -633,8 +633,21 @@ filter:alpha(opacity:0);
 .pagination li a,
 .pagination li span{
 	display: block;
-	background: #0d7eff;
-	color:#fff;
+	border:1px solid #0d7eff;
+	color:#333;
 	text-align:center;
 	font-size:14px;
+}
+.pagination li.active span{
+	background: #0d7eff;
+	border:1px solid #0d7eff;
+	color:#fff;
+}
+.pagination li.disabled span{
+	background: #ccc;
+	border:1px solid #ccc;
+}
+.pagination li a:hover{
+	background: #0d7eff;
+	color:#fff;
 }
