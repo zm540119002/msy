@@ -616,3 +616,38 @@ filter:alpha(opacity:0);
 .dotted_bottom_gray img{max-width:190px;margin-left:0;margin-top:15px;margin-bottom:10px;}
 .type_img_box .showimg{text-align: left;}
 .purchase_level_default{max-width:190px;margin:15px 0;}
+.pagination{
+	width:400px;
+	margin:0 auto;
+}
+.pagination li{
+	width:30px;
+	height:30px;
+	line-height: 30px;
+	margin:0 5px;
+	float:left;
+}
+.pagination li a{
+	cursor: pointer;
+}
+.pagination li a,
+.pagination li span{
+	display: block;
+	border:1px solid #0d7eff;
+	color:#333;
+	text-align:center;
+	font-size:14px;
+}
+.pagination li.active span{
+	background: #0d7eff;
+	border:1px solid #0d7eff;
+	color:#fff;
+}
+.pagination li.disabled span{
+	background: #ccc;
+	border:1px solid #ccc;
+}
+.pagination li a:hover{
+	background: #0d7eff;
+	color:#fff;
+}

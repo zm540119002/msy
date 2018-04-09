@@ -50,7 +50,7 @@
             $("#list").html($('#loading').html());
             var url = controller+'/nodeList';
             var postData = $('#form1').serializeObject();
-            postData.p = currentPage ? currentPage : 1;
+            postData.page = currentPage ? currentPage : 1;
             postData.pageSize = 5;
             $.get(url, postData , function(data){
                 $('#list').html(data);
@@ -59,10 +59,6 @@
         $(function () {
             //加载第一页
             getPage();
-            //翻页
-            $('body').on('click','.pager a',function(){
-                getPage($(this).data('page'));
-            });
             //搜索
             $('#searchNode').click(function(){
                 getPage();
