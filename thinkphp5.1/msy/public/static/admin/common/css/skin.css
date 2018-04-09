@@ -621,16 +621,18 @@ filter:alpha(opacity:0);
 	margin:0 auto;
 }
 .pagination li{
-	width:20px;
-	height:20px;
-	line-height: 20px;
+	width:30px;
+	height:30px;
+	line-height: 30px;
+	margin:0 5px;
 	float:left;
+}
+.pagination li a{
+	cursor: pointer;
 }
 .pagination li a,
 .pagination li span{
 	display: block;
-	width:20px;
-	margin:0 5px;
 	background: #0d7eff;
 	color:#fff;
 	text-align:center;
