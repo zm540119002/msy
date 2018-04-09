@@ -534,7 +534,7 @@ function intProvince() {
 }
 intProvince();
 var areaObject={
-	provinceCityD:[],
+	provinceCityD:'',
 	/*选择省份*/
 	selectP:function(p) {
 		areaCont = "";
@@ -584,14 +584,14 @@ var areaObject={
 		if(!areaObject.provinceCityD.length){
 			
 			for(var i=0;i<arguments.length;i++){
-				areaObject.provinceCityD.push(arguments[i]);
+				areaObject.provinceCityD+=arguments[i]+',';
 			}
 			$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
 			// return false;
 		}
 		areaObject.provinceCityD=[];
 		for(var i=0;i<arguments.length;i++){
-			areaObject.provinceCityD.push(arguments[i]);
+			areaObject.provinceCityD+=arguments[i]+',';
 		}
 		$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
 		return expressArea;
