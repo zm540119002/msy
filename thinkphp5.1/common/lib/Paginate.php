@@ -14,7 +14,7 @@ namespace common\lib;
 
 use think\Paginator;
 
-class ZmPaginate extends Paginator
+class Paginate extends Paginator
 {
 
     /**
