@@ -12,7 +12,7 @@ var dialog = {
     success : function(message,url) {
         layer.open({
             content : message?message:'成功',
-            time : 1,
+            time : 1000,
             skin: 'msg',
             end : function(){
                 if(url){
@@ -45,9 +45,9 @@ var dialog = {
     msg:function (message,option,callback) {
         var _option ={};
         if(message.status==0){
-            _option ={icon: 2,time: 3};
+            _option ={icon: 2,time: 3000};
         }else if(message.status==1){
-            _option ={icon: 1,time: 1};
+            _option ={icon: 1,time: 1000};
         }
         $.extend(_option,option);
         layer.msg(message.info,_option,callback);
