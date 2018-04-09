@@ -599,7 +599,11 @@ filter:alpha(opacity:0);
 	border-top:1px solid #ddd;
 	/*width:1426px;*/
 }
-.search_product_type .product_management_name{height:36px;line-height: 36px;}
+.search_product_type .product_management_name{
+	height:30px;
+	line-height:30px;
+	border:1px solid #d9d9d9;
+}
 .pager{margin:30px 0;text-align:center;}
 .pager a{padding:3px 8px;margin-left:3px;line-height:20px;background:#f9f9f9;border:1px solid #DBDBDB;text-decoration: none}
 .pager a:hover,
