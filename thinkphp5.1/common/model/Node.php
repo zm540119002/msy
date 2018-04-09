@@ -24,6 +24,7 @@ class Node extends \think\Model {
 		if($postData['id'] && intval($postData['id'])){
 			$this->isUpdate(true)->save($postData);
 		}else{
+			unset($postData['id']);
 			$this->save($postData);
 		}
 		if(!$this->getAttr('id')){
