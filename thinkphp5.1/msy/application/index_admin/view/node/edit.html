@@ -58,7 +58,6 @@
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
                 $.post(action,postData,function(msg){
-                    console.log(msg);
                     dialog.msg(msg,'',function () {
                         location.href = controller + '/edit';
                     });
