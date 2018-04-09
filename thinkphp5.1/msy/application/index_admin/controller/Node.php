@@ -46,8 +46,7 @@ class Node extends \common\controller\Base {
         if(!request()->isPost()){
             return config('not_post');
         }
-        $modelNode = '';
-        $res = $modelNode->del();
-        return $res;
+        $modelNode = new \common\model\Node();
+        return $modelNode->del();
     }
 }
