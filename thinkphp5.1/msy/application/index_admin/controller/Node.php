@@ -33,8 +33,6 @@ class Node extends \common\controller\Base {
         $modelNode = new \common\model\Node();
         $list = $modelNode->pageQuery();
         $this->assign('list',$list);
-        $page = $list->render();
-//        $this->assign('page',$page);
         return $this->fetch('node_list');
     }
     /**节点-删除
