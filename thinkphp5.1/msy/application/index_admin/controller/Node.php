@@ -5,10 +5,10 @@ class Node extends \common\controller\Base {
     /**节点-管理
      */
     public function manage(){
-        if(request()->isPost()){
-        }else{
-            return $this->fetch();
+        if(!request()->isGet()){
+            return config('not_get');
         }
+        return $this->fetch();
     }
     /**节点-编辑
      */

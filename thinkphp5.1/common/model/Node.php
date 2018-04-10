@@ -9,11 +9,6 @@ class Node extends \think\Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
-	//管理
-	public function manage(){
-		$data = input('post.');
-		return successMsg('成功！');
-	}
 	//编辑
 	public function edit(){
 		$postData = input('post.');
@@ -28,7 +23,7 @@ class Node extends \think\Model {
 			$this->save($postData);
 		}
 		if(!$this->getAttr('id')){
-			return errorMsg('失败');
+			return errorMsg('失败',$this->getError());
 		}
 		return successMsg('成功！',array('id'=>$this->getAttr('id')));
 	}
@@ -51,6 +46,18 @@ class Node extends \think\Model {
 	}
 	//删除
 	public function del(){
-
+		$where = [
+			['status', '=', 0],
+		];
+		$id = input('post.id',0);
+		if(!$id){
+			return errorMsg('参数错误');
+		}
+		$where[] = ['id', '=', $id];
+		$result = $this->where($where)->delete();
+		if(!$result){
+			return errorMsg('失败',$this->getError());
+		}
+		return successMsg('成功');
 	}
 }
