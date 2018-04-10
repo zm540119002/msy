@@ -1,10 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-use think\Controller;
-use think\Request ;
-
-class Index extends Controller
+class Index extends \common\controller\UserBase
 {
     //首页
     public function index()

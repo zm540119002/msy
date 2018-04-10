@@ -1,7 +1,8 @@
 <?php
 namespace app\index_admin\controller;
 
-class Node extends \common\controller\Base {
+class Node extends \common\controller\UserBase
+{
     /**节点-管理
      */
     public function manage(){

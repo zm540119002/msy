@@ -1,7 +1,8 @@
 <?php
 namespace app\index_admin\controller;
 
-class Role extends \common\controller\Base {
+class Role extends \common\controller\UserBase
+{
     /**角色-管理
      */
     public function manage(){

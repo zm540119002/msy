@@ -6,7 +6,7 @@ use think\Request ;
 use think\Db;
 use app\index_admin\model\Category as M;
 
-class Category extends Controller
+class Category extends \common\controller\UserBase
 {
     //获取一级菜单
     public function getFirstCategory()

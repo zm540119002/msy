@@ -17,7 +17,6 @@ class Base extends Controller{
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
     }
-
     //返回图片临时相对路径
     public function uploadImgToTemp(){
         $img = isset($_POST['img'])? $_POST['img'] : '';
@@ -78,7 +77,6 @@ class Base extends Controller{
 //        }
         return successMsg($tempRelativePath . $fileName);
     }
-
     //返回图片临时相对路,上传多张图片
     public function uploadMultiImgToTemp(){
         //$img = isset($_POST['imgs'])? $_POST['imgs'] : '';
@@ -135,7 +133,6 @@ class Base extends Controller{
                 if(false === $returnData){
                     return errorMsg('保存文件失败');
                 }
-
                 //压缩文件
 //        if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
 //            $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
@@ -148,11 +145,9 @@ class Base extends Controller{
             }else{
                 $imgsNew[] = $img;
             }
-
         }
        return successMsg($imgsNew);
     }
-
     /**检查是否登录
      */
     public function checkLogin(){
@@ -167,9 +162,3 @@ class Base extends Controller{
         return $user;
     }
 }
-
-
-
-
-
-
