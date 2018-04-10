@@ -1,10 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-use think\Controller;
-use think\Request ;
-
-class Goods extends Controller
+class Goods extends \common\controller\UserBase
 {
     public function goodsManage()
     {

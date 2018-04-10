@@ -1,9 +1,9 @@
 <?php
 namespace app\index_admin\controller;
 
-class Node extends \common\controller\UserBase
+class Role extends \common\controller\UserBase
 {
-    /**节点-管理
+    /**角色-管理
      */
     public function manage(){
         if(!request()->isGet()){
@@ -11,12 +11,12 @@ class Node extends \common\controller\UserBase
         }
         return $this->fetch();
     }
-    /**节点-编辑
+    /**角色-编辑
      */
     public function edit(){
-        $modelNode = new \common\model\Node();
+        $modelRole = new \common\model\Role();
         if(request()->isPost()){
-            return $modelNode->edit();
+            return $modelRole->edit();
         }else{
             $id = input('id',0);
             if($id){
@@ -24,30 +24,30 @@ class Node extends \common\controller\UserBase
                     'status' => 0,
                     'id' => $id,
                 ];
-                $info = $modelNode->where($where)->find();
+                $info = $modelRole->where($where)->find();
                 $this->assign('info',$info);
             }
             return $this->fetch();
         }
     }
-    /**节点-列表
+    /**角色-列表
      */
-    public function nodeList(){
+    public function roleList(){
         if(!request()->isGet()){
             return config('not_get');
         }
-        $modelNode = new \common\model\Node();
-        $list = $modelNode->pageQuery();
+        $modelRole = new \common\model\Role();
+        $list = $modelRole->pageQuery();
         $this->assign('list',$list);
-        return $this->fetch('node_list');
+        return $this->fetch('role_list');
     }
-    /**节点-删除
+    /**角色-删除
      */
     public function del(){
         if(!request()->isPost()){
             return config('not_post');
         }
-        $modelNode = new \common\model\Node();
-        return $modelNode->del();
+        $modelRole = new \common\model\Role();
+        return $modelRole->del();
     }
 }

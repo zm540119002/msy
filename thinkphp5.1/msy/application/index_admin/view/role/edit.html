@@ -8,8 +8,8 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('Node/manage')}" ><span>管理</span></a></li>
-                    <li><a href="{:url('Node/edit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:url('Role/manage')}" ><span>管理</span></a></li>
+                    <li><a href="{:url('Role/edit')}" class="current"><span>编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -22,12 +22,6 @@
                             <td class=dotted_bottom_gray width="88%" align=left>
                                 <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name|default=''}">
                                 <input type="hidden" name="id" value="{$info.id|default=0}">
-                            </td>
-                        </tr>
-                        <tr class="tr-margin-item">
-                            <td class=dotted_bottom_gray height=40 width="12%" align="right"><font color="#FF0000">*</font>路径：</td>
-                            <td class=dotted_bottom_gray width="88%" align=left>
-                                <input style="width: 200px;" class="inputboxadmin" name="path" value="{$info.path|default=''}">
                             </td>
                         </tr>
                         <tr class="tr-margin-item">

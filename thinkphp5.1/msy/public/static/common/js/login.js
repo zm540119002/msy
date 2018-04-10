@@ -192,6 +192,7 @@ $(function(){
         var postData = $('#formLogin').serializeObject();
         postData.returnUrl = '';
         $.post(url,postData,function (data) {
+            // console.log(data);return;
             if(data.status==0){
                 dialog.error(data.info);
                 return false;

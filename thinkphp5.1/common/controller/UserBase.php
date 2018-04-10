@@ -14,7 +14,7 @@ class UserBase extends Base{
         if (!$this->user) {
             if (request()->isAjax()) {
                 header('HTTP/1.1 200');
-                $this->ajaxReturn(successMsg('isAjax'));
+                return successMsg('isAjax');
             }else{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
