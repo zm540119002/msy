@@ -11,7 +11,7 @@ class Node extends \think\Validate
         ],
         'path'  => [
             'require',
-            'alphaNum',
+            'regex' => '/^[A-Za-z0-9]\/]+$/',
             'max'=> 256,
         ],
         'remark'  => [
@@ -23,7 +23,7 @@ class Node extends \think\Validate
         'name.require' => '名称必须！',
         'name.max' => '名称最多不能超过64个字符！',
         'path.require' => '路径必须！',
-        'path.alphaNum' => '路径只能是字母或数字！',
+        'path.regex' => '路径只能是字母或数字！',
         'path.max' => '路径最多不能超过256个字符！',
         'remark.max' => '备注最多不能超过512个字符！',
     ];

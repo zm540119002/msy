@@ -5,10 +5,10 @@ class Node extends \common\controller\Base {
     /**节点-管理
      */
     public function manage(){
-        if(request()->isPost()){
-        }else{
-            return $this->fetch();
+        if(!request()->isGet()){
+            return config('not_get');
         }
+        return $this->fetch();
     }
     /**节点-编辑
      */
@@ -17,10 +17,15 @@ class Node extends \common\controller\Base {
         if(request()->isPost()){
             return $modelNode->edit();
         }else{
-            $where = [
-                'status' => 0,
-                'id' => input('get.id'),
-            ];
+            $id = input('id',0);
+            if($id){
+                $where = [
+                    'status' => 0,
+                    'id' => $id,
+                ];
+                $info = $modelNode->where($where)->find();
+                $this->assign('info',$info);
+            }
             return $this->fetch();
         }
     }
@@ -41,8 +46,7 @@ class Node extends \common\controller\Base {
         if(!request()->isPost()){
             return config('not_post');
         }
-        $modelNode = '';
-        $res = $modelNode->del();
-        return $res;
+        $modelNode = new \common\model\Node();
+        return $modelNode->del();
     }
 }
