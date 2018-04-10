@@ -85,7 +85,7 @@
 					<div class="picture-module company-picture-module">
 						<input type="file" class="uploadImg uploadSingleImg" name="">
 						<img class="upload_img" src="" alt="">
-						<input type="hidden" class="business-license img" value="" name="companyImage"/>
+						<input type="hidden" class="business-license img" value="" name="company_img"/>
 					</div>
 					<!--<p>企业营业执照</p>-->
 				</div>
@@ -98,26 +98,26 @@
 					</div>
 				</li>
 				<li>
-					<input type="text" value="" placeholder="填写店铺名称" class=" input-text" name="storeName" >
+					<input type="text" value="" placeholder="填写店铺名称" class=" input-text" name="shop_name" >
 				</li>
 				<li>
 					<div class="express-area area-box">
 						<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 							<label class="form-label">所在地区：</label>
 							<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-							<input type="hidden" value="" class="area-address-name" data-key="" name="areaName">
+							<input type="hidden" value="" class="area-address-name" data-key="" name="provinces">
 						</a>
 					</div>
 				</li>
 				<li>
-					<input type="text" class="detail-address" value="" placeholder="填写详细地址" name="detailAddress" >
+					<input type="text" class="detail-address" value="" placeholder="填写详细地址" name="detail_address" >
 				</li>
 				<li>
 					<div class="logo-license">
 						<div class="half">
 							<a class="logo" id="logox">
 								<img id="" src='' />
-								<input type="hidden" class="logo-src" name="logoSrc">
+								<input type="hidden" class="logo-src" name="logo_img">
 							</a>
 							<p class="f24">企业标志</p>
 						</div>
@@ -130,23 +130,23 @@
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑企业简介</a>
-					<input type="hidden" class="company-introduce" value="" name="companyIntroduce"/>
+					<input type="hidden" class="company-introduce" value="" name="introduction"/>
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业视频</a>
-					<input type="hidden" class="company-video" value="" name="companyVideo" data-src="">
+					<input type="hidden" class="company-video" value="" name="factory_video" data-src="">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传研发生产照片</a>
-					<input type="hidden" class="development-picture" data-src="" value="" name="developmentPicture">
+					<input type="hidden" class="development-picture" data-src="" value="" name="rb_img">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质</a>
-					<input type="hidden" class="license-picture" data-src="" value="" name="LicensePicture">
+					<input type="hidden" class="license-picture" data-src="" value="" name="license">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉</a>
-					<input type="hidden" class="honor-picture" data-src="" value="" name="honorPicture">
+					<input type="hidden" class="honor-picture" data-src="" value="" name="glory_img">
 				</li>
 			</ul>
 		</form>
@@ -229,31 +229,32 @@
 		$('body').on('click','.identifyNewGoods',function(){
 			var postData={};
 			postData=$('.qualificationContent').serializeObject();
-			postData.developmentPicture=$('.development-picture').data('src');
-			postData.LicensePicture=$('.license-picture').data('src');
-			postData.areaName=$('.area-address-name').data('key');
-			postData.honorPicture=$('.honor-picture').data('src');
-			postData.companyVideo=$('.company-video').data('src');
+			postData.rb_img=$('.development-picture').data('src');
+			postData.license=$('.license-picture').data('src');
+			postData.provinces=$('.area-address-name').data('key');
+			postData.glory_img=$('.honor-picture').data('src');
+			postData.factory_video=$('.company-video').data('src');
+			console.log(postData);return;
 			var content='';
-			if(!postData.companyImage){
+			if(!postData.company_img){
 				content='请上传企业形象图片';
-			}else if(!postData.storeName){
+			}else if(!postData.shop_name){
 				content='请填写店铺名称';
-			}else if(!postData.areaName){
+			}else if(!postData.provinces){
 				content='请选择所在的省市区';
-			}else if(!postData.detailAddress){
+			}else if(!postData.detail_address){
 				content='请填写详细地址';
-			}else if(!postData.logoSrc){
+			}else if(!postData.logo_img){
 				content='请上传企业标志图';
-			}else if(!postData.companyIntroduce){
+			}else if(!postData.introduction){
 				content='请填写企业简介';
-			}else if(!postData.companyVideo||postData.companyVideo==0){
+			}else if(!postData.factory_video||postData.factory_video==0){
 				content='请上传企业视频';
-			}else if(!postData.developmentPicture||postData.developmentPicture==0){
+			}else if(!postData.rb_img||postData.rb_img==0){
 				content='请上传企业研发生产图片';
-			}else if(!postData.LicensePicture||postData.LicensePicture==0){
+			}else if(!postData.license||postData.license==0){
 				content='请上传执照资质图片';
-			}else if(!postData.honorPicture||postData.honorPicture==0){
+			}else if(!postData.glory_img||postData.glory_img==0){
 				content='请上传专利荣誉图片';
 			}
 			if(content){
