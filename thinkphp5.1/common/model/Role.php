@@ -1,9 +1,9 @@
 <?php
 namespace common\model;
 
-class Node extends \think\Model {
+class Role extends \think\Model {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'node';
+	protected $table = 'role';
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
@@ -12,9 +12,9 @@ class Node extends \think\Model {
 	//编辑
 	public function edit(){
 		$postData = input('post.');
-		$validateNode = new \common\validate\Node();
-		if(!$validateNode->scene('edit')->check($postData)){
-			return errorMsg($validateNode->getError());
+		$validateRole = new \common\validate\Role();
+		if(!$validateRole->scene('edit')->check($postData)){
+			return errorMsg($validateRole->getError());
 		}
 		if($postData['id'] && intval($postData['id'])){
 			$this->isUpdate(true)->save($postData);
@@ -37,7 +37,7 @@ class Node extends \think\Model {
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$field = array(
-			'id','name','path','status','type','remark',
+			'id','name','status','type','remark',
 		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
