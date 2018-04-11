@@ -405,7 +405,7 @@ function uploadsImgDescribe(content,obj){
                 }
                 var postDate = {};
                 postDate.imgsWithDes = layermultiImgAttr;
-
+                console.log(JSON.stringify(layermultiImgAttr));
                 $.post(controller + 'uploadMultiImgToTempWithDes',postDate,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
