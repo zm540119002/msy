@@ -15,8 +15,9 @@ class Factory extends Model {
 	/**
 	 * 新增
 	 */
-	public function add(){
+	public function add($uid=''){
 		$data = input('post.');
+		$data['user_id'] = $uid;
 		$validate = validate('Factory');
 		if(!$result = $validate->scene('add')->check($data)) {
 			return errorMsg($validate->getError());
@@ -28,7 +29,6 @@ class Factory extends Model {
 		if(false !== $result){
 			return successMsg("已提交申请");
 		}else{
-			
 			return errorMsg($this->getError());
 		}
 	}
@@ -36,8 +36,14 @@ class Factory extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit(){
+	public function edit($uid=''){
 		$data = input('post.');
+		$data['user_id'] = $uid;
+		$where['id'] = $data['factory_id'];
+		$file = array(
+			'business_license','auth_letter',
+		);
+		$oldFactoryInfo = $this -> getFactory($where,$file);
 		$validate = validate('Factory');
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
@@ -47,11 +53,15 @@ class Factory extends Model {
 		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data,['id' => $data['factory_id']]);
 		if(false !== $result){
-			return successMsg("已提交申请");
+			$newFactoryInfo = $this -> getFactory($where,$file);
+			delImgFromPaths($oldFactoryInfo['business_license'],$newFactoryInfo['business_license']);
+			delImgFromPaths($oldFactoryInfo['auth_letter'],$newFactoryInfo['auth_letter']);
+			return successMsg("已修改");
 		}else{
 			return errorMsg($this->getError());
 		}
 	}
+
 
 	/**
 	 * @param array $where
