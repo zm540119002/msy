@@ -472,28 +472,28 @@ function uploadsVideoDescribe(content,obj){
                
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
-                // if(layermultiImgAttr.length==0){
-                //     layer.close(index);
-                //     return false;
-                // }
-                // var postDate = {};
-                // postDate.imgs = layermultiImgAttr;
-                // $.post('uploadMultiImgToTemp',postDate,function(info){
-                //    if(info.status == 0){
-                //        dialog.error(info.msg);
-                //        return false;
-                //    }
-                //     var imgArray = [];
-                //     $.each(info.info,function(index,img){
-                //         if(img.indexOf("uploads") == -1 && img !=''){
-                //             img = uploads+img;
-                //         }
-                //         imgArray.push(img);
-                //     });
+                if(layermultiImgAttr.length==0){
+                    layer.close(index);
+                    return false;
+                }
+                var postDate = {};
+                postDate.imgsWithDes = layermultiImgAttr;
+                $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
+                   if(info.status == 0){
+                       dialog.error(info.msg);
+                       return false;
+                   }
+                    var imgArray = [];
+                    $.each(info.info,function(index,img){
+                        if(img.indexOf("uploads") == -1 && img !=''){
+                            img = uploads+img;
+                        }
+                        imgArray.push(img);
+                    });
 
-                //     $('.goods-detail').data('src',imgArray);
-                //     layer.close(index);
-                // })
+                    $('.goods-detail').data('src',imgArray);
+                    layer.close(index);
+                })
                 layer.close(index);
             },
             no:function(){

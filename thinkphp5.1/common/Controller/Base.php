@@ -1,6 +1,7 @@
 <?php
 namespace common\controller;
 
+use Org\Util\Rbac;
 use think\Controller;
 use think\Image;
 
@@ -155,9 +156,9 @@ class Base extends Controller{
         $imgsNew = [];
         foreach ($imgs as $k=>$img){
             //判断是否为base64编码图片
-            if(strpos($img[0],'data:image') !==false || strpos($img[0],'data:video') !== false){
+            if(strpos($img['imgSrc'],'data:image') !==false || strpos($img['imgSrc'],'data:video') !== false){
                 // 获取图片
-                list($type, $data) = explode(',', $img[0]);
+                list($type, $data) = explode(',', $img['imgSrc']);
                 // 判断文件类型
                 $ext = '';
                 if(strstr($type,'image/jpeg')!=''){
@@ -212,12 +213,13 @@ class Base extends Controller{
 //            $image->open($photo);
 //            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
 //        }
-                $imgsNew[] = $tempRelativePath . $fileName;
+                $imgsNew[$k]['imgSrc'] = $tempRelativePath . $fileName;
+                $imgsNew[$k]['imgText'] = $img['imgText'];
             }else{
-                $imgsNew[] = $img;
+                $imgsNew[$k] = $img;
             }
         }
-        return successMsg($imgsNew);
+        return successMsg(json_encode($imgsNew));
     }
     /**检查是否登录
      */
