@@ -411,14 +411,22 @@ function uploadsImgDescribe(content,obj){
                        return false;
                    }
                     var imgArray = [];
-                    $.each(info.info,function(index,img){
-                        if(img.indexOf("uploads") == -1 && img !=''){
-                            img = uploads+img;
-                        }
-                        imgArray.push(img);
-                    });
-                    console.log(imgArray) ;return;
-                    $('.goods-detail').data('src', JSON.stringify(imgArray));
+                    // $.each(info.info,function(index,img){
+                    //     if(img.indexOf("uploads") == -1 && img !=''){
+                    //         img = uploads+img;
+                    //     }
+                    //     imgArray.push(img);
+                    // });
+                    var a=JSON.parse(info);
+                    for(var i=0;i<a.length;i++){
+                         if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
+                            a[i].imgSrc= uploads+a[i].imgSrc;
+                            a[i].imgText= a[i].imgText;
+                         }
+                         imgArray.push(a[i]);
+                    }
+                    console.log(imgArray) ;
+                    $('.goods-detail').data('src', imgArray);
                     layer.close(index);
                 })
                 layer.close(index);

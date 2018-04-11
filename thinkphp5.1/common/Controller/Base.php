@@ -219,7 +219,7 @@ class Base extends Controller{
                 $imgsNew[$k] = $img;
             }
         }
-        return successMsg(json_encode($imgsNew));
+        return json_encode($imgsNew);
     }
     /**检查是否登录
      */
