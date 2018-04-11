@@ -405,7 +405,6 @@ function uploadsImgDescribe(content,obj){
                 }
                 var postDate = {};
                 postDate.imgsWithDes = layermultiImgAttr;
-                console.log(JSON.stringify(layermultiImgAttr));
                 $.post(controller + 'uploadMultiImgToTempWithDes',postDate,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
@@ -418,8 +417,8 @@ function uploadsImgDescribe(content,obj){
                         }
                         imgArray.push(img);
                     });
-
-                    $('.goods-detail').data('src',imgArray);
+                    console.log(imgArray) ;return;
+                    $('.goods-detail').data('src', JSON.stringify(imgArray));
                     layer.close(index);
                 })
                 layer.close(index);
