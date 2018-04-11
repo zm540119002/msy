@@ -468,7 +468,7 @@ function uploadsVideoDescribe(content,obj){
                         imgText:imgText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
-                })
+                });
                
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
@@ -476,6 +476,7 @@ function uploadsVideoDescribe(content,obj){
                     layer.close(index);
                     return false;
                 }
+                
                 var postDate = {};
                 postDate.imgsWithDes = layermultiImgAttr;
                 $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
