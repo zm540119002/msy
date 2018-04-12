@@ -30,6 +30,25 @@ class Role extends \common\controller\UserBase
             return $this->fetch();
         }
     }
+    /**角色-赋权
+     */
+    public function empower(){
+        $modelRole = new \common\model\Role();
+        if(request()->isPost()){
+            return $modelRole->edit();
+        }else{
+            $id = input('id',0);
+            if($id){
+                $where = [
+                    'status' => 0,
+                    'id' => $id,
+                ];
+                $info = $modelRole->where($where)->find();
+                $this->assign('info',$info);
+            }
+            return $this->fetch();
+        }
+    }
     /**角色-列表
      */
     public function roleList(){

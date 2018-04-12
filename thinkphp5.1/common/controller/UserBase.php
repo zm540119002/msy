@@ -10,7 +10,7 @@ class UserBase extends Base{
     public function __construct(){
         parent::__construct();
         //判断是否登录
-        $this->user = $this->checkLogin();
+        $this->user = checkLogin();
         if (!$this->user) {
             if (request()->isAjax()) {
                 header('HTTP/1.1 200');

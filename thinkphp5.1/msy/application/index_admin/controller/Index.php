@@ -6,7 +6,7 @@ class Index extends \common\controller\UserBase
     //首页
     public function index()
     {
-        $menu = config('menu.menu');
+        $menu = getMenu();
         $this->assign('menu',$menu);
         return $this->fetch();
     }
