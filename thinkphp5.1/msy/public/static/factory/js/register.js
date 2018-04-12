@@ -30,6 +30,7 @@ $(function(){
         agentName=trim($('.agentName').val(),'g');
         businessLicense=$('.business-license').val();
         agentAuthorization=$('.agent-authorization').val();
+        factory_id = $('.factory_id').val();
         var content='';
         if(!factoryFullName){
             content='请填写厂商全称';
@@ -41,6 +42,7 @@ $(function(){
             content='请上传代办人企业授权信照片';
         }
         postData={
+            factory_id : factory_id,
             name:factoryFullName,
             agent:agentName,
             business_license:businessLicense,
@@ -50,7 +52,7 @@ $(function(){
             dialog.error(content);
             return false;
         }
-        $.post("enters",postData,function(msg){
+        $.post(controller + 'register',postData,function(msg){
             if(msg.status == 0){
                 dialog.error(msg.info);
             }
@@ -61,6 +63,7 @@ $(function(){
                 $('.apply-module:eq(2)').show();
                 $('.weui-flex-item:eq(0)').addClass('disabled');
                 $('.weui-flex-item:eq(1)').addClass('disabled');
+                dialog.success(msg.info);
             }
         });
     });

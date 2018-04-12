@@ -377,7 +377,6 @@ function uploadsImgDescribe(content,obj){
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
-                console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
                     $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
@@ -400,28 +399,36 @@ function uploadsImgDescribe(content,obj){
                
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
-                // if(layermultiImgAttr.length==0){
-                //     layer.close(index);
-                //     return false;
-                // }
-                // var postDate = {};
-                // postDate.imgs = layermultiImgAttr;
-                // $.post('uploadMultiImgToTemp',postDate,function(info){
-                //    if(info.status == 0){
-                //        dialog.error(info.msg);
-                //        return false;
-                //    }
-                //     var imgArray = [];
-                //     $.each(info.info,function(index,img){
-                //         if(img.indexOf("uploads") == -1 && img !=''){
-                //             img = uploads+img;
-                //         }
-                //         imgArray.push(img);
-                //     });
-
-                //     $('.goods-detail').data('src',imgArray);
-                //     layer.close(index);
-                // })
+                if(layermultiImgAttr.length==0){
+                    layer.close(index);
+                    return false;
+                }
+                var postDate = {};
+                postDate.imgsWithDes = layermultiImgAttr;
+                $.post(controller + 'uploadMultiImgToTempWithDes',postDate,function(info){
+                   if(info.status == 0){
+                       dialog.error(info.msg);
+                       return false;
+                   }
+                    var imgArray = [];
+                    // $.each(info.info,function(index,img){
+                    //     if(img.indexOf("uploads") == -1 && img !=''){
+                    //         img = uploads+img;
+                    //     }
+                    //     imgArray.push(img);
+                    // });
+                    var a=JSON.parse(info);
+                    for(var i=0;i<a.length;i++){
+                         if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
+                            a[i].imgSrc= uploads+a[i].imgSrc;
+                            a[i].imgText= a[i].imgText;
+                         }
+                         imgArray.push(a[i]);
+                    }
+                    console.log(imgArray) ;
+                    $('.goods-detail').data('src', imgArray);
+                    layer.close(index);
+                })
                 layer.close(index);
             },
             no:function(){
@@ -468,32 +475,33 @@ function uploadsVideoDescribe(content,obj){
                         imgText:imgText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
-                })
+                });
                
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
-                // if(layermultiImgAttr.length==0){
-                //     layer.close(index);
-                //     return false;
-                // }
-                // var postDate = {};
-                // postDate.imgs = layermultiImgAttr;
-                // $.post('uploadMultiImgToTemp',postDate,function(info){
-                //    if(info.status == 0){
-                //        dialog.error(info.msg);
-                //        return false;
-                //    }
-                //     var imgArray = [];
-                //     $.each(info.info,function(index,img){
-                //         if(img.indexOf("uploads") == -1 && img !=''){
-                //             img = uploads+img;
-                //         }
-                //         imgArray.push(img);
-                //     });
+                if(layermultiImgAttr.length==0){
+                    layer.close(index);
+                    return false;
+                }
+                
+                var postDate = {};
+                postDate.imgsWithDes = layermultiImgAttr;
+                $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
+                   if(info.status == 0){
+                       dialog.error(info.msg);
+                       return false;
+                   }
+                    var imgArray = [];
+                    $.each(info.info,function(index,img){
+                        if(img.indexOf("uploads") == -1 && img !=''){
+                            img = uploads+img;
+                        }
+                        imgArray.push(img);
+                    });
 
-                //     $('.goods-detail').data('src',imgArray);
-                //     layer.close(index);
-                // })
+                    $('.goods-detail').data('src',imgArray);
+                    layer.close(index);
+                })
                 layer.close(index);
             },
             no:function(){
