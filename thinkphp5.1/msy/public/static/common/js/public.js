@@ -153,7 +153,6 @@ var maximumWord =function(obj,max){
 
 //选项卡切换
 $.fn.tab = function(){
-    alert(1);
     $(this).addClass("current").siblings().removeClass("current");
 };
 $('.top_menu_list a').on('click',function(){
