@@ -221,17 +221,4 @@ class Base extends Controller{
         }
         return json_encode($imgsNew);
     }
-    /**检查是否登录
-     */
-    public function checkLogin(){
-        $user = session('user');
-        $user_sign = session('user_sign');
-        if (!$user || !$user_sign) {
-            return false;
-        }
-        if ($user_sign != data_auth_sign($user)) {
-            return false;
-        }
-        return $user;
-    }
 }

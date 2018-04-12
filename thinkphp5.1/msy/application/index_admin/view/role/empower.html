@@ -1,0 +1,53 @@
+{extend name="template/base_pc.html" /}
+{block name="css-customize"}
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+{/block}
+{block name="content"}
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('Role/manage')}" ><span>管理</span></a></li>
+                    <li><a href="{:url('Role/edit')}"><span>编辑</span></a></li>
+                    <li><a href="{:url('Role/empower')}" class="current"><span>赋权</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:15px;">
+            <form id="form1">
+                <table id=table18 class="add_new_merchandise" width="100%">
+                    <tbody>
+                        <tr class="tr-margin-item">
+                            <td class="w10">
+                                <input type="checkbox" class="checkitem" >
+                                <span class="folding" status="open"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+    <script type="text/javascript">
+        $(function(){
+            //页面初始化
+            //确定
+            $('.button_save_black_4').on('click',function(){
+                var postData = $('#form1').serializeObject();
+                $.post(action,postData,function(msg){
+                    dialog.msg(msg,'',function () {
+                        location.href = controller + '/edit';
+                    });
+                },'JSON');
+            });
+            //返回
+            $('.button_save_black').click(function(){
+                location.href = controller + '/manage';
+            });
+        });
+    </script>
+{/block}
