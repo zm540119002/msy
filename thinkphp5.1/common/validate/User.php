@@ -1,9 +1,7 @@
 <?php
 namespace common\validate;
 
-use think\Validate;
-
-class User extends Validate
+class User extends \think\Validate
 {
     //验证规则
     protected $rule = [

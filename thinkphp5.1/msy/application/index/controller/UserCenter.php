@@ -1,9 +1,7 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
-
-class UserCenter extends Controller{
+class UserCenter extends \think\Controller{
     /**登录
      * @return array|mixed
      */

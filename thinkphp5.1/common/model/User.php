@@ -1,9 +1,7 @@
 <?php
 namespace common\model;
 
-use think\Model;
-
-class User extends Model {
+class User extends \think\Model {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
 	// 设置主键
