@@ -24,8 +24,6 @@ class Record extends Model {
 //		if(!$result = $validate->scene('add')->check($data)) {
 //			return errorMsg($validate->getError());
 //		}
-
-
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
@@ -38,18 +36,16 @@ class Record extends Model {
 		if(!empty($data['factory_video'])){
 			$data['factory_video'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
 		}
-		if(!empty($data['licence'])){
-			$data['licence'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['licence']);
+		if(!empty($data['license'])){
+			$data['license'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['license']);
 		}
-		if(!empty($data['glory'])){
-			$data['glory'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['glory']);
+		if(!empty($data['glory_img'])){
+			$data['glory_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['glory_img']);
 		}
-
-//		$data['rb_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
-			return successMsg("已提交申请");
+			return successMsg("已成功添加");
 		}else{
 			return errorMsg($this->getError());
 		}
@@ -60,11 +56,11 @@ class Record extends Model {
 	 */
 	public function edit(){
 		$data = input('post.');
-		$where['id'] = $data['factory_id'];
+		$where['id'] = $data['record_id'];
 		$file = array(
-			'business_license','auth_letter',
+			'logo_img','company_img','rb_img','factory_video','license','glory_img'
 		);
-		$oldFactoryInfo = $this -> getFactory($where,$file);
+		$oldFactoryInfo = $this -> getRecord($where,$file);
 		$validate = validate('Factory');
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());

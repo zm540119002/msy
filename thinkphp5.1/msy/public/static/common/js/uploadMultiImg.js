@@ -426,7 +426,7 @@ function uploadsImgDescribe(content,obj){
                          imgArray.push(a[i]);
                     }
 
-                    $('.goods-detail').data('src', imgArray);
+                    obj.data('src', imgArray);
                     layer.close(index);
                 })
                 layer.close(index);
