@@ -206,7 +206,7 @@ function checkShow(ele){
     })
 }
 
-//全选
+//一级-全选
 $('body').on('click','.checkall',function () {
     var _thisChecked = $(this).prop("checked");
     $.each($('.checkitem'),function () {
@@ -214,7 +214,7 @@ $('body').on('click','.checkall',function () {
     });
 });
 
-//反选
+//一级-反选
 $('body').on('click','.checkitem',function () {
     var sign = true;
     //一票否决

@@ -1,26 +1,26 @@
 <tr class="hover edit" level="1">
     <td class="w10" width="25%">
-        <input type="checkbox" class="checkitem" >
+        <input type="checkbox" class="check_item_2" >
         <span class="folding" status="open"></span>
         <span>第一级</span>
     </td>
 </tr>
 <tr class="hover" level="2">
     <td class="w10" width="25%">
-        <input type="checkbox" class="checkitem" >
+        <input type="checkbox" class="check_item_2" >
         <span class="folding"></span>
         <span>第二级</span>
     </td>
 </tr>
 <tr class="hover" level="2">
     <td class="w10" width="25%">
-        <input type="checkbox" class="checkitem" />
+        <input type="checkbox" class="check_item_2" />
         <span>第二级</span>
     </td>
 </tr>
 <tr class="hover" level="2">
     <td class="w10" width="25%">
-        <input type="checkbox" class="checkitem" />
+        <input type="checkbox" class="check_item_2" />
         <span>第二级</span>
     </td>
 </tr>
@@ -49,32 +49,32 @@
                 }
             }
         });
-        $('body').on('click','.checkitem',function () {
+        $('body').on('click','.check_item_2',function () {
             var _thisTr=$(this).parents('tr');
             var _thisChecked = $(this).prop("checked");
             if(_thisTr.data('level') == 1){
-                _thisTr.siblings('tr[level="2"]').find('.checkitem').prop('checked',_thisChecked);
-                _thisTr.siblings('tr[level="3"]').find('.checkitem').prop('checked',_thisChecked);
+                _thisTr.siblings('tr[level="2"]').find('.check_item_2').prop('checked',_thisChecked);
+                _thisTr.siblings('tr[level="3"]').find('.check_item_2').prop('checked',_thisChecked);
             }else if(_thisTr.data('level') == 2){
-                _thisTr.siblings('tr[level="1"]').find('.checkitem').prop('checked',_thisChecked);
-                _thisTr.siblings('tr[level="3"]').find('.checkitem').prop('checked',_thisChecked);
+                _thisTr.siblings('tr[level="1"]').find('.check_item_2').prop('checked',_thisChecked);
+                _thisTr.siblings('tr[level="3"]').find('.check_item_2').prop('checked',_thisChecked);
             }else if(_thisTr.data('level') == 3){
-                _thisTr.siblings('tr[level="1"]').find('.checkitem').prop('checked',_thisChecked);
-                _thisTr.siblings('tr[level="2"]').find('.checkitem').prop('checked',_thisChecked);
+                _thisTr.siblings('tr[level="1"]').find('.check_item_2').prop('checked',_thisChecked);
+                _thisTr.siblings('tr[level="2"]').find('.check_item_2').prop('checked',_thisChecked);
             }
         });
         //批量全选
-        $('body').on('click','.checkall',function () {
+        $('body').on('click','.check_all_2',function () {
             var _thisChecked = $(this).prop("checked");
-            $.each($('.checkitem'),function () {
+            $.each($('.check_item_2'),function () {
                 $(this).prop('checked',_thisChecked);
             });
         });
         //批量反选
-        $('body').on('click','.checkitem',function () {
+        $('body').on('click','.check_item_2',function () {
             var sign = true;
             //一票否决
-            $.each($('.checkitem'),function () {
+            $.each($('.check_item_2'),function () {
                 if(!$(this).prop('checked')){
                     sign = false;
                 }
