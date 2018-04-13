@@ -48,6 +48,6 @@ class User extends \common\controller\UserBase
             return config('not_post');
         }
         $modelUser = new \common\model\User();
-        return $modelUser->del();
+        return $modelUser->tagDel();
     }
 }
