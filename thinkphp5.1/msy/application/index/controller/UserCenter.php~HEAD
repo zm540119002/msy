@@ -3,11 +3,7 @@ namespace app\index\controller;
 
 use think\Controller;
 
-class User extends Controller{
-    public function __construct(){
-        parent::__construct();
-    }
-
+class UserCenter extends Controller{
     /**登录
      * @return array|mixed
      */
