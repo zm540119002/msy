@@ -4,9 +4,10 @@
         <thead>
         <tr class="thead">
             <th></th>
-            <th width="20%">名称</th>
-            <th width="60%">备注</th>
-            <th width="20%">操作</th>
+            <th width="20%">姓名</th>
+            <th width="20%">昵称</th>
+            <th width="20%">手机号码</th>
+            <th width="40%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -14,7 +15,8 @@
         <tr class="hover" data-id="{$vo.id}">
             <td class="w48"><input type="checkbox" class="checkitem">
             <td class="w50pre"><span title="" class="editable ">{$vo.name}</span></td>
-            <td class="w5">{$vo.remark}</td>
+            <td class="w5">{$vo.nickname}</td>
+            <td class="w5">{$vo.mobile_phone}</td>
             <td class="w96">
                 <a href="javascript:void(0);" class="edit">编辑</a>
                 | <a href="javascript:void(0);" class="del">删除</a>
