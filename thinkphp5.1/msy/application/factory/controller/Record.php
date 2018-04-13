@@ -6,12 +6,20 @@ class Record extends FactoryBase
 {
     //产商档案编辑
     public function edit(){
+        $model = new \app\factory\model\Record();
         $factoryInfo = $this->factory;
         if(request()->isAjax()){
-            $model = new \app\factory\model\Record();
             return $model -> add($factoryInfo['id']);
         }else{
-            $this ->assign('factoryInfo',$factoryInfo);
+            if(input('?record_id')){
+                $recordId = input('record_id');
+                $where = array(
+                    'id' => $recordId,
+                    'factory_id' => $factoryInfo['id'],
+                );
+                $recordInfo =  $model -> getRecord($where);
+                $this -> assign('recordInfo',$recordInfo);
+            }
             return $this->fetch();
         }
     }
