@@ -5,6 +5,11 @@ use common\controller\UserBase;
 
 class Deploy extends UserBase
 {
+    //部署首页
+    public function index(){
+        return $this->fetch();
+    }
+
     /**入驻登记
      */
     public function register()
@@ -18,7 +23,7 @@ class Deploy extends UserBase
                 return $model -> add($uid);
             }
         }else{
-            $mobilePhone = $this->user['mobile_phone'];
+            $mobilePhone = $this -> user['mobile_phone'];
             $this->assign('mobilePhone',$mobilePhone);
             if(input('?factory_id')){
                 $factoryId = input('factory_id');
@@ -32,15 +37,7 @@ class Deploy extends UserBase
         }
     }
 
-    //产商档案编辑
-    public function recordEdit(){
-        if(request()->isAjax()){
-            $model = new \app\factory\model\Factory();
-            return $model -> add();
-        }else{
-            return $this->fetch();
-        }
-    }
+  
 
     //设置默认产商
     public function setDefaultFactory(){

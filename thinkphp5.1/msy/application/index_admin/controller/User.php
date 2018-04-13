@@ -1,9 +1,9 @@
 <?php
 namespace app\index_admin\controller;
 
-class Role extends \common\controller\UserBase
+class User extends \common\controller\UserBase
 {
-    /**角色-管理
+    /**用户-管理
      */
     public function manage(){
         if(!request()->isGet()){
@@ -11,12 +11,12 @@ class Role extends \common\controller\UserBase
         }
         return $this->fetch();
     }
-    /**角色-编辑
+    /**用户-编辑
      */
     public function edit(){
-        $modelRole = new \common\model\Role();
+        $modelUser = new \common\model\User();
         if(request()->isPost()){
-            return $modelRole->edit();
+            return $modelUser->edit();
         }else{
             $id = input('id',0);
             if($id){
@@ -24,43 +24,30 @@ class Role extends \common\controller\UserBase
                     'status' => 0,
                     'id' => $id,
                 ];
-                $info = $modelRole->where($where)->find();
+                $info = $modelUser->where($where)->find();
                 $this->assign('info',$info);
             }
             return $this->fetch();
         }
     }
-    /**角色-赋权
-     */
-    public function empower(){
-        if(request()->isPost()){
-            return 'empower';
-        }else{
-            $id = input('id',0);
-            $menuList = getMenu(true);
-            $this->assign('menuList',$menuList);
-//            print_r($menuList);
-            return $this->fetch();
-        }
-    }
-    /**角色-列表
+    /**用户-列表
      */
     public function getList(){
         if(!request()->isGet()){
             return config('not_get');
         }
-        $modelRole = new \common\model\Role();
-        $list = $modelRole->pageQuery();
+        $modelUser = new \common\model\User();
+        $list = $modelUser->pageQuery();
         $this->assign('list',$list);
-        return $this->fetch('role_list');
+        return $this->fetch('user_list');
     }
-    /**角色-删除
+    /**用户-删除
      */
     public function del(){
         if(!request()->isPost()){
             return config('not_post');
         }
-        $modelRole = new \common\model\Role();
-        return $modelRole->del();
+        $modelUser = new \common\model\User();
+        return $modelUser->tagDel();
     }
 }

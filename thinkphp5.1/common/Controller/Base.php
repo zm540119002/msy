@@ -1,13 +1,9 @@
 <?php
 namespace common\controller;
 
-use Org\Util\Rbac;
-use think\Controller;
-use think\Image;
-
 /**基于公共基础控制器
  */
-class Base extends Controller{
+class Base extends \think\Controller{
     protected $host;
     public function __construct(){
         parent::__construct();

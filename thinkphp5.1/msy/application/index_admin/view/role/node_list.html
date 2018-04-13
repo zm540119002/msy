@@ -1,19 +1,8 @@
-<!--{notempty name='menuList'}
-{volist name="menuList" id="vo"}
-    <tr class="hover edit" >
-        <td class="w10">
-            <input type="checkbox" class="checkitem" >
-            <span>{$vo.name}</span>
-            <span class="folding" status="open"></span>
-        </td>
-    </tr>
-{/volist}
-{/notempty}-->
 <tr class="hover edit" data-level="1">
     <td class="w10" width="25%">
         <input type="checkbox" class="checkitem" >
         <span class="folding" status="open"></span>
-        <span>{$vo.name}</span>
+        <span>第一级</span>
     </td>
 </tr>
 <tr class="hover" data-level="2">
@@ -29,7 +18,12 @@
         <span>第三级</span>
     </td>
 </tr>
-{block name="script"}
+<tr class="hover" data-level="3">
+    <td class="w10" width="25%">
+        <input type="checkbox" class="checkitem" />
+        <span>第三级</span>
+    </td>
+</tr>
     <script type="text/javascript">
         $(function(){
             //折叠
@@ -89,4 +83,3 @@
             });
         });
     </script>
-{/block}

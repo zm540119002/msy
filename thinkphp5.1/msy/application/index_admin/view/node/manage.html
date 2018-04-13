@@ -48,7 +48,7 @@
         //获取列表
         function getPage(currentPage) {
             $("#list").html($('#loading').html());
-            var url = controller+'/nodeList';
+            var url = controller+'getList';
             var postData = $('#form1').serializeObject();
             postData.page = currentPage ? currentPage : 1;
             postData.pageSize = 5;

@@ -2,32 +2,50 @@
 namespace app\factory\model;
 use think\Model;
 use think\Db;
+use think\Route;
+
 /**
  * 基础模型器
  */
 
-class Factory extends Model {
+class Record extends Model {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'factory';
+	protected $table = 'record';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
-//	protected $readonly = ['name'];
+
 	/**
 	 * 新增
 	 */
-	public function add($uid=''){
+	public function add($factoryId=''){
 		$data = input('post.');
-		$data['user_id'] = $uid;
-		$validate = validate('Factory');
-		if(!$result = $validate->scene('add')->check($data)) {
-			return errorMsg($validate->getError());
+		$data['factory_id'] = $factoryId;
+		//$validate = validate('Factory');
+//		if(!$result = $validate->scene('add')->check($data)) {
+//			return errorMsg($validate->getError());
+//		}
+		if(!empty($data['company_img'])){
+			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
-		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
-		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
+		if(!empty($data['logo_img'])){
+			$data['logo_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['logo_img']));
+		}
+		if(!empty($data['rb_img'])){
+			$data['rb_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
+		}
+		if(!empty($data['factory_video'])){
+			$data['factory_video'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
+		}
+		if(!empty($data['license'])){
+			$data['license'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['license']);
+		}
+		if(!empty($data['glory_img'])){
+			$data['glory_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['glory_img']);
+		}
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		if(false !== $result){
-			return successMsg("已提交申请");
+			return successMsg("已成功添加");
 		}else{
 			return errorMsg($this->getError());
 		}
@@ -36,14 +54,13 @@ class Factory extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit($uid=''){
+	public function edit(){
 		$data = input('post.');
-		$data['user_id'] = $uid;
-		$where['id'] = $data['factory_id'];
+		$where['id'] = $data['record_id'];
 		$file = array(
-			'business_license','auth_letter',
+			'logo_img','company_img','rb_img','factory_video','license','glory_img'
 		);
-		$oldFactoryInfo = $this -> getFactory($where,$file);
+		$oldFactoryInfo = $this -> getRecord($where,$file);
 		$validate = validate('Factory');
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
@@ -61,31 +78,6 @@ class Factory extends Model {
 			return errorMsg($this->getError());
 		}
 	}
-
-	/**
-	 * 新增档案
-	 */
-	public function addRecord($uid='',$factoryId=''){
-		$data = input('post.');
-		$data['user_id'] = $uid;
-		$data['id'] = $factoryId;
-//		$validate = validate('Factory');
-//		if(!$result = $validate->scene('addRecord')->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
-		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
-		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
-		$result = $this->allowField(true)->save($data);
-		if(false !== $result){
-			return successMsg("已提交申请");
-		}else{
-			return errorMsg($this->getError());
-		}
-	}
-
-
-
-
 	/**
 	 * @param array $where
 	 * @param array $field
@@ -95,15 +87,15 @@ class Factory extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectFactory($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectRecord($where=[],$field=[],$order=[],$join=[],$limit=''){
 		$_where = array(
-			'f.status' => 0,
+			'r.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
 		if($field){
-			$list = $this->alias('f')
+			$list = $this->alias('r')
 				->where($where)
 				->field($field)
 				->join(array_merge($_join,$join))
@@ -111,7 +103,7 @@ class Factory extends Model {
 				->limit($limit)
 				->select();
 		}else{
-			$list = $this->alias('f')
+			$list = $this->alias('r')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->order($order)
@@ -128,7 +120,7 @@ class Factory extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getFactory($where=[],$field=[],$join=[]){
+	public function getRecord($where=[],$field=[],$join=[]){
 		$_where = array(
 			'status' => 0,
 		);

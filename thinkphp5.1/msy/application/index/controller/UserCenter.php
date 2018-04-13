@@ -1,19 +1,13 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
-
-class User extends Controller{
-    public function __construct(){
-        parent::__construct();
-    }
-
+class UserCenter extends \think\Controller{
     /**登录
      * @return array|mixed
      */
     public function login(){
         if (request()->isAjax()) {
-            $modelUser = new \common\model\User();
+            $modelUser = new \common\model\UserCenter();
             return $modelUser->login();
         } else {
             return $this->fetch();
@@ -25,7 +19,7 @@ class User extends Controller{
      */
     public function forgetPassword(){
         if (request()->isAjax()) {
-            $modelUser = new \common\model\User();
+            $modelUser = new \common\model\UserCenter();
             return $modelUser->resetPassword();
         } else {
             return $this->fetch();

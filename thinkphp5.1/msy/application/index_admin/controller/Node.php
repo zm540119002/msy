@@ -32,7 +32,7 @@ class Node extends \common\controller\UserBase
     }
     /**节点-列表
      */
-    public function nodeList(){
+    public function getList(){
         if(!request()->isGet()){
             return config('not_get');
         }

@@ -8,8 +8,8 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('Role/manage')}" class="current"><span>管理</span></a></li>
-                    <li><a href="{:url('Role/edit')}"><span>编辑</span></a></li>
+                    <li><a href="{:url('User/manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('User/edit')}"><span>编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -24,7 +24,7 @@
                             </td>
                             <td class="w70 tc">
                                 <label class="submit-border">
-                                    <input type="button" id="searchRole" class="submit product_search_btn" value="搜索">
+                                    <input type="button" id="searchUser" class="submit product_search_btn" value="搜索">
                                 </label>
                             </td>
                         </tr>
@@ -60,7 +60,7 @@
             //加载第一页
             getPage();
             //搜索
-            $('#searchRole').click(function(){
+            $('#searchUser').click(function(){
                 getPage();
             });
             //编辑
