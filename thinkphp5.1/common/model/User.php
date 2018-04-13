@@ -37,7 +37,7 @@ class User extends \think\Model {
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$field = array(
-			'id','name','status','type','remark',
+			'id','name','nickname','mobile_phone',
 		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
