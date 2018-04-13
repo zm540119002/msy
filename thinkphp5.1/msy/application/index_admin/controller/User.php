@@ -32,7 +32,7 @@ class User extends \common\controller\UserBase
     }
     /**用户-列表
      */
-    public function userList(){
+    public function getList(){
         if(!request()->isGet()){
             return config('not_get');
         }

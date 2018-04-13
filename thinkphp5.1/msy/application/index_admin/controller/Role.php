@@ -45,7 +45,7 @@ class Role extends \common\controller\UserBase
     }
     /**角色-列表
      */
-    public function roleList(){
+    public function getList(){
         if(!request()->isGet()){
             return config('not_get');
         }
