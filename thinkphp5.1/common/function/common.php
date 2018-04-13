@@ -706,6 +706,61 @@ function moveImgFromTemp($newRelativePath,$filename){
     return $newRelativePath . $filename;
 }
 
+/**从临时目录里移动多文件带描述到新的目录
+ * @param $newRelativePath 目标相对路径
+ * @param $filename 文件名
+ * @return string 返回相对文件名
+ */
+function moveImgsWithDecFromTemp($newRelativePath,$imgsWithDec){
+    $imgsWithDecNew = [];
+    foreach ($imgsWithDec as $item => $value) {
+        if($value){
+            //上传文件公共路径
+            $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
+
+            //临时相对路径
+            $tempRelativePath = config('upload_dir.temp_path');
+            //var_dump($tempRelativePath);exit;
+
+            //旧路径
+            $oldPath = $uploadPath . $tempRelativePath;
+
+            if(!file_exists($oldPath)){
+                //检查是否有该文件夹，如果没有就创建，并给予最高权限
+                if(!mkdir($oldPath, 0700,true)){
+                    show(0,'创建目录失败');
+                }
+            }
+            //旧文件
+            $oldFile = $oldPath . basename($value['imgSrc']);
+
+            //新路径
+            $newPath = $uploadPath . $newRelativePath;
+
+            if(!file_exists($newPath)){
+                //检查是否有该文件夹，如果没有就创建，并给予最高权限
+                if(!mkdir($newPath, 0700,true)){
+                    show(0,'创建目录失败');
+                }
+            }
+            //新文件
+            $newFile = $newPath .basename($value['imgSrc']);
+
+            //重命名文件
+            if(file_exists($oldFile)){
+                if(!rename($oldFile,$newFile)){
+                    show(0,'重命名文件失败');
+                    //$this->ajaxReturn(errorMsg('重命名文件失败'));
+                }
+            }
+            $imgsWithDecNew[$item]['imgSrc'] = $newRelativePath.basename($value['imgSrc']);
+            $imgsWithDecNew[$item]['imgText'] = $value['imgText'];
+        }
+    }
+    return  json_encode($imgsWithDecNew) ;
+}
+
+
 //新增图片对比数据库，删除不同的图片
 function delImgFromPaths($oldImgPaths,$newImgPaths){
     //上传文件公共路径
