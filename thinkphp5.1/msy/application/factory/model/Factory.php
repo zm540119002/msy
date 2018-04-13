@@ -11,7 +11,7 @@ class Factory extends Model {
 	protected $table = 'factory';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
-	protected $readonly = ['name'];
+//	protected $readonly = ['name'];
 	/**
 	 * 新增
 	 */
@@ -74,13 +74,13 @@ class Factory extends Model {
 	 */
 	public function selectFactory($where=[],$field=[],$order=[],$join=[],$limit=''){
 		$_where = array(
-			'b.status' => 0,
+			'f.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
 		if($field){
-			$list = $this->alias('s')
+			$list = $this->alias('f')
 				->where($where)
 				->field($field)
 				->join(array_merge($_join,$join))
@@ -88,7 +88,7 @@ class Factory extends Model {
 				->limit($limit)
 				->select();
 		}else{
-			$list = $this->alias('s')
+			$list = $this->alias('f')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->order($order)

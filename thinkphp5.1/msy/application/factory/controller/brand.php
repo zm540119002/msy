@@ -2,8 +2,7 @@
 namespace app\factory\controller;
 use app\factory\model\Brand as M;
 use app\index_admin\model\Category as categoryModel;
-use common\controller\Base;
-class Brand extends Base
+class Brand extends FactoryBase
 {
     //商标首页
     public function index()
