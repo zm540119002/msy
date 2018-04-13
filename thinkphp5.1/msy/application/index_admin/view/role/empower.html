@@ -14,40 +14,45 @@
                 </ul>
             </div>
         </div>
-        <div style="margin-top:15px;">
-            <form id="form1">
-                <table id=table18 class="add_new_merchandise" width="100%">
-                    <tbody>
-                        <tr class="tr-margin-item">
-                            <td class="w10">
-                                <input type="checkbox" class="checkitem" >
-                                <span class="folding" status="open"></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+        <div class="fixed-empty"></div>
+        <div style="margin:15px 0 0 20px;">
+            <table class="table tb-type2">
+                <tbody>
+                    {include file="role/node_list" /}
+                </tbody>
+                <tfoot>
+                    <tr class="tfoot">
+                        <td>
+                            <input type="checkbox" class="checkall" id="checkall_2">
+                            <label for="checkall_2" class="all_checkbox">全选</label>
+                        </td>
+                        <td id="batchAction" colspan="15">
+                            <a href="JavaScript:void(0);" class="a-del-batch">批量删除</a>
+                        </td>
+                    </tr>            
+                </tfoot>
+            </table>
         </div>
     </div>
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-    <script type="text/javascript">
-        $(function(){
-            //页面初始化
-            //确定
-            $('.button_save_black_4').on('click',function(){
-                var postData = $('#form1').serializeObject();
-                $.post(action,postData,function(msg){
-                    dialog.msg(msg,'',function () {
-                        location.href = controller + '/edit';
-                    });
-                },'JSON');
-            });
-            //返回
-            $('.button_save_black').click(function(){
-                location.href = controller + '/manage';
-            });
+<script type="text/javascript">
+    $(function(){
+       
+        //确定
+        $('.button_save_black_4').on('click',function(){
+            var postData = $('#form1').serializeObject();
+            $.post(action,postData,function(msg){
+                dialog.msg(msg,'',function () {
+                    location.href = controller + '/edit';
+                });
+            },'JSON');
         });
-    </script>
+        //返回
+        $('.button_save_black').click(function(){
+            location.href = controller + '/manage';
+        });
+    });
+</script>
 {/block}
