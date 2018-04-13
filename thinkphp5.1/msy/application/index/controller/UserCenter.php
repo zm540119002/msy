@@ -7,7 +7,7 @@ class UserCenter extends \think\Controller{
      */
     public function login(){
         if (request()->isAjax()) {
-            $modelUser = new \common\model\User();
+            $modelUser = new \common\model\UserCenter();
             return $modelUser->login();
         } else {
             return $this->fetch();
@@ -19,7 +19,7 @@ class UserCenter extends \think\Controller{
      */
     public function forgetPassword(){
         if (request()->isAjax()) {
-            $modelUser = new \common\model\User();
+            $modelUser = new \common\model\UserCenter();
             return $modelUser->resetPassword();
         } else {
             return $this->fetch();
