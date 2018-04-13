@@ -73,7 +73,6 @@ $(document).ready(function(){
             });
         });
     });
-
     //新增下级
     $('body').on('click','.a-add',function(){
         var _thisTr = $(this).parents('tr');
@@ -82,7 +81,6 @@ $(document).ready(function(){
         url += '/operate/' + 'addLower';
         location.href = url;
     });
-
     //批量删除
     $('body').on('click','.a-del-batch',function(){
         // var url = '';

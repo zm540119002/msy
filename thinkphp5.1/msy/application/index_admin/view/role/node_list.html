@@ -1,0 +1,10 @@
+{notempty name='menuList'}
+{volist name="menuList" id="vo"}
+    <tr class="hover">
+        <td class="w10">
+            <input type="checkbox" class="checkitem" >
+            <span class="folding" status="open">{$vo.name}</span>
+        </td>
+    </tr>
+{/volist}
+{/notempty}

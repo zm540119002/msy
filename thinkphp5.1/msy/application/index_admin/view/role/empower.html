@@ -15,78 +15,32 @@
             </div>
         </div>
         <div class="fixed-empty"></div>
-        <table class="table tb-type2" id="prompt">
-            <tbody>
-                <tr><td><ul><li class="friendly_tipc">
-                    <span>*</span>请注意：删除分类时，（1）如果分类存在子分类，也会把子分类删除，（2）如果分类存在商品，删除分类会有可能导致商品无法正常显示
-                </li></ul></td></tr>
-            </tbody>
-        </table>
         <div style="margin:15px 0 0 20px;">
             <table class="table tb-type2">
-                <thead>
-                    <tr class="thead">
-                        <th></th>
-                        <th>排序</th>
-                        <th>分类名称</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    <include file="empowerList"/>
+                    {include file="role/node_list" /}
                 </tbody>
-                <tfoot>
-                    <notempty name="empowerList">
-                        <tr class="tfoot">
-                            <td>
-                                <input type="checkbox" class="checkall" id="checkall_2">
-                                <label for="checkall_2" class="all_checkbox">全选</label>
-                            </td>
-                            <td id="batchAction" colspan="15">
-                                <a href="JavaScript:void(0);" class="a-del-batch">批量删除</a>
-                            </td>
-                        </tr>
-                    </notempty>
-                </tfoot>
             </table>
         </div>
-        <!--<div style="margin-top:15px;">
-            <form id="form1">
-                <table id=table18 class="add_new_merchandise" width="100%">
-                    <tbody>
-                        <tr class="tr-margin-item">
-                            <td class="w10">
-                                <input type="checkbox" class="checkitem" >
-                                <span class="folding" status="open"></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </div>-->
     </div>
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-    <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
-{/block}
-{block name="script"}
-    <script type="text/javascript">
-        $(function(){
-            //页面初始化
-            //确定
-            $('.button_save_black_4').on('click',function(){
-                var postData = $('#form1').serializeObject();
-                $.post(action,postData,function(msg){
-                    dialog.msg(msg,'',function () {
-                        location.href = controller + '/edit';
-                    });
-                },'JSON');
-            });
-            //返回
-            $('.button_save_black').click(function(){
-                location.href = controller + '/manage';
-            });
+<script type="text/javascript">
+    $(function(){
+        //确定
+        $('.button_save_black_4').on('click',function(){
+            var postData = $('#form1').serializeObject();
+            $.post(action,postData,function(msg){
+                dialog.msg(msg,'',function () {
+                    location.href = controller + '/edit';
+                });
+            },'JSON');
         });
-    </script>
+        //返回
+        $('.button_save_black').click(function(){
+            location.href = controller + '/manage';
+        });
+    });
+</script>
 {/block}

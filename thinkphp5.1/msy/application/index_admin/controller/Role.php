@@ -33,19 +33,13 @@ class Role extends \common\controller\UserBase
     /**角色-赋权
      */
     public function empower(){
-        $modelRole = new \common\model\Role();
         if(request()->isPost()){
-            return $modelRole->edit();
+            return 'empower';
         }else{
             $id = input('id',0);
-            if($id){
-                $where = [
-                    'status' => 0,
-                    'id' => $id,
-                ];
-                $info = $modelRole->where($where)->find();
-                $this->assign('info',$info);
-            }
+            $menuList = getMenu(true);
+            $this->assign('menuList',$menuList);
+//            print_r($menuList);
             return $this->fetch();
         }
     }
