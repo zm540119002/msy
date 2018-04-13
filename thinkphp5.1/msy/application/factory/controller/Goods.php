@@ -6,7 +6,7 @@ use app\index_admin\model\Category as categoryModel;
 use app\factory\model\Series as seriesModel;
 use GuzzleHttp\Psr7\Request;
 
-class Goods extends Base
+class Goods extends FactoryBase
 {
     public function index()
     {

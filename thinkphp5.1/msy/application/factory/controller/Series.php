@@ -2,7 +2,7 @@
 namespace app\factory\controller;
 use app\factory\model\Series as M;
 use common\controller\Base;
-class Series extends Base
+class Series extends FactoryBase
 {
     
     //系列编辑

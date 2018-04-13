@@ -94,7 +94,7 @@
 				<li>
 					<div class="company-n">
 						<span>企业全称</span>
-						维观科技有限公司
+						{$factoryInfo.name|default=''}
 					</div>
 				</li>
 				<li>
@@ -262,6 +262,7 @@
 //			}
 
 			$.post(controller + "edit",postData,function(msg){
+				console.log(msg)
 //				if(msg.status == 0){
 //					layer.open({
 //						content:msg.info,
