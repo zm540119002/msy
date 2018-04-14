@@ -17,9 +17,7 @@
         <div class="fixed-empty"></div>
         <div style="margin:15px 0 0 20px;">
             <table class="table tb-type2">
-                <tbody>
-                    {include file="role/node_list" /}
-                </tbody>
+                {include file="role/node_list" /}
                 <tfoot>
                     <tr class="tfoot">
                         <td>
@@ -39,7 +37,6 @@
 {block name="script"}
 <script type="text/javascript">
     $(function(){
-       
         //确定
         $('.button_save_black_4').on('click',function(){
             var postData = $('#form1').serializeObject();
