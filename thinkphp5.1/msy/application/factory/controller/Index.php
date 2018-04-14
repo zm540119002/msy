@@ -29,10 +29,12 @@ class Index extends UserBase
             if(!$factoryInfo){
                 $this -> assign('notDefaultFactory',1);
             }
+            $this -> assign('factoryInfo',$factoryInfo);
         }elseif ($factoryCount == 1){
             $factoryInfo = $model -> getFactory($where,$file);
+            $this -> assign('factoryInfo',$factoryInfo);
         }
-        $this -> assign('factoryInfo',$factoryInfo);
+
         return $this->fetch();
     }
 }

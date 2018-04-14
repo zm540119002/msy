@@ -421,12 +421,12 @@ function uploadsImgDescribe(content,obj){
                     for(var i=0;i<a.length;i++){
                          if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
                             a[i].imgSrc= uploads+a[i].imgSrc;
-                            a[i].imgText= a[i].imgText;
+
                          }
                          imgArray.push(a[i]);
                     }
-                    console.log(imgArray) ;
-                    $('.goods-detail').data('src', imgArray);
+
+                    obj.data('src', imgArray);
                     layer.close(index);
                 })
                 layer.close(index);

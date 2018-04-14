@@ -208,23 +208,51 @@ function checkShow(ele){
 }
 
 //全选
-$('body').on('click','.checkall',function () {
+$('body').on('click','.checkall,.check_all_2',function () {
     var _thisChecked = $(this).prop("checked");
-    $.each($('.checkitem'),function () {
+    $.each($('.checkitem,.check_item_2'),function () {
         $(this).prop('checked',_thisChecked);
     });
 });
-
 //反选
-$('body').on('click','.checkitem',function () {
+$('body').on('click','.checkitem,.check_item_2',function () {
     var sign = true;
     //一票否决
-    $.each($('.checkitem'),function () {
+    $.each($('.checkitem,.check_item_2'),function () {
         if(!$(this).prop('checked')){
             sign = false;
         }
     });
-    $('.checkall').prop('checked',sign);
+    $('.checkall,.check_all_2').prop('checked',sign);
+});
+//折叠
+$('body').on('click','.folding',function(){
+    var _this = $(this);
+    var status = _this.attr('status');
+    var _thisTbody = _this.parents('tbody');
+    if(status == 'open'){
+        _this.attr('status','close');
+        _thisTbody.find('[level=2]').show();
+    }else if(status == 'close'){
+        _this.attr('status','open');
+        _thisTbody.find('[level=2]').hide();
+    }
+});
+//复选-二级
+$('body').on('click','.check_item_2',function () {
+    var _thisTbody = $(this).parents('tbody');
+    if($(this).parents('tr').attr('level')=='1'){
+        _thisTbody.find('[level=2]').find('.check_item_2').prop('checked',$(this).prop('checked'));
+    }else if($(this).parents('tr').attr('level')=='2'){
+        var sign = true;
+        //一票否决
+        $.each(_thisTbody.find('[level=2]').find('.check_item_2'),function () {
+            if(!$(this).prop('checked')){
+                sign = false;
+            }
+        });
+        _thisTbody.find('[level=1]').find('.check_item_2').prop('checked',sign);
+    }
 });
 
 //滑动轮播

@@ -82,7 +82,7 @@
 		<!--<p>系统发现你已关联了XX家厂商企业，请选择进入</p>-->
 	</section>
 	<section>
-		<a class="account_entry right-arrow f20">还未入驻？免费申请</a>
+		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费申请</a>
 	</section>
 
 	<section class="explain_nav">
@@ -153,9 +153,9 @@
 		$('body').on('click','.deployed-deployment',function () {
 			var factoryCount = {$factoryCount};
 			if(factoryCount){
-				alert(1)
+				location.href = module + 'deploy/index';
 			}else {
-				dialog.success('未入住',module+'deploy/register')
+				dialog.success('未入驻，请先申请入住',module+'deploy/register')
 			}
 		})
 

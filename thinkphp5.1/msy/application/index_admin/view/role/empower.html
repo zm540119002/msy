@@ -17,14 +17,12 @@
         <div class="fixed-empty"></div>
         <div style="margin:15px 0 0 20px;">
             <table class="table tb-type2">
-                <tbody>
-                    {include file="role/node_list" /}
-                </tbody>
+                {include file="role/node_list" /}
                 <tfoot>
                     <tr class="tfoot">
                         <td>
-                            <input type="checkbox" class="checkall" id="checkall_2">
-                            <label for="checkall_2" class="all_checkbox">全选</label>
+                            <input type="checkbox" class="check_all_2" id="check_all_2">
+                            <label for="check_all_2" class="all_checkbox">全选</label>
                         </td>
                         <td id="batchAction" colspan="15">
                             <a href="JavaScript:void(0);" class="a-del-batch">批量删除</a>
@@ -39,7 +37,6 @@
 {block name="script"}
 <script type="text/javascript">
     $(function(){
-       
         //确定
         $('.button_save_black_4').on('click',function(){
             var postData = $('#form1').serializeObject();
