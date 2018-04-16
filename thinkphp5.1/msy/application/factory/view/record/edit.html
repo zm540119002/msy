@@ -309,8 +309,16 @@
 				url:controller + "edit",
 				type:'post',
 				data:postData,
-				success:function () {
-					
+				success:function (msg) {
+				   if(msg.status == 0){
+						layer.open({
+							content:msg.info,
+							time:2
+						});
+						return false;
+					}else if(msg.status == 1){
+						dialog.success(msg.info,controller+'preview')
+					}
 				},
 				error:function (xhr) {
 					dialog.error(xhr)

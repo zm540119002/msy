@@ -462,7 +462,11 @@ function uploadsVideoDescribe(content,obj)
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
+
                 for(var i=0;i<multiImgAttr.length;i++){
+                    if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
+                        multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
+                    }
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
                     $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
                     $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].imgText);
@@ -497,14 +501,22 @@ function uploadsVideoDescribe(content,obj)
                        return false;
                    }
                     var imgArray = [];
-                    $.each(info.info,function(index,img){
-                        if(img.indexOf("uploads") == -1 && img !=''){
-                            img = uploads+img;
-                        }
-                        imgArray.push(img);
-                    });
+                    // $.each(info.info,function(index,img){
+                    //     if(img.indexOf("uploads") == -1 && img !=''){
+                    //         img = uploads+img;
+                    //     }
+                    //     imgArray.push(img);
+                    // });
+                    var a=JSON.parse(info);
+                    for(var i=0;i<a.length;i++){
+                        if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
+                            a[i].imgSrc= uploads+a[i].imgSrc;
 
-                    $('.goods-detail').data('src',imgArray);
+                        }
+                        imgArray.push(a[i]);
+                    }
+
+                    obj.data('src', imgArray);
                     layer.close(index);
                 });
                 layer.close(index);

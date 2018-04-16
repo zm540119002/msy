@@ -733,7 +733,6 @@ function moveImgsWithDecFromTemp($newRelativePath,$imgsWithDec){
                 }
             }
             //旧文件
-            return $value['imgSrc'];
             $oldFile = $oldPath . basename($value['imgSrc']);
 
             //新路径

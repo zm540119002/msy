@@ -60,6 +60,7 @@ class Record extends Model {
 		$file = array(
 			'logo_img','company_img','rb_img','factory_video','license','glory_img'
 		);
+
 		$oldRecordInfo = $this -> getRecord($where,$file);
 		//return $oldRecordInfo;
 //		$validate = validate('Record');
@@ -69,18 +70,20 @@ class Record extends Model {
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
+
 		if(!empty($data['logo_img'])){
 			$data['logo_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['logo_img']));
 		}
+
 		if(!empty($data['rb_img'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
 			$data['rb_img'] = $rse['imgsWithDecNew'];
 			$newRbImg = $rse['imgsArray'];
 		}
+
 		if(!empty($data['factory_video'])){
-			return $rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
 			$data['factory_video'] = $rse['imgsWithDecNew'];
-			return $data['factory_video'];
 			$newFactoryVideo = $rse['imgsArray'];
 		}
 		if(!empty($data['license'])){
