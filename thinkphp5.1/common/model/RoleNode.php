@@ -25,16 +25,14 @@ class RoleNode extends \think\Model {
 					$arr = ['role_id'=>$postData['roleId'],'node_id'=>$val];
 					$list[] = $arr;
 				}
-				if(!empty($list) && !empty($this->saveAll($list))){
-					return errorMsg('失败',$this->getError());
-				}
+				!empty($list) && $this->saveAll($list);
 			}
 			if(!empty($originNodeIds)){
 				//删除节点
 				$delNodeIds = array_diff($originNodeIds,$postData['nodeIds']);
 				$delNodeIds = array_values($delNodeIds);
 				if(!empty($delNodeIds) && !$this->batchDelByNodeIds($delNodeIds)){
-					return errorMsg('失败',$this->getError());
+					return errorMsg('删除失败',$this->getError());
 				}
 			}
 		}

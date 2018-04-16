@@ -1,7 +1,7 @@
 {notempty name='menuList'}
     {volist name="menuList" id="vo"}
     <tbody>
-    <tr class="hover" level="1" data-id="{$vo.id}">
+    <tr class="hover" level="1" data-node_id="{$vo.id}">
         <td class="w10" width="25%">
             <input type="checkbox" class="check_item_2" >
             <span class="folding" status="open"></span>
@@ -10,7 +10,7 @@
     </tr>
     {notempty name='vo.sub_menu'}
         {volist name="vo.sub_menu" id="vv"}
-        <tr class="hover" level="2" data-id="{$vv.id}">
+        <tr class="hover" level="2" data-node_id="{$vv.id}">
             <td class="w10" width="25%">
                 <input type="checkbox" class="check_item_2" />
                 <span>{$vv.name}</span>

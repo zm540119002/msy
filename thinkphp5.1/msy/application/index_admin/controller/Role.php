@@ -41,10 +41,8 @@ class Role extends \common\controller\UserBase
             $this->assign('roleId',$roleId);
             $response = $modelRoleNode->where('role_id','=',$roleId)->select();
             $response = $response->toArray();
-            if(!empty($response)){
-                $nodeIds = array_column($response,'node_id');
-                $this->assign('nodeIds',$nodeIds);
-            }
+            $nodeIds = array_column($response,'node_id');
+            $this->assign('nodeIds',$nodeIds?:[]);
             $menuList = getMenu(true);
             $this->assign('menuList',$menuList);
             return $this->fetch();
