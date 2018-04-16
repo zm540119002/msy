@@ -1790,7 +1790,7 @@
 
 })(jQuery);
 
-<!--  陈廷峰增加中文资源包 (ceo@vmeitime.com)  -->
+
 (function ($) {
     $.mobiscroll.i18n.zh = $.extend($.mobiscroll.i18n.zh, {
         dateFormat: 'yyyy-mm-dd',

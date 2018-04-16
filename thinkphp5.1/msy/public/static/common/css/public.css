@@ -299,6 +299,7 @@ i{
 }
 .common_default_img{
     width:100%;
+    height:auto;
     vertical-align: middle;
 }
 /*美尚云生态圈平台*/
@@ -998,7 +999,7 @@ color: #ed6d00;
 }
 .upload-company-map .picture-module{
     position:relative;
-    height:4rem;
+    /*height:4rem;*/
     background: #ccc;
 }
 .upload-picture-module .uploadImg,
