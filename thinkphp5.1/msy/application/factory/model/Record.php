@@ -80,6 +80,7 @@ class Record extends Model {
 		if(!empty($data['factory_video'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
 			$data['factory_video'] = $rse['imgsWithDecNew'];
+			return $data['factory_video'];
 			$newFactoryVideo = $rse['imgsArray'];
 		}
 		if(!empty($data['license'])){
