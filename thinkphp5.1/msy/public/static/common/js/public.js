@@ -206,24 +206,23 @@ function checkShow(ele){
     })
 }
 
-//一级-全选
-$('body').on('click','.checkall',function () {
+//全选
+$('body').on('click','.checkall,.check_all_2',function () {
     var _thisChecked = $(this).prop("checked");
-    $.each($('.checkitem'),function () {
+    $.each($('.checkitem,.check_item_2'),function () {
         $(this).prop('checked',_thisChecked);
     });
 });
-
-//一级-反选
-$('body').on('click','.checkitem',function () {
+//反选
+$('body').on('click','.checkitem,.check_item_2',function () {
     var sign = true;
     //一票否决
-    $.each($('.checkitem'),function () {
+    $.each($('.checkitem,.check_item_2'),function () {
         if(!$(this).prop('checked')){
             sign = false;
         }
     });
-    $('.checkall').prop('checked',sign);
+    $('.checkall,.check_all_2').prop('checked',sign);
 });
 
 //滑动轮播

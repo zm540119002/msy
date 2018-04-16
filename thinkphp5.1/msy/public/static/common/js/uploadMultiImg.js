@@ -378,6 +378,10 @@ function uploadsImgDescribe(content,obj){
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
                 for(var i=0;i<multiImgAttr.length;i++){
+                    if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
+                        multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
+                    }
+                    //imgArray.push(img);
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
                     $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
                     $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].imgText);

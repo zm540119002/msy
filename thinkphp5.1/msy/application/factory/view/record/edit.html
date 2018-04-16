@@ -129,10 +129,10 @@
 						<div class="clear"></div>
 					</div>
 				</li>
-				<li >
+				<!--<li >
 					<a href="http://192.168.1.101:8008/demo/trademark.html" class="right-arrow" >企业商标备案</a>
 					<input type="hidden" class="" value="" name="" />
-				</li>
+				</li>-->
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑企业简介</a>
 					<input type="hidden" class="company-introduce" value="{$recordInfo.introduction|default=''}" name="introduction"/>
@@ -177,6 +177,10 @@
 
 <script type="text/javascript">
 	$(function(){
+		//初始化地址
+		var addressIndex=$('.area-address-name').data('key');
+		var areaAddressArr=addressIndex.split(',');
+		$('.area_address').setArea(areaAddressArr);
 		//编辑企业简介
 		var editGoodsParameter=$('#editGoodsParameter').html();
 		$('body').on('click','.editGoodsParameter',function(){
