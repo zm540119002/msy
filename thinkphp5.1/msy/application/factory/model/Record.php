@@ -98,7 +98,7 @@ class Record extends Model {
 		if(false !== $result){
 			delImgFromPaths($oldRecordInfo['company_img'],$data['company_img']);
 			delImgFromPaths($oldRecordInfo['logo_img'],$data['logo_img']);
-			if(!empty($oldRecordInfo['rb_img'])){
+			if(!empty($oldRecordInfo['rb_img']) && !empty($data['rb_img'])){
 				$rbImgWithDec = json_decode($oldRecordInfo['rb_img'],true);
 				$oldRbImg = [];
 				foreach ($rbImgWithDec as $item){
@@ -106,7 +106,7 @@ class Record extends Model {
 				}
 				delImgFromPaths($oldRbImg,$newRbImg);
 			}
-			if(!empty($oldRecordInfo['factory_video'])){
+			if(!empty($oldRecordInfo['factory_video']) && !empty($data['factory_video'])) {
 				$rbImgWithDec = json_decode($oldRecordInfo['factory_video'],true);
 				$oldFactoryVideo = [];
 				foreach ($rbImgWithDec as $item){
@@ -114,7 +114,7 @@ class Record extends Model {
 				}
 				delImgFromPaths($oldFactoryVideo,$newFactoryVideo);
 			}
-			if(!empty($oldRecordInfo['license'])){
+			if(!empty($oldRecordInfo['license']) && !empty($data['license'])){
 				$rbImgWithDec = json_decode($oldRecordInfo['license'],true);
 				$oldLicense = [];
 				foreach ($rbImgWithDec as $item){
@@ -122,7 +122,7 @@ class Record extends Model {
 				}
 				delImgFromPaths($oldLicense,$newLicense);
 			}
-			if(!empty($oldRecordInfo['glory_img'])){
+			if(!empty($oldRecordInfo['glory_img']) && !empty($data['glory_img'])){
 				$rbImgWithDec = json_decode($oldRecordInfo['glory_img'],true);
 				$oldGloryImg = [];
 				foreach ($rbImgWithDec as $item){
