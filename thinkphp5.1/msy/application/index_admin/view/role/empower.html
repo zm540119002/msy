@@ -43,16 +43,24 @@
     $(function(){
         //确定
         $('.button_save_black_4').on('click',function(){
-            var postData = $('#form1').serializeObject();
+            var postData = {};
+            postData.nodeIds = [];
+            $.each($('tbody').find('tr[level=2]'),function(){
+                if($(this).find('.check_item_2').prop('checked')){
+                    postData.nodeIds.push($(this).data('id'));
+                }
+            });
+            postData.roleId = '{$roleId}';
             $.post(action,postData,function(msg){
+                return;
                 dialog.msg(msg,'',function () {
-                    location.href = controller + '/edit';
+                    location.href = controller + 'manage';
                 });
             },'JSON');
         });
         //返回
         $('.button_save_black').click(function(){
-            location.href = controller + '/manage';
+            location.href = controller + 'manage';
         });
     });
 </script>

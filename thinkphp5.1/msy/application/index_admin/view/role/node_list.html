@@ -1,55 +1,23 @@
-<tbody>
-    <tr class="hover" level="1">
+{notempty name='menuList'}
+    {volist name="menuList" id="vo"}
+    <tbody>
+    <tr class="hover" level="1" data-id="{$vo.id}">
         <td class="w10" width="25%">
             <input type="checkbox" class="check_item_2" >
             <span class="folding" status="open"></span>
-            <span>第一级</span>
+            <span>{$vo.name}</span>
         </td>
     </tr>
-    <tr class="hover" level="2">
-        <td class="w10" width="25%">
-            <input type="checkbox" class="check_item_2" >
-            <span>第二级</span>
-        </td>
-    </tr>
-    <tr class="hover" level="2">
-        <td class="w10" width="25%">
-            <input type="checkbox" class="check_item_2" />
-            <span>第二级</span>
-        </td>
-    </tr>
-    <tr class="hover" level="2">
-        <td class="w10" width="25%">
-            <input type="checkbox" class="check_item_2" />
-            <span>第二级</span>
-        </td>
-    </tr>
-</tbody>
-
-<tbody>
-    <tr class="hover" level="1">
-        <td class="w10" width="25%">
-            <input type="checkbox" class="check_item_2" >
-            <span class="folding" status="open"></span>
-            <span>第一级</span>
-        </td>
-    </tr>
-    <tr class="hover" level="2">
-        <td class="w10" width="25%">
-            <input type="checkbox" class="check_item_2" >
-            <span>第二级</span>
-        </td>
-    </tr>
-    <tr class="hover" level="2">
-        <td class="w10" width="25%">
-            <input type="checkbox" class="check_item_2" />
-            <span>第二级</span>
-        </td>
-    </tr>
-    <tr class="hover" level="2">
-        <td class="w10" width="25%">
-            <input type="checkbox" class="check_item_2" />
-            <span>第二级</span>
-        </td>
-    </tr>
-</tbody>
+    {notempty name='vo.sub_menu'}
+        {volist name="vo.sub_menu" id="vv"}
+        <tr class="hover" level="2" data-id="{$vv.id}">
+            <td class="w10" width="25%">
+                <input type="checkbox" class="check_item_2" />
+                <span>{$vv.name}</span>
+            </td>
+        </tr>
+        {/volist}
+    {/notempty}
+    </tbody>
+    {/volist}
+{/notempty}
