@@ -20,7 +20,7 @@ class Record extends Model {
 	public function add($factoryId=''){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
-		//$validate = validate('Factory');
+		//$validate = validate('Record');
 //		if(!$result = $validate->scene('add')->check($data)) {
 //			return errorMsg($validate->getError());
 //		}
@@ -54,25 +54,45 @@ class Record extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit(){
+	public function edit($factoryId){
 		$data = input('post.');
 		$where['id'] = $data['record_id'];
 		$file = array(
 			'logo_img','company_img','rb_img','factory_video','license','glory_img'
 		);
 		$oldFactoryInfo = $this -> getRecord($where,$file);
-		$validate = validate('Factory');
-		if(!$result = $validate->scene('edit')->check($data)) {
-			return errorMsg($validate->getError());
+//		$validate = validate('Record');
+//		if(!$result = $validate->scene('edit')->check($data)) {
+//			return errorMsg($validate->getError());
+//		}
+		if(!empty($data['company_img'])){
+			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
-		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
-		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
+		if(!empty($data['logo_img'])){
+			$data['logo_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['logo_img']));
+		}
+		if(!empty($data['rb_img'])){
+			$data['rb_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
+		}
+		if(!empty($data['factory_video'])){
+			$data['factory_video'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
+		}
+		if(!empty($data['license'])){
+			$data['license'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['license']);
+		}
+		if(!empty($data['glory_img'])){
+			$data['glory_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['glory_img']);
+		}
 		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data,['id' => $data['factory_id']]);
+		$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
 		if(false !== $result){
-			$newFactoryInfo = $this -> getFactory($where,$file);
-			delImgFromPaths($oldFactoryInfo['business_license'],$newFactoryInfo['business_license']);
-			delImgFromPaths($oldFactoryInfo['auth_letter'],$newFactoryInfo['auth_letter']);
+			$newFactoryInfo = $this -> getRecord($where,$file);
+			delImgFromPaths($oldFactoryInfo['company_img'],$newFactoryInfo['company_img']);
+			delImgFromPaths($oldFactoryInfo['logo_img'],$newFactoryInfo['logo_img']);
+			delImgFromPaths($oldFactoryInfo['rb_img'],$newFactoryInfo['rb_img']);
+			delImgFromPaths($oldFactoryInfo['factory_video'],$newFactoryInfo['factory_video']);
+			delImgFromPaths($oldFactoryInfo['license'],$newFactoryInfo['license']);
+			delImgFromPaths($oldFactoryInfo['glory_img'],$newFactoryInfo['glory_img']);
 			return successMsg("已修改");
 		}else{
 			return errorMsg($this->getError());
