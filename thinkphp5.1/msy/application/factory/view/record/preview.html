@@ -30,9 +30,9 @@
 		</div>
 		<div class="">
 			<span class="address-label">地址：</span>
-			<input  type="hidden" class="provinces" value="{$recordInfo.provinces|default=''}">
+			<input  type="hidden" class="provinces area-address-name" value="{$recordInfo.provinces|default=''}">
 			<input  type="hidden" class="detail_address" value="{$recordInfo.detail_address|default=''}">
-			<p>{$recordInfo.detail_address|default=''}</p>
+			<span class="area_address"></span><span>{$recordInfo.detail_address|default=''}</span>
 		</div>
 	</section>
 	<section class="separation-line content-box">
@@ -45,7 +45,7 @@
 				<!--</div>-->
 				{volist name="recordInfo.factory_video" id="vo"}
 				<div class="swiper-slide ">
-					<video src="public_uploads/{$vo['imgSrc']}"></video>
+					<video src="public_uploads/{$vo['imgSrc']}" preload="meta" controls="controls" class="common_default_img"></video>
 					<p>{$vo['imgText']}</p>
 				</div>
 				{/volist}
@@ -64,7 +64,7 @@
 				<!--</div>-->
 				{volist name="recordInfo.rb_img" id="vo"}
 				<div class="swiper-slide ">
-					<img src="public_uploads/{$vo['imgSrc']}" />
+					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
 					<p>{$vo['imgText']}</p>
 				</div>
 				{/volist}
@@ -83,7 +83,7 @@
 				<!--</div>-->
 				{volist name="recordInfo.license" id="vo"}
 				<div class="swiper-slide ">
-					<img src="public_uploads/{$vo['imgSrc']}" />
+					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
 					<p>{$vo['imgText']}</p>
 				</div>
 				{/volist}
@@ -102,7 +102,7 @@
 				<!--</div>-->
 				{volist name="recordInfo.glory_img" id="vo"}
 				<div class="swiper-slide ">
-					<img src="public_uploads/{$vo['imgSrc']}" />
+					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
 					<p>{$vo['imgText']}</p>
 				</div>
 				{/volist}
@@ -122,8 +122,13 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//初始化地址
+		var addressIndex=$('.area-address-name').val();
+		var areaAddressArr=addressIndex.split(',');
+		$('.area_address').setArea(areaAddressArr);
 		swiper('.swiper-container');
 		$('.more-text-box').moreText({
 			mainCell:".more-text",
