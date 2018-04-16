@@ -130,12 +130,17 @@ $(function(){
     //编辑商品参数
     var editGoodsParameter=$('#editGoodsParameter').html();
     $('body').on('click','.editGoodsParameter',function(){
+        var winH=$(window).height();
         layer.open({
             title:['编辑商品参数','border-bottom:1px solid #d9d9d9;'],
             className:'editParameterLayer',
+            type:1,
             content:editGoodsParameter,
+            anim:'up',
+            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
             btn:['确定','取消'],
             success:function(){
+                $('.editParameterLayer .editGoodsText').css('height',(winH-112)+'px');
                 var goodsParameter=$('.goods-parameter').val();
                 $('.editParameterLayer .editGoodsText').val(goodsParameter);
             },
