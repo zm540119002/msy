@@ -78,7 +78,7 @@ class Record extends Model {
 			$newRbImg = $rse['imgsArray'];
 		}
 		if(!empty($data['factory_video'])){
-			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
+			return $rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
 			$data['factory_video'] = $rse['imgsWithDecNew'];
 			return $data['factory_video'];
 			$newFactoryVideo = $rse['imgsArray'];
