@@ -43,7 +43,6 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-    <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         //获取列表
         function getPage(currentPage) {
@@ -69,10 +68,10 @@
                 var url =  controller + 'edit/id/' + _thisTr.data('id');
                 location.href = url;
             });
-            //赋权
+            //设置角色
             $('body').on('click','.empower',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  controller + 'empower/id/' + _thisTr.data('id');
+                var url =  controller + 'empower/id/' + _thisTr.data('id') + '/name/' + _thisTr.data('name');
                 location.href = url;
             });
             //删除
