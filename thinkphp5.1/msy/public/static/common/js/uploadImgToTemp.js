@@ -14,6 +14,7 @@ $(function(){
                 content:'请上传：jpg、jpeg、png、gif格式图片',
                 time:2
             }) ;
+            return false;
         }
         var reader = new FileReader();
         reader.readAsDataURL(img);

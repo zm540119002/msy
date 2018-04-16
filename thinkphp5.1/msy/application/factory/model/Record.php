@@ -60,7 +60,8 @@ class Record extends Model {
 		$file = array(
 			'logo_img','company_img','rb_img','factory_video','license','glory_img'
 		);
-		$oldFactoryInfo = $this -> getRecord($where,$file);
+		$oldRecordInfo = $this -> getRecord($where,$file);
+		//return $oldRecordInfo;
 //		$validate = validate('Record');
 //		if(!$result = $validate->scene('edit')->check($data)) {
 //			return errorMsg($validate->getError());
@@ -72,27 +73,64 @@ class Record extends Model {
 			$data['logo_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['logo_img']));
 		}
 		if(!empty($data['rb_img'])){
-			$data['rb_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
+			$data['rb_img'] = $rse['imgsWithDecNew'];
+			$newRbImg = $rse['imgsArray'];
 		}
 		if(!empty($data['factory_video'])){
-			$data['factory_video'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
+			$data['factory_video'] = $rse['imgsWithDecNew'];
+			$newFactoryVideo = $rse['imgsArray'];
 		}
 		if(!empty($data['license'])){
-			$data['license'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['license']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['license']);
+			$data['license'] = $rse['imgsWithDecNew'];
+			$newLicense = $rse['imgsArray'];
 		}
 		if(!empty($data['glory_img'])){
-			$data['glory_img'] = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['glory_img']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['glory_img']);
+			$data['glory_img'] = $rse['imgsWithDecNew'];
+			$newGloryImg = $rse['imgsArray'];
 		}
 		$data['update_time'] = time();
+
 		$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
 		if(false !== $result){
-			$newFactoryInfo = $this -> getRecord($where,$file);
-			delImgFromPaths($oldFactoryInfo['company_img'],$newFactoryInfo['company_img']);
-			delImgFromPaths($oldFactoryInfo['logo_img'],$newFactoryInfo['logo_img']);
-			delImgFromPaths($oldFactoryInfo['rb_img'],$newFactoryInfo['rb_img']);
-			delImgFromPaths($oldFactoryInfo['factory_video'],$newFactoryInfo['factory_video']);
-			delImgFromPaths($oldFactoryInfo['license'],$newFactoryInfo['license']);
-			delImgFromPaths($oldFactoryInfo['glory_img'],$newFactoryInfo['glory_img']);
+			delImgFromPaths($oldRecordInfo['company_img'],$data['company_img']);
+			delImgFromPaths($oldRecordInfo['logo_img'],$data['logo_img']);
+			if(!empty($oldRecordInfo['rb_img'])){
+				$rbImgWithDec = json_decode($oldRecordInfo['rb_img'],true);
+				$oldRbImg = [];
+				foreach ($rbImgWithDec as $item){
+					$oldRbImg[] = $item['imgSrc'];
+				}
+				delImgFromPaths($oldRbImg,$newRbImg);
+			}
+			if(!empty($oldRecordInfo['factory_video'])){
+				$rbImgWithDec = json_decode($oldRecordInfo['factory_video'],true);
+				$oldFactoryVideo = [];
+				foreach ($rbImgWithDec as $item){
+					$oldFactoryVideo[] = $item['imgSrc'];
+				}
+				delImgFromPaths($oldFactoryVideo,$newFactoryVideo);
+			}
+			if(!empty($oldRecordInfo['license'])){
+				$rbImgWithDec = json_decode($oldRecordInfo['license'],true);
+				$oldLicense = [];
+				foreach ($rbImgWithDec as $item){
+					$oldLicense[] = $item['imgSrc'];
+				}
+				delImgFromPaths($oldLicense,$newLicense);
+			}
+			if(!empty($oldRecordInfo['glory_img'])){
+				$rbImgWithDec = json_decode($oldRecordInfo['glory_img'],true);
+				$oldGloryImg = [];
+				foreach ($rbImgWithDec as $item){
+					$oldGloryImg[] = $item['imgSrc'];
+				}
+				delImgFromPaths($oldGloryImg,$newGloryImg);
+			}
+
 			return successMsg("已修改");
 		}else{
 			return errorMsg($this->getError());

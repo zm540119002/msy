@@ -712,16 +712,17 @@ function moveImgFromTemp($newRelativePath,$filename){
  * @return string 返回相对文件名
  */
 function moveImgsWithDecFromTemp($newRelativePath,$imgsWithDec){
+    $imgs =[];
     $imgsWithDecNew = [];
-    foreach ($imgsWithDec as $item => $value) {
+    $imgsArray = [];
+    foreach ($imgsWithDec as $k => $value) {
         if($value){
             //上传文件公共路径
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
 
             //临时相对路径
             $tempRelativePath = config('upload_dir.temp_path');
-            //var_dump($tempRelativePath);exit;
-
+           
             //旧路径
             $oldPath = $uploadPath . $tempRelativePath;
 
@@ -753,11 +754,15 @@ function moveImgsWithDecFromTemp($newRelativePath,$imgsWithDec){
                     //$this->ajaxReturn(errorMsg('重命名文件失败'));
                 }
             }
-            $imgsWithDecNew[$item]['imgSrc'] = $newRelativePath.basename($value['imgSrc']);
-            $imgsWithDecNew[$item]['imgText'] = $value['imgText'];
+            $imgsArray[] = $newRelativePath.basename($value['imgSrc']);
+            $imgsWithDecNew[$k]['imgSrc'] = $newRelativePath.basename($value['imgSrc']);
+            $imgsWithDecNew[$k]['imgText'] = $value['imgText'];
         }
     }
-    return  json_encode($imgsWithDecNew) ;
+
+    $imgs['imgsWithDecNew'] = json_encode($imgsWithDecNew);
+    $imgs['imgsArray'] = $imgsArray;
+    return  $imgs ;
 }
 
 
