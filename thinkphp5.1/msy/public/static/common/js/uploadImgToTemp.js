@@ -26,7 +26,6 @@ $(function(){
             postData.imgHeight = 100;
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
-            console.log(postData);
             //提交
             $.post(controller+"uploadImgToTemp",postData,function(msg){
                 if(msg.status == 1){

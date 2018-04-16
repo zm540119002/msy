@@ -60,6 +60,7 @@ class Record extends Model {
 		$file = array(
 			'logo_img','company_img','rb_img','factory_video','license','glory_img'
 		);
+
 		$oldRecordInfo = $this -> getRecord($where,$file);
 		//return $oldRecordInfo;
 //		$validate = validate('Record');
@@ -69,14 +70,17 @@ class Record extends Model {
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
+
 		if(!empty($data['logo_img'])){
 			$data['logo_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['logo_img']));
 		}
+
 		if(!empty($data['rb_img'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
 			$data['rb_img'] = $rse['imgsWithDecNew'];
 			$newRbImg = $rse['imgsArray'];
 		}
+
 		if(!empty($data['factory_video'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
 			$data['factory_video'] = $rse['imgsWithDecNew'];
@@ -98,7 +102,7 @@ class Record extends Model {
 		if(false !== $result){
 			delImgFromPaths($oldRecordInfo['company_img'],$data['company_img']);
 			delImgFromPaths($oldRecordInfo['logo_img'],$data['logo_img']);
-			if(!empty($oldRecordInfo['rb_img'])){
+			if(!empty($oldRecordInfo['rb_img']) && !empty($data['rb_img'])){
 				$rbImgWithDec = json_decode($oldRecordInfo['rb_img'],true);
 				$oldRbImg = [];
 				foreach ($rbImgWithDec as $item){
@@ -106,7 +110,7 @@ class Record extends Model {
 				}
 				delImgFromPaths($oldRbImg,$newRbImg);
 			}
-			if(!empty($oldRecordInfo['factory_video'])){
+			if(!empty($oldRecordInfo['factory_video']) && !empty($data['factory_video'])) {
 				$rbImgWithDec = json_decode($oldRecordInfo['factory_video'],true);
 				$oldFactoryVideo = [];
 				foreach ($rbImgWithDec as $item){
@@ -114,7 +118,7 @@ class Record extends Model {
 				}
 				delImgFromPaths($oldFactoryVideo,$newFactoryVideo);
 			}
-			if(!empty($oldRecordInfo['license'])){
+			if(!empty($oldRecordInfo['license']) && !empty($data['license'])){
 				$rbImgWithDec = json_decode($oldRecordInfo['license'],true);
 				$oldLicense = [];
 				foreach ($rbImgWithDec as $item){
@@ -122,7 +126,7 @@ class Record extends Model {
 				}
 				delImgFromPaths($oldLicense,$newLicense);
 			}
-			if(!empty($oldRecordInfo['glory_img'])){
+			if(!empty($oldRecordInfo['glory_img']) && !empty($data['glory_img'])){
 				$rbImgWithDec = json_decode($oldRecordInfo['glory_img'],true);
 				$oldGloryImg = [];
 				foreach ($rbImgWithDec as $item){

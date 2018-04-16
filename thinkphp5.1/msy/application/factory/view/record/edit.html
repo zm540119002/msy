@@ -237,11 +237,33 @@
 		$('body').on('click','.identifyNewGoods',function(){
 			var postData={};
 			postData=$('.qualificationContent').serializeObject();
-			postData.rb_img=$('.development-picture').data('src');
-			postData.license=$('.license-picture').data('src');
 			postData.provinces=$('.area-address-name').data('key');
-			postData.glory_img=$('.honor-picture').data('src');
-			console.log(postData);
+			var rb_img = $('.development-picture').data('src');
+			if(rb_img == ''){
+				postData.rb_img = '';
+			}else{
+				postData.rb_img = rb_img;
+			}
+//			postData.rb_img=$('.development-picture').data('src');
+			var license=$('.license-picture').data('src');
+			if(rb_img == ''){
+				postData.license = '';
+			}else{
+				postData.license = license;
+			}
+			var glory_img=$('.honor-picture').data('src');
+			if(glory_img == ''){
+				postData.glory_img = '';
+			}else{
+				postData.glory_img = glory_img;
+			}
+
+			var factory_video=$('.company-video').data('src');
+			if(factory_video == ''){
+				postData.factory_video = '';
+			}else{
+				postData.factory_video = factory_video;
+			}
 //			postData.factory_video=$('.company-video').data('src');
 			var content='';
 //			if(!postData.company_img){
@@ -287,8 +309,16 @@
 				url:controller + "edit",
 				type:'post',
 				data:postData,
-				success:function () {
-					
+				success:function (msg) {
+				   if(msg.status == 0){
+						layer.open({
+							content:msg.info,
+							time:2
+						});
+						return false;
+					}else if(msg.status == 1){
+						dialog.success(msg.info,controller+'preview')
+					}
 				},
 				error:function (xhr) {
 					dialog.error(xhr)
