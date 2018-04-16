@@ -165,6 +165,7 @@ $(function(){
         var categoryArray = category.split(',');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
+        console.log(postData.sale_price);
         postData.details_img=goodsDetail;
         postData.goods_video=goodsVideo;
         postData.cat_id_1=categoryArray[0];
