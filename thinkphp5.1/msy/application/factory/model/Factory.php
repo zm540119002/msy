@@ -136,13 +136,13 @@ class Factory extends Model {
 		$_join = array(
 		);
 		if($field){
-			$info = $this
+			$info = $this->alias('f')
 				->field($field)
 				->join(array_merge($_join,$join))
 				->where($where)
 				->find();
 		}else{
-			$info = $this
+			$info = $this->alias('f')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->find();

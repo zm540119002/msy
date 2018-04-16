@@ -109,19 +109,19 @@ class Series extends Model {
 	 */
 	public function getSeries($where=[],$field=[],$join=[]){
 		$_where = array(
-			'status' => 0,
+			's.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
 		if($field){
-			$info = $this
+			$info = $this->alias('s')
 				->field($field)
 				->join(array_merge($_join,$join))
 				->where($where)
 				->find();
 		}else{
-			$info = $this
+			$info = $this->alias('s')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->find();

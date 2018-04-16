@@ -150,19 +150,19 @@ class Goods extends Model {
 	 */
 	public function getGoods($where=[],$field=[],$join=[]){
 		$_where = array(
-			'status' => 0,
+			'g.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
 		if($field){
-			$info = $this
+			$info = $this->alias('g')
 				->field($field)
 				->join(array_merge($_join,$join))
 				->where($where)
 				->find();
 		}else{
-			$info = $this
+			$info = $this->alias('g')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->find();

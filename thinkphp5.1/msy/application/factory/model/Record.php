@@ -184,21 +184,21 @@ class Record extends Model {
 	 */
 	public function getRecord($where=[],$field=[],$join=[]){
 		$_where = array(
-			'status' => 0,
+			'r.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
 		if($field){
-			$info = $this
+			$info = $this->alias('r')
 				->field($field)
-				->join(array_merge($_join,$join))
 				->where($where)
+				->join( 'factory f','f.id = r.factory_id')
 				->find();
 		}else{
-			$info = $this
-				->where($where)
+			$info = $this->alias('r')
 				->join(array_merge($_join,$join))
+				->where($where)
 				->find();
 		}
 		return $info;
