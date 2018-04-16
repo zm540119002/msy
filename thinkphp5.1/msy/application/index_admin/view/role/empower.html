@@ -23,11 +23,15 @@
                         <td>
                             <input type="checkbox" class="check_all_2" id="check_all_2">
                             <label for="check_all_2" class="all_checkbox">全选</label>
-                        </td>
-                        <td id="batchAction" colspan="15">
                             <a href="JavaScript:void(0);" class="a-del-batch">批量删除</a>
                         </td>
-                    </tr>            
+                    </tr> 
+                    <tr class="tr-margin-item">
+                        <td height="60" width="50%" align="left">
+                            <a href="javascript:void(0);"><input class="button_save_black_4" value="确定" type="button"></a>
+                            <input class="button_save_black" name="add0" value="返回" type="button">
+                        </td>
+                    </tr>           
                 </tfoot>
             </table>
         </div>
@@ -39,16 +43,24 @@
     $(function(){
         //确定
         $('.button_save_black_4').on('click',function(){
-            var postData = $('#form1').serializeObject();
+            var postData = {};
+            postData.nodeIds = [];
+            $.each($('tbody').find('tr[level=2]'),function(){
+                if($(this).find('.check_item_2').prop('checked')){
+                    postData.nodeIds.push($(this).data('id'));
+                }
+            });
+            postData.roleId = '{$roleId}';
             $.post(action,postData,function(msg){
+                return;
                 dialog.msg(msg,'',function () {
-                    location.href = controller + '/edit';
+                    location.href = controller + 'manage';
                 });
             },'JSON');
         });
         //返回
         $('.button_save_black').click(function(){
-            location.href = controller + '/manage';
+            location.href = controller + 'manage';
         });
     });
 </script>

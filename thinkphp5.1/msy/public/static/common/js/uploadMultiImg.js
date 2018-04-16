@@ -378,6 +378,10 @@ function uploadsImgDescribe(content,obj){
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
                 for(var i=0;i<multiImgAttr.length;i++){
+                    if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
+                        multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
+                    }
+                    //imgArray.push(img);
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
                     $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
                     $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].imgText);
@@ -422,7 +426,7 @@ function uploadsImgDescribe(content,obj){
                          if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
                             a[i].imgSrc= uploads+a[i].imgSrc;
 
-                         }
+                        }
                          imgArray.push(a[i]);
                     }
 
@@ -437,7 +441,9 @@ function uploadsImgDescribe(content,obj){
         })
 }
 //视频描述弹窗
-function uploadsVideoDescribe(content,obj){
+function uploadsVideoDescribe(content,obj)
+
+{
     layer.open({
             title:['上传企业视频','border-bottom:1px solid #d9d9d9'],
             className:'editCompanyPicLayer',
@@ -456,7 +462,6 @@ function uploadsVideoDescribe(content,obj){
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
-                console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
                     $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
@@ -501,7 +506,7 @@ function uploadsVideoDescribe(content,obj){
 
                     $('.goods-detail').data('src',imgArray);
                     layer.close(index);
-                })
+                });
                 layer.close(index);
             },
             no:function(){

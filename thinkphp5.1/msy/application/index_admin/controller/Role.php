@@ -33,13 +33,19 @@ class Role extends \common\controller\UserBase
     /**角色-赋权
      */
     public function empower(){
+        $modelRoleNode = new \common\model\RoleNode();
         if(request()->isPost()){
-            return 'empower';
+            return $modelRoleNode->edit();
         }else{
-            $id = input('id',0);
+            $roleId = input('id',0);
+            $this->assign('roleId',$roleId);
+            $response = $modelRoleNode->where('role_id','=',$roleId)->select();
+            if(!empty($response)){
+                $nodeIds = array_column($response,'node_id');
+                $this->assign('nodeIds',$nodeIds);
+            }
             $menuList = getMenu(true);
             $this->assign('menuList',$menuList);
-//            print_r($menuList);
             return $this->fetch();
         }
     }

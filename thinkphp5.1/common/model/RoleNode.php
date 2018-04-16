@@ -12,64 +12,39 @@ class RoleNode extends \think\Model {
 	//编辑
 	public function edit(){
 		$postData = input('post.');
-		if($postData['id'] && intval($postData['id'])){
-			$this->isUpdate(true)->save($postData);
-		}else{
-			unset($postData['id']);
-			$this->save($postData);
+		if($postData['roleId'] && intval($postData['roleId']) && !empty($postData['nodeIds'])){
+			$response = $this->where('role_id','=',$postData['roleId'])->select();
+			$response = $response->toArray();
+			//原节点
+			$originNodeIds = array_column($response,'node_id');
+			//新增节点
+			$addNodeIds = empty($originNodeIds)?$postData['nodeIds']:array_diff($postData['nodeIds'],$originNodeIds);
+			if(!empty($addNodeIds)){
+				$list = [];
+				foreach ($addNodeIds as $val){
+					$arr = ['role_id'=>$postData['roleId'],'node_id'=>$val];
+					$list[] = $arr;
+				}
+				if(!empty($list) && !empty($this->saveAll($list))){
+					return errorMsg('失败',$this->getError());
+				}
+			}
+			if(!empty($originNodeIds)){
+				//删除节点
+				$delNodeIds = array_diff($originNodeIds,$postData['nodeIds']);
+				$delNodeIds = array_values($delNodeIds);
+				if(!empty($delNodeIds) && !$this->batchDelByNodeIds($delNodeIds)){
+					return errorMsg('失败',$this->getError());
+				}
+			}
 		}
-		if(!$this->getAttr('id')){
-			return errorMsg('失败',$this->getError());
-		}
-		return successMsg('成功！',array('id'=>$this->getAttr('id')));
+		return successMsg('成功！');
 	}
-	//分页查询
-	public function pageQuery(){
+	//批量删除
+	public function batchDelByNodeIds($nodeIds){
 		$where = [
-			['status', '=', 0],
+			['node_id', 'in', $nodeIds],
 		];
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
-		}
-		$field = array(
-			'id','name','status','type','remark',
-		);
-		$order = 'id';
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
-	}
-	//删除
-	public function del(){
-		$where = [
-			['status', '=', 0],
-		];
-		$id = input('post.id',0);
-		if(!$id){
-			return errorMsg('参数错误');
-		}
-		$where[] = ['id', '=', $id];
-		$result = $this->where($where)->delete();
-		if(!$result){
-			return errorMsg('失败',$this->getError());
-		}
-		return successMsg('成功');
-	}
-	//标记删除
-	public function tagDel(){
-		$where = [
-			['status', '=', 0],
-		];
-		$id = input('post.id',0);
-		if(!$id){
-			return errorMsg('参数错误');
-		}
-		$where[] = ['id', '=', $id];
-		$result = $this->where($where)->setField('status',2);
-		if(!$result){
-			return errorMsg('失败',$this->getError());
-		}
-		return successMsg('成功');
+		return $this->where($where)->delete();
 	}
 }
