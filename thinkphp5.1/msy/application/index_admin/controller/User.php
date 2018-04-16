@@ -50,4 +50,24 @@ class User extends \common\controller\UserBase
         $modelUser = new \common\model\User();
         return $modelUser->tagDel();
     }
+    /**用户-赋角色
+     */
+    public function empower(){
+        $modelUserRole = new \common\model\UserRole();
+        if(request()->isPost()){
+            return $modelUserRole->edit();
+        }else{
+            $userId = input('id',0);
+            $this->assign('userId',$userId);
+            $this->assign('userName',input('name',''));
+            //用户角色列表
+            $response = $modelUserRole->where('user_id','=',$userId)->select();
+            $userRoleList = $response->toArray();
+            $this->assign('userRoleList',$userRoleList?:[]);
+            //系统角色列表
+            $roleList = getRole();
+            $this->assign('roleList',$roleList);
+            return $this->fetch();
+        }
+    }
 }

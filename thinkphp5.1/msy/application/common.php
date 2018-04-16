@@ -37,3 +37,12 @@ function getMenu($all=false){
     }
     return $menu;
 }
+
+/**获取系统角色
+ * @return array
+ */
+function getRole(){
+    $modelRole = new \common\model\Role();
+    $response = $modelRole->where('status','=',0)->select();
+    return $response->toArray()?:[];
+}
