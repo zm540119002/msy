@@ -62,8 +62,8 @@ class User extends \common\controller\UserBase
             $this->assign('userName',input('name',''));
             //用户角色列表
             $response = $modelUserRole->where('user_id','=',$userId)->select();
-            $userRoleList = $response->toArray();
-            $this->assign('userRoleList',$userRoleList?:[]);
+            $roleIds = array_column($response->toArray(),'role_id');
+            $this->assign('roleIds',$roleIds?:[]);
             //系统角色列表
             $roleList = getRole();
             $this->assign('roleList',$roleList);
