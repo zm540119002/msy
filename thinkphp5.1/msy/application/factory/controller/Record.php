@@ -9,8 +9,11 @@ class Record extends FactoryBase
         $model = new \app\factory\model\Record();
         $factoryInfo = $this->factory;
         if(request()->isAjax()){
+            if( isset($_POST['rb_img'])){
+                return 1;
+            }
+            return 2;
             if(input('?post.record_id') && !input('?post.record_id') == ''){
-                $recordId = input('post.record_id');
                 return $model -> edit($factoryInfo['id']);
             }
             return $model -> add($factoryInfo['id']);
