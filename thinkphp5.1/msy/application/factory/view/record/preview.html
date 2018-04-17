@@ -5,7 +5,7 @@
 <article class="f24">
 	<section>
 		<div>
-			<img src="public/static/common/img/default/no_pic_1000.jpg" alt="" class="common_default_img">
+			<img src="public_uploads/{$recordInfo.company_img|default=''}" alt="" class="common_default_img">
 		</div>
 	</section>
 	<section class="separation-line company-preview-top content-box">
@@ -15,8 +15,8 @@
 		</div>
 		<div class="columns_flex">
 			<div>
-				<img src="" alt="">
-				<span>[某某]</span>
+				<img src="public_uploads/{$recordInfo.logo_img|default=''}" alt="">
+				<span>[{$recordInfo.shop_name|default=''}]</span>
 			</div>
 			<a href="" class="enter">进入厂商确定预览&nbsp;></a>
 		</div>
@@ -25,38 +25,30 @@
 		<div>
 			<span class="content-label">企业简介</span>
 			<div class="more-text-box">
-				<p class="more-text">某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某</p>
+				<p class="more-text">{$recordInfo.introduction|default=''}</p>
 			</div>
 		</div>
 		<div class="">
 			<span class="address-label">地址：</span>
-			<p>XXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+			<input  type="hidden" class="provinces area-address-name" value="{$recordInfo.provinces|default=''}">
+			<input  type="hidden" class="detail_address" value="{$recordInfo.detail_address|default=''}">
+			<span class="area_address"></span><span>{$recordInfo.detail_address|default=''}</span>
 		</div>
 	</section>
 	<section class="separation-line content-box">
 		<span class="content-label">企业视频</span>
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<video src="public/static/common/video1.mp4" autoplay="autoplay"></video>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				<!--<div class="swiper-slide swiper-slide-active">-->
+					<!--<video src="public/static/common/video1.mp4" autoplay="autoplay"></video>-->
+					<!--<p>sfsfsfsfsdfsfdfdsf</p>-->
+				<!--</div>-->
+				{volist name="recordInfo.factory_video" id="vo"}
 				<div class="swiper-slide ">
-					<video src="public/static/common/video2.mp4"></video>
-					<p>sfsfsfsfsdfsfdfdsf</p>
+					<video src="public_uploads/{$vo['imgSrc']}" preload="meta" controls="controls" class="common_default_img"></video>
+					<p>{$vo['imgText']}</p>
 				</div>
-				<div class="swiper-slide ">
-					<video src="public/static/common/video3.mp4"></video>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<video src="public/static/common/video2.mp4"></video>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<video src="public/static/common/video1.mp4"></video>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				{/volist}
 			</div>
 		</div>
 	</section>
@@ -64,36 +56,18 @@
 		<span class="content-label content-box">研发生产</span>
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				<!--<div class="swiper-slide swiper-slide-active">-->
+					<!--<a>-->
+						<!--<img src="public/static/common/img/default/no_pic_100.jpg" />-->
+					<!--</a>-->
+					<!--<p>sfsfsfsfsdfsfdfdsf</p>-->
+				<!--</div>-->
+				{volist name="recordInfo.rb_img" id="vo"}
 				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
+					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
+					<p>{$vo['imgText']}</p>
 				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				{/volist}
 			</div>
 		</div>
 	</section>
@@ -101,36 +75,18 @@
 		<span class="content-label">执照资质</span>
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				<!--<div class="swiper-slide swiper-slide-active">-->
+					<!--<a>-->
+						<!--<img src="public/static/common/img/default/no_pic_100.jpg" />-->
+					<!--</a>-->
+					<!--<p>sfsfsfsfsdfsfdfdsf</p>-->
+				<!--</div>-->
+				{volist name="recordInfo.license" id="vo"}
 				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
+					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
+					<p>{$vo['imgText']}</p>
 				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				{/volist}
 			</div>
 		</div>
 	</section>
@@ -138,36 +94,18 @@
 		<span class="content-label">专利荣誉</span>
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				<!--<div class="swiper-slide swiper-slide-active">-->
+					<!--<a>-->
+						<!--<img src="public/static/common/img/default/no_pic_100.jpg" />-->
+					<!--</a>-->
+					<!--<p>sfsfsfsfsdfsfdfdsf</p>-->
+				<!--</div>-->
+				{volist name="recordInfo.glory_img" id="vo"}
 				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
+					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
+					<p>{$vo['imgText']}</p>
 				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
-				<div class="swiper-slide ">
-					<a>
-						<img src="public/static/common/img/default/no_pic_100.jpg" />
-					</a>
-					<p>sfsfsfsfsdfsfdfdsf</p>
-				</div>
+				{/volist}
 			</div>
 		</div>
 	</section>
@@ -184,8 +122,13 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//初始化地址
+		var addressIndex=$('.area-address-name').val();
+		var areaAddressArr=addressIndex.split(',');
+		$('.area_address').setArea(areaAddressArr);
 		swiper('.swiper-container');
 		$('.more-text-box').moreText({
 			mainCell:".more-text",

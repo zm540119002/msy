@@ -97,17 +97,21 @@ class Brand extends Model {
 	 */
 	public function getBrand($where=[],$field=[],$join=[]){
 		$_where = array(
-			'status' => 0,
+			'b.status' => 0,
+		);
+		$_join = array(
 		);
 		$where = array_merge($_where, $where);
 		if($field){
-			$info = $this
+			$info = $this->alias('b')
 				->field($field)
 				->where($where)
+				->join(array_merge($_join,$join))
 				->find();
 		}else{
-			$info = $this
+			$info = $this->alias('b')
 				->where($where)
+				->join(array_merge($_join,$join))
 				->find();
 		}
 		return $info;

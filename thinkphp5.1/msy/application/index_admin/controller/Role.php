@@ -40,10 +40,9 @@ class Role extends \common\controller\UserBase
             $roleId = input('id',0);
             $this->assign('roleId',$roleId);
             $response = $modelRoleNode->where('role_id','=',$roleId)->select();
-            if(!empty($response)){
-                $nodeIds = array_column($response,'node_id');
-                $this->assign('nodeIds',$nodeIds);
-            }
+            $response = $response->toArray();
+            $nodeIds = array_column($response,'node_id');
+            $this->assign('nodeIds',$nodeIds?:[]);
             $menuList = getMenu(true);
             $this->assign('menuList',$menuList);
             return $this->fetch();

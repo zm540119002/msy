@@ -87,8 +87,7 @@
 				<div>
 					<div class="picture-module company-picture-module">
 						<input type="file" class="uploadImg uploadSingleImg" name="">
-						<img class="upload_img" src="" alt="">
-						<!--<img class="upload_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">-->
+						<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
 						<input type="hidden" class="business-license img" value="{$recordInfo.company_img|default=''}" name="company_img"/>
 					</div>
 					<!--<p>企业营业执照</p>-->
@@ -238,10 +237,33 @@
 		$('body').on('click','.identifyNewGoods',function(){
 			var postData={};
 			postData=$('.qualificationContent').serializeObject();
-			postData.rb_img=$('.development-picture').data('src');
-			postData.license=$('.license-picture').data('src');
 			postData.provinces=$('.area-address-name').data('key');
-			postData.glory_img=$('.honor-picture').data('src');
+			var rb_img = $('.development-picture').data('src');
+			if(rb_img == ''){
+				postData.rb_img = '';
+			}else{
+				postData.rb_img = rb_img;
+			}
+//			postData.rb_img=$('.development-picture').data('src');
+			var license=$('.license-picture').data('src');
+			if(rb_img == ''){
+				postData.license = '';
+			}else{
+				postData.license = license;
+			}
+			var glory_img=$('.honor-picture').data('src');
+			if(glory_img == ''){
+				postData.glory_img = '';
+			}else{
+				postData.glory_img = glory_img;
+			}
+
+			var factory_video=$('.company-video').data('src');
+			if(factory_video == ''){
+				postData.factory_video = '';
+			}else{
+				postData.factory_video = factory_video;
+			}
 //			postData.factory_video=$('.company-video').data('src');
 			var content='';
 //			if(!postData.company_img){
@@ -270,18 +292,41 @@
 //				return false;
 //			}
 
-			$.post(controller + "edit",postData,function(msg){
-				console.log(msg)
-//				if(msg.status == 0){
-//					layer.open({
-//						content:msg.info,
-//						time:2
-//					});
-//					return false;
-//				}else if(msg.status == 1){
-//					$('.logo-src').val(msg.info);
-//				}
-			},'json');
+//			$.post(controller + "edit",postData,function(msg){
+//
+////				if(msg.status == 0){
+////					layer.open({
+////						content:msg.info,
+////						time:2
+////					});
+////					return false;
+////				}else if(msg.status == 1){
+////					$('.logo-src').val(msg.info);
+////				}
+//			},'json');
+			
+			$.ajax({
+				url:controller + "edit",
+				type:'post',
+				data:postData,
+				success:function (msg) {
+				   if(msg.status == 0){
+						layer.open({
+							content:msg.info,
+							time:2
+						});
+						return false;
+					}else if(msg.status == 1){
+						dialog.success(msg.info,controller+'preview')
+					}
+				},
+				error:function (xhr) {
+					dialog.error(xhr)
+				},
+
+				
+				
+			})
 		})
 
 	})

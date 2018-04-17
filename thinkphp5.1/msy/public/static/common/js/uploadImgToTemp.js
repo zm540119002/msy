@@ -14,6 +14,7 @@ $(function(){
                 content:'请上传：jpg、jpeg、png、gif格式图片',
                 time:2
             }) ;
+            return false;
         }
         var reader = new FileReader();
         reader.readAsDataURL(img);
@@ -25,7 +26,6 @@ $(function(){
             postData.imgHeight = 100;
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
-            console.log(postData);
             //提交
             $.post(controller+"uploadImgToTemp",postData,function(msg){
                 if(msg.status == 1){
