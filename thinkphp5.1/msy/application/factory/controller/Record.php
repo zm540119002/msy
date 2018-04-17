@@ -34,16 +34,11 @@ class Record extends FactoryBase
         $model = new \app\factory\model\Record();
         $factoryInfo = $this->factory;
         $where['factory_id'] = $factoryInfo['id'];
-        $join = array(
-            'factory f','f.id = r.factory_id'
-        );
-        $field = array(
-            'r.id','r.factory_id','r.shop_name','r.introduction','r.factory_video','r.logo_img','r.rb_img',
-            'r.license','r.glory_img','r.provinces','r.detail_address','r.company_img','r.create_time','r.update_time',
-            'f.name'
-        );
-        $recordInfo = $model -> getRecord($where,$field,$join);
-        return $model->getLastSql();
+
+        $recordInfo = $model::hasWhere('factory',['id'=>$factoryInfo['id']])->field('factory.name')->find()->toArray();
+
+
+
 
         $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
         $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
