@@ -159,6 +159,7 @@ class UserCenter extends \think\Model {
 	 * @return bool
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
+		return true;//上线后再验证
 		return session('captcha_' . $mobilePhone) == $captcha ;
 	}
 

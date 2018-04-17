@@ -31,7 +31,6 @@ class UserCenter extends \think\Controller{
         session('user', null);
         session('user_sign', null);
         header('Content-type: text/html; charset=utf-8');
-        echo '退出成功！';exit;
         return redirect('login');
     }
 
