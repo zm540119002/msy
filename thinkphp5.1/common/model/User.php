@@ -10,7 +10,7 @@ class User extends \think\Model {
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function edit(){
+	public function edit($userId){
 		$postData = input('post.');
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('edit')->check($postData)){
@@ -20,6 +20,9 @@ class User extends \think\Model {
 			$this->isUpdate(true)->save($postData);
 		}else{
 			unset($postData['id']);
+			if(isset($userId) && $userId){
+				$postData['parent_id'] = $userId;
+			}
 			$this->save($postData);
 		}
 		if(!$this->getAttr('id')){
@@ -28,10 +31,13 @@ class User extends \think\Model {
 		return successMsg('成功！',array('id'=>$this->getAttr('id')));
 	}
 	//分页查询
-	public function pageQuery(){
+	public function pageQuery($userId){
 		$where = [
 			['status', '=', 0],
 		];
+		if(isset($userId) && $userId){
+			$where[] = ['parent_id', '=', $userId];
+		}
 		$keyword = input('get.keyword','');
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];

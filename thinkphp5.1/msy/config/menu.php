@@ -7,7 +7,7 @@ return [
         'common'=>[
             'id'=>1,'name'=>'基本信息','type'=>1,
             'sub_menu' => [
-                ['id'=>2,'name'=>'用户信息','display'=>1,'controller'=>'User','action'=>'info',],
+                ['id'=>2,'name'=>'基本信息','display'=>1,'controller'=>'User','action'=>'info',],
             ],
         ],
         'system'=>[

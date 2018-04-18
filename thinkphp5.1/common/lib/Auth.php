@@ -3,18 +3,16 @@ namespace common\lib;
 
 class Auth
 {
-    // 所有菜单
-    private $_allMenu = [];
-    // 可显示的菜单
-    private $_displayMenu = [];
     // 用户信息
     private $_user = [];
     // 用户角色
     private $_role = [];
     // 用户节点
     private $_node = [];
+    // 所有菜单
+    private $_allMenu = [];
     // 用户菜单
-    public static $ownMenu = [];
+    private $_ownMenu = [];
     // 默认配置
     private $_config = [
         'model_user_role' => '\common\model\UserRole', // 用户-角色关系表-模型
@@ -23,19 +21,48 @@ class Auth
     ];
 
     public function __construct(){
-        $this->_config = array_merge($this->_config, !empty(config('auth'))?config('auth'):[]);
-        $this->_user = session('user');
+        $this->_config = array_merge($this->_config,!empty(config('auth'))?config('auth'):[]);
+        $this->_user = !empty(session('user'))?session('user'):[];
         $this->_setAllMenu();
-        $this->_setDisplayMenu();
     }
     public function test(){
-        return $this->_displayMenu;
         return $this->getOwnMenu();
+    }
+    /**获取用户可显示菜单
+     */
+    public function getOwnDisplayMenu(){
+        //获取用户可显示菜单先获取用户菜单
+        $this->getOwnMenu();
+        return $this->_filterDisplayMenu($this->_ownMenu);
+    }
+    /**获取所有可显示菜单
+     */
+    public function getAllDisplayMenu(){
+        //获取用户可显示菜单先获取用户菜单
+        return $this->_filterDisplayMenu($this->_allMenu);
+    }
+    /**获取所有菜单
+     */
+    public function getAllMenu(){
+        //获取用户可显示菜单先获取用户菜单
+        return $this->_allMenu;
     }
     /**获取用户菜单
      */
     public function getOwnMenu(){
-        return $this->getNode();
+        //获取菜单先获取用户节点
+        $this->getNode();
+        $temp = !empty($this->_allMenu)?$this->_allMenu:[];
+        if(is_array($temp) && !empty($temp)){
+            foreach ($temp as &$value){
+                foreach ($value['sub_menu'] as $key=>$val){
+                    if(!in_array($val['id'],$this->_node)){
+                        unset($value['sub_menu'][$key]);
+                    }
+                }
+            }
+        }
+        return $this->_ownMenu = $temp;
     }
     /**获取用户角色
      */
@@ -49,13 +76,13 @@ class Auth
     /**获取用户节点
      */
     public function getNode(){
-        $modelRoleNode = new $this->_config['model_role_node'];
-        //获取节点先获取角色
+        //获取用户节点先获取角色
         $this->getRole();
+        $modelRoleNode = new $this->_config['model_role_node'];
         if(!empty($this->_role)){
             $response = $modelRoleNode->where('role_id','in',$this->_role)->select();
             $response = $response->toArray();
-            $node = array_column($response,'node_id');
+            $node = array_unique(array_column($response,'node_id'));
             $this->_node = $node;
         }
         return $this->_node;
@@ -66,19 +93,18 @@ class Auth
         $this->_allMenu = array_merge($this->_allMenu,!empty(config('menu.menu'))?config('menu.menu'):[]);
         $this->_allMenu = array_merge($this->_allMenu,!empty(config('sub_menu.menu'))?config('sub_menu.menu'):[]);
     }
-    /**设置可显示菜单
+    /**过滤不显示菜单
      */
-    private function _setDisplayMenu(){
-        $temp = $this->_allMenu;
-        if(!empty($temp)){
-            foreach ($temp as &$value){
+    private function _filterDisplayMenu($menu){
+        if(is_array($menu) && !empty($menu)){
+            foreach ($menu as &$value){
                 foreach ($value['sub_menu'] as $key=>$val){
                     if(!$val['display']){
                         unset($value['sub_menu'][$key]);
                     }
                 }
             }
-            $this->_displayMenu = $temp;
         }
+        return $menu;
     }
 }
