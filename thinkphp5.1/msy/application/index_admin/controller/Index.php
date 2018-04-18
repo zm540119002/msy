@@ -9,12 +9,13 @@ class Index extends \common\controller\UserBase
         if($this->user['type']==0){//超级管理员
             $menu = getMenu();
             $this->assign('menu',$menu);
-        }else{
         }
         $auth = new \common\lib\Auth();
         $allMenu = $auth->test();
-        foreach ($allMenu as $value){
-            print_r($value);
+        if(is_array($allMenu)){
+            print_r($allMenu);
+        }else{
+            echo $allMenu;
             echo '<br/>';
         }
         exit;

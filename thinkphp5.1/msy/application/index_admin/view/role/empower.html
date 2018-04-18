@@ -59,13 +59,25 @@
         $.each($('tbody'),function(){
             var _this = $(this);
             var sign = true;
+            var selectOneSign = false;
             //一票否决
             $.each(_this.find('[level=2]').find('.check_item_2'),function(){
                 if(!$(this).prop('checked')){
                     sign = false;
+                    return;
+                }
+            });
+            //只要选中一个
+            $.each(_this.find('[level=2]').find('.check_item_2'),function(){
+                if($(this).prop('checked')){
+                    selectOneSign = true;
+                    return;
                 }
             });
             _this.find('[level=1]').find('.check_item_2').prop('checked',sign);
+            if(selectOneSign){
+                _this.find('.folding').click();
+            }
         });
         //确定
         $('.button_save_black_4').on('click',function(){
