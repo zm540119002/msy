@@ -25,6 +25,8 @@ class Series extends FactoryBase
     public function move(){
         $model = new M();
         if(request()->isPost()){
+
+            
             return $model -> move($this->factory['id']);
         }
     }
