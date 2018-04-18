@@ -27,8 +27,6 @@ class Auth
         $this->_user = session('user');
         $this->_setAllMenu();
         $this->_setDisplayMenu();
-        $this->_setRole();
-        $this->_setNode();
     }
     public function test(){
         return $this->_displayMenu;
@@ -42,31 +40,25 @@ class Auth
     /**获取用户角色
      */
     public function getRole(){
+        $modelUserRole = new $this->_config['model_user_role'];
+        $response = $modelUserRole->where('user_id','=',$this->_user['id'])->select();
+        $response = $response->toArray();
+        $this->_role = array_column($response,'role_id');
         return $this->_role;
     }
     /**获取用户节点
      */
     public function getNode(){
-        return $this->_node;
-    }
-    /**设置节点
-     */
-    private function _setNode(){
         $modelRoleNode = new $this->_config['model_role_node'];
+        //获取节点先获取角色
+        $this->getRole();
         if(!empty($this->_role)){
             $response = $modelRoleNode->where('role_id','in',$this->_role)->select();
             $response = $response->toArray();
             $node = array_column($response,'node_id');
             $this->_node = $node;
         }
-    }
-    /**设置角色
-     */
-    private function _setRole(){
-        $modelUserRole = new $this->_config['model_user_role'];
-        $response = $modelUserRole->where('user_id','=',$this->_user['id'])->select();
-        $response = $response->toArray();
-        $this->_role = array_column($response,'role_id');
+        return $this->_node;
     }
     /**设置所有菜单
      */
