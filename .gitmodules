@@ -1,3 +1,6 @@
 [submodule "thinkphp-bjyadmin"]
 	path = thinkphp-bjyadmin
 	url = http://git.oschina.net/shuaibai123/thinkphp-bjyadmin
+[submodule "shopping-mall"]
+	path = shopping-mall
+	url = https://github.com/huangleimingTiAmo/shopping-mall
