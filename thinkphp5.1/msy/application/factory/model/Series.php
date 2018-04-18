@@ -25,15 +25,12 @@ class Series extends Model {
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		$id = $this->getAttr('id');
-
 		if(false == $result){
 			$this->rollBack();// 事务A回滚
 			return errorMsg($this->getError());
 		}
-
 		$data = array('sort'=>$id);
 		$result = $this->allowField(true)->save($data,['id' => $id]);
-
 		if(false == $result){
 			$this->rollBack();// 事务A回滚
 			return errorMsg($this->getError());
@@ -81,22 +78,45 @@ class Series extends Model {
 		}
 	}
 
-	//
-	public function moveUp($factoryId){
+	//移动
+	public function move($factoryId){
 		$data = input('post.');
-		$where = array(
-			'id' => $data['series_id'],
-			'factory_id' => $data['factory_id'],
-            'sort' => $data['sort'],
-		);
-		$sort = $data['sort'];
-		$this -> selectSeries($where,[],['sort'=>'desc'],"$sort,1");
-		echo $this -> getLastSql();exit;
+		if($data['move']){
+			$where = [
+				['factory_id','=',$factoryId],
+				['sort', '<', $data['sort']]
+			];
+		}else{
+			$where = [
+				['factory_id','=',$factoryId],
+				['sort', '>', $data['sort']]
+			];
+		}
+		$lastSeries = $this -> selectSeries($where,[],[],'1');
+		if(!empty($lastSeries)){
+			$this -> startTrans();
+			$updateData = [
+				'sort' => $data['sort'],
+			];
+			$result = $this->allowField(true)->save($updateData,['id' => $lastSeries[0]['id'],'factory_id' => $factoryId]);
+			if(false == $result){
+				$this->rollBack();// 事务A回滚
+				return errorMsg($this->getError());
+			}
+			$updateData = [
+				'sort' => $lastSeries[0]['sort'],
+			];
+			$result = $this->allowField(true)->save($updateData,['id' => $data['series_id'],'factory_id' => $factoryId]);
+			if(false == $result){
+				$this->rollBack();// 事务A回滚
+				return errorMsg($this->getError());
+			}
+			$this->commit();
+			return successMsg("成功添加");
+		}
 
 	}
-	public function moveDown($factoryId){
 
-	}
 
 	/**
 	 * @param array $where
@@ -126,6 +146,9 @@ class Series extends Model {
 				->limit($limit)
 				->select();
 		}
+		if(!empty($list)){
+			$list = $list->toArray();
+		}
 		return $list;
 	}
 
@@ -150,6 +173,9 @@ class Series extends Model {
 			$info = $this->alias('s')
 				->where($where)
 				->find();
+		}
+		if(!empty($info)){
+			$info = $info->toArray();
 		}
 		return $info;
 	}
