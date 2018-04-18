@@ -11,9 +11,9 @@ class Series extends FactoryBase
         $model = new M();
         if(request()->isPost()){
             if(input('?post.series_id')){
-                return $model -> edit();
+                return $model -> edit($this->factory['id']);
             }else{
-                return $model -> add();
+                return $model -> add($this->factory['id']);
             }
         }
         $seriesList = $model -> selectSeries([],[],['sort'=>'desc','id'=>'desc',]);
@@ -28,7 +28,7 @@ class Series extends FactoryBase
         $model = new M();
         if(request()->isPost()){
             if(input('?post.series_id')){
-                return $model -> delete();
+                return $model -> del($this->factory['id']);
             }
         }
     }

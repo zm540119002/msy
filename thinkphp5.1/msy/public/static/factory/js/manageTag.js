@@ -4,7 +4,6 @@ $(function(){
     var layerTagName;
     var tagListLen=$('.classify-label-content .tag-item').length;
         if(!tagListLen){
-            alert(1);
             $('.classify-label-content .set-tag-tipc').hide();
             $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
             $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
@@ -30,15 +29,8 @@ $(function(){
                 layerTagNum=$('.addTagLayer .layer-tag-num').val();
                 layerTagName=$('.addTagLayer .layer-tag-name').val();
 
-
-
-                // tagData={
-                //     layerTagNum:layerTagNum,
-                //     layerTagName:layerTagName
-                // }
                 $('input[class="classifyTagInfo'+layerTagNum+'"]').data('tag-id',layerTagNum);
                 var postData = {};
-                postData.sort = layerTagNum;
                 postData.name = layerTagName;
                 $.post(controller+"edit",postData,function(msg){
                     if(msg.status == 0){
@@ -99,7 +91,7 @@ $(function(){
         if(_this.hasClass('move-disabled-icons')){
             _this.attr('disabled',true);
         }else{
-            manageClassifyTag.moveTag(_this);
+            manageClassifyTag.upTag(_this);
         }
         
     })
@@ -148,10 +140,8 @@ var manageClassifyTag={
         layerTagNum=$('.addTagLayer .layer-tag-num').val();
         var seriesId = editObj.siblings('.series_id').data('series-id');
         editObj.text(layerTagName);
-        editObj.siblings('input').data('tag-id',layerTagNum);
         var postData = {};
         postData.series_id = seriesId;
-        postData.sort = layerTagNum;
         postData.name = layerTagName;
         $.post(controller+"edit",postData,function(msg){
             if(msg.status == 0){
@@ -191,13 +181,13 @@ var manageClassifyTag={
         });
         delObj.parents('.tag-item').remove();
     },
-    moveTag:function(moveObj){
-        var currentIndex=moveObj.parents('.tag-item').index();
-        var upperIndex=moveObj.parents('.tag-item').prev().index();
-        var currentTagName=moveObj.parents('.tag-item').find('.classify-tag-name');
-        var upperTagName=moveObj.parents('.tag-item').prev().find('.classify-tag-name');
-        var currentTagId=moveObj.parents('.tag-item').find('input');
-        var upperTagId=moveObj.parents('.tag-item').prev().find('input');
+    upTag:function(upObj){
+        var currentIndex=upObj.parents('.tag-item').index();
+        var upperIndex=upObj.parents('.tag-item').prev().index();
+        var currentTagName=upObj.parents('.tag-item').find('.classify-tag-name');
+        var upperTagName=upObj.parents('.tag-item').prev().find('.classify-tag-name');
+        var currentTagId=upObj.parents('.tag-item').find('input');
+        var upperTagId=upObj.parents('.tag-item').prev().find('input');
 
         var temp,tempId;
             temp=upperTagName.text();
@@ -208,6 +198,16 @@ var manageClassifyTag={
                 upperTagId.data('tag-id',currentTagId.data('tag-id')).attr('class','classifyTagInfo'+currentTagId.data('tag-id'));
                 currentTagId.data('tag-id',tempId).attr('class','classifyTagInfo'+tempId);
             }
+        var postData = {};
+        postData.series_id = upObj.siblings('.')
+        $.post(controller+"up",{series_id:series_id},function(msg){
+            if(msg.status == 0){
+                dialog.error(msg.info);
+            }
+            if(msg.status == 1){
+                dialog.success(msg.info);
+            }
+        });
         
     },
     downTag:function(downObj){
