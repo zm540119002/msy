@@ -196,26 +196,50 @@ var manageClassifyTag={
             temp=upperTagName.text();
             tempId=upperTagId.data('tag-id');
             tempSeriesId=upperSeriesTagId.data('series-id');
-            if(currentIndex>upperIndex){
-                upperTagName.text(currentTagName.text());
-                currentTagName.text(temp);
-                //upperTagId.data('tag-id',currentTagId.data('tag-id')).attr('class','sort'+currentTagId.data('tag-id'));
-                //currentTagId.data('tag-id',tempId).attr('class','sort'+tempId);
-                upperTagId.data('tag-id',currentTagId.data('tag-id'));
-                currentTagId.data('tag-id',tempId);
-                upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
-                currentSeriesTagId.data('series-id',tempSeriesId);
-            }
         var postData = {};
-        postData.series_id = upObj.siblings('.')
-        $.post(controller+"up",{series_id:series_id},function(msg){
-            if(msg.status == 0){
-                dialog.error(msg.info);
-            }
-            if(msg.status == 1){
-                dialog.success(msg.info);
-            }
+        postData.move = upObj.data('move');
+        postData.series_id = upObj.parent().siblings('.series_id').data('series-id');
+        postData.sort = upObj.parent().siblings('.sort').data('tag-id');
+        console.log(postData);
+        $.ajax({
+            url: controller+"move",
+            data: postData,
+            type: 'post',
+            beforeSend: function(){
+                //$('.loading').show();
+            },
+            success: function(info){
+                if(info.status == 1){
+                    if(currentIndex>upperIndex){
+                        upperTagName.text(currentTagName.text());
+                        currentTagName.text(temp);
+                        upperTagId.data('tag-id',currentTagId.data('tag-id'));
+                        currentTagId.data('tag-id',tempId);
+                        upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+                        currentSeriesTagId.data('series-id',tempSeriesId);
+                    }
+                }
+            },
+            complete:function(){
+
+            },
+            error:function (xhr) {
+                dialog.error('AJAX错误'+xhr);
+            },
         });
+
+        // $.post(controller+"move",postData,function(msg){
+        //     if(msg.status == 1){
+        //         if(currentIndex>upperIndex){
+        //             upperTagName.text(currentTagName.text());
+        //             currentTagName.text(temp);
+        //             upperTagId.data('tag-id',currentTagId.data('tag-id'));
+        //             currentTagId.data('tag-id',tempId);
+        //             upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+        //             currentSeriesTagId.data('series-id',tempSeriesId);
+        //         }
+        //     }
+        // });
         
     },
     downTag:function(downObj){
@@ -231,16 +255,22 @@ var manageClassifyTag={
             temp=nextTagName.text();
             tempId=nextTagId.data('tag-id');
             tempSeriesId=nextSeriesTagId.data('series-id');
-            if(currentIndex<nextIndex){
-                alert(currentTagId.data('tag-id')+'\n'+currentSeriesTagId.data('series-id'));
-                nextTagName.text(currentTagName.text());
-                currentTagName.text(temp);
-                //nextTagId.data('tag-id',currentTagId.data('tag-id')).attr('class','sort'+currentTagId.data('tag-id'));
-                nextTagId.data('tag-id',currentTagId.data('tag-id'));
-                currentTagId.data('tag-id',tempId);
-                nextSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
-                // currentTagId.data('tag-id',tempId).attr('class','sort'+tempId);
-                currentSeriesTagId.data('series-id',tempSeriesId);
+        var postData = {};
+        postData.move = downObj.data('move');
+        postData.series_id = downObj.parent().siblings('.series_id').data('series-id');
+        postData.sort = downObj.parent().siblings('.sort').data('tag-id');
+        $.post(controller+"move",postData,function(msg){
+            if(msg.status == 1){
+                if(currentIndex<nextIndex){
+                    nextTagName.text(currentTagName.text());
+                    currentTagName.text(temp);
+                    nextTagId.data('tag-id',currentTagId.data('tag-id'));
+                    currentTagId.data('tag-id',tempId);
+                    nextSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+                    currentSeriesTagId.data('series-id',tempSeriesId);
+                }
             }
+
+        });
     }
 }

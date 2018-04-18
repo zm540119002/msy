@@ -21,6 +21,14 @@ class Series extends FactoryBase
         return $this->fetch();
     }
 
+    //
+    public function move(){
+        $model = new M();
+        if(request()->isPost()){
+            return $model -> move($this->factory['id']);
+        }
+    }
+
 
     //删除
     public function delete()
