@@ -3,8 +3,6 @@ namespace common\lib;
 
 class Auth
 {
-    // 被赋权菜单
-    public static $ownMenu = [];
     // 所有菜单
     private $_allMenu = [];
     // 可显示的菜单
@@ -15,6 +13,8 @@ class Auth
     private $_role = [];
     // 用户节点
     private $_node = [];
+    // 用户菜单
+    public static $ownMenu = [];
     // 默认配置
     private $_config = [
         'model_user_role' => '\common\model\UserRole', // 用户-角色关系表-模型
@@ -28,8 +28,15 @@ class Auth
         $this->_setAllMenu();
         $this->_setDisplayMenu();
         $this->_setRole();
+        $this->_setNode();
     }
     public function test(){
+        return $this->_displayMenu;
+        return $this->getOwnMenu();
+    }
+    /**获取用户菜单
+     */
+    public function getOwnMenu(){
         return $this->getNode();
     }
     /**获取用户角色
