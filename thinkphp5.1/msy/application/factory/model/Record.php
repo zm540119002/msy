@@ -149,25 +149,22 @@ class Record extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectRecord($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectRecord($where=[],$field=[],$order=[],$limit=''){
 		$_where = array(
 			'r.status' => 0,
 		);
-		$_join = array(
-		);
+
 		$where = array_merge($_where, $where);
 		if($field){
 			$list = $this->alias('r')
 				->where($where)
 				->field($field)
-				->join(array_merge($_join,$join))
 				->order($order)
 				->limit($limit)
 				->select();
 		}else{
 			$list = $this->alias('r')
 				->where($where)
-				->join(array_merge($_join,$join))
 				->order($order)
 				->limit($limit)
 				->select();
@@ -182,25 +179,27 @@ class Record extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getRecord($where=[],$field=[],$join=[]){
+	public function getRecord($where=[],$field=[]){
 		$_where = array(
 			'r.status' => 0,
 		);
 		$where = array_merge($_where, $where);
-		$_join = array(
-		);
 		if($field){
 			$info = $this->alias('r')
 				->field($field)
 				->where($where)
-				->join( 'factory f','f.id = r.factory_id')
 				->find();
 		}else{
 			$info = $this->alias('r')
-				->join(array_merge($_join,$join))
 				->where($where)
 				->find();
 		}
 		return $info;
+	}
+
+	//关联产商模型
+	public function factory()
+	{
+		return $this->hasOne('Factory','id','factory_id');
 	}
 }
