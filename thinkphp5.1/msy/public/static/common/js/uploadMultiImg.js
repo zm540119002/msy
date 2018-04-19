@@ -5,7 +5,20 @@ $(function(){
         var fileList = $(this).get(0).files;
         var imgContainer = $('.multi-picture-module');
         var imgArr = [];
-        for (var i = 0; i < fileList.length; i++) {                
+        var num=file.data('num');//限制个数  
+        if(num==6&&$('.editDetailLayer li').length==num){
+            errorTipc('只能上传'+num+'个图片');
+            return false;
+        }
+        if(num==0){ //0代表无限制个数
+            uploadPic(imgContainer,fileList.length);
+        }else{
+            uploadPic(imgContainer,num);
+        }      
+    });
+    function uploadPic(containerObj,len){
+       console.log(len);
+        for (var i = 0; i < len; i++) {                
             var img = event.target.files[i];
             var obj=$(this).parent();
             // 判断是否图片
@@ -32,10 +45,11 @@ $(function(){
                 img.attr("src", imgUrl);
                 var imgAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><span class="delete-picture">X</span></div></li>');
                 imgAdd.find('.picture-module').append(img);
-                imgContainer.append(imgAdd);
+                containerObj.append(imgAdd);
             }
+           
         };
-    });
+    }
     //选择视频上传
     $('body').on('change','#video',function(){
         var file = $(this);
@@ -160,12 +174,13 @@ $(function(){
             // })
         }
     });
-    //编辑商品详情 上传多张图片 确认上传
+    //编辑商品详情 
     var editDetail=$('#editDetail').html();
     $('body').on('click','.editDetail',function(){
-        // var array = ["/uploads/temp/15214424210.jpeg", "/uploads/temp/15214424211.jpeg"];
-        //  $('.goods-detail').data('src',array);
-        uploadsMultiImg(editDetail);
+        var _this=$(this);
+        var storageDataObj=_this.siblings('input[type="hidden"]');
+        var num=_this.siblings('input[type="hidden"]').data('picture-num');
+        uploadsMultiImg(editDetail,storageDataObj,num,'编辑商品详情');
     }); 
     //删除
     $('body').on('click','.delete-picture',function(){
@@ -230,17 +245,18 @@ $(function(){
         _this.next('.edit-text').toggleClass('active');
     })
 })
-//图片弹窗
-function uploadsMultiImg(content){
+//多图片弹窗
+function uploadsMultiImg(content,obj,limitNum,title){
     layer.open({
-            title:['编辑商品详情','border-bottom:1px solid #d9d9d9'],
+            title:[title,'border-bottom:1px solid #d9d9d9'],
             className:'editDetailLayer',
             content:content,
             btn:['确定','取消'],
             success:function(){
                 var html=$('#img_list').html();
-                var multiImgSrc=$('.goods-detail').data('src');
+                var multiImgSrc=obj.data('src');
                 var multiImgAttr=multiImgSrc.split(',');
+                    $('.editDetailLayer .uploadMultiImg').data('num',limitNum);
                 for(var i=0;i<multiImgAttr.length-1;i++){
                     if(multiImgAttr[i].indexOf("uploads") == -1 && multiImgAttr[i] !=''){
                         multiImgAttr[i] = uploads+multiImgAttr[i];
@@ -258,7 +274,7 @@ function uploadsMultiImg(content){
                 })
                 //$('.goods-detail').data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
-                    $('.goods-detail').data('src','');
+                    obj.data('src','');
                     layer.close(index);
                     return false;
                 }
@@ -277,7 +293,7 @@ function uploadsMultiImg(content){
                         imgArray+=img+',';
                     });
                     
-                    $('.goods-detail').data('src',imgArray);
+                    obj.data('src',imgArray);
                     layer.close(index);
                 })
             },

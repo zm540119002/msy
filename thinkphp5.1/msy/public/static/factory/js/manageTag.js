@@ -43,8 +43,8 @@ $(function(){
                         html+='<span class="classify-operate-btn">';
                         html+=' <a href="javascript:void(0);" class="edit-icons">编辑</a>';
                         html+=' <a href="javascript:void(0);" class="del-icons">删除</a>';
-                        html+=' <a href="javascript:void(0);" class="move-btn">上移</a>';
-                        html+=' <a href="javascript:void(0);" class="down-btn">下移</a>';
+                        html+=' <a href="javascript:void(0);" class="move-btn" data-move="0">上移</a>';
+                        html+=' <a href="javascript:void(0);" class="down-btn" data-move="1">下移</a>';
                         html+='</span>';
                         html+='<input type="hidden" value="" class="sort'+layerTagNum+'" data-tag-id=""/>';
                         html+='<input type="hidden" value="" class="series_id" data-series-id="">';
@@ -90,7 +90,7 @@ $(function(){
     $('body').on('click','.move-btn',function(){
         var _this=$(this);
         if(_this.hasClass('move-disabled-icons')){
-            _this.attr('disabled',true);
+            //_this.attr('disabled',true);
         }else{
             manageClassifyTag.upTag(_this);
         }
@@ -183,7 +183,7 @@ var manageClassifyTag={
         delObj.parents('.tag-item').remove();
     },
     upTag:function(upObj){
-       
+        var swith=false;
         var currentIndex=upObj.parents('.tag-item').index();
         var upperIndex=upObj.parents('.tag-item').prev().index();
         var currentTagName=upObj.parents('.tag-item').find('.classify-tag-name');
@@ -201,33 +201,44 @@ var manageClassifyTag={
         postData.series_id = upObj.parent().siblings('.series_id').data('series-id');
         postData.sort = upObj.parent().siblings('.sort').data('tag-id');
         console.log(postData);
-        $.ajax({
-            url: controller+"move",
-            data: postData,
-            type: 'post',
-            beforeSend: function(){
-                //$('.loading').show();
-            },
-            success: function(info){
-                if(info.status == 1){
-                    if(currentIndex>upperIndex){
-                        upperTagName.text(currentTagName.text());
-                        currentTagName.text(temp);
-                        upperTagId.data('tag-id',currentTagId.data('tag-id'));
-                        currentTagId.data('tag-id',tempId);
-                        upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
-                        currentSeriesTagId.data('series-id',tempSeriesId);
+        console.log(swith);
+        if(swith==true){
+            upObj.addClass('disabled');
+        }else{
+            swith=true;
+            console.log(swith);
+            $.ajax({
+                url: controller+"move",
+                data: postData,
+                type: 'post',
+                beforeSend: function(){
+                    swith=true;
+                    //$('.loading').show();
+                },
+                success: function(info){
+                    if(info.status == 1){
+                        if(currentIndex>upperIndex){
+                            upperTagName.text(currentTagName.text());
+                            currentTagName.text(temp);
+                            upperTagId.data('tag-id',currentTagId.data('tag-id'));
+                            currentTagId.data('tag-id',tempId);
+                            upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+                            currentSeriesTagId.data('series-id',tempSeriesId);  
+                            //upObj.addClass('disabled');
+                            swith=false; 
+                        }
+                        
                     }
-                }
-            },
-            complete:function(){
-
-            },
-            error:function (xhr) {
-                dialog.error('AJAX错误'+xhr);
-            },
-        });
-
+                    
+                },
+                complete:function(){
+                     
+                },
+                error:function (xhr) {
+                    dialog.error('AJAX错误'+xhr);
+                },
+            });
+        }
         // $.post(controller+"move",postData,function(msg){
         //     if(msg.status == 1){
         //         if(currentIndex>upperIndex){

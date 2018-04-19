@@ -6,9 +6,13 @@ $(function(){
         uploadsImg(_this,'上传商品首焦图','uploadThumbnailLayer');
     });
     //上传首焦图
+    var editDetail=$('#editDetail').html();
     $('body').on('click','.uploadFocusPicture',function(){
         var _this = $(this);
-        uploadsImg(_this,'上传商品首焦图','uploadFocusLayer');
+        var storageDataObj=_this.siblings('input[type="hidden"]');
+        var num=_this.siblings('input[type="hidden"]').data('picture-num');
+        // uploadsImg(_this,'上传商品首焦图','uploadFocusLayer');
+        uploadsMultiImg(editDetail,storageDataObj,num,'上传商品首焦图');
     });
 
     //初始化
@@ -213,10 +217,21 @@ $(function(){
         _this.addClass('current').siblings().removeClass('current');
     });
 
-
+    //发布选项
+    $('.release-options a').on('click',function(){
+        var _this=$(this);
+        var index=_this.index();
+        _this.toggleClass('current');
+            if(_this.hasClass('current')){
+                $('li.price-options').eq(index).show();
+            }else{
+                $('li.price-options').eq(index).hide();
+            }
+            
+    })
 
 });
-//单图片上传的弹窗
+//单图片上传弹窗
 function uploadsImg(obj,tilt,className) {
     var uploadSingleImgHtml=$('#uploadSingleImgHtml').html();
     layer.open({
