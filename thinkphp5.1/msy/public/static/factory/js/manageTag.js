@@ -4,7 +4,6 @@ $(function(){
     var layerTagName;
     var tagListLen=$('.classify-label-content .tag-item').length;
         if(!tagListLen){
-            alert(1);
             $('.classify-label-content .set-tag-tipc').hide();
             $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
             $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
@@ -30,15 +29,8 @@ $(function(){
                 layerTagNum=$('.addTagLayer .layer-tag-num').val();
                 layerTagName=$('.addTagLayer .layer-tag-name').val();
 
-
-
-                // tagData={
-                //     layerTagNum:layerTagNum,
-                //     layerTagName:layerTagName
-                // }
                 $('input[class="classifyTagInfo'+layerTagNum+'"]').data('tag-id',layerTagNum);
                 var postData = {};
-                postData.sort = layerTagNum;
                 postData.name = layerTagName;
                 $.post(controller+"edit",postData,function(msg){
                     if(msg.status == 0){
@@ -54,7 +46,8 @@ $(function(){
                         html+=' <a href="javascript:void(0);" class="move-btn">上移</a>';
                         html+=' <a href="javascript:void(0);" class="down-btn">下移</a>';
                         html+='</span>';
-                        html+='<input type="hidden" value="" class="classifyTagInfo'+layerTagNum+'" data-tag-id=""/>';
+                        html+='<input type="hidden" value="" class="sort'+layerTagNum+'" data-tag-id=""/>';
+                        html+='<input type="hidden" value="" class="series_id" data-series-id="">';
                         html+='</div>';
                         var tagListLen=$('.classify-label-content .tag-item').length;
                         if(!tagListLen){
@@ -99,7 +92,7 @@ $(function(){
         if(_this.hasClass('move-disabled-icons')){
             _this.attr('disabled',true);
         }else{
-            manageClassifyTag.moveTag(_this);
+            manageClassifyTag.upTag(_this);
         }
         
     })
@@ -148,10 +141,8 @@ var manageClassifyTag={
         layerTagNum=$('.addTagLayer .layer-tag-num').val();
         var seriesId = editObj.siblings('.series_id').data('series-id');
         editObj.text(layerTagName);
-        editObj.siblings('input').data('tag-id',layerTagNum);
         var postData = {};
         postData.series_id = seriesId;
-        postData.sort = layerTagNum;
         postData.name = layerTagName;
         $.post(controller+"edit",postData,function(msg){
             if(msg.status == 0){
@@ -191,23 +182,64 @@ var manageClassifyTag={
         });
         delObj.parents('.tag-item').remove();
     },
-    moveTag:function(moveObj){
-        var currentIndex=moveObj.parents('.tag-item').index();
-        var upperIndex=moveObj.parents('.tag-item').prev().index();
-        var currentTagName=moveObj.parents('.tag-item').find('.classify-tag-name');
-        var upperTagName=moveObj.parents('.tag-item').prev().find('.classify-tag-name');
-        var currentTagId=moveObj.parents('.tag-item').find('input');
-        var upperTagId=moveObj.parents('.tag-item').prev().find('input');
-
-        var temp,tempId;
+    upTag:function(upObj){
+       
+        var currentIndex=upObj.parents('.tag-item').index();
+        var upperIndex=upObj.parents('.tag-item').prev().index();
+        var currentTagName=upObj.parents('.tag-item').find('.classify-tag-name');
+        var upperTagName=upObj.parents('.tag-item').prev().find('.classify-tag-name');
+        var currentTagId=upObj.parents('.tag-item').find('.sort');
+        var upperTagId=upObj.parents('.tag-item').prev().find('.sort');
+        var currentSeriesTagId=upObj.parents('.tag-item').find('.series_id');
+        var upperSeriesTagId=upObj.parents('.tag-item').prev().find('.series_id');
+        var temp,tempId,tempSeriesId;
             temp=upperTagName.text();
             tempId=upperTagId.data('tag-id');
-            if(currentIndex>upperIndex){
-                upperTagName.text(currentTagName.text());
-                currentTagName.text(temp);
-                upperTagId.data('tag-id',currentTagId.data('tag-id')).attr('class','classifyTagInfo'+currentTagId.data('tag-id'));
-                currentTagId.data('tag-id',tempId).attr('class','classifyTagInfo'+tempId);
-            }
+            tempSeriesId=upperSeriesTagId.data('series-id');
+        var postData = {};
+        postData.move = upObj.data('move');
+        postData.series_id = upObj.parent().siblings('.series_id').data('series-id');
+        postData.sort = upObj.parent().siblings('.sort').data('tag-id');
+        console.log(postData);
+        $.ajax({
+            url: controller+"move",
+            data: postData,
+            type: 'post',
+            beforeSend: function(){
+                //$('.loading').show();
+            },
+            success: function(info){
+                if(info.status == 1){
+                    if(currentIndex>upperIndex){
+                        upperTagName.text(currentTagName.text());
+                        currentTagName.text(temp);
+                        upperTagId.data('tag-id',currentTagId.data('tag-id'));
+                        currentTagId.data('tag-id',tempId);
+                        upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+                        currentSeriesTagId.data('series-id',tempSeriesId);
+                    }
+                }
+            },
+            complete:function(){
+
+            },
+            error:function (xhr) {
+                dialog.error('AJAX错误'+xhr);
+            },
+        });
+
+        // $.post(controller+"move",postData,function(msg){
+        //     if(msg.status == 1){
+        //         if(currentIndex>upperIndex){
+        //             upperTagName.text(currentTagName.text());
+        //             currentTagName.text(temp);
+        //             upperTagId.data('tag-id',currentTagId.data('tag-id'));
+        //             currentTagId.data('tag-id',tempId);
+        //             upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+        //             currentSeriesTagId.data('series-id',tempSeriesId);
+        //         }
+        //     }
+        // });
         
     },
     downTag:function(downObj){
@@ -215,16 +247,30 @@ var manageClassifyTag={
         var nextIndex=downObj.parents('.tag-item').next().index();
         var currentTagName=downObj.parents('.tag-item').find('.classify-tag-name');
         var nextTagName=downObj.parents('.tag-item').next().find('.classify-tag-name');
-        var currentTagId=downObj.parents('.tag-item').find('input');
-        var nextTagId=downObj.parents('.tag-item').next().find('input');
-        var temp,tempId;
+        var currentTagId=downObj.parents('.tag-item').find('.sort');
+        var nextTagId=downObj.parents('.tag-item').next().find('.sort');
+        var currentSeriesTagId=downObj.parents('.tag-item').find('.series_id');
+        var nextSeriesTagId=downObj.parents('.tag-item').next().find('.series_id');
+        var temp,tempId,tempSeriesId;
             temp=nextTagName.text();
             tempId=nextTagId.data('tag-id');
-            if(currentIndex<nextIndex){
-                nextTagName.text(currentTagName.text());
-                currentTagName.text(temp);
-                nextTagId.data('tag-id',currentTagId.data('tag-id')).attr('class','classifyTagInfo'+currentTagId.data('tag-id'));
-                currentTagId.data('tag-id',tempId).attr('class','classifyTagInfo'+tempId);
+            tempSeriesId=nextSeriesTagId.data('series-id');
+        var postData = {};
+        postData.move = downObj.data('move');
+        postData.series_id = downObj.parent().siblings('.series_id').data('series-id');
+        postData.sort = downObj.parent().siblings('.sort').data('tag-id');
+        $.post(controller+"move",postData,function(msg){
+            if(msg.status == 1){
+                if(currentIndex<nextIndex){
+                    nextTagName.text(currentTagName.text());
+                    currentTagName.text(temp);
+                    nextTagId.data('tag-id',currentTagId.data('tag-id'));
+                    currentTagId.data('tag-id',tempId);
+                    nextSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+                    currentSeriesTagId.data('series-id',tempSeriesId);
+                }
             }
+
+        });
     }
 }

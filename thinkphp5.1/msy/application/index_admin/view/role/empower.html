@@ -58,14 +58,26 @@
         //一级菜单回显
         $.each($('tbody'),function(){
             var _this = $(this);
-            var sign = true;
+            var selectAllsign = true;
+            var selectOneSign = false;
             //一票否决
             $.each(_this.find('[level=2]').find('.check_item_2'),function(){
                 if(!$(this).prop('checked')){
-                    sign = false;
+                    selectAllsign = false;
+                    return;
                 }
             });
-            _this.find('[level=1]').find('.check_item_2').prop('checked',sign);
+            //只要选中一个
+            $.each(_this.find('[level=2]').find('.check_item_2'),function(){
+                if($(this).prop('checked')){
+                    selectOneSign = true;
+                    return;
+                }
+            });
+            _this.find('[level=1]').find('.check_item_2').prop('checked',selectAllsign);
+            if(selectOneSign){
+                _this.find('.folding').click();
+            }
         });
         //确定
         $('.button_save_black_4').on('click',function(){

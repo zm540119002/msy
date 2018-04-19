@@ -1,5 +1,6 @@
 {extend name="template/base_admin.html" /}
 {block name="menu"}
+{notempty name='menu'}
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2">
         {foreach $menu as $key=>$vo}
@@ -18,4 +19,5 @@
         {/foreach}
     </div>
 </aside>
+{/notempty}
 {/block}
