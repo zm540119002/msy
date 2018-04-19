@@ -1,7 +1,7 @@
 <?php
 namespace common\lib;
 
-class Auth
+class Menu
 {
     // 用户信息
     private $_user = [];
@@ -22,11 +22,8 @@ class Auth
 
     public function __construct(){
         $this->_config = array_merge($this->_config,!empty(config('auth'))?config('auth'):[]);
-        $this->_user = !empty(session('user'))?session('user'):[];
+        $this->_user = checkLogin()?:[];
         $this->_setAllMenu();
-    }
-    public function test(){
-        return $this->getOwnMenu();
     }
     /**获取用户可显示菜单
      */
@@ -38,7 +35,6 @@ class Auth
     /**获取所有可显示菜单
      */
     public function getAllDisplayMenu(){
-        //获取用户可显示菜单先获取用户菜单
         return $this->_filterDisplayMenu($this->_allMenu);
     }
     /**获取所有菜单
