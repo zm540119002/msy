@@ -43,7 +43,8 @@ class Role extends \common\controller\UserBase
             $response = $response->toArray();
             $nodeIds = array_column($response,'node_id');
             $this->assign('nodeIds',$nodeIds?:[]);
-            $menuList = getMenu(true);
+            $menu = new \common\lib\Menu();
+            $menuList = $menu->getAllMenu();
             $this->assign('menuList',$menuList);
             return $this->fetch();
         }
