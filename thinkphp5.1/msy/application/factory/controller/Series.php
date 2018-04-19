@@ -16,17 +16,15 @@ class Series extends FactoryBase
                 return $model -> add($this->factory['id']);
             }
         }
-        $seriesList = $model -> selectSeries([],[],['sort'=>'desc','id'=>'desc',]);
+        $seriesList = $model -> selectSeries([],[],['sort'=>'desc']);
         $this->assign('seriesList',$seriesList);
         return $this->fetch();
     }
 
-    //
+    //移动
     public function move(){
         $model = new M();
         if(request()->isPost()){
-
-            
             return $model -> move($this->factory['id']);
         }
     }

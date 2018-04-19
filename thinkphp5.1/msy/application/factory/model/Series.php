@@ -78,10 +78,9 @@ class Series extends Model {
 		}
 	}
 
-	//
+	//移动
 	public function move($factoryId){
 		$data = input('post.');
-
 		if($data['move']){
 			$where = [
 				['factory_id','=',$factoryId],

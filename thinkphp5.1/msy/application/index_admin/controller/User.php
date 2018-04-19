@@ -16,7 +16,7 @@ class User extends \common\controller\UserBase
     public function edit(){
         $modelUser = new \common\model\User();
         if(request()->isPost()){
-            return $modelUser->edit();
+            return $modelUser->edit($this->user['id']);
         }else{
             $id = input('id',0);
             if($id){
@@ -37,7 +37,7 @@ class User extends \common\controller\UserBase
             return config('not_get');
         }
         $modelUser = new \common\model\User();
-        $list = $modelUser->pageQuery();
+        $list = $modelUser->pageQuery($this->user['id']);
         $this->assign('list',$list);
         return $this->fetch('user_list');
     }
@@ -65,7 +65,8 @@ class User extends \common\controller\UserBase
             $roleIds = array_column($response->toArray(),'role_id');
             $this->assign('roleIds',$roleIds?:[]);
             //系统角色列表
-            $roleList = getRole();
+            $menu = new \common\lib\Menu();
+            $roleList = $menu->getAllRole();
             $this->assign('roleList',$roleList);
             return $this->fetch();
         }

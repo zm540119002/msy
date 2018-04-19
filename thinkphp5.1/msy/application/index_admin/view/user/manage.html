@@ -68,7 +68,7 @@
                 var url =  controller + 'edit/id/' + _thisTr.data('id');
                 location.href = url;
             });
-            //设置角色
+            //角色设置
             $('body').on('click','.empower',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'empower/id/' + _thisTr.data('id') + '/name/' + _thisTr.data('name');
