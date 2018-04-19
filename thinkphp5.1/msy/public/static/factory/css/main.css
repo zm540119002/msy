@@ -160,6 +160,9 @@
 .classify-operate-btn a.down-disabled-icons{
     background-position:0 -178px;
 }
+.move-btn.disabled{
+    pointer-events:none;
+}
 .addTagLayer .layui-m-layercont{
     padding:0.20rem;
 }
@@ -198,6 +201,22 @@
     border-bottom: .12em solid #39b54a;
     border-left: .12em solid #39b54a;
     /*margin:0 0 0.15rem 0;*/
+}
+.release-options{
+    padding:.15rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.release-options a{
+    margin:0 10px;
+    border:1px solid #999;
+    border-radius:4px;
+}
+.release-options a.current{
+    color:#ff7aab;
+    border:1px solid #ff7aab;
+}
+.price-options.hide{
+    display: none;
 }
 .price-flex{
     display: inline-block;
