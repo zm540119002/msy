@@ -11,6 +11,22 @@ class User extends \common\controller\UserBase
         }
         return $this->fetch();
     }
+    /**用户-信息
+     */
+    public function info(){
+        $modelUser = new \common\model\User();
+        if(request()->isPost()){
+            return errorMsg('暂未开通');
+        }else{
+            $where = [
+                'status' => 0,
+                'id' => $this->user['id'],
+            ];
+            $info = $modelUser->where($where)->find();
+            $this->assign('info',$info);
+            return $this->fetch();
+        }
+    }
     /**用户-编辑
      */
     public function edit(){
@@ -65,7 +81,8 @@ class User extends \common\controller\UserBase
             $roleIds = array_column($response->toArray(),'role_id');
             $this->assign('roleIds',$roleIds?:[]);
             //系统角色列表
-            $roleList = getRole();
+            $menu = new \common\lib\Menu();
+            $roleList = $menu->getAllRole();
             $this->assign('roleList',$roleList);
             return $this->fetch();
         }

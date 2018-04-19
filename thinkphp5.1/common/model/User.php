@@ -17,12 +17,14 @@ class User extends \think\Model {
 			return errorMsg($validateUser->getError());
 		}
 		if($postData['id'] && intval($postData['id'])){
+			$postData['update_time'] = time();
 			$this->isUpdate(true)->save($postData);
 		}else{
 			unset($postData['id']);
 			if(isset($userId) && $userId){
 				$postData['parent_id'] = $userId;
 			}
+			$postData['create_time'] = time();
 			$this->save($postData);
 		}
 		if(!$this->getAttr('id')){
