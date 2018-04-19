@@ -43,6 +43,13 @@ class Menu
         //获取用户可显示菜单先获取用户菜单
         return $this->_allMenu;
     }
+    /**获取所有角色
+     */
+    public function getAllRole(){
+        $modelRole = new $this->_config['model_role'];
+        $response = $modelRole->where('status','=',0)->select();
+        return $response->toArray()?:[];
+    }
     /**获取用户菜单
      */
     public function getOwnMenu(){

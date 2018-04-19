@@ -65,7 +65,8 @@ class User extends \common\controller\UserBase
             $roleIds = array_column($response->toArray(),'role_id');
             $this->assign('roleIds',$roleIds?:[]);
             //系统角色列表
-            $roleList = getRole();
+            $menu = new \common\lib\Menu();
+            $roleList = $menu->getAllRole();
             $this->assign('roleList',$roleList);
             return $this->fetch();
         }
