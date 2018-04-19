@@ -6,13 +6,13 @@ class Index extends \common\controller\UserBase
     //首页
     public function index()
     {
-        $auth = new \common\lib\Auth();
+        $menu = new \common\lib\Menu();
         if($this->user['type']==0){//超级管理员
-            $menu = $auth->getAllDisplayMenu();
+            $menuList = $menu->getAllDisplayMenu();
         }else{
-            $menu = $auth->getOwnDisplayMenu();
+            $menuList = $menu->getOwnDisplayMenu();
         }
-        $this->assign('menu',$menu);
+        $this->assign('menu',$menuList);
         return $this->fetch();
     }
     //欢迎页
