@@ -8,7 +8,7 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('User/info')}"  class="current"><span>账号信息</span></a></li>
+                    <li><a href="{:url('User/info')}"  class="current"><span>个人信息</span></a></li>
                 </ul>
             </div>
         </div>
@@ -41,13 +41,6 @@
                                 <textarea class="textareaadmin textarea_text remark-text" name="remark">{$info.remark|default=''}</textarea>
                             </td>
                         </tr>
-                        <tr class="tr-margin-item">
-                            <td width="11%"></td>
-                            <td height=60 width="50%" align=center>
-                                <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
-                                <input class="button_save_black" name="add0" value="返回" type="button">
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </form>
@@ -58,20 +51,6 @@
 {block name="script"}
     <script type="text/javascript">
         $(function(){
-            //页面初始化
-            //确定
-            $('.button_save_black_4').on('click',function(){
-                var postData = $('#form1').serializeObject();
-                $.post(action,postData,function(msg){
-                    dialog.msg(msg,'',function () {
-                        location.href = controller + '/edit';
-                    });
-                },'JSON');
-            });
-            //返回
-            $('.button_save_black').click(function(){
-                location.href = controller + '/manage';
-            });
         });
     </script>
 {/block}

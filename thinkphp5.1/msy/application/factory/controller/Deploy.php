@@ -27,9 +27,9 @@ class Deploy extends UserBase
             $this->assign('mobilePhone',$mobilePhone);
             if(input('?factory_id')){
                 $factoryId = input('factory_id');
-                $where = array(
-                    'id' => $factoryId,
-                );
+                $where = [
+                    ['id','=',$factoryId],
+                ];
                 $factoryInfo =  $model -> getFactory($where);
                 $this -> assign('factoryInfo',$factoryInfo);
             }
@@ -51,8 +51,10 @@ class Deploy extends UserBase
             try{
                 $data = array('is_default' => 1);
                 $result = $model->allowField(true)->save($data,['id' => $id,'user_id'=>$this->user['id']]);
-                $where['id']  = array('id','<>',$id);
-                $where['user_id']  = $this->user['id'];
+                $where = [
+                    ['id','<>',$id],
+                    ['user_id','=',$this->user['id']],
+                ];
                 $result = $model ->where($where)->setField('is_default',0);
                 $model->commit();
                 return successMsg("已选择");
