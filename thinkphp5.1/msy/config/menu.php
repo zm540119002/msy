@@ -17,7 +17,7 @@ return [
                 ['id'=>12,'name'=>'角色管理','display'=>1,'controller'=>'Role','action'=>'manage',],
                 ['id'=>13,'name'=>'权限管理','display'=>0,'controller'=>'Role','action'=>'empower',],
                 ['id'=>14,'name'=>'用户管理','display'=>1,'controller'=>'User','action'=>'manage',],
-                ['id'=>15,'name'=>'角色设置','display'=>0,'controller'=>'User','action'=>'empower',],
+                ['id'=>15,'name'=>'用户设置','display'=>0,'controller'=>'User','action'=>'empower',],
             ],
         ],
     ],
