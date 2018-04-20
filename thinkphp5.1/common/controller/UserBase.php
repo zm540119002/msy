@@ -33,6 +33,6 @@ class UserBase extends Base{
         foreach ($subMenu as $item) {
             $allMenu = array_merge($allMenu,array_column($item,'id'));
         }
-        $this->assign('allMenuIds',$allMenu);
+        $this->assign('allMenuIds',$allMenu?:[]);
     }
 }
