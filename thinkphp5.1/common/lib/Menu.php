@@ -25,6 +25,7 @@ class Menu
         $this->_user = checkLogin()?:[];
         $this->_setAllMenu();
     }
+
     /**获取用户可显示菜单
      */
     public function getOwnDisplayMenu(){
@@ -32,17 +33,20 @@ class Menu
         $this->getOwnMenu();
         return $this->_filterDisplayMenu($this->_ownMenu);
     }
+
     /**获取所有可显示菜单
      */
     public function getAllDisplayMenu(){
         return $this->_filterDisplayMenu($this->_allMenu);
     }
+
     /**获取所有菜单
      */
     public function getAllMenu(){
         //获取用户可显示菜单先获取用户菜单
         return $this->_allMenu;
     }
+
     /**获取所有角色
      */
     public function getAllRole(){
@@ -50,11 +54,12 @@ class Menu
         $response = $modelRole->where('status','=',0)->select();
         return $response->toArray()?:[];
     }
+
     /**获取用户菜单
      */
     public function getOwnMenu(){
         //获取菜单先获取用户节点
-        $this->getNode();
+        $this->getRoleNode();
         $temp = !empty($this->_allMenu)?$this->_allMenu:[];
         if(is_array($temp) && !empty($temp)){
             foreach ($temp as &$value){
@@ -67,20 +72,22 @@ class Menu
         }
         return $this->_ownMenu = $temp;
     }
+
     /**获取用户角色
      */
-    public function getRole(){
+    public function getUserRole(){
         $modelUserRole = new $this->_config['model_user_role'];
         $response = $modelUserRole->where('user_id','=',$this->_user['id'])->select();
         $response = $response->toArray();
         $this->_role = array_column($response,'role_id');
         return $this->_role;
     }
+
     /**获取用户节点
      */
-    public function getNode(){
+    public function getRoleNode(){
         //获取用户节点先获取角色
-        $this->getRole();
+        $this->getUserRole();
         $modelRoleNode = new $this->_config['model_role_node'];
         if(!empty($this->_role)){
             $response = $modelRoleNode->where('role_id','in',$this->_role)->select();
@@ -90,12 +97,14 @@ class Menu
         }
         return $this->_node;
     }
+
     /**设置所有菜单
      */
     private function _setAllMenu(){
         $this->_allMenu = array_merge($this->_allMenu,!empty(config('menu.menu'))?config('menu.menu'):[]);
         $this->_allMenu = array_merge($this->_allMenu,!empty(config('sub_menu.menu'))?config('sub_menu.menu'):[]);
     }
+    
     /**过滤不显示菜单
      */
     private function _filterDisplayMenu($menu){

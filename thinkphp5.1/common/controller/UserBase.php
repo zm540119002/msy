@@ -19,5 +19,20 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
+        $menu = new \common\lib\Menu();
+        if($this->user['type']==0){//超级管理员
+            $menuList = $menu->getAllDisplayMenu();
+            $menuAll = $menu->getAllMenu();
+        }else{
+            $menuList = $menu->getOwnDisplayMenu();
+            $menuAll = $menu->getOwnMenu();
+        }
+        $this->assign('menu',$menuList);
+        $subMenu = array_column($menuAll,'sub_menu');
+        $menuAll = [];
+        foreach ($subMenu as $item) {
+            $menuAll = array_merge($menuAll,array_column($item,'id'));
+        }
+        $this->assign('menuIds',$menuAll);
     }
 }

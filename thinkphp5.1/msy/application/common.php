@@ -14,3 +14,21 @@ function checkLogin(){
     }
     return $user;
 }
+
+/**循环判断键值是否存在
+ * @return bool
+ */
+function multi_array_key_exists( $needle, $haystack ) {
+    foreach ( $haystack as $key => $value ) :
+        if ( $needle == $key )
+            return true;
+        if ( is_array( $value ) ) :
+            if ( multi_array_key_exists( $needle, $value ) == true )
+                return true;
+            else
+                continue;
+        endif;
+    endforeach;
+    return false;
+}
+

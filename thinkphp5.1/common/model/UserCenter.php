@@ -13,6 +13,8 @@ class UserCenter extends \think\Model {
 	 */
 	public function login(){
 		$data = input('post.');
+		$data['mobile_phone'] = trim($data['mobile_phone']);
+		$data['captcha'] = trim($data['captcha']);
 		$validateUser = new \common\validate\User;
 		if($data['mobile_phone'] && $data['captcha']){//验证码登录
 			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
