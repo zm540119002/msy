@@ -168,13 +168,24 @@ $(function(){
     
     //增加商品
     $('body').on('click','.identifyNewGoods',function(){
+        var mainImg=$('.main_img').data('src');
         var goodsDetail=$('.goods-detail').data('src');
         var goodsVideo=$('.goods-video').data('src');
         var category=$('.select-category').data('category-id');
         var categoryArray = category.split(',');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
-        console.log(postData.sale_price);
+        //查找选择发布的商城平台
+        if($('#purchases').hasClass('current')){
+            postData.purchases = 1;
+        }
+        if($('#commission').hasClass('current')){
+            postData.commission = 1;
+        }
+        if($('#retail').hasClass('current')){
+            postData.retail = 1;
+        }
+        postData.main_img = mainImg;
         postData.details_img=goodsDetail;
         postData.goods_video=goodsVideo;
         postData.cat_id_1=categoryArray[0];
@@ -199,10 +210,10 @@ $(function(){
         }else if(!postData.details_img){
             content='请上传商品详情图';
         }
-        if(content){
-            dialog.error(content);
-            return false;
-        }
+        // if(content){
+        //     dialog.error(content);
+        //     return false;
+        // }
         $.post(controller+'edit',postData,function(msg){
             if(msg.status == 0){
                 dialog.error(msg.info);

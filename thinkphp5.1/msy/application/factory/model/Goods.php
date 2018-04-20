@@ -15,32 +15,49 @@ class Goods extends Model {
 	/**
 	 * 新增
 	 */
-	public function add(){
+	public function add($factory_id =''){
 		$validate = validate('Goods');
 		$data = input('post.');
-		if(!$result = $validate->scene('add')->check($data)) {
-			return errorMsg($validate->getError());
+//		if(!$result = $validate->scene('add')->check($data)) {
+//			return errorMsg($validate->getError());
+//		}
+		if(!empty($data['thumb_img'])){
+			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}
-		$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
-		$data['main_img']  = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['main_img']));
-		$goodsVideo = '';
-		$tempGoodsVideo = explode(",",$data['goods_video']);
-		array_pop($tempGoodsVideo);
-		foreach ($tempGoodsVideo as $item) {
-			if($item){
-				$goodsVideo = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$goodsVideo;
+		if(!empty($data['main_img'])){
+			$mainImg = '';
+			$tempMainImg = explode(",",$data['main_img']);
+			array_pop($tempMainImg);
+			foreach ($tempMainImg as $item) {
+				if($item){
+					$mainImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
+				}
 			}
+			$data['main_img'] = $mainImg;
 		}
-		$data['goods_video'] = $goodsVideo;
-		$detailsImg = '';
-		$tempArray = explode(",",$data['details_img']);
-		array_pop($tempArray);
-		foreach ($tempArray as $item) {
-			if($item){
-				$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+		if(!empty($data['goods_video'])){
+			$goodsVideo = '';
+			$tempGoodsVideo = explode(",",$data['goods_video']);
+			array_pop($tempGoodsVideo);
+			foreach ($tempGoodsVideo as $item) {
+				if($item){
+					$goodsVideo = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$goodsVideo;
+				}
 			}
+			$data['goods_video'] = $goodsVideo;
 		}
-		$data['details_img'] = $detailsImg;
+		if(!empty($data['details_img'])){
+			$detailsImg = '';
+			$tempArray = explode(",",$data['details_img']);
+			array_pop($tempArray);
+			foreach ($tempArray as $item) {
+				if($item){
+					$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+				}
+			}
+			$data['details_img'] = $detailsImg;
+		}
+		$data['factory_id'] = $factory_id;
 		$data['create_time'] = time();
 		$result = $this -> allowField(true) -> save($data);
 		if(false !== $result){
@@ -53,49 +70,79 @@ class Goods extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit(){
+	public function edit($factory_id =''){
 		$data = input('post.');
 		$validate = validate('Goods');
 		// if(!$result = $validate->scene('edit')->check($data)) {
 		// 	return errorMsg($validate->getError());
 		// }
-		$where['id'] = $data['goods_id'];
+		$where = [
+			['id','=',$data['goods_id']],
+			['factory_id','=',$factory_id],
+		];
 		$file = array(
-			'thumb_img','main_img','details_img',
+			'thumb_img','main_img','details_img','goods_video'
 		);
 		$oldGoodsInfo = $this -> getGoods($where,$file);
-		$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
-		$data['main_img']  = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['main_img']));
-		$goodsVideo = '';
-		$tempGoodsVideo = explode(",",$data['goods_video']);
-		array_pop($tempGoodsVideo);
-		foreach ($tempGoodsVideo as $item) {
-			if($item){
-				$goodsVideo = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$goodsVideo;
-			}
+		if(!empty($data['thumb_img'])){
+			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}
-		$data['goods_video'] = $goodsVideo;
-
-		$detailsImg = '';
-		$tempDetailsImg = explode(",",$data['details_img']);
-		array_pop($tempDetailsImg);
-		foreach ($tempDetailsImg as $item) {
-			if($item){
-				$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+		if(!empty($data['main_img'])){
+			$mainImg = '';
+			$tempMainImg = explode(",",$data['main_img']);
+			array_pop($tempMainImg);
+			foreach ($tempMainImg as $item) {
+				if($item){
+					$mainImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
+				}
 			}
+			$data['main_img'] = $mainImg;
 		}
-		$data['details_img'] = $detailsImg;
+		if(!empty($data['goods_video'])){
+			$goodsVideo = '';
+			$tempGoodsVideo = explode(",",$data['goods_video']);
+			array_pop($tempGoodsVideo);
+			foreach ($tempGoodsVideo as $item) {
+				if($item){
+					$goodsVideo = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$goodsVideo;
+				}
+			}
+			$data['goods_video'] = $goodsVideo;
+		}
+		if(!empty($data['details_img'])){
+			$detailsImg = '';
+			$tempArray = explode(",",$data['details_img']);
+			array_pop($tempArray);
+			foreach ($tempArray as $item) {
+				if($item){
+					$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+				}
+			}
+			$data['details_img'] = $detailsImg;
+		}
 		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data, ['id' => $data['goods_id']]);
 		if(false !== $result){
 			$newGoodsInfo = $this -> getGoods($where,$file);
 			delImgFromPaths($oldGoodsInfo['thumb_img'],$newGoodsInfo['thumb_img']);
-			delImgFromPaths($oldGoodsInfo['main_img'],$newGoodsInfo['main_img']);
+            //删除就图片
+			$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
+			array_pop($oldMainImg);
+			$newMainImg = explode(",",$newGoodsInfo['main_img']);
+			array_pop($newMainImg);
+			delImgFromPaths($oldMainImg,$newMainImg);
+
 			$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
 			array_pop($oldDetailsImg);
 			$newDetailsImg = explode(",",$newGoodsInfo['details_img']);
 			array_pop($newDetailsImg);
 			delImgFromPaths($oldDetailsImg,$newDetailsImg);
+
+			$oldGoodsVideo = explode(",",$oldGoodsInfo['goods_video']);
+			array_pop($oldGoodsVideo);
+			$newGoodsVideo = explode(",",$newGoodsInfo['goods_video']);
+			array_pop($newGoodsVideo);
+			delImgFromPaths($oldGoodsVideo,$newGoodsVideo);
 			return successMsg("修改成功");
 		}else{
 			return errorMsg($this->getError());

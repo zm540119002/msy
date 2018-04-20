@@ -11,7 +11,10 @@ class Goods extends FactoryBase
     public function index()
     {
         $seriesModel = new seriesModel();
-        $seriesList = $seriesModel -> selectSeries([],[],['sort'=>'desc','id'=>'desc',]);
+        $where = [
+            ['factory_id','=',$this->factory['id']],
+        ];
+        $seriesList = $seriesModel -> selectSeries($where,[],['sort'=>'desc','id'=>'desc',]);
         $this -> assign('seriesList',$seriesList);
         $model = new M();
         $goodsList = $model -> selectGoods();
@@ -28,21 +31,25 @@ class Goods extends FactoryBase
         $model = new M();
         if(request()->isPost()){
             if(input('?post.goods_id') && !input('?post.goods_id') == ''){
-                return $model -> edit();
+                return $model -> edit($this->factory['id']);
             }
-            return $model -> add();
+            return $model -> add($this->factory['id']);
         }
         $categoryModel = new categoryModel();
         $platformCategory = $categoryModel->selectFirstCategory();
         $this -> assign('platformCategory',$platformCategory);
         $seriesModel = new seriesModel();
-        $seriesList = $seriesModel -> selectSeries([],[],['sort'=>'desc','id'=>'desc',]);
+        $where = [
+            ['factory_id','=',$this->factory['id']],
+        ];
+        $seriesList = $seriesModel -> selectSeries($where,[],['sort'=>'desc','id'=>'desc',]);
         $this -> assign('seriesList',$seriesList);
         if(input('?goods_id')){
             $goodsId = (int)input('goods_id');
-            $where = array(
-                'id' => $goodsId,
-            );
+            $where = [
+               ['id','=',$goodsId],
+               ['factory_id','=',$this->factory['id']],
+            ];
             $goodsInfo =  $model -> getGoods($where);
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
@@ -64,9 +71,9 @@ class Goods extends FactoryBase
         $model = new M();
         if(input('?goods_id')){
             $goodsId = (int)input('goods_id');
-            $where = array(
-                'id' => $goodsId,
-            );
+            $where = [
+                ['id','=',$goodsId],
+            ];
             $goodsInfo =  $model -> getGoods($where);
             $this -> assign('goodsInfo',$goodsInfo);
         }
@@ -74,6 +81,12 @@ class Goods extends FactoryBase
     }
 
 
+    /**
+     * 查出产商相关产品
+     */
+    public function getGoodsList(){
+
+    }
 
 
 }

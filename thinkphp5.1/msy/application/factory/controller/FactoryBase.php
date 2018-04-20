@@ -10,16 +10,16 @@ class FactoryBase extends UserBase{
         parent::__construct();
         $model = new \app\factory\model\Factory();
         $uid = $this -> user['id'];
-        $where = array(
-            'user_id' => $uid,
-        );
+        $where = [
+            ['user_id','=',$uid],
+        ];
 
         $factoryCount = $model -> where($where)->count('id');
         if($factoryCount > 1){
-            $_where = array(
-                'user_id' => $uid,
-                'is_default' => 1,
-            );
+            $_where = [
+                ['user_id','=',$uid],
+                ['is_default','=',1],
+            ];
             $factoryInfo = $model -> getFactory($_where);
             if(!$factoryInfo){
                 $this->success('请选择多家产商入住，请选择一家', 'Index/index');;

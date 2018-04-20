@@ -19,10 +19,10 @@ class Index extends UserBase
         $factoryCount = $model -> where($where)->count('id');
         $this -> assign('factoryCount',$factoryCount);
         if($factoryCount > 1){
-            $_where = array(
-                'user_id' => $uid,
-                'is_default' => 1,
-            );
+            $_where = [
+              ['user_id','=',$uid],
+              ['is_default','=',1],
+            ];
             $factoryInfo = $model -> getFactory($_where,$file);
             $factoryList = $model -> selectFactory($where,$file);
             $this -> assign('factoryList',$factoryList);

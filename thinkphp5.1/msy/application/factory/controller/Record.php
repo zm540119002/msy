@@ -16,10 +16,11 @@ class Record extends FactoryBase
         }else{
             if(input('?record_id')){
                 $recordId = input('record_id');
-                $where = array(
-                    'id' => $recordId,
-                    'factory_id' => $factoryInfo['id'],
-                );
+                $where = [
+                    ['id','=',$recordId],
+                    ['factory_id','=',$factoryInfo['id']],
+                ];
+
                 $recordInfo =  $model -> getRecord($where);
                 $this -> assign('recordInfo',$recordInfo);
             }
@@ -34,12 +35,7 @@ class Record extends FactoryBase
         $model = new \app\factory\model\Record();
         $factoryInfo = $this->factory;
         $where['factory_id'] = $factoryInfo['id'];
-
         $recordInfo = $model::hasWhere('factory',['id'=>$factoryInfo['id']])->field('factory.name')->find()->toArray();
-
-
-
-
         $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
         $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
         $recordInfo['license'] = json_decode($recordInfo['license'],true);
