@@ -1,43 +1,43 @@
 <?php
 namespace common\cache;
 
-class AgentCache{
-    private static $_cache_key = 'cache_agent_';
+class Menu{
+    private static $_cache_key = 'cache_menu_';
 
     /**从缓存中获取信息
      */
     public static function get($user_id){
-        $agent = S(self::$_cache_key.$user_id);
-        if(!$agent){
+        $menu = S(self::$_cache_key.$user_id);
+        if(!$menu){
             $where = array(
                 'user_id' => $user_id,
                 'status' => 0,
                 'auth_status' => 1,
             );
-            $modelAgent = D('Business/Agent');
-            $agent = $modelAgent->selectAgent($where);
-            $agent = $agent[0];
-            S(self::$_cache_key.$user_id, $agent, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
+            $modelMenu = D('Business/Menu');
+            $menu = $modelMenu->selectMenu($where);
+            $menu = $menu[0];
+            S(self::$_cache_key.$user_id, $menu, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
         }
-        return $agent;
+        return $menu;
     }
 
     /**从缓存中获取信息
      */
     public static function getByMobilePhone($mobilePhone){
-        $agent = S(self::$_cache_key.$mobilePhone);
-        if(!$agent){
+        $menu = S(self::$_cache_key.$mobilePhone);
+        if(!$menu){
             $where = array(
                 'mobile_phone' => $mobilePhone,
                 'status' => 0,
                 'auth_status' => 1,
             );
-            $modelAgent = D('Agent');
-            $agent = $modelAgent->selectAgent($where);
-            $agent = $agent[0];
-            S(self::$_cache_key.$mobilePhone, $agent, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
+            $modelMenu = D('Menu');
+            $menu = $modelMenu->selectMenu($where);
+            $menu = $menu[0];
+            S(self::$_cache_key.$mobilePhone, $menu, array('type'=>'file', 'expire'=>C('DEFAULT_EXPIRE')));
         }
-        return $agent;
+        return $menu;
     }
 
     /**删除缓存信息
