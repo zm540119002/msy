@@ -43,16 +43,17 @@ $(function(){
         var html='';
 
         if(_this.hasClass('current')){
-            dialog.error('已添加,不能重复添加');
+            dialog.error('已添加');
             return false;
         }else{
-            _this.addClass('current');
+            _this.addClass('current').siblings().removeClass('current');
             html+='<li data-promotional-id="'+goodsId+'"><img src="'+goodsImgSrc+'" alt=""/><span class="">'+goodsName+'</span><a href="javascript:void(0);" class="promotional-close-btn">X</a></li>';
             console.log(goodsImgSrc);
             if(!selectedLen){
                 $('.promotional-goods-list').append(html);
-            }else{
-                $('.addsalesgoodsLayer .promotional-goods-list li').eq(0).before(html);
+            }else if(selectedLen==1){
+                dialog.error('已添加');
+                //$('.addsalesgoodsLayer .promotional-goods-list li').eq(0).before(html);
             }
         }
 
