@@ -67,22 +67,46 @@ $(function(){
     });
     $('body').on('click','.addSalesPromotion',function(){
         var postData=$('.addSalesPromotionForm').serializeObject();
+        postData.goods_id = $('.linked-goods-id').val();
         var content='';
-        if(!postData.salesPromotionName){
+        if(!postData.name){
             content="请填写促销活动名称";
-        }else if(!postData.salesPromotionImg){
+        }else if(!postData.img){
             content="请上传促销活动图片";
-        }else if(!postData.specialPrice){
+        }else if(!postData.promotion_price){
             content="请填写特价";
-        }else if(!postData.startTime){
+        }else if(!postData.start_time){
             content="请选择起始日期";
-        }else if(!postData.endTime){
+        }else if(!postData.end_time){
             content="请选择结束日期";
         }
         if(content){
             dialog.error(content);
             return false;
         }
+        $.ajax({
+            url: controller + 'edit',
+            data: postData,
+            type: 'post',
+            beforeSend: function(){
+                //$('.loading').show();
+            },
+            success: function(msg){
+                if(msg.status == 0){
+                    dialog.error(msg.info);
+                    return false;
+                }
+                if(msg.status == 1){
+                    dialog.success(msg.info,controller + 'manage');
+                }
+            },
+            complete:function(){
+
+            },
+            error:function (xhr) {
+                dialog.error('AJAX错误'+xhr);
+            },
+        });
     })
 
 })
