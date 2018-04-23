@@ -46,7 +46,7 @@ $(function(){
             dialog.error('已添加');
             return false;
         }else{
-            _this.addClass('current').siblings().removeClass('current');
+            //_this.addClass('current').siblings().removeClass('current');
             html+='<li data-promotional-id="'+goodsId+'"><img src="'+goodsImgSrc+'" alt=""/><span class="">'+goodsName+'</span><a href="javascript:void(0);" class="promotional-close-btn">X</a></li>';
             console.log(goodsImgSrc);
             if(!selectedLen){
