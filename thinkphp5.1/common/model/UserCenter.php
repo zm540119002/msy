@@ -34,7 +34,7 @@ class UserCenter extends \think\Model {
 				}
 				return $this->_login($data['mobile_phone']);
 			}
-		}elseif($data['mobile_phone'] && $data['password']){//密码登录
+		}elseif($data['mobile_phone'] && $data['password']){//账号密码登录
 			if(!$validateUser->scene('sceneLoginPassword')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
