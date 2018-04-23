@@ -84,8 +84,9 @@ class Goods extends FactoryBase
     /**
      * 查出产商相关产品
      */
-    public function getGoodsList(){
-
+    public function getList(){
+        $model = new M();
+        return $model -> pageQuery();
     }
 
 

@@ -1,0 +1,107 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<!--选择商品搞促销-->
+<section id="addsalesgoods" style="display:none;" class="f24">
+	<div class="content-box">
+		<span class="content-label">已选择促销商品</span>
+		<ul class="columns_flex l-r-sides promotional-goods-list"></ul>
+		<form name="form1">
+			<div class="columns_flex search-row-flex">
+				<input type="text" class="input-filed search-goods keyword" placeholder="搜索商品"/>
+				<input type="button" value="搜索" class="layer-search-btn"/>
+			</div>
+		</form>
+		<!--<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>-->
+		<!--<div class="columns_flex l-r-sides all-goods-list">-->
+			<!--<a href="javascript:void(0);" data-id="1">-->
+				<!--<img src="public/static/common/img/base_info.png" alt="" class="">-->
+				<!--<span class="goods-name">111</span>-->
+			<!--</a>-->
+			<!--<a href="javascript:void(0);" data-id="2">-->
+				<!--<img src="public/static/common/img/base_finish.png" alt="">-->
+				<!--<span class="goods-name">222</span>-->
+			<!--</a>-->
+			<!--<a href="javascript:void(0);" data-id="3">-->
+				<!--<img src="public/static/common/img/base_address.png" alt="">-->
+				<!--<span class="goods-name">333</span>-->
+			<!--</a>-->
+			<!--<a href="javascript:void(0);" data-id="4">-->
+				<!--<img src="public/static/common/img/base_address.png" alt="">-->
+				<!--<span class="goods-name">444</span>-->
+			<!--</a>-->
+		<!--</div>-->
+		<div class="content" id="list"></div>
+	</div>
+</section>
+<article class="f24">
+	<section class="bottomLine">
+		<div class="top_bar top-title">
+			<h2>新建促销活动</h2>
+		</div>
+	</section>
+	<section class="content-box">
+		<form class="addSalesPromotionForm">
+			<div class="content-row-list">
+				<span class="content-label">第1：填写促销活动名称</span>
+				<input type="text" name="salesPromotionName" value="" placeholder="促销活动名称" class="sales-promotion-name input-filed f24">
+			</div>
+			<div class="content-row-list">
+				<span class="content-label">第2：上传促销活动图片</span>
+				<p>（宽1000像素高400-1000像素 ）</p>
+				<div class="upload-company-map f24">
+					<div>
+						<div class="picture-module company-picture-module">
+							<input type="file" class="uploadImg uploadSingleImg" name="">
+							<img class="upload_img common_default_img" src="" alt="">
+							<input type="hidden" class="business-license img" value="" name="salesPromotionImg">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content-row-list">
+				<span class="content-label">第3：促销活动图片链接到商品</span>
+				<a href="javascript:void(0);" class="linked-goods green-small-btn">链接商品</a>
+				<input type="hidden" value="" class="linked-goods-id">
+			</div>
+			<div class="content-row-list">
+				<span class="content-label">第4：填写促销活动特价</span>
+				<div class="columns_flex">
+					<input type="text" class="input-filed f24" name="specialPrice" placeholder="特价￥00.00">
+					<span>优惠价￥<price>5.00<price></span>
+					<span>零售价￥<price>5.00<price></span>
+				</div>
+			</div>
+			<div class="content-row-list">
+				<p>第5：促销活动特价期限（促销活动自动上架和下架）</p>
+				<span class="content-label">起始时间</span>
+				<input name="startTime" id="startTime" readonly="" class="input-filed f24" type="text" placeholder="选择起始时间" value=""/>
+				<span class="content-label">结束时间</span>
+				<input name="endTime" id="endTime" readonly="" class="input-filed f24" type="text" placeholder="选择结束时间" value=""/>
+			</div>
+		</form>
+	</section>
+</article>
+<a href="javascript:void(0);" class="addSalesPromotion foot-btn f24">确定</a>
+
+
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="factory_js/promotion.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript">
+
+	$(function () {
+		//加载第一页
+		getPage();
+		//搜索
+		$('#searchNode').click(function(){
+			getPage();
+		});
+	});
+</script>
+{/block}
