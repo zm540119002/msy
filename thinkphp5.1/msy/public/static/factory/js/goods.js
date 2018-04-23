@@ -177,13 +177,13 @@ $(function(){
         var postData=$('.addProductContent').serializeObject();
         //查找选择发布的商城平台
         if($('#purchases').hasClass('current')){
-            postData.purchases = 1;
+            postData.purchases_store = 1;
         }
         if($('#commission').hasClass('current')){
-            postData.commission = 1;
+            postData.commission_store = 1;
         }
         if($('#retail').hasClass('current')){
-            postData.retail = 1;
+            postData.retail_store = 1;
         }
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;

@@ -149,6 +149,24 @@ class Goods extends Model {
 		}
 	}
 
+	//分页查询
+	public function pageQuery(){
+		$where = [
+			['status', '=', 0],
+		];
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
+		}
+		$field = array(
+			'id','name','settle_price','retail_price','sale_price',
+		);
+		$order = 'id';
+		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+			input('get.pageSize',0,'int') : config('custom.default_page_size');
+		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
+	}
+
 	/**
 	 * @param array $where
 	 * @param array $field
