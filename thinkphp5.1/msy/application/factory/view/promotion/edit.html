@@ -96,11 +96,12 @@
 <script type="text/javascript">
 
 	$(function () {
+		var url = module + 'Goods/getList';
 		//加载第一页
-		getPage();
+		getPage1(url);
 		//搜索
 		$('#searchNode').click(function(){
-			getPage();
+			getPage1(url,currentPage);
 		});
 	});
 </script>
