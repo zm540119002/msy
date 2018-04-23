@@ -1,12 +1,13 @@
-
+<div class="columns_flex l-r-sides all-goods-list" >
 {notempty name='list'}
 {volist name="list" id="vo"}
-<a href="javascript:void(0);" data-id="{$vo.id}">
-    <!--<img src="public_uploads/{$vo.thumb_img}" alt="" class="">-->
+<a href="javascript:void(0);" data-id="{$vo.id}" class="goods">
+    <img src="public_uploads/{$vo.thumb_img}" alt="" class="">
     <span class="goods-name">{$vo.name}</span>
 </a>
 {/volist}
 {else/}
 <div class='loading'>没有符合条件的记录！</div>
 {/notempty}
+</div>
 {$list|raw}

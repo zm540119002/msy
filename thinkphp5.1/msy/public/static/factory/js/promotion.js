@@ -33,7 +33,7 @@ $(function(){
 
     });
     //添加促销商品
-    $('body').on('click','.all-goods-list a',function(){
+    $('body').on('click','.all-goods-list a.goods',function(){
         var _this=$(this);
         var goodsId=_this.data('id');
         var goodsName=_this.find('.goods-name').text();

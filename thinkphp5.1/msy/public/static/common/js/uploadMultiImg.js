@@ -6,8 +6,9 @@ $(function(){
         var imgContainer = $('.multi-picture-module');
         var imgArr = [];
         var num=file.data('num');//限制个数  
+        console.log(num);
         if(num==6&&$('.editDetailLayer li').length==num){
-            errorTipc('只能上传'+num+'个图片');
+            errorTipc('只能上传'+num+'张图片');
             return false;
         }
         if(num==0){ //0代表无限制个数
