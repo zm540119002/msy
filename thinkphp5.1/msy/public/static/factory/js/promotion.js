@@ -20,10 +20,7 @@ $(function(){
             },
             yes:function(index){
                 var promotionalId='';
-                $.each($('.addsalesgoodsLayer .promotional-goods-list li'),function(){
-                    var _this=$(this);
-                    promotionalId+=_this.data('promotional-id')+',';
-                })
+                promotionalId+=$('.addsalesgoodsLayer .promotional-goods-list li').data('promotional-id');
                 $('.linked-goods-id').val(promotionalId);
                 console.log(promotionalId);
                 layer.close(index);
@@ -41,22 +38,14 @@ $(function(){
         var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
         // alert(selectedLen);
         var html='';
-
-        if(_this.hasClass('current')){
-            dialog.error('已添加');
-            return false;
-        }else{
-            //_this.addClass('current').siblings().removeClass('current');
             html+='<li data-promotional-id="'+goodsId+'"><img src="'+goodsImgSrc+'" alt=""/><span class="">'+goodsName+'</span><a href="javascript:void(0);" class="promotional-close-btn">X</a></li>';
             console.log(goodsImgSrc);
             if(!selectedLen){
                 $('.promotional-goods-list').append(html);
-                _this.addClass('current');
             }else if(selectedLen==1){
                 dialog.error('已添加');
-                //$('.addsalesgoodsLayer .promotional-goods-list li').eq(0).before(html);
             }
-        }
+        // }
 
     });
 
