@@ -57,6 +57,11 @@ $(function(){
         }
 
     });
+
+    //搜索
+    $('body').on('click','.addsalesgoodsLayer .search',function(){
+        getPage();
+    });
     //移除促销商品
     $('body').on('click','.promotional-close-btn',function(){
         var _this=$(this);
@@ -68,7 +73,7 @@ $(function(){
             }
         })
         _this.parent().remove();
-    })
+    });
     $('body').on('click','.addSalesPromotion',function(){
         var postData=$('.addSalesPromotionForm').serializeObject();
         var content='';
@@ -113,7 +118,7 @@ $("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 function getPage(currentPage) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getList';
-    var postData = $('#form1').serializeObject();
+    var postData = $('.addsalesgoodsLayer #form1').serializeObject();
     postData.page = currentPage ? currentPage : 1;
     postData.pageSize = 2;
     $.get(url, postData , function(data){
