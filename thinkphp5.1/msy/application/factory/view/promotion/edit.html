@@ -7,7 +7,20 @@
 <section id="addsalesgoods" style="display:none;" class="f24">
 	<div class="content-box">
 		<span class="content-label">已选择促销商品</span>
-		<ul class="columns_flex l-r-sides promotional-goods-list"></ul>
+		<ul class="columns_flex l-r-sides promotional-goods-list">
+			{notempty name="promotionInfo.goods_id"}
+			<li data-promotional-id="{$promotionInfo.goods_id}">
+				{notempty name="$promotionInfo.thumb_img"}
+				<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.thumb_img|default=''}" alt="">
+				{else /}
+				<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+				{/notempty}
+				<span class="">{$promotionInfo.goods_name}</span>
+				<a href="javascript:void(0);" class="promotional-close-btn">X</a>
+			</li>
+			{/notempty}
+
+		</ul>
 		<form name="form1" id="form1">
 			<div class="columns_flex search-row-flex">
 				<input type="text" class="input-filed search-goods keyword" name="keyword" placeholder="搜索商品"/>

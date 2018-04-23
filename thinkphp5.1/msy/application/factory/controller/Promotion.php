@@ -25,10 +25,16 @@ class Promotion extends FactoryBase
         if(input('?promotion_id')){
             $promotionId = (int)input('promotion_id');
             $where = [
-                ['id','=',$promotionId],
-                ['factory_id','=',$this->factory['id']],
+                ['p.id','=',$promotionId],
+                ['p.factory_id','=',$this->factory['id']],
             ];
-            $promotionInfo =  $model -> getPromotion($where);
+            $file = [
+                'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,p.factory_id,g.thumb_img,g.name as goods_name'
+            ];
+            $join =[
+              ['goods g','g.id = p.goods_id'],
+            ];
+            $promotionInfo =  $model -> getPromotion($where,$file,$join);
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }
