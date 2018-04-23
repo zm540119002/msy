@@ -105,8 +105,8 @@ opt.default = {
     startYear: currYear - 100, //开始年份
     endYear: currYear + 100 //结束年份
 };
-// $("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
-// $("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
+$("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
+$("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 
 
 //获取列表
