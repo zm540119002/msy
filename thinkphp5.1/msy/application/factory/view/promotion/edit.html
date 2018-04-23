@@ -1,5 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
+<link rel="stylesheet" href="public_css/mobiscroll.css">
 {/block}
 {block name="content"}
 <!--选择商品搞促销-->
@@ -7,31 +8,13 @@
 	<div class="content-box">
 		<span class="content-label">已选择促销商品</span>
 		<ul class="columns_flex l-r-sides promotional-goods-list"></ul>
-		<form name="form1">
+		<form name="form1" id="form1">
 			<div class="columns_flex search-row-flex">
-				<input type="text" class="input-filed search-goods keyword" placeholder="搜索商品"/>
-				<input type="button" value="搜索" class="layer-search-btn"/>
+				<input type="text" class="input-filed search-goods keyword" name="keyword" placeholder="搜索商品"/>
+				<input type="button" value="搜索" class="layer-search-btn search"/>
 			</div>
 		</form>
-		<!--<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>-->
-		<!--<div class="columns_flex l-r-sides all-goods-list">-->
-			<!--<a href="javascript:void(0);" data-id="1">-->
-				<!--<img src="public/static/common/img/base_info.png" alt="" class="">-->
-				<!--<span class="goods-name">111</span>-->
-			<!--</a>-->
-			<!--<a href="javascript:void(0);" data-id="2">-->
-				<!--<img src="public/static/common/img/base_finish.png" alt="">-->
-				<!--<span class="goods-name">222</span>-->
-			<!--</a>-->
-			<!--<a href="javascript:void(0);" data-id="3">-->
-				<!--<img src="public/static/common/img/base_address.png" alt="">-->
-				<!--<span class="goods-name">333</span>-->
-			<!--</a>-->
-			<!--<a href="javascript:void(0);" data-id="4">-->
-				<!--<img src="public/static/common/img/base_address.png" alt="">-->
-				<!--<span class="goods-name">444</span>-->
-			<!--</a>-->
-		<!--</div>-->
+		<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>
 		<div class="content" id="list"></div>
 	</div>
 </section>
@@ -91,18 +74,8 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="factory_js/promotion.js"></script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="public_js/mobiscroll.js"></script>
+<script type="text/javascript" src="factory_js/promotion.js"></script>
 
-	$(function () {
-		var url = module + 'Goods/getList';
-		//加载第一页
-		getPage1(url);
-		//搜索
-		$('#searchNode').click(function(){
-			getPage1(url,currentPage);
-		});
-	});
-</script>
 {/block}

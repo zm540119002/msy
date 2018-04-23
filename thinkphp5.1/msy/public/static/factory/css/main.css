@@ -446,3 +446,189 @@
 .addCcountLayer .signIn-wrapper{
     
 }
+/*供应商店铺*/
+.top-row-bar .columns_flex{
+    justify-content: space-between;
+}
+.top-row-bar img{
+    width:30%;
+    vertical-align: top;
+}
+.top-row-bar div:first{
+    width:30%;
+}
+.top-row-bar .col-left{
+    width:125px;
+}
+.brand-store-info{
+    background-image:url(../../common/img/banner/home-banner.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+
+}
+.brand-series a{
+    margin:0 0 20px 0;
+}
+.brand-series img{
+    width:50%;
+}
+.store-qr-code{
+    margin:40px 0 15px 0;
+    overflow: hidden;
+}
+.store-qr-code a{
+    display: block;
+    width:1.4rem;
+    background: #009a3e;
+    color:#fff;
+    float:right;
+    text-align:center;
+}
+.brand-bottom-flex img{
+    float:left;
+    width:20%;
+}
+.brand-bottom-flex{
+    justify-content: space-between;
+}
+.coorperation-model{
+    display: block;
+    width:1.4rem;
+    background: #e60012;
+    color:#fff;
+    font-style: normal;
+    font-weight:normal;
+    text-align:center;
+}
+.follow-store{
+    display: block;
+    width:1.4rem;
+    background: #e60012;
+    text-align: center;
+    color:#fff;
+}
+.brand-store-name{
+    margin:0 0 0 .8rem;
+}
+.brand-store-nav a{
+    position:relative;
+    box-sizing: border-box;
+}
+.brand-store-nav{
+    padding:0.18rem 0;
+}
+.brand-store-nav li{
+    flex:1;
+    text-align: center;
+}
+.brand-store-nav li.current a{
+    color:#ff7aab;
+}
+.brand-store-nav li.current a:before{
+    bottom:-18px;
+    background-color:#ff7aab;
+}
+.flagship-store-goods li{
+    margin:0 0 0.25rem 0;
+    overflow:hidden;
+}
+.flagship-store-goods .flag-intro{
+    margin:0 0 0 1.8rem;
+}
+.qr-code-layer{
+    justify-content: space-between;
+}
+.role-label{
+    padding:.12rem 0 0;
+    margin:.15rem 0 0;
+    border-top:1px solid #d9d9d9;
+    color:#39b54a;
+}
+.stroe-preview{
+    display: block;
+    padding:0 0 0.15rem 0;
+    margin:0.15rem 0 0;
+    border-bottom:1px solid #d9d9d9;
+    text-align:right;
+}
+.l-r-sides a{
+    display: block;
+}
+.row-item-mgl .collect{
+    display: flex;
+    width:150px;
+    height:30px;
+    line-height: 30px;
+    margin:.15rem 0 0;
+    text-align:right;
+}
+.row-item-mgl .collect span,
+.invite-friends span,
+.go-shopping span{
+    display: inline-block;
+    width:26px;
+    height:28px;
+    background-image:url(../../common/img/icons/detail-icons.png);
+    background-position:0 -130px;
+    background-size:30px 325px;
+}
+.invite-friends span{
+    background-position:0 -160px;
+}
+.go-shopping span{
+    background-position:0 -192px;
+}
+.l-r-sides .invite-friends,
+.l-r-sides .go-shopping{
+    display: flex;
+    height:30px;
+    line-height: 30px;
+}
+.l-r-sides li{
+    display: flex;
+}
+.l-r-sides li:last-child{
+    margin:0 0.16rem 0 0;
+}
+.search-goods{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.layer-search-btn{
+    width:70px;
+    background:none;
+    border:1px solid #d9d9d9;
+    border-left:none;
+    text-align:center;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.addsalesgoodsLayer .content-box{
+    padding-right:0;
+}
+.addsalesgoodsLayer .content-label{
+    padding:0 0 .10rem 0;
+    margin-top:.10rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.addsalesgoodsLayer .promotional-close-btn{
+    width:22px;
+    height:22px;
+    line-height: 22px;
+    text-align:center;
+    background: #ff7aab;
+    color:#fff;
+}
+.search-row-flex{
+    margin:.5rem 0 0;
+}
+.all-goods-list a.current span{
+    color:#ff7aab;
+}
+.all-goods-list img,
+.promotional-goods-list img{
+    max-width:40px;
+    height:28px;
+}

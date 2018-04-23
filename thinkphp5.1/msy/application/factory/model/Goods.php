@@ -159,7 +159,7 @@ class Goods extends Model {
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$field = array(
-			'id','name','settle_price','retail_price','sale_price',
+			'id','name','settle_price','retail_price','sale_price','thumb_img'
 		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
