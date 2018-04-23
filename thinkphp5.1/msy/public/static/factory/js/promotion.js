@@ -51,6 +51,7 @@ $(function(){
             console.log(goodsImgSrc);
             if(!selectedLen){
                 $('.promotional-goods-list').append(html);
+                _this.addClass('current');
             }else if(selectedLen==1){
                 dialog.error('已添加');
                 //$('.addsalesgoodsLayer .promotional-goods-list li').eq(0).before(html);
