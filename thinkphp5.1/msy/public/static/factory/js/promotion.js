@@ -15,7 +15,8 @@ $(function(){
             success:function(){
                 var winHeight=$(window).height();
                 $('.signIn-wrapper').css('height',winHeight-120+'px');
-                alert($('.linked-goods-id').val());
+                    //加载第一页
+                    getPage();
             },
             yes:function(index){
                 var promotionalId='';
@@ -104,8 +105,20 @@ opt.default = {
     startYear: currYear - 100, //开始年份
     endYear: currYear + 100 //结束年份
 };
-$("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
-$("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
+// $("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
+// $("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 
 
+//获取列表
+function getPage(currentPage) {
+    $("#list").html($('#loading').html());
+    var url = module+'goods/getList';
+    var postData = $('#form1').serializeObject();
+    postData.page = currentPage ? currentPage : 1;
+    postData.pageSize = 2;
+    $.get(url, postData , function(data){
+        console.log(data);
+        $('.addsalesgoodsLayer #list').html(data);
+    });
+}
 

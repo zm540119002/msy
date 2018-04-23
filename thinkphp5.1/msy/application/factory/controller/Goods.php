@@ -86,7 +86,9 @@ class Goods extends FactoryBase
      */
     public function getList(){
         $model = new M();
-        return $model -> pageQuery();
+        $list = $model -> pageQuery();
+        $this->assign('list',$list);
+        return $this->fetch('goods_list');
     }
 
 

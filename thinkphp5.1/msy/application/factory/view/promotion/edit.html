@@ -13,26 +13,8 @@
 				<input type="button" value="搜索" class="layer-search-btn"/>
 			</div>
 		</form>
-		<!--<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>-->
-		<!--<div class="columns_flex l-r-sides all-goods-list">-->
-			<!--<a href="javascript:void(0);" data-id="1">-->
-				<!--<img src="public/static/common/img/base_info.png" alt="" class="">-->
-				<!--<span class="goods-name">111</span>-->
-			<!--</a>-->
-			<!--<a href="javascript:void(0);" data-id="2">-->
-				<!--<img src="public/static/common/img/base_finish.png" alt="">-->
-				<!--<span class="goods-name">222</span>-->
-			<!--</a>-->
-			<!--<a href="javascript:void(0);" data-id="3">-->
-				<!--<img src="public/static/common/img/base_address.png" alt="">-->
-				<!--<span class="goods-name">333</span>-->
-			<!--</a>-->
-			<!--<a href="javascript:void(0);" data-id="4">-->
-				<!--<img src="public/static/common/img/base_address.png" alt="">-->
-				<!--<span class="goods-name">444</span>-->
-			<!--</a>-->
-		<!--</div>-->
-		<div class="content" id="list"></div>
+		<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>
+		<div class="content columns_flex l-r-sides all-goods-list" id="list"></div>
 	</div>
 </section>
 <article class="f24">
@@ -95,14 +77,5 @@
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
 
-	$(function () {
-		var url = module + 'Goods/getList';
-		//加载第一页
-		getPage1(url);
-		//搜索
-		$('#searchNode').click(function(){
-			getPage1(url,currentPage);
-		});
-	});
 </script>
 {/block}
