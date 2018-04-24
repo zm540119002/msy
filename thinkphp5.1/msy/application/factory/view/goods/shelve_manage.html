@@ -36,52 +36,71 @@
 </article>
 {/block}
 {block name="common"}
+{include file="template/loading.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
 <script type="text/javascript">
+var config = {
+		pageSize:4
+	};
+	$(function () {
+		getPage(config);
+	})
 	//获取列表
-	function getPage(currentPage) {
-		var postData={};
+	var currentPage = 1;//记录当前页
+	var requestEnd = false;//请求结束标记
+	function getPage(config) {
+		var postData = $.extend({},config);
 //		$("#list").html($('#loading').html());
 		var url = module+'goods/getList';
 		postData.pageType = 'shelve';
 		postData.page = currentPage ? currentPage : 1;
-		postData.pageSize = 2;
+		postData.pageSize = postData.pageSize?postData.pageSize:4;
+		//请求结束标志
+		if(requestEnd){
+			dialog.error('没有更多啦');
+			loadTrigger = true;
+			return false;
+		}
 		$.ajax({
 			url: url,
 			data: postData,
 			type: 'get',
 			dataType:'json',
 			beforeSend: function(){
-//				$('.loading').show();
+				$('.loading').show();
 			},
 			error:function (xhr) {
-//				$('.loading').hide();
+				$('.loading').hide();
 				dialog.error('AJAX错误');
 			},
 			success: function(data){
-//				$('.loading').hide();
-				//console.log(data)
-				console.log($('#list'));
+				$('.loading').hide();
 				if(currentPage == 1){
 					$('#list').append(data);
 				}else{
 					$('#list li:last').after(data);
 				}
-				if($(data).length<postData.pageSize){
-					//requestEnd = true;
+				if($($.parseHTML(data)).length<postData.pageSize){
+					requestEnd = true;
 				}
 				currentPage ++;
-//				loadTrigger = true;
+				loadTrigger = true;
 			}
 		});
 
 	}
-	$(function () {
-		getPage(1);
-	})
+	
+	//上拉加载更多
+	var loadTrigger = false;//加载触发器
+	$(window).on('scroll',function(){
+		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+			loadTrigger = false;
+			getPage(config);
+		}
+	});
 
 </script>
 {/block}
