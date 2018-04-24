@@ -123,24 +123,23 @@ class Goods extends Model {
 		$data['update_time'] = time();
 		$result = $this->allowField(true)->save($data, ['id' => $data['goods_id']]);
 		if(false !== $result){
-			$newGoodsInfo = $this -> getGoods($where,$file);
-			delImgFromPaths($oldGoodsInfo['thumb_img'],$newGoodsInfo['thumb_img']);
+			delImgFromPaths($oldGoodsInfo['thumb_img'],$data['thumb_img']);
             //删除就图片
 			$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
 			array_pop($oldMainImg);
-			$newMainImg = explode(",",$newGoodsInfo['main_img']);
+			$newMainImg = explode(",",$data['main_img']);
 			array_pop($newMainImg);
 			delImgFromPaths($oldMainImg,$newMainImg);
 
 			$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
 			array_pop($oldDetailsImg);
-			$newDetailsImg = explode(",",$newGoodsInfo['details_img']);
+			$newDetailsImg = explode(",",$data['details_img']);
 			array_pop($newDetailsImg);
 			delImgFromPaths($oldDetailsImg,$newDetailsImg);
 
 			$oldGoodsVideo = explode(",",$oldGoodsInfo['goods_video']);
 			array_pop($oldGoodsVideo);
-			$newGoodsVideo = explode(",",$newGoodsInfo['goods_video']);
+			$newGoodsVideo = explode(",",$data['goods_video']);
 			array_pop($newGoodsVideo);
 			delImgFromPaths($oldGoodsVideo,$newGoodsVideo);
 			return successMsg("修改成功");
@@ -150,7 +149,7 @@ class Goods extends Model {
 	}
 
 	//分页查询
-	public function pageQuery(){
+	public function pageQuery($_where = []){
 		$where = [
 			['status', '=', 0],
 		];
@@ -158,8 +157,9 @@ class Goods extends Model {
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
+		$where = array_merge($_where, $where);
 		$field = array(
-			'id','name','settle_price','retail_price','sale_price',
+			'id','name','settle_price','retail_price','sale_price','thumb_img'
 		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?

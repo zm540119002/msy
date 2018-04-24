@@ -1044,7 +1044,7 @@ color: #ed6d00;
 }
 .upload-company-map .picture-module{
     position:relative;
-    /*height:4rem;*/
+    height:4rem;
     background: #ccc;
 }
 .upload-picture-module .uploadImg,
@@ -1775,4 +1775,62 @@ input[type=text]::-webkit-focus-inner {
     padding:0.15rem 0;
     border-radius:4px;
     text-align:center;
+}
+/*立即购买数量*/
+.quantity_wrapper input,
+.selected-number input{
+    width:0.8rem;
+    border:1px solid #d9d9d9;
+    text-align: center;
+    float:left;
+    height:0.48rem;
+    border-left:0;
+    border-right:0;
+    border-radius:0;
+    margin-top:0;
+}
+.concessional_price{padding:0.15rem 0 0;}
+.project_quantity_purchased{padding:0.20rem 0 0.20rem;}
+.quantity_wrapper a,
+.selected-number a{
+    border:1px solid #d9d9d9;
+    width:0.55rem;
+    display: inline-block;
+    text-align: center;
+    font-size:0.30rem;
+    float:left;
+    height:0.48rem;
+    color:#333;
+}
+.count-down-icons{
+    display:block;
+    width:42px;
+    height:42px;
+    background-image:url(../../common/img/icons/pay_time.png);
+    background-repeat: no-repeat;
+    background-position:center;
+}
+/*商品促销活动*/
+.linked-goods{
+    display: block;
+    width:100%;
+    padding:.12rem 0;
+    text-align:center;
+    border-radius:4px;
+    color:#fff;
+}
+/*促销商品*/
+.addsalesgoodsLayer .pagination{
+    width:150px;
+    margin:0 auto;
+}
+.addsalesgoodsLayer .pagination li{
+    width:22px;
+    height:22px;
+    float:left;
+    text-align: center;
+}
+.addsalesgoodsLayer .pagination li.active{
+    background: #0066cc;
+    color:#fff;
 }

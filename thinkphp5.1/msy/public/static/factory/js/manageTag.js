@@ -183,7 +183,7 @@ var manageClassifyTag={
         delObj.parents('.tag-item').remove();
     },
     upTag:function(upObj){
-        var swith=false;
+        var swith=upObj.parents('.tag-item').siblings('.isClick').val();
         var currentIndex=upObj.parents('.tag-item').index();
         var upperIndex=upObj.parents('.tag-item').prev().index();
         var currentTagName=upObj.parents('.tag-item').find('.classify-tag-name');
@@ -201,12 +201,12 @@ var manageClassifyTag={
         postData.series_id = upObj.parent().siblings('.series_id').data('series-id');
         postData.sort = upObj.parent().siblings('.sort').data('tag-id');
         console.log(postData);
-        console.log(swith);
-        if(swith==true){
-            upObj.addClass('disabled');
-        }else{
-            swith=true;
+        
+        if(swith==1){
             console.log(swith);
+            //upObj.addClass('disabled');
+            // console.log(swith);
+            upObj.parents('.tag-item').siblings('.isClick').val(0);
             $.ajax({
                 url: controller+"move",
                 data: postData,
@@ -217,27 +217,30 @@ var manageClassifyTag={
                 },
                 success: function(info){
                     if(info.status == 1){
-                        if(currentIndex>upperIndex){
-                            upperTagName.text(currentTagName.text());
-                            currentTagName.text(temp);
-                            upperTagId.data('tag-id',currentTagId.data('tag-id'));
-                            currentTagId.data('tag-id',tempId);
-                            upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
-                            currentSeriesTagId.data('series-id',tempSeriesId);  
-                            //upObj.addClass('disabled');
-                            swith=false; 
-                        }
+                        // if(currentIndex>upperIndex){
+                        //     upperTagName.text(currentTagName.text());
+                        //     currentTagName.text(temp);
+                        //     upperTagId.data('tag-id',currentTagId.data('tag-id'));
+                        //     currentTagId.data('tag-id',tempId);
+                        //     upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+                        //     currentSeriesTagId.data('series-id',tempSeriesId);  
+                        //     //upObj.addClass('disabled');
+                            
+                        // }
+                        window.location=module+'Series/edit'
                         
                     }
                     
                 },
                 complete:function(){
-                     
+                     upObj.parents('.tag-item').siblings('.isClick').val(1);
                 },
                 error:function (xhr) {
                     dialog.error('AJAX错误'+xhr);
                 },
             });
+        }else{
+            alert(111);
         }
         // $.post(controller+"move",postData,function(msg){
         //     if(msg.status == 1){
