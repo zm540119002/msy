@@ -110,7 +110,7 @@ class Promotion extends Model {
 	 */
 	public function selectPromotion($where=[],$field=[],$order=[],$join=[],$limit=''){
 		$_where = array(
-			'g.status' => 0,
+			'p.status' => 0,
 		);
 		$_join = array(
 		);
@@ -120,7 +120,7 @@ class Promotion extends Model {
 		);
 		$order = array_merge($_order, $order);
 		if($field){
-			$list = $this->alias('g')
+			$list = $this->alias('p')
 				->where($where)
 				->field($field)
 				->join(array_merge($_join,$join))
@@ -128,7 +128,7 @@ class Promotion extends Model {
 				->limit($limit)
 				->select();
 		}else{
-			$list = $this->alias('g')
+			$list = $this->alias('p')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->order($order)
@@ -150,21 +150,20 @@ class Promotion extends Model {
 	 */
 	public function getPromotion($where=[],$field=[],$join=[]){
 		$_where = array(
-			'g.status' => 0,
+			'p.status' => 0,
 		);
 		$where = array_merge($_where, $where);
-		$_join = array(
-		);
+
 		if($field){
-			$info = $this->alias('g')
+			$info = $this->alias('p')
 				->field($field)
-				->join(array_merge($_join,$join))
+				->join($join)
 				->where($where)
 				->find();
 		}else{
-			$info = $this->alias('g')
+			$info = $this->alias('p')
 				->where($where)
-				->join(array_merge($_join,$join))
+				->join($join)
 				->find();
 		}
 		if(!empty($info)){
