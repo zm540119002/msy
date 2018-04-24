@@ -18,7 +18,7 @@ class Menu{
             }
             cache(self::$_cache_key.$user['id'], $allDisplayMenu);
         }
-        return $allDisplayMenu;
+        return $allDisplayMenu?:[];
     }
 
     /**删除缓存信息
@@ -30,8 +30,8 @@ class Menu{
     /**从缓存中获取信息
      */
     public static function getAllMenu($user){
-        $allMenu = cache(self::$_cache_key_2.$user['id']);
-        if(!$allMenu){
+        $allMenuIds = cache(self::$_cache_key_2.$user['id']);
+        if(!$allMenuIds){
             $menu = new \common\lib\Menu();
             if($user['type']==0){//超级管理员
                 $allMenu = $menu->getAllMenu();
@@ -39,13 +39,13 @@ class Menu{
                 $allMenu = $menu->getOwnMenu();
             }
             $subMenu = array_column($allMenu,'sub_menu');
-            $allMenu = [];
+            $allMenuIds = [];
             foreach ($subMenu as $item) {
-                $allMenu = array_merge($allMenu,array_column($item,'id'));
+                $allMenuIds = array_merge($allMenuIds,array_column($item,'id'));
             }
-            cache(self::$_cache_key_2.$user['id'], $allMenu);
+            cache(self::$_cache_key_2.$user['id'], $allMenuIds);
         }
-        return $allMenu;
+        return $allMenuIds?:[];
     }
 
     /**删除缓存信息
