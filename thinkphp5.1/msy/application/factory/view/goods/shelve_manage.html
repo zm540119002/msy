@@ -53,7 +53,6 @@ var config = {
 	var requestEnd = false;//请求结束标记
 	function getPage(config) {
 		var postData = $.extend({},config);
-//		$("#list").html($('#loading').html());
 		var url = module+'goods/getList';
 		postData.pageType = 'shelve';
 		postData.page = currentPage ? currentPage : 1;
