@@ -134,10 +134,10 @@ function getPage(currentPage) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getList';
     var postData = $('.addsalesgoodsLayer #form1').serializeObject();
+    postData.pageType = 'promotion';
     postData.page = currentPage ? currentPage : 1;
     postData.pageSize = 2;
     $.get(url, postData , function(data){
-        console.log(data);
         $('.addsalesgoodsLayer #list').html(data);
     });
 }

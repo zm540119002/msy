@@ -82,14 +82,27 @@ class Goods extends FactoryBase
 
 
     /**
-     * 查出产商相关产品
+     * 查出产商相关产品 分页查询
      */
     public function getList(){
+
         $model = new M();
         $list = $model -> pageQuery();
+  
         $this->assign('list',$list);
-        return $this->fetch('goods_list');
+        if($_GET['pageType'] == 'promotion' ){
+            return $this->fetch('goods_list_promotion');
+        }
+        if($_GET['pageType'] == 'shelve' ){
+            return $this->fetch('goods_list_shelve');
+        }
+
     }
+    //上下架
+    public function shelveManage(){
+        return $this->fetch();
+    }
+
 
 
 }

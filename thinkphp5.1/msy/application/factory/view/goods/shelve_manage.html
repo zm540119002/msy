@@ -1,0 +1,87 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="">
+		<nav class="columns_flex channel_nav manufacturer_nav supply-nav">
+			<a href="" class="current">
+				<span class="exclusive"></span>
+				采购供应联营
+			</a>
+			<a href="">
+				<span class="classify"></span>
+				分成供应联营
+			</a>
+			<a href="">
+				<span class="purchasers"></span>
+				零售供应联营
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex subNav3 f22">
+			<a >分类标签</a>
+			<a>商品管理</a>
+			<a class="column_type current">上架管理</a>
+		</div>
+	</section>
+	<section>
+		<div class="content-wrapper">
+			<ul class="columns_flex flex-both-side" id="list">
+
+			</ul>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
+<script type="text/javascript">
+	//获取列表
+	function getPage(currentPage) {
+		var postData={};
+//		$("#list").html($('#loading').html());
+		var url = module+'goods/getList';
+		postData.pageType = 'shelve';
+		postData.page = currentPage ? currentPage : 1;
+		postData.pageSize = 2;
+		$.ajax({
+			url: url,
+			data: postData,
+			type: 'get',
+			dataType:'json',
+			beforeSend: function(){
+//				$('.loading').show();
+			},
+			error:function (xhr) {
+//				$('.loading').hide();
+				dialog.error('AJAX错误');
+			},
+			success: function(data){
+//				$('.loading').hide();
+				//console.log(data)
+				console.log($('#list'));
+				if(currentPage == 1){
+					$('#list').append(data);
+				}else{
+					$('#list li:last').after(data);
+				}
+				if($(data).length<postData.pageSize){
+					//requestEnd = true;
+				}
+				currentPage ++;
+//				loadTrigger = true;
+			}
+		});
+
+	}
+	$(function () {
+		getPage(1);
+	})
+
+</script>
+{/block}

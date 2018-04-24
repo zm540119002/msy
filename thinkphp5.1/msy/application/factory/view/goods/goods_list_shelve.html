@@ -1,0 +1,21 @@
+
+{notempty name='list'}
+{volist name="list" id="vo"}
+<li>
+    <a class="product-square-box">
+        {notempty name='vo.thumb_img'}
+        <img src="public_uploads/{$vo.thumb_img}" alt="" class="">
+        {else /}
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+        {/notempty}
+    </a>
+    <p class="product-title">{$vo.name}</p>
+    <div class="columns_flex two-flex">
+        <div class="pink">
+            ￥<price>5.00</price>
+        </div>
+        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">上架</a>
+    </div>
+</li>
+{/volist}
+{/notempty}
