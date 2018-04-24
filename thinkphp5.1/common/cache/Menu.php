@@ -38,6 +38,11 @@ class Menu{
             }else{
                 $allMenu = $menu->getOwnMenu();
             }
+            $subMenu = array_column($allMenu,'sub_menu');
+            $allMenu = [];
+            foreach ($subMenu as $item) {
+                $allMenu = array_merge($allMenu,array_column($item,'id'));
+            }
             cache(self::$_cache_key_2.$user['id'], $allMenu);
         }
         return $allMenu;
