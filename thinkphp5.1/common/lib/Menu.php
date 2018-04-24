@@ -43,7 +43,6 @@ class Menu
     /**获取所有菜单
      */
     public function getAllMenu(){
-        //获取用户可显示菜单先获取用户菜单
         return $this->_allMenu;
     }
 
