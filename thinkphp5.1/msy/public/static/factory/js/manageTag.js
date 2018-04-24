@@ -184,18 +184,6 @@ var manageClassifyTag={
     },
     upTag:function(upObj){
         var swith=upObj.parents('.tag-item').siblings('.isClick').val();
-        var currentIndex=upObj.parents('.tag-item').index();
-        var upperIndex=upObj.parents('.tag-item').prev().index();
-        var currentTagName=upObj.parents('.tag-item').find('.classify-tag-name');
-        var upperTagName=upObj.parents('.tag-item').prev().find('.classify-tag-name');
-        var currentTagId=upObj.parents('.tag-item').find('.sort');
-        var upperTagId=upObj.parents('.tag-item').prev().find('.sort');
-        var currentSeriesTagId=upObj.parents('.tag-item').find('.series_id');
-        var upperSeriesTagId=upObj.parents('.tag-item').prev().find('.series_id');
-        var temp,tempId,tempSeriesId;
-            temp=upperTagName.text();
-            tempId=upperTagId.data('tag-id');
-            tempSeriesId=upperSeriesTagId.data('series-id');
         var postData = {};
         postData.move = upObj.data('move');
         postData.series_id = upObj.parent().siblings('.series_id').data('series-id');
@@ -212,35 +200,52 @@ var manageClassifyTag={
                 data: postData,
                 type: 'post',
                 beforeSend: function(){
-                    swith=true;
+                    //swith=true;
                     //$('.loading').show();
                 },
                 success: function(info){
                     if(info.status == 1){
-                        // if(currentIndex>upperIndex){
-                        //     upperTagName.text(currentTagName.text());
-                        //     currentTagName.text(temp);
-                        //     upperTagId.data('tag-id',currentTagId.data('tag-id'));
-                        //     currentTagId.data('tag-id',tempId);
-                        //     upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
-                        //     currentSeriesTagId.data('series-id',tempSeriesId);  
-                        //     //upObj.addClass('disabled');
+                        var currentIndex=upObj.parents('.tag-item').index();
+                        var upperIndex=upObj.parents('.tag-item').prev().index();
+                        var currentTagName=upObj.parents('.tag-item').find('.classify-tag-name');
+                        var upperTagName=upObj.parents('.tag-item').prev().find('.classify-tag-name');
+                        var currentTagId=upObj.parents('.tag-item').find('.sort');
+                        var upperTagId=upObj.parents('.tag-item').prev().find('.sort');
+                        var currentSeriesTagId=upObj.parents('.tag-item').find('.series_id');
+                        var upperSeriesTagId=upObj.parents('.tag-item').prev().find('.series_id');
+                        var temp,tempId,tempSeriesId;
+                            temp=upperTagName.text();
+                            tempId=upperTagId.data('tag-id');
+                            tempSeriesId=upperSeriesTagId.data('series-id');
+                        if(currentIndex>upperIndex){
+                            upperTagName.text(currentTagName.text());
+                            currentTagName.text(temp);
                             
-                        // }
-                        window.location=module+'Series/edit'
+                            currentTagId.data('tag-id',upperTagId.data('tag-id'));
+                            upperTagId.data('tag-id',currentTagId.data('tag-id'));
+                            
+                            currentSeriesTagId.data('series-id',upperSeriesTagId.data('series-id'));  
+                            upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+                            //upObj.addClass('disabled');
+                            
+                        }
+                        //window.location=module+'Series/edit'
                         
                     }
                     
                 },
                 complete:function(){
-                     upObj.parents('.tag-item').siblings('.isClick').val(1);
+                    setTimeout(function() {  
+                        upObj.parents('.tag-item').siblings('.isClick').val(1);
+                    }, 1500); 
+                        
                 },
                 error:function (xhr) {
                     dialog.error('AJAX错误'+xhr);
                 },
             });
         }else{
-            alert(111);
+            return false;
         }
         // $.post(controller+"move",postData,function(msg){
         //     if(msg.status == 1){
