@@ -92,7 +92,17 @@
 				var url = module+'goods/getList';
 				getPage(url,config);
             }
-        })
+        });
+		$('body').on('click','.shelf',function(){
+			var shelfStatus=$(this).data('shelf');
+			if(shelfStatus==1){
+				$(this).data('shelf',0);
+				$(this).addClass('apply-shelf').text('已申请');
+			}else{
+				$(this).data('shelf',1);
+				$(this).addClass('up-shelf').text('上架');
+			}
+		})
 	});
 
 	//上拉加载更多

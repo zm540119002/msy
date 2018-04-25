@@ -15,11 +15,12 @@
             ￥<price>5.00</price>
         </div>
         {if $vo.shelves == 1 }
-        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">已申请</a>
+        <a href="javascript:void(0);" class="shelf small-btn apply-shelf" disabled="disabled">已申请</a>
         {elseif $vo.shelves == 2 /}
-        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">上架亮</a>
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="0">下架</a>
         {else /}
-        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">上架暗</a>
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="1">上架</a>
+        
         {/if}
 
     </div>
