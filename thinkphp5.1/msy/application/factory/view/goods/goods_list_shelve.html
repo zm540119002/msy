@@ -22,10 +22,31 @@
         {elseif $vo.purchases_shelf == 3 /}
         <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
         {else /}
-
+        {/if}
+        {/notempty}
+        {notempty name="vo.commission_shelf"}
+        {if $vo.commission_shelf == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="2">上架</a>
+        {elseif $vo.commission_shelf == 2 /}
+        <a href="javascript:void(0);" class="small-btn apply-shelf" disabled="disabled">已申请</a>
+        {elseif $vo.commission_shelf == 3 /}
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
+        {else /}
+        {/if}
+        {/notempty}
+        {notempty name="vo.retail_shelf"}
+        {if $vo.retail_shelf == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="2">上架</a>
+        {elseif $vo.retail_shelf == 2 /}
+        <a href="javascript:void(0);" class="small-btn apply-shelf" disabled="disabled">已申请</a>
+        {elseif $vo.retail_shelf == 3 /}
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
+        {else /}
         {/if}
         {/notempty}
     </div>
 </li>
 {/volist}
+{else /}
+<li><span>没有数据</span></li>
 {/notempty}

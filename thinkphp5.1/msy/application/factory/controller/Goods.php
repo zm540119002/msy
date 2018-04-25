@@ -120,11 +120,13 @@ class Goods extends FactoryBase
                 if($data['storeType'] == 'commission_store'){
                     $data['commission_shelf'] = $data['shelfStatus'];
                 }
-                if($data['storeType'] == 'retail_shelf'){
+                if($data['storeType'] == 'retail_store'){
                     $data['retail_shelf'] = $data['shelfStatus'];
                 }
             }
-            $result = $model->allowField(true)->save($data, ['id' => $data['goodsId'],'factory_id'=>$this->factory['id']]);
+
+            $result = $model->allowField(true)
+                ->save($data, ['id' => $data['goodsId'],'factory_id'=>$this->factory['id'],$data['storeType']=>1]);
            if(false !== $result){
                return successMsg('成功');
            }

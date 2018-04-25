@@ -59,6 +59,7 @@
 			var url = module+'goods/getList';
             getPage(url,config);
         }
+		//选择店铺类型
 		$('.channel_nav a').on('click',function(){
             var _this=$(this);
                 _this.addClass('current').siblings().removeClass('current');
@@ -76,7 +77,7 @@
 				getPage(url,config);
             }
         });
-		//
+		//选择商品管理类型
         $('.subNav3 a').on('click',function(){
             var _this=$(this);
                 _this.addClass('current').siblings().removeClass('current');
