@@ -49,14 +49,13 @@
 <script type="text/javascript">
 	$(function () {
         var pageType = $('.subNav3 a.current').data('page-type');
-
         if(pageType == 'shelve' || pageType == 'manage'){
             var config = {
                 pageSize:4,
-                url:module+'goods/getList',
                 pageType:pageType,
             };
-            getPage(config);
+			var url = module+'goods/getList';
+            getPage(url,config);
         }
         $('.subNav3 a').on('click',function(){
             var _this=$(this);
@@ -65,17 +64,17 @@
             if(pageType == 'shelve' || pageType == 'manage'){
                 var config = {
                     pageSize:4,
-                    url:module+'goods/getList',
                     pageType:pageType,
                 };
 				currentPage=1;
 				requestEnd=false;
-                getPage(config);
+				var url = module+'goods/getList';
+				getPage(url,config);
             }
 
         })
 	});
-	
+
 	//上拉加载更多
 	var loadTrigger = false;//加载触发器
 	$(window).on('scroll',function(){
@@ -85,10 +84,10 @@
             if(pageType == 'shelve' || pageType == 'manage'){
                 var config = {
                     pageSize:4,
-                    url:module+'goods/getList',
                     pageType:pageType,
                 };
-                getPage(config);
+				var url = module+'goods/getList';
+				getPage(url,config);
             }
 		}
 	});
@@ -96,8 +95,7 @@
 	//获取列表
 	var currentPage = 1;//记录当前页
 	var requestEnd = false;//请求结束标记
-	function getPage(config) {
-		console.log(currentPage);
+	function getPage(url,config) {
 		var postData = $.extend({},config);
 		postData.page = currentPage ? currentPage : 1;
 		postData.pageSize = postData.pageSize?postData.pageSize:4;
@@ -108,7 +106,7 @@
 			return false;
 		}
 		$.ajax({
-			url: postData.url,
+			url: url,
 			data: postData,
 			type: 'get',
 			dataType:'json',
