@@ -29,7 +29,7 @@ class Menu{
 
     /**从缓存中获取信息
      */
-    public static function getAllMenu($user){
+    public static function getAllMenuIds($user){
         $allMenuIds = cache(self::$_cache_key_2.$user['id']);
         if(!$allMenuIds){
             $menu = new \common\lib\Menu();
@@ -50,7 +50,7 @@ class Menu{
 
     /**删除缓存信息
      */
-    public static function removeAllMenu($userId){
+    public static function removeAllMenuIds($userId){
         cache(self::$_cache_key_2.$userId, null);
     }
 }
