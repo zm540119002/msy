@@ -27,6 +27,11 @@
 		</div>
 	</section>
 	<section>
+		<div>
+            企业名称:
+            <span>达安有限公司</span>
+        </div>
+		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
 		<div class="content-wrapper">
 			<ul class="columns_flex flex-both-side" id="list">
 
@@ -77,7 +82,7 @@ var config = {
 			},
 			success: function(data){
 				$('.loading').hide();
-				if(currentPage == 1){
+				if(currentPage == 1){ 
 					$('#list').append(data);
 				}else{
 					$('#list li:last').after(data);
