@@ -75,7 +75,7 @@
 
         })
 	});
-	
+	 
 	//上拉加载更多
 	var loadTrigger = false;//加载触发器
 	$(window).on('scroll',function(){
@@ -84,7 +84,7 @@
             var pageType = $('.subNav3 a.current').data('page-type');
             if(pageType == 'shelve' || pageType == 'manage'){
                 var config = {
-                    pageSize:4,
+                    pageSize:4, 
                     url:module+'goods/getList',
                     pageType:pageType,
                 };
