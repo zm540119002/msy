@@ -1,9 +1,9 @@
 
 {notempty name='list'}
 {volist name="list" id="vo"}
-<li>
+<li data-id="{$vo.id}">
     <a class="product-square-box">
-        {notempty name='vo.thumb_img'}
+        {notempty name="vo.thumb_img"}
         <img src="public_uploads/{$vo.thumb_img}" alt="" class="product-square-img">
         {else /}
         <img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
@@ -14,15 +14,17 @@
         <div class="pink">
             ￥<price>5.00</price>
         </div>
-        {if $vo.shelves == 1 }
-        <a href="javascript:void(0);" class="shelf small-btn apply-shelf" disabled="disabled">已申请</a>
-        {elseif $vo.shelves == 2 /}
-        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="0">下架</a>
+        {notempty name="vo.purchases_shelf"}
+        {if $vo.purchases_shelf == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="2">上架</a>
+        {elseif $vo.purchases_shelf == 2 /}
+        <a href="javascript:void(0);" class="small-btn apply-shelf" disabled="disabled">已申请</a>
+        {elseif $vo.purchases_shelf == 3 /}
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
         {else /}
-        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="1">上架</a>
-        
-        {/if}
 
+        {/if}
+        {/notempty}
     </div>
 </li>
 {/volist}

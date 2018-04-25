@@ -89,40 +89,46 @@ class Goods extends FactoryBase
         $where = [
             ['factory_id','=',$this->factory['id']],
         ];
-        if($_GET['storeType'] == 'purchases_store'){
-            $where = [
-                ['factory_id','=',$this->factory['id']],
-                ['purchases_store','=',1]
-            ];
-        }
-        if($_GET['storeType'] == 'commission_store'){
-            $where = [
-                ['factory_id','=',$this->factory['id']],
-                ['commission_store','=',1]
-            ];
-        }
-        if($_GET['storeType'] == 'retail_store'){
-            $where = [
-                ['factory_id','=',$this->factory['id']],
-                ['retail_store','=',1]
-            ];
-        }
         $list = $model -> pageQuery($where);
         $this->assign('list',$list);
-        if($_GET['pageType'] == 'promotion' ){
-            return $this->fetch('goods_list_promotion');
+        if(isset($_GET['pageType'])){
+            if($_GET['pageType'] == 'promotion' ){
+                return $this->fetch('goods_list_promotion');
+            }
+            if($_GET['pageType'] == 'shelf' ){
+                return $this->fetch('goods_list_shelve');
+            }
+            if($_GET['pageType'] == 'manage' ){
+                return $this->fetch('goods_list_manage');
+            }
         }
-        if($_GET['pageType'] == 'shelve' ){
-            return $this->fetch('goods_list_shelve');
-        }
-        if($_GET['pageType'] == 'manage' ){
-            return $this->fetch('goods_list_manage');
-        }
-
     }
     //商品管理展示页
     public function manage(){
+        $this->assign('factory',$this->factory);
         return $this->fetch();
+    }
+    //上下架设置
+    public function setShelf(){
+        if(request()->isPost()){
+            $data = input();
+            $model = new M();
+            if(isset($data['storeType'])){
+                if($data['storeType'] == 'purchases_store'){
+                    $data['purchases_shelf'] = $data['shelfStatus'];
+                }
+                if($data['storeType'] == 'commission_store'){
+                    $data['commission_shelf'] = $data['shelfStatus'];
+                }
+                if($data['storeType'] == 'retail_shelf'){
+                    $data['retail_shelf'] = $data['shelfStatus'];
+                }
+            }
+            $result = $model->allowField(true)->save($data, ['id' => $data['goodsId'],'factory_id'=>$this->factory['id']]);
+           if(false !== $result){
+               return successMsg('成功');
+           }
+        }
     }
 
 

@@ -157,10 +157,22 @@ class Goods extends Model {
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
+		$field =['id','name','settle_price','retail_price','sale_price','thumb_img',];
+		if(isset($_GET['storeType'])){
+			if($_GET['storeType'] == 'purchases_store'){
+				$where[] = ['purchases_store','=',1];
+				$field[] = 'purchases_shelf';
+			}
+			if($_GET['storeType'] == 'commission_store'){
+				$where[] =  ['commission_store','=',1];
+				$field[] = 'commission_shelf';
+			}
+			if($_GET['storeType'] == 'retail_store'){
+				$where[] =  ['retail_store','=',1];
+				$field[] = 'retail_shelf';
+			}
+		}
 		$where = array_merge($_where, $where);
-		$field = array(
-			'id','name','settle_price','retail_price','sale_price','thumb_img','shelves'
-		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');

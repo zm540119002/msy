@@ -23,13 +23,13 @@
 		<div class="columns_flex subNav3 f22">
 			<a class="column_type current" data-page-type="manage">商品管理</a>
             <a class="column_type" data-page-type="sort">商品排序</a>
-			<a class="column_type  " data-page-type="shelve">上架管理</a>
+			<a class="column_type  " data-page-type="shelf">上架管理</a>
 		</div>
 	</section>
 	<section>
 		<div>
             企业名称:
-            <span>达安有限公司</span>
+            <span>{$factory.name}</span>
         </div>
 		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
 		<div class="content-wrapper">
@@ -51,7 +51,7 @@
 	$(function () {
 		var storeType=$('.channel_nav a.current').data('type');
         var pageType = $('.subNav3 a.current').data('page-type');
-        if(pageType == 'shelve' || pageType == 'manage'){
+        if(pageType == 'shelf' || pageType == 'manage'){
             var config = {
                 pageSize:4,
 				storeType:storeType,
@@ -65,7 +65,7 @@
                 _this.addClass('current').siblings().removeClass('current');
 			var pageType=$('.subNav3 a.current').data('page-type');
             var storeType=_this.data('type');
-            if(pageType == 'shelve' || pageType == 'manage'){
+            if(pageType == 'shelf' || pageType == 'manage'){
                 var config = {
                     pageSize:4,
 					storeType:storeType,
@@ -77,12 +77,13 @@
 				getPage(url,config);
             }
         });
+		//
         $('.subNav3 a').on('click',function(){
             var _this=$(this);
                 _this.addClass('current').siblings().removeClass('current');
             var pageType =_this.data('page-type');
 			 var storeType=$('.channel_nav a.current').data('type');
-            if(pageType == 'shelve' || pageType == 'manage'){
+            if(pageType == 'shelf' || pageType == 'manage'){
                 var config = {
                     pageSize:4,
 					storeType:storeType,
@@ -94,15 +95,38 @@
 				getPage(url,config);
             }
         });
+		//上下架
 		$('body').on('click','.shelf',function(){
 			var shelfStatus=$(this).data('shelf');
-			if(shelfStatus==1){
-				$(this).data('shelf',0);
-				$(this).removeClass('shelf').addClass('apply-shelf').text('已申请');
-			}else{
-				$(this).data('shelf',1);
-				$(this).addClass('up-shelf').text('上架');
-			}
+            var _this = $(this);
+			var storeType=$('.channel_nav a.current').data('type');
+			var goodsId = $(this).parents('li').data('id');
+			var postData ={};
+			postData.goodsId = goodsId;
+			postData.shelfStatus = shelfStatus;
+			postData.storeType = storeType;
+			var url = module+'goods/setShelf';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				dataType:'json',
+				beforeSend: function(){
+				},
+				error:function (xhr) {
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					if(data.status == 1){
+						if(shelfStatus==2){
+							_this.removeClass('shelf').addClass('apply-shelf').text('已申请');
+						}else{
+							_this.data('shelf',2);
+							_this.addClass('up-shelf').text('上架');
+						}
+					}
+				}
+			});
 		})
 	});
 
@@ -113,7 +137,7 @@
 			loadTrigger = false;
             var pageType = $('.subNav3 a.current').data('page-type');
             var storeType = $('.channel_nav a.current').data('type');
-            if(pageType == 'shelve' || pageType == 'manage'){
+            if(pageType == 'shelf' || pageType == 'manage'){
                 var config = {
                     pageSize:4,
 					storeType:storeType,
@@ -129,7 +153,6 @@
 	var currentPage = 1;//记录当前页
 	var requestEnd = false;//请求结束标记
 	function getPage(url,config) {
-		console.log(config);
 		var postData = $.extend({},config);
 		postData.page = currentPage ? currentPage : 1;
 		postData.pageSize = postData.pageSize?postData.pageSize:4;
