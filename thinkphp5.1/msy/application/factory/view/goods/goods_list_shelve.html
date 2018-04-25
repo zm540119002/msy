@@ -14,7 +14,14 @@
         <div class="pink">
             ￥<price>5.00</price>
         </div>
-        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">上架</a>
+        {if $vo.shelves == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">已申请</a>
+        {elseif $vo.shelves == 2 /}
+        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">上架亮</a>
+        {else /}
+        <a href="javascript:void(0);" class="shelf small-btn green-small-btn">上架暗</a>
+        {/if}
+
     </div>
 </li>
 {/volist}

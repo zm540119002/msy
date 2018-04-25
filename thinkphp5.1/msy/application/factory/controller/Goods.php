@@ -89,6 +89,24 @@ class Goods extends FactoryBase
         $where = [
             ['factory_id','=',$this->factory['id']],
         ];
+        if($_GET['storeType'] == 'purchases_store'){
+            $where = [
+                ['factory_id','=',$this->factory['id']],
+                ['purchases_store','=',1]
+            ];
+        }
+        if($_GET['storeType'] == 'commission_store'){
+            $where = [
+                ['factory_id','=',$this->factory['id']],
+                ['commission_store','=',1]
+            ];
+        }
+        if($_GET['storeType'] == 'retail_store'){
+            $where = [
+                ['factory_id','=',$this->factory['id']],
+                ['retail_store','=',1]
+            ];
+        }
         $list = $model -> pageQuery($where);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'promotion' ){
