@@ -21,9 +21,9 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex subNav3 f22">
-			<a >分类标签</a>
-			<a>商品管理</a>
-			<a class="column_type current">上架管理</a>
+			<a class="column_type current" data-page-type="manage">商品管理</a>
+            <a class="column_type" data-page-type="sort">商品排序</a>
+			<a class="column_type  " data-page-type="shelve">上架管理</a>
 		</div>
 	</section>
 	<section>
@@ -47,19 +47,37 @@
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
 <script type="text/javascript">
-var config = {
-		pageSize:4
-	};
 	$(function () {
-		getPage(config);
+        var pageType = $('.subNav3 a.current').data('page-type');
+
+        if(pageType == 'shelve' || pageType == 'manage'){
+            var config = {
+                pageSize:4,
+                url:module+'goods/getList',
+                pageType:pageType,
+            };
+            getPage(config);
+        }
+        $('.subNav3 a').on('click',function(){
+            var _this=$(this);
+                _this.addClass('current').siblings().removeClass('current');
+            var pageType =_this.data('page-type');
+            if(pageType == 'shelve' || pageType == 'manage'){
+                var config = {
+                    pageSize:4,
+                    url:module+'goods/getList',
+                    pageType:pageType,
+                };
+                getPage(config);
+            }
+
+        })
 	})
 	//获取列表
 	var currentPage = 1;//记录当前页
 	var requestEnd = false;//请求结束标记
 	function getPage(config) {
 		var postData = $.extend({},config);
-		var url = module+'goods/getList';
-		postData.pageType = 'shelve';
 		postData.page = currentPage ? currentPage : 1;
 		postData.pageSize = postData.pageSize?postData.pageSize:4;
 		//请求结束标志
@@ -69,7 +87,7 @@ var config = {
 			return false;
 		}
 		$.ajax({
-			url: url,
+			url: postData.url,
 			data: postData,
 			type: 'get',
 			dataType:'json',
@@ -102,7 +120,15 @@ var config = {
 	$(window).on('scroll',function(){
 		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
 			loadTrigger = false;
-			getPage(config);
+            var pageType = $('.subNav3 a.current').data('page-type');
+            if(pageType == 'shelve' || pageType == 'manage'){
+                var config = {
+                    pageSize:4,
+                    url:module+'goods/getList',
+                    pageType:pageType,
+                };
+                getPage(config);
+            }
 		}
 	});
 

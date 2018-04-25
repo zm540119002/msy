@@ -87,14 +87,19 @@ class Goods extends FactoryBase
     public function getList(){
 
         $model = new M();
-        $list = $model -> pageQuery();
-  
+        $where = [
+            ['factory_id','=',$this->factory['id']],
+        ];
+        $list = $model -> pageQuery($where);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'promotion' ){
             return $this->fetch('goods_list_promotion');
         }
         if($_GET['pageType'] == 'shelve' ){
             return $this->fetch('goods_list_shelve');
+        }
+        if($_GET['pageType'] == 'manage' ){
+            return $this->fetch('goods_list_manage');
         }
 
     }
