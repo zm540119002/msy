@@ -24,6 +24,7 @@ class Menu
         $this->_config = array_merge($this->_config,!empty(config('auth'))?config('auth'):[]);
         $this->_user = checkLogin()?:[];
         $this->_setAllMenu();
+        $this->_ownMenu = array_merge($this->_ownMenu,!empty(config('common_menu.menu'))?config('common_menu.menu'):[]);
     }
 
     /**获取用户可显示菜单
@@ -69,7 +70,8 @@ class Menu
                 }
             }
         }
-        return $this->_ownMenu = $temp;
+        !empty($temp) && $this->_ownMenu = array_merge($this->_ownMenu,$temp);
+        return $this->_ownMenu;
     }
 
     /**获取用户角色
