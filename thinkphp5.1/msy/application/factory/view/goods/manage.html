@@ -97,7 +97,7 @@
 			var shelfStatus=$(this).data('shelf');
 			if(shelfStatus==1){
 				$(this).data('shelf',0);
-				$(this).addClass('apply-shelf').text('已申请');
+				$(this).removeClass('shelf').addClass('apply-shelf').text('已申请');
 			}else{
 				$(this).data('shelf',1);
 				$(this).addClass('up-shelf').text('上架');
