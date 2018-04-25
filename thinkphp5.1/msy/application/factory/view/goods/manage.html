@@ -5,16 +5,16 @@
 <article class="f24">
 	<section class="">
 		<nav class="columns_flex channel_nav manufacturer_nav supply-nav">
-			<a href="" class="current">
+			<a href="javascript:void(0);" class="current" data-type="purchases_store">
 				<span class="exclusive"></span>
 				采购供应联营
 			</a>
-			<a href="">
-				<span class="classify"></span>
+			<a href="javascript:void(0);" data-type="commission_store">
+				<span class="classify" ></span>
 				分成供应联营
 			</a>
-			<a href="">
-				<span class="purchasers"></span>
+			<a href="javascript:void(0);" data-type="retail_store">
+				<span class="purchasers" ></span>
 				零售供应联营
 			</a>
 		</nav>
@@ -48,22 +48,26 @@
 <!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
 <script type="text/javascript">
 	$(function () {
+		var storeType=$('.channel_nav a.current').data('type');
         var pageType = $('.subNav3 a.current').data('page-type');
         if(pageType == 'shelve' || pageType == 'manage'){
             var config = {
                 pageSize:4,
+				storeType:storeType,
                 pageType:pageType,
             };
 			var url = module+'goods/getList';
             getPage(url,config);
         }
-        $('.subNav3 a').on('click',function(){
+		$('.channel_nav a').on('click',function(){
             var _this=$(this);
                 _this.addClass('current').siblings().removeClass('current');
-            var pageType =_this.data('page-type');
+			var pageType=$('.subNav3 a.current').data('page-type');
+            var storeType=_this.data('type');
             if(pageType == 'shelve' || pageType == 'manage'){
                 var config = {
                     pageSize:4,
+					storeType:storeType,
                     pageType:pageType,
                 };
 				currentPage=1;
@@ -71,7 +75,23 @@
 				var url = module+'goods/getList';
 				getPage(url,config);
             }
-
+        });
+        $('.subNav3 a').on('click',function(){
+            var _this=$(this);
+                _this.addClass('current').siblings().removeClass('current');
+            var pageType =_this.data('page-type');
+			 var storeType=$('.channel_nav a.current').data('type');
+            if(pageType == 'shelve' || pageType == 'manage'){
+                var config = {
+                    pageSize:4,
+					storeType:storeType,
+                    pageType:pageType,
+                };
+				currentPage=1;
+				requestEnd=false;
+				var url = module+'goods/getList';
+				getPage(url,config);
+            }
         })
 	});
 
@@ -81,9 +101,11 @@
 		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
 			loadTrigger = false;
             var pageType = $('.subNav3 a.current').data('page-type');
+            var storeType = $('.channel_nav a.current').data('type');
             if(pageType == 'shelve' || pageType == 'manage'){
                 var config = {
                     pageSize:4,
+					storeType:storeType,
                     pageType:pageType,
                 };
 				var url = module+'goods/getList';
@@ -96,6 +118,7 @@
 	var currentPage = 1;//记录当前页
 	var requestEnd = false;//请求结束标记
 	function getPage(url,config) {
+		console.log(config);
 		var postData = $.extend({},config);
 		postData.page = currentPage ? currentPage : 1;
 		postData.pageSize = postData.pageSize?postData.pageSize:4;
