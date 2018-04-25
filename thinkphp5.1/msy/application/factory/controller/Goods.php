@@ -85,7 +85,6 @@ class Goods extends FactoryBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
-
         $model = new M();
         $where = [
             ['factory_id','=',$this->factory['id']],

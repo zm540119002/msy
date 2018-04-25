@@ -54,7 +54,7 @@
                 pageSize:4,
                 pageType:pageType,
             };
-			var url= module+'goods/getList';
+			var url = module+'goods/getList';
             getPage(url,config);
         }
         $('.subNav3 a').on('click',function(){
@@ -66,15 +66,15 @@
                     pageSize:4,
                     pageType:pageType,
                 };
-				var url=module+'goods/getList';
 				currentPage=1;
 				requestEnd=false;
-                getPage(url,config);
+				var url = module+'goods/getList';
+				getPage(url,config);
             }
 
         })
 	});
-	 
+
 	//上拉加载更多
 	var loadTrigger = false;//加载触发器
 	$(window).on('scroll',function(){
@@ -83,13 +83,11 @@
             var pageType = $('.subNav3 a.current').data('page-type');
             if(pageType == 'shelve' || pageType == 'manage'){
                 var config = {
-                    pageSize:4, 
-                    url:module+'goods/getList',
                     pageSize:4,
                     pageType:pageType,
                 };
-				var url=module+'goods/getList';
-                getPage(url,config);
+				var url = module+'goods/getList';
+				getPage(url,config);
             }
 		}
 	});
