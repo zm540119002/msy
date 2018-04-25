@@ -85,7 +85,6 @@ class Goods extends FactoryBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
-
         $model = new M();
         $where = [
             ['factory_id','=',$this->factory['id']],
@@ -103,8 +102,8 @@ class Goods extends FactoryBase
         }
 
     }
-    //上下架
-    public function shelveManage(){
+    //商品管理展示页
+    public function manage(){
         return $this->fetch();
     }
 

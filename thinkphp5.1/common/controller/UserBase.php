@@ -21,7 +21,7 @@ class UserBase extends Base{
         }
         $allDisplayMenu = \common\Cache\Menu::getAllDisplayMenu($this->user);
         $this->assign('allDisplayMenu',$allDisplayMenu);
-        $allMenuIds = \common\Cache\Menu::getAllMenu($this->user);
+        $allMenuIds = \common\Cache\Menu::getAllMenuIds($this->user);
         $this->assign('allMenuIds',$allMenuIds);
     }
 }
