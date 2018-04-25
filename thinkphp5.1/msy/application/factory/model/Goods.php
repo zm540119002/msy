@@ -159,7 +159,7 @@ class Goods extends Model {
 		}
 		$where = array_merge($_where, $where);
 		$field = array(
-			'id','name','settle_price','retail_price','sale_price','thumb_img',
+			'id','name','settle_price','retail_price','sale_price','thumb_img','shelves'
 		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?

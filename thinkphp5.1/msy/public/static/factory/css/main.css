@@ -632,3 +632,14 @@
     max-width:40px;
     height:28px;
 }
+
+.down-shelf{
+    background: #ccc;
+}
+.up-shelf{
+    background: #009a3e;
+}
+.apply-shelf{
+    background: #C7AA53;
+}
+
