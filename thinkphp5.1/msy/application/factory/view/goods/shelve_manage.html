@@ -21,12 +21,17 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex subNav3 f22">
-			<a >分类标签</a>
-			<a>商品管理</a>
-			<a class="column_type current">上架管理</a>
+			<a class="column_type current" data-page-type="manage">商品管理</a>
+            <a class="column_type" data-page-type="sort">商品排序</a>
+			<a class="column_type  " data-page-type="shelve">上架管理</a>
 		</div>
 	</section>
 	<section>
+		<div>
+            企业名称:
+            <span>达安有限公司</span>
+        </div>
+		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
 		<div class="content-wrapper">
 			<ul class="columns_flex flex-both-side" id="list">
 
@@ -42,19 +47,58 @@
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
 <script type="text/javascript">
-var config = {
-		pageSize:4
-	};
 	$(function () {
-		getPage(config);
-	})
+        var pageType = $('.subNav3 a.current').data('page-type');
+
+        if(pageType == 'shelve' || pageType == 'manage'){
+            var config = {
+                pageSize:4,
+                url:module+'goods/getList',
+                pageType:pageType,
+            };
+            getPage(config);
+        }
+        $('.subNav3 a').on('click',function(){
+            var _this=$(this);
+                _this.addClass('current').siblings().removeClass('current');
+            var pageType =_this.data('page-type');
+            if(pageType == 'shelve' || pageType == 'manage'){
+                var config = {
+                    pageSize:4,
+                    url:module+'goods/getList',
+                    pageType:pageType,
+                };
+				currentPage=1;
+				requestEnd=false;
+                getPage(config);
+            }
+
+        })
+	});
+	
+	//上拉加载更多
+	var loadTrigger = false;//加载触发器
+	$(window).on('scroll',function(){
+		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+			loadTrigger = false;
+            var pageType = $('.subNav3 a.current').data('page-type');
+            if(pageType == 'shelve' || pageType == 'manage'){
+                var config = {
+                    pageSize:4,
+                    url:module+'goods/getList',
+                    pageType:pageType,
+                };
+                getPage(config);
+            }
+		}
+	});
+
 	//获取列表
 	var currentPage = 1;//记录当前页
 	var requestEnd = false;//请求结束标记
 	function getPage(config) {
+		console.log(currentPage);
 		var postData = $.extend({},config);
-		var url = module+'goods/getList';
-		postData.pageType = 'shelve';
 		postData.page = currentPage ? currentPage : 1;
 		postData.pageSize = postData.pageSize?postData.pageSize:4;
 		//请求结束标志
@@ -64,7 +108,7 @@ var config = {
 			return false;
 		}
 		$.ajax({
-			url: url,
+			url: postData.url,
 			data: postData,
 			type: 'get',
 			dataType:'json',
@@ -77,7 +121,8 @@ var config = {
 			},
 			success: function(data){
 				$('.loading').hide();
-				if(currentPage == 1){
+				if(currentPage == 1){ 
+					$('#list li').remove();
 					$('#list').append(data);
 				}else{
 					$('#list li:last').after(data);
@@ -92,14 +137,6 @@ var config = {
 
 	}
 	
-	//上拉加载更多
-	var loadTrigger = false;//加载触发器
-	$(window).on('scroll',function(){
-		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-			loadTrigger = false;
-			getPage(config);
-		}
-	});
 
 </script>
 {/block}
