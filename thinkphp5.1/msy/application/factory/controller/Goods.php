@@ -103,8 +103,8 @@ class Goods extends FactoryBase
         }
 
     }
-    //上下架
-    public function shelveManage(){
+    //商品管理展示页
+    public function manage(){
         return $this->fetch();
     }
 
