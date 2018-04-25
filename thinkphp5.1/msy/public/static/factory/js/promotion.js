@@ -73,6 +73,8 @@ $(function(){
             content="请填写促销活动名称";
         }else if(!postData.img){
             content="请上传促销活动图片";
+        }else if(!postData.goods_id){
+            content="请链接商品";
         }else if(!postData.promotion_price){
             content="请填写特价";
         }else if(!postData.start_time){
@@ -112,7 +114,9 @@ $(function(){
 })
 var currYear = (new Date()).getFullYear();
 var opt={};
+opt.date = {preset : 'date'};
 opt.datetime = {preset : 'datetime'};
+opt.time = {preset : 'time'};
 opt.default = {
     theme: 'android-ics light', //皮肤样式
     display: 'modal', //显示方式
@@ -123,21 +127,52 @@ opt.default = {
     showNow: false,
     nowText: "今天",
     startYear: currYear - 100, //开始年份
-    endYear: currYear + 100 //结束年份
+    endYear: currYear + 100, //结束年份
+    onSelect: function (valueText, inst) {
+    //    console.log(inst);
+      var id = $(this)[0].id;
+      var validity = valueText.split("-");
+      var hm=validity[2].split(' ');
+      var hm1=hm[1].split(':');
+       console.log(validity);
+       console.log(validity[2]);
+       console.log(hm);
+       console.log(hm1);
+      if (id === "startTime") {
+          console.log(opt.default.maxDate);
+         if (opt.default.maxDate) {
+             console.log(111);
+            opt.default.maxDate = null;
+         }
+         opt.default.minDate = new Date(validity[0], +validity[1] - 1, +validity[2] + 1);
+         opt.default.minDate = new Date(validity[0], validity[1] - 1,hm[0],hm1[0]);
+         console.log(opt.default.minDate);
+         //$("#endTime").mobiscroll($.extend(opt['datetime'], opt['default']));
+         $("#endTime").mobiscroll().datetime({
+             theme: 'android-ics light',  
+             display: 'modal', //显示方式
+             mode: 'scroller', //操作方式 
+             dateFormat: 'yy-mm-dd',
+             timeFormat: 'HH:ii',
+             lang: 'zh',  
+             minDate:new Date(validity[0], validity[1] - 1,hm[0],hm1[0],hm1[1]),
+            //stepMinute:1
+         });
+      }
+   } 
 };
 $("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
-$("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
-
+//$("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 
 //获取列表
 function getPage(currentPage) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getList';
     var postData = $('.addsalesgoodsLayer #form1').serializeObject();
+    postData.pageType = 'promotion';
     postData.page = currentPage ? currentPage : 1;
     postData.pageSize = 2;
     $.get(url, postData , function(data){
-        console.log(data);
         $('.addsalesgoodsLayer #list').html(data);
     });
 }

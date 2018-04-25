@@ -27,8 +27,8 @@ class RoleNode extends \think\Model {
 				}
 				!empty($list) && $this->saveAll($list);
 			}
+			//删除节点
 			if(!empty($originNodeIds)){
-				//删除节点
 				$delNodeIds = array_diff($originNodeIds,$postData['nodeIds']);
 				$delNodeIds = array_values($delNodeIds);
 				if(!empty($delNodeIds) && !$this->batchDelByNodeIds($delNodeIds)){

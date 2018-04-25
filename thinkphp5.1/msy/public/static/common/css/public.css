@@ -108,7 +108,21 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
     background: url("../img/img/setting.png") no-repeat center;
     background-size: 35px;
 }
-
+.loading{
+    width:100px;
+    height:32px;
+    position:fixed;
+    left:50%;
+    bottom:6%;
+    margin:0 0 0 -50px;
+    z-index:16;
+    color:#0066cc;
+}
+.loading img{
+    width:20px;
+    height:20px;
+    vertical-align:-5px;
+}
 /******轮播样式***********/
 /*#slider,#slider1{
     width: 100%;
@@ -1176,8 +1190,11 @@ color: #ed6d00;
 }
 .flex-both-side,.flex-both-side .two-flex{
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .flex-both-side li{
+    padding:.15rem 0 0;
+    margin:0 0 .15rem 0;
     width:48%;
 }
 .product-square-box{

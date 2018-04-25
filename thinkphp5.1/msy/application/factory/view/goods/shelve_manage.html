@@ -1,0 +1,105 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="">
+		<nav class="columns_flex channel_nav manufacturer_nav supply-nav">
+			<a href="" class="current">
+				<span class="exclusive"></span>
+				采购供应联营
+			</a>
+			<a href="">
+				<span class="classify"></span>
+				分成供应联营
+			</a>
+			<a href="">
+				<span class="purchasers"></span>
+				零售供应联营
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex subNav3 f22">
+			<a >分类标签</a>
+			<a>商品管理</a>
+			<a class="column_type current">上架管理</a>
+		</div>
+	</section>
+	<section>
+		<div class="content-wrapper">
+			<ul class="columns_flex flex-both-side" id="list">
+
+			</ul>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/loading.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
+<script type="text/javascript">
+var config = {
+		pageSize:4
+	};
+	$(function () {
+		getPage(config);
+	})
+	//获取列表
+	var currentPage = 1;//记录当前页
+	var requestEnd = false;//请求结束标记
+	function getPage(config) {
+		var postData = $.extend({},config);
+		var url = module+'goods/getList';
+		postData.pageType = 'shelve';
+		postData.page = currentPage ? currentPage : 1;
+		postData.pageSize = postData.pageSize?postData.pageSize:4;
+		//请求结束标志
+		if(requestEnd){
+			dialog.error('没有更多啦');
+			loadTrigger = true;
+			return false;
+		}
+		$.ajax({
+			url: url,
+			data: postData,
+			type: 'get',
+			dataType:'json',
+			beforeSend: function(){
+				$('.loading').show();
+			},
+			error:function (xhr) {
+				$('.loading').hide();
+				dialog.error('AJAX错误');
+			},
+			success: function(data){
+				$('.loading').hide();
+				if(currentPage == 1){
+					$('#list').append(data);
+				}else{
+					$('#list li:last').after(data);
+				}
+				if($($.parseHTML(data)).length<postData.pageSize){
+					requestEnd = true;
+				}
+				currentPage ++;
+				loadTrigger = true;
+			}
+		});
+
+	}
+	
+	//上拉加载更多
+	var loadTrigger = false;//加载触发器
+	$(window).on('scroll',function(){
+		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+			loadTrigger = false;
+			getPage(config);
+		}
+	});
+
+</script>
+{/block}
