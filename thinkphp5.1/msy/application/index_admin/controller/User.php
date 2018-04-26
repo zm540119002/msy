@@ -11,6 +11,7 @@ class User extends \common\controller\UserBase
         }
         return $this->fetch();
     }
+    
     /**用户-信息
      */
     public function info(){
@@ -27,6 +28,7 @@ class User extends \common\controller\UserBase
             return $this->fetch();
         }
     }
+
     /**用户-编辑
      */
     public function edit(){
@@ -46,6 +48,7 @@ class User extends \common\controller\UserBase
             return $this->fetch();
         }
     }
+
     /**用户-列表
      */
     public function getList(){
@@ -57,6 +60,7 @@ class User extends \common\controller\UserBase
         $this->assign('list',$list);
         return $this->fetch('user_list');
     }
+
     /**用户-删除
      */
     public function del(){
@@ -64,8 +68,9 @@ class User extends \common\controller\UserBase
             return config('not_post');
         }
         $modelUser = new \common\model\User();
-        return $modelUser->tagDel();
+        return $modelUser->del();
     }
+
     /**用户-赋角色
      */
     public function empower(){

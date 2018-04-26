@@ -54,7 +54,7 @@ class User extends \think\Model {
 		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
 	}
 	//删除
-	public function del(){
+	public function del($tag=true){
 		$where = [
 			['status', '=', 0],
 		];
@@ -63,23 +63,11 @@ class User extends \think\Model {
 			return errorMsg('参数错误');
 		}
 		$where[] = ['id', '=', $id];
-		$result = $this->where($where)->delete();
-		if(!$result){
-			return errorMsg('失败',$this->getError());
+		if($tag){//标记删除
+			$result = $this->where($where)->setField('status',2);
+		}else{
+			$result = $this->where($where)->delete();
 		}
-		return successMsg('成功');
-	}
-	//标记删除
-	public function tagDel(){
-		$where = [
-			['status', '=', 0],
-		];
-		$id = input('post.id',0);
-		if(!$id){
-			return errorMsg('参数错误');
-		}
-		$where[] = ['id', '=', $id];
-		$result = $this->where($where)->setField('status',2);
 		if(!$result){
 			return errorMsg('失败',$this->getError());
 		}

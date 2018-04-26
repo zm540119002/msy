@@ -50,7 +50,7 @@
             var url = controller+'getList';
             var postData = $('#form1').serializeObject();
             postData.page = currentPage ? currentPage : 1;
-            postData.pageSize = 5;
+            postData.pageSize = 10;
             $.get(url, postData , function(data){
                 $('#list').html(data);
             });
