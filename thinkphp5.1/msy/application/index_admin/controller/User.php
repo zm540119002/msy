@@ -32,7 +32,7 @@ class User extends \common\controller\UserBase
     public function edit(){
         $modelUser = new \common\model\User();
         if(request()->isPost()){
-            return $modelUser->edit($this->user['id']);
+            return $modelUser->edit($this->user);
         }else{
             $id = input('id',0);
             if($id){

@@ -10,7 +10,7 @@ class User extends \think\Model {
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function edit($userId){
+	public function edit($user){
 		$postData = input('post.');
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('edit')->check($postData)){
@@ -21,11 +21,11 @@ class User extends \think\Model {
 			$this->isUpdate(true)->save($postData);
 		}else{
 			unset($postData['id']);
-			if(isset($userId) && $userId){
-				$postData['parent_id'] = $userId;
+			if(isset($user['id']) && $user['id']){
+				$postData['parent_id'] = $user['id'];
+				$postData['type'] = $user['type'] + 1;
 			}
 			$postData['create_time'] = time();
-			$postData['type'] += 1;
 			$this->save($postData);
 		}
 		if(!$this->getAttr('id')){
