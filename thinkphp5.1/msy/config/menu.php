@@ -4,12 +4,6 @@
  */
 return [
     'menu' => [
-        'common'=>[
-            'id'=>1,'name'=>'基本管理','type'=>1,
-            'sub_menu' => [
-                ['id'=>2,'name'=>'账号管理','display'=>1,'controller'=>'User','action'=>'info',],
-            ],
-        ],
         'system'=>[
             'id'=>10,'name'=>'系统管理','type'=>1,
             'sub_menu' => [

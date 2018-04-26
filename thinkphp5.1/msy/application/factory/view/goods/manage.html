@@ -5,16 +5,16 @@
 <article class="f24">
 	<section class="">
 		<nav class="columns_flex channel_nav manufacturer_nav supply-nav">
-			<a href="" class="current">
+			<a href="javascript:void(0);" class="current" data-type="purchases_store">
 				<span class="exclusive"></span>
 				采购供应联营
 			</a>
-			<a href="">
-				<span class="classify"></span>
+			<a href="javascript:void(0);" data-type="commission_store">
+				<span class="classify" ></span>
 				分成供应联营
 			</a>
-			<a href="">
-				<span class="purchasers"></span>
+			<a href="javascript:void(0);" data-type="retail_store">
+				<span class="purchasers" ></span>
 				零售供应联营
 			</a>
 		</nav>
@@ -23,15 +23,17 @@
 		<div class="columns_flex subNav3 f22">
 			<a class="column_type current" data-page-type="manage">商品管理</a>
             <a class="column_type" data-page-type="sort">商品排序</a>
-			<a class="column_type  " data-page-type="shelve">上架管理</a>
+			<a class="column_type  " data-page-type="shelf">上架管理</a>
 		</div>
 	</section>
 	<section>
-		<div>
-            企业名称:
-            <span>达安有限公司</span>
-        </div>
-		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
+		<div class="content-box">
+			<div>
+				企业名称:
+				<span>{$factory.name}</span>
+			</div>
+			<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
+		</div>
 		<div class="content-wrapper">
 			<ul class="columns_flex flex-both-side" id="list">
 
@@ -39,102 +41,15 @@
 		</div>
 	</section>
 </article>
+<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>
 {/block}
 {block name="common"}
 {include file="template/loading.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<!--<script type="text/javascript" src="factory_js/goods.js"></script>-->
+<script type="text/javascript" src="factory_js/goodsManage.js"></script>
 <script type="text/javascript">
-	$(function () {
-        var pageType = $('.subNav3 a.current').data('page-type');
-        if(pageType == 'shelve' || pageType == 'manage'){
-            var config = {
-                pageSize:4,
-                pageType:pageType,
-            };
-			var url = module+'goods/getList';
-            getPage(url,config);
-        }
-        $('.subNav3 a').on('click',function(){
-            var _this=$(this);
-                _this.addClass('current').siblings().removeClass('current');
-            var pageType =_this.data('page-type');
-            if(pageType == 'shelve' || pageType == 'manage'){
-                var config = {
-                    pageSize:4,
-                    pageType:pageType,
-                };
-				currentPage=1;
-				requestEnd=false;
-				var url = module+'goods/getList';
-				getPage(url,config);
-            }
-
-        })
-	});
-
-	//上拉加载更多
-	var loadTrigger = false;//加载触发器
-	$(window).on('scroll',function(){
-		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-			loadTrigger = false;
-            var pageType = $('.subNav3 a.current').data('page-type');
-            if(pageType == 'shelve' || pageType == 'manage'){
-                var config = {
-                    pageSize:4,
-                    pageType:pageType,
-                };
-				var url = module+'goods/getList';
-				getPage(url,config);
-            }
-		}
-	});
-
-	//获取列表
-	var currentPage = 1;//记录当前页
-	var requestEnd = false;//请求结束标记
-	function getPage(url,config) {
-		var postData = $.extend({},config);
-		postData.page = currentPage ? currentPage : 1;
-		postData.pageSize = postData.pageSize?postData.pageSize:4;
-		//请求结束标志
-		if(requestEnd){
-			dialog.error('没有更多啦');
-			loadTrigger = true;
-			return false;
-		}
-		$.ajax({
-			url: url,
-			data: postData,
-			type: 'get',
-			dataType:'json',
-			beforeSend: function(){
-				$('.loading').show();
-			},
-			error:function (xhr) {
-				$('.loading').hide();
-				dialog.error('AJAX错误');
-			},
-			success: function(data){
-				$('.loading').hide();
-				if(currentPage == 1){ 
-					$('#list li').remove();
-					$('#list').append(data);
-				}else{
-					$('#list li:last').after(data);
-				}
-				if($($.parseHTML(data)).length<postData.pageSize){
-					requestEnd = true;
-				}
-				currentPage ++;
-				loadTrigger = true;
-			}
-		});
-
-	}
-	
 
 </script>
 {/block}
