@@ -3,7 +3,7 @@
 {/block}
 {block name="content"}
 <!--创建登录账号-->
-<article id="abc" style="display:none;">
+<article id="addLoginAccount" style="display:none;">
 	<section class="f24 signIn-wrapper">
 		<div class="account-item">
 			<input type="text" placeholder="姓名" class="input-filed" value="">
@@ -27,9 +27,9 @@
 				<div class="range-list">
 					<span class="range-label">[业务范围]</span>
 					<ul class="columns_flex">
-						<li class="current">采购联营</li>
-						<li class="current">分成联营</li>
-						<li class="current">零售联营</li>
+						<li class="current">采购业务</li>
+						<li class="current">分成业务</li>
+						<li class="current">零售业务</li>
 					</ul>
 				</div>
 				<div class="range-list">
@@ -49,17 +49,14 @@
 				<div class="range-list">
 					<span class="range-label">售中客服:</span>
 					<ul class="columns_flex">
-						<li class="current">接单</li>
-						<li class="current">打单</li>
-						<li class="current">备货</li>
-						<li class="current">打包</li>
-						<li class="current">发货</li>
-						<li class="current">物流</li>
-						<li class="current">填单</li>
+						<li class="current">接单打印</li>
+						<li class="current">备货打包</li>
+						<li class="current">发货/完成</li>
+						<li class="current">填物流单</li>
 					</ul>
 				</div>
 				<div class="range-list">
-					<span class="range-label">售中客服:</span>
+					<span class="range-label">售后客服:</span>
 					<ul class="columns_flex">
 						<li class="current">咨询</li>
 						<li class="current">退换货</li>
@@ -132,10 +129,11 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
-			<a class="column_type current">账号授权</a>
-			<a>档案资质</a>
-			<a>店铺部署</a>
-			<a>云推客圈</a>
+			<a href="{:url('account/index')}" class="column_type current">账号授权</a>
+			<a href="{:url('record/edit')}">档案资质</a>
+			<a href="{:url('goods/edit')}">店铺部署</a>
+			<a href="">促销管理</a>
+			<a href="">云推客联营计划</a>
 		</div>
 	</section>
 	<section class="f24 account-content-wrapper ">
@@ -165,6 +163,20 @@
 					<div>
 						<span class="list-label">角色类型</span>
 						<span>管理员</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<span class="list-label">姓名</span>
+						<span>XXXXXX</span>
+					</div>
+					<div>
+						<span class="list-label">手机号码</span>
+						<span>13430363587</span>
+					</div>
+					<div>
+						<span class="list-label">角色类型</span>
+						<span>总裁</span>
 					</div>
 				</li>
 			</ul>
@@ -211,15 +223,6 @@
 			$(this).toggleClass('current');
 			$('.range-list-wrapper').toggleClass('current');
 		});
-		//初始化
-		// var province = '{$consigneeAddressInfo.province}';
-		// $('[name=province]').val(province);
-		// $('[name=province]').change();
-		// var city = '{$consigneeAddressInfo.city}';
-		// $('[name=city]').val(city);
-		// $('[name=city]').change();
-		// var area = '{$consigneeAddressInfo.area}';
-		// $('[name=area]').val(area);
 	});
 </script>
 {/block}
