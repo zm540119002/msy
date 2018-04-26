@@ -61,7 +61,7 @@ class Goods extends Model {
 		$data['create_time'] = time();
 		$result = $this -> allowField(true) -> save($data);
 		if(false !== $result){
-			return successMsg("添加成功！");
+			return successMsg("成功！");
 		}else{
 			return errorMsg($this->getError());
 		}
@@ -157,22 +157,24 @@ class Goods extends Model {
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
-		$field =['id','name','settle_price','retail_price','sale_price','thumb_img',];
+		$field =['id','name','retail_price','thumb_img',];
+		$_field = [];
 		if(isset($_GET['storeType'])){
 			if($_GET['storeType'] == 'purchases_store'){
 				$where[] = ['purchases_store','=',1];
-				$field[] = 'purchases_shelf';
+				$_field = ['purchases_shelf','settle_price_purchases','sale_price_purchases'];
 			}
 			if($_GET['storeType'] == 'commission_store'){
 				$where[] =  ['commission_store','=',1];
-				$field[] = 'commission_shelf';
+				$_field = ['commission_shelf','settle_price_commission','sale_price_commission'];
 			}
 			if($_GET['storeType'] == 'retail_store'){
 				$where[] =  ['retail_store','=',1];
-				$field[] = 'retail_shelf';
+				$_field = ['retail_shelf','settle_price_retail','sale_price_retail'];
 			}
 		}
 		$where = array_merge($_where, $where);
+		$field = array_merge($_field,$field);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');

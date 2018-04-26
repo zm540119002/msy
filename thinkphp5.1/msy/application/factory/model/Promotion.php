@@ -13,74 +13,55 @@ class Promotion extends Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 	/**
-	 * 新增
+	 * 新增和修改
 	 */
-	public function add($factory_id =''){
+	public function edit($factory_id =''){
 		$validate = validate('Promotion');
 		$data = input('post.');
-		if(!$result = $validate->scene('add')->check($data)) {
+		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
 		}
 		if(!empty($data['img'])){
 			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
 		}
 		$data['factory_id'] = $factory_id;
-		$data['create_time'] = time();
 		$this ->startTrans();
-		$result = $this -> allowField(true) -> save($data);
-		if(false == $result){
-			$this ->rollback();
-			return errorMsg($this->getError());
+		if(input('?post.promotion_id')){//修改
+			$where = [
+				['id','=',$data['promotion_id']],
+				['factory_id','=',$factory_id],
+			];
+			$file = array(
+				'img',
+			);
+			$oldInfo = $this -> getPromotion($where,$file);
+			$data['update_time'] = time();
+			$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'factory_id'=>$factory_id]);
+			if(false == $result){
+				$this ->rollback();
+				return errorMsg($this->getError());
+			}
+		}else{//新增
+			$data['create_time'] = time();
+			$result = $this -> allowField(true) -> save($data);
+			if(false == $result){
+				$this ->rollback();
+				return errorMsg($this->getError());
+			}
 		}
 		$modelGoods  = new \app\factory\model\Goods;
-		$modelGoods ->save(['sale_type' => 1],['id' => $data['goods_id']]);
-		if(false == $result){
+		$result = $modelGoods ->save([$data['storeType'] => 1],['id' => $data['goods_id']]);
+		if(false === $result){
 			$this ->rollback();
 			return errorMsg($this->getError());
 		}
 		$this ->commit();
-		return successMsg("添加成功！");
+		if(input('?post.promotion_id')){//修改成功后，删除旧图
+			delImgFromPaths($oldInfo['img'],$data['img']);
+		}
+		return successMsg("成功！");
 	}
-
-	/**
-	 * 修改
-	 */
-	public function edit($factory_id =''){
-		$data = input('post.');
-		$validate = validate('Promotion');
-		 if(!$result = $validate->scene('edit')->check($data)) {
-		 	return errorMsg($validate->getError());
-		 }
-		$where = [
-			['id','=',$data['promotion_id']],
-			['factory_id','=',$factory_id],
-		];
-		$file = array(
-			'img',
-		);
-		$oldInfo = $this -> getPromotion($where,$file);
-		if(!empty($data['img'])){
-			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
-		}
-
-		$data['update_time'] = time();
-		$this ->startTrans();
-		$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'factory_id'=>$factory_id]);
-		if(false == $result){
-			$this ->rollback();
-			return errorMsg($this->getError());
-		}
-		$modelGoods  = new \app\factory\model\Goods;
-		$modelGoods ->save(['sale_type' => 1],['id' => $data['goods_id']]);
-		if(false == $result){
-			$this ->rollback();
-			return errorMsg($this->getError());
-		}
-		$this ->commit();
-		delImgFromPaths($oldInfo['img'],$data['img']);
-		return successMsg("修改成功！");
-	}
-
+	
 	//分页查询
 	public function pageQuery(){
 		$where = [

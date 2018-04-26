@@ -5,7 +5,6 @@ class Promotion extends FactoryBase
 {
     public function manage()
     {
-        return 11 ;
         return $this->fetch();
     }
 
@@ -17,10 +16,7 @@ class Promotion extends FactoryBase
     {
         $model = new \app\factory\model\Promotion;
         if(request()->isPost()){
-            if(input('?post.promotion_id') && !input('?post.promotion_id') == ''){
-                return $model -> edit($this->factory['id']);
-            }
-            return $model -> add($this->factory['id']);
+            return $model -> edit($this->factory['id']);
         }
         if(input('?promotion_id')){
             $promotionId = (int)input('promotion_id');
@@ -40,6 +36,8 @@ class Promotion extends FactoryBase
             }
             $this -> assign('promotionInfo',$promotionInfo);
         }
+        $storeType = input('storeType');
+        $this -> assign('storeType',$storeType);
         return $this->fetch();
     }
 

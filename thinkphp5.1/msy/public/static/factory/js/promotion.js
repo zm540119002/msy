@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2018/3/26.
  */
+
 $(function(){
     var addsalesgoods=$('#addsalesgoods').html();
     //链接商品
@@ -68,6 +69,7 @@ $(function(){
     $('body').on('click','.addSalesPromotion',function(){
         var postData=$('.addSalesPromotionForm').serializeObject();
         postData.goods_id = $('.linked-goods-id').val();
+        postData.storeType = storeType;
         var content='';
         if(!postData.name){
             content="请填写促销活动名称";
@@ -134,14 +136,9 @@ opt.default = {
       var validity = valueText.split("-");
       var hm=validity[2].split(' ');
       var hm1=hm[1].split(':');
-       console.log(validity);
-       console.log(validity[2]);
-       console.log(hm);
-       console.log(hm1);
       if (id === "startTime") {
           console.log(opt.default.maxDate);
          if (opt.default.maxDate) {
-             console.log(111);
             opt.default.maxDate = null;
          }
          opt.default.minDate = new Date(validity[0], +validity[1] - 1, +validity[2] + 1);
@@ -165,10 +162,12 @@ $("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 //$("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 
 //获取列表
+
 function getPage(currentPage) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getList';
     var postData = $('.addsalesgoodsLayer #form1').serializeObject();
+    postData.storeType = storeType;
     postData.pageType = 'promotion';
     postData.page = currentPage ? currentPage : 1;
     postData.pageSize = 2;

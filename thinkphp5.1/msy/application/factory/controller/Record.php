@@ -20,7 +20,6 @@ class Record extends FactoryBase
                     ['id','=',$recordId],
                     ['factory_id','=',$factoryInfo['id']],
                 ];
-
                 $recordInfo =  $model -> getRecord($where);
                 $this -> assign('recordInfo',$recordInfo);
             }

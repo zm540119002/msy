@@ -26,10 +26,10 @@ class Promotion extends Validate
         'end_time.require'   => '请填写促销结束时间',
     ];
     
-    protected $scene = [
-        'add'   =>  ['name','img','goods_id','promotion_price','start_time'],
-        'edit'  =>  ['name','img','goods_id','promotion_price','start_time'],
-    ];
+//    protected $scene = [
+//        'add'   =>  ['name','img','goods_id','promotion_price','start_time'],
+//        'edit'  =>  ['name','img','goods_id','promotion_price','start_time'],
+//    ];
 
 
 }

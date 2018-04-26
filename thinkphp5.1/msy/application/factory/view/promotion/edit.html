@@ -93,8 +93,15 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript">
+	//店铺类型，如果没有，就默认为采购类型
+	var storeType = "{$storeType}";
+	if(storeType == 'purchases_store' || storeType == 'commission_store' || storeType == 'retail_store'){
+	}else{
+		storeType = 'purchases_store';
+	}
+</script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript" src="public_js/mobiscroll.js"></script>
 <script type="text/javascript" src="factory_js/promotion.js"></script>
-
 {/block}
