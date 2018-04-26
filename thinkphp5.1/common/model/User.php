@@ -23,7 +23,7 @@ class User extends \think\Model {
 			unset($postData['id']);
 			if(isset($user['id']) && $user['id']){
 				$postData['parent_id'] = $user['id'];
-				$postData['type'] = $user['type'] + 1;
+				$postData['type'] = 2;
 			}
 			$postData['create_time'] = time();
 			$this->save($postData);

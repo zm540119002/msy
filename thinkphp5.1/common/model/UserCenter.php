@@ -103,7 +103,6 @@ class UserCenter extends \think\Model {
 	private function _register($mobilePhone){
 		$data['mobile_phone'] = $mobilePhone;
 		$data['create_time'] = time();
-		$data['type'] = 4;
 		$this->save($data);
 		return $this->getAttr('id');
 	}
