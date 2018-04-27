@@ -102,8 +102,8 @@ class Menu
     /**设置所有菜单
      */
     private function _setAllMenu(){
-        $this->_allMenu = array_merge($this->_allMenu,!empty(config('menu.menu'))?config('menu.menu'):[]);
-        $this->_allMenu = array_merge($this->_allMenu,!empty(config('sub_menu.menu'))?config('sub_menu.menu'):[]);
+        $this->_allMenu = array_merge($this->_allMenu,!empty(config('all_menu.menu'))?config('all_menu.menu'):[]);
+        $this->_allMenu = array_merge($this->_allMenu,!empty(config('module_menu.menu'))?config('module_menu.menu'):[]);
     }
     
     /**过滤不显示菜单
