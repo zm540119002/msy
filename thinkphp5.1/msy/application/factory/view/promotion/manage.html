@@ -45,23 +45,50 @@
 		<a href="javascript:void(0);" class="addSalesPromotion text-color-gr right-arrow">新建促销活动</a>
 	</section>
 	<section class="separation-line sales-promotion-content">
-		<p class="content-label">促销活动的修改、删除和排序</p>
-		<input type="hidden" value="1" class="isClick">
-		<div class="classify-label-content " id="list">
-
+		<div class="category-wrapper">
+			<div class="category-left-menu sort-left-menu">
+                <ul class="category-tab">
+                    <li class="current">
+                        <a href="javascript:void(0);">未结束</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">已结束</a>
+                    </li>
+                </ul>
+            </div>
+			<div class="promotion-item">
+				<p class="content-label">促销活动的修改、删除和排序</p>
+				<input type="hidden" value="1" class="isClick">
+				<div class="classify-label-content " id="list">
+					<div class="columns_flex tag-item first-tag">
+						<span class="classify-tag-name">1</span>
+						<span class="classify-operate-btn">
+							<a href="javascript:void(0);" class="edit-icons">编辑</a>
+							<a href="javascript:void(0);" class="del-icons">删除</a>
+							<a href="javascript:void(0);" class="move-btn move-icons move-disabled-icons" data-move="0">上移</a>
+							<a href="javascript:void(0);" class="down-btn  down-icons" data-move="1">下移</a>
+						</span>
+						<input type="hidden" value="" class="sort" data-tag-id="113">
+						<input type="hidden" value="" class="series_id" data-series-id="112">
+					</div>
+				</div>
+			</div>
+			<div class="promotion-item hide">
+				<p>已结束的促销活动</p>
+				<ul>
+					<li class="columns_flex l-r-sides">
+						<span>aaaaaaaaaaaaaaaaaa</span>
+						<div>
+							<p>开始<span>2018-4-23</span></p>
+							<p>结束<span>2018-4-25</span></p>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</section>
 	<section class="separation-line sales-promotion-content">
-		<p>已结束的促销活动</p>
-		<ul>
-			<li class="columns_flex l-r-sides">
-				<span>aaaaaaaaaaaaaaaaaa</span>
-				<div>
-					<p>开始<span>2018-4-23</span></p>
-					<p>结束<span>2018-4-25</span></p>
-				</div>
-			</li>
-		</ul>
+		
 	</section>
 </article>
 {/block}
@@ -89,7 +116,14 @@
 		$('body').on('click','.addSalesPromotion',function () {
 			var storeType=$('.store-type.current').data('type');
 			location.href = module + 'promotion/edit/storeType/'+storeType;
+		});
+		//促销活动状态
+		$('body').on('click','.category-tab li',function () {
+			var index=$(this).index();
+			$(this).addClass('current').siblings().removeClass('current');
+			$('.promotion-item').hide().eq(index).show();
 		})
+		
 	})
 </script>
 {/block}
