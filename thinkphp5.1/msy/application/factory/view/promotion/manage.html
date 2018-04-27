@@ -16,13 +16,13 @@
 	<section class="">
 		<nav class="columns_flex channel_nav top-nav-bar">
 			<a class="personal_center">我的</a>
-			<a href="javascript:void(0);" class="current store-type" data-type="purchases_store">
+			<a href="javascript:void(0);" class="current store-type" data-type="purchases">
 				采购
 			</a>
-			<a href="javascript:void(0);" class="store-type" data-type="commission_store">
+			<a href="javascript:void(0);" class="store-type" data-type="commission">
 				分成
 			</a>
-			<a href="javascript:void(0);" class="store-type" data-type="retail_store">
+			<a href="javascript:void(0);" class="store-type" data-type="retail">
 				零售
 			</a>
 			<a class="home">首页</a>
@@ -46,30 +46,9 @@
 	</section>
 	<section class="separation-line sales-promotion-content">
 		<p class="content-label">促销活动的修改、删除和排序</p>
-		<div class="classify-label-content ">
-			<input type="hidden" value="1" class="isClick">
-			<div class="columns_flex tag-item first-tag">
-				<span class="classify-tag-name">1</span>
-                <span class="classify-operate-btn">
-                    <a href="javascript:void(0);" class="edit-icons">编辑</a>
-                    <a href="javascript:void(0);" class="del-icons">删除</a>
-                    <a href="javascript:void(0);" class="move-btn move-icons move-disabled-icons" data-move="0">上移</a>
-                    <a href="javascript:void(0);" class="down-btn  down-icons" data-move="1">下移</a>
-                </span>
-				<input type="hidden" value="" class="sort" data-tag-id="113">
-				<input type="hidden" value="" class="series_id" data-series-id="112">
-			</div>
-			<div class="columns_flex tag-item first-tag">
-				<span class="classify-tag-name">2</span>
-                <span class="classify-operate-btn">
-                    <a href="javascript:void(0);" class="edit-icons">编辑</a>
-                    <a href="javascript:void(0);" class="del-icons">删除</a>
-                    <a href="javascript:void(0);" class="move-btn move-icons move-disabled-icons" data-move="0">上移</a>
-                    <a href="javascript:void(0);" class="down-btn  down-icons" data-move="1">下移</a>
-                </span>
-				<input type="hidden" value="" class="sort" data-tag-id="113">
-				<input type="hidden" value="" class="series_id" data-series-id="112">
-			</div>
+		<input type="hidden" value="1" class="isClick">
+		<div class="classify-label-content " id="list">
+
 		</div>
 	</section>
 	<section class="separation-line sales-promotion-content">
@@ -92,15 +71,23 @@
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/promotion.js"></script>-->
 <script type="text/javascript">
+	//店铺类型，如果没有，就默认为采购类型
+	var storeType = "{$storeType}";
 	$(function () {
-		var storeType=$('.store-type.current').data('type');
+		//默认选中店铺类型
+		$(".store-type").each(function(i){
+			if($(this).data('type')==storeType){
+				$(this).addClass('current').siblings().removeClass('current');
+				return false;
+			}
+		});
 		//选择店铺类型
 		$('body').on('click','.store-type',function () {
 			var _this=$(this);
 			_this.addClass('current').siblings().removeClass('current');
 		});
 		$('body').on('click','.addSalesPromotion',function () {
-			storeType=$('.store-type.current').data('type');
+			var storeType=$('.store-type.current').data('type');
 			location.href = module + 'promotion/edit/storeType/'+storeType;
 		})
 	})
