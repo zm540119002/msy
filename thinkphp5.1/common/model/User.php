@@ -36,6 +36,7 @@ class User extends \think\Model {
 	public function pageQuery($userId){
 		$where = [
 			['status', '=', 0],
+			['type', '<>', 0],
 		];
 		if(isset($userId) && $userId){
 			$where[] = ['id', '<>', $userId];
@@ -45,7 +46,7 @@ class User extends \think\Model {
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$field = array(
-			'id','name','nickname','mobile_phone',
+			'id','name','nickname','mobile_phone','remark',
 		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
