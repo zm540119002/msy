@@ -160,15 +160,15 @@ class Goods extends Model {
 		$field =['id','name','retail_price','thumb_img',];
 		$_field = [];
 		if(isset($_GET['storeType'])){
-			if($_GET['storeType'] == 'purchases_store'){
+			if($_GET['storeType'] == 'purchases'){
 				$where[] = ['purchases_store','=',1];
 				$_field = ['purchases_shelf','settle_price_purchases','sale_price_purchases'];
 			}
-			if($_GET['storeType'] == 'commission_store'){
+			if($_GET['storeType'] == 'commission'){
 				$where[] =  ['commission_store','=',1];
 				$_field = ['commission_shelf','settle_price_commission','sale_price_commission'];
 			}
-			if($_GET['storeType'] == 'retail_store'){
+			if($_GET['storeType'] == 'retail'){
 				$where[] =  ['retail_store','=',1];
 				$_field = ['retail_shelf','settle_price_retail','sale_price_retail'];
 			}

@@ -50,16 +50,16 @@ class Promotion extends Model {
 			}
 		}
 		$modelGoods  = new \app\factory\model\Goods;
-		$result = $modelGoods ->save([$data['storeType'] => 1],['id' => $data['goods_id']]);
+		$result = $modelGoods ->save(['sale_type_'.$data['storeType'] => 1],['id' => $data['goods_id'],'factory_id'=>$factory_id]);
 		if(false === $result){
 			$this ->rollback();
-			return errorMsg($this->getError());
+			return errorMsg($this->getError($modelGoods->getLastSql()));
 		}
 		$this ->commit();
 		if(input('?post.promotion_id')){//修改成功后，删除旧图
 			delImgFromPaths($oldInfo['img'],$data['img']);
 		}
-		return successMsg("成功！");
+		return successMsg("成功！",['storeType'=>$data['storeType']]);
 	}
 	
 	//分页查询

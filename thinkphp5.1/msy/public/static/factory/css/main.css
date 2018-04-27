@@ -642,4 +642,7 @@
 .apply-shelf{
     background: #C7AA53;
 }
-
+/*促销活动*/
+.promotion-item.hide{
+    display: none;
+}
