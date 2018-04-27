@@ -124,7 +124,6 @@ class Goods extends FactoryBase
                     $data['retail_shelf'] = $data['shelfStatus'];
                 }
             }
-
             $result = $model->allowField(true)
                 ->save($data, ['id' => $data['goodsId'],'factory_id'=>$this->factory['id'],$data['storeType']=>1]);
            if(false !== $result){

@@ -60,33 +60,29 @@
 				<li>
 					 <span class="price-flex">
                         <label for="">零售价￥</label>
-                        <input type="text" name="sale_price" value="{$goodsInfo.sale_price|default=''}" placeholder="688.00" class="retail-price">
+                        <input type="text" name="retail_price" value="{$goodsInfo.retail_price|default=''}" placeholder="688.00" class="retail-price">
 				 </span>
 				</li>
 				<li class="price-options">
 					<span class="form-title">采购店铺价格</span>
                     <span class="price-flex">
-                        <label for="">结算价￥</label>
-                        <input type="text" name="settle_price" value="{$goodsInfo.settle_price|default=''}" placeholder="68.00" class="settle-price">
+                        <label for="">销售价￥</label>
+                        <input type="text" name="sale_price_purchases" value="{$goodsInfo.sale_price_purchases|default=''}" placeholder="68.00" class="sale_price_purchases">
                     </span>
 
 				</li>
 				<li class="price-options hide">
 					<span class="form-title">分成店铺价格</span>
                     <span class="price-flex">
-                        <label for="">结算价￥</label>
-                        <input type="text" name="settle_price1" value="{$goodsInfo.settle_price|default=''}" placeholder="68.00" class="settle-price">
+                        <label for="">销售价￥</label>
+                        <input type="text" name="sale_price_commission" value="{$goodsInfo.sale_price_commission|default=''}" placeholder="68.00" class="sale_price_commission">
                     </span>
 				</li>
 				<li class="price-options">
 					<span class="form-title">零售店铺价格</span>
                     <span class="price-flex">
-                        <label for="">结算价￥</label>
-                        <input type="text" name="settle_price2" value="{$goodsInfo.settle_price|default=''}" placeholder="68.00" class="settle-price">
-                    </span>
-                    <span class="price-flex">
-                        <label for="">零售价￥</label>
-                        <input type="text" name="sale_price2" value="{$goodsInfo.sale_price|default=''}" placeholder="688.00" class="retail-price">
+                        <label for="">销售价￥</label>
+                        <input type="text" name="sale_price_retail" value="{$goodsInfo.sale_price_retail|default=''}" placeholder="68.00" class="sale_price_retail">
                     </span>
 				</li>
 				<li >

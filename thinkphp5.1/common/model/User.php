@@ -10,7 +10,7 @@ class User extends \think\Model {
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function edit($userId){
+	public function edit($user){
 		$postData = input('post.');
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('edit')->check($postData)){
@@ -21,8 +21,9 @@ class User extends \think\Model {
 			$this->isUpdate(true)->save($postData);
 		}else{
 			unset($postData['id']);
-			if(isset($userId) && $userId){
-				$postData['parent_id'] = $userId;
+			if(isset($user['id']) && $user['id']){
+				$postData['parent_id'] = $user['id'];
+				$postData['type'] = 2;
 			}
 			$postData['create_time'] = time();
 			$this->save($postData);
@@ -53,7 +54,7 @@ class User extends \think\Model {
 		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
 	}
 	//删除
-	public function del(){
+	public function del($tag=true){
 		$where = [
 			['status', '=', 0],
 		];
@@ -62,23 +63,11 @@ class User extends \think\Model {
 			return errorMsg('参数错误');
 		}
 		$where[] = ['id', '=', $id];
-		$result = $this->where($where)->delete();
-		if(!$result){
-			return errorMsg('失败',$this->getError());
+		if($tag){//标记删除
+			$result = $this->where($where)->setField('status',2);
+		}else{
+			$result = $this->where($where)->delete();
 		}
-		return successMsg('成功');
-	}
-	//标记删除
-	public function tagDel(){
-		$where = [
-			['status', '=', 0],
-		];
-		$id = input('post.id',0);
-		if(!$id){
-			return errorMsg('参数错误');
-		}
-		$where[] = ['id', '=', $id];
-		$result = $this->where($where)->setField('status',2);
 		if(!$result){
 			return errorMsg('失败',$this->getError());
 		}
