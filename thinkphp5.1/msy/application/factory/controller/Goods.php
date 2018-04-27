@@ -114,13 +114,13 @@ class Goods extends FactoryBase
             $data = input();
             $model = new M();
             if(isset($data['storeType'])){
-                if($data['storeType'] == 'purchases_store'){
+                if($data['storeType'] == 'purchases'){
                     $data['purchases_shelf'] = $data['shelfStatus'];
                 }
-                if($data['storeType'] == 'commission_store'){
+                if($data['storeType'] == 'commission'){
                     $data['commission_shelf'] = $data['shelfStatus'];
                 }
-                if($data['storeType'] == 'retail_store'){
+                if($data['storeType'] == 'retail'){
                     $data['retail_shelf'] = $data['shelfStatus'];
                 }
             }

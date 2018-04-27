@@ -101,7 +101,7 @@ $(function(){
                     return false;
                 }
                 if(msg.status == 1){
-                    dialog.success(msg.info,controller + 'manage');
+                    dialog.success(msg.info,controller + 'manage/storeType/'+msg.storeType);
                 }
             },
             complete:function(){

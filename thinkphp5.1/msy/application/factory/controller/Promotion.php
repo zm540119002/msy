@@ -3,14 +3,20 @@ namespace app\factory\controller;
 
 class Promotion extends FactoryBase
 {
+    //促销管理
     public function manage()
     {
+        $storeType = input('storeType');
+        if($storeType !='purchases' && $storeType!='commission' && $storeType!='retail') {
+            $storeType = 'purchases';
+        }
+        $this -> assign('storeType',$storeType);
         return $this->fetch();
     }
 
     /**
      * @return array|mixed
-     *商品编辑
+     *编辑
      */
     public function edit()
     {
@@ -37,6 +43,9 @@ class Promotion extends FactoryBase
             $this -> assign('promotionInfo',$promotionInfo);
         }
         $storeType = input('storeType');
+        if($storeType!='purchases' &&  $storeType!='commission' && $storeType!='retail') {
+            $storeType = 'purchases';
+        }
         $this -> assign('storeType',$storeType);
         return $this->fetch();
     }

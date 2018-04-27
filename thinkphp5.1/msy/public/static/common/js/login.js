@@ -141,7 +141,9 @@ function forgetPasswordDialog(func){
         }
     });
 }
-
+$('body').on('click','.use-attention',function(){
+    
+})
 $(function(){
     //弹窗忘记密码
     $('body').on('click','.forget_dialog',function(){
