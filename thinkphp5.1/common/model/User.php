@@ -22,7 +22,6 @@ class User extends \think\Model {
 		}else{
 			unset($postData['id']);
 			if(isset($user['id']) && $user['id']){
-				$postData['parent_id'] = $user['id'];
 				$postData['type'] = 2;
 			}
 			$postData['create_time'] = time();
@@ -37,9 +36,9 @@ class User extends \think\Model {
 	public function pageQuery($userId){
 		$where = [
 			['status', '=', 0],
+			['type', '<>', 0],
 		];
 		if(isset($userId) && $userId){
-			$where[] = ['parent_id', '=', $userId];
 		}
 		$keyword = input('get.keyword','');
 		if($keyword){
