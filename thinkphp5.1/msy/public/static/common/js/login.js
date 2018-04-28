@@ -133,16 +133,62 @@ function forgetPasswordDialog(func){
     forgetPasswdLayer = layer.open({
         className:'forgetPasswdLayer',
         content:userForgetPasswdForm,
-        // btn:['重置密码'],
+        btn:['确定'],
         success:function(){
             $('.forgetPasswdLayer .mesg_code').text('获取验证码');
         },
         yes:function(index){
+            var content='';
+            var userPhone=$('.forgetPasswdLayer .loginTab').find('.user_phone').val();
+            var password=$('.forgetPasswdLayer .loginTab').find('.password').val();
+            var verifiCode=$('.forgetPasswdLayer .loginTab').find('.tel_code').val();
+            if(!register.phoneCheck(userPhone)){
+                content='请输入正确手机号';
+            }else if(!register.vfyCheck(verifiCode)){
+                content = "请输入正确的验证码";
+            }else if(!register.pswCheck(password)){
+                content = "请输入6-16数字或字母的密码";
+            }
+            if(content){
+                errorTipc(content);
+                return false;
+            }else{
+                layer.close(index)
+            }
+            
+
         }
     });
 }
+var attentionForm=$('#attentionForm').html();
+//使用须知
 $('body').on('click','.use-attention',function(){
-    
+    var pageii = layer.open({
+            title:['《美尚平台使用须知》','border-bottom:1px solid #d9d9d9;'],
+            className:'addCcountLayer',
+            type: 1,
+            content: attentionForm,
+            anim: 'up',
+            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+            success:function(){
+               
+            },
+            btn:['确定']
+        });
+})
+//显示隐藏密码
+var onOff=true;
+$('body').on('click','.view-password',function(){
+    var _this=$(this);
+    if(onOff){
+        _this.addClass('active');
+        $('.login_item .password').attr('type','text');
+        onOff=false;
+    }else{
+         _this.removeClass('active');
+        $('.login_item .password').attr('type','password');
+        onOff=true;
+    }
 })
 $(function(){
     //弹窗忘记密码
@@ -155,31 +201,41 @@ $(function(){
         var _this=$(this);
         if(_this.index()==0){
             $('.login_item').find('.mesg_code').show();
+            $('.use-item').show();
+            $('.forget_password').hide();
+            $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
         }else{
             $('.login_item').find('.mesg_code').hide();
+            $('.use-item').hide();
+             $('.forget_password').show();
+            $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
+            $('.login_wrap').removeClass('active');
         }
     });
-    $('body').on('click','.loginBtn',function(){
+    $('body').on('click','.loginBtn,.registerBtn',function(){
         var $layer = $('.loginTab').find('.active');
         var _index = $('.loginTab').find('.login_wrap.active').index();
         var content='';
         //验证
         switch(_index){
-            case 0:
-                var userPhone=$layer.find('.user_phone').val();
+            case 1:
                 var verifiCode=$layer.find('.tel_code').val();
+                var userPhone=$('.loginTab').find('.user_phone').val();
+                var password=$('.loginTab').find('.password').val();
                 if(!register.phoneCheck(userPhone)){
                     content='请输入正确手机号';
                 }else if(!register.vfyCheck(verifiCode)){
                     content = "请输入正确的验证码";
+                }else if(!register.pswCheck(password)){
+                    content = "请输入密码";
                 }
                 break;
-            case 1:
+            default:
                 // $layer.prev('.login_item').find('.mesg_code').hide();
-                var userName=$layer.find('.user_name').val();
-                var password=$layer.find('.password').val();
-                $('.login_item').find('.mesg_code').hide();
-                if(!checkAccount(userName)){
+                var userPhone=$('.loginTab').find('.user_phone').val();
+                var password=$('.loginTab').find('.password').val();
+                // $('.login_item').find('.mesg_code').hide();
+                if(!register.phoneCheck(userPhone)){
                     content='请输入正确手机号';
                 }else if(!register.pswCheck(password)){
                     content = "请输入6-16数字或字母的密码";
