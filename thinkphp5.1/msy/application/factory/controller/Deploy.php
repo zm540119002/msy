@@ -15,13 +15,8 @@ class Deploy extends UserBase
     public function register()
     {
         $model = new \app\factory\model\Factory();
-        $uid = $this -> user['id'];
         if(request()->isAjax()){
-            if(input('?post.factory_id')){
-                return $model -> edit($uid);
-            }else{
-                return $model -> add($uid);
-            }
+            return $model -> edit($this -> user['id']);
         }else{
             $mobilePhone = $this -> user['mobile_phone'];
             $this->assign('mobilePhone',$mobilePhone);
