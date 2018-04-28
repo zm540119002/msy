@@ -31,7 +31,7 @@ class FactoryBase extends UserBase{
                 $this->success('你有多家厂商入住，请选择一家', 'Index/index');;
             }
         }elseif ($factoryCount == 1){
-            $factoryInfo = $model -> getFactoryUser($where);
+            $factoryInfo = $model -> getFactoryUser($where,$file,$join);
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }
