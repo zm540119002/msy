@@ -93,13 +93,13 @@ class Goods extends FactoryBase
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'promotion' ){
-                return $this->fetch('goods_list_promotion');
+                return $this->fetch('list_promotion');
             }
             if($_GET['pageType'] == 'shelf' ){
-                return $this->fetch('goods_list_shelve');
+                return $this->fetch('list_shelve');
             }
             if($_GET['pageType'] == 'manage' ){
-                return $this->fetch('goods_list_manage');
+                return $this->fetch('list_manage');
             }
         }
     }

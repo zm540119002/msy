@@ -39,6 +39,7 @@ class Role extends \common\controller\UserBase
         }else{
             $roleId = input('id',0);
             $this->assign('roleId',$roleId);
+            $this->assign('roleName',input('name',''));
             $response = $modelRoleNode->where('role_id','=',$roleId)->select();
             $response = $response->toArray();
             $nodeIds = array_column($response,'node_id');

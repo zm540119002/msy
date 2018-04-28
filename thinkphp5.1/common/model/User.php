@@ -36,6 +36,7 @@ class User extends \think\Model {
 	public function pageQuery($userId){
 		$where = [
 			['status', '=', 0],
+			['type', '<>', 0],
 		];
 		if(isset($userId) && $userId){
 			$where[] = ['id', '<>', $userId];

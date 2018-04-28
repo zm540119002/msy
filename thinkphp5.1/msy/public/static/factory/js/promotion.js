@@ -68,6 +68,8 @@ $(function(){
     });
     $('body').on('click','.addSalesPromotion',function(){
         var postData=$('.addSalesPromotionForm').serializeObject();
+        postData.start_time =  new Date(postData.start_time).getTime()/1000;
+        postData.end_time = new Date(postData.end_time).getTime()/1000;
         postData.goods_id = $('.linked-goods-id').val();
         postData.storeType = storeType;
         var content='';

@@ -1,0 +1,52 @@
+
+{notempty name='list'}
+{volist name="list" id="vo"}
+<li data-id="{$vo.id}">
+    <a class="product-square-box">
+        {notempty name="vo.thumb_img"}
+        <img src="public_uploads/{$vo.thumb_img}" alt="" class="product-square-img">
+        {else /}
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+        {/notempty}
+    </a>
+    <p class="product-title">{$vo.name}</p>
+    <div class="columns_flex two-flex">
+        <div class="pink">
+            ￥<price>5.00</price>
+        </div>
+        {notempty name="vo.purchases_shelf"}
+        {if $vo.purchases_shelf == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="2">上架</a>
+        {elseif $vo.purchases_shelf == 2 /}
+        <a href="javascript:void(0);" class="small-btn apply-shelf" disabled="disabled">已申请</a>
+        {elseif $vo.purchases_shelf == 3 /}
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
+        {else /}
+        {/if}
+        {/notempty}
+        {notempty name="vo.commission_shelf"}
+        {if $vo.commission_shelf == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="2">上架</a>
+        {elseif $vo.commission_shelf == 2 /}
+        <a href="javascript:void(0);" class="small-btn apply-shelf" disabled="disabled">已申请</a>
+        {elseif $vo.commission_shelf == 3 /}
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
+        {else /}
+        {/if}
+        {/notempty}
+        {notempty name="vo.retail_shelf"}
+        {if $vo.retail_shelf == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="2">上架</a>
+        {elseif $vo.retail_shelf == 2 /}
+        <a href="javascript:void(0);" class="small-btn apply-shelf" disabled="disabled">已申请</a>
+        {elseif $vo.retail_shelf == 3 /}
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
+        {else /}
+        {/if}
+        {/notempty}
+    </div>
+</li>
+{/volist}
+{else /}
+<li><span>没有数据</span></li>
+{/notempty}

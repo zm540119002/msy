@@ -50,6 +50,27 @@ class Promotion extends FactoryBase
         return $this->fetch();
     }
 
+    /**
+     * 查出产商相关产品 分页查询
+     */
+    public function getList(){
+        $model = new \app\factory\model\Promotion;
+        $where = [
+            ['p.factory_id','=',$this->factory['id']],
+        ];
+        $list = $model -> pageQuery($where);
+        $this->assign('list',$list);
+        if(isset($_GET['activityStatus'])){
+            if($_GET['activityStatus'] == 1 ){//未结束
+                return $this->fetch('list_notover');
+            }
+            if($_GET['activityStatus'] == 0 ){//结束
+                return $this->fetch('list_over');
+            }
+
+        }
+    }
+
 
 
 

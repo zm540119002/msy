@@ -179,6 +179,7 @@ class Goods extends Model {
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
+		
 	}
 
 	/**

@@ -53,7 +53,7 @@ class Promotion extends Model {
 		$result = $modelGoods ->save(['sale_type_'.$data['storeType'] => 1],['id' => $data['goods_id'],'factory_id'=>$factory_id]);
 		if(false === $result){
 			$this ->rollback();
-			return errorMsg($this->getError($modelGoods->getLastSql()));
+			return errorMsg($modelGoods->getLastSql());
 		}
 		$this ->commit();
 		if(input('?post.promotion_id')){//修改成功后，删除旧图
@@ -63,21 +63,37 @@ class Promotion extends Model {
 	}
 	
 	//分页查询
-	public function pageQuery(){
+	public function pageQuery($_where=[],$join=[]){
 		$where = [
-			['status', '=', 0],
+			['p.status', '=', 0],
 		];
+		$activityStatus = (int)input('get.activityStatus');
+		if($activityStatus == 1){//未结束
+			$where[] = ['p.end_time','>',time()];
+		}
+		if($activityStatus == 0){//已结束
+			$where[] = ['p.end_time','<=',time()];
+		}
+
 		$keyword = input('get.keyword','');
 		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
+			$where[] = ['p.name', 'like', '%'.trim($keyword).'%'];
+		}
+		if(isset($_GET['storeType'])){//选择哪个类型店铺的促销活动
+			$join = [
+				['goods g','g.id = p.goods_id'],
+			];
+			$where[] = ['g.sale_type_'.$_GET['storeType'],'=',1];
 		}
 		$field = array(
-			'id','name','settle_price','retail_price','sale_price','thumb_img'
+			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
+			'g.name as goods_name','g.retail_price'
 		);
-		$order = 'id';
+		$order = 'sort';
+		$where = array_merge($_where, $where);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
+		return $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
 	}
 
 	/**
