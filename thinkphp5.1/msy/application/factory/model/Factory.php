@@ -12,29 +12,9 @@ class Factory extends Model {
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
 //	protected $readonly = ['name'];
-	/**
-	 * 新增
-	 */
-	public function add($uid=''){
-		$data = input('post.');
-		$data['user_id'] = $uid;
-		$validate = validate('Factory');
-		if(!$result = $validate->scene('add')->check($data)) {
-			return errorMsg($validate->getError());
-		}
-		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
-		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
-		$data['create_time'] = time();
-		$result = $this->allowField(true)->save($data);
-		if(false !== $result){
-			return successMsg("已提交申请");
-		}else{
-			return errorMsg($this->getError());
-		}
-	}
 
 	/**
-	 * 修改
+	 * 编辑
 	 */
 	public function edit($uid=''){
 		$data = input('post.');
@@ -45,41 +25,39 @@ class Factory extends Model {
 		);
 		$oldFactoryInfo = $this -> getFactory($where,$file);
 		$validate = validate('Factory');
-		if(!$result = $validate->scene('edit')->check($data)) {
+		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
 		}
 		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
 		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
-		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data,['id' => $data['factory_id']]);
-		if(false !== $result){
-			$newFactoryInfo = $this -> getFactory($where,$file);
-			delImgFromPaths($oldFactoryInfo['business_license'],$newFactoryInfo['business_license']);
-			delImgFromPaths($oldFactoryInfo['auth_letter'],$newFactoryInfo['auth_letter']);
-			return successMsg("已修改");
+		if(input('?post.factory_id')){
+			$data['update_time'] = time();
+			$result = $this->allowField(true)->save($data,['id' => $data['factory_id']]);
+			if(false !== $result){
+				delImgFromPaths($oldFactoryInfo['business_license'],$data['business_license']);
+				delImgFromPaths($oldFactoryInfo['auth_letter'],$data['auth_letter']);
+				return successMsg("成功");
+			}else{
+				return errorMsg('失败');
+			}
 		}else{
-			return errorMsg($this->getError());
-		}
-	}
-
-	/**
-	 * 新增档案
-	 */
-	public function addRecord($uid='',$factoryId=''){
-		$data = input('post.');
-		$data['user_id'] = $uid;
-		$data['id'] = $factoryId;
-//		$validate = validate('Factory');
-//		if(!$result = $validate->scene('addRecord')->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
-		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
-		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
-		$result = $this->allowField(true)->save($data);
-		if(false !== $result){
-			return successMsg("已提交申请");
-		}else{
-			return errorMsg($this->getError());
+			$data['create_time'] = time();
+			$this -> startTrans();
+			$result = $this->allowField(true)->save($data);
+			if(!$result){
+				$this ->rollback();
+				return errorMsg('失败');
+			}
+			$factoryUserModel =  new \app\factory\model\FactoryUser;
+			$data['user_id'] = $uid;
+			$data['factory_id'] = $this->getAttr('id');
+			$result = $factoryUserModel -> allowField(true) -> save($data);
+			if(!$result){
+				$this ->rollback();
+				return errorMsg('失败');
+			}
+			$this ->commit();
+			return successMsg('提交申请成功');
 		}
 	}
 
@@ -118,6 +96,9 @@ class Factory extends Model {
 				->limit($limit)
 				->select();
 		}
+		if(!empty($list)){
+			$list = $list ->toArray();
+		}
 		return $list;
 	}
 
@@ -146,6 +127,9 @@ class Factory extends Model {
 				->where($where)
 				->join(array_merge($_join,$join))
 				->find();
+		}
+		if(!empty($info)){
+			$info = $info ->toArray();
 		}
 		return $info;
 	}

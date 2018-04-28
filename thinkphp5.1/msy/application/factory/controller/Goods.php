@@ -30,10 +30,7 @@ class Goods extends FactoryBase
     {
         $model = new M();
         if(request()->isPost()){
-            if(input('?post.goods_id') && !input('?post.goods_id') == ''){
-                return $model -> edit($this->factory['id']);
-            }
-            return $model -> add($this->factory['id']);
+            return $model -> edit($this->factory['id']);
         }
         $categoryModel = new categoryModel();
         $platformCategory = $categoryModel->selectFirstCategory();
