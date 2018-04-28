@@ -63,30 +63,37 @@ class Promotion extends Model {
 	}
 	
 	//分页查询
-	public function pageQuery($_where=[]){
+	public function pageQuery($_where=[],$join=[]){
 		$where = [
-			['status', '=', 0],
+			['p.status', '=', 0],
 		];
 		$activityStatus = (int)input('get.activityStatus');
 		if($activityStatus == 1){//未结束
-			$where[] = ['end_time','>',date('Y-m-d H:i:s')];
+			$where[] = ['p.end_time','>',time()];
 		}
 		if($activityStatus == 0){//已结束
-			$where[] = ["UNIX_TIMESTAMP('end_time')",'<=',time()];
+			$where[] = ['p.end_time','<=',time()];
 		}
+
 		$keyword = input('get.keyword','');
 		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
+			$where[] = ['p.name', 'like', '%'.trim($keyword).'%'];
+		}
+		if(isset($_GET['storeType'])){//选择哪个类型店铺的促销活动
+			$join = [
+				['goods g','g.id = p.goods_id'],
+			];
+			$where[] = ['g.sale_type_'.$_GET['storeType'],'=',1];
 		}
 		$field = array(
-			'id','name','img','goods_id','promotion_price','start_time','end_time','create_time','sort'
+			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
+			'g.name as goods_name','g.retail_price'
 		);
 		$order = 'sort';
 		$where = array_merge($_where, $where);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		$this->where($where)->field($field)->order($order)->paginate($pageSize);
-		echo $this->getLastSql();
+		return $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
 	}
 
 	/**

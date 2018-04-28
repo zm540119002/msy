@@ -438,14 +438,3 @@ $(window).on('scroll',function(){
         $('.right_sidebar').hide();
     }
 });
-
-//获取列表
-function getPage1(url,currentPage) {
-    $("#list").html($('#loading').html());
-    var postData = $('#form1').serializeObject();
-    postData.page = currentPage ? currentPage : 1;
-    postData.pageSize = 5;
-    $.get(url, postData , function(data){
-        $('#list').html(data);
-    });
-}

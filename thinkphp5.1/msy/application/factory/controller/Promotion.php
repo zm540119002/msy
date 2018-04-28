@@ -56,7 +56,7 @@ class Promotion extends FactoryBase
     public function getList(){
         $model = new \app\factory\model\Promotion;
         $where = [
-            ['factory_id','=',$this->factory['id']],
+            ['p.factory_id','=',$this->factory['id']],
         ];
         $list = $model -> pageQuery($where);
         $this->assign('list',$list);
