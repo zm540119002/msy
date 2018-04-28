@@ -5,11 +5,6 @@ use common\controller\UserBase;
 
 class Deploy extends UserBase
 {
-    //部署首页
-    public function index(){
-        return $this->fetch();
-    }
-
     /**入驻登记
      */
     public function register()
