@@ -42,7 +42,7 @@
 		</div>
 		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
 		<a href="javascript:void(0);" class="stroe-preview">采购店铺预览></a>
-		<a href="javascript:void(0);" class="addSalesPromotion text-color-gr right-arrow">新建促销活动</a>
+		<a href="javascript:void(0);" class="addSalesActivity text-color-gr right-arrow">新建促销活动</a>
 	</section>
 	<section class="separation-line sales-promotion-content">
 		<div class="category-wrapper">
@@ -136,7 +136,7 @@
 		});
 
 		//点击新建促销活动
-		$('body').on('click','.addSalesPromotion',function () {
+		$('body').on('click','.addSalesActivity',function () {
 			var storeType=$('.store-type.current').data('type');
 			location.href = module + 'promotion/edit/storeType/'+storeType;
 		});
