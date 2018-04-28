@@ -274,6 +274,9 @@
     /*min-height:100%;*/
     background: #f8f8f8;
 }
+.sort-left-menu{
+    border-right:1px solid #d9d9d9;
+}
 .category-tab li{
     height:46px;
     line-height: 46px;
@@ -632,7 +635,16 @@
     max-width:40px;
     height:28px;
 }
-
+.addSalesPromotion{
+    display: block;
+    padding:.18rem 0;
+}
+/*.sales-promotion-content{
+    padding:.12rem 0 0 .25rem;
+}
+.store-goods-sort img{
+    float:left;
+}*/
 .down-shelf{
     background: #ccc;
 }
@@ -643,6 +655,13 @@
     background: #C7AA53;
 }
 /*促销活动*/
+.promotion-item .classify-label-content {
+    height:328px;
+    overflow-y:scroll;
+}
 .promotion-item.hide{
     display: none;
+}
+.promotion-item .classify-tag-name{
+    width:92px;
 }

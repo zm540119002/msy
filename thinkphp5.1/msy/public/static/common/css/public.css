@@ -391,6 +391,18 @@ i{
     display:block;
     text-indent:-9999rem;
 }
+.top-nav-bar{color:#000;}
+.top-nav-bar a.personal_center,
+.top-nav-bar a.home{
+    width:20px;
+    height:22px;
+    margin:0 auto;
+    background-image:url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size:20px 204px;
+    display:block;
+    text-indent:-9999rem;
+}
 .top-title{
     border:none;
 }
@@ -399,7 +411,8 @@ i{
     top:10px;
     right:10px;
 }
-.top_bar a.personal_center{
+.top_bar a.personal_center,
+.top-nav-bar a.personal_center{
     background-position:0 -114px;
 }
 .top_bar a.shopping_cart{
