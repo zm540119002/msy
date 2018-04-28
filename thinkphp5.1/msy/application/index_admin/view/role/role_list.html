@@ -11,7 +11,7 @@
         </thead>
         <tbody>
         {volist name="list" id="vo"}
-        <tr class="hover" data-id="{$vo.id}">
+        <tr class="hover" data-id="{$vo.id}" data-name="{$vo.name}">
             <td class="w48"><input type="checkbox" class="checkitem">
             <td class="w50pre"><span title="" class="editable ">{$vo.name}</span></td>
             <td class="w5">{$vo.remark}</td>

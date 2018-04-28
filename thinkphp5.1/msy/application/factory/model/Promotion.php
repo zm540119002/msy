@@ -53,7 +53,7 @@ class Promotion extends Model {
 		$result = $modelGoods ->save(['sale_type_'.$data['storeType'] => 1],['id' => $data['goods_id'],'factory_id'=>$factory_id]);
 		if(false === $result){
 			$this ->rollback();
-			return errorMsg($this->getError($modelGoods->getLastSql()));
+			return errorMsg($modelGoods->getLastSql());
 		}
 		$this ->commit();
 		if(input('?post.promotion_id')){//修改成功后，删除旧图
@@ -63,21 +63,30 @@ class Promotion extends Model {
 	}
 	
 	//分页查询
-	public function pageQuery(){
+	public function pageQuery($_where=[]){
 		$where = [
 			['status', '=', 0],
 		];
+		$activityStatus = (int)input('get.activityStatus');
+		if($activityStatus == 1){//未结束
+			$where[] = ['end_time','>',date('Y-m-d H:i:s')];
+		}
+		if($activityStatus == 0){//已结束
+			$where[] = ["UNIX_TIMESTAMP('end_time')",'<=',time()];
+		}
 		$keyword = input('get.keyword','');
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$field = array(
-			'id','name','settle_price','retail_price','sale_price','thumb_img'
+			'id','name','img','goods_id','promotion_price','start_time','end_time','create_time','sort'
 		);
-		$order = 'id';
+		$order = 'sort';
+		$where = array_merge($_where, $where);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
+		$this->where($where)->field($field)->order($order)->paginate($pageSize);
+		echo $this->getLastSql();
 	}
 
 	/**
