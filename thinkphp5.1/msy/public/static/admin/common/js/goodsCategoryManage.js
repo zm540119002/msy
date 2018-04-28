@@ -6,7 +6,6 @@ $(document).ready(function(){
         var _thisTr = _this.parents('tr');
         if(status == 'open'){
             _this.attr('status','close');
-
             var postData = {};
             postData.level = _thisTr.data('level');
             postData.goodsCategoryId = _thisTr.data('id');
@@ -26,7 +25,6 @@ $(document).ready(function(){
             });
         }else if(status == 'close'){
             _this.attr('status','open');
-
             if(_thisTr.data('level') == 1){
                 _thisTr.nextUntil('[data-level=1]').remove();
             }else if(_thisTr.data('level') == 2){
@@ -38,7 +36,7 @@ $(document).ready(function(){
     //编辑
     $('body').on('click','.a-edit',function(){
         var _thisTr = $(this).parents('tr');
-        var url = CONTROLLER + '/goodsCategoryEdit';
+        var url = controller + 'edit';
         url += '/goodsCategoryId/' + _thisTr.data('id');
         url += '/operate/' + 'edit';
         location.href = url;
@@ -49,7 +47,7 @@ $(document).ready(function(){
         var _thisTr = $(this).parents('tr');
         var postData = {};
         postData.goodsCategoryId = _thisTr.data('id');
-        var url = CONTROLLER + '/delGoodsCategory';
+        var url = controller + '/del';
 
         var info = '删除该分类将会同时删除该分类的所有下级分类，您确定要删除吗';
         //询问框
@@ -76,15 +74,12 @@ $(document).ready(function(){
     //新增下级
     $('body').on('click','.a-add',function(){
         var _thisTr = $(this).parents('tr');
-        var url = CONTROLLER + '/goodsCategoryEdit';
+        var url = controller + 'edit';
         url += '/goodsCategoryId/' + _thisTr.data('id');
         url += '/operate/' + 'addLower';
         location.href = url;
     });
     //批量删除
     $('body').on('click','.a-del-batch',function(){
-        // var url = '';
-        // if(dialog.confirm('删除该分类将会同时删除该分类的所有下级分类，您确定要删除吗'))
-        //     location.href = url;
     });
 });
