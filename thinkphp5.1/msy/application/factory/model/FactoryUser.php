@@ -22,7 +22,33 @@ class FactoryUser extends Model {
 	}
 
 
-
+	//设置默认厂商
+	public function setDefaultFactory($uid=''){
+		if(request()->isAjax()){
+			$id = (int)input('post.id');
+			if(!$id){
+				return errorMsg('参数错误');
+			}
+			$this->startTrans();
+			$data = array('is_default' => 1);
+			$result = $this->allowField(true)->save($data,['id' => $id,'user_id'=>$uid]);
+			if(false === $result){
+				$this->rollback();
+				return errorMsg('修改默认失败');
+			}
+			$where = [
+				['id','<>',$id],
+				['user_id','=',$uid],
+			];
+			$result = $this ->where($where)->setField('is_default',0);
+			if(false === $result){
+				$this->rollback();
+				return errorMsg('修改失败');
+			}
+			$this->commit();
+			return successMsg("已选择");
+		}
+	}
 	/**
 	 * @param array $where
 	 * @param array $field
@@ -32,7 +58,7 @@ class FactoryUser extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectFactoryUser($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectFactoryUser($where=[],$field=[],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'u.status' => 0,
 		);
