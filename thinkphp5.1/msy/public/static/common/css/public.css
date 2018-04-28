@@ -780,7 +780,7 @@ color: #ed6d00;
      background-position:15px -7px;
 }
 .use-item.hide{display: none;}
-.use-attention{
+.use-attention,.forget_password{
     color:#3FA9F5;
 }
 .forgetPasswd_item .input_txt3,.login_item .input_txt3{
