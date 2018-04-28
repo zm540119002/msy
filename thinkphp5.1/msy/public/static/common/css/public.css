@@ -418,7 +418,8 @@ i{
 .top_bar a.shopping_cart{
     background-position:0 -136px;
 }
-.top_bar a.home{
+.top_bar a.home,
+.top-nav-bar a.home{
     background-position:0 -159px;
 }
 .top_search_module{
