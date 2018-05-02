@@ -1,4 +1,7 @@
+
+
 $(function(){
+ 
 
     //上传缩略图
     $('body').on('click','.upload-thumbnail',function(){
@@ -126,7 +129,6 @@ $(function(){
                     }
                 });
                 $('.select-category').data('category-id',categoryArr);
-                console.log(categoryArr);
                 layer.close(index);
             }
         })
@@ -175,16 +177,31 @@ $(function(){
         var categoryArray = category.split(',');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
-        //查找选择发布的商城平台
-        if($('#purchases').hasClass('current')){
-            postData.purchases_store = 1;
-        }
-        if($('#commission').hasClass('current')){
-            postData.commission_store = 1;
-        }
-        if($('#retail').hasClass('current')){
-            postData.retail_store = 1;
-        }
+        //查找选择发布的商城平台和对应的价格
+        var goodsExtend =[];
+        $(".store_type").each(function(){
+            var _this = $(this);
+            if(_this.hasClass('current')){
+                var store_type = _this.data('store-type');
+                var sale_price = '';
+                if(store_type == 1){
+                    sale_price = $('.sale_price_purchases').val();
+                }
+                if(store_type == 2){
+                    sale_price = $('.sale_price_commission').val();
+                }
+                if(store_type == 3){
+                    sale_price = $('.sale_price_retail').val();
+                }
+                var arr={};
+                arr={
+                    store_type:store_type,
+                    sale_price:sale_price,
+                };
+                goodsExtend.push(arr);
+            }
+        });
+        postData.goodsExtend = goodsExtend;
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;
         postData.goods_video=goodsVideo;
