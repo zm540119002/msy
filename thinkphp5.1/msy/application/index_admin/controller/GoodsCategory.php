@@ -20,13 +20,16 @@ class GoodsCategory extends \common\controller\Base
             return $modelGoodsCategory->edit();
         }else{
             $id = input('id',0);
+            $where = [
+                'status' => 0,
+            ];
+            $allCategoryList = $modelGoodsCategory->where($where)->select()->toArray();
+            $this->assign('allCategoryList',$allCategoryList);
             if($id){
-                $where = [
-                    'status' => 0,
-                    'id' => $id,
-                ];
+                $where['id'] = $id;
                 $info = $modelGoodsCategory->where($where)->find();
                 $this->assign('info',$info);
+                $this->assign('operate',input('operate',''));
             }
             return $this->fetch();
         }

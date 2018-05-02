@@ -40,7 +40,7 @@ class GoodsCategory extends \think\Model {
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$field = array(
-			'id','name','level','parent_id_1','parent_id_1','remark','img',
+			'id','name','level','parent_id_1','parent_id_2','remark','sort','img',
 		);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
