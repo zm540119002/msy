@@ -224,7 +224,7 @@ $(function(){
                 var userPhone=$('.loginTab').find('.user_phone').val();
                 var password=$('.loginTab').find('.password').val();
                 if(!register.phoneCheck(userPhone)){
-                    content='请输入正确手机号';
+                    content='请输入正确手机号码';
                 }else if(!register.vfyCheck(verifiCode)){
                     // content = "请输入正确的验证码";
                 }else if(!register.pswCheck(password)){
@@ -237,7 +237,7 @@ $(function(){
                 var password=$('.loginTab').find('.password').val();
                 // $('.login_item').find('.mesg_code').hide();
                 if(!register.phoneCheck(userPhone)){
-                    content='请输入正确手机号';
+                    content='请输入正确手机号码';
                 }else if(!register.pswCheck(password)){
                     content = "请输入6-16数字或字母的密码";
                 }
