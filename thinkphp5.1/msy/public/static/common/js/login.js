@@ -171,11 +171,10 @@ $('body').on('click','.use-attention',function(){
             anim: 'up',
             style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
             success:function(){
-               
             },
             btn:['确定']
         });
-})
+});
 //显示隐藏密码
 var onOff=true;
 $('body').on('click','.view-password',function(){
@@ -189,7 +188,7 @@ $('body').on('click','.view-password',function(){
         $('.login_item .password').attr('type','password');
         onOff=true;
     }
-})
+});
 $(function(){
     //弹窗忘记密码
     $('body').on('click','.forget_dialog',function(){
@@ -225,9 +224,9 @@ $(function(){
                 if(!register.phoneCheck(userPhone)){
                     content='请输入正确手机号';
                 }else if(!register.vfyCheck(verifiCode)){
-                    content = "请输入正确的验证码";
+                    // content = "请输入正确的验证码";
                 }else if(!register.pswCheck(password)){
-                    content = "请输入密码";
+                    // content = "请输入密码";
                 }
                 break;
             default:
