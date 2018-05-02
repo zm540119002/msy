@@ -8,27 +8,32 @@ class FactoryBase extends UserBase{
 
     public function __construct(){
         parent::__construct();
-        $model = new \app\factory\model\Factory();
+        $model = new \app\factory\model\FactoryUser();
         $uid = $this -> user['id'];
         $where = [
             ['user_id','=',$uid],
         ];
 
         $factoryCount = $model -> where($where)->count('id');
+        $file = [
+            'u.id,u.factory_id,u.is_default,f.name'
+        ];
+        $join =[
+            ['factory f','f.id = u.factory_id'],
+        ];
         if($factoryCount > 1){
             $_where = [
                 ['user_id','=',$uid],
                 ['is_default','=',1],
             ];
-            $factoryInfo = $model -> getFactory($_where);
+            $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
             if(!$factoryInfo){
-                $this->success('请选择多家产商入住，请选择一家', 'Index/index');;
+                $this->success('你有多家厂商入住，请选择一家', 'Index/index');;
             }
         }elseif ($factoryCount == 1){
-            $factoryInfo = $model -> getFactory($where);
+            $factoryInfo = $model -> getFactoryUser($where,$file,$join);
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
-
         }
         $this->factory =  $factoryInfo;
     }

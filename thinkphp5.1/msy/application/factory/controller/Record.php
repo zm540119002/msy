@@ -4,6 +4,13 @@ use common\controller\Base;
 
 class Record extends FactoryBase
 {
+    //部署首页
+    public function deployIndex(){
+        $factoryId =  $this->factory['id'];
+        $this ->assign('factoryId',$factoryId);
+        return $this->fetch('deploy/index');
+    }
+
     //产商档案编辑
     public function edit(){
         $model = new \app\factory\model\Record();

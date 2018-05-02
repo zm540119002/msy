@@ -20,7 +20,7 @@
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
 			<a href="{:url('account/index')}">账号授权</a>
-			<a href="{:url('record/edit')}">档案资质</a>
+			<a href="javascript:void(0);" class="record">档案资质</a>
 			<a href="{:url('goods/edit')}">店铺部署</a>
 			<a href="">促销管理</a>
 			<a href="">云推客联营计划</a>
@@ -70,7 +70,11 @@
 {block name="script"}
 
 <script type="text/javascript">
-
+$(function () {
+	$('.record').click(function () {
+		alert(1)
+	})
+})
 
 </script>
 {/block}

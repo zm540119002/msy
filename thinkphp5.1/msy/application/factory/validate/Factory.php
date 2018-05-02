@@ -23,10 +23,10 @@ class Factory extends Validate
         'auth_letter.max'   => '授权信存在地址最多不能超过25个字符',
     ];
     
-    protected $scene = [
-        'add'   =>  ['name','agent','business_license','auth_letter'],
-        'edit'  =>  ['name','agent','business_license','auth_letter'],
-    ];
+//    protected $scene = [
+//        'add'   =>  ['name','agent','business_license','auth_letter'],
+//        'edit'  =>  ['name','agent','business_license','auth_letter'],
+//    ];
 
 
 }

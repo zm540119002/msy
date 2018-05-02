@@ -14,7 +14,7 @@
 
 <article class="f24">
 	<section class="">
-		<nav class="columns_flex channel_nav top-nav-bar">
+		<nav class="columns_flex channel_nav top-nav-bar ">
 			<a class="personal_center">我的</a>
 			<a href="javascript:void(0);" class="current store-type" data-type="purchases">
 				采购
@@ -42,7 +42,7 @@
 		</div>
 		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
 		<a href="javascript:void(0);" class="stroe-preview">采购店铺预览></a>
-		<a href="javascript:void(0);" class="addSalesPromotion text-color-gr right-arrow">新建促销活动</a>
+		<a href="javascript:void(0);" class="addSalesActivity text-color-gr right-arrow">新建促销活动</a>
 	</section>
 	<section class="separation-line sales-promotion-content">
 		<div class="category-wrapper">
@@ -57,7 +57,7 @@
                 </ul>
             </div>
 			<input type="hidden" value="1" class="isClick">
-			<div class="promotion-item">
+			<div class="promotion-item" id="abc">
 				<p class="content-label">促销活动的修改、删除和排序</p>
 				<div class="classify-label-content " id="list">
 					<div class="columns_flex tag-item first-tag">
@@ -109,6 +109,16 @@
 				return false;
 			}
 		});
+		//初始化
+		var activityStatus=$('.category-tab li.current a').data('activity-status');
+		var config = {
+			storeType:storeType,
+			activityStatus:activityStatus,//未结束
+		};
+		currentPage=1;
+		requestEnd=false;
+		var url = module+'promotion/getList';
+		getPage(url,config);
 
 		//选择店铺类型
 		$('body').on('click','.store-type',function () {
@@ -124,22 +134,28 @@
 			var url = module+'promotion/getList';
 			getPage(url,config);
 		});
+
 		//点击新建促销活动
-		$('body').on('click','.addSalesPromotion',function () {
+		$('body').on('click','.addSalesActivity',function () {
 			var storeType=$('.store-type.current').data('type');
 			location.href = module + 'promotion/edit/storeType/'+storeType;
 		});
+
 		//促销活动状态
 		$('body').on('click','.category-tab li',function () {
 			var index=$(this).index();
 			$(this).addClass('current').siblings().removeClass('current');
-			var activityStatus = $(this).data('activity-status');
-			if(activityStatus == 1){
-
-			}
-			if(activityStatus==0){
-
-			}
+			var activityStatus = $(this).find('a').data('activity-status');
+			var storeType=$('.store-type.current').data('type');
+				var config = {
+					storeType:storeType,
+					activityStatus:activityStatus,//未结束
+				};
+				currentPage=1;
+				requestEnd=false;
+				var url = module+'promotion/getList';
+				getPage(url,config);
+			
 //			$('.promotion-item').hide().eq(index).show();
 		})
 	});
@@ -172,10 +188,16 @@
 			success: function(data){
 				$('.loading').hide();
 				if(currentPage == 1){
+					if(config.activityStatus == 1){
+						$('.promotion-item .content-label').text('促销活动的修改、删除和排序');
+					}
+					if(config.activityStatus==0){
+						$('.promotion-item .content-label').text('已结束的促销活动');
+					}
 					$('#list .tag-item').remove();
 					$('#list').append(data);
 				}else{
-					$('#list li:last').after(data);
+					$('#list .tag-item:last').after(data);
 				}
 				if($($.parseHTML(data)).length<postData.pageSize){
 					requestEnd = true;
@@ -188,11 +210,15 @@
 
 	//上拉加载更多
 	var loadTrigger = false;//加载触发器
-	$(window).on('scroll',function(){
-		if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+	$('.classify-label-content ').on('scroll',function(){
+		var listHeight=document.getElementById('list').scrollHeight;
+		console.log(1);
+		if(loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+			
 			loadTrigger = false;
 			var storeType=$('.store-type.current').data('type');
-			var activityStatus=$('.category-tab li.current').data('activity-status');
+			console.log(storeType);
+			var activityStatus=$('.category-tab li.current a').data('activity-status');
 			var config = {
 				storeType:storeType,
 				activityStatus:activityStatus,//活动状态
