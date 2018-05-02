@@ -56,7 +56,7 @@
                                                         <select name="parent_id_1" class="small form-control">
                                                             <option value="0" >一级分类</option>
                                                             {volist name="allCategoryList" id="vo"}
-                                                                <if condition="$vo.level eq 1">
+                                                                {if condition="$vo.level eq 1"}
                                                                     {if condition="$vo['id'] eq $editGoodsCategory['id']"}
                                                                         <option value="{$vo.id}" selected="selected">{$vo.name}</option>
                                                                         {else/}
@@ -94,35 +94,6 @@
                                                 </div>
                                             </div>
                                         {/if}
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>分类名称：</span>
-                                            <div class= width="89%" align=left>
-                                                <input class=inputboxadmin name="name" value="">
-                                            </div>
-                                        </div>
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>分类说明：</span>
-                                            <div class= width="89%" align=left>
-                                                <textarea class="project_description" name="explain" ></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>分类图片：</span>
-                                            <div class="type_img_box" width="89%" >
-                                                <input type="file" class="upload" id="img">
-                                                <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
-                                                <p class="showimg" id="">图片上传大小请小于50k</p>
-                                                <div class="upload_img_box">
-                                                    <img class="img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>排序：</span>
-                                            <div width="89%" align=left>
-                                                <input class=inputboxadmin name="sort" value="">
-                                            </div>
-                                        </div>
                                     {else /}<!-- 编辑本级 -->
                                         <input type="hidden" name="goodsCategoryId" value="{$editGoodsCategory.id}">
                                         {if condition="($editGoodsCategory.level eq 2) or ($editGoodsCategory.level eq 3)"}
@@ -160,53 +131,53 @@
                                                 </div>
                                             </div>
                                         {/if}
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>分类名称：</span>
-                                            <div class= width="89%" align=left>
-                                                <input class=inputboxadmin name="name" value="{$editGoodsCategory.name}">
-                                            </div>
-                                        </div>
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>分类说明：</span>
-                                            <div class= width="89%" align=left>
-                                                <textarea class="project_description" name="explain" >{$editGoodsCategory.explain}</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>分类图片：</span>
-                                            <div class="type_img_box" width="89%" >
-                                                <input type="file" class="upload">
-                                                <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
-                                                <p class="showimg" id="showimg">图片上传大小请小于50k</p>
-                                                {empty name="editGoodsCategory.img"}
-                                                    <div class="upload_img_box">
-                                                        <img  class="img" src="PUBLIC_ADMIN_IMG/common/default/goods_default.png">
-                                                        <input type="hidden" value="{$editGoodsCategory.img}" name="img"/>
-                                                    </div>
-                                                {else /}
-                                                    <div class="upload_img_box">
-                                                        <img class="img" src="UPLOADS_IMG/{$editGoodsCategory.img}">
-                                                        <input type="hidden" value="{$editGoodsCategory.img}" name="img"/>
-                                                    </div>
-                                                {/empty}
-                                            </div>
-                                        </div>
-                                        <div class="goods_c_item">
-                                            <span class='goods_label_title' height=40 width="11%" align=right>排序：</span>
-                                            <div width="89%" align=left>
-                                                <input class=inputboxadmin name="sort" value="{$editGoodsCategory.sort}">
-                                            </div>
-                                        </div>
                                     {/eq}
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>分类名称：</span>
+                                        <div class= width="89%" align=left>
+                                            <input class=inputboxadmin name="name" value="{$editGoodsCategory.name}">
+                                        </div>
+                                    </div>
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>分类说明：</span>
+                                        <div class= width="89%" align=left>
+                                            <textarea class="project_description" name="explain" >{$editGoodsCategory.explain}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>分类图片：</span>
+                                        <div class="type_img_box" width="89%" >
+                                            <input type="file" class="upload">
+                                            <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
+                                            <p class="showimg" id="showimg">图片上传大小请小于50k</p>
+                                            {empty name="editGoodsCategory.img"}
+                                                <div class="upload_img_box">
+                                                    <img  class="img" src="public_img/default/goods_default.png">
+                                                    <input type="hidden" value="{$editGoodsCategory.img}" name="img"/>
+                                                </div>
+                                            {else /}
+                                                <div class="upload_img_box">
+                                                    <img class="img" src="public_uploads/{$editGoodsCategory.img}">
+                                                    <input type="hidden" value="{$editGoodsCategory.img}" name="img"/>
+                                                </div>
+                                            {/empty}
+                                        </div>
+                                    </div>
+                                    <div class="goods_c_item">
+                                        <span class='goods_label_title' height=40 width="11%" align=right>排序：</span>
+                                        <div width="89%" align=left>
+                                            <input class=inputboxadmin name="sort" value="{$editGoodsCategory.sort}">
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
-                         </td>
-                     </tr>
-                     <tr>
-                         <td height=60 width="100%" align=center>
-                             <input type="button" class="button_save_black_4" value="确定">
-                             <input type="button" class="button_save_black" value="返回">
-                         </td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height=60 width="100%" align=center>
+                            <input type="button" class="button_save_black_4" value="确定">
+                            <input type="button" class="button_save_black" value="返回">
+                        </td>
                     </tr>
                 </tbody>
             </table>
