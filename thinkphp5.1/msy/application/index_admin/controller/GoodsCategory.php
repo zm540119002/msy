@@ -17,7 +17,7 @@ class GoodsCategory extends \common\controller\Base
     public function edit(){
         $modelGoodsCategory = new \common\model\GoodsCategory();
         if(request()->isPost()){
-            return $modelGoodsCategory->edit($this->user);
+            return $modelGoodsCategory->edit();
         }else{
             $id = input('id',0);
             if($id){
@@ -39,7 +39,7 @@ class GoodsCategory extends \common\controller\Base
             return config('not_get');
         }
         $modelGoodsCategory = new \common\model\GoodsCategory();
-        $list = $modelGoodsCategory->pageQuery($this->user['id']);
+        $list = $modelGoodsCategory->pageQuery();
         $this->assign('list',$list);
         return $this->fetch('list_tpl');
     }
