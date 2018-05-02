@@ -27,9 +27,9 @@
                                 {/switch}
                                 分类
                             {else/}
-                                }empty name="editGoodsCategory"}
+                                {empty name="editGoodsCategory"}
                                     新增一级分类
-                                    {else/}
+                                {else/}
                                     修改
                                     {switch name="editGoodsCategory.level"}
                                         {case value="1"}一级{/case}
@@ -41,9 +41,9 @@
                             {/eq}
                         </td>
                     </tr>
-                     <tr><td height=10 width="82%" colspan=3 align=center></td></tr>
-                     <tr>
-                         <td valign=middle width="100%">
+                    <tr><td height=10 width="82%" colspan=3 align=center></td></tr>
+                    <tr>
+                        <td valign=middle width="100%">
                             <div align=center class="goods_type_catague">
                                 <form id="form1">
                                     {eq name="operate" value="addLower"}<!-- 新增下级 -->
@@ -72,7 +72,7 @@
                                                                 {if condition="$vo.level eq 1"}
                                                                     {if condition="$vo['id'] eq $editGoodsCategory['parent_id_1']"}
                                                                         <option value="{$vo.id}" selected="selected">{$vo.name}</option>
-                                                                        {else/}
+                                                                    {else/}
                                                                         <option value="{$vo.id}">{$vo.name}</option>
                                                                     {/if}
                                                                 {/if}
@@ -84,7 +84,7 @@
                                                                 {if condition="$vo.level eq 2"}
                                                                     {if condition="$vo['id'] eq $editGoodsCategory['id']"}
                                                                         <option value="{$vo.id}" class="{$vo.parent_id_1}" selected="selected">{$vo.name}</option>
-                                                                        {else/}
+                                                                    {else/}
                                                                         <option value="{$vo.id}" class="{$vo.parent_id_1}">{$vo.name}</option>
                                                                     {/if}
                                                                 {/if}
