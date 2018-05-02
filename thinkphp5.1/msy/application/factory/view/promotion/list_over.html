@@ -1,16 +1,13 @@
-
-<ul>
-    {notempty name='list'}
-    {volist name="list" id="vo"}
-    <li class="columns_flex l-r-sides">
-        <span>{$vo.name}</span>
-        <div>
-            <p>开始<span>{$vo.start_time}</span></p>
-            <p>结束<span>{$vo.end_time}</span></p>
-        </div>
-    </li>
-    {/volist}
-    {else/}
-    <li class='tag-item'>没有符合条件的记录！</li>
-    {/notempty}
-</ul>
+{notempty name='list'}
+{volist name="list" id="vo"}
+<div class="columns_flex tag-item first-tag">
+    <span>{$vo.name}</span>
+    <div>
+        <p>开始<span>{$vo.start_time}</span></p>
+        <p>结束<span>{$vo.end_time}</span></p>
+    </div>
+</div>
+{/volist}
+{else/}
+<div class='tag-item'>没有符合条件的记录！</div>
+{/notempty}
