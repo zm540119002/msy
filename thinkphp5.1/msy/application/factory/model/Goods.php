@@ -63,7 +63,7 @@ class Goods extends Model {
 		if(false !== $result){
 			return successMsg("成功！");
 		}else{
-			return errorMsg($this->getError());
+			return errorMsg('失败');
 		}
 	}
 
@@ -83,7 +83,9 @@ class Goods extends Model {
 		$file = array(
 			'thumb_img','main_img','details_img','goods_video'
 		);
-		$oldGoodsInfo = $this -> getGoods($where,$file);
+		if(input('?post.goods_id')){//修改，查询
+			$oldGoodsInfo = $this -> getGoods($where,$file);
+		}
 		if(!empty($data['thumb_img'])){
 			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}
@@ -120,31 +122,39 @@ class Goods extends Model {
 			}
 			$data['details_img'] = $detailsImg;
 		}
-		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data, ['id' => $data['goods_id']]);
-		if(false !== $result){
-			delImgFromPaths($oldGoodsInfo['thumb_img'],$data['thumb_img']);
-            //删除就图片
-			$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
-			array_pop($oldMainImg);
-			$newMainImg = explode(",",$data['main_img']);
-			array_pop($newMainImg);
-			delImgFromPaths($oldMainImg,$newMainImg);
-
-			$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
-			array_pop($oldDetailsImg);
-			$newDetailsImg = explode(",",$data['details_img']);
-			array_pop($newDetailsImg);
-			delImgFromPaths($oldDetailsImg,$newDetailsImg);
-
-			$oldGoodsVideo = explode(",",$oldGoodsInfo['goods_video']);
-			array_pop($oldGoodsVideo);
-			$newGoodsVideo = explode(",",$data['goods_video']);
-			array_pop($newGoodsVideo);
-			delImgFromPaths($oldGoodsVideo,$newGoodsVideo);
-			return successMsg("修改成功");
+		if(input('?post.goods_id')){//修改
+			$data['update_time'] = time();
+			$result = $this->allowField(true)->save($data, ['id' => $data['goods_id']]);
 		}else{
-			return errorMsg($this->getError());
+			$data['factory_id'] = $factory_id;
+			$data['create_time'] = time();
+			$result = $this -> allowField(true) -> save($data);
+		}
+		if(false !== $result){
+			if(input('?post.goods_id')){//删除旧图片
+				delImgFromPaths($oldGoodsInfo['thumb_img'],$data['thumb_img']);
+				//删除就图片
+				$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
+				array_pop($oldMainImg);
+				$newMainImg = explode(",",$data['main_img']);
+				array_pop($newMainImg);
+				delImgFromPaths($oldMainImg,$newMainImg);
+
+				$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
+				array_pop($oldDetailsImg);
+				$newDetailsImg = explode(",",$data['details_img']);
+				array_pop($newDetailsImg);
+				delImgFromPaths($oldDetailsImg,$newDetailsImg);
+
+				$oldGoodsVideo = explode(",",$oldGoodsInfo['goods_video']);
+				array_pop($oldGoodsVideo);
+				$newGoodsVideo = explode(",",$data['goods_video']);
+				array_pop($newGoodsVideo);
+				delImgFromPaths($oldGoodsVideo,$newGoodsVideo);
+			}
+			return successMsg("成功");
+		}else{
+			return errorMsg('失败');
 		}
 	}
 

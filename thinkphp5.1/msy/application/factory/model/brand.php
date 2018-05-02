@@ -35,7 +35,7 @@ class Brand extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit(){
+	public function edit($factory_id = ''){
 		$data = input('post.');
 		$validate = validate('Brand');
 		if(!$result = $validate->scene('edit')->check($data)) {
@@ -44,12 +44,19 @@ class Brand extends Model {
 		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
 		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
 		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
-		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data, ['id' => $data['brand_id']]);
-		if(false !== $result){
-			return successMsg("已提交申请");
+		if(input('?post.brand_id')){//修改
+			$data['factory_id'] = $factory_id;
+			$data['update_time'] = time();
+			$data['is_audit'] = 0;
+			$result = $this->allowField(true)->save($data, ['id' => $data['brand_id']]);
 		}else{
-			return errorMsg($this->getError());
+			$data['create_time'] = time();
+			$result = $this->allowField(true)->save($data);
+		}
+		if(false !== $result){
+			return successMsg("成功");
+		}else{
+			return errorMsg('失败');
 		}
 	}
 

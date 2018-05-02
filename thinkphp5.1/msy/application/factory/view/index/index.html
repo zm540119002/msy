@@ -153,7 +153,7 @@
 		$('body').on('click','.deployed-deployment',function () {
 			var factoryCount = {$factoryCount};
 			if(factoryCount){
-				location.href = module + 'deploy/index';
+				location.href = module + 'Record/deployIndex';
 			}else {
 				dialog.success('未入驻，请先申请入住',module+'deploy/register')
 			}
