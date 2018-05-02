@@ -21,34 +21,27 @@
                 </li></ul></td></tr>
             </tbody>
         </table>
-        <table class="table tb-type2">
-            <thead>
-                <tr class="thead">
-                    <th></th>
-                    <th>排序</th>
-                    <th>分类名称</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                {notempty name="goodsCategoryList"}
-                    <tr class="tfoot">
-                        <td>
-                            <input type="checkbox" class="checkall" id="checkall_2">
-                            <label for="checkall_2" class="all_checkbox">全选</label>
-                        </td>
-                        <td id="batchAction" colspan="15">
-                            <a href="JavaScript:void(0);" class="a-del-batch">批量删除</a>
-                        </td>
-                    </tr>
-                {/notempty}
-            </tfoot>
-        </table>
     </div>
+    <div class="content" id="list"></div>
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-    <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js" charset="utf-8"></script>
+    <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
+    <script type="text/javascript">
+        //获取列表
+        function getPage(currentPage) {
+            $("#list").html($('#loading').html());
+            var url = controller+'getList';
+            var postData = $('#form1').serializeObject();
+            postData.page = currentPage ? currentPage : 1;
+            postData.pageSize = 10;
+            $.get(url, postData , function(data){
+                $('#list').html(data);
+            });
+        }
+        $(function(){
+            //加载第一页
+            getPage();
+        });
+    </script>
 {/block}

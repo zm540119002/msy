@@ -12,7 +12,7 @@ $(document).ready(function(){
             postData.parent_id_1 = _thisTr.data('parent-id-1');
             //异步加载子分类
             $.ajax({
-                url: 'goodsCategoryManage',
+                url: 'manage',
                 type:'post',
                 data:postData,
                 dataType: 'html',
