@@ -203,11 +203,13 @@ $(function(){
             $('.use-item').show();
             $('.forget_password').hide();
             $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
+            $('.login_item .password').attr('placeholder','设置密码');
         }else{
             $('.login_item').find('.mesg_code').hide();
             $('.use-item').hide();
              $('.forget_password').show();
             $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
+            $('.login_item .password').attr('placeholder','密码');
             $('.login_wrap').removeClass('active');
         }
     });

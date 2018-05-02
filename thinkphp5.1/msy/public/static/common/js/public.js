@@ -2,7 +2,9 @@
     var deviceWidth=document.documentElement.clientWidth;
     var html =document.getElementsByTagName('html')[0];
     html.style.fontSize=deviceWidth/6.4+'px';
-
+    if(deviceWidth>768){
+         html.style.fontSize=60+'px';
+    }
     $.fn.moreText = function(options){
         var defaults = {
             maxLength:50,
