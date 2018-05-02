@@ -708,6 +708,10 @@ color: #ed6d00;
     margin:0 0 .35rem 0;
     border-bottom:1px solid #d9d9d9;
 }
+.forgetPasswdLayer .layui-m-layerbtn span[yes]{
+    background: #FF7BAC;
+    color:#fff;
+}
 .loginNav li{
     width:50%;
     display:inline-block;
