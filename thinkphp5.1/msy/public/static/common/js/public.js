@@ -5,7 +5,6 @@
     if(deviceWidth>768){
          html.style.fontSize=60+'px';
     }
-    console.log(deviceWidth);
     $.fn.moreText = function(options){
         var defaults = {
             maxLength:50,
