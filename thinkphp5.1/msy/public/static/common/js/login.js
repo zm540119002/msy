@@ -270,7 +270,7 @@ $(function(){
         var verifiCode=$layer.find('.tel_code').val();
         var content='';
         if(!register.pswCheck(password)){
-            content = "请输入正确的密码";
+            content = "请输入正确的密码"; 
         }else if(password!=newPassword){
             content = "两次密码输入不一致";
         }else if(!register.phoneCheck(userPhone)){
@@ -278,7 +278,7 @@ $(function(){
         }else if(!register.vfyCheck(verifiCode)){
             content = "请输入正确的验证码";
         }
-        if(content){
+        if(content){ 
             errorTipc(content);
             return false;
         }
