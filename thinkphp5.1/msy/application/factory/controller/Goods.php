@@ -8,21 +8,6 @@ use GuzzleHttp\Psr7\Request;
 
 class Goods extends FactoryBase
 {
-//    //
-//    public function index()
-//    {
-//        $seriesModel = new seriesModel();
-//        $where = [
-//            ['factory_id','=',$this->factory['id']],
-//        ];
-//        $seriesList = $seriesModel -> selectSeries($where,[],['sort'=>'desc','id'=>'desc',]);
-//        $this -> assign('seriesList',$seriesList);
-//        $model = new M();
-//        $goodsList = $model -> selectGoods();
-//        $this -> assign('goodsList',$goodsList);
-//        return $this->fetch();
-//    }
-
     /**
      * @return array|mixed
      *商品编辑
