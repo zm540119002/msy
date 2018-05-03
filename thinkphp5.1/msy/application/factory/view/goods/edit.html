@@ -130,7 +130,11 @@
 <script type="text/javascript">
 	$(function () {
 		var goodsInfo = '{:json_encode($goodsInfo)}';
-		if(goodsInfo){
+		if(goodsInfo=='null'){
+			$('.store_type').eq(0).addClass('current');
+			$('.store_type').eq(2).addClass('current');
+			
+		}else{
 			goodsInfo = JSON.parse(goodsInfo);
 			$.each(goodsInfo,function(i,item){
 				if(item.store_type == 1){
@@ -152,14 +156,6 @@
 					$('.price-options').eq(2).show();
 				}
 			});
-		}else{
-
-		}
-
-		if(goodsInfo == null){
-			alert(1)
-			$('.store_type').eq(0).addClass('current');
-			$('.store_type').eq(2).addClass('current');
 		}
 	})
 
