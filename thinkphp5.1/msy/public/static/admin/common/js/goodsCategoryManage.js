@@ -49,6 +49,7 @@ $(document).ready(function(){
         var _thisTr = $(this).parents('tr');
         var postData = {};
         postData.id = _thisTr.data('id');
+        postData.level = _thisTr.data('level');
         var url = controller + 'del';
         var info = '删除该分类将会同时删除该分类的所有下级分类，您确定要删除吗';
         //询问框

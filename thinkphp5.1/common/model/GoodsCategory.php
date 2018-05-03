@@ -59,10 +59,16 @@ class GoodsCategory extends \think\Model {
 			return errorMsg('参数错误');
 		}
 		$where[] = ['id', '=', $id];
+		$level = input('post.level',0);
+		if($level==1){
+			$whereOr[] = ['parent_id_1', '=', $id];
+		}elseif($level==2){
+			$whereOr[] = ['parent_id_2', '=', $id];
+		}
 		if($tag){//标记删除
-			$result = $this->where($where)->setField('status',2);
+			$result = $this->where($where)->whereOr($whereOr)->setField('status',2);
 		}else{
-			$result = $this->where($where)->delete();
+			$result = $this->where($where)->whereOr($whereOr)->delete();
 		}
 		if(!$result){
 			return errorMsg('失败',$this->getError());
