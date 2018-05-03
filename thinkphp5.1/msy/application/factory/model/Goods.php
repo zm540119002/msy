@@ -16,7 +16,7 @@ class Goods extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit($goodsBaseId =''){
+	public function edit($goodsBaseId ='',$factoryId){
 		$data = input('post.');
 		$validate = validate('Goods');
 		// if(!$result = $validate->scene('edit')->check($data)) {
@@ -24,8 +24,43 @@ class Goods extends Model {
 		// }
 
 		if(input('?post.goods_base_id')){//修改
-			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data, ['id' => $data['goods_id']]);
+			//批量修改
+			$idsEdit =[];
+			$addData = [];
+			$editData =[];
+			foreach ($data['goodsExtend'] as $k=>$value){
+				if(isset($value['id']) && $value['id']){//修改
+					$value['update_time'] = time();
+					$editData[]=$value;
+
+				}else{//增加
+					$value['goods_base_id'] = $goodsBaseId;
+					$value['create_time'] = time();
+					$addData[] = $value;
+
+				}
+			}
+			if($addData){//添加新的数据
+				$result1 = $this->saveAll($addData);//
+				foreach ($result1 as $k=>$value){
+					$idsEdit[] = $value['id'];
+				}
+			}
+            if($editData){//修改数据
+				$result2 = $this->saveAll($editData);
+				foreach ($result2 as $k=>$value){
+					$idsEdit[] = $value['id'];
+				}
+			}
+//			//删除不要的数据
+			$_where=[
+				['id','not in',$idsEdit],
+				['goods_base_id','=',$goodsBaseId],
+			];
+			$result = $this->where($_where)->delete();
+			if(false === $result){
+				return errorMsg('失败');
+			}
 		}else{
 			//批量添加
 			$list = $data['goodsExtend'];
@@ -33,8 +68,9 @@ class Goods extends Model {
 				$list[$k]['goods_base_id'] = $goodsBaseId;
 				$list[$k]['create_time'] = time();
 			}
+			$result = $this->saveAll($list);
 		}
-		$result = $this->saveAll($list);
+
 		if(false !== $result){
 			return successMsg("成功");
 		}else{

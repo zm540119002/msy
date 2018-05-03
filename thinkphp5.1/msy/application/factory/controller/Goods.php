@@ -21,7 +21,7 @@ class Goods extends FactoryBase
             }
             //编辑商品表
             $goodsBaseId =  $result['id'];
-            $result = $goodsModel -> edit($goodsBaseId);
+            $result = $goodsModel -> edit($goodsBaseId,$this->factory['factory_id']);
             if(!$result['status']){
                 $goodsModel ->rollback();
                 return errorMsg('失败');

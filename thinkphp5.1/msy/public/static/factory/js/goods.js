@@ -183,6 +183,7 @@ $(function(){
             var _this = $(this);
             if(_this.hasClass('current')){
                 var store_type = _this.data('store-type');
+                var id = _this.data('goods-id');
                 var sale_price = '';
                 if(store_type == 1){
                     sale_price = $('.sale_price_purchases').val();
@@ -194,10 +195,19 @@ $(function(){
                     sale_price = $('.sale_price_retail').val();
                 }
                 var arr={};
-                arr={
-                    store_type:store_type,
-                    sale_price:sale_price,
-                };
+                if(id){
+                    arr={
+                        id:id,
+                        store_type:store_type,
+                        sale_price:sale_price,
+                    };
+                }else{
+                    arr={
+                        store_type:store_type,
+                        sale_price:sale_price,
+                    };
+                }
+
                 goodsExtend.push(arr);
             }
         });
