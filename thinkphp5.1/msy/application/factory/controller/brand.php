@@ -18,7 +18,7 @@ class Brand extends FactoryBase
     {
         $model = new M();
         if(request()->isPost()){
-            return $model -> edit($this ->factory['id']);
+            return $model -> edit($this->factory['factory_id']);
         }
         $categoryModel = new categoryModel;
         $categoryList = $categoryModel -> selectFirstCategory();
