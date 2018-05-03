@@ -226,7 +226,7 @@ $('body').on('click','.checkitem,.check_item_2',function () {
     $('.checkall,.check_all_2').prop('checked',sign);
 });
 //折叠
-$('body').on('click','.folding',function(){
+$('body').on('click','.node_folding',function(){
     var _this = $(this);
     var status = _this.attr('status');
     var _thisTbody = _this.parents('tbody');

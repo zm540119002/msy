@@ -6,10 +6,30 @@ class GoodsCategory extends \common\controller\Base
     /**商品分类-管理
      */
     public function manage(){
-        if(!request()->isGet()){
-            return config('not_get');
+        if(request()->isAjax()){
+            $modelGoodsCategory = new \common\model\GoodsCategory();
+            $where = [
+                'status' => 0,
+            ];
+            $level = input('level',0);
+            if($level){
+                $where['level'] = $level + 1;
+            }
+            $id = input('id',0);
+            if($id){
+                if($level==1){
+                    $where['parent_id_1'] = $id;
+                }
+                if($level==2){
+                    $where['parent_id_2'] = $id;
+                }
+            }
+            $list = $modelGoodsCategory->where($where)->select()->toArray();
+            $this->assign('list',$list);
+            return view('list_tpl');
+        }else{
+            return $this->fetch();
         }
-        return $this->fetch();
     }
 
     /**商品分类-编辑

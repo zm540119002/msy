@@ -34,6 +34,7 @@ class GoodsCategory extends \think\Model {
 	public function pageQuery(){
 		$where = [
 			['status', '=', 0],
+			['level', '=', 1],
 		];
 		$keyword = input('get.keyword','');
 		if($keyword){
