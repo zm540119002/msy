@@ -57,7 +57,7 @@ $(function () {
         var goodsId = $(this).parents('li').data('id');
         var postData ={};
         postData.goodsId = goodsId;
-        postData.shelfStatus = shelfStatus;
+        postData.shelf_status = shelfStatus;
         postData.storeType = storeType;
         var url = module+'goods/setShelf';
         $.ajax({

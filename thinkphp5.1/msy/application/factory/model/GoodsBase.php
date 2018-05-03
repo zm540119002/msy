@@ -116,39 +116,7 @@ class GoodsBase extends Model {
 		}
 	}
 
-	//分页查询
-	public function pageQuery($_where = []){
-		$where = [
-			['status', '=', 0],
-		];
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
-		}
-		$field =['id','name','retail_price','thumb_img',];
-		$_field = [];
-		if(isset($_GET['storeType'])){
-			if($_GET['storeType'] == 'purchases'){
-				$where[] = ['purchases_store','=',1];
-				$_field = ['purchases_shelf','settle_price_purchases','sale_price_purchases'];
-			}
-			if($_GET['storeType'] == 'commission'){
-				$where[] =  ['commission_store','=',1];
-				$_field = ['commission_shelf','settle_price_commission','sale_price_commission'];
-			}
-			if($_GET['storeType'] == 'retail'){
-				$where[] =  ['retail_store','=',1];
-				$_field = ['retail_shelf','settle_price_retail','sale_price_retail'];
-			}
-		}
-		$where = array_merge($_where, $where);
-		$field = array_merge($_field,$field);
-		$order = 'id';
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
-		
-	}
+	
 
 	/**
 	 * @param array $where

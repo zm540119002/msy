@@ -25,7 +25,7 @@ class Goods extends Model {
 
 		if(input('?post.goods_base_id')){//修改
 			//批量修改
-			$idsEdit =[];
+			$idsEdit =[];//修改后和增加的Ids
 			$addData = [];
 			$editData =[];
 			foreach ($data['goodsExtend'] as $k=>$value){
@@ -35,6 +35,7 @@ class Goods extends Model {
 
 				}else{//增加
 					$value['goods_base_id'] = $goodsBaseId;
+					$value['factory_id'] = $factoryId;
 					$value['create_time'] = time();
 					$addData[] = $value;
 
@@ -56,6 +57,7 @@ class Goods extends Model {
 			$_where=[
 				['id','not in',$idsEdit],
 				['goods_base_id','=',$goodsBaseId],
+				['factory_id','=',$factoryId],
 			];
 			$result = $this->where($_where)->delete();
 			if(false === $result){
@@ -66,6 +68,7 @@ class Goods extends Model {
 			$list = $data['goodsExtend'];
 			foreach ($list as $k=>$value){
 				$list[$k]['goods_base_id'] = $goodsBaseId;
+				$list[$k]['goods_base_id'] = $factoryId;
 				$list[$k]['create_time'] = time();
 			}
 			$result = $this->saveAll($list);
@@ -78,38 +81,42 @@ class Goods extends Model {
 		}
 	}
 
-	//分页查询 商品
-	public function pageQuery($_where = []){
+	/**
+	 * 分页查询 商品
+	 * @param array $_where
+	 * @param array $_field
+	 * @param array $_join
+	 * @param string $_order
+	 * @return \think\Paginator
+	 */
+	public function pageQuery($_where=[],$_field=[],$_join=[],$_order=''){
 		$where = [
-			['status', '=', 0],
+			['g.status', '=', 0],
 		];
+
 		$keyword = input('get.keyword','');
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
-		$field =['id','name','retail_price','thumb_img',];
-		$_field = [];
-		if(isset($_GET['storeType'])){
-			if($_GET['storeType'] == 'purchases'){
-				$where[] = ['purchases_store','=',1];
-				$_field = ['purchases_shelf','settle_price_purchases','sale_price_purchases'];
-			}
-			if($_GET['storeType'] == 'commission'){
-				$where[] =  ['commission_store','=',1];
-				$_field = ['commission_shelf','settle_price_commission','sale_price_commission'];
-			}
-			if($_GET['storeType'] == 'retail'){
-				$where[] =  ['retail_store','=',1];
-				$_field = ['retail_shelf','settle_price_retail','sale_price_retail'];
-			}
+		$field = [
+			'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.store_type,
+                gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,
+                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.create_time,gb.update_time,
+                gb.parameters'
+		];
+		if(input('?get.storeType') && (int)input('get.storeType')){
+			$where[] = ['store_type','=',(int)input('get.storeType')];
 		}
+		$join =[
+			['goods_base gb','gb.id = g.goods_base_id'],
+		];
 		$where = array_merge($_where, $where);
 		$field = array_merge($_field,$field);
+		$join = array_merge($_join,$join);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
-		
+		 return $this->alias('g')->join($join)->where($where)->field($field)->order($order)->paginate($pageSize);
 	}
 
 	/**
