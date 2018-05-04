@@ -141,4 +141,20 @@ $(function(){
     $('body').on('click','.forget_dialog',function(){
         forgetPasswordDialog();
     });
+
+    //使用须知
+    var attentionForm=$('#attentionForm').html();
+    $('body').on('click','.use-attention',function(){
+        var pageii = layer.open({
+            title:['《美尚平台使用须知》','border-bottom:1px solid #d9d9d9;'],
+            className:'addCcountLayer',
+            type: 1,
+            content: attentionForm,
+            anim: 'up',
+            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+            success:function(){
+            },
+            btn:['确定']
+        });
+    });
 });

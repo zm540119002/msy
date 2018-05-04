@@ -477,7 +477,8 @@ $(function(){
         $('body,html').animate({scrollTop:0+'px'},500);
     });
     //忘记密码-确定
-    $('body').on('click','.forgetPasswdLayer .forgetPasswordBtn',function(){
+    $('body').on('click','.forgetPasswdLayer .layui-m-layerbtn span',function(){
+        console.log(123);return;
         var $layer=$('.forgetPasswdLayer').find('.forgetPasswd_wrap');
         //验证
         var password=$layer.find('.password').val();
@@ -500,6 +501,7 @@ $(function(){
         }
         var url = controller + 'forgetPassword';
         var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
+        console.log(postData);return;
         $.ajax({
             url:url,
             type:'post',
