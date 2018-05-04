@@ -428,6 +428,40 @@ function isRolling(container){
         // return false;
     });
 }
+
+//忘记密码-弹窗
+var userForgetPasswdForm=$('#userForgetPasswdForm').html();
+var forgetPasswdLayer = null;
+function forgetPasswordDialog(func){
+    forgetPasswdLayer = layer.open({
+        className:'forgetPasswdLayer',
+        content:userForgetPasswdForm,
+        btn:['确定'],
+        success:function(){
+            $('.forgetPasswdLayer .mesg_code').text('获取验证码');
+        },
+        yes:function(index){
+            var content='';
+            var userPhone=$('.forgetPasswdLayer .loginTab').find('.user_phone').val();
+            var password=$('.forgetPasswdLayer .loginTab').find('.password').val();
+            var verifiCode=$('.forgetPasswdLayer .loginTab').find('.tel_code').val();
+            if(!register.phoneCheck(userPhone)){
+                content='请输入正确手机号';
+            }else if(!register.vfyCheck(verifiCode)){
+                content = "请输入正确的验证码";
+            }else if(!register.pswCheck(password)){
+                content = "请输入6-16数字或字母的密码";
+            }
+            if(content){
+                errorTipc(content);
+                return false;
+            }else{
+                layer.close(index)
+            }
+        }
+    });
+}
+
 $(window).on('scroll',function(){
     var scrolltop=$(document).scrollTop();
     if(scrolltop>=300){
@@ -472,6 +506,7 @@ $(function(){
             data:postData,
             error:function(xhr){},
             success:function(data){
+                console.log(data);return;
                 if(data.status==0){
                     errorTipc(data.info);
                     return false;
@@ -482,35 +517,3 @@ $(function(){
         });
     });
 });
-//忘记密码-弹窗
-var userForgetPasswdForm=$('#userForgetPasswdForm').html();
-var forgetPasswdLayer = null;
-function forgetPasswordDialog(func){
-    forgetPasswdLayer = layer.open({
-        className:'forgetPasswdLayer',
-        content:userForgetPasswdForm,
-        btn:['确定'],
-        success:function(){
-            $('.forgetPasswdLayer .mesg_code').text('获取验证码');
-        },
-        yes:function(index){
-            var content='';
-            var userPhone=$('.forgetPasswdLayer .loginTab').find('.user_phone').val();
-            var password=$('.forgetPasswdLayer .loginTab').find('.password').val();
-            var verifiCode=$('.forgetPasswdLayer .loginTab').find('.tel_code').val();
-            if(!register.phoneCheck(userPhone)){
-                content='请输入正确手机号';
-            }else if(!register.vfyCheck(verifiCode)){
-                content = "请输入正确的验证码";
-            }else if(!register.pswCheck(password)){
-                content = "请输入6-16数字或字母的密码";
-            }
-            if(content){
-                errorTipc(content);
-                return false;
-            }else{
-                layer.close(index)
-            }
-        }
-    });
-}
