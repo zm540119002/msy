@@ -7,8 +7,8 @@ class Promotion extends FactoryBase
     public function manage()
     {
         $storeType = input('storeType');
-        if($storeType !='purchases' && $storeType!='commission' && $storeType!='retail') {
-            $storeType = 'purchases';
+        if($storeType !=1 && $storeType!=2 && $storeType!=3) {
+            $storeType = 1;
         }
         $this -> assign('storeType',$storeType);
         return $this->fetch();
@@ -43,8 +43,8 @@ class Promotion extends FactoryBase
             $this -> assign('promotionInfo',$promotionInfo);
         }
         $storeType = input('storeType');
-        if($storeType!='purchases' &&  $storeType!='commission' && $storeType!='retail') {
-            $storeType = 'purchases';
+        if($storeType!=1 &&  $storeType!=2 && $storeType!=3) {
+            $storeType =1;
         }
         $this -> assign('storeType',$storeType);
         return $this->fetch();

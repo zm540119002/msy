@@ -169,6 +169,7 @@ function getPage(currentPage) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getList';
     var postData = $('.addsalesgoodsLayer #form1').serializeObject();
+    console.log(storeType)
     postData.storeType = storeType;
     postData.pageType = 'promotion';
     postData.page = currentPage ? currentPage : 1;
