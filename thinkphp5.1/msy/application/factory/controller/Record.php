@@ -6,7 +6,7 @@ class Record extends FactoryBase
 {
     //部署首页
     public function deployIndex(){
-        $factoryId =  $this->factory['id'];
+        $factoryId =  $this->factory['factory_id'];
         $this ->assign('factoryId',$factoryId);
         return $this->fetch('deploy/index');
     }

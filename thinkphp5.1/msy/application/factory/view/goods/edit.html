@@ -38,36 +38,36 @@
 		<form class="addProductContent">
 			<ul>
 				{notempty name="$goodsInfo"}
-				<input type="hidden" class="goods_id" value="{$goodsInfo.id|default=''}"  name="goods_id">
+				<input type="hidden" class="goods_base_id" value="{$goodsInfo[0]['goods_base_id']|default=''}"  name="goods_base_id">
 				{/notempty}
 
 				<li>
 					<span class="form-title">商品名称</span>
-					<input type="text" name="name" value="{$goodsInfo.name|default=''}" placeholder="商品名称,字数限18字" class="goods-name input-text">
+					<input type="text" name="name" value="{$goodsInfo[0]['name']|default=''}" placeholder="商品名称,字数限18字" class="goods-name input-text">
 				</li>
 				<li>
 					<span class="form-title">商品特点</span>
-					<textarea rows="" cols="" name="trait" placeholder="商品简要说明,字数限28字" class="goods-character input-text">{$goodsInfo.trait|default=''}</textarea>
+					<textarea rows="" cols="" name="trait" placeholder="商品简要说明,字数限28字" class="goods-character input-text">{$goodsInfo[0]['trait']|default=''}</textarea>
 				</li>
 				<li class="columns_flex l-r-sides release-options">
 					<span class="text-color-gr">同步发布选项</span>
 					<span class="columns_flex ">
-						<a href="javascript:void(0);" class="current" id="purchases">采购店铺</a>
-						<a href="javascript:void(0);" id="commission">分成店铺</a>
-						<a href="javascript:void(0);" class="current" id="retail" >零售店铺</a>
+						<a href="javascript:void(0);" class="store_type " data-store-type="1" data-goods-id="">采购店铺</a>
+						<a href="javascript:void(0);" class="store_type" data-store-type="2" data-goods-id="">分成店铺</a>
+						<a href="javascript:void(0);" class="store_type " data-store-type="3" data-goods-id="">零售店铺</a>
 					</span>
 				</li>
 				<li>
 					 <span class="price-flex">
                         <label for="">零售价￥</label>
-                        <input type="text" name="retail_price" value="{$goodsInfo.retail_price|default=''}" placeholder="688.00" class="retail-price">
+                        <input type="text" name="retail_price" value="{$goodsInfo[0]['retail_price']|default=''}" placeholder="688.00" class="retail-price">
 				 </span>
 				</li>
 				<li class="price-options">
 					<span class="form-title">采购店铺价格</span>
                     <span class="price-flex">
                         <label for="">销售价￥</label>
-                        <input type="text" name="sale_price_purchases" value="{$goodsInfo.sale_price_purchases|default=''}" placeholder="68.00" class="sale_price_purchases">
+                        <input type="text" name="" value="" placeholder="68.00" class="sale_price_purchases">
                     </span>
 
 				</li>
@@ -75,48 +75,45 @@
 					<span class="form-title">分成店铺价格</span>
                     <span class="price-flex">
                         <label for="">销售价￥</label>
-                        <input type="text" name="sale_price_commission" value="{$goodsInfo.sale_price_commission|default=''}" placeholder="68.00" class="sale_price_commission">
+                        <input type="text" name="" value="" placeholder="68.00" class="sale_price_commission">
                     </span>
 				</li>
 				<li class="price-options">
 					<span class="form-title">零售店铺价格</span>
                     <span class="price-flex">
                         <label for="">销售价￥</label>
-                        <input type="text" name="sale_price_retail" value="{$goodsInfo.sale_price_retail|default=''}" placeholder="68.00" class="sale_price_retail">
+                        <input type="text" name="" value="" placeholder="68.00" class="sale_price_retail">
                     </span>
 				</li>
 				<li >
 					<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图</a>
-					<input type="hidden" class="hidden_img" value="{$goodsInfo.thumb_img|default=''}" name="thumb_img">
+					<input type="hidden" class="hidden_img" value="{$goodsInfo[0]['thumb_img']|default=''}" name="thumb_img">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图</a>
-					<input type="hidden" class="main_img" value="" data-src="{$goodsInfo.main_img|default=''}" data-picture-num="6" name="main_img">
+					<input type="hidden" class="main_img" value="" data-src="{$goodsInfo[0]['main_img']|default=''}" data-picture-num="6" name="main_img">
 				</li>
 				<li class="">
                     <a href="javascript:void(0);" class="uploadGoodsVideo right-arrow">上传商品视频(可选项)</a>
-                    <input type="hidden" class="goods-video" value="" data-src="{$goodsInfo.goods_video|default=''}" name="goodsVideo">
+                    <input type="hidden" class="goods-video" value="" data-src="{$goodsInfo[0]['goods_video']|default=''}" name="goodsVideo">
                 </li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >归属店铺分类(系列)</a>
-					<input type="hidden" class="goods-tag" data-name="" value="{$goodsInfo.tag|default=''}" name="tag">
+					<input type="hidden" class="goods-tag" data-name="" value="{$goodsInfo[0]['tag']|default=''}" name="tag">
 				</li>
 				<li class="">
                     <a href="javascript:void(0);" class="set-category right-arrow">设置检索品类</a>
-                    <input type="hidden" class="select-category" data-category-id="{$goodsInfo.catArray|default=''}" value="" name="selectCategory">
+                    <input type="hidden" class="select-category" data-category-id="{$goodsInfo[0]['catArray']|default=''}" value="" name="selectCategory">
                 </li>
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑商品参数</a>
-					<input type="hidden" class="goods-parameter" value="{$goodsInfo.parameters|default=''}" name="parameters">
+					<input type="hidden" class="goods-parameter" value="{$goodsInfo[0]['parameters']|default=''}" name="parameters">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="editDetail right-arrow">编辑商品详情</a>
-					<input type="hidden" class="goods-detail" data-echoed_src="" data-src="{$goodsInfo.details_img|default=''}" data-picture-num="0" value="" name="goods_detail">
+					<input type="hidden" class="goods-detail" data-echoed_src="" data-src="{$goodsInfo[0]['details_img']|default=''}" data-picture-num="0" value="" name="goods_detail">
 				</li>
 			</ul>
-			<div>
-				<pre>{$goodsInfo.parameters|default=''}</pre>
-			</div>
 		</form>
 	</section>
 </article>
@@ -131,5 +128,37 @@
 <script type="text/javascript" src="factory_js/goods.js"></script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
+	$(function () {
+		var goodsInfo = '{:json_encode($goodsInfo)}';
+		if(goodsInfo=='null'){
+			$('.store_type').eq(0).addClass('current');
+			$('.store_type').eq(2).addClass('current');
+			
+		}else{
+			goodsInfo = JSON.parse(goodsInfo);
+			$.each(goodsInfo,function(i,item){
+				if(item.store_type == 1){
+					$('.store_type').eq(0).addClass('current');
+					$('.store_type').eq(0).data('goods-id',item.id);
+					$('.sale_price_purchases').val(item.sale_price);
+					$('.price-options').eq(0).show();
+				}
+				if(item.store_type == 2){
+					$('.store_type').eq(1).addClass('current');
+					$('.store_type').eq(1).data('goods-id',item.id);
+					$('.sale_price_commission').val(item.sale_price);
+					$('.price-options').eq(1).show();
+				}
+				if(item.store_type == 3){
+					$('.store_type').eq(2).addClass('current');
+					$('.store_type').eq(2).data('goods-id',item.id);
+					$('.sale_price_retail').val(item.sale_price);
+					$('.price-options').eq(2).show();
+				}
+			});
+		}
+	})
+
+
 </script>
 {/block}
