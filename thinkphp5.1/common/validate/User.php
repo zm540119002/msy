@@ -8,6 +8,7 @@ class User extends \think\Validate
         'mobile_phone'  => [
             'require',
             'mobile',
+            'unique' => '\common\model\User',
         ],
         'captcha'  => [
             'regex' => '/^\d{6}$/',
@@ -45,10 +46,10 @@ class User extends \think\Validate
         ],
     ];
 
-    // register 验证场景定义
-    public function sceneRegister()
+    // login 验证场景定义
+    public function sceneLogin()
     {
-        return $this->only(['mobile_phone','captcha','password'])
-            ->append('unique', '\common\model\User');
+        return $this->only(['mobile_phone','password'])
+            ->remove('mobile_phone',['unique',]);
     }
 }

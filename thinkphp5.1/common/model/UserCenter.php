@@ -40,11 +40,10 @@ class UserCenter extends \think\Model {
 		if(!$validateUser->scene('register')->check($data)) {
 			return errorMsg($validateUser->getError());
 		}
-		$user = $this->_register($data['mobile_phone'],$data['password']);
-		if(!$user){
-			return errorMsg($user);
+		if(!$this->_register($data['mobile_phone'],$data['password'])){
+			return errorMsg('注册失败');
 		}
-		return successMsg($this->_setSession($user));
+		return $this->_login($data['mobile_phone'],$data['password']);
 	}
 
 	/**重置密码
@@ -106,10 +105,10 @@ class UserCenter extends \think\Model {
 		$data['nickname'] = '游客';
 		$data['create_time'] = time();
 		$this->save($data);
-		if($this->getAttr('id')){
-			return $data;
+		if(!$this->getAttr('id')){
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**更新最后登录时间
@@ -141,7 +140,6 @@ class UserCenter extends \think\Model {
 			->field($field)
 			->where($where)
 			->find()->toArray();
-		return $this->getLastSql();
 		if(empty($user)) {
 			return false;
 		}

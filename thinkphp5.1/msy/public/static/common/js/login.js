@@ -108,14 +108,14 @@ $(function(){
             dialog.error(content);
             return false;
         }
-        if(_index==1){
+        if(_index==1){//注册
             var url = controller + 'register';
-        }else{
+        }else{//登录
             var url = action;
         }
         var postData = $('#formLogin').serializeObject();
         $.post(url,postData,function (data) {
-            console.log(data);return;
+            // console.log(data);return;
             if(data.status==0){
                 dialog.error(data.info);
                 return false;
