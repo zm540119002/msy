@@ -428,10 +428,6 @@ function isRolling(container){
         // return false;
     });
 }
-//返回顶部
-$('body').on('click','.backTop',function(){
-    $('body,html').animate({scrollTop:0+'px'},500);
-});
 $(window).on('scroll',function(){
     var scrolltop=$(document).scrollTop();
     if(scrolltop>=300){
@@ -440,3 +436,42 @@ $(window).on('scroll',function(){
         $('.right_sidebar').hide();
     }
 });
+//文档就绪
+$(function(){
+    //返回顶部
+    $('body').on('click','.backTop',function(){
+        $('body,html').animate({scrollTop:0+'px'},500);
+    });
+});
+//重置密码-弹窗
+var userForgetPasswdForm=$('#userForgetPasswdForm').html();
+var forgetPasswdLayer = null;
+function forgetPasswordDialog(func){
+    forgetPasswdLayer = layer.open({
+        className:'forgetPasswdLayer',
+        content:userForgetPasswdForm,
+        btn:['确定'],
+        success:function(){
+            $('.forgetPasswdLayer .mesg_code').text('获取验证码');
+        },
+        yes:function(index){
+            var content='';
+            var userPhone=$('.forgetPasswdLayer .loginTab').find('.user_phone').val();
+            var password=$('.forgetPasswdLayer .loginTab').find('.password').val();
+            var verifiCode=$('.forgetPasswdLayer .loginTab').find('.tel_code').val();
+            if(!register.phoneCheck(userPhone)){
+                content='请输入正确手机号';
+            }else if(!register.vfyCheck(verifiCode)){
+                content = "请输入正确的验证码";
+            }else if(!register.pswCheck(password)){
+                content = "请输入6-16数字或字母的密码";
+            }
+            if(content){
+                errorTipc(content);
+                return false;
+            }else{
+                layer.close(index)
+            }
+        }
+    });
+}
