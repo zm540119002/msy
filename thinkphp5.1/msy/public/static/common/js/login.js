@@ -163,4 +163,16 @@ $(function(){
             }
         });
     });
+    //显示隐藏密码
+    var onOff=true;
+    $('body').on('click','.view-password',function(){
+        var _this=$(this);
+        _this.toggleClass('active');
+        if(onOff){
+            $('.login_item .password').attr('type','text');
+        }else{
+            $('.login_item .password').attr('type','password');
+            onOff=false;
+        }
+    })
 });

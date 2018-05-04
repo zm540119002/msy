@@ -771,7 +771,7 @@ color: #ed6d00;
 .login_item .columns_flex .tel_code{
     width:50%;
 }
-.login_item .columns_flex .mesg_code{
+.login_item .columns_flex .send_sms{
     width:45%;
     padding:.14rem 0;
     background: #FF7BAC;

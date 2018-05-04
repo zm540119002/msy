@@ -55,6 +55,13 @@ class UserCenter extends \think\Controller{
             'smsTemplateCode' => config('custom.sms_template_code'),
             'captcha' => $captcha,
         );
+        /**隔断发送验证码，上线后才开启
+         */
+        //设置session
+        session('captcha_'.$mobilePhone,'123456');
+        return successMsg('验证码为：123456');
+        /**隔断发送验证码，上线后才开启
+         */
         $response = \common\lib\Sms::sendSms($config);
         if('OK'!==$response->Code){
             if('BUSINESS_LIMIT_CONTROL'===$response->Code){
