@@ -31,8 +31,11 @@ class GoodsBase extends Model {
 		$file = array(
 			'thumb_img','main_img','details_img','goods_video'
 		);
-		if(input('?post.goods_id')){//修改，查询
+		if(input('?post.goods_base_id')){//修改，查询
 			$oldGoodsInfo = $this -> getGoodsBase($where,$file);
+			if(empty($oldGoodsInfo)){
+				return errorMsg('没有数据');
+			}
 		}
 		if(!empty($data['thumb_img'])){
 			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
@@ -72,12 +75,13 @@ class GoodsBase extends Model {
 		}
 		if(input('?post.goods_base_id')){//修改
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data, ['id' => $data['goods_id']]);
+			$result = $this->allowField(true)->save($data, ['id' => $data['goods_base_id']]);
+			$goodsBaseId = $data['goods_base_id'];
 		}else{
 			$data['factory_id'] = $factoryId;
 			$data['create_time'] = time();
 			$result = $this -> allowField(true) -> save($data);
-			$goodsId =  $this->getAttr('id');
+			$goodsBaseId =  $this->getAttr('id');
 			if(!$result){
 				$this -> rollback();
 				return errorMsg('失败');
@@ -106,45 +110,13 @@ class GoodsBase extends Model {
 				array_pop($newGoodsVideo);
 				delImgFromPaths($oldGoodsVideo,$newGoodsVideo);
 			}
-			return successMsg("成功",array('id'=>$this->getAttr('id')));
+			return successMsg("成功",array('id'=>$goodsBaseId));
 		}else{
 			return errorMsg('失败');
 		}
 	}
 
-	//分页查询
-	public function pageQuery($_where = []){
-		$where = [
-			['status', '=', 0],
-		];
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
-		}
-		$field =['id','name','retail_price','thumb_img',];
-		$_field = [];
-		if(isset($_GET['storeType'])){
-			if($_GET['storeType'] == 'purchases'){
-				$where[] = ['purchases_store','=',1];
-				$_field = ['purchases_shelf','settle_price_purchases','sale_price_purchases'];
-			}
-			if($_GET['storeType'] == 'commission'){
-				$where[] =  ['commission_store','=',1];
-				$_field = ['commission_shelf','settle_price_commission','sale_price_commission'];
-			}
-			if($_GET['storeType'] == 'retail'){
-				$where[] =  ['retail_store','=',1];
-				$_field = ['retail_shelf','settle_price_retail','sale_price_retail'];
-			}
-		}
-		$where = array_merge($_where, $where);
-		$field = array_merge($_field,$field);
-		$order = 'id';
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
-		
-	}
+	
 
 	/**
 	 * @param array $where

@@ -21,7 +21,7 @@ class Goods extends FactoryBase
             }
             //编辑商品表
             $goodsBaseId =  $result['id'];
-            $result = $goodsModel -> edit($goodsBaseId);
+            $result = $goodsModel -> edit($goodsBaseId,$this->factory['factory_id']);
             if(!$result['status']){
                 $goodsModel ->rollback();
                 return errorMsg('失败');
@@ -91,18 +91,18 @@ class Goods extends FactoryBase
     public function getList(){
         $model = new\app\factory\model\Goods;
         $where = [
-            ['factory_id','=',$this->factory['factory_id']],
+            ['gb.factory_id','=',$this->factory['factory_id']],
         ];
         $list = $model -> pageQuery($where);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'promotion' ){
+            if($_GET['pageType'] == 'promotion' ){//促销
                 return $this->fetch('list_promotion');
             }
-            if($_GET['pageType'] == 'shelf' ){
-                return $this->fetch('list_shelve');
+            if($_GET['pageType'] == 'shelf' ){//上架管理
+                return $this->fetch('list_shelf');
             }
-            if($_GET['pageType'] == 'manage' ){
+            if($_GET['pageType'] == 'manage' ){//管理
                 return $this->fetch('list_manage');
             }
         }
@@ -117,19 +117,8 @@ class Goods extends FactoryBase
         if(request()->isPost()){
             $data = input();
             $model = new \app\factory\model\Goods;
-            if(isset($data['storeType'])){
-                if($data['storeType'] == 'purchases'){
-                    $data['purchases_shelf'] = $data['shelfStatus'];
-                }
-                if($data['storeType'] == 'commission'){
-                    $data['commission_shelf'] = $data['shelfStatus'];
-                }
-                if($data['storeType'] == 'retail'){
-                    $data['retail_shelf'] = $data['shelfStatus'];
-                }
-            }
             $result = $model->allowField(true)
-                ->save($data, ['id' => $data['goodsId'],'factory_id'=>$this->factory['factory_id'],$data['storeType']=>1]);
+                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
            if(false !== $result){
                return successMsg('成功');
            }
