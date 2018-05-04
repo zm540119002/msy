@@ -77,9 +77,10 @@ $(function(){
         _this.toggleClass('active');
         if(onOff){
             $('.login_item .password').attr('type','text');
+            onOff=false;
         }else{
             $('.login_item .password').attr('type','password');
-            onOff=false;
+            onOff=true;
         }
     });
 
