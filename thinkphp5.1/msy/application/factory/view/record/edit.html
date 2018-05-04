@@ -85,7 +85,7 @@
 			{/notempty}
 			<div class="upload-company-map f24">
 				<div>
-					<div class="picture-module company-picture-module">
+					<div class="picture-module company-picture-module active">
 						<input type="file" class="uploadImg uploadSingleImg" name="">
 						{notempty name="recordInfo.company_img"}
 						<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
@@ -187,8 +187,12 @@
 	$(function(){
 		//初始化地址
 		var addressIndex=$('.area-address-name').data('key');
-		var areaAddressArr=addressIndex.split(',');
-		$('.area_address').setArea(areaAddressArr);
+		
+		if(addressIndex){
+			var areaAddressArr=addressIndex.split(',');
+			$('.area_address').setArea(areaAddressArr);
+		}
+		
 		//编辑企业简介
 		var editGoodsParameter=$('#editGoodsParameter').html();
 		$('body').on('click','.editGoodsParameter',function(){
