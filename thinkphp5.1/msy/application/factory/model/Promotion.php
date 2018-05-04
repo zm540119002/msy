@@ -82,18 +82,20 @@ class Promotion extends Model {
 		if(isset($_GET['storeType'])){//选择哪个类型店铺的促销活动
 			$join = [
 				['goods g','g.id = p.goods_id'],
+				['goods_base gb','gb.id = g.goods_base_id'],
 			];
-			$where[] = ['g.sale_type_'.$_GET['storeType'],'=',1];
+			$where[] = ['g.sale_type','=',1];
 		}
 		$field = array(
 			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
-			'g.name as goods_name','g.retail_price'
+			'gb.name as goods_name','gb.retail_price'
 		);
 		$order = 'sort';
 		$where = array_merge($_where, $where);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
+		 $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
+		echo $this->getLastSql();exit;
 	}
 
 	/**

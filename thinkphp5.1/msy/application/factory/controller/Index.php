@@ -10,7 +10,7 @@ class Index extends UserBase
     {
         $model = new \app\factory\model\FactoryUser();
         $uid = $this -> user['id'];
-        $where = [ ['user_id','=',$uid] ];
+        $where = [ ['u.user_id','=',$uid] ];
         $factoryCount = $model -> where($where)->count('id');
         $this -> assign('factoryCount',$factoryCount);
         $file = [
@@ -21,8 +21,8 @@ class Index extends UserBase
         ];
         if($factoryCount > 1){
             $_where = [
-              ['user_id','=',$uid],
-              ['is_default','=',1],
+              ['u.user_id','=',$uid],
+              ['u.is_default','=',1],
             ];
             $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
             $factoryList = $model -> selectFactoryUser($where,$file,$join);
