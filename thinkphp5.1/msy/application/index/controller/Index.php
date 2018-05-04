@@ -11,4 +11,8 @@ class Index extends Controller
 //        return $this->request->param('aa');
         return $this->fetch();
     }
+    public function test()
+    {
+        return $this->fetch();
+    }
 }
