@@ -3,7 +3,6 @@ namespace app\index\controller;
 
 class UserCenter extends \think\Controller{
     /**登录
-     * @return array|mixed
      */
     public function login(){
         if (request()->isAjax()) {
@@ -14,8 +13,16 @@ class UserCenter extends \think\Controller{
         }
     }
 
+    /**注册
+     */
+    public function register(){
+        if (request()->isAjax()) {
+            $modelUser = new \common\model\UserCenter();
+            return $modelUser->register();
+        }
+    }
+
     /**忘记密码
-     * @return array|mixed
      */
     public function forgetPassword(){
         if (request()->isAjax()) {

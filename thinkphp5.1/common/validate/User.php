@@ -8,7 +8,6 @@ class User extends \think\Validate
         'mobile_phone'  => [
             'require',
             'mobile',
-//            'unique'=>'\common\model\User',
         ],
         'captcha'  => [
             'regex' => '/^\d{6}$/',
@@ -27,42 +26,29 @@ class User extends \think\Validate
     ];
     //验证场景
     protected $scene = [
-        //验证码登录
-        'loginCaptcha'  =>  [
-            'mobile_phone',
-//            'captcha',
-        ],
         //密码登录
-        'loginPassword'  =>  [
+        'login'  =>  [
             'mobile_phone',
             'password',
         ],
         //注册
         'register'  =>  [
             'mobile_phone',
+            'captcha',
+            'password',
         ],
         //修改密码
         'resetPassword'  =>  [
             'mobile_phone',
-//            'captcha',
+            'captcha',
+            'password',
         ],
     ];
-    //loginCaptcha场景重定义
-    public function sceneLoginCaptcha()
+
+    // register 验证场景定义
+    public function sceneRegister()
     {
-        return $this->only(['mobile_phone','captcha',])
-            ->remove('mobile_phone','unique');
-    }
-    //loginPassword场景重定义
-    public function sceneLoginPassword()
-    {
-        return $this->only(['mobile_phone','password',])
-            ->remove('mobile_phone','unique');
-    }
-    //resetPassword场景重定义
-    public function sceneResetPassword()
-    {
-        return $this->only(['mobile_phone','password',])
-            ->remove('mobile_phone','unique');
+        return $this->only(['mobile_phone','captcha','password'])
+            ->append('unique', '\common\model\User');
     }
 }

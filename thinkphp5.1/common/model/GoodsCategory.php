@@ -60,6 +60,7 @@ class GoodsCategory extends \think\Model {
 		}
 		$where[] = ['id', '=', $id];
 		$level = input('post.level',0);
+		$whereOr = [];
 		if($level==1){
 			$whereOr[] = ['parent_id_1', '=', $id];
 		}elseif($level==2){
