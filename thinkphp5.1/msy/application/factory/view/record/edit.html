@@ -85,9 +85,13 @@
 			{/notempty}
 			<div class="upload-company-map f24">
 				<div>
-					<div class="picture-module company-picture-module">
+					<div class="picture-module company-picture-module active">
 						<input type="file" class="uploadImg uploadSingleImg" name="">
+						{notempty name="recordInfo.company_img"}
 						<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
+						{else /}
+						<img class="upload_img common_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+						{/notempty}
 						<input type="hidden" class="business-license img" value="{$recordInfo.company_img|default=''}" name="company_img"/>
 					</div>
 					<!--<p>企业营业执照</p>-->
@@ -119,7 +123,12 @@
 					<div class="logo-license">
 						<div class="half">
 							<a class="logo" id="logox">
-								<img id="" src="public_uploads/{$recordInfo.logo_img|default=''}" />
+								{notempty name="recordInfo.logo_img"}
+								<img src="public_uploads/{$recordInfo.logo_img|default=''}" />
+								{else /}
+								<img src="public_img/default/no_pic_40.jpg" />
+								{/notempty}
+
 
 								<input type="hidden" class="logo-src" name="logo_img" value="{$recordInfo.logo_img|default=''}">
 							</a>
@@ -178,8 +187,12 @@
 	$(function(){
 		//初始化地址
 		var addressIndex=$('.area-address-name').data('key');
-		var areaAddressArr=addressIndex.split(',');
-		$('.area_address').setArea(areaAddressArr);
+		
+		if(addressIndex){
+			var areaAddressArr=addressIndex.split(',');
+			$('.area_address').setArea(areaAddressArr);
+		}
+		
 		//编辑企业简介
 		var editGoodsParameter=$('#editGoodsParameter').html();
 		$('body').on('click','.editGoodsParameter',function(){

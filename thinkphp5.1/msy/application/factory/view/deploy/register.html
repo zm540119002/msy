@@ -47,7 +47,12 @@
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="factoryInfo.business_license"}
 									<img class="upload_img" src="public_uploads/{$factoryInfo.business_license|default=''}" alt="">
+									{else /}
+									<img class="upload_img" src="public_img/default/no_pic_100.jpg" alt="">
+									{/notempty}
+
 									<input type="hidden" class="business-license img" value="{$factoryInfo.business_license|default=''}"/>
 								</div>
 								<p>企业营业执照</p>
@@ -55,7 +60,11 @@
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="factoryInfo.auth_letter"}
 									<img class="upload_img" src="public_uploads/{$factoryInfo.auth_letter|default=''}"  alt="">
+									{else /}
+									<img class="upload_img" src="public_img/default/no_pic_100.jpg"  alt="">
+									{/notempty}
 									<input type="hidden" class="agent-authorization img" value="{$factoryInfo.auth_letter|default=''}"/>
 								</div>
 								<p>代办人企业授权信</p>

@@ -19,20 +19,22 @@ class Index extends UserBase
         $join =[
             ['factory f','f.id = u.factory_id'],
         ];
+        $where_new = [ ['u.user_id','=',$uid] ];
         if($factoryCount > 1){
             $_where = [
-              ['user_id','=',$uid],
-              ['is_default','=',1],
+              ['u.user_id','=',$uid],
+              ['u.is_default','=',1],
             ];
             $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
-            $factoryList = $model -> selectFactoryUser($where,$file,$join);
+
+            $factoryList = $model -> selectFactoryUser($where_new,$file,$join);
             $this -> assign('factoryList',$factoryList);
             if(!$factoryInfo){
                 $this -> assign('notDefaultFactory',1);
             }
             $this -> assign('factoryInfo',$factoryInfo);
         }elseif ($factoryCount == 1){
-            $factoryInfo = $model -> getFactoryUser($where,$file,$join);
+            $factoryInfo = $model -> getFactoryUser($where_new,$file,$join);
             $this -> assign('factoryInfo',$factoryInfo);
         }
         return $this->fetch();

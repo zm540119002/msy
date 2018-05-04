@@ -23,15 +23,18 @@ class FactoryBase extends UserBase{
         ];
         if($factoryCount > 1){
             $_where = [
-                ['user_id','=',$uid],
-                ['is_default','=',1],
+                ['u.user_id','=',$uid],
+                ['u.is_default','=',1],
             ];
             $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
             if(!$factoryInfo){
                 $this->success('你有多家厂商入住，请选择一家', 'Index/index');;
             }
         }elseif ($factoryCount == 1){
-            $factoryInfo = $model -> getFactoryUser($where,$file,$join);
+            $where_new = [
+                ['u.user_id','=',$uid],
+            ];
+            $factoryInfo = $model -> getFactoryUser($where_new,$file,$join);
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }
