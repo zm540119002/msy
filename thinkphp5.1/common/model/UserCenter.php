@@ -47,7 +47,6 @@ class UserCenter extends \think\Model {
 	}
 
 	/**重置密码
-	 * @return array
 	 */
 	public function resetPassword(){
 		$postData = input('post.');
@@ -78,14 +77,11 @@ class UserCenter extends \think\Model {
 	}
 
 	/**登录
-	 * @param $mobilePhone
-	 * @param string $password
-	 * @return array
 	 */
 	private function _login($mobilePhone,$password){
 		$user = $this->_get($mobilePhone,$password);
 		if(!$user){
-			return errorMsg('密码错误,请重置！');
+			return errorMsg('账号或密码错误,请重新输入！');
 		}
 		//更新最后登录时间
 		$this->_setLastLoginTimeById($user['id']);
@@ -93,8 +89,6 @@ class UserCenter extends \think\Model {
 	}
 
 	/**注册
-	 * @param $mobilePhone
-	 * @return array
 	 */
 	private function _register($mobilePhone,$passWord){
 		$data['mobile_phone'] = $mobilePhone;
@@ -111,7 +105,7 @@ class UserCenter extends \think\Model {
 		return true;
 	}
 
-	/**更新最后登录时间
+	/**更新-最后登录时间
 	 */
 	private function _setLastLoginTimeById($userId){
 		$where = array(
@@ -119,12 +113,10 @@ class UserCenter extends \think\Model {
 		);
 		$this->where($where)->setField('last_login_time', time());
 	}
+
 	/**获取登录信息
-	 * @param string $mobilePhone 手机号码
-	 * @param string $password	密码
-	 * @return array|bool|null|\PDOStatement|string|Model
 	 */
-	private function _get($mobilePhone,$password=''){
+	private function _get($mobilePhone,$password){
 		if(!$mobilePhone) {
 			return false;
 		}
@@ -140,7 +132,7 @@ class UserCenter extends \think\Model {
 			->field($field)
 			->where($where)
 			->find()->toArray();
-		if(empty($user)) {
+		if(!is_array($user) || empty($user)) {
 			return false;
 		}
 		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
@@ -163,10 +155,6 @@ class UserCenter extends \think\Model {
 	}
 	
 	/**检查验证码
-	 * @param $mobilePhone
-	 * @param $captcha
-	 * @param string $captcha_type
-	 * @return bool
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
 		return true;//上线后再验证
@@ -174,8 +162,6 @@ class UserCenter extends \think\Model {
 	}
 
 	/**检查账号是否存在
-	 * @param $mobilePhone
-	 * @return bool
 	 */
 	private function _checkAccountExist($mobilePhone){
 		return count($this->where('mobile_phone','=',$mobilePhone)->select())?true:false;
