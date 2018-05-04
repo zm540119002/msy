@@ -11,7 +11,7 @@ class FactoryBase extends UserBase{
         $model = new \app\factory\model\FactoryUser();
         $uid = $this -> user['id'];
         $where = [
-            ['u.user_id','=',$uid],
+            ['user_id','=',$uid],
         ];
 
         $factoryCount = $model -> where($where)->count('id');
@@ -31,7 +31,10 @@ class FactoryBase extends UserBase{
                 $this->success('你有多家厂商入住，请选择一家', 'Index/index');;
             }
         }elseif ($factoryCount == 1){
-            $factoryInfo = $model -> getFactoryUser($where,$file,$join);
+            $where_new = [
+                ['u.user_id','=',$uid],
+            ];
+            $factoryInfo = $model -> getFactoryUser($where_new,$file,$join);
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }
