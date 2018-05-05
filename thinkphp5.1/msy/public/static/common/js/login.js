@@ -4,15 +4,9 @@ $(function(){
     $('body').on('click','.loginNav li',function(){
         var _this=$(this);
         if(_this.index()==0){
-            // $('.login_item').find('.send_sms').show();
-            // $('.use-item').show();
-            // $('.forget_password').hide();
             $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
             $('.login_item .password').attr('placeholder','设置密码');
         }else{
-            // $('.login_item').find('.send_sms').hide();
-            // $('.use-item').hide();
-            //  $('.forget_password').show();
             $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
             $('.login_item .password').attr('placeholder','密码');
             $('.login_wrap').removeClass('active');
@@ -42,26 +36,13 @@ $(function(){
         }
         if(_index==0){//注册
             var url = controller + 'register';
-            submitForm($('#formRegister'),url);
+            submitForm($('#formRegister').serializeObject(),url);
         }else{//登录
             var url = action;
-            submitForm($('#formLogin'),url);
+            submitForm($('#formLogin').serializeObject(),url);
         }
-       
     });
-    //提交表单
-    function submitForm(obj,postUrl){
-        var postData = obj.serializeObject();
-        $.post(postUrl,postData,function (data) {
-            // console.log(data);return;
-            if(data.status==0){
-                dialog.error(data.info);
-                return false;
-            }else if(data.status==1){
-                location.href = data.info;
-            }
-        });
-    }
+
     //显示隐藏密码
     var onOff=true;
     $('body').on('click','.view-password',function(){
@@ -151,3 +132,16 @@ $(function(){
         });
     });
 });
+
+//提交表单
+function submitForm(postData,postUrl){
+    $.post(postUrl,postData,function (data) {
+        // console.log(data);return;
+        if(data.status==0){
+            dialog.error(data.info);
+            return false;
+        }else if(data.status==1){
+            location.href = data.info;
+        }
+    });
+}
