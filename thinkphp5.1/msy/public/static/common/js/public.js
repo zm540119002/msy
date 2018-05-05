@@ -474,7 +474,7 @@ $(function(){
     //忘记密码-确定
     $('body').on('click','.forgetPasswordLayer .layui-m-layerbtn span',function(){
         console.log(123);
-        var $layer=$('.forgetPasswordLayer').find('.loginTab');
+        var $layer=$('.forgetPasswordLayer').find('.forgetPasswordTab');
         //验证
         var password=$layer.find('.password').val();
         // var newPassword=$layer.find('.cofirm_password').val();  

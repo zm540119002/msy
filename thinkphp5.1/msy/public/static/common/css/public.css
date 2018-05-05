@@ -1008,11 +1008,15 @@ color: #ed6d00;
 .trademarkTypeLayer .layui-m-layercont,
 .editCompanyPicLayer .layui-m-layercont,
 .addAdminLayer .layui-m-layercont,
-.editVideoLayer .layui-m-layercont{
+.editVideoLayer .layui-m-layercont,
+.forgetPasswordLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
-
+.forgetPasswordLayer .layui-m-layerbtn span[yes]{
+    background: #ff7bac;
+    color:#fff;
+}
 /*机构登记  background:url(../../images/sign-ico.png) repeat-x center 8px;*/
 .login-items{padding:0.30rem 0.28rem;border-top:1px solid #d9d9d9;}
 .apply-data-nav{padding:0.40rem 0.4rem;}
