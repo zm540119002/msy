@@ -62,7 +62,7 @@ class UserCenter extends \think\Model {
 				return errorMsg('账号不存在！');
 			}
 			$saveData['salt'] = create_random_str(10,0);//盐值
-			$saveData['password'] = md5($saveData['salt'] . $postData['pass_word']);//加密
+			$saveData['password'] = md5($saveData['salt'] . $postData['password']);//加密
 			$where = array(
 				'status' => 0,
 				'mobile_phone' => $postData['mobile_phone'],
@@ -71,7 +71,7 @@ class UserCenter extends \think\Model {
 			if(!$response){
 				return errorMsg('重置失败！');
 			}
-			return successMsg('重置成功');
+			return $this->_login($postData['mobile_phone'],$postData['password']);
 		}
 		return errorMsg('资料缺失！');
 	}
