@@ -1,18 +1,18 @@
 $(function(){
     //切换
-    tab_down('.loginNav li','.loginTab .login_wrap','click');
+    tab_down('.loginNav li','.loginTab ','click');
     $('body').on('click','.loginNav li',function(){
         var _this=$(this);
         if(_this.index()==0){
-            $('.login_item').find('.send_sms').show();
-            $('.use-item').show();
-            $('.forget_password').hide();
+            // $('.login_item').find('.send_sms').show();
+            // $('.use-item').show();
+            // $('.forget_password').hide();
             $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
             $('.login_item .password').attr('placeholder','设置密码');
         }else{
-            $('.login_item').find('.send_sms').hide();
-            $('.use-item').hide();
-             $('.forget_password').show();
+            // $('.login_item').find('.send_sms').hide();
+            // $('.use-item').hide();
+            //  $('.forget_password').show();
             $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
             $('.login_item .password').attr('placeholder','密码');
             $('.login_wrap').removeClass('active');
@@ -22,44 +22,37 @@ $(function(){
     //登录 or 注册
     $('body').on('click','.loginBtn,.registerBtn',function(){
         var $layer = $('.loginTab').find('.active');
-        var _index = $('.loginTab').find('.login_wrap.active').index();
+        // var _index = $('.loginTab').index();
+        var userPhone=$('.loginTab.active').find('.user_phone').val();
+        var password=$('.loginTab.active').find('.password').val();
+        var verifiCode=$('.loginTab.active').find('.tel_code').val();
+        var _index = $('.loginNav li.current').index();
         var content='';
-        switch(_index){
-            //注册
-            case 1:
-                var verifiCode=$layer.find('.tel_code').val();
-                var userPhone=$('.loginTab').find('.user_phone').val();
-                var password=$('.loginTab').find('.password').val();
-                if(!register.phoneCheck(userPhone)){
-                    content='请输入正确手机号码';
-                }else if(!register.vfyCheck(verifiCode)){
-                    content = "请输入正确的验证码";
-                }else if(!register.pswCheck(password)){
-                    content = "请输入密码";
-                }
-                break;
-            //登录
-            default:
-                var userPhone=$('.loginTab').find('.user_phone').val();
-                var password=$('.loginTab').find('.password').val();
-                if(!register.phoneCheck(userPhone)){
-                    content='请输入正确手机号';
-                }else if(!register.pswCheck(password)){
-                    content = "请输入6-16数字或字母的密码";
-                }
-                break;
+        if(!register.phoneCheck(userPhone)){
+            content='请输入正确手机号码';
+        }else if(_index==0&&!register.vfyCheck(verifiCode)){
+            content = "请输入正确的验证码";
+        }
+        else if(!register.pswCheck(password)){
+            content = "请输入6-16数字或字母的密码";
         }
         if(content){
             dialog.error(content);
             return false;
         }
-        if(_index==1){//注册
+        if(_index==0){//注册
             var url = controller + 'register';
+            submitForm($('#formRegister'),url);
         }else{//登录
             var url = action;
+            submitForm($('#formLogin'),url);
         }
-        var postData = $('#formLogin').serializeObject();
-        $.post(url,postData,function (data) {
+       
+    });
+    //提交表单
+    function submitForm(obj,postUrl){
+        var postData = obj.serializeObject();
+        $.post(postUrl,postData,function (data) {
             // console.log(data);return;
             if(data.status==0){
                 dialog.error(data.info);
@@ -68,8 +61,7 @@ $(function(){
                 location.href = data.info;
             }
         });
-    });
-
+    }
     //显示隐藏密码
     var onOff=true;
     $('body').on('click','.view-password',function(){
@@ -138,8 +130,9 @@ $(function(){
     });
 
     //忘记密码-弹窗
+    var userForgetPasswdForm=$('#userForgetPasswdForm').html();
     $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog();
+        forgetPasswordDialog(userForgetPasswdForm);
     });
 
     //使用须知
