@@ -376,8 +376,14 @@ var addTimer = function(){
 }();
 
 //错误提示;默认1.2s
-function errorTipc(info,time){
-    $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
+function errorTipc(obj,info,time){
+    console.log(obj);
+    if(obj){
+        console.log(1);
+        obj.find('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
+    }else{
+        $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
+    }
 }
 
 //阻止弹窗滑动穿透2
@@ -478,26 +484,11 @@ $(function(){
             content = "请输入6-16数字或字母的密码";
         }
         if(content){
-            errorTipc(content);
+            errorTipc($('.forgetPasswdLayer'),content);
             return false;
+        }else{
+            var url = controller + 'forgetPassword';
+            submitForm($('.forgetPasswdLayer').find('#formReset').serializeObject(),url);
         }
-        var url = controller + 'forgetPassword';
-        var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
-        console.log(postData);return;
-        $.ajax({
-            url:url,
-            type:'post',
-            data:postData,
-            error:function(xhr){},
-            success:function(data){
-                console.log(data);
-                if(data.status==0){
-                    errorTipc(data.info);
-                    // return false;
-                }else if(data.status==1){
-                    layer.close($layer);
-                }
-            }
-        });
     });
 });
