@@ -4,12 +4,10 @@ $(function(){
     $('body').on('click','.loginNav li',function(){
         var _this=$(this);
         if(_this.index()==0){
-            // $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
             $('.loginBtn').hide();
             $('.registerBtn').show().css('display','block');
             $('.login_item .password').attr('placeholder','设置密码');
         }else{
-            // $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
             $('.loginBtn').show();
             $('.registerBtn').hide();
             $('.login_item .password').attr('placeholder','密码');
@@ -21,32 +19,29 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
         var _this = $(this);
         var method = _this.data('method');
-        console.log(method);
-        return ;
-        var userPhone=$('.loginTab.active').find('.user_phone').val();
-        var password=$('.loginTab.active').find('.password').val();
-        var verifiCode=$('.loginTab.active').find('.tel_code').val();
-        var _index = $('.loginNav li.current').index();
+        var postData = {};
         var content='';
-        if(!register.phoneCheck(userPhone)){
-            content='请输入正确手机号码';
-        }else if(_index==0&&!register.vfyCheck(verifiCode)){
-            content = "请输入正确的验证码";
+        var url = controller + method;
+        if(method=='login'){//登录
+            postData = $('#formLogin').serializeObject();
+        }else if(method=='register'){//注册
+            postData = $('#formRegister').serializeObject();
+        }else{//重置密码
+            url = controller + 'forgetPassword';
+            postData = $('#formReset').serializeObject();
         }
-        else if(!register.pswCheck(password)){
+        if(!register.phoneCheck(postData.mobile_phone)){
+            content='请输入正确手机号码';
+        }else if(method!='login' && !register.vfyCheck(postData.captcha)){
+            content = "请输入正确的验证码";
+        }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
         if(content){
             dialog.error(content);
             return false;
         }
-        if(_index==0){//注册
-            var url = controller + 'register';
-            submitForm($('#formRegister').serializeObject(),url);
-        }else{//登录
-            var url = action;
-            submitForm($('#formLogin').serializeObject(),url);
-        }
+        submitForm(postData,url);
     });
 
     //显示隐藏密码
