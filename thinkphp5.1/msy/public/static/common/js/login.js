@@ -13,10 +13,12 @@ $(function(){
         }
     });
 
-    //登录 or 注册
-    $('body').on('click','.loginBtn,.registerBtn',function(){
-        var $layer = $('.loginTab').find('.active');
-        // var _index = $('.loginTab').index();
+    //登录 or 注册 or 重置密码
+    $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
+        var _this = $(this);
+        var method = _this.parents('form').data('method');
+        console.log(_this.html());
+        return ;
         var userPhone=$('.loginTab.active').find('.user_phone').val();
         var password=$('.loginTab.active').find('.password').val();
         var verifiCode=$('.loginTab.active').find('.tel_code').val();
@@ -44,7 +46,7 @@ $(function(){
     });
 
     //显示隐藏密码
-    var onOff=true;
+    var onOff = true;
     $('body').on('click','.view-password',function(){
         var _this=$(this);
         _this.toggleClass('active');
@@ -126,16 +128,3 @@ $(function(){
         });
     });
 });
-
-//提交表单
-function submitForm(postData,postUrl){
-    $.post(postUrl,postData,function (data) {
-        // console.log(data);return;
-        if(data.status==0){
-            dialog.error(data.info);
-            return false;
-        }else if(data.status==1){
-            location.href = data.info;
-        }
-    });
-}
