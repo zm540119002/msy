@@ -860,6 +860,12 @@ color: #ed6d00;
     color:#fff;
     padding:0.12rem 0;
 }
+.registerBtn{
+    display: none;
+}
+.registerBtn.active{
+    display: block;
+}
 .error_tipc{display:none;color:#ff0000;padding:0.12rem 0;}
 .friend_tipc{
     height:0.45rem;

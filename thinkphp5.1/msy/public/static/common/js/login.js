@@ -4,10 +4,14 @@ $(function(){
     $('body').on('click','.loginNav li',function(){
         var _this=$(this);
         if(_this.index()==0){
-            $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
+            // $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
+            $('.loginBtn').hide();
+            $('.registerBtn').show().css('display','block');
             $('.login_item .password').attr('placeholder','设置密码');
         }else{
-            $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
+            // $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
+            $('.loginBtn').show();
+            $('.registerBtn').hide();
             $('.login_item .password').attr('placeholder','密码');
             $('.login_wrap').removeClass('active');
         }
