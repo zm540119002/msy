@@ -393,7 +393,7 @@ function isRolling(container){
     var button=document.getElementById('formLogin');
     button.addEventListener('click',function(){
        $('input').focus();
-    })
+    });
     container.on('touchstart', function(e){
         //console.log(e.changedTouches[0]);
         // startX = e.changedTouches[0].pageX;
@@ -436,12 +436,17 @@ function isRolling(container){
 }
 
 //忘记密码-弹窗
+$('body').on('click','.forget_dialog',function(){
+    var sectionForgetPassword = $('#sectionForgetPassword').html();
+    forgetPasswordDialog(sectionForgetPassword);
+});
 
-var forgetPasswdLayer = null;
-function forgetPasswordDialog(func){
-    forgetPasswdLayer = layer.open({
-        className:'forgetPasswdLayer',
-        content:func,
+//忘记密码-弹窗
+var forgetPasswordLayer = null;
+function forgetPasswordDialog(content){
+    forgetPasswordLayer = layer.open({
+        className:'forgetPasswordLayer',
+        content:content,
         btn:['确定'],
         success:function(){
             
@@ -467,9 +472,9 @@ $(function(){
         $('body,html').animate({scrollTop:0+'px'},500);
     });
     //忘记密码-确定
-    $('body').on('click','.forgetPasswdLayer .layui-m-layerbtn span',function(){
+    $('body').on('click','.forgetPasswordLayer .layui-m-layerbtn span',function(){
         console.log(123);
-        var $layer=$('.forgetPasswdLayer').find('.loginTab');
+        var $layer=$('.forgetPasswordLayer').find('.loginTab');
         //验证
         var password=$layer.find('.password').val();
         // var newPassword=$layer.find('.cofirm_password').val();  
@@ -484,11 +489,11 @@ $(function(){
             content = "请输入6-16数字或字母的密码";
         }
         if(content){
-            errorTipc($('.forgetPasswdLayer'),content);
+            errorTipc($('.forgetPasswordLayer'),content);
             return false;
         }else{
             var url = controller + 'forgetPassword';
-            submitForm($('.forgetPasswdLayer').find('#formReset').serializeObject(),url);
+            submitForm($('.forgetPasswordLayer').find('#formReset').serializeObject(),url);
         }
     });
 });

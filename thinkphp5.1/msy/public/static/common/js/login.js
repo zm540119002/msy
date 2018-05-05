@@ -110,12 +110,6 @@ $(function(){
         });
     });
 
-    //忘记密码-弹窗
-    var userForgetPasswdForm=$('#userForgetPasswdForm').html();
-    $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog(userForgetPasswdForm);
-    });
-
     //使用须知
     var attentionForm=$('#attentionForm').html();
     $('body').on('click','.use-attention',function(){
