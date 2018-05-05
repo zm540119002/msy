@@ -376,14 +376,14 @@ var addTimer = function(){
 }();
 
 //错误提示;默认1.2s
-function errorTipc(obj,info,time){
-    console.log(obj);
-    if(obj){
-        console.log(1);
-        obj.find('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
-    }else{
+function errorTipc(info,time){
+    // console.log(obj);
+    // if(obj){
+    //     console.log(1);
+    //     obj.find('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
+    // }else{
         $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
-    }
+    // }
 }
 
 //阻止弹窗滑动穿透2

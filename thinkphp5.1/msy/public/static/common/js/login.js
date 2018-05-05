@@ -28,7 +28,7 @@ $(function(){
             postData = $('#formRegister').serializeObject();
         }else{//重置密码
             url = controller + 'forgetPassword';
-            postData = $('#formReset').serializeObject();
+            postData = $('.forgetPasswordLayer #formReset').serializeObject();
         }
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
@@ -37,11 +37,15 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
-        if(content){
+        if(method &&content){
             dialog.error(content);
             return false;
+        }else if(content){
+            errorTipc(content);
+            return false;
+        }else{   
+            submitForm(postData,url);
         }
-        submitForm(postData,url);
     });
 
     //显示隐藏密码
