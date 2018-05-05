@@ -758,6 +758,9 @@ color: #ed6d00;
     background:#fff;
 }
 /*2018-4-27 重改*/
+.loginTab.hide{
+    display: none;
+}
 .login_item .columns_flex span{
     width:100px;
     line-height: 32px;
