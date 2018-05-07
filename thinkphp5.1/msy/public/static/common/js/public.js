@@ -436,7 +436,6 @@ function isRolling(container){
 }
 
 //忘记密码-弹窗
-// var forgetPasswordLayer = null;
 function forgetPasswordDialog(content){
     layer.open({
         className:'forgetPasswordLayer',
@@ -476,33 +475,6 @@ $(function(){
         var sectionForgetPassword = $('#sectionForgetPassword').html();
         forgetPasswordDialog(sectionForgetPassword);
     });
-
-    //忘记密码-确定
-    // $('body').on('click','.forgetPasswordLayer .layui-m-layerbtn span',function(){
-    //     console.log(123);
-    //     return;
-    //     var $layer=$('.forgetPasswordLayer').find('.forgetPasswordTab');
-    //     //验证
-    //     var password=$layer.find('.password').val();
-    //     // var newPassword=$layer.find('.cofirm_password').val();
-    //     var userPhone=$layer.find('.user_phone').val();
-    //     var verifiCode=$layer.find('.tel_code').val();
-    //     var content='';
-    //     if(!register.phoneCheck(userPhone)   ){
-    //         content = "请输入正确的手机号码";
-    //     }else if(!register.vfyCheck(verifiCode)){
-    //         content = "请输入正确的验证码";
-    //     }else if(!register.pswCheck(password)){
-    //         content = "请输入6-16数字或字母的密码";
-    //     }
-    //     if(content){
-    //         errorTipc($('.forgetPasswordLayer'),content);
-    //         return false;
-    //     }else{
-    //         var url = controller + 'forgetPassword';
-    //         submitForm($('.forgetPasswordLayer').find('#formReset').serializeObject(),url);
-    //     }
-    // });
 });
 
 $(window).on('scroll',function(){
