@@ -140,7 +140,7 @@
 })(jQuery);
 
 //限制input、textarea字数
-var maximumWord =function(obj,max){
+var maximumWord = function(obj,max){
     var val=$(obj).val().length;
     var content='最多只能输入'+max+'个字';
     if(val>max){
@@ -162,7 +162,7 @@ $('.top_menu_list a').on('click',function(){
         if(index>0){
             dialog.error('功能正在开发中,暂未上线,敬请期待');
         }
-})
+});
 //选项卡切换
 function tab_down(tab_k, tab_con, tab_dz) {
     var $div_li = $(tab_k);
@@ -242,31 +242,32 @@ function swipe(elemObj){
         }
     );
 }
+
 function swiper(elemObj){
     var swiper = new Swiper(elemObj, {
-        slidesPerView: 5,
-        spaceBetween: 50,
-        // init: false,
-        pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
+            slidesPerView: 5,
+            spaceBetween: 50,
+            // init: false,
+            pagination: {
+            el: '.swiper-pagination',
+            clickable: true
         },
         breakpoints: {
         1024: {
             slidesPerView: 4,
-            spaceBetween: 40,
+            spaceBetween: 40
         },
         768: {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 30
         },
         640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 20
         },
         320: {
             slidesPerView: 1,
-            spaceBetween: 10,
+            spaceBetween: 10
         }
         }
     });
@@ -306,7 +307,7 @@ var addTimer = function(){
                 go(unix);
             },1000);
         }
-        
+
         list.push(
             {
                 ele:document.getElementById(id),
@@ -314,7 +315,7 @@ var addTimer = function(){
                 ctime:timeStamp2
             }
         );
-    }
+    };
 
     function go(opt) {
         for (var i = 0; i < list.length; i++) {
@@ -354,9 +355,6 @@ var addTimer = function(){
             var hour =Math.floor(distancetime/1000/60/60%24);
             var day = Math.floor(distancetime/1000/60/60/24);
 
-            // if(ms<100){
-            //     ms = "0"+ ms;
-            // }
             if(sec<10){
                 sec = "0"+ sec;
             }
@@ -377,13 +375,7 @@ var addTimer = function(){
 
 //错误提示;默认1.2s
 function errorTipc(info,time){
-    // console.log(obj);
-    // if(obj){
-    //     console.log(1);
-    //     obj.find('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
-    // }else{
-        $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
-    // }
+    $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
 }
 
 //阻止弹窗滑动穿透2
@@ -395,9 +387,6 @@ function isRolling(container){
        $('input').focus();
     });
     container.on('touchstart', function(e){
-        //console.log(e.changedTouches[0]);
-        // startX = e.changedTouches[0].pageX;
-        // startY = e.changedTouches[0].pageY;
         startX = e.originalEvent.touches[0].pageX;
         startY = e.originalEvent.touches[0].pageY;
         
