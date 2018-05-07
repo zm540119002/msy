@@ -19,11 +19,13 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
-        \common\Cache\Menu::removeAllDisplayMenu($this->user['id']);
+
         \common\Cache\Menu::removeAllMenuIds($this->user['id']);
-        $allDisplayMenu = \common\Cache\Menu::getAllDisplayMenu($this->user);
-        $this->assign('allDisplayMenu',$allDisplayMenu);
         $allMenuIds = \common\Cache\Menu::getAllMenuIds($this->user);
         $this->assign('allMenuIds',$allMenuIds);
+
+        \common\Cache\Menu::removeAllDisplayMenu($this->user['id']);
+        $allDisplayMenu = \common\Cache\Menu::getAllDisplayMenu($this->user);
+        $this->assign('allDisplayMenu',$allDisplayMenu);
     }
 }
