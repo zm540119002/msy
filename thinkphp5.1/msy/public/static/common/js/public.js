@@ -441,12 +441,7 @@ function forgetPasswordDialog(content){
         className:'forgetPasswordLayer',
         content:content,
         btn:['确定'],
-        success:function(){
-            
-        },
-        yes:function(index){
-           
-        }
+        yes:function(index){}
     });
 }
 
@@ -469,7 +464,7 @@ $(function(){
         $('body,html').animate({scrollTop:0+'px'},500);
     });
 
-    //忘记密码-弹窗
+    //忘记密码-触发弹窗
     $('body').on('click','.forget_dialog',function(){
         var sectionForgetPassword = $('#sectionForgetPassword').html();
         forgetPasswordDialog(sectionForgetPassword);
