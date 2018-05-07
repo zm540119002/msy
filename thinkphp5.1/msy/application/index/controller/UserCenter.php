@@ -6,7 +6,7 @@ class UserCenter extends \think\Controller{
      */
     public function login(){
         if (request()->isAjax()) {
-            $modelUser = new \common\model\UserCenter();
+            $modelUser = new \common\model\UserCenter();var_dump($modelUser);
             return $modelUser->login();
         } else {
             return $this->fetch();

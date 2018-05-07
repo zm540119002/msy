@@ -65,9 +65,9 @@
 		<div class="columns_flex f20">
 			<a href="javascript:void(0);" class="deployed-deployment">入驻部署</a>
 			<a href="javascript:void(0);" class="order-management">订单管理</a>
-			<a href="javascript:void(0);" class="order-management">采购店铺</a>
-			<a href="javascript:void(0);" class="order-management">分成店铺</a>
-			<a href="javascript:void(0);" class="order-management">零售店铺</a>
+			<a href="javascript:void(0);" class="order-management-change">采购店铺</a>
+			<a href="javascript:void(0);" class="order-management-change">分成店铺</a>
+			<a href="javascript:void(0);" class="order-management-change">零售店铺</a>
 		</div>
 	</section>
 	{notempty name="factoryList"}
@@ -150,10 +150,20 @@
 		if(notDefaultFactory == 1){
 			factoryList();
 		}
+
 		$('body').on('click','.deployed-deployment',function () {
 			var factoryCount = {$factoryCount};
 			if(factoryCount){
 				location.href = module + 'Record/deployIndex';
+			}else {
+				dialog.success('未入驻，请先申请入住',module+'deploy/register')
+			}
+		})
+
+		$('body').on('click','.order-management',function () {
+			var factoryCount = {$factoryCount};
+			if(factoryCount){
+				location.href = module + 'Order/index';
 			}else {
 				dialog.success('未入驻，请先申请入住',module+'deploy/register')
 			}
