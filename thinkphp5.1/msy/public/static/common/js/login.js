@@ -4,66 +4,52 @@ $(function(){
     $('body').on('click','.loginNav li',function(){
         var _this=$(this);
         if(_this.index()==0){
-            // $('.login_item').find('.send_sms').show();
-            // $('.use-item').show();
-            // $('.forget_password').hide();
-            $('.entry-button').text('注册').removeClass('loginBtn').addClass('registerBtn');
+            $('.loginBtn').hide();
+            $('.registerBtn').show().css('display','block');
             $('.login_item .password').attr('placeholder','设置密码');
         }else{
-            // $('.login_item').find('.send_sms').hide();
-            // $('.use-item').hide();
-            //  $('.forget_password').show();
-            $('.entry-button').text('登录').removeClass('registerBtn').addClass('loginBtn');
+            $('.loginBtn').show();
+            $('.registerBtn').hide();
             $('.login_item .password').attr('placeholder','密码');
             $('.login_wrap').removeClass('active');
         }
     });
 
-    //登录 or 注册
-    $('body').on('click','.loginBtn,.registerBtn',function(){
-        var $layer = $('.loginTab').find('.active');
-        // var _index = $('.loginTab').index();
-        var userPhone=$('.loginTab.active').find('.user_phone').val();
-        var password=$('.loginTab.active').find('.password').val();
-        var verifiCode=$('.loginTab.active').find('.tel_code').val();
-        var _index = $('.loginNav li.current').index();
+    //登录 or 注册 or 重置密码
+    $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
+        var _this = $(this);
+        var method = _this.data('method');
+        var postData = {};
         var content='';
-        if(!register.phoneCheck(userPhone)){
-            content='请输入正确手机号码';
-        }else if(_index==0&&!register.vfyCheck(verifiCode)){
-            content = "请输入正确的验证码";
+        var url = controller + method;
+        if(method=='login'){//登录
+            postData = $('#formLogin').serializeObject();
+        }else if(method=='register'){//注册
+            postData = $('#formRegister').serializeObject();
+        }else{//重置密码
+            url = controller + 'forgetPassword';
+            postData = $('.forgetPasswordLayer #formReset').serializeObject();
         }
-        else if(!register.pswCheck(password)){
+        if(!register.phoneCheck(postData.mobile_phone)){
+            content='请输入正确手机号码';
+        }else if(method!='login' && !register.vfyCheck(postData.captcha)){
+            content = "请输入正确的验证码";
+        }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
-        if(content){
+        if(method &&content){
             dialog.error(content);
             return false;
+        }else if(content){
+            errorTipc(content);
+            return false;
+        }else{   
+            submitForm(postData,url);
         }
-        if(_index==0){//注册
-            var url = controller + 'register';
-            submitForm($('#formRegister'),url);
-        }else{//登录
-            var url = action;
-            submitForm($('#formLogin'),url);
-        }
-       
     });
-    //提交表单
-    function submitForm(obj,postUrl){
-        var postData = obj.serializeObject();
-        $.post(postUrl,postData,function (data) {
-            // console.log(data);return;
-            if(data.status==0){
-                dialog.error(data.info);
-                return false;
-            }else if(data.status==1){
-                location.href = data.info;
-            }
-        });
-    }
+
     //显示隐藏密码
-    var onOff=true;
+    var onOff = true;
     $('body').on('click','.view-password',function(){
         var _this=$(this);
         _this.toggleClass('active');
@@ -127,12 +113,6 @@ $(function(){
                 return false;
             }
         });
-    });
-
-    //忘记密码-弹窗
-    var userForgetPasswdForm=$('#userForgetPasswdForm').html();
-    $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog(userForgetPasswdForm);
     });
 
     //使用须知

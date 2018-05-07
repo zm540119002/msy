@@ -377,7 +377,13 @@ var addTimer = function(){
 
 //错误提示;默认1.2s
 function errorTipc(info,time){
-    $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
+    // console.log(obj);
+    // if(obj){
+    //     console.log(1);
+    //     obj.find('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
+    // }else{
+        $('.error_tipc').text(info?info:'出错啦！').fadeIn().fadeOut(time?time:1200);
+    // }
 }
 
 //阻止弹窗滑动穿透2
@@ -387,7 +393,7 @@ function isRolling(container){
     var button=document.getElementById('formLogin');
     button.addEventListener('click',function(){
        $('input').focus();
-    })
+    });
     container.on('touchstart', function(e){
         //console.log(e.changedTouches[0]);
         // startX = e.changedTouches[0].pageX;
@@ -430,12 +436,11 @@ function isRolling(container){
 }
 
 //忘记密码-弹窗
-
-var forgetPasswdLayer = null;
-function forgetPasswordDialog(func){
-    forgetPasswdLayer = layer.open({
-        className:'forgetPasswdLayer',
-        content:func,
+// var forgetPasswordLayer = null;
+function forgetPasswordDialog(content){
+    layer.open({
+        className:'forgetPasswordLayer',
+        content:content,
         btn:['确定'],
         success:function(){
             
@@ -446,6 +451,60 @@ function forgetPasswordDialog(func){
     });
 }
 
+//提交表单
+function submitForm(postData,postUrl){
+    $.post(postUrl,postData,function (data) {
+        // console.log(data);return;
+        if(data.status==0){
+            dialog.error(data.info);
+            return false;
+        }else if(data.status==1){
+            location.href = data.info;
+        }
+    });
+}
+
+//文档就绪
+$(function(){
+    //返回顶部
+    $('body').on('click','.backTop',function(){
+        $('body,html').animate({scrollTop:0+'px'},500);
+    });
+
+    //忘记密码-弹窗
+    $('body').on('click','.forget_dialog',function(){
+        var sectionForgetPassword = $('#sectionForgetPassword').html();
+        forgetPasswordDialog(sectionForgetPassword);
+    });
+
+    //忘记密码-确定
+    // $('body').on('click','.forgetPasswordLayer .layui-m-layerbtn span',function(){
+    //     console.log(123);
+    //     return;
+    //     var $layer=$('.forgetPasswordLayer').find('.forgetPasswordTab');
+    //     //验证
+    //     var password=$layer.find('.password').val();
+    //     // var newPassword=$layer.find('.cofirm_password').val();
+    //     var userPhone=$layer.find('.user_phone').val();
+    //     var verifiCode=$layer.find('.tel_code').val();
+    //     var content='';
+    //     if(!register.phoneCheck(userPhone)   ){
+    //         content = "请输入正确的手机号码";
+    //     }else if(!register.vfyCheck(verifiCode)){
+    //         content = "请输入正确的验证码";
+    //     }else if(!register.pswCheck(password)){
+    //         content = "请输入6-16数字或字母的密码";
+    //     }
+    //     if(content){
+    //         errorTipc($('.forgetPasswordLayer'),content);
+    //         return false;
+    //     }else{
+    //         var url = controller + 'forgetPassword';
+    //         submitForm($('.forgetPasswordLayer').find('#formReset').serializeObject(),url);
+    //     }
+    // });
+});
+
 $(window).on('scroll',function(){
     var scrolltop=$(document).scrollTop();
     if(scrolltop>=300){
@@ -453,51 +512,4 @@ $(window).on('scroll',function(){
     }else{
         $('.right_sidebar').hide();
     }
-});
-//文档就绪
-$(function(){
-    //返回顶部
-    $('body').on('click','.backTop',function(){
-        $('body,html').animate({scrollTop:0+'px'},500);
-    });
-    //忘记密码-确定
-    $('body').on('click','.forgetPasswdLayer .layui-m-layerbtn span',function(){
-        console.log(123);
-        var $layer=$('.forgetPasswdLayer').find('.loginTab');
-        //验证
-        var password=$layer.find('.password').val();
-        // var newPassword=$layer.find('.cofirm_password').val();  
-        var userPhone=$layer.find('.user_phone').val();
-        var verifiCode=$layer.find('.tel_code').val();
-        var content='';
-        if(!register.phoneCheck(userPhone)   ){
-            content = "请输入正确的手机号码";
-        }else if(!register.vfyCheck(verifiCode)){
-            content = "请输入正确的验证码";
-        }else if(!register.pswCheck(password)){
-            content = "请输入6-16数字或字母的密码";
-        }
-        if(content){
-            errorTipc(content);
-            return false;
-        }
-        var url = controller + 'forgetPassword';
-        var postData = $('.forgetPasswdLayer').find('#formReset').serializeObject();
-        console.log(postData);return;
-        $.ajax({
-            url:url,
-            type:'post',
-            data:postData,
-            error:function(xhr){},
-            success:function(data){
-                console.log(data);
-                if(data.status==0){
-                    errorTipc(data.info);
-                    // return false;
-                }else if(data.status==1){
-                    layer.close($layer);
-                }
-            }
-        });
-    });
 });

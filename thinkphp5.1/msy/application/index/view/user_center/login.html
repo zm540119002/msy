@@ -5,14 +5,34 @@
 {/block}
 {block name="common"}
 <section class="userInfoWrapper">
-    {include file="template/login_common.html" /}
+    <div class="f24 bomb_box">
+        <div class="ucenter_logo">
+            <img src="public_img/ucenter_logo.png" alt="">
+        </div>
+        <ul class="loginNav">
+            <li >注册</li>
+            <li class="current">登录</li>
+        </ul>
+        <form class="loginTab hide" id="formRegister">
+            {include file="template/register_common.html" /}
+            <div class="login_item use-item ">
+                注册表示同意
+                <a href="javascript:void(0);" class="f06c use-attention"><<美尚平台使用须知>></a>
+            </div>
+        </form>
+        <a href="javascript:void(0);" class="registerBtn entry-button"  data-method="register">注册</a>
+        <form class="loginTab active" id="formLogin">
+            {include file="template/login_common.html" /}
+        </form>
+        <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
+    </div>
+    {include file="template/attention.html" /}
 </section>
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
     var send_sms = '{:url("sendSms")}';
-    $(function(){
-    });
 </script>
+<script type="text/javascript" src="public_js/login.js"></script>
 {/block}
