@@ -76,4 +76,5 @@ class GoodsCategory extends \think\Model {
 		}
 		return successMsg('成功');
 	}
+
 }
