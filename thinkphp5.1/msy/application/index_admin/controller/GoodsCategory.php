@@ -76,4 +76,21 @@ class GoodsCategory extends \common\controller\Base
         $modelGoodsCategory = new \common\model\GoodsCategory();
         return $modelGoodsCategory->del();
     }
+
+
+    /**获取二级分类
+     * @return mixed
+     *
+     */
+    public function getSecondCategoryById()
+    {
+        if(request()->isGet()){
+            $cat_id_1=(int)input('get.cat_id_1');
+            $model = new \common\model\GoodsCategory();
+            $secondCategory =  $model -> getSecondCategoryById($cat_id_1);
+            $this -> assign('secondCategory',$secondCategory);
+            return $this->fetch('template/category_second.html');
+        }
+    }
+
 }
