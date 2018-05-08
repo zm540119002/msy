@@ -7,11 +7,22 @@
 	
 <!--</section>-->
 <article class="f24">
-	<div class="new-store-type">
-		<ul id="status " class="status f24 weui-flex">
-			<li class="weui-flex-item switch-item current"><span class="base_info"></span><em></em>店铺类型</li>
-			<li class="weui-flex-item switch-item "><span class="upload-prove"></span><em class="last"></em>店铺名称</li>
-		</ul>
+	<section class="bottomLine">
+        <div class="top_bar top-title">
+            <span></span>
+            <h2>申请开新店</h2>
+            <!--<a href="" class="home">首页</a>-->
+        </div>
+    </section>
+	<div class="new-store-type applyNewStoreLayer">
+		<div id="wizard" class="page-bd ">
+			<nav class="apply-data-nav trademark-nav">
+				<ul id="status " class="status f24 weui-flex">
+					<li class="weui-flex-item switch-item current"><span class="base_info"></span><em></em>店铺类型</li>
+					<li class="weui-flex-item switch-item "><span class="upload-prove"></span><em class="last"></em>店铺名称</li>
+				</ul>
+			</nav>
+		</div>
 		<div class="error_tipc"></div>
 		<div class="stroe-content">
 			<div class="new-store-item store-one">
@@ -26,7 +37,7 @@
 					<a href="javascript:void(0);" data-pattern="1">B2B分成商城</a>
 					<a href="javascript:void(0);" data-pattern="2">B2B零售商城</a>
 				</div>
-				<a class="next-step" href="javascript:void(0);">下一步</a>
+				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
 			</div>
 			<div class="new-store-item store-two hide">
 				<ul>
@@ -52,6 +63,7 @@
 						</div>
 					</li>
 				</ul>
+				<a class="step-btn apply-new-store" href="javascript:void(0);">申请开通</a>
 			</div>
 		</div>
 	</div>
@@ -66,8 +78,8 @@
 
 <script type="text/javascript">
 	$(function(){
-		var postData=[],data={};
-		var storetypeArr=[];
+		var postData={};
+		var typeId,patternId;
 		//切换
 		$('body').on('click','.applyNewStoreLayer li.weui-flex-item',function(){
 			var index=$(this).index();
@@ -95,8 +107,8 @@
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
 			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
-				var typeId=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
-				var patternId=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
+				typeId=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+				patternId=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
 				$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
 				$('.store-two').show();
 				$('.store-one').hide();
@@ -106,51 +118,34 @@
 				}
 				console.log(postData);
 			}else{
-				errorTipc('请选择店铺类型和经营模式');
+				dialog.error('请选择店铺类型和经营模式');
 			}
 		});
 		//开店弹窗
 		var applyNewStore=$('#applyNewStore').html();
 		$('body').on('click','.apply-new-store',function(){
-			layer.open({
-				title:['申请开新店','border-bottom:1px solid #d9d9d9;'],
-				className:'applyNewStoreLayer',
-				content:applyNewStore,
-				btn:['申请开通'],
-				yes:function(index){
-
-					var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
-					var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
-					var storeList=$('.applyNewStoreLayer .store-list');
-					if(storeType.hasClass('current')&&storePattern.hasClass('current')){
-						if(storeList.hasClass('current')){
-							// $.each($('.applyNewStoreLayer .store-list'),function(){
-							//     var _this=$(this);
-							//     if(_this.hasClass('current')){
-							//         storetypeArr=[];
-							//         var storeId=_this.data('store-id');
-							//         storetypeArr.push(storeId);
-							//     }
-							// })
-							storeId=$('.applyNewStoreLayer .store-list.current').data('store-id');
-							postData={
-								typeId:typeId,
-								patternId:patternId,
-								storeId:storeId
-							};
-							console.log(postData);
-							layer.close(index);
-						}
-						else{
-							errorTipc('请选择店铺');
-							return false;
-						}
-					}else {
-						errorTipc('请选择店铺类型和经营模式');
-						return false;
-					}
+		
+			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+			var storeList=$('.applyNewStoreLayer .store-list');
+			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
+				if(storeList.hasClass('current')){
+					storeId=$('.applyNewStoreLayer .store-list.current').data('store-id');
+					postData={
+						typeId:typeId,
+						patternId:patternId,
+						storeId:storeId
+					};
+					console.log(postData);
 				}
-			})
+				else{
+					dialog.error('请选择店铺');
+					return false;
+				}
+			}else {
+				dialog.error('请选择店铺类型和经营模式');
+				return false;
+			}
 		});
 
 	})

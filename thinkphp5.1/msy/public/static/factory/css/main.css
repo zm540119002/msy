@@ -700,10 +700,11 @@
     display:none;
 }
 .store-type-menu{
-    margin:0 0 .10rem 0;
+    margin:0 0 15px 0;
 }
 .store-type-menu a{
     padding:.10rem .05rem;
+    margin:0 10px 0 0;
     border:1px solid #009A3E;
     border-radius:3px;
     color:#009A3E;
@@ -712,13 +713,16 @@
     background: #009A3E;
     color:#fff;
 }
+.new-store-item .content-label{
+    margin-bottom:20px;
+}
 .new-store-type .next-step{
-    display: block;
+    /*display: block;
     width:2rem;
     text-align:center;
     margin:1rem auto 0;
     background:#ff7aab;
-    color:#fff;
+    color:#fff;*/
 }
 .applyNewStoreLayer .store-list{
     margin:0 0 .15rem 0;
