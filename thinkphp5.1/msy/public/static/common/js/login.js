@@ -1,19 +1,6 @@
 $(function(){
-    //切换
+    //登录 / 注册-切换
     tab_down('.loginNav li','.loginTab ','click');
-    $('body').on('click','.loginNav li',function(){
-        var _this=$(this);
-        if(_this.index()==0){
-            $('.loginBtn').hide();
-            $('.registerBtn').show().css('display','block');
-            $('.login_item .password').attr('placeholder','设置密码');
-        }else{
-            $('.loginBtn').show();
-            $('.registerBtn').hide();
-            $('.login_item .password').attr('placeholder','密码');
-            $('.login_wrap').removeClass('active');
-        }
-    });
 
     //登录 or 注册 or 重置密码
     $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
@@ -37,7 +24,7 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
-        if(method &&content){
+        if(method && content){
             dialog.error(content);
             return false;
         }else if(content){

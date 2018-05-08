@@ -52,4 +52,15 @@
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
-{block name="script"}{/block}
+{block name="script"}
+<script type="text/javascript">
+    function create1(pro) {
+        console.log("pro : " + pro);
+        return function(obj1, obj2){
+            console.log(obj1 + " -- " + obj2);
+            return obj1 + obj2;
+        }
+    }
+    create1('aaa')(1,2);
+</script>
+{/block}
