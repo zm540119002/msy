@@ -361,6 +361,10 @@ i{
     height:auto;
     vertical-align: middle;
 }
+.small_default_img{
+    width:15%;
+    height:100%;
+}
 /*美尚云生态圈平台*/
 .top_nav_fixed{
     /*height:94px;*/

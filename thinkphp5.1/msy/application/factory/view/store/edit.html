@@ -44,9 +44,9 @@
 					{notempty name="factoryStore"}
 					<li class="columns_flex store-list" data-store-id="{$factoryStore.id|default=''}" data-foreign_id="{$factoryStore.id|default=''}">
 						{notempty name="factoryStore.img"}
-						<img src="public_uploads/{$factoryStore.img|default=''}" alt="">
+						<img class="small_default_img" src="public_uploads/{$factoryStore.img|default=''}" alt="">
 						{else /}
-						<img src="public_img/default/no_pic_40.jpg" alt="">
+						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 						{/notempty}
 						<div>
 							<p>{$factoryStore.name}官方旗舰店</p>
@@ -61,9 +61,9 @@
 					{volist name="brandStores" id="vo"}
 					<li class="columns_flex store-list" data-store-id="{$vo.id|default=''}" data-foreign_id="{$vo.id|default=''}">
 						{notempty name="vo.img"}
-						<img src="public_uploads/{$vo.img|default=''}" alt="">
+						<img class="small_default_img" src="public_uploads/{$vo.img|default=''}" alt="">
 						{else /}
-						<img src="public_img/default/no_pic_40.jpg" alt="">
+						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 						{/notempty}
 						<div>
 							<p>{$vo.name}品牌旗舰店</p>
@@ -127,6 +127,7 @@
 					patternId:patternId,
 				}
 				if(typeId ==1 ){
+					$('.factory_store').find('li').attr('disabled',false);
 					$('.store-two').show();
 					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 					$('.factory_store').find('.run_type').text(runType);
