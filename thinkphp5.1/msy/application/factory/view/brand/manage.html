@@ -1,5 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
 <article class="f24">
@@ -16,9 +17,9 @@
 				<li class="">
 					<img class="trade-logo" src="public_uploads/{$vo.brand_img}" />
 					<span class="trade-name">{$vo.name}</span>
-					{if  $vo.is_audit == 0}<span>待审核</span>
-					{elseif $vo.is_audit == 1 /}已备案
-					{elseif $vo.is_audit == 2 /}审核不通过<a href="{:url('brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
+					{if  $vo.auth_status == 0}<span>待审核</span>
+					{elseif $vo.auth_status == 1 /}已备案
+					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
 					{else /}
 					{/if}
 				</li>

@@ -1,0 +1,154 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<!--<section id="applyNewStore" style="display:none;">-->
+	
+<!--</section>-->
+<article class="f24">
+	<section class="bottomLine">
+        <div class="top_bar top-title">
+            <span></span>
+            <h2>申请开新店</h2>
+            <!--<a href="" class="home">首页</a>-->
+        </div>
+    </section>
+	<div class="new-store-type applyNewStoreLayer">
+		<div id="wizard" class="page-bd ">
+			<nav class="apply-data-nav trademark-nav">
+				<ul id="status " class="status f24 weui-flex">
+					<li class="weui-flex-item switch-item current"><span class="base_info"></span><em></em>店铺类型</li>
+					<li class="weui-flex-item switch-item "><span class="upload-prove"></span><em class="last"></em>店铺名称</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="error_tipc"></div>
+		<div class="stroe-content">
+			<div class="new-store-item store-one">
+				<span class="content-label">1)选择店铺类型</span>
+				<div class="store-type-menu" data-store-type="type">
+					<a class="" href="javascript:void(0);" data-type="0">企业官方旗舰店</a>
+					<a href="javascript:void(0);" data-type="1">品牌官方旗舰店</a>
+				</div>
+				<span class="content-label">2)设定经营模式</span>
+				<div class="store-type-menu" data-store-pattern="pattern">
+					<a class="" href="javascript:void(0);" data-pattern="0">B2B采购商城</a>
+					<a href="javascript:void(0);" data-pattern="1">B2B分成商城</a>
+					<a href="javascript:void(0);" data-pattern="2">B2B零售商城</a>
+				</div>
+				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
+			</div>
+			<div class="new-store-item store-two hide">
+				<ul>
+					<li class="columns_flex store-list" data-store-id="1">
+						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
+						<div>
+							<p>官方旗舰店1</p>
+							<p>B2C零售商城</p>
+						</div>
+					</li>
+					<li class="columns_flex store-list" data-store-id="2">
+						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
+						<div>
+							<p>官方旗舰店2</p>
+							<p>B2C零售商城</p>
+						</div>
+					</li>
+					<li class="columns_flex store-list" data-store-id="3">
+						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
+						<div>
+							<p>官方旗舰店3</p>
+							<p>B2C零售商城</p>
+						</div>
+					</li>
+				</ul>
+				<a class="step-btn apply-new-store" href="javascript:void(0);">申请开通</a>
+			</div>
+		</div>
+	</div>
+</article>
+
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+	$(function(){
+		var postData={};
+		var typeId,patternId;
+		//切换
+		$('body').on('click','.applyNewStoreLayer li.weui-flex-item',function(){
+			var index=$(this).index();
+			$(this).addClass('current').siblings().removeClass('current');
+			if(index==0){
+				$('.stroe-content .store-one').show();
+				$('.stroe-content .store-two').hide();
+			}else{
+				$('.stroe-content .store-one').hide();
+				$('.stroe-content .store-two').show();
+			}
+		});
+		//选择类型和模式
+		$('body').on('click','.store-type-menu a',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+		});
+
+		//选择店铺
+		$('body').on('click','.applyNewStoreLayer .store-list',function(){
+			var _this=$(this);
+			_this.addClass('current').siblings().removeClass('current');
+		});
+		//下一步
+		$('body').on('click','.next-step',function(){
+			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
+				typeId=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+				patternId=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
+				$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
+				$('.store-two').show();
+				$('.store-one').hide();
+				postData={
+					typeId:typeId,
+					patternId:patternId,
+				}
+				console.log(postData);
+			}else{
+				dialog.error('请选择店铺类型和经营模式');
+			}
+		});
+		//开店弹窗
+		var applyNewStore=$('#applyNewStore').html();
+		$('body').on('click','.apply-new-store',function(){
+		
+			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+			var storeList=$('.applyNewStoreLayer .store-list');
+			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
+				if(storeList.hasClass('current')){
+					storeId=$('.applyNewStoreLayer .store-list.current').data('store-id');
+					postData={
+						typeId:typeId,
+						patternId:patternId,
+						storeId:storeId
+					};
+					console.log(postData);
+				}
+				else{
+					dialog.error('请选择店铺');
+					return false;
+				}
+			}else {
+				dialog.error('请选择店铺类型和经营模式');
+				return false;
+			}
+		});
+
+	})
+
+</script>
+{/block}
