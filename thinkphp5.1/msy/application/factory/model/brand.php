@@ -11,29 +11,9 @@ class Brand extends Model {
 	protected $table = 'brand';
 //	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
-	/**
-	 * 新增
-	 */
-	public function add(){
-		$data = input('post.');
-		$validate = validate('Brand');
-		if(!$result = $validate->scene('add')->check($data)) {
-			return errorMsg($validate->getError());
-		}
-		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
-		$data['create_time'] = time();
-		$result = $this->allowField(true)->save($data);
-		if(false !== $result){
-			return successMsg("已提交申请");
-		}else{
-			return errorMsg($this->getError());
-		}
-	}
 
 	/**
-	 * 修改
+	 * 编辑 新增和修改
 	 */
 	public function edit($factory_id = ''){
 		$data = input('post.');
