@@ -47,7 +47,7 @@ class Brand extends Model {
 		if(input('?post.brand_id')){//修改
 			$data['factory_id'] = $factory_id;
 			$data['update_time'] = time();
-			$data['is_audit'] = 0;
+			$data['auth_status'] = 0;
 			$result = $this->allowField(true)->save($data, ['id' => $data['brand_id']]);
 		}else{
 			$data['create_time'] = time();
