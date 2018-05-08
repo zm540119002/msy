@@ -665,3 +665,65 @@
 .promotion-item .classify-tag-name{
     width:92px;
 }
+/*申请开店*/
+.apply-store-content{
+    padding:0 0 0 .20rem;
+}
+.thead-td{
+    padding:.18rem 0;
+    overflow:hidden;
+    border-bottom:1px solid #d9d9d9;
+}
+.thead-td .cols{
+    float:left;
+}
+.thead-td .cols:nth-of-type(1){
+    width:60%;
+}
+.thead-td .cols:nth-of-type(2){
+    width:15%;
+}
+.thead-td .cols:nth-of-type(3){
+    width:25%;
+}
+.apply-new-store{
+    display: block;
+    padding:.12rem 0;
+    background: #ff7aab;
+    color:#fff;
+    text-align:center;
+}
+.new-store-type{
+    padding:.20rem .20rem 1rem .20rem;
+}
+.new-store-item.hide{
+    display:none;
+}
+.store-type-menu{
+    margin:0 0 .10rem 0;
+}
+.store-type-menu a{
+    padding:.10rem .05rem;
+    border:1px solid #009A3E;
+    border-radius:3px;
+    color:#009A3E;
+}
+.store-type-menu a.current{
+    background: #009A3E;
+    color:#fff;
+}
+.new-store-type .next-step{
+    display: block;
+    width:2rem;
+    text-align:center;
+    margin:1rem auto 0;
+    background:#ff7aab;
+    color:#fff;
+}
+.applyNewStoreLayer .store-list{
+    margin:0 0 .15rem 0;
+}
+.applyNewStoreLayer .store-list.current{
+    background: #ff7aab;
+    color:#fff;
+}
