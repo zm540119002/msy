@@ -45,7 +45,6 @@ class Base extends \think\Controller{
             return  errorMsg('获取Uploads实际路径失败');
         }
         $uploadPath = $uploadPath . '/' ;
-
         //临时相对路径
         $tempRelativePath = config('upload_dir.temp_path');
         //存储路径
@@ -57,13 +56,11 @@ class Base extends \think\Controller{
         $fileName = time() . $ext;
         //带存储路径的文件名
         $photo = $storePath . $fileName;
-
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
         if(false === $returnData){
             return errorMsg('保存文件失败');
         }
-
         //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
             $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
@@ -130,13 +127,13 @@ class Base extends \think\Controller{
                     return errorMsg('保存文件失败');
                 }
                 //压缩文件
-        if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
-            $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
-            $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
-            $image = new \think\Image();
-            $image->open($photo);
-            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
-        }
+                if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
+                    $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
+                    $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
+                    $image = new \think\Image();
+                    $image->open($photo);
+                    $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
+                }
                 $imgsNew[] = $tempRelativePath . $fileName;
             }else{
                 $imgsNew[] = $img;
