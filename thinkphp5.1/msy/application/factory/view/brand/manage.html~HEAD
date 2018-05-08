@@ -1,0 +1,41 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="bottomLine">
+		<div class="top_bar top-title">
+			<span></span>
+			<h2>商标备案</h2>
+			<a href="" class="home">首页</a>
+		</div>
+	</section>
+	<section class="trademark-module">
+		<ul class="trademark-info">
+			{volist name="brandList" id="vo"}
+				<li class="">
+					<img class="trade-logo" src="public_uploads/{$vo.brand_img}" />
+					<span class="trade-name">{$vo.name}</span>
+					{if  $vo.auth_status == 0}<span>待审核</span>
+					{elseif $vo.auth_status == 1 /}已备案
+					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
+					{else /}
+					{/if}
+				</li>
+			{/volist}
+		</ul>
+	</section>
+	<a href="{:url('brand/record')}" class="foot-btn f24">进行商标备案</a>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+
+</script>
+{/block}
