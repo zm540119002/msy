@@ -5,9 +5,9 @@ class Brand extends FactoryBase
     //商标首页
     public function manage()
     {
-        $model = new \app\factory\model\Brand;
-        $brandList =  $model ->selectBrand();
-        $this -> assign('brandList',$brandList);
+//        $model = new \app\factory\model\Brand;
+//        $brandList =  $model ->selectBrand();
+//        $this -> assign('brandList',$brandList);
         return $this->fetch();
     }
 
