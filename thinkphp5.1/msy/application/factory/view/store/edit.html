@@ -28,40 +28,50 @@
 			<div class="new-store-item store-one">
 				<span class="content-label">1)选择店铺类型</span>
 				<div class="store-type-menu" data-store-type="type">
-					<a class="" href="javascript:void(0);" data-type="0">企业官方旗舰店</a>
-					<a href="javascript:void(0);" data-type="1">品牌官方旗舰店</a>
+					<a class="" href="javascript:void(0);" data-type="1">企业官方旗舰店</a>
+					<a href="javascript:void(0);" data-type="2">品牌官方旗舰店</a>
 				</div>
 				<span class="content-label">2)设定经营模式</span>
 				<div class="store-type-menu" data-store-pattern="pattern">
-					<a class="" href="javascript:void(0);" data-pattern="0">B2B采购商城</a>
-					<a href="javascript:void(0);" data-pattern="1">B2B分成商城</a>
-					<a href="javascript:void(0);" data-pattern="2">B2B零售商城</a>
+					<a class="" href="javascript:void(0);" data-pattern="1">B2B采购商城</a>
+					<a href="javascript:void(0);" data-pattern="2">B2B分成商城</a>
+					<a href="javascript:void(0);" data-pattern="3">B2B零售商城</a>
 				</div>
 				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
 			</div>
 			<div class="new-store-item store-two hide">
-				<ul>
-					<li class="columns_flex store-list" data-store-id="1">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
+				<ul class="factory_store">
+					{notempty name="factoryStore"}
+					<li class="columns_flex store-list" data-store-id="{$factoryStore.id|default=''}" data-foreign_id="{$factoryStore.id|default=''}">
+						{notempty name="factoryStore.img"}
+						<img src="public_uploads/{$factoryStore.img|default=''}" alt="">
+						{else /}
+						<img src="public_img/default/no_pic_40.jpg" alt="">
+						{/notempty}
 						<div>
-							<p>官方旗舰店1</p>
-							<p>B2C零售商城</p>
+							<p>{$factoryStore.name}官方旗舰店</p>
+							<p class="run_type">B2C零售商城</p>
 						</div>
 					</li>
-					<li class="columns_flex store-list" data-store-id="2">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
+					{/notempty}
+
+				</ul>
+				<ul class="brand_stores">
+					{notempty name="brandStores"}
+					{volist name="brandStores" id="vo"}
+					<li class="columns_flex store-list" data-store-id="{$vo.id|default=''}" data-foreign_id="{$vo.id|default=''}">
+						{notempty name="vo.img"}
+						<img src="public_uploads/{$vo.img|default=''}" alt="">
+						{else /}
+						<img src="public_img/default/no_pic_40.jpg" alt="">
+						{/notempty}
 						<div>
-							<p>官方旗舰店2</p>
-							<p>B2C零售商城</p>
+							<p>{$vo.name}品牌旗舰店</p>
+							<p class="run_type">B2C零售商城</p>
 						</div>
 					</li>
-					<li class="columns_flex store-list" data-store-id="3">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
-						<div>
-							<p>官方旗舰店3</p>
-							<p>B2C零售商城</p>
-						</div>
-					</li>
+					{/volist}
+					{/notempty}
 				</ul>
 				<a class="step-btn apply-new-store" href="javascript:void(0);">申请开通</a>
 			</div>
@@ -110,13 +120,27 @@
 				typeId=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
 				patternId=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
 				$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
-				$('.store-two').show();
+
 				$('.store-one').hide();
 				postData={
 					typeId:typeId,
 					patternId:patternId,
 				}
-				console.log(postData);
+				if(typeId ==1 ){
+					$('.store-two').show();
+					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+					$('.factory_store').find('.run_type').text(runType);
+					$('.brand_stores').hide();
+					$('.factory_store').show();
+				}
+				if(typeId ==2 ){
+					$('.store-two').show();
+					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+					$('.brand_stores').find('.run_type').text(runType);
+					$('.factory_store').hide();
+					$('.brand_stores').show();
+				}
+
 			}else{
 				dialog.error('请选择店铺类型和经营模式');
 			}
@@ -124,7 +148,6 @@
 		//开店弹窗
 		var applyNewStore=$('#applyNewStore').html();
 		$('body').on('click','.apply-new-store',function(){
-		
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
 			var storeList=$('.applyNewStoreLayer .store-list');
