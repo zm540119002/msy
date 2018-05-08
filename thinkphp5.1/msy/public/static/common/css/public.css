@@ -361,6 +361,10 @@ i{
     height:auto;
     vertical-align: middle;
 }
+.small_default_img{
+    width:15%;
+    height:100%;
+}
 /*美尚云生态圈平台*/
 .top_nav_fixed{
     /*height:94px;*/
@@ -390,6 +394,11 @@ i{
     background-size:20px 204px;
     display:block;
     text-indent:-9999rem;
+}
+.top_bar a.switch-account{
+    width:auto;
+    background:none;
+    text-indent: 0;
 }
 .top-nav-bar{color:#000;}
 .top-nav-bar a.personal_center,

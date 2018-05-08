@@ -24,8 +24,8 @@ class Brand extends Model {
 		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
 		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
 		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
+		$data['factory_id'] = $factory_id;
 		if(input('?post.brand_id')){//修改
-			$data['factory_id'] = $factory_id;
 			$data['update_time'] = time();
 			$data['auth_status'] = 0;
 			$result = $this->allowField(true)->save($data, ['id' => $data['brand_id']]);
@@ -49,7 +49,7 @@ class Brand extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectBrand($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectBrand($where=[],$field=[],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'b.status' => 0,
 		);

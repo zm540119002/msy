@@ -73,7 +73,7 @@ class Factory extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectFactory($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectFactory($where=[],$field=[],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'f.status' => 0,
 		);
@@ -111,7 +111,7 @@ class Factory extends Model {
 	 */
 	public function getFactory($where=[],$field=[],$join=[]){
 		$_where = array(
-			'status' => 0,
+			'f.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
