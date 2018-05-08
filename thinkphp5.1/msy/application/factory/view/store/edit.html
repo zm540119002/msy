@@ -40,9 +40,10 @@
 				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
 			</div>
 			<div class="new-store-item store-two hide">
-				<ul class="factory_store">
+				<ul class="">
+					<!--企业旗舰店-->
 					{notempty name="factoryStore"}
-					<li class="columns_flex store-list" data-store-id="{$factoryStore.id|default=''}" data-foreign_id="{$factoryStore.id|default=''}">
+					<li class="columns_flex store-list factory_store" data-foreign_id="{$factoryStore.id|default=''}">
 						{notempty name="factoryStore.img"}
 						<img class="small_default_img" src="public_uploads/{$factoryStore.img|default=''}" alt="">
 						{else /}
@@ -53,13 +54,11 @@
 							<p class="run_type">B2C零售商城</p>
 						</div>
 					</li>
+					<!--品牌旗舰店-->
 					{/notempty}
-
-				</ul>
-				<ul class="brand_stores">
 					{notempty name="brandStores"}
 					{volist name="brandStores" id="vo"}
-					<li class="columns_flex store-list" data-store-id="{$vo.id|default=''}" data-foreign_id="{$vo.id|default=''}">
+					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}" >
 						{notempty name="vo.img"}
 						<img class="small_default_img" src="public_uploads/{$vo.img|default=''}" alt="">
 						{else /}
@@ -89,7 +88,7 @@
 <script type="text/javascript">
 	$(function(){
 		var postData={};
-		var typeId,patternId;
+		var store_type,run_type;
 		//切换
 		$('body').on('click','.applyNewStoreLayer li.weui-flex-item',function(){
 			var index=$(this).index();
@@ -117,24 +116,24 @@
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
 			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
-				typeId=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
-				patternId=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
+				store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+				run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
 				$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
 
 				$('.store-one').hide();
 				postData={
-					typeId:typeId,
-					patternId:patternId,
+					store_type:store_type,
+					run_type:run_type,
 				}
-				if(typeId ==1 ){
+				if(store_type ==1 ){
 					$('.factory_store').find('li').attr('disabled',false);
 					$('.store-two').show();
-					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
-					$('.factory_store').find('.run_type').text(runType);
+					var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+					$('.factory_store').find('.run_type').text(runTypeTxt);
 					$('.brand_stores').hide();
 					$('.factory_store').show();
 				}
-				if(typeId ==2 ){
+				if(store_type ==2 ){
 					$('.store-two').show();
 					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 					$('.brand_stores').find('.run_type').text(runType);
@@ -154,13 +153,8 @@
 			var storeList=$('.applyNewStoreLayer .store-list');
 			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
 				if(storeList.hasClass('current')){
-					storeId=$('.applyNewStoreLayer .store-list.current').data('store-id');
-					postData={
-						typeId:typeId,
-						patternId:patternId,
-						storeId:storeId
-					};
-					console.log(postData);
+					foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
+					postData.foreign_id = foreign_id;
 				}
 				else{
 					dialog.error('请选择店铺');
@@ -170,6 +164,30 @@
 				dialog.error('请选择店铺类型和经营模式');
 				return false;
 			}
+			$.ajax({
+				url: controller + 'edit',
+				data: postData,
+				type: 'post',
+				beforeSend: function(){
+					//$('.loading').show();
+				},
+				success: function(msg){
+					if(msg.status == 0){
+						dialog.error(msg.info);
+						return false;
+					}
+					if(msg.status == 1){
+						dialog.success(msg.info,module+'Store/manage');
+						return false;
+					}
+				},
+				complete:function(){
+
+				},
+				error:function (xhr) {
+					dialog.error('AJAX错误'+xhr);
+				},
+			});
 		});
 
 	})

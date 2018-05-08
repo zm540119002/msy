@@ -1,8 +1,6 @@
 <?php
 namespace app\factory\controller;
 
-use common\controller\UserBase;
-
 class Store extends FactoryBase
 {
     /**
@@ -11,6 +9,26 @@ class Store extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Store();
+        //企业旗舰店
+        $where = [
+            ['s.factory_id','=',$this->factory['factory_id']],
+            ['s.store_type','=',1],
+        ];
+        $file = ['f.id,f.name,r.logo_img as img'];
+        $join =[
+            ['record r','f.id = r.factory_id'],
+        ];
+        $factoryStore = $model -> selectStore($where);
+        //品牌旗舰店
+        $where = [
+            ['s.factory_id','=',$this->factory['factory_id']],
+            ['s.store_type','=',2],
+        ];
+        $file = ['f.id,f.name,r.logo_img as img'];
+        $join =[
+            ['record r','f.id = r.factory_id'],
+        ];
+        $brandStore = $model->selectStore($where);
         return $this->fetch();
     }
 
@@ -41,18 +59,6 @@ class Store extends FactoryBase
             return $this->fetch();
         }
     }
-
-    public function getStoreName(){
-        $model = new \app\factory\model\Factory();
-        if(request()->isAjax()){
-            $where = [];
-            $storeNameList =  $model -> selectFactory($where);
-            $this -> assign('storeNameList',$storeNameList);
-            return $this->fetch('');
-        }
-    }
-
-
 
     //设置默认产商
     public function setDefaultStore(){
