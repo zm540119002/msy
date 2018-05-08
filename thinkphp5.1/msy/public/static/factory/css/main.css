@@ -313,6 +313,7 @@
     position:relative;
     border-bottom:1px solid #d9d9d9;
     padding:0.12rem 0;
+    overflow:hidden;
 }
 .trademark-info .trade-logo{
     max-width:50px;
@@ -674,16 +675,26 @@
     overflow:hidden;
     border-bottom:1px solid #d9d9d9;
 }
-.thead-td .cols{
+.thead-td .cols,
+.trademark-module .cols{
     float:left;
 }
 .thead-td .cols:nth-of-type(1){
     width:60%;
 }
+.trademark-module .cols:nth-of-type(1){
+    width:25%;
+}
 .thead-td .cols:nth-of-type(2){
     width:15%;
 }
+.trademark-module .cols:nth-of-type(2){
+    width:25%;
+}
 .thead-td .cols:nth-of-type(3){
+    width:25%;
+}
+.trademark-module .cols:nth-of-type(3){
     width:25%;
 }
 .apply-new-store{
