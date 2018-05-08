@@ -41,27 +41,34 @@
 			</div>
 			<div class="new-store-item store-two hide">
 				<ul>
-					<li class="columns_flex store-list" data-store-id="1">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
+					{notempty name="factoryStore"}
+					<li class="columns_flex store-list" data-store-id="{$factoryStore.id|default=''}" data-foreign_id="{$factoryStore.id|default=''}">
+						{notempty name="factoryStore.img"}
+						<img src="public_uploads/{$factoryStore.img|default=''}" alt="">
+						{else /}
+						<img src="public_img/default/no_pic_40.jpg" alt="">
+						{/notempty}
 						<div>
-							<p>官方旗舰店1</p>
+							<p>{$factoryStore.name}官方旗舰店1</p>
 							<p>B2C零售商城</p>
 						</div>
 					</li>
-					<li class="columns_flex store-list" data-store-id="2">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
+					{/notempty}
+					{notempty name="brandStores"}
+					{volist name="brandStores" id="vo"}
+					<li class="columns_flex store-list" data-store-id="{$vo.id|default=''}" data-foreign_id="{$vo.id|default=''}">
+						{notempty name="vo.img"}
+						<img src="public_uploads/{$vo.img|default=''}" alt="">
+						{else /}
+						<img src="public_img/default/no_pic_40.jpg" alt="">
+						{/notempty}
 						<div>
-							<p>官方旗舰店2</p>
+							<p>{$vo.name}</p>
 							<p>B2C零售商城</p>
 						</div>
 					</li>
-					<li class="columns_flex store-list" data-store-id="3">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
-						<div>
-							<p>官方旗舰店3</p>
-							<p>B2C零售商城</p>
-						</div>
-					</li>
+					{/volist}
+					{/notempty}
 				</ul>
 				<a class="step-btn apply-new-store" href="javascript:void(0);">申请开通</a>
 			</div>
@@ -116,7 +123,6 @@
 					typeId:typeId,
 					patternId:patternId,
 				}
-				console.log(postData);
 			}else{
 				dialog.error('请选择店铺类型和经营模式');
 			}
