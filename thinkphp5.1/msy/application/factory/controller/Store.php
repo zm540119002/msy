@@ -18,6 +18,19 @@ class Store extends UserBase
         }
     }
 
+    /**
+     * 店铺管理
+     */
+    public function edit()
+    {
+        $model = new \app\factory\model\Store();
+        if(request()->isAjax()){
+            return $model -> edit($this -> user['id']);
+        }else{
+            return $this->fetch();
+        }
+    }
+
     //设置默认产商
     public function setDefaultFactory(){
         if(request()->isAjax()){
