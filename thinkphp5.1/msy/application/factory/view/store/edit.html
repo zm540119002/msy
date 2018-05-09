@@ -58,7 +58,7 @@
 					{/notempty}
 					{notempty name="brandStores"}
 					{volist name="brandStores" id="vo"}
-					<li class="columns_flex store-list brand_stores disabled" data-foreign_id="{$vo.id|default=''}" >
+					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}" >
 						{notempty name="vo.img"}
 						<img class="small_default_img" src="public_uploads/{$vo.img|default=''}" alt="">
 						{else /}
@@ -157,6 +157,18 @@
 					$('.store-two').show();
 					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 					$('.brand_stores').find('.run_type').text(runType);
+					for(var i=0;i<storesApplied.length;i++){
+						if(run_type==storesApplied[i].run_type){
+							$.each($('.brand_stores'),function(j,val){
+								var _This=$(this);
+								var foreignId=_This.data('foreign_id');
+								if(foreignId==storesApplied[i].foreign_id){
+									_This.addClass('disabled');
+								}
+							})
+						}
+
+					}
 					$('.factory_store').hide();
 					$('.brand_stores').show();
 				}
