@@ -1,6 +1,8 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
+{block name="title"}开店部署{/block}
 {block name="content"}
 <article class="f24">
 	<section class="top_nav_fixed">
@@ -59,8 +61,6 @@
 		</div>
 	</section>
 </article>
-
-
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy.html" /}
@@ -68,13 +68,8 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-
 <script type="text/javascript">
 $(function () {
-	$('.record').click(function () {
-		alert(1)
-	})
-})
-
+});
 </script>
 {/block}

@@ -1,0 +1,65 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="bottomLine">
+		<div class="top_bar top-title">
+			<span></span>
+			<h2>商标备案</h2>
+			<a href="" class="home">首页</a>
+		</div>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20">
+			<a>企业档案</a>
+			<a class="column_type current">商标备案</a>
+			<a >开店申请</a>
+			<a>部门角色</a>
+			<a>账号授权</a>
+		</div>
+	</section>
+	<section class="trademark-module">
+		<div class="thead-td">
+			<span class="cols">图形</span>
+			<span class="cols">名称</span>
+			<span class="cols">状态</span>
+			<span class="cols">备注</span>
+		</div>
+		<ul class="trademark-info">
+			{volist name="brandList" id="vo"}
+				<li class="">
+					<div class="cols">
+						<img class="trade-logo" src="public_uploads/{$vo.brand_img}" />
+					</div>
+					<div class="cols">
+						<span class="trade-name">{$vo.name}</span>
+					</div>
+					<div class="cols">
+					{if  $vo.auth_status == 0}<span>待审核</span>
+					{elseif $vo.auth_status == 1 /}已备案
+					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
+					{else /}
+					{/if}
+					</div>
+					<div class="cols">
+						<a href="">修改图片</a>
+					</div>
+				</li>
+			{/volist}
+		</ul>
+	</section>
+	<a href="{:url('brand/record')}" class="foot-btn f24">进行新的商标备案</a>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+
+</script>
+{/block}

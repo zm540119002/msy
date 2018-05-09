@@ -11,29 +11,9 @@ class Brand extends Model {
 	protected $table = 'brand';
 //	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
-	/**
-	 * 新增
-	 */
-	public function add(){
-		$data = input('post.');
-		$validate = validate('Brand');
-		if(!$result = $validate->scene('add')->check($data)) {
-			return errorMsg($validate->getError());
-		}
-		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
-		$data['create_time'] = time();
-		$result = $this->allowField(true)->save($data);
-		if(false !== $result){
-			return successMsg("已提交申请");
-		}else{
-			return errorMsg($this->getError());
-		}
-	}
 
 	/**
-	 * 修改
+	 * 编辑 新增和修改
 	 */
 	public function edit($factory_id = ''){
 		$data = input('post.');
@@ -44,10 +24,10 @@ class Brand extends Model {
 		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
 		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
 		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
+		$data['factory_id'] = $factory_id;
 		if(input('?post.brand_id')){//修改
-			$data['factory_id'] = $factory_id;
 			$data['update_time'] = time();
-			$data['is_audit'] = 0;
+			$data['auth_status'] = 0;
 			$result = $this->allowField(true)->save($data, ['id' => $data['brand_id']]);
 		}else{
 			$data['create_time'] = time();
@@ -69,7 +49,7 @@ class Brand extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectBrand($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectBrand($where=[],$field=[],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'b.status' => 0,
 		);

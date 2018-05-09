@@ -361,6 +361,10 @@ i{
     height:auto;
     vertical-align: middle;
 }
+.small_default_img{
+    width:15%;
+    height:100%;
+}
 /*美尚云生态圈平台*/
 .top_nav_fixed{
     /*height:94px;*/
@@ -390,6 +394,11 @@ i{
     background-size:20px 204px;
     display:block;
     text-indent:-9999rem;
+}
+.top_bar a.switch-account{
+    width:auto;
+    background:none;
+    text-indent: 0;
 }
 .top-nav-bar{color:#000;}
 .top-nav-bar a.personal_center,
@@ -478,7 +487,7 @@ i{
 .top_menu_box a{
     display:inline-block;
     box-sizing:border-box;
-    padding:0 10px;
+    padding:0 5px;
     font-size:.24rem;
     color:#333;
     position:relative;
@@ -582,7 +591,10 @@ color: #ed6d00;
     box-sizing: border-box;
     text-align:center;
     margin:0 0 10px 0;
-    padding:4px 0;
+    /*padding:4px 0;*/
+}
+.specific_type a:last-child{
+    border-left:1px solid #999;
 }
 .column_type{
     /*float:left;
@@ -1015,7 +1027,8 @@ color: #ed6d00;
 .editCompanyPicLayer .layui-m-layercont,
 .addAdminLayer .layui-m-layercont,
 .editVideoLayer .layui-m-layercont,
-.forgetPasswordLayer .layui-m-layercont{
+.forgetPasswordLayer .layui-m-layercont,
+.applyNewStoreLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
@@ -1030,14 +1043,16 @@ color: #ed6d00;
 .login-items .weui_btn_primary{background-color: #F39800;}
 .login-items .weui_input{font-size:0.24rem;}
 .login-items .msy_cells:before,.login-items .msy_cells:after{border-top:none;border-bottom:none;}
-.page-bd .weui-flex {
+.page-bd .weui-flex,
+.applyNewStoreLayer .weui-flex{
     align-items: center;
     transition: all 0.3s ease 0s;
     display: -webkit-flex;
     display: -webkit-box;
     display: flex;
 }
-.page-bd .weui-flex-item {
+.page-bd .weui-flex-item,
+.applyNewStoreLayer .weui-flex-item {
     position:relative;
     -webkit-flex: 1 1 0;
     flex: 1 1 0;
@@ -1082,7 +1097,9 @@ color: #ed6d00;
     top: 14px;
     z-index: 999;
 }
-
+.applyNewStoreLayer .last{
+    width:0;
+}
 /*用户入驻申请2018-3-11*/
 .apply-data-content{
     padding:0.20rem 0.25rem;
@@ -1657,6 +1674,16 @@ input[type=text]::-webkit-focus-inner {
     height: 1.2rem;
     display: block;
 
+}
+.step-btn{
+    display: block;
+    width:3rem;
+    padding:.12rem 0;
+    text-align:center;
+    border-radius:3px;
+    margin:1rem auto 0;
+    background:#ff7aab;
+    color:#fff;
 }
 .photo-clip-mask{position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; pointer-events: none;}
 .photo-clip-mask-left{position: absolute; left: 0px; right: 50%; top: 50%; bottom: 50%; width: auto; height: 166px; margin-right: 99.5px; margin-top: -83px; margin-bottom: -83px; background-color: rgba(0, 0, 0, 0.498039);}

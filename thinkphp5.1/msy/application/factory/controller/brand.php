@@ -1,14 +1,13 @@
 <?php
 namespace app\factory\controller;
-use app\factory\model\Brand as M;
-use app\index_admin\model\Category as categoryModel;
 class Brand extends FactoryBase
 {
     //商标首页
-    public function index()
+    public function manage()
     {
-        $model = new M();
-        $brandList =  $model ->selectBrand();
+        $model = new \app\factory\model\Brand;
+        $where = [['factory_id','=',$this->factory['factory_id']]];
+        $brandList =  $model ->selectBrand($where);
         $this -> assign('brandList',$brandList);
         return $this->fetch();
     }
@@ -16,11 +15,11 @@ class Brand extends FactoryBase
     //备案
     public function record()
     {
-        $model = new M();
+        $model = new \app\factory\model\Brand;
         if(request()->isPost()){
             return $model -> edit($this->factory['factory_id']);
         }
-        $categoryModel = new categoryModel;
+        $categoryModel = new \app\index_admin\model\Category;
         $categoryList = $categoryModel -> selectFirstCategory();
         $this->assign('categoryList',$categoryList);
         if(input('?brand_id')){
