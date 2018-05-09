@@ -31,6 +31,7 @@ class Store extends FactoryBase
             ['brand b','b.id = s.foreign_id'],
         ];
         $brandStores = $model->selectStore($where,$file,$join);
+        $stores = array_merge($factoryStore,$brandStores);
         $this -> assign('brandStores',$brandStores);
         return $this->fetch();
     }
@@ -52,13 +53,13 @@ class Store extends FactoryBase
                 ['record r','f.id = r.factory_id'],
             ];
             $factoryStore =  $modelFactory -> getFactory($where,$file,$join);
+            $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
             $modelFactory = new \app\factory\model\Brand();
             $where = [['b.factory_id','=',$this->factory['factory_id']]];
             $file = ['b.id,b.name,b.brand_img as img'];
             $brandStores =  $modelFactory -> selectBrand($where,$file);
-            $stores = array_merge($factoryStore,$brandStores);
-            $this -> assign('stores',$stores);
+            $this -> assign('brandStores',$brandStores);
             //查看已申请的店铺
             $modeStore = new \app\factory\model\Store();
             $where = [['s.factory_id','=',$this->factory['factory_id']]];
