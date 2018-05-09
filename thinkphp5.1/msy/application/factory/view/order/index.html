@@ -1,5 +1,10 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
+	<style type="text/css">
+		dl{background: #ccfdff; margin-bottom: 5px; padding:10px; border-radius:10px;}
+		.print{background:red; color:white; width:30%; text-align: center;
+			padding:3px; font-weight: bold; border-radius:5px;}
+	</style>
 {/block}
 {block name="content"}
 <article class="f24">
@@ -19,18 +24,18 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
-			<a href="{:url('account/index')}">售前</a>
-			<a href="javascript:void(0);" class="record">打单</a>
-			<a href="{:url('goods/edit')}">出仓</a>
-			<a href="">发货/完成</a>
-			<a href="">填单</a>
-			<a href="">售后</a>
+			<a href="{:url('Order/beforeSale')}">售前</a>
+			<a href="{:url('Order/index')}" class="record">打单</a>
+			<a href="{:url('Order/out')}">出仓</a>
+			<a href="{:url('Order/delivery')}">发货/完成</a>
+			<a href="{:url('Order/bill')}">填单</a>
+			<a href="{:url('Order/afterSale')}">售后</a>
 		</div>
 	</section>
 	<section class="f24 account-content-wrapper ">
 		<div class="account-top">
 			<dl>
-				<dt class="role-label">订单号：<span>20180507123456</span></dt>
+				<dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt>
 				<dd>
 					<p>下单时间：2018-05-07 09:56:57</p>
 					<p>分类：购买商品</p>
@@ -42,10 +47,11 @@
 					<p>支付金额：￥199.56元</p>
 					<p>支付方式：微信支付</p>
 					<p>支付备注：金额付清</p>
+					<div class="print" data="1">打印订单</div>
 				</dd>
 			</dl>
 			<dl>
-				<dt class="role-label">订单号：<span>20180507123456</span></dt>
+				<dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt>
 				<dd>
 					<p>下单时间：2018-05-07 09:56:57</p>
 					<p>分类：购买商品</p>
@@ -57,6 +63,23 @@
 					<p>支付金额：￥199.56元</p>
 					<p>支付方式：微信支付</p>
 					<p>支付备注：金额付清</p>
+					<div class="print" data="2">打印订单</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt>
+				<dd>
+					<p>下单时间：2018-05-07 09:56:57</p>
+					<p>分类：购买商品</p>
+					<p>状态：新订单</p>
+					<p>总价：￥199.56元</p>
+					<p>收货人：张生</p>
+					<p>收货手机：13662539467</p>
+					<p>订单来源：美尚商城</p>
+					<p>支付金额：￥199.56元</p>
+					<p>支付方式：微信支付</p>
+					<p>支付备注：金额付清</p>
+					<div class="print"  data="3">打印订单</div>
 				</dd>
 			</dl>
 		</div>
@@ -76,8 +99,30 @@
 $(function () {
 	$('.record').click(function () {
 		alert(1)
-	})
-})
+	});
+
+	$('.print').on('click', function(){
+		var order_id = $(this).attr('data');
+		layer.open({
+			type: 1,
+			title: '订单管理'+order_id,
+			area: '80%',
+			shadeClose: true, //点击遮罩关闭
+			content: '<!--startprint--><dl><dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt><dd><p>下单时间：2018-05-07 09:56:57</p><p>分类：购买商品</p><p>状态：新订单</p><p>总价：￥199.56元</p><p>收货人：张生</p><div class="print" data="1" onClick="doPrint()">打印商品订单</div></dd></dl><div>Ajax获取的订单内容</div><!--endprint-->'
+		});
+	});
+});
+
+function doPrint() {
+	bdhtml=window.document.body.innerHTML;
+	sprnstr="<!--startprint-->"; //开始打印标识字符串有17个字符
+	eprnstr="<!--endprint-->"; //结束打印标识字符串
+	prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); //从开始打印标识之后的内容
+	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+	window.document.body.innerHTML=prnhtml; //把需要打印的指定内容赋给body.innerHTML
+	window.print(); //调用浏览器的打印功能打印指定区域
+	window.document.body.innerHTML=bdhtml;//重新给页面内容赋值；
+}
 
 </script>
 {/block}

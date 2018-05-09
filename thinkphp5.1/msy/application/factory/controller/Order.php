@@ -22,9 +22,59 @@ class Order extends FactoryBase
         return $this->fetch();
     }
 
+    /**
+     * 测试合成图片功能
+     * @return string
+     *
+     */
     public function  test()
     {
         return $this->compose();
+    }
+
+    /**
+     * 售前
+     *
+     */
+    public function beforeSale()
+    {
+        return $this->fetch('index');
+    }
+
+    /**
+     * 出仓
+     *
+     */
+    public function out()
+    {
+        return $this->fetch('index');
+    }
+
+    /**
+     * 发货/完成
+     *
+     */
+    public function delivery()
+    {
+        return $this->fetch('index');
+    }
+
+    /**
+     * 填单
+     *
+     */
+    public function bill()
+    {
+        return $this->fetch('index');
+    }
+
+    /**
+     *售后
+     *
+     */
+    public function afterSale()
+    {
+        return $this->fetch('index');
     }
 
 }
