@@ -14,21 +14,24 @@ class Store extends FactoryBase
             ['s.factory_id','=',$this->factory['factory_id']],
             ['s.store_type','=',1],
         ];
-        $file = ['f.id,f.name,r.logo_img as img'];
+        $file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,f.name,r.logo_img as img'];
         $join =[
-            ['record r','f.id = r.factory_id'],
+            ['factory f','f.id = s.foreign_id'],
+            ['record r','s.foreign_id = r.factory_id'],
         ];
-        $factoryStore = $model -> selectStore($where);
+        $factoryStore = $model -> selectStore($where,$file,$join);
+        $this -> assign('factoryStore',$factoryStore);
         //品牌旗舰店
         $where = [
             ['s.factory_id','=',$this->factory['factory_id']],
             ['s.store_type','=',2],
         ];
-        $file = ['f.id,f.name,r.logo_img as img'];
+        $file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
         $join =[
-            ['record r','f.id = r.factory_id'],
+            ['brand b','b.id = s.foreign_id'],
         ];
-        $brandStore = $model->selectStore($where);
+        $brandStores = $model->selectStore($where,$file,$join);
+        $this -> assign('brandStores',$brandStores);
         return $this->fetch();
     }
 
@@ -49,13 +52,18 @@ class Store extends FactoryBase
                 ['record r','f.id = r.factory_id'],
             ];
             $factoryStore =  $modelFactory -> getFactory($where,$file,$join);
-            $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
             $modelFactory = new \app\factory\model\Brand();
             $where = [['b.factory_id','=',$this->factory['factory_id']]];
             $file = ['b.id,b.name,b.brand_img as img'];
             $brandStores =  $modelFactory -> selectBrand($where,$file);
-            $this -> assign('brandStores',$brandStores);
+            $stores = array_merge($factoryStore,$brandStores);
+            $this -> assign('stores',$stores);
+            //查看已申请的店铺
+            $modeStore = new \app\factory\model\Store();
+            $where = [['s.factory_id','=',$this->factory['factory_id']]];
+            $storesApplied = $modeStore->selectStore($where);
+            $this -> assign('storesApplied',$storesApplied);
             return $this->fetch();
         }
     }
