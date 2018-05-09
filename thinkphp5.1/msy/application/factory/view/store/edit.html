@@ -58,7 +58,7 @@
 					{/notempty}
 					{notempty name="brandStores"}
 					{volist name="brandStores" id="vo"}
-					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}" >
+					<li class="columns_flex store-list brand_stores disabled" data-foreign_id="{$vo.id|default=''}" >
 						{notempty name="vo.img"}
 						<img class="small_default_img" src="public_uploads/{$vo.img|default=''}" alt="">
 						{else /}
@@ -90,7 +90,7 @@
 		var storesApplied = '{:json_encode($storesApplied)}';
 		storesApplied = JSON.parse(storesApplied);
 		console.log(storesApplied)
-
+		
 		var postData={};
 		var store_type,run_type;
 		//切换
@@ -107,7 +107,23 @@
 		});
 		//选择类型和模式
 		$('body').on('click','.store-type-menu a',function(){
+			var _this=$(this);
+			var dataTypeId=_this.data('type');
 			$(this).addClass('current').siblings().removeClass('current');
+			for(var i=0;i<storesApplied.length;i++){
+				if(dataTypeId==storesApplied[i].store_type){
+					$.each($('div[data-store-pattern="pattern"] a'),function(j,val){
+						var _This=$(this);
+						var storePatternId=_This.data('pattern');
+						if(storePatternId==storesApplied[i].run_type){
+							_This.addClass('disabled');
+						}
+					})
+				}
+				if(dataTypeId==2){
+					$('div[data-store-pattern="pattern"] a').removeClass('disabled');
+				}
+			}
 		});
 
 		//选择店铺
