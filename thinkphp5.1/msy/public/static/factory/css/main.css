@@ -750,7 +750,9 @@
 }
 .applyNewStoreLayer .store-list.disabled{
     background: #999;
-    border: 1px solid #999;
     color: #333;
+    pointer-events: none;
+}
+.weui-flex .weui-flex-item.disabled{
     pointer-events: none;
 }

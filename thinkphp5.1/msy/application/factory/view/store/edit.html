@@ -94,17 +94,17 @@
 		var postData={};
 		var store_type,run_type;
 		//切换
-		$('body').on('click','.applyNewStoreLayer li.weui-flex-item',function(){
-			var index=$(this).index();
-			$(this).addClass('current').siblings().removeClass('current');
-			if(index==0){
-				$('.stroe-content .store-one').show();
-				$('.stroe-content .store-two').hide();
-			}else{
-				$('.stroe-content .store-one').hide();
-				$('.stroe-content .store-two').show();
-			}
-		});
+		// $('body').on('click','.applyNewStoreLayer li.weui-flex-item',function(){
+		// 	var index=$(this).index();
+		// 	$(this).addClass('current').siblings().removeClass('current');
+		// 	if(index==0){
+		// 		$('.stroe-content .store-one').show();
+		// 		$('.stroe-content .store-two').hide();
+		// 	}else{
+		// 		$('.stroe-content .store-one').hide();
+		// 		$('.stroe-content .store-two').show();
+		// 	}
+		// });
 		//选择类型和模式
 		$('body').on('click','.store-type-menu a',function(){
 			var _this=$(this);

@@ -3,7 +3,13 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-
+<section id="storeLayerTipc" style="display: none;">
+	<div>
+		<span class=""></span>
+		<p class="comfirm-text">确定要<span class="textTipc">激活</span>以下店铺？</p>
+		
+	</div>
+</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex l-r-sides">
@@ -121,61 +127,58 @@
 <script type="text/javascript">
 	$(function(){
 		//激活店铺
-		$('body').on('click','.reapply_store',function () {
-			layer.open({
-				title:['是否激活店铺','border-bottom:1px solid #d9d9d9'],
-				className:'editVideoLayer',
-				btn:['确定','取消'],
-				success:function(){
-					layer.msg('的确很重要', {icon: 1});
-				},
-				yes:function(index){
-//					var postData = {};
-//					postData.imgs = layermultiVideoAttr;
-//					$.ajax({
-//						url: controller + 'uploadMultiImgToTemp',
-//						data: postData,
-//						type: 'post',
-//						beforeSend: function(){
-//							//$('.loading').show();
-//						},
-//						success: function(info){
-//							if(info.status == 0){
-//								dialog.error(info.msg);
-//								return false;
-//							}
-//							var videoArray = '';
-//							$.each(info.info,function(index,img){
-//								if(img.indexOf("uploads") == -1 && img !=''){
-//									img = uploads+img;
-//								}
-//								videoArray+=img+',';
-//							});
-//							$('.goods-video').data('src',videoArray);
-//							layer.close(index);
-//						},
-//						complete:function(){
-//
-//						},
-//						error:function (xhr) {
-//							dialog.error('AJAX错误'+xhr);
-//						},
-//					});
-				}
-			})
+		$('body').on('click','.activate_store',function () {
+			var _this=$(this);
+			var text='激活';
+			var parent=_this.parents('.thead-td');
+			var html=parent.find('div:eq(0)').clone();
+			$('.comfirm-text').after(html);
+			$('.textTipc').text(text);
+			var storeLayerTipc=$('#storeLayerTipc').html();
+			layerTipc(storeLayerTipc);
 		});
 		// 重新申请店铺
-		$('body').on('click','.activate_store',function () {
-			alert(1)
+		$('body').on('click','.reapply_store',function () {
+			var _this=$(this);
+			var text='重新申请';
+			var parent=_this.parents('.thead-td');
+			var html=parent.find('div:eq(0)').clone();
+			$('.comfirm-text').after(html);
+			$('.textTipc').text(text);
+			var storeLayerTipc=$('#storeLayerTipc').html();
+			layerTipc(storeLayerTipc);
 		});
 		//关闭店铺
 		$('body').on('click','.close_store',function () {
-			alert(1)
+			var _this=$(this);
+			var text='关闭';
+			var parent=_this.parents('.thead-td');
+			var html=parent.find('div:eq(0)').clone();
+			$('.comfirm-text').after(html);
+			$('.textTipc').text(text);
+			var storeLayerTipc=$('#storeLayerTipc').html();
+			layerTipc(storeLayerTipc);
 		});
 
 
 
 	})
-
+function layerTipc(content){
+	layer.open({
+		className:'storeTipcLayer',
+		content:content,
+		btn:['确定','取消'],
+		success:function(){
+			// layer.msg('的确很重要', {icon: 1});
+		},
+		yes:function(index){
+			$('.comfirm-text').next().remove();
+			layer.close(index);
+		},
+		no:function(){
+			$('.comfirm-text').next().remove();
+		}
+	})
+}
 </script>
 {/block}
