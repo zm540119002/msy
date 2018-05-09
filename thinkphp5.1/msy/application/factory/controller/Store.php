@@ -31,8 +31,8 @@ class Store extends FactoryBase
             ['brand b','b.id = s.foreign_id'],
         ];
         $brandStores = $model->selectStore($where,$file,$join);
-        $stores = array_merge($factoryStore,$brandStores);
-        $this -> assign('brandStores',$brandStores);
+        $storeList = array_merge($factoryStore,$brandStores);
+        $this -> assign('storeList',$storeList);
         return $this->fetch();
     }
 

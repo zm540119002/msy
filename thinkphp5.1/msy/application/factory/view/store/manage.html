@@ -3,56 +3,7 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<section id="applyNewStore" style="display:none;">
-	<div class="new-store-type">
-		<ul id="status " class="status f24 weui-flex">
-			<li class="weui-flex-item switch-item current"><span class="base_info"></span><em></em>店铺类型</li>
-			<li class="weui-flex-item switch-item "><span class="upload-prove"></span><em class="last"></em>店铺名称</li>
-		</ul>
-		<div class="error_tipc"></div>
-		<div class="stroe-content">
-			<div class="new-store-item store-one">
-				<span class="content-label">1)选择店铺类型</span>
-				<div class="store-type-menu" data-store-type="type">
-					<a class="" href="javascript:void(0);" data-type="0">企业官方旗舰店</a>
-					<a href="javascript:void(0);" data-type="1">品牌官方旗舰店</a>
-				</div>
-				<span class="content-label">2)设定经营模式</span>
-				<div class="store-type-menu" data-store-pattern="pattern">
-					<a class="" href="javascript:void(0);" data-pattern="0">B2B采购商城</a>
-					<a href="javascript:void(0);" data-pattern="1">B2B分成商城</a>
-					<a href="javascript:void(0);" data-pattern="2">B2B零售商城</a>
-				</div>
-				<a class="next-step" href="javascript:void(0);">下一步</a>
-			</div>
-			<div class="new-store-item store-two hide">
-				<ul>
-					<li class="columns_flex store-list" data-store-id="1">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
-						<div>
-							<p>官方旗舰店1</p>
-							<p>B2C零售商城</p>
-						</div>
-					</li>
-					<li class="columns_flex store-list" data-store-id="2">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
-						<div>
-							<p>官方旗舰店2</p>
-							<p>B2C零售商城</p>
-						</div>
-					</li>
-					<li class="columns_flex store-list" data-store-id="3">
-						<img src="public/static/common/img/default/no_pic_40.jpg" alt="">
-						<div>
-							<p>官方旗舰店3</p>
-							<p>B2C零售商城</p>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</section>
+
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex l-r-sides">
@@ -68,20 +19,6 @@
 			</div>
 		</div>
 	</section>
-	<!--<section class="top_nav_fixed">
-		<div class="top_bar columns_flex">
-			<div class="each_column">
-				<a class="personal_center">我的</a>
-			</div>
-			<div class="each_column top_search_module">
-				<input type="button" class="search_btn"/>
-				<input type="text" class="search_text" placeholder="美尚云搜索"/>
-			</div>
-			<div class="each_column">
-				<a class="home">首页</a>
-			</div>
-		</div>
-	</section>-->
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
 			<a>企业档案</a>
@@ -98,23 +35,77 @@
 			<span class="cols">备注</span>
 		</div>
 		<ul>
-			<li class="thead-td">
+            {notempty name="storeList"}
+			{volist name="storeList" id="vo"}
+			<li class="thead-td" data-id="{$vo.id}">
 				<div class="cols">
-					<img class="left" src="public_img/default/no_pic_40.jpg" alt="">
+					{notempty name="vo.img"}
+					<img class="left small_default_img" src="public_uploads/{$vo.img}" alt="">
+					{else /}
+					<img class="left small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
+					{/notempty}
 					<div class="store-type ">
 						<div>
-							<span>某某</span>官方旗舰店
+							{if $vo.store_type == 1 }
+							<span>{$vo.name}</span>官方旗舰店
+							{elseif $vo.store_type == 2/}
+							<span>{$vo.name}</span>品牌旗舰店
+							{else /}
+							{/if}
 						</div>
+						{if $vo.run_type == 1 }
 						<p>B2B采购商城</p>
+						{elseif $vo.run_type == 2 /}
+						<p>B2B分成商城</p>
+						{elseif $vo.run_type == 3 /}
+						<p>B2C零售商城</p>
+						{else /}
+						{/if}
 					</div>
 				</div>
+				{if $vo.auth_status == -2 }
+				<div class="cols">
+					<span>未通过</span>
+				</div>
+				<div class="cols">
+					<a class="text-color-gr reapply_store" href="javascript:void(0);" >重新申请></a>
+				</div>
+				{elseif $vo.auth_status == -1 /}
+				<div class="cols">
+					<span>已关闭</span>
+				</div>
+				<div class="cols">
+					<a class="text-color-gr activate_store" href="javascript:void(0);" >激活店铺></a>
+				</div>
+				{elseif $vo.auth_status == 0 /}
+				<div class="cols">
+					<span>审核中</span>
+				</div>
+				<div class="cols">
+					<a class="text-color-gr close_store" href="javascript:void(0);" >申请关店></a>
+				</div>
+				{elseif $vo.auth_status == 1 /}
+				<div class="cols">
+					<span>建设中</span>
+				</div>
+				<div class="cols">
+					<a class="text-color-gr close_store" href="javascript:void(0);" >申请关店></a>
+				</div>
+				{elseif $vo.auth_status == 2 /}
 				<div class="cols">
 					<span>营业中</span>
 				</div>
 				<div class="cols">
-					<a class="text-color-gr " href="javascript:void(0);" >申请关店></a>
+					<a class="text-color-gr close_store" href="javascript:void(0);" >申请关店></a>
 				</div>
+				{else /}
+				{/if}
+
 			</li>
+			{/volist}
+			{else /}
+			<li><span>暂无店铺</span></li>
+			{/notempty}
 		</ul>
 	</section>
 	<a href="{:url('store/edit')}" class="apply-new-store">申请开新店</a>
@@ -129,7 +120,61 @@
 
 <script type="text/javascript">
 	$(function(){
-	
+		//激活店铺
+		$('body').on('click','.reapply_store',function () {
+			layer.open({
+				title:['是否激活店铺','border-bottom:1px solid #d9d9d9'],
+				className:'editVideoLayer',
+				btn:['确定','取消'],
+				success:function(){
+					layer.msg('的确很重要', {icon: 1});
+				},
+				yes:function(index){
+//					var postData = {};
+//					postData.imgs = layermultiVideoAttr;
+//					$.ajax({
+//						url: controller + 'uploadMultiImgToTemp',
+//						data: postData,
+//						type: 'post',
+//						beforeSend: function(){
+//							//$('.loading').show();
+//						},
+//						success: function(info){
+//							if(info.status == 0){
+//								dialog.error(info.msg);
+//								return false;
+//							}
+//							var videoArray = '';
+//							$.each(info.info,function(index,img){
+//								if(img.indexOf("uploads") == -1 && img !=''){
+//									img = uploads+img;
+//								}
+//								videoArray+=img+',';
+//							});
+//							$('.goods-video').data('src',videoArray);
+//							layer.close(index);
+//						},
+//						complete:function(){
+//
+//						},
+//						error:function (xhr) {
+//							dialog.error('AJAX错误'+xhr);
+//						},
+//					});
+				}
+			})
+		});
+		// 重新申请店铺
+		$('body').on('click','.activate_store',function () {
+			alert(1)
+		});
+		//关闭店铺
+		$('body').on('click','.close_store',function () {
+			alert(1)
+		});
+
+
+
 	})
 
 </script>
