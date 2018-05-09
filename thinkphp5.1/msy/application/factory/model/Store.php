@@ -50,7 +50,7 @@ class Store extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectStore($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectStore($where=[],$field=[],$join=[],$order=[],$limit=''){
 		$_where = array(
 			's.status' => 0,
 		);

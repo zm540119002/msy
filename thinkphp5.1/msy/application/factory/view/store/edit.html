@@ -87,6 +87,10 @@
 
 <script type="text/javascript">
 	$(function(){
+		var storesApplied = '{:json_encode($storesApplied)}';
+		storesApplied = JSON.parse(storesApplied);
+		console.log(storesApplied)
+
 		var postData={};
 		var store_type,run_type;
 		//切换
