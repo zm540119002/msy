@@ -28,7 +28,7 @@ class Order extends FactoryBase
      * @param array $config 合成图片参数
      * @return $img->path 合成图片的路径
      *
-     */
+
     public function compose(array $config=[])
     {
         $init = [
@@ -101,5 +101,6 @@ class Order extends FactoryBase
             'obj'    => $fun($path),
         ];
     }
+     */
 
 }
