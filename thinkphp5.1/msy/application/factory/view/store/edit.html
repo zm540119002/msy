@@ -90,24 +90,40 @@
 		var storesApplied = '{:json_encode($storesApplied)}';
 		storesApplied = JSON.parse(storesApplied);
 		console.log(storesApplied)
-
+		
 		var postData={};
 		var store_type,run_type;
 		//切换
-		$('body').on('click','.applyNewStoreLayer li.weui-flex-item',function(){
-			var index=$(this).index();
-			$(this).addClass('current').siblings().removeClass('current');
-			if(index==0){
-				$('.stroe-content .store-one').show();
-				$('.stroe-content .store-two').hide();
-			}else{
-				$('.stroe-content .store-one').hide();
-				$('.stroe-content .store-two').show();
-			}
-		});
+		// $('body').on('click','.applyNewStoreLayer li.weui-flex-item',function(){
+		// 	var index=$(this).index();
+		// 	$(this).addClass('current').siblings().removeClass('current');
+		// 	if(index==0){
+		// 		$('.stroe-content .store-one').show();
+		// 		$('.stroe-content .store-two').hide();
+		// 	}else{
+		// 		$('.stroe-content .store-one').hide();
+		// 		$('.stroe-content .store-two').show();
+		// 	}
+		// });
 		//选择类型和模式
 		$('body').on('click','.store-type-menu a',function(){
+			var _this=$(this);
+			var dataTypeId=_this.data('type');
 			$(this).addClass('current').siblings().removeClass('current');
+			for(var i=0;i<storesApplied.length;i++){
+				if(dataTypeId==storesApplied[i].store_type){
+					$.each($('div[data-store-pattern="pattern"] a'),function(j,val){
+						var _This=$(this);
+						var storePatternId=_This.data('pattern');
+						if(storePatternId==storesApplied[i].run_type){
+							_This.addClass('disabled');
+						}
+					})
+				}
+				if(dataTypeId==2){
+					$('div[data-store-pattern="pattern"] a').removeClass('disabled');
+				}
+			}
 		});
 
 		//选择店铺
@@ -141,6 +157,18 @@
 					$('.store-two').show();
 					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 					$('.brand_stores').find('.run_type').text(runType);
+					for(var i=0;i<storesApplied.length;i++){
+						if(run_type==storesApplied[i].run_type){
+							$.each($('.brand_stores'),function(j,val){
+								var _This=$(this);
+								var foreignId=_This.data('foreign_id');
+								if(foreignId==storesApplied[i].foreign_id){
+									_This.addClass('disabled');
+								}
+							})
+						}
+
+					}
 					$('.factory_store').hide();
 					$('.brand_stores').show();
 				}
