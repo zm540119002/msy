@@ -23,9 +23,9 @@ class Store extends Model {
 //		if(!$result = $validate->check($data)) {
 //			return errorMsg($validate->getError());
 //		}
-		if(input('?post.store_id')){
+		if(input('?post.id')){
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['id' => $data['store_id']]);
+			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
 			if(false !== $result){
 				return successMsg("成功");
 			}
@@ -110,4 +110,5 @@ class Store extends Model {
 		}
 		return $info;
 	}
+	
 }

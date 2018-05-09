@@ -68,6 +68,12 @@ class Store extends FactoryBase
             return $this->fetch();
         }
     }
+    public function setStoreStatus(){
+        if(request()->isAjax()){
+            $model = new \app\factory\model\Store();
+            return $model->edit($this -> factory['factory_id']);
+        }
+    }
 
     //设置默认产商
     public function setDefaultStore(){

@@ -15,7 +15,7 @@ class Promotion extends Model {
 	/**
 	 * 新增和修改
 	 */
-	public function edit($factory_id =''){
+	public function edit($factoryId =''){
 		$validate = validate('Promotion');
 		$data = input('post.');
 		if(!$result = $validate->check($data)) {
@@ -24,19 +24,19 @@ class Promotion extends Model {
 		if(!empty($data['img'])){
 			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
 		}
-		$data['factory_id'] = $factory_id;
+		$data['factory_id'] = $factoryId;
 		$this ->startTrans();
 		if(input('?post.promotion_id')){//修改
 			$where = [
 				['id','=',$data['promotion_id']],
-				['factory_id','=',$factory_id],
+				['factory_id','=',$factoryId],
 			];
 			$file = array(
 				'img',
 			);
 			$oldInfo = $this -> getPromotion($where,$file);
 			$data['update_time'] = time();
-			$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'factory_id'=>$factory_id]);
+			$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'factory_id'=>$factoryId]);
 			if(false == $result){
 				$this ->rollback();
 				return errorMsg($this->getError());
@@ -50,7 +50,7 @@ class Promotion extends Model {
 			}
 		}
 		$modelGoods  = new \app\factory\model\Goods;
-		$result = $modelGoods ->save(['sale_type_'.$data['storeType'] => 1],['id' => $data['goods_id'],'factory_id'=>$factory_id]);
+		$result = $modelGoods ->save(['sale_type_'.$data['storeType'] => 1],['id' => $data['goods_id'],'factory_id'=>$factoryId]);
 		if(false === $result){
 			$this ->rollback();
 			return errorMsg($modelGoods->getLastSql());
