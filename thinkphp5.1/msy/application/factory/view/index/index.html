@@ -33,8 +33,10 @@
 			<div class="top_menu_list">
 				<a href="javascript:void(0);" class="current">供应商</a>
 				<a href="javascript:void(0);">云推客</a>
-				<a href="javascript:void(0);">培训</a>
-				<a href="javascript:void(0);">美尚会</a>
+				<a href="javascript:void(0);">培训直播</a>
+				<a href="javascript:void(0);">采购商城</a>
+				<a href="javascript:void(0);">分成商城</a>
+				<a href="javascript:void(0);">零售商城</a>
 			</div>
 		</div>
 	</section>
@@ -64,11 +66,11 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
-			<a href="javascript:void(0);" class="deployed-deployment">入驻部署</a>
-			<a href="javascript:void(0);" class="order-management">订单管理</a>
-			<a href="javascript:void(0);" class="order-management-change">采购店铺</a>
-			<a href="javascript:void(0);" class="order-management-change">分成店铺</a>
-			<a href="javascript:void(0);" class="order-management-change">零售店铺</a>
+			<a href="javascript:void(0);" class="deployed-deployment">开店部署</a>
+			<a href="javascript:void(0);" class="order-management">店铺运营</a>
+			<a href="javascript:void(0);" class="order-management-change">订单客服</a>
+			<a href="javascript:void(0);" class="order-management-change">财务结算</a>
+			<a href="javascript:void(0);" class="order-management-change">我的店铺</a>
 		</div>
 	</section>
 	{notempty name="factoryList"}
@@ -78,12 +80,12 @@
 	<input type="hidden" value="" class="factoryId">
 	<section class="message-center-info f20">
 		<div class="factoryInfo" data-id="{$factoryInfo.id|default=''}">企业名称:<span class="vendor-name">{$factoryInfo.name|default=''}</span></div>
-		<p>欢迎来到供应商管理中心</p>
-		<p>入驻部署仅对管理员开放，客服用户请进入订单管理操作</p>
+		<p>欢迎来到供应商管理中心，美尚云平台支持企业多店铺运营管理。</p>
+		<!--<p>入驻部署仅对管理员开放，客服用户请进入订单管理操作</p>-->
 		<!--<p>系统发现你已关联了XX家厂商企业，请选择进入</p>-->
 	</section>
 	<section>
-		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费申请</a>
+		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
 	</section>
 
 	<section class="explain_nav">
