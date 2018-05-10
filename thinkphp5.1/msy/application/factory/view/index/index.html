@@ -12,6 +12,41 @@
 		{/notempty}
 	</ul>
 </section>
+<!--店铺预览-->
+<section id="factoryStoreList" style="display: none;">
+	<ul class="factory-store-list">
+		<li >
+			<a href="#" class="columns_flex l-r-sides ">
+				<img src="public_img/default/no_pic_40.jpg" alt="">
+				<div>
+					<p><span>某某</span>官方旗舰店</p>
+					<p>B2B采购商城</p>
+				</div>
+				<span>营业中</span>
+			</a>
+		</li>
+		<li >
+			<a href="#" class="columns_flex l-r-sides ">
+				<img src="public_img/default/no_pic_40.jpg" alt="">
+				<div>
+					<p><span>某某</span>官方旗舰店</p>
+					<p>B2B分成商城</p>
+				</div>
+				<span>未通过</span>
+			</a>
+		</li>
+		<li >
+			<a href="#" class="columns_flex l-r-sides ">
+				<img src="public_img/default/no_pic_40.jpg" alt="">
+				<div>
+					<p><span>某某</span>官方旗舰店</p>
+					<p>B2B零售商城</p>
+				</div>
+				<span>建设中</span>
+			</a>
+		</li>
+	</ul>
+</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex">
@@ -71,9 +106,9 @@
 		<div class="columns_flex f20">
 			<a href="javascript:void(0);" class="deployed-deployment">开店部署</a>
 			<a href="javascript:void(0);" class="order-management">店铺运营</a>
-			<a href="javascript:void(0);" class="order-management-change">订单客服</a>
-			<a href="javascript:void(0);" class="order-management-change">财务结算</a>
-			<a href="javascript:void(0);" class="order-management-change">我的店铺</a>
+			<a href="javascript:void(0);" class="">订单客服</a>
+			<a href="javascript:void(0);" class="">财务结算</a>
+			<a href="javascript:void(0);" class="my-store">我的店铺</a>
 		</div>
 	</section>
 	{notempty name="factoryList"}
@@ -173,6 +208,15 @@
 			}else {
 				dialog.success('未入驻，请先申请入住',module+'deploy/register')
 			}
+		});
+		//我的店铺
+		var factoryStoreList=$('#factoryStoreList').html();
+		$('body').on('click','.my-store',function () {
+			layer.open({
+				title:['请选择供应商店铺进入预览','border-bottom:1px solid #d9d9d9'],
+				className:'factoryStoreLayer',
+				content:factoryStoreList,
+			})
 		})
 
 

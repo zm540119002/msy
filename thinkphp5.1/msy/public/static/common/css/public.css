@@ -429,7 +429,7 @@ i{
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -152px;
+    background-position:0 -154px;
 }
 .top_bar a.qr-code{
     background-position:0 -195px;
@@ -657,10 +657,10 @@ color: #ed6d00;
     display:block;
 }
 .foot_nav_bar a span.store{
-    background-position:0 0;
+    background-position:0 -125px;
 }
 .foot_nav_bar a span.practitioners{
-    background-position:0 -16px;
+    background-position:0 -14px;
 }
 .foot_nav_bar a span.manufacturer{
     background-position:0 -32px;
@@ -675,7 +675,7 @@ color: #ed6d00;
     background-position:0 -67px;
 }
 .foot_nav_bar .current a span.manufacturer{
-    background-position:0 -83px;
+    background-position:0 -68px;
 }
 /*美尚云从业人员*/
 
@@ -1031,7 +1031,8 @@ color: #ed6d00;
 .addAdminLayer .layui-m-layercont,
 .editVideoLayer .layui-m-layercont,
 .forgetPasswordLayer .layui-m-layercont,
-.applyNewStoreLayer .layui-m-layercont{
+.applyNewStoreLayer .layui-m-layercont,
+.factoryStoreLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }

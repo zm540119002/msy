@@ -116,6 +116,15 @@
     color:#39b54a;
 
 }
+.factory-store-list{
+    padding:.22rem;
+}
+.factory-store-list li{
+    padding:.12rem .15rem;
+    margin:0 0 .25rem 0;
+    border:1px solid #009A3E;
+    border-radius:4px;
+}
 .set-tag-tipc{
     padding:0 0 0 0.15rem;
 }
