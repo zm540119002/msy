@@ -135,44 +135,47 @@
 		$('body').on('click','.next-step',function(){
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
-			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
-				store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
-				run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
-				$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
+			if(storeType.hasClass('current')){
+				if(storePattern.hasClass('current')){
+					store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+					run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
+					$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
 
-				$('.store-one').hide();
-				postData={
-					store_type:store_type,
-					run_type:run_type,
-				}
-				if(store_type ==1 ){
-					$('.factory_store').find('li').attr('disabled',false);
-					$('.store-two').show();
-					var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
-					$('.factory_store').find('.run_type').text(runTypeTxt);
-					$('.brand_stores').hide();
-					$('.factory_store').show();
-				}
-				if(store_type ==2 ){
-					$('.store-two').show();
-					var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
-					$('.brand_stores').find('.run_type').text(runType);
-					for(var i=0;i<storesApplied.length;i++){
-						if(run_type==storesApplied[i].run_type){
-							$.each($('.brand_stores'),function(j,val){
-								var _This=$(this);
-								var foreignId=_This.data('foreign_id');
-								if(foreignId==storesApplied[i].foreign_id){
-									_This.addClass('disabled');
-								}
-							})
-						}
-
+					$('.store-one').hide();
+					postData={
+						store_type:store_type,
+						run_type:run_type,
 					}
-					$('.factory_store').hide();
-					$('.brand_stores').show();
-				}
+					if(store_type ==1 ){
+						$('.factory_store').find('li').attr('disabled',false);
+						$('.store-two').show();
+						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+						$('.factory_store').find('.run_type').text(runTypeTxt);
+						$('.brand_stores').hide();
+						$('.factory_store').show();
+					}
+					if(store_type ==2 ){
+						$('.store-two').show();
+						var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+						$('.brand_stores').find('.run_type').text(runType);
+						for(var i=0;i<storesApplied.length;i++){
+							if(run_type==storesApplied[i].run_type){
+								$.each($('.brand_stores'),function(j,val){
+									var _This=$(this);
+									var foreignId=_This.data('foreign_id');
+									if(foreignId==storesApplied[i].foreign_id){
+										_This.addClass('disabled');
+									}
+								})
+							}
 
+						}
+						$('.factory_store').hide();
+						$('.brand_stores').show();
+					}
+				}else{
+					dialog.error('此店所有经营模式已开过');
+				}
 			}else{
 				dialog.error('请选择店铺类型和经营模式');
 			}
@@ -189,7 +192,7 @@
 					postData.foreign_id = foreign_id;
 				}
 				else{
-					dialog.error('请选择店铺');
+					dialog.error('此店铺所有类型已开过');
 					return false;
 				}
 			}else {
