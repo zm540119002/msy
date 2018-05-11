@@ -33,8 +33,7 @@ return [
     'tpl_replace_string' => [
         'public_img' => Request::domain() .'/static/common/img',
         'public_js' => Request::domain() .'/static/common/js',
-//        'public_css' => Request::domain() .'/static/common/css',
-        'public_css' => '/static/common/css',
+        'public_css' => Request::domain() .'/static/common/css',
 
         'index_img' => Request::domain() .'/static/index/img',
         'index_js' => Request::domain() .'/static/index/js',
