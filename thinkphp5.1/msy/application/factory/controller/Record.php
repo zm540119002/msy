@@ -33,11 +33,13 @@ class Record extends FactoryBase
     public function preview()
     {
         $model = new \app\factory\model\Record();
-        $recordInfo = $model::hasWhere('factory',['id'=>$this->factory['factory_id']])->field('factory.name')->find()->toArray();
-        $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
-        $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
-        $recordInfo['license'] = json_decode($recordInfo['license'],true);
-        $recordInfo['glory_img'] = json_decode($recordInfo['glory_img'],true);
+        $recordInfo = $model::hasWhere('factory',['id'=>$this->factory['factory_id']])->field('factory.name')->find();
+        if(!empty($recordInfo)){
+            $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
+            $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
+            $recordInfo['license'] = json_decode($recordInfo['license'],true);
+            $recordInfo['glory_img'] = json_decode($recordInfo['glory_img'],true);
+        }
         $this -> assign('recordInfo',$recordInfo);
         return $this->fetch();
     }
