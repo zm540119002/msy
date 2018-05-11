@@ -9,6 +9,8 @@ class Index extends Controller
     {
 //        return dump(config());
 //        return $this->request->param('aa');
+        echo $this->request->domain();
+        exit;
         return $this->fetch();
     }
     public function test()
