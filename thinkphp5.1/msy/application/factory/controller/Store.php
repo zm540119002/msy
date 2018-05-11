@@ -82,11 +82,17 @@ class Store extends FactoryBase
         }
     }
 
+    //开店部署首页
+    public function deployIndex(){
+        $this ->assign('factoryId', $this->factory['factory_id']);
+        return $this->fetch('deploy/index');
+    }
+
     //运营管理首页
     public function operaManageIndex(){
         $model = new \app\factory\model\Store();
         $where = [ ['s.factory_id','=',$this->factory['factory_id']] ];
-        $storeCount = $model -> where('factory_id','=',$this->factory['factory_id'])->count('id');
+        $storeCount = $model -> where('factory_id','=',$this -> factory['factory_id']) -> count('id');
         $this -> assign('storeCount',$storeCount);
         if($storeCount > 1){
             $_where = [
