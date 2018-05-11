@@ -145,7 +145,7 @@
 						美容店家
 					</a>
 				</li>
-				<li class="each_column">
+				<li class="each_column current">
 					<a>
 						<span class="practitioners"></span>
 						从业人员
@@ -170,14 +170,8 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
-	//选择厂商
 	var vendorInfoList=$('#vendorInfoList').html();
-	$('body').on('click','.relation-vendor',function(){
-		factoryList();
-	})
-
 	$(function(){
-		// $('.top_menu_list a').tab();
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
@@ -186,12 +180,18 @@
 				clickable: true,
 			},
 		});
+		//切换厂商
 
+		$('body').on('click','.relation-vendor',function(){
+			factoryList();
+		});
+		//没有默认厂商
 		var notDefaultFactory = "{$notDefaultFactory|default=0}";
 		if(notDefaultFactory == 1){
 			factoryList();
 		}
 
+		//开店部署
 		$('body').on('click','.deployed-deployment',function () {
 			var factoryCount = {$factoryCount};
 			if(factoryCount){
@@ -199,7 +199,11 @@
 			}else {
 				dialog.success('未入驻，请先申请入住',module+'deploy/register')
 			}
-		})
+		});
+		//店铺运营
+		$('body').on('click','.store_run',function () {
+			location.href = module + 'Store/operaManageIndex.html';
+		});
 
 		$('body').on('click','.order-management',function () {
 			var factoryCount = {$factoryCount};
@@ -218,9 +222,8 @@
 				content:factoryStoreList,
 			})
 		})
-
-
-	})
+	});
+	//弹层 店铺
 	function factoryList() {
 		layer.open({
 			title:['请选择关联的供应商账号登录','border-bottom:1px solid #d9d9d9'],
@@ -244,10 +247,8 @@
 				var isCurrent=$('.vendorInfoLayer li.current');
 				factoryLayerName=isCurrent.text();
 				factoryLayerId  =isCurrent.data('id');
-				console.log(factoryLayerId);
 				$('.factoryId').val(factoryLayerId);
 				$('.vendor-name').text(factoryLayerName);
-
 				var postData = {};
 				postData.id = factoryLayerId;
 				$.ajax({
@@ -265,7 +266,6 @@
 						if(info.status == 1){
 							//dialog.success(info.msg,module+'index/index');
 						}
-
 					},
 					complete:function(){
 
@@ -278,6 +278,5 @@
 			}
 		})
 	}
-
 </script>
 {/block}

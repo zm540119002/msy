@@ -26,7 +26,6 @@ class Index extends UserBase
               ['u.is_default','=',1],
             ];
             $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
-
             $factoryList = $model -> selectFactoryUser($where_new,$file,$join);
             $this -> assign('factoryList',$factoryList);
             if(!$factoryInfo){
@@ -41,12 +40,5 @@ class Index extends UserBase
         return $this->fetch();
     }
 
-    /**设置登录session
-     */
-    private function _setSession($factoryInfo){
-        $factoryInfo = array_merge($factoryInfo,array('rand' => create_random_str(10, 0),));
-        session('factory', $factoryInfo);
-        session('factory_sign', data_auth_sign($factoryInfo));
-    }
-
+    
 }

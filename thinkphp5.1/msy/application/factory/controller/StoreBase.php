@@ -17,13 +17,30 @@ class StoreBase extends FactoryBase{
     private function _getStore(){
         $model = new \app\factory\model\Store();
         $where = [
-            ['factory_id','=',$this -> factory['factory_id']],
+            ['factory_id','=',$this->factory['factory_id']],
         ];
         $factoryCount = $model -> where($where)->count('id');
         $file = [
-            's.id,s.factory_id,s.is_default,s.name'
+            'u.id,u.factory_id,u.is_default,f.name'
         ];
-
+        if($factoryCount > 1){
+            $_where = [
+                ['factory_id','=',$this->factory['factory_id']],
+                ['u.is_default','=',1],
+            ];
+            $factoryInfo = $model -> getStore($_where,$file);
+            if(!$factoryInfo){
+                $this->success('你有多家厂商入住，请选择一家', 'Index/index');;
+            }
+        }elseif ($factoryCount == 1){
+            $where_new = [
+                ['factory_id','=',$this->factory['factory_id']],
+            ];
+            $factoryInfo = $model -> getStore($where_new,$file);
+        }elseif (!$factoryCount){
+            $this->success('没有产商入住，请入住', 'Deploy/register');
+        }
+        $factoryInfo = array_merge($factoryInfo,array('rand' => create_random_str(10, 0),));
         Session::set('factory',$factoryInfo);
         return  Session::get('factory');
     }

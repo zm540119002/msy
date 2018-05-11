@@ -20,8 +20,6 @@ class FactoryUser extends Model {
 		
 
 	}
-
-
 	//设置默认厂商
 	public function setDefaultFactory($uid=''){
 		if(request()->isAjax()){
