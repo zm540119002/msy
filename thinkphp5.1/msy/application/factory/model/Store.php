@@ -20,17 +20,16 @@ class Store extends Model {
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('Store');
-		if(!$result = $validate->check($data)) {
-			return errorMsg($validate->getError());
-		}
-		if(input('?post.store_id')){
+//		if(!$result = $validate->check($data)) {
+//			return errorMsg($validate->getError());
+//		}
+		if(input('?post.id')){
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['id' => $data['store_id']]);
+			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
 			if(false !== $result){
 				return successMsg("成功");
-			}else{
-				return errorMsg('失败');
 			}
+			return errorMsg('失败',$this->getError());
 		}else{
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
@@ -38,14 +37,10 @@ class Store extends Model {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$this ->commit();
 			return successMsg('提交申请成功');
 		}
 	}
-
-
-
-
+	
 	/**
 	 * @param array $where
 	 * @param array $field
@@ -55,7 +50,7 @@ class Store extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectStore($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function selectStore($where=[],$field=[],$join=[],$order=[],$limit=''){
 		$_where = array(
 			's.status' => 0,
 		);
@@ -115,4 +110,5 @@ class Store extends Model {
 		}
 		return $info;
 	}
+	
 }

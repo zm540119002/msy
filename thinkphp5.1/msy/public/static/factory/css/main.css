@@ -116,6 +116,15 @@
     color:#39b54a;
 
 }
+.factory-store-list{
+    padding:.22rem;
+}
+.factory-store-list li{
+    padding:.12rem .15rem;
+    margin:0 0 .25rem 0;
+    border:1px solid #009A3E;
+    border-radius:4px;
+}
 .set-tag-tipc{
     padding:0 0 0 0.15rem;
 }
@@ -724,6 +733,12 @@
     background: #009A3E;
     color:#fff;
 }
+.store-type-menu a.disabled{
+    background: #999;
+    border:1px solid #999;
+    color:#333;
+    pointer-events: none; 
+}
 .new-store-item .content-label{
     margin-bottom:20px;
 }
@@ -741,4 +756,12 @@
 .applyNewStoreLayer .store-list.current{
     background: #ff7aab;
     color:#fff;
+}
+.applyNewStoreLayer .store-list.disabled{
+    background: #999;
+    color: #333;
+    pointer-events: none;
+}
+.weui-flex .weui-flex-item.disabled{
+    pointer-events: none;
 }

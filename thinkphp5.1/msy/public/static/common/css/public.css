@@ -391,7 +391,7 @@ i{
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 204px;
+    background-size:20px 220px;
     display:block;
     text-indent:-9999rem;
 }
@@ -422,14 +422,17 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -114px;
+    background-position:0 -106px;
 }
 .top_bar a.shopping_cart{
-    background-position:0 -136px;
+    background-position:0 -130px;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -159px;
+    background-position:0 -154px;
+}
+.top_bar a.qr-code{
+    background-position:0 -195px;
 }
 .top_search_module{
     margin:-4px 0 0;
@@ -461,7 +464,7 @@ i{
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
     background-size:20px 204px;
-    background-position:12px -184px;
+    background-position:12px -162px;
 }
 .top_menu_box{
     position:relative;
@@ -654,10 +657,10 @@ color: #ed6d00;
     display:block;
 }
 .foot_nav_bar a span.store{
-    background-position:0 0;
+    background-position:0 -125px;
 }
 .foot_nav_bar a span.practitioners{
-    background-position:0 -16px;
+    background-position:0 -14px;
 }
 .foot_nav_bar a span.manufacturer{
     background-position:0 -32px;
@@ -672,7 +675,7 @@ color: #ed6d00;
     background-position:0 -67px;
 }
 .foot_nav_bar .current a span.manufacturer{
-    background-position:0 -83px;
+    background-position:0 -68px;
 }
 /*美尚云从业人员*/
 
@@ -1028,7 +1031,8 @@ color: #ed6d00;
 .addAdminLayer .layui-m-layercont,
 .editVideoLayer .layui-m-layercont,
 .forgetPasswordLayer .layui-m-layercont,
-.applyNewStoreLayer .layui-m-layercont{
+.applyNewStoreLayer .layui-m-layercont,
+.factoryStoreLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }

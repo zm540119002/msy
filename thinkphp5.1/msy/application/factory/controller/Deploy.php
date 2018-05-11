@@ -1,8 +1,7 @@
 <?php
 namespace app\factory\controller;
-
 use common\controller\UserBase;
-
+use think\facade\Session;
 class Deploy extends UserBase
 {
     /**入驻登记
