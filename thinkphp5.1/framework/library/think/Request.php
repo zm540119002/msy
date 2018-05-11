@@ -397,7 +397,8 @@ class Request
             $this->domain = $domain;
             return $this;
         } elseif (!$this->domain) {
-            $this->domain = $this->scheme() . '://' . $this->host();
+            $this->domain = 'https://baidu.com';
+//            $this->domain = $this->scheme() . '://' . $this->host();
         }
 
         return $this->domain;
