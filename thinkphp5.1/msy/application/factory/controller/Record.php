@@ -12,10 +12,14 @@ class Record extends FactoryBase
         }else{
 //            if(input('?record_id')){
 //                $recordId = input('record_id');
-//
+//                $where = [
+//                    ['id','=',$recordId],
+//                    ['factory_id','=',$this->factory['factory_id']],
+//                ];
+//                $recordInfo =  $model -> getRecord($where);
+//                $this -> assign('recordInfo',$recordInfo);
 //            }
             $where = [
-//                    ['id','=',$recordId],
                 ['factory_id','=',$this->factory['factory_id']],
             ];
             $recordInfo =  $model -> getRecord($where);
