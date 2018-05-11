@@ -63,14 +63,16 @@ class Brand extends Model {
 				->join(array_merge($_join,$join))
 				->order($order)
 				->limit($limit)
-				->select();
+				->select()
+			    ->toArray();
 		}else{
 			$list = $this->alias('b')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->order($order)
 				->limit($limit)
-				->select();
+				->select()
+			    ->toArray();
 		}
 		return $list;
 	}
@@ -94,12 +96,14 @@ class Brand extends Model {
 				->field($field)
 				->where($where)
 				->join(array_merge($_join,$join))
-				->find();
+				->find()
+			    ->toArray();
 		}else{
 			$info = $this->alias('b')
 				->where($where)
 				->join(array_merge($_join,$join))
-				->find();
+				->find()
+			    ->toArray();
 		}
 		return $info;
 	}

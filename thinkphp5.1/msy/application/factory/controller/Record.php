@@ -3,11 +3,6 @@ namespace app\factory\controller;
 
 class Record extends FactoryBase
 {
-    //部署首页
-    public function deployIndex(){
-        $this ->assign('factoryId', $this->factory['factory_id']);
-        return $this->fetch('deploy/index');
-    }
 
     //产商档案编辑
     public function edit(){
@@ -15,15 +10,20 @@ class Record extends FactoryBase
         if(request()->isAjax()){
             return $model -> edit($this->factory['factory_id']);
         }else{
-            if(input('?record_id')){
-                $recordId = input('record_id');
-                $where = [
-                    ['id','=',$recordId],
-                    ['factory_id','=',$this->factory['factory_id']],
-                ];
-                $recordInfo =  $model -> getRecord($where);
-                $this -> assign('recordInfo',$recordInfo);
-            }
+//            if(input('?record_id')){
+//                $recordId = input('record_id');
+//                $where = [
+//                    ['id','=',$recordId],
+//                    ['factory_id','=',$this->factory['factory_id']],
+//                ];
+//                $recordInfo =  $model -> getRecord($where);
+//                $this -> assign('recordInfo',$recordInfo);
+//            }
+            $where = [
+                ['factory_id','=',$this->factory['factory_id']],
+            ];
+            $recordInfo =  $model -> getRecord($where);
+            $this -> assign('recordInfo',$recordInfo);
             return $this->fetch();
         }
     }

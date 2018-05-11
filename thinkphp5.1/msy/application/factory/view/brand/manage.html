@@ -29,6 +29,7 @@
 			<span class="cols">备注</span>
 		</div>
 		<ul class="trademark-info">
+			{notempty name="brandList"}
 			{volist name="brandList" id="vo"}
 				<li class="">
 					<div class="cols">
@@ -49,6 +50,9 @@
 					</div>
 				</li>
 			{/volist}
+			{else /}
+				<li>暂无商标</li>
+			{/notempty}
 		</ul>
 	</section>
 	<a href="{:url('brand/record')}" class="foot-btn f24">进行新的商标备案</a>
