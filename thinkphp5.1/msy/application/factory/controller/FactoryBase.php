@@ -1,13 +1,22 @@
 <?php
 namespace app\factory\controller;
 use common\controller\UserBase;
+use think\facade\Session;
 /**用户信息验证控制器基类
  */
 class FactoryBase extends UserBase{
     protected $factory = null;
-
+    
     public function __construct(){
         parent::__construct();
+        $factoryInfo = Session::get('factory');;
+        if(empty($factoryInfo)){
+            $factoryInfo = $this ->_getFactory();
+        }
+        $this->factory =  $factoryInfo;
+    }
+
+    private function _getFactory(){
         $model = new \app\factory\model\FactoryUser();
         $uid = $this -> user['id'];
         $where = [
@@ -38,6 +47,9 @@ class FactoryBase extends UserBase{
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }
-        $this->factory =  $factoryInfo;
+//        $this->factory =  $factoryInfo;
+        $factoryInfo = array_merge($factoryInfo,array('rand' => create_random_str(10, 0),));
+        Session::set('factory',$factoryInfo);
+        return  Session::get('factory');
     }
 }
