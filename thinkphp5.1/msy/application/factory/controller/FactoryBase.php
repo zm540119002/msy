@@ -9,7 +9,8 @@ class FactoryBase extends UserBase{
     
     public function __construct(){
         parent::__construct();
-        $factoryInfo = Session::get('factory');;
+        $factoryInfo = Session::get('factory');
+
         if(empty($factoryInfo)){
             $factoryInfo = $this ->_getFactory();
         }
@@ -37,7 +38,7 @@ class FactoryBase extends UserBase{
             ];
             $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
             if(!$factoryInfo){
-                $this->success('你有多家厂商入住，请选择一家', 'Index/index');;
+                $this->success('你有多家厂商入住，请选择一家', 'Index/index');
             }
         }elseif ($factoryCount == 1){
             $where_new = [

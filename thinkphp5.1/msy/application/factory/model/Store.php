@@ -88,7 +88,7 @@ class Store extends Model {
 	 */
 	public function getStore($where=[],$field=[],$join=[]){
 		$_where = array(
-			'status' => 0,
+			's.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
@@ -110,5 +110,32 @@ class Store extends Model {
 		}
 		return $info;
 	}
-	
+
+	//设置默认店铺
+	public function setDefaultStore($factoryId=''){
+		if(request()->isAjax()){
+			$id = (int)input('post.id');
+			if(!$id){
+				return errorMsg('参数错误');
+			}
+			$this->startTrans();
+			$data = array('is_default' => 1);
+			$result = $this->allowField(true)->save($data,['id' => $id,'factory_id'=>$factoryId]);
+			if(false === $result){
+				$this->rollback();
+				return errorMsg('修改默认失败');
+			}
+			$where = [
+				['id','<>',$id],
+				['factory_id','=',$factoryId],
+			];
+			$result = $this ->where($where)->setField('is_default',0);
+			if(false === $result){
+				$this->rollback();
+				return errorMsg('修改失败');
+			}
+			$this->commit();
+			return successMsg("已选择");
+		}
+	}
 }

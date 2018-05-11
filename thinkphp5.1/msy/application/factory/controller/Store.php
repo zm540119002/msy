@@ -1,6 +1,6 @@
 <?php
 namespace app\factory\controller;
-
+use think\facade\Session;
 class Store extends FactoryBase
 {
     /**
@@ -35,7 +35,6 @@ class Store extends FactoryBase
         $this -> assign('storeList',$storeList);
         return $this->fetch();
     }
-
     /**
      * 店铺管理
      */
@@ -68,18 +67,46 @@ class Store extends FactoryBase
             return $this->fetch();
         }
     }
+    //设置店铺运营状态
     public function setStoreStatus(){
         if(request()->isAjax()){
             $model = new \app\factory\model\Store();
             return $model->edit($this -> factory['factory_id']);
         }
     }
-
     //设置默认产商
     public function setDefaultStore(){
         if(request()->isAjax()){
             $model = new \app\factory\model\Store();
-            return $model->setDefaultFactory($this->user['id']);
+            return $model->setDefaultStore($this->factory['factory_id']);
         }
+    }
+
+    //运营管理首页
+    public function operaManageIndex(){
+        $model = new \app\factory\model\Store();
+        $where = [ ['s.factory_id','=',$this->factory['factory_id']] ];
+        $storeCount = $model -> where('factory_id','=',$this->factory['factory_id'])->count('id');
+        $this -> assign('storeCount',$storeCount);
+        if($storeCount > 1){
+            $_where = [
+                ['u.factory_id','=',$this->factory['factory_id']],
+                ['u.is_default','=',1],
+            ];
+            $storeInfo = $model -> getStore($_where);
+            $storeList = $model -> selectStore($where);
+            $this -> assign('factoryList',$storeList);
+            if(!$storeInfo){
+                $this -> assign('notDefaultStore',1);
+            }
+            $this -> assign('storeInfo',$storeInfo);
+        }elseif ($storeCount == 1){
+            $storeInfo = $model -> getStore($where);
+            $this -> assign('storeInfo',$storeInfo);
+        }else{
+            
+        }
+        Session::set('store',$storeInfo);
+        return $this->fetch();
     }
 }
