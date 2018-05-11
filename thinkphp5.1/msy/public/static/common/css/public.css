@@ -391,12 +391,20 @@ i{
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 220px;
+    background-size:20px 240px;
     display:block;
     text-indent:-9999rem;
 }
+.top-switch-bar div:nth-child(2){
+    width:50%;
+}
+.top-switch-bar a.home{
+    width:20px;
+    margin:0 0 0 .15rem;
+}
 .top_bar a.switch-account{
     width:auto;
+    margin:0 10px 0 0;
     background:none;
     text-indent: 0;
 }
@@ -422,17 +430,17 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -106px;
+    background-position:0 -127px;
 }
 .top_bar a.shopping_cart{
-    background-position:0 -130px;
+    background-position:0 -150px;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -154px;
+    background-position:0 -172px;
 }
 .top_bar a.qr-code{
-    background-position:0 -195px;
+    background-position:0 -218px;
 }
 .top_search_module{
     margin:-4px 0 0;
@@ -463,8 +471,8 @@ i{
     margin:4px 0 0;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 204px;
-    background-position:12px -162px;
+    background-size:20px 240px;
+    background-position:12px -198px;
 }
 .top_menu_box{
     position:relative;
@@ -657,10 +665,10 @@ color: #ed6d00;
     display:block;
 }
 .foot_nav_bar a span.store{
-    background-position:0 -125px;
+    background-position:0 -130px;
 }
 .foot_nav_bar a span.practitioners{
-    background-position:0 -14px;
+    background-position:0 -12px;
 }
 .foot_nav_bar a span.manufacturer{
     background-position:0 -32px;
@@ -669,13 +677,13 @@ color: #ed6d00;
     color:#ff7aab;
 }
 .foot_nav_bar .current a span.store{
-    background-position:0 -50px;
+    background-position:0 -46px;
 }
 .foot_nav_bar .current a span.practitioners{
-    background-position:0 -67px;
+    background-position:0 -61px;
 }
 .foot_nav_bar .current a span.manufacturer{
-    background-position:0 -68px;
+    background-position:0 -75px;
 }
 /*美尚云从业人员*/
 
@@ -1862,7 +1870,7 @@ input[type=text]::-webkit-focus-inner {
     }
 /*账号授权*/
 .account-content-wrapper{
-    padding:0.25rem 0.20rem;
+    padding:0.25rem 0.20rem 1rem;
 }
 .account-top .columns_flex{
     margin:0.15rem 0;
