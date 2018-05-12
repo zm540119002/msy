@@ -1,6 +1,6 @@
 <?php
 namespace common\controller;
-
+use \common\component\image\Image;
 /**基于公共基础控制器
  */
 class Base extends \think\Controller{
@@ -62,13 +62,12 @@ class Base extends \think\Controller{
             return errorMsg('保存文件失败');
         }
 //        //压缩文件
-//        if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
-//            $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
-//            $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
-//            $image = new \think\Image();
-//            $image->open($photo);
-//            $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
-//        }
+        if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
+            $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
+            $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
+            $image = Image::open($photo);
+            $image->thumb($imgWidth, $imgHeight,Image::THUMB_SCALING)->save($photo);
+        }
         return successMsg($tempRelativePath . $fileName);
     }
     //返回图片临时相对路,上传多张图片
@@ -127,13 +126,12 @@ class Base extends \think\Controller{
                     return errorMsg('保存文件失败');
                 }
                 //压缩文件
-//                if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
-//                    $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
-//                    $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
-//                    $image = new \think\Image();
-//                    $image->open($photo);
-//                    $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
-//                }
+                if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
+                    $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
+                    $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
+                    $image = Image::open($photo);
+                    $image->thumb($imgWidth, $imgHeight,Image::THUMB_SCALING)->save($photo);
+                }
                 $imgsNew[] = $tempRelativePath . $fileName;
             }else{
                 $imgsNew[] = $img;
@@ -199,13 +197,13 @@ class Base extends \think\Controller{
                     return errorMsg('保存文件失败');
                 }
                 //压缩文件
-//                if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
-//                    $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
-//                    $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
-//                    $image = new \think\Image();
-//                    $image->open($photo);
-//                    $image->thumb($imgWidth, $imgHeight,\Think\Image::IMAGE_THUMB_SCALE)->save($photo);
-//                }
+                //压缩文件
+                if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
+                    $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
+                    $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
+                    $image = Image::open($photo);
+                    $image->thumb($imgWidth, $imgHeight,Image::THUMB_SCALING)->save($photo);
+                }
                 $imgsNew[$k]['imgSrc'] = $tempRelativePath . $fileName;
                 $imgsNew[$k]['imgText'] = $img['imgText'];
             }else{

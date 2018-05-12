@@ -1,11 +1,7 @@
 <section id="vendorInfoList" style="display:none;">
     <ul class="vendorInfoList">
         {volist name="storeList" id="vo"}
-        {if $vo.is_default == 1 }
-        <li class="current" data-id="{$vo.id}">
-            {else /}
         <li class="" data-id="{$vo.id}">
-        {/if}
             {if $vo.store_type == 1 }
             <span>{$vo.name}</span>官方旗舰店
             {elseif $vo.store_type == 2/}
