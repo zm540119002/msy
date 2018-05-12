@@ -14,7 +14,7 @@ class Index extends UserBase
         $factoryCount = $model -> where($where)->count('id');
         $this -> assign('factoryCount',$factoryCount);
         $file = [
-            'u.id,u.factory_id,f.name'
+            'u.id,u.factory_id,u.is_default,f.name'
         ];
         $join =[
             ['factory f','f.id = u.factory_id'],

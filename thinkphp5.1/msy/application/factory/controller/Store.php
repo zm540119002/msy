@@ -9,29 +9,7 @@ class Store extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Store();
-        //企业旗舰店
-        $where = [
-            ['s.factory_id','=',$this->factory['factory_id']],
-            ['s.store_type','=',1],
-        ];
-        $file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,f.name,r.logo_img as img'];
-        $join =[
-            ['factory f','f.id = s.foreign_id'],
-            ['record r','s.foreign_id = r.factory_id'],
-        ];
-        $factoryStore = $model -> selectStore($where,$file,$join);
-        $this -> assign('factoryStore',$factoryStore);
-        //品牌旗舰店
-        $where = [
-            ['s.factory_id','=',$this->factory['factory_id']],
-            ['s.store_type','=',2],
-        ];
-        $file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
-        $join =[
-            ['brand b','b.id = s.foreign_id'],
-        ];
-        $brandStores = $model->selectStore($where,$file,$join);
-        $storeList = array_merge($factoryStore,$brandStores);
+        $storeList =  $model -> getStoreList($this -> factory['factory_id']);
         $this -> assign('storeList',$storeList);
         return $this->fetch();
     }
@@ -91,26 +69,26 @@ class Store extends FactoryBase
     //运营管理首页
     public function operaManageIndex(){
         $model = new \app\factory\model\Store();
-        $where = [ ['s.factory_id','=',$this->factory['factory_id']] ];
         $storeCount = $model -> where('factory_id','=',$this -> factory['factory_id']) -> count('id');
         $this -> assign('storeCount',$storeCount);
         if($storeCount > 1){
             $_where = [
-                ['u.factory_id','=',$this->factory['factory_id']],
-                ['u.is_default','=',1],
+                ['s.factory_id','=',$this->factory['factory_id']],
+                ['s.is_default','=',1],
             ];
             $storeInfo = $model -> getStore($_where);
-            $storeList = $model -> selectStore($where);
-            $this -> assign('factoryList',$storeList);
+            $storeList =  $model -> getStoreList($this -> factory['factory_id']);
+            $this -> assign('storeList',$storeList);
             if(!$storeInfo){
                 $this -> assign('notDefaultStore',1);
             }
             $this -> assign('storeInfo',$storeInfo);
         }elseif ($storeCount == 1){
+            $where = [ ['s.factory_id','=',$this->factory['factory_id']] ];
             $storeInfo = $model -> getStore($where);
             $this -> assign('storeInfo',$storeInfo);
         }else{
-            
+            $this -> assign('noStore',1);
         }
         Session::set('store',$storeInfo);
         return $this->fetch();
