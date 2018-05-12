@@ -12,10 +12,14 @@ class Record extends FactoryBase
         }else{
 //            if(input('?record_id')){
 //                $recordId = input('record_id');
-//
+//                $where = [
+//                    ['id','=',$recordId],
+//                    ['factory_id','=',$this->factory['factory_id']],
+//                ];
+//                $recordInfo =  $model -> getRecord($where);
+//                $this -> assign('recordInfo',$recordInfo);
 //            }
             $where = [
-//                    ['id','=',$recordId],
                 ['factory_id','=',$this->factory['factory_id']],
             ];
             $recordInfo =  $model -> getRecord($where);
@@ -29,11 +33,13 @@ class Record extends FactoryBase
     public function preview()
     {
         $model = new \app\factory\model\Record();
-        $recordInfo = $model::hasWhere('factory',['id'=>$this->factory['factory_id']])->field('factory.name')->find()->toArray();
-        $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
-        $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
-        $recordInfo['license'] = json_decode($recordInfo['license'],true);
-        $recordInfo['glory_img'] = json_decode($recordInfo['glory_img'],true);
+        $recordInfo = $model::hasWhere('factory',['id'=>$this->factory['factory_id']])->field('factory.name')->find();
+        if(!empty($recordInfo)){
+            $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
+            $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
+            $recordInfo['license'] = json_decode($recordInfo['license'],true);
+            $recordInfo['glory_img'] = json_decode($recordInfo['glory_img'],true);
+        }
         $this -> assign('recordInfo',$recordInfo);
         return $this->fetch();
     }
