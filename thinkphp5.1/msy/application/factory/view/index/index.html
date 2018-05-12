@@ -7,7 +7,11 @@
 	<ul class="vendorInfoList">
 		{notempty name="factoryList"}
 			{volist name="factoryList" id="vo"}
-				<li data-id="{$vo.id}">{$vo.name}</li>
+		        {if $vo.is_default ==1 }
+				<li data-id="{$vo.id}" class="current">{$vo.name}</li>
+				{else /}
+				<li data-id="{$vo.id}" class="">{$vo.name}</li>
+				{/if}
 			{/volist}
 		{/notempty}
 	</ul>
@@ -264,6 +268,7 @@
 							return false;
 						}
 						if(info.status == 1){
+							_this.addClass('current').siblings().removeClass('current');
 							//dialog.success(info.msg,module+'index/index');
 						}
 					},

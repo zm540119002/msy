@@ -138,4 +138,31 @@ class Store extends Model {
 			return successMsg("已选择");
 		}
 	}
+	
+	//获取店铺的列表
+	public function getStoreList($factoryId=''){
+		//企业旗舰店
+		$where = [
+			['s.factory_id','=',$factoryId],
+			['s.store_type','=',1],
+		];
+		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,f.name,r.logo_img as img'];
+		$join =[
+			['factory f','f.id = s.foreign_id'],
+			['record r','s.foreign_id = r.factory_id'],
+		];
+		$factoryStore = $this -> selectStore($where,$file,$join);
+		//品牌旗舰店
+		$where = [
+			['s.factory_id','=',$factoryId],
+			['s.store_type','=',2],
+		];
+		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
+		$join =[
+			['brand b','b.id = s.foreign_id'],
+		];
+		$brandStores = $this->selectStore($where,$file,$join);
+		$storeList = array_merge($factoryStore,$brandStores);
+		return $storeList;
+	}
 }
