@@ -30,36 +30,36 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        'public_img' => Request::domain() .'/static/common/img',
-        'public_js' => Request::domain() .'/static/common/js',
-        'public_css' => Request::domain() .'/static/common/css',
+        'public_img' => \think\facade\Request::domain() .'/static/common/img',
+        'public_js' => \think\facade\Request::domain() .'/static/common/js',
+        'public_css' => \think\facade\Request::domain() .'/static/common/css',
 
-        'index_img' => Request::domain() .'/static/index/img',
-        'index_js' => Request::domain() .'/static/index/js',
-        'index_css' => Request::domain() .'/static/index/css',
+        'index_img' => \think\facade\Request::domain() .'/static/index/img',
+        'index_js' => \think\facade\Request::domain() .'/static/index/js',
+        'index_css' => \think\facade\Request::domain() .'/static/index/css',
 
-        'store_img' => Request::domain() .'/static/store/img',
-        'store_js' => Request::domain() .'/static/store/js',
-        'store_css' => Request::domain() .'/static/store/css',
+        'store_img' => \think\facade\Request::domain() .'/static/store/img',
+        'store_js' => \think\facade\Request::domain() .'/static/store/js',
+        'store_css' => \think\facade\Request::domain() .'/static/store/css',
 
-        'store_admin_img' => Request::domain() .'/static/store_admin/img',
-        'store_admin_js' => Request::domain() .'/static/store_admin/js',
-        'store_admin_css' => Request::domain() .'/static/store_admin/css',
+        'store_admin_img' => \think\facade\Request::domain() .'/static/store_admin/img',
+        'store_admin_js' => \think\facade\Request::domain() .'/static/store_admin/js',
+        'store_admin_css' => \think\facade\Request::domain() .'/static/store_admin/css',
 
-        'factory_img' => Request::domain() .'/static/factory/img',
-        'factory_js' => Request::domain() .'/static/factory/js',
-        'factory_css' => Request::domain() .'/static/factory/css',
+        'factory_img' => \think\facade\Request::domain() .'/static/factory/img',
+        'factory_js' => \think\facade\Request::domain() .'/static/factory/js',
+        'factory_css' => \think\facade\Request::domain() .'/static/factory/css',
 
-        'factory_admin_img' => Request::domain() .'/static/factory_admin/img',
-        'factory_admin_js' => Request::domain() .'/static/factory_admin/js',
-        'factory_admin_css' => Request::domain() .'/static/factory_admin/css',
+        'factory_admin_img' => \think\facade\Request::domain() .'/static/factory_admin/img',
+        'factory_admin_js' => \think\facade\Request::domain() .'/static/factory_admin/js',
+        'factory_admin_css' => \think\facade\Request::domain() .'/static/factory_admin/css',
 
-        'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
-        'public_admin_common_js' => Request::domain() .'/static/admin/common/js',
-        'public_admin_common_css' => Request::domain() .'/static/admin/common/css',
-        'public_admin_common_img' => Request::domain() .'/static/admin/common/img',
+        'public_hui_admin' => \think\facade\Request::domain() .'/static/admin/hadmin',
+        'public_admin_common_js' => \think\facade\Request::domain() .'/static/admin/common/js',
+        'public_admin_common_css' => \think\facade\Request::domain() .'/static/admin/common/css',
+        'public_admin_common_img' => \think\facade\Request::domain() .'/static/admin/common/img',
         
-        'public_uploads' => Request::domain() .'/uploads',
+        'public_uploads' => \think\facade\Request::domain() .'/uploads',
 
     ],
 ];
