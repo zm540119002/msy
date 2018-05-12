@@ -12,7 +12,7 @@
 namespace think;
 
 use think\exception\HttpResponseException;
-use think\Config;
+
 class Request
 {
     /**
