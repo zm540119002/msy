@@ -13,9 +13,10 @@ class Index extends Controller
     }
     public function test()
     {
-        echo realpath('../../image.png');
+        echo __FILE__;
+        echo  realpath(dirname(__FILE__) . '/../application');
         exit;
-        $image = \think\Image::open('./image.png');
+        $image = \common\component\image\Image::open('./image.png');
         print_r($image);
         exit;
         return $this->fetch();
