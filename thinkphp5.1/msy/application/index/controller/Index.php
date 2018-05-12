@@ -13,6 +13,11 @@ class Index extends Controller
     }
     public function test()
     {
+        echo realpath('../../image.png');
+        exit;
+        $image = \think\Image::open('./image.png');
+        print_r($image);
+        exit;
         return $this->fetch();
     }
 }
