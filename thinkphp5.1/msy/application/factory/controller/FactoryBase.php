@@ -49,7 +49,6 @@ class FactoryBase extends UserBase{
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }
 //        $this->factory =  $factoryInfo;
-        $factoryInfo = array_merge($factoryInfo,array('rand' => create_random_str(10, 0),));
         Session::set('factory',$factoryInfo);
         return  Session::get('factory');
     }
