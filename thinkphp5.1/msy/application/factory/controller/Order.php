@@ -47,7 +47,7 @@ class Order extends FactoryBase
      */
     public function out()
     {
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**
@@ -65,7 +65,7 @@ class Order extends FactoryBase
      */
     public function bill()
     {
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**
@@ -76,5 +76,21 @@ class Order extends FactoryBase
     {
         return $this->fetch('index');
     }
+
+    /**
+     *根据订单号查订单详情
+     *@param number|string $order_id
+     *@param boolean $json
+     *@return array|json
+     */
+    public function  detail($order_id, $json=false)
+    {
+        $order_id = '201805141234';
+        if($json){
+            return json(['order_id'=>$order_id, 'detail'=>['订单详情']]);
+        }
+        return ['order_id'=>$order_id, 'detail'=>['订单详情']];
+    }
+    
 
 }

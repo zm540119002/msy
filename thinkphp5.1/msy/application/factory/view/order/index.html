@@ -4,6 +4,7 @@
 		dl{background: #ccfdff; margin-bottom: 5px; padding:10px; border-radius:10px;}
 		.print{background:red; color:white; width:30%; text-align: center;
 			padding:3px; font-weight: bold; border-radius:5px;}
+
 	</style>
 {/block}
 {block name="content"}
@@ -86,7 +87,6 @@
 	</section>
 </article>
 
-
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy.html" /}
@@ -98,7 +98,7 @@
 <script type="text/javascript">
 $(function () {
 	$('.record').click(function () {
-		alert(1)
+		//alert(1);
 	});
 
 	$('.print').on('click', function(){
@@ -107,10 +107,12 @@ $(function () {
 			type: 1,
 			title: '订单管理'+order_id,
 			area: '80%',
+			closeBtn: 2,
 			shadeClose: true, //点击遮罩关闭
 			content: '<!--startprint--><dl><dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt><dd><p>下单时间：2018-05-07 09:56:57</p><p>分类：购买商品</p><p>状态：新订单</p><p>总价：￥199.56元</p><p>收货人：张生</p><div class="print" data="1" onClick="doPrint()">打印商品订单</div></dd></dl><div>Ajax获取的订单内容</div><!--endprint-->'
 		});
 	});
+
 });
 
 function doPrint() {
