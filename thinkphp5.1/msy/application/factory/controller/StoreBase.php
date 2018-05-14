@@ -9,12 +9,12 @@ class StoreBase extends FactoryBase{
         parent::__construct();
         $factoryInfo = Session::get('factory');;
         if(empty($factoryInfo)){
-            $factoryInfo = $this ->_getStore();
+            $factoryInfo = $this ->getStore();
         }
         $this->factory =  $factoryInfo;
     }
 
-    private function _getStore(){
+    public function getStore(){
         $model = new \app\factory\model\Store();
         $where = [
             ['factory_id','=',$this->factory['factory_id']],
