@@ -115,4 +115,14 @@ class Order extends FactoryBase
         return true;
     }
 
+    /**
+     * 订单商品数据与扫描数据比对
+     * @param json $scan 扫描到的商品数据
+     * @param number|string $order_id 订单号
+     * @return boolean|json|array 比对完全一致或返回其差异数据
+     */
+    public function compareGoods($order_id, $scan){
+        return true;
+    }
+
 }
