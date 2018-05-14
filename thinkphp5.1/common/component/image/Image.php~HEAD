@@ -9,10 +9,10 @@
 // | Author: yunwuxin <448901948@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think;
+namespace common\component\image;
 
-use think\image\Exception as ImageException;
-use think\image\gif\Gif;
+use common\component\image\Exception as ImageException;
+use common\component\image\gif\Gif;
 
 class Image
 {
