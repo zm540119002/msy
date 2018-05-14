@@ -1,0 +1,159 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<section class="htmleaf-container" style="display: none;">
+	<div id="clipArea">
+		<div class="photo-clip-view" >
+			<div class="photo-clip-moveLayer" >
+				<div class="photo-clip-rotateLayer"></div>
+			</div>
+		</div>
+		<div class="photo-clip-mask">
+			<div class="photo-clip-mask-left"></div>
+			<div class="photo-clip-mask-right" ></div>
+			<div class="photo-clip-mask-top" ></div>
+			<div class="photo-clip-mask-bottom" ></div>
+			<div class="photo-clip-area" ></div>
+		</div>
+		<a href="javascript:void(0);" class="photoClip-close ">X</a>
+	</div>
+	<div class="foot-use f28">
+		<div class="uploader1 blue">
+			<input type="button" name="file" class="button" value="打开图片">
+			<input id="file" type="file" onchange="javascript:void(0);" accept="image/*" multiple="" />
+		</div>
+		<button id="clipBtn">截取</button>
+	</div>
+	<div id="view" class="photoview" ></div>
+</section>
+<article class="f24">
+	<section class="top_nav_fixed">
+		<div class="top_bar columns_flex l-r-sides">
+			<div class="">
+				<a class="home">首页</a>
+			</div>
+			<div class="">
+				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+				<span>爱国宾</span>
+			</div>
+			<div class="">
+				<a class="switch-account">切换我的店铺</a>
+			</div>
+		</div>
+	</section>
+	<section class="columns_flex l-r-sides">
+		<div>
+			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+			<div>
+				<p><span>某某</span>官方旗舰店</p>
+				<p>B2B采购商城 <span>供应商自营</span></p>
+			</div>
+		</div>
+		<div>
+			<a href="" class="personal_center">我的</a>
+			<a href="" class="my-store">我的店铺</a>
+		</div>
+	</section>
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="" class="current">
+				店铺提醒
+			</a>
+			<a href="">
+				店铺管理
+			</a>
+			<a href="">
+				营销推广
+			</a>
+			<a href="">
+				官方活动
+			</a>
+		</nav>
+	</section>
+
+</article>
+
+{/block}
+{block name="common"}
+{include file="store/list_layer" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+	var vendorInfoList=$('#vendorInfoList').html();
+	$(function(){
+		//没有店铺
+		var notStore = "{$noStore|default=0}";
+		if(notStore == 1){
+			dialog.success('暂无店铺，去申请开店',module+'Store/edit')
+		}
+		//切换店铺
+		$('body').on('click','.switch-account',function(){
+			storeList();
+		});
+		//没有默认店铺
+		var notDefaultStore = "{$notDefaultStore|default=0}";
+		if(notDefaultStore == 1){
+			storeList();
+		}
+	})
+	//弹层 店铺
+	function storeList() {
+		layer.open({
+			title:['请选择关联的供应商账号登录','border-bottom:1px solid #d9d9d9'],
+			className:'vendorInfoLayer',
+			content:vendorInfoList,
+			btn:['确定'],
+			success:function(){
+				var storeId=$('.storeId').val();
+				$('.vendorInfoLayer li').on('click',function(){
+					var _this=$(this);
+					_this.addClass('current').siblings().removeClass('current');
+				});
+				$.each($('.vendorInfoLayer li'),function(){
+					var currentId=$(this).data('id');
+					if(storeId==currentId){
+						$(this).addClass('current');
+					}
+				})
+			},
+			yes:function(index){
+				var isCurrent=$('.vendorInfoLayer li.current');
+				factoryLayerName=isCurrent.text();
+				factoryLayerId  =isCurrent.data('id');
+				$('.factoryId').val(factoryLayerId);
+				$('.vendor-name').text(factoryLayerName);
+				var postData = {};
+				postData.id = factoryLayerId;
+				$.ajax({
+					url: module + 'Store/setDefaultStore',
+					data: postData,
+					type: 'post',
+					beforeSend: function(){
+						//$('.loading').show();
+					},
+					success: function(info){
+						if(info.status == 0){
+							dialog.error(info.msg);
+							return false;
+						}
+						if(info.status == 1){
+							//dialog.success(info.msg,module+'index/index');
+						}
+					},
+					complete:function(){
+
+					},
+					error:function (xhr) {
+						dialog.error('AJAX错误'+xhr);
+					},
+				});
+				layer.close(index);
+			}
+		})
+	}
+</script>
+{/block}

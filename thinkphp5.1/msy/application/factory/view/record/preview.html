@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
+{notempty name="recordInfo"}
 <article class="f24">
 	<section>
 		<div>
@@ -109,7 +110,10 @@
 		</div>
 	</section>
 </article>
-<a href="javascript:void(0);" class="identifyNewGoods foot-btn f24">确定预览</a>
+{else /}
+<span>没有档案</span>
+{/notempty}
+<a href="{:url('record/edit')}" class="identifyNewGoods foot-btn f24">进入传统编辑模式></a>
 <div id="areaMask" class="mask"></div>
 
 {/block}

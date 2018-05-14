@@ -15,7 +15,7 @@ class Brand extends Model {
 	/**
 	 * 编辑 新增和修改
 	 */
-	public function edit($factory_id = ''){
+	public function edit($factoryId = ''){
 		$data = input('post.');
 		$validate = validate('Brand');
 		if(!$result = $validate->scene('edit')->check($data)) {
@@ -24,7 +24,7 @@ class Brand extends Model {
 		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
 		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
 		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
-		$data['factory_id'] = $factory_id;
+		$data['factory_id'] = $factoryId;
 		if(input('?post.brand_id')){//修改
 			$data['update_time'] = time();
 			$data['auth_status'] = 0;
@@ -63,14 +63,16 @@ class Brand extends Model {
 				->join(array_merge($_join,$join))
 				->order($order)
 				->limit($limit)
-				->select();
+				->select()
+			    ->toArray();
 		}else{
 			$list = $this->alias('b')
 				->where($where)
 				->join(array_merge($_join,$join))
 				->order($order)
 				->limit($limit)
-				->select();
+				->select()
+			    ->toArray();
 		}
 		return $list;
 	}
@@ -94,12 +96,14 @@ class Brand extends Model {
 				->field($field)
 				->where($where)
 				->join(array_merge($_join,$join))
-				->find();
+				->find()
+			    ->toArray();
 		}else{
 			$info = $this->alias('b')
 				->where($where)
 				->join(array_merge($_join,$join))
-				->find();
+				->find()
+			    ->toArray();
 		}
 		return $info;
 	}

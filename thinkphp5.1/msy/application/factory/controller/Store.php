@@ -1,6 +1,6 @@
 <?php
 namespace app\factory\controller;
-
+use think\facade\Session;
 class Store extends FactoryBase
 {
     /**
@@ -9,33 +9,10 @@ class Store extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Store();
-        //企业旗舰店
-        $where = [
-            ['s.factory_id','=',$this->factory['factory_id']],
-            ['s.store_type','=',1],
-        ];
-        $file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,f.name,r.logo_img as img'];
-        $join =[
-            ['factory f','f.id = s.foreign_id'],
-            ['record r','s.foreign_id = r.factory_id'],
-        ];
-        $factoryStore = $model -> selectStore($where,$file,$join);
-        $this -> assign('factoryStore',$factoryStore);
-        //品牌旗舰店
-        $where = [
-            ['s.factory_id','=',$this->factory['factory_id']],
-            ['s.store_type','=',2],
-        ];
-        $file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
-        $join =[
-            ['brand b','b.id = s.foreign_id'],
-        ];
-        $brandStores = $model->selectStore($where,$file,$join);
-        $storeList = array_merge($factoryStore,$brandStores);
+        $storeList =  $model -> getStoreList($this -> factory['factory_id']);
         $this -> assign('storeList',$storeList);
         return $this->fetch();
     }
-
     /**
      * 店铺管理
      */
@@ -68,12 +45,52 @@ class Store extends FactoryBase
             return $this->fetch();
         }
     }
-
+    //设置店铺运营状态
+    public function setStoreStatus(){
+        if(request()->isAjax()){
+            $model = new \app\factory\model\Store();
+            return $model->edit($this -> factory['factory_id']);
+        }
+    }
     //设置默认产商
     public function setDefaultStore(){
         if(request()->isAjax()){
             $model = new \app\factory\model\Store();
-            return $model->setDefaultFactory($this->user['id']);
+            return $model->setDefaultStore($this->factory['factory_id']);
         }
+    }
+
+    //开店部署首页
+    public function deployIndex(){
+        $this ->assign('factoryId', $this->factory['factory_id']);
+        return $this->fetch('deploy/index');
+    }
+
+    //运营管理首页
+    public function operaManageIndex(){
+        $model = new \app\factory\model\Store();
+        $storeCount = $model -> where('factory_id','=',$this -> factory['factory_id']) -> count('id');
+        $this -> assign('storeCount',$storeCount);
+        if($storeCount > 1){
+            $_where = [
+                ['s.factory_id','=',$this->factory['factory_id']],
+                ['s.is_default','=',1],
+            ];
+            $storeInfo = $model -> getStore($_where);
+            $storeList =  $model -> getStoreList($this -> factory['factory_id']);
+            $this -> assign('storeList',$storeList);
+            if(!$storeInfo){
+                $this -> assign('notDefaultStore',1);
+            }
+            $this -> assign('storeInfo',$storeInfo);
+        }elseif ($storeCount == 1){
+            $where = [ ['s.factory_id','=',$this->factory['factory_id']] ];
+            $storeInfo = $model -> getStore($where);
+            $this -> assign('storeInfo',$storeInfo);
+        }else{
+            $this -> assign('noStore',1);
+        }
+        Session::set('store',$storeInfo);
+        return $this->fetch();
     }
 }

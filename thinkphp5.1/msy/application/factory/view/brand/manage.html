@@ -13,9 +13,9 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
-			<a>企业档案</a>
+			<a href="{:url('record/preview')}">企业档案</a>
 			<a class="column_type current">商标备案</a>
-			<a >开店申请</a>
+			<a href="{:url('store/manage')}">开店申请</a>
 			<a>部门角色</a>
 			<a>账号授权</a>
 		</div>
@@ -28,6 +28,7 @@
 			<span class="cols">备注</span>
 		</div>
 		<ul class="trademark-info">
+			{notempty name="brandList"}
 			{volist name="brandList" id="vo"}
 				<li class="">
 					<div class="cols">
@@ -48,6 +49,9 @@
 					</div>
 				</li>
 			{/volist}
+			{else /}
+				<li>暂无商标</li>
+			{/notempty}
 		</ul>
 	</section>
 	<a href="{:url('brand/record')}" class="foot-btn f24">进行新的商标备案</a>

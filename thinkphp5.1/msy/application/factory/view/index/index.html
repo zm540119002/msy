@@ -1,39 +1,80 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
 <section id="vendorInfoList" style="display:none;">
 	<ul class="vendorInfoList">
 		{notempty name="factoryList"}
 			{volist name="factoryList" id="vo"}
-				<li data-id="{$vo.id}">{$vo.name}</li>
+				<li data-id="{$vo.id}" class="">{$vo.name}</li>
 			{/volist}
 		{/notempty}
+	</ul>
+</section>
+<!--店铺预览-->
+<section id="factoryStoreList" style="display: none;">
+	<ul class="factory-store-list">
+		<li >
+			<a href="#" class="columns_flex l-r-sides ">
+				<img src="public_img/default/no_pic_40.jpg" alt="">
+				<div>
+					<p><span>某某</span>官方旗舰店</p>
+					<p>B2B采购商城</p>
+				</div>
+				<span>营业中</span>
+			</a>
+		</li>
+		<li >
+			<a href="#" class="columns_flex l-r-sides ">
+				<img src="public_img/default/no_pic_40.jpg" alt="">
+				<div>
+					<p><span>某某</span>官方旗舰店</p>
+					<p>B2B分成商城</p>
+				</div>
+				<span>未通过</span>
+			</a>
+		</li>
+		<li >
+			<a href="#" class="columns_flex l-r-sides ">
+				<img src="public_img/default/no_pic_40.jpg" alt="">
+				<div>
+					<p><span>某某</span>官方旗舰店</p>
+					<p>B2B零售商城</p>
+				</div>
+				<span>建设中</span>
+			</a>
+		</li>
 	</ul>
 </section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex">
 			<div class="each_column">
-				<a class="personal_center">我的</a>
+				<a class="qr-code">二维码</a>
 			</div>
 			<div class="each_column">
-				<a class="shopping_cart">购物车</a>
+				<a class="home">首页</a>
 			</div>
 			<div class="each_column top_search_module">
 				<input type="button" class="search_btn"/>
 				<input type="text" class="search_text" placeholder="美尚云搜索"/>
 			</div>
 			<div class="each_column">
-				<a class="home">首页</a>
+				<a class="shopping_cart">购物车</a>
+			</div>
+			<div class="each_column">
+				<a class="personal_center">我的</a>
 			</div>
 		</div>
 		<div class="top_menu_box">
 			<div class="top_menu_list">
-				<a href="javascript:void(0);" class="current">供应商</a>
-				<a href="javascript:void(0);">云推客</a>
-				<a href="javascript:void(0);">培训</a>
-				<a href="javascript:void(0);">美尚会</a>
+				<a href="" class="current">供应商</a>
+				<a href="">云推客</a>
+				<a href="">培训直播</a>
+				<a href="">采购商城</a>
+				<a href="">分成商城</a>
+				<a href="">零售商城</a>
 			</div>
 		</div>
 	</section>
@@ -63,26 +104,29 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
-			<a href="javascript:void(0);" class="deployed-deployment">入驻部署</a>
-			<a href="javascript:void(0);" class="order-management">订单管理</a>
-			<a href="javascript:void(0);" class="order-management-change">采购店铺</a>
-			<a href="javascript:void(0);" class="order-management-change">分成店铺</a>
-			<a href="javascript:void(0);" class="order-management-change">零售店铺</a>
+			<a href="javascript:void(0);" class="deployed-deployment">开店部署</a>
+			<a href="javascript:void(0);" class="store_run">店铺运营</a>
+			<a href="javascript:void(0);" class="order-management">订单客服</a>
+			<a href="javascript:void(0);" class="order-management-change">财务结算</a>
+			<a href="javascript:void(0);" class="order-management-change">我的店铺</a>
+
 		</div>
 	</section>
 	{notempty name="factoryList"}
 	<a href="javascript:void(0);" class="relation-vendor">切换供应商账号></a>
 	{/notempty}
 
-	<input type="hidden" value="" class="factoryId">
+	<input type="hidden" value="{$factoryInfo.id|default=''}" class="factoryId">
 	<section class="message-center-info f20">
+		{notempty name="$factoryInfo"}
 		<div class="factoryInfo" data-id="{$factoryInfo.id|default=''}">企业名称:<span class="vendor-name">{$factoryInfo.name|default=''}</span></div>
-		<p>欢迎来到供应商管理中心</p>
-		<p>入驻部署仅对管理员开放，客服用户请进入订单管理操作</p>
+		{/notempty}
+		<p>欢迎来到供应商管理中心，美尚云平台支持企业多店铺运营管理。</p>
+		<!--<p>入驻部署仅对管理员开放，客服用户请进入订单管理操作</p>-->
 		<!--<p>系统发现你已关联了XX家厂商企业，请选择进入</p>-->
 	</section>
 	<section>
-		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费申请</a>
+		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
 	</section>
 
 	<section class="explain_nav">
@@ -101,7 +145,7 @@
 						美容店家
 					</a>
 				</li>
-				<li class="each_column">
+				<li class="each_column current">
 					<a>
 						<span class="practitioners"></span>
 						从业人员
@@ -117,8 +161,6 @@
 		</nav>
 	</section>
 </article>
-
-
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy.html" /}
@@ -128,15 +170,8 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
-	//选择厂商
 	var vendorInfoList=$('#vendorInfoList').html();
-	$('body').on('click','.relation-vendor',function(){
-		var factoryLayerName,factoryLayerId;
-		factoryList();
-	})
-
 	$(function(){
-		$('.top_menu_list a').tab();
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
@@ -145,20 +180,30 @@
 				clickable: true,
 			},
 		});
+		//切换厂商
 
+		$('body').on('click','.relation-vendor',function(){
+			factoryList();
+		});
+		//没有默认厂商
 		var notDefaultFactory = "{$notDefaultFactory|default=0}";
 		if(notDefaultFactory == 1){
 			factoryList();
 		}
 
+		//开店部署
 		$('body').on('click','.deployed-deployment',function () {
 			var factoryCount = {$factoryCount};
 			if(factoryCount){
-				location.href = module + 'Record/deployIndex';
+				location.href = module + 'Store/deployIndex';
 			}else {
 				dialog.success('未入驻，请先申请入住',module+'deploy/register')
 			}
-		})
+		});
+		//店铺运营
+		$('body').on('click','.store_run',function () {
+			location.href = module + 'Store/operaManageIndex.html';
+		});
 
 		$('body').on('click','.order-management',function () {
 			var factoryCount = {$factoryCount};
@@ -167,16 +212,24 @@
 			}else {
 				dialog.success('未入驻，请先申请入住',module+'deploy/register')
 			}
+		});
+		//我的店铺
+		var factoryStoreList=$('#factoryStoreList').html();
+		$('body').on('click','.my-store',function () {
+			layer.open({
+				title:['请选择供应商店铺进入预览','border-bottom:1px solid #d9d9d9'],
+				className:'factoryStoreLayer',
+				content:factoryStoreList,
+			})
 		})
-
-
-	})
+	});
+	//弹层 店铺
 	function factoryList() {
 		layer.open({
 			title:['请选择关联的供应商账号登录','border-bottom:1px solid #d9d9d9'],
 			className:'vendorInfoLayer',
 			content:vendorInfoList,
-			btn:['确定','取消'],
+			btn:['确定'],
 			success:function(){
 				var factoryId=$('.factoryId').val();
 				$('.vendorInfoLayer li').on('click',function(){
@@ -194,10 +247,8 @@
 				var isCurrent=$('.vendorInfoLayer li.current');
 				factoryLayerName=isCurrent.text();
 				factoryLayerId  =isCurrent.data('id');
-				console.log(factoryLayerId);
 				$('.factoryId').val(factoryLayerId);
 				$('.vendor-name').text(factoryLayerName);
-
 				var postData = {};
 				postData.id = factoryLayerId;
 				$.ajax({
@@ -213,9 +264,9 @@
 							return false;
 						}
 						if(info.status == 1){
+//							_this.addClass('current').siblings().removeClass('current');
 							//dialog.success(info.msg,module+'index/index');
 						}
-
 					},
 					complete:function(){
 
@@ -228,6 +279,5 @@
 			}
 		})
 	}
-
 </script>
 {/block}

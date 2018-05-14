@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 use common\controller\UserBase;
-
+use think\facade\Session;
 class Index extends UserBase
 {
     /**首页
@@ -14,7 +14,7 @@ class Index extends UserBase
         $factoryCount = $model -> where($where)->count('id');
         $this -> assign('factoryCount',$factoryCount);
         $file = [
-            'u.id,u.factory_id,f.name'
+            'u.id,u.factory_id,u.is_default,f.name'
         ];
         $join =[
             ['factory f','f.id = u.factory_id'],
@@ -26,7 +26,6 @@ class Index extends UserBase
               ['u.is_default','=',1],
             ];
             $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
-
             $factoryList = $model -> selectFactoryUser($where_new,$file,$join);
             $this -> assign('factoryList',$factoryList);
             if(!$factoryInfo){
@@ -37,6 +36,9 @@ class Index extends UserBase
             $factoryInfo = $model -> getFactoryUser($where_new,$file,$join);
             $this -> assign('factoryInfo',$factoryInfo);
         }
+        Session::set('factory',$factoryInfo);
         return $this->fetch();
     }
+
+    
 }
