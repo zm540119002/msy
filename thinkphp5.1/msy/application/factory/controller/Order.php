@@ -96,10 +96,23 @@ class Order extends FactoryBase
      * 填写物流单号
      * @param number|string $order_id 订单号
      * @param number|string $express_id  物流单号
+     * @param number $name_id 物流公司代号
      * @return boolean
      */
-    public function setExpress($order_id, $express_id)
+    public function setExpress($order_id, $express_id, $name_id)
     {
-
+        return true;
     }
+
+    /**
+     * 更改订单状态
+     * @param number|string $order_id 订单号
+     * @param number $status 订单状态
+     * @return boolean
+     */
+    public function setStatus($order_id, $status)
+    {
+        return true;
+    }
+
 }
