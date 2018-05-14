@@ -7,11 +7,7 @@
 	<ul class="vendorInfoList">
 		{notempty name="factoryList"}
 			{volist name="factoryList" id="vo"}
-		        {if $vo.is_default ==1 }
-				<li data-id="{$vo.id}" class="current">{$vo.name}</li>
-				{else /}
 				<li data-id="{$vo.id}" class="">{$vo.name}</li>
-				{/if}
 			{/volist}
 		{/notempty}
 	</ul>
@@ -120,7 +116,7 @@
 	<a href="javascript:void(0);" class="relation-vendor">切换供应商账号></a>
 	{/notempty}
 
-	<input type="hidden" value="" class="factoryId">
+	<input type="hidden" value="{$factoryInfo.id|default=''}" class="factoryId">
 	<section class="message-center-info f20">
 		{notempty name="$factoryInfo"}
 		<div class="factoryInfo" data-id="{$factoryInfo.id|default=''}">企业名称:<span class="vendor-name">{$factoryInfo.name|default=''}</span></div>
@@ -268,7 +264,7 @@
 							return false;
 						}
 						if(info.status == 1){
-							_this.addClass('current').siblings().removeClass('current');
+//							_this.addClass('current').siblings().removeClass('current');
 							//dialog.success(info.msg,module+'index/index');
 						}
 					},

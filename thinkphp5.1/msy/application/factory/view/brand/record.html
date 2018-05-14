@@ -67,7 +67,11 @@
 						<div class="logo-license">
 							<div class="half">
 								<a class="logo" id="logox">
+									{notempty name="brandInfo.brand_img"}
 									<img id="" src="public_uploads/{$brandInfo.brand_img|default=''}" />
+									{else /}
+									<img src="public_img/default/no_pic_40.jpg" />
+									{/notempty}
 									<input type="hidden" class="logo-src" name="brand_img" value="{$brandInfo.brand_img|default=''}">
 								</a>
 								<p class="f24">上传商标</p>

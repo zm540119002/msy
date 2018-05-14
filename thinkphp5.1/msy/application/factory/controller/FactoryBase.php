@@ -10,11 +10,10 @@ class FactoryBase extends UserBase{
     public function __construct(){
         parent::__construct();
         $factoryInfo = Session::get('factory');
-
         if(empty($factoryInfo)){
             $factoryInfo = $this ->_getFactory();
         }
-        $this->factory =  $factoryInfo;
+        $this -> factory =  $factoryInfo;
     }
 
     private function _getFactory(){
@@ -23,7 +22,6 @@ class FactoryBase extends UserBase{
         $where = [
             ['user_id','=',$uid],
         ];
-
         $factoryCount = $model -> where($where)->count('id');
         $file = [
             'u.id,u.factory_id,u.is_default,f.name'
@@ -48,8 +46,6 @@ class FactoryBase extends UserBase{
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }
-//        $this->factory =  $factoryInfo;
-        $factoryInfo = array_merge($factoryInfo,array('rand' => create_random_str(10, 0),));
         Session::set('factory',$factoryInfo);
         return  Session::get('factory');
     }
