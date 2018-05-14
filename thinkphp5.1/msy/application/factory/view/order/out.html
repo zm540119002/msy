@@ -78,7 +78,7 @@ $(function () {
 		if (event.keyCode == 13) {
 			$.ajax({
 				type: "POST",
-				url: "{:url('Order/detail')}",
+				url: "{:url('Order/getDetail')}",
 				data: {type:true, order_id:'123456'},
 				dataType: 'html',
 				success: function(msg){

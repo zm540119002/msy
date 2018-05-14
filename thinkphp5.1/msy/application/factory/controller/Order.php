@@ -83,7 +83,7 @@ class Order extends FactoryBase
      *@param boolean $json
      *@return array|json
      */
-    public function  detail($order_id, $json=false)
+    public function  getDetail($order_id, $json=false)
     {
         $order_id = '201805141234';
         if($json){
@@ -92,5 +92,14 @@ class Order extends FactoryBase
         return ['order_id'=>$order_id, 'detail'=>['订单详情']];
     }
     
+    /**
+     * 填写物流单号
+     * @param number|string $order_id 订单号
+     * @param number|string $express_id  物流单号
+     * @return boolean
+     */
+    public function setExpress($order_id, $express_id)
+    {
 
+    }
 }
