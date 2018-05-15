@@ -406,6 +406,19 @@ no-repeat scroll
 right center 
 transparent;
 }
+.account-item .content-label{
+    text-align: center;
+}
+.account-role-list{
+    padding:.18rem;
+    border:1px solid #d9d9d9;
+}
+.account-role-list li{
+    padding:.10rem 0;
+    margin:0 0 18px 0;
+    border:1px solid #009a3e;
+    border-radius:5px;
+}
 .range-list li{
     margin:0 0.20rem 0.15rem 0;
     padding:0 0.10rem;
@@ -740,4 +753,129 @@ transparent;
 }
 .store-goods-sort img{
     float:left;
+}
+/*推客圈*/
+.release-news{
+    position:relative;
+    width:100px;
+    height:100px;
+    background: #DCDDDE;
+}
+.release-news .camera-btn{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    width:100%;
+    opacity: 0;
+    cursor:pointer;
+}
+.release-news .video-camera{
+    position:absolute;
+    display: block;
+    width:50px;
+    height:40px;
+    left:50%;
+    top:50%;
+    margin:-20px 0 0 -25px;
+    background-image:url(../../common/img/icons/camera.png);
+    background-repeat: no-repeat;
+    background-size: 50px 40px;
+    background-position:center;
+}
+.twitter-release-content .columns_flex{
+    margin:0 0 18px 0;
+}
+.twitter-release-content .release-date{
+    width:100px;
+}
+.photo-frame{
+    width:180px;
+    height:88px;
+    overflow:hidden;
+}
+.photo-frame img{
+    width:50%;
+    float:left;
+}
+.twitter-release-content{
+    padding:.15rem .15rem 0 .15rem;
+}
+.cloudTwitterLayer .twitter-text{
+    width:100%;
+    height:2rem;
+}
+.cloudTwitterLayer .layui-m-layerbtn span[yes]{
+    background: #ff7bac;
+    color:#fff;
+}
+.cloudTwitterLayer .multi-picture-module li{
+    width:30%;
+}
+/*申请开店*/
+.apply-store-content{
+    padding:0 0 0 .20rem;
+}
+.thead-td{
+    padding:.18rem 0;
+    overflow:hidden;
+    border-bottom:1px solid #d9d9d9;
+}
+.thead-td .cols{
+    float:left;
+}
+.thead-td .cols:nth-of-type(1){
+    width:60%;
+}
+.thead-td .cols:nth-of-type(2){
+    width:15%;
+}
+.thead-td .cols:nth-of-type(3){
+    width:25%;
+}
+.apply-new-store{
+    display: block;
+    padding:.12rem 0;
+    background: #ff7aab;
+    color:#fff;
+    text-align:center;
+}
+.new-store-type{
+    padding:.20rem .20rem 1rem .20rem;
+}
+.new-store-item.hide{
+    display:none;
+}
+.store-type-menu{
+    margin:0 0 .10rem 0;
+}
+.store-type-menu a{
+    padding:.10rem .05rem;
+    border:1px solid #009A3E;
+    border-radius:3px;
+    color:#009A3E;
+}
+.store-type-menu a.current{
+    background: #009A3E;
+    color:#fff;
+}
+.new-store-type .next-step{
+    display: block;
+    width:2rem;
+    text-align:center;
+    margin:1rem auto 0;
+    background:#ff7aab;
+    color:#fff;
+}
+.applyNewStoreLayer .store-list{
+    margin:0 0 .15rem 0;
+}
+.applyNewStoreLayer .store-list.current{
+    background: #ff7aab;
+    color:#fff;
+}
+/*店铺运营*/
+.store-manage-type a{
+    width:15%;
 }
