@@ -43,7 +43,6 @@ class Index extends UserBase
             $storeList = $modelStore -> getStoreList($factoryInfo['factory_id']);
             $this -> assign('storeList',$storeList);
         }
-
         return $this->fetch();
     }
 
