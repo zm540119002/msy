@@ -16,29 +16,12 @@
 <section id="factoryStoreList" style="display: none;">
 	<ul class="factory-store-list">
 		{volist name="storeList" id="vo"}
-		<li class="" data-id="{$vo.id}">
-			{if $vo.store_type == 1 }
-			<span>{$vo.name}</span>官方旗舰店
-			{elseif $vo.store_type == 2/}
-			<span>{$vo.name}</span>品牌旗舰店
-			{else /}
-			{/if}
-
-			{if $vo.run_type == 1 }
-			<p>B2B采购商城</p>
-			{elseif $vo.run_type == 2 /}
-			<p>B2B分成商城</p>
-			{elseif $vo.run_type == 3 /}
-			<p>B2C零售商城</p>
-			{else /}
-			{/if}
-		</li>
 		<li  class="" data-id="{$vo.id}" >
 			<a href="#" class="columns_flex l-r-sides ">
 				{notempty name="vo.img"}
-				<img class="common_default_img" src="public_uploads/{$vo.img}" alt="">
+				<img class="small_default_img" src="public_uploads/{$vo.img}" alt="">
 				{else /}
-				<img class="common_default_img" src="public_img/default/no_pic_40.jpg" alt="">
+				<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 				{/notempty}
 				<div>
 					{if $vo.store_type == 1 }
