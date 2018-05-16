@@ -1,0 +1,99 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+	<style type="text/css">
+		dl{background: white; margin-bottom: 5px; padding:10px; border-radius:10px;}
+		.print{background:red; color:white; width:30%; text-align: center;
+			padding:3px; font-weight: bold; border-radius:5px;}
+
+	</style>
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="top_nav_fixed">
+		<div class="top_bar columns_flex">
+			<div class="each_column">
+				<a class="personal_center">我的</a>
+			</div>
+			<div class="each_column top_search_module">
+				<input type="button" class="search_btn"/>
+				<input type="text" class="search_text" placeholder="美尚云搜索"/>
+			</div>
+			<div class="each_column">
+				<a class="home">首页</a>
+			</div>
+		</div>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20">
+			<a href="{:url('Order/beforeSale')}">售前</a>
+			<a href="{:url('Order/index')}" class="record">打单</a>
+			<a href="{:url('Order/out')}">出仓</a>
+			<a href="{:url('Order/delivery')}">发货/完成</a>
+			<a href="{:url('Order/bill')}">填单</a>
+			<a href="{:url('Order/afterSale')}">售后</a>
+		</div>
+	</section>
+	<section class="f24 account-content-wrapper ">
+		<div class="account-top">
+			<dl>
+				<dt class="role-label"><strong>备货出仓自动检测模式</strong></dt>
+				<dd>
+					<p style="text-align: center"><img src="/static/factory/img/scan.jpg"  /></p>
+				</dd>
+			</dl>
+			<hr />
+			<dl>
+				<dt class="role-label"><strong>备货出仓人工检测模式</strong></dt>
+				<dd>
+					<section class="top_nav_fixed">
+						<div class="top_bar columns_flex">
+							<div class="each_column top_search_module">
+								<input type="button" class="search_btn"/>
+								<input type="text" class="order" placeholder="手动输入订单号"/>
+							</div>
+						</div>
+					</section>
+				</dd>
+			</dl>
+
+		</div>
+	</section>
+</article>
+
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+$(function () {
+	$('.record').click(function () {
+		//alert(1);
+	});
+
+	$(".order").keydown(function(event) {
+		if (event.keyCode == 13) {
+			$.ajax({
+				type: "POST",
+				url: "{:url('Order/getDetail')}",
+				data: {type:true, order_id:'123456'},
+				dataType: 'html',
+				success: function(msg){
+					layer.open({
+						type: 1,
+						title: '订单管理',
+						area: '80%',
+						closeBtn: 2,
+						shadeClose: true, //点击遮罩关闭
+						content: msg
+					});
+				}
+			});
+		}
+	})
+});
+</script>
+{/block}

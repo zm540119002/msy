@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="public/static/common/js/layer.mobile/need/layer.css">
 </head>
 <body>
-<section id="areaListLayer">
+<div style="position:relative;">
+    <img src="public/static/common/img/default/no_pic_100.jpg" alt="" style="vertical-align: middle;display: inline-block">
+    <input type="" name="" value="1" style="display:block;position:absolute;bottom:0;right:0;border:1px solid #d9d9d9;">
+</div>
+<!--<section id="areaListLayer">
     <div class="weui_cells msy_cells weui_address">
         <div class="weui_cell">
             <select name="province" class="pca province">
@@ -24,7 +28,7 @@
             </select>
         </div>
     </div>
-</section>
+</section>-->
 <script type="text/javascript" src="public/static/common/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="public/static/common/js/public.js"></script>
 <script type="text/javascript" src="public/static/common/js/common.js"></script>
@@ -36,36 +40,36 @@
 <script type="text/javascript">
     $(function(){
         //创建登录账号
-        var abc=$('#abc').html();
-        $('body').on('click','.add-account',function(){
-            var pageii = layer.open({
-                title:['创建登录账号','border-bottom:1px solid #d9d9d9;'],
-                className:'addCcountLayer',
-                type: 1,
-                content: abc,
-                anim: 'up',
-                style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
-                success:function(){
-                    var winHeight=$(window).height();
-                    $('.signIn-wrapper').css('height',winHeight-120+'px');
-                },
-                btn:['确定']
-            });
+        // var abc=$('#abc').html();
+        // $('body').on('click','.add-account',function(){
+        //     var pageii = layer.open({
+        //         title:['创建登录账号','border-bottom:1px solid #d9d9d9;'],
+        //         className:'addCcountLayer',
+        //         type: 1,
+        //         content: abc,
+        //         anim: 'up',
+        //         style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+        //         success:function(){
+        //             var winHeight=$(window).height();
+        //             $('.signIn-wrapper').css('height',winHeight-120+'px');
+        //         },
+        //         btn:['确定']
+        //     });
 
-        });
-        var areaListLayer=$('#areaListLayer').html();
-        $('body').on('click','.responsible-area',function(){
-            layer.open({
-                title:['设定该账户角色负责的省市区域市场','border-bottom:1px solid #d9d9d9;'],
-                className:'areaListLayer',
-                content:areaListLayer,
-                btn:['确定']
-            })
-        });
-        $('body').on('click','.modify-role',function(){
-            $(this).toggleClass('current');
-            $('.range-list-wrapper').toggleClass('current');
-        })
+        // });
+        // var areaListLayer=$('#areaListLayer').html();
+        // $('body').on('click','.responsible-area',function(){
+        //     layer.open({
+        //         title:['设定该账户角色负责的省市区域市场','border-bottom:1px solid #d9d9d9;'],
+        //         className:'areaListLayer',
+        //         content:areaListLayer,
+        //         btn:['确定']
+        //     })
+        // });
+        // $('body').on('click','.modify-role',function(){
+        //     $(this).toggleClass('current');
+        //     $('.range-list-wrapper').toggleClass('current');
+        // })
 
         //初始化
         // var province = '{$consigneeAddressInfo.province}';
