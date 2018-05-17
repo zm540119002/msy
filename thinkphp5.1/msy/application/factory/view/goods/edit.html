@@ -19,7 +19,21 @@
 		</div>
 	</form>
 </section>
-
+<!--单视频-->
+<section id="uploadSingleVideoHtml" style="display: none;">
+	<p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+	<form>
+		<div class="upload-picture-module f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleVideo" name="">
+					<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
 <section id="editGoodsLabel" style="display:none;">
 	<ul class="vendorInfoList">
 		{volist name="seriesList" id="vo"}
@@ -105,8 +119,8 @@
 					<input type="hidden" class="main_img" value="" data-src="{$goodsInfo[0]['main_img']|default=''}" data-picture-num="6" name="main_img">
 				</li>
 				<li class="">
-                    <a href="javascript:void(0);" class="uploadGoodsVideo right-arrow">上传商品视频(可选项)</a>
-                    <input type="hidden" class="goods-video" value="" data-src="{$goodsInfo[0]['goods_video']|default=''}" name="goodsVideo">
+                    <a href="javascript:void(0);" class="uploadVideo right-arrow">上传商品视频(可选项)</a>
+                    <input type="hidden" class="hidden_video" value="" data-src="{$goodsInfo[0]['goods_video']|default=''}" name="goodsVideo">
                 </li>
 				<!--<li class="">
 					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >归属店铺分类(系列)</a>
