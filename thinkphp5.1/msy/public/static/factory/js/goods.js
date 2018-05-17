@@ -1,12 +1,15 @@
 
 
 $(function(){
- 
-
     //上传缩略图
     $('body').on('click','.upload-thumbnail',function(){
         var _this = $(this);
         uploadsImg(_this,'上传商品缩略图','uploadThumbnailLayer');
+    });
+    //上传单视频
+    $('body').on('click','.uploadVideo',function(){
+        var _this = $(this);
+        uploadsVideo(_this,'上传商品小视频','uploadSingleVideoLayer');
     });
     //上传首焦图
     var editDetail=$('#editDetail').html();
@@ -18,8 +21,6 @@ $(function(){
         uploadsMultiImg(editDetail,storageDataObj,num,'上传商品首焦图');
     });
 
-    //初始化
-    
     //归属店铺分类(系列)
     var editGoodsLabel=$('#editGoodsLabel').html();
     $('body').on('click','.editGoodsLabel',function(){
@@ -271,6 +272,7 @@ $(function(){
 });
 //单图片上传弹窗
 function uploadsImg(obj,tilt,className) {
+    // alert(1);
     var uploadSingleImgHtml=$('#uploadSingleImgHtml').html();
     layer.open({
         title:[tilt,'border-bottom:1px solid #d9d9d9;'],
@@ -291,6 +293,33 @@ function uploadsImg(obj,tilt,className) {
         yes:function(index){
             var layerImgSrc= $('.'+ className).find('.img').val();
             obj.siblings('.hidden_img').val(layerImgSrc);
+            layer.close(index);
+        }
+    })
+}
+
+//单视频上传弹窗
+function uploadsVideo(obj,tilt,className) {
+    var uploadSingleVideoHtml=$('#uploadSingleVideoHtml').html();
+    layer.open({
+        title:[tilt,'border-bottom:1px solid #d9d9d9;'],
+        className:className,
+        content:uploadSingleVideoHtml,
+        btn:['确定','取消'],
+        success:function(){
+            var imgSrc=obj.siblings('.hidden_video').val();
+            var echoedImg = '';
+            if(imgSrc.indexOf("uploads") == -1 && imgSrc != ''){
+                echoedImg= uploads+imgSrc;
+            }
+            //显示图片
+            $('.'+ className).find('video').attr('src',echoedImg);
+            //赋值回
+            $('.'+ className).find('.img').val(imgSrc);
+        },
+        yes:function(index){
+            var layerImgSrc= $('.'+ className).find('.img').val();
+            obj.siblings('.hidden_video').val(layerImgSrc);
             layer.close(index);
         }
     })
