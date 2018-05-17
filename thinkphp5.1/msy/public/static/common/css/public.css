@@ -1040,13 +1040,20 @@ color: #ed6d00;
 .editVideoLayer .layui-m-layercont,
 .forgetPasswordLayer .layui-m-layercont,
 .applyNewStoreLayer .layui-m-layercont,
-.factoryStoreLayer .layui-m-layercont{
+.factoryStoreLayer .layui-m-layercont,
+.groupRoleLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
 .forgetPasswordLayer .layui-m-layerbtn span[yes]{
     background: #ff7bac;
     color:#fff;
+}
+.groupRole-box{
+    padding:.4rem .12rem .4rem;
+}
+.groupRoleLayer .role-name{
+    box-sizing: border-box;
 }
 /*机构登记  background:url(../../images/sign-ico.png) repeat-x center 8px;*/
 .login-items{padding:0.30rem 0.28rem;border-top:1px solid #d9d9d9;}

@@ -4,6 +4,11 @@
 {/block}
 {block name="title"}开店部署{/block}
 {block name="content"}
+<section id="groupRole" style="display: none;">
+	<div class="groupRole-box">
+		<input class="role-name input-filed" type="text" name="" value="" placeholder="请输入组别名称">
+	</div>
+</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar top-switch-bar columns_flex l-r-sides">
@@ -82,6 +87,15 @@
 {block name="script"}
 <script type="text/javascript">
 $(function () {
+	var groupRole=$('#groupRole').html();
+	$('body').on('click','.add',function(){
+		layer.open({
+			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],
+			className:'groupRoleLayer',
+			content:groupRole,
+			btn:['确定','取消']
+		})
+	})
 });
 </script>
 {/block}
