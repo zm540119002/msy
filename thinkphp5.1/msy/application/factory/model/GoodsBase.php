@@ -15,25 +15,26 @@ class GoodsBase extends Model {
 
 	/**
 	 * 编辑 新增和修改
-	 * @param string $factory_id
+	 * @param string $store_id
 	 * @return array
 	 */
-	public function edit($factoryId =''){
+	public function edit($storeId =''){
 		$data = input('post.');
 		$validate = validate('GoodsBase');
 		// if(!$result = $validate->scene('edit')->check($data)) {
 		// 	return errorMsg($validate->getError());
 		// }
-		$where = [
-			['id','=',$data['goods_base_id']],
-			['factory_id','=',$factoryId],
-		];
-		$file = array(
-			'thumb_img','main_img','details_img','goods_video'
-		);
+
 		if(input('?post.goods_base_id')){//修改，查询
-			$oldGoodsInfo = $this -> getGoodsBase($where,$file);
-			if(empty($oldGoodsInfo)){
+			$where = [
+				['id','=',$data['goods_base_id']],
+				['store_id','=',$storeId],
+			];
+			$file = array(
+				'thumb_img','main_img','details_img','goods_video'
+			);
+			$oldGoodsBaseInfo = $this -> getGoodsBase($where,$file);
+			if(empty($oldGoodsBaseInfo)){
 				return errorMsg('没有数据');
 			}
 		}
@@ -78,7 +79,7 @@ class GoodsBase extends Model {
 			$result = $this->allowField(true)->save($data, ['id' => $data['goods_base_id']]);
 			$goodsBaseId = $data['goods_base_id'];
 		}else{
-			$data['factory_id'] = $factoryId;
+			$data['store_id'] = $storeId;
 			$data['create_time'] = time();
 			$result = $this -> allowField(true) -> save($data);
 			$goodsBaseId =  $this->getAttr('id');
@@ -90,21 +91,21 @@ class GoodsBase extends Model {
 		}
 		if(false !== $result){
 			if(input('?post.goods_base_id')){//删除旧图片
-				delImgFromPaths($oldGoodsInfo['thumb_img'],$data['thumb_img']);
+				delImgFromPaths($oldGoodsBaseInfo['thumb_img'],$data['thumb_img']);
 				//删除就图片
-				$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
+				$oldMainImg = explode(",",$oldGoodsBaseInfo['main_img']);
 				array_pop($oldMainImg);
 				$newMainImg = explode(",",$data['main_img']);
 				array_pop($newMainImg);
 				delImgFromPaths($oldMainImg,$newMainImg);
 
-				$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
+				$oldDetailsImg = explode(",",$oldGoodsBaseInfo['details_img']);
 				array_pop($oldDetailsImg);
 				$newDetailsImg = explode(",",$data['details_img']);
 				array_pop($newDetailsImg);
 				delImgFromPaths($oldDetailsImg,$newDetailsImg);
 
-				$oldGoodsVideo = explode(",",$oldGoodsInfo['goods_video']);
+				$oldGoodsVideo = explode(",",$oldGoodsBaseInfo['goods_video']);
 				array_pop($oldGoodsVideo);
 				$newGoodsVideo = explode(",",$data['goods_video']);
 				array_pop($newGoodsVideo);

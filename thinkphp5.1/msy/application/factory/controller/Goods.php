@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Goods extends FactoryBase
+class Goods extends StoreBase
 {
     /**
      * @return array|mixed
@@ -14,42 +14,40 @@ class Goods extends FactoryBase
         if(request()->isPost()){
             //编辑商品基础表
             $goodsBaseModel -> startTrans();
-            $result = $goodsBaseModel -> edit($this->factory['factory_id']);
+            $result = $goodsBaseModel -> edit($this->store['id']);
             if(!$result['status']){
                 $goodsBaseModel ->rollback();
                 return errorMsg('失败');
             }
             //编辑商品表
             $goodsBaseId =  $result['id'];
-            $result = $goodsModel -> edit($goodsBaseId,$this->factory['factory_id']);
+            $result = $goodsModel -> edit($goodsBaseId,$this->store['id']);
             if(!$result['status']){
                 $goodsModel ->rollback();
                 return errorMsg('失败');
             }
             $goodsBaseModel ->commit();
             return successMsg('成功');
-
         }
         $categoryModel = new \app\index_admin\model\Category;
         $platformCategory = $categoryModel->selectFirstCategory();
         $this -> assign('platformCategory',$platformCategory);
         $seriesModel = new \app\factory\model\Series;
         $where = [
-            ['factory_id','=',$this->factory['factory_id']],
+            ['store_id','=',$this->store['id']],
         ];
-        $seriesList = $seriesModel -> selectSeries($where,[],['sort'=>'desc','id'=>'desc',]);
-        $this -> assign('seriesList',$seriesList);
+//        $seriesList = $seriesModel -> selectSeries($where,[],['sort'=>'desc','id'=>'desc',]);
+//        $this -> assign('seriesList',$seriesList);
         if(input('?goods_base_id')){
             $goodsBaseId = (int)input('goods_base_id');
             $where = [
-               ['gb.factory_id','=',$this->factory['factory_id']],
+               ['gb.store_id','=',$this->store['id']],
                ['g.goods_base_id','=',$goodsBaseId],
             ];
             $file = [
                 'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.store_type,
                 gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,
-                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.create_time,gb.update_time,
-                gb.parameters'
+                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.parameters'
             ];
             $join =[
                 ['goods_base gb','gb.id = g.goods_base_id'],
@@ -91,7 +89,7 @@ class Goods extends FactoryBase
     public function getList(){
         $model = new\app\factory\model\Goods;
         $where = [
-            ['gb.factory_id','=',$this->factory['factory_id']],
+            ['gb.store_id','=',$this->store['id']],
         ];
         $list = $model -> pageQuery($where);
         $this->assign('list',$list);

@@ -16,68 +16,29 @@ class Goods extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit($goodsBaseId ='',$factoryId){
+	public function edit($goodsBaseId ='',$storeId =''){
 		$data = input('post.');
 		$validate = validate('Goods');
 		// if(!$result = $validate->scene('edit')->check($data)) {
 		// 	return errorMsg($validate->getError());
 		// }
 
-		if(input('?post.goods_base_id')){//修改
-			//批量修改
-			$idsEdit =[];//修改后和增加的Ids
-			$addData = [];
-			$editData =[];
-			foreach ($data['goodsExtend'] as $k=>$value){
-				if(isset($value['id']) && $value['id']){//修改
-					$value['update_time'] = time();
-					$editData[]=$value;
-
-				}else{//增加
-					$value['goods_base_id'] = $goodsBaseId;
-					$value['factory_id'] = $factoryId;
-					$value['create_time'] = time();
-					$addData[] = $value;
-
-				}
+		if(input('?post.goods_base_id')){
+			$data['update_time'] = time();
+			$result = $this->allowField(true)->save($data,['goods_base_id' => $goodsBaseId,'store_id'=>$storeId]);
+			if(false !== $result){
+				return successMsg("成功");
 			}
-			if($addData){//添加新的数据
-				$result1 = $this->saveAll($addData);//
-				foreach ($result1 as $k=>$value){
-					$idsEdit[] = $value['id'];
-				}
-			}
-            if($editData){//修改数据
-				$result2 = $this->saveAll($editData);
-				foreach ($result2 as $k=>$value){
-					$idsEdit[] = $value['id'];
-				}
-			}
-//			//删除不要的数据
-			$_where=[
-				['id','not in',$idsEdit],
-				['goods_base_id','=',$goodsBaseId],
-				['factory_id','=',$factoryId],
-			];
-			$result = $this->where($_where)->delete();
-			if(false === $result){
+			return errorMsg('失败',$this->getError());
+		}else{
+			$data['create_time'] = time();
+			$data['store_id'] = $storeId;
+			$result = $this->allowField(true)->save($data);
+			if(!$result){
+				$this ->rollback();
 				return errorMsg('失败');
 			}
-		}else{
-			//批量添加
-			$list = $data['goodsExtend'];
-			foreach ($list as $k=>$value){
-				$list[$k]['goods_base_id'] = $goodsBaseId;
-				$list[$k]['goods_base_id'] = $factoryId;
-				$list[$k]['create_time'] = time();
-			}
-			$result = $this->saveAll($list);
-		}
-
-		if(false !== $result){
-			return successMsg("成功");
-		}else{
-			return errorMsg('失败');
+			return successMsg('提交申请成功');
 		}
 	}
 

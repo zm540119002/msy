@@ -21,12 +21,12 @@ class StoreBase extends FactoryBase{
         ];
         $storeCount = $model -> where($where)->count('id');
         $file = [
-            'u.id,u.factory_id,u.is_default,f.name'
+            's.id,s.factory_id,s.is_default,s.store_type,run_type,auth_status'
         ];
         if($storeCount > 1){
             $_where = [
-                ['factory_id','=',$this->factory['factory_id']],
-                ['u.is_default','=',1],
+                ['s.factory_id','=',$this->factory['factory_id']],
+                ['s.is_default','=',1],
             ];
             $storeInfo = $model -> getStore($_where,$file);
             if(!$storeInfo){
@@ -37,6 +37,7 @@ class StoreBase extends FactoryBase{
                 ['factory_id','=',$this->factory['factory_id']],
             ];
             $storeInfo = $model -> getStore($where_new,$file);
+
         }elseif (!$storeCount){
             $this->success('没有店铺，请申请', 'Store/deployIndex');
         }
