@@ -47,35 +47,9 @@
 	</section>
 	<section class="organize">
 		<ul>
-			<li>
+			<li data-level="0">
 				<span class="content-label">总经办</span>
 				<a class="add">+</a>
-				<ul>
-					<li>
-						<span class="content-label">总经办</span>
-						<a class="add">+</a>
-						<ul>
-							<li>
-								<span class="content-label">总经办</span>
-								<a class="add">+</a>
-							</li>
-							<li>
-								<span class="content-label">总经办</span>
-								<a class="add">+</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<span class="content-label">总经办</span>
-						<a class="add">+</a>
-						<ul>
-							<li>
-								<span class="content-label">总经办</span>
-								<a class="add">+</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
 			</li>
 		</ul>
 	</section>
@@ -100,7 +74,13 @@ $(function () {
 			content:groupRole,
 			btn:['确定','取消'],
 			yes:function () {
-				console.log(_this.attr('class'));
+				var postData = {};
+				postData.level = _this.parent().data('level');
+				postData.name = _this.prev().text();
+				$.post(action,postData,function(msg){
+					console.log(msg);
+					return;
+				});
 			}
 		});
 	});

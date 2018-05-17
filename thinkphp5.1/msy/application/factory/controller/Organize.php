@@ -3,22 +3,26 @@ namespace app\factory\controller;
 
 class Organize extends FactoryBase
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**首页
      */
     public function index()
     {
-        return $this->fetch();
+        $modelOrganize = new \app\factory\model\Organize();
+        if(request()->isAjax()){
+            return $modelOrganize->edit($this->factory['id']);
+        }else{
+            return $this->fetch();
+        }
     }
 
     /**
      */
     public function  test()
     {
-        return $this->fetch();
+        if(request()->isAjax()){
+            return input('post.');
+        }else{
+            return $this->fetch();
+        }
     }
 }
