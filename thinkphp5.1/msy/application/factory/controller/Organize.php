@@ -8,7 +8,7 @@ class Organize extends FactoryBase
         parent::__construct();
     }
 
-    /**
+    /**首页
      */
     public function index()
     {
