@@ -1,0 +1,101 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="title"}开店部署{/block}
+{block name="content"}
+<section id="groupRole" style="display: none;">
+	<div class="groupRole-box">
+		<input class="role-name input-filed" type="text" name="" value="" placeholder="请输入组别名称">
+	</div>
+</section>
+<article class="f24">
+	<section class="top_nav_fixed">
+		<div class="top_bar top-switch-bar columns_flex l-r-sides">
+			<div class="">
+				<a class="home">首页</a>
+			</div>
+			<div class="">
+				<img class="left" src="public_img/default/no_pic_40.jpg" alt="">
+				<span>爱国宾</span>
+			</div>
+			<div class="">
+				<a class="switch-account">切换供应商账号></a>
+			</div>
+		</div>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20">
+			<a >企业档案</a>
+			<a>商标备案</a>
+			<a>开店申请</a>
+			<a class="column_type current">组别角色</a>
+			<a>账号授权</a>
+		</div>
+	</section>
+	<section class="f24 ">
+		<div class="page-bd">
+			<nav class="apply-data-nav">
+				<ul id="status " class="status f24 weui-flex group-role-nav">
+					<li class="weui-flex-item switch-item current"><span class="ogranzi"></span><em></em>组织</li>
+					<li class="weui-flex-item switch-item "><span class="group"></span><em></em>组别</li>
+					<li class="weui-flex-item "><span class="role"></span><em></em>角色</li>
+					<li class="weui-flex-item "><span class="juris"></span>权限</li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<section>
+		<ul class="group-role-content first-ul">
+			<li class="first-role">
+				<span class="first-name content-label">总经办</span>
+				<a class="first-add add">+</a>
+				<ul class="two-ul">
+					<li class="two-role role-item">
+						<span class="two-name content-label">运营部</span>
+						<a class="two-add add">+</a>
+						<ul class="three-ul">
+							<li class="three-role role-item">
+								<span class="three-name content-label">运营部1</span>
+								<a class="three-add add">+</a>
+								<ul class="four-ul">
+									<li class="four-role role-item">
+										<span class="four-name content-label">运营部111</span>
+										<a class="four-add add">+</a>
+									</li>
+									<li class="four-role role-item">
+										<span class="four-name content-label">运营部111</span>
+										<a class="four-add add">+</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<p class="f20 content-box group-role-tipc">说明：这里仅构建与企业云端店铺经营直接相关的业务组织架构，点击    键可增加所在部门的分支/部门；点击部门框可修改名称；消除部门框内容相同于删除该部门；如正在删除的部门有分支部门，请先删除其分支部门再删除该部门；建议企业部门的级别不超过5级，企业部门设置完成后再按下一步。</p>
+	<a href="javascript:void(0);" class="add-account foot-btn">下一步</a>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+$(function () {
+	var groupRole=$('#groupRole').html();
+	$('body').on('click','.add',function(){
+		layer.open({
+			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],
+			className:'groupRoleLayer',
+			content:groupRole,
+			btn:['确定','取消']
+		});
+	});
+});
+</script>
+{/block}

@@ -19,7 +19,21 @@
 		</div>
 	</form>
 </section>
-
+<!--单视频-->
+<section id="uploadSingleVideoHtml" style="display: none;">
+	<p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+	<form>
+		<div class="upload-picture-module f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleVideo" name="">
+					<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+					<input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
 <section id="editGoodsLabel" style="display:none;">
 	<ul class="vendorInfoList">
 		{volist name="seriesList" id="vo"}
@@ -35,6 +49,11 @@
 </section>
 
 <article class="f24">
+	<section class="bottomLine">
+        <div class="top_bar top-title">
+            <h2>增加商品</h2>
+        </div>
+    </section>
 	<section>
 		<form class="addProductContent">
 			<ul>
@@ -50,21 +69,26 @@
 					<span class="form-title">商品特点</span>
 					<textarea rows="" cols="" name="trait" placeholder="商品简要说明,字数限28字" class="goods-character input-text">{$goodsInfo[0]['trait']|default=''}</textarea>
 				</li>
-				<li class="columns_flex l-r-sides release-options">
+				<!--<li class="columns_flex l-r-sides release-options">
 					<span class="text-color-gr">同步发布选项</span>
 					<span class="columns_flex ">
 						<a href="javascript:void(0);" class="store_type " data-store-type="1" data-goods-id="">采购店铺</a>
 						<a href="javascript:void(0);" class="store_type" data-store-type="2" data-goods-id="">分成店铺</a>
 						<a href="javascript:void(0);" class="store_type " data-store-type="3" data-goods-id="">零售店铺</a>
 					</span>
-				</li>
+				</li>-->
 				<li>
-					 <span class="price-flex">
+					<span class="form-title">展示价格</span>
+					<span class="price-flex">
+                        <label for="">优惠价￥</label>
+                        <input type="text" name="retail_price" value="{$goodsInfo[0]['retail_price']|default=''}" placeholder="688.00" class="retail-price">
+				 	</span>
+					<span class="price-flex">
                         <label for="">零售价￥</label>
                         <input type="text" name="retail_price" value="{$goodsInfo[0]['retail_price']|default=''}" placeholder="688.00" class="retail-price">
-				 </span>
+				 	</span>
 				</li>
-				<li class="price-options">
+				<!--<li class="price-options">
 					<span class="form-title">采购店铺价格</span>
                     <span class="price-flex">
                         <label for="">销售价￥</label>
@@ -85,23 +109,23 @@
                         <label for="">销售价￥</label>
                         <input type="text" name="" value="" placeholder="68.00" class="sale_price_retail">
                     </span>
-				</li>
+				</li>-->
 				<li >
-					<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图</a>
+					<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图(1张)</a>
 					<input type="hidden" class="hidden_img" value="{$goodsInfo[0]['thumb_img']|default=''}" name="thumb_img">
 				</li>
 				<li class="">
-					<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图</a>
+					<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图(最多6张)</a>
 					<input type="hidden" class="main_img" value="" data-src="{$goodsInfo[0]['main_img']|default=''}" data-picture-num="6" name="main_img">
 				</li>
 				<li class="">
-                    <a href="javascript:void(0);" class="uploadGoodsVideo right-arrow">上传商品视频(可选项)</a>
-                    <input type="hidden" class="goods-video" value="" data-src="{$goodsInfo[0]['goods_video']|default=''}" name="goodsVideo">
+                    <a href="javascript:void(0);" class="uploadVideo right-arrow">上传商品视频(可选项)</a>
+                    <input type="hidden" class="hidden_video" value="" data-src="{$goodsInfo[0]['goods_video']|default=''}" name="goodsVideo">
                 </li>
-				<li class="">
+				<!--<li class="">
 					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >归属店铺分类(系列)</a>
 					<input type="hidden" class="goods-tag" data-name="" value="{$goodsInfo[0]['tag']|default=''}" name="tag">
-				</li>
+				</li>-->
 				<li class="">
                     <a href="javascript:void(0);" class="set-category right-arrow">设置检索品类</a>
                     <input type="hidden" class="select-category" data-category-id="{$goodsInfo[0]['catArray']|default=''}" value="" name="selectCategory">

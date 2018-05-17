@@ -1040,13 +1040,20 @@ color: #ed6d00;
 .editVideoLayer .layui-m-layercont,
 .forgetPasswordLayer .layui-m-layercont,
 .applyNewStoreLayer .layui-m-layercont,
-.factoryStoreLayer .layui-m-layercont{
+.factoryStoreLayer .layui-m-layercont,
+.groupRoleLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
 .forgetPasswordLayer .layui-m-layerbtn span[yes]{
     background: #ff7bac;
     color:#fff;
+}
+.groupRole-box{
+    padding:.4rem .12rem .4rem;
+}
+.groupRoleLayer .role-name{
+    box-sizing: border-box;
 }
 /*机构登记  background:url(../../images/sign-ico.png) repeat-x center 8px;*/
 .login-items{padding:0.30rem 0.28rem;border-top:1px solid #d9d9d9;}
@@ -1112,6 +1119,118 @@ color: #ed6d00;
 .applyNewStoreLayer .last{
     width:0;
 }
+.group-role-nav .weui-flex-item span.ogranzi{
+        background:#fff url(../../common/img/organization.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item.current span.ogranzi{
+        background:#fff url(../../common/img/organization-cur.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item span.group{
+        background:#fff url(../../common/img/group.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item.current span.group{
+        background:#fff url(../../common/img/group-cur.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item span.role{
+        background:#fff url(../../common/img/role.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item.current span.role{
+        background:#fff url(../../common/img/role-cur.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item span.juris{
+        background:#fff url(../../common/img/jurisdiction.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item.current span.juris{
+        background:#fff url(../../common/img/jurisdiction-cur.png) no-repeat center 0;
+}
+.group-role-nav .weui-flex-item.current{
+    color:#009a3e;
+}
+/*角色2018-5-11*/
+.group-role-content li,
+.group-role-content li span{
+    position:relative;
+}
+.group-role-content li.first-role{
+    border-left:1px solid #333;
+    margin:0 0 0 10px;
+}
+.group-role-content li.two-role{
+    margin:0 0 50px 20px;
+    border-left:1px solid #333;
+}
+.group-role-content li.role-item span:before{
+    position: absolute;
+    z-index: 1;
+    left: -6px;
+    bottom: 50px;
+    display: inline-block;
+    height: 30px;
+    width: 22px;
+    background-color: #333;
+    content: "";
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: center;
+    transition: all 0.5s;
+    margin-left: -15px;
+}
+.group-role-content li.three-role{
+    margin:0 0 0 30px;
+    border-left:1px solid #333;
+}
+.group-role-content li.four-role{
+    margin:0 0 0 40px;
+}
+.group-role-content li.two-role span:before{
+    width: 20px;
+    bottom: 0;
+    left: -6px;
+}
+.group-role-content li.three-role span:before{
+    /*width:50px;*/
+    width:32px;
+    bottom:0;
+    /*left:-35px;*/
+    left:-17px;
+}
+.group-role-content li.four-role span:before{
+    width:42px;
+    bottom: 0;
+    /*left: -75px;*/
+    left: -27px;
+}
+.group-role-content li.first-role .first-name,
+.group-role-content li.two-role .two-name,
+.group-role-content li.three-role .three-name,
+.group-role-content li.four-role .four-name{
+    height:35px;
+    line-height:35px;
+    border:1px solid #009a3e;
+    border-left:none;
+    text-align:center;
+}
+.group-role-content li.four-role .four-name{
+    border:1px solid #009a3e;
+}
+.group-role-content li .add{
+    position:absolute;
+    top:0;
+    right:0;
+    width:35px;
+    height:36px;
+    line-height:36px;
+    background: #009a3e;
+    color:#fff;
+    text-align:center;
+    font-size:22px;
+}
+.group-role-tipc{
+    padding-bottom:1rem;
+}
+.group-name{
+    width:25%;
+}
+
 /*用户入驻申请2018-3-11*/
 .apply-data-content{
     padding:0.20rem 0.25rem;
