@@ -6,7 +6,7 @@
  */
 namespace app\factory\controller;
 
-class Order extends FactoryBase
+class Order extends StoreBase
 {
     public function __construct()
     {

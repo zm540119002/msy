@@ -117,7 +117,9 @@
 
 }
 .factory-store-list{
+    height:5rem;
     padding:.22rem;
+    overflow-y:auto;
 }
 .factory-store-list li{
     padding:.12rem .15rem;

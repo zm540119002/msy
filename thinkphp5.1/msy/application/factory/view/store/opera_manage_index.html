@@ -88,10 +88,14 @@
 		//没有店铺
 		var notStore = "{$noStore|default=0}";
 		if(notStore == 1){
-			dialog.success('暂无店铺，去申请开店',module+'Store/edit')
+			dialog.confirm('暂无店铺，去申请开店',module+'Store/edit')
 		}
 		//切换店铺
 		$('body').on('click','.switch-account',function(){
+			if(notStore == 1){
+				dialog.confirm('暂无店铺，去申请开店',module+'Store/edit');
+				return false;
+			}
 			storeList();
 		});
 		//没有默认店铺

@@ -37,6 +37,12 @@ class Index extends UserBase
             $this -> assign('factoryInfo',$factoryInfo);
         }
         Session::set('factory',$factoryInfo);
+        //我的店铺
+        if(!empty($factoryInfo)){
+            $modelStore = new \app\factory\model\Store();
+            $storeList = $modelStore -> getStoreList($factoryInfo['factory_id']);
+            $this -> assign('storeList',$storeList);
+        }
         return $this->fetch();
     }
 
