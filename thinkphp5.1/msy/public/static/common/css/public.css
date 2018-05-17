@@ -1162,7 +1162,8 @@ color: #ed6d00;
     margin:0 0 50px 20px;
     border-left:1px solid #333;
 }
-.group-role-content li.role-item span:before{
+.group-role-content li.role-item span:before,
+.organize ul:nth-of-type(1) li span:before{
     position: absolute;
     z-index: 1;
     left: -6px;
@@ -1184,10 +1185,11 @@ color: #ed6d00;
 .group-role-content li.four-role{
     margin:0 0 0 40px;
 }
-.group-role-content li.two-role span:before{
-    width: 20px;
+.group-role-content li.two-role span:before,
+.organize ul:nth-of-type(1) li span:before{
+    width: 12px;
     bottom: 0;
-    left: -6px;
+    left: 3px;
 }
 .group-role-content li.three-role span:before{
     /*width:50px;*/
@@ -1201,6 +1203,9 @@ color: #ed6d00;
     bottom: 0;
     /*left: -75px;*/
     left: -27px;
+}
+.organize ul:nth-of-type(2) li span:before{
+    width:0;
 }
 .group-role-content li.first-role .first-name,
 .group-role-content li.two-role .two-name,
