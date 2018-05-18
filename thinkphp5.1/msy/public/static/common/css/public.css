@@ -1221,14 +1221,19 @@ color: #ed6d00;
 .group-role-content li.four-role .four-name{
     border:1px solid #009a3e;
 }
-.group-role-content li .add,
-.organize li a.add{
+.organize .operate-box{
     position:absolute;
     top:0;
     right:0;
+}
+.group-role-content li .btn,
+.organize li a.btn{
+    display: block;
     width:35px;
     height:36px;
+    float:left;
     line-height:36px;
+    margin:0 0 0 5px;
     background: #009a3e;
     color:#fff;
     text-align:center;
