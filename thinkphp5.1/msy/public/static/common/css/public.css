@@ -1163,7 +1163,7 @@ color: #ed6d00;
     border-left:1px solid #333;
 }
 .group-role-content li.role-item span:before,
-.organize ul[level="1"] li span:before{
+.organize ul[data-level="1"] li span:before{
     position: absolute;
     z-index: 1;
     left: -6px;
@@ -1186,7 +1186,7 @@ color: #ed6d00;
     margin:0 0 0 40px;
 }
 .group-role-content li.two-role span:before,
-.organize ul[level="1"] li span:before{
+.organize ul[data-level="1"] li span:before{
     width: 12px;
     bottom: 0;
     left: 3px;
