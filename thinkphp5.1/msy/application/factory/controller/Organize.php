@@ -9,7 +9,9 @@ class Organize extends FactoryBase
     {
         $modelOrganize = new \app\factory\model\Organize();
         if(request()->isAjax()){
-            return $modelOrganize->edit($this->factory['id']);
+            $info = $modelOrganize->edit($this->factory['id']);
+            $this->assign('info',$info);
+            return view('info_tpl');
         }else{
             return $this->fetch();
         }

@@ -11,11 +11,9 @@ class Organize extends \think\Model {
 
 	//编辑
 	public function edit($factoryId){
-		if(!$factoryId){
-			return errorMsg('失败','缺少供应商ID');
-		}
 		$postData = input('post.');
 		$postData['factory_id'] = $factoryId;
+		$postData['level'] = intval($postData['level']) + 1;
 		$validateOrganize = new \app\factory\validate\Organize();
 		if(!$validateOrganize->scene('edit')->check($postData)){
 			return errorMsg($validateOrganize->getError());
@@ -26,12 +24,13 @@ class Organize extends \think\Model {
 		}else{
 			unset($postData['id']);
 			$postData['create_time'] = time();
+			$postData['superior_id'] = $postData['organize_id'];
 			$this->save($postData);
 		}
 		if(!$this->getAttr('id')){
 			return errorMsg('失败',$this->getError());
 		}
-		return successMsg('成功！',array('id'=>$this->getAttr('id')));
+		return successMsg('成功！',array_merge(array('id'=>$this->getAttr('id')),$postData));
 	}
 	
 	//分页查询
