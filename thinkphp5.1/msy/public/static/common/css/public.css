@@ -1163,7 +1163,7 @@ color: #ed6d00;
     border-left:1px solid #333;
 }
 .group-role-content li.role-item span:before,
-.organize ul:nth-of-type(1) li span:before{
+.organize ul[level="1"] li span:before{
     position: absolute;
     z-index: 1;
     left: -6px;
@@ -1186,7 +1186,7 @@ color: #ed6d00;
     margin:0 0 0 40px;
 }
 .group-role-content li.two-role span:before,
-.organize ul:nth-of-type(1) li span:before{
+.organize ul[level="1"] li span:before{
     width: 12px;
     bottom: 0;
     left: 3px;
@@ -1204,7 +1204,7 @@ color: #ed6d00;
     /*left: -75px;*/
     left: -27px;
 }
-.organize ul:nth-of-type(2) li span:before{
+.organize li[data-level="0"]>span:before{
     width:0;
 }
 .group-role-content li.first-role .first-name,
