@@ -30,7 +30,11 @@ class Organize extends \think\Model {
 		if(!$this->getAttr('id')){
 			return errorMsg('失败',$this->getError());
 		}
-		return successMsg('成功！',array_merge(array('id'=>$this->getAttr('id')),$postData));
+		if($postData['id'] && intval($postData['id'])){
+			return successMsg('成功！',array('id'=>$this->getAttr('id')));
+		}else{
+			return successMsg('成功！',array_merge(array('id'=>$this->getAttr('id')),$postData));
+		}
 	}
 	
 	//分页查询

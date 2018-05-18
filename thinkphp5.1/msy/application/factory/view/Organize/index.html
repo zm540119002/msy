@@ -46,8 +46,8 @@
 		</div>
 	</section>
 	<section class="organize">
-		<ul level="0">
-			<li data-id="1" data-superior_id="0" data-level="0">
+		<ul data-id="1" data-superior_id="0" data-level="0">
+			<li>
 				<span class="content-label">总经办</span>
 				<a class="add">+</a>
 			</li>
@@ -75,8 +75,8 @@ $(function () {
 			btn:['确定','取消'],
 			yes:function (index) {
 				var postData = {};
-				postData.organize_id = _this.parent().data('id');
-				postData.level = _this.parent().data('level');
+				postData.organize_id = _this.parent().parent().data('id');
+				postData.level = _this.parent().parent().data('level');
 				postData.name = $('div.groupRoleLayer').find('input').val();
 				$.post(action,postData,function(data){
 					_this.after(data);
@@ -94,9 +94,9 @@ $(function () {
 			className:'groupRoleLayer',
 			content:$('#groupRole').html(),
 			btn:['确定','取消'],
-			yes:function () {
+			yes:function (index) {
 				var postData = {};
-				postData.id = _this.parent().data('id');
+				postData.id = _this.parent().parent().data('id');
 				postData.name = $('div.groupRoleLayer').find('input').val();
 				$.post(action,postData,function(data){
 					if(data.status==0){
