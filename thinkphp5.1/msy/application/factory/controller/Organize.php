@@ -5,8 +5,7 @@ class Organize extends FactoryBase
 {
     /**首页
      */
-    public function index()
-    {
+    public function index(){
         $modelOrganize = new \app\factory\model\Organize();
         if(request()->isAjax()){
             $info = $modelOrganize->edit($this->factory['id']);
@@ -19,10 +18,21 @@ class Organize extends FactoryBase
 
     /**
      */
-    public function  test()
-    {
+    public function  getOrganizeList(){
+        if(!request()->isGet()){
+            return config('custom.not_get');
+        }
+        $modelOrganize = new \app\factory\model\Organize();
+        $list = $modelOrganize->edit($this->factory['id']);
+        $this->assign('list',$list);
+        return view('list_tpl');
+    }
+
+    /**
+     */
+    public function  test(){
         if(request()->isAjax()){
-            return input('post.');
+            return errorMsg(config('custom.not_ajax'));
         }else{
             return $this->fetch();
         }

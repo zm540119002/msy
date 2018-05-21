@@ -36,24 +36,19 @@ class Organize extends \think\Model {
 			return successMsg('成功！',array_merge(array('id'=>$this->getAttr('id')),$postData));
 		}
 	}
-	
-	//分页查询
-	public function pageQuery(){
+
+	//列表查询
+	public function getOrganizeList($factoryId){
 		$where = [
 			['status', '=', 0],
-			['level', '=', 1],
+			['factory_id', '=', $factoryId],
 		];
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
-		}
 		$field = array(
-			'id','name','level','parent_id_1','parent_id_2','remark','sort','img',
+			'id','name','level','superior_id',
 		);
 		$order = 'id';
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
+		$group = 'level';
+		return $this->where($where)->field($field)->group($group)->order($order)->select()->toArray();
 	}
 
 	//删除
