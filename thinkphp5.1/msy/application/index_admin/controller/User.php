@@ -7,7 +7,7 @@ class User extends \common\controller\UserBase
      */
     public function manage(){
         if(!request()->isGet()){
-            return config('not_get');
+            return config('custom.not_get');
         }
         return $this->fetch();
     }
@@ -53,7 +53,7 @@ class User extends \common\controller\UserBase
      */
     public function getList(){
         if(!request()->isGet()){
-            return config('not_get');
+            return config('custom.not_get');
         }
         $modelUser = new \common\model\User();
         $list = $modelUser->pageQuery($this->user['id']);
@@ -65,7 +65,7 @@ class User extends \common\controller\UserBase
      */
     public function del(){
         if(!request()->isPost()){
-            return config('not_post');
+            return errorMsg(config('custom.not_post'));
         }
         $modelUser = new \common\model\User();
         return $modelUser->del();

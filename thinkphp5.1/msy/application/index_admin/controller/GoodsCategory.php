@@ -59,7 +59,7 @@ class GoodsCategory extends \common\controller\Base
      */
     public function getList(){
         if(!request()->isGet()){
-            return config('not_get');
+            return config('custom.not_get');
         }
         $modelGoodsCategory = new \common\model\GoodsCategory();
         $list = $modelGoodsCategory->pageQuery();
@@ -71,7 +71,7 @@ class GoodsCategory extends \common\controller\Base
      */
     public function del(){
         if(!request()->isPost()){
-            return config('not_post');
+            return config('custom.not_post');
         }
         $modelGoodsCategory = new \common\model\GoodsCategory();
         return $modelGoodsCategory->del();

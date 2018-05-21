@@ -46,10 +46,14 @@
 		</div>
 	</section>
 	<section class="organize">
-		<ul level="0">
-			<li data-id="1" data-superior_id="0" data-level="0">
+		<!--组织根节点，默认id为1，上级为0 ，级别为0-->
+		<ul data-id="1" data-superior_id="0" data-level="0">
+			<li>
 				<span class="content-label">总经办</span>
-				<a class="add">+</a>
+				<div class="operate-box">
+					<a class="btn edit">i</a>
+					<a class="btn add">+</a>
+				</div>
 			</li>
 		</ul>
 	</section>
@@ -75,11 +79,11 @@ $(function () {
 			btn:['确定','取消'],
 			yes:function (index) {
 				var postData = {};
-				postData.organize_id = _this.parent().data('id');
-				postData.level = _this.parent().data('level');
+				postData.organize_id = _this.parent().parent().parent().data('id');
+				postData.level = _this.parent().parent().parent().data('level');
 				postData.name = $('div.groupRoleLayer').find('input').val();
 				$.post(action,postData,function(data){
-					_this.after(data);
+					_this.parent().after(data);
 					layer.close(index)
 				});
 			}
@@ -94,9 +98,9 @@ $(function () {
 			className:'groupRoleLayer',
 			content:$('#groupRole').html(),
 			btn:['确定','取消'],
-			yes:function () {
+			yes:function (index) {
 				var postData = {};
-				postData.id = _this.parent().data('id');
+				postData.id = _this.parent().parent().parent().data('id');
 				postData.name = $('div.groupRoleLayer').find('input').val();
 				$.post(action,postData,function(data){
 					if(data.status==0){
@@ -109,6 +113,17 @@ $(function () {
 			}
 		});
 	});
+
+	//初始化
+	getOrganizeList();
 });
+//获取组织列表
+function getOrganizeList() {
+	var postData = {};
+	var url = controller + 'getOrganizeList';
+	$.get(url,postData,function(data){
+		$('section.organize').find('div.operate-box').after(data);
+	});
+}
 </script>
 {/block}
