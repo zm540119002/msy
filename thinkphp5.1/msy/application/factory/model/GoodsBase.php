@@ -95,7 +95,7 @@ class GoodsBase extends Model {
 				$newDetailsImg = explode(",",$data['details_img']);
 				array_pop($newDetailsImg);
 				delImgFromPaths($oldDetailsImg,$newDetailsImg);
-				
+
 				delImgFromPaths($oldGoodsBaseInfo['goods_video'],$data['goods_video']);
 			}
 			return successMsg("成功",array('id'=>$goodsBaseId));
@@ -170,6 +170,9 @@ class GoodsBase extends Model {
 				->where($where)
 				->join(array_merge($_join,$join))
 				->find();
+		}
+		if(!empty($info)){
+			$info = $info->toArray();
 		}
 		return $info;
 	}
