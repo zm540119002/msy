@@ -94,8 +94,7 @@ class Promotion extends Model {
 		$where = array_merge($_where, $where);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		 $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
-		echo $this->getLastSql();exit;
+		return $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
 	}
 
 	/**

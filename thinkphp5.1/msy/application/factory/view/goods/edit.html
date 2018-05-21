@@ -51,13 +51,17 @@
 <article class="f24">
 	<section class="bottomLine">
         <div class="top_bar top-title">
-            <h2>增加商品</h2>
+			{notempty name="goodsInfo"}
+			<h2>编辑商品</h2>
+			{else /}
+			<h2>增加商品</h2>
+			{/notempty}
         </div>
     </section>
 	<section>
 		<form class="addProductContent">
 			<ul>
-				{notempty name="$goodsInfo"}
+				{notempty name="goodsInfo"}
 				<input type="hidden" class="goods_base_id" value="{$goodsInfo[0]['goods_base_id']|default=''}"  name="goods_base_id">
 				{/notempty}
 
@@ -69,47 +73,18 @@
 					<span class="form-title">商品特点</span>
 					<textarea rows="" cols="" name="trait" placeholder="商品简要说明,字数限28字" class="goods-character input-text">{$goodsInfo[0]['trait']|default=''}</textarea>
 				</li>
-				<!--<li class="columns_flex l-r-sides release-options">
-					<span class="text-color-gr">同步发布选项</span>
-					<span class="columns_flex ">
-						<a href="javascript:void(0);" class="store_type " data-store-type="1" data-goods-id="">采购店铺</a>
-						<a href="javascript:void(0);" class="store_type" data-store-type="2" data-goods-id="">分成店铺</a>
-						<a href="javascript:void(0);" class="store_type " data-store-type="3" data-goods-id="">零售店铺</a>
-					</span>
-				</li>-->
 				<li>
 					<span class="form-title">展示价格</span>
 					<span class="price-flex">
                         <label for="">优惠价￥</label>
-                        <input type="text" name="retail_price" value="{$goodsInfo[0]['retail_price']|default=''}" placeholder="688.00" class="retail-price">
+                        <input type="text" name="sale_price" value="{$goodsInfo[0]['sale_price']|default=''}" placeholder="688.00" class="retail-price">
 				 	</span>
 					<span class="price-flex">
                         <label for="">零售价￥</label>
                         <input type="text" name="retail_price" value="{$goodsInfo[0]['retail_price']|default=''}" placeholder="688.00" class="retail-price">
 				 	</span>
 				</li>
-				<!--<li class="price-options">
-					<span class="form-title">采购店铺价格</span>
-                    <span class="price-flex">
-                        <label for="">销售价￥</label>
-                        <input type="text" name="" value="" placeholder="68.00" class="sale_price_purchases">
-                    </span>
 
-				</li>
-				<li class="price-options hide">
-					<span class="form-title">分成店铺价格</span>
-                    <span class="price-flex">
-                        <label for="">销售价￥</label>
-                        <input type="text" name="" value="" placeholder="68.00" class="sale_price_commission">
-                    </span>
-				</li>
-				<li class="price-options">
-					<span class="form-title">零售店铺价格</span>
-                    <span class="price-flex">
-                        <label for="">销售价￥</label>
-                        <input type="text" name="" value="" placeholder="68.00" class="sale_price_retail">
-                    </span>
-				</li>-->
 				<li >
 					<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图(1张)</a>
 					<input type="hidden" class="hidden_img" value="{$goodsInfo[0]['thumb_img']|default=''}" name="thumb_img">
@@ -120,12 +95,9 @@
 				</li>
 				<li class="">
                     <a href="javascript:void(0);" class="uploadVideo right-arrow">上传商品视频(可选项)</a>
-                    <input type="hidden" class="hidden_video" value="" data-src="{$goodsInfo[0]['goods_video']|default=''}" name="goodsVideo">
+                    <input type="hidden" class="hidden_video" value="{$goodsInfo[0]['goods_video']|default=''}" data-src="{$goodsInfo[0]['goods_video']|default=''}" name="goods_video">
                 </li>
-				<!--<li class="">
-					<a href="javascript:void(0);" class="editGoodsLabel right-arrow" >归属店铺分类(系列)</a>
-					<input type="hidden" class="goods-tag" data-name="" value="{$goodsInfo[0]['tag']|default=''}" name="tag">
-				</li>-->
+
 				<li class="">
                     <a href="javascript:void(0);" class="set-category right-arrow">设置检索品类</a>
                     <input type="hidden" class="select-category" data-category-id="{$goodsInfo[0]['catArray']|default=''}" value="" name="selectCategory">
@@ -153,34 +125,6 @@
 <script type="text/javascript" src="factory_js/goods.js"></script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
-	$(function () {
-		var goodsInfo = '{:json_encode($goodsInfo)}';
-		if(goodsInfo=='null'){
-			$('.store_type').eq(0).addClass('current');
-			$('.store_type').eq(2).addClass('current');
-		}else{
-			goodsInfo = JSON.parse(goodsInfo);
-			$.each(goodsInfo,function(i,item){
-				if(item.store_type == 1){
-					$('.store_type').eq(0).addClass('current');
-					$('.store_type').eq(0).data('goods-id',item.id);
-					$('.sale_price_purchases').val(item.sale_price);
-					$('.price-options').eq(0).show();
-				}
-				if(item.store_type == 2){
-					$('.store_type').eq(1).addClass('current');
-					$('.store_type').eq(1).data('goods-id',item.id);
-					$('.sale_price_commission').val(item.sale_price);
-					$('.price-options').eq(1).show();
-				}
-				if(item.store_type == 3){
-					$('.store_type').eq(2).addClass('current');
-					$('.store_type').eq(2).data('goods-id',item.id);
-					$('.sale_price_retail').val(item.sale_price);
-					$('.price-options').eq(2).show();
-				}
-			});
-		}
-	})
+
 </script>
 {/block}
