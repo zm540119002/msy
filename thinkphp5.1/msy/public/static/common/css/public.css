@@ -1161,8 +1161,7 @@ color: #ed6d00;
     position:relative;
 }
 .group-role-content li.first-role,
-.organize li,
-.organize li[data-level="0"]{
+.organize li{
     border-left:1px solid #333;
     margin:0 0 0 10px;
 }
@@ -1170,18 +1169,8 @@ color: #ed6d00;
     margin:0 0 50px 20px;
     border-left:1px solid #333;
 }
-.organize li[data-level="1"]{
-    border-left:1px solid #333;
-    margin:0 0 0 20px;
-}
-.organize li[data-level="2"]{
-    border-left:1px solid #333;
-    margin:0 0 0 30px;
-}
 .group-role-content li.role-item span:before,
-.organize ul[data-level="1"] li span:before,
-.organize li[data-level="1"] span:before,
-.organize li[data-level="2"] span:before{
+.organize ul[data-level="1"] li span:before{
     position: absolute;
     z-index: 1;
     left: -6px;
@@ -1204,9 +1193,7 @@ color: #ed6d00;
     margin:0 0 0 40px;
 }
 .group-role-content li.two-role span:before,
-.organize ul[data-level="1"] li span:before,
-.organize li[data-level="1"] span:before,
-.organize li[data-level="2"] span:before{
+.organize ul[data-level="1"] li span:before{
     width: 12px;
     bottom: 0;
     left: 3px;

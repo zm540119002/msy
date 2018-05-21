@@ -527,8 +527,9 @@
 .floor-item{
     display: block;
 }
+.floor-content{padding:0 0 .8rem 0;}
 .scroll-floor{
-    height:500px;
+    /*height:500px;*/
 }
 /*区域市场*/
 .pca{
