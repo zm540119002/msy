@@ -40,15 +40,36 @@ class Organize extends \think\Model {
 	//列表查询
 	public function getOrganizeList($factoryId){
 		$where = [
-			['status', '=', 0],
 			['factory_id', '=', $factoryId],
 		];
+		$allOrganize = $this->createTree($this->getAllOrganize($where));
+		return empty($allOrganize)?[]:$allOrganize;
+	}
+
+	//递归生成菜单树
+	private function createTree($multiArr,$superiorId=1){
+		static $list = [];
+		foreach ($multiArr as $k => $v){
+			if($v['superior_id']==$superiorId){
+				$list[] = $v;
+				self::createTree($multiArr,$v['id']);
+			}
+		}
+		return $list;
+	}
+
+	//获取组织
+	private function getAllOrganize($where){
+		$_where = [
+			['status', '=', 0],
+		];
+		$where = array_merge($_where,$where);
 		$field = array(
 			'id','name','level','superior_id',
 		);
 		$order = 'id';
-		$group = 'level';
-		return $this->where($where)->field($field)->group($group)->order($order)->select()->toArray();
+		$allOrganize = $this->where($where)->field($field)->order($order)->select()->toArray();
+		return empty($allOrganize)?[]:$allOrganize;
 	}
 
 	//删除
@@ -78,5 +99,4 @@ class Organize extends \think\Model {
 		}
 		return successMsg('成功');
 	}
-
 }

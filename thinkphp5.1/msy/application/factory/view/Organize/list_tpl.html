@@ -1,7 +1,6 @@
 {notempty name='list'}
 {volist name='list' id='vo'}
-<ul data-id="{$vo.id}" data-superior_id="{$vo.superior_id}" data-level="{$vo.level}">
-	<li>
+	<li data-id="{$vo.id}" data-superior_id="{$vo.superior_id}" data-level="{$vo.level}">
 		<span class="content-label">{$vo.name}</span>
 		<div class="operate-box">
 			<a class="btn edit">i</a>
@@ -9,6 +8,5 @@
 			<a class="btn add">+</a>
 		</div>
 	</li>
-</ul>
 {/volist}
 {/notempty}
