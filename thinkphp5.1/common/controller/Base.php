@@ -21,6 +21,7 @@ class Base extends \think\Controller{
         list($type, $data) = explode(',', $img);
         // 判断文件类型
         $ext = '';
+
         if(strstr($type,'image/jpeg')!=''){
             $ext = '.jpeg';
         }elseif(strstr($type,'image/jpeg')!=''){
@@ -29,6 +30,8 @@ class Base extends \think\Controller{
             $ext = '.gif';
         }elseif(strstr($type,'image/png')!=''){
             $ext = '.png';
+        }elseif(strstr($type,'video/mp4')!=''){
+            $ext = '.mp4';
         }
         if(!$ext){
             return errorMsg('只支持:jpeg,jpg,gif,png格式的图片');

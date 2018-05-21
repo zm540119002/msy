@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Promotion extends FactoryBase
+class Promotion extends StoreBase
 {
     //促销管理
     public function manage()
@@ -22,13 +22,13 @@ class Promotion extends FactoryBase
     {
         $model = new \app\factory\model\Promotion;
         if(request()->isPost()){
-            return $model -> edit($this->factory['factory_id']);
+            return $model -> edit();
         }
         if(input('?promotion_id')){
             $promotionId = (int)input('promotion_id');
             $where = [
                 ['p.id','=',$promotionId],
-                ['p.factory_id','=',$this->factory['factory_id']],
+                ['p.store_id','=',$this->store['id']],
             ];
             $file = [
                 'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,p.factory_id,g.thumb_img,g.name as goods_name'
@@ -43,10 +43,10 @@ class Promotion extends FactoryBase
             $this -> assign('promotionInfo',$promotionInfo);
         }
         $storeType = input('storeType');
-        if($storeType!=1 &&  $storeType!=2 && $storeType!=3) {
-            $storeType =1;
-        }
-        $this -> assign('storeType',$storeType);
+//        if($storeType!=1 &&  $storeType!=2 && $storeType!=3) {
+//            $storeType =1;
+//        }
+//        $this -> assign('storeType',$storeType);
         return $this->fetch();
     }
 
@@ -56,7 +56,7 @@ class Promotion extends FactoryBase
     public function getList(){
         $model = new \app\factory\model\Promotion;
         $where = [
-            ['p.factory_id','=',$this->factory['factory_id']],
+            ['p.store_id','=',$this->store['id']],
         ];
         $list = $model -> pageQuery($where);
         $this->assign('list',$list);

@@ -2,17 +2,22 @@
  * Created by Administrator on 2018/4/25.
  */
 $(function () {
-    var storeType=$('.channel_nav a.current').data('type');
-    var pageType = $('.subNav3 a.current').data('page-type');
-    if(pageType == 'shelf' || pageType == 'manage'){
-        var config = {
-            pageSize:4,
-            storeType:storeType,
-            pageType:pageType,
-        };
-        var url = module+'goods/getList';
-        getPage(url,config);
-    }
+
+    // if(pageType == 'shelf' || pageType == 'manage'){
+    //     var config = {
+    //         pageSize:4,
+    //         storeType:storeType,
+    //         pageType:pageType,
+    //     };
+    //     var url = module+'goods/getList';
+    //     getPage(url,config);
+    // }
+    var config = {
+        pageSize:4,
+        pageType:'manage',
+    };
+    var url = module+'goods/getList';
+    getPage(url,config);
     //选择店铺类型
     $('.channel_nav a').on('click',function(){
         var _this=$(this);
@@ -89,17 +94,12 @@ var loadTrigger = false;//加载触发器
 $(window).on('scroll',function(){
     if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
         loadTrigger = false;
-        var pageType = $('.subNav3 a.current').data('page-type');
-        var storeType = $('.channel_nav a.current').data('type');
-        if(pageType == 'shelf' || pageType == 'manage'){
-            var config = {
-                pageSize:4,
-                storeType:storeType,
-                pageType:pageType,
-            };
-            var url = module+'goods/getList';
-            getPage(url,config);
-        }
+        var config = {
+            pageSize:4,
+            pageType:'manage-',
+        };
+        var url = module+'goods/getList';
+        getPage(url,config);
     }
 });
 
