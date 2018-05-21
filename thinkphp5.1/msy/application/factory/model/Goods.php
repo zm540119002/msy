@@ -33,6 +33,7 @@ class Goods extends Model {
 		}else{
 			$data['create_time'] = time();
 			$data['store_id'] = $storeId;
+			$data['goods_base_id'] = $goodsBaseId;
 			$result = $this->allowField(true)->save($data);
 			if(!$result){
 				$this ->rollback();
@@ -59,20 +60,17 @@ class Goods extends Model {
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
-		$field = [
-			'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.store_type,
+		$file = [
+			'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,
                 gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,
-                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.create_time,gb.update_time,
-                gb.parameters'
+                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.parameters'
 		];
-		if(input('?get.storeType') && (int)input('get.storeType')){
-			$where[] = ['store_type','=',(int)input('get.storeType')];
-		}
 		$join =[
 			['goods_base gb','gb.id = g.goods_base_id'],
 		];
+		
 		$where = array_merge($_where, $where);
-		$field = array_merge($_field,$field);
+		$field = array_merge($_field,$file);
 		$join = array_merge($_join,$join);
 		$order = 'id';
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
@@ -147,6 +145,9 @@ class Goods extends Model {
 				->where($where)
 				->join(array_merge($_join,$join))
 				->find();
+		}
+		if(!empty($info)){
+			$info = $info->toArray();
 		}
 		return $info;
 	}
