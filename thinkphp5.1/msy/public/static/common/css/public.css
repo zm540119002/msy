@@ -439,8 +439,15 @@ i{
 .top-nav-bar a.home{
     background-position:0 -172px;
 }
+.top_bar a.goods-video{
+    background-image:url(../../common/img/icons/detail-icons.png);
+    background-position:0 0;
+    background-size:30px 325px;
+}
 .top_bar a.qr-code{
-    background-position:0 -218px;
+    background-image:url(../../common/img/icons/detail-icons.png);
+    background-position:0 -33px;
+    background-size:30px 325px;
 }
 .top_search_module{
     margin:-4px 0 0;

@@ -7,7 +7,7 @@ class Role extends \common\controller\UserBase
      */
     public function manage(){
         if(!request()->isGet()){
-            return config('not_get');
+            return config('custom.not_get');
         }
         return $this->fetch();
     }
@@ -54,7 +54,7 @@ class Role extends \common\controller\UserBase
      */
     public function getList(){
         if(!request()->isGet()){
-            return config('not_get');
+            return config('custom.not_get');
         }
         $modelRole = new \common\model\Role();
         $list = $modelRole->pageQuery();
@@ -65,7 +65,7 @@ class Role extends \common\controller\UserBase
      */
     public function del(){
         if(!request()->isPost()){
-            return config('not_post');
+            return config('custom.not_post');
         }
         $modelRole = new \common\model\Role();
         return $modelRole->del();
