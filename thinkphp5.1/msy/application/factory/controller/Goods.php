@@ -91,6 +91,11 @@ class Goods extends StoreBase
         return $this->fetch();
     }
 
+    //生成商品二维码
+    public function generateGoodsQRcode(){
+        print_r(compose());
+    }
+
 
     /**
      * 查出产商相关产品 分页查询
