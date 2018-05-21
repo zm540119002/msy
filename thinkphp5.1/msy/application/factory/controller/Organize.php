@@ -23,7 +23,7 @@ class Organize extends FactoryBase
             return config('custom.not_get');
         }
         $modelOrganize = new \app\factory\model\Organize();
-        $list = $modelOrganize->edit($this->factory['id']);
+        $list = $modelOrganize->getOrganizeList($this->factory['id']);
         $this->assign('list',$list);
         return view('list_tpl');
     }

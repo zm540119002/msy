@@ -64,6 +64,7 @@ $(function(){
             //提交
             $.post(controller+"uploadImgToTemp",postData,function(msg){
                 if(msg.status == 1){
+                    console.log(msg.info);
                     $(obj).find('.img').val(msg.info);
                     $(obj).find('img').attr('src','/uploads/'+msg.info);
                 }else{
