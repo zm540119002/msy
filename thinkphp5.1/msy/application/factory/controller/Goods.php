@@ -99,8 +99,29 @@ class Goods extends StoreBase
 
     //生成商品二维码
     public function generateGoodsQRcode(){
-        print_r(input());exit;
-        print_r($this->compose());
+        if(request()->isPost()){
+            $url = request()->domain().'/index.php/factory/Goods/preview/goods_id/'.input('post.goods_id');
+            $avatarPath = request()->domain().'/static/common/img/ucenter_logo.png';
+            $newRelativePath = config('upload_dir.upload_path').'/';
+            $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
+
+            $init = [
+                'filename'=>'goods',   //保存目录  ./uploads/compose/goods....
+                'title'=>'美尚官方旗舰店',
+                'type'=>'供应商自营',
+                'slogan'=>"采购平台·省了即赚到！",
+                'name'=>input('post.name'),
+                'introduce'=>input('post.specification'),
+                'money'=>'￥'.input('post.sale_price').'元',
+                'logo'=>$avatarPath, // 60*55px
+                'brand'=>input('post.store_logo'), // 160*55
+                'goods'=>input('post.goods_thumb_img'), // 460*534
+                'qrcode'=>config('upload_dir.upload_path').'/'.$shareQRCodes, // 120*120
+                'font'=>'./static/font/simhei.ttf',   //字体
+            ];
+            return successMsg($this->compose($init));
+        }
+
     }
 
 

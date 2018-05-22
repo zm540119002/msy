@@ -640,6 +640,14 @@ function captcha_check($value, $id = "", $config = [])
 
 
 //生成带logo二维码
+/**
+ * @param $url
+ * @param $avatarPath
+ * @param $newRelativePath
+ * @param string $eclevel
+ * @param int $pixelPerPoint
+ * @return string
+ */
 function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
     $QRcode = new Vendor\Qrcode\Qrcode();
     $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
@@ -682,5 +690,4 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     imagepng($QR,$logoFilename);
     unlink($noLogoFilename);
     return $newRelativePath.$filename;
-
 }
