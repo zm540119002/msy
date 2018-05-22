@@ -12,11 +12,12 @@
 		<video width="" height="" src=""></video>
 		<a class="video-btn"></a>
 		{/notempty}
-
 	</div>
 </section>
 <article class="f24">
 	<section class="top_nav_fixed">
+		<input type="hidden" class="goods_id" value="{$goodsInfo.id|default=''}"/>
+		<input type="hidden" class="goods_thumb_img" value="public_uploads/{$goodsInfo.thumb_img|default=''}"/>
 		<div class="top_bar top columns_flex">
 			{notempty name="goodsInfo.goods_video"}
 			<div class="each_column">
@@ -25,7 +26,7 @@
 			{else /}
 			{/notempty}
 			<div class="each_column">
-				<a href="javascript:void(0);" class=" qr-code">商品二维码</a>
+				<a href="javascript:void(0);" class="qr-code">商品二维码</a>
 			</div>
 			<div class="each_column top_search_module">
 				<input type="button" class="search_btn"/>
@@ -65,7 +66,7 @@
 					<div class="columns_flex l-r-sides">
 						<div >
                             <span class="retail-price pink f28">￥
-                                <price>{$goodsInfo.sale_price}</price>
+                                <price class="sale_price">{$goodsInfo.sale_price}</price>
                             </span>
 							<del>￥{$goodsInfo.retail_price}</del>
 						</div>
@@ -74,7 +75,7 @@
 							<a>分享</a>
 						</div>
 					</div>
-					<p>{$goodsInfo.name}</p>
+					<p class="goods_name">{$goodsInfo.name}</p>
 					<div>12g*20条 /盒</div>
 					<p>{$goodsInfo.trait}</p>
 				</div>
@@ -86,7 +87,7 @@
 				{/if}
 				<div class="row-item-mgl">
 					<div class="columns_flex l-r-sides">
-						<div>采购箱规格<span>50</span>盒/箱</div>
+						<div class="specification">采购箱规格<span class="specification_num">50</span><span class="unit">盒/箱</span></div>
 						<div>
 							<span class="pink">￥<price>5</price>/箱</span>
 						</div>
@@ -123,13 +124,15 @@
 			<li>
 				<div class="columns_flex l-r-sides">
 					<div>
+						<div><img src="public_uploads/{$storeInfo.img}" class="small_default_img store_logo" alt=""></div>
 						<div>
-							<img src="" alt="">
-							<span>供应商简称</span>
-						</div>
-						<div>
-							<img src="" alt="">
-							<span>官方旗舰店</span>
+							{if $storeInfo.store_type == 1 }
+							<span class="store_name">{$storeInfo.name}官方旗舰店</span>
+							{elseif $storeInfo.store_type == 2/}
+							<span class="store_name">{$storeInfo.name}品牌旗舰店</span>
+							{else /}
+							{/if}
+							<p class="store_run_type">供应商自营</p>
 						</div>
 					</div>
 					<div>
@@ -211,12 +214,26 @@
 		});
 		//商品二维码图片
 		$('body').on('click','.qr-code',function(){
-			layer.open({
-				title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],
-				className:'qrCodePicLayer',
-				content:'产品图片+文字+二维码图片',
-				btn:['确定','取消'],
+			var postData = {};
+            postData.goods_id = $('.goods_id').val();
+            postData.goods_thumb_img = $('.goods_thumb_img').val();
+            postData.goods_name = $('.goods_name').text();
+            postData.specification = $('.specification_num').text()+ $('.unit').text();
+            postData.sale_price = $('.sale_price').text();
+            postData.store_name = $('.store_name').text();
+            postData.store_logo = $('.store_logo').attr('src');
+            postData.store_run_type = $('.store_run_type').text();
+			$.post(module+'Goods/generateGoodsQRcode',postData,function (msg) {
+				if(msg.status == 1){
+					layer.open({
+						title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],
+						className:'qrCodePicLayer',
+						content:'产品图片+文字+二维码图片',
+						btn:['确定','取消'],
+					})
+				}
 			})
+
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
