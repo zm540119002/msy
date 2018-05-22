@@ -104,7 +104,7 @@ $(function () {
 	//修改
 	$('body').on('click','.edit',function(){
 		var _this = $(this);
-		var _thisSpan = _this.parent().parent().find('span');
+		var _thisSpan = _this.parent().prev();
 		var name = _thisSpan.text();
 		layer.open({
 			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],

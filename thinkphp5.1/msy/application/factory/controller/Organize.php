@@ -20,7 +20,7 @@ class Organize extends FactoryBase
         }
     }
 
-    /**获取列表
+    /**获取组织列表
      */
     public function  getOrganizeList(){
         if(!request()->isGet()){
