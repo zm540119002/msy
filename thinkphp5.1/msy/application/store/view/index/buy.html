@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页--店铺</title>
+
+    <style type="text/css">
+        table,td{border:1px red solid;}
+        #minus{ padding:5px; background: #a9ff0b; cursor: pointer;}
+        #plus{text-align:right; padding:5px; background: #a9ff0b; cursor: pointer;}
+        #nums{padding:4px; font-weight: bold; border:1px yellowgreen solid;}
+        #cart{cursor: pointer;}
+    </style>
+</head>
+
+<body>
+<p><a href="{:url('Cart/index')}">购物车</a></p>
+<div style="display: none" id="store_id">{$store_id}</div>
+<table>
+    <tr><td>商品ID</td><td>商品名称</td><td>商品价格</td><td>产品图片</td><td>购买数量</td><td>操作</td></tr>
+    {volist name="goods" id="vo"}
+    <tr>
+        <td id="goods_id">{$vo.id}</td>
+        <td><a href="{:url('Index/index',['store_id'=>$vo.store_id])}">{$vo.name}</a></td>
+        <td>{$vo.retail_price}</td>
+        <td><img src="public_uploads/{$vo.thumb_img}" /></td>
+        <td><span id="minus">-</span><span id="nums">1</span><span id="plus">+</span></td>
+        <td><span id="cart">加入购物车</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">直接购买</a> </td>
+    </tr>
+    {/volist}
+</table>
+</body>
+
+</html>
+
+<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    ;$(function(){
+
+    });
+
+    $('#minus').click(function(){
+        var nums = $('#nums'),nums_value = parseInt(nums.text());
+        if(nums_value==1){
+            alert('最少购买一件');
+            return false;
+        }
+        nums.text(nums_value-1);
+    });
+    $('#plus').click(function(){
+        var nums = $('#nums'),nums_value = parseInt(nums.text());
+        nums.text(nums_value+1);
+    });
+    $('#cart').click(function(){
+        var goods_id = $('#goods_id').text(),
+                nums = parseInt($('#nums').text()),
+                store_id =$('#store_id').text();
+        $.ajax({
+            url: "{:url('Cart/addGoods')}",
+            type: 'POST',
+            data: {goods_id:goods_id,number:nums,store_id:store_id},
+            dataType: 'text',
+            success:function(e){
+                alert(e);
+            }
+        });
+    })
+
+</script>
