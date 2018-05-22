@@ -45,6 +45,9 @@ class Role extends \think\Model {
 		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
 		
 	}
+	//获取角色列表
+	public function getRoleList(){
+	}
 	//删除
 	public function del(){
 		$where = [
