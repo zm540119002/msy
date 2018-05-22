@@ -6,9 +6,11 @@
 <section id="goodsvideoLayer" style="display: none;">
 	<div class="video-layer">
 		{notempty name="goodsInfo.goods_video"}
-		<video width="" height="" src="public_uploads/{$goodsInfo.goods_video|default=''}" autoplay="autoplay"></video>
+		<video width="" height="" class="" src="public_uploads/{$goodsInfo.goods_video|default=''}"></video>
+		<a class="video-btn"></a>
 		{else /}
-		<video width="" height="" src="" autoplay="autoplay"></video>
+		<video width="" height="" src=""></video>
+		<a class="video-btn"></a>
 		{/notempty}
 
 	</div>
@@ -232,6 +234,9 @@
 				content:goodsvideoLayer
 			})
 		});
+		$('body').on('click','.video-btn',function(){
+			$('.goodsvideoLayer video').get(0).play();
+		})
 		//星星评分等级
 		// var getFractionValue='{$aveScore}';
 		$('.five_star').setStar(5);
