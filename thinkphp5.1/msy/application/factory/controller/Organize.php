@@ -9,14 +9,18 @@ class Organize extends FactoryBase
         $modelOrganize = new \app\factory\model\Organize();
         if(request()->isAjax()){
             $info = $modelOrganize->edit($this->factory['id']);
-            $this->assign('info',$info);
-            return view('info_tpl');
+            if($info['status']==1){
+                $this->assign('info',$info);
+                return view('info_tpl');
+            }else{
+                return $info;
+            }
         }else{
             return $this->fetch();
         }
     }
 
-    /**
+    /**获取列表
      */
     public function  getOrganizeList(){
         if(!request()->isGet()){
@@ -24,8 +28,17 @@ class Organize extends FactoryBase
         }
         $modelOrganize = new \app\factory\model\Organize();
         $list = $modelOrganize->getOrganizeList($this->factory['id']);
-        $this->assign('list',$list);
-        return view('list_tpl');
+        return $list;
+    }
+
+    /**删除
+     */
+    public function  del(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $modelOrganize = new \app\factory\model\Organize();
+        return $modelOrganize->del($this->factory['id'],true);
     }
 
     /**

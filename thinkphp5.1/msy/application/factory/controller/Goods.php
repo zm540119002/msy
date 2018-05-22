@@ -50,14 +50,14 @@ class Goods extends StoreBase
                 gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.parameters'
             ];
             $join =[
-                ['goods_base gb','gb.id = g.goods_base_id'],
+                ['goods g','gb.id = g.goods_base_id'],
             ];
-            $goodsInfo =  $goodsModel -> selectGoods($where,$file,$join);
+            $goodsInfo =  $goodsBaseModel -> getGoodsBase($where,$file,$join);
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
             }
-            $catArray= $goodsInfo[0]['cat_id_1'].','.$goodsInfo[0]['cat_id_2'];
-            $goodsInfo[0]['catArray'] = $catArray;
+            $catArray= $goodsInfo['cat_id_1'].','.$goodsInfo['cat_id_2'];
+            $goodsInfo['catArray'] = $catArray;
             $this -> assign('goodsInfo',$goodsInfo);
         }
         return $this->fetch();
@@ -82,9 +82,18 @@ class Goods extends StoreBase
                     gb.main_img,gb.goods_video,gb.parameters,gb.details_img'];
             $join = [  ['goods_base gb','gb.id = g.goods_base_id'],];
             $goodsInfo =  $model -> getGoods($where,$file,$join);
+            $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
+            array_pop( $goodsInfo['main_img']);
+            $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
+            array_pop( $goodsInfo['details_img']);
             $this -> assign('goodsInfo',$goodsInfo);
         }
         return $this->fetch();
+    }
+
+    //生成商品二维码
+    public function generateGoodsQRcode(){
+        print_r(compose());
     }
 
 

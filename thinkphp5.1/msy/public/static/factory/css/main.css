@@ -527,8 +527,13 @@
 .floor-item{
     display: block;
 }
+.floor-content{padding:0 0 .8rem 0;}
 .scroll-floor{
-    height:500px;
+    padding:.12rem;
+    /*height:500px;*/
+}
+.scroll-floor h3{
+    margin:0 0 .12rem 0;
 }
 /*区域市场*/
 .pca{
