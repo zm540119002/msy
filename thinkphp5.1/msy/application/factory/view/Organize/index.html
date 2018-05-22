@@ -37,10 +37,10 @@
 		<div class="page-bd">
 			<nav class="apply-data-nav">
 				<ul id="status " class="status f24 weui-flex group-role-nav">
-					<li class="weui-flex-item switch-item current"><span class="ogranzi"></span><em></em>组织</li>
-					<li class="weui-flex-item switch-item "><span class="group"></span><em></em>组别</li>
-					<li class="weui-flex-item "><span class="role"></span><em></em>角色</li>
-					<li class="weui-flex-item "><span class="juris"></span>权限</li>
+					<li class="weui-flex-item current"><a href="{:url('Organize/index')}"><span class="ogranzi"></span><em></em>组织</a></li>
+					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="group"></span><em></em>组别</a></li>
+					<li class="weui-flex-item"><a href="{:url('Organize/role')}"><span class="role"></span><em></em>角色</a></li>
+					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="juris"></span>权限</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -58,7 +58,6 @@
 		</ul>
 	</section>
 	<p class="f20 content-box group-role-tipc">说明：这里仅构建与企业云端店铺经营直接相关的业务组织架构，点击    键可增加所在部门的分支/部门；点击部门框可修改名称；消除部门框内容相同于删除该部门；如正在删除的部门有分支部门，请先删除其分支部门再删除该部门；建议企业部门的级别不超过5级，企业部门设置完成后再按下一步。</p>
-	<a href="javascript:void(0);" class="add-account foot-btn">下一步</a>
 </article>
 <div id="organize_tpl" style="display:none;">
 	<ul data-id="" data-superior_id="" data-level="">
@@ -104,7 +103,7 @@ $(function () {
 	//修改
 	$('body').on('click','.edit',function(){
 		var _this = $(this);
-		var _thisSpan = _this.parent().parent().find('span');
+		var _thisSpan = _this.parent().prev();
 		var name = _thisSpan.text();
 		layer.open({
 			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],

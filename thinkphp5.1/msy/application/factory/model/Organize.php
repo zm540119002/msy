@@ -37,7 +37,7 @@ class Organize extends \think\Model {
 		}
 	}
 
-	//列表查询
+	//获取组织列表
 	public function getOrganizeList($factoryId){
 		$where = [
 			['factory_id', '=', $factoryId],
@@ -66,7 +66,7 @@ class Organize extends \think\Model {
 		$where = array_merge($_where,$where);
 		$field = array(
 			'id','name','level','superior_id',
-		);
+		);	
 		$order = 'id';
 		$allOrganize = $this->where($where)->field($field)->order($order)->select()->toArray();
 		return empty($allOrganize)?[]:$allOrganize;
@@ -78,7 +78,7 @@ class Organize extends \think\Model {
 			['status', '=', 0],
 			['factory_id', '=', $factoryId],
 		];
-		$id = input('post.id/a',0);
+		$id = input('post.id/a');
 		if(!is_array($id) || empty($id)){
 			return errorMsg('参数错误');
 		}

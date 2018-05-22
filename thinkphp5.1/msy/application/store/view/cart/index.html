@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style type="text/css">
+        table,td{border:1px blue solid;}
+        #settlement{background: #c6ffee; border-radius: 3px; padding:5px;cursor: pointer}
+    </style>
+</head>
+<body>
+  <p><strong>购物车列表</strong></p>
+  <p><a href="">返回</a></p>
+    <table>
+        <tr>
+            <td>店铺信息</td>
+            <td>商品信息</td>
+            <td>产品图片</td>
+            <td>操作</td>
+        </tr>
+        {foreach $cartList as $k=>$v}
+        <tr>
+            <td>{$v.store_id}</td>
+            <td>
+                <p>{$v.goods_id}</p>
+                <p>画好粤语</p>
+            </td>
+            <td><img src="public_uploads/{$v.thumb_img}" /></td>
+            <td>-&nbsp;{$v.number} &nbsp;+</td>
+        </tr>
+        {/foreach}
+    </table>
+    <div>优惠信息：满100元减50元</div>
+    <div>订单总额：￥100.23元</div>
+    <div>优惠金额：￥50元</div>
+    <div>应付金额：￥50.23元</div>
+    <div id="settlement">确认订单</div>
+</body>
+</html>
+
+<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    ;$(function(){
+
+    });
+
+    $('#settlement').click(function(){
+        $.ajax({
+            url: "{:url('Order/addOrder')}",
+            type:'POST',
+            data:{},
+            dataType:'text',
+            success:function(e){
+                alert('success');
+            }
+        });
+    });
+
+</script>

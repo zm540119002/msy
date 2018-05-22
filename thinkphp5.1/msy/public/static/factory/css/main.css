@@ -419,6 +419,24 @@
     border:1px solid #d9d9d9;
     background:none;
 }
+.account-item .content-label{
+    text-align: center;
+}
+.account-role-list{
+    padding:.18rem;
+    border:1px solid #d9d9d9;
+}
+.account-role-list li
+,.group-list li{
+    padding:.10rem 0 .10rem 1rem;
+    margin:0 0 18px 0;
+    background:url('../../common/img/icons/group-icons.png') no-repeat 0 center;
+    border:1px solid #009a3e;
+    border-radius:5px;
+}
+.role-list li{
+    background:url('../../common/img/icons/role-icons.png') no-repeat 0 center;
+}
 .range-list li{
     margin:0 0.20rem 0.15rem 0;
     padding:0 0.10rem;

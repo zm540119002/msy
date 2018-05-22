@@ -1,19 +1,37 @@
 <?php
-namespace app\index\controller;
+namespace app\store\controller;
 
-use think\Controller;
-use Request;
 
-class Index extends Controller
+class Index extends Base
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
-        return dump(config());
+        //return dump(config());
+        $this->assign('goodsList', $this->store->getGoodsList($this->store_id));
+        $this->assign('store_id', $this->store_id);
         return $this->fetch();
     }
 
-    public function hello()
+    /**
+     * 商品购买
+     *
+     *
+     */
+    public function buy($goods_id)
+    {
+        $this->assign('goods', $this->store->getGoods($goods_id));
+        $this->assign('store_id', $this->store_id);
+        return $this->fetch();
+    }
+
+    public  function  hello()
     {
         return $this->fetch();
     }
+
 }
