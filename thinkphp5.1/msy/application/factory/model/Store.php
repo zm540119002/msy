@@ -165,4 +165,27 @@ class Store extends Model {
 		$storeList = array_merge($factoryStore,$brandStores);
 		return $storeList;
 	}
+
+	//获取单店铺的详情信息
+	public function getStoreInfo($store){
+		$where = [
+			['s.id','=',$store['id']],
+		];
+		if($store['store_type'] == 1){
+			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,f.name,r.logo_img as img'];
+			$join =[
+				['factory f','f.id = s.foreign_id'],
+				['record r','s.foreign_id = r.factory_id'],
+			];
+			$storeInfo = $this -> getStore($where,$file,$join);
+		}
+		if($store['store_type'] == 2){
+			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
+			$join =[
+				['brand b','b.id = s.foreign_id'],
+			];
+			$storeInfo = $this -> getStore($where,$file,$join);
+		}
+		return $storeInfo;
+	}
 }
