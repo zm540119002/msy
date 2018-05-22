@@ -71,29 +71,36 @@ class Goods extends StoreBase
     public function preview()
     {
         $model = new \app\factory\model\Goods;
-        if(input('?goods_id')){
-            $goodsId = (int)input('goods_id');
-            $where = [
-                ['g.id','=',$goodsId],
-                ['g.store_id','=',$this->store['id']],
-            ];
-            $file = ['g.id,g.goods_base_id,g.sale_price,g.sale_type,g.create_time,g.update_time,
+        $goodsId = (int)input('goods_id');
+        if(empty($goodsId) && !$goodsId){
+            $this -> error('此商品不存在');
+        }
+        $where = [
+            ['g.id','=',$goodsId],
+            ['g.store_id','=',$this->store['id']],
+        ];
+        $file = ['g.id,g.goods_base_id,g.sale_price,g.sale_type,g.create_time,g.update_time,
                     gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,gb.thumb_img,
                     gb.main_img,gb.goods_video,gb.parameters,gb.details_img'];
-            $join = [  ['goods_base gb','gb.id = g.goods_base_id'],];
-            $goodsInfo =  $model -> getGoods($where,$file,$join);
-            $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
-            array_pop( $goodsInfo['main_img']);
-            $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
-            array_pop( $goodsInfo['details_img']);
-            $this -> assign('goodsInfo',$goodsInfo);
-        }
+        $join = [  ['goods_base gb','gb.id = g.goods_base_id'],];
+        $goodsInfo =  $model -> getGoods($where,$file,$join);
+        $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
+        array_pop( $goodsInfo['main_img']);
+        $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
+        array_pop( $goodsInfo['details_img']);
+        $this -> assign('goodsInfo',$goodsInfo);
+
+        //获取店铺的详情信息
+        $modelStore = new \app\factory\model\Store;
+        $storeInfo = $modelStore -> getStoreInfo($this->store);
+        $this -> assign('storeInfo',$storeInfo);
         return $this->fetch();
     }
 
     //生成商品二维码
     public function generateGoodsQRcode(){
-        print_r(compose());
+        print_r(input());exit;
+        print_r($this->compose());
     }
 
 
