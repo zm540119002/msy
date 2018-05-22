@@ -37,15 +37,6 @@ class Organize extends \think\Model {
 		}
 	}
 
-	//获取角色列表
-	public function getRoleList($factoryId){
-		$where = [
-			['factory_id', '=', $factoryId],
-		];
-		$allOrganize = $this->createTree($this->getAllOrganize($where));
-		return empty($allOrganize)?[]:$allOrganize;
-	}
-
 	//获取组织列表
 	public function getOrganizeList($factoryId){
 		$where = [
@@ -75,7 +66,7 @@ class Organize extends \think\Model {
 		$where = array_merge($_where,$where);
 		$field = array(
 			'id','name','level','superior_id',
-		);
+		);	
 		$order = 'id';
 		$allOrganize = $this->where($where)->field($field)->order($order)->select()->toArray();
 		return empty($allOrganize)?[]:$allOrganize;

@@ -54,8 +54,8 @@ class Organize extends FactoryBase
         if(!request()->isGet()){
             return config('custom.not_get');
         }
-        $modelOrganize = new \app\factory\model\Organize();
-        $list = $modelOrganize->getRoleList($this->factory['id']);
+        $modelRole = new \common\model\Role();
+        $list = $modelRole->getRoleList($this->factory['id']);
         return $list;
     }
 
