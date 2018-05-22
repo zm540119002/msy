@@ -419,6 +419,24 @@
     border:1px solid #d9d9d9;
     background:none;
 }
+.account-item .content-label{
+    text-align: center;
+}
+.account-role-list{
+    padding:.18rem;
+    border:1px solid #d9d9d9;
+}
+.account-role-list li
+,.group-list li{
+    padding:.10rem 0 .10rem 1rem;
+    margin:0 0 18px 0;
+    background:url('../../common/img/icons/group-icons.png') no-repeat 0 center;
+    border:1px solid #009a3e;
+    border-radius:5px;
+}
+.role-list li{
+    background:url('../../common/img/icons/role-icons.png') no-repeat 0 center;
+}
 .range-list li{
     margin:0 0.20rem 0.15rem 0;
     padding:0 0.10rem;
@@ -460,6 +478,104 @@
 }
 .addCcountLayer .signIn-wrapper{
     
+}
+.range-list-wrapper{
+    display: none;
+    
+}
+
+.range-list-wrapper.current{
+    display: block;
+    background: #fff;
+    animation: wrapper-gradient 0.5s linear;
+}
+@keyframes wrapper-gradient {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.region-box li{
+    float:left;
+    margin:0 10px;
+}
+.price_item{
+    padding:0.15rem 0.15rem 0.15rem 0;
+    justify-content: space-between;
+}
+.detail-nav{
+    padding:0.18rem 0;
+    border-bottom:1px solid #d9d9d9;
+    background:#fff;
+}
+.detail-nav.top-fixed{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+}
+.detail-nav a{
+    position:relative;
+    width:25%;
+    text-align:center;
+    box-sizing:border-box;
+    
+}
+.detail-nav a.current{
+    color:#ff7bac;
+}
+.detail-nav a.current:before{
+    bottom:-20px;
+    background-color: #ff7bac;
+}
+.real-price{
+    color:#ff1d25;
+}
+.real-price price{
+    font-size:0.28rem;
+}
+.price_item del{
+    color:#808080;
+}
+.abcd{
+    height:500px;
+}
+.floor-item{
+    display: block;
+}
+.floor-content{padding:0 0 .8rem 0;}
+.scroll-floor{
+    padding:.12rem;
+    /*height:500px;*/
+}
+.scroll-floor h3{
+    margin:0 0 .12rem 0;
+}
+/*区域市场*/
+.pca{
+    width:30%;
+    padding:0.12rem 0;
+    margin:0 0 .12rem 0;
+    border-radius:4px;
+    border:1px solid #d9d9d9;
+    /*background:none;*/
+    appearance:none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background:url('../../common/img/icons/arrow_drop_down.png')
+no-repeat scroll 
+right center 
+transparent;
+}
+.addTo{
+    display: block;
+    width:1rem;
+    padding:.08rem;
+    border:1px solid #d9d9d9;
+    border-radius:3px;
+    text-align:center;
 }
 /*供应商店铺*/
 .top-row-bar .columns_flex{

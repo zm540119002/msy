@@ -15,28 +15,16 @@ class GoodsBase extends Model {
 
 	/**
 	 * 编辑 新增和修改
-	 * @param string $factory_id
+	 * @param string $store_id
 	 * @return array
 	 */
-	public function edit($factoryId =''){
+	public function edit($storeId =''){
 		$data = input('post.');
 		$validate = validate('GoodsBase');
 		// if(!$result = $validate->scene('edit')->check($data)) {
 		// 	return errorMsg($validate->getError());
 		// }
-		$where = [
-			['id','=',$data['goods_base_id']],
-			['factory_id','=',$factoryId],
-		];
-		$file = array(
-			'thumb_img','main_img','details_img','goods_video'
-		);
-		if(input('?post.goods_base_id')){//修改，查询
-			$oldGoodsInfo = $this -> getGoodsBase($where,$file);
-			if(empty($oldGoodsInfo)){
-				return errorMsg('没有数据');
-			}
-		}
+
 		if(!empty($data['thumb_img'])){
 			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}
@@ -52,15 +40,7 @@ class GoodsBase extends Model {
 			$data['main_img'] = $mainImg;
 		}
 		if(!empty($data['goods_video'])){
-			$goodsVideo = '';
-			$tempGoodsVideo = explode(",",$data['goods_video']);
-			array_pop($tempGoodsVideo);
-			foreach ($tempGoodsVideo as $item) {
-				if($item){
-					$goodsVideo = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$goodsVideo;
-				}
-			}
-			$data['goods_video'] = $goodsVideo;
+			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
 		}
 		if(!empty($data['details_img'])){
 			$detailsImg = '';
@@ -74,11 +54,23 @@ class GoodsBase extends Model {
 			$data['details_img'] = $detailsImg;
 		}
 		if(input('?post.goods_base_id')){//修改
+			$where = [
+				['id','=',$data['goods_base_id']],
+				['store_id','=',$storeId],
+			];
+			$file = array(
+				'thumb_img','main_img','details_img','goods_video'
+			);
+			$oldGoodsBaseInfo = $this -> getGoodsBase($where,$file);
+			if(empty($oldGoodsBaseInfo)){
+				return errorMsg('没有数据');
+			}
+
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data, ['id' => $data['goods_base_id']]);
 			$goodsBaseId = $data['goods_base_id'];
 		}else{
-			$data['factory_id'] = $factoryId;
+			$data['store_id'] = $storeId;
 			$data['create_time'] = time();
 			$result = $this -> allowField(true) -> save($data);
 			$goodsBaseId =  $this->getAttr('id');
@@ -90,25 +82,21 @@ class GoodsBase extends Model {
 		}
 		if(false !== $result){
 			if(input('?post.goods_base_id')){//删除旧图片
-				delImgFromPaths($oldGoodsInfo['thumb_img'],$data['thumb_img']);
+				delImgFromPaths($oldGoodsBaseInfo['thumb_img'],$data['thumb_img']);
 				//删除就图片
-				$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
+				$oldMainImg = explode(",",$oldGoodsBaseInfo['main_img']);
 				array_pop($oldMainImg);
 				$newMainImg = explode(",",$data['main_img']);
 				array_pop($newMainImg);
 				delImgFromPaths($oldMainImg,$newMainImg);
 
-				$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
+				$oldDetailsImg = explode(",",$oldGoodsBaseInfo['details_img']);
 				array_pop($oldDetailsImg);
 				$newDetailsImg = explode(",",$data['details_img']);
 				array_pop($newDetailsImg);
 				delImgFromPaths($oldDetailsImg,$newDetailsImg);
 
-				$oldGoodsVideo = explode(",",$oldGoodsInfo['goods_video']);
-				array_pop($oldGoodsVideo);
-				$newGoodsVideo = explode(",",$data['goods_video']);
-				array_pop($newGoodsVideo);
-				delImgFromPaths($oldGoodsVideo,$newGoodsVideo);
+				delImgFromPaths($oldGoodsBaseInfo['goods_video'],$data['goods_video']);
 			}
 			return successMsg("成功",array('id'=>$goodsBaseId));
 		}else{
@@ -182,6 +170,9 @@ class GoodsBase extends Model {
 				->where($where)
 				->join(array_merge($_join,$join))
 				->find();
+		}
+		if(!empty($info)){
+			$info = $info->toArray();
 		}
 		return $info;
 	}
