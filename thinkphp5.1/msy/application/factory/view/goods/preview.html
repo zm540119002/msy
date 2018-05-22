@@ -216,7 +216,7 @@
 		$('body').on('click','.qr-code',function(){
 			var postData = {};
             postData.goods_id = $('.goods_id').val();
-            postData.goods_thumb_img = $('.goods_thumb_img').val();
+            postData.goods_thumb_img = $('.swiper-slide').eq(0).find('img').attr('src');
             postData.goods_name = $('.goods_name').text();
             postData.specification = $('.specification_num').text()+ $('.unit').text();
             postData.sale_price = $('.sale_price').text();
