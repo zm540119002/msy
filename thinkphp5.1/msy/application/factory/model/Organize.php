@@ -66,7 +66,7 @@ class Organize extends \think\Model {
 		$where = array_merge($_where,$where);
 		$field = array(
 			'id','name','level','superior_id',
-		);
+		);	
 		$order = 'id';
 		$allOrganize = $this->where($where)->field($field)->order($order)->select()->toArray();
 		return empty($allOrganize)?[]:$allOrganize;
