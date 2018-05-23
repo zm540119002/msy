@@ -18,13 +18,14 @@ class Role extends FactoryBase
 
     /**获取组织列表
      */
-    public function  getRoleList(){
+    public function  getList(){
         if(!request()->isGet()){
             return config('custom.not_get');
         }
         $modelRole = new \app\factory\model\Role();
-        $list = $modelRole->getRoleList($this->factory['id']);
-        return $list;
+        $list = $modelRole->getList($this->factory['id']);
+        $this->assign('list',$list);
+        return view('list_tpl');
     }
 
     /**删除
