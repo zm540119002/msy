@@ -1048,7 +1048,8 @@ color: #ed6d00;
 .forgetPasswordLayer .layui-m-layercont,
 .applyNewStoreLayer .layui-m-layercont,
 .factoryStoreLayer .layui-m-layercont,
-.groupRoleLayer .layui-m-layercont{
+.groupRoleLayer .layui-m-layercont,
+.rolePowerLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
@@ -1075,6 +1076,10 @@ color: #ed6d00;
     height:50px;
     margin:-25px 0 0 -25px;
     background: url(../../common/img/icons/video-btn.png);
+}
+.rolePowerLayer .layui-m-layercont{
+    overflow-y:scroll;
+    padding:15px;
 }
 .rolePowerLayer li{
     margin:0 0 10px 0;
