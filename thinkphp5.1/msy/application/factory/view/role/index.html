@@ -194,6 +194,7 @@
 			$(this).toggleClass('current');
 		});
 	});
+<<<<<<< HEAD:thinkphp5.1/msy/application/factory/view/role/index.html
 	//获取组织列表
 	function getRoleList() {
 		var postData = {};
@@ -201,5 +202,33 @@
 //	$.get(url,postData,function(data){
 //	});
 	}
+=======
+	$('body').on('click','.rolePowerLayer li',function(){
+		$(this).toggleClass('current');
+	});
+	$('body').on('click','.responsible-area',function(){
+		layer.open({
+			className:'rolePowerLayer',
+			type: 1,
+			anim: 'up',
+            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+			content:rolePower,
+			btn:['确定','取消'],
+			success:function(){
+				// var winHeight=$(window).height();
+				// $('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+			}
+		});
+	});
+	
+});
+//获取组织列表
+function getRoleList() {
+	var postData = {};
+	var url = controller + 'getRoleList';
+	$.get(url,postData,function(data){
+	});
+}
+>>>>>>> 86ec947119b2ccfd2e79fc776cf3737291eefcea:thinkphp5.1/msy/application/factory/view/organize/role.html
 </script>
 {/block}

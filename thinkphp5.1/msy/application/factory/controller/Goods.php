@@ -145,12 +145,32 @@ class Goods extends StoreBase
             if($_GET['pageType'] == 'manage' ){//管理
                 return $this->fetch('list_manage');
             }
+            if($_GET['pageType'] == 'inventory' ){//入库
+                return $this->fetch('list_inventory');
+            }
+            if($_GET['pageType'] == 'sort' ){//入库
+                return $this->fetch('list_sort');
+            }
         }
     }
+
     //商品管理展示页
     public function manage(){
         $this->assign('factory',$this->factory);
         return $this->fetch();
+    }
+    //设置商品库存
+    public function setSort(){
+        if(request()->isPost()){
+            $data = input();
+            $model = new \app\factory\model\Goods;
+            $result = $model->allowField(true)
+                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
+            if(false !== $result){
+                return successMsg('成功');
+            }
+        }
+        return $this -> fetch();
     }
     //上下架设置
     public function setShelf(){
@@ -158,11 +178,25 @@ class Goods extends StoreBase
             $data = input();
             $model = new \app\factory\model\Goods;
             $result = $model->allowField(true)
-                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
+                ->save($data, ['id' => $data['goodsId'],'store_id'=>$this->store['id']]);
            if(false !== $result){
                return successMsg('成功');
            }
         }
+        return $this -> fetch();
     }
 
+    //设置商品库存
+    public function setInventory(){
+        if(request()->isPost()){
+            $data = input();
+            $model = new \app\factory\model\Goods;
+            $result = $model->allowField(true)
+                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
+            if(false !== $result){
+                return successMsg('成功');
+            }
+        }
+        return $this -> fetch();
+    }
 }
