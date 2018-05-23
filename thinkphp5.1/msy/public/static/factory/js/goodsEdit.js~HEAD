@@ -176,41 +176,6 @@ $(function(){
         var categoryArray = category.split(',');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
-        // //查找选择发布的商城平台和对应的价格
-        // var goodsExtend =[];
-        // $(".store_type").each(function(){
-        //     var _this = $(this);
-        //     if(_this.hasClass('current')){
-        //         var store_type = _this.data('store-type');
-        //         var id = _this.data('goods-id');
-        //         var sale_price = '';
-        //         if(store_type == 1){
-        //             sale_price = $('.sale_price_purchases').val();
-        //         }
-        //         if(store_type == 2){
-        //             sale_price = $('.sale_price_commission').val();
-        //         }
-        //         if(store_type == 3){
-        //             sale_price = $('.sale_price_retail').val();
-        //         }
-        //         var arr={};
-        //         if(id){
-        //             arr={
-        //                 id:id,
-        //                 store_type:store_type,
-        //                 sale_price:sale_price,
-        //             };
-        //         }else{
-        //             arr={
-        //                 store_type:store_type,
-        //                 sale_price:sale_price,
-        //             };
-        //         }
-        //
-        //         goodsExtend.push(arr);
-        //     }
-        // });
-        // postData.goodsExtend = goodsExtend;
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;
         postData.cat_id_1=categoryArray[0];
@@ -252,19 +217,7 @@ $(function(){
         var _this = $(this);
         _this.addClass('current').siblings().removeClass('current');
     });
-
-    // //发布选项
-    // $('.release-options a').on('click',function(){
-    //     var _this=$(this);
-    //     var index=_this.index();
-    //     _this.toggleClass('current');
-    //         if(_this.hasClass('current')){
-    //             $('li.price-options').eq(index).show();
-    //         }else{
-    //             $('li.price-options').eq(index).hide();
-    //         }
-    //
-    // })
+    
 
 });
 //单图片上传弹窗
