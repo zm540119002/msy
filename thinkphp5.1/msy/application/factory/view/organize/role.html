@@ -9,6 +9,13 @@
 		<input class="role-name input-filed" type="text" value="" placeholder="请输入角色名称">
 	</div>
 </section>
+<section id="rolePower" style="display: none;">
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar top-switch-bar columns_flex l-r-sides">
@@ -50,6 +57,7 @@
 			<li>
 				<span>总经理</span>
 				<div class="operate-box">
+					<a class="power btn">f</a>
 					<a class="edit btn">i</a>
 					<a class="reduce btn">-</a>
 				</div>
@@ -57,6 +65,7 @@
 			<li>
 				<span>运营总监</span>
 				<div class="operate-box">
+					<a class="power btn">f</a>
 					<a class="edit btn">i</a>
 					<a class="reduce btn">-</a>
 				</div>
@@ -88,6 +97,18 @@ $(function () {
 			content:groupRole,
 			btn:['确定','取消']
 		});
+	});
+	var rolePower=$('#rolePower').html();
+	$('body').on('click','.power',function(){
+		layer.open({
+			title:['角色赋权','border-bottom:1px solid #d9d9d9;'],
+			className:'rolePowerLayer',
+			content:rolePower,
+			btn:['确定','取消']
+		});
+	});
+	$('body').on('click','.rolePowerLayer li',function(){
+		$(this).toggleClass('current');
 	});
 });
 //获取组织列表

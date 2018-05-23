@@ -1076,6 +1076,14 @@ color: #ed6d00;
     margin:-25px 0 0 -25px;
     background: url(../../common/img/icons/video-btn.png);
 }
+.rolePowerLayer li{
+    margin:0 0 10px 0;
+    border:1px solid #d9d9d9;
+}
+.rolePowerLayer li.current{
+     background: #ff7bac;
+     color:#fff;
+}
 .qrCodePicLayer img{
     width:100%;
 }
