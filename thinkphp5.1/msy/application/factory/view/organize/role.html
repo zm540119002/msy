@@ -6,7 +6,7 @@
 {block name="content"}
 <section id="groupRole" style="display: none;">
 	<div class="groupRole-box">
-		<input class="role-name input-filed" type="text" name="" value="" placeholder="请输入组别名称">
+		<input class="role-name input-filed" type="text" value="" placeholder="请输入角色名称">
 	</div>
 </section>
 <article class="f24">
@@ -47,17 +47,28 @@
 	</section>
 	<section>
 		<ul class="account-role-list role-list">
-			<li>总经理组</li>
-			<li>运营总监</li>
-			<li>运营经理</li>
-			<li>运营专员</li>
-			<li>客服总监</li>
+			<li>
+				<span>总经理</span>
+				<div class="operate-box">
+					<a class="edit btn">i</a>
+					<a class="reduce btn">-</a>
+				</div>
+			</li>
+			<li>
+				<span>运营总监</span>
+				<div class="operate-box">
+					<a class="edit btn">i</a>
+					<a class="reduce btn">-</a>
+				</div>
+			</li>
 		</ul>
+		<div class="add-role">
+			<a href="javascript:void(0);" class="add">+</a>
+		</div>
 	</section>
 	<p class="f20 content-box group-role-tipc">提示：选择角色进行默认权限的设定，全部角色默认权限设定后再按确定。</p>
 	<!--<a href="javascript:void(0);" class="add-account foot-btn">下一步</a>-->
 </article>
-
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy.html" /}
@@ -69,6 +80,15 @@
 $(function () {
 	//初始化
 	getRoleList();
+	var groupRole=$('#groupRole').html();
+	$('body').on('click','.add-role .add',function(){
+		layer.open({
+			title:['新增角色','border-bottom:1px solid #d9d9d9;'],
+			className:'',
+			content:groupRole,
+			btn:['确定','取消']
+		});
+	});
 });
 //获取组织列表
 function getRoleList() {
