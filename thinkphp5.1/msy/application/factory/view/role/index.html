@@ -31,7 +31,7 @@
 					<li class="current">某某官方旗舰店.零售</li>
 				</ul>
 			</div>
-			
+
 			<div class="range-list">
 				<span class="range-label">[分配区域]</span>
 				<ul class="columns_flex">
@@ -111,31 +111,14 @@
 				<ul id="status " class="status f24 weui-flex group-role-nav">
 					<li class="weui-flex-item "><a href="{:url('Organize/index')}"><span class="ogranzi"></span><em></em>组织</a></li>
 					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="group"></span><em></em>组别</a></li>
-					<li class="weui-flex-item current"><a href="{:url('Organize/role')}"><span class="role"></span><em></em>角色</a></li>
+					<li class="weui-flex-item current"><a href="{:url('Role/index')}"><span class="role"></span><em></em>角色</a></li>
 					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="juris"></span>权限</a></li>
 				</ul>
 			</nav>
 		</div>
 	</section>
 	<section>
-		<ul class="account-role-list role-list">
-			<li>
-				<span>总经理</span>
-				<div class="operate-box">
-					<a class="power btn">f</a>
-					<a class="edit btn">i</a>
-					<a class="reduce btn">-</a>
-				</div>
-			</li>
-			<li>
-				<span>运营总监</span>
-				<div class="operate-box">
-					<a class="power btn">f</a>
-					<a class="edit btn">i</a>
-					<a class="reduce btn">-</a>
-				</div>
-			</li>
-		</ul>
+		<ul class="account-role-list role-list"></ul>
 		<div class="add-role">
 			<a href="javascript:void(0);" class="add">+</a>
 		</div>
@@ -151,58 +134,90 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-$(function () {
-	//初始化
-	getRoleList();
-	var groupRole=$('#groupRole').html();
-	$('body').on('click','.add-role .add',function(){
-		layer.open({
-			title:['新增角色','border-bottom:1px solid #d9d9d9;'],
-			className:'',
-			content:groupRole,
-			btn:['确定','取消']
+	$(function () {
+		//初始化
+		getRoleList();
+		//新增角色
+		var groupRole=$('#groupRole').html();
+		$('body').on('click','.add',function(){
+			var _this = $(this);
+			layer.open({
+				title:['新增角色','border-bottom:1px solid #d9d9d9;'],
+				className:'groupRole',
+				content:groupRole,
+				btn:['确定','取消'],
+				yes:function(index){
+					var postData = {};
+					postData.name = $('div.groupRole').find('input').val();
+					$.post(action,postData,function(data){
+						$('ul.role-list').append(data);
+						layer.close(index);
+					});
+				}
+			});
+		});
+		//修改角色
+		$('body').on('click','.edit',function(){
+			var _this = $(this);
+			var _thisLi = _this.parent().parent();
+			layer.open({
+				title:['新增角色','border-bottom:1px solid #d9d9d9;'],
+				className:'groupRole',
+				content:groupRole,
+				btn:['确定','取消'],
+				success:function(){
+					$('div.groupRole').find('input').val(_thisLi.find('span').text());
+				},
+				yes:function(index){
+					var postData = {};
+					postData.id = _thisLi.data('id');
+					postData.name = $('div.groupRole').find('input').val();
+					$.post(action,postData,function(data){
+						_thisLi.replaceWith(data);
+						layer.close(index);
+					});
+				}
+			});
+		});
+
+		//赋权弹框
+		var rolePower=$('#rolePower').html();
+		$('body').on('click','.power',function(){
+			layer.open({
+				className:'rolePowerLayer',
+				type: 1,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				content:rolePower,
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+				}
+			});
+		});
+		//权限选择
+		$('body').on('click','.rolePowerLayer li',function(){
+			$(this).toggleClass('current');
+		});
+		//删除
+		$('body').on('click','.reduce',function(){
+			var _thisLi = $(this).parent().parent();
+			var postData = {};
+			postData.id = _thisLi.data('id');
+			var url = controller + 'del';
+			$.post(url,postData,function(data){
+				_thisLi.remove();
+			});
 		});
 	});
-	var rolePower=$('#rolePower').html();
-	$('body').on('click','.power',function(){
-		layer.open({
-			className:'rolePowerLayer',
-			type: 1,
-			anim: 'up',
-            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
-			content:rolePower,
-			btn:['确定','取消'],
-			success:function(){
-				var winHeight=$(window).height();
-				$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
-			}
+	//获取组织列表
+	function getRoleList() {
+		var postData = {};
+		var url = controller + 'getList';
+		$.get(url,postData,function(data){
+			$('ul.role-list').append(data);
 		});
-	});
-	$('body').on('click','.rolePowerLayer li',function(){
-		$(this).toggleClass('current');
-	});
-	$('body').on('click','.responsible-area',function(){
-		layer.open({
-			className:'rolePowerLayer',
-			type: 1,
-			anim: 'up',
-            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
-			content:rolePower,
-			btn:['确定','取消'],
-			success:function(){
-				// var winHeight=$(window).height();
-				// $('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
-			}
-		});
-	});
-	
-});
-//获取组织列表
-function getRoleList() {
-	var postData = {};
-	var url = controller + 'getRoleList';
-	$.get(url,postData,function(data){
-	});
-}
+	}
 </script>
 {/block}
