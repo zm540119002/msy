@@ -600,7 +600,7 @@ function isPhoneSide()
 //生成不带二维码
 function createQRcode($url){
     //生成二维码图片
-    $object = new Vendor\Qrcode\Qrcode();
+    $object = new \common\component\qrcode\Qrcode();
     $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
     $fileName = time().'.png';//保存文件名
     $outFile = $qrcodePath.$fileName;
@@ -613,9 +613,17 @@ function createQRcode($url){
 
 
 //生成带logo二维码
+/**
+ * @param $url 要跳转的url
+ * @param $avatarPath 中间logo的图片路径
+ * @param $newRelativePath 生成二维码图片保存路径
+ * @param string $eclevel
+ * @param int $pixelPerPoint
+ * @return array|string 返回二维码相对路径
+ */
 function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
-    $QRcode = new Vendor\Qrcode\Qrcode();
-    $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
+    $QRcode = new \common\component\qrcode\Qrcode();
+    $uploadPath =realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
             return (errorMsg('创建Uploads目录失败'));
@@ -623,7 +631,7 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     }
     $logo = $uploadPath.$avatarPath;
     //没有带logo二维码保存路径
-    $tempPath =$uploadPath.C('TEMP_PATH');
+    $tempPath =$uploadPath.config('upload_dir.temp_path');;
     if(!mk_dir($tempPath)){
         return (errorMsg('创建新目录失败'));
     }
@@ -642,10 +650,13 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     {
         $QR = imagecreatefromstring(file_get_contents($noLogoFilename));
         $logo = imagecreatefromstring(file_get_contents($logo));
-        $QR_width = imagesx($QR);
-        $QR_height = imagesy($QR);
-        $logo_width = imagesx($logo);
-        $logo_height = imagesy($logo);
+        if(imageistruecolor($logo)){
+            imagetruecolortopalette($logo,false,65535);//解决颜色失真
+        }
+        $QR_width = imagesx($QR);//二维码图片宽度
+        $QR_height = imagesy($QR);//二维码图片高度
+        $logo_width = imagesx($logo);// LOGO图片宽度
+        $logo_height = imagesy($logo);// logo图片高度
         $logo_qr_width = $QR_width / 5;
         $scale = $logo_width / $logo_qr_width;
         $logo_qr_height = $logo_height / $scale;
@@ -902,6 +913,8 @@ function imgInfo($path)
         'obj'    => $fun($path),
     ];
 }
+
+
 
 
 
