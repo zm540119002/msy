@@ -1,7 +1,7 @@
 
 {notempty name='list'}
 {volist name="list" id="vo"}
-<li class="columns_flex l-r-sides">
+<li class="columns_flex l-r-sides" data-id="{$vo.id}">
     <div class="td">
         {notempty name="vo.thumb_img"}
         <img src="public_uploads/{$vo.thumb_img}" alt="" class="left">
@@ -24,5 +24,5 @@
 </li>
 {/volist}
 {else /}
-<li><span>没有数据</span></li>
+
 {/notempty}
