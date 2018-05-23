@@ -1,0 +1,28 @@
+
+{notempty name='list'}
+{volist name="list" id="vo"}
+<li class="columns_flex l-r-sides">
+    <div class="td">
+        {notempty name="vo.thumb_img"}
+        <img src="public_uploads/{$vo.thumb_img}" alt="" class="left">
+        {else /}
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+        {/notempty}
+        <div>
+            <p>{$vo.name}</p>
+        </div>
+    </div>
+    <div class="td">
+        <span class="goods-library-num">{$vo.inventory}</span>
+    </div>
+    <div class="td">
+        <input type="text" placeholder="增加数量" class="add-num"/>
+    </div>
+    <div class="td">
+        <input type="text" placeholder="减去数量" class="reduce-num"/>
+    </div>
+</li>
+{/volist}
+{else /}
+<li><span>没有数据</span></li>
+{/notempty}

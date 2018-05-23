@@ -61,7 +61,7 @@ class Goods extends Model {
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
 		$file = [
-			'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,
+			'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,
                 gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.parameters'
 		];
