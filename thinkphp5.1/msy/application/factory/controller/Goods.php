@@ -145,6 +145,9 @@ class Goods extends StoreBase
             if($_GET['pageType'] == 'manage' ){//管理
                 return $this->fetch('list_manage');
             }
+            if($_GET['pageType'] == 'inventory' ){//入库
+                return $this->fetch('list_inventory');
+            }
         }
     }
     //商品管理展示页
@@ -165,4 +168,17 @@ class Goods extends StoreBase
         }
     }
 
+    //设置商品库存
+    public function setInventory(){
+        if(request()->isPost()){
+            $data = input();
+            $model = new \app\factory\model\Goods;
+            $result = $model->allowField(true)
+                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
+            if(false !== $result){
+                return successMsg('成功');
+            }
+        }
+        return $this -> fetch();
+    }
 }
