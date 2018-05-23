@@ -42,7 +42,7 @@ class Organize extends \think\Model {
 		$where = [
 			['factory_id', '=', $factoryId],
 		];
-		$allOrganize = $this->createTree($this->getAllOrganize($where));
+		$allOrganize = $this->createTree($this->getAllOrganize($factoryId));
 		return empty($allOrganize)?[]:$allOrganize;
 	}
 
@@ -59,11 +59,11 @@ class Organize extends \think\Model {
 	}
 
 	//获取组织
-	private function getAllOrganize($where){
-		$_where = [
+	private function getAllOrganize($factoryId){
+		$where = [
 			['status', '=', 0],
+			['factory_id', '=', $factoryId],
 		];
-		$where = array_merge($_where,$where);
 		$field = array(
 			'id','name','level','superior_id',
 		);	

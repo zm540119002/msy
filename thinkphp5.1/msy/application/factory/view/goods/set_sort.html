@@ -50,34 +50,25 @@
 	<section class="specific_type store-manage-type bottomLine">
 		<div class="columns_flex f20">
 			<a >设置</a>
-			<a class="column_type current">商品</a>
-			<a >排序</a>
-			<a>入仓</a>
-			<a>上架</a>
+			<a class="">商品</a>
+			<a class="column_type current">排序</a>
+			<a >入仓</a>
+			<a >上架</a>
 			<a>卡券</a>
 		</div>
 	</section>
-	<section class="bottomLine">
-		<div class="columns_flex backups-content ">
-			<div>
-				<span class="func-icons"></span>
-				<span>功能推荐</span>
-			</div>
-			<div class="backups-right">
-				<a href="javascript:void(0);" class="gr">备份本店铺商品数据</a>
-				<p>上次备份日期:<span>2018年5月21日</span></p>
-				<a href="javascript:void(0);" class="gr">复制商品数据到本店铺</a>
-			</div>
-		</div>
-	</section>
-	<section>
-		<div class="content-wrapper">
-			<ul class="columns_flex flex-both-side" id="list">
+	<section class="content-marginLeft">
+		<p class="columns_flex l-r-sides">
+			<span>数字排序法</span>
+			<span>位移排序法</span>
+		</p>
+		<div class="classify-label-content">
+			<ul class="" id="list">
 			</ul>
 		</div>
 	</section>
 </article>
-<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>
+<!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
 {/block}
 {block name="common"}
 {include file="template/loading.html" /}
@@ -89,13 +80,47 @@
 	$(function () {
 		var config = {
 			pageSize:4,
-			pageType:'manage',
+			pageType:'sort',
 		};
 		var url = module+'goods/getList';
 		//初始化商品列表
 		getPage(url,config);
 		//上拉加载更多
 		getMore(url,config);
+
+		//上下架
+		$('body').on('click','.shelf',function(){
+			var shelfStatus=$(this).data('shelf');
+			var _this = $(this);
+			var storeType=$('.channel_nav a.current').data('type');
+			var goodsId = $(this).parents('li').data('id');
+			var postData ={};
+			postData.goodsId = goodsId;
+			postData.shelf_status = shelfStatus;
+			postData.storeType = storeType;
+			var url = module+'goods/setShelf';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				dataType:'json',
+				beforeSend: function(){
+				},
+				error:function (xhr) {
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					if(data.status == 1){
+						if(shelfStatus==2){
+							_this.removeClass('shelf').addClass('apply-shelf').text('已申请');
+						}else{
+							_this.data('shelf',2);
+							_this.addClass('up-shelf').text('上架');
+						}
+					}
+				}
+			});
+		})
 	});
 </script>
 {/block}

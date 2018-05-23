@@ -1,0 +1,234 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="title"}开店部署{/block}
+{block name="content"}
+<section id="groupRole" style="display: none;">
+	<div class="groupRole-box">
+		<input class="role-name input-filed" type="text" value="" placeholder="请输入角色名称">
+	</div>
+</section>
+<section id="rolePower" style="display: none;">
+	<div class="rolePower-content">
+		<div class="columns_flex role-head l-r-sides">
+			<div>
+				<span>角色</span>
+			</div>
+			<div>
+				<span class="hd-icon"></span>
+				<span>总经理</span>
+			</div>
+			<div>
+				<span>权限</span>
+			</div>
+		</div>
+		<div class="range-list-wrapper ">
+			<div class="range-list">
+				<span class="range-label">[经营店铺]</span>
+				<ul class="columns_flex">
+					<li class="current">某某官方旗舰店.采购</li>
+					<li class="current">某某官方旗舰店.零售</li>
+				</ul>
+			</div>
+
+			<div class="range-list">
+				<span class="range-label">[分配区域]</span>
+				<ul class="columns_flex">
+					<li class="current">全国</li>
+				</ul>
+				<a href="javascript:void(0);" class="responsible-area right-arrow">修改分配区域</a>
+			</div>
+			<div class="range-list">
+				<span class="range-label">[授权操作]</span>
+				<span>店铺运营:</span>
+				<ul class="columns_flex">
+					<li class="current">商品管理</li>
+					<li class="current">场景管理</li>
+					<li class="current">特价管理</li>
+					<li class="current">上架下架</li>
+				</ul>
+			</div>
+			<div class="range-list">
+				<span>售前客服:</span>
+				<ul class="columns_flex">
+					<li class="current">售前咨询</li>
+				</ul>
+			</div>
+			<div class="range-list">
+				<span class="range-label">售中客服:</span>
+				<ul class="columns_flex">
+					<li class="current">接单打印</li>
+					<li class="current">备货打包</li>
+					<li class="current">发货完成</li>
+					<li class="current">填物流单</li>
+				</ul>
+			</div>
+			<div class="range-list">
+				<span class="range-label">售后客服:</span>
+				<ul class="columns_flex">
+					<li class="current">售后咨询</li>
+					<li class="current">退换货</li>
+				</ul>
+			</div>
+			<div class="range-list">
+				<span class="range-label">财务结算:</span>
+				<ul class="columns_flex">
+					<li class="current">退货款</li>
+					<li class="current">开发票</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<article class="f24">
+	<section class="top_nav_fixed">
+		<div class="top_bar top-switch-bar columns_flex l-r-sides">
+			<div class="">
+				<a class="home">首页</a>
+			</div>
+			<div class="">
+				<img class="left" src="public_img/default/no_pic_40.jpg" alt="">
+				<span>爱国宾</span>
+			</div>
+			<div class="">
+				<a class="switch-account">切换供应商账号></a>
+			</div>
+		</div>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20">
+			<a>企业档案</a>
+			<a>商标备案</a>
+			<a>开店申请</a>
+			<a class="column_type current">组别角色</a>
+			<a>账号授权</a>
+		</div>
+	</section>
+	<section class="f24 ">
+		<div class="page-bd">
+			<nav class="apply-data-nav">
+				<ul id="status " class="status f24 weui-flex group-role-nav">
+					<li class="weui-flex-item "><a href="{:url('Organize/index')}"><span class="ogranzi"></span><em></em>组织</a></li>
+					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="group"></span><em></em>组别</a></li>
+					<li class="weui-flex-item current"><a href="{:url('Organize/role')}"><span class="role"></span><em></em>角色</a></li>
+					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="juris"></span>权限</a></li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<section>
+		<ul class="account-role-list role-list">
+			<li>
+				<span>总经理</span>
+				<div class="operate-box">
+					<a class="power btn">f</a>
+					<a class="edit btn">i</a>
+					<a class="reduce btn">-</a>
+				</div>
+			</li>
+			<li>
+				<span>运营总监</span>
+				<div class="operate-box">
+					<a class="power btn">f</a>
+					<a class="edit btn">i</a>
+					<a class="reduce btn">-</a>
+				</div>
+			</li>
+		</ul>
+		<div class="add-role">
+			<a href="javascript:void(0);" class="add">+</a>
+		</div>
+	</section>
+	<p class="f20 content-box group-role-tipc">提示：选择角色进行默认权限的设定，全部角色默认权限设定后再按确定。</p>
+	<!--<a href="javascript:void(0);" class="add-account foot-btn">下一步</a>-->
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function () {
+		//初始化
+		getRoleList();
+		//新增角色弹框
+		var groupRole=$('#groupRole').html();
+		$('body').on('click','.add-role .add',function(){
+			layer.open({
+				title:['新增角色','border-bottom:1px solid #d9d9d9;'],
+				className:'groupRole',
+				content:groupRole,
+				btn:['确定','取消'],
+				yes:function(){
+					var postData = {};
+					postData.name = $('div.groupRole').find('input').val();
+					var url = controller + 'roleEdit';
+					$.post(url,postData,function(data){
+						_this.parent().after(data);
+						layer.close(index);
+					});
+				}
+			});
+		});
+		//赋权弹框
+		var rolePower=$('#rolePower').html();
+		$('body').on('click','.power',function(){
+			layer.open({
+				className:'rolePowerLayer',
+				type: 1,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				content:rolePower,
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+				}
+			});
+		});
+		//权限选择
+		$('body').on('click','.rolePowerLayer li',function(){
+			$(this).toggleClass('current');
+		});
+	});
+<<<<<<< HEAD:thinkphp5.1/msy/application/factory/view/role/index.html
+	//获取组织列表
+	function getRoleList() {
+		var postData = {};
+		var url = controller + 'getRoleList';
+//	$.get(url,postData,function(data){
+//	});
+	}
+=======
+	$('body').on('click','.rolePowerLayer li',function(){
+		$(this).toggleClass('current');
+	});
+	$('body').on('click','.responsible-area',function(){
+		layer.open({
+			className:'rolePowerLayer',
+			type: 1,
+			anim: 'up',
+            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+			content:rolePower,
+			btn:['确定','取消'],
+			success:function(){
+				// var winHeight=$(window).height();
+				// $('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+			}
+		});
+	});
+	
+});
+//获取组织列表
+function getRoleList() {
+	var postData = {};
+	var url = controller + 'getRoleList';
+	$.get(url,postData,function(data){
+	});
+}
+>>>>>>> 86ec947119b2ccfd2e79fc776cf3737291eefcea:thinkphp5.1/msy/application/factory/view/organize/role.html
+</script>
+{/block}
