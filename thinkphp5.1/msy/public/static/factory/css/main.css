@@ -435,6 +435,7 @@
     border-radius:5px;
 }
 .role-list li{
+    position:relative;
     background:url('../../common/img/icons/role-icons.png') no-repeat 0 center;
 }
 .range-list li{
