@@ -20,23 +20,6 @@ class Organize extends FactoryBase
         }
     }
 
-    /**角色
-     */
-    public function role(){
-        $modelOrganize = new \app\factory\model\Organize();
-        if(request()->isAjax()){
-            $info = $modelOrganize->edit($this->factory['id']);
-            if($info['status']==1){
-                $this->assign('info',$info);
-                return view('info_tpl');
-            }else{
-                return $info;
-            }
-        }else{
-            return $this->fetch();
-        }
-    }
-
     /**获取组织列表
      */
     public function  getOrganizeList(){
@@ -48,17 +31,6 @@ class Organize extends FactoryBase
         return $list;
     }
 
-    /**获取组织列表
-     */
-    public function  getRoleList(){
-        if(!request()->isGet()){
-            return config('custom.not_get');
-        }
-        $modelRole = new \common\model\Role();
-        $list = $modelRole->getRoleList($this->factory['id']);
-        return $list;
-    }
-
     /**删除
      */
     public function  del(){
@@ -67,15 +39,5 @@ class Organize extends FactoryBase
         }
         $modelOrganize = new \app\factory\model\Organize();
         return $modelOrganize->del($this->factory['id'],true);
-    }
-
-    /**
-     */
-    public function  test(){
-        if(request()->isAjax()){
-            return errorMsg(config('custom.not_ajax'));
-        }else{
-            return $this->fetch();
-        }
     }
 }
