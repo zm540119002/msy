@@ -25,15 +25,26 @@ class Role extends \think\Model {
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
 			$this->save($postData);
+			$postData['id'] = $this->getAttr('id');
 		}
 		if(!$this->getAttr('id')){
 			return errorMsg('失败',$this->getError());
 		}
-		return successMsg('成功！',array('id'=>$this->getAttr('id')));
+		return successMsg('成功！',$postData);
 	}
 
-	//获取角色列表
-	public function getRoleList(){
+	//获取列表
+	public function getList($factoryId){
+		$where = [
+			['status', '=', 0],
+			['factory_id', '=', $factoryId],
+		];
+		$field = array(
+			'id','name',
+		);
+		$order = 'id';
+		$list = $this->where($where)->field($field)->order($order)->select()->toArray();
+		return empty($list)?[]:$list;
 	}
 
 	//删除
