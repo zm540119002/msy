@@ -205,7 +205,6 @@
 		var offsetHeight=$('.detail-nav').offset().top;
 		$(window).on('scroll',function(){
 			var scrollHeight=$(document).scrollTop();
-
 			if(scrollHeight+height>offsetHeight){
 				$('.detail-nav').addClass('top-fixed');
 			}else {
