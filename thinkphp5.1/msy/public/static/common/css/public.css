@@ -1052,7 +1052,8 @@ color: #ed6d00;
     padding:0;
     text-align: left;
 }
-.goodsvideoLayer .layui-m-layercont{
+.goodsvideoLayer .layui-m-layercont,
+.qrCodePicLayer .layui-m-layercont{
      padding:15px;
 }
 .goodsvideoLayer video{
@@ -1074,6 +1075,9 @@ color: #ed6d00;
     height:50px;
     margin:-25px 0 0 -25px;
     background: url(../../common/img/icons/video-btn.png);
+}
+.qrCodePicLayer img{
+    width:100%;
 }
 .forgetPasswordLayer .layui-m-layerbtn span[yes]{
     background: #ff7bac;
