@@ -912,3 +912,40 @@ transparent;
 .weui-flex .weui-flex-item.disabled{
     pointer-events: none;
 }
+/*店铺运营*/
+.store-manage-type a{
+    width:15%;
+}
+.backups-content{
+    padding:.20rem .15rem;
+}
+.backups-content .gr{
+    border:1px solid #009A3E;
+    border-radius:5px;
+}
+.backups-right{
+    margin:0 0 0 .5rem;
+}
+.library-th.l-r-sides{
+    margin-bottom:0;
+}
+.library-th span{
+    display: block;
+    width:25%;
+    padding:10px 0;
+    text-align:center;
+    border-left:1px solid #d9d9d9;
+}
+.library-tr li{
+    border-top:1px solid #d9d9d9;
+}
+.library-tr li.l-r-sides{
+    margin:0;
+}
+.library-tr .td{
+    width:25%;
+    padding:20px 0;
+    text-align:center;
+    border-left:1px solid #d9d9d9;
+    box-sizing:border-box;
+}
