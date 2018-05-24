@@ -10,7 +10,7 @@
 	</div>
 </section>
 <section id="rolePower" style="display: none;">
-	{include file="role/node_tpl" /}
+	{include file="role/node_list_tpl" /}
 </section>
 <article class="f24">
 	<section class="top_nav_fixed">
@@ -118,6 +118,7 @@
 		var rolePower=$('#rolePower').html();
 		$('body').on('click','.power',function(){
 			var _this = $(this);
+			var _thisLi = _this.parent().parent();
 			layer.open({
 				className:'rolePowerLayer',
 				type: 1,
@@ -128,6 +129,13 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+					var postData = {};
+					postData.roleId = _thisLi.data('id');
+					$.post(controller+'getRoleNode',function(data){
+						console.log(data);
+					});
+				},
+				yes:function(index){
 				}
 			});
 		});
