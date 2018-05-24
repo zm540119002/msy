@@ -10,76 +10,7 @@
 	</div>
 </section>
 <section id="rolePower" style="display: none;">
-	<div class="rolePower-content">
-		<div class="columns_flex role-head l-r-sides">
-			<div>
-				<span>角色</span>
-			</div>
-			<div>
-				<span class="hd-icon"></span>
-				<span>总经理</span>
-			</div>
-			<div>
-				<span>权限</span>
-			</div>
-		</div>
-		<div class="range-list-wrapper ">
-			<div class="range-list">
-				<span class="range-label">[经营店铺]</span>
-				<ul class="columns_flex">
-					<li class="current">某某官方旗舰店.采购</li>
-					<li class="current">某某官方旗舰店.零售</li>
-				</ul>
-			</div>
-
-			<div class="range-list">
-				<span class="range-label">[分配区域]</span>
-				<ul class="columns_flex">
-					<li class="current">全国</li>
-				</ul>
-				<a href="javascript:void(0);" class="responsible-area right-arrow">修改分配区域</a>
-			</div>
-			<div class="range-list">
-				<span class="range-label">[授权操作]</span>
-				<span>店铺运营:</span>
-				<ul class="columns_flex">
-					<li class="current">商品管理</li>
-					<li class="current">场景管理</li>
-					<li class="current">特价管理</li>
-					<li class="current">上架下架</li>
-				</ul>
-			</div>
-			<div class="range-list">
-				<span>售前客服:</span>
-				<ul class="columns_flex">
-					<li class="current">售前咨询</li>
-				</ul>
-			</div>
-			<div class="range-list">
-				<span class="range-label">售中客服:</span>
-				<ul class="columns_flex">
-					<li class="current">接单打印</li>
-					<li class="current">备货打包</li>
-					<li class="current">发货完成</li>
-					<li class="current">填物流单</li>
-				</ul>
-			</div>
-			<div class="range-list">
-				<span class="range-label">售后客服:</span>
-				<ul class="columns_flex">
-					<li class="current">售后咨询</li>
-					<li class="current">退换货</li>
-				</ul>
-			</div>
-			<div class="range-list">
-				<span class="range-label">财务结算:</span>
-				<ul class="columns_flex">
-					<li class="current">退货款</li>
-					<li class="current">开发票</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	{include file="role/node_list_tpl" /}
 </section>
 <article class="f24">
 	<section class="top_nav_fixed">
@@ -179,10 +110,15 @@
 				}
 			});
 		});
-
+		//权限选择-样式
+		$('body').on('click','.rolePowerLayer li',function(){
+			$(this).toggleClass('current');
+		});
 		//赋权
 		var rolePower=$('#rolePower').html();
 		$('body').on('click','.power',function(){
+			var _this = $(this);
+			var _thisLi = _this.parent().parent();
 			layer.open({
 				className:'rolePowerLayer',
 				type: 1,
@@ -193,12 +129,15 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+					var postData = {};
+					postData.roleId = _thisLi.data('id');
+					$.post(controller+'getRoleNode',function(data){
+						console.log(data);
+					});
+				},
+				yes:function(index){
 				}
 			});
-		});
-		//权限选择
-		$('body').on('click','.rolePowerLayer li',function(){
-			$(this).toggleClass('current');
 		});
 		//删除
 		$('body').on('click','.reduce',function(){
