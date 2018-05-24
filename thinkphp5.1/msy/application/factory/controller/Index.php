@@ -25,15 +25,15 @@ class Index extends UserBase
               ['u.user_id','=',$uid],
               ['u.is_default','=',1],
             ];
-            $factoryInfo = $model -> getUserFactory($_where,$file,$join);
-            $factoryList = $model -> selectUserFactory($where_new,$file,$join);
+            $factoryInfo = $model -> getInfo($_where,$file,$join);
+            $factoryList = $model -> getList($where_new,$file,$join);
             $this -> assign('factoryList',$factoryList);
             if(!$factoryInfo){
                 $this -> assign('notDefaultFactory',1);
             }
             $this -> assign('factoryInfo',$factoryInfo);
         }elseif ($factoryCount == 1){
-            $factoryInfo = $model -> getUserFactory($where_new,$file,$join);
+            $factoryInfo = $model -> getInfo($where_new,$file,$join);
             $this -> assign('factoryInfo',$factoryInfo);
         }
         Session::set('factory',$factoryInfo);
