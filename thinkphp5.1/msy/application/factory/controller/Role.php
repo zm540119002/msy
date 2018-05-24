@@ -12,6 +12,9 @@ class Role extends FactoryBase
             $this->assign('info',$info);
             return view('info_tpl');
         }else{
+            $menu = new \common\lib\Menu();
+            $allMenu = $menu->getAllMenu();
+            $this->assign('allMenu',$allMenu);
             return $this->fetch();
         }
     }
