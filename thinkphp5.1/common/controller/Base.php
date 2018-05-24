@@ -245,7 +245,7 @@ class Base extends \think\Controller{
         $goods = $this->imgInfo($init['goods']);
         $qrcode = $this->imgInfo($init['qrcode']);
         if(!$logo ||!$brand || !$goods || !$qrcode){
-            return '提供的图片问题';
+            return errorMsg('提供的图片问题');
         }
         $im = imagecreatetruecolor(480, 780);  //图片大小
         $color = imagecolorallocate($im, 240, 255, 255);
@@ -268,10 +268,10 @@ class Base extends \think\Controller{
         }
         $filename = $dir.'/'.time().mt_rand(1000, 9999).'.jpg';
         if( !imagejpeg($im, $filename, 90) ){
-            return '合成图片失败';
+            return errorMsg('合成图片失败');
         }
         imagedestroy($im);
-        return  substr($filename, 1);
+        return  successMsg(substr($filename, 1));
     }
 
     private function imgInfo($path)
