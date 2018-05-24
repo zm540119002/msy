@@ -1,4 +1,3 @@
-
 <div class="rolePower-content">
 	<div class="columns_flex role-head l-r-sides">
 		<div>
@@ -19,7 +18,7 @@
 			{notempty name='allMenu'}
 			<ul class="columns_flex">
 				{volist name='vo.sub_menu' id='vv'}
-				<li class="">{$vv.name}</li>
+				<li class="" data-id="{$vv.id}">{$vv.name}</li>
 				{/volist}
 			</ul>
 			{/notempty}

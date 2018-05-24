@@ -31,15 +31,6 @@ class Role extends FactoryBase
         return view('list_tpl');
     }
 
-    public function getRoleNode(){
-        if(!request()->isAjax()){
-            return errorMsg(config('custom.not_ajax'));
-        }
-        $roleNodeModel = new \app\factory\model\RoleNode();
-        $list = $roleNodeModel->getList();
-        return $list;
-    }
-
     /**删除
      */
     public function  del(){
@@ -48,5 +39,27 @@ class Role extends FactoryBase
         }
         $modelRole = new \app\factory\model\Role();
         return $modelRole->del($this->factory['id'],true);
+    }
+
+    /**获取角色权限列表
+     */
+    public function getRoleNode(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $roleNodeModel = new \app\factory\model\RoleNode();
+        $list = $roleNodeModel->getList();
+        return array_column($list,'node_id');
+    }
+
+    /**保存角色权限
+     */
+    public function saveRoleNode(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $roleNodeModel = new \app\factory\model\RoleNode();
+        $res = $roleNodeModel->edit();
+        return $res;
     }
 }

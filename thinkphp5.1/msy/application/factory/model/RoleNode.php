@@ -12,7 +12,10 @@ class RoleNode extends \think\Model {
 	//编辑
 	public function edit(){
 		$postData = input('post.');
-		if($postData['roleId'] && intval($postData['roleId']) && !empty($postData['nodeIds'])){
+		if(!intval($postData['roleId'])){
+			return errorMsg('参数有误');
+		}
+		if(is_array($postData['nodeIds']) && !empty($postData['nodeIds'])){
 			$response = $this->where('role_id','=',$postData['roleId'])->select();
 			$response = $response->toArray();
 			//原节点

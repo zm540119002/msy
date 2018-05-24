@@ -133,10 +133,30 @@
 					var postData = {};
 					postData.roleId = _thisLi.data('id');
 					$.post(controller+'getRoleNode',postData,function(data){
-						console.log(data);
+						if($.isArray(data) && data.length){
+							$.each($('.rolePowerLayer').find('li'),function(){
+								if($.inArray($(this).data('id'),data)!='-1'){
+									$(this).attr('class','current');
+								}
+							});
+						}
 					});
 				},
 				yes:function(index){
+					var postData = {};
+					postData.roleId = _thisLi.data('id');
+					postData.nodeIds = [];
+					$.each($('.rolePowerLayer').find('li'),function(){
+						if($(this).attr('class')=='current'){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					$.post(controller+'saveRoleNode',postData,function(data){
+						if(data.status==0){
+						}else{
+							layer.close(index);
+						}
+					});
 				}
 			});
 		});
