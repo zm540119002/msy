@@ -153,6 +153,7 @@
 					});
 					$.post(controller+'saveRoleNode',postData,function(data){
 						if(data.status==0){
+							dialog.error(data.info);
 						}else{
 							layer.close(index);
 						}
