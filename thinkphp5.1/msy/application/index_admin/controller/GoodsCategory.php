@@ -1,7 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class GoodsCategory extends \common\controller\Base
+class GoodsCategory extends Base
 {
     /**商品分类-管理
      */
