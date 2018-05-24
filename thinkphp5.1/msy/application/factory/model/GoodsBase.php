@@ -56,7 +56,6 @@ class GoodsBase extends Model {
 		if(input('?post.goods_base_id')){//修改
 			$where = [
 				['id','=',$data['goods_base_id']],
-				['store_id','=',$storeId],
 			];
 			$file = array(
 				'thumb_img','main_img','details_img','goods_video'
@@ -70,7 +69,6 @@ class GoodsBase extends Model {
 			$result = $this->allowField(true)->save($data, ['id' => $data['goods_base_id']]);
 			$goodsBaseId = $data['goods_base_id'];
 		}else{
-			$data['store_id'] = $storeId;
 			$data['create_time'] = time();
 			$result = $this -> allowField(true) -> save($data);
 			$goodsBaseId =  $this->getAttr('id');
