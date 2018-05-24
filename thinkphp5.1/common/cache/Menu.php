@@ -2,35 +2,12 @@
 namespace common\cache;
 
 class Menu{
-    private static $_cache_key = 'all_display_menu_';
-    private static $_cache_key_2 = 'all_menu_';
-
-    /**从缓存中获取信息
-     */
-    public static function getAllDisplayMenu($user){
-        $allDisplayMenu = cache(self::$_cache_key.$user['id']);
-        if(!$allDisplayMenu){
-            $menu = new \common\lib\Menu();
-            if($user['type']==0){//超级管理员
-                $allDisplayMenu = $menu->getAllDisplayMenu();
-            }else{
-                $allDisplayMenu = $menu->getOwnDisplayMenu();
-            }
-            cache(self::$_cache_key.$user['id'], $allDisplayMenu);
-        }
-        return $allDisplayMenu?:[];
-    }
-
-    /**删除缓存信息
-     */
-    public static function removeAllDisplayMenu($userId){
-        cache(self::$_cache_key.$userId, null);
-    }
+    private static $_cache_key = 'all_menu_ids_';
 
     /**从缓存中获取信息
      */
     public static function getAllMenuIds($user){
-        $allMenuIds = cache(self::$_cache_key_2.$user['id']);
+        $allMenuIds = cache(self::$_cache_key.$user['id']);
         if(!$allMenuIds){
             $menu = new \common\lib\Menu();
             if($user['type']==0){//超级管理员
@@ -43,7 +20,7 @@ class Menu{
             foreach ($subMenu as $item) {
                 $allMenuIds = array_merge($allMenuIds,array_column($item,'id'));
             }
-            cache(self::$_cache_key_2.$user['id'], $allMenuIds);
+            cache(self::$_cache_key.$user['id'], $allMenuIds);
         }
         return $allMenuIds?:[];
     }
@@ -51,6 +28,6 @@ class Menu{
     /**删除缓存信息
      */
     public static function removeAllMenuIds($userId){
-        cache(self::$_cache_key_2.$userId, null);
+        cache(self::$_cache_key.$userId, null);
     }
 }

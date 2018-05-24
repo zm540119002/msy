@@ -1,7 +1,7 @@
 <?php
 namespace app\index_admin\controller;
 
-class Role extends \common\controller\UserBase
+class Role extends Base
 {
     /**角色-管理
      */
@@ -40,8 +40,7 @@ class Role extends \common\controller\UserBase
             $roleId = input('id',0);
             $this->assign('roleId',$roleId);
             $this->assign('roleName',input('name',''));
-            $response = $modelRoleNode->where('role_id','=',$roleId)->select();
-            $response = $response->toArray();
+            $response = $modelRoleNode->where('role_id','=',$roleId)->select()->toArray();
             $nodeIds = array_column($response,'node_id');
             $this->assign('nodeIds',$nodeIds?:[]);
             $menu = new \common\lib\Menu();
