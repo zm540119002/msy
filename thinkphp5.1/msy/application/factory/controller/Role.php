@@ -23,12 +23,21 @@ class Role extends FactoryBase
      */
     public function  getList(){
         if(!request()->isGet()){
-            return config('custom.not_get');
+            return errorMsg(config('custom.not_get'));
         }
         $modelRole = new \app\factory\model\Role();
         $list = $modelRole->getList($this->factory['id']);
         $this->assign('list',$list);
         return view('list_tpl');
+    }
+
+    public function getRoleNode(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $roleNodeModel = new \app\factory\model\RoleNode();
+        $list = $roleNodeModel->getList();
+        return $list;
     }
 
     /**删除

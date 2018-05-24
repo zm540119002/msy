@@ -38,11 +38,27 @@ class RoleNode extends \think\Model {
 		}
 		return successMsg('成功！');
 	}
+
 	//批量删除
 	public function batchDelByNodeIds($nodeIds){
 		$where = [
 			['node_id', 'in', $nodeIds],
 		];
 		return $this->where($where)->delete();
+	}
+
+	//获取列表
+	public function getList(){
+		$postData = input('post.');
+		$where = [];
+		if(is_array($postData['roleId']) && !empty($postData['roleId'])){
+			$where[] = ['role_id', 'in', $postData['roleId']];
+		}elseif(!is_array($postData['roleId']) && intval($postData['roleId'])){
+			$where[] = ['role_id', '=', $postData['roleId']];
+		}else{
+			return errorMsg('参数错误');
+		}
+		$list = $this->where($where)->select()->toArray();
+		return $list;
 	}
 }
