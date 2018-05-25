@@ -16,16 +16,20 @@ use app\store\model\Cart as CartModel;
  */
 class Cart extends UserBase
 {
+    private $cart;
 
     public function __construct()
     {
         parent::__construct();
+        if(!is_object($this->cart)){
+            $this->cart = new CartModel();
+        }
     }
 
     //购物车页面列表
     public function index()
     {
-        $this->assign( 'cartList', CartModel::getCartList(Session::get('user.id')) );
+        $this->assign( 'cartList', $this->cart->getCartList(Session::get('user.id')) );
         return $this->fetch();
     }
 
@@ -39,8 +43,7 @@ class Cart extends UserBase
      */
     public function addGoods($store_id, $goods_id, $number)
     {
-        //return dump(Session::get('user.id'));
-        return CartModel::addGoods(Session::get('user.id'), $store_id, $goods_id, $number);
+        return $this->cart->addGoods(Session::get('user.id'), $store_id, $goods_id, $number);
     }
 
 }

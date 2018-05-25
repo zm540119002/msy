@@ -18,14 +18,10 @@ class Cart extends Model {
     protected $connection = 'db_config_factory';
     // 设置主键
     protected $pk = 'cart_id';
-    private $time = 0;
 
     public function __construct()
     {
         parent::__construct();
-        if($this->time==0){
-            $this->time = time();
-        }
     }
 
     /**
@@ -37,7 +33,6 @@ class Cart extends Model {
      */
     public  function hasCart($user_id, $store_id)
     {
-        //return Shop::where(['id'=>$id, 'auth_status'=>2, 'status'=>0])->count();
         return Db::table('user_factory')->where(['user_id'=>$user_id])->column('factory_id', 'id');
     }
 
@@ -67,33 +62,67 @@ class Cart extends Model {
      */
     public function addGoods($user_id, $store_id, $goods_id, $number)
     {
-        $sql = "update msy_factory.cart set number=number+{$number}
-                where store_id={$store_id} and user_id={$user_id} and goods_id={$goods_id}";// and store_type={$store_type}
-        if( Db::execute($sql) ){
-            return true;
+        $goods = $this->hasGoods($store_id, $goods_id, $number);
+        if($goods['status']!==1){
+            return $goods;
         }
-       $sql = "insert into msy_factory.cart(user_id, store_id, goods_id, store_type, number, create_time)  
-              select {$user_id}, {$store_id}, goods_base_id, store_type, {$number}, $this->time 
-              from msy_factory.goods where store_id={$store_id} and goods_base_id={$goods_id}";
-        if( Db::execute($sql) ){
-            return true;
+        $cart = Db::table('msy_factory.cart')
+            ->where(['user_id'=>$user_id, 'store_id'=>$store_id, 'goods_id'=>$goods_id])->find();
+        if( is_array($cart) ){
+            $ret = $this->where(['cart_id'=>$cart['cart_id']])->setInc('number', $number);
+        }else{
+            $ret = static::create([
+                'user_id' => $user_id,
+                'store_id' => $store_id,
+                'goods_id' => $goods_id,
+                'number' => $number,
+                'create_time' => time(),
+            ], ['user_id', 'store_id', 'goods_id', 'number', 'create_time']);
         }
+        if($ret){
+            return successMsg('添加购物车成功');
+        }
+        return errorMsg('添加购物车失败');
     }
 
-    private function hasGoods($user_id, $store_id, $goods_id)
+    /**
+     * 检测商品是否可添加购物车
+     *
+     * @param $store_id
+     * @param $goods_id
+     * @param $number
+     * @return array
+     */
+    public function hasGoods($store_id, $goods_id, $number)
     {
-        //检测商品
-        $sql = "select * from msy_factory.store a inner join msy_factory.goods b 
-                on a.id=b.store_id where a.id={$store_id} and b.goods_base_id={$goods_id}";
-        return true;
+        $goods = Db::table('msy_factory.goods')->alias('a')
+            ->join('msy_factory.goods_base b', 'a.goods_base_id=b.id', 'INNER')
+            ->field('a.id, a.inventory, a.status, a.shelf_status, a.sale_price, b.name')
+            ->where(['a.store_id'=>$store_id, 'a.id'=>$goods_id])
+            ->find();
+        if(!$goods||!is_array($goods)||count($goods)<=0){
+            return errorMsg('商品已不存在');
+        }
+        if(!$goods['status']==0){
+            return errorMsg('商品不存在');
+        }
+        if($goods['sale_price']<=0.00){
+            return errorMsg('【'.$goods['name'].'】销售价格有误，不能购买');
+        }
+        if($goods['inventory']<=0||$goods['inventory']<$number){
+            return errorMsg('【'.$goods['name'].'】库存不足');
+        }
+        if($goods['shelf_status']!==3){
+            return errorMsg('【'.$goods['name'].'】已下架');
+        }
+        return successMsg('已加入购物车');
     }
 
     public function getCartList($user_id)
     {
-        //dump(Cart::get(8));
-        return Db::table('msy_factory.cart')->where(['user_id'=>$user_id])->field('*')->select();
-        //return Cart::where(['user_id'=>$user_id])->field('*')->select();
-        //return Cart::where(['cart_id'=>8])->field('*')->select();
+        return Db::table('msy_factory.cart')->alias('a')
+                ->join('msy_factory.goods_base b ', 'a.goods_id=b.id', 'LEFT')
+                ->where(['a.user_id'=>$user_id])->field('a.*, b.thumb_img')->select();
     }
 
 }
