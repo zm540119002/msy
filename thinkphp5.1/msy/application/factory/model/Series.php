@@ -92,7 +92,7 @@ class Series extends Model {
 				['sort', '>', $data['sort']]
 			];
 		}
-		$lastSeries = $this -> selectSeries($where,[],[],'1');
+		$lastSeries = $this -> getList($where,[],[],'1');
 		if(!empty($lastSeries)){
 			$this -> startTrans();
 			$updateData = [
@@ -127,25 +127,17 @@ class Series extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectSeries($where=[],$field=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$order=[],$limit=''){
 		$_where = array(
 			's.status' => 0,
 		);
 		$where = array_merge($_where, $where);
-		if($field){
-			$list = $this->alias('s')
-				->where($where)
-				->field($field)
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('s')
-				->where($where)
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$list = $this->alias('s')
+			->where($where)
+			->field($field)
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
 			$list = $list->toArray();
 		}
@@ -159,21 +151,15 @@ class Series extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getSeries($where=[],$field=[]){
+	public function getInfo($where=[],$field=['*']){
 		$_where = array(
 			's.status' => 0,
 		);
 		$where = array_merge($_where, $where);
-		if($field){
-			$info = $this->alias('s')
-				->field($field)
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('s')
-				->where($where)
-				->find();
-		}
+		$info = $this->alias('s')
+			->field($field)
+			->where($where)
+			->find();
 		if(!empty($info)){
 			$info = $info->toArray();
 		}

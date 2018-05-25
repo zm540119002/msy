@@ -19,7 +19,7 @@ class Deploy extends UserBase
                 $where = [
                     ['id','=',$factoryId],
                 ];
-                $factoryInfo =  $model -> getFactory($where);
+                $factoryInfo =  $model -> getInfo($where);
                 $this -> assign('factoryInfo',$factoryInfo);
             }
             return $this->fetch();

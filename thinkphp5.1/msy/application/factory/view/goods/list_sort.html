@@ -68,33 +68,6 @@
     }) 
 })
 var manageClassifyTag={
-    //初始化弹窗
-    initLayer:function(content,name,title,obj){
-        layer.open({
-            title:[title,'border-bottom:1px solid #d9d9d9;'],
-            content:content,
-            className:'addTagLayer',
-            btn:['确定','取消'],
-            success:function(){
-                // $('.addTagLayer .layer-tag-num').val(name.text());
-                var abc=obj.parents('.classify-operate-btn').next().data('tag-id');
-                $('.addTagLayer .layer-tag-name').val(name.text());
-                $('.addTagLayer .layer-tag-num').val(abc);
-                if(obj.hasClass('del-icons')){
-                    $('.addTagLayer .layer-tag-name').attr('disabled',true);
-                }
-            },
-            yes:function(index){
-                if(obj.hasClass('edit-icons')){
-                     manageClassifyTag.editTag(name);
-                }else{
-                    manageClassifyTag.deleteTag(name,obj);
-                }
-                
-                layer.close(index);
-            }
-        });
-    },
     upTag:function(upObj){
         // var swith=upObj.parents('.tag-item').siblings('.isClick').val();
         // var postData = {};

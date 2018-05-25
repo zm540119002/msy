@@ -1,7 +1,6 @@
 <?php
 namespace app\store\controller;
 
-
 class Index extends Base
 {
     public function __construct()

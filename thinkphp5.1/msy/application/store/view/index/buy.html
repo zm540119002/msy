@@ -58,10 +58,10 @@
         $.ajax({
             url: "{:url('Cart/addGoods')}",
             type: 'POST',
-            data: {goods_id:goods_id,number:nums,store_id:store_id},
-            dataType: 'text',
+            data: {goods_id:goods_id, number:nums, store_id:store_id},
+            dataType: 'json',
             success:function(e){
-                alert(e);
+                alert(e.info);
             }
         });
     })

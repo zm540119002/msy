@@ -83,7 +83,7 @@ class Goods extends StoreBase
                     gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,gb.thumb_img,
                     gb.main_img,gb.goods_video,gb.parameters,gb.details_img'];
         $join = [  ['goods_base gb','gb.id = g.goods_base_id'],];
-        $goodsInfo =  $model -> getGoods($where,$file,$join);
+        $goodsInfo =  $model -> getInfo($where,$file,$join);
         $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
         array_pop( $goodsInfo['main_img']);
         $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);

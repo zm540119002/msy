@@ -37,7 +37,8 @@ class Store extends Model {
      */
     public  function hasStore($id)
     {
-         return Store::where(['id'=>$id, 'auth_status'=>2, 'status'=>0])->count();
+        return static::where(['id'=>$id, 'auth_status'=>2, 'status'=>0])->count();
+
     }
 
     /**
