@@ -513,6 +513,44 @@
     padding:0 0 0.15rem 0;
     border-bottom:1px solid #d9d9d9;
 }
+.account-edit-btn {
+    width:40%;
+}
+.account-edit-btn a {
+    margin:0 0 0 10px;
+}
+.account-edit-btn a span.ic{
+    display: block;
+    width:25px;
+    height:25px;
+    margin:0 auto;
+    background-image:url(../../common/img/icons/account-icons.png);
+    background-repeat: no-repeat;
+    background-size:25px 55px;
+}
+.account-edit-btn a span.stop-icon{
+    background-position:0 0;
+}
+.account-edit-btn a span.del-icon{
+    background-position:0 -30px;
+}
+.account-header .r-t,
+.account-info .r-t{
+    display: inline-block;
+    width:64px;
+    text-align: right;
+    margin:0 10px 0 0;
+}
+.accountInfoLayer .account-info{
+    padding:15px;
+    margin:15px;
+    background:#ccc;
+    border:1px solid #999;
+    border-radius:4px;
+}
+.accountInfoLayer h3{
+    color:#ff0000;
+}
 .modify-role span{
     display:inline-block;
     width:10px;

@@ -1049,7 +1049,8 @@ color: #ed6d00;
 .applyNewStoreLayer .layui-m-layercont,
 .factoryStoreLayer .layui-m-layercont,
 .groupRoleLayer .layui-m-layercont,
-.rolePowerLayer .layui-m-layercont{
+.rolePowerLayer .layui-m-layercont,
+.accountInfoLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
@@ -2106,11 +2107,29 @@ input[type=text]::-webkit-focus-inner {
     margin:0.15rem 0;
 }
 .account-list li{
-    padding:0.12rem 0.20rem;
+    display: flex;
+    display: -webkit-flex;
+    padding:0 0.20rem;
     margin:0 0 0.28rem 0;
     border:1px solid #727171;
     background: #f2f2f2;
     border-radius:5px;
+    justify-content: space-between;
+}
+.account-list li div:nth-child(1),
+.account-list li div:nth-child(2){
+    padding:0.12rem 0.20rem;
+
+}
+.account-list .account-status{
+    border-left:1px solid #d9d9d9;
+
+}
+.account-status span{
+    display:block;
+    margin:20px 0 0;
+}
+.account-list li div:nth-child(2){
 }
 .list-label{
     display: inline-block;
