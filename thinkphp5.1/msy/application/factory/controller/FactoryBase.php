@@ -34,7 +34,7 @@ class FactoryBase extends UserBase{
                 ['u.user_id','=',$uid],
                 ['u.is_default','=',1],
             ];
-            $factoryInfo = $model -> getUserFactory($_where,$file,$join);
+            $factoryInfo = $model -> getInfo($_where,$file,$join);
             if(!$factoryInfo){
                 $this->success('你有多家厂商入住，请选择一家', 'Index/index');
             }
@@ -42,7 +42,7 @@ class FactoryBase extends UserBase{
             $where_new = [
                 ['u.user_id','=',$uid],
             ];
-            $factoryInfo = $model -> getUserFactory($where_new,$file,$join);
+            $factoryInfo = $model -> getList($where_new,$file,$join);
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }

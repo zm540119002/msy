@@ -49,31 +49,21 @@ class Brand extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectBrand($where=[],$field=[],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'b.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		if($field){
-			$list = $this->alias('b')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select()
-			    ->toArray();
-		}else{
-			$list = $this->alias('b')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select()
-			    ->toArray();
-		}
+		$list = $this->alias('b')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select()
+			->toArray();
 		return $list;
 	}
 
@@ -84,27 +74,19 @@ class Brand extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getBrand($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=[],$join=[]){
 		$_where = array(
 			'b.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		if($field){
-			$info = $this->alias('b')
-				->field($field)
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find()
-			    ->toArray();
-		}else{
-			$info = $this->alias('b')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find()
-			    ->toArray();
-		}
+		$info = $this->alias('b')
+			->field($field)
+			->where($where)
+			->join(array_merge($_join,$join))
+			->find()
+			->toArray();
 		return $info;
 	}
 }

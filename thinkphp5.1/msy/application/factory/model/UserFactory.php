@@ -37,7 +37,7 @@ class UserFactory extends \think\Model {
 
 	/**查询多条数据
 	 */
-	public function selectUserFactory($where=[],$field=['*'],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'u.status' => 0,
 		);
@@ -56,7 +56,7 @@ class UserFactory extends \think\Model {
 
 	/**查找一条数据
 	 */
-	public function getUserFactory($where=[],$field=['*'],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'u.status' => 0,
 		);

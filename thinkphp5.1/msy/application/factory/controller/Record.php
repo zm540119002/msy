@@ -22,7 +22,7 @@ class Record extends FactoryBase
             $where = [
                 ['factory_id','=',$this->factory['factory_id']],
             ];
-            $recordInfo =  $model -> getRecord($where);
+            $recordInfo =  $model -> getInfo($where);
             $this -> assign('recordInfo',$recordInfo);
             return $this->fetch();
         }

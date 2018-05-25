@@ -28,7 +28,7 @@ class StoreBase extends FactoryBase{
                 ['s.factory_id','=',$this->factory['factory_id']],
                 ['s.is_default','=',1],
             ];
-            $storeInfo = $model -> getStore($_where,$file);
+            $storeInfo = $model -> getInfo($_where,$file);
             if(!$storeInfo){
                 $this->success('你有多家店，请选择一家', 'Store/operaManageIndex');;
             }
@@ -36,7 +36,7 @@ class StoreBase extends FactoryBase{
             $where_new = [
                 ['factory_id','=',$this->factory['factory_id']],
             ];
-            $storeInfo = $model -> getStore($where_new,$file);
+            $storeInfo = $model -> getInfo($where_new,$file);
 
         }elseif (!$storeCount){
             $this->success('没有店铺，请申请', 'Store/deployIndex');

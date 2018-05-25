@@ -50,31 +50,26 @@ class Store extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectStore($where=[],$field=[],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			's.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		if($field){
-			$list = $this->alias('s')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('s')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$_order = array(
+			's.id'=>'desc',
+		);
+		$order = array_merge($_order, $order);
+		$list = $this->alias('s')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
-			$list = $list ->toArray();
+			$list = $list->toArray();
 		}
 		return $list;
 	}
@@ -86,25 +81,18 @@ class Store extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getStore($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			's.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		if($field){
-			$info = $this->alias('s')
-				->field($field)
-				->join(array_merge($_join,$join))
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('s')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find();
-		}
+		$info = $this->alias('s')
+			->field($field)
+			->join(array_merge($_join,$join))
+			->where($where)
+			->find();
 		if(!empty($info)){
 			$info = $info ->toArray();
 		}
@@ -151,7 +139,7 @@ class Store extends Model {
 			['factory f','f.id = s.foreign_id'],
 			['record r','s.foreign_id = r.factory_id'],
 		];
-		$factoryStore = $this -> selectStore($where,$file,$join);
+		$factoryStore = $this -> getList($where,$file,$join);
 		//品牌旗舰店
 		$where = [
 			['s.factory_id','=',$factoryId],
@@ -161,7 +149,7 @@ class Store extends Model {
 		$join =[
 			['brand b','b.id = s.foreign_id'],
 		];
-		$brandStores = $this->selectStore($where,$file,$join);
+		$brandStores = $this->getList($where,$file,$join);
 		$storeList = array_merge($factoryStore,$brandStores);
 		return $storeList;
 	}
@@ -177,14 +165,14 @@ class Store extends Model {
 				['factory f','f.id = s.foreign_id'],
 				['record r','s.foreign_id = r.factory_id'],
 			];
-			$storeInfo = $this -> getStore($where,$file,$join);
+			$storeInfo = $this -> getInfo($where,$file,$join);
 		}
 		if($store['store_type'] == 2){
 			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
 			$join =[
 				['brand b','b.id = s.foreign_id'],
 			];
-			$storeInfo = $this -> getStore($where,$file,$join);
+			$storeInfo = $this -> getInfo($where,$file,$join);
 		}
 		return $storeInfo;
 	}
