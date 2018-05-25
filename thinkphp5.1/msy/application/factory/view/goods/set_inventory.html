@@ -96,16 +96,15 @@
 			var _this = $(this);
 			var type  = _this.data('type');
 			var inventory = parseInt(_this.parents('li').find('.goods-library-num').text());
-			var num1 =  _this.val();
-			if(num1.length == 0){//如果没有输入数据，
-				dialog.error('11');
+			var num = _this.val();
+			if(!num){
+				return false
+			}
+			if(!isPosIntNumber(num)){
+				dialog.error('请输入大于0正整数');
 				return false;
 			}
-			var num = parseInt(num1);
-			if(!isNaturalNumber(num)){
-				dialog.error('请输入正整数');
-				return false;
-			}
+			num = parseInt(num);
 			if(type == 0 && inventory < num){
 				dialog.error('大于库存量');
 				return false;
