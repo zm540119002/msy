@@ -1198,7 +1198,8 @@ color: #ed6d00;
 .group-role-content li,
 .group-role-content li span,
 .organize li,
-.organize li span{
+.organize li span,
+.setRoleLayer li{
     position:relative;
 }
 .group-role-content li.first-role,
@@ -1259,7 +1260,8 @@ color: #ed6d00;
 .group-role-content li.two-role .two-name,
 .group-role-content li.three-role .three-name,
 .group-role-content li.four-role .four-name,
-.organize li span{
+.organize li span,
+.setRoleLayer li span{
     height:35px;
     line-height:35px;
     border:1px solid #009a3e;
@@ -1269,13 +1271,15 @@ color: #ed6d00;
 .group-role-content li.four-role .four-name{
     border:1px solid #009a3e;
 }
-.organize .operate-box{
+.organize .operate-box,
+.setRoleLayer .operate-box{
     position:absolute;
     top:0;
     right:0;
 }
 .group-role-content li .btn,
-.organize li a.btn,.role-list li .btn{
+.organize li a.btn,.role-list li .btn,
+.setRoleLayer li .btn{
     display: block;
     width:35px;
     height:36px;
@@ -1286,6 +1290,19 @@ color: #ed6d00;
     color:#fff;
     text-align:center;
     font-size:22px;
+}
+.setRoleLayer ul{
+    padding:20px 15px 15px;
+}
+.setRoleLayer li{
+    margin-bottom:15px;
+}
+.setRoleLayer li.current{
+    background:#009a3e;
+    color:#fff;
+}
+.setRoleLayer li span.content-label{
+    border-left:1px solid #009a3e;
 }
 .role-list li .btn{
     height:31px;

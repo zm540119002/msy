@@ -45,32 +45,9 @@
 			</nav>
 		</div>
 	</section>
-	<section class="organize">
-		<!--组织根节点，默认id为1，上级为0 ，级别为0-->
-		<ul data-id="1" data-superior_id="0" data-level="0">
-			<li>
-				<span class="content-label">总经办</span>
-				<div class="operate-box">
-					<a class="btn edit">i</a>
-					<a class="btn add">+</a>
-				</div>
-			</li>
-		</ul>
-	</section>
+	{include file='organize/list_tpl' /}
 	<p class="f20 content-box group-role-tipc">说明：这里仅构建与企业云端店铺经营直接相关的业务组织架构，点击    键可增加所在部门的分支/部门；点击部门框可修改名称；消除部门框内容相同于删除该部门；如正在删除的部门有分支部门，请先删除其分支部门再删除该部门；建议企业部门的级别不超过5级，企业部门设置完成后再按下一步。</p>
 </article>
-<div id="organize_tpl" style="display:none;">
-	<ul data-id="" data-superior_id="" data-level="">
-		<li>
-			<span class="content-label"></span>
-			<div class="operate-box">
-				<a class="btn edit">i</a>
-				<a class="btn reduce">-</a>
-				<a class="btn add">+</a>
-			</div>
-		</li>
-	</ul>
-</div>
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy.html" /}
@@ -78,6 +55,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="factory_js/organize.js"></script>
 <script type="text/javascript">
 $(function () {
 	//新增下级
@@ -161,24 +139,5 @@ $(function () {
 	//初始化
 	getOrganizeList();
 });
-//获取组织列表
-function getOrganizeList() {
-	var postData = {};
-	var url = controller + 'getOrganizeList';
-	$.get(url,postData,function(data){
-		$.each(data,function(i,o){
-			$.each($('section.organize').find('div.operate-box'),function(){
-				if($(this).parent().parent().data('id')==o.superior_id){
-					var node = $('#organize_tpl').find('ul').clone();
-					node.attr('data-id',o.id);
-					node.attr('data-superior_id',o.superior_id);
-					node.attr('data-level',o.level);
-					node.find('span').text(o.name);
-					$(this).after(node);
-				}
-			});
-		});
-	});
-}
 </script>
 {/block}
