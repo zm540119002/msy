@@ -1297,6 +1297,10 @@ color: #ed6d00;
 .setRoleLayer li{
     margin-bottom:15px;
 }
+.setRoleLayer li.current{
+    background:#009a3e;
+    color:#fff;
+}
 .setRoleLayer li span.content-label{
     border-left:1px solid #009a3e;
 }
