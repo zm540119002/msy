@@ -111,13 +111,14 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript">
+	var setOrganize;
+</script>
 <script type="text/javascript" src="factory_js/organize.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//页面初始化
-		$.each($('#setRole').find('li'),function(){
-			$(this).find('div').remove();
-		});
+		$('#setRole').find('div').remove();
 		//定义新增用户角色
 		var addUserRoleIds = [];
 		getOrganizeList();
@@ -143,7 +144,7 @@
 			});
 		});
 		//角色设置
-		var setRole=$('#setRole').html();
+		var setRole = $('#setRole').html();
 		$('body').on('click','.account-role',function(){
 			layer.open({
 				title:['角色设置','border-bottom:1px solid #d9d9d9;'],
@@ -177,8 +178,10 @@
 			});
 		});
 		//行政组织设置
-		var setOrganize=$('#setOrganize').html();
 		$('body').on('click','.organize-set',function(){
+			if(!setOrganize){
+				return false;
+			}
 			layer.open({
 				title:['行政组织设置','border-bottom:1px solid #d9d9d9;'],
 				className:'setOrganizeLayer',
@@ -196,7 +199,7 @@
 				}
 			});
 		});
-		$('body').on('click','.setRoleLayer li',function(){
+		$('body').on('click','.setRoleLayer li,.setOrganizeLayer li',function(){
 			$(this).toggleClass('current');
 		});
 	});
