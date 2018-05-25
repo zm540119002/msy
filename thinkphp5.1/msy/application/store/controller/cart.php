@@ -17,6 +17,7 @@ use app\store\model\Cart as CartModel;
 class Cart extends UserBase
 {
     private $cart;
+    private $user_id = '';
 
     public function __construct()
     {
@@ -24,12 +25,26 @@ class Cart extends UserBase
         if(!is_object($this->cart)){
             $this->cart = new CartModel();
         }
+        if(!$this->user_id){
+            $this->user_id = Session::get('user.id');
+        }
     }
 
     //购物车页面列表
     public function index()
     {
-        $this->assign( 'cartList', $this->cart->getCartList(Session::get('user.id')) );
+        $this->assign( 'cartList', $this->cart->getCartList($this->user_id) );
+        $address =new \app\store\model\Address();
+        $ret = $address->getAddress($this->user_id, true);
+        if($ret){
+            if($ret['status']==1){
+                $this->assign( 'address',  $ret['data']);
+            }else{
+                $this->assign( 'address',  []);
+            }
+        }else{
+            $this->assign( 'address',  []);
+        }
         return $this->fetch();
     }
 
