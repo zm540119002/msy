@@ -36,7 +36,7 @@ class Promotion extends StoreBase
             $join =[
               ['goods g','g.id = p.goods_id'],
             ];
-            $promotionInfo =  $model -> getPromotion($where,$file,$join);
+            $promotionInfo =  $model -> getInfo($where,$file,$join);
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }

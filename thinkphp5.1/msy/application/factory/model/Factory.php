@@ -48,7 +48,7 @@ class Factory extends Model {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$factoryUserModel =  new \app\factory\model\FactoryUser;
+			$factoryUserModel =  new \app\factory\model\UserFactory;
 			$data['user_id'] = $uid;
 			$data['factory_id'] = $this->getAttr('id');
 			$result = $factoryUserModel -> allowField(true) -> save($data);
@@ -73,29 +73,20 @@ class Factory extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectFactory($where=[],$field=[],$join=[],$order=[],$limit=''){
+	public function selectFactory($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'f.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		if($field){
-			$list = $this->alias('f')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('f')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$list = $this->alias('f')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
 			$list = $list ->toArray();
 		}
@@ -109,25 +100,18 @@ class Factory extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getFactory($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'f.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		if($field){
-			$info = $this->alias('f')
-				->field($field)
-				->join(array_merge($_join,$join))
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('f')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find();
-		}
+		$info = $this->alias('f')
+			->field($field)
+			->join(array_merge($_join,$join))
+			->where($where)
+			->find();
 		if(!empty($info)){
 			$info = $info ->toArray();
 		}

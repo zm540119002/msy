@@ -56,7 +56,6 @@ class GoodsBase extends Model {
 		if(input('?post.goods_base_id')){//修改
 			$where = [
 				['id','=',$data['goods_base_id']],
-				['store_id','=',$storeId],
 			];
 			$file = array(
 				'thumb_img','main_img','details_img','goods_video'
@@ -70,7 +69,6 @@ class GoodsBase extends Model {
 			$result = $this->allowField(true)->save($data, ['id' => $data['goods_base_id']]);
 			$goodsBaseId = $data['goods_base_id'];
 		}else{
-			$data['store_id'] = $storeId;
 			$data['create_time'] = time();
 			$result = $this -> allowField(true) -> save($data);
 			$goodsBaseId =  $this->getAttr('id');
@@ -115,7 +113,7 @@ class GoodsBase extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectGoodsBase($where=[],$field=[],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'gb.status' => 0,
 		);
@@ -126,21 +124,15 @@ class GoodsBase extends Model {
 			'gb.id'=>'desc',
 		);
 		$order = array_merge($_order, $order);
-		if($field){
-			$list = $this->alias('gb')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('gb')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
+		$list = $this->alias('gb')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
+		if(!empty($list)){
+			$list = $list->toArray();
 		}
 		return $list;
 	}
@@ -152,25 +144,18 @@ class GoodsBase extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getGoodsBase($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'gb.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		if($field){
-			$info = $this->alias('gb')
-				->field($field)
-				->join(array_merge($_join,$join))
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('gb')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find();
-		}
+		$info = $this->alias('gb')
+			->field($field)
+			->join(array_merge($_join,$join))
+			->where($where)
+			->find();
 		if(!empty($info)){
 			$info = $info->toArray();
 		}

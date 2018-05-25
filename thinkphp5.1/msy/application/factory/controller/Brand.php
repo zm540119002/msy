@@ -7,7 +7,7 @@ class Brand extends FactoryBase
     {
         $model = new \app\factory\model\Brand;
         $where = [['factory_id','=',$this->factory['factory_id']]];
-        $brandList =  $model ->selectBrand($where);
+        $brandList =  $model -> getList($where);
         $this -> assign('brandList',$brandList);
         return $this->fetch();
     }
@@ -27,7 +27,7 @@ class Brand extends FactoryBase
             $where = array(
                 'id' => $brandId,
             );
-            $brandInfo =  $model -> getBrand($where);
+            $brandInfo =  $model -> getInfo($where);
             $this -> assign('brandInfo',$brandInfo);
         }
         return $this->fetch();

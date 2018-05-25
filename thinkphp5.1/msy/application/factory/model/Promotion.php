@@ -106,7 +106,7 @@ class Promotion extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectPromotion($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'p.status' => 0,
 		);
@@ -114,27 +114,18 @@ class Promotion extends Model {
 		);
 		$where = array_merge($_where, $where);
 		$_order = array(
-			'id'=>'desc',
+			'p.id'=>'desc',
 		);
 		$order = array_merge($_order, $order);
-		if($field){
-			$list = $this->alias('p')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('p')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$list = $this->alias('g')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
-			return $list->toArray();
+			$list = $list->toArray();
 		}
 		return $list;
 	}
@@ -146,27 +137,22 @@ class Promotion extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getPromotion($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'p.status' => 0,
 		);
+		$_join = array(
+		);
 		$where = array_merge($_where, $where);
+		$list = $this->alias('g')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
 
-		if($field){
-			$info = $this->alias('p')
-				->field($field)
-				->join($join)
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('p')
-				->where($where)
-				->join($join)
-				->find();
+			->find();
+		if(!empty($list)){
+			$list = $list->toArray();
 		}
-		if(!empty($info)){
-			return $info->toArray();
-		}
-		return $info;
+		return $list;
 	}
 }

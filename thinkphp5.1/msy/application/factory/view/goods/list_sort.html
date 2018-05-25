@@ -3,11 +3,11 @@
 {volist name="list" id="vo"}
 <li class="columns_flex tag-item first-tag" data-id="{$vo.id}">
     <div class="td">
-        <input type="text" />
+        <input type="text" class="serial-num"/>
     </div>
     <div class="td">
         {notempty name="vo.thumb_img"}
-        <img src="public_uploads/{$vo.thumb_img}" alt="" class="left">
+        <img src="public_uploads/{$vo.thumb_img}" alt="" class="left goods-img">
         {else /}
         <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
         {/notempty}
@@ -22,3 +22,131 @@
 {/volist}
 {else /}
 {/notempty}
+{block name="script"}
+<script type="text/javascript">
+    $(function(){
+    var addTagForm=$('#addTagForm').html();
+    var layerTagNum;
+    var layerTagName;
+    var tagListLen=$('.classify-label-content li').length;
+   
+        if(!tagListLen){
+             alert(tagListLen);
+            $('.classify-label-content .set-tag-tipc').hide();
+            $('.classify-label-content li').eq(0).find('a:eq(0)').addClass('move-disabled-icons');
+            $('.classify-label-content li').eq(0).find('a:eq(1)').addClass('down-disabled-icons');
+        }else{
+            if(tagListLen>=1){
+                $('.classify-label-content li').siblings().find('a:eq(0)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.classify-label-content li').siblings().find('a:eq(1)').addClass('down-icons');
+                $('.classify-label-content li').eq(0).find('a:eq(0)').addClass('move-disabled-icons');
+                $('.classify-label-content li').eq(0).find('a:eq(1)').addClass('down-icons');
+
+                $('.classify-label-content li').eq(tagListLen-1).find('a:eq(0)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.classify-label-content li').eq(tagListLen-1).find('a:eq(1)').addClass('down-disabled-icons');
+            }
+        }
+    //上移
+    $('body').on('click','.move-btn',function(){
+        var _this=$(this);
+        if(_this.hasClass('move-disabled-icons')){
+            //_this.attr('disabled',true);
+        }else{
+            manageClassifyTag.upTag(_this);
+        }
+        
+    })
+    //下移
+    $('body').on('click','.down-btn',function(){
+        var _this=$(this);
+        if(_this.hasClass('down-disabled-icons')){
+            _this.attr('disabled',true);
+        }else{
+            manageClassifyTag.downTag(_this);
+        }
+       
+    }) 
+})
+var manageClassifyTag={
+    upTag:function(upObj){
+        // var swith=upObj.parents('.tag-item').siblings('.isClick').val();
+        // var postData = {};
+        // postData.move = upObj.data('move');
+        // postData.series_id = upObj.parent().siblings('.series_id').data('series-id');
+        // postData.sort = upObj.parent().siblings('.sort').data('tag-id');
+        // console.log(postData);
+        var currentIndex=upObj.parents('.tag-item').index();
+        var upperIndex=upObj.parents('.tag-item').prev().index();
+        var currentTagName=upObj.parents('.tag-item').find('.classify-tag-name');
+        var upperTagName=upObj.parents('.tag-item').prev().find('.classify-tag-name');
+        var currentGoodsImg=upObj.parents('.tag-item').find('.goods-img');
+        var upperGoodsImg=upObj.parents('.tag-item').prev().find('.goods-img');
+        var currentSerialNum=upObj.parents('.tag-item').find('.serial-num');
+        var upperSerialNum=upObj.parents('.tag-item').prev().find('.serial-num');
+        // var currentTagId=upObj.parents('.tag-item').find('.sort');
+        // var upperTagId=upObj.parents('.tag-item').prev().find('.sort');
+        // var currentSeriesTagId=upObj.parents('.tag-item').find('.series_id');
+        // var upperSeriesTagId=upObj.parents('.tag-item').prev().find('.series_id');
+        var temp,tempId,tempSeriesId,tempImg,tempNum;
+            temp=upperTagName.text();
+            // tempId=upperTagId.data('tag-id');
+            // tempSeriesId=upperSeriesTagId.data('series-id');
+            tempImg=upperGoodsImg.attr('src');
+            tempNum=upperSerialNum.val();
+        if(currentIndex>upperIndex){
+            upperTagName.text(currentTagName.text());
+            currentTagName.text(temp);
+            upperGoodsImg.attr('src',currentGoodsImg.attr('src'));
+            currentGoodsImg.attr('src',tempImg);
+            upperSerialNum.val(currentSerialNum.val());
+            currentSerialNum.val(tempNum);
+            currentTagId.data('tag-id',upperTagId.data('tag-id'));
+            upperTagId.data('tag-id',currentTagId.data('tag-id'));
+            
+            currentSeriesTagId.data('series-id',upperSeriesTagId.data('series-id'));  
+            upperSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+            //upObj.addClass('disabled');
+            
+        }
+    },
+    downTag:function(downObj){
+        var currentIndex=downObj.parents('.tag-item').index();
+        var nextIndex=downObj.parents('.tag-item').next().index();
+        var currentTagName=downObj.parents('.tag-item').find('.classify-tag-name');
+        var nextTagName=downObj.parents('.tag-item').next().find('.classify-tag-name');
+        var currentGoodsImg=downObj.parents('.tag-item').find('.goods-img');
+        var nextGoodsImg=downObj.parents('.tag-item').next().find('.goods-img');
+        var currentSerialNum=downObj.parents('.tag-item').find('.serial-num');
+        var nextSerialNum=downObj.parents('.tag-item').next().find('.serial-num');
+        // var currentTagId=downObj.parents('.tag-item').find('.sort');
+        // var nextTagId=downObj.parents('.tag-item').next().find('.sort');
+        // var currentSeriesTagId=downObj.parents('.tag-item').find('.series_id');
+        // var nextSeriesTagId=downObj.parents('.tag-item').next().find('.series_id');
+        var temp,tempId,tempSeriesId,tempImg,tempNum;
+            temp=nextTagName.text();
+            tempImg=nextGoodsImg.attr('src');
+            tempNum=nextSerialNum.val();
+            // tempId=nextTagId.data('tag-id');
+            // tempSeriesId=nextSeriesTagId.data('series-id');
+            // var postData = {};
+            // postData.move = downObj.data('move');
+            // postData.series_id = downObj.parent().siblings('.series_id').data('series-id');
+            // postData.sort = downObj.parent().siblings('.sort').data('tag-id');
+       
+        if(currentIndex<nextIndex){
+            nextTagName.text(currentTagName.text());
+            currentTagName.text(temp);
+            nextGoodsImg.attr('src',currentGoodsImg.attr('src'));
+            currentGoodsImg.attr('src',tempImg);
+            nextSerialNum.val(currentSerialNum.val());
+            currentSerialNum.val(tempNum);
+            nextTagId.data('tag-id',currentTagId.data('tag-id'));
+            currentTagId.data('tag-id',tempId);
+            nextSeriesTagId.data('series-id',currentSeriesTagId.data('series-id'));
+            currentSeriesTagId.data('series-id',tempSeriesId);
+        }
+    }
+}
+</script>
+{/block}
+

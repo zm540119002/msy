@@ -122,7 +122,7 @@ class Record extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectRecord($where=[],$field=[],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'r.status' => 0,
 		);
@@ -133,22 +133,13 @@ class Record extends Model {
 			'r.id'=>'desc',
 		);
 		$order = array_merge($_order, $order);
-		if($field){
-			$list = $this->alias('r')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('r')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$list = $this->alias('r')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
 			$list = $list->toArray();
 		}
@@ -162,27 +153,20 @@ class Record extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getRecord($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'r.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		if($field){
-			$info = $this->alias('r')
-				->field($field)
-				->join(array_merge($_join,$join))
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('r')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find();
-		}
+		$info = $this->alias('r')
+			->field($field)
+			->join(array_merge($_join,$join))
+			->where($where)
+			->find();
 		if(!empty($info)){
-			$info = $info->toArray();
+			$info = $info ->toArray();
 		}
 		return $info;
 	}

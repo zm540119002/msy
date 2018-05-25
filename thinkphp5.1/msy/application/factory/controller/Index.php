@@ -8,7 +8,7 @@ class Index extends UserBase
      */
     public function index()
     {
-        $model = new \app\factory\model\FactoryUser();
+        $model = new \app\factory\model\UserFactory();
         $uid = $this -> user['id'];
         $where = [ ['user_id','=',$uid] ];
         $factoryCount = $model -> where($where)->count('id');
@@ -25,15 +25,15 @@ class Index extends UserBase
               ['u.user_id','=',$uid],
               ['u.is_default','=',1],
             ];
-            $factoryInfo = $model -> getFactoryUser($_where,$file,$join);
-            $factoryList = $model -> selectFactoryUser($where_new,$file,$join);
+            $factoryInfo = $model -> getInfo($_where,$file,$join);
+            $factoryList = $model -> getList($where_new,$file,$join);
             $this -> assign('factoryList',$factoryList);
             if(!$factoryInfo){
                 $this -> assign('notDefaultFactory',1);
             }
             $this -> assign('factoryInfo',$factoryInfo);
         }elseif ($factoryCount == 1){
-            $factoryInfo = $model -> getFactoryUser($where_new,$file,$join);
+            $factoryInfo = $model -> getInfo($where_new,$file,$join);
             $this -> assign('factoryInfo',$factoryInfo);
         }
         Session::set('factory',$factoryInfo);

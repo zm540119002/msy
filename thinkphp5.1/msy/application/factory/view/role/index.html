@@ -32,8 +32,8 @@
 			<a>企业档案</a>
 			<a>商标备案</a>
 			<a>开店申请</a>
-			<a class="column_type current">组别角色</a>
-			<a>账号授权</a>
+			<a href="{:url('Organize/index')}" class="column_type current">组别角色</a>
+			<a href="{:url('Account/index')}">账号授权</a>
 		</div>
 	</section>
 	<section class="f24 ">
@@ -129,13 +129,35 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+					$('.rolePowerLayer').find('.role_name').text(_thisLi.find('span').text());
 					var postData = {};
 					postData.roleId = _thisLi.data('id');
-					$.post(controller+'getRoleNode',function(data){
-						console.log(data);
+					$.post(controller+'getRoleNode',postData,function(data){
+						if($.isArray(data) && data.length){
+							$.each($('.rolePowerLayer').find('li'),function(){
+								if($.inArray($(this).data('id'),data)!='-1'){
+									$(this).attr('class','current');
+								}
+							});
+						}
 					});
 				},
 				yes:function(index){
+					var postData = {};
+					postData.roleId = _thisLi.data('id');
+					postData.nodeIds = [];
+					$.each($('.rolePowerLayer').find('li'),function(){
+						if($(this).attr('class')=='current'){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					$.post(controller+'saveRoleNode',postData,function(data){
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							layer.close(index);
+						}
+					});
 				}
 			});
 		});
