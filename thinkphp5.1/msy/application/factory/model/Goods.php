@@ -135,4 +135,10 @@ class Goods extends Model {
 		}
 		return $info;
 	}
+
+	public function setInventory(){
+
+		$this->where('id=5')->setInc('score' ); // 用户的积分加1
+		$this->where('id=5')->setDec('score',5); // 用户的积分减5
+	}
 }

@@ -42,7 +42,7 @@ class FactoryBase extends UserBase{
             $where_new = [
                 ['u.user_id','=',$uid],
             ];
-            $factoryInfo = $model -> getList($where_new,$file,$join);
+            $factoryInfo = $model -> getInfo($where_new,$file,$join);
         }elseif (!$factoryCount){
             $this->success('没有产商入住，请入住', 'Deploy/register');
         }

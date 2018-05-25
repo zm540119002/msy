@@ -88,6 +88,47 @@
 		getPage(url,config);
 		//上拉加载更多
 		getMore(url,config);
+
+		$('body').on('blur','.add-num,.reduce-num',function () {
+			console.log(1)
+//			var _this = $(this);
+//			var type  = _this.data('type');
+//			var inventory = _this.parents('li').find('.goods-library-num').text();
+//			var num = _this.val();
+//			if(!isNaturalNumber(num)){
+//				dialog.error('请输入正整数');
+//				return false;
+//			}
+//			if(type == 0 && inventory < num){
+//				dialog.error('大于库存量');
+//				return false;
+//			}
+//			if(type){
+//				console.log(type)
+//				_this.parents('li').find('.goods-library-num').text(parseInt(inventory)+parseInt(num));
+//			}else{
+//				console.log(type)
+//				_this.parents('li').find('.goods-library-num').text(parseInt(inventory)-parseInt(num));
+//			}
+//			var postData = {};
+//			postData.id = _this.parents('li').data('id');
+//			postData.type = type;
+//			postData.num = num;
+//			$.post(module+'Goods/setInventory',postData,function (msg) {
+//				if(!msg.status){
+//					dialog.error(msg.info);
+//					return false;
+//				}
+//				if(type){
+//					_this.parents('li').find('.goods-library-num').text(parseInt(inventory)+parseInt(num));
+//				}else{
+//					_this.parents('li').find('.goods-library-num').text(parseInt(inventory)-parseInt(num));
+//				}
+//			})
+//
+//
+		})
+
 	});
 </script>
 {/block}
