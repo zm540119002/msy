@@ -32,6 +32,7 @@ class User extends \think\Model {
 		}
 		return successMsg('成功！',array('id'=>$this->getAttr('id')));
 	}
+
 	//分页查询
 	public function pageQuery($userId){
 		$where = [
@@ -53,6 +54,7 @@ class User extends \think\Model {
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
 	}
+
 	//删除
 	public function del($tag=true){
 		$where = [

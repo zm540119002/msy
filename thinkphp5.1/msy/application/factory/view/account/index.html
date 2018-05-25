@@ -13,64 +13,13 @@
 			<input type="tel" placeholder="手机号码" class="input-filed" value="">
 		</div>
 		<div class="account-item">
-			<span class="content-label">账号授权角色</span>
-			<ul class="account-role-list">
-				<li>总经理</li>
-				<li>运营部.运营总监</li>
-				<li>运营部.运营经理</li>
-				<li>运营部.运营专员</li>
-				<li>客服部.客服总监</li>
-				<li>客服部.客服经理</li>
-				<li>客服部.客服专员</li>
-			</ul>
+			<a href="javascript:void(0);" class="content-label account-role">角色设置></a>
+		</div>
+		<div class="account-item">
+			<a href="javascript:void(0);" class="content-label organize-set">行政组织设置></a>
 		</div>
 	</section>
 </article>
-<!--省市区-->
-<section id="areaLayer" class="express-area-box" style="display:none;">
-	<header>
-		<h3>选择地区</h3>
-		<a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
-		<a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-	</header>
-	<article id="areaBox">
-		<ul id="areaList" class="area-list"></ul>
-	</article>
-</section>
-<section id="areaListLayer" style="display:none;">
-	<span class="content-label">可选择的区域(点击选择添加)</span>
-	<select name="region" id="" class="pca">
-		<option value="">区域</option>
-		<!--<option value="">华东</option>
-        <option value="">华南</option>
-        <option value="">华中</option>
-        <option value="">华北</option>
-        <option value="">西北</option>
-        <option value="">西南</option>
-        <option value="">东北</option>
-        <option value="">台港澳</option>-->
-	</select>
-	<div class="weui_cells msy_cells weui_address">
-		<span class="content-label">具体的市区添加</span>
-		<select name="province" class="pca province" id="province">
-			<option value="0">省</option>
-		</select>
-		<select name="city" class="pca">
-			<option value="">市</option>
-		</select>
-		<select name="area" class="pca">
-			<option value="">县区</option>
-		</select>
-		<div class="error_tipc"></div>
-		<a href="javascript:void(0);" class="addTo">添加</a>
-	</div>
-	<span class="content-label">已添加的省市区域(点击移出)</span>
-	<section class="region-box" style="border:1px solid #d9d9d9;height:100px;">
-		<ul>
-
-		</ul>
-	</section>
-</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex l-r-sides">
@@ -82,7 +31,7 @@
 				<span>爱国宾</span>
 			</div>
 			<div class="">
-				<a class="switch-account">切换我的店铺</a>
+				<a class="switch-account">切换供应商账号</a>
 			</div>
 		</div>
 	</section>
@@ -124,29 +73,59 @@
 							</div>
 						</a>
 					</div>
-					<div>
+					<div class="account-status">
 						<span>账号正常</span>
 					</div>
-
 				</li>
 			</ul>
 		</div>
 	</section>
 	<a href="javascript:void(0);" class="add-account foot-btn">新建供应商员工登陆账户</a>
 </article>
+<!--角色设置-->
+<section id="setRole" style="display: none;">
+	<ul>
+		{include file="role/list_tpl" /}
+	</ul>
+</section>
+<!--行政组织设置-->
+<section id="setOrganize" style="display: none;">
+	{include file='organize/list_tpl' /}
+</section>
+<div id="organize_tpl" style="display:none;">
+	<ul data-id="" data-superior_id="" data-level="">
+		<li>
+			<span class="content-label"></span>
+			<div class="operate-box">
+				<a class="btn edit">i</a>
+				<a class="btn reduce">-</a>
+				<a class="btn add">+</a>
+			</div>
+		</li>
+	</ul>
+</div>
 {/block}
 {block name="common"}
-{include file="template/footer_menu_msy.html" /}
+<!--{include file="template/footer_menu_msy.html" /}-->
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="factory_js/organize.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//页面初始化
+		$.each($('#setRole').find('li'),function(){
+			$(this).find('div').remove();
+		});
+		//定义新增用户角色
+		var addUserRoleIds = [];
+		getOrganizeList();
+
 		//创建供应商员工登录账号
 		var addLoginAccount=$('#addLoginAccount').html();
 		$('body').on('click','.add-account',function(){
-			var pageii = layer.open({
+			layer.open({
 				title:['新建供应商员工登陆账号','border-bottom:1px solid #d9d9d9;'],
 				className:'addCcountLayer',
 				type: 1,
@@ -157,11 +136,67 @@
 					var winHeight=$(window).height();
 					$('.signIn-wrapper').css('height',winHeight-120+'px');
 				},
-				btn:['确定']
+				btn:['确定'],
+				yes:function(index){
+					layer.close(index);
+				}
 			});
-
 		});
-		$('body').on('click','.account-role-list li',function(){
+		//角色设置
+		var setRole=$('#setRole').html();
+		$('body').on('click','.account-role',function(){
+			layer.open({
+				title:['角色设置','border-bottom:1px solid #d9d9d9;'],
+				className:'setRoleLayer',
+				type: 1,
+				content: setRole,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				success:function(){
+					var winHeight=$(window).height();
+					$('.signIn-wrapper').css('height',winHeight-120+'px');
+					$.each(addUserRoleIds,function(i,o){
+						$.each($('.setRoleLayer li'),function(){
+							if($(this).data('id')==o){
+								$(this).attr('class','current');
+							}
+						});
+					});
+				},
+				btn:['确定'],
+				yes:function(index){
+					//先清空
+					addUserRoleIds = [];
+					$.each($('.setRoleLayer li'),function(){
+						if($(this).attr('class')=='current'){
+							addUserRoleIds.push($(this).data('id'));
+						}
+					});
+					layer.close(index);
+				}
+			});
+		});
+		//行政组织设置
+		var setOrganize=$('#setOrganize').html();
+		$('body').on('click','.organize-set',function(){
+			layer.open({
+				title:['行政组织设置','border-bottom:1px solid #d9d9d9;'],
+				className:'setOrganizeLayer',
+				type: 1,
+				content: setOrganize,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				success:function(){
+					var winHeight=$(window).height();
+					$('.signIn-wrapper').css('height',winHeight-120+'px');
+				},
+				btn:['确定'],
+				yes:function(index){
+					layer.close(index);
+				}
+			});
+		});
+		$('body').on('click','.setRoleLayer li',function(){
 			$(this).toggleClass('current');
 		});
 	});
