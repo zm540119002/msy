@@ -51,6 +51,9 @@ class UserFactory extends \think\Model {
 			->order($order)
 			->limit($limit)
 			->select();
+		if(!empty($list)){
+			$list = $list->toArray();
+		}
 		return $list;
 	}
 
@@ -68,6 +71,9 @@ class UserFactory extends \think\Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
+		if(!empty($info)){
+			$info = $info->toArray();
+		}
 		return $info;
 	}
 }

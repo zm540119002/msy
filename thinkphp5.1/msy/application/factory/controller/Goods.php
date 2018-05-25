@@ -52,7 +52,7 @@ class Goods extends StoreBase
             $join =[
                 ['goods g','gb.id = g.goods_base_id'],
             ];
-            $goodsInfo =  $goodsBaseModel -> getGoodsBase($where,$file,$join);
+            $goodsInfo =  $goodsBaseModel -> getInfo($where,$file,$join);
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
             }
@@ -190,6 +190,7 @@ class Goods extends StoreBase
     public function setInventory(){
         if(request()->isPost()){
             $data = input();
+            print_r($data);exit;
             $model = new \app\factory\model\Goods;
             $result = $model->allowField(true)
                 ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
