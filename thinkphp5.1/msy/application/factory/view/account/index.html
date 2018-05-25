@@ -21,51 +21,6 @@
 <section id="setRole" style="display: none;">
 	{include file="role/list_tpl" /}
 </section>
-<!--省市区-->
-<section id="areaLayer" class="express-area-box" style="display:none;">
-	<header>
-		<h3>选择地区</h3>
-		<a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
-		<a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-	</header>
-	<article id="areaBox">
-		<ul id="areaList" class="area-list"></ul>
-	</article>
-</section>
-<section id="areaListLayer" style="display:none;">
-	<span class="content-label">可选择的区域(点击选择添加)</span>
-	<select name="region" id="" class="pca">
-		<option value="">区域</option>
-		<!--<option value="">华东</option>
-        <option value="">华南</option>
-        <option value="">华中</option>
-        <option value="">华北</option>
-        <option value="">西北</option>
-        <option value="">西南</option>
-        <option value="">东北</option>
-        <option value="">台港澳</option>-->
-	</select>
-	<div class="weui_cells msy_cells weui_address">
-		<span class="content-label">具体的市区添加</span>
-		<select name="province" class="pca province" id="province">
-			<option value="0">省</option>
-		</select>
-		<select name="city" class="pca">
-			<option value="">市</option>
-		</select>
-		<select name="area" class="pca">
-			<option value="">县区</option>
-		</select>
-		<div class="error_tipc"></div>
-		<a href="javascript:void(0);" class="addTo">添加</a>
-	</div>
-	<span class="content-label">已添加的省市区域(点击移出)</span>
-	<section class="region-box" style="border:1px solid #d9d9d9;height:100px;">
-		<ul>
-
-		</ul>
-	</section>
-</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex l-r-sides">
@@ -158,7 +113,7 @@
 		var setRole=$('#setRole').html();
 		$('body').on('click','.account-role',function(){
 			var pageii = layer.open({
-				title:['设置行政级别','border-bottom:1px solid #d9d9d9;'],
+				title:['角色设置','border-bottom:1px solid #d9d9d9;'],
 				className:'addCcountLayer',
 				type: 1,
 				content: setRole,
