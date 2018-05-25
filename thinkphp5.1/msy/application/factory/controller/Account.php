@@ -11,6 +11,9 @@ class Account extends FactoryBase
             $this->assign('info',$info);
             return view('info_tpl');
         }else{
+            $modelRole = new \app\factory\model\Role();
+            $list = $modelRole->getList($this->factory['id']);
+            $this->assign('list',$list);
             return $this->fetch();
         }
     }

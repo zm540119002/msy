@@ -13,24 +13,13 @@
 			<input type="tel" placeholder="手机号码" class="input-filed" value="">
 		</div>
 		<div class="account-item">
-			<a href="javascript:void(0);" class="content-label account-role">账号授权角色></a>
-			<ul class="account-role-list">
-				<li>总经理</li>
-				<li>运营部.运营总监</li>
-				<li>运营部.运营经理</li>
-				<li>运营部.运营专员</li>
-				<li>客服部.客服总监</li>
-				<li>客服部.客服经理</li>
-				<li>客服部.客服专员</li>
-			</ul>
+			<a href="javascript:void(0);" class="content-label account-role">角色设置></a>
 		</div>
 	</section>
 </article>
 <!--行政级别-->
-<section id="adminLevel" style="display: none;">
-	<div class="groupRole-box">
-		<input class="role-name input-filed" type="text" name="" value="" placeholder="请输入行政级别">
-	</div>
+<section id="setRole" style="display: none;">
+	{include file="role/list_tpl" /}
 </section>
 <!--省市区-->
 <section id="areaLayer" class="express-area-box" style="display:none;">
@@ -166,13 +155,13 @@
 			});
 		});
 		//行政级别
-		var adminLevel=$('#adminLevel').html();
+		var setRole=$('#setRole').html();
 		$('body').on('click','.account-role',function(){
 			var pageii = layer.open({
 				title:['设置行政级别','border-bottom:1px solid #d9d9d9;'],
 				className:'addCcountLayer',
 				type: 1,
-				content: adminLevel,
+				content: setRole,
 				anim: 'up',
 				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
 				success:function(){
