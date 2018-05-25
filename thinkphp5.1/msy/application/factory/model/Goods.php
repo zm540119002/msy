@@ -136,9 +136,26 @@ class Goods extends Model {
 		return $info;
 	}
 
-	public function setInventory(){
+	//设置库存
+	public function setInventory($storeId=''){
+		$data = input('post.');
+		if(empty($data['id'] || (int)$data['id'])){
+			return errorMsg("参数错误");
+		}
+		$where = [
+			['id','=',(int)$data['id']],
+			['store_id','=',$storeId],
+		];
+		if((int)$data['type']){
+			$result = $this->where($where)->setInc('inventory',(int)$data['num'] ); // 增加
+		}else{
+			$result = $this->where($where)->setDec('inventory',(int)$data['num']); // 减少
+		}
+		if(false !== $result){
+			return successMsg("成功");
+		}else{
+			return errorMsg("失败");
+		}
 
-		$this->where('id=5')->setInc('score' ); // 用户的积分加1
-		$this->where('id=5')->setDec('score',5); // 用户的积分减5
 	}
 }

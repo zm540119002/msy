@@ -189,14 +189,8 @@ class Goods extends StoreBase
     //设置商品库存
     public function setInventory(){
         if(request()->isPost()){
-            $data = input();
-            print_r($data);exit;
             $model = new \app\factory\model\Goods;
-            $result = $model->allowField(true)
-                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
-            if(false !== $result){
-                return successMsg('成功');
-            }
+            return $result = $model ->setInventory($this->store['id']);
         }
         return $this -> fetch();
     }
