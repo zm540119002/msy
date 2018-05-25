@@ -33,9 +33,15 @@ class Order extends UserBase
      *
      *
      */
-    public function addOrder()
+    public function addOrder($address_id)
     {
-        $cart = new Cart();
-        return  $this->order->addOrder(Session::get('user.id'), 1);
+        //$cart = new Cart();
+        return  $this->order->addOrder(Session::get('user.id'), $address_id);
+    }
+
+    public function index()
+    {
+        //订单列表
+        $this->fetch();
     }
 }

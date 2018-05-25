@@ -18,5 +18,7 @@ function getOrganizeList() {
                 }
             });
         });
+        $('#setOrganize').find('div').remove();
+        setOrganize=$('#setOrganize').html();
     });
 }

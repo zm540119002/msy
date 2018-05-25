@@ -11,6 +11,14 @@
 <body>
   <p><strong>购物车列表</strong></p>
   <p><a href="">返回</a></p>
+  <p>
+      {foreach $address as $k=>$v}
+        <p id="address_id" style="display: none;">{$v.address_id}</p>
+        <p><span>收货人：</span>{$v.consignee}</p>
+        <p><span>联系电话：</span>{$v.phone}</p>
+        <p><span>详细地址：</span>{$v.detail}</p>
+  {/foreach}
+  </p>
     <table>
         <tr>
             <td>店铺信息</td>
@@ -45,10 +53,15 @@
     });
 
     $('#settlement').click(function(){
+        if($('#address_id').length<=0){
+            alert('请先创建收货地址！');
+            return false;
+        }
+        var address_id = $('#address_id').text();
         $.ajax({
             url: "{:url('Order/addOrder')}",
             type:'POST',
-            data:{},
+            data:{address_id:address_id},
             dataType:'json',
             success:function(e){
                 alert(e.info);

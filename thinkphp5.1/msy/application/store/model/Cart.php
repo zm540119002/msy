@@ -124,5 +124,5 @@ class Cart extends Model {
                 ->join('msy_factory.goods_base b ', 'a.goods_id=b.id', 'LEFT')
                 ->where(['a.user_id'=>$user_id])->field('a.*, b.thumb_img')->select();
     }
-
+    
 }
