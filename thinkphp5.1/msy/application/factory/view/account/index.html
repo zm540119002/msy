@@ -19,7 +19,9 @@
 </article>
 <!--行政级别-->
 <section id="setRole" style="display: none;">
-	{include file="role/list_tpl" /}
+	<ul>
+		{include file="role/list_tpl" /}
+	</ul>
 </section>
 <article class="f24">
 	<section class="top_nav_fixed">
@@ -114,7 +116,7 @@
 		$('body').on('click','.account-role',function(){
 			var pageii = layer.open({
 				title:['角色设置','border-bottom:1px solid #d9d9d9;'],
-				className:'addCcountLayer',
+				className:'setRoleLayer',
 				type: 1,
 				content: setRole,
 				anim: 'up',
