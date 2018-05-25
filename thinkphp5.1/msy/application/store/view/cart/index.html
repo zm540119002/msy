@@ -49,9 +49,9 @@
             url: "{:url('Order/addOrder')}",
             type:'POST',
             data:{},
-            dataType:'text',
+            dataType:'json',
             success:function(e){
-                alert('success');
+                alert(e.info);
             }
         });
     });
