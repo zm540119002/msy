@@ -62,7 +62,7 @@
 		<form class="addProductContent">
 			<ul>
 				{notempty name="goodsInfo"}
-				<input type="hidden" class="goods_base_id" value="{$goodsInfo['goods_base_id']|default=''}"  name="goods_base_id">
+				<input type="hidden" class="goods_id" value="{$goodsInfo['id']|default=''}"  name="id">
 				{/notempty}
 
 				<li>

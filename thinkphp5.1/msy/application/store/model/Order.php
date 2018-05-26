@@ -19,12 +19,7 @@ class Order extends Model
     protected $connection = 'db_config_factory';
     // 设置主键
     protected $pk = 'order_id';
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
+    
     /**
      * 添加订单
      *

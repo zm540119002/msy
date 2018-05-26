@@ -9,50 +9,20 @@ class Goods extends StoreBase
      */
     public function edit()
     {
-        $goodsBaseModel = new \app\factory\model\GoodsBase;//商品基础表
         $goodsModel = new \app\factory\model\Goods;//商品扩展模型
         if(request()->isPost()){
-            //编辑商品基础表
-            $goodsBaseModel -> startTrans();
-            $result = $goodsBaseModel -> edit($this->store['id']);
-            if(!$result['status']){
-                $goodsBaseModel ->rollback();
-                return errorMsg('失败');
-            }
-            //编辑商品表
-            $goodsBaseId =  $result['id'];
-            $result = $goodsModel -> edit($goodsBaseId,$this->store['id']);
-            if(!$result['status']){
-                $goodsModel ->rollback();
-                return errorMsg('失败');
-            }
-            $goodsBaseModel ->commit();
-            return successMsg('成功');
+            return $result = $goodsModel -> edit($this->store['id']);
         }
         $categoryModel = new \app\index_admin\model\Category;
         $platformCategory = $categoryModel->selectFirstCategory();
         $this -> assign('platformCategory',$platformCategory);
-//        $seriesModel = new \app\factory\model\Series;
-//        $where = [
-//            ['store_id','=',$this->store['id']],
-//        ];
-//        $seriesList = $seriesModel -> selectSeries($where,[],['sort'=>'desc','id'=>'desc',]);
-//        $this -> assign('seriesList',$seriesList);
-        if(input('?goods_base_id')){
-            $goodsBaseId = (int)input('goods_base_id');
+        if(input('?goods_id')){
+            $goodsId= (int)input('goods_id');
             $where = [
-               ['gb.store_id','=',$this->store['id']],
-               ['g.goods_base_id','=',$goodsBaseId],
+               ['g.store_id','=',$this->store['id']],
+               ['g.id','=',$goodsId],
             ];
-            $file = [
-                'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,
-                gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,
-                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.parameters'
-            ];
-            $join =[
-                ['goods g','gb.id = g.goods_base_id'],
-            ];
-            $goodsInfo =  $goodsBaseModel -> getInfo($where,$file,$join);
+            $goodsInfo =  $goodsModel -> getInfo($where);
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
             }
@@ -133,7 +103,12 @@ class Goods extends StoreBase
         $where = [
             ['g.store_id','=',$this->store['id']],
         ];
-        $list = $model -> pageQuery($where);
+        $file = [
+            'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
+                g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,
+                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters'
+        ];
+        $list = $model -> pageQuery($where,$file);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'promotion' ){//促销
