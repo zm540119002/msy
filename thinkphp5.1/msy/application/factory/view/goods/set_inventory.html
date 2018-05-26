@@ -102,13 +102,13 @@
 			}
 			if(!isPosIntNumber(num)){
 				dialog.error('请输入大于0正整数');
-				_this.val(0);
+				_this.val('');
 				return false;
 			}
 			num = parseInt(num);
 			if(type == 0 && inventory < num){
 				dialog.error('大于库存量');
-				_this.val(0);
+				_this.val('');
 				return false;
 			}
 			_this.val('');
