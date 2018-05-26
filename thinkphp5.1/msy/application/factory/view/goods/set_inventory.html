@@ -102,32 +102,32 @@
 			}
 			if(!isPosIntNumber(num)){
 				dialog.error('请输入大于0正整数');
+				_this.val(0);
 				return false;
 			}
 			num = parseInt(num);
 			if(type == 0 && inventory < num){
 				dialog.error('大于库存量');
+				_this.val(0);
 				return false;
 			}
 			_this.val(0);
 			var postData = {};
 			postData.id = _this.parents('li').data('id');
 			postData.type = type;
+			if(!type){
+				num = 0 - num;
+			}
 			postData.num = num;
-			$.post(module+'Goods/setInventory',postData,function (msg) {
+			$.post(module + 'Goods/setInventory',postData,function (msg) {
 				if(!msg.status){
 					dialog.error(msg.info);
 					return false;
 				}
 				dialog.success(msg.info);
-				if(type){
-					_this.parents('li').find('.goods-library-num').text(inventory+num);
-				}else{
-					_this.parents('li').find('.goods-library-num').text(inventory-num);
-				}
+				_this.parents('li').find('.goods-library-num').text(inventory + num);
 			});
 		})
-
 	});
 </script>
 {/block}
