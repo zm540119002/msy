@@ -15,7 +15,7 @@ class Promotion extends Model {
 	/**
 	 * 新增和修改
 	 */
-	public function edit($factoryId =''){
+	public function edit($storeId =''){
 		$validate = validate('Promotion');
 		$data = input('post.');
 		if(!$result = $validate->check($data)) {
@@ -24,33 +24,33 @@ class Promotion extends Model {
 		if(!empty($data['img'])){
 			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
 		}
-		$data['factory_id'] = $factoryId;
+		$data['store_id'] = $storeId;
 		$this ->startTrans();
 		if(input('?post.promotion_id')){//修改
 			$where = [
 				['id','=',$data['promotion_id']],
-				['factory_id','=',$factoryId],
+				['store_id','=',$storeId],
 			];
 			$file = array(
 				'img',
 			);
-			$oldInfo = $this -> getPromotion($where,$file);
+			$oldInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
-			$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'factory_id'=>$factoryId]);
+			$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'store_id'=>$storeId]);
 			if(false == $result){
 				$this ->rollback();
-				return errorMsg($this->getError());
+				return errorMsg('失败');
 			}
 		}else{//新增
 			$data['create_time'] = time();
 			$result = $this -> allowField(true) -> save($data);
 			if(false == $result){
 				$this ->rollback();
-				return errorMsg($this->getError());
+				return errorMsg('失败');
 			}
 		}
 		$modelGoods  = new \app\factory\model\Goods;
-		$result = $modelGoods ->save(['sale_type_'.$data['storeType'] => 1],['id' => $data['goods_id'],'factory_id'=>$factoryId]);
+		$result = $modelGoods ->save(['sale_type'=>1],['id' => $data['goods_id'],'store_id'=>$storeId]);
 		if(false === $result){
 			$this ->rollback();
 			return errorMsg($modelGoods->getLastSql());
@@ -59,11 +59,11 @@ class Promotion extends Model {
 		if(input('?post.promotion_id')){//修改成功后，删除旧图
 			delImgFromPaths($oldInfo['img'],$data['img']);
 		}
-		return successMsg("成功！",['storeType'=>$data['storeType']]);
+		return successMsg("成功");
 	}
 	
 	//分页查询
-	public function pageQuery($_where=[],$join=[]){
+	public function pageQuery($_where=[],$field=['*'],$join=[],$_order=[]){
 		$where = [
 			['p.status', '=', 0],
 		];
@@ -79,19 +79,14 @@ class Promotion extends Model {
 		if($keyword){
 			$where[] = ['p.name', 'like', '%'.trim($keyword).'%'];
 		}
-		if(isset($_GET['storeType'])){//选择哪个类型店铺的促销活动
-			$join = [
-				['goods g','g.id = p.goods_id'],
-				['goods_base gb','gb.id = g.goods_base_id'],
-			];
-			$where[] = ['g.sale_type','=',1];
-		}
+
 		$field = array(
 			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
-			'gb.name as goods_name','gb.retail_price'
+			'g.name as goods_name','g.retail_price'
 		);
-		$order = 'sort';
+		$order = ['id'=>'desc','sort'=>'desc'];
 		$where = array_merge($_where, $where);
+		$order = array_merge($_order, $order);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
@@ -144,7 +139,7 @@ class Promotion extends Model {
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		$list = $this->alias('g')
+		$list = $this->alias('p')
 			->where($where)
 			->field($field)
 			->join(array_merge($_join,$join))

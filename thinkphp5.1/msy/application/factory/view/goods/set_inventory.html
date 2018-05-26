@@ -88,6 +88,46 @@
 		getPage(url,config);
 		//上拉加载更多
 		getMore(url,config);
+
+		/**
+		 * 设置库存
+		 */
+		$('body').on('blur','.add-num,.reduce-num',function () {
+			var _this = $(this);
+			var type  = _this.data('type');
+			var inventory = parseInt(_this.parents('li').find('.goods-library-num').text());
+			var num = _this.val();
+			if(!num){
+				return false
+			}
+			if(!isPosIntNumber(num)){
+				dialog.error('请输入大于0正整数');
+				_this.val('');
+				return false;
+			}
+			num = parseInt(num);
+			if(type == 0 && inventory < num){
+				dialog.error('大于库存量');
+				_this.val('');
+				return false;
+			}
+			_this.val('');
+			var postData = {};
+			postData.id = _this.parents('li').data('id');
+			postData.type = type;
+			if(!type){
+				num = 0 - num;
+			}
+			postData.num = num;
+			$.post(module + 'Goods/setInventory',postData,function (msg) {
+				if(!msg.status){
+					dialog.error(msg.info);
+					return false;
+				}
+				dialog.success(msg.info);
+				_this.parents('li').find('.goods-library-num').text(inventory + num);
+			});
+		})
 	});
 </script>
 {/block}

@@ -14,69 +14,91 @@ class Goods extends Model {
 	protected $connection = 'db_config_factory';
 
 	/**
-	 * 修改
+	 * 编辑 新增和修改
+	 * @param string $store_id
+	 * @return array
 	 */
-	public function edit($goodsBaseId ='',$storeId =''){
+	public function edit($storeId =''){
 		$data = input('post.');
 		$validate = validate('Goods');
-		// if(!$result = $validate->scene('edit')->check($data)) {
-		// 	return errorMsg($validate->getError());
-		// }
-
-		if(input('?post.goods_base_id')){
-			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['goods_base_id' => $goodsBaseId,'store_id'=>$storeId]);
-			if(false !== $result){
-				return successMsg("成功");
+//		 if(!$result = $validate->scene('edit')->check($data)) {
+//		 	return errorMsg($validate->getError());
+//		 }
+		if(!empty($data['thumb_img'])){
+			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
+		}
+		if(!empty($data['main_img'])){
+			$mainImg = '';
+			$tempMainImg = explode(",",$data['main_img']);
+			array_pop($tempMainImg);
+			foreach ($tempMainImg as $item) {
+				if($item){
+					$mainImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
+				}
 			}
-			return errorMsg('失败',$this->getError());
+			$data['main_img'] = $mainImg;
+		}
+		if(!empty($data['goods_video'])){
+			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
+		}
+		if(!empty($data['details_img'])){
+			$detailsImg = '';
+			$tempArray = explode(",",$data['details_img']);
+			array_pop($tempArray);
+			foreach ($tempArray as $item) {
+				if($item){
+					$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+				}
+			}
+			$data['details_img'] = $detailsImg;
+		}
+		if(input('?post.id')){//修改
+			$where = [
+				['id','=',$data['id']],
+			];
+			$file = array(
+				'thumb_img','main_img','details_img','goods_video'
+			);
+			$oldGoodsInfo = $this -> getInfo($where,$file);
+			if(empty($oldGoodsInfo)){
+				return errorMsg('没有数据');
+			}
+			$data['update_time'] = time();
+			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'store_id'=>$storeId]);
 		}else{
 			$data['create_time'] = time();
 			$data['store_id'] = $storeId;
-			$data['goods_base_id'] = $goodsBaseId;
-			$result = $this->allowField(true)->save($data);
+			$result = $this -> allowField(true) -> save($data);
 			if(!$result){
-				$this ->rollback();
 				return errorMsg('失败');
 			}
-			return successMsg('提交申请成功');
+
+		}
+		if(false !== $result){
+			if(input('?post.id')){//删除旧图片
+				delImgFromPaths($oldGoodsInfo['thumb_img'],$data['thumb_img']);
+				//删除就图片
+				$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
+				array_pop($oldMainImg);
+				$newMainImg = explode(",",$data['main_img']);
+				array_pop($newMainImg);
+				delImgFromPaths($oldMainImg,$newMainImg);
+
+				$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
+				array_pop($oldDetailsImg);
+				$newDetailsImg = explode(",",$data['details_img']);
+				array_pop($newDetailsImg);
+				delImgFromPaths($oldDetailsImg,$newDetailsImg);
+
+				delImgFromPaths($oldGoodsInfo['goods_video'],$data['goods_video']);
+			}
+			return successMsg("成功");
+		}else{
+			return errorMsg('失败');
 		}
 	}
 
-	/**
-	 * 分页查询 商品
-	 * @param array $_where
-	 * @param array $_field
-	 * @param array $_join
-	 * @param string $_order
-	 * @return \think\Paginator
-	 */
-	public function pageQuery($_where=[],$_field=[],$_join=[],$_order=''){
-		$where = [
-			['g.status', '=', 0],
-		];
-
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
-		}
-		$file = [
-			'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,
-                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.parameters'
-		];
-		$join =[
-			['goods_base gb','gb.id = g.goods_base_id'],
-		];
-		
-		$where = array_merge($_where, $where);
-		$field = array_merge($_field,$file);
-		$join = array_merge($_join,$join);
-		$order = 'id';
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		 return $this->alias('g')->join($join)->where($where)->field($field)->order($order)->paginate($pageSize);
-	}
+	
 
 	/**
 	 * @param array $where
@@ -118,7 +140,7 @@ class Goods extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getInfo($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'g.status' => 0,
 		);
@@ -135,4 +157,54 @@ class Goods extends Model {
 		}
 		return $info;
 	}
+
+	/**
+	 * 分页查询 商品
+	 * @param array $_where
+	 * @param array $_field
+	 * @param array $_join
+	 * @param string $_order
+	 * @return \think\Paginator
+	 */
+	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
+		$where = [
+			['g.status', '=', 0],
+		];
+
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
+		}
+		$join =[
+
+		];
+		$order = ['id'=>'desc'];
+		$where = array_merge($_where, $where);
+		$join = array_merge($_join,$join);
+		$order = array_merge($_order,$order);
+		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+			input('get.pageSize',0,'int') : config('custom.default_page_size');
+		return $this->alias('g')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+	}
+
+
+	//设置库存
+	public function setInventory($storeId=''){
+		$data = input('post.');
+		if(empty($data['id'] || (int)$data['id'])){
+			return errorMsg("参数错误");
+		}
+		$where = [
+			['id','=',(int)$data['id']],
+			['store_id','=',$storeId],
+		];
+		$result = $this->where($where)->setInc('inventory',(int)$data['num'] );
+		if(false !== $result){
+			return successMsg("成功");
+		}else{
+			return errorMsg("失败");
+		}
+
+	}
+
 }

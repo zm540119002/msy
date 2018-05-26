@@ -22,6 +22,6 @@ class Nostore extends Controller
 
     public function test()
     {
-        echo  Order::addOrder();
+        return Order::addOrder();
     }
 }
