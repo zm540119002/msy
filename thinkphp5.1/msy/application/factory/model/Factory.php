@@ -23,7 +23,7 @@ class Factory extends Model {
 		$file = array(
 			'business_license','auth_letter',
 		);
-		$oldFactoryInfo = $this -> getFactory($where,$file);
+		$oldFactoryInfo = $this -> getInfo($where,$file);
 		$validate = validate('Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
