@@ -24,21 +24,18 @@ class Store extends Model {
     // 设置主键
     protected $pk = 'id';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * 判断店铺是否存在、是否营业、是否正常
-     *
-     * @param int $id  店铺ID
-     * @return boolean
+     * @param $id
+     * @return array
      */
     public  function hasStore($id)
     {
-        return static::where(['id'=>$id, 'auth_status'=>2, 'status'=>0])->count();
-
+        $ret = $this->where(['id'=>$id, 'auth_status'=>2, 'status'=>0])->count();
+        if($ret){
+            return successMsg('合法店铺');
+        }
+        return errorMsg('非法店铺');
     }
 
     /**
