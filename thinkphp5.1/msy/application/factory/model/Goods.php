@@ -146,11 +146,7 @@ class Goods extends Model {
 			['id','=',(int)$data['id']],
 			['store_id','=',$storeId],
 		];
-		if((int)$data['type']){
-			$result = $this->where($where)->setInc('inventory',(int)$data['num'] ); // 增加
-		}else{
-			$result = $this->where($where)->setDec('inventory',(int)$data['num']); // 减少
-		}
+		$result = $this->where($where)->setInc('inventory',(int)$data['num'] );
 		if(false !== $result){
 			return successMsg("成功");
 		}else{
