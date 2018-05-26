@@ -7,16 +7,16 @@
 <article id="addLoginAccount" style="display:none;">
 	<section class="f24 signIn-wrapper">
 		<div class="account-item">
-			<input type="text" placeholder="姓名" class="input-filed" value="">
+			<input type="text" placeholder="姓名" class="input-filed" name="name">
 		</div>
 		<div class="account-item">
-			<input type="tel" placeholder="手机号码" class="input-filed" value="">
+			<input type="tel" placeholder="手机号码" class="input-filed" name="mobile_phone">
 		</div>
 		<div class="account-item">
 			<a href="javascript:void(0);" class="content-label account-role">角色设置></a>
 		</div>
 		<div class="account-item">
-			<a href="javascript:void(0);" class="content-label organize-set">行政组织设置></a>
+			<a href="javascript:void(0);" class="content-label organize-set">组织设置></a>
 		</div>
 	</section>
 </article>
@@ -46,12 +46,11 @@
 	</section>
 	<section class="f24 account-content-wrapper ">
 		<div class="search-bar columns_flex">
-			<input type="text" class="search-text" name="" value="" placeholder="输入姓名、手机号码查询账号">
+			<input type="text" class="search-text" name=""  placeholder="输入姓名、手机号码查询账号">
 			<input type="button" class="search-btn">
 		</div>
 		<div class="account-list-content">
 			<span class="title">供应商员工登陆账号列表</span>
-
 			<span class="title">暂无数据</span>
 			<span class="title">搜索结果</span>
 			<span class="title">查无此人</span>
@@ -88,7 +87,7 @@
 		{include file="role/list_tpl" /}
 	</ul>
 </section>
-<!--行政组织设置-->
+<!--组织设置-->
 <section id="setOrganize" style="display: none;">
 	{include file='organize/list_tpl' /}
 </section>
@@ -111,16 +110,16 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript">
-	var setOrganize;
-</script>
 <script type="text/javascript" src="factory_js/organize.js"></script>
 <script type="text/javascript">
+	var setOrganize;
 	$(function(){
 		//页面初始化
 		$('#setRole').find('div').remove();
 		//定义新增用户角色
-		var addUserRoleIds = [];
+		var userFactoryRoleIds = [];
+		//定义新增组织
+		var userFactoryOrganizeId = 0;
 		getOrganizeList();
 
 		//创建供应商员工登录账号
@@ -136,9 +135,14 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.signIn-wrapper').css('height',winHeight-120+'px');
+					//先清空
+					userFactoryRoleIds = [];
+					userFactoryOrganizeId = 0;
 				},
 				btn:['确定'],
 				yes:function(index){
+					var postData = {};
+
 					layer.close(index);
 				}
 			});
@@ -156,7 +160,7 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.signIn-wrapper').css('height',winHeight-120+'px');
-					$.each(addUserRoleIds,function(i,o){
+					$.each(userFactoryRoleIds,function(i,o){
 						$.each($('.setRoleLayer li'),function(){
 							if($(this).data('id')==o){
 								$(this).attr('class','current');
@@ -167,23 +171,23 @@
 				btn:['确定'],
 				yes:function(index){
 					//先清空
-					addUserRoleIds = [];
+					userFactoryRoleIds = [];
 					$.each($('.setRoleLayer li'),function(){
 						if($(this).attr('class')=='current'){
-							addUserRoleIds.push($(this).data('id'));
+							userFactoryRoleIds.push($(this).data('id'));
 						}
 					});
 					layer.close(index);
 				}
 			});
 		});
-		//行政组织设置
+		//组织设置
 		$('body').on('click','.organize-set',function(){
 			if(!setOrganize){
-				return false;
+				dialog.error('加载中，请稍等。。。');
 			}
 			layer.open({
-				title:['行政组织设置','border-bottom:1px solid #d9d9d9;'],
+				title:['组织设置','border-bottom:1px solid #d9d9d9;'],
 				className:'setOrganizeLayer',
 				type: 1,
 				content: setOrganize,
@@ -192,20 +196,29 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.signIn-wrapper').css('height',winHeight-120+'px');
+					//回写
+					$.each($('.setOrganizeLayer').find('.organize ul'),function(){
+						if($(this).data('id')==userFactoryOrganizeId){
+							$(this).find('span:first').addClass('current');
+						}
+					});
 				},
 				btn:['确定'],
 				yes:function(index){
+					userFactoryOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
 					layer.close(index);
 				}
 			});
 		});
+		//角色多选效果
 		$('body').on('click','.setRoleLayer li',function(){
 			$(this).toggleClass('current');
 		});
+		//组织单选效果
 		$('body').on('click','.setOrganizeLayer span',function(){
+			$(this).parents('.organize').find('span.content-label').removeClass('current');
 			$(this).toggleClass('current');
 		});
-		
 	});
 </script>
 {/block}
