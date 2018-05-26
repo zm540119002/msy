@@ -1298,7 +1298,7 @@ color: #ed6d00;
     margin-bottom:15px;
 }
 .setRoleLayer li.current,
-.setOrganizeLayer li.current{
+.setOrganizeLayer li span.current{
     background:#009a3e;
     color:#fff;
 }
@@ -2153,9 +2153,10 @@ input[type=text]::-webkit-focus-inner {
     border-radius:5px;
     justify-content: space-between;
 }
-.account-list li div:nth-child(1),
-.account-list li div:nth-child(2){
-    padding:0.12rem 0.20rem;
+.account-list li a div:nth-child(1),
+.account-list li a div:nth-child(2),
+.account-list li a div:nth-child(3){
+    padding:0.12rem 0 0;
 
 }
 .account-list .account-status{
