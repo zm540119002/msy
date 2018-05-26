@@ -63,7 +63,7 @@ class Promotion extends Model {
 	}
 	
 	//分页查询
-	public function pageQuery($_where=[],$join=[]){
+	public function pageQuery($_where=[],$field=['*'],$join=[],$_order=[]){
 		$where = [
 			['p.status', '=', 0],
 		];
@@ -84,8 +84,9 @@ class Promotion extends Model {
 			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
 			'g.name as goods_name','g.retail_price'
 		);
-		$order = 'sort';
+		$order = ['id'=>'desc','sort'=>'desc'];
 		$where = array_merge($_where, $where);
+		$order = array_merge($_order, $order);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);

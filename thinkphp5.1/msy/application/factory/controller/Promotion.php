@@ -51,7 +51,11 @@ class Promotion extends StoreBase
         $join = [
             ['goods g','g.id = p.goods_id'],
         ];
-        $list = $model -> pageQuery($where,$join);
+        $field = array(
+            'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
+            'g.name as goods_name','g.retail_price'
+        );
+        $list = $model -> pageQuery($where,$field,$join);
         $this->assign('list',$list);
         if(isset($_GET['activityStatus'])){
             if($_GET['activityStatus'] == 1 ){//未结束
