@@ -199,9 +199,15 @@
 				}
 			});
 		});
-		$('body').on('click','.setRoleLayer li,.setOrganizeLayer li',function(){
+		$('body').on('click','.setRoleLayer li',function(){
 			$(this).toggleClass('current');
 		});
+		$('body').on('click','.setOrganizeLayer li',function(){
+			$(this).toggleClass('current');
+			$(this).addClass('current').siblings().removeClass('current');
+			$(this).parents('li').removeClass('current')
+		});
+		
 	});
 </script>
 {/block}
