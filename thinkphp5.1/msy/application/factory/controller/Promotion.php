@@ -6,11 +6,6 @@ class Promotion extends StoreBase
     //促销管理
     public function manage()
     {
-        $storeType = input('storeType');
-        if($storeType !=1 && $storeType!=2 && $storeType!=3) {
-            $storeType = 1;
-        }
-        $this -> assign('storeType',$storeType);
         return $this->fetch();
     }
 
@@ -22,7 +17,7 @@ class Promotion extends StoreBase
     {
         $model = new \app\factory\model\Promotion;
         if(request()->isPost()){
-            return $model -> edit();
+            return $model -> edit($this->store['id']);
         }
         if(input('?promotion_id')){
             $promotionId = (int)input('promotion_id');
@@ -31,7 +26,7 @@ class Promotion extends StoreBase
                 ['p.store_id','=',$this->store['id']],
             ];
             $file = [
-                'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,p.factory_id,g.thumb_img,g.name as goods_name'
+                'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,p.store_id,g.thumb_img,g.name as goods_name'
             ];
             $join =[
               ['goods g','g.id = p.goods_id'],
@@ -42,11 +37,6 @@ class Promotion extends StoreBase
             }
             $this -> assign('promotionInfo',$promotionInfo);
         }
-        $storeType = input('storeType');
-//        if($storeType!=1 &&  $storeType!=2 && $storeType!=3) {
-//            $storeType =1;
-//        }
-//        $this -> assign('storeType',$storeType);
         return $this->fetch();
     }
 
@@ -58,7 +48,10 @@ class Promotion extends StoreBase
         $where = [
             ['p.store_id','=',$this->store['id']],
         ];
-        $list = $model -> pageQuery($where);
+        $join = [
+            ['goods g','g.id = p.goods_id'],
+        ];
+        $list = $model -> pageQuery($where,$join);
         $this->assign('list',$list);
         if(isset($_GET['activityStatus'])){
             if($_GET['activityStatus'] == 1 ){//未结束

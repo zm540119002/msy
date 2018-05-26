@@ -103,7 +103,7 @@ $(function(){
                     return false;
                 }
                 if(msg.status == 1){
-                    dialog.success(msg.info,controller + 'manage/storeType/'+msg.storeType);
+                    dialog.success(msg.info,controller + 'manage');
                 }
             },
             complete:function(){
@@ -163,8 +163,7 @@ opt.default = {
 $("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 //$("#endTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 
-//获取列表
-
+//获取商品列表
 function getPage(currentPage) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getList';
@@ -172,7 +171,7 @@ function getPage(currentPage) {
     postData.storeType = storeType;
     postData.pageType = 'promotion';
     postData.page = currentPage ? currentPage : 1;
-    postData.pageSize = 2;
+    postData.pageSize = 4;
     $.get(url, postData , function(data){
         $('.addsalesgoodsLayer #list').html(data);
     });

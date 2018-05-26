@@ -13,26 +13,57 @@
 </section>
 
 <article class="f24">
-	<section class="">
-		<nav class="columns_flex channel_nav top-nav-bar ">
-			<a class="personal_center">我的</a>
-			<a href="javascript:void(0);" class="current store-type" data-type="1">
-				采购
+	<section class="top_nav_fixed">
+		<div class="top_bar columns_flex l-r-sides">
+			<div class="">
+				<a class="home">首页</a>
+			</div>
+			<div class="">
+				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+				<span>爱国宾</span>
+			</div>
+			<div class="">
+				<a class="switch-account">切换我的店铺</a>
+			</div>
+		</div>
+	</section>
+	<section class="columns_flex l-r-sides">
+		<div>
+			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+			<div>
+				<p><span>某某</span>官方旗舰店</p>
+				<p>B2B采购商城 <span>供应商自营</span></p>
+			</div>
+		</div>
+		<div>
+			<a href="" class="personal_center">我的</a>
+			<a href="" class="my-store">我的店铺</a>
+		</div>
+	</section>
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="">
+				店铺提醒
 			</a>
-			<a href="javascript:void(0);" class="store-type" data-type="2">
-				分成
+			<a href="">
+				店铺管理
 			</a>
-			<a href="javascript:void(0);" class="store-type" data-type="3">
-				零售
+			<a href=""  class="current">
+				营销推广
 			</a>
-			<a class="home">首页</a>
+			<a href="">
+				官方活动
+			</a>
 		</nav>
 	</section>
-	<section class="specific_type bottomLine">
+	<section class="specific_type store-manage-type bottomLine">
 		<div class="columns_flex f20">
-			<a class="">店铺首页</a>
-			<a>限时抢购</a>
-			<a>新品尝鲜</a>
+			<a  href="javascript:void (0)" class="column_type current">场景</a>
+			<a >云推客</a>
+			<a href="javascript:void (0)">线上</a>
+			<a href="javascript:void (0)">线下</a>
+			<a href="javascript:void (0)">视频</a>
+			<a href="javascript:void (0)">直播</a>
 		</div>
 	</section>
 	<section class="content-marginLeft separation-line">
@@ -115,8 +146,7 @@
 
 		//点击新建促销活动
 		$('body').on('click','.addSalesActivity',function () {
-			var storeType=$('.store-type.current').data('type');
-			location.href = module + 'promotion/edit/storeType/'+storeType;
+			location.href = module + 'promotion/edit'
 		});
 
 		//促销活动状态

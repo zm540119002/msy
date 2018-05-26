@@ -12,7 +12,6 @@ class GoodsBase extends Validate
         'name'  =>  'require|max:18',
         'trait' =>  'require|max:28',
         'retail_price' =>  'require',
-        'settle_price' =>  'require',
         'sale_price' =>  'require',
         'cat_id_1' =>  'require',
         'thumb_img' =>  'require',
@@ -28,7 +27,6 @@ class GoodsBase extends Validate
         'trait.require'   => '请填写商品特点',
         'trait.max'   => '商品特点字数不能超过28字',
         'retail_price.require'   => '请填写零售价格',
-        'settle_price.require'   => '请填写结算价格',
         'sale_price.require'   => '请填写销售价格',
         'thumb_img.require'   => '请上传缩略图',
         'tag.require'   => '请选择标签',
@@ -42,7 +40,7 @@ class GoodsBase extends Validate
     protected $scene = [
         'add'   =>  ['name','trait','retail_price','settle_price','thumb_img','tab','main_img','parameters','details_img'],
         'edit'  =>  ['name','trait','retail_price','settle_price','thumb_img','tab','main_img','parameters','details_img'],
-        'admin_edit'  =>  ['trait'],
+
     ];
 
 
