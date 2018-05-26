@@ -142,7 +142,22 @@
 				btn:['确定'],
 				yes:function(index){
 					var postData = {};
-
+					var content = '';
+					postData.name = $('.addCcountLayer').find('[name=name]').val();
+					postData.mobile_phone = $('.addCcountLayer').find('[mobile_phone=mobile_phone]').val();
+					if(!userFactoryRoleIds.length){
+						content = '请设置角色';
+					}
+					postData.userFactoryRoleIds = userFactoryRoleIds;
+					postData.userFactoryOrganizeId = userFactoryOrganizeId;
+					$.post(action,postData,function(data){
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							$('ul.account-list ').append(data);
+							layer.close(index);
+						}
+					});
 					layer.close(index);
 				}
 			});

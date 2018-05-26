@@ -5,11 +5,15 @@ class Account extends FactoryBase
 {
     //首页
     public function index(){
-        $modelUser = new \common\model\User();
         if(request()->isAjax()){
-            $info = $modelUser->edit();
-            $this->assign('info',$info);
-            return view('info_tpl');
+            $modelAccount = new \app\factory\model\Account();
+            $info = $modelAccount->edit();
+            if($info.status==0){
+                return $info;
+            }else{
+                $this->assign('info',$info);
+                return view('info_tpl');
+            }
         }else{
             $modelRole = new \app\factory\model\Role();
             $list = $modelRole->getList($this->factory['id']);
