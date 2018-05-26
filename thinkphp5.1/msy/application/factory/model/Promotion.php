@@ -79,11 +79,6 @@ class Promotion extends Model {
 		if($keyword){
 			$where[] = ['p.name', 'like', '%'.trim($keyword).'%'];
 		}
-
-		$field = array(
-			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
-			'g.name as goods_name','g.retail_price'
-		);
 		$order = ['id'=>'desc','sort'=>'desc'];
 		$where = array_merge($_where, $where);
 		$order = array_merge($_order, $order);

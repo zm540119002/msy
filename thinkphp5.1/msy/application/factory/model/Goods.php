@@ -170,21 +170,16 @@ class Goods extends Model {
 		$where = [
 			['g.status', '=', 0],
 		];
-
 		$keyword = input('get.keyword','');
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
-		$join =[
-
-		];
 		$order = ['id'=>'desc'];
 		$where = array_merge($_where, $where);
-		$join = array_merge($_join,$join);
 		$order = array_merge($_order,$order);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->alias('g')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+		return $this->alias('g')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 	}
 
 
