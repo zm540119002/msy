@@ -131,7 +131,7 @@ class Goods extends StoreBase
     public function getList(){
         $model = new\app\factory\model\Goods;
         $where = [
-            ['gb.store_id','=',$this->store['id']],
+            ['g.store_id','=',$this->store['id']],
         ];
         $list = $model -> pageQuery($where);
         $this->assign('list',$list);
