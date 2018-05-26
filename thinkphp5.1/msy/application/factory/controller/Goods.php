@@ -103,7 +103,12 @@ class Goods extends StoreBase
         $where = [
             ['g.store_id','=',$this->store['id']],
         ];
-        $list = $model -> pageQuery($where);
+        $file = [
+            'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
+                g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,
+                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters'
+        ];
+        $list = $model -> pageQuery($where,$file);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'promotion' ){//促销

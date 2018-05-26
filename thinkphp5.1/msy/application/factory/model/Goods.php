@@ -166,7 +166,7 @@ class Goods extends Model {
 	 * @param string $_order
 	 * @return \think\Paginator
 	 */
-	public function pageQuery($_where=[],$_field=[],$_join=[],$_order=[]){
+	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
 		$where = [
 			['g.status', '=', 0],
 		];
@@ -175,23 +175,16 @@ class Goods extends Model {
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
-		$file = [
-			'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters'
-		];
 		$join =[
 
 		];
 		$order = ['id'=>'desc'];
 		$where = array_merge($_where, $where);
-		$field = array_merge($_field,$file);
 		$join = array_merge($_join,$join);
 		$order = array_merge($_order,$order);
-
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->alias('g')->join($join)->where($where)->field($field)->order($order)->paginate($pageSize);
+		return $this->alias('g')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 	}
 
 
