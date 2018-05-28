@@ -52,7 +52,7 @@ class Order extends Model
             $sql .= ";insert into order_detail(order_sn, goods_id, number, goods_price, store_id, thumb_img)
            values('{$order_sn}',{$v['goods_id']},{$v['number']},{$v['sale_price']},{$v['store_id']},'{$v['thumb_img']}')";
         }
-        $sql = trim($sql, ';');echo $sql; dump ($this->execute($sql) );exit;
+        $sql = trim($sql, ';');
         $this->startTrans();
         try{
             $order = $this->create([
@@ -64,7 +64,8 @@ class Order extends Model
                 'remark' => '星期六派送',
                 'create_time' => time(),
             ], ['order_sn', 'amount', 'user_id', 'source', 'address_id', 'remark', 'create_time']);
-            $this->query($sql);
+            //$this->query($sql);
+            $this->execute($sql);
             //$cart->where(['user_id'=>$user_id])->delete();
             $this->commit();
             return successMsg('添加订单成功');
