@@ -25,8 +25,7 @@ class Account extends \think\Model {
 		//修改用户
 		if($postData['id'] && intval($postData['id'])){
 			$res = $this->isUpdate(true)->save($postData);
-			return $this->getLastSql();
-			if(!$res){
+			if($res==false){
 				$this->rollback();//回滚事务
 				return errorMsg('更新失败',$this->getError());
 			}
