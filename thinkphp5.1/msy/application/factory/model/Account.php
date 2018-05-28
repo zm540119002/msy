@@ -12,25 +12,44 @@ class Account extends \think\Model {
 	//编辑
 	public function edit($factoryId){
 		$postData = input('post.');
+		//用户数据验证
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('edit')->check($postData)){
 			return errorMsg($validateUser->getError());
 		}
+		//用户表
 		if($postData['id'] && intval($postData['id'])){
-			$this->isUpdate(true)->save($postData);
+			$res = $this->isUpdate(true)->save($postData);
+			if(!$res){
+				return errorMsg('更新失败',$this->getError());
+			}
 		}else{
 			if(!intval($factoryId)){
 				return errorMsg('参数错误');
 			}
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
-			$this->save($postData);
+			$res = $this->save($postData);
+			if(!$res){
+				return errorMsg('新增失败',$this->getError());
+			}
 			$postData['id'] = $this->getAttr('id');
 		}
-		if(!$this->getAttr('id')){
-			return errorMsg('失败',$this->getError());
-		}
+		//用户-工厂-关系表
+
 		return successMsg('成功！',$postData);
+	}
+
+	public function factory(){
+		return $this->belongsToMany('Factory');
+	}
+
+	public function roles(){
+		return $this->belongsToMany('Role');
+	}
+
+	public function userFactoryOrganize(){
+		return $this->hasOne('UserFactoryOrganize','user_id');
 	}
 
 	//获取列表
