@@ -175,8 +175,6 @@ class Goods extends StoreBase
 
     //商品备份
     public function backup(){
-        $a=filectime(request()->domain()."/robots.txt");
-        $a=file_get_contents(request()->domain()."/robots.txt");
-        echo $a;
+        file_put_contents(config('upload_dir.upload_path').'/a.txt',"Hello World. Testing!");
     }
 }
