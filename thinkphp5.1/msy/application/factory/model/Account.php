@@ -35,7 +35,7 @@ class Account extends \think\Model {
 		}else{//新增用户
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
-			$res = $this->save($postData);
+			$res = $this->isUpdate(false)->save($postData);
 			if(!$res){
 				$this->rollback();//回滚事务
 				return errorMsg('新增失败',$this->getError());
