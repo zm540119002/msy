@@ -25,7 +25,7 @@ class Account extends \think\Model {
 		//修改用户
 		if($postData['id'] && intval($postData['id'])){
 			$res = $this->isUpdate(true)->save($postData);
-			if($res==false){
+			if($res===false){
 				$this->rollback();//回滚事务
 				return errorMsg('更新失败',$this->getError());
 			}
@@ -35,7 +35,7 @@ class Account extends \think\Model {
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
 			$res = $this->isUpdate(false)->save($postData);
-			if($res==false){
+			if($res===false){
 				$this->rollback();//回滚事务
 				return errorMsg('新增失败',$this->getError());
 			}

@@ -21,7 +21,7 @@ class Organize extends \think\Model {
 		if($postData['id'] && intval($postData['id'])){
 			$postData['update_time'] = time();
 			$res = $this->isUpdate(true)->save($postData);
-			if($res==false){
+			if($res===false){
 				return errorMsg('更新失败',$this->getError());
 			}
 		}else{
@@ -29,7 +29,7 @@ class Organize extends \think\Model {
 			$postData['create_time'] = time();
 			$postData['superior_id'] = $postData['organize_id'];
 			$res = $this->isUpdate(false)->save($postData);
-			if($res==false){
+			if($res===false){
 				return errorMsg('新增失败',$this->getError());
 			}
 			$postData['id'] = $this->getAttr('id');
