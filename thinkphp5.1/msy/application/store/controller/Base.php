@@ -2,7 +2,6 @@
 namespace app\store\controller;
 
 use think\Controller;
-//use think\facade\Request;
 
 class Base extends Controller
 {

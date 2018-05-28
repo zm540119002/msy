@@ -73,16 +73,21 @@ class Cart extends Model {
         return errorMsg('添加购物车失败');
     }
 
+    /**
+     * 获取购物车商品列表
+     * @param $user_id
+     * @return array|\PDOStatement|string|\think\Collection
+     */
     public function getCartList($user_id)
     {
         return $this->alias('a')
-                ->join('msy_factory.goods_base b ', 'a.goods_id=b.id', 'LEFT')
-                ->where(['a.user_id'=>$user_id])->field('a.*, b.thumb_img')->select();
+                ->join('goods b ', 'a.goods_id=b.id', 'LEFT')
+                ->where(['a.user_id'=>$user_id])->field('a.*, b.name, b.thumb_img')->select();
     }
 
     public function deleteGoods($user_id, $goods_id)
     {
         return $this->where(['user_id'=>$user_id, 'goods_id'=>$goods_id])->delete();
     }
-
+    
 }

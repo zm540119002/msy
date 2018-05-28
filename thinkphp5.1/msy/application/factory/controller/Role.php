@@ -9,6 +9,9 @@ class Role extends FactoryBase
         $modelRole = new \app\factory\model\Role();
         if(request()->isAjax()){
             $info = $modelRole->edit($this->factory['id']);
+            if($info['status']==0){
+                return $info;
+            }
             $this->assign('info',$info);
             return view('info_tpl');
         }else{

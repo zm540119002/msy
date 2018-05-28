@@ -70,7 +70,6 @@ return [
         'password'    => 'msy',// 数据库密码
         'charset'     => 'utf8',// 数据库编码默认采用utf8
     ],
-
     //数据库配置-厂商
     'db_config_msy' => [
         'type'        => 'mysql',// 数据库类型

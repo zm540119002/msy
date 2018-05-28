@@ -13,7 +13,7 @@ use think\facade\Session;
 use app\store\model\Cart as CartModel;
 use app\store\model\Address;
 use app\store\model\Goods;
-use app\store\model\store;
+//use app\store\model\store;
 
 /**
  * 购物车控制器

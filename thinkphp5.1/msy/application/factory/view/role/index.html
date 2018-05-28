@@ -81,8 +81,12 @@
 					var postData = {};
 					postData.name = $('div.groupRole').find('input').val();
 					$.post(action,postData,function(data){
-						$('ul.role-list').append(data);
-						layer.close(index);
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							$('ul.role-list').append(data);
+							layer.close(index);
+						}
 					});
 				}
 			});
@@ -104,8 +108,12 @@
 					postData.id = _thisLi.data('id');
 					postData.name = $('div.groupRole').find('input').val();
 					$.post(action,postData,function(data){
-						_thisLi.replaceWith(data);
-						layer.close(index);
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							_thisLi.replaceWith(data);
+							layer.close(index);
+						}
 					});
 				}
 			});
