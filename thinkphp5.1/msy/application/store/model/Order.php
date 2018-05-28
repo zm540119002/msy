@@ -49,14 +49,13 @@ class Order extends Model
                 return errorMsg('【'.$v['name'].'】库存不足，不能购买！');
             }
             $amount += $v['number']*$v['sale_price'];
-            $sql .= ";insert into order_detail(order_sn, goods_id, number, goods_price, store_id, thumb_img, name)
-           values('{$order_sn}',{$v['goods_id']},{$v['number']},{$v['sale_price']},{$v['store_id']},'{$v['thumb_img']}',
-           {$v['name']})";
+            $sql .= ";insert into order_detail(order_sn, goods_id, number, goods_price, store_id, thumb_img)
+           values('{$order_sn}',{$v['goods_id']},{$v['number']},{$v['sale_price']},{$v['store_id']},'{$v['thumb_img']}')";
         }
-        $sql = trim($sql, ';');
-        static::startTrans();
+        $sql = trim($sql, ';');echo $sql; dump ($this->execute($sql) );exit;
+        $this->startTrans();
         try{
-            $order = static::create([
+            $order = $this->create([
                 'order_sn' => $order_sn,
                 'amount' => $amount,
                 'user_id' => $user_id,
@@ -65,12 +64,12 @@ class Order extends Model
                 'remark' => '星期六派送',
                 'create_time' => time(),
             ], ['order_sn', 'amount', 'user_id', 'source', 'address_id', 'remark', 'create_time']);
-            static::execute($sql);
-            $cart->where(['user_id'=>$user_id])->delete();
-            static::commit();
+            $this->query($sql);
+            //$cart->where(['user_id'=>$user_id])->delete();
+            $this->commit();
             return successMsg('添加订单成功');
         } catch (\Exception $e) {
-            static::rollback(); // 回滚事务
+            $this->rollback(); // 回滚事务
             return errorMsg('添加订单失败');
         }
     }
