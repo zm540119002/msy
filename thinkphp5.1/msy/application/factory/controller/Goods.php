@@ -135,6 +135,15 @@ class Goods extends StoreBase
     //商品管理展示页
     public function manage(){
         $this->assign('factory',$this->factory);
+        //查看本店商品是否存在备份文件
+        //存储路径
+        $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
+        //店铺商品备份文件名
+        $fileName = $storePath.$this->store['id'].'.txt';
+        if(file_exists($fileName)){
+            $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
+            $this -> assign('backupTime',$backupTime);
+        }
         return $this->fetch();
     }
     //设置商品库存
@@ -175,6 +184,35 @@ class Goods extends StoreBase
 
     //商品备份
     public function backup(){
-        file_put_contents(config('upload_dir.upload_path').'/a.txt',"Hello World. Testing!");
+        if(request()->isPost()){
+            $model = new \app\factory\model\Goods;
+            $where = [
+                ['store_id','=',$this->store['id']]
+            ];
+            $field = [
+                'g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
+            g.retail_price,g.retail_price,g.sale_price,g.settle_price'
+            ];
+            $goodsList = $model -> getList($where,$field);
+            $goodsList = json_encode($goodsList);
+            $uploadPath = config('upload_dir.upload_path');
+            if(!is_dir($uploadPath)){
+                if(!mk_dir($uploadPath)){
+                    return  errorMsg('创建Uploads目录失败');
+                }
+            }
+            $uploadPath = realpath($uploadPath);
+            //存储路径
+            $storePath = $uploadPath.'/'.config('upload_dir.factory_goods_backup');
+            if(!mk_dir($storePath)){
+                return errorMsg('创建临时目录失败');
+            }
+            //按店Id为文件名保存数据
+            $fileName = $storePath.$this->store['id'].'.txt';
+            file_put_contents($fileName,$goodsList);
+            //创建时间
+            $fileCreateTime = ['create_time'=>date("Y年m月d日 H:i:s",filemtime($fileName))];
+            return successMsg('成功',$fileCreateTime);
+        }
     }
 }

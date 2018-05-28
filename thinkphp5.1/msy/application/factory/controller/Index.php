@@ -8,10 +8,6 @@ class Index extends UserBase
      */
     public function index()
     {
-
-        file_put_contents(config('upload_dir.upload_path').'/a.txt',"Hello World. Testing!");
-        $a=filectime(config('upload_dir.upload_path').'/a.txt');
-        echo $a;exit;
         $model = new \app\factory\model\UserFactory();
         $uid = $this -> user['id'];
         $where = [ ['user_id','=',$uid] ];
