@@ -35,7 +35,7 @@ class Account extends \think\Model {
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
 			$res = $this->isUpdate(false)->save($postData);
-			if(!$res){
+			if($res==false){
 				$this->rollback();//回滚事务
 				return errorMsg('新增失败',$this->getError());
 			}
