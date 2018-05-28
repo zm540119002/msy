@@ -103,6 +103,9 @@ class Goods extends StoreBase
         $where = [
             ['g.store_id','=',$this->store['id']],
         ];
+        if($_GET['pageType'] == 'promotion' ){//促销
+            $where[] =  ['g.sale_type','=',0];
+        }
         $file = [
             'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,

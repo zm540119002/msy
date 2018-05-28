@@ -32,7 +32,7 @@ class Promotion extends Model {
 				['store_id','=',$storeId],
 			];
 			$file = array(
-				'img',
+				'img,goods_id',
 			);
 			$oldInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
@@ -53,7 +53,14 @@ class Promotion extends Model {
 		$result = $modelGoods ->save(['sale_type'=>1],['id' => $data['goods_id'],'store_id'=>$storeId]);
 		if(false === $result){
 			$this ->rollback();
-			return errorMsg($modelGoods->getLastSql());
+			return errorMsg('失败');
+		}
+		if(!empty($oldInfo) && $oldInfo['goods_id'] != $data['goods_id']){ //如换商品，把旧商品销售类型改为普通商品类型
+			$result = $modelGoods ->save(['sale_type'=>0],['id' => $oldInfo['goods_id'],'store_id'=>$storeId]);
+			if(false === $result){
+				$this ->rollback();
+				return errorMsg('失败');
+			}
 		}
 		$this ->commit();
 		if(input('?post.promotion_id')){//修改成功后，删除旧图
@@ -79,11 +86,6 @@ class Promotion extends Model {
 		if($keyword){
 			$where[] = ['p.name', 'like', '%'.trim($keyword).'%'];
 		}
-
-		$field = array(
-			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
-			'g.name as goods_name','g.retail_price'
-		);
 		$order = ['id'=>'desc','sort'=>'desc'];
 		$where = array_merge($_where, $where);
 		$order = array_merge($_order, $order);
