@@ -19,6 +19,6 @@ class OrderDetail extends Model
     //被关联模型
     public function order()
     {
-        return $this->hasMany('Order', 'order_sn');
+        return $this->hasMany('Order', 'order_id');
     }
 }

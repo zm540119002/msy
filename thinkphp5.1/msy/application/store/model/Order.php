@@ -69,7 +69,7 @@ class Order extends Model
                 'remark' => '星期六派送',
                 'create_time' => time(),
             ], ['order_sn', 'amount', 'user_id', 'source', 'address_id', 'remark', 'create_time']);
-            $this->orderDetail()->saveAll($data);
+            $this->orderDetail()->insertAll($data);
             $this->orderDetail()->where(['order_sn'=>$order_sn])->setField(['order_id'=>$order['order_id']]);
             $cart->where(['user_id'=>$user_id])->delete();
             $this->commit();

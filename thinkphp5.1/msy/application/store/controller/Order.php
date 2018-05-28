@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
+ * User: mr.wei
  * Date: 2018/5/21
  * Time: 14:09
  * 订单控制器
@@ -11,7 +11,6 @@ namespace app\store\controller;
 use common\controller\UserBase;
 use think\facade\Session;
 use app\store\model\Order as OrderModel;
-use app\store\model\Cart;
 
 class Order extends UserBase
 {
@@ -35,14 +34,13 @@ class Order extends UserBase
      */
     public function addOrder($address_id)
     {
-        //$cart = new Cart();
         return  $this->order->addOrder(Session::get('user.id'), $address_id);
     }
 
     //订单列表
     public function index()
     {
-        $a = $this->order->orderDetail()->get(8);
+        $a = $this->order->orderDetail()->where(['order_id'=>112])->select();
         dump($a);
         //$this->fetch();
     }
