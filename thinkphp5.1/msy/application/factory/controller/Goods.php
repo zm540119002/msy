@@ -172,4 +172,11 @@ class Goods extends StoreBase
         }
         return $this -> fetch();
     }
+
+    //商品备份
+    public function backup(){
+        $a=filectime(request()->domain()."/robots.txt");
+        $a=file_get_contents(request()->domain()."/robots.txt");
+        echo $a;
+    }
 }
