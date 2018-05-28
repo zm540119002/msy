@@ -24,7 +24,7 @@ class Address extends Model
      * @return array
      */
     public function getAddress($user_id, $is_default=false)
-    {   
+    {
         $address = $this->where(['user_id'=>$user_id])->order('address_id asc')->select()->toArray();
         if(!$address||!is_array($address)||count($address)<=0){
             return errorMsg('请添加地址');
@@ -75,11 +75,10 @@ class Address extends Model
     }
 
     /**
-     * 设置默认地址
+     * 设置默认地址  【暂保留】与updateAddress()方法重复
      * @param $user_id
      * @param $address_id
      * @return array
-     */
     public function setDefault($user_id, $address_id)
     {
         $ret = $this->allowField('is_default')
@@ -88,7 +87,7 @@ class Address extends Model
             return successMsg('设置默认地址成功');
         }
         return errorMsg('设置默认地址失败');
-    }
+    }*/
 
     /**
      * 修改地址
