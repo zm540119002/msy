@@ -39,9 +39,11 @@ class Order extends UserBase
         return  $this->order->addOrder(Session::get('user.id'), $address_id);
     }
 
+    //订单列表
     public function index()
     {
-        //订单列表
-        $this->fetch();
+        $a = $this->order->orderDetail()->get(8);
+        dump($a);
+        //$this->fetch();
     }
 }

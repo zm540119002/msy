@@ -10,6 +10,8 @@ use think\Db;
 class Promotion extends Model {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'promotion';
+	// 设置主键
+	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 	/**
@@ -26,9 +28,9 @@ class Promotion extends Model {
 		}
 		$data['store_id'] = $storeId;
 		$this ->startTrans();
-		if(input('?post.promotion_id')){//修改
+		if(input('?post.id')){//修改
 			$where = [
-				['id','=',$data['promotion_id']],
+				['id','=',$data['id']],
 				['store_id','=',$storeId],
 			];
 			$file = array(
@@ -36,7 +38,7 @@ class Promotion extends Model {
 			);
 			$oldInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
-			$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'store_id'=>$storeId]);
+			$result = $this -> allowField(true) -> save($data,['id' => $data['id'],'store_id'=>$storeId]);
 			if(false == $result){
 				$this ->rollback();
 				return errorMsg('失败');
@@ -63,10 +65,34 @@ class Promotion extends Model {
 			}
 		}
 		$this ->commit();
-		if(input('?post.promotion_id')){//修改成功后，删除旧图
+		if(input('?post.id')){//修改成功后，删除旧图
 			delImgFromPaths($oldInfo['img'],$data['img']);
 		}
 		return successMsg("成功");
+	}
+
+	/**
+	 * 删除
+	 */
+	public function del($storeId,$tag = true){
+		$data = input('post.');
+		$where = [
+			['store_id','=',$storeId]
+		];
+		if(is_array($data['id'])){
+			$where[] = ['id','in',$data['id']];
+		}else{
+			$where[] = ['id','=',$data['id']];
+		}
+		if($tag){//标记删除
+			$result = $this->where($where)->setField('status',2);
+		}else{
+			$result = $this->where($where)->delete();
+		}
+		if(false !== $result){
+			return successMsg("已删除");
+		}
+		return errorMsg('失败');
 	}
 	
 	//分页查询

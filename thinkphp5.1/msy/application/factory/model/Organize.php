@@ -20,21 +20,21 @@ class Organize extends \think\Model {
 		}
 		if($postData['id'] && intval($postData['id'])){
 			$postData['update_time'] = time();
-			$this->isUpdate(true)->save($postData);
+			$res = $this->isUpdate(true)->save($postData);
+			if($res==false){
+				return errorMsg('更新失败',$this->getError());
+			}
 		}else{
 			unset($postData['id']);
 			$postData['create_time'] = time();
 			$postData['superior_id'] = $postData['organize_id'];
-			$this->save($postData);
+			$res = $this->isUpdate(false)->save($postData);
+			if($res==false){
+				return errorMsg('新增失败',$this->getError());
+			}
+			$postData['id'] = $this->getAttr('id');
 		}
-		if(!$this->getAttr('id')){
-			return errorMsg('失败',$this->getError());
-		}
-		if($postData['id'] && intval($postData['id'])){
-			return successMsg('成功！',array('id'=>$this->getAttr('id')));
-		}else{
-			return successMsg('成功！',array_merge(array('id'=>$this->getAttr('id')),$postData));
-		}
+		return successMsg('成功！',$postData);
 	}
 
 	//获取组织列表

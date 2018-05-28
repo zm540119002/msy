@@ -10,18 +10,10 @@ use think\Controller;
 
 class Nostore extends Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function index()
     {
         return $this->fetch();
     }
 
-    public function test()
-    {
-        return Order::addOrder();
-    }
 }
