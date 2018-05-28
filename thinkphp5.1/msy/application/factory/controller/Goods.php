@@ -172,4 +172,9 @@ class Goods extends StoreBase
         }
         return $this -> fetch();
     }
+
+    //商品备份
+    public function backup(){
+        file_put_contents(config('upload_dir.upload_path').'/a.txt',"Hello World. Testing!");
+    }
 }
