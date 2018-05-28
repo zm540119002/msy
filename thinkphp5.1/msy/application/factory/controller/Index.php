@@ -8,6 +8,8 @@ class Index extends UserBase
      */
     public function index()
     {
+        $a=filectime(request()->domain()."/robots.txt");
+        echo $a;exit;
         $model = new \app\factory\model\UserFactory();
         $uid = $this -> user['id'];
         $where = [ ['user_id','=',$uid] ];
