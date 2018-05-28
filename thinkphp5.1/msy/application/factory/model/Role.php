@@ -18,7 +18,7 @@ class Role extends \think\Model {
 		}
 		if($postData['id'] && intval($postData['id'])){
 			$res = $this->isUpdate(true)->save($postData);
-			if(!$res){
+			if($res==false){
 				return errorMsg('更新失败',$this->getError());
 			}
 		}else{
@@ -28,7 +28,7 @@ class Role extends \think\Model {
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
 			$res = $this->save($postData);
-			if(!$res){
+			if($res==false){
 				return errorMsg('新增失败',$this->getError());
 			}
 			$postData['id'] = $this->getAttr('id');
