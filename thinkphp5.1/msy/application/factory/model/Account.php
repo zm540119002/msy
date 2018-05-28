@@ -40,27 +40,56 @@ class Account extends \think\Model {
 				return errorMsg('新增失败',$this->getError());
 			}
 			$postData['id'] = $this->getAttr('id');
-			//新增用户角色
+			//新增用户工厂
+			$user = $this->get($postData['id']);
+			$userFactory = $user->userFactory();
+			if(empty($userFactory)){
+				$data = [
+					'user_id' => $postData['id'],
+					'factory_id' => $factoryId,
+					'type' => 2,
+				];
+				$userFactory->save($data);
+			}
+			//新增用户工厂角色
 			if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
-				$this->roles()->attach($postData['userFactoryRoleIds']);
+				foreach ($postData['userFactoryRoleIds'] as $key){
+					$data = [];
+					$data[] = [
+						'user_id' => $postData['id'],
+						'factory_id' => $factoryId,
+						'role_id' => $key,
+					];
+				}
+				$user->UserFactoryRole()->saveAll($data);
+			}
+			//新增用户工厂组织
+			if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
+				$data = [
+					'user_id' => $postData['id'],
+					'factory_id' => $factoryId,
+					'organize_id' => $postData['userFactoryOrganizeId'],
+				];
+				$user->userFactoryOrganize()->save($data);
 			}
 		}
 		$this->commit();//提交事务
-		//用户-工厂-关系表
-		//用户-工厂-角色-关系表
 		return successMsg('成功！',$postData);
 	}
 
-	public function factory(){
-		return $this->belongsToMany('Factory');
+	//用户-工厂-关系表
+	public function userFactory(){
+		return $this->hasMany('UserFactory','factory_id','id');
 	}
 
-	public function roles(){
-		return $this->belongsToMany('Role','\app\factory\model\UserFactoryRole','role_id','user_id');
+	//用户-工厂-角色-关系表
+	public function UserFactoryRole(){
+		return $this->hasMany('UserFactoryRole','role_id','id');
 	}
 
+	//用户-工厂-组织-关系表
 	public function userFactoryOrganize(){
-		return $this->hasOne('UserFactoryOrganize','user_id');
+		return $this->hasOne('UserFactoryOrganize','id');
 	}
 
 	//获取列表

@@ -27,7 +27,7 @@ class Role extends \think\Model {
 			}
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
-			$res = $this->save($postData);
+			$res = $this->isUpdate(false)->save($postData);
 			if($res===false){
 				return errorMsg('新增失败',$this->getError());
 			}
