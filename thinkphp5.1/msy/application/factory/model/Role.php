@@ -17,18 +17,21 @@ class Role extends \think\Model {
 			return errorMsg($validateRole->getError());
 		}
 		if($postData['id'] && intval($postData['id'])){
-			$this->isUpdate(true)->save($postData);
+			$res = $this->isUpdate(true)->save($postData);
+			if(!$res){
+				return errorMsg('更新失败',$this->getError());
+			}
 		}else{
 			if(!intval($factoryId)){
 				return errorMsg('参数错误');
 			}
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
-			$this->save($postData);
+			$res = $this->save($postData);
+			if(!$res){
+				return errorMsg('新增失败',$this->getError());
+			}
 			$postData['id'] = $this->getAttr('id');
-		}
-		if(!$this->getAttr('id')){
-			return errorMsg('失败',$this->getError());
 		}
 		return successMsg('成功！',$postData);
 	}

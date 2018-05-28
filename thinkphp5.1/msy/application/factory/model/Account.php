@@ -11,32 +11,44 @@ class Account extends \think\Model {
 
 	//编辑
 	public function edit($factoryId){
+		if(!intval($factoryId)){
+			return errorMsg('缺少供应商ID');
+		}
 		$postData = input('post.');
 		//用户数据验证
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('edit')->check($postData)){
 			return errorMsg($validateUser->getError());
 		}
-		//用户表
+		//开启事务
+		$this->startTrans();
+		//修改用户
 		if($postData['id'] && intval($postData['id'])){
 			$res = $this->isUpdate(true)->save($postData);
+			return $this->getLastSql();
 			if(!$res){
+				$this->rollback();//回滚事务
 				return errorMsg('更新失败',$this->getError());
 			}
-		}else{
-			if(!intval($factoryId)){
-				return errorMsg('参数错误');
-			}
+			$roles = $this->roles();
+			return $roles;
+		}else{//新增用户
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
 			$res = $this->save($postData);
 			if(!$res){
+				$this->rollback();//回滚事务
 				return errorMsg('新增失败',$this->getError());
 			}
 			$postData['id'] = $this->getAttr('id');
+			//新增用户角色
+			if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
+				$this->roles()->attach($postData['userFactoryRoleIds']);
+			}
 		}
+		$this->commit();//提交事务
 		//用户-工厂-关系表
-
+		//用户-工厂-角色-关系表
 		return successMsg('成功！',$postData);
 	}
 
@@ -45,7 +57,7 @@ class Account extends \think\Model {
 	}
 
 	public function roles(){
-		return $this->belongsToMany('Role');
+		return $this->belongsToMany('Role','\app\factory\model\UserFactoryRole','role_id','user_id');
 	}
 
 	public function userFactoryOrganize(){
