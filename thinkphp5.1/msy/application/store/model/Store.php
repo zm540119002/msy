@@ -37,36 +37,5 @@ class Store extends Model {
         }
         return errorMsg('非法店铺');
     }
-
-    /**
-     *根据店铺ID获取商品列表
-     *
-     * @param int $id  店铺ID
-     * @return  array
-     */
-    public function getGoodsList($id)
-    {
-        return Db::table('msy_factory.goods_base')->alias('a')
-            ->field('a.id, a.name, a.retail_price, a.thumb_img, a.store_id, b.sale_price')
-            ->join('msy_factory.goods b', 'a.id=b.goods_base_id', 'LEFT')
-            ->where(['a.store_id'=>$id])
-            ->select();
-    }
-
-    /**
-     * 根据商品ID，获取单个的商品信息
-     *
-     * @param int $goods_id 商品ID
-     * @return mixed
-     */
-    public function getGoods($goods_id)
-    {   //? 此方法待修改
-        return Db::table('msy_factory.goods_base')->alias('a')
-            ->field('a.id, a.name, a.retail_price, a.thumb_img, a.store_id, b.sale_price')
-            ->join('msy_factory.goods b', 'a.id=b.goods_base_id', 'LEFT')
-            ->where(['a.id'=>$goods_id])
-            ->limit(1)
-            ->select();
-    }
     
 }

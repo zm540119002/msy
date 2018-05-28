@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
+ * User: mr.wei
  * Date: 2018/5/26
  * Time: 11:18
  * 商品模型
@@ -15,13 +15,7 @@ class Goods extends Model
     protected $table = 'goods';
     protected $connection = 'db_config_factory';
     protected $pk = 'id';
-
-    //相对的关联
-    public function goodsBase()
-    {
-        return $this->belongsTo('GoodsBase');
-    }
-
+    
     /**
      * 检测商品是否可添加购物车
      *
@@ -32,10 +26,8 @@ class Goods extends Model
      */
     public function hasGoods($store_id, $goods_id, $number)
     {
-        $goods = $this->alias('a')
-            ->join('msy_factory.goods_base b', 'a.goods_base_id=b.id', 'INNER')
-            ->field('a.id, a.inventory, a.status, a.shelf_status, a.sale_price, b.name')
-            ->where(['a.store_id'=>$store_id, 'a.id'=>$goods_id])
+        $goods = $this->field('id, inventory, status, shelf_status, sale_price, name')
+            ->where(['store_id'=>$store_id, 'id'=>$goods_id])
             ->find();
         if(is_null($goods)){
             return errorMsg('商品已不存在');
@@ -53,6 +45,32 @@ class Goods extends Model
             return errorMsg('【'.$goods->name.'】已下架');
         }
         return successMsg('已加入购物车');
+    }
+
+    /**
+     * 获取店铺商品列表
+     * @param $store_id
+     * @return \think\Paginator
+     */
+    public function getList($store_id)
+    {
+        return $this->field('id, name, retail_price, thumb_img, store_id, sale_price')
+                ->where(['store_id'=>$store_id, 'shelf_status'=>3, 'status'=>0])
+                ->where('inventory', '>', 0)
+                ->paginate(2);
+    }
+
+    /**
+     * 获取单个店铺商品明细
+     * @param $store_id
+     * @param $goods_id
+     * @return array|\PDOStatement|string|\think\Collection
+     */
+    public function getDetail($store_id, $goods_id)
+    {
+        return $this->field('id, name, thumb_img, store_id, sale_price')
+                ->where(['id'=>$goods_id, 'store_id'=>$store_id, 'shelf_status'=>3, 'status'=>0])
+                ->select();
     }
 
 }
