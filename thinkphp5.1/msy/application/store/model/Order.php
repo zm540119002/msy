@@ -39,7 +39,7 @@ class Order extends Model
             return errorMsg('请添加结算商品');
         }
         $amount = 0.00;
-        $sql = '';
+        $data = [];
         $order_sn = $this->createOrderSn();
         foreach($detail as $v){
             if($v['sale_price']<=0.00){
@@ -49,10 +49,15 @@ class Order extends Model
                 return errorMsg('【'.$v['name'].'】库存不足，不能购买！');
             }
             $amount += $v['number']*$v['sale_price'];
-            $sql .= ";insert into order_detail(order_sn, goods_id, number, goods_price, store_id, thumb_img)
-           values('{$order_sn}',{$v['goods_id']},{$v['number']},{$v['sale_price']},{$v['store_id']},'{$v['thumb_img']}')";
+            $data[] = [ 'order_sn' => $order_sn,
+                    'goods_id' =>$v['goods_id'],
+                    'number' => $v['number'],
+                    'goods_price' => $v['sale_price'],
+                    'store_id' => $v['store_id'],
+                    'thumb_img' => $v['thumb_img'],
+                    'name' =>   $v['name']
+                ];
         }
-        $sql = trim($sql, ';');
         $this->startTrans();
         try{
             $order = $this->create([
@@ -64,9 +69,9 @@ class Order extends Model
                 'remark' => '星期六派送',
                 'create_time' => time(),
             ], ['order_sn', 'amount', 'user_id', 'source', 'address_id', 'remark', 'create_time']);
-            //$this->query($sql);
-            $this->execute($sql);
-            //$cart->where(['user_id'=>$user_id])->delete();
+            $this->orderDetail()->insertAll($data);
+            $this->orderDetail()->where(['order_sn'=>$order_sn])->setField(['order_id'=>$order['order_id']]);
+            $cart->where(['user_id'=>$user_id])->delete();
             $this->commit();
             return successMsg('添加订单成功');
         } catch (\Exception $e) {
@@ -91,6 +96,6 @@ class Order extends Model
     //关联模型
     public function orderDetail()
     {
-        return $this->hasMany('OrderDetail', 'order_sn');
+        return $this->belongsTo('OrderDetail');
     }
 }

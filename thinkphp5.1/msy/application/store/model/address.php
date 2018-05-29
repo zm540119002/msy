@@ -67,7 +67,7 @@ class Address extends Model
         if($count>=5){
             return errorMsg('最多只能5个地址');
         }
-        $ret = static::create($data, ['user_id', 'consignee', 'phone', 'detail', 'is_default']);
+        $ret = $this->create($data, ['user_id', 'consignee', 'phone', 'detail', 'is_default']);
         if($ret){
             return successMsg('新增地址成功');
         }
