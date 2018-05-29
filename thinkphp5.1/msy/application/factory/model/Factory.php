@@ -76,11 +76,8 @@ class Factory extends Model {
 			->join(array_merge($_join,$join))
 			->order($order)
 			->limit($limit)
-			->select();
-		if(!empty($list)){
-			$list = $list ->toArray();
-		}
-		return $list;
+			->select()->toArray();
+		return empty($list)?[]:$list;
 	}
 
 	/**查找一条数据
@@ -96,10 +93,7 @@ class Factory extends Model {
 			->field($field)
 			->join(array_merge($_join,$join))
 			->where($where)
-			->find();
-		if(!empty($info)){
-			$info = $info ->toArray();
-		}
-		return $info;
+			->find()->toArray();
+		return empty($info)?[]:$info;
 	}
 }
