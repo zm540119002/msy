@@ -19,8 +19,8 @@ class Promotion extends StoreBase
         if(request()->isPost()){
             return $model -> edit($this->store['id']);
         }
-        if(input('?promotion_id')){
-            $promotionId = (int)input('promotion_id');
+        if(input('?id')){
+            $promotionId = (int)input('id');
             $where = [
                 ['p.id','=',$promotionId],
                 ['p.store_id','=',$this->store['id']],
@@ -68,7 +68,14 @@ class Promotion extends StoreBase
         }
     }
 
-
-
+    /**删除
+     */
+    public function  del(){
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $modelRole = new \app\factory\model\Promotion();
+        return $modelRole->del($this->store['id'],true);
+    }
 
 }

@@ -144,13 +144,25 @@
 					var postData = {};
 					var content = '';
 					postData.name = $('.addCcountLayer').find('[name=name]').val();
-					postData.mobile_phone = $('.addCcountLayer').find('[mobile_phone=mobile_phone]').val();
-					if(!userFactoryRoleIds.length){
-						content = '请设置角色';
+					postData.mobile_phone = $('.addCcountLayer').find('[name=mobile_phone]').val();
+//					postData.id = 65;
+					if(!postData.name){
+//						content = '请输入姓名';
+					}else if(!isMobilePhone(postData.mobile_phone)){
+						content = '请输入正确的手机号码';
+					}else if(!userFactoryRoleIds.length){
+//						content = '请设置角色';
+					}else if(!userFactoryOrganizeId){
+//						content = '请设置组织';
+					}
+					if(content){
+						dialog.error(content);
 					}
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
 					$.post(action,postData,function(data){
+						console.log(data);
+						return ;
 						if(data.status==0){
 							dialog.error(data.info);
 						}else{
@@ -158,7 +170,6 @@
 							layer.close(index);
 						}
 					});
-					layer.close(index);
 				}
 			});
 		});

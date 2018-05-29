@@ -7,7 +7,7 @@ class Account extends FactoryBase
     public function index(){
         if(request()->isAjax()){
             $modelAccount = new \app\factory\model\Account();
-            $info = $modelAccount->edit();
+            $info = $modelAccount->edit($this->factory['id']);
             if($info.status==0){
                 return $info;
             }else{

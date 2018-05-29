@@ -135,6 +135,28 @@ class Goods extends StoreBase
     //商品管理展示页
     public function manage(){
         $this->assign('factory',$this->factory);
+        //查看本店商品是否存在备份文件
+        //存储路径
+        $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
+        //本厂商店铺备份文件
+        $modelStore = new \app\factory\model\Store;
+        $storeList = $modelStore -> getStoreList($this -> factory['factory_id']);
+        foreach ( $storeList as &$storeInfo) {
+            $fileName = $storePath.$storeInfo['id'].'.txt';
+            if(file_exists($fileName)){
+                //本店铺商品备份文件名
+                if($storeInfo['id'] == $this -> store['id']){
+                    $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
+                    $this -> assign('backupTime',$backupTime);
+                    $selfStore = $storeInfo;
+                    $this -> assign('selfStore',$selfStore);
+                }else{
+                    //本厂商其他店铺商品备份文件
+                    $otherStores = $storeInfo;
+                    $this -> assign('otherStores',$otherStores);
+                }
+            }
+        }
         return $this->fetch();
     }
     //设置商品库存
@@ -171,5 +193,39 @@ class Goods extends StoreBase
             return $result = $model ->setInventory($this->store['id']);
         }
         return $this -> fetch();
+    }
+
+    //商品备份
+    public function backup(){
+        if(request()->isPost()){
+            $model = new \app\factory\model\Goods;
+            $where = [
+                ['store_id','=',$this->store['id']]
+            ];
+            $field = [
+                'g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
+            g.retail_price,g.retail_price,g.sale_price,g.settle_price'
+            ];
+            $goodsList = $model -> getList($where,$field);
+            $goodsList = json_encode($goodsList);
+            $uploadPath = config('upload_dir.upload_path');
+            if(!is_dir($uploadPath)){
+                if(!mk_dir($uploadPath)){
+                    return  errorMsg('创建Uploads目录失败');
+                }
+            }
+            $uploadPath = realpath($uploadPath);
+            //存储路径
+            $storePath = $uploadPath.'/'.config('upload_dir.factory_goods_backup');
+            if(!mk_dir($storePath)){
+                return errorMsg('创建临时目录失败');
+            }
+            //按店Id为文件名保存数据
+            $fileName = $storePath.$this->store['id'].'.txt';
+            file_put_contents($fileName,$goodsList);
+            //创建时间
+            $fileCreateTime = ['create_time'=>date("Y年m月d日 H:i:s",filemtime($fileName))];
+            return successMsg('成功',$fileCreateTime);
+        }
     }
 }

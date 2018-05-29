@@ -108,20 +108,10 @@
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/promotion.js"></script>-->
 <script type="text/javascript">
-	//店铺类型，如果没有，就默认为采购类型
-	var storeType = "{$storeType}";
 	$(function () {
-		//默认选中店铺类型
-		$(".store-type").each(function(i){
-			if($(this).data('type')==storeType){
-				$(this).addClass('current').siblings().removeClass('current');
-				return false;
-			}
-		});
 		//初始化
 		var activityStatus=$('.category-tab li.current a').data('activity-status');
 		var config = {
-			storeType:storeType,
 			activityStatus:activityStatus,//未结束
 		};
 		currentPage=1;
@@ -129,42 +119,37 @@
 		var url = module+'promotion/getList';
 		getPage(url,config);
 
-		//选择店铺类型
-		$('body').on('click','.store-type',function () {
-			var _this=$(this);
-			_this.addClass('current').siblings().removeClass('current');
-			var storeType=_this.data('type');
-			var config = {
-				storeType:storeType,
-				activityStatus:1,//未结束
-			};
-			currentPage=1;
-			requestEnd=false;
-			var url = module+'promotion/getList';
-			getPage(url,config);
-		});
-
 		//点击新建促销活动
 		$('body').on('click','.addSalesActivity',function () {
 			location.href = module + 'promotion/edit'
 		});
 
-		//促销活动状态
+		//根据促销活动状态获取活动列表
 		$('body').on('click','.category-tab li',function () {
-			var index=$(this).index();
 			$(this).addClass('current').siblings().removeClass('current');
 			var activityStatus = $(this).find('a').data('activity-status');
-			var storeType=$('.store-type.current').data('type');
 				var config = {
-					storeType:storeType,
 					activityStatus:activityStatus,//未结束
 				};
 				currentPage=1;
 				requestEnd=false;
 				var url = module+'promotion/getList';
 				getPage(url,config);
-			
-//			$('.promotion-item').hide().eq(index).show();
+		})
+
+		//删除促销活动
+		$('body').on('click','.del-icons',function () {
+			var _this = $(this);
+			var postData = {};
+			postData.id = _this.parent().data('id');
+			$.post(module+'Promotion/del',postData,function (msg) {
+				if(msg.status == 0){
+					dialog.error(msg.info);
+					return false;
+				}
+				_this.parents('.tag-item').remove();
+				dialog.success(msg.info);
+			})
 		})
 	});
 
@@ -220,15 +205,10 @@
 	var loadTrigger = false;//加载触发器
 	$('.classify-label-content ').on('scroll',function(){
 		var listHeight=document.getElementById('list').scrollHeight;
-		console.log(1);
 		if(loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
-			
 			loadTrigger = false;
-			var storeType=$('.store-type.current').data('type');
-			console.log(storeType);
 			var activityStatus=$('.category-tab li.current a').data('activity-status');
 			var config = {
-				storeType:storeType,
 				activityStatus:activityStatus,//活动状态
 			};
 			var url = module+'promotion/getList';
