@@ -188,28 +188,12 @@
 			spaceBetween: 30,
 			pagination: {
 				el: '.swiper-pagination',
-				clickable: true,
-			},
+				clickable: true
+			}
 		});
-		//用户的产商商数
-		var factoryCount = {$factoryCount};
-		//切换厂商
-		$('body').on('click','.relation-vendor',function(){
-			factoryList();
-		});
-		//没有默认厂商
-		var notDefaultFactory = "{$notDefaultFactory|default=0}";
-		if(notDefaultFactory == 1){
-			factoryList();
-		}
-
 		//开店部署
 		$('body').on('click','.deployed-deployment',function () {
-			if(factoryCount){
-				location.href = module + 'Store/deployIndex';
-			}else {
-				dialog.confirm('未入驻，请先申请入住',module+'deploy/register')
-			}
+			location.href = module + 'Store/deployIndex';
 		});
 
 		var storeList = '{:json_encode($storeList)}';
@@ -219,18 +203,12 @@
 		$('body').on('click','.store_run',function () {
 			location.href = module + 'Store/operaManageIndex.html';
 		});
+
 		//订单管理
 		$('body').on('click','.order-management',function () {
-//			if(!factoryCount){
-//				dialog.confirm('未入驻，请先申请入住',module+'deploy/register');
-//				return false;
-//			}
-//			if(!storeList.length){
-//				dialog.confirm('此厂商，没有开通店，请开通店',module+'Store/deployIndex');
-//				return false;
-//			}
 			location.href = module + 'Order/index';
 		});
+
 		//我的店铺
 		var factoryStoreList=$('#factoryStoreList').html();
 		$('body').on('click','.my-store',function () {
@@ -245,7 +223,7 @@
 			layer.open({
 				title:['请选择供应商店铺进入预览','border-bottom:1px solid #d9d9d9'],
 				className:'factoryStoreLayer',
-				content:factoryStoreList,
+				content:factoryStoreList
 			})
 		})
 	});
@@ -299,7 +277,7 @@
 					},
 					error:function (xhr) {
 						dialog.error('AJAX错误'+xhr);
-					},
+					}
 				});
 				layer.close(index);
 			}
