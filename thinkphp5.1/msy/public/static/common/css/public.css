@@ -1050,7 +1050,8 @@ color: #ed6d00;
 .factoryStoreLayer .layui-m-layercont,
 .groupRoleLayer .layui-m-layercont,
 .rolePowerLayer .layui-m-layercont,
-.accountInfoLayer .layui-m-layercont{
+.accountInfoLayer .layui-m-layercont,
+.databaseLayer .layui-m-layercont{
     padding:0;
     text-align: left;
 }
@@ -1093,7 +1094,8 @@ color: #ed6d00;
 .qrCodePicLayer img{
     width:100%;
 }
-.forgetPasswordLayer .layui-m-layerbtn span[yes]{
+.forgetPasswordLayer .layui-m-layerbtn span[yes],
+.databaseLayer .layui-m-layerbtn span[yes]{
     background: #ff7bac;
     color:#fff;
 }

@@ -1016,3 +1016,52 @@ transparent;
 .library-tr .td img{
     max-width:50%;
 }
+.goods-database-nav{
+    margin:20px 0;
+}
+.goods-database-nav li{
+    width:50%;
+    position:relative;
+    text-align: center;
+}
+.goods-database-nav li.current{
+    color:#009A3E;
+}
+.goods-database-nav li:first-child:before{
+    position: absolute;
+    z-index: 1;
+    left: 86%;
+    bottom: -5px;
+    display: inline-block;
+    height: 30px;
+    width: 80px;
+    background-color: #999;
+    content: "";
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: center;
+    transition: all 0.5s;
+    margin-left: -15px;
+}
+.goods-database-content,
+.goods-store-content{
+    margin:0 15px;
+}
+.goods-database-content li,
+.goods-store-content li{
+    padding:.12rem;
+    margin:0 0 20px 0;
+    border:1px solid #009a3e;
+    border-radius:5px;
+    overflow:hidden;
+}
+.goods-database-content li.current,
+.goods-store-content li.current{
+    background: #009a3e;
+}
+.goods-database-content .database-r{
+    margin:0 0 0 1.8rem;
+}
+.database-r .p-r{
+    color:#E60012;
+}
+.database-item.hide{display: none;}
