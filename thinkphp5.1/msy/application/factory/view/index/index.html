@@ -133,8 +133,11 @@
 		<div class="factoryInfo" data-id="{$factoryInfo.id|default=''}">企业名称:<span class="vendor-name">{$factoryInfo.name|default=''}</span></div>
 		{/notempty}
 		<p>欢迎来到供应商管理中心，美尚云平台支持企业多店铺运营管理。</p>
-		<!--<p>入驻部署仅对管理员开放，客服用户请进入订单管理操作</p>-->
-		<!--<p>系统发现你已关联了XX家厂商企业，请选择进入</p>-->
+		<ul class="vendorInfoList">
+			<li data-id="1"><a>达安有限公司</a></li>   
+			<li data-id="2"><a>华大有限公司</a></li>   
+			<li data-id="3"><a>人体密码基因有限公司</a></li>   
+		</ul>
 	</section>
 	<section>
 		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
@@ -188,28 +191,12 @@
 			spaceBetween: 30,
 			pagination: {
 				el: '.swiper-pagination',
-				clickable: true,
-			},
+				clickable: true
+			}
 		});
-		//用户的产商商数
-		var factoryCount = {$factoryCount};
-		//切换厂商
-		$('body').on('click','.relation-vendor',function(){
-			factoryList();
-		});
-		//没有默认厂商
-		var notDefaultFactory = "{$notDefaultFactory|default=0}";
-		if(notDefaultFactory == 1){
-			factoryList();
-		}
-
 		//开店部署
 		$('body').on('click','.deployed-deployment',function () {
-			if(factoryCount){
-				location.href = module + 'Store/deployIndex';
-			}else {
-				dialog.confirm('未入驻，请先申请入住',module+'deploy/register')
-			}
+			location.href = module + 'Store/deployIndex';
 		});
 
 		var storeList = '{:json_encode($storeList)}';
@@ -219,18 +206,12 @@
 		$('body').on('click','.store_run',function () {
 			location.href = module + 'Store/operaManageIndex.html';
 		});
+
 		//订单管理
 		$('body').on('click','.order-management',function () {
-//			if(!factoryCount){
-//				dialog.confirm('未入驻，请先申请入住',module+'deploy/register');
-//				return false;
-//			}
-//			if(!storeList.length){
-//				dialog.confirm('此厂商，没有开通店，请开通店',module+'Store/deployIndex');
-//				return false;
-//			}
 			location.href = module + 'Order/index';
 		});
+
 		//我的店铺
 		var factoryStoreList=$('#factoryStoreList').html();
 		$('body').on('click','.my-store',function () {
@@ -245,7 +226,7 @@
 			layer.open({
 				title:['请选择供应商店铺进入预览','border-bottom:1px solid #d9d9d9'],
 				className:'factoryStoreLayer',
-				content:factoryStoreList,
+				content:factoryStoreList
 			})
 		})
 	});
@@ -299,7 +280,7 @@
 					},
 					error:function (xhr) {
 						dialog.error('AJAX错误'+xhr);
-					},
+					}
 				});
 				layer.close(index);
 			}
