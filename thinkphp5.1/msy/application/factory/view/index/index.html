@@ -133,8 +133,11 @@
 		<div class="factoryInfo" data-id="{$factoryInfo.id|default=''}">企业名称:<span class="vendor-name">{$factoryInfo.name|default=''}</span></div>
 		{/notempty}
 		<p>欢迎来到供应商管理中心，美尚云平台支持企业多店铺运营管理。</p>
-		<!--<p>入驻部署仅对管理员开放，客服用户请进入订单管理操作</p>-->
-		<!--<p>系统发现你已关联了XX家厂商企业，请选择进入</p>-->
+		<ul class="vendorInfoList">
+			<li data-id="1"><a>达安有限公司</a></li>   
+			<li data-id="2"><a>华大有限公司</a></li>   
+			<li data-id="3"><a>人体密码基因有限公司</a></li>   
+		</ul>
 	</section>
 	<section>
 		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>

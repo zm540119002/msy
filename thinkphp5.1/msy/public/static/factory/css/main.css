@@ -82,8 +82,8 @@
     margin:0.12rem 0.15rem 0 0;
 }
 .vendorInfoList{
-    height:3rem;
-    padding:0.15rem;
+    /*height:3rem;*/
+    padding:0.15rem 0.15rem 0 0;
     overflow:hidden;
     overflow-y:scroll;
 }
@@ -93,6 +93,7 @@
     border:1px solid #ff7aab;
     border-radius:4px;
     color:#ff7aab;
+    text-align: center;
 }
 .vendorInfoList li.current{
     background: #ff7aab;
