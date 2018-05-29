@@ -13,26 +13,57 @@
 </section>
 
 <article class="f24">
-	<section class="">
-		<nav class="columns_flex channel_nav top-nav-bar ">
-			<a class="personal_center">我的</a>
-			<a href="javascript:void(0);" class="current store-type" data-type="1">
-				采购
+	<section class="top_nav_fixed">
+		<div class="top_bar columns_flex l-r-sides">
+			<div class="">
+				<a class="home">首页</a>
+			</div>
+			<div class="">
+				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+				<span>爱国宾</span>
+			</div>
+			<div class="">
+				<a class="switch-account">切换我的店铺</a>
+			</div>
+		</div>
+	</section>
+	<section class="columns_flex l-r-sides">
+		<div>
+			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+			<div>
+				<p><span>某某</span>官方旗舰店</p>
+				<p>B2B采购商城 <span>供应商自营</span></p>
+			</div>
+		</div>
+		<div>
+			<a href="" class="personal_center">我的</a>
+			<a href="" class="my-store">我的店铺</a>
+		</div>
+	</section>
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="">
+				店铺提醒
 			</a>
-			<a href="javascript:void(0);" class="store-type" data-type="2">
-				分成
+			<a href="">
+				店铺管理
 			</a>
-			<a href="javascript:void(0);" class="store-type" data-type="3">
-				零售
+			<a href=""  class="current">
+				营销推广
 			</a>
-			<a class="home">首页</a>
+			<a href="">
+				官方活动
+			</a>
 		</nav>
 	</section>
-	<section class="specific_type bottomLine">
+	<section class="specific_type store-manage-type bottomLine">
 		<div class="columns_flex f20">
-			<a class="">店铺首页</a>
-			<a>限时抢购</a>
-			<a>新品尝鲜</a>
+			<a  href="javascript:void (0)" class="column_type current">场景</a>
+			<a >云推客</a>
+			<a href="javascript:void (0)">线上</a>
+			<a href="javascript:void (0)">线下</a>
+			<a href="javascript:void (0)">视频</a>
+			<a href="javascript:void (0)">直播</a>
 		</div>
 	</section>
 	<section class="content-marginLeft separation-line">
@@ -77,20 +108,10 @@
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/promotion.js"></script>-->
 <script type="text/javascript">
-	//店铺类型，如果没有，就默认为采购类型
-	var storeType = "{$storeType}";
 	$(function () {
-		//默认选中店铺类型
-		$(".store-type").each(function(i){
-			if($(this).data('type')==storeType){
-				$(this).addClass('current').siblings().removeClass('current');
-				return false;
-			}
-		});
 		//初始化
 		var activityStatus=$('.category-tab li.current a').data('activity-status');
 		var config = {
-			storeType:storeType,
 			activityStatus:activityStatus,//未结束
 		};
 		currentPage=1;
@@ -98,43 +119,37 @@
 		var url = module+'promotion/getList';
 		getPage(url,config);
 
-		//选择店铺类型
-		$('body').on('click','.store-type',function () {
-			var _this=$(this);
-			_this.addClass('current').siblings().removeClass('current');
-			var storeType=_this.data('type');
-			var config = {
-				storeType:storeType,
-				activityStatus:1,//未结束
-			};
-			currentPage=1;
-			requestEnd=false;
-			var url = module+'promotion/getList';
-			getPage(url,config);
-		});
-
 		//点击新建促销活动
 		$('body').on('click','.addSalesActivity',function () {
-			var storeType=$('.store-type.current').data('type');
-			location.href = module + 'promotion/edit/storeType/'+storeType;
+			location.href = module + 'promotion/edit'
 		});
 
-		//促销活动状态
+		//根据促销活动状态获取活动列表
 		$('body').on('click','.category-tab li',function () {
-			var index=$(this).index();
 			$(this).addClass('current').siblings().removeClass('current');
 			var activityStatus = $(this).find('a').data('activity-status');
-			var storeType=$('.store-type.current').data('type');
 				var config = {
-					storeType:storeType,
 					activityStatus:activityStatus,//未结束
 				};
 				currentPage=1;
 				requestEnd=false;
 				var url = module+'promotion/getList';
 				getPage(url,config);
-			
-//			$('.promotion-item').hide().eq(index).show();
+		})
+
+		//删除促销活动
+		$('body').on('click','.del-icons',function () {
+			var _this = $(this);
+			var postData = {};
+			postData.id = _this.parent().data('id');
+			$.post(module+'Promotion/del',postData,function (msg) {
+				if(msg.status == 0){
+					dialog.error(msg.info);
+					return false;
+				}
+				_this.parents('.tag-item').remove();
+				dialog.success(msg.info);
+			})
 		})
 	});
 
@@ -190,15 +205,10 @@
 	var loadTrigger = false;//加载触发器
 	$('.classify-label-content ').on('scroll',function(){
 		var listHeight=document.getElementById('list').scrollHeight;
-		console.log(1);
 		if(loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
-			
 			loadTrigger = false;
-			var storeType=$('.store-type.current').data('type');
-			console.log(storeType);
 			var activityStatus=$('.category-tab li.current a').data('activity-status');
 			var config = {
-				storeType:storeType,
 				activityStatus:activityStatus,//活动状态
 			};
 			var url = module+'promotion/getList';

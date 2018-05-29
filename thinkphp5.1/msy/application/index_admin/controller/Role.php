@@ -1,13 +1,13 @@
 <?php
 namespace app\index_admin\controller;
 
-class Role extends \common\controller\UserBase
+class Role extends Base
 {
     /**角色-管理
      */
     public function manage(){
         if(!request()->isGet()){
-            return config('not_get');
+            return config('custom.not_get');
         }
         return $this->fetch();
     }
@@ -40,8 +40,7 @@ class Role extends \common\controller\UserBase
             $roleId = input('id',0);
             $this->assign('roleId',$roleId);
             $this->assign('roleName',input('name',''));
-            $response = $modelRoleNode->where('role_id','=',$roleId)->select();
-            $response = $response->toArray();
+            $response = $modelRoleNode->where('role_id','=',$roleId)->select()->toArray();
             $nodeIds = array_column($response,'node_id');
             $this->assign('nodeIds',$nodeIds?:[]);
             $menu = new \common\lib\Menu();
@@ -54,7 +53,7 @@ class Role extends \common\controller\UserBase
      */
     public function getList(){
         if(!request()->isGet()){
-            return config('not_get');
+            return config('custom.not_get');
         }
         $modelRole = new \common\model\Role();
         $list = $modelRole->pageQuery();
@@ -65,7 +64,7 @@ class Role extends \common\controller\UserBase
      */
     public function del(){
         if(!request()->isPost()){
-            return config('not_post');
+            return config('custom.not_post');
         }
         $modelRole = new \common\model\Role();
         return $modelRole->del();

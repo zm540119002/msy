@@ -7,11 +7,11 @@ class StoreBase extends FactoryBase{
     protected $store = null;
     public function __construct(){
         parent::__construct();
-        $factoryInfo = Session::get('factory');;
-        if(empty($factoryInfo)){
-            $factoryInfo = $this ->getStore();
+        $storeInfo = Session::get('store');;
+        if(empty($storeInfo)){
+            $storeInfo = $this ->getStore();
         }
-        $this->factory =  $factoryInfo;
+        $this->store =  $storeInfo;
     }
 
     public function getStore(){
@@ -19,29 +19,30 @@ class StoreBase extends FactoryBase{
         $where = [
             ['factory_id','=',$this->factory['factory_id']],
         ];
-        $factoryCount = $model -> where($where)->count('id');
+        $storeCount = $model -> where($where)->count('id');
         $file = [
-            'u.id,u.factory_id,u.is_default,f.name'
+            's.id,s.factory_id,s.is_default,s.store_type,run_type,auth_status'
         ];
-        if($factoryCount > 1){
+        if($storeCount > 1){
             $_where = [
-                ['factory_id','=',$this->factory['factory_id']],
-                ['u.is_default','=',1],
+                ['s.factory_id','=',$this->factory['factory_id']],
+                ['s.is_default','=',1],
             ];
-            $factoryInfo = $model -> getStore($_where,$file);
-            if(!$factoryInfo){
-                $this->success('你有多家厂商入住，请选择一家', 'Index/index');;
+            $storeInfo = $model -> getInfo($_where,$file);
+            if(!$storeInfo){
+                $this->success('你有多家店，请选择一家', 'Store/operaManageIndex');;
             }
-        }elseif ($factoryCount == 1){
+        }elseif ($storeCount == 1){
             $where_new = [
                 ['factory_id','=',$this->factory['factory_id']],
             ];
-            $factoryInfo = $model -> getStore($where_new,$file);
-        }elseif (!$factoryCount){
-            $this->success('没有产商入住，请入住', 'Deploy/register');
+            $storeInfo = $model -> getInfo($where_new,$file);
+
+        }elseif (!$storeCount){
+            $this->success('没有店铺，请申请', 'Store/deployIndex');
         }
-        $factoryInfo = array_merge($factoryInfo,array('rand' => create_random_str(10, 0),));
-        Session::set('factory',$factoryInfo);
-        return  Session::get('factory');
+        $storeInfo = array_merge($storeInfo,array('rand' => create_random_str(10, 0),));
+        Session::set('store',$storeInfo);
+        return  Session::get('store');
     }
 }

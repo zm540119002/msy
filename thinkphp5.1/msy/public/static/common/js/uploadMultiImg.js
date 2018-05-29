@@ -51,7 +51,7 @@ $(function(){
            
         };
     }
-    //选择视频上传
+    //选择视频上传   uploadGoodsVideo
     $('body').on('change','#video',function(){
         var file = $(this);
         var fileList = $(this).get(0).files;
@@ -89,7 +89,7 @@ $(function(){
             }
         };
     });
-    //上传视频
+    //上传视频   
     var goodsVideoList=$('#goodsVideoList').html();
     $('body').on('click','.uploadGoodsVideo',function(){
         uploadsMultiVideo(goodsVideoList);

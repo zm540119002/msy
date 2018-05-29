@@ -61,6 +61,5 @@ return [
         'public_admin_common_img' => Request::domain() .'/static/admin/common/img',
         
         'public_uploads' => Request::domain() .'/uploads',
-
     ],
 ];

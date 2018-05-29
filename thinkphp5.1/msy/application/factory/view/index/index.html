@@ -15,36 +15,47 @@
 <!--店铺预览-->
 <section id="factoryStoreList" style="display: none;">
 	<ul class="factory-store-list">
-		<li >
+		{volist name="storeList" id="vo"}
+		<li  class="" data-id="{$vo.id}" >
 			<a href="#" class="columns_flex l-r-sides ">
-				<img src="public_img/default/no_pic_40.jpg" alt="">
+				{notempty name="vo.img"}
+				<img class="small_default_img" src="public_uploads/{$vo.img}" alt="">
+				{else /}
+				<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
+				{/notempty}
 				<div>
-					<p><span>某某</span>官方旗舰店</p>
+					{if $vo.store_type == 1 }
+					<span>{$vo.name}</span>官方旗舰店
+					{elseif $vo.store_type == 2/}
+					<span>{$vo.name}</span>品牌旗舰店
+					{else /}
+					{/if}
+
+					{if $vo.run_type == 1 }
 					<p>B2B采购商城</p>
-				</div>
-				<span>营业中</span>
-			</a>
-		</li>
-		<li >
-			<a href="#" class="columns_flex l-r-sides ">
-				<img src="public_img/default/no_pic_40.jpg" alt="">
-				<div>
-					<p><span>某某</span>官方旗舰店</p>
+					{elseif $vo.run_type == 2 /}
 					<p>B2B分成商城</p>
+					{elseif $vo.run_type == 3 /}
+					<p>B2C零售商城</p>
+					{else /}
+					{/if}
 				</div>
-				<span>未通过</span>
+				{if $vo.auth_status == -2 }
+					<span>未通过</span>
+				{elseif $vo.auth_status == -1 /}
+					<span>已关闭</span>
+				{elseif $vo.auth_status == 0 /}
+					<span>审核中</span>
+				{elseif $vo.auth_status == 1 /}
+					<span>建设中</span>
+				{elseif $vo.auth_status == 2 /}
+					<span>营业中</span>
+				{else /}
+				{/if}
 			</a>
 		</li>
-		<li >
-			<a href="#" class="columns_flex l-r-sides ">
-				<img src="public_img/default/no_pic_40.jpg" alt="">
-				<div>
-					<p><span>某某</span>官方旗舰店</p>
-					<p>B2B零售商城</p>
-				</div>
-				<span>建设中</span>
-			</a>
-		</li>
+		{/volist}
+
 	</ul>
 </section>
 <article class="f24">
@@ -180,8 +191,9 @@
 				clickable: true,
 			},
 		});
+		//用户的产商商数
+		var factoryCount = {$factoryCount};
 		//切换厂商
-
 		$('body').on('click','.relation-vendor',function(){
 			factoryList();
 		});
@@ -193,29 +205,43 @@
 
 		//开店部署
 		$('body').on('click','.deployed-deployment',function () {
-			var factoryCount = {$factoryCount};
 			if(factoryCount){
 				location.href = module + 'Store/deployIndex';
 			}else {
-				dialog.success('未入驻，请先申请入住',module+'deploy/register')
+				dialog.confirm('未入驻，请先申请入住',module+'deploy/register')
 			}
 		});
+
+		var storeList = '{:json_encode($storeList)}';
+		storeList = JSON.parse(storeList);
+
 		//店铺运营
 		$('body').on('click','.store_run',function () {
 			location.href = module + 'Store/operaManageIndex.html';
 		});
-
+		//订单管理
 		$('body').on('click','.order-management',function () {
-			var factoryCount = {$factoryCount};
-			if(factoryCount){
-				location.href = module + 'Order/index';
-			}else {
-				dialog.success('未入驻，请先申请入住',module+'deploy/register')
-			}
+//			if(!factoryCount){
+//				dialog.confirm('未入驻，请先申请入住',module+'deploy/register');
+//				return false;
+//			}
+//			if(!storeList.length){
+//				dialog.confirm('此厂商，没有开通店，请开通店',module+'Store/deployIndex');
+//				return false;
+//			}
+			location.href = module + 'Order/index';
 		});
 		//我的店铺
 		var factoryStoreList=$('#factoryStoreList').html();
 		$('body').on('click','.my-store',function () {
+			if(!factoryCount){
+				dialog.confirm('未入驻，请先申请入住',module+'deploy/register');
+				return false;
+			}
+			if(!storeList.length){
+				dialog.confirm('此厂商，没有开通店，请开通店',module+'Store/deployIndex');
+				return false;
+			}
 			layer.open({
 				title:['请选择供应商店铺进入预览','border-bottom:1px solid #d9d9d9'],
 				className:'factoryStoreLayer',

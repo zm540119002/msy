@@ -57,9 +57,20 @@ $(function(){
         var reader = new FileReader();
         reader.readAsDataURL(img);
         reader.onload = function(e){
+            var postData = {img: e.target.result};
             var videoUrl=e.target.result;
              $(obj).find('video').attr('src',videoUrl);
             $(obj).find('.img').val(videoUrl);
+            //提交
+            $.post(controller+"uploadImgToTemp",postData,function(msg){
+                if(msg.status == 1){
+                    console.log(msg.info);
+                    $(obj).find('.img').val(msg.info);
+                    $(obj).find('img').attr('src','/uploads/'+msg.info);
+                }else{
+                    dialog.error(msg.info)
+                }
+            })
         }
     })
   

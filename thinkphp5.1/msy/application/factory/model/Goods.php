@@ -10,114 +10,97 @@ use think\Db;
 class Goods extends Model {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'goods';
+	// 设置主键
+	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 
 	/**
-	 * 修改
+	 * 编辑 新增和修改
+	 * @param string $store_id
+	 * @return array
 	 */
-	public function edit($goodsBaseId ='',$factoryId){
+	public function edit($storeId =''){
 		$data = input('post.');
 		$validate = validate('Goods');
-		// if(!$result = $validate->scene('edit')->check($data)) {
-		// 	return errorMsg($validate->getError());
-		// }
-
-		if(input('?post.goods_base_id')){//修改
-			//批量修改
-			$idsEdit =[];//修改后和增加的Ids
-			$addData = [];
-			$editData =[];
-			foreach ($data['goodsExtend'] as $k=>$value){
-				if(isset($value['id']) && $value['id']){//修改
-					$value['update_time'] = time();
-					$editData[]=$value;
-
-				}else{//增加
-					$value['goods_base_id'] = $goodsBaseId;
-					$value['factory_id'] = $factoryId;
-					$value['create_time'] = time();
-					$addData[] = $value;
-
+//		 if(!$result = $validate->scene('edit')->check($data)) {
+//		 	return errorMsg($validate->getError());
+//		 }
+		if(!empty($data['thumb_img'])){
+			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
+		}
+		if(!empty($data['main_img'])){
+			$mainImg = '';
+			$tempMainImg = explode(",",$data['main_img']);
+			array_pop($tempMainImg);
+			foreach ($tempMainImg as $item) {
+				if($item){
+					$mainImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
 				}
 			}
-			if($addData){//添加新的数据
-				$result1 = $this->saveAll($addData);//
-				foreach ($result1 as $k=>$value){
-					$idsEdit[] = $value['id'];
+			$data['main_img'] = $mainImg;
+		}
+		if(!empty($data['goods_video'])){
+			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
+		}
+		if(!empty($data['details_img'])){
+			$detailsImg = '';
+			$tempArray = explode(",",$data['details_img']);
+			array_pop($tempArray);
+			foreach ($tempArray as $item) {
+				if($item){
+					$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
 				}
 			}
-            if($editData){//修改数据
-				$result2 = $this->saveAll($editData);
-				foreach ($result2 as $k=>$value){
-					$idsEdit[] = $value['id'];
-				}
-			}
-//			//删除不要的数据
-			$_where=[
-				['id','not in',$idsEdit],
-				['goods_base_id','=',$goodsBaseId],
-				['factory_id','=',$factoryId],
+			$data['details_img'] = $detailsImg;
+		}
+		if(input('?post.id')){//修改
+			$where = [
+				['id','=',$data['id']],
 			];
-			$result = $this->where($_where)->delete();
-			if(false === $result){
+			$file = array(
+				'thumb_img','main_img','details_img','goods_video'
+			);
+			$oldGoodsInfo = $this -> getInfo($where,$file);
+			if(empty($oldGoodsInfo)){
+				return errorMsg('没有数据');
+			}
+			$data['update_time'] = time();
+			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'store_id'=>$storeId]);
+		}else{
+			$data['create_time'] = time();
+			$data['store_id'] = $storeId;
+			$result = $this -> allowField(true) -> save($data);
+			if(!$result){
 				return errorMsg('失败');
 			}
-		}else{
-			//批量添加
-			$list = $data['goodsExtend'];
-			foreach ($list as $k=>$value){
-				$list[$k]['goods_base_id'] = $goodsBaseId;
-				$list[$k]['goods_base_id'] = $factoryId;
-				$list[$k]['create_time'] = time();
-			}
-			$result = $this->saveAll($list);
-		}
 
+		}
 		if(false !== $result){
+			if(input('?post.id')){//删除旧图片
+				delImgFromPaths($oldGoodsInfo['thumb_img'],$data['thumb_img']);
+				//删除就图片
+				$oldMainImg = explode(",",$oldGoodsInfo['main_img']);
+				array_pop($oldMainImg);
+				$newMainImg = explode(",",$data['main_img']);
+				array_pop($newMainImg);
+				delImgFromPaths($oldMainImg,$newMainImg);
+
+				$oldDetailsImg = explode(",",$oldGoodsInfo['details_img']);
+				array_pop($oldDetailsImg);
+				$newDetailsImg = explode(",",$data['details_img']);
+				array_pop($newDetailsImg);
+				delImgFromPaths($oldDetailsImg,$newDetailsImg);
+
+				delImgFromPaths($oldGoodsInfo['goods_video'],$data['goods_video']);
+			}
 			return successMsg("成功");
 		}else{
 			return errorMsg('失败');
 		}
 	}
 
-	/**
-	 * 分页查询 商品
-	 * @param array $_where
-	 * @param array $_field
-	 * @param array $_join
-	 * @param string $_order
-	 * @return \think\Paginator
-	 */
-	public function pageQuery($_where=[],$_field=[],$_join=[],$_order=''){
-		$where = [
-			['g.status', '=', 0],
-		];
-
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
-		}
-		$field = [
-			'g.goods_base_id,g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.store_type,
-                gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,
-                gb.thumb_img,gb.goods_video,gb.main_img,gb.details_img,gb.tag,gb.create_time,gb.update_time,
-                gb.parameters'
-		];
-		if(input('?get.storeType') && (int)input('get.storeType')){
-			$where[] = ['store_type','=',(int)input('get.storeType')];
-		}
-		$join =[
-			['goods_base gb','gb.id = g.goods_base_id'],
-		];
-		$where = array_merge($_where, $where);
-		$field = array_merge($_field,$field);
-		$join = array_merge($_join,$join);
-		$order = 'id';
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		 return $this->alias('g')->join($join)->where($where)->field($field)->order($order)->paginate($pageSize);
-	}
+	
 
 	/**
 	 * @param array $where
@@ -128,7 +111,7 @@ class Goods extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectGoods($where=[],$field=[],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'g.status' => 0,
 		);
@@ -139,22 +122,13 @@ class Goods extends Model {
 			'g.id'=>'desc',
 		);
 		$order = array_merge($_order, $order);
-		if($field){
-			$list = $this->alias('g')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('g')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$list = $this->alias('g')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
 			$list = $list->toArray();
 		}
@@ -168,25 +142,66 @@ class Goods extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getGoods($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'g.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		if($field){
-			$info = $this->alias('g')
-				->field($field)
-				->join(array_merge($_join,$join))
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('g')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find();
+		$info = $this->alias('g')
+			->field($field)
+			->join(array_merge($_join,$join))
+			->where($where)
+			->find();
+		if(!empty($info)){
+			$info = $info->toArray();
 		}
 		return $info;
 	}
+
+	/**
+	 * 分页查询 商品
+	 * @param array $_where
+	 * @param array $_field
+	 * @param array $_join
+	 * @param string $_order
+	 * @return \think\Paginator
+	 */
+	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
+		$where = [
+			['g.status', '=', 0],
+		];
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
+		}
+		$order = ['id'=>'desc'];
+		$where = array_merge($_where, $where);
+		$order = array_merge($_order,$order);
+		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+			input('get.pageSize',0,'int') : config('custom.default_page_size');
+		return $this->alias('g')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+	}
+
+
+	//设置库存
+	public function setInventory($storeId=''){
+		$data = input('post.');
+		if(empty($data['id'] || (int)$data['id'])){
+			return errorMsg("参数错误");
+		}
+		$where = [
+			['id','=',(int)$data['id']],
+			['store_id','=',$storeId],
+		];
+		$result = $this->where($where)->setInc('inventory',(int)$data['num'] );
+		if(false !== $result){
+			return successMsg("成功");
+		}else{
+			return errorMsg("失败");
+		}
+
+	}
+
 }

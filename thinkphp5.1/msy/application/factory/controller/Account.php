@@ -1,10 +1,24 @@
 <?php
 namespace app\factory\controller;
 
-class Account extends \common\controller\UserBase
+class Account extends FactoryBase
 {
     //首页
     public function index(){
-        return $this->fetch();
+        if(request()->isAjax()){
+            $modelAccount = new \app\factory\model\Account();
+            $info = $modelAccount->edit($this->factory['id']);
+            if($info.status==0){
+                return $info;
+            }else{
+                $this->assign('info',$info);
+                return view('info_tpl');
+            }
+        }else{
+            $modelRole = new \app\factory\model\Role();
+            $list = $modelRole->getList($this->factory['id']);
+            $this->assign('list',$list);
+            return $this->fetch();
+        }
     }
 }

@@ -600,7 +600,7 @@ function isPhoneSide()
 //生成不带二维码
 function createQRcode($url){
     //生成二维码图片
-    $object = new Vendor\Qrcode\Qrcode();
+    $object = new \common\component\qrcode\Qrcode();
     $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
     $fileName = time().'.png';//保存文件名
     $outFile = $qrcodePath.$fileName;
@@ -613,9 +613,17 @@ function createQRcode($url){
 
 
 //生成带logo二维码
+/**
+ * @param $url 要跳转的url
+ * @param $avatarPath 中间logo的图片路径
+ * @param $newRelativePath 生成二维码图片保存路径
+ * @param string $eclevel
+ * @param int $pixelPerPoint
+ * @return array|string 返回二维码相对路径
+ */
 function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
-    $QRcode = new Vendor\Qrcode\Qrcode();
-    $uploadPath = realpath(C('UPLOAD_PATH')) . '/';
+    $QRcode = new \common\component\qrcode\Qrcode();
+    $uploadPath =realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
             return (errorMsg('创建Uploads目录失败'));
@@ -623,7 +631,7 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     }
     $logo = $uploadPath.$avatarPath;
     //没有带logo二维码保存路径
-    $tempPath =$uploadPath.C('TEMP_PATH');
+    $tempPath =$uploadPath.config('upload_dir.temp_path');;
     if(!mk_dir($tempPath)){
         return (errorMsg('创建新目录失败'));
     }
@@ -642,10 +650,13 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
     {
         $QR = imagecreatefromstring(file_get_contents($noLogoFilename));
         $logo = imagecreatefromstring(file_get_contents($logo));
-        $QR_width = imagesx($QR);
-        $QR_height = imagesy($QR);
-        $logo_width = imagesx($logo);
-        $logo_height = imagesy($logo);
+        if(imageistruecolor($logo)){
+            imagetruecolortopalette($logo,false,65535);//解决颜色失真
+        }
+        $QR_width = imagesx($QR);//二维码图片宽度
+        $QR_height = imagesy($QR);//二维码图片高度
+        $logo_width = imagesx($logo);// LOGO图片宽度
+        $logo_height = imagesy($logo);// logo图片高度
         $logo_qr_width = $QR_width / 5;
         $scale = $logo_width / $logo_qr_width;
         $logo_qr_height = $logo_height / $scale;
@@ -821,6 +832,89 @@ function delImg($imgPaths){
         }
     }
 }
+
+/**
+ * 合成商品图片
+ *
+ * @param array $config 合成图片参数
+ * @return $img->path 合成图片的路径
+ *
+ */
+function compose(array $config=[])
+{
+    $init = [
+        'filename'=>'goods',   //保存目录  ./uploads/compose/goods....
+        'title'=>'美尚官方旗舰店',
+        'type'=>'供应商自营',
+        'slogan'=>"采购平台·省了即赚到！",
+        'name'=>'产品名称即“品牌名称（brand name）”。',
+        'introduce'=>'产品标识所用文字应当为规范中文。',
+        'money'=>'￥ 68.56 元',
+        'logo'=>'./static/common/img/ucenter_logo.png', // 60*55px
+        'brand'=>'http://msy.new.com/uploads/factory_goods/15268896785.jpeg', // 160*55
+        'goods'=>'http://msy.new.com/uploads/factory_goods/15268896785.jpeg', // 460*534
+        'qrcode'=>'./static/common/img/default/compose/no_pic_40.jpghttps://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=fa9140accd95d143ce7bec711299e967/2934349b033b5bb571dc8c5133d3d539b600bc12.jpg', // 120*120
+        'font'=>'./static/font/simhei.ttf',   //字体
+    ];
+    $init = array_merge($init, $config);
+    $logo = imgInfo($init['logo']);
+    $brand = imgInfo($init['brand']);
+    $goods = imgInfo($init['goods']);
+    $qrcode = imgInfo($init['qrcode']);
+    if(!$logo ||!$brand || !$goods || !$qrcode){
+        return '提供的图片有问题';
+    }
+    $im = imagecreatetruecolor(480, 780);  //图片大小
+    $color = imagecolorallocate($im, 240, 255, 255);
+    $text_color = imagecolorallocate($im, 0, 0, 0);
+    imagefill($im, 0, 0, $color);
+    imagettftext($im, 14, 0, 265, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
+    imagettftext($im, 12, 0, 265, 55, $text_color, $init['font'], $init['type']); //供应商自营
+    imagettftext($im, 16, 0, 10,  96, $text_color, $init['font'], $init['slogan']);   //标语
+    imagettftext($im, 14, 0, 10, 670, $text_color, $init['font'], $init['name']); //说明
+    imagettftext($im, 12, 0, 10, 700, $text_color, $init['font'], $init['introduce']); //规格
+    imagettftext($im, 12, 0, 10, 730, $text_color, $init['font'], $init['money']); //金额
+    imagecopyresized($im, $logo['obj'], 10, 10, 0, 0, 60, 55, $logo['width'], $logo['height'] );  //平台logo
+    imageline($im, 80, 10, 80, 65, $text_color); //划一条实线
+    imagecopyresized($im, $brand['obj'], 95, 10, 0, 0, 160, 55, $brand['width'], $brand['height'] );  //店铺logo
+    imagecopyresized($im, $goods['obj'], 10, 106, 0, 0, 460, 534, $goods['width'], $goods['height']);  //商品
+    imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维
+    $dir = './uploads/compose/'.$init['filename'].'/'.date('Y').'/'.date('m');
+    if(!is_dir($dir)){
+        mkdir($dir, 0777, true);
+    }
+    $filename = $dir.'/'.time().mt_rand(1000, 9999).'.jpg';
+    if( !imagejpeg($im, $filename, 90) ){
+        return '合成图片失败';
+    }
+    imagedestroy($im);
+    return  substr($filename, 1);
+}
+
+function imgInfo($path)
+{
+    $info = getimagesize($path);
+    //检测图像合法性
+    if (false === $info) {
+        return false; //图片不合法
+    }
+    if($info[2]>3){
+        return false; //不支持此图片类型
+    }
+    $type = image_type_to_extension($info[2], false);
+    $fun = "imagecreatefrom{$type}";
+    //返回图像信息
+    if(!$fun) return false;
+    return [
+        'width'  => $info[0],
+        'height' => $info[1],
+        'type'   => $type,
+        'mime'   => $info['mime'],
+        'obj'    => $fun($path),
+    ];
+}
+
+
 
 
 

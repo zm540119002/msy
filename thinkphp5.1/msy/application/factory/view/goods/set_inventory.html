@@ -1,0 +1,133 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="top_nav_fixed">
+		<div class="top_bar columns_flex l-r-sides">
+			<div class="">
+				<a class="home">首页</a>
+			</div>
+			<div class="">
+				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+				<span>爱国宾</span>
+			</div>
+			<div class="">
+				<a class="switch-account">切换我的店铺</a>
+			</div>
+		</div>
+	</section>
+	<section class="columns_flex l-r-sides">
+		<div>
+			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+			<div>
+				<p><span>某某</span>官方旗舰店</p>
+				<p>B2B采购商城 <span>供应商自营</span></p>
+			</div>
+		</div>
+		<div>
+			<a href="" class="personal_center">我的</a>
+			<a href="" class="my-store">我的店铺</a>
+		</div>
+	</section>
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="">
+				店铺提醒
+			</a>
+			<a href="" class="current">
+				店铺管理
+			</a>
+			<a href="">
+				营销推广
+			</a>
+			<a href="">
+				官方活动
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type store-manage-type bottomLine">
+		<div class="columns_flex f20">
+			<a >设置</a>
+			<a class="" href="{:url('Goods/manage')}">商品</a>
+			<a href="{:url('Goods/setSort')}">排序</a>
+			<a class="column_type current">入仓</a>
+			<a  href="{:url('Goods/setShelf')}">上架</a>
+			<a>卡券</a>
+		</div>
+	</section>
+	<section class="">
+		<div class="columns_flex l-r-sides library-th">
+			<span>商品</span>
+			<span>商品库存</span>
+			<span>商品入仓</span>
+			<span>盘点出仓</span>
+		</div>
+		<ul class="library-tr" id="list">
+		</ul>
+	</section>
+
+</article>
+<!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
+{/block}
+{block name="common"}
+{include file="template/loading.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="factory_js/getGoodsList.js"></script>
+<script type="text/javascript">
+	$(function () {
+		var config = {
+			pageSize:4,
+			pageType:'inventory',
+		};
+		var url = module+'goods/getList';
+		//初始化商品列表
+		getPage(url,config);
+		//上拉加载更多
+		getMore(url,config);
+
+		/**
+		 * 设置库存
+		 */
+		$('body').on('blur','.add-num,.reduce-num',function () {
+			var _this = $(this);
+			var type  = _this.data('type');
+			var inventory = parseInt(_this.parents('li').find('.goods-library-num').text());
+			var num = _this.val();
+			if(!num){
+				return false
+			}
+			if(!isPosIntNumber(num)){
+				dialog.error('请输入大于0正整数');
+				_this.val('');
+				return false;
+			}
+			num = parseInt(num);
+			if(type == 0 && inventory < num){
+				dialog.error('大于库存量');
+				_this.val('');
+				return false;
+			}
+			_this.val('');
+			var postData = {};
+			postData.id = _this.parents('li').data('id');
+			postData.type = type;
+			if(!type){
+				num = 0 - num;
+			}
+			postData.num = num;
+			$.post(module + 'Goods/setInventory',postData,function (msg) {
+				if(!msg.status){
+					dialog.error(msg.info);
+					return false;
+				}
+				dialog.success(msg.info);
+				_this.parents('li').find('.goods-library-num').text(inventory + num);
+			});
+		})
+	});
+</script>
+{/block}

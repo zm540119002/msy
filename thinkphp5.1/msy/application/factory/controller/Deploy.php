@@ -19,7 +19,7 @@ class Deploy extends UserBase
                 $where = [
                     ['id','=',$factoryId],
                 ];
-                $factoryInfo =  $model -> getFactory($where);
+                $factoryInfo =  $model -> getInfo($where);
                 $this -> assign('factoryInfo',$factoryInfo);
             }
             return $this->fetch();
@@ -29,7 +29,7 @@ class Deploy extends UserBase
     //设置默认产商
     public function setDefaultFactory(){
         if(request()->isAjax()){
-            $model = new \app\factory\model\FactoryUser();
+            $model = new \app\factory\model\UserFactory();
             return $model->setDefaultFactory($this->user['id']);
         }
     }

@@ -10,12 +10,14 @@ use think\Db;
 class Promotion extends Model {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'promotion';
+	// 设置主键
+	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 	/**
 	 * 新增和修改
 	 */
-	public function edit($factoryId =''){
+	public function edit($storeId =''){
 		$validate = validate('Promotion');
 		$data = input('post.');
 		if(!$result = $validate->check($data)) {
@@ -24,46 +26,77 @@ class Promotion extends Model {
 		if(!empty($data['img'])){
 			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
 		}
-		$data['factory_id'] = $factoryId;
+		$data['store_id'] = $storeId;
 		$this ->startTrans();
-		if(input('?post.promotion_id')){//修改
+		if(input('?post.id')){//修改
 			$where = [
-				['id','=',$data['promotion_id']],
-				['factory_id','=',$factoryId],
+				['id','=',$data['id']],
+				['store_id','=',$storeId],
 			];
 			$file = array(
-				'img',
+				'img,goods_id',
 			);
-			$oldInfo = $this -> getPromotion($where,$file);
+			$oldInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
-			$result = $this -> allowField(true) -> save($data,['id' => $data['promotion_id'],'factory_id'=>$factoryId]);
+			$result = $this -> allowField(true) -> save($data,['id' => $data['id'],'store_id'=>$storeId]);
 			if(false == $result){
 				$this ->rollback();
-				return errorMsg($this->getError());
+				return errorMsg('失败');
 			}
 		}else{//新增
 			$data['create_time'] = time();
 			$result = $this -> allowField(true) -> save($data);
 			if(false == $result){
 				$this ->rollback();
-				return errorMsg($this->getError());
+				return errorMsg('失败');
 			}
 		}
 		$modelGoods  = new \app\factory\model\Goods;
-		$result = $modelGoods ->save(['sale_type_'.$data['storeType'] => 1],['id' => $data['goods_id'],'factory_id'=>$factoryId]);
+		$result = $modelGoods ->save(['sale_type'=>1],['id' => $data['goods_id'],'store_id'=>$storeId]);
 		if(false === $result){
 			$this ->rollback();
-			return errorMsg($modelGoods->getLastSql());
+			return errorMsg('失败');
+		}
+		if(!empty($oldInfo) && $oldInfo['goods_id'] != $data['goods_id']){ //如换商品，把旧商品销售类型改为普通商品类型
+			$result = $modelGoods ->save(['sale_type'=>0],['id' => $oldInfo['goods_id'],'store_id'=>$storeId]);
+			if(false === $result){
+				$this ->rollback();
+				return errorMsg('失败');
+			}
 		}
 		$this ->commit();
-		if(input('?post.promotion_id')){//修改成功后，删除旧图
+		if(input('?post.id')){//修改成功后，删除旧图
 			delImgFromPaths($oldInfo['img'],$data['img']);
 		}
-		return successMsg("成功！",['storeType'=>$data['storeType']]);
+		return successMsg("成功");
+	}
+
+	/**
+	 * 删除
+	 */
+	public function del($storeId,$tag = true){
+		$data = input('post.');
+		$where = [
+			['store_id','=',$storeId]
+		];
+		if(is_array($data['id'])){
+			$where[] = ['id','in',$data['id']];
+		}else{
+			$where[] = ['id','=',$data['id']];
+		}
+		if($tag){//标记删除
+			$result = $this->where($where)->setField('status',2);
+		}else{
+			$result = $this->where($where)->delete();
+		}
+		if(false !== $result){
+			return successMsg("已删除");
+		}
+		return errorMsg('失败');
 	}
 	
 	//分页查询
-	public function pageQuery($_where=[],$join=[]){
+	public function pageQuery($_where=[],$field=['*'],$join=[],$_order=[]){
 		$where = [
 			['p.status', '=', 0],
 		];
@@ -79,23 +112,12 @@ class Promotion extends Model {
 		if($keyword){
 			$where[] = ['p.name', 'like', '%'.trim($keyword).'%'];
 		}
-		if(isset($_GET['storeType'])){//选择哪个类型店铺的促销活动
-			$join = [
-				['goods g','g.id = p.goods_id'],
-				['goods_base gb','gb.id = g.goods_base_id'],
-			];
-			$where[] = ['g.sale_type','=',1];
-		}
-		$field = array(
-			'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
-			'gb.name as goods_name','gb.retail_price'
-		);
-		$order = 'sort';
+		$order = ['id'=>'desc','sort'=>'desc'];
 		$where = array_merge($_where, $where);
+		$order = array_merge($_order, $order);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		 $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
-		echo $this->getLastSql();exit;
+		return $this->alias('p')->where($where)->join($join)->field($field)->order($order)->paginate($pageSize);
 	}
 
 	/**
@@ -107,7 +129,7 @@ class Promotion extends Model {
 	 * @return array|\PDOStatement|string|\think\Collection
 	 * 查询多条数据
 	 */
-	public function selectPromotion($where=[],$field=[],$order=[],$join=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'p.status' => 0,
 		);
@@ -115,27 +137,18 @@ class Promotion extends Model {
 		);
 		$where = array_merge($_where, $where);
 		$_order = array(
-			'id'=>'desc',
+			'p.id'=>'desc',
 		);
 		$order = array_merge($_order, $order);
-		if($field){
-			$list = $this->alias('p')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('p')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$list = $this->alias('g')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
-			return $list->toArray();
+			$list = $list->toArray();
 		}
 		return $list;
 	}
@@ -147,27 +160,22 @@ class Promotion extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getPromotion($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'p.status' => 0,
 		);
+		$_join = array(
+		);
 		$where = array_merge($_where, $where);
+		$list = $this->alias('p')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
 
-		if($field){
-			$info = $this->alias('p')
-				->field($field)
-				->join($join)
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('p')
-				->where($where)
-				->join($join)
-				->find();
+			->find();
+		if(!empty($list)){
+			$list = $list->toArray();
 		}
-		if(!empty($info)){
-			return $info->toArray();
-		}
-		return $info;
+		return $list;
 	}
 }

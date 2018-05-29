@@ -29,18 +29,18 @@ class Store extends FactoryBase
             $join =[
                 ['record r','f.id = r.factory_id'],
             ];
-            $factoryStore =  $modelFactory -> getFactory($where,$file,$join);
+            $factoryStore =  $modelFactory -> getInfo($where,$file,$join);
             $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
             $modelFactory = new \app\factory\model\Brand();
             $where = [['b.factory_id','=',$this->factory['factory_id']]];
             $file = ['b.id,b.name,b.brand_img as img'];
-            $brandStores =  $modelFactory -> selectBrand($where,$file);
+            $brandStores =  $modelFactory -> getList($where,$file);
             $this -> assign('brandStores',$brandStores);
             //查看已申请的店铺
             $modeStore = new \app\factory\model\Store();
             $where = [['s.factory_id','=',$this->factory['factory_id']]];
-            $storesApplied = $modeStore->selectStore($where);
+            $storesApplied = $modeStore->getList($where);
             $this -> assign('storesApplied',$storesApplied);
             return $this->fetch();
         }
@@ -76,7 +76,7 @@ class Store extends FactoryBase
                 ['s.factory_id','=',$this->factory['factory_id']],
                 ['s.is_default','=',1],
             ];
-            $storeInfo = $model -> getStore($_where);
+            $storeInfo = $model -> getInfo($_where);
             $storeList =  $model -> getStoreList($this -> factory['factory_id']);
             $this -> assign('storeList',$storeList);
             if(!$storeInfo){
@@ -85,7 +85,7 @@ class Store extends FactoryBase
             $this -> assign('storeInfo',$storeInfo);
         }elseif ($storeCount == 1){
             $where = [ ['s.factory_id','=',$this->factory['factory_id']] ];
-            $storeInfo = $model -> getStore($where);
+            $storeInfo = $model -> getInfo($where);
             $this -> assign('storeInfo',$storeInfo);
         }else{
             $this -> assign('noStore',1);

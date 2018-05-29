@@ -9,12 +9,12 @@ use think\Db;
 class Factory extends Model {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'factory';
+	// 设置主键
+	protected $pk = 'id';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
-//	protected $readonly = ['name'];
 
-	/**
-	 * 编辑
+	/**编辑
 	 */
 	public function edit($uid=''){
 		$data = input('post.');
@@ -23,7 +23,7 @@ class Factory extends Model {
 		$file = array(
 			'business_license','auth_letter',
 		);
-		$oldFactoryInfo = $this -> getFactory($where,$file);
+		$oldFactoryInfo = $this -> getInfo($where,$file);
 		$validate = validate('Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
@@ -48,7 +48,7 @@ class Factory extends Model {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$factoryUserModel =  new \app\factory\model\FactoryUser;
+			$factoryUserModel =  new \app\factory\model\UserFactory;
 			$data['user_id'] = $uid;
 			$data['factory_id'] = $this->getAttr('id');
 			$result = $factoryUserModel -> allowField(true) -> save($data);
@@ -61,73 +61,42 @@ class Factory extends Model {
 		}
 	}
 
-
-
-
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $order
-	 * @param array $join
-	 * @param string $limit
-	 * @return array|\PDOStatement|string|\think\Collection
-	 * 查询多条数据
+	/**查询多条数据
 	 */
-	public function selectFactory($where=[],$field=[],$join=[],$order=[],$limit=''){
+	public function selectFactory($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'f.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		if($field){
-			$list = $this->alias('f')
-				->where($where)
-				->field($field)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}else{
-			$list = $this->alias('f')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->order($order)
-				->limit($limit)
-				->select();
-		}
+		$list = $this->alias('f')
+			->where($where)
+			->field($field)
+			->join(array_merge($_join,$join))
+			->order($order)
+			->limit($limit)
+			->select();
 		if(!empty($list)){
 			$list = $list ->toArray();
 		}
 		return $list;
 	}
 
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $join
-	 * @return array|null|\PDOStatement|string|Model
-	 * 查找一条数据
+	/**查找一条数据
 	 */
-	public function getFactory($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'f.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		if($field){
-			$info = $this->alias('f')
-				->field($field)
-				->join(array_merge($_join,$join))
-				->where($where)
-				->find();
-		}else{
-			$info = $this->alias('f')
-				->where($where)
-				->join(array_merge($_join,$join))
-				->find();
-		}
+		$info = $this->alias('f')
+			->field($field)
+			->join(array_merge($_join,$join))
+			->where($where)
+			->find();
 		if(!empty($info)){
 			$info = $info ->toArray();
 		}

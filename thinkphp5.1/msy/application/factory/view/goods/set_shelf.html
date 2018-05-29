@@ -1,0 +1,123 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="top_nav_fixed">
+		<div class="top_bar columns_flex l-r-sides">
+			<div class="">
+				<a class="home">首页</a>
+			</div>
+			<div class="">
+				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+				<span>爱国宾</span>
+			</div>
+			<div class="">
+				<a class="switch-account">切换我的店铺</a>
+			</div>
+		</div>
+	</section>
+	<section class="columns_flex l-r-sides">
+		<div>
+			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+			<div>
+				<p><span>某某</span>官方旗舰店</p>
+				<p>B2B采购商城 <span>供应商自营</span></p>
+			</div>
+		</div>
+		<div>
+			<a href="" class="personal_center">我的</a>
+			<a href="" class="my-store">我的店铺</a>
+		</div>
+	</section>
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="">
+				店铺提醒
+			</a>
+			<a href="" class="current">
+				店铺管理
+			</a>
+			<a href="">
+				营销推广
+			</a>
+			<a href="">
+				官方活动
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type store-manage-type bottomLine">
+		<div class="columns_flex f20">
+			<a >设置</a>
+			<a class="" href="{:url('Goods/manage')}">商品</a>
+			<a href="{:url('Goods/setSort')}">排序</a>
+			<a href="{:url('Goods/setInventory')}">入仓</a>
+			<a class="column_type current">上架</a>
+			<a>卡券</a>
+		</div>
+	</section>
+	<section class="">
+		<div class="content-wrapper">
+			<ul class="columns_flex flex-both-side" id="list">
+			</ul>
+		</div>
+	</section>
+
+</article>
+<!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
+{/block}
+{block name="common"}
+{include file="template/loading.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="factory_js/getGoodsList.js"></script>
+<script type="text/javascript">
+	$(function () {
+		var config = {
+			pageSize:4,
+			pageType:'shelf',
+		};
+		var url = module+'goods/getList';
+		//初始化商品列表
+		getPage(url,config);
+		//上拉加载更多
+		getMore(url,config);
+
+		//上下架
+		$('body').on('click','.shelf',function(){
+			var shelfStatus=$(this).data('shelf');
+			var _this = $(this);
+			var storeType=$('.channel_nav a.current').data('type');
+			var goodsId = $(this).parents('li').data('id');
+			var postData ={};
+			postData.goodsId = goodsId;
+			postData.shelf_status = shelfStatus;
+			postData.storeType = storeType;
+			var url = module+'goods/setShelf';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				dataType:'json',
+				beforeSend: function(){
+				},
+				error:function (xhr) {
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					if(data.status == 1){
+						if(shelfStatus==2){
+							_this.removeClass('shelf').addClass('apply-shelf').text('已申请');
+						}else{
+							_this.data('shelf',2);
+							_this.addClass('up-shelf').text('上架');
+						}
+					}
+				}
+			});
+		})
+	});
+</script>
+{/block}
