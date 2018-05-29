@@ -12,15 +12,18 @@ class FactoryBase extends UserBase{
         $modelUserFactory = new \app\factory\model\UserFactory();
         $where = [
             ['status','=',0],
-            ['is_default','=',1],
             ['user_id','=',$this->user['id']],
         ];
-        $info = $modelUserFactory->where($where)->field('factory_id')->find()->toArray();
-        $factoryId = $info['factory_id'];
-        if (!$factoryId){
+        $list = $modelUserFactory->where($where)->field('factory_id')->select()->toArray();
+        $factoryCount = count($list);
+        if ($factoryCount==0){//没有入住供应商
             $this->error('没有入住供应商，请入住', 'Deploy/register');
+        }elseif($factoryCount==1){//入住一家供应商
+            $info = $list[0];
+            \common\cache\Factory::remove($info['id']);
+            $this->factory = \common\cache\Factory::get($info['id']);
+        }elseif($factoryCount>1){//入住多家供应商
+            //如果按戴总的逻辑，这里停不下
         }
-        \common\cache\Factory::remove($factoryId);
-        $this->factory = \common\cache\Factory::get($factoryId);
     }
 }
