@@ -18,7 +18,7 @@ class FactoryBase extends UserBase{
         $info = $modelUserFactory->where($where)->field('factory_id')->find()->toArray();
         $factoryId = $info['factory_id'];
         if (!$factoryId){
-            $this->error('没有产商入住，请入住', 'Deploy/register');
+            $this->error('没有入住供应商，请入住', 'Deploy/register');
         }
         \common\cache\Factory::remove($factoryId);
         $this->factory = \common\cache\Factory::get($factoryId);
