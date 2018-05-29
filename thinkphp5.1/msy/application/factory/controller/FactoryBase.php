@@ -9,7 +9,18 @@ class FactoryBase extends UserBase{
     
     public function __construct(){
         parent::__construct();
-        $factoryInfo = Session::get('factory');
+        $model = new \app\factory\model\UserFactory();
+        $where = [
+            ['user_id','=',$this->user['id']],
+        ];
+        $factoryCount = $model->where($where)->count('id');
+        if($factoryCount > 1){
+            $this->success('你有多家厂商入住，请选择一家', 'Index/index');
+        }elseif ($factoryCount == 1){
+            $factoryInfo = $model->getInfo($where,$file,$join);
+        }elseif (!$factoryCount){
+            $this->success('没有产商入住，请入住', 'Deploy/register');
+        }
         if(empty($factoryInfo)){
             $factoryInfo = $this ->_getFactory();
         }
