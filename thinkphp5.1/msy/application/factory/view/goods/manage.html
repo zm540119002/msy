@@ -125,17 +125,13 @@
 				<span>功能推荐</span>
 			</div>
 			<div class="backups-right">
-				<a href="javascript:void(0);" class="gr">备份本店铺商品数据</a>
-				<p>上次备份日期:<span>2018年5月21日</span></p>
-				<a href="javascript:void(0);" class="gr copy-store">复制商品数据到本店铺</a>
-
 				<a href="javascript:void(0);" class="gr backup">备份本店铺商品数据</a>
 				{notempty name="backupTime"}
 				<p>上次备份日期:<span class="backup-time">{$backupTime}</span></p>
 				{else /}
 				<p>上次备份日期:<span class="backup-time">从未备份</span></p>
 				{/notempty}
-				<a href="javascript:void(0);" class="gr copy-goods">复制商品数据到本店铺</a>
+				<a href="javascript:void(0);" class="gr copy-store">复制商品数据到本店铺</a>
 			</div>
 		</div>
 	</section>
@@ -221,9 +217,7 @@
 				dialog.success(msg.info);
 			})
 		});
-		$('body').on('click','.backup',function () {
 
-		})
 
 	});
 </script>
