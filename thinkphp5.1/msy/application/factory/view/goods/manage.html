@@ -12,55 +12,74 @@
 	</nav>
 	<div class="database-item">
 		<ul class="goods-store-content">
-			<li class="columns_flex">
+			{notempty name="selfStore"}
+			<li class="columns_flex" data-store-id="{$selfStore.id}">
 				<div>
-					<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+					{notempty name="selfStore.img"}
+					<img src="public_uploads/{$selfStore.img}" alt="" class="small_default_img">
+					{else /}
+					<img src="public_uploads/default/no_pic_40.jpg" alt="">
+					{/notempty}
 				</div>
 				<div>
 					<p>本店铺商品数据备份</p>
-					<p><span>日期：</span></p>
+					<p><span>日期：{$selfStore.backup_time}</span></p>
 				</div>
 			</li>
+			{/notempty}
 		</ul>
 		<ul class="goods-store-content">
-			<li class="columns_flex l-r-sides">
+			{notempty name="otherStores"}
+			{volist name="otherStores" id="vo"}
+			<li class="columns_flex l-r-sides" data-store-id="{$vo.id}">
 				<div>
-					<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
+					{notempty name="vo.img"}
+					<img src="public_uploads/{$vo.img}" alt="" class="small_default_img">
+					{else /}
+					<img src="public_uploads/default/no_pic_40.jpg" alt="">
+					{/notempty}
 				</div>
 				<div>
-					<p><span>某某</span>官方旗舰店</p>
+					{if $vo.store_type == 1 }
+					<span>{$vo.name}</span>官方旗舰店
+					{elseif $vo.store_type == 2/}
+					<span>{$vo.name}</span>品牌旗舰店
+					{else /}
+					{/if}
+
+					{if $vo.run_type == 1 }
 					<p>B2B采购商城</p>
+					{elseif $vo.run_type == 2 /}
+					<p>B2B分成商城</p>
+					{elseif $vo.run_type == 3 /}
+					<p>B2C零售商城</p>
+					{else /}
+					{/if}
 				</div>
-				<div>
+				<div class="">
+				{if $vo.auth_status == -2 }
+					<span>未通过</span>
+				{elseif $vo.auth_status == -1 /}
+					<span>已关闭</span>
+				{elseif $vo.auth_status == 0 /}
+					<span>审核中</span>
+				{elseif $vo.auth_status == 1 /}
 					<span>建设中</span>
+				{elseif $vo.auth_status == 2 /}
+					<span>营业中</span>
+				{else /}
+				{/if}
 				</div>
 			</li>
+			{/volist}
+			{/notempty}
 		</ul>
 		<div class="error_tipc"></div>
 		<a href="javascript:void(0);" class="next-step step">下一步</a>
 	</div>
 	<div class="database-item hide">
-		<ul class="goods-database-content">
-			<li>
-				<img src="http://msy.new.com/static/common/img/default/no_pic_100.jpg" alt="" class="left">
-				<div class="database-r">
-					<p>商品名商品名商品名商品名</p>
-					<div class="p-r">
-						<span>￥</span>
-						<price>888.00</price>
-					</div>
-				</div>
-			</li>
-			<li>
-				<img src="http://msy.new.com/static/common/img/default/no_pic_100.jpg" alt="" class="left">
-				<div class="database-r">
-					<p>商品名商品名商品名商品名</p>
-					<div class="p-r">
-						<span>￥</span>
-						<price>88888.00</price>
-					</div>
-				</div>
-			</li>
+		<ul class="goods-database-content" id="listLayer">
+
 		</ul>
 	</div>
 </section>
@@ -126,8 +145,8 @@
 			</div>
 			<div class="backups-right">
 				<a href="javascript:void(0);" class="gr backup">备份本店铺商品数据</a>
-				{notempty name="backupTime"}
-				<p>上次备份日期:<span class="backup-time">{$backupTime}</span></p>
+				{notempty name="selfStore"}
+				<p>上次备份日期:<span class="backup-time">{$selfStore.backup_time}</span></p>
 				{else /}
 				<p>上次备份日期:<span class="backup-time">从未备份</span></p>
 				{/notempty}
@@ -165,7 +184,7 @@
 		var databaseContent=$('#databaseContent').html();
 		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
 			var _this=$(this);
-				
+
 			layer.open({
 				title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
 				className:'databaseLayer',
@@ -180,18 +199,26 @@
 		});
 		$('body').on('click','.next-step',function(){
 			var _this=$(this);
-			var oLi=$('.databaseLayer .goods-store-content li');
+			var oLi = $('.databaseLayer .goods-store-content li');
+			var storeId  = $('.databaseLayer .goods-store-content li.current').data('store-id');
 			if(oLi.hasClass('current')){
 				layer.open({
 					title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
 					className:'databaseLayer',
 					content:databaseContent,
 					success:function(){
-						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
+//						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
 						if(_this.hasClass('step')){
 							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
 							$('.databaseLayer .database-item').hide().eq(1).show();
 						}
+						var url = module + 'Goods/getBackup';
+						var config = {
+							storeId:storeId,
+							pageSize:4,
+						};
+						getPageLayer(url,config);
+						getMoreLayer(url,config)
 					},
 					yes:function(index){
 						layer.close(index);
@@ -225,10 +252,6 @@
 				dialog.success(msg.info);
 			})
 		});
-		$('body').on('click','.databaseLayer .goods-database-nav li',function(){
-			
-			
-		})
 
 	});
 </script>

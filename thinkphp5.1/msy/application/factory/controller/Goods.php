@@ -99,6 +99,9 @@ class Goods extends StoreBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
         $model = new\app\factory\model\Goods;
         $where = [
             ['g.store_id','=',$this->store['id']],
@@ -147,12 +150,12 @@ class Goods extends StoreBase
                 //本店铺商品备份文件名
                 if($storeInfo['id'] == $this -> store['id']){
                     $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
-                    $this -> assign('backupTime',$backupTime);
                     $selfStore = $storeInfo;
+                    $selfStore['backup_time'] = $backupTime;
                     $this -> assign('selfStore',$selfStore);
                 }else{
                     //本厂商其他店铺商品备份文件
-                    $otherStores = $storeInfo;
+                    $otherStores[] = $storeInfo;
                     $this -> assign('otherStores',$otherStores);
                 }
             }
@@ -227,5 +230,26 @@ class Goods extends StoreBase
             $fileCreateTime = ['create_time'=>date("Y年m月d日 H:i:s",filemtime($fileName))];
             return successMsg('成功',$fileCreateTime);
         }
+    }
+
+    public function getBackup(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $storeId = (int)input('get.storeId');
+        $modelStore = new \app\factory\model\Store;
+        if(!$modelStore -> checkStoreExist($storeId,$this -> factory['factory_id'])){
+            return errorMsg('不存在店铺');
+        }
+        //存储路径
+        $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
+        $storeBackupFile = $storePath.$this->store['id'].'.txt';
+        $backup = file_get_contents($storeBackupFile);
+        $goodsListBackup = json_decode($backup,true);
+        $this -> assign('goodsListBackup',$goodsListBackup);
+        return $this -> fetch('List_backup');
+        print_r($backup);exit;
+
+
     }
 }
