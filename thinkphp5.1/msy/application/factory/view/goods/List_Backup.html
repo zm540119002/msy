@@ -1,0 +1,19 @@
+{notempty name="goodsListBackup"}
+{volist name="goodsListBackup" id="vo"}
+<li>
+    {notempty name="vo.thumb_img"}
+    <img src="public_uploads/{$vo.thumb_img}" alt="" class="left">
+    {else}
+    <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+    {/notempty}
+    <div class="database-r">
+        <p>{$vo.name}</p>
+        <div class="p-r">
+            <span>￥</span>
+            <price>{$vo.sale_price}</price>
+        </div>
+    </div>
+</li>
+{/volist}
+{/else}
+{/notempty}

@@ -178,4 +178,20 @@ class Store extends Model {
 		}
 		return $storeInfo;
 	}
+
+	/**检查店铺是否属于此厂商
+	 */
+	public function checkStoreExist($id,$factoryId){
+		$where = [
+			['id','=',$id],
+			['factory_id','=',$factoryId]
+		];
+		$count = $this->where($where)->count();
+		if($count){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
 }
