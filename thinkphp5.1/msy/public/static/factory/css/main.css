@@ -946,6 +946,9 @@ transparent;
     color:#333;
     pointer-events: none; 
 }
+.goods-database-nav li.disabled{
+    pointer-events: none; 
+}
 .new-store-item .content-label{
     margin-bottom:20px;
 }
