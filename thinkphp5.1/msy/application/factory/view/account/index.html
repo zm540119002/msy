@@ -147,13 +147,13 @@
 					postData.mobile_phone = $('.addCcountLayer').find('[name=mobile_phone]').val();
 //					postData.id = 65;
 					if(!postData.name){
-//						content = '请输入姓名';
+						content = '请输入姓名';
 					}else if(!isMobilePhone(postData.mobile_phone)){
 						content = '请输入正确的手机号码';
 					}else if(!userFactoryRoleIds.length){
-//						content = '请设置角色';
+						content = '请设置角色';
 					}else if(!userFactoryOrganizeId){
-//						content = '请设置组织';
+						content = '请设置组织';
 					}
 					if(content){
 						dialog.error(content);
@@ -161,8 +161,6 @@
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
 					$.post(action,postData,function(data){
-						console.log(data);
-						return ;
 						if(data.status==0){
 							dialog.error(data.info);
 						}else{

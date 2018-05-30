@@ -22,8 +22,7 @@ class Account extends \think\Model {
 		}
 		//开启事务
 		$this->startTrans();
-		//修改用户
-		if($postData['id'] && intval($postData['id'])){
+		if($postData['id'] && intval($postData['id'])){//修改用户
 			$res = $this->isUpdate(true)->save($postData);
 			if($res===false){
 				$this->rollback();//回滚事务
@@ -40,56 +39,55 @@ class Account extends \think\Model {
 				return errorMsg('新增失败',$this->getError());
 			}
 			$postData['id'] = $this->getAttr('id');
-			//新增用户工厂
 			$user = $this->get($postData['id']);
-			$userFactory = $user->userFactory();
-			if(empty($userFactory)){
+			if(!empty($user)){
+				//新增用户工厂
 				$data = [
 					'user_id' => $postData['id'],
 					'factory_id' => $factoryId,
 					'type' => 2,
 				];
-				$userFactory->save($data);
-			}
-			//新增用户工厂角色
-			if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
-				foreach ($postData['userFactoryRoleIds'] as $key){
+				$user->userFactory()->save($data);
+				//新增用户工厂角色
+				if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
 					$data = [];
-					$data[] = [
+					foreach ($postData['userFactoryRoleIds'] as $val){
+						$data[] = [
+							'user_id' => $postData['id'],
+							'factory_id' => $factoryId,
+							'role_id' => $val,
+						];
+					}
+					$user->UserFactoryRole()->saveAll($data);
+				}
+				//新增用户工厂组织
+				if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
+					$data = [
 						'user_id' => $postData['id'],
 						'factory_id' => $factoryId,
-						'role_id' => $key,
+						'organize_id' => $postData['userFactoryOrganizeId'],
 					];
+					$user->userFactoryOrganize()->save($data);
 				}
-				$user->UserFactoryRole()->saveAll($data);
-			}
-			//新增用户工厂组织
-			if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
-				$data = [
-					'user_id' => $postData['id'],
-					'factory_id' => $factoryId,
-					'organize_id' => $postData['userFactoryOrganizeId'],
-				];
-				$user->userFactoryOrganize()->save($data);
 			}
 		}
 		$this->commit();//提交事务
 		return successMsg('成功！',$postData);
 	}
 
-	//用户-工厂-关系表
+	//用户-工厂-关联模型
 	public function userFactory(){
-		return $this->hasMany('UserFactory','factory_id','id');
+		return $this->hasOne('UserFactory');
 	}
 
-	//用户-工厂-角色-关系表
+	//用户-工厂-角色-关联模型
 	public function userFactoryRole(){
-		return $this->hasMany('UserFactoryRole','role_id','id');
+		return $this->hasMany('UserFactoryRole');
 	}
 
-	//用户-工厂-组织-关系表
+	//用户-工厂-组织-关联模型
 	public function userFactoryOrganize(){
-		return $this->hasOne('UserFactoryOrganize','id');
+		return $this->hasOne('UserFactoryOrganize');
 	}
 
 	//获取列表
