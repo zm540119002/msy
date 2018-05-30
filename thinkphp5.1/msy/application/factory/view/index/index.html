@@ -3,15 +3,6 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<section id="vendorInfoList" style="display:none;">
-	<ul class="vendorInfoList">
-		{notempty name="factoryList"}
-			{volist name="factoryList" id="vo"}
-				<li data-id="{$vo.id}" class="">{$vo.name}</li>
-			{/volist}
-		{/notempty}
-	</ul>
-</section>
 <!--店铺预览-->
 <section id="factoryStoreList" style="display: none;">
 	<ul class="factory-store-list">
