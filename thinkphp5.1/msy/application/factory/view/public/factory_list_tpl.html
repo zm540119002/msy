@@ -1,0 +1,40 @@
+<section class="message-center-info f20" style="display:none;" id="factoryList">
+    <ul class="vendorInfoList">
+        <li data-id="1">
+            <span>达安有限公司</span>
+        </li>
+        <li data-id="1">
+            <span>达安有限公司</span>
+        </li>
+        <li data-id="1">
+            <span>达安有限公司</span>
+        </li>
+    </ul>
+</section>
+<script type="text/javascript">
+    $(function () {
+        var multiFactorySign = '{$multiFactorySign}';
+        console.log(multiFactorySign);
+        //如果是多供应商
+        if(multiFactorySign==1){
+            //选择供应商
+            var factoryList = $('#factoryList').html();
+            layer.open({
+                title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
+                className:'setRoleLayer',
+                type: 1,
+                content: factoryList,
+                anim: 'up',
+                style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+                success:function(){
+                    var winHeight=$(window).height();
+                    $('.signIn-wrapper').css('height',winHeight-120+'px');
+                },
+                btn:['确定'],
+                yes:function(index){
+                    layer.close(index);
+                }
+            });
+        }
+    });
+</script>
