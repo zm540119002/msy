@@ -52,8 +52,8 @@ class UserFactory extends \think\Model {
 			->join(array_merge($_join,$join))
 			->order($order)
 			->limit($limit)
-			->select()->toArray();
-		return empty($list)?[]:$list;
+			->select();
+		return empty($list)?[]:$list->toArray();
 	}
 
 	/**查找一条数据

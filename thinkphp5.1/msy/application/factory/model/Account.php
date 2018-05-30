@@ -83,7 +83,7 @@ class Account extends \think\Model {
 	}
 
 	//用户-工厂-角色-关系表
-	public function UserFactoryRole(){
+	public function userFactoryRole(){
 		return $this->hasMany('UserFactoryRole','role_id','id');
 	}
 

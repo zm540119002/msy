@@ -30,7 +30,8 @@ class StoreBase extends FactoryBase{
             ];
             $storeInfo = $model -> getInfo($_where,$file);
             if(!$storeInfo){
-                $this->success('你有多家店，请选择一家', 'Store/operaManageIndex');;
+                $this -> assign('notDefaultStore',1);
+                $this->success('你有多家店，请选择一家', 'Store/operaManageIndex');
             }
         }elseif ($storeCount == 1){
             $where_new = [

@@ -82,21 +82,29 @@
     margin:0.12rem 0.15rem 0 0;
 }
 .vendorInfoList{
-    height:3rem;
-    padding:0.15rem;
+    /*height:3rem;*/
+    padding:0.15rem 0.15rem 0 0;
     overflow:hidden;
     overflow-y:scroll;
 }
 .vendorInfoList li{
+    position:relative;
     margin:0 0 0.15rem 0;
-    padding:0.15rem 0;
+    padding:0.15rem 0 .15rem .10rem;
     border:1px solid #ff7aab;
     border-radius:4px;
     color:#ff7aab;
+    /*text-align: center;*/
 }
 .vendorInfoList li.current{
     background: #ff7aab;
     color:#fff;
+}
+.vendorInfoList li input{
+    display: inline-block;
+    width:15px;
+    height:15px;
+    -webkit-appearance: radio;
 }
 .add-type-tag {
     display: block;
@@ -944,6 +952,9 @@ transparent;
     background: #999;
     border:1px solid #999;
     color:#333;
+    pointer-events: none; 
+}
+.goods-database-nav li.disabled{
     pointer-events: none; 
 }
 .new-store-item .content-label{

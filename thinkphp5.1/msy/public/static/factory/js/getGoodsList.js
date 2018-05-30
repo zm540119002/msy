@@ -11,6 +11,17 @@ function getMore(url,config) {
         }
     });
 }
+
+//上拉加载更多
+var loadTriggerLayer = false;//加载触发器
+function getMoreLayer(url,config) {
+    $(window).on('scroll',function(){
+        if(loadTriggerLayer && $(document).scrollTop()+$(window).height()>=$(document).height()){
+            loadTriggerLayer = false;
+            getPageLayer(url,config);
+        }
+    });
+}
 //获取列表
 var currentPage = 1;//记录当前页
 var requestEnd = false;//请求结束标记
@@ -49,6 +60,49 @@ function getPage(url,config) {
             }
             currentPage ++;
             loadTrigger = true;
+        }
+    });
+}
+
+var currentPageLayer = 1;//记录当前页
+var requestEndLayer = false;//请求结束标记
+function getPageLayer(url,config) {
+    var postData = $.extend({},config);
+    postData.page = currentPageLayer ? currentPageLayer : 1;
+    postData.pageSize = postData.pageSize?postData.pageSize:4;
+    //请求结束标志
+    if(requestEndLayer){
+        dialog.error('没有更多啦');
+        loadTrigger = true;
+        return false;
+    }
+    $.ajax({
+        url: url,
+        data: postData,
+        type: 'get',
+        dataType:'json',
+        beforeSend: function(){
+            $('.loading').show();
+        },
+        error:function (xhr) {
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            console.log(data)
+            $('.loading').hide();
+            if(currentPageLayer == 1){
+                console.log( $('.databaseLayer #listLayer li'))
+                $('.databaseLayer #listLayer li').remove();
+                $('.databaseLayer #listLayer').append(data);
+            }else{
+                $('.databaseLayer #listLayer li:last').after(data);
+            }
+            if($($.parseHTML(data)).length<postData.pageSize){
+                requestEndLayer = true;
+            }
+            currentPageLayer ++;
+            loadTriggerLayer = true;
         }
     });
 }

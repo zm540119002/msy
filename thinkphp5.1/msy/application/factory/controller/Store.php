@@ -52,6 +52,7 @@ class Store extends FactoryBase
             return $model->edit($this -> factory['factory_id']);
         }
     }
+
     //设置默认产商
     public function setDefaultStore(){
         if(request()->isAjax()){
