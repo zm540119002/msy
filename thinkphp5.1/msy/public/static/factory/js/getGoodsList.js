@@ -69,7 +69,7 @@ var currentPageLayer = 1;//记录当前页
 var requestEndLayer = false;//请求结束标记
 function getPageLayer(url,config) {
     var postData = $.extend({},config);
-    postData.page = currentPageLayer ? currentPageLayer : postData.page;
+    postData.page = currentPageLayer ? currentPageLayer : 1;
     postData.pageSize = postData.pageSize?postData.pageSize:4;
     //请求结束标志
     if(requestEndLayer){
