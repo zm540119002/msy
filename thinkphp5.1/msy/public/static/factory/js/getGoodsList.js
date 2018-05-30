@@ -4,19 +4,20 @@
 //上拉加载更多
 var loadTrigger = false;//加载触发器
 function getMore(url,config) {
-    $(window).on('scroll',function(){
-        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-            loadTrigger = false;
-            getPage(url,config);
-        }
-    });
+    // $(window).on('scroll',function(){
+    //     if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+    //         loadTrigger = false;
+    //         getPage(url,config);
+    //     }
+    // });
 }
 
 //上拉加载更多
 var loadTriggerLayer = false;//加载触发器
 function getMoreLayer(url,config) {
-    $(window).on('scroll',function(){
-        if(loadTriggerLayer && $(document).scrollTop()+$(window).height()>=$(document).height()){
+    $('.goods-database-content').on('scroll',function(){
+        var listHeight=document.getElementById('listLayer').scrollHeight;
+        if(loadTriggerLayer && $('.goods-database-content').scrollTop()+$('.goods-database-content').height()>=listHeight){
             loadTriggerLayer = false;
             getPageLayer(url,config);
         }

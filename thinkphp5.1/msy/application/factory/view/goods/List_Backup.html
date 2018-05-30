@@ -3,7 +3,7 @@
 <li>
     {notempty name="vo.thumb_img"}
     <img src="public_uploads/{$vo.thumb_img}" alt="" class="left">
-    {else}
+    {else /}
     <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
     {/notempty}
     <div class="database-r">
@@ -15,5 +15,5 @@
     </div>
 </li>
 {/volist}
-{/else}
+{else /}
 {/notempty}
