@@ -23,17 +23,21 @@ class StoreBase extends FactoryBase
         $count = count($list);
         if ($count > 1) {
             //多家店判断是否有默认店铺
-            $where[] = ['is_default', '=', 1];
-            $list = $model -> getList($where);
-            $countDefault = count($list);
-            if (!$countDefault) {
+            $info = [];
+            foreach ($list as $val){
+                if($val['is_default']){
+                    $info = $val;
+                }
+            }
+            if (empty($info)) {
                 $this -> assign('notDefaultStore', 1);
                 $this -> success('你有多家店，请选择一家', 'Store/operaManageIndex');;
             }
-        } elseif (!$count) {
+        } elseif ($count == 1){
+            $info = $list[0];
+        }elseif (!$count) {
             $this -> success('没有店铺，请申请', 'Store/deployIndex');
         }
-        $info = $list[0];
         \common\cache\Store::remove($info['id']);
         $this -> store = \common\cache\Store::get($info['id']);
     }
