@@ -10,30 +10,33 @@ class UserFactory extends \think\Model {
     protected $connection = 'db_config_factory';
 
 	//设置默认厂商
-	public function setDefaultFactory($uid=''){
+	public function setDefaultFactory($userId=0){
 		if(request()->isAjax()){
-			$id = (int)input('post.id');
-			if(!$id){
-				return errorMsg('参数错误');
-			}
-			$this->startTrans();
-			$data = array('is_default' => 1);
-			$result = $this->allowField(true)->save($data,['id' => $id,'user_id'=>$uid]);
-			if(false === $result){
-				$this->rollback();
-				return errorMsg('修改默认失败');
-			}
+			$this->startTrans();//开启事务
 			$where = [
-				['id','<>',$id],
-				['user_id','=',$uid],
+				['status','=',0],
+				['user_id','=',$userId],
 			];
-			$result = $this ->where($where)->setField('is_default',0);
+			$result = $this->where($where)->setField('is_default',0);
 			if(false === $result){
-				$this->rollback();
-				return errorMsg('修改失败');
+				$this->rollback();//回滚事务
+				return errorMsg('失败');
 			}
-			$this->commit();
-			return successMsg("已选择");
+			$id = (int)input('post.id');
+			if($id){
+				$where[] = ['id','=',$id];
+			}
+			$factoryId = input('post.factoryId');
+			if(intval($factoryId)){
+				$where[] = ['factory_id','=',$factoryId];
+			}
+			$result = $this->where($where)->setField('is_default',1);
+			if(false === $result){
+				$this->rollback();//回滚事务
+				return errorMsg('失败');
+			}
+			$this->commit();//提交事务
+			return successMsg("成功");
 		}
 	}
 
@@ -52,8 +55,8 @@ class UserFactory extends \think\Model {
 			->join(array_merge($_join,$join))
 			->order($order)
 			->limit($limit)
-			->select()->toArray();
-		return empty($list)?[]:$list;
+			->select();
+		return empty($list)?[]:$list->toArray();
 	}
 
 	/**查找一条数据

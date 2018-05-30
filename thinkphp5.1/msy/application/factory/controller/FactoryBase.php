@@ -6,7 +6,8 @@ use think\facade\Session;
  */
 class FactoryBase extends UserBase{
     protected $factory = null;
-    
+    protected $factoryList = null;
+
     public function __construct(){
         parent::__construct();
         $modelUserFactory = new \app\factory\model\UserFactory();
@@ -14,16 +15,37 @@ class FactoryBase extends UserBase{
             ['status','=',0],
             ['user_id','=',$this->user['id']],
         ];
-        $list = $modelUserFactory->where($where)->field('factory_id')->select()->toArray();
+        $field = [
+            'factory_id','is_default',
+        ];
+        $list = $modelUserFactory->getList($where,$field);
         $factoryCount = count($list);
         if ($factoryCount==0){//没有入住供应商
             $this->error('没有入住供应商，请入住', 'Deploy/register');
         }elseif($factoryCount==1){//入住一家供应商
             $info = $list[0];
-            \common\cache\Factory::remove($info['id']);
-            $this->factory = \common\cache\Factory::get($info['id']);
+            \common\cache\Factory::remove($info['factory_id']);
+            $this->factory = \common\cache\Factory::get($info['factory_id']);
         }elseif($factoryCount>1){//入住多家供应商
-            //如果按戴总的逻辑，这里停不下
+            $info = [];
+            foreach ($list as $val){
+                if($val['is_default']){
+                    $info = $val;
+                }
+            }
+            if(!empty($info)){//存在默认供应商的情况
+                \common\cache\Factory::remove($info['factory_id']);
+                $this->factory = \common\cache\Factory::get($info['factory_id']);
+            }else{//不存在默认供应商的情况
+                $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
+            }
         }
+        $this->assign('factoryList',$this->factoryList);
+    }
+
+    //设置默认供应商
+    public function setDefaultFactory(){
+        $modelUserFactory = new \app\factory\model\UserFactory();
+        return $modelUserFactory->setDefaultFactory($this->user['id']);
     }
 }

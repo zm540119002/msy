@@ -1035,6 +1035,9 @@ color: #ed6d00;
     border-bottom:1px solid #d9d9d9;
     color:#0066cc;
 }
+.factoryListLayer{
+    position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;
+}
 .vendorInfoLayer .layui-m-layercont,
 .addTagLayer .layui-m-layercont,
 .editDetailLayer .layui-m-layercont,
