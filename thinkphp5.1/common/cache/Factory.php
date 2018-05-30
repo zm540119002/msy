@@ -11,14 +11,19 @@ class Factory{
         if(!$factory){
             $modelFactory = new \app\factory\model\Factory();
             $where = [
-                'status' => 0,
-                'id' => $factoryId,
+                ['status','=',0],
             ];
             $field = [
                 'id','name',
             ];
-            $factory = $modelFactory->getInfo($where,$field);
-            cache(self::$_cache_key.$factoryId, $factory,config('custom.factory_cache_time'));
+            if(is_array($factoryId)){
+                $where[] = ['id','in',$factoryId];
+                $factory = $modelFactory->selectFactory($where,$field);
+            }else{
+                $where[] = ['id','=',$factoryId];
+                $factory = $modelFactory->getInfo($where,$field);
+                cache(self::$_cache_key.$factoryId, $factory,config('custom.factory_cache_time'));
+            }
         }
         return $factory;
     }

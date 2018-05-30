@@ -26,6 +26,7 @@ class Organize extends FactoryBase
         if(!request()->isGet()){
             return config('custom.not_get');
         }
+
         $modelOrganize = new \app\factory\model\Organize();
         $list = $modelOrganize->getOrganizeList($this->factory['id']);
         return $list;

@@ -24,4 +24,5 @@ return [
     'sms_sign_name' => '美尚云',//短信签名名称（阿里云）
     'sms_template_code' => 'SMS_127169884',//短信模板CODE（阿里云）
     'factory_cache_time' => 60 * 60 * 24,//供应商缓存时间
+    'store_cache_time' => 60 * 60 * 24,//厂商缓存时间
 ];

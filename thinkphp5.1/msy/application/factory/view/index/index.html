@@ -3,15 +3,6 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<section id="vendorInfoList" style="display:none;">
-	<ul class="vendorInfoList">
-		{notempty name="factoryList"}
-			{volist name="factoryList" id="vo"}
-				<li data-id="{$vo.id}" class="">{$vo.name}</li>
-			{/volist}
-		{/notempty}
-	</ul>
-</section>
 <!--店铺预览-->
 <section id="factoryStoreList" style="display: none;">
 	<ul class="factory-store-list">
@@ -126,30 +117,8 @@
 	{notempty name="factoryList"}
 	<a href="javascript:void(0);" class="relation-vendor">切换供应商账号></a>
 	{/notempty}
-
-	<input type="hidden" value="{$factoryInfo.id|default=''}" class="factoryId">
 	<section class="message-center-info f20">
-		{notempty name="$factoryInfo"}
-		<div class="factoryInfo" data-id="{$factoryInfo.id|default=''}">企业名称:<span class="vendor-name">{$factoryInfo.name|default=''}</span></div>
-		{/notempty}
 		<p>欢迎来到供应商管理中心，美尚云平台支持企业多店铺运营管理。</p>
-		<ul class="vendorInfoList">
-			<li data-id="1">
-				<span>达安有限公司</span>
-				<input type="radio" name="factory" />
-				<span>设为默认供应商</span>
-			</li>
-			<li data-id="1">
-				<span>达安有限公司</span>
-				<input type="radio" name="factory" />
-				<span>设为默认供应商</span>
-			</li>
-			<li data-id="1">
-				<span>达安有限公司</span>
-				<input type="radio" name="factory" />
-				<span>设为默认供应商</span>
-			</li>
-		</ul>
 	</section>
 	<section>
 		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
@@ -160,31 +129,6 @@
 		<a href="">厂商使用帮助></a>
 		<a href="">人才招聘></a>
 		<a href="">版权信息备案号</a>
-	</section>
-
-	<section class="bottom_nav_fixed">
-		<nav class=" foot_nav_bar">
-			<ul class="columns_flex">
-				<li class="each_column ">
-					<a>
-						<span class="store"></span>
-						美容店家
-					</a>
-				</li>
-				<li class="each_column current">
-					<a>
-						<span class="practitioners"></span>
-						从业人员
-					</a>
-				</li>
-				<li class="each_column current">
-					<a>
-						<span class="manufacturer"></span>
-						供应商
-					</a>
-				</li>
-			</ul>
-		</nav>
 	</section>
 </article>
 {/block}

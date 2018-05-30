@@ -39,9 +39,6 @@ class Organize extends \think\Model {
 
 	//获取组织列表
 	public function getOrganizeList($factoryId){
-		$where = [
-			['factory_id', '=', $factoryId],
-		];
 		$allOrganize = $this->createTree($this->getAllOrganize($factoryId));
 		return empty($allOrganize)?[]:$allOrganize;
 	}
@@ -68,8 +65,8 @@ class Organize extends \think\Model {
 			'id','name','level','superior_id',
 		);	
 		$order = 'id';
-		$allOrganize = $this->where($where)->field($field)->order($order)->select()->toArray();
-		return empty($allOrganize)?[]:$allOrganize;
+		$allOrganize = $this->where($where)->field($field)->order($order)->select();
+		return empty($allOrganize)?[]:$allOrganize->toArray();
 	}
 
 	//删除

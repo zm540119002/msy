@@ -14,11 +14,35 @@ use app\store\model\Cart;
 class Order extends Model
 {
     // 设置当前模型对应的完整数据表名称
-    protected $table = 'orders';
+    protected $table = 'order';
     // 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
     // 设置主键
     protected $pk = 'order_id';
+
+    /**
+     * 相对的关联模型
+     * @return \think\model\relation\BelongsTo
+     */
+    public function orderDetail()
+    {
+        return $this->belongsTo('OrderDetail');
+    }
+
+    //相对的关联模型
+    public function addressStatic()
+    {
+        return $this->hasOne('AddressStatic', 'order_id');
+    }
+
+    /**
+     * 订单拆分关联模型
+     * @return \think\model\relation\HasMany
+     */
+    public function orderUnpack()
+    {
+        return $this->hasMany('OrderUnpack', 'order_id');
+    }
 
     /**
      * 添加订单
@@ -27,27 +51,24 @@ class Order extends Model
      * @param $address_id
      * @return array
      */
-    public function addOrder($user_id, $address_id)
+    public function addOrder($user_id, $address_id, $remark = '备注')
     {
+        config('database.datetime_format', false);  //解决时间戳自动转换问题
+        $address = new \app\store\model\Address;
+        $address_ret = $address->findAddress($user_id, $address_id);
+        if($address_ret['status']!==1){
+            return $address_ret;
+        }
+        unset($address_ret['data']['address_id']);
         $cart = new Cart;
-        $detail = $cart->alias('a')
-           ->join('goods b', 'a.goods_id=b.id', 'INNER')
-           ->field('a.goods_id, a.number, a.store_id, b.sale_price, b.inventory, b.name, b.thumb_img')
-           ->where(['a.user_id'=>$user_id])
-            ->select()->toArray();
-        if(!$detail||!is_array($detail)||count($detail)<=0){
-            return errorMsg('请添加结算商品');
+        $ret = $cart->getCartList($user_id);
+        if($ret['status']!==1){
+            return  errorMsg($ret['info']);
         }
         $amount = 0.00;
         $data = [];
         $order_sn = $this->createOrderSn();
-        foreach($detail as $v){
-            if($v['sale_price']<=0.00){
-                return errorMsg('【'.$v['name'].'】销售价格有误，不能购买！');
-            }
-            if($v['number']>$v['inventory']){
-                return errorMsg('【'.$v['name'].'】库存不足，不能购买！');
-            }
+        foreach($ret['data'] as $v){
             $amount += $v['number']*$v['sale_price'];
             $data[] = [ 'order_sn' => $order_sn,
                     'goods_id' =>$v['goods_id'],
@@ -65,13 +86,14 @@ class Order extends Model
                 'amount' => $amount,
                 'user_id' => $user_id,
                 'source' => 'PC',
-                'address_id' => $address_id,
-                'remark' => '星期六派送',
+                'remark' => $remark,
                 'create_time' => time(),
-            ], ['order_sn', 'amount', 'user_id', 'source', 'address_id', 'remark', 'create_time']);
+            ], ['order_sn', 'amount', 'user_id', 'source', 'remark', 'create_time']);
             $this->orderDetail()->insertAll($data);
             $this->orderDetail()->where(['order_sn'=>$order_sn])->setField(['order_id'=>$order['order_id']]);
-            $cart->where(['user_id'=>$user_id])->delete();
+            //$cart->where(['user_id'=>$user_id])->delete();
+            $address_ret['data']['order_id'] = $order['order_id'];
+            $this->addressStatic()->insert($address_ret['data']);
             $this->commit();
             return successMsg('添加订单成功');
         } catch (\Exception $e) {
@@ -93,9 +115,46 @@ class Order extends Model
         }
     }
 
-    //关联模型
-    public function orderDetail()
+    /**
+     * 拆分订单
+     * @param $order_id
+     * @return array
+     */
+    public function setOrderUnpack($order_id)
     {
-        return $this->belongsTo('OrderDetail');
+        $ret = $this->alias('a')->field('a.order_id, a.status, b.store_id, b.number, b.after_sale_price')
+            ->join('order_detail b', 'b.order_id=a.order_id', 'INNER')
+            ->where(['a.order_id'=>$order_id])
+            ->select();
+        if(count($ret)<=0){
+           return errorMsg('订单信息不存在');
+        }
+        if($ret[0]['status']!=2){
+           return errorMsg('未全额支付订单，不能拆分');
+        }
+        $data = [];
+        foreach($ret as $v){
+            if(array_key_exists($v['store_id'], $data)){
+                $data[ $v['store_id'] ] ['pay_money']=
+                    $data[$v['store_id']]['pay_money']+($v['after_sale_price']*$v['number']);
+            }else{
+                $data[ $v['store_id'] ] =[
+                    'order_id' => $order_id,
+                    'store_id' => $v['store_id'],
+                    'pay_money' => $v['after_sale_price']*$v['number'],
+                ];
+            }
+        }
+        $this->startTrans();
+        try{
+            $this->orderUnpack()->insertAll($data);
+            $this->where(['order_id'=>$order_id,'is_unpack'=>0])->setField(['is_unpack'=>1]);
+            $this->commit();
+            return successMsg('拆分订单成功');
+        } catch (\Exception $e) {
+            $this->rollback(); // 回滚事务
+            return errorMsg('拆分订单失败');
+        }
     }
+
 }
