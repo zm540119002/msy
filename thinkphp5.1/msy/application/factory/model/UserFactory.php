@@ -72,7 +72,7 @@ class UserFactory extends \think\Model {
 			->field($field)
 			->join(array_merge($_join,$join))
 			->where($where)
-			->find()->toArray();
-		return empty($info)?[]:$info;
+			->find();
+		return empty($info)?[]:$info->toArray();
 	}
 }
