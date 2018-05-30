@@ -137,13 +137,13 @@ class Goods extends StoreBase
 
     //商品管理展示页
     public function manage(){
-        $this->assign('factory',$this->factory);
+//        $this->assign('factory',$this->factory);
         //查看本店商品是否存在备份文件
         //存储路径
         $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
         //本厂商店铺备份文件
         $modelStore = new \app\factory\model\Store;
-        $storeList = $modelStore -> getStoreList($this -> factory['factory_id']);
+        $storeList = $modelStore -> getStoreList($this -> factory['id']);
         foreach ( $storeList as &$storeInfo) {
             $fileName = $storePath.$storeInfo['id'].'.txt';
             if(file_exists($fileName)){
@@ -239,7 +239,7 @@ class Goods extends StoreBase
         }
         $storeId = (int)input('get.storeId');
         $modelStore = new \app\factory\model\Store;
-        if(!$modelStore -> checkStoreExist($storeId,$this -> factory['factory_id'])){
+        if(!$modelStore -> checkStoreExist($storeId,$this -> factory['id'])){
             return errorMsg('不存在店铺');
         }
         //存储路径
