@@ -8,8 +8,4 @@ class UserFactoryRole extends \think\model\Pivot {
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
-
-	public function users(){
-		return $this->belongsToMany('\common\model\User');
-	}
 }

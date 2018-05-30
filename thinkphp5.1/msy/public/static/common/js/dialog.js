@@ -27,7 +27,7 @@ var dialog = {
             content : message?message:'成功',
             btn:['确定','取消'],
             end : function(){
-              
+
             },
             yes:function(index){
                 if(url){

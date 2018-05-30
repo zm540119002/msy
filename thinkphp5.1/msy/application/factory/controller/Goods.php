@@ -260,6 +260,6 @@ class Goods extends StoreBase
             }
         }
         $this -> assign('goodsListBackup',$goodsList);
-        return $this -> fetch('List_backup');
+        return $this -> fetch('list_backup');
     }
 }

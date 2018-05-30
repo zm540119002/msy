@@ -8,8 +8,4 @@ class UserFactoryOrganize extends \think\Model {
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
-
-	public function user(){
-		return $this->belongsTo('\common\model\User');
-	}
 }
