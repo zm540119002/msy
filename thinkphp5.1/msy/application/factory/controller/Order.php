@@ -8,11 +8,6 @@ namespace app\factory\controller;
 
 class Order extends StoreBase
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      *订单首页
      *

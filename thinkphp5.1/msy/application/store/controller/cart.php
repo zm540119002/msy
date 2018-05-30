@@ -13,7 +13,6 @@ use think\facade\Session;
 use app\store\model\Cart as CartModel;
 use app\store\model\Address;
 use app\store\model\Goods;
-//use app\store\model\store;
 
 /**
  * 购物车控制器
@@ -44,7 +43,13 @@ class Cart extends UserBase
         }else{
             $this->assign( 'address',  []);
         }
-        $this->assign( 'cartList', $this->cart->getCartList($this->user_id) );
+        $cart = $this->cart->getCartList($this->user_id);
+        if($cart['status']==1){
+            $this->assign('error_info', '');
+        }else{
+            $this->assign('error_info', $cart['info']);
+        }
+        $this->assign( 'cartList',  $cart['data']);
         return $this->fetch();
     }
 
@@ -63,6 +68,17 @@ class Cart extends UserBase
             return $ret;
         }
         return $this->cart->addGoods($this->user_id, $store_id, $goods_id, $number);
+    }
+
+    public function deleteGoods($goods_id)
+    {
+        return $this->cart->deleteGoods($this->user_id, $goods_id);
+    }
+
+    public function test()
+    {
+        $order = new \app\store\model\Order;
+        $order->setOrderUnpack(148);
     }
 
 }
