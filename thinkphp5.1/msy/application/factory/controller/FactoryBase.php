@@ -24,8 +24,6 @@ class FactoryBase extends UserBase{
             $this->error('没有入住供应商，请入住', 'Deploy/register');
         }elseif($factoryCount==1){//入住一家供应商
             $info = $list[0];
-            \common\cache\Factory::remove($info['factory_id']);
-            $this->factory = \common\cache\Factory::get($info['factory_id']);
         }elseif($factoryCount>1){//入住多家供应商
             $info = [];
             foreach ($list as $val){
@@ -33,13 +31,12 @@ class FactoryBase extends UserBase{
                     $info = $val;
                 }
             }
-            if(!empty($info)){//存在默认供应商的情况
-                \common\cache\Factory::remove($info['factory_id']);
-                $this->factory = \common\cache\Factory::get($info['factory_id']);
-            }else{//不存在默认供应商的情况
+            if(empty($info)){//不存在默认供应商的情况
                 $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
             }
         }
+        \common\cache\Factory::remove($info['factory_id']);
+        $this->factory = \common\cache\Factory::get($info['factory_id']);
         $this->assign('factoryList',$this->factoryList);
     }
 
