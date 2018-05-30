@@ -27,6 +27,11 @@ class FactoryBase extends UserBase{
             \common\cache\Factory::remove($info['id']);
             $this->factory = \common\cache\Factory::get($info['id']);
         }elseif($factoryCount>1){//入住多家供应商
+            $modelFactory = new \app\factory\model\Factory();
+            $where = [
+                
+            ];
+            $list = $modelFactory->selectFactory();
             $this->multiFactorySign = true;
         }
         $this->assign('multiFactorySign',$this->multiFactorySign);
