@@ -206,7 +206,7 @@ class Goods extends StoreBase
                 ['store_id','=',$this->store['id']]
             ];
             $field = [
-                'g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
+                'g.id,g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
             g.retail_price,g.retail_price,g.sale_price,g.settle_price'
             ];
             $goodsList = $model -> getList($where,$field);
@@ -232,6 +232,7 @@ class Goods extends StoreBase
         }
     }
 
+    //获取备份
     public function getBackup(){
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
@@ -248,8 +249,5 @@ class Goods extends StoreBase
         $goodsListBackup = json_decode($backup,true);
         $this -> assign('goodsListBackup',$goodsListBackup);
         return $this -> fetch('List_backup');
-        print_r($backup);exit;
-
-
     }
 }
