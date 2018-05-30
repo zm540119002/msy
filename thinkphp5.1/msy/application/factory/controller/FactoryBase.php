@@ -16,7 +16,7 @@ class FactoryBase extends UserBase{
             ['user_id','=',$this->user['id']],
         ];
         $field = [
-            'factory_id',
+            'factory_id','is_default',
         ];
         $list = $modelUserFactory->getList($where,$field);
         $factoryCount = count($list);
@@ -27,8 +27,25 @@ class FactoryBase extends UserBase{
             \common\cache\Factory::remove($info['factory_id']);
             $this->factory = \common\cache\Factory::get($info['factory_id']);
         }elseif($factoryCount>1){//入住多家供应商
-            $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
+            $info = [];
+            foreach ($list as $val){
+                if($val['is_default']){
+                    $info = $val;
+                }
+            }
+            if(!empty($info)){//存在默认供应商的情况
+                \common\cache\Factory::remove($info['factory_id']);
+                $this->factory = \common\cache\Factory::get($info['factory_id']);
+            }else{//不存在默认供应商的情况
+                $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
+            }
         }
         $this->assign('factoryList',$this->factoryList);
+    }
+
+    //设置默认供应商
+    public function setDefaultFactory(){
+        $modelUserFactory = new \app\factory\model\UserFactory();
+        return $modelUserFactory->setDefaultFactory($this->user['id']);
     }
 }

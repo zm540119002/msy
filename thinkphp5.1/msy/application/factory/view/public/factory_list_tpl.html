@@ -1,14 +1,10 @@
 <section class="message-center-info f20" style="display:none;" id="factoryList">
     <ul class="vendorInfoList">
-        <li data-id="1">
-            <span>达安有限公司</span>
+        {volist name='factoryList' id='vo'}
+        <li data-id="{$vo.id}">
+            <span>{$vo.name}</span>
         </li>
-        <li data-id="1">
-            <span>达安有限公司</span>
-        </li>
-        <li data-id="1">
-            <span>达安有限公司</span>
-        </li>
+        {/volist}
     </ul>
 </section>
 <script type="text/javascript">
@@ -31,9 +27,27 @@
                 },
                 btn:['确定'],
                 yes:function(index){
-                    layer.close(index);
+                    var postData = {};
+                    postData.factoryId = $('.factoryListLayer li.current').data('id');
+                    if(!postData.factoryId){
+                        dialog.error('请选择供应商');
+                        return false;
+                    }
+                    var url = 'setDefaultFactory';
+                    $.post(url,postData,function(data){
+                        if(data.status==0){
+                            dialog.error(data.info);
+                        }else if(data.status==1){
+                            layer.close(index);
+                        }
+                    });
                 }
             });
         }
+        //选择效果
+        $('body').on('click','.factoryListLayer li',function(){
+            $('.factoryListLayer li').removeClass('current');
+            $(this).toggleClass('current');
+        });
     });
 </script>
