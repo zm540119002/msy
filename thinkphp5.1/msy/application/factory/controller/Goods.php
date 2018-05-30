@@ -247,7 +247,19 @@ class Goods extends StoreBase
         $storeBackupFile = $storePath.$this->store['id'].'.txt';
         $backup = file_get_contents($storeBackupFile);
         $goodsListBackup = json_decode($backup,true);
-        $this -> assign('goodsListBackup',$goodsListBackup);
+        $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+            input('get.pageSize',0,'int') : config('custom.default_page_size');
+        $start = $pageSize* (input('get.page',0,'int')-1);
+        $end = $pageSize* input('get.page',0,'int')-1;
+        $goodsList = [];
+        foreach ($goodsListBackup as $k=>$v){
+            if($k>=$start && $k<= $end){
+                $goodsList[] = $v;
+            }elseif($k>$end){
+                break;
+            }
+        }
+        $this -> assign('goodsListBackup',$goodsList);
         return $this -> fetch('List_backup');
     }
 }

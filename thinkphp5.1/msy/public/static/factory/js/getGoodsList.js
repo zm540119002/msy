@@ -73,7 +73,7 @@ function getPageLayer(url,config) {
     postData.pageSize = postData.pageSize?postData.pageSize:4;
     //请求结束标志
     if(requestEndLayer){
-        dialog.error('没有更多啦');
+        // dialog.error('没有更多啦');
         loadTrigger = true;
         return false;
     }
