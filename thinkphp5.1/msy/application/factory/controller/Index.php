@@ -10,15 +10,4 @@ class Index extends UserBase
     {
         return $this->fetch();
     }
-
-    /**供应商列表页
-     */
-    public function factoryList(){
-        $modelUserFactory = new \app\factory\model\UserFactory();
-        $where = [
-            ['status','=',0],
-            ['user_id','=',$this->user['id']],
-        ];
-        $list = $modelUserFactory->where($where)->field('factory_id')->select()->toArray();
-    }
 }
