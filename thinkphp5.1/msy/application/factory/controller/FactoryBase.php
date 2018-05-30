@@ -6,7 +6,7 @@ use think\facade\Session;
  */
 class FactoryBase extends UserBase{
     protected $factory = null;
-    protected $multiFactorySign = false;
+    protected $factoryList = null;
 
     public function __construct(){
         parent::__construct();
@@ -24,16 +24,11 @@ class FactoryBase extends UserBase{
             $this->error('没有入住供应商，请入住', 'Deploy/register');
         }elseif($factoryCount==1){//入住一家供应商
             $info = $list[0];
-            \common\cache\Factory::remove($info['id']);
-            $this->factory = \common\cache\Factory::get($info['id']);
+            \common\cache\Factory::remove($info['factory_id']);
+            $this->factory = \common\cache\Factory::get($info['factory_id']);
         }elseif($factoryCount>1){//入住多家供应商
-            $modelFactory = new \app\factory\model\Factory();
-            $where = [
-                
-            ];
-            $list = $modelFactory->selectFactory();
-            $this->multiFactorySign = true;
+            $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
         }
-        $this->assign('multiFactorySign',$this->multiFactorySign);
+        $this->assign('factoryList',$this->factoryList);
     }
 }

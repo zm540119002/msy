@@ -13,10 +13,9 @@
 </section>
 <script type="text/javascript">
     $(function () {
-        var multiFactorySign = '{$multiFactorySign}';
-        console.log(multiFactorySign);
+        var factoryList = '{:json_encode($factoryList)}';
         //如果是多供应商
-        if(multiFactorySign==1){
+        if(factoryList!='null'){
             //选择供应商
             var factoryList = $('#factoryList').html();
             layer.open({
