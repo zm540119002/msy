@@ -28,8 +28,6 @@ class Account extends \think\Model {
 				$this->rollback();//回滚事务
 				return errorMsg('更新失败',$this->getError());
 			}
-			$roles = $this->roles();
-			return $roles;
 		}else{//新增用户
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
