@@ -6,7 +6,7 @@ class Brand extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Brand;
-        $where = [['factory_id','=',$this->factory['factory_id']]];
+        $where = [['factory_id','=',$this->factory['id']]];
         $brandList =  $model -> getList($where);
         $this -> assign('brandList',$brandList);
         return $this->fetch();
@@ -17,7 +17,7 @@ class Brand extends FactoryBase
     {
         $model = new \app\factory\model\Brand;
         if(request()->isPost()){
-            return $model -> edit($this->factory['factory_id']);
+            return $model -> edit($this->factory['id']);
         }
         $categoryModel = new \app\index_admin\model\Category;
         $categoryList = $categoryModel -> selectFirstCategory();
