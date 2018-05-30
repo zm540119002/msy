@@ -16,7 +16,7 @@
 			<li class="columns_flex" data-store-id="{$selfStore.id}">
 				<div>
 					{notempty name="selfStore.img"}
-					<img src="public_uploads/{$selfStore.img}" alt="" class="small_default_img">
+					<img src="public_uploads/{$selfStore.img}" alt="" class="">
 					{else /}
 					<img src="public_uploads/default/no_pic_40.jpg" alt="">
 					{/notempty}
@@ -218,7 +218,12 @@
 							pageSize:4,
 						};
 						getPageLayer(url,config);
-						getMoreLayer(url,config)
+<<<<<<< HEAD
+						getMoreLayer(url,config);
+						isRolling($('.goods-database-nav,.databaseLayer h3'));
+=======
+						getMoreLayer(url,config1)
+>>>>>>> 962664a21c174cd4130a104fb967d66b5924aebe
 					},
 					yes:function(index){
 						layer.close(index);
