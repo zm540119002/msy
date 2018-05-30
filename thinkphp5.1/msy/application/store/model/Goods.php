@@ -32,17 +32,17 @@ class Goods extends Model
         if(is_null($goods)){
             return errorMsg('商品已不存在');
         }
-        if(!$goods->status==0){
+        if(!$goods->getAttr('status')==0){
             return errorMsg('商品不存在');
         }
-        if($goods->sale_price<=0.00){
-            return errorMsg('【'.$goods->name.'】销售价格有误，不能购买');
+        if($goods->getAttr('sale_price')<=0.00){
+            return errorMsg("【{$goods->getAttr('name')}】销售价格有误，不能购买");
         }
-        if($goods->inventory<=0||$goods->inventory<$number){
-            return errorMsg('【'.$goods->name.'】库存不足');
+        if($goods->getAttr('inventory')<=0||$goods->getAttr('inventory')<$number){
+            return errorMsg("【{$goods->getAttr('name')}】库存不足");
         }
-        if($goods->shelf_status!==3){
-            return errorMsg('【'.$goods->name.'】已下架');
+        if($goods->getAttr('shelf_status')!==3){
+            return errorMsg("【{$goods->getAttr('name')}】已下架");
         }
         return successMsg('已加入购物车');
     }

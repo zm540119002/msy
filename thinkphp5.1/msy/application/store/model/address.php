@@ -4,7 +4,7 @@
  * User: Mr.wei
  * Date: 2018/5/25
  * Time: 14:48
- * 地址控制器
+ * 用户地址控制器
  */
 namespace app\store\model;
 
@@ -25,8 +25,8 @@ class Address extends Model
      */
     public function getAddress($user_id, $is_default=false)
     {
-        $address = $this->where(['user_id'=>$user_id])->order('address_id asc')->select()->toArray();
-        if(!$address||!is_array($address)||count($address)<=0){
+        $address = $this->where(['user_id'=>$user_id])->order('address_id asc')->select();
+        if(count($address)<=0){
             return errorMsg('请添加地址');
         }
         if(!$is_default){
@@ -41,11 +41,10 @@ class Address extends Model
     }
 
     /**
-     * 判断地址是否存在
+     * 判断地址是否存在  【暂时保留】 与方法 findAddress 重复
      * @param $user_id
      * @param $address_id
      * @return array
-     */
     public function isAddress($user_id, $address_id)
     {
         $ret = $this->where(['user_id'=>$user_id, 'address_id'=>$address_id])->count();
@@ -53,7 +52,7 @@ class Address extends Model
             return successMsg('地址可用');
         }
         return errorMsg('地址不存在');
-    }
+    }*/
 
     /**
      * 新增地址
@@ -107,4 +106,19 @@ class Address extends Model
         return errorMsg('修改地址失败');
     }
 
+    /**
+     * 查询单条地址
+     * @param $user_id
+     * @param $address_id
+     * @return array
+     */
+    public function findAddress($user_id, $address_id)
+    {
+        $ret = $this->where(['address_id'=>$address_id, 'user_id'=>$user_id])->find();
+        if($ret){
+            return successMsg('查询地址成功', ['data'=>$ret->toArray()]);
+        }
+        return errorMsg('查询地址失败');
+
+    }
 }
