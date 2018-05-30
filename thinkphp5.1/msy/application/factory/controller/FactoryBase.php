@@ -29,6 +29,7 @@ class FactoryBase extends UserBase{
             foreach ($list as $val){
                 if($val['is_default']){
                     $info = $val;
+                    break;
                 }
             }
             if(empty($info)){//不存在默认供应商的情况
