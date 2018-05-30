@@ -6,7 +6,8 @@ use think\facade\Session;
  */
 class FactoryBase extends UserBase{
     protected $factory = null;
-    
+    protected $multiFactorySign = false;
+
     public function __construct(){
         parent::__construct();
         $modelUserFactory = new \app\factory\model\UserFactory();
@@ -14,7 +15,10 @@ class FactoryBase extends UserBase{
             ['status','=',0],
             ['user_id','=',$this->user['id']],
         ];
-        $list = $modelUserFactory->where($where)->field('factory_id')->select()->toArray();
+        $field = [
+            'factory_id',
+        ];
+        $list = $modelUserFactory->getList($where,$field);
         $factoryCount = count($list);
         if ($factoryCount==0){//没有入住供应商
             $this->error('没有入住供应商，请入住', 'Deploy/register');
@@ -23,7 +27,8 @@ class FactoryBase extends UserBase{
             \common\cache\Factory::remove($info['id']);
             $this->factory = \common\cache\Factory::get($info['id']);
         }elseif($factoryCount>1){//入住多家供应商
-            //如果按戴总的逻辑，这里停不下
+            $this->multiFactorySign = true;
         }
+        $this->assign('multiFactorySign',$this->multiFactorySign);
     }
 }
