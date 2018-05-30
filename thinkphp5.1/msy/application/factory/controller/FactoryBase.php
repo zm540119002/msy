@@ -20,15 +20,16 @@ class FactoryBase extends UserBase{
         ];
         $list = $modelUserFactory->getList($where,$field);
         $factoryCount = count($list);
+        $info = [];
         if ($factoryCount==0){//没有入住供应商
             $this->error('没有入住供应商，请入住', 'Deploy/register');
         }elseif($factoryCount==1){//入住一家供应商
             $info = $list[0];
         }elseif($factoryCount>1){//入住多家供应商
-            $info = [];
             foreach ($list as $val){
                 if($val['is_default']){
                     $info = $val;
+                    break;
                 }
             }
             if(empty($info)){//不存在默认供应商的情况
