@@ -24,7 +24,11 @@ class Account extends FactoryBase
 
     public function getAccountList(){
         if(request()->isGet()){
-            $modelAccount = new \app\factory\model\Account();
+            $modelUserFactory = new \app\factory\model\UserFactory();
+            $where = [
+                'factory_id' => $this->factory['id'],
+            ];
+            $list = $modelUserFactory->getList($where);
         }
     }
 }

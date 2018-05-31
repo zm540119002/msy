@@ -77,7 +77,7 @@ class Factory extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		return empty($list)?[]:$list->toArray();
+		return count($list)?$list->toArray():[];
 	}
 
 	/**查找一条数据
@@ -94,6 +94,6 @@ class Factory extends Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
-		return empty($info)?[]:$info->toArray();
+		return $info?$info->toArray():[];
 	}
 }
