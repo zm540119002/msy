@@ -68,13 +68,14 @@ function getPage(url,config) {
 var currentPageLayer = 1;//记录当前页
 var requestEndLayer = false;//请求结束标记
 function getPageLayer(url,config) {
+    console.log(requestEndLayer);
     var postData = $.extend({},config);
     postData.page = currentPageLayer ? currentPageLayer : 1;
     postData.pageSize = postData.pageSize?postData.pageSize:4;
     //请求结束标志
     if(requestEndLayer){
         // dialog.error('没有更多啦');
-        loadTrigger = true;
+        loadTriggerLayer  = true;
         return false;
     }
     $.ajax({
@@ -90,7 +91,7 @@ function getPageLayer(url,config) {
             dialog.error('AJAX错误');
         },
         success: function(data){
-            console.log(data)
+            console.log('成功');
             $('.loading').hide();
             if(currentPageLayer == 1){
                 console.log( $('.databaseLayer #listLayer li'))
@@ -103,6 +104,7 @@ function getPageLayer(url,config) {
                 requestEndLayer = true;
             }
             currentPageLayer ++;
+            console.log(currentPageLayer );
             loadTriggerLayer = true;
         }
     });
