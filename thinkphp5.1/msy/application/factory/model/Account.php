@@ -95,11 +95,11 @@ class Account extends \think\Model {
 			['factory_id', '=', $factoryId],
 		];
 		$field = array(
-			'id','name',
+			'id','name','nickname','mobile_phone',
 		);
 		$order = 'id';
-		$list = $this->where($where)->field($field)->order($order)->select()->toArray();
-		return empty($list)?[]:$list;
+		$list = $this->where($where)->field($field)->order($order)->select();
+		return empty($list)?[]:$list->toArray();
 	}
 
 	//删除

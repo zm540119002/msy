@@ -51,8 +51,8 @@ class Menu
      */
     public function getAllRole(){
         $modelRole = new $this->_config['model_role'];
-        $response = $modelRole->where('status','=',0)->select()->toArray();
-        return $response?:[];
+        $response = $modelRole->where('status','=',0)->select();
+        return empty($response)?[]:$response->toArray();
     }
 
     /**获取用户菜单
@@ -78,8 +78,8 @@ class Menu
      */
     public function getUserRole(){
         $modelUserRole = new $this->_config['model_user_role'];
-        $response = $modelUserRole->where('user_id','=',$this->_user['id'])->select()->toArray();
-        $this->_role = array_column($response,'role_id');
+        $response = $modelUserRole->where('user_id','=',$this->_user['id'])->select();
+        $this->_role = array_column($response->toArray(),'role_id');
         return $this->_role;
     }
 
@@ -90,8 +90,8 @@ class Menu
         $this->getUserRole();
         $modelRoleNode = new $this->_config['model_role_node'];
         if(!empty($this->_role)){
-            $response = $modelRoleNode->where('role_id','in',$this->_role)->select()->toArray();
-            $node = array_unique(array_column($response,'node_id'));
+            $response = $modelRoleNode->where('role_id','in',$this->_role)->select();
+            $node = array_unique(array_column($response->toArray(),'node_id'));
             $this->_node = $node;
         }
         return $this->_node;

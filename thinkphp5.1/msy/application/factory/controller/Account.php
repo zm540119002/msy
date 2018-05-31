@@ -8,7 +8,7 @@ class Account extends FactoryBase
         if(request()->isAjax()){
             $modelAccount = new \app\factory\model\Account();
             $info = $modelAccount->edit($this->factory['id']);
-            if($info.status==0){
+            if($info['status']==0){
                 return $info;
             }else{
                 $this->assign('info',$info);
@@ -19,6 +19,12 @@ class Account extends FactoryBase
             $list = $modelRole->getList($this->factory['id']);
             $this->assign('list',$list);
             return $this->fetch();
+        }
+    }
+
+    public function getAccountList(){
+        if(request()->isGet()){
+            $modelAccount = new \app\factory\model\Account();
         }
     }
 }
