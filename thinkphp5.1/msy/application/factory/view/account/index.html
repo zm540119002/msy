@@ -141,6 +141,7 @@
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
 					$.post(action,postData,function(data){
+						return ;
 						if(data.status==0){
 							dialog.error(data.info);
 						}else{

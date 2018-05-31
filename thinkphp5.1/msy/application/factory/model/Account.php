@@ -41,11 +41,9 @@ class Account extends \think\Model {
 			if(!empty($user)){
 				//新增用户工厂
 				$data = [
-					'user_id' => $postData['id'],
-					'factory_id' => $factoryId,
 					'type' => 2,
 				];
-				$user->userFactory()->save($data);
+				$user->factories()->attach($factoryId,$data);
 				//新增用户工厂角色
 				if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
 					$data = [];
@@ -74,8 +72,8 @@ class Account extends \think\Model {
 	}
 
 	//用户-工厂-关联模型
-	public function userFactory(){
-		return $this->hasOne('UserFactory');
+	public function factories(){
+		return $this->belongsToMany('Factory','UserFactory','factory_id','user_id');
 	}
 
 	//用户-工厂-角色-关联模型
