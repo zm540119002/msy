@@ -2172,6 +2172,9 @@ input[type=text]::-webkit-focus-inner {
     display:block;
     margin:20px 0 0;
 }
+.account-status span.stop{
+    color:#ff0000;
+}
 .account-list li div:nth-child(2){
 }
 .list-label{
