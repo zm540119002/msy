@@ -2165,12 +2165,17 @@ input[type=text]::-webkit-focus-inner {
 
 }
 .account-list .account-status{
+    width:28%;
     border-left:1px solid #d9d9d9;
+    text-align: center;
 
 }
 .account-status span{
     display:block;
     margin:20px 0 0;
+}
+.account-status span.stop{
+    color:#ff0000;
 }
 .account-list li div:nth-child(2){
 }

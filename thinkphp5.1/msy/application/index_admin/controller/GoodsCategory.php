@@ -24,8 +24,8 @@ class GoodsCategory extends Base
                     $where['parent_id_2'] = $id;
                 }
             }
-            $list = $modelGoodsCategory->where($where)->select()->toArray();
-            $this->assign('list',$list);
+            $list = $modelGoodsCategory->where($where)->select();
+            $this->assign('list',$list->toArray());
             return view('list_tpl');
         }else{
             return $this->fetch();
@@ -43,8 +43,8 @@ class GoodsCategory extends Base
             $where = [
                 'status' => 0,
             ];
-            $allCategoryList = $modelGoodsCategory->where($where)->select()->toArray();
-            $this->assign('allCategoryList',$allCategoryList);
+            $allCategoryList = $modelGoodsCategory->where($where)->select();
+            $this->assign('allCategoryList',$allCategoryList->toArray());
             if($id){
                 $where['id'] = $id;
                 $info = $modelGoodsCategory->where($where)->find();

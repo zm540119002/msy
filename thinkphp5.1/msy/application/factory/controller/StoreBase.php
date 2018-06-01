@@ -40,5 +40,12 @@ class StoreBase extends FactoryBase
         }
         \common\cache\Store::remove($info['id']);
         $this -> store = \common\cache\Store::get($info['id']);
+       
+    }
+
+    //设置默认产商
+    public function setDefaultStore(){
+        $model = new \app\factory\model\Store();
+        return $model->setDefaultStore($this->factory['id']);
     }
 }

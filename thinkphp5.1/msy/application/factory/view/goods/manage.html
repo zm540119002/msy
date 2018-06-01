@@ -16,7 +16,7 @@
 			<li class="columns_flex" data-store-id="{$selfStore.id}">
 				<div>
 					{notempty name="selfStore.img"}
-					<img src="public_uploads/{$selfStore.img}" alt="" class="small_default_img">
+					<img src="public_uploads/{$selfStore.img}" alt="" class="">
 					{else /}
 					<img src="public_uploads/default/no_pic_40.jpg" alt="">
 					{/notempty}
@@ -212,13 +212,16 @@
 							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
 							$('.databaseLayer .database-item').hide().eq(1).show();
 						}
+						requestEndLayer=false;
+						currentPageLayer=1;
 						var url = module + 'Goods/getBackup';
 						var config = {
 							storeId:storeId,
-							pageSize:4,
+							pageSize:4
 						};
 						getPageLayer(url,config);
-						getMoreLayer(url,config)
+						getMoreLayer(url,config);
+						isRolling($('.goods-database-nav,.databaseLayer h3'));
 					},
 					yes:function(index){
 						layer.close(index);

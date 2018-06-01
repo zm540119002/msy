@@ -40,7 +40,7 @@ class Organize extends \think\Model {
 	//获取组织列表
 	public function getOrganizeList($factoryId){
 		$allOrganize = $this->createTree($this->getAllOrganize($factoryId));
-		return empty($allOrganize)?[]:$allOrganize;
+		return count($allOrganize)?$allOrganize:[];
 	}
 
 	//递归生成菜单树
@@ -66,7 +66,7 @@ class Organize extends \think\Model {
 		);	
 		$order = 'id';
 		$allOrganize = $this->where($where)->field($field)->order($order)->select();
-		return empty($allOrganize)?[]:$allOrganize->toArray();
+		return count($allOrganize)?$allOrganize->toArray():[];
 	}
 
 	//删除
@@ -76,7 +76,7 @@ class Organize extends \think\Model {
 			['factory_id', '=', $factoryId],
 		];
 		$id = input('post.id/a');
-		if(!is_array($id) || empty($id)){
+		if(!is_array($id) || count($id)){
 			return errorMsg('参数错误');
 		}
 		$where[] = ['id', 'in', $id];

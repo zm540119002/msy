@@ -25,12 +25,4 @@ class Deploy extends UserBase
             return $this->fetch();
         }
     }
-
-    //设置默认产商
-    public function setDefaultFactory(){
-        if(request()->isAjax()){
-            $model = new \app\factory\model\UserFactory();
-            return $model->setDefaultFactory($this->user['id']);
-        }
-    }
 }
