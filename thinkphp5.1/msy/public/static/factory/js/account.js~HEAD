@@ -22,3 +22,16 @@ function getOrganizeList() {
         setOrganize=$('#setOrganize').html();
     });
 }
+
+//获取员工账号列表
+function getAccountList() {
+    var postData = {};
+    var url = module + 'Account/getAccountList';
+    $.get(url,postData,function(data){
+        if(data.status==0){
+            dialog.error(data.info);
+        }else{
+            $('ul.account-list').empty().append(data);
+        }
+    });
+}
