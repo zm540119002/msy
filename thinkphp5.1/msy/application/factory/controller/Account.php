@@ -28,9 +28,12 @@ class Account extends FactoryBase
             $where = [
                 ['uu.status','<>',2],
                 ['u.factory_id','=',$this->factory['id']],
-                ['u.status','=',0],
                 ['u.type','=',2],
             ];
+            $keyword = input('get.keyword','');
+            if($keyword){
+                $where[] = ['uu.name|uu.mobile_phone', 'like', '%'.trim($keyword).'%',];
+            }
             $field = [
                 'uu.id','uu.name','uu.nickname','uu.mobile_phone','uu.status','u.is_default',
             ];

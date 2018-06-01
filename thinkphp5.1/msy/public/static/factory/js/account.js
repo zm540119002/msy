@@ -26,6 +26,7 @@ function getOrganizeList() {
 //获取员工账号列表
 function getAccountList() {
     var postData = {};
+    postData.keyword = $('[name=keyword]').val();
     var url = module + 'Account/getAccountList';
     $.get(url,postData,function(data){
         if(data.status==0){

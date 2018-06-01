@@ -46,7 +46,7 @@
 	</section>
 	<section class="f24 account-content-wrapper ">
 		<div class="search-bar columns_flex">
-			<input type="text" class="search-text" name=""  placeholder="输入姓名、手机号码查询账号">
+			<input type="text" class="search-text" name="keyword"  placeholder="输入姓名、手机号码查询账号">
 			<input type="button" class="search-btn">
 		</div>
 		<div class="account-list-content">
@@ -98,6 +98,10 @@
 		//获取员工账号列表
 		getAccountList();
 
+		//查询
+		$('body').on('click','.search-btn',function(){
+			getAccountList();
+		});
 		//创建供应商员工登录账号
 		var addLoginAccount=$('#addLoginAccount').html();
 		$('body').on('click','.add-account',function(){
