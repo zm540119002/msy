@@ -40,8 +40,8 @@ class Role extends Base
             $roleId = input('id',0);
             $this->assign('roleId',$roleId);
             $this->assign('roleName',input('name',''));
-            $response = $modelRoleNode->where('role_id','=',$roleId)->select()->toArray();
-            $nodeIds = array_column($response,'node_id');
+            $response = $modelRoleNode->where('role_id','=',$roleId)->select();
+            $nodeIds = array_column($response->toArray(),'node_id');
             $this->assign('nodeIds',$nodeIds?:[]);
             $menu = new \common\lib\Menu();
             $menuList = $menu->getAllMenu();

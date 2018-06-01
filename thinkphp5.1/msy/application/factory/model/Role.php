@@ -46,8 +46,8 @@ class Role extends \think\Model {
 			'id','name',
 		);
 		$order = 'id';
-		$list = $this->where($where)->field($field)->order($order)->select()->toArray();
-		return empty($list)?[]:$list;
+		$list = $this->where($where)->field($field)->order($order)->select();
+		return count($list)?$list->toArray():[];
 	}
 
 	//删除

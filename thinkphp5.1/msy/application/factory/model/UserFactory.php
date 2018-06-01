@@ -1,13 +1,13 @@
 <?php
 namespace app\factory\model;
 
-class UserFactory extends \think\Model {
+class UserFactory extends \think\model\Pivot {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user_factory';
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
+    protected $connection = 'db_config_common';
 
 	//设置默认厂商
 	public function setDefaultFactory($userId=0){
@@ -56,7 +56,7 @@ class UserFactory extends \think\Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		return empty($list)?[]:$list->toArray();
+		return count($list)?$list->toArray():[];
 	}
 
 	/**查找一条数据
@@ -73,6 +73,6 @@ class UserFactory extends \think\Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
-		return empty($info)?[]:$info->toArray();
+		return $info?$info->toArray():[];
 	}
 }

@@ -1,8 +1,7 @@
 <?php
 namespace app\factory\controller;
 use common\controller\UserBase;
-use think\facade\Session;
-class Index extends UserBase
+class Index extends FactoryBase
 {
     /**首页
      */

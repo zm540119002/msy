@@ -61,7 +61,7 @@ class RoleNode extends \think\Model {
 		}else{
 			return errorMsg('参数错误');
 		}
-		$list = $this->where($where)->select()->toArray();
-		return $list;
+		$list = $this->where($where)->select();
+		return count($list)?$list->toArray():[];
 	}
 }

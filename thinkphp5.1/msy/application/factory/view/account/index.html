@@ -54,29 +54,7 @@
 			<span class="title">暂无数据</span>
 			<span class="title">搜索结果</span>
 			<span class="title">查无此人</span>
-			<ul class="account-list ">
-				<li>
-					<div>
-						<a href="">
-							<div>
-								<span class="list-label">姓名</span>
-								<span>XXXXXX</span>
-							</div>
-							<div>
-								<span class="list-label">手机号码</span>
-								<span>13430363587</span>
-							</div>
-							<div>
-								<span class="list-label">角色类型</span>
-								<span>管理员</span>
-							</div>
-						</a>
-					</div>
-					<div class="account-status">
-						<span>账号正常</span>
-					</div>
-				</li>
-			</ul>
+			<ul class="account-list"></ul>
 		</div>
 	</section>
 	<a href="javascript:void(0);" class="add-account foot-btn">新建供应商员工登陆账户</a>
@@ -105,12 +83,11 @@
 </div>
 {/block}
 {block name="common"}
-<!--{include file="template/footer_menu_msy.html" /}-->
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="factory_js/organize.js"></script>
+<script type="text/javascript" src="factory_js/account.js"></script>
 <script type="text/javascript">
 	var setOrganize;
 	$(function(){
@@ -120,7 +97,10 @@
 		var userFactoryRoleIds = [];
 		//定义新增组织
 		var userFactoryOrganizeId = 0;
+		//获取组织列表
 		getOrganizeList();
+		//获取员工账号列表
+		getAccountList();
 
 		//创建供应商员工登录账号
 		var addLoginAccount=$('#addLoginAccount').html();
@@ -145,7 +125,6 @@
 					var content = '';
 					postData.name = $('.addCcountLayer').find('[name=name]').val();
 					postData.mobile_phone = $('.addCcountLayer').find('[name=mobile_phone]').val();
-//					postData.id = 65;
 					if(!postData.name){
 						content = '请输入姓名';
 					}else if(!isMobilePhone(postData.mobile_phone)){
