@@ -2165,7 +2165,9 @@ input[type=text]::-webkit-focus-inner {
 
 }
 .account-list .account-status{
+    width:28%;
     border-left:1px solid #d9d9d9;
+    text-align: center;
 
 }
 .account-status span{
