@@ -135,6 +135,7 @@
 					}
 					if(content){
 						dialog.error(content);
+						return false;
 					}
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
@@ -142,7 +143,7 @@
 						if(data.status==0){
 							dialog.error(data.info);
 						}else{
-							$('ul.account-list').append(data);
+							$('ul.account-list').prepend(data);
 							layer.close(index);
 						}
 					});
