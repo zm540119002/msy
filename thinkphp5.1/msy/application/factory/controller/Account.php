@@ -24,42 +24,19 @@ class Account extends FactoryBase
 
     public function getAccountList(){
         if(request()->isGet()){
-//            $modelUserFactory = new \app\factory\model\UserFactory();
-//            $where = [
-//                'u.factory_id' => $this->factory['id'],
-//            ];
-//            $field = [
-//                'u.user_id id','u.is_default','u.type','uu.name','uu.nickname','uu.mobile_phone',
-//            ];
-//            $join = [
-//                ['common.user uu','uu.id = u.user_id','LEFT'],
-//            ];
-//            $list = $modelUserFactory->getList($where,$field,$join);
-//            $this->assign('list',$list);
-//            return view('list_tpl');
-
-            $modelFactory = new \app\factory\model\Factory();
-            $field = [
-                'id',
+            $modelUserFactory = new \app\factory\model\UserFactory();
+            $where = [
+                'u.factory_id' => $this->factory['id'],
             ];
-            $factory = \app\factory\model\Factory::get($this->factory['id']);
-            $users = $factory->users;
-            $list = [];
-            foreach ($users as $user){
-                if($user->pivot->type==2){
-                    $arr = [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'nickname' => $user->nickname,
-                        'mobile_phone' => $user->mobile_phone,
-                        'status' => $user->status,
-                    ];
-                    $list[] = $arr;
-                }
-            }
+            $field = [
+                'uu.id','uu.name','uu.nickname','uu.mobile_phone','uu.status','u.is_default',
+            ];
+            $join = [
+                ['common.user uu','uu.id = u.user_id','LEFT'],
+            ];
+            $list = $modelUserFactory->getList($where,$field,$join);
             $this->assign('list',$list);
             return view('list_tpl');
-            return $list;
         }
     }
 }

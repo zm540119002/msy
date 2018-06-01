@@ -20,8 +20,10 @@
 		{eq name="info.status" value="0"}
 			<span>账号正常</span>
 		{else/}
-			<span>账号已停用</span>
+			<span class="stop">账号已停用</span>
 		{/eq}
 	</div>
 </li>
+{else/}
+<span class="title">暂无数据</span>
 {/notempty}
