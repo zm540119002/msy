@@ -28,7 +28,6 @@ function getAccountList() {
     var postData = {};
     var url = module + 'Account/getAccountList';
     $.get(url,postData,function(data){
-        return;
         if(data.status==0){
             dialog.error(data.info);
         }else{

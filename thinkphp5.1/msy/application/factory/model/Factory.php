@@ -96,4 +96,8 @@ class Factory extends Model {
 			->find();
 		return $info?$info->toArray():[];
 	}
+
+	public function users(){
+		return $this->belongsToMany('Account','UserFactory','user_id','factory_id');
+	}
 }

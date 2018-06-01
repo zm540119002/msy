@@ -17,7 +17,11 @@
 		</a>
 	</div>
 	<div class="account-status">
-		<span>账号正常</span>
+		{eq name="info.status" value="0"}
+			<span>账号正常</span>
+		{else/}
+			<span>账号已停用</span>
+		{/eq}
 	</div>
 </li>
 {/notempty}

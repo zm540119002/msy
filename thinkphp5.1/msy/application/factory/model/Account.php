@@ -43,27 +43,34 @@ class Account extends \think\Model {
 				$data = [
 					'type' => 2,
 				];
-				$user->factories()->attach($factoryId,$data);
+				$res = $user->factories()->attach($factoryId,$data);
+				if(!count($res)){
+					$this->rollback();//回滚事务
+					return errorMsg('新增失败');
+				}
 				//新增用户工厂角色
 				if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
-					$data = [];
 					foreach ($postData['userFactoryRoleIds'] as $val){
-						$data[] = [
-							'user_id' => $postData['id'],
+						$data = [
 							'factory_id' => $factoryId,
-							'role_id' => $val,
 						];
+						$res = $user->roles()->attach($val,$data);
+						if(!count($res)){
+							$this->rollback();//回滚事务
+							return errorMsg('新增失败');
+						}
 					}
-					$user->UserFactoryRole()->saveAll($data);
 				}
 				//新增用户工厂组织
 				if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
 					$data = [
-						'user_id' => $postData['id'],
 						'factory_id' => $factoryId,
-						'organize_id' => $postData['userFactoryOrganizeId'],
 					];
-					$user->userFactoryOrganize()->save($data);
+					$res = $user->organizes()->attach($postData['userFactoryOrganizeId'],$data);
+					if(!count($res)){
+						$this->rollback();//回滚事务
+						return errorMsg('新增失败');
+					}
 				}
 			}
 		}
@@ -76,28 +83,14 @@ class Account extends \think\Model {
 		return $this->belongsToMany('Factory','UserFactory','factory_id','user_id');
 	}
 
-	//用户-工厂-角色-关联模型
-	public function userFactoryRole(){
-		return $this->hasMany('UserFactoryRole');
+	//用户-工厂角色-关联模型
+	public function roles(){
+		return $this->belongsToMany('Role','UserFactoryRole','role_id','user_id');
 	}
 
 	//用户-工厂-组织-关联模型
-	public function userFactoryOrganize(){
-		return $this->hasOne('UserFactoryOrganize');
-	}
-
-	//获取列表
-	public function getList($factoryId){
-		$where = [
-			['status', '=', 0],
-			['factory_id', '=', $factoryId],
-		];
-		$field = array(
-			'id','name','nickname','mobile_phone',
-		);
-		$order = 'id';
-		$list = $this->where($where)->field($field)->order($order)->select();
-		return count($list)?$list->toArray():[];
+	public function organizes(){
+		return $this->belongsToMany('Organize','UserFactoryOrganize','organize_id','user_id');
 	}
 
 	//删除
