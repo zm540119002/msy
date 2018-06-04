@@ -27,12 +27,10 @@ class Account extends FactoryBase
         if(request()->isGet()){
             $modelAccount = new \app\factory\model\Account();
             $info = $modelAccount->detail($this->factory['id']);
-            if($info['status']==0){
-                return $info;
-            }else{
-                $this->assign('info',$info);
-                return $this->fetch();
-            }
+//            print_r($info);
+//            exit;
+            $this->assign('info',$info);
+            return $this->fetch();
         }
     }
 
