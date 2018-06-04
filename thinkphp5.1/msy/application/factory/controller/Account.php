@@ -30,6 +30,7 @@ class Account extends FactoryBase
 //            print_r($info);
 //            exit;
             $this->assign('info',$info);
+            $this->assign('list',$info['role']);
             return $this->fetch();
         }
     }

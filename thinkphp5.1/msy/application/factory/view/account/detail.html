@@ -52,7 +52,9 @@
 	<section class="f24 signIn-wrapper">
 		<div class="account-item">
 			<span class="content-label">修改账号角色</span>
-			<ul class="account-role-list role-list"></ul>
+			<ul class="account-role-list role-list">
+				{include file="role/list_tpl" /}
+			</ul>
 		</div>
 	</section>
 </article>
@@ -65,6 +67,8 @@
 <script type="text/javascript" src="factory_js/account.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//页面初始化
+		$('#setRole').find('div').remove();
 		$('body').on('click','.account-role-list li',function(){
 			$(this).toggleClass('current');
 		});
