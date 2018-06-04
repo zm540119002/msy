@@ -7,14 +7,15 @@
 	<section class="separation-line">
 		<div class="columns_flex l-r-sides content-padding account-header">
 			<div id="accountInfo">
+				<input type="hidden" class="user_id" value="{$info.id}"/>
 				<div>
-					<span class="r-t">姓名</span><span>{$info.name}</span>
+					<span class="r-t">姓名：</span><span>{$info.name}</span>
 				</div>
 				<div>
-					<span class="r-t">手机号码</span><span>{$info.mobile_phone}</span>
+					<span class="r-t">手机号码：</span><span>{$info.mobile_phone}</span>
 				</div>
 				<div>
-					<span class="r-t">角色类型</span>
+					<span class="r-t">角色：</span>
 					<span>
 					{notempty name='info.role'}
 					{volist name='info.role' id='vo'}
@@ -99,7 +100,12 @@
 			title:[title,'border-bottom:1px solid #d9d9d9;'],
 			className:'accountInfoLayer',
 			content:content,
-			btn:['确定','取消']
+			btn:['确定','取消'],
+			yes:function(index){
+				var postData = {};
+				var url = controller + 'setStatus';
+
+			}
 		});
 	}
 </script>
