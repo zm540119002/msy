@@ -3,6 +3,12 @@ namespace app\factory\controller;
 use think\facade\Session;
 class Store extends FactoryBase
 {
+
+    //开店部署首页
+    public function index(){
+        $this ->assign('factoryId', $this->factory['id']);
+        return $this->fetch('index');
+    }
     /**
      * 店铺管理
      */
@@ -55,37 +61,7 @@ class Store extends FactoryBase
 
    
 
-    //开店部署首页
-    public function deployIndex(){
-        $this ->assign('factoryId', $this->factory['id']);
-        return $this->fetch('deploy/index');
-    }
 
-    //运营管理首页
-    public function operaManageIndex(){
-        $model = new \app\factory\model\Store();
-        $storeCount = $model -> where('factory_id','=',$this -> factory['id']) -> count('id');
-        $this -> assign('storeCount',$storeCount);
-        if($storeCount > 1){
-            $_where = [
-                ['s.factory_id','=',$this->factory['id']],
-                ['s.is_default','=',1],
-            ];
-            $storeInfo = $model -> getInfo($_where);
-            $storeList =  $model -> getStoreList($this -> factory['id']);
-            $this -> assign('storeList',$storeList);
-            if(!$storeInfo){
-                $this -> assign('notDefaultStore',1);
-            }
-            $this -> assign('storeInfo',$storeInfo);
-        }elseif ($storeCount == 1){
-            $where = [ ['s.factory_id','=',$this->factory['id']] ];
-            $storeInfo = $model -> getInfo($where);
-            $this -> assign('storeInfo',$storeInfo);
-        }else{
-            $this -> assign('noStore',1);
-        }
-        Session::set('store',$storeInfo);
-        return $this->fetch();
-    }
+
+   
 }

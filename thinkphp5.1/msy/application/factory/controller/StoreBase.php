@@ -31,7 +31,6 @@ class StoreBase extends FactoryBase
             }
             if (empty($info)) {
                 $this -> assign('notDefaultStore', 1);
-                $this -> success('你有多家店，请选择一家', 'Store/operaManageIndex');;
             }
         } elseif ($count == 1){
             $info = $list[0];

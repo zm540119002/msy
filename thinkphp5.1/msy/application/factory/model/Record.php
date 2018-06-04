@@ -142,10 +142,7 @@ class Record extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		if(!empty($list)){
-			$list = $list->toArray();
-		}
-		return $list;
+		return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -167,10 +164,7 @@ class Record extends Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
-		if(!empty($info)){
-			$info = $info ->toArray();
-		}
-		return $info;
+		return $info?$info->toArray():[];
 	}
 
 	//关联产商模型
