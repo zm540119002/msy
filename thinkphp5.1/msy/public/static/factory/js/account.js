@@ -36,3 +36,12 @@ function getAccountList() {
         }
     });
 }
+
+//获取角色列表
+function getRoleList() {
+    var postData = {};
+    var url = module + 'role/getList';
+    $.get(url,postData,function(data){
+        $('ul.role-list').append(data);
+    });
+}
