@@ -68,8 +68,9 @@
 <script type="text/javascript">
 	$(function(){
 		//页面初始化
-		$('#setRole').find('div').remove();
-		$('body').on('click','.account-role-list li',function(){
+		$('ul.role-list').find('div').remove();
+		//角色选择效果
+		$('body').on('click','ul.role-list li',function(){
 			$(this).toggleClass('current');
 		});
 		$('body').on('click','.account-edit-btn a',function(){
