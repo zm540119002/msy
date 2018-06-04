@@ -548,12 +548,19 @@
 .account-edit-btn a activate.del-icon{
     background-position:0 -30px;
 }
+.account-header{
+    padding:10px 0 0;
+}
 .account-header .r-t,
-.account-info .r-t{
+.account-info .r-t,
+.accountInfoLayer .r-t{
     display: inline-block;
-    width:64px;
+    width:72px;
     text-align: right;
     margin:0 10px 0 0;
+}
+.accountInfoLayer .layui-m-layercont{
+    padding:10px;
 }
 .accountInfoLayer .account-info{
     padding:15px;
