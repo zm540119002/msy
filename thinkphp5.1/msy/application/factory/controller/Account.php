@@ -22,38 +22,25 @@ class Account extends FactoryBase
         }
     }
 
+    //账号详情
+    public function detail(){
+        if(request()->isGet()){
+            $modelAccount = new \app\factory\model\Account();
+            $info = $modelAccount->detail($this->factory['id']);
+            if($info['status']==0){
+                return $info;
+            }else{
+                $this->assign('info',$info);
+                return $this->fetch();
+            }
+        }
+    }
+
+    //获取工厂账号列表
     public function getAccountList(){
         if(request()->isGet()){
-            $modelUserFactory = new \app\factory\model\UserFactory();
-            $where = [
-                ['uu.status','<>',2],
-                ['u.factory_id','=',$this->factory['id']],
-                ['u.type','=',2],
-            ];
-            $keyword = input('get.keyword','');
-            if($keyword){
-                $where[] = ['uu.name|uu.mobile_phone', 'like', '%'.trim($keyword).'%',];
-            }
-            $field = [
-                'uu.id','uu.name','uu.nickname','uu.mobile_phone','uu.status','u.is_default',
-            ];
-            $join = [
-                ['common.user uu','uu.id = u.user_id','LEFT'],
-            ];
-            $list = $modelUserFactory->getList($where,$field,$join);
-            $modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
-            $field = [
-                'r.id','r.name',
-            ];
-            $join = [
-                ['role r','r.id = ufr.role_id','LEFT'],
-            ];
-            foreach ($list as &$value){
-                $where = [
-                    'ufr.user_id' => $value['id'],
-                ];
-                $value['role'] = $modelUserFactoryRole->getList($where,$field,$join);
-            }
+            $modelAccount = new \app\factory\model\Account();
+            $list = $modelAccount->getList($this->factory['id']);
             $this->assign('list',$list);
             return view('list_tpl');
         }

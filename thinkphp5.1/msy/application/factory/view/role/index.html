@@ -180,13 +180,5 @@
 			});
 		});
 	});
-	//获取组织列表
-	function getRoleList() {
-		var postData = {};
-		var url = controller + 'getList';
-		$.get(url,postData,function(data){
-			$('ul.role-list').append(data);
-		});
-	}
 </script>
 {/block}
