@@ -140,10 +140,7 @@ class Series extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		if(!empty($list)){
-			$list = $list->toArray();
-		}
-		return $list;
+		return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -162,9 +159,6 @@ class Series extends Model {
 			->field($field)
 			->where($where)
 			->find();
-		if(!empty($info)){
-			$info = $info->toArray();
-		}
-		return $info;
+		return $info?$info->toArray():[];
 	}
 }

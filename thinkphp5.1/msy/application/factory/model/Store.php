@@ -70,10 +70,7 @@ class Store extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		if(!empty($list)){
-			$list = $list->toArray();
-		}
-		return $list;
+	    return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -95,10 +92,7 @@ class Store extends Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
-		if(!empty($info)){
-			$info = $info ->toArray();
-		}
-		return $info;
+		return $info?$info->toArray():[];
 	}
 
 	//设置默认店铺
