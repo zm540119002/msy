@@ -3,6 +3,11 @@ namespace app\factory\controller;
 
 class Goods extends StoreBase
 {
+    //运营管理首页
+    public function operaManageIndex(){
+        return $this->fetch('store/opera_manage_index');
+    }
+
     /**
      * @return array|mixed
      *商品编辑

@@ -66,7 +66,7 @@ class Brand extends Model {
 			->limit($limit)
 			->select()
 			->toArray();
-		return $list;
+		return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -89,6 +89,6 @@ class Brand extends Model {
 			->join(array_merge($_join,$join))
 			->find()
 			->toArray();
-		return $info;
+		return $info?$info->toArray():[];
 	}
 }
