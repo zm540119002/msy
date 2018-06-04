@@ -38,10 +38,26 @@ function getAccountList() {
 }
 
 //获取角色列表
-function getRoleList() {
+function getRoleList(config) {
+    var _config = {
+        option:true
+    };
+    _config = $.extend(_config,config);
     var postData = {};
     var url = module + 'role/getList';
     $.get(url,postData,function(data){
         $('ul.role-list').append(data);
+        if(!_config.option){
+            $('ul.role-list').find('div').remove();
+        }
+        if(_config.roleList){
+            $.each(JSON.parse(_config.roleList),function(i,o){
+                $.each($('ul.role-list').find('li'),function(){
+                    if(o.id==$(this).data('id')){
+                        $(this).addClass('current');
+                    }
+                });
+            });
+        }
     });
 }

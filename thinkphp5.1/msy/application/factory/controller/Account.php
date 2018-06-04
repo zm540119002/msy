@@ -27,10 +27,8 @@ class Account extends FactoryBase
         if(request()->isGet()){
             $modelAccount = new \app\factory\model\Account();
             $info = $modelAccount->detail($this->factory['id']);
-//            print_r($info);
-//            exit;
             $this->assign('info',$info);
-            $this->assign('list',$info['role']);
+            $this->assign('roleList',$info['role']);
             return $this->fetch();
         }
     }
@@ -43,5 +41,11 @@ class Account extends FactoryBase
             $this->assign('list',$list);
             return view('list_tpl');
         }
+    }
+
+    //用户角色编辑
+    public function editRole(){
+        $modelAccount = new \app\factory\model\Account();
+        return $modelAccount->editRole($this->factory['id']);
     }
 }

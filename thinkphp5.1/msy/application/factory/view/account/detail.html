@@ -3,26 +3,10 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<section id="accountInfo" style="display: none;">
-	<div class="account-info">
-		<div>
-			<span class="r-t">姓名</span>
-			<span>cccc</span>
-		</div>
-		<div>
-			<span class="r-t">手机号码</span>
-			<span>cccc</span>
-		</div>
-		<div>
-			<span class="r-t">角色类型</span>
-			<span>客服部客服专员</span>
-		</div>
-	</div>
-</section>
 <article class="f24">
 	<section class="separation-line">
 		<div class="columns_flex l-r-sides content-padding account-header">
-			<div>
+			<div id="accountInfo">
 				<div>
 					<span class="r-t">姓名</span><span>{$info.name}</span>
 				</div>
@@ -30,18 +14,28 @@
 					<span class="r-t">手机号码</span><span>{$info.mobile_phone}</span>
 				</div>
 				<div>
-					<span class="r-t">角色类型</span><span>客服部客服专员</span>
+					<span class="r-t">角色类型</span>
+					<span>
+					{notempty name='info.role'}
+					{volist name='info.role' id='vo'}
+					{$vo.name}
+					{/volist}
+					{/notempty}
+					</span>
 				</div>
 			</div>
 			<div class="account-edit-btn columns_flex">
-				<a>
-					<span class="activate-icon ic"></span>
-					<span class="btn-status">激活账号</span>
-				</a>
-				<a>
-					<span class="stop-icon ic"></span>
-					<span class="btn-status">停用账号</span>
-				</a>
+				{if $info.status == 0}
+					<a>
+						<span class="stop-icon ic"></span>
+						<span class="btn-status">停用账号</span>
+					</a>
+				{elseif $info.status == 1 /}
+					<a>
+						<span class="activate-icon ic"></span>
+						<span class="btn-status">激活账号</span>
+					</a>
+				{/if}
 				<a>
 					<span class="del-icon ic"></span>
 					<span class="btn-status">删除账号</span>
@@ -52,13 +46,11 @@
 	<section class="f24 signIn-wrapper">
 		<div class="account-item">
 			<span class="content-label">修改账号角色</span>
-			<ul class="account-role-list role-list">
-				{include file="role/list_tpl" /}
-			</ul>
+			<ul class="account-role-list role-list"></ul>
 		</div>
 	</section>
 </article>
-<a href="javascript:void(0);" class="foot-btn f24">确定</a>
+<a href="javascript:void(0);" class="foot-btn f24 confirm">确定</a>
 {/block}
 {block name="common"}
 {/block}
@@ -68,10 +60,33 @@
 <script type="text/javascript">
 	$(function(){
 		//页面初始化
-		$('ul.role-list').find('div').remove();
+		var roleList = '{:json_encode($roleList)}';
+		var config = {
+			option:false,
+			roleList:roleList
+		};
+		getRoleList(config);
 		//角色选择效果
 		$('body').on('click','ul.role-list li',function(){
 			$(this).toggleClass('current');
+		});
+		//确定
+		$('body').on('click','.confirm',function(){
+			var postData = {};
+			var url = controller + 'editRole';
+			postData.userId = '{$info.id}';
+			postData.ids = [];
+			$.each($('ul.role-list li.current'),function(){
+				if($(this).data('id')){
+					postData.ids.push($(this).data('id'));
+				}
+			});
+			if(!postData.ids.length){
+				dialog.error('请选择角色');
+			}
+			$.post(url,postData,function(data){
+				dialog.error(data.info);
+			});
 		});
 		$('body').on('click','.account-edit-btn a',function(){
 			var status=$(this).find('.btn-status').text();
@@ -85,7 +100,7 @@
 			className:'accountInfoLayer',
 			content:content,
 			btn:['确定','取消']
-		})
+		});
 	}
 </script>
 {/block}
