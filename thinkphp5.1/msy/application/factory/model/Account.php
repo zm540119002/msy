@@ -93,6 +93,76 @@ class Account extends \think\Model {
 		return $this->belongsToMany('Organize','UserFactoryOrganize','organize_id','user_id');
 	}
 
+	//详情
+	public function detail($factoryId){
+		if(!intval($factoryId)){
+			return errorMsg('参数错误');
+		}
+		//用户信息
+		$where = [
+			['status', '<>', 2],
+		];
+		$id = input('id');
+		if(!intval($id)){
+			return errorMsg('参数错误');
+		}
+		$where[] = ['id','=',$id];
+		$field = [
+			'u.id','u.name','u.nickname','u.mobile_phone','u.status',
+		];
+		$info = $this->alias('u')->field($field)->where($where)->find();
+		//用户工厂角色
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		$where = [
+			'ufr.user_id' => $info['id'],
+			'ufr.factory_id' => $factoryId,
+		];
+		$field = [
+			'r.id','r.name',
+		];
+		$join = [
+			['role r','r.id = ufr.role_id','LEFT'],
+		];
+		$info['role'] = $modelUserFactoryRole->getList($where,$field,$join);
+		return $info?$info->toArray():[];
+	}
+
+	//获取列表
+	public function getList($factoryId){
+		$modelUserFactory = new \app\factory\model\UserFactory();
+		$where = [
+			['uu.status','<>',2],
+			['u.factory_id','=',$factoryId],
+			['u.type','=',2],
+		];
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['uu.name|uu.mobile_phone', 'like', '%'.trim($keyword).'%',];
+		}
+		$field = [
+			'uu.id','uu.name','uu.nickname','uu.mobile_phone','uu.status','u.is_default',
+		];
+		$join = [
+			['common.user uu','uu.id = u.user_id','LEFT'],
+		];
+		$list = $modelUserFactory->getList($where,$field,$join);
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		$field = [
+			'r.id','r.name',
+		];
+		$join = [
+			['role r','r.id = ufr.role_id','LEFT'],
+		];
+		foreach ($list as &$value){
+			$where = [
+				'ufr.user_id' => $value['id'],
+				'ufr.factory_id' => $factoryId,
+			];
+			$value['role'] = $modelUserFactoryRole->getList($where,$field,$join);
+		}
+		return count($list)?$list:[];
+	}
+
 	//删除
 	public function del($factoryId,$tag=true){
 		if(!intval($factoryId)){
@@ -115,6 +185,56 @@ class Account extends \think\Model {
 		if(!$result){
 			return errorMsg('失败',$this->getError());
 		}
+		return successMsg('成功');
+	}
+
+	//用户角色编辑
+	public function editRole($factoryId){
+		$userId = input('post.userId');
+		if(!intval($userId) || !intval($factoryId)){
+			return errorMsg('参数错误');
+		}
+		$newRoleIds = input('post.ids/a');
+		if(empty($newRoleIds)){
+			return errorMsg('请选择角色');
+		}
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		$where = [
+			['status','=',0],
+			['user_id','=',$userId],
+			['factory_id','=',$factoryId],
+		];
+		$userFactoryRole = $modelUserFactoryRole->getList($where);
+		$oldRoleIds = array_column($userFactoryRole,'role_id');
+		$modelUserFactoryRole->startTrans();//开启事务
+		//新增角色
+		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
+		if(!empty($addRoleIds)){
+			$data = [];
+			foreach ($addRoleIds as $value){
+				$data[] = [
+					'factory_id' => $factoryId,
+					'user_id' => $userId,
+					'role_id' => $value,
+				];
+			}
+			$res = $modelUserFactoryRole->saveAll($data);
+			if(false===$res){
+				$modelUserFactoryRole->rollback();//回滚事务
+				return errorMsg('失败');
+			}
+		}
+		//删除角色
+		$delRoleIds = array_diff($oldRoleIds,$newRoleIds);
+		if(!empty($delRoleIds)){
+			$where[] = ['role_id','in',$delRoleIds];
+			$res = $modelUserFactoryRole->where($where)->delete();
+			if(!$res){
+				$modelUserFactoryRole->rollback();//回滚事务
+				return errorMsg('失败',$this->getError());
+			}
+		}
+		$modelUserFactoryRole->commit();//提交事务
 		return successMsg('成功');
 	}
 }

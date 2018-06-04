@@ -64,6 +64,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="factory_js/account.js"></script>
 <script type="text/javascript">
 	$(function () {
 		//初始化
@@ -180,13 +181,5 @@
 			});
 		});
 	});
-	//获取组织列表
-	function getRoleList() {
-		var postData = {};
-		var url = controller + 'getList';
-		$.get(url,postData,function(data){
-			$('ul.role-list').append(data);
-		});
-	}
 </script>
 {/block}
