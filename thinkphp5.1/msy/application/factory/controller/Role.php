@@ -25,9 +25,6 @@ class Role extends FactoryBase
     /**获取组织列表
      */
     public function  getList(){
-        if(!request()->isGet()){
-            return errorMsg(config('custom.not_get'));
-        }
         $modelRole = new \app\factory\model\Role();
         $list = $modelRole->getList($this->factory['id']);
         $this->assign('list',$list);
