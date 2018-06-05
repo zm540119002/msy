@@ -14,7 +14,39 @@
         if(factoryList!='null'){
             //选择供应商
             var factoryList = $('#factoryList').html();
+<<<<<<< HEAD
             aa();
+=======
+            layer.open({
+                title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
+                className:'factoryListLayer',
+                type: 1,
+                content: factoryList,
+                anim: 'up',
+                style: '',
+                success:function(){
+                    var winHeight=$(window).height();
+                    $('.signIn-wrapper').css('height',winHeight-120+'px');
+                },
+                btn:['确定'],
+                yes:function(index){
+                    var postData = {};
+                    postData.factoryId = $('.factoryListLayer li.current').data('id');
+                    if(!postData.factoryId){
+                        dialog.error('请选择供应商');
+                        return false;
+                    }
+                    var url = 'setDefaultFactory';
+                    $.post(url,postData,function(data){
+                        if(data.status==0){
+                            dialog.error(data.info);
+                        }else if(data.status==1){
+                            layer.close(index);
+                        }
+                    });
+                }
+            });
+>>>>>>> 8c12e4eff9a29e6058f5a81cb68c8c62b9d39e84
         }
         //选择效果
         $('body').on('click','.factoryListLayer li',function(){
@@ -22,6 +54,7 @@
             $(this).toggleClass('current');
         });
     });
+<<<<<<< HEAD
     function aa() {
         layer.open({
             title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
@@ -53,4 +86,6 @@
             }
         });
     }
+=======
+>>>>>>> 8c12e4eff9a29e6058f5a81cb68c8c62b9d39e84
 </script>
