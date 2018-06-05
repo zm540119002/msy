@@ -1,12 +1,10 @@
 <?php
 namespace app\factory\controller;
-use common\controller\UserBase;
-class Index extends UserBase
-{
+
+class Index extends \common\controller\UserBase{
     /**首页
      */
-    public function index()
-    {
+    public function index(){
         return $this->fetch();
     }
 }
