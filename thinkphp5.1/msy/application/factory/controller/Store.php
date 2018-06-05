@@ -5,7 +5,6 @@ class Store extends FactoryBase
 
     //开店部署首页
     public function index(){
-        $this ->assign('factoryId', $this->factory['id']);
         return $this->fetch('index');
     }
     /**
