@@ -93,7 +93,7 @@
 			<a href="" class="current">
 				店铺管理
 			</a>
-			<a href="">
+			<a href="{:url('Promotion/manage')}">
 				营销推广
 			</a>
 			<a href="">
@@ -145,11 +145,8 @@
 <script type="text/javascript" src="factory_js/getGoodsList.js"></script>
 <script type="text/javascript">
 	$(function () {
-
-
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
-		console.log(notDefaultStore);
 		if(notDefaultStore == 0){
 			var config = {
 				pageSize:4,

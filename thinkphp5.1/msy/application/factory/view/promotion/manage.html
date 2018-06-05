@@ -20,7 +20,7 @@
 			<a href="">
 				店铺提醒
 			</a>
-			<a href="">
+			<a href="{:url('Goods/manage')}">
 				店铺管理
 			</a>
 			<a href=""  class="current">
@@ -81,18 +81,21 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<!--<script type="text/javascript" src="factory_js/promotion.js"></script>-->
 <script type="text/javascript">
 	$(function () {
-		//初始化
-		var activityStatus=$('.category-tab li.current a').data('activity-status');
-		var config = {
-			activityStatus:activityStatus,//未结束
-		};
-		currentPage=1;
-		requestEnd=false;
-		var url = module+'promotion/getList';
-		getPage(url,config);
+		//没有默认店铺
+		var notDefaultStore = "{$notDefaultStore|default=0}";
+		if(notDefaultStore == 0){
+			//初始化
+			var activityStatus=$('.category-tab li.current a').data('activity-status');
+			var config = {
+				activityStatus:activityStatus,//未结束
+			};
+			currentPage=1;
+			requestEnd=false;
+			var url = module+'promotion/getList';
+			getPage(url,config);
+		}
 
 		//点击新建促销活动
 		$('body').on('click','.addSalesActivity',function () {

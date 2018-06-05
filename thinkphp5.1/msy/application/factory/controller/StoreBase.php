@@ -11,15 +11,9 @@ class StoreBase extends FactoryBase
     public function __construct()
     {
         parent::__construct();
-        $model = new \app\factory\model\Store();
         //获取厂商店铺详情列表
         \common\cache\Store::removeList($this->factory['id']);
-        $storeList = \common\cache\Store::getList($this->factory['id']);
-        $this -> assign('storeList', $storeList);
-        $where = [
-            ['factory_id', '=', $this->factory['id']],
-        ];
-        $list = $model -> getList($where);
+        $list = \common\cache\Store::getList($this->factory['id']);
         $count = count($list);
         if ($count > 1) {
             //多家店判断是否有默认店铺
@@ -37,6 +31,7 @@ class StoreBase extends FactoryBase
         }elseif (!$count) {
             $this -> success('没有店铺，请申请', 'Store/edit');
         }
+        $this -> assign('storeList', $list);
         \common\cache\Store::remove($info['id']);
         $this -> store = \common\cache\Store::get($info['id']);
        

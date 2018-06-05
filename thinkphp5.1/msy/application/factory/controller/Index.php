@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 use common\controller\UserBase;
-class Index extends FactoryBase
+class Index extends UserBase
 {
     /**首页
      */

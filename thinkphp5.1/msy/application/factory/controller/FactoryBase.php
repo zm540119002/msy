@@ -34,6 +34,7 @@ class FactoryBase extends UserBase{
             }
             if(empty($info)){//不存在默认供应商的情况
                 $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
+                print_r( $this->factoryList );exit;
             }
         }
         \common\cache\Factory::remove($info['factory_id']);
