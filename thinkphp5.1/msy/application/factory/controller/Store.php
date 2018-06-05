@@ -1,6 +1,5 @@
 <?php
 namespace app\factory\controller;
-use think\facade\Session;
 class Store extends FactoryBase
 {
 
@@ -42,6 +41,9 @@ class Store extends FactoryBase
             $where = [['b.factory_id','=',$this->factory['id']]];
             $file = ['b.id,b.name,b.brand_img as img'];
             $brandStores =  $modelFactory -> getList($where,$file);
+            if(empty($brandStores)){
+
+            }
             $this -> assign('brandStores',$brandStores);
             //查看已申请的店铺
             $modeStore = new \app\factory\model\Store();
