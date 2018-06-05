@@ -84,6 +84,7 @@
 			});
 			if(!postData.ids.length){
 				dialog.error('请选择角色');
+				return false;
 			}
 			$.post(url,postData,function(data){
 				dialog.error(data.info);
