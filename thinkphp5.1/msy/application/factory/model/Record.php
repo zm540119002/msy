@@ -63,7 +63,7 @@ class Record extends Model {
 			$file = array(
 				'logo_img','company_img','rb_img','factory_video','license','glory_img'
 			);
-			$oldRecordInfo = $this -> getRecord($where,$file);
+			$oldRecordInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
 		}else{
