@@ -145,15 +145,22 @@
 <script type="text/javascript" src="factory_js/getGoodsList.js"></script>
 <script type="text/javascript">
 	$(function () {
-		var config = {
-			pageSize:4,
-			pageType:'manage',
-		};
-		var url = module+'goods/getList';
-		//初始化商品列表
-		getPage(url,config);
-		//上拉加载更多
-		getMore(url,config);
+
+
+		//没有默认店铺
+		var notDefaultStore = "{$notDefaultStore|default=0}";
+		console.log(notDefaultStore);
+		if(notDefaultStore == 0){
+			var config = {
+				pageSize:4,
+				pageType:'manage',
+			};
+			var url = module+'goods/getList';
+			//初始化商品列表
+			getPage(url,config);
+			//上拉加载更多
+			getMore(url,config);
+		}
 
 		var databaseContent=$('#databaseContent').html();
 		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){

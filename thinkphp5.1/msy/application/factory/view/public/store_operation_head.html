@@ -57,23 +57,24 @@
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
-        //没有店铺
-        var notStore = "{$noStore|default=0}";
-        if(notStore == 1){
-            dialog.confirm('暂无店铺，去申请开店',module+'Store/edit')
-        }
+//        //没有店铺
+//        var notStore = "{$noStore|default=0}";
+//        if(notStore == 1){
+//            dialog.confirm('暂无店铺，去申请开店',module+'Store/edit')
+//        }
         //切换店铺
         $('body').on('click','.switch-account',function(){
-            if(notStore == 1){
-                dialog.confirm('暂无店铺，去申请开店',module+'Store/edit');
-                return false;
-            }
+//            if(notStore == 1){
+//                dialog.confirm('暂无店铺，去申请开店',module+'Store/edit');
+//                return false;
+//            }
             storeList();
         });
         //没有默认店铺
         var notDefaultStore = "{$notDefaultStore|default=0}";
         if(notDefaultStore == 1){
             storeList();
+            return false;
         }
 
         //获取厂商信息
