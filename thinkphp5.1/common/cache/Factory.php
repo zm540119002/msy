@@ -3,7 +3,6 @@ namespace common\cache;
 
 class Factory{
     private static $_cache_key = 'cache_factory_';
-    
     /**从缓存中获取信息
      */
     public static function get($factoryId){
@@ -16,9 +15,10 @@ class Factory{
             $field = [
                 'id','name',
             ];
+
             if(is_array($factoryId)){
                 $where[] = ['id','in',$factoryId];
-                $factory = $modelFactory->selectFactory($where,$field);
+                $factory = $modelFactory->getList($where,$field);
             }else{
                 $where[] = ['id','=',$factoryId];
                 $factory = $modelFactory->getInfo($where,$field);

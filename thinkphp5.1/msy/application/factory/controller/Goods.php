@@ -21,7 +21,7 @@ class Goods extends StoreBase
         $categoryModel = new \app\index_admin\model\Category;
         $platformCategory = $categoryModel->selectFirstCategory();
         $this -> assign('platformCategory',$platformCategory);
-        if(input('?goods_id')){
+        if(input('?goods_id') && $this->store['id']){
             $goodsId= (int)input('goods_id');
             $where = [
                ['g.store_id','=',$this->store['id']],
@@ -50,25 +50,31 @@ class Goods extends StoreBase
         if(empty($goodsId) && !$goodsId){
             $this -> error('此商品不存在');
         }
-        $where = [
-            ['g.id','=',$goodsId],
-            ['g.store_id','=',$this->store['id']],
-        ];
-        $file = ['g.id,g.sale_price,g.sale_type,g.create_time,g.update_time,
+        if($this->store['id']){
+            $where = [
+                ['g.id','=',$goodsId],
+                ['g.store_id','=',$this->store['id']],
+            ];
+            $file = ['g.id,g.sale_price,g.sale_type,g.create_time,g.update_time,
                     g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,g.thumb_img,
                     g.main_img,g.goods_video,g.parameters,g.details_img'];
 
-        $goodsInfo =  $model -> getInfo($where,$file);
-        $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
-        array_pop( $goodsInfo['main_img']);
-        $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
-        array_pop( $goodsInfo['details_img']);
-        $this -> assign('goodsInfo',$goodsInfo);
+            $goodsInfo =  $model -> getInfo($where,$file);
+            if(empty($goodsInfo)){
+                $this -> error('此商品不存在');
+            }
+            $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
+            array_pop( $goodsInfo['main_img']);
+            $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
+            array_pop( $goodsInfo['details_img']);
+            $this -> assign('goodsInfo',$goodsInfo);
 
-        //获取店铺的详情信息
-        $modelStore = new \app\factory\model\Store;
-        $storeInfo = $modelStore -> getStoreInfo($this->store);
-        $this -> assign('storeInfo',$storeInfo);
+            //获取店铺的详情信息
+            $modelStore = new \app\factory\model\Store;
+            $storeInfo = $modelStore -> getStoreInfo($this->store);
+            $this -> assign('storeInfo',$storeInfo);
+        }
+
         return $this->fetch();
     }
 

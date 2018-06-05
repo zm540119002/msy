@@ -1,7 +1,26 @@
+<section class="top_nav_fixed">
+    <div class="top_bar top-switch-bar columns_flex l-r-sides">
+        <div class="">
+            <a class="home">首页</a>
+        </div>
+        <div class="">
+            <img class="left" src="public_img/default/no_pic_40.jpg" alt="">
+            <span>爱国宾</span>
+        </div>
+        <div class="">
+            <a class="switch-account">切换供应商账号></a>
+        </div>
+    </div>
+</section>
 <section id="vendorInfoList" style="display:none;">
     <ul class="vendorInfoList">
         {volist name="storeList" id="vo"}
+        {if $vo.is_default == 1}
+        <li class="current" data-id="{$vo.id}">
+        {else /}
         <li class="" data-id="{$vo.id}">
+        {/if}
+        <!--<li class="" data-id="{$vo.id}">-->
             {if $vo.store_type == 1 }
             <span>{$vo.name}</span>官方旗舰店
             {elseif $vo.store_type == 2/}
@@ -24,12 +43,56 @@
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
+//        //没有店铺
+//        var notStore = "{$noStore|default=0}";
+//        if(notStore == 1){
+//            dialog.confirm('暂无店铺，去申请开店',module+'Store/edit')
+//        }
+        //切换店铺
+        $('body').on('click','.switch-account',function(){
+//            if(notStore == 1){
+//                dialog.confirm('暂无店铺，去申请开店',module+'Store/edit');
+//                return false;
+//            }
+            storeList();
+        });
         //没有默认店铺
         var notDefaultStore = "{$notDefaultStore|default=0}";
         if(notDefaultStore == 1){
             storeList();
             return false;
         }
+
+        //获取厂商信息
+        $.get(controller+'getFactoryInfo',{},function (msg) {
+            if(msg != 'null'){
+                $('.factory-log-img').attr('src',uploads+msg.logo_img);
+                $('.factory-name').text(msg.name);
+            }
+
+        });
+        //获取店铺信息
+        $.get(controller+'getStoreInfo',{},function (msg) {
+            if(msg != 'null'){
+                $('.storeId').val(msg.id);
+                $('.store-logo-img').attr('src',uploads+msg.img);
+                $('.store-name').text(msg.name);
+                if(msg.store_type == 1){
+                    $('.store-type').text('官方旗舰店');
+                }else if(msg.store_type == 2){
+                    $('.store-type').text('品牌旗舰店');
+                }
+                if(msg.run_type == 1){
+                    $('.run-type').text('B2B采购商城');
+                }else if(msg.run_type == 2){
+                    $('.run-type').text('B2B分成商城');
+                }else if(msg.run_type == 3){
+                    $('.run-type').text('B2C零售商城');
+                }
+            }
+
+        })
+
     })
     //弹层 店铺
     function storeList() {

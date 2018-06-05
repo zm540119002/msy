@@ -3,7 +3,7 @@ namespace common\cache;
 
 class Store{
     private static $_cache_key = 'cache_store_';
-    private static $_cache_key_list = 'cache_store_List';
+    private static $_cache_key_list = 'cache_store_list_';
 
     /**从缓存中获取信息
      */
