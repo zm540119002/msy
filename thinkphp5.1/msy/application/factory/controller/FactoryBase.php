@@ -46,4 +46,19 @@ class FactoryBase extends UserBase{
         $modelUserFactory = new \app\factory\model\UserFactory();
         return $modelUserFactory->setDefaultFactory($this->user['id']);
     }
+
+    //获取厂家详细信息
+    public function getFactoryInfo(){
+        $model = new \app\factory\model\Factory();
+        $where = [
+            ['f.id','=',$this->factory['id']],
+        ];
+        $file = [
+            'f.id,f.name,r.logo_img'
+        ];
+        $join =[
+            ['record r','r.factory_id = f.id',],
+        ];
+        return $model->getInfo($where,$file,$join);
+    }
 }

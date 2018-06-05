@@ -54,11 +54,11 @@ class Goods extends StoreBase
             ['g.id','=',$goodsId],
             ['g.store_id','=',$this->store['id']],
         ];
-        $file = ['g.id,g.goods_base_id,g.sale_price,g.sale_type,g.create_time,g.update_time,
-                    gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,gb.thumb_img,
-                    gb.main_img,gb.goods_video,gb.parameters,gb.details_img'];
-        $join = [  ['goods_base gb','gb.id = g.goods_base_id'],];
-        $goodsInfo =  $model -> getInfo($where,$file,$join);
+        $file = ['g.id,g.sale_price,g.sale_type,g.create_time,g.update_time,
+                    g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,g.thumb_img,
+                    g.main_img,g.goods_video,g.parameters,g.details_img'];
+
+        $goodsInfo =  $model -> getInfo($where,$file);
         $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
         array_pop( $goodsInfo['main_img']);
         $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
@@ -142,7 +142,6 @@ class Goods extends StoreBase
 
     //商品管理展示页
     public function manage(){
-//        $this->assign('factory',$this->factory);
         //查看本店商品是否存在备份文件
         //存储路径
         $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
@@ -267,4 +266,5 @@ class Goods extends StoreBase
         $this -> assign('goodsListBackup',$goodsList);
         return $this -> fetch('list_backup');
     }
+    
 }

@@ -35,7 +35,7 @@ class StoreBase extends FactoryBase
         } elseif ($count == 1){
             $info = $list[0];
         }elseif (!$count) {
-            $this -> success('没有店铺，请申请', 'Store/deployIndex');
+            $this -> success('没有店铺，请申请', 'Store/edit');
         }
         \common\cache\Store::remove($info['id']);
         $this -> store = \common\cache\Store::get($info['id']);
@@ -46,5 +46,11 @@ class StoreBase extends FactoryBase
     public function setDefaultStore(){
         $model = new \app\factory\model\Store();
         return $model->setDefaultStore($this->factory['id']);
+    }
+
+    //获取店铺信息
+    public function getStoreInfo(){
+        $modelStore = new \app\factory\model\Store;
+        return $storeInfo = $modelStore -> getStoreInfo($this->store);
     }
 }
