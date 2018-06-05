@@ -118,12 +118,25 @@
 		});
 		//下一步
 		$('body').on('click','.next-step',function(){
-
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+			store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+			if(store_type ==1 ) {
+				var factory_store = $('.factory_store').length;
+				if (!factory_store) {
+					dialog.success('请完善企业档案', module + 'Record/edit');
+					return false;
+				}
+			}
+			if(store_type ==2 ){
+				var brand_stores = $('.brand_stores').length;
+				if(!brand_stores){
+					dialog.success('请完善品牌资料备案',module+'Brand/record');
+					return false;
+				}
+			}
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
 			if(storeType.hasClass('current')){
 				if(storePattern.hasClass('current')){
-					store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
 					run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
 					$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
 
@@ -133,11 +146,7 @@
 						run_type:run_type,
 					}
 					if(store_type ==1 ){
-						var factory_store = $('.factory_store').length;
-						if(!factory_store){
-							dialog.success('请完善企业档案',module+'Record/edit');
-							return false;
-						}
+
 						$('.factory_store').find('li').attr('disabled',false);
 						$('.store-two').show();
 						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
@@ -146,11 +155,7 @@
 						$('.factory_store').show();
 					}
 					if(store_type ==2 ){
-						var brand_stores = $('.brand_stores').length;
-						if(!brand_stores){
-							dialog.success('请完善品牌资料备案',module+'Brand/record');
-							return false;
-						}
+
 						$('.store-two').show();
 						var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 						$('.brand_stores').find('.run_type').text(runType);
