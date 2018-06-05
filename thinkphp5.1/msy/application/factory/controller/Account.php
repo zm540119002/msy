@@ -33,6 +33,15 @@ class Account extends FactoryBase
         }
     }
 
+    //设置账户状态
+    public function setStatus(){
+        if(request()->isPost()){
+            $modelUserFactory = new \app\factory\model\UserFactory();
+            $info = $modelUserFactory->setStatus($this->factory['id']);
+            return $info;
+        }
+    }
+
     //获取工厂账号列表
     public function getAccountList(){
         if(request()->isGet()){

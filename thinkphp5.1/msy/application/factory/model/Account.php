@@ -108,9 +108,22 @@ class Account extends \think\Model {
 		}
 		$where[] = ['id','=',$id];
 		$field = [
-			'u.id','u.name','u.nickname','u.mobile_phone','u.status',
+			'u.id','u.name','u.nickname','u.mobile_phone',
 		];
 		$info = $this->alias('u')->field($field)->where($where)->find();
+		//用户工厂关系表
+		$modelUserFactory = new \app\factory\model\UserFactory();
+		$where = [
+			['status', '<>', 2],
+			['user_id', '=', $id],
+			['factory_id', '=', $factoryId],
+		];
+		$field = [
+			'status',
+		];
+		$userFactory = $modelUserFactory->field($field)->where($where)->find();
+		$userFactory = $userFactory->toArray();
+		$info['status'] = $userFactory['status'];
 		//用户工厂角色
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		$where = [
@@ -131,21 +144,22 @@ class Account extends \think\Model {
 	public function getList($factoryId){
 		$modelUserFactory = new \app\factory\model\UserFactory();
 		$where = [
-			['uu.status','<>',2],
-			['u.factory_id','=',$factoryId],
-			['u.type','=',2],
+			['u.status','<>',2],
+			['uf.status','<>',2],
+			['uf.factory_id','=',$factoryId],
+			['uf.type','=',2],
 		];
 		$keyword = input('get.keyword','');
 		if($keyword){
-			$where[] = ['uu.name|uu.mobile_phone', 'like', '%'.trim($keyword).'%',];
+			$where[] = ['u.name|u.mobile_phone', 'like', '%'.trim($keyword).'%',];
 		}
 		$field = [
-			'uu.id','uu.name','uu.nickname','uu.mobile_phone','uu.status','u.is_default',
+			'u.id','u.name','u.nickname','u.mobile_phone','uf.status','uf.is_default',
 		];
 		$join = [
-			['common.user uu','uu.id = u.user_id','LEFT'],
+			['common.user u','u.id = uf.user_id','LEFT'],
 		];
-		$list = $modelUserFactory->getList($where,$field,$join);
+		$list = $modelUserFactory->alias('uf')->where($where)->field($field)->join($join)->select();
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		$field = [
 			'r.id','r.name',
@@ -161,31 +175,6 @@ class Account extends \think\Model {
 			$value['role'] = $modelUserFactoryRole->getList($where,$field,$join);
 		}
 		return count($list)?$list:[];
-	}
-
-	//删除
-	public function del($factoryId,$tag=true){
-		if(!intval($factoryId)){
-			return errorMsg('参数错误');
-		}
-		$where = [
-			['status', '=', 0],
-			['factory_id', '=', $factoryId],
-		];
-		$id = input('post.id');
-		if(!intval($id)){
-			return errorMsg('参数错误');
-		}
-		$where[] = ['id', '=', $id];
-		if($tag){//标记删除
-			$result = $this->where($where)->setField('status',2);
-		}else{
-			$result = $this->where($where)->delete();
-		}
-		if(!$result){
-			return errorMsg('失败',$this->getError());
-		}
-		return successMsg('成功');
 	}
 
 	//用户角色编辑

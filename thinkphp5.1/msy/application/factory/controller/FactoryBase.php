@@ -18,7 +18,7 @@ class FactoryBase extends UserBase{
         $field = [
             'factory_id','is_default',
         ];
-        $list = $modelUserFactory->getList($where,$field);
+        $list = $modelUserFactory->where($where)->field($field)->select();
         $factoryCount = count($list);
         $info = [];
         if ($factoryCount==0){//没有入住供应商
