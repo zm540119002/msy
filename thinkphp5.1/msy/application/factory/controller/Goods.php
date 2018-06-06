@@ -55,11 +55,7 @@ class Goods extends StoreBase
                 ['g.id','=',$goodsId],
                 ['g.store_id','=',$this->store['id']],
             ];
-            $file = ['g.id,g.sale_price,g.sale_type,g.create_time,g.update_time,
-                    g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,g.thumb_img,
-                    g.main_img,g.goods_video,g.parameters,g.details_img'];
-
-            $goodsInfo =  $model -> getInfo($where,$file);
+            $goodsInfo =  $model -> getInfo($where);
             if(empty($goodsInfo)){
                 $this -> error('此商品不存在');
             }
@@ -88,10 +84,10 @@ class Goods extends StoreBase
 
             $init = [
                 'filename'=>'goods',   //保存目录  ./uploads/compose/goods....
-                'title'=>'美尚官方旗舰店',
-                'type'=>'供应商自营',
+                'title'=>input('post.store_name'),
+                'type'=>input('post.store_run_type'),
                 'slogan'=>"采购平台·省了即赚到！",
-                'name'=>input('post.name'),
+                'name'=>input('post.goods_name'),
                 'introduce'=>input('post.specification'),
                 'money'=>'￥'.input('post.sale_price').'元',
                 'logo'=>$avatarPath, // 60*55px
@@ -100,7 +96,7 @@ class Goods extends StoreBase
                 'qrcode'=>config('upload_dir.upload_path').'/'.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
             ];
-            return successMsg($this->compose($init));
+            return $this->compose($init);
         }
 
     }
