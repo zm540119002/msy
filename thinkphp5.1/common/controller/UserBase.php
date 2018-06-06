@@ -19,5 +19,8 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
+        //获取所有权限节点
+        $node = new \common\lib\Node();
+        $this->assign('allNode',$node->getAllNode());
     }
 }

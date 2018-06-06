@@ -15,9 +15,6 @@ class Role extends FactoryBase
             $this->assign('info',$info);
             return view('info_tpl');
         }else{
-            $menu = new \common\lib\Menu();
-            $allMenu = $menu->getAllMenu();
-            $this->assign('allMenu',$allMenu);
             return $this->fetch();
         }
     }
@@ -47,8 +44,8 @@ class Role extends FactoryBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $roleNodeModel = new \app\factory\model\RoleNode();
-        $list = $roleNodeModel->getList();
+        $modelRoleNode = new \app\factory\model\RoleNode();
+        $list = $modelRoleNode->getList();
         return array_column($list,'node_id');
     }
 
@@ -58,8 +55,8 @@ class Role extends FactoryBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $roleNodeModel = new \app\factory\model\RoleNode();
-        $res = $roleNodeModel->edit();
+        $modelRoleNode = new \app\factory\model\RoleNode();
+        $res = $modelRoleNode->edit();
         return $res;
     }
 }

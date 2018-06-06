@@ -10,9 +10,6 @@ class FactoryBase extends UserBase{
 
     public function __construct(){
         parent::__construct();
-//        \common\cache\FactoryMenu::removeAllMenuIds($this->user['id']);
-//        $allMenuIds = \common\cache\FactoryMenu::getAllMenuIds($this->user);
-//        $this->assign('allMenuIds',$allMenuIds);
 
         $modelUserFactory = new \app\factory\model\UserFactory();
         $where = [
