@@ -42,7 +42,7 @@ class FactoryBase extends UserBase{
             //获取工厂信息
             \common\cache\Factory::remove($info['factory_id']);
             $this->factory = \common\cache\Factory::get($info['factory_id']);
-            //获取用户工厂节点ID
+            //获取用户工厂角色权限节点ID
         }
     }
 
