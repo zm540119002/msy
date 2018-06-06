@@ -55,8 +55,8 @@ class Role extends FactoryBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $roleNodeModel = new \app\factory\model\RoleNode();
-        $res = $roleNodeModel->edit();
+        $modelRoleNode = new \app\factory\model\RoleNode();
+        $res = $modelRoleNode->edit();
         return $res;
     }
 }
