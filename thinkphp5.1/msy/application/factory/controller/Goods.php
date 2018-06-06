@@ -31,8 +31,8 @@ class Goods extends StoreBase
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
             }
-            $catArray= $goodsInfo['cat_id_1'].','.$goodsInfo['cat_id_2'];
-            $goodsInfo['catArray'] = $catArray;
+            $catArray= $goodsInfo['category_id_1'].','.$goodsInfo['category_id_2'];
+            $goodsInfo['categoryArray'] = $catArray;
             $this -> assign('goodsInfo',$goodsInfo);
         }
         return $this->fetch();
@@ -56,7 +56,7 @@ class Goods extends StoreBase
                 ['g.store_id','=',$this->store['id']],
             ];
             $file = ['g.id,g.sale_price,g.sale_type,g.create_time,g.update_time,
-                    g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,g.thumb_img,
+                    g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,g.thumb_img,
                     g.main_img,g.goods_video,g.parameters,g.details_img'];
 
             $goodsInfo =  $model -> getInfo($where,$file);
@@ -122,7 +122,7 @@ class Goods extends StoreBase
         }
         $file = [
             'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,
+                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
                 g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters'
         ];
         $list = $model -> pageQuery($where,$file);
