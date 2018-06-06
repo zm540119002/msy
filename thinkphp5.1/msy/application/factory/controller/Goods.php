@@ -3,6 +3,11 @@ namespace app\factory\controller;
 
 class Goods extends StoreBase
 {
+    //运营管理首页
+    public function operaManageIndex(){
+        return $this->fetch('store/opera_manage_index');
+    }
+
     /**
      * @return array|mixed
      *商品编辑
@@ -16,7 +21,7 @@ class Goods extends StoreBase
         $categoryModel = new \app\index_admin\model\Category;
         $platformCategory = $categoryModel->selectFirstCategory();
         $this -> assign('platformCategory',$platformCategory);
-        if(input('?goods_id')){
+        if(input('?goods_id') && $this->store['id']){
             $goodsId= (int)input('goods_id');
             $where = [
                ['g.store_id','=',$this->store['id']],
@@ -26,8 +31,8 @@ class Goods extends StoreBase
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
             }
-            $catArray= $goodsInfo['cat_id_1'].','.$goodsInfo['cat_id_2'];
-            $goodsInfo['catArray'] = $catArray;
+            $catArray= $goodsInfo['category_id_1'].','.$goodsInfo['category_id_2'];
+            $goodsInfo['categoryArray'] = $catArray;
             $this -> assign('goodsInfo',$goodsInfo);
         }
         return $this->fetch();
@@ -45,25 +50,27 @@ class Goods extends StoreBase
         if(empty($goodsId) && !$goodsId){
             $this -> error('此商品不存在');
         }
-        $where = [
-            ['g.id','=',$goodsId],
-            ['g.store_id','=',$this->store['id']],
-        ];
-        $file = ['g.id,g.goods_base_id,g.sale_price,g.sale_type,g.create_time,g.update_time,
-                    gb.name,gb.retail_price,gb.trait,gb.cat_id_1,gb.cat_id_2,gb.cat_id_3,gb.thumb_img,
-                    gb.main_img,gb.goods_video,gb.parameters,gb.details_img'];
-        $join = [  ['goods_base gb','gb.id = g.goods_base_id'],];
-        $goodsInfo =  $model -> getInfo($where,$file,$join);
-        $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
-        array_pop( $goodsInfo['main_img']);
-        $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
-        array_pop( $goodsInfo['details_img']);
-        $this -> assign('goodsInfo',$goodsInfo);
+        if($this->store['id']){
+            $where = [
+                ['g.id','=',$goodsId],
+                ['g.store_id','=',$this->store['id']],
+            ];
+            $goodsInfo =  $model -> getInfo($where);
+            if(empty($goodsInfo)){
+                $this -> error('此商品不存在');
+            }
+            $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
+            array_pop( $goodsInfo['main_img']);
+            $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
+            array_pop( $goodsInfo['details_img']);
+            $this -> assign('goodsInfo',$goodsInfo);
 
-        //获取店铺的详情信息
-        $modelStore = new \app\factory\model\Store;
-        $storeInfo = $modelStore -> getStoreInfo($this->store);
-        $this -> assign('storeInfo',$storeInfo);
+            //获取店铺的详情信息
+            $modelStore = new \app\factory\model\Store;
+            $storeInfo = $modelStore -> getStoreInfo($this->store);
+            $this -> assign('storeInfo',$storeInfo);
+        }
+
         return $this->fetch();
     }
 
@@ -77,10 +84,10 @@ class Goods extends StoreBase
 
             $init = [
                 'filename'=>'goods',   //保存目录  ./uploads/compose/goods....
-                'title'=>'美尚官方旗舰店',
-                'type'=>'供应商自营',
+                'title'=>input('post.store_name'),
+                'type'=>input('post.store_run_type'),
                 'slogan'=>"采购平台·省了即赚到！",
-                'name'=>input('post.name'),
+                'name'=>input('post.goods_name'),
                 'introduce'=>input('post.specification'),
                 'money'=>'￥'.input('post.sale_price').'元',
                 'logo'=>$avatarPath, // 60*55px
@@ -89,7 +96,7 @@ class Goods extends StoreBase
                 'qrcode'=>config('upload_dir.upload_path').'/'.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
             ];
-            return successMsg($this->compose($init));
+            return $this->compose($init);
         }
 
     }
@@ -111,7 +118,7 @@ class Goods extends StoreBase
         }
         $file = [
             'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.cat_id_1,g.cat_id_2,g.cat_id_3,
+                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
                 g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters'
         ];
         $list = $model -> pageQuery($where,$file);
@@ -137,7 +144,6 @@ class Goods extends StoreBase
 
     //商品管理展示页
     public function manage(){
-//        $this->assign('factory',$this->factory);
         //查看本店商品是否存在备份文件
         //存储路径
         $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
@@ -262,4 +268,5 @@ class Goods extends StoreBase
         $this -> assign('goodsListBackup',$goodsList);
         return $this -> fetch('list_backup');
     }
+    
 }

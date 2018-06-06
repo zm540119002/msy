@@ -124,7 +124,14 @@
 			<li>
 				<div class="columns_flex l-r-sides">
 					<div>
-						<div><img src="public_uploads/{$storeInfo.img}" class="small_default_img store_logo" alt=""></div>
+						<div>
+							{notempty name="$storeInfo.img"}
+							<img src="public_uploads/{$storeInfo.img}" class="small_default_img store_logo" alt="">
+							{else /}
+							<img src="" class="small_default_img store_logo" alt="">
+							{/notempty}
+
+						</div>
 						<div>
 							{if $storeInfo.store_type == 1 }
 							<span class="store_name">{$storeInfo.name}官方旗舰店</span>
@@ -174,11 +181,11 @@
 			<div class="goods_star_score comment_star_module">
 				<div class="five_star">
 					<div class="star_img">
-						<img src="public/static/common/img/starred.png">
-						<img src="public/static/common/img/starred.png">
-						<img src="public/static/common/img/starred.png">
-						<img src="public/static/common/img/star.png">
-						<img src="public/static/common/img/star.png">
+						<img src="public_img/starred.png">
+						<img src="public_img/starred.png">
+						<img src="public_img/starred.png">
+						<img src="public_img/star.png">
+						<img src="public_img/star.png">
 					</div>
 					<span class="fraction" data-score="0">0分</span>
 				</div>
@@ -187,11 +194,11 @@
 		</section>
 	</div>
 </article>
-<a href="http://192.168.1.101:8008/demo/joint-deployment.4.html" class="foot-btn f24">确定预览</a>
+<a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="foot-btn f24">修改</a>
 
 {/block}
 {block name="common"}
-
+{include file="store/list_layer" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -223,6 +230,7 @@
             postData.store_logo = $('.store_logo').attr('src');
             postData.store_run_type = $('.store_run_type').text();
 			$.post(module+'Goods/generateGoodsQRcode',postData,function (msg) {
+				console.log(msg.info.info);
 				if(msg.status == 1){
 					layer.open({
 						title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],

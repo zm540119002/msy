@@ -46,13 +46,11 @@
 	</section>
 	<section class="f24 account-content-wrapper ">
 		<div class="search-bar columns_flex">
-			<input type="text" class="search-text" name=""  placeholder="输入姓名、手机号码查询账号">
+			<input type="text" class="search-text" name="keyword"  placeholder="输入姓名、手机号码查询账号">
 			<input type="button" class="search-btn">
 		</div>
 		<div class="account-list-content">
 			<span class="title">供应商员工登陆账号列表</span>
-			<span class="title">搜索结果</span>
-			<span class="title">查无此人</span>
 			<ul class="account-list"></ul>
 		</div>
 	</section>
@@ -82,7 +80,6 @@
 </div>
 {/block}
 {block name="common"}
-{include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -101,6 +98,10 @@
 		//获取员工账号列表
 		getAccountList();
 
+		//查询
+		$('body').on('click','.search-btn',function(){
+			getAccountList();
+		});
 		//创建供应商员工登录账号
 		var addLoginAccount=$('#addLoginAccount').html();
 		$('body').on('click','.add-account',function(){
@@ -135,6 +136,7 @@
 					}
 					if(content){
 						dialog.error(content);
+						return false;
 					}
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
@@ -142,7 +144,7 @@
 						if(data.status==0){
 							dialog.error(data.info);
 						}else{
-							$('ul.account-list').append(data);
+							$('ul.account-list').prepend(data);
 							layer.close(index);
 						}
 					});

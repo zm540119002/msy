@@ -3,7 +3,7 @@ namespace common\cache;
 
 class Store{
     private static $_cache_key = 'cache_store_';
-    private static $_cache_key_list = 'cache_store_List';
+    private static $_cache_key_list = 'cache_store_list_';
 
     /**从缓存中获取信息
      */
@@ -33,13 +33,13 @@ class Store{
     /**从缓存中获取厂商店铺信息列表详情
      */
     public static function getList($factorId){
-        $store = cache(self::$_cache_key_list.$factorId);
-        if(!$store){
+        $storeList = cache(self::$_cache_key_list.$factorId);
+        if(!$storeList){
             $model = new \app\factory\model\Store();
             $storeList = $model -> getStoreList($factorId);
             cache(self::$_cache_key_list.$factorId, $storeList,config('custom.factory_cache_time'));
         }
-        return $store;
+        return $storeList;
     }
 
     /**删除缓存厂商店铺信息列表详情

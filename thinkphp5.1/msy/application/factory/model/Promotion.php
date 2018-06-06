@@ -150,7 +150,7 @@ class Promotion extends Model {
 		if(!empty($list)){
 			$list = $list->toArray();
 		}
-		return $list;
+		return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -167,15 +167,11 @@ class Promotion extends Model {
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		$list = $this->alias('p')
+		$info = $this->alias('p')
 			->where($where)
 			->field($field)
 			->join(array_merge($_join,$join))
-
 			->find();
-		if(!empty($list)){
-			$list = $list->toArray();
-		}
-		return $list;
+		return $info?$info->toArray():[];
 	}
 }

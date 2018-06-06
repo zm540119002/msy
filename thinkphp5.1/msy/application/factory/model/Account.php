@@ -93,28 +93,137 @@ class Account extends \think\Model {
 		return $this->belongsToMany('Organize','UserFactoryOrganize','organize_id','user_id');
 	}
 
-	//删除
-	public function del($factoryId,$tag=true){
+	//详情
+	public function detail($factoryId){
 		if(!intval($factoryId)){
 			return errorMsg('参数错误');
 		}
+		//用户信息
 		$where = [
-			['status', '=', 0],
-			['factory_id', '=', $factoryId],
+			['status', '<>', 2],
 		];
-		$id = input('post.id');
+		$id = input('id');
 		if(!intval($id)){
 			return errorMsg('参数错误');
 		}
-		$where[] = ['id', '=', $id];
-		if($tag){//标记删除
-			$result = $this->where($where)->setField('status',2);
-		}else{
-			$result = $this->where($where)->delete();
+		$where[] = ['id','=',$id];
+		$field = [
+			'u.id','u.name','u.nickname','u.mobile_phone',
+		];
+		$info = $this->alias('u')->field($field)->where($where)->find();
+		//用户工厂关系表
+		$modelUserFactory = new \app\factory\model\UserFactory();
+		$where = [
+			['status', '<>', 2],
+			['user_id', '=', $id],
+			['factory_id', '=', $factoryId],
+		];
+		$field = [
+			'status',
+		];
+		$userFactory = $modelUserFactory->field($field)->where($where)->find();
+		$userFactory = $userFactory->toArray();
+		$info['status'] = $userFactory['status'];
+		//用户工厂角色
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		$where = [
+			'ufr.user_id' => $info['id'],
+			'ufr.factory_id' => $factoryId,
+		];
+		$field = [
+			'r.id','r.name',
+		];
+		$join = [
+			['role r','r.id = ufr.role_id','LEFT'],
+		];
+		$info['role'] = $modelUserFactoryRole->getList($where,$field,$join);
+		return $info?$info->toArray():[];
+	}
+
+	//获取列表
+	public function getList($factoryId){
+		$modelUserFactory = new \app\factory\model\UserFactory();
+		$where = [
+			['u.status','<>',2],
+			['uf.status','<>',2],
+			['uf.factory_id','=',$factoryId],
+			['uf.type','=',2],
+		];
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['u.name|u.mobile_phone', 'like', '%'.trim($keyword).'%',];
 		}
-		if(!$result){
-			return errorMsg('失败',$this->getError());
+		$field = [
+			'u.id','u.name','u.nickname','u.mobile_phone','uf.status','uf.is_default',
+		];
+		$join = [
+			['common.user u','u.id = uf.user_id','LEFT'],
+		];
+		$list = $modelUserFactory->alias('uf')->where($where)->field($field)->join($join)->select();
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		$field = [
+			'r.id','r.name',
+		];
+		$join = [
+			['role r','r.id = ufr.role_id','LEFT'],
+		];
+		foreach ($list as &$value){
+			$where = [
+				'ufr.user_id' => $value['id'],
+				'ufr.factory_id' => $factoryId,
+			];
+			$value['role'] = $modelUserFactoryRole->getList($where,$field,$join);
 		}
+		return count($list)?$list:[];
+	}
+
+	//用户角色编辑
+	public function editRole($factoryId){
+		$userId = input('post.userId');
+		if(!intval($userId) || !intval($factoryId)){
+			return errorMsg('参数错误');
+		}
+		$newRoleIds = input('post.ids/a');
+		if(empty($newRoleIds)){
+			return errorMsg('请选择角色');
+		}
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		$where = [
+			['status','=',0],
+			['user_id','=',$userId],
+			['factory_id','=',$factoryId],
+		];
+		$userFactoryRole = $modelUserFactoryRole->getList($where);
+		$oldRoleIds = array_column($userFactoryRole,'role_id');
+		$modelUserFactoryRole->startTrans();//开启事务
+		//新增角色
+		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
+		if(!empty($addRoleIds)){
+			$data = [];
+			foreach ($addRoleIds as $value){
+				$data[] = [
+					'factory_id' => $factoryId,
+					'user_id' => $userId,
+					'role_id' => $value,
+				];
+			}
+			$res = $modelUserFactoryRole->saveAll($data);
+			if(false===$res){
+				$modelUserFactoryRole->rollback();//回滚事务
+				return errorMsg('失败');
+			}
+		}
+		//删除角色
+		$delRoleIds = array_diff($oldRoleIds,$newRoleIds);
+		if(!empty($delRoleIds)){
+			$where[] = ['role_id','in',$delRoleIds];
+			$res = $modelUserFactoryRole->where($where)->delete();
+			if(!$res){
+				$modelUserFactoryRole->rollback();//回滚事务
+				return errorMsg('失败',$this->getError());
+			}
+		}
+		$modelUserFactoryRole->commit();//提交事务
 		return successMsg('成功');
 	}
 }

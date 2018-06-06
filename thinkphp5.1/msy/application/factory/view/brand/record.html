@@ -92,7 +92,12 @@
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="brandInfo.certificate"}
 									<img class="upload_img" src="public_uploads/{$brandInfo.certificate|default=''}" alt="">
+									{else /}
+									<img class="upload_img" src="" alt="">
+									{/notempty}
+
 									<input type="hidden" class="trademark-certificate img" value="{$brandInfo.certificate|default=''}" name="certificate"/>
 								</div>
 								<p>商标证书</p>
@@ -100,7 +105,11 @@
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="brandInfo.certificate"}
 									<img class="upload_img" src="public_uploads/{$brandInfo.authorization|default=''}" alt="">
+									{else /}
+									<img class="upload_img" src="" alt="">
+									{/notempty}
 									<input type="hidden" class="trademark-authorization img" value="{$brandInfo.authorization|default=''}" name="authorization"/>
 								</div>
 								<p>商标授权书<br/>(非所有权者需递交)</p>

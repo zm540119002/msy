@@ -891,7 +891,7 @@ color: #ed6d00;
     padding:0.12rem 0;
 }
 .registerBtn{
-    display: none;
+    /*display: none;*/
 }
 .registerBtn.active{
     display: block;
@@ -1057,6 +1057,10 @@ color: #ed6d00;
 .databaseLayer .layui-m-layercont{
     padding:0;
     text-align: left;
+}
+.addCcountLayer,
+.vendorInfoLayer{
+    position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
@@ -1330,7 +1334,7 @@ color: #ed6d00;
 color:#fff;
 }
 .role-list li .btn{
-    height:31px;
+    /*height:31px;*/
 }
 .role-list .operate-box{
     position:absolute;
@@ -2181,8 +2185,8 @@ input[type=text]::-webkit-focus-inner {
 }
 .list-label{
     display: inline-block;
-    width:1rem;
-    margin:0 0.10rem 0 0;
+    width:1.2rem;
+    margin:0 0.08rem 0 0;
     text-align:right;
 }
 

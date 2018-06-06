@@ -79,9 +79,12 @@ class UserCenter extends \think\Model {
 	/**登录
 	 */
 	private function _login($mobilePhone,$password){
+		if(!$this->_checkAccountExist($mobilePhone)){
+			return errorMsg('账号不存在，请注册！');
+		}
 		$user = $this->_get($mobilePhone,$password);
 		if(!$user){
-			return errorMsg('账号或密码错误,请重新输入！');
+			return errorMsg('密码错误,请重新输入！');
 		}
 		//更新最后登录时间
 		$this->_setLastLoginTimeById($user['id']);
@@ -128,17 +131,14 @@ class UserCenter extends \think\Model {
 			'id','name','nickname','mobile_phone','status','type','password','avatar',
 			'sex','salt','birthday','last_login_time',
 		);
-		$user = $this
-			->field($field)
-			->where($where)
-			->find()->toArray();
-		if(!is_array($user) || empty($user)) {
+		$user = $this->field($field)->where($where)->find();
+		if(!count($user)) {
 			return false;
 		}
 		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
 			return false;
 		}
-		return $user;
+		return $user->toArray();
 	}
 
 	/**设置登录session

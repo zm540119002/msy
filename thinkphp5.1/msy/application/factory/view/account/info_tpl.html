@@ -1,7 +1,7 @@
 {notempty name='info'}
 <li data-id="{$info.id}">
 	<div>
-		<a href="javascript:void(0);">
+		<a href="{:url('detail',['id'=>$info.id])}">
 			<div>
 				<span class="list-label">姓名：</span>
 				<span>{$info.name}</span>
@@ -28,6 +28,4 @@
 		{/eq}
 	</div>
 </li>
-{else/}
-<span class="title">暂无数据</span>
 {/notempty}

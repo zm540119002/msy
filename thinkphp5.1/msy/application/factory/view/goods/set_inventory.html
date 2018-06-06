@@ -4,33 +4,7 @@
 {/block}
 {block name="content"}
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar columns_flex l-r-sides">
-			<div class="">
-				<a class="home">首页</a>
-			</div>
-			<div class="">
-				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
-				<span>爱国宾</span>
-			</div>
-			<div class="">
-				<a class="switch-account">切换我的店铺</a>
-			</div>
-		</div>
-	</section>
-	<section class="columns_flex l-r-sides">
-		<div>
-			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
-			<div>
-				<p><span>某某</span>官方旗舰店</p>
-				<p>B2B采购商城 <span>供应商自营</span></p>
-			</div>
-		</div>
-		<div>
-			<a href="" class="personal_center">我的</a>
-			<a href="" class="my-store">我的店铺</a>
-		</div>
-	</section>
+	{include file="public/store_operation_head" /}
 	<section class="bottomLine">
 		<nav class="columns_flex channel_nav manufacturer_nav">
 			<a href="">
@@ -79,16 +53,21 @@
 <script type="text/javascript" src="factory_js/getGoodsList.js"></script>
 <script type="text/javascript">
 	$(function () {
-		var config = {
-			pageSize:4,
-			pageType:'inventory',
-		};
-		var url = module+'goods/getList';
-		//初始化商品列表
-		getPage(url,config);
-		//上拉加载更多
-		getMore(url,config);
-
+		//没有默认店铺
+		var notDefaultStore = "{$notDefaultStore|default=0}";
+		console.log(notDefaultStore);
+		if(notDefaultStore == 0){
+			//初始化商品列表
+			var config = {
+				pageSize:4,
+				pageType:'inventory',
+			};
+			var url = module+'goods/getList';
+			//初始化商品列表
+			getPage(url,config);
+			//上拉加载更多
+			getMore(url,config);
+		}
 		/**
 		 * 设置库存
 		 */

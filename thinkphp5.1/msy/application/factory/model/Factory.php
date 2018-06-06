@@ -63,7 +63,7 @@ class Factory extends Model {
 
 	/**查询多条数据
 	 */
-	public function selectFactory($where=[],$field=['*'],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'f.status' => 0,
 		);

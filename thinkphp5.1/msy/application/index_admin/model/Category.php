@@ -22,7 +22,8 @@ class Category extends Model {
 	 * 获取第一级分类
 	 */
 	public function selectFirstCategory(){
-		return $this->where(['status'=>0,'parent_id_1'=>0])->field('id,name,img,level')->select();
+		$list = $this->where(['status'=>0,'parent_id_1'=>0])->field('id,name,img,level')->select();
+		return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -31,6 +32,8 @@ class Category extends Model {
 	 * 根据第一级分类id查二级分类
 	 */
 	public function getSecondCategoryById($id){
-		return $this->where(['status'=>0,'parent_id_1'=>$id])->field('id,name,img,level')->select();
+		$list = $this->where(['status'=>0,'parent_id_1'=>$id])->field('id,name,img,level')->select();
+		return count($list)?$list->toArray():[];
+
 	}
 }

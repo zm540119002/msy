@@ -153,7 +153,7 @@
 		});
 		//开店部署
 		$('body').on('click','.deployed-deployment',function () {
-			location.href = module + 'Store/deployIndex';
+			location.href = module + 'Store/index';
 		});
 
 		var storeList = '{:json_encode($storeList)}';
@@ -161,7 +161,7 @@
 
 		//店铺运营
 		$('body').on('click','.store_run',function () {
-			location.href = module + 'Store/operaManageIndex.html';
+			location.href = module + 'Operation/index';
 		});
 
 		//订单管理

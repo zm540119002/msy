@@ -26,12 +26,38 @@ function getOrganizeList() {
 //获取员工账号列表
 function getAccountList() {
     var postData = {};
+    postData.keyword = $('[name=keyword]').val();
     var url = module + 'Account/getAccountList';
     $.get(url,postData,function(data){
         if(data.status==0){
             dialog.error(data.info);
         }else{
             $('ul.account-list').empty().append(data);
+        }
+    });
+}
+
+//获取角色列表
+function getRoleList(config) {
+    var _config = {
+        option:true
+    };
+    _config = $.extend(_config,config);
+    var postData = {};
+    var url = module + 'role/getList';
+    $.get(url,postData,function(data){
+        $('ul.role-list').append(data);
+        if(!_config.option){
+            $('ul.role-list').find('div').remove();
+        }
+        if(_config.roleList){
+            $.each(JSON.parse(_config.roleList),function(i,o){
+                $.each($('ul.role-list').find('li'),function(){
+                    if(o.id==$(this).data('id')){
+                        $(this).addClass('current');
+                    }
+                });
+            });
         }
     });
 }

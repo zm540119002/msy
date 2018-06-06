@@ -19,7 +19,7 @@ class Promotion extends StoreBase
         if(request()->isPost()){
             return $model -> edit($this->store['id']);
         }
-        if(input('?id')){
+        if(input('?id') && $this->store['id']){
             $promotionId = (int)input('id');
             $where = [
                 ['p.id','=',$promotionId],

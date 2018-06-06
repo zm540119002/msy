@@ -19,8 +19,8 @@ class UserBase extends Base{
                 $this->error(config('custom.error_login'),url($this->loginUrl));
             }
         }
-        \common\cache\Menu::removeAllMenuIds($this->user['id']);
-        $allMenuIds = \common\cache\Menu::getAllMenuIds($this->user);
-        $this->assign('allMenuIds',$allMenuIds);
+        //获取所有权限节点
+        $node = new \common\lib\Node();
+        $this->assign('allNode',$node->getAllNode());
     }
 }
