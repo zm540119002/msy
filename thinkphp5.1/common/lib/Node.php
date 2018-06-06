@@ -21,7 +21,7 @@ class Node
     /**获取所有可显示菜单
      */
     public function getAllDisplayNode(){
-        $this->_allDisplayNode = $this->_filterDisplayNode($this->_allNode);
+        $this->_allDisplayNode = $this->_filterNoDisplayNode($this->_allNode);
         return $this->_allDisplayNode;
     }
 
@@ -34,7 +34,7 @@ class Node
     
     /**过滤不显示菜单
      */
-    private function _filterDisplayNode($node){
+    private function _filterNoDisplayNode($node){
         if(is_array($node) && !empty($node)){
             foreach ($node as &$value){
                 foreach ($value['sub_menu'] as $key=>$val){
