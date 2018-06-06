@@ -949,6 +949,11 @@ color: #ed6d00;
     border-bottom:8px solid #f2f2f2;
     padding:0 0 0 0.12rem;
 }*/
+/*弹窗穿透滚动*/
+.scrollfixed{
+    height:100%;
+    overflow:hidden;
+}
 .pink{
     color:#ff6482;
 }
