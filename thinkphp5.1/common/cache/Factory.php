@@ -15,7 +15,6 @@ class Factory{
             $field = [
                 'id','name',
             ];
-
             if(is_array($factoryId)){
                 $where[] = ['id','in',$factoryId];
                 $factory = $modelFactory->getList($where,$field);
