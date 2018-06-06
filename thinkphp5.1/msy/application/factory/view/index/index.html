@@ -7,46 +7,41 @@
 <section id="factoryStoreList" style="display: none;">
 	<ul class="factory-store-list">
 		{volist name="storeList" id="vo"}
-		<li  class="" data-id="{$vo.id}" >
-			<a href="#" class="columns_flex l-r-sides ">
-				{notempty name="vo.img"}
-				<img class="small_default_img" src="public_uploads/{$vo.img}" alt="">
-				{else /}
-				<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
-				{/notempty}
-				<div>
-					{if $vo.store_type == 1 }
-					<span>{$vo.name}</span>官方旗舰店
-					{elseif $vo.store_type == 2/}
-					<span>{$vo.name}</span>品牌旗舰店
+			<li  class="" data-id="{$vo.id}" >
+				<a href="#" class="columns_flex l-r-sides ">
+					{notempty name="vo.img"}
+						<img class="small_default_img" src="public_uploads/{$vo.img}" alt="">
 					{else /}
+						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
+					{/notempty}
+					<div>
+						{if $vo.store_type == 1 }
+							<span>{$vo.name}</span>官方旗舰店
+						{elseif $vo.store_type == 2/}
+							<span>{$vo.name}</span>品牌旗舰店
+						{/if}
+						{if $vo.run_type == 1 }
+							<p>B2B采购商城</p>
+						{elseif $vo.run_type == 2 /}
+							<p>B2B分成商城</p>
+						{elseif $vo.run_type == 3 /}
+							<p>B2C零售商城</p>
+						{/if}
+					</div>
+					{if $vo.auth_status == -2 }
+						<span>未通过</span>
+					{elseif $vo.auth_status == -1 /}
+						<span>已关闭</span>
+					{elseif $vo.auth_status == 0 /}
+						<span>审核中</span>
+					{elseif $vo.auth_status == 1 /}
+						<span>建设中</span>
+					{elseif $vo.auth_status == 2 /}
+						<span>营业中</span>
 					{/if}
-
-					{if $vo.run_type == 1 }
-					<p>B2B采购商城</p>
-					{elseif $vo.run_type == 2 /}
-					<p>B2B分成商城</p>
-					{elseif $vo.run_type == 3 /}
-					<p>B2C零售商城</p>
-					{else /}
-					{/if}
-				</div>
-				{if $vo.auth_status == -2 }
-					<span>未通过</span>
-				{elseif $vo.auth_status == -1 /}
-					<span>已关闭</span>
-				{elseif $vo.auth_status == 0 /}
-					<span>审核中</span>
-				{elseif $vo.auth_status == 1 /}
-					<span>建设中</span>
-				{elseif $vo.auth_status == 2 /}
-					<span>营业中</span>
-				{else /}
-				{/if}
-			</a>
-		</li>
+				</a>
+			</li>
 		{/volist}
-
 	</ul>
 </section>
 <article class="f24">
@@ -71,12 +66,12 @@
 		</div>
 		<div class="top_menu_box">
 			<div class="top_menu_list">
-				<a href="" class="current">供应商</a>
-				<a href="">云推客</a>
-				<a href="">培训直播</a>
-				<a href="">采购商城</a>
-				<a href="">分成商城</a>
-				<a href="">零售商城</a>
+				<a href="javascript:void(0);" class="current">供应商</a>
+				<a href="javascript:void(0);">云推客</a>
+				<a href="javascript:void(0);">培训直播</a>
+				<a href="javascript:void(0);">采购商城</a>
+				<a href="javascript:void(0);">分成商城</a>
+				<a href="javascript:void(0);">零售商城</a>
 			</div>
 		</div>
 	</section>
@@ -111,11 +106,10 @@
 			<a href="javascript:void(0);" class="order-management">订单客服</a>
 			<a href="javascript:void(0);" class="order-management-change">财务结算</a>
 			<a href="javascript:void(0);" class="my-store">我的店铺</a>
-
 		</div>
 	</section>
 	{notempty name="factoryList"}
-	<a href="javascript:void(0);" class="relation-vendor">切换供应商账号></a>
+		<a href="javascript:void(0);" class="relation-vendor">切换供应商账号></a>
 	{/notempty}
 	<section class="message-center-info f20">
 		<p>欢迎来到供应商管理中心，美尚云平台支持企业多店铺运营管理。</p>
@@ -123,12 +117,11 @@
 	<section>
 		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
 	</section>
-
 	<section class="explain_nav">
-		<a href="">关于美尚云></a>
-		<a href="">厂商使用帮助></a>
-		<a href="">人才招聘></a>
-		<a href="">版权信息备案号</a>
+		<a href="javascript:void(0);">关于美尚云></a>
+		<a href="javascript:void(0);">厂商使用帮助></a>
+		<a href="javascript:void(0);">人才招聘></a>
+		<a href="javascript:void(0);">版权信息备案号</a>
 	</section>
 </article>
 {/block}
@@ -232,16 +225,13 @@
 							//dialog.success(info.msg,module+'index/index');
 						}
 					},
-					complete:function(){
-
-					},
 					error:function (xhr) {
 						dialog.error('AJAX错误'+xhr);
 					}
 				});
 				layer.close(index);
 			}
-		})
+		});
 	}
 </script>
 {/block}
