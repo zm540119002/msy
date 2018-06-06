@@ -15,6 +15,9 @@ class Role extends FactoryBase
             $this->assign('info',$info);
             return view('info_tpl');
         }else{
+            //获取所有权限节点
+            $node = new \common\lib\Node();
+            $this->assign('allNode',$node->getAllNode());
             return $this->fetch();
         }
     }

@@ -34,12 +34,11 @@ class FactoryBase extends UserBase{
                     break;
                 }
             }
-            if(empty($info)){//不存在默认供应商的情况
-                $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
-                $this->assign('factoryList',$this->factoryList);
-            }
         }
-        if(!empty($info)){
+        if(empty($info)){//不存在默认供应商的情况
+            $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
+            $this->assign('factoryList',$this->factoryList);
+        }else{
             //获取工厂信息
             \common\cache\Factory::remove($info['factory_id']);
             $this->factory = \common\cache\Factory::get($info['factory_id']);
