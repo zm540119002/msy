@@ -619,6 +619,15 @@ color: #ed6d00;
     margin:0 10px;*/
     
 }
+.store_operation_head a.home{
+    background-position: 0 -175px;
+}
+.store_operation_head div:nth-child(1){
+    width:15%;
+}
+.store_operation_head div:nth-child(2){
+    width:50%;
+}
 /*内容框*/
 .content-box{
     padding:0.20rem 0.15rem;
@@ -738,7 +747,8 @@ color: #ed6d00;
     margin:0 0 .35rem 0;
     border-bottom:1px solid #d9d9d9;
 }
-.forgetPasswdLayer .layui-m-layerbtn span[yes]{
+.forgetPasswdLayer .layui-m-layerbtn span[yes],
+.vendorInfoLayer .layui-m-layerbtn span[yes]{
     background: #FF7BAC;
     color:#fff;
 }
