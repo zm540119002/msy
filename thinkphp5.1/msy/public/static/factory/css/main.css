@@ -1099,7 +1099,8 @@ transparent;
     color:#E60012;
 }
 .database-item.hide{display: none;}
-.goods-store-content li div:first-child{
+.goods-store-content li div:first-child,
+.goods-database-content li img{
     width:20%;
 }
 .goods-store-content li img{

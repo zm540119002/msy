@@ -15,9 +15,9 @@ function getMore(url,config) {
 //上拉加载更多
 var loadTriggerLayer = false;//加载触发器
 function getMoreLayer(url,config) {
-    $('.goods-database-content').on('scroll',function(){
+    $('.scroll-list-content').on('scroll',function(){
         var listHeight=document.getElementById('listLayer').scrollHeight;
-        if(loadTriggerLayer && $('.goods-database-content').scrollTop()+$('.goods-database-content').height()>=listHeight){
+        if(loadTriggerLayer && $('.scroll-list-content').scrollTop()+$('.scroll-list-content').height()>=listHeight){
             loadTriggerLayer = false;
             getPageLayer(url,config);
         }
@@ -92,11 +92,11 @@ function getPageLayer(url,config) {
         success: function(data){
             $('.loading').hide();
             if(currentPageLayer == 1){
-                console.log( $('.databaseLayer #listLayer li'))
-                $('.databaseLayer #listLayer li').remove();
-                $('.databaseLayer #listLayer').append(data);
+                console.log( $('.databaseLayer #list li'))
+                $('.databaseLayer #list li').remove();
+                $('.databaseLayer #list').append(data);
             }else{
-                $('.databaseLayer #listLayer li:last').after(data);
+                $('.databaseLayer #list li:last').after(data);
             }
             if($($.parseHTML(data)).length<postData.pageSize){
                 requestEndLayer = true;
