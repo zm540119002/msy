@@ -64,8 +64,7 @@ class Brand extends Model {
 			->join(array_merge($_join,$join))
 			->order($order)
 			->limit($limit)
-			->select()
-			->toArray();
+			->select();
 		return count($list)?$list->toArray():[];
 	}
 
@@ -76,19 +75,19 @@ class Brand extends Model {
 	 * @return array|null|\PDOStatement|string|Model
 	 * 查找一条数据
 	 */
-	public function getInfo($where=[],$field=[],$join=[]){
+	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
 			'b.status' => 0,
 		);
+		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		$where = array_merge($_where, $where);
-		$info = $this->alias('b')
+		$info = $this->alias('g')
 			->field($field)
-			->where($where)
 			->join(array_merge($_join,$join))
-			->find()
-			->toArray();
+			->where($where)
+			->find();
 		return $info?$info->toArray():[];
 	}
+
 }
