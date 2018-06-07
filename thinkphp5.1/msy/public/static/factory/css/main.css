@@ -1041,8 +1041,10 @@ transparent;
     max-width:50%;
 }
 .goods-database-nav{
-    margin:20px 0 10px;
-    padding:0 0 20px 0;
+    /*margin:20px 0 10px;*/
+    /*padding:20px 0 20px 0;*/
+    height:60px;
+    line-height:60px;
     border-bottom:1px solid #d9d9d9;
 }
 .goods-database-nav li{
@@ -1057,7 +1059,7 @@ transparent;
     position: absolute;
     z-index: 1;
     left: 86%;
-    bottom: -5px;
+    bottom: 15px;
     display: inline-block;
     height: 30px;
     width: 80px;
@@ -1075,7 +1077,7 @@ transparent;
 .goods-database-content,
 .goods-store-content{
     padding:0 3px;
-    margin:0 12px;
+    /*margin:0 12px;*/
 }
 .goods-database-content li,
 .goods-store-content li{

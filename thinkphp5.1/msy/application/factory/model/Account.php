@@ -126,17 +126,7 @@ class Account extends \think\Model {
 		$info['status'] = $userFactory['status'];
 		//用户工厂角色
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
-		$where = [
-			'ufr.user_id' => $info['id'],
-			'ufr.factory_id' => $factoryId,
-		];
-		$field = [
-			'r.id','r.name',
-		];
-		$join = [
-			['role r','r.id = ufr.role_id','LEFT'],
-		];
-		$info['role'] = $modelUserFactoryRole->getList($where,$field,$join);
+		$info['role'] = $modelUserFactoryRole->getRole($info['id'],$factoryId);
 		return $info?$info->toArray():[];
 	}
 
@@ -161,18 +151,8 @@ class Account extends \think\Model {
 		];
 		$list = $modelUserFactory->alias('uf')->where($where)->field($field)->join($join)->select();
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
-		$field = [
-			'r.id','r.name',
-		];
-		$join = [
-			['role r','r.id = ufr.role_id','LEFT'],
-		];
 		foreach ($list as &$value){
-			$where = [
-				'ufr.user_id' => $value['id'],
-				'ufr.factory_id' => $factoryId,
-			];
-			$value['role'] = $modelUserFactoryRole->getList($where,$field,$join);
+			$value['role'] = $modelUserFactoryRole->getRole($value['id'],$factoryId);
 		}
 		return count($list)?$list:[];
 	}
@@ -193,7 +173,7 @@ class Account extends \think\Model {
 			['user_id','=',$userId],
 			['factory_id','=',$factoryId],
 		];
-		$userFactoryRole = $modelUserFactoryRole->getList($where);
+		$userFactoryRole = $modelUserFactoryRole->getRole($userId,$factoryId);
 		$oldRoleIds = array_column($userFactoryRole,'role_id');
 		$modelUserFactoryRole->startTrans();//开启事务
 		//新增角色

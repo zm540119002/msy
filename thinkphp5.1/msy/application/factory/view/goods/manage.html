@@ -172,6 +172,7 @@
 					if(oLi.hasClass('current')){
 						oLi.addClass('disabled');
 					}
+					isRolling($('.databaseLayer'));
 				}
 			})
 		});
@@ -185,6 +186,7 @@
 					className:'databaseLayer',
 					content:databaseContent,
 					success:function(){
+						$('body').addClass('scrollfixed');
 //						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
 						if(_this.hasClass('step')){
 							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
@@ -202,6 +204,7 @@
 						isRolling($('.goods-database-nav,.databaseLayer h3'));
 					},
 					yes:function(index){
+						$('body').removeClass('scrollfixed');
 						layer.close(index);
 					},
 					btn:['确定']

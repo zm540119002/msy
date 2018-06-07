@@ -4,12 +4,12 @@
 //上拉加载更多
 var loadTrigger = false;//加载触发器
 function getMore(url,config) {
-    // $(window).on('scroll',function(){
-    //     if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-    //         loadTrigger = false;
-    //         getPage(url,config);
-    //     }
-    // });
+    $(window).on('scroll',function(){
+        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+            loadTrigger = false;
+            getPage(url,config);
+        }
+    });
 }
 
 //上拉加载更多
