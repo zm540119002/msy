@@ -128,13 +128,11 @@
 {block name="common"}
 {include file="template/footer_menu_msy.html" /}
 {include file="template/right_side_bar.html" /}
-{include file="public/factory_list_tpl" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
-	var vendorInfoList=$('#vendorInfoList').html();
 	$(function(){
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
@@ -144,94 +142,6 @@
 				clickable: true
 			}
 		});
-		//开店部署
-		$('body').on('click','.deployed-deployment',function () {
-			location.href = module + 'Store/index';
-		});
-
-		var storeList = '{:json_encode($storeList)}';
-		storeList = JSON.parse(storeList);
-
-		//店铺运营
-		$('body').on('click','.store_run',function () {
-			location.href = module + 'Operation/index';
-		});
-
-		//订单管理
-		$('body').on('click','.order-management',function () {
-			location.href = module + 'Order/index';
-		});
-
-		//我的店铺
-		var factoryStoreList=$('#factoryStoreList').html();
-		$('body').on('click','.my-store',function () {
-			if(!factoryCount){
-				dialog.confirm('未入驻，请先申请入住',module+'deploy/register');
-				return false;
-			}
-			if(!storeList.length){
-				dialog.confirm('此厂商，没有开通店，请开通店',module+'Store/deployIndex');
-				return false;
-			}
-			layer.open({
-				title:['请选择供应商店铺进入预览','border-bottom:1px solid #d9d9d9'],
-				className:'factoryStoreLayer',
-				content:factoryStoreList
-			})
-		})
 	});
-	//弹层 店铺
-	function factoryList() {
-		layer.open({
-			title:['请选择关联的供应商账号登录','border-bottom:1px solid #d9d9d9'],
-			className:'vendorInfoLayer',
-			content:vendorInfoList,
-			btn:['确定'],
-			success:function(){
-				var factoryId=$('.factoryId').val();
-				$('.vendorInfoLayer li').on('click',function(){
-					var _this=$(this);
-					_this.addClass('current').siblings().removeClass('current');
-				});
-				$.each($('.vendorInfoLayer li'),function(){
-					var currentId=$(this).data('id');
-					if(factoryId==currentId){
-						$(this).addClass('current');
-					}
-				})
-			},
-			yes:function(index){
-				var isCurrent=$('.vendorInfoLayer li.current');
-				factoryLayerName=isCurrent.text();
-				factoryLayerId  =isCurrent.data('id');
-				$('.factoryId').val(factoryLayerId);
-				$('.vendor-name').text(factoryLayerName);
-				var postData = {};
-				postData.id = factoryLayerId;
-				$.ajax({
-					url: module + 'deploy/setDefaultFactory',
-					data: postData,
-					type: 'post',
-					beforeSend: function(){
-						//$('.loading').show();
-					},
-					success: function(info){
-						if(info.status == 0){
-							dialog.error(info.msg);
-							return false;
-						}
-						if(info.status == 1){
-//							_this.addClass('current').siblings().removeClass('current');
-							//dialog.success(info.msg,module+'index/index');
-						}
-					},
-					error:function (xhr) {
-						dialog.error('AJAX错误'+xhr);
-					}
-				});
-				layer.close(index);
-			}
-		});
-	}
 </script>
 {/block}
