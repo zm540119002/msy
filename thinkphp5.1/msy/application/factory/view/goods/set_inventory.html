@@ -65,15 +65,7 @@
 			//初始化商品列表
 			getPage(url,config);
 			//上拉加载更多
-			//上拉加载更多
-			var loadTriggerLayer = false;//加载触发器
-			$('.scroll-list-content').on('scroll',function(){
-				var listHeight=document.getElementById('listLayer').scrollHeight;
-				if(loadTriggerLayer && $('.scroll-list-content').scrollTop()+$('.scroll-list-content').height()>=listHeight){
-					loadTriggerLayer = false;
-					getPage(url,config);
-				}
-			});
+			getMoreLayer(url,config);
 		}
 		/**
 		 * 设置库存
