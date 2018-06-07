@@ -3,47 +3,6 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<!--店铺预览-->
-<section id="factoryStoreList" style="display: none;">
-	<ul class="factory-store-list">
-		{volist name="storeList" id="vo"}
-			<li  class="" data-id="{$vo.id}" >
-				<a href="#" class="columns_flex l-r-sides ">
-					{notempty name="vo.img"}
-						<img class="small_default_img" src="public_uploads/{$vo.img}" alt="">
-					{else /}
-						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
-					{/notempty}
-					<div>
-						{if $vo.store_type == 1 }
-							<span>{$vo.name}</span>官方旗舰店
-						{elseif $vo.store_type == 2/}
-							<span>{$vo.name}</span>品牌旗舰店
-						{/if}
-						{if $vo.run_type == 1 }
-							<p>B2B采购商城</p>
-						{elseif $vo.run_type == 2 /}
-							<p>B2B分成商城</p>
-						{elseif $vo.run_type == 3 /}
-							<p>B2C零售商城</p>
-						{/if}
-					</div>
-					{if $vo.auth_status == -2 }
-						<span>未通过</span>
-					{elseif $vo.auth_status == -1 /}
-						<span>已关闭</span>
-					{elseif $vo.auth_status == 0 /}
-						<span>审核中</span>
-					{elseif $vo.auth_status == 1 /}
-						<span>建设中</span>
-					{elseif $vo.auth_status == 2 /}
-						<span>营业中</span>
-					{/if}
-				</a>
-			</li>
-		{/volist}
-	</ul>
-</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex">
@@ -101,16 +60,13 @@
 	</section>
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
-			<a href="javascript:void(0);" class="deployed-deployment">开店部署</a>
-			<a href="javascript:void(0);" class="store_run">店铺运营</a>
+			<a href="{:url('Store/index')}" class="deployed-deployment">开店部署</a>
+			<a href="{:url('Operation/index')}" class="store_run">店铺运营</a>
 			<a href="javascript:void(0);" class="order-management">订单客服</a>
 			<a href="javascript:void(0);" class="order-management-change">财务结算</a>
 			<a href="javascript:void(0);" class="my-store">我的店铺</a>
 		</div>
 	</section>
-	{notempty name="factoryList"}
-		<a href="javascript:void(0);" class="relation-vendor">切换供应商账号></a>
-	{/notempty}
 	<section class="message-center-info f20">
 		<p>欢迎来到供应商管理中心，美尚云平台支持企业多店铺运营管理。</p>
 	</section>
@@ -128,13 +84,11 @@
 {block name="common"}
 {include file="template/footer_menu_msy.html" /}
 {include file="template/right_side_bar.html" /}
-{include file="public/factory_list_tpl" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
-	var vendorInfoList=$('#vendorInfoList').html();
 	$(function(){
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
@@ -144,94 +98,6 @@
 				clickable: true
 			}
 		});
-		//开店部署
-		$('body').on('click','.deployed-deployment',function () {
-			location.href = module + 'Store/index';
-		});
-
-		var storeList = '{:json_encode($storeList)}';
-		storeList = JSON.parse(storeList);
-
-		//店铺运营
-		$('body').on('click','.store_run',function () {
-			location.href = module + 'Operation/index';
-		});
-
-		//订单管理
-		$('body').on('click','.order-management',function () {
-			location.href = module + 'Order/index';
-		});
-
-		//我的店铺
-		var factoryStoreList=$('#factoryStoreList').html();
-		$('body').on('click','.my-store',function () {
-			if(!factoryCount){
-				dialog.confirm('未入驻，请先申请入住',module+'deploy/register');
-				return false;
-			}
-			if(!storeList.length){
-				dialog.confirm('此厂商，没有开通店，请开通店',module+'Store/deployIndex');
-				return false;
-			}
-			layer.open({
-				title:['请选择供应商店铺进入预览','border-bottom:1px solid #d9d9d9'],
-				className:'factoryStoreLayer',
-				content:factoryStoreList
-			})
-		})
 	});
-	//弹层 店铺
-	function factoryList() {
-		layer.open({
-			title:['请选择关联的供应商账号登录','border-bottom:1px solid #d9d9d9'],
-			className:'vendorInfoLayer',
-			content:vendorInfoList,
-			btn:['确定'],
-			success:function(){
-				var factoryId=$('.factoryId').val();
-				$('.vendorInfoLayer li').on('click',function(){
-					var _this=$(this);
-					_this.addClass('current').siblings().removeClass('current');
-				});
-				$.each($('.vendorInfoLayer li'),function(){
-					var currentId=$(this).data('id');
-					if(factoryId==currentId){
-						$(this).addClass('current');
-					}
-				})
-			},
-			yes:function(index){
-				var isCurrent=$('.vendorInfoLayer li.current');
-				factoryLayerName=isCurrent.text();
-				factoryLayerId  =isCurrent.data('id');
-				$('.factoryId').val(factoryLayerId);
-				$('.vendor-name').text(factoryLayerName);
-				var postData = {};
-				postData.id = factoryLayerId;
-				$.ajax({
-					url: module + 'deploy/setDefaultFactory',
-					data: postData,
-					type: 'post',
-					beforeSend: function(){
-						//$('.loading').show();
-					},
-					success: function(info){
-						if(info.status == 0){
-							dialog.error(info.msg);
-							return false;
-						}
-						if(info.status == 1){
-//							_this.addClass('current').siblings().removeClass('current');
-							//dialog.success(info.msg,module+'index/index');
-						}
-					},
-					error:function (xhr) {
-						dialog.error('AJAX错误'+xhr);
-					}
-				});
-				layer.close(index);
-			}
-		});
-	}
 </script>
 {/block}

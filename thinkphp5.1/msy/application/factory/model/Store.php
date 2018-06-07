@@ -141,7 +141,7 @@ class Store extends Model {
 			['s.factory_id','=',$factoryId],
 			['s.store_type','=',2],
 		];
-		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
+		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,b.name,b.brand_img as img'];
 		$join =[
 			['brand b','b.id = s.foreign_id'],
 		];

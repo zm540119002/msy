@@ -11,27 +11,14 @@
 	</div>
 </section>
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar columns_flex l-r-sides">
-			<div class="">
-				<a class="home">首页</a>
-			</div>
-			<div class="">
-				<img src="public_img/default/no_pic_40.jpg" alt="">
-				<span>爱国宾</span>
-			</div>
-			<div class="">
-				<a class="switch-account">切换供应商账号></a>
-			</div>
-		</div>
-	</section>
+	{include file="public/store_deploy_head" /}
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
 			<a href="{:url('record/preview')}">企业档案</a>
 			<a href="{:url('brand/manage')}">商标备案</a>
 			<a class="column_type current">开店申请</a>
-			<a>部门角色</a>
-			<a>账号授权</a>
+			<a href="{:url('Organize/index')}">组别角色</a>
+			<a href="{:url('Account/index')}">账号授权</a>
 		</div>
 	</section>
 	<section class="f24 apply-store-content">

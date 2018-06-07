@@ -18,8 +18,9 @@ class Goods extends StoreBase
         if(request()->isPost()){
             return $result = $goodsModel -> edit($this->store['id']);
         }
-        $categoryModel = new \app\index_admin\model\Category;
-        $platformCategory = $categoryModel->selectFirstCategory();
+        $categoryModel = new \app\index_admin\model\GoodsCategory;
+        $where = [['parent_id_1','=',0]];
+        $platformCategory = $categoryModel->getList($where);
         $this -> assign('platformCategory',$platformCategory);
         if(input('?goods_id') && $this->store['id']){
             $goodsId= (int)input('goods_id');
