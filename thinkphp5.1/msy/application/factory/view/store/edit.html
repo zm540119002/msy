@@ -146,7 +146,7 @@
 						run_type:run_type,
 					}
 					if(store_type ==1 ){
-
+						$('.applyNewStoreLayer .store-list').addClass('current');
 						$('.factory_store').find('li').attr('disabled',false);
 						$('.store-two').show();
 						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
@@ -186,43 +186,44 @@
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
 			var storeList=$('.applyNewStoreLayer .store-list');
-			if(storeType.hasClass('current')&&storePattern.hasClass('current')){
+			var brandList=$('.applyNewStoreLayer .brand_stores');
+			var selectedLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
+				if(selectedLen==brandList.length){
+					dialog.success('此店所有经营模式已开过',module+'Store/manage');
+					return false;
+				}
 				if(storeList.hasClass('current')){
 					foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
 					postData.foreign_id = foreign_id;
 				}
 				else{
-					dialog.success('此店铺所有类型已开过',module+'Store/manage');
+					dialog.success('请选择店铺');
 					return false;
 				}
-			}else {
-				dialog.success('请选择店铺类型和经营模式',module+'Store/manage');
-				return false;
-			}
-			$.ajax({
-				url: controller + 'edit',
-				data: postData,
-				type: 'post',
-				beforeSend: function(){
-					//$('.loading').show();
-				},
-				success: function(msg){
-					if(msg.status == 0){
-						dialog.error(msg.info);
-						return false;
-					}
-					if(msg.status == 1){
-						dialog.success(msg.info,module+'Store/manage');
-						return false;
-					}
-				},
-				complete:function(){
+				$.ajax({
+					url: controller + 'edit',
+					data: postData,
+					type: 'post',
+					beforeSend: function(){
+						//$('.loading').show();
+					},
+					success: function(msg){
+						if(msg.status == 0){
+							dialog.error(msg.info);
+							return false;
+						}
+						if(msg.status == 1){
+							dialog.success(msg.info,module+'Store/manage');
+							return false;
+						}
+					},
+					complete:function(){
 
-				},
-				error:function (xhr) {
-					dialog.error('AJAX错误'+xhr);
-				},
-			});
+					},
+					error:function (xhr) {
+						dialog.error('AJAX错误'+xhr);
+					},
+				});
 		});
 
 	})
