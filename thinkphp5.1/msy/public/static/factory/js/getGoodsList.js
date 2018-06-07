@@ -102,7 +102,6 @@ function getPageLayer(url,config) {
                 requestEndLayer = true;
             }
             currentPageLayer ++;
-            console.log(currentPageLayer );
             loadTriggerLayer = true;
         }
     });
