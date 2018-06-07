@@ -73,7 +73,7 @@ $(function(){
                     category_id_1=categoryIdArr[0];
                 }
                 $.ajax({
-                    url: domain+'index_admin/Category/getSecondCategoryById',
+                    url: module+'GoodsCategory/getSecondCategoryById',
                     data: {category_id_1:category_id_1},
                     type: 'get',
                     beforeSend: function(){
@@ -161,7 +161,7 @@ $(function(){
     $('body').on('click','.first_category',function () {
         var _this = $(this);
         var category_id_1 = _this.data('id');
-        $.get(domain+'index_admin/Category/getSecondCategoryById',{category_id_1:category_id_1},function(msg){
+        $.get(module+'GoodsCategory/getSecondCategoryById',{category_id_1:category_id_1},function(msg){
             $('.category-content-wrapper').empty();
            $('.category-content-wrapper').append(msg);
         });
