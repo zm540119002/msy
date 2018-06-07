@@ -92,7 +92,6 @@ function getPageLayer(url,config) {
         success: function(data){
             $('.loading').hide();
             if(currentPageLayer == 1){
-                console.log( $('.databaseLayer #list li'))
                 $('.databaseLayer #list li').remove();
                 $('.databaseLayer #list').append(data);
             }else{
