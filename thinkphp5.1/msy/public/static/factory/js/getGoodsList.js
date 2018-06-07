@@ -16,7 +16,7 @@ function getMore(url,config) {
 var loadTriggerLayer = false;//加载触发器
 function getMoreLayer(url,config) {
     $('.scroll-list-content').on('scroll',function(){
-        var listHeight=document.getElementById('listLayer').scrollHeight;
+        var listHeight=document.getElementById('list').scrollHeight;
         if(loadTriggerLayer && $('.scroll-list-content').scrollTop()+$('.scroll-list-content').height()>=listHeight){
             loadTriggerLayer = false;
             getPageLayer(url,config);
@@ -92,7 +92,6 @@ function getPageLayer(url,config) {
         success: function(data){
             $('.loading').hide();
             if(currentPageLayer == 1){
-                console.log( $('.databaseLayer #list li'))
                 $('.databaseLayer #list li').remove();
                 $('.databaseLayer #list').append(data);
             }else{
