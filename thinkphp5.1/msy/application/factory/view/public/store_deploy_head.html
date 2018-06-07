@@ -1,7 +1,7 @@
 <section class="top_nav_fixed">
     <div class="top_bar top-switch-bar columns_flex l-r-sides">
         <div class="">
-            <a class="home">首页</a>
+            <a class="" href="{:url('factory/Index/index')}">首页</a>
         </div>
         <div class="">
             <img class="left" src="public_img/default/no_pic_40.jpg" alt="">
@@ -12,148 +12,8 @@
         </div>
     </div>
 </section>
-<section id="vendorInfoList" style="display:none;">
-    <ul class="vendorInfoList">
-        {volist name="storeList" id="vo"}
-        {if $vo.is_default == 1}
-        <li class="current" data-id="{$vo.id}">
-        {else /}
-        <li class="" data-id="{$vo.id}">
-        {/if}
-        <!--<li class="" data-id="{$vo.id}">-->
-            {if $vo.store_type == 1 }
-            <span>{$vo.name}</span>官方旗舰店
-            {elseif $vo.store_type == 2/}
-            <span>{$vo.name}</span>品牌旗舰店
-            {else /}
-            {/if}
-
-            {if $vo.run_type == 1 }
-            <p>B2B采购商城</p>
-            {elseif $vo.run_type == 2 /}
-            <p>B2B分成商城</p>
-            {elseif $vo.run_type == 3 /}
-            <p>B2C零售商城</p>
-            {else /}
-            {/if}
-        </li>
-        {/volist}
-    </ul>
-</section>
 <script type="text/javascript">
-    var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
-//        //没有店铺
-//        var notStore = "{$noStore|default=0}";
-//        if(notStore == 1){
-//            dialog.confirm('暂无店铺，去申请开店',module+'Store/edit')
-//        }
-        //切换店铺
-        $('body').on('click','.switch-account',function(){
-//            if(notStore == 1){
-//                dialog.confirm('暂无店铺，去申请开店',module+'Store/edit');
-//                return false;
-//            }
-            storeList();
-        });
-        //没有默认店铺
-        var notDefaultStore = "{$notDefaultStore|default=0}";
-        if(notDefaultStore == 1){
-            storeList();
-            return false;
-        }
 
-        //获取厂商信息
-        $.get(controller+'getFactoryInfo',{},function (msg) {
-            if(msg != 'null'){
-                $('.factory-log-img').attr('src',uploads+msg.logo_img);
-                $('.factory-name').text(msg.name);
-            }
-
-        });
-        //获取店铺信息
-        $.get(controller+'getStoreInfo',{},function (msg) {
-            if(msg != 'null'){
-                $('.storeId').val(msg.id);
-                $('.store-logo-img').attr('src',uploads+msg.img);
-                $('.store-name').text(msg.name);
-                if(msg.store_type == 1){
-                    $('.store-type').text('官方旗舰店');
-                }else if(msg.store_type == 2){
-                    $('.store-type').text('品牌旗舰店');
-                }
-                if(msg.run_type == 1){
-                    $('.run-type').text('B2B采购商城');
-                }else if(msg.run_type == 2){
-                    $('.run-type').text('B2B分成商城');
-                }else if(msg.run_type == 3){
-                    $('.run-type').text('B2C零售商城');
-                }
-            }
-
-        })
-
-    })
-    //弹层 店铺
-    function storeList() {
-        layer.open({
-            type: 1,
-            title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
-            className:'vendorInfoLayer',
-            content:vendorInfoList,
-            anim: 'up',
-            btn:['确定'],
-            success:function(){
-                var storeId=$('.storeId').val();
-                $('.vendorInfoLayer li').on('click',function(){
-                    var _this=$(this);
-                    _this.addClass('current').siblings().removeClass('current');
-                });
-                $.each($('.vendorInfoLayer li'),function(){
-                    var currentId=$(this).data('id');
-                    if(storeId==currentId){
-                        $(this).addClass('current');
-                    }
-                })
-            },
-            yes:function(index){
-                var isCurrent=$('.vendorInfoLayer li.current');
-                factoryLayerName=isCurrent.text();
-                factoryLayerId  =isCurrent.data('id');
-                $('.factoryId').val(factoryLayerId);
-                $('.vendor-name').text(factoryLayerName);
-                if(!factoryLayerId){
-                    dialog.error('请选择一个店铺');
-                    return false
-                }
-                var postData = {};
-                postData.id = factoryLayerId;
-                $.ajax({
-                    url: controller + 'setDefaultStore',
-                    data: postData,
-                    type: 'post',
-                    beforeSend: function(){
-                        //$('.loading').show();
-                    },
-                    success: function(info){
-                        if(info.status == 0){
-                            dialog.error(info.msg);
-                            return false;
-                        }
-                        if(info.status == 1){
-                            dialog.success(info.msg);
-                            location.reload();
-                        }
-                    },
-                    complete:function(){
-
-                    },
-                    error:function (xhr) {
-                        dialog.error('AJAX错误'+xhr);
-                    },
-                });
-                layer.close(index);
-            }
-        })
-    }
+    });
 </script>
