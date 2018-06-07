@@ -40,19 +40,20 @@ function getAccountList() {
 //获取角色列表
 function getRoleList(config) {
     var _config = {
-        option:true
+        option:true,
+        listContainer:$('ul.role-list')
     };
     _config = $.extend(_config,config);
     var postData = {};
     var url = module + 'role/getList';
     $.get(url,postData,function(data){
-        $('ul.role-list').append(data);
+        _config.listContainer.append(data);
         if(!_config.option){
-            $('ul.role-list').find('div').remove();
+            _config.listContainer.find('div').remove();
         }
         if(_config.roleList){
             $.each(JSON.parse(_config.roleList),function(i,o){
-                $.each($('ul.role-list').find('li'),function(){
+                $.each(_config.listContainer.find('li'),function(){
                     if(o.id==$(this).data('id')){
                         $(this).addClass('current');
                     }
