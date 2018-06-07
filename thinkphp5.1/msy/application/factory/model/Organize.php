@@ -76,7 +76,7 @@ class Organize extends \think\Model {
 			['factory_id', '=', $factoryId],
 		];
 		$id = input('post.id/a');
-		if(!is_array($id) || count($id)){
+		if(!is_array($id) || !count($id)){
 			return errorMsg('参数错误');
 		}
 		$where[] = ['id', 'in', $id];
