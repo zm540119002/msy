@@ -8,7 +8,7 @@ class Category extends \common\controller\UserBase
     {
         return $this->fetch();
     }
-    //欢迎页
+    //
     public function getSecondCategoryById()
     {
         if(request()->isGet()){
