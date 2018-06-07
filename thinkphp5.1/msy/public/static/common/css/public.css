@@ -386,12 +386,14 @@ i{
     font-size: 0.24rem;
 }
 .top_bar a{
-    width:20px;
-    height:22px;
+    width:28px;
+    /*width:20px;*/
+    /*height:22px;*/
+    height:28px;
     margin:0 auto;
-    background-image:url(../../common/img/icons/public_icons.png);
+    background-image:url(../../common/img/icons/detail-icons.png);
     background-repeat: no-repeat;
-    background-size:20px 240px;
+    background-size:30px 325px;
     display:block;
     text-indent:-9999rem;
 }
@@ -430,14 +432,14 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -127px;
+    background-position:0 -66px;
 }
 .top_bar a.shopping_cart{
     background-position:0 -150px;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -172px;
+    background-position:0 -97px;
 }
 .top_bar a.goods-video{
     background-image:url(../../common/img/icons/detail-icons.png);
@@ -618,6 +620,12 @@ color: #ed6d00;
     /*float:left;
     margin:0 10px;*/
     
+}
+.store_mall_status{
+    padding:.20rem;
+}
+.store_operation_head{
+    margin:0;
 }
 .store_operation_head a.home{
     background-position: 0 -175px;
