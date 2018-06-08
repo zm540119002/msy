@@ -605,9 +605,10 @@ color: #ed6d00;
 }
 .specific_type .columns_flex{
     flex-wrap: wrap;
+    margin:0;
 }
 .specific_type a{
-    width:20%;
+    /*width:20%;*/
     box-sizing: border-box;
     text-align:center;
     margin:0 0 10px 0;
@@ -2296,4 +2297,24 @@ input[type=text]::-webkit-focus-inner {
     .login_item{
         margin:0 0 25px 0;
     }
+}
+/*订单*/
+.order-content-wrapper{
+    background: #f2f2f2;
+}
+.order-content-wrapper dl{
+    background: #fff; 
+    margin-bottom: 5px; 
+    padding:10px; 
+    border-radius:10px;
+}
+.print{
+    background:#ff7aab; 
+    color:white; 
+    width:30%; 
+    margin:.15rem auto 0;
+    text-align: center;
+	padding:3px; 
+    font-weight: bold; 
+    border-radius:5px;
 }
