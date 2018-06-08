@@ -1003,9 +1003,18 @@ transparent;
 .backups-content{
     padding:.20rem .15rem;
 }
+.func-icons{
+    display: block;
+    width:25px;
+    height:25px;
+    margin:0 auto;
+    background: url(../../common/img/icons/copy-icons.png) no-repeat;
+    background-size:25px 25px;
+}
 .backups-content .gr{
     border:1px solid #009A3E;
     border-radius:5px;
+    color:#009a3e;
 }
 .backups-right{
     margin:0 0 0 .5rem;
