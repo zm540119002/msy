@@ -1,10 +1,5 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<style type="text/css">
-		dl{background: #ccfdff; margin-bottom: 5px; padding:10px; border-radius:10px;}
-		.print{background:red; color:white; width:30%; text-align: center;
-			padding:3px; font-weight: bold; border-radius:5px;}
-</style>
 {/block}
 {block name="content"}
 <article class="f24">
@@ -22,8 +17,8 @@
 			</div>
 		</div>
 	</section>
-	<section class="specific_type bottomLine">
-		<div class="columns_flex f20">
+	<section class="specific_type separation-line">
+		<div class="columns_flex f20 l-r-sides">
 			<a href="{:url('Order/beforeSale')}">售前</a>
 			<a href="{:url('Order/index')}" class="record">打单</a>
 			<a href="{:url('Order/out')}">出仓</a>
@@ -32,7 +27,7 @@
 			<a href="{:url('Order/afterSale')}">售后</a>
 		</div>
 	</section>
-	<section class="f24 account-content-wrapper ">
+	<section class="f24 account-content-wrapper order-content-wrapper">
 		<div class="account-top">
 			<dl>
 				<dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt>
