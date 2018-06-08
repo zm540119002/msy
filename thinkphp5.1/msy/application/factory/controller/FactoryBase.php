@@ -44,7 +44,8 @@ class FactoryBase extends UserBase{
             $this->factory = \common\cache\Factory::get($info['factory_id']);
             //获取用户-工厂-角色-权限节点
             $nodeList = getUserFactoryRoleNode($this->user['id'],$this->factory['id']);
-            $nodeIds = '';
+            $nodeIds = array_column($nodeList,'node_id');
+            $this->assign('nodeIds',$nodeIds);
         }
     }
 
