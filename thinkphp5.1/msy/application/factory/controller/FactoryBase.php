@@ -5,7 +5,7 @@ use think\facade\Session;
 /**用户信息验证控制器基类
  */
 class FactoryBase extends UserBase{
-    protected $factory = [];
+    protected $factory = null;
 
     public function __construct(){
         parent::__construct();
@@ -25,14 +25,12 @@ class FactoryBase extends UserBase{
                 }
             }
         }
-        $onlyOneFactory = false;
-        if(!empty($this->factory)){
-            $onlyOneFactory = true;
+        if(!$this->factory){
             //获取用户-工厂-角色-权限节点
             $nodeList = getUserFactoryRoleNode($this->user['id'],$this->factory['id']);
             $this->assign('nodeIds',array_column($nodeList,'node_id'));
         }
-        $this->assign('onlyOneFactory',$onlyOneFactory);
+        $this->assign('factory',$this->factory);
     }
 
     //设置默认供应商
