@@ -78,7 +78,7 @@ class Cart extends UserBase
     public function test()
     {
         $order = new \app\store\model\Order;
-        $order->setOrderUnpack(148);
+        $order->setOrderUnpack(150);
     }
 
 }

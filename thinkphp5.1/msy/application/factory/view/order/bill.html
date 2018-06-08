@@ -4,7 +4,7 @@
 	dl{background: white; margin-bottom: 5px; padding:10px; border-radius:10px;}
 	.print{background:red; color:white; width:30%; text-align: center;
 		padding:3px; font-weight: bold; border-radius:5px;}
-
+	#order_status{background: #ffc6cd;text-align: center;cursor: pointer;}
 </style>
 {/block}
 {block name="content"}
@@ -36,26 +36,21 @@
 	<section class="f24 account-content-wrapper ">
 		<div class="account-top">
 			<dl>
-				<dt class="role-label"><strong>备货出仓自动检测模式</strong></dt>
-				<dd>
-					<p style="text-align: center"><img src="/static/factory/img/scan.jpg"  /></p>
-				</dd>
-			</dl>
-			<hr />
-			<dl>
-				<dt class="role-label"><strong>备货出仓人工检测模式</strong></dt>
+				<dt class="role-label"><strong>填写物流单号</strong></dt>
 				<dd>
 					<section class="top_nav_fixed">
 						<div class="top_bar columns_flex">
 							<div class="each_column top_search_module">
 								<input type="button" class="search_btn"/>
-								<input type="text" class="order" placeholder="手动输入订单号"/>
+								<input type="text" id="order" placeholder="手动输入订单号"/>
 							</div>
 						</div>
 					</section>
 				</dd>
 			</dl>
-
+			<div id="order_detail"></div>
+			<div id="data_all" data_order_id="" data_order_sn="" data_status_unpack="" ></div>
+			<div id="order_status"></div>
 		</div>
 	</section>
 </article>
@@ -69,14 +64,31 @@
 {block name="script"}
 
 <script type="text/javascript">
-	$(function () {
-		$('.record').click(function () {
-			//alert(1);
-		});
+$(function(){
 
+});
+	$("#order").keydown(function(e) {
+		if (e.keyCode == 13) {
+			var order_sn = $.trim( $('#order').val() );
+			if(!order_sn){
+				alert('请输入订单号');
+				return false;
+			}
+			$.ajax({
+				type: 'POST',
+				url: "{:url('Order/getExpress')}",
+				data:{order_sn:order_sn},
+				dataType:'json',
+				success:function(e){
+					if(e.status==1){
+						$('#order_detail').empty().append(e.data);
+					}else{
+						alert(e.info);
+					}
 
-
+				}
+			});
+		}
 	});
-
 </script>
 {/block}
