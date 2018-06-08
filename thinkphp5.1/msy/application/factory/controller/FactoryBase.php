@@ -31,8 +31,7 @@ class FactoryBase extends UserBase{
             $onlyOneFactory = true;
             //获取用户-工厂-角色-权限节点
             $nodeList = getUserFactoryRoleNode($this->user['id'],$this->factory['id']);
-            $nodeIds = array_column($nodeList,'node_id');
-            $this->assign('nodeIds',$nodeIds);
+            $this->assign('nodeIds',array_column($nodeList,'node_id'));
         }
         $this->assign('onlyOneFactory',$onlyOneFactory);
     }
