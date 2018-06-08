@@ -113,7 +113,7 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
     height:32px;
     position:fixed;
     left:50%;
-    bottom:6%;
+    bottom:12%;
     margin:0 0 0 -50px;
     z-index:16;
     color:#0066cc;
@@ -628,7 +628,7 @@ color: #ed6d00;
     margin:0;
 }
 .store_operation_head a.home{
-    background-position: 0 -175px;
+    background-position: 0 -97px;
 }
 .store_operation_head div:nth-child(1){
     width:15%;
