@@ -113,7 +113,7 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
     height:32px;
     position:fixed;
     left:50%;
-    bottom:6%;
+    bottom:12%;
     margin:0 0 0 -50px;
     z-index:16;
     color:#0066cc;
