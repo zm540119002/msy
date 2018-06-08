@@ -51,15 +51,18 @@ class RoleNode extends \think\Model {
 	}
 
 	//获取列表
-	public function getList(){
+	public function getList($roleId=[]){
 		$postData = input('post.');
 		$where = [];
 		if(is_array($postData['roleId']) && !empty($postData['roleId'])){
 			$where[] = ['role_id', 'in', $postData['roleId']];
 		}elseif(!is_array($postData['roleId']) && intval($postData['roleId'])){
 			$where[] = ['role_id', '=', $postData['roleId']];
-		}else{
-			return errorMsg('参数错误');
+		}
+		if(is_array($roleId) && !empty($roleId)){
+			$where[] = ['role_id', 'in', $roleId];
+		}elseif(!is_array($roleId) && intval($roleId)){
+			$where[] = ['role_id', '=', $roleId];
 		}
 		$list = $this->where($where)->select();
 		return count($list)?$list->toArray():[];
