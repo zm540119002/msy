@@ -5,8 +5,7 @@ use think\facade\Session;
 /**用户信息验证控制器基类
  */
 class FactoryBase extends UserBase{
-    protected $factory = null;
-    protected $factoryList = null;
+    protected $factory = [];
 
     public function __construct(){
         parent::__construct();
