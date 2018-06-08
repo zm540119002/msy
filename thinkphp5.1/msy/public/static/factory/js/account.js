@@ -62,37 +62,3 @@ function getRoleList(config) {
         }
     });
 }
-
-//设置默认供应商
-function setDefaultFactory() {
-    var factoryList = $('#factoryList').html();
-    layer.open({
-        title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
-        className:'factoryListLayer',
-        type: 1,
-        content: factoryList,
-        anim: 'up',
-        style: '',
-        success:function(){
-            var winHeight=$(window).height();
-            $('.signIn-wrapper').css('height',winHeight-120+'px');
-        },
-        btn:['确定'],
-        yes:function(index){
-            var postData = {};
-            postData.factoryId = $('.factoryListLayer li.current').data('id');
-            if(!postData.factoryId){
-                dialog.error('请选择供应商');
-                return false;
-            }
-            var url = 'setDefaultFactory';
-            $.post(url,postData,function(data){
-                if(data.status==0){
-                    dialog.error(data.info);
-                }else if(data.status==1){
-                    layer.close(index);
-                }
-            });
-        }
-    });
-}

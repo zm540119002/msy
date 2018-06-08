@@ -10,44 +10,31 @@ class FactoryBase extends UserBase{
 
     public function __construct(){
         parent::__construct();
-
-        $modelUserFactory = new \app\factory\model\UserFactory();
-        $where = [
-            ['status','=',0],
-            ['user_id','=',$this->user['id']],
-        ];
-        $field = [
-            'factory_id','is_default',
-        ];
-        $list = $modelUserFactory->where($where)->field($field)->select();
-        $list = $list->toArray();
-        $factoryCount = count($list);
-        $info = [];
+        \common\cache\Factory::remove($this->user['id']);
+        $factoryList = \common\cache\Factory::get($this->user['id']);
+        $this->assign('factoryList',$factoryList);
+        $factoryCount = count($factoryList);
+        $this->factory = [];
         if ($factoryCount==0){//没有入住供应商
             $this->error('没有入住供应商，请入住', 'Deploy/register');
         }elseif($factoryCount==1){//入住一家供应商
-            $info = $list[0];
+            $this->factory = $factoryList[0];
         }elseif($factoryCount>1){//入住多家供应商，有默认供应商的情况
-            foreach ($list as $val){
-                if($val['is_default']){
-                    $info = $val;
+            foreach ($factoryList as $factory){
+                if($factory['is_default']){
+                    $this->factory = $factory;
                     break;
                 }
             }
         }
         $onlyOneFactory = false;
-        if(!empty($info)){
+        if(!empty($this->factory)){
             $onlyOneFactory = true;
-            //获取工厂信息
-            \common\cache\Factory::remove($info['factory_id']);
-            $this->factory = \common\cache\Factory::get($info['factory_id']);
             //获取用户-工厂-角色-权限节点
             $nodeList = getUserFactoryRoleNode($this->user['id'],$this->factory['id']);
             $nodeIds = array_column($nodeList,'node_id');
             $this->assign('nodeIds',$nodeIds);
         }
-        $this->factoryList = \common\cache\Factory::get(array_column($list,'factory_id'));
-        $this->assign('factoryList',$this->factoryList);
         $this->assign('onlyOneFactory',$onlyOneFactory);
     }
 
