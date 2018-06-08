@@ -38,7 +38,7 @@
 			<span>商品入仓</span>
 			<span>盘点出仓</span>
 		</div>
-		<ul class="library-tr" id="list">
+		<ul class="library-tr scroll-list-content" id="list">
 		</ul>
 	</section>
 
@@ -55,7 +55,6 @@
 	$(function () {
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
-		console.log(notDefaultStore);
 		if(notDefaultStore == 0){
 			//初始化商品列表
 			var config = {
@@ -66,7 +65,7 @@
 			//初始化商品列表
 			getPage(url,config);
 			//上拉加载更多
-			getMore(url,config);
+			getMoreLayer(url,config);
 		}
 		/**
 		 * 设置库存

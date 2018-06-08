@@ -1070,7 +1070,8 @@ transparent;
     transition: all 0.5s;
     margin-left: -15px;
 }
-.databaseLayer .goods-database-content{
+.databaseLayer .scroll-list-content,
+.scroll-list-content{
     height:300px;
     overflow-y:scroll;
 }
@@ -1099,7 +1100,8 @@ transparent;
     color:#E60012;
 }
 .database-item.hide{display: none;}
-.goods-store-content li div:first-child{
+.goods-store-content li div:first-child,
+.goods-database-content li img{
     width:20%;
 }
 .goods-store-content li img{
