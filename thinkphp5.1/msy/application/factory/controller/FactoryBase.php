@@ -18,9 +18,9 @@ class FactoryBase extends UserBase{
             $this->error('没有入住供应商，请入住', 'Deploy/register');
         }elseif($factoryCount==1){//入住一家供应商
             $this->factory = $factoryList[0];
-        }elseif($factoryCount>1){//入住多家供应商，有默认供应商的情况
+        }elseif($factoryCount>1){//入住多家供应商
             foreach ($factoryList as $factory){
-                if($factory['is_default']){
+                if($factory['is_default']){//默认供应商
                     $this->factory = $factory;
                     break;
                 }
