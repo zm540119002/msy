@@ -442,8 +442,17 @@ i{
     background-position:0 -172px;
 }
 .top_bar a.goods-video{
+    width:28px;
+    height: 28px;
     background-image:url(../../common/img/icons/detail-icons.png);
     background-position:0 0;
+    background-size:30px 325px;
+}
+.top_bar a.qr-d-code{
+    width:28px;
+    height: 28px;
+    background-image:url(../../common/img/icons/detail-icons.png);
+    background-position:0 -33px;
     background-size:30px 325px;
 }
 .top_bar a.qr-code{
@@ -629,7 +638,7 @@ color: #ed6d00;
     margin:0;
 }
 .store_operation_head a.home{
-    background-position: 0 -97px;
+    background-position: 0 -172px;
 }
 .store_operation_head div:nth-child(1){
     width:15%;
