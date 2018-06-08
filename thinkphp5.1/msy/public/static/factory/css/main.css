@@ -1070,8 +1070,7 @@ transparent;
     transition: all 0.5s;
     margin-left: -15px;
 }
-.databaseLayer .scroll-list-content,
-.scroll-list-content{
+.databaseLayer .scroll-list-content{
     height:300px;
     overflow-y:scroll;
 }

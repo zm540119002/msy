@@ -78,9 +78,10 @@
 		<a href="javascript:void(0);" class="next-step step">下一步</a>
 	</div>
 	<div class="database-item hide">
-		<ul class="goods-database-content scroll-list-content" id="list">
+		<ul class="goods-database-content scroll-list-content" id="listLayer">
 
 		</ul>
+		<div class="error_tipc"></div>
 	</div>
 </section>
 <article class="f24">
@@ -200,6 +201,7 @@
 							pageSize:4
 						};
 						getPageLayer(url,config);
+						loadTriggerLayer = false;
 						getMoreLayer(url,config);
 						isRolling($('.goods-database-nav,.databaseLayer h3'));
 					},

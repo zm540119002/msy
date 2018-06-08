@@ -34,7 +34,7 @@
 					<div class="cols">
 					{if  $vo.auth_status == 0}<span>待审核</span>
 					{elseif $vo.auth_status == 1 /}已备案
-					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
+					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('Brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
 					{else /}
 					{/if}
 					</div>

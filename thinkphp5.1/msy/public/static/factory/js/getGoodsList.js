@@ -12,12 +12,12 @@ function getMore(url,config) {
     });
 }
 
-//上拉加载更多
+//弹窗上拉加载更多
 var loadTriggerLayer = false;//加载触发器
 function getMoreLayer(url,config) {
-    $('.scroll-list-content').on('scroll',function(){
-        var listHeight=document.getElementById('list').scrollHeight;
-        if(loadTriggerLayer && $('.scroll-list-content').scrollTop()+$('.scroll-list-content').height()>=listHeight){
+    $('.databaseLayer .scroll-list-content').on('scroll',function(){
+        var listHeight=$('.databaseLayer #listLayer').get(0).scrollHeight;
+        if(loadTriggerLayer && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
             loadTriggerLayer = false;
             getPageLayer(url,config);
         }
@@ -73,7 +73,7 @@ function getPageLayer(url,config) {
     postData.pageSize = postData.pageSize?postData.pageSize:4;
     //请求结束标志
     if(requestEndLayer){
-        // dialog.error('没有更多啦');
+        errorTipc('没有更多啦');
         loadTriggerLayer  = true;
         return false;
     }
@@ -92,10 +92,10 @@ function getPageLayer(url,config) {
         success: function(data){
             $('.loading').hide();
             if(currentPageLayer == 1){
-                $('.databaseLayer #list li').remove();
-                $('.databaseLayer #list').append(data);
+                $('.databaseLayer #listLayer li').remove();
+                $('.databaseLayer #listLayer').append(data);
             }else{
-                $('.databaseLayer #list li:last').after(data);
+                $('.databaseLayer #listLayer li:last').after(data);
             }
             if($($.parseHTML(data)).length<postData.pageSize){
                 requestEndLayer = true;
