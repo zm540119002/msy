@@ -22,10 +22,6 @@ class UserFactory extends \think\model\Pivot {
 				$this->rollback();//回滚事务
 				return errorMsg('失败');
 			}
-			$id = (int)input('post.id');
-			if($id){
-				$where[] = ['id','=',$id];
-			}
 			$factoryId = input('post.factoryId');
 			if(intval($factoryId)){
 				$where[] = ['factory_id','=',$factoryId];
@@ -38,22 +34,6 @@ class UserFactory extends \think\model\Pivot {
 			$this->commit();//提交事务
 			return successMsg("成功");
 		}
-	}
-
-	/**查找一条数据
-	 */
-	public function getInfo($where=[],$field=['*'],$join=[]){
-		$_where = [
-			['uf.status', '=', 0],
-		];
-		$_join = array(
-		);
-		$info = $this->alias('uf')
-			->field($field)
-			->join(array_merge($_join,$join))
-			->where(array_merge($_where, $where))
-			->find();
-		return $info?$info->toArray():[];
 	}
 
 	//删除
