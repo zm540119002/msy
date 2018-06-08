@@ -36,22 +36,6 @@ class UserFactory extends \think\model\Pivot {
 		}
 	}
 
-	/**查找一条数据
-	 */
-	public function getInfo($where=[],$field=['*'],$join=[]){
-		$_where = [
-			['uf.status', '=', 0],
-		];
-		$_join = array(
-		);
-		$info = $this->alias('uf')
-			->field($field)
-			->join(array_merge($_join,$join))
-			->where(array_merge($_where, $where))
-			->find();
-		return $info?$info->toArray():[];
-	}
-
 	//删除
 	public function setStatus($factoryId){
 		if(!intval($factoryId)){
