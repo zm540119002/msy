@@ -4,20 +4,20 @@
 //上拉加载更多
 var loadTrigger = false;//加载触发器
 function getMore(url,config) {
-    // $(window).on('scroll',function(){
-    //     if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-    //         loadTrigger = false;
-    //         getPage(url,config);
-    //     }
-    // });
+    $(window).on('scroll',function(){
+        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+            loadTrigger = false;
+            getPage(url,config);
+        }
+    });
 }
 
-//上拉加载更多
+//弹窗上拉加载更多
 var loadTriggerLayer = false;//加载触发器
 function getMoreLayer(url,config) {
-    $('.goods-database-content').on('scroll',function(){
-        var listHeight=document.getElementById('listLayer').scrollHeight;
-        if(loadTriggerLayer && $('.goods-database-content').scrollTop()+$('.goods-database-content').height()>=listHeight){
+    $('.databaseLayer .scroll-list-content').on('scroll',function(){
+        var listHeight=$('.databaseLayer #listLayer').get(0).scrollHeight;
+        if(loadTriggerLayer && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
             loadTriggerLayer = false;
             getPageLayer(url,config);
         }
@@ -68,13 +68,12 @@ function getPage(url,config) {
 var currentPageLayer = 1;//记录当前页
 var requestEndLayer = false;//请求结束标记
 function getPageLayer(url,config) {
-    console.log(requestEndLayer);
     var postData = $.extend({},config);
     postData.page = currentPageLayer ? currentPageLayer : 1;
     postData.pageSize = postData.pageSize?postData.pageSize:4;
     //请求结束标志
     if(requestEndLayer){
-        // dialog.error('没有更多啦');
+        errorTipc('没有更多啦');
         loadTriggerLayer  = true;
         return false;
     }
@@ -91,10 +90,8 @@ function getPageLayer(url,config) {
             dialog.error('AJAX错误');
         },
         success: function(data){
-            console.log('成功');
             $('.loading').hide();
             if(currentPageLayer == 1){
-                console.log( $('.databaseLayer #listLayer li'))
                 $('.databaseLayer #listLayer li').remove();
                 $('.databaseLayer #listLayer').append(data);
             }else{
@@ -104,7 +101,6 @@ function getPageLayer(url,config) {
                 requestEndLayer = true;
             }
             currentPageLayer ++;
-            console.log(currentPageLayer );
             loadTriggerLayer = true;
         }
     });

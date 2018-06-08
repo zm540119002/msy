@@ -21,3 +21,76 @@
         {/volist}
     </ul>
 </section>
+<script type="text/javascript">
+    var vendorInfoList=$('#vendorInfoList').html();
+    $(function(){
+        //没有默认店铺
+        var notDefaultStore = "{$notDefaultStore|default=0}";
+        if(notDefaultStore == 1){
+            storeList();
+            return false;
+        }
+    })
+    //弹层 店铺
+    function storeList() {
+        layer.open({
+            type: 1,
+            title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
+            className:'vendorInfoLayer',
+            content:vendorInfoList,
+            anim: 'up',
+            btn:['确定'],
+            success:function(){
+                var storeId=$('.storeId').val();
+                $('.vendorInfoLayer li').on('click',function(){
+                    var _this=$(this);
+                    _this.addClass('current').siblings().removeClass('current');
+                });
+                $.each($('.vendorInfoLayer li'),function(){
+                    var currentId=$(this).data('id');
+                    if(storeId==currentId){
+                        $(this).addClass('current');
+                    }
+                })
+            },
+            yes:function(index){
+                var isCurrent=$('.vendorInfoLayer li.current');
+                factoryLayerName=isCurrent.text();
+                factoryLayerId  =isCurrent.data('id');
+                $('.factoryId').val(factoryLayerId);
+                $('.vendor-name').text(factoryLayerName);
+                if(!factoryLayerId){
+                    dialog.error('请选择一个店铺');
+                    return false
+                }
+                var postData = {};
+                postData.id = factoryLayerId;
+                $.ajax({
+                    url: controller + 'setDefaultStore',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
+                        }
+                        if(info.status == 1){
+                            dialog.success(info.msg);
+                            location.reload();
+                        }
+                    },
+                    complete:function(){
+
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    },
+                });
+                layer.close(index);
+            }
+        })
+    }
+</script>

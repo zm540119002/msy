@@ -82,7 +82,7 @@
     margin:0.12rem 0.15rem 0 0;
 }
 .vendorInfoList{
-    /*height:3rem;*/
+    height:8rem;
     padding:0.15rem 0.15rem 0 .15rem;
     overflow:hidden;
     overflow-y:scroll;
@@ -1041,8 +1041,10 @@ transparent;
     max-width:50%;
 }
 .goods-database-nav{
-    margin:20px 0 10px;
-    padding:0 0 20px 0;
+    /*margin:20px 0 10px;*/
+    /*padding:20px 0 20px 0;*/
+    height:60px;
+    line-height:60px;
     border-bottom:1px solid #d9d9d9;
 }
 .goods-database-nav li{
@@ -1057,7 +1059,7 @@ transparent;
     position: absolute;
     z-index: 1;
     left: 86%;
-    bottom: -5px;
+    bottom: 15px;
     display: inline-block;
     height: 30px;
     width: 80px;
@@ -1068,14 +1070,14 @@ transparent;
     transition: all 0.5s;
     margin-left: -15px;
 }
-.databaseLayer .goods-database-content{
+.databaseLayer .scroll-list-content{
     height:300px;
     overflow-y:scroll;
 }
 .goods-database-content,
 .goods-store-content{
     padding:0 3px;
-    margin:0 12px;
+    /*margin:0 12px;*/
 }
 .goods-database-content li,
 .goods-store-content li{
@@ -1097,7 +1099,8 @@ transparent;
     color:#E60012;
 }
 .database-item.hide{display: none;}
-.goods-store-content li div:first-child{
+.goods-store-content li div:first-child,
+.goods-database-content li img{
     width:20%;
 }
 .goods-store-content li img{

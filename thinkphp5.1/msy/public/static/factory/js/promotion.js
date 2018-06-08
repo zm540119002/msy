@@ -71,7 +71,6 @@ $(function(){
         postData.start_time =  new Date(postData.start_time).getTime()/1000;
         postData.end_time = new Date(postData.end_time).getTime()/1000;
         postData.goods_id = $('.linked-goods-id').val();
-        postData.storeType = storeType;
         var content='';
         if(!postData.name){
             content="请填写促销活动名称";
@@ -168,7 +167,6 @@ function getPage(currentPage) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getList';
     var postData = $('.addsalesgoodsLayer #form1').serializeObject();
-    postData.storeType = storeType;
     postData.pageType = 'promotion';
     postData.page = currentPage ? currentPage : 1;
     postData.pageSize = 4;

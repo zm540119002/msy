@@ -13,25 +13,12 @@
 	{include file="role/node_list_tpl" /}
 </section>
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar top-switch-bar columns_flex l-r-sides">
-			<div class="">
-				<a class="home">首页</a>
-			</div>
-			<div class="">
-				<img class="left" src="public_img/default/no_pic_40.jpg" alt="">
-				<span>爱国宾</span>
-			</div>
-			<div class="">
-				<a class="switch-account">切换供应商账号></a>
-			</div>
-		</div>
-	</section>
+	{include file="public/store_deploy_head" /}
 	<section class="specific_type bottomLine">
-		<div class="columns_flex f20">
-			<a>企业档案</a>
-			<a>商标备案</a>
-			<a>开店申请</a>
+		<div class="columns_flex f20 l-r-sides">
+			<a href="{:url('Record/preview')}">企业档案</a>
+			<a href="{:url('Brand/manage')}">商标备案</a>
+			<a href="{:url('Store/manage')}">开店申请</a>
 			<a href="{:url('Organize/index')}" class="column_type current">组别角色</a>
 			<a href="{:url('Account/index')}">账号授权</a>
 		</div>
@@ -41,9 +28,7 @@
 			<nav class="apply-data-nav">
 				<ul id="status " class="status f24 weui-flex group-role-nav">
 					<li class="weui-flex-item "><a href="{:url('Organize/index')}"><span class="ogranzi"></span><em></em>组织</a></li>
-					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="group"></span><em></em>组别</a></li>
 					<li class="weui-flex-item current"><a href="{:url('Role/index')}"><span class="role"></span><em></em>角色</a></li>
-					<li class="weui-flex-item "><a href="javascript:void(0);"><span class="juris"></span>权限</a></li>
 				</ul>
 			</nav>
 		</div>

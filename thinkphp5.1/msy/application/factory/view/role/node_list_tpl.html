@@ -11,11 +11,11 @@
 			<span>权限</span>
 		</div>
 	</div>
-	{notempty name='allMenu'}
-		{volist name='allMenu' id='vo'}
+	{notempty name='allNode'}
+		{volist name='allNode' id='vo'}
 		<div class="range-list">
 			<span class="range-label">{$vo.name}:</span>
-			{notempty name='allMenu'}
+			{notempty name='allNode'}
 			<ul class="columns_flex">
 				{volist name='vo.sub_menu' id='vv'}
 				<li class="" data-id="{$vv.id}">{$vv.name}</li>

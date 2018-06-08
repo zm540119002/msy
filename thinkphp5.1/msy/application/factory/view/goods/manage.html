@@ -78,40 +78,15 @@
 		<a href="javascript:void(0);" class="next-step step">下一步</a>
 	</div>
 	<div class="database-item hide">
-		<ul class="goods-database-content" id="listLayer">
+		<ul class="goods-database-content scroll-list-content" id="listLayer">
 
 		</ul>
+		<div class="error_tipc"></div>
 	</div>
 </section>
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar columns_flex l-r-sides">
-			<div class="">
-				<a class="home">首页</a>
-			</div>
-			<div class="">
-				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
-				<span>爱国宾</span>
-			</div>
-			<div class="">
-				<a class="switch-account">切换我的店铺</a>
-			</div>
-		</div>
-	</section>
-	<section class="columns_flex l-r-sides">
-		<div>
-			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
-			<div>
-				<p><span>某某</span>官方旗舰店</p>
-				<p>B2B采购商城 <span>供应商自营</span></p>
-			</div>
-		</div>
-		<div>
-			<a href="" class="personal_center">我的</a>
-			<a href="" class="my-store">我的店铺</a>
-		</div>
-	</section>
-	<section class="bottomLine">
+	{include file="public/store_operation_head" /}
+	<section class="separation-line">
 		<nav class="columns_flex channel_nav manufacturer_nav">
 			<a href="">
 				店铺提醒
@@ -119,7 +94,7 @@
 			<a href="" class="current">
 				店铺管理
 			</a>
-			<a href="">
+			<a href="{:url('Promotion/manage')}">
 				营销推广
 			</a>
 			<a href="">
@@ -137,7 +112,7 @@
 			<a>卡券</a>
 		</div>
 	</section>
-	<section class="bottomLine">
+	<section class="separation-line">
 		<div class="columns_flex backups-content ">
 			<div>
 				<span class="func-icons"></span>
@@ -171,15 +146,19 @@
 <script type="text/javascript" src="factory_js/getGoodsList.js"></script>
 <script type="text/javascript">
 	$(function () {
-		var config = {
-			pageSize:4,
-			pageType:'manage',
-		};
-		var url = module+'goods/getList';
-		//初始化商品列表
-		getPage(url,config);
-		//上拉加载更多
-		getMore(url,config);
+		//没有默认店铺
+		var notDefaultStore = "{$notDefaultStore|default=0}";
+		if(notDefaultStore == 0){
+			var config = {
+				pageSize:4,
+				pageType:'manage',
+			};
+			var url = module+'goods/getList';
+			//初始化商品列表
+			getPage(url,config);
+			//上拉加载更多
+			getMore(url,config);
+		}
 
 		var databaseContent=$('#databaseContent').html();
 		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
@@ -194,6 +173,7 @@
 					if(oLi.hasClass('current')){
 						oLi.addClass('disabled');
 					}
+					isRolling($('.databaseLayer'));
 				}
 			})
 		});
@@ -207,6 +187,7 @@
 					className:'databaseLayer',
 					content:databaseContent,
 					success:function(){
+						$('body').addClass('scrollfixed');
 //						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
 						if(_this.hasClass('step')){
 							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
@@ -220,10 +201,12 @@
 							pageSize:4
 						};
 						getPageLayer(url,config);
+						loadTriggerLayer = false;
 						getMoreLayer(url,config);
 						isRolling($('.goods-database-nav,.databaseLayer h3'));
 					},
 					yes:function(index){
+						$('body').removeClass('scrollfixed');
 						layer.close(index);
 					},
 					btn:['确定']

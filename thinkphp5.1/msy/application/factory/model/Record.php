@@ -63,7 +63,7 @@ class Record extends Model {
 			$file = array(
 				'logo_img','company_img','rb_img','factory_video','license','glory_img'
 			);
-			$oldRecordInfo = $this -> getRecord($where,$file);
+			$oldRecordInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
 		}else{
@@ -142,10 +142,7 @@ class Record extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		if(!empty($list)){
-			$list = $list->toArray();
-		}
-		return $list;
+		return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -167,10 +164,7 @@ class Record extends Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
-		if(!empty($info)){
-			$info = $info ->toArray();
-		}
-		return $info;
+		return $info?$info->toArray():[];
 	}
 
 	//关联产商模型

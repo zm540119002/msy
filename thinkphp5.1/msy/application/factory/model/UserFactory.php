@@ -22,10 +22,6 @@ class UserFactory extends \think\model\Pivot {
 				$this->rollback();//回滚事务
 				return errorMsg('失败');
 			}
-			$id = (int)input('post.id');
-			if($id){
-				$where[] = ['id','=',$id];
-			}
 			$factoryId = input('post.factoryId');
 			if(intval($factoryId)){
 				$where[] = ['factory_id','=',$factoryId];
@@ -40,39 +36,23 @@ class UserFactory extends \think\model\Pivot {
 		}
 	}
 
-	/**查询多条数据
-	 */
-	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
-		$_where = array(
-			'u.status' => 0,
-		);
-		$_join = array(
-		);
-		$where = array_merge($_where, $where);
-		$list = $this->alias('u')
-			->where($where)
-			->field($field)
-			->join(array_merge($_join,$join))
-			->order($order)
-			->limit($limit)
-			->select();
-		return count($list)?$list->toArray():[];
-	}
-
-	/**查找一条数据
-	 */
-	public function getInfo($where=[],$field=['*'],$join=[]){
-		$_where = array(
-			'u.status' => 0,
-		);
-		$where = array_merge($_where, $where);
-		$_join = array(
-		);
-		$info = $this->alias('u')
-			->field($field)
-			->join(array_merge($_join,$join))
-			->where($where)
-			->find();
-		return $info?$info->toArray():[];
+	//删除
+	public function setStatus($factoryId){
+		if(!intval($factoryId)){
+			return errorMsg('参数错误');
+		}
+		$postData = input('post.');
+		if(!intval($postData['userId'])){
+			return errorMsg('参数错误');
+		}
+		$where = [
+			['user_id', '=', $postData['userId']],
+			['factory_id', '=', $factoryId],
+		];
+		$res = $this->where($where)->setField('status',$postData['status']);
+		if(!$res){
+			return errorMsg('失败',$this->getError());
+		}
+		return successMsg('成功');
 	}
 }

@@ -19,8 +19,9 @@ class Brand extends FactoryBase
         if(request()->isPost()){
             return $model -> edit($this->factory['id']);
         }
-        $categoryModel = new \app\index_admin\model\Category;
-        $categoryList = $categoryModel -> selectFirstCategory();
+        $categoryModel = new \app\index_admin\model\GoodsCategory;
+        $where = [['parent_id_1','=',0]];
+        $categoryList = $categoryModel->getList($where);
         $this->assign('categoryList',$categoryList);
         if(input('?brand_id')){
             $brandId = input('brand_id');

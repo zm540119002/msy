@@ -3,34 +3,32 @@ namespace common\cache;
 
 class Factory{
     private static $_cache_key = 'cache_factory_';
-    
     /**从缓存中获取信息
      */
-    public static function get($factoryId){
-        $factory = cache(self::$_cache_key.$factoryId);
-        if(!$factory){
-            $modelFactory = new \app\factory\model\Factory();
+    public static function get($userId){
+        $factoryList = cache(self::$_cache_key.$userId);
+        if(!$factoryList){
+            $modelUserFactory = new \app\factory\model\UserFactory();
             $where = [
-                ['status','=',0],
+                ['uf.status','=',0],
+                ['uf.user_id','=',$userId],
             ];
             $field = [
-                'id','name',
+                'uf.is_default','f.id','f.name',
             ];
-            if(is_array($factoryId)){
-                $where[] = ['id','in',$factoryId];
-                $factory = $modelFactory->selectFactory($where,$field);
-            }else{
-                $where[] = ['id','=',$factoryId];
-                $factory = $modelFactory->getInfo($where,$field);
-                cache(self::$_cache_key.$factoryId, $factory,config('custom.factory_cache_time'));
-            }
+            $join = [
+                ['factory f','uf.factory_id = f.id','left'],
+            ];
+            $factoryList = $modelUserFactory->alias('uf')->join($join)->where($where)->field($field)->select();
+            $factoryList = $factoryList->toArray();
         }
-        return $factory;
+        cache(self::$_cache_key.$userId, $factoryList,config('custom.factory_cache_time'));
+        return $factoryList;
     }
 
     /**删除缓存信息
      */
-    public static function remove($factoryId){
-        cache(self::$_cache_key.$factoryId, null);
+    public static function remove($userId){
+        cache(self::$_cache_key.$userId, null);
     }
 }

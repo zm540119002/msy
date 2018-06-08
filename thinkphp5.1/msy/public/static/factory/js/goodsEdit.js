@@ -65,16 +65,16 @@ $(function(){
             success:function(){
                 var categoryId=$('.select-category').data('category-id');
                 var categoryIdArr=categoryId.split(',');
-                var cat_id_1;
-                if(categoryIdArr.length==1){
+                var category_id_1;
+                if(categoryIdArr[0]==0){
                     $('.categoryContentLayer').find('li:first').addClass('current');
-                    cat_id_1 =  $('.categoryContentLayer .category-tab').find('li:first a').data('id');
+                    category_id_1 =  $('.categoryContentLayer .category-tab').find('li:first a').data('id');
                 }else{
-                    cat_id_1=categoryIdArr[0];
+                    category_id_1=categoryIdArr[0];
                 }
                 $.ajax({
-                    url: domain+'index_admin/Category/getSecondCategoryById',
-                    data: {cat_id_1:cat_id_1},
+                    url: module+'GoodsCategory/getSecondCategoryById',
+                    data: {category_id_1:category_id_1},
                     type: 'get',
                     beforeSend: function(){
                         //$('.loading').show();
@@ -123,7 +123,7 @@ $(function(){
                 $.each($('.category-type li'),function(){
                     var _this=$(this);
                     if(_this.hasClass('current')){
-                        var second_category_id=$('.categoryContentLayer .category-type>li.current').find('a').data('id');
+                        second_category_id=$('.categoryContentLayer .category-type>li.current').find('a').data('id');
                         categoryArr+=second_category_id;
                         return false;
                     }
@@ -160,8 +160,8 @@ $(function(){
     //获取二级分类
     $('body').on('click','.first_category',function () {
         var _this = $(this);
-        var cat_id_1 = _this.data('id');
-        $.get(domain+'index_admin/Category/getSecondCategoryById',{cat_id_1:cat_id_1},function(msg){
+        var category_id_1 = _this.data('id');
+        $.get(module+'GoodsCategory/getSecondCategoryById',{category_id_1:category_id_1},function(msg){
             $('.category-content-wrapper').empty();
            $('.category-content-wrapper').append(msg);
         });
@@ -178,8 +178,8 @@ $(function(){
         var postData=$('.addProductContent').serializeObject();
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;
-        postData.cat_id_1=categoryArray[0];
-        postData.cat_id_2=categoryArray[1];
+        postData.category_id_1=categoryArray[0];
+        postData.category_id_2=categoryArray[1];
         var content='';
         if(!postData.name){
             content='请填写商品名称';
