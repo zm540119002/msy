@@ -4,29 +4,63 @@
  */
 return [
     'menu' => [
-        'goods'=>[
-            'id'=>40,'name'=>'商品管理','type'=>2,
+        'deploy'=>[
+            'id'=>40,'name'=>'供应商入驻','type'=>2,
             'sub_menu'=>[
-                ['id'=>41,'name'=>'分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
-                ['id'=>42,'name'=>'单位管理','display'=>1,'controller'=>'Unit','action'=>'manage',],
-                ['id'=>43,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'manage',],
+                ['id'=>41,'name'=>'供应商入驻申请','display'=>1,'controller'=>'Deploy','action'=>'register',],
             ],
         ],
-        'order'=>[
-            'id'=>50,'name'=>'订单管理','type'=>2,
+        'record'=>[
+            'id'=>50,'name'=>'企业档案','type'=>2,
             'sub_menu'=>[
-                ['id'=>51,'name'=>'订单列表','display'=>1,'controller'=>'Order','action'=>'index',],
-                ['id'=>52,'name'=>'发货订单','display'=>1,'controller'=>'Order','action'=>'deliveryList',],
-                ['id'=>53,'name'=>'退款订单','display'=>1,'controller'=>'Order','action'=>'refundOrderList',],
-                ['id'=>54,'name'=>'退换货订单','display'=>1,'controller'=>'Order','action'=>'returnList',],
-                ['id'=>55,'name'=>'导出数据','display'=>1,'controller'=>'Inout','action'=>'index',],
+                ['id'=>51,'name'=>'企业档案案编辑','display'=>1,'controller'=>'Record','action'=>'edit',],
+                ['id'=>52,'name'=>'企业档案案预览','display'=>1,'controller'=>'Record','action'=>'preview',],
             ],
         ],
-        'city'=>[
-            'id'=>60,'name'=>'省市管理','type'=>2,
+        'brand'=>[
+            'id'=>60,'name'=>'商标管理','type'=>2,
             'sub_menu' => [
-                ['id'=>61,'name'=>'省份管理','display'=>1,'controller'=>'Province','action'=>'manage',],
-                ['id'=>62,'name'=>'城市管理','display'=>1,'controller'=>'City','action'=>'manage',],
+                ['id'=>61,'name'=>'商标管理','display'=>1,'controller'=>'Brand','action'=>'manage',],
+                ['id'=>62,'name'=>'商标备案','display'=>1,'controller'=>'Brand','action'=>'record',],
+            ],
+        ],
+        'store'=>[
+            'id'=>70,'name'=>'开店申请','type'=>2,
+            'sub_menu' => [
+                ['id'=>71,'name'=>'开店部署','display'=>1,'controller'=>'Store','action'=>'index',],
+                ['id'=>72,'name'=>'店铺列表','display'=>1,'controller'=>'Store','action'=>'manage',],
+                ['id'=>73,'name'=>'申请开新店','display'=>1,'controller'=>'Store','action'=>'edit',],
+            ],
+        ],
+        'organize'=>[
+            'id'=>80,'name'=>'组别角色','type'=>2,
+            'sub_menu' => [
+                ['id'=>81,'name'=>'组别角色','display'=>1,'controller'=>'organize','action'=>'index',],
+                ['id'=>82,'name'=>'组别角色删除','display'=>1,'controller'=>'organize','action'=>'del',],
+            ],
+        ],
+        'operation'=>[
+            'id'=>90,'name'=>'店铺运营','type'=>2,
+            'sub_menu' => [
+                ['id'=>91,'name'=>'店铺提醒','display'=>1,'controller'=>'operation','action'=>'index',],
+            ],
+        ],
+        'goods'=>[
+            'id'=>100,'name'=>'商品','type'=>2,
+            'sub_menu' => [
+                ['id'=>101,'name'=>'商品','display'=>1,'controller'=>'goods','action'=>'manage',],
+                ['id'=>102,'name'=>'增加商品','display'=>1,'controller'=>'goods','action'=>'edit',],
+                ['id'=>103,'name'=>'商品预览','display'=>1,'controller'=>'goods','action'=>'preview',],
+                ['id'=>104,'name'=>'商品排序','display'=>1,'controller'=>'goods','action'=>'setSort',],
+                ['id'=>105,'name'=>'上下架','display'=>1,'controller'=>'goods','action'=>'setShelf',],
+                ['id'=>106,'name'=>'库存管理','display'=>1,'controller'=>'goods','action'=>'setInventory',],
+            ],
+        ],
+        'promotion'=>[
+            'id'=>110,'name'=>'组别角色','type'=>2,
+            'sub_menu' => [
+                ['id'=>111,'name'=>'场景','display'=>1,'controller'=>'promotion','action'=>'manage',],
+                ['id'=>112,'name'=>'增加促销','display'=>1,'controller'=>'promotion','action'=>'edit',],
             ],
         ],
     ],

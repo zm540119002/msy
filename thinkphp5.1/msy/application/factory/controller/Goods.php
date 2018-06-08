@@ -3,11 +3,6 @@ namespace app\factory\controller;
 
 class Goods extends StoreBase
 {
-    //运营管理首页
-    public function operaManageIndex(){
-        return $this->fetch('store/opera_manage_index');
-    }
-
     /**
      * @return array|mixed
      *商品编辑
@@ -169,7 +164,7 @@ class Goods extends StoreBase
         }
         return $this->fetch();
     }
-    //设置商品库存
+    //设置商品排序
     public function setSort(){
         if(request()->isPost()){
             $data = input();
