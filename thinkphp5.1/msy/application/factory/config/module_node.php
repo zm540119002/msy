@@ -35,32 +35,32 @@ return [
         'organize'=>[
             'id'=>80,'name'=>'组别角色','type'=>2,
             'sub_menu' => [
-                ['id'=>81,'name'=>'组别角色','display'=>1,'controller'=>'organize','action'=>'index',],
-                ['id'=>82,'name'=>'组别角色删除','display'=>1,'controller'=>'organize','action'=>'del',],
+                ['id'=>81,'name'=>'组别角色','display'=>1,'controller'=>'Organize','action'=>'index',],
+                ['id'=>82,'name'=>'组别角色删除','display'=>1,'controller'=>'Organize','action'=>'del',],
             ],
         ],
         'operation'=>[
             'id'=>90,'name'=>'店铺运营','type'=>2,
             'sub_menu' => [
-                ['id'=>91,'name'=>'店铺提醒','display'=>1,'controller'=>'operation','action'=>'index',],
+                ['id'=>91,'name'=>'店铺提醒','display'=>1,'controller'=>'Operation','action'=>'index',],
             ],
         ],
         'goods'=>[
             'id'=>100,'name'=>'商品','type'=>2,
             'sub_menu' => [
-                ['id'=>101,'name'=>'商品','display'=>1,'controller'=>'goods','action'=>'manage',],
-                ['id'=>102,'name'=>'增加商品','display'=>1,'controller'=>'goods','action'=>'edit',],
-                ['id'=>103,'name'=>'商品预览','display'=>1,'controller'=>'goods','action'=>'preview',],
-                ['id'=>104,'name'=>'商品排序','display'=>1,'controller'=>'goods','action'=>'setSort',],
-                ['id'=>105,'name'=>'上下架','display'=>1,'controller'=>'goods','action'=>'setShelf',],
-                ['id'=>106,'name'=>'库存管理','display'=>1,'controller'=>'goods','action'=>'setInventory',],
+                ['id'=>101,'name'=>'商品','display'=>1,'controller'=>'Goods','action'=>'manage',],
+                ['id'=>102,'name'=>'增加商品','display'=>1,'controller'=>'Goods','action'=>'edit',],
+                ['id'=>103,'name'=>'商品预览','display'=>1,'controller'=>'Goods','action'=>'preview',],
+                ['id'=>104,'name'=>'商品排序','display'=>1,'controller'=>'Goods','action'=>'setSort',],
+                ['id'=>105,'name'=>'上下架','display'=>1,'controller'=>'Goods','action'=>'setShelf',],
+                ['id'=>106,'name'=>'库存管理','display'=>1,'controller'=>'Goods','action'=>'setInventory',],
             ],
         ],
         'promotion'=>[
             'id'=>110,'name'=>'组别角色','type'=>2,
             'sub_menu' => [
-                ['id'=>111,'name'=>'场景','display'=>1,'controller'=>'promotion','action'=>'manage',],
-                ['id'=>112,'name'=>'增加促销','display'=>1,'controller'=>'promotion','action'=>'edit',],
+                ['id'=>111,'name'=>'场景','display'=>1,'controller'=>'Promotion','action'=>'manage',],
+                ['id'=>112,'name'=>'增加促销','display'=>1,'controller'=>'Promotion','action'=>'edit',],
             ],
         ],
     ],
