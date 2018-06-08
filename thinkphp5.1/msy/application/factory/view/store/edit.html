@@ -135,7 +135,12 @@
 				}
 			}
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+			var selectedLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
 			if(storeType.hasClass('current')){
+				if(selectedLen==storePattern.length){
+					dialog.success('此店所有经营模式已开过',module+'Store/manage');
+					return false;
+				}
 				if(storePattern.hasClass('current')){
 					run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
 					$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
@@ -174,7 +179,8 @@
 						$('.brand_stores').show();
 					}
 				}else{
-					dialog.success('此店所有经营模式已开过',module+'Store/manage');
+					dialog.error('请选择经营模式');
+					return false;
 				}
 			}else{
 				dialog.error('请选择店铺类型和经营模式');
