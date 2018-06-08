@@ -5,6 +5,8 @@ function getUserFactoryRoleNode($userId,$factoryId){
         return errorMsg('参数错误');
     }
     $modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
-    $list = $modelUserFactoryRole->getRole($userId,$factoryId);
+    $roleList = $modelUserFactoryRole->getRole($userId,$factoryId);
+    $modelRoleNode = new \app\factory\model\RoleNode();
+    $list = $modelRoleNode->getList(array_column($roleList,'id'));
     return $list;
 }

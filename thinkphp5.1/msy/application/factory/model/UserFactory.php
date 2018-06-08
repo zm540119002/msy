@@ -22,10 +22,6 @@ class UserFactory extends \think\model\Pivot {
 				$this->rollback();//回滚事务
 				return errorMsg('失败');
 			}
-			$id = (int)input('post.id');
-			if($id){
-				$where[] = ['id','=',$id];
-			}
 			$factoryId = input('post.factoryId');
 			if(intval($factoryId)){
 				$where[] = ['factory_id','=',$factoryId];
