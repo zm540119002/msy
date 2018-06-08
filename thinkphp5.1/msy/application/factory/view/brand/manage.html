@@ -7,11 +7,11 @@
 	{include file="public/store_deploy_head" /}
 	<section class="specific_type bottomLine">
 		<div class="columns_flex f20">
-			<a href="{:url('record/preview')}">企业档案</a>
-			<a class="column_type current">商标备案</a>
-			<a href="{:url('store/manage')}">开店申请</a>
-			<a>部门角色</a>
-			<a>账号授权</a>
+			<a href="{:url('Record/preview')}">企业档案</a>
+			<a href="{:url('Brand/manage')}" class="column_type current" >商标备案</a>
+			<a href="{:url('Store/manage')}">开店申请</a>
+			<a href="{:url('Organize/index')}">组别角色</a>
+			<a href="{:url('Account/index')}">账号授权</a>
 		</div>
 	</section>
 	<section class="trademark-module">
@@ -34,7 +34,7 @@
 					<div class="cols">
 					{if  $vo.auth_status == 0}<span>待审核</span>
 					{elseif $vo.auth_status == 1 /}已备案
-					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
+					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('Brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
 					{else /}
 					{/if}
 					</div>
@@ -48,7 +48,7 @@
 			{/notempty}
 		</ul>
 	</section>
-	<a href="{:url('brand/record')}" class="foot-btn f24">进行新的商标备案</a>
+	<a href="{:url('Brand/record')}" class="foot-btn f24">进行新的商标备案</a>
 </article>
 {/block}
 {block name="common"}
