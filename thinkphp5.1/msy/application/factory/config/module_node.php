@@ -57,7 +57,7 @@ return [
             ],
         ],
         'promotion'=>[
-            'id'=>110,'name'=>'组别角色','type'=>2,
+            'id'=>110,'name'=>'促销','type'=>2,
             'sub_menu' => [
                 ['id'=>111,'name'=>'场景','display'=>1,'controller'=>'Promotion','action'=>'manage',],
                 ['id'=>112,'name'=>'增加促销','display'=>1,'controller'=>'Promotion','action'=>'edit',],
