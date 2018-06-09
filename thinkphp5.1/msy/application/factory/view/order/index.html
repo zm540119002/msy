@@ -29,55 +29,27 @@
 	</section>
 	<section class="f24 account-content-wrapper order-content-wrapper">
 		<div class="account-top">
+			{volist name="list" id="v"}
 			<dl>
-				<dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt>
+				<dt class="role-label"><strong>订单号：<span>{$v.order_sn}</span></strong></dt>
 				<dd>
-					<p>下单时间：2018-05-07 09:56:57</p>
-					<p>分类：购买商品</p>
-					<p>状态：新订单</p>
-					<p>总价：￥199.56元</p>
-					<p>收货人：张生</p>
-					<p>收货手机：13662539467</p>
-					<p>订单来源：美尚商城</p>
-					<p>支付金额：￥199.56元</p>
-					<p>支付方式：微信支付</p>
-					<p>支付备注：金额付清</p>
-					<div class="print" data="1">打印订单</div>
+					<p>下单时间：{$v.create_time}</p>
+					<p>分类：购买商品 ??</p>
+					<p>支付状态：{$v.status}</p>
+					<p>订单状态：{$v.status_unpack}</p>
+					<p>总价：￥ {$v.pay_money} 元</p>
+					<p>收货人：{$v.consignee}</p>
+					<p>收货手机：{$v.phone}</p>
+					<p>订单来源：{$v.source}</p>
+					<p><strong>支付金额：￥ {$v.pay_money} 元</strong></p>
+					<p>支付方式：{$v.pay_method}</p>
+					<p>支付备注：{$v.remark}</p>
+					<div class="print" data="{$v.order_sn}" data_id="{$v.order_id}">打印订单</div>
 				</dd>
 			</dl>
-			<dl>
-				<dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt>
-				<dd>
-					<p>下单时间：2018-05-07 09:56:57</p>
-					<p>分类：购买商品</p>
-					<p>状态：新订单</p>
-					<p>总价：￥199.56元</p>
-					<p>收货人：张生</p>
-					<p>收货手机：13662539467</p>
-					<p>订单来源：美尚商城</p>
-					<p>支付金额：￥199.56元</p>
-					<p>支付方式：微信支付</p>
-					<p>支付备注：金额付清</p>
-					<div class="print" data="2">打印订单</div>
-				</dd>
-			</dl>
-			<dl>
-				<dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt>
-				<dd>
-					<p>下单时间：2018-05-07 09:56:57</p>
-					<p>分类：购买商品</p>
-					<p>状态：新订单</p>
-					<p>总价：￥199.56元</p>
-					<p>收货人：张生</p>
-					<p>收货手机：13662539467</p>
-					<p>订单来源：美尚商城</p>
-					<p>支付金额：￥199.56元</p>
-					<p>支付方式：微信支付</p>
-					<p>支付备注：金额付清</p>
-					<div class="print"  data="3">打印订单</div>
-				</dd>
-			</dl>
+			{/volist}
 		</div>
+		{$list|raw}
 	</section>
 </article>
 
@@ -94,7 +66,7 @@ $(function () {
 	$('.record').click(function () {
 		//alert(1);
 	});
-
+	/**
 	$('.print').on('click', function(){
 		var order_id = $(this).attr('data');
 		layer.open({
@@ -105,6 +77,27 @@ $(function () {
 			shadeClose: true, //点击遮罩关闭
 			content: '<!--startprint--><dl><dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt><dd><p>下单时间：2018-05-07 09:56:57</p><p>分类：购买商品</p><p>状态：新订单</p><p>总价：￥199.56元</p><p>收货人：张生</p><div class="print" data="1" onClick="doPrint()">打印商品订单</div></dd></dl><div>Ajax获取的订单内容</div><!--endprint-->'
 		});
+	});*/
+
+	$('.print').on('click', function(){
+		var order_sn = $(this).attr('data'),order_id = $(this).attr('data_id');
+		$.ajax({
+			url: "{:url('Order/getOrderDetail')}",
+			data: {order_id:order_id},
+			dataType: 'HTML',
+			type: 'POST',
+			success:function(e){
+				layer.open({
+					type: 1,
+					title: '订单管理'+order_sn,
+					area: '80%',
+					closeBtn: 2,
+					shadeClose: true, //点击遮罩关闭
+					content: '<!--startprint-->'+ e +'<!--endprint-->'
+				});
+			}
+		});
+
 	});
 
 });

@@ -386,14 +386,14 @@ i{
     font-size: 0.24rem;
 }
 .top_bar a{
-    width:28px;
-    /*width:20px;*/
-    /*height:22px;*/
-    height:28px;
+    /*width:28px;*/
+    width:20px;
+    height:22px;
+    /*height:28px;*/
     margin:0 auto;
-    background-image:url(../../common/img/icons/detail-icons.png);
+    background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:30px 325px;
+    background-size:20px 240px;
     display:block;
     text-indent:-9999rem;
 }
@@ -418,7 +418,7 @@ i{
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 204px;
+    background-size:20px 240px;
     display:block;
     text-indent:-9999rem;
 }
@@ -432,24 +432,33 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -66px;
+    background-position:0 -127px;
 }
 .top_bar a.shopping_cart{
     background-position:0 -150px;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -97px;
+    background-position:0 -172px;
 }
 .top_bar a.goods-video{
+    width:28px;
+    height: 28px;
     background-image:url(../../common/img/icons/detail-icons.png);
     background-position:0 0;
     background-size:30px 325px;
 }
-.top_bar a.qr-code{
+.top_bar a.qr-d-code{
+    width:28px;
+    height: 28px;
     background-image:url(../../common/img/icons/detail-icons.png);
     background-position:0 -33px;
     background-size:30px 325px;
+}
+.top_bar a.qr-code{
+    background-image:url(../../common/img/icons/public_icons.png);
+    background-position:0 -218px;
+    background-size:20px 240px;
 }
 .top_search_module{
     margin:-4px 0 0;
@@ -629,7 +638,7 @@ color: #ed6d00;
     margin:0;
 }
 .store_operation_head a.home{
-    background-position: 0 -97px;
+    background-position: 0 -172px;
 }
 .store_operation_head div:nth-child(1){
     width:15%;
@@ -1600,7 +1609,9 @@ color:#fff;
 }
 .product-square-box{
     display: block;
+    height:2.6rem;
     margin:0 0 0.10rem 0;
+    overflow:hidden;
 }
 .product-square-img{
     display: block;
