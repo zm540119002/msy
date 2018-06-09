@@ -1236,6 +1236,9 @@ color: #ed6d00;
 .group-role-nav .weui-flex-item.current{
     color:#009a3e;
 }
+.group-role-nav li:last-child em{
+    width:0;
+}
 /*角色2018-5-11*/
 .group-role-content li,
 .group-role-content li span,

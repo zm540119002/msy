@@ -182,7 +182,7 @@ class Goods extends Model {
 	//设置库存
 	public function setInventory($storeId=''){
 		$data = input('post.');
-		if(empty($data['id'] || (int)$data['id'])){
+		if(empty($data['id'] || !(int)$data['id'])){
 			return errorMsg("参数错误");
 		}
 		$where = [
