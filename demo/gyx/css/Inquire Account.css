@@ -17,17 +17,17 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 	}
 .height{ height:31px;}
 
-.overall{ width:375px; margin:0 auto ; height:640px;}
+.overall{}
 /*header*/
 .nav{
-	position:relative; background-color:#333; height:54px;
+	position:relative; background-color:#333; height: 3.4rem;
 }
 h2{
-	text-align:center; color:#FFF; height:54px; line-height:54px; font-size:18px;
+	text-align:center; color:#FFF; height: 3.4rem; line-height: 3.4rem;; font-size:18px;
 	}
 .nav a{
-	width:20px;    
-	height:54px;
+	width:1.3rem;   
+	height: 3.4rem;
 	position:absolute;
 }
 .nav a.left{
@@ -39,28 +39,27 @@ h2{
 	top:4.5px;
 	}
 /*nav*/
-.fir-nav{ position:relative; height:50px; border-bottom:1px solid #7e7d7d;} 
+.fir-nav{height:50px; border-bottom:1px solid #7e7d7d;overflow:hidden;} 
 
 .fir-nav a.home{
-	left:10px;
-	top:5px;
+	margin: 5px 0 0 23px;
 	}
 .fir-nav a.circle{
-	left:60px;
-	top:4.5px;
+	margin: 5px 0 0 8px;
 	}	
 .fir-nav a{
 	width:40px;    
 	height:50px;
-	position:absolute;
 }
-font{ text-align:left; font-size:14px; height:50px; line-height:50px; margin-left:110px;}
-h4{ font-size:14px; margin-right:15px; height:50px; line-height:50px;}
+.supplier{font-size:14px; height:50px; line-height:50px; margin-left:3px;}
+h4 { display:block;font-size:14px; margin-right:15px; line-height:50px;}
+.gh{ width: 47%;}
 /*mainnav*/
-.sec-nav{ border-bottom:8px solid #efefef; height:50px;} 
-.sec-nav li{ float:left; }
+.sec-nav{ border-bottom:8px solid #efefef; height:3.3rem; padding:3px;} 
+.columns_flex{ display: -webkit-flex;}
+.sec-nav li{width: 20%; }
 .sec-nav a{ display:block; font-size:14px; margin-left:7.5px; padding:0px 5px 0px 5px;color:#595757;
-    height:50px; line-height:50px; font-weight: bold;
+    height:3.3rem; line-height:3.3rem; font-weight: bold;text-align:center;
 }
 .sec-nav a.current{color: #ff7bac;} 
 .sec-nav a{
@@ -68,10 +67,8 @@ h4{ font-size:14px; margin-right:15px; height:50px; line-height:50px;}
 } 
 .sec-nav a.current:before{
 	position: absolute;
-    /*z-index: 1;*/
     left: 50%;
     bottom: -10px;
-    /*display: inline-block;*/
     height: 30px;
     width: 30px;
     background-color: #ff7bac;
@@ -82,38 +79,86 @@ h4{ font-size:14px; margin-right:15px; height:50px; line-height:50px;}
     margin-left: -15px;
 }
 /*content*/
-.search{ width:300px; height:30px; border:1px solid #8c8c8c; border-radius:5px; margin:20px 36.5px 0 36.5px;}
-.search span{ display:block; font-size:13px; color:#b3b3b3; line-height:30px; margin-left:20px;
-width:240px;}
-.search img{ margin-top:5px;}
-h5{ font-size:15px; color:#595757; margin:9px 0 0 36.5px;}
+.main{ padding:0px 10px;}
+.search{height: 2rem; border:1px solid #8c8c8c; border-radius:5px;margin:20px 10px 0 10px; display: -webkit-flex;}
+.search .text{ flex: 4; font-size:13px; color:#b3b3b3; line-height: 2rem; margin-left:20px;}
+.search-btn{     flex: 1;
+	             border-left: 1px solid #d9d9d9;
+	             background: none;
+	             background-image:url(../img/search.png);
+	             background-repeat: no-repeat;
+	             background-position: center;}
+h5{ font-size:15px; color:#595757; margin:9px 0 0 10px;}
 
-.list1{ width:300px;height:90px; border:1px solid #009a3e; border-radius:5px; margin:14px 36.5px 0 36.5px;
-background-color:#efefef; }
-.list1 p{ font-size:13px; margin:14px 0px 0 10px; color:#808080; line-height:20px;}
-.list1 span{ font-size:13px; text-align:center;color:#595757;display:block; padding:35px 0 38px 23px; border-left:1px solid #727171; margin-left: 33px;}
+.list1{
+	height:5.7rem;
+	border:1px solid #009a3e;
+	border-radius:5px;
+	margin:14px 10px 0 10px;
+    background-color:#efefef;
+	display:flex;
+	justify-content: space-between;
+}
+.list1 .box-right {
+    padding:17px 5px;font-size:14px;color:#595757;
+}
+.list1 .box-left{ font-size:14px;color:#595757;padding:36px 15px; 
+	border-left:1px solid #727171; }
+.list1 .label{
+    display: inline-block;
+    width:70px;
+    text-align: right;
+	margin-right: 5px;}
+
+	.list2{ 
+        height:5.7rem;
+		border:1px solid #009a3e;
+		border-radius:5px;
+		margin:14px 10px 0 10px;
+        background-color:#efefef;
+	    display:flex;
+	    justify-content: space-between;
+}
+.list2 .box-right {
+    padding:17px 5px;font-size:14px;color:#595757;
+}
+.list2 .box-left{ font-size:14px;color:#595757;padding:36px 8px;
+	 border-left:1px solid #727171; color:#E60012; }
+.list2 .label{
+    display: inline-block;
+    width:70px;
+    text-align: right;
+	margin-right: 5px;}
 
 
-.btn {color: #fff; font-size: 15px; line-height: 50px; text-align: center;
- width:270px; height: 50px; border-radius: 8px; background-color: #ff7bac; position: fixed;
-    right: 55.5px;
+.btn {color: #fff; 
+	font-size: 15px; 
+	line-height: 50px; 
+	text-align: center;
+	width:100%; 
+	height:3.3rem;
+	background-color: #ff7bac;
+	 position: fixed;
+    right: 0px;
     bottom:0px;
 	z-index: 2;
  } 
 
 .box{ width:330px; height:500px;}
 /*h1{ text-align:center; margin-top: 47px; font-size:18px;}*/
-.area-frame{ width:300px; height:30px;margin:20px 0 0px 36.5px;}
-.area-frame .srk{ display:block;font-size:15px; color:#b3b3b3; line-height:30px; text-align:center; height:30px; border:1px solid #918b8a; border-radius:5px;width: 300px; }
+.area-frame{ height:2rem;margin:20px 10px 0px 10px;}
+.area-frame .srk{ display:block;font-size:15px; color:#b3b3b3; line-height:2rem; text-align:center; height:2rem; border:1px solid #918b8a; border-radius:5px;width: 100%; }
 h6{text-align:center; margin-top: 15px; font-size:15px;}
 
-.area-frame1{ width:300px;margin:16px 0 0px 36.5px; border:1px solid #918b8a; border-radius:5px;height: 380px;}
+.area-frame1{margin:16px 10px 0px 10px; border:1px solid #918b8a; border-radius:5px;
+	height: 380px;}
 .area-frame1 .current{ background-color:#009a3e;}
 
 
 
 
-.rectangle1{ width:270px; height: 40px; border: 1px solid #009a3e; border-radius: 8px; background-color: #efefef;
-margin: 10px 15px;}
+.rectangle1{height:2.5rem; border: 1px solid #009a3e; border-radius: 8px; 
+	background-color: #efefef;
+   margin: 10px 15px;}
 .rectangle1 img{ float: left;padding:7.5px 33px 0px 15px;}
 .rectangle1 h1{ float:left;color: #595757; font-size: 16px; line-height:40px;}
