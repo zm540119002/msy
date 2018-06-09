@@ -1,10 +1,9 @@
 <?php
 namespace app\factory\controller;
-use common\controller\UserBase;
-use think\facade\Session;
-/**用户信息验证控制器基类
+
+/**供应商验证控制器基类
  */
-class FactoryBase extends UserBase{
+class FactoryBase extends \common\controller\UserBase{
     protected $factory = null;
 
     public function __construct(){
