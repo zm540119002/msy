@@ -56,10 +56,5 @@ class Store extends FactoryBase
             return $model->edit($this -> factory['id']);
         }
     }
-
-   
-
-
-
-   
+    
 }
