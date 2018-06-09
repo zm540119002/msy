@@ -63,5 +63,11 @@ return [
                 ['id'=>112,'name'=>'增加促销','display'=>1,'controller'=>'Promotion','action'=>'edit',],
             ],
         ],
+        'order'=>[
+            'id'=>120,'name'=>'订单管理','type'=>2,
+            'sub_menu' => [
+                ['id'=>121,'name'=>'打单','display'=>1,'controller'=>'Order','action'=>'index',],
+            ]
+        ]
     ],
 ];
