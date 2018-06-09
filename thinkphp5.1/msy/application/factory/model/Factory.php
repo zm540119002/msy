@@ -63,7 +63,7 @@ class Factory extends Model {
 
 	/**查询多条数据
 	 */
-	public function selectFactory($where=[],$field=['*'],$join=[],$order=[],$limit=''){
+	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'f.status' => 0,
 		);
@@ -76,8 +76,8 @@ class Factory extends Model {
 			->join(array_merge($_join,$join))
 			->order($order)
 			->limit($limit)
-			->select()->toArray();
-		return empty($list)?[]:$list;
+			->select();
+		return count($list)?$list->toArray():[];
 	}
 
 	/**查找一条数据
@@ -93,7 +93,7 @@ class Factory extends Model {
 			->field($field)
 			->join(array_merge($_join,$join))
 			->where($where)
-			->find()->toArray();
-		return empty($info)?[]:$info;
+			->find();
+		return $info?$info->toArray():[];
 	}
 }

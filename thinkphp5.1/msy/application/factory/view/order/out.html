@@ -4,7 +4,7 @@
 		dl{background: white; margin-bottom: 5px; padding:10px; border-radius:10px;}
 		.print{background:red; color:white; width:30%; text-align: center;
 			padding:3px; font-weight: bold; border-radius:5px;}
-
+		#order_status{background: #ffc6cd;text-align: center;cursor: pointer;}
 	</style>
 {/block}
 {block name="content"}
@@ -24,7 +24,7 @@
 		</div>
 	</section>
 	<section class="specific_type bottomLine">
-		<div class="columns_flex f20">
+		<div class="columns_flex f20 l-r-sides">
 			<a href="{:url('Order/beforeSale')}">售前</a>
 			<a href="{:url('Order/index')}" class="record">打单</a>
 			<a href="{:url('Order/out')}">出仓</a>
@@ -35,13 +35,13 @@
 	</section>
 	<section class="f24 account-content-wrapper ">
 		<div class="account-top">
-			<dl>
+			<!--<dl>
 				<dt class="role-label"><strong>备货出仓自动检测模式</strong></dt>
 				<dd>
 					<p style="text-align: center"><img src="/static/factory/img/scan.jpg"  /></p>
 				</dd>
 			</dl>
-			<hr />
+			<hr />-->
 			<dl>
 				<dt class="role-label"><strong>备货出仓人工检测模式</strong></dt>
 				<dd>
@@ -49,13 +49,15 @@
 						<div class="top_bar columns_flex">
 							<div class="each_column top_search_module">
 								<input type="button" class="search_btn"/>
-								<input type="text" class="order" placeholder="手动输入订单号"/>
+								<input type="text" id="order" placeholder="手动输入订单号"/>
 							</div>
 						</div>
 					</section>
 				</dd>
 			</dl>
-
+			<div id="order_detail"></div>
+			<div id="data_all" data_order_id="" data_order_sn="" data_status_unpack="" ></div>
+			<div id="order_status"></div>
 		</div>
 	</section>
 </article>
@@ -70,30 +72,105 @@
 
 <script type="text/javascript">
 $(function () {
-	$('.record').click(function () {
-		//alert(1);
-	});
-
-	$(".order").keydown(function(event) {
+	$("#order").keydown(function(event) {
 		if (event.keyCode == 13) {
+			var order_sn = $.trim( $('#order').val() );
+			if(!order_sn){
+				alert('请输入订单号');
+				return false;
+			}
 			$.ajax({
-				type: "POST",
-				url: "{:url('Order/getDetail')}",
-				data: {type:true, order_id:'123456'},
-				dataType: 'html',
-				success: function(msg){
-					layer.open({
-						type: 1,
-						title: '订单管理',
-						area: '80%',
-						closeBtn: 2,
-						shadeClose: true, //点击遮罩关闭
-						content: msg
-					});
+				type: 'POST',
+				url: "{:url('Order/isOwnOrder')}",
+				data:{order_sn:order_sn},
+				dataType:'json',
+				success:function(e){
+					if(e.status==1){
+						$('#data_all').attr('data_order_id', e.order_id);
+						$('#data_all').attr('data_order_sn', e.order_sn);
+						$('#data_all').attr('data_status_unpack', e.status_unpack);
+						status.getStatus(e.status_unpack);
+						$('#order_detail').empty().append(e.data);
+					}else{
+						alert(e.info);
+					}
+
 				}
 			});
 		}
-	})
+	});
+
+	var status = {
+		order_status:$('#order_status'),
+		order_detail:$('#order_detail'),
+		data_all:$('#data_all'),
+		getStatus:function(status_value){
+			if(!this.order_detail){
+				this.order_status.empty();
+				return false;
+			}
+			switch(status_value){
+				case 1:
+					var html ="<span id='reset_pick'>重新拣货</span>&nbsp;<span id='pick'>仓库拣货</span>";
+					this.order_status.empty().append(html).on('click', '#pick', function(){
+						status.data_all.empty().append("<span id='aa'>手动拣货&nbsp;&nbsp;</span></span><input id='compare' type='text' placeholder='商品条码'>").on(
+								'click', '#aa', function(){
+									alert($('#compare').val());
+								}
+						)
+						//alert(status.data_all.attr('data_order_id'));
+						//status.setStatusUnpack(2);
+					}).on('click', '#reset_pick', function(){
+						alert(33);
+					});
+					break;
+				case 2:
+					this.order_status.empty().text('填写物流单号');
+					break;
+				case 3:
+					this.order_status.empty().text('交付发货');
+					break;
+				case 4:
+					this.order_status.empty().text('已发货');
+					break;
+				default:
+					this.order_status.empty();break;
+			}
+		},
+		setExpress:function(order_id, express_id, express){
+			$.ajax({ //填写物流单号
+				url: "{:url('Order/setExpress')}",
+				type: 'POST',
+				data:{ order_id:order_id, express_id:express_id, express:express},
+				dataType: 'json',
+				success: function(e){
+					if(e.status==1){
+						alert(e.info);
+						return false;
+					}
+					alert(e.info);
+				}
+			});
+		},
+		pick:function(){
+			alert('动态变动sd ');
+		},
+		setStatusUnpack:function(status_unpack){
+			$.ajax({ //设置订单状态
+				url: "{:url('Order/setStatusUnpack')}",
+				type: 'POST',
+				data: {status_unpack:status_unpack, order_id:148},
+				dataType: 'json',
+				success: function(e){
+					if(e.status==1){
+						status.getStatus(e.status_unpack);
+					}
+					alert(e.info);
+				}
+			});
+		}
+	}
+
 });
 </script>
 {/block}

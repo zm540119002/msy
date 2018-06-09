@@ -6,58 +6,51 @@ use think\facade\Session;
  */
 class FactoryBase extends UserBase{
     protected $factory = null;
-    
+
     public function __construct(){
         parent::__construct();
-        $model = new \app\factory\model\UserFactory();
-        $where = [
-            ['user_id','=',$this->user['id']],
-        ];
-        $factoryCount = $model->where($where)->count('id');
-        if($factoryCount > 1){
-            $this->success('你有多家厂商入住，请选择一家', 'Index/index');
-        }elseif ($factoryCount == 1){
-            $factoryInfo = $model->getInfo($where,$file,$join);
-        }elseif (!$factoryCount){
-            $this->success('没有产商入住，请入住', 'Deploy/register');
+        \common\cache\Factory::remove($this->user['id']);
+        $factoryList = \common\cache\Factory::get($this->user['id']);
+        $this->assign('factoryList',$factoryList);
+        $factoryCount = count($factoryList);
+        if ($factoryCount==0){//没有入住供应商
+            $this->error('没有入住供应商，请入住', 'Deploy/register');
+        }elseif($factoryCount==1){//入住一家供应商
+            $this->factory = $factoryList[0];
+        }elseif($factoryCount>1){//入住多家供应商
+            foreach ($factoryList as $factory){
+                if($factory['is_default']){//默认供应商
+                    $this->factory = $factory;
+                    break;
+                }
+            }
         }
-        if(empty($factoryInfo)){
-            $factoryInfo = $this ->_getFactory();
+        if(!$this->factory){
+            //获取用户-工厂-角色-权限节点
+            $nodeList = getUserFactoryRoleNode($this->user['id'],$this->factory['id']);
+            $this->assign('nodeIds',array_column($nodeList,'node_id'));
         }
-        $this -> factory =  $factoryInfo;
+        $this->assign('factory',$this->factory);
     }
 
-    private function _getFactory(){
-        $model = new \app\factory\model\UserFactory();
-        $uid = $this -> user['id'];
+    //设置默认供应商
+    public function setDefaultFactory(){
+        $modelUserFactory = new \app\factory\model\UserFactory();
+        return $modelUserFactory->setDefaultFactory($this->user['id']);
+    }
+
+    //获取厂家详细信息
+    public function getFactoryInfo(){
+        $model = new \app\factory\model\Factory();
         $where = [
-            ['user_id','=',$uid],
+            ['f.id','=',$this->factory['id']],
         ];
-        $factoryCount = $model -> where($where)->count('id');
         $file = [
-            'u.id,u.factory_id,u.is_default,f.name'
+            'f.id,f.name,r.logo_img'
         ];
         $join =[
-            ['factory f','f.id = u.factory_id'],
+            ['record r','r.factory_id = f.id',],
         ];
-        if($factoryCount > 1){
-            $_where = [
-                ['u.user_id','=',$uid],
-                ['u.is_default','=',1],
-            ];
-            $factoryInfo = $model -> getInfo($_where,$file,$join);
-            if(!$factoryInfo){
-                $this->success('你有多家厂商入住，请选择一家', 'Index/index');
-            }
-        }elseif ($factoryCount == 1){
-            $where_new = [
-                ['u.user_id','=',$uid],
-            ];
-            $factoryInfo = $model -> getInfo($where_new,$file,$join);
-        }elseif (!$factoryCount){
-            $this->success('没有产商入住，请入住', 'Deploy/register');
-        }
-        Session::set('factory',$factoryInfo);
-        return  Session::get('factory');
+        return $model->getInfo($where,$file,$join);
     }
 }

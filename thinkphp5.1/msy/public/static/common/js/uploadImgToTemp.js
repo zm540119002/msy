@@ -22,8 +22,8 @@ $(function(){
             var imgUrl=e.target.result;
             $(obj).addClass('active');
             var postData = {img: e.target.result};
-            postData.imgWidth = 145;
-            postData.imgHeight = 100;
+            // postData.imgWidth = 145;
+            // postData.imgHeight = 100;
             $(obj).find('img').attr('src',imgUrl);
             $(obj).find('.img').val(imgUrl);
             //提交

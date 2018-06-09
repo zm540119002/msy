@@ -9,6 +9,19 @@ class Account extends \think\Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
+	/**检查账号
+	 */
+	public function checkExist($userId,$factoryId){
+		$modelUserFactory = new \app\factory\model\UserFactory();
+		$where = [
+			['user_id','=',$userId],
+			['factory_id','=',$factoryId],
+			['status','<>',2],
+		];
+		$res = $modelUserFactory->where($where)->count('id');
+		return $res?true:false;
+	}
+
 	//编辑
 	public function edit($factoryId){
 		if(!intval($factoryId)){
@@ -22,112 +35,193 @@ class Account extends \think\Model {
 		}
 		//开启事务
 		$this->startTrans();
-		//修改用户
-		if($postData['id'] && intval($postData['id'])){
-			$res = $this->isUpdate(true)->save($postData);
-			if($res===false){
-				$this->rollback();//回滚事务
-				return errorMsg('更新失败',$this->getError());
-			}
-			$roles = $this->roles();
-			return $roles;
-		}else{//新增用户
-			$postData['factory_id'] = $factoryId;
-			unset($postData['id']);
+		//新增用户
+		unset($postData['id']);
+		$postData['factory_id'] = $factoryId;
+		//检查手机号码是否在平台注册
+		$modelUserCenter = new \common\model\UserCenter();
+		$result = $modelUserCenter->registerCheck($postData['mobile_phone']);
+		if($result){
+			$postData['id'] = $result['id'];
+		}else{
 			$res = $this->isUpdate(false)->save($postData);
 			if($res===false){
 				$this->rollback();//回滚事务
 				return errorMsg('新增失败',$this->getError());
 			}
 			$postData['id'] = $this->getAttr('id');
+		}
+		//检查用户是否是本供应商的员工
+		if($this->checkExist($postData['id'],$factoryId)){
+			return errorMsg('该手机号码已经是本供应商的员工！');
+		}
+		$user = $this->get($postData['id']);
+		if(!empty($user)){
 			//新增用户工厂
-			$user = $this->get($postData['id']);
-			$userFactory = $user->userFactory();
-			if(empty($userFactory)){
-				$data = [
-					'user_id' => $postData['id'],
-					'factory_id' => $factoryId,
-					'type' => 2,
-				];
-				$userFactory->save($data);
+			$data = [
+				'type' => 2,
+			];
+			$res = $user->factories()->attach($factoryId,$data);
+			if(!count($res)){
+				$this->rollback();//回滚事务
+				return errorMsg('新增失败');
 			}
 			//新增用户工厂角色
 			if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
-				foreach ($postData['userFactoryRoleIds'] as $key){
-					$data = [];
-					$data[] = [
-						'user_id' => $postData['id'],
+				foreach ($postData['userFactoryRoleIds'] as $val){
+					$data = [
 						'factory_id' => $factoryId,
-						'role_id' => $key,
 					];
+					$res = $user->roles()->attach($val,$data);
+					if(!count($res)){
+						$this->rollback();//回滚事务
+						return errorMsg('新增失败');
+					}
 				}
-				$user->UserFactoryRole()->saveAll($data);
 			}
 			//新增用户工厂组织
 			if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
 				$data = [
-					'user_id' => $postData['id'],
 					'factory_id' => $factoryId,
-					'organize_id' => $postData['userFactoryOrganizeId'],
 				];
-				$user->userFactoryOrganize()->save($data);
+				$res = $user->organizes()->attach($postData['userFactoryOrganizeId'],$data);
+				if(!count($res)){
+					$this->rollback();//回滚事务
+					return errorMsg('新增失败');
+				}
 			}
 		}
+		$postData['userFactoryStatus'] = 0;
 		$this->commit();//提交事务
 		return successMsg('成功！',$postData);
 	}
 
-	//用户-工厂-关系表
-	public function userFactory(){
-		return $this->hasMany('UserFactory','factory_id','id');
+	//用户-工厂-关联模型
+	public function factories(){
+		return $this->belongsToMany('Factory','UserFactory','factory_id','user_id');
 	}
 
-	//用户-工厂-角色-关系表
-	public function userFactoryRole(){
-		return $this->hasMany('UserFactoryRole','role_id','id');
+	//用户-工厂角色-关联模型
+	public function roles(){
+		return $this->belongsToMany('Role','UserFactoryRole','role_id','user_id');
 	}
 
-	//用户-工厂-组织-关系表
-	public function userFactoryOrganize(){
-		return $this->hasOne('UserFactoryOrganize','id');
+	//用户-工厂-组织-关联模型
+	public function organizes(){
+		return $this->belongsToMany('Organize','UserFactoryOrganize','organize_id','user_id');
+	}
+
+	//详情
+	public function detail($factoryId){
+		if(!intval($factoryId)){
+			return errorMsg('参数错误');
+		}
+		//用户信息
+		$where = [
+			['status', '<>', 2],
+		];
+		$id = input('id');
+		if(!intval($id)){
+			return errorMsg('参数错误');
+		}
+		$where[] = ['id','=',$id];
+		$field = [
+			'u.id','u.name','u.nickname','u.mobile_phone',
+		];
+		$info = $this->alias('u')->field($field)->where($where)->find();
+		//用户工厂关系表
+		$modelUserFactory = new \app\factory\model\UserFactory();
+		$where = [
+			['status', '<>', 2],
+			['user_id', '=', $id],
+			['factory_id', '=', $factoryId],
+		];
+		$field = [
+			'status',
+		];
+		$userFactory = $modelUserFactory->field($field)->where($where)->find();
+		$userFactory = $userFactory->toArray();
+		$info['status'] = $userFactory['status'];
+		//用户工厂角色
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		$info['role'] = $modelUserFactoryRole->getRole($info['id'],$factoryId);
+		return $info?$info->toArray():[];
 	}
 
 	//获取列表
 	public function getList($factoryId){
+		$modelUserFactory = new \app\factory\model\UserFactory();
 		$where = [
-			['status', '=', 0],
-			['factory_id', '=', $factoryId],
+			['u.status','<>',2],
+			['uf.status','<>',2],
+			['uf.factory_id','=',$factoryId],
+			['uf.type','=',2],
 		];
-		$field = array(
-			'id','name',
-		);
-		$order = 'id';
-		$list = $this->where($where)->field($field)->order($order)->select()->toArray();
-		return empty($list)?[]:$list;
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['u.name|u.mobile_phone', 'like', '%'.trim($keyword).'%',];
+		}
+		$field = [
+			'u.id','u.name','u.nickname','u.mobile_phone','uf.status userFactoryStatus','uf.is_default',
+		];
+		$join = [
+			['common.user u','u.id = uf.user_id','LEFT'],
+		];
+		$list = $modelUserFactory->alias('uf')->where($where)->field($field)->join($join)->select();
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+		foreach ($list as &$value){
+			$value['role'] = $modelUserFactoryRole->getRole($value['id'],$factoryId);
+		}
+		return count($list)?$list:[];
 	}
 
-	//删除
-	public function del($factoryId,$tag=true){
-		if(!intval($factoryId)){
+	//用户角色编辑
+	public function editRole($factoryId){
+		$userId = input('post.userId');
+		if(!intval($userId) || !intval($factoryId)){
 			return errorMsg('参数错误');
 		}
+		$newRoleIds = input('post.ids/a');
+		if(empty($newRoleIds)){
+			return errorMsg('请选择角色');
+		}
+		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		$where = [
-			['status', '=', 0],
-			['factory_id', '=', $factoryId],
+			['status','=',0],
+			['user_id','=',$userId],
+			['factory_id','=',$factoryId],
 		];
-		$id = input('post.id');
-		if(!intval($id)){
-			return errorMsg('参数错误');
+		$userFactoryRole = $modelUserFactoryRole->getRole($userId,$factoryId);
+		$oldRoleIds = array_column($userFactoryRole,'role_id');
+		$modelUserFactoryRole->startTrans();//开启事务
+		//新增角色
+		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
+		if(!empty($addRoleIds)){
+			$data = [];
+			foreach ($addRoleIds as $value){
+				$data[] = [
+					'factory_id' => $factoryId,
+					'user_id' => $userId,
+					'role_id' => $value,
+				];
+			}
+			$res = $modelUserFactoryRole->saveAll($data);
+			if(false===$res){
+				$modelUserFactoryRole->rollback();//回滚事务
+				return errorMsg('失败');
+			}
 		}
-		$where[] = ['id', '=', $id];
-		if($tag){//标记删除
-			$result = $this->where($where)->setField('status',2);
-		}else{
-			$result = $this->where($where)->delete();
+		//删除角色
+		$delRoleIds = array_diff($oldRoleIds,$newRoleIds);
+		if(!empty($delRoleIds)){
+			$where[] = ['role_id','in',$delRoleIds];
+			$res = $modelUserFactoryRole->where($where)->delete();
+			if(!$res){
+				$modelUserFactoryRole->rollback();//回滚事务
+				return errorMsg('失败',$this->getError());
+			}
 		}
-		if(!$result){
-			return errorMsg('失败',$this->getError());
-		}
+		$modelUserFactoryRole->commit();//提交事务
 		return successMsg('成功');
 	}
 }

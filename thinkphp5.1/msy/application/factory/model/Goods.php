@@ -129,10 +129,7 @@ class Goods extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		if(!empty($list)){
-			$list = $list->toArray();
-		}
-		return $list;
+		return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -154,10 +151,7 @@ class Goods extends Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
-		if(!empty($info)){
-			$info = $info->toArray();
-		}
-		return $info;
+		return $info?$info->toArray():[];
 	}
 
 	/**
@@ -188,7 +182,7 @@ class Goods extends Model {
 	//设置库存
 	public function setInventory($storeId=''){
 		$data = input('post.');
-		if(empty($data['id'] || (int)$data['id'])){
+		if(empty($data['id'] || !(int)$data['id'])){
 			return errorMsg("参数错误");
 		}
 		$where = [

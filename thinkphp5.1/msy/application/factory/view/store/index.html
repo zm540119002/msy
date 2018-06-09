@@ -5,22 +5,9 @@
 {block name="title"}开店部署{/block}
 {block name="content"}
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar top-switch-bar columns_flex l-r-sides">
-			<div class="">
-				<a class="home">首页</a>
-			</div>
-			<div class="">
-				<img class="left" src="public_img/default/no_pic_40.jpg" alt="">
-				<span>爱国宾</span>
-			</div>
-			<div class="">
-				<a class="switch-account">切换供应商账号></a>
-			</div>
-		</div>
-	</section>
+	{include file="public/store_deploy_head" /}
 	<section class="specific_type bottomLine">
-		<div class="columns_flex f20">
+		<div class="columns_flex f20 l-r-sides">
 			<a href="{:url('Record/preview')}">企业档案</a>
 			<a href="{:url('Brand/manage')}">商标备案</a>
 			<a href="{:url('Store/manage')}">开店申请</a>
@@ -59,8 +46,7 @@
 			<dl>
 				<dt class="role-label">组别角色:</dt>
 				<dd>
-					<p>设定企业的组织架构（仅设置与店铺运营和订单管理有关的部门人员），设定组别角色的默认权限；每当新开一家店铺后应及时更新组别角色对该店铺的经营管理权限。
-</p>
+					<p>设定企业的组织架构（仅设置与店铺运营和订单管理有关的部门人员），设定组别角色的默认权限；每当新开一家店铺后应及时更新组别角色对该店铺的经营管理权限。</p>
 				</dd>
 			</dl>
 			<dl>

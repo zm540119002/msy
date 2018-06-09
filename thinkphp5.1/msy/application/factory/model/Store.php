@@ -70,10 +70,7 @@ class Store extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		if(!empty($list)){
-			$list = $list->toArray();
-		}
-		return $list;
+	    return count($list)?$list->toArray():[];
 	}
 
 	/**
@@ -95,10 +92,7 @@ class Store extends Model {
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
-		if(!empty($info)){
-			$info = $info ->toArray();
-		}
-		return $info;
+		return $info?$info->toArray():[];
 	}
 
 	//设置默认店铺
@@ -147,7 +141,7 @@ class Store extends Model {
 			['s.factory_id','=',$factoryId],
 			['s.store_type','=',2],
 		];
-		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
+		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,b.name,b.brand_img as img'];
 		$join =[
 			['brand b','b.id = s.foreign_id'],
 		];
@@ -177,5 +171,21 @@ class Store extends Model {
 			$storeInfo = $this -> getInfo($where,$file,$join);
 		}
 		return $storeInfo;
+	}
+
+	/**检查店铺是否属于此厂商
+	 */
+	public function checkStoreExist($id,$factoryId){
+		$where = [
+			['id','=',$id],
+			['factory_id','=',$factoryId]
+		];
+		$count = $this->where($where)->count();
+		if($count){
+			return true;
+		}else{
+			return false;
+		}
+
 	}
 }

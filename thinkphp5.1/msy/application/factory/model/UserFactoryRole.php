@@ -9,7 +9,26 @@ class UserFactoryRole extends \think\model\Pivot {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 
-	public function users(){
-		return $this->belongsToMany('\common\model\User');
+	/**获取用户工厂角色
+	 */
+	public function getRole($userId,$factoryId){
+		$where = [
+			['ufr.status','=',0],
+			['ufr.user_id','=',$userId],
+			['ufr.factory_id','=',$factoryId],
+			['r.status','=',0],
+		];
+		$field = [
+			'r.id','r.name',
+		];
+		$join = [
+			['role r','r.id = ufr.role_id','LEFT'],
+		];
+		$list = $this->alias('ufr')
+			->where($where)
+			->field($field)
+			->join($join)
+			->select();
+		return count($list)?$list->toArray():[];
 	}
 }

@@ -34,7 +34,7 @@ class RoleNode extends \think\Model {
 			if(!empty($originNodeIds)){
 				$delNodeIds = array_diff($originNodeIds,$postData['nodeIds']);
 				$delNodeIds = array_values($delNodeIds);
-				if(!empty($delNodeIds) && !$this->batchDelByNodeIds($delNodeIds)){
+				if(!empty($delNodeIds) && !$this->delByNodeIds($delNodeIds)){
 					return errorMsg('删除失败',$this->getError());
 				}
 			}
@@ -43,7 +43,7 @@ class RoleNode extends \think\Model {
 	}
 
 	//批量删除
-	public function batchDelByNodeIds($nodeIds){
+	public function delByNodeIds($nodeIds){
 		$where = [
 			['node_id', 'in', $nodeIds],
 		];
@@ -51,17 +51,20 @@ class RoleNode extends \think\Model {
 	}
 
 	//获取列表
-	public function getList(){
+	public function getList($roleId=[]){
 		$postData = input('post.');
 		$where = [];
 		if(is_array($postData['roleId']) && !empty($postData['roleId'])){
 			$where[] = ['role_id', 'in', $postData['roleId']];
 		}elseif(!is_array($postData['roleId']) && intval($postData['roleId'])){
 			$where[] = ['role_id', '=', $postData['roleId']];
-		}else{
-			return errorMsg('参数错误');
 		}
-		$list = $this->where($where)->select()->toArray();
-		return $list;
+		if(is_array($roleId) && !empty($roleId)){
+			$where[] = ['role_id', 'in', $roleId];
+		}elseif(!is_array($roleId) && intval($roleId)){
+			$where[] = ['role_id', '=', $roleId];
+		}
+		$list = $this->where($where)->select();
+		return count($list)?$list->toArray():[];
 	}
 }

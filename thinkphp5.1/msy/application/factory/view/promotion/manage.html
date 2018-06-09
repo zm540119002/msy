@@ -13,39 +13,14 @@
 </section>
 
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar columns_flex l-r-sides">
-			<div class="">
-				<a class="home">首页</a>
-			</div>
-			<div class="">
-				<img src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
-				<span>爱国宾</span>
-			</div>
-			<div class="">
-				<a class="switch-account">切换我的店铺</a>
-			</div>
-		</div>
-	</section>
-	<section class="columns_flex l-r-sides">
-		<div>
-			<img class="left" src="http://msy.new.com/static/common/img/default/no_pic_40.jpg" alt="">
-			<div>
-				<p><span>某某</span>官方旗舰店</p>
-				<p>B2B采购商城 <span>供应商自营</span></p>
-			</div>
-		</div>
-		<div>
-			<a href="" class="personal_center">我的</a>
-			<a href="" class="my-store">我的店铺</a>
-		</div>
-	</section>
+	<!--店铺运营头部-->
+	{include file="public/store_operation_head" /}
 	<section class="bottomLine">
 		<nav class="columns_flex channel_nav manufacturer_nav">
 			<a href="">
 				店铺提醒
 			</a>
-			<a href="">
+			<a href="{:url('Goods/manage')}">
 				店铺管理
 			</a>
 			<a href=""  class="current">
@@ -106,18 +81,21 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<!--<script type="text/javascript" src="factory_js/promotion.js"></script>-->
 <script type="text/javascript">
 	$(function () {
-		//初始化
-		var activityStatus=$('.category-tab li.current a').data('activity-status');
-		var config = {
-			activityStatus:activityStatus,//未结束
-		};
-		currentPage=1;
-		requestEnd=false;
-		var url = module+'promotion/getList';
-		getPage(url,config);
+		//没有默认店铺
+		var notDefaultStore = "{$notDefaultStore|default=0}";
+		if(notDefaultStore == 0){
+			//初始化
+			var activityStatus=$('.category-tab li.current a').data('activity-status');
+			var config = {
+				activityStatus:activityStatus,//未结束
+			};
+			currentPage=1;
+			requestEnd=false;
+			var url = module+'promotion/getList';
+			getPage(url,config);
+		}
 
 		//点击新建促销活动
 		$('body').on('click','.addSalesActivity',function () {

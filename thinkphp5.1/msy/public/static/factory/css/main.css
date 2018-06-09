@@ -82,21 +82,29 @@
     margin:0.12rem 0.15rem 0 0;
 }
 .vendorInfoList{
-    height:3rem;
-    padding:0.15rem;
+    height:8rem;
+    padding:0.15rem 0.15rem 0 .15rem;
     overflow:hidden;
     overflow-y:scroll;
 }
 .vendorInfoList li{
+    position:relative;
     margin:0 0 0.15rem 0;
-    padding:0.15rem 0;
+    padding:0.15rem 0 .15rem .10rem;
     border:1px solid #ff7aab;
     border-radius:4px;
     color:#ff7aab;
+    text-align: center;
 }
 .vendorInfoList li.current{
     background: #ff7aab;
     color:#fff;
+}
+.vendorInfoList li input{
+    display: inline-block;
+    width:15px;
+    height:15px;
+    -webkit-appearance: radio;
 }
 .add-type-tag {
     display: block;
@@ -450,11 +458,14 @@
 }
 .account-role-list li
 ,.group-list li{
-    padding:.10rem 0 .10rem 1rem;
+    padding:7px 0 0 1rem;
     margin:0 0 18px 0;
     background:url('../../common/img/icons/group-icons.png') no-repeat 0 center;
     border:1px solid #009a3e;
     border-radius:5px;
+}
+.account-role-list li.current {
+    background: #009A3E;
 }
 .rolePower-content{
     position:relative;
@@ -534,12 +545,22 @@
 .account-edit-btn a span.del-icon{
     background-position:0 -30px;
 }
+.account-edit-btn a activate.del-icon{
+    background-position:0 -30px;
+}
+.account-header{
+    padding:10px 0 0;
+}
 .account-header .r-t,
-.account-info .r-t{
+.account-info .r-t,
+.accountInfoLayer .r-t{
     display: inline-block;
-    width:64px;
+    width:72px;
     text-align: right;
     margin:0 10px 0 0;
+}
+.accountInfoLayer .layui-m-layercont{
+    padding:10px;
 }
 .accountInfoLayer .account-info{
     padding:15px;
@@ -982,9 +1003,18 @@ transparent;
 .backups-content{
     padding:.20rem .15rem;
 }
+.func-icons{
+    display: block;
+    width:25px;
+    height:25px;
+    margin:0 auto;
+    background: url(../../common/img/icons/copy-icons.png) no-repeat;
+    background-size:25px 25px;
+}
 .backups-content .gr{
     border:1px solid #009A3E;
     border-radius:5px;
+    color:#009a3e;
 }
 .backups-right{
     margin:0 0 0 .5rem;
@@ -1020,7 +1050,11 @@ transparent;
     max-width:50%;
 }
 .goods-database-nav{
-    margin:20px 0;
+    /*margin:20px 0 10px;*/
+    /*padding:20px 0 20px 0;*/
+    height:60px;
+    line-height:60px;
+    border-bottom:1px solid #d9d9d9;
 }
 .goods-database-nav li{
     width:50%;
@@ -1034,7 +1068,7 @@ transparent;
     position: absolute;
     z-index: 1;
     left: 86%;
-    bottom: -5px;
+    bottom: 15px;
     display: inline-block;
     height: 30px;
     width: 80px;
@@ -1045,9 +1079,14 @@ transparent;
     transition: all 0.5s;
     margin-left: -15px;
 }
+.databaseLayer .scroll-list-content{
+    height:300px;
+    overflow-y:scroll;
+}
 .goods-database-content,
 .goods-store-content{
-    margin:0 15px;
+    padding:0 3px;
+    /*margin:0 12px;*/
 }
 .goods-database-content li,
 .goods-store-content li{
@@ -1056,6 +1095,7 @@ transparent;
     border:1px solid #009a3e;
     border-radius:5px;
     overflow:hidden;
+    box-sizing:border-box;
 }
 .goods-database-content li.current,
 .goods-store-content li.current{
@@ -1068,3 +1108,10 @@ transparent;
     color:#E60012;
 }
 .database-item.hide{display: none;}
+.goods-store-content li div:first-child,
+.goods-database-content li img{
+    width:20%;
+}
+.goods-store-content li img{
+    width:100%;
+}

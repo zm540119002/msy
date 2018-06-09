@@ -21,62 +21,24 @@
 	</section>
 </article>
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar columns_flex l-r-sides">
-			<div class="">
-				<a class="home">首页</a>
-			</div>
-			<div class="">
-				<img src="public_img/default/no_pic_40.jpg" alt="">
-				<span>爱国宾</span>
-			</div>
-			<div class="">
-				<a class="switch-account">切换供应商账号</a>
-			</div>
-		</div>
-	</section>
+	{include file="public/store_deploy_head" /}
 	<section class="specific_type bottomLine">
-		<div class="columns_flex f20">
-			<a >企业档案</a>
-			<a>商标备案</a>
-			<a>开店申请</a>
+		<div class="columns_flex f20 l-r-sides">
+			<a href="{:url('Record/preview')}">企业档案</a>
+			<a href="{:url('Brand/manage')}">商标备案</a>
+			<a href="{:url('Store/manage')}">开店申请</a>
 			<a href="{:url('Organize/index')}">组别角色</a>
 			<a href="{:url('Account/index')}" class="column_type current">账号授权</a>
 		</div>
 	</section>
 	<section class="f24 account-content-wrapper ">
 		<div class="search-bar columns_flex">
-			<input type="text" class="search-text" name=""  placeholder="输入姓名、手机号码查询账号">
+			<input type="text" class="search-text" name="keyword"  placeholder="输入姓名、手机号码查询账号">
 			<input type="button" class="search-btn">
 		</div>
 		<div class="account-list-content">
 			<span class="title">供应商员工登陆账号列表</span>
-			<span class="title">暂无数据</span>
-			<span class="title">搜索结果</span>
-			<span class="title">查无此人</span>
-			<ul class="account-list ">
-				<li>
-					<div>
-						<a href="">
-							<div>
-								<span class="list-label">姓名</span>
-								<span>XXXXXX</span>
-							</div>
-							<div>
-								<span class="list-label">手机号码</span>
-								<span>13430363587</span>
-							</div>
-							<div>
-								<span class="list-label">角色类型</span>
-								<span>管理员</span>
-							</div>
-						</a>
-					</div>
-					<div class="account-status">
-						<span>账号正常</span>
-					</div>
-				</li>
-			</ul>
+			<ul class="account-list"></ul>
 		</div>
 	</section>
 	<a href="javascript:void(0);" class="add-account foot-btn">新建供应商员工登陆账户</a>
@@ -105,12 +67,10 @@
 </div>
 {/block}
 {block name="common"}
-<!--{include file="template/footer_menu_msy.html" /}-->
-{include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="factory_js/organize.js"></script>
+<script type="text/javascript" src="factory_js/account.js"></script>
 <script type="text/javascript">
 	var setOrganize;
 	$(function(){
@@ -120,8 +80,15 @@
 		var userFactoryRoleIds = [];
 		//定义新增组织
 		var userFactoryOrganizeId = 0;
+		//获取组织列表
 		getOrganizeList();
+		//获取员工账号列表
+		getAccountList();
 
+		//查询
+		$('body').on('click','.search-btn',function(){
+			getAccountList();
+		});
 		//创建供应商员工登录账号
 		var addLoginAccount=$('#addLoginAccount').html();
 		$('body').on('click','.add-account',function(){
@@ -145,28 +112,26 @@
 					var content = '';
 					postData.name = $('.addCcountLayer').find('[name=name]').val();
 					postData.mobile_phone = $('.addCcountLayer').find('[name=mobile_phone]').val();
-//					postData.id = 65;
 					if(!postData.name){
-//						content = '请输入姓名';
+						content = '请输入姓名';
 					}else if(!isMobilePhone(postData.mobile_phone)){
 						content = '请输入正确的手机号码';
 					}else if(!userFactoryRoleIds.length){
-//						content = '请设置角色';
+						content = '请设置角色';
 					}else if(!userFactoryOrganizeId){
-//						content = '请设置组织';
+						content = '请设置组织';
 					}
 					if(content){
 						dialog.error(content);
+						return false;
 					}
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
 					$.post(action,postData,function(data){
-						console.log(data);
-						return ;
 						if(data.status==0){
 							dialog.error(data.info);
 						}else{
-							$('ul.account-list ').append(data);
+							$('ul.account-list').prepend(data);
 							layer.close(index);
 						}
 					});

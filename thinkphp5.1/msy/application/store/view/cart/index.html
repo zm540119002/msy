@@ -26,6 +26,7 @@
             <td>产品图片</td>
             <td>操作</td>
         </tr>
+        <tr><td colspan="4" style="border: red solid 1px;">错误信息：{$error_info}</td></tr>
         {foreach $cartList as $k=>$v}
         <tr>
             <td>{$v.store_id}</td>
@@ -33,7 +34,10 @@
                 <p>{$v.goods_id}----{$v.name}</p>
             </td>
             <td><img src="public_uploads/{$v.thumb_img}" /></td>
-            <td>-&nbsp;{$v.number} &nbsp;+</td>
+            <td>
+                <p>-&nbsp;{$v.number} &nbsp;+</p>
+                <p class="delete_goods" data="{$v.goods_id}">删除</p>
+            </td>
         </tr>
         {/foreach}
     </table>
@@ -66,6 +70,19 @@
                 alert(e.info);
             }
         });
+    });
+    //删除购物车商品
+    $('.delete_goods').click(function(){
+        var goods_id = $(this).attr('data');
+        $.ajax({
+            url: "{:url('Cart/deleteGoods')}",
+            type: 'POST',
+            data:{goods_id:goods_id},
+            dataType:'json',
+            success:function(e){
+                alert(e.info);
+            }
+        })
     });
 
 </script>

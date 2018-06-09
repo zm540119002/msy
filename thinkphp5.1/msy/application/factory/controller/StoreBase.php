@@ -1,48 +1,51 @@
 <?php
 namespace app\factory\controller;
-use think\facade\Session;
-/**用户信息验证控制器基类
+/**
+ * Class StoreBase
+ * @package app\factory\controller
+ * 店铺基础类
  */
-class StoreBase extends FactoryBase{
+class StoreBase extends FactoryBase
+{
     protected $store = null;
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
-        $storeInfo = Session::get('store');;
-        if(empty($storeInfo)){
-            $storeInfo = $this ->getStore();
+        //获取厂商店铺详情列表
+        \common\cache\Store::removeList($this->factory['id']);
+        $list = \common\cache\Store::getList($this->factory['id']);
+        $count = count($list);
+        if ($count > 1) {
+            //多家店判断是否有默认店铺
+            $info = [];
+            foreach ($list as $val){
+                if($val['is_default']){
+                    $info = $val;
+                }
+            }
+            if (empty($info)) {
+                $this -> assign('notDefaultStore', 1);
+            }
+        } elseif ($count == 1){
+            $info = $list[0];
+        }elseif (!$count) {
+            $this -> success('没有店铺，请申请', 'Store/edit');
         }
-        $this->store =  $storeInfo;
+        $this -> assign('storeList', $list);
+        \common\cache\Store::remove($info['id']);
+        $this -> store = \common\cache\Store::get($info['id']);
+       
     }
 
-    public function getStore(){
+    //设置默认产商
+    public function setDefaultStore(){
         $model = new \app\factory\model\Store();
-        $where = [
-            ['factory_id','=',$this->factory['factory_id']],
-        ];
-        $storeCount = $model -> where($where)->count('id');
-        $file = [
-            's.id,s.factory_id,s.is_default,s.store_type,run_type,auth_status'
-        ];
-        if($storeCount > 1){
-            $_where = [
-                ['s.factory_id','=',$this->factory['factory_id']],
-                ['s.is_default','=',1],
-            ];
-            $storeInfo = $model -> getInfo($_where,$file);
-            if(!$storeInfo){
-                $this->success('你有多家店，请选择一家', 'Store/operaManageIndex');;
-            }
-        }elseif ($storeCount == 1){
-            $where_new = [
-                ['factory_id','=',$this->factory['factory_id']],
-            ];
-            $storeInfo = $model -> getInfo($where_new,$file);
+        return $model->setDefaultStore($this->factory['id']);
+    }
 
-        }elseif (!$storeCount){
-            $this->success('没有店铺，请申请', 'Store/deployIndex');
-        }
-        $storeInfo = array_merge($storeInfo,array('rand' => create_random_str(10, 0),));
-        Session::set('store',$storeInfo);
-        return  Session::get('store');
+    //获取店铺信息
+    public function getStoreInfo(){
+        $modelStore = new \app\factory\model\Store;
+        return $storeInfo = $modelStore -> getStoreInfo($this->store);
     }
 }

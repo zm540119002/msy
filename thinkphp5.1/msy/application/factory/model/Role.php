@@ -38,6 +38,9 @@ class Role extends \think\Model {
 
 	//获取列表
 	public function getList($factoryId){
+		if(!request()->isGet()){
+			return errorMsg(config('custom.not_get'));
+		}
 		$where = [
 			['status', '=', 0],
 			['factory_id', '=', $factoryId],
@@ -46,8 +49,8 @@ class Role extends \think\Model {
 			'id','name',
 		);
 		$order = 'id';
-		$list = $this->where($where)->field($field)->order($order)->select()->toArray();
-		return empty($list)?[]:$list;
+		$list = $this->where($where)->field($field)->order($order)->select();
+		return count($list)?$list->toArray():[];
 	}
 
 	//删除

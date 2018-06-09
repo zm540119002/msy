@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\model;
 
-class UserFactory extends \think\Model {
+class UserFactory extends \think\model\Pivot {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user_factory';
 	// 设置主键
@@ -10,66 +10,49 @@ class UserFactory extends \think\Model {
     protected $connection = 'db_config_factory';
 
 	//设置默认厂商
-	public function setDefaultFactory($uid=''){
+	public function setDefaultFactory($userId=0){
 		if(request()->isAjax()){
-			$id = (int)input('post.id');
-			if(!$id){
-				return errorMsg('参数错误');
-			}
-			$this->startTrans();
-			$data = array('is_default' => 1);
-			$result = $this->allowField(true)->save($data,['id' => $id,'user_id'=>$uid]);
-			if(false === $result){
-				$this->rollback();
-				return errorMsg('修改默认失败');
-			}
+			$this->startTrans();//开启事务
 			$where = [
-				['id','<>',$id],
-				['user_id','=',$uid],
+				['status','=',0],
+				['user_id','=',$userId],
 			];
-			$result = $this ->where($where)->setField('is_default',0);
+			$result = $this->where($where)->setField('is_default',0);
 			if(false === $result){
-				$this->rollback();
-				return errorMsg('修改失败');
+				$this->rollback();//回滚事务
+				return errorMsg('失败');
 			}
-			$this->commit();
-			return successMsg("已选择");
+			$factoryId = input('post.factoryId');
+			if(intval($factoryId)){
+				$where[] = ['factory_id','=',$factoryId];
+			}
+			$result = $this->where($where)->setField('is_default',1);
+			if(false === $result){
+				$this->rollback();//回滚事务
+				return errorMsg('失败');
+			}
+			$this->commit();//提交事务
+			return successMsg("成功");
 		}
 	}
 
-	/**查询多条数据
-	 */
-	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
-		$_where = array(
-			'u.status' => 0,
-		);
-		$_join = array(
-		);
-		$where = array_merge($_where, $where);
-		$list = $this->alias('u')
-			->where($where)
-			->field($field)
-			->join(array_merge($_join,$join))
-			->order($order)
-			->limit($limit)
-			->select()->toArray();
-		return empty($list)?[]:$list;
-	}
-
-	/**查找一条数据
-	 */
-	public function getInfo($where=[],$field=['*'],$join=[]){
-		$_where = array(
-			'u.status' => 0,
-		);
-		$where = array_merge($_where, $where);
-		$_join = array(
-		);
-		$info = $this->alias('u')
-			->field($field)
-			->join(array_merge($_join,$join))
-			->where($where)
-			->find()->toArray();
-		return empty($info)?[]:$info;
+	//删除
+	public function setStatus($factoryId){
+		if(!intval($factoryId)){
+			return errorMsg('参数错误');
+		}
+		$postData = input('post.');
+		if(!intval($postData['userId'])){
+			return errorMsg('参数错误');
+		}
+		$where = [
+			['user_id', '=', $postData['userId']],
+			['factory_id', '=', $factoryId],
+		];
+		$res = $this->where($where)->setField('status',$postData['status']);
+		if(!$res){
+			return errorMsg('失败',$this->getError());
+		}
+		return successMsg('成功');
 	}
 }

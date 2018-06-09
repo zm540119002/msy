@@ -3,45 +3,32 @@ namespace common\cache;
 
 class Factory{
     private static $_cache_key = 'cache_factory_';
-
     /**从缓存中获取信息
      */
-    public static function getByUserId($userId){
-        $factory = cache(self::$_cache_key.$userId);
-        if(!$factory){
-            $model = new \app\factory\model\UserFactory();
-            $file = [
-                'u.id,u.factory_id,u.is_default,f.name'
+    public static function get($userId){
+        $factoryList = cache(self::$_cache_key.$userId);
+        if(!$factoryList){
+            $modelUserFactory = new \app\factory\model\UserFactory();
+            $where = [
+                ['uf.status','=',0],
+                ['uf.user_id','=',$userId],
             ];
-            $join =[
-                ['factory f','f.id = u.factory_id'],
+            $field = [
+                'uf.is_default','f.id','f.name',
             ];
-            if($factoryCount > 1){
-                $_where = [
-                    ['u.user_id','=',$userId],
-                    ['u.is_default','=',1],
-                ];
-
-                if(!$factoryInfo){
-                    $this->success('你有多家厂商入住，请选择一家', 'Index/index');
-                }
-            }elseif ($factoryCount == 1){
-                $_where = [
-                    ['u.user_id','=',$userId],
-                ];
-                $factoryInfo = $model -> getInfo($where_new,$file,$join);
-            }elseif (!$factoryCount){
-                $this->success('没有产商入住，请入住', 'Deploy/register');
-            }
-            $factory = $model-> getInfo($_where,$file,$join);
-            cache(self::$_cache_key.$userId, $factory,config('custom.factory_cache_time'));
+            $join = [
+                ['factory f','uf.factory_id = f.id','left'],
+            ];
+            $factoryList = $modelUserFactory->alias('uf')->join($join)->where($where)->field($field)->select();
+            $factoryList = $factoryList->toArray();
         }
-        return $factory;
+        cache(self::$_cache_key.$userId, $factoryList,config('custom.factory_cache_time'));
+        return $factoryList;
     }
 
     /**删除缓存信息
      */
-    public static function removeByUserId($userId){
+    public static function remove($userId){
         cache(self::$_cache_key.$userId, null);
     }
 }

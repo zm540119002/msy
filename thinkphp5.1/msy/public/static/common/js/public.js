@@ -44,8 +44,8 @@
         var defaults={
             getFractionValue:1,
             mainCell:".star_img img",
-            star:'/Public/img/common/star.png',
-            starRed:'/Public/img/common/starred.png'
+            star:'public_img/star.png',
+            starRed:'public_img/starred.png'
         };
         if($.isNumeric(options)){
             defaults.getFractionValue=options;
@@ -382,10 +382,10 @@ function errorTipc(info,time){
 function isRolling(container){
     // 移动端touch重写
     var startX, startY;
-    var button=document.getElementById('formLogin');
-    button.addEventListener('click',function(){
-       $('input').focus();
-    });
+    // var button=document.getElementById('formLogin');
+    // button.addEventListener('click',function(){
+    //    $('input').focus();
+    // });
     container.on('touchstart', function(e){
         startX = e.originalEvent.touches[0].pageX;
         startY = e.originalEvent.touches[0].pageY;
