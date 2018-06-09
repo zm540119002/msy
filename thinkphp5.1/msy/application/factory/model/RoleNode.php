@@ -34,7 +34,7 @@ class RoleNode extends \think\Model {
 			if(!empty($originNodeIds)){
 				$delNodeIds = array_diff($originNodeIds,$postData['nodeIds']);
 				$delNodeIds = array_values($delNodeIds);
-				if(!empty($delNodeIds) && !$this->batchDelByNodeIds($delNodeIds)){
+				if(!empty($delNodeIds) && !$this->delByNodeIds($delNodeIds)){
 					return errorMsg('删除失败',$this->getError());
 				}
 			}
@@ -43,7 +43,7 @@ class RoleNode extends \think\Model {
 	}
 
 	//批量删除
-	public function batchDelByNodeIds($nodeIds){
+	public function delByNodeIds($nodeIds){
 		$where = [
 			['node_id', 'in', $nodeIds],
 		];

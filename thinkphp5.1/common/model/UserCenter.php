@@ -9,16 +9,38 @@ class UserCenter extends \think\Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
+	/**登录-账号检查
+	 */
+	public function loginCheck($mobilePhone){
+		$where = [
+			['mobile_phone','=',$mobilePhone],
+		];
+		$field = [
+			'status',
+		];
+		$returnData = '';
+		$user = $this->where($where)->field($field)->find();
+		if(!$user){
+			$returnData = '账号不存在';
+		}elseif($user['status']==1){
+			$returnData = '账号异常，请申诉';
+		}
+		return $returnData;
+	}
+
 	/**登录
 	 */
-	public function login(){
-		$data = input('post.');
+	public function login($data){
 		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
-		$validateUser = new \common\validate\User;
+		$validateUser = new \common\validate\User();
 		if($data['mobile_phone'] && $data['password']){//账号密码登录
 			if(!$validateUser->scene('login')->check($data)) {
 				return errorMsg($validateUser->getError());
+			}
+			$res = $this->registerCheck($data['mobile_phone']);
+			if($res){
+				return errorMsg($res);
 			}
 			return $this->_login($data['mobile_phone'],$data['password']);
 		}else{
@@ -26,17 +48,37 @@ class UserCenter extends \think\Model {
 		}
 	}
 
+	/**注册-账号检查
+	 */
+	public function registerCheck($mobilePhone){
+		$where = [
+			['mobile_phone','=',$mobilePhone],
+			['status','<>',2],
+		];
+		$field = [
+			'id','name','nickname',
+		];
+		$user = $this->where($where)->field($field)->find();
+		if(!$user){
+			return false;
+		}
+		return $user;
+	}
+
 	/**注册
 	 */
-	public function register(){
-		$data = input('post.');
+	public function register($data){
 		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
 		$data['captcha'] = trim($data['captcha']);
 		if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 			return errorMsg('验证码错误，请重新获取验证码！');
 		}
-		$validateUser = new \common\validate\User;
+		$res = $this->registerCheck($data['mobile_phone']);
+		if($res){
+			return errorMsg('手机号码已被注册，请更换手机号码，谢谢！');
+		}
+		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('register')->check($data)) {
 			return errorMsg($validateUser->getError());
 		}
@@ -48,30 +90,30 @@ class UserCenter extends \think\Model {
 
 	/**重置密码
 	 */
-	public function resetPassword(){
-		$postData = input('post.');
-		$validateUser = new \common\validate\User;
-		if(!$validateUser->scene('resetPassword')->check($postData)){
+	public function resetPassword($data){
+		$validateUser = new \common\validate\User();
+		if(!$validateUser->scene('resetPassword')->check($data)){
 			return errorMsg($validateUser->getError());
 		}
-		if($postData['mobile_phone'] && $postData['captcha']){
-			if(!$this->_checkCaptcha($postData['mobile_phone'],$postData['captcha'])){
+		if($data['mobile_phone'] && $data['captcha']){
+			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
 			}
-			if(!$this->_checkAccountExist($postData['mobile_phone'])){
-				return errorMsg('账号不存在！');
+			$res = $this->loginCheck($data['mobile_phone']);
+			if($res){
+				return errorMsg($res);
 			}
 			$saveData['salt'] = create_random_str(10,0);//盐值
-			$saveData['password'] = md5($saveData['salt'] . $postData['password']);//加密
+			$saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
 			$where = array(
 				'status' => 0,
-				'mobile_phone' => $postData['mobile_phone'],
+				'mobile_phone' => $data['mobile_phone'],
 			);
 			$response = $this->where($where)->update($saveData,$where);
 			if(!$response){
 				return errorMsg('重置失败！');
 			}
-			return $this->_login($postData['mobile_phone'],$postData['password']);
+			return $this->_login($data['mobile_phone'],$data['password']);
 		}
 		return errorMsg('资料缺失！');
 	}
@@ -79,9 +121,6 @@ class UserCenter extends \think\Model {
 	/**登录
 	 */
 	private function _login($mobilePhone,$password){
-		if(!$this->_checkAccountExist($mobilePhone)){
-			return errorMsg('账号不存在，请注册！');
-		}
 		$user = $this->_get($mobilePhone,$password);
 		if(!$user){
 			return errorMsg('密码错误,请重新输入！');
@@ -159,11 +198,5 @@ class UserCenter extends \think\Model {
 	private function _checkCaptcha($mobilePhone,$captcha){
 		return true;//上线后再验证
 		return session('captcha_' . $mobilePhone) == $captcha ;
-	}
-
-	/**检查账号是否存在
-	 */
-	private function _checkAccountExist($mobilePhone){
-		return count($this->where('mobile_phone','=',$mobilePhone)->select())?true:false;
 	}
 }

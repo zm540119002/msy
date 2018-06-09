@@ -9,6 +9,25 @@ class Account extends \think\Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
+	/**检查账号
+	 */
+	public function checkAccount($mobilePhone){
+		$where = [
+			['mobile_phone','=',$mobilePhone],
+		];
+		$field = [
+			'status',
+		];
+		$returnData = '';
+		$user = $this->where($where)->field($field)->find();
+		if(!$user){
+			$returnData = '账号不存在';
+		}elseif($user['status']==1){
+			$returnData = '账号异常，请申诉';
+		}
+		return $returnData;
+	}
+
 	//编辑
 	public function edit($factoryId){
 		if(!intval($factoryId)){
@@ -31,12 +50,19 @@ class Account extends \think\Model {
 		}else{//新增用户
 			$postData['factory_id'] = $factoryId;
 			unset($postData['id']);
-			$res = $this->isUpdate(false)->save($postData);
-			if($res===false){
-				$this->rollback();//回滚事务
-				return errorMsg('新增失败',$this->getError());
+			//先检查手机号码是否在平台注册
+			$modelUserCenter = new \common\model\UserCenter();
+			$result = $modelUserCenter->registerCheck($postData['mobile_phone']);
+			if($result){
+				$postData['id'] = $result['id'];
+			}else{
+				$res = $this->isUpdate(false)->save($postData);
+				if($res===false){
+					$this->rollback();//回滚事务
+					return errorMsg('新增失败',$this->getError());
+				}
+				$postData['id'] = $this->getAttr('id');
 			}
-			$postData['id'] = $this->getAttr('id');
 			$user = $this->get($postData['id']);
 			if(!empty($user)){
 				//新增用户工厂
