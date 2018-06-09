@@ -26,7 +26,7 @@
 			{else /}
 			{/notempty}
 			<div class="each_column">
-				<a href="javascript:void(0);" class="qr-code">商品二维码</a>
+				<a href="javascript:void(0);" class="qr-d-code">商品二维码</a>
 			</div>
 			<div class="each_column top_search_module">
 				<input type="button" class="search_btn"/>
@@ -219,7 +219,7 @@
 			}
 		});
 		//商品二维码图片
-		$('body').on('click','.qr-code',function(){
+		$('body').on('click','.qr-d-code',function(){
 			var postData = {};
             postData.goods_id = $('.goods_id').val();
             postData.goods_thumb_img = $('.swiper-slide').eq(0).find('img').attr('src');

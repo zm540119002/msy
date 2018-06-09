@@ -8,7 +8,7 @@ class User extends \think\Validate
         'mobile_phone'  => [
             'require',
             'mobile',
-            'unique' => '\common\model\User',
+//            'unique' => '\common\model\User',
         ],
         'captcha'  => [
             'regex' => '/^\d{6}$/',
