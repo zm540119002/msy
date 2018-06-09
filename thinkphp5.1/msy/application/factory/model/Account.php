@@ -162,7 +162,7 @@ class Account extends \think\Model {
 			$where[] = ['u.name|u.mobile_phone', 'like', '%'.trim($keyword).'%',];
 		}
 		$field = [
-			'u.id','u.name','u.nickname','u.mobile_phone','uf.status','uf.is_default',
+			'u.id','u.name','u.nickname','u.mobile_phone','uf.status userFactoryStatus','uf.is_default',
 		];
 		$join = [
 			['common.user u','u.id = uf.user_id','LEFT'],
