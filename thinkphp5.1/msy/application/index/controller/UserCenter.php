@@ -7,7 +7,8 @@ class UserCenter extends \think\Controller{
     public function login(){
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
-            return $modelUser->login();
+            $postData = input('post.');
+            return $modelUser->login($postData);
         } else {
             return $this->fetch();
         }
@@ -18,7 +19,8 @@ class UserCenter extends \think\Controller{
     public function register(){
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
-            return $modelUser->register();
+            $postData = input('post.');
+            return $modelUser->register($postData);
         }
     }
 
@@ -27,7 +29,8 @@ class UserCenter extends \think\Controller{
     public function forgetPassword(){
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
-            return $modelUser->resetPassword();
+            $postData = input('post.');
+            return $modelUser->resetPassword($postData);
         } else {
             return $this->fetch();
         }

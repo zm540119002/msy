@@ -43,9 +43,9 @@
         });
     }
     $(function () {
-        var onlyOneFactory = '{:$onlyOneFactory}';
+        var factory = '{:json_encode($factory)}';
         //如果是多供应商
-        if(!onlyOneFactory){
+        if(factory === 'null'){
             setDefaultFactory();
         }
         //选择效果
