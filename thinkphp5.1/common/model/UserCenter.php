@@ -38,7 +38,7 @@ class UserCenter extends \think\Model {
 			if(!$validateUser->scene('login')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
-			$res = $this->registerCheck($data['mobile_phone']);
+			$res = $this->loginCheck($data['mobile_phone']);
 			if($res){
 				return errorMsg($res);
 			}
@@ -76,7 +76,7 @@ class UserCenter extends \think\Model {
 		}
 		$res = $this->registerCheck($data['mobile_phone']);
 		if($res){
-			return errorMsg('手机号码已被注册，请更换手机号码，谢谢！');
+			return errorMsg('该手机号码已被注册，请更换手机号码，谢谢！');
 		}
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('register')->check($data)) {

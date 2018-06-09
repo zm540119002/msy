@@ -11,21 +11,15 @@ class Account extends \think\Model {
 
 	/**检查账号
 	 */
-	public function checkAccount($mobilePhone){
+	public function checkExist($userId,$factoryId){
+		$modelUserFactory = new \app\factory\model\UserFactory();
 		$where = [
-			['mobile_phone','=',$mobilePhone],
+			['user_id','=',$userId],
+			['factory_id','=',$factoryId],
+			['status','<>',2],
 		];
-		$field = [
-			'status',
-		];
-		$returnData = '';
-		$user = $this->where($where)->field($field)->find();
-		if(!$user){
-			$returnData = '账号不存在';
-		}elseif($user['status']==1){
-			$returnData = '账号异常，请申诉';
-		}
-		return $returnData;
+		$res = $modelUserFactory->where($where)->count('id');
+		return $res?true:false;
 	}
 
 	//编辑
@@ -41,65 +35,63 @@ class Account extends \think\Model {
 		}
 		//开启事务
 		$this->startTrans();
-		if($postData['id'] && intval($postData['id'])){//修改用户
-			$res = $this->isUpdate(true)->save($postData);
+		//新增用户
+		unset($postData['id']);
+		$postData['factory_id'] = $factoryId;
+		//检查手机号码是否在平台注册
+		$modelUserCenter = new \common\model\UserCenter();
+		$result = $modelUserCenter->registerCheck($postData['mobile_phone']);
+		if($result){
+			$postData['id'] = $result['id'];
+		}else{
+			$res = $this->isUpdate(false)->save($postData);
 			if($res===false){
 				$this->rollback();//回滚事务
-				return errorMsg('更新失败',$this->getError());
+				return errorMsg('新增失败',$this->getError());
 			}
-		}else{//新增用户
-			$postData['factory_id'] = $factoryId;
-			unset($postData['id']);
-			//先检查手机号码是否在平台注册
-			$modelUserCenter = new \common\model\UserCenter();
-			$result = $modelUserCenter->registerCheck($postData['mobile_phone']);
-			if($result){
-				$postData['id'] = $result['id'];
-			}else{
-				$res = $this->isUpdate(false)->save($postData);
-				if($res===false){
-					$this->rollback();//回滚事务
-					return errorMsg('新增失败',$this->getError());
-				}
-				$postData['id'] = $this->getAttr('id');
+			$postData['id'] = $this->getAttr('id');
+		}
+		//检查用户是否是本供应商的员工
+		if($this->checkExist($postData['id'],$factoryId)){
+			return errorMsg('该手机号码已经是本供应商的员工！');
+		}
+		$user = $this->get($postData['id']);
+		if(!empty($user)){
+			//新增用户工厂
+			$data = [
+				'type' => 2,
+			];
+			$res = $user->factories()->attach($factoryId,$data);
+			if(!count($res)){
+				$this->rollback();//回滚事务
+				return errorMsg('新增失败');
 			}
-			$user = $this->get($postData['id']);
-			if(!empty($user)){
-				//新增用户工厂
-				$data = [
-					'type' => 2,
-				];
-				$res = $user->factories()->attach($factoryId,$data);
-				if(!count($res)){
-					$this->rollback();//回滚事务
-					return errorMsg('新增失败');
-				}
-				//新增用户工厂角色
-				if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
-					foreach ($postData['userFactoryRoleIds'] as $val){
-						$data = [
-							'factory_id' => $factoryId,
-						];
-						$res = $user->roles()->attach($val,$data);
-						if(!count($res)){
-							$this->rollback();//回滚事务
-							return errorMsg('新增失败');
-						}
-					}
-				}
-				//新增用户工厂组织
-				if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
+			//新增用户工厂角色
+			if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
+				foreach ($postData['userFactoryRoleIds'] as $val){
 					$data = [
 						'factory_id' => $factoryId,
 					];
-					$res = $user->organizes()->attach($postData['userFactoryOrganizeId'],$data);
+					$res = $user->roles()->attach($val,$data);
 					if(!count($res)){
 						$this->rollback();//回滚事务
 						return errorMsg('新增失败');
 					}
 				}
 			}
+			//新增用户工厂组织
+			if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
+				$data = [
+					'factory_id' => $factoryId,
+				];
+				$res = $user->organizes()->attach($postData['userFactoryOrganizeId'],$data);
+				if(!count($res)){
+					$this->rollback();//回滚事务
+					return errorMsg('新增失败');
+				}
+			}
 		}
+		$postData['userFactoryStatus'] = 0;
 		$this->commit();//提交事务
 		return successMsg('成功！',$postData);
 	}
