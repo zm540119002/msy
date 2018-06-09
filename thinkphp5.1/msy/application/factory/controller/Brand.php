@@ -33,7 +33,4 @@ class Brand extends FactoryBase
         }
         return $this->fetch();
     }
-
-
-
 }
