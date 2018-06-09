@@ -11,30 +11,31 @@ class StoreBase extends FactoryBase
     public function __construct()
     {
         parent::__construct();
-        //获取厂商店铺详情列表
-        \common\cache\Store::removeList($this->factory['id']);
-        $list = \common\cache\Store::getList($this->factory['id']);
-        $count = count($list);
-        if ($count > 1) {
-            //多家店判断是否有默认店铺
-            $info = [];
-            foreach ($list as $val){
-                if($val['is_default']){
-                    $info = $val;
+        if($this->factory){
+            //获取厂商店铺详情列表
+            \common\cache\Store::removeList($this->factory['id']);
+            $list = \common\cache\Store::getList($this->factory['id']);
+            $count = count($list);
+            if ($count > 1) {
+                //多家店判断是否有默认店铺
+                $info = [];
+                foreach ($list as $val){
+                    if($val['is_default']){
+                        $info = $val;
+                    }
                 }
+                if (empty($info)) {
+                    $this -> assign('notDefaultStore', 1);
+                }
+            } elseif ($count == 1){
+                $info = $list[0];
+            }elseif (!$count) {
+                $this -> success('没有店铺，请申请', 'Store/edit');
             }
-            if (empty($info)) {
-                $this -> assign('notDefaultStore', 1);
-            }
-        } elseif ($count == 1){
-            $info = $list[0];
-        }elseif (!$count) {
-            $this -> success('没有店铺，请申请', 'Store/edit');
+            $this -> assign('storeList', $list);
+            \common\cache\Store::remove($info['id']);
+            $this -> store = \common\cache\Store::get($info['id']);
         }
-        $this -> assign('storeList', $list);
-        \common\cache\Store::remove($info['id']);
-        $this -> store = \common\cache\Store::get($info['id']);
-       
     }
 
     //设置默认产商

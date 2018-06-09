@@ -88,10 +88,10 @@
 	{include file="public/store_operation_head" /}
 	<section class="separation-line">
 		<nav class="columns_flex channel_nav manufacturer_nav">
-			<a href="javascript:void(0);">
+			<a href="{:url('Operation/index')}">
 				店铺提醒
 			</a>
-			<a href="{:url('Goods/manage')}" class="current">
+			<a href="javascript:void(0);" class="current">
 				店铺管理
 			</a>
 			<a href="{:url('Promotion/manage')}">
@@ -104,7 +104,7 @@
 	</section>
 	<section class="specific_type store-manage-type bottomLine">
 		<div class="columns_flex f20">
-			<a >设置</a>
+			<a href="{:url('Operation/set')}">设置</a>
 			<a class="column_type current">商品</a>
 			<a href="{:url('Goods/setSort')}">排序</a>
 			<a href="{:url('Goods/setInventory')}">入仓</a>
