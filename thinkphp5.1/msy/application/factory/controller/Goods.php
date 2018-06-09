@@ -140,27 +140,30 @@ class Goods extends StoreBase
 
     //商品管理展示页
     public function manage(){
-        //查看本店商品是否存在备份文件
-        //存储路径
-        $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
-        //本厂商店铺备份文件
-        $modelStore = new \app\factory\model\Store;
-        $storeList = $modelStore -> getStoreList($this -> factory['id']);
-        foreach ( $storeList as &$storeInfo) {
-            $fileName = $storePath.$storeInfo['id'].'.txt';
-            if(file_exists($fileName)){
-                //本店铺商品备份文件名
-                if($storeInfo['id'] == $this -> store['id']){
-                    $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
-                    $selfStore = $storeInfo;
-                    $selfStore['backup_time'] = $backupTime;
-                    $this -> assign('selfStore',$selfStore);
-                }else{
-                    //本厂商其他店铺商品备份文件
-                    $otherStores[] = $storeInfo;
-                    $this -> assign('otherStores',$otherStores);
+        if($this->factory && $this->store){
+            //查看本店商品是否存在备份文件
+            //存储路径
+            $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
+            //本厂商店铺备份文件
+            $modelStore = new \app\factory\model\Store;
+            $storeList = $modelStore -> getStoreList($this -> factory['id']);
+            foreach ( $storeList as &$storeInfo) {
+                $fileName = $storePath.$storeInfo['id'].'.txt';
+                if(file_exists($fileName)){
+                    //本店铺商品备份文件名
+                    if($storeInfo['id'] == $this -> store['id']){
+                        $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
+                        $selfStore = $storeInfo;
+                        $selfStore['backup_time'] = $backupTime;
+                        $this -> assign('selfStore',$selfStore);
+                    }else{
+                        //本厂商其他店铺商品备份文件
+                        $otherStores[] = $storeInfo;
+                        $this -> assign('otherStores',$otherStores);
+                    }
                 }
             }
+
         }
         return $this->fetch();
     }
