@@ -7,23 +7,23 @@
 	{include file="public/store_operation_head" /}
 	<section class="bottomLine">
 		<nav class="columns_flex channel_nav manufacturer_nav">
-			<a href="">
+			<a href="{:url('Operation/index')}">
 				店铺提醒
 			</a>
-			<a href="" class="current">
+			<a href="javascript:void(0);" class="current">
 				店铺管理
 			</a>
-			<a href="">
+		    <a href="{:url('Promotion/manage')}">
 				营销推广
 			</a>
-			<a href="">
+			<a href="javascript:void(0);">
 				官方活动
 			</a>
 		</nav>
 	</section>
 	<section class="specific_type store-manage-type bottomLine">
 		<div class="columns_flex f20">
-			<a >设置</a>
+			<a href="{:url('Operation/set')}">设置</a>
 			<a class="" href="{:url('Goods/manage')}">商品</a>
 			<a href="{:url('Goods/setSort')}">排序</a>
 			<a class="column_type current">入仓</a>
@@ -53,7 +53,7 @@
 <script type="text/javascript" src="factory_js/getGoodsList.js"></script>
 <script type="text/javascript">
 	$(function () {
-		//没有默认店铺
+		//有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
 			//初始化商品列表
