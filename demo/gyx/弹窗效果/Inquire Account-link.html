@@ -8,6 +8,7 @@
 <link type="text/css" href='../css/Inquire Account-layer.css' rel="stylesheet">
 <script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 <script type="text/javascript" src='../js/layer.js'></script>
+<script type="text/javascript" src='../js/public.js'></script>
 
 </head>
 
@@ -23,42 +24,42 @@
 
     <h6>账号授权角色</h6>
     <ul class="area-frame1">
-    <li class="rectangle1 current">
-                <img src="../img/role0.png">
-                <h1>总经理</h1>
-            </li>           
+        <li class="rectangle1 current">
+            <img src="../img/role0.png">
+            <h1>总经理</h1>
+        </li>           
        
-            <li class="rectangle1">
-                <img src="../img/role0.png">
-                 <h1>运营部.运营总监</h1>
-            </li> 
+        <li class="rectangle1">
+            <img src="../img/role0.png">
+            <h1>运营部.运营总监</h1>
+        </li> 
        
-            <li class="rectangle1">
-                 <img src="../img/role0.png">
-                 <h1>运营部.运营经理</h1>
-            </li> 
+        <li class="rectangle1">
+            <img src="../img/role0.png">
+            <h1>运营部.运营经理</h1>
+        </li> 
             
-            <li class="rectangle1">
-                <img src="../img/role0.png">
-                 <h1>运营部.运营专员</h1>
-            </li>
+        <li class="rectangle1">
+            <img src="../img/role0.png">
+            <h1>运营部.运营专员</h1>
+        </li>
 
-            <li class="rectangle1">
-                 <img src="../img/role0.png">
-                <h1>客服部.客服总监</h1>
-            </li> 
+        <li class="rectangle1">
+            <img src="../img/role0.png">
+            <h1>客服部.客服总监</h1>
+        </li> 
                    
-            <li class="rectangle1">
-                 <img src="../img/role0.png">
-                <h1>客服部.客服经理</h1>
-            </li> 
+        <li class="rectangle1">
+            <img src="../img/role0.png">
+            <h1>客服部.客服经理</h1>
+        </li> 
                         
-            <li class="rectangle1">
-                 <img src="../img/role0.png">
-                <h1>客服部.客服专员</h1>
-             </li>
-</ul>
-    </section>
+        <li class="rectangle1">
+            <img src="../img/role0.png">
+            <h1>客服部.客服专员</h1>
+        </li>
+    </ul>
+
 </article>
 
 
@@ -73,51 +74,73 @@
     </nav> 
     
  <!-- nav bar -->   
- <section class="fir-nav">
-       <a class="home left"><img src="../img/home.png"></a>
-       <div class="left">
-        <a class="circle"><img src="../img/circle.png"></a>
-        <font>[供用商名称/简称]</font>
+    <section class="fir-nav">
+        <a class="home left"><img src="../img/home.png"></a>
+        <div class="left gh">
+        <a class="circle left"><img src="../img/circle.png"></a>
+        <span class="supplier">[供用商名称/简称]</span>
         </div>
         <h4 class="right">切换供用商账号></h4>
- </section>
+    </section>
 <!--mainnav bar-->
-  <section class="sec-nav">
-          <ul>
-                <li><a href="#" >企业档案</a></li>
-                <li><a href="#">商标备案</a></li>
-                <li><a href="#">开店申请</a></li>
-                <li><a href="#">组别角色</a></li>
-                <li><a href="#" class="current">账号授权</a></li>
-         </ul>    
- </section>
+    <section class="sec-nav">
+    <ul class="columns_flex">
+        <li><a href="#" >企业档案</a></li>
+        <li><a href="#">商标备案</a></li>
+        <li><a href="#">开店申请</a></li>
+        <li><a href="#">组别角色</a></li>
+        <li><a href="#" class="current">账号授权</a></li>
+    </ul>    
+    </section>
 <!--content-->
-   <section class="search">
-          <span class="left">输入姓名、手机号查询账号</span>
-          <a class="left"><img src="../img/search.png"></a>
-   </section>
-   <h5>供应商员工登录账号列表</h5>
-   <h5>暂无数据</h5>
-   <h5>搜索结果</h5>
-   <h5>查无此人</h5>
+<section class="main">
+    <div class="search">
+        <input type="text" class="left text" value="输入姓名、手机号查询账号">
+        <input type="button" class="search-btn" >
+    </div>
+    <h5>供应商员工登录账号列表</h5>
+    <h5>暂无数据</h5>
+    <h5>搜索结果</h5>
+    <h5>查无此人</h5>
   
-   <ul class="list1">
-       <li>
-           <p class="left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp; XXX<br>
-           手机号码&nbsp;&nbsp;&nbsp; 13XXXXXXXXX<br>
-           角色类型&nbsp;&nbsp;&nbsp; 客服部.客服专员</p>
-           <span class="left">账号正常</span>
-       </li>
-       <li>
-           <p class="left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp; XXX<br>
-           手机号码&nbsp;&nbsp;&nbsp; 13XXXXXXXXX<br>
-           角色类型&nbsp;&nbsp;&nbsp; 客服部.客服专员</p>
-           <span class="left">账号已停用</span>
-       </li>
-   </ul>
+    <ul class="account">
+    <li class="list1">
+        <div class="box-right">
+        <div>
+        <span class="label">姓名</span> <span>XXX</span>
+        </div>
+        <div>
+        <span class="label">手机号码</span> <span>13XXXXXXXXX</span>
+        </div>
+        <div>
+        <span class="label">角色类型</span> <span>客服部.客服专员</span>
+        </div>
+        </div>
+        <div class="box-left">
+        <span>账号正常</span>
+        </div>
+    </li>
+    <li class="list2">
+        <div class="box-right">
+        <div>
+        <span class="label">姓名</span> <span>XXX</span>
+        </div>
+        <div>
+        <span class="label">手机号码</span> <span>13XXXXXXXXX</span>
+        </div>
+        <div>
+        <span class="label">角色类型</span> <span>客服部.客服专员</span>
+        </div>
+        </div>
+        <div class="box-left">
+        <span>账号已停用</span>
+        </div>
+    </li>
+    </ul>
+</section>
 <!--footer-->
     
-            <a href="javascript:void(0);" class="add-account btn">新建供应商员工登录账号</a>
+    <a href="javascript:void(0);" class="add-account btn">新建供应商员工登录账号</a>
      
 
 </article>
@@ -153,7 +176,15 @@
        
     })
 </script>
-
+<script >
+    $(function(){
+        $('.list1').on('click',function(){
+            
+            location.href="Account Modification-link.html";
+            
+            })
+        })
+</script>
 
 
 
