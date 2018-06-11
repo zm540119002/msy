@@ -167,9 +167,4 @@ class Record extends Model {
 		return $info?$info->toArray():[];
 	}
 
-	//关联产商模型
-	public function factory()
-	{
-		return $this->hasOne('Factory','id','factory_id');
-	}
 }
