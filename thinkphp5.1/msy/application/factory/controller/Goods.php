@@ -169,27 +169,31 @@ class Goods extends StoreBase
     }
     //设置商品排序
     public function setSort(){
-        if(request()->isPost()){
-            $data = input();
-            $model = new \app\factory\model\Goods;
-            $result = $model->allowField(true)
-                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
-            if(false !== $result){
-                return successMsg('成功');
+        if($this->factory && $this->store) {
+            if (request()->isPost()) {
+                $data = input();
+                $model = new \app\factory\model\Goods;
+                $result = $model->allowField(true)
+                    ->save($data, ['id' => $data['goodsId'], 'store_type' => $data['storeType']]);
+                if (false !== $result) {
+                    return successMsg('成功');
+                }
             }
         }
         return $this -> fetch();
     }
     //上下架设置
     public function setShelf(){
-        if(request()->isPost()){
-            $data = input();
-            $model = new \app\factory\model\Goods;
-            $result = $model->allowField(true)
-                ->save($data, ['id' => $data['goodsId'],'store_id'=>$this->store['id']]);
-           if(false !== $result){
-               return successMsg('成功');
-           }
+        if($this->factory && $this->store) {
+            if (request()->isPost()) {
+                $data = input();
+                $model = new \app\factory\model\Goods;
+                $result = $model->allowField(true)
+                    ->save($data, ['id' => $data['goodsId'], 'store_id' => $this->store['id']]);
+                if (false !== $result) {
+                    return successMsg('成功');
+                }
+            }
         }
         return $this -> fetch();
     }
