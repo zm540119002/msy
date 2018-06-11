@@ -243,6 +243,10 @@ function uploadsImg(obj,tilt,className) {
         yes:function(index){
             var layerImgSrc= $('.'+ className).find('.img').val();
             obj.siblings('.hidden_img').val(layerImgSrc);
+            if(layerImgSrc.indexOf("data:") !=-1){
+                errorTipc('文件还没上传完毕')
+                return false;
+            }
             layer.close(index);
         }
     })
@@ -269,7 +273,12 @@ function uploadsVideo(obj,tilt,className) {
         },
         yes:function(index){
             var layerImgSrc= $('.'+ className).find('.img').val();
+            console.log(layerImgSrc);
             obj.siblings('.hidden_video').val(layerImgSrc);
+            if(layerImgSrc.indexOf("data:") !=-1){
+                errorTipc('文件还没上传完毕')
+                return false;
+            }
             layer.close(index);
         }
     })
