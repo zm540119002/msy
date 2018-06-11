@@ -7,7 +7,7 @@ class GoodsCategory extends Base
      */
     public function manage(){
         if(request()->isAjax()){
-            $modelGoodsCategory = new \common\model\GoodsCategory();
+            $modelGoodsCategory = new \app\index_admin\model\GoodsCategory();
             $where = [
                 'status' => 0,
             ];
@@ -35,7 +35,7 @@ class GoodsCategory extends Base
     /**商品分类-编辑
      */
     public function edit(){
-        $modelGoodsCategory = new \common\model\GoodsCategory();
+        $modelGoodsCategory = new \app\index_admin\model\GoodsCategory();
         if(request()->isPost()){
             return $modelGoodsCategory->edit();
         }else{
@@ -61,7 +61,7 @@ class GoodsCategory extends Base
         if(!request()->isGet()){
             return config('custom.not_get');
         }
-        $modelGoodsCategory = new \common\model\GoodsCategory();
+        $modelGoodsCategory = new \app\index_admin\model\GoodsCategory();
         $list = $modelGoodsCategory->pageQuery();
         $this->assign('list',$list);
         return $this->fetch('list_tpl');
@@ -73,7 +73,27 @@ class GoodsCategory extends Base
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $modelGoodsCategory = new \common\model\GoodsCategory();
+        $modelGoodsCategory = new \app\index_admin\model\GoodsCategory();
         return $modelGoodsCategory->del();
     }
+<<<<<<< HEAD
+=======
+
+
+    /**获取二级分类
+     * @return mixed
+     *
+     */
+    public function getSecondCategoryById()
+    {
+        if(request()->isGet()){
+            $cat_id_1=(int)input('get.cat_id_1');
+            $model = new \app\index_admin\model\GoodsCategory();
+            $secondCategory =  $model -> getSecondCategoryById($cat_id_1);
+            $this -> assign('secondCategory',$secondCategory);
+            return $this->fetch('template/category_second.html');
+        }
+    }
+
+>>>>>>> 2e65b145ec6968f4ec03340c19e370d825c95d12
 }
