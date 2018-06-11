@@ -1,13 +1,13 @@
 <?php
-namespace app\factory\controller;
+namespace app\store\controller;
 
-class Account extends FactoryBase
+class Account extends StoreBase
 {
     //首页
     public function index(){
         if(request()->isAjax()){
-            $modelAccount = new \app\factory\model\Account();
-            $info = $modelAccount->edit($this->factory['id']);
+            $modelAccount = new \app\store\model\Account();
+            $info = $modelAccount->edit($this->store['id']);
             if($info['status']==0){
                 return $info;
             }else{
@@ -15,8 +15,8 @@ class Account extends FactoryBase
                 return view('info_tpl');
             }
         }else{
-            $modelRole = new \app\factory\model\Role();
-            $list = $modelRole->getList($this->factory['id']);
+            $modelRole = new \app\store\model\Role();
+            $list = $modelRole->getList($this->store['id']);
             $this->assign('list',$list);
             return $this->fetch();
         }
@@ -25,8 +25,8 @@ class Account extends FactoryBase
     //账号详情
     public function detail(){
         if(request()->isGet()){
-            $modelAccount = new \app\factory\model\Account();
-            $info = $modelAccount->detail($this->factory['id']);
+            $modelAccount = new \app\store\model\Account();
+            $info = $modelAccount->detail($this->store['id']);
             $this->assign('info',$info);
             $this->assign('roleList',$info['role']);
             return $this->fetch();
@@ -36,8 +36,8 @@ class Account extends FactoryBase
     //设置账户状态
     public function setStatus(){
         if(request()->isPost()){
-            $modelUserFactory = new \app\factory\model\UserFactory();
-            $info = $modelUserFactory->setStatus($this->factory['id']);
+            $modelUserStore = new \app\store\model\UserStore();
+            $info = $modelUserStore->setStatus($this->store['id']);
             return $info;
         }
     }
@@ -45,8 +45,8 @@ class Account extends FactoryBase
     //获取工厂账号列表
     public function getAccountList(){
         if(request()->isGet()){
-            $modelAccount = new \app\factory\model\Account();
-            $list = $modelAccount->getList($this->factory['id']);
+            $modelAccount = new \app\store\model\Account();
+            $list = $modelAccount->getList($this->store['id']);
             $this->assign('list',$list);
             return view('list_tpl');
         }
@@ -54,7 +54,7 @@ class Account extends FactoryBase
 
     //用户角色编辑
     public function editRole(){
-        $modelAccount = new \app\factory\model\Account();
-        return $modelAccount->editRole($this->factory['id']);
+        $modelAccount = new \app\store\model\Account();
+        return $modelAccount->editRole($this->store['id']);
     }
 }
