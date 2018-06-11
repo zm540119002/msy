@@ -1,14 +1,14 @@
 <?php
-namespace app\factory\controller;
+namespace app\store\controller;
 
-class Role extends FactoryBase
+class Role extends StoreBase
 {
     /**首页
      */
     public function index(){
-        $modelRole = new \app\factory\model\Role();
+        $modelRole = new \app\store\model\Role();
         if(request()->isAjax()){
-            $info = $modelRole->edit($this->factory['id']);
+            $info = $modelRole->edit($this->store['id']);
             if($info['status']==0){
                 return $info;
             }
@@ -25,8 +25,8 @@ class Role extends FactoryBase
     /**获取组织列表
      */
     public function  getList(){
-        $modelRole = new \app\factory\model\Role();
-        $list = $modelRole->getList($this->factory['id']);
+        $modelRole = new \app\store\model\Role();
+        $list = $modelRole->getList($this->store['id']);
         $this->assign('list',$list);
         return view('list_tpl');
     }
@@ -37,8 +37,8 @@ class Role extends FactoryBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $modelRole = new \app\factory\model\Role();
-        return $modelRole->del($this->factory['id'],true);
+        $modelRole = new \app\store\model\Role();
+        return $modelRole->del($this->store['id'],true);
     }
 
     /**获取角色权限列表
@@ -47,7 +47,7 @@ class Role extends FactoryBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $modelRoleNode = new \app\factory\model\RoleNode();
+        $modelRoleNode = new \app\store\model\RoleNode();
         $list = $modelRoleNode->getList();
         return array_column($list,'node_id');
     }
@@ -58,7 +58,7 @@ class Role extends FactoryBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $modelRoleNode = new \app\factory\model\RoleNode();
+        $modelRoleNode = new \app\store\model\RoleNode();
         $res = $modelRoleNode->edit();
         return $res;
     }

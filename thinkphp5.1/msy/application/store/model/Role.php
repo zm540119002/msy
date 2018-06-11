@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 
 class Role extends \think\Model {
 	// 设置当前模型对应的完整数据表名称
@@ -7,12 +7,12 @@ class Role extends \think\Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_store';
 
 	//编辑
-	public function edit($factoryId){
+	public function edit($storeId){
 		$postData = input('post.');
-		$validateRole = new \app\factory\validate\Role();
+		$validateRole = new \app\store\validate\Role();
 		if(!$validateRole->scene('edit')->check($postData)){
 			return errorMsg($validateRole->getError());
 		}
@@ -22,10 +22,10 @@ class Role extends \think\Model {
 				return errorMsg('更新失败',$this->getError());
 			}
 		}else{
-			if(!intval($factoryId)){
+			if(!intval($storeId)){
 				return errorMsg('参数错误');
 			}
-			$postData['factory_id'] = $factoryId;
+			$postData['store_id'] = $storeId;
 			unset($postData['id']);
 			$res = $this->isUpdate(false)->save($postData);
 			if($res===false){
@@ -37,13 +37,13 @@ class Role extends \think\Model {
 	}
 
 	//获取列表
-	public function getList($factoryId){
+	public function getList($storeId){
 		if(!request()->isGet()){
 			return errorMsg(config('custom.not_get'));
 		}
 		$where = [
 			['status', '=', 0],
-			['factory_id', '=', $factoryId],
+			['store_id', '=', $storeId],
 		];
 		$field = array(
 			'id','name',
@@ -54,13 +54,13 @@ class Role extends \think\Model {
 	}
 
 	//删除
-	public function del($factoryId,$tag=true){
-		if(!intval($factoryId)){
+	public function del($storeId,$tag=true){
+		if(!intval($storeId)){
 			return errorMsg('参数错误');
 		}
 		$where = [
 			['status', '=', 0],
-			['factory_id', '=', $factoryId],
+			['store_id', '=', $storeId],
 		];
 		$id = input('post.id');
 		if(!intval($id)){

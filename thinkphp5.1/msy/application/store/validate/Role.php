@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\validate;
+namespace app\store\validate;
 
 class Role extends \think\Validate
 {
