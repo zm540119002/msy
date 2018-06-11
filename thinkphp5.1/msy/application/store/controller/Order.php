@@ -4,11 +4,11 @@
  * @date : 2018-05-07
  * @effect : 厂商的订单管理
  */
-namespace app\factory\controller;
+namespace app\store\controller;
 
-use app\factory\model\Order as OrderModel;
+use app\store\model\Order as OrderModel;
 
-class Order extends StoreBase
+class Order extends ShopBase
 {
     private  $order;
 
