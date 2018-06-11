@@ -3,7 +3,7 @@ namespace common\controller;
 
 use component\wx_pay_api\Jssdk;
 
-class WXBase extends Base{
+class WXBase extends UserBase{
     private $_jssdk = null;
     public function __construct(){
         parent::__construct();
