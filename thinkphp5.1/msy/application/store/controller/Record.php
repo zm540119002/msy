@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Record extends ShopBase
+class Record extends StoreBase
 {
 
     //产商档案编辑
