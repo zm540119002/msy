@@ -76,21 +76,4 @@ class GoodsCategory extends Base
         $modelGoodsCategory = new \app\index_admin\model\GoodsCategory();
         return $modelGoodsCategory->del();
     }
-
-
-    /**获取二级分类
-     * @return mixed
-     *
-     */
-    public function getSecondCategoryById()
-    {
-        if(request()->isGet()){
-            $cat_id_1=(int)input('get.cat_id_1');
-            $model = new \app\index_admin\model\GoodsCategory();
-            $secondCategory =  $model -> getSecondCategoryById($cat_id_1);
-            $this -> assign('secondCategory',$secondCategory);
-            return $this->fetch('template/category_second.html');
-        }
-    }
-
 }
