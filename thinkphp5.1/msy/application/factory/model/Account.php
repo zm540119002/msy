@@ -101,8 +101,7 @@ class Account extends \think\Model {
 		$field = array(
 			'id','name',
 		);
-		$order = 'id';
-		$roleList = $modeRole->where($where)->field($field)->order($order)->select();
+		$roleList = $modeRole->where($where)->field($field)->select();
 		$postData['role'] = count($roleList)?$roleList->toArray():[];
 		$this->commit();//提交事务
 		return successMsg('成功！',$postData);
