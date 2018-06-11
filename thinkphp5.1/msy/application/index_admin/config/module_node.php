@@ -5,9 +5,9 @@
 return [
     'menu' => [
         'goods_category'=>[
-            'id'=>100,'name'=>'商品分类','type'=>2,
+            'id'=>1000,'name'=>'商品分类','type'=>2,
             'sub_menu' => [
-                ['id'=>101,'name'=>'商品分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
+                ['id'=>1001,'name'=>'商品分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
             ],
         ],
     ],
