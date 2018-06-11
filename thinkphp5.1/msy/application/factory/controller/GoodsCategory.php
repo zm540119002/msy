@@ -15,7 +15,9 @@ class GoodsCategory extends UserBase
         if(request()->isGet()){
             $category_id_1=(int)input('get.category_id_1');
             $model = new \app\index_admin\model\GoodsCategory;
-            $where = [['parent_id_1','=',$category_id_1]];
+            $where = [
+                ['parent_id_1','=',$category_id_1]
+            ];
             $secondCategory = $model->getList($where);
             $this -> assign('secondCategory',$secondCategory);
             return $this->fetch('template/category_second.html');

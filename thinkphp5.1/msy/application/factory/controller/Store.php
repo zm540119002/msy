@@ -28,7 +28,9 @@ class Store extends FactoryBase
         }else{
             // 企业旗舰店
             $modelFactory = new \app\factory\model\Factory();
-            $where = [['f.id','=',$this->factory['id']]];
+            $where = [
+                ['f.id','=',$this->factory['id']]
+            ];
             $file = ['f.id,f.name,r.logo_img as img'];
             $join =[
                 ['record r','f.id = r.factory_id'],
@@ -43,7 +45,9 @@ class Store extends FactoryBase
             $this -> assign('brandStores',$brandStores);
             //查看已申请的店铺
             $modeStore = new \app\factory\model\Store();
-            $where = [['s.factory_id','=',$this->factory['id']]];
+            $where = [
+                ['s.factory_id','=',$this->factory['id']]
+            ];
             $storesApplied = $modeStore->getList($where);
             $this -> assign('storesApplied',$storesApplied);
             return $this->fetch();
