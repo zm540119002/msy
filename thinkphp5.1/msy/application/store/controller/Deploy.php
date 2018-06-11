@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\controller;
+namespace app\store\controller;
 use common\controller\UserBase;
 use think\facade\Session;
 class Deploy extends UserBase
@@ -8,19 +8,19 @@ class Deploy extends UserBase
      */
     public function register()
     {
-        $model = new \app\factory\model\Factory();
+        $model = new \app\store\model\Store();
         if(request()->isAjax()){
             return $model -> edit($this -> user['id']);
         }else{
             $mobilePhone = $this -> user['mobile_phone'];
             $this->assign('mobilePhone',$mobilePhone);
-            if(input('?factory_id')){
-                $factoryId = input('factory_id');
+            if(input('?store_id')){
+                $storeId = input('store_id');
                 $where = [
-                    ['id','=',$factoryId],
+                    ['id','=',$storeId],
                 ];
-                $factoryInfo =  $model -> getInfo($where);
-                $this -> assign('factoryInfo',$factoryInfo);
+                $StoreInfo =  $model -> getInfo($where);
+                $this -> assign('StoreInfo',$StoreInfo);
             }
             return $this->fetch();
         }

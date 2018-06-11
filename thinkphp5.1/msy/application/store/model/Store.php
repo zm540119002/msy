@@ -48,7 +48,7 @@ class Store extends Model {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$storeUserModel =  new \app\store\model\Userstore;
+			$storeUserModel =  new \app\store\model\UserStore;
 			$data['user_id'] = $uid;
 			$data['store_id'] = $this->getAttr('id');
 			$result = $storeUserModel -> allowField(true) -> save($data);

@@ -1,6 +1,6 @@
 <?php
 namespace app\store\controller;
-class Store extends storeBase
+class Shop extends StoreBase
 {
 
     //开店部署首页
