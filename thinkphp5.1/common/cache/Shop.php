@@ -2,8 +2,8 @@
 namespace common\cache;
 
 class ShopStore{
-    private static $_cache_key = 'cache_store_';
-    private static $_cache_key_list = 'cache_store_list_';
+    private static $_cache_key = 'cache_shop_';
+    private static $_cache_key_list = 'cache_shop_list_';
 
     /**从缓存中获取信息
      */
@@ -16,7 +16,7 @@ class ShopStore{
                 'id' => $id,
             ];
             $file = [
-                's.id,s.is_default,s.store_type,run_type,auth_status'
+                's.id,s.is_default,s.shop_type,run_type,auth_status'
             ];
             $store = $model -> getInfo($where,$file);
             cache(self::$_cache_key.$id, $store,config('custom.factory_cache_time'));
