@@ -135,9 +135,9 @@
 				}
 			}
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
-			var selectedLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
+			var selectedPLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
 			if(storeType.hasClass('current')){
-				if(selectedLen==storePattern.length){
+				if(selectedPLen==storePattern.length){
 					dialog.success('此店所有经营模式已开过',module+'Store/manage');
 					return false;
 				}
