@@ -34,7 +34,7 @@ class StoreBase extends FactoryBase
             }
             $this -> assign('storeList', $list);
             \common\cache\Store::remove($info['id']);
-            $this -> store = \common\cache\Store::get($info['id']);
+            $this -> store = \common\cache\FactoryStore::get($info['id']);
         }
     }
 
