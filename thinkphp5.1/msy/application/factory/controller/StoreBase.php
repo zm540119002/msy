@@ -15,26 +15,24 @@ class StoreBase extends FactoryBase
             //获取厂商店铺详情列表
             \common\cache\FactoryStore::removeList($this->factory['id']);
             $list = \common\cache\FactoryStore::getList($this->factory['id']);
+            $this -> assign('storeList', $list);
             $count = count($list);
             if ($count > 1) {
                 //多家店判断是否有默认店铺
-                $info = [];
                 foreach ($list as $val){
                     if($val['is_default']){
-                        $info = $val;
+                        $this->store = $val;
                     }
                 }
-                if (empty($info)) {
+                if (empty($this->store)) {
                     $this -> assign('notDefaultStore', 1);
                 }
             } elseif ($count == 1){
-                $info = $list[0];
+                $this->store = $list[0];
             }elseif (!$count) {
                 $this -> success('没有店铺，请申请', 'Store/edit');
             }
-            $this -> assign('storeList', $list);
-            \common\cache\Store::remove($info['id']);
-            $this -> store = \common\cache\FactoryStore::get($info['id']);
+            $this -> assign('store', $this->store);
         }
     }
 
