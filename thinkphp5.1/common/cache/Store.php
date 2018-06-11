@@ -3,48 +3,32 @@ namespace common\cache;
 
 class Store{
     private static $_cache_key = 'cache_store_';
-    private static $_cache_key_list = 'cache_store_list_';
-
     /**从缓存中获取信息
      */
-    public static function get($id){
-        $store = cache(self::$_cache_key.$id);
-        if(!$store){
-            $model = new \app\factory\model\Store();
+    public static function get($userId){
+        $storeList = cache(self::$_cache_key.$userId);
+        if(!$storeList){
+            $modelUserStore = new \app\store\model\UserStore();
             $where = [
-                'status' => 0,
-                'id' => $id,
+                ['uf.status','=',0],
+                ['uf.user_id','=',$userId],
             ];
-            $file = [
-                's.id,s.is_default,s.store_type,run_type,auth_status'
+            $field = [
+                'uf.is_default','f.id','f.name',
             ];
-            $store = $model -> getInfo($where,$file);
-            cache(self::$_cache_key.$id, $store,config('custom.factory_cache_time'));
+            $join = [
+                ['store f','uf.store_id = f.id','left'],
+            ];
+            $storeList = $modelUserStore->alias('uf')->join($join)->where($where)->field($field)->select();
+            $storeList = $storeList->toArray();
         }
-        return $store;
+        cache(self::$_cache_key.$userId, $storeList,config('custom.store_cache_time'));
+        return $storeList;
     }
 
     /**删除缓存信息
      */
-    public static function remove($id){
-        cache(self::$_cache_key.$id, null);
-    }
-
-    /**从缓存中获取厂商店铺信息列表详情
-     */
-    public static function getList($factorId){
-        $storeList = cache(self::$_cache_key_list.$factorId);
-        if(!$storeList){
-            $model = new \app\factory\model\Store();
-            $storeList = $model -> getStoreList($factorId);
-            cache(self::$_cache_key_list.$factorId, $storeList,config('custom.factory_cache_time'));
-        }
-        return $storeList;
-    }
-
-    /**删除缓存厂商店铺信息列表详情
-     */
-    public static function removeList($factorId){
-        cache(self::$_cache_key_list.$factorId, null);
+    public static function remove($userId){
+        cache(self::$_cache_key.$userId, null);
     }
 }

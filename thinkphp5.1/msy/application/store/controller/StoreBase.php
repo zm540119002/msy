@@ -13,7 +13,7 @@ class StoreBase extends \common\controller\UserBase{
         $this->assign('storeList',$storeList);
         $storeCount = count($storeList);
         if ($storeCount==0){//没有入住供应商
-            $this->error('没有入住供应商，请入住', 'Deploy/register');
+            $this->error('没有入驻店家，请入住', 'Deploy/register');
         }elseif($storeCount==1){//入住一家供应商
             $this->store = $storeList[0];
         }elseif($storeCount>1){//入住多家供应商
