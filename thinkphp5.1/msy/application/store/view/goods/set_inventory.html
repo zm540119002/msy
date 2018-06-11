@@ -1,0 +1,111 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	{include file="public/store_operation_head" /}
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="{:url('Operation/index')}">
+				店铺提醒
+			</a>
+			<a href="javascript:void(0);" class="current">
+				店铺管理
+			</a>
+		    <a href="{:url('Promotion/manage')}">
+				营销推广
+			</a>
+			<a href="javascript:void(0);">
+				官方活动
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type store-manage-type bottomLine">
+		<div class="columns_flex f20">
+			<a href="{:url('Operation/set')}">设置</a>
+			<a class="" href="{:url('Goods/manage')}">商品</a>
+			<a href="{:url('Goods/setSort')}">排序</a>
+			<a class="column_type current">入仓</a>
+			<a  href="{:url('Goods/setShelf')}">上架</a>
+			<a>卡券</a>
+		</div>
+	</section>
+	<section class="">
+		<div class="columns_flex l-r-sides library-th">
+			<span>商品</span>
+			<span>商品库存</span>
+			<span>商品入仓</span>
+			<span>盘点出仓</span>
+		</div>
+		<ul class="library-tr scroll-list-content" id="list">
+		</ul>
+	</section>
+
+</article>
+<!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
+{/block}
+{block name="common"}
+{include file="template/loading.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="factory_js/getGoodsList.js"></script>
+<script type="text/javascript">
+	$(function () {
+		//有默认店铺
+		var notDefaultStore = "{$notDefaultStore|default=0}";
+		if(notDefaultStore == 0){
+			//初始化商品列表
+			var config = {
+				pageSize:4,
+				pageType:'inventory',
+			};
+			var url = module+'goods/getList';
+			//初始化商品列表
+			getPage(url,config);
+			//上拉加载更多
+			getMore(url,config);
+		}
+		/**
+		 * 设置库存
+		 */
+		$('body').on('blur','.add-num,.reduce-num',function () {
+			var _this = $(this);
+			var type  = _this.data('type');
+			var inventory = parseInt(_this.parents('li').find('.goods-library-num').text());
+			var num = _this.val();
+			if(!num){
+				return false
+			}
+			if(!isPosIntNumber(num)){
+				dialog.error('请输入大于0正整数');
+				_this.val('');
+				return false;
+			}
+			num = parseInt(num);
+			if(type == 0 && inventory < num){
+				dialog.error('大于库存量');
+				_this.val('');
+				return false;
+			}
+			_this.val('');
+			var postData = {};
+			postData.id = _this.parents('li').data('id');
+			postData.type = type;
+			if(!type){
+				num = 0 - num;
+			}
+			postData.num = num;
+			$.post(module + 'Goods/setInventory',postData,function (msg) {
+				if(!msg.status){
+					dialog.error(msg.info);
+					return false;
+				}
+				dialog.success(msg.info);
+				_this.parents('li').find('.goods-library-num').text(inventory + num);
+			});
+		})
+	});
+</script>
+{/block}
