@@ -186,13 +186,8 @@ class Account extends \think\Model {
 			return errorMsg('请选择角色');
 		}
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
-		$where = [
-			['status','=',0],
-			['user_id','=',$userId],
-			['factory_id','=',$factoryId],
-		];
 		$userFactoryRole = $modelUserFactoryRole->getRole($userId,$factoryId);
-		$oldRoleIds = array_column($userFactoryRole,'role_id');
+		$oldRoleIds = array_unique(array_column($userFactoryRole,'id'));
 		$modelUserFactoryRole->startTrans();//开启事务
 		//新增角色
 		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);

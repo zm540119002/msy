@@ -1,55 +1,52 @@
 <?php
-namespace app\shop\controller;
-
-/**供应商验证控制器基类
+namespace app\store\controller;
+/**
+ * Class StoreBase
+ * @package app\store\controller
+ * 店铺基础类
  */
-class ShopBase extends \common\controller\UserBase{
+class ShopBase extends StoreBase
+{
     protected $shop = null;
-
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
-        \common\cache\Shop::remove($this->user['id']);
-        $shopList = \common\cache\Shop::get($this->user['id']);
-        $this->assign('shopList',$shopList);
-        $shopCount = count($shopList);
-        if ($shopCount==0){//没有入住供应商
-            $this->error('没有入住供应商，请入住', 'Deploy/register');
-        }elseif($shopCount==1){//入住一家供应商
-            $this->shop = $shopList[0];
-        }elseif($shopCount>1){//入住多家供应商
-            foreach ($shopList as $shop){
-                if($shop['is_default']){//默认供应商
-                    $this->shop = $shop;
-                    break;
+        if($this->store){
+            //获取厂商店铺详情列表
+            \common\cache\Store::removeList($this->store['id']);
+            $list = \common\cache\Store::getList($this->store['id']);
+            $count = count($list);
+            if ($count > 1) {
+                //多家店判断是否有默认店铺
+                $info = [];
+                foreach ($list as $val){
+                    if($val['is_default']){
+                        $info = $val;
+                    }
                 }
+                if (empty($info)) {
+                    $this -> assign('notDefaultStore', 1);
+                }
+            } elseif ($count == 1){
+                $info = $list[0];
+            }elseif (!$count) {
+                $this -> success('没有店铺，请申请', 'Store/edit');
             }
+            $this -> assign('storeList', $list);
+            \common\cache\Store::remove($info['id']);
+            $this -> shop = \common\cache\Store::get($info['id']);
         }
-        if(!$this->shop){
-            //获取用户-工厂-角色-权限节点
-            $nodeList = getUserShopRoleNode($this->user['id'],$this->shop['id']);
-            $this->assign('nodeIds',array_column($nodeList,'node_id'));
-        }
-        $this->assign('shop',$this->shop);
     }
 
-    //设置默认供应商
-    public function setDefaultShop(){
-        $modelUserShop = new \app\shop\model\UserShop();
-        return $modelUserShop->setDefaultShop($this->user['id']);
+    //设置默认产商
+    public function setDefaultStore(){
+        $model = new \app\store\model\Shop();
+        return $model->setDefaultStore($this->store['id']);
     }
 
-    //获取厂家详细信息
-    public function getShopInfo(){
-        $model = new \app\shop\model\Shop();
-        $where = [
-            ['f.id','=',$this->shop['id']],
-        ];
-        $file = [
-            'f.id,f.name,r.logo_img'
-        ];
-        $join =[
-            ['record r','r.shop_id = f.id',],
-        ];
-        return $model->getInfo($where,$file,$join);
+    //获取店铺信息
+    public function getStoreInfo(){
+        $modelStore = new \app\store\model\Store;
+        return $shopInfo = $modelStore -> getStoreInfo($this->store);
     }
 }

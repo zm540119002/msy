@@ -71,7 +71,7 @@
 		$('body').on('click','ul.role-list li',function(){
 			$(this).toggleClass('current');
 		});
-		//确定
+		//修改账号角色
 		$('body').on('click','.confirm',function(){
 			var postData = {};
 			var url = controller + 'editRole';
@@ -88,6 +88,9 @@
 			}
 			$.post(url,postData,function(data){
 				dialog.error(data.info);
+				if(data.status==1){
+					history.go(-1);
+				}
 			});
 		});
 		//状态设置弹框
