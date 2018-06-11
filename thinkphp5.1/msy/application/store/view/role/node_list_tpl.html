@@ -1,0 +1,28 @@
+<div class="rolePower-content">
+	<div class="columns_flex role-head l-r-sides">
+		<div>
+			<span>角色</span>
+		</div>
+		<div>
+			<span class="hd-icon"></span>
+			<span class="role_name">出错啦</span>
+		</div>
+		<div>
+			<span>权限</span>
+		</div>
+	</div>
+	{notempty name='allNode'}
+		{volist name='allNode' id='vo'}
+		<div class="range-list">
+			<span class="range-label">{$vo.name}:</span>
+			{notempty name='allNode'}
+			<ul class="columns_flex">
+				{volist name='vo.sub_menu' id='vv'}
+				<li class="" data-id="{$vv.id}">{$vv.name}</li>
+				{/volist}
+			</ul>
+			{/notempty}
+		</div>
+		{/volist}
+	{/notempty}
+</div>
