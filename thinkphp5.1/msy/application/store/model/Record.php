@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 use think\Model;
 use think\Db;
 use think\Route;
@@ -14,46 +14,46 @@ class Record extends Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
+    protected $connection = 'db_config_store';
 
 	/**
 	 * 编辑厂商档案 新增和修改
-	 * @param string $factoryId
+	 * @param string $storeId
 	 * @return array
 	 */
-	public function edit($factoryId=''){
+	public function edit($storeId=''){
 		$data = input('post.');
-		$data['factory_id'] = $factoryId;
+		$data['store_id'] = $storeId;
 		//$validate = validate('Record');
 //		if(!$result = $validate->scene('add')->check($data)) {
 //			return errorMsg($validate->getError());
 //		}
 		if(!empty($data['company_img'])){
-			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
+			$data['company_img'] = moveImgFromTemp(config('upload_dir.store_record'),basename($data['company_img']));
 		}
 
 		if(!empty($data['logo_img'])){
-			$data['logo_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['logo_img']));
+			$data['logo_img'] = moveImgFromTemp(config('upload_dir.store_record'),basename($data['logo_img']));
 		}
 
 		if(!empty($data['rb_img'])){
-			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.store_record'),$data['rb_img']);
 			$data['rb_img'] = $rse['imgsWithDecNew'];
 			$newRbImg = $rse['imgsArray'];
 		}
 
-		if(!empty($data['factory_video'])){
-			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
-			$data['factory_video'] = $rse['imgsWithDecNew'];
-			$newFactoryVideo = $rse['imgsArray'];
+		if(!empty($data['store_video'])){
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.store_record'),$data['store_video']);
+			$data['store_video'] = $rse['imgsWithDecNew'];
+			$newstoreVideo = $rse['imgsArray'];
 		}
 		if(!empty($data['license'])){
-			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['license']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.store_record'),$data['license']);
 			$data['license'] = $rse['imgsWithDecNew'];
 			$newLicense = $rse['imgsArray'];
 		}
 		if(!empty($data['glory_img'])){
-			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['glory_img']);
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.store_record'),$data['glory_img']);
 			$data['glory_img'] = $rse['imgsWithDecNew'];
 			$newGloryImg = $rse['imgsArray'];
 		}
@@ -61,11 +61,11 @@ class Record extends Model {
 		if(input('?post.record_id') && !input('?post.record_id') == ''){
 			$where['id'] = $data['record_id'];
 			$file = array(
-				'logo_img','company_img','rb_img','factory_video','license','glory_img'
+				'logo_img','company_img','rb_img','store_video','license','glory_img'
 			);
 			$oldRecordInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
+			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'store_id'=>$storeId]);
 		}else{
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
@@ -83,13 +83,13 @@ class Record extends Model {
 					}
 					delImgFromPaths($oldRbImg,$newRbImg);
 				}
-				if(!empty($oldRecordInfo['factory_video']) && !empty($data['factory_video'])) {
-					$rbImgWithDec = json_decode($oldRecordInfo['factory_video'],true);
-					$oldFactoryVideo = [];
+				if(!empty($oldRecordInfo['store_video']) && !empty($data['store_video'])) {
+					$rbImgWithDec = json_decode($oldRecordInfo['store_video'],true);
+					$oldstoreVideo = [];
 					foreach ($rbImgWithDec as $item){
-						$oldFactoryVideo[] = $item['imgSrc'];
+						$oldstoreVideo[] = $item['imgSrc'];
 					}
-					delImgFromPaths($oldFactoryVideo,$newFactoryVideo);
+					delImgFromPaths($oldstoreVideo,$newstoreVideo);
 				}
 				if(!empty($oldRecordInfo['license']) && !empty($data['license'])){
 					$rbImgWithDec = json_decode($oldRecordInfo['license'],true);

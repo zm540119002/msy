@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 use think\Model;
 use think\Db;
 /**
@@ -12,18 +12,18 @@ class Series extends Model {
 	// 设置主键
 	protected $pk = 'id';
 //	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_store';
 	/**
 	 * 新增
 	 */
-	public function add($factoryId){
+	public function add($storeId){
 		$data = input('post.');
 		$validate = validate('Series');
 		if(!$result = $validate->scene('add')->check($data)) {
 			return errorMsg($validate->getError());
 		}
 		$this->startTrans();
-		$data['factory_id'] = $factoryId;
+		$data['store_id'] = $storeId;
 		$data['create_time'] = time();
 		$result = $this->allowField(true)->save($data);
 		$id = $this->getAttr('id');
@@ -46,14 +46,14 @@ class Series extends Model {
 	/**
 	 * 修改
 	 */
-	public function edit($factoryId){
+	public function edit($storeId){
 		$data = input('post.');
 		$validate = validate('Series');
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
 		$data['update_time'] = time();
-		$result = $this->allowField(true)->save($data,['id' => $data['series_id'],'factory_id'=>$factoryId]);
+		$result = $this->allowField(true)->save($data,['id' => $data['series_id'],'store_id'=>$storeId]);
 		if(false !== $result){
 			return successMsg("已修改");
 		}else{
@@ -64,13 +64,13 @@ class Series extends Model {
 	/**
 	 * 删除
 	 */
-	public function del($factoryId){
+	public function del($storeId){
 		$data = input('post.');
 		if(is_array($data['series_id'])){
 			$where['id']  = array('in',$data['series_id']);
 		}else{
 			$where['id'] = $data['series_id'];
-			$where['factory_id'] = $factoryId;
+			$where['store_id'] = $storeId;
 		}
 		$result = $this->where($where)->delete();;
 		if(false !== $result){
@@ -81,16 +81,16 @@ class Series extends Model {
 	}
 
 	//移动
-	public function move($factoryId){
+	public function move($storeId){
 		$data = input('post.');
 		if($data['move']){
 			$where = [
-				['factory_id','=',$factoryId],
+				['store_id','=',$storeId],
 				['sort', '<', $data['sort']]
 			];
 		}else{
 			$where = [
-				['factory_id','=',$factoryId],
+				['store_id','=',$storeId],
 				['sort', '>', $data['sort']]
 			];
 		}
@@ -100,7 +100,7 @@ class Series extends Model {
 			$updateData = [
 				'sort' => $data['sort'],
 			];
-			$result = $this->allowField(true)->save($updateData,['id' => $lastSeries[0]['id'],'factory_id' => $factoryId]);
+			$result = $this->allowField(true)->save($updateData,['id' => $lastSeries[0]['id'],'store_id' => $storeId]);
 			if(false == $result){
 				$this->rollBack();// 事务A回滚
 				return errorMsg($this->getError());
@@ -108,7 +108,7 @@ class Series extends Model {
 			$updateData = [
 				'sort' => $lastSeries[0]['sort'],
 			];
-			$result = $this->allowField(true)->save($updateData,['id' => $data['series_id'],'factory_id' => $factoryId]);
+			$result = $this->allowField(true)->save($updateData,['id' => $data['series_id'],'store_id' => $storeId]);
 			if(false == $result){
 				$this->rollBack();// 事务A回滚
 				return errorMsg($this->getError());

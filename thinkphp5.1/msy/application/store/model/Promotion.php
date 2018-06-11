@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 use GuzzleHttp\Psr7\Request;
 use think\Model;
 use think\Db;
@@ -13,32 +13,32 @@ class Promotion extends Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_store';
 	/**
 	 * 新增和修改
 	 */
-	public function edit($storeId =''){
+	public function edit($shopId =''){
 		$validate = validate('Promotion');
 		$data = input('post.');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
 		}
 		if(!empty($data['img'])){
-			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
+			$data['img'] = moveImgFromTemp(config('upload_dir.store_goods'),basename($data['img']));
 		}
-		$data['store_id'] = $storeId;
+		$data['shop_id'] = $shopId;
 		$this ->startTrans();
 		if(input('?post.id')){//修改
 			$where = [
 				['id','=',$data['id']],
-				['store_id','=',$storeId],
+				['shop_id','=',$shopId],
 			];
 			$file = array(
 				'img,goods_id',
 			);
 			$oldInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
-			$result = $this -> allowField(true) -> save($data,['id' => $data['id'],'store_id'=>$storeId]);
+			$result = $this -> allowField(true) -> save($data,['id' => $data['id'],'shop_id'=>$shopId]);
 			if(false == $result){
 				$this ->rollback();
 				return errorMsg('失败');
@@ -51,14 +51,14 @@ class Promotion extends Model {
 				return errorMsg('失败');
 			}
 		}
-		$modelGoods  = new \app\factory\model\Goods;
-		$result = $modelGoods ->save(['sale_type'=>1],['id' => $data['goods_id'],'store_id'=>$storeId]);
+		$modelGoods  = new \app\store\model\Goods;
+		$result = $modelGoods ->save(['sale_type'=>1],['id' => $data['goods_id'],'shop_id'=>$shopId]);
 		if(false === $result){
 			$this ->rollback();
 			return errorMsg('失败');
 		}
 		if(!empty($oldInfo) && $oldInfo['goods_id'] != $data['goods_id']){ //如换商品，把旧商品销售类型改为普通商品类型
-			$result = $modelGoods ->save(['sale_type'=>0],['id' => $oldInfo['goods_id'],'store_id'=>$storeId]);
+			$result = $modelGoods ->save(['sale_type'=>0],['id' => $oldInfo['goods_id'],'shop_id'=>$shopId]);
 			if(false === $result){
 				$this ->rollback();
 				return errorMsg('失败');
@@ -74,10 +74,10 @@ class Promotion extends Model {
 	/**
 	 * 删除
 	 */
-	public function del($storeId,$tag = true){
+	public function del($shopId,$tag = true){
 		$data = input('post.');
 		$where = [
-			['store_id','=',$storeId]
+			['shop_id','=',$shopId]
 		];
 		if(is_array($data['id'])){
 			$where[] = ['id','in',$data['id']];
