@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 
 class Organize extends \think\Model {
 	// 设置当前模型对应的完整数据表名称
@@ -7,14 +7,14 @@ class Organize extends \think\Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_store';
 
 	//编辑
-	public function edit($factoryId){
+	public function edit($storeId){
 		$postData = input('post.');
-		$postData['factory_id'] = $factoryId;
+		$postData['store_id'] = $storeId;
 		$postData['level'] = intval($postData['level']) + 1;
-		$validateOrganize = new \app\factory\validate\Organize();
+		$validateOrganize = new \app\store\validate\Organize();
 		if(!$validateOrganize->scene('edit')->check($postData)){
 			return errorMsg($validateOrganize->getError());
 		}
@@ -38,8 +38,8 @@ class Organize extends \think\Model {
 	}
 
 	//获取组织列表
-	public function getOrganizeList($factoryId){
-		$allOrganize = $this->createTree($this->getAllOrganize($factoryId));
+	public function getOrganizeList($storeId){
+		$allOrganize = $this->createTree($this->getAllOrganize($storeId));
 		return count($allOrganize)?$allOrganize:[];
 	}
 
@@ -56,10 +56,10 @@ class Organize extends \think\Model {
 	}
 
 	//获取组织
-	private function getAllOrganize($factoryId){
+	private function getAllOrganize($storeId){
 		$where = [
 			['status', '=', 0],
-			['factory_id', '=', $factoryId],
+			['store_id', '=', $storeId],
 		];
 		$field = array(
 			'id','name','level','superior_id',
@@ -70,10 +70,10 @@ class Organize extends \think\Model {
 	}
 
 	//删除
-	public function del($factoryId,$tag=true){
+	public function del($storeId,$tag=true){
 		$where = [
 			['status', '=', 0],
-			['factory_id', '=', $factoryId],
+			['store_id', '=', $storeId],
 		];
 		$id = input('post.id/a');
 		if(!is_array($id) || !count($id)){

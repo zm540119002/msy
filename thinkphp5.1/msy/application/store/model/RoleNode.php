@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 
 class RoleNode extends \think\Model {
 	// 设置当前模型对应的完整数据表名称
@@ -7,7 +7,7 @@ class RoleNode extends \think\Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_store';
 
 	//编辑
 	public function edit(){

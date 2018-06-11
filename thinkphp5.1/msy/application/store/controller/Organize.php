@@ -1,14 +1,14 @@
 <?php
-namespace app\factory\controller;
+namespace app\store\controller;
 
-class Organize extends FactoryBase
+class Organize extends StoreBase
 {
     /**首页
      */
     public function index(){
-        $modelOrganize = new \app\factory\model\Organize();
+        $modelOrganize = new \app\store\model\Organize();
         if(request()->isAjax()){
-            $info = $modelOrganize->edit($this->factory['id']);
+            $info = $modelOrganize->edit($this->store['id']);
             if($info['status']==1){
                 $this->assign('info',$info);
                 return view('info_tpl');
@@ -26,8 +26,8 @@ class Organize extends FactoryBase
         if(!request()->isGet()){
             return config('custom.not_get');
         }
-        $modelOrganize = new \app\factory\model\Organize();
-        $list = $modelOrganize->getOrganizeList($this->factory['id']);
+        $modelOrganize = new \app\store\model\Organize();
+        $list = $modelOrganize->getOrganizeList($this->store['id']);
         return $list;
     }
 
@@ -37,7 +37,7 @@ class Organize extends FactoryBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $modelOrganize = new \app\factory\model\Organize();
-        return $modelOrganize->del($this->factory['id'],true);
+        $modelOrganize = new \app\store\model\Organize();
+        return $modelOrganize->del($this->store['id'],true);
     }
 }
