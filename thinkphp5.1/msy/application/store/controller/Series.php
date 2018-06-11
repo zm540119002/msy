@@ -1,8 +1,8 @@
 <?php
-namespace app\factory\controller;
-use app\factory\model\Series as M;
+namespace app\store\controller;
+use app\store\model\Series as M;
 use common\controller\Base;
-class Series extends FactoryBase
+class Series extends StoreBase
 {
     
     //系列编辑
@@ -11,9 +11,9 @@ class Series extends FactoryBase
         $model = new M();
         if(request()->isPost()){
             if(input('?post.series_id')){
-                return $model -> edit($this->factory['id']);
+                return $model -> edit($this->store['id']);
             }else{
-                return $model -> add($this->factory['id']);
+                return $model -> add($this->store['id']);
             }
         }
         $seriesList = $model -> getList([],[],['sort'=>'desc']);
@@ -25,7 +25,7 @@ class Series extends FactoryBase
     public function move(){
         $model = new M();
         if(request()->isPost()){
-            return $model -> move($this->factory['id']);
+            return $model -> move($this->store['id']);
         }
     }
 
@@ -36,7 +36,7 @@ class Series extends FactoryBase
         $model = new M();
         if(request()->isPost()){
             if(input('?post.series_id')){
-                return $model -> del($this->factory['id']);
+                return $model -> del($this->store['id']);
             }
         }
     }

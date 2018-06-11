@@ -1,7 +1,7 @@
 <?php
-namespace app\factory\controller;
+namespace app\store\controller;
 
-class Promotion extends StoreBase
+class Promotion extends ShopBase
 {
     //促销管理
     public function manage()
@@ -15,15 +15,15 @@ class Promotion extends StoreBase
      */
     public function edit()
     {
-        $model = new \app\factory\model\Promotion;
+        $model = new \app\store\model\Promotion;
         if(request()->isPost()){
-            return $model -> edit($this->store['id']);
+            return $model -> edit($this->shop['id']);
         }
-        if(input('?id') && $this->store['id']){
+        if(input('?id') && $this->shop['id']){
             $promotionId = (int)input('id');
             $where = [
                 ['p.id','=',$promotionId],
-                ['p.store_id','=',$this->store['id']],
+                ['p.store_id','=',$this->shop['id']],
             ];
             $file = [
                 'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,p.store_id,g.thumb_img,g.name as goods_name'
@@ -44,9 +44,9 @@ class Promotion extends StoreBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
-        $model = new \app\factory\model\Promotion;
+        $model = new \app\store\model\Promotion;
         $where = [
-            ['p.store_id','=',$this->store['id']],
+            ['p.store_id','=',$this->shop['id']],
         ];
         $join = [
             ['goods g','g.id = p.goods_id'],
@@ -74,8 +74,8 @@ class Promotion extends StoreBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $modelRole = new \app\factory\model\Promotion();
-        return $modelRole->del($this->store['id'],true);
+        $modelRole = new \app\store\model\Promotion();
+        return $modelRole->del($this->shop['id'],true);
     }
 
 }

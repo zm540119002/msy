@@ -1,6 +1,6 @@
 <?php
-namespace app\factory\controller;
-class Store extends FactoryBase
+namespace app\store\controller;
+class Store extends storeBase
 {
 
     //开店部署首页
@@ -12,9 +12,9 @@ class Store extends FactoryBase
      */
     public function manage()
     {
-        $model = new \app\factory\model\Store();
-        $storeList =  $model -> getStoreList($this -> factory['id']);
-        $this -> assign('storeList',$storeList);
+        $model = new \app\store\model\Shop();
+        $ShopList =  $model -> getShopList($this -> shop['id']);
+        $this -> assign('ShopList',$ShopList);
         return $this->fetch();
     }
     /**
@@ -22,42 +22,42 @@ class Store extends FactoryBase
      */
     public function edit()
     {
-        $model = new \app\factory\model\Store();
+        $model = new \app\store\model\Shop();
         if(request()->isAjax()){
-            return $model -> edit($this -> factory['id']);
+            return $model -> edit($this -> shop['id']);
         }else{
             // 企业旗舰店
-            $modelFactory = new \app\factory\model\Factory();
+            $modelShop = new \app\store\model\Shop();
             $where = [
-                ['f.id','=',$this->factory['id']]
+                ['f.id','=',$this->shop['id']]
             ];
             $file = ['f.id,f.name,r.logo_img as img'];
             $join =[
-                ['record r','f.id = r.factory_id'],
+                ['record r','f.id = r.Shop_id'],
             ];
-            $factoryStore =  $modelFactory -> getInfo($where,$file,$join);
-            $this -> assign('factoryStore',$factoryStore);
+            $ShopShop =  $modelShop -> getInfo($where,$file,$join);
+            $this -> assign('ShopShop',$ShopShop);
             //企业品牌旗舰店名
-            $modelFactory = new \app\factory\model\Brand();
-            $where = [['b.factory_id','=',$this->factory['id']]];
+            $modelShop = new \app\store\model\Brand();
+            $where = [['b.Shop_id','=',$this->shop['id']]];
             $file = ['b.id,b.name,b.brand_img as img'];
-            $brandStores =  $modelFactory -> getList($where,$file);
-            $this -> assign('brandStores',$brandStores);
+            $brandShops =  $modelShop -> getList($where,$file);
+            $this -> assign('brandShops',$brandShops);
             //查看已申请的店铺
-            $modeStore = new \app\factory\model\Store();
+            $modeShop = new \app\store\model\Shop();
             $where = [
-                ['s.factory_id','=',$this->factory['id']]
+                ['s.Shop_id','=',$this->shop['id']]
             ];
-            $storesApplied = $modeStore->getList($where);
-            $this -> assign('storesApplied',$storesApplied);
+            $ShopsApplied = $modeShop->getList($where);
+            $this -> assign('ShopsApplied',$ShopsApplied);
             return $this->fetch();
         }
     }
     //设置店铺运营状态
-    public function setStoreStatus(){
+    public function setShopStatus(){
         if(request()->isAjax()){
-            $model = new \app\factory\model\Store();
-            return $model->edit($this -> factory['id']);
+            $model = new \app\store\model\Shop();
+            return $model->edit($this -> shop['id']);
         }
     }
     

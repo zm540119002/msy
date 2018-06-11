@@ -1,13 +1,13 @@
 <?php
-namespace app\factory\controller;
-class Brand extends FactoryBase
+namespace app\store\controller;
+class Brand extends StoreBase
 {
     //商标首页
     public function manage()
     {
-        $model = new \app\factory\model\Brand;
+        $model = new \app\store\model\Brand;
         $where = [
-            ['factory_id','=',$this->factory['id']]
+            ['store_id','=',$this->store['id']]
         ];
         $brandList =  $model -> getList($where);
         $this -> assign('brandList',$brandList);
@@ -17,9 +17,9 @@ class Brand extends FactoryBase
     //备案
     public function record()
     {
-        $model = new \app\factory\model\Brand;
+        $model = new \app\store\model\Brand;
         if(request()->isPost()){
-            return $model -> edit($this->factory['id']);
+            return $model -> edit($this->store['id']);
         }
         $categoryModel = new \app\index_admin\model\GoodsCategory;
         $where = [

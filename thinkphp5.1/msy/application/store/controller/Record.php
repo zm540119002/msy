@@ -1,17 +1,17 @@
 <?php
-namespace app\factory\controller;
+namespace app\store\controller;
 
-class Record extends FactoryBase
+class Record extends ShopBase
 {
 
     //产商档案编辑
     public function edit(){
-        $model = new \app\factory\model\Record();
+        $model = new \app\store\model\Record();
         if(request()->isAjax()){
-            return $model -> edit($this->factory['id']);
+            return $model -> edit($this->store['id']);
         }else{
             $where = [
-                ['factory_id','=',$this->factory['id']],
+                ['store_id','=',$this->store['id']],
             ];
             $recordInfo =  $model -> getInfo($where);
             $this -> assign('recordInfo',$recordInfo);
@@ -23,18 +23,18 @@ class Record extends FactoryBase
      */
     public function preview()
     {
-        $model = new \app\factory\model\Record();
+        $model = new \app\store\model\Record();
         $where = [
-            ['r.factory_id','=',$this->factory['id']],
+            ['r.store_id','=',$this->store['id']],
         ];
-        $file = ['r.id,r.shop_name,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
+        $file = ['r.id,r.shop_name,r.introduction,r.store_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
         r.company_img,r.create_time,r.update_time,f.name'];
         $join = [
-            ['factory f','f.id = r.factory_id'],
+            ['store f','f.id = r.store_id'],
         ];
         $recordInfo = $model -> getInfo($where,$file,$join);
         if(!empty($recordInfo)){
-            $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
+            $recordInfo['store_video'] = json_decode($recordInfo['store_video'],true);
             $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
             $recordInfo['license'] = json_decode($recordInfo['license'],true);
             $recordInfo['glory_img'] = json_decode($recordInfo['glory_img'],true);

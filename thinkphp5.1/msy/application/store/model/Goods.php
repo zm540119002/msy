@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 use GuzzleHttp\Psr7\Request;
 use think\Model;
 use think\Db;
@@ -13,21 +13,21 @@ class Goods extends Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_store';
 
 	/**
 	 * 编辑 新增和修改
-	 * @param string $store_id
+	 * @param string $shop_id
 	 * @return array
 	 */
-	public function edit($storeId =''){
+	public function edit($shopId =''){
 		$data = input('post.');
 		$validate = validate('Goods');
 //		 if(!$result = $validate->scene('edit')->check($data)) {
 //		 	return errorMsg($validate->getError());
 //		 }
 		if(!empty($data['thumb_img'])){
-			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
+			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.store_goods'),basename($data['thumb_img']));
 		}
 		if(!empty($data['main_img'])){
 			$mainImg = '';
@@ -35,13 +35,13 @@ class Goods extends Model {
 			array_pop($tempMainImg);
 			foreach ($tempMainImg as $item) {
 				if($item){
-					$mainImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
+					$mainImg = moveImgFromTemp(config('upload_dir.store_goods'),basename($item)).','.$mainImg;
 				}
 			}
 			$data['main_img'] = $mainImg;
 		}
 		if(!empty($data['goods_video'])){
-			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
+			$data['goods_video'] = moveImgFromTemp(config('upload_dir.store_goods'),basename($data['goods_video']));
 		}
 		if(!empty($data['details_img'])){
 			$detailsImg = '';
@@ -49,7 +49,7 @@ class Goods extends Model {
 			array_pop($tempArray);
 			foreach ($tempArray as $item) {
 				if($item){
-					$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+					$detailsImg = moveImgFromTemp(config('upload_dir.store_goods'),basename($item)).','.$detailsImg;
 				}
 			}
 			$data['details_img'] = $detailsImg;
@@ -66,10 +66,10 @@ class Goods extends Model {
 				return errorMsg('没有数据');
 			}
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'store_id'=>$storeId]);
+			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'shop_id'=>$shopId]);
 		}else{
 			$data['create_time'] = time();
-			$data['store_id'] = $storeId;
+			$data['shop_id'] = $shopId;
 			$result = $this -> allowField(true) -> save($data);
 			if(!$result){
 				return errorMsg('失败');
@@ -180,14 +180,14 @@ class Goods extends Model {
 
 
 	//设置库存
-	public function setInventory($storeId=''){
+	public function setInventory($shopId=''){
 		$data = input('post.');
 		if(empty($data['id'] || !(int)$data['id'])){
 			return errorMsg("参数错误");
 		}
 		$where = [
 			['id','=',(int)$data['id']],
-			['store_id','=',$storeId],
+			['shop_id','=',$shopId],
 		];
 		$result = $this->where($where)->setInc('inventory',(int)$data['num'] );
 		if(false !== $result){
