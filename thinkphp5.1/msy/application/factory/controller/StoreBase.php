@@ -13,8 +13,8 @@ class StoreBase extends FactoryBase
         parent::__construct();
         if($this->factory){
             //获取厂商店铺详情列表
-            \common\cache\Store::removeList($this->factory['id']);
-            $list = \common\cache\Store::getList($this->factory['id']);
+            \common\cache\FactoryStore::removeList($this->factory['id']);
+            $list = \common\cache\FactoryStore::getList($this->factory['id']);
             $count = count($list);
             if ($count > 1) {
                 //多家店判断是否有默认店铺
