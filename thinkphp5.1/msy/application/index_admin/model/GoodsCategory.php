@@ -77,16 +77,7 @@ class GoodsCategory extends \think\Model {
 		return successMsg('成功');
 	}
 
-
-
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $order
-	 * @param array $join
-	 * @param string $limit
-	 * @return array|\PDOStatement|string|\think\Collection
-	 * 查询多条数据
+	/**查询多条数据
 	 */
 	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
@@ -109,12 +100,7 @@ class GoodsCategory extends \think\Model {
 		return count($list)?$list->toArray():[];
 	}
 
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $join
-	 * @return array|null|\PDOStatement|string|Model
-	 * 查找一条数据
+	/**查找一条数据
 	 */
 	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
@@ -130,6 +116,4 @@ class GoodsCategory extends \think\Model {
 			->find();
 		return $info?$info->toArray():[];
 	}
-
-
 }
