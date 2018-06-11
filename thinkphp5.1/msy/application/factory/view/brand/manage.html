@@ -26,7 +26,13 @@
 			{volist name="brandList" id="vo"}
 				<li class="">
 					<div class="cols">
+						{notempty name="vo.brand_img"}
 						<img class="trade-logo" src="public_uploads/{$vo.brand_img}" />
+						{else /}
+						<img class="trade-logo" src="" />
+						{/notempty}
+
+
 					</div>
 					<div class="cols">
 						<span class="trade-name">{$vo.name}</span>
