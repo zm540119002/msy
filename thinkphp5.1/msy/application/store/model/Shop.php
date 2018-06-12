@@ -54,16 +54,16 @@ class Shop extends Model {
 	 */
 	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
-			's.status' => 0,
+			'sh.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
 		$_order = array(
-			's.id'=>'desc',
+			'sh.id'=>'desc',
 		);
 		$order = array_merge($_order, $order);
-		$list = $this->alias('s')
+		$list = $this->alias('sh')
 			->where($where)
 			->field($field)
 			->join(array_merge($_join,$join))
@@ -82,12 +82,12 @@ class Shop extends Model {
 	 */
 	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
-			's.status' => 0,
+			'sh.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		$info = $this->alias('s')
+		$info = $this->alias('sh')
 			->field($field)
 			->join(array_merge($_join,$join))
 			->where($where)
@@ -124,26 +124,26 @@ class Shop extends Model {
 	}
 	
 	//获取店铺的列表
-	public function getStoreList($storeId=''){
+	public function getShopList($storeId=''){
 		//企业旗舰店
 		$where = [
-			['s.store_id','=',$storeId],
-			['s.store_type','=',1],
+			['sh.store_id','=',$storeId],
+			['sh.shop_type','=',1],
 		];
-		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,f.name,r.logo_img as img'];
+		$file = ['sh.id,sh.shop_type,sh.run_type,sh.auth_status,sh.create_time,sh.update_time,sh.is_default,s.name,r.logo_img as img'];
 		$join =[
-			['factory f','f.id = s.foreign_id'],
-			['record r','s.foreign_id = r.store_id'],
+			['store s','s.id = sh.foreign_id'],
+			['record r','sh.foreign_id = r.store_id'],
 		];
 		$factoryStore = $this -> getList($where,$file,$join);
 		//品牌旗舰店
 		$where = [
-			['s.store_id','=',$storeId],
-			['s.store_type','=',2],
+			['sh.store_id','=',$storeId],
+			['sh.shop_type','=',2],
 		];
-		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,b.name,b.brand_img as img'];
+		$file = ['sh.id,sh.shop_type,sh.run_type,sh.auth_status,sh.create_time,sh.update_time,sh.is_default,b.name,b.brand_img as img'];
 		$join =[
-			['brand b','b.id = s.foreign_id'],
+			['brand b','b.id = sh.foreign_id'],
 		];
 		$brandStores = $this->getList($where,$file,$join);
 		$storeList = array_merge($factoryStore,$brandStores);
@@ -153,20 +153,20 @@ class Shop extends Model {
 	//获取单店铺的详情信息
 	public function getStoreInfo($store){
 		$where = [
-			['s.id','=',$store['id']],
+			['sh.id','=',$store['id']],
 		];
-		if($store['store_type'] == 1){
-			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,f.name,r.logo_img as img'];
+		if($store['shop_type'] == 1){
+			$file = ['sh.id,sh.shop_type,sh.run_type,sh.auth_status,sh.create_time,sh.update_time,sh.is_default,f.name,r.logo_img as img'];
 			$join =[
-				['factory f','f.id = s.foreign_id'],
-				['record r','s.foreign_id = r.store_id'],
+				['factory f','f.id = sh.foreign_id'],
+				['record r','sh.foreign_id = r.store_id'],
 			];
 			$storeInfo = $this -> getInfo($where,$file,$join);
 		}
-		if($store['store_type'] == 2){
-			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
+		if($store['shop_type'] == 2){
+			$file = ['sh.id,sh.shop_type,sh.run_type,sh.auth_status,sh.create_time,sh.update_time,b.name,b.brand_img as img'];
 			$join =[
-				['brand b','b.id = s.foreign_id'],
+				['brand b','b.id = sh.foreign_id'],
 			];
 			$storeInfo = $this -> getInfo($where,$file,$join);
 		}

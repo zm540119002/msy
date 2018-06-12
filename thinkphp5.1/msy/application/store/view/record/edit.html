@@ -146,7 +146,7 @@
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业视频</a>
-					<input type="hidden" class="company-video" value="" name="factory_video" data-src="{$recordInfo.factory_video|default=''}">
+					<input type="hidden" class="company-video" value="" name="store_video" data-src="{$recordInfo.store_video|default=''}">
 				</li>
 				<li class="">
 					<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传研发生产照片</a>
@@ -270,13 +270,13 @@
 				postData.glory_img = glory_img;
 			}
 
-			var factory_video=$('.company-video').data('src');
-			if(factory_video == ''){
-				postData.factory_video = '';
+			var store_video=$('.company-video').data('src');
+			if(store_video == ''){
+				postData.store_video = '';
 			}else{
-				postData.factory_video = factory_video;
+				postData.store_video = store_video;
 			}
-//			postData.factory_video=$('.company-video').data('src');
+//			postData.store_video=$('.company-video').data('src');
 			var content='';
 //			if(!postData.company_img){
 //				content='请上传企业形象图片';
@@ -290,7 +290,7 @@
 //				content='请上传企业标志图';
 //			}else if(!postData.introduction){
 //				content='请填写企业简介';
-//			}else if(!postData.factory_video||postData.factory_video==0){
+//			}else if(!postData.store_video||postData.store_video==0){
 //				content='请上传企业视频';
 //			}else if(!postData.rb_img||postData.rb_img==0){
 //				content='请上传企业研发生产图片';

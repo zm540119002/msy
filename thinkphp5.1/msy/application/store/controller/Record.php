@@ -7,7 +7,7 @@ class Record extends StoreBase
     //产商档案编辑
     public function edit(){
         $model = new \app\store\model\Record();
-        if(request()->isAjax()){
+        if(request()->isPost()){
             return $model -> edit($this->store['id']);
         }else{
             $where = [
