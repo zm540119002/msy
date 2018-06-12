@@ -13,8 +13,9 @@ class ShopBase extends StoreBase
         parent::__construct();
         if($this->store){
             //获取厂商店铺详情列表
-            \common\cache\Store::removeList($this->store['id']);
-            $list = \common\cache\Store::getList($this->store['id']);
+            \common\cache\Shop::removeList($this->store['id']);
+            $list = \common\cache\Shop::getList($this->store['id']);
+            $this -> assign('shopList', $list);
             $count = count($list);
             if ($count > 1) {
                 //多家店判断是否有默认店铺
@@ -30,23 +31,24 @@ class ShopBase extends StoreBase
             } elseif ($count == 1){
                 $info = $list[0];
             }elseif (!$count) {
-                $this -> success('没有店铺，请申请', 'Store/edit');
+                $this -> success('没有店铺，请申请', 'Shop/edit');
             }
             $this -> assign('storeList', $list);
-            \common\cache\Store::remove($info['id']);
-            $this -> shop = \common\cache\Store::get($info['id']);
+            \common\cache\Shop::remove($info['id']);
+            $this -> shop = \common\cache\Shop::get($info['id']);
+
         }
     }
 
     //设置默认产商
-    public function setDefaultStore(){
+    public function setDefaultShop(){
         $model = new \app\store\model\Shop();
-        return $model->setDefaultStore($this->store['id']);
+        return $model->setDefaultShop($this->store['id']);
     }
 
     //获取店铺信息
-    public function getStoreInfo(){
-        $modelStore = new \app\store\model\Store;
-        return $shopInfo = $modelStore -> getStoreInfo($this->store);
+    public function getShopInfo(){
+        $modelShop= new \app\store\model\Shop;
+        return $shopInfo = $modelShop -> getShopInfo($this->shop);
     }
 }

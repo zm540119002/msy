@@ -1,7 +1,7 @@
 <?php
 namespace common\cache;
 
-class ShopStore{
+class Shop{
     private static $_cache_key = 'cache_shop_';
     private static $_cache_key_list = 'cache_shop_list_';
 
@@ -10,13 +10,13 @@ class ShopStore{
     public static function get($id){
         $store = cache(self::$_cache_key.$id);
         if(!$store){
-            $model = new \app\factory\model\Store();
+            $model = new \app\store\model\Shop();
             $where = [
                 'status' => 0,
                 'id' => $id,
             ];
             $file = [
-                's.id,s.is_default,s.shop_type,run_type,auth_status'
+                'id,is_default,shop_type,run_type,auth_status'
             ];
             $store = $model -> getInfo($where,$file);
             cache(self::$_cache_key.$id, $store,config('custom.factory_cache_time'));
@@ -35,8 +35,8 @@ class ShopStore{
     public static function getList($factorId){
         $storeList = cache(self::$_cache_key_list.$factorId);
         if(!$storeList){
-            $model = new \app\factory\model\Store();
-            $storeList = $model -> getStoreList($factorId);
+            $model = new \app\store\model\Shop();
+            $storeList = $model -> getShopList($factorId);
             cache(self::$_cache_key_list.$factorId, $storeList,config('custom.factory_cache_time'));
         }
         return $storeList;

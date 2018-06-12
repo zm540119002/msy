@@ -42,13 +42,13 @@ class StoreBase extends \common\controller\UserBase{
     public function getStoreInfo(){
         $model = new \app\store\model\Store();
         $where = [
-            ['f.id','=',$this->store['id']],
+            ['s.id','=',$this->store['id']],
         ];
         $file = [
-            'f.id,f.name,r.logo_img'
+            's.id,s.name,r.logo_img'
         ];
         $join =[
-            ['record r','r.store_id = f.id',],
+            ['record r','r.store_id = s.id',],
         ];
         return $model->getInfo($where,$file,$join);
     }
