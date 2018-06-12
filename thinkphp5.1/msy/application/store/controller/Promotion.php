@@ -23,10 +23,10 @@ class Promotion extends ShopBase
             $promotionId = (int)input('id');
             $where = [
                 ['p.id','=',$promotionId],
-                ['p.store_id','=',$this->shop['id']],
+                ['p.shop_id','=',$this->shop['id']],
             ];
             $file = [
-                'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,p.store_id,g.thumb_img,g.name as goods_name'
+                'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,g.thumb_img,g.name as goods_name'
             ];
             $join =[
               ['goods g','g.id = p.goods_id'],
@@ -46,7 +46,7 @@ class Promotion extends ShopBase
     public function getList(){
         $model = new \app\store\model\Promotion;
         $where = [
-            ['p.store_id','=',$this->shop['id']],
+            ['p.shop_id','=',$this->shop['id']],
         ];
         $join = [
             ['goods g','g.id = p.goods_id'],

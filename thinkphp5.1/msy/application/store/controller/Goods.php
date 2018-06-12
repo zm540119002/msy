@@ -20,7 +20,7 @@ class Goods extends ShopBase
         if(input('?goods_id') && $this->shop['id']){
             $goodsId= (int)input('goods_id');
             $where = [
-               ['g.store_id','=',$this->shop['id']],
+               ['g.shop_id','=',$this->shop['id']],
                ['g.id','=',$goodsId],
             ];
             $goodsInfo =  $goodsModel -> getInfo($where);
@@ -49,7 +49,7 @@ class Goods extends ShopBase
         if($this->shop['id']){
             $where = [
                 ['g.id','=',$goodsId],
-                ['g.store_id','=',$this->shop['id']],
+                ['g.shop_id','=',$this->shop['id']],
             ];
             $goodsInfo =  $model -> getInfo($where);
             if(empty($goodsInfo)){
@@ -63,7 +63,7 @@ class Goods extends ShopBase
 
             //获取店铺的详情信息
             $modelShop = new \app\store\model\Shop;
-            $shopInfo = $modelShop -> getStoreInfo($this->store);
+            $shopInfo = $modelShop -> getShopInfo($this->store);
             $this -> assign('storeInfo',$shopInfo);
         }
 
@@ -107,7 +107,7 @@ class Goods extends ShopBase
         }
         $model = new\app\store\model\Goods;
         $where = [
-            ['g.store_id','=',$this->shop['id']],
+            ['g.shop_id','=',$this->shop['id']],
         ];
         if($_GET['pageType'] == 'promotion' ){//促销
             $where[] =  ['g.sale_type','=',0];
@@ -146,7 +146,7 @@ class Goods extends ShopBase
             $shopPath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.store_goods_backup');
             //本厂商店铺备份文件
             $modelShop = new \app\store\model\Shop;
-            $shopList = $modelShop -> getStoreList($this -> store['id']);
+            $shopList = $modelShop -> getShopList($this -> store['id']);
             foreach ( $shopList as &$shopInfo) {
                 $fileName = $shopPath.$shopInfo['id'].'.txt';
                 if(file_exists($fileName)){
@@ -187,9 +187,12 @@ class Goods extends ShopBase
         if($this->store && $this->store) {
             if (request()->isPost()) {
                 $data = input();
+                if(empty($data['goodsId']) && !(int)($data['goodsId'])){
+                    return errorMsg('参数错误');
+                }
                 $model = new \app\store\model\Goods;
                 $result = $model->allowField(true)
-                    ->save($data, ['id' => $data['goodsId'], 'store_id' => $this->shop['id']]);
+                    ->save($data, ['id' => $data['goodsId'], 'shop_id' => $this->shop['id']]);
                 if (false !== $result) {
                     return successMsg('成功');
                 }
@@ -212,7 +215,7 @@ class Goods extends ShopBase
         if(request()->isPost()){
             $model = new \app\store\model\Goods;
             $where = [
-                ['store_id','=',$this->shop['id']]
+                ['shop_id','=',$this->shop['id']]
             ];
             $field = [
                 'g.id,g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,

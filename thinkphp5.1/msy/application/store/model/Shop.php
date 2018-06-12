@@ -96,7 +96,7 @@ class Shop extends Model {
 	}
 
 	//设置默认店铺
-	public function setDefaultStore($storeId=''){
+	public function setDefaultShop($storeId=''){
 		if(request()->isAjax()){
 			$id = (int)input('post.id');
 			if(!$id){
@@ -135,7 +135,7 @@ class Shop extends Model {
 			['store s','s.id = sh.foreign_id'],
 			['record r','sh.foreign_id = r.store_id'],
 		];
-		$factoryStore = $this -> getList($where,$file,$join);
+		$factoryShop = $this -> getList($where,$file,$join);
 		//品牌旗舰店
 		$where = [
 			['sh.store_id','=',$storeId],
@@ -145,37 +145,37 @@ class Shop extends Model {
 		$join =[
 			['brand b','b.id = sh.foreign_id'],
 		];
-		$brandStores = $this->getList($where,$file,$join);
-		$storeList = array_merge($factoryStore,$brandStores);
-		return $storeList;
+		$brandShops = $this->getList($where,$file,$join);
+		$shopList = array_merge($factoryShop,$brandShops);
+		return $shopList;
 	}
 
 	//获取单店铺的详情信息
-	public function getStoreInfo($store){
+	public function getShopInfo($store){
 		$where = [
 			['sh.id','=',$store['id']],
 		];
 		if($store['shop_type'] == 1){
-			$file = ['sh.id,sh.shop_type,sh.run_type,sh.auth_status,sh.create_time,sh.update_time,sh.is_default,f.name,r.logo_img as img'];
+			$file = ['sh.id,sh.shop_type,sh.run_type,sh.auth_status,sh.create_time,sh.update_time,sh.is_default,s.name,r.logo_img as img'];
 			$join =[
-				['factory f','f.id = sh.foreign_id'],
+				['store s','s.id = sh.foreign_id'],
 				['record r','sh.foreign_id = r.store_id'],
 			];
-			$storeInfo = $this -> getInfo($where,$file,$join);
+			$shopInfo = $this -> getInfo($where,$file,$join);
 		}
 		if($store['shop_type'] == 2){
 			$file = ['sh.id,sh.shop_type,sh.run_type,sh.auth_status,sh.create_time,sh.update_time,b.name,b.brand_img as img'];
 			$join =[
 				['brand b','b.id = sh.foreign_id'],
 			];
-			$storeInfo = $this -> getInfo($where,$file,$join);
+			$shopInfo = $this -> getInfo($where,$file,$join);
 		}
-		return $storeInfo;
+		return $shopInfo;
 	}
 
 	/**检查店铺是否属于此厂商
 	 */
-	public function checkStoreExist($id,$storeId){
+	public function checkShopExist($id,$storeId){
 		$where = [
 			['id','=',$id],
 			['store_id','=',$storeId]

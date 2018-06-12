@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\controller;
+namespace app\store\controller;
 
 use common\controller\UserBase;
 
