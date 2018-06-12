@@ -40,6 +40,7 @@ $(function(){
     });
     // 选择单视频
     $('body').on('change','.uploadSingleVideo',function () {
+         console.log(event.target.files[0].size);
         var img = event.target.files[0];
         var obj=$(this).parent();
         // 判断是否图片
@@ -57,9 +58,10 @@ $(function(){
         var reader = new FileReader();
         reader.readAsDataURL(img);
         reader.onload = function(e){
+           
             var postData = {img: e.target.result};
             var videoUrl=e.target.result;
-             $(obj).find('video').attr('src',videoUrl);
+            $(obj).find('video').attr('src',videoUrl);
             $(obj).find('.img').val(videoUrl);
             //提交
             $.post(controller+"uploadImgToTemp",postData,function(msg){
