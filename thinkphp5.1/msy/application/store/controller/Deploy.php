@@ -9,8 +9,7 @@ class Deploy extends \common\controller\UserBase{
 
     /**入驻登记
      */
-    public function register()
-    {
+    public function register(){
         $model = new \app\store\model\Store();
         if(request()->isAjax()){
             return $model -> edit($this -> user['id']);
