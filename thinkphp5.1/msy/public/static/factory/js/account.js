@@ -45,7 +45,7 @@ function getRoleList(config) {
     };
     _config = $.extend(_config,config);
     var postData = {};
-    var url = module + 'role/getList';
+    var url = module + 'Role/getList';
     $.get(url,postData,function(data){
         _config.listContainer.append(data);
         if(!_config.option){
