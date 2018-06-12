@@ -1,6 +1,6 @@
-<section class="message-center-info f20" style="display:none;" id="factoryList">
+<section class="message-center-info f20" style="display:none;" id="storeList">
     <ul class="vendorInfoList">
-        {volist name='factoryList' id='vo'}
+        {volist name='storeList' id='vo'}
         <li data-id="{$vo.id}" class="{eq name='vo.is_default' value='1'}current{/eq}">
             <span>{$vo.name}</span>
         </li>
@@ -9,13 +9,13 @@
 </section>
 <script type="text/javascript">
     //设置默认供应商
-    function setDefaultFactory() {
-        var factoryList = $('#factoryList').html();
+    function setDefaultStore() {
+        var storeList = $('#storeList').html();
         layer.open({
             title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
-            className:'factoryListLayer',
+            className:'storeListLayer',
             type: 1,
-            content: factoryList,
+            content: storeList,
             anim: 'up',
             style: '',
             success:function(){
@@ -25,12 +25,12 @@
             btn:['确定'],
             yes:function(index){
                 var postData = {};
-                postData.factoryId = $('.factoryListLayer li.current').data('id');
-                if(!postData.factoryId){
+                postData.storeId = $('.storeListLayer li.current').data('id');
+                if(!postData.storeId){
                     dialog.error('请选择供应商');
                     return false;
                 }
-                var url = 'setDefaultFactory';
+                var url = 'setDefaultStore';
                 $.post(url,postData,function(data){
                     if(data.status==0){
                         dialog.error(data.info);
@@ -43,14 +43,14 @@
         });
     }
     $(function () {
-        var factory = '{:json_encode($store)}';
+        var store = '{:json_encode($store)}';
         //如果是多供应商
-        if(factory === 'null'){
-            setDefaultFactory();
+        if(store === 'null'){
+            setDefaultStore();
         }
         //选择效果
-        $('body').on('click','.factoryListLayer li',function(){
-            $('.factoryListLayer li').removeClass('current');
+        $('body').on('click','.storeListLayer li',function(){
+            $('.storeListLayer li').removeClass('current');
             $(this).toggleClass('current');
         });
     });
