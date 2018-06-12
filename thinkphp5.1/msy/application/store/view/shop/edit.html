@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="factory_css/main.css">
+<link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
 <!--<section id="applyNewStore" style="display:none;">-->
@@ -42,7 +42,7 @@
 				<ul class="">
 					<!--企业旗舰店-->
 					{notempty name="storeShop"}
-					<li class="columns_flex store-list factory_store" data-foreign_id="{$storeShop.id|default=''}">
+					<li class="columns_flex store-list store_store" data-foreign_id="{$storeShop.id|default=''}">
 						{notempty name="storeShop.img"}
 						<img class="small_default_img" src="public_uploads/{$storeShop.img|default=''}" alt="">
 						{else /}
@@ -123,8 +123,8 @@
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
 			shop_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
 			if(shop_type ==1 ) {
-				var factory_store = $('.factory_store').length;
-				if (!factory_store) {
+				var store_store = $('.store_store').length;
+				if (!store_store) {
 					dialog.success('请完善企业档案', module + 'Record/edit');
 					return false;
 				}
@@ -154,12 +154,12 @@
 					}
 					if(shop_type ==1 ){
 						$('.applyNewStoreLayer .store-list').addClass('current');
-						$('.factory_store').find('li').attr('disabled',false);
+						$('.store_store').find('li').attr('disabled',false);
 						$('.store-two').show();
 						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
-						$('.factory_store').find('.run_type').text(runTypeTxt);
+						$('.store_store').find('.run_type').text(runTypeTxt);
 						$('.brand_stores').hide();
-						$('.factory_store').show();
+						$('.store_store').show();
 					}
 					if(shop_type ==2 ){
 
@@ -177,7 +177,7 @@
 								})
 							}
 						}
-						$('.factory_store').hide();
+						$('.store_store').hide();
 						$('.brand_stores').show();
 					}
 				}else{
