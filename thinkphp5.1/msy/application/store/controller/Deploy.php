@@ -1,9 +1,12 @@
 <?php
 namespace app\store\controller;
-use common\controller\UserBase;
-use think\facade\Session;
-class Deploy extends UserBase
-{
+
+class Deploy extends \common\controller\UserBase{
+    //入驻部署首页
+    public function index(){
+        return $this->fetch('index');
+    }
+
     /**入驻登记
      */
     public function register()
