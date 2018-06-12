@@ -14,8 +14,6 @@ $(function(){
             content='请填写商标全称';
         }else if(!postData.brand_img){
             content='请上传商标图片';
-        }else if(!postData.cat_id_1){
-            content='请选择商标所属分类';
         }
         if(content){
             dialog.error(content);
@@ -124,8 +122,6 @@ $(function(){
             content='请填写商标名称';
         }else if(!postData.brand_img){
             content='请上传商标图片';
-        }else if(!postData.category_id_1){
-            content='请选择商标所属分类';
         }else if(!postData.certificate){
             content='请上传商标证书图片';
         }
