@@ -6,7 +6,7 @@
  * Time: 9:39
  * 订单管理控制器
  */
-namespace app\factory\model;
+namespace app\store\model;
 
 use think\Model;
 
@@ -15,7 +15,7 @@ class Order extends Model
     // 设置当前模型对应的完整数据表名称
     protected $table = 'order_unpack';
     // 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
+    protected $connection = 'db_config_store';
     // 设置主键
     protected $pk = 'order_id';
 
