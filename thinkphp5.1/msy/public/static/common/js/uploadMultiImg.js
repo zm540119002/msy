@@ -394,6 +394,7 @@ function uploadsImgDescribe(content,obj){
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
+                console.log(typeof multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
                         multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
