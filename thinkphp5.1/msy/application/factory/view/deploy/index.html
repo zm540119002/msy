@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="store_css/main.css">
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="title"}开店部署{/block}
 {block name="content"}
@@ -10,7 +10,7 @@
 		<div class="columns_flex f20 l-r-sides">
 			<a href="{:url('Record/preview')}">企业档案</a>
 			<a href="{:url('Brand/manage')}">商标备案</a>
-			<a href="{:url('Shop/manage')}">开店申请</a>
+			<a href="{:url('Store/manage')}">开店申请</a>
 			<a href="{:url('Organize/index')}">组别角色</a>
 			<a href="{:url('Account/index')}">账号授权</a>
 		</div>
@@ -60,7 +60,7 @@
 </article>
 {/block}
 {block name="common"}
-{include file="template/footer_menu_msy_store.html" /}
+{include file="template/footer_menu_msy_factory.html" /}
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
