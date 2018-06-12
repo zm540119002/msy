@@ -2,9 +2,10 @@
 namespace app\store\controller;
 
 class Deploy extends \common\controller\UserBase{
+
     //入驻部署首页
     public function index(){
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**入驻登记
