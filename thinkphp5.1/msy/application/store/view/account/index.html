@@ -78,9 +78,9 @@
 		//页面初始化
 		$('#setRole').find('div').remove();
 		//定义新增用户角色
-		var userFactoryRoleIds = [];
+		var userStoreRoleIds = [];
 		//定义新增组织
-		var userFactoryOrganizeId = 0;
+		var userStoreOrganizeId = 0;
 		//获取组织列表
 		getOrganizeList();
 		//获取员工账号列表
@@ -104,8 +104,8 @@
 					var winHeight=$(window).height();
 					$('.signIn-wrapper').css('height',winHeight-120+'px');
 					//先清空
-					userFactoryRoleIds = [];
-					userFactoryOrganizeId = 0;
+					userStoreRoleIds = [];
+					userStoreOrganizeId = 0;
 				},
 				btn:['确定','取消'],
 				yes:function(index){
@@ -117,17 +117,17 @@
 						content = '请输入姓名';
 					}else if(!isMobilePhone(postData.mobile_phone)){
 						content = '请输入正确的手机号码';
-					}else if(!userFactoryRoleIds.length){
+					}else if(!userStoreRoleIds.length){
 						content = '请设置角色';
-					}else if(!userFactoryOrganizeId){
+					}else if(!userStoreOrganizeId){
 						content = '请设置组织';
 					}
 					if(content){
 						dialog.error(content);
 						return false;
 					}
-					postData.userFactoryRoleIds = userFactoryRoleIds;
-					postData.userFactoryOrganizeId = userFactoryOrganizeId;
+					postData.userStoreRoleIds = userStoreRoleIds;
+					postData.userStoreOrganizeId = userStoreOrganizeId;
 					$.post(action,postData,function(data){
 						if(data.status==0){
 							dialog.error(data.info);
@@ -153,7 +153,7 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.signIn-wrapper').css('height',winHeight-120+'px');
-					$.each(userFactoryRoleIds,function(i,o){
+					$.each(userStoreRoleIds,function(i,o){
 						$.each($('.setRoleLayer li'),function(){
 							if($(this).data('id')==o){
 								$(this).attr('class','current');
@@ -164,10 +164,10 @@
 				btn:['确定'],
 				yes:function(index){
 					//先清空
-					userFactoryRoleIds = [];
+					userStoreRoleIds = [];
 					$.each($('.setRoleLayer li'),function(){
 						if($(this).attr('class')=='current'){
-							userFactoryRoleIds.push($(this).data('id'));
+							userStoreRoleIds.push($(this).data('id'));
 						}
 					});
 					layer.close(index);
@@ -191,14 +191,14 @@
 					$('.signIn-wrapper').css('height',winHeight-120+'px');
 					//回写
 					$.each($('.setOrganizeLayer').find('.organize ul'),function(){
-						if($(this).data('id')==userFactoryOrganizeId){
+						if($(this).data('id')==userStoreOrganizeId){
 							$(this).find('span:first').addClass('current');
 						}
 					});
 				},
 				btn:['确定'],
 				yes:function(index){
-					userFactoryOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
+					userStoreOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
 					layer.close(index);
 				}
 			});

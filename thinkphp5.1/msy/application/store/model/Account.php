@@ -92,6 +92,17 @@ class Account extends \think\Model {
 			}
 		}
 		$postData['userStoreStatus'] = 0;
+		$modeRole = new \app\store\model\Role();
+		$where = [
+			['status', '=', 0],
+			['store_id', '=', $storeId],
+			['id', 'in', $postData['userStoreRoleIds']],
+		];
+		$field = array(
+			'id','name',
+		);
+		$roleList = $modeRole->where($where)->field($field)->select();
+		$postData['role'] = count($roleList)?$roleList->toArray():[];
 		$this->commit();//提交事务
 		return successMsg('成功！',$postData);
 	}
@@ -192,7 +203,7 @@ class Account extends \think\Model {
 			['store_id','=',$storeId],
 		];
 		$userStoreRole = $modelUserStoreRole->getRole($userId,$storeId);
-		$oldRoleIds = array_column($userStoreRole,'role_id');
+		$oldRoleIds = array_column($userStoreRole,'id');
 		$modelUserStoreRole->startTrans();//开启事务
 		//新增角色
 		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
