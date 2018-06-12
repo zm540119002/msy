@@ -88,6 +88,9 @@
 			}
 			$.post(url,postData,function(data){
 				dialog.error(data.info);
+				if(data.status==1){
+					history.go(-1);
+				}
 			});
 		});
 		//状态设置弹框
