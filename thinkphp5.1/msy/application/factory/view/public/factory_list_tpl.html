@@ -19,8 +19,9 @@
             anim: 'up',
             style: '',
             success:function(){
+                console.log(123);
                 var winHeight=$(window).height();
-                $('.signIn-wrapper').css('height',winHeight-120+'px');
+                $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
             },
             btn:['确定'],
             yes:function(index){
