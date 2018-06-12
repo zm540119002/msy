@@ -92,6 +92,17 @@ class Account extends \think\Model {
 			}
 		}
 		$postData['userStoreStatus'] = 0;
+		$modeRole = new \app\store\model\Role();
+		$where = [
+			['status', '=', 0],
+			['store_id', '=', $storeId],
+			['id', 'in', $postData['userStoreRoleIds']],
+		];
+		$field = array(
+			'id','name',
+		);
+		$roleList = $modeRole->where($where)->field($field)->select();
+		$postData['role'] = count($roleList)?$roleList->toArray():[];
 		$this->commit();//提交事务
 		return successMsg('成功！',$postData);
 	}
