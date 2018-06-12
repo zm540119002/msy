@@ -63,8 +63,10 @@ class Organize extends \think\Model {
 		];
 		$field = array(
 			'id','name','level','superior_id',
-		);	
-		$order = 'id';
+		);
+		$order = [
+			'id'=>'desc','name',
+		];
 		$allOrganize = $this->where($where)->field($field)->order($order)->select();
 		return count($allOrganize)?$allOrganize->toArray():[];
 	}

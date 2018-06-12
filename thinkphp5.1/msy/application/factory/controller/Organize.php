@@ -26,9 +26,11 @@ class Organize extends FactoryBase
         if(!request()->isGet()){
             return config('custom.not_get');
         }
-        $modelOrganize = new \app\factory\model\Organize();
-        $list = $modelOrganize->getOrganizeList($this->factory['id']);
-        return $list;
+        if(intval($this->factory['id'])){
+            $modelOrganize = new \app\factory\model\Organize();
+            $list = $modelOrganize->getOrganizeList($this->factory['id']);
+        }
+        return count($list)?$list:[];
     }
 
     /**删除

@@ -8,11 +8,11 @@
     </ul>
 </section>
 <script type="text/javascript">
-    //设置默认供应商
+    //设置默认美容机构
     function setDefaultStore() {
         var storeList = $('#storeList').html();
         layer.open({
-            title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
+            title:['选择美容机构','border-bottom:1px solid #d9d9d9;'],
             className:'storeListLayer',
             type: 1,
             content: storeList,
@@ -20,14 +20,14 @@
             style: '',
             success:function(){
                 var winHeight=$(window).height();
-                $('.signIn-wrapper').css('height',winHeight-120+'px');
+                $('.storeListLayer .vendorInfoList').css('height',winHeight-120+'px');
             },
             btn:['确定'],
             yes:function(index){
                 var postData = {};
                 postData.storeId = $('.storeListLayer li.current').data('id');
                 if(!postData.storeId){
-                    dialog.error('请选择供应商');
+                    dialog.error('请选择美容机构');
                     return false;
                 }
                 var url = 'setDefaultStore';
@@ -44,7 +44,7 @@
     }
     $(function () {
         var store = '{:json_encode($store)}';
-        //如果是多供应商
+        //如果是多美容机构
         if(store === 'null'){
             setDefaultStore();
         }
