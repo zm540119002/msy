@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="factory_css/main.css">
+<link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
 <!--商标截图-->
@@ -80,7 +80,7 @@
 						</div>
 						<div class="">
 							<a href="javascript:void(0);" class="trademark-type right-arrow">商标所属分类</a>
-							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.cat_id_1|default=''}"/>
+							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.category_id_1|default=''}"/>
 						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>
@@ -133,7 +133,7 @@
 <script type="text/javascript" src="public_js/hammer.js"></script>
 <script type="text/javascript" src="public_js/iscroll-zoom.js"></script>
 <script type="text/javascript" src="public_js/jquery.photoClip.js"></script>
-<script type="text/javascript" src="factory_js/brand.js"></script>
+<script type="text/javascript" src="store_js/brand.js"></script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
 

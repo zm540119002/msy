@@ -28,8 +28,8 @@
 			<span class="cols">备注</span>
 		</div>
 		<ul>
-            {notempty name="storeList"}
-			{volist name="storeList" id="vo"}
+            {notempty name="shopList"}
+			{volist name="shopList" id="vo"}
 			<li class="thead-td" data-id="{$vo.id}">
 				<div class="cols">
 					{notempty name="vo.img"}
@@ -39,9 +39,9 @@
 					{/notempty}
 					<div class="store-type ">
 						<div>
-							{if $vo.store_type == 1 }
+							{if $vo.shop_type == 1 }
 							<span>{$vo.name}</span>官方旗舰店
-							{elseif $vo.store_type == 2/}
+							{elseif $vo.shop_type == 2/}
 							<span>{$vo.name}</span>品牌旗舰店
 							{else /}
 							{/if}
@@ -100,7 +100,7 @@
 			{/notempty}
 		</ul>
 	</section>
-	<a href="{:url('store/edit')}" class="apply-new-store">申请开新店</a>
+	<a href="{:url('Shop/edit')}" class="apply-new-store">申请开新店</a>
 </article>
 
 {/block}
