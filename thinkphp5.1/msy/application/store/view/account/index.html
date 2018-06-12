@@ -133,6 +133,7 @@
 							dialog.error(data.info);
 						}else{
 							$('ul.account-list').prepend(data);
+							$('ul.account-list').find('span.no-data').remove();
 							layer.close(index);
 						}
 					});
