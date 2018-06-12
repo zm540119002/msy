@@ -7,7 +7,7 @@ class Record extends FactoryBase
     //产商档案编辑
     public function edit(){
         $model = new \app\factory\model\Record();
-        if(request()->isAjax()){
+        if(request()->isPost()){
             return $model -> edit($this->factory['id']);
         }else{
             $where = [

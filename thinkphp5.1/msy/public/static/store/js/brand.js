@@ -8,13 +8,13 @@ $(function(){
         var tardemark=$('.trademark-info').data('trademark');
         var postData={};
         var postData=$('.trademarkform').serializeObject();
-        postData.category_id_1=tardemark;
+        postData.cat_id_1=tardemark;
         var content='';
         if(!postData.name){
             content='请填写商标全称';
         }else if(!postData.brand_img){
             content='请上传商标图片';
-        }else if(!postData.category_id_1){
+        }else if(!postData.cat_id_1){
             content='请选择商标所属分类';
         }
         if(content){

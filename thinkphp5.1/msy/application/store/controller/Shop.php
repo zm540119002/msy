@@ -13,8 +13,8 @@ class Shop extends StoreBase
     public function manage()
     {
         $model = new \app\store\model\Shop();
-        $ShopList =  $model -> getShopList($this -> shop['id']);
-        $this -> assign('ShopList',$ShopList);
+        $shopList =  $model -> getShopList($this -> store['id']);
+        $this -> assign('shopList',$shopList);
         return $this->fetch();
     }
     /**
@@ -24,32 +24,35 @@ class Shop extends StoreBase
     {
         $model = new \app\store\model\Shop();
         if(request()->isAjax()){
-            return $model -> edit($this -> shop['id']);
+            return $model -> edit($this -> store['id']);
         }else{
             // 企业旗舰店
-            $modelShop = new \app\store\model\Shop();
+            $modelStore= new \app\store\model\Store();
             $where = [
-                ['f.id','=',$this->shop['id']]
+                ['s.id','=',$this->store['id']]
             ];
-            $file = ['f.id,f.name,r.logo_img as img'];
+            $file = ['s.id,s.name,r.logo_img as img'];
             $join =[
-                ['record r','f.id = r.Shop_id'],
+                ['record r','s.id = r.store_id'],
             ];
-            $ShopShop =  $modelShop -> getInfo($where,$file,$join);
-            $this -> assign('ShopShop',$ShopShop);
+            $storeShop =  $modelStore -> getInfo($where,$file,$join);
+            $this -> assign('storeShop',$storeShop);
             //企业品牌旗舰店名
             $modelShop = new \app\store\model\Brand();
-            $where = [['b.Shop_id','=',$this->shop['id']]];
+            $where = [
+                ['b.store_id','=',$this->store['id']]
+            ];
             $file = ['b.id,b.name,b.brand_img as img'];
             $brandShops =  $modelShop -> getList($where,$file);
             $this -> assign('brandShops',$brandShops);
             //查看已申请的店铺
             $modeShop = new \app\store\model\Shop();
+            $file = ['sh.shop_type, sh.run_type, sh.foreign_id'];
             $where = [
-                ['s.Shop_id','=',$this->shop['id']]
+                ['sh.store_id','=',$this->store['id']]
             ];
-            $ShopsApplied = $modeShop->getList($where);
-            $this -> assign('ShopsApplied',$ShopsApplied);
+            $shopsApplied = $modeShop->getList($where,$file);
+            $this -> assign('shopsApplied',$shopsApplied);
             return $this->fetch();
         }
     }
@@ -57,7 +60,7 @@ class Shop extends StoreBase
     public function setShopStatus(){
         if(request()->isAjax()){
             $model = new \app\store\model\Shop();
-            return $model->edit($this -> shop['id']);
+            return $model->edit($this -> store['id']);
         }
     }
     

@@ -50,7 +50,7 @@
 		<span class="content-label">企业视频</span>
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				{volist name="recordInfo.factory_video" id="vo"}
+				{volist name="recordInfo.store_video" id="vo"}
 				<div class="swiper-slide ">
 					{notempty name="vo"}
 					<video src="public_uploads/{$vo['imgSrc']}" preload="meta" controls="controls" class="common_default_img"></video>

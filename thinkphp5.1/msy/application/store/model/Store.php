@@ -65,12 +65,12 @@ class Store extends Model {
 	 */
 	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
-			'f.status' => 0,
+			's.status' => 0,
 		);
 		$_join = array(
 		);
 		$where = array_merge($_where, $where);
-		$list = $this->alias('f')
+		$list = $this->alias('s')
 			->where($where)
 			->field($field)
 			->join(array_merge($_join,$join))
@@ -84,12 +84,12 @@ class Store extends Model {
 	 */
 	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
-			'f.status' => 0,
+			's.status' => 0,
 		);
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		$info = $this->alias('f')
+		$info = $this->alias('s')
 			->field($field)
 			->join(array_merge($_join,$join))
 			->where($where)
