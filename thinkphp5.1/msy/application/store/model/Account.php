@@ -203,7 +203,7 @@ class Account extends \think\Model {
 			['store_id','=',$storeId],
 		];
 		$userStoreRole = $modelUserStoreRole->getRole($userId,$storeId);
-		$oldRoleIds = array_column($userStoreRole,'role_id');
+		$oldRoleIds = array_column($userStoreRole,'id');
 		$modelUserStoreRole->startTrans();//开启事务
 		//新增角色
 		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
