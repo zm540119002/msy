@@ -26,9 +26,11 @@ class Organize extends StoreBase
         if(!request()->isGet()){
             return config('custom.not_get');
         }
-        $modelOrganize = new \app\store\model\Organize();
-        $list = $modelOrganize->getOrganizeList($this->store['id']);
-        return $list;
+        if(intval($this->store['id'])){
+            $modelOrganize = new \app\store\model\Organize();
+            $list = $modelOrganize->getOrganizeList($this->store['id']);
+        }
+        return count($list)?$list:[];
     }
 
     /**删除
