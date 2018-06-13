@@ -516,38 +516,47 @@ function uploadsVideoDescribe(content,obj)
                 }
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
-                var postDate = {};
-                postDate.imgsWithDes = layermultiImgAttr;
-                $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
-                   if(info.status == 0){
-                       dialog.error(info.msg);
-                       return false;
-                   }
-                    var imgArray = [];
-                    // $.each(info.info,function(index,img){
-                    //     if(img.indexOf("uploads") == -1 && img !=''){
-                    //         img = uploads+img;
-                    //     }
-                    //     imgArray.push(img);
-                    // });
-                    var a=JSON.parse(info);
-                    for(var i=0;i<a.length;i++){
-                        if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                            a[i].imgSrc= uploads+a[i].imgSrc;
-
+                var postData = {};
+                postData.imgsWithDes = layermultiImgAttr;
+                $('.layui-m-layerbtn span[type="1"]').addClass('disabled');
+                $.ajax({
+                    url: controller + 'uploadMultiImgToTempWithDes',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
                         }
-                        imgArray.push(a[i]);
-                    }
+                        var imgArray = [];
+                        var a=JSON.parse(info);
+                        for(var i=0;i<a.length;i++){
+                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
+                                a[i].imgSrc= uploads+a[i].imgSrc;
 
-                    obj.data('src', imgArray);
-                   console.log(info);
-                    if(info != ''){
-                        layer.close(index);
-                    }else{
-                        alert(1);
-                         errorTipc('文件还没上传完毕');
-                    }
+                            }
+                            imgArray.push(a[i]);
+                        }
 
+                        obj.data('src', imgArray);
+                        if(info != ''){
+                            $('.layui-m-layerbtn span[type="1"]').removeClass('disabled');
+                            layer.close(index);
+                        }else{
+                            alert(1);
+                            errorTipc('文件还没上传完毕');
+                        }
+                        
+                    },
+                    complete:function(){
+                        
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    },
                 });
 
             },
