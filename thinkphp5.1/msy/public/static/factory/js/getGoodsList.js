@@ -110,7 +110,7 @@ function getPageLayer(url,config) {
 //禁用移动按钮
 function disableBtn(){
     var listUl = $('#list');
-    listUl.find('li').find('.move-btn').removeAttr('disabled');
-    listUl.find('li:first').find('.up-btn').attr('disabled','disabled');
-    listUl.find('li:last').find('.down-btn').attr('disabled','disabled');
+    listUl.find('li').find('.move-btn').removeProp('disabled');
+    listUl.find('li:first').find('.up-btn').prop('disabled','disabled');
+    listUl.find('li:last').find('.down-btn').prop('disabled','disabled');
 }
