@@ -540,8 +540,11 @@ function uploadsVideoDescribe(content,obj)
                     }
 
                     obj.data('src', imgArray);
+                   
                     if(info != ''){
                         layer.close(index);
+                    }else{
+                         errorTipc('文件还没上传完毕');
                     }
 
                 });
