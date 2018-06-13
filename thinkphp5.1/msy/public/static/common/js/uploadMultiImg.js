@@ -159,7 +159,7 @@ $(function(){
             // $(obj).addClass('active');
             var video=  $('<video src="" class="upload_img" autoplay="autoplay"></video>');
             video.attr("src", videoUrl);
-            var videoAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><span class="delete-picture">X</span></div><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></li>');
+            var videoAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></li>');
             videoAdd.find('.picture-module').append(video);
             imgContainer.append(videoAdd);
            
@@ -474,7 +474,7 @@ function uploadsVideoDescribe(content,obj)
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
-                    html+='<input type="file" class="uploadImg uploadSingleEditVideo" name="">';
+                    html+='<input type="file" class="uploadImg uploadSingleVideo" name="">';
                     html+='<a class="delete-picture">X</a>';
                     html+='<video src="" class="upload_img"></video>';
                     html+='</div>';
@@ -537,10 +537,8 @@ function uploadsVideoDescribe(content,obj)
                         console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
-                            alert(1);
                             layer.close(index);
                         }else{
-                            alert(222);
                             errorTipc('文件还没上传完毕');
                         }
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
