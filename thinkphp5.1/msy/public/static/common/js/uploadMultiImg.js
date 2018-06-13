@@ -466,6 +466,7 @@ function uploadsVideoDescribe(content,obj)
             title:['上传企业视频','border-bottom:1px solid #d9d9d9'],
             className:'editCompanyPicLayer',
             content:content,
+            type:1,
             btn:['确定','取消'],
             success:function(){
                 //var html=$('#img_list').html(); 模板
