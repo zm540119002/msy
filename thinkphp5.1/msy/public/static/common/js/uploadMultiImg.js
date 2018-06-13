@@ -542,7 +542,7 @@ function uploadsVideoDescribe(content,obj)
                     }
 
                     obj.data('src', imgArray);
-                   
+                   console.log(info);
                     if(info != ''){
                         layer.close(index);
                     }else{
