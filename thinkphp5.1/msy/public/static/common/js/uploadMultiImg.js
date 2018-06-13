@@ -511,7 +511,7 @@ function uploadsVideoDescribe(content,obj)
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 });
-               
+               console.log(layermultiImgAttr);
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
                 var postDate = {};
