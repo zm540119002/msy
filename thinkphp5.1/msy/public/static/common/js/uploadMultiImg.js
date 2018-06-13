@@ -469,7 +469,8 @@ function uploadsVideoDescribe(content,obj)
             type:1,
             btn:['确定','取消'],
             success:function(){
-                //var html=$('#img_list').html(); 模板
+                var winHeight=$(window).height();
+                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
@@ -545,6 +546,7 @@ function uploadsVideoDescribe(content,obj)
                     if(info != ''){
                         layer.close(index);
                     }else{
+                        alert(1);
                          errorTipc('文件还没上传完毕');
                     }
 
