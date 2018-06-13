@@ -466,9 +466,11 @@ function uploadsVideoDescribe(content,obj)
             title:['上传企业视频','border-bottom:1px solid #d9d9d9'],
             className:'editCompanyPicLayer',
             content:content,
+            type:1,
             btn:['确定','取消'],
             success:function(){
-                //var html=$('#img_list').html(); 模板
+                var winHeight=$(window).height();
+                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
@@ -493,8 +495,6 @@ function uploadsVideoDescribe(content,obj)
             yes:function(index){
                 var layermultiImgAttr=[];
                 var layerImgInfoData={};
-                console.log(layermultiImgAttr);
-
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
                     var imgSrc=_this.find('video').attr('src');
@@ -516,34 +516,47 @@ function uploadsVideoDescribe(content,obj)
                 }
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
-                var postDate = {};
-                postDate.imgsWithDes = layermultiImgAttr;
-                $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
-                   if(info.status == 0){
-                       dialog.error(info.msg);
-                       return false;
-                   }
-                    var imgArray = [];
-                    // $.each(info.info,function(index,img){
-                    //     if(img.indexOf("uploads") == -1 && img !=''){
-                    //         img = uploads+img;
-                    //     }
-                    //     imgArray.push(img);
-                    // });
-                    var a=JSON.parse(info);
-                    for(var i=0;i<a.length;i++){
-                        if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                            a[i].imgSrc= uploads+a[i].imgSrc;
-
+                var postData = {};
+                postData.imgsWithDes = layermultiImgAttr;
+                $('.layui-m-layerbtn span[type="1"]').addClass('disabled');
+                $.ajax({
+                    url: controller + 'uploadMultiImgToTempWithDes',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
                         }
-                        imgArray.push(a[i]);
-                    }
+                        var imgArray = [];
+                        var a=JSON.parse(info);
+                        for(var i=0;i<a.length;i++){
+                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
+                                a[i].imgSrc= uploads+a[i].imgSrc;
 
-                    obj.data('src', imgArray);
-                    if(info != ''){
-                        layer.close(index);
-                    }
+                            }
+                            imgArray.push(a[i]);
+                        }
 
+                        obj.data('src', imgArray);
+                        if(info != ''){
+                            $('.layui-m-layerbtn span[type="1"]').removeClass('disabled');
+                            layer.close(index);
+                        }else{
+                            alert(1);
+                            errorTipc('文件还没上传完毕');
+                        }
+                        
+                    },
+                    complete:function(){
+                        
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    },
                 });
 
             },

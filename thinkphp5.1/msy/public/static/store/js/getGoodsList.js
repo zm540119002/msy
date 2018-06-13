@@ -61,6 +61,7 @@ function getPage(url,config) {
             }
             currentPage ++;
             loadTrigger = true;
+            disableBtn();
         }
     });
 }
