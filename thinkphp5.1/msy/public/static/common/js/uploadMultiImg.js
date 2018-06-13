@@ -540,7 +540,7 @@ function uploadsVideoDescribe(content,obj)
 
                     obj.data('src', imgArray);
                     if(info != ''){
-                        layer.close(index);
+                        // layer.close(index);
                     }
                 });
 
