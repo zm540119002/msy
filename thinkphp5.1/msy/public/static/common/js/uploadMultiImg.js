@@ -534,12 +534,13 @@ function uploadsVideoDescribe(content,obj)
                             }
                             imgArray.push(a[i]);
                         }
-                        console.log(typeof info);
+                        console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
+                            alert(1);
                             layer.close(index);
                         }else{
-                            alert(1);
+                            
                             errorTipc('文件还没上传完毕');
                         }
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
