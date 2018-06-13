@@ -3,7 +3,7 @@
 {volist name="list" id="vo"}
 <li class="columns_flex tag-item first-tag" data-id="{$vo.id}">
     <div class="td">
-        <input type="text" class="serial-num" value="{$vo.sort}"/>
+        <input type="text" class="serial-num sort" value="{$vo.sort}"/>
     </div>
     <div class="td">
         {notempty name="vo.thumb_img"}
@@ -30,9 +30,9 @@
             var _this=$(this);
             var _thisLi = _this.parents('li');
             //交换排序值
-            var _thisSortVal = _thisLi.find('input').val();
-            _thisLi.find('input').val(_thisLi.prev().find('input').val());
-            _thisLi.prev().find('input').val(_thisSortVal);
+            var _thisSortVal = _thisLi.find('input.sort').val();
+            _thisLi.find('input.sort').val(_thisLi.prev().find('input.sort').val());
+            _thisLi.prev().find('input.sort').val(_thisSortVal);
             //交换位置
             _thisLi.insertBefore(_thisLi.prev());
             //禁用移动按钮
@@ -43,10 +43,10 @@
             var _this=$(this);
             var _thisLi = _this.parents('li');
             //交换排序值
-            var _thisSortVal = _thisLi.find('input').val();
-            console.log(_thisLi.next().find('input').val());
-            _thisLi.find('input').val(_thisLi.next().find('input').val());
-            _thisLi.next().find('input').val(_thisSortVal);
+            var _thisSortVal = _thisLi.find('input.sort').val();
+            console.log(_thisLi.next().find('input.sort').val());
+            _thisLi.find('input.sort').val(_thisLi.next().find('input.sort').val());
+            _thisLi.next().find('input.sort').val(_thisSortVal);
             //交换位置
             _thisLi.insertAfter(_thisLi.next());
             disableBtn();
