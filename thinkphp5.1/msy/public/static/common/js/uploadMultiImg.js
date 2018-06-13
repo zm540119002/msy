@@ -540,7 +540,7 @@ function uploadsVideoDescribe(content,obj)
                             alert(1);
                             layer.close(index);
                         }else{
-                            
+                            alert(222);
                             errorTipc('文件还没上传完毕');
                         }
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
