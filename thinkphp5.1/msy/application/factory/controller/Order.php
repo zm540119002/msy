@@ -64,7 +64,7 @@ class Order extends StoreBase
      */
     public function delivery()
     {
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**
@@ -108,7 +108,7 @@ class Order extends StoreBase
 					<p><strong>支付金额：￥ {$ret['order']['pay_money']} 元</strong></p>
 					<p>支付方式：{$ret['order']['pay_method']}</p>
 					<p>支付备注：{$ret['order']['remark']}</p>
-					</dd>
+				</dd>
 			</dl>
         ";
         $html .= "
@@ -124,11 +124,11 @@ class Order extends StoreBase
         foreach($ret['order_detail'] as $v){
             $html .= "
                 <dl>
-                    <dd>
+                    <dd class='goods_all' data='{$v["goods_id"]}'>
                         <p><img src='".config('template.tpl_replace_string.public_uploads')."/{$v["thumb_img"]}' /></p>
                         <p>商品名称：{$v['name']}</p>
-                        <p>购买数量：{$v['number']}</p>
-                        <p>发货数量：<span id='goods_{$v['goods_id']}'>{$v['send_number']}</span></p>
+                        <p>购买数量：<span class='number_'>{$v['number']}</span></p>
+                        <p>发货数量：<span class='send'>{$v['send_number']}</span></p>
                         <p>当时销售价：{$v['goods_price']}</p>
                         <p>售后价：{$v['after_sale_price']}</p>
                     </dd>
@@ -142,18 +142,6 @@ class Order extends StoreBase
         }
         return $html;
     }
-    
-    /**
-     * 填写物流单号
-     * @param number|string $order_id 订单号
-     * @param number|string $express_id  物流单号
-     * @param number $name_id 物流公司代号
-     * @return boolean
-     */
-    public function setExpress($order_id, $express_id, $name_id)
-    {
-        return true;
-    }
 
     /**
      * 更改订单状态
@@ -164,16 +152,6 @@ class Order extends StoreBase
     public function setStatusUnpack($order_id, $status_unpack)
     {
         return $this->order->setStatusUnpack($this->store['id'], $order_id, $status_unpack);
-    }
-
-    /**
-     * 订单商品数据与扫描数据比对
-     * @param json $scan 扫描到的商品数据
-     * @param number|string $order_id 订单号
-     * @return boolean|json|array 比对完全一致或返回其差异数据
-     */
-    public function compareGoods($order_id, $scan){
-        return true;
     }
 
     public function isOwnOrder($order_sn)
@@ -190,7 +168,6 @@ class Order extends StoreBase
             'data'=>$this->getOrderDetail($ret['order_id'], false)
         ];
         return successMsg('订单单条明细数据', $data);
-
     }
 
     public function getExpress($order_sn)
@@ -205,7 +182,7 @@ class Order extends StoreBase
             if( !$order_html ){
                 $order_html = "
                     <dl>
-                        <dt>订单号：{$v['order_sn']}</dt>
+                        <dt id='order_id' data='{$v["order_id"]}'>订单号：{$v['order_sn']}</dt>
                         <dt>下单时间：{$v['create_time']}</dt>
                         <dt>支付状态：{$v['status']}</dt>
                         <dt>订单状态：{$v['status_unpack']}</dt>
@@ -217,15 +194,28 @@ class Order extends StoreBase
             if($v['express_name']){
                 $express_html .= "
                     <dl>
-                        <dt>物流公司：{$v['express_name']}</dt>
-                        <dt>物流单号：{$v['express_code']}</dt>
+                        <dt>物流公司：物流公司：
+                            <input type='text' value='{$v["express_name"]}' id='name_{$v["express_id"]}' disabled />
+                        </dt>
+                        <dt>物流单号：
+                            <input type='text' value='{$v['express_code']}' id='code_{$v["express_id"]}' disabled />
+                        </dt>
+                        <dt class='operation' style='display: none'>
+                            <span class='update_express' data='{$v['express_id']}'>修改</span>
+                            <span class='del_express' data='{$v['express_id']}'>删除</span>
+                            
+                        </dt>
                     </dl>
                 ";
             }
-
         }
         $order_html .= $express_html;
         return successMsg('查询成功', ['data'=>$order_html]);
+    }
+
+    public function setDelivery($order_id)
+    {
+        return $this->order->setDelivery($this->store['id'], $order_id);
     }
 
 }
