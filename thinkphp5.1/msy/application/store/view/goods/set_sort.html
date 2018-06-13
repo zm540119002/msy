@@ -66,17 +66,24 @@
 			getMore(url,config);
 		}
 
-		//上下架
-		$('body').on('click','.shelf',function(){
-			var shelfStatus=$(this).data('shelf');
-			var _this = $(this);
-			var storeType=$('.channel_nav a.current').data('type');
-			var goodsId = $(this).parents('li').data('id');
+		//排序
+		$('body').on('click','.increase-commodity',function(){
 			var postData ={};
-			postData.goodsId = goodsId;
-			postData.shelf_status = shelfStatus;
-			postData.storeType = storeType;
-			var url = module+'goods/setShelf';
+			var dataArray=[];
+			var dataOjb={};
+			$.each($('.classify-label-content li'),function(i,val){
+				var _this = $(this);
+				var id = _this.data('id');
+				var sort = _this.find('.sort').val();
+				dataOjb={
+					id:id,
+					sort:sort,
+					line_num : i,
+				};
+				dataArray.push(dataOjb);
+			});
+			postData.sortData = dataArray;
+			var url = module+'goods/setSort';
 			$.ajax({
 				url: url,
 				data: postData,
@@ -84,22 +91,19 @@
 				dataType:'json',
 				beforeSend: function(){
 				},
+				success: function(data){
+					if(data.status == 0){
+						dialog.error(data.info);
+						return false;
+					}
+					dialog.success(data.info,location.reload());
+				},
 				error:function (xhr) {
+					console.log(xhr)
 					dialog.error('AJAX错误');
 				},
-				success: function(data){
-					if(data.status == 1){
-						if(shelfStatus==2){
-							_this.removeClass('shelf').addClass('apply-shelf').text('已申请');
-						}else{
-							_this.data('shelf',2);
-							_this.addClass('up-shelf').text('上架');
-						}
-					}
-				}
 			});
 		})
 	});
 </script>
-<!--<script type="text/javascript" src="store_js/manageTag.1.js"></script>-->
 {/block}
