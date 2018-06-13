@@ -493,24 +493,29 @@ function uploadsVideoDescribe(content,obj)
             yes:function(index){
                 var layermultiImgAttr=[];
                 var layerImgInfoData={};
+                console.log(layermultiImgAttr);
+
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
                     var imgSrc=_this.find('video').attr('src');
                     var imgText=_this.find('textarea').val();
+                    // if(imgSrc.indexOf('data:')!=-1){
+                    //     errorTipc('文件还没上传完毕');
+                    //     return false;
+                    // }
                     layerImgInfoData={
                         imgSrc:imgSrc,
                         imgText:imgText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 });
-               
-                // obj.data('src',layermultiImgAttr);
-                obj.data('src',layermultiImgAttr);
-                if(layermultiImgAttr.length==0){
+                if(layermultiImgAttr==false){
+
                     layer.close(index);
                     return false;
                 }
-                
+                // obj.data('src',layermultiImgAttr);
+                obj.data('src',layermultiImgAttr);
                 var postDate = {};
                 postDate.imgsWithDes = layermultiImgAttr;
                 $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
@@ -535,9 +540,12 @@ function uploadsVideoDescribe(content,obj)
                     }
 
                     obj.data('src', imgArray);
-                    layer.close(index);
+                    if(info != ''){
+                        layer.close(index);
+                    }
+
                 });
-                layer.close(index);
+
             },
             no:function(){
                 $('.editCompanyPicLayer li').remove();

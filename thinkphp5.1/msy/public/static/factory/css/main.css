@@ -201,7 +201,7 @@
 .classify-operate-btn a.down-disabled-icons{
     background-position:0 -178px;
 }
-.move-btn.disabled{
+.up-btn.disabled{
     pointer-events:none;
 }
 .addTagLayer .layui-m-layercont{
@@ -940,6 +940,9 @@ transparent;
     background: #ff7aab;
     color:#fff;
     text-align:center;
+}
+.apply-new-store.disabled{
+    pointer-events: none;
 }
 .new-store-type{
     padding:.20rem .20rem 1rem .20rem;

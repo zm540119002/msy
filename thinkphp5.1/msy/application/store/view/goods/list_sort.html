@@ -14,7 +14,7 @@
         <p class="classify-tag-name">{$vo.name}</p>
     </div>
     <div class="classify-operate-btn td">
-        <a href="javascript:void(0);" class="move-btn move-disabled-icons">上移</a>
+        <a href="javascript:void(0);" class="up-btn  move-disabled-icons">上移</a>
         <a href="javascript:void(0);" class="down-btn down-icons">下移</a>
     </div>
     <input type="hidden" value="" class="classifyTagInfo1" data-tag-id="">
@@ -46,7 +46,7 @@
             }
         }
     //上移
-    $('body').on('click','.move-btn',function(){
+    $('body').on('click','.up-btn',function(){
         var _this=$(this);
         if(_this.hasClass('move-disabled-icons')){
             //_this.attr('disabled',true);
