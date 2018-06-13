@@ -111,6 +111,6 @@ function getPageLayer(url,config) {
 function disableBtn(){
     var listUl = $('#list');
     listUl.find('li').find('.move-icons').removeClass('move-disabled-icons');
-    listUl.find('li:first').find('.up-icons').addClass('move-disabled-icons');
-    listUl.find('li:last').find('.down-icons').addClass('move-disabled-icons');
+    listUl.find('li:first').find('.up-btn').addClass('move-disabled-icons');
+    listUl.find('li:last').find('.down-btn').addClass('move-disabled-icons');
 }
