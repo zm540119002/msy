@@ -454,7 +454,7 @@ function uploadsImgDescribe(content,obj){
                         console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
-                            dialog.error('文件上传完！')
+                            dialog.error('图片文件上传完！')
                             layer.close(index);
                         }else{
                             
@@ -555,7 +555,7 @@ function uploadsVideoDescribe(content,obj)
                         console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
-                            dialog.error('文件上传完！')
+                            dialog.error('视频文件上传完！')
                             layer.close(index);
                         }else{
                             
