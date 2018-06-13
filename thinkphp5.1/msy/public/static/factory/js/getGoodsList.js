@@ -61,6 +61,7 @@ function getPage(url,config) {
             }
             currentPage ++;
             loadTrigger = true;
+            disableBtn();
         }
     });
 }
@@ -104,4 +105,12 @@ function getPageLayer(url,config) {
             loadTriggerLayer = true;
         }
     });
+}
+
+//禁用移动按钮
+function disableBtn(){
+    var listUl = $('#list');
+    listUl.find('li').find('.move-icons').removeClass('move-disabled-icons');
+    listUl.find('li:first').find('.move-icons').addClass('move-disabled-icons');
+    listUl.find('li:last').find('.down-icons').addClass('move-disabled-icons');
 }
