@@ -429,30 +429,6 @@ function uploadsImgDescribe(content,obj){
                 }
                 var postData = {};
                 postData.imgsWithDes = layermultiImgAttr;
-                $.post(controller + 'uploadMultiImgToTempWithDes',postData,function(info){
-                   if(info.status == 0){
-                       dialog.error(info.msg);
-                       return false;
-                   }
-                    var imgArray = [];
-                    var a=JSON.parse(info);
-                    for(var i=0;i<a.length;i++){
-                         if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                            a[i].imgSrc= uploads+a[i].imgSrc;
-
-                        }
-                         imgArray.push(a[i]);
-                    }
-
-                    obj.data('src', imgArray);
-                    if(info != ''){
-                        layer.close(index);
-                    }else{
-                        
-                    }
-                    $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
-                    });
-
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
                     url: controller + 'uploadMultiImgToTempWithDes',
