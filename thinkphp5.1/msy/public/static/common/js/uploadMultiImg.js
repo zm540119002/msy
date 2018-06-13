@@ -539,9 +539,11 @@ function uploadsVideoDescribe(content,obj)
                     }
 
                     obj.data('src', imgArray);
-                    layer.close(index);
+                    if(info != ''){
+                        layer.close(index);
+                    }
                 });
-                
+
             },
             no:function(){
                 $('.editCompanyPicLayer li').remove();
