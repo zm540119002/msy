@@ -110,7 +110,7 @@ function getPageLayer(url,config) {
 //禁用移动按钮
 function disableBtn(){
     var listUl = $('#list');
-    listUl.find('li').find('.move-icons').removeClass('move-disabled-icons');
+    listUl.find('li').find('.move-btn').removeClass('move-disabled-icons');
     listUl.find('li:first').find('.up-btn').addClass('move-disabled-icons');
     listUl.find('li:last').find('.down-btn').addClass('move-disabled-icons');
 }
