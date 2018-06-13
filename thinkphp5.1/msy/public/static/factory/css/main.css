@@ -941,6 +941,9 @@ transparent;
     color:#fff;
     text-align:center;
 }
+.apply-new-store.disabled{
+    pointer-events: none;
+}
 .new-store-type{
     padding:.20rem .20rem 1rem .20rem;
 }

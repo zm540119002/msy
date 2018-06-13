@@ -43,7 +43,7 @@ $(function(){
                         html+='<span class="classify-operate-btn">';
                         html+=' <a href="javascript:void(0);" class="edit-icons">编辑</a>';
                         html+=' <a href="javascript:void(0);" class="del-icons">删除</a>';
-                        html+=' <a href="javascript:void(0);" class="move-btn" data-move="0">上移</a>';
+                        html+=' <a href="javascript:void(0);" class="up-btn" data-move="0">上移</a>';
                         html+=' <a href="javascript:void(0);" class="down-btn" data-move="1">下移</a>';
                         html+='</span>';
                         html+='<input type="hidden" value="" class="sort'+layerTagNum+'" data-tag-id=""/>';
@@ -87,7 +87,7 @@ $(function(){
         manageClassifyTag.initLayer('你确定删除分类标签?',tagName,'删除商品分类标签',_this);
     })
     //上移
-    $('body').on('click','.move-btn',function(){
+    $('body').on('click','.up-btn',function(){
         var _this=$(this);
         if(_this.hasClass('move-disabled-icons')){
             //_this.attr('disabled',true);
