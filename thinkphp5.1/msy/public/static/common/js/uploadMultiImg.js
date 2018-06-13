@@ -377,12 +377,14 @@ function uploadsMultiVideo(content){
 //图片描述弹窗
 function uploadsImgDescribe(content,obj){
     layer.open({
-            // title:['商品分类标签','border-bottom:1px solid #d9d9d9'],
+            title:['上传照片和描述','border-bottom:1px solid #d9d9d9'],
             className:'editCompanyPicLayer',
             content:content,
+            type:1,
             btn:['确定','取消'],
             success:function(){
-                //var html=$('#img_list').html(); 模板
+                var winHeight=$(window).height();
+                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
@@ -425,20 +427,14 @@ function uploadsImgDescribe(content,obj){
                     layer.close(index);
                     return false;
                 }
-                var postDate = {};
-                postDate.imgsWithDes = layermultiImgAttr;
-                $.post(controller + 'uploadMultiImgToTempWithDes',postDate,function(info){
+                var postData = {};
+                postData.imgsWithDes = layermultiImgAttr;
+                $.post(controller + 'uploadMultiImgToTempWithDes',postData,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
                        return false;
                    }
                     var imgArray = [];
-                    // $.each(info.info,function(index,img){
-                    //     if(img.indexOf("uploads") == -1 && img !=''){
-                    //         img = uploads+img;
-                    //     }
-                    //     imgArray.push(img);
-                    // });
                     var a=JSON.parse(info);
                     for(var i=0;i<a.length;i++){
                          if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
@@ -449,9 +445,54 @@ function uploadsImgDescribe(content,obj){
                     }
 
                     obj.data('src', imgArray);
-                    layer.close(index);
-                })
-                layer.close(index);
+                    if(info != ''){
+                        layer.close(index);
+                    }else{
+                        
+                    }
+                    $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
+                    });
+
+                $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
+                $.ajax({
+                    url: controller + 'uploadMultiImgToTempWithDes',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        errorTipc('文件还没上传完毕');
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
+                        }
+                        var imgArray = [];
+                        var a=JSON.parse(info);
+                        for(var i=0;i<a.length;i++){
+                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
+                                a[i].imgSrc= uploads+a[i].imgSrc;
+
+                            }
+                            imgArray.push(a[i]);
+                        }
+                        console.log(info);
+                        obj.data('src', imgArray);
+                        if(info != ''){
+                            dialog.error('文件上传完！')
+                            layer.close(index);
+                        }else{
+                            
+                        }
+                        $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
+                    },
+                    complete:function(){
+                        
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    },
+                });
+                
             },
             no:function(){
                 $('.editCompanyPicLayer li').remove();
@@ -519,6 +560,7 @@ function uploadsVideoDescribe(content,obj)
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
+                        errorTipc('文件还没上传完毕');
                     },
                     success: function(info){
                         if(info.status == 0){
@@ -537,9 +579,10 @@ function uploadsVideoDescribe(content,obj)
                         console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
+                            dialog.error('文件上传完！')
                             layer.close(index);
                         }else{
-                            errorTipc('文件还没上传完毕');
+                            
                         }
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
                     },
