@@ -775,6 +775,9 @@ color: #ed6d00;
     background: #FF7BAC;
     color:#fff;
 }
+.editCompanyPicLayer .layui-m-layerbtn span[yes]{
+    pointer-events: none;
+}
 .loginNav li{
     width:50%;
     display:inline-block;
@@ -1074,7 +1077,8 @@ color: #ed6d00;
     color:#0066cc;
 }
 .factoryListLayer,
-.storeListLayer {
+.storeListLayer,
+.editCompanyPicLayer{
     position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;
 }
 .vendorInfoLayer .layui-m-layercont,

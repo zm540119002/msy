@@ -403,7 +403,7 @@
     text-indent: 0.15rem;
 }
 .editCompanyPicLayer .layui-m-layercont{
-    height:4.5rem;
+    /*height:4.5rem;*/
     overflow: hidden;
     overflow-y:scroll;
 }
