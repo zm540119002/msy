@@ -510,10 +510,10 @@ function uploadsVideoDescribe(content,obj)
                
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
-                if(layermultiImgAttr.length==0){
-                    layer.close(index);
-                    return false;
-                }
+                // if(layermultiImgAttr.length==0){
+                //     layer.close(index);
+                //     return false;
+                // }
                 
                 var postDate = {};
                 postDate.imgsWithDes = layermultiImgAttr;
