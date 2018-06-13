@@ -67,10 +67,10 @@ class Order extends Model
             ->join('order_detail d', 'c.order_id=d.order_id', 'INNER')
             ->where(['a.order_id'=>$order_id, 'a.store_id'=>$store_id, 'd.store_id'=>$store_id])
             ->select();
-        if(count($ret)<=0){
+        if( count($ret)<=0 ){
             errorMsg('订单数据有误');
         }
-        $data = []; //'' => $v[''],
+        $data = []; //'' => $v[''],''=>$v['']
         foreach($ret as $v){
             if( !array_key_exists($data['order'], $data) ){
                 $data['order'] =[
@@ -148,7 +148,8 @@ class Order extends Model
 
     public function getOrderExpress($store_id, $order_sn)
     {
-        $ret = $this->alias('a')->field('a.status_unpack, b.*, c.express_name, c.express_code')
+        $ret = $this->alias('a')
+            ->field('a.status_unpack, b.*, c.express_name, c.express_code, c.id as express_id')
             ->join('order b', 'a.order_id=b.order_id', 'INNER')
             ->join('express c', 'c.order_id=b.order_id', 'LEFT')
             ->where(['b.order_sn'=>$order_sn, 'a.store_id'=>$store_id])
@@ -157,6 +158,40 @@ class Order extends Model
             return errorMsg('订单不存在');
         }
         return successMsg('查询物流信息成功',['data'=>$ret]);
+    }
+
+    public function setDelivery($store_id, $order_id)
+    {
+        $data = $this->alias('a')->field('a.status_unpack, b.number, b.send_number')
+            ->join('order_detail b', 'a.order_id=b.order_id and a.store_id=b.store_id', 'INNER')
+            ->where(['a.order_id'=>$order_id ,'a.store_id'=>$store_id])
+            ->select();
+        if( count($data)<=0 ){
+            return errorMsg('订单不存在');
+        }
+        $number = $send_number = 0;
+        foreach($data as $k=>$v){
+            if($k==0){
+                if( !in_array($v->getData('status_unpack'), [4, 6]) ){
+                    return errorMsg('发货中订单，才允许发货');
+                }
+            }
+            $number += $v['number'];
+            $send_number += $v['send_number'];
+        }
+        if($send_number <= 0||$send_number > $number){
+            return errorMsg('发货数量有误');
+        }
+        $status = 5; //完全发货
+        $where = "order_id={$order_id} and store_id={$store_id} and (status_unpack=4 or status_unpack=6)";
+        if($send_number<$number){
+            $status = 6;  //部分发货
+        }
+        $ret = $this->where($where)->setField(['status_unpack'=>$status]);
+        if($ret){
+            return successMsg('发货成功');
+        }
+        return errorMsg('发货失败');
     }
 
 }
