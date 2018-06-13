@@ -201,7 +201,7 @@
 .classify-operate-btn a.down-disabled-icons{
     background-position:0 -178px;
 }
-.move-btn.disabled{
+.up-btn.disabled{
     pointer-events:none;
 }
 .addTagLayer .layui-m-layercont{

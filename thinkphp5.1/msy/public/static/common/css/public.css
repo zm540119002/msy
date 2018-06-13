@@ -625,6 +625,7 @@ color: #ed6d00;
 }
 .specific_type a:last-child{
     border-left:1px solid #999;
+    padding:0 0 0 5px;
 }
 .store_specific_type a:last-child{
     border-left:0;
