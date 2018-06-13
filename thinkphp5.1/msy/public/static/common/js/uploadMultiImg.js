@@ -495,8 +495,6 @@ function uploadsVideoDescribe(content,obj)
             yes:function(index){
                 var layermultiImgAttr=[];
                 var layerImgInfoData={};
-                console.log(layermultiImgAttr);
-
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
                     var imgSrc=_this.find('video').attr('src');
