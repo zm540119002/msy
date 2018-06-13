@@ -494,6 +494,7 @@ function uploadsVideoDescribe(content,obj)
                 var layermultiImgAttr=[];
                 var layerImgInfoData={};
                 if(layermultiImgAttr.length==0){
+                    console.log(111)
                     layer.close(index);
                     return false;
                 }
