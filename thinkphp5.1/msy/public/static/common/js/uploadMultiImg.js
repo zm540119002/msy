@@ -497,6 +497,10 @@ function uploadsVideoDescribe(content,obj)
                     var _this=$(this);
                     var imgSrc=_this.find('video').attr('src');
                     var imgText=_this.find('textarea').val();
+                    if(imgSrc.indexOf('data:')!=-1){
+                        errorTipc('文件还没上传完毕');
+                        return false;
+                    }
                     layerImgInfoData={
                         imgSrc:imgSrc,
                         imgText:imgText
