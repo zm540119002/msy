@@ -494,11 +494,7 @@ function uploadsVideoDescribe(content,obj)
                 var layermultiImgAttr=[];
                 var layerImgInfoData={};
                 console.log(layermultiImgAttr);
-                if(layermultiImgAttr.length==0){
-                    console.log(111)
-                    layer.close(index);
-                    return false;
-                }
+
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
                     var imgSrc=_this.find('video').attr('src');
@@ -513,7 +509,11 @@ function uploadsVideoDescribe(content,obj)
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 });
-               console.log(layermultiImgAttr);
+                if(layermultiImgAttr==false){
+
+                    layer.close(index);
+                    return false;
+                }
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
                 var postDate = {};
