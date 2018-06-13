@@ -474,7 +474,7 @@ function uploadsVideoDescribe(content,obj)
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
-                    html+='<input type="file" class="uploadImg uploadSingleEditImg" name="">';
+                    html+='<input type="file" class="uploadImg uploadSingleEditVideo" name="">';
                     html+='<a class="delete-picture">X</a>';
                     html+='<video src="" class="upload_img"></video>';
                     html+='</div>';
