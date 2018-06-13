@@ -170,7 +170,11 @@ class Goods extends Model {
 		if($keyword){
 			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
 		}
-		$order = ['id'=>'desc'];
+		$order = [
+			'sort'=>'desc',
+			'line_num'=>'asc',
+			'id'=>'desc'
+		];
 		$where = array_merge($_where, $where);
 		$order = array_merge($_order,$order);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?

@@ -172,9 +172,11 @@ class Goods extends StoreBase
         if($this->factory && $this->store) {
             if (request()->isPost()) {
                 $data = input();
+                if(empty($data['sortData']) && !is_array($data['sortData'])){
+                    return errorMsg('参数错误');
+                }
                 $model = new \app\factory\model\Goods;
-                $result = $model->allowField(true)
-                    ->save($data, ['id' => $data['goodsId'], 'store_type' => $data['storeType']]);
+                $result = $model->isUpdate(true)->saveAll($data['sortData']);
                 if (false !== $result) {
                     return successMsg('成功');
                 }
