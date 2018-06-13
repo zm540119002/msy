@@ -6,7 +6,9 @@ class Brand extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Brand;
-        $where = [['factory_id','=',$this->factory['id']]];
+        $where = [
+            ['factory_id','=',$this->factory['id']]
+        ];
         $brandList =  $model -> getList($where);
         $this -> assign('brandList',$brandList);
         return $this->fetch();
@@ -20,7 +22,9 @@ class Brand extends FactoryBase
             return $model -> edit($this->factory['id']);
         }
         $categoryModel = new \app\index_admin\model\GoodsCategory;
-        $where = [['parent_id_1','=',0]];
+        $where = [
+            ['parent_id_1','=',0]
+        ];
         $categoryList = $categoryModel->getList($where);
         $this->assign('categoryList',$categoryList);
         if(input('?brand_id')){
@@ -33,7 +37,4 @@ class Brand extends FactoryBase
         }
         return $this->fetch();
     }
-
-
-
 }

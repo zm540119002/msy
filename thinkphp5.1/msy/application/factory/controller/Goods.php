@@ -115,7 +115,7 @@ class Goods extends StoreBase
         $file = [
             'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters'
+                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
         ];
         $list = $model -> pageQuery($where,$file);
         $this->assign('list',$list);
@@ -140,53 +140,60 @@ class Goods extends StoreBase
 
     //商品管理展示页
     public function manage(){
-        //查看本店商品是否存在备份文件
-        //存储路径
-        $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
-        //本厂商店铺备份文件
-        $modelStore = new \app\factory\model\Store;
-        $storeList = $modelStore -> getStoreList($this -> factory['id']);
-        foreach ( $storeList as &$storeInfo) {
-            $fileName = $storePath.$storeInfo['id'].'.txt';
-            if(file_exists($fileName)){
-                //本店铺商品备份文件名
-                if($storeInfo['id'] == $this -> store['id']){
-                    $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
-                    $selfStore = $storeInfo;
-                    $selfStore['backup_time'] = $backupTime;
-                    $this -> assign('selfStore',$selfStore);
-                }else{
-                    //本厂商其他店铺商品备份文件
-                    $otherStores[] = $storeInfo;
-                    $this -> assign('otherStores',$otherStores);
+        if($this->factory && $this->store){
+            //查看本店商品是否存在备份文件
+            //存储路径
+            $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
+            //本厂商店铺备份文件
+            $modelStore = new \app\factory\model\Store;
+            $storeList = $modelStore -> getStoreList($this -> factory['id']);
+            foreach ( $storeList as &$storeInfo) {
+                $fileName = $storePath.$storeInfo['id'].'.txt';
+                if(file_exists($fileName)){
+                    //本店铺商品备份文件名
+                    if($storeInfo['id'] == $this -> store['id']){
+                        $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
+                        $selfStore = $storeInfo;
+                        $selfStore['backup_time'] = $backupTime;
+                        $this -> assign('selfStore',$selfStore);
+                    }else{
+                        //本厂商其他店铺商品备份文件
+                        $otherStores[] = $storeInfo;
+                        $this -> assign('otherStores',$otherStores);
+                    }
                 }
             }
+
         }
         return $this->fetch();
     }
     //设置商品排序
     public function setSort(){
-        if(request()->isPost()){
-            $data = input();
-            $model = new \app\factory\model\Goods;
-            $result = $model->allowField(true)
-                ->save($data, ['id' => $data['goodsId'],'store_type'=>$data['storeType']]);
-            if(false !== $result){
-                return successMsg('成功');
+        if($this->factory && $this->store) {
+            if (request()->isPost()) {
+                $data = input();
+                $model = new \app\factory\model\Goods;
+                $result = $model->allowField(true)
+                    ->save($data, ['id' => $data['goodsId'], 'store_type' => $data['storeType']]);
+                if (false !== $result) {
+                    return successMsg('成功');
+                }
             }
         }
         return $this -> fetch();
     }
     //上下架设置
     public function setShelf(){
-        if(request()->isPost()){
-            $data = input();
-            $model = new \app\factory\model\Goods;
-            $result = $model->allowField(true)
-                ->save($data, ['id' => $data['goodsId'],'store_id'=>$this->store['id']]);
-           if(false !== $result){
-               return successMsg('成功');
-           }
+        if($this->factory && $this->store) {
+            if (request()->isPost()) {
+                $data = input();
+                $model = new \app\factory\model\Goods;
+                $result = $model->allowField(true)
+                    ->save($data, ['id' => $data['goodsId'], 'store_id' => $this->store['id']]);
+                if (false !== $result) {
+                    return successMsg('成功');
+                }
+            }
         }
         return $this -> fetch();
     }

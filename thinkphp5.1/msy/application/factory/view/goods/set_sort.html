@@ -7,10 +7,10 @@
 	{include file="public/store_operation_head" /}
 	<section class="bottomLine">
 		<nav class="columns_flex channel_nav manufacturer_nav">
-			<a href="javascript:void(0);">
+			<a href="{:url('Operation/index')}">
 				店铺提醒
 			</a>
-			<a href="{:url('Goods/manage')}" class="current">
+			<a href="javascript:void(0);" class="current">
 				店铺管理
 			</a>
 			<a href="{:url('Promotion/manage')}">
@@ -23,7 +23,7 @@
 	</section>
 	<section class="specific_type store-manage-type bottomLine">
 		<div class="columns_flex f20">
-			<a >设置</a>
+			<a href="{:url('Operation/set')}">设置</a>
 			<a class="" href="{:url('Goods/manage')}">商品</a>
 			<a class="column_type current">排序</a>
 			<a href="{:url('Goods/setInventory')}">入仓</a>
@@ -37,12 +37,11 @@
 			<span>位移排序法</span>
 		</p>
 		<div class="classify-label-content">
-			<ul class="" id="list">
-			</ul>
+			<ul class="" id="list"></ul>
 		</div>
 	</section>
 </article>
-<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">排序</a>
+<a href="javascript:void(0)" class="increase-commodity foot-btn f24">保存排序</a>
 {/block}
 {block name="common"}
 {include file="template/loading.html" /}
@@ -57,7 +56,7 @@
 		if(notDefaultStore == 0){
 			var config = {
 				pageSize:4,
-				pageType:'sort',
+				pageType:'sort'
 			};
 			//初始化商品列表
 			var url = module+'goods/getList';

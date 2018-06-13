@@ -7,7 +7,7 @@ class Record extends FactoryBase
     //产商档案编辑
     public function edit(){
         $model = new \app\factory\model\Record();
-        if(request()->isAjax()){
+        if(request()->isPost()){
             return $model -> edit($this->factory['id']);
         }else{
             $where = [
@@ -24,7 +24,15 @@ class Record extends FactoryBase
     public function preview()
     {
         $model = new \app\factory\model\Record();
-        $recordInfo = $model::hasWhere('factory',['id'=>$this->factory['id']])->field('factory.name')->find();
+        $where = [
+            ['r.factory_id','=',$this->factory['id']],
+        ];
+        $file = ['r.id,r.shop_name,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
+        r.company_img,r.create_time,r.update_time,f.name'];
+        $join = [
+            ['factory f','f.id = r.factory_id'],
+        ];
+        $recordInfo = $model -> getInfo($where,$file,$join);
         if(!empty($recordInfo)){
             $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
             $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);

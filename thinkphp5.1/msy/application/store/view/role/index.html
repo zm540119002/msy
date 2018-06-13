@@ -1,0 +1,171 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="title"}开店部署{/block}
+{block name="content"}
+<section id="groupRole" style="display: none;">
+	<div class="groupRole-box">
+		<input class="role-name input-filed" type="text" value="" placeholder="请输入角色名称">
+	</div>
+</section>
+<section id="rolePower" style="display: none;">
+	{include file="role/node_list_tpl" /}
+</section>
+<article class="f24">
+	{include file="public/store_deploy_head" /}
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20 l-r-sides">
+			<a href="{:url('Record/preview')}">档案</a>
+			<a href="{:url('Brand/manage')}">商标</a>
+			<a href="{:url('Brand/manage')}">入驻</a>
+			<a href="{:url('Store/manage')}">门店</a>
+			<a href="{:url('Organize/index')}" class="column_type current">角色</a>
+			<a href="{:url('Account/index')}">账号</a>
+		</div>
+	</section>
+	<section class="f24 ">
+		<div class="page-bd">
+			<nav class="apply-data-nav">
+				<ul id="status " class="status f24 weui-flex group-role-nav">
+					<li class="weui-flex-item "><a href="{:url('Organize/index')}"><span class="ogranzi"></span><em></em>组织</a></li>
+					<li class="weui-flex-item current"><a href="{:url('Role/index')}"><span class="role"></span><em></em>角色</a></li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<section>
+		<ul class="account-role-list role-list"></ul>
+		<div class="add-role">
+			<a href="javascript:void(0);" class="add">+</a>
+		</div>
+	</section>
+	<p class="f20 content-box group-role-tipc">提示：选择角色进行默认权限的设定，全部角色默认权限设定后再按确定。</p>
+	<!--<a href="javascript:void(0);" class="add-account foot-btn">下一步</a>-->
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_store.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="factory_js/account.js"></script>
+<script type="text/javascript">
+	$(function () {
+		//初始化
+		getRoleList();
+		//新增角色
+		var groupRole=$('#groupRole').html();
+		$('body').on('click','.add',function(){
+			var _this = $(this);
+			layer.open({
+				title:['新增角色','border-bottom:1px solid #d9d9d9;'],
+				className:'groupRole',
+				content:groupRole,
+				btn:['确定','取消'],
+				yes:function(index){
+					var postData = {};
+					postData.name = $('div.groupRole').find('input').val();
+					$.post(action,postData,function(data){
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							$('ul.role-list').append(data);
+							layer.close(index);
+						}
+					});
+				}
+			});
+		});
+		//修改角色
+		$('body').on('click','.edit',function(){
+			var _this = $(this);
+			var _thisLi = _this.parent().parent();
+			layer.open({
+				title:['修改角色','border-bottom:1px solid #d9d9d9;'],
+				className:'groupRole',
+				content:groupRole,
+				btn:['确定','取消'],
+				success:function(){
+					$('div.groupRole').find('input').val(_thisLi.find('span').text());
+				},
+				yes:function(index){
+					var postData = {};
+					postData.id = _thisLi.data('id');
+					postData.name = $('div.groupRole').find('input').val();
+					$.post(action,postData,function(data){
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							_thisLi.replaceWith(data);
+							layer.close(index);
+						}
+					});
+				}
+			});
+		});
+		//权限选择-样式
+		$('body').on('click','.rolePowerLayer li',function(){
+			$(this).toggleClass('current');
+		});
+		//赋权
+		var rolePower=$('#rolePower').html();
+		$('body').on('click','.power',function(){
+			var _this = $(this);
+			var _thisLi = _this.parent().parent();
+			layer.open({
+				className:'rolePowerLayer',
+				type: 1,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				content:rolePower,
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+					$('.rolePowerLayer').find('.role_name').text(_thisLi.find('span').text());
+					var postData = {};
+					postData.roleId = _thisLi.data('id');
+					$.post(controller+'getRoleNode',postData,function(data){
+						if($.isArray(data) && data.length){
+							$.each($('.rolePowerLayer').find('li'),function(){
+								if($.inArray($(this).data('id'),data)!='-1'){
+									$(this).attr('class','current');
+								}
+							});
+						}
+					});
+				},
+				yes:function(index){
+					var postData = {};
+					postData.roleId = _thisLi.data('id');
+					postData.nodeIds = [];
+					$.each($('.rolePowerLayer').find('li'),function(){
+						if($(this).attr('class')=='current'){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					$.post(controller+'saveRoleNode',postData,function(data){
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							layer.close(index);
+						}
+					});
+				}
+			});
+		});
+		//删除
+		$('body').on('click','.reduce',function(){
+			var _thisLi = $(this).parent().parent();
+			var postData = {};
+			postData.id = _thisLi.data('id');
+			var url = controller + 'del';
+			$.post(url,postData,function(data){
+				_thisLi.remove();
+			});
+		});
+	});
+</script>
+{/block}

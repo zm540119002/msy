@@ -1,0 +1,126 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<!--企业品牌logo-->
+<section class="htmleaf-container" style="display: none;">
+	<div id="clipArea">
+		<div class="photo-clip-view" >
+			<div class="photo-clip-moveLayer" >
+				<div class="photo-clip-rotateLayer"></div>
+			</div>
+		</div>
+		<div class="photo-clip-mask">
+			<div class="photo-clip-mask-left"></div>
+			<div class="photo-clip-mask-right" ></div>
+			<div class="photo-clip-mask-top" ></div>
+			<div class="photo-clip-mask-bottom" ></div>
+			<div class="photo-clip-area" ></div>
+		</div>
+		<a href="javascript:void(0);" class="photoClip-close ">X</a>
+	</div>
+	<div class="foot-use f28">
+		<div class="uploader1 blue">
+			<input type="button" name="file" class="button" value="打开图片">
+			<input id="file" type="file" onchange="javascript:void(0);" accept="image/*" multiple="" />
+		</div>
+		<button id="clipBtn">截取</button>
+	</div>
+	<div id="view" class="photoview" ></div>
+</section>
+
+<article class="f24">
+	{include file="public/store_operation_head" /}
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="{:url('Operation/index')}">
+				店铺提醒
+			</a>
+			<a href="javascript:void(0);" class="current">
+				店铺管理
+			</a>
+			<a href="{:url('Promotion/manage')}">
+				营销推广
+			</a>
+			<a href="javascript:void(0);">
+				官方活动
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type store-manage-type bottomLine">
+		<div class="columns_flex f20">
+			<a href="{:url('Operation/set')}" class="column_type current">设置</a>
+			<a href="{:url('Goods/manage')}">商品</a>
+			<a href="{:url('Goods/setSort')}">排序</a>
+			<a href="{:url('Goods/setInventory')}">入仓</a>
+			<a href="{:url('Goods/setShelf')}">上架</a>
+			<a href="javascript:void(0)">卡券</a>
+		</div>
+	</section>
+	<section class="content-box">
+		<div class="logo-license">
+			<div class="half">
+				<a class="logo" id="logox">
+					<img id="" src="">
+					<input type="hidden" class="logo-src" name="logoSrc">
+				</a>
+				<p class="f24">点击优化</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<span>品牌宣言:</span>
+		<textarea class="textarea-box" rows="" cols="" placeholder="品牌宣言文字..."></textarea>
+	</section>
+
+</article>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/hammer.js"></script>
+<script type="text/javascript" src="public_js/iscroll-zoom.js"></script>
+<script type="text/javascript" src="public_js/jquery.photoClip.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		//编辑品牌logo
+		var clipImg = '';
+		$("#clipArea").photoClip({
+			width: 199,
+			height: 166,
+			file: "#file",
+			view: "#view",
+			ok: "#clipBtn",
+			clipFinish: function(img) {
+				clipImg = img;
+				 $.post("uploadImgToTemp", { img: clipImg , compress:false },function(msg){
+				     if(msg.status == 0){
+				         layer.open({
+				             content:msg.info,
+				             time:2
+				         });
+				         return false;
+				     }else if(msg.status == 1){
+				         $('body').data('clipAvatar',msg.info);
+				     }
+				 },'json');
+			}
+		});
+		$(".logo").click(function(){
+			$(".htmleaf-container").show();
+		});
+		$("#clipBtn").click(function(){
+			$('.logo img').attr('src',clipImg).addClass('active');
+			$('.logo-src').val(clipImg);
+			$(".htmleaf-container").hide();
+		});
+		$('.photoClip-close').click(function(){
+			$(".htmleaf-container").hide();
+		});
+	})
+
+</script>
+
+{/block}

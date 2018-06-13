@@ -625,6 +625,10 @@ color: #ed6d00;
 }
 .specific_type a:last-child{
     border-left:1px solid #999;
+    padding:0 0 0 5px;
+}
+.store_specific_type a:last-child{
+    border-left:0;
 }
 .column_type{
     /*float:left;
@@ -705,7 +709,7 @@ color: #ed6d00;
     background-position:0 -12px;
 }
 .foot_nav_bar a span.manufacturer{
-    background-position:0 -32px;
+    background-position:0 -27px;
 }
 .foot_nav_bar .current a{
     color:#ff7aab;
@@ -766,9 +770,13 @@ color: #ed6d00;
     border-bottom:1px solid #d9d9d9;
 }
 .forgetPasswdLayer .layui-m-layerbtn span[yes],
-.vendorInfoLayer .layui-m-layerbtn span[yes]{
+.vendorInfoLayer .layui-m-layerbtn span[yes],
+.factoryListLayer .layui-m-layerbtn span[yes]{
     background: #FF7BAC;
     color:#fff;
+}
+.editCompanyPicLayer .layui-m-layerbtn span[yes].disabled{
+    pointer-events: none;
 }
 .loginNav li{
     width:50%;
@@ -1068,7 +1076,9 @@ color: #ed6d00;
     border-bottom:1px solid #d9d9d9;
     color:#0066cc;
 }
-.factoryListLayer{
+.factoryListLayer,
+.storeListLayer,
+.editCompanyPicLayer{
     position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;
 }
 .vendorInfoLayer .layui-m-layercont,
@@ -1135,7 +1145,8 @@ color: #ed6d00;
     width:100%;
 }
 .forgetPasswordLayer .layui-m-layerbtn span[yes],
-.databaseLayer .layui-m-layerbtn span[yes]{
+.databaseLayer .layui-m-layerbtn span[yes],
+.storeListLayer .layui-m-layerbtn span[yes]{
     background: #ff7bac;
     color:#fff;
 }

@@ -43,7 +43,7 @@
 		<div class="top_bar top-title">
 			<span></span>
 			<h2>进行商标备案</h2>
-			<a href="" class="home">首页</a>
+			{include file="public/home_page" /}
 		</div>
 	</section>
 	<section>
@@ -80,7 +80,7 @@
 						</div>
 						<div class="">
 							<a href="javascript:void(0);" class="trademark-type right-arrow">商标所属分类</a>
-							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.cat_id_1|default=''}"/>
+							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.category_id_1|default=''}"/>
 						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>

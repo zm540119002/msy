@@ -88,6 +88,7 @@
 	$(function(){
 		var storesApplied = '{:json_encode($storesApplied)}';
 		storesApplied = JSON.parse(storesApplied);
+
 		var postData={};
 		var store_type,run_type;
 		//选择类型和模式
@@ -138,7 +139,7 @@
 			var selectedLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
 			if(storeType.hasClass('current')){
 				if(selectedLen==storePattern.length){
-					dialog.success('此店所有经营模式已开过',module+'Store/manage');
+					dialog.error('此店所有经营模式已开过');
 					return false;
 				}
 				if(storePattern.hasClass('current')){
@@ -195,7 +196,7 @@
 			var brandList=$('.applyNewStoreLayer .brand_stores');
 			var selectedLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
 				if(selectedLen==brandList.length){
-					dialog.success('此店所有经营模式已开过',module+'Store/manage');
+					dialog.error('此店所有经营模式已开过');
 					return false;
 				}
 				if(storeList.hasClass('current')){
@@ -206,6 +207,7 @@
 					dialog.success('请选择店铺');
 					return false;
 				}
+				$(this).addClass('disabled');
 				$.ajax({
 					url: controller + 'edit',
 					data: postData,

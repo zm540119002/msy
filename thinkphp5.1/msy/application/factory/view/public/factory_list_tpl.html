@@ -1,7 +1,7 @@
 <section class="message-center-info f20" style="display:none;" id="factoryList">
     <ul class="vendorInfoList">
         {volist name='factoryList' id='vo'}
-        <li data-id="{$vo.id}" class="{eq name="vo.is_default" value="1"}current{/eq}">
+        <li data-id="{$vo.id}" class="{eq name='vo.is_default' value='1'}current{/eq}">
             <span>{$vo.name}</span>
         </li>
         {/volist}
@@ -20,7 +20,7 @@
             style: '',
             success:function(){
                 var winHeight=$(window).height();
-                $('.signIn-wrapper').css('height',winHeight-120+'px');
+                $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
             },
             btn:['确定'],
             yes:function(index){

@@ -92,6 +92,17 @@ class Account extends \think\Model {
 			}
 		}
 		$postData['userFactoryStatus'] = 0;
+		$modeRole = new \app\factory\model\Role();
+		$where = [
+			['status', '=', 0],
+			['factory_id', '=', $factoryId],
+			['id', 'in', $postData['userFactoryRoleIds']],
+		];
+		$field = array(
+			'id','name',
+		);
+		$roleList = $modeRole->where($where)->field($field)->select();
+		$postData['role'] = count($roleList)?$roleList->toArray():[];
 		$this->commit();//提交事务
 		return successMsg('成功！',$postData);
 	}
@@ -186,13 +197,8 @@ class Account extends \think\Model {
 			return errorMsg('请选择角色');
 		}
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
-		$where = [
-			['status','=',0],
-			['user_id','=',$userId],
-			['factory_id','=',$factoryId],
-		];
 		$userFactoryRole = $modelUserFactoryRole->getRole($userId,$factoryId);
-		$oldRoleIds = array_column($userFactoryRole,'role_id');
+		$oldRoleIds = array_unique(array_column($userFactoryRole,'id'));
 		$modelUserFactoryRole->startTrans();//开启事务
 		//新增角色
 		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);

@@ -7,5 +7,9 @@ class Operation extends StoreBase
     public function Index(){
         return $this->fetch();
     }
+    //店铺管理设置页
+    public function set(){
+        return $this->fetch();
+    }
 
 }

@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="factory_css/main.css">
+<link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
 <article class="f24">
@@ -8,7 +8,7 @@
 		<div class="top_bar top-title">
 			<span></span>
 			<h2>入驻申请</h2>
-			<a href="" class="home">首页</a>
+			{include file="public/home_page" /}
 		</div>
 	</section>
 	<section>
@@ -24,7 +24,7 @@
 				<div class="apply-module ">
 					<form class="">
 						{notempty name="factoryInfo"}
-						<input type="hidden" name="factory_id" class="factory_id" value="{$factoryInfo.id|default=''}">
+						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
 						{/notempty}
 						<div class="apply-items">
 							<input type="text" class="factoryFullName" name="" value="{$factoryInfo.name|default=''}" placeholder="厂商全称(与营业执照相同)">
@@ -93,5 +93,5 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
-<script type="text/javascript" src="factory_js/register.js"></script>
+<script type="text/javascript" src="store_js/register.js"></script>
 {/block}

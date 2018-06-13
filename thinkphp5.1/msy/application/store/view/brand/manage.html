@@ -1,0 +1,64 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	{include file="public/store_deploy_head" /}
+	<section class="specific_type bottomLine store_specific_type">
+		<div class="columns_flex f20 l-r-sides">
+			<a href="{:url('Record/preview')}">档案</a>
+			<a href="{:url('Brand/manage')}" class="column_type current">商标</a>
+			<a href="{:url('Deploy/register')}">入驻</a>
+			<a href="{:url('Shop/manage')}">门店</a>
+			<a href="{:url('Organize/index')}" >角色</a>
+			<a href="{:url('Account/index')}">账号</a>
+		</div>
+	</section>
+	<section class="trademark-module">
+		<div class="thead-td">
+			<span class="cols">图形</span>
+			<span class="cols">名称</span>
+			<span class="cols">状态</span>
+			<span class="cols">备注</span>
+		</div>
+		<ul class="trademark-info">
+			{notempty name="brandList"}
+			{volist name="brandList" id="vo"}
+				<li class="">
+					<div class="cols">
+						<img class="trade-logo" src="public_uploads/{$vo.brand_img}" />
+					</div>
+					<div class="cols">
+						<span class="trade-name">{$vo.name}</span>
+					</div>
+					<div class="cols">
+					{if  $vo.auth_status == 0}<span>待审核</span>
+					{elseif $vo.auth_status == 1 /}已备案
+					{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('Brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
+					{else /}
+					{/if}
+					</div>
+					<div class="cols">
+						<a href="">修改图片</a>
+					</div>
+				</li>
+			{/volist}
+			{else /}
+				<li>暂无商标</li>
+			{/notempty}
+		</ul>
+	</section>
+	<a href="{:url('Brand/record')}" class="foot-btn f24">进行新的商标备案</a>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+
+</script>
+{/block}

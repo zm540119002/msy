@@ -106,7 +106,7 @@
 					userFactoryRoleIds = [];
 					userFactoryOrganizeId = 0;
 				},
-				btn:['确定'],
+				btn:['确定','取消'],
 				yes:function(index){
 					var postData = {};
 					var content = '';
@@ -132,6 +132,7 @@
 							dialog.error(data.info);
 						}else{
 							$('ul.account-list').prepend(data);
+							$('ul.account-list').find('span.no-data').remove();
 							layer.close(index);
 						}
 					});

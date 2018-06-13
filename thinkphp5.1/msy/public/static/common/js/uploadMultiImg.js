@@ -394,6 +394,7 @@ function uploadsImgDescribe(content,obj){
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
+                console.log(typeof multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
                         multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
@@ -465,9 +466,11 @@ function uploadsVideoDescribe(content,obj)
             title:['上传企业视频','border-bottom:1px solid #d9d9d9'],
             className:'editCompanyPicLayer',
             content:content,
+            type:1,
             btn:['确定','取消'],
             success:function(){
-                //var html=$('#img_list').html(); 模板
+                var winHeight=$(window).height();
+                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
@@ -502,41 +505,54 @@ function uploadsVideoDescribe(content,obj)
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 });
-               
-                // obj.data('src',layermultiImgAttr);
-                obj.data('src',layermultiImgAttr);
-                if(layermultiImgAttr.length==0){
+                if(layermultiImgAttr==false){
+
                     layer.close(index);
                     return false;
                 }
-                
-                var postDate = {};
-                postDate.imgsWithDes = layermultiImgAttr;
-                $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
-                   if(info.status == 0){
-                       dialog.error(info.msg);
-                       return false;
-                   }
-                    var imgArray = [];
-                    // $.each(info.info,function(index,img){
-                    //     if(img.indexOf("uploads") == -1 && img !=''){
-                    //         img = uploads+img;
-                    //     }
-                    //     imgArray.push(img);
-                    // });
-                    var a=JSON.parse(info);
-                    for(var i=0;i<a.length;i++){
-                        if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                            a[i].imgSrc= uploads+a[i].imgSrc;
-
+                obj.data('src',layermultiImgAttr);
+                var postData = {};
+                postData.imgsWithDes = layermultiImgAttr;   
+                $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
+                $.ajax({
+                    url: controller + 'uploadMultiImgToTempWithDes',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
                         }
-                        imgArray.push(a[i]);
-                    }
+                        var imgArray = [];
+                        var a=JSON.parse(info);
+                        for(var i=0;i<a.length;i++){
+                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
+                                a[i].imgSrc= uploads+a[i].imgSrc;
 
-                    obj.data('src', imgArray);
-                    layer.close(index);
+                            }
+                            imgArray.push(a[i]);
+                        }
+                        console.log(info);
+                        obj.data('src', imgArray);
+                        if(info != ''){
+                            alert(1);
+                            layer.close(index);
+                        }else{
+                            alert(222);
+                            errorTipc('文件还没上传完毕');
+                        }
+                        $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
+                    },
+                    complete:function(){
+                        
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    },
                 });
-                layer.close(index);
+
             },
             no:function(){
                 $('.editCompanyPicLayer li').remove();
