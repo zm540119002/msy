@@ -207,6 +207,7 @@
 					dialog.success('请选择店铺');
 					return false;
 				}
+				$(this).addClass('disabled');
 				$.ajax({
 					url: controller + 'edit',
 					data: postData,
