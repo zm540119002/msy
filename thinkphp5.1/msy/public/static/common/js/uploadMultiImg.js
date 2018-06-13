@@ -493,6 +493,10 @@ function uploadsVideoDescribe(content,obj)
             yes:function(index){
                 var layermultiImgAttr=[];
                 var layerImgInfoData={};
+                if(layermultiImgAttr.length==0){
+                    layer.close(index);
+                    return false;
+                }
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
                     var imgSrc=_this.find('video').attr('src');
@@ -510,11 +514,6 @@ function uploadsVideoDescribe(content,obj)
                
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
-                // if(layermultiImgAttr.length==0){
-                //     layer.close(index);
-                //     return false;
-                // }
-                
                 var postDate = {};
                 postDate.imgsWithDes = layermultiImgAttr;
                 $.post(controller +'uploadMultiImgToTempWithDes',postDate,function(info){
