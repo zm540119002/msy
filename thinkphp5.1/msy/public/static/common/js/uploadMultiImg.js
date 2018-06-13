@@ -499,10 +499,6 @@ function uploadsVideoDescribe(content,obj)
                     var _this=$(this);
                     var imgSrc=_this.find('video').attr('src');
                     var imgText=_this.find('textarea').val();
-                    // if(imgSrc.indexOf('data:')!=-1){
-                    //     errorTipc('文件还没上传完毕');
-                    //     return false;
-                    // }
                     layerImgInfoData={
                         imgSrc:imgSrc,
                         imgText:imgText
@@ -514,17 +510,15 @@ function uploadsVideoDescribe(content,obj)
                     layer.close(index);
                     return false;
                 }
-                // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
-                postData.imgsWithDes = layermultiImgAttr;
-                $('.layui-m-layerbtn span[type="1"]').addClass('disabled');
+                postData.imgsWithDes = layermultiImgAttr;   
+                $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
                     url: controller + 'uploadMultiImgToTempWithDes',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
-                        //$('.loading').show();
                     },
                     success: function(info){
                         if(info.status == 0){
@@ -540,16 +534,16 @@ function uploadsVideoDescribe(content,obj)
                             }
                             imgArray.push(a[i]);
                         }
-
+                        console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
-                            $('.layui-m-layerbtn span[type="1"]').removeClass('disabled');
+                            alert(1);
                             layer.close(index);
                         }else{
-                            alert(1);
+                            alert(222);
                             errorTipc('文件还没上传完毕');
                         }
-                        
+                        $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
                     },
                     complete:function(){
                         

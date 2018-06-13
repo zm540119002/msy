@@ -775,7 +775,7 @@ color: #ed6d00;
     background: #FF7BAC;
     color:#fff;
 }
-.editCompanyPicLayer .layui-m-layerbtn span[yes]{
+.editCompanyPicLayer .layui-m-layerbtn span[yes].disabled{
     pointer-events: none;
 }
 .loginNav li{
