@@ -12,7 +12,7 @@ class Promotion extends Validate
         'name'  =>  'require|max:50',
         'img' =>  'require|max:30',
         'goods_id' =>  'require',
-        'promotion_price' =>  'require',
+        'promotion_price' =>  'require|float',
         'start_time' =>  'require',
         'end_time' =>  'require',
     ];
@@ -22,14 +22,8 @@ class Promotion extends Validate
         'img.require'   => '请上传图片',
         'goods_id.require'   => '请链接商品',
         'promotion_price.require'   => '请填写促销价格',
+        'promotion_price.float'   => '价格格式有误',
         'start_time.require'   => '请填写促销开始时间',
         'end_time.require'   => '请填写促销结束时间',
     ];
-    
-//    protected $scene = [
-//        'add'   =>  ['name','img','goods_id','promotion_price','start_time'],
-//        'edit'  =>  ['name','img','goods_id','promotion_price','start_time'],
-//    ];
-
-
 }
