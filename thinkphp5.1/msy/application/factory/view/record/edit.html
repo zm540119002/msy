@@ -263,10 +263,10 @@
 			}else if(!postData.glory_img||postData.glory_img==0){
 				content='请上传专利荣誉图片';
 			}
-			if(content){
-				dialog.error(content);
-				return false;
-			}
+//			if(content){
+//				dialog.error(content);
+//				return false;
+//			}
 			$.ajax({
 				url:controller + "edit",
 				type:'post',
