@@ -13,18 +13,18 @@ class UserStoreRole extends \think\model\Pivot {
 	 */
 	public function getRole($userId,$storeId){
 		$where = [
-			['ufr.status','=',0],
-			['ufr.user_id','=',$userId],
-			['ufr.store_id','=',$storeId],
+			['usr.status','<>',2],
+			['usr.user_id','=',$userId],
+			['usr.store_id','=',$storeId],
 			['r.status','=',0],
 		];
 		$field = [
 			'r.id','r.name',
 		];
 		$join = [
-			['role r','r.id = ufr.role_id','LEFT'],
+			['role r','r.id = usr.role_id','LEFT'],
 		];
-		$list = $this->alias('ufr')
+		$list = $this->alias('usr')
 			->where($where)
 			->field($field)
 			->join($join)
