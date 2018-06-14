@@ -694,13 +694,21 @@ color: #ed6d00;
     color:#e60012;
 }
 .foot_nav_bar a span{
-    width:20px;
+    /*width:20px;
     height:18px;
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
     background-size:20px 240px;
-    display:block;
+    display:block;*/
+
+    width: 26px;
+    height: 22px;
+    margin: 0 auto;
+    background-image: url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size: 25px 290px;
+    display: block;
 }
 .foot_nav_bar a span.store{
     /*background-position:0 -130px;*/
