@@ -387,13 +387,13 @@ i{
 }
 .top_bar a{
     /*width:28px;*/
-    width:20px;
-    height:22px;
+    width:26px;
+    height:28px;
     /*height:28px;*/
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 240px;
+    background-size:28px 342px;
     display:block;
     text-indent:-9999rem;
 }
@@ -439,7 +439,8 @@ i{
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -172px;
+    /*background-position:0 -172px;*/
+    background-position:0 -248px;
 }
 .top_bar a.goods-video{
     width:28px;
