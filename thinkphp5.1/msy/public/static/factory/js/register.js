@@ -38,8 +38,6 @@ $(function(){
             content='请填写代办人姓名';
         }else if(!businessLicense){
             content='请上传企业营业执照照片';
-        }else if(!agentAuthorization){
-            content='请上传代办人企业授权信照片';
         }
         postData={
             factory_id : factory_id,

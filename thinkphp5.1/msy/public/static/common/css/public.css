@@ -387,13 +387,13 @@ i{
 }
 .top_bar a{
     /*width:28px;*/
-    width:20px;
-    height:22px;
+    width:26px;
+    height:28px;
     /*height:28px;*/
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 240px;
+    background-size:28px 342px;
     display:block;
     text-indent:-9999rem;
 }
@@ -401,7 +401,7 @@ i{
     width:50%;
 }
 .top-switch-bar a.home{
-    width:20px;
+    width:30px;
     margin:0 0 0 .15rem;
 }
 .top_bar a.switch-account{
@@ -432,14 +432,15 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -127px;
+    background-position:0 -175px;
 }
 .top_bar a.shopping_cart{
-    background-position:0 -150px;
+    background-position:0 -212px;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -172px;
+    /*background-position:0 -172px;*/
+    background-position:0 -248px;
 }
 .top_bar a.goods-video{
     width:28px;
@@ -457,8 +458,8 @@ i{
 }
 .top_bar a.qr-code{
     background-image:url(../../common/img/icons/public_icons.png);
-    background-position:0 -218px;
-    background-size:20px 240px;
+    background-position:0 -314px;
+    background-size:28px 342px;
 }
 .top_search_module{
     margin:-4px 0 0;
@@ -486,11 +487,11 @@ i{
 .top_search_module .search_btn{
     width:15%;
     height:20px;
-    margin:4px 0 0;
+    margin:2px 0 0;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 240px;
-    background-position:12px -198px;
+    background-size:28px 342px;
+    background-position:0 -283px;
 }
 .top_menu_box{
     position:relative;
@@ -718,7 +719,7 @@ color: #ed6d00;
     background-position:0 -25px;
 }
 .foot_nav_bar a span.manufacturer{
-    background-position:0 -46px;
+    background-position:0 -54px;
 }
 .foot_nav_bar .current a{
     color:#ff7aab;
@@ -730,7 +731,7 @@ color: #ed6d00;
     background-position:0 -61px;
 }
 .foot_nav_bar .current a span.manufacturer{
-    background-position:0 -124px;
+    background-position:0 -143px;
 }
 /*美尚云从业人员*/
 
