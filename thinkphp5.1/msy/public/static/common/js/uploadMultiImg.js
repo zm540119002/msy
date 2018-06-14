@@ -6,7 +6,6 @@ $(function(){
         var imgContainer = $('.multi-picture-module');
         var imgArr = [];
         var num=file.data('num');//限制个数  
-        console.log(num);
         if(num==6&&$('.editDetailLayer li').length==num){
             errorTipc('只能上传'+num+'张图片');
             return false;
@@ -59,7 +58,6 @@ $(function(){
         var imgArr = [];
         for (var i = 0; i < fileList.length; i++) {                
             var video = event.target.files[i];
-            console.log(video);
             var obj=$(this).parent();
             // 判断是否图片
             // if(!video){
@@ -186,6 +184,7 @@ $(function(){
     //删除
     $('body').on('click','.delete-picture',function(){
         $(this).parents('li').remove();
+        $('.company-video').data('src','');
     })
 
     // 修改单个图片
@@ -396,7 +395,6 @@ function uploadsImgDescribe(content,obj){
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
-                console.log(typeof multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
                         multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
@@ -420,7 +418,6 @@ function uploadsImgDescribe(content,obj){
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 })
-               
                 // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
@@ -499,7 +496,7 @@ function uploadsVideoDescribe(content,obj)
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
-
+                console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
                         multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;

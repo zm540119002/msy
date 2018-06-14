@@ -48,6 +48,7 @@ class UserStore extends \think\model\Pivot {
 		$where = [
 			['user_id', '=', $postData['userId']],
 			['store_id', '=', $storeId],
+			['status', '<>', 2],
 		];
 		$res = $this->where($where)->setField('status',$postData['status']);
 		if(!$res){
