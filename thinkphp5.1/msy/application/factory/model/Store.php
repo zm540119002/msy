@@ -13,8 +13,6 @@ class Store extends Model {
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
-//	protected $readonly = ['name'];
-
 	/**
 	 * 编辑
 	 */
@@ -22,9 +20,9 @@ class Store extends Model {
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('Store');
-//		if(!$result = $validate->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		if(!$result = $validate->check($data)) {
+			return errorMsg($validate->getError());
+		}
 		if(input('?post.id')){
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
