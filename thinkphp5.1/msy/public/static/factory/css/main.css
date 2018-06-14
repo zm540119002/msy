@@ -181,6 +181,9 @@
     background-size:32px 250px;
     text-indent:-9999rem;
 }
+.classify-operate-btn .move-btn{
+    background-color:transparent;
+}
 .classify-operate-btn a.add-icons{
     background-position:0 0;
 }
