@@ -122,7 +122,6 @@
 						postData.roleIds.push(role_id);
 					}
 				});
-				console.log(postData);return;
 				var url = controller + 'setStatus';
 				$.post(url,postData,function(data){
 					if(data.status==0){
