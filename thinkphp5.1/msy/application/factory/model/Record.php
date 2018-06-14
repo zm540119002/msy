@@ -24,10 +24,10 @@ class Record extends Model {
 	public function edit($factoryId=''){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
-		//$validate = validate('Record');
-//		if(!$result = $validate->scene('add')->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		$validate = validate('Record');
+		if(!$result = $validate -> check($data)) {
+			return errorMsg($validate->getError());
+		}
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
