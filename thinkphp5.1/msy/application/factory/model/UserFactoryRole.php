@@ -13,7 +13,7 @@ class UserFactoryRole extends \think\model\Pivot {
 	 */
 	public function getRole($userId,$factoryId){
 		$where = [
-			['ufr.status','=',0],
+			['ufr.status','<>',2],
 			['ufr.user_id','=',$userId],
 			['ufr.factory_id','=',$factoryId],
 			['r.status','=',0],

@@ -23,9 +23,9 @@ class Goods extends Model {
 	public function edit($storeId =''){
 		$data = input('post.');
 		$validate = validate('Goods');
-//		 if(!$result = $validate->scene('edit')->check($data)) {
-//		 	return errorMsg($validate->getError());
-//		 }
+		 if(!$result = $validate->scene('edit')->check($data)) {
+		 	return errorMsg($validate->getError());
+		 }
 		if(!empty($data['thumb_img'])){
 			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}

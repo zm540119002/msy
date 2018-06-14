@@ -80,6 +80,8 @@ $(function(){
             content="请链接商品";
         }else if(!postData.promotion_price){
             content="请填写特价";
+        }else if(!isMoney(postData.promotion_price)){
+            content="价格格式有误";
         }else if(!postData.start_time){
             content="请选择起始日期";
         }else if(!postData.end_time){

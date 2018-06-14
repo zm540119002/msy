@@ -702,35 +702,35 @@ color: #ed6d00;
     background-size:20px 240px;
     display:block;*/
 
-    width: 26px;
-    height: 22px;
+    width: 30px;
+    height: 25px;
     margin: 0 auto;
     background-image: url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size: 25px 290px;
+    background-size: 30px 345px;
     display: block;
 }
 .foot_nav_bar a span.store{
     /*background-position:0 -130px;*/
-    background-position:0 0;
+    background-position:0 2px;
 }
 .foot_nav_bar a span.practitioners{
     background-position:0 -25px;
 }
 .foot_nav_bar a span.manufacturer{
-    background-position:0 -48px;
+    background-position:0 -46px;
 }
 .foot_nav_bar .current a{
     color:#ff7aab;
 }
 .foot_nav_bar .current a span.store{
-    background-position:0 -79px;
+    background-position:0 -87px;
 }
 .foot_nav_bar .current a span.practitioners{
     background-position:0 -61px;
 }
 .foot_nav_bar .current a span.manufacturer{
-    background-position:0 -126px;
+    background-position:0 -124px;
 }
 /*美尚云从业人员*/
 

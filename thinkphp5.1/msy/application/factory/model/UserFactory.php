@@ -36,7 +36,7 @@ class UserFactory extends \think\model\Pivot {
 		}
 	}
 
-	//删除
+	//设置用户工厂状态
 	public function setStatus($factoryId){
 		if(!intval($factoryId)){
 			return errorMsg('参数错误');
@@ -50,10 +50,29 @@ class UserFactory extends \think\model\Pivot {
 			['factory_id', '=', $factoryId],
 			['status', '<>', 2],
 		];
+		$this->startTrans();//开启事务
 		$res = $this->where($where)->setField('status',$postData['status']);
 		if(!$res){
+			$this->rollback();//回滚事务
 			return errorMsg('失败',$this->getError());
 		}
+		//设置用户工厂角色状态
+		$roleIds = array_unique($postData['roleIds']);
+		if(is_array($roleIds) && !empty($roleIds)){
+			$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
+			$where = [
+				['user_id', '=', $postData['userId']],
+				['factory_id', '=', $factoryId],
+				['status', '<>', 2],
+				['role_id', 'in', $roleIds],
+			];
+			$res = $modelUserFactoryRole->where($where)->setField('status',$postData['status']);
+			if(!$res){
+				$this->rollback();//回滚事务
+				return errorMsg('失败',$this->getError());
+			}
+		}
+		$this->commit();//提交事务
 		return successMsg('成功');
 	}
 }
