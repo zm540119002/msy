@@ -251,96 +251,52 @@
 			postData=$('.qualificationContent').serializeObject();
 			postData.provinces=$('.area-address-name').data('key');
 			var rb_img = $('.development-picture').data('src');
-			if(rb_img == ''){
-				postData.rb_img = '';
-			}else{
-				postData.rb_img = rb_img;
-			}
-//			postData.rb_img=$('.development-picture').data('src');
+			postData.rb_img = rb_img;
 			var license=$('.license-picture').data('src');
-			if(rb_img == ''){
-				postData.license = '';
-			}else{
-				postData.license = license;
-			}
+			postData.license = license;
 			var glory_img=$('.honor-picture').data('src');
-			if(glory_img == ''){
-				postData.glory_img = '';
-			}else{
-				postData.glory_img = glory_img;
+			postData.glory_img = glory_img;
+			var factory_video=$('.company-video').data('src');
+			postData.factory_video = factory_video;
+			var  content ='';
+			if(!postData.company_img){
+				content='请上传企业形象图片';
+			}else if(!postData.provinces){
+				content='请选择所在的省市区';
+			}else if(!postData.detail_address){
+				content='请填写详细地址';
+			}else if(!postData.logo_img){
+				content='请上传企业标志图';
+			}else if(!postData.introduction){
+				content='请填写企业简介';
+			}else if(!postData.rb_img||postData.rb_img==0){
+				content='请上传企业研发生产图片';
+			}else if(!postData.license||postData.license==0){
+				content='请上传执照资质图片';
+			}else if(!postData.glory_img||postData.glory_img==0){
+				content='请上传专利荣誉图片';
 			}
-
-			var store_video=$('.company-video').data('src');
-			if(store_video == ''){
-				postData.store_video = '';
-			}else{
-				postData.store_video = store_video;
+			if(content){
+				dialog.error(content);
+				return false;
 			}
-//			postData.store_video=$('.company-video').data('src');
-			var content='';
-//			if(!postData.company_img){
-//				content='请上传企业形象图片';
-//			}else if(!postData.shop_name){
-//				content='请填写店铺名称';
-//			}else if(!postData.provinces){
-//				content='请选择所在的省市区';
-//			}else if(!postData.detail_address){
-//				content='请填写详细地址';
-//			}else if(!postData.logo_img){
-//				content='请上传企业标志图';
-//			}else if(!postData.introduction){
-//				content='请填写企业简介';
-//			}else if(!postData.store_video||postData.store_video==0){
-//				content='请上传企业视频';
-//			}else if(!postData.rb_img||postData.rb_img==0){
-//				content='请上传企业研发生产图片';
-//			}else if(!postData.license||postData.license==0){
-//				content='请上传执照资质图片';
-//			}else if(!postData.glory_img||postData.glory_img==0){
-//				content='请上传专利荣誉图片';
-//			}
-//			if(content){
-//				dialog.error(content);
-//				return false;
-//			}
-
-//			$.post(controller + "edit",postData,function(msg){
-//
-////				if(msg.status == 0){
-////					layer.open({
-////						content:msg.info,
-////						time:2
-////					});
-////					return false;
-////				}else if(msg.status == 1){
-////					$('.logo-src').val(msg.info);
-////				}
-//			},'json');
-			
 			$.ajax({
 				url:controller + "edit",
 				type:'post',
 				data:postData,
-				success:function (msg) {
-				   if(msg.status == 0){
-						layer.open({
-							content:msg.info,
-							time:2
-						});
+				success:function (data) {
+					if(data.status == 0){
+						dialog.error(data.info);
 						return false;
-					}else if(msg.status == 1){
-						dialog.success(msg.info,controller+'preview')
+					}else if(data.status == 1){
+						dialog.success(data.info,controller+'preview');
 					}
 				},
 				error:function (xhr) {
-					dialog.error(xhr)
+					dialog.error('Ajax错误');
 				},
-
-				
-				
 			})
 		})
-
 	})
 
 </script>
