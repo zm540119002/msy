@@ -170,7 +170,8 @@
 .tag-item div:nth-of-type(3){
     width:35%;
 }
-.classify-operate-btn a{
+.classify-operate-btn a,
+.classify-operate-btn .move-btn{
     display:inline-block;
     width:32px;
     height:32px;
