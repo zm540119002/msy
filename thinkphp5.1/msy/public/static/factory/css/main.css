@@ -193,16 +193,20 @@
 .classify-operate-btn a.del-icons{
     background-position:0 -71px;
 }
-.classify-operate-btn a.move-icons{
+.classify-operate-btn a.move-icons,
+.classify-operate-btn .move-btn.move-icons{
     background-position:0 -214px;
 }
-.classify-operate-btn a.down-icons{
+.classify-operate-btn a.down-icons,
+.classify-operate-btn .move-btn.down-icons{
     background-position:0 -106px;
 }
-.classify-operate-btn a.move-disabled-icons{
+.classify-operate-btn a.move-disabled-icons,
+.classify-label-content li:first-child .move-icons{
     background-position:0 -142px;
 }
-.classify-operate-btn a.down-disabled-icons{
+.classify-operate-btn a.down-disabled-icons,
+.classify-label-content li:last-child .down-icons{
     background-position:0 -178px;
 }
 .up-btn.disabled{

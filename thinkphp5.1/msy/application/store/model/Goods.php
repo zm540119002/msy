@@ -181,8 +181,7 @@ class Goods extends Model {
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->alias('g')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 	}
-
-
+	
 	//设置库存
 	public function setInventory($shopId=''){
 		$data = input('post.');
@@ -199,7 +198,6 @@ class Goods extends Model {
 		}else{
 			return errorMsg("失败");
 		}
-
 	}
 
 }

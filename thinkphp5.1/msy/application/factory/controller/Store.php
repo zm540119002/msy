@@ -36,6 +36,9 @@ class Store extends FactoryBase
                 ['record r','f.id = r.factory_id'],
             ];
             $factoryStore =  $modelFactory -> getInfo($where,$file,$join);
+            if(empty($factoryStore)){
+                $this -> error('请完善档案资料,再申请开店',url('Record/edit'));
+            }
             $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
             $modelFactory = new \app\factory\model\Brand();

@@ -694,34 +694,43 @@ color: #ed6d00;
     color:#e60012;
 }
 .foot_nav_bar a span{
-    width:20px;
+    /*width:20px;
     height:18px;
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:18px 180px;
-    display:block;
+    background-size:20px 240px;
+    display:block;*/
+
+    width: 26px;
+    height: 22px;
+    margin: 0 auto;
+    background-image: url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size: 25px 290px;
+    display: block;
 }
 .foot_nav_bar a span.store{
-    background-position:0 -130px;
+    /*background-position:0 -130px;*/
+    background-position:0 0;
 }
 .foot_nav_bar a span.practitioners{
-    background-position:0 -12px;
+    background-position:0 -25px;
 }
 .foot_nav_bar a span.manufacturer{
-    background-position:0 -27px;
+    background-position:0 -48px;
 }
 .foot_nav_bar .current a{
     color:#ff7aab;
 }
 .foot_nav_bar .current a span.store{
-    background-position:0 -46px;
+    background-position:0 -79px;
 }
 .foot_nav_bar .current a span.practitioners{
     background-position:0 -61px;
 }
 .foot_nav_bar .current a span.manufacturer{
-    background-position:0 -75px;
+    background-position:0 -126px;
 }
 /*美尚云从业人员*/
 

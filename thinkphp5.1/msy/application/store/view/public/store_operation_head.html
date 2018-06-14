@@ -36,7 +36,11 @@
         //获取厂商信息
         $.get(controller+'getStoreInfo',{},function (msg) {
             if(msg != ''){
-                $('.store-log-img').attr('src',uploads+msg.logo_img);
+                if(msg.logo_img = ''){
+                    $('.store-log-img').attr('src',public_img+'default/no_pic_40.jpg');
+                }else{
+                    $('.store-log-img').attr('src',uploads+msg.logo_img);
+                }
                 $('.store-name').text(msg.name);
             }
 

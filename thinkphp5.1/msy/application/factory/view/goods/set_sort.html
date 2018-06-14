@@ -64,7 +64,31 @@
 			//上拉加载更多
 			getMore(url,config);
 		}
-
+		 //上移
+        $('body').on('click','.up-btn',function(){
+            var _this=$(this);
+            var _thisLi = _this.parents('li');
+            //交换排序值
+            var _thisSortVal = _thisLi.find('input.sort').val();
+            _thisLi.find('input.sort').val(_thisLi.prev().find('input.sort').val());
+            _thisLi.prev().find('input.sort').val(_thisSortVal);
+            //交换位置
+            _thisLi.insertBefore(_thisLi.prev());
+            //禁用移动按钮
+            disableBtn();
+        });
+        //下移
+        $('body').on('click','.down-btn',function(){
+            var _this=$(this);
+            var _thisLi = _this.parents('li');
+            //交换排序值
+            var _thisSortVal = _thisLi.find('input.sort').val();
+            _thisLi.find('input.sort').val(_thisLi.next().find('input.sort').val());
+            _thisLi.next().find('input.sort').val(_thisSortVal);
+            //交换位置
+            _thisLi.insertAfter(_thisLi.next());
+            disableBtn();
+        });
 		//排序
 		$('body').on('click','.increase-commodity',function(){
 			var postData ={};
