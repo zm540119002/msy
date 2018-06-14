@@ -487,11 +487,11 @@ i{
 .top_search_module .search_btn{
     width:15%;
     height:20px;
-    margin:4px 0 0;
+    margin:2px 0 0;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 240px;
-    background-position:12px -198px;
+    background-size:28px 342px;
+    background-position:0 -284px;
 }
 .top_menu_box{
     position:relative;
