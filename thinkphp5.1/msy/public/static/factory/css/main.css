@@ -170,7 +170,8 @@
 .tag-item div:nth-of-type(3){
     width:35%;
 }
-.classify-operate-btn a{
+.classify-operate-btn a,
+.classify-operate-btn .move-btn{
     display:inline-block;
     width:32px;
     height:32px;
@@ -179,6 +180,9 @@
     background-repeat: no-repeat;
     background-size:32px 250px;
     text-indent:-9999rem;
+}
+.classify-operate-btn .move-btn{
+    background-color:transparent;
 }
 .classify-operate-btn a.add-icons{
     background-position:0 0;
@@ -189,10 +193,12 @@
 .classify-operate-btn a.del-icons{
     background-position:0 -71px;
 }
-.classify-operate-btn a.move-icons{
+.classify-operate-btn a.move-icons,
+.classify-operate-btn .move-btn.move-icons{
     background-position:0 -214px;
 }
-.classify-operate-btn a.down-icons{
+.classify-operate-btn a.down-icons,
+.classify-operate-btn .move-btn.down-icons{
     background-position:0 -106px;
 }
 .classify-operate-btn a.move-disabled-icons{
