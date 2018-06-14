@@ -95,6 +95,7 @@
     border-radius:4px;
     color:#ff7aab;
     text-align: center;
+    cursor:pointer;
 }
 .vendorInfoList li.current{
     background: #ff7aab;
