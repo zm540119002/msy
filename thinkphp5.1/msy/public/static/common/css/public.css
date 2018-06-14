@@ -1362,6 +1362,7 @@ color: #ed6d00;
 }
 .setRoleLayer li{
     margin-bottom:15px;
+    cursor:pointer;
 }
 .setRoleLayer li.current,
 .setOrganizeLayer li span.current{
