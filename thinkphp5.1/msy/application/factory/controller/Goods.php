@@ -14,7 +14,9 @@ class Goods extends StoreBase
             return $result = $goodsModel -> edit($this->store['id']);
         }
         $categoryModel = new \app\index_admin\model\GoodsCategory;
-        $where = [['parent_id_1','=',0]];
+        $where = [
+            ['parent_id_1','=',0]
+        ];
         $platformCategory = $categoryModel->getList($where);
         $this -> assign('platformCategory',$platformCategory);
         if(input('?goods_id') && $this->factory && $this->store){
@@ -168,7 +170,6 @@ class Goods extends StoreBase
     }
     //设置商品排序
     public function setSort(){
-
         if (request()->isPost()) {
             $data = input();
             if(empty($data['sortData']) && !is_array($data['sortData'])){
@@ -199,7 +200,6 @@ class Goods extends StoreBase
         if($this->factory && $this->store) {
             return $this -> fetch();
         }
-
     }
 
     //设置商品库存
