@@ -244,6 +244,7 @@
 				postData.glory_img = glory_img;
 			var factory_video=$('.company-video').data('src');
 				postData.factory_video = factory_video;
+			var  content ='';
 			if(!postData.company_img){
 				content='请上传企业形象图片';
 			}else if(!postData.provinces){
@@ -254,8 +255,6 @@
 				content='请上传企业标志图';
 			}else if(!postData.introduction){
 				content='请填写企业简介';
-			}else if(!postData.factory_video||postData.factory_video==0){
-				content='请上传企业视频';
 			}else if(!postData.rb_img||postData.rb_img==0){
 				content='请上传企业研发生产图片';
 			}else if(!postData.license||postData.license==0){
