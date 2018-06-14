@@ -17,7 +17,7 @@ class Goods extends StoreBase
         $where = [['parent_id_1','=',0]];
         $platformCategory = $categoryModel->getList($where);
         $this -> assign('platformCategory',$platformCategory);
-        if(input('?goods_id') && $this->store['id']){
+        if(input('?goods_id') && $this->factory && $this->store){
             $goodsId= (int)input('goods_id');
             $where = [
                ['g.store_id','=',$this->store['id']],
@@ -46,7 +46,7 @@ class Goods extends StoreBase
         if(empty($goodsId) && !$goodsId){
             $this -> error('此商品不存在');
         }
-        if($this->store['id']){
+        if($this->factory && $this->store){
             $where = [
                 ['g.id','=',$goodsId],
                 ['g.store_id','=',$this->store['id']],
@@ -60,7 +60,6 @@ class Goods extends StoreBase
             $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
             array_pop( $goodsInfo['details_img']);
             $this -> assign('goodsInfo',$goodsInfo);
-
             //获取店铺的详情信息
             $modelStore = new \app\factory\model\Store;
             $storeInfo = $modelStore -> getStoreInfo($this->store);
@@ -169,33 +168,38 @@ class Goods extends StoreBase
     }
     //设置商品排序
     public function setSort(){
-        if($this->factory && $this->store) {
-            if (request()->isPost()) {
-                $data = input();
-                $model = new \app\factory\model\Goods;
-                $result = $model->allowField(true)
-                    ->save($data, ['id' => $data['goodsId'], 'store_type' => $data['storeType']]);
-                if (false !== $result) {
-                    return successMsg('成功');
-                }
+
+        if (request()->isPost()) {
+            $data = input();
+            if(empty($data['sortData']) && !is_array($data['sortData'])){
+                return errorMsg('参数错误');
+            }
+            $model = new \app\factory\model\Goods;
+            $result = $model->isUpdate(true)->saveAll($data['sortData']);
+            if (false !== $result) {
+                return successMsg('成功');
             }
         }
-        return $this -> fetch();
+        if($this->factory && $this->store) {
+            return $this -> fetch();
+        }
+
     }
     //上下架设置
     public function setShelf(){
-        if($this->factory && $this->store) {
-            if (request()->isPost()) {
-                $data = input();
-                $model = new \app\factory\model\Goods;
-                $result = $model->allowField(true)
-                    ->save($data, ['id' => $data['goodsId'], 'store_id' => $this->store['id']]);
-                if (false !== $result) {
-                    return successMsg('成功');
-                }
+        if (request()->isPost()) {
+            $data = input();
+            $model = new \app\factory\model\Goods;
+            $result = $model->allowField(true)
+                ->save($data, ['id' => $data['goodsId'], 'store_id' => $this->store['id']]);
+            if (false !== $result) {
+                return successMsg('成功');
             }
         }
-        return $this -> fetch();
+        if($this->factory && $this->store) {
+            return $this -> fetch();
+        }
+
     }
 
     //设置商品库存
@@ -204,7 +208,9 @@ class Goods extends StoreBase
             $model = new \app\factory\model\Goods;
             return $result = $model ->setInventory($this->store['id']);
         }
-        return $this -> fetch();
+        if($this->factory && $this->store) {
+            return $this -> fetch();
+        }
     }
 
     //商品备份
