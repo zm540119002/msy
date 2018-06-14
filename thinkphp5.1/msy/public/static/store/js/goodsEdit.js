@@ -185,13 +185,17 @@ $(function(){
             content='请填写商品名称';
         }else if(!postData.trait){
             content='请填写商品特点';
-        }else if(!postData.settle_price){
-            content='请填写结算价';
         }else if(!postData.sale_price){
+            content='请填写优惠价';
+        }else if(!isMoney(postData.sale_price)){
+            content='价格格式有误';
+        }else if(!postData.retail_price){
             content='请填写零售价';
+        }else if(!isMoney(postData.retail_price)){
+            content='价格格式有误';
         }else if(!postData.thumb_img){
             content='请上传缩略图';
-        }else if(!postData.tag){
+        }else if(!postData.category_id_1){
             content='请选择分类标签';
         }else if(!postData.main_img){
             content='请上传首焦图';
@@ -200,10 +204,10 @@ $(function(){
         }else if(!postData.details_img){
             content='请上传商品详情图';
         }
-        // if(content){
-        //     dialog.error(content);
-        //     return false;
-        // }
+        if(content){
+            dialog.error(content);
+            return false;
+        }
         $.post(controller+'edit',postData,function(msg){
             if(msg.status == 0){
                 dialog.error(msg.info);
