@@ -432,10 +432,10 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -127px;
+    background-position:0 -175px;
 }
 .top_bar a.shopping_cart{
-    background-position:0 -150px;
+    background-position:0 -212px;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
@@ -458,8 +458,8 @@ i{
 }
 .top_bar a.qr-code{
     background-image:url(../../common/img/icons/public_icons.png);
-    background-position:0 -218px;
-    background-size:20px 240px;
+    background-position:0 -314px;
+    background-size:28px 342px;
 }
 .top_search_module{
     margin:-4px 0 0;
