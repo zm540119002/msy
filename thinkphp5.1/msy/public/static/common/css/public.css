@@ -1333,6 +1333,7 @@ color: #ed6d00;
     border:1px solid #009a3e;
     border-left:none;
     text-align:center;
+    cursor: pointer;
 }
 .group-role-content li.four-role .four-name{
     border:1px solid #009a3e;
