@@ -20,7 +20,7 @@ class Brand extends Model {
 	public function edit($factoryId = ''){
 		$data = input('post.');
 		$validate = validate('Brand');
-		if(!$result = $validate->scene('edit')->check($data)) {
+		if(!$result = $validate ->check($data)) {
 			return errorMsg($validate->getError());
 		}
 		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));

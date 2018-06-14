@@ -22,11 +22,4 @@ class Brand extends Validate
         'category_id_1.require'   => '请选择商标所属分类',
         'certificate.require'   => '请上传证书',
     ];
-    
-    protected $scene = [
-        'add'   =>  ['name','brand_img','cat_id_1','certificate'],
-        'edit'  =>  ['name','brand_img','cat_id_1','certificate'],
-    ];
-
-
 }
