@@ -699,11 +699,12 @@ color: #ed6d00;
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:18px 180px;
+    background-size:20px 240px;
     display:block;
 }
 .foot_nav_bar a span.store{
-    background-position:0 -130px;
+    /*background-position:0 -130px;*/
+    background-position:0 0;
 }
 .foot_nav_bar a span.practitioners{
     background-position:0 -12px;
