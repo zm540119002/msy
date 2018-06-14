@@ -51,10 +51,7 @@
 		<div>
 			<div class="picture-module">
 				<input type="file" class="uploadImg uploadVideoDescribe" name="" accept="video/*"  >
-				<!--<img class="upload_img" src="" alt="">
-                <input type="hidden" class="layer-thumbnail-picture" value=""/>-->
 			</div>
-			<!--<p>企业营业执照</p>-->
 		</div>
 	</div>
 </section>
@@ -101,15 +98,6 @@
 				</div>
 			</div>
 			<ul class="content-marginLeft">
-				<!--<li>-->
-					<!--<div class="company-n">-->
-						<!--<span>企业全称</span>-->
-						<!--{$factoryInfo.name|default=''}-->
-					<!--</div>-->
-				<!--</li>-->
-				<!--<li>-->
-					<!--<input type="text" value="{$recordInfo.shop_name|default=''}" placeholder="填写店铺名称" class=" input-text" name="shop_name" >-->
-				<!--</li>-->
 				<li>
 					<div class="express-area area-box">
 						<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
@@ -138,10 +126,6 @@
 						<div class="clear"></div>
 					</div>
 				</li>
-				<!--<li >
-					<a href="http://192.168.1.101:8008/demo/trademark.html" class="right-arrow" >企业商标备案</a>
-					<input type="hidden" class="" value="" name="" />
-				</li>-->
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑企业简介</a>
 					<input type="hidden" class="company-introduce" value="{$recordInfo.introduction|default=''}" name="introduction"/>
@@ -260,73 +244,46 @@
 				postData.glory_img = glory_img;
 			var factory_video=$('.company-video').data('src');
 				postData.factory_video = factory_video;
-			console.log(postData);
-//			postData.factory_video=$('.company-video').data('src');
-			var content='';
-//			if(!postData.company_img){
-//				content='请上传企业形象图片';
-//			}else if(!postData.shop_name){
-//				content='请填写店铺名称';
-//			}else if(!postData.provinces){
-//				content='请选择所在的省市区';
-//			}else if(!postData.detail_address){
-//				content='请填写详细地址';
-//			}else if(!postData.logo_img){
-//				content='请上传企业标志图';
-//			}else if(!postData.introduction){
-//				content='请填写企业简介';
-//			}else if(!postData.factory_video||postData.factory_video==0){
-//				content='请上传企业视频';
-//			}else if(!postData.rb_img||postData.rb_img==0){
-//				content='请上传企业研发生产图片';
-//			}else if(!postData.license||postData.license==0){
-//				content='请上传执照资质图片';
-//			}else if(!postData.glory_img||postData.glory_img==0){
-//				content='请上传专利荣誉图片';
-//			}
-//			if(content){
-//				dialog.error(content);
-//				return false;
-//			}
-
-//			$.post(controller + "edit",postData,function(msg){
-//
-////				if(msg.status == 0){
-////					layer.open({
-////						content:msg.info,
-////						time:2
-////					});
-////					return false;
-////				}else if(msg.status == 1){
-////					$('.logo-src').val(msg.info);
-////				}
-//			},'json');
-			
+			if(!postData.company_img){
+				content='请上传企业形象图片';
+			}else if(!postData.provinces){
+				content='请选择所在的省市区';
+			}else if(!postData.detail_address){
+				content='请填写详细地址';
+			}else if(!postData.logo_img){
+				content='请上传企业标志图';
+			}else if(!postData.introduction){
+				content='请填写企业简介';
+			}else if(!postData.factory_video||postData.factory_video==0){
+				content='请上传企业视频';
+			}else if(!postData.rb_img||postData.rb_img==0){
+				content='请上传企业研发生产图片';
+			}else if(!postData.license||postData.license==0){
+				content='请上传执照资质图片';
+			}else if(!postData.glory_img||postData.glory_img==0){
+				content='请上传专利荣誉图片';
+			}
+			if(content){
+				dialog.error(content);
+				return false;
+			}
 			$.ajax({
 				url:controller + "edit",
 				type:'post',
 				data:postData,
-				success:function (msg) {
-				   if(msg.status == 0){
-						layer.open({
-							content:msg.info,
-							time:2
-						});
+				success:function (data) {
+				   if(data.status == 0){
+						dialog.error(data.info);
 						return false;
-					}else if(msg.status == 1){
-						dialog.success(msg.info,controller+'preview')
+					}else if(data.status == 1){
+						dialog.success(data.info,controller+'preview');
 					}
 				},
 				error:function (xhr) {
-					dialog.error(xhr)
+					dialog.error('Ajax错误');
 				},
-
-				
-				
 			})
 		})
-
 	})
-
 </script>
 {/block}
