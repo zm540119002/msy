@@ -48,6 +48,7 @@ class UserFactory extends \think\model\Pivot {
 		$where = [
 			['user_id', '=', $postData['userId']],
 			['factory_id', '=', $factoryId],
+			['status', '<>', 2],
 		];
 		$res = $this->where($where)->setField('status',$postData['status']);
 		if(!$res){
