@@ -14,15 +14,13 @@
 				<div>
 					<span class="r-t">手机号码：</span><span>{$info.mobile_phone}</span>
 				</div>
-				<div>
+				<div class="role">
 					<span class="r-t">角色：</span>
-					<span>
 					{notempty name='info.role'}
 					{volist name='info.role' id='vo'}
-					{$vo.name}
+						<span data-role_id="{$vo.id}">{$vo.name}</span>
 					{/volist}
 					{/notempty}
-					</span>
 				</div>
 			</div>
 			<div class="account-edit-btn columns_flex">
@@ -117,6 +115,14 @@
 				var postData = {};
 				postData.status = status;
 				postData.userId = $('.accountInfoLayer').find('.user_id').val();
+				postData.roleIds = [];
+				$.each($('div.role').find('span'),function(){
+					var role_id = $(this).data('role_id');
+					if(role_id){
+						postData.roleIds.push(role_id);
+					}
+				});
+				console.log(postData);return;
 				var url = controller + 'setStatus';
 				$.post(url,postData,function(data){
 					if(data.status==0){
