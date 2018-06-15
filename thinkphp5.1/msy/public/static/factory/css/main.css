@@ -566,7 +566,7 @@
     display: inline-block;
     width:85px;
     text-align: right;
-    margin:0 10px 0 0;
+    /*margin:0 10px 0 0;*/
 }
 .accountInfoLayer .layui-m-layercont{
     padding:10px;
