@@ -280,8 +280,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
                     return false;
                 }
                 var postData = {};
-                postData.fileBase64 = layermultiImgAttr;
-                postData.fileType = 'video';
+                postData.imgs = layermultiImgAttr;
                 $.post(controller + 'uploadMultiImgToTemp',postData,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
@@ -341,7 +340,7 @@ function uploadsMultiVideo(content){
                 }
                 var postData = {};
                 postData.fileBase64 = layermultiVideoAttr;
-                postData.fileType = 'video';
+                postData.
                 $.ajax({
                     url: controller + 'uploadMultiImgToTemp',
                     data: postData,
