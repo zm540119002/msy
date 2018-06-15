@@ -195,10 +195,10 @@ $(function(){
             content='价格格式有误';
         }else if(!postData.thumb_img){
             content='请上传缩略图';
-        }else if(!postData.category_id_1){
-            content='请选择分类标签';
         }else if(!postData.main_img){
             content='请上传首焦图';
+        }else if(!postData.category_id_1){
+            content='请选择分类标签';
         }else if(!postData.parameters){
             content='请填写商品参数';
         }else if(!postData.details_img){

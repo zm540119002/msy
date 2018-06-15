@@ -641,11 +641,54 @@ color: #ed6d00;
 .store_mall_status{
     padding:.20rem;
 }
+.my-store-right{
+    width:30%;
+}
+.store_mall_status .personal_center{
+    /*width:28px;*/
+    width:26px;
+    height:28px;
+    /*height:28px;*/
+    margin:0 auto;
+    background-image:url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size:28px 342px;
+    background-position: 0 -175px;
+    display:block;
+    text-indent:-9999rem;
+}
+.store_mall_status a,
+.popularity a{
+    /*width:28px;*/
+    width:30px;
+    height:28px;
+    /*height:28px;*/
+    margin:0 0 0 42px;
+    background-image:url(../../common/img/icons/public_my_icons.png);
+    background-repeat: no-repeat;
+    background-size:28px 100px;
+    
+    display:block;
+    text-indent:-9999rem;
+}
+.store_mall_status .my-store{
+    background-position: 0 4px;
+}
+.popularity{
+    width:20%;
+}
+.popularity a.fabulous{
+background-position: 0 -60px;
+margin-left:0;
+}
+.popularity a.share{
+background-position: 0 -27px;
+}
 .store_operation_head{
     margin:0;
 }
 .store_operation_head a.home{
-    background-position: 0 -172px;
+    background-position: 0 -250px;
 }
 .store_operation_head div:nth-child(1){
     width:15%;
