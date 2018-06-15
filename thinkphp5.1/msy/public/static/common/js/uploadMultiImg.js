@@ -160,8 +160,8 @@ $(function(){
             var videoAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></li>');
             videoAdd.find('.picture-module').append(video);
             imgContainer.append(videoAdd);
-
-
+           
+            
             //提交
             // $.post("uploadImgToTemp",postData,function(msg){
             //     if(msg.status == 1){
@@ -173,14 +173,14 @@ $(function(){
             // })
         }
     });
-    //编辑商品详情
+    //编辑商品详情 
     var editDetail=$('#editDetail').html();
     $('body').on('click','.editDetail',function(){
         var _this=$(this);
         var storageDataObj=_this.siblings('input[type="hidden"]');
         var num=_this.siblings('input[type="hidden"]').data('picture-num');
         uploadsMultiImg(editDetail,storageDataObj,num,'编辑商品详情');
-    });
+    }); 
     //删除
     $('body').on('click','.delete-picture',function(){
         $(this).parents('li').remove();
@@ -239,7 +239,7 @@ $(function(){
         var _this=$(this);
         var storageDataObj=_this.next('input[type="hidden"]');
         uploadsVideoDescribe(companyVideoList,storageDataObj);
-    });
+    }); 
     //编辑描述
     $('body').on('click','.edit-describe',function () {
         var _this=$(this);
@@ -281,8 +281,8 @@ function uploadsMultiImg(content,obj,limitNum,title){
                 }
                 var postData = {};
                 postData.fileBase64 = layermultiImgAttr;
-                postData.fileType = 'image';
-                $.post(controller + 'uploadFileToTemp',postData,function(info){
+                postData.fileType = 'video';
+                $.post(controller + 'uploadMultiImgToTemp',postData,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
                        return false;
@@ -294,7 +294,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
                         }
                         imgArray+=img+',';
                     });
-
+                    
                     obj.data('src',imgArray);
                     layer.close(index);
                 })
@@ -343,7 +343,7 @@ function uploadsMultiVideo(content){
                 postData.fileBase64 = layermultiVideoAttr;
                 postData.fileType = 'video';
                 $.ajax({
-                    url: controller + 'uploadFileToTemp',
+                    url: controller + 'uploadMultiImgToTemp',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -428,7 +428,7 @@ function uploadsImgDescribe(content,obj){
                     return false;
                 }
                 var postData = {};
-                postData.fileType = 'image';
+                postData.type = 'image';
                 postData.imgsWithDes = layermultiImgAttr;
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
@@ -531,7 +531,7 @@ function uploadsVideoDescribe(content,obj)
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
                 postData.imgsWithDes = layermultiImgAttr;
-                postData.fileType = 'video';
+                postData.type = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
                     url: controller + 'uploadMultiImgToTempWithDes',
@@ -548,7 +548,6 @@ function uploadsVideoDescribe(content,obj)
                         var imgArray = [];
                         var a=JSON.parse(info);
                         for(var i=0;i<a.length;i++){
-                            console.log(a)
                             if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
                                 a[i].imgSrc= uploads+a[i].imgSrc;
 

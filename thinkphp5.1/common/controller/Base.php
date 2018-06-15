@@ -41,10 +41,10 @@ class Base extends \think\Controller{
         $imgsNew = [];
         foreach ($imgs as $k=>$img){
             //判断是否为base64编码图片
-            if(strpos($img['imgSrc'],'data:image') !==false || strpos($img['imgSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($img['imgSrc'],$_POST['fileType']);
-                $imgsNew[$k]['imgSrc'] = $fileName;
-                $imgsNew[$k]['imgText'] = $img['imgText'];
+            if(strpos($img['fileSrc'],'data:image') !==false || strpos($img['fileSrc'],'data:video') !== false){
+                $fileName =  $this ->_uploadSingleFileToTemp($img['fileSrc'],$_POST['fileType']);
+                $imgsNew[$k]['fileSrc'] = $fileName;
+                $imgsNew[$k]['fileText'] = $img['fileText'];
             }else{
                 $imgsNew[$k] = $img;
             }
