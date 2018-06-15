@@ -356,6 +356,7 @@ i{
     bottom:0;
     width:100%;
     font-size:0.24rem;
+    z-index:6;
 }
 .common_default_img{
     width:100%;
