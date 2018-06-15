@@ -280,8 +280,9 @@ function uploadsMultiImg(content,obj,limitNum,title){
                     return false;
                 }
                 var postData = {};
-                postData.imgs = layermultiImgAttr;
-                $.post(controller + 'uploadMultiImgToTemp',postData,function(info){
+                postData.fileBase64 = layermultiImgAttr;
+                postData.fileType = 'image';
+                $.post(controller + 'uploadFileToTemp',postData,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
                        return false;
@@ -340,9 +341,9 @@ function uploadsMultiVideo(content){
                 }
                 var postData = {};
                 postData.fileBase64 = layermultiVideoAttr;
-                postData.
+                postData.fileType = 'video';
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTemp',
+                    url: controller + 'uploadFileToTemp',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){

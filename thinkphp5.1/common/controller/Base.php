@@ -19,6 +19,9 @@ class Base extends \think\Controller{
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
             $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$postData['fileType']);
+            if(isset($fileName['status'])&& $fileName['status'] == 0){
+                return $fileName;
+            }
             return successMsg($fileName);
         }
         if(is_array($postData['fileBase64'])){
@@ -27,6 +30,9 @@ class Base extends \think\Controller{
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
                     $fileName = $this ->_uploadSingleFileToTemp($file,$postData['fileType']);
+                    if(isset($fileName['status'])&& $fileName['status'] == 0){
+                        return $fileName;
+                    }
                     $filesNew[] = $fileName;
                 }else{
                     $filesNew[] = $file;
@@ -43,6 +49,9 @@ class Base extends \think\Controller{
             //判断是否为base64编码图片
             if(strpos($img['fileSrc'],'data:image') !==false || strpos($img['fileSrc'],'data:video') !== false){
                 $fileName =  $this ->_uploadSingleFileToTemp($img['fileSrc'],$_POST['fileType']);
+                if(isset($fileName['status'])&& $fileName['status'] == 0){
+                    return $fileName;
+                }
                 $imgsNew[$k]['fileSrc'] = $fileName;
                 $imgsNew[$k]['fileText'] = $img['fileText'];
             }else{
