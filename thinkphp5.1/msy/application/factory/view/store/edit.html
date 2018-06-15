@@ -85,156 +85,281 @@
 {block name="script"}
 
 <script type="text/javascript">
-	$(function(){
-		var storesApplied = '{:json_encode($storesApplied)}';
-		storesApplied = JSON.parse(storesApplied);
+//	$(function(){
+//		var storesApplied = '{:json_encode($storesApplied)}';
+//		storesApplied = JSON.parse(storesApplied);
+//
+//		var postData={};
+//		var store_type,run_type;
+//		//选择类型和模式
+//		$('body').on('click','.store-type-menu a',function(){
+//			var _this=$(this);
+//			var dataTypeId=_this.data('type');
+//			$(this).addClass('current').siblings().removeClass('current');
+//			for(var i=0;i<storesApplied.length;i++){
+//				if(dataTypeId==storesApplied[i].store_type){
+//					$.each($('div[data-store-pattern="pattern"] a'),function(j,val){
+//						var _This=$(this);
+//						var storePatternId=_This.data('pattern');
+//						if(storePatternId==storesApplied[i].run_type){
+//							_This.addClass('disabled');
+//						}
+//					})
+//				}
+//				if(dataTypeId==2){
+//					$('div[data-store-pattern="pattern"] a').removeClass('disabled');
+//				}
+//			}
+//		});
+//
+//		//选择店铺
+//		$('body').on('click','.applyNewStoreLayer .store-list',function(){
+//			var _this=$(this);
+//			_this.addClass('current').siblings().removeClass('current');
+//		});
+//		//下一步
+//		$('body').on('click','.next-step',function(){
+//			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+//			store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+//			if(store_type ==1 ) {
+//				var factory_store = $('.factory_store').length;
+//				if (!factory_store) {
+//					dialog.success('请完善企业档案', module + 'Record/edit');
+//					return false;
+//				}
+//			}
+//			if(store_type ==2 ){
+//				var brand_stores = $('.brand_stores').length;
+//				if(!brand_stores){
+//					dialog.success('请完善品牌资料备案',module+'Brand/record');
+//					return false;
+//				}
+//			}
+//			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+//			var selectedLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
+//			if(storeType.hasClass('current')){
+//				if(selectedLen==storePattern.length){
+//					dialog.error('此店所有经营模式已开过');
+//					return false;
+//				}
+//				if(storePattern.hasClass('current')){
+//					run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
+//					$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
+//
+//					$('.store-one').hide();
+//					postData={
+//						store_type:store_type,
+//						run_type:run_type,
+//					}
+//					if(store_type ==1 ){
+//						$('.applyNewStoreLayer .store-list').addClass('current');
+//						//$('.factory_store').find('li').attr('disabled',false);
+//						$('.store-two').show();
+//						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+//						$('.factory_store').find('.run_type').text(runTypeTxt);
+//						$('.brand_stores').hide();
+//						$('.factory_store').show();
+//					}
+//					if(store_type ==2 ){
+//
+//						$('.store-two').show();
+//						var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+//						$('.brand_stores').find('.run_type').text(runType);
+//						for(var i=0;i<storesApplied.length;i++){
+//							if(run_type==storesApplied[i].run_type){
+//								$.each($('.brand_stores'),function(j,val){
+//									var _This=$(this);
+//									var foreignId=_This.data('foreign_id');
+//									if(foreignId==storesApplied[i].foreign_id){
+//										_This.addClass('disabled');
+//									}
+//								})
+//							}
+//						}
+//						$('.factory_store').hide();
+//						$('.brand_stores').show();
+//					}
+//				}else{
+//					dialog.error('请选择经营模式');
+//					return false;
+//				}
+//			}else{
+//				dialog.error('请选择店铺类型和经营模式');
+//			}
+//		});
+//		//开店弹窗
+//		var applyNewStore=$('#applyNewStore').html();
+//		$('body').on('click','.apply-new-store',function(){
+//			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+//			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+//			var storeList=$('.applyNewStoreLayer .store-list');
+//			var brandList=$('.applyNewStoreLayer .brand_stores');
+//			var selectedBLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
+//				if(selectedBLen==brandList.length){
+//					dialog.error('此店所有经营模式已开过');
+//					return false;
+//				}
+//				if(storeList.hasClass('current')){
+//					foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
+//					postData.foreign_id = foreign_id;
+//				}
+//				else{
+//					dialog.success('请选择店铺');
+//					return false;
+//				}
+//				$(this).addClass('disabled');
+//				$.ajax({
+//					url: controller + 'edit',
+//					data: postData,
+//					type: 'post',
+//					beforeSend: function(){
+//						//$('.loading').show();
+//					},
+//					success: function(msg){
+//						if(msg.status == 0){
+//							dialog.error(msg.info);
+//							return false;
+//						}
+//						if(msg.status == 1){
+//							dialog.success(msg.info,module+'Store/manage');
+//							return false;
+//						}
+//					},
+//					complete:function(){
+//
+//					},
+//					error:function (xhr) {
+//						dialog.error('AJAX错误'+xhr);
+//					},
+//				});
+//		});
+//
+//	})
+$(function(){
+	var storesApplied = '{:json_encode($storesApplied)}';
+	storesApplied = JSON.parse(storesApplied);
 
-		var postData={};
-		var store_type,run_type;
-		//选择类型和模式
-		$('body').on('click','.store-type-menu a',function(){
-			var _this=$(this);
-			var dataTypeId=_this.data('type');
-			$(this).addClass('current').siblings().removeClass('current');
-			for(var i=0;i<storesApplied.length;i++){
-				if(dataTypeId==storesApplied[i].store_type){
-					$.each($('div[data-store-pattern="pattern"] a'),function(j,val){
-						var _This=$(this);
-						var storePatternId=_This.data('pattern');
-						if(storePatternId==storesApplied[i].run_type){
-							_This.addClass('disabled');
-						}
-					})
-				}
-				if(dataTypeId==2){
-					$('div[data-store-pattern="pattern"] a').removeClass('disabled');
-				}
+	var postData={};
+	var store_type,run_type;
+	//选择类型和模式
+	$('body').on('click','.store-type-menu a',function(){
+		var _this=$(this);
+		var dataTypeId=_this.data('type');
+		$(this).addClass('current').siblings().removeClass('current');
+//		for(var i=0;i<storesApplied.length;i++){
+//			if(dataTypeId==storesApplied[i].store_type){
+//				$.each($('div[data-store-pattern="pattern"] a'),function(j,val){
+//					var _This=$(this);
+//					var storePatternId=_This.data('pattern');
+//					if(storePatternId==storesApplied[i].run_type){
+//						_This.addClass('disabled');
+//					}
+//				})
+//			}
+//			if(dataTypeId==2){
+//				$('div[data-store-pattern="pattern"] a').removeClass('disabled');
+//			}
+//		}
+	});
+
+	//选择店铺
+	$('body').on('click','.applyNewStoreLayer .store-list',function(){
+		var _this=$(this);
+		_this.addClass('current').siblings().removeClass('current');
+	});
+	//下一步
+	$('body').on('click','.next-step',function(){
+		var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+		store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+		if(store_type ==1 ) {
+			var factory_store = $('.factory_store').length;
+			if (!factory_store) {
+				dialog.success('请完善企业档案', module + 'Record/edit');
+				return false;
 			}
-		});
-
-		//选择店铺
-		$('body').on('click','.applyNewStoreLayer .store-list',function(){
-			var _this=$(this);
-			_this.addClass('current').siblings().removeClass('current');
-		});
-		//下一步
-		$('body').on('click','.next-step',function(){
-			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
-			store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
-			if(store_type ==1 ) {
-				var factory_store = $('.factory_store').length;
-				if (!factory_store) {
-					dialog.success('请完善企业档案', module + 'Record/edit');
-					return false;
-				}
+		}
+		if(store_type ==2 ){
+			var brand_stores = $('.brand_stores').length;
+			if(!brand_stores){
+				dialog.success('请完善品牌资料备案',module+'Brand/record');
+				return false;
 			}
-			if(store_type ==2 ){
-				var brand_stores = $('.brand_stores').length;
-				if(!brand_stores){
-					dialog.success('请完善品牌资料备案',module+'Brand/record');
-					return false;
-				}
-			}
-			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
-			var selectedLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
-			if(storeType.hasClass('current')){
-				if(selectedLen==storePattern.length){
-					dialog.error('此店所有经营模式已开过');
-					return false;
-				}
-				if(storePattern.hasClass('current')){
-					run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
-					$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
+		}
+		var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+		if(!storeType.hasClass('current')) {
+			dialog.error('请选择经营模式000000');
+			return false;
+		}
+		if(!storePattern.hasClass('current')){
+			dialog.error('请选择经营模式');
+			return false;
+		}
+		run_type=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').data('pattern');
+		$('.applyNewStoreLayer li').siblings().removeClass('current').eq(1).addClass('current');
+		$('.store-one').hide();
+		postData={
+			store_type:store_type,
+			run_type:run_type,
+		}
+		if(store_type ==1 ){
+			$('.store-two').show();
+			$('.brand_stores').hide();
+			$('.factory_store').show();
+		}
+		if(store_type ==2 ){
+			$('.store-two').show();
+			$('.factory_store').hide();
+			$('.brand_stores').show();
+		}
 
-					$('.store-one').hide();
-					postData={
-						store_type:store_type,
-						run_type:run_type,
-					}
-					if(store_type ==1 ){
-						$('.applyNewStoreLayer .store-list').addClass('current');
-						//$('.factory_store').find('li').attr('disabled',false);
-						$('.store-two').show();
-						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
-						$('.factory_store').find('.run_type').text(runTypeTxt);
-						$('.brand_stores').hide();
-						$('.factory_store').show();
-					}
-					if(store_type ==2 ){
-
-						$('.store-two').show();
-						var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
-						$('.brand_stores').find('.run_type').text(runType);
-						for(var i=0;i<storesApplied.length;i++){
-							if(run_type==storesApplied[i].run_type){
-								$.each($('.brand_stores'),function(j,val){
-									var _This=$(this);
-									var foreignId=_This.data('foreign_id');
-									if(foreignId==storesApplied[i].foreign_id){
-										_This.addClass('disabled');
-									}
-								})
-							}
-						}
-						$('.factory_store').hide();
-						$('.brand_stores').show();
-					}
-				}else{
-					dialog.error('请选择经营模式');
+		console.log(postData);return false;
+	});
+	//开店弹窗
+	var applyNewStore=$('#applyNewStore').html();
+	$('body').on('click','.apply-new-store',function(){
+		var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
+		var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
+		var storeList=$('.applyNewStoreLayer .store-list');
+		var brandList=$('.applyNewStoreLayer .brand_stores');
+		var selectedBLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
+		if(selectedBLen==brandList.length){
+			dialog.error('此店所有经营模式已开过');
+			return false;
+		}
+		if(storeList.hasClass('current')){
+			foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
+			postData.foreign_id = foreign_id;
+		}
+		else{
+			dialog.success('请选择店铺');
+			return false;
+		}
+		$(this).addClass('disabled');
+		$.ajax({
+			url: controller + 'edit',
+			data: postData,
+			type: 'post',
+			beforeSend: function(){
+				//$('.loading').show();
+			},
+			success: function(msg){
+				if(msg.status == 0){
+					dialog.error(msg.info);
 					return false;
 				}
-			}else{
-				dialog.error('请选择店铺类型和经营模式');
-			}
+				if(msg.status == 1){
+					dialog.success(msg.info,module+'Store/manage');
+					return false;
+				}
+			},
+			complete:function(){
+
+			},
+			error:function (xhr) {
+				dialog.error('AJAX错误'+xhr);
+			},
 		});
-		//开店弹窗
-		var applyNewStore=$('#applyNewStore').html();
-		$('body').on('click','.apply-new-store',function(){
-			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
-			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
-			var storeList=$('.applyNewStoreLayer .store-list');
-			var brandList=$('.applyNewStoreLayer .brand_stores');
-			var selectedBLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
-				if(selectedBLen==brandList.length){
-					dialog.error('此店所有经营模式已开过');
-					return false;
-				}
-				if(storeList.hasClass('current')){
-					foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
-					postData.foreign_id = foreign_id;
-				}
-				else{
-					dialog.success('请选择店铺');
-					return false;
-				}
-				$(this).addClass('disabled');
-				$.ajax({
-					url: controller + 'edit',
-					data: postData,
-					type: 'post',
-					beforeSend: function(){
-						//$('.loading').show();
-					},
-					success: function(msg){
-						if(msg.status == 0){
-							dialog.error(msg.info);
-							return false;
-						}
-						if(msg.status == 1){
-							dialog.success(msg.info,module+'Store/manage');
-							return false;
-						}
-					},
-					complete:function(){
-
-					},
-					error:function (xhr) {
-						dialog.error('AJAX错误'+xhr);
-					},
-				});
-		});
-
-	})
-
+	});
+})
 </script>
 {/block}
