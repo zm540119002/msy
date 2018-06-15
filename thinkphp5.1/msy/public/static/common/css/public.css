@@ -840,7 +840,8 @@ color: #ed6d00;
 }
 .login_item .columns_flex span{
     width:100px;
-    line-height: 32px;
+    padding:.12rem 0;
+    /*line-height: 32px;*/
     border:1px solid #d9d9d9;
     border-radius:5px 0 0 5px;
 }
