@@ -431,7 +431,7 @@ function uploadsImgDescribe(content,obj){
                 postData.imgsWithDes = layermultiImgAttr;
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTempWithDes',
+                    url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -533,7 +533,7 @@ function uploadsVideoDescribe(content,obj)
                 postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTempWithDes',
+                    url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
