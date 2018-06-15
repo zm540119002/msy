@@ -88,7 +88,7 @@
 	$(function(){
 		var storesApplied = '{:json_encode($storesApplied)}';
 		storesApplied = JSON.parse(storesApplied);
-
+		console.log(storesApplied);
 		var postData={};
 		var store_type,run_type;
 		//选择类型和模式
@@ -139,6 +139,7 @@
 			var selectedLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
 			if(storeType.hasClass('current')){
 				if(selectedLen==storePattern.length){
+					alert(1);
 					dialog.error('此店所有经营模式已开过');
 					return false;
 				}
@@ -153,7 +154,7 @@
 					}
 					if(store_type ==1 ){
 						$('.applyNewStoreLayer .store-list').addClass('current');
-						//$('.factory_store').find('li').attr('disabled',false);
+						$('.factory_store').attr('disabled',false);
 						$('.store-two').show();
 						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 						$('.factory_store').find('.run_type').text(runTypeTxt);
@@ -195,7 +196,9 @@
 			var storeList=$('.applyNewStoreLayer .store-list');
 			var brandList=$('.applyNewStoreLayer .brand_stores');
 			var selectedBLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
+				alert(brandList.length);
 				if(selectedBLen==brandList.length){
+					alert(2);
 					dialog.error('此店所有经营模式已开过');
 					return false;
 				}
