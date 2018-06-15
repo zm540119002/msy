@@ -78,44 +78,7 @@ $(function(){
             }
         })
     })
-    //裁剪商标logo
-    var clipImg = '';
-    $("#clipArea").photoClip({
-        width: 199,
-        height: 166,
-        file: "#file",
-        view: "#view",
-        ok: "#clipBtn",
-        clipFinish: function(img) {
-            clipImg = img;
-            var postData ={};
-            postData.fileBase64 = clipImg;
-            postData.fileType = 'image';
-            $.post(controller + "uploadFileToTemp", postData,function(msg){
-                if(msg.status == 0){
-                    layer.open({
-                        content:msg.info,
-                        time:2
-                    });
-                    return false;
-                }else if(msg.status == 1){
-                    $('.logo-src').val(msg.info);
-                }
-            },'json');
-        }
-    });
-    $(".logo").click(function(){
-        $(".htmleaf-container").show();
-    });
-    $("#clipBtn").click(function(){
-        $('.logo img').attr('src',clipImg).addClass('active');
-        $('.logo-src').val(clipImg);
-        $(".htmleaf-container").hide();
-    });
-    $('.photoClip-close').click(function(){
-        $(".htmleaf-container").hide();
-    })
-
+    
     //递交商标资料
     $('body').on('click','.two-step',function(){
         var trademark=$('.trademark-info').data('trademark');

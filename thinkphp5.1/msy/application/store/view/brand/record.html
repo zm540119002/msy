@@ -3,32 +3,6 @@
 <link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
-<!--商标截图-->
-<section class="htmleaf-container" style="display: none;">
-	<div id="clipArea">
-		<div class="photo-clip-view" >
-			<div class="photo-clip-moveLayer" >
-				<div class="photo-clip-rotateLayer"></div>
-			</div>
-		</div>
-		<div class="photo-clip-mask">
-			<div class="photo-clip-mask-left"></div>
-			<div class="photo-clip-mask-right" ></div>
-			<div class="photo-clip-mask-top" ></div>
-			<div class="photo-clip-mask-bottom" ></div>
-			<div class="photo-clip-area" ></div>
-		</div>
-		<a href="javascript:void(0);" class="photoClip-close ">X</a>
-	</div>
-	<div class="foot-use f28">
-		<div class="uploader1 blue">
-			<input type="button" name="file" class="button" value="打开图片">
-			<input id="file" type="file" onchange="javascript:void(0);" accept="image/*" multiple="" />
-		</div>
-		<button id="clipBtn">截取</button>
-	</div>
-	<div id="view" class="photoview" ></div>
-</section>
 <!--商标所属分类-->
 <section id="edittradeMark" style="display:none;">
 	<p><span class="friend-tipc">*注意</span>：商标分类至少选择1个,最多只能选择3个</p>
@@ -126,7 +100,7 @@
 
 {/block}
 {block name="common"}
-
+{include file="template/clip_img.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
