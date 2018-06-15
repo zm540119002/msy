@@ -191,11 +191,13 @@ $(function(){
 				return false;
 			}
 		}
-		if(selectedBLen==brandList.length){
-			alert(1111);
-			dialog.success('此店所有经营模式已开过',module+'Store/manage');
-			return false;
+		if(store_type ==2){
+			if(selectedBLen==brandList.length){
+				dialog.success('此店所有经营模式已开过',module+'Store/manage');
+				return false;
+			}
 		}
+		
 		if(storeList.hasClass('current')){
 			foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
 			postData.foreign_id = foreign_id;
