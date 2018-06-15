@@ -945,7 +945,7 @@ transparent;
 }
 .apply-new-store{
     display: block;
-    padding:.12rem 0;
+    /*padding:.12rem 0;*/
     background: #ff7aab;
     color:#fff;
     text-align:center;
