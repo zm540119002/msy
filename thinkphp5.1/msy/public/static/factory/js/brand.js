@@ -88,7 +88,10 @@ $(function(){
         ok: "#clipBtn",
         clipFinish: function(img) {
             clipImg = img;
-            $.post(controller+"uploadImgToTemp", { img: clipImg , compress:false },function(msg){
+            var postData ={};
+            postData.fileBase64 = clipImg;
+            postData.fileType = 'image';
+            $.post(controller + "uploadFileToTemp", postData,function(msg){
                 if(msg.status == 0){
                     layer.open({
                         content:msg.info,

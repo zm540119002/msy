@@ -18,7 +18,7 @@ class Base extends \think\Controller{
     public function uploadFileToTemp(){
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
-            $fileName =  $this ->_uploadSingleImgToTemp($postData['fileBase64'],$postData['fileType']);
+            $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$postData['fileType']);
             return successMsg($fileName);
         }
         if(is_array($postData['fileBase64'])){
@@ -26,7 +26,7 @@ class Base extends \think\Controller{
             foreach ($postData['fileBase64'] as $k=>$file){
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                    $fileName = $this ->_uploadSingleImgToTemp($file,$postData['fileType']);
+                    $fileName = $this ->_uploadSingleFileToTemp($file,$postData['fileType']);
                     $filesNew[] = $fileName;
                 }else{
                     $filesNew[] = $file;
@@ -42,7 +42,7 @@ class Base extends \think\Controller{
         foreach ($imgs as $k=>$img){
             //判断是否为base64编码图片
             if(strpos($img['imgSrc'],'data:image') !==false || strpos($img['imgSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleImgToTemp($img['imgSrc'],$_POST['fileType']);
+                $fileName =  $this ->_uploadSingleFileToTemp($img['imgSrc'],$_POST['fileType']);
                 $imgsNew[$k]['imgSrc'] = $fileName;
                 $imgsNew[$k]['imgText'] = $img['imgText'];
             }else{
@@ -53,7 +53,7 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    private function _uploadSingleImgToTemp($fileBase64,$fileType){
+    private function _uploadSingleFileToTemp($fileBase64,$fileType){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
