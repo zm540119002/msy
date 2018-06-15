@@ -42,23 +42,23 @@ class Base extends \think\Controller{
         }
     }
     //返回图片临时相对路,上传多张图片带描述
-    public function uploadMultiImgToTempWithDes(){
-        $imgs = $_POST['imgsWithDes'];
-        $imgsNew = [];
-        foreach ($imgs as $k=>$img){
+    public function uploadMultiFileToTempWithDes(){
+        $files = $_POST['imgsWithDes'];
+        $filesNew = [];
+        foreach ($files as $k=>$file){
             //判断是否为base64编码图片
-            if(strpos($img['fileSrc'],'data:image') !==false || strpos($img['fileSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($img['fileSrc'],$_POST['fileType']);
+            if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
+                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$_POST['fileType']);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
-                $imgsNew[$k]['fileSrc'] = $fileName;
-                $imgsNew[$k]['fileText'] = $img['fileText'];
+                $filesNew[$k]['fileSrc'] = $fileName;
+                $filesNew[$k]['fileText'] = $file['fileText'];
             }else{
-                $imgsNew[$k] = $img;
+                $filesNew[$k] = $file;
             }
         }
-        return json_encode($imgsNew);
+        return json_encode($filesNew);
     }
 
     //上传单个data64位文件

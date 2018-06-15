@@ -431,7 +431,7 @@ function uploadsImgDescribe(content,obj){
                 postData.imgsWithDes = layermultiImgAttr;
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTempWithDes',
+                    url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -533,7 +533,7 @@ function uploadsVideoDescribe(content,obj)
                 postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTempWithDes',
+                    url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -546,7 +546,6 @@ function uploadsVideoDescribe(content,obj)
                         }
                         var imgArray = [];
                         var returnData=JSON.parse(info);
-                        console.log(returnData);
                         for(var i=0;i<returnData.length;i++){
                             if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
                                 returnData[i].fileSrc= uploads+returnData[i].fileSrc;
