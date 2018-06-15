@@ -420,14 +420,13 @@ function uploadsImgDescribe(content,obj){
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 })
-                // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
                     layer.close(index);
                     return false;
                 }
                 var postData = {};
-                postData.type = 'image';
+                postData.fileType = 'image';
                 postData.imgsWithDes = layermultiImgAttr;
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
@@ -446,12 +445,11 @@ function uploadsImgDescribe(content,obj){
                         var returnData=JSON.parse(info);
                         for(var i=0;i<returnData.length;i++){
                             if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
-                                returnData[i].fileSrc= uploads+a[i].fileSrc;
+                                returnData[i].fileSrc= uploads+returnData[i].fileSrc;
 
                             }
                             imgArray.push(returnData[i]);
                         }
-                        console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
                             dialog.error('图片文件上传完！')
@@ -530,7 +528,8 @@ function uploadsVideoDescribe(content,obj)
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
                 postData.imgsWithDes = layermultiImgAttr;
-                postData.type = 'video';
+                console.log(postData);
+                postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
                     url: controller + 'uploadMultiImgToTempWithDes',
@@ -549,12 +548,11 @@ function uploadsVideoDescribe(content,obj)
                         console.log(returnData);
                         for(var i=0;i<returnData.length;i++){
                             if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
-                                returnData[i].fileSrc= uploads+a[i].fileSrc;
+                                returnData[i].fileSrc= uploads+returnData[i].fileSrc;
 
                             }
                             imgArray.push(returnData[i]);
                         }
-                        console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
                             dialog.error('视频文件上传完！')
