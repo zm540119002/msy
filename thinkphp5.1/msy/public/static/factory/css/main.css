@@ -95,6 +95,7 @@
     border-radius:4px;
     color:#ff7aab;
     text-align: center;
+    cursor:pointer;
 }
 .vendorInfoList li.current{
     background: #ff7aab;
@@ -563,9 +564,9 @@
 .account-info .r-t,
 .accountInfoLayer .r-t{
     display: inline-block;
-    width:72px;
+    width:85px;
     text-align: right;
-    margin:0 10px 0 0;
+    /*margin:0 10px 0 0;*/
 }
 .accountInfoLayer .layui-m-layercont{
     padding:10px;

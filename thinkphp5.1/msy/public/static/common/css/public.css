@@ -38,10 +38,11 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 .input-filed{
     display: block;
     width:100%;
-    padding:0.15rem 0;
+    padding:0.18rem 0;
     border:1px solid #d9d9d9;
     border-radius:5px;
     text-indent:10px;
+    font-size:0.24rem;
 }
 .content-row-list{
     margin:0 0 .18rem 0;
@@ -387,13 +388,13 @@ i{
 }
 .top_bar a{
     /*width:28px;*/
-    width:20px;
-    height:22px;
+    width:26px;
+    height:28px;
     /*height:28px;*/
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 240px;
+    background-size:28px 342px;
     display:block;
     text-indent:-9999rem;
 }
@@ -401,7 +402,7 @@ i{
     width:50%;
 }
 .top-switch-bar a.home{
-    width:20px;
+    width:30px;
     margin:0 0 0 .15rem;
 }
 .top_bar a.switch-account{
@@ -432,14 +433,15 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -127px;
+    background-position:0 -175px;
 }
 .top_bar a.shopping_cart{
-    background-position:0 -150px;
+    background-position:0 -212px;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    background-position:0 -172px;
+    /*background-position:0 -172px;*/
+    background-position:0 -248px;
 }
 .top_bar a.goods-video{
     width:28px;
@@ -457,8 +459,8 @@ i{
 }
 .top_bar a.qr-code{
     background-image:url(../../common/img/icons/public_icons.png);
-    background-position:0 -218px;
-    background-size:20px 240px;
+    background-position:0 -314px;
+    background-size:28px 342px;
 }
 .top_search_module{
     margin:-4px 0 0;
@@ -486,11 +488,11 @@ i{
 .top_search_module .search_btn{
     width:15%;
     height:20px;
-    margin:4px 0 0;
+    margin:2px 0 0;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:20px 240px;
-    background-position:12px -198px;
+    background-size:28px 342px;
+    background-position:0 -283px;
 }
 .top_menu_box{
     position:relative;
@@ -838,7 +840,8 @@ color: #ed6d00;
 }
 .login_item .columns_flex span{
     width:100px;
-    line-height: 32px;
+    padding:.18rem 0;
+    /*line-height: 32px;*/
     border:1px solid #d9d9d9;
     border-radius:5px 0 0 5px;
 }
@@ -869,8 +872,8 @@ color: #ed6d00;
     border-radius:0 5px 5px 0;
     background-image:url(../../common/img/icons/psw-icons.png);
     background-repeat: no-repeat;
-    background-size:30px 30px;
-    background-position:15px 16px;
+    background-size:30px 34px;
+    background-position:15px 22px;
 }
 .login_item .columns_flex .hidden.active{
      background-position:15px -7px;
@@ -1332,6 +1335,7 @@ color: #ed6d00;
     border:1px solid #009a3e;
     border-left:none;
     text-align:center;
+    cursor: pointer;
 }
 .group-role-content li.four-role .four-name{
     border:1px solid #009a3e;
@@ -1361,6 +1365,7 @@ color: #ed6d00;
 }
 .setRoleLayer li{
     margin-bottom:15px;
+    cursor:pointer;
 }
 .setRoleLayer li.current,
 .setOrganizeLayer li span.current{
@@ -2243,7 +2248,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .list-label{
     display: inline-block;
-    width:1.2rem;
+    width:80px;
     margin:0 0.08rem 0 0;
     text-align:right;
 }
