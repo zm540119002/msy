@@ -398,13 +398,13 @@ function uploadsImgDescribe(content,obj){
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
                 for(var i=0;i<multiImgAttr.length;i++){
-                    if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
-                        multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
+                    if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
+                        multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                     }
                     //imgArray.push(img);
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
-                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
-                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].imgText);
+                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
+                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
                 }
             },
             yes:function(index){
@@ -412,11 +412,11 @@ function uploadsImgDescribe(content,obj){
                 var layerImgInfoData={};
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
-                    var imgSrc=_this.find('img').attr('src');
-                    var imgText=_this.find('textarea').val();
+                    var fileSrc=_this.find('img').attr('src');
+                    var fileText=_this.find('textarea').val();
                     layerImgInfoData={
-                        imgSrc:imgSrc,
-                        imgText:imgText
+                        fileSrc:fileSrc,
+                        fileText:fileText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 })
@@ -443,13 +443,13 @@ function uploadsImgDescribe(content,obj){
                             return false;
                         }
                         var imgArray = [];
-                        var a=JSON.parse(info);
-                        for(var i=0;i<a.length;i++){
-                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                                a[i].imgSrc= uploads+a[i].imgSrc;
+                        var returnData=JSON.parse(info);
+                        for(var i=0;i<returnData.length;i++){
+                            if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
+                                returnData[i].fileSrc= uploads+a[i].fileSrc;
 
                             }
-                            imgArray.push(a[i]);
+                            imgArray.push(returnData[i]);
                         }
                         console.log(info);
                         obj.data('src', imgArray);
@@ -501,12 +501,12 @@ function uploadsVideoDescribe(content,obj)
                 var multiImgAttr=obj.data('src');
                 console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
-                    if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
-                        multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
+                    if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
+                        multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                     }
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
-                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
-                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].imgText);
+                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
+                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
                 }
             },
             yes:function(index){
@@ -514,11 +514,11 @@ function uploadsVideoDescribe(content,obj)
                 var layerImgInfoData={};
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
-                    var imgSrc=_this.find('video').attr('src');
-                    var imgText=_this.find('textarea').val();
+                    var fileSrc=_this.find('video').attr('src');
+                    var fileText=_this.find('textarea').val();
                     layerImgInfoData={
-                        imgSrc:imgSrc,
-                        imgText:imgText
+                        fileSrc:fileSrc,
+                        fileText:fileText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 });
@@ -545,13 +545,14 @@ function uploadsVideoDescribe(content,obj)
                             return false;
                         }
                         var imgArray = [];
-                        var a=JSON.parse(info);
-                        for(var i=0;i<a.length;i++){
-                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                                a[i].imgSrc= uploads+a[i].imgSrc;
+                        var returnData=JSON.parse(info);
+                        console.log(returnData);
+                        for(var i=0;i<returnData.length;i++){
+                            if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
+                                returnData[i].fileSrc= uploads+a[i].fileSrc;
 
                             }
-                            imgArray.push(a[i]);
+                            imgArray.push(returnData[i]);
                         }
                         console.log(info);
                         obj.data('src', imgArray);
