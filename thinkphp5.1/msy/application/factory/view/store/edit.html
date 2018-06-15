@@ -174,13 +174,10 @@ $(function(){
 				}
 			}
 		})
-		console.log(postData);return false;
 	});
 	//开店弹窗
 	var applyNewStore=$('#applyNewStore').html();
 	$('body').on('click','.apply-new-store',function(){
-		var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
-		var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
 		var storeList=$('.applyNewStoreLayer .store-list');
 		var brandList=$('.applyNewStoreLayer .brand_stores');
 		var selectedBLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
