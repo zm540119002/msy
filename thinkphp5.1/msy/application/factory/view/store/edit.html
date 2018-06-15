@@ -123,6 +123,8 @@ $(function(){
 		store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
 		if(store_type ==1 ) {
 			var factory_store = $('.factory_store').length;
+			var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+				$('.factory_store').find('.run_type').text(runTypeTxt);
 			if (!factory_store) {
 				dialog.success('请完善企业档案', module + 'Record/edit');
 				return false;
@@ -130,6 +132,8 @@ $(function(){
 		}
 		if(store_type ==2 ){
 			var brand_stores = $('.brand_stores').length;
+			var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
+				$('.brand_stores').find('.run_type').text(runType);
 			if(!brand_stores){
 				dialog.success('请完善品牌资料备案',module+'Brand/record');
 				return false;
