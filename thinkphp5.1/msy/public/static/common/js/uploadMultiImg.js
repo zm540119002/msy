@@ -160,8 +160,8 @@ $(function(){
             var videoAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></li>');
             videoAdd.find('.picture-module').append(video);
             imgContainer.append(videoAdd);
-           
-            
+
+
             //提交
             // $.post("uploadImgToTemp",postData,function(msg){
             //     if(msg.status == 1){
@@ -173,14 +173,14 @@ $(function(){
             // })
         }
     });
-    //编辑商品详情 
+    //编辑商品详情
     var editDetail=$('#editDetail').html();
     $('body').on('click','.editDetail',function(){
         var _this=$(this);
         var storageDataObj=_this.siblings('input[type="hidden"]');
         var num=_this.siblings('input[type="hidden"]').data('picture-num');
         uploadsMultiImg(editDetail,storageDataObj,num,'编辑商品详情');
-    }); 
+    });
     //删除
     $('body').on('click','.delete-picture',function(){
         $(this).parents('li').remove();
@@ -208,9 +208,10 @@ $(function(){
         reader.onload = function(e){
             var imgUrl=e.target.result;
             $(obj).addClass('active');
-            var postData = {img: e.target.result};
-            postData.imgWidth = 145;
-            postData.imgHeight = 100;
+            var postData = {fileBase64: e.target.result};
+            postData.fileType = 'image';
+            // postData.imgWidth = 145;
+            // postData.imgHeight = 100;
             //提交
             $.post(controller + "uploadImgToTemp",postData,function(msg){
                 if(msg.status == 1){
@@ -238,7 +239,7 @@ $(function(){
         var _this=$(this);
         var storageDataObj=_this.next('input[type="hidden"]');
         uploadsVideoDescribe(companyVideoList,storageDataObj);
-    }); 
+    });
     //编辑描述
     $('body').on('click','.edit-describe',function () {
         var _this=$(this);
@@ -279,8 +280,9 @@ function uploadsMultiImg(content,obj,limitNum,title){
                     return false;
                 }
                 var postData = {};
-                postData.imgs = layermultiImgAttr;
-                $.post(controller + 'uploadMultiImgToTemp',postData,function(info){
+                postData.fileBase64 = layermultiImgAttr;
+                postData.fileType = 'image';
+                $.post(controller + 'uploadFileToTemp',postData,function(info){
                    if(info.status == 0){
                        dialog.error(info.msg);
                        return false;
@@ -292,7 +294,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
                         }
                         imgArray+=img+',';
                     });
-                    
+
                     obj.data('src',imgArray);
                     layer.close(index);
                 })
@@ -302,7 +304,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
             }
         })
 }
-//视频弹窗
+//多视频弹窗
 function uploadsMultiVideo(content){
     layer.open({
             title:['上传商品视频','border-bottom:1px solid #d9d9d9'],
@@ -338,9 +340,10 @@ function uploadsMultiVideo(content){
                     return false;
                 }
                 var postData = {};
-                postData.imgs = layermultiVideoAttr;
+                postData.fileBase64 = layermultiVideoAttr;
+                postData.fileType = 'video';
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTemp',
+                    url: controller + 'uploadFileToTemp',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -425,6 +428,7 @@ function uploadsImgDescribe(content,obj){
                     return false;
                 }
                 var postData = {};
+                postData.fileType = 'image';
                 postData.imgsWithDes = layermultiImgAttr;
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
@@ -526,7 +530,8 @@ function uploadsVideoDescribe(content,obj)
                 }
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
-                postData.imgsWithDes = layermultiImgAttr;   
+                postData.imgsWithDes = layermultiImgAttr;
+                postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
                     url: controller + 'uploadMultiImgToTempWithDes',
@@ -543,6 +548,7 @@ function uploadsVideoDescribe(content,obj)
                         var imgArray = [];
                         var a=JSON.parse(info);
                         for(var i=0;i<a.length;i++){
+                            console.log(a)
                             if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
                                 a[i].imgSrc= uploads+a[i].imgSrc;
 

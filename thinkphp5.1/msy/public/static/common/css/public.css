@@ -38,10 +38,11 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 .input-filed{
     display: block;
     width:100%;
-    padding:0.15rem 0;
+    padding:0.18rem 0;
     border:1px solid #d9d9d9;
     border-radius:5px;
     text-indent:10px;
+    font-size:0.24rem;
 }
 .content-row-list{
     margin:0 0 .18rem 0;
@@ -839,7 +840,8 @@ color: #ed6d00;
 }
 .login_item .columns_flex span{
     width:100px;
-    line-height: 32px;
+    padding:.18rem 0;
+    /*line-height: 32px;*/
     border:1px solid #d9d9d9;
     border-radius:5px 0 0 5px;
 }
@@ -870,8 +872,8 @@ color: #ed6d00;
     border-radius:0 5px 5px 0;
     background-image:url(../../common/img/icons/psw-icons.png);
     background-repeat: no-repeat;
-    background-size:30px 30px;
-    background-position:15px 16px;
+    background-size:30px 34px;
+    background-position:15px 22px;
 }
 .login_item .columns_flex .hidden.active{
      background-position:15px -7px;
@@ -1333,6 +1335,7 @@ color: #ed6d00;
     border:1px solid #009a3e;
     border-left:none;
     text-align:center;
+    cursor: pointer;
 }
 .group-role-content li.four-role .four-name{
     border:1px solid #009a3e;
@@ -1362,6 +1365,7 @@ color: #ed6d00;
 }
 .setRoleLayer li{
     margin-bottom:15px;
+    cursor:pointer;
 }
 .setRoleLayer li.current,
 .setOrganizeLayer li span.current{
@@ -2244,7 +2248,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .list-label{
     display: inline-block;
-    width:1.2rem;
+    width:80px;
     margin:0 0.08rem 0 0;
     text-align:right;
 }

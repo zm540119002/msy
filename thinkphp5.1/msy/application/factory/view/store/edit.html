@@ -153,7 +153,7 @@
 					}
 					if(store_type ==1 ){
 						$('.applyNewStoreLayer .store-list').addClass('current');
-						$('.factory_store').find('li').attr('disabled',false);
+						//$('.factory_store').find('li').attr('disabled',false);
 						$('.store-two').show();
 						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 						$('.factory_store').find('.run_type').text(runTypeTxt);
@@ -194,8 +194,8 @@
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
 			var storeList=$('.applyNewStoreLayer .store-list');
 			var brandList=$('.applyNewStoreLayer .brand_stores');
-			var selectedLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
-				if(selectedLen==brandList.length){
+			var selectedBLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
+				if(selectedBLen==brandList.length){
 					dialog.error('此店所有经营模式已开过');
 					return false;
 				}
