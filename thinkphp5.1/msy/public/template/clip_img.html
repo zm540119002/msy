@@ -46,8 +46,9 @@
                             time:2
                         });
                         return false;
-                    }else if(msg.status == 1){
-                        $('body').data('clipAvatar',msg.info);
+                    }
+                    if(msg.status == 1){
+                        $('.logo-src').val(msg.info)
                     }
                 },'json');
             }
