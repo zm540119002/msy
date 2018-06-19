@@ -36,7 +36,7 @@ class Goods extends Model {
 			array_pop($tempMainImg);
 			foreach ($tempMainImg as $item) {
 				if($item){
-					$mainImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
+					$mainImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item));
 				}
 			}
 			$data['main_img'] = implode(",", $mainImg).',';
