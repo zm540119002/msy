@@ -67,7 +67,7 @@ class UserFactory extends \think\model\Pivot {
 				['role_id', 'in', $roleIds],
 			];
 			$res = $modelUserFactoryRole->where($where)->setField('status',$postData['status']);
-			return errorMsg($this->getError());
+			return errorMsg($this->getLastSql());
 			if(!$res){
 				$this->rollback();//回滚事务
 				return errorMsg('失败2',$this->getError());
