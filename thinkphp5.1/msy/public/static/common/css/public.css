@@ -2245,6 +2245,7 @@ input[type=text]::-webkit-focus-inner {
     flex: 4;
     padding: 0.18rem 0 0.18rem 0.15rem;
     background: none;
+    font-size:.24rem;
 }
 .search-bar .search-btn{
     flex: 1;
