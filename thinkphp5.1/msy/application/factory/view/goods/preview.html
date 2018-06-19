@@ -33,7 +33,7 @@
 				<input type="text" class="search_text" placeholder="搜索"/>
 			</div>
 			<div class="each_column">
-				<a class="personal_center">我的</a>
+				<a href="javascript:void(0);" class="personal_center ">我的</a>
 			</div>
 			{include file="public/home_page" /}
 		</div>
@@ -68,9 +68,9 @@
                             </span>
 							<del>￥{$goodsInfo.retail_price}</del>
 						</div>
-						<div>
-							<a>赞</a>
-							<a>分享</a>
+						<div class="popularity">
+							<a href="javascript:void(0);" class="fabulous left">赞</a>
+							<a href="javascript:void(0);" class="share ">分享</a>
 						</div>
 					</div>
 					<p class="goods_name">{$goodsInfo.name}</p>
@@ -140,7 +140,7 @@
 							<p class="store_run_type">供应商自营</p>
 						</div>
 					</div>
-					<div>
+					<div class="follow-right">
 						<a href="javascript:void(0);" class="text-color-gr">+关注供应商</a>
 						<a class="text-color-gr go-shopping"><span></span>进店逛逛</a>
 					</div>
