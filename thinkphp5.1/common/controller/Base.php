@@ -134,7 +134,7 @@ class Base extends \think\Controller{
             return errorMsg('创建临时目录失败');
         }
         //文件名
-        $fileName = time() . $ext;
+        $fileName = generateSN(6) . $ext;
         //带存储路径的文件名
         $photo = $storePath . $fileName;
         // 生成文件
