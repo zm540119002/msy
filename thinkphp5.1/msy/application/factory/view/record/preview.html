@@ -53,11 +53,11 @@
 				{volist name="recordInfo.factory_video" id="vo"}
 				<div class="swiper-slide ">
 					{notempty name="vo"}
-					<video src="public_uploads/{$vo['imgSrc']}" preload="meta" controls="controls" class="common_default_img"></video>
+					<video src="public_uploads/{$vo['fileSrc']}" preload="meta" controls="controls" class="common_default_img"></video>
 					{else /}
 					<video src="" preload="meta" controls="controls" class="common_default_img"></video>
 					{/notempty}
-					<p>{$vo['imgText']}</p>
+					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
 			</div>
@@ -70,11 +70,11 @@
 				{volist name="recordInfo.rb_img" id="vo"}
 				<div class="swiper-slide ">
 					{notempty name="vo"}
-					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
+					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
 					{else /}
 					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
 					{/notempty}
-					<p>{$vo['imgText']}</p>
+					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
 			</div>
@@ -87,11 +87,11 @@
 				{volist name="recordInfo.license" id="vo"}
 				<div class="swiper-slide ">
 					{notempty name="vo"}
-					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
+					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
 					{else /}
 					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
 					{/notempty}
-					<p>{$vo['imgText']}</p>
+					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
 			</div>
@@ -104,11 +104,11 @@
 				{volist name="recordInfo.glory_img" id="vo"}
 				<div class="swiper-slide ">
 					{notempty name="vo"}
-					<img src="public_uploads/{$vo['imgSrc']}" class="common_default_img"/>
+					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
 					{else /}
 					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
 					{/notempty}
-					<p>{$vo['imgText']}</p>
+					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
 			</div>

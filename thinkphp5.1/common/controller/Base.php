@@ -19,6 +19,9 @@ class Base extends \think\Controller{
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
             $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$postData['fileType']);
+            if(isset($fileName['status'])&& $fileName['status'] == 0){
+                return $fileName;
+            }
             return successMsg($fileName);
         }
         if(is_array($postData['fileBase64'])){
@@ -27,6 +30,9 @@ class Base extends \think\Controller{
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
                     $fileName = $this ->_uploadSingleFileToTemp($file,$postData['fileType']);
+                    if(isset($fileName['status'])&& $fileName['status'] == 0){
+                        return $fileName;
+                    }
                     $filesNew[] = $fileName;
                 }else{
                     $filesNew[] = $file;
@@ -36,20 +42,23 @@ class Base extends \think\Controller{
         }
     }
     //返回图片临时相对路,上传多张图片带描述
-    public function uploadMultiImgToTempWithDes(){
-        $imgs = $_POST['imgsWithDes'];
-        $imgsNew = [];
-        foreach ($imgs as $k=>$img){
+    public function uploadMultiFileToTempWithDes(){
+        $files = $_POST['imgsWithDes'];
+        $filesNew = [];
+        foreach ($files as $k=>$file){
             //判断是否为base64编码图片
-            if(strpos($img['imgSrc'],'data:image') !==false || strpos($img['imgSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($img['imgSrc'],$_POST['fileType']);
-                $imgsNew[$k]['imgSrc'] = $fileName;
-                $imgsNew[$k]['imgText'] = $img['imgText'];
+            if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
+                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$_POST['fileType']);
+                if(isset($fileName['status'])&& $fileName['status'] == 0){
+                    return $fileName;
+                }
+                $filesNew[$k]['fileSrc'] = $fileName;
+                $filesNew[$k]['fileText'] = $file['fileText'];
             }else{
-                $imgsNew[$k] = $img;
+                $filesNew[$k] = $file;
             }
         }
-        return json_encode($imgsNew);
+        return json_encode($filesNew);
     }
 
     //上传单个data64位文件

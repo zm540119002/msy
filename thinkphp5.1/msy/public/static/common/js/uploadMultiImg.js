@@ -160,8 +160,8 @@ $(function(){
             var videoAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></li>');
             videoAdd.find('.picture-module').append(video);
             imgContainer.append(videoAdd);
-
-
+           
+            
             //提交
             // $.post("uploadImgToTemp",postData,function(msg){
             //     if(msg.status == 1){
@@ -173,14 +173,14 @@ $(function(){
             // })
         }
     });
-    //编辑商品详情
+    //编辑商品详情 
     var editDetail=$('#editDetail').html();
     $('body').on('click','.editDetail',function(){
         var _this=$(this);
         var storageDataObj=_this.siblings('input[type="hidden"]');
         var num=_this.siblings('input[type="hidden"]').data('picture-num');
         uploadsMultiImg(editDetail,storageDataObj,num,'编辑商品详情');
-    });
+    }); 
     //删除
     $('body').on('click','.delete-picture',function(){
         $(this).parents('li').remove();
@@ -239,7 +239,7 @@ $(function(){
         var _this=$(this);
         var storageDataObj=_this.next('input[type="hidden"]');
         uploadsVideoDescribe(companyVideoList,storageDataObj);
-    });
+    }); 
     //编辑描述
     $('body').on('click','.edit-describe',function () {
         var _this=$(this);
@@ -294,7 +294,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
                         }
                         imgArray+=img+',';
                     });
-
+                    
                     obj.data('src',imgArray);
                     layer.close(index);
                 })
@@ -399,13 +399,13 @@ function uploadsImgDescribe(content,obj){
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
                 for(var i=0;i<multiImgAttr.length;i++){
-                    if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
-                        multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
+                    if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
+                        multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                     }
                     //imgArray.push(img);
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
-                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
-                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].imgText);
+                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
+                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
                 }
             },
             yes:function(index){
@@ -413,15 +413,14 @@ function uploadsImgDescribe(content,obj){
                 var layerImgInfoData={};
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
-                    var imgSrc=_this.find('img').attr('src');
-                    var imgText=_this.find('textarea').val();
+                    var fileSrc=_this.find('img').attr('src');
+                    var fileText=_this.find('textarea').val();
                     layerImgInfoData={
-                        imgSrc:imgSrc,
-                        imgText:imgText
+                        fileSrc:fileSrc,
+                        fileText:fileText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 })
-                // obj.data('src',layermultiImgAttr);
                 obj.data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
                     layer.close(index);
@@ -432,7 +431,7 @@ function uploadsImgDescribe(content,obj){
                 postData.imgsWithDes = layermultiImgAttr;
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTempWithDes',
+                    url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -444,15 +443,14 @@ function uploadsImgDescribe(content,obj){
                             return false;
                         }
                         var imgArray = [];
-                        var a=JSON.parse(info);
-                        for(var i=0;i<a.length;i++){
-                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                                a[i].imgSrc= uploads+a[i].imgSrc;
+                        var returnData=JSON.parse(info);
+                        for(var i=0;i<returnData.length;i++){
+                            if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
+                                returnData[i].fileSrc= uploads+returnData[i].fileSrc;
 
                             }
-                            imgArray.push(a[i]);
+                            imgArray.push(returnData[i]);
                         }
-                        console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
                             dialog.error('图片文件上传完！')
@@ -502,12 +500,12 @@ function uploadsVideoDescribe(content,obj)
                 var multiImgAttr=obj.data('src');
                 console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
-                    if(multiImgAttr[i].imgSrc.indexOf("uploads") == -1 && multiImgAttr[i].imgSrc !=''){
-                        multiImgAttr[i].imgSrc = uploads+multiImgAttr[i].imgSrc;
+                    if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
+                        multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                     }
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
-                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].imgSrc);
-                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].imgText);
+                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
+                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
                 }
             },
             yes:function(index){
@@ -515,11 +513,11 @@ function uploadsVideoDescribe(content,obj)
                 var layerImgInfoData={};
                 $.each($('.editCompanyPicLayer li'),function(i,val){
                     var _this=$(this);
-                    var imgSrc=_this.find('video').attr('src');
-                    var imgText=_this.find('textarea').val();
+                    var fileSrc=_this.find('video').attr('src');
+                    var fileText=_this.find('textarea').val();
                     layerImgInfoData={
-                        imgSrc:imgSrc,
-                        imgText:imgText
+                        fileSrc:fileSrc,
+                        fileText:fileText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
                 });
@@ -531,10 +529,11 @@ function uploadsVideoDescribe(content,obj)
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
                 postData.imgsWithDes = layermultiImgAttr;
+                console.log(postData);
                 postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
-                    url: controller + 'uploadMultiImgToTempWithDes',
+                    url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -546,16 +545,14 @@ function uploadsVideoDescribe(content,obj)
                             return false;
                         }
                         var imgArray = [];
-                        var a=JSON.parse(info);
-                        for(var i=0;i<a.length;i++){
-                            console.log(a)
-                            if(a[i].imgSrc.indexOf("uploads") == -1 && a[i]!=''){
-                                a[i].imgSrc= uploads+a[i].imgSrc;
+                        var returnData=JSON.parse(info);
+                        for(var i=0;i<returnData.length;i++){
+                            if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
+                                returnData[i].fileSrc= uploads+returnData[i].fileSrc;
 
                             }
-                            imgArray.push(a[i]);
+                            imgArray.push(returnData[i]);
                         }
-                        console.log(info);
                         obj.data('src', imgArray);
                         if(info != ''){
                             dialog.error('视频文件上传完！')

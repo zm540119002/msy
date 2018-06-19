@@ -744,7 +744,7 @@ function moveImgsWithDecFromTemp($newRelativePath,$imgsWithDec){
                 }
             }
             //旧文件
-            $oldFile = $oldPath . basename($value['imgSrc']);
+            $oldFile = $oldPath . basename($value['fileSrc']);
 
             //新路径
             $newPath = $uploadPath . $newRelativePath;
@@ -756,7 +756,7 @@ function moveImgsWithDecFromTemp($newRelativePath,$imgsWithDec){
                 }
             }
             //新文件
-            $newFile = $newPath .basename($value['imgSrc']);
+            $newFile = $newPath .basename($value['fileSrc']);
 
             //重命名文件
             if(file_exists($oldFile)){
@@ -765,9 +765,9 @@ function moveImgsWithDecFromTemp($newRelativePath,$imgsWithDec){
                     //$this->ajaxReturn(errorMsg('重命名文件失败'));
                 }
             }
-            $imgsArray[] = $newRelativePath.basename($value['imgSrc']);
-            $imgsWithDecNew[$k]['imgSrc'] = $newRelativePath.basename($value['imgSrc']);
-            $imgsWithDecNew[$k]['imgText'] = $value['imgText'];
+            $imgsArray[] = $newRelativePath.basename($value['fileSrc']);
+            $imgsWithDecNew[$k]['fileSrc'] = $newRelativePath.basename($value['fileSrc']);
+            $imgsWithDecNew[$k]['fileText'] = $value['fileText'];
         }
     }
 
