@@ -69,7 +69,7 @@ class UserFactory extends \think\model\Pivot {
 			$res = $modelUserFactoryRole->where($where)->setField('status',$postData['status']);
 			if(!$res){
 				$this->rollback();//回滚事务
-				return errorMsg('失败',$this->getError());
+				return errorMsg('失败2',$this->getError());
 			}
 		}
 		$this->commit();//提交事务
