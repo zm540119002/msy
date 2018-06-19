@@ -23,30 +23,30 @@ class Goods extends Model {
 	public function edit($storeId =''){
 		$data = input('post.');
 		$validate = validate('Goods');
-		 if(!$result = $validate->scene('edit')->check($data)) {
+		 if(!$result = $validate->check($data)) {
 		 	return errorMsg($validate->getError());
 		 }
 		if(!empty($data['thumb_img'])){
 			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}
 		if(!empty($data['main_img'])){
-			$mainImg =[];
 			$tempMainImg = explode(",",$data['main_img']);
 			array_pop($tempMainImg);
+			$mainImg =[];
 			foreach ($tempMainImg as $item) {
 				if($item){
-					$mainImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
+					$mainImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item));
 				}
 			}
-			$data['details_img'] = implode(",", $mainImg).',';
+			$data['main_img'] = implode(",", $mainImg).',';
 		}
 		if(!empty($data['goods_video'])){
 			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
 		}
 		if(!empty($data['details_img'])){
-			$detailsImg = [];
 			$tempArray = explode(",",$data['details_img']);
 			array_pop($tempArray);
+			$detailsImg = [];
 			foreach ($tempArray as $item) {
 				if($item){
 					$detailsImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item));

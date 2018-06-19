@@ -39,7 +39,7 @@ class Goods extends Model {
 					$mainImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
 				}
 			}
-			$data['details_img'] = implode(",", $mainImg).',';
+			$data['main_img'] = implode(",", $mainImg).',';
 		}
 		if(!empty($data['goods_video'])){
 			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
