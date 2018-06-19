@@ -15,44 +15,45 @@ class Goods extends Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_store';
 
+
 	/**
 	 * 编辑 新增和修改
-	 * @param string $shop_id
+	 * @param string $shopId
 	 * @return array
 	 */
 	public function edit($shopId =''){
 		$data = input('post.');
 		$validate = validate('Goods');
-		 if(!$result = $validate ->check($data)) {
-		 	return errorMsg($validate->getError());
-		 }
+		if(!$result = $validate ->check($data)) {
+			return errorMsg($validate->getError());
+		}
 		if(!empty($data['thumb_img'])){
-			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.store_goods'),basename($data['thumb_img']));
+			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}
 		if(!empty($data['main_img'])){
-			$mainImg = '';
+			$mainImg =[];
 			$tempMainImg = explode(",",$data['main_img']);
 			array_pop($tempMainImg);
 			foreach ($tempMainImg as $item) {
 				if($item){
-					$mainImg = moveImgFromTemp(config('upload_dir.store_goods'),basename($item)).','.$mainImg;
+					$mainImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
 				}
 			}
-			$data['main_img'] = $mainImg;
+			$data['details_img'] = implode(",", $mainImg).',';
 		}
 		if(!empty($data['goods_video'])){
-			$data['goods_video'] = moveImgFromTemp(config('upload_dir.store_goods'),basename($data['goods_video']));
+			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
 		}
 		if(!empty($data['details_img'])){
-			$detailsImg = '';
+			$detailsImg = [];
 			$tempArray = explode(",",$data['details_img']);
 			array_pop($tempArray);
 			foreach ($tempArray as $item) {
 				if($item){
-					$detailsImg = moveImgFromTemp(config('upload_dir.store_goods'),basename($item)).','.$detailsImg;
+					$detailsImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item));
 				}
 			}
-			$data['details_img'] = $detailsImg;
+			$data['details_img'] = implode(",", $detailsImg).',';
 		}
 		if(input('?post.id')){//修改
 			$where = [
@@ -66,10 +67,10 @@ class Goods extends Model {
 				return errorMsg('没有数据');
 			}
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'shop_id'=>$shopId]);
+			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'store_id'=>$shopId]);
 		}else{
 			$data['create_time'] = time();
-			$data['shop_id'] = $shopId;
+			$data['store_id'] = $shopId;
 			$result = $this -> allowField(true) -> save($data);
 			if(!$result){
 				return errorMsg('失败');
@@ -99,8 +100,6 @@ class Goods extends Model {
 			return errorMsg('失败');
 		}
 	}
-
-	
 
 	/**
 	 * @param array $where

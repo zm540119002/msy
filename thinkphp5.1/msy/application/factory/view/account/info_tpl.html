@@ -11,11 +11,13 @@
 				<span>{$info.mobile_phone}</span>
 			</div>
 			<div>
-				<span class="list-label">角色：</span>
+				<span class="list-label left">角色：</span>
 				{notempty name='info.role'}
+				<div class="multi-role left">
 				{volist name='info.role' id='vo'}
 				<span id="{$vo.id}">{$vo.name}</span>
 				{/volist}
+				</div>
 				{/notempty}
 			</div>
 		</a>

@@ -74,6 +74,13 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 .list-item li:last-child{
     border-bottom:6px solid #efefef;
 }
+.store_name{
+    display: inline-block;
+    width:200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 /*头部样式*/
 .header{
@@ -1725,6 +1732,7 @@ color:#fff;
     background:none;
     text-indent: 10px;
     box-sizing:border-box;
+    font-size:.24rem;
 }
 .foot-btn{
     position:fixed;
@@ -2276,6 +2284,11 @@ input[type=text]::-webkit-focus-inner {
 .account-list li a div:nth-child(3){
     padding:0.12rem 0 0;
 
+}
+.account-list li a div.multi-role,
+.role .multi-role{
+    width:140px;
+    padding-top:0;
 }
 .account-list .account-status{
     width:28%;

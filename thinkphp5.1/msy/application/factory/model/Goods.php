@@ -30,29 +30,29 @@ class Goods extends Model {
 			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}
 		if(!empty($data['main_img'])){
-			$mainImg = '';
+			$mainImg =[];
 			$tempMainImg = explode(",",$data['main_img']);
 			array_pop($tempMainImg);
 			foreach ($tempMainImg as $item) {
 				if($item){
-					$mainImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
+					$mainImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$mainImg;
 				}
 			}
-			$data['main_img'] = $mainImg;
+			$data['details_img'] = implode(",", $mainImg).',';
 		}
 		if(!empty($data['goods_video'])){
 			$data['goods_video'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['goods_video']));
 		}
 		if(!empty($data['details_img'])){
-			$detailsImg = '';
+			$detailsImg = [];
 			$tempArray = explode(",",$data['details_img']);
 			array_pop($tempArray);
 			foreach ($tempArray as $item) {
 				if($item){
-					$detailsImg = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item)).','.$detailsImg;
+					$detailsImg[] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($item));
 				}
 			}
-			$data['details_img'] = $detailsImg;
+			$data['details_img'] = implode(",", $detailsImg).',';
 		}
 		if(input('?post.id')){//修改
 			$where = [
