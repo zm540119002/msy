@@ -52,9 +52,9 @@ class UserFactory extends \think\model\Pivot {
 		];
 		$this->startTrans();//开启事务
 		$res = $this->where($where)->setField('status',$postData['status']);
-		if(!$res){
+		if(false === $res){
 			$this->rollback();//回滚事务
-			return errorMsg('失败1',$this->getError());
+			return errorMsg('失败');
 		}
 		//设置用户工厂角色状态
 		$roleIds = array_unique($postData['roleIds']);
@@ -67,10 +67,9 @@ class UserFactory extends \think\model\Pivot {
 				['role_id', 'in', $roleIds],
 			];
 			$res = $modelUserFactoryRole->where($where)->setField('status',$postData['status']);
-			return errorMsg($this->getLastSql());
-			if(!$res){
+			if(false === $res){
 				$this->rollback();//回滚事务
-				return errorMsg('失败2',$this->getError());
+				return errorMsg('失败');
 			}
 		}
 		$this->commit();//提交事务
