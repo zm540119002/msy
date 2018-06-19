@@ -1477,16 +1477,16 @@ color:#fff;
 }
 .apply-items{
     margin:0 0 0.25rem 0;
-    padding:0 0 0 0.12rem;
+    /*padding:0 0 0 0.12rem;
     border:1px solid #d9d9d9;
     border-radius:5px;
-    box-sizing: border-box;
+    box-sizing: border-box;*/
 }
 .apply-items input{
-    display: block;
+    /*display: block;
     width:100%;
     padding:0.18rem 0;
-    background: none;
+    background: none;*/
 }
 .step{
     display: block;
