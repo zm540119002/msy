@@ -152,7 +152,9 @@ class Account extends \think\Model {
 		];
 		$userFactory = $modelUserFactory->field($field)->where($where)->find();
 		$userFactory = count($userFactory)?$userFactory->toArray():[];
-		$info['status'] = $userFactory['status'];
+		if(count($userFactory)){
+			$info['status'] = $userFactory['status'];
+		}
 		//用户工厂角色
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		$info['role'] = $modelUserFactoryRole->getRole($info['id'],$factoryId);
