@@ -36,7 +36,7 @@ class UserStore extends \think\model\Pivot {
 		}
 	}
 
-	//删除
+	//设置用户机构状态
 	public function setStatus($storeId){
 		if(!intval($storeId)){
 			return errorMsg('参数错误');
@@ -50,10 +50,29 @@ class UserStore extends \think\model\Pivot {
 			['store_id', '=', $storeId],
 			['status', '<>', 2],
 		];
+		$this->startTrans();//开启事务
 		$res = $this->where($where)->setField('status',$postData['status']);
-		if(!$res){
-			return errorMsg('失败',$this->getError());
+		if(false === $res){
+			$this->rollback();//回滚事务
+			return errorMsg('失败');
 		}
+		//设置用户机构角色状态
+		$roleIds = array_unique($postData['roleIds']);
+		if(is_array($roleIds) && !empty($roleIds)){
+			$modelUserStoreRole = new \app\store\model\UserStoreRole();
+			$where = [
+				['user_id', '=', $postData['userId']],
+				['store_id', '=', $storeId],
+				['status', '<>', 2],
+				['role_id', 'in', $roleIds],
+			];
+			$res = $modelUserStoreRole->where($where)->setField('status',$postData['status']);
+			if(false === $res){
+				$this->rollback();//回滚事务
+				return errorMsg('失败');
+			}
+		}
+		$this->commit();//提交事务
 		return successMsg('成功');
 	}
 }

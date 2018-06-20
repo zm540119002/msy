@@ -192,16 +192,11 @@ class Account extends \think\Model {
 		if(!intval($userId) || !intval($storeId)){
 			return errorMsg('参数错误');
 		}
-		$newRoleIds = input('post.ids/a');
+		$newRoleIds = input('post.roleIds/a');
 		if(empty($newRoleIds)){
 			return errorMsg('请选择角色');
 		}
 		$modelUserStoreRole = new \app\store\model\UserStoreRole();
-		$where = [
-			['status','=',0],
-			['user_id','=',$userId],
-			['store_id','=',$storeId],
-		];
 		$userStoreRole = $modelUserStoreRole->getRole($userId,$storeId);
 		$oldRoleIds = array_column($userStoreRole,'id');
 		$modelUserStoreRole->startTrans();//开启事务
@@ -225,6 +220,10 @@ class Account extends \think\Model {
 		//删除角色
 		$delRoleIds = array_diff($oldRoleIds,$newRoleIds);
 		if(!empty($delRoleIds)){
+			$where = [
+				['user_id','=',$userId],
+				['store_id','=',$storeId],
+			];
 			$where[] = ['role_id','in',$delRoleIds];
 			$res = $modelUserStoreRole->where($where)->delete();
 			if(!$res){

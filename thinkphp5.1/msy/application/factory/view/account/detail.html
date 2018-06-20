@@ -15,11 +15,13 @@
 					<span class="r-t">手机号码：</span><span>{$info.mobile_phone}</span>
 				</div>
 				<div class="role">
-					<span class="r-t">角色：</span>
+					<span class="r-t left">角色：</span>
 					{notempty name='info.role'}
+					<div class="multi-role left">
 					{volist name='info.role' id='vo'}
 						<span data-role_id="{$vo.id}">{$vo.name}</span>
 					{/volist}
+					</div>
 					{/notempty}
 				</div>
 			</div>
@@ -74,13 +76,13 @@
 			var postData = {};
 			var url = controller + 'editRole';
 			postData.userId = '{$info.id}';
-			postData.ids = [];
+			postData.roleIds = [];
 			$.each($('ul.role-list li.current'),function(){
 				if($(this).data('id')){
-					postData.ids.push($(this).data('id'));
+					postData.roleIds.push($(this).data('id'));
 				}
 			});
-			if(!postData.ids.length){
+			if(!postData.roleIds.length){
 				dialog.error('请选择角色');
 				return false;
 			}

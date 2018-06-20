@@ -507,6 +507,7 @@
 .role-list li{
     position:relative;
     background:url('../../common/img/icons/role-icons.png') no-repeat 0 center;
+    cursor:pointer;
 }
 .range-list li{
     margin:0 0.20rem 0.15rem 0;
