@@ -52,11 +52,13 @@
 			<div class="swiper-wrapper">
 				{volist name="recordInfo.factory_video" id="vo"}
 				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
 					{notempty name="vo"}
 					<video src="public_uploads/{$vo['fileSrc']}" preload="meta" controls="controls" class="common_default_img"></video>
 					{else /}
 					<video src="" preload="meta" controls="controls" class="common_default_img"></video>
 					{/notempty}
+					</div>
 					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
@@ -69,11 +71,13 @@
 			<div class="swiper-wrapper">
 				{volist name="recordInfo.rb_img" id="vo"}
 				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
 					{notempty name="vo"}
 					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
 					{else /}
 					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
 					{/notempty}
+					</div>
 					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
@@ -86,11 +90,13 @@
 			<div class="swiper-wrapper">
 				{volist name="recordInfo.license" id="vo"}
 				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
 					{notempty name="vo"}
 					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
 					{else /}
 					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
 					{/notempty}
+					</div>
 					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
@@ -103,11 +109,13 @@
 			<div class="swiper-wrapper">
 				{volist name="recordInfo.glory_img" id="vo"}
 				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
 					{notempty name="vo"}
 					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
 					{else /}
 					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
 					{/notempty}
+					</div>
 					<p>{$vo['fileText']}</p>
 				</div>
 				{/volist}
