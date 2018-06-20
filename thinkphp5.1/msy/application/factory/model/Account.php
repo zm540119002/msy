@@ -151,8 +151,10 @@ class Account extends \think\Model {
 			'status',
 		];
 		$userFactory = $modelUserFactory->field($field)->where($where)->find();
-		$userFactory = $userFactory->toArray();
-		$info['status'] = $userFactory['status'];
+		$userFactory = count($userFactory)?$userFactory->toArray():[];
+		if(count($userFactory)){
+			$info['status'] = $userFactory['status'];
+		}
 		//用户工厂角色
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		$info['role'] = $modelUserFactoryRole->getRole($info['id'],$factoryId);
@@ -196,13 +198,13 @@ class Account extends \think\Model {
 		if(empty($newRoleIds)){
 			return errorMsg('请选择角色');
 		}
-		print_r($factoryId);exit;
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		$userFactoryRole = $modelUserFactoryRole->getRole($userId,$factoryId);
 		$oldRoleIds = array_unique(array_column($userFactoryRole,'id'));
 		$modelUserFactoryRole->startTrans();//开启事务
 		//新增角色
 		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
+
 		if(!empty($addRoleIds)){
 			$data = [];
 			foreach ($addRoleIds as $value){
@@ -221,6 +223,10 @@ class Account extends \think\Model {
 		//删除角色
 		$delRoleIds = array_diff($oldRoleIds,$newRoleIds);
 		if(!empty($delRoleIds)){
+			$where = [
+				['user_id','=',$userId],
+				['factory_id','=',$factoryId],
+			];
 			$where[] = ['role_id','in',$delRoleIds];
 			$res = $modelUserFactoryRole->where($where)->delete();
 			if(!$res){
