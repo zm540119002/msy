@@ -220,8 +220,11 @@ class Account extends \think\Model {
 		}
 		//删除角色
 		$delRoleIds = array_diff($oldRoleIds,$newRoleIds);
-		print_r($delRoleIds);exit;
 		if(!empty($delRoleIds)){
+			$where = [
+				['user_id','=',$userId],
+				['factory_id','=',$factoryId],
+			];
 			$where[] = ['role_id','in',$delRoleIds];
 			$res = $modelUserFactoryRole->where($where)->delete();
 			if(!$res){
