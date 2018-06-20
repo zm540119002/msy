@@ -7,6 +7,7 @@ $(function(){
         fileList = $(this).get(0).files;
         var imgArr = [];
         var num=file.data('num');//限制个数  
+       
         if(num==6&&$('.editDetailLayer li').length==num){
             errorTipc('只能上传'+num+'张图片');
             return false;
@@ -14,10 +15,11 @@ $(function(){
         if(num==0){ //0代表无限制个数
             uploadPic(fileList[0],0,fileList.length);
         }else{
-            uploadPic(fileList[0],0,fileList.length);
+            uploadPic(fileList[0],0,num);
         }      
     });
     function uploadPic(fil,i,len){
+         console.log(len);
             var img = fil;
             var obj=$(this).parent();
             // console.log(event.target.files[i]);
@@ -45,7 +47,7 @@ $(function(){
                 imgAdd.find('.picture-module').append(img);
                 $('.multi-picture-module').append(imgAdd);
                 if(i<len-1){
-                    uploadPic(fileList[i+1],i+1,fileList.length);
+                    uploadPic(fileList[i+1],i+1,len);
                 }
             }         
     }
