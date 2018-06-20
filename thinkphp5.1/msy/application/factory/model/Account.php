@@ -186,13 +186,13 @@ class Account extends \think\Model {
 		return count($list)?$list:[];
 	}
 
-	//用户角色编辑
+	//用户工厂角色编辑
 	public function editRole($factoryId){
 		$userId = input('post.userId');
 		if(!intval($userId) || !intval($factoryId)){
 			return errorMsg('参数错误');
 		}
-		$newRoleIds = input('post.ids/a');
+		$newRoleIds = input('post.roleIds/a');
 		if(empty($newRoleIds)){
 			return errorMsg('请选择角色');
 		}

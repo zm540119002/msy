@@ -192,7 +192,7 @@ class Account extends \think\Model {
 		if(!intval($userId) || !intval($storeId)){
 			return errorMsg('参数错误');
 		}
-		$newRoleIds = input('post.ids/a');
+		$newRoleIds = input('post.roleIds/a');
 		if(empty($newRoleIds)){
 			return errorMsg('请选择角色');
 		}
