@@ -76,17 +76,18 @@
 			var postData = {};
 			var url = controller + 'editRole';
 			postData.userId = '{$info.id}';
-			postData.ids = [];
+			postData.roleIds = [];
 			$.each($('ul.role-list li.current'),function(){
 				if($(this).data('id')){
-					postData.ids.push($(this).data('id'));
+					postData.roleIds.push($(this).data('id'));
 				}
 			});
-			if(!postData.ids.length){
+			if(!postData.roleIds.length){
 				dialog.error('请选择角色');
 				return false;
 			}
 			$.post(url,postData,function(data){
+				console.log(postData);return;
 				dialog.error(data.info);
 				if(data.status==1){
 					history.go(-1);
