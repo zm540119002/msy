@@ -1,9 +1,11 @@
 $(function(){
     //多图片上传
+    var imgContainer = $('.multi-picture-module');
+    var fileList;
     $('body').on('change','#file',function(){
         var file = $(this);
-        var fileList = $(this).get(0).files;
-        var imgContainer = $('.multi-picture-module');
+        fileList = $(this).get(0).files;
+        // console.log(fileList);
         var imgArr = [];
         var num=file.data('num');//限制个数  
         if(num==6&&$('.editDetailLayer li').length==num){
@@ -11,16 +13,19 @@ $(function(){
             return false;
         }
         if(num==0){ //0代表无限制个数
-            uploadPic(imgContainer,fileList.length);
+            // for (var i = 0; i < fileList.length; i++) {    
+                uploadPic(imgContainer,fileList[0],0,fileList.length);
+            // }
         }else{
             uploadPic(imgContainer,num);
         }      
     });
-    function uploadPic(containerObj,len){
-       console.log(len);
-        for (var i = 0; i < len; i++) {                
-            var img = event.target.files[i];
+    function uploadPic(containerObj,fil,i,Len){
+       alert(fil);
+        // for (var i = 0; i < len; i++) {                
+            var img = fil;
             var obj=$(this).parent();
+            // console.log(event.target.files[i]);
             // 判断是否图片
             if(!img){
                 return false;
@@ -38,7 +43,9 @@ $(function(){
             reader.readAsDataURL(img);
 
             reader.onload = function(e){
+                // console.log(e);
                 var imgUrl=e.target.result;
+                // alert(111);
                 var html=$('#img_list').html();
                 //imgArr.push(imgUrl);
                 var img=  $('<img src="" class="upload_img">');
@@ -46,9 +53,13 @@ $(function(){
                 var imgAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><span class="delete-picture">X</span></div></li>');
                 imgAdd.find('.picture-module').append(img);
                 containerObj.append(imgAdd);
+                if(i<Len){
+                    alert(i);
+                    uploadPic(imgContainer,fileList[i+1],i+1,fileList.length);
+                }
             }
            
-        };
+        // };
     }
     //选择视频上传   uploadGoodsVideo
     $('body').on('change','#video',function(){
