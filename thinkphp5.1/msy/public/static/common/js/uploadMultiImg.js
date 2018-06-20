@@ -19,7 +19,6 @@ $(function(){
         }      
     });
     function uploadPic(fil,i,len){
-         console.log(len);
             var img = fil;
             var obj=$(this).parent();
             // console.log(event.target.files[i]);
@@ -499,7 +498,6 @@ function uploadsVideoDescribe(content,obj)
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
-                console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
                         multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
@@ -530,7 +528,6 @@ function uploadsVideoDescribe(content,obj)
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
                 postData.imgsWithDes = layermultiImgAttr;
-                console.log(postData);
                 postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
