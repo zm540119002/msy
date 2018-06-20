@@ -202,7 +202,7 @@ class Account extends \think\Model {
 		$modelUserFactoryRole->startTrans();//开启事务
 		//新增角色
 		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
-		print_r($addRoleIds);exit;
+
 		if(!empty($addRoleIds)){
 			$data = [];
 			foreach ($addRoleIds as $value){
@@ -220,6 +220,7 @@ class Account extends \think\Model {
 		}
 		//删除角色
 		$delRoleIds = array_diff($oldRoleIds,$newRoleIds);
+		print_r($delRoleIds);exit;
 		if(!empty($delRoleIds)){
 			$where[] = ['role_id','in',$delRoleIds];
 			$res = $modelUserFactoryRole->where($where)->delete();
