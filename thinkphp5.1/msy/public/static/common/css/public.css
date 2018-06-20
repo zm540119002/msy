@@ -81,7 +81,9 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+.layui-m-layerbtn span[yes]{
+    cursor: pointer;
+}
 /*头部样式*/
 .header{
     width: 100%;
