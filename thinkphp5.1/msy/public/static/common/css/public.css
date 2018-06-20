@@ -2235,6 +2235,19 @@ input[type=text]::-webkit-focus-inner {
       -webkit-align-items: center;
       align-items: center;*/
     }
+.swiper-slide .swiper-cols-img{
+    height:150px;
+    overflow:hidden;
+}
+.swiper-slide p{
+    /*height:100px;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size:.20rem;
+}
 /*账号授权*/
 .account-content-wrapper{
     padding:0.25rem 0.20rem 1rem;
