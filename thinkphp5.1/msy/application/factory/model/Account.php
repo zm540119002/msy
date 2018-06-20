@@ -196,6 +196,7 @@ class Account extends \think\Model {
 		if(empty($newRoleIds)){
 			return errorMsg('请选择角色');
 		}
+		print_r($newRoleIds);exit;
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		$userFactoryRole = $modelUserFactoryRole->getRole($userId,$factoryId);
 		$oldRoleIds = array_unique(array_column($userFactoryRole,'id'));
