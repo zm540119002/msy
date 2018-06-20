@@ -5,7 +5,6 @@ $(function(){
     $('body').on('change','#file',function(){
         var file = $(this);
         fileList = $(this).get(0).files;
-        // console.log(fileList);
         var imgArr = [];
         var num=file.data('num');//限制个数  
         if(num==6&&$('.editDetailLayer li').length==num){
@@ -13,16 +12,12 @@ $(function(){
             return false;
         }
         if(num==0){ //0代表无限制个数
-            // for (var i = 0; i < fileList.length; i++) {    
-                uploadPic(imgContainer,fileList[0],0,fileList.length);
-            // }
+            uploadPic(fileList[0],0,fileList.length);
         }else{
-            uploadPic(imgContainer,num);
+            uploadPic(fileList[0],0,fileList.length);
         }      
     });
-    function uploadPic(containerObj,fil,i,Len){
-       alert(fil);
-        // for (var i = 0; i < len; i++) {                
+    function uploadPic(fil,i,len){
             var img = fil;
             var obj=$(this).parent();
             // console.log(event.target.files[i]);
@@ -43,23 +38,16 @@ $(function(){
             reader.readAsDataURL(img);
 
             reader.onload = function(e){
-                // console.log(e);
                 var imgUrl=e.target.result;
-                // alert(111);
-                var html=$('#img_list').html();
-                //imgArr.push(imgUrl);
                 var img=  $('<img src="" class="upload_img">');
                 img.attr("src", imgUrl);
                 var imgAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><span class="delete-picture">X</span></div></li>');
                 imgAdd.find('.picture-module').append(img);
-                containerObj.append(imgAdd);
-                if(i<Len){
-                    alert(i);
-                    uploadPic(imgContainer,fileList[i+1],i+1,fileList.length);
+                $('.multi-picture-module').append(imgAdd);
+                if(i<len-1){
+                    uploadPic(fileList[i+1],i+1,fileList.length);
                 }
-            }
-           
-        // };
+            }         
     }
     //选择视频上传   uploadGoodsVideo
     $('body').on('change','#video',function(){
