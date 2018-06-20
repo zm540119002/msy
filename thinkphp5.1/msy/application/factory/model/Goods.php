@@ -22,6 +22,9 @@ class Goods extends Model {
 	 */
 	public function edit($storeId =''){
 		$data = input('post.');
+		if($this->_isExistGoodsName($data,$storeId)) {
+			return errorMsg('本店已存在此商品名，请更改别的商品名');
+		}
 		$validate = validate('Goods');
 		 if(!$result = $validate->check($data)) {
 		 	return errorMsg($validate->getError());
@@ -100,7 +103,20 @@ class Goods extends Model {
 		}
 	}
 
-	
+
+	//检查本店的商品是否同名,
+	private function _isExistGoodsName($data,$storeId){
+		$name = $data['name'];
+		$where = [
+			['store_id','=',$storeId],
+			['name','=',$name],
+		];
+		if(isset($data['id']) && (int)$data['id']){//
+			$id = $data['id'];
+			$where[] =  ['id','<>',$id];
+		}
+		return $this->where($where)->count() ? true : false;
+	}
 
 	/**
 	 * @param array $where
@@ -201,5 +217,6 @@ class Goods extends Model {
 		}
 
 	}
+	
 
 }
