@@ -210,7 +210,8 @@
 .classify-label-content li:last-child .down-icons{
     background-position:0 -178px;
 }
-.up-btn.disabled{
+.classify-label-content li:first-child .up-btn.disabled,
+.classify-label-content li:last-child .down-btn.disabled{
     pointer-events:none;
 }
 .addTagLayer .layui-m-layercont{

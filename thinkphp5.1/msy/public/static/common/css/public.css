@@ -651,7 +651,7 @@ color: #ed6d00;
     padding:.20rem;
 }
 .my-store-right{
-    width:20%;
+    width:25%;
 }
 .store_mall_status .personal_center{
     /*width:28px;*/
@@ -672,7 +672,7 @@ color: #ed6d00;
     width:30px;
     height:28px;
     /*height:28px;*/
-    margin:0 0 0 42px;
+    margin:0 0 0 40px;
     background-image:url(../../common/img/icons/public_my_icons.png);
     background-repeat: no-repeat;
     background-size:28px 100px;
