@@ -237,6 +237,9 @@
     text-align:center;
     
 }
+.sort-title{
+    padding:.1rem 0 0;
+}
 .addProductContent {
     padding:0.25rem 0.15rem 1rem;
 }
