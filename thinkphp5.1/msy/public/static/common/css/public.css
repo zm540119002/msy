@@ -634,6 +634,7 @@ color: #ed6d00;
     text-align:center;
     margin:0 0 10px 0;
     /*padding:4px 0;*/
+    font-size:.22rem;
 }
 .specific_type a:last-child{
     border-left:1px solid #999;
