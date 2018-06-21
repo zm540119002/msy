@@ -35,10 +35,14 @@
 		<div class="logo-license">
 			<div class="half">
 				<a class="logo" id="logox">
-					<img id="" src="">
+					{notempty name="store.logo_img"}
+					<img  src="public_uploads/{$store.logo_img}">
+					{else /}
+					<img  src="public_uploads/{$store.img}">
+					{/notempty}
 					<input type="hidden" class="logo-src" name="logoSrc">
 				</a>
-				<p class="f24">点击优化</p>
+				<p class="f24 optimize_img">点击优化</p>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -57,6 +61,21 @@
 <script type="text/javascript" src="public_js/iscroll-zoom.js"></script>
 <script type="text/javascript" src="public_js/jquery.photoClip.js"></script>
 <script type="text/javascript">
-	
+	$(function () {
+		$('body').on('click','.optimize_img',function () {
+			var logo_img = $('.logo-src').val();
+		    if(!logo_img){
+				dialog.error('还是原来的图片，没有图片优化');
+				return false;
+			}
+			$.post(controller + 'set',{logo_img:logo_img},function (data) {
+				if(!data.status){
+					dialog.error(data.info);
+					return false;
+				}
+				dialog.success(data.info,location.reload());
+			})
+		})
+	})
 </script>
 {/block}
