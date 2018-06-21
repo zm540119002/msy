@@ -82,7 +82,7 @@
     margin:0.12rem 0.15rem 0 0;
 }
 .vendorInfoList{
-    height:8rem;
+    /*height:8rem;*/
     padding:0.15rem 0.15rem 0 .15rem;
     overflow:hidden;
     overflow-y:scroll;
