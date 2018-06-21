@@ -59,8 +59,21 @@
 <script type="text/javascript" src="public_js/jquery.photoClip.js"></script>
 
 <script type="text/javascript">
-	$(function(){
-
+	$(function () {
+		$('body').on('click','.optimize_img',function () {
+			var logo_img = $('.logo-src').val();
+			if(!logo_img){
+				dialog.error('还是原来的图片，没有图片优化');
+				return false;
+			}
+			$.post(controller + 'set',{logo_img:logo_img},function (data) {
+				if(!data.status){
+					dialog.error(data.info);
+					return false;
+				}
+				dialog.success(data.info,location.reload());
+			})
+		})
 	})
 </script>
 
