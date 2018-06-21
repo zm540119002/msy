@@ -237,7 +237,7 @@
     
 }
 .addProductContent {
-    padding:0.25rem 0.15rem 0;
+    padding:0.25rem 0.15rem 1rem;
 }
 .addProductContent .right-arrow{
     position:relative;
