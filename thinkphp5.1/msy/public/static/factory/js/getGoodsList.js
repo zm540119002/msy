@@ -111,6 +111,6 @@ function getPageLayer(url,config) {
 function disableBtn(){
     var listUl = $('#list');
     listUl.find('li').find('.move-btn').removeProp('disabled');
-    listUl.find('li:first').find('.up-btn').prop('disabled','disabled');
-    listUl.find('li:last').find('.down-btn').prop('disabled','disabled');
+    listUl.find('li:first').find('.up-btn').prop('disabled','disabled').addClass('disabled');
+    listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');
 }
