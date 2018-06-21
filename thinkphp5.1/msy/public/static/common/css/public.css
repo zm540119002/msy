@@ -834,7 +834,7 @@ background-position: 0 -27px;
     border-bottom:1px solid #d9d9d9;
 }
 .vendorInfoLayer .layui-m-layerbtn{
-    /*position:fixed;*/
+    position:fixed;
     left:0;
     right:0;
     bottom:0;
