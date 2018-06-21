@@ -128,7 +128,7 @@ class Store extends Model {
 			['s.factory_id','=',$factoryId],
 			['s.store_type','=',1],
 		];
-		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,f.name,r.logo_img as img'];
+		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.logo_img,s.update_time,s.is_default,f.name,r.logo_img as img'];
 		$join =[
 			['factory f','f.id = s.foreign_id'],
 			['record r','s.foreign_id = r.factory_id'],
@@ -139,7 +139,7 @@ class Store extends Model {
 			['s.factory_id','=',$factoryId],
 			['s.store_type','=',2],
 		];
-		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,b.name,b.brand_img as img'];
+		$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.logo_img,s.is_default,b.name,b.brand_img as img'];
 		$join =[
 			['brand b','b.id = s.foreign_id'],
 		];
@@ -154,7 +154,7 @@ class Store extends Model {
 			['s.id','=',$store['id']],
 		];
 		if($store['store_type'] == 1){
-			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.is_default,f.name,r.logo_img as img'];
+			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.logo_img,s.is_default,f.name,r.logo_img as img'];
 			$join =[
 				['factory f','f.id = s.foreign_id'],
 				['record r','s.foreign_id = r.factory_id'],
@@ -162,7 +162,7 @@ class Store extends Model {
 			$storeInfo = $this -> getInfo($where,$file,$join);
 		}
 		if($store['store_type'] == 2){
-			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,b.name,b.brand_img as img'];
+			$file = ['s.id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,s.logo_img,b.name,b.brand_img as img'];
 			$join =[
 				['brand b','b.id = s.foreign_id'],
 			];

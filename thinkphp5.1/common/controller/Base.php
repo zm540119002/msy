@@ -143,7 +143,7 @@ class Base extends \think\Controller{
         if(false === $returnData){
             return errorMsg('保存文件失败');
         }
-//        //压缩文件
+      //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
             $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
             $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
@@ -163,18 +163,18 @@ class Base extends \think\Controller{
     public function compose(array $config=[])
     {
         $init = [
-            'filename'=>'goods',   //保存目录  ./uploads/compose/goods....
-            'title'=>'美尚官方旗舰店',
-            'type'=>'供应商自营',
-            'slogan'=>"采购平台·省了即赚到！",
-            'name'=>'产品名称即“品牌名称（brand name）”。',
-            'introduce'=>'产品标识所用文字应当为规范中文。',
-            'money'=>'￥ 68.56 元',
-            'logo'=>'./static/common/img/ucenter_logo.png', // 60*55px
-            'brand'=>'./static/common/img/compose/brand.png', // 160*55
-            'goods'=>'./static/common/img/compose/goods.png', // 460*534
-            'qrcode'=>'./static/common/img/compose/qrcode.png', // 120*120
-            'font'=>'./static/font/simhei.ttf',   //字体
+//            'filename'=>'goods',   //保存目录  ./uploads/compose/goods....
+//            'title'=>'美尚官方旗舰店',
+//            'type'=>'供应商自营',
+//            'slogan'=>"采购平台·省了即赚到！",
+//            'name'=>'产品名称即“品牌名称（brand name）”。',
+//            'introduce'=>'产品标识所用文字应当为规范中文。',
+//            'money'=>'￥ 68.56 元',
+//            'logo'=>'./static/common/img/ucenter_logo.png', // 60*55px
+//            'brand'=>'./static/common/img/compose/brand.png', // 160*55
+//            'goods'=>'./static/common/img/compose/goods.png', // 460*534
+//            'qrcode'=>'./static/common/img/compose/qrcode.png', // 120*120
+//            'font'=>'./static/font/simhei.ttf',   //字体
         ];
         $init = array_merge($init, $config);
         $logo = $this->imgInfo($init['logo']);
