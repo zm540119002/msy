@@ -829,6 +829,7 @@ transparent;
 }
 .invite-friends span{
     background-position:0 -160px;
+    vertical-align: middle;
 }
 .go-shopping span.icons{
     background-position:0 -192px;
