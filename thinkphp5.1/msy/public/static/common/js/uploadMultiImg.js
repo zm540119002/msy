@@ -284,7 +284,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
                 postData.fileType = 'image';
                 $.post(controller + 'uploadFileToTemp',postData,function(info){
                    if(info.status == 0){
-                       dialog.error(info.msg);
+                       dialog.error(info.info);
                        return false;
                    }
                     var imgArray ='';
