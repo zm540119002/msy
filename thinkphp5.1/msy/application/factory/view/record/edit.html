@@ -160,9 +160,12 @@
 			layer.open({
 				title:['编辑企业简介','border-bottom:1px solid #d9d9d9;'],
 				className:'editParameterLayer',
+				type:1,
 				content:editGoodsParameter,
 				btn:['确定','取消'],
 				success:function(){
+					var winHeight=$(window).height();
+                	$('.editParameterLayer .layui-m-layercont').css('height',winHeight-112+'px');
 					var goodsParameter=$('.company-introduce').val();
 					$('.editParameterLayer .editGoodsText').val(goodsParameter);
 				},
