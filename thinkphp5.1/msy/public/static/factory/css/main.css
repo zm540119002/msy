@@ -835,7 +835,7 @@ transparent;
 }
 .l-r-sides .invite-friends,
 .l-r-sides .go-shopping{
-    display: flex;
+    /*display: flex;*/
     height:30px;
     line-height: 30px;
 }
@@ -1133,7 +1133,7 @@ transparent;
     width:100%;
 }
 .columns_flex .rows{
-    flex:1;
+    /*flex:1;*/
 }
 .follow-right{
     width:112px;
