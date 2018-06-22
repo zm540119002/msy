@@ -838,7 +838,7 @@ transparent;
 .l-r-sides .invite-friends,
 .l-r-sides .go-shopping{
     /*display: flex;*/
-    width:108px;
+    width:110px;
     height:30px;
     line-height: 30px;
 }
