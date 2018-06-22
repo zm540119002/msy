@@ -38,7 +38,6 @@ $(function(){
     });
     // 选择单视频
     $('body').on('change','.uploadSingleVideo',function () {
-         console.log(event.target.files[0].size);
         var img = event.target.files[0];
         var obj=$(this).parent();
         // 判断是否图片
@@ -65,7 +64,7 @@ $(function(){
             //提交
             $.post(controller+"uploadFileToTemp",postData,function(msg){
                 if(msg.status == 1){
-                    console.log(msg.info);
+
                     $(obj).find('.img').val(msg.info);
                     $(obj).find('img').attr('src','/uploads/'+msg.info);
                 }else{
