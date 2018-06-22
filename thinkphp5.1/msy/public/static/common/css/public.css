@@ -76,7 +76,7 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 }
 .store_name{
     display: inline-block;
-    width:200px;
+    width:178px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -771,7 +771,7 @@ background-position: 0 -27px;
     background-position:0 2px;
 }
 .foot_nav_bar a span.practitioners{
-    background-position:0 -25px;
+    background-position:0 -28px;
 }
 .foot_nav_bar a span.manufacturer{
     background-position:0 -54px;
@@ -1421,7 +1421,8 @@ background-position: 0 -27px;
     font-size:22px;
 }
 .setRoleLayer ul{
-    padding:20px 15px 15px;
+    padding:20px 15px 10px;
+    overflow-y:auto;
 }
 .setRoleLayer li{
     margin-bottom:15px;

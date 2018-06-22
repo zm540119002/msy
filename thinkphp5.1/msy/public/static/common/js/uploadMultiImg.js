@@ -391,7 +391,7 @@ function uploadsImgDescribe(content,obj){
                     html+='<li>';
                     html+='<div class="picture-module active">';
                     html+='<input type="file" class="uploadImg uploadSingleEditImg" name="">';
-                    html+='<a class="delete-picture">X</a>';
+                    html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
                     html+='<img src="" class="upload_img">';
                     html+='</div>';
                     html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
@@ -491,7 +491,7 @@ function uploadsVideoDescribe(content,obj)
                     html+='<li>';
                     html+='<div class="picture-module active">';
                     html+='<input type="file" class="uploadImg uploadSingleVideo" name="">';
-                    html+='<a class="delete-picture">X</a>';
+                    html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
                     html+='<video src="" class="upload_img"></video>';
                     html+='</div>';
                     html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
