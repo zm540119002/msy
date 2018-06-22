@@ -818,7 +818,7 @@ transparent;
     text-align:right;
 }
 .row-item-mgl .collect span,
-.invite-friends span,
+.invite-friends .icons,
 .go-shopping .icons{
     display: inline-block;
     width:26px;
@@ -827,7 +827,7 @@ transparent;
     background-position:0 -130px;
     background-size:30px 325px;
 }
-.invite-friends span{
+.invite-friends span.icons{
     background-position:0 -160px;
     vertical-align: middle;
 }
@@ -838,7 +838,7 @@ transparent;
 .l-r-sides .invite-friends,
 .l-r-sides .go-shopping{
     /*display: flex;*/
-    width:115px;
+    width:108px;
     height:30px;
     line-height: 30px;
 }
