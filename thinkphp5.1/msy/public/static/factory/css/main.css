@@ -832,10 +832,12 @@ transparent;
 }
 .go-shopping span.icons{
     background-position:0 -192px;
+    vertical-align: middle;
 }
 .l-r-sides .invite-friends,
 .l-r-sides .go-shopping{
     /*display: flex;*/
+    width:115px;
     height:30px;
     line-height: 30px;
 }
@@ -1136,5 +1138,5 @@ transparent;
     /*flex:1;*/
 }
 .follow-right{
-    width:112px;
+    /*width:112px;*/
 }
