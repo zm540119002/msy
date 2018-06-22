@@ -7,6 +7,7 @@ $(function(){
         fileList = $(this).get(0).files;
         var imgArr = [];
         var num=file.data('num');//限制个数  
+       
         if(num==6&&$('.editDetailLayer li').length==num){
             errorTipc('只能上传'+num+'张图片');
             return false;
@@ -14,7 +15,7 @@ $(function(){
         if(num==0){ //0代表无限制个数
             uploadPic(fileList[0],0,fileList.length);
         }else{
-            uploadPic(fileList[0],0,fileList.length);
+            uploadPic(fileList[0],0,num);
         }      
     });
     function uploadPic(fil,i,len){
@@ -45,7 +46,7 @@ $(function(){
                 imgAdd.find('.picture-module').append(img);
                 $('.multi-picture-module').append(imgAdd);
                 if(i<len-1){
-                    uploadPic(fileList[i+1],i+1,fileList.length);
+                    uploadPic(fileList[i+1],i+1,len);
                 }
             }         
     }
@@ -390,7 +391,7 @@ function uploadsImgDescribe(content,obj){
                     html+='<li>';
                     html+='<div class="picture-module active">';
                     html+='<input type="file" class="uploadImg uploadSingleEditImg" name="">';
-                    html+='<a class="delete-picture">X</a>';
+                    html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
                     html+='<img src="" class="upload_img">';
                     html+='</div>';
                     html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
@@ -490,14 +491,13 @@ function uploadsVideoDescribe(content,obj)
                     html+='<li>';
                     html+='<div class="picture-module active">';
                     html+='<input type="file" class="uploadImg uploadSingleVideo" name="">';
-                    html+='<a class="delete-picture">X</a>';
+                    html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
                     html+='<video src="" class="upload_img"></video>';
                     html+='</div>';
                     html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
                     html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                     html+='</li>';                  
                 var multiImgAttr=obj.data('src');
-                console.log(multiImgAttr);
                 for(var i=0;i<multiImgAttr.length;i++){
                     if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
                         multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
@@ -528,7 +528,6 @@ function uploadsVideoDescribe(content,obj)
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
                 postData.imgsWithDes = layermultiImgAttr;
-                console.log(postData);
                 postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({

@@ -76,12 +76,14 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
 }
 .store_name{
     display: inline-block;
-    width:200px;
+    width:178px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+.layui-m-layerbtn span[yes]{
+    cursor: pointer;
+}
 /*头部样式*/
 .header{
     width: 100%;
@@ -632,6 +634,7 @@ color: #ed6d00;
     text-align:center;
     margin:0 0 10px 0;
     /*padding:4px 0;*/
+    font-size:.22rem;
 }
 .specific_type a:last-child{
     border-left:1px solid #999;
@@ -649,7 +652,7 @@ color: #ed6d00;
     padding:.20rem;
 }
 .my-store-right{
-    width:30%;
+    width:25%;
 }
 .store_mall_status .personal_center{
     /*width:28px;*/
@@ -670,7 +673,7 @@ color: #ed6d00;
     width:30px;
     height:28px;
     /*height:28px;*/
-    margin:0 0 0 42px;
+    margin:0 0 0 40px;
     background-image:url(../../common/img/icons/public_my_icons.png);
     background-repeat: no-repeat;
     background-size:28px 100px;
@@ -768,7 +771,7 @@ background-position: 0 -27px;
     background-position:0 2px;
 }
 .foot_nav_bar a span.practitioners{
-    background-position:0 -25px;
+    background-position:0 -28px;
 }
 .foot_nav_bar a span.manufacturer{
     background-position:0 -54px;
@@ -830,6 +833,12 @@ background-position: 0 -27px;
     line-height:.8rem;
     margin:0 0 .35rem 0;
     border-bottom:1px solid #d9d9d9;
+}
+.vendorInfoLayer .layui-m-layerbtn{
+    /*position:fixed;
+    left:0;
+    right:0;
+    bottom:0;*/
 }
 .forgetPasswdLayer .layui-m-layerbtn span[yes],
 .vendorInfoLayer .layui-m-layerbtn span[yes],
@@ -1412,7 +1421,8 @@ background-position: 0 -27px;
     font-size:22px;
 }
 .setRoleLayer ul{
-    padding:20px 15px 15px;
+    padding:20px 15px 10px;
+    overflow-y:auto;
 }
 .setRoleLayer li{
     margin-bottom:15px;
@@ -2010,7 +2020,9 @@ table {
      width:36%;
      position: relative;
 }
-
+.classify-label-content{
+    padding:0 0 1.5rem 0;
+}
 .uploader1 input[type=file] {
     position: absolute;
     top: 0;

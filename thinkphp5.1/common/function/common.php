@@ -622,7 +622,7 @@ function createQRcode($url){
  * @return array|string 返回二维码相对路径
  */
 function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
-    $QRcode = new \common\component\qrcode\Qrcode();
+    $QRcode = new \common\component\qrcode\qrcode();
     $uploadPath =realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
