@@ -41,7 +41,9 @@
             anim: 'up',
             btn:['确定'],
             success:function(){
+                var winH=$(window).height();
                 var storeId=$('.storeId').val();
+                $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
                 $('.vendorInfoLayer li').on('click',function(){
                     var _this=$(this);
                     _this.addClass('current').siblings().removeClass('current');
