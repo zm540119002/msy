@@ -1422,6 +1422,7 @@ background-position: 0 -27px;
 }
 .setRoleLayer ul{
     padding:20px 15px 10px;
+    overflow-y:auto;
 }
 .setRoleLayer li{
     margin-bottom:15px;
