@@ -251,6 +251,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
     layer.open({
             title:[title,'border-bottom:1px solid #d9d9d9'],
             className:'editDetailLayer',
+            type:1,
             content:content,
             btn:['确定','取消'],
             success:function(){
@@ -282,22 +283,47 @@ function uploadsMultiImg(content,obj,limitNum,title){
                 var postData = {};
                 postData.fileBase64 = layermultiImgAttr;
                 postData.fileType = 'image';
-                $.post(controller + 'uploadFileToTemp',postData,function(info){
-                   if(info.status == 0){
-                       dialog.error(info.info);
-                       return false;
-                   }
-                    var imgArray ='';
-                    $.each(info.info,function(index,img){
-                        if(img.indexOf("uploads") == -1 && img !=''){
-                            img = uploads+img;
-                        }
-                        imgArray+=img+',';
-                    });
+                // $.post(controller + 'uploadFileToTemp',postData,function(info){
+                //    if(info.status == 0){
+                //        dialog.error(info.info);
+                //        return false;
+                //    }
+                //     var imgArray ='';
+                //     $.each(info.info,function(index,img){
+                //         if(img.indexOf("uploads") == -1 && img !=''){
+                //             img = uploads+img;
+                //         }
+                //         imgArray+=img+',';
+                //     });
                     
-                    obj.data('src',imgArray);
-                    layer.close(index);
-                })
+                //     obj.data('src',imgArray);
+                //     layer.close(index);
+                // });
+
+                 $.ajax({
+                    url: controller + 'uploadFileToTemp',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        errorTipc('文件还没上传完毕');
+                    },
+                    success:function(info){
+                        if(info.status == 0){
+                            dialog.error(info.info);
+                            return false;
+                        }
+                        var imgArray ='';
+                        $.each(info.info,function(index,img){
+                            if(img.indexOf("uploads") == -1 && img !=''){
+                                img = uploads+img;
+                            }
+                            imgArray+=img+',';
+                        });
+                        
+                        obj.data('src',imgArray);
+                        layer.close(index);
+                    }
+                 })
             },
             no:function(){
                 $('.editDetailLayer li').remove();
