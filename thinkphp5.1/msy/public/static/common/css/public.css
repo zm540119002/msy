@@ -1177,7 +1177,10 @@ background-position: 0 -27px;
 .addCcountLayer,
 .vendorInfoLayer,
 .editParameterLayer,
-.editDetailLayer{
+.editDetailLayer,
+.uploadSingleVideoLayer,
+.uploadThumbnailLayer,
+.categoryContentLayer{
     position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;
 }
 .goodsvideoLayer .layui-m-layercont,
@@ -1448,7 +1451,10 @@ background-position: 0 -27px;
 /*弹窗按钮固定定位*/
 .setOrganizeLayer .layui-m-layerbtn,
 .editDetailLayer .layui-m-layerbtn,
-.editParameterLayer .layui-m-layerbtn{
+.editParameterLayer .layui-m-layerbtn,
+.uploadSingleVideoLayer .layui-m-layerbtn,
+.uploadThumbnailLayer .layui-m-layerbtn,
+.categoryContentLayer .layui-m-layerbtn{
     position:fixed;
     bottom:0;
     left:0;

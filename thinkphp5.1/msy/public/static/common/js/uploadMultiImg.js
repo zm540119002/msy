@@ -22,6 +22,7 @@ $(function(){
             var img = fil;
             var obj=$(this).parent();
             // console.log(event.target.files[i]);
+            console.log(111);
             // 判断是否图片
             if(!img){
                 return false;

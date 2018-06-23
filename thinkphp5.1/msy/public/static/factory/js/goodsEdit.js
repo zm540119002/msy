@@ -60,6 +60,7 @@ $(function(){
         layer.open({
             title:['设置商品的检索品类','border-bottom:1px solid #d9d9d9'],
             className:'categoryContentLayer',
+            type:1,
             content:categoryContent,
             btn:['确定','取消'],
             success:function(){
@@ -231,6 +232,7 @@ function uploadsImg(obj,tilt,className) {
     layer.open({
         title:[tilt,'border-bottom:1px solid #d9d9d9;'],
         className:className,
+        type:1,
         content:uploadSingleImgHtml,
         btn:['确定','取消'],
         success:function(){
@@ -262,6 +264,7 @@ function uploadsVideo(obj,tilt,className) {
     layer.open({
         title:[tilt,'border-bottom:1px solid #d9d9d9;'],
         className:className,
+        type:1,
         content:uploadSingleVideoHtml,
         btn:['确定','取消'],
         success:function(){
