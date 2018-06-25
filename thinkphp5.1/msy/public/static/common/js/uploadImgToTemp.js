@@ -2,6 +2,7 @@ $(function(){
     // 选择单图片
     $('body').on('change','.uploadSingleImg',function () {
         var img = event.target.files[0];
+        var uploadfileSize=img.size/1024/1024;
         var obj=$(this).parent();
         // 判断是否图片
         if(!img){
@@ -11,6 +12,10 @@ $(function(){
         var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
         if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
             dialog.error('请上传：jpg、jpeg、png、gif格式图片');
+            return false;
+        }
+        if(uploadfileSize>1){
+            dialog.error('图片大小不能超过1M');
             return false;
         }
         var reader = new FileReader();
