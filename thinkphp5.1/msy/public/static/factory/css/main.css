@@ -312,6 +312,7 @@
     text-align:center;
     background:#ff7aab;
     color:#fff;
+    cursor:pointer;
 }
 /*设置商品的检索品类*/
 .category-wrapper{
