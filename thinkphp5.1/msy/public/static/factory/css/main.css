@@ -293,7 +293,7 @@
     text-indent: 10px;
 }
 .editDetailLayer .layui-m-layercont{
-    height:6.5rem;
+    /*height:6.5rem;*/
     overflow: hidden;
     overflow-y: scroll;
 }
