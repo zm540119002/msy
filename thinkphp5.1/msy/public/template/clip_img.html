@@ -41,10 +41,7 @@
                 postData.fileType = 'image';
                 $.post(controller + "uploadFileToTemp", postData,function(msg){
                     if(msg.status == 0){
-                        layer.open({
-                            content:msg.info,
-                            time:2
-                        });
+                        dialog.error(msg.info);
                         return false;
                     }
                     if(msg.status == 1){
