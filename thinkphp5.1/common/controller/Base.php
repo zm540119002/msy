@@ -104,7 +104,7 @@ class Base extends \think\Controller{
         $fileSize = strlen($data)/1024/1024;
         //图片限制大小
         if($fileType == 'image'){
-            if($fileSize > 3){//大于2M
+            if($fileSize >3){//大于2M
                 return errorMsg('请上传小于2M的图片');
             }
         }
