@@ -190,7 +190,7 @@ class UserCenter extends \think\Model {
 		$backUrl = session('backUrl');
 		$pattern  =  '/index.php\/([A-Z][a-z]*)\//' ;
 		preg_match ($pattern,$backUrl,$matches);
-		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('index');
+		return $backUrl?(is_ssl()?'https://':'http://').$backUrl:url('Index/index');
 	}
 	
 	/**检查验证码
