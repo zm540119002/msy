@@ -21,8 +21,9 @@ $(function(){
     function uploadPic(fil,i,len){
             var img = fil;
             var obj=$(this).parent();
+            var fileSize=fil.size/1024/1024;
             // console.log(event.target.files[i]);
-            console.log(111);
+            // console.log(fileSize);
             // 判断是否图片
             if(!img){
                 return false;
@@ -35,7 +36,10 @@ $(function(){
                     time:2
                 }) ;
             }
-
+            if(fileSize>1){
+                dialog.error('图片大小不能超过1M');
+                return false;
+            }
             var reader = new FileReader();
             reader.readAsDataURL(img);
 
@@ -47,7 +51,10 @@ $(function(){
                 imgAdd.find('.picture-module').append(img);
                 $('.multi-picture-module').append(imgAdd);
                 if(i<len-1){
-                    uploadPic(fileList[i+1],i+1,len);
+                    // console.log(len);
+                    if(fileList[i+1]){
+                        uploadPic(fileList[i+1],i+1,len);
+                    }
                 }
             }         
     }
@@ -256,6 +263,8 @@ function uploadsMultiImg(content,obj,limitNum,title){
             content:content,
             btn:['确定','取消'],
             success:function(){
+                var winHeight=$(window).height();
+                $('.editDetailLayer .layui-m-layercont').css('height',winHeight-120+'px');
                 var html=$('#img_list').html();
                 var multiImgSrc=obj.data('src');
                 var multiImgAttr=multiImgSrc.split(',');
@@ -284,23 +293,6 @@ function uploadsMultiImg(content,obj,limitNum,title){
                 var postData = {};
                 postData.fileBase64 = layermultiImgAttr;
                 postData.fileType = 'image';
-                // $.post(controller + 'uploadFileToTemp',postData,function(info){
-                //    if(info.status == 0){
-                //        dialog.error(info.info);
-                //        return false;
-                //    }
-                //     var imgArray ='';
-                //     $.each(info.info,function(index,img){
-                //         if(img.indexOf("uploads") == -1 && img !=''){
-                //             img = uploads+img;
-                //         }
-                //         imgArray+=img+',';
-                //     });
-                    
-                //     obj.data('src',imgArray);
-                //     layer.close(index);
-                // });
-
                  $.ajax({
                     url: controller + 'uploadFileToTemp',
                     data: postData,
@@ -502,9 +494,7 @@ function uploadsImgDescribe(content,obj){
         })
 }
 //视频描述弹窗
-function uploadsVideoDescribe(content,obj)
-
-{
+function uploadsVideoDescribe(content,obj){
     layer.open({
             title:['上传企业视频','border-bottom:1px solid #d9d9d9'],
             className:'editCompanyPicLayer',

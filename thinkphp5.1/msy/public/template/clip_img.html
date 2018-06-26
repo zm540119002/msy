@@ -29,22 +29,21 @@
         //编辑品牌logo
         var clipImg = '';
         $("#clipArea").photoClip({
-            width: 199,
-            height: 166,
+            width: 80,
+            height: 60,
+            strictSize:true,
             file: "#file",
             view: "#view",
             ok: "#clipBtn",
             clipFinish: function(img) {
                 clipImg = img;
+                console.log(this);
                 var postData ={};
                 postData.fileBase64 = clipImg;
                 postData.fileType = 'image';
                 $.post(controller + "uploadFileToTemp", postData,function(msg){
                     if(msg.status == 0){
-                        layer.open({
-                            content:msg.info,
-                            time:2
-                        });
+                        dialog.error(msg.info);
                         return false;
                     }
                     if(msg.status == 1){
@@ -58,7 +57,7 @@
         });
         $("#clipBtn").click(function(){
             $('.logo img').attr('src',clipImg).addClass('active');
-            $('.logo-src').val(clipImg);
+//            $('.logo-src').val(clipImg);
             $(".htmleaf-container").hide();
         });
         $('.photoClip-close').click(function(){
