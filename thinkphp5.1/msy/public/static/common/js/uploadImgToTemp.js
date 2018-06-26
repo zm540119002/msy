@@ -23,7 +23,7 @@ $(function(){
             // postData.imgWidth = 145;
             // postData.imgHeight = 100;
             $(obj).find('img').attr('src',imgUrl);
-            $(obj).find('.img').val(imgUrl);
+            // $(obj).find('.img').val(imgUrl);
             //提交
             $.post(controller+"uploadFileToTemp",postData,function(msg){
                 if(msg.status == 1){
@@ -60,11 +60,10 @@ $(function(){
             postData.fileType = 'video';
             var videoUrl=e.target.result;
             $(obj).find('video').attr('src',videoUrl);
-            $(obj).find('.img').val(videoUrl);
+            // $(obj).find('.img').val(videoUrl);
             //提交
             $.post(controller+"uploadFileToTemp",postData,function(msg){
                 if(msg.status == 1){
-
                     $(obj).find('.img').val(msg.info);
                     $(obj).find('img').attr('src','/uploads/'+msg.info);
                 }else{
