@@ -1,0 +1,33 @@
+{extend name="template/base_pc.html" /}
+{block name="css-customize"}
+<link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+<link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+{/block}
+{block name="content"}
+
+html代码
+
+
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
+<script type="text/javascript">
+    //获取列表
+    function getPage(currentPage) {
+        $("#list").html($('#loading').html());
+//        var url = controller+'getList';
+//        var postData = $('#form1').serializeObject();
+//        postData.page = currentPage ? currentPage : 1;
+//        postData.pageSize = 10;
+//        $.get(url, postData , function(data){
+//            $('#list').html(data);
+//        });
+    }
+    $(function(){
+//        //加载第一页
+//        getPage();
+    });
+</script>
+{/block}
