@@ -42,7 +42,9 @@ class Store extends FactoryBase
             $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
             $modelFactory = new \app\factory\model\Brand();
-            $where = [['b.factory_id','=',$this->factory['id']]];
+            $where = [
+                ['b.factory_id','=',$this->factory['id']]
+            ];
             $file = ['b.id,b.name,b.brand_img as img'];
             $brandStores =  $modelFactory -> getList($where,$file);
             $this -> assign('brandStores',$brandStores);
