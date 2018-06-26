@@ -29,15 +29,14 @@
         //编辑品牌logo
         var clipImg = '';
         $("#clipArea").photoClip({
-            width: 80,
-            height: 60,
-            strictSize:true,
+            width: 199,
+            height: 166,
             file: "#file",
             view: "#view",
             ok: "#clipBtn",
             clipFinish: function(img) {
                 clipImg = img;
-                console.log(this);
+                console.log(img.length/1024);
                 var postData ={};
                 postData.fileBase64 = clipImg;
                 postData.fileType = 'image';
