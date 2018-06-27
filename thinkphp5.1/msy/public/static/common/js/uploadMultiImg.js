@@ -68,17 +68,17 @@ $(function(){
             var video = event.target.files[i];
             var obj=$(this).parent();
             // 判断是否图片
-            // if(!video){
-            //     return false;
-            // }
-            // // 判断图片格式
-            // var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
-            // if(!(video.type.indexOf('image')==0 && video.type && imgRegExp.test(video.name)) ){
-            //     layer.open({
-            //         content:'请上传：jpg、jpeg、png、gif格式图片',
-            //         time:2
-            //     }) ;
-            // }
+            if(!video){
+                return false;
+            }
+            // 判断图片格式
+            var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
+            if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
+                layer.open({
+                    content:'请上传：mp4、rmvb、avi、ts格式图片',
+                    time:2
+                }) ;
+            }
 
             var reader = new FileReader();
             reader.readAsDataURL(video);

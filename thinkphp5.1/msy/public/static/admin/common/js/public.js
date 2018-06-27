@@ -1,141 +1,141 @@
-(function($){
-    var deviceWidth=document.documentElement.clientWidth;
-    var html =document.getElementsByTagName('html')[0];
-    html.style.fontSize=deviceWidth/6.4+'px';
+// (function($){
+    // var deviceWidth=document.documentElement.clientWidth;
+    // var html =document.getElementsByTagName('html')[0];
+    // html.style.fontSize=deviceWidth/6.4+'px';
 
-    $.fn.moreText = function(options){
-        var defaults = {
-            maxLength:50,
-            mainCell:".branddesc",
-            openBtn:'显示全部>',
-            closeBtn:'收起'
-        };
-        return this.each(function() {
-            var _this = $(this);
+    // $.fn.moreText = function(options){
+    //     var defaults = {
+    //         maxLength:50,
+    //         mainCell:".branddesc",
+    //         openBtn:'显示全部>',
+    //         closeBtn:'收起'
+    //     };
+    //     return this.each(function() {
+    //         var _this = $(this);
 
-            var opts = $.extend({},defaults,options);
-            var maxLength = opts.maxLength;
-            var TextBox = $(opts.mainCell,_this);
-            var openBtn = opts.openBtn;
-            var closeBtn = opts.closeBtn;
+    //         var opts = $.extend({},defaults,options);
+    //         var maxLength = opts.maxLength;
+    //         var TextBox = $(opts.mainCell,_this);
+    //         var openBtn = opts.openBtn;
+    //         var closeBtn = opts.closeBtn;
 
-            var countText = TextBox.html();
-            var newHtml = '';
-            if(countText.length > maxLength){
-                newHtml = countText.substring(0,maxLength)+'...<span class="more">'+openBtn+'</span>';
-            }else{
-                newHtml = countText;
-            }
-            TextBox.html(newHtml);
-            TextBox.on("click",".more",function(){
-                if($(this).text()==openBtn){
-                    TextBox.html(countText+' <span class="more">'+closeBtn+'</span>');
-                }else{
-                    TextBox.html(newHtml);
-                }
-            });
-        });
-    };
+    //         var countText = TextBox.html();
+    //         var newHtml = '';
+    //         if(countText.length > maxLength){
+    //             newHtml = countText.substring(0,maxLength)+'...<span class="more">'+openBtn+'</span>';
+    //         }else{
+    //             newHtml = countText;
+    //         }
+    //         TextBox.html(newHtml);
+    //         TextBox.on("click",".more",function(){
+    //             if($(this).text()==openBtn){
+    //                 TextBox.html(countText+' <span class="more">'+closeBtn+'</span>');
+    //             }else{
+    //                 TextBox.html(newHtml);
+    //             }
+    //         });
+    //     });
+    // };
 
     //星星评分等级(5个img布局，有点重复)
-    $.fn.setStar=function(options){
-        var defaults={
-            getFractionValue:1,
-            mainCell:".star_img img",
-            star:'/Public/img/common/star.png',
-            starRed:'/Public/img/common/starred.png'
-        };
-        if($.isNumeric(options)){
-            defaults.getFractionValue=options;
-        }
-        return this.each(function(){
-            //console.log($(this));
-            var _this=$(this);
+    // $.fn.setStar=function(options){
+    //     var defaults={
+    //         getFractionValue:1,
+    //         mainCell:".star_img img",
+    //         star:'/Public/img/common/star.png',
+    //         starRed:'/Public/img/common/starred.png'
+    //     };
+    //     if($.isNumeric(options)){
+    //         defaults.getFractionValue=options;
+    //     }
+    //     return this.each(function(){
+    //         //console.log($(this));
+    //         var _this=$(this);
             
-            var opts=$.extend({},defaults,options); 
-            var starBox = $(opts.mainCell,_this);
-            var getFractionValue=opts.getFractionValue;
-            var star=opts.star;
-            var starRed=opts.starRed;
-            var starValue=parseInt(getFractionValue);
+    //         var opts=$.extend({},defaults,options); 
+    //         var starBox = $(opts.mainCell,_this);
+    //         var getFractionValue=opts.getFractionValue;
+    //         var star=opts.star;
+    //         var starRed=opts.starRed;
+    //         var starValue=parseInt(getFractionValue);
 
-            starBox.each(function(index){
+    //         starBox.each(function(index){
                 	
-				var prompt=['1分','2分','3分','4分','5分'];	//评价分数
-				this.id=index;		//遍历img元素，设置单独的id
-                //console.log(this.id);
-				starBox.attr('src',star);//空心星
-				// _this.find('#'+getFractionValue).attr('src',starRed);		//当前的图片为实星
-				// _this.find('#'+getFractionValue).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
-                _this.find('#'+(starValue-1)).attr('src',starRed);		//当前的图片为实星
-				_this.find('#'+(starValue-1)).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
-                $(this).parent().next('span').text(getFractionValue+'分');
-                $(this).parent().next('span').attr('data-score',getFractionValue);  
-			});
-        });
-    };
-    $.fn.getStar=function(){
-         return this.find("span").attr('data-score');
-    };
+	// 			var prompt=['1分','2分','3分','4分','5分'];	//评价分数
+	// 			this.id=index;		//遍历img元素，设置单独的id
+    //             //console.log(this.id);
+	// 			starBox.attr('src',star);//空心星
+	// 			// _this.find('#'+getFractionValue).attr('src',starRed);		//当前的图片为实星
+	// 			// _this.find('#'+getFractionValue).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
+    //             _this.find('#'+(starValue-1)).attr('src',starRed);		//当前的图片为实星
+	// 			_this.find('#'+(starValue-1)).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
+    //             $(this).parent().next('span').text(getFractionValue+'分');
+    //             $(this).parent().next('span').attr('data-score',getFractionValue);  
+	// 		});
+    //     });
+    // };
+    // $.fn.getStar=function(){
+    //      return this.find("span").attr('data-score');
+    // };
 
     //星星评分（绝对定位布局）
-     $.fn.classStar=function(options){
-        var defaults={
-            getFractionValue:1,
-            mainCell:".real_star",
-            star:'public/admin-img/common/sellerCompany/star.png',
-            starRed:'public/admin-img/common/sellerCompany/starred.png'
-        };
-        if($.isNumeric(options)){
-            defaults.getFractionValue=options;
-        }
-        return this.each(function(){
-            //console.log($(this));
-            var _this=$(this);
+    //  $.fn.classStar=function(options){
+    //     var defaults={
+    //         getFractionValue:1,
+    //         mainCell:".real_star",
+    //         star:'public/admin-img/common/sellerCompany/star.png',
+    //         starRed:'public/admin-img/common/sellerCompany/starred.png'
+    //     };
+    //     if($.isNumeric(options)){
+    //         defaults.getFractionValue=options;
+    //     }
+    //     return this.each(function(){
+    //         //console.log($(this));
+    //         var _this=$(this);
             
-            var opts=$.extend({},defaults,options); 
-            var starBox = $(opts.mainCell,_this);
-            var getFractionValue=opts.getFractionValue;
-            var star=opts.star;
-            var starRed=opts.starRed;
-            var starValue=parseInt(getFractionValue)*25;
+    //         var opts=$.extend({},defaults,options); 
+    //         var starBox = $(opts.mainCell,_this);
+    //         var getFractionValue=opts.getFractionValue;
+    //         var star=opts.star;
+    //         var starRed=opts.starRed;
+    //         var starValue=parseInt(getFractionValue)*25;
 
-            starBox.each(function(index){             	
-				// this.id=index;
-                $(this).css('width',starValue+'px');
-                $(this).parent().next('span').text(getFractionValue+'分');
-                $(this).parent().next('span').attr('data-score',getFractionValue);  
-			});
-        });
-    };
-    $.fn.getClassStar=function(){
-         return this.find("span").attr('data-store');
-    };
+    //         starBox.each(function(index){             	
+	// 			// this.id=index;
+    //             $(this).css('width',starValue+'px');
+    //             $(this).parent().next('span').text(getFractionValue+'分');
+    //             $(this).parent().next('span').attr('data-score',getFractionValue);  
+	// 		});
+    //     });
+    // };
+    // $.fn.getClassStar=function(){
+    //      return this.find("span").attr('data-store');
+    // };
 
     //进度条
-    $.fn.getProgressBar=function(options){
-        var defaults={
-            getProgressValue:1,
-            mainCell:".real_star_progress"
-        };
-        if($.isNumeric(options)){
-            defaults.getProgressValue=options;
-        }
-        return this.each(function(){
-            // console.log($(this));
-            var _this=$(this);
+    // $.fn.getProgressBar=function(options){
+    //     var defaults={
+    //         getProgressValue:1,
+    //         mainCell:".real_star_progress"
+    //     };
+    //     if($.isNumeric(options)){
+    //         defaults.getProgressValue=options;
+    //     }
+    //     return this.each(function(){
+    //         // console.log($(this));
+    //         var _this=$(this);
             
-            var opts=$.extend({},defaults,options); 
-            var progressBox = $(opts.mainCell,_this);
-            var getProgressValue=opts.getProgressValue;
-            var progressValue=parseInt(getProgressValue)*2.1;
-            progressBox.each(function(index){
-                // this.id=index;
-                $(this).css('width',progressValue+'px');
-			});
-        });
-    };
-})(jQuery);
+    //         var opts=$.extend({},defaults,options); 
+    //         var progressBox = $(opts.mainCell,_this);
+    //         var getProgressValue=opts.getProgressValue;
+    //         var progressValue=parseInt(getProgressValue)*2.1;
+    //         progressBox.each(function(index){
+    //             // this.id=index;
+    //             $(this).css('width',progressValue+'px');
+	// 		});
+    //     });
+    // };
+// })(jQuery);
 
 //限制input、textarea字数
 var maximumWord =function(obj,max){

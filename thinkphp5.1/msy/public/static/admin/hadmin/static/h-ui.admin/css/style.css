@@ -1,3 +1,18 @@
 @charset "utf-8";
 /* 你自己的样式 */
-
+.audit-item{
+    padding:20px 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.field{
+    display:inline-block;
+    width:140px;
+    text-align: right;
+}
+.audit-img{
+    max-width:200px;
+}
+.friend-tips{
+    padding:0 0 0 100px;
+    color:#ff0000;
+}
