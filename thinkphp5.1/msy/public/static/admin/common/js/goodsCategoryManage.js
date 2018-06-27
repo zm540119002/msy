@@ -77,4 +77,40 @@ $(document).ready(function(){
     //批量删除
     $('body').on('click','.a-del-batch',function(){
     });
+    //审核商标申请资料
+    var auditInfoLayer=$('#auditInfoLayer').html();
+    $('body').on('click','.entry-audit',function(){
+		 layer.open({
+            type:1,
+            area: ['1500px','auto'],
+            fix: true, //不固定
+            maxmin: true,
+            shade:0.4,
+            tipsMore:true,
+            title: '查看申请人资料',
+            content: auditInfoLayer,
+            btn:['不通过','通过'],
+            btn1:function(index){
+               //不通过
+            },
+            btn2:function(index){
+               //通过
+            }
+        });
+	});
+    var maxImg=$('#maxImg').html();
+    $('body').on('click','.audit-img',function(){
+        var imgSrc=$(this).attr('src');
+        layer.open({
+            // type:1,
+            title: '图片信息',
+            fix:false,
+            moveOut:true,
+            content:maxImg,
+            success:function(){
+                $('.max-img').attr('src',imgSrc);
+            }
+        })
+    })
+    
 });
