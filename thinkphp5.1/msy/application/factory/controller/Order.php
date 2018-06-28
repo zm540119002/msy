@@ -127,17 +127,17 @@ class Order extends StoreBase
                     <dd class='goods_all' data='{$v["goods_id"]}'>
                         <p><img src='".config('template.tpl_replace_string.public_uploads')."/{$v["thumb_img"]}' /></p>
                         <p>商品名称：{$v['name']}</p>
-                        <p>购买数量：<span class='number_'>{$v['number']}</span></p>
-                        <p>发货数量：<span class='send'>{$v['send_number']}</span></p>
+                        <p>购买数量：<span class='number_{$v["goods_id"]}' data='{$v["number"]}'>{$v['number']}</span></p>
+                        <p>发货数量：<span class='send_{$v["goods_id"]}' data='{$v["send_number"]}'>{$v['send_number']}</span></p>
                         <p>当时销售价：{$v['goods_price']}</p>
                         <p>售后价：{$v['after_sale_price']}</p>
                     </dd>
                 </dl>
             ";
         }
-        $html .= "<div class='print' data='{$ret['order']['order_sn']}' data_id='{$ret['order']['order_id']}'>
-            打印订单</div>";
         if($data_html){
+            $html .= "<div class='print' data='{$ret['order']['order_sn']}' data_id='{$ret['order']['order_id']}'>
+            打印订单</div>";
             return response($html);
         }
         return $html;
@@ -149,9 +149,9 @@ class Order extends StoreBase
      * @param number $status 订单状态
      * @return boolean
      */
-    public function setStatusUnpack($order_id, $status_unpack)
+    public function setStatusUnpack($order_id, $status)
     {
-        return $this->order->setStatusUnpack($this->store['id'], $order_id, $status_unpack);
+        return $this->order->setStatusUnpack($this->store['id'], $order_id, $status);
     }
 
     public function isOwnOrder($order_sn)
@@ -213,9 +213,10 @@ class Order extends StoreBase
         return successMsg('查询成功', ['data'=>$order_html]);
     }
 
-    public function setDelivery($order_id)
+    public function setDelivery($order_id, $goods)
     {
-        return $this->order->setDelivery($this->store['id'], $order_id);
+        return $this->order->setDelivery($this->store['id'], $order_id, $goods);
     }
 
+   
 }
