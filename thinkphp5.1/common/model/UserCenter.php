@@ -130,7 +130,6 @@ class UserCenter extends \think\Model {
 		return successMsg($this->_setSession($user));
 	}
 
-
 	/**注册
 	 */
 	private function _register($mobilePhone,$passWord){
