@@ -7,6 +7,5 @@ class Base extends \common\controller\Base{
         $node = new \common\lib\Node();
         $allDisplayMenu = $node->getAllDisplayNode();
         $this->assign('allDisplayMenu',$allDisplayMenu);
-        
     }
 }
