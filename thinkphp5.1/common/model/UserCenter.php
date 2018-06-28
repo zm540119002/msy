@@ -27,7 +27,6 @@ class UserCenter extends \think\Model {
 		}
 		return $returnData;
 	}
-	
 
 	/**登录
 	 */
