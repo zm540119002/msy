@@ -5,6 +5,7 @@
 		.print{background:red; color:white; width:30%; text-align: center;
 			padding:3px; font-weight: bold; border-radius:5px;}
 		#order_status{background: #ffc6cd;text-align: center;cursor: pointer;}
+		#check_goods{background: #ffc6cd;display: none;text-align: center;}
 	</style>
 {/block}
 {block name="content"}
@@ -57,7 +58,7 @@
 			</dl>
 			<div id="order_detail"></div>
 			<div id="data_all" data_order_id="" data_order_sn=""></div>
-			<div id="check_goods" style="background: #ffc6cd;display: none;text-align: center">进行订单验货</div>
+			<div id="check_goods">进行订单验货</div>
 		</div>
 	</section>
 </article>
@@ -72,30 +73,109 @@
 <script type="text/javascript">
 	$("#order").keydown(function(event) {
 		if (event.keyCode == 13) {
-			var order_sn = $.trim( $('#order').val() );
-			if(!order_sn){
-				alert('请输入订单号');
-				return false;
-			}
-			$.ajax({
-				type: 'POST',
-				url: "{:url('Order/isOwnOrder')}",
-				data:{order_sn:order_sn},
-				dataType:'json',
-				success:function(e){
-					if(e.status==1){
-						$('#data_all').attr('data_order_id', e.order_id);
-						$('#data_all').attr('data_order_sn', e.order_sn);
-						$('#order_detail').empty().append(e.data);
-						$('#check_goods').css({'display':'block'});
-					}else{
-						alert(e.info);
-					}
-				}
-			});
+			getOrderDetail();
 		}
 	});
 
-	$('#')
+	$('.search_btn').click(function(){
+		getOrderDetail();
+	});
+
+	$('#check_goods').on('click', function(){
+		var html = "<span id='reset_goods'>重新验货</span><input type='text' id='goods' placeholder='输入商品ID' />",
+			html_self = "<p id='submit_goods'>确认出仓</p>", order_id = $('#data_all').attr('data_order_id');
+		$('#data_all').empty().append(html);
+		$(this).empty().append(html_self);
+	});
+
+	//验货+1
+	$('#data_all').on('keydown', '#goods', function(e){
+		if(e.keyCode == 13){
+			var goods_id = parseInt( $.trim($(this).val()) );
+			if(goods_id<=0){
+				alert('您输入的商品号有误');
+				return false;
+			}
+			var send_ = $('.send_'+goods_id), number_ = $('.number_'+goods_id);
+			if(send_.length>0&&number_.length>0){
+				send_.text( parseInt(send_.text(), 10)+1 );
+				if( (parseInt(send_.text(), 10))>parseInt(number_.text()) ){
+					$('.goods_all').find(number_).parents('dl').css('background', 'red');
+					alert('商品数量超出');
+				}
+			}else{
+				alert('商品编号不存在');
+			}
+		}
+	});
+
+	//重新验货
+	$('#data_all').on('click', '#reset_goods', function() {
+		$('.goods_all').each(function(){
+			var goods_id = parseInt( $(this).attr('data') );
+			$(this).find('.send_'+goods_id).text( $('.send_'+goods_id).attr('data') );
+			$(this).parent().css('background', 'white');
+		});
+	});
+
+	//验货提交
+	$('#check_goods').on('click', '#submit_goods', function(){
+		var obj = {}, order_id = $('#data_all').attr('data_order_id');
+		if(order_id<=0){
+			alert('订单信息有误');
+			return false;
+		}
+		$('.goods_all').each(function(i){
+			var number_ = parseInt( $(this).find('.number_'+$(this).attr('data')).text(), 10),
+					send = parseInt( $(this).find('.send_'+$(this).attr('data')).text(), 10),
+					old_send = parseInt( $(this).find('.send_'+$(this).attr('data')).attr('data'), 10);
+			if(send>number_){
+				alert('发货数量超出');
+				return false;
+			}
+			if(send>old_send){
+				obj[i] ={'goods_id':$(this).attr('data'),'send_number':send-old_send};
+			}
+		});
+		if($.isEmptyObject(obj)){
+			alert('请扫描发货商品');
+			return false;
+		}
+		$.ajax({
+			url: "{:url('Order/setDelivery')}",
+			type: 'POST',
+			data: {'goods':obj, 'order_id': order_id},
+			dataType: 'json',
+			success: function(e){
+				alert(e.info);
+			}
+		});
+	});
+
+	function getOrderDetail()
+	{
+		var order_sn = $.trim( $('#order').val() );
+		if(!order_sn){
+			alert('请输入订单号');
+			return false;
+		}
+		$.ajax({
+			type: 'POST',
+			url: "{:url('Order/isOwnOrder')}",
+			data:{order_sn:order_sn},
+			dataType:'json',
+			success:function(e){
+				if(e.status==1){
+					$('#data_all').attr('data_order_id', e.order_id);
+					$('#data_all').attr('data_order_sn', e.order_sn);
+					$('#order_detail').empty().append(e.data);
+					$('#check_goods').empty().css({'display':'block'}).text('进行订单验货');
+					$('#data_all').empty();
+				}else{
+					alert(e.info);
+				}
+			}
+		});
+	}
 </script>
 {/block}
