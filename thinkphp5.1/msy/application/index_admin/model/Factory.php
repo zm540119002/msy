@@ -92,5 +92,6 @@ class Factory extends Model {
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->alias('f')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+		print_r($this->getLastSql());exit;
 	}
 }

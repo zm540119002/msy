@@ -34,20 +34,14 @@
   $(function () {
 	  // 选择状态
 	  $('body').on('change','.select',function(){
-		  var config = {
-			  auth_status:$(this).val(),
-		  };
-		  getPage(config);
+		  getPage(1,$(this).val());
+		  $('.auth_status').val($(this).val());
 	  })
 	  //获取列表
-	  var config ={};
-	  getPage(config);
+	  getPage();
 	  //搜索
 	  $('body').on('click','.search',function(){
-		  var postData = $('#form1').serializeObject();
-		  var config ={};
-		  config = postData;
-		  getPage(config);
+		  getPage();
 	  })
 	  //审核商标申请资料
 	  $('body').on('click','.entry-audit',function(){
@@ -170,12 +164,14 @@
 	  })
   })
   //获取商品列表
-  function getPage(config) {
+  function getPage(currentPage,selectData) {
 	  $("#list").html($('#loading').html());
 	  var url = module+'factory/getList';
-	  config.page = 1;
-	  config.pageSize = 10;
-	  $.get(url, config , function(data){
+	  var postData = $('#form1').serializeObject();
+	  postData.page = currentPage ? currentPage : 1;
+	  postData.auth_status = selectData;
+	  postData.pageSize = 10;
+	  $.get(url, postData , function(data){
 		  $('#list').html(data);
 	  });
   }
