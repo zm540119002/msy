@@ -13,8 +13,7 @@ return [
         'factory'=>[
             'id'=>2000,'name'=>'厂商审核','type'=>2,
             'sub_menu' => [
-                ['id'=>2001,'name'=>'厂商入驻审核','display'=>1,'controller'=>'Factory','action'=>'auditList',],
-                ['id'=>2002,'name'=>'厂商资料','display'=>1,'controller'=>'Factory','action'=>'info',],
+                ['id'=>2001,'name'=>'厂商入驻审核','display'=>1,'controller'=>'Factory','action'=>'auditManage',],
             ],
         ],
     ],
