@@ -82,7 +82,7 @@ class Brand extends Model {
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		$info = $this->alias('g')
+		$info = $this->alias('b')
 			->field($field)
 			->join(array_merge($_join,$join))
 			->where($where)

@@ -5,15 +5,21 @@
 return [
     'menu' => [
         'goods_category'=>[
-            'id'=>1000,'name'=>'商品分类','type'=>2,
+            'id'=>100,'name'=>'商品分类','type'=>2,
             'sub_menu' => [
-                ['id'=>1001,'name'=>'商品分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
+                ['id'=>101,'name'=>'商品分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
             ],
         ],
         'factory'=>[
-            'id'=>2000,'name'=>'厂商审核','type'=>2,
+            'id'=>200,'name'=>'厂商审核','type'=>2,
             'sub_menu' => [
-                ['id'=>2001,'name'=>'厂商入驻审核','display'=>1,'controller'=>'Factory','action'=>'auditManage',],
+                ['id'=>201,'name'=>'厂商入驻审核','display'=>1,'controller'=>'Factory','action'=>'auditManage',],
+            ],
+        ],
+        'brand'=>[
+            'id'=>300,'name'=>'厂商品牌审核','type'=>2,
+            'sub_menu' => [
+                ['id'=>301,'name'=>'品牌审核','display'=>1,'controller'=>'Brand','action'=>'auditManage',],
             ],
         ],
     ],

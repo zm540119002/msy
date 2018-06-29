@@ -67,12 +67,43 @@ class Brand extends Model {
 		$where = array_merge($_where, $where);
 		$_join = array(
 		);
-		$info = $this->alias('g')
+		$info = $this->alias('b')
 			->field($field)
 			->join(array_merge($_join,$join))
 			->where($where)
 			->find();
 		return $info?$info->toArray():[];
+	}
+	/**
+	 * 分页查询 商品
+	 * @param array $_where
+	 * @param array $_field
+	 * @param array $_join
+	 * @param string $_order
+	 * @return \think\Paginator
+	 */
+	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
+		$where = [
+			['b.status', '=', 0],
+		];
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['b.name', 'like', '%'.trim($keyword).'%'];
+		}
+		if(input('?get.auth_status')){
+			$authStatus = input('get.auth_status','int');
+			$where[] = ['b.auth_status', '=',$authStatus];
+		}
+		$order = [
+			'b.auth_status'=>'asc',
+			'b.id'=>'desc'
+		];
+		$where = array_merge($_where, $where);
+		$order = array_merge($_order,$order);
+		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+			input('get.pageSize',0,'int') : config('custom.default_page_size');
+		 $this->alias('b')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+		print_r($this->getLastSql());exit;
 	}
 
 }
