@@ -31,3 +31,7 @@
     background: #0066cc;
     color:#fff;
 }
+.pagination li a{
+    display: block;
+    cursor: pointer;
+}
