@@ -23,6 +23,7 @@ class Brand extends Base {
             return errorMsg('请求方式错误');
         }
         $model = new \app\index_admin\model\Brand;
+        
         $list = $model -> pageQuery();
         $this->assign('list',$list);
         return $this->fetch('audit_list');
