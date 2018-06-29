@@ -69,4 +69,23 @@ class Express extends Model
         return errorMsg('修改失败');
     }
 
+    /**
+     * 查询是否有物流信息
+     * @param $store_id
+     * @param $order_id
+     * @return int|string
+     */
+    public function isExpress($store_id, $order_id)
+    {
+        return $this->where(['order_id'=>$order_id, 'store_id'=>$store_id])->count();
+    }
+
+    /**
+     * -对多相对关联
+     * @return \think\model\relation\BelongsTo
+     */
+    public function order()
+    {
+        return $this->belongsTo('Order', 'order_id', 'id');
+    }
 }

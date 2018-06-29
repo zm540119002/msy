@@ -133,6 +133,16 @@ body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333
     height:20px;
     vertical-align:-5px;
 }
+.fixedtop{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 29;
+    /*max-width: 640px;*/
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+}
 /******轮播样式***********/
 /*#slider,#slider1{
     width: 100%;
@@ -388,7 +398,7 @@ i{
 }
 .top_bar{
     position:relative;
-    background: #fff;
+    /*background: #fff;*/
     border-bottom:1px solid #9fa0a0;
     padding:10px 0;
 }
@@ -476,7 +486,7 @@ i{
     margin:-4px 0 0;
     border-radius:6px;
     flex:5;
-    background: #efefef;
+    background: #fff;
     padding:4px 0 6px;
     -webkit-box-align:center;
     
@@ -512,7 +522,7 @@ i{
 }
 .top_nav_fixed .top_menu_list{
     width:100%;
-    background:#fff;
+    /*background:#fff;*/
     /*margin:0 auto;
     text-align:left;*/
     font-size:0;
@@ -530,7 +540,7 @@ i{
     box-sizing:border-box;
     padding:0 5px;
     font-size:.24rem;
-    color:#333;
+    color:#fff;
     position:relative;
 }
 .top_menu_box a.current:before{
@@ -541,7 +551,7 @@ i{
     display: inline-block;
     height: 30px;
     width: 30px;
-    background-color: #e60012;
+    background-color: #fff;
     content: "";
     transform: scale3d(1, 0.05, 1);
     transform-origin: center;
@@ -568,9 +578,22 @@ i{
     position:relative;
     color:#898989;
 }
+.module-navigation{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    background:transparent;
+}
 .channel_nav{
     padding:0.20rem 0 0.15rem 0;
     border-bottom:1px solid #d9d9d9;
+}
+.module-navigation .channel_nav{
+    background: #000;
+    border: 1px solid darkslategray;
+    border-radius: 30px 30px 0 0;
 }
 .channel_nav a{
     position:relative;
@@ -625,8 +648,8 @@ color: #ed6d00;
     border-top:1px solid #9fa0a0;
 }
 .specific_type .columns_flex{
-    flex-wrap: wrap;
-    margin:0;
+    /*flex-wrap: wrap;
+    margin:0;*/
 }
 .specific_type a{
     /*width:20%;*/
@@ -637,8 +660,8 @@ color: #ed6d00;
     font-size:.22rem;
 }
 .specific_type a:last-child{
-    border-left:1px solid #999;
-    padding:0 0 0 5px;
+    /*border-left:1px solid #999;
+    padding:0 0 0 5px;*/
 }
 .store_specific_type a:last-child{
     border-left:0;
@@ -2190,7 +2213,8 @@ input[type=text]::-webkit-focus-inner {
  .swiper-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    height:275px;
+    /*height: 100%;*/
     z-index: 1;
     display: -webkit-box;
     display: -webkit-flex;
