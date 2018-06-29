@@ -48,7 +48,7 @@
 		  _this = $(this);
           var id = _this.parents('tr').data('id');
 		  $.ajax({
-			  url: module + 'Factory/getInfo',
+			  url: module + 'Brand/getInfo',
 			  data: {id:id},
 			  type: 'get',
 			  beforeSend: function(){
@@ -113,7 +113,7 @@
 	  $('body').on('click','.view',function(){
 		  var id = $(this).parents('tr').data('id');
 		  $.ajax({
-			  url: module + 'Factory/getInfo',
+			  url: module + 'Brand/getInfo',
 			  data: {id:id},
 			  type: 'get',
 			  beforeSend: function(){
@@ -166,7 +166,7 @@
   //获取商品列表
   function getPage(currentPage,selectData) {
 	  $("#list").html($('#loading').html());
-	  var url = module+'Factory/getList';
+	  var url = module+'Brand/getList';
 	  var postData = $('#form1').serializeObject();
 	  postData.page = currentPage ? currentPage : 1;
 	  postData.auth_status = selectData;
