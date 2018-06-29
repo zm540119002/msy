@@ -98,11 +98,15 @@ class Brand extends Model {
 			'b.auth_status'=>'asc',
 			'b.id'=>'desc'
 		];
+		$join = [
+			['factory f','f.id = b.factory_id','left']
+		];
 		$where = array_merge($_where, $where);
 		$order = array_merge($_order,$order);
+		$join  = array_merge($_join,$join);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		 $this->alias('b')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+		 $this->alias('b')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 		print_r($this->getLastSql());exit;
 	}
 
