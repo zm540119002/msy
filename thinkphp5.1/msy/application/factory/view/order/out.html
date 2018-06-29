@@ -142,7 +142,7 @@
 			return false;
 		}
 		$.ajax({
-			url: "{:url('Order/setDelivery')}",
+			url: "{:url('Order/setDeliveryGoods')}",
 			type: 'POST',
 			data: {'goods':obj, 'order_id': order_id},
 			dataType: 'json',
@@ -166,11 +166,10 @@
 			dataType:'json',
 			success:function(e){
 				if(e.status==1){
-					$('#data_all').attr('data_order_id', e.order_id);
+					$('#data_all').attr('data_order_id', e.order_id).empty();
 					$('#data_all').attr('data_order_sn', e.order_sn);
 					$('#order_detail').empty().append(e.data);
 					$('#check_goods').empty().css({'display':'block'}).text('进行订单验货');
-					$('#data_all').empty();
 				}else{
 					alert(e.info);
 				}
