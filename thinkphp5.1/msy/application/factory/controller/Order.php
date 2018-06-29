@@ -31,16 +31,6 @@ class Order extends StoreBase
     }
 
     /**
-     * 测试合成图片功能
-     * @return string
-     *
-     */
-    public function  test()
-    {
-        return $this->compose();
-    }
-
-    /**
      * 售前
      *
      */
@@ -213,10 +203,13 @@ class Order extends StoreBase
         return successMsg('查询成功', ['data'=>$order_html]);
     }
 
-    public function setDelivery($order_id, $goods)
+    public function setDeliveryGoods($order_id, $goods)
     {
-        return $this->order->setDelivery($this->store['id'], $order_id, $goods);
+        return $this->order->setDeliveryGoods($this->store['id'], $order_id, $goods);
     }
 
-   
+    public function setDelivery($order_id)
+    {
+        return $this->order->setDelivery($this->store['id'], $order_id);
+    }
 }

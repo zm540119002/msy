@@ -42,7 +42,8 @@ class Order extends Model
 
     public function getStatusUnpackAttr($v)
     {
-        $su = [1=>'待仓库拣货', 2=>'仓库拣货', 3=>'已出库', 4=>'发货中', 5=>'已发货', 6=>'部分发货'];
+        $su = [1=>'待仓库拣货', 2=>'部分拣货中', 3=>'全部拣货中', 4=>'部分发货中', 5=>'全部发货中', 6=>'部分发货',
+            7=>'已发货', 8=>'追加部分发货', 9=>'追加全部发货'];
         return $su[$v];
     }
 
@@ -70,7 +71,7 @@ class Order extends Model
         if( count($ret)<=0 ){
             errorMsg('订单数据有误');
         }
-        $data = []; //'' => $v[''],''=>$v['']{order_id=order-id}
+        $data = []; //'' => $v[''],
         foreach($ret as $v){
             if( !array_key_exists($data['order'], $data) ){
                 $data['order'] =[
@@ -168,8 +169,11 @@ class Order extends Model
      * @param $goods array : ['goods_id':1, 'send_number':1]
      * @return array
      */
-    public function setDelivery($store_id, $order_id, $goods)
+    public function setDeliveryGoods($store_id, $order_id, $goods)
     {
+        if(!is_array($goods)||count($goods)<=0){
+            return errorMsg('拣货数据有误');
+        }
         $data = $this->alias('a')->field('a.status_unpack, b.number, b.send_number, b.goods_id')
             ->join('order_detail b', 'a.order_id=b.order_id and a.store_id=b.store_id', 'INNER')
             ->where(['a.order_id'=>$order_id ,'a.store_id'=>$store_id])
@@ -177,17 +181,16 @@ class Order extends Model
         if( count($data)<=0 ){
             return errorMsg('订单不存在');
         }
-        $send_number = 0;
+        $number = $send_number = $new_send_number = $status_unpack = 0;
         try{
             foreach($data as $k=>$v){
                 if($k==0){
-                    if( !in_array($v->getData('status_unpack'), [1, 2, 3, 4, 5, 6]) ){
+                    if( in_array($v->getData('status_unpack'), [5, 7, 9]) ){
                         return errorMsg('已不可发货');
                     }
-                    if( in_array($v->getData('status_unpack'), [1, 2]) ){
-                        $this->where(['order_id'=>$order_id,'store_id'=>$store_id])->setField(['status_unpack'=>3]);
-                    }
                 }
+                $number += $v['number'];
+                $send_number += $v['send_number'];
                 if($v['number']==$v['send_number']){
                     continue;
                 }
@@ -202,20 +205,56 @@ class Order extends Model
                                 ->inc('b.send_number', $val['send_number'])
                                 ->update();
                             $send_number += $val['send_number'];
+                            $new_send_number += $val['send_number'];
+                        }else{
+                            return errorMsg('拣货数量有误');
                         }
                     }
                 }
             }
+            if($new_send_number<=0){
+                return errorMsg('拣货数量有误');
+            }
+            if($data[0]['status_unpack']==1){
+                if($number==$send_number){
+                    $status_unpack = 3;
+                }else{
+                    $status_unpack = 2;
+                }
+            }
+            if($data[0]['status_unpack']==2){
+                if($number==$send_number){
+                    $status_unpack = 3;
+                }
+            }
+            if($data[0]['status_unpack']==4){
+                if($number==$send_number){
+                    $status_unpack = 9;
+                }else{
+                    $status_unpack = 8;
+                }
+            }
+            if($data[0]['status_unpack']==6){
+                if($number==$send_number){
+                    $status_unpack = 9;
+                }else{
+                    $status_unpack = 8;
+                }
+            }
+            if($data[0]['status_unpack']==8){
+                if($number==$send_number){
+                    $status_unpack = 9;
+                }
+            }
+            if($status_unpack>0){
+                $this->where(['order_id'=>$order_id,'store_id'=>$store_id])->setField(['status_unpack'=>$status_unpack]);
+            }
             $this->commit();
+            return successMsg('出仓成功');
         } catch (\Exception $e) {
             $this->rollback();
             return errorMsg('出仓失败');
         }
-        if($send_number<=0){
-            $this->where(['order_id'=>$order_id,'store_id'=>$store_id])->setField(['status_unpack'=>2]);
-            return errorMsg('出仓数量有误');
-        }
-        return successMsg('货物出仓');
     }
 
     /**
@@ -234,4 +273,35 @@ class Order extends Model
         return errorMsg('仓库拣货');
     }
 
+    public function setDelivery($store_id, $order_id)
+    {
+        //设置发货状态  怎么追加发货
+        $isExpress = $this->express()->where(['order_id'=>$order_id, 'store_id'=>$store_id])->count();
+        if($isExpress<=0){
+            return errorMsg('请填写物流信息在发货');
+        }
+        $data = $this->alias('a')->field('a.status_unpack, b.number, b.send_number, b.goods_id')
+            ->join('order_detail b', 'a.order_id=b.order_id and a.store_id=b.store_id', 'INNER')
+            ->where(['a.order_id'=>$order_id ,'a.store_id'=>$store_id])
+            ->select();
+        if( count($data)<=0 ){
+            return errorMsg('订单不存在');
+        }
+        foreach($data as $v)
+        $ret = $this->where(['order_id'=>$order_id, 'store_id'=>$store_id, 'status_unpack'=>1])
+            ->setField(['status_unpack'=>2]);
+        if($ret){
+            return successMsg('仓库拣货');
+        }
+        return errorMsg('仓库拣货');
+    }
+
+    /**
+     * -对多关联
+     * @return \think\model\relation\HasMany
+     */
+    public function express()
+    {
+        return $this->hasMany('Express', 'id', 'order_id');
+    }
 }

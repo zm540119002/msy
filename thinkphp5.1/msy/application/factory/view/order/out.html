@@ -142,7 +142,7 @@
 			return false;
 		}
 		$.ajax({
-			url: "{:url('Order/setDelivery')}",
+			url: "{:url('Order/setDeliveryGoods')}",
 			type: 'POST',
 			data: {'goods':obj, 'order_id': order_id},
 			dataType: 'json',
