@@ -8,7 +8,6 @@ class Index extends Controller
     //首页
     public function index()
     {
-        echo 222;exit;
 //        return $this->request->param('aa');
         return $this->fetch();
     }
