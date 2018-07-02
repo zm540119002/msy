@@ -418,6 +418,10 @@ i{
     display:block;
     text-indent:-9999rem;
 }
+.top-switch-bar{
+    height:30px;
+    line-height: 30px;
+}
 .top-switch-bar div:nth-child(2){
     width:50%;
 }
