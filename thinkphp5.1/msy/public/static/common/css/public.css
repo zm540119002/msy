@@ -602,14 +602,14 @@ i{
 .supply-nav a{width:33%;}
 .channel_nav a span{
     display:block;
-    width:46px;
+    width:48px;
     height:47px;
     margin:0 auto;
     background-image:url(../../common/img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
     background-size:46px 234px;
 }
-.channel_nav a span.union_purchase{background-position:0 0px;}
+.channel_nav a span.union_purchase{background-position:0 1px;}
 .channel_nav a span.exclusive{background-position:0 -46px;}
 .channel_nav a span.classify{background-position:0 -93px;}
 .channel_nav a span.purchasers{background-position:0 -140px;}
