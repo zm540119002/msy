@@ -437,7 +437,6 @@ function forgetPasswordDialog(content){
 //提交表单
 function submitForm(postData,postUrl){
     $.post(postUrl,postData,function (data) {
-        return;
         if(data.status==0){
             dialog.error(data.info);
             return false;
