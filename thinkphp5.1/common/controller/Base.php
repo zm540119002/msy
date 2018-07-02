@@ -20,7 +20,7 @@ class Base extends \think\Controller{
     public function uploadFileToTemp(){
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
-            $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$postData['fileType']);
+            $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64']);
             if(isset($fileName['status'])&& $fileName['status'] == 0){
                 return $fileName;
             }
@@ -31,7 +31,7 @@ class Base extends \think\Controller{
             foreach ($postData['fileBase64'] as $k=>$file){
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                    $fileName = $this ->_uploadSingleFileToTemp($file,$postData['fileType']);
+                    $fileName = $this ->_uploadSingleFileToTemp($file);
                     if(isset($fileName['status'])&& $fileName['status'] == 0){
                         return $fileName;
                     }
@@ -50,7 +50,7 @@ class Base extends \think\Controller{
         foreach ($files as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$_POST['fileType']);
+                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc']);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
@@ -64,40 +64,17 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    private function _uploadSingleFileToTemp($fileBase64,$fileType){
+    private function _uploadSingleFileToTemp($fileBase64){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
-        $ext = '';
-        if($fileType == 'image'){
-            if(strstr($type,'image/jpeg')!=''){
-                $ext = '.jpeg';
-            }elseif(strstr($type,'image/jpeg')!=''){
-                $ext = '.jpg';
-            }elseif(strstr($type,'image/gif')!=''){
-                $ext = '.gif';
-            }elseif(strstr($type,'image/png')!=''){
-                $ext = '.png';
-            }
-        }
-        if($fileType == 'video'){
-            if(strstr($type,'video/mp4')!=''){
-                $ext = '.mp4';
-            }elseif(strstr($type,'video/rm')!=''){
-                $ext = '.rm';
-            }elseif(strstr($type,'video/mtv')!=''){
-                $ext = '.mtv';
-            }elseif(strstr($type,'video/wmv')!=''){
-                $ext = '.wmv';
-            }elseif(strstr($type,'video/avi')!=''){
-                $ext = '.avi';
-            }elseif(strstr($type,'video/3gp')!=''){
-                $ext = '.3gp';
-            }elseif(strstr($type,'video/flv')!=''){
-                $ext = '.flv';
-            }elseif(strstr($type,'video/rmvb')!=''){
-                $ext = '.rmvb';
-            }
+        list($fileType,$ext) = explode('/', $type);
+        $array = [
+            'image/jpg','image/jpeg','image/gif','image/png',
+            'video/mp4','video/rm','video/mtv','video/wmv','video/avi','video/3gp','video/flv','video/rmvb',
+        ];
+        if(in_array($array,$type)){
+            $ext = '.' . $ext;
         }
         if(!$ext){
             return errorMsg('不支持此文件格式');
