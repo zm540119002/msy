@@ -70,11 +70,25 @@ class Base extends \think\Controller{
         // 判断文件类型
         list($fileType,$ext) = explode('/', $type);
         $array = [
-            'image/jpg','image/jpeg','image/gif','image/png',
-            'video/mp4','video/rm','video/mtv','video/wmv','video/avi','video/3gp','video/flv','video/rmvb',
+            'data:image/jpg;base64',
+            'data:image/gif;base64',
+            'data:image/png;base64',
+            'data:image/jpeg;base64',
+            'data:video/mp4;base64',
+            'data:video/rm;base64',
+            'data:video/mtv;base64',
+            'data:video/wmv;base64',
+            'data:video/avi;base64',
+            'data:video/3gp;base64',
+            'data:video/flv;base64',
+            'data:video/rmvb;base64',
+//            'data:video/3gp;base64',
+//            'image/jpg','image/jpeg','image/gif','image/png',
+//            'video/mp4','video/rm','video/mtv','video/wmv','video/avi','video/3gp','video/flv','video/rmvb',
         ];
-        if(in_array($array,$type)){
-            $ext = '.' . $ext;
+        if(in_array($type,$array)){
+            $ext = explode(';', $ext);
+            $ext = '.'.$ext[0];
         }
         if(!$ext){
             return errorMsg('不支持此文件格式');
@@ -82,13 +96,13 @@ class Base extends \think\Controller{
         //文件大小 单位M
         $fileSize = strlen($data)/1024/1024;
         //图片限制大小
-        if($fileType == 'image'){
+        if($fileType == 'data:image'){
             if($fileSize >3){//大于2M
                 return errorMsg('请上传小于2M的图片');
             }
         }
         //视频限制大小
-        if($fileType == 'video'){
+        if($fileType == 'data:video'){
             if($fileSize > 10){//大于10
                 return errorMsg('请上传小于10M的视频');
             }

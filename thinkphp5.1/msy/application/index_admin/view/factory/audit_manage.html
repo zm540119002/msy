@@ -170,7 +170,7 @@
 	  var postData = $('#form1').serializeObject();
 	  postData.page = currentPage ? currentPage : 1;
 	  postData.auth_status = selectData;
-	  postData.pageSize = 10;
+	  postData.pageSize = 20;
 	  $.get(url, postData , function(data){
 		  $('#list').html(data);
 	  });
