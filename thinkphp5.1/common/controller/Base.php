@@ -68,8 +68,6 @@ class Base extends \think\Controller{
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
-        $ext = '';
-        $fileType = '';
         list($fileType,$ext) = explode('/', $type);
         $array = [
             'image/jpg','image/jpeg','image/gif','image/png',
