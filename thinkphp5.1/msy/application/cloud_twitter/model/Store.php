@@ -1,5 +1,5 @@
 <?php
-namespace app\index_admin\model;
+namespace app\factory\model;
 use think\Model;
 use think\Db;
 /**
@@ -14,15 +14,30 @@ class Store extends Model {
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
 	/**
-	 * 审核厂商
+	 * 编辑
 	 */
-	public function audit(){
-		$postData = input('post.');
-		$res = $this->isUpdate(true)->save($postData);
-		if($res===false){
-			return errorMsg('更新失败',$this->getError());
+	public function edit($factoryId=''){
+		$data = input('post.');
+		$data['factory_id'] = $factoryId;
+		$validate = validate('Store');
+		if(!$result = $validate->check($data)) {
+			return errorMsg($validate->getError());
+		}
+		if(input('?post.id')){
+			$data['update_time'] = time();
+			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
+			if(false !== $result){
+				return successMsg("成功");
+			}
+			return errorMsg('失败',$this->getError());
 		}else{
-			return successMsg('成功！',$postData);
+			$data['create_time'] = time();
+			$result = $this->allowField(true)->save($data);
+			if(!$result){
+				$this ->rollback();
+				return errorMsg('失败');
+			}
+			return successMsg('提交申请成功');
 		}
 	}
 	
@@ -169,38 +184,6 @@ class Store extends Model {
 		}else{
 			return false;
 		}
-	}
 
-	/**
-	 * 分页查询 商品
-	 * @param array $_where
-	 * @param array $_field
-	 * @param array $_join
-	 * @param string $_order
-	 * @return \think\Paginator
-	 */
-	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
-		$where = [
-			['s.status', '=', 0],
-		];
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['s.name|s.name', 'like', '%'.trim($keyword).'%'];
-		}
-		if(input('?get.auth_status')){
-			$authStatus = input('get.auth_status','int');
-			$where[] = ['b.auth_status', '=',$authStatus];
-		}
-		$order = [
-			's.auth_status'=>'asc',
-			's.id'=>'desc'
-		];
-		$join = [];
-		$where = array_merge($_where, $where);
-		$order = array_merge($_order,$order);
-		$join  = array_merge($_join,$join);
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $list = $this->alias('b')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 	}
 }

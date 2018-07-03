@@ -1,0 +1,19 @@
+<section class="top_nav_fixed">
+    <div class="top_bar top-switch-bar columns_flex l-r-sides">
+        {include file="public/home_page" /}
+        <div class="">
+            <span>{$factory.name}</span>
+        </div>
+        <div class="">
+            <a href="javascript:void(0);" class="switch-account">切换供应商账号></a>
+        </div>
+    </div>
+</section>
+{include file="public/factory_list_tpl" /}
+<script type="text/javascript">
+    $(function(){
+        $('body').on('click','.switch-account',function(){
+            setDefaultFactory();
+        });
+    });
+</script>
