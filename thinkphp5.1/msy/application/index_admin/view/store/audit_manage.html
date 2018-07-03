@@ -10,7 +10,6 @@
 <div id="maxImg" style="display: none;">
 	<img class="max-img" src="" alt="">
 </div>
-<div><span>按审核状态筛选</span></div>
 <div>
 	<select name="" id="" class="select">
 		<option value="" name="auth_status">请选择</option>
@@ -22,7 +21,7 @@
 </div>
 <form name="form1" id="form1">
 	<div class="columns_flex search-row-flex">
-		<input type="text" class="input-filed keyword" name="keyword" placeholder="按产商名或品牌名搜索"/>
+		<input type="text" class="input-filed keyword" name="keyword" placeholder="按产商名搜索"/>
 		<input type="button" value="搜索" class="layer-search-btn search"/>
 	</div>
 </form>
@@ -49,7 +48,7 @@
 		  _this = $(this);
           var id = _this.parents('tr').data('id');
 		  $.ajax({
-			  url: module + 'Brand/getInfo',
+			  url: module + 'Store/getInfo',
 			  data: {id:id},
 			  type: 'get',
 			  beforeSend: function(){
@@ -75,7 +74,7 @@
 						  var postData = {};
 						  postData.auth_status = 2;
 						  postData.id  = id;
-						  $.post(module + 'Brand/audit', postData , function(data){
+						  $.post(module + 'Store/audit', postData , function(data){
 							  if(!data.status){
 								  dialog.error(data.info);
 								  return false;
@@ -90,7 +89,7 @@
 						  var postData ={};
 						  postData.auth_status = 1;
 						  postData.id = id;
-						  $.post(module + 'Brand/audit', postData , function(data){
+						  $.post(module + 'Store/audit', postData , function(data){
 							  if(!data.status){
 								  dialog.error(data.info);
 								  return false;
@@ -114,7 +113,7 @@
 	  $('body').on('click','.view',function(){
 		  var id = $(this).parents('tr').data('id');
 		  $.ajax({
-			  url: module + 'Brand/getInfo',
+			  url: module + 'Store/getInfo',
 			  data: {id:id},
 			  type: 'get',
 			  beforeSend: function(){
@@ -167,11 +166,11 @@
   //获取商品列表
   function getPage(currentPage,selectData) {
 	  $("#list").html($('#loading').html());
-	  var url = module+'Brand/getList';
+	  var url = module+'Store/getList';
 	  var postData = $('#form1').serializeObject();
 	  postData.page = currentPage ? currentPage : 1;
 	  postData.auth_status = selectData;
-	  postData.pageSize = 10;
+	  postData.pageSize = 20;
 	  $.get(url, postData , function(data){
 		  $('#list').html(data);
 	  });

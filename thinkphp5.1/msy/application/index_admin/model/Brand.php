@@ -88,7 +88,7 @@ class Brand extends Model {
 		];
 		$keyword = input('get.keyword','');
 		if($keyword){
-			$where[] = ['b.name', 'like', '%'.trim($keyword).'%'];
+			$where[] = ['b.name|f.name', 'like', '%'.trim($keyword).'%'];
 		}
 		if(input('?get.auth_status')){
 			$authStatus = input('get.auth_status','int');
@@ -105,7 +105,6 @@ class Brand extends Model {
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $list = $this->alias('b')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
-		print_r($this -> getLastSql());exit;
 	}
 
 }

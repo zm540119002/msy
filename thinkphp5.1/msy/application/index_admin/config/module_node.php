@@ -22,5 +22,11 @@ return [
                 ['id'=>301,'name'=>'品牌审核','display'=>1,'controller'=>'Brand','action'=>'auditManage',],
             ],
         ],
+        'store'=>[
+            'id'=>400,'name'=>'厂商品牌审核','type'=>2,
+            'sub_menu' => [
+                ['id'=>401,'name'=>'品牌审核','display'=>1,'controller'=>'Store','action'=>'auditManage',],
+            ],
+        ],
     ],
 ];
