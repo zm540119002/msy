@@ -23,8 +23,16 @@ class Brand extends Base {
             return errorMsg('请求方式错误');
         }
         $model = new \app\index_admin\model\Brand;
-        
-        $list = $model -> pageQuery();
+        $filed = [
+            'b.id,b.name,b.brand_img,b.certificate,b.authorization,b.create_time,b.update_time,b.auth_status,
+             f.name as factory_name,gc.name as goods_category_name'
+        ];
+        $join = [
+            ['factory f','f.id = b.factory_id','left'],
+            ['goods_category gc','gc.id = b.category_id_1','left'],
+        ];
+        $list = $model -> pageQuery([],$filed,$join);
+//        print_r($list);exit;
         $this->assign('list',$list);
         return $this->fetch('audit_list');
     }

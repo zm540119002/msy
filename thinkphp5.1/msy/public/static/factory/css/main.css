@@ -59,7 +59,7 @@
     line-height: 24px;
 }
 .message-center-info p:last-child{
-    margin:20px 0 0;
+    /*margin:20px 0 0;*/
 }
 .vendor-settled-list{
     padding:0 0.15rem 0 0.15rem;

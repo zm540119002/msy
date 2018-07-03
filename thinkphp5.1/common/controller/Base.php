@@ -8,8 +8,10 @@ class Base extends \think\Controller{
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
-        $this->host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
-            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+        $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $this->host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
@@ -18,7 +20,7 @@ class Base extends \think\Controller{
     public function uploadFileToTemp(){
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
-            $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$postData['fileType']);
+            $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64']);
             if(isset($fileName['status'])&& $fileName['status'] == 0){
                 return $fileName;
             }
@@ -29,7 +31,7 @@ class Base extends \think\Controller{
             foreach ($postData['fileBase64'] as $k=>$file){
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                    $fileName = $this ->_uploadSingleFileToTemp($file,$postData['fileType']);
+                    $fileName = $this ->_uploadSingleFileToTemp($file);
                     if(isset($fileName['status'])&& $fileName['status'] == 0){
                         return $fileName;
                     }
@@ -48,7 +50,7 @@ class Base extends \think\Controller{
         foreach ($files as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$_POST['fileType']);
+                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc']);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
@@ -62,40 +64,31 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    private function _uploadSingleFileToTemp($fileBase64,$fileType){
+    private function _uploadSingleFileToTemp($fileBase64){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
-        $ext = '';
-        if($fileType == 'image'){
-            if(strstr($type,'image/jpeg')!=''){
-                $ext = '.jpeg';
-            }elseif(strstr($type,'image/jpeg')!=''){
-                $ext = '.jpg';
-            }elseif(strstr($type,'image/gif')!=''){
-                $ext = '.gif';
-            }elseif(strstr($type,'image/png')!=''){
-                $ext = '.png';
-            }
-        }
-        if($fileType == 'video'){
-            if(strstr($type,'video/mp4')!=''){
-                $ext = '.mp4';
-            }elseif(strstr($type,'video/rm')!=''){
-                $ext = '.rm';
-            }elseif(strstr($type,'video/mtv')!=''){
-                $ext = '.mtv';
-            }elseif(strstr($type,'video/wmv')!=''){
-                $ext = '.wmv';
-            }elseif(strstr($type,'video/avi')!=''){
-                $ext = '.avi';
-            }elseif(strstr($type,'video/3gp')!=''){
-                $ext = '.3gp';
-            }elseif(strstr($type,'video/flv')!=''){
-                $ext = '.flv';
-            }elseif(strstr($type,'video/rmvb')!=''){
-                $ext = '.rmvb';
-            }
+        list($fileType,$ext) = explode('/', $type);
+        $array = [
+            'data:image/jpg;base64',
+            'data:image/gif;base64',
+            'data:image/png;base64',
+            'data:image/jpeg;base64',
+            'data:video/mp4;base64',
+            'data:video/rm;base64',
+            'data:video/mtv;base64',
+            'data:video/wmv;base64',
+            'data:video/avi;base64',
+            'data:video/3gp;base64',
+            'data:video/flv;base64',
+            'data:video/rmvb;base64',
+//            'data:video/3gp;base64',
+//            'image/jpg','image/jpeg','image/gif','image/png',
+//            'video/mp4','video/rm','video/mtv','video/wmv','video/avi','video/3gp','video/flv','video/rmvb',
+        ];
+        if(in_array($type,$array)){
+            $ext = explode(';', $ext);
+            $ext = '.'.$ext[0];
         }
         if(!$ext){
             return errorMsg('不支持此文件格式');
@@ -103,13 +96,13 @@ class Base extends \think\Controller{
         //文件大小 单位M
         $fileSize = strlen($data)/1024/1024;
         //图片限制大小
-        if($fileType == 'image'){
+        if($fileType == 'data:image'){
             if($fileSize >3){//大于2M
                 return errorMsg('请上传小于2M的图片');
             }
         }
         //视频限制大小
-        if($fileType == 'video'){
+        if($fileType == 'data:video'){
             if($fileSize > 10){//大于10
                 return errorMsg('请上传小于10M的视频');
             }

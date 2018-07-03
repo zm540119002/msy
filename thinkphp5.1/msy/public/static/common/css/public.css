@@ -399,7 +399,7 @@ i{
 .top_bar{
     position:relative;
     /*background: #fff;*/
-    border-bottom:1px solid #9fa0a0;
+    /*border-bottom:1px solid #9fa0a0;*/
     padding:10px 0;
 }
 .top_bar h2{
@@ -407,9 +407,9 @@ i{
     font-size: 0.24rem;
 }
 .top_bar a{
-    /*width:28px;*/
-    width:26px;
-    height:28px;
+    width:28px;
+    /*width:26px;*/
+    height:30px;
     /*height:28px;*/
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
@@ -417,6 +417,10 @@ i{
     background-size:28px 342px;
     display:block;
     text-indent:-9999rem;
+}
+.top-switch-bar{
+    height:30px;
+    line-height: 30px;
 }
 .top-switch-bar div:nth-child(2){
     width:50%;
@@ -483,7 +487,7 @@ i{
     background-size:28px 342px;
 }
 .top_search_module{
-    margin:-4px 0 0;
+    /*margin:-4px 0 0;*/
     border-radius:6px;
     flex:5;
     background: #fff;
@@ -591,8 +595,8 @@ i{
     border-bottom:1px solid #d9d9d9;
 }
 .module-navigation .channel_nav{
-    background: #000;
-    border: 1px solid darkslategray;
+    background: #F7F8F8;
+    border: 1px solid transparent;
     border-radius: 30px 30px 0 0;
 }
 .channel_nav a{
@@ -602,18 +606,18 @@ i{
 .supply-nav a{width:33%;}
 .channel_nav a span{
     display:block;
-    width:46px;
-    height:49px;
+    width:48px;
+    height:47px;
     margin:0 auto;
-    background-image:url(../../store/img/store_purchase_type.png);
+    background-image:url(../../common/img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
     background-size:46px 234px;
 }
-.channel_nav a span.union_purchase{background-position:0 2px;}
-.channel_nav a span.exclusive{background-position:0 -45px;}
+.channel_nav a span.union_purchase{background-position:0 1px;}
+.channel_nav a span.exclusive{background-position:0 -46px;}
 .channel_nav a span.classify{background-position:0 -93px;}
 .channel_nav a span.purchasers{background-position:0 -140px;}
-.channel_nav a span.recharge{background-position:0 -188px;}
+.channel_nav a span.recharge{background-position:0 -187px;}
 .channel_nav>a.current:before{
     position: absolute;
     z-index: 1;
@@ -922,7 +926,7 @@ background-position: 0 -27px;
     display: none;
 }
 .login_item .columns_flex span{
-    width:100px;
+    width:1.8rem;
     padding:.18rem 0;
     /*line-height: 32px;*/
     border:1px solid #d9d9d9;
@@ -2213,7 +2217,7 @@ input[type=text]::-webkit-focus-inner {
  .swiper-container {
     position: relative;
     width: 100%;
-    height:275px;
+    height:4.6rem;
     /*height: 100%;*/
     z-index: 1;
     display: -webkit-box;
