@@ -169,6 +169,38 @@ class Store extends Model {
 		}else{
 			return false;
 		}
+	}
 
+	/**
+	 * 分页查询 商品
+	 * @param array $_where
+	 * @param array $_field
+	 * @param array $_join
+	 * @param string $_order
+	 * @return \think\Paginator
+	 */
+	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
+		$where = [
+			['s.status', '=', 0],
+		];
+		$keyword = input('get.keyword','');
+		if($keyword){
+			$where[] = ['s.name|s.name', 'like', '%'.trim($keyword).'%'];
+		}
+		if(input('?get.auth_status')){
+			$authStatus = input('get.auth_status','int');
+			$where[] = ['b.auth_status', '=',$authStatus];
+		}
+		$order = [
+			's.auth_status'=>'asc',
+			's.id'=>'desc'
+		];
+		$join = [];
+		$where = array_merge($_where, $where);
+		$order = array_merge($_order,$order);
+		$join  = array_merge($_join,$join);
+		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+			input('get.pageSize',0,'int') : config('custom.default_page_size');
+		return $list = $this->alias('b')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 	}
 }
