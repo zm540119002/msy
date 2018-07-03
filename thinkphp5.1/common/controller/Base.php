@@ -130,10 +130,10 @@ class Base extends \think\Controller{
         $fileName = generateSN(5) . $ext;
         //带存储路径的文件名
         $photo = $storePath . $fileName;
-        print_r($data);exit;
+
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
-
+        print_r($photo);exit;
         if(false === $returnData){
             return errorMsg('保存文件失败');
         }
