@@ -1,0 +1,57 @@
+<section class="message-center-info f20" style="display:none;" id="factoryList">
+    <ul class="vendorInfoList">
+        {volist name='factoryList' id='vo'}
+        <li data-id="{$vo.id}" class="{eq name='vo.is_default' value='1'}current{/eq}">
+            <span>{$vo.name}</span>
+        </li>
+        {/volist}
+    </ul>
+</section>
+<script type="text/javascript">
+    //设置默认供应商
+    function setDefaultFactory() {
+        var factoryList = $('#factoryList').html();
+        layer.open({
+            title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
+            className:'factoryListLayer',
+            type: 1,
+            content: factoryList,
+            anim: 'up',
+            style: '',
+            success:function(){
+                var winHeight=$(window).height();
+                $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
+            },
+            btn:['确定'],
+            yes:function(index){
+                var postData = {};
+                postData.factoryId = $('.factoryListLayer li.current').data('id');
+                if(!postData.factoryId){
+                    dialog.error('请选择供应商');
+                    return false;
+                }
+                var url = 'setDefaultFactory';
+                $.post(url,postData,function(data){
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.status==1){
+                        layer.close(index);
+                        location.reload();
+                    }
+                });
+            }
+        });
+    }
+    $(function () {
+        var factory = '{:json_encode($factory)}';
+        //如果是多供应商
+        if(factory === 'null'){
+            setDefaultFactory();
+        }
+        //选择效果
+        $('body').on('click','.factoryListLayer li',function(){
+            $('.factoryListLayer li').removeClass('current');
+            $(this).toggleClass('current');
+        });
+    });
+</script>
