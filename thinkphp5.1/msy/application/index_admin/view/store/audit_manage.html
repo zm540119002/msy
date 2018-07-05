@@ -45,14 +45,36 @@
 	  })
 	  //审核操作
 	  $('body').on('click', '.audit', function () {
+		  var _this = $(this);
+		  var postData = {};
+		  postData.id=_this.parents('tr').data('id');
+		  postData.auth_status = _this.data('auth_status');
 		  layer.open({
-			  content :'成功',
+			  content :'是否操作',
 			  btn:['确定','取消'],
 			  end : function(){
 
 			  },
 			  yes:function(index){
-				  console.log(1)
+				  $.ajax({
+					  url: controller+'audit',
+					  type: 'post',
+					  dataType: 'json',
+					  data: postData ,
+					  beforeSend:function(){
+						  //some js code
+					  },
+					  success: function(data){
+						  if(!data.status){
+							  dialog.error(data.info);
+							  return false;
+						  }
+						  dialog.success(data.info);
+					  },
+					  error: function(data){
+
+					  }
+				  });
 				  layer.close(index)
 			  }
 		  })
