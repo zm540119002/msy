@@ -36,7 +36,7 @@ class FactoryStore{
         $storeList = cache(self::$_cache_key_list.$factorId);
         if(!$storeList){
             $model = new \app\factory\model\Store();
-            $storeList = $model -> getStoreList($factorId);
+            $storeList = $model -> getList($factorId);
             cache(self::$_cache_key_list.$factorId, $storeList,config('custom.factory_cache_time'));
         }
         return $storeList;

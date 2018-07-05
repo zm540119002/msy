@@ -42,7 +42,8 @@
 				<ul class="">
 					<!--企业旗舰店-->
 					{notempty name="factoryStore"}
-					<li class="columns_flex store-list factory_store" data-foreign_id="{$factoryStore.id|default=''}">
+					<li class="columns_flex store-list factory_store" data-foreign_id="{$factoryStore.id|default=''}"
+						data-store_name="{$factoryStore.name|default=''}" data-store_logo="{$factoryStore.img|default=''}">
 						{notempty name="factoryStore.img"}
 						<img class="small_default_img" src="public_uploads/{$factoryStore.img|default=''}" alt="">
 						{else /}
@@ -57,7 +58,8 @@
 					{/notempty}
 					{notempty name="brandStores"}
 					{volist name="brandStores" id="vo"}
-					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}" >
+					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}"
+						data-store_name="{$vo.name|default=''}" data-store_logo="{$vo.img|default=''}">
 						{notempty name="vo.img"}
 						<img class="small_default_img" src="public_uploads/{$vo.img|default=''}" alt="">
 						{else /}
@@ -183,8 +185,12 @@ $(function(){
 		}
 		
 		if(storeList.hasClass('current')){
-			foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
+			foreign_id = $('.applyNewStoreLayer .store-list.current').data('foreign_id');
+			name	   = $('.applyNewStoreLayer .store-list.current').data('store_name');
+			logo_img   = $('.applyNewStoreLayer .store-list.current').data('store_logo');
 			postData.foreign_id = foreign_id;
+			postData.name = name;
+			postData.logo_img = logo_img;
 		}
 		else{
 			dialog.success('请选择店铺');
@@ -205,7 +211,6 @@ $(function(){
 				}
 				if(msg.status == 1){
 					dialog.success(msg.info,module+'Store/manage');
-					return false;
 				}
 			},
 			complete:function(){

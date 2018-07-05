@@ -63,9 +63,9 @@ class Goods extends StoreBase
             array_pop( $goodsInfo['details_img']);
             $this -> assign('goodsInfo',$goodsInfo);
             //获取店铺的详情信息
-            $modelStore = new \app\factory\model\Store;
-            $storeInfo = $modelStore -> getStoreInfo($this->store);
-            $this -> assign('storeInfo',$storeInfo);
+//            $modelStore = new \app\factory\model\Store;
+//            $storeInfo = $modelStore -> getStoreInfo($this->store);
+            $this -> assign('storeInfo',$this->store);
         }
 
         return $this->fetch();
@@ -147,7 +147,10 @@ class Goods extends StoreBase
             $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
             //本厂商店铺备份文件
             $modelStore = new \app\factory\model\Store;
-            $storeList = $modelStore -> getStoreList($this -> factory['id']);
+            $where = [
+               ['factory_id','=',$this -> factory['id']]
+            ];
+            $storeList = $modelStore -> getList($where);
             foreach ( $storeList as &$storeInfo) {
                 $fileName = $storePath.$storeInfo['id'].'.txt';
                 if(file_exists($fileName)){

@@ -32,8 +32,8 @@
 			{volist name="storeList" id="vo"}
 			<li class="thead-td" data-id="{$vo.id}">
 				<div class="cols">
-					{notempty name="vo.img"}
-					<img class="left small_default_img" src="public_uploads/{$vo.img}" alt="">
+					{notempty name="vo.logo_img"}
+					<img class="left small_default_img" src="public_uploads/{$vo.logo_img}" alt="">
 					{else /}
 					<img class="left small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 					{/notempty}
