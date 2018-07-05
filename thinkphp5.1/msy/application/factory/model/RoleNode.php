@@ -64,7 +64,7 @@ class RoleNode extends \think\Model {
 		}elseif(!is_array($roleId) && intval($roleId)){
 			$where[] = ['role_id', '=', $roleId];
 		}
-		$list = $this->where($where)->field('role_id,node_id+0')->select();
+		$list = $this->where($where)->field('role_id,node_id')->select();
 		return count($list)?$list->toArray():[];
 	}
 }
