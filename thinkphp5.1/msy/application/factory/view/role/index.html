@@ -108,7 +108,7 @@
 		$('body').on('click','.rolePowerLayer li',function(){
 			$(this).toggleClass('current');
 		});
-		//赋权
+		//赋权-确定
 		var rolePower=$('#rolePower').html();
 		$('body').on('click','.power',function(){
 			var _this = $(this);
@@ -129,6 +129,8 @@
 					$.post(controller+'getRoleNode',postData,function(data){
 						if($.isArray(data) && data.length){
 							$.each($('.rolePowerLayer').find('li'),function(){
+								console.log($(this).data('id'));
+								console.log(data);
 								if($.inArray($(this).data('id'),data)!='-1'){
 									$(this).attr('class','current');
 								}
