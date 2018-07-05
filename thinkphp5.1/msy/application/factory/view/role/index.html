@@ -129,7 +129,9 @@
 					$.post(controller+'getRoleNode',postData,function(data){
 						if($.isArray(data) && data.length){
 							$.each($('.rolePowerLayer').find('li'),function(){
-								if($.inArray($(this).data('id'),data)!='-1'){
+								var aa = $.inArray($(this).data('id'),data)!='-1';
+								console.log(aa);
+								if(aa){
 									console.log($(this).data('id'));
 									console.log(data);
 									$(this).attr('class','current');
