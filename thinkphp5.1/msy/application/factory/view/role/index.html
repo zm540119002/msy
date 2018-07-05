@@ -127,7 +127,6 @@
 					var postData = {};
 					postData.roleId = _thisLi.data('id');
 					$.post(controller+'getRoleNode',postData,function(data){
-						console.log(data);
 						if($.isArray(data) && data.length){
 							$.each($('.rolePowerLayer').find('li'),function(){
 								if($.inArray($(this).data('id'),data)!='-1'){
