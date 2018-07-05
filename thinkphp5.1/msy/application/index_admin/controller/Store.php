@@ -11,9 +11,6 @@ class Store extends Base {
     public function auditManage(){
         return $this->fetch();
     }
-    public function info(){
-
-    }
 
     /**
      *  分页查询
@@ -23,32 +20,16 @@ class Store extends Base {
             return errorMsg('请求方式错误');
         }
         $model = new \app\index_admin\model\Store;
-        $list = $model -> pageQuery();
+        $filed = [
+            's.id,s.name,s.foreign_id,s.store_type,s.run_type,s.auth_status,s.create_time,s.update_time,
+             s.logo_img,f.name as factory_name'
+        ];
+        $join = [
+            ['factory f','f.id = s.factory_id','left'],
+        ];
+        $list = $model -> pageQuery([],$filed,$join);
         $this->assign('list',$list);
         return $this->fetch('audit_list');
-    }
-    /**
-     *  单条数据信息
-     */
-    public function getInfo(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $id = (int)input('get.id');
-        if(!$id){
-            return errorMsg('参数错误');
-        }
-        $model = new \app\index_admin\model\Store;
-        $where = [
-            ['id','=',$id]
-        ];
-        $info = $model -> getInfo($where);
-        if(empty($info)){
-            return errorMsg('不存在此店铺');
-        }
-        $info = $model -> getStoreInfo($info);
-        $this->assign('info',$info);
-        return $this->fetch('audit_info');
     }
 
     /**

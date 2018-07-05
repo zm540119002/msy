@@ -82,9 +82,6 @@ class Base extends \think\Controller{
             'data:video/3gp;base64',
             'data:video/flv;base64',
             'data:video/rmvb;base64',
-//            'data:video/3gp;base64',
-//            'image/jpg','image/jpeg','image/gif','image/png',
-//            'video/mp4','video/rm','video/mtv','video/wmv','video/avi','video/3gp','video/flv','video/rmvb',
         ];
         if(in_array($type,$array)){
             $ext = explode(';', $ext);

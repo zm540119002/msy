@@ -47,8 +47,6 @@
                 $('.storeId').val(msg.id);
                 if(msg.logo_img){
                     $('.store-logo-img').attr('src',uploads+msg.logo_img);
-                }else{
-                    $('.store-logo-img').attr('src',uploads+msg.img);
                 }
                 $('.store-name').text(msg.name);
                 if(msg.store_type == 1){
