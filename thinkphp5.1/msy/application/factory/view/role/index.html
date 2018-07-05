@@ -108,7 +108,7 @@
 		$('body').on('click','.rolePowerLayer li',function(){
 			$(this).toggleClass('current');
 		});
-		//赋权
+		//赋权-确定
 		var rolePower=$('#rolePower').html();
 		$('body').on('click','.power',function(){
 			var _this = $(this);
@@ -121,14 +121,18 @@
 				content:rolePower,
 				btn:['确定','取消'],
 				success:function(){
+					console.log(123);
 					var winHeight=$(window).height();
 					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
 					$('.rolePowerLayer').find('.role_name').text(_thisLi.find('span').text());
 					var postData = {};
 					postData.roleId = _thisLi.data('id');
 					$.post(controller+'getRoleNode',postData,function(data){
+						console.log(data);
 						if($.isArray(data) && data.length){
 							$.each($('.rolePowerLayer').find('li'),function(){
+								console.log($(this).data('id'));
+								console.log(data);
 								if($.inArray($(this).data('id'),data)!='-1'){
 									$(this).attr('class','current');
 								}
