@@ -49,7 +49,7 @@ class Role extends FactoryBase
         }
         $modelRoleNode = new \app\factory\model\RoleNode();
         $list = $modelRoleNode->getList();
-        $list = array_values($list);
+        $list = array_walk($list,'intval');
         var_dump($list);
         return array_column($list,'node_id');
     }
