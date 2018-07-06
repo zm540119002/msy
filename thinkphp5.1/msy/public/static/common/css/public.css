@@ -449,6 +449,7 @@ i{
 }
 .top-title{
     border:none;
+    padding-bottom:10px;
 }
 .top-title a{
     position:absolute;
@@ -466,6 +467,10 @@ i{
 .top-nav-bar a.home{
     /*background-position:0 -172px;*/
     background-position:0 -248px;
+}
+.top-title a.home{
+    /*background-position:0 -172px;*/
+    background-position:0 -253px;
 }
 .top_bar a.goods-video{
     width:28px;
