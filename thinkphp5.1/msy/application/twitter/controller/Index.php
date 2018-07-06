@@ -1,5 +1,5 @@
 <?php
-namespace app\cloud_twitter\controller;
+namespace app\twitter\controller;
 
 class Index extends TwitterBase{
     /**首页

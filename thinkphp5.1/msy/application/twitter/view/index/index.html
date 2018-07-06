@@ -1,0 +1,26 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="factory_css/main.css">
+{/block}
+{block name="content"}
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_factory.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+	});
+</script>
+{/block}

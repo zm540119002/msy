@@ -1,5 +1,5 @@
 <?php
-namespace app\cloud_twitter\controller;
+namespace app\twitter\controller;
 /**
  * Class TwitterBase
  * @package app\user\controller
