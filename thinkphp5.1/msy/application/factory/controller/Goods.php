@@ -103,6 +103,7 @@ class Goods extends StoreBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
+        print_r($this->store);exit;
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
