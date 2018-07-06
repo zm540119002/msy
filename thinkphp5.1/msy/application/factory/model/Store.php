@@ -26,6 +26,7 @@ class Store extends Model {
 		if(input('?post.id')){
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
+			print_r($this->getLastSql());exit;
 			if(false !== $result){
 				return successMsg("成功");
 			}
