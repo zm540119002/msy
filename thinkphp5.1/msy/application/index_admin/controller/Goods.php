@@ -23,15 +23,14 @@ class Goods extends Base {
         $filed = [
             'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,
-                s.name as store_name,f.name as factory_name'
+                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.store_id,
+                s.name as store_name,f.id as factory_id,f.name as factory_name'
         ];
         $join = [
             ['store s','g.store_id = s.id','left'],
             ['factory f','f.id = s.factory_id','left'],
         ];
-        $list = $model -> pageQuery([],$filed,$join,[],'s.name');
-        print_r($model->getLastSql());exit;
+        $list = $model -> pageQuery([],$filed,$join);
         $this->assign('list',$list);
         return $this->fetch('audit_list');
     }

@@ -86,7 +86,7 @@ class Goods extends Model {
 	 * @param string $_order
 	 * @return \think\Paginator
 	 */
-	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[],$_group=''){
+	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
 		$where = [
 			['g.status', '=', 0],
 		];
@@ -99,6 +99,8 @@ class Goods extends Model {
 			$where[] = ['g.auth_status', '=',$authStatus];
 		}
 		$order = [
+			'g.store_id'=>'desc',
+			'f.id'=>'desc',
 			'g.shelf_status'=>'asc',
 			'g.id'=>'desc'
 		];
@@ -108,6 +110,6 @@ class Goods extends Model {
 		$join  = array_merge($_join,$join);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $list = $this->alias('g')->join($join)->where($where)->field($_field)->order($order)->group($_group)->paginate($pageSize);
+		return $list = $this->alias('g')->join($join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 	}
 }
