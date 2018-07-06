@@ -18,7 +18,7 @@ button,input,textarea{
     vertical-align: middle;
 }
 textarea{-webkit-appearance: none;}
-body{font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333;background: #fff;}
+body{width: 6.4rem;margin: 0 auto;font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333;background: #fff;}
 .clearfix:after{content:"."; display:block; height:0; clear:both;visibility:hidden;}
 .f06c{color:#06c;}
 .fl{float:left;}
@@ -400,7 +400,7 @@ i{
     position:relative;
     /*background: #fff;*/
     /*border-bottom:1px solid #9fa0a0;*/
-    padding:10px 0;
+    padding:10px 0 0;
 }
 .top_bar h2{
     text-align: center;
@@ -637,6 +637,9 @@ i{
     transition: all 0.5s;
     margin-left: -15px;
 }
+.twitter-nav a span{
+     background-image:url(../../common/img/icons/twitter-icons.png);
+}
 ul>li:hover>a:before{
 transform: scale3d(1, 1, 1);
 color: #ed6d00;
@@ -738,7 +741,7 @@ background-position: 0 -27px;
     width:50%;
 }
 /*内容框*/
-.content-box{
+.content-box,.content-padding{
     padding:0.20rem 0.15rem;
 }.content-box:last-child{
     padding-bottom:1rem;
@@ -2394,6 +2397,84 @@ input[type=text]::-webkit-focus-inner {
     padding:0.15rem 0;
     border-radius:4px;
     text-align:center;
+}
+.user-concern.columns_flex{
+    position:relative;
+    box-sizing: border-box;
+    padding:0.15rem 0;
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+    place-content: flex-start;
+    flex-shrink: 0;
+    /*width: 351px;*/
+    -webkit-box-pack: start;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.user-concern .row{
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+    place-content: flex-start;
+    flex: 1 1 0%;
+    -webkit-box-flex: 1;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+}
+
+.user-concern .row:nth-of-type(1),
+.user-concern .row:nth-of-type(2){
+    flex: 1 1 auto;
+    /*padding: 0px 2.5px;*/
+    height: 20px;
+    margin-left: 12px;
+}
+.date-range{
+    margin:0 0 5px 0;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+    place-content: flex-start;
+    /*flex: 1 1 0%;
+    -webkit-box-flex: 1;*/
+    -webkit-box-align: center;
+    align-items: center;
+    /*-webkit-box-pack: start;*/
+}
+.user-concern .row:nth-of-type(1){
+    margin-left:2px;
+}
+.user-concern i{
+    display: inline-block;
+    width:22px;
+    height:15px;
+    background-image: url(../../common/img/icons/store-dynamin-icons.png);
+    background-repeat: no-repeat;
+    background-size: 22px 84px;
+    color:transparent;
+    font-weight: normal;
+    font-style:normal;
+}
+.user-concern i.date-time{
+    width:20px;
+    height:18px;
+    background-position:0 0;
+    margin:0 2px 0 0;
+}
+.user-concern i.browse-records{
+    background-position:0 -22px;
+}
+.user-concern i.comment{
+    width:20px;
+    background-position:0 -44px;
+}
+.user-concern i.thumbs-up{
+    width:18px;
+    height:20px;
+    background-position:0 -66px;
 }
 /*立即购买数量*/
 .quantity_wrapper input,

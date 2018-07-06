@@ -304,13 +304,18 @@
 <script type="text/javascript">
 	$(function(){
 		//轮播
-		var swiper = new Swiper('.swiper-container', {
+        var swiper1 = new Swiper('.swiper-container', {
 			spaceBetween: 30,
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true
 			}
 		});
+		swiper('.swiper-focus-container');
+        $('.more-text-box').moreText({
+            mainCell:".more-text",
+            openBtn:'全部>'
+        });
 	});
 </script>
 {/block}

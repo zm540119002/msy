@@ -463,6 +463,7 @@ $(function(){
 $(window).on('scroll',function(){
     var scrolltop=$(document).scrollTop();
     if(scrolltop>=300){
+        $('.fixedtop').addClass('active');
         $('.right_sidebar').show();
     }else{
         $('.right_sidebar').hide();
