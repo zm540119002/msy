@@ -1,7 +1,7 @@
 <?php
 namespace app\cloud_twitter\controller;
 
-class Index extends \common\controller\UserBase{
+class Index extends TwitterBase{
     /**首页
      */
     public function index(){
