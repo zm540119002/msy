@@ -64,6 +64,7 @@ return [
         'practitioner_img' => Request::domain() .'/static/practitioner/img',
         'practitioner_js' => Request::domain() .'/static/practitioner/js',
         'practitioner_css' => Request::domain() .'/static/practitioner/css',
+        'practitioner_video' => Request::domain() .'/static/practitioner/video',
         'practitioner_admin_img' => Request::domain() .'/static/practitioner_admin/img',
         'practitioner_admin_js' => Request::domain() .'/static/practitioner_admin/js',
         'practitioner_admin_css' => Request::domain() .'/static/practitioner_admin/css',

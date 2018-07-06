@@ -195,7 +195,8 @@ class Goods extends Model {
 		$order = array_merge($_order,$order);
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->alias('g')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+		$this->alias('g')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
+		print_r($this->getLastSql());exit;
 	}
 
 
