@@ -103,7 +103,6 @@ class Store extends Model {
 			$this->startTrans();
 			$data = array('is_default' => 1);
 			$result = $this->allowField(true)->save($data,['id' => $id,'factory_id'=>$factoryId]);
-			print_r($this->getLastSql());
 			if(false === $result){
 				$this->rollback();
 				return errorMsg('修改默认失败');
