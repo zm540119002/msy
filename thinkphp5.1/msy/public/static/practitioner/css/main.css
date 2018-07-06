@@ -1274,3 +1274,9 @@ transparent;
 .follow-video-msg{
     width:100%;
 }
+.swiper-focus-container .store-logo{
+    display:block;
+    width:70px;
+    height:70px;
+    margin:.12rem auto .1rem;
+}
