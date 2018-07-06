@@ -55,6 +55,10 @@ return [
         'factory_admin_js' => Request::domain() .'/static/factory_admin/js',
         'factory_admin_css' => Request::domain() .'/static/factory_admin/css',
 
+        'practitioner_img' => Request::domain() .'/static/practitioner/img',
+        'practitioner_js' => Request::domain() .'/static/practitioner/js',
+        'practitioner_css' => Request::domain() .'/static/practitioner/css',
+
         'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
         'public_admin_common_js' => Request::domain() .'/static/admin/common/js',
         'public_admin_common_css' => Request::domain() .'/static/admin/common/css',
