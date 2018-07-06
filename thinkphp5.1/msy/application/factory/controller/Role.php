@@ -49,6 +49,9 @@ class Role extends FactoryBase
         }
         $modelRoleNode = new \app\factory\model\RoleNode();
         $list = $modelRoleNode->getList();
+        foreach($list as &$v){
+            $v['node_id']=intval($v['node_id']);
+        }
         return array_column($list,'node_id');
     }
 
