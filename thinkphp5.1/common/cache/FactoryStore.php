@@ -40,7 +40,6 @@ class FactoryStore{
                 ['factory_id','=',$factorId]
             ];
             $storeList = $model -> getList($where);
-            print_r($model->getLastSql());exit;
             cache(self::$_cache_key_list.$factorId, $storeList,config('custom.factory_cache_time'));
         }
         return $storeList;
