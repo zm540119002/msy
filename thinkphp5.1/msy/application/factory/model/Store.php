@@ -103,7 +103,7 @@ class Store extends Model {
 			$this->startTrans();
 			$data = array('is_default' => 1);
 			$result = $this->allowField(true)->save($data,['id' => $id,'factory_id'=>$factoryId]);
-			print_r($this->getLastSql());exit;
+			print_r($this->getLastSql());
 			if(false === $result){
 				$this->rollback();
 				return errorMsg('修改默认失败');
@@ -113,6 +113,7 @@ class Store extends Model {
 				['factory_id','=',$factoryId],
 			];
 			$result = $this ->where($where)->setField('is_default',0);
+			print_r($this->getLastSql());exit;
 			if(false === $result){
 				$this->rollback();
 				return errorMsg('修改失败');
