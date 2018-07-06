@@ -26,7 +26,6 @@ class Store extends Model {
 		if(input('?post.id')){
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
-			print_r($this->getLastSql());exit;
 			if(false !== $result){
 				return successMsg("成功");
 			}
@@ -104,6 +103,7 @@ class Store extends Model {
 			$this->startTrans();
 			$data = array('is_default' => 1);
 			$result = $this->allowField(true)->save($data,['id' => $id,'factory_id'=>$factoryId]);
+			print_r($this->getLastSql());exit;
 			if(false === $result){
 				$this->rollback();
 				return errorMsg('修改默认失败');
