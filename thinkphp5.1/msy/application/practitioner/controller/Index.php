@@ -1,7 +1,7 @@
 <?php
-namespace app\twitter\controller;
+namespace app\practitioner\controller;
 
-class Index extends TwitterBase{
+class Index extends PractitionerBase{
     /**首页
      */
     public function index(){

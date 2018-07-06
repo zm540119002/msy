@@ -1,12 +1,12 @@
 <?php
-namespace app\twitter\controller;
+namespace app\practitioner\controller;
 /**
  * Class TwitterBase
  * @package app\user\controller
  * 店铺基础类
  */
-class TwitterBase extends \common\controller\UserBase{
-    protected $twitter = null;
+class PractitionerBase extends \common\controller\UserBase{
+    protected $practitioner = null;
     public function __construct(){
         parent::__construct();
         if($this->user){
