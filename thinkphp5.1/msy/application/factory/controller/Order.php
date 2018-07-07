@@ -208,8 +208,8 @@ class Order extends StoreBase
         return $this->order->setDeliveryGoods($this->store['id'], $order_id, $goods);
     }
 
-    public function setDelivery($order_id, $__token__)
-    { echo $__token__;
+    public function setDelivery($order_id)
+    {
         $result = $this->validate(
             [
                 'order_id' => intval($order_id),

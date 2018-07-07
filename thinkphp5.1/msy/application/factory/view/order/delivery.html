@@ -80,7 +80,7 @@
         $.ajax({
             type: 'POST',
             url: "{:url('Order/setDelivery')}",
-            data:{order_id:order_id, '__token__':$("input[name='__token__']").val()},
+            data:{order_id:order_id},
             dataType:'json',
             success:function(e){
                 if(e.status==1){
