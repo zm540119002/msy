@@ -26,12 +26,12 @@
 				</div>
 			</div>
 			<div class="account-edit-btn columns_flex">
-				{if $info.status === 0}
+				{if $info.status == 0}
 					<a href="javascript:void(0);" option="stop">
 						<span class="stop-icon ic"></span>
 						<span class="btn-status">停用账号</span>
 					</a>
-				{elseif $info.status === 1 /}
+				{elseif $info.status == 1 /}
 					<a href="javascript:void(0);" option="activate">
 						<span class="activate-icon ic"></span>
 						<span class="btn-status">激活账号</span>

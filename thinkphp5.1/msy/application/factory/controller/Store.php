@@ -13,7 +13,10 @@ class Store extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Store();
-        $storeList =  $model -> getList($this -> factory['id']);
+        $where = [
+            ['factory_id','=',$this -> factory['id']]
+        ];
+        $storeList =  $model -> getList($where);
         $this -> assign('storeList',$storeList);
         return $this->fetch();
     }
