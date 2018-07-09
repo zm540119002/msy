@@ -39,11 +39,13 @@ $(function(){
     //var onOff = true;
     $('body').on('click','.view-password',function(){
         var _this=$(this);
-        _this.toggleClass('active');
+        //_this.toggleClass('active');
         if(_this.prev().attr('type')=='password'){
             $('.login_item .password').attr('type','text');
+            $('.view-password').addClass('active');
         }else{
             $('.login_item .password').attr('type','password');
+            $('.view-password').removeClass('active');
         }
     });
 
