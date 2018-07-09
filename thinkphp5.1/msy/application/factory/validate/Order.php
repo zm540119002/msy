@@ -12,8 +12,9 @@ use think\Validate;
 class Order extends Validate
 {
     protected $rule = [
-        'order_id'  =>  'require|integer|token',
+        'order_id'  =>  'require|integer',
         'store_id' => 'require|integer',
+        '__token__' => 'require|token',
     ];
 
     protected $message = [

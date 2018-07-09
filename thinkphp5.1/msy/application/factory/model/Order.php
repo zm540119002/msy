@@ -267,8 +267,7 @@ class Order extends Model
         $data = $this->where($where)->field('status_unpack')->find();
         if(is_null($data)){
             return errorMsg('订单不存在');
-        }
-
+        } 
         $status_unpack = $data->getData('status_unpack');
         if( !in_array($status_unpack, [2, 3, 6, 8, 9]) ){
             return errorMsg('此订单状态下不可发货');
