@@ -1190,7 +1190,14 @@ background-position: 0 -27px;
 .layui-m-layerchild.factoryListLayer,
 .layui-m-layerchild.storeListLayer,
 .layui-m-layerchild.editCompanyPicLayer{
-    position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;
+    position:fixed; 
+    left:0; 
+    top:0; 
+    width:100%; 
+    height:100%; 
+    border: none; 
+    -webkit-animation-duration: .5s; 
+    animation-duration: .5s;
 }
 .vendorInfoLayer .layui-m-layercont,
 .addTagLayer .layui-m-layercont,
@@ -1220,7 +1227,14 @@ background-position: 0 -27px;
 .layui-m-layerchild.uploadSingleVideoLayer,
 .layui-m-layerchild.uploadThumbnailLayer,
 .layui-m-layerchild.categoryContentLayer{
-    position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;
+    position:fixed; 
+    left:0; 
+    top:0; 
+    width:100%; 
+    height:100%; 
+    border: none; 
+    -webkit-animation-duration: .5s; 
+    animation-duration: .5s;
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
@@ -2516,6 +2530,10 @@ input[type=text]::-webkit-focus-inner {
     background-position:center;
 }
 /*商品促销活动*/
+.upload-company-map .picture-module{
+   width:2.6rem;
+   height:2.6rem;
+}
 .linked-goods{
     display: block;
     width:100%;
