@@ -46,9 +46,9 @@
                     </section>
                 </dd>
             </dl>
-            <div id="order_detail"></div>{:token()}
+            <div id="order_detail"></div>
             <div id="delivery" data_order_id="">交付发货</div>
-            <div></div>
+            {:token()}
         </div>
     </section>
 </article>
@@ -72,7 +72,8 @@
     });
 
     $('#delivery').click(function(){
-        var order_id=$('#delivery').attr('data_order_id');
+        var order_id=$('#delivery').attr('data_order_id'),
+                token=$("input[name='__token__']").val();
         if(!order_id){
             alert('订单信息有误');
             return false;
@@ -80,7 +81,7 @@
         $.ajax({
             type: 'POST',
             url: "{:url('Order/setDelivery')}",
-            data:{order_id:order_id},
+            data:{order_id:order_id, token:token},
             dataType:'json',
             success:function(e){
                 if(e.status==1){
