@@ -25,4 +25,8 @@ return [
     'sms_template_code' => 'SMS_127169884',//短信模板CODE（阿里云）
     'factory_cache_time' => 60 * 60 * 24,//供应商缓存时间
     'store_cache_time' => 60 * 60 * 24,//厂商缓存时间
+    'system_type' => [
+        '1000' => 'factory',
+        '1001' => 'store',
+    ],
 ];
