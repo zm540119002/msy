@@ -430,6 +430,10 @@ function forgetPasswordDialog(content){
         className:'forgetPasswordLayer',
         content:content,
         btn:['确定'],
+        success:function(){
+            $('.login_item .password').attr('type','password');
+            $('.view-password').removeClass('active');
+        },
         yes:function(index){}
     });
 }

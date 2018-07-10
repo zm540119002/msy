@@ -10,13 +10,16 @@ use app\factory\model\Order as OrderModel;
 
 class Order extends StoreBase
 {
-    private  $order;
+    private  $order, $validate;
 
     public function __construct()
     {
         parent::__construct();
         if(!is_object($this->order)){
             $this->order = new OrderModel;
+        }
+        if(!is_object($this->validate)){
+            $this->validate = new \think\Validate;
         }
     }
 
@@ -78,6 +81,18 @@ class Order extends StoreBase
     //根据订单号查订单详情
     public function  getOrderDetail($order_id, $data_html=true)
     {
+        $this->validate->rule([
+            'order_id'  => 'require|integer',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.integer' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_id,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
         $ret = $this->order->getOrderDetail($this->store['id'], $order_id);
         if($ret['status']=0){
             return $ret['info'];
@@ -133,20 +148,21 @@ class Order extends StoreBase
         return $html;
     }
 
-    /**
-     * 更改订单状态
-     * @param number|string $order_id 订单号
-     * @param number $status 订单状态
-     * @return boolean
-     */
-    public function setStatusUnpack($order_id, $status)
-    {
-        return $this->order->setStatusUnpack($this->store['id'], $order_id, $status);
-    }
-
     public function isOwnOrder($order_sn)
     {
         //是否拥有此订单
+        $this->validate->rule([
+            'order_id'  => 'require|string',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.string' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_sn,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
         $ret = $this->order->isOwnOrder($this->store['id'], $order_sn);
         if($ret['status']==0){
             return $ret;
@@ -162,6 +178,18 @@ class Order extends StoreBase
 
     public function getExpress($order_sn)
     {
+        $this->validate->rule([
+            'order_id'  => 'require|string',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.string' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_sn,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
        $ret = $this->order->getOrderExpress($this->store['id'], $order_sn);
         if($ret['status']==0){
             return $ret;
@@ -205,22 +233,38 @@ class Order extends StoreBase
 
     public function setDeliveryGoods($order_id, $goods)
     {
+        $this->validate->rule([
+                'order_id'  => 'require|integer',
+                'goods' => 'require|array',
+            ])->message([
+                'order_id.require' => '订单号不存在',
+                'order_id.integer' => '订单号数据错误',
+                'goods.require' => '货品不存在',
+                'goods.array' => '货品数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_id,
+            'goods' => $goods,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
         return $this->order->setDeliveryGoods($this->store['id'], $order_id, $goods);
     }
 
-    public function setDelivery($order_id, $token)
+    public function setDelivery($order_id)
     {
-        $result = $this->validate(
-            [
-                'order_id' => intval($order_id),
-                'store_id' => $this->store['id'],
-                '__token__' => $token,
-            ],
-            'app\factory\validate\Order');
-
-        if (true !== $result) {
-            // 验证失败 输出错误信息
-            return errorMsg($result);
+        $this->validate->rule([
+            'order_id'  => 'require|integer',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.integer' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_id,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
         }
         return $this->order->setDelivery($this->store['id'], $order_id);
     }
