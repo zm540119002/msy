@@ -93,7 +93,7 @@
 		if(e.keyCode == 13){
 			var goods_id = parseInt( $.trim($(this).val()) );
 			if(goods_id<=0){
-				alert('您输入的商品号有误');
+				dialog.error('您输入的商品号有误');
 				return false;
 			}
 			var send_ = $('.send_'+goods_id), number_ = $('.number_'+goods_id);
@@ -101,10 +101,10 @@
 				send_.text( parseInt(send_.text(), 10)+1 );
 				if( (parseInt(send_.text(), 10))>parseInt(number_.text()) ){
 					$('.goods_all').find(number_).parents('dl').css('background', 'red');
-					alert('商品数量超出');
+					dialog.error('商品数量超出');
 				}
 			}else{
-				alert('商品编号不存在');
+				dialog.error('商品编号不存在');
 			}
 		}
 	});
@@ -122,7 +122,7 @@
 	$('#check_goods').on('click', '#submit_goods', function(){
 		var obj = {}, order_id = $('#data_all').attr('data_order_id');
 		if(order_id<=0){
-			alert('订单信息有误');
+			dialog.error('订单信息有误');
 			return false;
 		}
 		$('.goods_all').each(function(i){
@@ -130,7 +130,7 @@
 					send = parseInt( $(this).find('.send_'+$(this).attr('data')).text(), 10),
 					old_send = parseInt( $(this).find('.send_'+$(this).attr('data')).attr('data'), 10);
 			if(send>number_){
-				alert('发货数量超出');
+				dialog.error('发货数量超出');
 				return false;
 			}
 			if(send>old_send){
@@ -138,7 +138,7 @@
 			}
 		});
 		if($.isEmptyObject(obj)){
-			alert('请扫描发货商品');
+			dialog.error('请扫描发货商品');
 			return false;
 		}
 		$.ajax({
@@ -147,7 +147,7 @@
 			data: {'goods':obj, 'order_id': order_id},
 			dataType: 'json',
 			success: function(e){
-				alert(e.info);
+				dialog.error(e.info);
 			}
 		});
 	});
@@ -156,7 +156,7 @@
 	{
 		var order_sn = $.trim( $('#order').val() );
 		if(!order_sn){
-			alert('请输入订单号');
+			dialog.error('请输入订单号');
 			return false;
 		}
 		$.ajax({
@@ -170,8 +170,9 @@
 					$('#data_all').attr('data_order_sn', e.order_sn);
 					$('#order_detail').empty().append(e.data);
 					$('#check_goods').empty().css({'display':'block'}).text('进行订单验货');
+					$('#order').val('');
 				}else{
-					alert(e.info);
+					dialog.error(e.info);
 				}
 			}
 		});
