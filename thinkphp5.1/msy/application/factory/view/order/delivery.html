@@ -72,16 +72,16 @@
     });
 
     $('#delivery').click(function(){
-        var order_id=$('#delivery').attr('data_order_id'),
-                token=$("input[name='__token__']").val();
+        var order_id=$('#delivery').attr('data_order_id');
+               // token=$("input[name='__token__']").val();
         if(!order_id){
-            alert('订单信息有误');
+            dialog.error('订单信息有误');
             return false;
         }
         $.ajax({
             type: 'POST',
             url: "{:url('Order/setDelivery')}",
-            data:{order_id:order_id, token:token},
+            data:{order_id:order_id},
             dataType:'json',
             success:function(e){
                 if(e.status==1){
@@ -97,7 +97,7 @@
     {
         var order_sn = $.trim( $('#order').val() );
         if(!order_sn){
-            alert('请输入订单号');
+            dialog.error('请输入订单号');
             return false;
         }
         $.ajax({
@@ -109,6 +109,7 @@
                 if(e.status==1){
                     $('#order_detail').empty().append(e.data);
                     $('#delivery').css({'display':'block'}).attr('data_order_id', e.order_id);
+                    $('#order').val('');
                 }else{
                     dialog.error(e.info);
                 }
