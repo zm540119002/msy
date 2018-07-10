@@ -17,6 +17,7 @@ class Promotion extends StoreBase
     {
         $model = new \app\factory\model\Promotion;
         if(request()->isPost()){
+            print_r(input());exit;
             return $model -> edit($this->store['id']);
         }
         if(input('?id') && $this->store['id']){

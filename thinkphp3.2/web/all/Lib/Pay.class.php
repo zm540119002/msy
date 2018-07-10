@@ -185,9 +185,7 @@ EOF;
         $input->SetTotal_fee($refund['total_price']);			//订单标价金额，单位为分
         $input->SetRefund_fee($refund['refund_amount']);			//退款总金额，订单总金额，单位为分，只能为整数
         $input->SetOp_user_id($merchid);
-
         $result = \WxPayApi::refund($input);	//退款操作
-
         // 这句file_put_contents是用来查看服务器返回的退款结果 测试完可以删除了
         //file_put_contents(APP_ROOT.'/Api/wxpay/logs/log3.txt',arrayToXml($result),FILE_APPEND);
         return $result;

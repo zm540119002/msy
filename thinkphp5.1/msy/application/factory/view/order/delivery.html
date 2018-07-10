@@ -46,9 +46,9 @@
                     </section>
                 </dd>
             </dl>
-            <div id="order_detail"></div>{:token()}
+            <div id="order_detail"></div>
             <div id="delivery" data_order_id="">交付发货</div>
-            <div></div>
+            {:token()}
         </div>
     </section>
 </article>
@@ -73,8 +73,9 @@
 
     $('#delivery').click(function(){
         var order_id=$('#delivery').attr('data_order_id');
+               // token=$("input[name='__token__']").val();
         if(!order_id){
-            alert('订单信息有误');
+            dialog.error('订单信息有误');
             return false;
         }
         $.ajax({
@@ -96,7 +97,7 @@
     {
         var order_sn = $.trim( $('#order').val() );
         if(!order_sn){
-            alert('请输入订单号');
+            dialog.error('请输入订单号');
             return false;
         }
         $.ajax({
@@ -108,6 +109,7 @@
                 if(e.status==1){
                     $('#order_detail').empty().append(e.data);
                     $('#delivery').css({'display':'block'}).attr('data_order_id', e.order_id);
+                    $('#order').val('');
                 }else{
                     dialog.error(e.info);
                 }

@@ -9,18 +9,9 @@
 	<div class="content-box">
 		<span class="content-label">已选择促销商品</span>
 		<ul class="columns_flex l-r-sides promotional-goods-list">
-			{notempty name="promotionInfo.goods_id"}
-			<li data-promotional-id="{$promotionInfo.goods_id}">
-				{notempty name="$promotionInfo.thumb_img"}
-				<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.thumb_img|default=''}" alt="">
-				{else /}
-				<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
-				{/notempty}
-				<span class="">{$promotionInfo.goods_name}</span>
-				<a href="javascript:void(0);" class="promotional-close-btn">X</a>
-			</li>
-			{/notempty}
+
 		</ul>
+		<div class="error_tipc"></div>
 		<form name="form1" id="form1">
 			<div class="columns_flex search-row-flex">
 				<input type="text" class="input-filed search-goods keyword" name="keyword" placeholder="搜索商品"/>
@@ -48,9 +39,10 @@
 			</div>
 			<div class="content-row-list">
 				<span class="content-label">第2：上传促销活动图片</span>
-				<p>（宽1000像素高400-1000像素 ）</p>
-				<div class="upload-company-map f24">
+				
+				<div class="upload-company-map columns_flex l-r-sides f24">
 					<div>
+						<p>一级页面广告图</p>
 						<div class="picture-module company-picture-module active">
 							<input type="file" class="uploadImg uploadSingleImg" name="">
 							{notempty name="$promotionInfo.img"}
@@ -58,7 +50,19 @@
 							{else /}
 							<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
 							{/notempty}
-							<input type="hidden" class="business-license img" value="{$promotionInfo.img|default=''}" name="img">
+							<input type="hidden" class="img" value="{$promotionInfo.img|default=''}" name="first_img">
+						</div>
+					</div>
+					<div>
+						<p>二级页面首焦图</p>
+						<div class="picture-module company-picture-module active">
+							<input type="file" class="uploadImg uploadSingleImg" name="">
+							{notempty name="$promotionInfo.img"}
+							<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.img|default=''}" alt="">
+							{else /}
+							<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+							{/notempty}
+							<input type="hidden" class="img" value="{$promotionInfo.img|default=''}" name="second_img">
 						</div>
 					</div>
 				</div>
@@ -67,14 +71,6 @@
 				<span class="content-label">第3：促销活动图片链接到商品</span>
 				<a href="javascript:void(0);" class="linked-goods green-small-btn">链接商品</a>
 				<input type="hidden" value="{$promotionInfo.goods_id|default=''}" class="linked-goods-id">
-			</div>
-			<div class="content-row-list">
-				<span class="content-label">第4：填写促销活动特价</span>
-				<div class="columns_flex">
-					<input type="text" class="input-filed f24" name="promotion_price" placeholder="特价￥00.00" value="{$promotionInfo.promotion_price|default=''}">
-					<span>优惠价￥<price>5.00<price></span>
-					<span>零售价￥<price>5.00<price></span>
-				</div>
 			</div>
 			<div class="content-row-list">
 				<p>第5：促销活动特价期限（促销活动自动上架和下架）</p>
