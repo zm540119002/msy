@@ -43,7 +43,7 @@ $(function(){
                         return false;
                     }
                     selectedGood={
-                        goodsId:goodsId,
+                        goods_id:goodsId,
                         special:special,
                     }
                     selectedGoods.push(selectedGood);

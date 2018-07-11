@@ -23,9 +23,21 @@ class Promotion extends Model {
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		if(!empty($data['img'])){
-			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
+		if(!empty($data['first_img'])){
+			$data['first_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['first_img']));
 		}
+		if(!empty($data['second_img'])){
+			$data['second_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['second_img']));
+		}
+		//
+		$selectedGoods = json_decode($data['goods'],true);
+		$selectedGoodsIds = [];
+		foreach ($selectedGoods as $key=>$value){
+			$selectedGoodsIds[] = $value['goods_id'];
+			$selectedGoods[$key]['id'] = $value['goods_id'];
+			$selectedGoods[$key]['sale_type'] = 1;
+		}
+		$data['goods_ids'] = implode(',',$selectedGoodsIds);
 		$data['store_id'] = $storeId;
 		$this ->startTrans();
 		if(input('?post.id')){//修改
@@ -34,7 +46,7 @@ class Promotion extends Model {
 				['store_id','=',$storeId],
 			];
 			$file = array(
-				'img,goods_id',
+				'first_img,second_img,goods_ids',
 			);
 			$oldInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
@@ -42,6 +54,16 @@ class Promotion extends Model {
 			if(false == $result){
 				$this ->rollback();
 				return errorMsg('失败');
+			}
+			$deleteGoodsIds= array_diff(implode(',',$oldInfo['goods_ids']),$selectedGoodsIds);
+			print_r($deleteGoodsIds);exit;
+			$modelGoods  = new \app\factory\model\Goods;
+			if(!empty($oldInfo) && $oldInfo['goods_ids'] != $data['goods_id']){ //如换商品，把旧商品销售类型改为普通商品类型
+				$result = $modelGoods ->save(['sale_type'=>0],['id' => $oldInfo['goods_id'],'store_id'=>$storeId]);
+				if(false === $result){
+					$this ->rollback();
+					return errorMsg('失败');
+				}
 			}
 		}else{//新增
 			$data['create_time'] = time();
@@ -51,22 +73,17 @@ class Promotion extends Model {
 				return errorMsg('失败');
 			}
 		}
-		$modelGoods  = new \app\factory\model\Goods;
-		$result = $modelGoods ->save(['sale_type'=>1],['id' => $data['goods_id'],'store_id'=>$storeId]);
+
+		$result = $modelGoods -> saveAll($selectedGoods);
 		if(false === $result){
 			$this ->rollback();
 			return errorMsg('失败');
 		}
-		if(!empty($oldInfo) && $oldInfo['goods_id'] != $data['goods_id']){ //如换商品，把旧商品销售类型改为普通商品类型
-			$result = $modelGoods ->save(['sale_type'=>0],['id' => $oldInfo['goods_id'],'store_id'=>$storeId]);
-			if(false === $result){
-				$this ->rollback();
-				return errorMsg('失败');
-			}
-		}
+
 		$this ->commit();
 		if(input('?post.id')){//修改成功后，删除旧图
-			delImgFromPaths($oldInfo['img'],$data['img']);
+			delImgFromPaths($oldInfo['first_img'],$data['first_img']);
+			delImgFromPaths($oldInfo['second_img'],$data['second_img']);
 		}
 		return successMsg("成功");
 	}
