@@ -122,13 +122,11 @@
 			<li>
 				<div class="columns_flex l-r-sides">
 					<div class="rows">
-						<div>
+						<div class="rows-l">
 							{notempty name="storeInfo.logo_img"}
-							<img src="public_uploads/{$storeInfo.logo_img}" class="small_default_img store_logo left" alt="">
-							{else /}
+							<img src="public_uploads/{$storeInfo.logo_img}" class="small_default_img store_logo left" alt="">							{else /}
 							<img src="" class="small_default_img store_logo left" alt="">
 							{/notempty}
-
 						</div>
 						<div>
 							{if $storeInfo.store_type == 1 }
