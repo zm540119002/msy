@@ -8,4 +8,5 @@ return [
     'factory_brand' => 'factory_brand/',//厂商品牌图片
     'factory_record' => 'factory_record/',//厂商品牌图
     'factory_goods_backup' => 'factory_goods_backup/',//厂商商品备份
+    'factory_store' => 'factory_store/',//厂商商品备份
 ];
