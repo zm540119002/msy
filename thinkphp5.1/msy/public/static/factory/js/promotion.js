@@ -81,7 +81,7 @@ $(function(){
         var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
         var html='';
             html+='<li data-goods-id="'+goodsId+'"><img src="'+goodsImgSrc+'" alt=""/><span class="goods-name">'+goodsName+'</span><a href="javascript:void(0);" class="promotional-close-btn">X</a>' +
-                '<span>特价</span><input type="text" class="special"></li>';
+                '<span class="special-price">特价</span><input type="text" class="special" placeholder="填写价格"></li>';
             if(!selectedLen){
                 $('.promotional-goods-list').append(html);
             }else{
