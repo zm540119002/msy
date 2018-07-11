@@ -1136,9 +1136,8 @@ transparent;
 .goods-store-content li img{
     width:100%;
 }
-.columns_flex .rows .rows-l{
-    width:20px;
-    /*flex:1;*/
+.columns_flex .rows.rows-l{
+    flex:1;
 }
 .follow-right{
     /*width:112px;*/
