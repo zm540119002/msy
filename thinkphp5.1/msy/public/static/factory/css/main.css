@@ -1139,6 +1139,12 @@ transparent;
 .columns_flex .rows.rows-l{
     display:flex;
 }
+.rows.rows-l div:first-child{
+    width:40px;
+}
+.rows.rows-l div:first-child .store_logo{
+     width:100%;       
+}
 .follow-right{
     /*width:112px;*/
 }
