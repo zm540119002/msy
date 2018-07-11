@@ -1137,7 +1137,7 @@ transparent;
     width:100%;
 }
 .columns_flex .rows.rows-l{
-    flex:1;
+    display:flex;
 }
 .follow-right{
     /*width:112px;*/
