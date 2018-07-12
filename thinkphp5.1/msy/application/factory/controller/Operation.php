@@ -18,6 +18,7 @@ class Operation extends StoreBase
             $where = [
                 ['id','=', $this->store['id']]
             ];
+            $logoImg = moveImgFromTemp(config('upload_dir.factory_store'),basename($logoImg));
             $result = $model->where($where)->setField('logo_img',$logoImg);
             if(false == $result){
                 return errorMsg('优化失败');

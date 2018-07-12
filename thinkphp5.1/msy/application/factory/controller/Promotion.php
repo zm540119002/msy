@@ -17,7 +17,6 @@ class Promotion extends StoreBase
     {
         $model = new \app\factory\model\Promotion;
         if(request()->isPost()){
-            print_r(input());exit;
             return $model -> edit($this->store['id']);
         }
         if(input('?id') && $this->store['id']){
@@ -27,16 +26,23 @@ class Promotion extends StoreBase
                 ['p.store_id','=',$this->store['id']],
             ];
             $file = [
-                'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,p.store_id,g.thumb_img,g.name as goods_name'
+                'p.id,p.name,p.first_img,p.second_img,p.goods_ids,p.start_time,p.end_time,p.store_id'
             ];
-            $join =[
-              ['goods g','g.id = p.goods_id'],
-            ];
-            $promotionInfo =  $model -> getInfo($where,$file,$join);
+            $promotionInfo =  $model -> getInfo($where,$file);
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }
             $this -> assign('promotionInfo',$promotionInfo);
+            $modelGoods = new \app\factory\model\Goods;
+            $goodsIds = explode(',',$promotionInfo['goods_ids']);
+            $where = [
+                ['id','in',$goodsIds]
+            ];
+            $goodsFile = [
+                'g.id,g.name,g.thumb_img,g.sale_price,g.special'
+            ];
+            $goodsList = $modelGoods -> getList($where,$goodsFile);
+            $this -> assign('goodsList',$goodsList);
         }
         return $this->fetch();
     }
@@ -49,14 +55,11 @@ class Promotion extends StoreBase
         $where = [
             ['p.store_id','=',$this->store['id']],
         ];
-        $join = [
-            ['goods g','g.id = p.goods_id'],
-        ];
+
         $field = array(
-            'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
-            'g.name as goods_name','g.retail_price'
+            'p.id','p.name','p.goods_ids','p.start_time','p.end_time','p.create_time','p.sort',
         );
-        $list = $model -> pageQuery($where,$field,$join);
+        $list = $model -> pageQuery($where,$field);
         $this->assign('list',$list);
         if(isset($_GET['activityStatus'])){
             if($_GET['activityStatus'] == 1 ){//未结束

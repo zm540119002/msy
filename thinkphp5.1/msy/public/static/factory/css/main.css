@@ -809,6 +809,20 @@ transparent;
 }
 .l-r-sides a{
     display: block;
+    
+}
+.promotional-goods-list a{
+    position:absolute;
+    right:0;
+    top:0;
+}
+.special-price{
+    display:block;
+}
+input.special{
+    width:100%;
+    padding:.10rem 0;
+    border:1px solid #d9d9d9;
 }
 .row-item-mgl .collect{
     display: flex;
@@ -844,7 +858,13 @@ transparent;
     line-height: 30px;
 }
 .l-r-sides li{
-    display: flex;
+    position:relative;
+    width:25%;
+    margin:0 0 .25rem 0;
+    /*display: flex;*/
+}
+.addsalesgoodsLayer .promotional-goods-list{
+    flex-wrap:wrap;
 }
 .l-r-sides li:last-child{
     margin:0 0.16rem 0 0;
@@ -1138,6 +1158,12 @@ transparent;
 }
 .columns_flex .rows.rows-l{
     display:flex;
+}
+.rows.rows-l div:first-child{
+    width:40px;
+}
+.rows.rows-l div:first-child .store_logo{
+     width:100%;       
 }
 .follow-right{
     /*width:112px;*/
