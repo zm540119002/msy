@@ -1,0 +1,14 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+<li data-goods-id="{$info.id}">
+    {notempty name="info.thumb_img"}
+    <img class="upload_img common_default_img" src="public_uploads/{$info.thumb_img|default=''}" alt="">
+    {else /}
+    <img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+    {/notempty}
+    <span class="">{$info.name}</span>
+    <span class="special-price">特价</span><input type="text" class="special" value="{$info.special}">
+    <a href="javascript:void(0);" class="promotional-close-btn">X</a>
+</li>
+{/volist}
+{/notempty}
