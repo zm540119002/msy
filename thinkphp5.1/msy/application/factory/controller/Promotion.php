@@ -32,17 +32,18 @@ class Promotion extends StoreBase
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }
-            $this -> assign('promotionInfo',$promotionInfo);
             $modelGoods = new \app\factory\model\Goods;
             $goodsIds = explode(',',$promotionInfo['goods_ids']);
             $where = [
-                ['id','in',$goodsIds]
+                ['id','in',$goodsIds],
+                ['sale_type','=',1],
             ];
             $goodsFile = [
-                'g.id,g.name,g.thumb_img,g.sale_price,g.special'
+                'g.id as goods_id,g.special'
             ];
             $goodsList = $modelGoods -> getList($where,$goodsFile);
-            $this -> assign('goodsList',$goodsList);
+            $promotionInfo['goods'] = json_encode($goodsList);
+            $this -> assign('promotionInfo',$promotionInfo);
         }
         return $this->fetch();
     }

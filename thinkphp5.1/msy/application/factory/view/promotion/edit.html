@@ -9,20 +9,7 @@
 	<div class="content-box">
 		<span class="content-label">已选择促销商品</span>
 		<ul class="columns_flex l-r-sides promotional-goods-list">
-			{notempty name="goodsList"}
-			{volist name="goodsList" id="goodsInfo"}
-			<li data-goods-id="{$goodsInfo.id}">
-				{notempty name="goodsInfo.thumb_img"}
-				<img class="upload_img common_default_img" src="public_uploads/{$goodsInfo.thumb_img|default=''}" alt="">
-				{else /}
-				<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
-				{/notempty}
-				<span class="">{$goodsInfo.name}</span>
-				<span class="special-price">特价</span><input type="text" class="special" value="{$goodsInfo.special}">
-				<a href="javascript:void(0);" class="promotional-close-btn">X</a>
-			</li>
-			{/volist}
-			{/notempty}
+
 		</ul>
 		<div class="error_tipc"></div>
 		<form name="form1" id="form1">
@@ -83,7 +70,7 @@
 			<div class="content-row-list">
 				<span class="content-label">第3：促销活动图片链接到商品</span>
 				<a href="javascript:void(0);" class="linked-goods green-small-btn">链接商品</a>
-				<input type="hidden" value="{$promotionInfo.goods_ids|default=''}" class="linked-goods-id">
+				<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 			</div>
 			<div class="content-row-list">
 				<p>第5：促销活动特价期限（促销活动自动上架和下架）</p>

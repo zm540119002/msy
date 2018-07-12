@@ -280,5 +280,33 @@ class Goods extends StoreBase
         $this -> assign('goodsListBackup',$goodsList);
         return $this -> fetch('list_backup');
     }
-    
+
+    //获取场景也选择商品
+    public function getSceneGoodsList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $selectedGoodsList = json_decode(input('get.goods'),true);
+        $goodsIds = [];
+        foreach ($selectedGoodsList as $key=>$goods){
+            $goodsIds[] = $goods['goods_id'];
+        }
+        $modelGoods = new \app\factory\model\Goods;
+        $where = [
+            ['id','in',$goodsIds]
+        ];
+        $goodsFile = [
+            'g.id,g.name,g.thumb_img,g.sale_price'
+        ];
+        $goodsList = $modelGoods -> getList($where,$goodsFile);
+        foreach ($goodsList as $k=>$v){
+            foreach ($selectedGoodsList as $kk=>$vv){
+               if($v['id'] == $vv['goods_id'] ){
+                  $goodsList[$k]['special'] = $vv['special'];
+               }
+            }
+        }
+        $this -> assign('list',$goodsList);
+        return $this -> fetch('list_scene_selected');
+    }
 }
