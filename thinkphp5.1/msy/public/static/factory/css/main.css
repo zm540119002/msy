@@ -820,7 +820,7 @@ transparent;
     display:block;
 }
 input.special{
-    width:100%;
+    width:36%;
     padding:.10rem 0;
     border:1px solid #d9d9d9;
 }
@@ -859,15 +859,20 @@ input.special{
 }
 .l-r-sides li{
     position:relative;
-    width:25%;
+    width:48%;
     margin:0 0 .25rem 0;
     /*display: flex;*/
 }
 .addsalesgoodsLayer .promotional-goods-list{
     flex-wrap:wrap;
 }
+.promotional-goods-list li{
+    position:relative;
+    padding:0 0 .15rem 0;
+    margin:0 0 .12rem 0;
+}
 .l-r-sides li:last-child{
-    margin:0 0.16rem 0 0;
+    /*margin:0 0.16rem 0 0;*/
 }
 .search-goods{
     border-top-right-radius: 0;
