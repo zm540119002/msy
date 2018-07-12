@@ -874,6 +874,11 @@ input.special{
 .l-r-sides li:last-child{
     /*margin:0 0.16rem 0 0;*/
 }
+.all-goods-list a{
+    display: block;
+    width:33%;
+    float:left;
+}
 .search-goods{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -891,6 +896,10 @@ input.special{
 }
 .addsalesgoodsLayer .content-box{
     padding-right:0;
+    overflow-y:auto;
+}
+.promotion-img-item{
+    width:48%;
 }
 .addsalesgoodsLayer .content-label{
     padding:0 0 .10rem 0;

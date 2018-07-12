@@ -13,10 +13,9 @@ $(function(){
             type: 1,
             content:addsalesgoods,
             anim: 'up',
-            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
             success:function(){
                 var winHeight=$(window).height();
-                $('.signIn-wrapper').css('height',winHeight-120+'px');
+                $('.content-box').css('height',winHeight-180+'px');
                     //加载第一页
                     getPage();
                 //回显也选择的产品
