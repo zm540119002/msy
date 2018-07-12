@@ -6,18 +6,24 @@ $(function(){
     var addsalesgoods=$('#addsalesgoods').html();
     //链接商品
     $('body').on('click','.linked-goods',function(){
+       var goods = $('.linked-goods-id').val();
         var pageii = layer.open({
             title:['选择促销商品','border-bottom:1px solid #d9d9d9;'],
             className:'addsalesgoodsLayer',
             type: 1,
             content:addsalesgoods,
             anim: 'up',
-            style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
             success:function(){
                 var winHeight=$(window).height();
-                $('.signIn-wrapper').css('height',winHeight-120+'px');
+                $('.content-box').css('height',winHeight-180+'px');
                     //加载第一页
                     getPage();
+                //回显也选择的产品
+                console.log(goods)
+                if(goods!=''){
+                    console.log(1)
+                    selectedGoodsList(goods);
+                }
             },
             yes:function(index){
                 var selectedGood={};
@@ -43,7 +49,7 @@ $(function(){
                         return false;
                     }
                     selectedGood={
-                        goodsId:goodsId,
+                        goods_id:goodsId,
                         special:special,
                     }
                     selectedGoods.push(selectedGood);
@@ -81,7 +87,7 @@ $(function(){
         var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
         var html='';
             html+='<li data-goods-id="'+goodsId+'"><img src="'+goodsImgSrc+'" alt=""/><span class="goods-name">'+goodsName+'</span><a href="javascript:void(0);" class="promotional-close-btn">X</a>' +
-                '<span>特价</span><input type="text" class="special"></li>';
+                '<span class="special-price">特价</span><input type="text" class="special" placeholder="填写价格"></li>';
             if(!selectedLen){
                 $('.promotional-goods-list').append(html);
             }else{
@@ -109,7 +115,6 @@ $(function(){
         var postData=$('.addSalesPromotionForm').serializeObject();
         postData.start_time =  new Date(postData.start_time).getTime()/1000;
         postData.end_time = new Date(postData.end_time).getTime()/1000;
-        postData.goods = $('.linked-goods-id').val();
         var content='';
         if(!postData.name){
             content="请填写促销活动名称";
@@ -206,6 +211,16 @@ function getPage(currentPage) {
     postData.pageSize = 4;
     $.get(url, postData , function(data){
         $('.addsalesgoodsLayer #list').html(data);
+    });
+}
+//获取商品列表
+function selectedGoodsList(selectedGoods) {
+    $("#list").html($('#loading').html());
+    var url = module+'goods/getSceneGoodsList';
+    var postData = {};
+    postData.goods = selectedGoods;
+    $.get(url, postData , function(data){
+        $('.promotional-goods-list').append(data);
     });
 }
 

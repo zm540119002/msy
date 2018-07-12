@@ -41,28 +41,28 @@
 				<span class="content-label">第2：上传促销活动图片</span>
 				
 				<div class="upload-company-map columns_flex l-r-sides f24">
-					<div>
+					<div class="promotion-img-item">
 						<p>一级页面广告图</p>
 						<div class="picture-module company-picture-module active">
 							<input type="file" class="uploadImg uploadSingleImg" name="">
-							{notempty name="$promotionInfo.img"}
-							<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.img|default=''}" alt="">
+							{notempty name="$promotionInfo.first_img"}
+							<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.first_img|default=''}" alt="">
 							{else /}
 							<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
 							{/notempty}
-							<input type="hidden" class="img" value="{$promotionInfo.img|default=''}" name="first_img">
+							<input type="hidden" class="img" value="{$promotionInfo.first_img|default=''}" name="first_img">
 						</div>
 					</div>
-					<div>
+					<div class="promotion-img-item">
 						<p>二级页面首焦图</p>
 						<div class="picture-module company-picture-module active">
 							<input type="file" class="uploadImg uploadSingleImg" name="">
-							{notempty name="$promotionInfo.img"}
-							<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.img|default=''}" alt="">
+							{notempty name="$promotionInfo.second_img"}
+							<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.second_img|default=''}" alt="">
 							{else /}
 							<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
 							{/notempty}
-							<input type="hidden" class="img" value="{$promotionInfo.img|default=''}" name="second_img">
+							<input type="hidden" class="img" value="{$promotionInfo.second_img|default=''}" name="second_img">
 						</div>
 					</div>
 				</div>
@@ -70,7 +70,7 @@
 			<div class="content-row-list">
 				<span class="content-label">第3：促销活动图片链接到商品</span>
 				<a href="javascript:void(0);" class="linked-goods green-small-btn">链接商品</a>
-				<input type="hidden" value="{$promotionInfo.goods_id|default=''}" class="linked-goods-id">
+				<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 			</div>
 			<div class="content-row-list">
 				<p>第5：促销活动特价期限（促销活动自动上架和下架）</p>
@@ -83,7 +83,6 @@
 	</section>
 </article>
 <a href="javascript:void(0);" class="addSalesPromotion foot-btn f24">确定</a>
-
 
 {/block}
 {block name="common"}

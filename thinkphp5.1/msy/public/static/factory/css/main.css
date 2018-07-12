@@ -809,6 +809,20 @@ transparent;
 }
 .l-r-sides a{
     display: block;
+    
+}
+.promotional-goods-list a{
+    position:absolute;
+    right:0;
+    top:0;
+}
+.special-price{
+    display:block;
+}
+input.special{
+    width:36%;
+    padding:.10rem 0;
+    border:1px solid #d9d9d9;
 }
 .row-item-mgl .collect{
     display: flex;
@@ -844,10 +858,26 @@ transparent;
     line-height: 30px;
 }
 .l-r-sides li{
-    display: flex;
+    position:relative;
+    width:48%;
+    margin:0 0 .25rem 0;
+    /*display: flex;*/
+}
+.addsalesgoodsLayer .promotional-goods-list{
+    flex-wrap:wrap;
+}
+.promotional-goods-list li{
+    position:relative;
+    padding:0 0 .15rem 0;
+    margin:0 0 .12rem 0;
 }
 .l-r-sides li:last-child{
-    margin:0 0.16rem 0 0;
+    /*margin:0 0.16rem 0 0;*/
+}
+.all-goods-list a{
+    display: block;
+    width:33%;
+    float:left;
 }
 .search-goods{
     border-top-right-radius: 0;
@@ -866,6 +896,10 @@ transparent;
 }
 .addsalesgoodsLayer .content-box{
     padding-right:0;
+    overflow-y:auto;
+}
+.promotion-img-item{
+    width:48%;
 }
 .addsalesgoodsLayer .content-label{
     padding:0 0 .10rem 0;
@@ -890,6 +924,7 @@ transparent;
 .promotional-goods-list img{
     max-width:40px;
     height:28px;
+    vertical-align: middle;
 }
 .addSalesActivity{
     display: block;
@@ -1138,6 +1173,12 @@ transparent;
 }
 .columns_flex .rows.rows-l{
     display:flex;
+}
+.rows.rows-l div:first-child{
+    width:40px;
+}
+.rows.rows-l div:first-child .store_logo{
+     width:100%;       
 }
 .follow-right{
     /*width:112px;*/

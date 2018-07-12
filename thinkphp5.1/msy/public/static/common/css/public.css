@@ -1226,7 +1226,8 @@ background-position: 0 -27px;
 .layui-m-layerchild.editDetailLayer,
 .layui-m-layerchild.uploadSingleVideoLayer,
 .layui-m-layerchild.uploadThumbnailLayer,
-.layui-m-layerchild.categoryContentLayer{
+.layui-m-layerchild.categoryContentLayer,
+.layui-m-layerchild.addsalesgoodsLayer{
     position:fixed; 
     left:0; 
     top:0; 
