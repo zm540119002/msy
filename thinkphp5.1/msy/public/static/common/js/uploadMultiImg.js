@@ -318,6 +318,9 @@ function uploadsMultiImg(content,obj,limitNum,title){
                     }
                  })
             },
+            error:function (xhr) {
+                dialog.error('AJAX错误'+xhr);
+            },
             no:function(){
                 $('.editDetailLayer li').remove();
             }

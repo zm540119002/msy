@@ -66,6 +66,23 @@ class Record extends Model {
 			$oldRecordInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
+			$modelStore = new \app\factory\model\Store;
+			$whereStore = [
+				['factory_id','=',$factoryId],
+				['store_type','=',1],
+			];
+			$fileStore = ['s.id,s.logo_img'];
+			$storeList = $modelStore->getList($whereStore,$fileStore);
+			if(!empty($storeList)){
+				foreach ($storeList as $k=>$v){
+					if($v['logo_img'] != $data['logo_img']){
+						$result = $modelStore ->allowField(true)
+							                  ->save(['logo_img' => $data['logo_img']],['id' => $data['record_id'],'factory_id'=>$factoryId]);
+					}
+				}
+			}
+
+
 		}else{
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);

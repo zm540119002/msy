@@ -79,8 +79,7 @@ class Promotion extends StoreBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $modelRole = new \app\factory\model\Promotion();
-        return $modelRole->del($this->store['id'],true);
+        $model = new \app\factory\model\Promotion();
+        return $model->del($this->store['id'],true);
     }
-
 }
