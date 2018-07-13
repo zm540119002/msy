@@ -75,7 +75,7 @@ class Record extends Model {
 			$storeList = $modelStore->getList($whereStore,$fileStore);
 			if(!empty($storeList)){
 				foreach ($storeList as $k=>$v){
-					if($v['logo_img'] != $data['logo_img']){
+					if($v['logo_img'] == $oldRecordInfo['logo_img']){
 						$result = $modelStore ->allowField(true)
 							                  ->save(['logo_img' => $data['logo_img']],['id' => $data['record_id'],'factory_id'=>$factoryId]);
 					}
