@@ -77,7 +77,7 @@ class Record extends Model {
 				foreach ($storeList as $k=>$v){
 					if($v['logo_img'] == $oldRecordInfo['logo_img']){
 						$result = $modelStore ->allowField(true)
-							                  ->save(['logo_img' => $data['logo_img']],['id' => $data['record_id'],'factory_id'=>$factoryId]);
+							                  ->save(['logo_img' => $data['logo_img']],['id' => $v['id'],'factory_id'=>$factoryId]);
 					}
 				}
 			}
