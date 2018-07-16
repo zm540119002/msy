@@ -67,7 +67,6 @@ class Goods extends StoreBase
 //            $storeInfo = $modelStore -> getStoreInfo($this->store);
             $this -> assign('storeInfo',$this->store);
         }
-
         return $this->fetch();
     }
 
@@ -95,7 +94,6 @@ class Goods extends StoreBase
             ];
             return $this->compose($init);
         }
-
     }
 
 
@@ -167,7 +165,6 @@ class Goods extends StoreBase
                     }
                 }
             }
-
         }
         return $this->fetch();
     }
