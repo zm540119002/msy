@@ -1,0 +1,34 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="practitioner_css/main.css">
+{/block}
+{block name="content"}
+<div>商城首页</div>
+<div><a href="{:url('')}">云推客店铺</a></div>
+<div><a href="{:url('')}">供应商零售店</a></div>
+<div><a href="{:url('')}">美容机构门店</a></div>
+{/block}
+{block name="common"}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//轮播
+        var swiper1 = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		swiper('.swiper-focus-container');
+        $('.more-text-box').moreText({
+            mainCell:".more-text",
+            openBtn:'全部>'
+        });
+	});
+</script>
+{/block}
