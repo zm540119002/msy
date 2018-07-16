@@ -1,7 +1,7 @@
 <?php
-namespace app\twitter\controller;
+namespace app\mall\controller;
 
-class TwitterBase extends \common\controller\UserBase{
+class MallBase extends \common\controller\UserBase{
     protected $twitter = null;
     public function __construct(){
         parent::__construct();
