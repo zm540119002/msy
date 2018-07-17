@@ -456,7 +456,6 @@ function uploadsImgDescribe(content,obj){
                     url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
-                    dataType:'json',
                     beforeSend: function(){
                         errorTipc('文件还没上传完毕');
                     },
@@ -470,6 +469,7 @@ function uploadsImgDescribe(content,obj){
                         for(var i=0;i<returnData.length;i++){
                             if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
                                 returnData[i].fileSrc= uploads+returnData[i].fileSrc;
+
                             }
                             imgArray.push(returnData[i]);
                         }
@@ -481,7 +481,6 @@ function uploadsImgDescribe(content,obj){
                             
                         }
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
-                        console.log(imgArray);
                     },
                     complete:function(){
                         
@@ -555,7 +554,6 @@ function uploadsVideoDescribe(content,obj){
                     url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
-                    dataType:'json',
                     beforeSend: function(){
                         errorTipc('文件还没上传完毕');
                     },
