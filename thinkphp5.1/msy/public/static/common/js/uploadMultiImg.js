@@ -456,6 +456,7 @@ function uploadsImgDescribe(content,obj){
                     url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
+                    dataType:'json',
                     beforeSend: function(){
                         errorTipc('文件还没上传完毕');
                     },
@@ -475,7 +476,7 @@ function uploadsImgDescribe(content,obj){
                         }
                         obj.data('src', imgArray);
                         if(info != ''){
-                            dialog.error('图片文件上传完！')
+                            dialog.error('图片文件上传完！');
                             layer.close(index);
                         }else{
                             
@@ -554,6 +555,7 @@ function uploadsVideoDescribe(content,obj){
                     url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
+                    dataType:'json',
                     beforeSend: function(){
                         errorTipc('文件还没上传完毕');
                     },
