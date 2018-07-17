@@ -216,6 +216,7 @@
 				url:controller + "edit",
 				type:'post',
 				data:postData,
+				dataType:'json',
 				success:function (data) {
 				   if(data.status == 0){
 						dialog.error(data.info);
@@ -225,7 +226,7 @@
 					}
 				},
 				error:function (xhr) {
-					dialog.error('Ajax错误');
+					dialog.error('Ajax错误'+xhr.status);
 				},
 			})
 		})
