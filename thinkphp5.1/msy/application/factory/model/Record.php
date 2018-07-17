@@ -65,7 +65,12 @@ class Record extends Model {
 			);
 			$oldRecordInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
+            $this->startTrans();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
+			if(false == $result){
+				$this ->rollback();
+				return errorMsg('失败！');
+			}
 			$modelStore = new \app\factory\model\Store;
 			$whereStore = [
 				['factory_id','=',$factoryId],
@@ -89,6 +94,11 @@ class Record extends Model {
 						['factory_id','=',$factoryId],
 					];
 					$result = $modelStore -> allowField(true)->save($data1,$where1);
+					if(false == $result){
+						$this ->rollback();
+						return errorMsg('失败！');
+					}
+					$this->commit();
 				}
 			}
 		}else{
