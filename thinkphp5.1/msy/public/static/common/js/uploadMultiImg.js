@@ -8,7 +8,7 @@ $(function(){
         var imgArr = [];
         var num=file.data('num');//限制个数  
        
-        if(num==6&&$('.editDetailLayer li').length==num){
+        if($('.editDetailLayer li').length==num){
             errorTipc('只能上传'+num+'张图片');
             return false;
         }
@@ -456,7 +456,6 @@ function uploadsImgDescribe(content,obj){
                     url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
-                    dataType:'json',
                     beforeSend: function(){
                         errorTipc('文件还没上传完毕');
                     },
