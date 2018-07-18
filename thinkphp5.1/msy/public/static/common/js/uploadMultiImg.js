@@ -6,9 +6,8 @@ $(function(){
         var file = $(this);
         fileList = $(this).get(0).files;
         var imgArr = [];
-        var num=file.data('num');//限制个数  
-       
-        if($('.editDetailLayer li').length==num){
+        var num=file.data('num');//限制个数
+        if($('.editDetailLayer li').length==num && num){
             errorTipc('只能上传'+num+'张图片');
             return false;
         }
