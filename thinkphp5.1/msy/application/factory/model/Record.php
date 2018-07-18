@@ -65,10 +65,8 @@ class Record extends Model {
 			);
 			$oldRecordInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
-            $this->startTrans();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
 			if(false == $result){
-				$this ->rollback();
 				return errorMsg('失败！');
 			}
 			$modelStore = new \app\factory\model\Store;
@@ -79,9 +77,9 @@ class Record extends Model {
 			$fileStore = ['s.id,s.logo_img'];
 			$storeList = $modelStore->getList($whereStore,$fileStore);
 			$ids = [];
-			if(!empty($storeList)){
+			if(!empty($storeList) && $data['logo_img'] != $oldRecordInfo['logo_img']){
 				foreach ($storeList as $k=>&$v){
-					if($v['logo_img'] == $oldRecordInfo['logo_img'] && $data['logo_img'] != $oldRecordInfo['logo_img']){
+					if($v['logo_img'] == $oldRecordInfo['logo_img'] ){
 						$ids[] = $v['id'];
 					}
 				}
@@ -94,13 +92,13 @@ class Record extends Model {
 						['factory_id','=',$factoryId],
 					];
 					$result = $modelStore -> allowField(true)->save($data1,$where1);
+
 					if(false == $result){
-						$this ->rollback();
 						return errorMsg('失败！');
 					}
-					$this->commit();
 				}
 			}
+
 		}else{
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
