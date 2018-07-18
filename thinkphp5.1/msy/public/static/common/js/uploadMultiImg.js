@@ -381,7 +381,7 @@ function uploadsMultiVideo(content){
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);
-                    },
+                    }
                 });
             }
         })
@@ -431,7 +431,7 @@ function uploadsImgDescribe(content,obj){
                         fileText:fileText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
-                })
+                });
                 obj.data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
                     layer.close(index);
@@ -475,7 +475,7 @@ function uploadsImgDescribe(content,obj){
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);
-                    },
+                    }
                 });
                 
             },
@@ -560,7 +560,7 @@ function uploadsVideoDescribe(content,obj){
                         }
                         obj.data('src', imgArray);
                         if(info != ''){
-                            dialog.error('视频文件上传完！')
+                            dialog.error('视频文件上传完！');
                             layer.close(index);
                         }else{
                             
@@ -572,7 +572,7 @@ function uploadsVideoDescribe(content,obj){
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);
-                    },
+                    }
                 });
             },
             no:function(){
