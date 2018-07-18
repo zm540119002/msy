@@ -8,7 +8,7 @@ $(function(){
         var imgArr = [];
         var num=file.data('num');//限制个数  
        
-        if(num==6&&$('.editDetailLayer li').length==num){
+        if($('.editDetailLayer li').length==num){
             errorTipc('只能上传'+num+'张图片');
             return false;
         }
@@ -475,7 +475,7 @@ function uploadsImgDescribe(content,obj){
                         }
                         obj.data('src', imgArray);
                         if(info != ''){
-                            dialog.error('图片文件上传完！')
+                            dialog.error('图片文件上传完！');
                             layer.close(index);
                         }else{
                             

@@ -34,7 +34,6 @@ class Store extends Model {
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
 			if(!$result){
-				$this ->rollback();
 				return errorMsg('失败');
 			}
 			return successMsg('提交申请成功');
