@@ -61,7 +61,6 @@ $(function(){
             var postData = {fileBase64: e.target.result};
             var videoUrl=e.target.result;
             $(obj).find('video').attr('src',videoUrl);
-            // $(obj).find('.img').val(videoUrl);
             //提交
             $.post(controller+"uploadFileToTemp",postData,function(msg){
                 if(msg.status == 1){

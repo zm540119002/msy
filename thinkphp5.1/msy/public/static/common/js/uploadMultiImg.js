@@ -277,8 +277,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
                     var _this=$(this);
                     var imgSrc=_this.find('img').attr('src');
                     layermultiImgAttr.push(imgSrc);
-                })
-                //$('.goods-detail').data('src',layermultiImgAttr);
+                });
                 if(layermultiImgAttr.length==0){
                     obj.data('src','');
                     layer.close(index);
@@ -346,9 +345,8 @@ function uploadsMultiVideo(content){
                     var _this=$(this);
                     var videoSrc=_this.find('video').attr('src');
                     layermultiVideoAttr.push(videoSrc);
-                })
+                });
 
-                //$('.goods-video').data('src',layermultiVideoAttr);
                 if(layermultiVideoAttr.length==0){
                     $('.goods-video').data('src','');
                     layer.close(index);
@@ -416,7 +414,6 @@ function uploadsImgDescribe(content,obj){
                     if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
                         multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                     }
-                    //imgArray.push(img);
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
                     $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
                     $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
@@ -577,7 +574,6 @@ function uploadsVideoDescribe(content,obj){
                         dialog.error('AJAX错误'+xhr);
                     },
                 });
-
             },
             no:function(){
                 $('.editCompanyPicLayer li').remove();
