@@ -554,7 +554,6 @@ function uploadsVideoDescribe(content,obj){
                     url: controller + 'uploadMultiFileToTempWithDes',
                     data: postData,
                     type: 'post',
-                    dataType:'json',
                     beforeSend: function(){
                         errorTipc('文件还没上传完毕');
                     },
