@@ -157,7 +157,7 @@ var maximumWord = function(obj,max){
 $.fn.tab = function(){
     $(this).addClass("current").siblings().removeClass("current");
 };
-$('.top_menu_list a').on('click',function(){
+$('.top_menu_list.underdevelopment').on('click',function(){
     var index=$(this).index();
         if(index>0){
             dialog.error('功能正在开发中,暂未上线,敬请期待');

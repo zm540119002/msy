@@ -1,0 +1,110 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="mall_css/main.css">
+{/block}
+{block name="content"}
+<article class="scroll-wrapper f24">
+	<section class="top_nav_fixed store-top-nav">
+		<div class="top_bar columns_flex">
+			<!--<div class="each_column">
+				<a class="qr-code">二维码</a>
+			</div>-->
+			<div class="each_column">
+				<!--<a class="home">首页</a>-->
+			</div>
+			<div class="each_column top_search_module">
+				<input type="button" class="search_btn"/>
+				<input type="text" class="search_text" placeholder="美尚云搜索"/>
+			</div>
+			<div class="each_column">
+				<a class="shopping_cart">购物车</a>
+			</div>
+			<div class="each_column">
+				<a class="personal_center">我的</a>
+			</div>
+		</div>
+		<div class="columns_flex flex-both-side store-focus-num">
+			<div>
+				<img src="public_img/default/no_pic_40.jpg" alt="" class="left">
+				<div>
+					<p><span>某某</span>官方旗舰店</p>
+					<span>美尚联营</span>
+				</div>
+			</div>
+			<div>
+				<a href="javascript:void(0);" class="store-focus">关注</a>
+				<p><span>1500</span>人</p>
+			</div>
+		</div>
+		<div class="top_menu_box">
+			<div class="top_menu_list columns_flex flex-both-side">
+				<a href="{:url('index')}" class="">首页</a>
+				<a href="{:url('goods')}" class="current">商品</a>
+				<a href="javascript:void(0);" class="underdevelopment">消息</a>
+				<a href="javascript:void(0);" class="underdevelopment">文章</a>
+				<a href="javascript:void(0);" class="underdevelopment">小视频</a>
+				<a href="javascript:void(0);" class="underdevelopment">视频</a>
+				<a href="javascript:void(0);" class="underdevelopment">直播</a>
+			</div>
+		</div>
+	</section>
+	<div class="content-wrapper">
+		<ul class="columns_flex flex-both-side goods-list">
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品11111111111111111</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品22222222222222</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品22222222222222</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品22222222222222</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</article>
+{/block}
+{block name="common"}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function(){
+	});
+</script>
+{/block}

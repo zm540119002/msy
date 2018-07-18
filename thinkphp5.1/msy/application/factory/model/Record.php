@@ -28,6 +28,7 @@ class Record extends Model {
 		if(!$result = $validate -> check($data)) {
 			return errorMsg($validate->getError());
 		}
+		//把临时文件移动到相应的文件夹下
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
@@ -59,6 +60,7 @@ class Record extends Model {
 		}
 
 		if(input('?post.record_id') && !input('?post.record_id') == ''){
+			//修改
 			$where['id'] = $data['record_id'];
 			$file = array(
 				'logo_img','company_img','rb_img','factory_video','license','glory_img'
@@ -79,9 +81,9 @@ class Record extends Model {
 			$fileStore = ['s.id,s.logo_img'];
 			$storeList = $modelStore->getList($whereStore,$fileStore);
 			$ids = [];
-			if(!empty($storeList)){
+			if(!empty($storeList) && $data['logo_img'] != $oldRecordInfo['logo_img']){
 				foreach ($storeList as $k=>&$v){
-					if($v['logo_img'] == $oldRecordInfo['logo_img'] && $data['logo_img'] != $oldRecordInfo['logo_img']){
+					if($v['logo_img'] == $oldRecordInfo['logo_img'] ){
 						$ids[] = $v['id'];
 					}
 				}
@@ -98,10 +100,11 @@ class Record extends Model {
 						$this ->rollback();
 						return errorMsg('失败！');
 					}
-					$this->commit();
 				}
 			}
+			$this->commit();
 		}else{
+			//增加
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
 		}
