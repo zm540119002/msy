@@ -28,6 +28,7 @@ class Record extends Model {
 		if(!$result = $validate -> check($data)) {
 			return errorMsg($validate->getError());
 		}
+		//把临时文件移动到相应的文件夹下
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
@@ -59,14 +60,17 @@ class Record extends Model {
 		}
 
 		if(input('?post.record_id') && !input('?post.record_id') == ''){
+			//修改
 			$where['id'] = $data['record_id'];
 			$file = array(
 				'logo_img','company_img','rb_img','factory_video','license','glory_img'
 			);
 			$oldRecordInfo = $this -> getInfo($where,$file);
 			$data['update_time'] = time();
+            $this->startTrans();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
 			if(false == $result){
+				$this ->rollback();
 				return errorMsg('失败！');
 			}
 			$modelStore = new \app\factory\model\Store;
@@ -92,14 +96,15 @@ class Record extends Model {
 						['factory_id','=',$factoryId],
 					];
 					$result = $modelStore -> allowField(true)->save($data1,$where1);
-
 					if(false == $result){
+						$this ->rollback();
 						return errorMsg('失败！');
 					}
 				}
 			}
-
+			$this->commit();
 		}else{
+			//增加
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
 		}
