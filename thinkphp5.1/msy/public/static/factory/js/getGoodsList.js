@@ -23,6 +23,24 @@ function getMoreLayer(url,config) {
         }
     });
 }
+
+//获取分页列表-公共回调函数
+function goodsPagingCallBack(){
+    $('.loading').hide();
+    if(currentPage == 1){
+        $('#list li').remove();
+        $('#list').append(data);
+    }else{
+        $('#list li:last').after(data);
+    }
+    if($($.parseHTML(data)).length<_postData.pageSize){
+        requestEnd = true;
+    }
+    currentPage ++;
+    loadTrigger = true;
+    disableBtn();
+}
+
 //获取列表
 var currentPage = 1;//记录当前页
 var requestEnd = false;//请求结束标记

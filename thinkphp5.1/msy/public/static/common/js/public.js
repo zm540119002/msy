@@ -157,12 +157,7 @@ var maximumWord = function(obj,max){
 $.fn.tab = function(){
     $(this).addClass("current").siblings().removeClass("current");
 };
-$('.top_menu_list .underdevelopment').on('click',function(){
-    var index=$(this).index();
-        if(index>0){
-            dialog.error('功能正在开发中,暂未上线,敬请期待');
-        }
-});
+
 //选项卡切换
 function tab_down(tab_k, tab_con, tab_dz) {
     var $div_li = $(tab_k);
@@ -207,25 +202,6 @@ function checkShow(ele){
         }
     })
 }
-
-//全选
-$('body').on('click','.checkall,.check_all_2',function () {
-    var _thisChecked = $(this).prop("checked");
-    $.each($('.checkitem,.check_item_2'),function () {
-        $(this).prop('checked',_thisChecked);
-    });
-});
-//反选
-$('body').on('click','.checkitem,.check_item_2',function () {
-    var sign = true;
-    //一票否决
-    $.each($('.checkitem,.check_item_2'),function () {
-        if(!$(this).prop('checked')){
-            sign = false;
-        }
-    });
-    $('.checkall,.check_all_2').prop('checked',sign);
-});
 
 //滑动轮播
 function swipe(elemObj){
@@ -449,6 +425,54 @@ function submitForm(postData,postUrl){
         }
     });
 }
+//获取分页列表-公共回调函数
+function pagingCallBack(){
+    // $('.loading').hide();
+    // if(currentPage == 1){
+    //     $('#list li').remove();
+    //     $('#list').append(data);
+    // }else{
+    //     $('#list li:last').after(data);
+    // }
+    // if($($.parseHTML(data)).length<_postData.pageSize){
+    //     requestEnd = true;
+    // }
+    // currentPage ++;
+    // loadTrigger = true;
+    // disableBtn();
+}
+//获取列表
+var currentPage = 1;//记录当前页
+var requestEnd = false;//请求结束标记
+function getPagingList(config,postData) {
+    var _postData = $.extend({},postData);
+    _postData.page = currentPage ? currentPage : 1;
+    _postData.pageSize = _postData.pageSize?_postData.pageSize:4;
+    //请求结束标志
+    if(requestEnd){
+        dialog.error('没有更多啦');
+        loadTrigger = true;
+        return false;
+    }
+    config.url = config.url?config.url:action;
+    config.callBack = config.callBack?config.callBack:pagingCallBack;
+    $.ajax({
+        url: url,
+        data: _postData,
+        type: 'get',
+        dataType:'json',
+        beforeSend: function(){
+            $('.loading').show();
+        },
+        error:function (xhr) {
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            config.callBack();
+        }
+    });
+}
 
 //文档就绪
 $(function(){
@@ -456,20 +480,44 @@ $(function(){
     $('body').on('click','.backTop',function(){
         $('body,html').animate({scrollTop:0+'px'},500);
     });
-
     //忘记密码-触发弹窗
     $('body').on('click','.forget_dialog',function(){
         var sectionForgetPassword = $('#sectionForgetPassword').html();
         forgetPasswordDialog(sectionForgetPassword);
     });
-});
-
-$(window).on('scroll',function(){
-    var scrolltop=$(document).scrollTop();
-    if(scrolltop>=300){
-        $('.fixedtop').addClass('active');
-        $('.right_sidebar').show();
-    }else{
-        $('.right_sidebar').hide();
-    }
+    //窗口滚动条滚动
+    $(window).on('scroll',function(){
+        var scrollTop=$(document).scrollTop();
+        if(scrollTop>=300){
+            $('.fixedtop').addClass('active');
+            $('.right_sidebar').show();
+        }else{
+            $('.right_sidebar').hide();
+        }
+    });
+    //未开发菜单点击提示
+    $('.top_menu_list .underdevelopment').on('click',function(){
+        var index=$(this).index();
+        if(index>0){
+            dialog.error('功能正在开发中,暂未上线,敬请期待');
+        }
+    });
+    //全选
+    $('body').on('click','.checkall,.check_all_2',function () {
+        var _thisChecked = $(this).prop("checked");
+        $.each($('.checkitem,.check_item_2'),function () {
+            $(this).prop('checked',_thisChecked);
+        });
+    });
+    //反选
+    $('body').on('click','.checkitem,.check_item_2',function () {
+        var sign = true;
+        //一票否决
+        $.each($('.checkitem,.check_item_2'),function () {
+            if(!$(this).prop('checked')){
+                sign = false;
+            }
+        });
+        $('.checkall,.check_all_2').prop('checked',sign);
+    });
 });
