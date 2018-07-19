@@ -145,6 +145,19 @@
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/getGoodsList.js"></script>-->
 <script type="text/javascript">
+	var config = {
+		url:module+'goods/getList',
+		type:true,
+		callBack:callBack,
+
+	};
+	var postData = {
+		pageSize:6,
+		pageType:'manage',
+	};
+</script>
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript">
 	$(function () {
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
@@ -161,17 +174,6 @@
 //			function callBack(obj,data) {
 //				goodsPullDownPagingCallBack();
 //			}
-			var config = {
-				url:module+'goods/getList',
-				type:true,
-				callBack:callBack,
-
-			};
-			var postData = {
-				pageSize:6,
-				pageType:'manage',
-			};
-
 			getPagingList(config,postData);
 		}
 
@@ -271,5 +273,4 @@
 		loadTrigger = true;
 	}
 </script>
-<script type="text/javascript" src="public_js/paging.js"></script>
 {/block}
