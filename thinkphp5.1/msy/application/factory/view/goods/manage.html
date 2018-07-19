@@ -260,7 +260,6 @@
 
 	//获取分页列表-商品页回调函数
 	function callBack(config,postData,data){
-		$('.loading').hide();
 		if(config.currentPage == 1){
 			config.container.find('li').remove();
 			config.container.append(data);
@@ -275,7 +274,6 @@
 	}
 	//获取分页列表-商品页回调函数
 	function callBack_2(config,postData,data){
-		$('.loading').hide();
 		if(config.currentPage == 1){
 			config.container.find('li').remove();
 			config.container.append(data);
