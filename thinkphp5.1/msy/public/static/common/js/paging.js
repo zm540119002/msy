@@ -50,7 +50,7 @@ function getPagingList(config,postData) {
 
 //窗口滚动条-加载更多
 $(window).on('scroll',function(){
-    if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+    if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
         config.loadTrigger = false;
         getPagingList(config,postData);
     }
@@ -58,8 +58,8 @@ $(window).on('scroll',function(){
 //
 $('.databaseLayer .scroll-list-content').on('scroll',function(){
     var listHeight=$('.databaseLayer #listLayer').get(0).scrollHeight;
-    if(loadTrigger && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
-        loadTrigger = false;
+    if(config.loadTrigger && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
+        config.loadTrigger = false;
         getPagingList(config_2,postData_2);
     }
 });
