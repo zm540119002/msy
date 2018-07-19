@@ -58,8 +58,8 @@ $(window).on('scroll',function(){
 //
 $('.databaseLayer .scroll-list-content').on('scroll',function(){
     var listHeight=$('.databaseLayer #listLayer').get(0).scrollHeight;
-    if(config.loadTrigger && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
-        config.loadTrigger = false;
+    if(config_2.loadTrigger && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
+        config_2.loadTrigger = false;
         getPagingList(config_2,postData_2);
     }
 });
