@@ -164,13 +164,16 @@
 //			}
 			var config = {
 				url:module+'goods/getList',
+				callBack:callBack,
+
 			};
 			var postData = {
-				pageSize:10,
+				pageSize:6,
 				pageType:'manage',
 			};
 
 			getPagingList(config,postData);
+			getMore(config,postData)
 		}
 
 //		var databaseContent=$('#databaseContent').html();
@@ -252,5 +255,22 @@
 //		});
 
 	});
+
+	//获取分页列表-商品页回调函数
+	function callBack(obj,data){
+		$('.loading').hide();
+		if(currentPage == 1){
+			obj.find('li').remove();
+			obj.append(data);
+		}else{
+			obj.find('li:last').after(data);
+		}
+		if($($.parseHTML(data)).length<postData.pageSize){
+			requestEnd = true;
+		}
+		currentPage ++;
+		loadTrigger = true;
+		disableBtn();
+	}
 </script>
 {/block}

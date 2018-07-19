@@ -39,6 +39,18 @@ function getPagingList(config,postData) {
         },
         success: function(data){
             config.callBack(config.container,data);
+            $('.loading').hide();
+        }
+    });
+}
+
+//下拉加载更多
+var loadTrigger = false;//加载触发器
+function getMore(config,postData) {
+    $(window).on('scroll',function(){
+        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+            loadTrigger = false;
+            getPagingList(config,postData);
         }
     });
 }
