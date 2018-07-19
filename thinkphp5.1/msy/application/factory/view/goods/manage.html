@@ -144,6 +144,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/getGoodsList.js"></script>-->
+<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
 	var config = {
 		url:module+'goods/getList',
@@ -154,9 +155,6 @@
 		pageSize:6,
 		pageType:'manage'
 	};
-</script>
-<script type="text/javascript" src="public_js/paging.js"></script>
-<script type="text/javascript">
 	$(function () {
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
