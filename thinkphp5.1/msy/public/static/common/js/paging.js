@@ -20,7 +20,7 @@ function getPagingList(config,postData) {
     postData.page = postData.currentPage ? postData.currentPage : currentPage;
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
-    if(config.type && requestEnd){
+    if(config.type && config.requestEnd){
         dialog.error('没有更多啦');
         loadTrigger = true;
         return false;
