@@ -173,7 +173,7 @@
 			};
 
 			getPagingList(config,postData);
-			getMore(config,postData)
+			getMore(config,postData);
 		}
 
 //		var databaseContent=$('#databaseContent').html();
@@ -257,20 +257,19 @@
 	});
 
 	//获取分页列表-商品页回调函数
-	function callBack(obj,data){
+	function callBack(config,postData,data){
 		$('.loading').hide();
 		if(currentPage == 1){
-			obj.find('li').remove();
-			obj.append(data);
+			config.container.find('li').remove();
+			config.container.append(data);
 		}else{
-			obj.find('li:last').after(data);
+			config.container.find('li:last').after(data);
 		}
 		if($($.parseHTML(data)).length<postData.pageSize){
 			requestEnd = true;
 		}
 		currentPage ++;
 		loadTrigger = true;
-		disableBtn();
 	}
 </script>
 {/block}
