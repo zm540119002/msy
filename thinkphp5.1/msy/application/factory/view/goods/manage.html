@@ -176,83 +176,83 @@
 			getPagingList(config_2,postData_2);
 		}
 
-//		var databaseContent=$('#databaseContent').html();
-//		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
-//			var _this=$(this);
-//
-//			layer.open({
-//				title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
-//				className:'databaseLayer',
-//				content:databaseContent,
-//				success:function(){
-//					var oLi=$('.databaseLayer .goods-database-nav li:eq(0)')
-//					if(oLi.hasClass('current')){
-//						oLi.addClass('disabled');
-//					}
-//					isRolling($('.databaseLayer'));
-//				}
-//			})
-//		});
-//		$('body').on('click','.next-step',function(){
-//			var _this=$(this);
-//			var oLi = $('.databaseLayer .goods-store-content li');
-//			var storeId  = $('.databaseLayer .goods-store-content li.current').data('store-id');
-//			if(oLi.hasClass('current')){
-//				layer.open({
-//					title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
-//					className:'databaseLayer',
-//					content:databaseContent,
-//					success:function(){
-//						$('body').addClass('scrollfixed');
-////						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
-//						if(_this.hasClass('step')){
-//							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
-//							$('.databaseLayer .database-item').hide().eq(1).show();
-//						}
-//						requestEndLayer=false;
-//						currentPageLayer=1;
-//						var url = module + 'Goods/getBackup';
-//						var config = {
-//							storeId:storeId,
-//							pageSize:4
-//						};
-//						getPageLayer(url,config);
-//						loadTriggerLayer = false;
-//						getMoreLayer(url,config);
-//						isRolling($('.goods-database-nav,.databaseLayer h3'));
-//					},
-//					yes:function(index){
-//						$('body').removeClass('scrollfixed');
-//						layer.close(index);
-//					},
-//					btn:['确定']
-//				})
-//			}else{
-//				errorTipc('请选择源文件');
-//			}
-//		});
-//		$('body').on('click','.databaseLayer .goods-store-content li',function(){
-//			var _this=$(this);
-//				_this.addClass('current').siblings().removeClass('current');
-//				_this.parent().siblings().find('li').removeClass('current');
-//		});
-//		$('body').on('click','.databaseLayer .goods-database-content li',function(){
-//			var _this=$(this);
-//				_this.toggleClass('current');
-//		})
-//
-//
-//		//备份
-//		$('body').on('click','.backup',function () {
-//			$.post(module+'Goods/backup',{},function (msg) {
-//				if(msg.status == 0){
-//					dialog.error(msg.info);
-//					return false;
-//				}
-//				$('.backup-time').text(msg.create_time);
-//				dialog.success(msg.info);
-//			})
-//		});
+		var databaseContent=$('#databaseContent').html();
+		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
+			var _this=$(this);
+
+			layer.open({
+				title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
+				className:'databaseLayer',
+				content:databaseContent,
+				success:function(){
+					var oLi=$('.databaseLayer .goods-database-nav li:eq(0)')
+					if(oLi.hasClass('current')){
+						oLi.addClass('disabled');
+					}
+					isRolling($('.databaseLayer'));
+				}
+			})
+		});
+		$('body').on('click','.next-step',function(){
+			var _this=$(this);
+			var oLi = $('.databaseLayer .goods-store-content li');
+			var storeId  = $('.databaseLayer .goods-store-content li.current').data('store-id');
+			if(oLi.hasClass('current')){
+				layer.open({
+					title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
+					className:'databaseLayer',
+					content:databaseContent,
+					success:function(){
+						$('body').addClass('scrollfixed');
+//						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
+						if(_this.hasClass('step')){
+							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
+							$('.databaseLayer .database-item').hide().eq(1).show();
+						}
+						requestEndLayer=false;
+						currentPageLayer=1;
+						var url = module + 'Goods/getBackup';
+						var config = {
+							storeId:storeId,
+							pageSize:4
+						};
+						getPageLayer(url,config);
+						loadTriggerLayer = false;
+						getMoreLayer(url,config);
+						isRolling($('.goods-database-nav,.databaseLayer h3'));
+					},
+					yes:function(index){
+						$('body').removeClass('scrollfixed');
+						layer.close(index);
+					},
+					btn:['确定']
+				})
+			}else{
+				errorTipc('请选择源文件');
+			}
+		});
+		$('body').on('click','.databaseLayer .goods-store-content li',function(){
+			var _this=$(this);
+				_this.addClass('current').siblings().removeClass('current');
+				_this.parent().siblings().find('li').removeClass('current');
+		});
+		$('body').on('click','.databaseLayer .goods-database-content li',function(){
+			var _this=$(this);
+				_this.toggleClass('current');
+		})
+
+
+		//备份
+		$('body').on('click','.backup',function () {
+			$.post(module+'Goods/backup',{},function (msg) {
+				if(msg.status == 0){
+					dialog.error(msg.info);
+					return false;
+				}
+				$('.backup-time').text(msg.create_time);
+				dialog.success(msg.info);
+			})
+		});
 
 	});
 

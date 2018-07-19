@@ -50,3 +50,11 @@ $(window).on('scroll',function(){
         getPagingList(config,postData);
     }
 });
+loadTriggerLayer = false;
+$('.databaseLayer .scroll-list-content').on('scroll',function(){
+    var listHeight=$('.databaseLayer #listLayer').get(0).scrollHeight;
+    if(loadTriggerLayer && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
+        loadTriggerLayer = false;
+        getPageLayer(url,config);
+    }
+});
