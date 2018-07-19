@@ -1,6 +1,6 @@
 //下拉获取分页列表-公共回调函数
-function getPagingListCallBack(obj,data){
-    obj.html(data);
+function getPagingListCallBack(config,data){
+    config.container.html(data);
 }
 
 //下拉获取分页列表
@@ -38,6 +38,7 @@ function getPagingList(config,postData) {
             dialog.error('AJAX错误');
         },
         success: function(data){
+<<<<<<< HEAD
             config.callBack(config.container,data);
             $('.loading').hide();
         }
@@ -51,6 +52,9 @@ function getMore(config,postData) {
         if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
             loadTrigger = false;
             getPagingList(config,postData);
+=======
+            config.callBack(config,data);
+>>>>>>> 4d8d57871f5e3f020f11ac944f2405a038e9190d
         }
     });
 }
