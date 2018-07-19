@@ -156,12 +156,24 @@
 		pageSize:6,
 		pageType:'manage'
 	};
+	var config_2 = {
+		url:module+'goods/getList',
+		type:true,
+		requestEnd:false,
+		currentPage:1,
+		callBack:callBack
+	};
+	var postData_2 = {
+		pageSize:6,
+		pageType:'manage'
+	};
 	$(function () {
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
 			//初始化商品列表
 			getPagingList(config,postData);
+			getPagingList(config_2,postData_2);
 		}
 
 //		var databaseContent=$('#databaseContent').html();

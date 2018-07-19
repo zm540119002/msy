@@ -1,17 +1,15 @@
-//下拉获取分页列表-公共回调函数
+//获取分页列表-公共回调函数
 function getPagingListCallBack(config,postData,data){
     config.container.html(data);
 }
 
-//下拉获取分页列表
-// var currentPage = 1;//记录当前页
-// var requestEnd = false;//请求结束标记
+//获取分页列表
 function getPagingList(config,postData) {
     //容器
     config.container = config.container?config.container:$("#list");
     //提交路径
     config.url = config.url?config.url:action;
-    //type为true时为下拉分页,默认为普通分页
+    //type为true时为分页,默认为普通分页
     config.type = config.type?config.type:false;
     //回调函数名
     config.callBack = config.callBack?config.callBack:getPagingListCallBack;
@@ -44,7 +42,7 @@ function getPagingList(config,postData) {
     });
 }
 
-//下拉加载更多
+//加载更多
 var loadTrigger = false;//加载触发器
 $(window).on('scroll',function(){
     if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
