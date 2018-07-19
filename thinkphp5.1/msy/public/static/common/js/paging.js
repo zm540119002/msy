@@ -1,6 +1,6 @@
 //下拉获取分页列表-公共回调函数
-function getPagingListCallBack(obj,data){
-    obj.html(data);
+function getPagingListCallBack(config,postData,data){
+    config.container.html(data);
 }
 
 //下拉获取分页列表
@@ -17,10 +17,11 @@ function getPagingList(config,postData) {
     config.callBack = config.callBack?config.callBack:getPagingListCallBack;
     //要提交的数据
     postData = postData?postData:$('#form1').serializeObject();
-    postData.page = postData.currentPage ? postData.currentPage : 1;
+    postData.page = postData.currentPage ? postData.currentPage : currentPage;
     postData.pageSize = postData.pageSize?postData.pageSize:4;
     //请求结束标志
     if(config.type && requestEnd){
+        console.log(config.type)
         dialog.error('没有更多啦');
         loadTrigger = true;
         return false;
@@ -38,7 +39,19 @@ function getPagingList(config,postData) {
             dialog.error('AJAX错误');
         },
         success: function(data){
-            config.callBack(config.container,data);
+            $('.loading').hide();
+            config.callBack(config,postData,data);
+        }
+    });
+}
+
+//下拉加载更多
+var loadTrigger = false;//加载触发器
+function getMore(config,postData) {
+    $(window).on('scroll',function(){
+        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+            loadTrigger = false;
+            getPagingList(config,postData);
         }
     });
 }
