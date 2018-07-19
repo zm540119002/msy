@@ -24,8 +24,8 @@ function getMoreLayer(url,config) {
     });
 }
 
-//获取分页列表-公共回调函数
-function goodsPagingCallBack(){
+//获取分页列表-商品页回调函数
+function goodsPullDownPagingCallBack(){
     $('.loading').hide();
     if(currentPage == 1){
         $('#list li').remove();
