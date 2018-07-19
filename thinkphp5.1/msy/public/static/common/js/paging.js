@@ -4,8 +4,8 @@ function getPagingListCallBack(config,postData,data){
 }
 
 //下拉获取分页列表
-var currentPage = 1;//记录当前页
-var requestEnd = false;//请求结束标记
+// var currentPage = 1;//记录当前页
+// var requestEnd = false;//请求结束标记
 function getPagingList(config,postData) {
     //容器
     config.container = config.container?config.container:$("#list");
