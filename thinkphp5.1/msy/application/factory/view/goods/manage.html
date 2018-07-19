@@ -247,16 +247,16 @@
 	//获取分页列表-商品页回调函数
 	function callBack(config,postData,data){
 		$('.loading').hide();
-		if(currentPage == 1){
+		if(config.currentPage == 1){
 			config.container.find('li').remove();
 			config.container.append(data);
 		}else{
 			config.container.find('li:last').after(data);
 		}
 		if($($.parseHTML(data)).length<postData.pageSize){
-			requestEnd = true;
+			config.requestEnd = true;
 		}
-		currentPage ++;
+		config.currentPage ++;
 		loadTrigger = true;
 	}
 </script>

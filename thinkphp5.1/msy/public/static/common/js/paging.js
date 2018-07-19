@@ -17,7 +17,7 @@ function getPagingList(config,postData) {
     config.callBack = config.callBack?config.callBack:getPagingListCallBack;
     //要提交的数据
     postData = postData?postData:$('#form1').serializeObject();
-    postData.page = postData.currentPage ? postData.currentPage : currentPage;
+    postData.page = postData.currentPage ? postData.currentPage : config.currentPage;
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.type && config.requestEnd){
