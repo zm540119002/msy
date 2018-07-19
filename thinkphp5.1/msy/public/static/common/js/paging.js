@@ -18,7 +18,7 @@ function getPagingList(config,postData) {
     //要提交的数据
     postData = postData?postData:$('#form1').serializeObject();
     postData.page = postData.currentPage ? postData.currentPage : currentPage;
-    postData.pageSize = postData.pageSize?postData.pageSize:4;
+    postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.type && requestEnd){
         dialog.error('没有更多啦');
