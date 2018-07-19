@@ -9,6 +9,12 @@ function getPagingList(config,postData) {
     config.container = config.container?config.container:$("#list");
     //提交路径
     config.url = config.url?config.url:action;
+    //请求结束标志
+    config.requestEnd = config.requestEnd?config.requestEnd:false;
+    //触发器
+    config.loadTrigger = config.loadTrigger?config.loadTrigger:false;
+    //当前页
+    config.currentPage = config.currentPage?config.currentPage:1;
     //type为true时为分页,默认为普通分页
     config.type = config.type?config.type:false;
     //回调函数名
@@ -20,7 +26,7 @@ function getPagingList(config,postData) {
     //请求结束标志
     if(config.type && config.requestEnd){
         dialog.error('没有更多啦');
-        loadTrigger = true;
+        config.loadTrigger = true;
         return false;
     }
     $.ajax({
@@ -42,19 +48,18 @@ function getPagingList(config,postData) {
     });
 }
 
-//加载更多
-var loadTrigger = false;//加载触发器
+//窗口滚动条-加载更多
 $(window).on('scroll',function(){
     if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-        loadTrigger = false;
+        config.loadTrigger = false;
         getPagingList(config,postData);
     }
 });
-loadTriggerLayer = false;
+//
 $('.databaseLayer .scroll-list-content').on('scroll',function(){
     var listHeight=$('.databaseLayer #listLayer').get(0).scrollHeight;
-    if(loadTriggerLayer && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
-        loadTriggerLayer = false;
-        getPageLayer(url,config);
+    if(loadTrigger && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
+        loadTrigger = false;
+        getPagingList(config_2,postData_2);
     }
 });
