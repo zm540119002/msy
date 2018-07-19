@@ -4,6 +4,21 @@ function getPagingListCallBack(config,postData,data){
 }
 
 //获取分页列表
+/**
+ *
+ * @param config 必须是全局变量
+ *例子
+ * var config = {
+        requestEnd:false,//固定项不可修改，必须填写
+		loadTrigger:false,//固定项不可修改，必须填写
+		currentPage:1,//固定项不可修改，必须填写
+		url:module+'goods/getList', 必填填写项，
+		type:true,//可选项 true:下拉分页 false:带页数分页
+		callBack:callBack //可选项 成功回调函数
+	};
+ * @param postData 必须是全局变量
+ * @returns {boolean}
+ */
 function getPagingList(config,postData) {
     //容器
     config.container = config.container?config.container:$("#list");
