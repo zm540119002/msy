@@ -157,18 +157,6 @@
 		pageSize:6,
 		pageType:'manage'
 	};
-	var config_2 = {
-		url:module+'goods/getList',
-		type:true,
-		requestEnd:false,
-		loadTrigger:false,
-		currentPage:1,
-		callBack:callBack_2
-	};
-	var postData_2 = {
-		pageSize:6,
-		pageType:'manage'
-	};
 	$(function () {
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
@@ -259,32 +247,23 @@
 	});
 
 	//获取分页列表-商品页回调函数
-	function callBack(config,postData,data){
+	function callBack(config,data){
+		$('.loading').hide();
 		if(config.currentPage == 1){
-			config.container.find('li').remove();
-			config.container.append(data);
+			$('#list li').remove();
+			$('#list').append(data);
 		}else{
-			config.container.find('li:last').after(data);
+			$('#list li:last').after(data);
 		}
-		if($($.parseHTML(data)).length<postData.pageSize){
-			config.requestEnd = true;
-		}
-		config.currentPage ++;
-		config.loadTrigger = true;
 	}
-	//获取分页列表-商品页回调函数
-	function callBack_2(config,postData,data){
-		if(config.currentPage == 1){
-			config.container.find('li').remove();
-			config.container.append(data);
-		}else{
-			config.container.find('li:last').after(data);
+	//窗口滚动条-加载更多
+	$(window).on('scroll',function(){
+		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+			config.loadTrigger = false;
+			getPagingList(config,postData);
 		}
-		if($($.parseHTML(data)).length<postData.pageSize){
-			config.requestEnd = true;
-		}
-		config.currentPage ++;
-		config.loadTrigger = true;
-	}
+	});
+
+
 </script>
 {/block}

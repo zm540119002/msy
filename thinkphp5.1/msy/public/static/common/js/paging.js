@@ -1,11 +1,11 @@
 //获取分页列表-公共回调函数
-function getPagingListCallBack(config,postData,data){
+function getPagingListCallBack(config,data){
     config.container.html(data);
 }
 
-//获取分页列表
+
 /**
- *
+ * 获取分页列表
  * @param config 必须是全局变量
  *例子
  * var config = {
@@ -52,23 +52,15 @@ function getPagingList(config,postData) {
         },
         success: function(data){
             $('.loading').hide();
-            config.callBack(config,postData,data);
+            config.callBack(config,data);
+            if(config.type){
+                if($($.parseHTML(data)).length<postData.pageSize){
+                    config.requestEnd = true;
+                }
+                config.currentPage ++;
+                config.loadTrigger = true;
+            }
         }
     });
 }
 
-//窗口滚动条-加载更多
-$(window).on('scroll',function(){
-    if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-        config.loadTrigger = false;
-        getPagingList(config,postData);
-    }
-});
-//
-$('.databaseLayer .scroll-list-content').on('scroll',function(){
-    var listHeight=$('.databaseLayer #listLayer').get(0).scrollHeight;
-    if(config_2.loadTrigger && $('.databaseLayer .scroll-list-content').scrollTop()+$('.databaseLayer .scroll-list-content').height()>=listHeight){
-        config_2.loadTrigger = false;
-        getPagingList(config_2,postData_2);
-    }
-});
