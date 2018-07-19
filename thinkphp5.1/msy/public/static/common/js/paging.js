@@ -9,12 +9,6 @@ function getPagingList(config,postData) {
     config.container = config.container?config.container:$("#list");
     //提交路径
     config.url = config.url?config.url:action;
-    //请求结束标志
-    config.requestEnd = config.requestEnd?config.requestEnd:false;
-    //触发器
-    config.loadTrigger = config.loadTrigger?config.loadTrigger:false;
-    //当前页
-    config.currentPage = config.currentPage?config.currentPage:1;
     //type为true时为分页,默认为普通分页
     config.type = config.type?config.type:false;
     //回调函数名
