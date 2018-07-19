@@ -144,6 +144,17 @@
 {block name="footer"}{/block}
 {block name="script"}
 <!--<script type="text/javascript" src="factory_js/getGoodsList.js"></script>-->
+<script type="text/javascript">
+	var config = {
+		url:module+'goods/getList',
+		type:true,
+		callBack:callBack
+	};
+	var postData = {
+		pageSize:6,
+		pageType:'manage'
+	};
+</script>
 <script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
 	$(function () {
@@ -162,14 +173,6 @@
 //			function callBack(obj,data) {
 //				goodsPullDownPagingCallBack();
 //			}
-			var config = {
-				url:module+'goods/getList',
-			};
-			var postData = {
-				pageSize:10,
-				pageType:'manage',
-			};
-
 			getPagingList(config,postData);
 		}
 
@@ -252,5 +255,21 @@
 //		});
 
 	});
+
+	//获取分页列表-商品页回调函数
+	function callBack(config,postData,data){
+		$('.loading').hide();
+		if(currentPage == 1){
+			config.container.find('li').remove();
+			config.container.append(data);
+		}else{
+			config.container.find('li:last').after(data);
+		}
+		if($($.parseHTML(data)).length<postData.pageSize){
+			requestEnd = true;
+		}
+		currentPage ++;
+		loadTrigger = true;
+	}
 </script>
 {/block}
