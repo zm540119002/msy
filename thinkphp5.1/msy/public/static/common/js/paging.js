@@ -1,6 +1,6 @@
 //下拉获取分页列表-公共回调函数
-function getPagingListCallBack(obj,data){
-    obj.html(data);
+function getPagingListCallBack(config,data){
+    config.container.html(data);
 }
 
 //下拉获取分页列表
@@ -38,7 +38,7 @@ function getPagingList(config,postData) {
             dialog.error('AJAX错误');
         },
         success: function(data){
-            config.callBack(config.container,data);
+            config.callBack(config,data);
         }
     });
 }
