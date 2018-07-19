@@ -6,9 +6,8 @@ $(function(){
         var file = $(this);
         fileList = $(this).get(0).files;
         var imgArr = [];
-        var num=file.data('num');//限制个数  
-       
-        if($('.editDetailLayer li').length==num){
+        var num=file.data('num');//限制个数
+        if($('.editDetailLayer li').length==num && num){
             errorTipc('只能上传'+num+'张图片');
             return false;
         }
@@ -22,8 +21,6 @@ $(function(){
             var img = fil;
             var obj=$(this).parent();
             var fileSize=fil.size/1024/1024;
-            // console.log(event.target.files[i]);
-            // console.log(fileSize);
             // 判断是否图片
             if(!img){
                 return false;
@@ -74,10 +71,8 @@ $(function(){
             // 判断图片格式
             var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
             if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
-                layer.open({
-                    content:'请上传：mp4、rmvb、avi、ts格式图片',
-                    time:2
-                }) ;
+                dialog.error('请上传：mp4、rmvb、avi、ts格式图片');
+                return false;
             }
 
             var reader = new FileReader();
@@ -217,7 +212,6 @@ $(function(){
             var imgUrl=e.target.result;
             $(obj).addClass('active');
             var postData = {fileBase64: e.target.result};
-            postData.fileType = 'image';
             // postData.imgWidth = 145;
             // postData.imgHeight = 100;
             //提交
@@ -283,8 +277,7 @@ function uploadsMultiImg(content,obj,limitNum,title){
                     var _this=$(this);
                     var imgSrc=_this.find('img').attr('src');
                     layermultiImgAttr.push(imgSrc);
-                })
-                //$('.goods-detail').data('src',layermultiImgAttr);
+                });
                 if(layermultiImgAttr.length==0){
                     obj.data('src','');
                     layer.close(index);
@@ -292,7 +285,6 @@ function uploadsMultiImg(content,obj,limitNum,title){
                 }
                 var postData = {};
                 postData.fileBase64 = layermultiImgAttr;
-                postData.fileType = 'image';
                  $.ajax({
                     url: controller + 'uploadFileToTemp',
                     data: postData,
@@ -353,9 +345,8 @@ function uploadsMultiVideo(content){
                     var _this=$(this);
                     var videoSrc=_this.find('video').attr('src');
                     layermultiVideoAttr.push(videoSrc);
-                })
+                });
 
-                //$('.goods-video').data('src',layermultiVideoAttr);
                 if(layermultiVideoAttr.length==0){
                     $('.goods-video').data('src','');
                     layer.close(index);
@@ -363,7 +354,6 @@ function uploadsMultiVideo(content){
                 }
                 var postData = {};
                 postData.fileBase64 = layermultiVideoAttr;
-                postData.fileType = 'video';
                 $.ajax({
                     url: controller + 'uploadFileToTemp',
                     data: postData,
@@ -391,7 +381,7 @@ function uploadsMultiVideo(content){
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);
-                    },
+                    }
                 });
             }
         })
@@ -424,7 +414,6 @@ function uploadsImgDescribe(content,obj){
                     if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
                         multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                     }
-                    //imgArray.push(img);
                     $('.editCompanyPicLayer .multi-picture-module').append(html);
                     $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
                     $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
@@ -442,14 +431,13 @@ function uploadsImgDescribe(content,obj){
                         fileText:fileText
                     }
                     layermultiImgAttr.push(layerImgInfoData);
-                })
+                });
                 obj.data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
                     layer.close(index);
                     return false;
                 }
                 var postData = {};
-                postData.fileType = 'image';
                 postData.imgsWithDes = layermultiImgAttr;
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
@@ -487,7 +475,7 @@ function uploadsImgDescribe(content,obj){
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);
-                    },
+                    }
                 });
                 
             },
@@ -548,7 +536,6 @@ function uploadsVideoDescribe(content,obj){
                 obj.data('src',layermultiImgAttr);
                 var postData = {};
                 postData.imgsWithDes = layermultiImgAttr;
-                postData.fileType = 'video';
                 $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
                 $.ajax({
                     url: controller + 'uploadMultiFileToTempWithDes',
@@ -573,7 +560,7 @@ function uploadsVideoDescribe(content,obj){
                         }
                         obj.data('src', imgArray);
                         if(info != ''){
-                            dialog.error('视频文件上传完！')
+                            dialog.error('视频文件上传完！');
                             layer.close(index);
                         }else{
                             
@@ -585,9 +572,8 @@ function uploadsVideoDescribe(content,obj){
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);
-                    },
+                    }
                 });
-
             },
             no:function(){
                 $('.editCompanyPicLayer li').remove();
