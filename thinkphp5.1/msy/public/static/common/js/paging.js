@@ -5,7 +5,9 @@ function getPagingListCallBack(config,postData,data){
 
 //下拉获取分页列表
 var currentPage = 1;//记录当前页
+var currentPage_2 = 1;//记录当前页
 var requestEnd = false;//请求结束标记
+var requestEnd_2 = false;//请求结束标记
 function getPagingList(config,postData) {
     //容器
     config.container = config.container?config.container:$("#list");
@@ -21,7 +23,6 @@ function getPagingList(config,postData) {
     postData.pageSize = postData.pageSize?postData.pageSize:4;
     //请求结束标志
     if(config.type && requestEnd){
-        console.log(config.type)
         dialog.error('没有更多啦');
         loadTrigger = true;
         return false;
@@ -47,11 +48,9 @@ function getPagingList(config,postData) {
 
 //下拉加载更多
 var loadTrigger = false;//加载触发器
-function getMore(config,postData) {
-    $(window).on('scroll',function(){
-        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-            loadTrigger = false;
-            getPagingList(config,postData);
-        }
-    });
-}
+$(window).on('scroll',function(){
+    if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+        loadTrigger = false;
+        getPagingList(config,postData);
+    }
+});
