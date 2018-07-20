@@ -15,8 +15,7 @@ class Goods extends Model {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 
-	/**
-	 * 编辑 新增和修改
+	/**编辑 新增和修改
 	 * @param string $store_id
 	 * @return array
 	 */
@@ -118,14 +117,7 @@ class Goods extends Model {
 		return $this->where($where)->count() ? true : false;
 	}
 
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $order
-	 * @param array $join
-	 * @param string $limit
-	 * @return array|\PDOStatement|string|\think\Collection
-	 * 查询多条数据
+	/**查询多条数据
 	 */
 	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
@@ -148,12 +140,7 @@ class Goods extends Model {
 		return count($list)?$list->toArray():[];
 	}
 
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $join
-	 * @return array|null|\PDOStatement|string|Model
-	 * 查找一条数据
+	/**查找一条数据
 	 */
 	public function getInfo($where=[],$field=['*'],$join=[]){
 		$_where = array(
@@ -170,13 +157,7 @@ class Goods extends Model {
 		return $info?$info->toArray():[];
 	}
 
-	/**
-	 * 分页查询 商品
-	 * @param array $_where
-	 * @param array $_field
-	 * @param array $_join
-	 * @param string $_order
-	 * @return \think\Paginator
+	/**分页查询 商品
 	 */
 	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
 		$where = [

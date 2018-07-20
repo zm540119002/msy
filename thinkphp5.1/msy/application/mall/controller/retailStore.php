@@ -5,12 +5,17 @@ class RetailStore extends MallBase{
     /**首页
      */
     public function index(){
-        return $this->fetch();
+        if(request()->isGet()){
+            return $this->fetch();
+        }
     }
 
     /**供应商零售店
      */
     public function goods(){
-        return $this->fetch();
+        if(request()->isGet()){
+            $modelGoods = new \app\factory\model\Goods();
+            $list = $modelGoods->getList();
+        }
     }
 }
