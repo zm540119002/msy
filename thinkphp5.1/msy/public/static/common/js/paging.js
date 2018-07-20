@@ -3,27 +3,11 @@ function getPagingListCallBack(config,data){
     config.container.html(data);
 }
 
-<<<<<<< HEAD
-
-/**
- * 获取分页列表
- * @param config 必须是全局变量
- *例子
- * var config = {
-        requestEnd:false,//固定项不可修改，必须填写
-		loadTrigger:false,//固定项不可修改，必须填写
-		currentPage:1,//固定项不可修改，必须填写
-		url:module+'goods/getList', 必填填写项，
-		type:true,//可选项 true:下拉分页 false:带页数分页
-		callBack:callBack //可选项 成功回调函数
-	};
-=======
 /**获取分页列表
  * @param config.currentPage 必须配置
  * @param config.loadTrigger 必须配置
  * @param config.requestEnd  必须配置
  * @param config   必须是全局变量
->>>>>>> fb08196718a928ce826424397164920e69c6a9f5
  * @param postData 必须是全局变量
  */
 function getPagingList(config,postData) {
