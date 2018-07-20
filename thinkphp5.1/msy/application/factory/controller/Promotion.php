@@ -71,7 +71,6 @@ class Promotion extends StoreBase
             if($_GET['activityStatus'] == 0 ){//结束
                 return $this->fetch('list_over');
             }
-
         }
     }
 
