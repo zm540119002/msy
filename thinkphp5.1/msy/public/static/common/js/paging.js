@@ -3,12 +3,28 @@ function getPagingListCallBack(config,data){
     config.container.html(data);
 }
 
+<<<<<<< HEAD
+/**
+ * 获取分页列表
+ * @param config  下拉分页 必须是全局变量
+ *例子
+ * var config = {
+        type:true,//可选项 true:下拉分页 false:带页数分页
+        requestEnd:false,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
+		loadTrigger:false,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
+		currentPage:1,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
+		url:module+'goods/getList', 必填填写项，
+		callBack:callBack //可选项 成功回调函数
+	};
+ * @param postData 下拉分页 必须是全局变量
+=======
 /**获取分页列表
  * @param config.currentPage 必须配置
  * @param config.loadTrigger 必须配置
  * @param config.requestEnd  必须配置
  * @param config   必须是全局变量
  * @param postData 必须是全局变量
+>>>>>>> c602e7207c2e4d3306fdf59961ae982a0cced980
  */
 function getPagingList(config,postData) {
     //容器
@@ -54,4 +70,21 @@ function getPagingList(config,postData) {
         }
     });
 }
+
+//窗口滚动条-加载更多
+$(window).on('scroll',function(){
+    if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+        config.loadTrigger = false;
+        getPagingList(config,postData);
+    }
+});
+
+$('.classify-label-content ').on('scroll',function(){
+    var listHeight=document.getElementById('list').scrollHeight;
+    if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+        config.loadTrigger = false;
+        config.activityStatus = $('.category-tab li.current a').data('activity-status');
+        getPagingList(config,postData);
+    }
+});
 
