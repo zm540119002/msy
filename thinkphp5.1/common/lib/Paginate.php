@@ -131,7 +131,7 @@ class Paginate extends Paginator
      */
     protected function getAvailablePageWrapper($page,$text)
     {
-        return '<li><a href="javascript:void(0);" onclick="getPage('.$page.');">' . ($text?:$page) . '</a></li>';
+        return '<li><a href="javascript:void(0);" onclick="getPagingList('.$page.');">' . ($text?:$page) . '</a></li>';
     }
 
     /**
