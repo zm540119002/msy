@@ -973,6 +973,9 @@ input.special{
     overflow:hidden;
     border-bottom:1px solid #d9d9d9;
 }
+.thead-td .store-type {
+    margin:0 0 0 15%;
+}
 .thead-td .cols,
 .trademark-module .cols{
     float:left;
