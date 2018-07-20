@@ -3,7 +3,6 @@ function getPagingListCallBack(config,data){
     config.container.html(data);
 }
 
-<<<<<<< HEAD
 /**
  * 获取分页列表
  * @param config  下拉分页 必须是全局变量
@@ -17,14 +16,7 @@ function getPagingListCallBack(config,data){
 		callBack:callBack //可选项 成功回调函数
 	};
  * @param postData 下拉分页 必须是全局变量
-=======
-/**获取分页列表
- * @param config.currentPage 必须配置
- * @param config.loadTrigger 必须配置
- * @param config.requestEnd  必须配置
- * @param config   必须是全局变量
- * @param postData 必须是全局变量
->>>>>>> afb4444e5a8c0f8c8a84dc52940c4f861ab210c8
+
  */
 function getPagingList(config,postData) {
     //容器
