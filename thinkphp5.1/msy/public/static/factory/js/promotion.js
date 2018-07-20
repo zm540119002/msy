@@ -3,6 +3,18 @@
  */
 
 $(function(){
+    var config = {
+        url:module+'Goods/getList',
+        type:true,
+        requestEnd:false,
+        loadTrigger:false,
+        currentPage:1,
+        callBack:callBack
+    };
+    var postData = {
+        pageSize:4,
+        pageType:'promotion'
+    };
     var addsalesgoods=$('#addsalesgoods').html();
     //链接商品
     $('body').on('click','.linked-goods',function(){
@@ -17,7 +29,7 @@ $(function(){
                 var winHeight=$(window).height();
                 $('.content-box').css('height',winHeight-180+'px');
                     //加载第一页
-                    getPage();
+                getPagingList(config,postData);
                 //回显也选择的产品
                 if(goods!=''){
                     selectedGoodsList(goods);
@@ -93,9 +105,11 @@ $(function(){
             }
     });
 
-    //搜索
+    //搜索商品
     $('body').on('click','.addsalesgoodsLayer .search',function(){
-        getPage();
+        var serializeData =$('.addsalesgoodsLayer #form1').serializeObject();
+        postData = Object.assign(postData,serializeData);
+        getPagingList(config,postData);
     });
     //移除促销商品
     $('body').on('click','.promotional-close-btn',function(){
@@ -198,19 +212,7 @@ opt.default = {
 };
 $("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 
-//获取商品列表
-function getPage(currentPage) {
-    $("#list").html($('#loading').html());
-    var url = module+'goods/getList';
-    var postData = $('.addsalesgoodsLayer #form1').serializeObject();
-    postData.pageType = 'promotion';
-    postData.page = currentPage ? currentPage : 1;
-    postData.pageSize = 4;
-    $.get(url, postData , function(data){
-        $('.addsalesgoodsLayer #list').html(data);
-    });
-}
-//获取商品列表
+//获取已选择的商品
 function selectedGoodsList(selectedGoods) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getSceneGoodsList';
@@ -219,5 +221,10 @@ function selectedGoodsList(selectedGoods) {
     $.get(url, postData , function(data){
         $('.promotional-goods-list').append(data);
     });
+}
+
+//获取分页列表-商品页回调函数
+function callBack(config,data){
+    $('.addsalesgoodsLayer #list').html(data);
 }
 
