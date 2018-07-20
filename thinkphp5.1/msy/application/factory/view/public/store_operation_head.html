@@ -39,7 +39,6 @@
                 $('.factory-log-img').attr('src',uploads+msg.logo_img);
                 $('.factory-name').text(msg.name);
             }
-
         });
         //获取店铺信息
         $.get(controller+'getStoreInfo',{},function (msg) {
@@ -62,8 +61,6 @@
                     $('.run-type').text('B2C零售商城');
                 }
             }
-
         })
-
     })
 </script>

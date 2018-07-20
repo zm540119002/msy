@@ -1,6 +1,12 @@
 //获取分页列表-公共回调函数
 function getPagingListCallBack(config,data){
-    config.container.html(data);
+    $('.loading').hide();
+    if(config.currentPage == 1){
+        config.container.find('li').remove();
+        config.container.append(data);
+    }else{
+        config.container.find('li:last').after(data);
+    }
 }
 
 /**
@@ -80,3 +86,10 @@ $('.classify-label-content ').on('scroll',function(){
     }
 });
 
+//禁用移动按钮
+function disableBtn(){
+    var listUl = $('#list');
+    listUl.find('li').find('.move-btn').removeProp('disabled');
+    listUl.find('li:first').find('.up-btn').prop('disabled','disabled').addClass('disabled');
+    listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');
+}
