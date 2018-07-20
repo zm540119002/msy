@@ -1,29 +1,48 @@
-//下拉获取分页列表-公共回调函数
-function getPagingListCallBack(config,postData,data){
+//获取分页列表-公共回调函数
+function getPagingListCallBack(config,data){
     config.container.html(data);
 }
 
-//下拉获取分页列表
-var currentPage = 1;//记录当前页
-var requestEnd = false;//请求结束标记
+<<<<<<< HEAD
+
+/**
+ * 获取分页列表
+ * @param config 必须是全局变量
+ *例子
+ * var config = {
+        requestEnd:false,//固定项不可修改，必须填写
+		loadTrigger:false,//固定项不可修改，必须填写
+		currentPage:1,//固定项不可修改，必须填写
+		url:module+'goods/getList', 必填填写项，
+		type:true,//可选项 true:下拉分页 false:带页数分页
+		callBack:callBack //可选项 成功回调函数
+	};
+=======
+/**获取分页列表
+ * @param config.currentPage 必须配置
+ * @param config.loadTrigger 必须配置
+ * @param config.requestEnd  必须配置
+ * @param config   必须是全局变量
+>>>>>>> fb08196718a928ce826424397164920e69c6a9f5
+ * @param postData 必须是全局变量
+ */
 function getPagingList(config,postData) {
     //容器
     config.container = config.container?config.container:$("#list");
     //提交路径
     config.url = config.url?config.url:action;
-    //type为true时为下拉分页,默认为普通分页
+    //type为true时为分页,默认为普通分页
     config.type = config.type?config.type:false;
     //回调函数名
     config.callBack = config.callBack?config.callBack:getPagingListCallBack;
     //要提交的数据
     postData = postData?postData:$('#form1').serializeObject();
-    postData.page = postData.currentPage ? postData.currentPage : currentPage;
-    postData.pageSize = postData.pageSize?postData.pageSize:4;
+    postData.page = postData.currentPage ? postData.currentPage : config.currentPage;
+    postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
-    if(config.type && requestEnd){
-        console.log(config.type)
+    if(config.type && config.requestEnd){
         dialog.error('没有更多啦');
-        loadTrigger = true;
+        config.loadTrigger = true;
         return false;
     }
     $.ajax({
@@ -40,18 +59,15 @@ function getPagingList(config,postData) {
         },
         success: function(data){
             $('.loading').hide();
-            config.callBack(config,postData,data);
+            config.callBack(config,data);
+            if(config.type){
+                if($($.parseHTML(data)).length<postData.pageSize){
+                    config.requestEnd = true;
+                }
+                config.currentPage ++;
+                config.loadTrigger = true;
+            }
         }
     });
 }
 
-//下拉加载更多
-var loadTrigger = false;//加载触发器
-function getMore(config,postData) {
-    $(window).on('scroll',function(){
-        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-            loadTrigger = false;
-            getPagingList(config,postData);
-        }
-    });
-}

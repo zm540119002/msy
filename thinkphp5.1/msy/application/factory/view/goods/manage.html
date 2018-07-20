@@ -143,134 +143,127 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<!--<script type="text/javascript" src="factory_js/getGoodsList.js"></script>-->
 <script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
+	var config = {
+		url:module+'goods/getList',
+		type:true,
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		callBack:callBack
+	};
+	var postData = {
+		pageSize:6,
+		pageType:'manage'
+	};
 	$(function () {
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
-//			var config = {
-//				pageSize:10,
-//				pageType:'manage',
-//			};
-//			var url = module+'goods/getList';
-//			//初始化商品列表
-//			getPage(url,config);
-//			//上拉加载更多
-//			getMore(url,config);
-//			function callBack(obj,data) {
-//				goodsPullDownPagingCallBack();
-//			}
-			var config = {
-				url:module+'goods/getList',
-				type:true,
-				callBack:callBack,
-
-			};
-			var postData = {
-				pageSize:6,
-				pageType:'manage',
-			};
-
+			//初始化商品列表
 			getPagingList(config,postData);
-			getMore(config,postData);
+			getPagingList(config_2,postData_2);
 		}
 
-//		var databaseContent=$('#databaseContent').html();
-//		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
-//			var _this=$(this);
-//
-//			layer.open({
-//				title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
-//				className:'databaseLayer',
-//				content:databaseContent,
-//				success:function(){
-//					var oLi=$('.databaseLayer .goods-database-nav li:eq(0)')
-//					if(oLi.hasClass('current')){
-//						oLi.addClass('disabled');
-//					}
-//					isRolling($('.databaseLayer'));
-//				}
-//			})
-//		});
-//		$('body').on('click','.next-step',function(){
-//			var _this=$(this);
-//			var oLi = $('.databaseLayer .goods-store-content li');
-//			var storeId  = $('.databaseLayer .goods-store-content li.current').data('store-id');
-//			if(oLi.hasClass('current')){
-//				layer.open({
-//					title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
-//					className:'databaseLayer',
-//					content:databaseContent,
-//					success:function(){
-//						$('body').addClass('scrollfixed');
-////						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
-//						if(_this.hasClass('step')){
-//							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
-//							$('.databaseLayer .database-item').hide().eq(1).show();
-//						}
-//						requestEndLayer=false;
-//						currentPageLayer=1;
-//						var url = module + 'Goods/getBackup';
-//						var config = {
-//							storeId:storeId,
-//							pageSize:4
-//						};
-//						getPageLayer(url,config);
-//						loadTriggerLayer = false;
-//						getMoreLayer(url,config);
-//						isRolling($('.goods-database-nav,.databaseLayer h3'));
-//					},
-//					yes:function(index){
-//						$('body').removeClass('scrollfixed');
-//						layer.close(index);
-//					},
-//					btn:['确定']
-//				})
-//			}else{
-//				errorTipc('请选择源文件');
-//			}
-//		});
-//		$('body').on('click','.databaseLayer .goods-store-content li',function(){
-//			var _this=$(this);
-//				_this.addClass('current').siblings().removeClass('current');
-//				_this.parent().siblings().find('li').removeClass('current');
-//		});
-//		$('body').on('click','.databaseLayer .goods-database-content li',function(){
-//			var _this=$(this);
-//				_this.toggleClass('current');
-//		})
-//
-//
-//		//备份
-//		$('body').on('click','.backup',function () {
-//			$.post(module+'Goods/backup',{},function (msg) {
-//				if(msg.status == 0){
-//					dialog.error(msg.info);
-//					return false;
-//				}
-//				$('.backup-time').text(msg.create_time);
-//				dialog.success(msg.info);
-//			})
-//		});
+		var databaseContent=$('#databaseContent').html();
+		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
+			var _this=$(this);
+
+			layer.open({
+				title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
+				className:'databaseLayer',
+				content:databaseContent,
+				success:function(){
+					var oLi=$('.databaseLayer .goods-database-nav li:eq(0)')
+					if(oLi.hasClass('current')){
+						oLi.addClass('disabled');
+					}
+					isRolling($('.databaseLayer'));
+				}
+			})
+		});
+		$('body').on('click','.next-step',function(){
+			var _this=$(this);
+			var oLi = $('.databaseLayer .goods-store-content li');
+			var storeId  = $('.databaseLayer .goods-store-content li.current').data('store-id');
+			if(oLi.hasClass('current')){
+				layer.open({
+					title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
+					className:'databaseLayer',
+					content:databaseContent,
+					success:function(){
+						$('body').addClass('scrollfixed');
+//						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
+						if(_this.hasClass('step')){
+							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
+							$('.databaseLayer .database-item').hide().eq(1).show();
+						}
+						requestEndLayer=false;
+						currentPageLayer=1;
+						var url = module + 'Goods/getBackup';
+						var config = {
+							storeId:storeId,
+							pageSize:4
+						};
+						getPageLayer(url,config);
+						loadTriggerLayer = false;
+						getMoreLayer(url,config);
+						isRolling($('.goods-database-nav,.databaseLayer h3'));
+					},
+					yes:function(index){
+						$('body').removeClass('scrollfixed');
+						layer.close(index);
+					},
+					btn:['确定']
+				})
+			}else{
+				errorTipc('请选择源文件');
+			}
+		});
+		$('body').on('click','.databaseLayer .goods-store-content li',function(){
+			var _this=$(this);
+				_this.addClass('current').siblings().removeClass('current');
+				_this.parent().siblings().find('li').removeClass('current');
+		});
+		$('body').on('click','.databaseLayer .goods-database-content li',function(){
+			var _this=$(this);
+				_this.toggleClass('current');
+		})
+
+
+		//备份
+		$('body').on('click','.backup',function () {
+			$.post(module+'Goods/backup',{},function (msg) {
+				if(msg.status == 0){
+					dialog.error(msg.info);
+					return false;
+				}
+				$('.backup-time').text(msg.create_time);
+				dialog.success(msg.info);
+			})
+		});
 
 	});
 
 	//获取分页列表-商品页回调函数
-	function callBack(config,postData,data){
+	function callBack(config,data){
 		$('.loading').hide();
-		if(currentPage == 1){
-			config.container.find('li').remove();
-			config.container.append(data);
+		if(config.currentPage == 1){
+			$('#list li').remove();
+			$('#list').append(data);
 		}else{
-			config.container.find('li:last').after(data);
+			$('#list li:last').after(data);
 		}
-		if($($.parseHTML(data)).length<postData.pageSize){
-			requestEnd = true;
-		}
-		currentPage ++;
-		loadTrigger = true;
 	}
+	//窗口滚动条-加载更多
+	$(window).on('scroll',function(){
+		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+			config.loadTrigger = false;
+			getPagingList(config,postData);
+		}
+	});
+
+
 </script>
 {/block}

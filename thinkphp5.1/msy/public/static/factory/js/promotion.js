@@ -19,9 +19,7 @@ $(function(){
                     //加载第一页
                     getPage();
                 //回显也选择的产品
-                console.log(goods)
                 if(goods!=''){
-                    console.log(1)
                     selectedGoodsList(goods);
                 }
             },
@@ -50,7 +48,7 @@ $(function(){
                     }
                     selectedGood={
                         goods_id:goodsId,
-                        special:special,
+                        special:special
                     }
                     selectedGoods.push(selectedGood);
                 });
@@ -154,7 +152,7 @@ $(function(){
             },
             error:function (xhr) {
                 dialog.error('AJAX错误'+xhr);
-            },
+            }
         });
     })
 
@@ -181,7 +179,6 @@ opt.default = {
       var hm=validity[2].split(' ');
       var hm1=hm[1].split(':');
       if (id === "startTime") {
-          console.log(opt.default.maxDate);
          if (opt.default.maxDate) {
             opt.default.maxDate = null;
          }
@@ -194,7 +191,7 @@ opt.default = {
              dateFormat: 'yy-mm-dd',
              timeFormat: 'HH:ii',
              lang: 'zh',  
-             minDate:new Date(validity[0], validity[1] - 1,hm[0],hm1[0],hm1[1]),
+             minDate:new Date(validity[0], validity[1] - 1,hm[0],hm1[0],hm1[1])
          });
       }
    } 

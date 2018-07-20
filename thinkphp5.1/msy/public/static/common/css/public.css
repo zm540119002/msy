@@ -2088,7 +2088,7 @@ table {
      position: relative;
 }
 .classify-label-content{
-    padding:0 0 1.5rem 0;
+    /*padding:0 0 1.5rem 0;*/
 }
 .uploader1 input[type=file] {
     position: absolute;
