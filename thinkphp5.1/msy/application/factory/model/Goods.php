@@ -215,8 +215,5 @@ class Goods extends Model {
 		}else{
 			return errorMsg("失败");
 		}
-
 	}
-	
-
 }

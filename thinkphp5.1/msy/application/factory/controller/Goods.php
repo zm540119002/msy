@@ -117,6 +117,8 @@ class Goods extends StoreBase
                 g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
         ];
         $list = $model -> pageQuery($where,$file);
+        $page = $list->getCurrentPage();
+        $this->assign('page',$page);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'promotion' ){//促销
