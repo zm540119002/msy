@@ -89,10 +89,11 @@
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1,
-		callBack:callBack
+		callBack:callBack,
+		container1:$('.promotion-item .content-label')
 	};
 	var postData = {
-		pageSize:10,
+		pageSize:10
 	};
 	$(function () {
 		//没有默认店铺
@@ -111,7 +112,9 @@
 		//根据促销活动状态获取活动列表
 		$('body').on('click','.category-tab li',function () {
 			$(this).addClass('current').siblings().removeClass('current');
-			config.activityStatus = $(this).find('a').data('activity-status');
+			postData.activityStatus = $(this).find('a').data('activity-status');
+			config.currentPage = 1;
+			config.requestEnd = false;
 			getPagingList(config,postData);
 		})
 
@@ -131,79 +134,20 @@
 		})
 	});
 
-//	//获取列表
-//	var currentPage = 1;//记录当前页
-//	var requestEnd = false;//请求结束标记
-//	function getPage(url,config) {
-//		var postData = $.extend({},config);
-//		postData.page = currentPage ? currentPage : 1;
-//		postData.pageSize = postData.pageSize?postData.pageSize:7;
-//		//请求结束标志
-//		if(requestEnd){
-//			dialog.error('没有更多啦');
-//			loadTrigger = true;
-//			return false;
-//		}
-//		$.ajax({
-//			url: url,
-//			data: postData,
-//			type: 'get',
-//			dataType:'json',
-//			beforeSend: function(){
-//				$('.loading').show();
-//			},
-//			error:function (xhr) {
-//				$('.loading').hide();
-//				dialog.error('AJAX错误');
-//			},
-//			success: function(data){
-//				$('.loading').hide();
-//				if(currentPage == 1){
-//					if(config.activityStatus == 1){
-//						$('.promotion-item .content-label').text('促销活动的修改、删除和排序');
-//					}
-//					if(config.activityStatus==0){
-//						$('.promotion-item .content-label').text('已结束的促销活动');
-//					}
-//					$('#list .tag-item').remove();
-//					$('#list').append(data);
-//				}else{
-//					$('#list .tag-item:last').after(data);
-//				}
-//				if($($.parseHTML(data)).length<postData.pageSize){
-//					requestEnd = true;
-//				}
-//				currentPage ++;
-//				loadTrigger = true;
-//			}
-//		});
-//	}
-//
-
-	$('.classify-label-content ').on('scroll',function(){
-		var listHeight=document.getElementById('list').scrollHeight;
-		console.log($('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight)
-		if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
-			config.loadTrigger = false;
-			config.activityStatus = $('.category-tab li.current a').data('activity-status');
-			getPagingList(config,postData);
-		}
-	});
-
 	//获取分页列表-商品页回调函数
 	function callBack(config,data){
 		$('.loading').hide();
 		if(config.currentPage == 1){
 			if(config.activityStatus == 1){
-				$('.promotion-item .content-label').text('促销活动的修改、删除和排序');
+				config.container1.text('促销活动的修改、删除和排序');
 			}
 			if(config.activityStatus==0){
-				$('.promotion-item .content-label').text('已结束的促销活动');
+				config.container1.text('已结束的促销活动');
 			}
-			$('#list .tag-item').remove();
-			$('#list').append(data);
+			config.container.find('.tag-item').remove();
+			config.container.append(data);
 		}else{
-			$('#list .tag-item:last').after(data);
+			config.container.find('.tag-item:last').after(data);
 		}
 	}
 </script>

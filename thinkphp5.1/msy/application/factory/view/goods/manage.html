@@ -163,7 +163,6 @@
 		if(notDefaultStore == 0){
 			//初始化商品列表
 			getPagingList(config,postData);
-			getPagingList(config_2,postData_2);
 		}
 
 		var databaseContent=$('#databaseContent').html();
@@ -250,20 +249,12 @@
 	function callBack(config,data){
 		$('.loading').hide();
 		if(config.currentPage == 1){
-			$('#list li').remove();
-			$('#list').append(data);
+			config.container.find('li').remove();
+			config.container.append(data);
 		}else{
-			$('#list li:last').after(data);
+			config.container.find('li:last').after(data);
 		}
 	}
-	//窗口滚动条-加载更多
-	$(window).on('scroll',function(){
-		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-			config.loadTrigger = false;
-			getPagingList(config,postData);
-		}
-	});
-
 
 </script>
 {/block}
