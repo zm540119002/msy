@@ -3,6 +3,18 @@
  */
 
 $(function(){
+    var config = {
+        url:module+'Goods/getList',
+        type:true,
+        requestEnd:false,
+        loadTrigger:false,
+        currentPage:1,
+        callBack:callBack
+    };
+    var postData = {
+        pageSize:4,
+        pageType:'promotion'
+    };
     var addsalesgoods=$('#addsalesgoods').html();
     //链接商品
     $('body').on('click','.linked-goods',function(){
@@ -17,11 +29,9 @@ $(function(){
                 var winHeight=$(window).height();
                 $('.content-box').css('height',winHeight-180+'px');
                     //加载第一页
-                    getPage();
+                getPagingList(config,postData);
                 //回显也选择的产品
-                console.log(goods)
                 if(goods!=''){
-                    console.log(1)
                     selectedGoodsList(goods);
                 }
             },
@@ -50,7 +60,7 @@ $(function(){
                     }
                     selectedGood={
                         goods_id:goodsId,
-                        special:special,
+                        special:special
                     }
                     selectedGoods.push(selectedGood);
                 });
@@ -95,9 +105,11 @@ $(function(){
             }
     });
 
-    //搜索
+    //搜索商品
     $('body').on('click','.addsalesgoodsLayer .search',function(){
-        getPage();
+        var serializeData =$('.addsalesgoodsLayer #form1').serializeObject();
+        postData = Object.assign(postData,serializeData);
+        getPagingList(config,postData);
     });
     //移除促销商品
     $('body').on('click','.promotional-close-btn',function(){
@@ -154,7 +166,7 @@ $(function(){
             },
             error:function (xhr) {
                 dialog.error('AJAX错误'+xhr);
-            },
+            }
         });
     })
 
@@ -181,7 +193,6 @@ opt.default = {
       var hm=validity[2].split(' ');
       var hm1=hm[1].split(':');
       if (id === "startTime") {
-          console.log(opt.default.maxDate);
          if (opt.default.maxDate) {
             opt.default.maxDate = null;
          }
@@ -194,26 +205,14 @@ opt.default = {
              dateFormat: 'yy-mm-dd',
              timeFormat: 'HH:ii',
              lang: 'zh',  
-             minDate:new Date(validity[0], validity[1] - 1,hm[0],hm1[0],hm1[1]),
+             minDate:new Date(validity[0], validity[1] - 1,hm[0],hm1[0],hm1[1])
          });
       }
    } 
 };
 $("#startTime").mobiscroll($.extend(opt['datetime'],opt['default']));
 
-//获取商品列表
-function getPage(currentPage) {
-    $("#list").html($('#loading').html());
-    var url = module+'goods/getList';
-    var postData = $('.addsalesgoodsLayer #form1').serializeObject();
-    postData.pageType = 'promotion';
-    postData.page = currentPage ? currentPage : 1;
-    postData.pageSize = 4;
-    $.get(url, postData , function(data){
-        $('.addsalesgoodsLayer #list').html(data);
-    });
-}
-//获取商品列表
+//获取已选择的商品
 function selectedGoodsList(selectedGoods) {
     $("#list").html($('#loading').html());
     var url = module+'goods/getSceneGoodsList';
@@ -222,5 +221,10 @@ function selectedGoodsList(selectedGoods) {
     $.get(url, postData , function(data){
         $('.promotional-goods-list').append(data);
     });
+}
+
+//获取分页列表-商品页回调函数
+function callBack(config,data){
+    $('.addsalesgoodsLayer #list').html(data);
 }
 

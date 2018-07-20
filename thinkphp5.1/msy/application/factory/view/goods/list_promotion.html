@@ -11,7 +11,10 @@
 </a>
 {/volist}
 {else/}
-<div class='loading'>没有符合条件的记录！</div>
+    {if $page == 1}
+    <div class='tag-item'>没有符合条件的记录！</div>
+    {else /}
+    {/if}
 {/notempty}
 </div>
 {$list|raw}

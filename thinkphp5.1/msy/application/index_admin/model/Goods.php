@@ -95,8 +95,8 @@ class Goods extends Model {
 			$where[] = ['f.name|g.name', 'like', '%'.trim($keyword).'%'];
 		}
 		if(input('?get.auth_status')){
-			$authStatus = input('get.auth_status','int');
-			$where[] = ['g.auth_status', '=',$authStatus];
+			$authStatus = input('get.shelf_status','int');
+			$where[] = ['g.shelf_status', '=',$authStatus];
 		}
 		$order = [
 			'g.store_id'=>'desc',

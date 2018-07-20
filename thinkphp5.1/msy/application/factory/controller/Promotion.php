@@ -61,6 +61,8 @@ class Promotion extends StoreBase
             'p.id','p.name','p.goods_ids','p.start_time','p.end_time','p.create_time','p.sort',
         );
         $list = $model -> pageQuery($where,$field);
+        $page = $list->getCurrentPage();
+        $this->assign('page',$page);
         $this->assign('list',$list);
         if(isset($_GET['activityStatus'])){
             if($_GET['activityStatus'] == 1 ){//未结束
@@ -69,7 +71,6 @@ class Promotion extends StoreBase
             if($_GET['activityStatus'] == 0 ){//结束
                 return $this->fetch('list_over');
             }
-
         }
     }
 
