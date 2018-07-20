@@ -50,22 +50,25 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="factory_js/getGoodsList.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
+	var config = {
+		url:module+'goods/getList',
+		type:true,
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'inventory'
+	};
 	$(function () {
 		//有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
 			//初始化商品列表
-			var config = {
-				pageSize:10,
-				pageType:'inventory',
-			};
-			var url = module+'goods/getList';
-			//初始化商品列表
-			getPage(url,config);
-			//上拉加载更多
-			getMore(url,config);
+			getPagingList(config,postData);
 		}
 		/**
 		 * 设置库存

@@ -227,7 +227,6 @@
             postData.store_logo = $('.store_logo').attr('src');
             postData.store_run_type = $('.store_run_type').text();
 			$.post(module+'Goods/generateGoodsQRcode',postData,function (msg) {
-				console.log(msg.info.info);
 				if(msg.status == 1){
 					layer.open({
 						title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],

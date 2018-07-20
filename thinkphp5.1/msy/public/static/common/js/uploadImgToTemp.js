@@ -32,7 +32,7 @@ $(function(){
             $.post(controller+"uploadFileToTemp",postData,function(msg){
                 if(msg.status == 1){
                     $(obj).find('.img').val(msg.info);
-                    $(obj).find('img').attr('src','/uploads/'+msg.info);
+                    // $(obj).find('img').attr('src','/uploads/'+msg.info);
                 }else{
                     dialog.error(msg.info)
                 }

@@ -1,14 +1,28 @@
 //获取分页列表-公共回调函数
 function getPagingListCallBack(config,data){
-    config.container.html(data);
+    $('.loading').hide();
+    if(config.currentPage == 1){
+        config.container.find('li').remove();
+        config.container.append(data);
+    }else{
+        config.container.find('li:last').after(data);
+    }
 }
 
-/**获取分页列表
- * @param config.currentPage 必须配置
- * @param config.loadTrigger 必须配置
- * @param config.requestEnd  必须配置
- * @param config   必须是全局变量
- * @param postData 必须是全局变量
+/**
+ * 获取分页列表
+ * @param config  下拉分页 必须是全局变量
+ *例子
+ * var config = {
+        type:true,//可选项 true:下拉分页 false:带页数分页
+        requestEnd:false,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
+		loadTrigger:false,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
+		currentPage:1,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
+		url:module+'goods/getList', 必填填写项，
+		callBack:callBack //可选项 成功回调函数
+	};
+ * @param postData 下拉分页 必须是全局变量
+
  */
 function getPagingList(config,postData) {
     //容器
@@ -72,3 +86,10 @@ $('.classify-label-content ').on('scroll',function(){
     }
 });
 
+//禁用移动按钮
+function disableBtn(){
+    var listUl = $('#list');
+    listUl.find('li').find('.move-btn').removeProp('disabled');
+    listUl.find('li:first').find('.up-btn').prop('disabled','disabled').addClass('disabled');
+    listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');
+}

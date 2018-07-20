@@ -150,8 +150,7 @@
 		type:true,
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1,
-		callBack:callBack
+		currentPage:1
 	};
 	var postData = {
 		pageSize:6,
@@ -245,16 +244,6 @@
 
 	});
 
-	//获取分页列表-商品页回调函数
-	function callBack(config,data){
-		$('.loading').hide();
-		if(config.currentPage == 1){
-			config.container.find('li').remove();
-			config.container.append(data);
-		}else{
-			config.container.find('li:last').after(data);
-		}
-	}
 
 </script>
 {/block}
