@@ -5,6 +5,17 @@
 {/block}
 {block name="content"}
 <!--选择商品搞促销-->
+<section style="display: none" class="search-li">
+<li data-goods-id="" >
+	<img src="" alt="" class="left"/>
+	<div>
+		<span class="goods-name"></span>
+		<span class="special-price">特价</span>
+		<input type="text" class="special" placeholder="填写价格">
+	</div>
+	<a href="javascript:void(0);" class="promotional-close-btn">X</a>
+</li>
+</section>
 <section id="addsalesgoods" style="display:none;" class="f24">
 	<div class="content-box">
 		<span class="content-label">已选择促销商品</span>
@@ -15,7 +26,6 @@
 		<form name="form1" id="form1">
 			<div class="columns_flex search-row-flex">
 				<input type="text" class="input-filed search-goods keyword" name="keyword" placeholder="搜索商品"/>
-				<input type="text" class="input-filed search-goods keyword" name="keyword2" placeholder="搜索商品"/>
 				<input type="button" value="搜索" class="layer-search-btn search"/>
 			</div>
 		</form>
