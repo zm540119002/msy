@@ -16,6 +16,7 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
+		
 		$_config = $config+$_config;
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){

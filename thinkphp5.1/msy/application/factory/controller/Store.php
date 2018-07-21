@@ -13,10 +13,13 @@ class Store extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Store();
-        $where = [
-            ['factory_id','=',$this -> factory['id']]
+
+        $config = [
+            'where' => [
+                ['factory_id','=',$this -> factory['id']],
+            ]
         ];
-        $storeList =  $model -> getList($where);
+        $storeList =  $model -> getList($config);
         $this -> assign('storeList',$storeList);
         return $this->fetch();
     }
@@ -31,32 +34,39 @@ class Store extends FactoryBase
         }else{
             // 企业旗舰店
             $modelFactory = new \app\factory\model\Factory();
-            $where = [
-                ['f.id','=',$this->factory['id']]
+            $config = [
+                'where' => [
+                    ['f.id','=',$this->factory['id']]
+                ],'join' => [
+                    ['factory f','f.id = r.factory_id'],
+                ],'field' =>  ['f.id,f.name,r.logo_img as img']
             ];
-            $file = ['f.id,f.name,r.logo_img as img'];
-            $join =[
-                ['record r','f.id = r.factory_id'],
-            ];
-            $factoryStore =  $modelFactory -> getInfo($where,$file,$join);
+            $factoryStore =  $modelFactory -> getInfo($config);
+            print_r($modelFactory->getLastSql());exit;
             if(empty($factoryStore)){
                 $this -> error('请完善档案资料,再申请开店',url('Record/edit'));
             }
             $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
             $modelFactory = new \app\factory\model\Brand();
-            $where = [
-                ['b.factory_id','=',$this->factory['id']]
+            $config = [
+                'where' => [
+                    ['b.factory_id','=',$this->factory['id']]
+                ],'field' => [
+                    'b.id,b.name,b.brand_img as img',
+                ],
             ];
-            $file = ['b.id,b.name,b.brand_img as img'];
-            $brandStores =  $modelFactory -> getList($where,$file);
+            print_r(11);exit;
+            $brandStores =  $modelFactory -> getList($config);
             $this -> assign('brandStores',$brandStores);
             //查看已申请的店铺
             $modeStore = new \app\factory\model\Store();
-            $where = [
-                ['s.factory_id','=',$this->factory['id']]
+            $config = [
+                'where' => [
+                    ['s.factory_id','=',$this->factory['id']]
+                ],
             ];
-            $storesApplied = $modeStore->getList($where);
+            $storesApplied = $modeStore->getList($config);
             $this -> assign('storesApplied',$storesApplied);
             return $this->fetch();
         }

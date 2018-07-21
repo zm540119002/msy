@@ -6,7 +6,7 @@ use think\Db;
  * 基础模型器
  */
 
-class Brand extends Model {
+class Brand extends \common\model\Base  {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'brand';
 	// 设置主键
