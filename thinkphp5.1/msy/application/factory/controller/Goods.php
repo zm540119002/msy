@@ -105,18 +105,30 @@ class Goods extends StoreBase
             return errorMsg('请求方式错误');
         }
         $model = new\app\factory\model\Goods;
-        $where = [
-            ['g.store_id','=',$this->store['id']],
-        ];
-        if($_GET['pageType'] == 'promotion' ){//促销
-            $where[] =  ['g.sale_type','=',0];
-        }
-        $file = [
-            'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
+        $config=[
+            'where'=>[
+                ['g.store_id','=',$this->store['id']],
+            ],
+            'field'=>[
+                    'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
                 g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
+            ],
+            'order'=>[
+                'sort'=>'desc',
+                'line_num'=>'asc',
+                'id'=>'desc'
+            ],
         ];
-        $list = $model -> pageQuery($where,$file);
+        if($_GET['pageType'] == 'promotion' ) {//促销
+            $config['where'][] = ['g.sale_type', '=', 0];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $config['where'][] = ['name', 'like', '%'.trim($keyword).'%'];
+        }
+     
+        $list = $model -> pageQuery($config);
         $page = $list->getCurrentPage();
         $this->assign('page',$page);
         $this->assign('list',$list);
@@ -147,10 +159,13 @@ class Goods extends StoreBase
             $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
             //本厂商店铺备份文件
             $modelStore = new \app\factory\model\Store;
-            $where = [
-               ['factory_id','=',$this -> factory['id']]
+
+            $config = [
+                'where'=>[
+                    ['factory_id','=',$this -> factory['id']]
+                ],
             ];
-            $storeList = $modelStore -> getList($where);
+            $storeList = $modelStore -> getList($config);
             foreach ( $storeList as &$storeInfo) {
                 $fileName = $storePath.$storeInfo['id'].'.txt';
                 if(file_exists($fileName)){
@@ -219,14 +234,16 @@ class Goods extends StoreBase
     public function backup(){
         if(request()->isPost()){
             $model = new \app\factory\model\Goods;
-            $where = [
-                ['store_id','=',$this->store['id']]
+            $config = [
+                'where'=>[
+                    ['store_id','=',$this->store['id']]
+                ],
+                'field'=>[
+                    'g.id,g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
+                        g.retail_price,g.retail_price,g.sale_price,g.settle_price'
+                ],
             ];
-            $field = [
-                'g.id,g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
-            g.retail_price,g.retail_price,g.sale_price,g.settle_price'
-            ];
-            $goodsList = $model -> getList($where,$field);
+            $goodsList = $model -> getList($config);
             $goodsList = json_encode($goodsList);
             $uploadPath = config('upload_dir.upload_path');
             if(!is_dir($uploadPath)){
@@ -291,13 +308,15 @@ class Goods extends StoreBase
             $goodsIds[] = $goods['goods_id'];
         }
         $modelGoods = new \app\factory\model\Goods;
-        $where = [
-            ['id','in',$goodsIds]
+        $config = [
+            'where'=>[
+                ['id','in',$goodsIds]
+            ],
+            'field'=>[
+                'g.id,g.name,g.thumb_img,g.sale_price'
+            ],
         ];
-        $goodsFile = [
-            'g.id,g.name,g.thumb_img,g.sale_price'
-        ];
-        $goodsList = $modelGoods -> getList($where,$goodsFile);
+        $goodsList = $modelGoods -> getList($config);
         foreach ($goodsList as $k=>$v){
             foreach ($selectedGoodsList as $kk=>$vv){
                if($v['id'] == $vv['goods_id'] ){

@@ -5,7 +5,8 @@ class RetailStore extends MallBase{
     /**首页
      */
     public function index(){
-        if(request()->isGet()){
+        if(request()->isAjax()){
+        }else{
             return $this->fetch();
         }
     }
@@ -13,9 +14,17 @@ class RetailStore extends MallBase{
     /**供应商零售店
      */
     public function goods(){
-        if(request()->isGet()){
+        if(request()->isAjax()){
             $modelGoods = new \app\factory\model\Goods();
-            $list = $modelGoods->getList();
+            $config =[
+                'field' => [
+                    'g.id','g.name',
+                ],
+            ];
+            $list = $modelGoods->getList($config);
+            return $list;
+        }else{
+            return $this->fetch();
         }
     }
 }
