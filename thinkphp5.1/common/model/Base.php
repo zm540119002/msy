@@ -16,7 +16,7 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
-		$_config = array_merge_recursive($_config,$config);
+		$_config = $config+$_config;
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
@@ -40,7 +40,7 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
-		$_config = array_merge_recursive($_config,$config);
+		$_config = $config+$_config;
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
@@ -64,7 +64,7 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
-		$_config = array_merge_recursive($_config,$config);
+		$_config = $config+$_config;
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){

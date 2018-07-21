@@ -17,7 +17,9 @@ class RetailStore extends MallBase{
         if(request()->isAjax()){
             $modelGoods = new \app\factory\model\Goods();
             $config =[
-                'field' => [
+                'where' => [
+                    ['status', '=', 1],
+                ],'field' => [
                     'g.id','g.name',
                 ],
             ];
