@@ -16,7 +16,12 @@ class RetailStore extends MallBase{
     public function goods(){
         if(request()->isAjax()){
             $modelGoods = new \app\factory\model\Goods();
-            $list = $modelGoods->getList();
+            $config =[
+                'field' => [
+                    'g.id','g.name',
+                ],
+            ];
+            $list = $modelGoods->getList($config);
             return $list;
         }else{
             return $this->fetch();

@@ -135,12 +135,22 @@ class Goods extends \think\Model {
 	 */
 	public function getList($config=[]){
 		$_config = [
-			$_where = [
+			'where' => [
 				'g.status' => 0,
+			],'order' => [
+				'g.id' => 'desc',
+			],'join' => [
+			],'field' => [
+				'*',
 			],
 		];
 		$_config = array_merge($_config,$config);
-		return $_config;
+		$_model = $this->alias('g');
+		foreach ($_config as $key=>$value){
+			$_model = $_model->$key($value);
+		}
+		$list = $_model->select();
+		return count($list)?$list->toArray():[];
 	}
 
 	/**查找一条数据
