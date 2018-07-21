@@ -157,18 +157,25 @@ class Goods extends \think\Model {
 
 	/**查找一条数据
 	 */
-	public function getInfo($where=[],$field=['*'],$join=[]){
-		$_where = array(
-			'g.status' => 0,
-		);
-		$where = array_merge($_where, $where);
-		$_join = array(
-		);
-		$info = $this->alias('g')
-			->field($field)
-			->join(array_merge($_join,$join))
-			->where($where)
-			->find();
+	public function getInfo($config){
+		$_config = [
+			'where' => [
+				'g.status' => 0,
+			],'order' => [
+				'g.id' => 'desc',
+			],'join' => [
+			],'field' => [
+				'*',
+			],
+		];
+		$_config = array_merge($_config,$config);
+		$_model = $this->alias('g');
+		foreach ($_config as $key=>$value){
+			if(!empty($value)){
+				$_model = $_model->$key($value);
+			}
+		}
+		$info = $_model->find();
 		return $info?$info->toArray():[];
 	}
 
