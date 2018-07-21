@@ -1,28 +1,23 @@
 <?php
 namespace common\model;
 
-class ModelBase extends \think\Model {
+class Base extends \think\Model {
 
 	/**查询多条数据
 	 */
-	public function getList($config=[],$alias=''){
-		if($alias){
-			$_alias = $alias.'.';
-		}else{
-			$_alias =$alias;
-		}
+	public function getList($config=[]){
 		$_config = [
 			'where' => [
-				$_alias.'status' => 0,
+				'status' => 0,
 			],'order' => [
-				$_alias.'id' => 'desc',
+				'id' => 'desc',
 			],'join' => [
 			],'field' => [
 				'*',
 			],
 		];
 		$_config = array_merge($_config,$config);
-		$_model = $this->alias($alias);
+		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
 				$_model = $_model->$key($value);
@@ -37,16 +32,16 @@ class ModelBase extends \think\Model {
 	public function getInfo($config){
 		$_config = [
 			'where' => [
-				'g.status' => 0,
+				'status' => 0,
 			],'order' => [
-				'g.id' => 'desc',
+				'id' => 'desc',
 			],'join' => [
 			],'field' => [
 				'*',
 			],
 		];
 		$_config = array_merge($_config,$config);
-		$_model = $this->alias('g');
+		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
 				$_model = $_model->$key($value);
@@ -58,25 +53,19 @@ class ModelBase extends \think\Model {
 
 	/**分页查询 商品
 	 */
-	public function pageQuery($config=[],$alias=''){
-		if($alias){
-			$_alias = $alias.'.';
-		}else{
-			$_alias =$alias;
-		}
+	public function pageQuery($config=[]){
 		$_config = [
 			'where' => [
-				[$_alias.'status', '=', 0],
+				['status', '=', 0],
 			],'order' => [
-				$_alias.'id' => 'desc',
+				'id' => 'desc',
 			],'join' => [
 			],'field' => [
 				'*',
 			],
 		];
 		$_config = array_merge($_config,$config);
-
-		$_model = $this->alias($alias);
+		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
 				$_model = $_model->$key($value);

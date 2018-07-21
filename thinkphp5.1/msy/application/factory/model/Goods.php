@@ -1,11 +1,13 @@
 <?php
 namespace app\factory\model;
 
-class Goods extends \common\model\ModelBase {
+class Goods extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'goods';
 	// 设置主键
 	protected $pk = 'id';
+	// 别名
+	protected $alias = 'g';
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 
@@ -107,102 +109,6 @@ class Goods extends \common\model\ModelBase {
 		}
 		return $this->where($where)->count() ? true : false;
 	}
-
-	/**查询多条数据
-	 */
-	public function getList2($where=[],$field=['*'],$join=[],$order=[],$limit=''){
-		$_where = array(
-			'g.status' => 0,
-		);
-		$_join = array(
-		);
-		$where = array_merge($_where, $where);
-		$_order = array(
-			'g.id'=>'desc',
-		);
-		$order = array_merge($_order, $order);
-		$list = $this->alias('g')
-			->where($where)
-			->field($field)
-			->join(array_merge($_join,$join))
-			->order($order)
-			->limit($limit)
-			->select();
-		return count($list)?$list->toArray():[];
-	}
-
-	/**查询多条数据
-	 */
-	public function getList($config=[]){
-		$_config = [
-			'where' => [
-				'g.status' => 0,
-			],'order' => [
-				'g.id' => 'desc',
-			],'join' => [
-			],'field' => [
-				'*',
-			],
-		];
-		$_config = array_merge($_config,$config);
-		$_model = $this->alias('g');
-		foreach ($_config as $key=>$value){
-			if(!empty($value)){
-				$_model = $_model->$key($value);
-			}
-		}
-		$list = $_model->select();
-		return count($list)?$list->toArray():[];
-	}
-
-	/**查找一条数据
-	 */
-	public function getInfo($config){
-		$_config = [
-			'where' => [
-				'g.status' => 0,
-			],'order' => [
-				'g.id' => 'desc',
-			],'join' => [
-			],'field' => [
-				'*',
-			],
-		];
-		$_config = array_merge($_config,$config);
-		$_model = $this->alias('g');
-		foreach ($_config as $key=>$value){
-			if(!empty($value)){
-				$_model = $_model->$key($value);
-			}
-		}
-		$info = $_model->find();
-		return $info?$info->toArray():[];
-	}
-
-//	/**分页查询 商品
-//	 */
-//	public function pageQuery($config=[]){
-//		$_config = [
-//			'where' => [
-//				['g.status', '=', 0],
-//			],'order' => [
-//				'g.id' => 'desc',
-//			],'join' => [
-//			],'field' => [
-//				'*',
-//			],
-//		];
-//		$_config = array_merge($_config,$config);
-//		$_model = $this->alias('g');
-//		foreach ($_config as $key=>$value){
-//			if(!empty($value)){
-//				$_model = $_model->$key($value);
-//			}
-//		}
-//		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-//			input('get.pageSize',0,'int') : config('custom.default_page_size');
-//		return $_model->paginate($pageSize);
-//	}
 
 	//设置库存
 	public function setInventory($storeId=''){
