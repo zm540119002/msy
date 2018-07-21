@@ -21,7 +21,7 @@ class RetailStore extends MallBase{
                     'g.id','g.name',
                 ],
             ];
-            $list = $modelGoods->getList($config,'g');
+            $list = $modelGoods->getList($config);
             return $list;
         }else{
             return $this->fetch();
