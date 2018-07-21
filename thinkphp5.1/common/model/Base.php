@@ -29,7 +29,7 @@ class Base extends \think\Model {
 
 	/**查找一条数据
 	 */
-	public function getInfo($config){
+	public function getInfo($config=[]){
 		$_config = [
 			'where' => [
 				['status', '=', 0],
