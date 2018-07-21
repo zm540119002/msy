@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\model;
 
-class Goods extends \think\Model {
+class Goods extends \common\model\ModelBase {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'goods';
 	// 设置主键
@@ -179,27 +179,30 @@ class Goods extends \think\Model {
 		return $info?$info->toArray():[];
 	}
 
-	/**分页查询 商品
-	 */
-	public function pageQuery($_where=[],$_field=['*'],$_join=[],$_order=[]){
-		$where = [
-			['g.status', '=', 0],
-		];
-		$keyword = input('get.keyword','');
-		if($keyword){
-			$where[] = ['name', 'like', '%'.trim($keyword).'%'];
-		}
-		$order = [
-			'sort'=>'desc',
-			'line_num'=>'asc',
-			'id'=>'desc'
-		];
-		$where = array_merge($_where, $where);
-		$order = array_merge($_order,$order);
-		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
-			input('get.pageSize',0,'int') : config('custom.default_page_size');
-		return $this->alias('g')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
-	}
+//	/**分页查询 商品
+//	 */
+//	public function pageQuery($config=[]){
+//		$_config = [
+//			'where' => [
+//				['g.status', '=', 0],
+//			],'order' => [
+//				'g.id' => 'desc',
+//			],'join' => [
+//			],'field' => [
+//				'*',
+//			],
+//		];
+//		$_config = array_merge($_config,$config);
+//		$_model = $this->alias('g');
+//		foreach ($_config as $key=>$value){
+//			if(!empty($value)){
+//				$_model = $_model->$key($value);
+//			}
+//		}
+//		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
+//			input('get.pageSize',0,'int') : config('custom.default_page_size');
+//		return $_model->paginate($pageSize);
+//	}
 
 	//设置库存
 	public function setInventory($storeId=''){

@@ -116,7 +116,42 @@ class Goods extends StoreBase
                 g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
                 g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
         ];
-        $list = $model -> pageQuery($where,$file);
+//        $where = [
+//            ['g.status', '=', 0],
+//        ];
+//        $keyword = input('get.keyword','');
+//        if($keyword){
+//            $where[] = ['name', 'like', '%'.trim($keyword).'%'];
+//        }
+//        $order = [
+//            'sort'=>'desc',
+//            'line_num'=>'asc',
+//            'id'=>'desc'
+//        ];
+        $config=[
+            'where'=>[
+                ['g.store_id','=',$this->store['id']],
+            ],
+            'filed'=>[
+                    'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
+                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
+                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
+            ],
+            'order'=>[
+                'sort'=>'desc',
+                'line_num'=>'asc',
+                'id'=>'desc'
+            ],
+        ];
+        if($_GET['pageType'] == 'promotion' ) {//促销
+            $config['where'][] = ['g.sale_type', '=', 0];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $config['where'][] = ['name', 'like', '%'.trim($keyword).'%'];
+        }
+
+        $list = $model -> pageQuery($config,'g');
         $page = $list->getCurrentPage();
         $this->assign('page',$page);
         $this->assign('list',$list);
@@ -297,7 +332,15 @@ class Goods extends StoreBase
         $goodsFile = [
             'g.id,g.name,g.thumb_img,g.sale_price'
         ];
-        $goodsList = $modelGoods -> getList($where,$goodsFile);
+        $config = [
+            'where'=>[
+                ['id','in',$goodsIds]
+            ],
+            'field'=>[
+                'g.id,g.name,g.thumb_img,g.sale_price'
+            ],
+        ];
+        $goodsList = $modelGoods -> getList($config);
         foreach ($goodsList as $k=>$v){
             foreach ($selectedGoodsList as $kk=>$vv){
                if($v['id'] == $vv['goods_id'] ){
