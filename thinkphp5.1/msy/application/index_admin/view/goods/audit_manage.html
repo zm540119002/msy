@@ -12,12 +12,11 @@
 </div>
 <div>
 	<select name="" id="" class="select">
-		<option value="" name="auth_status">请选择</option>
-		<option value="0" name="auth_status">待审核</option>
-		<option value="1" name="auth_status">通过</option>
-		<option value="2" name="auth_status">未通过</option>
+		<option value="" name="shelf_status">请选择</option>
+		<option value="0" name="shelf_status">待审核</option>
+		<option value="1" name="shelf_status">通过</option>
+		<option value="2" name="shelf_status">未通过</option>
 	</select>
-	<input type="hidden" value="" name="auth_status" class="auth_status">
 </div>
 <form name="form1" id="form1">
 	<div class="columns_flex search-row-flex">
@@ -34,8 +33,7 @@
   $(function () {
 	  // 选择状态
 	  $('body').on('change','.select',function(){
-		  getPage(1,$(this).val());
-		  $('.auth_status').val($(this).val());
+		  getPage();
 	  })
 	  //获取列表
 	  getPage();
@@ -164,13 +162,17 @@
 	  })
   })
   //获取商品列表
-  function getPage(currentPage,selectData) {
+  function getPage(currentPage) {
 	  $("#list").html($('#loading').html());
 	  var url = module+'Goods/getList';
 	  var postData = $('#form1').serializeObject();
+	  var options=$(".select option:selected"); //获取选中的项
+	  var shelf_status = options.val();
+	  if(shelf_status){
+		  postData.shelf_status = shelf_status; //拿到选中项的值
+	  }
 	  postData.page = currentPage ? currentPage : 1;
-	  postData.auth_status = selectData;
-	  postData.pageSize = 20;
+	  postData.pageSize = 2;
 	  $.get(url, postData , function(data){
 		  $('#list').html(data);
 	  });

@@ -1,9 +1,14 @@
 //获取分页列表-公共回调函数
 function getPagingListCallBack(config,data){
-    config.container.html(data);
+    $('.loading').hide();
+    if(config.currentPage == 1){
+        config.container.find('li').remove();
+        config.container.append(data);
+    }else{
+        config.container.find('li:last').after(data);
+    }
 }
 
-<<<<<<< HEAD
 /**
  * 获取分页列表
  * @param config  下拉分页 必须是全局变量
@@ -17,14 +22,7 @@ function getPagingListCallBack(config,data){
 		callBack:callBack //可选项 成功回调函数
 	};
  * @param postData 下拉分页 必须是全局变量
-=======
-/**获取分页列表
- * @param config.currentPage 必须配置
- * @param config.loadTrigger 必须配置
- * @param config.requestEnd  必须配置
- * @param config   必须是全局变量
- * @param postData 必须是全局变量
->>>>>>> c602e7207c2e4d3306fdf59961ae982a0cced980
+
  */
 function getPagingList(config,postData) {
     //容器
@@ -88,3 +86,10 @@ $('.classify-label-content ').on('scroll',function(){
     }
 });
 
+//禁用移动按钮
+function disableBtn(){
+    var listUl = $('#list');
+    listUl.find('li').find('.move-btn').removeProp('disabled');
+    listUl.find('li:first').find('.up-btn').prop('disabled','disabled').addClass('disabled');
+    listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');
+}
