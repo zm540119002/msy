@@ -51,7 +51,7 @@ class Base extends \think\Model {
 		return $info?$info->toArray():[];
 	}
 
-	/**分页查询 商品
+	/**分页查询
 	 */
 	public function pageQuery($config=[]){
 		$_config = [
