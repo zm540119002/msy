@@ -973,6 +973,9 @@ input.special{
     overflow:hidden;
     border-bottom:1px solid #d9d9d9;
 }
+.thead-td .store-type {
+    margin:0 0 0 15%;
+}
 .thead-td .cols,
 .trademark-module .cols{
     float:left;
@@ -1190,4 +1193,10 @@ input.special{
 }
 .follow-right{
     /*width:112px;*/
+}
+.store_mall_status .store-logo-img,.factory-log-img{
+    max-width:30px;
+}
+.store-type-item{
+    margin:0 0 0 30px;
 }
