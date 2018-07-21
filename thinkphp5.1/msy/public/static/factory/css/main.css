@@ -957,10 +957,15 @@ input.special{
 .classify-label-content{
     height:400px;
     overflow-y:scroll;
+    border-bottom:1px solid #d9d9d9;
 }
 .promotion-item .classify-label-content {
     height:328px;
    
+}
+.classify-label-content a.goods{
+    display: block;
+    height:195px;
 }
 .promotion-item.hide{
     display: none;

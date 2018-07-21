@@ -36,6 +36,7 @@ $(function(){
                 }
                  $('.addsalesgoodsLayer .classify-label-content').on('scroll',function(){
                     var listHeight=document.getElementById('list').scrollHeight;
+                    console.log(config.loadTrigger);
                     if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
                         config.loadTrigger = false;
                         getPagingList(config,postData);
@@ -87,7 +88,7 @@ $(function(){
 
     });
     //添加促销商品
-    $('body').on('click','.all-goods-list a.goods',function(){
+    $('body').on('click','a.goods',function(){
         var selectedGoodsIds = [];
         $('.addsalesgoodsLayer .promotional-goods-list li').each(function(){
             var selectedGoodsId = $(this).data('goods-id');
