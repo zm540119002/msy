@@ -34,3 +34,6 @@ function multi_array_key_exists( $needle, $haystack ) {
     return false;
 }
 
+function assemblyParameters($model){
+
+}

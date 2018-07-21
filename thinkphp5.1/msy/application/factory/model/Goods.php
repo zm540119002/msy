@@ -1,13 +1,7 @@
 <?php
 namespace app\factory\model;
-use GuzzleHttp\Psr7\Request;
-use think\Model;
-use think\Db;
-/**
- * 基础模型器
- */
 
-class Goods extends Model {
+class Goods extends \think\Model {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'goods';
 	// 设置主键
@@ -16,8 +10,6 @@ class Goods extends Model {
 	protected $connection = 'db_config_factory';
 
 	/**编辑 新增和修改
-	 * @param string $store_id
-	 * @return array
 	 */
 	public function edit($storeId =''){
 		$data = input('post.');
@@ -102,7 +94,6 @@ class Goods extends Model {
 		}
 	}
 
-
 	//检查本店的商品是否同名,
 	private function _isExistGoodsName($data,$storeId){
 		$name = $data['name'];
@@ -119,7 +110,7 @@ class Goods extends Model {
 
 	/**查询多条数据
 	 */
-	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
+	public function getList2($where=[],$field=['*'],$join=[],$order=[],$limit=''){
 		$_where = array(
 			'g.status' => 0,
 		);
@@ -138,6 +129,18 @@ class Goods extends Model {
 			->limit($limit)
 			->select();
 		return count($list)?$list->toArray():[];
+	}
+
+	/**查询多条数据
+	 */
+	public function getList($config=[]){
+		$_config = [
+			$_where = [
+				'g.status' => 0,
+			],
+		];
+		$_config = array_merge($_config,$config);
+		return $_config;
 	}
 
 	/**查找一条数据
@@ -178,7 +181,6 @@ class Goods extends Model {
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->alias('g')->join($_join)->where($where)->field($_field)->order($order)->paginate($pageSize);
 	}
-
 
 	//设置库存
 	public function setInventory($storeId=''){
