@@ -5,14 +5,12 @@
 $(function(){
     var config = {
         url:module+'Goods/getList',
-        type:true,
         requestEnd:false,
         loadTrigger:false,
-        currentPage:1,
-        callBack:callBack
+        currentPage:1
     };
     var postData = {
-        pageSize:4,
+        pageSize:8,
         pageType:'promotion'
     };
     var addsalesgoods=$('#addsalesgoods').html();
@@ -28,6 +26,7 @@ $(function(){
             success:function(){
                 var winHeight=$(window).height();
                 $('.content-box').css('height',winHeight-180+'px');
+                config.container = $('.addsalesgoodsLayer #list');  // container:$('.addsalesgoodsLayer #list')
                     //加载第一页
                 getPagingList(config,postData);
                 //回显也选择的产品
@@ -223,8 +222,14 @@ function selectedGoodsList(selectedGoods) {
     });
 }
 
-//获取分页列表-商品页回调函数
-function callBack(config,data){
-    $('.addsalesgoodsLayer #list').html(data);
-}
+$(window).on('scroll',function(){
+    console.log(111);
+    console.log(config.loadTrigger);
+    console.log($(document).scrollTop()+$(window).height()>=$(document).height());
 
+    if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+        config.loadTrigger = false;
+        config.container = $('.addsalesgoodsLayer #list');
+        getPagingList(config,postData);
+    }
+});
