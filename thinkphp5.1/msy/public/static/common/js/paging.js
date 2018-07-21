@@ -19,7 +19,7 @@ function getPagingListCallBack(config,data){
 		url:module+'goods/getList', 非必须配置项，默认为当前方法
 		callBack:callBack //非必须配置项，默认为getPagingListCallBack
 	};
- * @param postData 提交数据 必须是全局变量
+ * @param postData 提交数据
  */
 function getPagingList(config,postData) {
     //容器
