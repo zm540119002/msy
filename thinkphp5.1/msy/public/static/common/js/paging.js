@@ -71,7 +71,6 @@ $(window).on('scroll',function(){
 });
 
 $('.classify-label-content').on('scroll',function(){
-    console.log(1)
     var listHeight=document.getElementById('list').scrollHeight;
     if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
         config.loadTrigger = false;

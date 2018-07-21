@@ -904,7 +904,7 @@ input.special{
 }
 .addsalesgoodsLayer .content-box{
     padding-right:0;
-    overflow-y:auto;
+    /*overflow-y:auto;*/
 }
 .promotion-img-item{
     width:48%;
@@ -954,9 +954,13 @@ input.special{
     background: #C7AA53;
 }
 /*促销活动*/
+.classify-label-content{
+    height:400px;
+    overflow-y:scroll;
+}
 .promotion-item .classify-label-content {
     height:328px;
-    overflow-y:scroll;
+   
 }
 .promotion-item.hide{
     display: none;

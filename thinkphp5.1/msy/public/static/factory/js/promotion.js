@@ -26,6 +26,7 @@ $(function(){
             success:function(){
                 var winHeight=$(window).height();
                 $('.content-box').css('height',winHeight-180+'px');
+               
                 config.container = $('.addsalesgoodsLayer #list');  // container:$('.addsalesgoodsLayer #list')
                     //加载第一页
                 getPagingList(config,postData);
@@ -33,6 +34,13 @@ $(function(){
                 if(goods!=''){
                     selectedGoodsList(goods);
                 }
+                 $('.addsalesgoodsLayer .classify-label-content').on('scroll',function(){
+                    var listHeight=document.getElementById('list').scrollHeight;
+                    if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+                        config.loadTrigger = false;
+                        getPagingList(config,postData);
+                    }
+                });
             },
             yes:function(index){
                 var selectedGood={};
