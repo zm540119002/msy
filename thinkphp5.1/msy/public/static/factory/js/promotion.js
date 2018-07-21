@@ -10,7 +10,7 @@ $(function(){
         currentPage:1
     };
     var postData = {
-        pageSize:8,
+        pageSize:4,
         pageType:'promotion'
     };
     var addsalesgoods=$('#addsalesgoods').html();
@@ -36,7 +36,6 @@ $(function(){
                 }
                  $('.addsalesgoodsLayer .classify-label-content').on('scroll',function(){
                     var listHeight=document.getElementById('list').scrollHeight;
-                    console.log(config.loadTrigger);
                     if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
                         config.loadTrigger = false;
                         getPagingList(config,postData);
@@ -121,6 +120,9 @@ $(function(){
     $('body').on('click','.addsalesgoodsLayer .search',function(){
         var serializeData =$('.addsalesgoodsLayer #form1').serializeObject();
         postData = Object.assign(postData,serializeData);
+        config.loadTrigger = false;
+        config.requestEnd=false;
+        config.currentPage=1;
         getPagingList(config,postData);
     });
     //移除促销商品
@@ -236,10 +238,6 @@ function selectedGoodsList(selectedGoods) {
 }
 
 $(window).on('scroll',function(){
-    console.log(111);
-    console.log(config.loadTrigger);
-    console.log($(document).scrollTop()+$(window).height()>=$(document).height());
-
     if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
         config.loadTrigger = false;
         config.container = $('.addsalesgoodsLayer #list');
