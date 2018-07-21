@@ -13,11 +13,11 @@ function getPagingListCallBack(config,data){
  * @param config  下拉分页配置 必须是全局变量
  *例子
  * var config = {
-        requestEnd:false,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
-		loadTrigger:false,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
-		currentPage:1,//如type为true  就是固定项不可修改，必须填写  type：为false或不传 不需要填写
+        requestEnd:false,//如type为true  就是固定项不可修改，必须填写
+		loadTrigger:false,//如type为true  就是固定项不可修改，必须填写
+		currentPage:1,//如type为true  就是固定项不可修改，必须填写
 		url:module+'goods/getList', 非必填填写项，默认为当前方法
-		callBack:callBack //可选项 成功回调函数
+		callBack:callBack //非必填填写项，默认为getPagingListCallBack
 	};
  * @param postData 提交数据 必须是全局变量
  */
