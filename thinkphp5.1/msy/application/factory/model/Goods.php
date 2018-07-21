@@ -147,7 +147,9 @@ class Goods extends \think\Model {
 		$_config = array_merge($_config,$config);
 		$_model = $this->alias('g');
 		foreach ($_config as $key=>$value){
-			$_model = $_model->$key($value);
+			if(!empty($value)){
+				$_model = $_model->$key($value);
+			}
 		}
 		$list = $_model->select();
 		return count($list)?$list->toArray():[];
