@@ -103,8 +103,19 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
+	var config = {
+		requestEnd:false,//必须配置项
+		loadTrigger:false,//必须配置项
+		currentPage:1//必须配置项
+	};
+	var postData = {
+		pageSize:6
+	};
+	//文档就绪
 	$(function(){
+		getPagingList(config,postData);
 	});
 </script>
 {/block}

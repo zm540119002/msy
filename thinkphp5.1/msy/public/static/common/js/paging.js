@@ -1,5 +1,5 @@
 //获取分页列表-公共回调函数
-function getPagingListCallBack(config,data){
+function commonCallBack(config,data){
     $('.loading').hide();
     if(config.currentPage == 1){
         config.container.find('li').remove();
@@ -16,8 +16,8 @@ function getPagingListCallBack(config,data){
         requestEnd:false,//必须配置项
 		loadTrigger:false,//必须配置项
 		currentPage:1,//必须配置项
-		url:module+'goods/getList', 非必须配置项，默认为当前方法
-		callBack:callBack //非必须配置项，默认为getPagingListCallBack
+		url:module+'goods/getList', //非必须配置项，默认为当前方法
+		callBack:callBack //非必须配置项，默认为commonCallBack
 	};
  * @param postData 提交数据
  */
@@ -27,7 +27,7 @@ function getPagingList(config,postData) {
     //提交路径
     config.url = config.url?config.url:action;
     //回调函数名
-    config.callBack = config.callBack?config.callBack:getPagingListCallBack;
+    config.callBack = config.callBack?config.callBack:commonCallBack;
     //要提交的数据
     postData = postData?postData:$('#form1').serializeObject();
     postData.page = postData.currentPage ? postData.currentPage : config.currentPage;
