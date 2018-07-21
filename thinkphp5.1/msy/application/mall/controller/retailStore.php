@@ -18,7 +18,7 @@ class RetailStore extends MallBase{
             $modelGoods = new \app\factory\model\Goods();
             $config =[
                 'where' => [
-                    ['status', '=', 1],
+                    ['g.status', '=', 1],
                 ],'field' => [
                     'g.id','g.name',
                 ],
