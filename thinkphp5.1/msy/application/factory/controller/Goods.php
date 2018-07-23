@@ -21,11 +21,13 @@ class Goods extends StoreBase
         $this -> assign('platformCategory',$platformCategory);
         if(input('?goods_id') && $this->factory && $this->store){
             $goodsId= (int)input('goods_id');
-            $where = [
-               ['g.store_id','=',$this->store['id']],
-               ['g.id','=',$goodsId],
+            $config=[
+                'where'=>[
+                    ['g.store_id','=',$this->store['id']],
+                    ['g.id','=',$goodsId],
+                ],
             ];
-            $goodsInfo =  $goodsModel -> getInfo($where);
+            $goodsInfo =  $goodsModel -> getInfo($config);
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
             }
@@ -49,11 +51,13 @@ class Goods extends StoreBase
             $this -> error('此商品不存在');
         }
         if($this->factory && $this->store){
-            $where = [
-                ['g.id','=',$goodsId],
-                ['g.store_id','=',$this->store['id']],
+            $config=[
+                'where'=>[
+                    ['g.id','=',$goodsId],
+                    ['g.store_id','=',$this->store['id']],
+                ],
             ];
-            $goodsInfo =  $model -> getInfo($where);
+            $goodsInfo =  $model -> getInfo($config);
             if(empty($goodsInfo)){
                 $this -> error('此商品不存在');
             }

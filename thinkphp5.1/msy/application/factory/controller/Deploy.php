@@ -16,10 +16,12 @@ class Deploy extends UserBase
             $this->assign('mobilePhone',$mobilePhone);
             if(input('?factory_id')){
                 $factoryId = input('factory_id');
-                $where = [
-                    ['id','=',$factoryId],
+                $config = [
+                    'where' => [
+                        ['id','=',$factoryId],
+                    ],
                 ];
-                $factoryInfo =  $model -> getInfo($where);
+                $factoryInfo =  $model -> getInfo($config);
                 $this -> assign('factoryInfo',$factoryInfo);
             }
             return $this->fetch();

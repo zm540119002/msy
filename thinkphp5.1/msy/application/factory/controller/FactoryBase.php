@@ -41,15 +41,17 @@ class FactoryBase extends \common\controller\UserBase{
     //获取厂家详细信息
     public function getFactoryInfo(){
         $model = new \app\factory\model\Factory();
-        $where = [
-            ['f.id','=',$this->factory['id']],
+        $config = [
+            'where' => [
+                ['f.id','=',$this->factory['id']],
+            ],'order' => [
+                'id' => 'desc',
+            ],'join' => [
+                ['record r','r.factory_id = f.id',],
+            ],'field' => [
+                'f.id,f.name,r.logo_img',
+            ],
         ];
-        $file = [
-            'f.id,f.name,r.logo_img'
-        ];
-        $join =[
-            ['record r','r.factory_id = f.id',],
-        ];
-        return $model->getInfo($where,$file,$join);
+        return $model->getInfo($config);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\model;
 
-class RoleNode extends \think\Model {
+class RoleNode extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'role_node';
 	// 设置主键

@@ -16,6 +16,7 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
+		
 		$_config = $config+$_config;
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
@@ -29,7 +30,7 @@ class Base extends \think\Model {
 
 	/**查找一条数据
 	 */
-	public function getInfo($config){
+	public function getInfo($config=[]){
 		$_config = [
 			'where' => [
 				['status', '=', 0],
