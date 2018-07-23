@@ -38,11 +38,10 @@ class Store extends FactoryBase
                 'where' => [
                     ['f.id','=',$this->factory['id']]
                 ],'join' => [
-                    ['factory f','f.id = r.factory_id'],
+                    ['record r','f.id = r.factory_id'],
                 ],'field' =>  ['f.id,f.name,r.logo_img as img']
             ];
             $factoryStore =  $modelFactory -> getInfo($config);
-            print_r($modelFactory->getLastSql());exit;
             if(empty($factoryStore)){
                 $this -> error('请完善档案资料,再申请开店',url('Record/edit'));
             }
@@ -56,7 +55,6 @@ class Store extends FactoryBase
                     'b.id,b.name,b.brand_img as img',
                 ],
             ];
-            print_r(11);exit;
             $brandStores =  $modelFactory -> getList($config);
             $this -> assign('brandStores',$brandStores);
             //查看已申请的店铺

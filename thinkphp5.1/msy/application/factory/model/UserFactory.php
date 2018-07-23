@@ -6,6 +6,8 @@ class UserFactory extends \think\model\Pivot {
 	protected $table = 'user_factory';
 	// 设置主键
 	protected $pk = 'id';
+	// 别名
+	protected $alias = 'uf';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
 
