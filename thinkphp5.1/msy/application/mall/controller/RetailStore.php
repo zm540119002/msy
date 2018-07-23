@@ -44,12 +44,12 @@ class RetailStore extends MallBase{
                     ],
                 ];
                 $info = $modelGoods->getInfo($config);
+                return $info;
                 if(!empty($info)){
                     $info['main_img'] = explode(',',$info['main_img']);
                     $this->assign('info',$info);
                 }
             }
-            return $info;
             return $this->fetch();
         }
     }
