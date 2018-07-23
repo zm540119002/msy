@@ -18,12 +18,20 @@ class RetailStore extends MallBase{
             $modelGoods = new \app\factory\model\Goods();
             $config =[
                 'field' => [
-                    'g.id','g.name','g.thumb_img',
+                    'g.id','g.name','g.thumb_img','g.sale_price',
                 ],
             ];
             $list = $modelGoods->getList($config);
-//            $this->assign('list',$list);
             return view('list_tpl',['list'=>$list]);
+        }else{
+            return $this->fetch();
+        }
+    }
+
+    /**商品详情页
+     */
+    public function detail(){
+        if(request()->isAjax()){
         }else{
             return $this->fetch();
         }
