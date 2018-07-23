@@ -3,10 +3,15 @@
 <link rel="stylesheet" href="mall_css/main.css">
 {/block}
 {block name="content"}
-<div>商城首页</div>
-<div><a href="{:url('')}">云推客店铺</a></div>
-<div><a href="{:url('RetailStore/index')}">供应商零售店</a></div>
-<div><a href="{:url('')}">美容机构门店</a></div>
+<section class="store-top-nav">
+	<div class="top_menu_box">
+		<div class="top_menu_list columns_flex">
+			<a href="{:url('')}" class="current">云推客店铺</a>
+			<a href="{:url('RetailStore/index')}">供应商零售店</a>
+			<a href="{:url('')}">美容机构门店</a>
+		</div>
+	</div>
+</section>
 {/block}
 {block name="common"}
 {include file="template/right_side_bar.html" /}
