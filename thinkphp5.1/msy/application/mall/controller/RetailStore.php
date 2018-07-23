@@ -49,6 +49,7 @@ class RetailStore extends MallBase{
                     $this->assign('info',$info);
                 }
             }
+            return $info;
             return $this->fetch();
         }
     }
