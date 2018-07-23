@@ -13,7 +13,12 @@ class Record extends FactoryBase
             $where = [
                 ['factory_id','=',$this->factory['id']],
             ];
-            $recordInfo =  $model -> getInfo($where);
+            $config = [
+                'where' => [
+                    ['factory_id','=',$this->factory['id']],
+                ],
+            ];
+            $recordInfo =  $model -> getInfo($config);
             $this -> assign('recordInfo',$recordInfo);
             return $this->fetch();
         }
@@ -24,15 +29,17 @@ class Record extends FactoryBase
     public function preview()
     {
         $model = new \app\factory\model\Record();
-        $where = [
-            ['r.factory_id','=',$this->factory['id']],
+        $config = [
+            'where' => [
+                ['r.factory_id','=',$this->factory['id']],
+            ],'order' => [
+                'id' => 'desc',
+            ],'join' => [
+                ['factory f','f.id = r.factory_id'],
+            ],'field' => ['r.id,r.shop_name,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
+                            r.company_img,r.create_time,r.update_time,f.name'],
         ];
-        $file = ['r.id,r.shop_name,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
-        r.company_img,r.create_time,r.update_time,f.name'];
-        $join = [
-            ['factory f','f.id = r.factory_id'],
-        ];
-        $recordInfo = $model -> getInfo($where,$file,$join);
+        $recordInfo = $model -> getInfo($config);
         if(!empty($recordInfo)){
             $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
             $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);

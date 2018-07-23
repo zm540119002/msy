@@ -16,7 +16,12 @@ class Series extends FactoryBase
                 return $model -> add($this->factory['id']);
             }
         }
-        $seriesList = $model -> getList([],[],['sort'=>'desc']);
+        $config = [
+            'order' => [
+                'sort'=>'desc'
+            ]
+        ];
+        $seriesList = $model -> getList($config);
         $this->assign('seriesList',$seriesList);
         return $this->fetch();
     }

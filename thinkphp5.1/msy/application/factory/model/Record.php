@@ -8,11 +8,13 @@ use think\Route;
  * 基础模型器
  */
 
-class Record extends Model {
+class Record extends \common\model\Base{
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'record';
 	// 设置主键
 	protected $pk = 'id';
+	// 别名
+	protected $alias = 'r';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_factory';
 
@@ -150,59 +152,6 @@ class Record extends Model {
 		}else{
 			return errorMsg("失败");
 		}
-	}
-
-
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $order
-	 * @param array $join
-	 * @param string $limit
-	 * @return array|\PDOStatement|string|\think\Collection
-	 * 查询多条数据
-	 */
-	public function getList($where=[],$field=['*'],$join=[],$order=[],$limit=''){
-		$_where = array(
-			'r.status' => 0,
-		);
-		$_join = array(
-		);
-		$where = array_merge($_where, $where);
-		$_order = array(
-			'r.id'=>'desc',
-		);
-		$order = array_merge($_order, $order);
-		$list = $this->alias('r')
-			->where($where)
-			->field($field)
-			->join(array_merge($_join,$join))
-			->order($order)
-			->limit($limit)
-			->select();
-		return count($list)?$list->toArray():[];
-	}
-
-	/**
-	 * @param array $where
-	 * @param array $field
-	 * @param array $join
-	 * @return array|null|\PDOStatement|string|Model
-	 * 查找一条数据
-	 */
-	public function getInfo($where=[],$field=['*'],$join=[]){
-		$_where = array(
-			'r.status' => 0,
-		);
-		$where = array_merge($_where, $where);
-		$_join = array(
-		);
-		$info = $this->alias('r')
-			->field($field)
-			->join(array_merge($_join,$join))
-			->where($where)
-			->find();
-		return $info?$info->toArray():[];
 	}
 
 }

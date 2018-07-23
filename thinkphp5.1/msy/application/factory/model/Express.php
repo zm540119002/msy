@@ -9,7 +9,7 @@ namespace app\factory\model;
 
 use think\Model;
 
-class Express extends Model
+class Express extends \common\model\Base
 {
     // 设置当前模型对应的完整数据表名称
     protected $table = 'express';
@@ -17,6 +17,8 @@ class Express extends Model
     protected $connection = 'db_config_factory';
     // 设置主键
     protected $pk = 'id';
+    // 别名
+    protected $alias = 'e';
     protected $autoWriteTimestamp = true;
 
     /**

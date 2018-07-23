@@ -57,7 +57,15 @@ class Goods extends \common\model\Base {
 			$file = array(
 				'thumb_img','main_img','details_img','goods_video'
 			);
-			$oldGoodsInfo = $this -> getInfo($where,$file);
+			$config = [
+				'where' => [
+					['id','=',$data['id']],
+				],
+				'field' => [
+					'thumb_img','main_img','details_img','goods_video'
+				],
+			];
+			$oldGoodsInfo = $this -> getInfo($config);
 			if(empty($oldGoodsInfo)){
 				return errorMsg('没有数据');
 			}
