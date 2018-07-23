@@ -49,7 +49,7 @@ class Base extends \think\Model {
 			}
 		}
 		$info = $_model->find();
-		return $info?$info->toArray():[];
+		return $info;
 	}
 
 	/**分页查询
