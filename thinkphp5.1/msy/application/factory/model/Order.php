@@ -171,7 +171,7 @@ class Order extends Model
      */
     public function setDeliveryGoods($store_id, $order_id, $goods)
     {
-        if(!is_array($goods)||count($goods)<=0){
+        if(!is_array($goods)||count($goods)<=0){  //var_dump($goods);
             return errorMsg('拣货数据有误');
         }
         $data = $this->alias('a')->field('a.status_unpack, b.number, b.send_number, b.goods_id')
