@@ -33,6 +33,19 @@ class RetailStore extends MallBase{
     public function detail(){
         if(request()->isAjax()){
         }else{
+            $goodsId = intval(input('goodsId'));
+            if($goodsId){
+                $modelGoods = new \app\factory\model\Goods();
+                $config =[
+                    'where' => [
+                        ['id', '=', $goodsId],
+                    ],'field' => [
+                        'g.id','g.name','g.thumb_img','g.sale_price','g.retail_price',
+                    ],
+                ];
+                $info = $modelGoods->getInfo($config);
+                $this->assign('info',$info);
+            }
             return $this->fetch();
         }
     }
