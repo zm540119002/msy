@@ -40,7 +40,7 @@ class RetailStore extends MallBase{
                     'where' => [
                         ['id', '=', $goodsId],
                     ],'field' => [
-                        'g.id','g.name','g.thumb_img','g.sale_price','g.retail_price',
+                        'g.id','g.name','g.sale_price','g.retail_price','g.main_img','g.parameters',
                     ],
                 ];
                 $info = $modelGoods->getInfo($config);

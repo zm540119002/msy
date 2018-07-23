@@ -7,9 +7,34 @@
 	<section class="">
 		<img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
 	</section>
+	<section class="slider_banner ">
+
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_img/banner/home-banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/home-banner2.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/home-banner3.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/home-banner.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
 	<section class="">
 		<div class="columns_flex l-r-sides">
-			<p class="store-product-title">产品富含小分子活性多肽以及多种医药级成分，较小的分子，极高的肌肤亲活力，有效调节肌肤油脂分泌，抑制肌肤脂肪酶、蛋白酶活性，预防肌肤粉刺、青春痘的产生。</p>
+			<p class="store-product-title">{$info.name}</p>
 			<div class="">
 				<a href="javascript:void(0);">
 					<span class="share"></span>
@@ -38,7 +63,7 @@
 			</li>
 
 		</ul>
-		<p class="explain-text content-padding">产品富含小分子活性多肽以及多种医药级成分，较小的分子，极高的肌肤亲活力，有效调节肌肤油脂分泌，抑制肌肤脂肪酶、蛋白酶活性，预防肌肤粉刺、青春痘的产生。</p>
+		<p class="explain-text content-padding">{$info.parameters}</p>
 	</section>
 </article>
 {include file='public/goods_footer' /}
@@ -47,6 +72,19 @@
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+	});
+</script>
 {block name="script"}
 <script type="text/javascript">
 	$(function(){
