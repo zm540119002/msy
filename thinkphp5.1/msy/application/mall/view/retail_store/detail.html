@@ -6,15 +6,6 @@
 <article class="f24">
 	<section class="slider_banner ">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-			{empty name="info.main_img"}
-				<img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
-			{else /}
-				{volist name="info.main_img" id="vo"}
-					<div class="swiper-slide swiper-slide-active">
-						<img src="public_uploads/{$vo}" alt="" class="common_default_img">
-					</div>
-				{/volist}
-			{/empty}
 		</div>
 	</section>
 	<section class="">
