@@ -82,6 +82,11 @@ $(function(){
                 $('.linked-goods-id').val(JSON.stringify(selectedGoods));
                 layer.close(index);
             },
+            no:function () {
+                config.requestEnd=false;
+                config.loadTrigger=false;
+                config.currentPage=1;
+            },
             btn:['确定','取消']
         });
 
@@ -103,9 +108,6 @@ $(function(){
         var goodsImgSrc=_this.find('img').attr('src');
         var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
         var html = $('.search-li').html();
-        // var html='';
-            // html+='<li data-goods-id="'+goodsId+'"><img src="'+goodsImgSrc+'" alt=""/><span class="goods-name">'+goodsName+'</span><a href="javascript:void(0);" class="promotional-close-btn">X</a>' +
-            //     '<span class="special-price">特价</span><input type="text" class="special" placeholder="填写价格"></li>';
             if(!selectedLen){
                 $('.promotional-goods-list').append(html);
             }else{
