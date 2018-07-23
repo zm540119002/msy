@@ -1,7 +1,7 @@
 {notempty name='list'}
 {volist name="list" id="vo"}
 <li data-id="{$vo.id}">
-    <a class="product-square-box" href="{:url('Goods/preview',['goods_id'=>$vo.id])}">
+    <a class="product-square-box" href="{:url('detail',['goods_id'=>$vo.id])}">
         {notempty name='vo.thumb_img'}
         <img src="public_uploads/{$vo.thumb_img}" alt="" class="product-square-img">
         {else /}

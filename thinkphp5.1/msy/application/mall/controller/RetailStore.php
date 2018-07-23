@@ -22,8 +22,16 @@ class RetailStore extends MallBase{
                 ],
             ];
             $list = $modelGoods->getList($config);
-//            $this->assign('list',$list);
             return view('list_tpl',['list'=>$list]);
+        }else{
+            return $this->fetch();
+        }
+    }
+
+    /**商品详情页
+     */
+    public function detail(){
+        if(request()->isAjax()){
         }else{
             return $this->fetch();
         }
