@@ -18,11 +18,12 @@ class RetailStore extends MallBase{
             $modelGoods = new \app\factory\model\Goods();
             $config =[
                 'field' => [
-                    'g.id','g.name',
+                    'g.id','g.name','g.thumb_img',
                 ],
             ];
             $list = $modelGoods->getList($config);
-            return $list;
+            $this->assign('list',$list);
+            return view('list_tpl');
         }else{
             return $this->fetch();
         }
