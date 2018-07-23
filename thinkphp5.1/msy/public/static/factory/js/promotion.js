@@ -35,9 +35,8 @@ $(function(){
                     selectedGoodsList(goods);
                 }
                  $('.addsalesgoodsLayer .classify-label-content').on('scroll',function(){
-                    var listHeight=document.getElementById('list').scrollHeight;
-                    if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
-                        config.loadTrigger = false;
+                    var listHeight=$('.addsalesgoodsLayer #list').get(0).scrollHeight;
+                    if(config.loadTrigger && $('.addsalesgoodsLayer .classify-label-content').scrollTop()+$('.classify-label-content ').height()>=listHeight){
                         getPagingList(config,postData);
                     }
                 });
@@ -239,10 +238,12 @@ function selectedGoodsList(selectedGoods) {
     });
 }
 
-$(window).on('scroll',function(){
-    if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-        config.loadTrigger = false;
-        config.container = $('.addsalesgoodsLayer #list');
-        getPagingList(config,postData);
-    }
-});
+// $(window).on('scroll',function(){
+//     if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+//         console.log(25454)
+//         config.loadTrigger = false;
+//         config.requestEnd = false;
+//         config.container = $('.addsalesgoodsLayer #list');
+//         getPagingList(config,postData);
+//     }
+// });
