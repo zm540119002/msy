@@ -1,6 +1,5 @@
 //获取分页列表-公共回调函数
 function commonCallBack(config,data){
-    $('.loading').hide();
     if(config.currentPage == 1){
         config.container.find('li').remove();
         config.container.append(data);
@@ -42,7 +41,6 @@ function getPagingList(config,postData) {
         url: config.url,
         data: postData,
         type: 'get',
-        dataType:'json',
         beforeSend: function(){
             $('.loading').show();
         },
