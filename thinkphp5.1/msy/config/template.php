@@ -68,6 +68,14 @@ return [
         'practitioner_admin_img' => Request::domain() .'/static/practitioner_admin/img',
         'practitioner_admin_js' => Request::domain() .'/static/practitioner_admin/js',
         'practitioner_admin_css' => Request::domain() .'/static/practitioner_admin/css',
+        //商城资源路径
+        'mall_img' => Request::domain() .'/static/mall/img',
+        'mall_js' => Request::domain() .'/static/mall/js',
+        'mall_css' => Request::domain() .'/static/mall/css',
+        'mall_video' => Request::domain() .'/static/mall/video',
+        'mall_admin_img' => Request::domain() .'/static/mall_admin/img',
+        'mall_admin_js' => Request::domain() .'/static/mall_admin/js',
+        'mall_admin_css' => Request::domain() .'/static/mall_admin/css',
 
         'public_uploads' => Request::domain() .'/uploads',
     ],

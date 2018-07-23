@@ -87,6 +87,42 @@
 				 	</span>
 				</li>
 
+				<li>
+					<span class=form-title ><font color="#FF0000">*</font>包装单位：</span>
+					<select name="package_unit" class="selectbox">
+						<option value="1">55</option>
+						<option value="5">66</option>
+						<option value="4">77</option>
+						<option value="6">88</option>
+						<option value="7">99</option>
+					</select>
+					<!--<select name="package_unit" class="selectbox">-->
+						<!--<notempty name="unitList">-->
+							<!--<volist name="unitList" id="vo">-->
+								<!--<option value="{$vo.key}">{$vo.value}</option>-->
+							<!--</volist>-->
+						<!--</notempty>-->
+					<!--</select>-->
+				</li>
+
+				<li>
+					<span class=form-title ><font color="#FF0000">*</font>采购单位：</span>
+					<select name="package_unit" class="selectbox">
+						<option value="1">55</option>
+						<option value="5">66</option>
+						<option value="4">77</option>
+						<option value="6">88</option>
+						<option value="7">99</option>
+					</select>
+					<!--<select name="package_unit" class="selectbox">-->
+					<!--<notempty name="unitList">-->
+					<!--<volist name="unitList" id="vo">-->
+					<!--<option value="{$vo.key}">{$vo.value}</option>-->
+					<!--</volist>-->
+					<!--</notempty>-->
+					<!--</select>-->
+				</li>
+
 				<li >
 					<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图(1张)</a>
 					<input type="hidden" class="hidden_img" value="{$goodsInfo['thumb_img']|default=''}" name="thumb_img">
@@ -104,6 +140,7 @@
                     <a href="javascript:void(0);" class="set-category right-arrow">设置检索品类</a>
                     <input type="hidden" class="select-category" data-category-id="{$goodsInfo['categoryArray']|default=''}" value="" name="selectCategory">
                 </li>
+
 				<li class="">
 					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑商品参数</a>
 					<input type="hidden" class="goods-parameter" value="{$goodsInfo['parameters']|default=''}" name="parameters">

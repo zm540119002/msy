@@ -28,20 +28,31 @@ class Promotion extends StoreBase
             $file = [
                 'p.id,p.name,p.first_img,p.second_img,p.goods_ids,p.start_time,p.end_time,p.store_id'
             ];
-            $promotionInfo =  $model -> getInfo($where,$file);
+            $config = [
+                'where' => [
+                    ['p.id','=',$promotionId],
+                    ['p.store_id','=',$this->store['id']],
+                ],'join' => [
+                    ['record r','r.factory_id = f.id',],
+                ],'field' => [
+                    'p.id,p.name,p.first_img,p.second_img,p.goods_ids,p.start_time,p.end_time,p.store_id'
+                ],
+            ];
+            $promotionInfo =  $model -> getInfo($config);
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }
             $modelGoods = new \app\factory\model\Goods;
             $goodsIds = explode(',',$promotionInfo['goods_ids']);
-            $where = [
-                ['id','in',$goodsIds],
-                ['sale_type','=',1],
+            $config = [
+                'where' => [
+                    ['id','in',$goodsIds],
+                    ['sale_type','=',1],
+                ],'field' => [
+                    'g.id as goods_id,g.special',
+                ],
             ];
-            $goodsFile = [
-                'g.id as goods_id,g.special'
-            ];
-            $goodsList = $modelGoods -> getList($where,$goodsFile);
+            $goodsList = $modelGoods -> getList($config);
             $promotionInfo['goods'] = json_encode($goodsList);
             $this -> assign('promotionInfo',$promotionInfo);
         }
@@ -53,14 +64,33 @@ class Promotion extends StoreBase
      */
     public function getList(){
         $model = new \app\factory\model\Promotion;
-        $where = [
-            ['p.store_id','=',$this->store['id']],
+        $config=[
+            'where'=>[
+                ['p.store_id','=',$this->store['id']],
+            ],
+            'field'=>[
+                'p.id','p.name','p.goods_ids','p.start_time','p.end_time','p.create_time','p.sort',
+            ],
+            'order'=>[
+                'id'=>'desc','sort'=>'desc'
+            ],
         ];
+        $activityStatus = (int)input('get.activityStatus');
+        if($activityStatus == 1){//未结束
+            $config['where'][] = ['p.end_time','>',time()];
+        }
+        if($activityStatus == 0){//已结束
+            $config['where'][] = ['p.end_time','<=',time()];
+        }
 
-        $field = array(
-            'p.id','p.name','p.goods_ids','p.start_time','p.end_time','p.create_time','p.sort',
-        );
-        $list = $model -> pageQuery($where,$field);
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $config['where'][] = ['p.name', 'like', '%'.trim($keyword).'%'];
+        }
+
+        $list = $model -> pageQuery($config);
+        $page = $list->getCurrentPage();
+        $this->assign('page',$page);
         $this->assign('list',$list);
         if(isset($_GET['activityStatus'])){
             if($_GET['activityStatus'] == 1 ){//未结束
@@ -69,7 +99,6 @@ class Promotion extends StoreBase
             if($_GET['activityStatus'] == 0 ){//结束
                 return $this->fetch('list_over');
             }
-
         }
     }
 

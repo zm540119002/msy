@@ -35,8 +35,7 @@
   $(function () {
 	  // 选择状态
 	  $('body').on('change','.select',function(){
-		  getPage(1,$(this).val());
-		  $('.auth_status').val($(this).val());
+		  getPage();
 	  })
 	  //获取列表
 	  getPage();
@@ -165,13 +164,17 @@
 	  })
   })
   //获取商品列表
-  function getPage(currentPage,selectData) {
+  function getPage(currentPage) {
 	  $("#list").html($('#loading').html());
 	  var url = module+'Brand/getList';
 	  var postData = $('#form1').serializeObject();
 	  postData.page = currentPage ? currentPage : 1;
-	  postData.auth_status = selectData;
-	  postData.pageSize = 10;
+	  var options=$(".select option:selected"); //获取选中的项
+	  var auth_status =  options.val();
+	  if(auth_status){
+		  postData.auth_status = options.val(); //拿到选中项的值
+	  }
+	  postData.pageSize = 3;
 	  $.get(url, postData , function(data){
 		  $('#list').html(data);
 	  });

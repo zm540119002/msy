@@ -236,20 +236,21 @@ function uploadsImg(obj,tilt,className) {
         content:uploadSingleImgHtml,
         btn:['确定','取消'],
         success:function(){
-            var imgSrc=obj.siblings('.hidden_img').val();
+            var fileSrc=obj.siblings('.hidden_img').val();
             var echoedImg = '';
-            if(imgSrc.indexOf("uploads") == -1 && imgSrc != ''){
-                echoedImg= uploads+imgSrc;
+            if(fileSrc.indexOf("uploads") == -1 && fileSrc != ''){
+                echoedImg= uploads+fileSrc;
             }
             //显示图片
             $('.'+ className).find('img').attr('src',echoedImg);
             //赋值回
-            $('.'+ className).find('.img').val(imgSrc);
+            $('.'+ className).find('.img').val(fileSrc);
         },
         yes:function(index){
-            var layerImgSrc= $('.'+ className).find('.img').val();
-            obj.siblings('.hidden_img').val(layerImgSrc);
-            if(layerImgSrc.indexOf("data:") !=-1){
+            var layerfileSrc= $('.'+ className).find('.img').val();
+            obj.siblings('.hidden_img').val(layerfileSrc);
+            var fileSrc = $('.'+ className).find('img').attr('src');
+            if(layerfileSrc=='' && fileSrc != ''){
                 errorTipc('文件还没上传完毕')
                 return false;
             }
@@ -268,21 +269,21 @@ function uploadsVideo(obj,tilt,className) {
         content:uploadSingleVideoHtml,
         btn:['确定','取消'],
         success:function(){
-            var imgSrc=obj.siblings('.hidden_video').val();
+            var fileSrc=obj.siblings('.hidden_video').val();
             var echoedImg = '';
-            if(imgSrc.indexOf("uploads") == -1 && imgSrc != ''){
-                echoedImg= uploads+imgSrc;
+            if(fileSrc.indexOf("uploads") == -1 && fileSrc != ''){
+                echoedImg= uploads+fileSrc;
             }
             //显示图片
             $('.'+ className).find('video').attr('src',echoedImg);
             //赋值回
-            $('.'+ className).find('.img').val(imgSrc);
+            $('.'+ className).find('.img').val(fileSrc);
         },
         yes:function(index){
-            var layerImgSrc= $('.'+ className).find('.img').val();
-            console.log(layerImgSrc);
-            obj.siblings('.hidden_video').val(layerImgSrc);
-            if(layerImgSrc.indexOf("data:") !=-1){
+            var layerfileSrc= $('.'+ className).find('.img').val();
+            obj.siblings('.hidden_video').val(layerfileSrc);
+            var fileSrc = $('.'+ className).find('video').attr('src');
+            if(layerfileSrc=='' && fileSrc != ''){
                 errorTipc('文件还没上传完毕')
                 return false;
             }

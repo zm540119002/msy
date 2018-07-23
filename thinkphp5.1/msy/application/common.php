@@ -33,4 +33,3 @@ function multi_array_key_exists( $needle, $haystack ) {
     endforeach;
     return false;
 }
-

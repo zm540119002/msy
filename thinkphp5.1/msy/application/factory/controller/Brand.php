@@ -6,10 +6,12 @@ class Brand extends FactoryBase
     public function manage()
     {
         $model = new \app\factory\model\Brand;
-        $where = [
-            ['factory_id','=',$this->factory['id']]
+        $config = [
+            'where' => [
+                ['factory_id','=',$this->factory['id']]
+            ],
         ];
-        $brandList =  $model -> getList($where);
+        $brandList =  $model -> getList($config);
         $this -> assign('brandList',$brandList);
         return $this->fetch();
     }
@@ -29,10 +31,12 @@ class Brand extends FactoryBase
         $this->assign('categoryList',$categoryList);
         if(input('?brand_id')){
             $brandId = input('brand_id');
-            $where = array(
-                'id' => $brandId,
-            );
-            $brandInfo =  $model -> getInfo($where);
+            $config = [
+                'where' => [
+                    ['id', '=', $brandId],
+                ],
+            ];
+            $brandInfo =  $model -> getInfo($config);
             $this -> assign('brandInfo',$brandInfo);
         }
         return $this->fetch();

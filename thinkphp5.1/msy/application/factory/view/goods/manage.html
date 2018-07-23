@@ -143,21 +143,24 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="factory_js/getGoodsList.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:6,
+		pageType:'manage'
+	};
 	$(function () {
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
-			var config = {
-				pageSize:10,
-				pageType:'manage',
-			};
-			var url = module+'goods/getList';
 			//初始化商品列表
-			getPage(url,config);
-			//上拉加载更多
-			getMore(url,config);
+			getPagingList(config,postData);
 		}
 
 		var databaseContent=$('#databaseContent').html();
@@ -224,7 +227,7 @@
 			var _this=$(this);
 				_this.toggleClass('current');
 		})
-		
+
 
 		//备份
 		$('body').on('click','.backup',function () {
@@ -233,12 +236,13 @@
 					dialog.error(msg.info);
 					return false;
 				}
-				console.log(msg);
 				$('.backup-time').text(msg.create_time);
 				dialog.success(msg.info);
 			})
 		});
 
 	});
+
+
 </script>
 {/block}

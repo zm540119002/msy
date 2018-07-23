@@ -5,6 +5,17 @@
 {/block}
 {block name="content"}
 <!--选择商品搞促销-->
+<section style="display: none" class="search-li">
+<li data-goods-id="" >
+	<img src="" alt="" class="left"/>
+	<div>
+		<span class="goods-name"></span>
+		<span class="special-price">特价</span>
+		<input type="text" class="special" placeholder="填写价格">
+	</div>
+	<a href="javascript:void(0);" class="promotional-close-btn">X</a>
+</li>
+</section>
 <section id="addsalesgoods" style="display:none;" class="f24">
 	<div class="content-box">
 		<span class="content-label">已选择促销商品</span>
@@ -19,7 +30,10 @@
 			</div>
 		</form>
 		<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>
-		<div class="content" id="list"></div>
+		<div class="">
+			<ul class="columns_flex flex-both-side classify-label-content" id="list">
+			</ul>
+		</div>
 	</div>
 </section>
 <article class="f24">
@@ -104,5 +118,6 @@
 </script>
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript" src="public_js/mobiscroll.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript" src="factory_js/promotion.js"></script>
 {/block}

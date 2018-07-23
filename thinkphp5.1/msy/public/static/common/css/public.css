@@ -119,6 +119,7 @@ body{width: 6.4rem;margin: 0 auto;font-family: '微软雅黑',Verdana,Arial,Helv
     background-size: 35px;
 }
 .loading{
+    display:none;
     width:100px;
     height:32px;
     position:fixed;
@@ -2087,7 +2088,7 @@ table {
      position: relative;
 }
 .classify-label-content{
-    padding:0 0 1.5rem 0;
+    /*padding:0 0 1.5rem 0;*/
 }
 .uploader1 input[type=file] {
     position: absolute;
