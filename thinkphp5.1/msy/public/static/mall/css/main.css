@@ -1520,3 +1520,14 @@ transparent;
     margin:0 0 .25rem 0;
     border-bottom:1px solid #d9d9d9;
 }
+/*商城店铺*/
+.store-product-title{
+    width:75%;
+}
+.explain-text{
+    color:#0068B5;
+
+}
+.price-item span{
+    font-size:.28rem;
+}
