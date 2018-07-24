@@ -10,9 +10,6 @@ class Record extends FactoryBase
         if(request()->isPost()){
             return $model -> edit($this->factory['id']);
         }else{
-            $where = [
-                ['factory_id','=',$this->factory['id']],
-            ];
             $config = [
                 'where' => [
                     ['factory_id','=',$this->factory['id']],
@@ -49,6 +46,4 @@ class Record extends FactoryBase
         $this -> assign('recordInfo',$recordInfo);
         return $this->fetch();
     }
-
-
 }
