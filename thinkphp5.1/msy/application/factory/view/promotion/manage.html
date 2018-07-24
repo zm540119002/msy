@@ -149,5 +149,14 @@
 			config.container.find('.tag-item:last').after(data);
 		}
 	}
+	//下拉加载
+	$('.classify-label-content').on('scroll',function(){
+		var listHeight=document.getElementById('list').scrollHeight;
+		if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+			config.loadTrigger = false;
+			config.activityStatus = $('.category-tab li.current a').data('activity-status');
+			getPagingList(config,postData);
+		}
+	});
 </script>
 {/block}
