@@ -27,8 +27,7 @@ class RetailStore extends MallBase{
                     ['store s','g.store_id = s.id',],
                 ],
             ];
-            return $_GET;
-            $list = $modelGoods->getList($config);
+            $list = $modelGoods->pageQuery($config);
             return view('list_tpl',['list'=>$list]);
         }else{
             return $this->fetch();
