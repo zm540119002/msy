@@ -244,9 +244,9 @@
 	});
 	//下拉加载
 	$(window).on('scroll',function(){
-		console.log(111)
+		console.log(config.loadTrigger);
+		console.log($(document).scrollTop()+$(window).height()>=$(document).height());
 		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-			console.log(22)
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}
