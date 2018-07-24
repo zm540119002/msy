@@ -972,6 +972,7 @@ input.special{
 .classify-label-content a.goods{
     display: block;
     height:125px;
+    overflow:hidden;
 }
 .classify-label-content a.goods img{
     margin:0 auto;
