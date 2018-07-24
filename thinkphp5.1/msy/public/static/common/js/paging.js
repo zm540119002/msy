@@ -53,7 +53,7 @@ function getPagingList(config,postData) {
             config.callBack(config,data);
             console.log($(data));
             console.log($(data).length);
-            if($.parseXML(data).length<postData.pageSize){
+            if($(data).length<postData.pageSize){
                 config.requestEnd = true;
             }
             config.currentPage ++;
