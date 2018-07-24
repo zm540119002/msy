@@ -17,11 +17,17 @@ class RetailStore extends MallBase{
         if(request()->isAjax()){
             $modelGoods = new \app\factory\model\Goods();
             $config =[
-                'field' => [
+                'where' => [
+                    ['g.status', '=', 0],
+                    ['s.status', '=', 0],
+//                    ['s.run_type', '=', 2],
+                ],'field' => [
                     'g.id','g.name','g.thumb_img','g.sale_price',
+                ],'leftJoin' => [
+                    ['store s','g.store_id = s.id',],
                 ],
             ];
-            $list = $modelGoods->getList($config);
+            $list = $modelGoods->pageQuery($config);
             return view('list_tpl',['list'=>$list]);
         }else{
             return $this->fetch();

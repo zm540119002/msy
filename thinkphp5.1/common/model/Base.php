@@ -7,17 +7,12 @@ class Base extends \think\Model {
 	 */
 	public function getList($config=[]){
 		$_config = [
-			'where' => [
-				['status', '=', 0],
-			],'order' => [
-				'id' => 'desc',
-			],'join' => [
-			],'field' => [
+			'field' => [
 				'*',
 			],
 		];
 		
-		$_config = $config+$_config;
+		$_config = array_merge($_config,$config);
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
@@ -32,16 +27,11 @@ class Base extends \think\Model {
 	 */
 	public function getInfo($config=[]){
 		$_config = [
-			'where' => [
-				['status', '=', 0],
-			],'order' => [
-				'id' => 'desc',
-			],'join' => [
-			],'field' => [
+			'field' => [
 				'*',
 			],
 		];
-		$_config = $config+$_config;
+		$_config = array_merge($_config,$config);
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
@@ -56,16 +46,11 @@ class Base extends \think\Model {
 	 */
 	public function pageQuery($config=[]){
 		$_config = [
-			'where' => [
-				['status', '=', 0],
-			],'order' => [
-				'id' => 'desc',
-			],'join' => [
-			],'field' => [
+			'field' => [
 				'*',
 			],
 		];
-		$_config = $config+$_config;
+		$_config = array_merge($_config,$config);
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
 			if(!empty($value)){
