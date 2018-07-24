@@ -61,10 +61,8 @@ class Goods extends StoreBase
             if(empty($goodsInfo)){
                 $this -> error('此商品不存在');
             }
-            $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
-            array_pop( $goodsInfo['main_img']);
-            $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
-            array_pop( $goodsInfo['details_img']);
+            $goodsInfo['main_img'] = explode(",",rtrim($goodsInfo['main_img'], ","));
+            $goodsInfo['details_img'] = explode(",",rtrim($goodsInfo['details_img'], ","));
             $this -> assign('goodsInfo',$goodsInfo);
             //获取店铺的详情信息
             $this -> assign('storeInfo',$this->store);
