@@ -16,9 +16,9 @@
 			<li class="columns_flex" data-store-id="{$selfStore.id}">
 				<div>
 					{notempty name="selfStore.img"}
-					<img src="public_img/{$selfStore.img}" alt="" class="">
+					<img src="public_uploads/{$selfStore.img}" alt="" class="">
 					{else /}
-
+					<img src="public_img/default/no_pic_40.jpg" alt="">
 					{/notempty}
 				</div>
 				<div>
