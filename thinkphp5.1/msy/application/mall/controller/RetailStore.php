@@ -28,7 +28,7 @@ class RetailStore extends MallBase{
                 ],
             ];
             $list = $modelGoods->pageQuery($config);
-            return $list;
+            return $list->listRows();
             return view('list_tpl',['list'=>$list]);
         }else{
             return $this->fetch();
