@@ -143,6 +143,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+
 <script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
 	var config = {
@@ -244,6 +245,7 @@
 	});
 	//下拉加载
 	$(window).on('scroll',function(){
+		console.log(config.loadTrigger);
 		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
 			config.loadTrigger = false;
 			getPagingList(config,postData);

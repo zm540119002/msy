@@ -49,13 +49,15 @@ function getPagingList(config,postData) {
             dialog.error('AJAX错误');
         },
         success: function(data){
+            console.log(data)
             $('.loading').hide();
             config.callBack(config,data);
-            if($(data).length<postData.pageSize){
+            if($($.parseHTML(data)).length<postData.pageSize){
                 config.requestEnd = true;
             }
             config.currentPage ++;
             config.loadTrigger = true;
+            console.log( '2222'+config.loadTrigger)
         }
     });
 }
