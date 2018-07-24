@@ -872,7 +872,7 @@ input.special{
     /*display: flex;*/
 }
 .addsalesgoodsLayer .promotional-goods-list{
-    height:150px;
+    height:100px;
     overflow-y:auto;
     flex-wrap:wrap;
 }
@@ -971,7 +971,11 @@ input.special{
 }
 .classify-label-content a.goods{
     display: block;
-    height:195px;
+    height:125px;
+}
+.classify-label-content a.goods img{
+    margin:0 auto;
+    max-width:50%;
 }
 .promotion-item.hide{
     display: none;

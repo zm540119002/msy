@@ -131,6 +131,7 @@
 			});
 		})
 	});
+	//下拉加载
 	$(window).on('scroll',function(){
 		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
 			config.loadTrigger = false;
