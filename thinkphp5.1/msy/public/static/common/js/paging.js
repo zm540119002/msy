@@ -61,13 +61,13 @@ function getPagingList(config,postData) {
     });
 }
 
-//窗口滚动条-加载更多
-$(window).on('scroll',function(){
-    if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-        config.loadTrigger = false;
-        getPagingList(config,postData);
-    }
-});
+// //窗口滚动条-加载更多
+// $(window).on('scroll',function(){
+//     if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+//         config.loadTrigger = false;
+//         getPagingList(config,postData);
+//     }
+// });
 
 $('.classify-label-content').on('scroll',function(){
     var listHeight=document.getElementById('list').scrollHeight;
