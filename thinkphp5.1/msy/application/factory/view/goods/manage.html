@@ -246,6 +246,7 @@
 	$(window).on('scroll',function(){
 		console.log(111)
 		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+			console.log(22)
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}
