@@ -71,6 +71,14 @@
 	//文档就绪
 	$(function(){
 		getPagingList(config,postData);
+
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
 	});
 </script>
 {/block}

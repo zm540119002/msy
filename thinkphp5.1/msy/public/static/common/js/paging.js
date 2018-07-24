@@ -33,7 +33,6 @@ function getPagingList(config,postData) {
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.requestEnd){
-        console.log(2222)
         dialog.error('没有更多啦');
         config.loadTrigger = true;
         return false;
@@ -52,7 +51,7 @@ function getPagingList(config,postData) {
         success: function(data){
             $('.loading').hide();
             config.callBack(config,data);
-            if($($.parseHTML(data)).length<postData.pageSize){
+            if($(data).length<postData.pageSize){
                 config.requestEnd = true;
             }
             config.currentPage ++;
@@ -61,22 +60,6 @@ function getPagingList(config,postData) {
     });
 }
 
-//窗口滚动条-加载更多
-$(window).on('scroll',function(){
-    if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-        config.loadTrigger = false;
-        getPagingList(config,postData);
-    }
-});
-
-$('.classify-label-content').on('scroll',function(){
-    var listHeight=document.getElementById('list').scrollHeight;
-    if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
-        config.loadTrigger = false;
-        config.activityStatus = $('.category-tab li.current a').data('activity-status');
-        getPagingList(config,postData);
-    }
-});
 //禁用移动按钮
 function disableBtn(){
     var listUl = $('#list');
