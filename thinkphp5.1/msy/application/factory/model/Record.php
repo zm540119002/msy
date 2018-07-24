@@ -63,11 +63,15 @@ class Record extends \common\model\Base{
 
 		if(input('?post.record_id') && !input('?post.record_id') == ''){
 			//修改
-			$where['id'] = $data['record_id'];
-			$file = array(
-				'logo_img','company_img','rb_img','factory_video','license','glory_img'
-			);
-			$oldRecordInfo = $this -> getInfo($where,$file);
+			$config = [
+				'where' => [
+					['id','=',$data['record_id']],
+				],
+				'field' => [
+					'logo_img','company_img','rb_img','factory_video','license','glory_img'
+				],
+			];
+			$oldRecordInfo = $this -> getInfo($config);
 			$data['update_time'] = time();
             $this->startTrans();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
@@ -76,12 +80,16 @@ class Record extends \common\model\Base{
 				return errorMsg('失败！');
 			}
 			$modelStore = new \app\factory\model\Store;
-			$whereStore = [
-				['factory_id','=',$factoryId],
-				['store_type','=',1],
+			$config = [
+				'where' => [
+					['factory_id','=',$factoryId],
+					['store_type','=',1],
+				],
+				'field' => [
+					'id','logo_img'
+				],
 			];
-			$fileStore = ['s.id,s.logo_img'];
-			$storeList = $modelStore->getList($whereStore,$fileStore);
+			$storeList = $modelStore->getList($config);
 			$ids = [];
 			if(!empty($storeList) && $data['logo_img'] != $oldRecordInfo['logo_img']){
 				foreach ($storeList as $k=>&$v){

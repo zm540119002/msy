@@ -21,19 +21,10 @@ class Promotion extends StoreBase
         }
         if(input('?id') && $this->store['id']){
             $promotionId = (int)input('id');
-            $where = [
-                ['p.id','=',$promotionId],
-                ['p.store_id','=',$this->store['id']],
-            ];
-            $file = [
-                'p.id,p.name,p.first_img,p.second_img,p.goods_ids,p.start_time,p.end_time,p.store_id'
-            ];
             $config = [
                 'where' => [
                     ['p.id','=',$promotionId],
                     ['p.store_id','=',$this->store['id']],
-                ],'join' => [
-                    ['record r','r.factory_id = f.id',],
                 ],'field' => [
                     'p.id,p.name,p.first_img,p.second_img,p.goods_ids,p.start_time,p.end_time,p.store_id'
                 ],
