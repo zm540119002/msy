@@ -66,6 +66,10 @@
 				dialog.error('还是原来的图片，没有图片优化');
 				return false;
 			}
+			if(!uploadsClipImgFlag){
+				dialog.error('图片还没有上传完毕');
+				return false;
+			}
 			$.post(controller + 'set',{logo_img:logo_img},function (data) {
 				if(!data.status){
 					dialog.error(data.info);
