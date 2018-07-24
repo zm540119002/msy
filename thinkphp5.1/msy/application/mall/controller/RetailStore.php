@@ -20,7 +20,7 @@ class RetailStore extends MallBase{
                 'where' => [
                     ['g.status', '=', 0],
                     ['s.status', '=', 0],
-                    ['s.run_type', '=', 2],
+//                    ['s.run_type', '=', 2],
                 ],'field' => [
                     'g.id','g.name','g.thumb_img','g.sale_price',
                 ],'leftJoin' => [
