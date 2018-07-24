@@ -33,7 +33,6 @@ function getPagingList(config,postData) {
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.requestEnd){
-        console.log(2222)
         dialog.error('没有更多啦');
         config.loadTrigger = true;
         return false;
@@ -52,6 +51,7 @@ function getPagingList(config,postData) {
         success: function(data){
             $('.loading').hide();
             config.callBack(config,data);
+            console.log($($.parseHTML(data)).length);
             if($($.parseHTML(data)).length<postData.pageSize){
                 config.requestEnd = true;
             }
