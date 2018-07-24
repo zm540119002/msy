@@ -60,6 +60,6 @@ class Base extends \think\Model {
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
         $_model->paginate($pageSize);
-		return $this->getLastSql();
+		return $_model->getLastSql();
 	}
 }
