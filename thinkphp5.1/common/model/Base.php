@@ -24,8 +24,8 @@ class Base extends \think\Model {
 				$_model = $_model->$key($value);
 			}
 		}
-		return $_model;
 		$list = $_model->select();
+		return $_model->getLastSql();
 		return count($list)?$list->toArray():[];
 	}
 

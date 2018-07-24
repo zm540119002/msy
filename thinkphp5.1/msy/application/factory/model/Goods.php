@@ -51,12 +51,6 @@ class Goods extends \common\model\Base {
 			$data['details_img'] = implode(",", $detailsImg).',';
 		}
 		if(input('?post.id')){//修改
-			$where = [
-				['id','=',$data['id']],
-			];
-			$file = array(
-				'thumb_img','main_img','details_img','goods_video'
-			);
 			$config = [
 				'where' => [
 					['id','=',$data['id']],
