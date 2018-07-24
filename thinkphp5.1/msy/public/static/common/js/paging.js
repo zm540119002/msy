@@ -51,8 +51,8 @@ function getPagingList(config,postData) {
         success: function(data){
             $('.loading').hide();
             config.callBack(config,data);
-            var lis = data.find('li');
-            console.log(lis.length);
+            console.log(data);
+            return;
             if(lis.length<postData.pageSize){
                 config.requestEnd = true;
             }
