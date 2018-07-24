@@ -44,14 +44,16 @@ class Promotion extends \common\model\Base {
 		$data['store_id'] = $storeId;
 		$this ->startTrans();
 		if(input('?post.id')){//修改
-			$where = [
-				['id','=',$data['id']],
-				['store_id','=',$storeId],
+			$config = [
+				'where' => [
+					['id','=',$data['id']],
+					['store_id','=',$storeId],
+				],
+				'field' => [
+					'first_img','second_img','goods_ids',
+				],
 			];
-			$file = array(
-				'first_img,second_img,goods_ids',
-			);
-			$oldInfo = $this -> getInfo($where,$file);
+			$oldInfo = $this -> getInfo($config);
 			$data['update_time'] = time();
 			$result = $this -> allowField(true) -> save($data,['id' => $data['id'],'store_id'=>$storeId]);
 			if(false == $result){

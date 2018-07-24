@@ -67,8 +67,6 @@ class Goods extends StoreBase
             array_pop( $goodsInfo['details_img']);
             $this -> assign('goodsInfo',$goodsInfo);
             //获取店铺的详情信息
-//            $modelStore = new \app\factory\model\Store;
-//            $storeInfo = $modelStore -> getStoreInfo($this->store);
             $this -> assign('storeInfo',$this->store);
         }
         return $this->fetch();
