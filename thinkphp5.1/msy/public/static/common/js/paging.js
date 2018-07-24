@@ -56,6 +56,7 @@ function getPagingList(config,postData) {
             }
             config.currentPage ++;
             config.loadTrigger = true;
+            console.log( '2222'+config.loadTrigger)
         }
     });
 }
