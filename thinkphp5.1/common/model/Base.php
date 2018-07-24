@@ -7,12 +7,7 @@ class Base extends \think\Model {
 	 */
 	public function getList($config=[]){
 		$_config = [
-			'where' => [
-				['status', '=', 0],
-			],'order' => [
-				'id' => 'desc',
-			],'join' => [
-			],'field' => [
+			'field' => [
 				'*',
 			],
 		];
@@ -32,12 +27,7 @@ class Base extends \think\Model {
 	 */
 	public function getInfo($config=[]){
 		$_config = [
-			'where' => [
-				['status', '=', 0],
-			],'order' => [
-				'id' => 'desc',
-			],'join' => [
-			],'field' => [
+			'field' => [
 				'*',
 			],
 		];
@@ -56,12 +46,7 @@ class Base extends \think\Model {
 	 */
 	public function pageQuery($config=[]){
 		$_config = [
-			'where' => [
-				['status', '=', 0],
-			],'order' => [
-				'id' => 'desc',
-			],'join' => [
-			],'field' => [
+			'field' => [
 				'*',
 			],
 		];

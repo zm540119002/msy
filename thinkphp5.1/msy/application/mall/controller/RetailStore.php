@@ -18,11 +18,13 @@ class RetailStore extends MallBase{
             $modelGoods = new \app\factory\model\Goods();
             $config =[
                 'where' => [
+                    ['g.status', '=', 0],
+                    ['s.status', '=', 0],
                     ['s.run_type', '=', 2],
                 ],'field' => [
                     'g.id','g.name','g.thumb_img','g.sale_price',
-                ],'join' => [
-                    ' left join store s on g.store_id = s.id ',
+                ],'leftJoin' => [
+                    ['store s','g.store_id = s.id',],
                 ],
             ];
             $list = $modelGoods->getList($config);
