@@ -25,7 +25,7 @@
     <div id="view" class="photoview" ></div>
 </section>
 <script type="text/javascript">
-    var uploadsClipImg = true;
+    var uploadsClipImgFlag = true;
     $(function(){
         //编辑品牌logo
         var clipImg = '';
@@ -36,7 +36,7 @@
             view: "#view",
             ok: "#clipBtn",
             clipFinish: function(img) {
-                uploadsClipImg = false;
+                uploadsClipImgFlag = false;
                 clipImg = img;
                 var postData ={};
                 postData.fileBase64 = clipImg;
@@ -47,7 +47,7 @@
                         return false;
                     }
                     if(msg.status == 1){
-                        uploadsClipImg = true;
+                        uploadsClipImgFlag = true;
                         $('.logo-src').val(msg.info)
                     }
                 },'json');
