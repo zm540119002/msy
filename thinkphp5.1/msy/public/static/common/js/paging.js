@@ -51,7 +51,7 @@ function getPagingList(config,postData) {
         success: function(data){
             $('.loading').hide();
             config.callBack(config,data);
-            if($(data).length<postData.pageSize){
+            if($($.parseHTML(data)).length<postData.pageSize){
                 config.requestEnd = true;
             }
             config.currentPage ++;
