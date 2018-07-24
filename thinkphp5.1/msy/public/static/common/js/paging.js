@@ -49,6 +49,7 @@ function getPagingList(config,postData) {
             dialog.error('AJAX错误');
         },
         success: function(data){
+            console.log(data)
             $('.loading').hide();
             config.callBack(config,data);
             if($(data).length<postData.pageSize){
