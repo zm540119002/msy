@@ -828,6 +828,10 @@ background-position: 0 -27px;
 .foot_nav_bar .current a span.manufacturer{
     background-position:0 -143px;
 }
+.layui-m-layermain .layui-m-layerchild.cloudTwitterLayer,
+.layui-m-layermain .layui-m-layerchild.editDetailLayer {
+    width: 100%;
+}
 /*美尚云从业人员*/
 
 .project_list li{
