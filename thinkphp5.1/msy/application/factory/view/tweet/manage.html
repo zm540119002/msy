@@ -13,7 +13,7 @@
 </section>
 <!--云推客发布图片消息-->
 <section id="cloudImgTwitter" style="display: none;">
-	<form id="releaseInfoForm">
+	<form class="releaseInfoForm">
 		<div class="twitter-release-content">
 			<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="消息文字..."></textarea>
 			<ul class="upload-picture-module multi-picture-module">
@@ -31,7 +31,7 @@
 </section>
 <!--云推客发布视频消息-->
 <section id="cloudVideoTwitter" style="display: none;">
-	<form id="releaseInfoForm">
+	<form class="releaseInfoForm">
 		<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="视频说明文字..."></textarea>
 		<div class="error_tipc"></div>
 		<div class="upload-picture-module f24">
@@ -51,7 +51,7 @@
 <section id="cloudArticleTwitter" style="display: none;">
 	<p>*编辑完文字图片后再按发布</p>
 	<div class="error_tipc"></div>
-	<form id="releaseInfoForm">
+	<form class="releaseInfoForm">
 		<div class="separation-line columns_flex l-r-sides release-file-module ">
 			<div class="upload-picture-module f24">
 				<div>
@@ -227,6 +227,10 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
+
 <script type="text/javascript">
 //	var config = {
 //		url:module+'promotion/getList',
@@ -279,13 +283,13 @@
 //	});
 	$(function(){
 		//轮播
-		var swiper1 = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
+//		var swiper1 = new Swiper('.swiper-container', {
+//			spaceBetween: 30,
+//			pagination: {
+//				el: '.swiper-pagination',
+//				clickable: true
+//			}
+//		});
 		// swiper('.swiper-focus-container');
 		var paragraphLayer=$('#paragraphLayer').html();
 		//添加段落文章和图片
@@ -382,7 +386,7 @@
 					console.log(options.paragraphAttr);
 					$('.msg-img').val(layermultiImgAttr);
 					//序列化表单数据
-					var releaseFormData=$('.editDetailLayer #releaseInfoForm').serializeObject();
+					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
 					var content='';
 					if(!releaseFormData.msgText){
 						content='请填写消息内容';
