@@ -49,7 +49,6 @@ function getPagingList(config,postData) {
             dialog.error('AJAX错误');
         },
         success: function(data){
-            console.log(data)
             $('.loading').hide();
             config.callBack(config,data);
             if($($.parseHTML(data)).length<postData.pageSize){
@@ -57,7 +56,6 @@ function getPagingList(config,postData) {
             }
             config.currentPage ++;
             config.loadTrigger = true;
-            console.log( '2222'+config.loadTrigger)
         }
     });
 }
