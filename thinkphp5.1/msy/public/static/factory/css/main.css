@@ -251,6 +251,9 @@
 .addProductContent {
     padding:0.25rem 0.15rem 1rem;
 }
+.addProductContent li{
+    margin:0 0 .12rem 0;
+}
 .addProductContent .right-arrow{
     position:relative;
     display: block;
