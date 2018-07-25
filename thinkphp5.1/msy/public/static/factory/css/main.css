@@ -1058,8 +1058,8 @@ input.special{
 }
 .cloudTwitterLayer .layui-m-layerbtn span[yes],
 .editDetailLayer .layui-m-layerbtn span[yes]{
-    background: #ff7bac;
-    color:#fff;
+    /*background: #ff7bac;*/
+    /*color:#fff;*/
 }
 .cloudTwitterLayer .multi-picture-module li{
     width:30%;

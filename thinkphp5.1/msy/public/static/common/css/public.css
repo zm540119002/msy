@@ -44,6 +44,14 @@ body{width: 6.4rem;margin: 0 auto;font-family: '微软雅黑',Verdana,Arial,Helv
     text-indent:10px;
     font-size:0.24rem;
 }
+.text-intro{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break:break-all;
+}
 .content-row-list{
     margin:0 0 .18rem 0;
 }
