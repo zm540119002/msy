@@ -415,7 +415,7 @@
     display: block;
     margin:0;
 }
-.qualificationContent .upload-company-map .picture-module{
+.qualificationContent .upload-company-map .picture-module.active{
     height:4rem;
 }
 .company-n{
