@@ -251,6 +251,9 @@
 .addProductContent {
     padding:0.25rem 0.15rem 1rem;
 }
+.addProductContent li{
+    margin:0 0 .12rem 0;
+}
 .addProductContent .right-arrow{
     position:relative;
     display: block;
@@ -1058,8 +1061,8 @@ input.special{
 }
 .cloudTwitterLayer .layui-m-layerbtn span[yes],
 .editDetailLayer .layui-m-layerbtn span[yes]{
-    background: #ff7bac;
-    color:#fff;
+    /*background: #ff7bac;*/
+    /*color:#fff;*/
 }
 .cloudTwitterLayer .multi-picture-module li{
     width:30%;
