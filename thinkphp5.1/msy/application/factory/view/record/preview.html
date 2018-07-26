@@ -23,9 +23,9 @@
 		<div class="columns_flex">
 			<div>
 				{notempty name="recordInfo.logo_img"}
-				<img class="upload_img small_default_img" src="public_uploads/{$recordInfo.logo_img|default=''}" alt="">
+				<img class="upload_img small_default_img" src="public_uploads/{$recordInfo.logo_img|default=''}" alt="" class="left">
 				{else /}
-				<img class="upload_img small_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+				<img class="upload_img small_default_img" src="public_img/default/no_pic_100.jpg" alt="" class="left">
 				{/notempty}
 				<span>[{$recordInfo.name|default=''}]</span>
 			</div>
