@@ -15,6 +15,7 @@ class Tweet extends StoreBase
      */
     public function edit()
     {
+        print_r(input());exit;
         $model = new \app\factory\model\Promotion;
         if(request()->isPost()){
             return $model -> edit($this->store['id']);
