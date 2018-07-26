@@ -50,6 +50,11 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        if(!uploadsSingleImgFlag ){
+            dialog.error('图片还没有上传完毕');
+            return false;
+        }
+        
         $.post(controller + 'register',postData,function(msg){
             if(msg.status == 0){
                 dialog.error(msg.info);

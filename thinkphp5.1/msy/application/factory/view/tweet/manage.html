@@ -392,24 +392,23 @@
 						content='请填写消息内容';
 					}else if(!releaseFormData.msgfile){
 						content=options.msg;
-					}else if(!releaseFormData.storeGoods){
-						content='请链接商家商品';
 					}
 					if(content){
 						errorTipc(content);
 						return false;
 					}
-					$.ajax({
-						url:'',
-						type:'',
-						data:{},
-						success:function(){
-
-						},
-						error:function(){
-
-						}
-					})
+					console.log(releaseFormData)
+//					$.ajax({
+//						url:'',
+//						type:'',
+//						data:{},
+//						success:function(){
+//
+//						},
+//						error:function(){
+//
+//						}
+//					})
 				}
 			});
 		}

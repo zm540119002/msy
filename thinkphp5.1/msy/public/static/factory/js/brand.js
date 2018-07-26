@@ -99,6 +99,18 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        if(!uploadsSingleImgFlag ){
+            dialog.error('图片还没有上传完毕');
+            return false;
+        }
+        if(!uploadsSingleVideoFlag){
+            dialog.error('视频还没有上传完毕');
+            return false;
+        }
+        if(!uploadsClipImgFlag){
+            dialog.error('商标还没有上传完毕');
+            return false;
+        }
         $.post(controller+"record",postData,function(msg){
             if(msg.status == 0){
                 dialog.error(msg.info);
