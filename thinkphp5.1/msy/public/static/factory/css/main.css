@@ -415,6 +415,9 @@
     display: block;
     margin:0;
 }
+.qualificationContent .upload-company-map .picture-module{
+    height:4rem;
+}
 .company-n{
     margin:0.18rem 0;
 }
