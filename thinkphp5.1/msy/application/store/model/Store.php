@@ -23,7 +23,7 @@ class Store extends Model {
 		$file = array(
 			'business_license','auth_letter',
 		);
-		$oldstoreInfo = $this -> getInfo($where,$file);
+		$oldStoreInfo = $this -> getInfo($where,$file);
 		$validate = validate('store');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
@@ -34,8 +34,8 @@ class Store extends Model {
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['store_id']]);
 			if(false !== $result){
-				delImgFromPaths($oldstoreInfo['business_license'],$data['business_license']);
-				delImgFromPaths($oldstoreInfo['auth_letter'],$data['auth_letter']);
+				delImgFromPaths($oldStoreInfo['business_license'],$data['business_license']);
+				delImgFromPaths($oldStoreInfo['auth_letter'],$data['auth_letter']);
 				return successMsg("成功");
 			}else{
 				return errorMsg('失败');

@@ -21,15 +21,6 @@ class Factory extends \common\model\Base {
 	public function edit($uid=''){
 		$data = input('post.');
 		$data['user_id'] = $uid;
-		$config = [
-			'where' => [
-				['id', '=', $data['factory_id']],
-			],
-			'field' => [
-				'business_license','auth_letter',
-			],
-		];
-		$oldFactoryInfo = $this -> getInfo($config);
 		$validate = validate('Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
@@ -37,6 +28,16 @@ class Factory extends \common\model\Base {
 		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
 		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
 		if(input('?post.factory_id')){
+			//查找当前的factory_id的入驻信息
+			$config = [
+				'where' => [
+					['id', '=', $data['factory_id']],
+				],
+				'field' => [
+					'business_license','auth_letter',
+				],
+			];
+			$oldFactoryInfo = $this -> getInfo($config);
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['factory_id']]);
 			if(false !== $result){

@@ -38,8 +38,10 @@ $(function(){
             content='请填写代办人姓名';
         }else if(!businessLicense){
             content='请上传企业营业执照照片';
-        }else if(!agentAuthorization){
-            content='请上传代办人企业授权信照片';
+        }
+        if(!uploadsSingleImgFlag ){
+            dialog.error('图片还没有上传完毕');
+            return false;
         }
         postData={
             id : id,
