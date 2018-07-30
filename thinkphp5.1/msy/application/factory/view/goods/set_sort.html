@@ -136,9 +136,9 @@
 		var listHeight=$('.classify-label-content').get(0).scrollHeight;
 		if(config.loadTrigger &&  $('.classify-label-content').scrollTop()+ $('.classify-label-content').height()>=listHeight){
 			config.loadTrigger = false;
-			getPagingList(config,postData);
 			$('.classify-label-content li').find('.down-btn').removeClass('down-disabled-icons');
 			$('.classify-label-content li:last').find('.down-btn').addClass('down-disabled-icons');
+			getPagingList(config,postData);
 		}
 	});
 
