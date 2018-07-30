@@ -215,7 +215,7 @@
     background-position:0 -142px;
 }
 .classify-operate-btn a.down-disabled-icons,
-.classify-label-content li:last-child .down-icons{
+.classify-label-content li:last-child .down-disabled-icons{
     background-position:0 -178px;
 }
 .classify-label-content li:first-child .up-btn.disabled,
