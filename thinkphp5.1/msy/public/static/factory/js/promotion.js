@@ -79,9 +79,14 @@ $(function(){
                     return false;
                 }
                 $('.linked-goods-id').val(JSON.stringify(selectedGoods));
+                //设置分页请求默认值
+                config.requestEnd=false;
+                config.loadTrigger=false;
+                config.currentPage=1;
                 layer.close(index);
             },
             no:function () {
+                //设置分页请求默认值
                 config.requestEnd=false;
                 config.loadTrigger=false;
                 config.currentPage=1;

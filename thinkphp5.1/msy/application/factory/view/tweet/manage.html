@@ -3,6 +3,37 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
+<!--选择商品搞促销-->
+<section style="display: none" class="search-li">
+	<li data-goods-id="" >
+		<img src="" alt="" class="left"/>
+		<div class="promotional-g-right">
+			<span class="goods-name"></span>
+		</div>
+		<a href="javascript:void(0);" class="promotional-close-btn">X</a>
+	</li>
+</section>
+<section id="addsalesgoods" style="display:none;" class="f24">
+	<div class="content-box">
+		<span class="content-label">已选择促销商品</span>
+		<ul class="columns_flex l-r-sides promotional-goods-list">
+
+		</ul>
+		<div class="error_tipc"></div>
+		<form name="form1" id="form1">
+			<div class="columns_flex search-row-flex">
+				<input type="text" class="input-filed search-goods keyword" name="keyword" placeholder="搜索商品"/>
+				<input type="button" value="搜索" class="layer-search-btn search"/>
+			</div>
+		</form>
+		<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>
+		<div class="">
+			<ul class="columns_flex flex-both-side classify-label-content" id="list">
+			</ul>
+		</div>
+	</div>
+</section>
+
 <section id="releaseFileContent" style="display: none;">
 	<div class="release-file">
 		<a href="javascript:void(0);" class="release-img" data-type="1">图片消息（最多9张图）</a>
@@ -21,11 +52,11 @@
 			<div class="error_tipc"></div>
 			<div class="release-news">
 				<span class="video-camera"></span>
-				<input class="camera-btn uploadSingleImg" type="file" id="file" capture="camera" data-num="9" multiple>
+				<input class="camera-btn " type="file" id="file" capture="camera" data-num="9" multiple>
 				<input type="hidden" name="msgfile" class="msg-img">
 			</div>
 			<a href="javascript:void(0);" class="link-store-goods">设定链接的商家店铺商品（可选）></a>
-			<input type="hidden" name="storeGoods" class="store-goods">
+			<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 		</div>
 	</form>
 </section>
@@ -44,7 +75,7 @@
 			</div>
 		</div>
 		<a href="javascript:void(0);" class="link-store-goods">设定链接的商家店铺商品（可选）></a>
-		<input type="hidden" name="storeGoods" class="store-goods">
+		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 	</form>
 </section>
 <!--云推客发布文章-->
@@ -73,7 +104,6 @@
 					<div class="picture-module">
 						<input type="file" class="uploadImg uploadSingleVideo" name="">
 						<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
-						<input type="hidden"  name="msgfile" class="img" data-src="" value="">
 					</div>
 					<p>上传视频(可不选)</p>
 				</div>
@@ -83,7 +113,7 @@
 			</div>
 		</div>
 		<a href="javascript:void(0);" class="link-store-goods">设定链接的商家店铺商品（可选）></a>
-		<input type="hidden" name="storeGoods" class="store-goods">
+		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 	</form>
 	<div class="paragraph-module">
 		<textarea class="twitter-text" rows="" cols="" placeholder="段落文字粘贴..."></textarea>
@@ -232,6 +262,16 @@
 <script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
 
 <script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:4,
+		pageType:'promotion'
+	};
 //	var config = {
 //		url:module+'promotion/getList',
 //		requestEnd:false,
@@ -282,6 +322,7 @@
 //		})
 //	});
 	$(function(){
+
 		//轮播
 //		var swiper1 = new Swiper('.swiper-container', {
 //			spaceBetween: 30,
@@ -383,10 +424,12 @@
 						}
 						options.paragraphAttr.push(mesObject);
 					})
-					console.log(options.paragraphAttr);
+//					console.log(layermultiImgAttr)
 					$('.msg-img').val(layermultiImgAttr);
+					console.log($('.msg-img').val());
 					//序列化表单数据
 					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
+					releaseFormData.img =  layermultiImgAttr;
 					var content='';
 					if(!releaseFormData.msgText){
 						content='请填写消息内容';
@@ -398,22 +441,157 @@
 						return false;
 					}
 					console.log(releaseFormData)
-//					$.ajax({
-//						url:'',
-//						type:'',
-//						data:{},
-//						success:function(){
-//
-//						},
-//						error:function(){
-//
-//						}
-//					})
+					$.ajax({
+						url:'edit',
+						type:'post',
+						data:releaseFormData,
+						success:function(data){
+
+						},
+						error:function(data){
+
+						}
+					});
+					layer.close(index);
 				}
 			});
 		}
-	})
 
+		//链接商品
+		var addsalesgoods=$('#addsalesgoods').html();
+		$('body').on('click','.link-store-goods',function(){
+			var goods = $('.linked-goods-id').val();
+			var pageii = layer.open({
+				title:['选择关联商品','border-bottom:1px solid #d9d9d9;'],
+				className:'addsalesgoodsLayer',
+				type: 1,
+				content:addsalesgoods,
+				anim: 'up',
+				success:function(){
+					var winHeight=$(window).height();
+					$('.content-box').css('height',winHeight-180+'px');
+
+					config.container = $('.addsalesgoodsLayer #list');  // container:$('.addsalesgoodsLayer #list')
+					//加载第一页
+					getPagingList(config,postData);
+					//回显也选择的产品
+					if(goods!=''){
+						selectedGoodsList(goods);
+					}
+					$('.addsalesgoodsLayer .classify-label-content').on('scroll',function(){
+						var listHeight=$('.addsalesgoodsLayer #list').get(0).scrollHeight;
+						if(config.loadTrigger && $('.addsalesgoodsLayer .classify-label-content').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+							getPagingList(config,postData);
+						}
+					});
+				},
+				yes:function(index){
+					var selectedGood={};
+					var selectedGoods =[];
+					var emptySpecialFlag  = 0;//未填价格标识位
+					var errorSpecialFlag = 0; // 价格格式错误标识位
+//					var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
+//					if(!selectedLen){
+//						errorTipc('请添加商品！');
+//						return false;
+//					}
+					var a = '';
+					var goodsName ='';
+					$('.addsalesgoodsLayer .promotional-goods-list li').each(function () {
+						goodsName = $(this).find('.goods-name').text();
+						var goodsId = $(this).data('goods-id');
+						a += goodsId+',';
+						selectedGood={
+							goods_id:goodsId,
+						}
+						selectedGoods.push(selectedGood);
+					});
+					if(emptySpecialFlag){
+						errorTipc(goodsName+'商品请填写特价');
+						return false;
+					}
+					if(errorSpecialFlag){
+						errorTipc(goodsName+'商品价格格式有误');
+						return false;
+					}
+					$('.linked-goods-id').val(a);
+					//设置分页请求默认值
+					config.requestEnd=false;
+					config.loadTrigger=false;
+					config.currentPage=1;
+					layer.close(index);
+				},
+				no:function () {
+					//设置分页请求默认值
+					config.requestEnd=false;
+					config.loadTrigger=false;
+					config.currentPage=1;
+				},
+				btn:['确定','取消']
+			});
+
+		});
+
+		//添加促销商品
+		$('body').on('click','a.goods',function(){
+			var selectedGoodsIds = [];
+			$('.addsalesgoodsLayer .promotional-goods-list li').each(function(){
+				var selectedGoodsId = $(this).data('goods-id');
+				selectedGoodsIds.push(selectedGoodsId);
+			});
+			var _this=$(this);
+			var goodsId=_this.data('id');
+			if($.inArray(goodsId, selectedGoodsIds) !== -1){
+				dialog.error('此商品已选择！');
+				return false;
+			}
+			var goodsName=_this.parent().find('.goods-name').text();
+			var goodsImgSrc=_this.find('img').attr('src');
+			var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
+			var html = $('.search-li').html();
+			if(!selectedLen){
+				$('.addsalesgoodsLayer .promotional-goods-list').append(html);
+			}else{
+				$('.addsalesgoodsLayer .promotional-goods-list li:last').after(html);
+			}
+			$('.addsalesgoodsLayer .promotional-goods-list li').attr('data-goods-id',goodsId);
+			$('.addsalesgoodsLayer .goods-name').text(goodsName);
+			$('.addsalesgoodsLayer .promotional-goods-list img').attr('src',goodsImgSrc);
+		});
+		//移除促销商品
+		$('body').on('click','.promotional-close-btn',function(){
+			var _this=$(this);
+			var promotionalId=_this.parent().data('goods-id');
+			$.each($('.all-goods-list a'),function(){
+				var _This=$(this);
+				if(_This.data('id')==promotionalId){
+					_This.removeClass('current');
+				}
+			})
+			_this.parent().remove();
+		});
+
+		//搜索商品
+		$('body').on('click','.addsalesgoodsLayer .search',function(){
+			var serializeData =$('.addsalesgoodsLayer #form1').serializeObject();
+			postData = Object.assign(postData,serializeData);
+			config.loadTrigger = false;
+			config.requestEnd=false;
+			config.currentPage=1;
+			getPagingList(config,postData);
+		});
+	});
+
+	//获取已选择的商品
+	function selectedGoodsList(selectedGoods) {
+		$("#list").html($('#loading').html());
+		var url = module+'goods/getTweetGoodsList';
+		var postData = {};
+		postData.goods = selectedGoods;
+		$.get(url, postData , function(data){
+			$('.promotional-goods-list').append(data);
+		});
+	}
 	//下拉加载
 	$('.classify-label-content').on('scroll',function(){
 		var listHeight=document.getElementById('list').scrollHeight;
