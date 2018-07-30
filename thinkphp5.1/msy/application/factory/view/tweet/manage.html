@@ -585,7 +585,7 @@
 	//获取已选择的商品
 	function selectedGoodsList(selectedGoods) {
 		$("#list").html($('#loading').html());
-		var url = module+'goods/getSceneGoodsList';
+		var url = module+'goods/getTweetGoodsList';
 		var postData = {};
 		postData.goods = selectedGoods;
 		$.get(url, postData , function(data){
