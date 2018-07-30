@@ -222,6 +222,9 @@
 .classify-label-content li:last-child .down-btn.disabled{
     pointer-events:none;
 }
+.content-marginLeft{
+    padding-bottom:1rem;
+}
 .addTagLayer .layui-m-layercont{
     padding:0.20rem;
 }
