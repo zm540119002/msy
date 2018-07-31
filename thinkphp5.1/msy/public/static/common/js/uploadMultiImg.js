@@ -7,15 +7,17 @@ $(function(){
         fileList = $(this).get(0).files;
         var imgArr = [];
         var num=file.data('num');//限制个数
+        console.log(1111);
         if($('.editDetailLayer li').length==num && num){
             console.log(1);
             errorTipc('只能上传'+num+'张图片');
             return false;
         }
         if(num==0){ //0代表无限制个数
-            console.log(2);
+            
             uploadPic(fileList[0],0,fileList.length);
         }else{
+            console.log(2);
             uploadPic(fileList[0],0,num);
         }      
     });
