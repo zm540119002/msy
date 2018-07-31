@@ -20,6 +20,7 @@ $(function(){
         }      
     });
     function uploadPic(fil,i,len){
+        console.log(3);
             var img = fil;
             var obj=$(this).parent();
             var fileSize=fil.size/1024/1024;
