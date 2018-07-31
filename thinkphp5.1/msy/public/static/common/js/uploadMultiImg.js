@@ -7,7 +7,7 @@ $(function(){
         fileList = $(this).get(0).files;
         var imgArr = [];
         var num=file.data('num');//限制个数
-        console.log(1111);
+        console.log(num);
         if($('.editDetailLayer li').length==num && num){
             console.log(1);
             errorTipc('只能上传'+num+'张图片');
