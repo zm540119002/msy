@@ -319,12 +319,32 @@ class Goods extends StoreBase
         $goodsList = $modelGoods -> getList($config);
         foreach ($goodsList as $k=>$v){
             foreach ($selectedGoodsList as $kk=>$vv){
-               if($v['id'] == $vv['goods_id'] ){
-                  $goodsList[$k]['special'] = $vv['special'];
-               }
+                if($v['id'] == $vv['goods_id'] ){
+                    $goodsList[$k]['special'] = $vv['special'];
+                }
             }
         }
         $this -> assign('list',$goodsList);
         return $this -> fetch('list_scene_selected');
+    }
+
+    // 获取推文相关的商品
+    public function getTweetGoodsList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $goodsIds = explode(",",rtrim(input('get.goods'), ","));
+        $modelGoods = new \app\factory\model\Goods;
+        $config = [
+            'where'=>[
+                ['id','in',$goodsIds]
+            ],
+            'field'=>[
+                'g.id,g.name,g.thumb_img,g.sale_price'
+            ],
+        ];
+        $goodsList = $modelGoods -> getList($config);
+        $this -> assign('list',$goodsList);
+        return $this -> fetch('list_tweet_selected');
     }
 }

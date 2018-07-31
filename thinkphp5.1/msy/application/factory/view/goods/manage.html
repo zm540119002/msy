@@ -245,7 +245,6 @@
 	});
 	//下拉加载
 	$(window).on('scroll',function(){
-		console.log(config.loadTrigger);
 		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
