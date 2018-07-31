@@ -55,7 +55,9 @@
 		url:module+'Goods/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+		type:'sort',
+		disableBtn:disableBtn //头尾上下移图标变灰色函数
 	};
 	var postData = {
 		pageSize:6,
@@ -67,6 +69,8 @@
 		if(notDefaultStore == 0){
 			//初始化商品列表
 			getPagingList(config,postData);
+			console.log($('.up-btn'));
+			
 		}
 		 //上移
         $('body').on('click','.up-btn',function(){
@@ -136,8 +140,7 @@
 		var listHeight=$('.classify-label-content').get(0).scrollHeight;
 		if(config.loadTrigger &&  $('.classify-label-content').scrollTop()+ $('.classify-label-content').height()>=listHeight){
 			config.loadTrigger = false;
-			$('.classify-label-content li').find('.down-btn').removeClass('down-disabled-icons');
-			$('.classify-label-content li:last').find('.down-btn').addClass('down-disabled-icons');
+			config.disableBtn();
 			getPagingList(config,postData);
 		}
 	});
