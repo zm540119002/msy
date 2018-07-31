@@ -9,20 +9,16 @@ $(function(){
         var num=file.data('num');//限制个数
         console.log($('.editDetailLayer li').length);
         if($('.editDetailLayer li').length>=num && num){
-            console.log(1);
             errorTipc('只能上传'+num+'张图片');
             return false;
         }
-        if(num==0){ //0代表无限制个数
-            
+        if(num==0){ //0代表无限制个数          
             uploadPic(fileList[0],0,fileList.length);
         }else{
-            console.log(2);
             uploadPic(fileList[0],0,num);
         }      
     });
     function uploadPic(fil,i,len){
-        console.log(3);
             var img = fil;
             var obj=$(this).parent();
             var fileSize=fil.size/1024/1024;
