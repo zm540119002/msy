@@ -67,6 +67,8 @@
 		if(notDefaultStore == 0){
 			//初始化商品列表
 			getPagingList(config,postData);
+			$('.classify-label-content li').find('.down-btn').removeClass('down-disabled-icons');
+			$('.classify-label-content li:last').find('.down-btn').addClass('down-disabled-icons');
 		}
 		 //上移
         $('body').on('click','.up-btn',function(){
