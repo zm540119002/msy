@@ -203,11 +203,11 @@
     background-position:0 -71px;
 }
 .classify-operate-btn a.move-icons,
-.classify-operate-btn .move-btn.move-icons{
+.classify-operate-btn .up-btn.move-icons{
     background-position:0 -214px;
 }
 .classify-operate-btn a.down-icons,
-.classify-operate-btn .move-btn.down-icons{
+.classify-operate-btn .down-btn.down-icons{
     background-position:0 -106px;
 }
 .classify-operate-btn a.move-disabled-icons,
@@ -215,12 +215,15 @@
     background-position:0 -142px;
 }
 .classify-operate-btn a.down-disabled-icons,
-.classify-label-content li:last-child .down-icons{
+.classify-label-content li:last-child .down-disabled-icons{
     background-position:0 -178px;
 }
 .classify-label-content li:first-child .up-btn.disabled,
 .classify-label-content li:last-child .down-btn.disabled{
     pointer-events:none;
+}
+.content-marginLeft{
+    padding-bottom:1rem;
 }
 .addTagLayer .layui-m-layercont{
     padding:0.20rem;
@@ -969,7 +972,7 @@ input.special{
 .classify-label-content{
     height:400px;
     overflow-y:scroll;
-    border-bottom:1px solid #d9d9d9;
+    /*border-bottom:1px solid #d9d9d9;*/
 }
 .promotion-item .classify-label-content {
     height:328px;
