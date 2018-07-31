@@ -54,7 +54,7 @@
 			<div class="release-news">
 				<span class="video-camera"></span>
 				<input class="camera-btn " type="file" id="file" capture="camera" data-num="9" multiple>
-				<input type="hidden" name="msgfile" class="msg-img">
+				<input type="hidden"  class="msg-img">
 			</div>
 			<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
 			<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
@@ -341,7 +341,6 @@
 		//推文类型弹窗
 		var releaseFile=$('#releaseFileContent').html();
 		$('body').on('click','.release-msg',function(){
-			//var initData=$(this).data('init-data');
 			var pageii = layer.open({
 				className:'releaseFileLayer',
 				content: releaseFile,
@@ -355,6 +354,7 @@
 			});
 		});
 		//发布推文选项
+		var releaseFlag = true;
 		$('body').on('click','.release-file a',function(){
 			var releaseType=$(this).data('type');
 			var num=$('.release-goods-data').data('num');
@@ -401,6 +401,7 @@
 					goodsData:goodsData
 				}
 			}
+			releaseFlag = false;
 			releaseFileLayer(opt,goodsData);
 		});
 		//发布弹窗
@@ -420,7 +421,7 @@
 					
 				},
 				btn:['发布','取消'],
-				yes:function(){
+				yes:function(index){
 					var layermultiImgAttr=[];
 					//获取图片路径
 					$.each($('.editDetailLayer li'),function(i,val){
@@ -441,7 +442,6 @@
 						}
 						options.paragraphAttr.push(mesObject);
 					})
-//					console.log(layermultiImgAttr)
 					$('.msg-img').val(layermultiImgAttr);
 					//序列化表单数据
 					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
@@ -450,14 +450,13 @@
 					var content='';
 					if(!releaseFormData.msgText){
 						content='请填写消息内容';
-					}else if(!releaseFormData.msgfile){
+					}else if(!releaseFormData.img){
 						content=options.msg;
 					}
 					if(content){
 						errorTipc(content);
 						return false;
 					}
-					console.log(releaseFormData)
 					$.ajax({
 						url:'edit',
 						type:'post',
@@ -469,7 +468,7 @@
 
 						}
 					});
-					layer.close(index);
+//					layer.close(index);
 				}
 			});
 		}
@@ -479,7 +478,6 @@
 		$('body').on('click','.link-store-goods',function(){
 			var releaseType=$(this).data('release-type');
 			var goods = $('.editDetailLayer .linked-goods-id').val();
-			console.log(goods);
 			var pageii = layer.open({
 				title:['选择关联商品','border-bottom:1px solid #d9d9d9;'],
 				className:'addsalesgoodsLayer',
@@ -517,7 +515,6 @@
 						var goodsId = $(this).data('goods-id');
 						selectedGoods += goodsId+',';
 					});
-					console.log($(".editDetailLayer .link-store-goods"));
 					$(".editDetailLayer .linked-goods-id").val(selectedGoods);
 					$(".release-goods-data").val(selectedGoods).data('num',releaseType);
 					//设置分页请求默认值
