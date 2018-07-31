@@ -40,6 +40,7 @@
 		<a href="javascript:void(0);" data-type="2">小视频（不超过10秒）</a>
 		<a href="javascript:void(0);" data-type="3">视频 （不超过3分钟）</a>
 		<a href="javascript:void(0);" data-type="4">文章（视频+文字+图片）</a>
+		<input type="hidden" class="release-goods-data" value="" data-num=""/>
 	</div>
 </section>
 <!--云推客发布图片消息-->
@@ -55,7 +56,7 @@
 				<input class="camera-btn " type="file" id="file" capture="camera" data-num="9" multiple>
 				<input type="hidden" name="msgfile" class="msg-img">
 			</div>
-			<a href="javascript:void(0);" class="link-store-goods">设定链接的商家店铺商品（可选）></a>
+			<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
 			<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 		</div>
 	</form>
@@ -74,7 +75,7 @@
 				</div>
 			</div>
 		</div>
-		<a href="javascript:void(0);" class="link-store-goods">设定链接的商家店铺商品（可选）></a>
+		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
 		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 	</form>
 </section>
@@ -112,7 +113,7 @@
 				<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
 			</div>
 		</div>
-		<a href="javascript:void(0);" class="link-store-goods">设定链接的商家店铺商品（可选）></a>
+		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
 		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
 	</form>
 	<div class="paragraph-module">
@@ -340,6 +341,7 @@
 		//推文类型弹窗
 		var releaseFile=$('#releaseFileContent').html();
 		$('body').on('click','.release-msg',function(){
+			//var initData=$(this).data('init-data');
 			var pageii = layer.open({
 				className:'releaseFileLayer',
 				content: releaseFile,
@@ -355,13 +357,19 @@
 		//发布推文选项
 		$('body').on('click','.release-file a',function(){
 			var releaseType=$(this).data('type');
+			var num=$('.release-goods-data').data('num');
 			var opt={};
+			if(num==releaseType){
+			var goodsData=$('.release-goods-data').val();
+			}
 			if(releaseType==1){
 				var cloudTwitter=$('#cloudImgTwitter').html();
 				opt={
 					content:cloudTwitter,
 					title:'发图片消息',
-					msg:'请上传图片'
+					msg:'请上传图片',
+					releaseType:releaseType,
+					goodsData:goodsData
 				}
 			}else if(releaseType==2){
 				var cloudTwitter=$('#cloudVideoTwitter').html();
@@ -369,7 +377,9 @@
 					content:cloudTwitter,
 					title:'发小视频',
 					msg:'请上传小视频',
-					duration:10
+					duration:10,
+					releaseType:releaseType,
+					goodsData:goodsData
 				}
 			}else if(releaseType==3){
 				var cloudTwitter=$('#cloudVideoTwitter').html();
@@ -377,17 +387,21 @@
 					content:cloudTwitter,
 					title:'发视频',
 					msg:'请上传视频',
-					duration:180
+					duration:180,
+					releaseType:releaseType,
+					goodsData:goodsData
 				}
 			}else{
 				var cloudTwitter=$('#cloudArticleTwitter').html();
 				opt={
 					content:cloudTwitter,
 					title:'发文章',
-					paragraphAttr:[]
+					paragraphAttr:[],
+					releaseType:releaseType,
+					goodsData:goodsData
 				}
 			}
-			releaseFileLayer(opt);
+			releaseFileLayer(opt,goodsData);
 		});
 		//发布弹窗
 		function releaseFileLayer(options){
@@ -401,6 +415,9 @@
 					var winHeight=$(window).height();
 					$('.editDetailLayer .layui-m-layercont').css('height',winHeight-120+'px');
 					$('.editDetailLayer .uploadSingleVideo').data('duration',options.duration);
+					$('.editDetailLayer .link-store-goods').data('release-type',options.releaseType);
+					$('.editDetailLayer .linked-goods-id').val(options.goodsData);
+					
 				},
 				btn:['发布','取消'],
 				yes:function(){
@@ -426,10 +443,10 @@
 					})
 //					console.log(layermultiImgAttr)
 					$('.msg-img').val(layermultiImgAttr);
-					console.log($('.msg-img').val());
 					//序列化表单数据
 					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
 					releaseFormData.img =  layermultiImgAttr;
+					releaseFormData.release_type =  options.releaseType;
 					var content='';
 					if(!releaseFormData.msgText){
 						content='请填写消息内容';
@@ -460,7 +477,9 @@
 		//链接商品
 		var addsalesgoods=$('#addsalesgoods').html();
 		$('body').on('click','.link-store-goods',function(){
-			var goods = $('.linked-goods-id').val();
+			var releaseType=$(this).data('release-type');
+			var goods = $('.editDetailLayer .linked-goods-id').val();
+			console.log(goods);
 			var pageii = layer.open({
 				title:['选择关联商品','border-bottom:1px solid #d9d9d9;'],
 				className:'addsalesgoodsLayer',
@@ -486,35 +505,21 @@
 					});
 				},
 				yes:function(index){
-					var selectedGood={};
-					var selectedGoods =[];
-					var emptySpecialFlag  = 0;//未填价格标识位
-					var errorSpecialFlag = 0; // 价格格式错误标识位
-//					var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
-//					if(!selectedLen){
-//						errorTipc('请添加商品！');
-//						return false;
-//					}
-					var a = '';
+					var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
+					if(!selectedLen){
+						errorTipc('请添加商品！');
+						return false;
+					}
+					var selectedGoods = '';
 					var goodsName ='';
 					$('.addsalesgoodsLayer .promotional-goods-list li').each(function () {
 						goodsName = $(this).find('.goods-name').text();
 						var goodsId = $(this).data('goods-id');
-						a += goodsId+',';
-						selectedGood={
-							goods_id:goodsId,
-						}
-						selectedGoods.push(selectedGood);
+						selectedGoods += goodsId+',';
 					});
-					if(emptySpecialFlag){
-						errorTipc(goodsName+'商品请填写特价');
-						return false;
-					}
-					if(errorSpecialFlag){
-						errorTipc(goodsName+'商品价格格式有误');
-						return false;
-					}
-					$('.linked-goods-id').val(a);
+					console.log($(".editDetailLayer .link-store-goods"));
+					$(".editDetailLayer .linked-goods-id").val(selectedGoods);
+					$(".release-goods-data").val(selectedGoods).data('num',releaseType);
 					//设置分页请求默认值
 					config.requestEnd=false;
 					config.loadTrigger=false;
