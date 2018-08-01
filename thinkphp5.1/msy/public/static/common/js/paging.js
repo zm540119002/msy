@@ -69,7 +69,6 @@ function getPagingList(config,postData) {
 //禁用移动按钮
 var disableBtn=function disableBtn(){
     var listUl = $('#list');
-    console.log(listUl.find('li:last'));
     listUl.find('li').find('.move-btn').removeProp('disabled');
     listUl.find('li:first').find('.up-btn').prop('disabled','disabled').addClass('disabled');
     listUl.find('li:last').find('.down-btn').prop('disabled','disabled').addClass('disabled');

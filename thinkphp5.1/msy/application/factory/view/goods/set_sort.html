@@ -68,9 +68,7 @@
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
 			//初始化商品列表
-			getPagingList(config,postData);
-			console.log($('.up-btn'));
-			
+			getPagingList(config,postData);			
 		}
 		 //上移
         $('body').on('click','.up-btn',function(){
