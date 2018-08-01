@@ -15,7 +15,20 @@ class Tweet extends StoreBase
      */
     public function edit()
     {
-        print_r(input());exit;
+        $data =  input();
+        $_POST['fileBase64'] = $data['img'];
+        $result =  $this->uploadFileToTemp();
+        $a = '';
+        if($result['status']){
+            foreach ($result['info'] as $k=>$v){
+                $a .= moveImgFromTemp(config('upload_dir.factory_promotion'),basename($v)) .',';
+            }
+            $data['img'] = $a;
+            print_r($data);
+        }else{
+            return errorMsg('上传失败');
+        }
+        exit;
         $model = new \app\factory\model\Promotion;
         if(request()->isPost()){
             return $model -> edit($this->store['id']);
