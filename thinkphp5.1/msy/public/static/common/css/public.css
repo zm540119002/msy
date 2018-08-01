@@ -1770,6 +1770,7 @@ color:#fff;
 .content-wrapper #list{
     height:400px;
     overflow-y:scroll;
+    -webkit-overflow-scrolling: touch;
 }
 .flex-both-side,.flex-both-side .two-flex{
     justify-content: space-between;
