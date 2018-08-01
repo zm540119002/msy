@@ -244,20 +244,20 @@
 
 	});
 	//下拉加载
-	// $(window).on('scroll',function(){
-	// 	if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-	// 		config.loadTrigger = false;
-	// 		getPagingList(config,postData);
-	// 	}
-	// });
-
-	$('.content-wrapper #list').on('scroll',function(){
-		var listHeight=$('.content-wrapper #list').get(0).scrollHeight;
-		if(config.loadTrigger &&  $('.content-wrapper #list').scrollTop()+ $('.content-wrapper #list').height()>=listHeight){
+	window.addEventListener('scroll',function(){
+		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}
 	});
+
+	// $('.content-wrapper #list').on('scroll',function(){
+	// 	var listHeight=$('.content-wrapper #list').get(0).scrollHeight;
+	// 	if(config.loadTrigger &&  $('.content-wrapper #list').scrollTop()+ $('.content-wrapper #list').height()>=listHeight){
+	// 		config.loadTrigger = false;
+	// 		getPagingList(config,postData);
+	// 	}
+	// });
 
 </script>
 {/block}
