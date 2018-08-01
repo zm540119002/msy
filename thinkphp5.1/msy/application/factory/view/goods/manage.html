@@ -295,7 +295,7 @@ function getWindowHeight(){
 }
 //给Window设置滚动事件
 window.onscroll = function(){
-　　if(config.loadTrigger && getScrollTop() + getWindowHeight() == getScrollHeight()){
+　　if(config.loadTrigger && getScrollTop() + getWindowHeight() >= getScrollHeight()){
 		config.loadTrigger = false;
 　　　　getPagingList(config,postData);
 　　}
