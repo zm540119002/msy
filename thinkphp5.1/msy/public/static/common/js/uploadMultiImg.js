@@ -35,11 +35,11 @@ $(function(){
                 dialog.error('图片大小不能超过1M');
                 return false;
             }
-             console.log($('.editDetailLayer li').length);
-                if($('.editDetailLayer li').length>=num && num){
-                    errorTipc('只能上传'+num+'张图片');
-                    return false;
-                }
+            console.log($('.editDetailLayer li').length);
+            if($('.editDetailLayer li').length>=num && num){
+                errorTipc('只能上传'+num+'张图片');
+                return false;
+            }
             var reader = new FileReader();
             reader.readAsDataURL(img);
 
