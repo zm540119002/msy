@@ -85,7 +85,7 @@
 	</div>
 </section>
 <article class="f24">
-	<!--{include file="public/store_operation_head" /}
+	{include file="public/store_operation_head" /}
 	<section class="separation-line">
 		<nav class="columns_flex channel_nav manufacturer_nav">
 			<a href="{:url('Operation/index')}">
@@ -128,7 +128,7 @@
 				<a href="javascript:void(0);" class="gr copy-store">复制商品数据到本店铺</a>
 			</div>
 		</div>
-	</section>-->
+	</section>
 	<section>
 		<div class="content-wrapper">
 			<ul class="columns_flex flex-both-side" id="list">
@@ -136,7 +136,7 @@
 		</div>
 	</section>
 </article>
-<!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
+<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>
 {/block}
 {block name="common"}
 {include file="template/loading.html" /}
@@ -250,15 +250,5 @@
 			getPagingList(config,postData);
 		}
 	});
-
-	// $('.content-wrapper #list').on('scroll',function(){
-	// 	var listHeight=$('.content-wrapper #list').get(0).scrollHeight;
-	// 	if(config.loadTrigger &&  $('.content-wrapper #list').scrollTop()+ $('.content-wrapper #list').height()>=listHeight){
-	// 		config.loadTrigger = false;
-	// 		getPagingList(config,postData);
-	// 	}
-	// });
-
-
 </script>
 {/block}
