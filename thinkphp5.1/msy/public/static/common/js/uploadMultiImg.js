@@ -2,16 +2,13 @@ $(function(){
     //多图片上传
     var imgContainer = $('.multi-picture-module');
     var fileList;
+    var num;
     $('body').on('change','#file',function(){
         var file = $(this);
         fileList = $(this).get(0).files;
         var imgArr = [];
-        var num=file.data('num');//限制个数
-        console.log($('.editDetailLayer li').length);
-        if($('.editDetailLayer li').length>=num && num){
-            errorTipc('只能上传'+num+'张图片');
-            return false;
-        }
+        num=file.data('num');//限制个数
+       
         if(num==0){ //0代表无限制个数          
             uploadPic(fileList[0],0,fileList.length);
         }else{
@@ -48,6 +45,11 @@ $(function(){
                 var imgAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><span class="delete-picture">X</span></div></li>');
                 imgAdd.find('.picture-module').append(img);
                 $('.multi-picture-module').append(imgAdd);
+                 console.log($('.editDetailLayer li').length);
+                if($('.editDetailLayer li').length>=num && num){
+                    errorTipc('只能上传'+num+'张图片');
+                    return false;
+                }
                 if(i<len-1){
                     // console.log(len);
                     if(fileList[i+1]){
