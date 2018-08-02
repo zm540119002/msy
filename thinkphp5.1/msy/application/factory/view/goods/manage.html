@@ -245,8 +245,7 @@
 	});
 	//下拉加载
 	window.addEventListener('scroll',function(){
-		var listHeight=$(document).get(0).scrollHeight;
-		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=listHeight){
+		if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}
@@ -259,6 +258,7 @@
 	// 		getPagingList(config,postData);
 	// 	}
 	// });
+
 
 </script>
 {/block}
