@@ -35,6 +35,11 @@ $(function(){
                 dialog.error('图片大小不能超过1M');
                 return false;
             }
+             console.log($('.editDetailLayer li').length);
+                if($('.editDetailLayer li').length>=num && num){
+                    errorTipc('只能上传'+num+'张图片');
+                    return false;
+                }
             var reader = new FileReader();
             reader.readAsDataURL(img);
 
@@ -45,11 +50,6 @@ $(function(){
                 var imgAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><span class="delete-picture">X</span></div></li>');
                 imgAdd.find('.picture-module').append(img);
                 $('.multi-picture-module').append(imgAdd);
-                 console.log($('.editDetailLayer li').length);
-                if($('.editDetailLayer li').length>=num && num){
-                    errorTipc('只能上传'+num+'张图片');
-                    return false;
-                }
                 if(i<len-1){
                     // console.log(len);
                     if(fileList[i+1]){
