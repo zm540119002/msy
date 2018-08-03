@@ -1531,8 +1531,11 @@ background-position: 0 -27px;
     z-index:5;
     
 }
-.setOrganizeLayer .layui-m-layerbtn span[yes]{
-color:#fff;
+.setOrganizeLayer .layui-m-layerbtn span[yes],
+.setRoleLayer .layui-m-layerbtn span[yes]{
+    background:#ff7bac;
+    color:#fff;
+    border-radius:0;
 }
 .role-list li .btn{
     /*height:31px;*/
@@ -2607,4 +2610,7 @@ input[type=text]::-webkit-focus-inner {
 	padding:3px; 
     font-weight: bold; 
     border-radius:5px;
+}
+.no-record{
+    padding:0 0 0 .12rem;
 }
