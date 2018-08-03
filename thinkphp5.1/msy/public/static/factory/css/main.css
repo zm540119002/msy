@@ -177,7 +177,7 @@
     max-width:32%;
 }
 .tag-item div:nth-of-type(3){
-    width:35%;
+    width:28%;
 }
 .classify-operate-btn a,
 .classify-operate-btn .move-btn{
@@ -250,6 +250,9 @@
 }
 .sort-title{
     padding:.1rem 0 0;
+}
+.sort-title .s-r{
+    margin-right:0.15rem;
 }
 .addProductContent {
     padding:0.25rem 0.15rem 1rem;
