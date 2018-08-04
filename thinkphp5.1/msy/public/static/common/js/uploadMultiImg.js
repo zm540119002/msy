@@ -402,7 +402,7 @@ function uploadsImgDescribe(content,obj){
             success:function(){
                 var winHeight=$(window).height();
                 $('html,body').addClass('scrollStyle');
-                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
+                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
