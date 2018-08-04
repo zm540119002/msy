@@ -237,7 +237,6 @@
 				</div>
 				<div class="news-item">
 					<div class="photo-frame">
-						<!--<img class="common_default_img" src="public/static/common/img/default/no_pic_100.jpg" alt="">-->
 						<img class="common_default_img" src="public/static/common/img/icons/long.png" alt="">
 						<img class="common_default_img" src="public/static/common/img/icons/long.png" alt="">
 					</div>
@@ -547,9 +546,9 @@
 				dialog.error('此商品已选择！');
 				return false;
 			}
-			var goodsName=_this.parent().find('.goods-name').text();
-			var goodsImgSrc=_this.find('img').attr('src');
-			var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
+			var goodsName = _this.parent().find('.goods-name').text();
+			var goodsImgSrc = _this.find('img').attr('src');
+			var selectedLen = $('.addsalesgoodsLayer .promotional-goods-list li').length;
 			var html = $('.search-li').html();
 			if(!selectedLen){
 				$('.addsalesgoodsLayer .promotional-goods-list').append(html);
@@ -575,11 +574,11 @@
 
 		//搜索商品
 		$('body').on('click','.addsalesgoodsLayer .search',function(){
-			var serializeData =$('.addsalesgoodsLayer #form1').serializeObject();
+			var serializeData = $('.addsalesgoodsLayer #form1').serializeObject();
 			postData = Object.assign(postData,serializeData);
 			config.loadTrigger = false;
-			config.requestEnd=false;
-			config.currentPage=1;
+			config.requestEnd  = false;
+			config.currentPage = 1;
 			getPagingList(config,postData);
 		});
 	});
@@ -596,7 +595,7 @@
 	}
 	//下拉加载
 	$('.classify-label-content').on('scroll',function(){
-		var listHeight=document.getElementById('list').scrollHeight;
+		var listHeight = document.getElementById('list').scrollHeight;
 		if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
 			config.loadTrigger = false;
 			config.activityStatus = $('.category-tab li.current a').data('activity-status');
