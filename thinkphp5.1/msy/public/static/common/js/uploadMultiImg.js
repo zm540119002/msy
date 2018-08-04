@@ -438,6 +438,7 @@ function uploadsImgDescribe(content,obj){
                 });
                 obj.data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
+                    $('html,body').removeClass('scrollStyle');
                     layer.close(index);
                     return false;
                 }
@@ -472,6 +473,7 @@ function uploadsImgDescribe(content,obj){
                         }else{
                             
                         }
+                        $('html,body').removeClass('scrollStyle');
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
                     },
                     complete:function(){
@@ -484,6 +486,7 @@ function uploadsImgDescribe(content,obj){
                 
             },
             no:function(){
+                $('html,body').removeClass('scrollStyle');
                 $('.editCompanyPicLayer li').remove();
             }
         })
