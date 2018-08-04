@@ -1232,6 +1232,10 @@ background-position: 0 -27px;
     padding:0;
     text-align: left;
 }
+.scrollStyle{
+    height:100%;
+    overflow:hidden;
+}
 /*全屏弹窗*/
 .layui-m-layerchild.addCcountLayer,
 .layui-m-layerchild.vendorInfoLayer,

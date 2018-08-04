@@ -401,6 +401,7 @@ function uploadsImgDescribe(content,obj){
             btn:['确定','取消'],
             success:function(){
                 var winHeight=$(window).height();
+                $('html,body').addClass('scrollStyle');
                 $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
                 var html='';
                     html+='<li>';
