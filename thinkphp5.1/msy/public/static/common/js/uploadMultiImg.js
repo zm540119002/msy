@@ -453,6 +453,14 @@ function uploadsImgDescribe(content,obj){
                         errorTipc('文件还没上传完毕');
                     },
                     success: function(info){
+                        if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
+                            bodyTag = document.getElementsByTagName('body')[0];
+                            bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';
+                        }
+                        setTimeout(function() {
+                            console.log(123);
+                            window.scrollTo(0, 1)
+                        }, 0);
                         if(info.status == 0){
                             dialog.error(info.msg);
                             return false;
