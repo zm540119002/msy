@@ -247,13 +247,13 @@ function uploadsImg(obj,tilt,className) {
             $('.'+ className).find('.img').val(fileSrc);
         },
         yes:function(index){
-            // var layerfileSrc= $('.'+ className).find('.img').val();
-            // obj.siblings('.hidden_img').val(layerfileSrc);
-            // var fileSrc = $('.'+ className).find('img').attr('src');
-            // if(layerfileSrc=='' && fileSrc != ''){
-            //     errorTipc('文件还没上传完毕');
-            //     return false;
-            // }
+            var layerfileSrc= $('.'+ className).find('.img').val();
+            obj.siblings('.hidden_img').val(layerfileSrc);
+            var fileSrc = $('.'+ className).find('img').attr('src');
+            if(layerfileSrc=='' && fileSrc != ''){
+                errorTipc('文件还没上传完毕');
+                return false;
+            }
             if(!uploadsSingleImgFlag){
                 errorTipc('文件还没上传完毕');
                 return false;
