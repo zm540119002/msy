@@ -126,6 +126,7 @@
 						dialog.error(content);
 						return false;
 					}
+					$('html,body').removeClass('scrollStyle');
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
 					$.post(action,postData,function(data){
@@ -134,10 +135,12 @@
 						}else{
 							$('ul.account-list').prepend(data);
 							$('ul.account-list').find('span.no-data').remove();
-							$('html,body').removeClass('scrollStyle');
 							layer.close(index);
 						}
 					});
+				},
+				no:function(){
+					$('html,body').removeClass('scrollStyle');
 				}
 			});
 		});
