@@ -1205,7 +1205,7 @@ background-position: 0 -27px;
 .layui-m-layerchild.editCompanyPicLayer{
     position:fixed; 
     left:0; 
-    top:0; 
+    top:40px; 
     width:100%; 
     height:100%; 
     border: none; 
