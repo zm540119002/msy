@@ -1502,9 +1502,12 @@ background-position: 0 -27px;
     text-align:center;
     font-size:22px;
 }
+
 .setRoleLayer ul{
     padding:20px 15px 10px;
-    overflow-y:auto;
+}
+.setRoleLayer .layui-m-layercont{
+    overflow-y:auto;   
 }
 .setRoleLayer li{
     margin-bottom:15px;
@@ -1532,7 +1535,8 @@ background-position: 0 -27px;
 .uploadThumbnailLayer .layui-m-layerbtn,
 .categoryContentLayer .layui-m-layerbtn,
 .editCompanyPicLayer .layui-m-layerbtn,
-.addCcountLayer .layui-m-layerbtn{
+.addCcountLayer .layui-m-layerbtn,
+.setRoleLayer .layui-m-layerbtn{
     position:fixed;
     bottom:0;
     left:0;
