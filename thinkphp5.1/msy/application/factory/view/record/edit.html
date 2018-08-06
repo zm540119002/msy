@@ -173,7 +173,11 @@
 				yes:function(index){
 					var editGoodsText=$('.editParameterLayer .editGoodsText').val();
 					$('.company-introduce').val(editGoodsText);
+					$('html,body').removeClass('scrollStyle');
 					layer.close(index);
+				},
+				no:function(){
+					$('html,body').removeClass('scrollStyle');
 				}
 			})
 		});
