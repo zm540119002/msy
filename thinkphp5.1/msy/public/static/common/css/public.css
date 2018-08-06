@@ -2181,6 +2181,9 @@ input[type=text]::-webkit-focus-inner {
 .content-marginLeft{
     padding:0 0 0 0.25rem;
 }
+.margin-left{
+    margin:0 0 0 .15rem;
+}
 .edit-describe{
     display: block;
     margin:0.12rem 0 0;
