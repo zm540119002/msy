@@ -101,7 +101,7 @@
 				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
 				success:function(){
 					var winHeight=$(window).height();
-					$('.signIn-wrapper').css('height',winHeight-120+'px');
+					$('.addCcountLayer .layui-m-layercont').css('height',winHeight-112+'px');
 					//先清空
 					userFactoryRoleIds = [];
 					userFactoryOrganizeId = 0;
@@ -151,7 +151,7 @@
 				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
 				success:function(){
 					var winHeight=$(window).height();
-					$('.setRoleLayer ul').css('height',winHeight-140+'px');
+					$('.setRoleLayer .layui-m-layercont').css('height',winHeight-112+'px');
 					$.each(userFactoryRoleIds,function(i,o){
 						$.each($('.setRoleLayer li'),function(){
 							if($(this).data('id')==o){
