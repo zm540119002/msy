@@ -1526,7 +1526,8 @@ background-position: 0 -27px;
 .editParameterLayer .layui-m-layerbtn,
 .uploadSingleVideoLayer .layui-m-layerbtn,
 .uploadThumbnailLayer .layui-m-layerbtn,
-.categoryContentLayer .layui-m-layerbtn{
+.categoryContentLayer .layui-m-layerbtn,
+.editCompanyPicLayer .layui-m-layerbtn{
     position:fixed;
     bottom:0;
     left:0;
