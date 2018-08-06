@@ -402,14 +402,6 @@ function uploadsImgDescribe(content,obj){
             success:function(){
                 var winHeight=$(window).height();
                 $('html,body').addClass('scrollStyle');
-                if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
-                    bodyTag = document.getElementsByTagName('body')[0];
-                    bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';
-                }
-                setTimeout(function() {
-                    console.log(123);
-                    window.scrollTo(0, 1)
-                }, 0);
                 $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
                 var html='';
                     html+='<li>';
