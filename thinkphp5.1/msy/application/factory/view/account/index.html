@@ -151,6 +151,7 @@
 				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
 				success:function(){
 					var winHeight=$(window).height();
+					$('html,body').addClass('scrollStyle');
 					$('.setRoleLayer .layui-m-layercont').css('height',winHeight-112+'px');
 					$.each(userFactoryRoleIds,function(i,o){
 						$.each($('.setRoleLayer li'),function(){
@@ -169,6 +170,7 @@
 							userFactoryRoleIds.push($(this).data('id'));
 						}
 					});
+					$('html,body').removeClass('scrollStyle');
 					layer.close(index);
 				}
 			});
@@ -187,7 +189,8 @@
 				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
 				success:function(){
 					var winHeight=$(window).height();
-					$('.signIn-wrapper').css('height',winHeight-120+'px');
+					$('html,body').addClass('scrollStyle');
+					$('.setOrganizeLayer .layui-m-layercont').css('height',winHeight-112+'px');
 					//回写
 					$.each($('.setOrganizeLayer').find('.organize ul'),function(){
 						if($(this).data('id')==userFactoryOrganizeId){
@@ -198,6 +201,7 @@
 				btn:['确定'],
 				yes:function(index){
 					userFactoryOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
+					$('html,body').removeClass('scrollStyle');
 					layer.close(index);
 				}
 			});
