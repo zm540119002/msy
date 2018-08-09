@@ -495,7 +495,7 @@
 ,.group-list li{
     height:35px;
     line-height: 35px;
-    /*padding:7px 0 0 1rem;*/
+    padding:0 0 0 1rem;
     margin:0 0 18px 0;
     background:url('../../common/img/icons/group-icons.png') no-repeat 0 center;
     border:1px solid #009a3e;
