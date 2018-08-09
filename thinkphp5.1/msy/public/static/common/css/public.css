@@ -1242,7 +1242,8 @@ background-position: 0 -27px;
 .groupRoleLayer .layui-m-layercont,
 .rolePowerLayer .layui-m-layercont,
 .accountInfoLayer .layui-m-layercont,
-.databaseLayer .layui-m-layercont{
+.databaseLayer .layui-m-layercont,
+.groupRole .layui-m-layercont{
     padding:0;
     text-align: left;
 }
