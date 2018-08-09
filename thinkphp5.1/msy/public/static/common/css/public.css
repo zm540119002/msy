@@ -1547,7 +1547,8 @@ background-position: 0 -27px;
 .categoryContentLayer .layui-m-layerbtn,
 .editCompanyPicLayer .layui-m-layerbtn,
 .addCcountLayer .layui-m-layerbtn,
-.setRoleLayer .layui-m-layerbtn{
+.setRoleLayer .layui-m-layerbtn,
+.rolePowerLayer .layui-m-layerbtn{
     position:fixed;
     bottom:0;
     left:0;

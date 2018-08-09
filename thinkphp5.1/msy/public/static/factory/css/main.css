@@ -619,8 +619,8 @@
 }
 .signIn-wrapper{
     padding:0.12rem 0 0 0.25rem;
-    overflow:hidden;
-    overflow-y:auto;
+    /*overflow:hidden;
+    overflow-y:auto;*/
 }
 .addCcountLayer .signIn-wrapper{
     
