@@ -590,6 +590,9 @@
 .account-header{
     padding:10px 0 0;
 }
+.accountInfo{
+    flex:5;
+}
 .account-header .r-t,
 .account-info .r-t,
 .accountInfoLayer .r-t{
