@@ -601,6 +601,9 @@
     text-align: right;
     /*margin:0 10px 0 0;*/
 }
+.account-info .r-t-m{
+    display:inline-block;
+}
 .accountInfoLayer .layui-m-layercont{
     padding:10px;
 }
