@@ -537,7 +537,7 @@ function uploadsVideoDescribe(content,obj){
                     layermultiImgAttr.push(layerImgInfoData);
                 });
                 if(layermultiImgAttr==false){
-
+                    $('html,body').removeClass('scrollStyle');
                     layer.close(index);
                     return false;
                 }
@@ -577,7 +577,7 @@ function uploadsVideoDescribe(content,obj){
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
                     },
                     complete:function(){
-                        
+                        $('html,body').removeClass('scrollStyle');
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);

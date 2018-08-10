@@ -543,6 +543,7 @@
     border:1px solid #009A3E;
     border-radius:4px;
     color:#009A3E;
+    cursor:pointer;
 }
 .range-list .columns_flex{
     flex-wrap: wrap;
