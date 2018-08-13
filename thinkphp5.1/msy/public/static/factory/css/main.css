@@ -1173,6 +1173,7 @@ input.special{
 }
 .applyNewStoreLayer .store-list{
     margin:0 0 .15rem 0;
+    cursor: pointer;
 }
 .applyNewStoreLayer .store-list.current{
     background: #ff7aab;
