@@ -601,6 +601,9 @@
     text-align: right;
     /*margin:0 10px 0 0;*/
 }
+.accountInfo .ac-item{
+    overflow:hidden;
+}
 .account-info .r-t-m{
     display:inline-block;
     margin:0 0 0 82px;
