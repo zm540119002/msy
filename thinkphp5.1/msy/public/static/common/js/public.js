@@ -150,7 +150,7 @@
                 
             var parentHeight=$('.'+settings.floorContent).height(),
                 parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
-                childHeight=$('.'+settings.floorContentChild).outerHeight(true),
+                childHeight=$('.'+settings.floorContentChild).height(),
                 docScrollTop=$(window).scrollTop();
                 result=docScrollTop-parentOffsetTop;
                 n=Math.floor(result/childHeight);
@@ -162,8 +162,8 @@
         });
         $('.'+settings.floorNavMenu).children().on('click',function(){
             var i=$(this).index();
-            var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
-            console.log($('.'+settings.floorContentChild).outerHeight(true));
+            var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).height()*i;
+            console.log($('.'+settings.floorContentChild).height());
             $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     };
