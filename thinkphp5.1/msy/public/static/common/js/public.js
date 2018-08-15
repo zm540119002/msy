@@ -163,6 +163,7 @@
         $('.'+settings.floorNavMenu).children().on('click',function(){
             var i=$(this).index();
             var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
+            console.log(scrollFloorH);
             $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     };
