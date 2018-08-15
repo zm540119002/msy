@@ -487,6 +487,9 @@
 .account-item .content-label{
     text-align: center;
 }
+.account-item .role-list{
+    padding:0 0 0.6rem 0;
+}
 .account-role-list{
     padding:.18rem;
     border:1px solid #d9d9d9;
