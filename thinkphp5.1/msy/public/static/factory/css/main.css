@@ -1097,6 +1097,9 @@ input.special{
 .apply-store-content{
     padding:0 0 0 .20rem;
 }
+.apply-store-content ul{
+    padding:0 0 0.8rem 0;
+}
 .thead-td{
     padding:.18rem 0;
     overflow:hidden;
