@@ -154,7 +154,7 @@
                 docScrollTop=$(window).scrollTop();
                 result=docScrollTop-parentOffsetTop;
                 n=Math.floor(result/childHeight);
-                console.log(n);
+                console.log(childHeight);
                 if(result>=0){
                     
                     $('.'+settings.floorNavMenu).children().removeClass(settings.activeClass).eq(n).addClass(settings.activeClass);
@@ -163,7 +163,7 @@
         $('.'+settings.floorNavMenu).children().on('click',function(){
             var i=$(this).index();
             var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
-            console.log(scrollFloorH);
+            console.log($('.'+settings.floorContentChild).outerHeight(true));
             $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     };
