@@ -149,21 +149,21 @@
 	</section>
 	<section class="scrollwrapper">
 		<div class="detail-nav columns_flex floor-nav nav-floor">
-			<a href="javascript:void(0);" class="scroll-nav active" id="c">商品参数</a>
+			<a href="javascript:void(0);" class="scroll-nav active" data-floor="c">商品参数</a>
 			<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
-			<a href="javascript:void(0);" class="scroll-nav" id="x">商品详情</a>
-			<a href="javascript:void(0);" class="scroll-nav" id="f">评分评论</a>
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="x">商品详情</a>
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="f">评分评论</a>
 		</div>
 		<div class="floor-content">
 			<section class="scroll-floor floor1 floor">
-				<h3>商品参数</h3>
+				<h3 id="c" class="floor-label">商品参数</h3>
 				{$goodsInfo.parameters}
 			</section>
 			<!--<section class="scroll-floor floor2">
 				<h3>商品视频</h3>
 			</section>-->
 			<section class="scroll-floor floor2 floor">
-				<h3>商品详情</h3>
+				<h3 id="x" class="floor-label">商品详情</h3>
 				<div class="details_img">
 					{notempty name="goodsInfo.details_img"}
 					{volist name="goodsInfo.details_img" id="vo"}
@@ -175,7 +175,7 @@
 				</div>
 			</section>
 			<section class="scroll-floor floor3 floor">
-				<h3>评分评论</h3>
+				<h3 id="f" class="floor-label">评分评论</h3>
 				<div class="goods_star_score comment_star_module">
 					<div class="five_star">
 						<div class="star_img">

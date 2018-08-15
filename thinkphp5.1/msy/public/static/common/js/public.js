@@ -162,9 +162,20 @@
         });
         $('.'+settings.floorNavMenu).children().on('click',function(){
             var i=$(this).index();
-            var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
-            console.log($('.'+settings.floorContentChild).outerHeight(true)*i);
-            $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
+            var floorId=$(this).data('floor');
+            //var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
+            //console.log($('.'+settings.floorContentChild).outerHeight(true)*i);
+            $.each($('.floor-label'),function(){
+                var floorScroll=$(this).attr('id');
+                var h=$(this).offset().top;
+                
+                if(floorId==floorScroll){
+                    //_this.addClass('active').siblings().removeClass('active');
+                    var abc=h;
+                    $('body,html').animate({'scrollTop':abc+'px'},800);
+                }
+            });
+            //$('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     };
 })(jQuery);
