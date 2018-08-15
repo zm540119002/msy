@@ -162,7 +162,7 @@
         });
         $('.'+settings.floorNavMenu).children().on('click',function(){
             var i=$(this).index();
-            var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
+            var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild)[i].outerHeight(true)*i;
             console.log($('.'+settings.floorContentChild).outerHeight(true)*i);
             $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
