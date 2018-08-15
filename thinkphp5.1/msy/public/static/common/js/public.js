@@ -152,15 +152,11 @@
                 parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
                 childHeight=$('.'+settings.floorContentChild).outerHeight(true),
                 docScrollTop=$(window).scrollTop();
-                if($('.'+settings.floorNavMenu).hasClass('top-fixed')){
-                    result=docScrollTop-(parentOffsetTop+41);
-                }else{
-                    result=docScrollTop-parentOffsetTop;
-                }
-                
+                result=docScrollTop-parentOffsetTop;
                 n=Math.floor(result/childHeight);
                 console.log(parentOffsetTop);
                 if(result>=0&&n<=2){
+                    
                     $('.'+settings.floorNavMenu).children().removeClass(settings.activeClass).eq(n).addClass(settings.activeClass);
                 }
         });
@@ -176,7 +172,7 @@
                 
                 if(floorId==floorScroll){
                     _this.addClass('active').siblings().removeClass('active');
-                    var abc=h-41;
+                    var abc=h;
                     $('body,html').animate({'scrollTop':abc+'px'},800);
                 }
             });
