@@ -154,7 +154,7 @@
                 docScrollTop=$(window).scrollTop();
                 result=docScrollTop-parentOffsetTop;
                 n=Math.floor(result/childHeight);
-                console.log(childHeight);
+                console.log(parentOffsetTop);
                 if(result>=0&&n<=2){
                     
                     $('.'+settings.floorNavMenu).children().removeClass(settings.activeClass).eq(n).addClass(settings.activeClass);
@@ -162,6 +162,7 @@
         });
         $('.'+settings.floorNavMenu).children().on('click',function(){
             var i=$(this).index();
+            var _this=$(this);
             var floorId=$(this).data('floor');
             //var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
             //console.log($('.'+settings.floorContentChild).outerHeight(true)*i);
@@ -170,7 +171,7 @@
                 var h=$(this).offset().top;
                 
                 if(floorId==floorScroll){
-                    //_this.addClass('active').siblings().removeClass('active');
+                    _this.addClass('active').siblings().removeClass('active');
                     var abc=h-42;
                     $('body,html').animate({'scrollTop':abc+'px'},800);
                 }
