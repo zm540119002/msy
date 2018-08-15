@@ -704,7 +704,10 @@
 .floor-item{
     display: block;
 }
-.floor-content{padding:0 0 .8rem 0;}
+.floor-content{
+    padding:0 0 .8rem 0;
+    margin:42px 0 0;
+}
 .scroll-floor{
     padding:.12rem;
     /*height:500px;*/
