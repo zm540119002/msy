@@ -149,7 +149,7 @@
         $(document).scroll(function(){
                 
             var parentHeight=$('.'+settings.floorContent).height(),
-                parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop-41,
+                parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
                 childHeight=$('.'+settings.floorContentChild).outerHeight(true),
                 docScrollTop=$(window).scrollTop();
                 result=docScrollTop-parentOffsetTop;
