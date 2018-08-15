@@ -155,7 +155,7 @@
                 result=docScrollTop-parentOffsetTop;
                 n=Math.floor(result/childHeight);
                 console.log(childHeight);
-                if(result>=0){
+                if(result>=0&&n<=2){
                     
                     $('.'+settings.floorNavMenu).children().removeClass(settings.activeClass).eq(n).addClass(settings.activeClass);
                 }
