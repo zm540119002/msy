@@ -172,7 +172,7 @@
                 
                 if(floorId==floorScroll){
                     _this.addClass('active').siblings().removeClass('active');
-                    var abc=h-42;
+                    var abc=h;
                     $('body,html').animate({'scrollTop':abc+'px'},800);
                 }
             });
