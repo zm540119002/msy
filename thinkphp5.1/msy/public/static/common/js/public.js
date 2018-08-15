@@ -152,7 +152,7 @@
                 parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
                 childHeight=$('.'+settings.floorContentChild).outerHeight(true),
                 docScrollTop=$(window).scrollTop();
-                result=docScrollTop-parentOffsetTop;
+                result=docScrollTop-1184;//parentOffsetTop
                 n=Math.floor(result/childHeight);
                 console.log(childHeight);
                 if(result>=0&&n<=2){
