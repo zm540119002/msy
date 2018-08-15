@@ -488,7 +488,7 @@
     text-align: center;
 }
 .account-item .role-list{
-    padding:0 0 0.6rem 0;
+    padding-bottom:0.6rem;
 }
 .account-role-list{
     padding:.18rem;
