@@ -682,10 +682,10 @@
     box-sizing:border-box;
     
 }
-.detail-nav a.current{
+.detail-nav a.active{
     color:#ff7bac;
 }
-.detail-nav a.current:before{
+.detail-nav a.active:before{
     bottom:-20px;
     background-color: #ff7bac;
 }
