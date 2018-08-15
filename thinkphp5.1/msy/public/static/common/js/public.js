@@ -153,7 +153,7 @@
                 childHeight=$('.'+settings.floorContentChild).outerHeight(true),
                 docScrollTop=$(window).scrollTop();
                 if($('.'+settings.floorNavMenu).hasClass('top-fixed')){
-                    result=(docScrollTop-parentOffsetTop)+41;
+                    result=docScrollTop-(parentOffsetTop+41);
                 }else{
                     result=docScrollTop-parentOffsetTop;
                 }
