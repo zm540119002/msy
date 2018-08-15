@@ -152,7 +152,7 @@
                 parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
                 childHeight=$('.'+settings.floorContentChild).outerHeight(true),
                 docScrollTop=$(window).scrollTop();
-                result=docScrollTop-1184;//parentOffsetTop
+                result=docScrollTop-parentOffsetTop;//parentOffsetTop
                 n=Math.floor(result/childHeight);
                 console.log(childHeight);
                 if(result>=0&&n<=2){
@@ -172,7 +172,7 @@
                 
                 if(floorId==floorScroll){
                     _this.addClass('active').siblings().removeClass('active');
-                    var abc=h-41;
+                    var abc=h;
                     $('body,html').animate({'scrollTop':abc+'px'},800);
                 }
             });
