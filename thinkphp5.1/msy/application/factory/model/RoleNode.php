@@ -15,11 +15,11 @@ class RoleNode extends \common\model\Base {
 		if(!intval($postData['roleId'])){
 			return errorMsg('参数有误');
 		}
+		$response = $this->where('role_id','=',$postData['roleId'])->select();
+		$response = $response->toArray();
+		//原节点
+		$originNodeIds = array_column($response,'node_id');
 		if(is_array($postData['nodeIds']) && !empty($postData['nodeIds'])){
-			$response = $this->where('role_id','=',$postData['roleId'])->select();
-			$response = $response->toArray();
-			//原节点
-			$originNodeIds = array_column($response,'node_id');
 			//新增节点
 			$addNodeIds = empty($originNodeIds)?$postData['nodeIds']:array_diff($postData['nodeIds'],$originNodeIds);
 			if(!empty($addNodeIds)){
@@ -37,6 +37,10 @@ class RoleNode extends \common\model\Base {
 				if(!empty($delNodeIds) && !$this->delByNodeIds($delNodeIds)){
 					return errorMsg('删除失败',$this->getError());
 				}
+			}
+		}else{
+			if(!empty($originNodeIds) && !$this->delByNodeIds($originNodeIds)){
+				return errorMsg('删除失败',$this->getError());
 			}
 		}
 		return successMsg('成功！');

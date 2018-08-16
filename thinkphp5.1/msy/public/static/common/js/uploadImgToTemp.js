@@ -1,6 +1,6 @@
 
 var uploadsSingleImgFlag = true; //上传单图片成功标识位
-var uploadsSingleVideoFlag = true;//上传但图片成功标识位
+var uploadsSingleVideoFlag = true;//上传单视频成功标识位
 $(function(){
     // 选择单图片
 
