@@ -404,6 +404,7 @@
     border-bottom:1px solid #d9d9d9;
 }
 .trademark-nav li:last-child em{
+    width:0;
     background:none;
 }
 .trademark-tipc{
@@ -486,13 +487,18 @@
 .account-item .content-label{
     text-align: center;
 }
+.account-item .role-list{
+    padding-bottom:0.6rem;
+}
 .account-role-list{
     padding:.18rem;
     border:1px solid #d9d9d9;
 }
 .account-role-list li
 ,.group-list li{
-    padding:7px 0 0 1rem;
+    height:35px;
+    line-height: 35px;
+    padding:0 0 0 1rem;
     margin:0 0 18px 0;
     background:url('../../common/img/icons/group-icons.png') no-repeat 0 center;
     border:1px solid #009a3e;
@@ -540,6 +546,7 @@
     border:1px solid #009A3E;
     border-radius:4px;
     color:#009A3E;
+    cursor:pointer;
 }
 .range-list .columns_flex{
     flex-wrap: wrap;
@@ -586,13 +593,23 @@
 .account-header{
     padding:10px 0 0;
 }
+.accountInfo{
+    flex:5;
+}
 .account-header .r-t,
 .account-info .r-t,
 .accountInfoLayer .r-t{
     display: inline-block;
-    width:85px;
+    width:82px;
     text-align: right;
     /*margin:0 10px 0 0;*/
+}
+#accountInfo .ac-item{
+    overflow:hidden;
+}
+.account-info .r-t-m{
+    display:inline-block;
+    margin:0 0 0 82px;
 }
 .accountInfoLayer .layui-m-layercont{
     padding:10px;
@@ -618,8 +635,8 @@
 }
 .signIn-wrapper{
     padding:0.12rem 0 0 0.25rem;
-    overflow:hidden;
-    overflow-y:auto;
+    /*overflow:hidden;
+    overflow-y:auto;*/
 }
 .addCcountLayer .signIn-wrapper{
     
@@ -668,10 +685,10 @@
     box-sizing:border-box;
     
 }
-.detail-nav a.current{
+.detail-nav a.active{
     color:#ff7bac;
 }
-.detail-nav a.current:before{
+.detail-nav a.active:before{
     bottom:-20px;
     background-color: #ff7bac;
 }
@@ -690,7 +707,10 @@
 .floor-item{
     display: block;
 }
-.floor-content{padding:0 0 .8rem 0;}
+.floor-content{
+    padding:0 0 .8rem 0;
+    /*margin:42px 0 0;*/
+}
 .scroll-floor{
     padding:.12rem;
     /*height:500px;*/
@@ -1080,6 +1100,9 @@ input.special{
 .apply-store-content{
     padding:0 0 0 .20rem;
 }
+.apply-store-content ul{
+    padding:0 0 0.8rem 0;
+}
 .thead-td{
     padding:.18rem 0;
     overflow:hidden;
@@ -1162,6 +1185,7 @@ input.special{
 }
 .applyNewStoreLayer .store-list{
     margin:0 0 .15rem 0;
+    cursor: pointer;
 }
 .applyNewStoreLayer .store-list.current{
     background: #ff7aab;

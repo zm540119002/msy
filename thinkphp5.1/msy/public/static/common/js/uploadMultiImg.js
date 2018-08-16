@@ -401,7 +401,8 @@ function uploadsImgDescribe(content,obj){
             btn:['确定','取消'],
             success:function(){
                 var winHeight=$(window).height();
-                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
+                $('html,body').addClass('scrollStyle');
+                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
@@ -437,6 +438,7 @@ function uploadsImgDescribe(content,obj){
                 });
                 obj.data('src',layermultiImgAttr);
                 if(layermultiImgAttr.length==0){
+                    $('html,body').removeClass('scrollStyle');
                     layer.close(index);
                     return false;
                 }
@@ -471,6 +473,7 @@ function uploadsImgDescribe(content,obj){
                         }else{
                             
                         }
+                        $('html,body').removeClass('scrollStyle');
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
                     },
                     complete:function(){
@@ -483,6 +486,7 @@ function uploadsImgDescribe(content,obj){
                 
             },
             no:function(){
+                $('html,body').removeClass('scrollStyle');
                 $('.editCompanyPicLayer li').remove();
             }
         })
@@ -497,7 +501,8 @@ function uploadsVideoDescribe(content,obj){
             btn:['确定','取消'],
             success:function(){
                 var winHeight=$(window).height();
-                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-120+'px');
+                $('html,body').addClass('scrollStyle');
+                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
@@ -532,7 +537,7 @@ function uploadsVideoDescribe(content,obj){
                     layermultiImgAttr.push(layerImgInfoData);
                 });
                 if(layermultiImgAttr==false){
-
+                    $('html,body').removeClass('scrollStyle');
                     layer.close(index);
                     return false;
                 }
@@ -568,10 +573,11 @@ function uploadsVideoDescribe(content,obj){
                         }else{
                             
                         }
+                        $('html,body').removeClass('scrollStyle');
                         $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
                     },
                     complete:function(){
-                        
+                        $('html,body').removeClass('scrollStyle');
                     },
                     error:function (xhr) {
                         dialog.error('AJAX错误'+xhr);
@@ -579,6 +585,7 @@ function uploadsVideoDescribe(content,obj){
                 });
             },
             no:function(){
+                $('html,body').removeClass('scrollStyle');
                 $('.editCompanyPicLayer li').remove();
             }
         })

@@ -61,6 +61,7 @@ $(function () {
 		layer.open({
 			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],
 			className:'groupRoleLayer',
+			shadeClose:false,
 			content:$('#groupRole').html(),
 			btn:['确定','取消'],
 			yes:function (index) {
@@ -84,6 +85,7 @@ $(function () {
 			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],
 			className:'groupRoleLayer',
 			content:$('#groupRole').html(),
+			shadeClose:false,
 			btn:['确定','取消'],
 			success:function(){
 				$('div.groupRoleLayer').find('input').val(name);

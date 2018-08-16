@@ -26,7 +26,7 @@ class Promotion extends StoreBase
                     ['p.id','=',$promotionId],
                     ['p.store_id','=',$this->store['id']],
                 ],'field' => [
-                    'p.id,p.name,p.first_img,p.second_img,p.goods_ids,p.start_time,p.end_time,p.store_id'
+                    'p.id','p.name','p.first_img','p.second_img','p.goods_ids','p.start_time','p.end_time','p.store_id'
                 ],
             ];
             $promotionInfo =  $model -> getInfo($config);
