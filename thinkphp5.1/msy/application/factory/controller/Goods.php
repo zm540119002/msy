@@ -71,6 +71,9 @@ class Goods extends StoreBase
     }
 
     //生成商品二维码
+    /**
+     * @return array
+     */
     public function generateGoodsQRcode(){
         if(request()->isPost()){
             $url = request()->domain().'/index.php/factory/Goods/preview/goods_id/'.input('post.goods_id');
@@ -231,6 +234,9 @@ class Goods extends StoreBase
     }
 
     //商品备份
+    /**
+     * @return array
+     */
     public function backup(){
         if(request()->isPost()){
             $model = new \app\factory\model\Goods;
@@ -329,6 +335,9 @@ class Goods extends StoreBase
     }
 
     // 获取推文相关的商品
+    /**
+     * @return array|mixed
+     */
     public function getTweetGoodsList(){
         if(!request()->isGet()){
             return errorMsg('请求方式错误');

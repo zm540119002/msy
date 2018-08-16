@@ -147,49 +147,51 @@
 			</li>
 		</ul>
 	</section>
-	<div class="detail-nav columns_flex floor-nav">
-		<a href="javascript:void(0);" class="scroll-nav current" id="c">商品参数</a>
-		<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
-		<a href="javascript:void(0);" class="scroll-nav" id="x">商品详情</a>
-		<a href="javascript:void(0);" class="scroll-nav" id="f">评分评论</a>
-	</div>
-	<div class="floor-content">
-		<section class="scroll-floor floor1">
-			<h3>商品参数</h3>
-			{$goodsInfo.parameters}
-		</section>
-		<!--<section class="scroll-floor floor2">
-            <h3>商品视频</h3>
-        </section>-->
-		<section class="scroll-floor floor2">
-			<h3>商品详情</h3>
-			<div class="details_img">
-				{notempty name="goodsInfo.details_img"}
-				{volist name="goodsInfo.details_img" id="vo"}
-				<div class="">
-					<img src="public_uploads/{$vo}" alt="" class="common_default_img">
-				</div>
-				{/volist}
-				{/notempty}
-			</div>
-		</section>
-		<section class="scroll-floor floor3">
-			<h3>评分评论</h3>
-			<div class="goods_star_score comment_star_module">
-				<div class="five_star">
-					<div class="star_img">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
+	<section class="scrollwrapper">
+		<div class="detail-nav columns_flex floor-nav nav-floor">
+			<a href="javascript:void(0);" class="scroll-nav active" data-floor="c">商品参数</a>
+			<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="x">商品详情</a>
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="f">评分评论</a>
+		</div>
+		<div class="floor-content">
+			<section class="scroll-floor floor1 floor">
+				<h3 id="c" class="floor-label">商品参数</h3>
+				{$goodsInfo.parameters}
+			</section>
+			<!--<section class="scroll-floor floor2">
+				<h3>商品视频</h3>
+			</section>-->
+			<section class="scroll-floor floor2 floor">
+				<h3 id="x" class="floor-label">商品详情</h3>
+				<div class="details_img">
+					{notempty name="goodsInfo.details_img"}
+					{volist name="goodsInfo.details_img" id="vo"}
+					<div class="">
+						<img src="public_uploads/{$vo}" alt="" class="common_default_img">
 					</div>
-					<span class="fraction" data-score="0">0分</span>
+					{/volist}
+					{/notempty}
 				</div>
-				<a href="javascript:void(0);" class="comment_num">0人评论</a>
-			</div>
-		</section>
-	</div>
+			</section>
+			<section class="scroll-floor floor3 floor">
+				<h3 id="f" class="floor-label">评分评论</h3>
+				<div class="goods_star_score comment_star_module">
+					<div class="five_star">
+						<div class="star_img">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+						</div>
+						<span class="fraction" data-score="0">0分</span>
+					</div>
+					<a href="javascript:void(0);" class="comment_num">0人评论</a>
+				</div>
+			</section>
+		</div>
+	</section>
 </article>
 <a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="foot-btn f24">修改</a>
 
@@ -201,7 +203,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-<script type="text/javascript" src="public_js/jquery.scroll.floor.js"></script>
+<!--<script type="text/javascript" src="public_js/jquery.scroll.floor.js"></script>-->
 
 <script type="text/javascript">
 
@@ -264,18 +266,19 @@
             star:'public_img/star.png',
             starRed:'public_img/starred.png'
 		});
-
+		$('.scrollwrapper').scrollFloor();
 	});
-	window.onload=function(){
-		scrollFloor({
-			floorClass : '.scroll-floor',       //楼层盒子class;默认为'.scroll-floor'
-			navClass : '.scroll-nav',           //导航盒子class;默认为'.scroll-nav'
-			activeClass : 'current',             //导航高亮class;默认为'active'
-			delayTime:1000,                      //点击导航，滚动条滑动到该位置的时间间隔;默认为200
-			activeTop:300,                      //楼层到窗口的某个位置时，导航高亮（设置该位置）;默认为100
-			scrollTop:0                         //点击导航，楼层滑动到窗口的某位置;默认为100
-		});
-	}
+	
+	// window.onload=function(){
+	// 	scrollFloor({
+	// 		floorClass : '.scroll-floor',       //楼层盒子class;默认为'.scroll-floor'
+	// 		navClass : '.scroll-nav',           //导航盒子class;默认为'.scroll-nav'
+	// 		activeClass : 'current',             //导航高亮class;默认为'active'
+	// 		delayTime:1000,                      //点击导航，滚动条滑动到该位置的时间间隔;默认为200
+	// 		activeTop:100,                      //楼层到窗口的某个位置时，导航高亮（设置该位置）;默认为100
+	// 		scrollTop:0                         //点击导航，楼层滑动到窗口的某位置;默认为100
+	// 	});
+	// }
 
 </script>
 {/block}

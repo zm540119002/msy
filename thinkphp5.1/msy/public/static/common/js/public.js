@@ -137,6 +137,48 @@
 			});
         });
     };
+    //楼层导航
+    $.fn.scrollFloor=function(options){
+        var defaults={
+            floorNavMenu:'nav-floor',
+            floorContent:'floor-content',
+            floorContentChild:'floor',
+            activeClass:'active'
+        };
+        var settings=$.extend(defaults,options);
+        $(document).scroll(function(){
+                
+            var parentHeight=$('.'+settings.floorContent).height(),
+                parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
+                childHeight=$('.'+settings.floorContentChild).outerHeight(true),
+                docScrollTop=$(window).scrollTop();
+                result=docScrollTop-parentOffsetTop;//parentOffsetTop
+                n=Math.floor(result/childHeight);
+                console.log(childHeight);
+                if(result>=0&&n<=2){
+                    
+                    $('.'+settings.floorNavMenu).children().removeClass(settings.activeClass).eq(n).addClass(settings.activeClass);
+                }
+        });
+        $('.'+settings.floorNavMenu).children().on('click',function(){
+            var i=$(this).index();
+            var _this=$(this);
+            var floorId=$(this).data('floor');
+            //var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
+            //console.log($('.'+settings.floorContentChild).outerHeight(true)*i);
+            $.each($('.floor-label'),function(){
+                var floorScroll=$(this).attr('id');
+                var h=$(this).offset().top;
+                
+                if(floorId==floorScroll){
+                    _this.addClass('active').siblings().removeClass('active');
+                    var abc=h;
+                    $('body,html').animate({'scrollTop':abc+'px'},800);
+                }
+            });
+            //$('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
+        })
+    };
 })(jQuery);
 
 //限制input、textarea字数

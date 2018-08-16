@@ -61,6 +61,7 @@
 			layer.open({
 				title:['新增角色','border-bottom:1px solid #d9d9d9;'],
 				className:'groupRole',
+				shadeClose: true,
 				content:groupRole,
 				btn:['确定','取消'],
 				yes:function(index){
@@ -85,6 +86,7 @@
 				title:['修改角色','border-bottom:1px solid #d9d9d9;'],
 				className:'groupRole',
 				content:groupRole,
+				shadeClose:false,
 				btn:['确定','取消'],
 				success:function(){
 					$('div.groupRole').find('input').val(_thisLi.find('span').text());
@@ -122,7 +124,8 @@
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
-					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-50+'px');
+					$('html,body').addClass('scrollStyle');
+					$('.rolePowerLayer .layui-m-layercont').css('height',winHeight-55+'px');
 					$('.rolePowerLayer').find('.role_name').text(_thisLi.find('span').text());
 					var postData = {};
 					postData.roleId = _thisLi.data('id');
@@ -153,9 +156,13 @@
 						if(data.status==0){
 							dialog.error(data.info);
 						}else{
+							$('html,body').removeClass('scrollStyle');
 							layer.close(index);
 						}
 					});
+				},
+				no:function(){
+					$('html,body').removeClass('scrollStyle');
 				}
 			});
 		});
