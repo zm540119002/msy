@@ -1287,7 +1287,10 @@ background-position: 0 -27px;
     border:none;
 }
 .editCompanyPicLayer .layui-m-layerbtn span[no],
-.editParameterLayer .layui-m-layerbtn span[no]{
+.editParameterLayer .layui-m-layerbtn span[no],
+.editCompanyPicLayer .layui-m-layerbtn span[yes],
+.editParameterLayer .layui-m-layerbtn span[yes]{
+    width:50px;
     border:none;
 }
 .layui-m-layermain.arrow-bottom{
