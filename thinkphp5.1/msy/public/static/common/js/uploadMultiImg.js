@@ -502,7 +502,7 @@ function uploadsVideoDescribe(content,obj){
             btn:['确定','取消'],
             success:function(){
                 var winHeight=$(window).height();
-                $('html,body').addClass('scrollStyle');
+                // $('html,body').addClass('scrollStyle');
                 $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 var html='';
