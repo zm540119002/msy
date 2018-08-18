@@ -1289,7 +1289,7 @@ background-position: 0 -27px;
     border:none;
 }
 .layui-m-layermain.arrow-bottom{
-    position:absolute;
+    position:fixed;
     left:0;
     bottom:0;
     top:auto;
