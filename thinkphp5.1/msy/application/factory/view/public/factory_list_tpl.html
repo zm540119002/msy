@@ -21,8 +21,10 @@
             success:function(){
                 var winHeight=$(window).height();
                 $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
+                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
             },
-            btn:['确定'],
+            btn:['确定','取消'],
             yes:function(index){
                 var postData = {};
                 postData.factoryId = $('.factoryListLayer li.current').data('id');

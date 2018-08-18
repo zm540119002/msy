@@ -1276,7 +1276,13 @@ background-position: 0 -27px;
     animation-duration: .5s;
 }
 .editCompanyPicLayer .layui-m-layerbtn,
-.editParameterLayer .layui-m-layerbtn{
+.editParameterLayer .layui-m-layerbtn,
+.uploadThumbnailLayer .layui-m-layerbtn,
+.editDetailLayer .layui-m-layerbtn,
+.uploadSingleVideoLayer .layui-m-layerbtn,
+.categoryContentLayer .layui-m-layerbtn,
+.factoryListLayer .layui-m-layerbtn,
+.addCcountLayer .layui-m-layerbtn{
     display: flex;
     justify-content: space-between;
     position:absolute;
@@ -1289,9 +1295,27 @@ background-position: 0 -27px;
 .editCompanyPicLayer .layui-m-layerbtn span[no],
 .editParameterLayer .layui-m-layerbtn span[no],
 .editCompanyPicLayer .layui-m-layerbtn span[yes],
-.editParameterLayer .layui-m-layerbtn span[yes]{
+.editParameterLayer .layui-m-layerbtn span[yes],
+.uploadThumbnailLayer .layui-m-layerbtn span[no],
+.uploadThumbnailLayer .layui-m-layerbtn span[yes],
+.editDetailLayer .layui-m-layerbtn span[no],
+.editDetailLayer .layui-m-layerbtn span[yes],
+.uploadSingleVideoLayer .layui-m-layerbtn span[no],
+.uploadSingleVideoLayer .layui-m-layerbtn span[yes],
+.categoryContentLayer .layui-m-layerbtn span[no],
+.categoryContentLayer .layui-m-layerbtn span[yes],
+.addCcountLayer .layui-m-layerbtn span[no],
+.addCcountLayer .layui-m-layerbtn span[yes]{
     width:50px;
     border:none;
+}
+.factoryListLayer .layui-m-layerbtn span[no]{
+    visibility: hidden;
+}
+.factoryListLayer .layui-m-layerbtn span[yes]{
+    width:50px;
+    background:none;
+    color:#40AFFE;
 }
 .layui-m-layermain.arrow-bottom{
     position:fixed;
