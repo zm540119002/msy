@@ -1228,6 +1228,7 @@ background-position: 0 -27px;
 }
 .layui-m-layermain .bottom-layer .layui-m-layerchild{
     width:100%;
+    height:100%;
     border-radius:0;
 }
 .vendorInfoLayer .layui-m-layercont,
