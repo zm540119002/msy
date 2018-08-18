@@ -1549,13 +1549,13 @@ background-position: 0 -27px;
 .addCcountLayer .layui-m-layerbtn,
 .setRoleLayer .layui-m-layerbtn,
 .rolePowerLayer .layui-m-layerbtn{
-    position:fixed;
+    /*position:fixed;
     bottom:0;
     left:0;
     right:0;
     width:100%;
-    /*background: #009a3e;*/
-    z-index:5;
+    background: #009a3e;
+    z-index:5;*/
     
 }
 .setOrganizeLayer .layui-m-layerbtn span[yes],
