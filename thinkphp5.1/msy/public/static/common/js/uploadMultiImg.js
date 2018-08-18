@@ -401,7 +401,7 @@ function uploadsImgDescribe(content,obj){
             btn:['确定','取消'],
             success:function(){
                 var winHeight=$(window).height();
-                $('body').addClass('scrollStyle');
+                $('html,body').addClass('scrollStyle');
                 $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
                 $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
