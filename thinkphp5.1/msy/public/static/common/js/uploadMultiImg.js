@@ -504,6 +504,7 @@ function uploadsVideoDescribe(content,obj){
                 var winHeight=$(window).height();
                 $('html,body').addClass('scrollStyle');
                 $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 var html='';
                     html+='<li>';
                     html+='<div class="picture-module active">';
