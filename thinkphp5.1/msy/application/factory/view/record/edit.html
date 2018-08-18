@@ -169,6 +169,8 @@
                 	$('.editParameterLayer .layui-m-layercont').css('height',winHeight-112+'px');
 					var goodsParameter=$('.company-introduce').val();
 					$('.editParameterLayer .editGoodsText').val(goodsParameter);
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 				},
 				yes:function(index){
 					var editGoodsText=$('.editParameterLayer .editGoodsText').val();

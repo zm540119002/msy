@@ -1275,7 +1275,8 @@ background-position: 0 -27px;
     -webkit-animation-duration: .5s; 
     animation-duration: .5s;
 }
-.editCompanyPicLayer .layui-m-layerbtn{
+.editCompanyPicLayer .layui-m-layerbtn,
+.editParameterLayer .layui-m-layerbtn{
     display: flex;
     justify-content: space-between;
     position:absolute;
@@ -1285,7 +1286,8 @@ background-position: 0 -27px;
     background:transparent;
     border:none;
 }
-.editCompanyPicLayer .layui-m-layerbtn span[no]{
+.editCompanyPicLayer .layui-m-layerbtn span[no],
+.editParameterLayer .layui-m-layerbtn span[no]{
     border:none;
 }
 .layui-m-layermain.arrow-bottom{
