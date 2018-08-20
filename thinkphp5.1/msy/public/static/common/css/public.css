@@ -1217,14 +1217,19 @@ background-position: 0 -27px;
 .layui-m-layerchild.factoryListLayer,
 .layui-m-layerchild.storeListLayer,
 .layui-m-layerchild.editCompanyPicLayer{
-    position:fixed; 
+    /*position:fixed; 
     left:0; 
     top:0; 
     width:100%; 
     height:100%; 
     border: none; 
     -webkit-animation-duration: .5s; 
-    animation-duration: .5s;
+    animation-duration: .5s;*/
+}
+.layui-m-layermain .bottom-layer .layui-m-layerchild{
+    width:100%;
+    height:100%;
+    border-radius:0;
 }
 .vendorInfoLayer .layui-m-layercont,
 .addTagLayer .layui-m-layercont,
@@ -1269,6 +1274,54 @@ background-position: 0 -27px;
     border: none; 
     -webkit-animation-duration: .5s; 
     animation-duration: .5s;
+}
+.editCompanyPicLayer .layui-m-layerbtn,
+.editParameterLayer .layui-m-layerbtn,
+.uploadThumbnailLayer .layui-m-layerbtn,
+.editDetailLayer .layui-m-layerbtn,
+.uploadSingleVideoLayer .layui-m-layerbtn,
+.categoryContentLayer .layui-m-layerbtn,
+.factoryListLayer .layui-m-layerbtn,
+.addCcountLayer .layui-m-layerbtn{
+    display: flex;
+    justify-content: space-between;
+    position:absolute;
+    top:5px;
+    /*right:0;*/
+    width:100%;
+    background:transparent;
+    border:none;
+}
+.editCompanyPicLayer .layui-m-layerbtn span[no],
+.editParameterLayer .layui-m-layerbtn span[no],
+.editCompanyPicLayer .layui-m-layerbtn span[yes],
+.editParameterLayer .layui-m-layerbtn span[yes],
+.uploadThumbnailLayer .layui-m-layerbtn span[no],
+.uploadThumbnailLayer .layui-m-layerbtn span[yes],
+.editDetailLayer .layui-m-layerbtn span[no],
+.editDetailLayer .layui-m-layerbtn span[yes],
+.uploadSingleVideoLayer .layui-m-layerbtn span[no],
+.uploadSingleVideoLayer .layui-m-layerbtn span[yes],
+.categoryContentLayer .layui-m-layerbtn span[no],
+.categoryContentLayer .layui-m-layerbtn span[yes],
+.addCcountLayer .layui-m-layerbtn span[no],
+.addCcountLayer .layui-m-layerbtn span[yes]{
+    width:50px;
+    border:none;
+}
+.factoryListLayer .layui-m-layerbtn span[no]{
+    visibility: hidden;
+}
+.factoryListLayer .layui-m-layerbtn span[yes]{
+    width:50px;
+    background:none;
+    color:#40AFFE;
+}
+.layui-m-layermain.arrow-bottom{
+    position:fixed;
+    left:0;
+    bottom:0;
+    top:auto;
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
@@ -1549,14 +1602,17 @@ background-position: 0 -27px;
 .addCcountLayer .layui-m-layerbtn,
 .setRoleLayer .layui-m-layerbtn,
 .rolePowerLayer .layui-m-layerbtn{
-    position:fixed;
+    /*position:fixed;
     bottom:0;
     left:0;
     right:0;
     width:100%;
-    /*background: #009a3e;*/
-    z-index:5;
+    background: #009a3e;
+    z-index:5;*/
     
+}
+.layui-m-layermain .layui-m-layersection.bottom-layer{
+    vertical-align: bottom;
 }
 .setOrganizeLayer .layui-m-layerbtn span[yes],
 .setRoleLayer .layui-m-layerbtn span[yes]{
