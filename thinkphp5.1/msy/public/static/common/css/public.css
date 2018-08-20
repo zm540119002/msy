@@ -1284,7 +1284,8 @@ background-position: 0 -27px;
 .factoryListLayer .layui-m-layerbtn,
 .addCcountLayer .layui-m-layerbtn,
 .setRoleLayer .layui-m-layerbtn,
-.setOrganizeLayer .layui-m-layerbtn{
+.setOrganizeLayer .layui-m-layerbtn,
+.rolePowerLayer .layui-m-layerbtn{
     display: flex;
     justify-content: space-between;
     position:absolute;
@@ -1307,7 +1308,9 @@ background-position: 0 -27px;
 .categoryContentLayer .layui-m-layerbtn span[no],
 .categoryContentLayer .layui-m-layerbtn span[yes],
 .addCcountLayer .layui-m-layerbtn span[no],
-.addCcountLayer .layui-m-layerbtn span[yes]{
+.addCcountLayer .layui-m-layerbtn span[yes],
+.rolePowerLayer .layui-m-layerbtn span[no],
+.rolePowerLayer .layui-m-layerbtn span[yes]{
     width:50px;
     border:none;
 }
