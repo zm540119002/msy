@@ -20,6 +20,7 @@
             style: '',
             success:function(){
                 var winHeight=$(window).height();
+                $('html,body').addClass('scrollStyle');
                 $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
                 $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
@@ -41,6 +42,7 @@
                         location.reload();
                     }
                 });
+                $('html,body').addClass('scrollStyle');
             }
         });
     }
