@@ -50,11 +50,13 @@
                         uploadsClipImgFlag = true;
                         $('.logo-src').val(msg.info)
                     }
+                    $('html,body').removeClass('scrollStyle');
                 },'json');
             }
         });
         $(".logo").click(function(){
             $(".htmleaf-container").show();
+            $('html,body').addClass('scrollStyle');
         });
         $("#clipBtn").click(function(){
             $('.logo img').attr('src',clipImg).addClass('active');
@@ -63,6 +65,7 @@
         });
         $('.photoClip-close').click(function(){
             $(".htmleaf-container").hide();
+            $('html,body').removeClass('scrollStyle');
         });
     })
 
