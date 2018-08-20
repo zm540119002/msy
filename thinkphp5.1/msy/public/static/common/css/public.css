@@ -1282,7 +1282,9 @@ background-position: 0 -27px;
 .uploadSingleVideoLayer .layui-m-layerbtn,
 .categoryContentLayer .layui-m-layerbtn,
 .factoryListLayer .layui-m-layerbtn,
-.addCcountLayer .layui-m-layerbtn{
+.addCcountLayer .layui-m-layerbtn,
+.setRoleLayer .layui-m-layerbtn,
+.setOrganizeLayer .layui-m-layerbtn{
     display: flex;
     justify-content: space-between;
     position:absolute;
@@ -1309,10 +1311,14 @@ background-position: 0 -27px;
     width:50px;
     border:none;
 }
-.factoryListLayer .layui-m-layerbtn span[no]{
+.factoryListLayer .layui-m-layerbtn span[no],
+.setRoleLayer .layui-m-layerbtn span[no],
+.setOrganizeLayer .layui-m-layerbtn span[no]{
     visibility: hidden;
 }
-.factoryListLayer .layui-m-layerbtn span[yes]{
+.factoryListLayer .layui-m-layerbtn span[yes],
+.setRoleLayer .layui-m-layerbtn span[yes],
+.setOrganizeLayer .layui-m-layerbtn span[yes]{
     width:50px;
     background:none;
     color:#40AFFE;
@@ -1616,9 +1622,9 @@ background-position: 0 -27px;
 }
 .setOrganizeLayer .layui-m-layerbtn span[yes],
 .setRoleLayer .layui-m-layerbtn span[yes]{
-    background:#ff7bac;
+    /*background:#ff7bac;
     color:#fff;
-    border-radius:0;
+    border-radius:0;*/
 }
 .role-list li .btn{
     /*height:31px;*/

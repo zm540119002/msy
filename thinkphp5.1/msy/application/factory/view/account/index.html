@@ -160,6 +160,8 @@
 					var winHeight=$(window).height();
 					$('html,body').addClass('scrollStyle');
 					$('.setRoleLayer .layui-m-layercont').css('height',winHeight-112+'px');
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					$.each(userFactoryRoleIds,function(i,o){
 						$.each($('.setRoleLayer li'),function(){
 							if($(this).data('id')==o){
@@ -168,7 +170,7 @@
 						});
 					});
 				},
-				btn:['确定'],
+				btn:['确定','取消'],
 				yes:function(index){
 					//先清空
 					userFactoryRoleIds = [];
@@ -198,6 +200,8 @@
 					var winHeight=$(window).height();
 					$('html,body').addClass('scrollStyle');
 					$('.setOrganizeLayer .layui-m-layercont').css('height',winHeight-112+'px');
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					//回写
 					$.each($('.setOrganizeLayer').find('.organize ul'),function(){
 						if($(this).data('id')==userFactoryOrganizeId){
@@ -205,7 +209,7 @@
 						}
 					});
 				},
-				btn:['确定'],
+				btn:['确定','取消'],
 				yes:function(index){
 					userFactoryOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
 					$('html,body').removeClass('scrollStyle');
