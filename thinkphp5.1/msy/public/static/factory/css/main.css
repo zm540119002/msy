@@ -439,7 +439,7 @@
 }
 .editCompanyPicLayer .layui-m-layercont{
     /*height:4.5rem;*/
-    overflow: hidden;
+    /*overflow: hidden;*/
     overflow-y:scroll;
 }
 .company-preview-top .columns_flex{

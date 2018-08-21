@@ -1327,10 +1327,10 @@ background-position: 0 -27px;
     color:#40AFFE;
 }
 .layui-m-layermain.arrow-bottom{
-    position:fixed;
+    /*position:fixed;
     left:0;
     bottom:0;
-    top:auto;
+    top:auto;*/
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
@@ -1621,7 +1621,7 @@ background-position: 0 -27px;
     
 }
 .layui-m-layermain .layui-m-layersection.bottom-layer{
-    vertical-align: bottom;
+    /*vertical-align: bottom;*/
 }
 .setOrganizeLayer .layui-m-layerbtn span[yes],
 .setRoleLayer .layui-m-layerbtn span[yes]{
