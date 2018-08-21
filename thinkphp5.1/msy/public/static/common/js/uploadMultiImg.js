@@ -394,105 +394,105 @@ function uploadsMultiVideo(content){
 //图片描述弹窗
 function uploadsImgDescribe(content,obj){
     layer.open({
-            title:['上传照片和描述','border-bottom:1px solid #d9d9d9'],
-            className:'editCompanyPicLayer',
-            content:content,
-            type:1,
-            btn:['确定','取消'],
-            success:function(){
-                var winHeight=$(window).height();
-                document.documentElement.scrollTop = document.body.scrollTop = 0
-                $('html,body').addClass('scrollStyle');
-                $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
-                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
-                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-                var html='';
-                    html+='<li>';
-                    html+='<div class="picture-module active">';
-                    html+='<input type="file" class="uploadImg uploadSingleEditImg" name="">';
-                    html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
-                    html+='<img src="" class="upload_img">';
-                    html+='</div>';
-                    html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
-                    html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
-                    html+='</li>';                  
-                var multiImgAttr=obj.data('src');
-                for(var i=0;i<multiImgAttr.length;i++){
-                    if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
-                        multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
-                    }
-                    $('.editCompanyPicLayer .multi-picture-module').append(html);
-                    $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
-                    $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
+        title:['上传照片和描述','border-bottom:1px solid #d9d9d9'],
+        className:'editCompanyPicLayer',
+        content:content,
+        type:1,
+        btn:['确定','取消'],
+        success:function(){
+            var winHeight=$(window).height();
+            document.documentElement.scrollTop = document.body.scrollTop = 0
+            $('html,body').addClass('scrollStyle');
+            $('.editCompanyPicLayer .layui-m-layercont').css('height',winHeight-112+'px');
+            $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+            $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+            var html='';
+                html+='<li>';
+                html+='<div class="picture-module active">';
+                html+='<input type="file" class="uploadImg uploadSingleEditImg" name="">';
+                html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
+                html+='<img src="" class="upload_img">';
+                html+='</div>';
+                html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
+                html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
+                html+='</li>';                  
+            var multiImgAttr=obj.data('src');
+            for(var i=0;i<multiImgAttr.length;i++){
+                if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
+                    multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                 }
-            },
-            yes:function(index){
-                var layermultiImgAttr=[];
-                var layerImgInfoData={};
-                $.each($('.editCompanyPicLayer li'),function(i,val){
-                    var _this=$(this);
-                    var fileSrc=_this.find('img').attr('src');
-                    var fileText=_this.find('textarea').val();
-                    layerImgInfoData={
-                        fileSrc:fileSrc,
-                        fileText:fileText
-                    }
-                    layermultiImgAttr.push(layerImgInfoData);
-                });
-                obj.data('src',layermultiImgAttr);
-                if(layermultiImgAttr.length==0){
-                    $('html,body').removeClass('scrollStyle');
-                    layer.close(index);
-                    return false;
-                }
-                var postData = {};
-                postData.imgsWithDes = layermultiImgAttr;
-                $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
-                $.ajax({
-                    url: controller + 'uploadMultiFileToTempWithDes',
-                    data: postData,
-                    type: 'post',
-                    beforeSend: function(){
-                        errorTipc('文件还没上传完毕');
-                    },
-                    success: function(info){
-                        if(info.status == 0){
-                            dialog.error(info.msg);
-                            return false;
-                        }
-                        var imgArray = [];
-                        var returnData=JSON.parse(info);
-                        for(var i=0;i<returnData.length;i++){
-                            if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
-                                returnData[i].fileSrc= uploads+returnData[i].fileSrc;
-
-                            }
-                            imgArray.push(returnData[i]);
-                        }
-                        obj.data('src', imgArray);
-                        if(info != ''){
-                            dialog.error('图片文件上传完！');
-                            layer.close(index);
-                        }else{
-                            
-                        }
-                        $('html,body').removeClass('scrollStyle');
-                        $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
-                    },
-                    complete:function(){
-                        
-                    },
-                    error:function (xhr) {
-                        dialog.error('AJAX错误'+xhr);
-                    }
-                });
-                
-            },
-            no:function(){
-                $('html,body').removeClass('scrollStyle');
-                $('.editCompanyPicLayer li').remove();
+                $('.editCompanyPicLayer .multi-picture-module').append(html);
+                $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
+                $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
             }
-        })
+        },
+        yes:function(index){
+            var layermultiImgAttr=[];
+            var layerImgInfoData={};
+            $.each($('.editCompanyPicLayer li'),function(i,val){
+                var _this=$(this);
+                var fileSrc=_this.find('img').attr('src');
+                var fileText=_this.find('textarea').val();
+                layerImgInfoData={
+                    fileSrc:fileSrc,
+                    fileText:fileText
+                }
+                layermultiImgAttr.push(layerImgInfoData);
+            });
+            obj.data('src',layermultiImgAttr);
+            if(layermultiImgAttr.length==0){
+                $('html,body').removeClass('scrollStyle');
+                layer.close(index);
+                return false;
+            }
+            var postData = {};
+            postData.imgsWithDes = layermultiImgAttr;
+            $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').addClass('disabled');            
+            $.ajax({
+                url: controller + 'uploadMultiFileToTempWithDes',
+                data: postData,
+                type: 'post',
+                beforeSend: function(){
+                    errorTipc('文件还没上传完毕');
+                },
+                success: function(info){
+                    if(info.status == 0){
+                        dialog.error(info.msg);
+                        return false;
+                    }
+                    var imgArray = [];
+                    var returnData=JSON.parse(info);
+                    for(var i=0;i<returnData.length;i++){
+                        if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
+                            returnData[i].fileSrc= uploads+returnData[i].fileSrc;
+
+                        }
+                        imgArray.push(returnData[i]);
+                    }
+                    obj.data('src', imgArray);
+                    if(info != ''){
+                        dialog.error('图片文件上传完！');
+                        layer.close(index);
+                    }else{
+                        
+                    }
+                    $('html,body').removeClass('scrollStyle');
+                    $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
+                },
+                complete:function(){
+                    
+                },
+                error:function (xhr) {
+                    dialog.error('AJAX错误'+xhr);
+                }
+            });
+            
+        },
+        no:function(){
+            $('html,body').removeClass('scrollStyle');
+            $('.editCompanyPicLayer li').remove();
+        }
+    });
 }
 //视频描述弹窗
 function uploadsVideoDescribe(content,obj){
