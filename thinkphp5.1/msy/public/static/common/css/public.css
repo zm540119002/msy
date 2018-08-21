@@ -1330,7 +1330,7 @@ background-position: 0 -27px;
     position:fixed;
     left:0;
     bottom:0;
-    top:0;
+    top:auto;
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
