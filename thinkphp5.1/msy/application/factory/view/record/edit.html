@@ -54,75 +54,77 @@
 </section>
 <article class="f24 app-content">
 	<section class="app-shell">
-		<form class="addProductContent qualificationContent">
-			{notempty name="recordInfo"}
-			<input type="hidden" name="record_id" value="{$recordInfo.id|default=''}">
-			{/notempty}
-			<div class="upload-company-map f24">
-				<div>
-					<div class="picture-module company-picture-module active">
-						<input type="file" class="uploadImg uploadSingleImg" name="">
-						{notempty name="recordInfo.company_img"}
-						<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
-						{else /}
-						<img class="upload_img common_default_img" src="public_img/default/no_pic_100.jpg" alt="">
-						{/notempty}
-						<input type="hidden" class="business-license img" value="{$recordInfo.company_img|default=''}" name="company_img"/>
-					</div>
-					<!--<p>企业营业执照</p>-->
-				</div>
-			</div>
-			<ul class="content-marginLeft">
-				<li>
-					<div class="express-area area-box">
-						<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
-							<label class="form-label">所在地区：</label>
-							<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-							<input type="hidden" value="" class="area-address-name" data-key="{$recordInfo.provinces|default=''}" name="provinces">
-						</a>
-					</div>
-				</li>
-				<li>
-					<input type="text" class="detail-address" value="{$recordInfo.detail_address|default=''}" placeholder="填写详细地址" name="detail_address" >
-				</li>
-				<li>
-					<div class="logo-license">
-						<div class="half">
-							<a class="logo" id="logox">
-								{notempty name="recordInfo.logo_img"}
-								<img src="public_uploads/{$recordInfo.logo_img|default=''}" />
-								{else /}
-								<img src="public_img/default/no_pic_40.jpg" />
-								{/notempty}
-								<input type="hidden" class="logo-src" name="logo_img" value="{$recordInfo.logo_img|default=''}">
-							</a>
-							<p class="f24">企业标志</p>
+		<div class="app-view-wrapper">
+			<form class="addProductContent qualificationContent">
+				{notempty name="recordInfo"}
+				<input type="hidden" name="record_id" value="{$recordInfo.id|default=''}">
+				{/notempty}
+				<div class="upload-company-map f24">
+					<div>
+						<div class="picture-module company-picture-module active">
+							<input type="file" class="uploadImg uploadSingleImg" name="">
+							{notempty name="recordInfo.company_img"}
+							<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
+							{else /}
+							<img class="upload_img common_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+							{/notempty}
+							<input type="hidden" class="business-license img" value="{$recordInfo.company_img|default=''}" name="company_img"/>
 						</div>
-						<div class="clear"></div>
+						<!--<p>企业营业执照</p>-->
 					</div>
-				</li>
-				<li class="">
-					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑企业简介</a>
-					<input type="hidden" class="company-introduce" value="{$recordInfo.introduction|default=''}" name="introduction"/>
-				</li>
-				<li class="">
-					<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业视频</a>
-					<input type="hidden" class="company-video" value="" name="factory_video" data-src="{$recordInfo.factory_video|default=''}">
-				</li>
-				<li class="">
-					<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传研发生产照片</a>
-					<input type="hidden" class="development-picture" data-src="{$recordInfo.rb_img|default=''}" value="" name="rb_img">
-				</li>
-				<li class="">
-					<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质</a>
-					<input type="hidden" class="license-picture" data-src="{$recordInfo.license|default=''}" value="" name="license">
-				</li>
-				<li class="">
-					<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉</a>
-					<input type="hidden" class="honor-picture" data-src="{$recordInfo.glory_img|default=''}" value="" name="glory_img">
-				</li>
-			</ul>
-		</form>
+				</div>
+				<ul class="content-marginLeft">
+					<li>
+						<div class="express-area area-box">
+							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">所在地区：</label>
+								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+								<input type="hidden" value="" class="area-address-name" data-key="{$recordInfo.provinces|default=''}" name="provinces">
+							</a>
+						</div>
+					</li>
+					<li>
+						<input type="text" class="detail-address" value="{$recordInfo.detail_address|default=''}" placeholder="填写详细地址" name="detail_address" >
+					</li>
+					<li>
+						<div class="logo-license">
+							<div class="half">
+								<a class="logo" id="logox">
+									{notempty name="recordInfo.logo_img"}
+									<img src="public_uploads/{$recordInfo.logo_img|default=''}" />
+									{else /}
+									<img src="public_img/default/no_pic_40.jpg" />
+									{/notempty}
+									<input type="hidden" class="logo-src" name="logo_img" value="{$recordInfo.logo_img|default=''}">
+								</a>
+								<p class="f24">企业标志</p>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑企业简介</a>
+						<input type="hidden" class="company-introduce" value="{$recordInfo.introduction|default=''}" name="introduction"/>
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业视频</a>
+						<input type="hidden" class="company-video" value="" name="factory_video" data-src="{$recordInfo.factory_video|default=''}">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传研发生产照片</a>
+						<input type="hidden" class="development-picture" data-src="{$recordInfo.rb_img|default=''}" value="" name="rb_img">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质</a>
+						<input type="hidden" class="license-picture" data-src="{$recordInfo.license|default=''}" value="" name="license">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉</a>
+						<input type="hidden" class="honor-picture" data-src="{$recordInfo.glory_img|default=''}" value="" name="glory_img">
+					</li>
+				</ul>
+			</form>
+		</div>
 		<a href="javascript:void(0);" class="identifyNewGoods foot-btn f24">确定</a>
 	</section>
 </article>
