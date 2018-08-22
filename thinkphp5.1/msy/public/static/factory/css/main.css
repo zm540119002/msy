@@ -450,7 +450,9 @@
 .editCompanyPicLayer .layui-m-layercont{
     /*height:4.5rem;*/
     /*overflow: hidden;*/
-    overflow-y:scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .company-preview-top .columns_flex{
     padding:0 0 0.15rem 0;
