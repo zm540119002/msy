@@ -417,6 +417,16 @@
 /*档案资质*/
 .qualificationContent{
     padding:0 0 0.8rem 0;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .qualificationContent .upload-picture-module{
     display: block;

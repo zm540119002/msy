@@ -52,8 +52,8 @@
 		</div>
 	</div>
 </section>
-<article class="f24">
-	<section>
+<article class="f24 app-content">
+	<section class="app-shell">
 		<form class="addProductContent qualificationContent">
 			{notempty name="recordInfo"}
 			<input type="hidden" name="record_id" value="{$recordInfo.id|default=''}">
@@ -123,9 +123,10 @@
 				</li>
 			</ul>
 		</form>
+		<a href="javascript:void(0);" class="identifyNewGoods foot-btn f24">确定</a>
 	</section>
 </article>
-<a href="javascript:void(0);" class="identifyNewGoods foot-btn f24">确定</a>
+
 <div id="areaMask" class="mask"></div>
 
 
