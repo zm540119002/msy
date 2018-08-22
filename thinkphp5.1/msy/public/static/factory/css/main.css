@@ -997,7 +997,9 @@ input.special{
 /*促销活动*/
 .classify-label-content{
     height:400px;
-    overflow-y:scroll;
+    overflow-x:hidden;
+    overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
     /*border-bottom:1px solid #d9d9d9;*/
 }
 .promotion-item .classify-label-content {
