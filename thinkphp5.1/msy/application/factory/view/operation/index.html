@@ -28,27 +28,31 @@
 	</div>
 	<div id="view" class="photoview" ></div>
 </section>
-<article class="f24">
+<article class="f24 app-content">
 	<!--店铺运营头部-->
-	{include file="public/store_operation_head" /}
-
-	<section class="bottomLine">
-		<nav class="columns_flex channel_nav manufacturer_nav">
-			<a href="javascript:void(0);" class="current">
-				店铺提醒
-			</a>
-			<a href="{:url('Operation/set')}">
-				店铺管理
-			</a>
-			<a href="{:url('Promotion/manage')}">
-				营销推广
-			</a>
-			<a href="javascript:void(0)">
-				官方活动
-			</a>
-		</nav>
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				{include file="public/store_operation_head" /}
+				<section class="bottomLine">
+					<nav class="columns_flex channel_nav manufacturer_nav">
+						<a href="javascript:void(0);" class="current">
+							店铺提醒
+						</a>
+						<a href="{:url('Operation/set')}">
+							店铺管理
+						</a>
+						<a href="{:url('Promotion/manage')}">
+							营销推广
+						</a>
+						<a href="javascript:void(0)">
+							官方活动
+						</a>
+					</nav>
+				</section>
+			</div>
+		</div>
 	</section>
-
 </article>
 
 {/block}
