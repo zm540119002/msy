@@ -15,6 +15,7 @@
         </div>
         <a href="javascript:void(0);" class="photoClip-close ">X</a>
     </div>
+    <p class="f24" style="width:100%;position:absolute;top:0;color:#fff;">温馨提示：先打开图片上传,再裁剪哦！</p>
     <div class="foot-use f28">
         <div class="uploader1 blue">
             <input type="button" name="file" class="button" value="打开图片">
@@ -57,6 +58,7 @@
         $(".logo").click(function(){
             $(".htmleaf-container").show();
             $('html,body').addClass('scrollStyle');
+            $('.htmleaf-container .photoview').get(0).style.backgroundImage="url("+$('.logo img').attr('src')+")";
         });
         $("#clipBtn").click(function(){
             $('.logo img').attr('src',clipImg).addClass('active');
