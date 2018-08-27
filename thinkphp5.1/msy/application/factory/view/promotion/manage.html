@@ -12,67 +12,72 @@
 	<div class="error_tipc"></div>
 </section>
 
-<article class="f24">
+<article class="f24 app-content">
 	<!--店铺运营头部-->
-	{include file="public/store_operation_head" /}
-	<section class="bottomLine">
-		<nav class="columns_flex channel_nav manufacturer_nav">
-			<a href="{:url('Operation/index')}">
-				店铺提醒
-			</a>
-			<a href="{:url('Goods/manage')}">
-				店铺管理
-			</a>
-			<a href=""  class="current">
-				营销推广
-			</a>
-			<a href="javascript:void (0)">
-				官方活动
-			</a>
-		</nav>
-	</section>
-	<section class="specific_type store-manage-type bottomLine">
-		<div class="columns_flex f20">
-			<a  href="javascript:void (0)" class="column_type current">场景</a>
-			<a >云推客</a>
-			<a href="javascript:void (0)">线上</a>
-			<a href="javascript:void (0)">线下</a>
-			<a href="javascript:void (0)">视频</a>
-			<a href="javascript:void (0)">直播</a>
-		</div>
-	</section>
-	<section class="content-marginLeft separation-line">
-		<div>
-			企业名称:
-			<span>达安有限公司</span>
-		</div>
-		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
-		<a href="javascript:void(0);" class="stroe-preview">采购店铺预览></a>
-		<a href="javascript:void(0);" class="addSalesActivity text-color-gr right-arrow">新建促销活动</a>
-	</section>
-	<section class="separation-line sales-promotion-content">
-		<div class="category-wrapper">
-			<div class="category-left-menu sort-left-menu">
-                <ul class="category-tab">
-                    <li class="current">
-                        <a href="javascript:void(0);" data-activity-status="1" class="activity-status">未结束</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-activity-status="0" class="activity-status">已结束</a>
-                    </li>
-                </ul>
-            </div>
-			<input type="hidden" value="1" class="isClick">
-			<div class="promotion-item" >
-				<p class="content-label">促销活动的修改、删除和排序</p>
-				<div class="classify-label-content " id="list">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				{include file="public/store_operation_head" /}
+				<div class="bottomLine">
+					<nav class="columns_flex channel_nav manufacturer_nav">
+						<a href="{:url('Operation/index')}">
+							店铺提醒
+						</a>
+						<a href="{:url('Goods/manage')}">
+							店铺管理
+						</a>
+						<a href=""  class="current">
+							营销推广
+						</a>
+						<a href="javascript:void (0)">
+							官方活动
+						</a>
+					</nav>
+				</div>
+				<div class="specific_type store-manage-type bottomLine">
+					<div class="columns_flex f20">
+						<a  href="javascript:void (0)" class="column_type current">场景</a>
+						<a >云推客</a>
+						<a href="javascript:void (0)">线上</a>
+						<a href="javascript:void (0)">线下</a>
+						<a href="javascript:void (0)">视频</a>
+						<a href="javascript:void (0)">直播</a>
+					</div>
+				</div>
+				<div class="content-marginLeft separation-line">
+					<div>
+						企业名称:
+						<span>达安有限公司</span>
+					</div>
+					<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
+					<a href="javascript:void(0);" class="stroe-preview">采购店铺预览></a>
+					<a href="javascript:void(0);" class="addSalesActivity text-color-gr right-arrow">新建促销活动</a>
+				</div>
+				<div class="separation-line sales-promotion-content">
+					<div class="category-wrapper">
+						<div class="category-left-menu sort-left-menu">
+							<ul class="category-tab">
+								<li class="current">
+									<a href="javascript:void(0);" data-activity-status="1" class="activity-status">未结束</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" data-activity-status="0" class="activity-status">已结束</a>
+								</li>
+							</ul>
+						</div>
+						<input type="hidden" value="1" class="isClick">
+						<div class="promotion-item" >
+							<p class="content-label">促销活动的修改、删除和排序</p>
+							<div class="classify-label-content " id="list">
 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="separation-line sales-promotion-content">
 				</div>
 			</div>
 		</div>
-	</section>
-	<section class="separation-line sales-promotion-content">
-		
 	</section>
 </article>
 {/block}

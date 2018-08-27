@@ -3,41 +3,46 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<article class="f24">
-	{include file="public/store_operation_head" /}
-	<section class="bottomLine">
-		<nav class="columns_flex channel_nav manufacturer_nav">
-			<a href="{:url('Operation/index')}">
-				店铺提醒
-			</a>
-			<a href="javascript:void(0);" class="current">
-				店铺管理
-			</a>
-			<a href="{:url('Promotion/manage')}">
-				营销推广
-			</a>
-			<a href="javascript:void(0);">
-				官方活动
-			</a>
-		</nav>
-	</section>
-	<section class="specific_type store-manage-type bottomLine">
-		<div class="columns_flex f20">
-			<a href="{:url('Operation/set')}">设置</a>
-			<a class="" href="{:url('Goods/manage')}">商品</a>
-			<a href="{:url('Goods/setSort')}">排序</a>
-			<a href="{:url('Goods/setInventory')}">入仓</a>
-			<a class="column_type current">上架</a>
-			<a>卡券</a>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				{include file="public/store_operation_head" /}
+				<div class="bottomLine">
+					<nav class="columns_flex channel_nav manufacturer_nav">
+						<a href="{:url('Operation/index')}">
+							店铺提醒
+						</a>
+						<a href="javascript:void(0);" class="current">
+							店铺管理
+						</a>
+						<a href="{:url('Promotion/manage')}">
+							营销推广
+						</a>
+						<a href="javascript:void(0);">
+							官方活动
+						</a>
+					</nav>
+				</div>
+				<div class="specific_type store-manage-type bottomLine">
+					<div class="columns_flex f20">
+						<a href="{:url('Operation/set')}">设置</a>
+						<a class="" href="{:url('Goods/manage')}">商品</a>
+						<a href="{:url('Goods/setSort')}">排序</a>
+						<a href="{:url('Goods/setInventory')}">入仓</a>
+						<a class="column_type current">上架</a>
+						<a>卡券</a>
+					</div>
+				</div>
+				<div class="">
+					<div class="content-wrapper">
+						<ul class="columns_flex flex-both-side" id="list">
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
-	<section class="">
-		<div class="content-wrapper">
-			<ul class="columns_flex flex-both-side" id="list">
-			</ul>
-		</div>
-	</section>
-
 </article>
 <!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
 {/block}
