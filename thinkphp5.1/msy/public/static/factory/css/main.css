@@ -597,6 +597,7 @@
     padding:10px 0 0;
 }
 .accountInfo{
+    width:70%;
     flex:5;
 }
 .account-header .r-t,
