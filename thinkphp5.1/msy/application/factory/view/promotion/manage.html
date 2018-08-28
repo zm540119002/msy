@@ -68,7 +68,7 @@
 						<input type="hidden" value="1" class="isClick">
 						<div class="promotion-item" >
 							<p class="content-label">促销活动的修改、删除和排序</p>
-							<div class="classify-label-content " id="list">
+							<div class="scroller-container " id="list">
 
 							</div>
 						</div>
@@ -155,9 +155,9 @@
 		}
 	}
 	//下拉加载
-	$('.classify-label-content').on('scroll',function(){
+	$('.scroller-container').on('scroll',function(){
 		var listHeight=document.getElementById('list').scrollHeight;
-		if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+		if(config.loadTrigger && $('.scroller-container ').scrollTop()+$('.scroller-container ').height()>=listHeight){
 			config.loadTrigger = false;
 			config.activityStatus = $('.category-tab li.current a').data('activity-status');
 			getPagingList(config,postData);

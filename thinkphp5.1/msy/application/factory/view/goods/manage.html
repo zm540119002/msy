@@ -133,8 +133,8 @@
 					</div>
 				</div>
 				<div>
-					<div class="content-wrapper classify-label-content">
-						<ul class="columns_flex flex-both-side" id="list">
+					<div class="content-wrapper">
+						<ul class="columns_flex flex-both-side scroller-container" id="list">
 						</ul>
 					</div>
 				</div>
@@ -258,9 +258,9 @@
 	// 		getPagingList(config,postData);
 	// 	}
 	// });
-	$('.classify-label-content').on('scroll',function(){
+	$('.scroller-container').on('scroll',function(){
 		var listHeight=document.getElementById('list').scrollHeight;
-		if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+		if(config.loadTrigger && $('.scroller-container ').scrollTop()+$('.scroller-container ').height()>=listHeight){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}

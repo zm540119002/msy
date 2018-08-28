@@ -138,14 +138,14 @@
 .set-tag-tipc{
     padding:0 0 0 0.15rem;
 }
-.classify-label-content .tag-item:first-child{
+.scroller-container .tag-item:first-child{
     border-top:1px solid #d9d9d9;
 }
-.classify-label-content .tag-item{
+.scroller-container .tag-item{
     padding:0.12rem 0.10rem;
     border-bottom:1px solid #d9d9d9;
 }
-.classify-label-content .columns_flex{
+.scroller-container .columns_flex{
     justify-content: space-between;
 }
 .tag-item .td{
@@ -894,7 +894,7 @@ transparent;
     background: #C7AA53;
 }
 /*促销活动*/
-.promotion-item .classify-label-content {
+.promotion-item .scroller-container {
     height:328px;
     overflow-y:scroll;
 }

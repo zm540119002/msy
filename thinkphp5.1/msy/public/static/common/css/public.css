@@ -2210,7 +2210,7 @@ table {
      width:36%;
      position: relative;
 }
-.classify-label-content{
+.scroller-container{
     /*padding:0 0 1.5rem 0;*/
 }
 .uploader1 input[type=file] {

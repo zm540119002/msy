@@ -36,7 +36,7 @@
 				</div>
 				<div class="">
 					<div class="content-wrapper">
-						<ul class="columns_flex flex-both-side classify-label-content" id="list">
+						<ul class="columns_flex flex-both-side scroller-container" id="list">
 						</ul>
 					</div>
 				</div>
@@ -116,9 +116,9 @@
 	// 	}
 	// });
 
-	$('.classify-label-content').on('scroll',function(){
+	$('.scroller-container').on('scroll',function(){
 		var listHeight=document.getElementById('list').scrollHeight;
-		if(config.loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+		if(config.loadTrigger && $('.scroller-container ').scrollTop()+$('.scroller-container ').height()>=listHeight){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}

@@ -139,14 +139,14 @@
 .set-tag-tipc{
     padding:0 0 0 0.15rem;
 }
-.classify-label-content .tag-item:first-child{
+.scroller-container .tag-item:first-child{
     border-top:1px solid #d9d9d9;
 }
-.classify-label-content .tag-item{
+.scroller-container .tag-item{
     padding:0.12rem 0.10rem;
     border-bottom:1px solid #d9d9d9;
 }
-.classify-label-content .columns_flex{
+.scroller-container .columns_flex{
     justify-content: space-between;
 }
 .tag-item .td{
@@ -211,15 +211,15 @@
     background-position:0 -106px;
 }
 .classify-operate-btn a.move-disabled-icons,
-.classify-label-content li:first-child .move-icons{
+.scroller-container li:first-child .move-icons{
     background-position:0 -142px;
 }
 .classify-operate-btn a.down-disabled-icons,
-.classify-label-content li:last-child .down-disabled-icons{
+.scroller-container li:last-child .down-disabled-icons{
     background-position:0 -178px;
 }
-.classify-label-content li:first-child .up-btn.disabled,
-.classify-label-content li:last-child .down-btn.disabled{
+.scroller-container li:first-child .up-btn.disabled,
+.scroller-container li:last-child .down-btn.disabled{
     pointer-events:none;
 }
 .content-marginLeft{
@@ -995,23 +995,23 @@ input.special{
     background: #C7AA53;
 }
 /*促销活动*/
-.classify-label-content{
+.scroller-container{
     height:400px;
     overflow-x:hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
     /*border-bottom:1px solid #d9d9d9;*/
 }
-.promotion-item .classify-label-content {
+.promotion-item .scroller-container {
     height:328px;
    
 }
-.classify-label-content a.goods{
+.scroller-container a.goods{
     display: block;
     height:125px;
     overflow:hidden;
 }
-.classify-label-content a.goods img{
+.scroller-container a.goods img{
     margin:0 auto;
     max-width:50%;
 }

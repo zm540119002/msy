@@ -36,7 +36,7 @@
 			<span>数字排序法</span>
 			<span>位移排序法</span>
 		</p>
-		<div class="classify-label-content">
+		<div class="scroller-container">
 			<ul class="" id="list">
 			</ul>
 		</div>
@@ -71,7 +71,7 @@
 			var postData ={};
 			var dataArray=[];
 			var dataOjb={};
-			$.each($('.classify-label-content li'),function(i,val){
+			$.each($('.scroller-container li'),function(i,val){
 				var _this = $(this);
 				var id = _this.data('id');
 				var sort = _this.find('.sort').val();
