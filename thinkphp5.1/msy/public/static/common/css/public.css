@@ -20,7 +20,6 @@ button,input,textarea{
 textarea{-webkit-appearance: none;resize:none;}
 html,body{
     height:100%;
-    overflow-y:scroll;
 }
 body{
     width: 6.4rem;
