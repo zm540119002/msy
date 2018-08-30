@@ -43,6 +43,7 @@
             success:function(){
                 var winH=$(window).height();
                 var storeId=$('.storeId').val();
+                $('html,body').css('height','auto');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
                 $('.vendorInfoLayer li').on('click',function(){
                     var _this=$(this);
@@ -90,6 +91,7 @@
                         dialog.error('AJAX错误'+xhr);
                     }
                 });
+                $('html,body').css({height:100+'%'});
                 layer.close(index);
             }
         })
