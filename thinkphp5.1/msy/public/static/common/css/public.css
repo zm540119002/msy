@@ -21,7 +21,14 @@ textarea{-webkit-appearance: none;resize:none;}
 html,body{
     height:100%;
 }
-body{width: 6.4rem;margin: 0 auto;font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; color: #333;background: #fff;}
+body{
+    width: 6.4rem;
+    margin: 0 auto;
+    font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; 
+    color: #333;
+    background: #fff;
+    overflow-x:hidden;
+}
 .clearfix:after{content:"."; display:block; height:0; clear:both;visibility:hidden;}
 .f06c{color:#06c;}
 .fl{float:left;}
