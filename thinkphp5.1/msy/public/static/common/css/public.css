@@ -2814,9 +2814,9 @@ input[type=text]::-webkit-focus-inner {
     box-shadow: 0 2px 4px -1px rgba(0,0,0,.2);
     background: #fff;
 }
-.bodys .content-wrapper #bodys{
+.bodys .content-wrapper #scroller-wrapper{
     height:500px;
-    /*overflow-x: hidden;
+    overflow-x: hidden;
     overflow-y:auto;
-    -webkit-overflow-scrolling: touch;*/
+    -webkit-overflow-scrolling: touch;
 }
