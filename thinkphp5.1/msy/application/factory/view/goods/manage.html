@@ -265,10 +265,10 @@
 	// 		getPagingList(config,postData);
 	// 	}
 	// });
-	$('#scroller-wrapper').on('scroll',function(){
+	$('#bodys').on('scroll',function(){
 		console.log(1);
-		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
-		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+		var listHeight=document.getElementById('bodys').scrollHeight;
+		if(config.loadTrigger && $('#bodys').scrollTop()+$('#bodys').height()>=listHeight){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}
