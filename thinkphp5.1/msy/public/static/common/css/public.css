@@ -705,7 +705,7 @@ color: #ed6d00;
     box-sizing: border-box;
     text-align:center;
     /*margin:0 0 10px 0;*/
-    padding:4px 0 0;
+    padding:2px 0 0;
     font-size:.22rem;
 }
 .specific_type a:last-child{
