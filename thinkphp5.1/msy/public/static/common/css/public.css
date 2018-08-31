@@ -137,13 +137,14 @@ body{
     background-size: 35px;
 }
 .loading{
-    display:none;
+    /*display:none;*/
     width:100px;
     height:32px;
-    position:fixed;
+    /*position:fixed;
     left:50%;
     bottom:12%;
-    margin:0 0 0 -50px;
+    margin:0 0 0 -50px;*/
+    margin:0 auto;
     z-index:16;
     color:#0066cc;
 }
