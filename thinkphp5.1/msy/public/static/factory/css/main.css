@@ -999,6 +999,9 @@ input.special{
     background: #C7AA53;
 }
 /*促销活动*/
+.addSalesPromotionForm{
+    padding-bottom:1rem;
+}
 .scroller-container{
     /*height:400px;
     overflow-x:hidden;
