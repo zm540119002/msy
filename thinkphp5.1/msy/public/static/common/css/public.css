@@ -1592,14 +1592,14 @@ background-position: 0 -27px;
     font-size:22px;
 }
 
-.setRoleLayer ul{
+.setRoleLayer .role-l-com{
     position:absolute;
     top:0;
     left:0;
     right:0;
     width:90%;
     height:450px;
-    padding:10px 15px 10px;
+    padding:5px 15px 10px;
     overflow-x:hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
