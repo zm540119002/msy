@@ -2804,7 +2804,7 @@ input[type=text]::-webkit-focus-inner {
     /*top: -1px;*/
     left: 0;
     right: 0;
-    z-index: 99;
+    z-index: 99999;
     box-shadow: 0 2px 4px -1px rgba(0,0,0,.2);
     background: #fff;
 }
