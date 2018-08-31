@@ -163,7 +163,7 @@ $(function(){
             // $(obj).addClass('active');
             var video=  $('<video src="" class="upload_img" autoplay="autoplay"></video>');
             video.attr("src", videoUrl);
-            var videoAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></li>');
+            var videoAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div></li>');
             videoAdd.find('.picture-module').append(video);
             imgContainer.append(videoAdd);
            
@@ -408,13 +408,13 @@ function uploadsImgDescribe(content,obj){
             $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
             var html='';
                 html+='<li>';
+                html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
+                html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                 html+='<div class="picture-module active">';
                 html+='<input type="file" class="uploadImg uploadSingleEditImg" name="">';
                 html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
                 html+='<img src="" class="upload_img">';
                 html+='</div>';
-                html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
-                html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                 html+='</li>';                  
             var multiImgAttr=obj.data('src');
             for(var i=0;i<multiImgAttr.length;i++){

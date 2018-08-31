@@ -1629,3 +1629,6 @@ input.special{
     background: #ff7bac;
     color:#fff;
 }
+.editCompanyPicLayer .edit-text{
+    margin-bottom:0.10rem;
+}
