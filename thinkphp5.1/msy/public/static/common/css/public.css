@@ -1593,7 +1593,12 @@ background-position: 0 -27px;
 }
 
 .setRoleLayer ul{
-    height:500px;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    width:100%;
+    height:400px;
     padding:20px 15px 10px;
     overflow-x:hidden;
     overflow-y:auto;
