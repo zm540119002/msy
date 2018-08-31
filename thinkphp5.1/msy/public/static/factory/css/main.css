@@ -1000,10 +1000,10 @@ input.special{
 }
 /*促销活动*/
 .scroller-container{
-    height:400px;
+    /*height:400px;
     overflow-x:hidden;
     overflow-y:auto;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;*/
     /*border-bottom:1px solid #d9d9d9;*/
 }
 .promotion-item .scroller-container {
