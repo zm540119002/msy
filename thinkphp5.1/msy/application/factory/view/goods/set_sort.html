@@ -7,40 +7,50 @@
 	<section class="app-shell">
 		<div class="app-view-wrapper">
 			<div class="app-view">
-				{include file="public/store_operation_head" /}
-				<div class="bottomLine">
-					<nav class="columns_flex channel_nav manufacturer_nav">
-						<a href="{:url('Operation/index')}">
-							店铺提醒
-						</a>
-						<a href="javascript:void(0);" class="current">
-							店铺管理
-						</a>
-						<a href="{:url('Promotion/manage')}">
-							营销推广
-						</a>
-						<a href="javascript:void(0);">
-							官方活动
-						</a>
-					</nav>
-				</div>
-				<div class="specific_type store-manage-type bottomLine">
-					<div class="columns_flex f20">
-						<a href="{:url('Operation/set')}">设置</a>
-						<a class="" href="{:url('Goods/manage')}">商品</a>
-						<a class="column_type current">排序</a>
-						<a href="{:url('Goods/setInventory')}">入仓</a>
-						<a href="{:url('Goods/setShelf')}">上架</a>
-						<a>卡券</a>
+				<div class="bodys-header">
+					{include file="public/store_operation_head" /}
+					<div class="bottomLine">
+						<nav class="columns_flex channel_nav manufacturer_nav">
+							<a href="{:url('Operation/index')}">
+								店铺提醒
+							</a>
+							<a href="javascript:void(0);" class="current">
+								店铺管理
+							</a>
+							<a href="{:url('Promotion/manage')}">
+								营销推广
+							</a>
+							<a href="javascript:void(0);">
+								官方活动
+							</a>
+						</nav>
+					</div>
+					<div class="specific_type store-manage-type ">
+						<div class="columns_flex f20">
+							<a href="{:url('Operation/set')}">设置</a>
+							<a class="" href="{:url('Goods/manage')}">商品</a>
+							<a class="column_type current">排序</a>
+							<a href="{:url('Goods/setInventory')}">入仓</a>
+							<a href="{:url('Goods/setShelf')}">上架</a>
+							<a>卡券</a>
+						</div>
 					</div>
 				</div>
-				<div class="content-marginLeft">
-					<p class="columns_flex l-r-sides sort-title">
-						<span>数字排序法(数字大排前)</span>
-						<span class="s-r">位移排序法</span>
-					</p>
-					<div class="scroller-container">
-						<ul class="" id="list"></ul>
+				<div class="page-wrap">
+					<div class="bodys" id="bodys">
+						<div class="content-wrapper">
+							<div class="scroller-wrapper" id="scroller-wrapper">
+								<div class="content-marginLeft">
+									<p class="columns_flex l-r-sides sort-title">
+										<span>数字排序法(数字大排前)</span>
+										<span class="s-r">位移排序法</span>
+									</p>
+									<div class="scroller-container">
+										<ul class="" id="list"></ul>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -141,9 +151,9 @@
 		})
 	});
 	//下拉加载
-	$('.scroller-container').on('scroll',function(){
-		var listHeight=$('.scroller-container').get(0).scrollHeight;
-		if(config.loadTrigger &&  $('.scroller-container').scrollTop()+ $('.scroller-container').height()>=listHeight){
+	$('#scroller-wrapper').on('scroll',function(){
+		var listHeight=$('#scroller-wrapper').get(0).scrollHeight;
+		if(config.loadTrigger &&  $('#scroller-wrapper').scrollTop()+ $('#scroller-wrapper').height()>=listHeight){
 			config.loadTrigger = false;
 			config.disableBtn();
 			getPagingList(config,postData);

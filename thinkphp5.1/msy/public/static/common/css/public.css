@@ -2773,7 +2773,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .bodys{
     position: absolute;
-    top: 302px;
+    top: 212px;
     left: 0;
     right: 0;
     background: #fff;
@@ -2787,7 +2787,7 @@ input[type=text]::-webkit-focus-inner {
     box-shadow: 0 2px 4px -1px rgba(0,0,0,.2);
     background: #fff;
 }
-.bodys .content-wrapper #list{
+.bodys .content-wrapper #scroller-wrapper{
     height:500px;
     overflow-y:auto;
 }
