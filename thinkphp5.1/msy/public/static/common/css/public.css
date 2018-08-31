@@ -2773,8 +2773,17 @@ input[type=text]::-webkit-focus-inner {
 }
 .bodys{
     position: absolute;
-    /*top: 82px;*/
+    top: 302px;
     left: 0;
     right: 0;
     background: #fff;
+}
+.bodys-header{
+    position: fixed;
+    top: -1px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2);
+    /*background: #f2f2f2;*/
 }

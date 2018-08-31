@@ -88,59 +88,59 @@
 	<section class="app-shell">
 		<div class="app-view-wrapper">
 			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/store_operation_head" /}
+					<div class="separation-line">
+						<nav class="columns_flex channel_nav manufacturer_nav">
+							<a href="{:url('Operation/index')}">
+								店铺提醒
+							</a>
+							<a href="javascript:void(0);" class="current">
+								店铺管理
+							</a>
+							<a href="{:url('Promotion/manage')}">
+								营销推广
+							</a>
+							<a href="javascript:void(0);">
+								官方活动
+							</a>
+						</nav>
+					</div>
+					<div class="specific_type store-manage-type bottomLine">
+						<div class="columns_flex f20">
+							<a href="{:url('Operation/set')}">设置</a>
+							<a class="column_type current">商品</a>
+							<a href="{:url('Goods/setSort')}">排序</a>
+							<a href="{:url('Goods/setInventory')}">入仓</a>
+							<a href="{:url('Goods/setShelf')}">上架</a>
+							<a>卡券</a>
+						</div>
+					</div>
+					<div class="separation-line">
+						<div class="columns_flex backups-content ">
+							<div>
+								<span class="func-icons"></span>
+								<span>功能推荐</span>
+							</div>
+							<div class="backups-right">
+								<a href="javascript:void(0);" class="gr backup">备份本店铺商品数据</a>
+								{notempty name="selfStore"}
+								<p>上次备份日期:<span class="backup-time">{$selfStore.backup_time}</span></p>
+								{else /}
+								<p>上次备份日期:<span class="backup-time">从未备份</span></p>
+								{/notempty}
+								<a href="javascript:void(0);" class="gr copy-store">复制商品数据到本店铺</a>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="page-wrap">
-                    <div class="bodys" id="bodys">
-						{include file="public/store_operation_head" /}
-						<div class="separation-line">
-							<nav class="columns_flex channel_nav manufacturer_nav">
-								<a href="{:url('Operation/index')}">
-									店铺提醒
-								</a>
-								<a href="javascript:void(0);" class="current">
-									店铺管理
-								</a>
-								<a href="{:url('Promotion/manage')}">
-									营销推广
-								</a>
-								<a href="javascript:void(0);">
-									官方活动
-								</a>
-							</nav>
+					<div class="bodys" id="bodys">
+						<div class="content-wrapper">
+							<ul class="columns_flex flex-both-side " id="list">
+							</ul>
 						</div>
-						<div class="specific_type store-manage-type bottomLine">
-							<div class="columns_flex f20">
-								<a href="{:url('Operation/set')}">设置</a>
-								<a class="column_type current">商品</a>
-								<a href="{:url('Goods/setSort')}">排序</a>
-								<a href="{:url('Goods/setInventory')}">入仓</a>
-								<a href="{:url('Goods/setShelf')}">上架</a>
-								<a>卡券</a>
-							</div>
-						</div>
-						<div class="separation-line">
-							<div class="columns_flex backups-content ">
-								<div>
-									<span class="func-icons"></span>
-									<span>功能推荐</span>
-								</div>
-								<div class="backups-right">
-									<a href="javascript:void(0);" class="gr backup">备份本店铺商品数据</a>
-									{notempty name="selfStore"}
-									<p>上次备份日期:<span class="backup-time">{$selfStore.backup_time}</span></p>
-									{else /}
-									<p>上次备份日期:<span class="backup-time">从未备份</span></p>
-									{/notempty}
-									<a href="javascript:void(0);" class="gr copy-store">复制商品数据到本店铺</a>
-								</div>
-							</div>
-						</div>
-						<div>
-							<div class="content-wrapper">
-								<ul class="columns_flex flex-both-side " id="list">
-								</ul>
-							</div>
-						</div>
-                    </div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -263,6 +263,7 @@
 	// 	}
 	// });
 	$('.bodys').on('scroll',function(){
+		console.log(1);
 		var listHeight=document.getElementById('bodys').scrollHeight;
 		if(config.loadTrigger && $('.bodys').scrollTop()+$('.bodys').height()>=listHeight){
 			config.loadTrigger = false;
