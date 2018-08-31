@@ -1598,8 +1598,8 @@ background-position: 0 -27px;
     left:0;
     right:0;
     width:90%;
-    height:480px;
-    padding:20px 15px 10px;
+    height:450px;
+    padding:10px 15px 10px;
     overflow-x:hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
@@ -1616,7 +1616,7 @@ background-position: 0 -27px;
     -webkit-overflow-scrolling: touch;
 }
 .setRoleLayer .layui-m-layercont{
-    /*overflow-y:auto;   */
+    overflow-y:auto;   
 }
 .setRoleLayer li{
     margin-bottom:15px;
