@@ -1593,7 +1593,10 @@ background-position: 0 -27px;
 }
 
 .setRoleLayer ul{
+    height:500px;
     padding:20px 15px 10px;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 .setRoleLayer .layui-m-layercont{
     overflow-y:auto;   
