@@ -44,9 +44,8 @@
 									<span>数字排序法(数字大排前)</span>
 									<span class="s-r">位移排序法</span>
 								</p>
-								<div class="scroller-container">
-									<ul class="" id="list"></ul>
-								</div>
+								<ul class="" id="list"></ul>
+								{include file="template/loading.html" /}
 							</div>
 						</div>
 					</div>
@@ -58,9 +57,9 @@
 </article>
 
 {/block}
-{block name="common"}
-{include file="template/loading.html" /}
-{/block}
+<!--{block name="common"}
+
+{/block}-->
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/paging.js"></script>
