@@ -1002,6 +1002,9 @@ input.special{
 .addSalesPromotionForm{
     padding-bottom:.5rem;
 }
+.sales-marginLeft{
+    margin:0 0 0 .15rem;
+}
 .scroller-container{
     /*height:400px;
     overflow-x:hidden;
