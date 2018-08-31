@@ -123,7 +123,7 @@
 	// });
 
 	$('#scroller-wrapper').on('scroll',function(){
-		var listHeight=document.getElementById('#scroller-wrapper').scrollHeight;
+		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
 		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
