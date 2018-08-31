@@ -39,8 +39,10 @@
 				<div class="page-wrap">
 					<div class="bodys" id="bodys">
 						<div class="content-wrapper">
-							<ul class="columns_flex flex-both-side scroller-container" id="list">
-							</ul>
+							<div class="scroller-wrapper" id="scroller-wrapper">
+								<ul class="columns_flex flex-both-side scroller-container" id="list">
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -120,9 +122,9 @@
 	// 	}
 	// });
 
-	$('.scroller-container').on('scroll',function(){
-		var listHeight=document.getElementById('list').scrollHeight;
-		if(config.loadTrigger && $('.scroller-container ').scrollTop()+$('.scroller-container ').height()>=listHeight){
+	$('#scroller-wrapper').on('scroll',function(){
+		var listHeight=document.getElementById('#scroller-wrapper').scrollHeight;
+		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}
