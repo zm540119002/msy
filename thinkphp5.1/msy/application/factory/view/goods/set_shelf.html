@@ -42,6 +42,7 @@
 							<div class="scroller-wrapper" id="scroller-wrapper">
 								<ul class="columns_flex flex-both-side scroller-container" id="list">
 								</ul>
+								{include file="template/loading.html" /}
 							</div>
 						</div>
 					</div>
@@ -52,9 +53,9 @@
 </article>
 <!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
 {/block}
-{block name="common"}
-{include file="template/loading.html" /}
-{/block}
+<!--{block name="common"}
+
+{/block}-->
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/paging.js"></script>
@@ -123,6 +124,7 @@
 	// });
 
 	$('#scroller-wrapper').on('scroll',function(){
+		console.log(1);
 		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
 		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
 			config.loadTrigger = false;

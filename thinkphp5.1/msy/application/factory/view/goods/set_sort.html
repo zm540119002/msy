@@ -152,6 +152,7 @@
 	});
 	//下拉加载
 	$('#scroller-wrapper').on('scroll',function(){
+		console.log(1);
 		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
 		if(config.loadTrigger &&  $('#scroller-wrapper').scrollTop()+ $('#scroller-wrapper').height()>=listHeight){
 			config.loadTrigger = false;
