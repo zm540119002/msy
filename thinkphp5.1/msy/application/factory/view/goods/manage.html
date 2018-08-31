@@ -116,7 +116,7 @@
 							<a>卡券</a>
 						</div>
 					</div>
-					<div class="separation-line">
+					<div class="">
 						<div class="columns_flex backups-content ">
 							<div>
 								<span class="func-icons"></span>
@@ -262,10 +262,10 @@
 	// 		getPagingList(config,postData);
 	// 	}
 	// });
-	$('.bodys').on('scroll',function(){
+	$('#list').on('scroll',function(){
 		console.log(1);
-		var listHeight=document.getElementById('bodys').scrollHeight;
-		if(config.loadTrigger && $('.bodys').scrollTop()+$('.bodys').height()>=listHeight){
+		var listHeight=document.getElementById('list').scrollHeight;
+		if(config.loadTrigger && $('#list').scrollTop()+$('#list').height()>=listHeight){
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}

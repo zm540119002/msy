@@ -2787,3 +2787,7 @@ input[type=text]::-webkit-focus-inner {
     box-shadow: 0 2px 4px -1px rgba(0,0,0,.2);
     background: #fff;
 }
+.bodys .content-wrapper #list{
+    height:400px;
+    overflow-y:auto;
+}
