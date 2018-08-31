@@ -1632,3 +1632,6 @@ input.special{
 .editCompanyPicLayer .edit-text{
     margin-bottom:0.10rem;
 }
+.scroller-wrapper .content-marginLeft{
+    padding-left:0;
+}
