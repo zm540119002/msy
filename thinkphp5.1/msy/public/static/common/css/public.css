@@ -1602,9 +1602,21 @@ background-position: 0 -27px;
     padding:20px 15px 10px;
     overflow-x:hidden;
     overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
+}
+.setOrganizeLayer .organize{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    width:90%;
+    height:400px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
 }
 .setRoleLayer .layui-m-layercont{
-    overflow-y:auto;   
+    /*overflow-y:auto;   */
 }
 .setRoleLayer li{
     margin-bottom:15px;
