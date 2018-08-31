@@ -1214,6 +1214,7 @@ input.special{
 }
 .backups-content{
     padding:.20rem .15rem;
+    margin:.05rem 0 0;
 }
 .func-icons{
     display: block;
