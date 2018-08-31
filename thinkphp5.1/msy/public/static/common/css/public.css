@@ -2800,6 +2800,10 @@ input[type=text]::-webkit-focus-inner {
     left: 0;
     right: 0;
     background: #fff;
+    -webkit-transition: -webkit-transform .4s cubic-bezier(.55,0,.1,1);
+    transition: -webkit-transform .4s cubic-bezier(.55,0,.1,1);
+    transition: transform .4s cubic-bezier(.55,0,.1,1);
+    transition: transform .4s cubic-bezier(.55,0,.1,1),-webkit-transform .4s cubic-bezier(.55,0,.1,1);
 }
 .bodys-header{
     position: fixed;
