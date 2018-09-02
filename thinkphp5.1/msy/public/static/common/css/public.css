@@ -2796,6 +2796,7 @@ input[type=text]::-webkit-focus-inner {
     height: 100%;
     background: #fff;
     -webkit-overflow-scrolling: touch;
+    overflow:hidden;
 }
 .page-wrap{
     position: relative;
