@@ -2783,14 +2783,14 @@ input[type=text]::-webkit-focus-inner {
     height: 100%;
     background:#fff;
     overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    /*overflow-y: auto;
+    -webkit-overflow-scrolling: touch;*/
 }
 .page-wrap{
     position: relative;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    /*overflow-x: hidden;
+    overflow-y: auto;*/
     -webkit-overflow-scrolling: touch;
     background:transparent;
 }
@@ -2815,7 +2815,7 @@ input[type=text]::-webkit-focus-inner {
     background: #fff;
 }
 .bodys .content-wrapper #scroller-wrapper{
-    height:500px;
+    height:400px;
     overflow-x: hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
