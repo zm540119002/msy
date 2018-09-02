@@ -212,15 +212,15 @@
     background-position:0 -106px;
 }
 .classify-operate-btn a.move-disabled-icons,
-.scroller-container li:first-child .move-icons{
+.scroller-wrapper li:first-child .move-icons{
     background-position:0 -142px;
 }
 .classify-operate-btn a.down-disabled-icons,
-.scroller-container li:last-child .down-disabled-icons{
+.scroller-wrapper li:last-child .down-disabled-icons{
     background-position:0 -178px;
 }
-.scroller-container li:first-child .up-btn.disabled,
-.scroller-container li:last-child .down-btn.disabled{
+.scroller-wrapper li:first-child .up-btn.disabled,
+.scroller-wrapper li:last-child .down-btn.disabled{
     pointer-events:none;
 }
 .content-marginLeft{
