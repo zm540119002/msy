@@ -8,9 +8,19 @@
  */
 
 namespace app\factory\controller;
+use app\factory\model\Finance as FinanceModel;
 
 class Finance extends StoreBase
 {
+    private $finance;
+
+    public function __construct()
+    {
+        parent::__construct();
+        if( !is_object($this->finance) ){
+            $this->finance = new FinanceModel();
+        }
+    }
 
     public function index()
     {
@@ -21,5 +31,15 @@ class Finance extends StoreBase
     public function getApp()
     {
         return $this->fetch();
+    }
+
+    public function cre()
+    {
+        return $this->finance->createFinanceId();
+    }
+
+    public function pay()
+    {
+        return $this->q();
     }
 }
