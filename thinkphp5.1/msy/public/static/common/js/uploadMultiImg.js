@@ -123,7 +123,7 @@ $(function(){
             var oLiLen=imgContainer.find('li').length;
             var img=  $('<img src="" class="upload_img">');
             img.attr("src", imgUrl);
-            var imgAdd = $('<li><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></li>');
+            var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
             imgAdd.find('.picture-module').append(img);
             imgContainer.append(imgAdd);
            
