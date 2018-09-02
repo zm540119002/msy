@@ -64,7 +64,7 @@ class WeiXinController extends CommonController {
     //响应
     public function responseMsg()
     {
-        $postStr = file_get_contents('php://input');
+        $postStr = file_get_contents('php://input'); //return  fasle;
         if (!empty($postStr)){
             $this->logger("R ".$postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
