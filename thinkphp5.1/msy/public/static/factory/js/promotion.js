@@ -34,9 +34,9 @@ $(function(){
                 if(goods!=''){
                     selectedGoodsList(goods);
                 }
-                 $('.addsalesgoodsLayer .classify-label-content').on('scroll',function(){
+                 $('.addsalesgoodsLayer .scroller-container').on('scroll',function(){
                     var listHeight=$('.addsalesgoodsLayer #list').get(0).scrollHeight;
-                    if(config.loadTrigger && $('.addsalesgoodsLayer .classify-label-content').scrollTop()+$('.classify-label-content ').height()>=listHeight){
+                    if(config.loadTrigger && $('.addsalesgoodsLayer .scroller-container').scrollTop()+$('.scroller-container ').height()>=listHeight){
                         getPagingList(config,postData);
                     }
                 });

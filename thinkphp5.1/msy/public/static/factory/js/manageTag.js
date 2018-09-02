@@ -2,20 +2,20 @@ $(function(){
     var addTagForm=$('#addTagForm').html();
     var layerTagNum;
     var layerTagName;
-    var tagListLen=$('.classify-label-content .tag-item').length;
+    var tagListLen=$('.scroller-container .tag-item').length;
         if(!tagListLen){
-            $('.classify-label-content .set-tag-tipc').hide();
-            $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
-            $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
+            $('.scroller-container .set-tag-tipc').hide();
+            $('.scroller-container div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+            $('.scroller-container div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
         }else{
             if(tagListLen>=1){
-                $('.classify-label-content div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
-                $('.classify-label-content div').siblings().find('a:eq(3)').addClass('down-icons');
-                $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
-                $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-icons');
+                $('.scroller-container div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.scroller-container div').siblings().find('a:eq(3)').addClass('down-icons');
+                $('.scroller-container div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+                $('.scroller-container div').eq(0).find('a:eq(3)').addClass('down-icons');
 
-                $('.classify-label-content div').eq(tagListLen-1).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
-                $('.classify-label-content div').eq(tagListLen-1).find('a:eq(3)').addClass('down-disabled-icons');
+                $('.scroller-container div').eq(tagListLen-1).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                $('.scroller-container div').eq(tagListLen-1).find('a:eq(3)').addClass('down-disabled-icons');
             }
         }
     //新增分类标签
@@ -49,22 +49,22 @@ $(function(){
                         html+='<input type="hidden" value="" class="sort'+layerTagNum+'" data-tag-id=""/>';
                         html+='<input type="hidden" value="" class="series_id" data-series-id="">';
                         html+='</div>';
-                        var tagListLen=$('.classify-label-content .tag-item').length;
+                        var tagListLen=$('.scroller-container .tag-item').length;
                         if(!tagListLen){
-                            $('.classify-label-content .set-tag-tipc').hide();
-                            $('.classify-label-content').append(html);
-                            $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
-                            $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
+                            $('.scroller-container .set-tag-tipc').hide();
+                            $('.scroller-container').append(html);
+                            $('.scroller-container div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+                            $('.scroller-container div').eq(0).find('a:eq(3)').addClass('down-disabled-icons');
                         }else{
-                            $('.classify-label-content .tag-item:first').before(html);
+                            $('.scroller-container .tag-item:first').before(html);
                             if(tagListLen>=1){
-                                $('.classify-label-content div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
-                                $('.classify-label-content div').siblings().find('a:eq(3)').addClass('down-icons');
-                                $('.classify-label-content div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
-                                $('.classify-label-content div').eq(0).find('a:eq(3)').addClass('down-icons');
+                                $('.scroller-container div').siblings().find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                                $('.scroller-container div').siblings().find('a:eq(3)').addClass('down-icons');
+                                $('.scroller-container div').eq(0).find('a:eq(2)').addClass('move-disabled-icons');
+                                $('.scroller-container div').eq(0).find('a:eq(3)').addClass('down-icons');
 
-                                $('.classify-label-content div').eq(tagListLen).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
-                                $('.classify-label-content div').eq(tagListLen).find('a:eq(3)').addClass('down-disabled-icons');
+                                $('.scroller-container div').eq(tagListLen).find('a:eq(2)').removeClass('move-disabled-icons').addClass('move-icons');
+                                $('.scroller-container div').eq(tagListLen).find('a:eq(3)').addClass('down-disabled-icons');
                             }
                         }
                     }
@@ -154,7 +154,7 @@ var manageClassifyTag={
         });
     },
     deleteTag:function(delObj){
-        var tagListLen=$('.classify-label-content .tag-item').length;
+        var tagListLen=$('.scroller-container .tag-item').length;
         if(tagListLen>=1){
             delObj.parents('.tag-item').siblings().find('a:eq(2)').addClass('move-icons');
             delObj.parents('.tag-item').siblings().find('a:eq(3)').removeClass('down-disabled-icons').addClass('down-icons');
@@ -169,7 +169,7 @@ var manageClassifyTag={
             }
         }
         if(tagListLen==1){
-            $('.classify-label-content .set-tag-tipc').show();
+            $('.scroller-container .set-tag-tipc').show();
         }
         var series_id = delObj.siblings('.series_id').data('series-id');
         $.post(controller+"delete",{series_id:series_id},function(msg){

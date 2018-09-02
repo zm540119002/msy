@@ -4,9 +4,9 @@
 //上拉加载更多
 var loadTrigger = false;//加载触发器
 function getMore(url,config) {
-    $('.classify-label-content').on('scroll',function(){
-        var listHeight=$('.classify-label-content').get(0).scrollHeight;
-        if(loadTrigger &&  $('.classify-label-content').scrollTop()+ $('.classify-label-content').height()>=listHeight){
+    $('.scroller-container').on('scroll',function(){
+        var listHeight=$('.scroller-container').get(0).scrollHeight;
+        if(loadTrigger &&  $('.scroller-container').scrollTop()+ $('.scroller-container').height()>=listHeight){
             loadTrigger = false;
             getPage(url,config);
         }

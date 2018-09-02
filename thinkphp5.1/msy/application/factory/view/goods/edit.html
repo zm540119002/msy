@@ -50,110 +50,117 @@
 	</div>
 </section>
 
-<article class="f24">
-	<section class="bottomLine">
-        <div class="top_bar top-title">
-			{notempty name="goodsInfo"}
-			<h2>编辑商品</h2>
-			{else /}
-			<h2>增加商品</h2>
-			{/notempty}
-        </div>
-    </section>
-	<section>
-		<form class="addProductContent">
-			<ul>
-				{notempty name="goodsInfo"}
-				<input type="hidden" class="goods-id" value="{$goodsInfo['id']|default=''}"  name="id"/>
-				{/notempty}
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bottomLine">
+					<div class="top_bar top-title">
+						{notempty name="goodsInfo"}
+						<h2>编辑商品</h2>
+						{else /}
+						<h2>增加商品</h2>
+						{/notempty}
+					</div>
+				</div>
+				<div>
+					<form class="addProductContent">
+						<ul>
+							{notempty name="goodsInfo"}
+							<input type="hidden" class="goods-id" value="{$goodsInfo['id']|default=''}"  name="id"/>
+							{/notempty}
 
-				<li>
-					<span class="form-title">商品名称</span>
-					<input type="text" name="name" value="{$goodsInfo['name']|default=''}" placeholder="商品名称,字数限18字" class="goods-name input-text">
-				</li>
-				<li>
-					<span class="form-title">商品特点</span>
-					<textarea rows="" cols="" name="trait" placeholder="商品简要说明,字数限28字" class="goods-character input-text">{$goodsInfo['trait']|default=''}</textarea>
-				</li>
-				<li>
-					<span class="form-title">展示价格</span>
-					<span class="price-flex">
-                        <label for="">优惠价￥</label>
-                        <input type="text" name="sale_price" value="{$goodsInfo['sale_price']|default=''}" placeholder="688.00" class="retail-price">
-				 	</span>
-					<span class="price-flex">
-                        <label for="">零售价￥</label>
-                        <input type="text" name="retail_price" value="{$goodsInfo['retail_price']|default=''}" placeholder="688.00" class="retail-price">
-				 	</span>
-				</li>
+							<li>
+								<span class="form-title">商品名称</span>
+								<input type="text" name="name" value="{$goodsInfo['name']|default=''}" placeholder="商品名称,字数限18字" class="goods-name input-text">
+							</li>
+							<li>
+								<span class="form-title">商品特点</span>
+								<textarea rows="" cols="" name="trait" placeholder="商品简要说明,字数限28字" class="goods-character input-text">{$goodsInfo['trait']|default=''}</textarea>
+							</li>
+							<li>
+								<span class="form-title">展示价格</span>
+								<span class="price-flex">
+									<label for="">优惠价￥</label>
+									<input type="text" name="sale_price" value="{$goodsInfo['sale_price']|default=''}" placeholder="688.00" class="retail-price">
+								</span>
+								<span class="price-flex">
+									<label for="">零售价￥</label>
+									<input type="text" name="retail_price" value="{$goodsInfo['retail_price']|default=''}" placeholder="688.00" class="retail-price">
+								</span>
+							</li>
 
-				<li class="columns_flex">
-					<span class=form-title ><font color="#FF0000">*</font>包装单位：</span>
-					<select name="package_unit" class="selectbox">
-						<option value="1">55</option>
-						<option value="5">66</option>
-						<option value="4">77</option>
-						<option value="6">88</option>
-						<option value="7">99</option>
-					</select>
-					<!--<select name="package_unit" class="selectbox">-->
-						<!--<notempty name="unitList">-->
-							<!--<volist name="unitList" id="vo">-->
+							<li class="columns_flex">
+								<span class=form-title ><font color="#FF0000">*</font>包装单位：</span>
+								<select name="package_unit" class="selectbox">
+									<option value="1">55</option>
+									<option value="5">66</option>
+									<option value="4">77</option>
+									<option value="6">88</option>
+									<option value="7">99</option>
+								</select>
+								<!--<select name="package_unit" class="selectbox">-->
+									<!--<notempty name="unitList">-->
+										<!--<volist name="unitList" id="vo">-->
+											<!--<option value="{$vo.key}">{$vo.value}</option>-->
+										<!--</volist>-->
+									<!--</notempty>-->
+								<!--</select>-->
+							</li>
+
+							<li class="columns_flex">
+								<span class=form-title ><font color="#FF0000">*</font>采购单位：</span>
+								<select name="package_unit" class="selectbox">
+									<option value="1">55</option>
+									<option value="5">66</option>
+									<option value="4">77</option>
+									<option value="6">88</option>
+									<option value="7">99</option>
+								</select>
+								<!--<select name="package_unit" class="selectbox">-->
+								<!--<notempty name="unitList">-->
+								<!--<volist name="unitList" id="vo">-->
 								<!--<option value="{$vo.key}">{$vo.value}</option>-->
-							<!--</volist>-->
-						<!--</notempty>-->
-					<!--</select>-->
-				</li>
+								<!--</volist>-->
+								<!--</notempty>-->
+								<!--</select>-->
+							</li>
 
-				<li class="columns_flex">
-					<span class=form-title ><font color="#FF0000">*</font>采购单位：</span>
-					<select name="package_unit" class="selectbox">
-						<option value="1">55</option>
-						<option value="5">66</option>
-						<option value="4">77</option>
-						<option value="6">88</option>
-						<option value="7">99</option>
-					</select>
-					<!--<select name="package_unit" class="selectbox">-->
-					<!--<notempty name="unitList">-->
-					<!--<volist name="unitList" id="vo">-->
-					<!--<option value="{$vo.key}">{$vo.value}</option>-->
-					<!--</volist>-->
-					<!--</notempty>-->
-					<!--</select>-->
-				</li>
+							<li >
+								<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图(1张)</a>
+								<input type="hidden" class="hidden_img" value="{$goodsInfo['thumb_img']|default=''}" name="thumb_img">
+							</li>
+							<li class="">
+								<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图(最多6张)</a>
+								<input type="hidden" class="main_img" value="" data-src="{$goodsInfo['main_img']|default=''}" data-picture-num="6" name="main_img">
+							</li>
+							<li class="">
+								<a href="javascript:void(0);" class="uploadVideo right-arrow">上传商品视频(可选项)</a>
+								<input type="hidden" class="hidden_video" value="{$goodsInfo['goods_video']|default=''}" data-src="{$goodsInfo['goods_video']|default=''}" name="goods_video">
+							</li>
 
-				<li >
-					<a href="javascript:void(0);" class="upload-thumbnail right-arrow" >上传商品缩略图(1张)</a>
-					<input type="hidden" class="hidden_img" value="{$goodsInfo['thumb_img']|default=''}" name="thumb_img">
-				</li>
-				<li class="">
-					<a href="javascript:void(0);" class="uploadFocusPicture right-arrow">上传商品首焦图(最多6张)</a>
-					<input type="hidden" class="main_img" value="" data-src="{$goodsInfo['main_img']|default=''}" data-picture-num="6" name="main_img">
-				</li>
-				<li class="">
-                    <a href="javascript:void(0);" class="uploadVideo right-arrow">上传商品视频(可选项)</a>
-                    <input type="hidden" class="hidden_video" value="{$goodsInfo['goods_video']|default=''}" data-src="{$goodsInfo['goods_video']|default=''}" name="goods_video">
-                </li>
+							<li class="">
+								<a href="javascript:void(0);" class="set-category right-arrow">设置检索品类</a>
+								<input type="hidden" class="select-category" data-category-id="{$goodsInfo['categoryArray']|default=''}" value="" name="selectCategory">
+							</li>
 
-				<li class="">
-                    <a href="javascript:void(0);" class="set-category right-arrow">设置检索品类</a>
-                    <input type="hidden" class="select-category" data-category-id="{$goodsInfo['categoryArray']|default=''}" value="" name="selectCategory">
-                </li>
-
-				<li class="">
-					<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑商品参数</a>
-					<input type="hidden" class="goods-parameter" value="{$goodsInfo['parameters']|default=''}" name="parameters">
-				</li>
-				<li class="">
-					<a href="javascript:void(0);" class="editDetail right-arrow">编辑商品详情</a>
-					<input type="hidden" class="goods-detail" data-echoed_src="" data-src="{$goodsInfo['details_img']|default=''}" data-picture-num="0" value="" name="goods_detail">
-				</li>
-			</ul>
-		</form>
+							<li class="">
+								<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑商品参数</a>
+								<input type="hidden" class="goods-parameter" value="{$goodsInfo['parameters']|default=''}" name="parameters">
+							</li>
+							<li class="">
+								<a href="javascript:void(0);" class="editDetail right-arrow">编辑商品详情</a>
+								<input type="hidden" class="goods-detail" data-echoed_src="" data-src="{$goodsInfo['details_img']|default=''}" data-picture-num="0" value="" name="goods_detail">
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+		<a href="javascript:void(0);" class="identifyNewGoods foot-btn f24">确定</a>
 	</section>
 </article>
-<a href="javascript:void(0);" class="identifyNewGoods foot-btn f24">确定</a>
+
 {/block}
 {block name="common"}
 {include file="template/upload-multi_img.html" /}

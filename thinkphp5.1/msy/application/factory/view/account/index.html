@@ -20,34 +20,42 @@
 		</div>
 	</section>
 </article>
-<article class="f24">
-	{include file="public/store_deploy_head" /}
-	<section class="specific_type bottomLine">
-		<div class="columns_flex f20 l-r-sides">
-			<a href="{:url('Record/preview')}">企业档案</a>
-			<a href="{:url('Brand/manage')}">商标备案</a>
-			<a href="{:url('Store/manage')}">开店申请</a>
-			<a href="{:url('Organize/index')}">组别角色</a>
-			<a href="{:url('Account/index')}" class="column_type current">账号授权</a>
-		</div>
-	</section>
-	<section class="f24 account-content-wrapper ">
-		<div class="search-bar columns_flex">
-			<input type="text" class="search-text" name="keyword"  placeholder="输入姓名、手机号码查询账号">
-			<input type="button" class="search-btn">
-		</div>
-		<div class="account-list-content">
-			<span class="title">供应商员工登陆账号列表</span>
-			<ul class="account-list"></ul>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				{include file="public/store_deploy_head" /}
+				<div class="specific_type bottomLine">
+					<div class="columns_flex f20 l-r-sides">
+						<a href="{:url('Record/preview')}">企业档案</a>
+						<a href="{:url('Brand/manage')}">商标备案</a>
+						<a href="{:url('Store/manage')}">开店申请</a>
+						<a href="{:url('Organize/index')}">组别角色</a>
+						<a href="{:url('Account/index')}" class="column_type current">账号授权</a>
+					</div>
+				</div>
+				<div class="f24 account-content-wrapper ">
+					<div class="search-bar columns_flex">
+						<input type="text" class="search-text" name="keyword"  placeholder="输入姓名、手机号码查询账号">
+						<input type="button" class="search-btn">
+					</div>
+					<div class="account-list-content">
+						<span class="title">供应商员工登陆账号列表</span>
+						<ul class="account-list"></ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 	<a href="javascript:void(0);" class="add-account foot-btn">新建供应商员工登陆账户</a>
 </article>
 <!--角色设置-->
 <section id="setRole" style="display: none;">
-	<ul>
-		{include file="role/list_tpl" /}
-	</ul>
+	<section class="role-l-com">
+		<ul>
+			{include file="role/list_tpl" /}
+		</ul>
+	</section>
 </section>
 <!--组织设置-->
 <section id="setOrganize" style="display: none;">
@@ -159,7 +167,9 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('html,body').addClass('scrollStyle');
-					$('.setRoleLayer .layui-m-layercont').css('height',winHeight-112+'px');
+					$('.setRoleLayer .layui-m-layercont').css({height:100+'%',position:'relative'});
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					$.each(userFactoryRoleIds,function(i,o){
 						$.each($('.setRoleLayer li'),function(){
 							if($(this).data('id')==o){
@@ -168,7 +178,7 @@
 						});
 					});
 				},
-				btn:['确定'],
+				btn:['确定','取消'],
 				yes:function(index){
 					//先清空
 					userFactoryRoleIds = [];
@@ -197,7 +207,9 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('html,body').addClass('scrollStyle');
-					$('.setOrganizeLayer .layui-m-layercont').css('height',winHeight-112+'px');
+					$('.setOrganizeLayer .layui-m-layercont').css({height:100+'%',position:'relative'});
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					//回写
 					$.each($('.setOrganizeLayer').find('.organize ul'),function(){
 						if($(this).data('id')==userFactoryOrganizeId){
@@ -205,7 +217,7 @@
 						}
 					});
 				},
-				btn:['确定'],
+				btn:['确定','取消'],
 				yes:function(index){
 					userFactoryOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
 					$('html,body').removeClass('scrollStyle');
