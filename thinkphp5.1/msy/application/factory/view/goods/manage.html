@@ -255,22 +255,22 @@
 
 	});
 	//下拉加载
-	// window.addEventListener('scroll',function(){
-	// 	console.log(1);
-	// 	if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-	// 		console.log(123);
-	// 		config.loadTrigger = false;
-	// 		getPagingList(config,postData);
-	// 	}
-	// });
-	$('#scroller-wrapper').on('scroll',function(){
+	window.addEventListener('scroll',function(){
 		console.log(1);
-		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
-		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
-		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+		if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+			console.log(123);
 			config.loadTrigger = false;
 			getPagingList(config,postData);
 		}
 	});
+	// $('#scroller-wrapper').on('scroll',function(){
+	// 	console.log(1);
+	// 	$('.app-view').css({overflowX:'initial',overflowY:'initial'});
+	// 	var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
+	// 	if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+	// 		config.loadTrigger = false;
+	// 		getPagingList(config,postData);
+	// 	}
+	// });
 </script>
 {/block}

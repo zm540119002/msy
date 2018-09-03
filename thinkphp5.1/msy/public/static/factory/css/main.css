@@ -83,6 +83,7 @@
 }
 .vendorInfoList{
     /*height:8rem;*/
+    position:static;
     padding:0.15rem 0.15rem 0 .15rem;
     overflow-x:hidden;
     overflow-y:auto;
