@@ -27,7 +27,7 @@ body{
     font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; 
     color: #333;
     background: #fff;
-    overflow-x:hidden;
+    /*overflow-x:hidden;*/
 }
 .clearfix:after{content:"."; display:block; height:0; clear:both;visibility:hidden;}
 .f06c{color:#06c;}
