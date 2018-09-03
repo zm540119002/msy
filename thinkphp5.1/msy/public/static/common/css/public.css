@@ -2829,8 +2829,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .bodys .content-wrapper #scroller-wrapper{
     position:static;
-    /*height:7rem;*/
-    height:100%;
+    height:7rem;
     overflow-x: hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
