@@ -1907,6 +1907,7 @@ background-position: 0 -27px;
     /*height:400px;
     overflow-y:scroll;
     -webkit-overflow-scrolling: touch;*/
+    padding-bottom:.5rem;
 }
 .flex-both-side,.flex-both-side .two-flex{
     justify-content: space-between;
