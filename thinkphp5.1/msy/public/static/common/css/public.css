@@ -2828,7 +2828,7 @@ input[type=text]::-webkit-focus-inner {
     background: #fff;
 }
 .bodys .content-wrapper #scroller-wrapper{
-    height:7rem;
+    height:7.2rem;
     overflow-x: hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
