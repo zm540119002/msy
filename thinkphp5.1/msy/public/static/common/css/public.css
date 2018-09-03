@@ -633,7 +633,7 @@ i{
     background:transparent;
 }
 .channel_nav{
-    padding:0.20rem 0 0.15rem 0;
+    padding:0 0 0.15rem 0;
     border-bottom:1px solid #d9d9d9;
 }
 .module-navigation .channel_nav{
