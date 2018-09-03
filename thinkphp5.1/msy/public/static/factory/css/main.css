@@ -1219,7 +1219,7 @@ input.special{
     width:15%;
 }
 .backups-content{
-    padding:.20rem .05rem;
+    padding:0 .05rem .20rem;
     margin:.05rem 0 0;
 }
 .func-icons{
