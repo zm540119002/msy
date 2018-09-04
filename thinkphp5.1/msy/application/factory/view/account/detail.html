@@ -3,51 +3,57 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<article class="f24">
-	<section class="separation-line">
-		<div class="columns_flex l-r-sides content-padding account-header">
-			<div id="accountInfo">
-				<input type="hidden" class="user_id" value="{$info.id}"/>
-				<div class="ac-item">
-					<span class="r-t left">姓名：</span><span>{$info.name}</span>
-				</div>
-				<div class="ac-item">
-					<span class="r-t left">手机号码：</span><span class="r-t-m">{$info.mobile_phone}</span>
-				</div>
-				<div class="role ac-item">
-					<span class="r-t left">角色：</span>
-					{notempty name='info.role'}
-					<div class="multi-role left">
-					{volist name='info.role' id='vo'}
-						<span data-role_id="{$vo.id}">{$vo.name}</span>
-					{/volist}
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="separation-line">
+					<div class="columns_flex l-r-sides content-padding account-header">
+						<div id="accountInfo">
+							<input type="hidden" class="user_id" value="{$info.id}"/>
+							<div class="ac-item">
+								<span class="r-t left">姓名：</span><span>{$info.name}</span>
+							</div>
+							<div class="ac-item">
+								<span class="r-t left">手机号码：</span><span class="r-t-m">{$info.mobile_phone}</span>
+							</div>
+							<div class="role ac-item">
+								<span class="r-t left">角色：</span>
+								{notempty name='info.role'}
+								<div class="multi-role left">
+								{volist name='info.role' id='vo'}
+									<span data-role_id="{$vo.id}">{$vo.name}</span>
+								{/volist}
+								</div>
+								{/notempty}
+							</div>
+						</div>
+						<div class="account-edit-btn columns_flex">
+							{if $info.status == 0}
+								<a href="javascript:void(0);" option="stop">
+									<span class="stop-icon ic"></span>
+									<span class="btn-status">停用账号</span>
+								</a>
+							{elseif $info.status == 1 /}
+								<a href="javascript:void(0);" option="activate">
+									<span class="activate-icon ic"></span>
+									<span class="btn-status">激活账号</span>
+								</a>
+							{/if}
+							<a href="javascript:void(0);" option="del">
+								<span class="del-icon ic"></span>
+								<span class="btn-status">删除账号</span>
+							</a>
+						</div>
 					</div>
-					{/notempty}
+				</div>
+				<div class="f24 signIn-wrapper">
+					<div class="account-item">
+						<span class="content-label">修改账号角色</span>
+						<ul class="account-role-list role-list"></ul>
+					</div>
 				</div>
 			</div>
-			<div class="account-edit-btn columns_flex">
-				{if $info.status == 0}
-					<a href="javascript:void(0);" option="stop">
-						<span class="stop-icon ic"></span>
-						<span class="btn-status">停用账号</span>
-					</a>
-				{elseif $info.status == 1 /}
-					<a href="javascript:void(0);" option="activate">
-						<span class="activate-icon ic"></span>
-						<span class="btn-status">激活账号</span>
-					</a>
-				{/if}
-				<a href="javascript:void(0);" option="del">
-					<span class="del-icon ic"></span>
-					<span class="btn-status">删除账号</span>
-				</a>
-			</div>
-		</div>
-	</section>
-	<section class="f24 signIn-wrapper">
-		<div class="account-item">
-			<span class="content-label">修改账号角色</span>
-			<ul class="account-role-list role-list"></ul>
 		</div>
 	</section>
 </article>
