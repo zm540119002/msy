@@ -168,6 +168,7 @@
 		pageType:'manage'
 	};
 	$(function () {
+		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
