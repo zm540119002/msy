@@ -168,6 +168,7 @@
 		pageType:'manage'
 	};
 	$(function () {
+		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
 		//没有默认店铺
 		var notDefaultStore = "{$notDefaultStore|default=0}";
 		if(notDefaultStore == 0){
@@ -265,7 +266,7 @@
 	// });
 	$('#scroller-wrapper').on('scroll',function(){
 		console.log(1);
-		$('.app-view').addClass('disabled');
+		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
 		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
 		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
 			config.loadTrigger = false;

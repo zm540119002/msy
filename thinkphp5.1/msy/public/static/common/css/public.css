@@ -27,7 +27,7 @@ body{
     font-family: '微软雅黑',Verdana,Arial,Helvetica,sans-serif; 
     color: #333;
     background: #fff;
-    overflow-x:hidden;
+    /*overflow-x:hidden;*/
 }
 .clearfix:after{content:"."; display:block; height:0; clear:both;visibility:hidden;}
 .f06c{color:#06c;}
@@ -633,13 +633,14 @@ i{
     background:transparent;
 }
 .channel_nav{
-    padding:0.20rem 0 0.15rem 0;
+    padding:0 0 0.15rem 0;
     border-bottom:1px solid #d9d9d9;
 }
 .module-navigation .channel_nav{
     background: #F7F8F8;
     border: 1px solid transparent;
     border-radius: 30px 30px 0 0;
+    padding-top:.12rem;
 }
 .channel_nav a{
     position:relative;
@@ -1907,6 +1908,7 @@ background-position: 0 -27px;
     /*height:400px;
     overflow-y:scroll;
     -webkit-overflow-scrolling: touch;*/
+    padding-bottom:2.5rem;
 }
 .flex-both-side,.flex-both-side .two-flex{
     justify-content: space-between;
@@ -1919,7 +1921,7 @@ background-position: 0 -27px;
 }
 .product-square-box{
     display: block;
-    height:2.6rem;
+    height:2rem;
     margin:0 0 0.10rem 0;
     overflow:hidden;
 }
@@ -1970,8 +1972,8 @@ background-position: 0 -27px;
     bottom:0;
     right:0;
     width:100%;
-    height:45px;
-    line-height:45px;
+    height:.7rem;
+    line-height:.7rem;
     background: #ff7bac;
     color:#fff;
     text-align:center;
@@ -2808,14 +2810,14 @@ input[type=text]::-webkit-focus-inner {
 }
 .bodys{
     position: absolute;
-    top: 216px;
+    top: 3.7rem;
     left: 0;
     right: 0;
     background: #fff;
-    -webkit-transition: -webkit-transform .4s cubic-bezier(.55,0,.1,1);
+    /*-webkit-transition: -webkit-transform .4s cubic-bezier(.55,0,.1,1);
     transition: -webkit-transform .4s cubic-bezier(.55,0,.1,1);
     transition: transform .4s cubic-bezier(.55,0,.1,1);
-    transition: transform .4s cubic-bezier(.55,0,.1,1),-webkit-transform .4s cubic-bezier(.55,0,.1,1);
+    transition: transform .4s cubic-bezier(.55,0,.1,1),-webkit-transform .4s cubic-bezier(.55,0,.1,1);*/
 }
 .bodys-header{
     position: fixed;
@@ -2827,7 +2829,8 @@ input[type=text]::-webkit-focus-inner {
     background: #fff;
 }
 .bodys .content-wrapper #scroller-wrapper{
-    height:400px;
+    position:static;
+    height:7rem;
     overflow-x: hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>店铺商品详情页</title>
+    <link rel="stylesheet" href="public/static/common/css/base.css">
+    <link rel="stylesheet" href="public/static/common/css/public.css">
+	<link rel="stylesheet" href="public/static/factory/css/main.css">
+    <link rel="stylesheet" href="public/static/common/js/layer.mobile/need/layer.css">
+</head>
+<body>
+<article class="f24">
+    <section class="">
+        <img class="common_default_img" src="public/static/common/img/default/no_pic_1000.jpg" alt="">
+    </section>
+    <section class="">
+        <div class="columns_flex l-r-sides">
+            <p class="store-product-title">产品富含小分子活性多肽以及多种医药级成分，较小的分子，极高的肌肤亲活力，有效调节肌肤油脂分泌，抑制肌肤脂肪酶、蛋白酶活性，预防肌肤粉刺、青春痘的产生。</p>
+            <div class="">
+                <a href="javascript:void(0);">
+                    <span class="share"></span>
+                    分享
+                </a>
+                <a href="javascript:void(0);">
+                    <span class="ytk"></span>
+                    云推客
+                </a>
+            </div>
+        </div>
+        <ul class="list-item goods_list">
+            <li>
+                <div class="price-item">
+                    <span class="text-color-ef">￥<price>1000</price></span>
+                    <del>￥999</del>
+                </div>
+                <div class="columns_flex l-r-sides">
+                    <span>15ml x 6瓶 /盒</span>
+                    <div class="quantity_wrapper selected-number">
+                        <a href="javascript:void(0);" class="greduce">-</a>
+                        <input type="text" value="1" class="f24 gshopping_count">
+                        <a href="javascript:void(0);" class="gplus">+</a>
+                    </div>
+                </div>
+            </li>
+                
+        </ul>
+        <p class="explain-text content-padding">产品富含小分子活性多肽以及多种医药级成分，较小的分子，极高的肌肤亲活力，有效调节肌肤油脂分泌，抑制肌肤脂肪酶、蛋白酶活性，预防肌肤粉刺、青春痘的产生。</p>
+    </section>
+</article>
+<footer class="f24 group_cart_nav">
+    <div class="group_btn50 bfff">
+        <span class="goods_total_price amount">￥<price>0.00</price></span>
+    </div>
+    <a href="javascript:void(0);" class="bff6482 group_btn50 add_cart">加入购物车</a>
+    <a href="javascript:void(0);" class="group_btn50 bff1d25 buy_now"><i class="collect"></i>立即购买</a>
+</footer>
+<script src="public/static/common/js/jquery-1.9.1.min.js"></script>
+<script src="public/static/common/js/public.js"></script>
+<script type="text/javascript" src="public/static/common/js/common.js"></script>
+<script src="public/static/common/js/dialog.js"></script>
+<script type="text/javascript" src="public/static/common/js/layer.mobile/layer.js"></script>
+<script>  
+$(function(){        
+    //加
+    $('body').on('click','.gplus',function(){
+        //单个商品数量自加
+        goodsNumPlus($(this));
+        //计算商品列表总价
+        calculateTotalPrice();
+        
+    });
+    //减
+    $('body').on('click','.greduce',function(){
+        //单个商品数量自减
+        goodsNumReduce($(this));
+        //计算商品列表总价
+        calculateTotalPrice();
+    });
+
+});
+//单个商品数量自加
+function goodsNumPlus(obj) {
+    var _li = obj.parents('li');
+    var num = _li.find('.gshopping_count').val();
+    _li.find('.gshopping_count').val(++num);
+}
+
+//单个商品数量自减
+function goodsNumReduce(obj) {
+    var _li = obj.parents('li');
+    var num = _li.find('.gshopping_count').val();
+    if(num<2){
+        return false;
+    }
+    _li.find('.gshopping_count').val(--num);
+}   
+
+//计算商品列表总价
+function calculateTotalPrice(){
+    var _thisLis = $('ul.goods_list').find('li');
+    if(!$('footer').find('price').length){
+        return false;
+    }
+    var isInt = true;
+    var amount = 0;
+    $.each(_thisLis,function(){
+        var _thisLi = $(this);
+        var num = _thisLi.find('.gshopping_count').val();
+        if(!isPosIntNumberOrZero(num)){
+            isInt = false;
+            return false;
+        }
+        amount += _thisLi.find('price').text() * num;
+    });
+    if(!isInt){
+        dialog.error('购买数量为正整数');
+        return false;
+    }
+    $('footer').find('price').html(amount.toFixed(2));
+}
+</script>
+</body>
+
+</html>
