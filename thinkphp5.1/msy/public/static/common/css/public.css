@@ -2835,3 +2835,7 @@ input[type=text]::-webkit-focus-inner {
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
 }
+.initial{
+    overflow-x:initial;
+    overflow-y:initial;
+}
