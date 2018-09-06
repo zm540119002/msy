@@ -1594,13 +1594,13 @@ background-position: 0 -27px;
 }
 
 .setRoleLayer .role-l-com{
-    position:absolute;
+    /*position:absolute;
     top:0;
     left:0;
     right:0;
     width:90%;
     padding:5px 5% 10px;
-    
+    */
 }
 .role-l-com ul{
     height:500px;
