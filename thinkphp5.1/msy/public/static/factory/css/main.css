@@ -87,7 +87,7 @@
     padding:0.15rem 0.15rem 0 .15rem;
     overflow-x:hidden;
     overflow-y:auto;
-    -webkit-overflow-scrolling: touch;
+    /*-webkit-overflow-scrolling: touch;*/
 }
 .vendorInfoList li{
     position:relative;
