@@ -1604,6 +1604,7 @@ background-position: 0 -27px;
     padding:.12rem;
 }
 .role-l-com ul{
+    position:static;
     height:300px;
     overflow-x:hidden;
     overflow-y:auto;
