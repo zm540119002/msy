@@ -27,7 +27,7 @@ class Store extends MallBase{
             ],
         ];
         $list = $modelGoods->pageQuery($config);
-        print_r($modelGoods->getLastSql());exit;
+        print_r($list);exit;
         return view('list_tpl',['list'=>$list]);
        if(request()->isAjax()){
             $modelGoods = new \app\factory\model\Goods();
