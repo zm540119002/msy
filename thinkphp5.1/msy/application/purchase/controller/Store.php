@@ -1,7 +1,7 @@
 <?php
-namespace app\mall\controller;
+namespace app\purchase\controller;
 
-class RetailStore extends MallBase{
+class Store extends MallBase{
     /**首页
      */
     public function index(){
@@ -13,8 +13,23 @@ class RetailStore extends MallBase{
 
     /**供应商零售店
      */
-    public function goods(){
-        if(request()->isAjax()){
+    public function goodsList(){
+        $modelGoods = new \app\factory\model\Goods();
+        $config =[
+            'where' => [
+                ['g.status', '=', 0],
+                ['s.status', '=', 0],
+                ['s.run_type', '=', 2],
+            ],'field' => [
+                'g.id','g.name','g.thumb_img','g.sale_price',
+            ],'leftJoin' => [
+                ['store s','g.store_id = s.id',],
+            ],
+        ];
+        $list = $modelGoods->pageQuery($config);
+        print_r($modelGoods->getLastSql());exit;
+        return view('list_tpl',['list'=>$list]);
+       if(request()->isAjax()){
             $modelGoods = new \app\factory\model\Goods();
             $config =[
                 'where' => [
@@ -22,7 +37,7 @@ class RetailStore extends MallBase{
                     ['s.status', '=', 0],
                     ['s.run_type', '=', 2],
                 ],'field' => [
-                    'g.id','g.name','g.thumb_img','g.sale_price',
+                     'g.id','g.name','g.thumb_img','g.sale_price',
                 ],'leftJoin' => [
                     ['store s','g.store_id = s.id',],
                 ],
