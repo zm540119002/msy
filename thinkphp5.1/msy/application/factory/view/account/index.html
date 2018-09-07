@@ -167,7 +167,7 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.app-view').addClass('initial');
-					$('html,body').addClass('scrollStyle');
+					//$('html,body').addClass('scrollStyle');
 					$('.setRoleLayer ul').css('height',winHeight-112+'px');
 					//$('.setRoleLayer .layui-m-layercont').css({height:100+'%',position:'relative'});
 					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
@@ -189,7 +189,7 @@
 							userFactoryRoleIds.push($(this).data('id'));
 						}
 					});
-					$('html,body').removeClass('scrollStyle');
+					//$('html,body').removeClass('scrollStyle');
 					$('.app-view').removeClass('initial');
 					layer.close(index);
 				}
