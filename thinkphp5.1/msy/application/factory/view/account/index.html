@@ -20,10 +20,10 @@
 		</div>
 	</section>
 </article>
-<article class="f24 app-content">
-	<section class="app-shell">
-		<div class="app-view-wrapper">
-			<div class="app-view">
+<article class="f24 ">
+	<section class="">
+		<div class="">
+			<div class="">
 				{include file="public/store_deploy_head" /}
 				<div class="specific_type bottomLine">
 					<div class="columns_flex f20 l-r-sides">
@@ -136,7 +136,7 @@
 						dialog.error(content);
 						return false;
 					}
-					$('html,body').removeClass('scrollStyle');
+					//$('html,body').removeClass('scrollStyle');
 					postData.userFactoryRoleIds = userFactoryRoleIds;
 					postData.userFactoryOrganizeId = userFactoryOrganizeId;
 					$.post(action,postData,function(data){
@@ -166,7 +166,7 @@
 				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
 				success:function(){
 					var winHeight=$(window).height();
-					$('.app-view').addClass('initial');
+					//$('.app-view').addClass('initial');
 					//$('html,body').addClass('scrollStyle');
 					$('.setRoleLayer ul').css('height',winHeight-112+'px');
 					//$('.setRoleLayer .layui-m-layercont').css({height:100+'%',position:'relative'});
@@ -190,7 +190,7 @@
 						}
 					});
 					//$('html,body').removeClass('scrollStyle');
-					$('.app-view').removeClass('initial');
+					//$('.app-view').removeClass('initial');
 					layer.close(index);
 				}
 			});
