@@ -195,6 +195,9 @@
 				}
 			});
 		});
+		$('.setRoleLayer ul').on('scroll',function(){
+			$('.app-view').addClass('initial');
+		})
 		//组织设置
 		$('body').on('click','.organize-set',function(){
 			if(!setOrganize){
