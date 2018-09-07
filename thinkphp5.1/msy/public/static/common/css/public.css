@@ -2866,7 +2866,7 @@ input[type=text]::-webkit-focus-inner {
 .page-scroller{
     min-height:100%;
 }
-.layui-m-layer{
+div.layui-m-layer{
     position:absolute;
     left:0;
     right:0;
