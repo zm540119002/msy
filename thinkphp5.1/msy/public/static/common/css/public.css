@@ -2868,12 +2868,3 @@ input[type=text]::-webkit-focus-inner {
 .page-scroller{
     min-height:100%;
 }
-div.layui-m-layer{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    /*top:0;*/
-    width:100%;
-    height:100%;
-}
