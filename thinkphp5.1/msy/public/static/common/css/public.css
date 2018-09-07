@@ -2861,4 +2861,5 @@ input[type=text]::-webkit-focus-inner {
     top: 0;
     z-index: 1000;
     width: 100%;
+    background:#fff;
 }
