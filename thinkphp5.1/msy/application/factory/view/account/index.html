@@ -212,7 +212,7 @@
 				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
 				success:function(){
 					var winHeight=$(window).height();
-					$('html,body').addClass('scrollStyle');
+					//$('html,body').addClass('scrollStyle');
 					$('.setOrganizeLayer .layui-m-layercont').css({height:100+'%',position:'relative'});
 					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
@@ -226,7 +226,7 @@
 				btn:['确定','取消'],
 				yes:function(index){
 					userFactoryOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
-					$('html,body').removeClass('scrollStyle');
+					//$('html,body').removeClass('scrollStyle');
 					layer.close(index);
 				}
 			});
