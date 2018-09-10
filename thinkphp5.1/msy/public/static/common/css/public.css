@@ -583,7 +583,7 @@ i{
     box-sizing:border-box;
     padding:0 5px;
     font-size:.24rem;
-    color:#fff;
+    color:#333;
     position:relative;
 }
 .top_menu_box a.current:before{
