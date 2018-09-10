@@ -18,52 +18,9 @@
 		</div>
 	</section>
 	<div class="content-wrapper">
-		<ul class="columns_flex flex-both-side goods-list">
-			<li>
-				<a class="product-square-box">
-					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
-				</a>
-				<p class="product-title">商品11111111111111111</p>
-				<div class="columns_flex two-flex">
-					<div class="pink">
-						￥<price>5.00</price>
-					</div>
-				</div>
-			</li>
-			<li>
-				<a class="product-square-box">
-					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
-				</a>
-				<p class="product-title">商品22222222222222</p>
-				<div class="columns_flex two-flex">
-					<div class="pink">
-						￥<price>5.00</price>
-					</div>
-				</div>
-			</li>
-			<li>
-				<a class="product-square-box">
-					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
-				</a>
-				<p class="product-title">商品22222222222222</p>
-				<div class="columns_flex two-flex">
-					<div class="pink">
-						￥<price>5.00</price>
-					</div>
-				</div>
-			</li>
-			<li>
-				<a class="product-square-box">
-					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
-				</a>
-				<p class="product-title">商品22222222222222</p>
-				<div class="columns_flex two-flex">
-					<div class="pink">
-						￥<price>5.00</price>
-					</div>
-				</div>
-			</li>
+		<ul class="columns_flex flex-both-side scroller-container" id="list">
 		</ul>
+		{include file="template/loading.html" /}
 	</div>
 </article>
 {/block}
@@ -74,9 +31,32 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:6,
+		pageType:'store'
+	};
 	$(function(){
+		//初始化商品列表
+		var storeId = {$storeId};
+		postData.storeId = storeId;
+		getPagingList(config,postData);
 
+		//下拉加载
+		 window.addEventListener('scroll',function(){
+		 	if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+		 		console.log(123);
+		 		config.loadTrigger = false;
+		 		getPagingList(config,postData);
+		 	}
+		 });
 	});
 </script>
 {/block}

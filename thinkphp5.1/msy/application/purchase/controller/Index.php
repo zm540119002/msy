@@ -1,7 +1,7 @@
 <?php
 namespace app\purchase\controller;
 
-class Index extends MallBase{
+class Index extends Base{
     /**首页
      */
     public function index(){
