@@ -11,14 +11,14 @@ class FactoryStore{
         $store = cache(self::$_cache_key.$id);
         if(!$store){
             $model = new \app\factory\model\Store();
-            $where = [
-                'status' => 0,
-                'id' => $id,
+            $config = [
+                'where' => [
+                    ['id','=',$id]
+                ],'field' =>[
+                    's.id,s.is_default,s.store_type,run_type,auth_status'
+                ]
             ];
-            $file = [
-                's.id,s.is_default,s.store_type,run_type,auth_status'
-            ];
-            $store = $model -> getInfo($where,$file);
+            $store = $model -> getInfo($config);
             cache(self::$_cache_key.$id, $store,config('custom.factory_cache_time'));
         }
         return $store;

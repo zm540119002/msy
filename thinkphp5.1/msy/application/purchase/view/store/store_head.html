@@ -18,9 +18,9 @@
 </div>
 <div class="columns_flex flex-both-side store-focus-num">
     <div>
-        <img src="public_img/default/no_pic_40.jpg" alt="" class="left">
+        <img src="public_img/default/no_pic_40.jpg" alt="" class="left store-logo small_default_img">
         <div>
-            <p><span>某某</span>官方旗舰店</p>
+            <p><span class="store-name">某某</span>旗舰店</p>
             <span>美尚联营</span>
         </div>
     </div>
@@ -29,3 +29,19 @@
         <p><span>1500</span>人</p>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function(){
+        //获取店铺信息
+        var storeId = {$storeId};
+        $.get(module+'store/getInfo',{storeId:storeId},function (msg) {
+            if(msg != ''){
+                $('.storeId').val(msg.id);
+                if(msg.img){
+                    $('.store-logo').attr('src',uploads+msg.img);
+                }
+                $('.store-name').text(msg.name);
+            }
+        })
+    })
+</script>

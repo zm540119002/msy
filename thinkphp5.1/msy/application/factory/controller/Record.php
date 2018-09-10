@@ -33,7 +33,7 @@ class Record extends FactoryBase
                 'id' => 'desc',
             ],'join' => [
                 ['factory f','f.id = r.factory_id'],
-            ],'field' => ['r.id,r.shop_name,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
+            ],'field' => ['r.id,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
                             r.company_img,r.create_time,r.update_time,f.name'],
         ];
         $recordInfo = $model -> getInfo($config);
