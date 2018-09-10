@@ -1,7 +1,7 @@
 <?php
-namespace app\purchase\controller;
+namespace app\twitter\controller;
 
-class Index extends Base{
+class Video extends TwitterBase{
     /**首页
      */
     public function index(){

@@ -179,6 +179,20 @@
             //$('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
         })
     };
+
+    //获取url中的参数名就可以获取到参数的值
+    $.getUrlParam
+        = function(name)
+    {
+        var reg
+            = new RegExp("(^|&)"+
+            name +"=([^&]*)(&|$)");
+        var r
+            = window.location.search.substr(1).match(reg);
+        if (r!=null) return unescape(r[2]); return null;
+    }
+
+
 })(jQuery);
 
 //限制input、textarea字数
