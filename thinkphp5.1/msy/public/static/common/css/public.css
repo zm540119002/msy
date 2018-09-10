@@ -443,7 +443,7 @@ i{
     line-height: 30px;
 }
 .top-switch-bar div:nth-child(2){
-    width:50%;
+    width:55%;
 }
 .top-switch-bar a.home{
     width:30px;
@@ -1594,13 +1594,18 @@ background-position: 0 -27px;
 }
 
 .setRoleLayer .role-l-com{
-    position:absolute;
+    /*position:absolute;
     top:0;
     left:0;
     right:0;
     width:90%;
-    height:450px;
     padding:5px 5% 10px;
+    */
+    padding:.12rem;
+}
+.role-l-com ul{
+    position:static;
+    height:300px;
     overflow-x:hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
@@ -1617,7 +1622,7 @@ background-position: 0 -27px;
     -webkit-overflow-scrolling: touch;
 }
 .setRoleLayer .layui-m-layercont{
-    overflow-y:auto;   
+    /*overflow-y:auto;   */
 }
 .setRoleLayer li{
     margin-bottom:15px;
@@ -2755,6 +2760,7 @@ input[type=text]::-webkit-focus-inner {
 .no-record{
     padding:0 0 0 .12rem;
 }
+/*小米的布局*/
 .app-content{
     position:static;
     height:100%;
@@ -2834,4 +2840,31 @@ input[type=text]::-webkit-focus-inner {
     overflow-x: hidden;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
+}
+.initial{
+    overflow:initial;
+}
+/*淘宝的布局*/
+.page-container{
+    padding-top: 96px;
+    padding-bottom: 41px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.page-m-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.page-header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background:#fff;
+}
+.page-scroller{
+    min-height:100%;
 }

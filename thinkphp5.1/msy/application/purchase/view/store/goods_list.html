@@ -1,0 +1,82 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<!--<link rel="stylesheet" href="store_css/main.css">-->
+{/block}
+{block name="content"}
+<article class="scroll-wrapper f24">
+	<section class="top_nav_fixed store-top-nav">
+		{include file="store/store_head" /}
+		<div class="top_menu_box">
+			<div class="top_menu_list columns_flex flex-both-side">
+				<a href="javascript:void(0);" class="current">商品</a>
+				<a href="javascript:void(0);">消息</a>
+				<a href="javascript:void(0);">文章</a>
+				<a href="javascript:void(0);">小视频</a>
+				<a href="javascript:void(0);">视频</a>
+				<a href="javascript:void(0);">直播</a>
+			</div>
+		</div>
+	</section>
+	<div class="content-wrapper">
+		<ul class="columns_flex flex-both-side goods-list">
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品11111111111111111</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品22222222222222</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品22222222222222</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a class="product-square-box">
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+				</a>
+				<p class="product-title">商品22222222222222</p>
+				<div class="columns_flex two-flex">
+					<div class="pink">
+						￥<price>5.00</price>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_store.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+
+	});
+</script>
+{/block}

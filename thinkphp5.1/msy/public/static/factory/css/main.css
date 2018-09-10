@@ -44,7 +44,7 @@
 .explain_nav{
     padding:0.15rem 0.20rem;
     background: #727171;
-    margin:0 0 1rem 0;
+    margin:0 0 4rem 0;
 }
 .explain_nav a{
     display: block;
@@ -87,7 +87,7 @@
     padding:0.15rem 0.15rem 0 .15rem;
     overflow-x:hidden;
     overflow-y:auto;
-    -webkit-overflow-scrolling: touch;
+    /*-webkit-overflow-scrolling: touch;*/
 }
 .vendorInfoList li{
     position:relative;
