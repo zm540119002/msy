@@ -11,45 +11,41 @@ class Store extends Base{
         }
     }
 
-    /**供应商零售店
+    /**供应商店商品列表
      */
     public function goodsList(){
        if(request()->isAjax()){
 
         }else{
            $storeId = input('param.store_id','int');
-//           if(!positiveInteger($storeId)){
-//               return 111;
-//           }
+           if(!positiveInteger($storeId)){
+               return 111;
+           }
             $this->assign('storeId',$storeId);
             return $this->fetch();
         }
-
     }
 
-    /**商品详情页
+    /**供应商店商品列表
      */
-    public function detail(){
-        if(request()->isAjax()){
-        }else{
-            $goodsId = intval(input('goodsId'));
-            if($goodsId){
-                $modelGoods = new \app\factory\model\Goods();
-                $config =[
-                    'where' => [
-                        ['g.status', '=', 0],
-                        ['g.id', '=', $goodsId],
-                    ],'field' => [
-                        'g.id','g.name','g.sale_price','g.retail_price','g.main_img','g.parameters',
-                    ],
-                ];
-                $info = $modelGoods->getInfo($config);
-                if($info){
-                    $info['main_img'] = explode(',',(string)$info['main_img']);
-                    $this->assign('info',$info);
-                }
-            }
-            return $this->fetch();
+    public function getInfo(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
         }
+        $model =  new \app\purchase\model\Store;
+        $config = [
+            'where' => [
+                ['s.id','=',input('get.storeId','int')],
+            ],'join' => [
+                ['record r','r.factory_id = s.foreign_id','left'],
+                ['brand b','b.id = s.foreign_id','left']
+            ],'field' => [
+                's.id','case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as img',
+                'case s.store_type when 1 then r.short_name when 2 then b.name END as name',
+            ],
+        ];
+        return $model -> getInfo($config);
     }
+
+
 }

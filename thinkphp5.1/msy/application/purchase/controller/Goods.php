@@ -37,32 +37,15 @@ class Goods extends Base{
         if(input('?get.storeId') && (int)input('?get.storeId')){
             $config['where'][] = ['g.store_id', '=', input('get.storeId')];
         }
-        if(input('get.pageType','') == 'promotion' ) {//促销
-            $config['where'][] = ['g.sale_type', '=', 0];
-        }
         $keyword = input('get.keyword','');
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
         }
         $list = $model -> pageQuery($config);
-        $page = $list->getCurrentPage();
-        $this->assign('page',$page);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'store' ){//促销
+            if($_GET['pageType'] == 'store' ){//店铺产品列表
                 return $this->fetch('list_tpl');
-            }
-            if($_GET['pageType'] == 'shelf' ){//上架管理
-                return $this->fetch('list_shelf');
-            }
-            if($_GET['pageType'] == 'manage' ){//管理
-                return $this->fetch('list_manage');
-            }
-            if($_GET['pageType'] == 'inventory' ){//入库
-                return $this->fetch('list_inventory');
-            }
-            if($_GET['pageType'] == 'sort' ){//入库
-                return $this->fetch('list_sort');
             }
         }
     }
