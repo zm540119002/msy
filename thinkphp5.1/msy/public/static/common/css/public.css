@@ -583,8 +583,11 @@ i{
     box-sizing:border-box;
     padding:0 5px;
     font-size:.24rem;
-    color:#333;
+    color:#fff;
     position:relative;
+}
+.store_menu_box{
+    color:#333;
 }
 .top_menu_box a.current:before{
     position: absolute;
