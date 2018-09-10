@@ -659,11 +659,15 @@ i{
     background-repeat: no-repeat;
     background-size:46px 234px;
 }
+.store_organize_nav a span{
+    background-image:url(../../common/img/icons/store_index_type.png);
+}
 .channel_nav a span.union_purchase{background-position:0 1px;}
 .channel_nav a span.exclusive{background-position:0 -46px;}
 .channel_nav a span.classify{background-position:0 -93px;}
 .channel_nav a span.purchasers{background-position:0 -140px;}
 .channel_nav a span.recharge{background-position:0 -187px;}
+.store_organize_nav a span.classify{background-position:0 -93px;}
 .channel_nav>a.current:before{
     position: absolute;
     z-index: 1;
