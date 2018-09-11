@@ -1,4 +1,30 @@
 /*美尚云厂商入驻*/
+.top_nav_store,
+.store_deploy_nav{
+    background:#666;
+}
+.top_nav_store{
+    padding:10px 0 0;
+}
+.store_deploy_nav{
+    border-top:1px solid #fff;
+}
+.top_nav_store span,
+.top_nav_store a,
+.store_deploy_nav a{
+    color:#fff;
+}
+.top_nav_store div:nth-child(2){
+    width:35%; 
+    margin-right:.25rem;   
+}
+.top_nav_store .top_bar{
+    height:auto;
+    padding-top:0;
+}
+.top_nav_store .top_bar a:last-child{
+    margin:0 auto;
+}
 .manufacturer_nav a span{
     background-image:url(../../factory/img/manufacturer_type.png);
 }
@@ -59,7 +85,7 @@
     line-height: 24px;
 }
 .message-center-info p:last-child{
-    margin:20px 0 0;
+    /*margin:20px 0 0;*/
 }
 .vendor-settled-list{
     padding:0 0.15rem 0 0.15rem;
