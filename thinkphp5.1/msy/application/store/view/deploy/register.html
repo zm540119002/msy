@@ -30,6 +30,9 @@
 							<input type="text" class="factoryFullName" name="" value="{$factoryInfo.name|default=''}" placeholder="机构名称(与营业执照相同)">
 						</div>
 						<div class="apply-items">
+							<input type="text" class="factoryFullName" name="" value="" placeholder="机构简称(选填)">
+						</div>
+						<div class="apply-items">
 							<input type="text" class="agentName" name="" value="{$factoryInfo.agent|default=''}" placeholder="代办人姓名">
 						</div>
 						<div>
@@ -38,13 +41,13 @@
 							(已验证)
 						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
-						<p class="upload-data-explain f20">申请入驻需要递交机构营业执照（加盖公章）、代办人企业介绍信（含代办人姓名和手机号码信息），请准备好材料提前拍照以备在线上传照片</p>
+						<p class="upload-data-explain f20">申请入驻需要递交机构营业执照（加盖公章）、代办人机构介绍信（含代办人姓名和手机号码信息），请准备好材料提前拍照以备在线上传照片</p>
 					</form>
 				</div>
 				<div class="apply-module hide">
 					<p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
 					<form>
-						<ul class="upload-picture-module f24">
+						<ul class="upload-picture-module store-picture-module f24">
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
@@ -83,6 +86,7 @@
 				</div>
 			</div>
 		</div>
+		<a href="" class="joint_instruction">免费入驻及自营联营说明</a>
 	</section>
 </article>
 {/block}
