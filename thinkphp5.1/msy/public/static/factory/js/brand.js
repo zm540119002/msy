@@ -111,7 +111,9 @@ $(function(){
             dialog.error('商标还没有上传完毕');
             return false;
         }
+        $(this).attr("disabled",true);//防止重复提交
         $.post(controller+"record",postData,function(msg){
+            $(this).attr("disabled",false);
             if(msg.status == 0){
                 dialog.error(msg.info);
             }

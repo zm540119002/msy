@@ -209,7 +209,9 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        $(this).attr("disabled",true);//防止重复提交
         $.post(controller+'edit',postData,function(msg){
+            $(this).attr("disabled",false);
             if(msg.status == 0){
                 dialog.error(msg.info);
             }

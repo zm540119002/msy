@@ -188,7 +188,7 @@
 		});
 
 		//提交档案信息
-		$('body').on('click','.identifyNewGoods',function(){
+		$('body').one('click','.identifyNewGoods',function(){
 			var postData={};
 			postData=$('.qualificationContent').serializeObject();
 			postData.provinces=$('.area-address-name').data('key');
@@ -234,12 +234,14 @@
 				dialog.error('企业标志图片还没有上传完毕');
 				return false;
 			}
+			$(this).attr("disabled",true);
 			$.ajax({
 				url:controller + "edit",
 				type:'post',
 				data:postData,
 				dataType:'json',
 				success:function (data) {
+					$(this).attr("disabled",false);
 				   if(data.status == 0){
 						dialog.error(data.info);
 						return false;
