@@ -192,6 +192,7 @@ class Goods extends StoreBase
     public function setSort(){
         if (request()->isPost()) {
             $data = input();
+            print_r($data);exit;
             if(empty($data['sortData']) && !is_array($data['sortData'])){
                 return errorMsg('参数错误');
             }
