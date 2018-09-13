@@ -668,7 +668,8 @@ i{
 .channel_nav a span.purchasers{background-position:0 -140px;}
 .channel_nav a span.recharge{background-position:0 -187px;}
 .store_organize_nav a span.classify{background-position:0 -93px;}
-.channel_nav>a.current:before{
+.channel_nav>a.current:before,
+.store_deploy_bar>a.current:before{
     position: absolute;
     z-index: 1;
     left: 50%;
@@ -682,6 +683,9 @@ i{
     transform-origin: center;
     transition: all 0.5s;
     margin-left: -15px;
+}
+.store_deploy_bar>a.current:before{
+    background-color: #fff;
 }
 .twitter-nav a span{
      background-image:url(../../common/img/icons/twitter-icons.png);
@@ -710,6 +714,7 @@ color: #ed6d00;
 }
 .specific_type a{
     /*width:20%;*/
+    position:relative;
     box-sizing: border-box;
     text-align:center;
     /*margin:0 0 10px 0;*/
