@@ -27,8 +27,9 @@
 {include file="public/store_list_tpl" /}
 {include file="shop/list_layer" /}
 <script type="text/javascript">
-    var vendorInfoList=$('#vendorInfoList').html();
+//    var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
+
         //切换店铺
         $('body').on('click','.switch-account',function(){
             storeList();
@@ -36,11 +37,11 @@
         //获取厂商信息
         $.get(controller+'getStoreInfo',{},function (msg) {
             if(msg != ''){
-                if(msg.logo_img = ''){
-                    $('.store-log-img').attr('src',public_img+'default/no_pic_40.jpg');
-                }else{
-                    $('.store-log-img').attr('src',uploads+msg.logo_img);
-                }
+//                if(msg.logo_img = ''){
+//                    $('.store-log-img').attr('src',public_img+"default/no_pic_40.jpg");
+//                }else{
+//                    $('.store-log-img').attr('src',uploads+msg.logo_img);
+//                }
                 $('.store-name').text(msg.name);
             }
 
@@ -52,14 +53,14 @@
                 $('.store-logo-img').attr('src',uploads+msg.img);
                 $('.store-name').text(msg.name);
                 if(msg.shop_type == 1){
-                    $('.type').text('官方旗舰店');
+                    $('.type').text('机构旗舰店');
                 }else if(msg.shop_type == 2){
                     $('.type').text('品牌旗舰店');
                 }
                 if(msg.run_type == 1){
-                    $('.run-type').text('B2B采购商城');
+                    $('.run-type').text('美尚会云店');
                 }else if(msg.run_type == 2){
-                    $('.run-type').text('B2B分成商城');
+                    $('.run-type').text('机构嵌入式门店');
                 }else if(msg.run_type == 3){
                     $('.run-type').text('B2C零售商城');
                 }
