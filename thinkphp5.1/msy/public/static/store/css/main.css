@@ -1156,3 +1156,27 @@ transparent;
 .goods-store-content li img{
     width:100%;
 }
+/*管理员账号*/
+.manage_account_list{
+    padding:.25rem;
+}
+.manage_account_list li{
+    padding:.15rem;
+    border:1px solid #d9d9d9;
+    border-radius:4px;
+}
+.manage_account_list li .m_item{
+    display:inline-block;
+    width:60px;
+    margin:0 .12rem 0 0;
+    text-align:right;
+}
+.addManageLayer .input-filed{
+    text-align:center;
+}
+.manage_account_list li.current{
+    border:1px solid #0066cc;
+}
+.manage_account_list .operate-btn{
+    display:none;
+}
