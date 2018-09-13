@@ -102,6 +102,9 @@ body{
 .layui-m-layerbtn span[yes]{
     cursor: pointer;
 }
+.nodisabled{
+    pointer-events: none;
+}
 /*头部样式*/
 .header{
     width: 100%;
