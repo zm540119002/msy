@@ -104,7 +104,9 @@
 				num = 0 - num;
 			}
 			postData.num = num;
+			$(this).attr("disabled",true);//防止重复提交
 			$.post(module + 'Goods/setInventory',postData,function (msg) {
+				$(this).attr("disabled",false);//防止重复提交
 				if(!msg.status){
 					dialog.error(msg.info);
 					return false;

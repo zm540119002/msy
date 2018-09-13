@@ -19,7 +19,7 @@ class Goods extends Base{
             return errorMsg('请求方式错误');
         }
 
-        $model = new\app\factory\model\Goods;
+        $model = new\app\purchase\model\Goods;
         $config=[
             'where'=>[
             ],
@@ -57,7 +57,7 @@ class Goods extends Base{
         }else{
             $goodsId = intval(input('goodsId'));
             if($goodsId){
-                $modelGoods = new \app\factory\model\Goods();
+                $modelGoods = new \app\purchase\model\Goods();
                 $config =[
                     'where' => [
                         ['g.status', '=', 0],

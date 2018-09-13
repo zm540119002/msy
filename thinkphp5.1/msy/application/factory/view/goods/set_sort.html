@@ -74,7 +74,7 @@
 		disableBtn:disableBtn //头尾上下移图标变灰色函数
 	};
 	var postData = {
-		pageSize:6,
+		pageSize:10,
 		pageType:'sort'
 	};
 	$(function () {
@@ -114,7 +114,7 @@
 			var postData ={};
 			var dataArray=[];
 			var dataOjb={};
-			$.each($('.scroller-container li'),function(i,val){
+			$.each($('.scroller-wrapper li'),function(i,val){
 				var _this = $(this);
 				var id = _this.data('id');
 				var sort = _this.find('.sort').val();
@@ -127,6 +127,7 @@
 			});
 			postData.sortData = dataArray;
 			var url = module+'goods/setSort';
+			$(this).attr("disabled",true);//防止重复提交
 			$.ajax({
 				url: url,
 				data: postData,
@@ -135,6 +136,7 @@
 				beforeSend: function(){
 				},
 				success: function(data){
+					$(this).attr("disabled",false);//防止重复提交
                   if(data.status == 0){
 					  dialog.error(data.info);
 					  return false;
