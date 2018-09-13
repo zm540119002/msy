@@ -127,7 +127,7 @@
 			});
 			postData.sortData = dataArray;
 			var url = module+'goods/setSort';
-			$(this).attr("disabled",true);//防止重复提交
+			$(this).addClass("nodisabled");//防止重复提交
 			$.ajax({
 				url: url,
 				data: postData,
@@ -136,7 +136,7 @@
 				beforeSend: function(){
 				},
 				success: function(data){
-					$(this).attr("disabled",false);//防止重复提交
+					$(this).removeClass("nodisabled");//防止重复提交
                   if(data.status == 0){
 					  dialog.error(data.info);
 					  return false;

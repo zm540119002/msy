@@ -206,7 +206,7 @@ $(function(){
 				//$('.loading').show();
 			},
 			success: function(msg){
-				$(this).attr("disabled",false);//防止重复提交
+				$(this).removeClass("nodisabled");//防止重复提交
 				if(msg.status == 0){
 					dialog.error(msg.info);
 					return false;

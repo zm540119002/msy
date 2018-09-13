@@ -75,9 +75,9 @@
 				dialog.error('图片还没有上传完毕');
 				return false;
 			}
-			$(this).attr("disabled",true);//防止重复提交
+			$(this).addClass("nodisabled");//防止重复提交
 			$.post(controller + 'set',{logo_img:logo_img},function (data) {
-				$(this).attr("disabled",false);
+				$(this).removeClass("nodisabled");
 				if(!data.status){
 					dialog.error(data.info);
 					return false;
