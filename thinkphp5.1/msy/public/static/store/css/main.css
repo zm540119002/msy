@@ -1160,10 +1160,12 @@ transparent;
 .manage_account_list{
     padding:.25rem;
 }
-.manage_account_list li{
+.manage_account_list li,
+.admin-account-list li{
     padding:.15rem;
     border:1px solid #d9d9d9;
     border-radius:4px;
+    cursor: pointer;
 }
 .manage_account_list li .m_item{
     display:inline-block;
@@ -1174,9 +1176,15 @@ transparent;
 .addManageLayer .input-filed{
     text-align:center;
 }
-.manage_account_list li.current{
+.manage_account_list li.current,
+.admin-account-list li.current{
     border:1px solid #0066cc;
 }
-.manage_account_list .operate-btn{
+.manage_account_list .operate-btn,
+.admin-account-list .operate-btn{
     display:none;
 }
+.operate-btn a{
+    margin:0 0 .12rem 0;
+}
+
