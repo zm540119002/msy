@@ -43,6 +43,8 @@
             success:function(){
                 var winH=$(window).height();
                 var storeId=$('.storeId').val();
+                $('html,body').addClass('scrollStyle');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
                 $('.vendorInfoLayer li').on('click',function(){
                     var _this=$(this);
@@ -90,6 +92,7 @@
                         dialog.error('AJAX错误'+xhr);
                     }
                 });
+                $('html,body').removeClass('scrollStyle');
                 layer.close(index);
             }
         })
