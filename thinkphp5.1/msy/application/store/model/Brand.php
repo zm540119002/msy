@@ -1,5 +1,5 @@
 <?php
-namespace app\store\model;
+namespace app\factory\model;
 use think\Model;
 use think\Db;
 /**
@@ -12,21 +12,21 @@ class Brand extends Model {
 	// 设置主键
 	protected $pk = 'id';
 //	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_store';
+	protected $connection = 'db_config_factory';
 
 	/**
 	 * 编辑 新增和修改
 	 */
-	public function edit($storeId = ''){
+	public function edit($factoryId = ''){
 		$data = input('post.');
 		$validate = validate('Brand');
 		if(!$result = $validate->scene('edit')->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['brand_img'] = moveImgFromTemp(config('upload_dir.store_brand'),basename($data['brand_img']));
-		$data['certificate'] = moveImgFromTemp(config('upload_dir.store_brand'),basename($data['certificate']));
-		$data['authorization'] = moveImgFromTemp(config('upload_dir.store_brand'),basename($data['authorization']));
-		$data['store_id'] = $storeId;
+		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
+		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
+		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));
+		$data['factory_id'] = $factoryId;
 		if(input('?post.brand_id')){//修改
 			$data['update_time'] = time();
 			$data['auth_status'] = 0;

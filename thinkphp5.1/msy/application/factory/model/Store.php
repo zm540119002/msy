@@ -14,7 +14,7 @@ class Store extends \common\model\Base {
 	// 别名
 	protected $alias = 's';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
+    protected $connection = 'db_config_common';
 	/**
 	 * 编辑
 	 */

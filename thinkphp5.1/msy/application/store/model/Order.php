@@ -6,7 +6,7 @@
  * Time: 9:39
  * 订单管理控制器
  */
-namespace app\store\model;
+namespace app\factory\model;
 
 use think\Model;
 
@@ -15,17 +15,17 @@ class Order extends Model
     // 设置当前模型对应的完整数据表名称
     protected $table = 'order_unpack';
     // 设置当前模型的数据库连接
-    protected $connection = 'db_config_store';
+    protected $connection = 'db_config_factory';
     // 设置主键
     protected $pk = 'order_id';
 
-    public function getOrderList($store_id)
+    public function getOrderList($factory_id)
     {
         return $this->alias('a')->field('a.pay_money, a.order_id, a.status_unpack, b.order_sn, b.status, 
             b.create_time, b.source, b.pay_method, b.remark, c.consignee, c.phone, c.detail')
             ->join('order b', 'a.order_id=b.order_id', 'INNER')
             ->join('address_static c', 'b.order_id=c.order_id', 'INNER')
-            ->where(['a.store_id'=>$store_id])
+            ->where(['a.factory_id'=>$factory_id])
             ->paginate(2);
     }
 
@@ -54,18 +54,18 @@ class Order extends Model
 
     /**
      * 根据店铺与订单ID获取订单明细
-     * @param $store_id
+     * @param $factory_id
      * @param $order_id
      * @return array
      */
-    public function getOrderDetail($store_id, $order_id)
+    public function getOrderDetail($factory_id, $order_id)
     {
         $ret = $this->alias('a')->field('a.pay_money, a.order_id, a.status_unpack, b.order_sn, b.status, 
             b.create_time, b.source, b.pay_method, b.remark, c.consignee, c.phone, c.detail, d.*')
             ->join('order b', 'a.order_id=b.order_id', 'INNER')
             ->join('address_static c', 'b.order_id=c.order_id', 'INNER')
             ->join('order_detail d', 'c.order_id=d.order_id', 'INNER')
-            ->where(['a.order_id'=>$order_id, 'a.store_id'=>$store_id, 'd.store_id'=>$store_id])
+            ->where(['a.order_id'=>$order_id, 'a.factory_id'=>$factory_id, 'd.factory_id'=>$factory_id])
             ->select();
         if(count($ret)<=0){
             errorMsg('订单数据有误');
@@ -102,11 +102,11 @@ class Order extends Model
         return successMsg('订单明细数据', $data);
     }
 
-    public function isOwnOrder($store_id, $order_sn)
+    public function isOwnOrder($factory_id, $order_sn)
     {
         $ret = $this->alias('a')->field('a.order_id, a.status_unpack, b.status')
             ->join('order b', 'a.order_id=b.order_id', 'INNER')
-            ->where(['a.store_id'=>$store_id, 'b.order_sn'=>$order_sn])
+            ->where(['a.factory_id'=>$factory_id, 'b.order_sn'=>$order_sn])
             ->find();
         if(!$ret){
             return errorMsg('订单不存在');
@@ -119,10 +119,10 @@ class Order extends Model
         return successMsg('订单存在', $data);
     }
 
-    public function setStatusUnpack($store_id, $order_id, $status)
+    public function setStatusUnpack($factory_id, $order_id, $status)
     {
         //设置订单状态$su = [1=>'待仓库拣货', 2=>'仓库拣货', 3=>'已出库', 4=>'发货中', 5=>'已发货', 6=>'已完成'];
-        $where = ['order_id'=>$order_id, 'store_id'=>$store_id];
+        $where = ['order_id'=>$order_id, 'factory_id'=>$factory_id];
         $where_status = 's';
         if($status<=1&&$status>5){
             return errorMsg('不允许修改订单状态');
@@ -146,12 +146,12 @@ class Order extends Model
         return errorMsg('设置订单状态失败');
     }
 
-    public function getOrderExpress($store_id, $order_sn)
+    public function getOrderExpress($factory_id, $order_sn)
     {
         $ret = $this->alias('a')->field('a.status_unpack, b.*, c.express_name, c.express_code')
             ->join('order b', 'a.order_id=b.order_id', 'INNER')
             ->join('express c', 'c.order_id=b.order_id', 'LEFT')
-            ->where(['b.order_sn'=>$order_sn, 'a.store_id'=>$store_id])
+            ->where(['b.order_sn'=>$order_sn, 'a.factory_id'=>$factory_id])
             ->select();
         if( count($ret)<=0 ){
             return errorMsg('订单不存在');
