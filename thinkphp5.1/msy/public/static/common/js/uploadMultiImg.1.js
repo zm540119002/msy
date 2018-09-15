@@ -99,26 +99,10 @@ $(function(){
         uploadsMultiVideo(goodsVideoList);
     });
      //上传单图片和描述
-    var imgContainer111 = $('.multi-picture-moduleDes');
-    // var fileList;
-    // var num;
     $('body').on('change','.uploadImgDescribe',function () {
-       
-        var file = $(this);
-        fileList = $(this).get(0).files;
-        var imgArr = [];
-        num=file.data('num');//限制个数
-        console.log(fileList.length);
-        //if(num==0){ //0代表无限制个数          
-            uploadPicDescribe(fileList[0],0,fileList.length);
-        // }else{
-        //     uploadPic(fileList[0],0,num);
-        // }   
-    });   
-    function uploadPicDescribe(fil,i,len){
-        var img = fil;
+        var img = event.target.files[0];
         var obj=$(this).parent();
-        var fileSize=fil.size/1024/1024;
+        var imgContainer = $('.multi-picture-module');
         // 判断是否图片
         if(!img){
             return false;
@@ -136,19 +120,13 @@ $(function(){
         reader.onload = function(e){
             var imgUrl=e.target.result;
             // $(obj).addClass('active');
-            var oLiLen=imgContainer111.find('li').length;
+            var oLiLen=imgContainer.find('li').length;
             var img=  $('<img src="" class="upload_img">');
             img.attr("src", imgUrl);
-            var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id='+i+' cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
-            console.log(imgAdd.find('.picture-module'));
+            var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
             imgAdd.find('.picture-module').append(img);
-            $('.multi-picture-moduleDes').append(imgAdd);
-            if(i<len-1){
-                // console.log(len);
-                if(fileList[i+1]){
-                    uploadPicDescribe(fileList[i+1],i+1,len);
-                }
-            }
+            imgContainer.append(imgAdd);
+           
             
             //提交
             // $.post("uploadImgToTemp",postData,function(msg){
@@ -160,8 +138,7 @@ $(function(){
             //     }
             // })
         }
-    };
-
+    });
     //上传单视频和描述
     $('body').on('change','.uploadVideoDescribe',function () {
         var img = event.target.files[0];
@@ -440,12 +417,11 @@ function uploadsImgDescribe(content,obj){
                 html+='</div>';
                 html+='</li>';                  
             var multiImgAttr=obj.data('src');
-            console.log(multiImgAttr);
             for(var i=0;i<multiImgAttr.length;i++){
                 if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
                     multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
                 }
-                $('.editCompanyPicLayer .multi-picture-moduleDes').append(html);
+                $('.editCompanyPicLayer .multi-picture-module').append(html);
                 $('.editCompanyPicLayer .upload_img').eq(i).attr('src',multiImgAttr[i].fileSrc);
                 $('.editCompanyPicLayer .edit-text').eq(i).val(multiImgAttr[i].fileText);
             }

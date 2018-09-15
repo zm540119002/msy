@@ -2341,7 +2341,7 @@ input[type=text]::-webkit-focus-inner {
     margin:0.12rem 0 0;
 }
 .edit-text{
-    width:2.6rem;
+    width:2.5rem;
     display: none;
     border:1px solid #d9d9d9;
     box-sizing: border-box;
