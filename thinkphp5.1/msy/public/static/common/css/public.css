@@ -801,9 +801,9 @@ background-position: 0 -27px;
     padding-bottom:1rem;
 }
 .column_type.current{
-    color:#ff7aab;
+    /*color:#ff7aab;
     border:1px solid #ff7aab;
-    border-radius:5px;
+    border-radius:5px;*/
 }
 .voucher_module{
     padding:0.12rem 0.12rem 1rem;
