@@ -23,16 +23,7 @@
 .top_nav_store .top_bar a:last-child{
     margin:0 auto;
 }
-.joint_instruction{
-    display:block;
-    width:3rem;
-    padding:.10rem 0;
-    margin:0 auto;
-    color:#39b54a;
-    border:1px solid #39b54a;
-    border-radius:6px;
-    text-align:center;
-}
+
 .store-picture-module{
     margin:0.15rem 0 0;
 }

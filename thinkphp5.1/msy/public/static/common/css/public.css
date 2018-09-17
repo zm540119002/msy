@@ -2860,7 +2860,16 @@ input[type=text]::-webkit-focus-inner {
 .initial{
     overflow:initial;
 }
-
+.joint_instruction{
+    display:block;
+    width:3rem;
+    padding:.10rem 0;
+    margin:0 auto;
+    color:#39b54a;
+    border:1px solid #39b54a;
+    border-radius:6px;
+    text-align:center;
+}
 /*淘宝的布局*/
 .page-container{
     padding-top: 96px;
