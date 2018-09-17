@@ -14,13 +14,14 @@ class Factory extends \common\model\Base {
 	// 别名
 	protected $alias = 'f';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
+    protected $connection = 'db_config_common';
 
 	/**编辑
 	 */
 	public function edit($uid=''){
 		$data = input('post.');
 		$data['user_id'] = $uid;
+		$data['type'] = 1;//供应商类型
 		$validate = validate('Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());

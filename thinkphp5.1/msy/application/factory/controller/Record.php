@@ -17,6 +17,7 @@ class Record extends FactoryBase
             ];
             $recordInfo =  $model -> getInfo($config);
             $this -> assign('recordInfo',$recordInfo);
+            $this -> assign('factoryName',$this->factory['name']);
             return $this->fetch();
         }
     }
@@ -34,7 +35,7 @@ class Record extends FactoryBase
             ],'join' => [
                 ['factory f','f.id = r.factory_id'],
             ],'field' => ['r.id,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
-                            r.company_img,r.create_time,r.update_time,f.name'],
+                            r.company_img,r.create_time,r.update_time,r.short_name,f.name'],
         ];
         $recordInfo = $model -> getInfo($config);
         if(!empty($recordInfo)){

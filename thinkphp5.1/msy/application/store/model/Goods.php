@@ -1,5 +1,5 @@
 <?php
-namespace app\store\model;
+namespace app\factory\model;
 use GuzzleHttp\Psr7\Request;
 use think\Model;
 use think\Db;
@@ -13,7 +13,7 @@ class Goods extends Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_store';
+	protected $connection = 'db_config_factory';
 
 
 	/**
@@ -70,10 +70,10 @@ class Goods extends Model {
 				return errorMsg('没有数据');
 			}
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'store_id'=>$shopId]);
+			$result = $this->allowField(true)->save($data, ['id' => $data['id'],'factory_id'=>$shopId]);
 		}else{
 			$data['create_time'] = time();
-			$data['store_id'] = $shopId;
+			$data['factory_id'] = $shopId;
 			$result = $this -> allowField(true) -> save($data);
 			if(!$result){
 				return errorMsg('失败');
@@ -108,7 +108,7 @@ class Goods extends Model {
 	private function _isExistGoodsName($data,$shopId){
 		$name = $data['name'];
 		$where = [
-			['store_id','=',$shopId],
+			['factory_id','=',$shopId],
 			['name','=',$name],
 		];
 		if(isset($data['id']) && (int)$data['id']){//

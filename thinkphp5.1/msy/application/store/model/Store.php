@@ -1,41 +1,41 @@
 <?php
-namespace app\store\model;
+namespace app\organization\model;
 use think\Model;
 use think\Db;
 /**
  * 基础模型器
  */
 
-class Store extends Model {
+class Organization extends Model {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'store';
+	protected $table = 'organization';
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_store';
+    protected $connection = 'db_config_organization';
 
 	/**编辑
 	 */
 	public function edit($uid=''){
 		$data = input('post.');
 		$data['user_id'] = $uid;
-		$where['id'] = $data['store_id'];
+		$where['id'] = $data['organization_id'];
 		$file = array(
 			'business_license','auth_letter',
 		);
-		$oldStoreInfo = $this -> getInfo($where,$file);
-		$validate = validate('store');
+		$oldOrganizationInfo = $this -> getInfo($where,$file);
+		$validate = validate('organization');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
 		}
-		$data['business_license'] = moveImgFromTemp(config('upload_dir.store_auto'),basename($data['business_license']));
-		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.store_auto'),basename($data['auth_letter']));
-		if(input('?post.store_id')){
+		$data['business_license'] = moveImgFromTemp(config('upload_dir.organization_auto'),basename($data['business_license']));
+		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.organization_auto'),basename($data['auth_letter']));
+		if(input('?post.organization_id')){
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['id' => $data['store_id']]);
+			$result = $this->allowField(true)->save($data,['id' => $data['organization_id']]);
 			if(false !== $result){
-				delImgFromPaths($oldStoreInfo['business_license'],$data['business_license']);
-				delImgFromPaths($oldStoreInfo['auth_letter'],$data['auth_letter']);
+				delImgFromPaths($oldOrganizationInfo['business_license'],$data['business_license']);
+				delImgFromPaths($oldOrganizationInfo['auth_letter'],$data['auth_letter']);
 				return successMsg("成功");
 			}else{
 				return errorMsg('失败');
@@ -48,10 +48,10 @@ class Store extends Model {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$storeUserModel =  new \app\store\model\UserStore;
+			$organizationUserModel =  new \app\organization\model\UserOrganization;
 			$data['user_id'] = $uid;
-			$data['store_id'] = $this->getAttr('id');
-			$result = $storeUserModel -> allowField(true) -> save($data);
+			$data['organization_id'] = $this->getAttr('id');
+			$result = $organizationUserModel -> allowField(true) -> save($data);
 			if(!$result){
 				$this ->rollback();
 				return errorMsg('失败');

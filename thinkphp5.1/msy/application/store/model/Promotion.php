@@ -1,5 +1,5 @@
 <?php
-namespace app\store\model;
+namespace app\factory\model;
 use GuzzleHttp\Psr7\Request;
 use think\Model;
 use think\Db;
@@ -13,7 +13,7 @@ class Promotion extends Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_store';
+	protected $connection = 'db_config_factory';
 	/**
 	 * 新增和修改
 	 */
@@ -24,7 +24,7 @@ class Promotion extends Model {
 			return errorMsg($validate->getError());
 		}
 		if(!empty($data['img'])){
-			$data['img'] = moveImgFromTemp(config('upload_dir.store_goods'),basename($data['img']));
+			$data['img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['img']));
 		}
 		$data['shop_id'] = $shopId;
 		$this ->startTrans();
@@ -51,7 +51,7 @@ class Promotion extends Model {
 				return errorMsg('失败');
 			}
 		}
-		$modelGoods  = new \app\store\model\Goods;
+		$modelGoods  = new \app\factory\model\Goods;
 		$result = $modelGoods ->save(['sale_type'=>1],['id' => $data['goods_id'],'shop_id'=>$shopId]);
 		if(false === $result){
 			$this ->rollback();

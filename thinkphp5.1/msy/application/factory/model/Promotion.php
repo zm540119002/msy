@@ -15,14 +15,15 @@ class Promotion extends \common\model\Base {
 	// 设置当前模型的数据库连接
 	// 别名
 	protected $alias = 'p';
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_common';
 	/**
 	 * 新增和修改
 	 */
-	public function edit($storeId =''){
+	public function edit($storeId ='',$runType =''){
 		$modelGoods  = new \app\factory\model\Goods;
 		$validate = validate('Promotion');
 		$data = input('post.');
+		$data['run_type'] = $runType;
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
 		}
