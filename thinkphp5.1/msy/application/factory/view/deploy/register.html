@@ -15,9 +15,9 @@
 		<div id="wizard" class="page-bd">
 			<nav class="apply-data-nav">
 				<ul id="status " class="status f24 weui-flex">
-					<li class="weui-flex-item switch-item current"><span class="base_info"></span><em></em>基本资料</li>
-					<li class="weui-flex-item switch-item "><span class="upload-prove"></span><em></em>上传证明</li>
-					<li class="weui-flex-item "><span class="opening"></span>开通入驻</li>
+					<li class="weui-flex-item switch-item current"><span class="base_info"></span><em></em>供应商信息</li>
+					<li class="weui-flex-item switch-item "><span class="upload-prove"></span><em></em>上传材料</li>
+					<li class="weui-flex-item "><span class="opening"></span>开通账号</li>
 				</ul>
 			</nav>
 			<div class="apply-data-content">
@@ -27,10 +27,16 @@
 						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
 						{/notempty}
 						<div class="apply-items">
-							<input type="text" class="factoryFullName " name="" value="{$factoryInfo.name|default=''}" placeholder="厂商全称(与营业执照相同)">
+							<input type="text" class="factoryFullName " name="" value="{$factoryInfo.name|default=''}" placeholder="企业全称(与营业执照相同)">
+						</div>
+						<div class="apply-items">
+							<input type="text" class="factoryFullName " name="" value="{$factoryInfo.name|default=''}" placeholder="企业简称">
 						</div>
 						<div class="apply-items">
 							<input type="text" class="agentName " name="" value="{$factoryInfo.agent|default=''}" placeholder="代办人姓名">
+						</div>
+						<div class="apply-items">
+							<input type="tel" class="agentName " name="" value="{$factoryInfo.agent|default=''}" placeholder="代办人手机号码">
 						</div>
 						<div>
 							手机号码
