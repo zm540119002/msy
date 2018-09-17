@@ -24,7 +24,7 @@
 		</div>
 	</section>
 	<section class="specific_type bottomLine">
-		<div class="columns_flex f20">
+		<div class="columns_flex f20 l-r-sides">
 			<a href="{:url('Order/beforeSale')}">售前</a>
 			<a href="{:url('Order/index')}" class="record">打单</a>
 			<a href="{:url('Order/out')}">出仓</a>
@@ -49,46 +49,139 @@
 				</dd>
 			</dl>
 			<div id="order_detail"></div>
-			<div id="data_all" data_order_id="" data_order_sn="" data_status_unpack="" ></div>
-			<div id="order_status"></div>
+			<div id="data_express" style="display: none;">
+				<p>物流公司：<input type="text" placeholder="名称" id="add_express_name" ></p>
+				<p>物流单号：<input type="text" placeholder="单号" id="add_express_code"></p>
+				<div class="add_express">添加</div>
+			</div>
+			<div class="text_express" style="background: #ffc6cd;display: none;">编辑物流信息</div>
 		</div>
 	</section>
 </article>
 
 {/block}
 {block name="common"}
-{include file="template/footer_menu_msy_store.html" /}
+{include file="template/footer_menu_msy_factory.html" /}
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-
 <script type="text/javascript">
-$(function(){
-
-});
 	$("#order").keydown(function(e) {
 		if (e.keyCode == 13) {
-			var order_sn = $.trim( $('#order').val() );
-			if(!order_sn){
-				alert('请输入订单号');
-				return false;
-			}
-			$.ajax({
-				type: 'POST',
-				url: "{:url('Order/getExpress')}",
-				data:{order_sn:order_sn},
-				dataType:'json',
-				success:function(e){
-					if(e.status==1){
-						$('#order_detail').empty().append(e.data);
-					}else{
-						alert(e.info);
-					}
-
-				}
-			});
+			getOrderExpress();
 		}
 	});
+
+	$('.search_btn').click(function(){
+		getOrderExpress();
+	});
+
+	$('.text_express').click(function(){
+		if( $('#data_express').is(':hidden') ){
+			$('#data_express').css({'display':'block'});
+			$('#order_detail input').prop({'disabled':false});
+			$('.operation').css({'display':'block'});
+		}else{
+			$('#data_express').css({'display':'none'});
+			$('#order_detail input').prop({'disabled':true});
+			$('.operation').css({'display':'none'});
+		}
+	});
+
+	//删除物流信息
+	$('#order_detail').on('click', '.del_express', function(){
+		var express_id = $(this).attr('data'), express=$(this);
+		if(!express_id){
+			dialog.error('物流信息有误');
+			return false;
+		}
+		$.ajax({
+			url: "{:url('Express/deleteExpress')}",
+			data: {'id':express_id},
+			type: 'POST',
+			dataType: 'json',
+			success: function(e){
+				if(e.status==1){
+					express.parents('dl').empty().css('display', 'none');
+					dialog.success(e.info);
+				}else{
+					dialog.error(e.info);
+				}
+			}
+		})
+	});
+
+	//修改物流信息
+	$('#order_detail').on('click', '.update_express', function(){
+		var express_id = $(this).attr('data');
+		if(!express_id){
+			dialog.error('物流信息有误');
+			return false;
+		}
+		$.ajax({
+			url: "{:url('Express/updateExpress')}",
+			data: {'id':express_id, express_name:$('#name_'+express_id).val(),
+				express_code:$('#code_'+express_id).val()},
+			type: 'POST',
+			dataType: 'json',
+			success: function(e){
+				dialog.success(e.info);
+			}
+		})
+	});
+
+	//新增物流信息
+	$('.add_express').click(function(){
+		var express_name = $('#add_express_name').val(), express_code = $('#add_express_code').val(),
+				order_id=$('#order_id').attr('data');
+		if(!express_name||!express_code){
+			dialog.error('数据不正确');
+			return false;
+		}
+		if(!order_id){
+			dialog.error('订单数据有误');
+			return false;
+		}
+		$.ajax({
+			url: "{:url('Express/addExpress')}",
+			data: {order_id:order_id, express_name:express_name, express_code:express_code},
+			type: 'POST',
+			dataType: 'json',
+			success: function(e){
+				if(e.status==1){
+					$('#order_detail').append(e.data);
+					dialog.success(e.info);
+				}else{
+					dialog.error(e.info);
+				}
+			}
+		});
+	});
+
+	function getOrderExpress()
+	{
+		var order_sn = $.trim( $('#order').val() );
+		if(!order_sn){
+			dialog.error('请输入订单号');
+			return false;
+		}
+		$.ajax({
+			type: 'POST',
+			url: "{:url('Order/getExpress')}",
+			data:{order_sn:order_sn},
+			dataType:'json',
+			success:function(e){
+				if(e.status==1){
+					$('#order_detail').empty().append(e.data);
+					$('.text_express').css({'display':'block'});
+					$('#order').val('');
+				}else{
+					dialog.error(e.info);
+				}
+
+			}
+		});
+	}
 </script>
 {/block}

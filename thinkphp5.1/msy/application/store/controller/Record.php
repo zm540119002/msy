@@ -1,20 +1,23 @@
 <?php
 namespace app\store\controller;
 
-class Record extends StoreBase
+class Record extends FactoryBase
 {
 
     //产商档案编辑
     public function edit(){
         $model = new \app\store\model\Record();
         if(request()->isPost()){
-            return $model -> edit($this->store['id']);
+            return $model -> edit($this->factory['id']);
         }else{
-            $where = [
-                ['store_id','=',$this->store['id']],
+            $config = [
+                'where' => [
+                    ['factory_id','=',$this->factory['id']],
+                ],
             ];
-            $recordInfo =  $model -> getInfo($where);
+            $recordInfo =  $model -> getInfo($config);
             $this -> assign('recordInfo',$recordInfo);
+            $this -> assign('factoryName',$this->factory['name']);
             return $this->fetch();
         }
     }
@@ -24,24 +27,25 @@ class Record extends StoreBase
     public function preview()
     {
         $model = new \app\store\model\Record();
-        $where = [
-            ['r.store_id','=',$this->store['id']],
+        $config = [
+            'where' => [
+                ['r.factory_id','=',$this->factory['id']],
+            ],'order' => [
+                'id' => 'desc',
+            ],'join' => [
+                ['factory f','f.id = r.factory_id'],
+            ],'field' => ['r.id,r.introduction,r.factory_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
+                            r.team_activity,r.company_img,r.create_time,r.update_time,r.short_name,f.name'],
         ];
-        $file = ['r.id,r.shop_name,r.introduction,r.store_video,r.logo_img,r.rb_img,r.license,r.glory_img,r.provinces,r.detail_address,
-        r.company_img,r.create_time,r.update_time,f.name'];
-        $join = [
-            ['store f','f.id = r.store_id'],
-        ];
-        $recordInfo = $model -> getInfo($where,$file,$join);
+        $recordInfo = $model -> getInfo($config);
         if(!empty($recordInfo)){
-            $recordInfo['store_video'] = json_decode($recordInfo['store_video'],true);
+            $recordInfo['factory_video'] = json_decode($recordInfo['factory_video'],true);
             $recordInfo['rb_img'] = json_decode($recordInfo['rb_img'],true);
             $recordInfo['license'] = json_decode($recordInfo['license'],true);
             $recordInfo['glory_img'] = json_decode($recordInfo['glory_img'],true);
+            $recordInfo['team_activity'] = json_decode($recordInfo['team_activity'],true);
         }
         $this -> assign('recordInfo',$recordInfo);
         return $this->fetch();
     }
-
-
 }

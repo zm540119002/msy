@@ -84,6 +84,25 @@
 			</div>
 		</div>
 	</section>
+	<section class="separation-line content-box">
+		<span class="content-label ">团队活动照片</span>
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="recordInfo.team_activity" id="vo"}
+				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
+						{notempty name="vo"}
+						<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
+						{else /}
+						<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+						{/notempty}
+					</div>
+					<p>{$vo['fileText']}</p>
+				</div>
+				{/volist}
+			</div>
+		</div>
+	</section>
 	<section class="separation-line content-box ">
 		<span class="content-label">执照资质</span>
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">

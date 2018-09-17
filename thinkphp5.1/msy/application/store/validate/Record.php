@@ -2,7 +2,6 @@
 namespace app\store\validate;
 
 
-
 class Record extends \think\Validate
 {
     protected $rule = [

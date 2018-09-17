@@ -44,6 +44,11 @@ class Record extends \common\model\Base{
 			$data['rb_img'] = $rse['imgsWithDecNew'];
 			$newRbImg = $rse['imgsArray'];
 		}
+		if(!empty($data['team_activity'])){
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['team_activity']);
+			$data['team_activity'] = $rse['imgsWithDecNew'];
+			$newRbImg = $rse['imgsArray'];
+		}
 
 		if(!empty($data['factory_video'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);

@@ -1,53 +1,59 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="store_css/main.css">
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<article class="f24">
-	<section class="separation-line">
-		<div class="columns_flex l-r-sides content-padding account-header">
-			<div id="accountInfo">
-				<input type="hidden" class="user_id" value="{$info.id}"/>
-				<div>
-					<span class="r-t">姓名：</span><span>{$info.name}</span>
-				</div>
-				<div>
-					<span class="r-t">手机号码：</span><span class="left">{$info.mobile_phone}</span>
-				</div>
-				<div class="role">
-					<span class="r-t left">角色：</span>
-					{notempty name='info.role'}
-					<div class="multi-role left">
-						{volist name='info.role' id='vo'}
-						<span data-role_id="{$vo.id}">{$vo.name}</span>
-						{/volist}
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="separation-line">
+					<div class="columns_flex l-r-sides content-padding account-header">
+						<div id="accountInfo">
+							<input type="hidden" class="user_id" value="{$info.id}"/>
+							<div class="ac-item">
+								<span class="r-t left">姓名：</span><span>{$info.name}</span>
+							</div>
+							<div class="ac-item">
+								<span class="r-t left">手机号码：</span><span class="r-t-m">{$info.mobile_phone}</span>
+							</div>
+							<div class="role ac-item">
+								<span class="r-t left">角色：</span>
+								{notempty name='info.role'}
+								<div class="multi-role left">
+								{volist name='info.role' id='vo'}
+									<span data-role_id="{$vo.id}">{$vo.name}</span>
+								{/volist}
+								</div>
+								{/notempty}
+							</div>
+						</div>
+						<div class="account-edit-btn columns_flex">
+							{if $info.status == 0}
+								<a href="javascript:void(0);" option="stop">
+									<span class="stop-icon ic"></span>
+									<span class="btn-status">停用账号</span>
+								</a>
+							{elseif $info.status == 1 /}
+								<a href="javascript:void(0);" option="activate">
+									<span class="activate-icon ic"></span>
+									<span class="btn-status">激活账号</span>
+								</a>
+							{/if}
+							<a href="javascript:void(0);" option="del">
+								<span class="del-icon ic"></span>
+								<span class="btn-status">删除账号</span>
+							</a>
+						</div>
 					</div>
-					{/notempty}
+				</div>
+				<div class="f24 signIn-wrapper">
+					<div class="account-item">
+						<span class="content-label">修改账号角色</span>
+						<ul class="account-role-list role-list"></ul>
+					</div>
 				</div>
 			</div>
-			<div class="account-edit-btn columns_flex">
-				{if $info.status === 0}
-					<a option="stop">
-						<span class="stop-icon ic"></span>
-						<span class="btn-status">停用账号</span>
-					</a>
-				{elseif $info.status === 1 /}
-					<a option="activate">
-						<span class="activate-icon ic"></span>
-						<span class="btn-status">激活账号</span>
-					</a>
-				{/if}
-				<a option="del">
-					<span class="del-icon ic"></span>
-					<span class="btn-status">删除账号</span>
-				</a>
-			</div>
-		</div>
-	</section>
-	<section class="f24 signIn-wrapper">
-		<div class="account-item">
-			<span class="content-label">修改账号角色</span>
-			<ul class="account-role-list role-list"></ul>
 		</div>
 	</section>
 </article>
@@ -57,7 +63,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="store_js/account.js"></script>
+<script type="text/javascript" src="factory_js/account.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//页面初始化
@@ -71,7 +77,7 @@
 		$('body').on('click','ul.role-list li',function(){
 			$(this).toggleClass('current');
 		});
-		//确定
+		//修改账号角色
 		$('body').on('click','.confirm',function(){
 			var postData = {};
 			var url = controller + 'editRole';
@@ -89,7 +95,8 @@
 			$.post(url,postData,function(data){
 				dialog.error(data.info);
 				if(data.status==1){
-					history.go(-1);
+					// history.go(-1);
+					location.href=module + 'Account/index';
 				}
 			});
 		});
@@ -111,6 +118,7 @@
 		layer.open({
 			title:[title,'border-bottom:1px solid #d9d9d9;'],
 			className:'accountInfoLayer',
+			shadeClose:false,
 			content:content,
 			btn:['确定','取消'],
 			yes:function(index){
@@ -130,7 +138,7 @@
 						dialog.error(data.info);
 					}else if(data.status==1){
 						layer.close(index);
-						history.go(-1);
+						location.href=module + 'Account/index';
 					}
 				});
 			}

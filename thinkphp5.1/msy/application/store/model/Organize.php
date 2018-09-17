@@ -1,11 +1,12 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 
-class Organize extends \think\Model {
+class Organize extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'organize';
 	// 设置主键
 	protected $pk = 'id';
+	
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_factory';
 
@@ -63,10 +64,8 @@ class Organize extends \think\Model {
 		];
 		$field = array(
 			'id','name','level','superior_id',
-		);
-		$order = [
-			'id'=>'desc','name',
-		];
+		);	
+		$order = 'id';
 		$allOrganize = $this->where($where)->field($field)->order($order)->select();
 		return count($allOrganize)?$allOrganize->toArray():[];
 	}

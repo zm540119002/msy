@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace app\store\model;
 
 class Account extends \think\Model {
 	// 设置当前模型对应的完整数据表名称
@@ -12,13 +12,13 @@ class Account extends \think\Model {
 	/**检查账号
 	 */
 	public function checkExist($userId,$factoryId){
-		$modelUserfactory = new \app\factory\model\Userfactory();
+		$modelUserFactory = new \app\store\model\UserFactory();
 		$where = [
 			['user_id','=',$userId],
 			['factory_id','=',$factoryId],
 			['status','<>',2],
 		];
-		$res = $modelUserfactory->where($where)->count('id');
+		$res = $modelUserFactory->where($where)->count('id');
 		return $res?true:false;
 	}
 
@@ -67,8 +67,8 @@ class Account extends \think\Model {
 				return errorMsg('新增失败');
 			}
 			//新增用户工厂角色
-			if(is_array($postData['userfactoryRoleIds']) && !empty($postData['userfactoryRoleIds'])){
-				foreach ($postData['userfactoryRoleIds'] as $val){
+			if(is_array($postData['userFactoryRoleIds']) && !empty($postData['userFactoryRoleIds'])){
+				foreach ($postData['userFactoryRoleIds'] as $val){
 					$data = [
 						'factory_id' => $factoryId,
 					];
@@ -80,23 +80,23 @@ class Account extends \think\Model {
 				}
 			}
 			//新增用户工厂组织
-			if(isset($postData['userfactoryOrganizeId']) && intval($postData['userfactoryOrganizeId'])){
+			if(isset($postData['userFactoryOrganizeId']) && intval($postData['userFactoryOrganizeId'])){
 				$data = [
 					'factory_id' => $factoryId,
 				];
-				$res = $user->organizes()->attach($postData['userfactoryOrganizeId'],$data);
+				$res = $user->organizes()->attach($postData['userFactoryOrganizeId'],$data);
 				if(!count($res)){
 					$this->rollback();//回滚事务
 					return errorMsg('新增失败');
 				}
 			}
 		}
-		$postData['userfactoryStatus'] = 0;
-		$modeRole = new \app\factory\model\Role();
+		$postData['userFactoryStatus'] = 0;
+		$modeRole = new \app\store\model\Role();
 		$where = [
 			['status', '=', 0],
 			['factory_id', '=', $factoryId],
-			['id', 'in', $postData['userfactoryRoleIds']],
+			['id', 'in', $postData['userFactoryRoleIds']],
 		];
 		$field = array(
 			'id','name',
@@ -109,17 +109,17 @@ class Account extends \think\Model {
 
 	//用户-工厂-关联模型
 	public function factories(){
-		return $this->belongsToMany('factory','Userfactory','factory_id','user_id');
+		return $this->belongsToMany('Factory','UserFactory','factory_id','user_id');
 	}
 
 	//用户-工厂角色-关联模型
 	public function roles(){
-		return $this->belongsToMany('Role','UserfactoryRole','role_id','user_id');
+		return $this->belongsToMany('Role','UserFactoryRole','role_id','user_id');
 	}
 
 	//用户-工厂-组织-关联模型
 	public function organizes(){
-		return $this->belongsToMany('Organize','UserfactoryOrganize','organize_id','user_id');
+		return $this->belongsToMany('Organize','UserFactoryOrganize','organize_id','user_id');
 	}
 
 	//详情
@@ -141,7 +141,7 @@ class Account extends \think\Model {
 		];
 		$info = $this->alias('u')->field($field)->where($where)->find();
 		//用户工厂关系表
-		$modelUserfactory = new \app\factory\model\Userfactory();
+		$modelUserFactory = new \app\store\model\UserFactory();
 		$where = [
 			['status', '<>', 2],
 			['user_id', '=', $id],
@@ -150,18 +150,20 @@ class Account extends \think\Model {
 		$field = [
 			'status',
 		];
-		$userfactory = $modelUserfactory->field($field)->where($where)->find();
-		$userfactory = $userfactory->toArray();
-		$info['status'] = $userfactory['status'];
+		$userFactory = $modelUserFactory->field($field)->where($where)->find();
+		$userFactory = count($userFactory)?$userFactory->toArray():[];
+		if(count($userFactory)){
+			$info['status'] = $userFactory['status'];
+		}
 		//用户工厂角色
-		$modelUserfactoryRole = new \app\factory\model\UserfactoryRole();
-		$info['role'] = $modelUserfactoryRole->getRole($info['id'],$factoryId);
+		$modelUserFactoryRole = new \app\store\model\UserFactoryRole();
+		$info['role'] = $modelUserFactoryRole->getRole($info['id'],$factoryId);
 		return $info?$info->toArray():[];
 	}
 
 	//获取列表
 	public function getList($factoryId){
-		$modelUserfactory = new \app\factory\model\Userfactory();
+		$modelUserFactory = new \app\store\model\UserFactory();
 		$where = [
 			['u.status','<>',2],
 			['uf.status','<>',2],
@@ -173,20 +175,20 @@ class Account extends \think\Model {
 			$where[] = ['u.name|u.mobile_phone', 'like', '%'.trim($keyword).'%',];
 		}
 		$field = [
-			'u.id','u.name','u.nickname','u.mobile_phone','uf.status userfactoryStatus','uf.is_default',
+			'u.id','u.name','u.nickname','u.mobile_phone','uf.status userFactoryStatus','uf.is_default',
 		];
 		$join = [
 			['common.user u','u.id = uf.user_id','LEFT'],
 		];
-		$list = $modelUserfactory->alias('uf')->where($where)->field($field)->join($join)->select();
-		$modelUserfactoryRole = new \app\factory\model\UserfactoryRole();
+		$list = $modelUserFactory->alias('uf')->where($where)->field($field)->join($join)->select();
+		$modelUserFactoryRole = new \app\store\model\UserFactoryRole();
 		foreach ($list as &$value){
-			$value['role'] = $modelUserfactoryRole->getRole($value['id'],$factoryId);
+			$value['role'] = $modelUserFactoryRole->getRole($value['id'],$factoryId);
 		}
 		return count($list)?$list:[];
 	}
 
-	//用户角色编辑
+	//用户工厂角色编辑
 	public function editRole($factoryId){
 		$userId = input('post.userId');
 		if(!intval($userId) || !intval($factoryId)){
@@ -196,12 +198,13 @@ class Account extends \think\Model {
 		if(empty($newRoleIds)){
 			return errorMsg('请选择角色');
 		}
-		$modelUserfactoryRole = new \app\factory\model\UserfactoryRole();
-		$userfactoryRole = $modelUserfactoryRole->getRole($userId,$factoryId);
-		$oldRoleIds = array_column($userfactoryRole,'id');
-		$modelUserfactoryRole->startTrans();//开启事务
+		$modelUserFactoryRole = new \app\store\model\UserFactoryRole();
+		$userFactoryRole = $modelUserFactoryRole->getRole($userId,$factoryId);
+		$oldRoleIds = array_unique(array_column($userFactoryRole,'id'));
+		$modelUserFactoryRole->startTrans();//开启事务
 		//新增角色
 		$addRoleIds = array_diff($newRoleIds,$oldRoleIds);
+
 		if(!empty($addRoleIds)){
 			$data = [];
 			foreach ($addRoleIds as $value){
@@ -211,9 +214,9 @@ class Account extends \think\Model {
 					'role_id' => $value,
 				];
 			}
-			$res = $modelUserfactoryRole->saveAll($data);
+			$res = $modelUserFactoryRole->saveAll($data);
 			if(false===$res){
-				$modelUserfactoryRole->rollback();//回滚事务
+				$modelUserFactoryRole->rollback();//回滚事务
 				return errorMsg('失败');
 			}
 		}
@@ -225,13 +228,13 @@ class Account extends \think\Model {
 				['factory_id','=',$factoryId],
 			];
 			$where[] = ['role_id','in',$delRoleIds];
-			$res = $modelUserfactoryRole->where($where)->delete();
+			$res = $modelUserFactoryRole->where($where)->delete();
 			if(!$res){
-				$modelUserfactoryRole->rollback();//回滚事务
+				$modelUserFactoryRole->rollback();//回滚事务
 				return errorMsg('失败',$this->getError());
 			}
 		}
-		$modelUserfactoryRole->commit();//提交事务
+		$modelUserFactoryRole->commit();//提交事务
 		return successMsg('成功');
 	}
 }
