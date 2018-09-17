@@ -75,20 +75,10 @@
 				</div>
 				<ul class="content-marginLeft">
 					<li>
-						<div class="express-area area-box">
-							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
-								<label class="form-label">所在地区：</label>
-								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-								<input type="hidden" value="" class="area-address-name" data-key="{$recordInfo.provinces|default=''}" name="provinces">
-							</a>
-						</div>
+						企业全称：<span>{$factoryName}</span>
 					</li>
 					<li>
-						<input type="text" class="detail-address" value="{$recordInfo.detail_address|default=''}" placeholder="填写详细地址" name="detail_address" >
-					</li>
-
-					<li>
-						<span>企业全称：{$factoryName}</span><input type="text" class="detail-address" value="{$recordInfo.short_name|default=''}" placeholder="填写企业简称" name="short_name">
+						<input type="text" class="detail-address" value="{$recordInfo.short_name|default=''}" placeholder="填写企业简称" name="short_name">
 					</li>
 					<li>
 						<div class="logo-license">
@@ -111,7 +101,7 @@
 						<input type="hidden" class="company-introduce" value="{$recordInfo.introduction|default=''}" name="introduction"/>
 					</li>
 					<li class="">
-						<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业视频</a>
+						<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业宣传视频</a>
 						<input type="hidden" class="company-video" value="" name="factory_video" data-src="{$recordInfo.factory_video|default=''}">
 					</li>
 					<li class="">
@@ -119,12 +109,28 @@
 						<input type="hidden" class="development-picture" data-src="{$recordInfo.rb_img|default=''}" value="" name="rb_img">
 					</li>
 					<li class="">
-						<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质</a>
+						<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传团队活动照片</a>
+						<input type="hidden" class="development-picture" data-src="{$recordInfo.rb_img|default=''}" value="" name="rb_img">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质照片</a>
 						<input type="hidden" class="license-picture" data-src="{$recordInfo.license|default=''}" value="" name="license">
 					</li>
 					<li class="">
-						<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉</a>
+						<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉照片</a>
 						<input type="hidden" class="honor-picture" data-src="{$recordInfo.glory_img|default=''}" value="" name="glory_img">
+					</li>
+					<li>
+						<div class="express-area area-box">
+							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">所在地区：</label>
+								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+								<input type="hidden" value="" class="area-address-name" data-key="{$recordInfo.provinces|default=''}" name="provinces">
+							</a>
+						</div>
+					</li>
+					<li>
+						<input type="text" class="detail-address" value="{$recordInfo.detail_address|default=''}" placeholder="填写详细地址" name="detail_address" >
 					</li>
 				</ul>
 			</form>
