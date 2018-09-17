@@ -1,4 +1,12 @@
 /*美尚云厂商入驻*/
+.store_deploy_nav{
+    border-top:1px solid #fff;
+}
+.top_nav_store span,
+.top_nav_store a,
+.store_deploy_nav a{
+    color:#fff;
+}
 .manufacturer_nav a span{
     background-image:url(../../factory/img/manufacturer_type.png);
 }
