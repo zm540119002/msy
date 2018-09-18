@@ -8,15 +8,18 @@ namespace app\store\controller;
 
 use app\store\model\Order as OrderModel;
 
-class Order extends ShopBase
+class Order extends StoreBase
 {
-    private  $order;
+    private  $order, $validate;
 
     public function __construct()
     {
         parent::__construct();
         if(!is_object($this->order)){
             $this->order = new OrderModel;
+        }
+        if(!is_object($this->validate)){
+            $this->validate = new \think\Validate;
         }
     }
 
@@ -28,16 +31,6 @@ class Order extends ShopBase
     {
         $this->assign( 'list', $this->order->getOrderList($this->store['id']) );
         return $this->fetch();
-    }
-
-    /**
-     * 测试合成图片功能
-     * @return string
-     *
-     */
-    public function  test()
-    {
-        return $this->compose();
     }
 
     /**
@@ -64,7 +57,7 @@ class Order extends ShopBase
      */
     public function delivery()
     {
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**
@@ -88,6 +81,18 @@ class Order extends ShopBase
     //根据订单号查订单详情
     public function  getOrderDetail($order_id, $data_html=true)
     {
+        $this->validate->rule([
+            'order_id'  => 'require|integer',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.integer' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_id,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
         $ret = $this->order->getOrderDetail($this->store['id'], $order_id);
         if($ret['status']=0){
             return $ret['info'];
@@ -108,7 +113,7 @@ class Order extends ShopBase
 					<p><strong>支付金额：￥ {$ret['order']['pay_money']} 元</strong></p>
 					<p>支付方式：{$ret['order']['pay_method']}</p>
 					<p>支付备注：{$ret['order']['remark']}</p>
-					</dd>
+				</dd>
 			</dl>
         ";
         $html .= "
@@ -124,61 +129,40 @@ class Order extends ShopBase
         foreach($ret['order_detail'] as $v){
             $html .= "
                 <dl>
-                    <dd>
+                    <dd class='goods_all' data='{$v["goods_id"]}'>
                         <p><img src='".config('template.tpl_replace_string.public_uploads')."/{$v["thumb_img"]}' /></p>
                         <p>商品名称：{$v['name']}</p>
-                        <p>购买数量：{$v['number']}</p>
-                        <p>发货数量：<span id='goods_{$v['goods_id']}'>{$v['send_number']}</span></p>
+                        <p>购买数量：<span class='number_{$v["goods_id"]}' data='{$v["number"]}'>{$v['number']}</span></p>
+                        <p>发货数量：<span class='send_{$v["goods_id"]}' data='{$v["send_number"]}'>{$v['send_number']}</span></p>
                         <p>当时销售价：{$v['goods_price']}</p>
                         <p>售后价：{$v['after_sale_price']}</p>
                     </dd>
                 </dl>
             ";
         }
-        $html .= "<div class='print' data='{$ret['order']['order_sn']}' data_id='{$ret['order']['order_id']}'>
-            打印订单</div>";
         if($data_html){
+            $html .= "<div class='print' data='{$ret['order']['order_sn']}' data_id='{$ret['order']['order_id']}'>
+            打印订单</div>";
             return response($html);
         }
         return $html;
-    }
-    
-    /**
-     * 填写物流单号
-     * @param number|string $order_id 订单号
-     * @param number|string $express_id  物流单号
-     * @param number $name_id 物流公司代号
-     * @return boolean
-     */
-    public function setExpress($order_id, $express_id, $name_id)
-    {
-        return true;
-    }
-
-    /**
-     * 更改订单状态
-     * @param number|string $order_id 订单号
-     * @param number $status 订单状态
-     * @return boolean
-     */
-    public function setStatusUnpack($order_id, $status_unpack)
-    {
-        return $this->order->setStatusUnpack($this->store['id'], $order_id, $status_unpack);
-    }
-
-    /**
-     * 订单商品数据与扫描数据比对
-     * @param json $scan 扫描到的商品数据
-     * @param number|string $order_id 订单号
-     * @return boolean|json|array 比对完全一致或返回其差异数据
-     */
-    public function compareGoods($order_id, $scan){
-        return true;
     }
 
     public function isOwnOrder($order_sn)
     {
         //是否拥有此订单
+        $this->validate->rule([
+            'order_id'  => 'require|string',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.string' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_sn,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
         $ret = $this->order->isOwnOrder($this->store['id'], $order_sn);
         if($ret['status']==0){
             return $ret;
@@ -190,11 +174,22 @@ class Order extends ShopBase
             'data'=>$this->getOrderDetail($ret['order_id'], false)
         ];
         return successMsg('订单单条明细数据', $data);
-
     }
 
     public function getExpress($order_sn)
     {
+        $this->validate->rule([
+            'order_id'  => 'require|string',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.string' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_sn,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
        $ret = $this->order->getOrderExpress($this->store['id'], $order_sn);
         if($ret['status']==0){
             return $ret;
@@ -205,7 +200,7 @@ class Order extends ShopBase
             if( !$order_html ){
                 $order_html = "
                     <dl>
-                        <dt>订单号：{$v['order_sn']}</dt>
+                        <dt id='order_id' data='{$v["order_id"]}'>订单号：{$v['order_sn']}</dt>
                         <dt>下单时间：{$v['create_time']}</dt>
                         <dt>支付状态：{$v['status']}</dt>
                         <dt>订单状态：{$v['status_unpack']}</dt>
@@ -217,15 +212,60 @@ class Order extends ShopBase
             if($v['express_name']){
                 $express_html .= "
                     <dl>
-                        <dt>物流公司：{$v['express_name']}</dt>
-                        <dt>物流单号：{$v['express_code']}</dt>
+                        <dt>物流公司：物流公司：
+                            <input type='text' value='{$v["express_name"]}' id='name_{$v["express_id"]}' disabled />
+                        </dt>
+                        <dt>物流单号：
+                            <input type='text' value='{$v['express_code']}' id='code_{$v["express_id"]}' disabled />
+                        </dt>
+                        <dt class='operation' style='display: none'>
+                            <span class='update_express' data='{$v['express_id']}'>修改</span>
+                            <span class='del_express' data='{$v['express_id']}'>删除</span>
+                            
+                        </dt>
                     </dl>
                 ";
             }
-
         }
         $order_html .= $express_html;
         return successMsg('查询成功', ['data'=>$order_html]);
     }
 
+    public function setDeliveryGoods($order_id, $goods)
+    {
+        $this->validate->rule([
+                'order_id'  => 'require|integer',
+                'goods' => 'require|array',
+            ])->message([
+                'order_id.require' => '订单号不存在',
+                'order_id.integer' => '订单号数据错误',
+                'goods.require' => '货品不存在',
+                'goods.array' => '货品数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_id,
+            'goods' => $goods,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
+        return $this->order->setDeliveryGoods($this->store['id'], $order_id, $goods);
+    }
+
+    public function setDelivery($order_id)
+    {
+        $this->validate->rule([
+            'order_id'  => 'require|integer',
+        ])->message([
+            'order_id.require' => '订单号不存在',
+            'order_id.integer' => '订单号数据错误',
+        ]);
+        $data = [
+            'order_id'  => $order_id,
+        ];
+        if (!$this->validate->check($data)) {
+            return errorMsg($this->validate->getError());
+        }
+        return $this->order->setDelivery($this->store['id'], $order_id);
+    }
 }

@@ -1,16 +1,18 @@
 <?php
 namespace app\store\model;
 
-class UserStore extends \think\model\Pivot {
+class UserFactory extends \think\model\Pivot {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'user_store';
+	protected $table = 'user_factory';
 	// 设置主键
 	protected $pk = 'id';
+	// 别名
+	protected $alias = 'uf';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_store';
+    protected $connection = 'db_config_common';
 
 	//设置默认厂商
-	public function setDefaultStore($userId=0){
+	public function setDefaultFactory($userId=0){
 		if(request()->isAjax()){
 			$this->startTrans();//开启事务
 			$where = [
@@ -22,9 +24,9 @@ class UserStore extends \think\model\Pivot {
 				$this->rollback();//回滚事务
 				return errorMsg('失败');
 			}
-			$storeId = input('post.storeId');
-			if(intval($storeId)){
-				$where[] = ['store_id','=',$storeId];
+			$factoryId = input('post.factoryId');
+			if(intval($factoryId)){
+				$where[] = ['factory_id','=',$factoryId];
 			}
 			$result = $this->where($where)->setField('is_default',1);
 			if(false === $result){
@@ -36,9 +38,9 @@ class UserStore extends \think\model\Pivot {
 		}
 	}
 
-	//设置用户机构状态
-	public function setStatus($storeId){
-		if(!intval($storeId)){
+	//设置用户工厂状态
+	public function setStatus($factoryId){
+		if(!intval($factoryId)){
 			return errorMsg('参数错误');
 		}
 		$postData = input('post.');
@@ -47,7 +49,7 @@ class UserStore extends \think\model\Pivot {
 		}
 		$where = [
 			['user_id', '=', $postData['userId']],
-			['store_id', '=', $storeId],
+			['factory_id', '=', $factoryId],
 			['status', '<>', 2],
 		];
 		$this->startTrans();//开启事务
@@ -56,17 +58,17 @@ class UserStore extends \think\model\Pivot {
 			$this->rollback();//回滚事务
 			return errorMsg('失败');
 		}
-		//设置用户机构角色状态
+		//设置用户工厂角色状态
 		$roleIds = array_unique($postData['roleIds']);
 		if(is_array($roleIds) && !empty($roleIds)){
-			$modelUserStoreRole = new \app\store\model\UserStoreRole();
+			$modelUserFactoryRole = new \app\store\model\UserFactoryRole();
 			$where = [
 				['user_id', '=', $postData['userId']],
-				['store_id', '=', $storeId],
+				['factory_id', '=', $factoryId],
 				['status', '<>', 2],
 				['role_id', 'in', $roleIds],
 			];
-			$res = $modelUserStoreRole->where($where)->setField('status',$postData['status']);
+			$res = $modelUserFactoryRole->where($where)->setField('status',$postData['status']);
 			if(false === $res){
 				$this->rollback();//回滚事务
 				return errorMsg('失败');

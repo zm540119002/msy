@@ -110,7 +110,7 @@
 					</li>
 					<li class="">
 						<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传团队活动照片</a>
-						<input type="hidden" class="development-picture" data-src="{$recordInfo.rb_img|default=''}" value="" name="rb_img">
+						<input type="hidden" class="team_activity" data-src="{$recordInfo.team_activity|default=''}" value="" name="team_activity">
 					</li>
 					<li class="">
 						<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质照片</a>
@@ -210,6 +210,9 @@
 				postData.glory_img = glory_img;
 			var factory_video=$('.company-video').data('src');
 				postData.factory_video = factory_video;
+			var team_activity=$('.team_activity').data('src');
+			postData.team_activity = team_activity;
+
 			var  content =''
 			if(!postData.company_img){
 				content='请上传企业形象图片';

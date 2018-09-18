@@ -5,6 +5,7 @@
 		.print{background:red; color:white; width:30%; text-align: center;
 			padding:3px; font-weight: bold; border-radius:5px;}
 		#order_status{background: #ffc6cd;text-align: center;cursor: pointer;}
+		#check_goods{background: #ffc6cd;display: none;text-align: center;}
 	</style>
 {/block}
 {block name="content"}
@@ -43,134 +44,138 @@
 			</dl>
 			<hr />-->
 			<dl>
-				<dt class="role-label"><strong>备货出仓人工检测模式</strong></dt>
+				<dt class="role-label"><strong>出仓</strong></dt>
 				<dd>
 					<section class="top_nav_fixed">
 						<div class="top_bar columns_flex">
 							<div class="each_column top_search_module">
 								<input type="button" class="search_btn"/>
-								<input type="text" id="order" placeholder="手动输入订单号"/>
+								<input type="text" id="order" placeholder="手动（扫码）输入订单号"/>
 							</div>
 						</div>
 					</section>
 				</dd>
 			</dl>
 			<div id="order_detail"></div>
-			<div id="data_all" data_order_id="" data_order_sn="" data_status_unpack="" ></div>
-			<div id="order_status"></div>
+			<div id="data_all" data_order_id="" data_order_sn=""></div>
+			<div id="check_goods">进行订单验货</div>
 		</div>
 	</section>
 </article>
 
 {/block}
 {block name="common"}
-{include file="template/footer_menu_msy_store.html" /}
+{include file="template/footer_menu_msy_factory.html" /}
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-
 <script type="text/javascript">
-$(function () {
 	$("#order").keydown(function(event) {
 		if (event.keyCode == 13) {
-			var order_sn = $.trim( $('#order').val() );
-			if(!order_sn){
-				alert('请输入订单号');
-				return false;
-			}
-			$.ajax({
-				type: 'POST',
-				url: "{:url('Order/isOwnOrder')}",
-				data:{order_sn:order_sn},
-				dataType:'json',
-				success:function(e){
-					if(e.status==1){
-						$('#data_all').attr('data_order_id', e.order_id);
-						$('#data_all').attr('data_order_sn', e.order_sn);
-						$('#data_all').attr('data_status_unpack', e.status_unpack);
-						status.getStatus(e.status_unpack);
-						$('#order_detail').empty().append(e.data);
-					}else{
-						alert(e.info);
-					}
-
-				}
-			});
+			getOrderDetail();
 		}
 	});
 
-	var status = {
-		order_status:$('#order_status'),
-		order_detail:$('#order_detail'),
-		data_all:$('#data_all'),
-		getStatus:function(status_value){
-			if(!this.order_detail){
-				this.order_status.empty();
+	$('.search_btn').click(function(){
+		getOrderDetail();
+	});
+
+	$('#check_goods').on('click', function(){
+		var html = "<span id='reset_goods'>重新验货</span><input type='text' id='goods' placeholder='输入商品ID' />",
+			html_self = "<p id='submit_goods'>确认出仓</p>", order_id = $('#data_all').attr('data_order_id');
+		$('#data_all').empty().append(html);
+		$(this).empty().append(html_self);
+	});
+
+	//验货+1
+	$('#data_all').on('keydown', '#goods', function(e){
+		if(e.keyCode == 13){
+			var goods_id = parseInt( $.trim($(this).val()) );
+			if(goods_id<=0){
+				dialog.error('您输入的商品号有误');
 				return false;
 			}
-			switch(status_value){
-				case 1:
-					var html ="<span id='reset_pick'>重新拣货</span>&nbsp;<span id='pick'>仓库拣货</span>";
-					this.order_status.empty().append(html).on('click', '#pick', function(){
-						status.data_all.empty().append("<span id='aa'>手动拣货&nbsp;&nbsp;</span></span><input id='compare' type='text' placeholder='商品条码'>").on(
-								'click', '#aa', function(){
-									alert($('#compare').val());
-								}
-						)
-						//alert(status.data_all.attr('data_order_id'));
-						//status.setStatusUnpack(2);
-					}).on('click', '#reset_pick', function(){
-						alert(33);
-					});
-					break;
-				case 2:
-					this.order_status.empty().text('填写物流单号');
-					break;
-				case 3:
-					this.order_status.empty().text('交付发货');
-					break;
-				case 4:
-					this.order_status.empty().text('已发货');
-					break;
-				default:
-					this.order_status.empty();break;
+			var send_ = $('.send_'+goods_id), number_ = $('.number_'+goods_id);
+			if(send_.length>0&&number_.length>0){
+				send_.text( parseInt(send_.text(), 10)+1 );
+				if( (parseInt(send_.text(), 10))>parseInt(number_.text()) ){
+					$('.goods_all').find(number_).parents('dl').css('background', 'red');
+					dialog.error('商品数量超出');
+				}
+			}else{
+				dialog.error('商品编号不存在');
 			}
-		},
-		setExpress:function(order_id, express_id, express){
-			$.ajax({ //填写物流单号
-				url: "{:url('Order/setExpress')}",
-				type: 'POST',
-				data:{ order_id:order_id, express_id:express_id, express:express},
-				dataType: 'json',
-				success: function(e){
-					if(e.status==1){
-						alert(e.info);
-						return false;
-					}
-					alert(e.info);
-				}
-			});
-		},
-		pick:function(){
-			alert('动态变动sd ');
-		},
-		setStatusUnpack:function(status_unpack){
-			$.ajax({ //设置订单状态
-				url: "{:url('Order/setStatusUnpack')}",
-				type: 'POST',
-				data: {status_unpack:status_unpack, order_id:148},
-				dataType: 'json',
-				success: function(e){
-					if(e.status==1){
-						status.getStatus(e.status_unpack);
-					}
-					alert(e.info);
-				}
-			});
 		}
-	}
+	});
 
-});
+	//重新验货
+	$('#data_all').on('click', '#reset_goods', function() {
+		$('.goods_all').each(function(){
+			var goods_id = parseInt( $(this).attr('data') );
+			$(this).find('.send_'+goods_id).text( $('.send_'+goods_id).attr('data') );
+			$(this).parent().css('background', 'white');
+		});
+	});
+
+	//验货提交
+	$('#check_goods').on('click', '#submit_goods', function(){
+		var obj = {}, order_id = $('#data_all').attr('data_order_id');
+		if(order_id<=0){
+			dialog.error('订单信息有误');
+			return false;
+		}
+		$('.goods_all').each(function(i){
+			var number_ = parseInt( $(this).find('.number_'+$(this).attr('data')).text(), 10),
+					send = parseInt( $(this).find('.send_'+$(this).attr('data')).text(), 10),
+					old_send = parseInt( $(this).find('.send_'+$(this).attr('data')).attr('data'), 10);
+			if(send>number_){
+				dialog.error('发货数量超出');
+				return false;
+			}
+			if(send>old_send){
+				obj[i] ={'goods_id':$(this).attr('data'),'send_number':send-old_send};
+			}
+		});
+		if($.isEmptyObject(obj)){
+			dialog.error('请扫描发货商品');
+			return false;
+		}
+		$.ajax({
+			url: "{:url('Order/setDeliveryGoods')}",
+			type: 'POST',
+			data: {'goods':obj, 'order_id': order_id},
+			dataType: 'json',
+			success: function(e){
+				dialog.error(e.info);
+			}
+		});
+	});
+
+	function getOrderDetail()
+	{
+		var order_sn = $.trim( $('#order').val() );
+		if(!order_sn){
+			dialog.error('请输入订单号');
+			return false;
+		}
+		$.ajax({
+			type: 'POST',
+			url: "{:url('Order/isOwnOrder')}",
+			data:{order_sn:order_sn},
+			dataType:'json',
+			success:function(e){
+				if(e.status==1){
+					$('#data_all').attr('data_order_id', e.order_id).empty();
+					$('#data_all').attr('data_order_sn', e.order_sn);
+					$('#order_detail').empty().append(e.data);
+					$('#check_goods').empty().css({'display':'block'}).text('进行订单验货');
+					$('#order').val('');
+				}else{
+					dialog.error(e.info);
+				}
+			}
+		});
+	}
 </script>
 {/block}
