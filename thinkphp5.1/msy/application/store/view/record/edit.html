@@ -40,8 +40,7 @@
 <section id="uploadCompanyPic" style="display: none;">
 	<p class="f20 friend-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
 	<form class="">
-		<ul class="upload-picture-module multi-picture-moduleDes f24">
-		</ul>
+		<ul class="upload-picture-module multi-picture-moduleDes f24"></ul>
 	</form>
 	<div class="error_tipc"></div>
 	<div class="upload-picture-module margin-left f24">
@@ -253,7 +252,6 @@
 				success:function (data) {
 					return false;
 					$(this).removeClass("nodisabled");
-
 				   if(data.status == 0){
 						dialog.error(data.info);
 						return false;
