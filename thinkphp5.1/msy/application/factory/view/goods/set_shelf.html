@@ -92,7 +92,7 @@
 			postData.shelf_status = shelfStatus;
 			postData.storeType = storeType;
 			var url = module+'goods/setShelf';
-			$(this).attr("disabled",true);//防止重复提交
+			$(this).addClass("nodisabled");//防止重复提交
 			$.ajax({
 				url: url,
 				data: postData,
@@ -104,7 +104,7 @@
 					dialog.error('AJAX错误');
 				},
 				success: function(data){
-					$(this).attr("disabled",false);
+					$(this).removeClass("nodisabled");
 					if(data.status == 1){
 						if(shelfStatus==2){
 							_this.removeClass('shelf').addClass('apply-shelf').text('已申请');

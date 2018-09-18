@@ -1,13 +1,11 @@
 /*美尚云厂商入驻*/
-.top_nav_store,
-.store_deploy_nav{
-    background:#666;
-}
 .top_nav_store{
     padding:10px 0 0;
+    background:#666;
 }
 .store_deploy_nav{
     border-top:1px solid #fff;
+    background:#666;
 }
 .top_nav_store span,
 .top_nav_store a,
@@ -25,16 +23,7 @@
 .top_nav_store .top_bar a:last-child{
     margin:0 auto;
 }
-.joint_instruction{
-    display:block;
-    width:3rem;
-    padding:.10rem 0;
-    margin:0 auto;
-    color:#39b54a;
-    border:1px solid #39b54a;
-    border-radius:6px;
-    text-align:center;
-}
+
 .store-picture-module{
     margin:0.15rem 0 0;
 }
@@ -1156,3 +1145,35 @@ transparent;
 .goods-store-content li img{
     width:100%;
 }
+/*管理员账号*/
+.manage_account_list{
+    padding:.25rem;
+}
+.manage_account_list li,
+.admin-account-list li{
+    padding:.15rem;
+    border:1px solid #d9d9d9;
+    border-radius:4px;
+    cursor: pointer;
+}
+.manage_account_list li .m_item{
+    display:inline-block;
+    width:60px;
+    margin:0 .12rem 0 0;
+    text-align:right;
+}
+.addManageLayer .input-filed{
+    text-align:center;
+}
+.manage_account_list li.current,
+.admin-account-list li.current{
+    border:1px solid #0066cc;
+}
+.manage_account_list .operate-btn,
+.admin-account-list .operate-btn{
+    display:none;
+}
+.operate-btn a{
+    margin:0 0 .12rem 0;
+}
+

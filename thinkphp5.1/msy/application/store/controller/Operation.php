@@ -1,13 +1,12 @@
 <?php
 namespace app\store\controller;
 
-class Operation extends ShopBase
+class Operation extends StoreBase
 {
     //运营管理首页
     public function Index(){
         return $this->fetch();
     }
-
     //店铺管理设置页
     public function set(){
         if(request()->isPost()){
@@ -15,10 +14,11 @@ class Operation extends ShopBase
             if(empty($logoImg)){
                 return errorMsg('参数错误');
             }
-            $model = new \app\store\model\Shop();
+            $model = new \app\store\model\Store();
             $where = [
-                ['id','=', $this->shop['id']]
+                ['id','=', $this->store['id']]
             ];
+            $logoImg = moveImgFromTemp(config('upload_dir.factory_store'),basename($logoImg));
             $result = $model->where($where)->setField('logo_img',$logoImg);
             if(false == $result){
                 return errorMsg('优化失败');
@@ -28,4 +28,5 @@ class Operation extends ShopBase
         }
         return $this->fetch();
     }
+
 }

@@ -1,11 +1,11 @@
 <?php
 //获取用户-工厂-角色-权限节点ID
-function getUserStoreRoleNode($userId,$storeId){
-    if(!intval($userId) || !intval($storeId)){
+function getUserFactoryRoleNode($userId,$factoryId){
+    if(!intval($userId) || !intval($factoryId)){
         return errorMsg('参数错误');
     }
-    $modelUserStoreRole = new \app\store\model\UserStoreRole();
-    $roleList = $modelUserStoreRole->getRole($userId,$storeId);
+    $modelUserFactoryRole = new \app\store\model\UserFactoryRole();
+    $roleList = $modelUserFactoryRole->getRole($userId,$factoryId);
     $modelRoleNode = new \app\store\model\RoleNode();
     $list = $modelRoleNode->getList(array_column($roleList,'id'));
     return $list;

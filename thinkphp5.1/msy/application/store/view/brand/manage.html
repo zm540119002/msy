@@ -1,19 +1,19 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="store_css/main.css">
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
 <article class="f24">
 	{include file="public/store_deploy_head" /}
 	<section class="specific_type bottomLine store_deploy_nav">
-		<div class="columns_flex f20 l-r-sides">
-			<a href="">管理员</a>
-			<a href="{:url('Record/preview')}">档案</a>
-			<a href="{:url('Brand/manage')}">商标</a>
-			<a href="{:url('Shop/manage')}">入驻</a>
-			<a href="{:url('Operation/index')}">店铺</a>
-			<a href="">门店</a>
-			<a href="{:url('Account/index')}">财务</a>
+		<div class="columns_flex f20 l-r-sides store_deploy_bar">
+			<a href="">管理员账号</a>
+			<a href="{:url('Record/preview')}">企业档案</a>
+			<a href="{:url('Brand/manage')}" class="current">商标备案</a>
+			<a href="{:url('store/manage')}" >开店申请</a>
+			<a href="{:url('Organize/index')}">店长账号</a>
+			<!--<a href="{:url('Organize/index')}">组别角色</a>
+			<a href="{:url('Account/index')}">账号授权</a>-->
 		</div>
 	</section>
 	<section class="trademark-module">
@@ -28,7 +28,11 @@
 			{volist name="brandList" id="vo"}
 				<li class="">
 					<div class="cols">
+						{notempty name="vo.brand_img"}
 						<img class="trade-logo" src="public_uploads/{$vo.brand_img}" />
+						{else /}
+						<img class="trade-logo" src="" />
+						{/notempty}
 					</div>
 					<div class="cols">
 						<span class="trade-name">{$vo.name}</span>

@@ -9,7 +9,7 @@ class UserFactory extends \think\model\Pivot {
 	// 别名
 	protected $alias = 'uf';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
+    protected $connection = 'db_config_common';
 
 	//设置默认厂商
 	public function setDefaultFactory($userId=0){

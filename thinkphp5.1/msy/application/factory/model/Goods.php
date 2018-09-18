@@ -9,12 +9,13 @@ class Goods extends \common\model\Base {
 	// 别名
 	protected $alias = 'g';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_common';
 
 	/**编辑 新增和修改
 	 */
-	public function edit($storeId =''){
+	public function edit($storeId ='',$runType = ''){
 		$data = input('post.');
+		$data['run_type'] = $runType;
 		if($this->_isExistGoodsName($data,$storeId)) {
 			return errorMsg('本店已存在此商品名，请更改别的商品名');
 		}

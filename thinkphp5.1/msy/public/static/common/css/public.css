@@ -102,6 +102,9 @@ body{
 .layui-m-layerbtn span[yes]{
     cursor: pointer;
 }
+.nodisabled{
+    pointer-events: none;
+}
 /*头部样式*/
 .header{
     width: 100%;
@@ -668,7 +671,8 @@ i{
 .channel_nav a span.purchasers{background-position:0 -140px;}
 .channel_nav a span.recharge{background-position:0 -187px;}
 .store_organize_nav a span.classify{background-position:0 -93px;}
-.channel_nav>a.current:before{
+.channel_nav>a.current:before,
+.store_deploy_bar>a.current:before{
     position: absolute;
     z-index: 1;
     left: 50%;
@@ -682,6 +686,9 @@ i{
     transform-origin: center;
     transition: all 0.5s;
     margin-left: -15px;
+}
+.store_deploy_bar>a.current:before{
+    background-color: #fff;
 }
 .twitter-nav a span{
      background-image:url(../../common/img/icons/twitter-icons.png);
@@ -710,6 +717,7 @@ color: #ed6d00;
 }
 .specific_type a{
     /*width:20%;*/
+    position:relative;
     box-sizing: border-box;
     text-align:center;
     /*margin:0 0 10px 0;*/
@@ -793,9 +801,9 @@ background-position: 0 -27px;
     padding-bottom:1rem;
 }
 .column_type.current{
-    color:#ff7aab;
+    /*color:#ff7aab;
     border:1px solid #ff7aab;
-    border-radius:5px;
+    border-radius:5px;*/
 }
 .voucher_module{
     padding:0.12rem 0.12rem 1rem;
@@ -2333,7 +2341,7 @@ input[type=text]::-webkit-focus-inner {
     margin:0.12rem 0 0;
 }
 .edit-text{
-    width:2.6rem;
+    width:2.5rem;
     display: none;
     border:1px solid #d9d9d9;
     box-sizing: border-box;
@@ -2851,6 +2859,16 @@ input[type=text]::-webkit-focus-inner {
 }
 .initial{
     overflow:initial;
+}
+.joint_instruction{
+    display:block;
+    width:3rem;
+    padding:.10rem 0;
+    margin:0 auto;
+    color:#39b54a;
+    border:1px solid #39b54a;
+    border-radius:6px;
+    text-align:center;
 }
 /*淘宝的布局*/
 .page-container{

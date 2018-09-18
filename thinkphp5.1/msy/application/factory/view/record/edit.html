@@ -40,14 +40,14 @@
 <section id="uploadCompanyPic" style="display: none;">
 	<p class="f20 friend-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
 	<form class="">
-		<ul class="upload-picture-module multi-picture-module f24">
+		<ul class="upload-picture-module multi-picture-moduleDes f24">
 		</ul>
 	</form>
 	<div class="error_tipc"></div>
 	<div class="upload-picture-module margin-left f24">
 		<div>
 			<div class="picture-module">
-				<input type="file" class="uploadImg uploadImgDescribe " name="" accept="image/*" >
+				<input type="file" class="uploadImg uploadImgDescribe " name="" accept="image/*" multiple>
 			</div>
 		</div>
 	</div>
@@ -75,16 +75,10 @@
 				</div>
 				<ul class="content-marginLeft">
 					<li>
-						<div class="express-area area-box">
-							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
-								<label class="form-label">所在地区：</label>
-								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-								<input type="hidden" value="" class="area-address-name" data-key="{$recordInfo.provinces|default=''}" name="provinces">
-							</a>
-						</div>
+						企业全称：<span>{$factoryName}</span>
 					</li>
 					<li>
-						<input type="text" class="detail-address" value="{$recordInfo.detail_address|default=''}" placeholder="填写详细地址" name="detail_address" >
+						<input type="text" class="detail-address" value="{$recordInfo.short_name|default=''}" placeholder="填写企业简称" name="short_name">
 					</li>
 					<li>
 						<div class="logo-license">
@@ -107,7 +101,7 @@
 						<input type="hidden" class="company-introduce" value="{$recordInfo.introduction|default=''}" name="introduction"/>
 					</li>
 					<li class="">
-						<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业视频</a>
+						<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业宣传视频</a>
 						<input type="hidden" class="company-video" value="" name="factory_video" data-src="{$recordInfo.factory_video|default=''}">
 					</li>
 					<li class="">
@@ -115,12 +109,28 @@
 						<input type="hidden" class="development-picture" data-src="{$recordInfo.rb_img|default=''}" value="" name="rb_img">
 					</li>
 					<li class="">
-						<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质</a>
+						<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传团队活动照片</a>
+						<input type="hidden" class="team_activity" data-src="{$recordInfo.team_activity|default=''}" value="" name="team_activity">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质照片</a>
 						<input type="hidden" class="license-picture" data-src="{$recordInfo.license|default=''}" value="" name="license">
 					</li>
 					<li class="">
-						<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉</a>
+						<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉照片</a>
 						<input type="hidden" class="honor-picture" data-src="{$recordInfo.glory_img|default=''}" value="" name="glory_img">
+					</li>
+					<li>
+						<div class="express-area area-box">
+							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">所在地区：</label>
+								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+								<input type="hidden" value="" class="area-address-name" data-key="{$recordInfo.provinces|default=''}" name="provinces">
+							</a>
+						</div>
+					</li>
+					<li>
+						<input type="text" class="detail-address" value="{$recordInfo.detail_address|default=''}" placeholder="填写详细地址" name="detail_address" >
 					</li>
 				</ul>
 			</form>
@@ -188,7 +198,7 @@
 		});
 
 		//提交档案信息
-		$('body').one('click','.identifyNewGoods',function(){
+		$('body').on('click','.identifyNewGoods',function(){
 			var postData={};
 			postData=$('.qualificationContent').serializeObject();
 			postData.provinces=$('.area-address-name').data('key');
@@ -200,6 +210,9 @@
 				postData.glory_img = glory_img;
 			var factory_video=$('.company-video').data('src');
 				postData.factory_video = factory_video;
+			var team_activity=$('.team_activity').data('src');
+			postData.team_activity = team_activity;
+
 			var  content =''
 			if(!postData.company_img){
 				content='请上传企业形象图片';
@@ -234,14 +247,15 @@
 				dialog.error('企业标志图片还没有上传完毕');
 				return false;
 			}
-			$(this).attr("disabled",true);
+			$(this).addClass("nodisabled");
 			$.ajax({
 				url:controller + "edit",
 				type:'post',
 				data:postData,
 				dataType:'json',
 				success:function (data) {
-					$(this).attr("disabled",false);
+					$(this).removeClass("nodisabled");
+
 				   if(data.status == 0){
 						dialog.error(data.info);
 						return false;

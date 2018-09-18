@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="store_css/main.css">
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
 <section id="goodsvideoLayer" style="display: none;">
@@ -33,7 +33,7 @@
 				<input type="text" class="search_text" placeholder="搜索"/>
 			</div>
 			<div class="each_column">
-				<a class="personal_center">我的</a>
+				<a href="javascript:void(0);" class="personal_center ">我的</a>
 			</div>
 			{include file="public/home_page" /}
 		</div>
@@ -68,9 +68,9 @@
                             </span>
 							<del>￥{$goodsInfo.retail_price}</del>
 						</div>
-						<div>
-							<a>赞</a>
-							<a>分享</a>
+						<div class="popularity">
+							<a href="javascript:void(0);" class="fabulous left">赞</a>
+							<a href="javascript:void(0);" class="share ">分享</a>
 						</div>
 					</div>
 					<p class="goods_name">{$goodsInfo.name}</p>
@@ -114,21 +114,20 @@
 						</div>
 					</div>
 					<a class="text-color-gr invite-friends">
-						<span></span>
-						邀好友参加
+						<span class="icons"></span><span >邀好友参加</span>
+						
 					</a>
 				</div>
 			</li>
 			<li>
 				<div class="columns_flex l-r-sides">
-					<div>
-						<div>
-							{notempty name="$storeInfo.img"}
-							<img src="public_uploads/{$storeInfo.img}" class="small_default_img store_logo left" alt="">
+					<div class="rows rows-l">
+						<div class="">
+							{notempty name="storeInfo.logo_img"}
+							<img src="public_uploads/{$storeInfo.logo_img}" class=" store_logo left" alt="">							
 							{else /}
-							<img src="" class="small_default_img store_logo left" alt="">
+							<img src="" class=" store_logo" alt="">
 							{/notempty}
-
 						</div>
 						<div>
 							{if $storeInfo.store_type == 1 }
@@ -140,68 +139,71 @@
 							<p class="store_run_type">供应商自营</p>
 						</div>
 					</div>
-					<div>
+					<div class="follow-right rows">
 						<a href="javascript:void(0);" class="text-color-gr">+关注供应商</a>
-						<a class="text-color-gr go-shopping"><span></span>进店逛逛</a>
+						<a class="text-color-gr go-shopping"><span class="icons"></span><span>进店逛逛</span></a>
 					</div>
 				</div>
 			</li>
 		</ul>
 	</section>
-	<div class="detail-nav columns_flex floor-nav">
-		<a href="javascript:void(0);" class="scroll-nav current" id="c">商品参数</a>
-		<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
-		<a href="javascript:void(0);" class="scroll-nav" id="x">商品详情</a>
-		<a href="javascript:void(0);" class="scroll-nav" id="f">评分评论</a>
-	</div>
-	<div class="floor-content">
-		<section class="scroll-floor floor1">
-			<h3>商品参数</h3>
-			{$goodsInfo.parameters}
-		</section>
-		<!--<section class="scroll-floor floor2">
-            <h3>商品视频</h3>
-        </section>-->
-		<section class="scroll-floor floor2">
-			<h3>商品详情</h3>
-			<div class="details_img">
-				{notempty name="goodsInfo.details_img"}
-				{volist name="goodsInfo.details_img" id="vo"}
-				<div class="">
-					<img src="public_uploads/{$vo}" alt="" class="common_default_img">
-				</div>
-				{/volist}
-				{/notempty}
-			</div>
-		</section>
-		<section class="scroll-floor floor3">
-			<h3>评分评论</h3>
-			<div class="goods_star_score comment_star_module">
-				<div class="five_star">
-					<div class="star_img">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
-						<img src="public_img/starred.png">
+	<section class="scrollwrapper">
+		<div class="detail-nav columns_flex floor-nav nav-floor">
+			<a href="javascript:void(0);" class="scroll-nav active" data-floor="c">商品参数</a>
+			<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="x">商品详情</a>
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="f">评分评论</a>
+		</div>
+		<div class="floor-content">
+			<section class="scroll-floor floor1 floor">
+				<h3 id="c" class="floor-label">商品参数</h3>
+				{$goodsInfo.parameters}
+			</section>
+			<!--<section class="scroll-floor floor2">
+				<h3>商品视频</h3>
+			</section>-->
+			<section class="scroll-floor floor2 floor">
+				<h3 id="x" class="floor-label">商品详情</h3>
+				<div class="details_img">
+					{notempty name="goodsInfo.details_img"}
+					{volist name="goodsInfo.details_img" id="vo"}
+					<div class="">
+						<img src="public_uploads/{$vo}" alt="" class="common_default_img">
 					</div>
-					<span class="fraction" data-score="0">0分</span>
+					{/volist}
+					{/notempty}
 				</div>
-				<a href="javascript:void(0);" class="comment_num">0人评论</a>
-			</div>
-		</section>
-	</div>
+			</section>
+			<section class="scroll-floor floor3 floor">
+				<h3 id="f" class="floor-label">评分评论</h3>
+				<div class="goods_star_score comment_star_module">
+					<div class="five_star">
+						<div class="star_img">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+						</div>
+						<span class="fraction" data-score="0">0分</span>
+					</div>
+					<a href="javascript:void(0);" class="comment_num">0人评论</a>
+				</div>
+			</section>
+		</div>
+	</section>
 </article>
 <a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="foot-btn f24">修改</a>
 
 {/block}
 {block name="common"}
-{include file="shop/list_layer" /}
+{include file="template/right_side_bar.html" /}
+{include file="store/list_layer" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-<script type="text/javascript" src="public_js/jquery.scroll.floor.js"></script>
+<!--<script type="text/javascript" src="public_js/jquery.scroll.floor.js"></script>-->
 
 <script type="text/javascript">
 
@@ -228,7 +230,6 @@
             postData.store_logo = $('.store_logo').attr('src');
             postData.store_run_type = $('.store_run_type').text();
 			$.post(module+'Goods/generateGoodsQRcode',postData,function (msg) {
-				console.log(msg.info.info);
 				if(msg.status == 1){
 					layer.open({
 						title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],
@@ -265,18 +266,19 @@
             star:'public_img/star.png',
             starRed:'public_img/starred.png'
 		});
-
+		$('.scrollwrapper').scrollFloor();
 	});
-	window.onload=function(){
-		scrollFloor({
-			floorClass : '.scroll-floor',       //楼层盒子class;默认为'.scroll-floor'
-			navClass : '.scroll-nav',           //导航盒子class;默认为'.scroll-nav'
-			activeClass : 'current',             //导航高亮class;默认为'active'
-			delayTime:1000,                      //点击导航，滚动条滑动到该位置的时间间隔;默认为200
-			activeTop:300,                      //楼层到窗口的某个位置时，导航高亮（设置该位置）;默认为100
-			scrollTop:0                         //点击导航，楼层滑动到窗口的某位置;默认为100
-		});
-	}
+	
+	// window.onload=function(){
+	// 	scrollFloor({
+	// 		floorClass : '.scroll-floor',       //楼层盒子class;默认为'.scroll-floor'
+	// 		navClass : '.scroll-nav',           //导航盒子class;默认为'.scroll-nav'
+	// 		activeClass : 'current',             //导航高亮class;默认为'active'
+	// 		delayTime:1000,                      //点击导航，滚动条滑动到该位置的时间间隔;默认为200
+	// 		activeTop:100,                      //楼层到窗口的某个位置时，导航高亮（设置该位置）;默认为100
+	// 		scrollTop:0                         //点击导航，楼层滑动到窗口的某位置;默认为100
+	// 	});
+	// }
 
 </script>
 {/block}

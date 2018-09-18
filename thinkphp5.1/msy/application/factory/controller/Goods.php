@@ -11,7 +11,7 @@ class Goods extends StoreBase
     {
         $goodsModel = new \app\factory\model\Goods;//商品扩展模型
         if(request()->isPost()){
-            return $result = $goodsModel -> edit($this->store['id']);
+            return $result = $goodsModel -> edit($this->store['id'],$this->store['run_type']);
         }
         $categoryModel = new \app\index_admin\model\GoodsCategory;
         $where = [

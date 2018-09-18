@@ -1,10 +1,15 @@
-<section class="top_nav_fixed">
+<section class="top_nav_fixed top_nav_store">
     <div class="top_bar top-switch-bar columns_flex l-r-sides">
-        {include file="public/home_page" /}
+        <!--{include file="public/home_page" /}-->
         <div class="">
             <span>{$factory.name}</span>
         </div>
         <div class="">
+            <div class="top_bar columns_flex">
+                <a href="javascript:void(0);" class="shopping_cart"></a>
+                <a href="javascript:void(0);" class="personal_center"></a>
+                <a href="/index.php/factory/Index/index.html" class="home"></a>
+            </div>
             <a href="javascript:void(0);" class="switch-account">切换供应商账号></a>
         </div>
     </div>

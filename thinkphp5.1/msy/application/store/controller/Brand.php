@@ -1,15 +1,17 @@
 <?php
 namespace app\store\controller;
-class Brand extends StoreBase
+class Brand extends FactoryBase
 {
     //商标首页
     public function manage()
     {
         $model = new \app\store\model\Brand;
-        $where = [
-            ['store_id','=',$this->store['id']]
+        $config = [
+            'where' => [
+                ['factory_id','=',$this->factory['id']]
+            ],
         ];
-        $brandList =  $model -> getList($where);
+        $brandList =  $model -> getList($config);
         $this -> assign('brandList',$brandList);
         return $this->fetch();
     }
@@ -19,7 +21,7 @@ class Brand extends StoreBase
     {
         $model = new \app\store\model\Brand;
         if(request()->isPost()){
-            return $model -> edit($this->store['id']);
+            return $model -> edit($this->factory['id']);
         }
         $categoryModel = new \app\index_admin\model\GoodsCategory;
         $where = [
@@ -29,10 +31,12 @@ class Brand extends StoreBase
         $this->assign('categoryList',$categoryList);
         if(input('?brand_id')){
             $brandId = input('brand_id');
-            $where = array(
-                'id' => $brandId,
-            );
-            $brandInfo =  $model -> getInfo($where);
+            $config = [
+                'where' => [
+                    ['id', '=', $brandId],
+                ],
+            ];
+            $brandInfo =  $model -> getInfo($config);
             $this -> assign('brandInfo',$brandInfo);
         }
         return $this->fetch();

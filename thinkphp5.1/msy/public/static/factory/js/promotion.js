@@ -165,7 +165,7 @@ $(function(){
             dialog.error(content);
             return false;
         }
-        $(this).attr("disabled",true);//防止重复提交
+        $(this).addClass("nodisabled");//防止重复提交
         $.ajax({
             url: controller + 'edit',
             data: postData,
@@ -174,7 +174,7 @@ $(function(){
 
             },
             success: function(msg){
-                $(this).attr("disabled",false);
+                $(this).removeClass("nodisabled");
                 if(msg.status == 0){
                     dialog.error(msg.info);
                     return false;

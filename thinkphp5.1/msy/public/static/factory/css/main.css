@@ -1,4 +1,28 @@
 /*美尚云厂商入驻*/
+.top_nav_store{
+    padding:10px 0 0;
+    background:#666;
+}
+.store_deploy_nav{
+    border-top:1px solid #fff;
+    background:#666;
+}
+.top_nav_store span,
+.top_nav_store a,
+.store_deploy_nav a{
+    color:#fff;
+}
+.top_nav_store div:nth-child(2){
+    width:35%; 
+    margin-right:.25rem;   
+}
+.top_nav_store .top_bar{
+    height:auto;
+    padding-top:0;
+}
+.top_nav_store .top_bar a:last-child{
+    margin:0 auto;
+}
 .manufacturer_nav a span{
     background-image:url(../../factory/img/manufacturer_type.png);
 }
@@ -33,7 +57,7 @@
 .account_entry{
     position:relative;
     display: block;
-    margin:1.8rem 0 0 0.35rem;
+    margin:1.2rem 0 0 0.35rem;
     border-top:1px solid #d9d9d9;
     padding:0.20rem 0;
     /*text-align: center;*/

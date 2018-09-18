@@ -11,17 +11,19 @@
 				<span>{$info.mobile_phone}</span>
 			</div>
 			<div>
-				<span class="list-label">角色类型：</span>
+				<span class="list-label left">角色：</span>
 				{notempty name='info.role'}
+				<div class="multi-role left">
 				{volist name='info.role' id='vo'}
 				<span id="{$vo.id}">{$vo.name}</span>
 				{/volist}
+				</div>
 				{/notempty}
 			</div>
 		</a>
 	</div>
 	<div class="account-status">
-		{eq name="info.userStoreStatus" value="0"}
+		{eq name="info.userFactoryStatus" value="0"}
 			<span>账号正常</span>
 		{else/}
 			<span class="stop">账号已停用</span>

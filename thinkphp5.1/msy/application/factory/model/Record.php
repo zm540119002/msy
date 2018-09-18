@@ -16,7 +16,7 @@ class Record extends \common\model\Base{
 	// 别名
 	protected $alias = 'r';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_factory';
+    protected $connection = 'db_config_common';
 
 	/**
 	 * 编辑厂商档案 新增和修改
@@ -42,6 +42,11 @@ class Record extends \common\model\Base{
 		if(!empty($data['rb_img'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
 			$data['rb_img'] = $rse['imgsWithDecNew'];
+			$newRbImg = $rse['imgsArray'];
+		}
+		if(!empty($data['team_activity'])){
+			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['team_activity']);
+			$data['team_activity'] = $rse['imgsWithDecNew'];
 			$newRbImg = $rse['imgsArray'];
 		}
 

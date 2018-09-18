@@ -3,7 +3,7 @@
         {volist name="storeList" id="vo"}
         <li class="" data-id="{$vo.id}">
             {if $vo.store_type == 1 }
-            <span>{$vo.name}</span>官方旗舰店
+            <span>{$vo.name}</span>旗舰店
             {elseif $vo.store_type == 2/}
             <span>{$vo.name}</span>品牌旗舰店
             {else /}
@@ -43,6 +43,8 @@
             success:function(){
                 var winH=$(window).height();
                 var storeId=$('.storeId').val();
+                $('html,body').addClass('scrollStyle');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
                 $('.vendorInfoLayer li').on('click',function(){
                     var _this=$(this);
@@ -90,6 +92,7 @@
                         dialog.error('AJAX错误'+xhr);
                     }
                 });
+                $('html,body').removeClass('scrollStyle');
                 layer.close(index);
             }
         })

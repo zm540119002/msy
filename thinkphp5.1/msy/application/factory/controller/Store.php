@@ -33,13 +33,11 @@ class Store extends FactoryBase
             return $model -> edit($this -> factory['id']);
         }else{
             // 企业旗舰店
-            $modelFactory = new \app\factory\model\Factory();
+            $modelFactory = new \app\factory\model\Record();
             $config = [
                 'where' => [
-                    ['f.id','=',$this->factory['id']]
-                ],'join' => [
-                    ['record r','f.id = r.factory_id'],
-                ],'field' =>  ['f.id,f.name,r.logo_img as img']
+                    ['r.factory_id','=',$this->factory['id']]
+                ],'field' =>  ['r.id,r.short_name as name,r.logo_img as img']
             ];
             $factoryStore =  $modelFactory -> getInfo($config);
             if(empty($factoryStore)){
