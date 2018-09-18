@@ -2872,6 +2872,9 @@ input[type=text]::-webkit-focus-inner {
     border-radius:6px;
     text-align:center;
 }
+.addProductContent li:first-child{
+    margin-top:.12rem;
+}
 /*淘宝的布局*/
 .page-container{
     padding-top: 96px;
