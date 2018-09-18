@@ -3,7 +3,6 @@ namespace app\store\controller;
 
 class Record extends FactoryBase
 {
-
     //产商档案编辑
     public function edit(){
         $model = new \app\store\model\Record();
