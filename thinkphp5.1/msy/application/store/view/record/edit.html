@@ -66,7 +66,7 @@
 							{notempty name="recordInfo.company_img"}
 							<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
 							{else /}
-							<img class="upload_img common_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+							<img class="upload_img common_default_img" src="public_img/default/upload-company-img.jpg" alt="">
 							{/notempty}
 							<input type="hidden" class="business-license img" value="{$recordInfo.company_img|default=''}" name="company_img"/>
 						</div>
@@ -87,7 +87,7 @@
 									{notempty name="recordInfo.logo_img"}
 									<img src="public_uploads/{$recordInfo.logo_img|default=''}" />
 									{else /}
-									<img src="public_img/default/no_pic_40.jpg" />
+									<img src="public_img/default/company-logo.jpg" />
 									{/notempty}
 									<input type="hidden" class="logo-src" name="logo_img" value="{$recordInfo.logo_img|default=''}">
 								</a>
@@ -161,12 +161,10 @@
 	$(function(){
 		//初始化地址
 		var addressIndex=$('.area-address-name').data('key');
-		
 		if(addressIndex){
 			var areaAddressArr=addressIndex.split(',');
 			$('.area_address').setArea(areaAddressArr);
 		}
-		
 		//编辑企业简介
 		var editGoodsParameter=$('#editGoodsParameter').html();
 		$('body').on('click','.editGoodsParameter',function(){
@@ -212,8 +210,7 @@
 				postData.factory_video = factory_video;
 			var team_activity=$('.team_activity').data('src');
 			postData.team_activity = team_activity;
-
-			var  content =''
+			var  content ='';
 			if(!postData.company_img){
 				content='请上传企业形象图片';
 			}else if(!postData.provinces){
@@ -232,8 +229,8 @@
 				content='请上传专利荣誉图片';
 			}
 			if(content){
-				dialog.error(content);
-				return false;
+//				dialog.error(content);
+//				return false;
 			}
 			if(!uploadsSingleImgFlag ){
 				dialog.error('图片还没有上传完毕');
@@ -254,6 +251,7 @@
 				data:postData,
 				dataType:'json',
 				success:function (data) {
+					return false;
 					$(this).removeClass("nodisabled");
 
 				   if(data.status == 0){
@@ -265,7 +263,7 @@
 				},
 				error:function (xhr) {
 					dialog.error('Ajax错误'+xhr.status);
-				},
+				}
 			})
 		})
 	});

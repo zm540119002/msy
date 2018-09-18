@@ -1,16 +1,24 @@
-<section class="top_nav_fixed">
-    <div class="top_bar columns_flex l-r-sides store_operation_head">
-        {include file="public/home_page" /}
-        <div class="">
-            <img class="factory-log-img left" src="" alt="">
-            <span class="factory-name"></span>
+<section class="top_nav_fixed top_nav_store">
+    <div class="top_bar top-switch-bar columns_flex l-r-sides ">
+        <div>
+            <input class="storeId" type="hidden" value=""/>
+            <img class="left store-logo-img small_default_img" src="" alt="">
+            <div class="store-type-item">
+                <p><span class="store-name"></span><span class="store-type"></span></p>
+                <p><span class="run-type"></span> <span></span></p>
+            </div>
         </div>
         <div class="">
-            <a href="javascript:void(0);" class="switch-account">切换我的店铺></a>
+            <div class="top_bar columns_flex">
+                <a href="javascript:void(0);" class="shopping_cart"></a>
+                <a href="javascript:void(0);" class="personal_center"></a>
+                <a href="{:url('Index/index')}" class="home"></a>
+            </div>
+            <a href="javascript:void(0);" class="switch-account">切换店铺账号></a>
         </div>
     </div>
 </section>
-<section class="columns_flex l-r-sides store_mall_status">
+<!--<section class="columns_flex l-r-sides store_mall_status">
     <div>
         <input class="storeId" type="hidden" value=""/>
         <img class="left store-logo-img" src="" alt="">
@@ -23,7 +31,7 @@
         <a href="javascript:void(0);" class="personal_center left">我的</a>
         <a href="javascript:void(0);" class="my-store">我的店铺</a>
     </div>
-</section>
+</section>-->
 {include file="public/factory_list_tpl" /}
 {include file="store/list_layer" /}
 <script type="text/javascript">

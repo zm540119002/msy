@@ -34,11 +34,9 @@ class Record extends \common\model\Base{
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
 		}
-
 		if(!empty($data['logo_img'])){
 			$data['logo_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['logo_img']));
 		}
-
 		if(!empty($data['rb_img'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['rb_img']);
 			$data['rb_img'] = $rse['imgsWithDecNew'];
@@ -49,7 +47,6 @@ class Record extends \common\model\Base{
 			$data['team_activity'] = $rse['imgsWithDecNew'];
 			$newRbImg = $rse['imgsArray'];
 		}
-
 		if(!empty($data['factory_video'])){
 			$rse = moveImgsWithDecFromTemp(config('upload_dir.factory_record'),$data['factory_video']);
 			$data['factory_video'] = $rse['imgsWithDecNew'];

@@ -35,7 +35,6 @@ $(function(){
                 dialog.error('图片大小不能超过1M');
                 return false;
             }
-            console.log($('.editDetailLayer li').length);
             if($('.editDetailLayer li').length>=num && num){
                 errorTipc('只能上传'+num+'张图片');
                 return false;
@@ -91,9 +90,9 @@ $(function(){
                 videoAdd.find('.picture-module').append(video);
                 imgContainer.append(videoAdd);             
             }
-        };
+        }
     });
-    //上传视频   
+    //上传视频
     var goodsVideoList=$('#goodsVideoList').html();
     $('body').on('click','.uploadGoodsVideo',function(){
         uploadsMultiVideo(goodsVideoList);

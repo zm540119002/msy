@@ -42,18 +42,16 @@
 					<div class="store-type ">
 						<div>
 							{if $vo.store_type == 1 }
-							<span>{$vo.name}</span>官方旗舰店
+							<span>{$vo.name}</span>旗舰店
 							{elseif $vo.store_type == 2/}
 							<span>{$vo.name}</span>品牌旗舰店
 							{else /}
 							{/if}
 						</div>
-						{if $vo.run_type == 1 }
-						<p>B2B采购商城</p>
-						{elseif $vo.run_type == 2 /}
-						<p>B2B分成商城</p>
+						{if $vo.run_type == 2 }
+						<p>美尚会云店</p>
 						{elseif $vo.run_type == 3 /}
-						<p>B2C零售商城</p>
+						<p>机构公众号内嵌式门店</p>
 						{else /}
 						{/if}
 					</div>
