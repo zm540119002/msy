@@ -715,6 +715,7 @@ color: #ed6d00;
 .specific_type .columns_flex{
     /*flex-wrap: wrap;
     margin:0;*/
+    border-bottom:none;
 }
 .specific_type a{
     /*width:20%;*/
