@@ -1,4 +1,3 @@
-$(function(){
     //多图片上传
     var fileList;
     var num;
@@ -48,9 +47,7 @@ $(function(){
         uploadsMultiVideo(goodsVideoList);
     });
      //上传单图片和描述
-    var imgContainer111 = $('.multi-picture-moduleDes');
     $('body').on('change','.uploadImgDescribe',function () {
-       return false;
         var file = $(this);
         fileList = $(this).get(0).files;
         num=file.data('num');//限制个数
@@ -139,10 +136,10 @@ $(function(){
         var _this=$(this);
         _this.next('.edit-text').toggleClass('active');
     });
-});
 
 //上传图片描述
 function uploadPicDescribe(fil,i,len){
+    
     var img = fil;
     var obj=$(this).parent();
     var fileSize=fil.size/1024/1024;
@@ -162,7 +159,7 @@ function uploadPicDescribe(fil,i,len){
     reader.readAsDataURL(img);
     reader.onload = function(e){
         var imgUrl=e.target.result;
-        var oLiLen=imgContainer111.find('li').length;
+        //var oLiLen=imgContainer111.find('li').length;
         var img=  $('<img src="" class="upload_img">');
         img.attr("src", imgUrl);
         var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id='+i+' cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
