@@ -30,8 +30,8 @@
 			<span class="cols">备注</span>
 		</div>
 		<ul>
-            {notempty name="shopList"}
-			{volist name="shopList" id="vo"}
+            {notempty name="storeList"}
+			{volist name="storeList" id="vo"}
 			<li class="thead-td" data-id="{$vo.id}">
 				<div class="cols">
 					{notempty name="vo.img"}
@@ -41,9 +41,9 @@
 					{/notempty}
 					<div class="store-type ">
 						<div>
-							{if $vo.shop_type == 1 }
+							{if $vo.store_type == 1 }
 							<span>{$vo.name}</span>官方旗舰店
-							{elseif $vo.shop_type == 2/}
+							{elseif $vo.store_type == 2/}
 							<span>{$vo.name}</span>品牌旗舰店
 							{else /}
 							{/if}
