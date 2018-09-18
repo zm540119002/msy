@@ -159,7 +159,6 @@ function uploadPicDescribe(fil,i,len){
     reader.readAsDataURL(img);
     reader.onload = function(e){
         var imgUrl=e.target.result;
-        //var oLiLen=imgContainer111.find('li').length;
         var img=  $('<img src="" class="upload_img">');
         img.attr("src", imgUrl);
         var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id='+i+' cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
@@ -380,8 +379,6 @@ function uploadsImgDescribe(content,obj){
                 html+='</div>';
                 html+='</li>';                  
             var multiImgAttr=obj.data('src');
-            console.log(obj);
-            console.log(multiImgAttr);
             for(var i=0;i<multiImgAttr.length;i++){
                 if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
                     multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
@@ -404,6 +401,7 @@ function uploadsImgDescribe(content,obj){
                 };
                 layerMultiImgAttr.push(layerImgInfoData);
             });
+            console.log(layerMultiImgAttr);
             obj.data('src',layerMultiImgAttr);
             if(layerMultiImgAttr.length==0){
                 $('html,body').removeClass('scrollStyle');
@@ -430,7 +428,6 @@ function uploadsImgDescribe(content,obj){
                     for(var i=0;i<returnData.length;i++){
                         if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
                             returnData[i].fileSrc= uploads+returnData[i].fileSrc;
-
                         }
                         imgArray.push(returnData[i]);
                     }
@@ -531,7 +528,6 @@ function uploadsVideoDescribe(content,obj){
                     for(var i=0;i<returnData.length;i++){
                         if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
                             returnData[i].fileSrc= uploads+returnData[i].fileSrc;
-
                         }
                         imgArray.push(returnData[i]);
                     }
@@ -539,8 +535,6 @@ function uploadsVideoDescribe(content,obj){
                     if(info != ''){
                         dialog.error('视频文件上传完！');
                         layer.close(index);
-                    }else{
-
                     }
                     $('html,body').removeClass('scrollStyle');
                     $('.editCompanyPicLayer .layui-m-layerbtn span[yes]').removeClass('disabled');
