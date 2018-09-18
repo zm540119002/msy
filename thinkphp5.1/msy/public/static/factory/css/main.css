@@ -13,8 +13,13 @@
     color:#fff;
 }
 .top_nav_store div:nth-child(2){
-    width:35%; 
+    /*width:35%; */
     margin-right:.25rem;   
+}
+.column_type.current{
+    color:#ff7bac;
+    border:1px solid #ff7bac;
+    border-radius:5px;
 }
 .top_nav_store .top_bar{
     height:auto;
@@ -1375,7 +1380,7 @@ input.special{
     max-width:30px;
 }
 .store-type-item{
-    margin:0 0 0 30px;
+    margin:0 0 0 52px;
 }
 /*云推客圈(美尚云和美尚会)*/
 .scroll-wrapper {
