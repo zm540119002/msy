@@ -13,7 +13,7 @@
     color:#fff;
 }
 .top_nav_store div:nth-child(2){
-    width:35%; 
+    /*width:35%; */
     margin-right:.25rem;   
 }
 .top_nav_store .top_bar{
