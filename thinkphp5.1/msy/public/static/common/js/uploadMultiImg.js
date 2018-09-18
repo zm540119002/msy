@@ -64,7 +64,7 @@
             var videoUrl=e.target.result;
             var video=  $('<video src="" class="upload_img" autoplay="autoplay"></video>');
             video.attr("src", videoUrl);
-            var videoAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div></li>');
+            var videoAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑视频描述</a><textarea name="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleVideo" name=""><span class="delete-picture">X</span></div></li>');
             videoAdd.find('.picture-module').append(video);
             imgContainer.append(videoAdd);
         }
@@ -161,7 +161,7 @@ function uploadPicDescribe(fil,i,len){
         var imgUrl=e.target.result;
         var img=  $('<img src="" class="upload_img">');
         img.attr("src", imgUrl);
-        var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id='+i+' cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
+        var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
         imgAdd.find('.picture-module').append(img);
         $('.multi-picture-moduleDes').append(imgAdd);
         if(i<len-1){
@@ -371,7 +371,7 @@ function uploadsImgDescribe(content,obj){
             var html='';
                 html+='<li>';
                 html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
-                html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
+                html+='<textarea name="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                 html+='<div class="picture-module active">';
                 html+='<input type="file" class="uploadImg uploadSingleEditImg" name="">';
                 html+='<a href="javascript:void(0);" class="delete-picture">X</a>';
@@ -477,7 +477,7 @@ function uploadsVideoDescribe(content,obj){
                 html+='<video src="" class="upload_img"></video>';
                 html+='</div>';
                 html+='<a href="javascript:void(0);" class="edit-describe">编辑照片描述</a>';
-                html+='<textarea name="" id="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
+                html+='<textarea name="" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>';
                 html+='</li>';
             var multiImgAttr=obj.data('src');
             for(var i=0;i<multiImgAttr.length;i++){
