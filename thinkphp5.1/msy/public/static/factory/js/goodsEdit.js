@@ -53,7 +53,10 @@ $(function(){
             }
         })
     });
-
+    //商品分类
+    $('body').on('click','.form_goods_type a',function () {
+        $(this).addClass('current').siblings().removeClass('current');
+    })
     //设置品类
     var categoryContent=$('#categoryContent').html();
     $('body').on('click','.set-category',function(){

@@ -362,6 +362,22 @@
     color:#fff;
     cursor:pointer;
 }
+.form_goods_type{
+    margin:0 0 0 1.25rem;
+}
+.form_goods_type a{
+    display:inline-block;
+    width:100px;
+    padding:.08rem 0 .06rem;
+    border:1px solid #39b54a;
+    border-radius:5px;
+    color:#39b54a;
+    text-align: center;
+}
+.form_goods_type a.current{
+    background:#39b54a;
+    color:#fff;
+}
 /*设置商品的检索品类*/
 .category-wrapper{
     /*height:auto;*/
