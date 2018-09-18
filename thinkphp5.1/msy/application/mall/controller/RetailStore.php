@@ -37,7 +37,8 @@ class RetailStore extends MallBase{
     /**商品详情页
      */
     public function detail(){
-        if(request()->isAjax()){
+        if( request()->isAjax() ){
+
         }else{
             $goodsId = intval(input('goodsId'));
             if($goodsId){
