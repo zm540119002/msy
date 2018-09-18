@@ -16,6 +16,10 @@
     /*width:35%; */
     margin-right:.25rem;   
 }
+.column_type.current{
+    color:#ff7bac;
+    border:1px solid #ff7bac;
+}
 .top_nav_store .top_bar{
     height:auto;
     padding-top:0;
