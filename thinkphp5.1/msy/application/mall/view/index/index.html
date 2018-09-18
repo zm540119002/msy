@@ -1,25 +1,73 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="mall_css/main.css">
+<link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
-<section class="store-top-nav">
-	<div class="top_menu_box">
-		<div class="top_menu_list columns_flex">
-			<a href="{:url('')}" class="current">云推客店铺</a>
-			<a href="{:url('RetailStore/index')}">供应商零售店</a>
-			<a href="{:url('')}">美容机构门店</a>
+<article class="f24">
+	<section class="fixedtop top_nav_fixed">
+		{include file="template/header_menu_msy_store.html" /}
+		<div class="top_menu_box">
+			<div class="top_menu_list">
+				<a href="javascript:void(0);" class="current">采购</a>
+				<a href="javascript:void(0);">分成</a>
+				<a href="javascript:void(0);">店家入驻</a>
+				<a href="javascript:void(0);">云推客</a>
+				<a href="javascript:void(0);">美尚会</a>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_img/banner/home-banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/home-banner2.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/home-banner3.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/home-banner.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20 l-r-sides">
+			<a href="{:url('Deploy/index')}" class="deployed-deployment">联合采购</a>
+			<a href="{:url('Operation/index')}" class="store_run">微团采购</a>
+			<a href="{:url('Order/index')}" class="order-management">商品分类</a>
+			<a href="javascript:void(0);" class="order-management-change">直升VIP</a>
+			<a href="javascript:void(0);" class="order-management-change">采购充值</a>
+		</div>
+	</section>
+</article>
 {/block}
 {block name="common"}
+{include file="template/footer_menu_msy_store.html" /}
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
 	});
 </script>
 {/block}
