@@ -40,8 +40,7 @@
 <section id="uploadCompanyPic" style="display: none;">
 	<p class="f20 friend-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
 	<form class="">
-		<ul class="upload-picture-module multi-picture-moduleDes f24">
-		</ul>
+		<ul class="upload-picture-module multi-picture-moduleDes f24"></ul>
 	</form>
 	<div class="error_tipc"></div>
 	<div class="upload-picture-module margin-left f24">
@@ -161,12 +160,10 @@
 	$(function(){
 		//初始化地址
 		var addressIndex=$('.area-address-name').data('key');
-		
 		if(addressIndex){
 			var areaAddressArr=addressIndex.split(',');
 			$('.area_address').setArea(areaAddressArr);
 		}
-		
 		//编辑企业简介
 		var editGoodsParameter=$('#editGoodsParameter').html();
 		$('body').on('click','.editGoodsParameter',function(){
@@ -212,8 +209,7 @@
 				postData.factory_video = factory_video;
 			var team_activity=$('.team_activity').data('src');
 			postData.team_activity = team_activity;
-
-			var  content =''
+			var  content ='';
 			if(!postData.company_img){
 				content='请上传企业形象图片';
 			}else if(!postData.provinces){
@@ -232,8 +228,8 @@
 				content='请上传专利荣誉图片';
 			}
 			if(content){
-				dialog.error(content);
-				return false;
+//				dialog.error(content);
+//				return false;
 			}
 			if(!uploadsSingleImgFlag ){
 				dialog.error('图片还没有上传完毕');
@@ -254,8 +250,8 @@
 				data:postData,
 				dataType:'json',
 				success:function (data) {
+					return false;
 					$(this).removeClass("nodisabled");
-
 				   if(data.status == 0){
 						dialog.error(data.info);
 						return false;
@@ -265,7 +261,7 @@
 				},
 				error:function (xhr) {
 					dialog.error('Ajax错误'+xhr.status);
-				},
+				}
 			})
 		})
 	});

@@ -715,6 +715,7 @@ color: #ed6d00;
 .specific_type .columns_flex{
     /*flex-wrap: wrap;
     margin:0;*/
+    border-bottom:none;
 }
 .specific_type a{
     /*width:20%;*/
@@ -1837,14 +1838,12 @@ background-position: 0 -27px;
     width: 2px;
     height: 27.5px;
     top:38%;
-    background:#fff;
 }
 .upload-picture-module .picture-module:after,
 .upload-company-map .picture-module:after{
     width: 27.5px;
     height: 2px;
     top:38%;
-    background:#fff;
 }
 .logo-license .logo:before{
     width: 2px;
@@ -2834,7 +2833,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .bodys{
     position: absolute;
-    top: 3.7rem;
+    top:3rem;
     left: 0;
     right: 0;
     background: #fff;
