@@ -19,6 +19,7 @@
 .column_type.current{
     color:#ff7bac;
     border:1px solid #ff7bac;
+    border-radius:5px;
 }
 .top_nav_store .top_bar{
     height:auto;
