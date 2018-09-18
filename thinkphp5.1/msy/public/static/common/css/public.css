@@ -457,6 +457,7 @@ i{
     margin:0 10px 0 0;
     background:none;
     text-indent: 0;
+    text-align:center;
 }
 .top-nav-bar{color:#000;}
 .top-nav-bar a.personal_center,
@@ -1834,15 +1835,16 @@ background-position: 0 -27px;
 .upload-picture-module .picture-module:before,
 .upload-company-map .picture-module:before  {
     width: 2px;
-    height: 39.5px;
-    top:45%;
-    
+    height: 27.5px;
+    top:38%;
+    background:#fff;
 }
 .upload-picture-module .picture-module:after,
 .upload-company-map .picture-module:after{
-    width: 39.5px;
+    width: 27.5px;
     height: 2px;
-    top:45%;
+    top:38%;
+    background:#fff;
 }
 .logo-license .logo:before{
     width: 2px;
@@ -2869,6 +2871,9 @@ input[type=text]::-webkit-focus-inner {
     border:1px solid #39b54a;
     border-radius:6px;
     text-align:center;
+}
+.addProductContent li:first-child{
+    margin-top:.12rem;
 }
 /*淘宝的布局*/
 .page-container{

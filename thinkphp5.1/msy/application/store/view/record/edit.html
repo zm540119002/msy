@@ -66,7 +66,7 @@
 							{notempty name="recordInfo.company_img"}
 							<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
 							{else /}
-							<img class="upload_img common_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+							<img class="upload_img common_default_img" src="public_img/default/upload-company-img.jpg" alt="">
 							{/notempty}
 							<input type="hidden" class="business-license img" value="{$recordInfo.company_img|default=''}" name="company_img"/>
 						</div>
@@ -87,7 +87,7 @@
 									{notempty name="recordInfo.logo_img"}
 									<img src="public_uploads/{$recordInfo.logo_img|default=''}" />
 									{else /}
-									<img src="public_img/default/no_pic_40.jpg" />
+									<img src="public_img/default/company-logo.jpg" />
 									{/notempty}
 									<input type="hidden" class="logo-src" name="logo_img" value="{$recordInfo.logo_img|default=''}">
 								</a>
