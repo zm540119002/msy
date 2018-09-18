@@ -4,13 +4,15 @@
 {/block}
 {block name="content"}
 <!--<section id="applyNewStore" style="display:none;">-->
-	
+
+
+
 <!--</section>-->
 <article class="f24">
 	<section class="bottomLine">
         <div class="top_bar top-title">
             <span></span>
-            <h2>申请开新店</h2>
+            <h2>申请店铺入驻</h2>
         </div>
     </section>
 	<div class="new-store-type applyNewStoreLayer">
@@ -27,36 +29,35 @@
 			<div class="new-store-item store-one">
 				<span class="content-label">1)选择店铺类型</span>
 				<div class="store-type-menu" data-store-type="type">
-					<a class="" href="javascript:void(0);" data-type="1">企业官方旗舰店</a>
-					<a href="javascript:void(0);" data-type="2">品牌官方旗舰店</a>
+					<a class="" href="javascript:void(0);" data-type="1">企业旗舰店</a>
+					<a href="javascript:void(0);" data-type="2">品牌旗舰店</a>
 				</div>
-				<span class="content-label">2)设定经营模式</span>
+				<span class="content-label">2)选择应用场景</span>
 				<div class="store-type-menu" data-store-pattern="pattern">
-					<a class="" href="javascript:void(0);" data-pattern="1">B2B采购商城</a>
-					<a href="javascript:void(0);" data-pattern="2">B2B分成商城</a>
-					<a href="javascript:void(0);" data-pattern="3">B2B零售商城</a>
+					<a class="" href="javascript:void(0);" data-pattern="1">美尚会云店</a>
+					<a href="javascript:void(0);" data-pattern="2">机构公众号内嵌式门店</a>
 				</div>
 				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
 			</div>
 			<div class="new-store-item store-two hide">
 				<ul class="">
 					<!--企业旗舰店-->
-					{notempty name="factoryStore"}
-					<li class="columns_flex store-list factory_store" data-foreign_id="{$factoryStore.id|default=''}">
-						{notempty name="factoryStore.img"}
-						<img class="small_default_img" src="public_uploads/{$factoryStore.img|default=''}" alt="">
+					{notempty name="storeShop"}
+					<li class="columns_flex store-list store_store" data-foreign_id="{$storeShop.id|default=''}">
+						{notempty name="storeShop.img"}
+						<img class="small_default_img" src="public_uploads/{$storeShop.img|default=''}" alt="">
 						{else /}
 						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 						{/notempty}
 						<div>
-							<p>{$factoryStore.name}官方旗舰店</p>
-							<p class="run_type">B2C零售商城</p>
+							<p>{$storeShop.name}机构官方旗舰店</p>
+							<p class="run_type"></p>
 						</div>
 					</li>
 					<!--品牌旗舰店-->
 					{/notempty}
-					{notempty name="brandStores"}
-					{volist name="brandStores" id="vo"}
+					{notempty name="brandShops"}
+					{volist name="brandShops" id="vo"}
 					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}" >
 						{notempty name="vo.img"}
 						<img class="small_default_img" src="public_uploads/{$vo.img|default=''}" alt="">
@@ -65,7 +66,7 @@
 						{/notempty}
 						<div>
 							<p>{$vo.name}品牌旗舰店</p>
-							<p class="run_type">B2C零售商城</p>
+							<p class="run_type"></p>
 						</div>
 					</li>
 					{/volist}
@@ -86,21 +87,21 @@
 
 <script type="text/javascript">
 	$(function(){
-		var storesApplied = '{:json_encode($storesApplied)}';
-		storesApplied = JSON.parse(storesApplied);
+		var shopsApplied = '{:json_encode($shopsApplied)}';
+		shopsApplied = JSON.parse(shopsApplied);
 		var postData={};
-		var store_type,run_type;
+		var shop_type,run_type;
 		//选择类型和模式
 		$('body').on('click','.store-type-menu a',function(){
 			var _this=$(this);
 			var dataTypeId=_this.data('type');
 			$(this).addClass('current').siblings().removeClass('current');
-			for(var i=0;i<storesApplied.length;i++){
-				if(dataTypeId==storesApplied[i].store_type){
+			for(var i=0;i<shopsApplied.length;i++){
+				if(dataTypeId==shopsApplied[i].shop_type){
 					$.each($('div[data-store-pattern="pattern"] a'),function(j,val){
 						var _This=$(this);
 						var storePatternId=_This.data('pattern');
-						if(storePatternId==storesApplied[i].run_type){
+						if(storePatternId==shopsApplied[i].run_type){
 							_This.addClass('disabled');
 						}
 					})
@@ -119,15 +120,15 @@
 		//下一步
 		$('body').on('click','.next-step',function(){
 			var storeType=$('.applyNewStoreLayer div[data-store-type="type"]').find('a');
-			store_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
-			if(store_type ==1 ) {
-				var factory_store = $('.factory_store').length;
-				if (!factory_store) {
+			shop_type=$('.applyNewStoreLayer .store-one').find('a.current').data('type');
+			if(shop_type ==1 ) {
+				var store_store = $('.store_store').length;
+				if (!store_store) {
 					dialog.success('请完善企业档案', module + 'Record/edit');
 					return false;
 				}
 			}
-			if(store_type ==2 ){
+			if(shop_type ==2 ){
 				var brand_stores = $('.brand_stores').length;
 				if(!brand_stores){
 					dialog.success('请完善品牌资料备案',module+'Brand/record');
@@ -135,10 +136,10 @@
 				}
 			}
 			var storePattern=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a');
-			var selectedPLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
+			var selectedLen=$('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('.disabled').length;
 			if(storeType.hasClass('current')){
-				if(selectedPLen==storePattern.length){
-					dialog.success('此店所有经营模式已开过',module+'Store/manage');
+				if(selectedLen==storePattern.length){
+					dialog.error('此店所有经营模式已开过');
 					return false;
 				}
 				if(storePattern.hasClass('current')){
@@ -147,35 +148,35 @@
 
 					$('.store-one').hide();
 					postData={
-						store_type:store_type,
+						shop_type:shop_type,
 						run_type:run_type,
 					}
-					if(store_type ==1 ){
+					if(shop_type ==1 ){
 						$('.applyNewStoreLayer .store-list').addClass('current');
-						$('.factory_store').find('li').attr('disabled',false);
+						$('.store_store').find('li').attr('disabled',false);
 						$('.store-two').show();
 						var runTypeTxt =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
-						$('.factory_store').find('.run_type').text(runTypeTxt);
+						$('.store_store').find('.run_type').text(runTypeTxt);
 						$('.brand_stores').hide();
-						$('.factory_store').show();
+						$('.store_store').show();
 					}
-					if(store_type ==2 ){
+					if(shop_type ==2 ){
 
 						$('.store-two').show();
 						var runType =  $('.applyNewStoreLayer div[data-store-pattern="pattern"]').find('a.current').text();
 						$('.brand_stores').find('.run_type').text(runType);
-						for(var i=0;i<storesApplied.length;i++){
-							if(run_type==storesApplied[i].run_type){
+						for(var i=0;i<shopsApplied.length;i++){
+							if(run_type==shopsApplied[i].run_type){
 								$.each($('.brand_stores'),function(j,val){
 									var _This=$(this);
 									var foreignId=_This.data('foreign_id');
-									if(foreignId==storesApplied[i].foreign_id){
+									if(foreignId==shopsApplied[i].foreign_id){
 										_This.addClass('disabled');
 									}
 								})
 							}
 						}
-						$('.factory_store').hide();
+						$('.store_store').hide();
 						$('.brand_stores').show();
 					}
 				}else{
@@ -195,7 +196,7 @@
 			var brandList=$('.applyNewStoreLayer .brand_stores');
 			var selectedLen=$('.applyNewStoreLayer .brand_stores.disabled').length;
 				if(selectedLen==brandList.length){
-					dialog.success('此店所有经营模式已开过',module+'Store/manage');
+					dialog.error('此店所有经营模式已开过');
 					return false;
 				}
 				if(storeList.hasClass('current')){
@@ -219,7 +220,7 @@
 							return false;
 						}
 						if(msg.status == 1){
-							dialog.success(msg.info,module+'Store/manage');
+							dialog.success(msg.info,module+'Shop/manage');
 							return false;
 						}
 					},
@@ -234,5 +235,8 @@
 
 	})
 
+	function isApplied(applyData,shopsApplied) {
+
+	}
 </script>
 {/block}
