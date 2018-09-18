@@ -379,8 +379,6 @@ function uploadsImgDescribe(content,obj){
                 html+='</div>';
                 html+='</li>';                  
             var multiImgAttr=obj.data('src');
-            console.log(obj);
-            console.log(multiImgAttr);
             for(var i=0;i<multiImgAttr.length;i++){
                 if(multiImgAttr[i].fileSrc.indexOf("uploads") == -1 && multiImgAttr[i].fileSrc !=''){
                     multiImgAttr[i].fileSrc = uploads+multiImgAttr[i].fileSrc;
@@ -403,6 +401,7 @@ function uploadsImgDescribe(content,obj){
                 };
                 layerMultiImgAttr.push(layerImgInfoData);
             });
+            console.log(layerMultiImgAttr);
             obj.data('src',layerMultiImgAttr);
             if(layerMultiImgAttr.length==0){
                 $('html,body').removeClass('scrollStyle');
@@ -429,7 +428,6 @@ function uploadsImgDescribe(content,obj){
                     for(var i=0;i<returnData.length;i++){
                         if(returnData[i].fileSrc.indexOf("uploads") == -1 && returnData[i]!=''){
                             returnData[i].fileSrc= uploads+returnData[i].fileSrc;
-
                         }
                         imgArray.push(returnData[i]);
                     }
