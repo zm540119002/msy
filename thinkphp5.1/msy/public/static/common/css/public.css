@@ -1836,14 +1836,14 @@ background-position: 0 -27px;
 .upload-company-map .picture-module:before  {
     width: 2px;
     height: 39.5px;
-    top:45%;
+    top:38%;
     
 }
 .upload-picture-module .picture-module:after,
 .upload-company-map .picture-module:after{
     width: 39.5px;
     height: 2px;
-    top:45%;
+    top:38%;
 }
 .logo-license .logo:before{
     width: 2px;
