@@ -42,12 +42,12 @@
 							<input type="button" class="search-btn">
 						</div>
 						<div class="account-list-content">
-							<span class="title">供应商员工登陆账号列表</span>
+							<span class="title">采购商员工登陆账号列表</span>
 							<ul class="account-list"></ul>
 						</div>
 					</div>
 				</div>
-		<a href="javascript:void(0);" class="add-account foot-btn">新建供应商员工登陆账户</a>
+		<a href="javascript:void(0);" class="add-account foot-btn">新建采购商员工登陆账户</a>
 	</section>
 </article>
 <!--角色设置-->
@@ -98,11 +98,11 @@
 		$('body').on('click','.search-btn',function(){
 			getAccountList();
 		});
-		//创建供应商员工登录账号
+		//创建采购商员工登录账号
 		var addLoginAccount=$('#addLoginAccount').html();
 		$('body').on('click','.add-account',function(){
 			layer.open({
-				title:['新建供应商员工登陆账号','border-bottom:1px solid #d9d9d9;'],
+				title:['新建采购商员工登陆账号','border-bottom:1px solid #d9d9d9;'],
 				className:'addCcountLayer',
 				type: 1,
 				content: addLoginAccount,
