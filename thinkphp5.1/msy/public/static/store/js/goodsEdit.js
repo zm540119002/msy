@@ -20,6 +20,10 @@ $(function(){
         // uploadsImg(_this,'上传商品首焦图','uploadFocusLayer');
         uploadsMultiImg(editDetail,storageDataObj,num,'上传商品首焦图');
     });
+    //商品分类
+    $('body').on('click','.form_goods_type a',function () {
+        $(this).addClass('current').siblings().removeClass('current');
+    })
 
     //归属店铺分类(系列)
     var editGoodsLabel=$('#editGoodsLabel').html();
@@ -174,8 +178,10 @@ $(function(){
         var goodsDetail=$('.goods-detail').data('src');
         var category=$('.select-category').data('category-id');
         var categoryArray = category.split(',');
+        var type = $('.goods-type.current').data('type');
         var postData={};
         var postData=$('.addProductContent').serializeObject();
+        postData.type = type;
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;
         postData.category_id_1=categoryArray[0];
