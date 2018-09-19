@@ -151,8 +151,8 @@
 <article class="f24">
 	<!--店铺运营头部-->
 	{include file="public/store_operation_head" /}
-	<section class="bottomLine">
-		<nav class="columns_flex channel_nav manufacturer_nav">
+	<div class="store_deploy_nav specific_type">
+		<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
 			<a href="{:url('Operation/index')}">
 				店铺提醒
 			</a>
@@ -165,19 +165,18 @@
 			<a href="javascript:void (0)">
 				官方活动
 			</a>
+			<a href="javascript:void (0)">
+				订单客服
+			</a>
 		</nav>
-	</section>
-	<section class="specific_type store-manage-type bottomLine">
+	</div>
+	<div class="specific_type store-manage-type bottomLine">
 		<div class="columns_flex f20">
-			<a  href="javascript:void (0)" class="column_type current">场景</a>
-			<a >云推客</a>
-			<a href="javascript:void (0)">线上</a>
-			<a href="javascript:void (0)">线下</a>
-			<a href="javascript:void (0)">视频</a>
+			<a  href="{:url('Promotion/manage')}" >场景</a>
+			<a href="javascript:void (0)" class="column_type current">推文</a>
 			<a href="javascript:void (0)">直播</a>
 		</div>
-	</section>
-	<section class="content-padding twitter-release-content">
+	</div>
 		<div class="twitter_flex">
 			<div class="release-date">
 				<span>今天</span>
