@@ -2874,6 +2874,9 @@ input[type=text]::-webkit-focus-inner {
 .addProductContent li:first-child{
     margin-top:.12rem;
 }
+.top_nav_store div:nth-child(1){
+    flex:3;
+}
 /*淘宝的布局*/
 .page-container{
     padding-top: 96px;
