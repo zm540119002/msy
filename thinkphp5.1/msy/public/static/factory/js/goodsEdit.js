@@ -179,7 +179,9 @@ $(function(){
         var category=$('.select-category').data('category-id');
         var categoryArray = category.split(',');
         var postData={};
+        var type = $('.goods-type.current').data('type');
         var postData=$('.addProductContent').serializeObject();
+        postData.type = type;
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;
         postData.category_id_1=categoryArray[0];

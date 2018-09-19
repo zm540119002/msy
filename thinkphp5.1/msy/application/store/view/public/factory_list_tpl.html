@@ -8,11 +8,11 @@
     </ul>
 </section>
 <script type="text/javascript">
-    //设置默认供应商
+    //设置默认采购商
     function setDefaultFactory() {
         var factoryList = $('#factoryList').html();
         layer.open({
-            title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
+            title:['选择采购商','border-bottom:1px solid #d9d9d9;'],
             className:'factoryListLayer',
             type: 1,
             content: factoryList,
@@ -30,7 +30,7 @@
                 var postData = {};
                 postData.factoryId = $('.factoryListLayer li.current').data('id');
                 if(!postData.factoryId){
-                    dialog.error('请选择供应商');
+                    dialog.error('请选择采购商');
                     return false;
                 }
                 var url = 'setDefaultFactory';
@@ -48,7 +48,7 @@
     }
     $(function () {
         var factory = '{:json_encode($factory)}';
-        //如果是多供应商
+        //如果是多采购商
         if(factory === 'null'){
             setDefaultFactory();
         }
