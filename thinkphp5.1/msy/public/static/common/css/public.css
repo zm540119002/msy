@@ -443,7 +443,7 @@ i{
 }
 .top-switch-bar{
     height:30px;
-    line-height: 30px;
+    line-height:24px;
 }
 .top-switch-bar div:nth-child(2){
     width:55%;
@@ -2874,8 +2874,16 @@ input[type=text]::-webkit-focus-inner {
 .addProductContent li:first-child{
     margin-top:.12rem;
 }
+.top_nav_store .top_bar{
+    padding-left:12px;
+}
 .top_nav_store div:nth-child(1){
     flex:3;
+}
+.top_bar .store-logo-img{
+    width:44px;
+    height:44px;
+    border-radius:100%;
 }
 /*淘宝的布局*/
 .page-container{
