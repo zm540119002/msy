@@ -15,7 +15,7 @@ class RetailStore extends MallBase{
      */
     public function goods(){
         if(request()->isAjax()){
-            $modelGoods = new \app\factory\model\Goods();
+            $modelGoods = new \common\model\Goods();
             $config =[
                 'where' => [
                     ['g.status', '=', 0],
@@ -42,7 +42,7 @@ class RetailStore extends MallBase{
         }else{
             $goodsId = intval(input('goodsId'));
             if($goodsId){
-                $modelGoods = new \app\factory\model\Goods();
+                $modelGoods = new \common\model\Goods();
                 $config =[
                     'where' => [
                         ['g.status', '=', 0],

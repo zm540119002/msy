@@ -45,7 +45,7 @@ class Store extends FactoryBase
             }
             $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
-            $modelFactory = new \app\factory\model\Brand();
+            $modelFactory = new \common\model\Brand();
             $config = [
                 'where' => [
                     ['b.factory_id','=',$this->factory['id']]

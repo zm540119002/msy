@@ -56,7 +56,7 @@ class Factory extends Base {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$factoryUserModel =  new \app\factory\model\UserFactory;
+			$factoryUserModel =  new \common\model\UserFactory;
 			$data['user_id'] = $uid;
 			$data['factory_id'] = $this->getAttr('id');
 			$result = $factoryUserModel -> allowField(true) -> save($data);
