@@ -20,7 +20,7 @@ class Goods extends MallBase{
             return errorMsg('请求方式错误');
         }
 
-        $model = new\app\purchase\model\Goods;
+        $model = new\app\mall\model\Goods;
         $config=[
             'where'=>[
             ],
@@ -51,7 +51,8 @@ class Goods extends MallBase{
         }
     }
 
-    /**商品详情页
+    /**
+     * 商品详情页
      */
     public function detail(){
         if(request()->isAjax()){

@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Organize extends FactoryBase
+class Organize extends \common\controller\FactoryBase
 {
     /**首页
      */

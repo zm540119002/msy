@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace common\model;
 
 class UserFactory extends \think\model\Pivot {
 	// 设置当前模型对应的完整数据表名称

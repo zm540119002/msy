@@ -56,13 +56,12 @@
 					删除
 				</a>
 			</div>
-			<input type="hidden" data-accountinfo="" class="accountInfo" value="">
+			<input type="hidden" data-account-info="" class="accountInfo" value="">
 		</li>
 	</section>
 	<section class="f24 account-content-wrapper admin-account-wrapper">
 		<div class="account-list-content">
-			<ul class="account-list admin-account-list">
-			</ul>
+			<ul class="account-list admin-account-list"></ul>
 		</div>
 	</section>
 	<a href="javascript:void(0);" class="addManageAccount foot-btn f24">新增管理员账号</a>
@@ -105,7 +104,7 @@
 					$('.admin-account-list li').eq(0).find('.list-company-name').text(postData.companyName);
 					$('.admin-account-list li').eq(0).find('.list-admin-name').text(postData.adminName);
 					$('.admin-account-list li').eq(0).find('.list-admin-mobile').text(postData.adminMobile);
-					$('.admin-account-list li').eq(0).find('.accountInfo').data('accountinfo',postData);
+					$('.admin-account-list li').eq(0).find('.accountInfo').data('account-info',postData);
 					layer.close(index);
 				}
 			});
@@ -119,7 +118,7 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function(){
-					var accountInfo=_this.find('.accountInfo').data('accountinfo');
+					var accountInfo=_this.find('.accountInfo').data('account-info');
 					$('.addAdminLayer .admin-name').val(accountInfo.adminName);
 					$('.addAdminLayer .admin-mobile').val(accountInfo.adminMobile);
 				},
@@ -138,7 +137,7 @@
 					}
 					_this.find('.list-admin-name').text(postData.adminName);
 					_this.find('.list-admin-mobile').text(postData.adminMobile);
-					_this.find('.accountInfo').data('accountinfo',postData);
+					_this.find('.accountInfo').data('account-info',postData);
 					layer.close(index);
 				}
 			});
@@ -152,13 +151,13 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function(){
-					var accountInfo=_this.find('.accountInfo').data('accountinfo');
+					var accountInfo=_this.find('.accountInfo').data('account-info');
 					$('.addAdminLayer .admin-name').val(accountInfo.adminName);
 					$('.addAdminLayer .admin-mobile').val(accountInfo.adminMobile);
 				},
 				yes:function(index){
 					_this.remove();
-					layer.close(index)
+					layer.close(index);
 				}
 			});
 		});

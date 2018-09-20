@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Role extends FactoryBase
+class Role extends \common\controller\FactoryBase
 {
     /**首页
      */
