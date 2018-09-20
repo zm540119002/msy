@@ -15,6 +15,7 @@
 
 return [
     'title' => '采购商',
+    'type' => '2',
     //微信公众号配置
     'wx_config' => array(
         //TODO: 修改这里配置为您自己申请的商户信息

@@ -19,10 +19,10 @@ class Goods extends Base {
 		if($this->_isExistGoodsName($data,$storeId)) {
 			return errorMsg('本店已存在此商品名，请更改别的商品名');
 		}
-		$validate = validate('\common\validate\Goods');
-		 if(!$result = $validate->check($data)) {
-		 	return errorMsg($validate->getError());
-		 }
+//		$validate = validate('\common\validate\Goods');
+//		 if(!$result = $validate->check($data)) {
+//		 	return errorMsg($validate->getError());
+//		 }
 		if(!empty($data['thumb_img'])){
 			$data['thumb_img'] = moveImgFromTemp(config('upload_dir.factory_goods'),basename($data['thumb_img']));
 		}

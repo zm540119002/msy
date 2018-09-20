@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Manager extends \common\controller\StoreBase
+class Manager extends \common\controller\FactoryBase
 {
     /**首页
      */
@@ -14,7 +14,7 @@ class Manager extends \common\controller\StoreBase
     public function add(){
         if(request()->isAjax()){
             $modelManager = new \app\store\model\Manager();
-            $info = $modelManager->edit($this->factory['id']);
+            $info = $modelManager->edit();
             if($info['status']==0){
                 return $info;
             }else{
