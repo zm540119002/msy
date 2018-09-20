@@ -18,10 +18,10 @@ class Factory extends Base {
 
 	/**编辑
 	 */
-	public function edit($uid=''){
+	public function edit($uid='',$type = ''){
 		$data = input('post.');
 		$data['user_id'] = $uid;
-		$data['type'] = 1;//供应商类型
+		$data['type'] = $type;//类型
 		$validate = validate('Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
