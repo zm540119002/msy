@@ -1,6 +1,6 @@
 <?php
 namespace app\factory\controller;
-class Brand extends FactoryBase
+class Brand extends \common\controller\FactoryBase
 {
     //商标首页
     public function manage()

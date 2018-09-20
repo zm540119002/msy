@@ -10,7 +10,7 @@
 namespace app\factory\controller;
 use app\factory\model\Finance as FinanceModel;
 
-class Finance extends StoreBase
+class Finance extends \common\controller\StoreBase
 {
     private $finance;
 

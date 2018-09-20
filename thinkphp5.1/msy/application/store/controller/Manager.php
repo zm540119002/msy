@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Manager extends StoreBase
+class Manager extends \common\controller\StoreBase
 {
     /**首页
      */

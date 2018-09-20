@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Operation extends StoreBase
+class Operation extends \common\controller\StoreBase
 {
     //运营管理首页
     public function Index(){
