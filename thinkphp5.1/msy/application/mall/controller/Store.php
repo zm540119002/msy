@@ -1,5 +1,5 @@
 <?php
-namespace app\purchase\controller;
+namespace app\mall\controller;
 
 class Store extends Base{
     /**首页
