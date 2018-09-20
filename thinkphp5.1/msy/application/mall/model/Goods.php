@@ -15,5 +15,10 @@ class Goods extends \common\model\Base {
 	{
 
 	}
-	
+
+	// 推荐商品
+	public function getRecommend()
+	{
+
+	}
 }
