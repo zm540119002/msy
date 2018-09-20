@@ -8,7 +8,7 @@ class Brand extends \think\Validate
      * 
      */
     protected $rule = [
-        'name'  =>  'require|max:18|unique:brand',
+        'name'  =>  'require|max:18|unique:\common\model\Brand',
         'brand_img' =>  'require',
         'category_id_1' =>  'require',
         'certificate' =>  'require',
