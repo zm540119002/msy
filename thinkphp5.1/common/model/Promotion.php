@@ -21,7 +21,7 @@ class Promotion extends Base {
 	 */
 	public function edit($storeId ='',$runType =''){
 		$modelGoods  = new \common\model\Goods;
-		$validate = validate('Promotion');
+		$validate = validate('\common\validate\Promotion');
 		$data = input('post.');
 		$data['run_type'] = $runType;
 		if(!$result = $validate->check($data)) {

@@ -22,7 +22,7 @@ class Factory extends Base {
 		$data = input('post.');
 		$data['user_id'] = $uid;
 		$data['type'] = $type;//类型
-		$validate = validate('Factory');
+		$validate = validate('\common\validate\Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
 		}

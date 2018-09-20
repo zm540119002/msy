@@ -1,9 +1,7 @@
 <?php
 namespace common\validate;
 
-use think\Validate;
-
-class Brand extends Validate
+class Brand extends \think\Validate
 {
     /**
      * @var array

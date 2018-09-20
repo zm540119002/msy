@@ -21,7 +21,7 @@ class Brand extends Base {
 	 */
 	public function edit($factoryId = ''){
 		$data = input('post.');
-		$validate = validate('Brand');
+		$validate = validate('\common\validate\Brand');
 		if(!$result = $validate ->check($data)) {
 			return errorMsg($validate->getError());
 		}

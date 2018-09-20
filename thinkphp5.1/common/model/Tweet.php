@@ -21,7 +21,7 @@ class Tweet extends Base {
 	 */
 	public function edit($storeId =''){
 		$modelGoods  = new \common\model\Goods;
-		$validate = validate('Tweet');
+		$validate = validate('\common\validate\Tweet');
 		$data = input('post.');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());

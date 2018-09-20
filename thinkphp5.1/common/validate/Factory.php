@@ -1,9 +1,7 @@
 <?php
 namespace common\validate;
 
-use think\Validate;
-
-class Factory extends Validate
+class Factory extends \think\Validate
 {
     protected $rule = [
         'name'  =>  'require|max:25|unique:factory',
