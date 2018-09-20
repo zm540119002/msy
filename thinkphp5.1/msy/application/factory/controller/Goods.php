@@ -8,7 +8,7 @@ class Goods extends StoreBase
      *商品编辑
      */
     public function edit()
-    {
+    {  
         $goodsModel = new \app\factory\model\Goods;//商品扩展模型
         if(request()->isPost()){
             return $result = $goodsModel -> edit($this->store['id'],$this->store['run_type']);
