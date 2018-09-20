@@ -14,7 +14,7 @@ class Operation extends StoreBase
             if(empty($logoImg)){
                 return errorMsg('参数错误');
             }
-            $model = new \app\store\model\Store();
+            $model = new \common\model\Store();
             $where = [
                 ['id','=', $this->store['id']]
             ];

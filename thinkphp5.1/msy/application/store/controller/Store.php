@@ -12,7 +12,7 @@ class Store extends FactoryBase
      */
     public function manage()
     {
-        $model = new \app\store\model\Store();
+        $model = new \common\model\Store();
 
         $config = [
             'where' => [
@@ -28,12 +28,12 @@ class Store extends FactoryBase
      */
     public function edit()
     {
-        $model = new \app\store\model\Store();
+        $model = new \common\model\Store();
         if(request()->isAjax()){
             return $model -> edit($this -> factory['id']);
         }else{
             // 企业旗舰店
-            $modelFactory = new \app\store\model\Record();
+            $modelFactory = new \common\model\Record();
             $config = [
                 'where' => [
                     ['r.factory_id','=',$this->factory['id']]
@@ -45,7 +45,7 @@ class Store extends FactoryBase
             }
             $this -> assign('factoryStore',$factoryStore);
             //企业品牌旗舰店名
-            $modelFactory = new \app\store\model\Brand();
+            $modelFactory = new \common\model\Brand();
             $config = [
                 'where' => [
                     ['b.factory_id','=',$this->factory['id']]
@@ -56,7 +56,7 @@ class Store extends FactoryBase
             $brandStores =  $modelFactory -> getList($config);
             $this -> assign('brandStores',$brandStores);
             //查看已申请的店铺
-            $modeStore = new \app\store\model\Store();
+            $modeStore = new \common\model\Store();
             $config = [
                 'where' => [
                     ['s.factory_id','=',$this->factory['id']]
@@ -70,7 +70,7 @@ class Store extends FactoryBase
     //设置店铺运营状态
     public function setStoreStatus(){
         if(request()->isAjax()){
-            $model = new \app\store\model\Store();
+            $model = new \common\model\Store();
             return $model->edit($this -> factory['id']);
         }
     }

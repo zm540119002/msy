@@ -36,7 +36,7 @@ class Account extends FactoryBase
     //设置账户状态
     public function setStatus(){
         if(request()->isPost()){
-            $modelUserFactory = new \app\factory\model\UserFactory();
+            $modelUserFactory = new \common\model\UserFactory();
             $info = $modelUserFactory->setStatus($this->factory['id']);
             return $info;
         }

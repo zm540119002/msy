@@ -38,7 +38,7 @@ class StoreBase extends FactoryBase
 
     //设置默认产商
     public function setDefaultStore(){
-        $model = new \app\store\model\Store();
+        $model = new \common\model\Store();
         return $model->setDefaultStore($this->factory['id']);
     }
 
