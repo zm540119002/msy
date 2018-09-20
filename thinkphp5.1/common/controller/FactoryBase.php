@@ -1,19 +1,19 @@
 <?php
-namespace app\factory\controller;
+namespace common\controller;
 
 /**供应商验证控制器基类
  */
-class FactoryBase extends \common\controller\UserBase{
+class FactoryBase extends UserBase{
     protected $factory = null;
 
     public function __construct(){
         parent::__construct();
         \common\cache\Factory::remove($this->user['id']);
-        $factoryList = \common\cache\Factory::get($this->user['id'],$type =1);
+        $factoryList = \common\cache\Factory::get($this->user['id'],$type = 2);
         $this->assign('factoryList',$factoryList);
         $factoryCount = count($factoryList);
         if ($factoryCount==0){//没有入住供应商
-            $this->error('没有入住供应商，请入住', 'Deploy/register');
+            $this->error('没有入驻，请入住', 'Deploy/register');
         }elseif($factoryCount==1){//入住一家供应商
             $this->factory = $factoryList[0];
         }elseif($factoryCount>1){//入住多家供应商
@@ -34,13 +34,13 @@ class FactoryBase extends \common\controller\UserBase{
 
     //设置默认供应商
     public function setDefaultFactory(){
-        $modelUserFactory = new \app\factory\model\UserFactory();
+        $modelUserFactory = new \common\model\UserFactory();
         return $modelUserFactory->setDefaultFactory($this->user['id']);
     }
 
     //获取厂家详细信息
     public function getFactoryInfo(){
-        $model = new \app\factory\model\Factory();
+        $model = new \common\model\Factory();
         $config = [
             'where' => [
                 ['f.id','=',$this->factory['id']],

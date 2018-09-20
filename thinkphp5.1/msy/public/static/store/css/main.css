@@ -489,7 +489,14 @@
     background: #efefef;
 }
 .admin-account-list li{
+    padding: .15rem;
     background: #fff;
+}
+.admin-account-list li.current{
+    border: 1px solid #0066cc;
+}
+.operate-btn a {
+    margin: 0 0 .12rem 0;
 }
 .addAdminLayer form{
     padding:0.20rem 0.35rem;

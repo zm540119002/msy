@@ -1,12 +1,12 @@
 <?php
-namespace app\store\model;
+namespace common\model;
 use think\Model;
 use think\Db;
 /**
  * 基础模型器
  */
 
-class Factory extends \common\model\Base {
+class Factory extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'factory';
 	// 设置主键
@@ -18,10 +18,10 @@ class Factory extends \common\model\Base {
 
 	/**编辑
 	 */
-	public function edit($uid=''){
+	public function edit($uid='',$type = ''){
 		$data = input('post.');
 		$data['user_id'] = $uid;
-		$data['type'] = 2;//美容店家
+		$data['type'] = $type;//类型
 		$validate = validate('Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
@@ -56,7 +56,7 @@ class Factory extends \common\model\Base {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$factoryUserModel =  new \app\store\model\UserFactory;
+			$factoryUserModel =  new \common\model\UserFactory;
 			$data['user_id'] = $uid;
 			$data['factory_id'] = $this->getAttr('id');
 			$result = $factoryUserModel -> allowField(true) -> save($data);

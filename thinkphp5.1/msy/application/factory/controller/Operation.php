@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Operation extends StoreBase
+class Operation extends \common\controller\StoreBase
 {
     //运营管理首页
     public function Index(){
@@ -14,7 +14,7 @@ class Operation extends StoreBase
             if(empty($logoImg)){
                 return errorMsg('参数错误');
             }
-            $model = new \app\factory\model\Store();
+            $model = new \common\model\Store();
             $where = [
                 ['id','=', $this->store['id']]
             ];

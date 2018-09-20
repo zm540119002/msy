@@ -1,15 +1,20 @@
 <?php
 namespace app\factory\controller;
 
-class Goods extends StoreBase
+class Goods extends \common\controller\StoreBase
 {
     /**
      * @return array|mixed
      *商品编辑
      */
     public function edit()
+<<<<<<< HEAD
     {  
         $goodsModel = new \app\factory\model\Goods;//商品扩展模型
+=======
+    {
+        $goodsModel = new \common\model\Goods;//商品扩展模型
+>>>>>>> 52a27e64e7c8f2c7d59041f286e21009d272fb04
         if(request()->isPost()){
             return $result = $goodsModel -> edit($this->store['id'],$this->store['run_type']);
         }
@@ -45,7 +50,7 @@ class Goods extends StoreBase
      */
     public function preview()
     {
-        $model = new \app\factory\model\Goods;
+        $model = new \common\model\Goods;
         $goodsId = (int)input('goods_id');
         if(empty($goodsId) && !$goodsId){
             $this -> error('此商品不存在');
@@ -107,7 +112,7 @@ class Goods extends StoreBase
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new\app\factory\model\Goods;
+        $model = new\common\model\Goods;
         $config=[
             'where'=>[
                 ['g.store_id','=',$this->store['id']],
@@ -161,7 +166,7 @@ class Goods extends StoreBase
             //存储路径
             $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
             //本厂商店铺备份文件
-            $modelStore = new \app\factory\model\Store;
+            $modelStore = new \common\model\Store;
 
             $config = [
                 'where'=>[
@@ -195,7 +200,7 @@ class Goods extends StoreBase
             if(empty($data['sortData']) && !is_array($data['sortData'])){
                 return errorMsg('参数错误');
             }
-            $model = new \app\factory\model\Goods;
+            $model = new \common\model\Goods;
             $result = $model->isUpdate(true)->saveAll($data['sortData']);
             if (false !== $result) {
                 return successMsg('成功');
@@ -210,7 +215,7 @@ class Goods extends StoreBase
     public function setShelf(){
         if (request()->isPost()) {
             $data = input();
-            $model = new \app\factory\model\Goods;
+            $model = new \common\model\Goods;
             $result = $model->allowField(true)
                 ->save($data, ['id' => $data['goodsId'], 'store_id' => $this->store['id']]);
             if (false !== $result) {
@@ -225,7 +230,7 @@ class Goods extends StoreBase
     //设置商品库存
     public function setInventory(){
         if(request()->isPost()){
-            $model = new \app\factory\model\Goods;
+            $model = new \common\model\Goods;
             return $result = $model ->setInventory($this->store['id']);
         }
         if($this->factory && $this->store) {
@@ -239,7 +244,7 @@ class Goods extends StoreBase
      */
     public function backup(){
         if(request()->isPost()){
-            $model = new \app\factory\model\Goods;
+            $model = new \common\model\Goods;
             $config = [
                 'where'=>[
                     ['store_id','=',$this->store['id']]
@@ -278,7 +283,7 @@ class Goods extends StoreBase
             return errorMsg('请求方式错误');
         }
         $storeId = (int)input('get.storeId');
-        $modelStore = new \app\factory\model\Store;
+        $modelStore = new \common\model\Store;
         if(!$modelStore -> checkStoreExist($storeId,$this -> factory['id'])){
             return errorMsg('不存在店铺');
         }
@@ -313,7 +318,7 @@ class Goods extends StoreBase
         foreach ($selectedGoodsList as $key=>$goods){
             $goodsIds[] = $goods['goods_id'];
         }
-        $modelGoods = new \app\factory\model\Goods;
+        $modelGoods = new \common\model\Goods;
         $config = [
             'where'=>[
                 ['id','in',$goodsIds]
@@ -343,7 +348,7 @@ class Goods extends StoreBase
             return errorMsg('请求方式错误');
         }
         $goodsIds = explode(",",rtrim(input('get.goods'), ","));
-        $modelGoods = new \app\factory\model\Goods;
+        $modelGoods = new \common\model\Goods;
         $config = [
             'where'=>[
                 ['id','in',$goodsIds]

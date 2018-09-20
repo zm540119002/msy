@@ -228,8 +228,8 @@
 				content='请上传专利荣誉图片';
 			}
 			if(content){
-//				dialog.error(content);
-//				return false;
+				dialog.error(content);
+				return false;
 			}
 			if(!uploadsSingleImgFlag ){
 				dialog.error('图片还没有上传完毕');
@@ -250,7 +250,6 @@
 				data:postData,
 				dataType:'json',
 				success:function (data) {
-					return false;
 					$(this).removeClass("nodisabled");
 				   if(data.status == 0){
 						dialog.error(data.info);

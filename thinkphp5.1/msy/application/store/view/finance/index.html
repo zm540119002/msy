@@ -187,11 +187,11 @@
         $('body').on('click','.search-btn',function(){
             getAccountList();
         });
-        //创建供应商员工登录账号
+        //创建采购商员工登录账号
         var addLoginAccount=$('#addLoginAccount').html();
         $('body').on('click','.add-account',function(){
             layer.open({
-                title:['新建供应商员工登陆账号','border-bottom:1px solid #d9d9d9;'],
+                title:['新建采购商员工登陆账号','border-bottom:1px solid #d9d9d9;'],
                 className:'addCcountLayer',
                 type: 1,
                 content: addLoginAccount,

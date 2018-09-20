@@ -179,7 +179,9 @@ $(function(){
         var category=$('.select-category').data('category-id');
         var categoryArray = category.split(',');
         var postData={};
+        var type = $('.goods-type.current').data('type');
         var postData=$('.addProductContent').serializeObject();
+        postData.type = type;
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;
         postData.category_id_1=categoryArray[0];
@@ -189,6 +191,8 @@ $(function(){
             content='请填写商品名称';
         }else if(!postData.trait){
             content='请填写商品特点';
+        }else if(!postData.type){
+            content='请选择商品类型';
         }else if(!postData.sale_price){
             content='请填写优惠价';
         }else if(!isMoney(postData.sale_price)){

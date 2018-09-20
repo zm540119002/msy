@@ -443,7 +443,7 @@ i{
 }
 .top-switch-bar{
     height:30px;
-    line-height: 30px;
+    line-height:24px;
 }
 .top-switch-bar div:nth-child(2){
     width:55%;
@@ -2873,6 +2873,33 @@ input[type=text]::-webkit-focus-inner {
 }
 .addProductContent li:first-child{
     margin-top:.12rem;
+}
+.top_nav_store .top_bar{
+    padding-left:12px;
+}
+.top_nav_store div:nth-child(1){
+    flex:3;
+}
+.top_bar .store-logo-img{
+    width:44px;
+    height:44px;
+    border-radius:100%;
+}
+.form_goods_type{
+    margin:0 0 0 1.25rem;
+}
+.form_goods_type a{
+    display:inline-block;
+    width:100px;
+    padding:.08rem 0 .06rem;
+    border:1px solid #39b54a;
+    border-radius:5px;
+    color:#39b54a;
+    text-align: center;
+}
+.form_goods_type a.current{
+    background:#39b54a;
+    color:#fff;
 }
 /*淘宝的布局*/
 .page-container{

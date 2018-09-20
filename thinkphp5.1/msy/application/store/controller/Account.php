@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Account extends FactoryBase
+class Account extends \common\controller\FactoryBase
 {
     //首页
     public function index(){
@@ -36,7 +36,7 @@ class Account extends FactoryBase
     //设置账户状态
     public function setStatus(){
         if(request()->isPost()){
-            $modelUserFactory = new \app\store\model\UserFactory();
+            $modelUserFactory = new \common\model\UserFactory();
             $info = $modelUserFactory->setStatus($this->factory['id']);
             return $info;
         }

@@ -8,9 +8,9 @@ class Deploy extends UserBase
      */
     public function register()
     {
-        $model = new \app\factory\model\Factory();
+        $model = new \common\model\Factory();
         if(request()->isAjax()){
-            return $model -> edit($this -> user['id']);
+            return $model -> edit($this -> user['id'],$type =1);
         }else{
             $mobilePhone = $this -> user['mobile_phone'];
             $this->assign('mobilePhone',$mobilePhone);
