@@ -9,7 +9,7 @@ class FactoryBase extends UserBase{
     public function __construct(){
         parent::__construct();
         \common\cache\Factory::remove($this->user['id']);
-        $factoryList = \common\cache\Factory::get($this->user['id'],$type = 2);
+        $factoryList = \common\cache\Factory::get($this->user['id'],config('custom.type'));
         $this->assign('factoryList',$factoryList);
         $factoryCount = count($factoryList);
         if ($factoryCount==0){//没有入住供应商
