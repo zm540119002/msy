@@ -21,12 +21,12 @@ class Promotion extends Base {
 	 */
 	public function edit($storeId ='',$runType =''){
 		$modelGoods  = new \common\model\Goods;
-		$validate = validate('\common\validate\Promotion');
 		$data = input('post.');
 		$data['run_type'] = $runType;
-		if(!$result = $validate->check($data)) {
-			return errorMsg($validate->getError());
-		}
+//		$validate = validate('\common\validate\Promotion');
+//		if(!$result = $validate->check($data)) {
+//			return errorMsg($validate->getError());
+//		}
 		if(!empty($data['first_img'])){
 			$data['first_img'] = moveImgFromTemp(config('upload_dir.factory_promotion'),basename($data['first_img']));
 		}

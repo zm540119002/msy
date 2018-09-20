@@ -23,11 +23,14 @@ class Factory extends Base {
 		$data['user_id'] = $uid;
 		$data['type'] = $type;//类型
 		$validate = validate('\common\validate\Factory');
-		if(!$result = $validate->check($data)) {
-			return errorMsg($validate->getError());
-		}
+
+//		if(!$result = $validate->check($data)) {
+//			return errorMsg($validate->getError());
+//		}
+
 		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
 		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
+
 		if(input('?post.factory_id')){
 			//查找当前的factory_id的入驻信息
 			$config = [
@@ -49,6 +52,7 @@ class Factory extends Base {
 				return errorMsg('失败');
 			}
 		}else{
+
 			$data['create_time'] = time();
 			$this -> startTrans();
 			$result = $this->allowField(true)->save($data);
