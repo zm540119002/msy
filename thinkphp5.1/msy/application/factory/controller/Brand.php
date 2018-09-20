@@ -5,7 +5,7 @@ class Brand extends FactoryBase
     //商标首页
     public function manage()
     {
-        $model = new \app\factory\model\Brand;
+        $model = new \common\model\Brand;
         $config = [
             'where' => [
                 ['factory_id','=',$this->factory['id']]
@@ -19,7 +19,7 @@ class Brand extends FactoryBase
     //备案
     public function record()
     {
-        $model = new \app\factory\model\Brand;
+        $model = new \common\model\Brand;
         if(request()->isPost()){
             return $model -> edit($this->factory['id']);
         }

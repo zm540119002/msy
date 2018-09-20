@@ -5,7 +5,7 @@ class Record extends FactoryBase
 {
     //产商档案编辑
     public function edit(){
-        $model = new \app\store\model\Record();
+        $model = new \common\model\Record();
         if(request()->isPost()){
             return $model -> edit($this->factory['id']);
         }else{
@@ -25,7 +25,7 @@ class Record extends FactoryBase
      */
     public function preview()
     {
-        $model = new \app\store\model\Record();
+        $model = new \common\model\Record();
         $config = [
             'where' => [
                 ['r.factory_id','=',$this->factory['id']],

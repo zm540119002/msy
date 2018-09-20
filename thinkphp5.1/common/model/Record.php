@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\model;
+namespace common\model;
 use think\Model;
 use think\Db;
 use think\Route;
@@ -8,7 +8,7 @@ use think\Route;
  * 基础模型器
  */
 
-class Record extends \common\model\Base{
+class Record extends Base{
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'record';
 	// 设置主键

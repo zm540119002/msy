@@ -8,7 +8,7 @@ class Factory{
     public static function get($userId,$type){
         $factoryList = cache(self::$_cache_key.$userId);
         if(!$factoryList){
-            $modelUserFactory = new \app\factory\model\UserFactory();
+            $modelUserFactory = new \common\model\UserFactory();
             $where = [
                 ['uf.status','=',0],
                 ['uf.user_id','=',$userId],

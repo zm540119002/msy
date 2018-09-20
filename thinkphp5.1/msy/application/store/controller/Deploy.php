@@ -8,7 +8,7 @@ class Deploy extends UserBase
      */
     public function register()
     {
-        $model = new \app\store\model\Factory();
+        $model = new \common\model\Factory();
         if(request()->isAjax()){
             return $model -> edit($this -> user['id']);
         }else{

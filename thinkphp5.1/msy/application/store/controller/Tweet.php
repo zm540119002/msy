@@ -35,7 +35,7 @@ class Tweet extends StoreBase
         $model = new \app\store\model\Tweeet;
 
         exit;
-        $model = new \app\store\model\Promotion;
+        $model = new \common\model\Promotion;
         if(request()->isPost()){
             return $model -> edit($this->store['id']);
         }
@@ -53,7 +53,7 @@ class Tweet extends StoreBase
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }
-            $modelGoods = new \app\store\model\Goods;
+            $modelGoods = new \common\model\Goods;
             $goodsIds = explode(',',$promotionInfo['goods_ids']);
             $config = [
                 'where' => [
@@ -74,7 +74,7 @@ class Tweet extends StoreBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
-        $model = new \app\store\model\Promotion;
+        $model = new \common\model\Promotion;
         $config=[
             'where'=>[
                 ['p.store_id','=',$this->store['id']],
@@ -119,7 +119,7 @@ class Tweet extends StoreBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $model = new \app\store\model\Promotion();
+        $model = new \common\model\Promotion();
         return $model->del($this->store['id'],true);
     }
 }

@@ -15,7 +15,7 @@ class Promotion extends StoreBase
      */
     public function edit()
     {
-        $model = new \app\factory\model\Promotion;
+        $model = new \common\model\Promotion;
         if(request()->isPost()){
             return $model -> edit($this->store['id'],$this->store['run_type']);
         }
@@ -33,7 +33,7 @@ class Promotion extends StoreBase
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }
-            $modelGoods = new \app\factory\model\Goods;
+            $modelGoods = new \common\model\Goods;
             $goodsIds = explode(',',$promotionInfo['goods_ids']);
             $config = [
                 'where' => [
@@ -54,7 +54,7 @@ class Promotion extends StoreBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
-        $model = new \app\factory\model\Promotion;
+        $model = new \common\model\Promotion;
         $config=[
             'where'=>[
                 ['p.store_id','=',$this->store['id']],
@@ -99,7 +99,7 @@ class Promotion extends StoreBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $model = new \app\factory\model\Promotion();
+        $model = new \common\model\Promotion();
         return $model->del($this->store['id'],true);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace app\store\model;
+namespace common\model;
 use GuzzleHttp\Psr7\Request;
 use think\Model;
 use think\Db;
@@ -7,7 +7,7 @@ use think\Db;
  * 基础模型器
  */
 
-class Tweet extends \common\model\Base {
+class Tweet extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'tweet';
 	// 设置主键
@@ -20,7 +20,7 @@ class Tweet extends \common\model\Base {
 	 * 新增和修改
 	 */
 	public function edit($storeId =''){
-		$modelGoods  = new \app\store\model\Goods;
+		$modelGoods  = new \app\factory\model\Goods;
 		$validate = validate('Tweet');
 		$data = input('post.');
 		if(!$result = $validate->check($data)) {

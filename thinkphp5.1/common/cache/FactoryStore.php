@@ -10,7 +10,7 @@ class FactoryStore{
     public static function get($id){
         $store = cache(self::$_cache_key.$id);
         if(!$store){
-            $model = new \app\factory\model\Store();
+            $model = new \common\model\Store();
             $config = [
                 'where' => [
                     ['id','=',$id]
@@ -35,7 +35,7 @@ class FactoryStore{
     public static function getList($factorId){
         $storeList = cache(self::$_cache_key_list.$factorId);
         if(!$storeList){
-            $model = new \app\factory\model\Store();
+            $model = new \common\model\Store();
             $config = [
                 'where' => [
                     ['factory_id','=',$factorId]
