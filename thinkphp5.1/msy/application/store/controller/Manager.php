@@ -12,6 +12,17 @@ class Manager extends \common\controller\StoreBase
     /**新增管理员
      */
     public function add(){
-        return $this->fetch();
+        if(request()->isAjax()){
+            $modelManager = new \app\store\model\Manager();
+            $info = $modelManager->edit($this->factory['id']);
+            if($info['status']==0){
+                return $info;
+            }else{
+                $this->assign('info',$info);
+                return view('info_tpl');
+            }
+        }else{
+            return $this->fetch();
+        }
     }
 }
