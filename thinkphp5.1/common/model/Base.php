@@ -2,7 +2,6 @@
 namespace common\model;
 
 class Base extends \think\Model {
-
 	/**查询多条数据
 	 */
 	public function getList($config=[]){
