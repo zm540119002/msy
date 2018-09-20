@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Tweet extends StoreBase
+class Tweet extends \common\controller\StoreBase
 {
     //促销管理
     public function manage()

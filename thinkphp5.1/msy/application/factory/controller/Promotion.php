@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Promotion extends StoreBase
+class Promotion extends \common\controller\StoreBase
 {
     //促销管理
     public function manage()

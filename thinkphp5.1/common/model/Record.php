@@ -84,7 +84,7 @@ class Record extends Base{
 				$this ->rollback();
 				return errorMsg('失败！');
 			}
-			$modelStore = new \app\factory\model\Store;
+			$modelStore = new \common\model\Store;
 			$config = [
 				'where' => [
 					['factory_id','=',$factoryId],

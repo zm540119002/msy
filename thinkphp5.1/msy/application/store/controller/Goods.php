@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Goods extends StoreBase
+class Goods extends \common\controller\StoreBase
 {
     /**
      * @return array|mixed

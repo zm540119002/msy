@@ -20,7 +20,7 @@ class Tweet extends Base {
 	 * 新增和修改
 	 */
 	public function edit($storeId =''){
-		$modelGoods  = new \app\factory\model\Goods;
+		$modelGoods  = new \common\model\Goods;
 		$validate = validate('Tweet');
 		$data = input('post.');
 		if(!$result = $validate->check($data)) {

@@ -1,7 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-class Record extends FactoryBase
+class Record extends \common\controller\FactoryBase
 {
 
     //产商档案编辑

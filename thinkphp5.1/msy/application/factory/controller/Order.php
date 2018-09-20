@@ -8,7 +8,7 @@ namespace app\factory\controller;
 
 use app\factory\model\Order as OrderModel;
 
-class Order extends StoreBase
+class Order extends \common\controller\StoreBase
 {
     private  $order, $validate;
 

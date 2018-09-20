@@ -1,6 +1,6 @@
 <?php
 namespace app\store\controller;
-class Store extends FactoryBase
+class Store extends \common\controller\FactoryBase
 {
 
     //开店部署首页

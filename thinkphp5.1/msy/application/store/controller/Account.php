@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Account extends FactoryBase
+class Account extends \common\controller\FactoryBase
 {
     //首页
     public function index(){
