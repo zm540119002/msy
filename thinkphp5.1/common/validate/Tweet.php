@@ -1,9 +1,7 @@
 <?php
 namespace common\validate;
 
-use think\Validate;
-
-class Tweet extends Validate
+class Tweet extends \think\Validate
 {
     /**
      * @var array

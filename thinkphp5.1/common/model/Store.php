@@ -21,10 +21,10 @@ class Store extends Base {
 	public function edit($factoryId=''){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
-//		$validate = validate('Store');
-//		if(!$result = $validate->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		$validate = validate('\common\validate\Store');
+		if(!$result = $validate->check($data)) {
+			return errorMsg($validate->getError());
+		}
 		if(input('?post.id')){
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);

@@ -19,7 +19,7 @@ class Goods extends Base {
 		if($this->_isExistGoodsName($data,$storeId)) {
 			return errorMsg('本店已存在此商品名，请更改别的商品名');
 		}
-		$validate = validate('Goods');
+		$validate = validate('\common\validate\Goods');
 		 if(!$result = $validate->check($data)) {
 		 	return errorMsg($validate->getError());
 		 }
