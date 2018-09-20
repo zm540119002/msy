@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\validate;
+namespace common\validate;
 
 class Store extends \think\Validate
 {

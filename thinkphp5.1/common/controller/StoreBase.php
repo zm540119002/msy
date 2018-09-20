@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\controller;
+namespace common\controller;
 /**
  * Class StoreBase
  * @package app\factory\controller

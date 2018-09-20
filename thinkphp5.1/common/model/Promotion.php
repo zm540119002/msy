@@ -20,7 +20,7 @@ class Promotion extends Base {
 	 * 新增和修改
 	 */
 	public function edit($storeId ='',$runType =''){
-		$modelGoods  = new \app\factory\model\Goods;
+		$modelGoods  = new \common\model\Goods;
 		$validate = validate('Promotion');
 		$data = input('post.');
 		$data['run_type'] = $runType;

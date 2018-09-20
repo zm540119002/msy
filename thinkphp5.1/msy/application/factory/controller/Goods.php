@@ -1,15 +1,20 @@
 <?php
 namespace app\factory\controller;
 
-class Goods extends StoreBase
+class Goods extends \common\controller\StoreBase
 {
     /**
      * @return array|mixed
      *商品编辑
      */
     public function edit()
+<<<<<<< HEAD
+    {  
+        $goodsModel = new \app\factory\model\Goods;//商品扩展模型
+=======
     {
         $goodsModel = new \common\model\Goods;//商品扩展模型
+>>>>>>> 52a27e64e7c8f2c7d59041f286e21009d272fb04
         if(request()->isPost()){
             return $result = $goodsModel -> edit($this->store['id'],$this->store['run_type']);
         }

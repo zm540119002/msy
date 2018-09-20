@@ -10,7 +10,7 @@ namespace app\factory\controller;
 use common\component\WeiXinPay\lib\WxPayApi;
 use app\factory\model\WxPayConfig;
 
-class Pay extends StoreBase
+class Pay extends \common\controller\StoreBase
 {
     private $config = ''; //微信配置信息
 

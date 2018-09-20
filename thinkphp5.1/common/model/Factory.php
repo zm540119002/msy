@@ -18,10 +18,10 @@ class Factory extends Base {
 
 	/**编辑
 	 */
-	public function edit($uid=''){
+	public function edit($uid='',$type = ''){
 		$data = input('post.');
 		$data['user_id'] = $uid;
-		$data['type'] = 1;//供应商类型
+		$data['type'] = $type;//类型
 		$validate = validate('Factory');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
@@ -56,7 +56,7 @@ class Factory extends Base {
 				$this ->rollback();
 				return errorMsg('失败');
 			}
-			$factoryUserModel =  new \app\factory\model\UserFactory;
+			$factoryUserModel =  new \common\model\UserFactory;
 			$data['user_id'] = $uid;
 			$data['factory_id'] = $this->getAttr('id');
 			$result = $factoryUserModel -> allowField(true) -> save($data);

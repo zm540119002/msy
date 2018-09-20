@@ -1,5 +1,5 @@
 <?php
-namespace app\factory\validate;
+namespace common\validate;
 
 
 class Record extends \think\Validate
