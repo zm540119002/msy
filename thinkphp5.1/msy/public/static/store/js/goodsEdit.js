@@ -216,7 +216,10 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        var _this = $(this);
+        _this.addClass("nodisabled");
         $.post(controller+'edit',postData,function(msg){
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }
@@ -285,7 +288,6 @@ function uploadsVideo(obj,tilt,className) {
         },
         yes:function(index){
             var layerImgSrc= $('.'+ className).find('.img').val();
-            console.log(layerImgSrc);
             obj.siblings('.hidden_video').val(layerImgSrc);
             if(layerImgSrc.indexOf("data:") !=-1){
                 errorTipc('文件还没上传完毕')

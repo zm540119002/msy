@@ -54,7 +54,10 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        var _this = $(this);
+        _this.addClass("nodisabled");
         $.post(controller + 'register',postData,function(msg){
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }

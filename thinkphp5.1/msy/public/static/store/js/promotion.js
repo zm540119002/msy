@@ -91,6 +91,8 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        var _this = $(this);
+        _this.addClass("nodisabled");
         $.ajax({
             url: controller + 'edit',
             data: postData,
@@ -99,6 +101,7 @@ $(function(){
                 //$('.loading').show();
             },
             success: function(msg){
+                _this.removeClass("nodisabled");
                 if(msg.status == 0){
                     dialog.error(msg.info);
                     return false;
