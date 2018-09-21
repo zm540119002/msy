@@ -1,0 +1,30 @@
+
+{notempty name='list'}
+{volist name="list" id="vo"}
+<li class="columns_flex tag-item first-tag" data-id="{$vo.id}">
+    <div class="td">
+        <input type="text" class="serial-num sort" value="{$vo.sort}"/>
+    </div>
+    <div class="td">
+        {notempty name="vo.thumb_img"}
+        <img src="public_uploads/{$vo.thumb_img}" alt="" class="left goods-img">
+        {else /}
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="">
+        {/notempty}
+        <p class="classify-tag-name">{$vo.name}</p>
+    </div>
+    <div class="classify-operate-btn td">
+        <input type="button" class="up-btn move-icons move-btn" value="上移"/>
+        <input type="button" class="down-btn down-icons move-btn" value="下移"/>
+    </div>
+    <input type="hidden" value="" class="classifyTagInfo1" data-tag-id="">
+</li>
+{/volist}
+{else /}
+{if $page == 1}
+<li class=''>没有符合条件的记录！</li>
+{else /}
+{/if}
+{/notempty}
+
+
