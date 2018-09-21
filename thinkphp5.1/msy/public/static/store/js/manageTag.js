@@ -172,7 +172,10 @@ var manageClassifyTag={
             $('.classify-label-content .set-tag-tipc').show();
         }
         var series_id = delObj.siblings('.series_id').data('series-id');
+       var _this = $(this);
+        _this.addClass("nodisabled");
         $.post(controller+"delete",{series_id:series_id},function(msg){
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }

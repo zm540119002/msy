@@ -23,9 +23,9 @@ class Factory extends Base {
 		$data['user_id'] = $uid;
 		$data['type'] = $type;//类型
 		$validate = new \common\validate\Factory();
-//		if(!$result = $validate->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		if(!$result = $validate->check($data)) {
+			return errorMsg($validate->getError());
+		}
 		$data['business_license'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['business_license']));
 		$data['auth_letter'] = moveImgFromTemp(config('upload_dir.factory_auto'),basename($data['auth_letter']));
 
@@ -59,9 +59,9 @@ class Factory extends Base {
 				return errorMsg('失败');
 			}
 			$factoryUserModel =  new \common\model\UserFactory;
-			$data['user_id'] = $uid;
-			$data['factory_id'] = $this->getAttr('id');
-			$result = $factoryUserModel -> allowField(true) -> save($data);
+			$data2['user_id'] = $uid;
+			$data2['factory_id'] = $this->getAttr('id');
+			$result = $factoryUserModel -> allowField(true) -> save($data2);
 			if(!$result){
 				$this ->rollback();
 				return errorMsg('失败');

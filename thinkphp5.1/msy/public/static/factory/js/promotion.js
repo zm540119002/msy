@@ -165,7 +165,8 @@ $(function(){
             dialog.error(content);
             return false;
         }
-        $(this).addClass("nodisabled");//防止重复提交
+        var _this = $(this);
+        _this.addClass("nodisabled");//防止重复提交
         $.ajax({
             url: controller + 'edit',
             data: postData,
@@ -174,7 +175,7 @@ $(function(){
 
             },
             success: function(msg){
-                $(this).removeClass("nodisabled");
+                _this.removeClass("nodisabled");
                 if(msg.status == 0){
                     dialog.error(msg.info);
                     return false;
@@ -244,13 +245,3 @@ function selectedGoodsList(selectedGoods) {
         $('.promotional-goods-list').append(data);
     });
 }
-
-// $(window).on('scroll',function(){
-//     if(config.loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
-//         console.log(25454)
-//         config.loadTrigger = false;
-//         config.requestEnd = false;
-//         config.container = $('.addsalesgoodsLayer #list');
-//         getPagingList(config,postData);
-//     }
-// });

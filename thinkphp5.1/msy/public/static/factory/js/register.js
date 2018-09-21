@@ -26,6 +26,7 @@ $(function(){
     });
     //验证是否上传图片 与 提交申请
     $('body').on('click','.two-step',function(){
+        var _this = $(this);
         factoryFullName=trim($('.factoryFullName').val(),'g');
         agentName=trim($('.agentName').val(),'g');
         businessLicense=$('.business-license').val();
@@ -54,9 +55,9 @@ $(function(){
             dialog.error('图片还没有上传完毕');
             return false;
         }
-        $(this).addClass("nodisabled");//防止重复提交
+        _this.addClass("nodisabled");//防止重复提交
         $.post(controller + 'register',postData,function(msg){
-            $(this).removeClass("nodisabled");
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }

@@ -4,7 +4,7 @@ namespace common\validate;
 class Factory extends \think\Validate
 {
     protected $rule = [
-        'name'  =>  'require|max:25|unique:factory',
+        'name'  =>  'require|max:25|unique:\common\model\Factory',
         'agent' =>  'require|max:50',
         'business_license' =>  'require',
     ];
