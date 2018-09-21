@@ -36,6 +36,35 @@ class Manager extends \common\model\Base {
 //		if(!$validateUser->scene('edit')->check($postData)){
 //			return errorMsg($validateUser->getError());
 //		}
+		$modelUserFactory = new \common\model\UserFactory();
+		if($postData['id'] && intval($postData['id'])){//修改
+			$postData['update_time'] = time();
+			$res = $this->isUpdate(true)->save($postData);
+			if($res===false){
+				return errorMsg('失败',$this->getError());
+			}
+		}else{//新增
+			unset($postData['id']);
+			$postData['type'] = 0;
+			$postData['create_time'] = time();
+			$this->startTrans();//事务开启
+			$res = $this->save($postData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$postData['type'] = 2;
+			$postData['user_id'] = $this->getAttr('id');
+			$postData['factory_id'] = $factoryId;
+			$res = $modelUserFactory->save($postData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$this->commit();//事务提交
+			$postData['id'] = $this->getAttr('id');
+			$postData['user_factory_id'] = $modelUserFactory->getAttr('id');
+		}
 		return successMsg('成功！',$postData);
 	}
 }
