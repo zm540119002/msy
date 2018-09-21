@@ -25,7 +25,7 @@
             // 判断图片格式
             var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
             if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
-                dialog.error('请上传：mp4、rmvb、avi、ts格式图片');
+                errorTipc('请上传：mp4、rmvb、avi、ts格式视频');
                 return false;
             }
             var reader = new FileReader();
@@ -93,10 +93,7 @@
         // 判断图片格式
         var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
         if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
-            layer.open({
-                content:'请上传：jpg、jpeg、png、gif格式图片',
-                time:2
-            }) ;
+            errorTipc('请上传：jpg、jpeg、png、gif格式图片');
         }
         var reader = new FileReader();
         reader.readAsDataURL(img);
@@ -150,10 +147,7 @@ function uploadPicDescribe(fil,i,len){
     // 判断图片格式
     var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
     if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
-        layer.open({
-            content:'请上传：jpg、jpeg、png、gif格式图片',
-            time:2
-        }) ;
+        errorTipc('请上传：jpg、jpeg、png、gif格式图片');
     }
     var reader = new FileReader();
     reader.readAsDataURL(img);
@@ -184,13 +178,10 @@ function uploadPic(fil,i,len){
     // 判断图片格式
     var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
     if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
-        layer.open({
-            content:'请上传：jpg、jpeg、png、gif格式图片',
-            time:2
-        }) ;
+        errorTipc('请上传：jpg、jpeg、png、gif格式图片');
     }
     if(fileSize>1){
-        dialog.error('图片大小不能超过1M');
+        errorTipc('图片大小不能超过1M');
         return false;
     }
     if($('.editDetailLayer li').length>=num && num){

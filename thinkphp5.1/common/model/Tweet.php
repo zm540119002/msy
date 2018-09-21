@@ -22,10 +22,10 @@ class Tweet extends Base {
 	public function edit($storeId =''){
 		$modelGoods  = new \common\model\Goods;
 		$data = input('post.');
-//		$validate = validate('\common\validate\Tweet');
-//		if(!$result = $validate->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		$validate = validate('\common\validate\Tweet');
+		if(!$result = $validate->check($data)) {
+			return errorMsg($validate->getError());
+		}
 		if(!empty($data['first_img'])){
 			$data['first_img'] = moveImgFromTemp(config('upload_dir.factory_promotion'),basename($data['first_img']));
 		}

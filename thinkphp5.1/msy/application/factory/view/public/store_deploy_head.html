@@ -2,7 +2,11 @@
     <div class="top_bar top-switch-bar columns_flex l-r-sides">
         <!--{include file="public/home_page" /}-->
         <div class="">
-            <img class="left store-logo-img small_default_img" src="" alt="">
+            {notempty name="factory.logo_img"}
+            <img class="left store-logo-img small_default_img" src="public_uploads/{$factory.logo_img|default=''}" alt="">
+            {else /}
+            <img class="upload_img" src="public_img/default/no_pic_100.jpg" alt="">
+            {/notempty}
             <span>{$factory.name}</span>
         </div>
         <div class="">

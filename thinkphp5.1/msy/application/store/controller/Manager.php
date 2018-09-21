@@ -11,11 +11,12 @@ class Manager extends \common\controller\FactoryBase
 
     /**新增管理员
      */
-    public function add(){
+    public function edit(){
         if(request()->isAjax()){
             $modelManager = new \app\store\model\Manager();
             $info = $modelManager->edit($this->user['id'],$this->factory['id']);
-            if($info['status']==0){
+            return $info;
+            if($info['id']==0){
                 return $info;
             }else{
                 $this->assign('info',$info);
