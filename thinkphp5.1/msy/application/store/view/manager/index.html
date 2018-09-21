@@ -24,10 +24,10 @@
 	<section id="addAdminAccount" style="display:none;">
 		<form class="addAdminForm">
 			<div class="account-field">
-				<input type="text" class="admin-name" placeholder="姓名" name="adminName">
+				<input type="text" class="admin-name" placeholder="姓名" name="name">
 			</div>
 			<div class="account-field">
-				<input type="tel" class="admin-mobile" placeholder="手机号码" name="adminMobile">
+				<input type="tel" class="admin-mobile" placeholder="手机号码" name="mobile_phone">
 			</div>
 		</form>
 		<div class="error_tipc"></div>
@@ -81,20 +81,49 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				yes:function(index){
-					var postData={};
 					var content='';
 					var html=$('#addAdminList').html();
 					var listLength=$('.admin-account-list li').length;
-					postData=$('.addAdminForm').serializeObject();
-					if(!postData.adminName){
+					var postData = $('.addAdminForm').serializeObject();
+					if(!postData.name){
 						content='请填写姓名';
-					}else if(!register.phoneCheck(postData.adminMobile)){
+					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
 					}
 					if(content){
 						errorTipc(content);
 						return false;
 					}
+					var postData = {};
+					var url = MODULE + '/Manager/edit';
+					$.ajax({
+						url: url,
+						data: postData,
+						type: 'post',
+						beforeSend: function(xhr){
+							$('.loading').show();
+						},
+						error:function(xhr){
+							$('.loading').hide();
+							dialog.error('AJAX错误');
+						},
+						success: function(data){
+							$('.loading').hide();
+							if(data.status == 0){
+								if(data.url){
+									location.href = data.url;
+								}else{
+									dialog.error(data.info);
+								}
+							}else if(data.status == 1){
+								if(data.info=='isAjax'){
+									loginDialog(func);
+								}else{
+									location.href = MODULE + '/Order/orderDetail/orderId/' + data.id;
+								}
+							}
+						}
+					});
 					if(listLength<1){
 						console.log(listLength);
 						$('.admin-account-list').append(html);
@@ -102,8 +131,8 @@
 						$('.admin-account-list li:first').before(html);
 					}
 					$('.admin-account-list li').eq(0).find('.list-company-name').text(postData.companyName);
-					$('.admin-account-list li').eq(0).find('.list-admin-name').text(postData.adminName);
-					$('.admin-account-list li').eq(0).find('.list-admin-mobile').text(postData.adminMobile);
+					$('.admin-account-list li').eq(0).find('.list-admin-name').text(postData.name);
+					$('.admin-account-list li').eq(0).find('.list-admin-mobile').text(postData.mobile_phone);
 					$('.admin-account-list li').eq(0).find('.accountInfo').data('account-info',postData);
 					layer.close(index);
 				}
@@ -119,24 +148,23 @@
 				btn:['确定','取消'],
 				success:function(){
 					var accountInfo=_this.find('.accountInfo').data('account-info');
-					$('.addAdminLayer .admin-name').val(accountInfo.adminName);
-					$('.addAdminLayer .admin-mobile').val(accountInfo.adminMobile);
+					$('.addAdminLayer .admin-name').val(accountInfo.name);
+					$('.addAdminLayer .admin-mobile').val(accountInfo.mobile_phone);
 				},
 				yes:function(index){
-					var postData={};
+					var postData=$('.addAdminForm').serializeObject();
 					var content='';
-					postData=$('.addAdminForm').serializeObject();
-					if(!postData.adminName){
+					if(!postData.name){
 						content='请填写姓名';
-					}else if(!register.phoneCheck(postData.adminMobile)){
+					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
 					}
 					if(content){
 						errorTipc(content);
 						return false;
 					}
-					_this.find('.list-admin-name').text(postData.adminName);
-					_this.find('.list-admin-mobile').text(postData.adminMobile);
+					_this.find('.list-admin-name').text(postData.name);
+					_this.find('.list-admin-mobile').text(postData.mobile_phone);
 					_this.find('.accountInfo').data('account-info',postData);
 					layer.close(index);
 				}
@@ -152,8 +180,8 @@
 				btn:['确定','取消'],
 				success:function(){
 					var accountInfo=_this.find('.accountInfo').data('account-info');
-					$('.addAdminLayer .admin-name').val(accountInfo.adminName);
-					$('.addAdminLayer .admin-mobile').val(accountInfo.adminMobile);
+					$('.addAdminLayer .admin-name').val(accountInfo.name);
+					$('.addAdminLayer .admin-mobile').val(accountInfo.mobile_phone);
 				},
 				yes:function(index){
 					_this.remove();
