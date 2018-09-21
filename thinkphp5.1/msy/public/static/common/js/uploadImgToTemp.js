@@ -55,7 +55,7 @@ $(function(){
         // 判断图片格式
         var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
         if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
-            dialog.error('请上传：mp4、rmvb、avi、ts格式图片');
+            // dialog.error('请上传：mp4、rmvb、avi、ts格式图片');
             return false;
         }
         var reader = new FileReader();
