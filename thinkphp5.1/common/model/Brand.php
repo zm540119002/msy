@@ -21,10 +21,10 @@ class Brand extends Base {
 	 */
 	public function edit($factoryId = ''){
 		$data = input('post.');
-//		$validate = validate('\common\validate\Brand');
-//		if(!$result = $validate ->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		$validate = new \common\validate\Brand();
+		if(!$result = $validate ->check($data)) {
+			return errorMsg($validate->getError());
+		}
 		$data['brand_img'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['brand_img']));
 		$data['certificate'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['certificate']));
 		$data['authorization'] = moveImgFromTemp(config('upload_dir.factory_brand'),basename($data['authorization']));

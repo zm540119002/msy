@@ -16,9 +16,11 @@ class Factory{
             ];
             $field = [
                 'uf.is_default','f.id','f.name',
+                'r.logo_img',
             ];
             $join = [
                 ['factory f','uf.factory_id = f.id','left'],
+                ['record r','r.factory_id = uf.factory_id','left'],
             ];
             $factoryList = $modelUserFactory->alias('uf')->join($join)->where($where)->field($field)->select();
             $factoryList = $factoryList->toArray();

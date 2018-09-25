@@ -26,10 +26,10 @@ class Record extends Base{
 	public function edit($factoryId=''){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
-//		$validate = validate('\common\validate\Record');
-//		if(!$result = $validate -> check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		$validate = validate('\common\validate\Record');
+		if(!$result = $validate -> check($data)) {
+			return errorMsg($validate->getError());
+		}
 		//把临时文件移动到相应的文件夹下
 		if(!empty($data['company_img'])){
 			$data['company_img'] = moveImgFromTemp(config('upload_dir.factory_record'),basename($data['company_img']));
