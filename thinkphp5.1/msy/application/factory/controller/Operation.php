@@ -28,5 +28,4 @@ class Operation extends \common\controller\StoreBase
         }
         return $this->fetch();
     }
-
 }
