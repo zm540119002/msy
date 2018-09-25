@@ -17,6 +17,7 @@
             type: 1,
             fixed:false,
             top:0,
+            shadeClose:false,
             content: factoryList,
             anim: 'up',
             style: '',
@@ -46,8 +47,8 @@
                 });
                 $('html,body').removeClass('scrollStyle');
             },
-            no:function(){
-
+            cancle:function(){
+                $('html,body').removeClass('scrollStyle');
             }
         });
     }
