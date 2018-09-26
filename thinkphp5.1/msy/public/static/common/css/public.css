@@ -2950,9 +2950,11 @@ input[type=text]::-webkit-focus-inner {
     width:100%;
     height:100%;
 }
-.app_wrapper .account-content-wrapper .account-top{
+.app_wrapper .account-content-wrapper {
     padding-left:0;
     padding-right:0;
+}
+.account-top{
     margin:118px 0 0;
 }
 .top_header{
