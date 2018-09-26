@@ -85,4 +85,5 @@ class Store extends Base {
 		}
 
 	}
+
 }

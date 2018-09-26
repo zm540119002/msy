@@ -10,4 +10,5 @@ return [
     'factory_goods_backup' => 'factory_goods_backup/',//厂商商品备份
     'factory_store' => 'factory_store/',//店铺图片
     'factory_promotion' => 'factory_promotion/',//场景图片
+    'factory_tweet' => 'factory_tweet/',//场景图片
 ];

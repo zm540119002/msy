@@ -15,25 +15,32 @@ class Tweet extends \common\controller\StoreBase
      */
     public function edit()
     {
-        $data =  input();
-        if($data['release_type'] == 1){
-            $_POST['fileBase64'] = $data['img'];
+        if(request()->isPost()){
+            $model = new \common\model\Tweet;
+            $data = input();
             $result =  $this->uploadFileToTemp();
+            print_r($result);exit;
             $imgs = '';
             if($result['status']){
                 foreach ($result['info'] as $k=>$v){
-                    $imgs .= moveImgFromTemp(config('upload_dir.factory_promotion'),basename($v)) .',';
+                    $imgs .= moveImgFromTemp(config('upload_dir.factory_tweet'),basename($v)) .',';
                 }
-                $data['img'] = $imgs;
-
+                $data['first_img'] = $imgs;
             }else{
                 return errorMsg('上传失败');
             }
-        }
-        print_r($data);
-        exit;
-        $model = new \common\model\Tweeet;
+            unset($data['fileBase64']);
+            $data['store_id'] = $this->store['id'];
+            $data['run_type'] = $this->store['run_type'];
+            $result = $model->allowField(true)->save($data);
+            if($result){
+                return successMsg('成功');
+            }
+            if($data['release_type'] == 3){
 
+            }
+        }
+       
         exit;
         $model = new \common\model\Promotion;
         if(request()->isPost()){

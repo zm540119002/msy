@@ -8,6 +8,7 @@ namespace common\controller;
 class StoreBase extends FactoryBase
 {
     protected $store = null;
+    protected $storeList = null;
     public function __construct()
     {
         parent::__construct();
@@ -33,6 +34,7 @@ class StoreBase extends FactoryBase
                 $this -> success('没有店铺，请申请', 'Store/edit');
             }
             $this -> assign('store', $this->store);
+            return $this -> storeList;
         }
     }
 

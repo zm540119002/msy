@@ -15,79 +15,15 @@ class Tweet extends Base {
 	// 设置当前模型的数据库连接
 	// 别名
 	protected $alias = 't';
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_common';
 	/**
 	 * 新增和修改
 	 */
 	public function edit($storeId =''){
-		$modelGoods  = new \common\model\Goods;
 		$data = input('post.');
 		$validate = validate('\common\validate\Tweet');
 		if(!$result = $validate->check($data)) {
 			return errorMsg($validate->getError());
-		}
-		if(!empty($data['first_img'])){
-			$data['first_img'] = moveImgFromTemp(config('upload_dir.factory_promotion'),basename($data['first_img']));
-		}
-		if(!empty($data['second_img'])){
-			$data['second_img'] = moveImgFromTemp(config('upload_dir.factory_promotion'),basename($data['second_img']));
-		}
-		//
-		$selectedGoods = json_decode($data['goods'],true);
-		$selectedGoodsIds = [];
-		foreach ($selectedGoods as $key=>$value){
-			$selectedGoodsIds[] = $value['goods_id'];
-			$selectedGoods[$key]['id'] = $value['goods_id'];
-			$selectedGoods[$key]['sale_type'] = 1;
-		}
-		$data['goods_ids'] = implode(',',$selectedGoodsIds);
-		$data['store_id'] = $storeId;
-		$this ->startTrans();
-		if(input('?post.id')){//修改
-			$config = [
-				'where' => [
-					['id','=',$data['id']],
-					['store_id','=',$storeId],
-				],
-				'field' => [
-					'first_img','second_img','goods_ids',
-				],
-			];
-			$oldInfo = $this -> getInfo($config);
-			$data['update_time'] = time();
-			$result = $this -> allowField(true) -> save($data,['id' => $data['id'],'store_id'=>$storeId]);
-			if(false == $result){
-				$this ->rollback();
-				return errorMsg('失败');
-			}
-			$deleteGoodsIds= array_diff(explode(',',$oldInfo['goods_ids']),$selectedGoodsIds);
-			if(!empty($deleteGoodsIds)){
-				$where = [
-					['id','in',$deleteGoodsIds]
-				];
-				$result = $modelGoods -> where($where)->setField('sale_type',0);
-				if(false === $result){
-					$this ->rollback();
-					return errorMsg('失败');
-				}
-			}
-		}else{//新增
-			$data['create_time'] = time();
-			$result = $this -> allowField(true) -> save($data);
-			if(false == $result){
-				$this ->rollback();
-				return errorMsg('失败');
-			}
-		}
-		$result = $modelGoods -> saveAll($selectedGoods);
-		if(false === $result){
-			$this ->rollback();
-			return errorMsg('失败');
-		}
-		$this ->commit();
-		if(input('?post.id')){//修改成功后，删除旧图
-			delImgFromPaths($oldInfo['first_img'],$data['first_img']);
-			delImgFromPaths($oldInfo['second_img'],$data['second_img']);
 		}
 		return successMsg("成功");
 	}
