@@ -97,7 +97,7 @@ class GoodsCategory extends \think\Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		return json($list);
+		return count($list)!=0?$list:[];
 	}
 
 	/**查找一条数据

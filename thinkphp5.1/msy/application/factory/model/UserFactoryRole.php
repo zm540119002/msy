@@ -29,6 +29,6 @@ class UserFactoryRole extends \think\model\Pivot {
 			->field($field)
 			->join($join)
 			->select();
-		return json($list);
+		return count($list)!=0?$list:[];
 	}
 }

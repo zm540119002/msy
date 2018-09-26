@@ -73,7 +73,7 @@ class Manager extends \common\model\Base {
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['uf.factory_id','=',$factoryId],
-			['uf.status','=',0],
+			['uf.status','=',2],
 			['uf.type','=',2],
 			['u.status','=',0],
 		];
@@ -85,6 +85,6 @@ class Manager extends \common\model\Base {
 			['user u','u.id = uf.user_id','left'],
 		];
 		$list = $modelUserFactory->alias('uf')->field($field)->join($join)->where($where)->select();
-		return json($list);
+		return count($list)!=0?$list:[];
 	}
 }
