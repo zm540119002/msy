@@ -4,7 +4,8 @@
 {/block}
 {block name="title"}开店部署{/block}
 {block name="content"}
-<article class="f24">
+<article class="f24" style="display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:100%;height:100%;">
+	<div style="position: fixed;height:128px;left: 0;right: 0;top: 0;z-index:99;">
 	{include file="public/store_deploy_head" /}
 	<section class="specific_type bottomLine store_deploy_nav">
 		<div class="columns_flex f20 l-r-sides ">
@@ -17,7 +18,8 @@
 			<a href="{:url('Account/index')}">账号授权</a>-->
 		</div>
 	</section>
-	<section class="f24 account-content-wrapper ">
+	</div>
+	<section class="f24 account-content-wrapper " style="-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;width:100%;">
 		<div class="account-top">
 			<!--<div>企业名称：<span>某某公司</span></div>
 			<p>管理员进行账户授权前请阅读以下角色类型与权限说明</p>-->
@@ -59,16 +61,18 @@
 			</dl>-->
 		</div>
 	</section>
+	{block name="footer"}{/block}
 </article>
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy_factory.html" /}
 {include file="template/right_side_bar.html" /}
 {/block}
-{block name="footer"}{/block}
+
 {block name="script"}
 <script type="text/javascript">
 $(function () {
+	$('html,body').addClass('scrollStyle');
 });
 </script>
 {/block}
