@@ -73,7 +73,7 @@ class Manager extends \common\model\Base {
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['uf.factory_id','=',$factoryId],
-			['uf.status','=',2],
+			['uf.status','=',0],
 			['uf.type','=',2],
 			['u.status','=',0],
 		];
