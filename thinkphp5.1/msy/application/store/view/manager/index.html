@@ -33,36 +33,9 @@
 		</form>
 		<div class="error_tipc"></div>
 	</section>
-	<!--管理员账号列表模板-->
-	<section id="addAdminList" style="display: none;">
-		<li class="columns_flex l-r-sides ">
-			<div>
-				<div>
-					<span class="list-label">姓名</span>
-					<span class="list-admin-name">XXXXXX</span>
-				</div>
-				<div>
-					<span class="list-label">手机号码</span>
-					<span class="list-admin-mobile">13430363587</span>
-				</div>
-				<div><span class="list-label">账号类型</span><span class="">管理员</span></div>
-			</div>
-			<div class="operate-btn">
-				<a href="javascript:void(0);" class="modify-account">
-					<span></span>
-					修改
-				</a>
-				<a href="javascript:void(0);" class="delete-account">
-					<span></span>
-					删除
-				</a>
-			</div>
-			<input type="hidden" data-account-info="" class="accountInfo" value="">
-		</li>
-	</section>
 	<section class="f24 account-content-wrapper admin-account-wrapper">
 		<div class="account-list-content">
-			<ul class="account-list admin-account-list"></ul>
+			<ul class="account-list admin-account-list list"></ul>
 		</div>
 	</section>
 	<a href="javascript:void(0);" class="addManageAccount foot-btn f24">新增管理员账号</a>
@@ -83,8 +56,6 @@
 				btn:['确定','取消'],
 				yes:function(index){
 					var content='';
-					var html=$('#addAdminList').html();
-					var listLength=$('.admin-account-list li').length;
 					var postData = $('.addAdminForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
@@ -108,20 +79,12 @@
 							dialog.error('AJAX错误');
 						},
 						success: function(data){
-							return false;
 							$('.loading').hide();
 							if(data.status == 0){
 								dialog.error(data.info);
-							}else if(data.status == 1){
-								if(listLength<1){
-									$('.admin-account-list').append(html);
-								}else{
-									$('.admin-account-list li:first').before(html);
-								}
-								$('.admin-account-list li').eq(0).find('.list-company-name').text(postData.companyName);
-								$('.admin-account-list li').eq(0).find('.list-admin-name').text(postData.name);
-								$('.admin-account-list li').eq(0).find('.list-admin-mobile').text(postData.mobile_phone);
-								$('.admin-account-list li').eq(0).find('.accountInfo').data('account-info',postData);
+							}else{
+								$('ul.list').prepend(data);
+								$('ul.list').find('span.no-data').remove();
 								layer.close(index);
 							}
 						}
@@ -131,7 +94,7 @@
 		});
 		//修改管理员账号
 		$('body').on('click','.modify-account',function(){
-			var _this=$(this).parents('.admin-account-list li');
+			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['修改账号','border-bottom:1px solid #d9d9d9;'],
 				className:'addAdminLayer',
@@ -163,7 +126,7 @@
 		});
 		//删除管理员账号
 		$('body').on('click','.delete-account',function(){
-			var _this=$(this).parents('.admin-account-list li');
+			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['删除账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
 				className:'addAdminLayer',
@@ -180,7 +143,7 @@
 				}
 			});
 		});
-		$('body').on('click','.admin-account-list li',function(){
+		$('body').on('click','.list li',function(){
 			$(this).addClass('current').siblings().removeClass('current');
 			$(this).find('.operate-btn').show();
 			$(this).siblings().find('.operate-btn').hide();

@@ -43,7 +43,7 @@ class Factory extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		return count($list)?$list->toArray():[];
+		return json($list);
 	}
 
 	/**查找一条数据
