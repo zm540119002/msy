@@ -50,7 +50,7 @@ class Brand extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		return count($list)?$list->toArray():[];
+		return count($list)!=0?$list:[];
 	}
 
 	/**

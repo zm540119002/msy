@@ -5,7 +5,7 @@
             {notempty name="factory.logo_img"}
             <img class="left store-logo-img small_default_img" src="public_uploads/{$factory.logo_img|default=''}" alt="">
             {else /}
-            <img class="upload_img" src="public_img/default/no_pic_100.jpg" alt="">
+            <img class="left upload_img store-logo-img" src="public_img/default/no_pic_100.jpg" alt="">
             {/notempty}
             <span>{$factory.name}</span>
         </div>
