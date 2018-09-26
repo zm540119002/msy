@@ -15,13 +15,15 @@
             title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
             className:'factoryListLayer',
             type: 1,
+            fixed:true,
+            // top:100,
+            shadeClose:false,
             content: factoryList,
             anim: 'up',
             style: '',
-            success:function(){
+            success:function(){   
                 var winHeight=$(window).height();
-                //$('html,body').addClass('scrollStyle');
-                ModalHelper.afterOpen();
+                $('html,body').addClass('scrollStyle');
                 $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
                 $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
@@ -43,8 +45,10 @@
                         location.reload();
                     }
                 });
-                ModalHelper.beforeClose();
-                //$('html,body').addClass('scrollStyle');
+                $('html,body').removeClass('scrollStyle');
+            },
+            cancle:function(){
+                $('html,body').removeClass('scrollStyle');
             }
         });
     }
@@ -60,30 +64,4 @@
             $(this).toggleClass('current');
         });
     });
-    var ModalHelper = (function(bodyCls) {
-  var scrollTop; // 在闭包中定义一个用来保存滚动位置的变量
-
-  return {
-
-    afterOpen: function() { //弹出之后记录保存滚动位置，并且给body添加.modal-open
-
-      scrollTop = document.scrollingElement.scrollTop;
-
-      document.body.classList.add(bodyCls);
-
-      document.body.style.top = -scrollTop + 'px';
-
-    },
-
-    beforeClose: function() { //关闭时将.modal-open移除并还原之前保存滚动位置
-
-      document.body.classList.remove(bodyCls);
-
-      document.scrollingElement.scrollTop = scrollTop;
-
-    }
-
-  };
-
-})('modal-open');
 </script>
