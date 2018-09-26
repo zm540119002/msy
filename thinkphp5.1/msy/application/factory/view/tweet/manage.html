@@ -47,7 +47,7 @@
 <section id="cloudImgTwitter" style="display: none;">
 	<form class="releaseInfoForm">
 		<div class="twitter-release-content">
-			<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="消息文字..."></textarea>
+			<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="消息文字..."></textarea>
 			<ul class="upload-picture-module multi-picture-module">
 			</ul>
 			<div class="error_tipc"></div>
@@ -57,26 +57,26 @@
 				<input type="hidden"  class="msg-img">
 			</div>
 			<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
-			<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
+			<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods_ids">
 		</div>
 	</form>
 </section>
 <!--云推客发布视频消息-->
 <section id="cloudVideoTwitter" style="display: none;">
 	<form class="releaseInfoForm">
-		<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="视频说明文字..."></textarea>
+		<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="视频说明文字..."></textarea>
 		<div class="error_tipc"></div>
 		<div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleVideo" name="" data-duration="">
+					<input type="file" class="uploadImg uploadSingleVideo" name="" data-duration="" data-type="tweet">
 					<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
-					<input type="hidden" name="msgfile" class="img" data-src="" value="">
+					<input type="hidden" name="fileBase64" class="img" data-src="" value="">
 				</div>
 			</div>
 		</div>
 		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
-		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
+		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods_ids">
 	</form>
 </section>
 <!--云推客发布文章-->
@@ -96,7 +96,7 @@
 				</div>
 			</div>
 			<div>
-				<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+				<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
 			</div>
 		</div>
 		<div class="separation-line columns_flex l-r-sides release-file-module ">
@@ -110,7 +110,7 @@
 				</div>
 			</div>
 			<div>
-				<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+				<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
 			</div>
 		</div>
 		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
@@ -321,16 +321,6 @@
 //		})
 //	});
 	$(function(){
-
-		//轮播
-//		var swiper1 = new Swiper('.swiper-container', {
-//			spaceBetween: 30,
-//			pagination: {
-//				el: '.swiper-pagination',
-//				clickable: true
-//			}
-//		});
-		// swiper('.swiper-focus-container');
 		var paragraphLayer=$('#paragraphLayer').html();
 		//添加段落文章和图片
 		$('body').on('click','.insert-button',function(){
@@ -443,12 +433,13 @@
 					$('.msg-img').val(layermultiImgAttr);
 					//序列化表单数据
 					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
-					releaseFormData.img =  layermultiImgAttr;
+					console.log(releaseFormData)
+					releaseFormData.passage =  layermultiImgAttr;
 					releaseFormData.release_type =  options.releaseType;
 					var content='';
-					if(!releaseFormData.msgText){
+					if(!releaseFormData.headline){
 						content='请填写消息内容';
-					}else if(!releaseFormData.img){
+					}else if(!releaseFormData.fileBase64){
 						content=options.msg;
 					}
 					if(content){
@@ -456,18 +447,23 @@
 						return false;
 					}
 					console.log(releaseFormData);return false;
+					_this.addClass("nodisabled");//防止重复提交
 					$.ajax({
-						url:'manage',
+						url:'edit',
 						type:'post',
 						data:releaseFormData,
 						success:function(data){
+							if(data.status){
+								dialog.success(data.info,location.reload());
+							}
+							_this.removeClass("nodisabled");
 
 						},
 						error:function(data){
 
 						}
 					});
-//					layer.close(index);
+					layer.close(index);
 				}
 			});
 		}
