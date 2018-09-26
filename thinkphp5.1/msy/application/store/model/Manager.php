@@ -67,4 +67,24 @@ class Manager extends \common\model\Base {
 		}
 		return successMsg('成功！',$postData);
 	}
+
+	//列表
+	public function getList($factoryId){
+		$modelUserFactory = new \common\model\UserFactory();
+		$where = [
+			['uf.factory_id','=',$factoryId],
+			['uf.status','=',0],
+			['uf.type','=',2],
+			['u.status','=',0],
+		];
+		$field = [
+			'u.id','u.name','u.mobile_phone',
+			'uf.id user_factory_id',
+		];
+		$join = [
+			['user u','u.id = uf.user_id','left'],
+		];
+		$list = $modelUserFactory->alias('uf')->field($field)->join($join)->where($where)->select();
+		return json($list);
+	}
 }

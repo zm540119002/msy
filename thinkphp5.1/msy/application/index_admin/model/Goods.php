@@ -53,7 +53,7 @@ class Goods extends Model {
 			->order($order)
 			->limit($limit)
 			->select();
-	    return count($list)?$list->toArray():[];
+	    return json($list);
 	}
 
 	/**
