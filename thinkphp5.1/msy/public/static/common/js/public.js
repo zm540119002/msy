@@ -481,6 +481,29 @@ function submitForm(postData,postUrl){
         }
     });
 }
+//获取列表
+function getList(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData?config.postData:{},
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status==0){
+                dialog.error(data.info);
+            }else{
+                $('ul.list').empty().append(data);
+            }
+        }
+    });
+}
 
 //文档就绪
 $(function(){
