@@ -5,7 +5,7 @@ namespace app\practitioner\controller;
  * @package app\user\controller
  * 店铺基础类
  */
-class PractitionerBase extends \common\controller\UserBase{
+class PractitionerBase extends \common\controller\Base{
     protected $practitioner = null;
     public function __construct(){
         parent::__construct();

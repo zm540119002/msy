@@ -85,6 +85,6 @@ class Manager extends \common\model\Base {
 			['user u','u.id = uf.user_id','left'],
 		];
 		$list = $modelUserFactory->alias('uf')->field($field)->join($join)->where($where)->select();
-		return json($list);
+		return count($list)!=0?$list:[];
 	}
 }
