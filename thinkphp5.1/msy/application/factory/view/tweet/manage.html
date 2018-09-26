@@ -455,8 +455,9 @@
 						errorTipc(content);
 						return false;
 					}
+					console.log(releaseFormData);return false;
 					$.ajax({
-						url:'edit',
+						url:'manage',
 						type:'post',
 						data:releaseFormData,
 						success:function(data){

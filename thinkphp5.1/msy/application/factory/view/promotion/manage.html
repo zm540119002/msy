@@ -12,66 +12,69 @@
 	<div class="error_tipc"></div>
 </section>
 
-<article class="f24 ">
+<article class="f24 app-content">
 	<!--店铺运营头部-->
-	<section class="">
-		<div class="">
-			<div class="">
-				{include file="public/store_operation_head" /}
-				<div class="store_deploy_nav specific_type">
-					<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
-						<a href="{:url('Operation/index')}">
-							店铺提醒
-						</a>
-						<a href="{:url('Goods/manage')}">
-							店铺管理
-						</a>
-						<a href=""  class="current">
-							营销推广
-						</a>
-						<a href="javascript:void (0)">
-							官方活动
-						</a>
-						<a href="javascript:void (0)">
-							订单客服
-						</a>
-					</nav>
-				</div>
-				<div class="specific_type store-manage-type bottomLine">
-					<div class="columns_flex f20">
-						<a  href="javascript:void (0)" class="column_type current">场景</a>
-						<a href="{:url('Tweet/manage')}">推文</a>
-						<a href="javascript:void (0)">直播</a>
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/store_operation_head" /}
+					<div class="store_deploy_nav specific_type">
+						<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
+							<a href="{:url('Operation/index')}">
+								店铺提醒
+							</a>
+							<a href="{:url('Goods/manage')}">
+								店铺管理
+							</a>
+							<a href=""  class="current">
+								营销推广
+							</a>
+							<a href="javascript:void (0)">
+								官方活动
+							</a>
+						</nav>
+					</div>
+					<div class="specific_type store-manage-type bottomLine">
+						<div class="columns_flex f20">
+							<a  href="javascript:void (0)" class="column_type current">场景</a>
+							<a href="{:url('Tweet/manage')}">推文</a>
+							<a href="javascript:void (0)">直播</a>
+						</div>
 					</div>
 				</div>
-				<div class="separation-line sales-promotion-content">
-					<div class="category-wrapper">
-						<div class="category-left-menu sort-left-menu">
-							<ul class="category-tab">
-								<li class="current">
-									<a href="javascript:void(0);" data-activity-status="1" class="activity-status">未结束</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" data-activity-status="0" class="activity-status">已结束</a>
-								</li>
-							</ul>
-						</div>
-						<input type="hidden" value="1" class="isClick">
-						<div class="promotion-item" >
-							<p class="content-label">促销活动的修改、删除和排序</p>
-							<div class="scroller-container " id="list">
+				<div class="page-wrap">
+					<div class="bodys" id="bodys">
+						<div class="separation-line sales-promotion-content">
+							<div class="category-wrapper">
+								<div class="category-left-menu sort-left-menu">
+									<ul class="category-tab">
+										<li class="current">
+											<a href="javascript:void(0);" data-activity-status="1" class="activity-status">未结束</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);" data-activity-status="0" class="activity-status">已结束</a>
+										</li>
+									</ul>
+								</div>
+								<input type="hidden" value="1" class="isClick">
+								<div class="promotion-item" >
+									<p class="content-label">促销活动的修改、删除和排序</p>
+									<div class="scroller-container " id="list">
 
+									</div>
+								</div>
 							</div>
 						</div>
+						<div class="separation-line sales-promotion-content">
+						</div>
 					</div>
-				</div>
-				<div class="separation-line sales-promotion-content">
 				</div>
 			</div>
 		</div>
 	</section>
-	<a href="javascript:void(0);" class="addSalesActivity increase-commodity foot-btn f24">新建促销活动</a>
 </article>
+<a href="javascript:void(0);" class="addSalesActivity increase-commodity foot-btn f24">新建促销活动</a>
 {/block}
 {block name="common"}
 {include file="template/loading.html" /}

@@ -23,10 +23,10 @@ class Promotion extends Base {
 		$modelGoods  = new \common\model\Goods;
 		$data = input('post.');
 		$data['run_type'] = $runType;
-//		$validate = validate('\common\validate\Promotion');
-//		if(!$result = $validate->check($data)) {
-//			return errorMsg($validate->getError());
-//		}
+		$validate = validate('\common\validate\Promotion');
+		if(!$result = $validate->check($data)) {
+			return errorMsg($validate->getError());
+		}
 		if(!empty($data['first_img'])){
 			$data['first_img'] = moveImgFromTemp(config('upload_dir.factory_promotion'),basename($data['first_img']));
 		}
