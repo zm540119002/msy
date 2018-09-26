@@ -2951,7 +2951,8 @@ input[type=text]::-webkit-focus-inner {
     height:100%;
 }
 .app_wrapper .account-content-wrapper{
-    padding:0 .10rem;
+    padding-left:.10rem;
+    padding-right:.10rem;
 }
 .top_header{
     position: fixed;
