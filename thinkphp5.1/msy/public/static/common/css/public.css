@@ -230,7 +230,13 @@ i{
     margin-right: 4px;
     font-weight: bold;
 }
-.icp_icon{text-align: center;display: block;padding:0 0 0.15rem 0;font-size:0.16rem;color:#999;}
+.icp_footer{
+    position:fixed;
+    left:0;
+    bottom:.8rem;
+    width:100%;
+}
+.icp_icon{text-align: center;display: block;padding:0 0 0.15rem 0;font-size:0.20rem;color:#999;}
 .group_cart_nav{height:0.8rem;line-height:0.8rem;position:fixed;left:0;bottom:0;width:100%;display:flex;display:-webkit-flex;}
 .group_cart_nav a{color:#fff;text-align: center;display: block;}
 .group_btn30{width:33.3%;box-sizing: border-box;}
