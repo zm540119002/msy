@@ -406,6 +406,9 @@ i{
     font-size:0.24rem;
     z-index:6;
 }
+.bottom_nav_fixed a{
+    font-size:.20rem;
+}
 .common_default_img{
     width:100%;
     height:auto;
