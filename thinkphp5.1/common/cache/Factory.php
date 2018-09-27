@@ -26,6 +26,7 @@ class Factory{
             $factoryList = $factoryList->toArray();
         }
         cache(self::$_cache_key.$userId, $factoryList,config('custom.factory_cache_time'));
+        print_r($factoryList);exit;
         return $factoryList;
     }
 
