@@ -406,7 +406,7 @@ function objectLength(o) {
 function copyDataByName(fromObj,toObj) {
     $.each(toObj.find(':input'),function(){
         var name = $(this).attr('name');
-        var val= fromObj.find('[name='+name+']').val();
+        var val= fromObj.find('[name='+name+']').text();
         val && $(this).val(val);
     });
 }
