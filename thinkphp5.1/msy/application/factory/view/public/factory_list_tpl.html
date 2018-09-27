@@ -24,6 +24,7 @@
             success:function(){   
                 var winHeight=$(window).height();
                 //$('html,body').addClass('scrollStyle');
+                 app.init();
                 $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
                 $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
@@ -64,4 +65,37 @@
             $(this).toggleClass('current');
         });
     });
+     var app = {
+        index: 0,
+        // tabOffsetTop: $('.tab')[0].offsetTop,
+        forbidScroll:null,
+        bindEvent: function () {
+            var $this = this;
+            // $('.show-toast').click(function () {
+            //     $('#toast').removeClass('hide');
+                $this.forbidScroll = new ForbidScroll();
+                $this.forbidScroll.initForbid();
+            // });
+            // $('.close').click(function () {
+                // $('#toast').addClass('hide');
+                $this.forbidScroll.relieveForbid();
+            // })
+
+        },
+
+        init: function () {
+            this.bindEvent();
+            // var tabOffsetTop = this.tabOffsetTop;
+            // window.onscroll = function () {
+            //     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            //     if (scrollTop >= tabOffsetTop) {
+            //         $('.tab').css('position', 'fixed');
+            //     } else {
+            //         $('.tab').css('position', 'relative');
+            //     }
+            // }
+
+        }
+    };
+   
 </script>
