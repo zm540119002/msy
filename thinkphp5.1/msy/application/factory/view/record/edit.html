@@ -78,7 +78,7 @@
 						企业全称：<span>{$factoryName}</span>
 					</li>
 					<li>
-						<input type="text" class="detail-address" value="{$recordInfo.short_name|default=''}" placeholder="填写企业简称" name="short_name">
+						<input type="text" class="detail-address short_name" value="{$recordInfo.short_name|default=''}" placeholder="填写企业简称" name="short_name">
 					</li>
 					<li>
 						<div class="logo-license">
@@ -197,6 +197,8 @@
 			})
 		});
 
+
+
 		//提交档案信息
 		$('body').on('click','.identifyNewGoods',function(){
 			var postData={};
@@ -216,10 +218,8 @@
 			var  content =''
 			if(!postData.company_img){
 				content='请上传企业形象图片';
-			}else if(!postData.provinces){
-				content='请选择所在的省市区';
-			}else if(!postData.detail_address){
-				content='请填写详细地址';
+			}else if(postData.short_name.length>8){
+				content='简称不能超过8位';
 			}else if(!postData.logo_img){
 				content='请上传企业标志图';
 			}else if(!postData.introduction){
@@ -230,6 +230,10 @@
 				content='请上传执照资质图片';
 			}else if(!postData.glory_img||postData.glory_img==0){
 				content='请上传专利荣誉图片';
+			}else if(!postData.provinces){
+				content='请选择所在的省市区';
+			}else if(!postData.detail_address){
+				content='请填写详细地址';
 			}
 			if(content){
 				dialog.error(content);
