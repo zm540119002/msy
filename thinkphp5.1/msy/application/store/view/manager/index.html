@@ -70,29 +70,12 @@
 						errorTipc(content);
 						return false;
 					}
-					var url = module + '/Manager/edit';
-					$.ajax({
-						url: url,
-						data: postData,
-						type: 'post',
-						beforeSend: function(xhr){
-							$('.loading').show();
-						},
-						error:function(xhr){
-							$('.loading').hide();
-							dialog.error('AJAX错误');
-						},
-						success: function(data){
-							$('.loading').hide();
-							if(data.status == 0){
-								dialog.error(data.info);
-							}else{
-								$('ul.list').prepend(data);
-								$('ul.list').find('span.no-data').remove();
-								layer.close(index);
-							}
-						}
-					});
+					var config = {
+						url:module + '/Manager/edit',
+						postData:postData,
+						index:index
+					};
+					dialogAddForm(config);
 				}
 			});
 		});
@@ -119,7 +102,15 @@
 						errorTipc(content);
 						return false;
 					}
-					layer.close(index);
+					postData.id = _this.data('id');
+					var config = {
+						url:module + '/Manager/edit',
+						postData:postData,
+						fromObj:$('.addAdminLayer .addAdminForm'),
+						toObj:_this,
+						index:index
+					};
+					dialogEditForm(config);
 				}
 			});
 		});
