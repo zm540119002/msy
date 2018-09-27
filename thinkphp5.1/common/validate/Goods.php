@@ -8,7 +8,7 @@ class Goods extends \think\Validate
      */
     protected $rule = [
         'name'  =>  'require|max:18',
-        'trait' =>  'require|max',
+        'trait' =>  'require|max:1000',
         'sale_price' =>  'require|float',
         'retail_price' =>  'require|float',
         'thumb_img' =>  'require',
