@@ -23,7 +23,7 @@ class Manager extends \common\controller\FactoryBase
         if(request()->isAjax()){
             $modelManager = new \app\store\model\Manager();
             $info = $modelManager->edit($this->user['id'],$this->factory['id']);
-            if($info['id']==0){
+            if($info['status']==0){
                 return $info;
             }else{
                 $this->assign('info',$info);
