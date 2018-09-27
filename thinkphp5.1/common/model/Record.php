@@ -78,92 +78,55 @@ class Record extends Base{
 			];
 			$oldRecordInfo = $this -> getInfo($config);
 			$data['update_time'] = time();
-            $this->startTrans();
 			$result = $this->allowField(true)->save($data,['id' => $data['record_id'],'factory_id'=>$factoryId]);
 			if(false == $result){
-				$this ->rollback();
-				return errorMsg('失败！');
+				return errorMsg('失败');
 			}
-			$modelStore = new \common\model\Store;
-			$config = [
-				'where' => [
-					['factory_id','=',$factoryId],
-					['store_type','=',1],
-				],
-				'field' => [
-					'id','logo_img'
-				],
-			];
-			$storeList = $modelStore->getList($config);
-			$ids = [];
-			if(!empty($storeList) && $data['logo_img'] != $oldRecordInfo['logo_img']){
-				foreach ($storeList as $k=>&$v){
-					if($v['logo_img'] == $oldRecordInfo['logo_img'] ){
-						$ids[] = $v['id'];
-					}
+			//删除旧图片
+			delImgFromPaths($oldRecordInfo['company_img'],$data['company_img']);
+			delImgFromPaths($oldRecordInfo['logo_img'],$data['logo_img']);
+			if(!empty($oldRecordInfo['rb_img']) && !empty($data['rb_img'])){
+				$rbImgWithDec = json_decode($oldRecordInfo['rb_img'],true);
+				$oldRbImg = [];
+				foreach ($rbImgWithDec as $item){
+					$oldRbImg[] = $item['imgSrc'];
 				}
-				if(!empty($ids)){
-					$data1 = [
-						'logo_img' => $data['logo_img']
-					];
-					$where1 = [
-						['id','in',$ids],
-						['factory_id','=',$factoryId],
-					];
-					$result = $modelStore -> allowField(true)->save($data1,$where1);
-					if(false == $result){
-						$this ->rollback();
-						return errorMsg('失败！');
-					}
-				}
+				delImgFromPaths($oldRbImg,$newRbImg);
 			}
-			$this->commit();
+			if(!empty($oldRecordInfo['factory_video']) && !empty($data['factory_video'])) {
+				$rbImgWithDec = json_decode($oldRecordInfo['factory_video'],true);
+				$oldFactoryVideo = [];
+				foreach ($rbImgWithDec as $item){
+					$oldFactoryVideo[] = $item['imgSrc'];
+				}
+				delImgFromPaths($oldFactoryVideo,$newFactoryVideo);
+			}
+			if(!empty($oldRecordInfo['license']) && !empty($data['license'])){
+				$rbImgWithDec = json_decode($oldRecordInfo['license'],true);
+				$oldLicense = [];
+				foreach ($rbImgWithDec as $item){
+					$oldLicense[] = $item['imgSrc'];
+				}
+				delImgFromPaths($oldLicense,$newLicense);
+			}
+			if(!empty($oldRecordInfo['glory_img']) && !empty($data['glory_img'])){
+				$rbImgWithDec = json_decode($oldRecordInfo['glory_img'],true);
+				$oldGloryImg = [];
+				foreach ($rbImgWithDec as $item){
+					$oldGloryImg[] = $item['imgSrc'];
+				}
+				delImgFromPaths($oldGloryImg,$newGloryImg);
+			}
 		}else{
 			//增加
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
+			if(false == $result){
+				return errorMsg('失败');
+			}
 		}
 		if(false !== $result){
-			//删除旧图片
-			if(input('?post.record_id') && !input('?post.record_id') == ''){
-				delImgFromPaths($oldRecordInfo['company_img'],$data['company_img']);
-				delImgFromPaths($oldRecordInfo['logo_img'],$data['logo_img']);
-				if(!empty($oldRecordInfo['rb_img']) && !empty($data['rb_img'])){
-					$rbImgWithDec = json_decode($oldRecordInfo['rb_img'],true);
-					$oldRbImg = [];
-					foreach ($rbImgWithDec as $item){
-						$oldRbImg[] = $item['imgSrc'];
-					}
-					delImgFromPaths($oldRbImg,$newRbImg);
-				}
-				if(!empty($oldRecordInfo['factory_video']) && !empty($data['factory_video'])) {
-					$rbImgWithDec = json_decode($oldRecordInfo['factory_video'],true);
-					$oldFactoryVideo = [];
-					foreach ($rbImgWithDec as $item){
-						$oldFactoryVideo[] = $item['imgSrc'];
-					}
-					delImgFromPaths($oldFactoryVideo,$newFactoryVideo);
-				}
-				if(!empty($oldRecordInfo['license']) && !empty($data['license'])){
-					$rbImgWithDec = json_decode($oldRecordInfo['license'],true);
-					$oldLicense = [];
-					foreach ($rbImgWithDec as $item){
-						$oldLicense[] = $item['imgSrc'];
-					}
-					delImgFromPaths($oldLicense,$newLicense);
-				}
-				if(!empty($oldRecordInfo['glory_img']) && !empty($data['glory_img'])){
-					$rbImgWithDec = json_decode($oldRecordInfo['glory_img'],true);
-					$oldGloryImg = [];
-					foreach ($rbImgWithDec as $item){
-						$oldGloryImg[] = $item['imgSrc'];
-					}
-					delImgFromPaths($oldGloryImg,$newGloryImg);
-				}
-			}
 			return successMsg("成功");
-		}else{
-			return errorMsg("失败");
 		}
 	}
 
