@@ -8,7 +8,7 @@ class Goods extends \think\Validate
      */
     protected $rule = [
         'name'  =>  'require|max:18',
-        'trait' =>  'require',
+        'trait' =>  'require|max:1000',
         'sale_price' =>  'require|float',
         'retail_price' =>  'require|float',
         'thumb_img' =>  'require',
@@ -22,6 +22,7 @@ class Goods extends \think\Validate
         'name.require' => '产商全称必须填写',
         'name.max'     => '产商全称最多不能超过18字',
         'trait.require'   => '请填写商品特点',
+        'trait.max'   => '商品特点不能超过1000字',
         'sale_price.require'   => '请填写销售价格',
         'sale_price.float'   => '价格格式有误',
         'retail_price.require'   => '请填写零售价格',

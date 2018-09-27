@@ -404,9 +404,9 @@ function objectLength(o) {
  * @param toObj 复制数据目的（jquery）对象
  */
 function copyDataByName(fromObj,toObj) {
-    $.each(toObj.find(':input'),function(){
+    $.each(toObj.find('input'),function(){
         var name = $(this).attr('name');
-        var val= fromObj.find('[name='+name+']').text();
+        var val= fromObj.find('[name='+name+']').val();
         val && $(this).val(val);
     });
 }
