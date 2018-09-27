@@ -859,7 +859,7 @@ background-position: 0 -27px;
 
     width: 30px;
     height: 25px;
-    margin: 0 auto;
+    margin: -5px auto;
     background-image: url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
     background-size: 30px 345px;
