@@ -7,6 +7,8 @@ class Factory{
      */
     public static function get($userId,$type){
         $factoryList = cache(self::$_cache_key.$userId);
+        print_r($factoryList);
+        echo "-------------------"."<br>";
         if(!$factoryList){
             $modelUserFactory = new \common\model\UserFactory();
             $where = [
