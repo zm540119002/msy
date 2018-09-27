@@ -7,6 +7,8 @@ class Factory{
      */
     public static function get($userId,$type){
         $factoryList = cache(self::$_cache_key.$userId);
+        print_r($factoryList);
+        echo "-------------------"."<br>";
         if(!$factoryList){
             $modelUserFactory = new \common\model\UserFactory();
             $where = [
@@ -24,8 +26,10 @@ class Factory{
             ];
             $factoryList = $modelUserFactory->alias('uf')->join($join)->where($where)->field($field)->select();
             $factoryList = $factoryList->toArray();
+            print_r($modelUserFactory->getLastSql());exit;
         }
         cache(self::$_cache_key.$userId, $factoryList,config('custom.factory_cache_time'));
+        print_r($factoryList);exit;
         return $factoryList;
     }
 
