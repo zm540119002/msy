@@ -631,7 +631,7 @@ i{
 }
 .foot_nav_bar{
     text-align:center;
-    padding:4px 0;
+    padding:10px 0 2px;
 }
 .foot_nav_bar a{
     position:relative;
