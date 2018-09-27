@@ -45,6 +45,7 @@ $(function(){
 
     // 选择单视频
     $('body').on('change','.uploadSingleVideo',function () {
+        _this = $(this);
         uploadsSingleVideoFlag = false;
         var video = event.target.files[0];
         var obj=$(this).parent();
@@ -65,6 +66,11 @@ $(function(){
             var videoUrl=e.target.result;
             $(obj).find('video').attr('src',videoUrl);
             //提交
+            var type = _this.data('type');
+            if(type == 'tweet'){
+                $(obj).find('.img').val(videoUrl);
+                return false;
+            }
             $.post(controller+"uploadFileToTemp",postData,function(msg){
                 if(msg.status == 1){
                     uploadsSingleVideoFlag = true;
@@ -73,6 +79,7 @@ $(function(){
                     dialog.error(msg.info)
                 }
             })
+
         }
     })
   
