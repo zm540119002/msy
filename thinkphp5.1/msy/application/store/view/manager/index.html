@@ -75,7 +75,7 @@
 						postData:postData,
 						index:index
 					};
-					dialogAddForm(config);
+					dialogFormAdd(config);
 				}
 			});
 		});
@@ -110,7 +110,7 @@
 						toObj:_this,
 						index:index
 					};
-					dialogEditForm(config);
+					dialogFormEdit(config);
 				}
 			});
 		});
@@ -126,8 +126,16 @@
 					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
 				},
 				yes:function(index){
-					_this.remove();
-					layer.close(index);
+					var postData = {};
+					postData.id = _this.data('id');
+					postData.user_factory_id = _this.data('user_factory_id');
+					var config = {
+						url:module + '/Manager/del',
+						postData:postData,
+						obj:_this,
+						index:index
+					};
+					dialogFormDel(config);
 				}
 			});
 		});
