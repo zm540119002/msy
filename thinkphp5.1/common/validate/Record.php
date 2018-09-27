@@ -13,7 +13,6 @@ class Record extends \think\Validate
         'rb_img' =>  'require',
         'license' =>  'require',
         'glory_img' =>  'require',
-        'factory_id' =>  'require|unique:\common\model\Record',
     ];
     protected $message  =   [
         'company_img.require' => '请上传企业形象图片',
