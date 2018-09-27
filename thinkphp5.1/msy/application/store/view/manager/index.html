@@ -106,8 +106,7 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function(){
-					var accountInfo=_this.find('.accountInfo').data('account-info');
-					copyDataByName($('.list li'),$('.addAdminLayer .addAdminForm'));
+					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
 				},
 				yes:function(index){
 					var postData=$('.addAdminForm').serializeObject();
@@ -138,7 +137,7 @@
 				btn:['确定','取消'],
 				success:function(){
 					var accountInfo=_this.find('.accountInfo').data('account-info');
-					copyDataByName($('.list li'),$('.addAdminLayer .addAdminForm'));
+					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
 				},
 				yes:function(index){
 					_this.remove();
