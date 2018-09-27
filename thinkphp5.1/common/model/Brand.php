@@ -43,5 +43,4 @@ class Brand extends Base {
 			return errorMsg('失败');
 		}
 	}
-	
 }
