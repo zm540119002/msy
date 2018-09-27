@@ -446,18 +446,16 @@
 						errorTipc(content);
 						return false;
 					}
-					console.log(releaseFormData);return false;
 					_this.addClass("nodisabled");//防止重复提交
 					$.ajax({
 						url:'edit',
 						type:'post',
 						data:releaseFormData,
 						success:function(data){
+							_this.removeClass("nodisabled");
 							if(data.status){
 								dialog.success(data.info,location.reload());
 							}
-							_this.removeClass("nodisabled");
-
 						},
 						error:function(data){
 

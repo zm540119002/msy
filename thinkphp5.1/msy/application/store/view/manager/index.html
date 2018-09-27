@@ -25,7 +25,6 @@
 		<form class="addAdminForm">
 			<div class="account-field">
 				<input type="text" class="admin-name" placeholder="姓名" name="name">
-				<!--<input type="hidden" name="id">-->
 			</div>
 			<div class="account-field">
 				<input type="tel" class="admin-mobile" placeholder="手机号码" name="mobile_phone">
@@ -60,8 +59,8 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				yes:function(index){
-					var content='';
 					var postData = $('.addAdminForm').serializeObject();
+					var content='';
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -71,29 +70,12 @@
 						errorTipc(content);
 						return false;
 					}
-					var url = module + '/Manager/edit';
-					$.ajax({
-						url: url,
-						data: postData,
-						type: 'post',
-						beforeSend: function(xhr){
-							$('.loading').show();
-						},
-						error:function(xhr){
-							$('.loading').hide();
-							dialog.error('AJAX错误');
-						},
-						success: function(data){
-							$('.loading').hide();
-							if(data.status == 0){
-								dialog.error(data.info);
-							}else{
-								$('ul.list').prepend(data);
-								$('ul.list').find('span.no-data').remove();
-								layer.close(index);
-							}
-						}
-					});
+					var config = {
+						url:module + '/Manager/edit',
+						postData:postData,
+						index:index
+					};
+					dialogAddForm(config);
 				}
 			});
 		});
@@ -106,8 +88,7 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function(){
-					var accountInfo=_this.find('.accountInfo').data('account-info');
-					copyDataByName($('.list li'),$('.addAdminLayer .addAdminForm'));
+					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
 				},
 				yes:function(index){
 					var postData=$('.addAdminForm').serializeObject();
@@ -121,10 +102,15 @@
 						errorTipc(content);
 						return false;
 					}
-					_this.find('.list-admin-name').text(postData.name);
-					_this.find('.list-admin-mobile').text(postData.mobile_phone);
-					_this.find('.accountInfo').data('account-info',postData);
-					layer.close(index);
+					postData.id = _this.data('id');
+					var config = {
+						url:module + '/Manager/edit',
+						postData:postData,
+						fromObj:$('.addAdminLayer .addAdminForm'),
+						toObj:_this,
+						index:index
+					};
+					dialogEditForm(config);
 				}
 			});
 		});
@@ -137,8 +123,7 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function(){
-					var accountInfo=_this.find('.accountInfo').data('account-info');
-					copyDataByName($('.list li'),$('.addAdminLayer .addAdminForm'));
+					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
 				},
 				yes:function(index){
 					_this.remove();

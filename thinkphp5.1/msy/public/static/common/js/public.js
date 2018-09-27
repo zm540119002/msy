@@ -505,6 +505,57 @@ function getList(config) {
     });
 }
 
+//新增-表单提交
+function dialogAddForm(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData,
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status == 0){
+                dialog.error(data.info);
+            }else{
+                $('ul.list').prepend(data);
+                $('ul.list').find('span.no-data').remove();
+                layer.close(config.index);
+            }
+        }
+    });
+}
+
+//修改-表单提交
+function dialogEditForm(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData,
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(data.status == 0){
+                dialog.error(data.info);
+            }else{
+                copyDataByName(config.fromObj,config.toObj);
+                layer.close(config.index);
+            }
+        }
+    });
+}
+
 //文档就绪
 $(function(){
     //返回顶部
