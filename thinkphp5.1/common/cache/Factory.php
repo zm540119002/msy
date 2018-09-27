@@ -26,6 +26,7 @@ class Factory{
             ];
             $factoryList = $modelUserFactory->alias('uf')->join($join)->where($where)->field($field)->select();
             $factoryList = $factoryList->toArray();
+            print_r($modelUserFactory->getLastSql());exit;
         }
         cache(self::$_cache_key.$userId, $factoryList,config('custom.factory_cache_time'));
         print_r($factoryList);exit;
