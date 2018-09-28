@@ -661,7 +661,11 @@ i{
 .channel_nav a{
     position:relative;
 }
-.channel_nav a{width:25%;text-align:center;color:#555;}
+.channel_nav a{
+    width:20%;
+    text-align:center;
+    color:#555;
+}
 .supply-nav a{width:33%;}
 .channel_nav a span{
     display:block;
