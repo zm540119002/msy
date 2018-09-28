@@ -80,4 +80,18 @@ class Base extends \think\Model {
 		}
 		return successMsg('成功');
 	}
+
+	/**根据手机号码检查正常账号
+	 */
+	public function checkUserByMobilePhone($mobilePhone){
+		if(!isMobile($mobilePhone)){
+			return errorMsg('请输入正确的手机号码');
+		}
+		$modelUser = new \common\model\User();
+		$where = [
+			['mobile_phone','=',$mobilePhone],
+			['status','<>',2],
+		];
+		return $modelUser->where($where)->value('id');
+	}
 }
