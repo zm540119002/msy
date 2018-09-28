@@ -1379,16 +1379,16 @@ background-position: 0 -27px;
     left:0;
     bottom:0;
     top:auto;*/
-    position: fixed;
+    /*position: fixed;
     width:100%;
-    /*height: auto;*/
+    height: auto;
     overflow: hidden;
     padding-top: 10px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     background: #fff;
-    text-align: center;
+    text-align: center;*/
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
