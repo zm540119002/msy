@@ -31,13 +31,13 @@ class Manager extends \common\model\Base {
 			return errorMsg('缺少采购商ID');
 		}
 		$postData = input('post.');
-//		//用户数据验证
-//		$validateUser = new \common\validate\User();
-//		if(!$validateUser->scene('edit')->check($postData)){
-//			return errorMsg($validateUser->getError());
-//		}
 		$modelUserFactory = new \common\model\UserFactory();
 		if($postData['id'] && intval($postData['id'])){//修改
+			//用户数据验证
+			$validateUser = new \common\validate\User();
+			if(!$validateUser->scene('edit')->check($postData)){
+				return errorMsg($validateUser->getError());
+			}
 			$postData['update_time'] = time();
 			$res = $this->isUpdate(true)->save($postData);
 			if($res===false){
