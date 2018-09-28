@@ -1380,7 +1380,7 @@ background-position: 0 -27px;
     bottom:0;
     top:auto;*/
     position: fixed;
-    width: 92%;
+    width:100%;
     height: auto;
     overflow: hidden;
     padding-top: 10px;
