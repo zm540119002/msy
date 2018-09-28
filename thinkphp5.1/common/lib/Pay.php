@@ -7,10 +7,10 @@
  */
 
 namespace common\lib;
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.JsApiPay.php');
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.NativePay.php');
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/log.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/lib/WxPay.Api.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.JsApiPay.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.NativePay.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/log.php');
 use Vendor\Qrcode\Qrcode;
 
 class Pay{
