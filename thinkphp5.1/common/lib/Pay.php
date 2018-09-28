@@ -7,10 +7,10 @@
  */
 
 namespace common\lib;
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.JsApiPay.php');
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/WxPay.NativePay.php');
-require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/log.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/lib/WxPay.Api.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.JsApiPay.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.NativePay.php');
+require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/log.php');
 use Vendor\Qrcode\Qrcode;
 
 class Pay{
@@ -55,9 +55,9 @@ class Pay{
         $order = \WxPayApi::unifiedOrder($input);	//统一下单
         $jsApiParameters = $tools->GetJsApiParameters($order);
         $html = <<<EOF
-			<script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>
-			<script type="text/javascript" src="/Public/js/common/layer.mobile/layer.js"></script>
-			<script type="text/javascript" src="/Public/js/common/dialog.js"></script>
+			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
+			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
+			<script type="text/javascript" src="/static/common/js/dialog.js"></script>
             <script type="text/javascript">
                 //调用微信JS api 支付
                 function jsApiCall()
@@ -150,7 +150,9 @@ EOF;
         $url = $order2['mweb_url'];
         $html = <<<EOF
             <head>
-                <script type="text/javascript" src="/Public/js/common/jquery-1.9.1.min.js"></script>		
+               <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
+			   <script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
+			   <script type="text/javascript" src="/static/common/js/dialog.js"></script>	
             </head>
             <body>
                  <a class="weixin_pay_h5" href="javascript:void(0);"></a>
