@@ -1381,7 +1381,7 @@ background-position: 0 -27px;
     top:auto;*/
     position: fixed;
     width:100%;
-    height: auto;
+    /*height: auto;*/
     overflow: hidden;
     padding-top: 10px;
     left: 50%;
