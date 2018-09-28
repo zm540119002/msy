@@ -9,6 +9,7 @@ function ForbidScroll(option) {
 }
 //初始化禁止穿透事件
 ForbidScroll.prototype.initForbid = function () {
+    console.log('滑动啦');
     var node1 = this.node1,
         node2 = this.node2;
     if(!node1  || !node2 ) return;
