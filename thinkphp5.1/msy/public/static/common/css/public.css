@@ -2990,3 +2990,15 @@ input[type=text]::-webkit-focus-inner {
     flex:1;
     width:100%;
 }
+.tipc_page{
+    width:4rem;
+    margin:35% auto 0;
+    text-align:center;
+}
+.tipc_page img{
+    width:100%;
+}
+.tipc_page a{
+    text-decoration: underline;
+    color:#0066cc;
+}
