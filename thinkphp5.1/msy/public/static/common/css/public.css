@@ -1375,7 +1375,7 @@ background-position: 0 -27px;
     left:0;
     bottom:0;
     top:auto;*/
-    position: fixed;
+    /*position: fixed;
     width: 92%;
     height: auto;
     overflow: hidden;
@@ -1384,7 +1384,7 @@ background-position: 0 -27px;
     top: 50%;
     transform: translate(-50%, -50%);
     background: #fff;
-    text-align: center;
+    text-align: center;*/
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
@@ -2969,6 +2969,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .account-top{
     margin:118px 0 0;
+    padding:0 0 0 .15rem;
 }
 .top_header{
     position: fixed;
