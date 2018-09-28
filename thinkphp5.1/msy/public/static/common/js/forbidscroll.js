@@ -1,6 +1,6 @@
 function ForbidScroll(option) {
     option = option || {};
-    var forbidScrollWrap = option.forbidScrollWrap || '.forbid-scroll-wrap',
+    var forbidScrollWrap = option.forbidScrollWrap || '.layui-m-layer',
         canScrollWrap = option.canScrollWrap || '.can-scroll-wrap';
     this.canScrollWrap = canScrollWrap;
     this.node1 = document.querySelector(canScrollWrap);

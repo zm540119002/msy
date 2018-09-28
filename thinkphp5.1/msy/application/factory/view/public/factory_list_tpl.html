@@ -1,5 +1,5 @@
 <section class="message-center-info f20" style="display:none;" id="factoryList">
-    <ul class="vendorInfoList">
+    <ul class="vendorInfoList can-scroll-wrap">
         {volist name='factoryList' id='vo'}
         <li data-id="{$vo.id}" class="{eq name='vo.is_default' value='1'}current{/eq}">
             <span>{$vo.name}</span>
@@ -24,7 +24,7 @@
             success:function(){   
                 var winHeight=$(window).height();
                 //$('html,body').addClass('scrollStyle');
-                 app.init();
+                app.init();
                 $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
                 $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
@@ -70,6 +70,7 @@
         // tabOffsetTop: $('.tab')[0].offsetTop,
         forbidScroll:null,
         bindEvent: function () {
+            console.log(this);
             var $this = this;
             // $('.show-toast').click(function () {
             //     $('#toast').removeClass('hide');
@@ -84,6 +85,7 @@
         },
 
         init: function () {
+            console.log(123);
             this.bindEvent();
             // var tabOffsetTop = this.tabOffsetTop;
             // window.onscroll = function () {

@@ -17,7 +17,7 @@ class Manager extends \common\controller\FactoryBase
         }
     }
 
-    /**新增管理员
+    /**编辑管理员
      */
     public function edit(){
         if(request()->isAjax()){
@@ -29,6 +29,15 @@ class Manager extends \common\controller\FactoryBase
                 $this->assign('info',$info);
                 return view('info_tpl');
             }
+        }
+    }
+
+    /**删除管理员
+     */
+    public function del(){
+        if(request()->isAjax()){
+            $modelManager = new \app\store\model\Manager();
+            return $modelManager->del();
         }
     }
 }
