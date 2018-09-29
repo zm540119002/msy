@@ -679,8 +679,8 @@ i{
 .store_organize_nav a span{
     background-image:url(../../common/img/icons/store_index_type.png);
 }
-.channel_nav a span.union_purchase{background-position:0 1px;}
-.channel_nav a span.exclusive{background-position:0 -46px;}
+.channel_nav a span.union_purchase{background-position:0 2px;}
+.channel_nav a span.exclusive{background-position:0 -50px;}
 .channel_nav a span.classify{background-position:0 -93px;}
 .channel_nav a span.purchasers{background-position:0 -140px;}
 .channel_nav a span.recharge{background-position:0 -187px;}
