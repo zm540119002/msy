@@ -20,8 +20,9 @@ class Manager extends \common\controller\FactoryBase
      */
     public function set(){
         if(request()->isAjax()){
-            $modelManager = new \app\store\model\Manager();
-            $list = $modelManager->getList($this->factory['id']);
+            $modelStore = new \common\model\Store();
+            $list = $modelStore->getList($this->factory['id']);
+            print_r($list);exit;
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
