@@ -21,24 +21,29 @@
 			<a href="javascript:void(0);">财务</a>
 		</div>
 	</section>
-	<!--添加管理员账号-->
-	<section id="addAdminAccount" style="display:none;">
-		<form class="addAdminForm">
-			<div class="account-field">
-				<input type="text" class="admin-name" placeholder="姓名" name="name">
-			</div>
-			<div class="account-field">
-				<input type="tel" class="admin-mobile" placeholder="手机号码" name="mobile_phone">
-			</div>
-		</form>
-		<div class="error_tipc"></div>
+	<section class="f24 account-content-wrapper">
+		<ul class="list">
+			<li class="columns_flex l-r-sides">
+				<div>
+					<p>
+						<span>某某</span>机构官方旗舰店
+					</p>
+					<p>美尚会云店店铺</p>
+					<div>
+						<span>店长:</span>
+						<input type="text" value="1" name="name" readonly="readonly"/>
+					</div>
+					<div>
+						<span>手机号码:</span>
+						<input type="tel" value="13430394569" name="mobile_phone" readonly="readonly"/>
+					</div>
+				</div>
+				<div>
+					<a href="javascript:void(0);" class="text-color-gr set_shopowner">设置店长</a>
+				</div>
+			</li>
+		</ul>
 	</section>
-	<section class="f24 account-content-wrapper admin-account-wrapper">
-		<div class="account-list-content">
-			<ul class="account-list admin-account-list list"></ul>
-		</div>
-	</section>
-	<a href="javascript:void(0);" class="addManageAccount foot-btn f24">新增管理员账号</a>
 </article>
 {/block}
 {block name="common"}{/block}
@@ -50,50 +55,23 @@
 		var config = {
 			url: module + 'Manager/set'
 		};
-		getList(config);
-		//创建管理员账号
-		var addAdminAccount=$('#addAdminAccount').html();
-		$('body').on('click','.addManageAccount',function(){
-			layer.open({
-				title:['新增管理员账号','border-bottom:1px solid #d9d9d9;'],
-				className:'addAdminLayer',
-				content:addAdminAccount,
-				btn:['确定','取消'],
-				yes:function(index){
-					var postData = $('.addAdminForm').serializeObject();
-					var content='';
-					if(!postData.name){
-						content='请填写姓名';
-					}else if(!register.phoneCheck(postData.mobile_phone)){
-						content='请填写手机号码';
-					}
-					if(content){
-						errorTipc(content);
-						return false;
-					}
-					var config = {
-						url:module + 'Manager/edit',
-						postData:postData,
-						index:index
-					};
-					dialogFormAdd(config);
-				}
-			});
-		});
-		//修改管理员账号
-		$('body').on('click','.modify-account',function(){
+//		getList(config);
+		//设置店长
+		var setShopAccount=$('#setShopAccount').html();
+		$('body').on('click','.set_shopowner',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
-				title:['修改账号','border-bottom:1px solid #d9d9d9;'],
-				className:'addAdminLayer',
-				content:addAdminAccount,
+				title:['设置线上店铺店长','border-bottom:1px solid #d9d9d9;color:#0066cc;'],
+				className:'setShopAccountLayer',
+				content:setShopAccount,
 				btn:['确定','取消'],
 				success:function(){
-					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
+					copyDataByName(_this,$('.setShopAccountLayer .setShopForm'));
 				},
 				yes:function(index){
-					var postData=$('.addAdminForm').serializeObject();
+					var postData={};
 					var content='';
+					postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -103,47 +81,17 @@
 						errorTipc(content);
 						return false;
 					}
-					postData.id = _this.data('id');
 					var config = {
-						url:module + 'Manager/edit',
+						url:module + 'Manager/set',
 						postData:postData,
-						fromObj:$('.addAdminLayer .addAdminForm'),
+						fromObj:$('.setShopAccountLayer .setShopForm'),
 						toObj:_this,
 						index:index
 					};
 					dialogFormEdit(config);
+					layer.close(index)
 				}
 			});
-		});
-		//删除管理员账号
-		$('body').on('click','.delete-account',function(){
-			var _this=$(this).parents('.list li');
-			layer.open({
-				title:['删除账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
-				className:'addAdminLayer',
-				content:addAdminAccount,
-				btn:['确定','取消'],
-				success:function(){
-					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
-				},
-				yes:function(index){
-					var postData = {};
-					postData.id = _this.data('id');
-					postData.userFactoryId = _this.data('user_factory_id');
-					var config = {
-						url:module + 'Manager/del',
-						postData:postData,
-						obj:_this,
-						index:index
-					};
-					dialogFormDel(config);
-				}
-			});
-		});
-		$('body').on('click','.list li',function(){
-			$(this).addClass('current').siblings().removeClass('current');
-			$(this).find('.operate-btn').show();
-			$(this).siblings().find('.operate-btn').hide();
 		});
 	});
 </script>
