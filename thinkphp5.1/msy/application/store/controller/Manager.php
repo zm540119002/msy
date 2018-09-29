@@ -6,7 +6,19 @@ class Manager extends \common\controller\FactoryBase
     /**首页
      */
     public function index(){
+        if(request()->isAjax()){
+            $modelManager = new \app\store\model\Manager();
+            $list = $modelManager->getList($this->factory['id']);
+            $this->assign('list',$list);
+            return view('list_tpl');
+        }else{
+            return $this->fetch();
+        }
+    }
 
+    /**店长设置
+     */
+    public function set(){
         if(request()->isAjax()){
             $modelManager = new \app\store\model\Manager();
             $list = $modelManager->getList($this->factory['id']);
