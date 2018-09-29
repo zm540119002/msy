@@ -670,7 +670,7 @@ i{
 .channel_nav a span{
     display:block;
     width: 0.82rem;
-    height: 0.82rem;
+    height: 0.785rem;
     margin:0 auto .05rem;
     background-image:url(../../common/img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
@@ -679,11 +679,11 @@ i{
 .store_organize_nav a span{
     background-image:url(../../common/img/icons/store_index_type.png);
 }
-.channel_nav a span.union_purchase{background-position:0 1px;}
-.channel_nav a span.exclusive{background-position:0 -46px;}
-.channel_nav a span.classify{background-position:0 -93px;}
-.channel_nav a span.purchasers{background-position:0 -140px;}
-.channel_nav a span.recharge{background-position:0 -187px;}
+.channel_nav a span.union_purchase{background-position:0 0;}
+.channel_nav a span.exclusive{background-position:0 -0.80rem;}
+.channel_nav a span.classify{background-position:0 -1.60rem;}
+.channel_nav a span.purchasers{background-position:0 -2.40rem;}
+.channel_nav a span.recharge{background-position:0 -3.19rem;}
 .store_organize_nav a span.classify{background-position:0 -93px;}
 .channel_nav>a.current:before,
 .store_deploy_bar>a.current:before{
@@ -2904,8 +2904,8 @@ input[type=text]::-webkit-focus-inner {
     flex:3;
 }
 .top_bar .store-logo-img{
-    width:44px;
-    height:44px;
+    width:0.75rem;
+    height:0.75rem;
     border-radius:100%;
 }
 .form_goods_type{
@@ -3022,5 +3022,6 @@ input[type=text]::-webkit-focus-inner {
 }
 .factory_name{
     display:inline-block;
-    width:110px;
+    width:1.88rem;
+    margin: 0 0 0 .15rem;
 }
