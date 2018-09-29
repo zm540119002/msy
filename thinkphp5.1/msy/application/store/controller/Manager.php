@@ -37,7 +37,7 @@ class Manager extends \common\controller\FactoryBase
     public function del(){
         if(request()->isAjax()){
             $modelManager = new \app\store\model\Manager();
-            return $modelManager->del();
+            return $modelManager->del($this->factory['id']);
         }
     }
 }
