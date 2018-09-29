@@ -185,6 +185,7 @@
     text-overflow:ellipsis;
     -webkit-line-clamp:2;
     -webkit-box-orient:vertical;
+    font-size:.20rem;
 }
 .tag-item div:nth-of-type(1) input{
     width:100%;
@@ -197,8 +198,13 @@
     width:52%;
     margin:0 0 0 5%;
 }
+.tag-item div:nth-of-type(2) .img_box{
+    width:1rem;
+    height:1rem;
+}
 .tag-item div:nth-of-type(2) img{
-    max-width:32%;
+    max-width:100%;
+    height:100%;
 }
 .tag-item div:nth-of-type(3){
     width:28%;
