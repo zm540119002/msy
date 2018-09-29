@@ -24,7 +24,7 @@ class Manager extends \common\controller\FactoryBase
             $list = $modelStore->getList($this->factory['id']);
 //            print_r($list);exit;
             $this->assign('list',$list);
-            return view('list_tpl');
+            return view('store_list_tpl');
         }else{
             return $this->fetch();
         }
