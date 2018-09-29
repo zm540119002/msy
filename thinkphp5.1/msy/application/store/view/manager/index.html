@@ -47,7 +47,7 @@
 	$(function(){
 		//页面初始化
 		var config = {
-			url: module + '/Manager/index'
+			url: module + 'Manager/index'
 		};
 		getList(config);
 		//创建管理员账号
@@ -71,7 +71,7 @@
 						return false;
 					}
 					var config = {
-						url:module + '/Manager/edit',
+						url:module + 'Manager/edit',
 						postData:postData,
 						index:index
 					};
@@ -104,7 +104,7 @@
 					}
 					postData.id = _this.data('id');
 					var config = {
-						url:module + '/Manager/edit',
+						url:module + 'Manager/edit',
 						postData:postData,
 						fromObj:$('.addAdminLayer .addAdminForm'),
 						toObj:_this,
@@ -128,9 +128,9 @@
 				yes:function(index){
 					var postData = {};
 					postData.id = _this.data('id');
-					postData.user_factory_id = _this.data('user_factory_id');
+					postData.userFactoryId = _this.data('user_factory_id');
 					var config = {
-						url:module + '/Manager/del',
+						url:module + 'Manager/del',
 						postData:postData,
 						obj:_this,
 						index:index
