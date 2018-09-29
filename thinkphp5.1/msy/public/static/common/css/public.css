@@ -669,12 +669,12 @@ i{
 .supply-nav a{width:33%;}
 .channel_nav a span{
     display:block;
-    width:48px;
-    height:47px;
+    width: 0.82rem;
+    height: 0.82rem;
     margin:0 auto .05rem;
     background-image:url(../../common/img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
-    background-size:46px 234px;
+    background-size:0.785rem 3.99rem;
 }
 .store_organize_nav a span{
     background-image:url(../../common/img/icons/store_index_type.png);
@@ -1205,9 +1205,9 @@ background-position: 0 -27px;
 }
 .right_sidebar a{
     display: block;
-    width:50px;
-    height:50px;
-    line-height:50px;
+    width:0.82rem;
+    height:0.82rem;
+    line-height:0.82rem;
     margin:0 0 5px 0;
     /*border:1px solid #d9d9d9;*/
     color:#0066cc;
