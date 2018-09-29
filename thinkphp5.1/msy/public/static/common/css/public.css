@@ -3023,4 +3023,5 @@ input[type=text]::-webkit-focus-inner {
 .factory_name{
     display:inline-block;
     width:1.88rem;
+    margin: 0 0 0 .15rem;
 }
