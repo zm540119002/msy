@@ -3020,3 +3020,7 @@ input[type=text]::-webkit-focus-inner {
 .message-center-info {
     padding: 0.25rem 0 0.25rem 0.22rem;
 }
+.factory_name{
+    display:inline-block;
+    width:110px;
+}
