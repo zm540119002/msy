@@ -1,7 +1,7 @@
 <?php
-namespace app\store\model;
+namespace common\model;
 
-class Manager extends \common\model\Base {
+class Manager extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
 	// 设置主键
