@@ -3002,3 +3002,21 @@ input[type=text]::-webkit-focus-inner {
     text-decoration: underline;
     color:#0066cc;
 }
+.entry_msy{
+    position:absolute;
+    width: 100%;
+    bottom:0.82rem;
+    left: 0;  
+}
+.account_entry{
+    position:relative;
+    display: block;
+    margin:1.10rem 0 0 0.22rem;
+    border-top:1px solid #d9d9d9;
+    padding:0.20rem 0;
+    /*text-align: center;*/
+    
+}
+.message-center-info {
+    padding: 0.25rem 0 0.25rem 0.22rem;
+}
