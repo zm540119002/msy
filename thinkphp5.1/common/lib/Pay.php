@@ -36,9 +36,9 @@ class Pay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $payInfo['success_back'] = $payInfo['success_back']?:U('Index/index');
-        $payInfo['cancel_back'] = $payInfo['cancel_back']?:U('Index/index');
-        $payInfo['fail_back'] = $payInfo['fail_back']?:U('Index/index');
+        $payInfo['success_back'] = $payInfo['success_back']?:url('Index/index');
+        $payInfo['cancel_back'] = $payInfo['cancel_back']?:url('Index/index');
+        $payInfo['fail_back'] = $payInfo['fail_back']?:url('Index/index');
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
@@ -179,7 +179,7 @@ EOF;
      */
     public static function wxRefund($refund){
         //查询订单,根据订单里边的数据进行退款
-        $merchid = C('WX_CONFIG')['MCHID'];
+        $merchid = config('wx_config.mchid');
         $input = new \WxPayRefund();
         $input->SetOut_trade_no($refund['order_sn']);			//自己的订单号
         $input->SetTransaction_id($refund['transaction_id']);  	//微信官方生成的订单流水号，在支付成功中有返回

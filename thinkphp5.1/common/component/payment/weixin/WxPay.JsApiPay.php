@@ -105,8 +105,8 @@ class JsApiPay
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		if(C('WX_CONFIG')['CURL_PROXY_HOST'] != "0.0.0.0"
 			&& C('WX_CONFIG')['CURL_PROXY_PORT'] != 0){
-			curl_setopt($ch,CURLOPT_PROXY, C('WX_CONFIG')['CURL_PROXY_HOST']);
-			curl_setopt($ch,CURLOPT_PROXYPORT, C('WX_CONFIG')['CURL_PROXY_PORT']);
+			curl_setopt($ch,CURLOPT_PROXY, config('wx_config.curl_proxy_host'));
+			curl_setopt($ch,CURLOPT_PROXYPORT, config('wx_config.curl_proxy_port'));
 		}
 		//运行curl，结果以jason形式返回
 		$res = curl_exec($ch);
@@ -163,7 +163,7 @@ class JsApiPay
 			"addrSign" => $addrSign,
 			"signType" => "sha1",
 			"scope" => "jsapi_address",
-			"appId" => C('WX_CONFIG')['APPID'],
+			"appId" => config('wx_config.appid'),
 			"timeStamp" => $data["timestamp"],
 			"nonceStr" => $data["noncestr"]
 		);
@@ -181,7 +181,7 @@ class JsApiPay
 	private function __CreateOauthUrlForCode($redirectUrl)
 	{
 
-		$urlObj["appid"] = C('WX_CONFIG')['APPID'];
+		$urlObj["appid"] = config('wx_config.appid');
 		$urlObj["redirect_uri"] = "$redirectUrl";
 		$urlObj["response_type"] = "code";
 		$urlObj["scope"] = "snsapi_base";
@@ -199,8 +199,8 @@ class JsApiPay
 	 */
 	private function __CreateOauthUrlForOpenid($code)
 	{
-		$urlObj["appid"] = C('WX_CONFIG')['APPID'];
-		$urlObj["secret"] = C('WX_CONFIG')['APPSECRET'];
+		$urlObj["appid"] = config('wx_config.appid');
+		$urlObj["secret"] = config('wx_config.appsecret');
 		$urlObj["code"] = $code;
 		$urlObj["grant_type"] = "authorization_code";
 		$bizString = $this->ToUrlParams($urlObj);

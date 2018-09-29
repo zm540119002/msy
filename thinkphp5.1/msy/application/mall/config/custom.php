@@ -17,22 +17,22 @@ return [
     //微信公众号配置
     'wx_config' => array(
         //TODO: 修改这里配置为您自己申请的商户信息
-        'APPID'=>'wx9eee7ee8c2ae57dc',
-        'APPSECRET'=>'00e0c9275fb24d6ca2a8dfe2a24cc2f6',
-        'MCHID' =>'1234887902',
-        'KEY' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
+        'appid'=>'wx9eee7ee8c2ae57dc',
+        'appsecret'=>'00e0c9275fb24d6ca2a8dfe2a24cc2f6',
+        'mchid' =>'1234887902',
+        'key' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 
         //TODO:公众号支付回调函数
-        'CALL_BACK_URL'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Mall/CallBack/notifyUrl",
-        'CALL_BACK_URL_BUSINESS'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Business/CallBack/notifyUrl",
+        'call_back_url'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Mall/CallBack/notifyUrl",
+        'call_back_url_business'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Business/CallBack/notifyUrl",
         /**
          * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0
          * 本例程通过curl使用HTTP POST方法，此处可修改代理服务器，
          * 默认CURL_PROXY_HOST=0.0.0.0和CURL_PROXY_PORT=0，此时不开启代理（如有需要才设置）
          * @var unknown_type
          */
-        'CURL_PROXY_HOST' =>'0.0.0.0',
-        'CURL_PROXY_PORT' => 0,
+        'curl_proxy_host' =>'0.0.0.0',
+        'curl_proxy_port' => 0,
 
         /**
          * TODO：接口调用上报等级，默认紧错误上报（注意：上报超时间为【1s】，上报无论成败【永不抛出异常】，
@@ -41,7 +41,7 @@ return [
          * 上报等级，0.关闭上报; 1.仅错误出错上报; 2.全量上报
          * @var int
          */
-        'REPORT_LEVENL' => 1,
+        'report_levenl' => 1,
 
         //=======【证书路径设置】=====================================
         /**
@@ -50,7 +50,7 @@ return [
          * API证书下载地址：https://pay.weixin.qq.com/index.php/account/api_cert，下载之前需要安装商户操作证书）
          * @var path
          */
-        'SSLCERT_PATH' => __DIR__.'/../../application/extend/component/wx_pay_api/cert/apiclient_cert.pem',
-        'SSLKEY_PATH' => __DIR__.'/../../application/extend/component/wx_pay_api/cert/apiclient_key.pem',
+        'sslcert_path' => __DIR__.'/../../application/extend/component/wx_pay_api/cert/apiclient_cert.pem',
+        'sslkey_path' => __DIR__.'/../../application/extend/component/wx_pay_api/cert/apiclient_key.pem',
     ),
 ];
