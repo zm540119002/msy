@@ -13,7 +13,6 @@ class Manager extends \common\controller\FactoryBase
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
-            print_r(phpinfo());exit;
             return $this->fetch();
         }
     }
