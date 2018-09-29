@@ -670,11 +670,11 @@ i{
 .channel_nav a span{
     display:block;
     width: 0.82rem;
-    height: 0.75rem;
+    height: 0.82rem;
     margin:0 auto .05rem;
     background-image:url(../../common/img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
-    background-size: 0.8rem 4rem;
+    background-size:46px 234px;
 }
 .store_organize_nav a span{
     background-image:url(../../common/img/icons/store_index_type.png);
