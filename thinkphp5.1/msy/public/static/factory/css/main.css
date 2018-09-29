@@ -197,8 +197,12 @@
     width:52%;
     margin:0 0 0 5%;
 }
+.tag-item div:nth-of-type(2) .img_box{
+    width:1rem;
+    height:1rem;
+}
 .tag-item div:nth-of-type(2) img{
-    max-width:32%;
+    max-width:100%;
 }
 .tag-item div:nth-of-type(3){
     width:28%;
