@@ -631,7 +631,7 @@ i{
 }
 .foot_nav_bar{
     text-align:center;
-    padding:0.06rem 0;
+    padding:0.085rem 0;
 }
 .foot_nav_bar a{
     position:relative;
@@ -656,7 +656,7 @@ i{
     background: #F7F8F8;
     border: 1px solid transparent;
     border-radius: 20px 20px 0 0;
-    padding-top:.22rem;
+    padding-top:.15rem;
 }
 .channel_nav a{
     position:relative;
