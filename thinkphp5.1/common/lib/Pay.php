@@ -160,7 +160,7 @@ EOF;
                     <script type="text/javascript">
                         $(function(){
                         var url =$('.url').val();
-                       location.href=url;
+//                       location.href=url;
                      });
                 </script>
             <body>
