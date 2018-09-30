@@ -11,8 +11,8 @@
  * @email molong@tensent.cn
  *
  */
-namespace common\component\qrcode;
-class qrcode {
+namespace common\component\code;
+class Qrcode {
 	
 	private $QR_MODE_NL = -1;
 	private $QR_MODE_NM = 0;

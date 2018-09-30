@@ -22,10 +22,11 @@ class Manager extends \common\controller\FactoryBase
         if(request()->isAjax()){
             $modelStore = new \common\model\Store();
             $list = $modelStore->getList($this->factory['id']);
-//            print_r($list);exit;
             $this->assign('list',$list);
-            return view('list_tpl');
+            return view('store_list_tpl');
         }else{
+            echo phpinfo();
+            exit;
             return $this->fetch();
         }
     }
