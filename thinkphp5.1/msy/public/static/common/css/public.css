@@ -862,7 +862,7 @@ background-position: 0 -27px;
     display:block;*/
 
     /*width: 30px;*/
-    width: 0.49rem;
+    width: 0.47rem;
     /*height: 25px;*/
     height:0.42rem;
     margin: -0.05rem auto;
@@ -877,6 +877,7 @@ background-position: 0 -27px;
     background-position:0 0.02rem;
 }
 .foot_nav_bar a span.practitioners{
+    width:0.49rem;
     /*background-position:0 -28px;*/
     background-position:0 -0.47rem;
 }
@@ -892,6 +893,7 @@ background-position: 0 -27px;
     background-position:0 -1.488rem;
 }
 .foot_nav_bar .current a span.practitioners{
+    width:0.49rem;
     /*background-position:0 -117px;*/
     background-position:0 -1.99rem;
 }
