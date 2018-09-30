@@ -865,7 +865,7 @@ background-position: 0 -27px;
     width: 0.47rem;
     /*height: 25px;*/
     height:0.42rem;
-    margin: -0.05rem auto;
+    margin:0 auto;
     background-image: url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
     /*background-size: 30px 345px;*/
@@ -874,7 +874,7 @@ background-position: 0 -27px;
 }
 .foot_nav_bar a span.store{
     /*background-position:0 2px;*/
-    background-position:0 0.02rem;
+    background-position:0 0.0248rem;
 }
 .foot_nav_bar a span.practitioners{
     width:0.49rem;
