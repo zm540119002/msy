@@ -11,7 +11,7 @@ require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/lib/WxPay.A
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.JsApiPay.php');
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.NativePay.php');
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/log.php');
-use Vendor\Qrcode\Qrcode;
+use common\component\qrcode;
 
 class Pay{
     /**支付端判断
@@ -118,8 +118,8 @@ EOF;
     //生成支付二维码
     public static function payQRcode($url){
         //生成二维码图片
-        $object = new Qrcode();
-        $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
+        $object = new \common\component\code\Qrcode();
+        $qrcodePath = WEB_URL.'public/images/qrcode/';//保存文件路径
         $fileName = time().'.png';//保存文件名
         $outFile = $qrcodePath.$fileName;
         $level = 'L'; //容错级别
@@ -160,7 +160,7 @@ EOF;
                     <script type="text/javascript">
                         $(function(){
                         var url =$('.url').val();
-                       location.href=url;
+//                       location.href=url;
                      });
                 </script>
             <body>

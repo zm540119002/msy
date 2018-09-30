@@ -439,16 +439,16 @@ i{
     font-size: 0.24rem;
 }
 .top_bar a{
-    width: 0.48rem;
-    /* width: 26px; */
-    height: 0.51rem;
-    /* height: 28px; */
-    margin: 0 auto;
-    background-image: url(../../common/img/icons/public_icons.png);
+    width:28px;
+    /*width:26px;*/
+    height:30px;
+    /*height:28px;*/
+    margin:0 auto;
+    background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size: 0.48rem 5.83rem;
-    display: block;
-    text-indent: -9999rem;
+    background-size:28px 342px;
+    display:block;
+    text-indent:-9999rem;
 }
 .top-switch-bar{
     height:30px;
