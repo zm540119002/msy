@@ -119,6 +119,7 @@ EOF;
     public static function payQRcode($url){
         //生成二维码图片
         $object = new qrcode\Qrcode();
+        print_r($object);exit;
         $qrcodePath = WEB_URL.'public/images/qrcode/';//保存文件路径
         $fileName = time().'.png';//保存文件名
         $outFile = $qrcodePath.$fileName;
