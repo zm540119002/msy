@@ -873,14 +873,16 @@ background-position: 0 -27px;
     display: block;
 }
 .foot_nav_bar a span.store{
-    /*background-position:0 -130px;*/
-    background-position:0 2px;
+    /*background-position:0 2px;*/
+    background-position:0 0.02rem;
 }
 .foot_nav_bar a span.practitioners{
-    background-position:0 -28px;
+    /*background-position:0 -28px;*/
+    background-position:0 -0.47rem;
 }
 .foot_nav_bar a span.manufacturer{
-    background-position:0 -54px;
+    /*background-position:0 -54px;*/
+    background-position:0 -0.92rem;
 }
 .foot_nav_bar .current a{
     color:#ff7aab;
