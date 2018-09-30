@@ -19,15 +19,21 @@ class Index extends MallBase{
     }
 
     public function pay(){
-        $payInfo = array(
+//        $payInfo = array(
+//            'sn'=>generateSN(10),
+//            'actually_amount'=>0.01,
+//            'cancel_back' => url('payCancel'),
+//            'fail_back' => url('payFail'),
+//            'success_back' => url('payComplete'),
+//            'notify_url'=>config('wx_config.call_back_url'),
+//        );
+//        Pay::wxPay($payInfo);
+        $order = [
             'sn'=>generateSN(10),
             'actually_amount'=>0.01,
-            'cancel_back' => url('payCancel'),
-            'fail_back' => url('payFail'),
-            'success_back' => url('payComplete'),
-            'notify_url'=>config('wx_config.call_back_url'),
-        );
-        Pay::wxPay($payInfo);
+        ];
+        $model = new \common\component\payment\unionpay\unionpay;
+        $model->get_code($order);
     }
 
 }
