@@ -439,14 +439,17 @@ i{
     font-size: 0.24rem;
 }
 .top_bar a{
-    width:28px;
+    /*width:28px;*/
+    width: 0.47rem;
     /*width:26px;*/
-    height:30px;
+    /*height:30px;*/
+    height: 0.52rem;
     /*height:28px;*/
     margin:0 auto;
     background-image:url(../../common/img/icons/public_icons.png);
     background-repeat: no-repeat;
-    background-size:28px 342px;
+    /*background-size:28px 342px;*/
+    background-size: 0.47rem 5.83rem;
     display:block;
     text-indent:-9999rem;
 }
@@ -491,15 +494,16 @@ i{
 }
 .top_bar a.personal_center,
 .top-nav-bar a.personal_center{
-    background-position:0 -175px;
+    /*background-position:0 -175px;*/
+    background-position:0 -2.98rem;
 }
 .top_bar a.shopping_cart{
-    background-position:0 -212px;
+    /*background-position:0 -212px;*/
+    background-position:0 -3.61rem;
 }
 .top_bar a.home,
 .top-nav-bar a.home{
-    /*background-position:0 -172px;*/
-    background-position:0 -248px;
+    background-position:0 -4.24rem;
 }
 .top-title a.home{
     /*background-position:0 -172px;*/
