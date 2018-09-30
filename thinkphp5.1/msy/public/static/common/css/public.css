@@ -677,14 +677,14 @@ i{
     background-size:0.785rem 3.99rem;
 }
 .store_organize_nav a span{
-    background-image:url(../../common/img/icons/store_index_type.png);
+    /*background-image:url(../../common/img/icons/store_index_type.png);*/
 }
 .channel_nav a span.union_purchase{background-position:0 0;}
 .channel_nav a span.exclusive{background-position:0 -0.80rem;}
 .channel_nav a span.classify{background-position:0 -1.60rem;}
 .channel_nav a span.purchasers{background-position:0 -2.40rem;}
 .channel_nav a span.recharge{background-position:0 -3.19rem;}
-.store_organize_nav a span.classify{background-position:0 -93px;}
+.store_organize_nav a span.classify{background-position:0 -1.60rem;}
 .channel_nav>a.current:before,
 .store_deploy_bar>a.current:before{
     position: absolute;
