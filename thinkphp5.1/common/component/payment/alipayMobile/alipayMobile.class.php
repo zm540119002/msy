@@ -1,7 +1,7 @@
 <?php
 
 
-namespace web\all\Component\payment\alipayMobile;
+namespace common\component\payment\alipayMobile;
 
 
 /**
