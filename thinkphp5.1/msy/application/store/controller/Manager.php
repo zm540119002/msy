@@ -25,8 +25,6 @@ class Manager extends \common\controller\FactoryBase
             $this->assign('list',$list);
             return view('store_list_tpl');
         }else{
-            echo phpinfo();
-            exit;
             return $this->fetch();
         }
     }
