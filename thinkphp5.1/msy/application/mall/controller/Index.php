@@ -27,6 +27,7 @@ class Index extends MallBase{
             'success_back' => url('payComplete'),
             'notify_url'=>config('wx_config.call_back_url'),
         );
+        print_r($payInfo);exit;
         Pay::wxPay($payInfo);
     }
 
