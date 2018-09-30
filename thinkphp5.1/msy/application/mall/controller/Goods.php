@@ -20,7 +20,7 @@ class Goods extends MallBase{
             return errorMsg('请求方式错误');
         }
 
-        $model = new\app\mall\model\Goods;
+        $model = new \app\mall\model\Goods;
         $config=[
             'where'=>[
             ],
