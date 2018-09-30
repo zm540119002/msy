@@ -11,7 +11,6 @@ require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/lib/WxPay.A
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.JsApiPay.php');
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.NativePay.php');
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/log.php');
-use common\component\qrcode;
 
 class Pay{
     /**支付端判断
