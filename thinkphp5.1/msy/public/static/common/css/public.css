@@ -398,8 +398,8 @@ i{
     flex:1;
 }
 /*临时隐藏*/
-.columns_flex div:nth-child(1),
-.columns_flex div:nth-child(2){
+.fixedtop div.each_column:nth-child(1), 
+.fixedtop div.each_column:nth-child(2){
     /*visibility: hidden*/
 }
 .bottom_nav_fixed{
@@ -443,7 +443,7 @@ i{
     text-align: center;
     font-size: 0.24rem;
 }
-.top_bar a{
+.top_bar a.top_icon{
     /*width:28px;*/
     width: 0.47rem;
     /*width:26px;*/
