@@ -1,5 +1,5 @@
 <?php
-namespace app\store\controller;
+namespace app\factory\controller;
 
 class Manager extends \common\controller\FactoryBase
 {
@@ -7,7 +7,7 @@ class Manager extends \common\controller\FactoryBase
      */
     public function index(){
         if(request()->isAjax()){
-            $modelManager = new \common\model\Manager();
+            $modelManager = new \app\store\model\Manager();
             $list = $modelManager->getList($this->factory['id']);
             $this->assign('list',$list);
             return view('list_tpl');
@@ -22,9 +22,9 @@ class Manager extends \common\controller\FactoryBase
         if(request()->isAjax()){
             $modelStore = new \common\model\Store();
             $list = $modelStore->getList($this->factory['id']);
-//            print_r($list);exit;
+            print_r($list);exit;
             $this->assign('list',$list);
-            return view('store_list_tpl');
+            return view('list_tpl');
         }else{
             return $this->fetch();
         }
@@ -34,7 +34,7 @@ class Manager extends \common\controller\FactoryBase
      */
     public function edit(){
         if(request()->isAjax()){
-            $modelManager = new \common\model\Manager();
+            $modelManager = new \app\store\model\Manager();
             $info = $modelManager->edit($this->factory['id']);
             if($info['status']==0){
                 return $info;
@@ -49,7 +49,7 @@ class Manager extends \common\controller\FactoryBase
      */
     public function del(){
         if(request()->isAjax()){
-            $modelManager = new \common\model\Manager();
+            $modelManager = new \app\store\model\Manager();
             return $modelManager->del($this->factory['id']);
         }
     }

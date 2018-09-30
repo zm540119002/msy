@@ -655,7 +655,7 @@ i{
 .module-navigation .channel_nav{
     background: #F7F8F8;
     border: 1px solid transparent;
-    border-radius: 30px 30px 0 0;
+    border-radius: 20px 20px 0 0;
     padding-top:.22rem;
 }
 .channel_nav a{
@@ -669,21 +669,21 @@ i{
 .supply-nav a{width:33%;}
 .channel_nav a span{
     display:block;
-    width:48px;
-    height:47px;
+    width: 0.82rem;
+    height: 0.785rem;
     margin:0 auto .05rem;
     background-image:url(../../common/img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
-    background-size:46px 234px;
+    background-size:0.785rem 3.99rem;
 }
 .store_organize_nav a span{
     background-image:url(../../common/img/icons/store_index_type.png);
 }
-.channel_nav a span.union_purchase{background-position:0 1px;}
-.channel_nav a span.exclusive{background-position:0 -46px;}
-.channel_nav a span.classify{background-position:0 -93px;}
-.channel_nav a span.purchasers{background-position:0 -140px;}
-.channel_nav a span.recharge{background-position:0 -187px;}
+.channel_nav a span.union_purchase{background-position:0 0;}
+.channel_nav a span.exclusive{background-position:0 -0.80rem;}
+.channel_nav a span.classify{background-position:0 -1.60rem;}
+.channel_nav a span.purchasers{background-position:0 -2.40rem;}
+.channel_nav a span.recharge{background-position:0 -3.19rem;}
 .store_organize_nav a span.classify{background-position:0 -93px;}
 .channel_nav>a.current:before,
 .store_deploy_bar>a.current:before{
@@ -1205,9 +1205,9 @@ background-position: 0 -27px;
 }
 .right_sidebar a{
     display: block;
-    width:50px;
-    height:50px;
-    line-height:50px;
+    width:0.82rem;
+    height:0.82rem;
+    line-height:0.82rem;
     margin:0 0 5px 0;
     /*border:1px solid #d9d9d9;*/
     color:#0066cc;
@@ -1979,7 +1979,7 @@ background-position: 0 -27px;
     height:42px;
 }
 .small-btn{
-    width:60px;
+    width:1.02rem;
     border-radius:4px;
     color:#fff;
     text-align:center;
@@ -2904,8 +2904,8 @@ input[type=text]::-webkit-focus-inner {
     flex:3;
 }
 .top_bar .store-logo-img{
-    width:44px;
-    height:44px;
+    width:0.75rem;
+    height:0.75rem;
     border-radius:100%;
 }
 .form_goods_type{
@@ -2973,7 +2973,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .account-top{
     margin:118px 0 0;
-    padding:0 0.15rem 0 .15rem;
+    padding:0 0.22rem 0 .22rem;
 }
 .top_header{
     position: fixed;
@@ -3001,4 +3001,27 @@ input[type=text]::-webkit-focus-inner {
 .tipc_page a{
     text-decoration: underline;
     color:#0066cc;
+}
+.entry_msy{
+    position:absolute;
+    width: 100%;
+    bottom:0.82rem;
+    left: 0;  
+}
+.account_entry{
+    position:relative;
+    display: block;
+    margin:1.10rem 0 0 0.22rem;
+    border-top:1px solid #d9d9d9;
+    padding:0.20rem 0;
+    /*text-align: center;*/
+    
+}
+.message-center-info {
+    padding: 0.25rem 0 0.25rem 0.22rem;
+}
+.factory_name{
+    display:inline-block;
+    width:1.88rem;
+    margin: 0 0 0 .15rem;
 }
