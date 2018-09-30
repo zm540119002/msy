@@ -11,7 +11,7 @@ require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/lib/WxPay.A
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.JsApiPay.php');
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/WxPay.NativePay.php');
 require_once(dirname(dirname(__FILE__)) . '/component/payment/weixin/log.php');
-use Vendor\Qrcode\Qrcode;
+use common\component\qrcode;
 
 class Pay{
     /**支付端判断
@@ -148,7 +148,6 @@ EOF;
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
-        print_r($order2);exit;
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
