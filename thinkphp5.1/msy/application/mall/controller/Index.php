@@ -21,7 +21,7 @@ class Index extends MallBase{
     public function pay(){
         $payInfo = array(
             'sn'=>generateSN(10),
-            'actually_amount'=>1,
+            'actually_amount'=>0.01,
             'cancel_back' => url('payCancel'),
             'fail_back' => url('payFail'),
             'success_back' => url('payComplete'),
