@@ -1,5 +1,5 @@
 <?php
-namespace  web\all\Component\payment\unionpay;
+namespace  common\component\payment\unionpay;
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -7,8 +7,8 @@ namespace  web\all\Component\payment\unionpay;
  * Time: 10:16
  */
 require_once(dirname(__FILE__) .'/sdk/acp_service.php');
-use web\all\Component\payment\unionpay\sdk\AcpService;
-use web\all\Component\payment\unionpay\sdk\SDKConfig;
+use common\component\payment\unionpay\sdk\AcpService;
+use common\component\payment\unionpay\sdk\SDKConfig;
 
 class unionpay
 {
