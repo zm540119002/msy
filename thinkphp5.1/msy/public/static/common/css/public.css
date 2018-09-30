@@ -889,13 +889,15 @@ background-position: 0 -27px;
 }
 .foot_nav_bar .current a span.store{
     /*background-position:0 -87px;*/
-    background-position:0 -1.48rem;
+    background-position:0 -1.488rem;
 }
 .foot_nav_bar .current a span.practitioners{
-    background-position:0 -117px;
+    /*background-position:0 -117px;*/
+    background-position:0 -1.99rem;
 }
 .foot_nav_bar .current a span.manufacturer{
-    background-position:0 -143px;
+    /*background-position:0 -143px;*/
+    background-position:0 -2.44rem;
 }
 .layui-m-layermain .layui-m-layerchild.cloudTwitterLayer,
 .layui-m-layermain .layui-m-layerchild.editDetailLayer {
