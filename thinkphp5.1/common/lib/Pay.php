@@ -118,8 +118,8 @@ EOF;
     //生成支付二维码
     public static function payQRcode($url){
         //生成二维码图片
-        $object = new Qrcode();
-        $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
+        $object = new qrcode\Qrcode();
+        $qrcodePath = WEB_URL.'public/images/qrcode/';//保存文件路径
         $fileName = time().'.png';//保存文件名
         $outFile = $qrcodePath.$fileName;
         $level = 'L'; //容错级别
