@@ -852,7 +852,11 @@ background-position: 0 -27px;
     font-size:0.28rem;
     color:#e60012;
 }
-.foot_nav_bar a span{
+.foot_nav_bar .f_txt{
+    display: block;
+    margin-top:0;
+}
+.foot_nav_bar a span.f_icon{
     /*width:20px;
     height:18px;
     margin:0 auto;
