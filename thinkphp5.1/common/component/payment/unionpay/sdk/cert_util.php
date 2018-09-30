@@ -1,5 +1,5 @@
 <?php
-namespace web\all\Component\payment\unionpay\sdk;
+namespace common\component\payment\unionpay\sdk;
 
 include_once 'acp_service.php';
 
