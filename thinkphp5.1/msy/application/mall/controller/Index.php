@@ -40,6 +40,7 @@ class Index extends MallBase{
         $order = [
             'sn'=>generateSN(),
             'actually_amount'=>1,
+            'create_time'=>time(),
         ];
         $model = new \common\component\payment\unionpay\unionpay;
         return $model->get_code($order);
