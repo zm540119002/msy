@@ -93,7 +93,7 @@ class Manager extends Base {
 			['user u','u.id = uf.user_id','left'],
 		];
 		$list = $modelUserFactory->alias('uf')->field($field)->join($join)->where($where)->select();
-		return count($list)!=0?$list:[];
+		return count($list)!=0?$list->toArray():[];
 	}
 
 	//删除

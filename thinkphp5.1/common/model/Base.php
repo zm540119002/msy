@@ -18,7 +18,7 @@ class Base extends \think\Model {
 			}
 		}
 		$list = $_model->select();
-		return count($list)!=0?$list:[];
+		return count($list)!=0?$list->toArray():[];
 	}
 
 	/**查找一条数据
