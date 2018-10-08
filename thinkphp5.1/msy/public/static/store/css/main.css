@@ -1684,9 +1684,11 @@ input.special{
     border-radius:4px;
 }
 .set_shopowner{
+    width:1rem;
     padding:.05rem 0.18rem;
     border:1px solid #39b54a;
     border-radius:4px;
+    text-align: center;
 }
 .set_top_info{
     text-align: center;
