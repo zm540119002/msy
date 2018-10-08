@@ -543,7 +543,6 @@ class WxPayApi
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	
 		if($useCert == true){
-			print_r(111);exit;
 			//设置证书
 			//使用证书：cert 与 key 分别属于两个.pem文件
 			curl_setopt($ch,CURLOPT_SSLCERTTYPE,'PEM');
