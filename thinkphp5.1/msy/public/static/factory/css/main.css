@@ -234,11 +234,11 @@
 }
 .classify-operate-btn a.move-icons,
 .classify-operate-btn .up-btn.move-icons{
-    background-position:0 -3.65rem;
+    background-position:0 -3.586rem;
 }
 .classify-operate-btn a.down-icons,
 .classify-operate-btn .down-btn.down-icons{
-    background-position:0 -1.80rem;
+    background-position:0 -1.788rem;
 }
 .classify-operate-btn a.move-disabled-icons,
 .scroller-wrapper li:first-child .move-icons{
