@@ -890,10 +890,10 @@ transparent;
     display: block;  
 }
 .top_nav_fixed .l-r-sides a{
-    display:inline-block;  
+    /*display:inline-block;  */
 }
 .top_nav_fixed .l-r-sides a.top_icon{
-    width: 0.64rem;
+    /*width: 0.64rem;*/
 }
 .promotional-goods-list a{
     position:absolute;
@@ -1684,7 +1684,7 @@ input.special{
     border-radius:4px;
 }
 .set_shopowner{
-    padding:.05rem 0.10rem;
+    padding:.05rem 0.13rem;
     border:1px solid #39b54a;
     border-radius:4px;
 }
