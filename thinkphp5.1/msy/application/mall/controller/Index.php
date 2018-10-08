@@ -20,15 +20,15 @@ class Index extends MallBase{
 
     public function pay(){
         //微信支付
-//        $payInfo = array(
-//            'sn'=>generateSN(10),
-//            'actually_amount'=>0.01,
-//            'cancel_back' => url('payCancel'),
-//            'fail_back' => url('payFail'),
-//            'success_back' => url('payComplete'),
-//            'notify_url'=>config('wx_config.call_back_url'),
-//        );
-//        Pay::wxPay($payInfo);
+        $payInfo = array(
+            'sn'=>generateSN(10),
+            'actually_amount'=>0.01,
+            'cancel_back' => url('payCancel'),
+            'fail_back' => url('payFail'),
+            'success_back' => url('payComplete'),
+            'notify_url'=>config('wx_config.call_back_url'),
+        );
+        Pay::wxPay($payInfo);
         //支付宝支付
 //        $order = [
 //            'sn'=>generateSN(10),
@@ -37,12 +37,12 @@ class Index extends MallBase{
 //        $model = new \common\component\payment\alipayMobile\alipayMobile;
 //        return $model->get_code($order);
         //银联支付
-        $order = [
-            'sn'=>generateSN(),
-            'actually_amount'=>0.01,
-        ];
-        $model = new \common\component\payment\unionpay\unionpay;
-        return $model->get_code($order);
+//        $order = [
+//            'sn'=>generateSN(),
+//            'actually_amount'=>0.01,
+//        ];
+//        $model = new \common\component\payment\unionpay\unionpay;
+//        return $model->get_code($order);
     }
 
 }
