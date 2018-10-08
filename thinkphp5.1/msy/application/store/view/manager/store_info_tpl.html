@@ -2,9 +2,10 @@
 <li class="columns_flex l-r-sides" data-id="{$info.id}">
 	<div>
 		<p>
-			<span>{$info.factory_name|default=''}</span>机构{$info.store_type|getStoreType}
+			<input type="text" value="{$info.factory_name|default=''}" name="store_name" readonly="readonly" class="input_size">机构
+			<input type="text" value="{$info.store_type|getStoreType}" name="store_type" readonly="readonly" class="input_size">
 		</p>
-		<p>{$info.run_type|getRunType}</p>
+		<input type="text" value="{$info.run_type|getRunType}" name="" readonly="readonly"/ class="input_size">
 		<div>
 			<span>店长:</span>
 			<input type="text" value="{$info.nickname|default=''}" name="name" readonly="readonly"/>

@@ -92,6 +92,9 @@
 			})
 		});
 
+		var text_length = $('.input_size').val().length;  //获取当前长度
+		var width = parseInt(text_length)*12;
+		$('.input_size').css('width',width+'px');
 	});
 </script>
 {/block}
