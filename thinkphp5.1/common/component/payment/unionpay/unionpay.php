@@ -95,7 +95,6 @@ class unionpay
             //TODO 其他特殊用法请查看 special_use_purchase.php
         );
         AcpService::sign ( $params );
-
         $uri = SDKConfig::getSDKConfig()->frontTransUrl;
         $html_form = AcpService::createAutoFormHtml( $params, $uri );
         echo  $html_form;
