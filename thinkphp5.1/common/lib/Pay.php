@@ -111,6 +111,7 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
+        print_r($url2);exit;
         Pay::payQRcode($url2);
     }
 
