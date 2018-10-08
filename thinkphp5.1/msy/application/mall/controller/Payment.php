@@ -7,6 +7,7 @@ class Payment extends MallBase {
     public function orderPayment(){
         if(IS_POST){
         }else{
+            print_r(11);exit;
 //            if(isset($_GET['orderId']) && !empty($_GET['orderId'])){
 //                $modelOrder = D('Order');
 //                $orderId = $_GET['orderId'];
