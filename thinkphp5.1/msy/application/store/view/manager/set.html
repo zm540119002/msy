@@ -68,9 +68,8 @@
 					copyDataByName(_this,$('.setShopAccountLayer .setShopForm'));
 				},
 				yes:function(index){
-					var postData={};
+					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					var content='';
-					postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
