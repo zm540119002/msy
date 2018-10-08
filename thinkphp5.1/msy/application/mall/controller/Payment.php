@@ -12,7 +12,7 @@ class Payment extends MallBase {
             'success_back' => url('payComplete'),
             'notify_url'=>config('wx_config.call_back_url')
         );
-        \common\component\payment\weixin\Pay::wxPay($payInfo);
+        \common\lib\Pay::wxPay($payInfo);
 
         //支付宝支付
 //        $order = [
