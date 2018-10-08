@@ -118,13 +118,14 @@ EOF;
     public static function payQRcode($url){
         //生成二维码图片
         $object = new \common\component\code\Qrcode();
-        $qrcodePath = WEB_URL.'public/images/qrcode/';//保存文件路径
+        $qrcodePath = config('uploads');//保存文件路径
         $fileName = time().'.png';//保存文件名
         $outFile = $qrcodePath.$fileName;
         $level = 'L'; //容错级别
         $size = 10; //生成图片大小
         $frameSize = 2; //边框像素
         $saveAndPrint = true;
+        print_r($object);exit;
         $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
     }
 
@@ -159,7 +160,7 @@ EOF;
                     <script type="text/javascript">
                         $(function(){
                         var url =$('.url').val();
-//                       location.href=url;
+                       location.href=url;
                      });
                 </script>
             <body>
