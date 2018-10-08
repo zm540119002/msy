@@ -11,4 +11,5 @@ return [
     'factory_store' => 'factory_store/',//店铺图片
     'factory_promotion' => 'factory_promotion/',//场景图片
     'factory_tweet' => 'factory_tweet/',//场景图片
+    
 ];
