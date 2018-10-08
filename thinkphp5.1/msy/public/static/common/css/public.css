@@ -575,8 +575,15 @@ i{
     height:28px;
     line-height:28px;
 }
+.top_left_menu .top_menu_list a{
+    display:inline-block;
+}
 .top_right_menu{
     margin:0 0.15rem 0 0;
+}
+.top_bar .top_right_menu a{
+    display:inline-block;
+    width:0.64rem;
 }
 .top_nav_fixed .top_menu_list{
     width:100%;
