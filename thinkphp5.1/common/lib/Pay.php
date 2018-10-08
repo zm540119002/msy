@@ -111,21 +111,27 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
-        Pay::payQRcode($url2);
+//        Pay::payQRcode($url2);
+        return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
+
     }
 
     //生成支付二维码
     public static function payQRcode($url){
         //生成二维码图片
         $object = new \common\component\code\Qrcode();
-        $qrcodePath = config('upload_dir.upload_path');//保存文件路径
+        $qrcodePath = config('upload_dir.upload_path').config('upload_dir.pay_QRcode');//保存文件路径
+        if(!mk_dir($qrcodePath)){
+            return errorMsg('创建目录失败');
+        }
         $fileName = time().'.png';//保存文件名
-        $outFile = $qrcodePath.$fileName;
+        $outFile = $qrcodePath.'/'.$fileName;
         $level = 'L'; //容错级别
         $size = 10; //生成图片大小
         $frameSize = 2; //边框像素
         $saveAndPrint = true;
         $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
+        return $outFile;
     }
 
     /**
