@@ -887,8 +887,10 @@ transparent;
     text-align:right;
 }
 .l-r-sides a{
-    display: block;
-    
+    display: block;  
+}
+.top_nav_fixed .l-r-sides a{
+    display:inline-block;  
 }
 .promotional-goods-list a{
     position:absolute;
