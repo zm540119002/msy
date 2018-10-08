@@ -53,7 +53,6 @@ class WxPayApi
 		$inputObj->SetSpbill_create_ip($_SERVER['REMOTE_ADDR']);//终端ip	  
 		//$inputObj->SetSpbill_create_ip("1.1.1.1");  	    
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
-		print_r(config('wx_config.mchid'));exit;
 		//签名
 		$inputObj->SetSign();
 		$xml = $inputObj->ToXml();
@@ -61,6 +60,7 @@ class WxPayApi
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($response);
 		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+		print_r($result);exit;
 		return $result;
 	}
 	
