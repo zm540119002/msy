@@ -5,9 +5,10 @@ use  web\all\Lib\Pay;
 class Payment extends MallBase {
     //订单-支付
     public function orderPayment(){
+        print_r(11);exit;
         if(IS_POST){
         }else{
-            print_r(11);exit;
+
 //            if(isset($_GET['orderId']) && !empty($_GET['orderId'])){
 //                $modelOrder = D('Order');
 //                $orderId = $_GET['orderId'];
