@@ -397,6 +397,10 @@ i{
 .each_column{
     flex:1;
 }
+/*临时隐藏*/
+.top_hidden{
+    visibility: hidden;
+}
 .bottom_nav_fixed{
     background: #efefef;
     position:fixed;
@@ -438,7 +442,7 @@ i{
     text-align: center;
     font-size: 0.24rem;
 }
-.top_bar a{
+.top_bar a.top_icon{
     /*width:28px;*/
     width: 0.47rem;
     /*width:26px;*/
