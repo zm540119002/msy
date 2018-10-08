@@ -119,7 +119,6 @@ EOF;
         //生成二维码图片
         $object = new \common\component\code\Qrcode();
         $qrcodePath = config('uploads');//保存文件路径
-        print_r($qrcodePath);exit;
         $fileName = time().'.png';//保存文件名
         $outFile = $qrcodePath.$fileName;
         $level = 'L'; //容错级别
