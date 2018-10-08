@@ -410,6 +410,13 @@ function copyDataByName(fromObj,toObj) {
         val && $(this).val(val);
     });
 }
+function copyDataByClassName(fromObj,toObj){
+    $.each(toObj.find('.span_text'),function(){
+        var name = $(this).attr('name');
+        var val= fromObj.find('span[name='+name+']').text();
+        val && $(this).text(val);
+    });
+}
 
 /**
  * 刷新当前页面
