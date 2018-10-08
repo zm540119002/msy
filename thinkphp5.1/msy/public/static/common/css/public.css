@@ -398,9 +398,8 @@ i{
     flex:1;
 }
 /*临时隐藏*/
-.fixedtop div.each_column:nth-child(1), 
-.fixedtop div.each_column:nth-child(2){
-    /*visibility: hidden*/
+.top_hidden{
+    visibility: hidden;
 }
 .bottom_nav_fixed{
     background: #efefef;
