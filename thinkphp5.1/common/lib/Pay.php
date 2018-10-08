@@ -110,6 +110,7 @@ EOF;
         $input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
+        print_r($result);exit;
         $url2 = $result["code_url"];
         print_r($url2);exit;
         Pay::payQRcode($url2);
