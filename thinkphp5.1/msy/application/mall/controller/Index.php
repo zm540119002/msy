@@ -1,6 +1,5 @@
 <?php
 namespace app\mall\controller;
-use  common\lib\Pay;
 class Index extends MallBase{
 
     public function index(){
@@ -28,7 +27,7 @@ class Index extends MallBase{
             'success_back' => url('payComplete'),
             'notify_url'=>config('wx_config.call_back_url'),
         );
-        Pay::wxPay($payInfo);
+    \common\lib\Pay::wxPay($payInfo);
         //支付宝支付
 //        $order = [
 //            'sn'=>generateSN(10),
