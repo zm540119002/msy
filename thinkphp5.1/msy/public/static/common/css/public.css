@@ -3048,3 +3048,6 @@ input[type=text]::-webkit-focus-inner {
     width:1.88rem;
     margin: 0 0 0 .15rem;
 }
+.top_hidden{
+    visibility: hidden;
+}
