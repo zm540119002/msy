@@ -212,12 +212,12 @@
 .classify-operate-btn a,
 .classify-operate-btn .move-btn{
     display:inline-block;
-    width:32px;
-    height:32px;
+    width:0.54rem;
+    height:0.54rem;
     margin:0 0 0 12px;
     background-image:url(../../common/img/icons/operate-icons.png);
     background-repeat: no-repeat;
-    background-size:32px 250px;
+    background-size:0.54rem 4.2rem;
     text-indent:-9999rem;
 }
 .classify-operate-btn .move-btn{
@@ -242,11 +242,11 @@
 }
 .classify-operate-btn a.move-disabled-icons,
 .scroller-wrapper li:first-child .move-icons{
-    background-position:0 -142px;
+    background-position:0 -2.385rem;
 }
 .classify-operate-btn a.down-disabled-icons,
 .scroller-wrapper li:last-child .down-disabled-icons{
-    background-position:0 -178px;
+    background-position:0 -2.985rem;
 }
 .scroller-wrapper li:first-child .up-btn.disabled,
 .scroller-wrapper li:last-child .down-btn.disabled{

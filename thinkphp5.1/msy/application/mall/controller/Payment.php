@@ -12,6 +12,7 @@ class Payment extends MallBase {
             'success_back' => url('payComplete'),
             'notify_url'=>config('wx_config.call_back_url')
         );
+        //微信支付
         \common\lib\Pay::wxPay($payInfo);
 
         //支付宝支付
