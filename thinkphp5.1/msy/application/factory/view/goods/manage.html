@@ -129,9 +129,9 @@
 									<div class="backups-right">
 										<a href="javascript:void(0);" class="gr backup">备份本店铺商品数据</a>
 										{notempty name="selfStore"}
-										<p>上次备份日期:<span class="backup-time">{$selfStore.backup_time}</span></p>
+										<p class="backup_text">上次备份日期:<span class="backup-time">{$selfStore.backup_time}</span></p>
 										{else /}
-										<p>上次备份日期:<span class="backup-time">从未备份</span></p>
+										<p class="backup_text">上次备份日期:<span class="backup-time">从未备份</span></p>
 										{/notempty}
 										<a href="javascript:void(0);" class="gr copy-store">复制商品数据到本店铺</a>
 									</div>
