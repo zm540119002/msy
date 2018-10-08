@@ -69,6 +69,6 @@ class RoleNode extends \common\model\Base {
 			$where[] = ['role_id', '=', $roleId];
 		}
 		$list = $this->where($where)->field('role_id,node_id')->select();
-		return count($list)!=0?$list:[];
+		return count($list)!=0?$list->toArray():[];
 	}
 }

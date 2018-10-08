@@ -21,7 +21,13 @@ class Manager extends \common\controller\FactoryBase
     public function set(){
         if(request()->isAjax()){
             $modelStore = new \common\model\Store();
-            $list = $modelStore->getList($this->factory['id']);
+            $config = [
+                'field' => [
+                    '*',
+                ],
+            ];
+            $list = $modelStore->getList($config);
+            print_r($list);exit;
             $this->assign('list',$list);
             return view('store_list_tpl');
         }else{
