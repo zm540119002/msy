@@ -111,7 +111,6 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
-        print_r($url2);exit;
         Pay::payQRcode($url2);
     }
 
@@ -120,6 +119,7 @@ EOF;
         //生成二维码图片
         $object = new \common\component\code\Qrcode();
         $qrcodePath = WEB_URL.'public/images/qrcode/';//保存文件路径
+        print_r($qrcodePath);exit;
         $fileName = time().'.png';//保存文件名
         $outFile = $qrcodePath.$fileName;
         $level = 'L'; //容错级别
