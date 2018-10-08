@@ -7,11 +7,11 @@ class Store extends \common\controller\FactoryBase
     public function index(){
         return $this->fetch('index');
     }
+
     /**
      * 店铺管理
      */
-    public function manage()
-    {
+    public function manage(){
         $model = new \common\model\Store();
         
         $config = [
@@ -29,11 +29,11 @@ class Store extends \common\controller\FactoryBase
         $this -> assign('storeList',$storeList);
         return $this->fetch();
     }
+
     /**
      * 店铺管理
      */
-    public function edit()
-    {
+    public function edit(){
         $model = new \common\model\Store();
         if(request()->isAjax()){
             return $model -> edit($this -> factory['id']);
@@ -73,6 +73,7 @@ class Store extends \common\controller\FactoryBase
             return $this->fetch();
         }
     }
+
     //设置店铺运营状态
     public function setStoreStatus(){
         if(request()->isAjax()){
@@ -80,6 +81,7 @@ class Store extends \common\controller\FactoryBase
             return $model->edit($this -> factory['id']);
         }
     }
+
     //获取店铺列表
     public function getList(){
         if(request()->isAjax()){
