@@ -103,8 +103,8 @@ class JsApiPay
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		if(C('WX_CONFIG')['CURL_PROXY_HOST'] != "0.0.0.0"
-			&& C('WX_CONFIG')['CURL_PROXY_PORT'] != 0){
+		if(config('wx_config.curl_proxy_host') != "0.0.0.0"
+			&&config('wx_config.curl_proxy_port')  != 0){
 			curl_setopt($ch,CURLOPT_PROXY, config('wx_config.curl_proxy_host'));
 			curl_setopt($ch,CURLOPT_PROXYPORT, config('wx_config.curl_proxy_port'));
 		}
