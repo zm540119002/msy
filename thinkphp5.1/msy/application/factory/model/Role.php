@@ -52,7 +52,7 @@ class Role extends \common\model\Base {
 			'id'=>'desc',
 		];
 		$list = $this->where($where)->field($field)->order($order)->select();
-		return count($list)!=0?$list:[];
+		return count($list)!=0?$list->toArray():[];
 	}
 
 	//删除

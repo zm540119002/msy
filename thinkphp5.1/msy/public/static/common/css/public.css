@@ -571,6 +571,13 @@ i{
     line-height:48px;
     padding:0 0 0 .12rem;
 }
+.top_left_menu{
+    height:28px;
+    line-height:28px;
+}
+.top_right_menu{
+    margin:0 0.15rem 0 0;
+}
 .top_nav_fixed .top_menu_list{
     width:100%;
     /*background:#fff;*/
@@ -610,11 +617,11 @@ i{
 .store_menu_box{
     color:#333;
 }
-.top_menu_box a.current:before{
+.top_left_menu a.current:before{
     position: absolute;
     z-index: 1;
     left: 50%;
-    bottom: -5px;
+    bottom: -12px;
     display: inline-block;
     height: 30px;
     width: 30px;
@@ -624,6 +631,9 @@ i{
     transform-origin: center;
     transition: all 0.5s;
     margin-left: -15px;
+}
+.top_menu_box a.current:before{
+
 }
 /*.top_menu_box a.current{
     border-bottom:1px solid #e60012;
