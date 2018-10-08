@@ -108,12 +108,9 @@ EOF;
         $input->SetNotify_url($payInfo['notify_url']); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
         $input->SetTrade_type("NATIVE"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
         $input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
-        print_r($input);exit;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
-        print_r($result);exit;
         $url2 = $result["code_url"];
-        print_r($url2);exit;
         Pay::payQRcode($url2);
     }
 
@@ -148,6 +145,7 @@ EOF;
         $input->SetGoods_tag("test3");
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("MWEB");				//支付类型
+        print_r($input);exit;
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
         $html = <<<EOF
