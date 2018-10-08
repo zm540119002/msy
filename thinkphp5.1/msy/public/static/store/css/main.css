@@ -892,6 +892,9 @@ transparent;
 .top_nav_fixed .l-r-sides a{
     display:inline-block;  
 }
+.top_nav_fixed .l-r-sides a.top_icon{
+    width: 0.64rem;
+}
 .promotional-goods-list a{
     position:absolute;
     right:0;
