@@ -5,7 +5,7 @@ class Payment extends MallBase {
     //订单-支付
     public function orderPayment(){
         $payInfo = array(
-            'sn'=>generateSN(),
+            'sn'=>generateSN(12),
             'actually_amount'=>0.01,
             'cancel_back' => url('payCancel'),
             'fail_back' => url('payFail'),
