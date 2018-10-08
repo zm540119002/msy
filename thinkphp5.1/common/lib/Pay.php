@@ -145,7 +145,6 @@ EOF;
         $input->SetGoods_tag("test3");
         $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
         $input->SetTrade_type("MWEB");				//支付类型
-        print_r($input);exit;
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
         $html = <<<EOF
