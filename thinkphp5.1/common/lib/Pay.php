@@ -125,6 +125,7 @@ EOF;
         $size = 10; //生成图片大小
         $frameSize = 2; //边框像素
         $saveAndPrint = true;
+        print_r($object);exit;
         $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
     }
 
