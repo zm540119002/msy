@@ -39,7 +39,7 @@ class Index extends MallBase{
         //银联支付
         $order = [
             'sn'=>generateSN(),
-            'actually_amount'=>1,
+            'actually_amount'=>0.01,
             'create_time'=>time(),
         ];
         $model = new \common\component\payment\unionpay\unionpay;
