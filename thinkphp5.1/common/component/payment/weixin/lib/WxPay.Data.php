@@ -24,7 +24,6 @@ class WxPayDataBase
 	{
 		$sign = $this->MakeSign();
 		$this->values['sign'] = $sign;
-		print_r($sign);exit;
 		return $sign;
 	}
 	
