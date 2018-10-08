@@ -118,7 +118,7 @@ EOF;
     public static function payQRcode($url){
         //生成二维码图片
         $object = new \common\component\code\Qrcode();
-        $qrcodePath = config('upload_dir.uploads');//保存文件路径
+        $qrcodePath = config('upload_dir.upload_path');//保存文件路径
         $fileName = time().'.png';//保存文件名
         $outFile = $qrcodePath.$fileName;
         $level = 'L'; //容错级别
