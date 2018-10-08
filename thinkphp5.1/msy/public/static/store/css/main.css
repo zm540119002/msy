@@ -890,10 +890,10 @@ transparent;
     display: block;  
 }
 .top_nav_fixed .l-r-sides a{
-    display:inline-block;  
+    /*display:inline-block;  */
 }
 .top_nav_fixed .l-r-sides a.top_icon{
-    width: 0.64rem;
+    /*width: 0.64rem;*/
 }
 .promotional-goods-list a{
     position:absolute;
@@ -1384,7 +1384,7 @@ input.special{
     /*width:112px;*/
 }
 .store_mall_status .store-logo-img,.factory-log-img{
-    max-width:30px;
+    /*max-width:30px;*/
 }
 .store-type-item{
     margin:0 0 0 30px;
@@ -1684,9 +1684,11 @@ input.special{
     border-radius:4px;
 }
 .set_shopowner{
-    padding:.05rem 0.10rem;
+    width:1rem;
+    padding:.05rem 0.18rem;
     border:1px solid #39b54a;
     border-radius:4px;
+    text-align: center;
 }
 .set_top_info{
     text-align: center;

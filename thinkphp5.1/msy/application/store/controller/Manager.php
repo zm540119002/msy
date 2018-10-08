@@ -23,11 +23,10 @@ class Manager extends \common\controller\FactoryBase
             $modelStore = new \common\model\Store();
             $config = [
                 'field' => [
-                    '*',
+                    's.id','s.name','s.store_type',
                 ],
             ];
             $list = $modelStore->getList($config);
-            print_r($list);exit;
             $this->assign('list',$list);
             return view('store_list_tpl');
         }else{

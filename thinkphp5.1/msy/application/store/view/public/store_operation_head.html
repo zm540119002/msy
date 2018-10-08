@@ -1,16 +1,21 @@
-<section class="top_nav_fixed">
-    <div class="top_bar columns_flex l-r-sides store_operation_head">
-        {include file="public/home_page" /}
+<section class="top_nav_fixed top_nav_store">
+    <div class="top_bar columns_flex l-r-sides ">
+        <!--{include file="public/home_page" /}-->
         <div class="">
-            <img class="factory-log-img left" src="" alt="">
+            <img class="store-logo-img left" src="" alt="">
             <span class="factory-name"></span>
         </div>
         <div class="">
+            <div class=" columns_flex">
+                <a href="javascript:void(0);" class="shopping_cart top_icon"></a>
+                <a href="javascript:void(0);" class="personal_center top_icon"></a>
+                <a href="{:url('Index/index')}" class="home top_icon"></a>
+            </div>
             <a href="javascript:void(0);" class="switch-account">切换我的店铺></a>
         </div>
     </div>
 </section>
-<section class="columns_flex l-r-sides store_mall_status">
+<!--<section class="columns_flex l-r-sides store_mall_status">
     <div>
         <input class="storeId" type="hidden" value=""/>
         <img class="left store-logo-img" src="" alt="">
@@ -23,7 +28,7 @@
         <a href="javascript:void(0);" class="personal_center left">我的</a>
         <a href="javascript:void(0);" class="my-store">我的店铺</a>
     </div>
-</section>
+</section>-->
 {include file="public/factory_list_tpl" /}
 {include file="store/list_layer" /}
 <script type="text/javascript">
