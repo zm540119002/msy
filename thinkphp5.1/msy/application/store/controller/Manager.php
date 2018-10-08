@@ -23,10 +23,20 @@ class Manager extends \common\controller\FactoryBase
             $modelStore = new \common\model\Store();
             $config = [
                 'field' => [
-                    's.id','s.name','s.store_type',
+                    's.id','s.name','s.store_type','s.run_type',
+                    'f.id','f.name factory_name',
+//                    'u.id','u.nickname','u.mobile_phone'
+                ],'leftJoin' => [
+                    ['factory f','f.id = s.factory_id'],
+//                    ['user_factory uf','uf.factory_id = s.factory_id'],
+//                    ['user u','u.id = uf.user_id'],
+                ],'where' => [
+                    ['s.status','=',0],
+//                    ['uf.type','=',3],
                 ],
             ];
             $list = $modelStore->getList($config);
+//            print_r($modelStore->getLastSql());exit;
             $this->assign('list',$list);
             return view('store_list_tpl');
         }else{

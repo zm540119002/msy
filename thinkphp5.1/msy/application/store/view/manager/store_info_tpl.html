@@ -2,12 +2,12 @@
 <li class="columns_flex l-r-sides" data-id="{$info.id}">
 	<div>
 		<p>
-			<span>某某</span>机构官方旗舰店
+			<span>{$info.factory_name|default=''}</span>机构{$info.store_type|getStoreType}
 		</p>
-		<p>美尚会云店店铺</p>
+		<p>{$info.run_type|getRunType}</p>
 		<div>
 			<span>店长:</span>
-			<input type="text" value="{$info.name|default=''}" name="name" readonly="readonly"/>
+			<input type="text" value="{$info.nickname|default=''}" name="name" readonly="readonly"/>
 		</div>
 		<div>
 			<span>手机号码:</span>
