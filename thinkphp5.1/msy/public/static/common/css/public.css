@@ -2469,6 +2469,9 @@ input[type=text]::-webkit-focus-inner {
     margin:0 0 10px 0;
 }
 /*swiper滑动*/
+.swiper_banner_wrapper .swiper-container{
+    height:4.5rem;
+}
  .swiper-container {
     position: relative;
     width: 100%;
