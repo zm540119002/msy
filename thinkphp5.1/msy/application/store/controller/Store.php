@@ -16,7 +16,7 @@ class Store extends \common\controller\FactoryBase
         
         $config = [
             'where' => [
-                ['factory_id','=',$this -> factory['id']],
+                ['s.factory_id','=',$this -> factory['id']],
             ],'join' => [
                 ['record r','r.id = s.foreign_id','left'],
                 ['brand b','b.id = s.foreign_id','left']

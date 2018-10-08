@@ -72,7 +72,6 @@ class AcpService {
 		if(isset($params['signature'])){
 			unset($params['signature']);
 		}
-		
 		$result = false;
 		
 		if($params['signMethod']=='01') {
@@ -87,7 +86,6 @@ class AcpService {
 				$logger->LogInfo ( "摘要sha1x16 >" . $params_sha1x16 );
 				// 签名
 				$result = openssl_sign ( $params_sha1x16, $signature, $private_key, OPENSSL_ALGO_SHA1);
-		
 				if ($result) {
 					$signature_base64 = base64_encode ( $signature );
 					$logger->LogInfo ( "签名串为 >" . $signature_base64 );
@@ -101,13 +99,16 @@ class AcpService {
 				$logger->LogInfo ( "摘要sha256x16 >" . $params_sha256x16 );
 				// 签名
 				$result = openssl_sign ( $params_sha256x16, $signature, $private_key, 'sha256');
+
 				if ($result) {
 					$signature_base64 = base64_encode ( $signature );
 					$logger->LogInfo ( "签名串为 >" . $signature_base64 );
 					$params ['signature'] = $signature_base64;
 				} else {
 					$logger->LogInfo ( ">>>>>签名失败<<<<<<<" );
+					print_r($logger);exit;
 				}
+
 			} else {
 				$logger->LogError ( "wrong version: " + $params['version'] );
 				$result = false;
@@ -116,6 +117,7 @@ class AcpService {
 			$logger->LogError ( "signMethod不正确");
 			$result = false;
 		}
+
 		$logger->LogInfo ( '=====签名报文结束======' );
 		return $result;
 	}
