@@ -1,0 +1,101 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">{/block}
+{block name="content"}
+<section id="storeLayerTipc" style="display: none;">
+	<div>
+		<span class=""></span>
+		<p class="comfirm-text">确定要<span class="textTipc">激活</span>以下店铺？</p>
+	</div>
+</section>
+<article class="f24">
+	{include file="public/store_deploy_head" /}
+	<section class="specific_type bottomLine store_deploy_nav">
+		<div class="columns_flex f20 l-r-sides store_deploy_bar">
+			<a href="{:url('Manager/index')}">管理员</a>
+			<a href="{:url('Record/preview')}">档案</a>
+			<a href="{:url('Brand/manage')}">商标</a>
+			<a href="{:url('Store/manage')}">开店</a>
+			<a href="{:url('Store/getList')}" class="current">店铺</a>
+			<a href="{:url('Shop/index')}">门店</a>
+			<a href="javascript:void(0);">财务</a>
+		</div>
+	</section>
+	<!--设置店长-->
+	<section id="setShopAccount" style="display:none;">
+		<div class="set_top_info">
+			<p>
+				<span>XXX</span>机构官方旗舰店
+			</p>
+			<p>美尚会云店店铺</p>
+		</div>
+		<form class="setShopForm">
+			<div class="account-field">
+				<input type="text" class="shopper_name" placeholder="店长姓名" name="name">
+			</div>
+			<div class="account-field">
+				<input type="tel" class="shopper_mobile" placeholder="手机号码" name="mobile_phone">
+			</div>
+		</form>
+		<div class="error_tipc"></div>
+	</section>
+	<section class="f24 account-content-wrapper">
+		<ul class="list"></ul>
+	</section>
+
+</article>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function(){
+		//页面初始化
+		var config = {
+			url: module + 'Manager/set'
+		};
+		getList(config);
+		//设置店长
+		var setShopAccount=$('#setShopAccount').html();
+		$('body').on('click','.set_shopowner',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['设置线上店铺店长','border-bottom:1px solid #d9d9d9;color:#0066cc;'],
+				className:'setShopAccountLayer',
+				content:setShopAccount,
+				btn:['确定','取消'],
+				success:function(){
+					copyDataByName(_this,$('.setShopAccountLayer .setShopForm'));
+				},
+				yes:function(index){
+					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
+					var content='';
+					if(!postData.name){
+						content='请填写姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					var config = {
+						url:module + 'Manager/set',
+						postData:postData,
+						fromObj:$('.setShopAccountLayer .setShopForm'),
+						toObj:_this,
+						index:index
+					};
+					dialogFormEdit(config);
+					layer.close(index)
+				}
+			})
+		});
+
+		var text_length = $('.input_size').val().length;  //获取当前长度
+		console.log(text_length);
+		var width = parseInt(text_length)*12;
+		$('.input_size').css('width',width+'px');
+	});
+</script>
+{/block}
