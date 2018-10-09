@@ -93,9 +93,6 @@ class Store extends Base {
 			return errorMsg('缺少店铺ID');
 		}
 		if($postData['mobile_phone']){//手机号存在
-			if(!isMobile($postData['mobile_phone'])){
-				return errorMsg('请输入正确的手机号码');
-			}
 			//验证用户是否存在
 			$userId = $this->checkUserByMobilePhone($postData['mobile_phone']);
 			$this->startTrans();//事务开启
@@ -104,43 +101,52 @@ class Store extends Base {
 				$postData['type'] = 0;
 				$postData['nickname'] = trim($postData['name']);
 				$postData['create_time'] = time();
-				$res = $this->save($postData);
+				$modelUser = new \common\model\User();
+				$res = $modelUser->save($postData);
 				if($res===false){
-					$this->rollback();//事务回滚
-					return errorMsg('失败',$this->getError());
+					$modelUser->rollback();//事务回滚
+					return errorMsg('失败',$modelUser->getError());
 				}
-				$userId = $this->getAttr('id');
+				$userId = $modelUser->getAttr('id');
 			}
-			//验证用户是否为店长
-			$userStoreId = $this->checkManager($userId,$factoryId,$storeId);
-			if(!$userStoreId){//不是管理员
-				$postData['type'] = 3;
-				$postData['user_id'] = $userId;
-				$postData['factory_id'] = $factoryId;
-				$postData['store_id'] = $storeId;
-				$modelUserStore = new \common\model\UserStore();
-				$res = $modelUserStore->save($postData);
-				if($res===false){
-					$this->rollback();//事务回滚
-					return errorMsg('失败',$this->getError());
-				}
-				$userStoreId = $modelUserStore->getAttr('id');
+			//验证是否存在店长
+			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
+			$modelUserStore = new \common\model\UserStore();
+			if($userStoreId){//存在测删除
+				$modelUserStore->delById($userStoreId,false);
 			}
+			$postData['type'] = 3;
+			$postData['user_id'] = $userId;
+			$postData['factory_id'] = $factoryId;
+			$postData['store_id'] = $storeId;
+			$res = $modelUserStore->save($postData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$userStoreId = $modelUserStore->getAttr('id');
 			$this->commit();//事务提交
+
 			$postData['id'] = $userId;
 			$postData['user_store_id'] = $userStoreId;
 			return successMsg('成功！',$postData);
 		}else{//手机号不存在
+			//验证是否存在店长
+			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
+			$modelUserStore = new \common\model\UserStore();
+			if($userStoreId){//存在测删除
+				$modelUserStore->delById($userStoreId,false);
+			}
+			return successMsg('删除成功！');
 		}
 	}
 
-	/**检查账号
+	/**验证用户是否为店长
 	 */
-	public function checkManager($userId,$factoryId,$storeId){
+	private function checkManagerExist($factoryId,$storeId){
 		$modelUserStore = new \common\model\UserStore();
 		$where = [
-			['user_id','=',$userId],
-			['storeId','=',$storeId],
+			['store_id','=',$storeId],
 			['factory_id','=',$factoryId],
 			['status','<>',2],
 			['type','=',3],
