@@ -1429,7 +1429,7 @@ background-position: 0 -27px;
     background: #fff;
     text-align: center;*/
     position: absolute;
-    top: 50%;
+    top:25%;
     /*transform: translateY(-50%);*/
 }
 .goodsvideoLayer .layui-m-layercont,
