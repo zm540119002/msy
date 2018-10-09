@@ -18,18 +18,13 @@ class alipayMobile
      * 析构流函数
      */
     public function  __construct() {
-        unset($_GET['pay_code']);   // 删除掉 以免被进入签名
-        unset($_REQUEST['pay_code']);// 删除掉 以免被进入签名
-        $model = new \common\model\Plugin;
-        $paymentPlugin = $model->where("code='alipayMobile' and  type = 'payment' ")->find(); // 找到支付插件的配置
-        $config_value = unserialize($paymentPlugin['config_value']); // 配置反序列化
-        $this->alipay_config['alipay_pay_method']= $config_value['alipay_pay_method']; // 1 使用担保交易接口  2 使用即时到帐交易接口s
-        $this->alipay_config['partner']       = $config_value['alipay_partner'];//合作身份者id，以2088开头的16位纯数字
-        $this->alipay_config['seller_email']  = $config_value['alipay_account'];//收款支付宝账号，一般情况下收款账号就是签约账号
-        $this->alipay_config['key']	      = $config_value['alipay_key'];//安全检验码，以数字和字母组成的32位字符
+        $this->alipay_config['alipay_pay_method']= 1; // 1 使用担保交易接口  2 使用即时到帐交易接口
+        $this->alipay_config['partner']       = '2088821868456923';//合作身份者id，以2088开头的16位纯数字
+        $this->alipay_config['seller_email']  = '1039188986@qq.com';//收款支付宝账号，一般情况下收款账号就是签约账号
+        $this->alipay_config['key']	      = 'cidoucoly59f1gwnbg51qqavdetduu2n';//安全检验码，以数字和字母组成的32位字符
         $this->alipay_config['sign_type']     = strtoupper('MD5');//签名方式 不需修改
         $this->alipay_config['input_charset'] = strtolower('utf-8');//字符编码格式 目前支持 gbk 或 utf-8
-        $this->alipay_config['cacert']        = getcwd().'\\Component\\payment\\alipayMobile\\cacert.pem'; //ca证书路径地址，用于curl中ssl校验 //请保证cacert.pem文件在当前文件夹目录中
+        $this->alipay_config['cacert']        = getcwd().'\\component\\payment\\alipayMobile\\cacert.pem'; //ca证书路径地址，用于curl中ssl校验 //请保证cacert.pem文件在当前文件夹目录中
         $this->alipay_config['transport']     = 'http';//访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
     }    
     /**
@@ -49,7 +44,6 @@ class alipayMobile
                         "partner" => trim($this->alipay_config['partner']), //合作身份者ID，签约账号，以2088开头由16位纯数字组成的字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
                         'seller_id'=> trim($this->alipay_config['partner']), //收款支付宝账号，以2088开头由16位纯数字组成的字符串，一般情况下收款账号就是签约账号
                         "key" => trim($this->alipay_config['key']), // MD5密钥，安全检验码，由数字和字母组成的32位字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
-                        // "seller_email" => trim($this->alipay_config['seller_email']),                                            
                         "notify_url"	=> SITE_URL.url('Payment/notifyUrl',array('pay_code'=>'alipayMobile')) , //服务器异步通知页面路径 //必填，不能修改
                         "return_url"	=> SITE_URL.url('Payment/returnUrl',array('pay_code'=>'alipayMobile')),  //页面跳转同步通知页面路径
                         "sign_type"     => strtoupper('MD5'), //签名方式
@@ -76,7 +70,6 @@ class alipayMobile
             $alipaySubmit = new \AlipaySubmit($this->alipay_config);
             $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
             echo($html_text);exit;
-            //return $html_text;
     }
     
     /**
