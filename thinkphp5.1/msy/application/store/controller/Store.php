@@ -1,15 +1,12 @@
 <?php
 namespace app\store\controller;
-class Store extends \common\controller\FactoryBase
-{
-
+class Store extends \common\controller\FactoryBase{
     //开店部署首页
     public function index(){
         return $this->fetch('index');
     }
 
-    /**
-     * 店铺管理
+    /**店铺管理
      */
     public function manage(){
         $model = new \common\model\Store();
@@ -30,8 +27,7 @@ class Store extends \common\controller\FactoryBase
         return $this->fetch();
     }
 
-    /**
-     * 店铺管理
+    /**店铺管理
      */
     public function edit(){
         $model = new \common\model\Store();
@@ -107,6 +103,7 @@ class Store extends \common\controller\FactoryBase
     //设置店铺店长
     public function setManager(){
         if(request()->isAjax()){
+            $modelStore = new \common\model\Store();
         }
     }
 }
