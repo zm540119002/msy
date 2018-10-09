@@ -511,7 +511,7 @@ i{
 }
 .top-title a.home{
     /*background-position:0 -172px;*/
-    background-position:0 -4.3rem;
+    background-position:0 -4.288rem;
 }
 .top_bar a.goods-video{
     width:28px;
@@ -1512,11 +1512,11 @@ background-position: 0 -27px;
 .weui-flex-item .base_info,
 .weui-flex-item .brand-name{
     background:#fff url(../../common/img/base_s_info.png) no-repeat center 0;
-    background-size:40px auto;
+    background-size:0.68rem auto;
 }
 .weui-flex-item.current .base_info{
     background:#fff url(../../common/img/base_info.png) no-repeat center 0;
-    background-size:40px auto;
+    background-size:0.68rem auto;
 }
 .weui-flex-item .base_address{background:#fff url(../../common/img/base_address.png) no-repeat center 0;background-size:40px auto;}
 .weui-flex-item .base_s_address{background:#fff url(../../common/img/base_s_address.png) no-repeat center 0;background-size:40px auto;}
