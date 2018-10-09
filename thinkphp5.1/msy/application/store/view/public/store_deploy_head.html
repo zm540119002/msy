@@ -16,10 +16,15 @@
     </div>
 </section>
 {include file="public/factory_list_tpl" /}
+{include file="public/store_list_tpl" /}
 <script type="text/javascript">
     $(function(){
         $('body').on('click','.switch-account',function(){
             setDefaultFactory();
+        });
+        //选择店铺
+        $('body').on('click','.switch_store',function(){
+            setDefaultStore();
         });
     });
 </script>
