@@ -3073,7 +3073,7 @@ input[type=text]::-webkit-focus-inner {
     width:1.88rem;
     margin: 0 0 0 .15rem;
 }
-.layui-m-layer{
+.layui-m-layer.layui-m-layer1{
     position: fixed;
     z-index: 19891014;
     top: 0;
