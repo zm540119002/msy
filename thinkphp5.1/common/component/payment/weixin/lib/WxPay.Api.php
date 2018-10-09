@@ -257,7 +257,6 @@ class WxPayApi
 		$inputObj->SetAppid(config('wx_config.appid'));//公众账号ID
 		$inputObj->SetMch_id(config('wx_config.mchid'));//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
-		
 		$inputObj->SetSign();//签名
 		$xml = $inputObj->ToXml();
 		
