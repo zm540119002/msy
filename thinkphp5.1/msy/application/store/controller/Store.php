@@ -8,8 +8,7 @@ class Store extends \common\controller\FactoryBase
         return $this->fetch('index');
     }
 
-    /**
-     * 店铺管理
+    /**店铺管理
      */
     public function manage(){
         $model = new \common\model\Store();
@@ -30,8 +29,7 @@ class Store extends \common\controller\FactoryBase
         return $this->fetch();
     }
 
-    /**
-     * 店铺管理
+    /**店铺管理
      */
     public function edit(){
         $model = new \common\model\Store();

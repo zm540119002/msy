@@ -112,7 +112,7 @@ EOF;
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
 //        Pay::payQRcode($url2);
-        return '<img alt="模式二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
+        return '<img alt="二扫码支付" src="/index.php?m=Home&c=Index&a=qr_code&data='.urlencode($url2).'" style="width:110px;height:110px;"/>';
 
     }
 
@@ -131,7 +131,6 @@ EOF;
         $frameSize = 2; //边框像素
         $saveAndPrint = true;
         $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
-        return $outFile;
     }
 
     /**
