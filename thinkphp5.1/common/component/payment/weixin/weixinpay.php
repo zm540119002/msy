@@ -12,18 +12,18 @@ require_once(dirname(__FILE__)  . '/WxPay.JsApiPay.php');
 require_once(dirname(__FILE__)  . '/WxPay.NativePay.php');
 require_once(dirname(__FILE__)  . '/log.php');
 
-class Pay{
+class weixinpay{
     /**支付端判断
      * @param $payInfo
      * @param $backUrl
      */
     public static function wxPay($payInfo){
         if (!isPhoneSide()) {//pc端微信扫码支付
-            Pay::pc_pay($payInfo);
+            weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
-            Pay::h5_pay($payInfo);
+            weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
-            Pay::getJSAPI($payInfo);
+            weixinpay::getJSAPI($payInfo);
         }
     }
 
@@ -111,7 +111,7 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
-        Pay::payQRcode($url2);
+        weixinpay::payQRcode($url2);
     }
 
     //生成支付二维码
