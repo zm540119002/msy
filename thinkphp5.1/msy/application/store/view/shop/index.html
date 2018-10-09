@@ -2,14 +2,67 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="store_css/main.css">{/block}
 {block name="content"}
-<section id="storeLayerTipc" style="display: none;">
-	<div>
-		<span class=""></span>
-		<p class="comfirm-text">确定要<span class="textTipc">激活</span>以下店铺？</p>
-	</div>
+<!--设置店长-->
+<section id="entryShopInfo" style="display:none;">
+	<form class="entryShopForm">
+		<div class="account-field">
+			<input type="text" class="store_name" placeholder="门店名称" name="store_name">
+		</div>
+		<div class="account-field">
+			<input type="text" class="store_name" placeholder="店长姓名" name="name">
+		</div>
+		<div class="account-field">
+			<input type="tel" class="store_mobile" placeholder="手机号码" name="mobile_phone">
+		</div>
+	</form>
+	<div class="error_tipc"></div>
+</section>
+<section style="display: none;" id="storeInfoList">
+	<li class="columns_flex l-r-sides">
+		<div>
+			<p>
+				<input class="input_size" type="text" value="" name="store_name" readonly="readonly">
+				<span>门店</span>
+			</p>
+			<div>
+				<span>店长:</span>
+				<input type="text" value="" name="name" readonly="readonly"/>
+			</div>
+			<div>
+				<span>手机号码:</span>
+				<input type="tel" value="" name="mobile_phone" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="operate-btn">
+			<a href="javascript:void(0);" class="modify-account">
+				<span></span>
+				修改
+			</a>
+			<a href="javascript:void(0);" class="delete-account">
+				<span></span>
+				删除
+			</a>
+		</div>
+	</li>
 </section>
 <article class="f24">
 	{include file="public/store_deploy_head" /}
+	<section class="top_nav_fixed top_nav_store">
+		<div class="top_bar top-switch-bar columns_flex l-r-sides">
+			<div class="">
+				<img class="left store-logo-img" src="" alt="">
+				<span>是防守对方</span>
+			</div>
+			<div class="">
+				<div class="top_bar columns_flex">
+					<a href="javascript:void(0);" class="shopping_cart"></a>
+					<a href="javascript:void(0);" class="personal_center"></a>
+					<a href="/index.php/store/Index/index.html" class="home"></a>
+				</div>
+				<a href="javascript:void(0);" class="switch-account">切换美容店家账号&gt;</a>
+			</div>
+		</div>
+	</section>
 	<section class="specific_type bottomLine store_deploy_nav">
 		<div class="columns_flex f20 l-r-sides store_deploy_bar">
 			<a href="{:url('Manager/index')}">管理员</a>
@@ -21,24 +74,21 @@
 			<a href="javascript:void(0);">财务</a>
 		</div>
 	</section>
-	<!--添加管理员账号-->
-	<section id="addAdminAccount" style="display:none;">
-		<form class="addAdminForm">
-			<div class="account-field">
-				<input type="text" class="admin-name" placeholder="姓名" name="name">
+	<section class="columns_flex l-r-sides content-padding">
+		<div>
+			<img class="left" src="" alt="" />
+			<div>
+				<p><span>某某XX</span>机构官方旗舰店</p>
+				<div>美尚会云店店铺</div>
 			</div>
-			<div class="account-field">
-				<input type="tel" class="admin-mobile" placeholder="手机号码" name="mobile_phone">
-			</div>
-		</form>
-		<div class="error_tipc"></div>
-	</section>
-	<section class="f24 account-content-wrapper admin-account-wrapper">
-		<div class="account-list-content">
-			<ul class="account-list admin-account-list list"></ul>
+		</div>
+		<div>
+			<a href="javascript:void(0);" class="text-color-gr">切换店铺></a>
 		</div>
 	</section>
-	<a href="javascript:void(0);" class="addManageAccount foot-btn f24">新增管理员账号</a>
+	<section class="f24 account-content-wrapper">
+		<ul class="list"></ul>
+	</section>
 </article>
 {/block}
 {block name="common"}{/block}
@@ -51,19 +101,24 @@
 			url: module + 'Manager/index'
 		};
 		getList(config);
-		//创建管理员账号
-		var addAdminAccount=$('#addAdminAccount').html();
-		$('body').on('click','.addManageAccount',function(){
+		//设置店长
+		var entryShopInfo=$('#entryShopInfo').html();
+		$('body').on('click','.entry_shop_info',function(){
+			var _this=$(this).parents('.list li');
 			layer.open({
-				title:['新增管理员账号','border-bottom:1px solid #d9d9d9;'],
-				className:'addAdminLayer',
-				content:addAdminAccount,
+				title:['录入线下门店信息','border-bottom:1px solid #d9d9d9;'],
+				className:'entryShopInfoLayer',
+				content:entryShopInfo,
 				btn:['确定','取消'],
 				yes:function(index){
-					var postData = $('.addAdminForm').serializeObject();
+					var postData = $('.entryShopForm').serializeObject();
+					var html=$('#storeInfoList').html();
+					var listLength=$('.list li').length;
 					var content='';
-					if(!postData.name){
-						content='请填写姓名';
+					if(!postData.store_name){
+						content='请填写门店名称';
+					}else if(!postData.name){
+						content='请填写店长姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
 					}
@@ -71,29 +126,32 @@
 						errorTipc(content);
 						return false;
 					}
-					var config = {
-						url:module + 'Manager/edit',
-						postData:postData,
-						index:index
-					};
-					dialogFormAdd(config);
+					if(listLength<1){
+						$('.list').append(html);
+
+					}else{
+						$('.list li:first').before(html);
+					}
+					copyDataByName(_this,$('.entryShopInfoLayer .entryShopForm'));
+					layer.close(index);
 				}
 			});
 		});
-		//修改管理员账号
+		//修改店长
 		$('body').on('click','.modify-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
-				title:['修改账号','border-bottom:1px solid #d9d9d9;'],
-				className:'addAdminLayer',
-				content:addAdminAccount,
+				title:['修改线下门店信息','border-bottom:1px solid #d9d9d9;'],
+				className:'setShopAccountLayer',
+				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function(){
-					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
+					copyDataByName(_this,$('.setShopAccountLayer .setShopForm'));
 				},
 				yes:function(index){
-					var postData=$('.addAdminForm').serializeObject();
+					var postData={};
 					var content='';
+					postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -103,28 +161,28 @@
 						errorTipc(content);
 						return false;
 					}
-					postData.id = _this.data('id');
 					var config = {
 						url:module + 'Manager/edit',
 						postData:postData,
-						fromObj:$('.addAdminLayer .addAdminForm'),
+						fromObj:$('.setShopAccountLayer .setShopForm'),
 						toObj:_this,
 						index:index
 					};
 					dialogFormEdit(config);
+					layer.close(index)
 				}
-			});
+			})
 		});
-		//删除管理员账号
+		//删除店长
 		$('body').on('click','.delete-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
-				title:['删除账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
-				className:'addAdminLayer',
-				content:addAdminAccount,
+				title:['删除线下门店信息','border-bottom:1px solid #d9d9d9;'],
+				className:'setShopAccountLayer',
+				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function(){
-					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
+					copyDataByName(_this,$('.setShopAccountLayer .setShopForm'));
 				},
 				yes:function(index){
 					var postData = {};
