@@ -80,6 +80,26 @@ class Base extends \think\Model {
 		}
 		return successMsg('成功');
 	}
+	
+	//删除
+	public function delById($id,$tag=true){
+		$where = [
+			['status', '=', 0],
+		];
+		if(!$id){
+			return errorMsg('参数错误');
+		}
+		$where[] = ['id', '=', $id];
+		if($tag){//标记删除
+			$result = $this->where($where)->setField('status',2);
+		}else{
+			$result = $this->where($where)->delete();
+		}
+		if(!$result){
+			return errorMsg('失败',$this->getError());
+		}
+		return successMsg('成功');
+	}
 
 	/**根据手机号码检查正常账号
 	 */
@@ -92,6 +112,7 @@ class Base extends \think\Model {
 			['mobile_phone','=',$mobilePhone],
 			['status','<>',2],
 		];
-		return $modelUser->where($where)->value('id');
+		$res = $modelUser->where($where)->value('id');
+		return $res;
 	}
 }

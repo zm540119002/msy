@@ -9,26 +9,12 @@ class Manager extends \common\model\Base {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
-	/**检查管理员账号
-	 */
-	public function checkManager($userId,$factoryId){
-		$modelUserFactory = new \common\model\UserFactory();
-		$where = [
-			['user_id','=',$userId],
-			['factory_id','=',$factoryId],
-			['status','<>',2],
-			['type','=',2],
-		];
-		return $modelUserFactory->where($where)->value('id');
-	}
-
 	//编辑
 	public function edit($factoryId){
 		if(!intval($factoryId)){
 			return errorMsg('缺少采购商ID');
 		}
 		$postData = input('post.');
-		$modelUserFactory = new \common\model\UserFactory();
 		//用户数据验证
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('manager')->check($postData)){
@@ -62,6 +48,7 @@ class Manager extends \common\model\Base {
 				$postData['type'] = 2;
 				$postData['user_id'] = $userId;
 				$postData['factory_id'] = $factoryId;
+				$modelUserFactory = new \common\model\UserFactory();
 				$res = $modelUserFactory->save($postData);
 				if($res===false){
 					$this->rollback();//事务回滚
@@ -123,5 +110,18 @@ class Manager extends \common\model\Base {
 			return errorMsg('失败',$modelUserFactory->getError());
 		}
 		return successMsg('成功');
+	}
+
+	/**检查管理员账号
+	 */
+	private function checkManager($userId,$factoryId){
+		$modelUserFactory = new \common\model\UserFactory();
+		$where = [
+			['user_id','=',$userId],
+			['factory_id','=',$factoryId],
+			['status','<>',2],
+			['type','=',2],
+		];
+		return $modelUserFactory->where($where)->value('id');
 	}
 }

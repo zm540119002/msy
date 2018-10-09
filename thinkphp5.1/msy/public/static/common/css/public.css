@@ -1428,6 +1428,9 @@ background-position: 0 -27px;
     transform: translate(-50%, -50%);
     background: #fff;
     text-align: center;*/
+    position: absolute;
+    top:0;
+    /*transform: translateY(-50%);*/
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
@@ -2041,12 +2044,12 @@ background-position: 0 -27px;
 .input-text{
     display: block;
     width:100%;
-    height:38px;
-    padding:5px 0;
+    height:0.64rem;
+    padding:0.08rem 0;
     border:1px solid #d9d9d9;
     border-radius:3px;
     background:none;
-    text-indent: 10px;
+    text-indent:0.15rem;
     box-sizing:border-box;
     font-size:.24rem;
 }
@@ -2647,12 +2650,15 @@ input[type=text]::-webkit-focus-inner {
 }
 .list-label{
     display: inline-block;
-    width:80px;
+    width:1.02rem;
     margin:0 0.08rem 0 0;
     text-align:right;
     float:left;
 }
-
+.list input[readonly="readonly"]{
+    font-size:.24rem;
+    vertical-align: 0;
+}
 .account-item{
     margin:0 0 0.25rem 0;
 }
@@ -2955,7 +2961,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .form_goods_type a{
     display:inline-block;
-    width:100px;
+    width:1.70rem;
     padding:.08rem 0 .06rem;
     border:1px solid #39b54a;
     border-radius:5px;
@@ -3066,4 +3072,12 @@ input[type=text]::-webkit-focus-inner {
     display:inline-block;
     width:1.88rem;
     margin: 0 0 0 .15rem;
+}
+.layui-m-layer.layui-m-layer1{
+    position: fixed;
+    z-index: 19891014;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }

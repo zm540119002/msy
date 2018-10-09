@@ -13,7 +13,7 @@ class Store extends \common\controller\FactoryBase{
         
         $config = [
             'where' => [
-                ['s.factory_id','=',$this -> factory['id']],
+                ['s.factory_id','=',$this->factory['id']],
             ],'join' => [
                 ['record r','r.id = s.foreign_id','left'],
                 ['brand b','b.id = s.foreign_id','left']
@@ -32,7 +32,7 @@ class Store extends \common\controller\FactoryBase{
     public function edit(){
         $model = new \common\model\Store();
         if(request()->isAjax()){
-            return $model -> edit($this -> factory['id']);
+            return $model -> edit($this->factory['id']);
         }else{
             // 企业旗舰店
             $modelFactory = new \common\model\Record();
@@ -74,7 +74,7 @@ class Store extends \common\controller\FactoryBase{
     public function setStoreStatus(){
         if(request()->isAjax()){
             $model = new \common\model\Store();
-            return $model->edit($this -> factory['id']);
+            return $model->edit($this->factory['id']);
         }
     }
 
@@ -85,9 +85,11 @@ class Store extends \common\controller\FactoryBase{
             $config = [
                 'field' => [
                     's.id','s.name','s.store_type','s.run_type',
-                    'f.id','f.name factory_name',
+                    'f.name factory_name','us.id user_store_id','u.nickname','u.mobile_phone',
                 ],'leftJoin' => [
                     ['factory f','f.id = s.factory_id'],
+                    ['user_store us','s.id = us.store_id'],
+                    ['user u','u.id = us.user_id'],
                 ],'where' => [
                     ['s.status','=',0],
                 ],
@@ -104,6 +106,7 @@ class Store extends \common\controller\FactoryBase{
     public function setManager(){
         if(request()->isAjax()){
             $modelStore = new \common\model\Store();
+            return $modelStore->setManager($this->factory['id']);
         }
     }
 }

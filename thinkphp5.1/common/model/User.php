@@ -1,7 +1,7 @@
 <?php
 namespace common\model;
 
-class User extends \think\Model {
+class User extends Base{
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
 	// 设置主键
@@ -53,26 +53,5 @@ class User extends \think\Model {
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 		return $this->where($where)->field($field)->order($order)->paginate($pageSize);
-	}
-
-	//删除
-	public function del($tag=true){
-		$where = [
-			['status', '=', 0],
-		];
-		$id = input('post.id',0);
-		if(!$id){
-			return errorMsg('参数错误');
-		}
-		$where[] = ['id', '=', $id];
-		if($tag){//标记删除
-			$result = $this->where($where)->setField('status',2);
-		}else{
-			$result = $this->where($where)->delete();
-		}
-		if(!$result){
-			return errorMsg('失败',$this->getError());
-		}
-		return successMsg('成功');
 	}
 }

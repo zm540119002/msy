@@ -19,15 +19,14 @@ class Goods extends MallBase{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-
         $model = new \app\mall\model\Goods;
         $config=[
             'where'=>[
             ],
             'field'=>[
-                'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
+                'g.id,','g.sale_price','g.sale_type','g.shelf_status','g.create_time','g.update_time','g.inventory',
+                'g.name','g.retail_price','g.trait','g.category_id_1','g.category_id_2','g.category_id_3',
+                'g.thumb_img','g.goods_video','g.main_img','g.details_img','g.tag','g.parameters','g.sort'
             ],
             'order'=>[
                 'sort'=>'desc',
