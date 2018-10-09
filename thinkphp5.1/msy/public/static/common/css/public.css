@@ -2647,12 +2647,15 @@ input[type=text]::-webkit-focus-inner {
 }
 .list-label{
     display: inline-block;
-    width:80px;
+    width:1.02rem;
     margin:0 0.08rem 0 0;
     text-align:right;
     float:left;
 }
-
+.list input[name="name"]{
+    font-size:.24rem;
+    vertical-align: 0;
+}
 .account-item{
     margin:0 0 0.25rem 0;
 }
