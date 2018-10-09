@@ -86,6 +86,10 @@ class Store extends Base {
 	}
 
 	//设置店长
-	public function setManager(){
+	public function setManager($factoryId){
+		$storeId = (int)input('post.id');
+		if(!$storeId){
+			return errorMsg('缺少门店ID');
+		}
 	}
 }
