@@ -2652,7 +2652,7 @@ input[type=text]::-webkit-focus-inner {
     text-align:right;
     float:left;
 }
-.list input[name="name"]{
+.list input[readonly="readonly"]{
     font-size:.24rem;
     vertical-align: 0;
 }
