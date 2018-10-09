@@ -21,7 +21,7 @@ return [
     'key' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 
     //TODO:公众号支付回调函数
-    'call_back_url'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Mall/CallBack/notifyUrl",
+    'call_back_url'  => "http://".$_SERVER['HTTP_HOST']."/index.php/mall/CallBack/notifyUrl",
     'call_back_url_business'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Business/CallBack/notifyUrl",
     /**
      * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0
@@ -48,6 +48,6 @@ return [
      * API证书下载地址：https://pay.weixin.qq.com/index.php/account/api_cert，下载之前需要安装商户操作证书）
      * @var path
      */
-    'sslcert_path' => __DIR__.'/../../application/extend/component/wx_pay_api/cert/apiclient_cert.pem',
-    'sslkey_path' => __DIR__.'/../../application/extend/component/wx_pay_api/cert/apiclient_key.pem',
+    'sslcert_path' => __DIR__.'/../../../common/component/payment/weixin/cert/apiclient_cert.pem',
+    'sslkey_path' => __DIR__.'/../../../common/component/payment/weixin/cert/apiclient_key.pem',
 ];
