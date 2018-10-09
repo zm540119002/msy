@@ -103,6 +103,7 @@ class Store extends \common\controller\FactoryBase{
     //设置店铺店长
     public function setManager(){
         if(request()->isAjax()){
+            $modelStore = new \common\model\Store();
         }
     }
 }

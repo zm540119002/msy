@@ -15,7 +15,7 @@ class Store extends Base {
 	protected $alias = 's';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_common';
-	
+
 	/**编辑
 	 */
 	public function edit($factoryId=''){
@@ -83,6 +83,9 @@ class Store extends Base {
 		}else{
 			return false;
 		}
+	}
 
+	//设置店长
+	public function setManager(){
 	}
 }
