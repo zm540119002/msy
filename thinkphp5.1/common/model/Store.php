@@ -15,8 +15,8 @@ class Store extends Base {
 	protected $alias = 's';
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_common';
-	/**
-	 * 编辑
+	
+	/**编辑
 	 */
 	public function edit($factoryId=''){
 		$data = input('post.');
@@ -41,7 +41,6 @@ class Store extends Base {
 			return successMsg('提交申请成功');
 		}
 	}
-	
 	
 	//设置默认店铺
 	public function setDefaultStore($factoryId=''){
@@ -70,6 +69,7 @@ class Store extends Base {
 			return successMsg("已选择");
 		}
 	}
+
 	/**检查店铺是否属于此厂商
 	 */
 	public function checkStoreExist($id,$factoryId){
@@ -85,5 +85,4 @@ class Store extends Base {
 		}
 
 	}
-
 }
