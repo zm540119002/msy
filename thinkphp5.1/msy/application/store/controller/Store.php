@@ -1,8 +1,6 @@
 <?php
 namespace app\store\controller;
-class Store extends \common\controller\FactoryBase
-{
-
+class Store extends \common\controller\FactoryBase{
     //开店部署首页
     public function index(){
         return $this->fetch('index');
