@@ -23,10 +23,10 @@
             style: '',
             success:function(){   
                 var winHeight=$(window).height();
-                $('html,body').addClass('scrollStyle');
+                //$('html,body').addClass('scrollStyle');
                 app.init();
                 $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
-                //$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
             },
             btn:['确定','取消'],
@@ -46,7 +46,7 @@
                         location.reload();
                     }
                 });
-                $('html,body').removeClass('scrollStyle');
+                //$('html,body').removeClass('scrollStyle');
             },
             cancle:function(){
                 //$('html,body').removeClass('scrollStyle');
