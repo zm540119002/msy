@@ -16,19 +16,19 @@ class Payment extends MallBase {
 //        \common\component\payment\weixin\weixinpay::wxPay($payInfo);
 
         //支付宝支付
-//        $order = [
-//            'sn'=>generateSN(10),
-//            'actually_amount'=>0.01,
-//        ];
-//        $model = new \common\component\payment\alipayMobile\alipayMobile;
-//        return $model->get_code($order);
-        //银联支付
         $order = [
-            'sn'=>generateSN(),
+            'sn'=>generateSN(10),
             'actually_amount'=>0.01,
         ];
-        $model = new \common\component\payment\unionpay\unionpay;
+        $model = new \common\component\payment\alipayMobile\alipayMobile;
         return $model->get_code($order);
+        //银联支付
+//        $order = [
+//            'sn'=>generateSN(),
+//            'actually_amount'=>0.01,
+//        ];
+//        $model = new \common\component\payment\unionpay\unionpay;
+//        return $model->get_code($order);
     }
 
     //充值-支付
