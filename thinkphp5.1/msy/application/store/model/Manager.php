@@ -28,7 +28,6 @@ class Manager extends \common\model\Base {
 			return errorMsg('缺少采购商ID');
 		}
 		$postData = input('post.');
-		$modelUserFactory = new \common\model\UserFactory();
 		//用户数据验证
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('manager')->check($postData)){
@@ -62,6 +61,7 @@ class Manager extends \common\model\Base {
 				$postData['type'] = 2;
 				$postData['user_id'] = $userId;
 				$postData['factory_id'] = $factoryId;
+				$modelUserFactory = new \common\model\UserFactory();
 				$res = $modelUserFactory->save($postData);
 				if($res===false){
 					$this->rollback();//事务回滚
