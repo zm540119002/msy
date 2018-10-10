@@ -33,7 +33,7 @@ class Store extends Base {
 			}
 			return errorMsg('失败',$this->getError());
 		}else{
-			if(!$result = $validate->check($data)) {
+			if(!$result = $validate->scene('add')->check($data)) {
 				return errorMsg($validate->getError());
 			}
 			$data['create_time'] = time();
