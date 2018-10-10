@@ -7,9 +7,7 @@
             {else /}
             <img  class="store-logo-img left" src="public_img/default/no_pic_40.jpg" />
             {/notempty}
-            <div>
-                <span class="store-name">{$factory.name}</span>
-            </div>
+            <span class="store-name">{$factory.name}</span>
         </div>
         <div class="">
             <div class="columns_flex">
@@ -17,16 +15,8 @@
                 <a href="javascript:void(0);" class="personal_center top_icon"></a>
                 <a href="{:url('Index/index')}" class="home top_icon"></a>
             </div>
-            <a href="javascript:void(0);" class="switch-account">切换供应商账号></a>
+            <a href="javascript:void(0);" class="switch-factory">切换供应商账号></a>
         </div>
     </div>
 </section>
 {include file="public/factory_list_tpl" /}
-<script type="text/javascript">
-    $(function(){
-        //选择-供应商|美容机构
-        $('body').on('click','.switch-account',function(){
-            setDefaultFactory();
-        });
-    });
-</script>

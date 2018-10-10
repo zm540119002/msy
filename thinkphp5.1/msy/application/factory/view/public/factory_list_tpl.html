@@ -58,6 +58,10 @@
         if(factory === 'null'){
             setDefaultFactory();
         }
+        //选择-供应商|美容机构
+        $('body').on('click','.switch-factory',function(){
+            setDefaultFactory();
+        });
         //选择效果
         $('body').on('click','.factoryListLayer li',function(){
             $('.factoryListLayer li').removeClass('current');
