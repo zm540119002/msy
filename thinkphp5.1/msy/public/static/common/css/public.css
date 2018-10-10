@@ -823,16 +823,16 @@ margin-left:0;
 .popularity a.share{
 background-position: 0 -27px;
 }
-.store_operation_head{
+.switch_store_head{
     margin:0;
 }
-.store_operation_head a.home{
+.switch_store_head a.home{
     background-position: 0 -250px;
 }
-.store_operation_head div:nth-child(1){
+.switch_store_head div:nth-child(1){
     width:15%;
 }
-.store_operation_head div:nth-child(2){
+.switch_store_head div:nth-child(2){
     width:50%;
 }
 /*内容框*/
