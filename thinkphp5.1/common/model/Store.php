@@ -44,6 +44,7 @@ class Store extends Base {
 	
 	//设置默认店铺
 	public function setDefaultStore($factoryId=''){
+		print_r(11);exit;
 		if(request()->isAjax()){
 			$id = (int)input('post.id');
 			if(!$id){
