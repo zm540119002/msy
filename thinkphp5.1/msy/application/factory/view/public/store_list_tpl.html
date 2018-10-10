@@ -44,8 +44,8 @@
                 });
                 $.each($('.vendorInfoLayer li'),function(){
                     var currentId=$(this).data('id');
-                    console.log(storeId)
-                    console.log(currentId)
+                    console.log(typeof storeId)
+                    console.log(typeof currentId)
                     if(storeId==currentId){
                         console.log(111)
                         $(this).addClass('current');
