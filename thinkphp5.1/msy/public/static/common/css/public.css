@@ -2951,7 +2951,7 @@ input[type=text]::-webkit-focus-inner {
     padding-left:12px;
 }
 .top_nav_store div:nth-child(1){
-    flex:3;
+    /*flex:3;*/
 }
 .top_bar .store-logo-img{
     width:0.75rem;
