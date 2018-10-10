@@ -1,0 +1,55 @@
+<section class="top_nav_fixed top_nav_store">
+    <div class="top_bar columns_flex l-r-sides ">
+        <!--{include file="public/home_page" /}-->
+        <div class="">
+            <img class="store-logo-img left" src="" alt="">
+            <span class="factory-name"></span>
+        </div>
+        <div class="">
+            <div class=" columns_flex">
+                <a href="javascript:void(0);" class="shopping_cart top_icon"></a>
+                <a href="javascript:void(0);" class="personal_center top_icon"></a>
+                <a href="{:url('Index/index')}" class="home top_icon"></a>
+            </div>
+            <a href="javascript:void(0);" class="switch-account">切换我的店铺></a>
+        </div>
+    </div>
+</section>
+{include file="public/factory_list_tpl" /}
+{include file="store/list_layer" /}
+<script type="text/javascript">
+    var vendorInfoList=$('#vendorInfoList').html();
+    $(function(){
+        //切换店铺
+        $('body').on('click','.switch-account',function(){
+            storeList();
+        });
+        //获取厂商信息
+        $.get(controller+'getFactoryInfo',{},function (msg) {
+            if(msg != ''){
+                $('.factory-log-img').attr('src',uploads+msg.logo_img);
+                $('.factory-name').text(msg.name);
+            }
+        });
+        //获取店铺信息
+        $.get(controller+'getStoreInfo',{},function (msg) {
+            if(msg != ''){
+                $('.storeId').val(msg.id);
+                if(msg.logo_img){
+                    $('.store-logo-img').attr('src',uploads+msg.logo_img);
+                }
+                $('.store-name').text(msg.name);
+                if(msg.store_type == 1){
+                    $('.store-type').text('旗舰店');
+                }else if(msg.store_type == 2){
+                    $('.store-type').text('品牌旗舰店');
+                }
+                if(msg.run_type == 4){
+                    $('.run-type').text('美尚会云店');
+                }else if(msg.run_type == 5){
+                    $('.run-type').text('机构公众号内嵌式门店');
+                }
+            }
+        })
+    })
+</script>
