@@ -48,6 +48,9 @@ class FactoryStore{
                 ],
             ];
             $storeList = $model -> getList($config);
+            foreach ($storeList as  $key=>$val){
+                
+            }
             cache(self::$_cache_key_list.$factorId, $storeList,config('custom.factory_cache_time'));
         }
         return $storeList;
