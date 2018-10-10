@@ -8,7 +8,17 @@ class Shop extends \common\controller\StoreBase
     public function index(){
         if(request()->isAjax()){
             $modelShop = new \app\store\model\Shop();
-            $list = $modelShop->getList($this->factory['id']);
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                    'u.nickname','u.mobile_phone',
+                ],'leftJoin' => [
+                    ['common.user u','u.id = s.user_id'],
+                ],'where' => [
+                    ['s.status','=',0],
+                ],
+            ];
+            $list = $modelShop->getList($config);
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
