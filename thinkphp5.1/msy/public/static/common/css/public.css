@@ -880,7 +880,7 @@ background-position: 0 -27px;
 }
 .foot_nav_bar .f_txt{
     display: block;
-    margin-top:0.05rem;
+    /*margin-top:0.05rem;*/
     font-size:.16rem;
 }
 .foot_nav_bar a span.f_icon{
