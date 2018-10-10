@@ -35,6 +35,7 @@
                 var winH=$(window).height();
                 var storeId='{:json_encode($store.id)}';
                 var a = parseInt(storeId);
+                console.log(typeof a)
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
