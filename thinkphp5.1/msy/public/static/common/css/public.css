@@ -878,8 +878,8 @@ background-position: 0 -27px;
     color:#e60012;
 }
 .foot_nav_bar .f_txt{
-    display: block;
-    margin-top:0;
+    /*display: block;
+    margin-top:0;*/
 }
 .foot_nav_bar a span.f_icon{
     /*width:20px;
