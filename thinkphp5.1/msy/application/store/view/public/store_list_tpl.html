@@ -3,8 +3,8 @@
         {volist name="storeList" id="vo"}
         <li class="" data-id="{$vo.id}">
             <span class="store-name">{$store.name}</span>
-            <span class="store-type">{$vo.store_type|getStoreType}</span>
-            <span class="run-type">{$vo.run_type|getRunType}</span>
+            <p class="store-type">{$vo.store_type|getStoreType}</p>
+            <p class="run-type">{$vo.run_type|getRunType}</p>
         </li>
         {/volist}
     </ul>
@@ -18,6 +18,10 @@
             storeList();
             return false;
         }
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            storeList();
+        });
     })
     //弹层 店铺
     function storeList() {
