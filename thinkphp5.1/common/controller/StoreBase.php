@@ -42,5 +42,5 @@ class StoreBase extends FactoryBase
         $model = new \common\model\Store();
         return $model->setDefaultStore($this->factory['id']);
     }
-    
+
 }
