@@ -33,3 +33,11 @@ function multi_array_key_exists( $needle, $haystack ) {
     endforeach;
     return false;
 }
+//获取店铺类型
+function getStoreType($num){
+    return $num?config('custom.store_type')[$num]:'保留';
+}
+//获取店铺经营类型
+function getRunType($num){
+    return $num?config('custom.run_type')[$num]:'保留';
+}

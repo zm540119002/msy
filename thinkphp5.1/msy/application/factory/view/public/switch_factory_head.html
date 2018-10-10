@@ -2,8 +2,14 @@
     <div class="top_bar top-switch-bar columns_flex l-r-sides">
         <!--{include file="public/home_page" /}-->
         <div class="top_left_n">
-            <img class="left store-logo-img" src="" alt="">
-            <span>{$factory.name}</span>
+            {notempty name="factory.logo_img"}
+            <img  class="store-logo-img left" src="public_uploads/{$factory.logo_img|default=''}" />
+            {else /}
+            <img  class="store-logo-img left" src="public_img/default/no_pic_40.jpg" />
+            {/notempty}
+            <div>
+                <span class="store-name">{$factory.name}</span>
+            </div>
         </div>
         <div class="">
             <div class="columns_flex">
@@ -11,7 +17,7 @@
                 <a href="javascript:void(0);" class="personal_center top_icon"></a>
                 <a href="{:url('Index/index')}" class="home top_icon"></a>
             </div>
-            <a href="javascript:void(0);" class="switch-account">切换美容店家账号></a>
+            <a href="javascript:void(0);" class="switch-account">切换供应商账号></a>
         </div>
     </div>
 </section>
@@ -21,10 +27,6 @@
         //选择-供应商|美容机构
         $('body').on('click','.switch-account',function(){
             setDefaultFactory();
-        });
-        //选择-店铺
-        $('body').on('click','.switch_store',function(){
-            setDefaultStore();
         });
     });
 </script>

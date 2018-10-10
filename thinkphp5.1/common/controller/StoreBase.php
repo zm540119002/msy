@@ -42,9 +42,5 @@ class StoreBase extends FactoryBase
         $model = new \common\model\Store();
         return $model->setDefaultStore($this->factory['id']);
     }
-
-    //获取店铺信息
-    public function getStoreInfo(){
-        return $this->store;
-    }
+    
 }
