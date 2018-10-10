@@ -1,62 +1,100 @@
-<section class="message-center-info f20" style="display:none;" id="storeList">
+<section id="vendorInfoList" style="display:none;">
     <ul class="vendorInfoList">
-        {volist name='factoryList' id='vo'}
-        <li data-id="{$vo.id}" class="{eq name='vo.is_default' value='1'}current{/eq}">
-            <span>{$vo.name}</span>
+        {volist name="storeList" id="vo"}
+        <li class="" data-id="{$vo.id}">
+            {if $vo.store_type == 1 }
+            <span>{$vo.name}</span>旗舰店
+            {elseif $vo.store_type == 2/}
+            <span>{$vo.name}</span>品牌旗舰店
+            {else /}
+            {/if}
+
+            {if $vo.run_type == 1 }
+            <p>B2B采购商城</p>
+            {elseif $vo.run_type == 2 /}
+            <p>B2B分成商城</p>
+            {elseif $vo.run_type == 3 /}
+            <p>B2C零售商城</p>
+            {else /}
+            {/if}
         </li>
         {/volist}
     </ul>
 </section>
 <script type="text/javascript">
-    //切换店铺
-    function setDefaultStore() {
-        var storeList = $('#storeList').html();
+    var vendorInfoList=$('#vendorInfoList').html();
+    $(function(){
+        //没有默认店铺
+        var notDefaultStore = "{$notDefaultStore|default=0}";
+        if(notDefaultStore == 1){
+            storeList();
+            return false;
+        }
+    })
+    //弹层 店铺
+    function storeList() {
         layer.open({
-            title:['选择店铺','border-bottom:1px solid #d9d9d9;'],
-            className:'factoryListLayer',
             type: 1,
-            content: storeList,
+            title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
+            className:'vendorInfoLayer',
+            content:vendorInfoList,
             anim: 'up',
-            style: '',
-            success:function(){
-                var winHeight=$(window).height();
-                $('html,body').addClass('scrollStyle');
-                $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
-                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
-                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-            },
             btn:['确定','取消'],
+            success:function(){
+                var winH=$(window).height();
+                var storeId=$('.storeId').val();
+                $('html,body').addClass('scrollStyle');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+                $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
+                $('.vendorInfoLayer li').on('click',function(){
+                    var _this=$(this);
+                    _this.addClass('current').siblings().removeClass('current');
+                });
+                $.each($('.vendorInfoLayer li'),function(){
+                    var currentId=$(this).data('id');
+                    if(storeId==currentId){
+                        $(this).addClass('current');
+                    }
+                })
+            },
             yes:function(index){
-                var postData = {};
-                postData.factoryId = $('.factoryListLayer li.current').data('id');
-                if(!postData.factoryId){
-                    dialog.error('请选择店铺');
-                    return false;
+                var isCurrent=$('.vendorInfoLayer li.current');
+                factoryLayerName=isCurrent.text();
+                factoryLayerId  =isCurrent.data('id');
+                $('.factoryId').val(factoryLayerId);
+                $('.vendor-name').text(factoryLayerName);
+                if(!factoryLayerId){
+                    dialog.error('请选择一个店铺');
+                    return false
                 }
-                var url = 'setDefaultFactory';
-                $.post(url,postData,function(data){
-                    if(data.status==0){
-                        dialog.error(data.info);
-                    }else if(data.status==1){
-                        layer.close(index);
-                        location.reload();
+                var postData = {};
+                postData.id = factoryLayerId;
+                $.ajax({
+                    url: controller + 'setDefaultStore',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
+                        }
+                        if(info.status == 1){
+                            dialog.success(info.msg, location.reload());
+                        }
+                    },
+                    complete:function(){
+
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
                     }
                 });
-                $('html,body').addClass('scrollStyle');
+                $('html,body').removeClass('scrollStyle');
+                layer.close(index);
             }
-        });
+        })
     }
-    $(function () {
-        var factory = '{:json_encode($factory)}';
-        //如果是多采购商
-        if(factory === 'null'){
-            setDefaultStore();
-        }
-        //选择效果
-        $('body').on('click','.factoryListLayer li',function(){
-            $('.factoryListLayer li').removeClass('current');
-            $(this).toggleClass('current');
-        });
-
-    });
 </script>
