@@ -1,0 +1,30 @@
+<section class="top_nav_fixed top_nav_store">
+    <div class="top_bar top-switch-bar columns_flex l-r-sides">
+        <!--{include file="public/home_page" /}-->
+        <div class="top_left_n">
+            <img class="left store-logo-img" src="" alt="">
+            <span>{$factory.name}</span>
+        </div>
+        <div class="">
+            <div class="columns_flex">
+                <a href="javascript:void(0);" class="shopping_cart top_icon"></a>
+                <a href="javascript:void(0);" class="personal_center top_icon"></a>
+                <a href="{:url('Index/index')}" class="home top_icon"></a>
+            </div>
+            <a href="javascript:void(0);" class="switch-account">切换美容店家账号></a>
+        </div>
+    </div>
+</section>
+{include file="public/factory_list_tpl" /}
+<script type="text/javascript">
+    $(function(){
+        //选择-供应商|美容机构
+        $('body').on('click','.switch-account',function(){
+            setDefaultFactory();
+        });
+        //选择-店铺
+        $('body').on('click','.switch_store',function(){
+            setDefaultStore();
+        });
+    });
+</script>
