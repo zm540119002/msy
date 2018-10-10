@@ -34,7 +34,6 @@
             success:function(){
                 var winH=$(window).height();
                 var storeId='{:json_encode($store.id)}';
-                console.log(storeId)
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
@@ -45,7 +44,7 @@
                 $.each($('.vendorInfoLayer li'),function(){
                     var currentId=$(this).data('id');
                     console.log(currentId)
-                    if(storeId==currentId){
+                    if(parseInt(storeId)==currentId){
                         $(this).addClass('current');
                     }
                 })
