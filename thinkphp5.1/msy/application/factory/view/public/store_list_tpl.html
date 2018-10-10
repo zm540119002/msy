@@ -12,11 +12,10 @@
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
-        //没有默认店铺
-        var notDefaultStore = "{$notDefaultStore|default=0}";
-        if(notDefaultStore == 1){
+        var store='{:json_encode($store)}';
+        //如果是多店铺，没有默认
+        if(store === 'null'){
             setDefaultStore();
-            return false;
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){
@@ -44,7 +43,6 @@
                 });
                 $.each($('.vendorInfoLayer li'),function(){
                     var currentId=$(this).data('id');
-                    console.log(storeId)
                     if(storeId==currentId){
                         $(this).addClass('current');
                     }

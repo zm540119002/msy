@@ -24,9 +24,6 @@ class StoreBase extends FactoryBase
                         $this->store = $val;
                     }
                 }
-                if(empty($this->store)){
-                    $this -> assign('notDefaultStore', 1);
-                }
             }elseif($count == 1){
                 $this->store = $list[0];
             }elseif(!$count) {
