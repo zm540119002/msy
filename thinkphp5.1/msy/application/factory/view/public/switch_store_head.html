@@ -1,12 +1,9 @@
 <section class="top_nav_fixed top_nav_store">
-    <div class="top_bar top-switch-bar columns_flex l-r-sides ">
-        <div>
-            <input class="storeId" type="hidden" value=""/>
-            <img class="left store-logo-img small_default_img" src="" alt="">
-            <div class="store-type-item">
-                <p><span class="store-name"></span><span class="store-type"></span></p>
-                <p><span class="run-type"></span> <span></span></p>
-            </div>
+    <div class="top_bar columns_flex l-r-sides ">
+        <!--{include file="public/home_page" /}-->
+        <div class="">
+            <img class="store-logo-img left" src="" alt="">
+            <span class="factory-name"></span>
         </div>
         <div class="">
             <div class=" columns_flex">
@@ -14,7 +11,7 @@
                 <a href="javascript:void(0);" class="personal_center top_icon"></a>
                 <a href="{:url('Index/index')}" class="home top_icon"></a>
             </div>
-            <a href="javascript:void(0);" class="switch-account">切换店铺账号></a>
+            <a href="javascript:void(0);" class="switch-account">切换我的店铺></a>
         </div>
     </div>
 </section>
@@ -47,12 +44,10 @@
                 }else if(msg.store_type == 2){
                     $('.store-type').text('品牌旗舰店');
                 }
-                if(msg.run_type == 1){
-                    $('.run-type').text('B2B采购商城');
-                }else if(msg.run_type == 2){
-                    $('.run-type').text('B2B分成商城');
-                }else if(msg.run_type == 3){
-                    $('.run-type').text('B2C零售商城');
+                if(msg.run_type == 4){
+                    $('.run-type').text('美尚会云店');
+                }else if(msg.run_type == 5){
+                    $('.run-type').text('机构公众号内嵌式门店');
                 }
             }
         })
