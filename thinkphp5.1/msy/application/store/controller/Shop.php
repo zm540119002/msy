@@ -26,7 +26,7 @@ class Shop extends \common\controller\StoreBase
         }
     }
 
-    /**编辑管理员
+    /**编辑
      */
     public function edit(){
         if(request()->isAjax()){
@@ -41,7 +41,7 @@ class Shop extends \common\controller\StoreBase
         }
     }
 
-    /**删除管理员
+    /**删除
      */
     public function del(){
         if(request()->isAjax()){
