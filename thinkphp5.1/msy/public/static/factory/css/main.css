@@ -13,7 +13,7 @@
     color:#fff;
 }
 .top_nav_store div:nth-child(2){
-    width:2.16rem; 
+    /*width:2.16rem; */
     margin-right:.25rem;   
 }
 .column_type.current{
