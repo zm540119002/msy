@@ -18,7 +18,7 @@ class Shop extends \common\model\Base{
 		$data['factory_id'] = $factoryId;
 		//数据验证
 		$validateShop = new \common\validate\Shop();
-		if(!$validateShop->scene('edit')->check($data)) {
+		if(!$validateShop->scene('edit')->check($data)){
 			return errorMsg($validateShop->getError());
 		}
 		if(input('?post.id')){

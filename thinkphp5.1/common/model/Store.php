@@ -22,10 +22,11 @@ class Store extends Base {
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('\common\validate\Store');
-		if(!$result = $validate->check($data)) {
-			return errorMsg($validate->getError());
-		}
+
 		if(input('?post.id')){
+			if(!$result = $validate->scene('edit')->check($data)) {
+				return errorMsg($validate->getError());
+			}
 			$data['update_time'] = time();
 			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
 			if(false !== $result){
@@ -33,6 +34,9 @@ class Store extends Base {
 			}
 			return errorMsg('失败',$this->getError());
 		}else{
+			if(!$result = $validate->check($data)) {
+				return errorMsg($validate->getError());
+			}
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
 			if(!$result){
