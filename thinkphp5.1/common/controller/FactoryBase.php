@@ -40,18 +40,19 @@ class FactoryBase extends UserBase{
 
     //获取厂家详细信息
     public function getFactoryInfo(){
-        $model = new \common\model\Factory();
-        $config = [
-            'where' => [
-                ['f.id','=',$this->factory['id']],
-            ],'order' => [
-                'id' => 'desc',
-            ],'join' => [
-                ['record r','r.factory_id = f.id',],
-            ],'field' => [
-                'f.id,f.name,r.logo_img',
-            ],
-        ];
-        return $model->getInfo($config);
+        return $this->factory;
+//        $model = new \common\model\Factory();
+//        $config = [
+//            'where' => [
+//                ['f.id','=',$this->factory['id']],
+//            ],'order' => [
+//                'id' => 'desc',
+//            ],'join' => [
+//                ['record r','r.factory_id = f.id',],
+//            ],'field' => [
+//                'f.id,f.name,r.logo_img',
+//            ],
+//        ];
+//        return $model->getInfo($config);
     }
 }
