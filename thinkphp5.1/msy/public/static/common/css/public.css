@@ -3089,3 +3089,19 @@ input[type=text]::-webkit-focus-inner {
 .top_left_n{
     /*width:2.6rem;*/
 }
+.operate-btn span{
+    width: 0.38rem;
+    height: 0.38rem;
+    display: inline-block;
+    margin-left: 5px;
+    background-image: url(../../common/img/icons/operate-icon.png);
+    background-repeat: no-repeat;
+    background-size: 0.38rem .85rem;
+    vertical-align: middle;
+}
+.operate-btn a:nth-child(1) span:nth-child(1){
+    background-position:0 0;
+}
+.operate-btn a:nth-child(2) span:nth-child(1){
+    background-position:0 -0.47rem;
+}
