@@ -13,10 +13,9 @@
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
         //没有默认店铺
-        var notDefaultStore = "{$notDefaultStore|default=0}";
-        if(notDefaultStore == 1){
+        var store='{:json_encode($store)}';
+        if(store === 'null'){
             setDefaultStore();
-            return false;
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){
@@ -34,7 +33,7 @@
             btn:['确定','取消'],
             success:function(){
                 var winH=$(window).height();
-                var storeId=$('.storeId').val();
+                var storeId='{:json_encode($store.id)}';
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');

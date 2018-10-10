@@ -1,10 +1,5 @@
 <?php
 namespace app\store\model;
-use think\Model;
-use think\Db;
-/**
- * 基础模型器
- */
 
 class Series extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
