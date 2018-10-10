@@ -22,7 +22,6 @@ class Store extends Base {
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('\common\validate\Store');
-
 		if(input('?post.id')){
 			if(!$result = $validate->scene('edit')->check($data)) {
 				return errorMsg($validate->getError());
