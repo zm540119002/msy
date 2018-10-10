@@ -24,13 +24,11 @@
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
-        //没有默认店铺
-        var notDefaultStore = "{$notDefaultStore|default=0}";
-        if(notDefaultStore == 1){
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
             storeList();
-            return false;
-        }
-    })
+        });
+    });
     //弹层 店铺
     function storeList() {
         layer.open({
