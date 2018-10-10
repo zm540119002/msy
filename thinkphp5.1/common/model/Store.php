@@ -22,7 +22,6 @@ class Store extends Base {
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('\common\validate\Store');
-
 		if(input('?post.id')){
 			if(!$result = $validate->scene('edit')->check($data)) {
 				return errorMsg($validate->getError());
@@ -34,7 +33,7 @@ class Store extends Base {
 			}
 			return errorMsg('失败',$this->getError());
 		}else{
-			if(!$result = $validate->check($data)) {
+			if(!$result = $validate->scene('add')->check($data)) {
 				return errorMsg($validate->getError());
 			}
 			$data['create_time'] = time();

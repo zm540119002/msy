@@ -21,4 +21,16 @@ class Brand extends \think\Validate
         'category_id_1.require'   => '请选择商标所属分类',
         'certificate.require'   => '请上传证书',
     ];
+    //验证场景
+    protected $scene = [
+        //验证编辑
+        'add'  =>  [
+            'foreign_id',
+            'store_type',
+            'run_type',
+        ],
+        'edit'  =>  [
+            'auth_status',
+        ],
+    ];
 }
