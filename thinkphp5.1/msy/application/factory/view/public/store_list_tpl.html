@@ -12,18 +12,18 @@
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
-        //没有默认店铺
-        var notDefaultStore = "{$notDefaultStore|default=0}";
-        if(notDefaultStore == 1){
-            storeList();
-            return false;
+        var store='{:json_encode($store)}';
+        //如果是多店铺，没有默认
+        if(store === 'null'){
+            setDefaultStore();
         }
+        //切换店铺
         $('body').on('click','.switch-store',function(){
-            storeList();
+            setDefaultStore();
         });
     })
     //弹层 店铺
-    function storeList() {
+    function  setDefaultStore() {
         layer.open({
             type: 1,
             title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
@@ -33,7 +33,7 @@
             btn:['确定','取消'],
             success:function(){
                 var winH=$(window).height();
-                var storeId=$('.storeId').val();
+                var storeId='{:json_encode($store.id)}';
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
@@ -43,7 +43,9 @@
                 });
                 $.each($('.vendorInfoLayer li'),function(){
                     var currentId=$(this).data('id');
-                    if(storeId==currentId){
+                    console.log(typeof storeId)
+                    console.log(typeof toString(currentId))
+                    if(storeId==toString(currentId)){
                         $(this).addClass('current');
                     }
                 })

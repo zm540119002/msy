@@ -1,13 +1,13 @@
 <section class="top_nav_fixed top_nav_store">
     <div class="top_bar top-switch-bar columns_flex l-r-sides">
         <!--{include file="public/home_page" /}-->
-        <div class="">
+        <div class="top_left_f">
             {notempty name="factory.logo_img"}
-            <img id="" class="store-logo-img" src="public_uploads/{$factory.logo_img|default=''}" />
+            <img id="" class="left store-logo-img" src="public_uploads/{$factory.logo_img|default=''}" />
             {else /}
-            <img class="store-logo-img" src="public_img/default/no_pic_40.jpg" />
+            <img class="left store-logo-img" src="public_img/default/no_pic_40.jpg" />
             {/notempty}
-            <span>{$factory.name}</span>
+            <span class="store-name">{$factory.name}</span>
         </div>
         <div class="">
             <div class="columns_flex">

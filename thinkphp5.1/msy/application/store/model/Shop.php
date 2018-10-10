@@ -1,41 +1,34 @@
 <?php
-namespace common\model;
-use think\Model;
-use think\Db;
-/**
- * 基础模型器
- */
+namespace app\store\model;
 
-class Store extends Base {
+class Shop extends \common\model\Base{
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'store';
+	protected $table = 'shop';
 	// 设置主键
 	protected $pk = 'id';
 	// 别名
 	protected $alias = 's';
 	// 设置当前模型的数据库连接
-    protected $connection = 'db_config_common';
+    protected $connection = 'db_config_store';
 
 	/**编辑
 	 */
 	public function edit($factoryId=''){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
-		$validate = validate('\common\validate\Store');
+		//数据验证
+		$validateShop = new \common\validate\Shop();
+		if(!$validateShop->scene('edit')->check($data)){
+			return errorMsg($validateShop->getError());
+		}
 		if(input('?post.id')){
-			if(!$result = $validate->scene('edit')->check($data)) {
-				return errorMsg($validate->getError());
-			}
 			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['id' => $data['store_id'],'factory_id'=>$factoryId]);
+			$result = $this->allowField(true)->save($data,['id' => $data['shop_id'],'factory_id'=>$factoryId]);
 			if(false !== $result){
 				return successMsg("成功");
 			}
 			return errorMsg('失败',$this->getError());
 		}else{
-			if(!$result = $validate->scene('add')->check($data)) {
-				return errorMsg($validate->getError());
-			}
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
 			if(!$result){
@@ -44,38 +37,10 @@ class Store extends Base {
 			return successMsg('提交申请成功');
 		}
 	}
-	
-	//设置默认店铺
-	public function setDefaultStore($factoryId=''){
-		if(request()->isAjax()){
-			$id = (int)input('post.id');
-			if(!$id){
-				return errorMsg('参数错误');
-			}
-			$this->startTrans();
-			$data = array('is_default' => 1);
-			$result = $this->allowField(true)->save($data,['id' => $id,'factory_id'=>$factoryId]);
-			if(false === $result){
-				$this->rollback();
-				return errorMsg('修改默认失败');
-			}
-			$where = [
-				['id','<>',$id],
-				['factory_id','=',$factoryId],
-			];
-			$result = $this ->where($where)->setField('is_default',0);
-			if(false === $result){
-				$this->rollback();
-				return errorMsg('修改失败');
-			}
-			$this->commit();
-			return successMsg("已选择");
-		}
-	}
 
 	/**检查店铺是否属于此厂商
 	 */
-	public function checkStoreExist($id,$factoryId){
+	public function checkShopExist($id,$factoryId){
 		$where = [
 			['id','=',$id],
 			['factory_id','=',$factoryId],
@@ -91,8 +56,8 @@ class Store extends Base {
 	//设置店长
 	public function setManager($factoryId){
 		$postData = input('post.');
-		$storeId = (int)$postData['id'];
-		if(!$storeId){
+		$shopId = (int)$postData['id'];
+		if(!$shopId){
 			return errorMsg('缺少店铺ID');
 		}
 		if($postData['mobile_phone']){//手机号存在
@@ -113,32 +78,32 @@ class Store extends Base {
 				$userId = $modelUser->getAttr('id');
 			}
 			//验证是否存在店长
-			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
-			$modelUserStore = new \common\model\UserStore();
-			if($userStoreId){//存在测删除
-				$modelUserStore->delById($userStoreId,false);
+			$userShopId = $this->checkManagerExist($factoryId,$shopId);
+			$modelUserShop = new \common\model\UserShop();
+			if($userShopId){//存在测删除
+				$modelUserShop->delById($userShopId,false);
 			}
 			$postData['type'] = 3;
 			$postData['user_id'] = $userId;
 			$postData['factory_id'] = $factoryId;
-			$postData['store_id'] = $storeId;
-			$res = $modelUserStore->save($postData);
+			$postData['shop_id'] = $shopId;
+			$res = $modelUserShop->save($postData);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
-			$userStoreId = $modelUserStore->getAttr('id');
+			$userShopId = $modelUserShop->getAttr('id');
 			$this->commit();//事务提交
 
 			$postData['id'] = $userId;
-			$postData['user_store_id'] = $userStoreId;
+			$postData['user_shop_id'] = $userShopId;
 			return successMsg('成功！',$postData);
 		}else{//手机号不存在
 			//验证是否存在店长
-			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
-			$modelUserStore = new \common\model\UserStore();
-			if($userStoreId){//存在测删除
-				$modelUserStore->delById($userStoreId,false);
+			$userShopId = $this->checkManagerExist($factoryId,$shopId);
+			$modelUserShop = new \common\model\UserShop();
+			if($userShopId){//存在测删除
+				$modelUserShop->delById($userShopId,false);
 			}
 			return successMsg('删除成功！');
 		}
@@ -146,14 +111,14 @@ class Store extends Base {
 
 	/**验证用户是否为店长
 	 */
-	private function checkManagerExist($factoryId,$storeId){
-		$modelUserStore = new \common\model\UserStore();
+	private function checkManagerExist($factoryId,$shopId){
+		$modelUserShop = new \common\model\UserShop();
 		$where = [
-			['store_id','=',$storeId],
+			['shop_id','=',$shopId],
 			['factory_id','=',$factoryId],
 			['status','<>',2],
 			['type','=',3],
 		];
-		return $modelUserStore->where($where)->value('id');
+		return $modelUserShop->where($where)->value('id');
 	}
 }

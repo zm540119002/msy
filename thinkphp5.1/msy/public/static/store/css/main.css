@@ -13,9 +13,10 @@
     color:#fff;
 }
 .top_nav_store div:nth-child(2){
-    width:35%; 
+    /*width:35%; */
     margin-right:.25rem;   
 }
+
 .top_nav_store .top_bar{
     height:auto;
     padding-top:0;
@@ -494,9 +495,6 @@
 }
 .admin-account-list li.current{
     border: 1px solid #0066cc;
-}
-.operate-btn a {
-    margin: 0 0 .12rem 0;
 }
 .addAdminLayer form{
     padding:0.20rem 0.35rem;

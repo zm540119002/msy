@@ -8,7 +8,17 @@ class Shop extends \common\controller\StoreBase
     public function index(){
         if(request()->isAjax()){
             $modelShop = new \app\store\model\Shop();
-            $list = $modelShop->getList($this->factory['id']);
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                    'u.nickname','u.mobile_phone',
+                ],'leftJoin' => [
+                    ['common.user u','u.id = s.user_id'],
+                ],'where' => [
+                    ['s.status','=',0],
+                ],
+            ];
+            $list = $modelShop->getList($config);
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
@@ -16,7 +26,7 @@ class Shop extends \common\controller\StoreBase
         }
     }
 
-    /**编辑管理员
+    /**编辑
      */
     public function edit(){
         if(request()->isAjax()){
@@ -31,7 +41,7 @@ class Shop extends \common\controller\StoreBase
         }
     }
 
-    /**删除管理员
+    /**删除
      */
     public function del(){
         if(request()->isAjax()){
