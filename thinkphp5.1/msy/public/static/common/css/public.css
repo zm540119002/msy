@@ -599,7 +599,10 @@ i{
     
     overflow-y:hidden;*/
     
-} 
+}
+.top_left{
+    width:4rem;
+}
 .friend-tipc-box{
     margin:0 0 0 .35rem;
 }
