@@ -2,21 +2,9 @@
     <ul class="vendorInfoList">
         {volist name="storeList" id="vo"}
         <li class="" data-id="{$vo.id}">
-            {if $vo.store_type == 1 }
-            <span>{$vo.name}</span>旗舰店
-            {elseif $vo.store_type == 2/}
-            <span>{$vo.name}</span>品牌旗舰店
-            {else /}
-            {/if}
-
-            {if $vo.run_type == 1 }
-            <p>B2B采购商城</p>
-            {elseif $vo.run_type == 2 /}
-            <p>B2B分成商城</p>
-            {elseif $vo.run_type == 3 /}
-            <p>B2C零售商城</p>
-            {else /}
-            {/if}
+            <span class="store-name">{$store.name}</span>
+            <span class="store-type">{$vo.store_type|getStoreType}</span>
+            <span class="run-type">{$vo.run_type|getRunType}</span>
         </li>
         {/volist}
     </ul>

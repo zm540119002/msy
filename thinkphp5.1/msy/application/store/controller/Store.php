@@ -84,7 +84,7 @@ class Store extends \common\controller\FactoryBase{
             $modelStore = new \common\model\Store();
             $config = [
                 'field' => [
-                    's.id','s.name','s.store_type','s.run_type',
+                    's.id','s.store_type','s.run_type',
                     'f.name factory_name','us.id user_store_id','u.nickname','u.mobile_phone',
                 ],'leftJoin' => [
                     ['factory f','f.id = s.factory_id'],
