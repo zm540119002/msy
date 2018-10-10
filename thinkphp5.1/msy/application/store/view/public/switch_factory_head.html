@@ -2,7 +2,11 @@
     <div class="top_bar top-switch-bar columns_flex l-r-sides">
         <!--{include file="public/home_page" /}-->
         <div class="">
-            <img class="left store-logo-img" src="" alt="">
+            {notempty name="factory.logo_img"}
+            <img id="" class="store-logo-img" src="public_uploads/{$factory.logo_img|default=''}" />
+            {else /}
+            <img class="store-logo-img" src="public_img/default/no_pic_40.jpg" />
+            {/notempty}
             <span>{$factory.name}</span>
         </div>
         <div class="">
@@ -21,10 +25,6 @@
         //选择-供应商|美容机构
         $('body').on('click','.switch-account',function(){
             setDefaultFactory();
-        });
-        //选择-店铺
-        $('body').on('click','.switch_store',function(){
-            setDefaultStore();
         });
     });
 </script>
