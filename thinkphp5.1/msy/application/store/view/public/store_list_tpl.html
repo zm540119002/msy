@@ -13,10 +13,9 @@
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
         //没有默认店铺
-        var notDefaultStore = "{$notDefaultStore|default=0}";
-        if(notDefaultStore == 1){
+        var store='{:json_encode($store)}';
+        if(store === 'null'){
             setDefaultStore();
-            return false;
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){

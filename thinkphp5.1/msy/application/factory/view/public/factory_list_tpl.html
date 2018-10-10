@@ -54,7 +54,7 @@
     }
     $(function () {
         var factory = '{:json_encode($factory)}';
-        //如果是多供应商
+        //如果是多供应商 没有默认
         if(factory === 'null'){
             setDefaultFactory();
         }
