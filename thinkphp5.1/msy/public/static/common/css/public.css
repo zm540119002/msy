@@ -411,7 +411,7 @@ i{
     z-index:6;
 }
 .bottom_nav_fixed a{
-    font-size:.16rem;
+    font-size:0;
 }
 .common_default_img{
     width:100%;
@@ -659,6 +659,7 @@ i{
     padding:0.085rem 0;
 }
 .foot_nav_bar a{
+    display:block;
     position:relative;
     color:#898989;
 }
@@ -879,7 +880,8 @@ background-position: 0 -27px;
 }
 .foot_nav_bar .f_txt{
     display: block;
-    margin-top:0;
+    margin-top:0.05rem;
+    font-size:.16rem;
 }
 .foot_nav_bar a span.f_icon{
     /*width:20px;
