@@ -3089,6 +3089,12 @@ input[type=text]::-webkit-focus-inner {
 .top_left_n{
     /*width:2.6rem;*/
 }
+.operate-btn a{
+    margin:0 0 0.25rem 0;
+}
+.operate-btn a:last-child{
+    margin-bottom:0;
+}
 .operate-btn span{
     width: 0.38rem;
     height: 0.38rem;
