@@ -1433,9 +1433,9 @@ background-position: 0 -27px;
     transform: translate(-50%, -50%);
     background: #fff;
     text-align: center;*/
-    /*position: absolute;
+    position: absolute;
     top:50%;
-    transform: translateY(-50%);*/
+    /*transform: translateY(-50%);*/
 }
 .goodsvideoLayer .layui-m-layercont,
 .qrCodePicLayer .layui-m-layercont{
@@ -3085,6 +3085,8 @@ input[type=text]::-webkit-focus-inner {
     right: 0;
     bottom: 0;
     left: 0;
+    width:100%;
+    height:100%;
 }
 .top_left_n{
     /*width:2.6rem;*/
