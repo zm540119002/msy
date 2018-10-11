@@ -60,7 +60,6 @@ class Base extends \think\Controller{
                 $filesNew[$k] = $file;
             }
         }
-        print_r($filesNew);exit;
         return json_encode($filesNew);
     }
 
