@@ -27,18 +27,18 @@ class Shop extends \common\model\Base{
 			return errorMsg($validateShop->getError());
 		}
 		if(isset($postData['id']) && intval($postData['id']) && isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
-			$data = [
+			$saveData = [
 				'name' => trim($postData['shop_name']),
 				'update_time' => time(),
 			];
-			$this->startTrans();//事务开启
 			$where = [
-				['factory_id','=',$this->factory['id']],
-				['store_id','=',$this->store['id']],
+				['factory_id','=',$factoryId],
+				['store_id','=',$storeId],
 				['id','=',$postData['userShopId']],
 				['status','=',0],
 			];
-			$res = $this->isUpdate(true)->where($where)->save($data);
+			$this->startTrans();//事务开启
+			$res = $this->where($where)->update($saveData);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
@@ -61,8 +61,8 @@ class Shop extends \common\model\Base{
 					$managerId = $modelUser->getAttr('id');
 				}
 				$where = [
-					['factory_id','=',$this->factory['id']],
-					['store_id','=',$this->store['id']],
+					['factory_id','=',$factoryId],
+					['store_id','=',$storeId],
 					['shop_id','=',$postData['userShopId']],
 					['status','=',0],
 				];
@@ -70,7 +70,7 @@ class Shop extends \common\model\Base{
 					'user_id' => $managerId,
 				];
 				$modelUserShop = new \app\store\model\UserShop();
-				$res = $modelUserShop->isUpdate(true)->where($where)->save($saveData);
+				$res = $modelUserShop->where($where)->update($saveData);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$modelUserShop->getError());
