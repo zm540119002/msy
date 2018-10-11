@@ -7,12 +7,14 @@ class Shop extends \think\Validate{
         'name'  => [
             'require',
             'max' => 64,
+            'unique' => '\app\store\model\Shop',
         ],
     ];
     //验证消息
     protected $message  =   [
         'name.require' => '名称必须！',
         'name.max' => '名称最多不能超过255个字符！',
+        'name.unique' => '此名称已被注册！',
     ];
     //验证场景
     protected $scene = [

@@ -61,7 +61,7 @@ class Base extends \think\Model {
 	}
 
 	//删除
-	public function del($tag=true){
+	public function del($condition=[],$tag=true){
 		$where = [
 			['status', '=', 0],
 		];
@@ -103,7 +103,7 @@ class Base extends \think\Model {
 
 	/**根据手机号码检查正常账号
 	 */
-	protected function checkUserByMobilePhone($mobilePhone){
+	protected function checkUserExistByMobilePhone($mobilePhone){
 		if(!isMobile($mobilePhone)){
 			return errorMsg('请输入正确的手机号码');
 		}

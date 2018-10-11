@@ -6,7 +6,7 @@
 <section id="entryShopInfo" style="display:none;">
 	<form class="entryShopForm">
 		<div class="account-field">
-			<input type="text" class="store_name" placeholder="门店名称" name="store_name">
+			<input type="text" class="store_name" placeholder="门店名称" name="shop_name">
 		</div>
 		<div class="account-field">
 			<input type="text" class="store_name" placeholder="店长姓名" name="name">
@@ -98,7 +98,7 @@
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
 					var content='';
-					if(!postData.store_name){
+					if(!postData.shop_name){
 						content='请填写门店名称';
 					}else if(!postData.name){
 						content='请填写店长姓名';
@@ -132,10 +132,12 @@
 					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
 				},
 				yes:function(index){
-					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
+					var postData=$('.setShopAccountLayer .entryShopForm').serializeObject();
 					var content='';
-					if(!postData.name){
-						content='请填写姓名';
+					if(!postData.shop_name){
+						content='请填写门店名称';
+					}else if(!postData.name){
+						content='请填写店长姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
 					}
@@ -143,10 +145,12 @@
 						errorTipc(content);
 						return false;
 					}
+					postData.id = _this.data('id');
+					postData.userShopId = _this.data('user_shop_id');
 					var config = {
 						url:module + 'Shop/edit',
 						postData:postData,
-						fromObj:$('.setShopAccountLayer .setShopForm'),
+						fromObj:$('.setShopAccountLayer .entryShopForm'),
 						toObj:_this,
 						index:index
 					};
@@ -168,9 +172,9 @@
 				yes:function(index){
 					var postData = {};
 					postData.id = _this.data('id');
-					postData.userFactoryId = _this.data('user_factory_id');
+					postData.userShopId = _this.data('user_shop_id');
 					var config = {
-						url:module + 'Manager/del',
+						url:module + 'Shop/del',
 						postData:postData,
 						obj:_this,
 						index:index

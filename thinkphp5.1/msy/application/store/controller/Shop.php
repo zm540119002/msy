@@ -12,6 +12,7 @@ class Shop extends \common\controller\StoreBase
                 'field' => [
                     's.id','s.name shop_name',
                     'u.nickname name','u.mobile_phone',
+                    'us.id user_shop_id',
                 ],'leftJoin' => [
                     ['user_shop us','s.id = us.shop_id'],
                     ['common.user u','u.id = us.user_id'],
