@@ -62,8 +62,8 @@
 		<div>
 			<img class="left" src="" alt="" />
 			<div>
-				<p><span>某某XX</span>机构官方旗舰店</p>
-				<div>美尚会云店店铺</div>
+				<p><span>{$store.name|default=''}</span>{$store.store_type|getStoreType}</p>
+				<div>{$store.run_type|getRunType}</div>
 			</div>
 		</div>
 		<div>
@@ -97,8 +97,6 @@
 				btn:['确定','取消'],
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
-					var html=$('#storeInfoList').html();
-					var listLength=$('.list li').length;
 					var content='';
 					if(!postData.store_name){
 						content='请填写门店名称';
@@ -111,14 +109,14 @@
 						errorTipc(content);
 						return false;
 					}
-					if(listLength<1){
-						$('.list').append(html);
-
-					}else{
-						$('.list li:first').before(html);
-					}
-					copyDataByName(_this,$('.entryShopInfoLayer .entryShopForm'));
-					layer.close(index);
+					var config = {
+						url:module + 'Shop/edit',
+						postData:postData,
+						fromObj:$('.setShopAccountLayer .setShopForm'),
+						toObj:_this,
+						index:index
+					};
+					dialogFormAdd(config)
 				}
 			});
 		});
@@ -134,9 +132,8 @@
 					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
 				},
 				yes:function(index){
-					var postData={};
+					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					var content='';
-					postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -147,14 +144,13 @@
 						return false;
 					}
 					var config = {
-						url:module + 'Manager/edit',
+						url:module + 'Shop/edit',
 						postData:postData,
 						fromObj:$('.setShopAccountLayer .setShopForm'),
 						toObj:_this,
 						index:index
 					};
 					dialogFormEdit(config);
-					layer.close(index)
 				}
 			})
 		});

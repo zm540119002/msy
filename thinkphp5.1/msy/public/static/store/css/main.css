@@ -1676,11 +1676,7 @@ input.special{
 .scroller-wrapper .content-marginLeft{
     padding-left:0;
 }
-.list li{
-    border:1px solid #d9d9d9;
-    padding:0.15rem 0.25rem;
-    border-radius:4px;
-}
+
 .set_shopowner{
     width:1rem;
     padding:.05rem 0.18rem;

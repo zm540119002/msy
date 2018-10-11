@@ -13,109 +13,80 @@ class Shop extends \common\model\Base{
 
 	/**编辑
 	 */
-	public function edit($factoryId=''){
-		$data = input('post.');
-		$data['factory_id'] = $factoryId;
+	public function edit($userId,$factoryId,$storeId){
+		if(!intval($userId) || !intval($factoryId) || !intval($storeId)){
+			return errorMsg('参数错误');
+		}
+		$postData = input('post.');
 		//数据验证
-		$validateShop = new \common\validate\Shop();
-		if(!$validateShop->scene('edit')->check($data)){
+		$validateShop = new \app\store\validate\Shop();
+		if(!$validateShop->scene('edit')->check($postData)){
 			return errorMsg($validateShop->getError());
 		}
-		if(input('?post.id')){
-			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['id' => $data['shop_id'],'factory_id'=>$factoryId]);
-			if(false !== $result){
-				return successMsg("成功");
-			}
-			return errorMsg('失败',$this->getError());
-		}else{
-			$data['create_time'] = time();
-			$result = $this->allowField(true)->save($data);
-			if(!$result){
-				return errorMsg('失败');
-			}
-			return successMsg('提交申请成功');
-		}
-	}
-
-	/**检查店铺是否属于此厂商
-	 */
-	public function checkShopExist($id,$factoryId){
-		$where = [
-			['id','=',$id],
-			['factory_id','=',$factoryId],
-		];
-		$count = $this->where($where)->count();
-		if($count){
-			return true;
-		}else{
-			return false;
-		}
-	}
-
-	//设置店长
-	public function setManager($factoryId){
-		$postData = input('post.');
-		$shopId = (int)$postData['id'];
-		if(!$shopId){
-			return errorMsg('缺少店铺ID');
-		}
-		if($postData['mobile_phone']){//手机号存在
-			//验证用户是否存在
-			$userId = $this->checkUserByMobilePhone($postData['mobile_phone']);
+		if(isset($postData['id']) && intval($postData['id'])){//修改
+		}else{//新增
+			$data = [
+				'name' => trim($postData['shop_name']),
+				'user_id' => $userId,
+				'factory_id' => $factoryId,
+				'store_id' => $storeId,
+				'create_time' => time(),
+			];
 			$this->startTrans();//事务开启
-			if(!$userId){//不存在
-				unset($postData['id']);
-				$postData['type'] = 0;
-				$postData['nickname'] = trim($postData['name']);
-				$postData['create_time'] = time();
-				$modelUser = new \common\model\User();
-				$res = $modelUser->save($postData);
-				if($res===false){
-					$modelUser->rollback();//事务回滚
-					return errorMsg('失败',$modelUser->getError());
-				}
-				$userId = $modelUser->getAttr('id');
-			}
-			//验证是否存在店长
-			$userShopId = $this->checkManagerExist($factoryId,$shopId);
-			$modelUserShop = new \common\model\UserShop();
-			if($userShopId){//存在测删除
-				$modelUserShop->delById($userShopId,false);
-			}
-			$postData['type'] = 3;
-			$postData['user_id'] = $userId;
-			$postData['factory_id'] = $factoryId;
-			$postData['shop_id'] = $shopId;
-			$res = $modelUserShop->save($postData);
+			$res = $this->isUpdate(false)->save($data);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
-			$userShopId = $modelUserShop->getAttr('id');
-			$this->commit();//事务提交
-
-			$postData['id'] = $userId;
-			$postData['user_shop_id'] = $userShopId;
-			return successMsg('成功！',$postData);
-		}else{//手机号不存在
-			//验证是否存在店长
-			$userShopId = $this->checkManagerExist($factoryId,$shopId);
-			$modelUserShop = new \common\model\UserShop();
-			if($userShopId){//存在测删除
-				$modelUserShop->delById($userShopId,false);
+			$shopId = $this->getAttr('id');
+			//验证用户是否存在
+			$managerId = $this->checkUserByMobilePhone($postData['mobile_phone']);
+			if(!$managerId){//不存在
+				unset($postData['id']);
+				$postData['type'] = 0;
+				$postData['name'] = trim($postData['name']);
+				$postData['nickname'] = $postData['name'];
+				$postData['create_time'] = time();
+				$modelUser = new \common\model\User();
+				$res = $modelUser->isUpdate(false)->save($postData);
+				if($res===false){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$this->getError());
+				}
+				$managerId = $modelUser->getAttr('id');
 			}
-			return successMsg('删除成功！');
+			//验证用户是否为门店店长
+			$userShopId = $this->checkManager($userId,$factoryId,$storeId,$shopId);
+			if(!$userShopId){//不是管理员
+				$postData['type'] = 3;
+				$postData['user_id'] = $managerId;
+				$postData['factory_id'] = $factoryId;
+				$postData['store_id'] = $storeId;
+				$postData['shop_id'] = $shopId;
+				$modelUserShop = new \app\store\model\UserShop();
+				$res = $modelUserShop->isUpdate(false)->save($postData);
+				if($res===false){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$this->getError());
+				}
+				$userShopId = $modelUserShop->getAttr('id');
+			}
+			$this->commit();//事务提交
+			$postData['id'] = $shopId;
+			$postData['user_shop_id'] = $userShopId;
 		}
+		return successMsg('成功！',$postData);
 	}
 
 	/**验证用户是否为店长
 	 */
-	private function checkManagerExist($factoryId,$shopId){
-		$modelUserShop = new \common\model\UserShop();
+	private function checkManager($userId,$factoryId,$storeId,$shopId){
+		$modelUserShop = new \app\store\model\UserShop();
 		$where = [
-			['shop_id','=',$shopId],
+			['user_id','=',$userId],
 			['factory_id','=',$factoryId],
+			['store_id','=',$storeId],
+			['shop_id','=',$shopId],
 			['status','<>',2],
 			['type','=',3],
 		];

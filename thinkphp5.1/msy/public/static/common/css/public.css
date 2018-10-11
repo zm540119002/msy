@@ -2655,7 +2655,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .list-label{
     display: inline-block;
-    width:1.02rem;
+    width:1.2rem;
     margin:0 0.08rem 0 0;
     text-align:right;
     float:left;
@@ -3116,4 +3116,9 @@ input[type=text]::-webkit-focus-inner {
 }
 .operate-btn a:nth-child(2) span:nth-child(1){
     background-position:0 -0.47rem;
+}
+.list li{
+    border:1px solid #d9d9d9;
+    padding:0.15rem 0.25rem;
+    border-radius:4px;
 }
