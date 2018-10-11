@@ -61,8 +61,8 @@ class Shop extends \common\model\Base{
 					$managerId = $modelUser->getAttr('id');
 				}
 				$where = [
-					['factory_id','=',$this->factory['id']],
-					['store_id','=',$this->store['id']],
+					['factory_id','=',$factoryId],
+					['store_id','=',$storeId],
 					['shop_id','=',$postData['userShopId']],
 					['status','=',0],
 				];
