@@ -59,9 +59,10 @@ class Shop extends \common\model\Base{
 			$userShopId = $this->checkManager($userId,$factoryId,$storeId,$shopId);
 			if(!$userShopId){//不是管理员
 				$postData['type'] = 3;
-				$postData['user_id'] = $userId;
+				$postData['user_id'] = $managerId;
 				$postData['factory_id'] = $factoryId;
 				$postData['store_id'] = $storeId;
+				$postData['shop_id'] = $shopId;
 				$modelUserShop = new \app\store\model\UserShop();
 				$res = $modelUserShop->isUpdate(false)->save($postData);
 				if($res===false){
@@ -71,8 +72,10 @@ class Shop extends \common\model\Base{
 				$userShopId = $modelUserShop->getAttr('id');
 			}
 			$this->commit();//事务提交
+			$postData['id'] = $shopId;
+			$postData['user_shop_id'] = $userShopId;
 		}
-		return successMsg('删除成功！');
+		return successMsg('成功！',$postData);
 	}
 
 	/**验证用户是否为店长
