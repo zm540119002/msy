@@ -193,7 +193,8 @@
 		</div>
 	</section>
 </article>
-<a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="foot-btn f24">修改</a>
+<div class="foot-btn"><a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="group_btn50 f24">修改</a>
+<a href="javascript:;" class="goods-del group_btn50 f24">删除</a></div>
 
 {/block}
 {block name="common"}
@@ -260,7 +261,6 @@
 			$('.goodsvideoLayer video').get(0).play();
 		})
 		//星星评分等级
-		// var getFractionValue='{$aveScore}';
 		$('.five_star').setStar({
 			getFractionValue:4,
             star:'public_img/star.png',
@@ -268,17 +268,54 @@
 		});
 		$('.scrollwrapper').scrollFloor();
 	});
-	
-	// window.onload=function(){
-	// 	scrollFloor({
-	// 		floorClass : '.scroll-floor',       //楼层盒子class;默认为'.scroll-floor'
-	// 		navClass : '.scroll-nav',           //导航盒子class;默认为'.scroll-nav'
-	// 		activeClass : 'current',             //导航高亮class;默认为'active'
-	// 		delayTime:1000,                      //点击导航，滚动条滑动到该位置的时间间隔;默认为200
-	// 		activeTop:100,                      //楼层到窗口的某个位置时，导航高亮（设置该位置）;默认为100
-	// 		scrollTop:0                         //点击导航，楼层滑动到窗口的某位置;默认为100
-	// 	});
-	// }
+	//删除
+	$('body').on('click','.goods-del',function(){
+		var postData = {};
+		postData.goods_id = {$goodsInfo.id};
+		layer.open({
+			className:'storeTipcLayer',
+			content:'确定要删除？',
+			btn:['确定','取消'],
+			success:function(){
+				// layer.msg('的确很重要', {icon: 1});
+			},
+			yes:function(index){
+				$('.comfirm-text').next().remove();
+				$.ajax({
+					url: module + 'Goods/del',
+					data: postData,
+					type: 'post',
+					beforeSend: function(){
+						//$('.loading').show();
+					},
+					success: function(msg){
+						if(msg.status == 0){
+							dialog.error(msg.info);
+							return false;
+						}
+						if(msg.status == 1){
+							dialog.success(msg.info,controller + 'manage');
+						}
+						//layer.close(index);
+					},
+					complete:function(){
+
+					},
+					error:function (xhr) {
+						dialog.error('AJAX错误'+xhr);
+					}
+				});
+				layer.close(index);
+			},
+			no:function(){
+				$('.comfirm-text').next().remove();
+			}
+		})
+
+
+
+	});
+
 
 </script>
 {/block}
