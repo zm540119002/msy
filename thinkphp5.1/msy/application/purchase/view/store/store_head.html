@@ -34,13 +34,15 @@
     $(function(){
         //获取店铺信息
         var storeId = {$storeId};
-        $.get(module+'store/getInfo',{storeId:storeId},function (msg) {
-            if(msg != ''){
-                $('.storeId').val(msg.id);
-                if(msg.img){
-                    $('.store-logo').attr('src',uploads+msg.img);
+        $.get(module+'store/getInfo',{storeId:storeId},function (data) {
+            if(data != ''){
+                $('.storeId').val(data.id);
+                if(data.logo_img){
+                    $('.store-logo').attr('src',uploads+data.logo_img);
                 }
-                $('.store-name').text(msg.name);
+                $('.store-name').text(data.name);
+            }else{
+                dialog.success('没有此店铺',module+'index/index')
             }
         })
     })

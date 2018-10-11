@@ -18,8 +18,7 @@ class Goods extends Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-
-        $model = new\app\purchase\model\Goods;
+        $model = new \app\purchase\model\Goods;
         $config=[
             'where'=>[
             ],
