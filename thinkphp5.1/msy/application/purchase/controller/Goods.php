@@ -1,7 +1,7 @@
 <?php
 namespace app\purchase\controller;
 
-class Goods extends Base{
+class Goods extends \common\controller\Base{
     /**首页
      */
     public function index(){
