@@ -37,6 +37,28 @@ class Goods extends \common\controller\StoreBase
         }
         return $this->fetch();
     }
+    /**
+     * @return array|mixed
+     *商品预览
+     */
+    public function del()
+    {
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误');
+        }
+        $model = new \common\model\Goods;
+        $goodsId = (int)input('goods_id');
+        if(empty($goodsId) && !$goodsId){
+            $this -> error('此商品不存在');
+        }
+        if($this->factory && $this->store){
+            $condition=[
+                ['id','=',$goodsId],
+                ['store_id','=',$this->store['id']],
+            ];
+            return $model -> del($condition);
+        }
+    }
 
 
     /**
@@ -111,6 +133,7 @@ class Goods extends \common\controller\StoreBase
         $config=[
             'where'=>[
                 ['g.store_id','=',$this->store['id']],
+                ['g.status','=',0],
             ],
             'field'=>[
                     'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,

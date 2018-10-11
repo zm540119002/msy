@@ -18,6 +18,7 @@ class Shop extends \common\controller\StoreBase
                     ['common.user u','u.id = us.user_id'],
                 ],'where' => [
                     ['s.status','=',0],
+                    ['us.status','=',0],
                     ['s.user_id','=',$this->user['id']],
                     ['s.factory_id','=',$this->factory['id']],
                     ['s.store_id','=',$this->store['id']],
@@ -50,8 +51,16 @@ class Shop extends \common\controller\StoreBase
      */
     public function del(){
         if(request()->isAjax()){
-            $modelShop = new \app\store\model\Shop();
-            return $modelShop->del($this->factory['id']);
+            $modelUserShop = new \app\store\model\UserShop();
+            $condition = [
+                ['factory_id','=',$this->factory['id'],],
+                ['store_id' ,'=', $this->store['id'],],
+                ['id' ,'=', $_POST['userShopId'],],
+                ['shop_id' ,'=', $_POST['id'],],
+                ['type' ,'=', 3,],
+                ['status' ,'=', 0,],
+            ];
+            return $modelUserShop->del($condition);
         }
     }
 }

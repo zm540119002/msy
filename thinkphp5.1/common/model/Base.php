@@ -62,14 +62,13 @@ class Base extends \think\Model {
 
 	//删除
 	public function del($condition=[],$tag=true){
+		if(!is_array($condition) || empty($condition)){
+			return errorMsg('缺失删除条件');
+		}
 		$where = [
 			['status', '=', 0],
 		];
-		$id = input('post.id',0);
-		if(!$id){
-			return errorMsg('参数错误');
-		}
-		$where[] = ['id', '=', $id];
+		$where = array_merge($where,$condition);
 		if($tag){//标记删除
 			$result = $this->where($where)->setField('status',2);
 		}else{
