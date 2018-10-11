@@ -95,13 +95,8 @@
 				className:'entryShopInfoLayer',
 				content:entryShopInfo,
 				btn:['确定','取消'],
-				success:function(){
-					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
-				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
-					var html=$('#storeInfoList').html();
-					var listLength=$('.list li').length;
 					var content='';
 					if(!postData.store_name){
 						content='请填写门店名称';
