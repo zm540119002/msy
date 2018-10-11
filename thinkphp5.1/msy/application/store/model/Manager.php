@@ -28,14 +28,14 @@ class Manager extends \common\model\Base {
 			}
 		}else{//新增
 			//验证用户是否存在
-			$userId = $this->checkUserByMobilePhone($postData['mobile_phone']);
+			$userId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
 			$this->startTrans();//事务开启
 			if(!$userId){//不存在
 				unset($postData['id']);
 				$postData['type'] = 0;
 				$postData['nickname'] = trim($postData['name']);
 				$postData['create_time'] = time();
-				$res = $this->save($postData);
+				$res = $this->isUpdate(false)->save($postData);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$this->getError());
@@ -49,7 +49,7 @@ class Manager extends \common\model\Base {
 				$postData['user_id'] = $userId;
 				$postData['factory_id'] = $factoryId;
 				$modelUserFactory = new \common\model\UserFactory();
-				$res = $modelUserFactory->save($postData);
+				$res = $modelUserFactory->isUpdate(false)->save($postData);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$this->getError());

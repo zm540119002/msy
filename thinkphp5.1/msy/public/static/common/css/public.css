@@ -2620,7 +2620,7 @@ input[type=text]::-webkit-focus-inner {
 .account-list li{
     display: flex;
     display: -webkit-flex;
-    padding:0 0.20rem;
+    /*padding:0 0.20rem;*/
     margin:0 0 0.28rem 0;
     border:1px solid #727171;
     background: #f2f2f2;
@@ -2654,15 +2654,15 @@ input[type=text]::-webkit-focus-inner {
 .account-list li div:nth-child(2){
 }
 .list-label{
-    display: inline-block;
-    width:1.2rem;
+    /*display: inline-block;*/
+    width:1.4rem;
     margin:0 0.08rem 0 0;
     text-align:right;
-    float:left;
 }
 .list input[readonly="readonly"]{
     font-size:.24rem;
     vertical-align: 0;
+    /*display:inline-block;*/
 }
 .account-item{
     margin:0 0 0.25rem 0;
@@ -3095,6 +3095,10 @@ input[type=text]::-webkit-focus-inner {
     display:block;
     width:2.85rem;
 }
+.operate-btn{
+    width:3.5rem;
+    text-align: center;
+}
 .operate-btn a{
     margin:0 0 0.25rem 0;
 }
@@ -3119,6 +3123,12 @@ input[type=text]::-webkit-focus-inner {
 }
 .list li{
     border:1px solid #d9d9d9;
-    padding:0.15rem 0.25rem;
+    padding:0.25rem 0;
     border-radius:4px;
+}
+.list .list_left{
+}
+.list_left .list_left_item{
+    display:flex;
+    display:-webkit-flex;
 }

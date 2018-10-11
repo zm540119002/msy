@@ -97,7 +97,7 @@ class Store extends Base {
 		}
 		if($postData['mobile_phone']){//手机号存在
 			//验证用户是否存在
-			$userId = $this->checkUserByMobilePhone($postData['mobile_phone']);
+			$userId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
 			$this->startTrans();//事务开启
 			if(!$userId){//不存在
 				unset($postData['id']);
