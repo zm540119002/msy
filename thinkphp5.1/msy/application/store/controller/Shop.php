@@ -17,6 +17,9 @@ class Shop extends \common\controller\StoreBase
                     ['common.user u','u.id = us.user_id'],
                 ],'where' => [
                     ['s.status','=',0],
+                    ['s.user_id','=',$this->user['id']],
+                    ['s.factory_id','=',$this->factory['id']],
+                    ['s.store_id','=',$this->store['id']],
                 ],
             ];
             $list = $modelShop->getList($config);
