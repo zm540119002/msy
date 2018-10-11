@@ -31,12 +31,18 @@ class Shop extends \common\model\Base{
 				'name' => trim($postData['shop_name']),
 				'update_time' => time(),
 			];
-//			$this->startTrans();//事务开启
-//			$res = $this->isUpdate(true)->save($data);
-//			if($res===false){
-//				$this->rollback();//事务回滚
-//				return errorMsg('失败',$this->getError());
-//			}
+			$this->startTrans();//事务开启
+			$where = [
+				['factory_id','=',$this->factory['id']],
+				['store_id','=',$this->store['id']],
+				['id','=',$postData['userShopId']],
+				['status','=',0],
+			];
+			$res = $this->isUpdate(true)->where($where)->save($data);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
 			$res = $this->checkManagerChange($factoryId,$storeId,$postData['id'],$postData['userShopId'],$postData['mobile_phone']);
 			if($res){//店长改变了（手机号码改变）
 				//验证用户是否存在
@@ -50,11 +56,28 @@ class Shop extends \common\model\Base{
 					$res = $modelUser->isUpdate(false)->save($postData);
 					if($res===false){
 						$this->rollback();//事务回滚
-						return errorMsg('失败',$this->getError());
+						return errorMsg('失败',$modelUser->getError());
 					}
 					$managerId = $modelUser->getAttr('id');
 				}
+				$where = [
+					['factory_id','=',$this->factory['id']],
+					['store_id','=',$this->store['id']],
+					['shop_id','=',$postData['userShopId']],
+					['status','=',0],
+				];
+				$saveData = [
+					'user_id' => $managerId,
+				];
+				$modelUserShop = new \app\store\model\UserShop();
+				$res = $modelUserShop->isUpdate(true)->where($where)->save($saveData);
+				if($res===false){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$modelUserShop->getError());
+				}
 			}
+			$this->commit();//事务提交
+			return successMsg('成功！');
 		}else{//新增
 			$data = [
 				'name' => $postData['shop_name'],
