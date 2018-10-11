@@ -62,7 +62,7 @@ class Base extends \think\Model {
 
 	//删除
 	public function del($condition=[],$tag=true){
-		if(!is_array($condition) ||  empty($condition)){
+		if(!is_array($condition) || empty($condition)){
 			return errorMsg('缺失删除条件');
 		}
 		$where = [
