@@ -2658,13 +2658,11 @@ input[type=text]::-webkit-focus-inner {
     width:1.2rem;
     margin:0 0.08rem 0 0;
     text-align:right;
-    float:left;
 }
 .list input[readonly="readonly"]{
     font-size:.24rem;
     vertical-align: 0;
     display:inline-block;
-    float:left;
 }
 .account-item{
     margin:0 0 0.25rem 0;
