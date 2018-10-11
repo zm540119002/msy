@@ -13,28 +13,15 @@ class Shop extends \common\model\Base{
 
 	/**编辑
 	 */
-	public function edit($factoryId=''){
-		$data = input('post.');
-		$data['factory_id'] = $factoryId;
-		//数据验证
-		$validateShop = new \common\validate\Shop();
-		if(!$validateShop->scene('edit')->check($data)){
-			return errorMsg($validateShop->getError());
+	public function edit($userId,$factoryId,$storeId){
+		if(!intval($factoryId)){
+			return errorMsg('缺少采购商ID');
 		}
-		if(input('?post.id')){
-			$data['update_time'] = time();
-			$result = $this->allowField(true)->save($data,['id' => $data['shop_id'],'factory_id'=>$factoryId]);
-			if(false !== $result){
-				return successMsg("成功");
-			}
-			return errorMsg('失败',$this->getError());
-		}else{
-			$data['create_time'] = time();
-			$result = $this->allowField(true)->save($data);
-			if(!$result){
-				return errorMsg('失败');
-			}
-			return successMsg('提交申请成功');
+		$postData = input('post.');
+		//数据验证
+		$validateShop = new \app\store\validate\Shop();
+		if(!$validateShop->scene('edit')->check($postData)){
+			return errorMsg($validateShop->getError());
 		}
 	}
 
@@ -79,8 +66,8 @@ class Shop extends \common\model\Base{
 			}
 			//验证是否存在店长
 			$userShopId = $this->checkManagerExist($factoryId,$shopId);
-			$modelUserShop = new \common\model\UserShop();
-			if($userShopId){//存在测删除
+			$modelUserShop = new \app\store\model\UserShop();
+			if($userShopId){//存在则删除
 				$modelUserShop->delById($userShopId,false);
 			}
 			$postData['type'] = 3;
@@ -101,8 +88,8 @@ class Shop extends \common\model\Base{
 		}else{//手机号不存在
 			//验证是否存在店长
 			$userShopId = $this->checkManagerExist($factoryId,$shopId);
-			$modelUserShop = new \common\model\UserShop();
-			if($userShopId){//存在测删除
+			$modelUserShop = new \app\store\model\UserShop();
+			if($userShopId){//存在则删除
 				$modelUserShop->delById($userShopId,false);
 			}
 			return successMsg('删除成功！');
@@ -112,7 +99,7 @@ class Shop extends \common\model\Base{
 	/**验证用户是否为店长
 	 */
 	private function checkManagerExist($factoryId,$shopId){
-		$modelUserShop = new \common\model\UserShop();
+		$modelUserShop = new \app\store\model\UserShop();
 		$where = [
 			['shop_id','=',$shopId],
 			['factory_id','=',$factoryId],

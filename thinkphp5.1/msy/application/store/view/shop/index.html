@@ -95,6 +95,9 @@
 				className:'entryShopInfoLayer',
 				content:entryShopInfo,
 				btn:['确定','取消'],
+				success:function(){
+					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
+				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
 					var html=$('#storeInfoList').html();
@@ -111,14 +114,14 @@
 						errorTipc(content);
 						return false;
 					}
-					if(listLength<1){
-						$('.list').append(html);
-
-					}else{
-						$('.list li:first').before(html);
-					}
-					copyDataByName(_this,$('.entryShopInfoLayer .entryShopForm'));
-					layer.close(index);
+					var config = {
+						url:module + 'Shop/edit',
+						postData:postData,
+						fromObj:$('.setShopAccountLayer .setShopForm'),
+						toObj:_this,
+						index:index
+					};
+					dialogFormAdd(config)
 				}
 			});
 		});
@@ -134,9 +137,8 @@
 					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
 				},
 				yes:function(index){
-					var postData={};
+					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					var content='';
-					postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -147,14 +149,13 @@
 						return false;
 					}
 					var config = {
-						url:module + 'Manager/edit',
+						url:module + 'Shop/edit',
 						postData:postData,
 						fromObj:$('.setShopAccountLayer .setShopForm'),
 						toObj:_this,
 						index:index
 					};
 					dialogFormEdit(config);
-					layer.close(index)
 				}
 			})
 		});
