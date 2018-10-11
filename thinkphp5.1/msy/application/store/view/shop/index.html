@@ -62,8 +62,8 @@
 		<div>
 			<img class="left" src="" alt="" />
 			<div>
-				<p><span>某某XX</span>机构官方旗舰店</p>
-				<div>美尚会云店店铺</div>
+				<p><span>{$store.name|default=''}</span>{$store.store_type|getStoreType}</p>
+				<div>{$store.run_type|getRunType}</div>
 			</div>
 		</div>
 		<div>
