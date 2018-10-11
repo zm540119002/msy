@@ -3127,7 +3127,6 @@ input[type=text]::-webkit-focus-inner {
     border-radius:4px;
 }
 .list .list_left{
-    width:102%;
 }
 .list_left .list_left_item{
     display:flex;
