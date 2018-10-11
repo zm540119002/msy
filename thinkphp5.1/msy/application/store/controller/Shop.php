@@ -10,12 +10,16 @@ class Shop extends \common\controller\StoreBase
             $modelShop = new \app\store\model\Shop();
             $config = [
                 'field' => [
-                    's.id','s.name',
-                    'u.nickname','u.mobile_phone',
+                    's.id','s.name shop_name',
+                    'u.nickname name','u.mobile_phone',
                 ],'leftJoin' => [
-                    ['common.user u','u.id = s.user_id'],
+                    ['user_shop us','s.id = us.shop_id'],
+                    ['common.user u','u.id = us.user_id'],
                 ],'where' => [
                     ['s.status','=',0],
+                    ['s.user_id','=',$this->user['id']],
+                    ['s.factory_id','=',$this->factory['id']],
+                    ['s.store_id','=',$this->store['id']],
                 ],
             ];
             $list = $modelShop->getList($config);
