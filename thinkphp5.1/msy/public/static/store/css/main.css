@@ -490,7 +490,7 @@
     background: #efefef;
 }
 .admin-account-list li{
-    padding: .15rem;
+    /*padding: .15rem;*/
     background: #fff;
 }
 .admin-account-list li.current{

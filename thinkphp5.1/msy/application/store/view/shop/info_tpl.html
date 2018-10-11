@@ -1,14 +1,21 @@
 {notempty name='info'}
+<<<<<<< HEAD
 <li class="columns_flex l-r-sides " data-id="{$info.id}"  data-user_shop_id="{$info.user_shop_id}">
 	<div>
 		<div>
+=======
+<li class="columns_flex l-r-sides " data-id="{$info.id}"  data-user_factory_id="{$info.user_shop_id}">
+	<div class="list_left">
+		<div class="list_left_item">
+>>>>>>> c7369f9c12aac9757a22d266104d2cf24973d630
 			<span class="list-label">门店：</span>
-			<input type="text" class="list-admin-name" name="shop_name" value="{$info.shop_name|default=''}" readonly="readonly">
-		</div><div>
-			<span class="list-label">姓名：</span>
-			<input type="text" class="list-admin-name" name="name" value="{$info.name|default=''}" readonly="readonly">
+			<input type="text" class="list-admin-name f20" name="shop_name" value="{$info.shop_name|default=''}" readonly="readonly">
 		</div>
-		<div>
+		<div class="list_left_item">
+			<span class="list-label">姓名：</span>
+			<input type="text" class="list-admin-name f20" name="name" value="{$info.name|default=''}" readonly="readonly">
+		</div>
+		<div class="list_left_item">
 			<span class="list-label">手机号码：</span>
 			<input type="text" class="list-admin-mobile" name="mobile_phone" value="{$info.mobile_phone|default=''}" readonly="readonly">
 		</div>
