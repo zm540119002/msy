@@ -2664,6 +2664,7 @@ input[type=text]::-webkit-focus-inner {
     font-size:.24rem;
     vertical-align: 0;
     display:inline-block;
+    float:left;
 }
 .account-item{
     margin:0 0 0.25rem 0;
@@ -3129,5 +3130,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .list .list_left{
     width:102%;
+}
+.list_left .list_left_item{
     overflow:hidden;
 }
