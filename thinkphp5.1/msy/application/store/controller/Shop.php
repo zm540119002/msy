@@ -10,7 +10,7 @@ class Shop extends \common\controller\StoreBase
             $modelShop = new \app\store\model\Shop();
             $config = [
                 'field' => [
-                    's.id','s.name store_name',
+                    's.id','s.name shop_name',
                     'u.nickname name','u.mobile_phone',
                 ],'leftJoin' => [
                     ['user_shop us','s.id = us.shop_id'],

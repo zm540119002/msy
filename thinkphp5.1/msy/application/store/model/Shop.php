@@ -26,7 +26,7 @@ class Shop extends \common\model\Base{
 		if(isset($postData['id']) && intval($postData['id'])){//修改
 		}else{//新增
 			$data = [
-				'name' => trim($postData['store_name']),
+				'name' => trim($postData['shop_name']),
 				'user_id' => $userId,
 				'factory_id' => $factoryId,
 				'store_id' => $storeId,
