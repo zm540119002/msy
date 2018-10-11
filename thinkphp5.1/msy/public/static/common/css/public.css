@@ -3132,5 +3132,6 @@ input[type=text]::-webkit-focus-inner {
     width:102%;
 }
 .list_left .list_left_item{
-    overflow:hidden;
+    display:flex;
+    display:-webkit-flex;
 }
