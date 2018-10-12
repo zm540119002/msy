@@ -197,7 +197,8 @@ $(function(){
 			dialog.success('请选择店铺');
 			return false;
 		}
-		$(this).addClass('disabled');
+		var _this = $(this)
+		_this.addClass('disabled');
 		$.ajax({
 			url: controller + 'edit',
 			data: postData,
@@ -206,7 +207,7 @@ $(function(){
 				//$('.loading').show();
 			},
 			success: function(msg){
-				$(this).removeClass("nodisabled");//防止重复提交
+				_this.removeClass("nodisabled");//防止重复提交
 				if(msg.status == 0){
 					dialog.error(msg.info);
 					return false;

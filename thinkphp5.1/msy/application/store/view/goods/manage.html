@@ -40,19 +40,9 @@
 					{/notempty}
 				</div>
 				<div>
-					{if $vo.store_type == 1 }
-					<span>{$vo.name}</span>官方旗舰店
-					{elseif $vo.store_type == 2/}
-					<span>{$vo.name}</span>品牌旗舰店
-					{else /}
-					{/if}
-
-					{if $vo.run_type == 4 }
-					<p>B2B采购商城</p>
-					{elseif $vo.run_type == 5/}
-					<p>B2B分成商城</p>
-					{else /}
-					{/if}
+					<span >{$vo.name}</span>
+					<span >{$vo.store_type|getStoreType}</span>
+					<p>{$vo.run_type|getRunType}</p>
 				</div>
 				<div class="">
 				{if $vo.auth_status == -2 }
@@ -167,13 +157,11 @@
 	};
 	$(function () {
 		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
-		//没有默认店铺
-		var notDefaultStore = "{$notDefaultStore|default=0}";
-		if(notDefaultStore == 0){
-			//初始化商品列表
+		//有默认店铺
+		var store_id = {:json_encode($store.id)};
+		if(store_id){
 			getPagingList(config,postData);
 		}
-		console.log($(window).height());
 		var databaseContent=$('#databaseContent').html();
 		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
 			var _this=$(this);
@@ -251,25 +239,18 @@
 				dialog.success(msg.info);
 			})
 		});
+		//下拉加载
+		$('#scroller-wrapper').on('scroll',function(){
+
+			$('.app-view').css({overflowX:'initial',overflowY:'initial'});
+			var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
+			if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
 
 	});
-	//下拉加载
-	// window.addEventListener('scroll',function(){
-	// 	console.log(1);
-	// 	if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-	// 		console.log(123);
-	// 		config.loadTrigger = false;
-	// 		getPagingList(config,postData);
-	// 	}
-	// });
-	$('#scroller-wrapper').on('scroll',function(){
 
-		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
-		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
-		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
-			config.loadTrigger = false;
-			getPagingList(config,postData);
-		}
-	});
 </script>
 {/block}
