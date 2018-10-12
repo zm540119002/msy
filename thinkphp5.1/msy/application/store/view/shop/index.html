@@ -85,7 +85,11 @@
 		var config = {
 			url: module + 'Shop/index'
 		};
-		getList(config);
+		//有默认店铺
+		var store_id = {:json_encode($store.id)};
+		if(store_id){
+			getList(config);
+		}
 		//录入门店信息
 		var entryShopInfo=$('#entryShopInfo').html();
 		$('body').on('click','.entry_shop_info',function(){
