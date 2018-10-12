@@ -10,7 +10,7 @@ class Deploy extends UserBase
     {
         $model = new \common\model\Factory();
         if(request()->isAjax()){
-            return $model -> edit($this -> user['id'],$type = 2);
+            return $model -> edit($this -> user['id'],config('custom.type'));
         }else{
             $mobilePhone = $this -> user['mobile_phone'];
             $this->assign('mobilePhone',$mobilePhone);
