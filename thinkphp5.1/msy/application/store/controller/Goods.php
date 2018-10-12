@@ -39,7 +39,7 @@ class Goods extends \common\controller\StoreBase
     }
     /**
      * @return array|mixed
-     *商品预览
+     *商品删除
      */
     public function del()
     {

@@ -199,7 +199,6 @@
 {/block}
 {block name="common"}
 {include file="template/right_side_bar.html" /}
-{include file="store/list_layer" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -267,54 +266,53 @@
             starRed:'public_img/starred.png'
 		});
 		$('.scrollwrapper').scrollFloor();
-	});
-	//删除
-	$('body').on('click','.goods-del',function(){
-		var postData = {};
-		postData.goods_id = {$goodsInfo.id};
-		layer.open({
-			className:'storeTipcLayer',
-			content:'确定要删除？',
-			btn:['确定','取消'],
-			success:function(){
-				// layer.msg('的确很重要', {icon: 1});
-			},
-			yes:function(index){
-				$('.comfirm-text').next().remove();
-				$.ajax({
-					url: module + 'Goods/del',
-					data: postData,
-					type: 'post',
-					beforeSend: function(){
-						//$('.loading').show();
-					},
-					success: function(msg){
-						if(msg.status == 0){
-							dialog.error(msg.info);
-							return false;
+
+		//删除商品
+		$('body').on('click','.goods-del',function(){
+			var postData = {};
+			postData.goods_id = {$goodsInfo.id};
+			layer.open({
+				className:'storeTipcLayer',
+				content:'确定要删除？',
+				btn:['确定','取消'],
+				success:function(){
+					// layer.msg('的确很重要', {icon: 1});
+				},
+				yes:function(index){
+					$('.comfirm-text').next().remove();
+					$.ajax({
+						url: module + 'Goods/del',
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+							//$('.loading').show();
+						},
+						success: function(msg){
+							if(msg.status == 0){
+								dialog.error(msg.info);
+								return false;
+							}
+							if(msg.status == 1){
+								dialog.success(msg.info,controller + 'manage');
+							}
+							//layer.close(index);
+						},
+						complete:function(){
+
+						},
+						error:function (xhr) {
+							dialog.error('AJAX错误'+xhr);
 						}
-						if(msg.status == 1){
-							dialog.success(msg.info,controller + 'manage');
-						}
-						//layer.close(index);
-					},
-					complete:function(){
-
-					},
-					error:function (xhr) {
-						dialog.error('AJAX错误'+xhr);
-					}
-				});
-				layer.close(index);
-			},
-			no:function(){
-				$('.comfirm-text').next().remove();
-			}
-		})
-
-
-
+					});
+					layer.close(index);
+				},
+				no:function(){
+					$('.comfirm-text').next().remove();
+				}
+			})
+		});
 	});
+
 
 
 </script>
