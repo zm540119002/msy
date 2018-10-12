@@ -12,12 +12,13 @@ class UserFactory extends \think\model\Pivot {
     protected $connection = 'db_config_common';
 
 	//设置默认厂商
-	public function setDefaultFactory($userId=0){
+	public function setDefaultFactory($userId=0,$factoryType){
 		if(request()->isAjax()){
 			$this->startTrans();//开启事务
 			$where = [
 				['status','=',0],
 				['user_id','=',$userId],
+				['factory_type','=',$factoryType],
 			];
 			$result = $this->where($where)->setField('is_default',0);
 			if(false === $result){

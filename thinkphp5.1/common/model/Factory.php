@@ -50,7 +50,6 @@ class Factory extends Base {
 				return errorMsg('失败');
 			}
 		}else{
-
 			$data['create_time'] = time();
 			$this -> startTrans();
 			$result = $this->allowField(true)->save($data);
@@ -61,6 +60,7 @@ class Factory extends Base {
 			$factoryUserModel =  new \common\model\UserFactory;
 			$data2['user_id'] = $uid;
 			$data2['factory_id'] = $this->getAttr('id');
+			$data2['factory_type'] = $type;
 			$result = $factoryUserModel -> allowField(true) -> save($data2);
 			if(!$result){
 				$this ->rollback();
