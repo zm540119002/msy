@@ -251,14 +251,15 @@
 				dialog.error('企业标志图片还没有上传完毕');
 				return false;
 			}
-			$(this).addClass("nodisabled");
+			var _this = $(this);
+			_this.addClass("nodisabled");//防止重复提交
 			$.ajax({
 				url:controller + "edit",
 				type:'post',
 				data:postData,
 				dataType:'json',
 				success:function (data) {
-					$(this).removeClass("nodisabled");
+					_this.removeClass("nodisabled");
 
 				   if(data.status == 0){
 						dialog.error(data.info);
