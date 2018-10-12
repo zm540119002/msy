@@ -3126,6 +3126,9 @@ input[type=text]::-webkit-focus-inner {
     padding:0.25rem 0;
     border-radius:4px;
 }
+.list-item{
+    padding:.12rem;
+}
 .list .list_left{
 }
 .list_left .list_left_item{
