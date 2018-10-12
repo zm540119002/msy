@@ -127,6 +127,15 @@ class Tweet extends \common\controller\StoreBase
             return errorMsg(config('custom.not_ajax'));
         }
         $model = new \common\model\Promotion();
-        return $model->del($this->store['id'],true);
+        $data = input('post.');
+        $condition = [
+            ['store_id','=',$this->store['id']]
+        ];
+        if(is_array($data['id'])){
+            $condition[] = ['id','in',$data['id']];
+        }else{
+            $condition[] = ['id','=',$data['id']];
+        }
+        return $model->del($condition);
     }
 }

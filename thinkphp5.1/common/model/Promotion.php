@@ -93,28 +93,28 @@ class Promotion extends Base {
 		return successMsg("成功");
 	}
 
-	/**
-	 * 删除
-	 */
-	public function del($storeId,$tag = true){
-		$data = input('post.');
-		$where = [
-			['store_id','=',$storeId]
-		];
-		if(is_array($data['id'])){
-			$where[] = ['id','in',$data['id']];
-		}else{
-			$where[] = ['id','=',$data['id']];
-		}
-		if($tag){//标记删除
-			$result = $this->where($where)->setField('status',2);
-		}else{
-			$result = $this->where($where)->delete();
-		}
-		if(false !== $result){
-			return successMsg("已删除");
-		}
-		return errorMsg('失败');
-	}
+//	/**
+//	 * 删除
+//	 */
+//	public function del($storeId,$tag = true){
+//		$data = input('post.');
+//		$where = [
+//			['store_id','=',$storeId]
+//		];
+//		if(is_array($data['id'])){
+//			$where[] = ['id','in',$data['id']];
+//		}else{
+//			$where[] = ['id','=',$data['id']];
+//		}
+//		if($tag){//标记删除
+//			$result = $this->where($where)->setField('status',2);
+//		}else{
+//			$result = $this->where($where)->delete();
+//		}
+//		if(false !== $result){
+//			return successMsg("已删除");
+//		}
+//		return errorMsg('失败');
+//	}
 	
 }

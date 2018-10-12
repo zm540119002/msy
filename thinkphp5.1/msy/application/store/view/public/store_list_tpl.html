@@ -16,6 +16,7 @@
         var store='{:json_encode($store)}';
         if(store === 'null'){
             setDefaultStore();
+            return false;
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){
