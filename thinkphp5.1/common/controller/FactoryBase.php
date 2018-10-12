@@ -35,7 +35,7 @@ class FactoryBase extends UserBase{
     //设置默认供应商
     public function setDefaultFactory(){
         $modelUserFactory = new \common\model\UserFactory();
-        return $modelUserFactory->setDefaultFactory($this->user['id']);
+        return $modelUserFactory->setDefaultFactory($this->user['id'],config('custom.type'));
     }
     
 }

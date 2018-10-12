@@ -355,7 +355,7 @@
 				opt={
 					content:cloudTwitter,
 					title:'发图片消息',
-					msg:'请上传图片',
+					msg:'请上传图片11',
 					releaseType:releaseType,
 					goodsData:goodsData
 				}
@@ -433,19 +433,21 @@
 					$('.msg-img').val(layermultiImgAttr);
 					//序列化表单数据
 					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
-					console.log(releaseFormData)
-					releaseFormData.passage =  layermultiImgAttr;
+					releaseFormData.fileBase64 =  layermultiImgAttr;
 					releaseFormData.release_type =  options.releaseType;
+					console.log(releaseFormData);
 					var content='';
 					if(!releaseFormData.headline){
 						content='请填写消息内容';
 					}else if(!releaseFormData.fileBase64){
-						content=options.msg;
+//						content=options.msg;
+						content=11;
 					}
 					if(content){
 						errorTipc(content);
 						return false;
 					}
+					var _this=$(this);
 					_this.addClass("nodisabled");//防止重复提交
 					$.ajax({
 						url:'edit',
