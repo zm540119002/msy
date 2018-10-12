@@ -158,9 +158,9 @@
 	$(function () {
 		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
 
-		var store = '{:json_encode($store)}';
-		if(store!=='null'){//有默认店铺
-			//初始化商品列表
+		//有默认店铺
+		var store_id = {:json_encode($store.id)};
+		if(store_id){
 			getPagingList(config,postData);
 		}
 		var databaseContent=$('#databaseContent').html();
