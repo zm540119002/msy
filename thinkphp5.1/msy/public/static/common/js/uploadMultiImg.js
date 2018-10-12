@@ -408,7 +408,7 @@ function uploadsImgDescribe(content,obj){
                 data: postData,
                 type: 'post',
                 beforeSend: function(){
-                    errorTipc('文件还没上传完毕');
+                    dialog.error('文件还没上传完毕');
                 },
                 success: function(info){
                     if(info.status == 0){
@@ -425,7 +425,7 @@ function uploadsImgDescribe(content,obj){
                     }
                     obj.data('src', imgArray);
                     if(info != ''){
-                        errorTipc('图片文件上传完');
+                        dialog.error('图片文件上传完');
                         layer.close(index);
                     }else{
                         
