@@ -3126,7 +3126,7 @@ input[type=text]::-webkit-focus-inner {
     padding:0.25rem 0;
     border-radius:4px;
 }
-.list-item{
+.list-item li{
     padding:.12rem;
 }
 .list .list_left{
