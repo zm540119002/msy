@@ -10,7 +10,7 @@ class Manager extends \common\model\Base {
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function edit($factoryId){
+	public function edit($factoryId,$factoryType){
 		if(!intval($factoryId)){
 			return errorMsg('缺少采购商ID');
 		}
@@ -48,6 +48,7 @@ class Manager extends \common\model\Base {
 				$postData['type'] = 2;
 				$postData['user_id'] = $userId;
 				$postData['factory_id'] = $factoryId;
+				$postData['factory_type'] = $factoryType;
 				$modelUserFactory = new \common\model\UserFactory();
 				$res = $modelUserFactory->isUpdate(false)->save($postData);
 				if($res===false){
