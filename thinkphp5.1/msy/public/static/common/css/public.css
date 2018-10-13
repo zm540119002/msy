@@ -710,8 +710,8 @@ i{
 }
 .channel_nav a span.union_purchase{background-position:0 0;}
 .channel_nav a span.exclusive{background-position:0 -0.80rem;}
-.channel_nav a span.classify{background-position:0 -1.60rem;}
-.channel_nav a span.purchasers{background-position:0 -2.40rem;}
+.channel_nav a span.classify{background-position:0 -1.595rem;}
+.channel_nav a span.purchasers{background-position:0 -2.395rem;}
 .channel_nav a span.recharge{background-position:0 -3.19rem;}
 .store_organize_nav a span.classify{background-position:0 -1.60rem;}
 .channel_nav>a.current:before,
@@ -3096,10 +3096,11 @@ input[type=text]::-webkit-focus-inner {
     width:2.85rem;
 }
 .operate-btn{
-    width:3.5rem;
-    text-align: center;
+    /*width:3.5rem;*/
+    margin:0 0.25rem 0 0;
 }
 .operate-btn a{
+    width:0.5rem;
     margin:0 0 0.25rem 0;
 }
 .operate-btn a:last-child{
@@ -3124,6 +3125,7 @@ input[type=text]::-webkit-focus-inner {
 .list li{
     border:1px solid #d9d9d9;
     padding:0.25rem 0;
+    margin:0 0 0.20rem 0;
     border-radius:4px;
 }
 .list-item li{
