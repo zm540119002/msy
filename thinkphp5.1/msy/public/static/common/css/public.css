@@ -3096,7 +3096,7 @@ input[type=text]::-webkit-focus-inner {
     width:2.85rem;
 }
 .operate-btn{
-    width:3.5rem;
+    /*width:3.5rem;*/
     text-align:left;
 }
 .operate-btn a{
