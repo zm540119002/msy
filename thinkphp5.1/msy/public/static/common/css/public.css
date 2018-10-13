@@ -665,6 +665,7 @@ i{
     display:block;
     position:relative;
     color:#898989;
+    font-size:0.16rem;
 }
 .module-navigation{
     /*position: absolute;
