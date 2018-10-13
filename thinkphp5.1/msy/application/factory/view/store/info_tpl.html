@@ -8,11 +8,11 @@
 		<span name="type_name" >{$info.run_type|getRunType}</span>
 		<div>
 			<span>店长:</span>
-			<input type="text" value="{$info.nickname|default=''}" name="name" readonly="readonly"/>
+			<input type="text" value="{$info.nickname|default=''}" name="name" readonly="readonly" unselectable="on" onfocus="this.blur()"/>
 		</div>
 		<div>
 			<span>手机号码:</span>
-			<input type="tel" value="{$info.mobile_phone|default=''}" name="mobile_phone" readonly="readonly"/>
+			<input type="tel" value="{$info.mobile_phone|default=''}" name="mobile_phone" readonly="readonly" unselectable="on" onfocus="this.blur()"/>
 		</div>
 	</div>
 	<div>
