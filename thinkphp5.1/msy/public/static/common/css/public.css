@@ -3127,6 +3127,7 @@ input[type=text]::-webkit-focus-inner {
     border-radius:4px;
 }
 .list-item li{
+    position:relative;
     padding:.12rem;
 }
 .list .list_left{
@@ -3134,4 +3135,15 @@ input[type=text]::-webkit-focus-inner {
 .list_left .list_left_item{
     display:flex;
     display:-webkit-flex;
+}
+
+.set_shopowner{
+    position:absolute;
+    top:.5rem;
+    right:.15rem;
+    width:1rem;
+    padding:.05rem 0.18rem;
+    border:1px solid #39b54a;
+    border-radius:4px;
+    text-align: center;
 }
