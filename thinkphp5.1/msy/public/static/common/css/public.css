@@ -662,10 +662,11 @@ i{
     padding:0.085rem 0;
 }
 .foot_nav_bar a{
+    width:100%;
     display:block;
     position:relative;
     color:#898989;
-    font-size:0.16rem;
+    font-size:0;
 }
 .module-navigation{
     /*position: absolute;
