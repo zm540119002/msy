@@ -3100,7 +3100,7 @@ input[type=text]::-webkit-focus-inner {
     margin:0 0.25rem 0 0;
 }
 .operate-btn a{
-    width:0.5rem;
+    width:1.05rem;
     margin:0 0 0.25rem 0;
 }
 .operate-btn a:last-child{
