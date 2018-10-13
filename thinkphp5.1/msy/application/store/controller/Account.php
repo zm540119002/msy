@@ -37,7 +37,7 @@ class Account extends \common\controller\FactoryBase
     public function setStatus(){
         if(request()->isPost()){
             $modelUserFactory = new \common\model\UserFactory();
-            $info = $modelUserFactory->setStatus($this->factory);
+            $info = $modelUserFactory->setStatus($this->factory['id']);
             return $info;
         }
     }

@@ -10,8 +10,8 @@ class Manager extends \common\model\Base {
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function edit($factory){
-		if(!intval($factory['id'])){
+	public function edit($factoryId){
+		if(!intval($factoryId)){
 			return errorMsg('缺少采购商ID');
 		}
 		$postData = input('post.');
@@ -43,12 +43,11 @@ class Manager extends \common\model\Base {
 				$userId = $this->getAttr('id');
 			}
 			//验证用户是否为管理员
-			$userFactoryId = $this->checkManager($userId,$factory);
+			$userFactoryId = $this->checkManager($userId,$factoryId);
 			if(!$userFactoryId){//不是管理员
 				$postData['type'] = 2;
 				$postData['user_id'] = $userId;
-				$postData['factory_id'] = $factory['id'];
-				$postData['factory_type'] = $factory['type'];
+				$postData['factory_id'] = $factoryId;
 				$modelUserFactory = new \common\model\UserFactory();
 				$res = $modelUserFactory->isUpdate(false)->save($postData);
 				if($res===false){
@@ -65,11 +64,10 @@ class Manager extends \common\model\Base {
 	}
 
 	//列表
-	public function getList($factory){
+	public function getList($factoryId){
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
-			['uf.factory_id','=',$factory['id']],
-			['uf.factory_id','=',$factory['type']],
+			['uf.factory_id','=',$factoryId],
 			['uf.status','=',0],
 			['uf.type','=',2],
 			['u.status','=',0],
@@ -86,7 +84,7 @@ class Manager extends \common\model\Base {
 	}
 
 	//删除
-	public function del($factory,$tag=true){
+	public function del($factoryId,$tag=true){
 		$id = input('post.id',0);
 		if(!$id){
 			return errorMsg('参数错误');
@@ -98,8 +96,7 @@ class Manager extends \common\model\Base {
 		$where = [
 			['user_id', '=', $id],
 			['id', '=', $userFactoryId],
-			['factory_id', '=', $factory['id']],
-			['factory_type', '=', $factory['type']],
+			['factory_id', '=', $factoryId],
 			['status', '=', 0],
 			['type', '=', 2],
 		];
@@ -117,12 +114,11 @@ class Manager extends \common\model\Base {
 
 	/**检查管理员账号
 	 */
-	private function checkManager($userId,$factory){
+	private function checkManager($userId,$factoryId){
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['user_id','=',$userId],
-			['factory_id','=',$factory['id']],
-			['factory_type','=',$factory['type']],
+			['factory_id','=',$factoryId],
 			['status','<>',2],
 			['type','=',2],
 		];

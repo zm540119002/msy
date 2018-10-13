@@ -11,12 +11,11 @@ class Account extends \think\Model {
 
 	/**检查账号
 	 */
-	public function checkExist($userId,$factory){
+	public function checkExist($userId,$factoryId){
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['user_id','=',$userId],
-			['factory_id','=',$factory['id']],
-			['factory_type','=',$factory['type']],
+			['factory_id','=',$factoryId],
 			['status','<>',2],
 		];
 		$res = $modelUserFactory->where($where)->count('id');
@@ -124,8 +123,8 @@ class Account extends \think\Model {
 	}
 
 	//详情
-	public function detail($factory){
-		if(!intval($factory['id'])){
+	public function detail($factoryId){
+		if(!intval($factoryId)){
 			return errorMsg('参数错误');
 		}
 		//用户信息
@@ -146,8 +145,7 @@ class Account extends \think\Model {
 		$where = [
 			['status', '<>', 2],
 			['user_id', '=', $id],
-			['factory_id', '=', $factory['id']],
-			['factory_type', '=', $factory['type']],
+			['factory_id', '=', $factoryId],
 		];
 		$field = [
 			'status',
@@ -159,18 +157,17 @@ class Account extends \think\Model {
 		}
 		//用户工厂角色
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
-		$info['role'] = $modelUserFactoryRole->getRole($info['id'],$factory['id']);
+		$info['role'] = $modelUserFactoryRole->getRole($info['id'],$factoryId);
 		return $info?$info->toArray():[];
 	}
 
 	//获取列表
-	public function getList($factory){
+	public function getList($factoryId){
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['u.status','<>',2],
 			['uf.status','<>',2],
-			['uf.factory_id','=',$factory['id']],
-			['uf.factory_type','=',$factory['type']],
+			['uf.factory_id','=',$factoryId],
 			['uf.type','=',2],
 		];
 		$keyword = input('get.keyword','');
@@ -186,7 +183,7 @@ class Account extends \think\Model {
 		$list = $modelUserFactory->alias('uf')->where($where)->field($field)->join($join)->select();
 		$modelUserFactoryRole = new \app\factory\model\UserFactoryRole();
 		foreach ($list as &$value){
-			$value['role'] = $modelUserFactoryRole->getRole($value['id'],$factory['id']);
+			$value['role'] = $modelUserFactoryRole->getRole($value['id'],$factoryId);
 		}
 		return count($list)?$list:[];
 	}
