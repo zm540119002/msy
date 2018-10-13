@@ -710,8 +710,8 @@ i{
 }
 .channel_nav a span.union_purchase{background-position:0 0;}
 .channel_nav a span.exclusive{background-position:0 -0.80rem;}
-.channel_nav a span.classify{background-position:0 -1.60rem;}
-.channel_nav a span.purchasers{background-position:0 -2.40rem;}
+.channel_nav a span.classify{background-position:0 -1.595rem;}
+.channel_nav a span.purchasers{background-position:0 -2.395rem;}
 .channel_nav a span.recharge{background-position:0 -3.19rem;}
 .store_organize_nav a span.classify{background-position:0 -1.60rem;}
 .channel_nav>a.current:before,
