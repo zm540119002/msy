@@ -26,82 +26,82 @@
 						</div>
 					</section>
 				</div>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="f24 apply-store-content">
+								<div class="thead-td">
+									<span class="cols">店铺名称</span>
+									<span class="cols">状态</span>
+									<span class="cols">备注</span>
+								</div>
+								<ul>
+									{notempty name="storeList"}
+									{volist name="storeList" id="vo"}
+									<li class="thead-td" data-id="{$vo.id}">
+										<div class="cols">
+											{notempty name="vo.logo_img"}
+											<img class="left small_default_img" src="public_uploads/{$vo.logo_img}" alt="">
+											{else /}
+											<img class="left small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
+											{/notempty}
+											<div class="store-type ">
+												<div>
+													<span>{$vo.name}{$vo.store_type|getStoreType}</span>
+												</div>
+												<p>{$vo.run_type|getRunType}</p>
+											</div>
+										</div>
+										{if $vo.auth_status == -2 }
+										<div class="cols">
+											<span>未通过</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr reapply_store" href="javascript:void(0);"  data-id="{$vo.id}" data-set-status="0">重新申请></a>
+										</div>
+										{elseif $vo.auth_status == -1 /}
+										<div class="cols">
+											<span>已关闭</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr activate_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="0">激活店铺></a>
+										</div>
+										{elseif $vo.auth_status == 0 /}
+										<div class="cols">
+											<span>审核中</span>
+										</div>
+										<div class="cols">
+											<span>5个工作日</span>
+										</div>
+										{elseif $vo.auth_status == 1 /}
+										<div class="cols">
+											<span>建设中</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="-1">申请关店></a>
+										</div>
+										{elseif $vo.auth_status == 2 /}
+										<div class="cols">
+											<span>营业中</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}" data-set-status="-1">申请关店></a>
+										</div>
+										{else /}
+										{/if}
+									</li>
+									{/volist}
+									{else /}
+									<li><span>暂无店铺</span></li>
+									{/notempty}
+								</ul>
+							</section>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
-	<div class="page-wrap">
-		<div class="bodys bodys_short" id="bodys">
-			<div class="content-wrapper">
-				<section class="f24 apply-store-content">
-					<div class="thead-td">
-						<span class="cols">店铺名称</span>
-						<span class="cols">状态</span>
-						<span class="cols">备注</span>
-					</div>
-					<ul>
-						{notempty name="storeList"}
-						{volist name="storeList" id="vo"}
-						<li class="thead-td" data-id="{$vo.id}">
-							<div class="cols">
-								{notempty name="vo.logo_img"}
-								<img class="left small_default_img" src="public_uploads/{$vo.logo_img}" alt="">
-								{else /}
-								<img class="left small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
-								{/notempty}
-								<div class="store-type ">
-									<div>
-										<span>{$vo.name}{$vo.store_type|getStoreType}</span>
-									</div>
-									<p>{$vo.run_type|getRunType}</p>
-								</div>
-							</div>
-							{if $vo.auth_status == -2 }
-							<div class="cols">
-								<span>未通过</span>
-							</div>
-							<div class="cols">
-								<a class="text-color-gr reapply_store" href="javascript:void(0);"  data-id="{$vo.id}" data-set-status="0">重新申请></a>
-							</div>
-							{elseif $vo.auth_status == -1 /}
-							<div class="cols">
-								<span>已关闭</span>
-							</div>
-							<div class="cols">
-								<a class="text-color-gr activate_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="0">激活店铺></a>
-							</div>
-							{elseif $vo.auth_status == 0 /}
-							<div class="cols">
-								<span>审核中</span>
-							</div>
-							<div class="cols">
-								<span>5个工作日</span>
-							</div>
-							{elseif $vo.auth_status == 1 /}
-							<div class="cols">
-								<span>建设中</span>
-							</div>
-							<div class="cols">
-								<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="-1">申请关店></a>
-							</div>
-							{elseif $vo.auth_status == 2 /}
-							<div class="cols">
-								<span>营业中</span>
-							</div>
-							<div class="cols">
-								<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}" data-set-status="-1">申请关店></a>
-							</div>
-							{else /}
-							{/if}
-						</li>
-						{/volist}
-						{else /}
-						<li><span>暂无店铺</span></li>
-						{/notempty}
-					</ul>
-				</section>
-			</div>
-		</div>
-	</div>
 </article>
 <a href="{:url('store/edit')}" class="apply-new-store f24 foot-btn">申请开新店</a>
 {/block}
