@@ -157,7 +157,6 @@
 	};
 	$(function () {
 		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
-
 		//有默认店铺
 		var store_id = {:json_encode($store.id)};
 		if(store_id){
@@ -240,16 +239,18 @@
 				dialog.success(msg.info);
 			})
 		});
+		//下拉加载
+		$('#scroller-wrapper').on('scroll',function(){
+
+			$('.app-view').css({overflowX:'initial',overflowY:'initial'});
+			var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
+			if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
 
 	});
-	$('#scroller-wrapper').on('scroll',function(){
 
-		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
-		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
-		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
-			config.loadTrigger = false;
-			getPagingList(config,postData);
-		}
-	});
 </script>
 {/block}

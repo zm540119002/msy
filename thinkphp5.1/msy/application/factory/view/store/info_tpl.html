@@ -1,18 +1,18 @@
 {notempty name='info'}
-<li class="columns_flex l-r-sides" data-id="{$info.id}" data-user_store_id="{$info.user_store_id}">
+<li class="" data-id="{$info.id}" data-user_store_id="{$info.user_store_id}">
 	<div>
 		<p>
-			<span name="store_name">{$info.factory_name|default=''}</span>机构
+			<span name="store_name">{$info.factory_name|default=''}</span>
 			<span name="store_type">{$info.store_type|getStoreType}</span>
 		</p>
 		<span name="type_name" >{$info.run_type|getRunType}</span>
 		<div>
 			<span>店长:</span>
-			<input type="text" value="{$info.nickname|default=''}" name="name" readonly="readonly"/>
+			<input type="text" value="{$info.nickname|default=''}" name="name" readonly="readonly" unselectable="on" onfocus="this.blur()"/>
 		</div>
 		<div>
 			<span>手机号码:</span>
-			<input type="tel" value="{$info.mobile_phone|default=''}" name="mobile_phone" readonly="readonly"/>
+			<input type="tel" value="{$info.mobile_phone|default=''}" name="mobile_phone" readonly="readonly" unselectable="on" onfocus="this.blur()"/>
 		</div>
 	</div>
 	<div>

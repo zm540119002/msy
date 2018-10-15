@@ -21,7 +21,7 @@ class Manager extends \common\controller\FactoryBase
     public function edit(){
         if(request()->isAjax()){
             $modelManager = new \app\store\model\Manager();
-            $info = $modelManager->edit($this->factory['id']);
+            $info = $modelManager->edit($this->factory['id'],$this->factory['type']);
             if($info['status']==0){
                 return $info;
             }else{
