@@ -49,8 +49,8 @@ class Store extends Base {
 			$postData['user_id'] = $userId;
 			$postData['factory_id'] = $factoryId;
 			$postData['store_id'] = $storeId;
-			$res = $modelUserStore->save($postData);
-			if($res===false){
+			$result = $modelUserStore->save($postData);
+			if(!$result){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
