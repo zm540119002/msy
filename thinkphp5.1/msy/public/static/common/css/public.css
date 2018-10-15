@@ -2920,6 +2920,9 @@ input[type=text]::-webkit-focus-inner {
     transition: transform .4s cubic-bezier(.55,0,.1,1);
     transition: transform .4s cubic-bezier(.55,0,.1,1),-webkit-transform .4s cubic-bezier(.55,0,.1,1);*/
 }
+.bodys_short{
+    top:2rem;
+}
 .bodys-header{
     position: fixed;
     top: 0;
