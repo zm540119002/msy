@@ -3151,3 +3151,6 @@ input[type=text]::-webkit-focus-inner {
     border-radius:4px;
     text-align: center;
 }
+.layui-m-layermain, .layui-m-layershade{
+    position:absolute;
+}
