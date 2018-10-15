@@ -2587,7 +2587,7 @@ input[type=text]::-webkit-focus-inner {
 }
 /*账号授权*/
 .account-content-wrapper{
-    padding:0.25rem 0.20rem 1rem;
+    padding:0.25rem 0.10rem 1rem;
 }
 .account-top .columns_flex{
     margin:0.15rem 0;
