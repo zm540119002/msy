@@ -8,35 +8,49 @@
 		<p class="comfirm-text">确定要<span class="textTipc">激活</span>以下店铺？</p>
 	</div>
 </section>
-<article class="f24">
-	{include file="public/switch_factory_head" /}
-	<section class="specific_type bottomLine store_deploy_nav">
-		<div class="columns_flex f20 l-r-sides store_deploy_bar">
-			<a href="{:url('Manager/index')}" class="current">管理员账号</a>
-			<a href="{:url('Record/preview')}">企业档案</a>
-			<a href="{:url('Brand/manage')}">商标备案</a>
-			<a href="{:url('Store/manage')}">开店申请</a>
-			<a href="{:url('Store/getList')}">店长账号</a>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+				{include file="public/switch_factory_head" /}
+					<div class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}" class="current">管理员账号</a>
+							<a href="{:url('Record/preview')}">企业档案</a>
+							<a href="{:url('Brand/manage')}">商标备案</a>
+							<a href="{:url('Store/manage')}">开店申请</a>
+							<a href="{:url('Store/getList')}">店长账号</a>
+						</div>
+					</div>
+				</div>
+				<!--添加管理员账号-->
+				<section id="addAdminAccount" style="display:none;">
+					<form class="addAdminForm">
+						<div class="account-field">
+							<input type="text" class="admin-name f20" placeholder="姓名" name="name">
+						</div>
+						<div class="account-field">
+							<input type="tel" class="admin-mobile f20" placeholder="手机号码" name="mobile_phone">
+						</div>
+					</form>
+					<div class="error_tipc"></div>
+				</section>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="f24 account-content-wrapper admin-account-wrapper">
+								<div class="account-list-content">
+									<ul class="account-list admin-account-list list"></ul>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+				<a href="javascript:void(0);" class="addManageAccount foot-btn f24">新增管理员账号</a>
+			</div>
 		</div>
 	</section>
-	<!--添加管理员账号-->
-	<section id="addAdminAccount" style="display:none;">
-		<form class="addAdminForm">
-			<div class="account-field">
-				<input type="text" class="admin-name f20" placeholder="姓名" name="name">
-			</div>
-			<div class="account-field">
-				<input type="tel" class="admin-mobile f20" placeholder="手机号码" name="mobile_phone">
-			</div>
-		</form>
-		<div class="error_tipc"></div>
-	</section>
-	<section class="f24 account-content-wrapper admin-account-wrapper">
-		<div class="account-list-content">
-			<ul class="account-list admin-account-list list"></ul>
-		</div>
-	</section>
-	<a href="javascript:void(0);" class="addManageAccount foot-btn f24">新增管理员账号</a>
 </article>
 {/block}
 {block name="common"}{/block}
