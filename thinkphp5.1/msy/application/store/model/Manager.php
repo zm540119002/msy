@@ -32,7 +32,7 @@ class Manager extends \common\model\Base {
 			$this->startTrans();//事务开启
 			if(!$userId){//不存在
 				unset($postData['id']);
-				$postData['type'] = 0;
+				$postData['type'] = 1;
 				$postData['nickname'] = trim($postData['name']);
 				$postData['create_time'] = time();
 				$res = $this->isUpdate(false)->save($postData);
