@@ -2587,7 +2587,7 @@ input[type=text]::-webkit-focus-inner {
 }
 /*账号授权*/
 .account-content-wrapper{
-    padding:0.25rem 0.20rem 1rem;
+    padding:0.25rem 0.10rem 1rem;
 }
 .account-top .columns_flex{
     margin:0.15rem 0;
@@ -2920,6 +2920,9 @@ input[type=text]::-webkit-focus-inner {
     transition: transform .4s cubic-bezier(.55,0,.1,1);
     transition: transform .4s cubic-bezier(.55,0,.1,1),-webkit-transform .4s cubic-bezier(.55,0,.1,1);*/
 }
+.bodys_short{
+    top:2rem;
+}
 .bodys-header{
     position: fixed;
     top: 0;
@@ -3150,4 +3153,7 @@ input[type=text]::-webkit-focus-inner {
     border:1px solid #39b54a;
     border-radius:4px;
     text-align: center;
+}
+.layui-m-layermain, .layui-m-layershade{
+    position:absolute;
 }
