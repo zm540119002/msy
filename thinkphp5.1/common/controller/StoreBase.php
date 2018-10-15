@@ -14,7 +14,7 @@ class StoreBase extends FactoryBase
         if($this->factory){
             //获取厂商店铺详情列表
             \common\cache\FactoryStore::removeList($this->factory['id']);
-            $list = \common\cache\FactoryStore::getList($this->factory['id']);
+            $list = \common\cache\FactoryStore::get($this->factory['id']);
             $this -> assign('storeList', $list);
             $count = count($list);
             if ($count > 1) {
