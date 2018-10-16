@@ -16,18 +16,21 @@ class Tweet extends \common\controller\StoreBase
     public function edit()
     {
         if(request()->isPost()){
+            $data = input('post.');
             $model = new \common\model\Tweet;
-            $data = input();
-            $result =  $this->uploadFileToTemp();
-            print_r($result);exit;
-            $imgs = '';
-            if($result['status']){
-                foreach ($result['info'] as $k=>$v){
-                    $imgs .= moveImgFromTemp(config('upload_dir.factory_tweet'),basename($v)) .',';
+            if(isset($data['fileBase64']) && !empty($data['fileBase64'])){
+                $result =  $this->uploadFileToTemp();
+                $file = '';
+                if($result['status']) {
+                    foreach ($result['info'] as $k => $v) {
+                        $file .= moveImgFromTemp(config('upload_dir.factory_tweet'), basename($v)) . ',';
+                    }
+                    if ($data['release_type'] == 1) {
+                        $data['img'] = $file;
+                    } else if ($data['release_type'] == 2) {
+                        $data['video'] = $file;
+                    }
                 }
-                $data['first_img'] = $imgs;
-            }else{
-                return errorMsg('上传失败');
             }
             unset($data['fileBase64']);
             $data['store_id'] = $this->store['id'];
