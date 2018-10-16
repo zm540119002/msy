@@ -3157,3 +3157,15 @@ input[type=text]::-webkit-focus-inner {
 .layui-m-layermain, .layui-m-layershade{
     position:absolute;
 }
+.foot_operate_bar{
+    margin:0;
+}
+.foot_operate_bar a{
+    color:#fff;
+}
+.foot_operate_bar .goods-del{
+    background:#ff0000;
+}
+.foot_operate_bar .modify{
+    background:#009A3E;
+}
