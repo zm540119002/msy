@@ -18,7 +18,7 @@ class Store extends Base {
 
 	/**编辑
 	 */
-	public function edit($factoryId=''){
+	public function edit($factoryId='',$userId){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('\common\validate\Store');
@@ -36,11 +36,25 @@ class Store extends Base {
 			if(!$result = $validate->scene('add')->check($data)) {
 				return errorMsg($validate->getError());
 			}
+			$this->startTrans();
 			$data['create_time'] = time();
 			$result = $this->allowField(true)->save($data);
 			if(!$result){
+				$this->rollback();//事务回滚
 				return errorMsg('失败');
 			}
+			$modelUserStore = new \common\model\UserStore();
+			$storeId = $this->getAttr('id');
+			$postData['type'] = 2;
+			$postData['user_id'] = $userId;
+			$postData['factory_id'] = $factoryId;
+			$postData['store_id'] = $storeId;
+			$result = $modelUserStore->save($postData);
+			if(!$result){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$this->commit();//事务提交
 			return successMsg('提交申请成功');
 		}
 	}
