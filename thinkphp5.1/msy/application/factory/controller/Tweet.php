@@ -35,6 +35,23 @@ class Tweet extends \common\controller\StoreBase
             }
         }
         unset($data['fileBase64']);
+        if($data['release_type'] == 4){
+            if(isset($data['img']) && !empty($data['img'])){
+                $_POST['fileBase64'] = $data['img'];
+                $result =  $this->uploadFileToTemp();
+                if($result['status']) {
+                    $data['img'] = moveImgFromTemp(config('upload_dir.factory_tweet'), basename($result['info'])) . ',';
+                }
+            }
+            if(isset($data['video']) && !empty($data['video'])){
+                $_POST['fileBase64'] = $data['video'];
+                $result =  $this->uploadFileToTemp();
+                if($result['status']) {
+                    $data['video'] = moveImgFromTemp(config('upload_dir.factory_tweet'), basename($result['info'])) . ',';
+                }
+            }
+        }
+
         $data['store_id'] = $this->store['id'];
         $data['run_type'] = $this->store['run_type'];
         if(input('?post.id')){

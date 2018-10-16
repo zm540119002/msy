@@ -94,13 +94,13 @@
 					<div class="picture-module">
 						<input type="file" class="uploadImg uploadSingleImg" name="" data-type="notupload">
 						<img class="upload_img" src="" alt="">
-						<input type="hidden" name="msgfile" class="img" data-src="" value="">
+						<input type="hidden" name="img" class="img" data-src="" value="">
 					</div>
 					<p>上传配图</p>
 				</div>
 			</div>
 			<div>
-				<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+				<textarea class="img-description" name="img_description" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
 			</div>
 		</div>
 		<div class="separation-line columns_flex l-r-sides release-file-module ">
@@ -109,12 +109,13 @@
 					<div class="picture-module">
 						<input type="file" class="uploadImg uploadSingleVideo" name="" data-type="notupload">
 						<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+						<input type="hidden" name="video" class="img" data-src="" value="">
 					</div>
 					<p>上传视频(可不选)</p>
 				</div>
 			</div>
 			<div>
-				<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+				<textarea  class="video-description" name="video_description" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
 			</div>
 		</div>
 		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
@@ -444,6 +445,7 @@
 					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
 					releaseFormData.fileBase64 =  layermultiFileAttr;
 					releaseFormData.release_type =  options.releaseType;
+					releaseFormData.paragraphAttr =  options.paragraphAttr;
 					console.log(releaseFormData);
 					var content='';
 //					if(!releaseFormData.headline){
