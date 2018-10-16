@@ -18,7 +18,7 @@ class Store extends Base {
 
 	/**编辑
 	 */
-	public function edit($factoryId='',$userId){
+	public function edit($factoryId,$userId){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('\common\validate\Store');
