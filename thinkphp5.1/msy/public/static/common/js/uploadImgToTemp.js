@@ -4,6 +4,7 @@ var uploadsSingleVideoFlag = true;//上传单视频成功标识位
 $(function(){
     // 选择单图片
     $('body').on('change','.uploadSingleImg',function () {
+        var _this=$(this);
         uploadsSingleImgFlag = false;
         var img = event.target.files[0];
         var uploadfileSize=img.size/1024/1024;
@@ -31,6 +32,12 @@ $(function(){
             // postData.imgWidth = 145;
             // postData.imgHeight = 100;
             $(obj).find('img').attr('src',imgUrl);
+            var type = _this.data('type');
+            if(type == 'notupload'){
+                $(obj).find('.img').val(imgUrl);
+                console.log(1);
+                return false;
+            }
             //提交
             $.post(controller+"uploadFileToTemp",postData,function(msg){
                 if(msg.status == 1){
@@ -67,7 +74,7 @@ $(function(){
             $(obj).find('video').attr('src',videoUrl);
             //提交
             var type = _this.data('type');
-            if(type == 'tweet'){
+            if(type == 'notupload'){
                 $(obj).find('.img').val(videoUrl);
                 return false;
             }
