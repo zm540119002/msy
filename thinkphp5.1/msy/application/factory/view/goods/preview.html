@@ -193,8 +193,10 @@
 		</div>
 	</section>
 </article>
-<div class="foot-btn"><a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="group_btn50 f24">修改</a>
-	<a href="javascript:;" class="goods-del group_btn50 f24">删除</a></div>
+<div class="foot-btn columns_flex foot_operate_bar">
+	<a href="javascript:;" class="goods-del group_btn50 f24">删除</a>
+	<a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="group_btn50 f24 modify">修改</a>
+</div>
 {/block}
 {block name="common"}
 {include file="template/right_side_bar.html" /}
