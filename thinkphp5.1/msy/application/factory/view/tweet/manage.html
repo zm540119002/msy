@@ -422,11 +422,11 @@
 					$.each($('.editDetailLayer .paragraph-module'),function(i,val){
 						var _this=$(this);
 						var mesObject={};
-						var mesText=_this.find('.twitter-text').val();
-						var mesImgSrc=_this.find('.img').val();
+						var fileText=_this.find('.twitter-text').val();
+						var fileSrc=_this.find('.img').val();
 						mesObject={
-							mesText:mesText,
-							mesImgSrc:mesImgSrc
+							fileText:fileText,
+							fileSrc:fileSrc
 						}
 						options.paragraphAttr.push(mesObject);
 					})
@@ -440,8 +440,7 @@
 					if(!releaseFormData.headline){
 						content='请填写消息内容';
 					}else if(!releaseFormData.fileBase64){
-//						content=options.msg;
-						content=11;
+						content=options.msg;
 					}
 					if(content){
 						errorTipc(content);
