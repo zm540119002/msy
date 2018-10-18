@@ -1,0 +1,247 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">{/block}
+{block name="content"}
+<!--新增员工账号-->
+<section id="employeeAccountInfo" style="display:none;">
+	<form class="employeeAccountForm">
+		<div class="account-field">
+			<span class="content-label">姓名</span>
+			<input type="text" class="" placeholder="姓名" name="name">
+		</div>
+		<div class="account-field">
+			<span class="content-label">手机号码</span>
+			<input type="tel" class="" placeholder="手机号码" name="mobile_phone">
+		</div>
+		<div class="account-field account_position">
+			<span class="content-label">职务设置</span>
+			<ul>
+				<li class="col" data-id="">总监</li>
+				<li class="col" data-id="">经理</li>
+				<li class="col" data-id="">专员</li>
+			</ul>
+		</div>
+		<div class="account-field account_position">
+			<span class="content-label">店铺运营</span>
+			<ul>
+				<li class="col" data-id="">商品管理</li>
+				<li class="col" data-id="">场景管理</li>
+				<li class="col" data-id="">特价管理</li>
+				<li class="col" data-id="">上架下架</li>
+			</ul>
+		</div>
+		<div class="account-field account_position">
+			<span class="content-label">店铺客服</span>
+			<ul>
+				<li class="col" data-id="">售前咨询</li>
+				<li class="col" data-id="">接单打印</li>
+				<li class="col" data-id="">备货打包</li>
+				<li class="col" data-id="">发货完成</li>
+				<li class="col" data-id="">填物流单</li>
+				<li class="col" data-id="">售后咨询</li>
+				<li class="col" data-id="">退换申请</li>
+			</ul>
+		</div>
+	</form>
+	<div class="error_tipc"></div>
+</section>
+<section style="display: none;" id="employeeAccountList">
+	<li class="columns_flex l-r-sides">
+		<div>
+			<p>
+				<span>姓名</span>
+				<input class="input_size" type="text" value="阿三" name="name" readonly="readonly">
+			</p>
+			<div>
+				<span>手机号码:</span>
+				<input type="tel" value="13430393576" name="mobile_phone" readonly="readonly"/>
+			</div>
+			<div>
+				<span>授权职务:</span>
+				<input type="text" value="" name="position" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="operate-btn">
+			<a href="javascript:void(0);" class="modify-account">
+				<span></span>
+				修改
+			</a>
+			<a href="javascript:void(0);" class="delete-account">
+				<span></span>
+				删除
+			</a>
+		</div>
+	</li>
+</section>
+<article class="f24">
+	<div class="top_header">
+		{include file="public/switch_store_head" /}
+		<section class="specific_type store_deploy_nav">
+			<div class="columns_flex f20 l-r-sides store_deploy_bar">
+				<a href="" class="current">店铺店长管理</a>
+				<a href="">门店店长管理</a>
+			</div>
+		</section>
+		<section class=" ">
+			<div class="columns_flex f20 l-r-sides top_empy_nav">
+				<a href="" class="current">店铺运营员工账号管理</a>
+				<a href="">设定商品退换收货人地址手机号码</a>
+			</div>
+		</section>
+	</div>
+	<section class="f24 account-content-wrapper">
+		<div class="content-top content-mg-top">
+			<div class="search_module_bar">
+				<input type="button" class="search_btn left"/>
+				<input type="text" class="search_text left" placeholder="输入姓名/手机号搜索账号"/>
+			</div>
+			<p class="emp_account_tipc">店铺运营员工账号</p>
+			<ul class="list">
+				<li>
+					<span>暂无数据</span>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<a href="javascript:void(0);" class="add_account foot-btn">新增员工账号</a>
+</article>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function(){
+		//新增员工账号
+		var employeeAccountInfo=$('#employeeAccountInfo').html();
+		$('body').on('click','.add_account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['新增员工账号','border-bottom:1px solid #d9d9d9;'],
+				className:'employeeAccountLayer',
+				content:employeeAccountInfo,
+				type:1,
+				anim:'up',
+				style:'',
+				btn:['确定','取消'],
+				success:function(){
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+				},
+				yes:function(index){
+					var postData={};
+					postData = $('.employeeAccountForm').serializeObject();
+					postData.nodeIds=[];
+					var html=$('#employeeAccountList').html();
+					var listLength=$('.list li').length;
+					var content='';
+					if(!postData.name){
+						content='请填写员工姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					if(listLength<1){
+						console.log(listLength);
+						$('.list').append(html);
+
+					}else{
+						$('.list li:first').before(html);
+					}
+					$.each($('.employeeAccountLayer').find('li'),function(){
+						if($(this).attr('class')=='current'){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					// var config = {
+					// 	url:module + 'Manager/edit',
+					// 	postData:postData,
+					// 	index:index
+					// };
+					// dialogFormAdd(config);
+					layer.close(index);
+				}
+			});
+		});
+		//修改
+		$('body').on('click','.modify-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['修改账号','border-bottom:1px solid #d9d9d9;'],
+				className:'employeeAccountLayer',
+				type:1,
+				anim:'up',
+				content:employeeAccountInfo,
+				btn:['确定','取消'],
+				success:function(){
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					copyDataByName(_this,$('.employeeAccountLayer .employeeAccountForm'));
+				},
+				yes:function(index){
+					var postData={};
+					var content='';
+					postData=$('.employeeAccountLayer .employeeAccountForm').serializeObject();
+					if(!postData.name){
+						content='请填写姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					// var config = {
+					// 	url:module + 'Manager/edit',
+					// 	postData:postData,
+					// 	fromObj:$('.employeeAccountLayer .employeeAccountForm'),
+					// 	toObj:_this,
+					// 	index:index
+					// };
+					// dialogFormEdit(config)
+					layer.close(index);
+
+				}
+			});
+		});
+		//删除
+		$('body').on('click','.delete-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['删除账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
+				className:'employeeAccountLayer',
+				type:1,
+				anim:'up',
+				content:employeeAccountInfo,
+				btn:['确定','取消'],
+				success:function(){
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					copyDataByName(_this,$('.employeeAccountLayer .employeeAccountForm'));
+				},
+				yes:function(index){
+					var postData = {};
+					postData.id = _this.data('id');
+					postData.userFactoryId = _this.data('user_factory_id');
+					// var config = {
+					// 	url:module + 'Manager/del',
+					// 	postData:postData,
+					// 	obj:_this,
+					// 	index:index
+					// };
+					// dialogFormDel(config);
+
+				}
+			});
+		});
+		$('body').on('click','.list li',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$(this).find('.operate-btn').show();
+			$(this).siblings().find('.operate-btn').hide();
+		});
+		//选择授权设置样式
+		$('body').on('click','.employeeAccountLayer li',function(){
+			$(this).toggleClass('current');
+		});
+	});
+</script>
+{/block}

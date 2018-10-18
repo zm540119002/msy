@@ -47,7 +47,7 @@
 <section id="cloudImgTwitter" style="display: none;">
 	<form class="releaseInfoForm">
 		<div class="twitter-release-content">
-			<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="消息文字..."></textarea>
+			<textarea name="img_description" class="twitter-text" rows="" cols="" placeholder="消息文字..."></textarea>
 			<ul class="upload-picture-module multi-picture-module">
 			</ul>
 			<div class="error_tipc"></div>
@@ -64,17 +64,21 @@
 <!--云推客发布视频消息-->
 <section id="cloudVideoTwitter" style="display: none;">
 	<form class="releaseInfoForm">
-		<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="视频说明文字..."></textarea>
+		<textarea name="video_description" class="twitter-text" rows="" cols="" placeholder="视频说明文字..."></textarea>
 		<div class="error_tipc"></div>
-		<div class="upload-picture-module f24">
-			<div>
-				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleVideo" name="" data-duration="" data-type="notupload">
-					<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
-					<input type="hidden" name="fileBase64" class="img" data-src="" value="">
+		<ul>
+			<li>
+				<div class="upload-picture-module f24">
+					<div>
+						<div class="picture-module">
+							<input type="file" class="uploadImg uploadSingleVideo" name="" data-duration="" data-type="notupload">
+							<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+							<input type="hidden" name="" class="img" data-src="" value="">
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			</li>
+		</ul>
 		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
 		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods_ids">
 	</form>
@@ -90,13 +94,13 @@
 					<div class="picture-module">
 						<input type="file" class="uploadImg uploadSingleImg" name="" data-type="notupload">
 						<img class="upload_img" src="" alt="">
-						<input type="hidden" name="msgfile" class="img" data-src="" value="">
+						<input type="hidden" name="img" class="img" data-src="" value="">
 					</div>
 					<p>上传配图</p>
 				</div>
 			</div>
 			<div>
-				<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+				<textarea class="img-description" name="img_description" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
 			</div>
 		</div>
 		<div class="separation-line columns_flex l-r-sides release-file-module ">
@@ -105,12 +109,13 @@
 					<div class="picture-module">
 						<input type="file" class="uploadImg uploadSingleVideo" name="" data-type="notupload">
 						<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+						<input type="hidden" name="video" class="img" data-src="" value="">
 					</div>
 					<p>上传视频(可不选)</p>
 				</div>
 			</div>
 			<div>
-				<textarea name="headline" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+				<textarea  class="video-description" name="video_description" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
 			</div>
 		</div>
 		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
@@ -355,7 +360,7 @@
 				opt={
 					content:cloudTwitter,
 					title:'发图片消息',
-					msg:'请上传图片11',
+					msg:'请上传图片',
 					releaseType:releaseType,
 					goodsData:goodsData
 				}
@@ -410,13 +415,19 @@
 				},
 				btn:['发布','取消'],
 				yes:function(index){
-					var layermultiImgAttr=[];
+					var layermultiFileAttr=[];
 					//获取图片路径
 					$.each($('.editDetailLayer li'),function(i,val){
 						var _this=$(this);
-						var imgSrc=_this.find('img').attr('src');
-						layermultiImgAttr.push(imgSrc);
-					})
+						if(options.releaseType==1){
+							var imgSrc=_this.find('img').attr('src');
+							layermultiFileAttr.push(imgSrc);
+						}else{
+							var videoSrc=_this.find('video').attr('src');
+							layermultiFileAttr.push(videoSrc);
+						}
+					});
+					console.log(layermultiFileAttr);
 					//获取文章段落和图片数据
 					options.paragraphAttr=[];
 					$.each($('.editDetailLayer .paragraph-module'),function(i,val){
@@ -430,26 +441,27 @@
 						}
 						options.paragraphAttr.push(mesObject);
 					})
-					$('.msg-img').val(layermultiImgAttr);
 					//序列化表单数据
 					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
-					releaseFormData.fileBase64 =  layermultiImgAttr;
+					releaseFormData.fileBase64 =  layermultiFileAttr;
 					releaseFormData.release_type =  options.releaseType;
+					releaseFormData.paragraphAttr =  options.paragraphAttr;
 					console.log(releaseFormData);
 					var content='';
-					if(!releaseFormData.headline){
-						content='请填写消息内容';
-					}else if(!releaseFormData.fileBase64){
-						content=options.msg;
-					}
-					if(content){
-						errorTipc(content);
-						return false;
-					}
+//					if(!releaseFormData.headline){
+//						content='请填写消息内容';
+//					}else if(!releaseFormData.fileBase64){
+//						content=options.msg;
+//					}
+//					if(content){
+//						errorTipc(content);
+//						return false;
+//					}
 					var _this=$(this);
+					var url = module + 'Tweet/edit';
 					_this.addClass("nodisabled");//防止重复提交
 					$.ajax({
-						url:'edit',
+						url:url,
 						type:'post',
 						data:releaseFormData,
 						success:function(data){

@@ -15,66 +15,61 @@ class Tweet extends \common\controller\StoreBase
      */
     public function edit()
     {
-        if(request()->isPost()){
-            $model = new \common\model\Tweet;
-            $data = input();
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $data = input('post.');
+        $model = new \common\model\Tweet;
+        if(isset($data['fileBase64']) && !empty($data['fileBase64'])){
             $result =  $this->uploadFileToTemp();
-            print_r($result);exit;
-            $imgs = '';
-            if($result['status']){
-                foreach ($result['info'] as $k=>$v){
-                    $imgs .= moveImgFromTemp(config('upload_dir.factory_tweet'),basename($v)) .',';
+            $file = '';
+            if($result['status']) {
+                foreach ($result['info'] as $k => $v) {
+                    $file .= moveImgFromTemp(config('upload_dir.factory_tweet'), basename($v)) . ',';
                 }
-                $data['first_img'] = $imgs;
-            }else{
-                return errorMsg('上传失败');
+                if ($data['release_type'] == 1) {
+                    $data['img'] = $file;
+                } else if ($data['release_type'] == 2 || $data['release_type'] == 3) {
+                    $data['video'] = $file;
+                }
             }
-            unset($data['fileBase64']);
-            $data['store_id'] = $this->store['id'];
-            $data['run_type'] = $this->store['run_type'];
-            $result = $model->allowField(true)->save($data);
-            if($result){
-                return successMsg('成功');
+        }
+        unset($data['fileBase64']);
+        if($data['release_type'] == 4){
+            if(isset($data['img']) && !empty($data['img'])){
+                $_POST['fileBase64'] = $data['img'];
+                $result =  $this->uploadFileToTemp();
+                if($result['status']) {
+                    $data['img'] = moveImgFromTemp(config('upload_dir.factory_tweet'), basename($result['info'])) . ',';
+                }
             }
-            if($data['release_type'] == 3){
+            if(isset($data['video']) && !empty($data['video'])){
+                $_POST['fileBase64'] = $data['video'];
+                $result =  $this->uploadFileToTemp();
+                if($result['status']) {
+                    $data['video'] = moveImgFromTemp(config('upload_dir.factory_tweet'), basename($result['info'])) . ',';
+                }
+            }
+        }
 
+        $data['store_id'] = $this->store['id'];
+        $data['run_type'] = $this->store['run_type'];
+        if(input('?post.id')){
+            $data['update_time'] = time();
+            $result = $model->allowField(true)->save($data,['id'=>input('post.id'),'store_id'=> $this->store['id']]);
+            if($result === false){
+                return successMsg('失败');
+            }
+        }else{
+            $data['create_time'] = time();
+            $result = $model->allowField(true)->save($data);
+            if(!$result){
+                return successMsg('失败');
             }
         }
-       
-        exit;
-        $model = new \common\model\Promotion;
-        if(request()->isPost()){
-            return $model -> edit($this->store['id']);
+        if($result){
+            return successMsg('成功');
         }
-        if(input('?id') && $this->store['id']){
-            $promotionId = (int)input('id');
-            $config = [
-                'where' => [
-                    ['p.id','=',$promotionId],
-                    ['p.store_id','=',$this->store['id']],
-                ],'field' => [
-                    'p.id,p.name,p.first_img,p.second_img,p.goods_ids,p.start_time,p.end_time,p.store_id'
-                ],
-            ];
-            $promotionInfo =  $model -> getInfo($config);
-            if(empty($promotionInfo)){
-                $this->error('此产品已下架');
-            }
-            $modelGoods = new \common\model\Goods;
-            $goodsIds = explode(',',$promotionInfo['goods_ids']);
-            $config = [
-                'where' => [
-                    ['id','in',$goodsIds],
-                    ['sale_type','=',1],
-                ],'field' => [
-                    'g.id as goods_id,g.special',
-                ],
-            ];
-            $goodsList = $modelGoods -> getList($config);
-            $promotionInfo['goods'] = json_encode($goodsList);
-            $this -> assign('promotionInfo',$promotionInfo);
-        }
-        return $this->fetch();
     }
 
     /**

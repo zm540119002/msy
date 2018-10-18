@@ -20,9 +20,11 @@ class Base extends \think\Controller{
     public function uploadFileToTemp(){
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
-            $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64']);
-            if(isset($fileName['status'])&& $fileName['status'] == 0){
-                return $fileName;
+            if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
+                $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64']);
+                if(isset($fileName['status'])&& $fileName['status'] == 0){
+                    return $fileName;
+                }
             }
             return successMsg($fileName);
         }
