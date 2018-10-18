@@ -60,23 +60,23 @@ class Payment extends \common\controller\UserBase{
         }
 
         //微信支付
-//        $payInfo = array(
-//            'sn'=>generateSN(12),
-//            'actually_amount'=>0.01,
-//            'cancel_back' => url('payCancel'),
-//            'fail_back' => url('payFail'),
-//            'success_back' => url('payComplete'),
-//            'notify_url'=>config('wx_config.call_back_url')
-//        );
-//        \common\component\payment\weixin\weixinpay::wxPay($payInfo);
+        $payInfo = array(
+            'sn'=>generateSN(12),
+            'actually_amount'=>0.01,
+            'cancel_back' => url('payCancel'),
+            'fail_back' => url('payFail'),
+            'success_back' => url('payComplete'),
+            'notify_url'=>config('wx_config.call_back_url')
+        );
+        \common\component\payment\weixin\weixinpay::wxPay($payInfo);
 
         //支付宝支付
-        $order = [
-            'sn'=>generateSN(10),
-            'actually_amount'=>0.01,
-        ];
-        $model = new \common\component\payment\alipayMobile\alipayMobile;
-        return $model->get_code($order);
+//        $order = [
+//            'sn'=>generateSN(10),
+//            'actually_amount'=>0.01,
+//        ];
+//        $model = new \common\component\payment\alipayMobile\alipayMobile;
+//        return $model->get_code($order);
         //银联支付
 //        $order = [
 //            'sn'=>generateSN(),

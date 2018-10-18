@@ -427,7 +427,7 @@
 							layermultiFileAttr.push(videoSrc);
 						}
 					});
-					console.log(layermultiFileAttr);
+
 					//获取文章段落和图片数据
 					options.paragraphAttr=[];
 					$.each($('.editDetailLayer .paragraph-module'),function(i,val){
@@ -446,7 +446,6 @@
 					releaseFormData.fileBase64 =  layermultiFileAttr;
 					releaseFormData.release_type =  options.releaseType;
 					releaseFormData.paragraphAttr =  options.paragraphAttr;
-					console.log(releaseFormData);
 					var content='';
 //					if(!releaseFormData.headline){
 //						content='请填写消息内容';
@@ -465,10 +464,11 @@
 						type:'post',
 						data:releaseFormData,
 						success:function(data){
-							_this.removeClass("nodisabled");
-							if(data.status){
-								dialog.success(data.info,location.reload());
-							}
+							console.log(data)
+//							_this.removeClass("nodisabled");
+//							if(data.status){
+//								dialog.success(data.info,location.reload());
+//							}
 						},
 						error:function(data){
 
