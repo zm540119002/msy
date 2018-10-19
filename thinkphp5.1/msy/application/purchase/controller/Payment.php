@@ -84,4 +84,14 @@ class Payment extends \common\controller\UserBase{
             }
         }
     }
+
+    public function payComplete(){
+        return $this->fetch();
+    }
+    public function payCancel(){
+        return $this->fetch();
+    }
+    public function payFail(){
+        return $this->fetch();
+    }
 }
