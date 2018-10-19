@@ -3,7 +3,14 @@
 <link rel="stylesheet" href="store_css/main.css">
 {/block}
 {block name="content"}
-111111111111111111
+<p>支付方式</p>
+<div>
+    <ul class="pay_nav">
+        <li data-paycode="1">微信支付</li>
+        <li data-paycode="2">支付宝支付</li>
+        <li data-paycode="3">银联支付</li>
+    </ul>
+</div>
 {/block}
 {block name="common"}
 {include file="public/footer_menu" /}
@@ -12,7 +19,11 @@
 {block name="script"}
 <script type="text/javascript">
     $(function(){
+        $('.pay_nav li').on('click',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+        })
         $('body').on('click','.pay',function () {
+            var pay_code=$('.pay_nav li.current').data('paycode');
             location.href =  module + 'Payment/orderPayment/sn/' + "{$orderInfo.sn}";
         })
     });

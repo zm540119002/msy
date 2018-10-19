@@ -3169,3 +3169,7 @@ input[type=text]::-webkit-focus-inner {
 .foot_operate_bar .modify{
     background:#009A3E;
 }
+.pay_nav li.current{
+    background:#009A3E;
+    color:#fff;
+}
