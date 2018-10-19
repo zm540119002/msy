@@ -33,6 +33,8 @@ class Payment extends \common\controller\UserBase{
             if($payCode == 1){
                 \common\component\payment\weixin\weixinpay::wxPay($payInfo);
             }
+
+            
             if($payCode == 2){
                 $model = new \common\component\payment\alipayMobile\alipayMobile;
                 return $model->get_code($payInfo);
