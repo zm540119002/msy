@@ -22,11 +22,11 @@ class Payment extends \common\controller\UserBase{
             $payInfo = [
                 'sn'=>$orderInfo['sn'],
                 'actually_amount'=>$orderInfo['amount'],
-                'cancel_back' => url('payCancel'),
-                'fail_back' => url('payFail'),
-                'success_back' => url('payComplete'),
-                'notify_url'=>"http://".$_SERVER['HTTP_HOST']."/purchase/".config('wx_config.call_back_url') .
-                    ($orderInfo['type'] == 0?'/weixin.order':'/weixin.group_buy'),
+                'cancel_back' => "http://".$_SERVER['HTTP_HOST'].url('payCancel'),
+                'fail_back' => "http://".$_SERVER['HTTP_HOST'].url('payFail'),
+                'success_back' => "http://".$_SERVER['HTTP_HOST'].url('payComplete'),
+                'notify_url'=>"http://".$_SERVER['HTTP_HOST']."/purchase/".config('wx_config.call_back_url')
+
             ];
             $payCode = input('pay_code','0','int');
             //微信支付
