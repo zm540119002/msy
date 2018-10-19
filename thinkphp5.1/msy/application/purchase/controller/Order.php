@@ -110,13 +110,34 @@ class Order extends \common\controller\UserBase
             ['id','=',$id],
         ];
         $res = $modelOrder->edit($data,$condition);
-        $sn = input('post.sn',0,'string');
+        $sn = input('post.sn','','string');
         if(false === $res){
            return errorMsg('失败');
         }
         return successMsg('成功',array('sn'=>$sn));
     }
 
+    //确定订单
+    public function pay()
+    {
+        $modelOrder = new \app\purchase\model\Order();
+        $orderSn = input('sn');
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $orderSn],
+                ['o.user_id', '=', $this->user['id']],
+            ],'field' => [
+                'o.id', 'o.sn', 'o.amount',
+                'o.user_id',
+            ],
+        ];
+        $orderInfo = $modelOrder->getInfo($config);
+        $this->assign('orderInfo', $orderInfo);
+        $unlockingFooterCart = unlockingFooterCartConfig([4]);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        return $this->fetch();
+    }
 
     //订单-详情页
     public function detail()

@@ -15,7 +15,7 @@
         $('body').on('click','.confirm_order',function () {
             _this = $(this);
             var orderId = {$info[0]['id']};
-            var sn = {$info[0]['sn']};
+            var sn = "{$info[0]['sn']}";
             var postData = {};
             postData.id = orderId;
             postData.sn = sn;
@@ -38,7 +38,7 @@
                     if(data.status == 0){
 
                     }else if(data.status == 1){
-                        location.href = module + 'Payment/orderPayment/sn/' + data.sn;
+                        location.href = module + 'Order/pay/sn/' + data.sn;
                     }
                 }
             });
