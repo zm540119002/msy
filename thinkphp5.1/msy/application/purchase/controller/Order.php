@@ -42,14 +42,15 @@ class Order extends \common\controller\UserBase
         $data['sn'] = $orderSN;
         $data['user_id'] = $this->user['id'];
 //        $_POST['logistics_id'] = $logisticsId;
-        $data['amount'] = $amount;
+        $data['amount'] = $amount;//订单金额
+        $data['actually_amount'] = $amount;//实际要支付的金额
         $data['create_time'] = time();
         $res = $modelOrder->edit($data);
-        $orderId = $res['id'];
-        if (!$orderId) {
+        if (!$res['status']) {
             $modelOrder->rollback();
             return errorMsg($res);
         }
+        $orderId = $res['id'];
         //生成订单明细
         foreach ($goodsList as $item) {
             $data = [];
@@ -60,7 +61,7 @@ class Order extends \common\controller\UserBase
             $data['goods_id'] = $item['goods_id'];
             $data['user_id'] = $this->user['id'];
             $res = $modelOrderDetail->edit($data);
-            if (!$res['id']) {
+            if (!$res['status']) {
                 $modelLogistics->rollback();
                 return errorMsg($res);
             }
