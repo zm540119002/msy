@@ -5,7 +5,7 @@ class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
 
-        if( !empty(input('sn')) ){
+        if( !empty(input('sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\purchase\model\Order();
             $orderSn = input('sn','','string');
             $config = [
@@ -19,7 +19,7 @@ class Payment extends \common\controller\UserBase{
                 ],
             ];
             $orderInfo = $modelOrder->getInfo($config);
-            $payInfo = array(
+            $payInfo = [
                 'sn'=>$orderInfo['sn'],
                 'actually_amount'=>$orderInfo['amount'],
                 'cancel_back' => url('payCancel'),
@@ -27,8 +27,21 @@ class Payment extends \common\controller\UserBase{
                 'success_back' => url('payComplete'),
                 'notify_url'=>"http://".$_SERVER['HTTP_HOST']."/purchase/".config('wx_config.call_back_url') .
                     ($orderInfo['type'] == 0?'/weixin.order':'/weixin.group_buy'),
-            );
-            \common\component\payment\weixin\weixinpay::wxPay($payInfo);
+            ];
+            $payCode = input('pay_code','0','int');
+
+            if($payCode == 1){
+                \common\component\payment\weixin\weixinpay::wxPay($payInfo);
+            }
+            if($payCode == 2){
+                $model = new \common\component\payment\alipayMobile\alipayMobile;
+                return $model->get_code($payInfo);
+            }
+            if($payCode == 3){
+                $model = new \common\component\payment\unionpay\unionpay;
+                return $model->get_code($payInfo);
+            }
+
         }
 
 

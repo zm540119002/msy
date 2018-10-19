@@ -24,7 +24,7 @@
         })
         $('body').on('click','.pay',function () {
             var pay_code=$('.pay_nav li.current').data('paycode');
-            location.href =  module + 'Payment/orderPayment/sn/' + "{$orderInfo.sn}";
+            location.href =  module + 'Payment/orderPayment/sn/' + "{$orderInfo.sn}" + '/pay_code/'+ pay_code;
         })
     });
 </script>
