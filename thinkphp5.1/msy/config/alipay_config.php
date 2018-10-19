@@ -43,7 +43,7 @@ return [
     //ca证书路径地址，用于curl中ssl校验
     //请保证cacert.pem文件在当前文件夹目录中
 //    'cacert'    => __DIR__  .'\\..\\acert.pem',
-    'cacert'    => __DIR__."/../common/component/payment/alipayMobile/apiclient_cert.pem",
+    'cacert'    => __DIR__."/../../common/component/payment/alipayMobile/apiclient_cert.pem",
 
 
     //访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
