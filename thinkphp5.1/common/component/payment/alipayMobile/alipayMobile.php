@@ -20,8 +20,8 @@ class alipayMobile
     public function  __construct() {
         $this->alipay_config['alipay_pay_method'] = config('alipay_config.payment_type'); // 1 使用担保交易接口  2 使用即时到帐交易接口
         $this->alipay_config['partner']           = config('alipay_config.partner');//合作身份者id，以2088开头的16位纯数字
-        $this->alipay_config['seller_email']      = config('alipay_config.key');//收款支付宝账号，一般情况下收款账号就是签约账号
-        $this->alipay_config['key']	              = config('alipay_config.seller_email');//安全检验码，以数字和字母组成的32位字符
+        $this->alipay_config['seller_email']      = config('alipay_config.seller_email');//收款支付宝账号，一般情况下收款账号就是签约账号
+        $this->alipay_config['key']	              = config('alipay_config.key');//安全检验码，以数字和字母组成的32位字符
         $this->alipay_config['sign_type']         = config('alipay_config.sign_type');//签名方式 不需修改
         $this->alipay_config['input_charset']     = config('alipay_config.input_charset');//字符编码格式 目前支持 gbk 或 utf-8
         $this->alipay_config['cacert']            = config('alipay_config.cacert'); //ca证书路径地址，用于curl中ssl校验 //请保证cacert.pem文件在当前文件夹目录中
@@ -34,7 +34,6 @@ class alipayMobile
      */
     function get_code($order, $config_value)
     {
-        print_r( $this->alipay_config);exit;
              // 接口类型
             $service = array(             
                  1 => 'create_partner_trade_by_buyer', //使用担保交易接口
