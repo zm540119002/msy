@@ -61,7 +61,7 @@ class unionpay
             'txnType' => '01',				      //交易类型
             'txnSubType' => '01',				  //交易子类
             'bizType' => '000201',				  //业务类型
-            'frontUrl' => SDKConfig::getSDKConfig()->frontUrl,  //前台通知地址
+            'frontUrl' => $order['success_back'],  //前台通知地址
             'backUrl' =>SDKConfig::getSDKConfig()->backUrl,	  //后台通知地址
             'signMethod' => SDKConfig::getSDKConfig()->signMethod,	              //签名方法
             'channelType' => '08',	              //渠道类型，07-PC，08-手机
