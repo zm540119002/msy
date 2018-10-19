@@ -112,17 +112,7 @@ EOF;
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
         $code_url = weixinpay::payQRcode($url2);
-        print_r($code_url);exit;
-        $html = <<<EOF
-            <head>
-               <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
-			   <script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
-			   <script type="text/javascript" src="/static/common/js/dialog.js"></script>	
-            </head>
-            <body>
-                 <img src="$code_url"  alt="支付" />
-            <body>
-EOF;
+        echo $code_url;
     }
 
     //生成支付二维码
