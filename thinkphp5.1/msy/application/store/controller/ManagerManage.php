@@ -12,7 +12,6 @@ class ManagerManage extends \common\controller\UserBase
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
-            exit;
             return $this->fetch();
         }
     }
