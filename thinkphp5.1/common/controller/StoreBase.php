@@ -1,9 +1,7 @@
 <?php
 namespace common\controller;
-/**
- * Class StoreBase
- * @package app\factory\controller
- * 店铺基础类
+
+/**店铺基础类，需要判断是否入驻店铺的类需要继承
  */
 class StoreBase extends FactoryBase
 {
@@ -16,9 +14,9 @@ class StoreBase extends FactoryBase
             //获取厂商店铺详情列表
             \common\cache\Store::remove($this->factory['id']);
             $list = \common\cache\Store::get($this->factory['id']);
-            $this -> assign('storeList', $list);
+            $this->assign('storeList', $list);
             $count = count($list);
-            if ($count > 1) {
+            if($count > 1){
                 //多家店判断是否有默认店铺
                 foreach ($list as $val){
                     if($val['is_default']){
@@ -28,10 +26,10 @@ class StoreBase extends FactoryBase
             }elseif($count == 1){
                 $this->store = $list[0];
             }elseif(!$count) {
-                $this -> success('没有店铺，请申请', 'Store/edit');
+                $this->success('没有店铺，请申请', 'Store/edit');
             }
-            $this -> assign('store', $this->store);
-            return $this -> storeList;
+            $this->assign('store', $this->store);
+            return $this->storeList;
         }
     }
 
