@@ -36,7 +36,10 @@ class Payment extends \common\controller\UserBase{
             if($payCode == 2){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/ali.order';
                 $model = new \common\component\payment\alipay\alipay;
-                return $model->get_code($payInfo);
+                $payInfo = [
+                    'sn'=>'20181020100025946369952747461181'
+                ];
+                return $model->orderQuery($payInfo);
             }
             //银联支付
             if($payCode == 3){
