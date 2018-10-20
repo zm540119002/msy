@@ -1,14 +1,13 @@
 <?php
 namespace common\cache;
 
-class FactoryStore{
+class Store{
     private static $_cache_key = 'cache_store_';
-    private static $_cache_key_list = 'cache_store_list_';
 
     /**从缓存中获取厂商店铺信息列表详情
      */
     public static function get($factorId){
-        $storeList = cache(self::$_cache_key_list.$factorId);
+        $storeList = cache(self::$_cache_key.$factorId);
         if(!$storeList){
             $model = new \common\model\Store();
             $config = [
@@ -23,20 +22,14 @@ class FactoryStore{
                 ],
             ];
             $storeList = $model -> getList($config);
-            cache(self::$_cache_key_list.$factorId, $storeList,config('custom.factory_cache_time'));
+            cache(self::$_cache_key.$factorId, $storeList,config('custom.factory_cache_time'));
         }
         return $storeList;
     }
 
-    /**删除缓存信息
-     */
-    public static function remove($id){
-        cache(self::$_cache_key.$id, null);
-    }
-
     /**删除缓存厂商店铺信息列表详情
      */
-    public static function removeList($factorId){
-        cache(self::$_cache_key_list.$factorId, null);
+    public static function remove($factorId){
+        cache(self::$_cache_key.$factorId, null);
     }
 }
