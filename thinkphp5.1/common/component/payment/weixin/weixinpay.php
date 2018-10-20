@@ -64,7 +64,6 @@ class weixinpay{
                     WeixinJSBridge.invoke(
                         'getBrandWCPayRequest',$jsApiParameters,
                         function(res){
-                        //return;
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
                                 dialog.success('支付成功！',"{$payInfo['success_back']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
@@ -150,9 +149,7 @@ EOF;
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
-        //https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096
-        //&redirect_url=https%3A%2F%2Fwww.wechatpay.com.cn
-        $url = $url.'&redirect_url='.$payInfo['success_back'];
+        $url = $url.'&redirect_url='.$payInfo['success_back'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
@@ -194,6 +191,17 @@ EOF;
         $input->SetOp_user_id($merchid);
 
         $result = \WxPayApi::refund($input);	//退款操作
+
+        // 这句file_put_contents是用来查看服务器返回的退款结果 测试完可以删除了
+        //file_put_contents(APP_ROOT.'/Api/wxpay/logs/log3.txt',arrayToXml($result),FILE_APPEND);
+        return $result;
+    }
+
+    public static function wxOrderQuery($orderSn,$transactionId){
+        $input = new \WxPayRefund();
+        $input->SetOut_trade_no($orderSn);			//自己的订单号
+        $input->SetTransaction_id($transactionId);  	//微信官方生成的订单流水号，在支付成功中有返回
+        $result = \WxPayApi::orderQuery($input);	//退款操作
 
         // 这句file_put_contents是用来查看服务器返回的退款结果 测试完可以删除了
         //file_put_contents(APP_ROOT.'/Api/wxpay/logs/log3.txt',arrayToXml($result),FILE_APPEND);

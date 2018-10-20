@@ -4,26 +4,13 @@ namespace app\store\controller;
 class ManagerManage extends \common\controller\UserBase{
     public function __construct(){
         parent::__construct();
-        if($this->factory){
+        if($this->user){
             //获取厂商店铺详情列表
-            \common\cache\Store::remove($this->factory['id']);
-            $list = \common\cache\Store::get($this->factory['id']);
-            $this -> assign('storeList', $list);
-            $count = count($list);
-            if ($count > 1) {
-                //多家店判断是否有默认店铺
-                foreach ($list as $val){
-                    if($val['is_default']){
-                        $this->store = $val;
-                    }
-                }
-            }elseif($count == 1){
-                $this->store = $list[0];
-            }elseif(!$count) {
-                $this -> success('没有店铺，请申请', 'Store/edit');
-            }
-            $this -> assign('store', $this->store);
-            return $this -> storeList;
+            \common\cache\Store::removeManagerStore($this->user['id']);
+            $list = \common\cache\Store::getManagerStore($this->user['id']);
+            $this->assign('managerStoreList', $list);
+            print_r($list);
+            exit;
         }
     }
 
@@ -32,7 +19,7 @@ class ManagerManage extends \common\controller\UserBase{
     public function index(){
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            $list = $modelManagerManage->getList($this->factory['id']);
+            $list = $modelManagerManage->getList($this->user['id']);
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
@@ -45,7 +32,7 @@ class ManagerManage extends \common\controller\UserBase{
     public function edit(){
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            $info = $modelManagerManage->edit($this->factory['id'],$this->factory['type']);
+            $info = $modelManagerManage->edit($this->user['id'],$this->user['type']);
             if($info['status']==0){
                 return $info;
             }else{
@@ -60,7 +47,7 @@ class ManagerManage extends \common\controller\UserBase{
     public function del(){
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            return $modelManagerManage->del($this->factory['id']);
+            return $modelManagerManage->del($this->user['id']);
         }
     }
 }

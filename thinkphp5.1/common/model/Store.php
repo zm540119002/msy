@@ -1,11 +1,8 @@
 <?php
 namespace common\model;
-use think\Model;
-use think\Db;
-/**
- * 基础模型器
- */
 
+/**基础模型器
+ */
 class Store extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'store';
@@ -130,7 +127,10 @@ class Store extends Base {
 			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
 			$modelUserStore = new \common\model\UserStore();
 			if($userStoreId){//存在测删除
-				$modelUserStore->delById($userStoreId,false);
+				$where = [
+					['id', '=', $userStoreId],
+				];
+				$modelUserStore->del($where,false);
 			}
 			$postData['type'] = 3;
 			$postData['user_id'] = $userId;
@@ -152,7 +152,10 @@ class Store extends Base {
 			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
 			$modelUserStore = new \common\model\UserStore();
 			if($userStoreId){//存在测删除
-				$modelUserStore->delById($userStoreId,false);
+				$where = [
+					['id', '=', $userStoreId],
+				];
+				$modelUserStore->del($where,false);
 			}
 			return successMsg('删除成功！');
 		}

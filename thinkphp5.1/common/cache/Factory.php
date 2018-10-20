@@ -3,11 +3,11 @@ namespace common\cache;
 
 class Factory{
     private static $_cache_key = 'cache_factory_';
+
     /**从缓存中获取信息
      */
     public static function get($userId,$type){
         $factoryList = cache(self::$_cache_key.$userId);
-
         if(!$factoryList){
             $modelUserFactory = new \common\model\UserFactory();
             $where = [
