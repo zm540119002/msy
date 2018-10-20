@@ -479,7 +479,7 @@ function arrayToXml($arr,$dom=null,$node=null,$root='xml',$cdata=false){
 //require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
 function makeSign($data){
     //获取微信支付秘钥
-    $key = C('WX_CONFIG')['KEY'];
+    $key = config('wx_config.key');
     // 去空
     $data=array_filter($data);
     //签名步骤一：按字典序排序参数
