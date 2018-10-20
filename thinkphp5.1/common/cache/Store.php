@@ -1,8 +1,7 @@
 <?php
 namespace common\cache;
 
-class FactoryStore{
-    private static $_cache_key = 'cache_store_';
+class Store{
     private static $_cache_key_list = 'cache_store_list_';
 
     /**从缓存中获取厂商店铺信息列表详情
@@ -28,15 +27,9 @@ class FactoryStore{
         return $storeList;
     }
 
-    /**删除缓存信息
-     */
-    public static function remove($id){
-        cache(self::$_cache_key.$id, null);
-    }
-
     /**删除缓存厂商店铺信息列表详情
      */
-    public static function removeList($factorId){
+    public static function remove($factorId){
         cache(self::$_cache_key_list.$factorId, null);
     }
 }
