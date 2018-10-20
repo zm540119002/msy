@@ -22,9 +22,7 @@ class Payment extends \common\controller\UserBase{
             $payInfo = [
                 'sn'=>$orderInfo['sn'],
                 'actually_amount'=>$orderInfo['actually_amount'],
-                'cancel_back' => "http://".$_SERVER['HTTP_HOST'].url('payCancel'),
-                'fail_back' => "http://".$_SERVER['HTTP_HOST'].url('payFail'),
-                'success_back' => "http://".$_SERVER['HTTP_HOST'].url('payComplete'),
+                'return_url' => "http://".$_SERVER['HTTP_HOST'].url('payComplete'),
                 'notify_url'=>"http://".$_SERVER['HTTP_HOST']."/purchase/".config('wx_config.call_back_url')
 
             ];

@@ -65,11 +65,11 @@ class weixinpay{
                         'getBrandWCPayRequest',$jsApiParameters,
                         function(res){
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
-                                dialog.success('支付成功！',"{$payInfo['success_back']}");
+                                dialog.success('支付成功！',"{$payInfo['return_url']}".'&method=weixin&back_code=success');
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                dialog.success('取消支付！',"{$payInfo['cancel_back']}");
+                                dialog.success('取消支付！',"{$payInfo['return_url']}.'&method=weixin&back_code=cancel'");
                             }else{
-                                dialog.success('支付失败！',"{$payInfo['fail_back']}");
+                                dialog.success('支付失败！',"{$payInfo['return_url']}.'&method=weixin&back_code=error'");
                             }
                         }
                     );
@@ -149,7 +149,7 @@ EOF;
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
-        $url = $url.'&redirect_url='.$payInfo['success_back'];//拼接支付完成后跳转的页面redirect_url
+        $url = $url.'&redirect_url='.$payInfo['return_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
