@@ -37,7 +37,7 @@ class Payment extends \common\controller\UserBase{
             //支付宝支付
             if($payCode == 2){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
-                $model = new \common\component\payment\alipayMobile\alipayMobile;
+                $model = new \common\component\payment\alipay\alipay;
                 return $model->get_code($payInfo);
             }
             //银联支付

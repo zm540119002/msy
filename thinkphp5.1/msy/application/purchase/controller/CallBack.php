@@ -312,4 +312,7 @@ class CallBack extends \common\controller\Base{
             return  array('status'=>0,'order_sn'=>$_GET['out_trade_no']);//跳转至失败页面
         }
     }
+
+
+    
 }
