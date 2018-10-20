@@ -150,6 +150,8 @@ EOF;
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
+        print_r($url);exit;
+//        $url = redirect_url=https%3A%2F%2Fwww.wechatpay.com.cn
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
