@@ -67,7 +67,7 @@ class alipay
 
             $Response = new \AlipayTradeService( $this->alipay_config);
             $result=$Response->Query($RequestBuilder);
-            return ;
+            return $result;
         }
     }
 
