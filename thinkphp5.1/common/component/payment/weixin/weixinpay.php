@@ -111,7 +111,8 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
-        weixinpay::payQRcode($url2);
+        $code_url = weixinpay::payQRcode($url2);
+        print_r($code_url);exit;
     }
 
     //生成支付二维码
@@ -126,6 +127,8 @@ EOF;
         $frameSize = 2; //边框像素
         $saveAndPrint = true;
         $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
+        return $fileName;
+
     }
 
     /**

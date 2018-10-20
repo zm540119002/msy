@@ -15,6 +15,8 @@
 namespace  common\component\payment\alipayMobile\lib;
 require_once("alipay_core.function.php");
 require_once("alipay_md5.function.php");
+require_once("../alipay.config.php");
+
 
 class AlipayNotify {
     /**
