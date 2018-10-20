@@ -35,6 +35,7 @@ class Tweet extends \common\controller\StoreBase
             }
         }
         unset($data['fileBase64']);
+        unset($_POST['fileBase64']);
         if($data['release_type'] == 4){
             if(isset($data['img']) && !empty($data['img'])){
                 $_POST['fileBase64'] = $data['img'];
@@ -50,6 +51,19 @@ class Tweet extends \common\controller\StoreBase
                     $data['video'] = moveImgFromTemp(config('upload_dir.factory_tweet'), basename($result['info'])) . ',';
                 }
             }
+            if(isset($data['paragraphAttr']) && !empty($data['paragraphAttr'])){
+                $passageAddData = [];
+                foreach ($data['paragraphAttr'] as $key=>$value){
+                    if(!empty($value['fileSrc'])){
+                        $_POST['fileBase64'] = $value['fileSrc'];
+                        $result =  $this->uploadFileToTemp();
+                        if($result['status']) {
+                            $passageAddData[$key]['illustration'] = moveImgFromTemp(config('upload_dir.factory_tweet'), basename($result['info'])) . ',';
+                        }
+                    }
+                    $passageAddData[$key]['passage'] = $value['fileText'];
+                }
+            }
         }
 
         $data['store_id'] = $this->store['id'];
@@ -58,18 +72,38 @@ class Tweet extends \common\controller\StoreBase
             $data['update_time'] = time();
             $result = $model->allowField(true)->save($data,['id'=>input('post.id'),'store_id'=> $this->store['id']]);
             if($result === false){
-                return successMsg('失败');
+                return errorMsg('失败');
             }
         }else{
             $data['create_time'] = time();
+            //推文类型为文章添加
+            if($data['release_type'] == 4){
+                $model->startTrans();
+                $result = $model->allowField(true)->save($data);
+                if(!$result){
+                    $model->rollback();//事务回滚
+                    return errorMsg('失败');
+                }
+                $tweetId = $model->getAttr('id');
+                $modelPassage = new \common\model\Passage;
+                foreach ($passageAddData as $k=>$v){
+                    $passageAddData[$k]['tweet_id'] = $tweetId;
+                }
+                $result = $modelPassage->allowField(true)->saveAll($passageAddData);
+                if(!$result){
+                    $model->rollback();//事务回滚
+                    return errorMsg('失败');
+                }
+                $model->commit();//事务提交
+                return successMsg('成功');
+            }
+            //推文类型不为文章的其他类型推文只是添加tweet表
             $result = $model->allowField(true)->save($data);
             if(!$result){
                 return successMsg('失败');
             }
         }
-        if($result){
-            return successMsg('成功');
-        }
+        return successMsg('成功');
     }
 
     /**

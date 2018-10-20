@@ -1,44 +1,98 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="mall_css/main.css">
+<link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
+<section id="goodsvideoLayer" style="display: none;">
+	<div class="video-layer">
+		{notempty name="info.goods_video"}
+		<video width="" height="" class="" src="public_uploads/{$info.goods_video|default=''}"></video>
+		<a class="video-btn"></a>
+		{else /}
+		<video width="" height="" src=""></video>
+		<a class="video-btn"></a>
+		{/notempty}
+	</div>
+</section>
 <article class="f24">
-	<section class="slider_banner ">
-		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-			{empty name="info.main_img"}
-				<img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+	<section class="top_nav_fixed">
+		<input type="hidden" class="goods_id" value="{$info.id|default=''}"/>
+		<input type="hidden" class="goods_thumb_img" value="public_uploads/{$info.thumb_img|default=''}"/>
+		<div class="top_bar top columns_flex">
+			{notempty name="info.goods_video"}
+			<div class="each_column">
+				<a href="javascript:void(0);" class=" goods-video top_icon">视频</a>
+			</div>
 			{else /}
+			{/notempty}
+			<div class="each_column">
+				<a href="javascript:void(0);" class="qr-d-code top_icon">商品二维码</a>
+			</div>
+			<div class="each_column top_search_module">
+				<input type="button" class="search_btn"/>
+				<input type="text" class="search_text top_icon" placeholder="搜索"/>
+			</div>
+			<div class="each_column">
+				<a href="javascript:void(0);" class="personal_center top_icon">我的</a>
+			</div>
+			{include file="public/home_page" /}
+		</div>
+	</section>
+	<section class="swiper_banner_wrapper">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{notempty name="info.main_img"}
 				{volist name="info.main_img" id="vo"}
-					<div class="swiper-slide swiper-slide-active">
-						<img src="public_uploads/{$vo}" alt="" class="common_default_img">
-					</div>
+				<div class="swiper-slide">
+					<img src="public_uploads/{$vo}" alt="" class="common_default_img">
+				</div>
 				{/volist}
-			{/empty}
+				{/notempty}
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
 		</div>
 	</section>
 	<section class="">
-		<div class="columns_flex l-r-sides">
-			<p class="store-product-title">{$info.name}</p>
-			<div class="">
-				<a href="javascript:void(0);">
-					<span class="share"></span>
-					分享
-				</a>
-				<a href="javascript:void(0);">
-					<span class="ytk"></span>
-					云推客
-				</a>
-			</div>
-		</div>
-		<ul class="list-item goods_list">
+		<ul class="list-item">
 			<li>
-				<div class="price-item">
-					<span class="text-color-ef">￥<price>{$info.sale_price}</price></span>
-					<del>￥</del>
+				<div class="row-item-mgl">
+					<div class="columns_flex l-r-sides">
+						<div >
+                            <span class="retail-price pink f28">￥
+                                <price class="sale_price">{$info.sale_price}</price>
+                            </span>
+							<del>￥{$info.retail_price}</del>
+						</div>
+						<div class="popularity">
+							<a href="javascript:void(0);" class="fabulous left">赞</a>
+							<a href="javascript:void(0);" class="share ">分享</a>
+						</div>
+					</div>
+					<p class="goods_name">{$info.name}</p>
+					<div>12g*20条 /盒</div>
+					<p>{$info.trait}</p>
 				</div>
-				<div class="columns_flex l-r-sides">
-					<span>15ml x 6瓶 /盒</span>
+				{if $info.sale_type = 1}
+				<div class="row-item-mgl">
+					<span class="content-label">促销活动</span>
+					<p class="text-color-ef">大优惠，路过不要错过大优惠，路过不要错过大优惠，路过不要错过大优惠，路过不要错过</p>
+				</div>
+				{/if}
+				<div class="row-item-mgl">
+					<div class="columns_flex l-r-sides">
+						<div class="specification">采购箱规格<span class="specification_num">50</span><span class="unit">盒/箱</span></div>
+						<div>
+							<span class="pink">￥<price>5</price>/箱</span>
+						</div>
+					</div>
+				</div>
+				<div class="row-item-mgl columns_flex l-r-sides">
+					<span>采购数量(箱)</span>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce">-</a>
 						<input type="text" value="1" class="f24 gshopping_count">
@@ -46,87 +100,212 @@
 					</div>
 				</div>
 			</li>
-
+			<li>
+				<div class="columns_flex l-r-sides">
+					<div class="">
+						<span class="count-down-icons left"></span>
+						<div class="right">
+							<p>本周联合采购截止日还剩</p>
+							<div>
+								<span>8</span>小时
+								<span>8</span>分
+								<span>8</span>秒
+							</div>
+						</div>
+					</div>
+					<a class="text-color-gr invite-friends">
+						<span class="icons"></span><span >邀好友参加</span>
+						
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="columns_flex l-r-sides">
+					<div class="rows rows-l">
+						<div class="">
+							{notempty name="storeInfo.logo_img"}
+							<img src="public_uploads/{$storeInfo.logo_img}" class=" store_logo left" alt="">							
+							{else /}
+							<img src="" class=" store_logo" alt="">
+							{/notempty}
+						</div>
+						<div>
+							<span class="store_name">{$storeInfo.name}{$storeInfo.store_type|getStoreType}</span>
+							<p class="store_run_type">美尚采购<span class="">.</span>联营</p>
+						</div>
+					</div>
+					<div class="follow-right rows">
+						<a href="javascript:void(0);" class="text-color-gr">+关注供应商</a>
+						<a class="text-color-gr go-shopping"><span class="icons"></span><span>进店逛逛</span></a>
+					</div>
+				</div>
+			</li>
 		</ul>
-		<p class="explain-text content-padding">{$info.parameters}</p>
+	</section>
+	<section class="scrollwrapper">
+		<div class="detail-nav columns_flex floor-nav nav-floor">
+			<a href="javascript:void(0);" class="scroll-nav active" data-floor="c">商品参数</a>
+			<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="x">商品详情</a>
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="f">评分评论</a>
+		</div>
+		<div class="floor-content">
+			<section class="scroll-floor floor1 floor">
+				<h3 id="c" class="floor-label">商品参数</h3>
+				{$info.parameters}
+			</section>
+			<!--<section class="scroll-floor floor2">
+				<h3>商品视频</h3>
+			</section>-->
+			<section class="scroll-floor floor2 floor">
+				<h3 id="x" class="floor-label">商品详情</h3>
+				<div class="details_img">
+					{notempty name="info.details_img"}
+					{volist name="info.details_img" id="vo"}
+					<div class="">
+						<img src="public_uploads/{$vo}" alt="" class="common_default_img">
+					</div>
+					{/volist}
+					{/notempty}
+				</div>
+			</section>
+			<section class="scroll-floor floor3 floor">
+				<h3 id="f" class="floor-label">评分评论</h3>
+				<div class="goods_star_score comment_star_module">
+					<div class="five_star">
+						<div class="star_img">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+						</div>
+						<span class="fraction" data-score="0">0分</span>
+					</div>
+					<a href="javascript:void(0);" class="comment_num">0人评论</a>
+				</div>
+			</section>
+		</div>
 	</section>
 </article>
-{include file='public/goods_footer' /}
 {/block}
-{block name="common"}
-{include file="template/right_side_bar.html" /}
+
+{block name="footer"}
+	{include file="public/footer_menu" /}
 {/block}
-{block name="footer"}{/block}
+{block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<!--<script type="text/javascript" src="public_js/jquery.scroll.floor.js"></script>-->
+
 <script type="text/javascript">
+
 	$(function(){
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+			if(scrollHeight+height>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		//商品二维码图片
+		$('body').on('click','.qr-d-code',function(){
+			var postData = {};
+            postData.goods_id = $('.goods_id').val();
+            postData.goods_thumb_img = $('.swiper-slide').eq(0).find('img').attr('src');
+            postData.goods_name = $('.goods_name').text();
+            postData.specification = $('.specification_num').text()+ $('.unit').text();
+            postData.sale_price = $('.sale_price').text();
+            postData.store_name = $('.store_name').text();
+            postData.store_logo = $('.store_logo').attr('src');
+            postData.store_run_type = $('.store_run_type').text();
+			$.post(module+'Goods/generateGoodsQRcode',postData,function (msg) {
+				if(msg.status == 1){
+					layer.open({
+						title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],
+						className:'qrCodePicLayer',
+						content:'<img src="'+msg.info+'" />'
+					})
+				}
+			})
+
+		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
 			pagination: {
 				el: '.swiper-pagination',
-				clickable: true
-			}
+				clickable: true,
+			},
+		});
+		//轮播视频
+		var goodsvideoLayer=$('#goodsvideoLayer').html();
+		$('body').on('click','.goods-video',function(){
+			layer.open({
+				className:'goodsvideoLayer',
+				content:goodsvideoLayer
+			})
+		});
+		$('body').on('click','.video-btn',function(){
+			$('.goodsvideoLayer video').get(0).play();
+		})
+		//星星评分等级
+		// var getFractionValue='{$aveScore}';
+		$('.five_star').setStar({
+			getFractionValue:4,
+            star:'public_img/star.png',
+            starRed:'public_img/starred.png'
+		});
+		$('.scrollwrapper').scrollFloor();
+
+		//立即购买或立即结算
+		$('body').on('click','.buy_now',function(){
+			_this = $(this);
+			var postData = {};
+			var goodsInfo = {};
+			var goodsList = [];
+			var num = $('.gshopping_count').val();
+			var goods_id = {$info.id};
+			goodsInfo.num=num;
+			goodsInfo.goods_id=goods_id;
+			goodsList.push(goodsInfo);
+			postData.goodsList = goodsList;
+			_this.addClass("nodisabled");//防止重复提交
+			var url = module + '/Order/generate';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(){
+					$('.loading').show();
+				},
+				error:function(){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					_this.removeClass("nodisabled");//删除防止重复提交
+					$('.loading').hide();
+					if(data.status == 0){
+						if(data.url){
+							location.href = data.url;
+						}else{
+							dialog.error(data.info);
+						}
+					}else if(data.status == 1){
+						if(data.info=='isAjax'){
+							loginDialog();
+						}else{
+							location.href = module + 'Order/settlement/sn/' + data.sn;
+						}
+					}
+				}
+			});
 		});
 	});
-</script>
-{block name="script"}
-<script type="text/javascript">
-	$(function(){
-		//加
-		$('body').on('click','.gplus',function(){
-			//单个商品数量自加
-			goodsNumPlus($(this));
-			//计算商品列表总价
-			calculateTotalPrice();
 
-		});
-		//减
-		$('body').on('click','.greduce',function(){
-			//单个商品数量自减
-			goodsNumReduce($(this));
-			//计算商品列表总价
-			calculateTotalPrice();
-		});
 
-	});
-	//单个商品数量自加
-	function goodsNumPlus(obj) {
-		var _li = obj.parents('li');
-		var num = _li.find('.gshopping_count').val();
-		_li.find('.gshopping_count').val(++num);
-	}
-	//单个商品数量自减
-	function goodsNumReduce(obj) {
-		var _li = obj.parents('li');
-		var num = _li.find('.gshopping_count').val();
-		if(num<2){
-			return false;
-		}
-		_li.find('.gshopping_count').val(--num);
-	}
-	//计算商品列表总价
-	function calculateTotalPrice(){
-		var _thisLis = $('ul.goods_list').find('li');
-		if(!$('footer').find('price').length){
-			return false;
-		}
-		var isInt = true;
-		var amount = 0;
-		$.each(_thisLis,function(){
-			var _thisLi = $(this);
-			var num = _thisLi.find('.gshopping_count').val();
-			if(!isPosIntNumberOrZero(num)){
-				isInt = false;
-				return false;
-			}
-			amount += _thisLi.find('price').text() * num;
-		});
-		if(!isInt){
-			dialog.error('购买数量为正整数');
-			return false;
-		}
-		$('footer').find('price').html(amount.toFixed(2));
-	}
 </script>
 {/block}

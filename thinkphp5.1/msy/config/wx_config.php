@@ -21,7 +21,7 @@ return [
     'key' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 
     //TODO:公众号支付回调函数
-    'call_back_url'  => "http://".$_SERVER['HTTP_HOST']."/index.php/mall/CallBack/notifyUrl",
+    'call_back_url'  => "CallBack/notifyUrl",
     'call_back_url_business'  => "http://".$_SERVER['HTTP_HOST']."/index.php/Business/CallBack/notifyUrl",
     /**
      * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0

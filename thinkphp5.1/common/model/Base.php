@@ -2,6 +2,26 @@
 namespace common\model;
 
 class Base extends \think\Model {
+
+	/**
+	 * 增加或修改
+	 * @param $data    //增加或修改的数据
+	 * @param array $condition 修改数据的条件
+	 * @return array
+	 */
+	public function edit($data,$condition=[]){
+		$res = $this->allowField(true)->save($data,$condition);
+		if($res === false){
+			return errorMsg('失败');
+		}
+		if(empty($condition)){
+			$id = $this ->getAttr('id');
+			$returnArray = array(
+				'id' => $id,
+			);
+		}
+		return successMsg('成功',$returnArray);
+	}
 	/**查询多条数据
 	 */
 	public function getList($config=[]){

@@ -41,3 +41,15 @@ function getStoreType($num){
 function getRunType($num){
     return $num?config('custom.run_type')[$num]:'保留';
 }
+
+/*开启底部购物车配置项
+ */
+function unlockingFooterCartConfig($arr){
+    $footerCartConfig = config('footer_menu.menu');
+    $tempArr = array();
+    $tempArr['count'] = count($arr);
+    foreach ($arr as $val) {
+        $tempArr['menu'][] = $footerCartConfig[$val];
+    }
+    return $tempArr;
+}

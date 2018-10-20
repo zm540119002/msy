@@ -25,7 +25,7 @@ class Goods extends \common\controller\Base{
             'field'=>[
                 'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
+                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.trait'
             ],
             'order'=>[
                 'sort'=>'desc',
@@ -54,23 +54,43 @@ class Goods extends \common\controller\Base{
     public function detail(){
         if(request()->isAjax()){
         }else{
-            $goodsId = intval(input('goodsId'));
-            if($goodsId){
-                $modelGoods = new \app\purchase\model\Goods();
-                $config =[
-                    'where' => [
-                        ['g.status', '=', 0],
-                        ['g.id', '=', $goodsId],
-                    ],'field' => [
-                        'g.id','g.name','g.sale_price','g.retail_price','g.main_img','g.parameters',
-                    ],
-                ];
-                $info = $modelGoods->getInfo($config);
-                if($info){
-                    $info['main_img'] = explode(',',(string)$info['main_img']);
-                    $this->assign('info',$info);
-                }
+            $goodsId = intval(input('goods_id'));
+            if(!$goodsId){
+                return errorMsg('此商品已下架');
             }
+            $modelGoods = new \app\purchase\model\Goods();
+            $config =[
+                'where' => [
+                    ['g.status', '=', 0],
+                    ['g.id', '=', $goodsId],
+                ],'field' => [
+                    'g.id','g.name','g.sale_price','g.retail_price','g.main_img','g.parameters','g.trait',
+                    'g.thumb_img','g.details_img','g.tag','g.store_id'
+                ],
+            ];
+            $info = $modelGoods->getInfo($config);
+            if($info){
+                $info['main_img'] = explode(',',(string)$info['main_img']);
+                $info['details_img'] = explode(',',(string)$info['details_img']);
+                $this->assign('info',$info);
+            }
+
+            $modelStore =  new \app\purchase\model\Store;
+            $config = [
+                'where' => [
+                    ['s.id','=',$info['store_id']],
+                ],'join' => [
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left']
+                ],'field' => [
+                    's.id','s.store_type','s.run_type','s.is_default','case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as name',
+                ],
+            ];
+            $storeInfo =  $modelStore -> getInfo($config);
+            $this->assign('storeInfo',$storeInfo);
+            $unlockingFooterCart = unlockingFooterCartConfig([0,1,2]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
     }
