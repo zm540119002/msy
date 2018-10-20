@@ -36,7 +36,8 @@ class alipay
      */
     function get_code($payInfo, $config_value)
     {
-       return dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
+//       return dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
+        return dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'config.php';
         if (!empty($payInfo['orderSn'])&& trim($payInfo['orderSn'])!=""){
             //商户订单号，商户网站订单系统中唯一订单号，必填
 //            $out_trade_no = $_POST['WIDout_trade_no'];
