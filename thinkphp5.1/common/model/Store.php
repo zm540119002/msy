@@ -127,7 +127,10 @@ class Store extends Base {
 			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
 			$modelUserStore = new \common\model\UserStore();
 			if($userStoreId){//存在测删除
-				$modelUserStore->delById($userStoreId,false);
+				$where = [
+					['id', '=', $userStoreId],
+				];
+				$modelUserStore->del($where,false);
 			}
 			$postData['type'] = 3;
 			$postData['user_id'] = $userId;
@@ -149,7 +152,10 @@ class Store extends Base {
 			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
 			$modelUserStore = new \common\model\UserStore();
 			if($userStoreId){//存在测删除
-				$modelUserStore->delById($userStoreId,false);
+				$where = [
+					['id', '=', $userStoreId],
+				];
+				$modelUserStore->del($where,false);
 			}
 			return successMsg('删除成功！');
 		}
