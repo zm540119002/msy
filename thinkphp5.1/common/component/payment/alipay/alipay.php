@@ -3,138 +3,72 @@
 
 namespace common\component\payment\alipay;
 
+require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/service/AlipayTradeService.php';
+require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
 
 /**
  * 支付 逻辑定义
  * Class AlipayPayment
  * @package Home\Payment
  */
-require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/service/AlipayTradeService.php';
-require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
-require dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'config.php';
+
 class alipay
 {
     public $alipay_config = array();// 支付宝支付配置参数
-    
+
     /**
      * 析构流函数
      */
     public function  __construct() {
-        $this->alipay_config['alipay_pay_method'] = config('alipay_config.payment_type'); // 1 使用担保交易接口  2 使用即时到帐交易接口
-        $this->alipay_config['partner']           = config('alipay_config.partner');//合作身份者id，以2088开头的16位纯数字
-        $this->alipay_config['seller_email']      = config('alipay_config.seller_email');//收款支付宝账号，一般情况下收款账号就是签约账号
-        $this->alipay_config['key']	              = config('alipay_config.key');//安全检验码，以数字和字母组成的32位字符
-        $this->alipay_config['sign_type']         = config('alipay_config.sign_type');//签名方式 不需修改
-        $this->alipay_config['input_charset']     = config('alipay_config.input_charset');//字符编码格式 目前支持 gbk 或 utf-8
-        $this->alipay_config['cacert']            = config('alipay_config.cacert'); //ca证书路径地址，用于curl中ssl校验 //请保证cacert.pem文件在当前文件夹目录中
-        $this->alipay_config['transport']         = config('alipay_config.transport');//访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
-    }    
+        //支付配置
+        require dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'config.php';
+        $this->alipay_config = $config;
+    }
     /**
      * 生成支付代码
      * @param   array   $order      订单信息
-     * @param   array   $config_value    支付方式信息
+     *
      */
-    function get_code($payInfo, $config_value)
+    function get_code($payInfo)
     {
-//       return dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
-        return dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'config.php';
-        if (!empty($payInfo['orderSn'])&& trim($payInfo['orderSn'])!=""){
+        if (!empty($payInfo['sn'])&& trim($payInfo['sn'])!=""){
             //商户订单号，商户网站订单系统中唯一订单号，必填
-//            $out_trade_no = $_POST['WIDout_trade_no'];
-//
-//            //订单名称，必填
-//            $subject = $_POST['WIDsubject'];
-//
-//            //付款金额，必填
-//            $total_amount = $_POST['WIDtotal_amount'];
-//
-//            //商品描述，可空
-//            $body = $_POST['WIDbody'];
-
-            //超时时间
-            $timeout_express="1m";
-
+            $timeout_express="10m";//该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。
             $payRequestBuilder = new \AlipayTradeWapPayContentBuilder();
             $payRequestBuilder->setBody('美尚云');//对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body。
-            $payRequestBuilder->setSubject($subject);//	商品的标题/交易标题/订单标题/订单关键字等。
-            $payRequestBuilder->setOutTradeNo($out_trade_no);//商户网站唯一订单号 最长64位
-            $payRequestBuilder->setTotalAmount($total_amount);//订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
+            $payRequestBuilder->setSubject('美尚云');//	商品的标题/交易标题/订单标题/订单关键字等。
+            $payRequestBuilder->setOutTradeNo($payInfo['sn']);//商户网站唯一订单号 最长64位
+            $payRequestBuilder->setTotalAmount($payInfo['actually_amount']);//订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
             $payRequestBuilder->setTimeExpress($timeout_express);//
-
-            $payResponse = new \AlipayTradeService($config);
+            $payResponse = new \AlipayTradeService($this->alipay_config);
             $result=$payResponse->wapPay($payRequestBuilder,$this->alipay_config['return_url'],$this->alipay_config['notify_url']);
-
             return ;
         }
-    }
-    
-    /**
-     * 服务器点对点响应操作给支付接口方调用
-     * 
-     */
-    function response()
-    {
-        require_once("lib/alipay_notify.class.php");  // 请求返回
-        //计算得出通知验证结果
-        $alipayNotify = new \AlipayNotify($this->alipay_config); // 使用支付宝原生自带的累 和方法 这里只是引用了一下 而已
-        $verify_result = $alipayNotify->verifyNotify();
-        if(!$verify_result){
-            
-            echo "fail";exit;
-        }
-        $order_sn = $out_trade_no = $_POST['out_trade_no']; //商户订单号
-        $trade_no = $_POST['trade_no']; //支付宝交易号
-        $trade_status = $_POST['trade_status']; //交易状态
-        // 支付宝解释: 交易成功且结束，即不可再做任何操作。
-        if($trade_status == 'TRADE_FINISHED'){
-            //支付成功，做自己的逻辑
-            $data = array(
-                'code'=>'alipay',
-                'name'=>'alipay'
-            );
-            D('Plugin')->add($data);
-            $xml = file_get_contents('php://input');
-            file_put_contents('zhifu.text',$xml);exit;
-        }
 
-        //支付宝解释: 交易成功，且可对该交易做操作，如：多级分润、退款等。
-        elseif ($trade_status== 'TRADE_SUCCESS'){
-            //支付成功，做自己的逻辑
-            $xml = file_get_contents('php://input');
-            file_put_contents('zhifu2.text',$xml);exit;
-        }
-        echo "success"; // 告诉支付宝处理成功
 
     }
-    
+
     /**
-     * 页面跳转响应操作给支付接口方调用
+     * 交易订单查询
      */
-    function respond2()
-    {
-        require_once("lib/alipay_notify.class.php");  // 请求返回
-        //计算得出通知验证结果
-        $alipayNotify = new \AlipayNotify($this->alipay_config);
-        $verify_result = $alipayNotify->verifyReturn();
+    public function orderQuery($orderInfo){
+        if (!empty($orderInfo['sn']) || !empty($orderInfo['pay_sn'])){
 
-            if($verify_result) //验证成功
-            {
-                    $order_sn = $out_trade_no = $_GET['out_trade_no']; //商户订单号
-                    $trade_no = $_GET['trade_no']; //支付宝交易号
-                    $trade_status = $_GET['trade_status']; //交易状态
+            //商户订单号和支付宝交易号不能同时为空。 trade_no、  out_trade_no如果同时存在优先取trade_no
+            //商户订单号，和支付宝交易号二选一
+            $out_trade_no = trim($orderInfo['sn']);
 
-                    if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS')
-                    {
-                       return  array('status'=>1,'order_sn'=>$order_sn);//跳转至成功页面
-                    }
-                    else {
-                        return  array('status'=>0,'order_sn'=>$order_sn); //跳转至失败页面
-                    }
-            }
-            else
-            {
-                return  array('status'=>0,'order_sn'=>$_GET['out_trade_no']);//跳转至失败页面
-            }
+            //支付宝交易号，和商户订单号二选一
+            $trade_no = trim($orderInfo['pay_sn']);
+
+            $RequestBuilder = new AlipayTradeQueryContentBuilder();
+            $RequestBuilder->setTradeNo($trade_no);
+            $RequestBuilder->setOutTradeNo($out_trade_no);
+
+            $Response = new \AlipayTradeService($config);
+            $result=$Response->Query($RequestBuilder);
+            return ;
+        }
     }
 
     //支付宝批量付款到支付宝账户有密接口接口

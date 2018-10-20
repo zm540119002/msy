@@ -54,4 +54,5 @@ return [
 
     // 产品类型，无需修改
 'service' => "alipay.wap.create.direct.pay.by.user",
+    
 ];

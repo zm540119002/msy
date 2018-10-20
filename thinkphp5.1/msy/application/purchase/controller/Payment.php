@@ -14,14 +14,14 @@ class Payment extends \common\controller\UserBase{
                     ['o.sn', '=', $orderSn],
                     ['o.user_id', '=', $this->user['id']],
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount',
+                    'o.id', 'o.sn', 'o.amount','o.actually_amount',
                     'o.user_id','o.type'
                 ],
             ];
             $orderInfo = $modelOrder->getInfo($config);
             $payInfo = [
                 'sn'=>$orderInfo['sn'],
-                'actually_amount'=>$orderInfo['amount'],
+                'actually_amount'=>$orderInfo['actually_amount'],
                 'cancel_back' => "http://".$_SERVER['HTTP_HOST'].url('payCancel'),
                 'fail_back' => "http://".$_SERVER['HTTP_HOST'].url('payFail'),
                 'success_back' => "http://".$_SERVER['HTTP_HOST'].url('payComplete'),
@@ -36,13 +36,13 @@ class Payment extends \common\controller\UserBase{
             }
             //支付宝支付
             if($payCode == 2){
-                $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
+                $payInfo['notify_url'] = $payInfo['notify_url'].'/ali.order';
                 $model = new \common\component\payment\alipay\alipay;
                 return $model->get_code($payInfo);
             }
             //银联支付
             if($payCode == 3){
-                $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin.order';
+                $payInfo['notify_url'] = $payInfo['notify_url'].'/union.order';
                 $model = new \common\component\payment\unionpay\unionpay;
                 return $model->get_code($payInfo);
             }
