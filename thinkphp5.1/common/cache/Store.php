@@ -50,7 +50,7 @@ class Store{
                     ['factory f','f.id = us.factory_id','left'],
                 ],'field' => [
                     's.id','s.store_type','s.run_type','s.is_default',
-                    'f.name','f.type',
+                    'f.id factory_id','f.name','f.type',
                 ],
             ];
             $storeList = $model->getList($config);
