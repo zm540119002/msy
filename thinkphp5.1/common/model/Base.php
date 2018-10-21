@@ -2,7 +2,6 @@
 namespace common\model;
 
 class Base extends \think\Model {
-
 	/**增加或修改
 	 */
 	public function edit($data,$condition=[]){
@@ -12,8 +11,7 @@ class Base extends \think\Model {
 		}
 		$returnArray = [];
 		if(empty($condition)){
-			$id = $this ->getAttr('id');
-			$returnArray['id'] = $id;
+			$returnArray['id'] = $this->getAttr('id');
 		}
 		return successMsg('成功',$returnArray);
 	}

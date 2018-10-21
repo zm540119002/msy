@@ -5,6 +5,7 @@ namespace common\component\payment\alipay;
 
 require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/service/AlipayTradeService.php';
 require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
+require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'wappay/buildermodel/AlipayTradeQueryContentBuilder.php';
 
 /**
  * 支付 逻辑定义
@@ -60,14 +61,13 @@ class alipay
 
             //支付宝交易号，和商户订单号二选一
             $trade_no = trim($orderInfo['pay_sn']);
-
-            $RequestBuilder = new AlipayTradeQueryContentBuilder();
+            $RequestBuilder = new \AlipayTradeQueryContentBuilder();
             $RequestBuilder->setTradeNo($trade_no);
             $RequestBuilder->setOutTradeNo($out_trade_no);
 
-            $Response = new \AlipayTradeService($config);
+            $Response = new \AlipayTradeService( $this->alipay_config);
             $result=$Response->Query($RequestBuilder);
-            return ;
+            return $result;
         }
     }
 
