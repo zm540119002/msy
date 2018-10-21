@@ -10,13 +10,13 @@ class ManagerManage extends \common\controller\UserBase{
             $storeList = \common\cache\Store::getManagerStore($this->user['id']);
             $list = [];
             foreach ($storeList as $item) {
-                $factory_id_arr = array_column($list,'factory_id');
                 $storeInfoArr = [
                     'id' => $item['id'],
                     'store_type' => $item['store_type'],
                     'run_type' => $item['run_type'],
                     'is_default' => $item['is_default'],
                 ];
+                $factory_id_arr = array_column($list,'factory_id');
                 if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
                     $list[] = [
                         'factory_id' => $item['factory_id'],
@@ -33,8 +33,6 @@ class ManagerManage extends \common\controller\UserBase{
                 }
             }
             $this->assign('managerStoreList', $list);
-            print_r($list);
-            exit;
         }
     }
 
