@@ -7,10 +7,25 @@ class ManagerManage extends \common\controller\UserBase{
         if($this->user){
             //获取厂商店铺详情列表
             \common\cache\Store::removeManagerStore($this->user['id']);
-            $list = \common\cache\Store::getManagerStore($this->user['id']);
+            $storeList = \common\cache\Store::getManagerStore($this->user['id']);
+            $list = [];
+            foreach ($storeList as $item) {
+                if(!array_key_exists($item['factory_id'],$list)){
+                    $list[] = [
+                        'factory_id' => $item['factory_id'],
+                        'name' => $item['name'],
+                        'type' => $item['type'],
+                        'store_list' => [
+                            'id' => $item['id'],
+                            'store_type' => $item['store_type'],
+                            'run_type' => $item['run_type'],
+                            'is_default' => $item['is_default'],
+                        ],
+                    ];
+                }
+            }
             $this->assign('managerStoreList', $list);
-            print_r($list);
-            exit;
+            print_r($list);exit;
         }
     }
 
