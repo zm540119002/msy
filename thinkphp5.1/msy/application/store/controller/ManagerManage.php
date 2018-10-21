@@ -4,36 +4,34 @@ namespace app\store\controller;
 class ManagerManage extends \common\controller\UserBase{
     public function __construct(){
         parent::__construct();
-        if($this->user){
-            //获取厂商店铺详情列表
-            \common\cache\Store::removeManagerStore($this->user['id']);
-            $storeList = \common\cache\Store::getManagerStore($this->user['id']);
-            $list = [];
-            foreach ($storeList as $item) {
-                $storeInfoArr = [
-                    'id' => $item['id'],
-                    'store_type' => $item['store_type'],
-                    'run_type' => $item['run_type'],
-                    'is_default' => $item['is_default'],
+        //获取厂商店铺详情列表
+        \common\cache\Store::removeManagerStore($this->user['id']);
+        $storeList = \common\cache\Store::getManagerStore($this->user['id']);
+        $list = [];
+        foreach ($storeList as $item) {
+            $storeInfoArr = [
+                'id' => $item['id'],
+                'store_type' => $item['store_type'],
+                'run_type' => $item['run_type'],
+                'is_default' => $item['is_default'],
+            ];
+            $factory_id_arr = array_column($list,'factory_id');
+            if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
+                $list[] = [
+                    'factory_id' => $item['factory_id'],
+                    'name' => $item['name'],
+                    'type' => $item['type'],
+                    'store_list' => [$storeInfoArr],
                 ];
-                $factory_id_arr = array_column($list,'factory_id');
-                if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
-                    $list[] = [
-                        'factory_id' => $item['factory_id'],
-                        'name' => $item['name'],
-                        'type' => $item['type'],
-                        'store_list' => [$storeInfoArr],
-                    ];
-                }else{//factory存在
-                    foreach ($list as &$key){
-                        if($key['factory_id'] == $item['factory_id']){
-                            $key['store_list'][] = $storeInfoArr;
-                        }
+            }else{//factory存在
+                foreach ($list as &$key){
+                    if($key['factory_id'] == $item['factory_id']){
+                        $key['store_list'][] = $storeInfoArr;
                     }
                 }
             }
-            $this->assign('managerStoreList', $list);
         }
+        $this->assign('managerStoreList', $list);
     }
 
     /**首页
