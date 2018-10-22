@@ -41,6 +41,9 @@ function getStoreType($num){
 function getRunType($num){
     return $num?config('custom.run_type')[$num]:'保留';
 }
+function getOperationalModel($num){
+    return $num?config('custom.operational_model')[$num]:'保留';
+}
 
 /*开启底部购物车配置项
  */
