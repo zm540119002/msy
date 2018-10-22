@@ -34,8 +34,8 @@
 				<span class="content-label">2)设定经营模式</span>
 				<div class="store-type-menu" data-store-pattern="pattern">
 					<a class="" href="javascript:void(0);" data-pattern="1">{:getRunType(1)}</a>
-					<a href="javascript:void(0);" data-pattern="3">{:getRunType(3)}</a>
 					<a href="javascript:void(0);" data-pattern="2">{:getRunType(2)}</a>
+					<a href="javascript:void(0);" data-pattern="3">{:getRunType(3)}</a>
 				</div>
 				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
 			</div>
@@ -52,7 +52,7 @@
 						{/notempty}
 						<div>
 							<p>{$factoryStore.name}{:getStoreType(1)}</p>
-							<p class="run_type">{:getRunType(3)}</p>
+							<p class="run_type"></p>
 						</div>
 					</li>
 					<!--品牌旗舰店-->
@@ -68,7 +68,7 @@
 						{/notempty}
 						<div>
 							<p>{$vo.name}{:getStoreType(2)}</p>
-							<p class="run_type">{:getRunType(3)}</p>
+							<p class="run_type"></p>
 						</div>
 					</li>
 					{/volist}
