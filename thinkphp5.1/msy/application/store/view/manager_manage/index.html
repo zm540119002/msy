@@ -267,6 +267,10 @@
 			$('.top_empy_nav a').eq(0).addClass('current').siblings().removeClass('current');
 			$('.content_main').eq(0).show().siblings().hide();
 		});
+		$('body').on('click','.top_empy_nav a',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+		})
+		
 	});
 </script>
 {/block}
