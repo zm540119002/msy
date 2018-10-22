@@ -10,8 +10,10 @@
     </ul>
 </section>
 <script type="text/javascript">
+ alert(1);
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
+      
         //如果没有默认店铺，则设置默认店铺
         var store='{:json_encode($store)}';
         if(store === 'null'){
@@ -19,6 +21,7 @@
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){
+            alert(1);
             switchManagerStore();
         });
     });
