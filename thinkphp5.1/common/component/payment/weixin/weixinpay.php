@@ -108,8 +108,26 @@ EOF;
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
-        $code_url = weixinpay::payQRcode($url2);
-        print_r($code_url);exit;
+        $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
+        $html = <<<EOF
+            <head>
+               <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
+			   <script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
+			   <script type="text/javascript" src="/static/common/js/dialog.js"></script>	
+            </head>
+            <body>
+                    <script type="text/javascript">
+                        $(function(){
+                          layer.open({
+                                title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
+                                className:'',
+                                content:'<img src="/uploads/{$code_url}">'
+                         })
+                     });
+                </script>
+            <body>
+EOF;
+        echo  $html;
     }
 
     //生成支付二维码
