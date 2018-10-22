@@ -51,6 +51,8 @@ class alipay
 
     /**
      * 交易订单查询
+     * @param $orderInfo ///订单详情
+     * @return bool|\SimpleXMLElement[]|string|\//提交表单HTML文本
      */
     public function orderQuery($orderInfo){
         if (!empty($orderInfo['sn']) || !empty($orderInfo['pay_sn'])){
@@ -71,5 +73,5 @@ class alipay
         }
     }
 
-  
+
 }

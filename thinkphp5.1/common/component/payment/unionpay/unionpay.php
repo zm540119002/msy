@@ -26,10 +26,10 @@ class unionpay
 
     /**
      * 生成支付代码
-     * @param   array   $order      订单信息
+     * @param   array   $payInfo      订单信息
      * @param   array   $config_value
      */
-    function unionPay($order)
+    function unionPay($payInfo)
     {
 
         header ( 'Content-type:text/html;charset=utf-8' );
@@ -61,8 +61,8 @@ class unionpay
             'txnType' => '01',				      //交易类型
             'txnSubType' => '01',				  //交易子类
             'bizType' => '000201',				  //业务类型
-            'frontUrl' => $order['return_url'],  //前台通知地址
-            'backUrl' =>$order['notify_url'],	  //后台通知地址
+            'frontUrl' => $payInfo['return_url'],  //前台通知地址
+            'backUrl' =>$payInfo['notify_url'],	  //后台通知地址
             'signMethod' => SDKConfig::getSDKConfig()->signMethod,	              //签名方法
             'channelType' => '08',	              //渠道类型，07-PC，08-手机
             'accessType' => '0',		          //接入类型
@@ -70,9 +70,9 @@ class unionpay
 
             //TODO 以下信息需要填写
             'merId' =>  $this->unionpay_config['unionpay_mid'] ,		//商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
-            'orderId' => $order["sn"],	//商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
+            'orderId' => $payInfo["sn"],	//商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
             'txnTime' => date('YmdHis',time()),	//订单发送时间，格式为YYYYMMDDhhmmss，取北京时间，此处默认取demo演示页面传递的参数
-            'txnAmt' => $order["actually_amount"]*100,	//交易金额，单位分，此处默认取demo演示页面传递的参数
+            'txnAmt' => $payInfo["actually_amount"]*100,	//交易金额，单位分，此处默认取demo演示页面传递的参数
 
             // 订单超时时间。
             // 超过此时间后，除网银交易外，其他交易银联系统会拒绝受理，提示超时。 跳转银行网银交易如果超时后交易成功，会自动退款，大约5个工作日金额返还到持卡人账户。
@@ -101,7 +101,7 @@ class unionpay
     }
     
     //退款有密接口接口
-    public function payment_refund($order)
+    public function payment_refund($payInfo)
     {
         header('Content-type:text/html;charset=utf-8');
         /**
@@ -138,11 +138,11 @@ class unionpay
             'backUrl' => SDKConfig::getSDKConfig()->backUrl, //后台通知地址
 
             //TODO 以下信息需要填写
-            'orderId' => $order["sn"],        //商户订单号，8-32位数字字母，不能含“-”或“_”，可以自行定制规则，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
+            'orderId' => $payInfo["sn"],        //商户订单号，8-32位数字字母，不能含“-”或“_”，可以自行定制规则，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
             'merId' =>  $this->unionpay_config['unionpay_mid'],            //商户代码，请改成自己的测试商户号，此处默认取demo演示页面传递的参数
-            'origQryId' => $order["origQryId"], //原消费的queryId，可以从查询接口或者通知接口中获取，此处默认取demo演示页面传递的参数
+            'origQryId' => $payInfo["origQryId"], //原消费的queryId，可以从查询接口或者通知接口中获取，此处默认取demo演示页面传递的参数
             'txnTime' => date('YmdHis'),        //订单发送时间，格式为YYYYMMDDhhmmss，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
-            'txnAmt' => $order["actually_amount"]*100,       //交易金额，退货总金额需要小于等于原消费
+            'txnAmt' => $payInfo["actually_amount"]*100,       //交易金额，退货总金额需要小于等于原消费
 
             // 请求方保留域，
             // 透传字段，查询、通知、对账文件中均会原样出现，如有需要请启用并修改自己希望透传的数据。
