@@ -2,6 +2,69 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="store_css/main.css">{/block}
 {block name="content"}
+<!--店家店铺模板-->
+<section id="storeShopInfo" style="display:none;">
+	<div class="store_list">
+		<div><span>维雅</span>供应商</div>
+		<ul>
+			<li data-id="1">
+				<img class="left" src="" />
+				<div>
+					<p>
+						<span>XXX</span>旗舰店
+					</p>
+					<p>
+						<span>美尚会</span>
+						<span>.</span>
+						美尚联营
+					</p>
+				</div>
+			</li>
+			<li data-id="2">
+				<img class="left" src="" />
+				<div>
+					<p>
+						<span>XXX</span>旗舰店
+					</p>
+					<p>
+						<span>在线商城</span>
+						<span>.</span>
+						美尚联营
+					</p>
+				</div>
+			</li>
+		</ul>
+		<div><span>腾讯</span>供应商</div>
+		<ul>
+			<li data-id="3">
+				<img class="left" src="" />
+				<div>
+					<p>
+						<span>XXX</span>旗舰店
+					</p>
+					<p>
+						<span>美尚会</span>
+						<span>.</span>
+						美尚联营
+					</p>
+				</div>
+			</li>
+			<li data-id="4">
+				<img class="left" src="" />
+				<div>
+					<p>
+						<span>XXX</span>旗舰店
+					</p>
+					<p>
+						<span>在线商城</span>
+						<span>.</span>
+						美尚联营
+					</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>
 <!--新增员工账号-->
 <section id="employeeAccountInfo" style="display:none;">
 	<form class="employeeAccountForm">
@@ -12,6 +75,13 @@
 		<div class="account-field">
 			<span class="content-label">手机号码</span>
 			<input type="tel" class="" placeholder="手机号码" name="mobile_phone">
+		</div>
+		<div class="account-field account_position">
+			<span class="content-label">岗位设置</span>
+			<ul>
+				<li class="col" data-id="">运营</li>
+				<li class="col" data-id="">客服</li>
+			</ul>
 		</div>
 		<div class="account-field account_position">
 			<span class="content-label">职务设置</span>
@@ -45,6 +115,7 @@
 	</form>
 	<div class="error_tipc"></div>
 </section>
+<!--员工账号列表模板-->
 <section style="display: none;" id="employeeAccountList">
 	<li class="columns_flex l-r-sides">
 		<div>
@@ -75,10 +146,11 @@
 </section>
 <article class="f24">
 	<div class="top_header">
+		{include file='public/switch_manager_store' /}
 		<section class="specific_type store_deploy_nav">
 			<div class="columns_flex f20 l-r-sides store_deploy_bar">
-				<a href="" class="current">线上店铺店长管理</a>
-				<a href="">O2O门店店长管理</a>
+				<a href="javascript:;" class="current">线上店铺店长管理</a>
+				<a href="javascript:;">020门店店长管理</a>
 			</div>
 		</section>
 		<section class=" ">
@@ -228,7 +300,6 @@
 					// 	index:index
 					// };
 					// dialogFormDel(config);
-
 				}
 			});
 		});
@@ -239,8 +310,52 @@
 		});
 		//选择授权设置样式
 		$('body').on('click','.employeeAccountLayer li',function(){
-			$(this).toggleClass('current');
+			$(this).addClass('current').siblings().removeClass('current');
+		});
+		//选择店铺样式
+		$('body').on('click','.storeShopListLayer li',function(){
+			$(this).parents('.store_list').find('li').removeClass('current');
+			$(this).addClass('current').siblings().removeClass('current');
+
 		});
 	});
+	//选择店家店铺
+	function switchManagerStore(){
+		var storeShopInfoList = $('#storeShopInfo').html();
+		layer.open({
+			title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
+			className:'storeShopListLayer',
+			type: 1,
+			fixed:true,
+			// top:100,
+			shadeClose:false,
+			content:storeShopInfoList,
+			anim: 'up',
+			style: '',
+			success:function(){
+				var winHeight=$(window).height();
+				$('.storeShopListLayer .store_list').css('height',winHeight-120+'px');
+				$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+				$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+			},
+			btn:['确定','取消'],
+			yes:function(index){
+				var postData = {};
+				postData.storeShopId = $('.storeShopListLayer li.current').data('id');
+				if(!postData.storeShopId){
+					dialog.error('请选择店家店铺');
+					return false;
+				}
+				$.post(url,postData,function(data){
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.status==1){
+						layer.close(index);
+						location.reload();
+					}
+				});
+			}
+		});
+	}
 </script>
 {/block}
