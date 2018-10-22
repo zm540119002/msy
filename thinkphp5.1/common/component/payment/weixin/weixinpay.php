@@ -35,9 +35,7 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $payInfo['success_back'] = $payInfo['success_back']?:url('Index/index');
-        $payInfo['cancel_back'] = $payInfo['cancel_back']?:url('Index/index');
-        $payInfo['fail_back'] = $payInfo['fail_back']?:url('Index/index');
+        $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
         $tools = new \JsApiPay();
         $openId = $tools->GetOpenid();
         $input = new \WxPayUnifiedOrder();
@@ -197,6 +195,7 @@ EOF;
         return $result;
     }
 
+    //订单查询
     public static function wxOrderQuery($orderSn,$transactionId){
         $input = new \WxPayRefund();
         $input->SetOut_trade_no($orderSn);			//自己的订单号

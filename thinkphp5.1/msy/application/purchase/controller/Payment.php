@@ -36,13 +36,13 @@ class Payment extends \common\controller\UserBase{
             if($payCode == 2){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/ali.order';
                 $model = new \common\component\payment\alipay\alipay;
-                return $model->get_code($payInfo);
+                $model->aliPay($payInfo);
             }
             //银联支付
             if($payCode == 3){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/union.order';
                 $model = new \common\component\payment\unionpay\unionpay;
-                return $model->get_code($payInfo);
+                $model->unionPay($payInfo);
             }
         }
     }
@@ -51,5 +51,5 @@ class Payment extends \common\controller\UserBase{
     public function payComplete(){
         return $this->fetch();
     }
-  
+
 }
