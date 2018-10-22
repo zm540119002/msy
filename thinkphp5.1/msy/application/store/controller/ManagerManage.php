@@ -14,12 +14,13 @@ class ManagerManage extends \common\controller\UserBase{
                 'store_name' => $item['store_name'],
                 'store_type' => $item['store_type'],
                 'run_type' => $item['run_type'],
+                'operational_model' => $item['operational_model'],
                 'is_default' => $item['is_default'],
             ];
             $factory_id_arr = array_column($list,'factory_id');
             if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
                 $list[] = [
-                    'id' => $item['factory_id'],
+                    'factory_id' => $item['factory_id'],
                     'name' => $item['name'],
                     'type' => $item['type'],
                     'store_list' => [$storeInfoArr],

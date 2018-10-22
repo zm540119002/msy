@@ -2,19 +2,19 @@
 <section id="storeShopInfo" style="display:none;">
     <div class="store_list">
         {volist name="managerFactoryList" id="factory"}
-        <div><span>{$factory.name}</span>供应商</div>
-        <ul>
+        <div><span>{$factory.name}</span></div>
+        <ul data-id="{$factory.factory_id}">
             {volist name="factory.store_list" id="store"}
-            <li data-id="1">
+            <li data-id="{$store.id}">
                 <img class="left" src="" />
                 <div>
                     <p>
-                        <span>{$store.store_name}</span>旗舰店
+                        <span>{$store.store_name}</span>{$store.store_type|getStoreType}
                     </p>
                     <p>
-                        <span>美尚会</span>
+                        <span>{$store.run_type|getRunType}</span>
                         <span>.</span>
-                        美尚联营
+                        {$store.operational_model|getOperationalModel}
                     </p>
                 </div>
             </li>
