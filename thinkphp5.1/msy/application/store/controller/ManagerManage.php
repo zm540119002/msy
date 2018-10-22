@@ -19,7 +19,7 @@ class ManagerManage extends \common\controller\UserBase{
             $factory_id_arr = array_column($list,'factory_id');
             if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
                 $list[] = [
-                    'id' => $item['factory_id'],
+                    'factory_id' => $item['factory_id'],
                     'name' => $item['name'],
                     'type' => $item['type'],
                     'store_list' => [$storeInfoArr],
