@@ -1,26 +1,40 @@
-<section id="vendorInfoList" style="display:none;">
-    <ul class="vendorInfoList">
-        {volist name="storeList" id="vo"}
-        <li class="" data-id="{$vo.id}">
-            <span class="store-name">{$store.name}</span>
-            <p class="store-type">{$vo.store_type|getStoreType}</p>
-            <p class="run-type">{$vo.run_type|getRunType}</p>
-        </li>
+<!--店家店铺模板-->
+<section id="storeShopInfo" style="display:none;">
+    <div class="store_list">
+        {volist name="managerFactoryList" id="factory"}
+        <div><span>{$factory.name}</span>供应商</div>
+        <ul>
+            {volist name="factory.store_list" id="store"}
+            <li data-id="1">
+                <img class="left" src="" />
+                <div>
+                    <p>
+                        <span>{$store.store_name}</span>旗舰店
+                    </p>
+                    <p>
+                        <span>美尚会</span>
+                        <span>.</span>
+                        美尚联营
+                    </p>
+                </div>
+            </li>
+            {/volist}
+        </ul>
         {/volist}
-    </ul>
+    </div>
 </section>
 <script type="text/javascript">
-    var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
         //如果没有默认店铺，则设置默认店铺
-        var store='{:json_encode($store)}';
-        if(store === 'null'){
+        var managerFactoryList='{:json_encode($managerFactoryList)}';
+        console.log(managerFactoryList);
+        if(managerFactoryList === 'null'){
             return false;
-        }
-        //切换店铺
-        $('body').on('click','.switch-store',function(){
-            switchManagerStore();
-        });
+        } 
+    });
+    //切换店铺
+    $('body').on('click','.switch-store',function(){
+        switchManagerStore();
     });
     //选择管理店铺
     function switchManagerStore(){
