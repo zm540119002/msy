@@ -16,7 +16,6 @@ function checkLogin(){
     }
     return $user;
 }
-
 /**循环判断键值是否存在
  * @return bool
  */
@@ -41,11 +40,7 @@ function getStoreType($num){
 function getRunType($num){
     return $num?config('custom.run_type')[$num]:'保留';
 }
-<<<<<<< HEAD
-//获取店铺经营类型（自营还是联营）
-=======
 //获取店铺合作类型
->>>>>>> e0e6cdb73bcc4d90ffa86278ca94d7c77f248bc9
 function getOperationalModel($num){
     return $num?config('custom.operational_model')[$num]:'保留';
 }

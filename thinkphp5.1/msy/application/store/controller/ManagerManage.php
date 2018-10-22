@@ -12,6 +12,7 @@ class ManagerManage extends \common\controller\UserBase{
             $storeInfoArr = [
                 'id' => $item['id'],
                 'store_name' => $item['store_name'],
+                'logo_img' => $item['logo_img'],
                 'store_type' => $item['store_type'],
                 'run_type' => $item['run_type'],
                 'operational_model' => $item['operational_model'],
