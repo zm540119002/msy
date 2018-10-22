@@ -146,25 +146,7 @@
 </section>
 <article class="f24">
 	<div class="top_header">
-		<section class="top_nav_fixed top_nav_store">
-			<div class="top_bar top-switch-bar columns_flex l-r-sides">
-				<!--<div class="">
-                    <a class="home top_icon" href="/store/Index/index.html">首页</a>
-                </div>-->
-				<div class="top_left_f">
-					<img id="" class="left store-logo-img" src="http://msy.meishangyun.com/uploads/factory_record/2018092516061665977.jpeg">
-					<span class="store-name">订单</span>
-				</div>
-				<div class="">
-					<div class="columns_flex">
-						<a href="javascript:void(0);" class="shopping_cart top_icon"></a>
-						<a href="javascript:void(0);" class="personal_center top_icon"></a>
-						<a href="/store/Index/index.html" class="home top_icon"></a>
-					</div>
-					<a href="javascript:void(0);" class="switch-factory ">切换店铺账号&gt;</a>
-				</div>
-			</div>
-		</section>
+		{include file='public/switch_manager_store' /}
 		<section class="specific_type store_deploy_nav">
 			<div class="columns_flex f20 l-r-sides store_deploy_bar">
 				<a href="javascript:;" class="current">线上店铺店长管理</a>
@@ -336,10 +318,9 @@
 			$(this).addClass('current').siblings().removeClass('current');
 
 		});
-		setstoreShop();
 	});
 	//选择店家店铺
-	function setstoreShop() {
+	function switchManagerStore(){
 		var storeShopInfoList = $('#storeShopInfo').html();
 		layer.open({
 			title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
@@ -353,7 +334,6 @@
 			style: '',
 			success:function(){
 				var winHeight=$(window).height();
-				//$('html,body').addClass('scrollStyle');
 				$('.storeShopListLayer .store_list').css('height',winHeight-120+'px');
 				$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
 				$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
@@ -366,7 +346,6 @@
 					dialog.error('请选择店家店铺');
 					return false;
 				}
-				//var url = 'setDefaultFactory';
 				$.post(url,postData,function(data){
 					if(data.status==0){
 						dialog.error(data.info);
