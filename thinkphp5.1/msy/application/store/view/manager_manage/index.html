@@ -92,23 +92,30 @@
 		</section>
 		<section class=" ">
 			<div class="columns_flex f20 l-r-sides top_empy_nav">
-				<a href="" class="current">店铺运营员工账号管理</a>
-				<a href="">设定商品退换收货人地址手机号码</a>
+				<a href="javascript:;" class="current">店铺运营员工账号管理</a>
+				<a href="javascript:;">设定商品退换收货人地址手机号码</a>
 			</div>
+			<div class="columns_flex f20 l-r-sides top_empy_nav hide">
+                <a href="javascript:;" class="current">门店员工账号</a>
+                <a href="javascript:;">门店经营地址</a>
+                <a href="javascript:;">门店收货人地址手机号码</a>
+            </div>
 		</section>
 	</div>
 	<section class="f24 account-content-wrapper">
 		<div class="content-top content-mg-top">
-			<div class="search_module_bar">
-				<input type="button" class="search_btn left"/>
-				<input type="text" class="search_text left" placeholder="输入姓名/手机号搜索账号"/>
+			<div class="content_main">
+				<div class="search_module_bar">
+					<input type="button" class="search_btn left"/>
+					<input type="text" class="search_text left" placeholder="输入姓名/手机号搜索账号"/>
+				</div>
+				<p class="emp_account_tipc">店铺运营员工账号</p>
+				<ul class="list">
+					<li>
+						<span>暂无数据</span>
+					</li>
+				</ul>
 			</div>
-			<p class="emp_account_tipc">店铺运营员工账号</p>
-			<ul class="list">
-				<li>
-					<span>暂无数据</span>
-				</li>
-			</ul>
 		</div>
 	</section>
 	<a href="javascript:void(0);" class="add_account foot-btn">新增员工账号</a>
@@ -254,6 +261,13 @@
 			$(this).parents('.store_list').find('li').removeClass('current');
 			$(this).addClass('current').siblings().removeClass('current');
 		});
+		$('body').on('click','.store_deploy_bar a',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
+			$('.top_empy_nav a').eq(0).addClass('current').siblings().removeClass('current');
+			$('.content_main').eq(0).show().siblings().hide();
+		});
+		
 	});
 </script>
 {/block}
