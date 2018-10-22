@@ -48,9 +48,12 @@ class Store{
                 ],'join' => [
                     ['store s','s.id = us.store_id','left'],
                     ['factory f','f.id = us.factory_id','left'],
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left'],
                 ],'field' => [
-                    's.id','s.store_type','s.run_type','s.is_default',
+                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
                     'f.id factory_id','f.name','f.type',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
                 ],
             ];
             $storeList = $model->getList($config);

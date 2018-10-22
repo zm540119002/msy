@@ -612,43 +612,38 @@ function createQRcode($url){
 }
 
 
-//生成带logo二维码
+//生成二维码 有$logo,生成带logo的二维码
 /**
  * @param $url 要跳转的url
- * @param $avatarPath 中间logo的图片路径
- * @param $newRelativePath 生成二维码图片保存路径
+ * @param $newRelativePath 生成二维码图片保存路径 相对路径
+ * @param $logo 中间logo的图片路径 绝对路径
  * @param string $eclevel
  * @param int $pixelPerPoint
  * @return array|string 返回二维码相对路径
  */
-function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
-    $QRcode = new \common\component\qrcode\qrcode();
-    $uploadPath =realpath( config('upload_dir.upload_path')) . '/';
+function createLogoQRcode($url,$newRelativePath,$logo){
+    $QRcode =  new \common\component\code\Qrcode();;
+    $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
-            return (errorMsg('创建Uploads目录失败'));
+            return errorMsg('创建Uploads目录失败');
         }
     }
-    $logo = $uploadPath.$avatarPath;
-    //没有带logo二维码保存路径
-    $tempPath =$uploadPath.config('upload_dir.temp_path');;
-    if(!mk_dir($tempPath)){
-        return (errorMsg('创建新目录失败'));
-    }
-    $noLogoFilename = $tempPath.'nologo'.time().'.png';
-    //带二维码保存路径
-    $newPath = $uploadPath . $newRelativePath;
+
+    //二维码图片保存路径
+    $newPath = $uploadPath . $newRelativePath; //绝对路经
     if(!mk_dir($newPath)){
-        return (errorMsg('创建新目录失败'));
+        return errorMsg('创建新目录失败');
     }
-
-    $filename = time().'.png';
-    $logoFilename = $newPath.$filename;
-
-    $QRcode->png($url, $noLogoFilename, $eclevel, $pixelPerPoint, 2);
+    //生产没有logo二维码图片
+    $filename = time().'nologo.png';
+    $noLogoFile = $newPath.$filename;
+    $QRcode->png($url, $noLogoFile);
     if($logo !== FALSE)
     {
-        $QR = imagecreatefromstring(file_get_contents($noLogoFilename));
+        $filename = time().'withlogo.png';
+        $logoFile = $newPath.$filename;
+        $QR = imagecreatefromstring(file_get_contents($noLogoFile));
         $logo = imagecreatefromstring(file_get_contents($logo));
         if(imageistruecolor($logo)){
             imagetruecolortopalette($logo,false,65535);//解决颜色失真
@@ -662,11 +657,10 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
         $logo_qr_height = $logo_height / $scale;
         $from_width = ($QR_width - $logo_qr_width) / 2;
         imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+        unlink($noLogoFile);
+        imagepng($QR,$logoFile);
     }
-    imagepng($QR,$logoFilename);
-    unlink($noLogoFilename);
     return $newRelativePath.$filename;
-
 }
 
 /**

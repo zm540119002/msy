@@ -11,8 +11,10 @@ class ManagerManage extends \common\controller\UserBase{
         foreach ($storeList as $item) {
             $storeInfoArr = [
                 'id' => $item['id'],
+                'store_name' => $item['store_name'],
                 'store_type' => $item['store_type'],
                 'run_type' => $item['run_type'],
+                'operational_model' => $item['operational_model'],
                 'is_default' => $item['is_default'],
             ];
             $factory_id_arr = array_column($list,'factory_id');
@@ -31,7 +33,7 @@ class ManagerManage extends \common\controller\UserBase{
                 }
             }
         }
-        $this->assign('managerStoreList', $list);
+        $this->assign('managerFactoryList', $list);
     }
 
     /**首页
