@@ -1,0 +1,63 @@
+<section id="vendorInfoList" style="display:none;">
+    <ul class="vendorInfoList">
+        {volist name="storeList" id="vo"}
+        <li class="" data-id="{$vo.id}">
+            <span class="store-name">{$store.name}</span>
+            <p class="store-type">{$vo.store_type|getStoreType}</p>
+            <p class="run-type">{$vo.run_type|getRunType}</p>
+        </li>
+        {/volist}
+    </ul>
+</section>
+<script type="text/javascript">
+    var vendorInfoList=$('#vendorInfoList').html();
+    $(function(){
+        //如果没有默认店铺，则设置默认店铺
+        var store='{:json_encode($store)}';
+        if(store === 'null'){
+            return false;
+        }
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            switchManagerStore();
+        });
+    });
+    //选择管理店铺
+    function switchManagerStore(){
+        var storeShopInfoList = $('#storeShopInfo').html();
+        layer.open({
+            title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
+            className:'storeShopListLayer',
+            type: 1,
+            fixed:true,
+            // top:100,
+            shadeClose:false,
+            content:storeShopInfoList,
+            anim: 'up',
+            style: '',
+            success:function(){
+                var winHeight=$(window).height();
+                $('.storeShopListLayer .store_list').css('height',winHeight-120+'px');
+                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+            },
+            btn:['确定','取消'],
+            yes:function(index){
+                var postData = {};
+                postData.storeShopId = $('.storeShopListLayer li.current').data('id');
+                if(!postData.storeShopId){
+                    dialog.error('请选择店家店铺');
+                    return false;
+                }
+                $.post(url,postData,function(data){
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.status==1){
+                        layer.close(index);
+                        location.reload();
+                    }
+                });
+            }
+        });
+    }
+</script>

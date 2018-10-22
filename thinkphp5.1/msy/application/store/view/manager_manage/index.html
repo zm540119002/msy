@@ -316,46 +316,7 @@
 		$('body').on('click','.storeShopListLayer li',function(){
 			$(this).parents('.store_list').find('li').removeClass('current');
 			$(this).addClass('current').siblings().removeClass('current');
-
 		});
 	});
-	//选择店家店铺
-	function switchManagerStore(){
-		var storeShopInfoList = $('#storeShopInfo').html();
-		layer.open({
-			title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
-			className:'storeShopListLayer',
-			type: 1,
-			fixed:true,
-			// top:100,
-			shadeClose:false,
-			content:storeShopInfoList,
-			anim: 'up',
-			style: '',
-			success:function(){
-				var winHeight=$(window).height();
-				$('.storeShopListLayer .store_list').css('height',winHeight-120+'px');
-				$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
-				$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-			},
-			btn:['确定','取消'],
-			yes:function(index){
-				var postData = {};
-				postData.storeShopId = $('.storeShopListLayer li.current').data('id');
-				if(!postData.storeShopId){
-					dialog.error('请选择店家店铺');
-					return false;
-				}
-				$.post(url,postData,function(data){
-					if(data.status==0){
-						dialog.error(data.info);
-					}else if(data.status==1){
-						layer.close(index);
-						location.reload();
-					}
-				});
-			}
-		});
-	}
 </script>
 {/block}
