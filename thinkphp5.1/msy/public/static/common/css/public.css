@@ -3173,3 +3173,140 @@ input[type=text]::-webkit-focus-inner {
     background:#009A3E;
     color:#fff;
 }
+.add_employee_account{
+    display:block;
+    width:100%;
+    padding:0.10rem 0;
+    background:#ff7bac;
+    color:#fff;
+    text-align:center;
+    border-radius:5px;
+    margin:0 0 0.28rem 0;
+}
+.search_module_bar{
+    border:1px solid #d9d9d9;
+    overflow:hidden;
+    border-radius:5px;
+}
+.search_module_bar .search_btn {
+    width: 15%;
+    height: .55rem;
+    /*margin: 2px 0 0;*/
+    background-color:#fff;
+    background-image: url(../../common/img/icons/public_icons.png);
+    background-repeat: no-repeat;
+    background-size: 28px 342px;
+    background-position:8px -277px;
+}
+.search_module_bar .search_text {
+    font-size: 12px;
+    width: 85%;
+    /*height: 100%;*/
+    /* line-height: 14px; */
+    box-sizing: border-box;
+    -webkit-box-flex: 1;
+    padding:.15rem 0; 
+}
+.emp_account_tipc{
+    margin:.15rem 0;
+}
+.employeeAccountLayer .layui-m-layerbtn,
+.storeShopListLayer .layui-m-layerbtn{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 5px;
+    /* right: 0; */
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+.employeeAccountLayer .layui-m-layerbtn span[no] {
+    visibility: hidden;
+}
+.employeeAccountLayer .layui-m-layerbtn span[yes] {
+    width: 50px;
+    background: none;
+    color: #40AFFE;
+}
+.employeeAccountForm{
+    margin:0.20rem .15rem 0;
+    padding:0.15rem;
+    border:1px solid #d9d9d9;
+    background:#efefef;
+    border-radius:5px;
+}
+.account_position li.col{
+    display:inline-block;
+    width:30%;
+    border:1px solid #009A3E;
+    text-align: center;
+    background:#fff;
+    border-radius:5px;
+}
+.permission_options li{
+    border:1px solid #009A3E;
+    background:#fff;
+    text-align: left;
+    border-radius:5px;
+    text-indent: 20px;
+}
+.employeeAccountLayer li.current{
+    background:#009A3E;
+    color:#fff;
+}
+.top_empy_nav{
+    background:#fff;
+    padding:0.16rem 0.12rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.top_empy_nav a{
+    position:relative;
+    width:50%;
+    text-align: center;
+    color:#666;
+}
+.top_empy_nav a.current{
+    color:#ff7bac;
+}
+.top_empy_nav a.current:before{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: -20px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color:#ff7bac;
+    content: "";
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: center;
+    transition: all 0.5s;
+    margin-left: -15px;
+}
+.content-mg-top{
+    margin-top:3rem;
+}
+/*打印订单*/
+.print_orders{
+    display:block;
+    width:1.25rem;
+    background:#ff7bac;
+    color:#fff;
+    margin:0.12rem auto 0;
+    text-align:center;
+    border-radius:5px;
+}
+.storeShopListLayer .store_list{
+    margin:0.25rem 0.15rem 0;
+}
+.storeShopListLayer li{
+    border:1px solid #009A3E;
+    border-radius:5px;
+    padding:0.15rem 0;
+    margin:0 0 .30rem 0;
+}
+.storeShopListLayer li.current{
+    background:#009A3E;
+    color:#fff;
+}

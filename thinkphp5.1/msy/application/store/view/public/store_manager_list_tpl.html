@@ -15,7 +15,6 @@
         //如果没有默认店铺，则设置默认店铺
         var store='{:json_encode($store)}';
         if(store === 'null'){
-            setDefaultStore();
             return false;
         }
         //切换店铺
