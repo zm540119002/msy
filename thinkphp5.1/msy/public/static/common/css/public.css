@@ -1402,7 +1402,8 @@ background-position: 0 -27px;
 .rolePowerLayer .layui-m-layerbtn span[no],
 .rolePowerLayer .layui-m-layerbtn span[yes],
 .vendorInfoLayer .layui-m-layerbtn span[no],
-.vendorInfoLayer .layui-m-layerbtn span[yes]{
+.vendorInfoLayer .layui-m-layerbtn span[yes],
+.storeShopListLayer .layui-m-layerbtn span[no]{
     width:50px;
     border:none;
 }
@@ -2961,7 +2962,8 @@ input[type=text]::-webkit-focus-inner {
 .top_nav_store div:nth-child(1){
     /*flex:3;*/
 }
-.top_bar .store-logo-img{
+.top_bar .store-logo-img,
+.store_logo{
     width:0.75rem;
     height:0.75rem;
     border-radius:100%;
@@ -3260,9 +3262,15 @@ input[type=text]::-webkit-focus-inner {
     padding:0.16rem 0.12rem;
     border-bottom:1px solid #d9d9d9;
 }
+.top_empy_nav.hide,.content_main.hide{
+    display: none;
+}
+.top_empy_nav.i_flex{
+    display:flex;
+}
 .top_empy_nav a{
     position:relative;
-    width:50%;
+    /*width:50%;*/
     text-align: center;
     color:#666;
 }
