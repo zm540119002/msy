@@ -1402,7 +1402,8 @@ background-position: 0 -27px;
 .rolePowerLayer .layui-m-layerbtn span[no],
 .rolePowerLayer .layui-m-layerbtn span[yes],
 .vendorInfoLayer .layui-m-layerbtn span[no],
-.vendorInfoLayer .layui-m-layerbtn span[yes]{
+.vendorInfoLayer .layui-m-layerbtn span[yes],
+.storeShopListLayer .layui-m-layerbtn span[yes]{
     width:50px;
     border:none;
 }
