@@ -16,7 +16,6 @@ function checkLogin(){
     }
     return $user;
 }
-
 /**循环判断键值是否存在
  * @return bool
  */
