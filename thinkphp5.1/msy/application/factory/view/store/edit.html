@@ -28,14 +28,14 @@
 			<div class="new-store-item store-one">
 				<span class="content-label">1)选择店铺类型</span>
 				<div class="store-type-menu" data-store-type="type">
-					<a class="" href="javascript:void(0);" data-type="1">企业旗舰店</a>
-					<a href="javascript:void(0);" data-type="2">品牌旗舰店</a>
+					<a class="" href="javascript:void(0);" data-type="1">{:getStoreType(1)}</a>
+					<a href="javascript:void(0);" data-type="2">{:getStoreType(2)}</a>
 				</div>
 				<span class="content-label">2)设定经营模式</span>
 				<div class="store-type-menu" data-store-pattern="pattern">
-					<a class="" href="javascript:void(0);" data-pattern="1">B2B采购商城</a>
-					<a href="javascript:void(0);" data-pattern="3">B2B分成商城</a>
-					<a href="javascript:void(0);" data-pattern="2">B2B零售商城</a>
+					<a class="" href="javascript:void(0);" data-pattern="1">{:getRunType(1)}</a>
+					<a href="javascript:void(0);" data-pattern="3">{:getRunType(3)}</a>
+					<a href="javascript:void(0);" data-pattern="2">{:getRunType(2)}</a>
 				</div>
 				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
 			</div>
@@ -51,8 +51,8 @@
 						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 						{/notempty}
 						<div>
-							<p>{$factoryStore.name}官方旗舰店</p>
-							<p class="run_type">B2C零售商城</p>
+							<p>{$factoryStore.name}{:getStoreType(1)}</p>
+							<p class="run_type">{:getRunType(3)}</p>
 						</div>
 					</li>
 					<!--品牌旗舰店-->
@@ -67,8 +67,8 @@
 						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 						{/notempty}
 						<div>
-							<p>{$vo.name}品牌旗舰店</p>
-							<p class="run_type">B2C零售商城</p>
+							<p>{$vo.name}{:getStoreType(2)}</p>
+							<p class="run_type">{:getRunType(3)}</p>
 						</div>
 					</li>
 					{/volist}

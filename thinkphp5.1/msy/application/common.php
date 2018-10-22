@@ -41,6 +41,7 @@ function getStoreType($num){
 function getRunType($num){
     return $num?config('custom.run_type')[$num]:'保留';
 }
+//获取店铺经营类型（自营还是联营）
 function getOperationalModel($num){
     return $num?config('custom.operational_model')[$num]:'保留';
 }
