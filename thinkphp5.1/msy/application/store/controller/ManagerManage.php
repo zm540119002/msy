@@ -50,6 +50,15 @@ class ManagerManage extends \common\controller\UserBase{
         }
     }
 
+    /**店铺管理
+     */
+    public function manage(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
+
     /**编辑管理员
      */
     public function edit(){
