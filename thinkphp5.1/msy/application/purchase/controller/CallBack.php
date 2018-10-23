@@ -73,7 +73,25 @@ class CallBack extends \common\controller\Base{
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             if ($order_type == 'order') {
-                $res = $this->orderHandle($data);
+                $modelOrder = new \app\purchase\model\Order();
+                $config = [
+                    'where' => [
+                        ['o.status', '=', 0],
+                        ['o.sn', '=', $data['order_sn']],
+                    ],'field' => [
+                        'o.id', 'o.sn', 'o.amount',
+                        'o.user_id','o.actually_amount'
+                    ],
+                ];
+                $orderInfo = $modelOrder->getInfo($config);
+                if ($orderInfo['logistics_status'] > 1) {
+                    return successMsg('已回调过，订单已处理');
+                }
+                if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
+                    //返回状态给微信服务器
+                    return errorMsg('回调的金额和订单的金额不符，终止购买');
+                }
+                $res = $this->orderHandle($data,$orderInfo);
                 if($res['status']){
                     $this->successReturn();
                 }else{
@@ -120,7 +138,18 @@ class CallBack extends \common\controller\Base{
             if ($data['respMsg'] == 'Success!') {
                 // 修改订单支付状态
                 if ($order_type == 'order') {
-                    $res = $this->orderHandle($data);
+                    $modelOrder = new \app\purchase\model\Order();
+                    $config = [
+                        'where' => [
+                            ['o.status', '=', 0],
+                            ['o.sn', '=', $data['order_sn']],
+                        ],'field' => [
+                            'o.id', 'o.sn', 'o.amount',
+                            'o.user_id','o.actually_amount'
+                        ],
+                    ];
+                    $orderInfo = $modelOrder->getInfo($config);
+                    $res = $this->orderHandle($data,$orderInfo);
                     if($res['status']){
                         echo "success"; // 处理成功
                     }else{
@@ -166,7 +195,18 @@ class CallBack extends \common\controller\Base{
                 $this->rechargeHandle($data);
             }
             if ($order_type == 'order') {
-                $this->orderHandle($data);
+                $modelOrder = new \app\purchase\model\Order();
+                $config = [
+                    'where' => [
+                        ['o.status', '=', 0],
+                        ['o.sn', '=', $data['order_sn']],
+                    ],'field' => [
+                        'o.id', 'o.sn', 'o.amount',
+                        'o.user_id','o.actually_amount'
+                    ],
+                ];
+                $orderInfo = $modelOrder->getInfo($config);
+                $res = $this->orderHandle($data,$orderInfo);
             }
 
         } //支付宝解释: 交易成功，且可对该交易做操作，如：多级分润、退款等。
@@ -176,7 +216,21 @@ class CallBack extends \common\controller\Base{
                 $this->rechargeHandle($data);
             }
             if ($order_type == 'order') {
-                $this->orderHandle($data);
+                if ($order_type == 'order') {
+                    $modelOrder = new \app\purchase\model\Order();
+                    $config = [
+                        'where' => [
+                            ['o.status', '=', 0],
+                            ['o.sn', '=', $data['order_sn']],
+                        ],'field' => [
+                            'o.id', 'o.sn', 'o.amount',
+                            'o.user_id','o.actually_amount'
+                        ],
+                    ];
+                    $orderInfo = $modelOrder->getInfo($config);
+                    $res = $this->orderHandle($data,$orderInfo);
+                }
+
             }
         }
         echo "success"; // 告诉支付宝处理成功
@@ -187,26 +241,9 @@ class CallBack extends \common\controller\Base{
      * 普通订单支付回调
      */
 
-    private function orderHandle($data){
+    private function orderHandle($data,$orderInfo){
+
         $modelOrder = new \app\purchase\model\Order();
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $data['order_sn']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id',
-            ],
-        ];
-        $orderInfo = $modelOrder->getInfo($config);
-        $userId = $orderInfo['user_id'];
-        if ($orderInfo['logistics_status'] > 1) {
-            return successMsg('已回调过，订单已处理');
-        }
-        if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
-            //返回状态给微信服务器
-            return errorMsg('回调的金额和订单的金额不符，终止购买');
-        }
         $modelOrder->startTrans();
         //更新订单状态
         $data2 = [];
@@ -215,11 +252,12 @@ class CallBack extends \common\controller\Base{
         $data2['pay_sn'] = $data['pay_sn'];
         $data2['payment_time'] = $data['payment_time'];
         $condition = [
-            ['user_id','=',$userId],
+            ['user_id','=',$orderInfo['user_id']],
             ['sn','=',$data['order_sn']],
         ];
-
+        file_put_contents('a.txt',$data2);
         $returnData = $modelOrder->edit($data2,$condition);
+        file_put_contents('a.txt',$modelOrder->getLastSql());
         if (!$returnData['status']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
@@ -284,34 +322,6 @@ class CallBack extends \common\controller\Base{
         return $result;
     }
 
-    /**
-     * 页面跳转响应操作给支付接口方调用
-     */
-    function respond2()
-    {
-        //计算得出通知验证结果
-        $alipayNotify = new AlipayNotify($this->alipay_config);
-        $verify_result = $alipayNotify->verifyReturn();
-
-        if($verify_result) //验证成功
-        {
-            $order_sn = $out_trade_no = $_GET['out_trade_no']; //商户订单号
-            $trade_no = $_GET['trade_no']; //支付宝交易号
-            $trade_status = $_GET['trade_status']; //交易状态
-
-            if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS')
-            {
-                return  array('status'=>1,'order_sn'=>$order_sn);//跳转至成功页面
-            }
-            else {
-                return  array('status'=>0,'order_sn'=>$order_sn); //跳转至失败页面
-            }
-        }
-        else
-        {
-            return  array('status'=>0,'order_sn'=>$_GET['out_trade_no']);//跳转至失败页面
-        }
-    }
 
 
     
