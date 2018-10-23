@@ -54,7 +54,6 @@ class unionpay
          */
 
         $params = array(
-
             //以下信息非特殊情况不需要改动
             'version' => SDKConfig::getSDKConfig()->version,                 //版本号
             'encoding' => 'utf-8',				  //编码方式
