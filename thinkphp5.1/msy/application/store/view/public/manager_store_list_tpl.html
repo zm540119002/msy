@@ -30,17 +30,10 @@
 <script type="text/javascript">
     $(function(){
         //如果没有默认店铺，则设置默认店铺
-        var store='{:json_encode($store)}';
-        console.log(store);
+        var defaultDialog='{:json_encode($defaultDialog)}';
         var managerFactoryList='{:json_encode($managerFactoryList)}';
-        console.log(managerFactoryList);
-        if(store === 'null' && managerFactoryList === 'null'){
-            //未授权
-        }else if(store !== 'null' && managerFactoryList === 'null'){
-            //只授权一家
-        }else if(store === 'null' && managerFactoryList !== 'null'){
-            //授权多家
-            console.log(123);
+        //授权多家，选择管理店铺
+        if(managerFactoryList !== 'null' && defaultDialog !== 'null'){
             switchManagerStore();
         }
         //切换店铺
@@ -69,12 +62,13 @@
             },
             btn:['确定','取消'],
             yes:function(index){
-                var postData = {};
-                postData.storeShopId = $('.storeShopListLayer li.current').data('id');
-                if(!postData.storeShopId){
+                var storeId = $('.storeShopListLayer li.current').data('id');
+                if(!storeId){
                     dialog.error('请选择店家店铺');
                     return false;
                 }
+                var url = controller + 'manage/storeId/' +storeId;
+                location.href = url;
             }
         });
     }
