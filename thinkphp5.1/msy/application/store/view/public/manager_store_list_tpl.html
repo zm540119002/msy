@@ -30,6 +30,8 @@
 <script type="text/javascript">
     $(function(){
         //如果没有默认店铺，则设置默认店铺
+        var store='{:json_encode($store)}';
+        console.log(store);
         var managerFactoryList='{:json_encode($managerFactoryList)}';
         console.log(managerFactoryList);
         if(managerFactoryList === 'null'){
@@ -67,14 +69,6 @@
                     dialog.error('请选择店家店铺');
                     return false;
                 }
-                $.post(url,postData,function(data){
-                    if(data.status==0){
-                        dialog.error(data.info);
-                    }else if(data.status==1){
-                        layer.close(index);
-                        location.reload();
-                    }
-                });
             }
         });
     }
