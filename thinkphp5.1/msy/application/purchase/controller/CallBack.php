@@ -60,6 +60,9 @@ class CallBack extends \common\controller\Base{
     //微信支付回调处理
     private function weixinBack($order_type){
         $xml = file_get_contents('php://input');
+        file_put_contents("weixinpay3.txt",$xml);
+        exit;
+        $xml = file_get_contents('php://input');
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
         //sign不参与签名算法
@@ -72,10 +75,10 @@ class CallBack extends \common\controller\Base{
         $data['payment_time'] = $data['time_end'];//支付时间
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
-            $xml = file_get_contents('php://input');
-            file_put_contents("pay2.txt",$xml);
-            exit;
             if ($order_type == 'order') {
+                $xml = file_get_contents('php://input');
+                file_put_contents("pay2.txt",$xml);
+                exit;
                 $res = $this->orderHandle($data);
                 if($res['status']){
                     $this->successReturn();
@@ -109,6 +112,9 @@ class CallBack extends \common\controller\Base{
     //银联支付回调处理
     private function unionBack($order_type){
         $data = $_POST;
+//        $xml = file_get_contents('php://input');
+        file_put_contents("unionpay3.txt",$data);
+        exit;
         //计算得出通知验证结果
         $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($data);
@@ -147,6 +153,10 @@ class CallBack extends \common\controller\Base{
 
     //支付宝支付回调处理
     private function aliBack($order_type){
+        $data = $_POST;
+//        $xml = file_get_contents('php://input');
+        file_put_contents("alipay3.txt",$data);
+        exit;
         $data = $_POST;
         $data['payment_code'] = 2; //支付类型
         $data['order_sn'] = $data['out_trade_no'];//系统的订单号
