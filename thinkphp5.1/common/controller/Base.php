@@ -12,6 +12,7 @@ class Base extends \think\Controller{
                 && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
         $this->host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
+        print_r($this->host);exit;
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
