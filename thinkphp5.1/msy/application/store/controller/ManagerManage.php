@@ -38,7 +38,7 @@ class ManagerManage extends \common\controller\UserBase{
                     }
                 }
             }
-//            $this->assign('managerFactoryList', $this->_managerFactoryList);
+            $this->assign('managerFactoryList', $this->_managerFactoryList);
         }
     }
 

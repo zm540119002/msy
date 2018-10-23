@@ -4,21 +4,21 @@
         {volist name="managerFactoryList" id="factory"}
         <div><span>{$factory.name}</span></div>
         <ul data-id="{$factory.factory_id}">
-            {volist name="factory.store_list" id="store"}
-            <li data-id="{$store.id}">
-                {notempty name="store.logo_img"}
-                <img  class="store_logo left" src="public_uploads/{$store.logo_img|default=''}" />
+            {volist name="factory.store_list" id="storeInfo"}
+            <li data-id="{$storeInfo.id}">
+                {notempty name="storeInfo.logo_img"}
+                <img  class="store_logo left" src="public_uploads/{$storeInfo.logo_img|default=''}" />
                 {else /}
                 <img  class="store_logo left" src="public_img/default/no_pic_40.jpg" />
                 {/notempty}
                 <div>
                     <p>
-                        <span>{$store.store_name}</span>{$store.store_type|getStoreType}
+                        <span>{$storeInfo.store_name}</span>{$storeInfo.store_type|getStoreType}
                     </p>
                     <p>
-                        <span>{$store.run_type|getRunType}</span>
+                        <span>{$storeInfo.run_type|getRunType}</span>
                         <span>.</span>
-                        {$store.operational_model|getOperationalModel}
+                        {$storeInfo.operational_model|getOperationalModel}
                     </p>
                 </div>
             </li>
