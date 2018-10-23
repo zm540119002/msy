@@ -34,6 +34,7 @@ class Payment extends \common\controller\UserBase{
             //支付宝支付
             if($payCode == 2){
                 $payInfo['notify_url'] = $payInfo['notify_url'].'/ali.order';
+                print_r($payInfo);exit;
                 $model = new \common\component\payment\alipay\alipay;
                 $model->aliPay($payInfo);
             }
