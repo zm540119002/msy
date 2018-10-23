@@ -7,9 +7,6 @@ use common\component\payment\weixin\Jssdk;
 class CallBack extends \common\controller\Base{
     //支付回调
     public function notifyUrl(){
-        $xml = file_get_contents('php://input');
-        file_put_contents("pay.txt",$xml);
-        exit;
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.order') == true) {
             $this->callBack('weixin', 'order');
         }
@@ -50,6 +47,9 @@ class CallBack extends \common\controller\Base{
     //支付完成，调用不同的支付的回调处理
     private function callBack($payment_type, $order_type){
         if ($payment_type == 'weixin') {
+            $xml = file_get_contents('php://input');
+            file_put_contents("pay1.txt",$xml);
+            exit;
             $this->weixinBack($order_type);
         }
         if ($payment_type == 'ali') {
