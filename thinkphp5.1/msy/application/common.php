@@ -34,15 +34,15 @@ function multi_array_key_exists( $needle, $haystack ) {
 }
 //获取店铺类型
 function getStoreType($num){
-    return $num?config('custom.store_type')[$num]:'保留';
+    return $num?config('custom.store_type')[$num]:'';
 }
 //获取店铺经营类型
 function getRunType($num){
-    return $num?config('custom.run_type')[$num]:'保留';
+    return $num?config('custom.run_type')[$num]:'';
 }
 //获取店铺合作类型
 function getOperationalModel($num){
-    return $num?config('custom.operational_model')[$num]:'保留';
+    return $num?config('custom.operational_model')[$num]:'';
 }
 /*开启底部购物车配置项
  */

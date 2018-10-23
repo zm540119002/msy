@@ -42,7 +42,7 @@ class alipay
             $payRequestBuilder->setTotalAmount($payInfo['actually_amount']);//订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
             $payRequestBuilder->setTimeExpress($timeout_express);//
             $payResponse = new \AlipayTradeService($this->alipay_config);
-            $result=$payResponse->wapPay($payRequestBuilder,$this->alipay_config['return_url'],$this->alipay_config['notify_url']);
+            $result=$payResponse->wapPay($payRequestBuilder,$payInfo['return_url'],$payInfo['notify_url']);
             return ;
         }
 
