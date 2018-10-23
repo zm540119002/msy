@@ -60,9 +60,6 @@ class CallBack extends \common\controller\Base{
     //微信支付回调处理
     private function weixinBack($order_type){
         $xml = file_get_contents('php://input');
-        file_put_contents("weixinpay3.txt",$xml);
-        exit;
-        $xml = file_get_contents('php://input');
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
         //sign不参与签名算法
@@ -77,7 +74,7 @@ class CallBack extends \common\controller\Base{
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             if ($order_type == 'order') {
                 $xml = file_get_contents('php://input');
-                file_put_contents("pay2.txt",$xml);
+                file_put_contents("pay3.txt",$xml);
                 exit;
                 $res = $this->orderHandle($data);
                 if($res['status']){
