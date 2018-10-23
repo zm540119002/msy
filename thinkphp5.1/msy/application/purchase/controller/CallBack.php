@@ -7,9 +7,7 @@ use common\component\payment\weixin\Jssdk;
 class CallBack extends \common\controller\Base{
     //支付回调
     public function notifyUrl(){
-        $data = $_POST;
-//        $xml = file_get_contents('php://input');
-        file_put_contents("alipay.txt",$_SERVER['QUERY_STRING']);
+        file_put_contents("union.txt",$_SERVER['QUERY_STRING']);
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.order') == true) {
             $this->callBack('weixin', 'order');
         }
@@ -21,9 +19,6 @@ class CallBack extends \common\controller\Base{
         }
         //支付宝回调
         if (strpos($_SERVER['QUERY_STRING'], 'ali.order') == true) {
-            $data = $_POST;
-//        $xml = file_get_contents('php://input');
-            file_put_contents("alipay2.txt",$data);
             $this->callBack('ali', 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'ali.recharge') == true) {
@@ -79,9 +74,6 @@ class CallBack extends \common\controller\Base{
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             if ($order_type == 'order') {
-                $xml = file_get_contents('php://input');
-                file_put_contents("pay3.txt",$xml);
-                exit;
                 $res = $this->orderHandle($data);
                 if($res['status']){
                     $this->successReturn();
@@ -115,9 +107,6 @@ class CallBack extends \common\controller\Base{
     //银联支付回调处理
     private function unionBack($order_type){
         $data = $_POST;
-//        $xml = file_get_contents('php://input');
-        file_put_contents("unionpay3.txt",$data);
-        exit;
         //计算得出通知验证结果
         $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($data);
@@ -156,10 +145,6 @@ class CallBack extends \common\controller\Base{
 
     //支付宝支付回调处理
     private function aliBack($order_type){
-        $data = $_POST;
-//        $xml = file_get_contents('php://input');
-        file_put_contents("alipay3.txt",$data);
-        exit;
         $data = $_POST;
         $data['payment_code'] = 2; //支付类型
         $data['order_sn'] = $data['out_trade_no'];//系统的订单号
