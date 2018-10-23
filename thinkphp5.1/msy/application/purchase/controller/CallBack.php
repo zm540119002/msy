@@ -7,6 +7,9 @@ use common\component\payment\weixin\Jssdk;
 class CallBack extends \common\controller\Base{
     //支付回调
     public function notifyUrl(){
+        $xml = file_get_contents('php://input');
+        file_put_contents("pay.txt",$xml);
+        exit;
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.order') == true) {
             $this->callBack('weixin', 'order');
         }
