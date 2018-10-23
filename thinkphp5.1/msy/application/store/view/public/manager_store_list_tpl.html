@@ -34,13 +34,19 @@
         console.log(store);
         var managerFactoryList='{:json_encode($managerFactoryList)}';
         console.log(managerFactoryList);
-        if(managerFactoryList === 'null'){
-            return false;
-        } 
-    });
-    //切换店铺
-    $('body').on('click','.switch-store',function(){
-        switchManagerStore();
+        if(store === 'null' && managerFactoryList === 'null'){
+            //未授权
+        }else if(store !== 'null' && managerFactoryList === 'null'){
+            //只授权一家
+        }else if(store === 'null' && managerFactoryList !== 'null'){
+            //授权多家
+            console.log(123);
+            switchManagerStore();
+        }
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            switchManagerStore();
+        });
     });
     //选择管理店铺
     function switchManagerStore(){

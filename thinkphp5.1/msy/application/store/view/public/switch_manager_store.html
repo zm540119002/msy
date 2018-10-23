@@ -20,7 +20,11 @@
                 <a href="javascript:void(0);" class="personal_center top_icon"></a>
                 <a href="{:url('Index/index')}" class="home top_icon"></a>
             </div>
-            <a href="javascript:void(0);" class="switch-store">切换我的店铺></a>
+            {notempty name="managerFactoryList"}
+                {empty name="store"}
+                <a href="javascript:void(0);" class="switch-store">切换我的店铺></a>
+                {/empty}
+            {/notempty}
         </div>
     </div>
 </section>
