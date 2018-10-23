@@ -15,7 +15,7 @@
 namespace  common\component\payment\alipayMobile\lib;
 require_once("alipay_core.function.php");
 require_once("alipay_md5.function.php");
-require_once("../alipay.config.php");
+require_once(dirname(__DIR__)."../alipay.config.php");
 
 
 class AlipayNotify {
@@ -85,7 +85,9 @@ class AlipayNotify {
 			$isSign = $this->getSignVeryfy($_GET, $_GET["sign"]);
 			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
 			$responseTxt = 'false';
-			if (! empty($_GET["notify_id"])) {$responseTxt = $this->getResponse($_GET["notify_id"]);}
+			if (! empty($_GET["notify_id"])) {
+				$responseTxt = $this->getResponse($_GET["notify_id"]);
+			}
 			
 			//写日志记录
 			//if ($isSign) {
@@ -118,7 +120,6 @@ class AlipayNotify {
 	function getSignVeryfy($para_temp, $sign) {
 		//除去待签名参数数组中的空值和签名参数
 		$para_filter = paraFilter($para_temp);
-		
 		//对待签名参数数组排序
 		$para_sort = argSort($para_filter);
 		
@@ -133,7 +134,6 @@ class AlipayNotify {
 			default :
 				$isSgin = false;
 		}
-		
 		return $isSgin;
 	}
 
@@ -158,7 +158,6 @@ class AlipayNotify {
 		}
 		$veryfy_url = $veryfy_url."partner=" . $partner . "&notify_id=" . $notify_id;
 		$responseTxt = getHttpResponseGET($veryfy_url, $this->alipay_config['cacert']);
-		
 		return $responseTxt;
 	}
 }
