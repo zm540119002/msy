@@ -9,7 +9,7 @@ class CallBack extends \common\controller\Base{
     public function notifyUrl(){
         $data = $_POST;
 //        $xml = file_get_contents('php://input');
-        file_put_contents("alipay1.txt",$data);
+        file_put_contents("alipay.txt",$_SERVER['QUERY_STRING']);
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.order') == true) {
             $this->callBack('weixin', 'order');
         }
