@@ -47,9 +47,6 @@ class CallBack extends \common\controller\Base{
     //支付完成，调用不同的支付的回调处理
     private function callBack($payment_type, $order_type){
         if ($payment_type == 'weixin') {
-            $xml = file_get_contents('php://input');
-            file_put_contents("pay1.txt",$xml);
-            exit;
             $this->weixinBack($order_type);
         }
         if ($payment_type == 'ali') {
@@ -75,6 +72,9 @@ class CallBack extends \common\controller\Base{
         $data['payment_time'] = $data['time_end'];//支付时间
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+            $xml = file_get_contents('php://input');
+            file_put_contents("pay2.txt",$xml);
+            exit;
             if ($order_type == 'order') {
                 $res = $this->orderHandle($data);
                 if($res['status']){
