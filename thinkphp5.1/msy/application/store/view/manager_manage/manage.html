@@ -49,7 +49,7 @@
         {include file='public/permission_tpl' /}
     </form>
 </section>
-<!--员工账号列表模板-->
+<!--店铺员工账号列表模板-->
 <section style="display: none;" id="employeeAccountList">
 	<li class="columns_flex l-r-sides">
 		<div>
@@ -62,7 +62,7 @@
 				<input type="tel" value="" name="mobile_phone" readonly="readonly"/>
 			</div>
 			<div>
-				<span>授权职务:</span>
+				<span>岗位职务:</span>
 				<input type="text" value="" name="position" readonly="readonly"/>
 			</div>
 		</div>
@@ -72,6 +72,35 @@
 				修改
 			</a>
 			<a href="javascript:void(0);" class="delete-account">
+				<span></span>
+				删除
+			</a>
+		</div>
+	</li>
+</section>
+<!--门店员工账号列表模板-->
+<section style="display: none;" id="shopEmployeeAccountList">
+	<li class="columns_flex l-r-sides">
+		<div>
+			<p>
+				<span>姓名</span>
+				<input class="input_size" type="text" value="" name="name" readonly="readonly">
+			</p>
+			<div>
+				<span>手机号码:</span>
+				<input type="tel" value="" name="mobile_phone" readonly="readonly"/>
+			</div>
+			<div>
+				<span>岗位职务:</span>
+				<input type="text" value="" name="position" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="operate-btn">
+			<a href="javascript:void(0);" class="modify-shop-account">
+				<span></span>
+				修改
+			</a>
+			<a href="javascript:void(0);" class="modify-shop-account">
 				<span></span>
 				删除
 			</a>
@@ -207,7 +236,7 @@
 		var storeOperator=$('#storeOperator').html();
 		$('.content_main').empty().append(storeOperator);
 		$('.add_store_account').hide();
-		//新增线上员工账号
+		//新增线上店铺员工账号
 		var employeeAccountInfo=$('#employeeAccountInfo').html();
 		$('body').on('click','.add_online_account',function(){
 			var _this=$(this).parents('.list li');
@@ -262,7 +291,7 @@
 				}
 			});
 		});
-		//修改线上员工账号
+		//修改线上店铺员工账号
 		$('body').on('click','.modify-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
@@ -304,7 +333,7 @@
 				}
 			});
 		});
-		//删除线上员工账号
+		//删除线上店铺员工账号
 		$('body').on('click','.delete-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
@@ -355,7 +384,7 @@
 					var postData={};
 					postData = $('.storeEmployeeForm').serializeObject();
 					postData.nodeIds=[];
-					var html=$('#employeeAccountList').html();
+					var html=$('#shopEmployeeAccountList').html();
 					var listLength=$('.list li').length;
 					var content='';
 					if(!postData.name){
@@ -390,14 +419,14 @@
 			});
 		});
 		//修改门店员工账号
-		$('body').on('click','.modify-account',function(){
+		$('body').on('click','.modify-shop-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['修改门店员工账号','border-bottom:1px solid #d9d9d9;'],
 				className:'employeeAccountLayer',
 				type:1,
 				anim:'up',
-				content:employeeAccountInfo,
+				content:storeEmployeeAccount,
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
@@ -432,14 +461,14 @@
 			});
 		});
 		//删除门店员工账号
-		$('body').on('click','.delete-account',function(){
+		$('body').on('click','.delete-shop-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['删除门店员工账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
 				className:'employeeAccountLayer',
 				type:1,
 				anim:'up',
-				content:employeeAccountInfo,
+				content:storeEmployeeAccount,
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
