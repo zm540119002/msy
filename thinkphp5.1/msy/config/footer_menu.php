@@ -23,6 +23,7 @@ return [
         ['name'   => '支付','class'=>'pay'],//4
         ['name'   => '增加地址','class'=>'address_save'],//5
         ['name'   => '修改地址','class'=>'address_save'],//6
+        ['name'   => '新建地址','class'=>'address_create'],//7
     ],
 
 ];
