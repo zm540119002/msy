@@ -341,13 +341,12 @@
 			$(this).parents('.store_list').find('li').removeClass('current');
 			$(this).addClass('current').siblings().removeClass('current');
 		});
-		//
+		//门店店长管理和店铺店长管理切换
 		$('body').on('click','.store_deploy_bar a',function(){
 			var typeId=$(this).data('type');
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
 			$('.top_empy_nav a').eq(0).addClass('current').siblings().removeClass('current');
-			// $('.content_main').eq(0).show().siblings().hide();
 			if(typeId=='online'){
 				var storeOperator=$('#storeOperator').html();
 				$('.content_main').empty().append(storeOperator);
@@ -356,31 +355,29 @@
 				$('.content_main').empty().append(storeStaff);
 			}	
 		});
-		//
 		$('body').on('click','.top_empy_nav a',function(){
 			var typeId=$(this).data('type');
 			$(this).addClass('current').siblings().removeClass('current');
 			switch(typeId){
 				case 0:
-				var storeOperator=$('#storeOperator').html();
-				$('.content_main').empty().append(storeOperator);
-				break;
+					var storeOperator=$('#storeOperator').html();
+					$('.content_main').empty().append(storeOperator);
+					break;
 				case 1:
-				var consigneeInfo=$('#consigneeInfo').html();
-				$('.content_main').empty().append(consigneeInfo);
-				break;
+					var consigneeInfo=$('#consigneeInfo').html();
+					$('.content_main').empty().append(consigneeInfo);
+					break;
 				case 2:
-				var storeStaff=$('#storeStaff').html();
-				$('.content_main').empty().append(storeStaff);
-				break;
+					var storeStaff=$('#storeStaff').html();
+					$('.content_main').empty().append(storeStaff);
+					break;
 				case 3:
-				var storeAddressList=$('#storeAddressList').html();
-				$('.content_main').empty().append(storeAddressList);
-				break;
+					var storeAddressList=$('#storeAddressList').html();
+					$('.content_main').empty().append(storeAddressList);
+					break;
 				case 4:
-				var storeConsigneeList=$('#storeConsigneeList').html();
-				$('.content_main').empty().append(storeConsigneeList);
-				
+					var storeConsigneeList=$('#storeConsigneeList').html();
+					$('.content_main').empty().append(storeConsigneeList);
 			}
 		})
 	});
