@@ -12,8 +12,8 @@
 	</section>
 	<section class="section-address bg-eae pt-5">
 		<form action='#' method="post" class="bg-fff form">
-			<input type="hidden" name="addressId" value="{$address.id}">
-			<input type="hidden" name="orderId" value="{$orderId}">
+			<input type="hidden" name="address_id" value="{$address.id}">
+			<input type="hidden" name="order_id" value="{$orderId}">
 			<div class="form-group box-flex clearfixed">
 				<label class="form-label">收件人：</label>
 				<input type="text" name="consignee" class="input-flex recipient_name" placeholder="请输入姓名" value="{$address.consignee}">
@@ -28,9 +28,9 @@
 					{empty name="address"}
 						<div class="area_address">省 &gt; 市 &gt; 区/县</div>
 						{else /}
-						<div class="area_address">{$address.district}</div>
+						<div class="area_address">{$address.district_address}</div>
 					{/empty}
-					<input type="hidden" value="{$address.district}" class="district_address" name="district">
+					<input type="hidden" name="district_address" data-key="{$address.district_address}" value="{$address.district_address}" class="area-address-name" >
 				</a>
 			</div>
 			<div class="form-group box-flex">
@@ -89,6 +89,8 @@
 			});
 
 			$('body').on('click','.address_save',function () {
+				var postData  = $(".form").serializeObject();
+				console.log(postData.district_address);return false;
 				var content='';
 				var recipientName=$('.recipient_name').val();
 				var recipientMobile=$('.recipient_mobile').val();
@@ -109,7 +111,7 @@
 				}
 				//添加或修改地址
 				var is_default      = $('.myswitch').attr('data-off');
-				var postData        = $(".form").serializeObject();
+//				var postData        = $(".form").serializeObject();
 				postData.district   = areaAddress;
 				postData.is_default = is_default;
 
