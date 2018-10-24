@@ -20,7 +20,9 @@ return [
         ['name'   => '加入购物车','class'=>'add_cart'],//1
         ['name'   => '立即购买','class'=>'buy_now'],//2
         ['name'   => '提交订单','class'=>'confirm_order'],//3
-        ['name'   => '支付','class'=>'pay'],//3
+        ['name'   => '支付','class'=>'pay'],//4
+        ['name'   => '增加地址','class'=>'address_save'],//5
+        ['name'   => '修改地址','class'=>'address_save'],//6
     ],
 
 ];
