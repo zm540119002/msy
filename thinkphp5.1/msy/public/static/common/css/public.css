@@ -1403,7 +1403,8 @@ background-position: 0 -27px;
 .rolePowerLayer .layui-m-layerbtn span[yes],
 .vendorInfoLayer .layui-m-layerbtn span[no],
 .vendorInfoLayer .layui-m-layerbtn span[yes],
-.storeShopListLayer .layui-m-layerbtn span[no]{
+.storeShopListLayer .layui-m-layerbtn span[no],
+.employeeAccountLayer .layui-m-layerbtn span[no] {
     width:50px;
     border:none;
 }
@@ -3224,7 +3225,7 @@ input[type=text]::-webkit-focus-inner {
     border: none;
 }
 .employeeAccountLayer .layui-m-layerbtn span[no] {
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 .employeeAccountLayer .layui-m-layerbtn span[yes] {
     width: 50px;
