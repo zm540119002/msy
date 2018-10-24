@@ -3232,12 +3232,15 @@ input[type=text]::-webkit-focus-inner {
     background: none;
     color: #40AFFE;
 }
-.employeeAccountForm{
+.employeeAccountForm,
+.storeEmployeeForm{
     margin:0.20rem .15rem 0;
     padding:0.15rem;
     border:1px solid #d9d9d9;
     background:#efefef;
     border-radius:5px;
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 .account_position li.col{
     display:inline-block;
