@@ -74,6 +74,13 @@
 <script type="text/javascript">
 	$(function(){
 		$(function () {
+			//初始化地址
+			var addressIndex=$('.area-address-name').data('key');
+			if(addressIndex){
+				var areaAddressArr=addressIndex.split(',');
+				$('.area_address').setArea(areaAddressArr);
+			}
+
 			//设定默认地址
 			$('.myswitch').on('click',function(){
 				if($(this).hasClass('myswitched')){
@@ -86,17 +93,18 @@
 			});
 
 			$('body').on('click','.address_save',function () {
+				_this = $(this);
 				var postData  = $(".form").serializeObject();
 				postData.district_address=$('.area-address-name').data('key');
-				console.log(postData);return false;
+				postData.is_default = $('.myswitch').attr('data-off');
 				var content='';
-				if(!recipientName){
+				if(!postData.consignee){
 					content='请填写收货人姓名';
-				}else if(!register.phoneCheck(recipientMobile)){
+				}else if(!register.phoneCheck(postData.mobile)){
 					content='请填写正确的手机号码';
-				}else if(!areaAddress){
+				}else if(!postData.district_address){
 					content='请选择地区';
-				}else if(!detailAddress){
+				}else if(!postData.detail_address){
 					content='请填写详细地址';
 				}
 				if(content){
@@ -104,8 +112,29 @@
 					return false;
 				}
 				//添加或修改地址
-				var is_default      = $('.myswitch').attr('data-off');
-				postData.is_default = is_default;
+				_this.addClass("nodisabled");//防止重复提交
+				var url = module + '/Address/edit';
+				$.ajax({
+					url: url,
+					data: postData,
+					type: 'post',
+					beforeSend: function(){
+						$('.loading').show();
+					},
+					error:function(){
+						$('.loading').hide();
+						dialog.error('AJAX错误');
+					},
+					success: function(data){
+						_this.removeClass("nodisabled");//删除防止重复提交
+						$('.loading').hide();
+						if(data.status == 0){
+
+						}else if(data.status == 1){
+							location.href = module + 'Address/getList/';
+						}
+					}
+				});
 
 			})
 		})
