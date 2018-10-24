@@ -11,9 +11,14 @@
         <li data-paycode="3">银联支付</li>
     </ul>
 </div>
+<form action="{:url('Payment/orderPayment')}" method="post">
+    <input type="hidden" name="sn" value="{$orderInfo.sn}"/>
+    <input type="hidden" name="pay_code" value="" class="pay_code"/>
+    <input type="submit" value="支付" />
+</form>
 {/block}
 {block name="common"}
-{include file="public/footer_menu" /} 
+<!--{include file="public/footer_menu" /}-->
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -21,10 +26,8 @@
     $(function(){
         $('.pay_nav li').on('click',function(){
             $(this).addClass('current').siblings().removeClass('current');
-        })
-        $('body').on('click','.pay',function () {
-            var pay_code=$('.pay_nav li.current').data('paycode');
-            location.href =  module + 'Payment/orderPayment/sn/' + "{$orderInfo.sn}" + '/pay_code/'+ pay_code;
+            var pay_code = $(this).data('paycode');
+            $('.pay_code').val(pay_code);
         })
     });
 </script>

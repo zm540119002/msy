@@ -1,10 +1,9 @@
 <?php
 namespace app\purchase\controller;
-
+//require_once dirname(__DIR__).'./../../../common/component/payment/alipay/lib/alipay_notify.class.php';
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
-
         if( !empty(input('sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\purchase\model\Order();
             $orderSn = input('sn','','string');
@@ -22,8 +21,8 @@ class Payment extends \common\controller\UserBase{
             $payInfo = [
                 'sn'=>$orderInfo['sn'],
                 'actually_amount'=>$orderInfo['actually_amount'],
-                'return_url' => "http://".$_SERVER['HTTP_HOST'].url('payComplete'),
-                'notify_url'=>"http://".$_SERVER['HTTP_HOST']."/purchase/".config('wx_config.call_back_url')
+                'return_url' => $this->host.url('payComplete'),
+                'notify_url'=>$this->host."/purchase/".config('wx_config.call_back_url')
 
             ];
             $payCode = input('pay_code','0','int');
@@ -47,8 +46,16 @@ class Payment extends \common\controller\UserBase{
         }
     }
 
-
+   //支付完跳转的页面
     public function payComplete(){
+        require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
+        require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
+        $arr = $_GET;
+        print_r($arr);exit;
+        $alipaySevice = new \AlipayTradeService($config);
+        $result = $alipaySevice->check($arr);
+        print_r($result);exit;
+
         return $this->fetch();
     }
 

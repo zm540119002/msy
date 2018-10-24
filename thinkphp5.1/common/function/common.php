@@ -621,7 +621,7 @@ function createQRcode($url){
  * @param int $pixelPerPoint
  * @return array|string 返回二维码相对路径
  */
-function createLogoQRcode($url,$newRelativePath,$logo){
+function createLogoQRcode($url,$newRelativePath,$logo=''){
     $QRcode =  new \common\component\code\Qrcode();;
     $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
@@ -636,12 +636,12 @@ function createLogoQRcode($url,$newRelativePath,$logo){
         return errorMsg('创建新目录失败');
     }
     //生产没有logo二维码图片
-    $filename = time().'nologo.png';
+    $filename = generateSN().'nologo.png';
     $noLogoFile = $newPath.$filename;
     $QRcode->png($url, $noLogoFile);
-    if($logo !== FALSE)
+    if(!empty($logo))
     {
-        $filename = time().'withlogo.png';
+        $filename = generateSN().'withlogo.png';
         $logoFile = $newPath.$filename;
         $QR = imagecreatefromstring(file_get_contents($noLogoFile));
         $logo = imagecreatefromstring(file_get_contents($logo));
