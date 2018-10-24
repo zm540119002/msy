@@ -30,12 +30,12 @@
 						{else /}
 						<div class="area_address">{$address.district}</div>
 					{/empty}
-					<input type="hidden" value="{$address.district}" class="district_address">
+					<input type="hidden" value="{$address.district}" class="district_address" name="district">
 				</a>
 			</div>
 			<div class="form-group box-flex">
 				<label class="form-label">详细地址：</label>
-				<input type="text" name="address" class="input-flex recipient_detail_address" placeholder="请填写详细地址" value="{$address.address}">
+				<input type="text" name="detail_address" class="input-flex recipient_detail_address" placeholder="请填写详细地址" value="{$address.detail_address}">
 			</div>
 			{if condition="$address.is_default eq 1 "}
 				{else /}
