@@ -3457,7 +3457,7 @@ input[type=text]::-webkit-focus-inner {
     /*margin-top: -16px;*/
     width: 60px;
     height: 40px;
-    background: url(../../img/home/check-sprites-5.png) no-repeat;
+    background: url(../../common/img/icons/check-sprites-5.png) no-repeat;
     background-size: 100px 100px;
     background-position: 2px -54px;
 }

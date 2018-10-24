@@ -30,23 +30,20 @@
 						{else /}
 						<div class="area_address">{$address.district_address}</div>
 					{/empty}
-					<input type="hidden" name="district_address" data-key="{$address.district_address}" value="{$address.district_address}" class="area-address-name" >
+					<input type="hidden" name="district_address" data-key="{$address.district_address}" value="" class="area-address-name" >
 				</a>
 			</div>
 			<div class="form-group box-flex">
 				<label class="form-label">详细地址：</label>
 				<input type="text" name="detail_address" class="input-flex recipient_detail_address" placeholder="请填写详细地址" value="{$address.detail_address}">
 			</div>
-			{if condition="$address.is_default eq 1 "}
-				{else /}
-				<div class="set_default_item f24">
-					<div>
-						<span>设为默认地址</span>
-						<p>注：每次下单时会使用该地址</p>
-					</div>
-					<div class="myswitch"  data-off="{$address.is_default}"></div>
+			<div class="set_default_item f24">
+				<div>
+					<span>设为默认地址</span>
+					<p>注：每次下单时会使用该地址</p>
 				</div>
-			{/if}
+				<div class="myswitch"  data-off="{$address.is_default}"></div>
+			</div>
 		</form>
 	</section>
 	<!--选择地区弹层-->
@@ -90,12 +87,9 @@
 
 			$('body').on('click','.address_save',function () {
 				var postData  = $(".form").serializeObject();
-				console.log(postData.district_address);return false;
+				postData.district_address=$('.area-address-name').data('key');
+				console.log(postData);return false;
 				var content='';
-				var recipientName=$('.recipient_name').val();
-				var recipientMobile=$('.recipient_mobile').val();
-				var areaAddress=$('.district_address').val();
-				var detailAddress=$('.recipient_detail_address').val();
 				if(!recipientName){
 					content='请填写收货人姓名';
 				}else if(!register.phoneCheck(recipientMobile)){
@@ -111,8 +105,6 @@
 				}
 				//添加或修改地址
 				var is_default      = $('.myswitch').attr('data-off');
-//				var postData        = $(".form").serializeObject();
-				postData.district   = areaAddress;
 				postData.is_default = is_default;
 
 			})
