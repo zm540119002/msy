@@ -66,40 +66,6 @@ class ManagerManage extends \common\controller\UserBase{
         }
     }
 
-    /**获取店家店铺列表
-     */
-    private function _getManagerFactoryList(){
-        $storeListCount = count($this->_storeList);
-        if($storeListCount>1){
-            foreach ($this->_storeList as $item) {
-                $storeInfoArr = [
-                    'id' => $item['id'],
-                    'store_name' => $item['store_name'],
-                    'logo_img' => $item['logo_img'],
-                    'store_type' => $item['store_type'],
-                    'run_type' => $item['run_type'],
-                    'operational_model' => $item['operational_model'],
-                    'is_default' => $item['is_default'],
-                ];
-                $factory_id_arr = array_column($this->_managerFactoryList,'factory_id');
-                if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
-                    $this->_managerFactoryList[] = [
-                        'factory_id' => $item['factory_id'],
-                        'name' => $item['name'],
-                        'type' => $item['type'],
-                        'store_list' => [$storeInfoArr],
-                    ];
-                }else{//factory存在
-                    foreach ($this->_managerFactoryList as &$key){
-                        if($key['factory_id'] == $item['factory_id']){
-                            $key['store_list'][] = $storeInfoArr;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     /**获取店铺列表
      */
     private function _getStoreList(){
@@ -151,6 +117,40 @@ class ManagerManage extends \common\controller\UserBase{
             $this->_store = $this->_storeList[0];
         }elseif(count($this->_storeList)>1){
             $this->_defaultDialog = true;
+        }
+    }
+
+    /**获取店家店铺列表
+     */
+    private function _getManagerFactoryList(){
+        $storeListCount = count($this->_storeList);
+        if($storeListCount>1){
+            foreach ($this->_storeList as $item) {
+                $storeInfoArr = [
+                    'id' => $item['id'],
+                    'store_name' => $item['store_name'],
+                    'logo_img' => $item['logo_img'],
+                    'store_type' => $item['store_type'],
+                    'run_type' => $item['run_type'],
+                    'operational_model' => $item['operational_model'],
+                    'is_default' => $item['is_default'],
+                ];
+                $factory_id_arr = array_column($this->_managerFactoryList,'factory_id');
+                if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
+                    $this->_managerFactoryList[] = [
+                        'factory_id' => $item['factory_id'],
+                        'name' => $item['name'],
+                        'type' => $item['type'],
+                        'store_list' => [$storeInfoArr],
+                    ];
+                }else{//factory存在
+                    foreach ($this->_managerFactoryList as &$key){
+                        if($key['factory_id'] == $item['factory_id']){
+                            $key['store_list'][] = $storeInfoArr;
+                        }
+                    }
+                }
+            }
         }
     }
 }
