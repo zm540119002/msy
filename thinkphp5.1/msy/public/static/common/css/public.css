@@ -3462,3 +3462,50 @@ input[type=text]::-webkit-focus-inner {
     background-position: 2px -54px;
 }
 .set_default_item .myswitched{background-position: 2px -17px;}
+.delivery_address{padding:0 0 1.5rem;}
+.item_addr{padding:0.20rem 0.15rem;position:relative;overflow: hidden;border-bottom:1px solid #d9d9d9;}
+.item_addr .item_info{float:left;width:70%;}
+.item_addr.active .ia-l{
+    height: .875em;
+    float: left;
+    background: url(../../img/home/Selected.png) no-repeat;
+    background-size: 1.25em;
+    margin: 1.475em 0 0 0;
+    width: 30px;
+}
+.item_addr .ia-r {
+    float: right;
+    border-left: 1px solid #e3e3e3;
+    padding: 0 0 0 5px;
+    display: inline-block;
+    height: 2.125em;
+    margin-top: .725em;
+    width: 10.875%;
+    text-align: center;
+}
+.item_addr .ia-r {
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    margin-top: 0;
+    margin-top: -17px;
+}
+.item_addr .ia-r .iar-icon {
+    display: inline-block;
+    width: 1.1875em;
+    height: 1.1875em;
+    margin-top: .6em;
+    background: url(../../common/img/icons/edit_addr.png) no-repeat;
+    background-size: 1.1875em;
+}
+.pay-btn {
+    height: 50px;
+    line-height: 22px;
+    text-align: center;
+    background: #f0f2f5;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 640px;
+    z-index: 6;
+}

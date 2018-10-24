@@ -6,12 +6,12 @@ class Address extends \common\controller\UserBase {
         $model = new \common\model\Address();
         $userId = $this->user['id'];
         if(request()->isPost()){
-            $data = $_POST;
-            if(isset($_POST['addressId']) && !empty($_POST['addressId']) ){
+            $data = input('post.');
+            if(input('?post.address_id') && !empty(input('post.address_id')) ){
                 //开启事务
                 $model -> startTrans();
                 //修改
-                $addressId = $_POST['addressId'];
+                $addressId = input('post.address_id');
                 $condition = [
                     ['id','=',$addressId],
                     ['user_id','=',$userId],
@@ -21,16 +21,14 @@ class Address extends \common\controller\UserBase {
                     $model ->rollback();
                     return errorMsg('失败');
                 }
+                //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
-                    $data2 = [
-                        'is_default'=>1,
-                    ];
-                    $condition = [
-                        ['id','<>',$addressId],
+                    $where = [
+                        ['id',"<>",$addressId],
                         ['user_id','=',$userId],
                     ];
-                    $result = $model -> edit($data2,$condition);
-                    if(!$result['status']){
+                    $result = $model->where($where)->setField('is_default',0);
+                    if(false === $result){
                         $model ->rollback();
                         return errorMsg('失败');
                     }
@@ -51,24 +49,22 @@ class Address extends \common\controller\UserBase {
                 //开启事务
                 $model -> startTrans();
                 $data['user_id'] = $userId;
-                $addressId = $model->edit($data);
-                if(!$addressId){
+                $result = $model->edit($data);
+                if(!$result['status']){
                     return errorMsg('失败');
                 }
+                $addressId = $result['id'];
+                //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
-                    $data2 = [
-                        'is_default'=>1,
-                    ];
-                    $condition = [
-                        ['id','<>',$addressId],
+                    $where = [
+                        ['id',"<>",$addressId],
                         ['user_id','=',$userId],
                     ];
-                    $result = $model -> edit($data2,$condition);
-                    if(!$result['status']){
+                    $result = $model->where($where)->setField('is_default',0);
+                    if(false === $result){
                         $model ->rollback();
                         return errorMsg('失败');
                     }
-
                 }
                 $model->commit();
                 return successMsg('成功');
@@ -104,7 +100,7 @@ class Address extends \common\controller\UserBase {
         ];
         $addressList = $model -> getList($config);
         $this->assign('addressList',$addressList);
-        $unlockingFooterCart = unlockingFooterCartConfig([0,1,2]);
+        $unlockingFooterCart = unlockingFooterCartConfig([7]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this -> fetch();
     }
