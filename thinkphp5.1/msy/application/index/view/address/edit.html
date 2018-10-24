@@ -42,7 +42,12 @@
 					<span>设为默认地址</span>
 					<p>注：每次下单时会使用该地址</p>
 				</div>
-				<div class="myswitch"  data-off="{$address.is_default}"></div>
+				{if $address.is_default eq 1 }
+				<div class="myswitch myswitched"  data-off="{$address.is_default}"></div>
+				{else /}
+				<div class="myswitch"  data-off="0"></div>
+				{/if}
+
 			</div>
 		</form>
 	</section>

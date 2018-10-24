@@ -21,10 +21,11 @@
 						<i class="default_tipc">默认</i>
 						{/if}
 					</div>
-					<p class="">{$vo.district_address}{$vo.detail_address}</p>
+					<p class=""><span class="area_address"></span>{$vo.detail_address}</p>
+					<input type="hidden" class="area-address-name" value="{$vo.district_address}" data-key="{$vo.district_address}">
 				</div>
 				<a href="javascript:void(0)" class="address_delete">删除</a>
-				<a href="javascript:void(0);" class="ia-r address_delete">
+				<a href="javascript:void(0);" class="ia-r address_edit">
 					<span class="iar-icon"></span>
 				</a>
 			</div>
@@ -37,16 +38,21 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$.each($('.delivery_address .item_info'),function(){
-			var _This=$(this);
-			_This.on('click',function(){
-				_This.parents('.item_addr').addClass('active').siblings().removeClass('active');
+			var _this=$(this);
+			var addressIndex=_this.find('.area-address-name').data('key');
+			if(addressIndex){
+				console.log(_this);
+				var areaAddressArr = addressIndex.split(',');
+				_this.parents('.item_addr').find('.area_address').setArea(areaAddressArr);
+			}
+			_this.on('click',function(){
+				_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
 				return false;
 			})
-
 		});
 
 		//新建地址
@@ -59,17 +65,17 @@
 			var addressId = $(this).find('.addressId').val();
 			var orderId = $(this).parents().find('.orderid').val();
 			if(orderId){
-				location.href = module + '/Order/orderDetail/orderId/'+orderId+'/addressId/'+addressId;
+				location.href = module + '/Order/orderDetail/order_id/'+orderId+'/address_id/'+addressId;
 			}
 		});
 
 		//修改地址
 		$('body').on('click','.address_edit',function () {
-			var addressId = $(this).parent().find('.addressId').val();
-			var url = CONTROLLER + '/addAddress/addressId/'+addressId;
+			var addressId = $(this).parent().find('.address_id').val();
+			var url = controller + '/edit/address_id/'+addressId;
 			var orderId = $(this).parents().find('.orderid').val();
 			if(orderId){
-				url += '/orderId/'+orderId;
+				url += '/order_id/'+orderId;
 			}
 			location.href = url;
 		});
@@ -84,7 +90,7 @@
 				btn : ['是','否'],
 				title: '提示',
 				yes : function(index){
-					$.post(CONTROLLER+'/delAddress',{addressId:addressId},function (msg) {
+					$.post(controller+'/del',{addressId:addressId},function (msg) {
 						if(msg.status == 1){
 							_this.parents('.item_addr').remove();
 						}
