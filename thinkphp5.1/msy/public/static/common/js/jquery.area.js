@@ -616,12 +616,12 @@ function clockArea() {
 
 $(function() {
 	/*打开省市区选项*/
-	$("#expressArea").click(function() {
+	$('body').on('click','#expressArea',function(){
 		$("#areaMask").fadeIn();
 		$("#areaLayer").show().animate({"bottom": 0});
 	});
 	/*关闭省市区选项*/
-	$("#areaMask, #closeArea").click(function() {
+	$('body').on('click','#areaMask, #closeArea',function(){
 		clockArea();
 	});
 	//加入到jquery对象空间下

@@ -2,6 +2,18 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="store_css/main.css">{/block}
 {block name="content"}
+<!--省市区-->
+<section id="areaLayer" class="express-area-box" style="display:none;">
+	<header>
+		<h3>选择地区</h3>
+		<a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+		<a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+	</header>
+	<article id="areaBox">
+		<ul id="areaList" class="area-list"></ul>
+	</article>
+</section> 
+<div id="areaMask" class="mask"></div>
 <!--新增线上店铺员工账号-->
 <section id="employeeAccountInfo" style="display:none;">
 	<form class="employeeAccountForm">
@@ -169,6 +181,7 @@
 				<span>暂无数据</span>
 			</li>
 		</ul>
+		<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
 	</form>
 </section>
 <!--退换货人地址手机-->
@@ -206,6 +219,7 @@
 				<span>暂无数据</span>
 			</li>
 		</ul>
+		<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
 	</form>
 </section>
 <!--门店经营地址-->
@@ -272,14 +286,11 @@
 			</div>
 		</div>
 	</section>
-	<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
-	<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
 </article>
 {/block}
 {block name="common"}{/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//初始化
@@ -600,4 +611,5 @@
 		})
 	});
 </script>
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
 {/block}
