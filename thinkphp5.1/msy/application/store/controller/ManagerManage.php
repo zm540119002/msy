@@ -6,6 +6,7 @@ class ManagerManage extends \common\controller\UserBase{
     private $_store = null;
     private $_managerFactoryList = null;
     private $_defaultDialog = null;
+
     public function __construct(){
         parent::__construct();
         //获取店铺列表
