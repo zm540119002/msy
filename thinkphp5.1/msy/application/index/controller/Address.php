@@ -11,7 +11,7 @@ class Address extends \common\controller\UserBase {
                 //开启事务
                 $model -> startTrans();
                 //修改
-                $addressId = $_POST['addressId'];
+                $addressId = input('post.address_id');
                 $condition = [
                     ['id','=',$addressId],
                     ['user_id','=',$userId],
