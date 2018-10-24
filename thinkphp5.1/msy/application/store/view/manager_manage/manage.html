@@ -25,60 +25,7 @@
 			<span class="content-label">手机号码</span>
 			<input type="tel" class="" placeholder="手机号码" name="mobile_phone">
 		</div>
-		<div class="account-field account_position">
-			<span class="content-label">设置岗位</span>
-			<ul>
-                {volist name="post" id="vo"}
-                <li class="col" data-id="{$vo.id}">{$vo.name}</li>
-                {/volist}
-			</ul>
-		</div>
-		<div class="account-field account_position">
-			<span class="content-label">设置职务</span>
-			<ul>
-                {volist name='duty' id='vo'}
-                <li class="col" data-id="{$vo.id}">{$vo.name}</li>
-                {/volist}
-			</ul>
-		</div>
-		<div class="account-field account_position">
-			<span class="content-label">店铺运营</span>
-			<ul>
-				<li class="col" data-id="">商品管理</li>
-				<li class="col" data-id="">场景管理</li>
-				<li class="col" data-id="">特价管理</li>
-				<li class="col" data-id="">上架下架</li>
-			</ul>
-		</div>
-		<div class="account-field account_position">
-			<span class="content-label">售前客服</span>
-			<ul>
-				<li class="col" data-id="">售前咨询</li>
-			</ul>
-		</div>
-		<div class="account-field account_position">
-			<span class="content-label">售中客服</span>
-			<ul>
-				<li class="col" data-id="">接单打印</li>
-				<li class="col" data-id="">备货打包</li>
-				<li class="col" data-id="">发货完成</li>
-				<li class="col" data-id="">填物流单</li>
-			</ul>
-		</div>
-		<div class="account-field account_position">
-			<span class="content-label">售后客服</span>
-			<ul>
-				<li class="col" data-id="">售后咨询</li>
-				<li class="col" data-id="">退换货</li>
-			</ul>
-		</div>
-		<div class="account-field account_position">
-			<span class="content-label">财务结算</span>
-			<ul>
-				<li class="col" data-id="">退货款</li>
-				<li class="col" data-id="">开发票</li>
-			</ul>
-		</div>
+        {include file='public/permission_tpl' /}
 	</form>
 </section>
 <!--新增门店员工账号-->
@@ -99,44 +46,7 @@
                 <option value="2">门店2</option>
             </select>
         </div>
-        <div class="account-field account_position">
-            <span class="content-label">岗位设置</span>
-            <ul>
-                <li class="col" data-id="">咨询组</li>
-                <li class="col" data-id="">财务组</li>
-                <li class="col" data-id="">护理组</li>
-                <li class="col" data-id="">网购组</li>
-            </ul>
-        </div>
-        <div class="account-field account_position">
-            <span class="content-label">职务设置</span>
-            <ul>
-                <li class="col" data-id="">总监</li>
-                <li class="col" data-id="">主管</li>
-                <li class="col" data-id="">顾问</li>
-                <li class="col" data-id="">专员</li>
-            </ul>
-        </div>
-        <div class="account-field account_position">
-            <span class="content-label">门店运营</span>
-            <ul>
-                <li class="col" data-id="">销售咨询</li>
-                <li class="col" data-id="">财务领料</li>
-                <li class="col" data-id="">护理操作</li>
-            </ul>
-        </div>
-        <div class="account-field account_position">
-            <span class="content-label">网购客服</span>
-            <ul>
-                <li class="col" data-id="">售前咨询</li>
-                <li class="col" data-id="">接单打印</li>
-                <li class="col" data-id="">备货打包</li>
-                <li class="col" data-id="">发货完成</li>
-                <li class="col" data-id="">填物流单</li>
-                <li class="col" data-id="">售后咨询</li>
-                <li class="col" data-id="">退换申请</li>
-            </ul>
-        </div>
+        {include file='public/permission_tpl' /}
     </form>
 </section>
 <!--员工账号列表模板-->

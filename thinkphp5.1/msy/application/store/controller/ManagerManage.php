@@ -44,6 +44,9 @@ class ManagerManage extends \common\controller\UserBase{
             //职务
             $duty = config('permission.duty');
             $this->assign('duty', $duty);
+            //鉴权
+            $authentication = config('permission.authentication');
+            $this->assign('authentication', $authentication);
 
             return $this->fetch();
         }
