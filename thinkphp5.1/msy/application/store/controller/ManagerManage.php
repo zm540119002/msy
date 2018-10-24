@@ -38,7 +38,13 @@ class ManagerManage extends \common\controller\UserBase{
     public function manage(){
         if(request()->isAjax()){
         }else{
-            $this->assign('store', $this->_store);
+            //岗位
+            $post = config('permission.post');
+            $this->assign('post', $post);
+            //职务
+            $duty = config('permission.duty');
+            $this->assign('duty', $duty);
+
             return $this->fetch();
         }
     }
