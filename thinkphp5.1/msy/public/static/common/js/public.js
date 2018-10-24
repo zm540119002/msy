@@ -499,7 +499,8 @@ function getList(config) {
             if(data.status==0){
                 dialog.error(data.info);
             }else{
-                $('ul.list').empty().append(data);
+                var container = config.container?config.container:$('ul.list');
+                container.empty().append(data);
             }
         }
     });
@@ -523,8 +524,9 @@ function dialogFormAdd(config) {
             if(data.status == 0){
                 dialog.error(data.info);
             }else{
-                $('ul.list').prepend(data);
-                $('ul.list').find('span.no-data').remove();
+                var container = config.container?config.container:$('ul.list');
+                container.prepend(data);
+                container.find('.no-data').remove();
                 layer.close(config.index);
             }
         }
