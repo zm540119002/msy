@@ -49,92 +49,6 @@
         {include file='public/permission_tpl' /}
     </form>
 </section>
-<!--店铺员工列表-->
-<section style="display:none;" id="storeEmployeeList">
-	<form class="">
-		<div class="search_module_bar">
-			<input type="button" class="search_btn left"/>
-			<input type="text" class="search_text left" placeholder="输入姓名/岗位/手机号搜索账号"/>
-		</div>
-		<p class="emp_account_tipc">线上店铺运营员工账号</p>
-		<ul class="list">
-			<li class="no-data"><span>暂无数据</span></li>
-		</ul>
-		<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
-	</form>
-</section>
-<!--退换货人地址手机-->
-<section style="display:none;" id="consigneeInfo">
-	<form class="consignee_info_form">
-		<p class="emp_account_tipc">设定店铺的收货人地址手机号码（*用于顾客退换货时对接）</p>
-		<div class="input_item">
-			<input class="input-filed" type="text" name="name" value="" placeholder="收货人姓名">
-		</div>
-		<div>
-			<input class="input-filed" type="tel" name="mobile_phone" value="" placeholder="收货人手机号码">
-		</div>
-		<div class="express-area area-box">
-			<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
-				<label class="form-label">所在地区：</label>
-				<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-				<input type="hidden" value="" class="area-address-name" data-key="" name="provinces">
-			</a>
-		</div>
-		<div>
-			<input class="input-filed" type="text" name="detail_name" value="" placeholder="详细地址">
-		</div>
-	</form>
-</section>
-<!--门店员工列表-->
-<section style="display:none;" id="shopEmployeeList">
-	<form class="">
-		<div class="search_module_bar">
-			<input type="button" class="search_btn left"/>
-			<input type="text" class="search_text left" placeholder="输入姓名/门店/手机号搜索账号"/>
-		</div>
-		<p class="emp_account_tipc">门店运营员工账号</p>
-		<ul class="list">
-			<li class="no-data"><span>暂无数据</span></li>
-		</ul>
-		<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
-	</form>
-</section>
-<!--门店经营地址-->
-<section style="display:none;" id="storeAddressList">
-	<ul class="list">
-		<li>
-			<img src="" alt="" class="left">
-			<div>
-				<div>
-					<span>莫某门店</span>
-				</div>
-				<div>地址：<sapn>广东</sapn></div>
-				<div>固话：<span>020-45646455</span></div>
-				<div>手机：<span>13825545678</span></div>
-				<div>
-					<i></i>
-					距离<span>500</span>km
-				</div>
-			</div>
-		</li>
-	</ul>
-</section>
-<!--门店收货人地址手机-->
-<section style="display:none;" id="storeConsigneeList">
-	<ul class="list">
-		<li>
-			<img src="" alt="" class="left">
-			<div>
-				<div>
-					<span>莫某门店</span>
-				</div>
-				<div>收货人地址：<sapn>广东</sapn></div>
-				<div>收货人姓名：<sapn>李四</sapn></div>
-				<div>收货人手机号码：<span>13825545678</span></div>
-			</div>
-		</li>
-	</ul>
-</section>
 <article class="f24">
 	<div class="top_header">
 		{include file='public/switch_manager_store' /}
@@ -159,7 +73,92 @@
 	<section class="f24 account-content-wrapper">
 		<div class="content-top content-mg-top">
 			<div class="content_main">
-				
+				<!--店铺员工列表-->
+				<section class="section_content" id="storeEmployeeList">
+					<form class="">
+						<div class="search_module_bar">
+							<input type="button" class="search_btn left"/>
+							<input type="text" class="search_text left" placeholder="输入姓名/岗位/手机号搜索账号"/>
+						</div>
+						<p class="emp_account_tipc">线上店铺运营员工账号</p>
+						<ul class="list">
+							<li class="no-data"><span>暂无数据</span></li>
+						</ul>
+						<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
+					</form>
+				</section>
+				<!--退换货人地址手机-->
+				<section class="section_content" id="consigneeInfo">
+					<form class="consignee_info_form">
+						<p class="emp_account_tipc">设定店铺的收货人地址手机号码（*用于顾客退换货时对接）</p>
+						<div class="input_item">
+							<input class="input-filed" type="text" name="name" value="" placeholder="收货人姓名">
+						</div>
+						<div>
+							<input class="input-filed" type="tel" name="mobile_phone" value="" placeholder="收货人手机号码">
+						</div>
+						<div class="express-area area-box">
+							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">所在地区：</label>
+								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+								<input type="hidden" value="" class="area-address-name" data-key="" name="provinces">
+							</a>
+						</div>
+						<div>
+							<input class="input-filed" type="text" name="detail_name" value="" placeholder="详细地址">
+						</div>
+					</form>
+				</section>
+				<!--门店员工列表-->
+				<section class="section_content" id="shopEmployeeList">
+					<form class="">
+						<div class="search_module_bar">
+							<input type="button" class="search_btn left"/>
+							<input type="text" class="search_text left" placeholder="输入姓名/门店/手机号搜索账号"/>
+						</div>
+						<p class="emp_account_tipc">门店运营员工账号</p>
+						<ul class="list">
+							<li class="no-data"><span>暂无数据</span></li>
+						</ul>
+						<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
+					</form>
+				</section>
+				<!--门店经营地址-->
+				<section class="section_content" id="storeAddressList">
+					<ul class="list">
+						<li>
+							<img src="" alt="" class="left">
+							<div>
+								<div>
+									<span>莫某门店</span>
+								</div>
+								<div>地址：<sapn>广东</sapn></div>
+								<div>固话：<span>020-45646455</span></div>
+								<div>手机：<span>13825545678</span></div>
+								<div>
+									<i></i>
+									距离<span>500</span>km
+								</div>
+							</div>
+						</li>
+					</ul>
+				</section>
+				<!--门店收货人地址手机-->
+				<section class="section_content" id="storeConsigneeList">
+					<ul class="list">
+						<li>
+							<img src="" alt="" class="left">
+							<div>
+								<div>
+									<span>莫某门店</span>
+								</div>
+								<div>收货人地址：<sapn>广东</sapn></div>
+								<div>收货人姓名：<sapn>李四</sapn></div>
+								<div>收货人手机号码：<span>13825545678</span></div>
+							</div>
+						</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 	</section>
@@ -171,9 +170,9 @@
 <script type="text/javascript">
 	$(function(){
 		//初始化
-		var storeEmployeeList=$('#storeEmployeeList').html();
-		$('.content_main').empty().append(storeEmployeeList);
-		$('.add_store_account').hide();
+		// var storeEmployeeList=$('#storeEmployeeList').html();
+		// $('.content_main').empty().append(storeEmployeeList);
+		$('.content_main .section_content').eq(0).show();
 		
 		//新增线上店铺员工账号
 		var storeEmployeeSection=$('#storeEmployeeSection').html();
@@ -424,18 +423,20 @@
 		$('body').on('click','.store_deploy_bar a',function(){
 			var typeId=$(this).data('type');
 			$(this).addClass('current').siblings().removeClass('current');
-			$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
-			$('.top_empy_nav a').eq(0).addClass('current').siblings().removeClass('current');
+			
 			if(typeId=='online'){
-				var storeEmployeeList=$('#storeEmployeeList').html();
-				$('.content_main').empty().append(storeEmployeeList);
-				$('.add_online_account').show();
-				$('.add_store_account').hide();
+				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
+				$('.top_empy_nav a').removeClass('current');
+				$('.top_empy_nav a:first').addClass('current');
+				$('.content_main .section_content').hide();
+				$('.content_main section').eq(0).show();
 			}else{
-				var shopEmployeeList=$('#shopEmployeeList').html();
-				$('.content_main').empty().append(shopEmployeeList);
-				$('.add_online_account').hide();
-				$('.add_store_account').show();
+				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
+				$('.top_empy_nav a').removeClass('current');
+				$('.top_empy_nav').eq(1).find('a:first').addClass('current');
+				$('.content_main .section_content').hide();
+				$('.content_main').find('#shopEmployeeList').show();
+				
 			}	
 		});
 		$('body').on('click','.top_empy_nav a',function(){
@@ -443,24 +444,24 @@
 			$(this).addClass('current').siblings().removeClass('current');
 			switch(typeId){
 				case 0:
-					var storeEmployeeList=$('#storeEmployeeList').html();
-					$('.content_main').empty().append(storeEmployeeList);
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#storeEmployeeList').show();
 					break;
 				case 1:
-					var consigneeInfo=$('#consigneeInfo').html();
-					$('.content_main').empty().append(consigneeInfo);
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#consigneeInfo').show();
 					break;
 				case 2:
-					var shopEmployeeList=$('#shopEmployeeList').html();
-					$('.content_main').empty().append(shopEmployeeList);
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#shopEmployeeList').show();
 					break;
 				case 3:
-					var storeAddressList=$('#storeAddressList').html();
-					$('.content_main').empty().append(storeAddressList);
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#storeAddressList').show();
 					break;
 				case 4:
-					var storeConsigneeList=$('#storeConsigneeList').html();
-					$('.content_main').empty().append(storeConsigneeList);
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#storeConsigneeList').show();
 			}
 		})
 	});
