@@ -189,6 +189,9 @@ class CallBack extends \common\controller\Base{
         $alipaySevice = new \AlipayTradeService($config);
         $alipaySevice->writeLog(var_export($_POST,true));
         $result = $alipaySevice->check($_POST);
+        if($result){
+            file_put_contents('ali222222222.text','chegggggggg' );
+        }
 
         if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
             //判断该笔订单是否在商户网站中已经做过处理
