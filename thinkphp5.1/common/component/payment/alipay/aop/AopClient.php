@@ -575,7 +575,6 @@ class AopClient {
 	 *  公钥是否是读取字符串还是读取文件，是根据初始化传入的值判断的。
 	 **/
 	public function rsaCheckV1($params, $rsaPublicKeyFilePath,$signType='RSA') {
-	echo $rsaPublicKeyFilePath;
 		$sign = $params['sign'];
 		$params['sign_type'] = null;
 		$params['sign'] = null;
@@ -590,7 +589,6 @@ class AopClient {
 	function verify($data, $sign, $rsaPublicKeyFilePath, $signType = 'RSA') {
 
 		if($this->checkEmpty($this->alipayPublicKey)){
-
 			$pubKey= $this->alipayrsaPublicKey;
 			$res = "-----BEGIN PUBLIC KEY-----\n" .
 				wordwrap($pubKey, 64, "\n", true) .
@@ -598,7 +596,6 @@ class AopClient {
 		}else {
 			//读取公钥文件
 			$pubKey = file_get_contents($rsaPublicKeyFilePath);
-			echo $pubKey;
 			//转换为openssl格式密钥
 			$res = openssl_get_publickey($pubKey);
 		}
@@ -608,7 +605,16 @@ class AopClient {
 		//调用openssl内置方法验签，返回bool值
 
 		if ("RSA2" == $signType) {
+			print_r($data);
+
+			echo "-----------------------------------------------------------------";
+			echo PHP_EOL;
+			print_r($sign);
+			echo "-----------------------------------------------------------------";
+			echo PHP_EOL;
+			echo $res;
 			$result = (bool)openssl_verify($data, base64_decode($sign), $res, OPENSSL_ALGO_SHA256);
+			print_r($result);exit;
 		} else {
 			$result = (bool)openssl_verify($data, base64_decode($sign), $res);
 		}
