@@ -341,9 +341,6 @@ class CallBack extends \common\controller\Base{
             ['user_id','=',$orderInfo['user_id']],
             ['sn','=',$data['order_sn']],
         ];
-        file_put_contents('data2.text',json_encode($data2) );
-        file_put_contents('condition.text',json_encode($condition) );
-        file_put_contents('orderInfo.text',json_encode($orderInfo) );
         $returnData = $modelOrder->edit($data2,$condition);
 
         if (!$returnData['status']) {
@@ -373,10 +370,11 @@ class CallBack extends \common\controller\Base{
         $data2['payment_time'] = "2018-10-25 16:50:01";
 
         $condition = [
-            ['user_id','=',69],
-            ['sn','=','20181025164949095186472049520841'],
+            ['user_id','=',6],
+            ['sn','=','20181025143939925644161272041123'],
         ];
         $returnData = $modelOrder->edit($data2,$condition);
+        print_r($returnData);
         print_r($modelOrder->getLastSql());
     }
 
