@@ -15,8 +15,8 @@
 </section> 
 <div id="areaMask" class="mask"></div>
 <!--新增线上店铺员工账号-->
-<section id="employeeAccountInfo" style="display:none;">
-	<form class="employeeAccountForm">
+<section id="storeEmployeeSection" style="display:none;">
+	<form class="storeEmployeeForm">
 		<div class="account-field">
 			<span class="content-label">姓名</span>
 			<input type="text" class="" placeholder="姓名" name="name">
@@ -29,7 +29,7 @@
 	</form>
 </section>
 <!--新增门店员工账号-->
-<section id="storeEmployeeAccount" style="display:none;">
+<section id="shopEmployeeSection" style="display:none;">
     <form class="storeEmployeeForm">
         <div class="account-field">
             <span class="content-label">姓名</span>
@@ -49,66 +49,8 @@
         {include file='public/permission_tpl' /}
     </form>
 </section>
-<!--店铺员工账号列表模板-->
-<section style="display: none;" id="employeeAccountList">
-	<li class="columns_flex l-r-sides">
-		<div>
-			<p>
-				<span>姓名</span>
-				<input class="input_size" type="text" value="" name="name" readonly="readonly">
-			</p>
-			<div>
-				<span>手机号码:</span>
-				<input type="tel" value="" name="mobile_phone" readonly="readonly"/>
-			</div>
-			<div>
-				<span>岗位职务:</span>
-				<input type="text" value="" name="position" readonly="readonly"/>
-			</div>
-		</div>
-		<div class="operate-btn">
-			<a href="javascript:void(0);" class="modify-account">
-				<span></span>
-				修改
-			</a>
-			<a href="javascript:void(0);" class="delete-account">
-				<span></span>
-				删除
-			</a>
-		</div>
-	</li>
-</section>
-<!--门店员工账号列表模板-->
-<section style="display: none;" id="shopEmployeeAccountList">
-	<li class="columns_flex l-r-sides">
-		<div>
-			<p>
-				<span>姓名</span>
-				<input class="input_size" type="text" value="" name="name" readonly="readonly">
-			</p>
-			<div>
-				<span>手机号码:</span>
-				<input type="tel" value="" name="mobile_phone" readonly="readonly"/>
-			</div>
-			<div>
-				<span>岗位职务:</span>
-				<input type="text" value="" name="position" readonly="readonly"/>
-			</div>
-		</div>
-		<div class="operate-btn">
-			<a href="javascript:void(0);" class="modify-shop-account">
-				<span></span>
-				修改
-			</a>
-			<a href="javascript:void(0);" class="modify-shop-account">
-				<span></span>
-				删除
-			</a>
-		</div>
-	</li>
-</section>
 <!--店铺员工列表-->
-<section style="display:none;" id="storeOperator">
+<section style="display:none;" id="storeEmployeeList">
 	<form class="">
 		<div class="search_module_bar">
 			<input type="button" class="search_btn left"/>
@@ -116,9 +58,7 @@
 		</div>
 		<p class="emp_account_tipc">线上店铺运营员工账号</p>
 		<ul class="list">
-			<li>
-				<span>暂无数据</span>
-			</li>
+			<li class="no-data"><span>暂无数据</span></li>
 		</ul>
 		<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
 	</form>
@@ -145,8 +85,8 @@
 		</div>
 	</form>
 </section>
-<!--门店员工账号-->
-<section style="display:none;" id="storeStaff">
+<!--门店员工列表-->
+<section style="display:none;" id="shopEmployeeList">
 	<form class="">
 		<div class="search_module_bar">
 			<input type="button" class="search_btn left"/>
@@ -154,9 +94,7 @@
 		</div>
 		<p class="emp_account_tipc">门店运营员工账号</p>
 		<ul class="list">
-			<li>
-				<span>暂无数据</span>
-			</li>
+			<li class="no-data"><span>暂无数据</span></li>
 		</ul>
 		<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
 	</form>
@@ -233,17 +171,18 @@
 <script type="text/javascript">
 	$(function(){
 		//初始化
-		var storeOperator=$('#storeOperator').html();
-		$('.content_main').empty().append(storeOperator);
+		var storeEmployeeList=$('#storeEmployeeList').html();
+		$('.content_main').empty().append(storeEmployeeList);
 		$('.add_store_account').hide();
+		
 		//新增线上店铺员工账号
-		var employeeAccountInfo=$('#employeeAccountInfo').html();
+		var storeEmployeeSection=$('#storeEmployeeSection').html();
 		$('body').on('click','.add_online_account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['新增线上店铺员工账号','border-bottom:1px solid #d9d9d9;'],
 				className:'employeeAccountLayer',
-				content:employeeAccountInfo,
+				content:storeEmployeeSection,
 				type:1,
 				anim:'up',
 				style:'',
@@ -251,14 +190,10 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .employeeAccountForm').css('height',winHeight-120+'px');
+					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var postData={};
-					postData = $('.employeeAccountForm').serializeObject();
-					postData.nodeIds=[];
-					var html=$('#employeeAccountList').html();
-					var listLength=$('.list li').length;
+					var postData=$('.storeEmployeeForm').serializeObject();
 					var content='';
 					if(!postData.name){
 						content='请填写员工姓名';
@@ -269,25 +204,18 @@
 						dialog.error(content);
 						return false;
 					}
-					if(listLength<1){
-						console.log(listLength);
-						$('.list').append(html);
-
-					}else{
-						$('.list li:first').before(html);
-					}
 					$.each($('.employeeAccountLayer').find('li'),function(){
 						if($(this).attr('class')=='current'){
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
-					// var config = {
-					// 	url:module + 'Manager/edit',
-					// 	postData:postData,
-					// 	index:index
-					// };
-					// dialogFormAdd(config);
-					layer.close(index);
+					 var config = {
+					 	url:controller + 'edit',
+					 	postData:postData,
+					 	index:index,
+					 	container:$('#storeEmployeeList').find('ul.list')
+					 };
+					 dialogFormAdd(config);
 				}
 			});
 		});
@@ -299,18 +227,17 @@
 				className:'employeeAccountLayer',
 				type:1,
 				anim:'up',
-				content:employeeAccountInfo,
+				content:storeEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .employeeAccountForm').css('height',winHeight-120+'px');
-					copyDataByName(_this,$('.employeeAccountLayer .employeeAccountForm'));
+					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
+					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
 				},
 				yes:function(index){
-					var postData={};
+					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
 					var content='';
-					postData=$('.employeeAccountLayer .employeeAccountForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -320,14 +247,14 @@
 						dialog.error(content);
 						return false;
 					}
-					// var config = {
-					// 	url:module + 'Manager/edit',
-					// 	postData:postData,
-					// 	fromObj:$('.employeeAccountLayer .employeeAccountForm'),
-					// 	toObj:_this,
-					// 	index:index
-					// };
-					// dialogFormEdit(config)
+					 var config = {
+					 	url:controller + 'edit',
+					 	postData:postData,
+					 	fromObj:$('.employeeAccountLayer .storeEmployeeForm'),
+					 	toObj:_this,
+					 	index:index
+					 };
+					 dialogFormEdit(config);
 					layer.close(index);
 
 				}
@@ -341,36 +268,36 @@
 				className:'employeeAccountLayer',
 				type:1,
 				anim:'up',
-				content:employeeAccountInfo,
+				content:storeEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .employeeAccountForm').css('height',winHeight-120+'px');
-					copyDataByName(_this,$('.employeeAccountLayer .employeeAccountForm'));
+					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
+					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
 				},
 				yes:function(index){
 					var postData = {};
 					postData.id = _this.data('id');
-					postData.userFactoryId = _this.data('user_factory_id');
-					// var config = {
-					// 	url:module + 'Manager/del',
-					// 	postData:postData,
-					// 	obj:_this,
-					// 	index:index
-					// };
-					// dialogFormDel(config);
+					 var config = {
+					 	url:controller + 'del',
+					 	postData:postData,
+					 	obj:_this,
+					 	index:index
+					 };
+					 dialogFormDel(config);
 				}
 			});
 		});
+
 		//新增门店员工账号
-		var storeEmployeeAccount=$('#storeEmployeeAccount').html();
+		var shopEmployeeSection=$('#shopEmployeeSection').html();
 		$('body').on('click','.add_store_account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['新增门店员工账号','border-bottom:1px solid #d9d9d9;'],
 				className:'employeeAccountLayer',
-				content:storeEmployeeAccount,
+				content:shopEmployeeSection,
 				type:1,
 				anim:'up',
 				style:'',
@@ -381,11 +308,7 @@
 					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var postData={};
-					postData = $('.storeEmployeeForm').serializeObject();
-					postData.nodeIds=[];
-					var html=$('#shopEmployeeAccountList').html();
-					var listLength=$('.list li').length;
+					var postData=$('.storeEmployeeForm').serializeObject();
 					var content='';
 					if(!postData.name){
 						content='请填写员工姓名';
@@ -396,24 +319,17 @@
 						dialog.error(content);
 						return false;
 					}
-					if(listLength<1){
-						console.log(listLength);
-						$('.list').append(html);
-
-					}else{
-						$('.list li:first').before(html);
-					}
 					$.each($('.employeeAccountLayer').find('li'),function(){
 						if($(this).attr('class')=='current'){
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
-					// var config = {
-					// 	url:module + 'Manager/edit',
-					// 	postData:postData,
-					// 	index:index
-					// };
-					// dialogFormAdd(config);
+					 var config = {
+					 	url:module + 'shopEdit',
+					 	postData:postData,
+					 	index:index
+					 };
+					 dialogFormAdd(config);
 					layer.close(index);
 				}
 			});
@@ -426,7 +342,7 @@
 				className:'employeeAccountLayer',
 				type:1,
 				anim:'up',
-				content:storeEmployeeAccount,
+				content:shopEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
@@ -435,9 +351,8 @@
 					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
 				},
 				yes:function(index){
-					var postData={};
+					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
 					var content='';
-					postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -447,14 +362,14 @@
 						dialog.error(content);
 						return false;
 					}
-					// var config = {
-					// 	url:module + 'Manager/edit',
-					// 	postData:postData,
-					// 	fromObj:$('.employeeAccountLayer .employeeAccountForm'),
-					// 	toObj:_this,
-					// 	index:index
-					// };
-					// dialogFormEdit(config)
+					 var config = {
+					 	url:module + 'Manager/edit',
+					 	postData:postData,
+					 	fromObj:$('.employeeAccountLayer .storeEmployeeForm'),
+					 	toObj:_this,
+					 	index:index
+					 };
+					 dialogFormEdit(config);
 					layer.close(index);
 
 				}
@@ -468,7 +383,7 @@
 				className:'employeeAccountLayer',
 				type:1,
 				anim:'up',
-				content:storeEmployeeAccount,
+				content:shopEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
@@ -480,13 +395,13 @@
 					var postData = {};
 					postData.id = _this.data('id');
 					postData.userFactoryId = _this.data('user_factory_id');
-					// var config = {
-					// 	url:module + 'Manager/del',
-					// 	postData:postData,
-					// 	obj:_this,
-					// 	index:index
-					// };
-					// dialogFormDel(config);
+					 var config = {
+					 	url:module + 'Manager/del',
+					 	postData:postData,
+					 	obj:_this,
+					 	index:index
+					 };
+					 dialogFormDel(config);
 				}
 			});
 		});
@@ -512,13 +427,13 @@
 			$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
 			$('.top_empy_nav a').eq(0).addClass('current').siblings().removeClass('current');
 			if(typeId=='online'){
-				var storeOperator=$('#storeOperator').html();
-				$('.content_main').empty().append(storeOperator);
+				var storeEmployeeList=$('#storeEmployeeList').html();
+				$('.content_main').empty().append(storeEmployeeList);
 				$('.add_online_account').show();
 				$('.add_store_account').hide();
 			}else{
-				var storeStaff=$('#storeStaff').html();
-				$('.content_main').empty().append(storeStaff);
+				var shopEmployeeList=$('#shopEmployeeList').html();
+				$('.content_main').empty().append(shopEmployeeList);
 				$('.add_online_account').hide();
 				$('.add_store_account').show();
 			}	
@@ -528,16 +443,16 @@
 			$(this).addClass('current').siblings().removeClass('current');
 			switch(typeId){
 				case 0:
-					var storeOperator=$('#storeOperator').html();
-					$('.content_main').empty().append(storeOperator);
+					var storeEmployeeList=$('#storeEmployeeList').html();
+					$('.content_main').empty().append(storeEmployeeList);
 					break;
 				case 1:
 					var consigneeInfo=$('#consigneeInfo').html();
 					$('.content_main').empty().append(consigneeInfo);
 					break;
 				case 2:
-					var storeStaff=$('#storeStaff').html();
-					$('.content_main').empty().append(storeStaff);
+					var shopEmployeeList=$('#shopEmployeeList').html();
+					$('.content_main').empty().append(shopEmployeeList);
 					break;
 				case 3:
 					var storeAddressList=$('#storeAddressList').html();
