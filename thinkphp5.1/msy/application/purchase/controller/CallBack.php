@@ -83,19 +83,21 @@ class CallBack extends \common\controller\Base{
                         ['o.sn', '=', $data['order_sn']],
                     ],'field' => [
                         'o.id', 'o.sn', 'o.amount',
-                        'o.user_id','o.actually_amount'
+                        'o.user_id','o.actually_amount','o.logistics_status'
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
+                file_put_contents('a1.text',$data);
                 if ($orderInfo['logistics_status'] > 1) {
+                    file_put_contents('a2.text',$data);
                     return successMsg('已回调过，订单已处理');
                 }
                 if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
-                file_put_contents('a1.text',$data);
-                file_put_contents('a2.text',$data);
+                file_put_contents('a3.text',$data);
+                file_put_contents('a4.text',$data);
                 $res = $this->orderHandle($data,$orderInfo);
                 if($res['status']){
                     $this->successReturn();
