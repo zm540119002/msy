@@ -91,7 +91,7 @@ class Address extends \common\controller\UserBase {
     }
 
     //地址列表
-    public function getList(){
+    public function manage(){
         $model = new \common\model\Address();
         $config = [
             'where'=>[
