@@ -66,7 +66,7 @@ class CallBack extends \common\controller\Base{
         //sign不参与签名算法
         unset($data['sign']);
         $sign = $this->makeSign($data);
-        $data['payment_code'] = 1;
+        $data['payment_code'] = 1;//weixin 支付
         $data['actually_amount'] =  $data['total_fee'];//支付金额
         $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
         $data['order_sn'] = $data['out_trade_no'];//系统的订单号
@@ -75,7 +75,6 @@ class CallBack extends \common\controller\Base{
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             if ($order_type == 'order') {
-                file_put_contents('a.text',$xml);
                 $modelOrder = new \app\purchase\model\Order();
                 $config = [
                     'where' => [
@@ -87,17 +86,13 @@ class CallBack extends \common\controller\Base{
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
-                file_put_contents('a1.text',$data);
                 if ($orderInfo['logistics_status'] > 1) {
-                    file_put_contents('a2.text',$data);
                     return successMsg('已回调过，订单已处理');
                 }
                 if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
-                file_put_contents('a3.text',$data);
-                file_put_contents('a4.text',$data);
                 $res = $this->orderHandle($data,$orderInfo);
                 if($res['status']){
                     $this->successReturn();
@@ -128,59 +123,6 @@ class CallBack extends \common\controller\Base{
         }
     }
 
-    public function a(){
-        /**
-         * <xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
-        <attach><![CDATA[weixin]]></attach>
-        <bank_type><![CDATA[HXB_CREDIT]]></bank_type>
-        <cash_fee><![CDATA[1]]></cash_fee>
-        <fee_type><![CDATA[CNY]]></fee_type>
-        <is_subscribe><![CDATA[Y]]></is_subscribe>
-        <mch_id><![CDATA[1234887902]]></mch_id>
-        <nonce_str><![CDATA[3qufclfhucrjfvjro5rvgljklfjzmmsi]]></nonce_str>
-        <openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
-        <out_trade_no><![CDATA[20181025135110255767457536540661]]></out_trade_no>
-        <result_code><![CDATA[SUCCESS]]></result_code>
-        <return_code><![CDATA[SUCCESS]]></return_code>
-        <sign><![CDATA[A45CFFE9E8ADDB2CB45F89F56F34CA27]]></sign>
-        <time_end><![CDATA[20181025135125]]></time_end>
-        <total_fee>1</total_fee>
-        <trade_type><![CDATA[NATIVE]]></trade_type>
-        <transaction_id><![CDATA[4200000233201810255306585263]]></transaction_id>
-        </xml>
-
-         */
-        $data['payment_code'] = 1;
-        $data['actually_amount'] = 1;//支付金额
-        $data['pay_sn'] = '4200000233201810255306585263';//服务商返回的交易号
-        $data['order_sn'] = '20181025135110255767457536540661';//系统的订单号
-        $data['payment_time'] = '20181025135125';//支付时间
-
-        $modelOrder = new \app\purchase\model\Order();
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $data['order_sn']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id','o.actually_amount'
-            ],
-        ];
-        $orderInfo = $modelOrder->getInfo($config);
-        if ($orderInfo['logistics_status'] > 1) {
-            return successMsg('已回调过，订单已处理');
-        }
-        if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
-            //返回状态给微信服务器
-            return errorMsg('回调的金额和订单的金额不符，终止购买');
-        }
-        $res = $this->orderHandle($data,$orderInfo);
-        if($res['status']){
-            $this->successReturn();
-        }else{
-            $this->errorReturn();
-        }
-    }
 
     //银联支付回调处理
     private function unionBack($order_type){
@@ -207,7 +149,7 @@ class CallBack extends \common\controller\Base{
                             ['o.sn', '=', $data['order_sn']],
                         ],'field' => [
                             'o.id', 'o.sn', 'o.amount',
-                            'o.user_id','o.actually_amount'
+                            'o.user_id','o.actually_amount','o.logistics_status'
                         ],
                     ];
                     $orderInfo = $modelOrder->getInfo($config);
@@ -238,107 +180,146 @@ class CallBack extends \common\controller\Base{
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
         $data = $_POST;
-        $data['payment_code'] = 2; //支付类型
-        $data['order_sn'] = $data['out_trade_no'];//系统的订单号
-        $data['actually_amount'] =  $data['receipt_amount'];//支付金额
-//        $data['actually_amount'] =  $data['total_amount'];//支付金额
-        $data['pay_sn'] = $data['trade_no'];//服务商返回的交易号
-        $data['payment_time'] = $data['gmt_close'];//支付时间
+        $payInfo['payment_code'] = 2; //支付类型
+        $payInfo['order_sn'] = $data['out_trade_no'];//系统的订单号
+        $payInfo['actually_amount'] =  $data['receipt_amount'];//支付金额
+        $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
+        $payInfo['payment_time'] = $data['gmt_payment'];//支付时间
+
+        file_put_contents('22222222.text',$payInfo);
 
         $alipaySevice = new \AlipayTradeService($config);
         $alipaySevice->writeLog(var_export($_POST,true));
-        $result = $alipaySevice->check($data);
+        $result = $alipaySevice->check($_POST);
+        if($result){
+            file_put_contents('ali222222222.text','chegggggggg' );
+        }
 
+        if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+            //判断该笔订单是否在商户网站中已经做过处理
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+            //如果有做过处理，不执行商户的业务程序
+            //注意：
+            //付款完成后，支付宝系统发送该交易状态通知
+
+
+            if ($order_type == 'order') {
+                file_put_contents('ali.text', json_encode($_POST));
+                $modelOrder = new \app\purchase\model\Order();
+                $config = [
+                    'where' => [
+                        ['o.status', '=', 0],
+                        ['o.sn', '=', $payInfo['order_sn']],
+                    ], 'field' => [
+                        'o.id', 'o.sn', 'o.amount',
+                        'o.user_id', 'o.actually_amount'
+                    ],
+                ];
+                $orderInfo = $modelOrder->getInfo($config);
+                $res = $this->orderHandle($payInfo, $orderInfo);
+                if (!$res['status']) {
+                    echo "fail";    //请不要修改或删除
+                }else{
+                    echo "success";		//请不要修改或删除
+                }
+            }
+        }
         /* 实际验证过程建议商户添加以下校验。
         1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
         2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
         3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
         4、验证app_id是否为该商户本身。
         */
-        if($result) {//验证成功
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //请在这里加上商户的业务逻辑程序代
-
-
-            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-
-            //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
-
-            //商户订单号
-
-            if($_POST['trade_status'] == 'TRADE_FINISHED') {
-
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
-                //如果有做过处理，不执行商户的业务程序
-
-                //注意：
-                //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
-
-                // 修改订单支付状态
-                if ($order_type == 'recharge') {
-                    $this->rechargeHandle($data);
-                }
-                if ($order_type == 'order') {
-                    $modelOrder = new \app\purchase\model\Order();
-                    $config = [
-                        'where' => [
-                            ['o.status', '=', 0],
-                            ['o.sn', '=', $data['order_sn']],
-                        ],'field' => [
-                            'o.id', 'o.sn', 'o.amount',
-                            'o.user_id','o.actually_amount'
-                        ],
-                    ];
-                    $orderInfo = $modelOrder->getInfo($config);
-                    $res = $this->orderHandle($data,$orderInfo);
-                    if(!$res['status']){
-                        echo "fail";	//请不要修改或删除
-                    }
-                }
-            }
-            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
-                //如果有做过处理，不执行商户的业务程序
-                //注意：
-                //付款完成后，支付宝系统发送该交易状态通知
-
-                if ($order_type == 'recharge') {
-                    $this->rechargeHandle($data);
-                }
-                if ($order_type == 'order') {
-                    if ($order_type == 'order') {
-                        $modelOrder = new \app\purchase\model\Order();
-                        $config = [
-                            'where' => [
-                                ['o.status', '=', 0],
-                                ['o.sn', '=', $data['order_sn']],
-                            ],'field' => [
-                                'o.id', 'o.sn', 'o.amount',
-                                'o.user_id','o.actually_amount'
-                            ],
-                        ];
-                        $orderInfo = $modelOrder->getInfo($config);
-                        $res = $this->orderHandle($data,$orderInfo);
-                        if(!$res['status']){
-                            echo "fail";	//请不要修改或删除
-                        }
-                    }
-
-                }
-            }
-            //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-
-            echo "success";		//请不要修改或删除
-
-        }else {
-            //验证失败
-            echo "fail";	//请不要修改或删除
-
-        }
+//        if(!$result) {//验证成功
+//            file_put_contents('ali3.text',json_encode($data));
+//            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//            //请在这里加上商户的业务逻辑程序代
+//
+//            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+//
+//            //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
+//
+//            //商户订单号
+//
+//            if($_POST['trade_status'] == 'TRADE_FINISHED') {
+//
+//                //判断该笔订单是否在商户网站中已经做过处理
+//                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+//                //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+//                //如果有做过处理，不执行商户的业务程序
+//
+//                //注意：
+//                //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
+//
+//                // 修改订单支付状态
+//                if ($order_type == 'order') {
+//                    file_put_contents('ali4.text',json_encode($data));
+//                    $modelOrder = new \app\purchase\model\Order();
+//                    $config = [
+//                        'where' => [
+//                            ['o.status', '=', 0],
+//                            ['o.sn', '=', $data['order_sn']],
+//                        ],'field' => [
+//                            'o.id', 'o.sn', 'o.amount',
+//                            'o.user_id','o.actually_amount','o.logistics_status'
+//                        ],
+//                    ];
+//                    $orderInfo = $modelOrder->getInfo($config);
+//                    $res = $this->orderHandle($data,$orderInfo);
+//                    if($res['status']){
+//                        echo "success"; // 处理成功
+//                    }else{
+//                        echo "fail"; //验证失败
+//                    }
+//                }
+//                //修改支付订单支付状态
+//                if ($order_type == 'recharge') {
+//                    $this->rechargeHandle($data);
+//                }
+//
+//            }
+//
+//            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+//                //判断该笔订单是否在商户网站中已经做过处理
+//                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+//                //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+//                //如果有做过处理，不执行商户的业务程序
+//                //注意：
+//                //付款完成后，支付宝系统发送该交易状态通知
+//
+//
+//                if ($order_type == 'order') {
+//                    file_put_contents('ali5.text',json_encode($data));
+//                    $modelOrder = new \app\purchase\model\Order();
+//                    $config = [
+//                        'where' => [
+//                            ['o.status', '=', 0],
+//                            ['o.sn', '=', $data['order_sn']],
+//                        ],'field' => [
+//                            'o.id', 'o.sn', 'o.amount',
+//                            'o.user_id','o.actually_amount'
+//                        ],
+//                    ];
+//                    $orderInfo = $modelOrder->getInfo($config);
+//                    $res = $this->orderHandle($data,$orderInfo);
+//                    if(!$res['status']){
+//                        echo "fail";	//请不要修改或删除
+//                    }
+//                }
+//
+//                if ($order_type == 'recharge') {
+//                    $this->rechargeHandle($data);
+//                }
+//            }
+//            //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+//            echo "success";		//请不要修改或删除
+//
+//        }else {
+//            //验证失败
+//            echo "fail";	//请不要修改或删除
+//
+//        }
 
     }
 
@@ -348,8 +329,6 @@ class CallBack extends \common\controller\Base{
      */
 
     private function orderHandle($data,$orderInfo){
-        file_put_contents('b.text',$data);
-        file_put_contents('c.text',$orderInfo);
         $modelOrder = new \app\purchase\model\Order();
         $modelOrder->startTrans();
         //更新订单状态
@@ -362,7 +341,12 @@ class CallBack extends \common\controller\Base{
             ['user_id','=',$orderInfo['user_id']],
             ['sn','=',$data['order_sn']],
         ];
+        file_put_contents('data.text',json_encode($data));
+        file_put_contents('data2.text',json_encode($data2) );
+        file_put_contents('condition.text',json_encode($condition) );
+        file_put_contents('orderInfo.text',json_encode($orderInfo) );
         $returnData = $modelOrder->edit($data2,$condition);
+        file_put_contents('orderInfo.text',$modelOrder->getLastSql() );
         if (!$returnData['status']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
@@ -373,6 +357,29 @@ class CallBack extends \common\controller\Base{
         //返回状态给微信服务器
         return successMsg('成功');
 
+    }
+
+    public function a(){
+        /**
+         * [["user_id","=","69"],["sn","=","20181025164949095186472049520841"]]
+         */
+        /**
+         *data2 {"logistics_status":2,"payment_code":2,"pay_sn":"2018102522001447171006299074","payment_time":"2018-10-25 16:50:01"}
+        {"id":"536","sn":"20181025164949095186472049520841","amount":"0.01","user_id":"69","actually_amount":"0.01"}
+         */
+
+        $modelOrder = new \app\purchase\model\Order();
+        $data2['logistics_status'] = 2;
+        $data2['payment_code'] = 2;
+        $data2['pay_sn'] = "2018102522001447171006299074";
+        $data2['payment_time'] = "2018-10-25 16:50:01";
+
+        $condition = [
+            ['user_id','=',6],
+            ['sn','=','20181025143939925644161272041123'],
+        ];
+        $returnData = $modelOrder->edit($data2,$condition);
+        print_r($modelOrder->getLastSql());
     }
 
     /**充值支付回调
