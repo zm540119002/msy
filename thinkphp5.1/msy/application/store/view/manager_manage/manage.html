@@ -58,9 +58,7 @@
 		</div>
 		<p class="emp_account_tipc">线上店铺运营员工账号</p>
 		<ul class="list">
-			<li>
-				<span>暂无数据</span>
-			</li>
+			<li class="no-data"><span>暂无数据</span></li>
 		</ul>
 		<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
 	</form>
@@ -96,9 +94,7 @@
 		</div>
 		<p class="emp_account_tipc">门店运营员工账号</p>
 		<ul class="list">
-			<li>
-				<span>暂无数据</span>
-			</li>
+			<li class="no-data"><span>暂无数据</span></li>
 		</ul>
 		<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
 	</form>
@@ -197,8 +193,7 @@
 					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var postData={};
-					postData = $('.storeEmployeeForm').serializeObject();
+					var postData=$('.storeEmployeeForm').serializeObject();
 					var content='';
 					if(!postData.name){
 						content='请填写员工姓名';
@@ -217,10 +212,10 @@
 					 var config = {
 					 	url:controller + 'edit',
 					 	postData:postData,
-					 	index:index
+					 	index:index,
+					 	container:$('#storeEmployeeList').find('ul.list')
 					 };
 					 dialogFormAdd(config);
-					layer.close(index);
 				}
 			});
 		});
@@ -241,9 +236,8 @@
 					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
 				},
 				yes:function(index){
-					var postData={};
+					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
 					var content='';
-					postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
 					if(!postData.name){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -314,8 +308,7 @@
 					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var postData={};
-					postData = $('.storeEmployeeForm').serializeObject();
+					var postData=$('.storeEmployeeForm').serializeObject();
 					var content='';
 					if(!postData.name){
 						content='请填写员工姓名';
@@ -376,7 +369,7 @@
 					 	toObj:_this,
 					 	index:index
 					 };
-					 dialogFormEdit(config)
+					 dialogFormEdit(config);
 					layer.close(index);
 
 				}
