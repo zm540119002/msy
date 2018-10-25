@@ -21,7 +21,7 @@
 						<i class="default_tipc">默认</i>
 						{/if}
 					</div>
-					<p class=""><span class="area_address"></span>{$vo.detail_address}</p>
+					<p class=""><span class="area_address" id="{$vo.id}"></span>{$vo.detail_address}</p>
 					<input type="hidden" class="area-address-name" value="{$vo.district_address}" data-key="{$vo.district_address}">
 				</div>
 				<a href="javascript:void(0)" class="address_delete">删除</a>
@@ -41,18 +41,22 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$.each($('.delivery_address .item_info'),function(){
+		$('.delivery_address .item_info').each(function(index,val){
 			var _this=$(this);
 			var addressIndex=_this.find('.area-address-name').data('key');
+			console.log(addressIndex);
 			if(addressIndex){
-				console.log(_this);
+				
 				var areaAddressArr = addressIndex.split(',');
-				_this.parents('.item_addr').find('.area_address').setArea(areaAddressArr);
+				// console.log(_this.find('.area_address').attr('id'));
+				//console.log(areaAddressArr);
+				
+				_this.find('.area_address').setArea(areaAddressArr);
 			}
-			_this.on('click',function(){
-				_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-				return false;
-			})
+			// _this.on('click',function(){
+			// 	_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+			// 	return false;
+			// })
 		});
 
 		//新建地址
