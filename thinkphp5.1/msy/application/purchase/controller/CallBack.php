@@ -18,7 +18,6 @@ class CallBack extends \common\controller\Base{
         }
         //支付宝回调
         if (strpos($_SERVER['QUERY_STRING'], 'ali.order') == true) {
-            file_put_contents('ali.text',json_encode($_POST));
             $this->callBack('ali', 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'ali.recharge') == true) {
@@ -52,7 +51,6 @@ class CallBack extends \common\controller\Base{
             $this->weixinBack($order_type);
         }
         if ($payment_type == 'ali') {
-            file_put_contents('ali1.text',json_encode($_POST));
             $this->aliBack($order_type);
         }
         if ($payment_type = 'union') {
@@ -179,7 +177,7 @@ class CallBack extends \common\controller\Base{
 
     //支付宝支付回调处理
     private function aliBack($order_type){
-        file_put_contents('ali2.text',json_encode($_POST));
+        file_put_contents('ali.text',json_encode($_POST));
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
         $data = $_POST;
@@ -203,7 +201,7 @@ class CallBack extends \common\controller\Base{
 
 
             if ($order_type == 'order') {
-                file_put_contents('ali5.text', json_encode($data));
+                file_put_contents('ali1.text', json_encode($data));
                 $modelOrder = new \app\purchase\model\Order();
                 $config = [
                     'where' => [
