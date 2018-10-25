@@ -124,7 +124,7 @@
 					</form>
 				</section>
 				<!--门店经营地址-->
-				<section class="section_content" id="storeAddressList">
+				<section class="section_content" id="shopAddressList">
 					<ul class="list">
 						<li>
 							<img src="" alt="" class="left">
@@ -144,7 +144,7 @@
 					</ul>
 				</section>
 				<!--门店收货人地址手机-->
-				<section class="section_content" id="storeConsigneeList">
+				<section class="section_content" id="shopConsigneeList">
 					<ul class="list">
 						<li>
 							<img src="" alt="" class="left">
@@ -170,8 +170,6 @@
 <script type="text/javascript">
 	$(function(){
 		//初始化
-		// var storeEmployeeList=$('#storeEmployeeList').html();
-		// $('.content_main').empty().append(storeEmployeeList);
 		$('.content_main .section_content').eq(0).show();
 		
 		//新增线上店铺员工账号
@@ -457,11 +455,11 @@
 					break;
 				case 3:
 					$('.section_content').siblings().hide();
-					$('.content_main').find('#storeAddressList').show();
+					$('.content_main').find('#shopAddressList').show();
 					break;
 				case 4:
 					$('.section_content').siblings().hide();
-					$('.content_main').find('#storeConsigneeList').show();
+					$('.content_main').find('#shopConsigneeList').show();
 			}
 		})
 	});

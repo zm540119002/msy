@@ -1,7 +1,7 @@
 <?php
 namespace app\store\model;
 
-class Manager extends \common\model\Base {
+class ManagerManageManage extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
 	// 设置主键
@@ -45,7 +45,7 @@ class Manager extends \common\model\Base {
 				$userId = $this->getAttr('id');
 			}
 			//验证用户是否为管理员
-			$userFactoryId = $this->checkManager($userId,$factoryId);
+			$userFactoryId = $this->checkManagerManage($userId,$factoryId);
 			if(!$userFactoryId){//不是管理员
 				$postData['type'] = 2;
 				$postData['user_id'] = $userId;
@@ -117,7 +117,7 @@ class Manager extends \common\model\Base {
 
 	/**检查管理员账号
 	 */
-	private function checkManager($userId,$factoryId){
+	private function checkManagerManage($userId,$factoryId){
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['user_id','=',$userId],
