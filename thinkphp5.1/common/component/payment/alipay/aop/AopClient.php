@@ -589,6 +589,7 @@ class AopClient {
 	function verify($data, $sign, $rsaPublicKeyFilePath, $signType = 'RSA') {
 
 		if($this->checkEmpty($this->alipayPublicKey)){
+
 			$pubKey= $this->alipayrsaPublicKey;
 			$res = "-----BEGIN PUBLIC KEY-----\n" .
 				wordwrap($pubKey, 64, "\n", true) .
@@ -605,16 +606,7 @@ class AopClient {
 		//调用openssl内置方法验签，返回bool值
 
 		if ("RSA2" == $signType) {
-			print_r($data);
-
-			echo "-----------------------------------------------------------------";
-			echo PHP_EOL;
-			print_r($sign);
-			echo "-----------------------------------------------------------------";
-			echo PHP_EOL;
-			echo $res;
 			$result = (bool)openssl_verify($data, base64_decode($sign), $res, OPENSSL_ALGO_SHA256);
-			print_r($result);exit;
 		} else {
 			$result = (bool)openssl_verify($data, base64_decode($sign), $res);
 		}
