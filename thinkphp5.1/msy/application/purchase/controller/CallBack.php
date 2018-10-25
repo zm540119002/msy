@@ -181,15 +181,15 @@ class CallBack extends \common\controller\Base{
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
         $data = $_POST;
-        $data['payment_code'] = 2; //支付类型
-        $data['order_sn'] = $data['out_trade_no'];//系统的订单号
-        $data['actually_amount'] =  $data['receipt_amount'];//支付金额
-        $data['pay_sn'] = $data['trade_no'];//服务商返回的交易号
-        $data['payment_time'] = $data['gmt_close'];//支付时间
+        $payInfo['payment_code'] = 2; //支付类型
+        $payInfo['order_sn'] = $data['out_trade_no'];//系统的订单号
+        $payInfo['actually_amount'] =  $data['receipt_amount'];//支付金额
+        $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
+        $payInfo['payment_time'] = $data['gmt_payment'];//支付时间
 
         $alipaySevice = new \AlipayTradeService($config);
         $alipaySevice->writeLog(var_export($_POST,true));
-        $result = $alipaySevice->check($data);
+        $result = $alipaySevice->check($_POST);
 
         if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
             //判断该笔订单是否在商户网站中已经做过处理
@@ -206,14 +206,14 @@ class CallBack extends \common\controller\Base{
                 $config = [
                     'where' => [
                         ['o.status', '=', 0],
-                        ['o.sn', '=', $data['order_sn']],
+                        ['o.sn', '=', $payInfo['order_sn']],
                     ], 'field' => [
                         'o.id', 'o.sn', 'o.amount',
                         'o.user_id', 'o.actually_amount'
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
-                $res = $this->orderHandle($data, $orderInfo);
+                $res = $this->orderHandle($payInfo, $orderInfo);
                 if (!$res['status']) {
                     echo "fail";    //请不要修改或删除
                 }else{
