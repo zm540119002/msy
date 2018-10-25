@@ -151,7 +151,7 @@ class CallBack extends \common\controller\Base{
                             ['o.sn', '=', $data['order_sn']],
                         ],'field' => [
                             'o.id', 'o.sn', 'o.amount',
-                            'o.user_id','o.actually_amount'
+                            'o.user_id','o.actually_amount','o.logistics_status'
                         ],
                     ];
                     $orderInfo = $modelOrder->getInfo($config);
@@ -186,7 +186,6 @@ class CallBack extends \common\controller\Base{
         $data['payment_code'] = 2; //支付类型
         $data['order_sn'] = $data['out_trade_no'];//系统的订单号
         $data['actually_amount'] =  $data['receipt_amount'];//支付金额
-//        $data['actually_amount'] =  $data['total_amount'];//支付金额
         $data['pay_sn'] = $data['trade_no'];//服务商返回的交易号
         $data['payment_time'] = $data['gmt_close'];//支付时间
 
@@ -202,11 +201,8 @@ class CallBack extends \common\controller\Base{
         */
         if($result) {//验证成功
             file_put_contents('ali2.text',json_encode($data));
-
-
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代
-
 
             //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
 
@@ -234,7 +230,7 @@ class CallBack extends \common\controller\Base{
                             ['o.sn', '=', $data['order_sn']],
                         ],'field' => [
                             'o.id', 'o.sn', 'o.amount',
-                            'o.user_id','o.actually_amount'
+                            'o.user_id','o.actually_amount','o.logistics_status'
                         ],
                     ];
                     $orderInfo = $modelOrder->getInfo($config);
