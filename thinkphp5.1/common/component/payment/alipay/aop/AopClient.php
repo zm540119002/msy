@@ -575,6 +575,7 @@ class AopClient {
 	 *  公钥是否是读取字符串还是读取文件，是根据初始化传入的值判断的。
 	 **/
 	public function rsaCheckV1($params, $rsaPublicKeyFilePath,$signType='RSA') {
+	echo $rsaPublicKeyFilePath;
 		$sign = $params['sign'];
 		$params['sign_type'] = null;
 		$params['sign'] = null;
@@ -597,6 +598,7 @@ class AopClient {
 		}else {
 			//读取公钥文件
 			$pubKey = file_get_contents($rsaPublicKeyFilePath);
+			echo $pubKey;
 			//转换为openssl格式密钥
 			$res = openssl_get_publickey($pubKey);
 		}

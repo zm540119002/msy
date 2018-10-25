@@ -200,7 +200,7 @@ class CallBack extends \common\controller\Base{
         4、验证app_id是否为该商户本身。
         */
         if($result) {//验证成功
-            file_put_contents('ali2.text',json_encode($data));
+            file_put_contents('ali3.text',json_encode($data));
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代
 
@@ -222,7 +222,7 @@ class CallBack extends \common\controller\Base{
 
                 // 修改订单支付状态
                 if ($order_type == 'order') {
-                    file_put_contents('ali3.text',json_encode($data));
+                    file_put_contents('ali4.text',json_encode($data));
                     $modelOrder = new \app\purchase\model\Order();
                     $config = [
                         'where' => [
@@ -260,7 +260,7 @@ class CallBack extends \common\controller\Base{
                 }
                 if ($order_type == 'order') {
                     if ($order_type == 'order') {
-                        file_put_contents('ali4.text',json_encode($data));
+                        file_put_contents('ali5.text',json_encode($data));
                         $modelOrder = new \app\purchase\model\Order();
                         $config = [
                             'where' => [
