@@ -3266,7 +3266,9 @@ input[type=text]::-webkit-focus-inner {
     padding:0.16rem 0.12rem;
     border-bottom:1px solid #d9d9d9;
 }
-.top_empy_nav.hide,.content_main.hide{
+.top_empy_nav.hide,
+.content_main.hide,
+.content_main .section_content{
     display: none;
 }
 .top_empy_nav.i_flex{

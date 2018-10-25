@@ -633,7 +633,7 @@ $(function() {
 	$.fn.extend({
 		getArea:areaObject.getArea,
         setArea:function (options) {
-			console.log(options);
+			//console.log(options);
             var address = areaObject.setArea(options);
             $(this).text(address);
         }
