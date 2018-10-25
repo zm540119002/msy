@@ -342,6 +342,7 @@ class CallBack extends \common\controller\Base{
             ['sn','=',$data['order_sn']],
         ];
         $returnData = $modelOrder->edit($data2,$condition);
+        file_put_contents('1111111111.text',$modelOrder->getLastSql() );
         if (!$returnData['status']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
