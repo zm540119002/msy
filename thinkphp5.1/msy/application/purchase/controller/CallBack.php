@@ -358,6 +358,28 @@ class CallBack extends \common\controller\Base{
 
     }
 
+    public function a(){
+        /**
+         * [["user_id","=","69"],["sn","=","20181025164949095186472049520841"]]
+         */
+        /**
+         *data2 {"logistics_status":2,"payment_code":2,"pay_sn":"2018102522001447171006299074","payment_time":"2018-10-25 16:50:01"}
+        {"id":"536","sn":"20181025164949095186472049520841","amount":"0.01","user_id":"69","actually_amount":"0.01"}
+         */
+        $modelOrder = new \app\purchase\model\Order();
+        $data2['logistics_status'] = 2;
+        $data2['payment_code'] = 2;
+        $data2['pay_sn'] = "2018102522001447171006299074";
+        $data2['payment_time'] = "2018-10-25 16:50:01";
+
+        $condition = [
+            ['user_id','=',69],
+            ['sn','=','20181025164949095186472049520841'],
+        ];
+        $returnData = $modelOrder->edit($data2,$condition);
+        print_r($modelOrder->getLastSql());
+    }
+
     /**充值支付回调
      * @param $parameter
      */
