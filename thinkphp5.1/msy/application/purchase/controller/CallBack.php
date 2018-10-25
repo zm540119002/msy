@@ -125,9 +125,33 @@ class CallBack extends \common\controller\Base{
     }
 
     public function a(){
-        $data =[
-            ''
-        ];
+        /**
+         * <xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
+        <attach><![CDATA[weixin]]></attach>
+        <bank_type><![CDATA[HXB_CREDIT]]></bank_type>
+        <cash_fee><![CDATA[1]]></cash_fee>
+        <fee_type><![CDATA[CNY]]></fee_type>
+        <is_subscribe><![CDATA[Y]]></is_subscribe>
+        <mch_id><![CDATA[1234887902]]></mch_id>
+        <nonce_str><![CDATA[3qufclfhucrjfvjro5rvgljklfjzmmsi]]></nonce_str>
+        <openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
+        <out_trade_no><![CDATA[20181025135110255767457536540661]]></out_trade_no>
+        <result_code><![CDATA[SUCCESS]]></result_code>
+        <return_code><![CDATA[SUCCESS]]></return_code>
+        <sign><![CDATA[A45CFFE9E8ADDB2CB45F89F56F34CA27]]></sign>
+        <time_end><![CDATA[20181025135125]]></time_end>
+        <total_fee>1</total_fee>
+        <trade_type><![CDATA[NATIVE]]></trade_type>
+        <transaction_id><![CDATA[4200000233201810255306585263]]></transaction_id>
+        </xml>
+
+         */
+        $data['payment_code'] = 1;
+        $data['actually_amount'] = 1;//支付金额
+        $data['pay_sn'] = '4200000233201810255306585263';//服务商返回的交易号
+        $data['order_sn'] = '20181025135110255767457536540661';//系统的订单号
+        $data['payment_time'] = '20181025135125';//支付时间
+
         $modelOrder = new \app\purchase\model\Order();
         $config = [
             'where' => [
@@ -320,7 +344,8 @@ class CallBack extends \common\controller\Base{
      */
 
     private function orderHandle($data,$orderInfo){
-        echo 5;exit;
+        file_put_contents('b.text',$data);
+        file_put_contents('c.text',$orderInfo);
         $modelOrder = new \app\purchase\model\Order();
         $modelOrder->startTrans();
         //更新订单状态
@@ -333,9 +358,7 @@ class CallBack extends \common\controller\Base{
             ['user_id','=',$orderInfo['user_id']],
             ['sn','=',$data['order_sn']],
         ];
-        file_put_contents('a.txt',$data2);
         $returnData = $modelOrder->edit($data2,$condition);
-        file_put_contents('a.txt',$modelOrder->getLastSql());
         if (!$returnData['status']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
