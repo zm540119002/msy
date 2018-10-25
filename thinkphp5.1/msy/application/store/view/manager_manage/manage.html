@@ -408,10 +408,14 @@
 			$(this).find('.operate-btn').show();
 			$(this).siblings().find('.operate-btn').hide();
 		});
-		//选择授权设置样式
-		$('body').on('click','.employeeAccountLayer li',function(){
+		//岗位职务设置样式
+		$('body').on('click','.post_position li',function(){
 			$(this).addClass('current').siblings().removeClass('current');
 		});
+		//账号授权设置样式
+		$('body').on('click','.account_authorization li',function(){
+			$(this).toggleClass('current');
+		})
 		//选择店铺样式
 		$('body').on('click','.storeShopListLayer li',function(){
 			$(this).parents('.store_list').find('li').removeClass('current');
