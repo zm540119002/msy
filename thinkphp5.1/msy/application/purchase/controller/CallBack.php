@@ -341,7 +341,8 @@ class CallBack extends \common\controller\Base{
             ['user_id','=',$orderInfo['user_id']],
             ['sn','=',$data['order_sn']],
         ];
-        file_put_contents('1111111111.text',$modelOrder->getLastSql() );
+        file_put_contents('data2.text',json_encode($data2) );
+        file_put_contents('condition.text',json_encode($condition) );
         $returnData = $modelOrder->edit($data2,$condition);
 
         if (!$returnData['status']) {
