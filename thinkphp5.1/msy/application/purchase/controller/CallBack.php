@@ -94,6 +94,8 @@ class CallBack extends \common\controller\Base{
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
+                file_put_contents('a1.text',$data);
+                file_put_contents('a2.text',$data);
                 $res = $this->orderHandle($data,$orderInfo);
                 if($res['status']){
                     $this->successReturn();
