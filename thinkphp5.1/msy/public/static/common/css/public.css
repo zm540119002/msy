@@ -3470,7 +3470,7 @@ input[type=text]::-webkit-focus-inner {
 .item_addr.active .ia-l{
     height: .875em;
     float: left;
-    background: url(../../img/home/Selected.png) no-repeat;
+    background: url(../../common/img/icons/Selected.png) no-repeat;
     background-size: 1.25em;
     margin: 1.475em 0 0 0;
     width: 30px;
