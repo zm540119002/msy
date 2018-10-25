@@ -13,6 +13,7 @@ class Address extends \common\controller\UserBase {
                 //修改
                 $addressId = input('post.address_id');
                 $condition = [
+                    ['status','=',0],
                     ['id','=',$addressId],
                     ['user_id','=',$userId],
                 ];
@@ -24,6 +25,7 @@ class Address extends \common\controller\UserBase {
                 //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
                     $where = [
+                        ['status','=',0],
                         ['id',"<>",$addressId],
                         ['user_id','=',$userId],
                     ];
@@ -39,6 +41,7 @@ class Address extends \common\controller\UserBase {
                 //增加
                 $config = [
                     'where'=>[
+                        ['status','=',0],
                         ['user_id','=',$userId]
                     ],
                 ];
@@ -57,6 +60,7 @@ class Address extends \common\controller\UserBase {
                 //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
                     $where = [
+                        ['status','=',0],
                         ['id',"<>",$addressId],
                         ['user_id','=',$userId],
                     ];
@@ -76,6 +80,7 @@ class Address extends \common\controller\UserBase {
             $id = input('address_id');
             $config = [
                 'where' => [
+                    ['status','=',0],
                     ['id','=',$id],
                     ['user_id','=',$userId],
                 ],
@@ -91,10 +96,11 @@ class Address extends \common\controller\UserBase {
     }
 
     //地址列表
-    public function getList(){
+    public function manage(){
         $model = new \common\model\Address();
         $config = [
             'where'=>[
+                ['status','=',0],
                 ['user_id','=',$this->user['id']]
             ],
         ];
@@ -107,17 +113,22 @@ class Address extends \common\controller\UserBase {
 
     //删除地址
     public function del(){
-        if(IS_POST){
-            $model = new \common\model\Address();
-            $where['user_id'] =$this->user['id'];
-            $where['id'] = $_POST['addressId'];
-            $result = $model -> del($where);
-            if($result['status']){
-                return successMsg('删除成功');
-            }else{
-                return errorMsg('删除失败');
-            }
+        if(!request()->isAjax()){
+            return errorMsg(config('custom.not_ajax'));
         }
+        $id = input('post.address_id',0,'int');
+        $model = new \common\model\Address();
+        $condition = [
+            ['user_id','=',$this->user['id']],
+            ['id','=',$id],
+        ];
+        $result = $model -> del($condition);
+        if($result['status']){
+            return successMsg('删除成功');
+        }else{
+            return errorMsg('删除失败');
+        }
+
     }
 
 }

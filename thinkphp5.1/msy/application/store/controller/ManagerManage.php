@@ -56,6 +56,7 @@ class ManagerManage extends \common\controller\UserBase{
      */
     public function edit(){
         if(request()->isAjax()){
+            return 123;
             $modelManagerManage = new \app\store\model\ManagerManage();
             $info = $modelManagerManage->edit($this->user['id'],$this->user['type']);
             if($info['status']==0){
@@ -71,6 +72,7 @@ class ManagerManage extends \common\controller\UserBase{
      */
     public function del(){
         if(request()->isAjax()){
+            return 123;
             $modelManagerManage = new \app\store\model\ManagerManage();
             return $modelManagerManage->del($this->user['id']);
         }
