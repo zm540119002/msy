@@ -51,7 +51,6 @@ class Payment extends \common\controller\UserBase{
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
         $arr = $_GET;
-        print_r($arr);exit;
         $alipaySevice = new \AlipayTradeService($config);
         $result = $alipaySevice->check($arr);
         print_r($result);exit;
