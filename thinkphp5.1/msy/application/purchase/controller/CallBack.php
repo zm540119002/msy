@@ -186,6 +186,8 @@ class CallBack extends \common\controller\Base{
         $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
         $payInfo['payment_time'] = $data['gmt_payment'];//支付时间
 
+        file_put_contents('22222222.text',$payInfo);
+
         $alipaySevice = new \AlipayTradeService($config);
         $alipaySevice->writeLog(var_export($_POST,true));
         $result = $alipaySevice->check($_POST);
