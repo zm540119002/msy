@@ -70,14 +70,14 @@
 			var addressId = $(this).find('.addressId').val();
 			var orderId = $(this).parents().find('.orderid').val();
 			if(orderId){
-				location.href = module + '/Order/orderDetail/order_id/'+orderId+'/address_id/'+addressId;
+				location.href = module + 'Order/orderDetail/order_id/'+orderId+'/address_id/'+addressId;
 			}
 		});
 
 		//修改地址
 		$('body').on('click','.address_edit',function () {
 			var addressId = $(this).parent().find('.address_id').val();
-			var url = controller + '/edit/address_id/'+addressId;
+			var url = controller + 'edit/address_id/'+addressId;
 			var orderId = $(this).parents().find('.orderid').val();
 			if(orderId){
 				url += '/order_id/'+orderId;
