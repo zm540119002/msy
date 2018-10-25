@@ -41,28 +41,24 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var areaAddressArr=[];
+		var addressArr=[];
 		$('.delivery_address .item_info').each(function(index,val){
 			var _this=$(this);
 			var addressIndex=_this.find('.area-address-name').data('key');
-			console.log(typeof addressIndex);
-			if(addressIndex instanceof string){
-				
-				areaAddressArr = addressIndex.split(',');
-				// console.log(_this.find('.area_address').attr('id'));
-				
-				
-				_this.find('.area_address').setArea(areaAddressArr);
-				console.log(areaAddressArr);
-
+			if(addressIndex){
+				var areaAddressArr = addressIndex.split(',');
+				addressArr.push(areaAddressArr);
 			}
-			console.log(2);
-			areaAddressArr=[];
-			// _this.on('click',function(){
-			// 	_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-			// 	return false;
-			// })
+			_this.on('click',function(){
+				_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+				return false;
+			})
 		});
+		for(let i=0;i<addressArr.length;i++){
+            setTimeout(function(){
+                $('.area_address').eq(i).setArea(addressArr[i]);
+            },100)
+        }
 
 		//新建地址
 		$('body').on('click','.address_create',function () {
