@@ -18,6 +18,7 @@ class CallBack extends \common\controller\Base{
         }
         //支付宝回调
         if (strpos($_SERVER['QUERY_STRING'], 'ali.order') == true) {
+            file_put_contents('ali.text',json_encode($_POST));
             $this->callBack('ali', 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'ali.recharge') == true) {
@@ -51,6 +52,7 @@ class CallBack extends \common\controller\Base{
             $this->weixinBack($order_type);
         }
         if ($payment_type == 'ali') {
+            file_put_contents('ali1.text',json_encode($_POST));
             $this->aliBack($order_type);
         }
         if ($payment_type = 'union') {
@@ -66,7 +68,7 @@ class CallBack extends \common\controller\Base{
         //sign不参与签名算法
         unset($data['sign']);
         $sign = $this->makeSign($data);
-        $data['payment_code'] = 1;
+        $data['payment_code'] = 1;//weixin 支付
         $data['actually_amount'] =  $data['total_fee'];//支付金额
         $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
         $data['order_sn'] = $data['out_trade_no'];//系统的订单号
@@ -75,7 +77,6 @@ class CallBack extends \common\controller\Base{
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             if ($order_type == 'order') {
-                file_put_contents('a.text',$xml);
                 $modelOrder = new \app\purchase\model\Order();
                 $config = [
                     'where' => [
@@ -87,17 +88,13 @@ class CallBack extends \common\controller\Base{
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
-                file_put_contents('a1.text',$data);
                 if ($orderInfo['logistics_status'] > 1) {
-                    file_put_contents('a2.text',$data);
                     return successMsg('已回调过，订单已处理');
                 }
                 if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
-                file_put_contents('a3.text',$data);
-                file_put_contents('a4.text',$data);
                 $res = $this->orderHandle($data,$orderInfo);
                 if($res['status']){
                     $this->successReturn();
@@ -128,59 +125,6 @@ class CallBack extends \common\controller\Base{
         }
     }
 
-    public function a(){
-        /**
-         * <xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
-        <attach><![CDATA[weixin]]></attach>
-        <bank_type><![CDATA[HXB_CREDIT]]></bank_type>
-        <cash_fee><![CDATA[1]]></cash_fee>
-        <fee_type><![CDATA[CNY]]></fee_type>
-        <is_subscribe><![CDATA[Y]]></is_subscribe>
-        <mch_id><![CDATA[1234887902]]></mch_id>
-        <nonce_str><![CDATA[3qufclfhucrjfvjro5rvgljklfjzmmsi]]></nonce_str>
-        <openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
-        <out_trade_no><![CDATA[20181025135110255767457536540661]]></out_trade_no>
-        <result_code><![CDATA[SUCCESS]]></result_code>
-        <return_code><![CDATA[SUCCESS]]></return_code>
-        <sign><![CDATA[A45CFFE9E8ADDB2CB45F89F56F34CA27]]></sign>
-        <time_end><![CDATA[20181025135125]]></time_end>
-        <total_fee>1</total_fee>
-        <trade_type><![CDATA[NATIVE]]></trade_type>
-        <transaction_id><![CDATA[4200000233201810255306585263]]></transaction_id>
-        </xml>
-
-         */
-        $data['payment_code'] = 1;
-        $data['actually_amount'] = 1;//支付金额
-        $data['pay_sn'] = '4200000233201810255306585263';//服务商返回的交易号
-        $data['order_sn'] = '20181025135110255767457536540661';//系统的订单号
-        $data['payment_time'] = '20181025135125';//支付时间
-
-        $modelOrder = new \app\purchase\model\Order();
-        $config = [
-            'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $data['order_sn']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id','o.actually_amount'
-            ],
-        ];
-        $orderInfo = $modelOrder->getInfo($config);
-        if ($orderInfo['logistics_status'] > 1) {
-            return successMsg('已回调过，订单已处理');
-        }
-        if ($orderInfo['actually_amount'] * 100 != $data['actually_amount']) {//校验返回的订单金额是否与商户侧的订单金额一致
-            //返回状态给微信服务器
-            return errorMsg('回调的金额和订单的金额不符，终止购买');
-        }
-        $res = $this->orderHandle($data,$orderInfo);
-        if($res['status']){
-            $this->successReturn();
-        }else{
-            $this->errorReturn();
-        }
-    }
 
     //银联支付回调处理
     private function unionBack($order_type){
@@ -235,6 +179,7 @@ class CallBack extends \common\controller\Base{
 
     //支付宝支付回调处理
     private function aliBack($order_type){
+        file_put_contents('ali2.text',json_encode($_POST));
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
         require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
         $data = $_POST;
@@ -256,6 +201,9 @@ class CallBack extends \common\controller\Base{
         4、验证app_id是否为该商户本身。
         */
         if($result) {//验证成功
+            file_put_contents('ali2.text',json_encode($data));
+
+
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代
 
@@ -277,10 +225,8 @@ class CallBack extends \common\controller\Base{
                 //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 
                 // 修改订单支付状态
-                if ($order_type == 'recharge') {
-                    $this->rechargeHandle($data);
-                }
                 if ($order_type == 'order') {
+                    file_put_contents('ali3.text',json_encode($data));
                     $modelOrder = new \app\purchase\model\Order();
                     $config = [
                         'where' => [
@@ -293,10 +239,17 @@ class CallBack extends \common\controller\Base{
                     ];
                     $orderInfo = $modelOrder->getInfo($config);
                     $res = $this->orderHandle($data,$orderInfo);
-                    if(!$res['status']){
-                        echo "fail";	//请不要修改或删除
+                    if($res['status']){
+                        echo "success"; // 处理成功
+                    }else{
+                        echo "fail"; //验证失败
                     }
                 }
+                //修改支付订单支付状态
+                if ($order_type == 'recharge') {
+                    $this->rechargeHandle($data);
+                }
+
             }
             else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
                 //判断该笔订单是否在商户网站中已经做过处理
@@ -311,6 +264,7 @@ class CallBack extends \common\controller\Base{
                 }
                 if ($order_type == 'order') {
                     if ($order_type == 'order') {
+                        file_put_contents('ali4.text',json_encode($data));
                         $modelOrder = new \app\purchase\model\Order();
                         $config = [
                             'where' => [
@@ -331,7 +285,6 @@ class CallBack extends \common\controller\Base{
                 }
             }
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-
             echo "success";		//请不要修改或删除
 
         }else {
@@ -348,8 +301,6 @@ class CallBack extends \common\controller\Base{
      */
 
     private function orderHandle($data,$orderInfo){
-        file_put_contents('b.text',$data);
-        file_put_contents('c.text',$orderInfo);
         $modelOrder = new \app\purchase\model\Order();
         $modelOrder->startTrans();
         //更新订单状态
