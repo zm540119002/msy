@@ -341,8 +341,12 @@ class CallBack extends \common\controller\Base{
             ['user_id','=',$orderInfo['user_id']],
             ['sn','=',$data['order_sn']],
         ];
+        file_put_contents('data.text',json_encode($data));
+        file_put_contents('data2.text',json_encode($data2) );
+        file_put_contents('condition.text',json_encode($condition) );
+        file_put_contents('orderInfo.text',json_encode($orderInfo) );
         $returnData = $modelOrder->edit($data2,$condition);
-
+        file_put_contents('orderInfo.text',$modelOrder->getLastSql() );
         if (!$returnData['status']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
@@ -363,6 +367,7 @@ class CallBack extends \common\controller\Base{
          *data2 {"logistics_status":2,"payment_code":2,"pay_sn":"2018102522001447171006299074","payment_time":"2018-10-25 16:50:01"}
         {"id":"536","sn":"20181025164949095186472049520841","amount":"0.01","user_id":"69","actually_amount":"0.01"}
          */
+
         $modelOrder = new \app\purchase\model\Order();
         $data2['logistics_status'] = 2;
         $data2['payment_code'] = 2;
@@ -374,7 +379,6 @@ class CallBack extends \common\controller\Base{
             ['sn','=','20181025143939925644161272041123'],
         ];
         $returnData = $modelOrder->edit($data2,$condition);
-        print_r($returnData);
         print_r($modelOrder->getLastSql());
     }
 
