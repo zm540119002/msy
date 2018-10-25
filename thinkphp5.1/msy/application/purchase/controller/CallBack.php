@@ -75,7 +75,7 @@ class CallBack extends \common\controller\Base{
         // 判断签名是否正确  判断支付状态
         if ($sign === $data_sign && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
             if ($order_type == 'order') {
-                file_put_contents('.text',$data);
+                file_put_contents('a.text',$data);
                 $modelOrder = new \app\purchase\model\Order();
                 $config = [
                     'where' => [
