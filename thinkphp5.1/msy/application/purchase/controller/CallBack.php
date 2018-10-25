@@ -343,6 +343,7 @@ class CallBack extends \common\controller\Base{
         ];
         file_put_contents('data2.text',json_encode($data2) );
         file_put_contents('condition.text',json_encode($condition) );
+        file_put_contents('orderInfo.text',json_encode($orderInfo) );
         $returnData = $modelOrder->edit($data2,$condition);
 
         if (!$returnData['status']) {
