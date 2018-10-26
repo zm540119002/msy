@@ -12,14 +12,14 @@ class ManagerManage extends \common\model\Base {
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function edit($factoryId,$factoryType){
-		if(!intval($factoryId)){
-			return errorMsg('缺少采购商ID');
+	public function storeEmployeeEdit($storeId){
+		if(!intval($storeId)){
+			return errorMsg('缺少店铺ID');
 		}
 		$postData = input('post.');
 		//用户数据验证
 		$validateUser = new \common\validate\User();
-		if(!$validateUser->scene('manager')->check($postData)){
+		if(!$validateUser->scene('employee')->check($postData)){
 			return errorMsg($validateUser->getError());
 		}
 		if($postData['id'] && intval($postData['id'])){//修改
@@ -34,7 +34,6 @@ class ManagerManage extends \common\model\Base {
 			$this->startTrans();//事务开启
 			if(!$userId){//不存在
 				unset($postData['id']);
-				$postData['type'] = 1;
 				$postData['nickname'] = trim($postData['name']);
 				$postData['create_time'] = time();
 				$res = $this->isUpdate(false)->save($postData);
@@ -44,87 +43,86 @@ class ManagerManage extends \common\model\Base {
 				}
 				$userId = $this->getAttr('id');
 			}
-			//验证用户是否为管理员
-			$userFactoryId = $this->checkManagerManage($userId,$factoryId);
-			if(!$userFactoryId){//不是管理员
+			//检查员工是否存在
+			$userStoreId = $this->_checkEmployeeExist($userId,$storeId);
+			if(!$userStoreId){//不是管理员
 				$postData['type'] = 2;
 				$postData['user_id'] = $userId;
-				$postData['factory_id'] = $factoryId;
-				$postData['factory_type'] = $factoryType;
-				$modelUserFactory = new \common\model\UserFactory();
-				$res = $modelUserFactory->isUpdate(false)->save($postData);
+				$postData['store_id'] = $storeId;
+				$modelUserStore = new \common\model\UserStore();
+				$res = $modelUserStore->isUpdate(false)->save($postData);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$this->getError());
 				}
-				$userFactoryId = $modelUserFactory->getAttr('id');
+				$userStoreId = $modelUserStore->getAttr('id');
 			}
 			$this->commit();//事务提交
 			$postData['id'] = $userId;
-			$postData['user_factory_id'] = $userFactoryId;
+			$postData['user_store_id'] = $userStoreId;
 		}
 		return successMsg('成功！',$postData);
 	}
 
 	//列表
-	public function getList($factoryId){
-		$modelUserFactory = new \common\model\UserFactory();
+	public function getList($storeId){
+		$modelUserStore = new \common\model\UserStore();
 		$where = [
-			['uf.factory_id','=',$factoryId],
+			['uf.store_id','=',$storeId],
 			['uf.status','=',0],
 			['uf.type','=',2],
 			['u.status','=',0],
 		];
 		$field = [
 			'u.id','u.name','u.mobile_phone',
-			'uf.id user_factory_id',
+			'uf.id user_store_id',
 		];
 		$join = [
 			['user u','u.id = uf.user_id','left'],
 		];
-		$list = $modelUserFactory->alias('uf')->field($field)->join($join)->where($where)->select();
+		$list = $modelUserStore->alias('uf')->field($field)->join($join)->where($where)->select();
 		return count($list)!=0?$list->toArray():[];
 	}
 
 	//删除
-	public function del($factoryId,$tag=true){
+	public function del($storeId,$tag=true){
 		$id = input('post.id',0);
 		if(!$id){
 			return errorMsg('参数错误');
 		}
-		$userFactoryId = input('post.userFactoryId',0);
-		if(!$userFactoryId){
+		$userStoreId = input('post.userStoreId',0);
+		if(!$userStoreId){
 			return errorMsg('参数错误');
 		}
 		$where = [
 			['user_id', '=', $id],
-			['id', '=', $userFactoryId],
-			['factory_id', '=', $factoryId],
+			['id', '=', $userStoreId],
+			['store_id', '=', $storeId],
 			['status', '=', 0],
 			['type', '=', 2],
 		];
-		$modelUserFactory = new \common\model\UserFactory();
+		$modelUserStore = new \common\model\UserStore();
 		if($tag){//标记删除
-			$result = $modelUserFactory->where($where)->setField('status',2);
+			$result = $modelUserStore->where($where)->setField('status',2);
 		}else{
-			$result = $modelUserFactory->where($where)->delete();
+			$result = $modelUserStore->where($where)->delete();
 		}
 		if(!$result){
-			return errorMsg('失败',$modelUserFactory->getError());
+			return errorMsg('失败',$modelUserStore->getError());
 		}
 		return successMsg('成功');
 	}
 
-	/**检查管理员账号
+	/**检查员工是否存在
 	 */
-	private function checkManagerManage($userId,$factoryId){
-		$modelUserFactory = new \common\model\UserFactory();
+	private function _checkEmployeeExist($userId,$storeId){
+		$modelUserStore = new \common\model\UserStore();
 		$where = [
 			['user_id','=',$userId],
-			['factory_id','=',$factoryId],
+			['store_id','=',$storeId],
 			['status','<>',2],
 			['type','=',2],
 		];
-		return $modelUserFactory->where($where)->value('id');
+		return $modelUserStore->where($where)->value('id');
 	}
 }

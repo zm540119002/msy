@@ -52,13 +52,15 @@ class ManagerManage extends \common\controller\UserBase{
         }
     }
 
-    /**编辑管理员
+    /**店铺员工-编辑
      */
-    public function edit(){
+    public function storeEmployeeEdit(){
+        if(!$this->_store){
+            return errorMsg('请选择店铺！');
+        }
         if(request()->isAjax()){
-            return 123;
             $modelManagerManage = new \app\store\model\ManagerManage();
-            $info = $modelManagerManage->edit($this->user['id'],$this->user['type']);
+            $info = $modelManagerManage->storeEmployeeEdit($this->_store['id']);
             if($info['status']==0){
                 return $info;
             }else{
