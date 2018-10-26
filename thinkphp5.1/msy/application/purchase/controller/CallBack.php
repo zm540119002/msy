@@ -400,10 +400,11 @@ class CallBack extends \common\controller\Base{
     }
 
     public function a(){
-        $orderSn = '';
-        $sn = '20181025164509165439423886370387';
+        $orderInfo = [
+            'sn'=>'20181025164509165439423886370387'
+        ];
         $model = new \common\component\payment\alipay\alipay;
-        $res = $model->orderQuery($orderSn,$sn);
+        $res = $model->orderQuery($orderInfo);
         print_r($res);
 
     }

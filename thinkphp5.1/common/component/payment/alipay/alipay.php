@@ -54,20 +54,15 @@ class alipay
      * @param $orderInfo ///订单详情
      * @return bool|\SimpleXMLElement[]|string|\//提交表单HTML文本
      */
-    /**
-     * @param $trade_no 商户订单号
-     * @param $out_trade_no 支付宝交易号
-     * @return bool|\SimpleXMLElement[]|string|\提交表单HTML文本
-     */
-    public function orderQuery($trade_no,$out_trade_no){
-        if (!empty($trade_no) || !empty($out_trade_no)){
+    public function orderQuery($orderInfo){
+        if (!empty($orderInfo['sn']) || !empty($orderInfo['pay_sn'])){
 
             //商户订单号和支付宝交易号不能同时为空。 trade_no、  out_trade_no如果同时存在优先取trade_no
             //商户订单号，和支付宝交易号二选一
-            $out_trade_no = trim($trade_no);
+            $out_trade_no = trim($orderInfo['sn']);
 
             //支付宝交易号，和商户订单号二选一
-            $trade_no = trim($out_trade_no);
+            $trade_no = trim($orderInfo['pay_sn']);
             $RequestBuilder = new \AlipayTradeQueryContentBuilder();
             $RequestBuilder->setTradeNo($trade_no);
             $RequestBuilder->setOutTradeNo($out_trade_no);
