@@ -1,72 +1,29 @@
 <?php
 namespace app\store\controller;
 
-class ManagerManage extends ManagerManageBase{
+use common\cache\Store;
+
+class ManagerManageBase extends \common\controller\UserBase{
+    protected $_storeList = null;
+    protected $_store = null;
+    protected $_managerFactoryList = null;
+    protected $_defaultDialog = null;
+
     public function __construct(){
         parent::__construct();
+
+        //获取店铺列表
+        $this->_getStoreList();
+        //获取当前店铺
+        $this->_getStoreInfo(input('storeId'));
+        //获取店家店铺列表
+        $this->_getManagerFactoryList();
+        $this->assign('store', $this->_store);
+        //缓存当前店铺信息
+        \common\cache\Store::cacheCurrentStoreInfo($this->_store);
+        $this->assign('managerFactoryList', $this->_managerFactoryList);
+        $this->assign('defaultDialog', $this->_defaultDialog);
     }
-
-    /**首页
-     */
-    public function index(){
-        if(request()->isAjax()){
-            $modelManagerManage = new \app\store\model\ManagerManage();
-            $this->_managerFactoryList = $modelManagerManage->getList($this->user['id']);
-            $this->assign('list',$this->_managerFactoryList);
-            return view('list_tpl');
-        }else{
-            return $this->fetch();
-        }
-    }
-
-    /**店铺管理
-     */
-    public function manage(){
-        if(request()->isAjax()){
-        }else{
-            //岗位
-            $post = config('permission.post');
-            $this->assign('post', $post);
-            //职务
-            $duty = config('permission.duty');
-            $this->assign('duty', $duty);
-            //鉴权
-            $authentication = config('permission.authentication');
-            $this->assign('authentication', $authentication);
-
-            return $this->fetch();
-        }
-    }
-
-    /**店铺员工-编辑
-     */
-    public function storeEmployeeEdit(){
-        $store = \common\cache\Store::getCurrentStoreInfo();
-        if(!($store['id'])){
-            return errorMsg('请选择店铺！');
-        }
-        if(request()->isAjax()){
-            $modelManagerManage = new \app\store\model\ManagerManage();
-            $info = $modelManagerManage->storeEmployeeEdit($store['id']);
-            if($info['status']==0){
-                return $info;
-            }else{
-                $this->assign('info',$info);
-                return view('store_employee_info_tpl');
-            }
-        }
-    }
-
-    /**删除管理员
-     */
-    public function del(){
-        if(request()->isAjax()){
-            return 123;
-            $modelManagerManage = new \app\store\model\ManagerManage();
-            return $modelManagerManage->del($this->user['id']);
-        }
-    }
-
     /**获取店铺列表
      */
     private function _getStoreList(){
@@ -88,7 +45,7 @@ class ManagerManage extends ManagerManageBase{
             ],
         ];
         $storeList = $model->getList($config);
-        $this->storeList = $storeList;
+        $this->_storeList = $storeList;
 
     }
 
@@ -113,10 +70,10 @@ class ManagerManage extends ManagerManageBase{
                 ],
             ];
             $storeInfo = $model->getInfo($config);
-            $this->store = $storeInfo;
-        }elseif(count($this->storeList)==1){
-            $this->store = $this->storeList[0];
-        }elseif(count($this->storeList)>1){
+            $this->_store = $storeInfo;
+        }elseif(count($this->_storeList)==1){
+            $this->_store = $this->_storeList[0];
+        }elseif(count($this->_storeList)>1){
             $this->_defaultDialog = true;
         }
     }
@@ -124,9 +81,9 @@ class ManagerManage extends ManagerManageBase{
     /**获取店家店铺列表
      */
     private function _getManagerFactoryList(){
-        $storeListCount = count($this->storeList);
+        $storeListCount = count($this->_storeList);
         if($storeListCount>1){
-            foreach ($this->storeList as $item) {
+            foreach ($this->_storeList as $item) {
                 $storeInfoArr = [
                     'id' => $item['id'],
                     'store_name' => $item['store_name'],

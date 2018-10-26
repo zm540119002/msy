@@ -201,13 +201,26 @@
 						dialog.error(content);
 						return false;
 					}
-					$.each($('.employeeAccountLayer').find('li'),function(){
-						if($(this).attr('class')=='current'){
+					postData.post = null;
+					$.each($('.employeeAccountLayer').find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each($('.employeeAccountLayer').find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each($('.employeeAccountLayer').find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
 					 var config = {
-					 	url:controller + 'edit',
+					 	url:controller + 'storeEmployeeEdit',
 					 	postData:postData,
 					 	index:index,
 					 	container:$('#storeEmployeeList').find('ul.list')
