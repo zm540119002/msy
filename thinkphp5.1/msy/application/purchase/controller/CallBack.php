@@ -186,15 +186,9 @@ class CallBack extends \common\controller\Base{
         $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
         $payInfo['payment_time'] = $data['gmt_payment'];//支付时间
 
-        file_put_contents('22222222.text',$payInfo);
-
         $alipaySevice = new \AlipayTradeService($config);
         $alipaySevice->writeLog(var_export($_POST,true));
         $result = $alipaySevice->check($_POST);
-        if($result){
-            file_put_contents('ali222222222.text','chegggggggg' );
-        }
-
         if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
             //判断该笔订单是否在商户网站中已经做过处理
             //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
@@ -205,7 +199,6 @@ class CallBack extends \common\controller\Base{
 
 
             if ($order_type == 'order') {
-                file_put_contents('ali.text', json_encode($_POST));
                 $modelOrder = new \app\purchase\model\Order();
                 $config = [
                     'where' => [
@@ -341,12 +334,7 @@ class CallBack extends \common\controller\Base{
             ['user_id','=',$orderInfo['user_id']],
             ['sn','=',$data['order_sn']],
         ];
-        file_put_contents('data.text',json_encode($data));
-        file_put_contents('data2.text',json_encode($data2) );
-        file_put_contents('condition.text',json_encode($condition) );
-        file_put_contents('orderInfo.text',json_encode($orderInfo) );
         $returnData = $modelOrder->edit($data2,$condition);
-        file_put_contents('orderInfo.text',$modelOrder->getLastSql() );
         if (!$returnData['status']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
@@ -357,29 +345,6 @@ class CallBack extends \common\controller\Base{
         //返回状态给微信服务器
         return successMsg('成功');
 
-    }
-
-    public function a(){
-        /**
-         * [["user_id","=","69"],["sn","=","20181025164949095186472049520841"]]
-         */
-        /**
-         *data2 {"logistics_status":2,"payment_code":2,"pay_sn":"2018102522001447171006299074","payment_time":"2018-10-25 16:50:01"}
-        {"id":"536","sn":"20181025164949095186472049520841","amount":"0.01","user_id":"69","actually_amount":"0.01"}
-         */
-
-        $modelOrder = new \app\purchase\model\Order();
-        $data2['logistics_status'] = 2;
-        $data2['payment_code'] = 2;
-        $data2['pay_sn'] = "2018102522001447171006299074";
-        $data2['payment_time'] = "2018-10-25 16:50:01";
-
-        $condition = [
-            ['user_id','=',6],
-            ['sn','=','20181025143939925644161272041123'],
-        ];
-        $returnData = $modelOrder->edit($data2,$condition);
-        print_r($modelOrder->getLastSql());
     }
 
     /**充值支付回调
