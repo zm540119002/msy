@@ -380,7 +380,7 @@ class CallBack extends \common\controller\Base{
      * 微信生成签名
      * @return 签名，本函数不覆盖sign成员变量
      */
-    function makeSign($data){
+    private function makeSign($data){
         //获取微信支付秘钥
         $key = config('wx_config.key');
         // 去空
@@ -399,7 +399,16 @@ class CallBack extends \common\controller\Base{
         return $result;
     }
 
+    public function a(){
+        return 'aaaaaaa';
+        $orderInfo = [
+            'sn'=>'20181025164509165439423886370387'
+        ];
+        $model = new \common\component\payment\alipay\alipay;
+        $res = $model->orderQuery($orderInfo);
+        print_r($res);
 
+    }
 
     
 }
