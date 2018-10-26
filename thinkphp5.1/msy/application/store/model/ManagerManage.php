@@ -45,8 +45,8 @@ class ManagerManage extends \common\model\Base {
 			}
 			//检查员工是否存在
 			$userStoreId = $this->_checkEmployeeExist($userId,$storeId);
-			if(!$userStoreId){//不是管理员
-				$postData['type'] = 2;
+			if(!$userStoreId){//不存在
+				$postData['type'] = 4;
 				$postData['user_id'] = $userId;
 				$postData['store_id'] = $storeId;
 				$modelUserStore = new \common\model\UserStore();
