@@ -400,6 +400,7 @@ class CallBack extends \common\controller\Base{
     }
 
     public function a(){
+        return 'aaaaaaa';
         $orderInfo = [
             'sn'=>'20181025164509165439423886370387'
         ];
