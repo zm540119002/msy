@@ -1,5 +1,13 @@
 {notempty name='info'}
-<li class="columns_flex l-r-sides" data-id="{$info.id}" data-user_store_id="{$info.user_store_id}">
+<li class="columns_flex l-r-sides" data-id="{$info.id}" data-user_store_id="{$info.user_store_id}"
+ data-post="{$info.post}" data-duty="{$info.duty}">
+	<div style="display:none;">
+		<select name="nodeIds">
+			{volist name='$info.nodeIds' id='node'}
+			<option value="{$node}"></option>
+			{/volist}
+		</select>
+	</div>
 	<div>
 		<p>
 			<span>姓名</span>
@@ -11,7 +19,7 @@
 		</div>
 		<div>
 			<span>岗位职务:</span>
-			<input type="text" value="" name="position" readonly="readonly"/>
+			<input type="text" value="{$info.post|getPostCn}.{$info.duty|getDutyCn}" name="position" readonly="readonly"/>
 		</div>
 	</div>
 	<div class="operate-btn">

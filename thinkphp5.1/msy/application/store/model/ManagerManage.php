@@ -53,13 +53,31 @@ class ManagerManage extends \common\model\Base {
 				$res = $modelUserStore->isUpdate(false)->save($postData);
 				if($res===false){
 					$this->rollback();//事务回滚
-					return errorMsg('失败',$this->getError());
+					return errorMsg('失败',$modelUserStore->getError());
 				}
 				$userStoreId = $modelUserStore->getAttr('id');
+				if(!empty($postData['nodeIds'])){
+					//新增权限节点
+					$list = [];
+					foreach ($postData['nodeIds'] as $value){
+						$list[] = [
+							'user_id'=>$userId,
+							'store_id'=>$storeId,
+							'node_id'=>$value,
+						];
+					}
+					$modelUserStoreNode = new \common\model\UserStoreNode();
+					$res = $modelUserStoreNode->isUpdate(false)->saveAll($list);
+					if($res===false){
+						$this->rollback();//事务回滚
+						return errorMsg('失败',$modelUserStoreNode->getError());
+					}
+				}
 			}
 			$this->commit();//事务提交
 			$postData['id'] = $userId;
 			$postData['user_store_id'] = $userStoreId;
+
 		}
 		return successMsg('成功！',$postData);
 	}
@@ -121,7 +139,7 @@ class ManagerManage extends \common\model\Base {
 			['user_id','=',$userId],
 			['store_id','=',$storeId],
 			['status','<>',2],
-			['type','=',2],
+			['type','=',4],
 		];
 		return $modelUserStore->where($where)->value('id');
 	}
