@@ -19,7 +19,7 @@ class Manager extends \common\model\Base {
 		$postData = input('post.');
 		//用户数据验证
 		$validateUser = new \common\validate\User();
-		if(!$validateUser->scene('manager')->check($postData)){
+		if(!$validateUser->scene('employee')->check($postData)){
 			return errorMsg($validateUser->getError());
 		}
 		if($postData['id'] && intval($postData['id'])){//修改

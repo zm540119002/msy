@@ -51,8 +51,8 @@ class User extends \think\Validate
             'captcha',
             'password',
         ],
-        //新增管理员
-        'manager'  =>  [
+        //添加员工
+        'employee'  =>  [
             'mobile_phone',
             'name',
         ],
