@@ -305,6 +305,8 @@
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
+					postData.id = _this.data('id');
+					postData.user_store_id = _this.data('user_store_id');
 					var config = {
 						url:controller + 'storeEmployeeEdit',
 						postData:postData,

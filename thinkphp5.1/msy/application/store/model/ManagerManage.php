@@ -24,10 +24,70 @@ class ManagerManage extends \common\model\Base {
 		}
 		if($postData['id'] && intval($postData['id'])){//修改
 			$postData['update_time'] = time();
+			unset($postData['mobile_phone']);
+			$this->startTrans();//事务开启
 			$res = $this->isUpdate(true)->save($postData);
 			if($res===false){
+				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
+			$userId = $postData['id'];
+			$postData['id'] = $postData['user_store_id'];
+			$modelUserStore = new \common\model\UserStore();
+			$res = $modelUserStore->isUpdate(true)->save($postData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$modelUserStore->getError());
+			}
+			if(!empty($postData['nodeIds'])){
+				$modelUserStoreNode = new \common\model\UserStoreNode();
+				$config = [
+					'field' => [
+						'usn.node_id',
+					],'where' => [
+						['usn.status','=',0],
+						['usn.user_id','=',$userId],
+						['usn.store_id','=',$storeId],
+					],
+				];
+				$userStoreNodeList = $modelUserStoreNode->getlist($config);
+				$oldNodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
+				if(empty($oldNodeIds)){
+					$addNodeIds = $postData['nodeIds'];
+					$delNodeIds = [];
+				}else{
+					$addNodeIds = array_diff($postData['nodeIds'],$oldNodeIds);
+					$delNodeIds = array_diff($oldNodeIds,$postData['nodeIds']);
+				}
+				if(!empty($addNodeIds)){
+					$data = [];
+					foreach ($addNodeIds as $node){
+						$data[] = [
+							'user_id' => $userId,
+							'store_id' => $storeId,
+							'node_id' => $node,
+						];
+					}
+					$res = $modelUserStoreNode->isUpdate(false)->saveAll($data);
+					if(false===$res){
+						$this->rollback();//回滚事务
+						return errorMsg($modelUserStoreNode->getError());
+					}
+				}
+				if(!empty($delNodeIds)){
+					$where = [
+						['user_id','=',$userId],
+						['store_id','=',$storeId],
+					];
+					$where[] = ['node_id','in',$delNodeIds];
+					$res = $modelUserStoreNode->where($where)->delete();
+					if(!$res){
+						$modelUserStoreNode->rollback();//回滚事务
+						return errorMsg('失败',$modelUserStoreNode->getError());
+					}
+				}
+			}
+			$this->commit();//提交事务
 		}else{//新增
 			//验证用户是否存在
 			$userId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
