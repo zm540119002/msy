@@ -44,6 +44,14 @@ function getRunType($num){
 function getOperationalModel($num){
     return $num?config('custom.operational_model')[$num]:'';
 }
+//获取岗位中文
+function getPostCn($num){
+    return $num?config('permission.post')[$num]:'';
+}
+//获取职务中文
+function getDutyCn($num){
+    return $num?config('permission.duty')[$num]:'';
+}
 /*开启底部购物车配置项
  */
 function unlockingFooterCartConfig($arr){

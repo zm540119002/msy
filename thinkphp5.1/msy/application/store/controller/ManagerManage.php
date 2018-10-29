@@ -10,10 +10,6 @@ class ManagerManage extends ManagerManageBase{
      */
     public function index(){
         if(request()->isAjax()){
-            $modelManagerManage = new \app\store\model\ManagerManage();
-            $this->_managerFactoryList = $modelManagerManage->getList($this->user['id']);
-            $this->assign('list',$this->_managerFactoryList);
-            return view('list_tpl');
         }else{
             return $this->fetch();
         }
@@ -56,6 +52,37 @@ class ManagerManage extends ManagerManageBase{
             }
         }
     }
+
+    //获取店铺员工列表
+    public function getStoreEmployeeList(){
+        $currentStore = \common\cache\Store::getCurrentStoreInfo();
+        if(!($currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelUserStore = new \common\model\UserStore();
+            $config = [
+                'field' => [
+                    'u.nickname','u.mobile_phone',
+                    'us.post','us.duty',
+                ],'leftJoin' => [
+                    ['user u','u.id = us.user_id'],
+                ],'where' => [
+                    ['u.status','=',0],
+                    ['us.status','=',0],
+                    ['us.type','=',4],
+                    ['us.store_id','=',$currentStore['id']],
+                    ['us.user_id','=',$this->user['id']],
+                ],
+            ];
+            $list = $modelUserStore->getList($config);
+            $this->assign('list',$list);
+            return view('store_employee_list_tpl');
+        }else{
+            return $this->fetch();
+        }
+    }
+
 
     /**删除管理员
      */

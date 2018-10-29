@@ -169,9 +169,14 @@
 {block name="script"}
 <script type="text/javascript">
 	$(function(){
-		//初始化
+		//页面初始化
 		$('.content_main .section_content').eq(0).show();
-		
+		//获取店铺员工账号列表
+		var config = {
+			url: controller + 'getStoreEmployeeList',
+			container: $('#storeEmployeeList').find('ul.list')
+		};
+		getList(config);
 		//新增线上店铺员工账号
 		var storeEmployeeSection=$('#storeEmployeeSection').html();
 		$('body').on('click','.add_online_account',function(){
@@ -190,7 +195,8 @@
 					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var postData=$('.storeEmployeeForm').serializeObject();
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					var postData=dialogForm.serializeObject();
 					var content='';
 					if(!postData.name){
 						content='请填写员工姓名';
@@ -202,19 +208,19 @@
 						return false;
 					}
 					postData.post = null;
-					$.each($('.employeeAccountLayer').find('ul.post').find('li'),function(){
+					$.each(dialogForm.find('ul.post').find('li'),function(){
 						if($(this).hasClass('current')){
 							postData.post = $(this).data('id');
 						}
 					});
 					postData.duty = null;
-					$.each($('.employeeAccountLayer').find('ul.duty').find('li'),function(){
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
 						if($(this).hasClass('current')){
 							postData.duty = $(this).data('id');
 						}
 					});
 					postData.nodeIds = [];
-					$.each($('.employeeAccountLayer').find('ul.authentication').find('li'),function(){
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
 						if($(this).hasClass('current')){
 							postData.nodeIds.push($(this).data('id'));
 						}
@@ -241,12 +247,36 @@
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
-					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
+					dialogForm.css('height',winHeight-120+'px');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
 				},
 				yes:function(index){
-					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					var postData=dialogForm.serializeObject();
 					var content='';
 					if(!postData.name){
 						content='请填写姓名';
@@ -260,7 +290,7 @@
 					 var config = {
 					 	url:controller + 'edit',
 					 	postData:postData,
-					 	fromObj:$('.employeeAccountLayer .storeEmployeeForm'),
+					 	fromObj:dialogForm,
 					 	toObj:_this,
 					 	index:index
 					 };
