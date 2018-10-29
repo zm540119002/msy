@@ -551,7 +551,7 @@ function dialogFormEdit(config) {
             if(data.status == 0){
                 dialog.error(data.info);
             }else{
-                copyDataByName(config.fromObj,config.toObj);
+                config.modifyObj.replaceWith(data);
                 layer.close(config.index);
             }
         }

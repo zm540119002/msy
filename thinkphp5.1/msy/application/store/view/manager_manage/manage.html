@@ -310,10 +310,8 @@
 					var config = {
 						url:controller + 'storeEmployeeEdit',
 						postData:postData,
-						fromObj:dialogForm,
-						toObj:_this,
-						index:index,
-						container:$('#storeEmployeeList').find('ul.list')
+						modifyObj:_this,
+						index:index
 					};
 					dialogFormEdit(config);
 				}
@@ -424,12 +422,10 @@
 					 var config = {
 					 	url:module + 'Manager/edit',
 					 	postData:postData,
-					 	fromObj:$('.employeeAccountLayer .storeEmployeeForm'),
-					 	toObj:_this,
+						 modifyObj:_this,
 					 	index:index
 					 };
 					 dialogFormEdit(config);
-					layer.close(index);
 
 				}
 			});

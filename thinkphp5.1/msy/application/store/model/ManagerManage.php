@@ -24,6 +24,9 @@ class ManagerManage extends \common\model\Base {
 		}
 		if($postData['id'] && intval($postData['id'])){//修改
 			$postData['update_time'] = time();
+			$postData['nickname'] = $postData['name'] = trim($postData['name']);
+			//手机号码暂存
+			$mobilePhone = $postData['mobile_phone'];
 			unset($postData['mobile_phone']);
 			$this->startTrans();//事务开启
 			$res = $this->isUpdate(true)->save($postData);
@@ -87,6 +90,8 @@ class ManagerManage extends \common\model\Base {
 					}
 				}
 			}
+			//需返回手机号码
+			$postData['mobile_phone'] = $mobilePhone;
 			$this->commit();//提交事务
 		}else{//新增
 			//验证用户是否存在
