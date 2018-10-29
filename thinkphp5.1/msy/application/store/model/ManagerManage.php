@@ -24,6 +24,8 @@ class ManagerManage extends \common\model\Base {
 		}
 		if($postData['id'] && intval($postData['id'])){//修改
 			$postData['update_time'] = time();
+			unset($postData['mobile_phone']);
+			$this->startTrans();//事务开启
 			$res = $this->isUpdate(true)->save($postData);
 			if($res===false){
 				return errorMsg('失败',$this->getError());
