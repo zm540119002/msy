@@ -75,6 +75,23 @@ class ManagerManage extends ManagerManageBase{
                 ],
             ];
             $list = $modelUserStore->getList($config);
+            foreach ($list as &$user){
+                $modelUserStoreNode = new \common\model\UserStoreNode();
+                $config = [
+                    'field' => [
+                        'usn.node_id',
+                    ],'where' => [
+                        ['usn.status','=',0],
+                        ['usn.user_id','=',$user['id']],
+                        ['usn.store_id','=',$currentStore['id']],
+                    ],
+                ];
+                $userStoreNodeList = $modelUserStoreNode->getlist($config);
+                $nodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
+                if(!empty($nodeIds)){
+                    $user['nodeIds'] = $nodeIds;
+                }
+            }
             $this->assign('list',$list);
             return view('store_employee_list_tpl');
         }else{
