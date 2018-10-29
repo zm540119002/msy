@@ -100,16 +100,16 @@ class ManagerManage extends ManagerManageBase{
     }
 
 
-    /**删除管理员
+    /**删除店铺员工
      */
-    public function del(){
+    public function delStoreEmployee(){
         $currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            return $modelManagerManage->del($this->user['id']);
+            return $modelManagerManage->delStoreEmployee($currentStore['id']);
         }
     }
 }

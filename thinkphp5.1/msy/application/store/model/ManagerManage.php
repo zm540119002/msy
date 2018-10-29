@@ -168,31 +168,50 @@ class ManagerManage extends \common\model\Base {
 	}
 
 	//删除
-	public function del($storeId,$tag=true){
+	public function delStoreEmployee($storeId,$tag=true){
+		$userStoreId = input('post.user_store_id',0);
+		if(!$userStoreId){
+			return errorMsg('参数错误');
+		}
+		$userId = input('post.id',0);
 		$id = input('post.id',0);
 		if(!$id){
 			return errorMsg('参数错误');
 		}
-		$userStoreId = input('post.userStoreId',0);
-		if(!$userStoreId){
-			return errorMsg('参数错误');
-		}
 		$where = [
-			['user_id', '=', $id],
 			['id', '=', $userStoreId],
+			['user_id', '=', $userId],
 			['store_id', '=', $storeId],
 			['status', '=', 0],
-			['type', '=', 2],
+			['type', '=', 4],
 		];
 		$modelUserStore = new \common\model\UserStore();
+		$modelUserStore->startTrans();//事务开启
 		if($tag){//标记删除
 			$result = $modelUserStore->where($where)->setField('status',2);
 		}else{
 			$result = $modelUserStore->where($where)->delete();
 		}
 		if(!$result){
+			$modelUserStore->rollback();//事务回滚
 			return errorMsg('失败',$modelUserStore->getError());
 		}
+		$modelUserStoreNode = new \common\model\UserStoreNode();
+		$where = [
+			['user_id', '=', $userId],
+			['store_id', '=', $storeId],
+			['status', '=', 0],
+		];
+		if($tag){//标记删除
+			$result = $modelUserStoreNode->where($where)->setField('status',2);
+		}else{
+			$result = $modelUserStoreNode->where($where)->delete();
+		}
+		if(!$result){
+			$modelUserStore->rollback();//事务回滚
+			return errorMsg('失败',$modelUserStore->getError());
+		}
+		$modelUserStore->commit();//事务提交
 		return successMsg('成功');
 	}
 

@@ -575,7 +575,7 @@ function dialogFormDel(config) {
             if(data.status == 0){
                 dialog.error(data.info);
             }else{
-                config.obj.remove();
+                config.delObj.remove();
                 layer.close(config.index);
             }
         }
