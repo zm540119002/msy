@@ -287,16 +287,33 @@
 						dialog.error(content);
 						return false;
 					}
-					 var config = {
-					 	url:controller + 'edit',
-					 	postData:postData,
-					 	fromObj:dialogForm,
-					 	toObj:_this,
-					 	index:index
-					 };
-					 dialogFormEdit(config);
-					layer.close(index);
-
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					var config = {
+						url:controller + 'storeEmployeeEdit',
+						postData:postData,
+						fromObj:dialogForm,
+						toObj:_this,
+						index:index,
+						container:$('#storeEmployeeList').find('ul.list')
+					};
+					dialogFormEdit(config);
 				}
 			});
 		});
