@@ -109,7 +109,7 @@ class ManagerManage extends ManagerManageBase{
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            return $modelManagerManage->delStoreEmployee($currentStore['id']);
+            return $modelManagerManage->delStoreEmployee($currentStore['id'],false);
         }
     }
 }
