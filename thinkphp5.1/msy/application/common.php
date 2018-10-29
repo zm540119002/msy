@@ -46,11 +46,25 @@ function getOperationalModel($num){
 }
 //获取岗位中文
 function getPostCn($num){
-    return $num?config('permission.post')[$num]:'';
+    $post = config('permission.post');
+    $res = '';
+    foreach ($post as $value){
+        if($num == $value['id']){
+            $res = $value['name'];
+        }
+    }
+    return $res;
 }
 //获取职务中文
 function getDutyCn($num){
-    return $num?config('permission.duty')[$num]:'';
+    $duty = config('permission.duty');
+    $res = '';
+    foreach ($duty as $value){
+        if($num == $value['id']){
+            $res = $value['name'];
+        }
+    }
+    return $res;
 }
 /*开启底部购物车配置项
  */

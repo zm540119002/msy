@@ -63,8 +63,8 @@ class ManagerManage extends ManagerManageBase{
             $modelUserStore = new \common\model\UserStore();
             $config = [
                 'field' => [
-                    'u.nickname','u.mobile_phone',
-                    'us.post','us.duty',
+                    'u.id','u.nickname name','u.mobile_phone',
+                    'us.post','us.duty','us.id user_store_id',
                 ],'leftJoin' => [
                     ['user u','u.id = us.user_id'],
                 ],'where' => [
@@ -72,7 +72,6 @@ class ManagerManage extends ManagerManageBase{
                     ['us.status','=',0],
                     ['us.type','=',4],
                     ['us.store_id','=',$currentStore['id']],
-                    ['us.user_id','=',$this->user['id']],
                 ],
             ];
             $list = $modelUserStore->getList($config);
