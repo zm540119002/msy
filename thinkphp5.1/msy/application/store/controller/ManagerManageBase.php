@@ -13,7 +13,6 @@ class ManagerManageBase extends \common\controller\UserBase{
         //获取店铺列表
         $this->_getStoreList();
         $this->assign('storeList', $this->_storeList);
-        print_r($this->_storeList);exit;
         //获取当前店铺
         $this->_getStoreInfo(input('storeId'));
         //获取店家店铺列表
