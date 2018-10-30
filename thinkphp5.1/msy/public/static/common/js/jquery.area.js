@@ -604,7 +604,7 @@ var areaObject={
 		return areaName;
 	},
 	getArea:function(){
-		return areaObject.provinceCityD;
+		return areaObject.provinceCityD.split(',');
 	}
 }
 /*关闭省市区选项*/
