@@ -183,9 +183,6 @@
 //            arr.push(area);
 //            $('.area_address').setArea(arr);
 //        }
-		var arr = [2,0,0];
-		$('.area_address').setArea(arr);
-		console.log($('.area-address-name').getArea());
 		//获取店铺员工账号列表
 		var config = {
 			url: controller + 'getStoreEmployeeList',
@@ -498,7 +495,7 @@
 			var _this = $(this);
 			_this.addClass("nodisabled");//防止重复提交
 			postData.region = $('.area-address-name').getArea();
-			console.log(postData.region);return;
+			console.log(postData);return;
 			$.ajax({
 				url:controller + "editStoreConsigneeInfo",
 				type:'post',

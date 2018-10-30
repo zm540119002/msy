@@ -220,10 +220,12 @@ class ManagerManage extends \common\model\Base {
 	public function editStoreConsigneeInfo($storeId){
 		$modelStore = new \common\model\Store();
 		$where = [
-			['store_id', '=', $storeId],
+			['id', '=', $storeId],
 			['status', '=', 0],
 		];
 		$postData = input('post.');
+		list($postData['province'],$postData['city'],$postData['area']) = $postData['region'];
+		return errorMsg($postData);
 		$res = $modelStore->isUpdate(true)->save($postData,$where);
 		if($res===false){
 			return errorMsg('失败',$modelStore->getError());
