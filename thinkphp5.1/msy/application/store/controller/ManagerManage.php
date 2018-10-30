@@ -94,8 +94,50 @@ class ManagerManage extends ManagerManageBase{
             }
             $this->assign('list',$list);
             return view('store_employee_list_tpl');
-        }else{
-            return $this->fetch();
+        }
+    }
+
+    //获取门店员工列表
+    public function getShopEmployeeList(){
+        $currentStore = \common\cache\Store::getCurrentStoreInfo();
+        if(!($currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelUserStore = new \common\model\UserStore();
+            $config = [
+                'field' => [
+                    'u.id','u.nickname name','u.mobile_phone',
+                    'us.post','us.duty','us.id user_store_id',
+                ],'leftJoin' => [
+                    ['user u','u.id = us.user_id'],
+                ],'where' => [
+                    ['u.status','=',0],
+                    ['us.status','=',0],
+                    ['us.type','=',4],
+                    ['us.store_id','=',$currentStore['id']],
+                ],
+            ];
+            $list = $modelUserStore->getList($config);
+            foreach ($list as &$user){
+                $modelUserStoreNode = new \common\model\UserStoreNode();
+                $config = [
+                    'field' => [
+                        'usn.node_id',
+                    ],'where' => [
+                        ['usn.status','=',0],
+                        ['usn.user_id','=',$user['id']],
+                        ['usn.store_id','=',$currentStore['id']],
+                    ],
+                ];
+                $userStoreNodeList = $modelUserStoreNode->getlist($config);
+                $nodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
+                if(!empty($nodeIds)){
+                    $user['nodeIds'] = $nodeIds;
+                }
+            }
+            $this->assign('list',$list);
+            return view('store_employee_list_tpl');
         }
     }
 

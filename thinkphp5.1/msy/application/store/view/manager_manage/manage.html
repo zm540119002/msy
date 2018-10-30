@@ -191,6 +191,14 @@
 			container: $('#storeEmployeeList').find('ul.list')
 		};
 		getList(config);
+
+		//获取门店员工账号列表
+		var config = {
+			url: controller + 'getShopEmployeeList',
+			container: $('#shopEmployeeList').find('ul.list')
+		};
+		getList(config);
+
 		//新增线上店铺员工账号
 		var storeEmployeeSection=$('#storeEmployeeSection').html();
 		$('body').on('click','.add_online_account',function(){
