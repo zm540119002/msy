@@ -464,9 +464,8 @@
 		});
 		//收货人信息
 		$('body').on('click','.submit',function(){
-			var postData={};
+			var postData=$('.consignee_info_form').serializeObject();
 			var  content ='';
-            postData=$('.consignee_info_form').serializeObject();
 			if(!postData.name){
 				content='请填写收货人姓名';
 			}else if(!register.phoneCheck(postData.mobile_phone)){
@@ -499,9 +498,9 @@
 				},
 				error:function (xhr) {
 					dialog.error('Ajax错误'+xhr.status);
-				},
-			})
-		})
+				}
+			});
+		});
 		//列表操作按钮
 		$('body').on('click','.list li',function(){
 			$(this).addClass('current').siblings().removeClass('current');
@@ -515,7 +514,7 @@
 		//账号授权设置样式
 		$('body').on('click','.account_authorization li',function(){
 			$(this).toggleClass('current');
-		})
+		});
 		//选择店铺样式
 		$('body').on('click','.storeShopListLayer li',function(){
 			$(this).parents('.store_list').find('li').removeClass('current');
