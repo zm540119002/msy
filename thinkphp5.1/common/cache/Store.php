@@ -8,7 +8,6 @@ class Store{
     /**从缓存中获取入驻厂商店铺列表
      */
     public static function get($factorId){
-        print_r(1243);
         $storeList = cache(self::$_cache_key.$factorId);
         if(!$storeList){
             $model = new \common\model\Store();
