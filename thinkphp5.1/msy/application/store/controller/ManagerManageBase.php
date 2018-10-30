@@ -22,7 +22,7 @@ class ManagerManageBase extends \common\controller\UserBase{
         $this->assign('managerFactoryList', $this->_managerFactoryList);
         $this->assign('defaultDialog', $this->_defaultDialog);
     }
-    
+
     /**获取店铺列表
      */
     private function _getStoreList(){
