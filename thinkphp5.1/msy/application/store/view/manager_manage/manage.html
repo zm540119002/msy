@@ -174,14 +174,16 @@
 		//页面初始化
 		$('.content_main .section_content').eq(0).show();
 		//省市区初始化
-        var province = '{$store.province}';
-        var city = '{$store.city}';
-        var area = '{$store.area}';
-		var arr = [];
-		arr.push(province);
-		arr.push(city);
-		arr.push(area);
-		$('.area_address').setArea(arr);
+        var province = '{$store.province|default=""}';
+        var city = '{$store.city|default=""}';
+        var area = '{$store.area|default=""}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
+		}
 
 		//获取店铺员工账号列表
 		var config = {
