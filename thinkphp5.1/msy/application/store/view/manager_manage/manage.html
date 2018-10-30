@@ -45,7 +45,7 @@
 				{notempty name='storeList'}
 					{volist name="storeList" id="vo"}
 					<option value="{$vo.id}">
-						{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$storeInfo.operational_model|getOperationalModel}
+						{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$vo.operational_model|getOperationalModel}
 					</option>
 					{/volist}
 				{/notempty}
