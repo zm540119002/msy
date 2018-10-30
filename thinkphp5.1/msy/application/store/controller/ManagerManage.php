@@ -104,40 +104,22 @@ class ManagerManage extends ManagerManageBase{
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
-            $modelUserStore = new \common\model\UserStore();
+            $modelShop = new \app\store\model\Shop();
             $config = [
                 'field' => [
-                    'u.id','u.nickname name','u.mobile_phone',
-                    'us.post','us.duty','us.id user_store_id',
+                    's.id','s.name',
+                    'u.id','u.nickname','u.nickname',
                 ],'leftJoin' => [
-                    ['user u','u.id = us.user_id'],
+                    ['common.user u','u.id = s.user_id'],
                 ],'where' => [
                     ['u.status','=',0],
-                    ['us.status','=',0],
-                    ['us.type','=',4],
-                    ['us.store_id','=',$currentStore['id']],
+                    ['s.status','=',0],
+                    ['s.store_id','=',$currentStore['id']],
                 ],
             ];
-            $list = $modelUserStore->getList($config);
-            foreach ($list as &$user){
-                $modelUserStoreNode = new \common\model\UserStoreNode();
-                $config = [
-                    'field' => [
-                        'usn.node_id',
-                    ],'where' => [
-                        ['usn.status','=',0],
-                        ['usn.user_id','=',$user['id']],
-                        ['usn.store_id','=',$currentStore['id']],
-                    ],
-                ];
-                $userStoreNodeList = $modelUserStoreNode->getlist($config);
-                $nodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
-                if(!empty($nodeIds)){
-                    $user['nodeIds'] = $nodeIds;
-                }
-            }
+            $list = $modelShop->getList($config);
             $this->assign('list',$list);
-            return view('store_employee_list_tpl');
+            return view('shop_employee_list_tpl');
         }
     }
 
