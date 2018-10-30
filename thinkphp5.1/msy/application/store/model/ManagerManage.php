@@ -225,7 +225,6 @@ class ManagerManage extends \common\model\Base {
 		];
 		$postData = input('post.');
 		list($postData['province'],$postData['city'],$postData['area']) = $postData['region'];
-		return errorMsg($postData);
 		$res = $modelStore->isUpdate(true)->save($postData,$where);
 		if($res===false){
 			return errorMsg('失败',$modelStore->getError());
