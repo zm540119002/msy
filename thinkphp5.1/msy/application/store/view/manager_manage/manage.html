@@ -92,20 +92,20 @@
 					<form class="consignee_info_form">
 						<p class="emp_account_tipc">设定店铺的收货人地址手机号码（*用于顾客退换货时对接）</p>
 						<div class="input_item">
-							<input class="input-filed" type="text" name="name" value="" placeholder="收货人姓名">
+							<input class="input-filed" type="text" name="consignee_name" value="" placeholder="收货人姓名">
 						</div>
 						<div>
-							<input class="input-filed" type="tel" name="mobile_phone" value="" placeholder="收货人手机号码">
+							<input class="input-filed" type="tel" name="consignee_mobile_phone" value="" placeholder="收货人手机号码">
 						</div>
 						<div class="express-area area-box">
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">所在地区：</label>
 								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-								<input type="hidden" value="" class="area-address-name" data-key="" name="provinces">
+								<input type="hidden" value="" class="area-address-name" data-key="">
 							</a>
 						</div>
 						<div>
-							<input class="input-filed" type="text" name="detail_name" value="" placeholder="详细地址">
+							<input class="input-filed" type="text" name="detail_address" value="" placeholder="详细地址">
 						</div>
 						<a href="javascript:void(0);" class="submit foot-btn">确定</a>
 					</form>
@@ -168,10 +168,24 @@
 {block name="common"}{/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//页面初始化
 		$('.content_main .section_content').eq(0).show();
+//		//省市区初始化
+//        var province = '{$consigneeAddressInfo.province}';
+//        var city = '{$consigneeAddressInfo.city}';
+//        var area = '{$consigneeAddressInfo.area}';
+//        if( province && city && area){
+//            arr.push(province);
+//            arr.push(city);
+//            arr.push(area);
+//            $('.area_address').setArea(arr);
+//        }
+		var arr = [1,3,9];
+		$('.area_address').setArea(arr);
+		console.log($('.area_address').getArea());
 		//获取店铺员工账号列表
 		var config = {
 			url: controller + 'getStoreEmployeeList',
@@ -464,44 +478,41 @@
 		});
 		//收货人信息
 		$('body').on('click','.submit',function(){
-			var postData={};
+			var postData=$('.consignee_info_form').serializeObject();
+			var areaAddress=$('.area-address-name').val();
 			var  content ='';
-            postData=$('.consignee_info_form').serializeObject();
-			if(!postData.name){
+			if(!postData.consignee_name){
 				content='请填写收货人姓名';
-			}else if(!register.phoneCheck(postData.mobile_phone)){
+			}else if(!register.phoneCheck(postData.consignee_mobile_phone)){
 				content='请填写手机号码';
-			}else if(!postData.provinces){
+			}else if(!areaAddress){
 				content='请选择所在地区';
-			}else if(!postData.detail_name){
+			}else if(!postData.detail_address){
 				content='请填写地区详细地址';
 			}
 			if(content){
 				dialog.error(content);
 				return false;
 			}
+			
 			var _this = $(this);
 			_this.addClass("nodisabled");//防止重复提交
+			postData.region = $('.area-address-name').getArea();
+			console.log(postData.region);return;
 			$.ajax({
-				url:controller + "edit",
+				url:controller + "editStoreConsigneeInfo",
 				type:'post',
 				data:postData,
 				dataType:'json',
 				success:function (data) {
 					_this.removeClass("nodisabled");
-
-				   if(data.status == 0){
-						dialog.error(data.info);
-						return false;
-					}else if(data.status == 1){
-						dialog.success(data.info,controller+'preview');
-					}
+					dialog.error(data.info);
 				},
 				error:function (xhr) {
 					dialog.error('Ajax错误'+xhr.status);
-				},
-			})
-		})
+				}
+			});
+		});
 		//列表操作按钮
 		$('body').on('click','.list li',function(){
 			$(this).addClass('current').siblings().removeClass('current');
@@ -515,7 +526,7 @@
 		//账号授权设置样式
 		$('body').on('click','.account_authorization li',function(){
 			$(this).toggleClass('current');
-		})
+		});
 		//选择店铺样式
 		$('body').on('click','.storeShopListLayer li',function(){
 			$(this).parents('.store_list').find('li').removeClass('current');
@@ -568,5 +579,4 @@
 		})
 	});
 </script>
-<script type="text/javascript" src="public_js/jquery.area.js"></script>
 {/block}
