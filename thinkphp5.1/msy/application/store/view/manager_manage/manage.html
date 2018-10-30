@@ -172,17 +172,19 @@
 	$(function(){
 		//页面初始化
 		$('.content_main .section_content').eq(0).show();
-		//省市区初始化
-        var arr = [];
-        var province = '{$consigneeAddressInfo.province}';
-        var city = '{$consigneeAddressInfo.city}';
-        var area = '{$consigneeAddressInfo.area}';
-        if( province && city && area){
-            arr.push(province);
-            arr.push(city);
-            arr.push(area);
-            $('.area_address').setArea(arr);
-        }
+//		//省市区初始化
+//        var province = '{$consigneeAddressInfo.province}';
+//        var city = '{$consigneeAddressInfo.city}';
+//        var area = '{$consigneeAddressInfo.area}';
+//        if( province && city && area){
+//            arr.push(province);
+//            arr.push(city);
+//            arr.push(area);
+//            $('.area_address').setArea(arr);
+//        }
+		var arr = [1,3,9];
+		$('.area_address').setArea(arr);
+		console.log($('.area_address').getArea());
 		//获取店铺员工账号列表
 		var config = {
 			url: controller + 'getStoreEmployeeList',
