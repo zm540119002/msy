@@ -75,6 +75,23 @@ class ManagerManage extends ManagerManageBase{
                 ],
             ];
             $list = $modelUserStore->getList($config);
+            foreach ($list as &$user){
+                $modelUserStoreNode = new \common\model\UserStoreNode();
+                $config = [
+                    'field' => [
+                        'usn.node_id',
+                    ],'where' => [
+                        ['usn.status','=',0],
+                        ['usn.user_id','=',$user['id']],
+                        ['usn.store_id','=',$currentStore['id']],
+                    ],
+                ];
+                $userStoreNodeList = $modelUserStoreNode->getlist($config);
+                $nodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
+                if(!empty($nodeIds)){
+                    $user['nodeIds'] = $nodeIds;
+                }
+            }
             $this->assign('list',$list);
             return view('store_employee_list_tpl');
         }else{
@@ -83,16 +100,16 @@ class ManagerManage extends ManagerManageBase{
     }
 
 
-    /**删除管理员
+    /**删除店铺员工
      */
-    public function del(){
+    public function delStoreEmployee(){
         $currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            return $modelManagerManage->del($this->user['id']);
+            return $modelManagerManage->delStoreEmployee($currentStore['id'],false);
         }
     }
 }

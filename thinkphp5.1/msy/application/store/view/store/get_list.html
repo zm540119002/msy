@@ -90,12 +90,10 @@
 					var config = {
 						url:module + 'Store/setManager',
 						postData:postData,
-						fromObj:$('.setShopAccountLayer .setShopForm'),
-						toObj:_this,
+						modifyObj:_this,
 						index:index
 					};
 					dialogFormEdit(config);
-					layer.close(index);
 				}
 			});
 		});
