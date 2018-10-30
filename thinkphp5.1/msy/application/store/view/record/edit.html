@@ -124,7 +124,7 @@
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">所在地区：</label>
 								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-								<input type="hidden" value="" class="area-address-name" data-key="{$recordInfo.provinces|default=''}" name="provinces">
+								<input type="hidden" value="" class="area-address-name" data-key="">
 							</a>
 						</div>
 					</li>
@@ -158,11 +158,16 @@
 
 <script type="text/javascript">
 	$(function(){
-		//初始化地址
-		var addressIndex=$('.area-address-name').data('key');
-		if(addressIndex){
-			var areaAddressArr=addressIndex.split(',');
-			$('.area_address').setArea(areaAddressArr);
+		//省市区初始化
+		var province = '{$recordInfo.province|default=""}';
+		var city = '{$recordInfo.city|default=""}';
+		var area = '{$recordInfo.area|default=""}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
 		}
 		//编辑企业简介
 		var editGoodsParameter=$('#editGoodsParameter').html();
@@ -196,26 +201,24 @@
 
 		//提交档案信息
 		$('body').on('click','.identifyNewGoods',function(){
+			var area_address =$('.area-address-name').getArea();
 			var postData={};
 			postData=$('.qualificationContent').serializeObject();
-			postData.provinces=$('.area-address-name').data('key');
 			var rb_img = $('.development-picture').data('src');
-				postData.rb_img = rb_img;
+			postData.rb_img = rb_img;
 			var license=$('.license-picture').data('src');
-				postData.license = license;
+			postData.license = license;
 			var glory_img=$('.honor-picture').data('src');
-				postData.glory_img = glory_img;
+			postData.glory_img = glory_img;
 			var factory_video=$('.company-video').data('src');
-				postData.factory_video = factory_video;
+			postData.factory_video = factory_video;
 			var team_activity=$('.team_activity').data('src');
 			postData.team_activity = team_activity;
-			var  content ='';
+			var  content =''
 			if(!postData.company_img){
 				content='请上传企业形象图片';
-			}else if(!postData.provinces){
-				content='请选择所在的省市区';
-			}else if(!postData.detail_address){
-				content='请填写详细地址';
+			}else if(postData.short_name.length>8){
+				content='简称不能超过8位';
 			}else if(!postData.logo_img){
 				content='请上传企业标志图';
 			}else if(!postData.introduction){
@@ -226,11 +229,18 @@
 				content='请上传执照资质图片';
 			}else if(!postData.glory_img||postData.glory_img==0){
 				content='请上传专利荣誉图片';
+			}else if(!area_address){
+				content='ddddfd请选择所在的省市区';
+			}else if(!postData.detail_address){
+				content='请填写详细地址';
 			}
 			if(content){
 				dialog.error(content);
 				return false;
 			}
+			postData.province = area_address[0];
+			postData.city = area_address[1];
+			postData.area = area_address[2];
 			if(!uploadsSingleImgFlag ){
 				dialog.error('图片还没有上传完毕');
 				return false;
@@ -243,8 +253,9 @@
 				dialog.error('企业标志图片还没有上传完毕');
 				return false;
 			}
+
 			var _this = $(this);
-			_this.addClass("nodisabled");
+			_this.addClass("nodisabled");//防止重复提交
 			$.ajax({
 				url:controller + "edit",
 				type:'post',
@@ -252,7 +263,8 @@
 				dataType:'json',
 				success:function (data) {
 					_this.removeClass("nodisabled");
-				   if(data.status == 0){
+
+					if(data.status == 0){
 						dialog.error(data.info);
 						return false;
 					}else if(data.status == 1){
@@ -261,7 +273,7 @@
 				},
 				error:function (xhr) {
 					dialog.error('Ajax错误'+xhr.status);
-				}
+				},
 			})
 		})
 	});
