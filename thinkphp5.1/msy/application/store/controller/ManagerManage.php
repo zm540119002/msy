@@ -99,6 +99,19 @@ class ManagerManage extends ManagerManageBase{
         }
     }
 
+    /**编辑店铺收货人信息
+     */
+    public function editStoreConsigneeInfo(){
+        $currentStore = \common\cache\Store::getCurrentStoreInfo();
+        if(!($currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelManagerManage = new \app\store\model\ManagerManage();
+            $res = $modelManagerManage->editStoreConsigneeInfo($currentStore['id']);
+            return $res;
+        }
+    }
 
     /**删除店铺员工
      */

@@ -215,6 +215,22 @@ class ManagerManage extends \common\model\Base {
 		return successMsg('成功');
 	}
 
+	/**编辑店铺收货人信息
+	 */
+	public function editStoreConsigneeInfo($storeId){
+		$modelStore = new \common\model\Store();
+		$where = [
+			['store_id', '=', $storeId],
+			['status', '=', 0],
+		];
+		$postData = input('post.');
+		$res = $modelStore->isUpdate(true)->save($postData,$where);
+		if($res===false){
+			return errorMsg('失败',$modelStore->getError());
+		}
+		return successMsg('成功');
+	}
+
 	/**检查员工是否存在
 	 */
 	private function _checkEmployeeExist($userId,$storeId){
