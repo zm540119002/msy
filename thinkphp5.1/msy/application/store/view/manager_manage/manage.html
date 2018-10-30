@@ -41,9 +41,14 @@
         </div>
         <div class="account-field">
             <span class="content-label">所属门店</span>
-            <select name="">
-                <option value="1">门店1</option>
-                <option value="2">门店2</option>
+            <select name="store_id">
+				{notempty name='storeList'}
+					{volist name="storeList" id="vo"}
+					<option value="{$vo.id}">
+						{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$vo.operational_model|getOperationalModel}
+					</option>
+					{/volist}
+				{/notempty}
             </select>
         </div>
         {include file='public/permission_tpl' /}
@@ -191,6 +196,14 @@
 			container: $('#storeEmployeeList').find('ul.list')
 		};
 		getList(config);
+
+		//获取门店员工账号列表
+		var config = {
+			url: controller + 'getShopEmployeeList',
+			container: $('#shopEmployeeList').find('ul.list')
+		};
+		getList(config);
+
 		//新增线上店铺员工账号
 		var storeEmployeeSection=$('#storeEmployeeSection').html();
 		$('body').on('click','.add_online_account',function(){

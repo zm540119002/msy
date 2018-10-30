@@ -94,8 +94,32 @@ class ManagerManage extends ManagerManageBase{
             }
             $this->assign('list',$list);
             return view('store_employee_list_tpl');
-        }else{
-            return $this->fetch();
+        }
+    }
+
+    //获取门店员工列表
+    public function getShopEmployeeList(){
+        $currentStore = \common\cache\Store::getCurrentStoreInfo();
+        if(!($currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                    'u.id','u.nickname','u.nickname',
+                ],'leftJoin' => [
+                    ['common.user u','u.id = s.user_id'],
+                ],'where' => [
+                    ['u.status','=',0],
+                    ['s.status','=',0],
+                    ['s.store_id','=',$currentStore['id']],
+                ],
+            ];
+            $list = $modelShop->getList($config);
+            $this->assign('list',$list);
+            return view('shop_employee_list_tpl');
         }
     }
 
