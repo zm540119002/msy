@@ -12,6 +12,7 @@ class ManagerManageBase extends \common\controller\UserBase{
 
         //获取店铺列表
         $this->_getStoreList();
+        $this->assign('storeList', $this->_storeList);
         //获取当前店铺
         $this->_getStoreInfo(input('storeId'));
         //获取店家店铺列表
@@ -63,6 +64,7 @@ class ManagerManageBase extends \common\controller\UserBase{
                     ['brand b','b.id = s.foreign_id','left'],
                 ],'field' => [
                     's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.consignee_name','s.consignee_mobile_phone','s.province','s.city','s.area','s.detail_address',
                     'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                     'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
                     'f.id factory_id','f.name','f.type',

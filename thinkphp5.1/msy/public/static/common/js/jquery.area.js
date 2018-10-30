@@ -604,7 +604,14 @@ var areaObject={
 		return areaName;
 	},
 	getArea:function(){
-		return areaObject.provinceCityD;
+		//return areaObject.provinceCityD.split(',');
+		
+		if(!areaObject.provinceCityD.length){
+			areaObject.provinceCityD.length=[];
+			return areaObject.provinceCityD
+		}
+		return areaObject.provinceCityD.substr(0, areaObject.provinceCityD.length - 1).split(',');
+		
 	}
 }
 /*关闭省市区选项*/
