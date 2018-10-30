@@ -3511,7 +3511,8 @@ input[type=text]::-webkit-focus-inner {
     max-width: 640px;
     z-index: 6;
 }
-select[name="store_id"]{
+select[name="store_id"],
+select[name="nodeIds"]{
     width:100%;
     padding:0.12rem 0;
 }
