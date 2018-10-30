@@ -6,7 +6,6 @@ class Record extends \think\Validate
 {
     protected $rule = [
         'company_img'  =>  'require',
-        'provinces' =>  'require',
         'detail_address' =>  'require',
         'logo_img' =>  'require',
         'introduction' =>  'require',
@@ -16,7 +15,6 @@ class Record extends \think\Validate
     ];
     protected $message  =   [
         'company_img.require' => '请上传企业形象图片',
-        'provinces.require'   => '请选择所在的省市区',
         'detail_address.require'   => '请填写详细地址',
         'logo_img.require'   => '请上传企业标志图',
         'introduction.require'   => '请编辑企业简介',
