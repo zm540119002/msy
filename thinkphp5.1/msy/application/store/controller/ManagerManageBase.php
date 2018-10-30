@@ -17,6 +17,7 @@ class ManagerManageBase extends \common\controller\UserBase{
         $this->_getStoreInfo(input('storeId'));
         //获取店家店铺列表
         $this->_getManagerFactoryList();
+        print_r($this->_store);exit;
         $this->assign('store', $this->_store);
         //缓存当前店铺信息
         \common\cache\Store::cacheCurrentStoreInfo($this->_store);
