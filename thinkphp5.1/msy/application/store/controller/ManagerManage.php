@@ -38,7 +38,6 @@ class ManagerManage extends ManagerManageBase{
      */
     public function storeEmployeeEdit(){
         $currentStore = \common\cache\Store::getCurrentStoreInfo();
-        print_r($currentStore);exit;
         if(!($currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
