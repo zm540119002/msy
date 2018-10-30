@@ -101,7 +101,7 @@
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">所在地区：</label>
 								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-								<input type="hidden" value="" class="area-address-name" data-key="" name="provinces">
+								<input type="hidden" value="" class="area-address-name" data-key="">
 							</a>
 						</div>
 						<div>
@@ -465,12 +465,13 @@
 		//收货人信息
 		$('body').on('click','.submit',function(){
 			var postData=$('.consignee_info_form').serializeObject();
+			var areaAddress=$('.area-address-name').val();
 			var  content ='';
 			if(!postData.consignee_name){
 				content='请填写收货人姓名';
 			}else if(!register.phoneCheck(postData.consignee_mobile_phone)){
 				content='请填写手机号码';
-			}else if(!postData.provinces){
+			}else if(!areaAddress){
 				content='请选择所在地区';
 			}else if(!postData.detail_address){
 				content='请填写地区详细地址';
@@ -479,9 +480,11 @@
 				dialog.error(content);
 				return false;
 			}
-			console.log(postData);return;
+			
 			var _this = $(this);
 			_this.addClass("nodisabled");//防止重复提交
+			postData.region = $('.area-address-name').getArea();
+			console.log(postData.region);return;
 			$.ajax({
 				url:controller + "editStoreConsigneeInfo",
 				type:'post',
