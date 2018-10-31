@@ -89,7 +89,9 @@
 						<ul class="list">
 							<li class="no-data"><span>暂无数据</span></li>
 						</ul>
+						{notempty name='store'}
 						<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
+						{/notempty}
 					</form>
 				</section>
 				<!--退换货人地址手机-->
@@ -126,7 +128,9 @@
 						<ul class="list">
 							<li class="no-data"><span>暂无数据</span></li>
 						</ul>
+						{notempty name='store'}
 						<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
+						{/notempty}
 					</form>
 				</section>
 				<!--门店经营地址-->
@@ -190,19 +194,21 @@
 			$('.area_address').setArea(region);
 		}
 
-		//获取店铺员工账号列表
-		var config = {
-			url: controller + 'getStoreEmployeeList',
-			container: $('#storeEmployeeList').find('ul.list')
-		};
-		getList(config);
-
-		//获取门店员工账号列表
-		var config = {
-			url: controller + 'getShopEmployeeList',
-			container: $('#shopEmployeeList').find('ul.list')
-		};
-		getList(config);
+		var store = '{$store}';
+		if(store){
+			//获取店铺员工账号列表
+			var config = {
+				url: controller + 'getStoreEmployeeList',
+				container: $('#storeEmployeeList').find('ul.list')
+			};
+			getList(config);
+			//获取门店员工账号列表
+			var config = {
+				url: controller + 'getShopEmployeeList',
+				container: $('#shopEmployeeList').find('ul.list')
+			};
+			getList(config);
+		}
 
 		//新增线上店铺员工账号
 		var storeEmployeeSection=$('#storeEmployeeSection').html();

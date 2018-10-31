@@ -3,7 +3,7 @@ namespace common\cache;
 
 class Store{
     private static $_cache_key = 'cache_store_';
-    private static $_cache_key_manager_store = 'cache_key_manager_store_';
+    private static $_cache_key_manager_store = 'cache_manager_store_';
 
     /**从缓存中获取入驻厂商店铺列表
      */
@@ -38,8 +38,9 @@ class Store{
     /**缓存当前店铺信息
      */
     public static function cacheCurrentStoreInfo($storeInfo){
-        cache(self::$_cache_key_manager_store,null);
-        cache(self::$_cache_key_manager_store, $storeInfo,config('custom.factory_cache_time'));
+        if($storeInfo){
+            cache(self::$_cache_key_manager_store, $storeInfo,config('custom.factory_cache_time'));
+        }
     }
 
     /**获取当前店铺信息
