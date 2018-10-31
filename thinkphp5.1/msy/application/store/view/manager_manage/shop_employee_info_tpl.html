@@ -1,5 +1,12 @@
 {notempty name='info'}
-<li class="columns_flex l-r-sides" data-id="{$info.id}"  data-user_shop_id="{$info.user_shop_id}">
+<li class="columns_flex l-r-sides" data-id="{$info.id}"  data-user_shop_id="{$info.user_shop_id}" data-post="{$info.post}" data-duty="{$info.duty}">
+	<div style="display:none;">
+		<select name="nodeIds">
+			{volist name='$info.nodeIds' id='node'}
+			<option value="{$node}"></option>
+			{/volist}
+		</select>
+	</div>
 	<div>
 		<p>
 			<span>姓名</span>

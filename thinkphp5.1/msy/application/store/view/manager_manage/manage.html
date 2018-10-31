@@ -229,7 +229,7 @@
 					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写员工姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
@@ -309,7 +309,7 @@
 					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
@@ -400,7 +400,7 @@
 					var dialogForm = $('.storeEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写员工姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
@@ -480,7 +480,7 @@
 				yes:function(index){
 					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
