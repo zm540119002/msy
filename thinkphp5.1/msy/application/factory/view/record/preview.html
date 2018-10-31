@@ -161,10 +161,17 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//初始化地址
-		var addressIndex=$('.area-address-name').val();
-		var areaAddressArr=addressIndex.split(',');
-		$('.area_address').setArea(areaAddressArr);
+		//省市区初始化
+		var province = '{$recordInfo.province|default=""}';
+		var city = '{$recordInfo.city|default=""}';
+		var area = '{$recordInfo.area|default=""}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
+		}
 		swiper('.swiper-container');
 		$('.more-text-box').moreText({
 			mainCell:".more-text",

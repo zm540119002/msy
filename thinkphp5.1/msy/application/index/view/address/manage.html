@@ -22,7 +22,7 @@
 						{/if}
 					</div>
 					<p class=""><span class="area_address" id="{$vo.id}"></span>{$vo.detail_address}</p>
-					<input type="hidden" class="area-address-name" value="{$vo.district_address}" data-key="{$vo.district_address}">
+					<input type="hidden" class="area-address-name" value="" data-province="{$vo.province}" data-city="{$vo.city}" data-area="{$vo.area}">
 				</div>
 				<a href="javascript:void(0)" class="address_delete">删除</a>
 				<a href="javascript:void(0);" class="ia-r address_edit">
@@ -41,24 +41,25 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var addressArr=[];
 		$('.delivery_address .item_info').each(function(index,val){
+			//省市区初始化
 			var _this=$(this);
-			var addressIndex=_this.find('.area-address-name').data('key');
-			if(addressIndex){
-				var areaAddressArr = addressIndex.split(',');
-				addressArr.push(areaAddressArr);
+			var province=_this.find('.area-address-name').data('province');
+			var city=_this.find('.area-address-name').data('city');
+			var area=_this.find('.area-address-name').data('area');
+			var region = [];
+			if(province && city && area){
+				region.push(province);
+				region.push(city);
+				region.push(area);
+				_this.find('.area_address').setArea(region);
 			}
+
 			_this.on('click',function(){
 				_this.parents('.item_addr').addClass('active').siblings().removeClass('active');
 				return false;
 			})
 		});
-		for(let i=0;i<addressArr.length;i++){
-            setTimeout(function(){
-                $('.area_address').eq(i).setArea(addressArr[i]);
-            },100)
-        }
 
 		//新建地址
 		$('body').on('click','.address_create',function () {

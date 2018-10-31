@@ -45,7 +45,7 @@
 				{notempty name='storeList'}
 					{volist name="storeList" id="vo"}
 					<option value="{$vo.id}">
-						{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$storeInfo.operational_model|getOperationalModel}
+						{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$vo.operational_model|getOperationalModel}
 					</option>
 					{/volist}
 				{/notempty}
@@ -252,13 +252,13 @@
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
-					 var config = {
-					 	url:controller + 'storeEmployeeEdit',
-					 	postData:postData,
-					 	index:index,
-					 	container:$('#storeEmployeeList').find('ul.list')
-					 };
-					 dialogFormAdd(config);
+					var config = {
+						url:controller + 'storeEmployeeEdit',
+						postData:postData,
+						index:index,
+						container:$('#storeEmployeeList').find('ul.list')
+					};
+					dialogFormAdd(config);
 				}
 			});
 		});
@@ -393,7 +393,8 @@
 					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var postData=$('.storeEmployeeForm').serializeObject();
+					var dialogForm = $('.storeEmployeeForm');
+					var postData=dialogForm.serializeObject();
 					var content='';
 					if(!postData.name){
 						content='请填写员工姓名';
@@ -409,13 +410,32 @@
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
-					 var config = {
-					 	url:module + 'shopEdit',
-					 	postData:postData,
-					 	index:index
-					 };
-					 dialogFormAdd(config);
-					layer.close(index);
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					console.log(postData);return;
+					var config = {
+						url:controller + 'shopEmployeeEdit',
+						postData:postData,
+						index:index,
+						container:$('#shopEmployeeList').find('ul.list')
+					};
+					dialogFormAdd(config);
 				}
 			});
 		});

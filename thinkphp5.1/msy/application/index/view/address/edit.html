@@ -28,9 +28,9 @@
 					{empty name="address"}
 						<div class="area_address">省 &gt; 市 &gt; 区/县</div>
 						{else /}
-						<div class="area_address">{$address.district_address}</div>
+						<div class="area_address"></div>
 					{/empty}
-					<input type="hidden" name="district_address" data-key="{$address.district_address}" value="" class="area-address-name" >
+					<input type="hidden"  data-key="" value="" class="area-address-name" >
 				</a>
 			</div>
 			<div class="form-group box-flex">
@@ -79,11 +79,16 @@
 <script type="text/javascript">
 	$(function(){
 		$(function () {
-			//初始化地址
-			var addressIndex=$('.area-address-name').data('key');
-			if(addressIndex){
-				var areaAddressArr=addressIndex.split(',');
-				$('.area_address').setArea(areaAddressArr);
+			//省市区初始化
+			var province = '{$address.province|default=""}';
+			var city = '{$address.city|default=""}';
+			var area = '{$address.area|default=""}';
+			var region = [];
+			if(province && city && area){
+				region.push(province);
+				region.push(city);
+				region.push(area);
+				$('.area_address').setArea(region);
 			}
 
 			//设定默认地址
@@ -98,16 +103,14 @@
 			});
 
 			$('body').on('click','.address_save',function () {
-				_this = $(this);
+				var area_address =$('.area-address-name').getArea();
 				var postData  = $(".form").serializeObject();
-				postData.district_address=$('.area-address-name').data('key');
-				postData.is_default = $('.myswitch').attr('data-off');
 				var content='';
 				if(!postData.consignee){
 					content='请填写收货人姓名';
 				}else if(!register.phoneCheck(postData.mobile)){
 					content='请填写正确的手机号码';
-				}else if(!postData.district_address){
+				}else if(!area_address){
 					content='请选择地区';
 				}else if(!postData.detail_address){
 					content='请填写详细地址';
@@ -116,7 +119,12 @@
 					dialog.error(content);
 					return false;
 				}
+				postData.is_default = $('.myswitch').attr('data-off');
+				postData.province = area_address[0];
+				postData.city = area_address[1];
+				postData.area = area_address[2];
 				//添加或修改地址
+				var _this = $(this);
 				_this.addClass("nodisabled");//防止重复提交
 				var url = module + '/Address/edit';
 				$.ajax({
