@@ -109,7 +109,7 @@ class ManagerManage extends \common\model\Base {
 				$userId = $this->getAttr('id');
 			}
 			//检查员工是否存在
-			$userStoreId = $this->_checkEmployeeExist($userId,$storeId);
+			$userStoreId = $this->_checkStoreEmployeeExist($userId,$storeId);
 			if(!$userStoreId){//不存在
 				$postData['type'] = 4;
 				$postData['user_id'] = $userId;
@@ -142,6 +142,143 @@ class ManagerManage extends \common\model\Base {
 			$this->commit();//事务提交
 			$postData['id'] = $userId;
 			$postData['user_store_id'] = $userStoreId;
+
+		}
+		return successMsg('成功！',$postData);
+	}
+
+	//编辑
+	public function editShopEmployee($storeId){
+		if(!intval($storeId)){
+			return errorMsg('缺少店铺ID');
+		}
+		$postData = input('post.');
+		//用户数据验证
+		$validateUser = new \common\validate\User();
+		if(!$validateUser->scene('employee')->check($postData)){
+			return errorMsg($validateUser->getError());
+		}
+		if($postData['id'] && intval($postData['id'])){//修改
+			$postData['update_time'] = time();
+			$postData['nickname'] = $postData['name'] = trim($postData['name']);
+			//手机号码暂存
+			$mobilePhone = $postData['mobile_phone'];
+			unset($postData['mobile_phone']);
+			$this->startTrans();//事务开启
+			$res = $this->isUpdate(true)->save($postData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$userId = $postData['id'];
+			$postData['id'] = $postData['user_store_id'];
+			$modelUserStore = new \common\model\UserStore();
+			$res = $modelUserStore->isUpdate(true)->save($postData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$modelUserStore->getError());
+			}
+			if(!empty($postData['nodeIds'])){
+				$modelUserStoreNode = new \common\model\UserStoreNode();
+				$config = [
+					'field' => [
+						'usn.node_id',
+					],'where' => [
+						['usn.status','=',0],
+						['usn.user_id','=',$userId],
+						['usn.store_id','=',$storeId],
+					],
+				];
+				$userStoreNodeList = $modelUserStoreNode->getlist($config);
+				$oldNodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
+				if(empty($oldNodeIds)){
+					$addNodeIds = $postData['nodeIds'];
+					$delNodeIds = [];
+				}else{
+					$addNodeIds = array_diff($postData['nodeIds'],$oldNodeIds);
+					$delNodeIds = array_diff($oldNodeIds,$postData['nodeIds']);
+				}
+				if(!empty($addNodeIds)){
+					$data = [];
+					foreach ($addNodeIds as $node){
+						$data[] = [
+							'user_id' => $userId,
+							'store_id' => $storeId,
+							'node_id' => $node,
+						];
+					}
+					$res = $modelUserStoreNode->isUpdate(false)->saveAll($data);
+					if(false===$res){
+						$this->rollback();//回滚事务
+						return errorMsg($modelUserStoreNode->getError());
+					}
+				}
+				if(!empty($delNodeIds)){
+					$where = [
+						['user_id','=',$userId],
+						['store_id','=',$storeId],
+					];
+					$where[] = ['node_id','in',$delNodeIds];
+					$res = $modelUserStoreNode->where($where)->delete();
+					if(!$res){
+						$modelUserStoreNode->rollback();//回滚事务
+						return errorMsg('失败',$modelUserStoreNode->getError());
+					}
+				}
+			}
+			//需返回手机号码
+			$postData['mobile_phone'] = $mobilePhone;
+			$this->commit();//提交事务
+		}else{//新增
+			//验证用户是否存在
+			$userId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
+			$this->startTrans();//事务开启
+			if(!$userId){//不存在
+				$postData['name'] = $this->createUserName();
+				$postData['nickname'] = trim($postData['nickname']);
+				$postData['create_time'] = time();
+				$res = $this->isUpdate(false)->save($postData);
+				if($res===false){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$this->getError());
+				}
+				$userId = $this->getAttr('id');
+			}
+			//检查员工是否存在
+			$userShopId = $this->_checkShopEmployeeExist($userId,$storeId,$postData['shop_id']);
+			if(!$userShopId){//不存在
+				$postData['type'] = 4;
+				$postData['user_id'] = $userId;
+				$postData['store_id'] = $storeId;
+				$modelUserShop = new \app\store\model\UserShop();
+				$res = $modelUserShop->isUpdate(false)->save($postData);
+				if($res===false){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$modelUserShop->getError());
+				}
+				$userShopId = $modelUserShop->getAttr('id');
+				if(!empty($postData['nodeIds'])){
+					//新增权限节点
+					$list = [];
+					foreach ($postData['nodeIds'] as $value){
+						$list[] = [
+							'user_id'=>$userId,
+							'store_id'=>$storeId,
+							'shop_id'=>$postData['shop_id'],
+							'node_id'=>$value,
+						];
+					}
+					$modelUserShopNode = new \app\store\model\UserShopNode();
+					$res = $modelUserShopNode->isUpdate(false)->saveAll($list);
+					if($res===false){
+						$this->rollback();//事务回滚
+						return errorMsg('失败',$modelUserShopNode->getError());
+					}
+				}
+			}
+			$this->commit();//事务提交
+			$postData['id'] = $userId;
+			$postData['user_shop_id'] = $userShopId;
 
 		}
 		return successMsg('成功！',$postData);
@@ -212,9 +349,9 @@ class ManagerManage extends \common\model\Base {
 		return successMsg('成功');
 	}
 
-	/**检查员工是否存在
+	/**检查店铺员工是否存在
 	 */
-	private function _checkEmployeeExist($userId,$storeId){
+	private function _checkStoreEmployeeExist($userId,$storeId){
 		$modelUserStore = new \common\model\UserStore();
 		$where = [
 			['user_id','=',$userId],
@@ -223,5 +360,19 @@ class ManagerManage extends \common\model\Base {
 			['type','=',4],
 		];
 		return $modelUserStore->where($where)->value('id');
+	}
+
+	/**检查门店员工是否存在
+	 */
+	private function _checkShopEmployeeExist($userId,$storeId,$shopId){
+		$modelUserShop = new \app\store\model\UserShop();
+		$where = [
+			['user_id','=',$userId],
+			['store_id','=',$storeId],
+			['shop_id','=',$shopId],
+			['status','<>',2],
+			['type','=',4],
+		];
+		return $modelUserShop->where($where)->value('id');
 	}
 }

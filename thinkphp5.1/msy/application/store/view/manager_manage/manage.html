@@ -409,11 +409,6 @@
 						dialog.error(content);
 						return false;
 					}
-					$.each($('.employeeAccountLayer').find('li'),function(){
-						if($(this).attr('class')=='current'){
-							postData.nodeIds.push($(this).data('id'));
-						}
-					});
 					postData.post = null;
 					$.each(dialogForm.find('ul.post').find('li'),function(){
 						if($(this).hasClass('current')){
@@ -432,9 +427,9 @@
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
-					console.log(postData);return;
+					postData.shop_id = dialogForm.find('[name=shop_id]').val();
 					var config = {
-						url:controller + 'shopEmployeeEdit',
+						url:controller + 'editShopEmployee',
 						postData:postData,
 						index:index,
 						container:$('#shopEmployeeList').find('ul.list')
@@ -472,7 +467,7 @@
 						return false;
 					}
 					 var config = {
-					 	url:module + 'Manager/edit',
+					 	url:controller + 'editShopEmployee',
 					 	postData:postData,
 						 modifyObj:_this,
 					 	index:index
@@ -503,7 +498,7 @@
 					postData.id = _this.data('id');
 					postData.userFactoryId = _this.data('user_factory_id');
 					 var config = {
-					 	url:module + 'Manager/del',
+					 	url:controller + 'delShopEmployee',
 					 	postData:postData,
 					 	obj:_this,
 					 	index:index

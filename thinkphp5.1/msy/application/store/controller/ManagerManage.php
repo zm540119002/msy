@@ -76,6 +76,24 @@ class ManagerManage extends FactoryStoreBase{
         }
     }
 
+    /**门店员工-编辑
+     */
+    public function editShopEmployee(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelManagerManage = new \app\store\model\ManagerManage();
+            $info = $modelManagerManage->editShopEmployee($this->currentStore['id']);
+            if($info['status']==0){
+                return $info;
+            }else{
+                $this->assign('info',$info);
+                return view('shop_employee_info_tpl');
+            }
+        }
+    }
+
     //获取店铺员工列表
     public function getStoreEmployeeList(){
         if(!($this->currentStore['id'])){
@@ -140,7 +158,6 @@ class ManagerManage extends FactoryStoreBase{
                 ],
             ];
             $shopEmployeeList = $modelUserShop->getList($config);
-            print_r($modelUserShop->getLastSql());
             $this->assign('list',$shopEmployeeList);
             return view('shop_employee_list_tpl');
         }

@@ -1,7 +1,7 @@
 <?php
 namespace common\model;
 
-class UserCenter extends \think\Model {
+class UserCenter extends Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'user';
 	// 设置主键
@@ -137,7 +137,7 @@ class UserCenter extends \think\Model {
 		$salt = create_random_str(10,0);
 		$data['salt'] = $salt;//盐值;
 		$data['password'] = md5($salt . $passWord);//加密;
-		$data['name'] = 'msy_' . create_random_str(9,3);
+		$data['name'] = $this->createUserName();
 		$data['nickname'] = '游客';
 		$data['create_time'] = time();
 		$this->save($data);

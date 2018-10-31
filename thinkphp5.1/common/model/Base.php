@@ -108,4 +108,8 @@ class Base extends \think\Model {
 		$res = $modelUser->where($where)->value('id');
 		return $res;
 	}
+
+	protected function createUserName(){
+		 return 'msy_' . create_random_str(9,3);
+	}
 }
