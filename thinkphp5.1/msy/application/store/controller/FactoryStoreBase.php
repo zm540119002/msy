@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class ManagerManageBase extends \common\controller\UserBase{
+class FactoryStoreBase extends \common\controller\UserBase{
     protected $_storeList = null;
     protected $_store = null;
     protected $_managerFactoryList = null;
