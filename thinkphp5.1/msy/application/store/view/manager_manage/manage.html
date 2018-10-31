@@ -449,10 +449,33 @@
 				content:shopEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
-					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
+					dialogForm.css('height',winHeight-120+'px');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
 				},
 				yes:function(index){
 					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
