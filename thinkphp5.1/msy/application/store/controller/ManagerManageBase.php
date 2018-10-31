@@ -32,6 +32,7 @@ class ManagerManageBase extends \common\controller\UserBase{
             'where' => [
                 ['us.status','=',0],
                 ['us.user_id','=',$this->user['id']],
+                ['f.type','=',2],
             ],'join' => [
                 ['store s','s.id = us.store_id','left'],
                 ['factory f','f.id = us.factory_id','left'],
