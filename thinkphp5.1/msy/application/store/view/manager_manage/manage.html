@@ -78,7 +78,7 @@
 			<div class="content_main">
 				<!--店铺员工列表-->
 				<section class="section_content" id="storeEmployeeList">
-					<form class="">
+					<form class="storeEmployeeList">
 						<div class="search_module_bar">
 							<input type="button" class="search_btn left"/>
 							<input type="text" class="search_text left" placeholder="输入姓名/岗位/手机号搜索账号"/>
@@ -117,7 +117,7 @@
 				</section>
 				<!--门店员工列表-->
 				<section class="section_content" id="shopEmployeeList">
-					<form class="">
+					<form class="shopEmployeeList">
 						<div class="search_module_bar">
 							<input type="button" class="search_btn left"/>
 							<input type="text" class="search_text left" placeholder="输入姓名/门店/手机号搜索账号"/>
@@ -267,7 +267,7 @@
 			});
 		});
 		//修改线上店铺员工账号
-		$('body').on('click','.modify-account',function(){
+		$('body').on('click','.storeEmployeeList .modify-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['修改线上店铺员工账号','border-bottom:1px solid #d9d9d9;'],
@@ -281,6 +281,7 @@
 					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
+					//$('input[name="mobile_phone"]').attr('disabled','disabled');
 					copyDataByName(_this,dialogForm);
 					//岗位回显
 					$.each(dialogForm.find('ul.post').find('li'),function(){
@@ -439,7 +440,8 @@
 			});
 		});
 		//修改门店员工账号
-		$('body').on('click','.modify-shop-account',function(){
+		$('body').on('click','.shopEmployeeList .modify-account',function(){
+			var dialogForm ;
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['修改门店员工账号','border-bottom:1px solid #d9d9d9;'],
@@ -449,7 +451,7 @@
 				content:shopEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
-					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
@@ -483,7 +485,7 @@
 					if(!postData.nickname){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
-						content='请填写手机号码';
+						content='请填写手机号码22222';
 					}
 					if(content){
 						dialog.error(content);
