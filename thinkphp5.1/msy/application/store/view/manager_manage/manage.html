@@ -19,7 +19,7 @@
 	<form class="storeEmployeeForm">
 		<div class="account-field">
 			<span class="content-label">姓名</span>
-			<input type="text" class="" placeholder="姓名" name="name">
+			<input type="text" class="" placeholder="姓名" name="nickname">
 		</div>
 		<div class="account-field">
 			<span class="content-label">手机号码</span>
@@ -33,7 +33,7 @@
     <form class="storeEmployeeForm">
         <div class="account-field">
             <span class="content-label">姓名</span>
-            <input type="text" class="" placeholder="姓名" name="name">
+            <input type="text" class="" placeholder="姓名" name="nickname">
         </div>
         <div class="account-field">
             <span class="content-label">手机号码</span>
@@ -41,13 +41,11 @@
         </div>
         <div class="account-field">
             <span class="content-label">所属门店</span>
-            <select name="store_id">
-				{notempty name='storeList'}
-					{volist name="storeList" id="vo"}
-					<option value="{$vo.id}">
-						{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$vo.operational_model|getOperationalModel}
-					</option>
-					{/volist}
+            <select name="shop_id">
+				{notempty name='shopList'}
+				{volist name="shopList" id="vo"}
+				<option value="{$vo.id}">{$vo.name}</option>
+				{/volist}
 				{/notempty}
             </select>
         </div>
@@ -89,7 +87,9 @@
 						<ul class="list">
 							<li class="no-data"><span>暂无数据</span></li>
 						</ul>
+						{notempty name='store'}
 						<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
+						{/notempty}
 					</form>
 				</section>
 				<!--退换货人地址手机-->
@@ -126,7 +126,9 @@
 						<ul class="list">
 							<li class="no-data"><span>暂无数据</span></li>
 						</ul>
+						{notempty name='store'}
 						<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
+						{/notempty}
 					</form>
 				</section>
 				<!--门店经营地址-->
@@ -190,19 +192,21 @@
 			$('.area_address').setArea(region);
 		}
 
-		//获取店铺员工账号列表
-		var config = {
-			url: controller + 'getStoreEmployeeList',
-			container: $('#storeEmployeeList').find('ul.list')
-		};
-		getList(config);
-
-		//获取门店员工账号列表
-		var config = {
-			url: controller + 'getShopEmployeeList',
-			container: $('#shopEmployeeList').find('ul.list')
-		};
-		getList(config);
+		var store = '{$store}';
+		if(store){
+			//获取店铺员工账号列表
+			var config = {
+				url: controller + 'getStoreEmployeeList',
+				container: $('#storeEmployeeList').find('ul.list')
+			};
+			getList(config);
+			//获取门店员工账号列表
+			config = {
+				url: controller + 'getShopEmployeeList',
+				container: $('#shopEmployeeList').find('ul.list')
+			};
+			getList(config);
+		}
 
 		//新增线上店铺员工账号
 		var storeEmployeeSection=$('#storeEmployeeSection').html();
@@ -253,7 +257,7 @@
 						}
 					});
 					var config = {
-						url:controller + 'storeEmployeeEdit',
+						url:controller + 'editStoreEmployee',
 						postData:postData,
 						index:index,
 						container:$('#storeEmployeeList').find('ul.list')
@@ -335,7 +339,7 @@
 					postData.id = _this.data('id');
 					postData.user_store_id = _this.data('user_store_id');
 					var config = {
-						url:controller + 'storeEmployeeEdit',
+						url:controller + 'editStoreEmployee',
 						postData:postData,
 						modifyObj:_this,
 						index:index
@@ -405,11 +409,6 @@
 						dialog.error(content);
 						return false;
 					}
-					$.each($('.employeeAccountLayer').find('li'),function(){
-						if($(this).attr('class')=='current'){
-							postData.nodeIds.push($(this).data('id'));
-						}
-					});
 					postData.post = null;
 					$.each(dialogForm.find('ul.post').find('li'),function(){
 						if($(this).hasClass('current')){
@@ -428,9 +427,9 @@
 							postData.nodeIds.push($(this).data('id'));
 						}
 					});
-					console.log(postData);return;
+					postData.shop_id = dialogForm.find('[name=shop_id]').val();
 					var config = {
-						url:controller + 'shopEmployeeEdit',
+						url:controller + 'editShopEmployee',
 						postData:postData,
 						index:index,
 						container:$('#shopEmployeeList').find('ul.list')
@@ -468,7 +467,7 @@
 						return false;
 					}
 					 var config = {
-					 	url:module + 'Manager/edit',
+					 	url:controller + 'editShopEmployee',
 					 	postData:postData,
 						 modifyObj:_this,
 					 	index:index
@@ -499,7 +498,7 @@
 					postData.id = _this.data('id');
 					postData.userFactoryId = _this.data('user_factory_id');
 					 var config = {
-					 	url:module + 'Manager/del',
+					 	url:controller + 'delShopEmployee',
 					 	postData:postData,
 					 	obj:_this,
 					 	index:index
