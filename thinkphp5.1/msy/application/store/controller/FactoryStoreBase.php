@@ -6,7 +6,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
     protected $_store = null;
     protected $_managerFactoryList = null;
     protected $_defaultDialog = null;
-
+    
     public function __construct(){
         parent::__construct();
 
