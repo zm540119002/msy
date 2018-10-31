@@ -9,5 +9,5 @@ class UserShopNode extends \common\model\Base{
 	// 别名
 	protected $alias = 'usn';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_common';
+	protected $connection = 'db_config_store';
 }

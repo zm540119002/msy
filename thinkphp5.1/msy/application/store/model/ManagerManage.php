@@ -24,7 +24,7 @@ class ManagerManage extends \common\model\Base {
 		}
 		if($postData['id'] && intval($postData['id'])){//修改
 			$postData['update_time'] = time();
-			$postData['nickname'] = $postData['name'] = trim($postData['name']);
+			$postData['nickname'] = trim($postData['nickname']);
 			//手机号码暂存
 			$mobilePhone = $postData['mobile_phone'];
 			unset($postData['mobile_phone']);
@@ -99,7 +99,8 @@ class ManagerManage extends \common\model\Base {
 			$this->startTrans();//事务开启
 			if(!$userId){//不存在
 				unset($postData['id']);
-				$postData['nickname'] = trim($postData['name']);
+				$postData['name'] = $this->createUserName();
+				$postData['nickname'] = trim($postData['nickname']);
 				$postData['create_time'] = time();
 				$res = $this->isUpdate(false)->save($postData);
 				if($res===false){
@@ -160,7 +161,7 @@ class ManagerManage extends \common\model\Base {
 		}
 		if($postData['id'] && intval($postData['id'])){//修改
 			$postData['update_time'] = time();
-			$postData['nickname'] = $postData['name'] = trim($postData['name']);
+			$postData['nickname'] = trim($postData['nickname']);
 			//手机号码暂存
 			$mobilePhone = $postData['mobile_phone'];
 			unset($postData['mobile_phone']);
