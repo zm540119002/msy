@@ -10,7 +10,23 @@ class ManagerManage extends FactoryStoreBase{
 
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(isset($this->currentStore['id']) && $this->currentStore['id']){
-            $modelShop = new \app\store\model\Shop();
+            $modelUserShop = new \app\store\model\UserShop();
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                    'u.nickname','u.mobile_phone',
+                    'us.id user_shop_id',
+                ],'leftJoin' => [
+                    ['shop s','s.id = us.shop_id'],
+                    ['common.user u','u.id = us.user_id'],
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['us.status','=',0],
+                    ['us.store_id','=',$this->currentStore['id']],
+                ],
+            ];
+            $shopList = $modelUserShop->getList($config);
+            $this->assign('shopList',$shopList);
         }
     }
 
@@ -44,13 +60,13 @@ class ManagerManage extends FactoryStoreBase{
 
     /**店铺员工-编辑
      */
-    public function storeEmployeeEdit(){
+    public function editStoreEmployee(){
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            $info = $modelManagerManage->storeEmployeeEdit($this->currentStore['id']);
+            $info = $modelManagerManage->editStoreEmployee($this->currentStore['id']);
             if($info['status']==0){
                 return $info;
             }else{
@@ -109,21 +125,23 @@ class ManagerManage extends FactoryStoreBase{
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
-            $modelShop = new \app\store\model\Shop();
+            $modelUserShop = new \app\store\model\UserShop();
             $config = [
                 'field' => [
-                    's.id','s.name',
-                    'u.id','u.nickname','u.nickname',
+                    'u.id','u.nickname','u.mobile_phone',
+                    'us.post','us.duty',
                 ],'leftJoin' => [
-                    ['common.user u','u.id = s.user_id'],
+                    ['common.user u','u.id = us.user_id'],
                 ],'where' => [
                     ['u.status','=',0],
-                    ['s.status','=',0],
-                    ['s.store_id','=',$this->currentStore['id']],
+                    ['us.status','=',0],
+                    ['us.type','=',4],
+                    ['us.store_id','=',$this->currentStore['id']],
                 ],
             ];
-            $list = $modelShop->getList($config);
-            $this->assign('list',$list);
+            $shopEmployeeList = $modelUserShop->getList($config);
+            print_r($modelUserShop->getLastSql());
+            $this->assign('list',$shopEmployeeList);
             return view('shop_employee_list_tpl');
         }
     }

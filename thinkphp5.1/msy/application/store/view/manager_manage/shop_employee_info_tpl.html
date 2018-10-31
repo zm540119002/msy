@@ -11,12 +11,10 @@
 		</div>
 		<div>
 			<span class="content-label">所属门店</span>
-			<select name="store_id">
-				{notempty name='storeList'}
-				{volist name="storeList" id="vo"}
-				<option value="{$vo.id}">
-					{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$vo.operational_model|getOperationalModel}
-				</option>
+			<select name="shop_id">
+				{notempty name='shopList'}
+				{volist name="shopList" id="vo"}
+				<option value="{$vo.id}">{$vo.name}</option>
 				{/volist}
 				{/notempty}
 			</select>

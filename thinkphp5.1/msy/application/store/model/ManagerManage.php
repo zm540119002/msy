@@ -12,7 +12,7 @@ class ManagerManage extends \common\model\Base {
 	protected $connection = 'db_config_common';
 
 	//编辑
-	public function storeEmployeeEdit($storeId){
+	public function editStoreEmployee($storeId){
 		if(!intval($storeId)){
 			return errorMsg('缺少店铺ID');
 		}

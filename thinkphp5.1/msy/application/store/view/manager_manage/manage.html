@@ -41,13 +41,11 @@
         </div>
         <div class="account-field">
             <span class="content-label">所属门店</span>
-            <select name="store_id">
-				{notempty name='storeList'}
-					{volist name="storeList" id="vo"}
-					<option value="{$vo.id}">
-						{$vo.store_name}{$vo.store_type|getStoreType}.{$vo.run_type|getRunType}.{$vo.operational_model|getOperationalModel}
-					</option>
-					{/volist}
+            <select name="shop_id">
+				{notempty name='shopList'}
+				{volist name="shopList" id="vo"}
+				<option value="{$vo.id}">{$vo.name}</option>
+				{/volist}
 				{/notempty}
             </select>
         </div>
@@ -203,7 +201,7 @@
 			};
 			getList(config);
 			//获取门店员工账号列表
-			var config = {
+			config = {
 				url: controller + 'getShopEmployeeList',
 				container: $('#shopEmployeeList').find('ul.list')
 			};
@@ -259,7 +257,7 @@
 						}
 					});
 					var config = {
-						url:controller + 'storeEmployeeEdit',
+						url:controller + 'editStoreEmployee',
 						postData:postData,
 						index:index,
 						container:$('#storeEmployeeList').find('ul.list')
@@ -341,7 +339,7 @@
 					postData.id = _this.data('id');
 					postData.user_store_id = _this.data('user_store_id');
 					var config = {
-						url:controller + 'storeEmployeeEdit',
+						url:controller + 'editStoreEmployee',
 						postData:postData,
 						modifyObj:_this,
 						index:index
