@@ -147,26 +147,6 @@ class ManagerManage extends \common\model\Base {
 		return successMsg('成功！',$postData);
 	}
 
-	//列表
-	public function getList($storeId){
-		$modelUserStore = new \common\model\UserStore();
-		$where = [
-			['uf.store_id','=',$storeId],
-			['uf.status','=',0],
-			['uf.type','=',2],
-			['u.status','=',0],
-		];
-		$field = [
-			'u.id','u.name','u.mobile_phone',
-			'uf.id user_store_id',
-		];
-		$join = [
-			['user u','u.id = uf.user_id','left'],
-		];
-		$list = $modelUserStore->alias('uf')->field($field)->join($join)->where($where)->select();
-		return count($list)!=0?$list->toArray():[];
-	}
-
 	//删除
 	public function delStoreEmployee($storeId,$tag=true){
 		$userStoreId = input('post.user_store_id',0);

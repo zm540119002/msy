@@ -10,6 +10,7 @@ class ManagerManage extends FactoryStoreBase{
 
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(isset($this->currentStore['id']) && $this->currentStore['id']){
+            $modelShop = new \app\store\model\Shop();
         }
     }
 
