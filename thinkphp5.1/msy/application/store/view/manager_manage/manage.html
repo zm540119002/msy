@@ -229,7 +229,7 @@
 					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写员工姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
@@ -309,7 +309,7 @@
 					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
@@ -400,7 +400,7 @@
 					var dialogForm = $('.storeEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写员工姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
@@ -449,15 +449,38 @@
 				content:shopEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
-					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
+					dialogForm.css('height',winHeight-120+'px');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
 				},
 				yes:function(index){
 					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
 					var content='';
-					if(!postData.name){
+					if(!postData.nickname){
 						content='请填写姓名';
 					}else if(!register.phoneCheck(postData.mobile_phone)){
 						content='请填写手机号码';
@@ -466,14 +489,35 @@
 						dialog.error(content);
 						return false;
 					}
-					 var config = {
-					 	url:controller + 'editShopEmployee',
-					 	postData:postData,
-						 modifyObj:_this,
-					 	index:index
-					 };
-					 dialogFormEdit(config);
-
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					postData.id = _this.data('id');
+					postData.user_shop_id = _this.data('user_shop_id');
+					postData.shop_id = dialogForm.find('[name=shop_id]').val();
+					console.log(postData);return;
+					var config = {
+						url:controller + 'editShopEmployee',
+						postData:postData,
+						modifyObj:_this,
+						index:index
+					};
+					dialogFormEdit(config);
 				}
 			});
 		});

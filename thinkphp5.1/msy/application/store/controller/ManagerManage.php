@@ -114,8 +114,8 @@ class ManagerManage extends FactoryStoreBase{
                     ['us.store_id','=',$this->currentStore['id']],
                 ],
             ];
-            $list = $modelUserStore->getList($config);
-            foreach ($list as &$user){
+            $storeEmployeeList = $modelUserStore->getList($config);
+            foreach ($storeEmployeeList as &$user){
                 $modelUserStoreNode = new \common\model\UserStoreNode();
                 $config = [
                     'field' => [
@@ -132,7 +132,7 @@ class ManagerManage extends FactoryStoreBase{
                     $user['nodeIds'] = $nodeIds;
                 }
             }
-            $this->assign('list',$list);
+            $this->assign('list',$storeEmployeeList);
             return view('store_employee_list_tpl');
         }
     }
@@ -147,7 +147,7 @@ class ManagerManage extends FactoryStoreBase{
             $config = [
                 'field' => [
                     'u.id','u.nickname','u.mobile_phone',
-                    'us.post','us.duty',
+                    'us.id user_shop_id','us.post','us.duty',
                 ],'leftJoin' => [
                     ['common.user u','u.id = us.user_id'],
                 ],'where' => [
@@ -158,6 +158,23 @@ class ManagerManage extends FactoryStoreBase{
                 ],
             ];
             $shopEmployeeList = $modelUserShop->getList($config);
+            foreach ($shopEmployeeList as &$user){
+                $modelUserShopNode = new \app\store\model\UserShopNode();
+                $config = [
+                    'field' => [
+                        'usn.node_id',
+                    ],'where' => [
+                        ['usn.status','=',0],
+                        ['usn.user_id','=',$user['id']],
+                        ['usn.store_id','=',$this->currentStore['id']],
+                    ],
+                ];
+                $userShopNodeList = $modelUserShopNode->getlist($config);
+                $nodeIds = array_unique(array_column($userShopNodeList,'node_id'));
+                if(!empty($nodeIds)){
+                    $user['nodeIds'] = $nodeIds;
+                }
+            }
             $this->assign('list',$shopEmployeeList);
             return view('shop_employee_list_tpl');
         }

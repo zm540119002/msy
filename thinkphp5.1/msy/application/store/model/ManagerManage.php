@@ -172,7 +172,7 @@ class ManagerManage extends \common\model\Base {
 				return errorMsg('失败',$this->getError());
 			}
 			$userId = $postData['id'];
-			$postData['id'] = $postData['user_store_id'];
+			$postData['id'] = $postData['user_shop_id'];
 			$modelUserStore = new \common\model\UserStore();
 			$res = $modelUserStore->isUpdate(true)->save($postData);
 			if($res===false){
