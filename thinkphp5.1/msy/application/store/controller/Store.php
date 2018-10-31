@@ -84,19 +84,23 @@ class Store extends \common\controller\FactoryBase{
             $modelStore = new \common\model\Store();
             $config = [
                 'field' => [
-                    's.id','s.store_type','s.run_type',
-                    'f.name factory_name','us.id user_store_id','u.nickname','u.mobile_phone',
-                ],'leftJoin' => [
-                    ['factory f','f.id = s.factory_id'],
-                    ['user_store us','s.id = us.store_id'],
-                    ['user u','u.id = us.user_id'],
+                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
+//                    'u.nickname','u.mobile_phone',
+                ],'join' => [
+                    ['factory f','f.id = s.factory_id','left'],
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left'],
+//                    ['user_store us','s.id = us.store_id','left'],
                 ],'where' => [
                     ['s.status','=',0],
                     ['s.factory_id','=',$this->factory['id']],
+                    ['f.type','=',2],
                 ],
             ];
-            $list = $modelStore->getList($config);
-            $this->assign('list',$list);
+            $storelist = $modelStore->getList($config);
+            $this->assign('list',$storelist);
             return view('list_tpl');
         }else{
             return $this->fetch();
