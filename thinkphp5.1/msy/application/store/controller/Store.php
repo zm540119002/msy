@@ -74,7 +74,7 @@ class Store extends \common\controller\FactoryBase{
     public function setStoreStatus(){
         if(request()->isAjax()){
             $model = new \common\model\Store();
-            return $model->edit($this->factory['id'],$this->user['id']);
+            return $model->edit($this->factory['id']);
         }
     }
 
