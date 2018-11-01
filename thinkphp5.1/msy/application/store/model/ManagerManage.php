@@ -328,7 +328,7 @@ class ManagerManage extends \common\model\Base {
 		}
 		if(!$result){
 			$modelUserStore->rollback();//事务回滚
-			return errorMsg('失败',$modelUserStore->getError());
+			return errorMsg('失败',$modelUserStoreNode->getError());
 		}
 		$modelUserStore->commit();//事务提交
 		return successMsg('成功');
@@ -376,7 +376,7 @@ class ManagerManage extends \common\model\Base {
 		}
 		if(!$result){
 			$modelUserShop->rollback();//事务回滚
-			return errorMsg('失败',$modelUserShop->getError());
+			return errorMsg('失败',$modelUserShopNode->getError());
 		}
 		$modelUserShop->commit();//事务提交
 		return successMsg('成功');
