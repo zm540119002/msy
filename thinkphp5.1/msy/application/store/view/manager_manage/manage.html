@@ -541,14 +541,14 @@
 				yes:function(index){
 					var postData = {};
 					postData.id = _this.data('id');
-					postData.userFactoryId = _this.data('user_factory_id');
-					 var config = {
-					 	url:controller + 'delShopEmployee',
-					 	postData:postData,
-					 	obj:_this,
-					 	index:index
-					 };
-					 dialogFormDel(config);
+					postData.user_shop_id = _this.data('user_shop_id');
+					var config = {
+						url:controller + 'delShopEmployee',
+						postData:postData,
+						delObj:_this,
+						index:index
+					};
+					dialogFormDel(config);
 				}
 			});
 		});

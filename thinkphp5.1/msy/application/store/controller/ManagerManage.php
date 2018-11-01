@@ -198,4 +198,16 @@ class ManagerManage extends FactoryStoreBase{
             return $modelManagerManage->delStoreEmployee($this->currentStore['id'],false);
         }
     }
+
+    /**删除门店员工
+     */
+    public function delShopEmployee(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelManagerManage = new \app\store\model\ManagerManage();
+            return $modelManagerManage->delShopEmployee($this->currentStore['id'],false);
+        }
+    }
 }
