@@ -14,7 +14,7 @@
 	</article>
 </section> 
 <div id="areaMask" class="mask"></div>
-<!--新增线上店铺员工账号-->
+<!--编辑线上店铺员工账号-->
 <section id="storeEmployeeSection" style="display:none;">
 	<form class="storeEmployeeForm">
 		<div class="account-field">
@@ -28,7 +28,7 @@
         {include file='public/permission_tpl' /}
 	</form>
 </section>
-<!--新增门店员工账号-->
+<!--编辑门店员工账号-->
 <section id="shopEmployeeSection" style="display:none;">
     <form class="shopEmployeeForm">
         <div class="account-field">
@@ -398,7 +398,7 @@
 					$('.employeeAccountLayer .shopEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var dialogForm = $('.shopEmployeeForm');
+					var dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
 					if(!postData.nickname){
@@ -429,7 +429,6 @@
 						}
 					});
 					postData.shop_id = dialogForm.find('[name=shop_id]').val();
-					
 					var config = {
 						url:controller + 'editShopEmployee',
 						postData:postData,
@@ -534,10 +533,33 @@
 				content:shopEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
+					var dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .shopEmployeeForm').css('height',winHeight-120+'px');
-					copyDataByName(_this,$('.employeeAccountLayer .shopEmployeeForm'));
+					dialogForm.css('height',winHeight-120+'px');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
 				},
 				yes:function(index){
 					var postData = {};
