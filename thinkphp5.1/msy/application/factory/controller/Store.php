@@ -33,7 +33,7 @@ class Store extends \common\controller\FactoryBase
     public function edit(){
         $model = new \common\model\Store();
         if(request()->isAjax()){
-            return $model->edit($this->factory['id'],$this->user['id']);
+            return $model->edit($this->factory['id']);
         }else{
             // 企业旗舰店
             $modelFactory = new \common\model\Record();
