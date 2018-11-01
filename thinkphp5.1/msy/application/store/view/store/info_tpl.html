@@ -2,8 +2,7 @@
 <li class="columns_flex l-r-sides" data-id="{$info.id}" data-user_store_id="{$info.user_store_id}">
 	<div>
 		<p>
-			<span name="store_name">{$info.factory_name|default=''}</span>机构
-			<span name="store_type">{$info.store_type|getStoreType}</span>
+			<span name="store_name">{$info.store_name}.{$info.store_type|getStoreType}</span>
 		</p>
 		<span name="type_name" >{$info.run_type|getRunType}</span>
 		<div>
