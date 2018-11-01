@@ -10,7 +10,6 @@ class Store extends \common\controller\FactoryBase{
      */
     public function manage(){
         $model = new \common\model\Store();
-        
         $config = [
             'where' => [
                 ['s.factory_id','=',$this->factory['id']],
