@@ -10,7 +10,6 @@ class Store extends \common\controller\FactoryBase{
      */
     public function manage(){
         $model = new \common\model\Store();
-        
         $config = [
             'where' => [
                 ['s.factory_id','=',$this->factory['id']],
@@ -32,7 +31,7 @@ class Store extends \common\controller\FactoryBase{
     public function edit(){
         $model = new \common\model\Store();
         if(request()->isAjax()){
-            return $model -> edit($this->factory['id']);
+            return $model -> edit($this->factory['id'],$this->user['id']);
         }else{
             // 企业旗舰店
             $modelFactory = new \common\model\Record();

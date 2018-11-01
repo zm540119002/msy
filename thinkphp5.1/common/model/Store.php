@@ -15,7 +15,7 @@ class Store extends Base {
 
 	/**编辑
 	 */
-	public function edit($factoryId){
+	public function edit($factoryId,$userId=0){
 		$data = input('post.');
 		$data['factory_id'] = $factoryId;
 		$validate = validate('\common\validate\Store');
@@ -44,6 +44,7 @@ class Store extends Base {
 			$storeId = $this->getAttr('id');
 			$postData['type'] = 2;
 			$postData['factory_id'] = $factoryId;
+			$postData['user-id'] = $userId;
 			$postData['store_id'] = $storeId;
 			$result = $modelUserStore->save($postData);
 			if(!$result){
