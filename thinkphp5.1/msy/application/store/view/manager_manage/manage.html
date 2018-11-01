@@ -350,7 +350,7 @@
 			});
 		});
 		//删除线上店铺员工账号
-		$('body').on('click','.delete-account',function(){
+		$('body').on('click','.storeEmployeeList .delete-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['删除线上店铺员工账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
@@ -382,7 +382,7 @@
 
 		//新增门店员工账号
 		var shopEmployeeSection=$('#shopEmployeeSection').html();
-		$('body').on('click','.add_store_account',function(){
+		$('body').on('click','.shopEmployeeList .add_store_account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['新增门店员工账号','border-bottom:1px solid #d9d9d9;'],
@@ -523,7 +523,7 @@
 			});
 		});
 		//删除门店员工账号
-		$('body').on('click','.delete-shop-account',function(){
+		$('body').on('click','.shopEmployeeList .delete-shop-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['删除门店员工账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
