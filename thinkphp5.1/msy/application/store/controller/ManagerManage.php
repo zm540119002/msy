@@ -10,22 +10,16 @@ class ManagerManage extends FactoryStoreBase{
 
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(isset($this->currentStore['id']) && $this->currentStore['id']){
-            $modelUserShop = new \app\store\model\UserShop();
+            $modelShop = new \app\store\model\Shop();
             $config = [
                 'field' => [
                     's.id','s.name',
-                    'u.nickname','u.mobile_phone',
-                    'us.id user_shop_id',
-                ],'leftJoin' => [
-                    ['shop s','s.id = us.shop_id'],
-                    ['common.user u','u.id = us.user_id'],
                 ],'where' => [
                     ['s.status','=',0],
-                    ['us.status','=',0],
-                    ['us.store_id','=',$this->currentStore['id']],
+                    ['s.store_id','=',$this->currentStore['id']],
                 ],
             ];
-            $shopList = $modelUserShop->getList($config);
+            $shopList = $modelShop->getList($config);
             $this->assign('shopList',$shopList);
         }
     }
@@ -147,7 +141,7 @@ class ManagerManage extends FactoryStoreBase{
             $config = [
                 'field' => [
                     'u.id','u.nickname','u.mobile_phone',
-                    'us.id user_shop_id','us.post','us.duty',
+                    'us.id user_shop_id','us.post','us.duty','us.shop_id',
                 ],'leftJoin' => [
                     ['common.user u','u.id = us.user_id'],
                 ],'where' => [
@@ -202,6 +196,18 @@ class ManagerManage extends FactoryStoreBase{
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
             return $modelManagerManage->delStoreEmployee($this->currentStore['id'],false);
+        }
+    }
+
+    /**删除门店员工
+     */
+    public function delShopEmployee(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelManagerManage = new \app\store\model\ManagerManage();
+            return $modelManagerManage->delShopEmployee($this->currentStore['id'],false);
         }
     }
 }

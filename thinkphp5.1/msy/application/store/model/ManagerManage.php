@@ -206,6 +206,7 @@ class ManagerManage extends \common\model\Base {
 							'user_id' => $userId,
 							'store_id' => $storeId,
 							'node_id' => $node,
+							'shop_id'=>$postData['shop_id'],
 						];
 					}
 					$res = $modelUserShopNode->isUpdate(false)->saveAll($data);
@@ -285,7 +286,7 @@ class ManagerManage extends \common\model\Base {
 		return successMsg('成功！',$postData);
 	}
 
-	//删除
+	//删除店铺员工
 	public function delStoreEmployee($storeId,$tag=true){
 		$userStoreId = input('post.user_store_id',0);
 		if(!$userStoreId){
@@ -327,9 +328,57 @@ class ManagerManage extends \common\model\Base {
 		}
 		if(!$result){
 			$modelUserStore->rollback();//事务回滚
-			return errorMsg('失败',$modelUserStore->getError());
+			return errorMsg('失败',$modelUserStoreNode->getError());
 		}
 		$modelUserStore->commit();//事务提交
+		return successMsg('成功');
+	}
+
+	//删除门店员工
+	public function delShopEmployee($storeId,$tag=true){
+		$userShopId = input('post.user_shop_id',0);
+		if(!$userShopId){
+			return errorMsg('参数错误');
+		}
+		$userId = input('post.id',0);
+		$id = input('post.id',0);
+		if(!$id){
+			return errorMsg('参数错误');
+		}
+		$where = [
+			['id', '=', $userShopId],
+			['user_id', '=', $userId],
+			['store_id', '=', $storeId],
+			['status', '=', 0],
+			['type', '=', 4],
+		];
+		$modelUserShop = new \app\store\model\UserShop();
+		$modelUserShop->startTrans();//事务开启
+		if($tag){//标记删除
+			$result = $modelUserShop->where($where)->setField('status',2);
+		}else{
+			$result = $modelUserShop->where($where)->delete();
+		}
+		if(!$result){
+			$modelUserShop->rollback();//事务回滚
+			return errorMsg('失败',$modelUserShop->getError());
+		}
+		$modelUserShopNode = new \app\store\model\UserShopNode();
+		$where = [
+			['user_id', '=', $userId],
+			['store_id', '=', $storeId],
+			['status', '=', 0],
+		];
+		if($tag){//标记删除
+			$result = $modelUserShopNode->where($where)->setField('status',2);
+		}else{
+			$result = $modelUserShopNode->where($where)->delete();
+		}
+		if(!$result){
+			$modelUserShop->rollback();//事务回滚
+			return errorMsg('失败',$modelUserShopNode->getError());
+		}
+		$modelUserShop->commit();//事务提交
 		return successMsg('成功');
 	}
 
