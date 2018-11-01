@@ -141,7 +141,7 @@ class ManagerManage extends FactoryStoreBase{
             $config = [
                 'field' => [
                     'u.id','u.nickname','u.mobile_phone',
-                    'us.id user_shop_id','us.post','us.duty',
+                    'us.id user_shop_id','us.post','us.duty','us.shop_id',
                 ],'leftJoin' => [
                     ['common.user u','u.id = us.user_id'],
                 ],'where' => [

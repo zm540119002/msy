@@ -21,7 +21,7 @@
 			<select name="shop_id">
 				{notempty name='shopList'}
 				{volist name="shopList" id="vo"}
-				<option value="{$vo.id}">{$vo.name}</option>
+				<option value="{$vo.id}" {if ($info.shop_id == $vo.id)}selected{/if}>{$vo.name}</option>
 				{/volist}
 				{/notempty}
 			</select>
