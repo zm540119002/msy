@@ -30,7 +30,7 @@
 </section>
 <!--新增门店员工账号-->
 <section id="shopEmployeeSection" style="display:none;">
-    <form class="storeEmployeeForm">
+    <form class="shopEmployeeForm">
         <div class="account-field">
             <span class="content-label">姓名</span>
             <input type="text" class="" placeholder="姓名" name="nickname">
@@ -395,10 +395,10 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
+					$('.employeeAccountLayer .shopEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var dialogForm = $('.storeEmployeeForm');
+					var dialogForm = $('.shopEmployeeForm');
 					var postData=dialogForm.serializeObject();
 					var content='';
 					if(!postData.nickname){
@@ -452,7 +452,7 @@
 				content:shopEmployeeSection,
 				btn:['确定','取消'],
 				success:function(){
-					dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
@@ -481,7 +481,7 @@
 					});
 				},
 				yes:function(index){
-					var postData=$('.employeeAccountLayer .storeEmployeeForm').serializeObject();
+					var postData=$('.employeeAccountLayer .shopEmployeeForm').serializeObject();
 					var content='';
 					if(!postData.nickname){
 						content='请填写姓名';
@@ -536,8 +536,8 @@
 				success:function(){
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
-					copyDataByName(_this,$('.employeeAccountLayer .storeEmployeeForm'));
+					$('.employeeAccountLayer .shopEmployeeForm').css('height',winHeight-120+'px');
+					copyDataByName(_this,$('.employeeAccountLayer .shopEmployeeForm'));
 				},
 				yes:function(index){
 					var postData = {};
