@@ -336,18 +336,19 @@ class ManagerManage extends \common\model\Base {
 
 	//删除门店员工
 	public function delShopEmployee($storeId,$tag=true){
-		$userShopId = input('post.user_shop_id',0);
-		if(!$userShopId){
+		$postData = input('post.');
+		if(!intval($postData['id'])){
 			return errorMsg('参数错误');
 		}
-		$userId = input('post.id',0);
-		$id = input('post.id',0);
-		if(!$id){
+		if(!intval($postData['user_shop_id'])){
+			return errorMsg('参数错误');
+		}
+		if(!intval($postData['shop_id'])){
 			return errorMsg('参数错误');
 		}
 		$where = [
-			['id', '=', $userShopId],
-			['user_id', '=', $userId],
+			['id', '=', $postData['user_shop_id']],
+			['user_id', '=', $postData['id']],
 			['store_id', '=', $storeId],
 			['status', '=', 0],
 			['type', '=', 4],
@@ -363,20 +364,23 @@ class ManagerManage extends \common\model\Base {
 			$modelUserShop->rollback();//事务回滚
 			return errorMsg('失败',$modelUserShop->getError());
 		}
-		$modelUserShopNode = new \app\store\model\UserShopNode();
-		$where = [
-			['user_id', '=', $userId],
-			['store_id', '=', $storeId],
-			['status', '=', 0],
-		];
-		if($tag){//标记删除
-			$result = $modelUserShopNode->where($where)->setField('status',2);
-		}else{
-			$result = $modelUserShopNode->where($where)->delete();
-		}
-		if(!$result){
-			$modelUserShop->rollback();//事务回滚
-			return errorMsg('失败',$modelUserShopNode->getError());
+		if(!empty($postData['nodeIds'])){
+			$modelUserShopNode = new \app\store\model\UserShopNode();
+			$where = [
+				['user_id', '=', $postData['id']],
+				['store_id', '=', $storeId],
+				['shop_id', '=', $postData['shop_id']],
+				['status', '=', 0],
+			];
+			if($tag){//标记删除
+				$result = $modelUserShopNode->where($where)->setField('status',2);
+			}else{
+				$result = $modelUserShopNode->where($where)->delete();
+			}
+			if(!$result){
+				$modelUserShop->rollback();//事务回滚
+				return errorMsg('失败',$modelUserShopNode->getError());
+			}
 		}
 		$modelUserShop->commit();//事务提交
 		return successMsg('成功');
