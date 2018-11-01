@@ -74,7 +74,7 @@ class Store extends \common\controller\FactoryBase{
     public function setStoreStatus(){
         if(request()->isAjax()){
             $model = new \common\model\Store();
-            return $model->edit($this->factory['id']);
+            return $model->edit($this->factory['id'],$this->user['id']);
         }
     }
 
@@ -101,8 +101,8 @@ class Store extends \common\controller\FactoryBase{
                     ['us.type','=',3],
                 ],
             ];
-            $storelist = $modelStore->getList($config);
-            $this->assign('list',$storelist);
+            $storeList = $modelStore->getList($config);
+            $this->assign('list',$storeList);
             return view('list_tpl');
         }else{
             return $this->fetch();
