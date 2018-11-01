@@ -10,7 +10,6 @@ class Store extends \common\controller\FactoryBase{
      */
     public function manage(){
         $model = new \common\model\Store();
-        
         $config = [
             'where' => [
                 ['s.factory_id','=',$this->factory['id']],
@@ -101,8 +100,8 @@ class Store extends \common\controller\FactoryBase{
                     ['us.type','=',3],
                 ],
             ];
-            $storelist = $modelStore->getList($config);
-            $this->assign('list',$storelist);
+            $storeList = $modelStore->getList($config);
+            $this->assign('list',$storeList);
             return view('list_tpl');
         }else{
             return $this->fetch();

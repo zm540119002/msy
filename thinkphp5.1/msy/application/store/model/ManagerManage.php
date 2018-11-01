@@ -173,14 +173,14 @@ class ManagerManage extends \common\model\Base {
 			}
 			$userId = $postData['id'];
 			$postData['id'] = $postData['user_shop_id'];
-			$modelUserStore = new \common\model\UserStore();
-			$res = $modelUserStore->isUpdate(true)->save($postData);
+			$modelUserShop = new \app\store\model\UserShop();
+			$res = $modelUserShop->isUpdate(true)->save($postData);
 			if($res===false){
 				$this->rollback();//事务回滚
-				return errorMsg('失败',$modelUserStore->getError());
+				return errorMsg('失败',$modelUserShop->getError());
 			}
 			if(!empty($postData['nodeIds'])){
-				$modelUserStoreNode = new \common\model\UserStoreNode();
+				$modelUserShopNode = new \app\store\model\UserShopNode();
 				$config = [
 					'field' => [
 						'usn.node_id',
@@ -190,8 +190,8 @@ class ManagerManage extends \common\model\Base {
 						['usn.store_id','=',$storeId],
 					],
 				];
-				$userStoreNodeList = $modelUserStoreNode->getlist($config);
-				$oldNodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
+				$userShopNodeList = $modelUserShopNode->getList($config);
+				$oldNodeIds = array_unique(array_column($userShopNodeList,'node_id'));
 				if(empty($oldNodeIds)){
 					$addNodeIds = $postData['nodeIds'];
 					$delNodeIds = [];
@@ -208,10 +208,10 @@ class ManagerManage extends \common\model\Base {
 							'node_id' => $node,
 						];
 					}
-					$res = $modelUserStoreNode->isUpdate(false)->saveAll($data);
+					$res = $modelUserShopNode->isUpdate(false)->saveAll($data);
 					if(false===$res){
 						$this->rollback();//回滚事务
-						return errorMsg($modelUserStoreNode->getError());
+						return errorMsg($modelUserShopNode->getError());
 					}
 				}
 				if(!empty($delNodeIds)){
@@ -220,10 +220,10 @@ class ManagerManage extends \common\model\Base {
 						['store_id','=',$storeId],
 					];
 					$where[] = ['node_id','in',$delNodeIds];
-					$res = $modelUserStoreNode->where($where)->delete();
+					$res = $modelUserShopNode->where($where)->delete();
 					if(!$res){
-						$modelUserStoreNode->rollback();//回滚事务
-						return errorMsg('失败',$modelUserStoreNode->getError());
+						$this->rollback();//回滚事务
+						return errorMsg('失败',$modelUserShopNode->getError());
 					}
 				}
 			}

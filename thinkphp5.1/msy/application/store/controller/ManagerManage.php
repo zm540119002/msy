@@ -126,7 +126,7 @@ class ManagerManage extends FactoryStoreBase{
                         ['usn.store_id','=',$this->currentStore['id']],
                     ],
                 ];
-                $userStoreNodeList = $modelUserStoreNode->getlist($config);
+                $userStoreNodeList = $modelUserStoreNode->getList($config);
                 $nodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
                 if(!empty($nodeIds)){
                     $user['nodeIds'] = $nodeIds;
@@ -169,7 +169,7 @@ class ManagerManage extends FactoryStoreBase{
                         ['usn.store_id','=',$this->currentStore['id']],
                     ],
                 ];
-                $userShopNodeList = $modelUserShopNode->getlist($config);
+                $userShopNodeList = $modelUserShopNode->getList($config);
                 $nodeIds = array_unique(array_column($userShopNodeList,'node_id'));
                 if(!empty($nodeIds)){
                     $user['nodeIds'] = $nodeIds;
