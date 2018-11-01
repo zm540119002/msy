@@ -3233,7 +3233,8 @@ input[type=text]::-webkit-focus-inner {
     color: #40AFFE;
 }
 .employeeAccountForm,
-.storeEmployeeForm{
+.storeEmployeeForm,
+.shopEmployeeForm{
     margin:0.20rem .15rem 0;
     padding:0.15rem;
     border:1px solid #d9d9d9;
