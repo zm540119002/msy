@@ -26,8 +26,12 @@
 					<div class="columns_flex l-r-sides">
 						<div class="picture-module">
 							<input type="file" class="uploadImg uploadSingleImg" name="">
-							<img class="upload_img" src="" alt="">
-							<input type="hidden" class="img" data-src="" value="">
+							{empty name="shopInfo.logo_img"}
+							<img class="upload_img" src="public_img/default/no_pic_100.jpg" alt="" class="left">
+							{else /}
+							<img class="upload_img" src="public_uploads/{$shopInfo.logo_img}" alt="" class="left">
+							{/empty}
+							<input type="hidden" class="img" data-src="" value="" name="logo_img">
 						</div>
 						<div>
 							<p>门店门头/前台照片推荐像素300X225（点击图片上传）</p>
@@ -67,6 +71,8 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+
 <script type="text/javascript">
 	$(function(){
 		//门店经营地址信息
@@ -109,10 +115,8 @@
 				dataType:'json',
 				success:function (data) {
 					_this.removeClass("nodisabled");
-					if(data.status == 0){
-						dialog.error(data.info);
-						return false;
-					}
+					dialog.error(data.info);
+					return false;
 				},
 				error:function (xhr) {
 					dialog.error('Ajax错误'+xhr.status);

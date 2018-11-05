@@ -225,6 +225,7 @@ class ManagerManage extends FactoryStoreBase{
             if(isset($postData['shopId']) && intval($postData['shopId'])){//修改门店经营地址信息
                 $modelShop = new \app\store\model\Shop();
                 list($postData['operation_province'],$postData['operation_city'],$postData['operation_area']) = $postData['region'];
+                $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
                 $where = [
                     ['id','=',$postData['shopId']],
                     ['store_id','=',$this->currentStore['id']],
