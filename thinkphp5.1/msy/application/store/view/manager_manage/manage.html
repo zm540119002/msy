@@ -677,7 +677,13 @@
 					$('.section_content').siblings().hide();
 					$('.content_main').find('#shopConsigneeList').show();
 			}
-		})
+		});
+		//编辑门店经营地址
+		$('body').on('click','#shopAddressList li',function(){
+			var _this = $(this);
+			var url = controller + 'editShopOperationAddress' + '/shopId/' + _this.data('id');
+			location.href = url;
+		});
 	});
 </script>
 {/block}

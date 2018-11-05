@@ -209,6 +209,33 @@ class ManagerManage extends FactoryStoreBase{
         }
     }
 
+    /**编辑店铺收货人信息
+     */
+    public function editShopOperationAddress(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+        }else{
+            $shopId = input('shopId');
+            if(intval($shopId)){
+                $modelShop = new \app\store\model\Shop();
+                $config = [
+                    'field' => [
+                        's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone','s.operation_address',
+                    ],'where' => [
+                        ['s.status','=',0],
+                        ['s.id','=',$shopId],
+                        ['s.store_id','=',$this->currentStore['id']],
+                    ],
+                ];
+                $shopInfo = $modelShop->getInfo($config);
+                $this->assign('shopInfo',$shopInfo);
+            }
+            return $this->fetch();
+        }
+    }
+
     /**删除店铺员工
      */
     public function delStoreEmployee(){
