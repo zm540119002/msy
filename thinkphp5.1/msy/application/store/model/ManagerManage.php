@@ -311,7 +311,7 @@ class ManagerManage extends \common\model\Base {
 		}else{
 			$result = $modelUserStore->where($where)->delete();
 		}
-		if(!$result){
+		if($result===false){
 			$modelUserStore->rollback();//事务回滚
 			return errorMsg('失败',$modelUserStore->getError());
 		}
@@ -326,7 +326,7 @@ class ManagerManage extends \common\model\Base {
 		}else{
 			$result = $modelUserStoreNode->where($where)->delete();
 		}
-		if(!$result){
+		if($result===false){
 			$modelUserStore->rollback();//事务回滚
 			return errorMsg('失败',$modelUserStoreNode->getError());
 		}
@@ -350,6 +350,7 @@ class ManagerManage extends \common\model\Base {
 			['id', '=', $postData['user_shop_id']],
 			['user_id', '=', $postData['id']],
 			['store_id', '=', $storeId],
+			['shop_id', '=', $postData['shop_id']],
 			['status', '=', 0],
 			['type', '=', 4],
 		];
@@ -360,7 +361,7 @@ class ManagerManage extends \common\model\Base {
 		}else{
 			$result = $modelUserShop->where($where)->delete();
 		}
-		if(!$result){
+		if($result===false){
 			$modelUserShop->rollback();//事务回滚
 			return errorMsg('失败',$modelUserShop->getError());
 		}
@@ -377,7 +378,7 @@ class ManagerManage extends \common\model\Base {
 			}else{
 				$result = $modelUserShopNode->where($where)->delete();
 			}
-			if(!$result){
+			if($result===false){
 				$modelUserShop->rollback();//事务回滚
 				return errorMsg('失败',$modelUserShopNode->getError());
 			}

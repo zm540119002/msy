@@ -123,9 +123,7 @@
 							<input type="text" class="search_text left" placeholder="输入姓名/门店/手机号搜索账号"/>
 						</div>
 						<p class="emp_account_tipc">门店运营员工账号</p>
-						<ul class="list">
-							<li class="no-data"><span>暂无数据</span></li>
-						</ul>
+						<ul class="list"><li class="no-data"><span>暂无数据</span></li></ul>
 						{notempty name='store'}
 						<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
 						{/notempty}
@@ -133,39 +131,11 @@
 				</section>
 				<!--门店经营地址-->
 				<section class="section_content" id="shopAddressList">
-					<ul class="list">
-						<li>
-							<img src="" alt="" class="left">
-							<div>
-								<div>
-									<span>莫某门店</span>
-								</div>
-								<div>地址：<sapn>广东</sapn></div>
-								<div>固话：<span>020-45646455</span></div>
-								<div>手机：<span>13825545678</span></div>
-								<div>
-									<i></i>
-									距离<span>500</span>km
-								</div>
-							</div>
-						</li>
-					</ul>
+					<ul class="list"></ul>
 				</section>
 				<!--门店收货人地址手机-->
 				<section class="section_content" id="shopConsigneeList">
-					<ul class="list">
-						<li>
-							<img src="" alt="" class="left">
-							<div>
-								<div>
-									<span>莫某门店</span>
-								</div>
-								<div>收货人地址：<sapn>广东</sapn></div>
-								<div>收货人姓名：<sapn>李四</sapn></div>
-								<div>收货人手机号码：<span>13825545678</span></div>
-							</div>
-						</li>
-					</ul>
+					<ul class="list"></ul>
 				</section>
 			</div>
 		</div>
@@ -204,6 +174,12 @@
 			config = {
 				url: controller + 'getShopEmployeeList',
 				container: $('#shopEmployeeList').find('ul.list')
+			};
+			getList(config);
+			//门店经营地址列表
+			config = {
+				url: controller + 'getShopOperationAddressList',
+				container: $('#shopAddressList').find('ul.list')
 			};
 			getList(config);
 		}
@@ -689,7 +665,13 @@
 					$('.section_content').siblings().hide();
 					$('.content_main').find('#shopConsigneeList').show();
 			}
-		})
+		});
+		//编辑门店经营地址
+		$('body').on('click','#shopAddressList li',function(){
+			var _this = $(this);
+			var url = controller + 'editShopOperationAddress' + '/shopId/' + _this.data('id');
+			location.href = url;
+		});
 	});
 </script>
 {/block}
