@@ -45,7 +45,6 @@
 				<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 					<label class="form-label">所在地区：</label>
 					<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-					<input type="hidden" value="" class="area-address-name" data-key="" name="provinces">
 				</a>
 			</li>
 			<li>
@@ -73,22 +72,23 @@
 		//门店经营地址信息
 		var shopId = '{$shopInfo.id}';
 		//省市区初始化
-		var province = '{$shopInfo.province|default="0"}';
-		var city = '{$shopInfo.city|default="0"}';
-		var area = '{$shopInfo.area|default="0"}';
+		var operation_province = '{$shopInfo.operation_province}';
+		var operation_city = '{$shopInfo.operation_city}';
+		var operation_area = '{$shopInfo.operation_area}';
 		var region = [];
-		if(province && city && area){
-			region.push(province);
-			region.push(city);
-			region.push(area);
+		if(operation_province && operation_city && operation_area){
+			region.push(operation_province);
+			region.push(operation_city);
+			region.push(operation_area);
 			$('.area_address').setArea(region);
 		}
 		$('body').on('click','.submit',function(){
 			var postData=$('.consignee_info_form').serializeObject();
 			var  content ='';
+			postData.region = $('.area-address-name').getArea();
 			if(!register.phoneCheck(postData.operation_mobile_phone)){
 				content='请填写手机号码';
-			}else if(!postData.provinces){
+			}else if(!postData.region){
 				content='请选择所在地区';
 			}else if(!postData.operation_address){
 				content='请填写地区详细地址';
@@ -102,7 +102,6 @@
 			if(shopId){
 				postData.shopId = shopId;
 			}
-			postData.region = $('.area-address-name').getArea();
 			$.ajax({
 				url:action,
 				type:'post',

@@ -8,6 +8,15 @@ class Shop extends \think\Validate{
             'require',
             'max' => 64,
             'unique' => '\app\store\model\Shop',
+        ],'operation_mobile_phone'  => [
+            'require',
+            'max' => 15,
+        ],'operation_fix_phone'  => [
+            'require',
+            'max' => 15,
+        ],'operation_address'  => [
+            'require',
+            'max' => 128,
         ],
     ];
     //验证消息
@@ -21,6 +30,10 @@ class Shop extends \think\Validate{
         //验证编辑
         'edit'  =>  [
             'name',
+        ],'operation_address'  =>  [
+            'operation_mobile_phone',
+            'operation_fix_phone',
+            'operation_address',
         ],
     ];
 }

@@ -209,14 +209,33 @@ class ManagerManage extends FactoryStoreBase{
         }
     }
 
-    /**编辑店铺收货人信息
+    /**编辑门店经营地址信息
      */
     public function editShopOperationAddress(){
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
-            
+            $postData = input('post.');
+            //数据验证
+            $validateShop = new \app\store\validate\Shop();
+            if(!$validateShop->scene('operation_address')->check($postData)){
+                return errorMsg($validateShop->getError());
+            }
+            if(isset($postData['shopId']) && intval($postData['shopId'])){//修改门店经营地址信息
+                $modelShop = new \app\store\model\Shop();
+                list($postData['operation_province'],$postData['operation_city'],$postData['operation_area']) = $postData['region'];
+                $where = [
+                    ['id','=',$postData['shopId']],
+                    ['store_id','=',$this->currentStore['id']],
+                    ['status','=',0],
+                ];
+                $res = $modelShop->isUpdate(true)->save($postData,$where);
+                if($res===false){
+                    return errorMsg('失败',$modelShop->getError());
+                }
+                return successMsg('成功');
+            }
         }else{
             $shopId = input('shopId');
             if(intval($shopId)){
