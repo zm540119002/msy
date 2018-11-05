@@ -369,6 +369,13 @@
 					var postData = {};
 					postData.id = _this.data('id');
 					postData.user_store_id = _this.data('user_store_id');
+					postData.nodeIds = [];
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
 					 var config = {
 					 	url:controller + 'delStoreEmployee',
 					 	postData:postData,
@@ -562,9 +569,17 @@
 					});
 				},
 				yes:function(index){
+					var dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
 					var postData = {};
 					postData.id = _this.data('id');
 					postData.user_shop_id = _this.data('user_shop_id');
+					postData.shop_id = dialogForm.find('[name=shop_id]').val();
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
 					var config = {
 						url:controller + 'delShopEmployee',
 						postData:postData,
