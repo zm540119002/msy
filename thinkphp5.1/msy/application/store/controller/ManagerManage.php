@@ -258,6 +258,55 @@ class ManagerManage extends FactoryStoreBase{
         }
     }
 
+    /**编辑门店收货人地址
+     */
+    public function editShopConsigneeAddress(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $postData = input('post.');
+            //数据验证
+            $validateShop = new \app\store\validate\Shop();
+            if(!$validateShop->scene('consignee_address')->check($postData)){
+                return errorMsg($validateShop->getError());
+            }
+            if(isset($postData['shopId']) && intval($postData['shopId'])){//修改门店经营地址信息
+                $modelShop = new \app\store\model\Shop();
+                list($postData['consignee_province'],$postData['consignee_city'],$postData['consignee_area']) = $postData['region'];
+                $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
+                $where = [
+                    ['id','=',$postData['shopId']],
+                    ['store_id','=',$this->currentStore['id']],
+                    ['status','=',0],
+                ];
+                $res = $modelShop->isUpdate(true)->save($postData,$where);
+                if($res===false){
+                    return errorMsg('失败',$modelShop->getError());
+                }
+                return successMsg('成功');
+            }
+        }else{
+            $shopId = input('shopId');
+            if(intval($shopId)){
+                $modelShop = new \app\store\model\Shop();
+                $config = [
+                    'field' => [
+                        's.id','s.name','s.logo_img','s.consignee_mobile_phone','s.consignee_fix_phone',
+                        's.consignee_province','s.consignee_city','s.consignee_area','s.consignee_address',
+                    ],'where' => [
+                        ['s.status','=',0],
+                        ['s.id','=',$shopId],
+                        ['s.store_id','=',$this->currentStore['id']],
+                    ],
+                ];
+                $shopInfo = $modelShop->getInfo($config);
+                $this->assign('shopInfo',$shopInfo);
+            }
+            return $this->fetch();
+        }
+    }
+
     /**删除店铺员工
      */
     public function delStoreEmployee(){

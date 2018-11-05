@@ -17,6 +17,15 @@ class Shop extends \think\Validate{
         ],'operation_address'  => [
             'require',
             'max' => 128,
+        ],'consignee_mobile_phone'  => [
+            'require',
+            'max' => 15,
+        ],'consignee_fix_phone'  => [
+            'require',
+            'max' => 15,
+        ],'consignee_address'  => [
+            'require',
+            'max' => 128,
         ],
     ];
     //验证消息
@@ -30,10 +39,14 @@ class Shop extends \think\Validate{
         //验证编辑
         'edit'  =>  [
             'name',
-        ],'operation_address'  =>  [
+        ],'consignee_address'  =>  [
             'operation_mobile_phone',
             'operation_fix_phone',
             'operation_address',
+        ],'consignee_address'  =>  [
+            'consignee_mobile_phone',
+            'consignee_fix_phone',
+            'consignee_address',
         ],
     ];
 }
