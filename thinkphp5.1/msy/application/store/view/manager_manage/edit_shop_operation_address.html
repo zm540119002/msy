@@ -27,9 +27,9 @@
 						<div class="picture-module">
 							<input type="file" class="uploadImg uploadSingleImg" name="">
 							{empty name="shopInfo.logo_img"}
-							<img class="upload_img" src="public_img/default/no_pic_100.jpg" alt="" class="left">
+							<img class="upload_img" src="public_img/default/no_pic_100.jpg" alt="">
 							{else /}
-							<img class="upload_img" src="public_uploads/{$shopInfo.logo_img}" alt="" class="left">
+							<img class="upload_img" src="public_uploads/{$shopInfo.logo_img}" alt="">
 							{/empty}
 							<input type="hidden" class="img" data-src="" value="" name="logo_img">
 						</div>
