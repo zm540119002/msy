@@ -18,7 +18,7 @@
 		<ul>
 			<li>
 				<label class="">门店名称：</label>
-				<input type="text" value="{$shopInfo.name}" />
+				<input type="text" value="{$shopInfo.name|default=''}" />
 			</li>
 			<li>
 				<p>设定门店店头</p>
@@ -36,10 +36,10 @@
 				</div>
 			</li>
 			<li class="input_item">
-				<input class="input-filed" type="tel" name="operation_fix_phone" value="{$shopInfo.operation_fix_phone}" placeholder="(区号)固定电话">
+				<input class="input-filed" type="tel" name="operation_fix_phone" value="{$shopInfo.operation_fix_phone|default=''}" placeholder="(区号)固定电话">
 			</li>
 			<li>
-				<input class="input-filed" type="tel" name="operation_mobile_phone" value="{$shopInfo.operation_mobile_phone}" placeholder="业务手机号码">
+				<input class="input-filed" type="tel" name="operation_mobile_phone" value="{$shopInfo.operation_mobile_phone|default=''}" placeholder="业务手机号码">
 			</li>
 			<li class="express-area area-box">
 				<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
@@ -49,7 +49,7 @@
 				</a>
 			</li>
 			<li>
-				<input class="input-filed" type="text" name="operation_address" value="{$shopInfo.operation_address}" placeholder="街道/小区/道/楼/门牌详细地址">
+				<input class="input-filed" type="text" name="operation_address" value="{$shopInfo.operation_address|default=''}" placeholder="街道/小区/道/楼/门牌详细地址">
 			</li>
 			<li>
 				<a href="javascript:void(0);" class="upload-thumbnail right-arrow">对门店地址进行地图人工标位（*可用于定位导航）</a>
@@ -70,16 +70,27 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//收货人信息
+		//门店经营地址信息
+		var shopId = '{$shopInfo.id}';
+		//省市区初始化
+		var province = '{$shopInfo.province|default="0"}';
+		var city = '{$shopInfo.city|default="0"}';
+		var area = '{$shopInfo.area|default="0"}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
+		}
 		$('body').on('click','.submit',function(){
-			var postData={};
+			var postData=$('.consignee_info_form').serializeObject();
 			var  content ='';
-			postData=$('.consignee_info_form').serializeObject();
-			if(!register.phoneCheck(postData.mobile_phone)){
+			if(!register.phoneCheck(postData.operation_mobile_phone)){
 				content='请填写手机号码';
 			}else if(!postData.provinces){
 				content='请选择所在地区';
-			}else if(!postData.detail_name){
+			}else if(!postData.operation_address){
 				content='请填写地区详细地址';
 			}
 			if(content){
@@ -88,19 +99,20 @@
 			}
 			var _this = $(this);
 			_this.addClass("nodisabled");//防止重复提交
+			if(shopId){
+				postData.shopId = shopId;
+			}
+			postData.region = $('.area-address-name').getArea();
 			$.ajax({
-				url:controller + "edit",
+				url:action,
 				type:'post',
 				data:postData,
 				dataType:'json',
 				success:function (data) {
 					_this.removeClass("nodisabled");
-
 					if(data.status == 0){
 						dialog.error(data.info);
 						return false;
-					}else if(data.status == 1){
-						dialog.success(data.info,controller+'preview');
 					}
 				},
 				error:function (xhr) {

@@ -222,7 +222,8 @@ class ManagerManage extends FactoryStoreBase{
                 $modelShop = new \app\store\model\Shop();
                 $config = [
                     'field' => [
-                        's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone','s.operation_address',
+                        's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone',
+                        's.operation_province','s.operation_city','s.operation_area','s.operation_address',
                     ],'where' => [
                         ['s.status','=',0],
                         ['s.id','=',$shopId],
