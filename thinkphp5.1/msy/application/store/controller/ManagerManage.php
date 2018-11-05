@@ -216,6 +216,7 @@ class ManagerManage extends FactoryStoreBase{
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
+            
         }else{
             $shopId = input('shopId');
             if(intval($shopId)){
