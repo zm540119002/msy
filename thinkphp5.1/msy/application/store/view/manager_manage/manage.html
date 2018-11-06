@@ -79,7 +79,6 @@
 			<span class="content-label">收货人手机号码：</span>
 			<input class="input-filed" type="tel" name="consignee_mobile_phone" value="{$store.consignee_mobile_phone}" placeholder="业务手机号码">
 		</div>
-		<!--<a href="javascript:void(0);" class="submit foot-btn">确定</a>-->
 	</form>
 </section>
 <article class="f24">
@@ -708,7 +707,7 @@
 			var url = controller + 'editShopOperationAddress' + '/shopId/' + _this.data('id');
 			location.href = url;
 		});
-		//门店收货人设置
+		//门店收货人地址手机号码
 		var shopConsigneeInfo=$('#shopConsigneeInfo').html();
 		$('body').on('click','.shop_list li',function(){
 			var _this=$(this).parents('.list li');
