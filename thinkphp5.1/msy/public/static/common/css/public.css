@@ -3135,6 +3135,7 @@ input[type=text]::-webkit-focus-inner {
     padding:0.25rem 0;
     margin:0 0 0.20rem 0;
     border-radius:4px;
+    overflow:hidden;
 }
 .list-item li{
     position:relative;
@@ -3302,7 +3303,7 @@ input[type=text]::-webkit-focus-inner {
 .content-mg-top{
     margin-top:3rem;
 }
-.content_main list img{
+.content_main .list img{
     width: 1.5rem;
     height: 1.5rem;
 }
