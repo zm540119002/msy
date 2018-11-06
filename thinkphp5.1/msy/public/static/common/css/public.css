@@ -3309,9 +3309,10 @@ input[type=text]::-webkit-focus-inner {
 .content_main .list img{
     width: 1.5rem;
     height: 1.5rem;
+    margin:0 0 0 0.14rem;
 }
 .content_main .list .info_r{
-    margin-left:1.65rem;
+    margin-left:1.82rem;
 }
 .consignee_info_form{
     padding:0.20rem;
@@ -3328,6 +3329,14 @@ input[type=text]::-webkit-focus-inner {
 .shop_consignee_info .emp_account_tipc{
     text-align: center;
 }
+.shop_img_r{
+    text-align: center;
+    margin:0.25rem 0 0;
+}
+.shop_consignee_info .box-flex{
+    margin:0 0 0.12rem 0;
+}
+
 /*打印订单*/
 .print_orders{
     display:block;
