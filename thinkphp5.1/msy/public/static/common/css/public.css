@@ -3310,17 +3310,23 @@ input[type=text]::-webkit-focus-inner {
     width: 1.5rem;
     height: 1.5rem;
 }
+.content_main .list .info_r{
+    margin-left:1.65rem;
+}
 .consignee_info_form{
     padding:0.20rem;
 }
 .consignee_info_form .picture-module {
-    width:3.6rem;
+    width:3.88rem;
 }
 .consignee_info_form .upload-picture-module{
     margin:0.12rem 0 0 0;
 }
 .employeeAccountLayer .shop_consignee_info{
     padding:.20rem;
+}
+.shop_consignee_info .emp_account_tipc{
+    text-align: center;
 }
 /*打印订单*/
 .print_orders{
