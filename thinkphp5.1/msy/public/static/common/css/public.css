@@ -3309,9 +3309,10 @@ input[type=text]::-webkit-focus-inner {
 .content_main .list img{
     width: 1.5rem;
     height: 1.5rem;
+    margin:0 0 0 0.14rem;
 }
 .content_main .list .info_r{
-    margin-left:1.65rem;
+    margin-left:1.82rem;
 }
 .consignee_info_form{
     padding:0.20rem;
