@@ -86,8 +86,7 @@ class Store extends \common\controller\FactoryBase{
                     's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
                     'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                     'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
-                    'us.user_id',
-                    'u.nickname','u.mobile_phone',
+                    'u.nickname','u.mobile_phone','us.factory_id',
                 ],'join' => [
                     ['factory f','f.id = s.factory_id','left'],
                     ['record r','r.id = s.foreign_id','left'],
@@ -101,7 +100,27 @@ class Store extends \common\controller\FactoryBase{
                     ['us.type','in',[1,3]],
                 ],
             ];
-            $storeList = $modelStore->getList($config);
+            $list = $modelStore->getList($config);
+            $storeList = [];
+            $userList = [];
+            foreach ($list as $item){
+                if($item['type'] == 1){
+                    array_push($storeList,$item);
+                }
+            }
+            foreach ($list as $item){
+                if($item['type'] == 3){
+                    array_push($userList,$item);
+                }
+            }
+            foreach ($storeList as &$store){
+                foreach ($userList as $user){
+                    if($store['id'] == $user['id'] && $store['factory_id'] == $user['factory_id'] ){
+                        $store['nickname'] = $user['nickname'];
+                        $store['mobile_phone'] = $user['mobile_phone'];
+                    }
+                }
+            }
             $this->assign('list',$storeList);
             return view('list_tpl');
         }else{
