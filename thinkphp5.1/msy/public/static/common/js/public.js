@@ -564,6 +564,7 @@ function dialogFormEditDefaultFunc(config,data) {
     }else{
         alert(2);
         config.modifyObj.replaceWith(data);
+        alert(3);
         layer.close(config.index);
     }
 }
