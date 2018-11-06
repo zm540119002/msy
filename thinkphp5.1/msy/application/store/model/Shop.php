@@ -50,7 +50,7 @@ class Shop extends \common\model\Base{
 				if(!$managerId){//不存在
 					unset($postData['id']);
 					$postData['type'] = 0;
-					$postData['nickname'] = $postData['name'];
+					$postData['name'] = trim($postData['name']);
 					$postData['create_time'] = time();
 					$modelUser = new \common\model\User();
 					$res = $modelUser->isUpdate(false)->save($postData);
@@ -98,7 +98,7 @@ class Shop extends \common\model\Base{
 			if(!$managerId){//不存在
 				unset($postData['id']);
 				$postData['type'] = 0;
-				$postData['nickname'] = $postData['name'];
+				$postData['name'] = trim($postData['name']);
 				$postData['create_time'] = time();
 				$modelUser = new \common\model\User();
 				$res = $modelUser->isUpdate(false)->save($postData);
