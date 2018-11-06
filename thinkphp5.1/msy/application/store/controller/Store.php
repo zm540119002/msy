@@ -101,7 +101,6 @@ class Store extends \common\controller\FactoryBase{
                 ],
             ];
             $storeList = $modelStore->getList($config);
-            print_r($modelStore->getLastSql());
             $this->assign('list',$storeList);
             return view('list_tpl');
         }else{
