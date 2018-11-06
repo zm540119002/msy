@@ -1407,7 +1407,8 @@ background-position: 0 -27px;
 .vendorInfoLayer .layui-m-layerbtn span[no],
 .vendorInfoLayer .layui-m-layerbtn span[yes],
 .storeShopListLayer .layui-m-layerbtn span[no],
-.employeeAccountLayer .layui-m-layerbtn span[no] {
+.employeeAccountLayer .layui-m-layerbtn span[no],
+.shopConsigneeLayer .layui-m-layerbtn span[no]{
     width:50px;
     border:none;
 }
@@ -3218,7 +3219,8 @@ input[type=text]::-webkit-focus-inner {
     margin:.15rem 0;
 }
 .employeeAccountLayer .layui-m-layerbtn,
-.storeShopListLayer .layui-m-layerbtn{
+.storeShopListLayer .layui-m-layerbtn,
+.shopConsigneeLayer .layui-m-layerbtn{
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -3228,7 +3230,8 @@ input[type=text]::-webkit-focus-inner {
     background: transparent;
     border: none;
 }
-.employeeAccountLayer .layui-m-layerbtn span[no] {
+.employeeAccountLayer .layui-m-layerbtn span[no],
+.shopConsigneeLayer .layui-m-layerbtn span[no]{
     /*visibility: hidden;*/
 }
 .employeeAccountLayer .layui-m-layerbtn span[yes] {
@@ -3323,7 +3326,7 @@ input[type=text]::-webkit-focus-inner {
 .consignee_info_form .upload-picture-module{
     margin:0.12rem 0 0 0;
 }
-.employeeAccountLayer .shop_consignee_info{
+.shopConsigneeLayer .shop_consignee_info{
     padding:.20rem;
 }
 .shop_consignee_info .emp_account_tipc{

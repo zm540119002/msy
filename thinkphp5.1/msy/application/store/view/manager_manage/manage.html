@@ -713,7 +713,7 @@
 			var _this=$(this).parents('.list li');
 			layer.open({
 				title:['设定门店收货人信息','border-bottom:1px solid #d9d9d9;'],
-				className:'employeeAccountLayer',
+				className:'shopConsigneeLayer',
 				content:shopConsigneeInfo,
 				type:1,
 				anim:'up',
@@ -721,13 +721,13 @@
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
-					var dialogForm = $('.employeeAccountLayer .shop_consignee_info');
+					var dialogForm = $('.shopConsigneeLayer .shop_consignee_info');
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
 					copyDataByName(_this,dialogForm);
 				},
 				yes:function(index){
-					var dialogForm = $('.employeeAccountLayer .shop_consignee_info');
+					var dialogForm = $('.shopConsigneeLayer .shop_consignee_info');
 					var postData=dialogForm.serializeObject();
 					var areaAddress=$('.area-address-name').val();
 					var content='';
