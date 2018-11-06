@@ -54,11 +54,11 @@
 </section>
 <!--编辑门店收货人信息-->
 <section class="shopConsigneeInfo" id="shopConsigneeInfo" style="display:none;">
-	<form class="consignee_info_form">
+	<form class="shop_consignee_info">
 		<p class="emp_account_tipc">设定门店收货人地址手机号码<br/>(用于门店用户代收货、调换货处理)</p>
 		<div class="input_item">
-			<span class="content-label">门店名称：</span>
-			<input class="input-filed" type="text" name="shop_name" value="" >
+			<label class="">门店名称：</label>
+			<input class="" type="text" name="shop_name" value="" >
 		</div>
 		<div class="express-area area-box">
 			<span class="content-label">收货人地址：</span>
@@ -68,16 +68,16 @@
 				<input type="hidden" value="" class="area-address-name" data-key="">
 			</a>
 			<div>
-				<input class="input-filed" type="text" name="detail_address" value="{$store.detail_address}" placeholder="详细地址">
+				<input class="input-filed" type="text" name="detail_address" value="{$store.detail_address}" placeholder="街道/小区/道/楼/门牌详细地址">
 			</div>
 		</div>
 		<div class="input_item">
 			<span class="content-label">收货人姓名：</span>
-			<input class="input-filed" type="text" name="consignee_name" value="{$store.consignee_name}" placeholder="收货人姓名">
+			<input class="input-filed" type="text" name="consignee_name" value="{$store.consignee_name}" placeholder="姓名">
 		</div>
 		<div>
 			<span class="content-label">收货人手机号码：</span>
-			<input class="input-filed" type="tel" name="consignee_mobile_phone" value="{$store.consignee_mobile_phone}" placeholder="收货人手机号码">
+			<input class="input-filed" type="tel" name="consignee_mobile_phone" value="{$store.consignee_mobile_phone}" placeholder="业务手机号码">
 		</div>
 		<!--<a href="javascript:void(0);" class="submit foot-btn">确定</a>-->
 	</form>
@@ -709,7 +709,7 @@
 			layer.open({
 				title:['设定门店收货人信息','border-bottom:1px solid #d9d9d9;'],
 				className:'employeeAccountLayer',
-				content:storeEmployeeSection,
+				content:shopConsigneeInfo,
 				type:1,
 				anim:'up',
 				style:'',
@@ -720,41 +720,29 @@
 					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
 				},
 				yes:function(index){
-					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					var dialogForm = $('.employeeAccountLayer .shop_consignee_info');
 					var postData=dialogForm.serializeObject();
+					var areaAddress=$('.area-address-name').val();
 					var content='';
-					if(!postData.nickname){
-						content='请填写员工姓名';
-					}else if(!register.phoneCheck(postData.mobile_phone)){
+					if(!areaAddress){
+						content='请选择所在地区';
+					}else if(!postData.detail_address){
+						content='请填写地区详细地址';
+					}
+					else if(!postData.consignee_name){
+						content='请填写收货人姓名';
+					}else if(!register.phoneCheck(postData.consignee_mobile_phone)){
 						content='请填写手机号码';
 					}
 					if(content){
 						dialog.error(content);
 						return false;
 					}
-					postData.post = null;
-					$.each(dialogForm.find('ul.post').find('li'),function(){
-						if($(this).hasClass('current')){
-							postData.post = $(this).data('id');
-						}
-					});
-					postData.duty = null;
-					$.each(dialogForm.find('ul.duty').find('li'),function(){
-						if($(this).hasClass('current')){
-							postData.duty = $(this).data('id');
-						}
-					});
-					postData.nodeIds = [];
-					$.each(dialogForm.find('ul.authentication').find('li'),function(){
-						if($(this).hasClass('current')){
-							postData.nodeIds.push($(this).data('id'));
-						}
-					});
 					var config = {
 						url:controller + 'editStoreEmployee',
 						postData:postData,
 						index:index,
-						container:$('#storeEmployeeList').find('ul.list')
+						container:$('#shopConsigneeList').find('ul.list')
 					};
 					dialogFormAdd(config);
 				}
