@@ -86,6 +86,7 @@ class Store extends \common\controller\FactoryBase{
                     's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
                     'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                     'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
+                    'us.user_id',
                     'u.nickname','u.mobile_phone',
                 ],'join' => [
                     ['factory f','f.id = s.factory_id','left'],
@@ -97,7 +98,7 @@ class Store extends \common\controller\FactoryBase{
                     ['s.status','=',0],
                     ['s.factory_id','=',$this->factory['id']],
                     ['f.type','=',2],
-                    ['us.type','=',1],
+                    ['us.type','in',[1,3]],
                 ],
             ];
             $storeList = $modelStore->getList($config);
