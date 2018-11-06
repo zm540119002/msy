@@ -564,8 +564,8 @@ function dialogFormEditDefaultFunc(config,data) {
     }else{
         alert(2);
         //dialog.success('修改成功',config.url);
-        config.modifyObj.replaceWith(data);
-        alert(3);
+        // config.modifyObj.replaceWith(data);
+        // alert(3);
         layer.close(config.index);
     }
 }
