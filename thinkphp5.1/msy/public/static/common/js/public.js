@@ -557,7 +557,7 @@ function dialogFormEdit(config) {
         }
     });
 }
-//修改-表单提交
+//删除-表单提交
 function dialogFormDel(config) {
     $.ajax({
         url: config.url,
