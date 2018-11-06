@@ -53,7 +53,7 @@
     </form>
 </section>
 <!--编辑门店收货人信息-->
-<section class="section_content" id="shopConsigneeInfo" style="display:none;">
+<section class="shopConsigneeInfo" id="shopConsigneeInfo" style="display:none;">
 	<form class="consignee_info_form">
 		<p class="emp_account_tipc">设定门店收货人地址手机号码<br/>(用于门店用户代收货、调换货处理)</p>
 		<div class="input_item">
@@ -706,7 +706,59 @@
 		var shopConsigneeInfo=$('#shopConsigneeInfo').html();
 		$('body').on('click','.shop_list li',function(){
 			var _this=$(this).parents('.list li');
-			
+			layer.open({
+				title:['设定门店收货人信息','border-bottom:1px solid #d9d9d9;'],
+				className:'employeeAccountLayer',
+				content:storeEmployeeSection,
+				type:1,
+				anim:'up',
+				style:'',
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
+				},
+				yes:function(index){
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					var postData=dialogForm.serializeObject();
+					var content='';
+					if(!postData.nickname){
+						content='请填写员工姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					var config = {
+						url:controller + 'editStoreEmployee',
+						postData:postData,
+						index:index,
+						container:$('#storeEmployeeList').find('ul.list')
+					};
+					dialogFormAdd(config);
+				}
+			});
 				
 		})
 	});
