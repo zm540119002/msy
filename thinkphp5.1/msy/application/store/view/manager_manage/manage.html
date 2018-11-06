@@ -68,16 +68,16 @@
 				<input type="hidden" value="" class="area-address-name" data-key="">
 			</a>
 			<div>
-				<input class="input-filed" type="text" name="detail_address" value="{$store.detail_address}" placeholder="街道/小区/道/楼/门牌详细地址">
+				<input class="input-filed" type="text" name="shop_detail_address" value="{$store.detail_address}" placeholder="街道/小区/道/楼/门牌详细地址">
 			</div>
 		</div>
 		<div class="input_item">
 			<span class="content-label">收货人姓名：</span>
-			<input class="input-filed" type="text" name="consignee_name" value="{$store.consignee_name}" placeholder="姓名">
+			<input class="input-filed" type="text" name="shop_consignee_name" value="{$store.consignee_name}" placeholder="姓名">
 		</div>
 		<div>
 			<span class="content-label">收货人手机号码：</span>
-			<input class="input-filed" type="tel" name="consignee_mobile_phone" value="{$store.consignee_mobile_phone}" placeholder="业务手机号码">
+			<input class="input-filed" type="tel" name="shop_onsignee_mobile_phone" value="{$store.consignee_mobile_phone}" placeholder="业务手机号码">
 		</div>
 	</form>
 </section>
@@ -724,7 +724,7 @@
 					var dialogForm = $('.shopConsigneeLayer .shop_consignee_info');
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
-					copyDataByName(_this,dialogForm);
+					//copyDataByName(_this,dialogForm);
 				},
 				yes:function(index){
 					var dialogForm = $('.shopConsigneeLayer .shop_consignee_info');
@@ -733,12 +733,12 @@
 					var content='';
 					if(!areaAddress){
 						content='请选择所在地区';
-					}else if(!postData.detail_address){
+					}else if(!postData.shop_detail_address){
 						content='请填写地区详细地址';
 					}
-					else if(!postData.consignee_name){
+					else if(!postData.shop_consignee_name){
 						content='请填写收货人姓名';
-					}else if(!register.phoneCheck(postData.consignee_mobile_phone)){
+					}else if(!register.phoneCheck(postData.shop_consignee_mobile_phone)){
 						content='请填写手机号码';
 					}
 					if(content){
