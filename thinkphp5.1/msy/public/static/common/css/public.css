@@ -3302,6 +3302,10 @@ input[type=text]::-webkit-focus-inner {
 .content-mg-top{
     margin-top:3rem;
 }
+.content_main list img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
 /*打印订单*/
 .print_orders{
     display:block;
