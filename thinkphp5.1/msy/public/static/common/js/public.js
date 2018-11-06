@@ -551,6 +551,7 @@ function dialogFormEdit(config) {
             if(config.callBack){
                 config.callBack(config,data);
             }else{
+                alert(23);
                 dialogFormEditDefaultFunc(config,data);
             }
         }
