@@ -3319,6 +3319,9 @@ input[type=text]::-webkit-focus-inner {
 .consignee_info_form .upload-picture-module{
     margin:0.12rem 0 0 0;
 }
+.employeeAccountLayer .shop_consignee_info{
+    padding:.20rem;
+}
 /*打印订单*/
 .print_orders{
     display:block;
