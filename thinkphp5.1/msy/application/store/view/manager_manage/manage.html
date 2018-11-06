@@ -206,10 +206,16 @@
 				container: $('#shopEmployeeList').find('ul.list')
 			};
 			getList(config);
-			//门店经营地址列表
+			//获取门店经营地址列表
 			config = {
 				url: controller + 'getShopOperationAddressList',
 				container: $('#shopAddressList').find('ul.list')
+			};
+			getList(config);
+			//获取门店收货人地址列表
+			config = {
+				url: controller + 'getShopConsigneeAddressList',
+				container: $('#shopConsigneeList').find('ul.list')
 			};
 			getList(config);
 		}
