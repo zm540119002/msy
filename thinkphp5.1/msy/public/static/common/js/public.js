@@ -551,7 +551,7 @@ function dialogFormEdit(config) {
             if(config.callBack){
                 config.callBack(config,data);
             }else{
-                alert(23);
+                alert(1);
                 dialogFormEditDefaultFunc(config,data);
             }
         }
@@ -562,6 +562,7 @@ function dialogFormEditDefaultFunc(config,data) {
     if(data.status == 0){
         dialog.error(data.info);
     }else{
+        alert(2);
         config.modifyObj.replaceWith(data);
         layer.close(config.index);
     }
