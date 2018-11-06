@@ -105,6 +105,9 @@ body{
 .nodisabled{
     pointer-events: none;
 }
+.input_item{
+    margin:0 0 0.18rem 0;
+}
 /*头部样式*/
 .header{
     width: 100%;
@@ -2429,7 +2432,7 @@ input[type=text]::-webkit-focus-inner {
 .area-box{
     margin:0.20rem 0 0.20rem 0;
     padding:0 0 0.12rem 0;
-    border-bottom:1px solid #d9d9d9;
+    /*border-bottom:1px solid #d9d9d9;*/
 }
 .express-area a {
     display: block;
@@ -3306,6 +3309,15 @@ input[type=text]::-webkit-focus-inner {
 .content_main .list img{
     width: 1.5rem;
     height: 1.5rem;
+}
+.consignee_info_form{
+    padding:0.20rem;
+}
+.consignee_info_form .picture-module {
+    width:3.6rem;
+}
+.consignee_info_form .upload-picture-module{
+    margin:0.12rem 0 0 0;
 }
 /*打印订单*/
 .print_orders{
