@@ -86,7 +86,7 @@ class Store extends \common\controller\FactoryBase{
                     's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
                     'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                     'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
-                    'u.nickname','u.mobile_phone','us.factory_id',
+                    'u.nickname','u.mobile_phone','us.factory_id','us.type',
                 ],'join' => [
                     ['factory f','f.id = s.factory_id','left'],
                     ['record r','r.id = s.foreign_id','left'],
