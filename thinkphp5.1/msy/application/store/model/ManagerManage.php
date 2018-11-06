@@ -173,14 +173,14 @@ class ManagerManage extends \common\model\Base {
 			}
 			$userId = $postData['id'];
 			$postData['id'] = $postData['user_shop_id'];
-			$modelUserStore = new \common\model\UserStore();
-			$res = $modelUserStore->isUpdate(true)->save($postData);
+			$modelUserShop = new \app\store\model\UserShop();
+			$res = $modelUserShop->isUpdate(true)->save($postData);
 			if($res===false){
 				$this->rollback();//事务回滚
-				return errorMsg('失败',$modelUserStore->getError());
+				return errorMsg('失败',$modelUserShop->getError());
 			}
 			if(!empty($postData['nodeIds'])){
-				$modelUserStoreNode = new \common\model\UserStoreNode();
+				$modelUserShopNode = new \app\store\model\UserShopNode();
 				$config = [
 					'field' => [
 						'usn.node_id',
@@ -190,8 +190,8 @@ class ManagerManage extends \common\model\Base {
 						['usn.store_id','=',$storeId],
 					],
 				];
-				$userStoreNodeList = $modelUserStoreNode->getlist($config);
-				$oldNodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
+				$userShopNodeList = $modelUserShopNode->getList($config);
+				$oldNodeIds = array_unique(array_column($userShopNodeList,'node_id'));
 				if(empty($oldNodeIds)){
 					$addNodeIds = $postData['nodeIds'];
 					$delNodeIds = [];
@@ -206,12 +206,13 @@ class ManagerManage extends \common\model\Base {
 							'user_id' => $userId,
 							'store_id' => $storeId,
 							'node_id' => $node,
+							'shop_id'=>$postData['shop_id'],
 						];
 					}
-					$res = $modelUserStoreNode->isUpdate(false)->saveAll($data);
+					$res = $modelUserShopNode->isUpdate(false)->saveAll($data);
 					if(false===$res){
 						$this->rollback();//回滚事务
-						return errorMsg($modelUserStoreNode->getError());
+						return errorMsg($modelUserShopNode->getError());
 					}
 				}
 				if(!empty($delNodeIds)){
@@ -220,10 +221,10 @@ class ManagerManage extends \common\model\Base {
 						['store_id','=',$storeId],
 					];
 					$where[] = ['node_id','in',$delNodeIds];
-					$res = $modelUserStoreNode->where($where)->delete();
+					$res = $modelUserShopNode->where($where)->delete();
 					if(!$res){
-						$modelUserStoreNode->rollback();//回滚事务
-						return errorMsg('失败',$modelUserStoreNode->getError());
+						$this->rollback();//回滚事务
+						return errorMsg('失败',$modelUserShopNode->getError());
 					}
 				}
 			}
@@ -285,7 +286,7 @@ class ManagerManage extends \common\model\Base {
 		return successMsg('成功！',$postData);
 	}
 
-	//删除
+	//删除店铺员工
 	public function delStoreEmployee($storeId,$tag=true){
 		$userStoreId = input('post.user_store_id',0);
 		if(!$userStoreId){
@@ -310,7 +311,7 @@ class ManagerManage extends \common\model\Base {
 		}else{
 			$result = $modelUserStore->where($where)->delete();
 		}
-		if(!$result){
+		if($result===false){
 			$modelUserStore->rollback();//事务回滚
 			return errorMsg('失败',$modelUserStore->getError());
 		}
@@ -325,11 +326,64 @@ class ManagerManage extends \common\model\Base {
 		}else{
 			$result = $modelUserStoreNode->where($where)->delete();
 		}
-		if(!$result){
+		if($result===false){
 			$modelUserStore->rollback();//事务回滚
-			return errorMsg('失败',$modelUserStore->getError());
+			return errorMsg('失败',$modelUserStoreNode->getError());
 		}
 		$modelUserStore->commit();//事务提交
+		return successMsg('成功');
+	}
+
+	//删除门店员工
+	public function delShopEmployee($storeId,$tag=true){
+		$postData = input('post.');
+		if(!intval($postData['id'])){
+			return errorMsg('参数错误');
+		}
+		if(!intval($postData['user_shop_id'])){
+			return errorMsg('参数错误');
+		}
+		if(!intval($postData['shop_id'])){
+			return errorMsg('参数错误');
+		}
+		$where = [
+			['id', '=', $postData['user_shop_id']],
+			['user_id', '=', $postData['id']],
+			['store_id', '=', $storeId],
+			['shop_id', '=', $postData['shop_id']],
+			['status', '=', 0],
+			['type', '=', 4],
+		];
+		$modelUserShop = new \app\store\model\UserShop();
+		$modelUserShop->startTrans();//事务开启
+		if($tag){//标记删除
+			$result = $modelUserShop->where($where)->setField('status',2);
+		}else{
+			$result = $modelUserShop->where($where)->delete();
+		}
+		if($result===false){
+			$modelUserShop->rollback();//事务回滚
+			return errorMsg('失败',$modelUserShop->getError());
+		}
+		if(!empty($postData['nodeIds'])){
+			$modelUserShopNode = new \app\store\model\UserShopNode();
+			$where = [
+				['user_id', '=', $postData['id']],
+				['store_id', '=', $storeId],
+				['shop_id', '=', $postData['shop_id']],
+				['status', '=', 0],
+			];
+			if($tag){//标记删除
+				$result = $modelUserShopNode->where($where)->setField('status',2);
+			}else{
+				$result = $modelUserShopNode->where($where)->delete();
+			}
+			if($result===false){
+				$modelUserShop->rollback();//事务回滚
+				return errorMsg('失败',$modelUserShopNode->getError());
+			}
+		}
+		$modelUserShop->commit();//事务提交
 		return successMsg('成功');
 	}
 

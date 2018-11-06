@@ -21,7 +21,7 @@
 			<select name="shop_id">
 				{notempty name='shopList'}
 				{volist name="shopList" id="vo"}
-				<option value="{$vo.id}">{$vo.name}</option>
+				<option value="{$vo.id}" {if ($info.shop_id == $vo.id)}selected{/if}>{$vo.name}</option>
 				{/volist}
 				{/notempty}
 			</select>
@@ -36,7 +36,7 @@
 			<span></span>
 			修改
 		</a>
-		<a href="javascript:void(0);" class="delete-account">
+		<a href="javascript:void(0);" class="delete-account delete-shop-account">
 			<span></span>
 			删除
 		</a>

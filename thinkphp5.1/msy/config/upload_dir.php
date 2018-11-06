@@ -12,5 +12,5 @@ return [
     'factory_promotion' => 'factory_promotion/',//场景图片
     'factory_tweet' => 'factory_tweet/',//场景图片
     'pay_QRcode' => 'pay_QRcode/',//场景图片
-
+    'shop_logo_img' => 'shop/logo_img/',//场景图片
 ];

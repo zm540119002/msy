@@ -10,22 +10,16 @@ class ManagerManage extends FactoryStoreBase{
 
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(isset($this->currentStore['id']) && $this->currentStore['id']){
-            $modelUserShop = new \app\store\model\UserShop();
+            $modelShop = new \app\store\model\Shop();
             $config = [
                 'field' => [
                     's.id','s.name',
-                    'u.nickname','u.mobile_phone',
-                    'us.id user_shop_id',
-                ],'leftJoin' => [
-                    ['shop s','s.id = us.shop_id'],
-                    ['common.user u','u.id = us.user_id'],
                 ],'where' => [
                     ['s.status','=',0],
-                    ['us.status','=',0],
-                    ['us.store_id','=',$this->currentStore['id']],
+                    ['s.store_id','=',$this->currentStore['id']],
                 ],
             ];
-            $shopList = $modelUserShop->getList($config);
+            $shopList = $modelShop->getList($config);
             $this->assign('shopList',$shopList);
         }
     }
@@ -126,7 +120,7 @@ class ManagerManage extends FactoryStoreBase{
                         ['usn.store_id','=',$this->currentStore['id']],
                     ],
                 ];
-                $userStoreNodeList = $modelUserStoreNode->getlist($config);
+                $userStoreNodeList = $modelUserStoreNode->getList($config);
                 $nodeIds = array_unique(array_column($userStoreNodeList,'node_id'));
                 if(!empty($nodeIds)){
                     $user['nodeIds'] = $nodeIds;
@@ -147,7 +141,7 @@ class ManagerManage extends FactoryStoreBase{
             $config = [
                 'field' => [
                     'u.id','u.nickname','u.mobile_phone',
-                    'us.id user_shop_id','us.post','us.duty',
+                    'us.id user_shop_id','us.post','us.duty','us.shop_id',
                 ],'leftJoin' => [
                     ['common.user u','u.id = us.user_id'],
                 ],'where' => [
@@ -169,7 +163,7 @@ class ManagerManage extends FactoryStoreBase{
                         ['usn.store_id','=',$this->currentStore['id']],
                     ],
                 ];
-                $userShopNodeList = $modelUserShopNode->getlist($config);
+                $userShopNodeList = $modelUserShopNode->getList($config);
                 $nodeIds = array_unique(array_column($userShopNodeList,'node_id'));
                 if(!empty($nodeIds)){
                     $user['nodeIds'] = $nodeIds;
@@ -177,6 +171,48 @@ class ManagerManage extends FactoryStoreBase{
             }
             $this->assign('list',$shopEmployeeList);
             return view('shop_employee_list_tpl');
+        }
+    }
+
+    //获取门店经营地址列表
+    public function getShopOperationAddressList(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone','s.operation_address',
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.store_id','=',$this->currentStore['id']],
+                ],
+            ];
+            $shopList = $modelShop->getList($config);
+            $this->assign('list',$shopList);
+            return view('shop_operation_address_list_tpl');
+        }
+    }
+
+    //获取门店收货人地址列表
+    public function getShopConsigneeAddressList(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name','s.logo_img','s.consignee_mobile_phone','s.consignee_name','s.consignee_address',
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.store_id','=',$this->currentStore['id']],
+                ],
+            ];
+            $shopList = $modelShop->getList($config);
+            $this->assign('list',$shopList);
+            return view('shop_consignee_address_list_tpl');
         }
     }
 
@@ -193,6 +229,104 @@ class ManagerManage extends FactoryStoreBase{
         }
     }
 
+    /**编辑门店经营地址信息
+     */
+    public function editShopOperationAddress(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $postData = input('post.');
+            //数据验证
+            $validateShop = new \app\store\validate\Shop();
+            if(!$validateShop->scene('operation_address')->check($postData)){
+                return errorMsg($validateShop->getError());
+            }
+            if(isset($postData['shopId']) && intval($postData['shopId'])){//修改门店经营地址信息
+                $modelShop = new \app\store\model\Shop();
+                list($postData['operation_province'],$postData['operation_city'],$postData['operation_area']) = $postData['region'];
+                $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
+                $where = [
+                    ['id','=',$postData['shopId']],
+                    ['store_id','=',$this->currentStore['id']],
+                    ['status','=',0],
+                ];
+                $res = $modelShop->isUpdate(true)->save($postData,$where);
+                if($res===false){
+                    return errorMsg('失败',$modelShop->getError());
+                }
+                return successMsg('成功');
+            }
+        }else{
+            $shopId = input('shopId');
+            if(intval($shopId)){
+                $modelShop = new \app\store\model\Shop();
+                $config = [
+                    'field' => [
+                        's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone',
+                        's.operation_province','s.operation_city','s.operation_area','s.operation_address',
+                    ],'where' => [
+                        ['s.status','=',0],
+                        ['s.id','=',$shopId],
+                        ['s.store_id','=',$this->currentStore['id']],
+                    ],
+                ];
+                $shopInfo = $modelShop->getInfo($config);
+                $this->assign('shopInfo',$shopInfo);
+            }
+            return $this->fetch();
+        }
+    }
+
+    /**编辑门店收货人地址
+     */
+    public function editShopConsigneeAddress(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $postData = input('post.');
+            //数据验证
+            $validateShop = new \app\store\validate\Shop();
+            if(!$validateShop->scene('consignee_address')->check($postData)){
+                return errorMsg($validateShop->getError());
+            }
+            if(isset($postData['shopId']) && intval($postData['shopId'])){//修改门店经营地址信息
+                $modelShop = new \app\store\model\Shop();
+                list($postData['consignee_province'],$postData['consignee_city'],$postData['consignee_area']) = $postData['region'];
+                $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
+                $where = [
+                    ['id','=',$postData['shopId']],
+                    ['store_id','=',$this->currentStore['id']],
+                    ['status','=',0],
+                ];
+                $res = $modelShop->isUpdate(true)->save($postData,$where);
+                if($res===false){
+                    return errorMsg('失败',$modelShop->getError());
+                }
+                return successMsg('成功');
+            }
+        }else{
+            $shopId = input('shopId');
+            if(intval($shopId)){
+                $modelShop = new \app\store\model\Shop();
+                $config = [
+                    'field' => [
+                        's.id','s.name','s.logo_img','s.consignee_mobile_phone','s.consignee_fix_phone',
+                        's.consignee_province','s.consignee_city','s.consignee_area','s.consignee_address',
+                    ],'where' => [
+                        ['s.status','=',0],
+                        ['s.id','=',$shopId],
+                        ['s.store_id','=',$this->currentStore['id']],
+                    ],
+                ];
+                $shopInfo = $modelShop->getInfo($config);
+                $this->assign('shopInfo',$shopInfo);
+            }
+            return $this->fetch();
+        }
+    }
+
     /**删除店铺员工
      */
     public function delStoreEmployee(){
@@ -202,6 +336,18 @@ class ManagerManage extends FactoryStoreBase{
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
             return $modelManagerManage->delStoreEmployee($this->currentStore['id'],false);
+        }
+    }
+
+    /**删除门店员工
+     */
+    public function delShopEmployee(){
+        if(!($this->currentStore['id'])){
+            return errorMsg('请选择店铺！');
+        }
+        if(request()->isAjax()){
+            $modelManagerManage = new \app\store\model\ManagerManage();
+            return $modelManagerManage->delShopEmployee($this->currentStore['id'],false);
         }
     }
 }
