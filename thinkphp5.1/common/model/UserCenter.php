@@ -137,8 +137,7 @@ class UserCenter extends Base {
 		$salt = create_random_str(10,0);
 		$data['salt'] = $salt;//盐值;
 		$data['password'] = md5($salt . $passWord);//加密;
-		$data['name'] = $this->createUserName();
-		$data['nickname'] = '游客';
+		$data['name'] = '游客';
 		$data['create_time'] = time();
 		$this->save($data);
 		if(!$this->getAttr('id')){

@@ -35,7 +35,7 @@ class Manager extends \common\model\Base {
 			if(!$userId){//不存在
 				unset($postData['id']);
 				$postData['type'] = 1;
-				$postData['nickname'] = trim($postData['name']);
+				$postData['name'] = trim($postData['name']);
 				$postData['create_time'] = time();
 				$res = $this->isUpdate(false)->save($postData);
 				if($res===false){
