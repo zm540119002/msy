@@ -97,7 +97,7 @@ class Store extends \common\controller\FactoryBase{
                     ['s.status','=',0],
                     ['s.factory_id','=',$this->factory['id']],
                     ['f.type','=',2],
-                    ['us.type','=',2],
+                    ['us.type','=',1],
                 ],
             ];
             $storeList = $modelStore->getList($config);
