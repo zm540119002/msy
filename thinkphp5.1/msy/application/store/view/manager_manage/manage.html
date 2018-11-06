@@ -721,8 +721,10 @@
 				btn:['确定','取消'],
 				success:function(){
 					var winHeight=$(window).height();
+					var dialogForm = $('.employeeAccountLayer .shop_consignee_info');
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
+					dialogForm.css('height',winHeight-120+'px');
+					copyDataByName(_this,dialogForm);
 				},
 				yes:function(index){
 					var dialogForm = $('.employeeAccountLayer .shop_consignee_info');
