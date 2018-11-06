@@ -18,6 +18,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
         //获取店家店铺列表
         $this->_getManagerFactoryList();
         $this->assign('store', $this->_store);
+        print_r($this->_store);
         //缓存当前店铺信息
         \common\cache\Store::cacheCurrentStoreInfo($this->_store);
         $this->assign('managerFactoryList', $this->_managerFactoryList);
