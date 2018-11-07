@@ -535,6 +535,7 @@ function dialogFormAdd(config) {
 
 //修改-表单提交
 function dialogFormEdit(config) {
+    console.log(config.modifyObj);
     $.ajax({
         url: config.url,
         data: config.postData,
@@ -555,14 +556,14 @@ function dialogFormEdit(config) {
             //     // dialogFormEditDefaultFunc(config,data);
                
             // }
-             if(data.status == 0){
+            if(data.status == 0){
                     console.log(3);
                     dialog.error(data.info);
-                }else{
-                    console.log(2);
+            }else{
+                    
                     config.modifyObj.replaceWith(data);
                     layer.close(config.index);
-                }
+            }
         }
     });
 }
