@@ -1,86 +1,154 @@
-{extend name="template/base.html" /}
-{block name="css-customize"}
-<link rel="stylesheet" href="factory_css/main.css">
-{/block}
-{block name="content"}
-<article class="f24">
-	<section class="fixedtop top_nav_fixed">
-		<!--{include file="template/footer_menu_msy_practitioner.html" /}-->
-		<div class="top_menu_box">
-			<div class="top_menu_list">
-				<a href="javascript:void(0);" class="current">零售</a>
-				<a href="javascript:void(0);">分成</a>
-				<a href="javascript:void(0);">店家入驻</a>
-				<a href="javascript:void(0);">云推客</a>
-				<a href="javascript:void(0);">美尚会</a>
-			</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+	<title>美尚网站</title>
+	<link rel="stylesheet" href="public_css/base.css">
+	<style type="text/css">
+		body{
+			font-size:14px;
+		}
+		header{
+			width:100%;
+			background:#000;
+			color:#fff;
+		}
+		.header_menu{
+			width:1200px;
+			height:48px;
+			line-height: 48px;
+			margin:0 auto;
+			overflow:hidden;
+			
+		}
+		.header_left{
+			width:100px;
+			float:left;
+		}
+		.header_right{
+			float:right;
+			width:500px;
+		}
+		.header_right li{
+			float:left;
+			width:100px;
+			text-align:center;
+		}
+		.content_wrapper{
+			width:1200px;
+			margin:0 auto;
+		}
+		.label_tipc{
+			margin:20px 0;
+		}
+		.pd_list li{
+			float:left;
+			width: 220px;
+			margin:0 10px 25px;	
+			border:1px solid #d9d9d9;
+			box-sizing:border-box;
+		}
+		.pd_list li img{
+			height:150px;
+		}
+		.pr_info{
+			margin:10px 0 0;
+			display:flex;
+			justify-content: space-between;
+		}
+		.pd_list li img{
+			display:block;
+			width:100px;
+			margin:0 auto;
+		}
+		.header_menu a{
+			color:#fff;
+			cursor: pointer;
+		}
+		.header_menu a.current{
+			border-bottom:1px solid #fff;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<div class="header_menu">
+		<div class="header_left">
+			<img src="" alt="">
 		</div>
-	</section>
-	<section class="slider_banner ">
-		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/banner/home-banner1.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public_img/banner/home-banner2.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public_img/banner/home-banner3.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public_img/banner/home-banner.jpg" alt="" class="common_default_img">
-				</div>
+		<ul class="header_right">
+			<li><a href="http://msy.new.com/index.php/mall/CaiHui/index.html">首页</a></li>
+			<li><a href="http://msy.new.com/index.php/mall/CaiHui/goods.html" class="current">产品展示</a></li>
+			<li><a href="http://msy.new.com/index.php/mall/CaiHui/about.html">关于我们</a></li>
+			<li><a href="http://msy.new.com/index.php/mall/CaiHui/contact.html">联系方式</a></li>
+		</ul>
+	</div>
+</header>
+<div class="content_wrapper">
+	<p class="label_tipc">商品列表</p>
+	<ul class="pd_list">
+		<li>
+			<div>
+				<a href="http://msy.new.com/index.php/mall/CaiHui/detail1.html">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
 			</div>
-			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			<p>产品介绍1111111111111</p>
+			<div class="pr_info">
+				<span><price>500.00</price>元</span>
+				<a href="javascript:;">购买</a>
 			</div>
-		</div>
-	</section>
-	<section class="module-navigation separation-line ">
-		<div class="columns_flex f20 channel_nav mall_function_menu">
-			<a href="{:url('index/index')}" class="deployed-deployment"><span class="union_purchase"></span>零售商城</a>
-			<a href="javascript:void(0);" class="my-store"><span class="exclusive"></span>微团零售</a>
-			<a href="{:url('Operation/index')}" class="store_run"><span class="classify"></span>商品分类</a>
-			<a href="{:url('Order/index')}" class="order-management"><span class="purchasers"></span>直升VIP</a>
-			<a href="javascript:void(0);" class="order-management-change"><span class="recharge"></span>零售充值</a>
-		</div>
-	</section>
-	<section class="message-center-info f20">
-		<p>欢迎来到供应商管理中心</p>
-		<p>美尚云平台支持企业多店铺运营管理</p>
-	</section>
-	<section>
-		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
-	</section>
-	<!--<section class="explain_nav">
-		<a href="javascript:void(0);">关于美尚云></a>
-		<a href="javascript:void(0);">厂商使用帮助></a>
-		<a href="javascript:void(0);">人才招聘></a>
-		<a href="javascript:void(0);">版权信息备案号</a>
-	</section>-->
-</article>
-{/block}
-{block name="common"}
-{include file="template/footer_menu_msy_practitioner.html" /}
-{include file="template/right_side_bar.html" /}
-{/block}
-{block name="footer"}{/block}
-{block name="script"}
-<script type="text/javascript" src="public_js/swiper.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-	});
-</script>
-{/block}
+		</li>
+		<li>
+			<div>
+				<a href="">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
+			</div>
+			<p>产品介绍222222222222222</p>
+			<div class="pr_info">
+				<span><price>500.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
+			</div>
+			<p>产品介绍222222222222222</p>
+			<div class="pr_info">
+				<span><price>500.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
+			</div>
+			<p>产品介绍222222222222222</p>
+			<div class="pr_info">
+				<span><price>500.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
+			</div>
+			<p>产品介绍222222222222222</p>
+			<div class="pr_info">
+				<span><price>500.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
