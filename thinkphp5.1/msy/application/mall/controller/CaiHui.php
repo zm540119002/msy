@@ -13,7 +13,37 @@ class CaiHui extends \think\Controller{
     }
 
     //商品详情页
-    public function detail(){
+    public function detail1(){
+        return $this->fetch();
+    }
+    //商品详情页
+    public function detail2(){
+        return $this->fetch();
+    }
+    //商品详情页
+    public function detail3(){
+        return $this->fetch();
+    }
+
+    //商品详情页
+    public function detail4(){
+        return $this->fetch();
+    }
+    //商品详情页
+    public function detail5(){
+        return $this->fetch();
+    }
+
+    //商品详情页
+    public function detail6(){
+        return $this->fetch();
+    }
+    //商品详情页
+    public function detail7(){
+        return $this->fetch();
+    }
+    //商品详情页
+    public function detail8(){
         return $this->fetch();
     }
 }
