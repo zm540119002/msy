@@ -7,8 +7,18 @@ class CaiHui extends \think\Controller{
         return $this->fetch();
     }
 
-    //商城商品列表页
+    //产品展示
     public function goods(){
+        return $this->fetch();
+    }
+
+    //关于我们
+    public function about(){
+        return $this->fetch();
+    }
+
+    //联系方式
+    public function contact(){
         return $this->fetch();
     }
 
