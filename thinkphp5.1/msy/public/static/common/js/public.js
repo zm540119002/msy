@@ -558,8 +558,6 @@ function dialogFormEdit(config) {
 }
 //修改-表单提交-默认回调
 function dialogFormEditDefaultCallBack(config,data) {
-    console.log(config);
-    console.log(data);
     if(data.status == 0){
         dialog.error(data.info);
     }else{
