@@ -42,6 +42,15 @@
 			border-radius: 0;
 			margin-top: 0;
 		}
+		.dt_item_flex{
+			display:flex;
+			display:-webkit-flex;
+		}
+		.dt_item_flex .pay{
+			width:120px;
+			text-align: center;
+			margin:0 0 0 20px;
+		}
 	</style>
 </head>
 <body>
@@ -57,10 +66,13 @@
 		</div>
 		<div class="dt_item">
 			<p>购买数量：</p>
-			<div class="quantity_wrapper selected-number">
-				<a href="javascript:void(0);" class="greduce">-</a>
-				<input type="text" value="1" class="f24 gshopping_count">
-				<a href="javascript:void(0);" class="gplus">+</a>
+			<div class="dt_item_flex">
+				<div class="quantity_wrapper selected-number">
+					<a href="javascript:void(0);" class="greduce">-</a>
+					<input type="text" value="1" class="f24 gshopping_count">
+					<a href="javascript:void(0);" class="gplus">+</a>
+				</div>
+				<a href="javascript:;" class="pay">立即结算</a>
 			</div>
 		</div>
 		<div  class="dt_item">
@@ -108,7 +120,7 @@
 				<img src="caihui_img/detail1/gy_12.jpg" alt="">
 			</p>
 		</div>
-		<a href="javascript:;" class="pay">立即结算</a>
+		
 	</div>
 </div>
 </body>

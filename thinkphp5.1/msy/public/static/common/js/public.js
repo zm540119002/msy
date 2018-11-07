@@ -552,14 +552,13 @@ function dialogFormEdit(config) {
             if(config.callBack){
                 config.callBack(config,data);
             }else{
-                dialogFormEditDefaultFunc(config,data);
-               
+                dialogFormEditDefaultCallBack(config,data);
             }
         }
     });
 }
 //修改-表单提交-默认回调
-function dialogFormEditDefaultFunc(config,data) {
+function dialogFormEditDefaultCallBack(config,data) {
     console.log(config);
     console.log(data);
     if(data.status == 0){
@@ -569,6 +568,7 @@ function dialogFormEditDefaultFunc(config,data) {
         layer.close(config.index);
     }
 }
+
 //删除-表单提交
 function dialogFormDel(config) {
     $.ajax({
