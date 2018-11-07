@@ -17,6 +17,31 @@
 			background:#ff0000;
 			color:#fff;
 		}
+		.dt_item{
+			overflow:hidden;
+			margin:0 0 20px 0;
+		}
+		.quantity_wrapper a, .selected-number a {
+			border: 1px solid #d9d9d9;
+			width: 20px;
+			display: inline-block;
+			text-align: center;
+			font-size:14px;
+			float: left;
+			height: 20px;
+			color: #333;
+		}
+		.quantity_wrapper input, .selected-number input {
+			width: 20px;
+			border: 1px solid #d9d9d9;
+			text-align: center;
+			float: left;
+			height: 20px;
+			border-left: 0;
+			border-right: 0;
+			border-radius: 0;
+			margin-top: 0;
+		}
 	</style>
 </head>
 <body>
@@ -25,10 +50,32 @@
 		<img src="" />
 	</div>
 	<div class="d_right">
-		<p>产品详情介绍111111</p>
+		<p>产品特点111</p>
 		<div>
 			<span>价格：</span>
 			<price>500</price>元
+		</div>
+		<div class="dt_item">
+			<p>购买数量：</p>
+			<div class="quantity_wrapper selected-number">
+				<a href="javascript:void(0);" class="greduce">-</a>
+				<input type="text" value="1" class="f24 gshopping_count">
+				<a href="javascript:void(0);" class="gplus">+</a>
+			</div>
+		</div>
+		<div  class="dt_item">
+			<p>商品介绍：</p>
+			<p>商品介绍11111</p>
+		</div>
+		<div  class="dt_item">
+			<p>商品参数：</p>
+			<p>商品参数商品参数商品参数商品参数商品参数</p>
+		</div>
+		<div  class="dt_item">
+			<p>商品详情：</p>
+			<p>
+				<img src="" alt="">
+			</p>
 		</div>
 		<a href="javascript:;" class="pay">立即结算</a>
 	</div>
