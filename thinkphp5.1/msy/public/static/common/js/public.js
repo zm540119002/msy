@@ -535,7 +535,6 @@ function dialogFormAdd(config) {
 
 //修改-表单提交
 function dialogFormEdit(config) {
-    
     $.ajax({
         url: config.url,
         data: config.postData,
