@@ -1,9 +1,12 @@
 <?php
 namespace app\mall\controller;
 
-class Payment extends MallBase {
+use Think\Think;
+
+class Payment extends \think\controller{
     //订单-支付
     public function orderPayment(){
+        print_r(input());exit;
         if( !empty(input('sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\purchase\model\Order();
             $orderSn = input('sn','','string');

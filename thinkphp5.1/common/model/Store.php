@@ -44,7 +44,7 @@ class Store extends Base {
 			$storeId = $this->getAttr('id');
 			$postData['type'] = 1;//拥有者
 			$postData['factory_id'] = $factoryId;
-			$postData['user-id'] = $userId;
+			$postData['user_id'] = $userId;
 			$postData['store_id'] = $storeId;
 			$result = $modelUserStore->save($postData);
 			if(!$result){
@@ -116,7 +116,7 @@ class Store extends Base {
 				$postData['name'] = trim($postData['name']);
 				$postData['create_time'] = time();
 				$modelUser = new \common\model\User();
-				$res = $modelUser->save($postData);
+				$res = $modelUser->isUpdate(false)->save($postData);
 				if($res===false){
 					$modelUser->rollback();//事务回滚
 					return errorMsg('失败',$modelUser->getError());
@@ -130,13 +130,17 @@ class Store extends Base {
 				$where = [
 					['id', '=', $userStoreId],
 				];
-				$modelUserStore->del($where,false);
+				$res = $modelUserStore->del($where,false);
+				if($res['status']==0){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$this->getError());
+				}
 			}
 			$postData['type'] = 3;
 			$postData['user_id'] = $userId;
 			$postData['factory_id'] = $factoryId;
 			$postData['store_id'] = $storeId;
-			$res = $modelUserStore->save($postData);
+			$res = $modelUserStore->isUpdate(false)->save($postData);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
@@ -155,7 +159,11 @@ class Store extends Base {
 				$where = [
 					['id', '=', $userStoreId],
 				];
-				$modelUserStore->del($where,false);
+				$res = $modelUserStore->del($where,false);
+				if($res['status']==0){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$this->getError());
+				}
 			}
 			return successMsg('删除成功！');
 		}

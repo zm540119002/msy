@@ -138,7 +138,7 @@
 				}
 			});
 		});
-		//修改店长
+		//修改门店信息
 		$('body').on('click','.modify-account',function(){
 			var _this=$(this).parents('.list li');
 			layer.open({
@@ -168,8 +168,7 @@
 					var config = {
 						url:module + 'Shop/edit',
 						postData:postData,
-						fromObj:$('.setShopAccountLayer .entryShopForm'),
-						toObj:_this,
+						modifyObj:_this,
 						index:index
 					};
 					dialogFormEdit(config);

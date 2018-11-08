@@ -88,7 +88,7 @@ class Base extends \think\Model {
 		}else{
 			$result = $this->where($where)->delete();
 		}
-		if(!$result){
+		if($result===false){
 			return errorMsg('失败',$this->getError());
 		}
 		return successMsg('成功');
