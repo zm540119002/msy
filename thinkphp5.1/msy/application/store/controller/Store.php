@@ -104,21 +104,25 @@ class Store extends \common\controller\FactoryBase{
             $list = $modelStore->getList($config);
             $storeList = [];
             $userList = [];
-            foreach ($list as $item){
-                if($item['type'] == 1){
-                    array_push($storeList,$item);
+            if(!empty($list)){
+                foreach ($list as $item){
+                    if($item['type'] == 1){
+                        $item['name'] = '';
+                        $item['mobile_phone'] = '';
+                        array_push($storeList,$item);
+                    }
+                    if($item['type'] == 3){
+                        array_push($userList,$item);
+                    }
                 }
             }
-            foreach ($list as $item){
-                if($item['type'] == 3){
-                    array_push($userList,$item);
-                }
-            }
-            foreach ($storeList as &$store){
-                foreach ($userList as $user){
-                    if($store['id'] == $user['id'] && $store['factory_id'] == $user['factory_id'] ){
-                        $store['name'] = $user['name'];
-                        $store['mobile_phone'] = $user['mobile_phone'];
+            if(!empty($storeList) && !empty($userList)){
+                foreach ($storeList as &$store){
+                    foreach ($userList as $user){
+                        if($store['id'] == $user['id'] && $store['factory_id'] == $user['factory_id'] ){
+                            $store['name'] = $user['name'];
+                            $store['mobile_phone'] = $user['mobile_phone'];
+                        }
                     }
                 }
             }

@@ -772,5 +772,20 @@
 <script type="text/javascript" src="public_js/common.js"></script>
 <script type="text/javascript" src="public_admin_common_js/layer.js"></script>
 <script type="text/javascript" src="caihui_js/index.js"></script>
+<script type="text/javascript">
+	var domain = '{:request()->domain()}'+'/'+'index.php/';
+	var module = domain + '{:request()->module()}/';
+	var controller = module + '{:request()->controller()}/';
+	var action = controller + '{:request()->action()}';
+	var uploads = '{:request()->domain()}'+'/uploads/';
+	$(function(){
+		$('.buy').on('click',function () {
+			var goods_id = "{$goods_id}";
+			var price = $(this).parents('li').siblings().find('price').text();
+			var num = $(this).parents('li').find('.gshopping_count').val();
+			location.href = controller+'pay/goods_id/'+goods_id+'/price/'+price+'/num/'+num;
+		})
+	})
+</script>
 </body>
 </html>
