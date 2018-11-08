@@ -28,52 +28,27 @@ class CaiHui extends \common\controller\Base{
         $this->assign('goods_id',$goods_id);
         return $this->fetch();
     }
-    //商品详情页
-    public function detail2(){
-        return $this->fetch();
-    }
-    //商品详情页
-    public function detail3(){
-        return $this->fetch();
-    }
 
-    //商品详情页
-    public function detail4(){
-        return $this->fetch();
-    }
-    //商品详情页
-    public function detail5(){
-        return $this->fetch();
-    }
-
-    //商品详情页
-    public function detail6(){
-        return $this->fetch();
-    }
-    //商品详情页
-    public function detail7(){
-        return $this->fetch();
-    }
-    //商品详情页
-    public function detail8(){
-        return $this->fetch();
-    }
     //结算
     public function pay(){
+        $goodsInfo = input();
+        $goodsInfo['amount'] = $goodsInfo['price'] * $goodsInfo['num'];
+        $this -> assign('goodsInfo',$goodsInfo);
         return $this->fetch();
     }
 
 
     //订单-支付
     public function orderPayment(){
+        $data = input('');
         $payInfo = [
             'sn'=>generateSN(),
-            'actually_amount'=>0.1,
+            'actually_amount'=>$data['amount'],
             'return_url' => $this->host.url('payComplete'),
             'notify_url'=>$this->host.url('notifyUrl')
         ];
+
         $payCode = input('pay_code','0','int');
-        //微信支付
         if($payCode == 1){
             $payInfo['notify_url'] = $payInfo['notify_url'].'/weixin';
             \common\component\payment\weixin\weixinpay::wxPay($payInfo);

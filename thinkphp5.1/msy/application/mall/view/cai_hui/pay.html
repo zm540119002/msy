@@ -132,11 +132,19 @@
 				<a href="javascript:;" data-pay="2">支付宝支付</a>
 				<a href="javascript:;" data-pay="3">银联支付</a>
 			</div>
-			<input type="hidden" name="pay_type" value="">
+			<input type="hidden" name="pay_code" value="">
+			<input type="hidden" name="goods_id" value="{$goodsInfo.goods_id}">
+			<input type="hidden" name="goods_price" value="{$goodsInfo.price}">
+			<input type="hidden" name="goods_num" value="{$goodsInfo.num}">
+			<input type="hidden" name="amount" value="{$goodsInfo.amount}">
+		</div>
+		<div>
+			<span>产品单价:<price>{$goodsInfo.price}</price></span>
+			<span>购买数量: {$goodsInfo.num}</span>
 		</div>
 		<div class="dt_item">
 			<span>应付总额:</span>
-			<span>￥<price>1250.00</price></span>
+			<span>￥<price>{$goodsInfo.amount}</price></span>
 		</div>
 		<input type="submit" value="立即结算" class="pay"/>
 	</form>
@@ -161,7 +169,7 @@
 		$(function(){
 			$('.pay_type a').on('click',function(){
 				$(this).addClass('current').siblings().removeClass('current');
-				$('[name = pay_type]').val($(this).data('pay'));
+				$('[name = pay_code]').val($(this).data('pay'));
 			})
 			$('.pay').on('click',function(){
 				var consignee=$('[name=name]').val();
