@@ -91,6 +91,7 @@
 						url:module + 'Store/setManager',
 						postData:postData,
 						modifyObj:_this,
+						callBack:setManagerCallBack,
 						index:index
 					};
 					dialogFormEdit(config);
@@ -98,5 +99,15 @@
 			});
 		});
 	});
+	//设置店长回调
+	function setManagerCallBack(config,data) {
+		console.log(config);
+		console.log(data);
+//		if(data.status == 0){
+//			dialog.error(data.info);
+//		}else{
+//			layer.close(config.index);
+//		}
+	}
 </script>
 {/block}
