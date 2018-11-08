@@ -65,7 +65,7 @@
 			url: module + 'Manager/index'
 		};
 		getList(config);
-		//创建管理员账号
+		//新增管理员账号
 		var addAdminAccount=$('#addAdminAccount').html();
 		$('body').on('click','.addManageAccount',function(){
 			layer.open({
@@ -158,7 +158,6 @@
 			$(this).find('.operate-btn').show();
 			$(this).siblings().find('.operate-btn').hide();
 		});
-		
 	});
 </script>
 {/block}
