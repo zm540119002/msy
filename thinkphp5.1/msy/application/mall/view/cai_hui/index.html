@@ -46,6 +46,9 @@
 		.label_tipc{
 			margin:20px 0;
 		}
+		.pd_list{
+			overflow:hidden;
+		}
 		.pd_list li{
 			float:left;
 			width: 220px;
@@ -79,6 +82,95 @@
 			-webkit-box-orient: vertical;
 			height:40px;
 		}
+		.slider_banner{
+			height:500px;
+		}
+		.swiper_banner_wrapper .swiper-container{
+			
+		}
+		.swiper-container {
+			position: relative;
+			width: 100%;
+			/*height:4.6rem;*/
+			height: 100%;
+			z-index: 1;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-transition-property: -webkit-transform;
+			transition-property: -webkit-transform;
+			-o-transition-property: transform;
+			transition-property: transform;
+			transition-property: transform,-webkit-transform;
+			-webkit-box-sizing: content-box;
+			box-sizing: content-box;
+			margin: 0 auto;
+			position: relative;
+			overflow: hidden;
+			list-style: none;
+			padding: 0;
+			z-index: 1;
+			}
+			.swiper-wrapper {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-transition-property: -webkit-transform;
+			transition-property: -webkit-transform;
+			-o-transition-property: transform;
+			transition-property: transform;
+			transition-property: transform,-webkit-transform;
+			-webkit-box-sizing: content-box;
+			box-sizing: content-box;
+		}
+		.swiper-slide {
+			-webkit-flex-shrink: 0;
+			-ms-flex-negative: 0;
+			flex-shrink: 0;
+			width: 100%;
+			height: 100%;
+			position: relative;
+			-webkit-transition-property: -webkit-transform;
+			transition-property: -webkit-transform;
+			-o-transition-property: transform;
+			transition-property: transform;
+			transition-property: transform,-webkit-transform;
+		}
+		.swiper-slide {
+			text-align: center;
+			font-size: 18px;
+			background: #fff;
+
+			/* Center slide text vertically */
+			/*display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			-webkit-align-items: center;
+			align-items: center;*/
+		}
+		.swiper-slide .swiper-cols-img{
+			height:150px;
+			overflow:hidden;
+		}
+		footer{
+			width:1000px;
+			margin:0 auto;
+			height:60px;
+			color:#333;
+		}
 	</style>
 </head>
 <body>
@@ -96,7 +188,144 @@
 	</div>
 </header>
 <div class="content_wrapper">
-	首页
+	<!--广告轮播图-->
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="caihui_img/home-banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="caihui_img/home-banner2.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>      
+	</section>
+	<p class="label_tipc">商品列表</p>
+	<ul class="pd_list">
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>1))}">
+					<img src="caihui_img/product01.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽修护原液</p>
+			<div class="pr_info">
+				<span><price>800.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>2))}">
+					<img src="caihui_img/product02.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽修护蚕丝面膜</p>
+			<div class="pr_info">
+				<span><price>660.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>3))}">
+					<img src="caihui_img/product03.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽提亮肤色束后修护组合</p>
+			<div class="pr_info">
+				<span><price>450.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>4))}">
+					<img src="caihui_img/product04.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽水氧净化液</p>
+			<div class="pr_info">
+				<span><price>890.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>5))}">
+					<img src="caihui_img/product05.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽身体乳</p>
+			<div class="pr_info">
+				<span><price>1000.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>6))}">
+					<img src="caihui_img/product06.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽嫩肤提升原液组</p>
+			<div class="pr_info">
+				<span><price>770.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>7))}">
+					<img src="caihui_img/product07.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽嫩肤提升冻干组</p>
+			<div class="pr_info">
+				<span><price>820.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="{:url('CaiHui/detail',array('goods_id'=>8))}">
+					<img src="caihui_img/product08.jpg" alt="">
+				</a>
+			</div>
+			<p>玻尿酸活性肽嫩肤提升标配版护理组合</p>
+			<div class="pr_info">
+				<span><price>630.00</price>元</span>
+				<a href="javascript:;">购买</a>
+			</div>
+		</li>
+	</ul>
 </div>
+<!--页脚备案-->
+<footer>
+	<p>备案信息</p>
+</footer>
+<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//轮播
+	var swiper = new Swiper('.swiper-container', {
+		spaceBetween:0,
+		loop: true,
+		autoplay:true,
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true
+		}
+	});
+});
+</script>
 </body>
 </html>
