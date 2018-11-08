@@ -38,7 +38,6 @@ class Shop extends \common\controller\StoreBase
         if(request()->isAjax()){
             $modelShop = new \app\store\model\Shop();
             $info = $modelShop->edit($this->user['id'],$this->factory['id'],$this->store['id']);
-            print_r($info);
             if($info['status']==0){
                 return $info;
             }else{
