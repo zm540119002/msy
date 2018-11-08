@@ -80,5 +80,7 @@ return [
         'public_uploads' => Request::domain() .'/uploads',
         //彩绘图片路径
         'caihui_img' => Request::domain() .'/static/caihui/img',
+        //彩绘图片路径
+        'caihui_js' => Request::domain() .'/static/caihui/js',
     ],
 ];
