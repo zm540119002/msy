@@ -97,7 +97,7 @@ class ManagerManage extends FactoryStoreBase{
             $modelUserStore = new \common\model\UserStore();
             $config = [
                 'field' => [
-                    'u.id','u.nickname','u.mobile_phone',
+                    'u.id','u.name','u.mobile_phone',
                     'us.post','us.duty','us.id user_store_id',
                 ],'leftJoin' => [
                     ['user u','u.id = us.user_id'],
@@ -140,7 +140,7 @@ class ManagerManage extends FactoryStoreBase{
             $modelUserShop = new \app\store\model\UserShop();
             $config = [
                 'field' => [
-                    'u.id','u.nickname','u.mobile_phone',
+                    'u.id','u.name','u.mobile_phone',
                     'us.id user_shop_id','us.post','us.duty','us.shop_id',
                 ],'leftJoin' => [
                     ['common.user u','u.id = us.user_id'],

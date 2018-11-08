@@ -521,16 +521,24 @@ function dialogFormAdd(config) {
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status == 0){
-                dialog.error(data.info);
+            if(config.callBack){
+                config.callBack(config,data);
             }else{
-                var container = config.container?config.container:$('ul.list');
-                container.prepend(data);
-                container.find('.no-data').remove();
-                layer.close(config.index);
+                dialogFormAddDefaultCallBack(config,data);
             }
         }
     });
+}
+//新增-表单提交-默认回调
+function dialogFormAddDefaultCallBack(config,data) {
+    if(data.status == 0){
+        dialog.error(data.info);
+    }else{
+        var container = config.container?config.container:$('ul.list');
+        container.prepend(data);
+        container.find('.no-data').remove();
+        layer.close(config.index);
+    }
 }
 
 //修改-表单提交
@@ -548,15 +556,24 @@ function dialogFormEdit(config) {
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status == 0){
-                dialog.error(data.info);
+            if(config.callBack){
+                config.callBack(config,data);
             }else{
-                config.modifyObj.replaceWith(data);
-                layer.close(config.index);
+                dialogFormEditDefaultCallBack(config,data);
             }
         }
     });
 }
+//修改-表单提交-默认回调
+function dialogFormEditDefaultCallBack(config,data) {
+    if(data.status == 0){
+        dialog.error(data.info);
+    }else{
+        config.modifyObj.replaceWith(data);
+        layer.close(config.index);
+    }
+}
+
 //删除-表单提交
 function dialogFormDel(config) {
     $.ajax({
@@ -572,14 +589,22 @@ function dialogFormDel(config) {
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status == 0){
-                dialog.error(data.info);
+            if(config.callBack){
+                config.callBack(config,data);
             }else{
-                config.delObj.remove();
-                layer.close(config.index);
+                dialogFormEditDefaultCallBack(config,data);
             }
         }
     });
+}
+//删除-表单提交-默认回调
+function dialogFormDelDefaultCallBack(config,data) {
+    if(data.status == 0){
+        dialog.error(data.info);
+    }else{
+        config.delObj.remove();
+        layer.close(config.index);
+    }
 }
 
 //文档就绪

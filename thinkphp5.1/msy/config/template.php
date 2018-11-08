@@ -76,7 +76,9 @@ return [
         'mall_admin_img' => Request::domain() .'/static/mall_admin/img',
         'mall_admin_js' => Request::domain() .'/static/mall_admin/js',
         'mall_admin_css' => Request::domain() .'/static/mall_admin/css',
-
+        //公共上传路径
         'public_uploads' => Request::domain() .'/uploads',
+        //彩绘图片路径
+        'caihui_img' => Request::domain() .'/static/caihui/img',
     ],
 ];

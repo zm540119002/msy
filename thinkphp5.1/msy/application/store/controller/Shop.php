@@ -11,7 +11,7 @@ class Shop extends \common\controller\StoreBase
             $config = [
                 'field' => [
                     's.id','s.name shop_name',
-                    'u.nickname name','u.mobile_phone',
+                    'u.name','u.mobile_phone',
                     'us.id user_shop_id',
                 ],'leftJoin' => [
                     ['user_shop us','s.id = us.shop_id'],

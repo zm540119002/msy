@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+	<title>美尚网站</title>
+	<link rel="stylesheet" href="public_css/base.css">
+	<style type="text/css">
+		body{
+			font-size:14px;
+		}
+		header{
+			width:100%;
+			background:#000;
+			color:#fff;
+		}
+		.header_menu{
+			width:1200px;
+			height:48px;
+			line-height: 48px;
+			margin:0 auto;
+			overflow:hidden;
+			
+		}
+		.header_left{
+			width:100px;
+			float:left;
+		}
+		.header_right{
+			float:right;
+			width:500px;
+		}
+		.header_right li{
+			float:left;
+			width:100px;
+			text-align:center;
+		}
+		.content_wrapper{
+			width:1200px;
+			margin:0 auto;
+		}
+		.label_tipc{
+			margin:20px 0;
+		}
+		.pd_list li{
+			float:left;
+			width: 220px;
+			margin:0 10px 25px;	
+			border:1px solid #d9d9d9;
+			box-sizing:border-box;
+		}
+		.pd_list li img{
+			height:150px;
+		}
+		.pr_info{
+			margin:10px 0 0;
+			display:flex;
+			justify-content: space-between;
+		}
+		.pd_list li img{
+			display:block;
+			width:100px;
+			margin:0 auto;
+		}
+		.header_menu a{
+			color:#fff;
+			cursor: pointer;
+		}
+		.header_menu a.current{
+			border-bottom:1px solid #fff;
+		}
+	</style>
+</head>
+<body>
+<header>
+<div class="header_menu">
+	<div class="header_left">
+		<img src="" alt="">
+	</div>
+	<ul class="header_right">
+		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/index">首页</a></li>
+		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/goods">产品展示</a></li>
+		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/about">关于我们</a></li>
+		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/contact" class="current">联系方式</a></li>
+	</ul>
+</div>
+</header>
+<p>电话：<span>121231313132</span></p>
+<p>地址：</p>
+<p>广州市</p>
+</body>
+</html>

@@ -105,6 +105,9 @@ body{
 .nodisabled{
     pointer-events: none;
 }
+.input_item{
+    margin:0 0 0.18rem 0;
+}
 /*头部样式*/
 .header{
     width: 100%;
@@ -1404,7 +1407,8 @@ background-position: 0 -27px;
 .vendorInfoLayer .layui-m-layerbtn span[no],
 .vendorInfoLayer .layui-m-layerbtn span[yes],
 .storeShopListLayer .layui-m-layerbtn span[no],
-.employeeAccountLayer .layui-m-layerbtn span[no] {
+.employeeAccountLayer .layui-m-layerbtn span[no],
+.shopConsigneeLayer .layui-m-layerbtn span[no]{
     width:50px;
     border:none;
 }
@@ -2429,7 +2433,7 @@ input[type=text]::-webkit-focus-inner {
 .area-box{
     margin:0.20rem 0 0.20rem 0;
     padding:0 0 0.12rem 0;
-    border-bottom:1px solid #d9d9d9;
+    /*border-bottom:1px solid #d9d9d9;*/
 }
 .express-area a {
     display: block;
@@ -3135,6 +3139,7 @@ input[type=text]::-webkit-focus-inner {
     padding:0.25rem 0;
     margin:0 0 0.20rem 0;
     border-radius:4px;
+    overflow:hidden;
 }
 .list-item li{
     position:relative;
@@ -3214,7 +3219,8 @@ input[type=text]::-webkit-focus-inner {
     margin:.15rem 0;
 }
 .employeeAccountLayer .layui-m-layerbtn,
-.storeShopListLayer .layui-m-layerbtn{
+.storeShopListLayer .layui-m-layerbtn,
+.shopConsigneeLayer .layui-m-layerbtn{
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -3224,7 +3230,8 @@ input[type=text]::-webkit-focus-inner {
     background: transparent;
     border: none;
 }
-.employeeAccountLayer .layui-m-layerbtn span[no] {
+.employeeAccountLayer .layui-m-layerbtn span[no],
+.shopConsigneeLayer .layui-m-layerbtn span[no]{
     /*visibility: hidden;*/
 }
 .employeeAccountLayer .layui-m-layerbtn span[yes] {
@@ -3302,10 +3309,37 @@ input[type=text]::-webkit-focus-inner {
 .content-mg-top{
     margin-top:3rem;
 }
-.content_main list img{
+.content_main .list img{
     width: 1.5rem;
     height: 1.5rem;
+    margin:0 0 0 0.14rem;
 }
+.content_main .list .info_r{
+    margin-left:1.82rem;
+}
+.consignee_info_form{
+    padding:0.20rem;
+}
+.consignee_info_form .picture-module {
+    width:3.88rem;
+}
+.consignee_info_form .upload-picture-module{
+    margin:0.12rem 0 0 0;
+}
+.shopConsigneeLayer .shop_consignee_info{
+    padding:.20rem;
+}
+.shop_consignee_info .emp_account_tipc{
+    text-align: center;
+}
+.shop_img_r{
+    text-align: center;
+    margin:0.25rem 0 0;
+}
+.shop_consignee_info .box-flex{
+    margin:0 0 0.12rem 0;
+}
+
 /*打印订单*/
 .print_orders{
     display:block;

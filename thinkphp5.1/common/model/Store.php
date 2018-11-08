@@ -113,7 +113,7 @@ class Store extends Base {
 			if(!$userId){//不存在
 				unset($postData['id']);
 				$postData['type'] = 1;
-				$postData['nickname'] = trim($postData['name']);
+				$postData['name'] = trim($postData['name']);
 				$postData['create_time'] = time();
 				$modelUser = new \common\model\User();
 				$res = $modelUser->save($postData);
