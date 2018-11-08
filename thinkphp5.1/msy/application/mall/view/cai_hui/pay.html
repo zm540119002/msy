@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="UTF-8">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+	<title>结算</title>
+	<link rel="stylesheet" href="public_css/base.css">
+	<style type="text/css">
+		body{
+			font-size:14px;
+		}
+		.detail_content{
+			width:1000px;
+			margin:0 auto;
+		}
+		.buy,.pay{
+			background:#ff0000;
+			color:#fff;
+		}
+		.dt_item{
+			overflow:hidden;
+			margin:0 0 20px 0;
+		}
+		.quantity_wrapper a, .selected-number a {
+			border: 1px solid #d9d9d9;
+			width: 20px;
+			display: inline-block;
+			text-align: center;
+			font-size:14px;
+			float: left;
+			height: 20px;
+			color: #333;
+		}
+		.quantity_wrapper input, .selected-number input {
+			width: 20px;
+			border: 1px solid #d9d9d9;
+			text-align: center;
+			float: left;
+			height: 20px;
+			border-left: 0;
+			border-right: 0;
+			border-radius: 0;
+			margin-top: 0;
+		}
+		.dt_item_flex{
+			display:flex;
+			display:-webkit-flex;
+		}
+		.dt_item_flex .buy{
+			width:120px;
+			text-align: center;
+			margin:0 0 0 20px;
+		}
+		.d_left{
+			float:left;
+			width:350px;
+			border:1px solid #d9d9d9;
+		}
+		.d_left img{
+			width:100%;
+		}
+		.d_right{
+			margin:280px 0 0 380px;
+			width:600px;
+		}
+		.dt_top{
+			overflow:hidden;
+		}
+		.pay{
+			width:120px;
+			text-align:center;
+		}
+		.pay_type a{
+			display:inline-block;
+			width:120px;
+			text-align: center;
+			height:32px;
+			line-height: 32px;
+		}
+		.pay_type a.current{
+			background:green;
+			color:#fff;
+		}
+		.dt_item price{
+			color:#ff0000;
+			
+		}
+	</style>
+</head>
+<body>
+<div class="detail_content">
+	<div class="dt_item">
+		<p>收货人信息</p>
+		<div>地址：</div>
+		<div class="weui_cells msy_cells weui_address">
+			<div class="weui_cell">
+				<select name="province" class="pca">
+					<option value="">省</option>
+				</select>
+				<select name="city" class="pca">
+					<option value="">市</option>
+				</select>
+				<select name="area" class="pca">
+					<option value="">县区</option>
+				</select>
+			</div>
+		</div>
+		<div>
+			<input type="text" value="" placeholder="填写详细地址"/>
+		</div>
+	</div>
+	<div class="dt_item">
+		<p>支付方式</p>
+		<div class="pay_type">
+			<a href="">微信支付</a>
+			<a href="">支付宝支付</a>
+			<a href="">银联支付</a>
+		</div>
+	</div>
+	<div class="dt_item">
+		<span>应付总额:</span>
+		<span>￥<price>1250.00</price></span>
+	</div>
+	<div class="dt_item">
+		<a href="javascript:;"class="pay">立即结算</a>
+	</div>
+</div>
+<script type="text/javascript" href="public_js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" href="public_js/province_city_area.js"></script>
+ <script type="text/javascript">
+        //初始化
+        var province = '{$company.province}';
+        $('[name=province]').val(province);
+        $('[name=province]').change();
+        var city = '{$company.city}';
+        $('[name=city]').val(city);
+        $('[name=city]').change();
+        var area = '{$company.area}';
+        $('[name=area]').val(area);
+
+		$('.pay_type a').on('click',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+		})
+    </script>
+</body>
+</html>

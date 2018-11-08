@@ -56,4 +56,8 @@ class CaiHui extends \think\Controller{
     public function detail8(){
         return $this->fetch();
     }
+    //结算
+    public function pay(){
+        return $this->fetch();
+    }
 }
