@@ -1,8 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Manager extends \common\controller\FactoryBase
-{
+class Manager extends \common\controller\FactoryBase{
     /**首页
      */
     public function index(){

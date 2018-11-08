@@ -46,19 +46,21 @@ class Manager extends \common\model\Base {
 			}
 			//验证用户是否为管理员
 			$userFactoryId = $this->checkManager($userId,$factoryId);
-			if(!$userFactoryId){//不是管理员
-				$postData['type'] = 2;
-				$postData['user_id'] = $userId;
-				$postData['factory_id'] = $factoryId;
-				$postData['factory_type'] = $factoryType;
-				$modelUserFactory = new \common\model\UserFactory();
-				$res = $modelUserFactory->isUpdate(false)->save($postData);
-				if($res===false){
-					$this->rollback();//事务回滚
-					return errorMsg('失败',$this->getError());
-				}
-				$userFactoryId = $modelUserFactory->getAttr('id');
+			if($userFactoryId){//已经是为管理员
+				$this->rollback();//事务回滚
+				return errorMsg('此号码已经是管理员，请更换手机号码！');
 			}
+			$postData['type'] = 2;
+			$postData['user_id'] = $userId;
+			$postData['factory_id'] = $factoryId;
+			$postData['factory_type'] = $factoryType;
+			$modelUserFactory = new \common\model\UserFactory();
+			$res = $modelUserFactory->isUpdate(false)->save($postData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$userFactoryId = $modelUserFactory->getAttr('id');
 			$this->commit();//事务提交
 			$postData['id'] = $userId;
 			$postData['user_factory_id'] = $userFactoryId;
