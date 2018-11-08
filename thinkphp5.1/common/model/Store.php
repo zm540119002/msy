@@ -44,7 +44,7 @@ class Store extends Base {
 			$storeId = $this->getAttr('id');
 			$postData['type'] = 1;//拥有者
 			$postData['factory_id'] = $factoryId;
-			$postData['user-id'] = $userId;
+			$postData['user_id'] = $userId;
 			$postData['store_id'] = $storeId;
 			$result = $modelUserStore->save($postData);
 			if(!$result){
