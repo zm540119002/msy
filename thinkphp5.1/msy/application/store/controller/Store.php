@@ -111,8 +111,6 @@ class Store extends \common\controller\FactoryBase{
                         $item['mobile_phone'] = '';
                         array_push($storeList,$item);
                     }
-                }
-                foreach ($list as $item){
                     if($item['type'] == 3){
                         array_push($userList,$item);
                     }

@@ -101,13 +101,11 @@
 	});
 	//设置店长回调
 	function setManagerCallBack(config,data) {
-		console.log(config);
-		console.log(data);
-//		if(data.status == 0){
-//			dialog.error(data.info);
-//		}else{
-//			layer.close(config.index);
-//		}
+		if(data.status == 0){
+			dialog.error(data.info);
+		}else{
+			location.reload();
+		}
 	}
 </script>
 {/block}
