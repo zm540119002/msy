@@ -96,7 +96,7 @@
 </head>
 <body>
 <div class="detail_content">
-	<form>
+	<form action="{:url('CaiHui/orderPayment')}" method="post">
 		<div class="dt_item">
 			<p>收货人信息</p>
 			<div class="dt_item">
@@ -122,7 +122,7 @@
 				</div>
 			</div>
 			<div>
-				<input class="detail_address" name="detailAddress" type="text" value="" placeholder="填写详细地址"/>
+				<input class="detail_address" name="detail_address" type="text" value="" placeholder="填写详细地址"/>
 			</div>
 		</div>
 		<div class="dt_item">
@@ -132,15 +132,15 @@
 				<a href="javascript:;" data-pay="2">支付宝支付</a>
 				<a href="javascript:;" data-pay="3">银联支付</a>
 			</div>
+			<input type="hidden" name="pay_type" value="">
 		</div>
+		<div class="dt_item">
+			<span>应付总额:</span>
+			<span>￥<price>1250.00</price></span>
+		</div>
+		<input type="submit" value="立即结算" class="pay"/>
 	</form>
-	<div class="dt_item">
-		<span>应付总额:</span>
-		<span>￥<price>1250.00</price></span>
-	</div>
-	<div class="dt_item">
-		<a href="javascript:;"class="pay">立即结算</a>
-	</div>
+
 </div>
 <script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="public_js/province_city_area.js"></script>
@@ -150,23 +150,24 @@
 
  <script type="text/javascript">
         //初始化
-        var province = '{$company.province}';
-        $('[name=province]').val(province);
-        $('[name=province]').change();
-        var city = '{$company.city}';
-        $('[name=city]').val(city);
-        $('[name=city]').change();
-        var area = '{$company.area}';
-        $('[name=area]').val(area);
+//        var province = '{$company.province}';
+//        $('[name=province]').val(province);
+//        $('[name=province]').change();
+//        var city = '{$company.city}';
+//        $('[name=city]').val(city);
+//        $('[name=city]').change();
+//        var area = '{$company.area}';
+//        $('[name=area]').val(area);
 		$(function(){
 			$('.pay_type a').on('click',function(){
 				$(this).addClass('current').siblings().removeClass('current');
+				$('[name = pay_type]').val($(this).data('pay'));
 			})
 			$('.pay').on('click',function(){
 				var consignee=$('[name=name]').val();
 				var consignee_mobile=$('[name=mobile]').val();
-				var address=$('[name=detailAddress]').val();
-
+				var address=$('[name=detail_address]').val();
+				var payType=$('.pay_type a.current').data('pay');
 				var content='';
 				if(!consignee){
 					content='请输入收货人姓名';
@@ -174,6 +175,8 @@
 					content='请输入正确的手机号码';
 				}else if(!address){
 					content='请输入你收货人地址';
+				}else if(!payType){
+					content='请选择支付方式';
 				}
 
 				if(content){
