@@ -5,6 +5,7 @@
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
 	<title>结算</title>
 	<link rel="stylesheet" href="public_css/base.css">
+	<link rel="stylesheet" href="public_admin_common_js/need/layer.css">
 	<style type="text/css">
 		body{
 			font-size:14px;
@@ -69,6 +70,7 @@
 		.pay{
 			width:120px;
 			text-align:center;
+			display:inline-block;
 		}
 		.pay_type a{
 			display:inline-block;
@@ -86,49 +88,52 @@
 			color:#ff0000;
 			
 		}
-		.dt_item input.name,.dt_item input.mobile{
+		.dt_item input.name,.dt_item input.mobile,.detail_address{
+			padding:10px 0;
 			border:1px solid #d9d9d9;
 		}
 	</style>
 </head>
 <body>
 <div class="detail_content">
-	<div class="dt_item">
-		<p>收货人信息</p>
+	<form>
 		<div class="dt_item">
-			<p>收货人姓名</p>
-			<input class="name" type="text" value="" placeholder="填写姓名"/>
-		</div>
-		<div class="dt_item">
-			<p>手机号码</p>
-			<input class="mobile" type="tel" value="" placeholder="填写手机号码"/>
-		</div>
-		<div>地址：</div>
-		<div class="weui_cells msy_cells weui_address">
-			<div class="weui_cell">
-				<select name="province" class="pca">
-					<option value="">省</option>
-				</select>
-				<select name="city" class="pca">
-					<option value="">市</option>
-				</select>
-				<select name="area" class="pca">
-					<option value="">县区</option>
-				</select>
+			<p>收货人信息</p>
+			<div class="dt_item">
+				<p>收货人姓名</p>
+				<input class="name" name="name" type="text" value="" placeholder="填写姓名"/>
+			</div>
+			<div class="dt_item">
+				<p>手机号码</p>
+				<input class="mobile" name="mobile" type="tel" value="" placeholder="填写手机号码"/>
+			</div>
+			<div>地址：</div>
+			<div class="weui_cells msy_cells weui_address">
+				<div class="weui_cell">
+					<select name="province" class="pca">
+						<option value="">省</option>
+					</select>
+					<select name="city" class="pca">
+						<option value="">市</option>
+					</select>
+					<select name="area" class="pca">
+						<option value="">县区</option>
+					</select>
+				</div>
+			</div>
+			<div>
+				<input class="detail_address" name="detailAddress" type="text" value="" placeholder="填写详细地址"/>
 			</div>
 		</div>
-		<div>
-			<input type="text" value="" placeholder="填写详细地址"/>
+		<div class="dt_item">
+			<p>支付方式</p>
+			<div class="pay_type">
+				<a href="javascript:;" data-pay="1">微信支付</a>
+				<a href="javascript:;" data-pay="2">支付宝支付</a>
+				<a href="javascript:;" data-pay="3">银联支付</a>
+			</div>
 		</div>
-	</div>
-	<div class="dt_item">
-		<p>支付方式</p>
-		<div class="pay_type">
-			<a href="javascript:;">微信支付</a>
-			<a href="javascript:;">支付宝支付</a>
-			<a href="javascript:;">银联支付</a>
-		</div>
-	</div>
+	</form>
 	<div class="dt_item">
 		<span>应付总额:</span>
 		<span>￥<price>1250.00</price></span>
@@ -139,6 +144,10 @@
 </div>
 <script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="public_js/province_city_area.js"></script>
+<script type="text/javascript" src="public_js/common.js"></script>
+<script type="text/javascript" src="public_admin_common_js/layer.js"></script>
+<script type="text/javascript" src="caihui_js/index.js"></script>
+
  <script type="text/javascript">
         //初始化
         var province = '{$company.province}';
@@ -153,6 +162,33 @@
 			$('.pay_type a').on('click',function(){
 				$(this).addClass('current').siblings().removeClass('current');
 			})
+			$('.pay').on('click',function(){
+				var consignee=$('[name=name]').val();
+				var consignee_mobile=$('[name=mobile]').val();
+				var address=$('[name=detailAddress]').val();
+
+				var content='';
+				if(!consignee){
+					content='请输入收货人姓名';
+				}else if(!isMobilePhone(consignee_mobile)){
+					content='请输入正确的手机号码';
+				}else if(!address){
+					content='请输入你收货人地址';
+				}
+
+				if(content){
+					layer.open({
+						content:content,
+						time: 2
+					});
+					return false;
+				}
+
+				var postData = $('form').serializeObject();
+				postData.payType=$('.pay_type a.current').data('pay');
+				console.log(postData);
+			});
+			
 		})
 		
     </script>
