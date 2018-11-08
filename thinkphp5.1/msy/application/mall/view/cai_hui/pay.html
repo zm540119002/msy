@@ -76,6 +76,7 @@
 			text-align: center;
 			height:32px;
 			line-height: 32px;
+			border:1px solid #d9d9d9;
 		}
 		.pay_type a.current{
 			background:green;
@@ -85,12 +86,23 @@
 			color:#ff0000;
 			
 		}
+		.dt_item input.name,.dt_item input.mobile{
+			border:1px solid #d9d9d9;
+		}
 	</style>
 </head>
 <body>
 <div class="detail_content">
 	<div class="dt_item">
 		<p>收货人信息</p>
+		<div class="dt_item">
+			<p>收货人姓名</p>
+			<input class="name" type="text" value="" placeholder="填写姓名"/>
+		</div>
+		<div class="dt_item">
+			<p>手机号码</p>
+			<input class="mobile" type="tel" value="" placeholder="填写手机号码"/>
+		</div>
 		<div>地址：</div>
 		<div class="weui_cells msy_cells weui_address">
 			<div class="weui_cell">
@@ -112,9 +124,9 @@
 	<div class="dt_item">
 		<p>支付方式</p>
 		<div class="pay_type">
-			<a href="">微信支付</a>
-			<a href="">支付宝支付</a>
-			<a href="">银联支付</a>
+			<a href="javascript:;">微信支付</a>
+			<a href="javascript:;">支付宝支付</a>
+			<a href="javascript:;">银联支付</a>
 		</div>
 	</div>
 	<div class="dt_item">
@@ -125,22 +137,24 @@
 		<a href="javascript:;"class="pay">立即结算</a>
 	</div>
 </div>
-<script type="text/javascript" href="public_js/jquery/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" href="public_js/province_city_area.js"></script>
+<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="public_js/province_city_area.js"></script>
  <script type="text/javascript">
         //初始化
-        // var province = '{$company.province}';
-        // $('[name=province]').val(province);
-        // $('[name=province]').change();
-        // var city = '{$company.city}';
-        // $('[name=city]').val(city);
-        // $('[name=city]').change();
-        // var area = '{$company.area}';
-        // $('[name=area]').val(area);
-
-		$('.pay_type a').on('click',function(){
-			$(this).addClass('current').siblings().removeClass('current');
+        var province = '{$company.province}';
+        $('[name=province]').val(province);
+        $('[name=province]').change();
+        var city = '{$company.city}';
+        $('[name=city]').val(city);
+        $('[name=city]').change();
+        var area = '{$company.area}';
+        $('[name=area]').val(area);
+		$(function(){
+			$('.pay_type a').on('click',function(){
+				$(this).addClass('current').siblings().removeClass('current');
+			})
 		})
+		
     </script>
 </body>
 </html>
