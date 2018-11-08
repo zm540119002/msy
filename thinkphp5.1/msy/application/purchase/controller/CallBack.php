@@ -4,37 +4,39 @@ use Think\Controller;
 use common\component\payment\unionpay\sdk\AcpService;
 use common\component\payment\alipay\lib\AlipayNotify;
 use common\component\payment\weixin\Jssdk;
-class CallBack extends \common\controller\Base{
+class CallBack extends \common\controller\Base
+{
     //支付回调
-    public function notifyUrl(){
+    public function notifyUrl()
+    {
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.order') == true) {
             $this->callBack('weixin', 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.recharge') == true) {
-            $this->callBack('weixin',  'recharge');
+            $this->callBack('weixin', 'recharge');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'weixin.group_buy') == true) {
-            $this->callBack('weixin',  'group_buy');
+            $this->callBack('weixin', 'group_buy');
         }
         //支付宝回调
         if (strpos($_SERVER['QUERY_STRING'], 'ali.order') == true) {
             $this->callBack('ali', 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'ali.recharge') == true) {
-            $this->callBack('ali',  'recharge');
+            $this->callBack('ali', 'recharge');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'ali.group_buy') == true) {
-            $this->callBack('ali',  'group_buy');
+            $this->callBack('ali', 'group_buy');
         }
         //银联回调
         if (strpos($_SERVER['QUERY_STRING'], 'union.recharge') == true) {
-            $this->callBack('union',  'recharge');
+            $this->callBack('union', 'recharge');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'union.order') == true) {
             $this->callBack('union', 'order');
         }
         if (strpos($_SERVER['QUERY_STRING'], 'union.group_buy') == true) {
-            $this->callBack('union',  'group_buy');
+            $this->callBack('union', 'group_buy');
         }
 
     }
@@ -45,7 +47,8 @@ class CallBack extends \common\controller\Base{
      * @param $order_type //支付单类型
      */
     //支付完成，调用不同的支付的回调处理
-    private function callBack($payment_type, $order_type){
+    private function callBack($payment_type, $order_type)
+    {
 
         if ($payment_type == 'weixin') {
             $this->weixinBack($order_type);
@@ -59,7 +62,8 @@ class CallBack extends \common\controller\Base{
     }
 
     //微信支付回调处理
-    private function weixinBack($order_type){
+    private function weixinBack($order_type)
+    {
         $xml = file_get_contents('php://input');
         $data = xmlToArray($xml);
         $data_sign = $data['sign'];
@@ -67,7 +71,7 @@ class CallBack extends \common\controller\Base{
         unset($data['sign']);
         $sign = $this->makeSign($data);
         $data['payment_code'] = 1;//weixin 支付
-        $data['actually_amount'] =  $data['total_fee'];//支付金额
+        $data['actually_amount'] = $data['total_fee'];//支付金额
         $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
         $data['order_sn'] = $data['out_trade_no'];//系统的订单号
         $data['payment_time'] = $data['time_end'];//支付时间
@@ -80,9 +84,9 @@ class CallBack extends \common\controller\Base{
                     'where' => [
                         ['o.status', '=', 0],
                         ['o.sn', '=', $data['order_sn']],
-                    ],'field' => [
+                    ], 'field' => [
                         'o.id', 'o.sn', 'o.amount',
-                        'o.user_id','o.actually_amount','o.logistics_status'
+                        'o.user_id', 'o.actually_amount', 'o.logistics_status'
                     ],
                 ];
                 $orderInfo = $modelOrder->getInfo($config);
@@ -93,27 +97,27 @@ class CallBack extends \common\controller\Base{
                     //返回状态给微信服务器
                     return errorMsg('回调的金额和订单的金额不符，终止购买');
                 }
-                $res = $this->orderHandle($data,$orderInfo);
-                if($res['status']){
+                $res = $this->orderHandle($data, $orderInfo);
+                if ($res['status']) {
                     $this->successReturn();
-                }else{
+                } else {
                     $this->errorReturn();
                 }
             }
             if ($order_type == 'recharge') {
                 $res = $this->rechargeHandle($data);
-                if($res['status']){
+                if ($res['status']) {
                     $this->successReturn();
-                }else{
+                } else {
                     $this->errorReturn();
                 }
             }
 
             if ($order_type == 'group_buy') {
                 $res = $this->groupBuyHandle($data);
-                if($res['status']){
+                if ($res['status']) {
                     $this->successReturn();
-                }else{
+                } else {
                     $this->errorReturn();
                 }
             }
@@ -125,17 +129,18 @@ class CallBack extends \common\controller\Base{
 
 
     //银联支付回调处理
-    private function unionBack($order_type){
+    private function unionBack($order_type)
+    {
         $data = $_POST;
         //计算得出通知验证结果
-        
+
         $unionpayNotify = new AcpService($this->unionpay_config); // 使用银联原生自带的累 和方法 这里只是引用了一下 而已
         $verify_result = $unionpayNotify->validate($data);
         if ($verify_result) //验证成功
         {
             $data['payment_code'] = 3;
             $data['order_sn'] = $data['orderId'];//系统的订单号
-            $data['actually_amount'] =  $data['txnAmt'];//支付金额
+            $data['actually_amount'] = $data['txnAmt'];//支付金额
             $data['pay_sn'] = $data['queryId'];//服务商返回的交易号
             $data['payment_time'] = $data['time_end'];//支付时间
             // 解释: 交易成功且结束，即不可再做任何操作。
@@ -147,25 +152,25 @@ class CallBack extends \common\controller\Base{
                         'where' => [
                             ['o.status', '=', 0],
                             ['o.sn', '=', $data['order_sn']],
-                        ],'field' => [
+                        ], 'field' => [
                             'o.id', 'o.sn', 'o.amount',
-                            'o.user_id','o.actually_amount','o.logistics_status'
+                            'o.user_id', 'o.actually_amount', 'o.logistics_status'
                         ],
                     ];
                     $orderInfo = $modelOrder->getInfo($config);
-                    $res = $this->orderHandle($data,$orderInfo);
-                    if($res['status']){
+                    $res = $this->orderHandle($data, $orderInfo);
+                    if ($res['status']) {
                         echo "success"; // 处理成功
-                    }else{
+                    } else {
                         echo "fail"; //验证失败
                     }
                 }
 
                 if ($order_type == 'recharge') {
                     $res = $this->rechargeHandle($data);
-                    if($res['status']){
+                    if ($res['status']) {
                         echo "success"; // 处理成功
-                    }else{
+                    } else {
                         echo "fail"; //验证失败
                     }
                 }
@@ -176,18 +181,19 @@ class CallBack extends \common\controller\Base{
     }
 
     //支付宝支付回调处理
-    private function aliBack($order_type){
-        require_once dirname(__DIR__).'./../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
-        require_once dirname(__DIR__).'./../../../common/component/payment/alipay/config.php';
+    private function aliBack($order_type)
+    {
+        require_once dirname(__DIR__) . './../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
+        require_once dirname(__DIR__) . './../../../common/component/payment/alipay/config.php';
         $data = $_POST;
         $payInfo['payment_code'] = 2; //支付类型
         $payInfo['order_sn'] = $data['out_trade_no'];//系统的订单号
-        $payInfo['actually_amount'] =  $data['receipt_amount'];//支付金额
+        $payInfo['actually_amount'] = $data['receipt_amount'];//支付金额
         $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
         $payInfo['payment_time'] = $data['gmt_payment'];//支付时间
 
         $alipaySevice = new \AlipayTradeService($config);
-        $alipaySevice->writeLog(var_export($_POST,true));
+        $alipaySevice->writeLog(var_export($_POST, true));
         $result = $alipaySevice->check($_POST);
         if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
             //判断该笔订单是否在商户网站中已经做过处理
@@ -213,8 +219,8 @@ class CallBack extends \common\controller\Base{
                 $res = $this->orderHandle($payInfo, $orderInfo);
                 if (!$res['status']) {
                     echo "fail";    //请不要修改或删除
-                }else{
-                    echo "success";		//请不要修改或删除
+                } else {
+                    echo "success";        //请不要修改或删除
                 }
             }
         }
@@ -321,7 +327,8 @@ class CallBack extends \common\controller\Base{
      * 普通订单支付回调
      */
 
-    private function orderHandle($data,$orderInfo){
+    private function orderHandle($data, $orderInfo)
+    {
         $modelOrder = new \app\purchase\model\Order();
         $modelOrder->startTrans();
         //更新订单状态
@@ -331,10 +338,10 @@ class CallBack extends \common\controller\Base{
         $data2['pay_sn'] = $data['pay_sn'];
         $data2['payment_time'] = $data['payment_time'];
         $condition = [
-            ['user_id','=',$orderInfo['user_id']],
-            ['sn','=',$data['order_sn']],
+            ['user_id', '=', $orderInfo['user_id']],
+            ['sn', '=', $data['order_sn']],
         ];
-        $returnData = $modelOrder->edit($data2,$condition);
+        $returnData = $modelOrder->edit($data2, $condition);
         if (!$returnData['status']) {
             $modelOrder->rollback();
             //返回状态给微信服务器
@@ -350,65 +357,56 @@ class CallBack extends \common\controller\Base{
     /**充值支付回调
      * @param $parameter
      */
-    private function rechargeHandle($data){
+    private function rechargeHandle($data)
+    {
 
     }
 
     /**团购订单支付回调
      * @param $parameter
      */
-    private function groupBuyHandle($data){
+    private function groupBuyHandle($data)
+    {
 
     }
 
     //成功返回
-    private function successReturn(){
+    private function successReturn()
+    {
         echo '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
         return true;
     }
 
     //失败返回
-    private function errorReturn($dataSn = '', $error = '签名错误', $type = '订单'){
+    private function errorReturn($dataSn = '', $error = '签名错误', $type = '订单')
+    {
         \Think\Log::write($type . '支付失败：' . $dataSn . "\r\n失败原因：" . $error, 'NOTIC');
         echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
         return false;
     }
 
 
-
     /**
      * 微信生成签名
      * @return 签名，本函数不覆盖sign成员变量
      */
-    private function makeSign($data){
+    private function makeSign($data)
+    {
         //获取微信支付秘钥
         $key = config('wx_config.key');
         // 去空
-        $data=array_filter($data);
+        $data = array_filter($data);
         //签名步骤一：按字典序排序参数
         ksort($data);
-        $string_a=http_build_query($data);
-        $string_a=urldecode($string_a);
+        $string_a = http_build_query($data);
+        $string_a = urldecode($string_a);
         //签名步骤二：在string后加入KEY
         //$config=$this->config;
-        $string_sign_temp=$string_a."&key=".$key;
+        $string_sign_temp = $string_a . "&key=" . $key;
         //签名步骤三：MD5加密
         $sign = md5($string_sign_temp);
         // 签名步骤四：所有字符转为大写
-        $result=strtoupper($sign);
+        $result = strtoupper($sign);
         return $result;
     }
-
-    public function a(){
-        return 'aaaaaaa';
-        $orderInfo = [
-            'sn'=>'20181025164509165439423886370387'
-        ];
-        $model = new \common\component\payment\alipay\alipay;
-        $res = $model->orderQuery($orderInfo);
-        print_r($res);
-
-    }
-
-    
 }
