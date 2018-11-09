@@ -74,7 +74,7 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function () {
-					$('.admin-mobile').attr('readonly',false);
+					$('.addAdminForm').find('.admin-mobile').removeAttr('readonly');
 				},
 				yes:function(index){
 					var postData = $('.addAdminForm').serializeObject();
@@ -107,7 +107,7 @@
 				btn:['确定','取消'],
 				success:function(){
 					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
-					$('.admin-mobile').attr('readonly','readonly');
+					$('.addAdminForm').find('.admin-mobile').attr('readonly','readonly');
 				},
 				yes:function(index){
 					var postData=$('.addAdminForm').serializeObject();
