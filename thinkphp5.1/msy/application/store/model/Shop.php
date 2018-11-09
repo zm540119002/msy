@@ -27,8 +27,7 @@ class Shop extends \common\model\Base{
 			return errorMsg($validateShop->getError());
 		}
 		if(isset($postData['id']) && intval($postData['id'])
-			&& isset($postData['userShopId']) && intval($postData['userShopId'])
-			&& isset($postData['shopId']) && intval($postData['shopId'])){//修改
+			&& isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
 			$saveData = [
 				'name' => trim($postData['shop_name']),
 				'update_time' => time(),
