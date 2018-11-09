@@ -114,11 +114,7 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function () {
-<<<<<<< HEAD
-					$('.input_disabled').attr('readonly',false);
-=======
-					$('.entryShopForm').find('.store_mobile').removeAttr('readonly');
->>>>>>> a88dfacf1a87315ce6b045b56cfe1ef8da676121
+					$('.entryShopInfoLayer .input_disabled').attr('readonly',false);
 				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
@@ -154,14 +150,10 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function(){
-<<<<<<< HEAD
 					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
-					$('.input_disabled').attr('readonly','readonly');
-=======
+					$('.setShopAccountLayer .input_disabled').attr('readonly','readonly');
 					var dialogForm = $('.setShopAccountLayer .entryShopForm');
 					copyDataByName(_this,dialogForm);
-					dialogForm.find('.store_mobile').attr('readonly','readonly');
->>>>>>> a88dfacf1a87315ce6b045b56cfe1ef8da676121
 				},
 				yes:function(index){
 					var postData=$('.setShopAccountLayer .entryShopForm').serializeObject();
