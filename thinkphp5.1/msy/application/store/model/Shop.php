@@ -35,7 +35,7 @@ class Shop extends \common\model\Base{
 			$where = [
 				['factory_id','=',$factoryId],
 				['store_id','=',$storeId],
-				['id','=',$postData['userShopId']],
+				['id','=',$postData['id']],
 				['status','=',0],
 			];
 			$this->startTrans();//事务开启
@@ -65,21 +65,21 @@ class Shop extends \common\model\Base{
 				$where = [
 					['factory_id','=',$factoryId],
 					['store_id','=',$storeId],
-					['shop_id','=',$postData['userShopId']],
+					['shop_id','=',$postData['id']],
+					['id','=',$postData['userShopId']],
 					['status','=',0],
 				];
 				$saveData = [
 					'user_id' => $managerId,
 				];
 				$modelUserShop = new \app\store\model\UserShop();
-				$res = $this->isUpdate(true)->save($saveData,$where);
+				$res = $modelUserShop->isUpdate(true)->save($saveData,$where);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$modelUserShop->getError());
 				}
 			}
 			$this->commit();//事务提交
-			return successMsg('成功！');
 		}else{//新增
 			//验证用户是否存在
 			$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
@@ -141,8 +141,6 @@ class Shop extends \common\model\Base{
 			$userShopId = $res[1]['id'];
 
 			$this->commit();//事务提交
-			$postData['id'] = $shopId;
-			$postData['user_shop_id'] = $userShopId;
 		}
 		return successMsg('成功！',$postData);
 	}
