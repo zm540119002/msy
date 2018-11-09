@@ -40,7 +40,7 @@ class Shop extends \common\model\Base{
 				['status','=',0],
 			];
 			$this->startTrans();//事务开启
-			$res = $this->where($where)->update($saveData);
+			$res = $this->isUpdate(true)->save($saveData,$where);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());

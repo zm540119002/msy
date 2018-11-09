@@ -114,7 +114,7 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function () {
-					$('.store_mobile').attr('readonly',false);
+					$('.store_mobile').attr('readonly','readonly');
 				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();

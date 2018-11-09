@@ -73,6 +73,9 @@
 				className:'addAdminLayer',
 				content:addAdminAccount,
 				btn:['确定','取消'],
+				success:function () {
+					$('.admin-mobile').attr('readonly',false);
+				},
 				yes:function(index){
 					var postData = $('.addAdminForm').serializeObject();
 					var content='';
@@ -126,10 +129,6 @@
 						index:index
 					};
 					dialogFormEdit(config);
-					$('.admin-mobile').attr('readonly',false);
-				},
-				no:function(){
-					$('.admin-mobile').attr('readonly',false);
 				}
 			});
 		});
