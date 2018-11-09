@@ -114,7 +114,6 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function () {
-					$('.entryShopInfoLayer .input_disabled').removeAttr('readonly');
 				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
@@ -152,7 +151,6 @@
 				success:function(){
 					var dialogForm = $('.setShopAccountLayer .entryShopForm');
 					copyDataByName(_this,dialogForm);
-					dialogForm.find('.input_disabled').attr('readonly','readonly');
 				},
 				yes:function(index){
 					var postData=$('.setShopAccountLayer .entryShopForm').serializeObject();
@@ -178,7 +176,7 @@
 					};
 					dialogFormEdit(config);
 				}
-			})
+			});
 		});
 		//删除店长
 		$('body').on('click','.delete-account',function(){

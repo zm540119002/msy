@@ -17,14 +17,20 @@ class Manager extends \common\model\Base {
 			return errorMsg('缺少采购商ID');
 		}
 		$postData = input('post.');
+		$postData['name'] = trim($postData['name']);
 		//用户数据验证
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('employee')->check($postData)){
 			return errorMsg($validateUser->getError());
 		}
 		if($postData['id'] && intval($postData['id'])){//修改
-			$postData['update_time'] = time();
-			$res = $this->isUpdate(true)->save($postData);
+			$where = [
+				'id' => $postData['id'],
+			];
+			$saveData = [
+				'update_time' => time(),
+			];
+			$res = $this->isUpdate(true)->save($saveData,$where);
 			if($res===false){
 				return errorMsg('失败',$this->getError());
 			}
@@ -33,11 +39,12 @@ class Manager extends \common\model\Base {
 			$userId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
 			$this->startTrans();//事务开启
 			if(!$userId){//不存在
-				unset($postData['id']);
-				$postData['type'] = 1;
-				$postData['name'] = trim($postData['name']);
-				$postData['create_time'] = time();
-				$res = $this->isUpdate(false)->save($postData);
+				$saveData = [
+					'type' => 1,
+					'name' => $postData['name'],
+					'create_time' => time(),
+				];
+				$res = $this->isUpdate(false)->save($saveData);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$this->getError());
@@ -50,12 +57,14 @@ class Manager extends \common\model\Base {
 				$this->rollback();//事务回滚
 				return errorMsg('此号码已经是管理员，请更换手机号码！');
 			}
-			$postData['type'] = 2;
-			$postData['user_id'] = $userId;
-			$postData['factory_id'] = $factoryId;
-			$postData['factory_type'] = $factoryType;
+			$saveData = [
+				'type' => 2,
+				'user_id' => $userId,
+				'factory_id' => $factoryId,
+				'factory_type' => $factoryType,
+			];
 			$modelUserFactory = new \common\model\UserFactory();
-			$res = $modelUserFactory->isUpdate(false)->save($postData);
+			$res = $modelUserFactory->isUpdate(false)->save($saveData);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
