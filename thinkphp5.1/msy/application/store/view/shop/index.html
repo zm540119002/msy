@@ -114,7 +114,7 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function () {
-					$('.entryShopInfoLayer .input_disabled').attr('readonly',false);
+					$('.entryShopInfoLayer .input_disabled').removeAttr('readonly');
 				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
@@ -150,10 +150,9 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function(){
-					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
-					$('.setShopAccountLayer .input_disabled').attr('readonly','readonly');
 					var dialogForm = $('.setShopAccountLayer .entryShopForm');
 					copyDataByName(_this,dialogForm);
+					dialogForm.find('.input_disabled').attr('readonly','readonly');
 				},
 				yes:function(index){
 					var postData=$('.setShopAccountLayer .entryShopForm').serializeObject();
