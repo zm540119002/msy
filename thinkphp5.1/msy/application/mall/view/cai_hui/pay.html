@@ -100,13 +100,18 @@
 		.weui_cell select{
 			height:35px;
 		}
+		.h1{
+			font-size:18px;
+			font-weight:bold;
+			margin:0 0 10px 0;
+		}
 	</style>
 </head>
 <body>
 <div class="detail_content">
 	<form action="{:url('CaiHui/orderPayment')}" method="post">
 		<div class="dt_item">
-			<p>收货人信息</p>
+			<p class="h1">收货人信息</p>
 			<div class="dt_item">
 				<p>收货人姓名</p>
 				<input class="name" name="name" type="text" value="" placeholder="填写姓名"/>
