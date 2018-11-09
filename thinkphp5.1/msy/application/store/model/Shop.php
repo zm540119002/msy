@@ -50,12 +50,13 @@ class Shop extends \common\model\Base{
 				//验证用户是否存在
 				$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
 				if(!$managerId){//不存在
-					unset($postData['id']);
-					$postData['type'] = 0;
-					$postData['name'] = trim($postData['name']);
-					$postData['create_time'] = time();
+					$saveData = [
+						'type' => 0,
+						'name' => $postData['name'],
+						'create_time' => time(),
+					];
 					$modelUser = new \common\model\User();
-					$res = $modelUser->isUpdate(false)->save($postData);
+					$res = $modelUser->isUpdate(false)->save($saveData);
 					if($res===false){
 						$this->rollback();//事务回滚
 						return errorMsg('失败',$modelUser->getError());
@@ -72,7 +73,7 @@ class Shop extends \common\model\Base{
 					'user_id' => $managerId,
 				];
 				$modelUserShop = new \app\store\model\UserShop();
-				$res = $modelUserShop->where($where)->update($saveData);
+				$res = $this->isUpdate(true)->save($saveData,$where);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$modelUserShop->getError());
@@ -161,26 +162,11 @@ class Shop extends \common\model\Base{
 				['us.factory_id','=',$factoryId],
 				['us.store_id','=',$storeId],
 				['us.shop_id','=',$shopId],
-				['us.status','<>',2],
+				['us.status','=',0],
 				['us.type','=',3],
 			],
 		];
 		$res = $modelUserShop->getInfo($config);
 		return ($res['mobile_phone']==$mobilePhone)?false:true;
-	}
-
-	/**验证用户是否为店长
-	 */
-	private function checkManager($userId,$factoryId,$storeId,$shopId){
-		$modelUserShop = new \app\store\model\UserShop();
-		$where = [
-			['user_id','=',$userId],
-			['factory_id','=',$factoryId],
-			['store_id','=',$storeId],
-			['shop_id','=',$shopId],
-			['status','<>',2],
-			['type','=',3],
-		];
-		return $modelUserShop->where($where)->value('id');
 	}
 }
