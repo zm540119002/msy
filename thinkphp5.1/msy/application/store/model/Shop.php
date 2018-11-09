@@ -26,7 +26,9 @@ class Shop extends \common\model\Base{
 		if(!$validateShop->scene('edit')->check($postData)){
 			return errorMsg($validateShop->getError());
 		}
-		if(isset($postData['id']) && intval($postData['id']) && isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
+		if(isset($postData['id']) && intval($postData['id'])
+			&& isset($postData['userShopId']) && intval($postData['userShopId'])
+			&& isset($postData['shopId']) && intval($postData['shopId'])){//修改
 			$saveData = [
 				'name' => trim($postData['shop_name']),
 				'update_time' => time(),
@@ -87,6 +89,7 @@ class Shop extends \common\model\Base{
 					'name' => $postData['name'],
 					'type' => 0,
 					'factory_id' => $factoryId,
+					'mobile_phone' => $postData['mobile_phone'],
 					'create_time' => time(),
 				];
 				$modelUser = new \common\model\User();

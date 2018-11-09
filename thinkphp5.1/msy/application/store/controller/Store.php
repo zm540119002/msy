@@ -27,7 +27,7 @@ class Store extends \common\controller\FactoryBase{
         return $this->fetch();
     }
 
-    /**店铺管理
+    /**店铺编辑
      */
     public function edit(){
         $model = new \common\model\Store();
