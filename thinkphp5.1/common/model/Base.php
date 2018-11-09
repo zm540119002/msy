@@ -109,6 +109,8 @@ class Base extends \think\Model {
 		return $res;
 	}
 
+	/**创建账号序列号
+	 */
 	protected function createUserSN(){
 		 return 'msy_' . create_random_str(9,3);
 	}

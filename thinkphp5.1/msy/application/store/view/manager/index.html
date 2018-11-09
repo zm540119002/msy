@@ -30,10 +30,10 @@
 				<section id="addAdminAccount" style="display:none;">
 					<form class="addAdminForm">
 						<div class="account-field">
-							<input type="text" class="admin-name f20" placeholder="姓名" name="name">
+							<input type="text" class="admin-name f20 input_disabled" placeholder="姓名" name="name">
 						</div>
 						<div class="account-field">
-							<input type="tel" class="admin-mobile f20" placeholder="手机号码" name="mobile_phone">
+							<input type="tel" class="admin-mobile f20 input_disabled" placeholder="手机号码" name="mobile_phone">
 						</div>
 					</form>
 					<div class="error_tipc"></div>
@@ -73,6 +73,8 @@
 				className:'addAdminLayer',
 				content:addAdminAccount,
 				btn:['确定','取消'],
+				success:function () {
+				},
 				yes:function(index){
 					var postData = $('.addAdminForm').serializeObject();
 					var content='';
@@ -103,8 +105,8 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function(){
-					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
-					$('.admin-mobile').attr('readonly','readonly');
+					var dialogForm = $('.addAdminLayer .addAdminForm');
+					copyDataByName(_this,dialogForm);
 				},
 				yes:function(index){
 					var postData=$('.addAdminForm').serializeObject();
@@ -126,10 +128,6 @@
 						index:index
 					};
 					dialogFormEdit(config);
-					$('.admin-mobile').attr('readonly',false);
-				},
-				no:function(){
-					$('.admin-mobile').attr('readonly',false);
 				}
 			});
 		});

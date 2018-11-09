@@ -26,7 +26,8 @@ class Shop extends \common\model\Base{
 		if(!$validateShop->scene('edit')->check($postData)){
 			return errorMsg($validateShop->getError());
 		}
-		if(isset($postData['id']) && intval($postData['id']) && isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
+		if(isset($postData['id']) && intval($postData['id'])
+			&& isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
 			$saveData = [
 				'name' => trim($postData['shop_name']),
 				'update_time' => time(),
@@ -34,11 +35,11 @@ class Shop extends \common\model\Base{
 			$where = [
 				['factory_id','=',$factoryId],
 				['store_id','=',$storeId],
-				['id','=',$postData['userShopId']],
+				['id','=',$postData['id']],
 				['status','=',0],
 			];
 			$this->startTrans();//事务开启
-			$res = $this->where($where)->update($saveData);
+			$res = $this->isUpdate(true)->save($saveData,$where);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
@@ -48,12 +49,13 @@ class Shop extends \common\model\Base{
 				//验证用户是否存在
 				$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
 				if(!$managerId){//不存在
-					unset($postData['id']);
-					$postData['type'] = 0;
-					$postData['name'] = trim($postData['name']);
-					$postData['create_time'] = time();
+					$saveData = [
+						'type' => 0,
+						'name' => $postData['name'],
+						'create_time' => time(),
+					];
 					$modelUser = new \common\model\User();
-					$res = $modelUser->isUpdate(false)->save($postData);
+					$res = $modelUser->isUpdate(false)->save($saveData);
 					if($res===false){
 						$this->rollback();//事务回滚
 						return errorMsg('失败',$modelUser->getError());
@@ -63,21 +65,21 @@ class Shop extends \common\model\Base{
 				$where = [
 					['factory_id','=',$factoryId],
 					['store_id','=',$storeId],
-					['shop_id','=',$postData['userShopId']],
+					['shop_id','=',$postData['id']],
+					['id','=',$postData['userShopId']],
 					['status','=',0],
 				];
 				$saveData = [
 					'user_id' => $managerId,
 				];
 				$modelUserShop = new \app\store\model\UserShop();
-				$res = $modelUserShop->where($where)->update($saveData);
+				$res = $modelUserShop->isUpdate(true)->save($saveData,$where);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$modelUserShop->getError());
 				}
 			}
 			$this->commit();//事务提交
-			return successMsg('成功！');
 		}else{//新增
 			//验证用户是否存在
 			$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
@@ -87,6 +89,7 @@ class Shop extends \common\model\Base{
 					'name' => $postData['name'],
 					'type' => 0,
 					'factory_id' => $factoryId,
+					'mobile_phone' => $postData['mobile_phone'],
 					'create_time' => time(),
 				];
 				$modelUser = new \common\model\User();
@@ -138,8 +141,6 @@ class Shop extends \common\model\Base{
 			$userShopId = $res[1]['id'];
 
 			$this->commit();//事务提交
-			$postData['id'] = $shopId;
-			$postData['user_shop_id'] = $userShopId;
 		}
 		return successMsg('成功！',$postData);
 	}
@@ -158,26 +159,11 @@ class Shop extends \common\model\Base{
 				['us.factory_id','=',$factoryId],
 				['us.store_id','=',$storeId],
 				['us.shop_id','=',$shopId],
-				['us.status','<>',2],
+				['us.status','=',0],
 				['us.type','=',3],
 			],
 		];
 		$res = $modelUserShop->getInfo($config);
 		return ($res['mobile_phone']==$mobilePhone)?false:true;
-	}
-
-	/**验证用户是否为店长
-	 */
-	private function checkManager($userId,$factoryId,$storeId,$shopId){
-		$modelUserShop = new \app\store\model\UserShop();
-		$where = [
-			['user_id','=',$userId],
-			['factory_id','=',$factoryId],
-			['store_id','=',$storeId],
-			['shop_id','=',$shopId],
-			['status','<>',2],
-			['type','=',3],
-		];
-		return $modelUserShop->where($where)->value('id');
 	}
 }
