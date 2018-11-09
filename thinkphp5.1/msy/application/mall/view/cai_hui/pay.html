@@ -69,6 +69,8 @@
 		}
 		.pay{
 			width:120px;
+			height:32px;
+			line-height: 32px;
 			text-align:center;
 			display:inline-block;
 		}
@@ -91,6 +93,12 @@
 		.dt_item input.name,.dt_item input.mobile,.detail_address{
 			padding:10px 0;
 			border:1px solid #d9d9d9;
+		}
+		.weui_cell{
+			margin:0 0 15px 0;
+		}
+		.weui_cell select{
+			height:35px;
 		}
 	</style>
 </head>
@@ -140,6 +148,9 @@
 		</div>
 		<div>
 			<span>产品单价:<price>{$goodsInfo.price}</price></span>
+			
+		</div>
+		<div>
 			<span>购买数量: {$goodsInfo.num}</span>
 		</div>
 		<div class="dt_item">
