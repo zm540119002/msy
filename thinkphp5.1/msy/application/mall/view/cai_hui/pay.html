@@ -69,6 +69,8 @@
 		}
 		.pay{
 			width:120px;
+			height:32px;
+			line-height: 32px;
 			text-align:center;
 			display:inline-block;
 		}
@@ -92,13 +94,24 @@
 			padding:10px 0;
 			border:1px solid #d9d9d9;
 		}
+		.weui_cell{
+			margin:0 0 15px 0;
+		}
+		.weui_cell select{
+			height:35px;
+		}
+		.h1{
+			font-size:18px;
+			font-weight:bold;
+			margin:0 0 10px 0;
+		}
 	</style>
 </head>
 <body>
 <div class="detail_content">
 	<form action="{:url('CaiHui/orderPayment')}" method="post">
 		<div class="dt_item">
-			<p>收货人信息</p>
+			<p class="h1">收货人信息</p>
 			<div class="dt_item">
 				<p>收货人姓名</p>
 				<input class="name" name="name" type="text" value="" placeholder="填写姓名"/>
@@ -140,6 +153,9 @@
 		</div>
 		<div>
 			<span>产品单价:<price>{$goodsInfo.price}</price></span>
+			
+		</div>
+		<div>
 			<span>购买数量: {$goodsInfo.num}</span>
 		</div>
 		<div class="dt_item">
