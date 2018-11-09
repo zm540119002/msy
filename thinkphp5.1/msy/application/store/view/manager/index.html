@@ -74,7 +74,6 @@
 				content:addAdminAccount,
 				btn:['确定','取消'],
 				success:function () {
-					$('.addAdminLayer .input_disabled').removeAttr('readonly');
 				},
 				yes:function(index){
 					var postData = $('.addAdminForm').serializeObject();
@@ -108,7 +107,6 @@
 				success:function(){
 					var dialogForm = $('.addAdminLayer .addAdminForm');
 					copyDataByName(_this,dialogForm);
-					dialogForm.find('.input_disabled').attr('readonly','readonly');
 				},
 				yes:function(index){
 					var postData=$('.addAdminForm').serializeObject();
