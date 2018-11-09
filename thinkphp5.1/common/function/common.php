@@ -132,8 +132,7 @@ function data_auth_sign($data)
     return $sign;
 }
 
-/**
- * $this->error() 的Ajax格式
+/**$this->error() 的Ajax格式
  * @param $msg
  * @param string $extend
  * @return array

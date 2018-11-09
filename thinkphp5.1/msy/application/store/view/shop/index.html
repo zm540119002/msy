@@ -113,6 +113,9 @@
 				className:'entryShopInfoLayer',
 				content:entryShopInfo,
 				btn:['确定','取消'],
+				success:function () {
+					$('.store_mobile').attr('readonly',false);
+				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
 					var content='';
@@ -174,10 +177,6 @@
 						index:index
 					};
 					dialogFormEdit(config);
-					$('.store_mobile').attr('readonly',false);
-				},
-				no:function(){
-					$('.store_mobile').attr('readonly',false);
 				}
 			})
 		});
