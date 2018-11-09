@@ -6,13 +6,13 @@
 <section id="entryShopInfo" style="display:none;">
 	<form class="entryShopForm">
 		<div class="account-field">
-			<input class="f20 store_name" type="text" placeholder="门店名称" name="shop_name">
+			<input class="f20 store_name " type="text" placeholder="门店名称" name="shop_name">
 		</div>
 		<div class="account-field">
-			<input class="f20 store_name" type="text" placeholder="店长姓名" name="name">
+			<input class="f20 store_name input_disabled" type="text" placeholder="店长姓名" name="name">
 		</div>
 		<div class="account-field">
-			<input class="f20 store_mobile" type="tel" placeholder="手机号码" name="mobile_phone">
+			<input class="f20 store_mobile input_disabled" type="tel" placeholder="手机号码" name="mobile_phone">
 		</div>
 	</form>
 	<div class="error_tipc"></div>
@@ -114,7 +114,7 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function () {
-					$('.entryShopForm').find('.store_mobile').removeAttr('readonly');
+					$('.entryShopInfoLayer .input_disabled').attr('readonly',false);
 				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
@@ -150,9 +150,10 @@
 				content:entryShopInfo,
 				btn:['确定','取消'],
 				success:function(){
+					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
+					$('.setShopAccountLayer .input_disabled').attr('readonly','readonly');
 					var dialogForm = $('.setShopAccountLayer .entryShopForm');
 					copyDataByName(_this,dialogForm);
-					dialogForm.find('.store_mobile').attr('readonly','readonly');
 				},
 				yes:function(index){
 					var postData=$('.setShopAccountLayer .entryShopForm').serializeObject();
