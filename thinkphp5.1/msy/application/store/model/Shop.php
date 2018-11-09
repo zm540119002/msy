@@ -79,51 +79,64 @@ class Shop extends \common\model\Base{
 			$this->commit();//事务提交
 			return successMsg('成功！');
 		}else{//新增
-			$data = [
-				'name' => $postData['shop_name'],
-				'user_id' => $userId,
-				'factory_id' => $factoryId,
-				'store_id' => $storeId,
-				'create_time' => time(),
-			];
-			$this->startTrans();//事务开启
-			$res = $this->isUpdate(false)->save($data);
-			if($res===false){
-				$this->rollback();//事务回滚
-				return errorMsg('失败',$this->getError());
-			}
-			$shopId = $this->getAttr('id');
 			//验证用户是否存在
 			$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
+			$this->startTrans();//事务开启
 			if(!$managerId){//不存在
-				unset($postData['id']);
-				$postData['type'] = 0;
-				$postData['name'] = trim($postData['name']);
-				$postData['create_time'] = time();
+				$saveData = [
+					'name' => $postData['name'],
+					'type' => 0,
+					'factory_id' => $factoryId,
+					'create_time' => time(),
+				];
 				$modelUser = new \common\model\User();
-				$res = $modelUser->isUpdate(false)->save($postData);
+				$res = $modelUser->isUpdate(false)->save($saveData);
 				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$this->getError());
 				}
 				$managerId = $modelUser->getAttr('id');
 			}
-			//验证用户是否为门店店长
-			$userShopId = $this->checkManager($userId,$factoryId,$storeId,$shopId);
-			if(!$userShopId){//不是管理员
-				$postData['type'] = 3;
-				$postData['user_id'] = $managerId;
-				$postData['factory_id'] = $factoryId;
-				$postData['store_id'] = $storeId;
-				$postData['shop_id'] = $shopId;
-				$modelUserShop = new \app\store\model\UserShop();
-				$res = $modelUserShop->isUpdate(false)->save($postData);
-				if($res===false){
-					$this->rollback();//事务回滚
-					return errorMsg('失败',$this->getError());
-				}
-				$userShopId = $modelUserShop->getAttr('id');
+
+			//保存门店信息
+			$saveData = [
+				'name' => $postData['shop_name'],
+				'user_id' => $userId,
+				'factory_id' => $factoryId,
+				'store_id' => $storeId,
+				'create_time' => time(),
+			];
+			$res = $this->isUpdate(false)->save($saveData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
 			}
+			$shopId = $this->getAttr('id');
+
+			$modelUserShop = new \app\store\model\UserShop();
+			//设置门店拥有者和门店店长
+			$saveData = [
+				[
+					'type' => 1,
+					'user_id' => $userId,
+					'factory_id' => $factoryId,
+					'store_id' => $storeId,
+					'shop_id' => $shopId,
+				],[
+					'type' => 3,
+					'user_id' => $managerId,
+					'factory_id' => $factoryId,
+					'store_id' => $storeId,
+					'shop_id' => $shopId,
+				],
+			];
+			$res = $modelUserShop->isUpdate(false)->saveAll($saveData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$userShopId = $res[1]['id'];
+
 			$this->commit();//事务提交
 			$postData['id'] = $shopId;
 			$postData['user_shop_id'] = $userShopId;
@@ -131,7 +144,7 @@ class Shop extends \common\model\Base{
 		return successMsg('成功！',$postData);
 	}
 
-	/**验证用户是否为店长
+	/**验证店长是否改变
 	 */
 	private function checkManagerChange($factoryId,$storeId,$shopId,$userShopId,$mobilePhone){
 		$modelUserShop = new \app\store\model\UserShop();

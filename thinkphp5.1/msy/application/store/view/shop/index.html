@@ -113,6 +113,9 @@
 				className:'entryShopInfoLayer',
 				content:entryShopInfo,
 				btn:['确定','取消'],
+				success:function () {
+					$('.store_mobile').attr('readonly',false);
+				},
 				yes:function(index){
 					var postData = $('.entryShopForm').serializeObject();
 					var content='';
@@ -165,6 +168,7 @@
 						return false;
 					}
 					postData.id = _this.data('id');
+					postData.ShopId = _this.data('shop_id');
 					postData.userShopId = _this.data('user_shop_id');
 					var config = {
 						url:module + 'Shop/edit',
@@ -173,10 +177,6 @@
 						index:index
 					};
 					dialogFormEdit(config);
-					$('.store_mobile').attr('readonly',false);
-				},
-				no:function(){
-					$('.store_mobile').attr('readonly',false);
 				}
 			})
 		});
