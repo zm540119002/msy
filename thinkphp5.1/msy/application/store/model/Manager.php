@@ -23,7 +23,24 @@ class Manager extends \common\model\Base {
 		if(!$validateUser->scene('employee')->check($postData)){
 			return errorMsg($validateUser->getError());
 		}
-		if($postData['id'] && intval($postData['id'])){//修改
+		//验证用户是否存在
+		$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
+		$this->startTrans();//事务开启
+		if(!$managerId){//不存在
+			$saveData = [
+				'type' => 1,
+				'name' => $postData['name'],
+				'create_time' => time(),
+			];
+			$res = $this->isUpdate(false)->save($saveData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$managerId = $this->getAttr('id');
+		}
+		if(isset($postData['id']) && intval($postData['id'])
+			&& isset($postData['userFactoryId']) && intval($postData['userFactoryId'])){//修改
 			$where = [
 				'id' => $postData['id'],
 			];
@@ -32,34 +49,36 @@ class Manager extends \common\model\Base {
 			];
 			$res = $this->isUpdate(true)->save($saveData,$where);
 			if($res===false){
+				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
-		}else{//新增
-			//验证用户是否存在
-			$userId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
-			$this->startTrans();//事务开启
-			if(!$userId){//不存在
-				$saveData = [
-					'type' => 1,
-					'name' => $postData['name'],
-					'create_time' => time(),
+			$res = $this->_checkManagerChange($factoryId,$postData['id'],$postData['userFactoryId'],$postData['mobile_phone']);
+			if($res){//修改管理员
+				$where = [
+					['factory_id','=',$factoryId],
+					['id','=',$postData['userFactoryId']],
+					['status','=',0],
 				];
-				$res = $this->isUpdate(false)->save($saveData);
+				$saveData = [
+					'user_id' => $managerId,
+				];
+				$modelUserFactory = new \common\model\UserFactory();
+				$res = $modelUserFactory->isUpdate(true)->save($saveData,$where);
 				if($res===false){
 					$this->rollback();//事务回滚
-					return errorMsg('失败',$this->getError());
+					return errorMsg('失败',$modelUserFactory->getError());
 				}
-				$userId = $this->getAttr('id');
 			}
-			//验证用户是否为管理员
-			$userFactoryId = $this->checkManager($userId,$factoryId);
+		}else{//新增
+			//验证用户是否已经是管理员
+			$userFactoryId = $this->_checkManager($managerId,$factoryId);
 			if($userFactoryId){//已经是为管理员
 				$this->rollback();//事务回滚
 				return errorMsg('此号码已经是管理员，请更换手机号码！');
 			}
 			$saveData = [
 				'type' => 2,
-				'user_id' => $userId,
+				'user_id' => $managerId,
 				'factory_id' => $factoryId,
 				'factory_type' => $factoryType,
 			];
@@ -70,10 +89,10 @@ class Manager extends \common\model\Base {
 				return errorMsg('失败',$this->getError());
 			}
 			$userFactoryId = $modelUserFactory->getAttr('id');
-			$this->commit();//事务提交
-			$postData['id'] = $userId;
+			$postData['id'] = $managerId;
 			$postData['user_factory_id'] = $userFactoryId;
 		}
+		$this->commit();//事务提交
 		return successMsg('成功！',$postData);
 	}
 
@@ -126,9 +145,31 @@ class Manager extends \common\model\Base {
 		return successMsg('成功');
 	}
 
+	/**判断是否修改管理员
+	 */
+	private function _checkManagerChange($factoryId,$userId,$userFactoryId,$mobilePhone){
+		$modelUserFactory = new \common\model\UserFactory();
+		$config = [
+			'field' => [
+				'u.mobile_phone',
+			],'join' => [
+				['user u','u.id = uf.user_id','left'],
+			],'where' => [
+				['uf.factory_id','=',$factoryId],
+				['uf.id','=',$userFactoryId],
+				['uf.user_id','=',$userId],
+				['uf.status','=',0],
+				['uf.type','=',2],
+				['u.status','=',0],
+			],
+		];
+		$res = $modelUserFactory->getInfo($config);
+		return ($res['mobile_phone']==$mobilePhone)?false:true;
+	}
+
 	/**检查管理员账号
 	 */
-	private function checkManager($userId,$factoryId){
+	private function _checkManager($userId,$factoryId){
 		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['user_id','=',$userId],
