@@ -58,9 +58,7 @@ class Manager extends \common\model\Base {
 					$this->rollback();//事务回滚
 					return errorMsg('号码：['.$postData['mobile_phone'].']已经是本店家管理员，请更换手机号码！');
 				}
-				$saveData[] = [
-					'user_id' => $managerId,
-				];
+				$saveData['user_id'] = $managerId;
 			}
 			$modelUserFactory = new \common\model\UserFactory();
 			$res = $modelUserFactory->isUpdate(true)->save($saveData,$where);
