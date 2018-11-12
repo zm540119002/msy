@@ -217,6 +217,8 @@
 			var  content =''
 			if(!postData.company_img){
 				content='请上传企业形象图片';
+			}else if(!postData.short_name){
+				content='请填写企业简称';
 			}else if(postData.short_name.length>8){
 				content='简称不能超过8位';
 			}else if(!postData.logo_img){
@@ -224,13 +226,15 @@
 			}else if(!postData.introduction){
 				content='请填写企业简介';
 			}else if(!postData.rb_img||postData.rb_img==0){
-				content='请上传企业研发生产图片';
+				content='请上传研发生产图片';
+			}else if(!postData.team_activity||postData.team_activity==0){
+				content='请上传团队活动图片';
 			}else if(!postData.license||postData.license==0){
 				content='请上传执照资质图片';
 			}else if(!postData.glory_img||postData.glory_img==0){
 				content='请上传专利荣誉图片';
 			}else if(!area_address){
-				content='ddddfd请选择所在的省市区';
+				content='请选择所在的省市区';
 			}else if(!postData.detail_address){
 				content='请填写详细地址';
 			}
