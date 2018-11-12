@@ -106,16 +106,11 @@ class Manager extends \common\model\Base {
 
 	//删除
 	public function del($factoryId,$tag=true){
-		$id = input('post.id',0);
-		if(!$id){
-			return errorMsg('参数错误');
-		}
 		$userFactoryId = input('post.userFactoryId',0);
 		if(!$userFactoryId){
 			return errorMsg('参数错误');
 		}
 		$where = [
-			['user_id', '=', $id],
 			['id', '=', $userFactoryId],
 			['factory_id', '=', $factoryId],
 			['status', '=', 0],
