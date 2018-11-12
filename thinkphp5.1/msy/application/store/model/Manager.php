@@ -30,6 +30,7 @@ class Manager extends \common\model\Base {
 			$saveData = [
 				'type' => 1,
 				'name' => $postData['name'],
+				'mobile_phone' => $postData['mobile_phone'],
 				'create_time' => time(),
 			];
 			$res = $this->isUpdate(false)->save($saveData);
