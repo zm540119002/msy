@@ -40,6 +40,12 @@ class Manager extends \common\model\Base {
 			}
 			$managerId = $this->getAttr('id');
 		}
+		//检验用户是否是本店家管理员
+		$userFactoryId = $this->_checkIsManager($managerId,$factoryId);
+		if($userFactoryId){//已经是为管理员
+			$this->rollback();//事务回滚
+			return errorMsg('此号码已经是本店家管理员，请更换手机号码！');
+		}
 		if(isset($postData['userFactoryId']) && intval($postData['userFactoryId'])){//修改
 			$where = [
 				['factory_id','=',$factoryId],
@@ -58,12 +64,6 @@ class Manager extends \common\model\Base {
 			}
 			$postData['user_factory_id'] = $postData['userFactoryId'];
 		}else{//新增
-			//检验用户是否是本店家管理员
-			$userFactoryId = $this->_checkIsManager($managerId,$factoryId);
-			if($userFactoryId){//已经是为管理员
-				$this->rollback();//事务回滚
-				return errorMsg('此号码已经是本店家管理员，请更换手机号码！');
-			}
 			$saveData = [
 				'type' => 2,
 				'user_id' => $managerId,
