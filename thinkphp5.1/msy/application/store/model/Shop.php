@@ -57,6 +57,7 @@ class Shop extends \common\model\Base{
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
+			//门店名称唯一性验证
 			$where = [
 				['id','<>',$postData['shopId']],
 				['name','=',$postData['shop_name']],
