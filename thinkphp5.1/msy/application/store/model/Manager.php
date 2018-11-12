@@ -58,7 +58,7 @@ class Manager extends \common\model\Base {
 			}
 			$postData['user_factory_id'] = $postData['userFactoryId'];
 		}else{//新增
-			//验证用户是否已经是管理员
+			//检验用户是否是本店家管理员
 			$userFactoryId = $this->_checkIsManager($managerId,$factoryId);
 			if($userFactoryId){//已经是为管理员
 				$this->rollback();//事务回滚
@@ -128,7 +128,7 @@ class Manager extends \common\model\Base {
 		return successMsg('成功');
 	}
 
-	/**检查是否是本店家管理员
+	/**检验用户是否是本店家管理员
 	 */
 	private function _checkIsManager($userId,$factoryId){
 		$modelUserFactory = new \common\model\UserFactory();
