@@ -26,6 +26,25 @@ class Shop extends \common\model\Base{
 		if(!$validateShop->scene('edit')->check($postData)){
 			return errorMsg($validateShop->getError());
 		}
+		//验证用户是否存在
+		$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
+		$this->startTrans();//事务开启
+		if(!$managerId){//不存在
+			$saveData = [
+				'name' => $postData['name'],
+				'type' => 0,
+				'factory_id' => $factoryId,
+				'mobile_phone' => $postData['mobile_phone'],
+				'create_time' => time(),
+			];
+			$modelUser = new \common\model\User();
+			$res = $modelUser->isUpdate(false)->save($saveData);
+			if($res===false){
+				$this->rollback();//事务回滚
+				return errorMsg('失败',$this->getError());
+			}
+			$managerId = $modelUser->getAttr('id');
+		}
 		if(isset($postData['id']) && intval($postData['id'])
 			&& isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
 			$saveData = [
@@ -38,30 +57,10 @@ class Shop extends \common\model\Base{
 				['id','=',$postData['id']],
 				['status','=',0],
 			];
-			$this->startTrans();//事务开启
 			$res = $this->isUpdate(true)->save($saveData,$where);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
-			}
-			//验证用户是否存在
-			$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
-			$this->startTrans();//事务开启
-			if(!$managerId){//不存在
-				$saveData = [
-					'name' => $postData['name'],
-					'type' => 0,
-					'factory_id' => $factoryId,
-					'mobile_phone' => $postData['mobile_phone'],
-					'create_time' => time(),
-				];
-				$modelUser = new \common\model\User();
-				$res = $modelUser->isUpdate(false)->save($saveData);
-				if($res===false){
-					$this->rollback();//事务回滚
-					return errorMsg('失败',$this->getError());
-				}
-				$managerId = $modelUser->getAttr('id');
 			}
 			$res = $this->_checkManagerChange($factoryId,$storeId,$postData['id'],$postData['userShopId'],$postData['mobile_phone']);
 			if($res){//修改店长（手机号码改变）
@@ -82,7 +81,6 @@ class Shop extends \common\model\Base{
 					return errorMsg('失败',$modelUserShop->getError());
 				}
 			}
-			$this->commit();//事务提交
 		}else{//新增
 			//保存门店信息
 			$saveData = [
@@ -124,9 +122,8 @@ class Shop extends \common\model\Base{
 			$userShopId = $res[1]['id'];
 			$postData['id'] = $shopId;
 			$postData['user_shop_id'] = $userShopId;
-
-			$this->commit();//事务提交
 		}
+		$this->commit();//事务提交
 		return successMsg('成功！',$postData);
 	}
 

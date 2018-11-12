@@ -52,6 +52,7 @@ class Manager extends \common\model\Base {
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
+			//判断是否修改管理员
 			$res = $this->_checkManagerChange($factoryId,$postData['id'],$postData['userFactoryId'],$postData['mobile_phone']);
 			if($res){//修改管理员
 				$where = [

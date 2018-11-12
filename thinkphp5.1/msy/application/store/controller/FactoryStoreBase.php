@@ -11,12 +11,12 @@ class FactoryStoreBase extends \common\controller\UserBase{
         parent::__construct();
 
         //获取店铺列表
-        $this->_getStoreList();
+        $this->getStoreList();
         $this->assign('storeList', $this->_storeList);
         //获取当前店铺
-        $this->_getStoreInfo(input('storeId'));
+        $this->getStoreInfo(input('storeId'));
         //获取店家店铺列表
-        $this->_getManagerFactoryList();
+        $this->getManagerFactoryList();
         $this->assign('store', $this->_store);
         //缓存当前店铺信息
         \common\cache\Store::cacheCurrentStoreInfo($this->_store);
@@ -26,7 +26,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
 
     /**获取店铺列表
      */
-    private function _getStoreList(){
+    protected function getStoreList(){
         $model = new \common\model\UserStore();
         $config = [
             'where' => [
@@ -52,7 +52,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
 
     /**获取当前店铺
      */
-    private function _getStoreInfo($storeId=0){
+    protected function getStoreInfo($storeId=0){
         if($storeId){
             $model = new \common\model\Store();
             $config = [
@@ -82,7 +82,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
 
     /**获取店家店铺列表
      */
-    private function _getManagerFactoryList(){
+    protected function getManagerFactoryList(){
         $storeListCount = count($this->_storeList);
         if($storeListCount>1){
             foreach ($this->_storeList as $item) {

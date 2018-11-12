@@ -37,6 +37,8 @@ class ManagerManage extends FactoryStoreBase{
      */
     public function manage(){
         if(request()->isAjax()){
+            return 123;
+            return $this->_managerFactoryList;
         }else{
             //岗位
             $post = config('permission.post');
