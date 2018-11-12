@@ -58,6 +58,16 @@ class Shop extends \common\model\Base{
 				return errorMsg('失败',$this->getError());
 			}
 			$where = [
+				['id','<>',$postData['shopId']],
+				['name','=',$postData['shop_name']],
+			];
+			$res = $this->checkUnique('name',$where);
+			if($res){
+				$this->rollback();//事务回滚
+				return errorMsg('此名称已存在，请更换名称！');
+			}
+			$modelUserShop = new \app\store\model\UserShop();
+			$where = [
 				['factory_id','=',$factoryId],
 				['store_id','=',$storeId],
 				['shop_id','=',$postData['shopId']],
@@ -65,12 +75,10 @@ class Shop extends \common\model\Base{
 				['status','=',0],
 				['type','=',3],
 			];
-
 			$saveData = [
 				'user_id' => $managerId,
 				'user_name' => $postData['name'],
 			];
-			$modelUserShop = new \app\store\model\UserShop();
 			$res = $modelUserShop->isUpdate(true)->save($saveData,$where);
 			if($res===false){
 				$this->rollback();//事务回滚
