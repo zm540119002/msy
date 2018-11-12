@@ -44,43 +44,6 @@ class Shop extends \common\model\Base{
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
-			$res = $this->checkManagerChange($factoryId,$storeId,$postData['id'],$postData['userShopId'],$postData['mobile_phone']);
-			if($res){//店长改变了（手机号码改变）
-				//验证用户是否存在
-				$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
-				if(!$managerId){//不存在
-					$saveData = [
-						'type' => 0,
-						'name' => $postData['name'],
-						'create_time' => time(),
-					];
-					$modelUser = new \common\model\User();
-					$res = $modelUser->isUpdate(false)->save($saveData);
-					if($res===false){
-						$this->rollback();//事务回滚
-						return errorMsg('失败',$modelUser->getError());
-					}
-					$managerId = $modelUser->getAttr('id');
-				}
-				$where = [
-					['factory_id','=',$factoryId],
-					['store_id','=',$storeId],
-					['shop_id','=',$postData['id']],
-					['id','=',$postData['userShopId']],
-					['status','=',0],
-				];
-				$saveData = [
-					'user_id' => $managerId,
-				];
-				$modelUserShop = new \app\store\model\UserShop();
-				$res = $modelUserShop->isUpdate(true)->save($saveData,$where);
-				if($res===false){
-					$this->rollback();//事务回滚
-					return errorMsg('失败',$modelUserShop->getError());
-				}
-			}
-			$this->commit();//事务提交
-		}else{//新增
 			//验证用户是否存在
 			$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
 			$this->startTrans();//事务开启
@@ -100,7 +63,27 @@ class Shop extends \common\model\Base{
 				}
 				$managerId = $modelUser->getAttr('id');
 			}
-
+			$res = $this->_checkManagerChange($factoryId,$storeId,$postData['id'],$postData['userShopId'],$postData['mobile_phone']);
+			if($res){//修改店长（手机号码改变）
+				$where = [
+					['factory_id','=',$factoryId],
+					['store_id','=',$storeId],
+					['shop_id','=',$postData['id']],
+					['id','=',$postData['userShopId']],
+					['status','=',0],
+				];
+				$saveData = [
+					'user_id' => $managerId,
+				];
+				$modelUserShop = new \app\store\model\UserShop();
+				$res = $modelUserShop->isUpdate(true)->save($saveData,$where);
+				if($res===false){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$modelUserShop->getError());
+				}
+			}
+			$this->commit();//事务提交
+		}else{//新增
 			//保存门店信息
 			$saveData = [
 				'name' => $postData['shop_name'],
@@ -139,15 +122,17 @@ class Shop extends \common\model\Base{
 				return errorMsg('失败',$this->getError());
 			}
 			$userShopId = $res[1]['id'];
+			$postData['id'] = $shopId;
+			$postData['user_shop_id'] = $userShopId;
 
 			$this->commit();//事务提交
 		}
 		return successMsg('成功！',$postData);
 	}
 
-	/**验证店长是否改变
+	/**检查是否修改店长
 	 */
-	private function checkManagerChange($factoryId,$storeId,$shopId,$userShopId,$mobilePhone){
+	private function _checkManagerChange($factoryId,$storeId,$shopId,$userShopId,$mobilePhone){
 		$modelUserShop = new \app\store\model\UserShop();
 		$config = [
 			'field' => [
