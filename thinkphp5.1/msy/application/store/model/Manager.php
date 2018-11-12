@@ -18,6 +18,7 @@ class Manager extends \common\model\Base {
 		}
 		$postData = input('post.');
 		$postData['name'] = trim($postData['name']);
+		$postData['mobile_phone'] = trim($postData['mobile_phone']);
 		//用户数据验证
 		$validateUser = new \common\validate\User();
 		if(!$validateUser->scene('employee')->check($postData)){
@@ -40,23 +41,24 @@ class Manager extends \common\model\Base {
 			}
 			$managerId = $this->getAttr('id');
 		}
-		if(isset($postData['userFactoryId']) && intval($postData['userFactoryId'])){//修改
+		if(isset($postData['id']) && intval($postData['id']) &&
+			isset($postData['userFactoryId']) && intval($postData['userFactoryId'])){//修改
 			$where = [
 				['factory_id','=',$factoryId],
 				['id','=',$postData['userFactoryId']],
 				['status','=',0],
 			];
-			//检验用户是否是本店家管理员
-			$userFactoryId = $this->_checkIsManager($managerId,$factoryId);
-			if($userFactoryId){//已经是为管理员
-				$saveData = [
-					'user_name' => $postData['name'],
-				];
-			}else{
-				$saveData = [
-					'user_id' => $managerId,
-					'user_name' => $postData['name'],
-				];
+			$saveData = [
+				'user_name' => $postData['name'],
+			];
+			if($managerId != $postData['id']){//更换管理员账号
+				//检验用户是否是本店家管理员
+				$userFactoryId = $this->_checkIsManager($managerId,$factoryId);
+				if($userFactoryId){//已经是为管理员
+					$this->rollback();//事务回滚
+					return errorMsg('号码：['.$postData['mobile_phone'].']已经是本店家管理员，请更换手机号码！');
+				}
+				$saveData['user_id'] = $managerId;
 			}
 			$modelUserFactory = new \common\model\UserFactory();
 			$res = $modelUserFactory->isUpdate(true)->save($saveData,$where);
@@ -70,7 +72,7 @@ class Manager extends \common\model\Base {
 			$userFactoryId = $this->_checkIsManager($managerId,$factoryId);
 			if($userFactoryId){//已经是为管理员
 				$this->rollback();//事务回滚
-				return errorMsg('此号码已经是本店家管理员，请更换手机号码！');
+				return errorMsg('号码：['.$postData['mobile_phone'].']已经是本店家管理员，请更换手机号码！');
 			}
 			$saveData = [
 				'type' => 2,
@@ -88,6 +90,7 @@ class Manager extends \common\model\Base {
 			$userFactoryId = $modelUserFactory->getAttr('id');
 			$postData['user_factory_id'] = $userFactoryId;
 		}
+		$postData['id'] = $managerId;
 		$this->commit();//事务提交
 		return successMsg('成功！',$postData);
 	}
