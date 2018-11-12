@@ -21,11 +21,6 @@ class Shop extends \common\model\Base{
 		$postData['mobile_phone'] = trim($postData['mobile_phone']);
 		$postData['name'] = trim($postData['name']);
 		$postData['shop_name'] = trim($postData['shop_name']);
-		//数据验证
-		$validateShop = new \app\store\validate\Shop();
-		if(!$validateShop->scene('edit')->check($postData)){
-			return errorMsg($validateShop->getError());
-		}
 		//验证用户是否存在
 		$managerId = $this->checkUserExistByMobilePhone($postData['mobile_phone']);
 		$this->startTrans();//事务开启
@@ -90,6 +85,11 @@ class Shop extends \common\model\Base{
 				'store_id' => $storeId,
 				'create_time' => time(),
 			];
+			//数据验证
+			$validateShop = new \app\store\validate\Shop();
+			if(!$validateShop->scene('edit')->check($saveData)){
+				return errorMsg($validateShop->getError());
+			}
 			$res = $this->isUpdate(false)->save($saveData);
 			if($res===false){
 				$this->rollback();//事务回滚
