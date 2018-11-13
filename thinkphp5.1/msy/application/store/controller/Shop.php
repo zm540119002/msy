@@ -55,10 +55,8 @@ class Shop extends \common\controller\StoreBase{
             $condition = [
                 ['factory_id','=',$this->factory['id'],],
                 ['store_id' ,'=', $this->store['id'],],
-                ['id' ,'=', $_POST['userShopId'],],
                 ['shop_id' ,'=', $_POST['shopId'],],
-                ['type' ,'=', 3,],
-                ['status' ,'=', 0,],
+                ['status' ,'<>', 2,],
             ];
             return $modelUserShop->del($condition);
         }
