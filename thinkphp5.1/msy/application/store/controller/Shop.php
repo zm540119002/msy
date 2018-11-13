@@ -60,7 +60,7 @@ class Shop extends \common\controller\StoreBase{
                 ['id' ,'=', $_POST['shopId'],],
                 ['status' ,'<>', 2,],
             ];
-            $res = $modelShop->del($condition);
+            $res = $modelShop->del($condition,false);
             if($res['status']==0){
                 $modelShop->rollback();//事务回滚
                 return errorMsg('失败',$res['info']);
@@ -72,7 +72,7 @@ class Shop extends \common\controller\StoreBase{
                 ['shop_id' ,'=', $_POST['shopId'],],
                 ['status' ,'<>', 2,],
             ];
-            $res = $modelUserShop->del($condition);
+            $res = $modelUserShop->del($condition,false);
             if($res['status']==0){
                 $modelShop->rollback();//事务回滚
                 return errorMsg('失败',$res['info']);

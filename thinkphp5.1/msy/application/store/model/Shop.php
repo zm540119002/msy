@@ -42,10 +42,6 @@ class Shop extends \common\model\Base{
 		}
 		if(isset($postData['shopId']) && intval($postData['shopId'])
 			&& isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
-			$saveData = [
-				'name' => $postData['shop_name'],
-				'update_time' => time(),
-			];
 			//门店名称唯一性验证
 			$config = [
 				'where' => [
@@ -62,7 +58,12 @@ class Shop extends \common\model\Base{
 				$this->rollback();//事务回滚
 				return errorMsg('门店名称已存在，请更换名称！');
 			}
+			$saveData = [
+				'name' => $postData['shop_name'],
+				'update_time' => time(),
+			];
 			$where = [
+				['user_id','=',$userId],
 				['factory_id','=',$factoryId],
 				['store_id','=',$storeId],
 				['id','=',$postData['shopId']],
@@ -73,6 +74,7 @@ class Shop extends \common\model\Base{
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$this->getError());
 			}
+			$shopId = $postData['shopId'];
 			$modelUserShop = new \app\store\model\UserShop();
 			$where = [
 				['factory_id','=',$factoryId],
@@ -91,6 +93,7 @@ class Shop extends \common\model\Base{
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$modelUserShop->getError());
 			}
+			$userShopId = $postData['userShopId'];
 		}else{//新增
 			//保存门店信息
 			$saveData = [
@@ -100,11 +103,6 @@ class Shop extends \common\model\Base{
 				'store_id' => $storeId,
 				'create_time' => time(),
 			];
-			//数据验证
-//			$validateShop = new \app\store\validate\Shop();
-//			if(!$validateShop->scene('add')->check($saveData)){
-//				return errorMsg($validateShop->getError());
-//			}
 			//门店名称唯一性验证
 			$config = [
 				'where' => [
@@ -151,10 +149,10 @@ class Shop extends \common\model\Base{
 				return errorMsg('失败',$this->getError());
 			}
 			$userShopId = $res[1]['id'];
-			$postData['shop_id'] = $shopId;
-			$postData['user_shop_id'] = $userShopId;
 		}
 		$this->commit();//事务提交
+		$postData['shop_id'] = $shopId;
+		$postData['user_shop_id'] = $userShopId;
 		return successMsg('成功！',$postData);
 	}
 }

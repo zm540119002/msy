@@ -556,6 +556,7 @@ function dialogFormEdit(config) {
         },
         success: function(data){
             $('.loading').hide();
+            return;
             if(config.callBack){
                 config.callBack(config,data);
             }else{
