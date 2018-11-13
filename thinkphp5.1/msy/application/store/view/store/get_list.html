@@ -84,12 +84,14 @@
 					copyDataByClassName(_this,$('.setShopAccountLayer .set_top_info'));
 				},
 				yes:function(index){
-					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
+					var dialogForm = $('.setShopAccountLayer .setShopForm');
+					var postData=dialogForm.serializeObject();
 					postData.id = _this.data('id');
 					var config = {
 						url:module + 'Store/setManager',
 						postData:postData,
-						modifyObj:_this,
+						fromObj:dialogForm,
+						toObj:_this,
 						callBack:setManagerCallBack,
 						index:index
 					};
@@ -103,7 +105,7 @@
 		if(data.status == 0){
 			dialog.error(data.info);
 		}else{
-			copyDataByName($('.setShopAccountLayer .setShopForm'),config.modifyObj);
+			copyDataByName(config.fromObj,config.toObj);
 			layer.close(config.index);
 		}
 	}
