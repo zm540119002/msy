@@ -9,6 +9,19 @@ class FactoryStoreBase extends \common\controller\UserBase{
 
     public function __construct(){
         parent::__construct();
+
+        //获取店铺列表
+        $this->getStoreList();
+        $this->assign('storeList', $this->_storeList);
+        //获取当前店铺
+        $this->getStoreInfo(input('storeId'));
+        //获取店家店铺列表
+        $this->getManagerFactoryList();
+        $this->assign('store', $this->_store);
+        //缓存当前店铺信息
+        \common\cache\Store::cacheCurrentStoreInfo($this->_store);
+        $this->assign('managerFactoryList', $this->_managerFactoryList);
+        $this->assign('defaultDialog', $this->_defaultDialog);
     }
 
     /**获取店铺列表

@@ -8,20 +8,21 @@ class ManagerManage extends FactoryStoreBase{
     public function __construct(){
         parent::__construct();
 
-        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
-        if(isset($this->currentStore['id']) && $this->currentStore['id']){
-            $modelShop = new \app\store\model\Shop();
-            $config = [
-                'field' => [
-                    's.id','s.name',
-                ],'where' => [
-                    ['s.status','=',0],
-                    ['s.store_id','=',$this->currentStore['id']],
-                ],
-            ];
-            $shopList = $modelShop->getList($config);
-            $this->assign('shopList',$shopList);
-        }
+//        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
+//        if(isset($this->currentStore['id']) && $this->currentStore['id']){
+//            $modelShop = new \app\store\model\Shop();
+//            $config = [
+//                'field' => [
+//                    's.id','s.name',
+//                ],'where' => [
+//                    ['s.status','=',0],
+//                    ['s.store_id','=',$this->currentStore['id']],
+//                ],
+//            ];
+//            $shopList = $modelShop->getList($config);
+//            $this->assign('shopList',$shopList);
+//        }
+        $this->getStoreList();
     }
 
     /**首页
@@ -37,7 +38,7 @@ class ManagerManage extends FactoryStoreBase{
      */
     public function manage(){
         if(request()->isAjax()){
-            return 123;
+            return $this->_storeList;
             return $this->_managerFactoryList;
         }else{
             //岗位
