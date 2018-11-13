@@ -51,6 +51,20 @@ class Shop extends \common\controller\StoreBase{
      */
     public function del(){
         if(request()->isAjax()){
+            $modelShop = new \app\store\model\Shop();
+            $modelShop->startTrans();//事务开启
+            $condition = [
+                ['user_id','=',$this->user['id'],],
+                ['factory_id','=',$this->factory['id'],],
+                ['store_id' ,'=', $this->store['id'],],
+                ['id' ,'=', $_POST['shopId'],],
+                ['status' ,'<>', 2,],
+            ];
+            $res = $modelShop->del($condition);
+            if($res['status']==0){
+                $modelShop->rollback();//事务回滚
+                return errorMsg('失败',$res['info']);
+            }
             $modelUserShop = new \app\store\model\UserShop();
             $condition = [
                 ['factory_id','=',$this->factory['id'],],
@@ -58,7 +72,12 @@ class Shop extends \common\controller\StoreBase{
                 ['shop_id' ,'=', $_POST['shopId'],],
                 ['status' ,'<>', 2,],
             ];
-            return $modelUserShop->del($condition);
+            $res = $modelUserShop->del($condition);
+            if($res['status']==0){
+                $modelShop->rollback();//事务回滚
+                return errorMsg('失败',$res['info']);
+            }
+            return successMsg('成功');
         }
     }
 }
