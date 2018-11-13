@@ -86,7 +86,7 @@
 				yes:function(index){
 					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					postData.id = _this.data('id');
-					postData.user_store_id = _this.data('user_store_id');
+					postData.userStoreId = _this.data('user_store_id');
 					var config = {
 						url:module + 'Store/setManager',
 						postData:postData,
