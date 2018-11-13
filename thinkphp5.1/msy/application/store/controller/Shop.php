@@ -77,6 +77,7 @@ class Shop extends \common\controller\StoreBase{
                 $modelShop->rollback();//事务回滚
                 return errorMsg('失败',$res['info']);
             }
+            $modelShop->commit();//事务提交
             return successMsg('成功');
         }
     }
