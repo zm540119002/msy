@@ -44,7 +44,6 @@ class Shop extends \common\model\Base{
 			&& isset($postData['userShopId']) && intval($postData['userShopId'])){//修改
 			$saveData = [
 				'name' => $postData['shop_name'],
-				'id' => $postData['shopId'],
 				'update_time' => time(),
 			];
 			//门店名称唯一性验证
