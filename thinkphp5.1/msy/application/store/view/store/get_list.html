@@ -100,11 +100,11 @@
 	});
 	//设置店长回调
 	function setManagerCallBack(config,data) {
-		return false;
 		if(data.status == 0){
 			dialog.error(data.info);
 		}else{
-			location.reload();
+			copyDataByName($('.setShopAccountLayer .setShopForm'),config.modifyObj);
+			layer.close(config.index);
 		}
 	}
 </script>
