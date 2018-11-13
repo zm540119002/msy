@@ -86,7 +86,6 @@
 				yes:function(index){
 					var postData=$('.setShopAccountLayer .setShopForm').serializeObject();
 					postData.id = _this.data('id');
-					postData.userStoreId = _this.data('user_store_id');
 					var config = {
 						url:module + 'Store/setManager',
 						postData:postData,
@@ -101,6 +100,7 @@
 	});
 	//设置店长回调
 	function setManagerCallBack(config,data) {
+		return false;
 		if(data.status == 0){
 			dialog.error(data.info);
 		}else{

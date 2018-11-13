@@ -61,6 +61,7 @@ class Shop extends \common\model\Base{
 			$where = [
 				['id','<>',$postData['shopId']],
 				['name','=',$postData['shop_name']],
+				['status','<>',2],
 			];
 			$res = $this->checkUnique('name',$where);
 			if($res){

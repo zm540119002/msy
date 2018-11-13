@@ -155,7 +155,6 @@ class Store extends Base {
 			$userStoreId = $modelUserStore->getAttr('id');
 			$this->commit();//事务提交
 			$postData['id'] = $userId;
-			$postData['user_store_id'] = $userStoreId;
 		}else{//手机号不存在
 			$modelUserStore = new \common\model\UserStore();
 			$where = [
