@@ -58,15 +58,20 @@ class Shop extends \common\model\Base{
 				return errorMsg('失败',$this->getError());
 			}
 			//门店名称唯一性验证
-			$where = [
-				['id','<>',$postData['shopId']],
-				['name','=',$postData['shop_name']],
-				['status','<>',2],
+			$config = [
+				'where' => [
+					['s.id','<>',$postData['shopId']],
+					['s.name','=',$postData['shop_name']],
+					['s.status','<>',2],
+					['us.status','<>',2],
+				],'join' => [
+					['user_shop us','s.id=us.shop_id','left'],
+				],
 			];
-			$res = $this->checkUnique('name',$where);
+			$res = $this->checkUnique('s.name',$config);
 			if($res){
 				$this->rollback();//事务回滚
-				return errorMsg('此名称已存在，请更换名称！');
+				return errorMsg('门店名称已存在，请更换名称！');
 			}
 			$modelUserShop = new \app\store\model\UserShop();
 			$where = [
@@ -99,6 +104,21 @@ class Shop extends \common\model\Base{
 			$validateShop = new \app\store\validate\Shop();
 			if(!$validateShop->scene('edit')->check($saveData)){
 				return errorMsg($validateShop->getError());
+			}
+			//门店名称唯一性验证
+			$config = [
+				'where' => [
+					['s.name','=',$postData['shop_name']],
+					['s.status','<>',2],
+					['us.status','<>',2],
+				],'join' => [
+					['user_shop us','s.id=us.shop_id','left'],
+				],
+			];
+			$res = $this->checkUnique('s.name',$config);
+			if($res){
+				$this->rollback();//事务回滚
+				return errorMsg('门店名称已存在，请更换名称！');
 			}
 			$res = $this->isUpdate(false)->save($saveData);
 			if($res===false){
