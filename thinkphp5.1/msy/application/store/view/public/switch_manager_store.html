@@ -26,4 +26,12 @@
         </div>
     </div>
 </section>
-{include file="public/manager_store_list_tpl" /}
+<script type="text/javascript">
+    $(function(){
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            switchManagerStore();
+        });
+    });
+</script>
+{include file="public/factory_store_list_tpl" /}

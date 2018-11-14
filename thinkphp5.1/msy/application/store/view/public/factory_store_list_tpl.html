@@ -5,7 +5,7 @@
         <div><span>{$factory.name}</span></div>
         <ul data-id="{$factory.factory_id}">
             {volist name="factory.storeList" id="storeInfo"}
-            <li data-id="{$storeInfo.id}">
+            <li data-id="{$storeInfo.store_id}">
                 {notempty name="storeInfo.logo_img"}
                 <img  class="store_logo left" src="public_uploads/{$storeInfo.logo_img|default=''}" />
                 {else /}
@@ -29,14 +29,17 @@
 </section>
 <script type="text/javascript">
     $(function(){
-        //切换店铺
-        $('body').on('click','.switch-store',function(){
-            switchManagerStore();
-        });
+        var factoryStoreList='{:json_encode($factoryStoreList)}';
+        console.log(factoryStoreList);
+        console.log(typeof factoryStoreList);
+//        //授权多家，选择管理店铺
+//        if(factoryStoreList !== 'null'){
+//            switchManagerStore();
+//        }
     });
     //选择管理店铺
     function switchManagerStore(){
-        var storeShopInfoList = $('#storeShopInfo').html();
+        var content = $('#storeShopInfo').html();
         layer.open({
             title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
             className:'storeShopListLayer',
@@ -44,7 +47,7 @@
             fixed:true,
             // top:100,
             shadeClose:false,
-            content:storeShopInfoList,
+            content:content,
             anim: 'up',
             style: '',
             success:function(){
