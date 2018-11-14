@@ -5,6 +5,10 @@
     </div>
 </section>
 <script type="text/javascript">
+    //设置店家店铺
+    $('body').on('click','.storeShopListLayer li',function(){
+        $(this).addClass('current').siblings().removeClass('current');
+    });
     //选择管理店铺
     function switchManagerStore(){
         var content = $('#storeShopInfo').html();
