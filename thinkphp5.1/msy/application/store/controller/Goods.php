@@ -13,11 +13,13 @@ class Goods extends \common\controller\StoreBase
         if(request()->isPost()){
             return $result = $goodsModel -> edit($this->store['id'],$this->store['run_type']);
         }
-        $categoryModel = new \app\index_admin\model\GoodsCategory;
-        $where = [
-            ['parent_id_1','=',0]
+        $categoryModel = new \common\model\GoodsCategory;
+        $config = [
+            'where' => [
+                ['parent_id_1','=',0]
+            ],
         ];
-        $platformCategory = $categoryModel->getList($where);
+        $platformCategory = $categoryModel->getList($config);
         $this -> assign('platformCategory',$platformCategory);
         if(input('?goods_id') && $this->factory && $this->store){
             $goodsId= (int)input('goods_id');

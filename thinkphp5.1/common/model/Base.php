@@ -94,6 +94,25 @@ class Base extends \think\Model {
 		return successMsg('成功');
 	}
 
+	/**验证字段唯一性
+	 */
+	public function checkUnique($fieldName,$config){
+		$_config = [
+			'field' => [
+				$fieldName,
+			],
+		];
+		$_model = $this->alias($this->alias);
+		$_config = array_merge($_config,$config);
+		foreach ($_config as $key=>$value){
+			if(!empty($value)){
+				$_model = $_model->$key($value);
+			}
+		}
+		$info = $_model->field($fieldName)->find();
+		return $info;
+	}
+
 	/**根据手机号码检查正常账号
 	 */
 	protected function checkUserExistByMobilePhone($mobilePhone){

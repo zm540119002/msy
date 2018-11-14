@@ -116,7 +116,8 @@
 				success:function () {
 				},
 				yes:function(index){
-					var postData = $('.entryShopForm').serializeObject();
+					var dialogForm = $('.entryShopForm');
+					var postData = dialogForm.serializeObject();
 					var content='';
 					if(!postData.shop_name){
 						content='请填写门店名称';
@@ -132,7 +133,7 @@
 					var config = {
 						url:module + 'Shop/edit',
 						postData:postData,
-						fromObj:$('.setShopAccountLayer .setShopForm'),
+						fromObj:dialogForm,
 						toObj:_this,
 						index:index
 					};
@@ -153,7 +154,8 @@
 					copyDataByName(_this,dialogForm);
 				},
 				yes:function(index){
-					var postData=$('.setShopAccountLayer .entryShopForm').serializeObject();
+					var dialogForm = $('.setShopAccountLayer .entryShopForm');
+					var postData=dialogForm.serializeObject();
 					var content='';
 					if(!postData.shop_name){
 						content='请填写门店名称';
@@ -166,7 +168,7 @@
 						errorTipc(content);
 						return false;
 					}
-					postData.id = _this.data('id');
+					postData.shopId = _this.data('shop_id');
 					postData.userShopId = _this.data('user_shop_id');
 					var config = {
 						url:module + 'Shop/edit',
@@ -191,12 +193,12 @@
 				},
 				yes:function(index){
 					var postData = {};
-					postData.id = _this.data('id');
+					postData.shopId = _this.data('shop_id');
 					postData.userShopId = _this.data('user_shop_id');
 					var config = {
 						url:module + 'Shop/del',
 						postData:postData,
-						obj:_this,
+						delObj:_this,
 						index:index
 					};
 					dialogFormDel(config);

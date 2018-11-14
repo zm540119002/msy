@@ -32,14 +32,16 @@ class Shop extends \think\Validate{
     protected $message  =   [
         'name.require' => '名称必须！',
         'name.max' => '名称最多不能超过255个字符！',
-        'name.unique' => '此名称已被注册！',
+        'name.unique' => '此名称已存在，请更换名称！',
     ];
     //验证场景
     protected $scene = [
         //验证编辑
         'edit'  =>  [
-            'name',
-        ],'consignee_address'  =>  [
+            'name'   => '\app\store\model\Shop,status<>2&id<>id',
+        ],'add'  =>  [
+            'name'   => '\app\store\model\Shop,status<>2',
+        ],'operation_address'  =>  [
             'operation_mobile_phone',
             'operation_fix_phone',
             'operation_address',

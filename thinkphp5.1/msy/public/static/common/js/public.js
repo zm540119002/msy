@@ -592,7 +592,7 @@ function dialogFormDel(config) {
             if(config.callBack){
                 config.callBack(config,data);
             }else{
-                dialogFormEditDefaultCallBack(config,data);
+                dialogFormDelDefaultCallBack(config,data);
             }
         }
     });

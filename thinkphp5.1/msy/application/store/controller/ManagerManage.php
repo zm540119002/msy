@@ -2,26 +2,26 @@
 namespace app\store\controller;
 
 class ManagerManage extends FactoryStoreBase{
-    protected $currentStore = null;
-    protected $currentShop = null;
+//    protected $currentStore = null;
 
     public function __construct(){
         parent::__construct();
 
-        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
-        if(isset($this->currentStore['id']) && $this->currentStore['id']){
-            $modelShop = new \app\store\model\Shop();
-            $config = [
-                'field' => [
-                    's.id','s.name',
-                ],'where' => [
-                    ['s.status','=',0],
-                    ['s.store_id','=',$this->currentStore['id']],
-                ],
-            ];
-            $shopList = $modelShop->getList($config);
-            $this->assign('shopList',$shopList);
-        }
+//        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
+//        if(isset($this->currentStore['id']) && $this->currentStore['id']){
+//            $modelShop = new \app\store\model\Shop();
+//            $config = [
+//                'field' => [
+//                    's.id','s.name',
+//                ],'where' => [
+//                    ['s.status','=',0],
+//                    ['s.store_id','=',$this->currentStore['id']],
+//                ],
+//            ];
+//            $shopList = $modelShop->getList($config);
+//            $this->assign('shopList',$shopList);
+//        }
+        $this->getFactoryStoreList();
     }
 
     /**首页
@@ -37,6 +37,8 @@ class ManagerManage extends FactoryStoreBase{
      */
     public function manage(){
         if(request()->isAjax()){
+            print_r($this->_factoryStoreList);
+            print_r($this->_store);
         }else{
             //岗位
             $post = config('permission.post');
