@@ -130,32 +130,38 @@ class Store extends Base {
 			//验证店铺店长是否存在
 			$userStoreId = $this->checkManagerExist($factoryId,$storeId);
 			$modelUserStore = new \common\model\UserStore();
-			if($userStoreId){//存在测删除
+			if($userStoreId){//修改
 				$where = [
+					['type', '=', 3],
 					['id', '=', $userStoreId],
+					['factory_id', '=', $factoryId],
+					['store_id', '=', $storeId],
 				];
-				$res = $modelUserStore->del($where,false);
-				if($res['status']==0){
+				$saveData = [
+					'user_id' => $userId,
+					'user_name' => $postData['name'],
+				];
+				$res = $modelUserStore->isUpdate(true)->save($saveData,$where);
+				if($res===false){
+					$this->rollback();//事务回滚
+					return errorMsg('失败',$this->getError());
+				}
+			}else{//新增
+				$saveData = [
+					'type' => 3,
+					'user_id' => $userId,
+					'factory_id' => $factoryId,
+					'store_id' => $storeId,
+					'user_name' => $postData['name'],
+				];
+				$res = $modelUserStore->isUpdate(false)->save($saveData);
+				if($res===false){
 					$this->rollback();//事务回滚
 					return errorMsg('失败',$this->getError());
 				}
 			}
-			$saveData = [
-				'type' => 3,
-				'user_id' => $userId,
-				'factory_id' => $factoryId,
-				'store_id' => $storeId,
-				'user_name' => $postData['name'],
-			];
-			$res = $modelUserStore->isUpdate(false)->save($saveData);
-			if($res===false){
-				$this->rollback();//事务回滚
-				return errorMsg('失败',$this->getError());
-			}
-			$userStoreId = $modelUserStore->getAttr('id');
 			$this->commit();//事务提交
 			$postData['id'] = $userId;
-			$postData['user_store_id'] = $userStoreId;
 		}else{//手机号不存在
 			$modelUserStore = new \common\model\UserStore();
 			$where = [

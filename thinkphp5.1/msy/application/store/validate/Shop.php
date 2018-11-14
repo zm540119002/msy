@@ -38,7 +38,9 @@ class Shop extends \think\Validate{
     protected $scene = [
         //验证编辑
         'edit'  =>  [
-            'name',
+            'name'   => '\app\store\model\Shop,status<>2&id<>id',
+        ],'add'  =>  [
+            'name'   => '\app\store\model\Shop,status<>2',
         ],'operation_address'  =>  [
             'operation_mobile_phone',
             'operation_fix_phone',

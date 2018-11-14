@@ -23,11 +23,13 @@ class Brand extends \common\controller\FactoryBase
         if(request()->isPost()){
             return $model -> edit($this->factory['id']);
         }
-        $categoryModel = new \app\index_admin\model\GoodsCategory;
-        $where = [
-            ['parent_id_1','=',0]
+        $categoryModel = new \common\model\GoodsCategory;
+        $config = [
+            'where' => [
+                ['parent_id_1','=',0]
+            ],
         ];
-        $categoryList = $categoryModel->getList($where);
+        $categoryList = $categoryModel->getList($config);
         $this->assign('categoryList',$categoryList);
         if(input('?brand_id')){
             $brandId = input('brand_id');
