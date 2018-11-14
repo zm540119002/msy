@@ -1,6 +1,6 @@
 {notempty name='factoryStoreList'}
     {volist name="factoryStoreList" id="factory"}
-    <div><span>{$factory.name}</span></div>
+    <div><span>{$factory.factory_name}</span></div>
     <ul data-id="{$factory.factory_id}">
         {volist name="factory.storeList" id="storeInfo"}
         <li data-id="{$storeInfo.store_id}">
