@@ -26,12 +26,55 @@
         </div>
     </div>
 </section>
+<!--店家店铺模板-->
+<section id="storeShopInfo" style="display:none;">
+    <div class="store_list">
+        {include file="public/factory_store_list_tpl" /}
+    </div>
+</section>
 <script type="text/javascript">
     $(function(){
+        var factoryStoreList='{:json_encode($factoryStoreList)}';
+        console.log(factoryStoreList);
+        console.log(typeof factoryStoreList);
+        //授权多家，选择管理店铺
+        if(factoryStoreList !== 'null'){
+            switchManagerStore();
+        }
         //切换店铺
         $('body').on('click','.switch-store',function(){
             switchManagerStore();
         });
     });
+    //选择管理店铺
+    function switchManagerStore(){
+        var content = $('#storeShopInfo').html();
+        layer.open({
+            title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
+            className:'storeShopListLayer',
+            type: 1,
+            fixed:true,
+            // top:100,
+            shadeClose:false,
+            content:content,
+            anim: 'up',
+            style: '',
+            success:function(){
+                var winHeight=$(window).height();
+                $('.storeShopListLayer .store_list').css('height',winHeight-120+'px');
+                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+            },
+            btn:['确定','取消'],
+            yes:function(index){
+                var storeId = $('.storeShopListLayer li.current').data('id');
+                if(!storeId){
+                    dialog.error('请选择店家店铺');
+                    return false;
+                }
+                var url = controller + 'manage/storeId/' +storeId;
+                location.href = url;
+            }
+        });
+    }
 </script>
-{include file="public/factory_store_list_tpl" /}

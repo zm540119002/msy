@@ -5,7 +5,6 @@ class FactoryStoreBase extends \common\controller\UserBase{
     protected $_storeList = null;
     protected $_store = null;
     protected $_factoryStoreList = null;
-    protected $_defaultDialog = null;
 
     public function __construct(){
         parent::__construct();
@@ -44,8 +43,8 @@ class FactoryStoreBase extends \common\controller\UserBase{
                 }
             }
         }
-//        $this->_factoryStoreList = null;
         $this->assign('factoryStoreList', $this->_factoryStoreList);
+        print_r($this->_factoryStoreList);
     }
 
     /**获取店铺列表
@@ -102,8 +101,6 @@ class FactoryStoreBase extends \common\controller\UserBase{
             $this->_store = $storeInfo;
         }elseif(count($this->_storeList)==1){
             $this->_store = $this->_storeList[0];
-        }elseif(count($this->_storeList)>1){
-            $this->_defaultDialog = true;
         }
     }
 }
