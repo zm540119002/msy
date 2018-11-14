@@ -43,10 +43,9 @@ class FactoryStoreBase extends \common\controller\UserBase{
     /**获取店家店铺列表
      */
     protected function getFactoryStoreList(){
+        $this->getStoreList();
         $storeListCount = count($this->_storeList);
         if($storeListCount>0){
-            $factory_id_arr = array_unique(array_column($this->_storeList,'factory_id'));
-            print_r($factory_id_arr);
             foreach ($this->_storeList as $item) {
                 $storeInfoArr = [
                     'store_id' => $item['store_id'],
@@ -57,6 +56,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
                     'operational_model' => $item['operational_model'],
                     'is_default' => $item['is_default'],
                 ];
+                $factory_id_arr = array_column($this->_factoryStoreList,'factory_id');
                 if(!in_array($item['factory_id'],$factory_id_arr)){//factory不存在
                     $this->_factoryStoreList[] = [
                         'factory_id' => $item['factory_id'],
@@ -65,9 +65,9 @@ class FactoryStoreBase extends \common\controller\UserBase{
                         'storeList' => [$storeInfoArr],
                     ];
                 }else{//factory存在
-                    foreach ($this->_factoryStoreList as &$key){
-                        if($key['factory_id'] == $item['factory_id']){
-                            $key['store_list'][] = $storeInfoArr;
+                    foreach ($this->_factoryStoreList as &$value){
+                        if($value['factory_id'] == $item['factory_id']){
+                            $value['storeList'][] = $storeInfoArr;
                         }
                     }
                 }
