@@ -333,11 +333,13 @@ $.fn.serializeObject = function() {
 $.extend({
     isEmptyArray: function(arr) {
         return (Array.prototype.isPrototypeOf(arr) && arr.length === 0)?true:false;
+    },
+    isEmptyObject: function(obj) {
+        return (Object.prototype.isPrototypeOf(obj) && Object.keys(obj).length === 0)?true:false;
     }
 });
 
-/**
- * 将已序列化的表单数据转为Json对象
+/**将已序列化的表单数据转为Json对象
  * @param str
  * @returns {Object|*}
  */
