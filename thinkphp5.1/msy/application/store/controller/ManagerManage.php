@@ -23,6 +23,7 @@ class ManagerManage extends FactoryStoreBase{
 //            $this->assign('shopList',$shopList);
 //        }
         $this->getStoreList();
+        $this->getFactoryStoreList();
     }
 
     /**首页
@@ -38,8 +39,9 @@ class ManagerManage extends FactoryStoreBase{
      */
     public function manage(){
         if(request()->isAjax()){
-            return $this->_storeList;
-            return $this->_managerFactoryList;
+            print_r($this->_storeList);
+            print_r(123);
+            print_r($this->_managerFactoryList);
         }else{
             //岗位
             $post = config('permission.post');
