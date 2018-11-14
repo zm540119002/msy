@@ -44,7 +44,6 @@ class FactoryStoreBase extends \common\controller\UserBase{
             }
         }
         $this->assign('factoryStoreList', $this->_factoryStoreList);
-        print_r($this->_factoryStoreList);
     }
 
     /**获取店铺列表

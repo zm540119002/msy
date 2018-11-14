@@ -38,6 +38,7 @@ class ManagerManage extends FactoryStoreBase{
     public function manage(){
         if(request()->isAjax()){
             if(count($this->_storeList)>1){
+//                $this->assign('factoryStoreList', $this->_factoryStoreList);
                 return view('public/factory_store_list_tpl');
             }else{
                 return errorMsg('未授权！');
