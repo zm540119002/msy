@@ -2,8 +2,7 @@
 namespace app\store\controller;
 
 class ManagerManage extends FactoryStoreBase{
-    protected $currentStore = null;
-    protected $currentShop = null;
+//    protected $currentStore = null;
 
     public function __construct(){
         parent::__construct();
@@ -22,7 +21,6 @@ class ManagerManage extends FactoryStoreBase{
 //            $shopList = $modelShop->getList($config);
 //            $this->assign('shopList',$shopList);
 //        }
-        $this->getStoreList();
         $this->getFactoryStoreList();
     }
 
@@ -39,9 +37,6 @@ class ManagerManage extends FactoryStoreBase{
      */
     public function manage(){
         if(request()->isAjax()){
-            print_r($this->_storeList);
-            print_r(123);
-            print_r($this->_managerFactoryList);
         }else{
             //岗位
             $post = config('permission.post');

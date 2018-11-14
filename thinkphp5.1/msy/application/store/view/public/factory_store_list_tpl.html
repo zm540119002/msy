@@ -4,7 +4,7 @@
         {volist name="factoryStoreList" id="factory"}
         <div><span>{$factory.name}</span></div>
         <ul data-id="{$factory.factory_id}">
-            {volist name="factory.store_list" id="storeInfo"}
+            {volist name="factory.storeList" id="storeInfo"}
             <li data-id="{$storeInfo.id}">
                 {notempty name="storeInfo.logo_img"}
                 <img  class="store_logo left" src="public_uploads/{$storeInfo.logo_img|default=''}" />
@@ -29,13 +29,6 @@
 </section>
 <script type="text/javascript">
     $(function(){
-        //如果没有默认店铺，则设置默认店铺
-        var defaultDialog='{:json_encode($defaultDialog)}';
-        var factoryStoreList='{:json_encode($factoryStoreList)}';
-        //授权多家，选择管理店铺
-        if(factoryStoreList !== 'null' && defaultDialog !== 'null'){
-            switchManagerStore();
-        }
         //切换店铺
         $('body').on('click','.switch-store',function(){
             switchManagerStore();
