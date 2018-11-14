@@ -312,8 +312,7 @@ function date(format, timestamp) {
     });
 }
 
-/**
- * 表单转json对象
+/**表单转json对象
  */
 $.fn.serializeObject = function() {
     var o = {};
@@ -330,6 +329,12 @@ $.fn.serializeObject = function() {
     });
     return o;
 };
+//jquery 扩展
+$.extend({
+    isEmptyArray: function(arr) {
+        return (Array.prototype.isPrototypeOf(arr) && arr.length === 0)?true:false;
+    }
+});
 
 /**
  * 将已序列化的表单数据转为Json对象
