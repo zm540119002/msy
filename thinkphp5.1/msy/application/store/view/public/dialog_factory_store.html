@@ -4,11 +4,11 @@
     </div>
 </section>
 <script type="text/javascript">
-    //设置店家店铺
+    //选择管理店铺-样式
     $('body').on('click','.storeShopListLayer li',function(){
         $(this).addClass('current').siblings().removeClass('current');
     });
-    //选择管理店铺
+    //选择管理店铺-确定
     function switchManagerStore(){
         var content = $('#storeShopInfo').html();
         layer.open({
