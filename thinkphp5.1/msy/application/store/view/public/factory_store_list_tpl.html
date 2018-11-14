@@ -1,68 +1,27 @@
-<!--店家店铺模板-->
-<section id="storeShopInfo" style="display:none;">
-    <div class="store_list">
-        {volist name="factoryStoreList" id="factory"}
-        <div><span>{$factory.name}</span></div>
-        <ul data-id="{$factory.factory_id}">
-            {volist name="factory.storeList" id="storeInfo"}
-            <li data-id="{$storeInfo.id}">
-                {notempty name="storeInfo.logo_img"}
-                <img  class="store_logo left" src="public_uploads/{$storeInfo.logo_img|default=''}" />
-                {else /}
-                <img  class="store_logo left" src="public_img/default/no_pic_40.jpg" />
-                {/notempty}
-                <div>
-                    <p>
-                        <span>{$storeInfo.store_name}</span>{$storeInfo.store_type|getStoreType}
-                    </p>
-                    <p>
-                        <span>{$storeInfo.run_type|getRunType}</span>
-                        <span>.</span>
-                        {$storeInfo.operational_model|getOperationalModel}
-                    </p>
-                </div>
-            </li>
-            {/volist}
-        </ul>
+{notempty name='factoryStoreList'}
+    {volist name="factoryStoreList" id="factory"}
+    <div><span>{$factory.name}</span></div>
+    <ul data-id="{$factory.factory_id}">
+        {volist name="factory.storeList" id="storeInfo"}
+        <li data-id="{$storeInfo.store_id}">
+            {notempty name="storeInfo.logo_img"}
+            <img  class="store_logo left" src="public_uploads/{$storeInfo.logo_img|default=''}" />
+            {else /}
+            <img  class="store_logo left" src="public_img/default/no_pic_40.jpg" />
+            {/notempty}
+            <div>
+                <p>
+                    <span>{$storeInfo.store_name}</span>{$storeInfo.store_type|getStoreType}
+                </p>
+                <p>
+                    <span>{$storeInfo.run_type|getRunType}</span>
+                    <span>.</span>
+                    {$storeInfo.operational_model|getOperationalModel}
+                </p>
+            </div>
+        </li>
         {/volist}
-    </div>
-</section>
-<script type="text/javascript">
-    $(function(){
-        //切换店铺
-        $('body').on('click','.switch-store',function(){
-            switchManagerStore();
-        });
-    });
-    //选择管理店铺
-    function switchManagerStore(){
-        var storeShopInfoList = $('#storeShopInfo').html();
-        layer.open({
-            title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
-            className:'storeShopListLayer',
-            type: 1,
-            fixed:true,
-            // top:100,
-            shadeClose:false,
-            content:storeShopInfoList,
-            anim: 'up',
-            style: '',
-            success:function(){
-                var winHeight=$(window).height();
-                $('.storeShopListLayer .store_list').css('height',winHeight-120+'px');
-                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
-                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
-            },
-            btn:['确定','取消'],
-            yes:function(index){
-                var storeId = $('.storeShopListLayer li.current').data('id');
-                if(!storeId){
-                    dialog.error('请选择店家店铺');
-                    return false;
-                }
-                var url = controller + 'manage/storeId/' +storeId;
-                location.href = url;
-            }
-        });
-    }
-</script>
+    </ul>
+    {/volist}
+{else /}
+{/notempty}

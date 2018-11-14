@@ -26,4 +26,25 @@
         </div>
     </div>
 </section>
-{include file="public/manager_store_list_tpl" /}
+<!--店家店铺模板-->
+<section id="storeShopInfo" style="display:none;">
+    <div class="store_list">
+        {include file="public/factory_store_list_tpl" /}
+    </div>
+</section>
+<script type="text/javascript" src="store_js/factoryStore.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var factoryStoreList='{:json_encode($factoryStoreList)}';
+        console.log(factoryStoreList);
+        console.log(typeof factoryStoreList);
+        //授权多家，选择管理店铺
+        if(factoryStoreList !== 'null'){
+            switchManagerStore();
+        }
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            switchManagerStore();
+        });
+    });
+</script>
