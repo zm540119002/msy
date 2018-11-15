@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class ManagerManage extends FactoryStoreBase{
+class ManagerManage extends \common\controller\FactoryStoreBase{
     public function __construct(){
         parent::__construct();
         //采购商店铺列表

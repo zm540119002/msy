@@ -1,7 +1,7 @@
 <?php
-namespace app\store\controller;
+namespace common\controller;
 
-class FactoryStoreBase extends \common\controller\UserBase{
+class FactoryStoreBase extends UserBase{
     protected $_storeList = null;
     protected $_currentStore = null;
     protected $_factoryStoreList = null;
@@ -64,7 +64,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
                 ['us.user_id','=',$this->user['id']],
                 ['s.status','=',0],
                 ['f.status','=',0],
-                ['f.type','=',2],
+                ['f.type','=',config('custom.type')],
             ],
         ];
         $storeList = $model->getList($config);
