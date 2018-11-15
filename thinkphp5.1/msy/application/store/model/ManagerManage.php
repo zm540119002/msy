@@ -39,12 +39,13 @@ class ManagerManage extends \common\model\Base {
 			}
 			$userId = $this->getAttr('id');
 		}
+		if($postData['id'] != $userId){
+			return errorMsg('不能修改手机号码！');
+		}
 		$this->startTrans();//事务开启
 		if($postData['id'] && intval($postData['id']) && $postData['userStoreId'] && intval($postData['userStoreId'])){//修改
-			$userId = $postData['id'];
-			$postData['id'] = $postData['userStoreId'];
 			$saveData = [
-				'user_id' => $userId,
+//				'user_id' => $userId,//备注：不能修改手机号
 				'user_name' => $postData['name'],
 				'post' => $postData['post'],
 				'duty' => $postData['duty'],
