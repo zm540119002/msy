@@ -6,11 +6,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
     protected $_currentStore = null;
     protected $_factoryStoreList = null;
 
-//    public function __construct(){
-//        parent::__construct();
-//    }
-
-    /**获取店长店铺列表
+    /**组装店铺列表
      */
     protected function getFactoryStoreList(){
         $this->getStoreList();
@@ -46,7 +42,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
         $this->assign('factoryStoreList', $this->_factoryStoreList);
     }
 
-    /**获取店铺列表
+    /**获取店店长铺列表
      */
     protected function getStoreList(){
         $model = new \common\model\UserStore();
