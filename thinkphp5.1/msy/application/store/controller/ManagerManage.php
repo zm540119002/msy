@@ -4,10 +4,10 @@ namespace app\store\controller;
 class ManagerManage extends FactoryStoreBase{
     public function __construct(){
         parent::__construct();
+        //采购商店铺列表
         $this->getFactoryStoreList();
-        $storeId = (int)input('storeId');
-        print_r($storeId);
-        $this->getShopConsigneeAddressList($storeId);
+        //当前店铺
+        $this->getCurrentStoreInfo((int)input('storeId'));
     }
 
     /**首页
@@ -29,7 +29,6 @@ class ManagerManage extends FactoryStoreBase{
                 return errorMsg('未授权！');
             }
         }else{
-            return $this->currentStore;
             //岗位
             $post = config('permission.post');
             $this->assign('post', $post);

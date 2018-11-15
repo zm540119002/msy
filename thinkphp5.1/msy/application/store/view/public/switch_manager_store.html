@@ -2,14 +2,14 @@
     <div class="top_bar columns_flex l-r-sides ">
         <div class="top_left">
             {notempty name="currentStore.logo_img"}
-            <img  class="currentStore-logo-img left" src="public_uploads/{$currentStore.logo_img|default=''}" />
+            <img  class="store-logo-img left" src="public_uploads/{$currentStore.logo_img|default=''}" />
             {else /}
-            <img  class="currentStore-logo-img left" src="public_img/default/no_pic_40.jpg" />
+            <img  class="store-logo-img left" src="public_img/default/no_pic_40.jpg" />
             {/notempty}
             <div>
                 <p>
-                    <span class="currentStore-name">{$currentStore.name}</span>
-                    <span class="currentStore-type">{$currentStore.currentStore_type|getStoreType}</span>
+                    <span class="store-name">{$currentStore.store_name}</span>
+                    <span class="store-type">{$currentStore.store_type|getStoreType}</span>
                 </p>
                 <span class="run-type">{$currentStore.run_type|getRunType}</span>
             </div>

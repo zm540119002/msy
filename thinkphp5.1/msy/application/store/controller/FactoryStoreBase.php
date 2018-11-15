@@ -77,7 +77,7 @@ class FactoryStoreBase extends \common\controller\UserBase{
 
     /**获取当前店铺信息
      */
-    public function getCurrentStoreInfo($storeId=0){
+    protected function getCurrentStoreInfo($storeId=0){
         if($storeId){
             $model = new \common\model\Store();
             $config = [
