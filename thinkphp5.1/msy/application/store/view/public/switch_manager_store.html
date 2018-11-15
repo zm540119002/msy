@@ -29,13 +29,6 @@
 {include file="public/dialog_factory_store" /}
 <script type="text/javascript">
     $(function(){
-        var factoryStoreList='{:json_encode($factoryStoreList)}';
-        console.log(factoryStoreList);
-        console.log(typeof factoryStoreList);
-        //授权多家，选择管理店铺
-        if(factoryStoreList !== 'null'){
-            switchManagerStore();
-        }
         //切换店铺
         $('body').on('click','.switch-store',function(){
             switchManagerStore();
