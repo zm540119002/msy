@@ -1,13 +1,14 @@
 <!--店家店铺模板-->
 <section id="storeShopInfo" style="display:none;">
-    <div class="store_list">
-    </div>
+    <div class="store_list">{include file="public/factory_store_list_tpl" /}</div>
 </section>
 <script type="text/javascript">
-    //选择管理店铺-样式
-    $('body').on('click','.storeShopListLayer li',function(){
-        $(this).addClass('current').siblings().removeClass('current');
-        $(this).parent().siblings().find('li').removeClass('current');
+    $(function(){
+        //选择管理店铺-样式
+        $('body').on('click','.storeShopListLayer li',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            $(this).parent().siblings().find('li').removeClass('current');
+        });
     });
     //选择管理店铺-确定
     function switchManagerStore(){
@@ -35,7 +36,7 @@
                     dialog.error('请选择店家店铺');
                     return false;
                 }
-                var url = controller + 'manage/storeId/' +storeId;
+                var url = module + 'ManagerManage/manage/storeId/' +storeId;
                 location.href = url;
             }
         });

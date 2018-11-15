@@ -3,12 +3,12 @@ namespace app\store\controller;
 
 class FactoryStoreBase extends \common\controller\UserBase{
     protected $_storeList = null;
-    protected $_store = null;
+    protected $_currentStore = null;
     protected $_factoryStoreList = null;
 
-    public function __construct(){
-        parent::__construct();
-    }
+//    public function __construct(){
+//        parent::__construct();
+//    }
 
     /**获取店长店铺列表
      */
@@ -75,9 +75,9 @@ class FactoryStoreBase extends \common\controller\UserBase{
         $this->_storeList = $storeList;
     }
 
-    /**获取当前店铺
+    /**获取当前店铺信息
      */
-    protected function getStoreInfo($storeId=0){
+    protected function getCurrentStoreInfo($storeId=0){
         if($storeId){
             $model = new \common\model\Store();
             $config = [
@@ -97,9 +97,10 @@ class FactoryStoreBase extends \common\controller\UserBase{
                 ],
             ];
             $storeInfo = $model->getInfo($config);
-            $this->_store = $storeInfo;
+            $this->_currentStore = $storeInfo;
         }elseif(count($this->_storeList)==1){
-            $this->_store = $this->_storeList[0];
+            $this->_currentStore = $this->_storeList[0];
         }
+        $this->assign('currentStore', $this->_currentStore);
     }
 }

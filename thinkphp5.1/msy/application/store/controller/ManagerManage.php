@@ -2,26 +2,12 @@
 namespace app\store\controller;
 
 class ManagerManage extends FactoryStoreBase{
-//    protected $currentStore = null;
-
     public function __construct(){
         parent::__construct();
-
-//        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
-//        if(isset($this->currentStore['id']) && $this->currentStore['id']){
-//            $modelShop = new \app\store\model\Shop();
-//            $config = [
-//                'field' => [
-//                    's.id','s.name',
-//                ],'where' => [
-//                    ['s.status','=',0],
-//                    ['s.store_id','=',$this->currentStore['id']],
-//                ],
-//            ];
-//            $shopList = $modelShop->getList($config);
-//            $this->assign('shopList',$shopList);
-//        }
+        //采购商店铺列表
         $this->getFactoryStoreList();
+        //当前店铺
+        $this->getCurrentStoreInfo((int)input('storeId'));
     }
 
     /**首页
@@ -38,7 +24,6 @@ class ManagerManage extends FactoryStoreBase{
     public function manage(){
         if(request()->isAjax()){
             if(count($this->_storeList)>1){
-//                $this->assign('factoryStoreList', $this->_factoryStoreList);
                 return view('public/factory_store_list_tpl');
             }else{
                 return errorMsg('未授权！');

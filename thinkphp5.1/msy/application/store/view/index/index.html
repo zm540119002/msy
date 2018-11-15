@@ -88,8 +88,7 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else{
-						console.log(data);
-						$('#storeShopInfo').find('.store_list').append(data);
+						$('#storeShopInfo').find('.store_list').empty().append(data);
 						switchManagerStore();
 					}
 				}
