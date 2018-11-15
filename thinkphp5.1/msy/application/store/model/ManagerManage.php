@@ -43,8 +43,20 @@ class ManagerManage extends \common\model\Base {
 		if($postData['id'] && intval($postData['id']) && $postData['userStoreId'] && intval($postData['userStoreId'])){//修改
 			$userId = $postData['id'];
 			$postData['id'] = $postData['userStoreId'];
+			$saveData = [
+				'user_id' => $userId,
+				'user_name' => $postData['name'],
+				'post' => $postData['post'],
+				'duty' => $postData['duty'],
+			];
+			$where = [
+				'id' => $postData['userStoreId'],
+				'store_id' => $storeId,
+				'type' => 4,
+				'status' => 0,
+			];
 			$modelUserStore = new \common\model\UserStore();
-			$res = $modelUserStore->isUpdate(true)->save($postData);
+			$res = $modelUserStore->isUpdate(true)->save($saveData,$where);
 			if($res===false){
 				$this->rollback();//事务回滚
 				return errorMsg('失败',$modelUserStore->getError());
@@ -70,15 +82,15 @@ class ManagerManage extends \common\model\Base {
 					$delNodeIds = array_diff($oldNodeIds,$postData['nodeIds']);
 				}
 				if(!empty($addNodeIds)){
-					$data = [];
+					$saveData = [];
 					foreach ($addNodeIds as $node){
-						$data[] = [
+						$saveData[] = [
 							'user_id' => $userId,
 							'store_id' => $storeId,
 							'node_id' => $node,
 						];
 					}
-					$res = $modelUserStoreNode->isUpdate(false)->saveAll($data);
+					$res = $modelUserStoreNode->isUpdate(false)->saveAll($saveData);
 					if(false===$res){
 						$this->rollback();//回滚事务
 						return errorMsg($modelUserStoreNode->getError());
@@ -97,8 +109,6 @@ class ManagerManage extends \common\model\Base {
 					}
 				}
 			}
-			//需返回手机号码
-			$postData['mobile_phone'] = $mobilePhone;
 		}else{//新增
 			//检查员工是否存在
 			$userStoreId = $this->_checkStoreEmployeeExist($userId,$storeId);
@@ -109,7 +119,7 @@ class ManagerManage extends \common\model\Base {
 			$saveData = [
 				'type' => 4,
 				'user_id' => $userId,
-				'user_name' => $postData['user_name'],
+				'user_name' => $postData['name'],
 				'store_id' => $storeId,
 				'post' => $postData['post'],
 				'duty' => $postData['duty'],

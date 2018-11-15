@@ -192,8 +192,8 @@
 			$('.area_address').setArea(region);
 		}
 
-		var store = '{$store}';
-		if(store){
+		var currentStore = '{$currentStore}';
+		if(currentStore){
 			//获取店铺员工账号列表
 			var config = {
 				url: controller + 'getStoreEmployeeList',
