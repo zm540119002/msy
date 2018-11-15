@@ -1,9 +1,7 @@
 <?php
 namespace app\factory\controller;
 
-use common\controller\UserBase;
-
-class GoodsCategory extends UserBase
+class GoodsCategory extends \common\controller\UserBase
 {
 
     /**获取二级分类
