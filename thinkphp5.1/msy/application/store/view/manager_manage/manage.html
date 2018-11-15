@@ -116,7 +116,7 @@
 						<ul class="list">
 							<li class="no-data"><span>暂无数据</span></li>
 						</ul>
-						{notempty name='store'}
+						{notempty name='currentStore'}
 						<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
 						{/notempty}
 					</form>
@@ -129,7 +129,8 @@
 							<input class="input-filed" type="text" name="consignee_name" value="{$store.consignee_name}" placeholder="收货人姓名">
 						</div>
 						<div>
-							<input class="input-filed" type="tel" name="consignee_mobile_phone" value="{$store.consignee_mobile_phone}" placeholder="收货人手机号码">
+							<input class="input-filed" type="tel" name="consignee_mobile_phone"
+								   value="{$store.consignee_mobile_phone}" placeholder="收货人手机号码">
 						</div>
 						<div class="express-area area-box">
 							<a id="expressArea2" href="javascript:void(0)" class="f24 form-group box-flex">
@@ -153,7 +154,7 @@
 						</div>
 						<p class="emp_account_tipc">门店运营员工账号</p>
 						<ul class="list"><li class="no-data"><span>暂无数据</span></li></ul>
-						{notempty name='store'}
+						{notempty name='currentStore'}
 						<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
 						{/notempty}
 					</form>
@@ -191,8 +192,8 @@
 			$('.area_address').setArea(region);
 		}
 
-		var store = '{$store}';
-		if(store){
+		var currentStore = '{$currentStore}';
+		if(currentStore){
 			//获取店铺员工账号列表
 			var config = {
 				url: controller + 'getStoreEmployeeList',
@@ -349,7 +350,7 @@
 						}
 					});
 					postData.id = _this.data('id');
-					postData.user_store_id = _this.data('user_store_id');
+					postData.userStoreId = _this.data('user_store_id');
 					var config = {
 						url:controller + 'editStoreEmployee',
 						postData:postData,

@@ -1,13 +1,11 @@
 <?php
 namespace app\store\controller;
 
-class ManagerManage extends FactoryStoreBase{
+class ManagerManage extends \common\controller\FactoryStoreBase{
+    protected $currentStore = null;
     public function __construct(){
         parent::__construct();
-        //采购商店铺列表
-        $this->getFactoryStoreList();
-        //当前店铺
-        $this->getCurrentStoreInfo((int)input('storeId'));
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
     }
 
     /**首页
@@ -88,8 +86,8 @@ class ManagerManage extends FactoryStoreBase{
             $modelUserStore = new \common\model\UserStore();
             $config = [
                 'field' => [
-                    'u.id','u.name','u.mobile_phone',
-                    'us.post','us.duty','us.id user_store_id',
+                    'u.id','u.mobile_phone',
+                    'us.post','us.duty','us.id user_store_id','us.user_name name',
                 ],'leftJoin' => [
                     ['user u','u.id = us.user_id'],
                 ],'where' => [
