@@ -4,13 +4,6 @@
 </section>
 <script type="text/javascript">
     $(function(){
-        var factoryStoreList='{:json_encode($factoryStoreList)}';
-        console.log(factoryStoreList);
-        console.log(typeof factoryStoreList);
-        //授权多家，选择管理店铺
-        if(factoryStoreList !== 'null'){
-            switchManagerStore();
-        }
         //选择管理店铺-样式
         $('body').on('click','.storeShopListLayer li',function(){
             $(this).addClass('current').siblings().removeClass('current');
@@ -43,7 +36,7 @@
                     dialog.error('请选择店家店铺');
                     return false;
                 }
-                var url = controller + 'manage/storeId/' +storeId;
+                var url = module + 'ManagerManage/manage/storeId/' +storeId;
                 location.href = url;
             }
         });
