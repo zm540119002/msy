@@ -78,11 +78,11 @@ class FactoryStoreBase extends \common\controller\UserBase{
             $model = new \common\model\Store();
             $config = [
                 'field' => [
-                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.store_type','s.run_type','s.is_default','s.operational_model',
                     's.consignee_name','s.consignee_mobile_phone','s.province','s.city','s.area','s.detail_address',
                     'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                     'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
-                    'f.id factory_id','f.name','f.type',
+                    'f.id factory_id','f.name factory_name','f.type factory_type',
                 ],'join' => [
                     ['factory f','f.id = s.factory_id','left'],
                     ['record r','r.id = s.foreign_id','left'],
