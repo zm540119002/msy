@@ -34,4 +34,18 @@ class Store{
     public static function remove($factorId){
         cache(self::$_cache_key.$factorId, null);
     }
+
+    /**缓存当前店铺信息
+     */
+    public static function cacheCurrentStoreInfo($storeInfo){
+        if($storeInfo){
+            cache(self::$_cache_key_manager_store, $storeInfo,config('custom.factory_cache_time'));
+        }
+    }
+
+    /**获取当前店铺信息
+     */
+    public static function getCurrentStoreInfo(){
+        return cache(self::$_cache_key_manager_store);
+    }
 }

@@ -3,8 +3,16 @@ namespace common\controller;
 
 class FactoryStoreBase extends UserBase{
     protected $_storeList = null;
-    protected $_currentStore = null;
     protected $_factoryStoreList = null;
+    private $_currentStore = null;
+
+    public function __construct(){
+        parent::__construct();
+        //采购商店铺列表
+        $this->getFactoryStoreList();
+        //当前店铺
+        $this->getCurrentStoreInfo((int)input('storeId'));
+    }
 
     /**组装店铺列表
      */
@@ -78,7 +86,7 @@ class FactoryStoreBase extends UserBase{
             $model = new \common\model\Store();
             $config = [
                 'field' => [
-                    's.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
                     's.consignee_name','s.consignee_mobile_phone','s.province','s.city','s.area','s.detail_address',
                     'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                     'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
@@ -97,6 +105,7 @@ class FactoryStoreBase extends UserBase{
         }elseif(count($this->_storeList)==1){
             $this->_currentStore = $this->_storeList[0];
         }
+        \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
         $this->assign('currentStore', $this->_currentStore);
     }
 }

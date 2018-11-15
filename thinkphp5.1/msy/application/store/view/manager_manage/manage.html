@@ -129,7 +129,8 @@
 							<input class="input-filed" type="text" name="consignee_name" value="{$store.consignee_name}" placeholder="收货人姓名">
 						</div>
 						<div>
-							<input class="input-filed" type="tel" name="consignee_mobile_phone" value="{$store.consignee_mobile_phone}" placeholder="收货人手机号码">
+							<input class="input-filed" type="tel" name="consignee_mobile_phone"
+								   value="{$store.consignee_mobile_phone}" placeholder="收货人手机号码">
 						</div>
 						<div class="express-area area-box">
 							<a id="expressArea2" href="javascript:void(0)" class="f24 form-group box-flex">
@@ -349,7 +350,7 @@
 						}
 					});
 					postData.id = _this.data('id');
-					postData.user_store_id = _this.data('user_store_id');
+					postData.userStoreId = _this.data('user_store_id');
 					var config = {
 						url:controller + 'editStoreEmployee',
 						postData:postData,
