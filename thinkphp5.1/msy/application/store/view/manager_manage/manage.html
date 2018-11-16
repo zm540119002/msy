@@ -186,6 +186,7 @@
         var province = '{$currentStore.province|default=""}';
         var city = '{$currentStore.city|default=""}';
         var area = '{$currentStore.area|default=""}';
+		console.log(province+'/n'+city+'/n'+area);
 		var region = [];
 		if(province && city && area){
 			region.push(province);
