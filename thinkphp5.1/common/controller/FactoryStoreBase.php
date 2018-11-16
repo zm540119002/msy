@@ -2,9 +2,9 @@
 namespace common\controller;
 
 class FactoryStoreBase extends UserBase{
+    private $_currentStore = null;
     protected $_storeList = null;
     protected $_factoryStoreList = null;
-    private $_currentStore = null;
 
     public function __construct(){
         parent::__construct();
@@ -107,5 +107,23 @@ class FactoryStoreBase extends UserBase{
         }
         \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
         $this->assign('currentStore', $this->_currentStore);
+    }
+
+    //获取店铺门店列表
+    protected function getStoreShopList($storeId=0){
+        $shopList = [];
+        if($storeId){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.store_id','=',$storeId],
+                ],
+            ];
+            $shopList = $modelShop->getList($config);
+        }
+        return $shopList;
     }
 }
