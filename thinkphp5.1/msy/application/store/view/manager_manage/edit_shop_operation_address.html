@@ -79,9 +79,10 @@
 		//门店经营地址信息
 		var shopId = '{$shopInfo.id}';
 		//省市区初始化
-		var operation_province = '{$shopInfo.operation_province}';
-		var operation_city = '{$shopInfo.operation_city}';
-		var operation_area = '{$shopInfo.operation_area}';
+		var operation_province = '{$shopInfo.operation_province|default=""}';
+		var operation_city = '{$shopInfo.operation_city|default=""}';
+		var operation_area = '{$shopInfo.operation_area|default=""}';
+		console.log(province+'/n'+city+'/n'+area);
 		var region = [];
 		if(operation_province && operation_city && operation_area){
 			region.push(operation_province);
