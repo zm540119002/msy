@@ -752,7 +752,7 @@
 						return false;
 					}
 					postData.shopId = _this.data('id');
-					postData.region = $('.area-address-name').getArea();
+					postData.region = $('.shop_consignee_info .area_address').getArea();
 					var config = {
 						url:controller + 'editShopConsigneeAddress',
 						postData:postData,
