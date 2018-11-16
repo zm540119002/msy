@@ -531,8 +531,7 @@
 						}
 					});
 					postData.id = _this.data('id');
-					postData.userShopId = _this.data('user_shop_id');
-					postData.shopId = dialogForm.find('[name=shop_id]').val();
+					postData.user_shop_id = _this.data('user_shop_id');
 					var config = {
 						url:controller + 'editShopEmployee',
 						postData:postData,

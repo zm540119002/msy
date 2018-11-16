@@ -134,8 +134,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
             $modelUserShop = new \app\store\model\UserShop();
             $config = [
                 'field' => [
-                    'u.id','u.name','u.mobile_phone',
-                    'us.id user_shop_id','us.post','us.duty','us.shop_id',
+                    'u.id','u.mobile_phone',
+                    'us.id user_shop_id','us.post','us.duty','us.shop_id','us.user_name name',
                 ],'leftJoin' => [
                     ['common.user u','u.id = us.user_id'],
                 ],'where' => [

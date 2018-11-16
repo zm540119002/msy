@@ -186,21 +186,21 @@ class ManagerManage extends \common\model\Base {
 			}
 			$userId = $this->getAttr('id');
 		}
-		if($postData['id'] && intval($postData['id']) && $postData['userShopId'] && intval($postData['userShopId'])){//修改
+		if($postData['id'] && intval($postData['id']) && $postData['user_shop_id'] && intval($postData['user_shop_id'])){//修改
 			if($postData['id'] != $userId){
 				$this->rollback();//回滚事务
 				return errorMsg('不能修改手机号码！');
 			}
 			$saveData = [
+				'shop_id' => $postData['shop_id'],
 				'user_name' => $postData['name'],
 				'post' => $postData['post'],
 				'duty' => $postData['duty'],
 			];
 			$where = [
-				['id','=',$postData['userShopId']],
+				['id','=',$postData['user_shop_id']],
 				['user_id','=',$userId],
 				['store_id','=',$storeId],
-				['shop_id','=',$postData['shop_id']],
 				['type','=',4],
 			];
 			$modelUserShop = new \app\store\model\UserShop();
