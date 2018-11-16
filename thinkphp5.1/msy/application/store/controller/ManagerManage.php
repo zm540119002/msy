@@ -198,7 +198,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
             $modelShop = new \app\store\model\Shop();
             $config = [
                 'field' => [
-                    's.id','s.name','s.logo_img','s.consignee_mobile_phone','s.consignee_name','s.consignee_address',
+                    's.id','s.name','s.logo_img','s.consignee_mobile_phone','s.consignee_name',
+                    's.consignee_address','s.consignee_province','s.consignee_city','s.consignee_area',
                 ],'where' => [
                     ['s.status','=',0],
                     ['s.store_id','=',$this->currentStore['id']],
