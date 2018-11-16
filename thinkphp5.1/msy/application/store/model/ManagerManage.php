@@ -156,6 +156,23 @@ class ManagerManage extends \common\model\Base {
 		return successMsg('成功！',$postData);
 	}
 
+	/**编辑店铺收货人信息
+	 */
+	public function editStoreConsigneeInfo($storeId){
+		$modelStore = new \common\model\Store();
+		$where = [
+			['id', '=', $storeId],
+			['status', '=', 0],
+		];
+		$postData = input('post.');
+		list($postData['province'],$postData['city'],$postData['area']) = $postData['region'];
+		$res = $modelStore->isUpdate(true)->save($postData,$where);
+		if($res===false){
+			return errorMsg('失败',$modelStore->getError());
+		}
+		return successMsg('成功');
+	}
+
 	//编辑
 	public function editShopEmployee($storeId){
 		if(!intval($storeId)){
@@ -403,23 +420,6 @@ class ManagerManage extends \common\model\Base {
 			}
 		}
 		$modelUserShop->commit();//事务提交
-		return successMsg('成功');
-	}
-
-	/**编辑店铺收货人信息
-	 */
-	public function editStoreConsigneeInfo($storeId){
-		$modelStore = new \common\model\Store();
-		$where = [
-			['id', '=', $storeId],
-			['status', '=', 0],
-		];
-		$postData = input('post.');
-		list($postData['province'],$postData['city'],$postData['area']) = $postData['region'];
-		$res = $modelStore->isUpdate(true)->save($postData,$where);
-		if($res===false){
-			return errorMsg('失败',$modelStore->getError());
-		}
 		return successMsg('成功');
 	}
 

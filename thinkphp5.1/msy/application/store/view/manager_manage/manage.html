@@ -68,7 +68,7 @@
 				<input type="hidden" value="" class="area-address-name" data-key="">
 			</a>
 			<div>
-				<input class="input-filed" type="text" name="detail_address" value="" placeholder="街道/小区/道/楼/门牌详细地址">
+				<input class="input-filed" type="text" name="consignee_address" value="" placeholder="街道/小区/道/楼/门牌详细地址">
 			</div>
 		</div>
 		<div class="input_item">
@@ -603,7 +603,7 @@
 				}
 			});
 		});
-		//收货人信息
+		//设置店铺收货人信息
 		$('body').on('click','.submit',function(){
 			var postData=$('.consignee_info_form').serializeObject();
 			var areaAddress=$('.area-address-name').val();
@@ -736,7 +736,7 @@
 					var content='';
 					if(!areaAddress){
 						content='请选择所在地区';
-					}else if(!postData.detail_address){
+					}else if(!postData.consignee_address){
 						content='请填写地区详细地址';
 					}
 					else if(!postData.consignee_name){
@@ -748,6 +748,7 @@
 						dialog.error(content);
 						return false;
 					}
+					postData.shopId = _this.data('id');
 					var config = {
 						url:controller + 'editShopConsigneeAddress',
 						postData:postData,
