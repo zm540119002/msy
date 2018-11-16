@@ -728,16 +728,16 @@
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
 					//省市区初始化
-        // var province = '{$currentStore.province|default=""}';
-        // var city = '{$currentStore.city|default=""}';
-        // var area = '{$currentStore.area|default=""}';
-		var region = [14,1,1];
-		// if(province && city && area){
-		// 	region.push(province);
-		// 	region.push(city);
-		// 	region.push(area);
-			$('.area_address').setArea(region);
-		// }
+					var province = '{$currentStore.province|default=""}';
+					var city = '{$currentStore.city|default=""}';
+					var area = '{$currentStore.area|default=""}';
+					var region = [];
+					if(province && city && area){
+						region.push(province);
+						region.push(city);
+						region.push(area);
+						$('.shop_consignee_info .area_address').setArea(region);
+					}
 					console.log(dialogForm);
 					copyDataByName(_this,dialogForm);
 				},
