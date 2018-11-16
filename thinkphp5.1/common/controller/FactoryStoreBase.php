@@ -10,7 +10,7 @@ class FactoryStoreBase extends UserBase{
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
-        //当前店铺
+        //获取当前店铺
         $this->getCurrentStoreInfo((int)input('storeId'));
     }
 

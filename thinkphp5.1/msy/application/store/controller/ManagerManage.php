@@ -3,11 +3,34 @@ namespace app\store\controller;
 
 class ManagerManage extends \common\controller\FactoryStoreBase{
     protected $currentStore = null;
+    private $_currentStoreShopList = null;
     public function __construct(){
         parent::__construct();
+        //获取当前店铺信息
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
+        //获取当前店铺门店列表
+        $this->_currentStoreShopList = $this->_getCurrentShopList($this->currentStore['id']);
+        $this->assign('currentStoreShopList',$this->_currentStoreShopList);
     }
 
+    private function _getCurrentShopList($storeId=0){
+        $shopList = [];
+        if($storeId){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.user_id','=',$this->user['id']],
+                    ['s.store_id','=',$storeId],
+                ],
+            ];
+            $shopList = $modelShop->getList($config);
+        }
+//        return $modelShop->getLastSql();
+        return $shopList;
+    }
     /**首页
      */
     public function index(){

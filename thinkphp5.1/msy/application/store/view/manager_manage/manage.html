@@ -42,8 +42,8 @@
         <div class="account-field">
             <span class="content-label">所属门店</span>
             <select name="shop_id">
-				{notempty name='shopList'}
-				{volist name="shopList" id="vo"}
+				{notempty name='currentStoreShopList'}
+				{volist name="currentStoreShopList" id="vo"}
 				<option value="{$vo.id}">{$vo.name}</option>
 				{/volist}
 				{/notempty}
