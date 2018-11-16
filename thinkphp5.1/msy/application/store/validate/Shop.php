@@ -17,10 +17,10 @@ class Shop extends \think\Validate{
         ],'operation_address'  => [
             'require',
             'max' => 128,
-        ],'consignee_mobile_phone'  => [
+        ],'consignee_name'  => [
             'require',
-            'max' => 15,
-        ],'consignee_fix_phone'  => [
+            'max' => 64,
+        ],'consignee_mobile_phone'  => [
             'require',
             'max' => 15,
         ],'consignee_address'  => [
@@ -46,8 +46,8 @@ class Shop extends \think\Validate{
             'operation_fix_phone',
             'operation_address',
         ],'consignee_address'  =>  [
+            'consignee_name',
             'consignee_mobile_phone',
-            'consignee_fix_phone',
             'consignee_address',
         ],
     ];

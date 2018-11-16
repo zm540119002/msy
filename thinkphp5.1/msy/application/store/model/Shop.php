@@ -27,8 +27,7 @@ class Shop extends \common\model\Base{
 		if(!$managerId){//不存在
 			$saveData = [
 				'name' => $postData['name'],
-				'type' => 0,
-				'factory_id' => $factoryId,
+				'type' => 1,
 				'mobile_phone' => $postData['mobile_phone'],
 				'create_time' => time(),
 			];

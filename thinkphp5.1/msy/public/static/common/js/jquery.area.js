@@ -580,7 +580,7 @@ var areaObject={
 		var areaKey=$('.area-address-name').data('key');
 		clockArea();
 		expressArea += district[p][c][d];
-		$("#expressArea .area_address").html(expressArea);
+		$(".express-area .area_address").html(expressArea);
 		if(!areaObject.provinceCityD.length){
 			
 			for(var i=0;i<arguments.length;i++){
@@ -623,7 +623,7 @@ function clockArea() {
 
 $(function() {
 	/*打开省市区选项*/
-	$('body').on('click','#expressArea',function(){
+	$('body').on('click','.express-area a',function(){
 		$("#areaMask").fadeIn();
 		$("#areaLayer").show().animate({"bottom": 0});
 	});
