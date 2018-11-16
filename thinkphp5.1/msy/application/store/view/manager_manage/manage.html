@@ -182,10 +182,11 @@
 	$(function(){
 		//页面初始化 
 		$('.content_main .section_content').eq(0).show();
-		//省市区初始化
+		// //省市区初始化
         var province = '{$currentStore.province|default=""}';
         var city = '{$currentStore.city|default=""}';
         var area = '{$currentStore.area|default=""}';
+		
 		var region = [];
 		if(province && city && area){
 			region.push(province);
@@ -726,7 +727,9 @@
 					var dialogForm = $('.shopConsigneeLayer .shop_consignee_info');
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
-					console.log(dialogForm);
+					//省市区初始化
+					region = [0,0,0];
+					$('.shop_consignee_info .area_address').setArea(region);
 					copyDataByName(_this,dialogForm);
 				},
 				yes:function(index){
@@ -749,6 +752,7 @@
 						return false;
 					}
 					postData.shopId = _this.data('id');
+					postData.region = $('.shop_consignee_info .area_address').getArea();
 					var config = {
 						url:controller + 'editShopConsigneeAddress',
 						postData:postData,
