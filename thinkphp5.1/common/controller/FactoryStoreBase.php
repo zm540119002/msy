@@ -97,7 +97,7 @@ class FactoryStoreBase extends UserBase{
                     ['brand b','b.id = s.foreign_id','left'],
                 ],'where' => [
                     ['s.status','=',0],
-                    ['s.id','=',$storeId],
+                    ['s.store_id','=',$storeId],
                 ],
             ];
             $storeInfo = $model->getInfo($config);
