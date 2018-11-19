@@ -82,13 +82,11 @@ class FactoryStoreBase extends UserBase{
     /**获取当前店铺信息
      */
     protected function getCurrentStoreInfo($storeId=0){
-        if(count($this->_storeList)==1){
-            $this->_currentStore = $this->_storeList[0];
-        }elseif($storeId){
+        if($storeId){
             $model = new \common\model\Store();
             $config = [
                 'field' => [
-                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.id store_id','s.store_type','s.run_type','s.is_default','s.operational_model',
                     's.consignee_name','s.consignee_mobile_phone','s.province','s.city','s.area','s.detail_address',
                     'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                     'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
@@ -104,6 +102,8 @@ class FactoryStoreBase extends UserBase{
             ];
             $storeInfo = $model->getInfo($config);
             $this->_currentStore = $storeInfo;
+        }elseif(count($this->_storeList)==1){
+            $this->_currentStore = $this->_storeList[0];
         }
         \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
         $this->assign('currentStore', $this->_currentStore);
