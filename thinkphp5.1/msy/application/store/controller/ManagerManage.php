@@ -8,6 +8,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
         parent::__construct();
         //获取当前店铺信息
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
+        print_r($this->currentStore);
         //获取当前店铺门店列表
         $this->_currentStoreShopList = $this->getStoreShopList($this->currentStore['id']);
         $this->assign('currentStoreShopList',$this->_currentStoreShopList);
@@ -28,7 +29,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
         if(request()->isAjax()){
             $countStoreList = count($this->_storeList);
             if($countStoreList==1) {
-                return successMsg('成功',['store_id'=>$this->currentStore['id']]);
+                return successMsg('成功',['id'=>$this->currentStore['id']]);
             }elseif($countStoreList>1){
                 return view('public/factory_store_list_tpl');
             }else{
@@ -87,7 +88,6 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取店铺员工列表
     public function getStoreEmployeeList(){
-        print_r($this->currentStore);
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
