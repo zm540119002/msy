@@ -88,7 +88,6 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else if(data.status==1){
-						return;
 						var url = module + 'ManagerManage/manage/storeId/' +data.store_id;
 						location.href = url;
 					}else{
