@@ -87,7 +87,6 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取店铺员工列表
     public function getStoreEmployeeList(){
-        print_r($this->currentStore);
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
