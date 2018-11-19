@@ -88,6 +88,8 @@
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
+					}else if(data.code==1){
+						loginDialog();
 					}else if(data.status==1){
 						var url = module + 'ManagerManage/manage/storeId/' +data.id;
 						location.href = url;
