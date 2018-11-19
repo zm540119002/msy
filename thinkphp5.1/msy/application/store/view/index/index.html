@@ -70,6 +70,7 @@
 		});
 		//店长管理
 		$('body').on('click','.manager_manage',function () {
+			var content = $('#storeShopInfo').html();
 			var url = module + 'ManagerManage/manage';
 			var postData = {};
 			$.ajax({
@@ -92,7 +93,7 @@
 						location.href = url;
 					}else{
 						$('#storeShopInfo').find('.store_list').empty().append(data);
-						switchManagerStore();
+						switchManagerStore(content);
 					}
 				}
 			});
