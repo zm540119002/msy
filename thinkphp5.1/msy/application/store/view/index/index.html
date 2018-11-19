@@ -88,11 +88,12 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else if(data.code==1){
+						console.log(data);
 						if(data.data == 'no_login'){
 							loginDialog();
 						}
 						if(data.data == 'no_factory_register'){
-							dialog.succsess(data.msg,module + 'Deploy/register')
+							dialog.success(data.msg,module + 'Deploy/register');
 						}
 
 					}else if(data.status==1){
