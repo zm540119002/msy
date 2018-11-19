@@ -35,8 +35,7 @@
                     return false;
                 }
 				var url = '{:url("index/UserCenter/login")}';
-                var postData = $('.loginLayer').find('#formLogin').serializeObject();
-                console.log(postData);
+                var postData = $layer.find('#formLogin').serializeObject();
                 $.ajax({
                     url:url,
                     type:'post',
