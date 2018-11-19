@@ -28,7 +28,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
         if(request()->isAjax()){
             $countStoreList = count($this->_storeList);
             if($countStoreList==1){
-                return successMsg('成功',$this->currentStore['id']);
+                return successMsg('成功',['id'=>$this->currentStore['id']]);
             }elseif($countStoreList>0){
                 return view('public/factory_store_list_tpl');
             }else{
