@@ -82,7 +82,9 @@ class FactoryStoreBase extends UserBase{
     /**获取当前店铺信息
      */
     protected function getCurrentStoreInfo($storeId=0){
-        if($storeId){
+        if(count($this->_storeList)==1){
+            $this->_currentStore = $this->_storeList[0];
+        }elseif($storeId){
             $model = new \common\model\Store();
             $config = [
                 'field' => [
@@ -102,8 +104,6 @@ class FactoryStoreBase extends UserBase{
             ];
             $storeInfo = $model->getInfo($config);
             $this->_currentStore = $storeInfo;
-        }elseif(count($this->_storeList)==1){
-            $this->_currentStore = $this->_storeList[0];
         }
         \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
         $this->assign('currentStore', $this->_currentStore);
