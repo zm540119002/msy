@@ -32,8 +32,6 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                 return errorMsg('未授权！');
             }
         }else{
-            //获取当前店铺信息
-            $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
             //岗位
             $post = config('permission.post');
             $this->assign('post', $post);
@@ -51,6 +49,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**店铺员工-编辑
      */
     public function editStoreEmployee(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -69,6 +69,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**门店员工-编辑
      */
     public function editShopEmployee(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -86,6 +88,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取店铺员工列表
     public function getStoreEmployeeList(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -129,6 +133,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取门店员工列表
     public function getShopEmployeeList(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -172,6 +178,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取门店经营地址列表
     public function getShopOperationAddressList(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -193,6 +201,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取门店收货人地址列表
     public function getShopConsigneeAddressList(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -216,6 +226,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**编辑店铺收货人信息
      */
     public function editStoreConsigneeInfo(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -229,6 +241,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**编辑门店经营地址信息
      */
     public function editShopOperationAddress(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -278,6 +292,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**编辑门店收货人地址
      */
     public function editShopConsigneeAddress(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -331,6 +347,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**删除店铺员工
      */
     public function delStoreEmployee(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
@@ -343,6 +361,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**删除门店员工
      */
     public function delShopEmployee(){
+        //获取当前店铺信息
+        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
