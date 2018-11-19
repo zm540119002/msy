@@ -88,9 +88,13 @@
 					if(data.status==0){
 						dialog.error(data.info);
 					}else if(data.code==1){
-						loginDialog();
-					}else if(data.code==0){
-						loginDialog();
+						if(data.data == 'no_login'){
+							loginDialog();
+						}
+						if(data.data == 'no_factory_register'){
+							dialog.succsess(data.msg,module + 'Deploy/register')
+						}
+
 					}else if(data.status==1){
 						location.href = url;
 					}else{
@@ -119,7 +123,7 @@
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
-					}else if(data.code==1){
+					}else if(data.code==1 && data.data=='no_login'){
 						loginDialog();
 					}else if(data.status==1){
 						var url = module + 'ManagerManage/manage/storeId/' +data.id;
