@@ -4,11 +4,9 @@ namespace app\store\controller;
 class ManagerManage extends \common\controller\FactoryStoreBase{
     protected $currentStore = null;
     protected $_currentStoreShopList = null;
-    
+
     public function __construct(){
         parent::__construct();
-        //获取当前店铺信息
-        $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
         //获取当前店铺门店列表
         $this->_currentStoreShopList = $this->getStoreShopList($this->currentStore['id']);
         $this->assign('currentStoreShopList',$this->_currentStoreShopList);
@@ -34,6 +32,8 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                 return errorMsg('未授权！');
             }
         }else{
+            //获取当前店铺信息
+            $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
             //岗位
             $post = config('permission.post');
             $this->assign('post', $post);
