@@ -1,3 +1,75 @@
 <section id="userLoginForm" style="display:none;">
 	{include file="template/login_common.html" /}
 </section>
+<script type="text/javascript">
+   var userLoginForm=$('#userLoginForm').html();
+    //登录触发
+    var loginLayer = null;
+	
+    function loginDialog(func){
+		
+        window.scrollTo(0,0);
+        loginLayer = layer.open({
+            className:'loginLayer',
+            content:userLoginForm,
+			title:['登录','border-bottom:1px solid #d9d9d9;'],
+            btn:'登录',
+            success:function(){
+                tab_down('.loginNav li','.loginTab .login_wrap','click');
+                $('.layui-m-layershade').on('touchmove',function(e){
+                    event.preventDefault(); 
+                });
+            },
+            yes:function(index){
+                var $layer = $('.loginLayer').find('.active');
+                var _index =$('.loginLayer').find('.login_wrap.active').index();
+                var content='';
+                //验证
+                switch(_index){
+                    case 0:
+                        var userName=$layer.find('.user_name').val();
+                        var password=$layer.find('.password').val();
+                        if(!checkAccount(userName)){
+                            content='请输入正确用户名';
+                        }else if(!register.pswCheck(password)){
+                            content = "请输入6-16数字或字母的密码";
+                        }
+                        break;
+                    case 1:
+                        var userPhone=$layer.find('.user_phone').val();
+                        var verifiCode=$layer.find('.tel_code').val();
+                        if(!register.phoneCheck(userPhone)){
+                            content='请输入正确手机号';
+                        }else if(!register.vfyCheck(verifiCode)){
+                            content = "请输入正确的验证码";
+                        }
+                        break;
+                }
+                if(content){
+                    errorTipc(content);
+                    return false;
+                }
+				var url = '{:url("/Home/User/login")}';
+                var postData = $('.loginLayer').find('#formLogin').serializeObject();
+                $.ajax({
+                    url:url,
+                    type:'post',
+                    data:postData,
+                    error:function(xhr){},
+                    success:function(data){
+                        if(data.status==0){
+                            errorTipc(data.info);
+                            return false;
+                        }else if(data.status==1){
+                            if(func && $.isFunction(func)){
+                                func();
+                            }
+                            layer.close(index);
+                        }
+                    }
+                });
+               
+            }
+        });
+    };
+</script>
