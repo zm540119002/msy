@@ -35,6 +35,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                 return errorMsg('未授权！');
             }
         }else{
+            print_r($this->currentStore);
             //岗位
             $post = config('permission.post');
             $this->assign('post', $post);
