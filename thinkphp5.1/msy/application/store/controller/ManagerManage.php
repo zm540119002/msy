@@ -90,6 +90,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     public function getStoreEmployeeList(){
         //获取当前店铺信息
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo();
+        print_r($this->currentStore);
         if(!($this->currentStore['id'])){
             return errorMsg('请选择店铺！');
         }
