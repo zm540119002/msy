@@ -430,7 +430,7 @@ class ManagerManage extends \common\model\Base {
 		$where = [
 			['user_id','=',$userId],
 			['store_id','=',$storeId],
-			['status','=',2],
+			['status','<>',2],
 			['type','=',4],
 		];
 		return $modelUserStore->where($where)->value('id');

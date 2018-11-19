@@ -728,8 +728,16 @@
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
 					//省市区初始化
-					region = [0,0,0];
-					$('.shop_consignee_info .area_address').setArea(region);
+					province = _this.data('consignee_province');
+					city = _this.data('consignee_city');
+					area = _this.data('consignee_area');
+					region = [];
+					if(province && city && area){
+						region.push(province);
+						region.push(city);
+						region.push(area);
+						$('.shop_consignee_info .area_address').setArea(region);
+					}
 					copyDataByName(_this,dialogForm);
 				},
 				yes:function(index){
