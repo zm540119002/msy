@@ -49,7 +49,7 @@
                     errorTipc(content);
                     return false;
                 }
-				var url = '{:url("/Home/User/login")}';
+				var url = '{:url("Index/userCenter/login")}';
                 var postData = $('.loginLayer').find('#formLogin').serializeObject();
                 $.ajax({
                     url:url,
