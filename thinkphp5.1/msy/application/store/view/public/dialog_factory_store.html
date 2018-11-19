@@ -9,9 +9,10 @@
             $(this).addClass('current').siblings().removeClass('current');
             $(this).parent().siblings().find('li').removeClass('current');
         });
-        var content = $('#storeShopInfo').html();
+        content = $('#storeShopInfo').html();
     });
     //选择管理店铺-确定
+    var content;
     function switchManagerStore(){
         layer.open({
             title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
