@@ -3,7 +3,12 @@ namespace app\store\controller;
 class Store extends \common\controller\FactoryBase{
     //开店部署首页
     public function index(){
-        return $this->fetch('index');
+        if(request()->isAjax()){
+            return successMsg('成功');
+        }else{
+            return $this->fetch();
+        }
+
     }
 
     /**店铺管理

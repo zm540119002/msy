@@ -33,7 +33,7 @@
 	</section>
 	<section class="module-navigation separation-line ">
 		<div class="columns_flex f20 channel_nav store_organize_nav">
-			<a href="{:url('Store/index')}" class="deployed-deployment"><span class="union_purchase"></span>入驻部署</a>
+			<a href="javascript:void(0);" class="deployed-deployment"><span class="union_purchase"></span>入驻部署</a>
 			<a href="javascript:void(0);" class="store_run manager_manage"><span class="exclusive"></span>店长管理</a>
 			<a href="{:url('Operation/index')}" class="order-management"><span class="classify"></span>店铺运营</a>
 			<a href="{:url('Order/index')}" class="order-management-change"><span class="purchasers"></span>门店订单</a>
@@ -68,6 +68,38 @@
 				clickable: true
 			}
 		});
+		//入驻部署
+		$('body').on('click','.deployed-deployment',function () {
+			var url = module + 'Store/index';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1){
+						loginDialog();
+					}else if(data.code==0){
+						loginDialog();
+					}else if(data.status==1){
+						location.href = url;
+					}else{
+
+					}
+				}
+			});
+		});
+
 		//店长管理
 		var content = $('#storeShopInfo').html();
 		$('body').on('click','.manager_manage',function () {

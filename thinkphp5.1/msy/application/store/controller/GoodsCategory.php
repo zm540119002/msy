@@ -25,6 +25,4 @@ class GoodsCategory extends UserBase
             return $this->fetch('template/category_second.html');
         }
     }
-
-
 }
