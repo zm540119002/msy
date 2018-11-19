@@ -87,8 +87,9 @@
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
-					}else if(ata.status==1){
+					}else if(data.status==1){
 						var url = module + 'ManagerManage/manage/storeId/' +data.store_id;
+						console.log(url);
 						location.href = url;
 					}else{
 						$('#storeShopInfo').find('.store_list').empty().append(data);
