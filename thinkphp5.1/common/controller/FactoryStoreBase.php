@@ -2,7 +2,7 @@
 namespace common\controller;
 
 class FactoryStoreBase extends UserBase{
-    private $_currentStore = null;
+    protected $_currentStore = null;
     protected $_storeList = null;
     protected $_factoryStoreList = null;
 
@@ -11,7 +11,40 @@ class FactoryStoreBase extends UserBase{
         //采购商店铺列表
         $this->getFactoryStoreList();
         //获取当前店铺
-        $this->getCurrentStoreInfo((int)input('storeId'));
+        $storeId = (int)input('storeId');
+        $this->getCurrentStoreInfo($storeId);
+    }
+
+    /**获取当前店铺信息
+     */
+    protected function getCurrentStoreInfo($storeId=0){
+        $countStoreList = count($this->_storeList);
+        if($storeId){
+            $model = new \common\model\Store();
+            $config = [
+                'field' => [
+                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.consignee_name','s.consignee_mobile_phone','s.province','s.city','s.area','s.detail_address',
+                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
+                    'f.id factory_id','f.name factory_name','f.type factory_type',
+                ],'join' => [
+                    ['factory f','f.id = s.factory_id','left'],
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left'],
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.id','=',$storeId],
+                ],
+            ];
+            $storeInfo = $model->getInfo($config);
+            $this->_currentStore = $storeInfo;
+        }elseif($countStoreList==1){
+            $this->_currentStore = $this->_storeList[0];
+            $this->_currentStore['id'] = $this->_currentStore['store_id'];
+        }
+        \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
+        $this->assign('currentStore', $this->_currentStore);
     }
 
     /**组装店铺列表
@@ -77,34 +110,6 @@ class FactoryStoreBase extends UserBase{
         ];
         $storeList = $model->getList($config);
         $this->_storeList = $storeList;
-    }
-
-    /**获取当前店铺信息
-     */
-    protected function getCurrentStoreInfo($storeId=0){
-        if($storeId){
-            $model = new \common\model\Store();
-            $config = [
-                'field' => [
-                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
-                    's.consignee_name','s.consignee_mobile_phone','s.province','s.city','s.area','s.detail_address',
-                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
-                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
-                    'f.id factory_id','f.name factory_name','f.type factory_type',
-                ],'join' => [
-                    ['factory f','f.id = s.factory_id','left'],
-                    ['record r','r.id = s.foreign_id','left'],
-                    ['brand b','b.id = s.foreign_id','left'],
-                ],'where' => [
-                    ['s.status','=',0],
-                    ['s.id','=',$storeId],
-                ],
-            ];
-            $storeInfo = $model->getInfo($config);
-            $this->_currentStore = $storeInfo;
-            \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
-            $this->assign('currentStore', $this->_currentStore);
-        }
     }
 
     //获取店铺门店列表
