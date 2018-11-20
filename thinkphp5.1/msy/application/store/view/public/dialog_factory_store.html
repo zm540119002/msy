@@ -32,10 +32,6 @@
             btn:['确定','取消'],
             yes:function(index){
                 var storeId = $('.storeShopListLayer li.current').data('id');
-                if(!storeId){
-                    dialog.error('请选择店家店铺');
-                    return false;
-                }
                 var url = module + 'ManagerManage/manage/storeId/' +storeId;
                 location.href = url;
             }
