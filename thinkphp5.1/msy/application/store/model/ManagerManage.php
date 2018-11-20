@@ -316,6 +316,7 @@ class ManagerManage extends \common\model\Base {
 					return errorMsg('失败',$modelUserShopNode->getError());
 				}
 			}
+			$postData['id'] = $userId;
 			$postData['user_shop_id'] = $userShopId;
 		}
 		$this->commit();//事务提交
