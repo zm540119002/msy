@@ -33,10 +33,10 @@
 	</section>
 	<section class="module-navigation separation-line ">
 		<div class="columns_flex f20 channel_nav store_organize_nav">
-			<a href="{:url('Store/index')}" class="deployed-deployment"><span class="union_purchase"></span>入驻部署</a>
+			<a href="javascript:void(0);" class="deployed-deployment"><span class="union_purchase"></span>入驻部署</a>
 			<a href="javascript:void(0);" class="store_run manager_manage"><span class="exclusive"></span>店长管理</a>
 			<a href="{:url('Operation/index')}" class="order-management"><span class="classify"></span>店铺运营</a>
-			<a href="{:url('Order/index')}" class="order-management-change"><span class="purchasers"></span>门店订单</a>
+			<a href="{:url('Order/index')}" class="order-management-change"><span class="purchasers"></span>订单客服</a>
 			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>财务结算</a>
 		</div>
 	</section>
@@ -68,6 +68,43 @@
 				clickable: true
 			}
 		});
+		//入驻部署
+		$('body').on('click','.deployed-deployment',function () {
+			var url = module + 'Store/index';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1){
+						console.log(data);
+						if(data.data == 'no_login'){
+							loginDialog();
+						}
+						if(data.data == 'no_factory_register'){
+							dialog.success(data.msg,module + 'Deploy/register');
+						}
+
+					}else if(data.status==1){
+						location.href = url;
+					}else{
+
+					}
+				}
+			});
+		});
+
 		//店长管理
 		$('body').on('click','.manager_manage',function () {
 			var url = module + 'ManagerManage/manage';
@@ -87,7 +124,7 @@
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
-					}else if(data.code==1){
+					}else if(data.code==1 && data.data=='no_login'){
 						loginDialog();
 					}else if(data.status==1){
 						var url = module + 'ManagerManage/manage/storeId/' +data.id;

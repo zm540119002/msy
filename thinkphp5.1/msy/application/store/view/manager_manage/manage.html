@@ -179,6 +179,38 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
+	//获取店铺员工账号列表
+	function getStoreEmployeeList() {
+		var config = {
+			url: controller + 'getStoreEmployeeList',
+			container: $('#storeEmployeeList').find('ul.list')
+		};
+		getList(config);
+	}
+	//获取门店员工账号列表
+	function getShopEmployeeList() {
+		var config = {
+			url: controller + 'getShopEmployeeList',
+			container: $('#shopEmployeeList').find('ul.list')
+		};
+		getList(config);
+	}
+	//获取门店经营地址列表
+	function getShopOperationList() {
+		var config = {
+			url: controller + 'getShopOperationAddressList',
+			container: $('#shopAddressList').find('ul.list')
+		};
+		getList(config);
+	}
+	//获取门店收货人地址列表
+	function getShopConsigneeList() {
+		var config = {
+			url: controller + 'getShopConsigneeAddressList',
+			container: $('#shopConsigneeList').find('ul.list')
+		};
+		getList(config);
+	}
 	$(function(){
 		//页面初始化 
 		$('.content_main .section_content').eq(0).show();
@@ -194,35 +226,64 @@
 			region.push(area);
 			$('.area_address').setArea(region);
 		}
-
-		var currentStore = '{$currentStore}';
-		if(currentStore){
-			//获取店铺员工账号列表
-			var config = {
-				url: controller + 'getStoreEmployeeList',
-				container: $('#storeEmployeeList').find('ul.list')
-			};
-			getList(config);
-			//获取门店员工账号列表
-			config = {
-				url: controller + 'getShopEmployeeList',
-				container: $('#shopEmployeeList').find('ul.list')
-			};
-			getList(config);
-			//获取门店经营地址列表
-			config = {
-				url: controller + 'getShopOperationAddressList',
-				container: $('#shopAddressList').find('ul.list')
-			};
-			getList(config);
-			//获取门店收货人地址列表
-			config = {
-				url: controller + 'getShopConsigneeAddressList',
-				container: $('#shopConsigneeList').find('ul.list')
-			};
-			getList(config);
-		}
-
+		//获取店铺员工账号列表
+		getStoreEmployeeList();
+		//门店店长管理和店铺店长管理切换
+		$('body').on('click','.store_deploy_bar a',function(){
+			var typeId=$(this).data('type');
+			$(this).addClass('current').siblings().removeClass('current');
+			if(typeId=='online'){
+				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
+				$('.top_empy_nav a').removeClass('current');
+				$('.top_empy_nav a:first').addClass('current');
+				$('.content_main .section_content').hide();
+				$('.content_main section').eq(0).show();
+				//获取店铺员工账号列表
+				getStoreEmployeeList();
+			}else{
+				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
+				$('.top_empy_nav a').removeClass('current');
+				$('.top_empy_nav').eq(1).find('a:first').addClass('current');
+				$('.content_main .section_content').hide();
+				$('.content_main').find('#shopEmployeeList').show();
+				//获取门店员工账号列表
+				getShopEmployeeList();
+			}
+		});
+		$('body').on('click','.top_empy_nav a',function(){
+			var typeId=$(this).data('type');
+			$(this).addClass('current').siblings().removeClass('current');
+			switch(typeId){
+				case 0:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#storeEmployeeList').show();
+					//获取店铺员工账号列表
+					getStoreEmployeeList();
+					break;
+				case 1:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#consigneeInfo').show();
+					break;
+				case 2:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#shopEmployeeList').show();
+					//获取门店员工账号列表
+					getShopEmployeeList();
+					break;
+				case 3:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#shopAddressList').show();
+					//获取门店经营地址列表
+					getShopOperationList();
+					break;
+				case 4:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#shopConsigneeList').show();
+					//获取门店收货人地址列表
+					getShopConsigneeList();
+					break;
+			}
+		});
 		//新增线上店铺员工账号
 		var storeEmployeeSection=$('#storeEmployeeSection').html();
 		$('body').on('click','.add_online_account',function(){
@@ -353,7 +414,7 @@
 						}
 					});
 					postData.id = _this.data('id');
-					postData.userStoreId = _this.data('user_store_id');
+					postData.user_store_id = _this.data('user_store_id');
 					var config = {
 						url:controller + 'editStoreEmployee',
 						postData:postData,
@@ -659,51 +720,6 @@
 			$(this).parents('.store_list').find('li').removeClass('current');
 			$(this).addClass('current').siblings().removeClass('current');
 		});
-		//门店店长管理和店铺店长管理切换
-		$('body').on('click','.store_deploy_bar a',function(){
-			var typeId=$(this).data('type');
-			$(this).addClass('current').siblings().removeClass('current');
-			
-			if(typeId=='online'){
-				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
-				$('.top_empy_nav a').removeClass('current');
-				$('.top_empy_nav a:first').addClass('current');
-				$('.content_main .section_content').hide();
-				$('.content_main section').eq(0).show();
-			}else{
-				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
-				$('.top_empy_nav a').removeClass('current');
-				$('.top_empy_nav').eq(1).find('a:first').addClass('current');
-				$('.content_main .section_content').hide();
-				$('.content_main').find('#shopEmployeeList').show();
-				
-			}	
-		});
-		$('body').on('click','.top_empy_nav a',function(){
-			var typeId=$(this).data('type');
-			$(this).addClass('current').siblings().removeClass('current');
-			switch(typeId){
-				case 0:
-					$('.section_content').siblings().hide();
-					$('.content_main').find('#storeEmployeeList').show();
-					break;
-				case 1:
-					$('.section_content').siblings().hide();
-					$('.content_main').find('#consigneeInfo').show();
-					break;
-				case 2:
-					$('.section_content').siblings().hide();
-					$('.content_main').find('#shopEmployeeList').show();
-					break;
-				case 3:
-					$('.section_content').siblings().hide();
-					$('.content_main').find('#shopAddressList').show();
-					break;
-				case 4:
-					$('.section_content').siblings().hide();
-					$('.content_main').find('#shopConsigneeList').show();
-			}
-		});
 		//编辑门店经营地址
 		$('body').on('click','#shopAddressList li',function(){
 			var _this = $(this);
@@ -770,8 +786,7 @@
 					dialogFormEdit(config);
 				}
 			});
-				
-		})
+		});
 	});
 </script>
 {/block}

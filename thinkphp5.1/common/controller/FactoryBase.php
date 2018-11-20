@@ -13,7 +13,7 @@ class FactoryBase extends UserBase{
         $this->assign('factoryList',$factoryList);
         $factoryCount = count($factoryList);
         if ($factoryCount==0){//没有入住供应商
-            $this->error('没有入驻，请入住', 'Deploy/register');
+            $this->success('没有入驻，请入驻',url('Deploy/register'),'no_factory_register',0);
         }elseif($factoryCount==1){//入住一家供应商
             $this->factory = $factoryList[0];
         }elseif($factoryCount>1){//入住多家供应商
