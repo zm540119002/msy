@@ -102,9 +102,9 @@ class FactoryStoreBase extends UserBase{
             ];
             $storeInfo = $model->getInfo($config);
             $this->_currentStore = $storeInfo;
+            \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
+            $this->assign('currentStore', $this->_currentStore);
         }
-        \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
-        $this->assign('currentStore', $this->_currentStore);
     }
 
     //获取店铺门店列表
