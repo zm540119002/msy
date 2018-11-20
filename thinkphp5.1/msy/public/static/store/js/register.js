@@ -68,7 +68,7 @@ $(function(){
                 $('.apply-module:eq(2)').show();
                 $('.weui-flex-item:eq(0)').addClass('disabled');
                 $('.weui-flex-item:eq(1)').addClass('disabled');
-                dialog.success(msg.info,module+'Index/index');
+                dialog.success(msg.info,module+'Store/index');
             }
         });
     });
