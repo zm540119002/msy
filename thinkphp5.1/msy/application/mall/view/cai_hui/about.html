@@ -23,14 +23,15 @@
 			
 		}
 		.header_left{
-			width:100px;
+			width:300px;
 			float:left;
 		}
 		.header_right{
 			float:right;
 			width:500px;
 		}
-		.header_right li{
+		.header_right li,
+		.header_left li{
 			float:left;
 			width:100px;
 			text-align:center;
@@ -75,27 +76,38 @@
 		.contact_text p{
 			line-height: 26px;
 		}
+		.banner{
+			height:550px;
+			background:url(caihui_img/top-banner.jpg) no-repeat center;
+		}
 	</style>
 </head>
 <body>
 <header>
-<div class="header_menu">
-	<div class="header_left">
-		<img src="" alt="">
+	<div class="header_menu">
+		<!--<div class="header_left">
+			<img src="" alt="">
+		</div>-->
+		<ul class="header_left">
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/index" class="current">关于我们</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/about1">关于美尚云</a></li>
+		</ul>
 	</div>
-	<ul class="header_right">
-		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/index">首页</a></li>
-		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/goods">产品展示</a></li>
-		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/about" class="current">关于我们</a></li>
-		<li><a href="{:Request::domain()}/index.php/mall/CaiHui/contact">联系方式</a></li>
-	</ul>
-</div>
 </header>
+<div class="banner"></div>
 <div class="content_wrapper">
-	<div class="contact_text">
-		<p>美尚云生态圈平台聚焦美健康产业，致力打造美丽云和健康云平台，面对全国数以万计的美容机构、百万数量级的从业人员和千万的消费者，
-	打造科技美肤采购平台、精准健康分成平台和美业众创空间等平台以及美尚会新零售共享商城，一站式赋能满足用户可持续发展需求。</p>
+	<!--<div>
+		<img src="caihui_img/bottom-01.jpg" alt="">
 	</div>
+	<div>
+		<img src="caihui_img/bottom-02.jpg" alt="">
+	</div>
+	<div>
+		<img src="caihui_img/bottom-03.jpg" alt="">
+	</div>
+	<div>
+		<img src="caihui_img/bottom-04.jpg" alt="">
+	</div>-->
 </div>
 </body>
 </html>

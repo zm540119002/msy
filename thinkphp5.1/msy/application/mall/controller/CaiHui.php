@@ -16,7 +16,10 @@ class CaiHui extends \common\controller\Base{
     public function about(){
         return $this->fetch();
     }
-
+    //关于美尚云
+    public function about1(){
+        return $this->fetch();
+    }
     //联系方式
     public function contact(){
         return $this->fetch();
