@@ -40,7 +40,7 @@ class ManagerManage extends \common\model\Base {
 			$userId = $this->getAttr('id');
 		}
 		$this->startTrans();//事务开启
-		if($postData['id'] && intval($postData['id']) && $postData['userStoreId'] && intval($postData['userStoreId'])){//修改
+		if($postData['id'] && intval($postData['id']) && $postData['user_store_id'] && intval($postData['user_store_id'])){//修改
 			if($postData['id'] != $userId){
 				$this->rollback();//回滚事务
 				return errorMsg('不能修改手机号码！');
@@ -51,7 +51,7 @@ class ManagerManage extends \common\model\Base {
 				'duty' => $postData['duty'],
 			];
 			$where = [
-				'id' => $postData['userStoreId'],
+				'id' => $postData['user_store_id'],
 				'store_id' => $storeId,
 				'type' => 4,
 				'status' => 0,
