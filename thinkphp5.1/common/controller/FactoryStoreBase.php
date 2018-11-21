@@ -9,6 +9,11 @@ class FactoryStoreBase extends UserBase{
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
+        //缓存当前店铺ID
+        $storeId = (int)input('storeId');
+        if($storeId){
+            session('currentStoreId',$storeId);
+        }
     }
 
     /**组装店铺列表
