@@ -3,7 +3,6 @@ namespace common\cache;
 
 class Store{
     private static $_cache_key = 'cache_store_';
-    private static $_cache_key_current_store = 'cache_current_store_';
 
     /**从缓存中获取入驻厂商店铺列表
      */

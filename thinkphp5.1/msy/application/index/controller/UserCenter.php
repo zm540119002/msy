@@ -40,6 +40,7 @@ class UserCenter extends \think\Controller{
     public function logout(){
         session('user', null);
         session('user_sign', null);
+        session('currentStoreId', null);
         header('Content-type: text/html; charset=utf-8');
         return redirect('login');
     }
