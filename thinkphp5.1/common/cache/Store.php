@@ -38,7 +38,7 @@ class Store{
     /**缓存当前店铺信息
      */
     public static function getCurrentStoreInfo($userId,$storeId,$storeList){
-        $storeInfo = cache(self::$_cache_key.$userId,$storeId);
+        $storeInfo = cache(self::$_cache_key_manager_store.$userId,$storeId);
         $countStoreList = count($storeList);
         if($storeId){
             $model = new \common\model\UserStore();
@@ -68,21 +68,13 @@ class Store{
             $storeInfo = $storeList[0];
             $storeInfo['id'] = $storeInfo['store_id'];
         }
-        cache(self::$_cache_key.$userId.$storeId,$storeInfo,config('custom.factory_cache_time'));
+        cache(self::$_cache_key.$userId.$storeId,$storeInfo,config('custom.current_store_cache_time'));
         return $storeInfo;
     }
 
-    /**缓存当前店铺信息
-     */
-    public static function cacheCurrentStoreInfo($storeInfo){
-        if($storeInfo){
-            cache(self::$_cache_key_manager_store, $storeInfo,config('custom.factory_cache_time'));
-        }
-    }
-
-    /**获取当前店铺信息
+    /**删除当前店铺缓存信息
      */
     public static function removeCurrentStoreInfo($userId,$storeId){
-        cache(self::$_cache_key.$userId.$storeId, null);
+        cache(self::$_cache_key_manager_store.$userId.$storeId, null);
     }
 }

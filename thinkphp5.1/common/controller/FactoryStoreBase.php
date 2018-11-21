@@ -10,14 +10,11 @@ class FactoryStoreBase extends UserBase{
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
-        //获取当前店铺
-        $storeId = (int)input('storeId');
-        $this->getCurrentStoreInfo($storeId);
     }
 
     /**获取当前店铺信息
      */
-    protected function getCurrentStoreInfo($storeId=0){
+    protected function getCurrentStoreInfo1($storeId=0){
         $countStoreList = count($this->_storeList);
         if($storeId){
             $model = new \common\model\Store();
