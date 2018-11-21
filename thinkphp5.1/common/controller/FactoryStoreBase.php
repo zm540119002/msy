@@ -16,6 +16,43 @@ class FactoryStoreBase extends UserBase{
         }
     }
 
+    /**缓存当前店铺信息
+     */
+    protected function getCurrentStoreInfo($userId,$storeId,$storeList){
+        $countStoreList = count($storeList);
+        if($storeId){
+            $model = new \common\model\UserStore();
+            $config = [
+                'field' => [
+                    'us.id user_store_id','us.user_id','us.user_name',
+                    's.id store_id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.consignee_name','s.consignee_mobile_phone','s.detail_address',
+                    's.province','s.city','s.area',
+                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
+                    'f.id factory_id','f.name factory_name','f.type factory_type',
+                ],'join' => [
+                    ['store s','s.id = us.store_id','left'],
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left'],
+                    ['factory f','f.id = us.factory_id','left'],
+                ],'where' => [
+                    ['us.status','=',0],
+                    ['us.user_id','=',$userId],
+                    ['s.status','=',0],
+                    ['s.id','=',$storeId],
+                    ['f.status','=',0],
+                    ['f.type','=',config('custom.type')],
+                ],
+            ];
+            $storeInfo = $model->getInfo($config);
+        }elseif($countStoreList==1){
+            $storeInfo = $storeList[0];
+        }
+        $storeInfo['id'] = $storeInfo['store_id'];
+        return $storeInfo;
+    }
+
     /**组装店铺列表
      */
     protected function getFactoryStoreList(){

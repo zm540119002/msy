@@ -38,8 +38,7 @@ class Store{
     /**缓存当前店铺信息
      */
     public static function getCurrentStoreInfo($userId,$storeId,$storeList){
-        $storeInfo = cache(self::$_cache_key_current_store.$userId.$storeId);
-        if(!$storeInfo){
+        if($userId && $storeId){
             $countStoreList = count($storeList);
             if($storeId){
                 $model = new \common\model\UserStore();
@@ -71,7 +70,6 @@ class Store{
                 $storeInfo = $storeList[0];
             }
             $storeInfo['id'] = $storeInfo['store_id'];
-            cache(self::$_cache_key_current_store.$userId.$storeId,$storeInfo,config('custom.current_store_cache_time'));
         }
         return $storeInfo;
     }
