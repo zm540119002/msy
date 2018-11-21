@@ -19,6 +19,12 @@
 			margin:0 auto;
 			overflow:hidden;
 		}
+		.header_menu a{
+			color:#fff;
+		}
+		.header_menu a.current {
+			border-bottom: 1px solid #fff;
+		}
 		.header_left{
 			width:300px;
 			float:left;
@@ -27,14 +33,10 @@
 			float:right;
 			width:500px;
 		}
-		.header_right li,
-		.header_left li{
+		.header_right li{
 			float:left;
 			width:100px;
 			text-align:center;
-		}
-		.header_left li a{
-			color:#fff;
 		}
 		.section{
             position:relative;
@@ -91,12 +93,15 @@
 <body>
 <header>
 	<div class="header_menu">
-		<!--<div class="header_left">
+		<div class="header_left">
 			<img src="" alt="">
-		</div>-->
-		<ul class="header_left">
-			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/index" >关于我们</a></li>
-			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/goods" class="current">关于美尚云</a></li>
+		</div>
+		<ul class="header_right">
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/index" >首页</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/goods">产品展示</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/about">关于我们</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/about1" class="current">关于美尚云</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/contact">联系方式</a></li>
 		</ul>
 	</div>
 </header>
