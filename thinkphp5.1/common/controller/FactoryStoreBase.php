@@ -20,6 +20,7 @@ class FactoryStoreBase extends UserBase{
      */
     protected function getCurrentStoreInfo($userId,$storeId,$storeList){
         $countStoreList = count($storeList);
+        $storeInfo = [];
         if($storeId){
             $model = new \common\model\UserStore();
             $config = [
