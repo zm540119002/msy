@@ -3558,3 +3558,4 @@ select[name="nodeIds"]{
 .list_s_item{
     overflow:hidden;
 }
+.shopEmployeeForm select.disabled {pointer-events: none;}
