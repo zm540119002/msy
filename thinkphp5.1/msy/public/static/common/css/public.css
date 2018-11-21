@@ -3555,3 +3555,6 @@ select[name="nodeIds"]{
     width:100%;
     padding:0.12rem 0;
 }
+.list_s_item{
+    overflow:hidden;
+}
