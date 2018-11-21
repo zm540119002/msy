@@ -1,5 +1,5 @@
 <section id="userLoginForm" style="display:none;">
-    <form id="formLogin">
+    <form id="dialogFormLogin">
 	    {include file="template/login_common.html" /}
     </form>
 </section>
@@ -37,7 +37,7 @@
                     return false;
                 }
 				var url = '{:url("index/UserCenter/login")}';
-                var postData = $layer.find('#formLogin').serializeObject();
+                var postData = $layer.find('#dialogFormLogin').serializeObject();
                 $.ajax({
                     url:url,
                     type:'post',

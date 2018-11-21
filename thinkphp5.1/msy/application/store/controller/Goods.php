@@ -155,7 +155,7 @@ class Goods extends \common\controller\StoreBase
         if($keyword){
             $config['where'][] = ['name', 'like', '%'.trim($keyword).'%'];
         }
-     
+
         $list = $model -> pageQuery($config);
         $page = $list->getCurrentPage();
         $this->assign('page',$page);
