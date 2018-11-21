@@ -1,7 +1,6 @@
 <?php
 namespace common\controller;
 
-use think\facade\Session;
 class FactoryStoreBase extends UserBase{
     protected $_storeList = null;
     protected $_factoryStoreList = null;
@@ -13,7 +12,7 @@ class FactoryStoreBase extends UserBase{
         //缓存当前店铺ID
         $storeId = (int)input('storeId');
         if($storeId){
-            Session::set('user.currentStoreId',$storeId);
+            session('currentStoreId',$storeId);
         }
     }
 
