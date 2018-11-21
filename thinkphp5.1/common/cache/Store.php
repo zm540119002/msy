@@ -3,7 +3,7 @@ namespace common\cache;
 
 class Store{
     private static $_cache_key = 'cache_store_';
-    private static $_cache_key_manager_store = 'cache_manager_store_';
+    private static $_cache_key_current_store = 'cache_current_store_';
 
     /**从缓存中获取入驻厂商店铺列表
      */
@@ -38,7 +38,7 @@ class Store{
     /**缓存当前店铺信息
      */
     public static function getCurrentStoreInfo($userId,$storeId,$storeList){
-        $storeInfo = cache(self::$_cache_key_manager_store.$userId,$storeId);
+        $storeInfo = cache(self::$_cache_key_current_store.$userId,$storeId);
         $countStoreList = count($storeList);
         if($storeId){
             $model = new \common\model\UserStore();
@@ -75,6 +75,6 @@ class Store{
     /**删除当前店铺缓存信息
      */
     public static function removeCurrentStoreInfo($userId,$storeId){
-        cache(self::$_cache_key_manager_store.$userId.$storeId, null);
+        cache(self::$_cache_key_current_store.$userId.$storeId, null);
     }
 }
