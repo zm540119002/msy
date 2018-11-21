@@ -1,13 +1,14 @@
 <?php
 namespace app\store\controller;
 
+use think\facade\Session;
 class ManagerManage extends \common\controller\FactoryStoreBase{
     private $currentStore = null;
     private $_currentStoreShopList = null;
     public function __construct(){
         parent::__construct();
         //获取当前店铺信息
-        $storeId = session('currentStoreId');
+        $storeId = Session::get('user.currentStoreId');
         $this->currentStore = $this->getCurrentStoreInfo($this->user['id'],$storeId,$this->_storeList);
         $this->assign('currentStore', $this->currentStore);
         //获取当前店铺门店列表
