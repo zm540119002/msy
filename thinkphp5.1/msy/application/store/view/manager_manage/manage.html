@@ -356,7 +356,7 @@
 					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
-					//$('input[name="mobile_phone"]').attr('disabled','disabled');
+					$('input[name="mobile_phone"]').attr('readonly','readonly');
 					copyDataByName(_this,dialogForm);
 					//岗位回显
 					$.each(dialogForm.find('ul.post').find('li'),function(){
@@ -560,6 +560,8 @@
 					var winHeight=$(window).height();
 					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
 					dialogForm.css('height',winHeight-120+'px');
+					$('input[name="mobile_phone"]').attr('readonly','readonly');
+					$('.shopEmployeeForm select[name="shop_id"]').attr('disabled','disabled');
 					copyDataByName(_this,dialogForm);
 					//岗位回显
 					$.each(dialogForm.find('ul.post').find('li'),function(){

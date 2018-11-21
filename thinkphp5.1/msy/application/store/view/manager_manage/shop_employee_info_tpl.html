@@ -16,8 +16,8 @@
 			<span>手机号码:</span>
 			<input type="tel" value="{$info.mobile_phone|default=''}" name="mobile_phone" readonly="readonly"/>
 		</div>
-		<div>
-			<span class="content-label">所属门店</span>
+		<div class="list_s_item">
+			<span class="content-label left">所属门店</span>
 			<select name="shop_id">
 				{notempty name='currentStoreShopList'}
 				{volist name="currentStoreShopList" id="vo"}

@@ -10,6 +10,10 @@
 			font-size:14px;
 		}
 		header{
+			position:fixed;
+			left:0;
+			top:0;
+			z-index:99;
 			width:100%;
 			background:#000;
 			color:#fff;
@@ -79,6 +83,16 @@
 			height:550px;
 			background:url(caihui_img/top-banner.jpg) no-repeat center;
 		}
+		.img_item{
+			width:734px;
+			margin:0 auto;
+		}
+		.img_item img{
+			vertical-align: middle;
+		}
+		.intro_wrapper{
+			background:#f2f2f2;
+		}
 	</style>
 </head>
 <body>
@@ -97,19 +111,21 @@
 	</div>
 </header>
 <div class="banner"></div>
+<div class="intro_wrapper">
 <div class="content_wrapper">
-	<!--<div>
-		<img src="caihui_img/bottom-01.jpg" alt="">
+	<div class="img_item">
+		<img src="caihui_img/intro.png" alt="">
 	</div>
-	<div>
-		<img src="caihui_img/bottom-02.jpg" alt="">
+	<div class="img_item">
+		<img src="caihui_img/intro1.png" alt="">
 	</div>
-	<div>
-		<img src="caihui_img/bottom-03.jpg" alt="">
+	<div class="img_item">
+		<img src="caihui_img/intro2.png" alt="">
 	</div>
-	<div>
-		<img src="caihui_img/bottom-04.jpg" alt="">
-	</div>-->
+	<div class="img_item">
+		<img src="caihui_img/intro3.png" alt="">
+	</div>
+</div>
 </div>
 </body>
 </html>
