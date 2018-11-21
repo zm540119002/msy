@@ -32,9 +32,13 @@ class FactoryStoreBase extends UserBase{
                     ['factory f','f.id = s.factory_id','left'],
                     ['record r','r.id = s.foreign_id','left'],
                     ['brand b','b.id = s.foreign_id','left'],
+                    ['user_store us','us.id = s.store_id','left'],
+                    ['user s','u.id = us.user_id','left'],
                 ],'where' => [
                     ['s.status','=',0],
                     ['s.id','=',$storeId],
+                    ['u.status','=',0],
+                    ['u.id','=',$this->user['id']],
                 ],
             ];
             $storeInfo = $model->getInfo($config);
