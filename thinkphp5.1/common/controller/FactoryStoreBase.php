@@ -2,7 +2,6 @@
 namespace common\controller;
 
 class FactoryStoreBase extends UserBase{
-    protected $_currentStore = null;
     protected $_storeList = null;
     protected $_factoryStoreList = null;
 
@@ -10,42 +9,6 @@ class FactoryStoreBase extends UserBase{
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
-    }
-
-    /**获取当前店铺信息
-     */
-    protected function getCurrentStoreInfo1($storeId=0){
-        $countStoreList = count($this->_storeList);
-        if($storeId){
-            $model = new \common\model\Store();
-            $config = [
-                'field' => [
-                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
-                    's.consignee_name','s.consignee_mobile_phone','s.province','s.city','s.area','s.detail_address',
-                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
-                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
-                    'f.id factory_id','f.name factory_name','f.type factory_type',
-                ],'join' => [
-                    ['factory f','f.id = s.factory_id','left'],
-                    ['record r','r.id = s.foreign_id','left'],
-                    ['brand b','b.id = s.foreign_id','left'],
-                    ['user_store us','us.id = s.store_id','left'],
-                    ['user s','u.id = us.user_id','left'],
-                ],'where' => [
-                    ['s.status','=',0],
-                    ['s.id','=',$storeId],
-                    ['u.status','=',0],
-                    ['u.id','=',$this->user['id']],
-                ],
-            ];
-            $storeInfo = $model->getInfo($config);
-            $this->_currentStore = $storeInfo;
-        }elseif($countStoreList==1){
-            $this->_currentStore = $this->_storeList[0];
-            $this->_currentStore['id'] = $this->_currentStore['store_id'];
-        }
-        \common\cache\Store::cacheCurrentStoreInfo($this->_currentStore);
-        $this->assign('currentStore', $this->_currentStore);
     }
 
     /**组装店铺列表
@@ -92,6 +55,8 @@ class FactoryStoreBase extends UserBase{
             'field' => [
                 'us.id user_store_id','us.user_id','us.user_name',
                 's.id store_id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                's.consignee_name','s.consignee_mobile_phone','s.detail_address',
+                's.province','s.city','s.area',
                 'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                 'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
                 'f.id factory_id','f.name factory_name','f.type factory_type',

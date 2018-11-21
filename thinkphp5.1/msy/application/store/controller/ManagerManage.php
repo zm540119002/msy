@@ -9,6 +9,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
         //获取当前店铺信息
         $storeId = (int)input('storeId');
         $this->currentStore = \common\cache\Store::getCurrentStoreInfo($this->user['id'],$storeId,$this->_storeList);
+        $this->assign('currentStore', $this->currentStore);
         //获取当前店铺门店列表
         $this->_currentStoreShopList = $this->getStoreShopList($this->currentStore['id']);
         $this->assign('currentStoreShopList',$this->_currentStoreShopList);
