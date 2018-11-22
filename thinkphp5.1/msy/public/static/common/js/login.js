@@ -10,7 +10,7 @@ $(function(){
         var content='';
         var url = domain+'index/UserCenter/'+method;
         if(method=='login'){//登录
-            postData = $('#formLogin').serializeObject();
+            postData = $('.loginLayer #formLogin').serializeObject();
         }else if(method=='register'){//注册
             postData = $('#formRegister').serializeObject();
         }else if(method=='forgetPassword'){//重置密码
