@@ -3,7 +3,7 @@ $(function(){
     tab_down('.loginNav li','.loginTab ','click');
 
     //登录 or 注册 or 重置密码
-    $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
+    $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
         var postData = {};
