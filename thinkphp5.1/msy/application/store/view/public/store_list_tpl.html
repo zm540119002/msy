@@ -1,7 +1,7 @@
 <section id="vendorInfoList" style="display:none;">
-    <ul class="vendorInfoList">
+    <div class="vendorInfoList">
         {include file="public/factory_store_list_tpl" /}
-    </ul>
+    </div>
 </section>
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
@@ -21,6 +21,11 @@
         $('body').on('click','.switch-store',function(){
             switchStore();
         });
+        //选择管理店铺-样式
+        $('body').on('click','.vendorInfoLayer li',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            $(this).parent().siblings().find('li').removeClass('current');
+        });
         
     });
     //弹层 店铺
@@ -39,10 +44,7 @@
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
-                $('.vendorInfoLayer li').on('click',function(){
-                    var _this=$(this);
-                    _this.addClass('current').siblings().removeClass('current');
-                });
+               
                 $.each($('.vendorInfoLayer li'),function(){
                     var currentId=$(this).data('id');
                     if(storeId==currentId){
