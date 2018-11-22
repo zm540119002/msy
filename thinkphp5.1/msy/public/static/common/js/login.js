@@ -14,12 +14,11 @@ $(function(){
         }else if(method=='register'){//注册
             postData = $('#formRegister').serializeObject();
         }else if(method=='forgetPassword'){//重置密码
-            postData = $('#formForgetPassword').serializeObject();
+            postData = $('.forgetPasswordLayer #formForgetPassword').serializeObject();
         }else{
             dialog.error('未知操作');
             return false;
         }
-        console.log(method);
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
@@ -27,7 +26,6 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
-        console.log(postData);
         if(method && content){
             dialog.error(content);
             return false;
@@ -36,7 +34,6 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
