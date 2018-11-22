@@ -14,16 +14,16 @@
         //如果没有默认店铺，则设置默认店铺
         var store='{:json_encode($store)}';
         if(store=== 'null'){
-            setDefaultStore();
+            switchStore();
             return false;
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){
-            setDefaultStore();
+            switchStore();
         });
     });
     //弹层 店铺
-    function setDefaultStore(){
+    function switchStore(){
         layer.open({
             type: 1,
             title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
