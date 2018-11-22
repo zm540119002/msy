@@ -1,29 +1,30 @@
 <section id="vendorInfoList" style="display:none;">
     <ul class="vendorInfoList">
-        {volist name="storeList" id="vo"}
-        <li class="" data-id="{$vo.id}">
-            <p class="store-type">  <span class="store-name">{$vo.name}</span>{$vo.store_type|getStoreType}</p>
-            <p class="run-type">{$vo.run_type|getRunType}</p>
-        </li>
-        {/volist}
+        {include file="public/factory_store_list_tpl" /}
     </ul>
 </section>
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
+        var no_empower = '{:json_encode($no_empower)}';
+        if(no_empower!=='null'){
+            dialog.success('未授权',module+'index/index');
+            return false;
+        }
         //如果没有默认店铺，则设置默认店铺
         var store='{:json_encode($store)}';
-        if(store === 'null'){
-            setDefaultStore();
+        if(store=== 'null'){
+            switchStore();
             return false;
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){
-            setDefaultStore();
+            switchStore();
         });
+        
     });
     //弹层 店铺
-    function setDefaultStore(){
+    function switchStore(){
         layer.open({
             type: 1,
             title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
@@ -33,7 +34,7 @@
             btn:['确定','取消'],
             success:function(){
                 var winH=$(window).height();
-                var storeId='{:json_encode($store.id)}';
+                var storeId='{:json_encode($store.store_id)}';
                 storeId = JSON.parse( storeId );
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
@@ -51,18 +52,18 @@
             },
             yes:function(index){
                 var isCurrent=$('.vendorInfoLayer li.current');
-                factoryLayerName=isCurrent.text();
-                factoryLayerId  =isCurrent.data('id');
-                $('.factoryId').val(factoryLayerId);
-                $('.vendor-name').text(factoryLayerName);
-                if(!factoryLayerId){
+                layerName=isCurrent.text();
+                layerId  =isCurrent.data('id');
+                $('.factoryId').val(layerId);
+                $('.vendor-name').text(layerName);
+                if(!layerId){
                     dialog.error('请选择一个店铺');
                     return false
                 }
                 var postData = {};
-                postData.id = factoryLayerId;
+                postData.store_id = layerId;
                 $.ajax({
-                    url: controller + 'setDefaultStore',
+                    url: module + 'store/selectStore',
                     data: postData,
                     type: 'post',
                     beforeSend: function(){
@@ -89,4 +90,5 @@
             }
         });
     }
+
 </script>

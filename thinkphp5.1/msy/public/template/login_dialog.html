@@ -1,61 +1,21 @@
+{include file="template/forget_password_common.html" /}
 <section id="userLoginForm" style="display:none;">
-    <form id="dialogFormLogin">
-	    {include file="template/login_common.html" /}
-    </form>
+    {include file="template/login_common.html" /}
 </section>
 <script type="text/javascript">
-   var userLoginForm=$('#userLoginForm').html();
     //登录触发
-    var loginLayer = null;
-    function loginDialog(func){
+    function loginDialog(){
+        var content=$('#userLoginForm').html();
         window.scrollTo(0,0);
-        loginLayer = layer.open({
+        layer.open({
             className:'loginLayer',
-            content:userLoginForm,
+            content:content,
 			title:['登录','border-bottom:1px solid #d9d9d9;'],
-            btn:'登录',
             success:function(){
                 tab_down('.loginNav li','.loginTab .login_wrap','click');
                 $('.layui-m-layershade').on('touchmove',function(e){
                     event.preventDefault(); 
                 });
-            },
-            yes:function(index){
-                var $layer = $('.loginLayer');
-                var content='';
-                //验证
-				var userName=$layer.find('.username').val();
-				var password=$layer.find('.password').val();
-				if(!checkAccount(userName)){
-					content='请输入正确手机号码';
-				}else if(!register.pswCheck(password)){
-					content = "请输入6-16数字或字母的密码";
-				}
-
-                if(content){
-                    errorTipc(content);
-                    return false;
-                }
-				var url = '{:url("index/UserCenter/login")}';
-                var postData = $layer.find('#dialogFormLogin').serializeObject();
-                $.ajax({
-                    url:url,
-                    type:'post',
-                    data:postData,
-                    error:function(xhr){},
-                    success:function(data){
-                        if(data.status==0){
-                            errorTipc(data.info);
-                            return false;
-                        }else if(data.status==1){
-                            if(func && $.isFunction(func)){
-                                func();
-                            }
-                            layer.close(index);
-                        }
-                    }
-                });
-
             }
         });
     };

@@ -3,18 +3,19 @@ $(function(){
     tab_down('.loginNav li','.loginTab ','click');
 
     //登录 or 注册 or 重置密码
-    $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
+    $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = controller + method;
+        var url = '{:url("index/UserCenter/login")}';
         if(method=='login'){//登录
             postData = $('#formLogin').serializeObject();
         }else if(method=='register'){//注册
+            url = '{:url("index/UserCenter/register")}';
             postData = $('#formRegister').serializeObject();
         }else{//重置密码
-            url = controller + 'forgetPassword';
+            url = '{:url("index/UserCenter/forgetPassword")}';
             postData = $('.forgetPasswordLayer #formReset').serializeObject();
         }
         if(!register.phoneCheck(postData.mobile_phone)){
@@ -30,8 +31,15 @@ $(function(){
         }else if(content){
             errorTipc(content);
             return false;
-        }else{   
-            submitForm(postData,url);
+        }else{
+            $.post(url,postData,function (data) {
+                if(data.status==0){
+                    dialog.error(data.info);
+                    return false;
+                }else if(data.status==1){
+                    location.href = data.info;
+                }
+            });
         }
     });
 
