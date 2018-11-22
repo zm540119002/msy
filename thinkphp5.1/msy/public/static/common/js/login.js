@@ -18,7 +18,6 @@ $(function(){
             url = '{:url("index/UserCenter/forgetPassword")}';
             postData = $('.forgetPasswordLayer #formReset').serializeObject();
         }
-        console.log(url);return;
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
