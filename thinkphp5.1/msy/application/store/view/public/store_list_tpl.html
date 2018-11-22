@@ -32,6 +32,11 @@
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
+        var no_empower = '{:json_encode($no_empower)}';
+        if(no_empower!=='null'){
+            dialog.success('未授权',module+'index/index');
+            return false;
+        }
         //如果没有默认店铺，则设置默认店铺
         var store='{:json_encode($store)}';
         if(store=== 'null'){
