@@ -21,7 +21,7 @@ class Goods extends \common\controller\StoreBase
         ];
         $platformCategory = $categoryModel->getList($config);
         $this -> assign('platformCategory',$platformCategory);
-        if(input('?goods_id') && $this->factory && $this->store){
+        if(input('?goods_id') &&  $this->store){
             $goodsId= (int)input('goods_id');
             $config=[
                 'where'=>[
@@ -53,7 +53,7 @@ class Goods extends \common\controller\StoreBase
         if(empty($goodsId) && !$goodsId){
             $this -> error('此商品不存在');
         }
-        if($this->factory && $this->store){
+        if($this->store){
             $condition=[
                 ['id','=',$goodsId],
                 ['store_id','=',$this->store['id']],
@@ -74,7 +74,7 @@ class Goods extends \common\controller\StoreBase
         if(empty($goodsId) && !$goodsId){
             $this -> error('此商品不存在');
         }
-        if($this->factory && $this->store){
+        if($this->store){
             $config=[
                 'where'=>[
                     ['g.id','=',$goodsId],
@@ -88,8 +88,6 @@ class Goods extends \common\controller\StoreBase
             $goodsInfo['main_img'] = explode(",",rtrim($goodsInfo['main_img'], ","));
             $goodsInfo['details_img'] = explode(",",rtrim($goodsInfo['details_img'], ","));
             $this -> assign('goodsInfo',$goodsInfo);
-            //获取店铺的详情信息
-            $this -> assign('storeInfo',$this->store);
         }
         return $this->fetch();
     }
@@ -181,7 +179,7 @@ class Goods extends \common\controller\StoreBase
 
     //商品管理展示页
     public function manage(){
-        if($this->factory && $this->store){
+        if($this->store){
             //查看本店商品是否存在备份文件
             //存储路径
             $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
@@ -190,7 +188,7 @@ class Goods extends \common\controller\StoreBase
 
             $config = [
                 'where'=>[
-                    ['factory_id','=',$this -> factory['id']]
+                    ['factory_id','=',$this -> store['factory_id']]
                 ],
             ];
             $storeList = $modelStore -> getList($config);
@@ -226,7 +224,7 @@ class Goods extends \common\controller\StoreBase
                 return successMsg('成功');
             }
         }
-        if($this->factory && $this->store) {
+        if($this->store) {
             return $this -> fetch();
         }
 
@@ -242,7 +240,7 @@ class Goods extends \common\controller\StoreBase
                 return successMsg('成功');
             }
         }
-        if($this->factory && $this->store) {
+        if( $this->store) {
             return $this -> fetch();
         }
     }
@@ -253,7 +251,7 @@ class Goods extends \common\controller\StoreBase
             $model = new \common\model\Goods;
             return $result = $model ->setInventory($this->store['id']);
         }
-        if($this->factory && $this->store) {
+        if($this->store) {
             return $this -> fetch();
         }
     }
@@ -304,7 +302,7 @@ class Goods extends \common\controller\StoreBase
         }
         $storeId = (int)input('get.storeId');
         $modelStore = new \common\model\Store;
-        if(!$modelStore -> checkStoreExist($storeId,$this -> factory['id'])){
+        if(!$modelStore -> checkStoreExist($storeId,$this -> store['factory_id'])){
             return errorMsg('不存在店铺');
         }
         //存储路径
