@@ -5,9 +5,9 @@
     </form>
 </section>
 <script type="text/javascript">
-   var userLoginForm=$('#userLoginForm').html();
     //登录触发
     function loginDialog(func){
+        var userLoginForm=$('#userLoginForm').html();
         window.scrollTo(0,0);
         layer.open({
             className:'loginLayer',
@@ -55,7 +55,6 @@
                         }
                     }
                 });
-
             }
         });
     };
