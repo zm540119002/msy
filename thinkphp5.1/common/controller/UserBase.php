@@ -19,4 +19,13 @@ class UserBase extends Base{
             }
         }
     }
+    //选择进入的店铺
+    public function selectStore(){
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误！');
+        }
+        $storeId = (int)input('post.store_id');
+        session('currentStoreId',$storeId);
+        return successMsg('成功！');
+    }
 }
