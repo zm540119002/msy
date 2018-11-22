@@ -1,0 +1,22 @@
+<section class="top_nav_fixed top_nav_store">
+    <div class="top_bar top-switch-bar columns_flex l-r-sides">
+        <!--{include file="public/home_page" /}-->
+        <div class="top_left_f">
+            {notempty name="factory.logo_img"}
+            <img id="" class="left store-logo-img" src="public_uploads/{$factory.logo_img|default=''}" />
+            {else /}
+            <img class="left store-logo-img" src="public_img/default/no_pic_40.jpg" />
+            {/notempty}
+            <span class="store-name">{$factory.name}</span>
+        </div>
+        <div class="">
+            <div class="columns_flex">
+                <a href="javascript:void(0);" class="shopping_cart top_icon"></a>
+                <a href="javascript:void(0);" class="personal_center top_icon"></a>
+                <a href="{:url('Index/index')}" class="home top_icon"></a>
+            </div>
+            <a href="javascript:void(0);" class="switch-factory">切换美容店家账号></a>
+        </div>
+    </div>
+</section>
+{include file="public/factory_list_tpl" /}
