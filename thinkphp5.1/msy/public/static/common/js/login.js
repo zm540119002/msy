@@ -8,7 +8,7 @@ $(function(){
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = '{:url("index/UserCenter/'+method+'")}';
+        var url = "{:url('index/UserCenter/"+method+"')}";
         console.log(url);
         if(method=='login'){//登录
             postData = $('#formLogin').serializeObject();
