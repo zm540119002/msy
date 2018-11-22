@@ -3,7 +3,7 @@ $(function(){
     tab_down('.loginNav li','.loginTab ','click');
 
     //登录 or 注册 or 重置密码
-    $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
+    $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
         var postData = {};
@@ -18,7 +18,7 @@ $(function(){
             url = '{:url("index/UserCenter/forgetPassword")}';
             postData = $('.forgetPasswordLayer #formReset').serializeObject();
         }
-        console.log(url);return;
+        //console.log(url);return;
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
