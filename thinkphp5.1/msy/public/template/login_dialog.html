@@ -7,10 +7,9 @@
 <script type="text/javascript">
    var userLoginForm=$('#userLoginForm').html();
     //登录触发
-    var loginLayer = null;
     function loginDialog(func){
         window.scrollTo(0,0);
-        loginLayer = layer.open({
+        layer.open({
             className:'loginLayer',
             content:userLoginForm,
 			title:['登录','border-bottom:1px solid #d9d9d9;'],

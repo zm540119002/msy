@@ -456,20 +456,6 @@ function isRolling(container){
     });
 }
 
-//忘记密码-弹窗
-function forgetPasswordDialog(content){
-    layer.open({
-        className:'forgetPasswordLayer',
-        content:content,
-        btn:['确定'],
-        success:function(){
-            $('.login_item .password').attr('type','password');
-            $('.view-password').removeClass('active');
-        },
-        yes:function(index){}
-    });
-}
-
 //提交表单
 function submitForm(postData,postUrl){
     $.post(postUrl,postData,function (data) {
@@ -612,11 +598,6 @@ $(function(){
     //返回顶部
     $('body').on('click','.backTop',function(){
         $('body,html').animate({scrollTop:0+'px'},500);
-    });
-    //忘记密码-触发弹窗
-    $('body').on('click','.forget_dialog',function(){
-        var sectionForgetPassword = $('#sectionForgetPassword').html();
-        forgetPasswordDialog(sectionForgetPassword);
     });
     //窗口滚动条滚动
     $(window).on('scroll',function(){
