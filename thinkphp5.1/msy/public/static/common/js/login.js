@@ -8,15 +8,17 @@ $(function(){
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = controller + method;
+        var url = '{:url("index/UserCenter/login")}';
         if(method=='login'){//登录
             postData = $('#formLogin').serializeObject();
         }else if(method=='register'){//注册
+            url = '{:url("index/UserCenter/register")}';
             postData = $('#formRegister').serializeObject();
         }else{//重置密码
-            url = controller + 'forgetPassword';
+            url = '{:url("index/UserCenter/forgetPassword")}';
             postData = $('.forgetPasswordLayer #formReset').serializeObject();
         }
+        console.log(url);return;
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
