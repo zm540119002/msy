@@ -19,6 +19,7 @@ $(function(){
             dialog.error('未知操作');
             return false;
         }
+        console.log(method);
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && !register.vfyCheck(postData.captcha)){
