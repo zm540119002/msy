@@ -8,8 +8,7 @@ $(function(){
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = "{:url('index/UserCenter/"+method+"')}";
-        console.log(url);
+        var url = domain+'index/UserCenter/'+method;
         if(method=='login'){//登录
             postData = $('#formLogin').serializeObject();
         }else if(method=='register'){//注册
