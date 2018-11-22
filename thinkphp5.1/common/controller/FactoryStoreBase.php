@@ -4,17 +4,23 @@ namespace common\controller;
 class FactoryStoreBase extends UserBase{
     protected $_storeList = null;
     protected $_factoryStoreList = null;
+    protected $currentStore = null;
 
     public function __construct(){
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
         //缓存当前店铺ID
-        $storeId = (int)input('storeId');
+        $storeId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
         if($storeId){
             session('currentStoreId',$storeId);
         }
+        //获取当前店铺信息
+        $storeId = session('currentStoreId');
+        $this->currentStore = $this->getCurrentStoreInfo($this->user['id'],$storeId,$this->_storeList);
+        $this->assign('currentStore', $this->currentStore);
     }
+    
 
     /**缓存当前店铺信息
      */
