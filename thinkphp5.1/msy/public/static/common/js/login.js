@@ -30,7 +30,7 @@ $(function(){
         }else if(content){
             errorTipc(content);
             return false;
-        }else{   
+        }else{
             submitForm(postData,url);
         }
     });
