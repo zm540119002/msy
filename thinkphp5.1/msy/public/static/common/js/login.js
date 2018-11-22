@@ -8,8 +8,7 @@ $(function(){
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = "{:url('index/UserCenter/"+method+"')}";
-        console.log(url);
+        var url = domain+'index/UserCenter/'+method;
         if(method=='login'){//登录
             postData = $('#formLogin').serializeObject();
         }else if(method=='register'){//注册
@@ -27,6 +26,7 @@ $(function(){
         }else if(!register.pswCheck(postData.password)){
             content = "请输入6-16数字或字母的密码";
         }
+        console.log(postData);
         if(method && content){
             dialog.error(content);
             return false;
@@ -35,6 +35,7 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
+                return;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
