@@ -456,17 +456,6 @@ function isRolling(container){
     });
 }
 
-//提交表单
-function submitForm(postData,postUrl){
-    $.post(postUrl,postData,function (data) {
-        if(data.status==0){
-            dialog.error(data.info);
-            return false;
-        }else if(data.status==1){
-            location.href = data.info;
-        }
-    });
-}
 //获取列表
 function getList(config) {
     $.ajax({
