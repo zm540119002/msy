@@ -1,10 +1,7 @@
 <?php
 namespace common\controller;
 
-/**店铺基础类，需要判断是否入驻店铺的类需要继承
- */
-class StoreBase extends UserBase
-{
+class StoreBase extends UserBase{
     protected $_storeList = null;
     protected $_factoryStoreList = null;
     protected $store = null;
@@ -12,29 +9,54 @@ class StoreBase extends UserBase
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
-        $this->assign('factoryStoreList', $this->_factoryStoreList);
-        $storeListCount = count($this->_storeList);
-        if($storeListCount==1){//一家店铺时
-            $this->store = $this->_storeList[0];
-            $this->assign('store', $this->_storeList[0]);
-            session('currentStoreId',$this->_storeList[0]['store_id']);
-        }
-        if(!$storeListCount){
-            if (request()->isAjax()) {
-                $this->success('未授权',url('Index/index'),'no_empower',0);
-            }else{
-                $this->assign('no_empower',1);
-            }
-        }
         $storeId = session('currentStoreId');
         if (!$storeId) {
             if (request()->isAjax()) {
                 $this->success('选择店铺',url($this->loginUrl),'no_set_store',0);
+            }else{
+                $this -> assign('no_set_store',1);
             }
         }else{
             $this -> getCurrentStoreInfo($this->user['id'],$storeId, $this->_storeList);
-            $this->assign('store', $this->store);
         }
+    }
+
+    /**缓存当前店铺信息
+     */
+    protected function getCurrentStoreInfo($userId,$storeId,$storeList){
+        $countStoreList = count($storeList);
+        $storeInfo = [];
+        if($storeId){
+            $model = new \common\model\UserStore();
+            $config = [
+                'field' => [
+                    'us.id user_store_id','us.user_id','us.user_name',
+                    's.id store_id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.consignee_name','s.consignee_mobile_phone','s.detail_address',
+                    's.province','s.city','s.area',
+                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
+                    'f.id factory_id','f.name factory_name','f.type factory_type',
+                ],'join' => [
+                    ['store s','s.id = us.store_id','left'],
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left'],
+                    ['factory f','f.id = us.factory_id','left'],
+                ],'where' => [
+                    ['us.status','=',0],
+                    ['us.user_id','=',$userId],
+                    ['s.status','=',0],
+                    ['s.id','=',$storeId],
+                    ['f.status','=',0],
+                    ['f.type','=',config('custom.type')],
+                ],
+            ];
+            $storeInfo = $model->getInfo($config);
+        }elseif($countStoreList==1){
+            $storeInfo = $storeList[0];
+        }
+        $storeInfo['id'] = $storeInfo['store_id'];
+        $this->store = $storeInfo;
     }
 
     /**组装店铺列表
@@ -76,7 +98,7 @@ class StoreBase extends UserBase
             $this->assign('store', $this->_storeList[0]);
             session('currentStoreId',$this->_storeList[0]['store_id']);
         }
-
+        $this->assign('factoryStoreList', $this->_factoryStoreList);
     }
 
     /**获取店长店铺列表
@@ -110,49 +132,31 @@ class StoreBase extends UserBase
         $this->_storeList = $storeList;
     }
 
-    /**缓存当前店铺信息
-     */
-    protected function getCurrentStoreInfo($userId,$storeId,$storeList){
-        $countStoreList = count($storeList);
-        $storeInfo = [];
+    //获取店铺门店列表
+    protected function getStoreShopList($storeId=0){
+        $shopList = [];
         if($storeId){
-            $model = new \common\model\UserStore();
+            $modelShop = new \app\store\model\Shop();
             $config = [
                 'field' => [
-                    'us.id user_store_id','us.user_id','us.user_name',
-                    's.id store_id','s.store_type','s.run_type','s.is_default','s.operational_model',
-                    's.consignee_name','s.consignee_mobile_phone','s.detail_address',
-                    's.province','s.city','s.area',
-                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
-                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
-                    'f.id factory_id','f.name factory_name','f.type factory_type',
-                ],'join' => [
-                    ['store s','s.id = us.store_id','left'],
-                    ['record r','r.id = s.foreign_id','left'],
-                    ['brand b','b.id = s.foreign_id','left'],
-                    ['factory f','f.id = us.factory_id','left'],
+                    's.id','s.name',
                 ],'where' => [
-                    ['us.status','=',0],
-                    ['us.user_id','=',$userId],
                     ['s.status','=',0],
-                    ['s.id','=',$storeId],
-                    ['f.status','=',0],
-                    ['f.type','=',config('custom.type')],
+                    ['s.store_id','=',$storeId],
                 ],
             ];
-            $storeInfo = $model->getInfo($config);
-        }elseif($countStoreList==1){
-            $storeInfo = $storeList[0];
+            $shopList = $modelShop->getList($config);
         }
-        $storeInfo['id'] = $storeInfo['store_id'];
-        $this->store = $storeInfo;
+        return $shopList;
     }
 
-    //设置默认产商
-    public function setDefaultStore(){
-        $model = new \common\model\Store();
-        return $model->setDefaultStore($this->factory['id']);
+    //选择进入的店铺
+    public function selectStore(){
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误！');
+        }
+        $storeId = (int)input('post.store_id');
+        session('currentStoreId',$storeId);
+        return successMsg('成功！');
     }
-
-   
 }
