@@ -14,18 +14,29 @@ class FactoryStoreBase extends UserBase{
         $storeId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
         if($storeId){
             session('currentStoreId',$storeId);
+            $this->currentStore = $this->getCurrentStoreInfo($this->user['id'],$storeId);
+        }else{
+            $countStoreList = count($this->_storeList);
+            if($countStoreList == 0){
+                if (request()->isAjax()) {
+                    $this->success(config('custom.no_empower'),url($this->indexUrl),'no_empower',0);
+                }else{
+                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
+                }
+            }elseif($countStoreList == 1){
+                $this->currentStore = $this->_storeList[0];
+            }
         }
-        //获取当前店铺信息
-        $storeId = session('currentStoreId');
-        $this->currentStore = $this->getCurrentStoreInfo($this->user['id'],$storeId,$this->_storeList);
-        $this->assign('currentStore', $this->currentStore);
+        if(!empty($this->currentStore)){
+            $this->currentStore['id'] = $this->currentStore['store_id'];
+        }
+        $this->assign('store', $this->currentStore);
     }
     
 
     /**缓存当前店铺信息
      */
-    protected function getCurrentStoreInfo($userId,$storeId,$storeList){
-        $countStoreList = count($storeList);
+    protected function getCurrentStoreInfo($userId,$storeId){
         $storeInfo = [];
         if($storeId){
             $model = new \common\model\UserStore();
@@ -53,10 +64,7 @@ class FactoryStoreBase extends UserBase{
                 ],
             ];
             $storeInfo = $model->getInfo($config);
-        }elseif($countStoreList==1){
-            $storeInfo = $storeList[0];
         }
-        $storeInfo['id'] = $storeInfo['store_id'];
         return $storeInfo;
     }
 

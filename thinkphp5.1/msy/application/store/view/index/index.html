@@ -133,6 +133,8 @@
 						dialog.error(data.info);
 					}else if(data.code==1 && data.data=='no_login'){
 						loginDialog();
+					}else if(data.code==1 && data.data=='no_empower'){
+						dialog.error(data.msg);
 					}else if(data.status==1){
 						var url = module + 'ManagerManage/manage/storeId/' +data.id;
 						location.href = url;
