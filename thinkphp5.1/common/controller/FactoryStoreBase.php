@@ -32,7 +32,7 @@ class FactoryStoreBase extends UserBase{
             }else{
                 if (request()->isAjax()) {
                 }else{
-//                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
+                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
                 }
             }
         }
