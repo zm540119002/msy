@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Shop extends \common\controller\StoreBase1{
+class Shop extends \common\controller\StoreBase{
     /**首页
      */
     public function index(){
