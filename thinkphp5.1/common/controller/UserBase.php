@@ -6,8 +6,8 @@ namespace common\controller;
 class UserBase extends Base{
     protected $user = null;
     protected $loginUrl = 'index/UserCenter/login';//登录URL
-    protected $indexUrl = 'store/Index/index';//采购商首页URL
-
+    protected $indexUrl = 'Index/index';//登录URL
+    
     public function __construct(){
         parent::__construct();
         //判断是否登录

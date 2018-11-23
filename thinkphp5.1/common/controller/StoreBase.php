@@ -11,30 +11,28 @@ class StoreBase extends UserBase
     public function __construct(){
         parent::__construct();
         //采购商店铺列表
-        $this->getFactoryStoreList();
-        $this->assign('factoryStoreList', $this->_factoryStoreList);
-        $storeListCount = count($this->_storeList);
-        if($storeListCount==1){//一家店铺时
-            $this->store = $this->_storeList[0];
-            $this->assign('store', $this->_storeList[0]);
-            session('currentStoreId',$this->_storeList[0]['store_id']);
-        }
-        if(!$storeListCount){
-            if (request()->isAjax()) {
-                $this->success('未授权',url('Index/index'),'no_empower',0);
-            }else{
-                $this->assign('no_empower',1);
-            }
-        }
-        $storeId = session('currentStoreId');
-        if (!$storeId) {
-            if (request()->isAjax()) {
-                $this->success('选择店铺',url($this->loginUrl),'no_set_store',0);
-            }
+     
+        $currentStoreId = session('currentStoreId');
+        if($currentStoreId){
+            $this->store = $this->getCurrentStoreInfo($this->user['id'],$currentStoreId,$this->_storeList);
         }else{
-            $this -> getCurrentStoreInfo($this->user['id'],$storeId, $this->_storeList);
-            $this->assign('store', $this->store);
+            $countStoreList = count($this->_storeList);
+            if($countStoreList == 0){
+                if (request()->isAjax()) {
+                    $this->success(config('custom.no_empower'),url($this->indexUrl),'no_empower',0);
+                }else{
+                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
+                }
+            }elseif($countStoreList == 1){
+                $this->store = $this->_storeList[0];
+            }
         }
+        if(!empty($this->store)){
+            $this->store['id'] = $this->store['store_id'];
+            //缓存当前店铺ID
+            session('currentStoreId',$this->store['store_id']);
+        }
+        $this->assign('store', $this->store);
     }
 
     /**组装店铺列表
@@ -70,13 +68,6 @@ class StoreBase extends UserBase
                 }
             }
         }
-
-        if($storeListCount==1){//一家店铺时
-            $this->store = $this->_storeList[0];
-            $this->assign('store', $this->_storeList[0]);
-            session('currentStoreId',$this->_storeList[0]['store_id']);
-        }
-
     }
 
     /**获取店长店铺列表
@@ -148,11 +139,7 @@ class StoreBase extends UserBase
         $this->store = $storeInfo;
     }
 
-    //设置默认产商
-    public function setDefaultStore(){
-        $model = new \common\model\Store();
-        return $model->setDefaultStore($this->factory['id']);
-    }
+
 
    
 }
