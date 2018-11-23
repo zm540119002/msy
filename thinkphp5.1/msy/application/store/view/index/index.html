@@ -135,6 +135,11 @@
 						loginDialog();
 					}else if(data.code==1 && data.data=='no_empower'){
 						dialog.error(data.msg);
+					}else if(data.code==1 && data.data=='success'){
+
+					}else if(data.status==1){
+						var url2 = module + 'ManagerManage/manage/currentStoreId/' +data.id;
+						location.href = url2;
 					}else{
 						$('#storeShopInfo').find('.store_list').empty().append(data);
 						switchManagerStore(url);

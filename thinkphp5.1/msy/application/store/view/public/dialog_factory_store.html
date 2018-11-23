@@ -31,9 +31,25 @@
             },
             btn:['确定','取消'],
             yes:function(index){
+<<<<<<< HEAD
                 var storeId = $('.storeShopListLayer li.current').data('id');
                 url = url+'/currentStoreId/' +storeId;
                 location.href = url;
+=======
+<<<<<<< HEAD
+                var storeId = $('.storeShopListLayer li.current').data('id');
+                url = url+'/currentStoreId/' +storeId;
+                location.href = url;
+=======
+                if(url){
+                    var storeId = $('.storeShopListLayer li.current').data('id');
+                    url = url+'/currentStoreId/' +storeId;
+                    location.href = url;
+                }else{
+                    location.reload();
+                }
+>>>>>>> 82189d4d92d5abf8ce4555f105fbd670bc6cb71d
+>>>>>>> 222c7d4068c48e0eb9c221a5b989b55e70f366e5
             }
         });
     }
