@@ -70,13 +70,6 @@ class StoreBase extends UserBase
                 }
             }
         }
-
-        if($storeListCount==1){//一家店铺时
-            $this->store = $this->_storeList[0];
-            $this->assign('store', $this->_storeList[0]);
-            session('currentStoreId',$this->_storeList[0]['store_id']);
-        }
-
     }
 
     /**获取店长店铺列表
@@ -148,11 +141,7 @@ class StoreBase extends UserBase
         $this->store = $storeInfo;
     }
 
-    //设置默认产商
-    public function setDefaultStore(){
-        $model = new \common\model\Store();
-        return $model->setDefaultStore($this->factory['id']);
-    }
+
 
    
 }
