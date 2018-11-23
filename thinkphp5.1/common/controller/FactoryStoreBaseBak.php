@@ -11,7 +11,7 @@ class FactoryStoreBase extends UserBase{
         //采购商店铺列表
         $this->getFactoryStoreList();
         //获取当前店铺ID
-//        session('currentStoreId',null);
+        session('currentStoreId',null);
         $sessionStoreId = (int)session('currentStoreId');
         $requestStoreId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
         $currentStoreId = ($requestStoreId && $sessionStoreId!=$requestStoreId)?$requestStoreId:$sessionStoreId;
@@ -41,7 +41,7 @@ class FactoryStoreBase extends UserBase{
         }
         $this->assign('store', $this->store);
     }
-
+    
 
     /**缓存当前店铺信息
      */
