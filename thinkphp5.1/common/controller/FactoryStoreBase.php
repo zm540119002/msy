@@ -25,14 +25,13 @@ class FactoryStoreBase extends UserBase{
                 if (request()->isAjax()) {
                     $this->success(config('custom.no_empower'),url($this->indexUrl),'no_empower',0);
                 }else{
-                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
+                    $this->error(config('custom.no_empower'),url($this->indexUrl),'none_store',0);
                 }
             }elseif($countStoreList == 1){
                 $this->store = $this->_storeList[0];
-            }else{
-                if (request()->isAjax()) {
-                }else{
-                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
+            }elseif($countStoreList > 1){
+                if (!request()->isAjax()) {
+//                    $this->success(config('custom.multi_store'),url($this->indexUrl),'multi_store',0);
                 }
             }
         }

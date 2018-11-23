@@ -21,6 +21,7 @@
         $('body').on('click','.switch-store',function(){
             setDefaultStore();
         });
+
     });
     //弹层 店铺
     function setDefaultStore(){
@@ -38,7 +39,10 @@
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
-               
+                $('.vendorInfoLayer li').on('click',function(){
+                    var _this=$(this);
+                    _this.addClass('current').siblings().removeClass('current');
+                });
                 $.each($('.vendorInfoLayer li'),function(){
                     var currentId=$(this).data('id');
                     if(storeId==currentId){

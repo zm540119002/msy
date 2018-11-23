@@ -214,6 +214,13 @@
 	$(function(){
 		//页面初始化 
 		$('.content_main .section_content').eq(0).show();
+		var store = '{$store.id}';
+		if(!store){
+			switchManagerStore(location.href);
+		}else{
+			//获取店铺员工账号列表
+			getStoreEmployeeList();
+		}
 		// //省市区初始化
         var province = '{$store.province|default=""}';
         var city = '{$store.city|default=""}';
@@ -225,8 +232,6 @@
 			region.push(area);
 			$('.area_address').setArea(region);
 		}
-		//获取店铺员工账号列表
-		getStoreEmployeeList();
 		//门店店长管理和店铺店长管理切换
 		$('body').on('click','.store_deploy_bar a',function(){
 			var typeId=$(this).data('type');
