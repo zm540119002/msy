@@ -17,10 +17,11 @@ return [
     'title' => '美尚云',
     'error_login' => '您还未登录平台，请先登录！',
     'default_page_size' => 5,//默认每页显示记录数
-    'not_ajax' => '请用AJAX方式访问！',//不是POST
+    'not_ajax' => '请用AJAX方式访问！',//不是AJAX
     'not_post' => '请用POST方式访问！',//不是POST
     'not_get' => '请用GET方式访问！',//不是GET
-    'none_store' => '请选择店铺！',//不是GET
+    'none_store' => '请选择店铺！',
+    'multi_store' => '登录成功，请选择店铺！',
     'no_empower' => '未授权！',//不是GET
     'sms_expire' => 60 * 10,//短信验证码过期时间
     'sms_sign_name' => '美尚云',//短信签名名称（阿里云）

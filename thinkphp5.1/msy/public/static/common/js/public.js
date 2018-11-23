@@ -485,14 +485,21 @@ function getList(config) {
         },
         success: function(data){
             $('.loading').hide();
-            if(data.status==0){
-                dialog.error(data.info);
+            if(config.callBack){
+                config.callBack(config,data);
             }else{
-                var container = config.container?config.container:$('ul.list');
-                container.empty().append(data);
+                getListDefaultCallBack(config,data)
             }
         }
     });
+}
+function getListDefaultCallBack(config,data) {
+    if(data.status==0){
+        dialog.error(data.info);
+    }else{
+        var container = config.container?config.container:$('ul.list');
+        container.empty().append(data);
+    }
 }
 
 //新增-表单提交
