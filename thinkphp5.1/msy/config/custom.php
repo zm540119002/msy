@@ -20,7 +20,6 @@ return [
     'not_ajax' => '请用AJAX方式访问！',//不是AJAX
     'not_post' => '请用POST方式访问！',//不是POST
     'not_get' => '请用GET方式访问！',//不是GET
-    'none_store' => '未授权！',
     'multi_store' => '登录成功，请选择店铺！',
     'no_empower' => '未授权！',//不是GET
     'sms_expire' => 60 * 10,//短信验证码过期时间
