@@ -4,17 +4,17 @@ namespace common\controller;
 class FactoryStoreBase extends UserBase{
     protected $_storeList = null;
     protected $_factoryStoreList = null;
-    protected $currentStore = null;
+    protected $store = null;
 
     public function __construct(){
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
         //缓存当前店铺ID
-        $storeId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
-        if($storeId){
-            session('currentStoreId',$storeId);
-            $this->currentStore = $this->getCurrentStoreInfo($this->user['id'],$storeId);
+        $currentStoreId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
+        if($currentStoreId){
+            session('currentStoreId',$currentStoreId);
+            $this->store = $this->getCurrentStoreInfo($this->user['id'],$currentStoreId);
         }else{
             $countStoreList = count($this->_storeList);
             if($countStoreList == 0){
@@ -24,13 +24,13 @@ class FactoryStoreBase extends UserBase{
                     $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
                 }
             }elseif($countStoreList == 1){
-                $this->currentStore = $this->_storeList[0];
+                $this->store = $this->_storeList[0];
             }
         }
-        if(!empty($this->currentStore)){
-            $this->currentStore['id'] = $this->currentStore['store_id'];
+        if(!empty($this->store)){
+            $this->store['id'] = $this->store['store_id'];
         }
-        $this->assign('store', $this->currentStore);
+        $this->assign('store', $this->store);
     }
     
 
