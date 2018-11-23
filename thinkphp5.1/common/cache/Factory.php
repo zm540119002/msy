@@ -16,7 +16,7 @@ class Factory{
                 ['f.type','=',$type],
             ];
             $field = [
-                'uf.is_default','f.id','f.name','f.type',
+                'uf.is_default','f.id','f.name','f.type','uf.type user_factory_type',
                 'r.logo_img',
             ];
             $join = [

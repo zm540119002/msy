@@ -12,6 +12,7 @@
 		<div class="list_left_item"><span class="list-label">账号类型</span><span class="">管理员</span></div>
 	</div>
 	<div class="operate-btn">
+		{if $factory.user_factory_type == 1}
 		<a href="javascript:void(0);" class="modify-account">
 			<span></span>
 			修改
@@ -20,6 +21,7 @@
 			<span></span>
 			删除
 		</a>
+		{/if}
 	</div>
 </li>
 {/notempty}
