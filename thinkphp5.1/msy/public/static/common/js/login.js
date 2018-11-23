@@ -8,14 +8,13 @@ $(function(){
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = "{:url('index/UserCenter/"+method+"')}";
-        console.log(url);
+        var url = domain+'index/UserCenter/'+method;
         if(method=='login'){//登录
-            postData = $('#formLogin').serializeObject();
+            postData = $('.loginLayer #formLogin').serializeObject();
         }else if(method=='register'){//注册
             postData = $('#formRegister').serializeObject();
         }else if(method=='forgetPassword'){//重置密码
-            postData = $('#formForgetPassword').serializeObject();
+            postData = $('.forgetPasswordLayer #formForgetPassword').serializeObject();
         }else{
             dialog.error('未知操作');
             return false;

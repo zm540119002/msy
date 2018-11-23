@@ -1,4 +1,5 @@
 <section id="vendorInfoList" style="display:none;">
+<<<<<<< HEAD
     <ul class="vendorInfoList">
         {volist name="storeList" id="vo"}
         <li class="" data-id="{$vo.id}">
@@ -7,20 +8,38 @@
         </li>
         {/volist}
     </ul>
+=======
+    <div class="vendorInfoList">
+        {include file="public/factory_store_list_tpl" /}
+    </div>
+>>>>>>> cb68c002a235f65283c4bc19c1b5d324bdd787b0
 </section>
 <script type="text/javascript">
     var vendorInfoList=$('#vendorInfoList').html();
     $(function(){
         //如果没有默认店铺，则设置默认店铺
         var store='{:json_encode($store)}';
+<<<<<<< HEAD
         if(store === 'null'){
             setDefaultStore();
             return false;
+=======
+        if(store=== 'null'){
+            switchStore();
+>>>>>>> cb68c002a235f65283c4bc19c1b5d324bdd787b0
         }
         //切换店铺
         $('body').on('click','.switch-store',function(){
             setDefaultStore();
         });
+<<<<<<< HEAD
+=======
+        //选择管理店铺-样式
+        $('body').on('click','.vendorInfoLayer li',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            $(this).parent().siblings().find('li').removeClass('current');
+        });
+>>>>>>> cb68c002a235f65283c4bc19c1b5d324bdd787b0
     });
     //弹层 店铺
     function setDefaultStore(){
@@ -38,10 +57,7 @@
                 $('html,body').addClass('scrollStyle');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
                 $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
-                $('.vendorInfoLayer li').on('click',function(){
-                    var _this=$(this);
-                    _this.addClass('current').siblings().removeClass('current');
-                });
+               
                 $.each($('.vendorInfoLayer li'),function(){
                     var currentId=$(this).data('id');
                     if(storeId==currentId){

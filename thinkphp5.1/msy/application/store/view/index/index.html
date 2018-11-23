@@ -133,12 +133,16 @@
 						dialog.error(data.info);
 					}else if(data.code==1 && data.data=='no_login'){
 						loginDialog();
+					}else if(data.code==1 && data.data=='no_empower'){
+						dialog.error(data.msg);
+					}else if(data.code==1 && data.data=='success'){
+
 					}else if(data.status==1){
-						var url = module + 'ManagerManage/manage/storeId/' +data.id;
-						location.href = url;
+						var url2 = module + 'ManagerManage/manage/currentStoreId/' +data.id;
+						location.href = url2;
 					}else{
 						$('#storeShopInfo').find('.store_list').empty().append(data);
-						switchManagerStore();
+						switchManagerStore(url);
 					}
 				}
 			});
@@ -167,17 +171,14 @@
 						if(data.data == 'no_login'){
 							loginDialog();
 						}
-						if(data.data == 'no_set_store'){
-							location.href = url;
-						}
 						if(data.data == 'no_empower'){
 							dialog.error(data.msg);
 						}
 
 					}else if(data.status==1){
-						location.href = url;
 					}else{
-						location.href = url;
+						$('#storeShopInfo').find('.store_list').empty().append(data);
+						switchManagerStore(url);
 					}
 				}
 			});

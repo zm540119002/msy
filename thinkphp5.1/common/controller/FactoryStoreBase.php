@@ -4,22 +4,50 @@ namespace common\controller;
 class FactoryStoreBase extends UserBase{
     protected $_storeList = null;
     protected $_factoryStoreList = null;
+    protected $store = null;
 
     public function __construct(){
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
-        //缓存当前店铺ID
-        $storeId = (int)input('storeId');
-        if($storeId){
-            session('currentStoreId',$storeId);
+        //获取当前店铺ID
+        $sessionStoreId = session('currentStoreId');
+        $requestStoreId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
+        if(($requestStoreId && $sessionStoreId!=$requestStoreId)){
+            session('currentStoreId',$requestStoreId);
         }
+        $currentStoreId = session('currentStoreId');
+        if($currentStoreId){
+            $this->getCurrentStoreInfo($this->user['id'],$currentStoreId);
+        }else{
+            $countStoreList = count($this->_storeList);
+            if($countStoreList == 0){
+                if (request()->isAjax()) {
+                    $this->success(config('custom.no_empower'),url($this->indexUrl),'no_empower',0);
+                }else{
+                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
+                }
+            }elseif($countStoreList == 1){
+                $this->store = $this->_storeList[0];
+            }else{
+                if (request()->isAjax()) {
+                }else{
+                    $this->error(config('custom.none_store'),url($this->indexUrl),'none_store',0);
+                }
+            }
+        }
+        if(!empty($this->store)){
+            $this->store['id'] = $this->store['store_id'];
+            //缓存当前店铺ID
+            session('currentStoreId',$this->store['store_id']);
+        }
+        $this->assign('store', $this->store);
     }
+
 
     /**缓存当前店铺信息
      */
-    protected function getCurrentStoreInfo($userId,$storeId,$storeList){
-        $countStoreList = count($storeList);
+    protected function getCurrentStoreInfo($userId,$storeId){
         $storeInfo = [];
         if($storeId){
             $model = new \common\model\UserStore();
@@ -47,11 +75,8 @@ class FactoryStoreBase extends UserBase{
                 ],
             ];
             $storeInfo = $model->getInfo($config);
-        }elseif($countStoreList==1){
-            $storeInfo = $storeList[0];
         }
-        $storeInfo['id'] = $storeInfo['store_id'];
-        return $storeInfo;
+        $this->store = $storeInfo;
     }
 
     /**组装店铺列表
@@ -119,23 +144,5 @@ class FactoryStoreBase extends UserBase{
         ];
         $storeList = $model->getList($config);
         $this->_storeList = $storeList;
-    }
-
-    //获取店铺门店列表
-    protected function getStoreShopList($storeId=0){
-        $shopList = [];
-        if($storeId){
-            $modelShop = new \app\store\model\Shop();
-            $config = [
-                'field' => [
-                    's.id','s.name',
-                ],'where' => [
-                    ['s.status','=',0],
-                    ['s.store_id','=',$storeId],
-                ],
-            ];
-            $shopList = $modelShop->getList($config);
-        }
-        return $shopList;
     }
 }

@@ -2,16 +2,11 @@
 namespace app\store\controller;
 
 class ManagerManage extends \common\controller\FactoryStoreBase{
-    private $currentStore = null;
     private $_currentStoreShopList = null;
     public function __construct(){
         parent::__construct();
-        //获取当前店铺信息
-        $storeId = session('currentStoreId');
-        $this->currentStore = $this->getCurrentStoreInfo($this->user['id'],$storeId,$this->_storeList);
-        $this->assign('currentStore', $this->currentStore);
         //获取当前店铺门店列表
-        $this->_currentStoreShopList = $this->getStoreShopList($this->currentStore['id']);
+        $this->getStoreShopList($this->store['id']);
         $this->assign('currentStoreShopList',$this->_currentStoreShopList);
     }
 
@@ -28,14 +23,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
      */
     public function manage(){
         if(request()->isAjax()){
-            $countStoreList = count($this->_storeList);
-            if($countStoreList==1) {
-                return successMsg('成功',['id'=>$this->currentStore['id']]);
-            }elseif($countStoreList>1){
-                return view('public/factory_store_list_tpl');
-            }else{
-                return errorMsg('未授权！');
-            }
+            return view('public/factory_store_list_tpl');
         }else{
             //岗位
             $post = config('permission.post');
@@ -54,12 +42,12 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**店铺员工-编辑
      */
     public function editStoreEmployee(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            $info = $modelManagerManage->editStoreEmployee($this->currentStore['id']);
+            $info = $modelManagerManage->editStoreEmployee($this->store['id']);
             if($info['status']==0){
                 return $info;
             }else{
@@ -72,12 +60,12 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**门店员工-编辑
      */
     public function editShopEmployee(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            $info = $modelManagerManage->editShopEmployee($this->currentStore['id']);
+            $info = $modelManagerManage->editShopEmployee($this->store['id']);
             if($info['status']==0){
                 return $info;
             }else{
@@ -89,7 +77,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取店铺员工列表
     public function getStoreEmployeeList(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
@@ -104,7 +92,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     ['u.status','=',0],
                     ['us.status','=',0],
                     ['us.type','=',4],
-                    ['us.store_id','=',$this->currentStore['id']],
+                    ['us.store_id','=',$this->store['id']],
                 ],
             ];
             $storeEmployeeList = $modelUserStore->getList($config);
@@ -116,7 +104,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     ],'where' => [
                         ['usn.status','=',0],
                         ['usn.user_id','=',$user['id']],
-                        ['usn.store_id','=',$this->currentStore['id']],
+                        ['usn.store_id','=',$this->store['id']],
                     ],
                 ];
                 $userStoreNodeList = $modelUserStoreNode->getList($config);
@@ -130,9 +118,27 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
         }
     }
 
+    //获取店铺门店列表
+    private function getStoreShopList($storeId=0){
+        $shopList = [];
+        if($storeId){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.store_id','=',$storeId],
+                ],
+            ];
+            $shopList = $modelShop->getList($config);
+        }
+        $this->_currentStoreShopList =  $shopList;
+    }
+
     //获取门店员工列表
     public function getShopEmployeeList(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
@@ -147,7 +153,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     ['u.status','=',0],
                     ['us.status','=',0],
                     ['us.type','=',4],
-                    ['us.store_id','=',$this->currentStore['id']],
+                    ['us.store_id','=',$this->store['id']],
                 ],
             ];
             $shopEmployeeList = $modelUserShop->getList($config);
@@ -159,7 +165,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     ],'where' => [
                         ['usn.status','=',0],
                         ['usn.user_id','=',$user['id']],
-                        ['usn.store_id','=',$this->currentStore['id']],
+                        ['usn.store_id','=',$this->store['id']],
                     ],
                 ];
                 $userShopNodeList = $modelUserShopNode->getList($config);
@@ -175,7 +181,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取门店经营地址列表
     public function getShopOperationAddressList(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
@@ -185,7 +191,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone','s.operation_address',
                 ],'where' => [
                     ['s.status','=',0],
-                    ['s.store_id','=',$this->currentStore['id']],
+                    ['s.store_id','=',$this->store['id']],
                 ],
             ];
             $shopList = $modelShop->getList($config);
@@ -196,7 +202,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
 
     //获取门店收货人地址列表
     public function getShopConsigneeAddressList(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
@@ -207,7 +213,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     's.consignee_address','s.consignee_province','s.consignee_city','s.consignee_area',
                 ],'where' => [
                     ['s.status','=',0],
-                    ['s.store_id','=',$this->currentStore['id']],
+                    ['s.store_id','=',$this->store['id']],
                 ],
             ];
             $shopList = $modelShop->getList($config);
@@ -219,12 +225,12 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**编辑店铺收货人信息
      */
     public function editStoreConsigneeInfo(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            $res = $modelManagerManage->editStoreConsigneeInfo($this->currentStore['id']);
+            $res = $modelManagerManage->editStoreConsigneeInfo($this->store['id']);
             return $res;
         }
     }
@@ -232,7 +238,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**编辑门店经营地址信息
      */
     public function editShopOperationAddress(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
@@ -248,7 +254,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                 $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
                 $where = [
                     ['id','=',$postData['shopId']],
-                    ['store_id','=',$this->currentStore['id']],
+                    ['store_id','=',$this->store['id']],
                     ['status','=',0],
                 ];
                 $res = $modelShop->isUpdate(true)->save($postData,$where);
@@ -268,7 +274,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     ],'where' => [
                         ['s.status','=',0],
                         ['s.id','=',$shopId],
-                        ['s.store_id','=',$this->currentStore['id']],
+                        ['s.store_id','=',$this->store['id']],
                     ],
                 ];
                 $shopInfo = $modelShop->getInfo($config);
@@ -281,7 +287,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**编辑门店收货人地址
      */
     public function editShopConsigneeAddress(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
@@ -302,7 +308,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
             $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
             $where = [
                 ['id','=',$postData['shopId']],
-                ['store_id','=',$this->currentStore['id']],
+                ['store_id','=',$this->store['id']],
                 ['status','=',0],
             ];
             $res = $modelShop->isUpdate(true)->save($postData,$where);
@@ -321,7 +327,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                     ],'where' => [
                         ['s.status','=',0],
                         ['s.id','=',$shopId],
-                        ['s.store_id','=',$this->currentStore['id']],
+                        ['s.store_id','=',$this->store['id']],
                     ],
                 ];
                 $shopInfo = $modelShop->getInfo($config);
@@ -334,24 +340,24 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     /**删除店铺员工
      */
     public function delStoreEmployee(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            return $modelManagerManage->delStoreEmployee($this->currentStore['id'],false);
+            return $modelManagerManage->delStoreEmployee($this->store['id'],false);
         }
     }
 
     /**删除门店员工
      */
     public function delShopEmployee(){
-        if(!($this->currentStore['id'])){
+        if(!($this->store['id'])){
             return errorMsg('请选择店铺！');
         }
         if(request()->isAjax()){
             $modelManagerManage = new \app\store\model\ManagerManage();
-            return $modelManagerManage->delShopEmployee($this->currentStore['id'],false);
+            return $modelManagerManage->delShopEmployee($this->store['id'],false);
         }
     }
 }
