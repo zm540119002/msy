@@ -6,8 +6,26 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
     public function __construct(){
         parent::__construct();
         //获取当前店铺门店列表
-        $this->_currentStoreShopList = $this->getStoreShopList($this->store['id']);
+        $this->getStoreShopList($this->store['id']);
         $this->assign('currentStoreShopList',$this->_currentStoreShopList);
+    }
+
+    //获取店铺门店列表
+    protected function getStoreShopList($storeId=0){
+        $shopList = [];
+        if($storeId){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.store_id','=',$storeId],
+                ],
+            ];
+            $shopList = $modelShop->getList($config);
+        }
+        $this->_currentStoreShopList =  $shopList;
     }
 
     /**首页
@@ -23,14 +41,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
      */
     public function manage(){
         if(request()->isAjax()){
-            $countStoreList = count($this->_storeList);
-            if($countStoreList==1) {
-                return successMsg('成功',['id'=>$this->store['id']]);
-            }elseif($countStoreList>1){
-                return view('public/factory_store_list_tpl');
-            }else{
-                return errorMsg('未授权！');
-            }
+            return view('public/factory_store_list_tpl');
         }else{
             //岗位
             $post = config('permission.post');
