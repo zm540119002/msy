@@ -31,13 +31,9 @@
             },
             btn:['确定','取消'],
             yes:function(index){
-                if(url){
-                    var storeId = $('.storeShopListLayer li.current').data('id');
-                    url = url+'/currentStoreId/' +storeId;
-                    location.href = url;
-                }else{
-                    location.reload();
-                }
+                var storeId = $('.storeShopListLayer li.current').data('id');
+                url = url+'/currentStoreId/' +storeId;
+                location.href = url;
             }
         });
     }
