@@ -42,7 +42,7 @@ class UserCenter extends \think\Controller{
         session('user_sign', null);
         session('currentStoreId', null);
         header('Content-type: text/html; charset=utf-8');
-        return redirect('login');
+        return redirect('store/Index/index');
     }
 
     /*发送验证码
