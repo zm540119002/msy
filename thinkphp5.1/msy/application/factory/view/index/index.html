@@ -124,6 +124,7 @@
 				}
 			});
 		});
+		
 		//店铺运营
 		$('body').on('click','.store-operation',function () {
 			var url = module + 'Operation/index';
@@ -147,20 +148,14 @@
 						if(data.data == 'no_login'){
 							loginDialog();
 						}
-						if(data.data == 'no_set_store'){
-							location.href = url;
-						}
-						if(data.data == 'no_empower'){
-							dialog.error(data.msg);
-						}
 						if(data.data == 'no_empower'){
 							dialog.error(data.msg);
 						}
 
 					}else if(data.status==1){
-						location.href = url;
 					}else{
-						location.href = url;
+						$('#storeShopInfo').find('.store_list').empty().append(data);
+						switchManagerStore(url);
 					}
 				}
 			});

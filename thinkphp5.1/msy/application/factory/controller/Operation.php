@@ -1,10 +1,13 @@
 <?php
 namespace app\factory\controller;
 
-class Operation extends \common\controller\StoreBase
+class Operation extends \common\controller\FactoryStoreBase
 {
     //运营管理首页
     public function Index(){
+        if(request()->isAjax()){
+            return view('public/factory_store_list_tpl');
+        }
         return $this->fetch();
     }
     //店铺管理设置页
