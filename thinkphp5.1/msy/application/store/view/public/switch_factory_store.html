@@ -31,7 +31,11 @@
     $(function(){
         //切换店铺
         $('body').on('click','.switch-store',function(){
-            switchManagerStore(location.href);
+            var url = location.href;
+            var arr = url.split("/");
+            arr.remove(-2,-1);
+            url = arr.join('/');
+            switchManagerStore(url);
         });
     });
 </script>
