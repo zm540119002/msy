@@ -31,10 +31,13 @@
             },
             btn:['确定','取消'],
             yes:function(index){
-                var storeId = $('.storeShopListLayer li.current').data('id');
-//                var url = module + 'ManagerManage/manage/currentStoreId/' +storeId;
-                url = url+'currentStoreId/' +storeId;
-                location.href = url;
+                if(url){
+                    var storeId = $('.storeShopListLayer li.current').data('id');
+                    url = url+'/currentStoreId/' +storeId;
+                    location.href = url;
+                }else{
+                    location.reload();
+                }
             }
         });
     }
