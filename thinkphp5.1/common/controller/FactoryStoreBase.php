@@ -11,10 +11,12 @@ class FactoryStoreBase extends UserBase{
         //采购商店铺列表
         $this->getFactoryStoreList();
         //获取当前店铺ID
-//        session('currentStoreId',null);
-        $sessionStoreId = (int)session('currentStoreId');
+        $sessionStoreId = session('currentStoreId');
         $requestStoreId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
-        $currentStoreId = ($requestStoreId && $sessionStoreId!=$requestStoreId)?$requestStoreId:$sessionStoreId;
+        if(($requestStoreId && $sessionStoreId!=$requestStoreId)){
+            session('currentStoreId',$requestStoreId);
+        }
+        $currentStoreId = session('currentStoreId');
         if($currentStoreId){
             $this->getCurrentStoreInfo($this->user['id'],$currentStoreId);
         }else{
