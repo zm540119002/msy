@@ -8,7 +8,7 @@
 		<div class="app-view-wrapper">
 			<div class="app-view">
 				<div class="bodys-header">
-					{include file="public/switch_store_head" /}
+					{include file="public/switch_factory_store" /}
 					<div class="store_deploy_nav specific_type">
 						<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
 							<a href="{:url('Operation/index')}">
@@ -79,12 +79,13 @@
 	};
 	$(function () {
 		//没有默认店铺
-		var notDefaultStore = "{$notDefaultStore|default=0}";
-		if(notDefaultStore == 0){
+		var store_id = "{$store.id}";
+		if(store_id !== 'null'){
 			//初始化商品列表
-			getPagingList(config,postData);			
+			getPagingList(config,postData);
 		}
-		 //上移
+
+		//上移
         $('body').on('click','.up-btn',function(){
             var _this=$(this);
             var _thisLi = _this.parents('li');
