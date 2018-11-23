@@ -1,22 +1,22 @@
 <?php
 namespace common\controller;
 
-/**店铺基础类，需要判断是否入驻店铺的类需要继承
- */
-class FactoryStoreBase extends UserBase
-{
+class FactoryStoreBase extends UserBase{
     protected $_storeList = null;
     protected $_factoryStoreList = null;
     protected $store = null;
+
     public function __construct(){
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
         //获取当前店铺ID
-        session('currentStoreId',null);
-        $sessionStoreId = (int)session('currentStoreId');
+        $sessionStoreId = session('currentStoreId');
         $requestStoreId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
-        $currentStoreId = ($requestStoreId && $sessionStoreId!=$requestStoreId)?$requestStoreId:$sessionStoreId;
+        if(($requestStoreId && $sessionStoreId!=$requestStoreId)){
+            session('currentStoreId',$requestStoreId);
+        }
+        $currentStoreId = session('currentStoreId');
         if($currentStoreId){
             $this->getCurrentStoreInfo($this->user['id'],$currentStoreId);
         }else{
@@ -42,6 +42,41 @@ class FactoryStoreBase extends UserBase
             session('currentStoreId',$this->store['store_id']);
         }
         $this->assign('store', $this->store);
+    }
+
+
+    /**缓存当前店铺信息
+     */
+    protected function getCurrentStoreInfo($userId,$storeId){
+        $storeInfo = [];
+        if($storeId){
+            $model = new \common\model\UserStore();
+            $config = [
+                'field' => [
+                    'us.id user_store_id','us.user_id','us.user_name',
+                    's.id store_id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    's.consignee_name','s.consignee_mobile_phone','s.detail_address',
+                    's.province','s.city','s.area',
+                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
+                    'f.id factory_id','f.name factory_name','f.type factory_type',
+                ],'join' => [
+                    ['store s','s.id = us.store_id','left'],
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left'],
+                    ['factory f','f.id = us.factory_id','left'],
+                ],'where' => [
+                    ['us.status','=',0],
+                    ['us.user_id','=',$userId],
+                    ['s.status','=',0],
+                    ['s.id','=',$storeId],
+                    ['f.status','=',0],
+                    ['f.type','=',config('custom.type')],
+                ],
+            ];
+            $storeInfo = $model->getInfo($config);
+        }
+        $this->store = $storeInfo;
     }
 
     /**组装店铺列表
@@ -77,6 +112,7 @@ class FactoryStoreBase extends UserBase
                 }
             }
         }
+        $this->assign('factoryStoreList', $this->_factoryStoreList);
     }
 
     /**获取店长店铺列表
@@ -108,39 +144,5 @@ class FactoryStoreBase extends UserBase
         ];
         $storeList = $model->getList($config);
         $this->_storeList = $storeList;
-    }
-
-    /**缓存当前店铺信息
-     */
-    protected function getCurrentStoreInfo($userId,$storeId){
-        $storeInfo = [];
-        if($storeId){
-            $model = new \common\model\UserStore();
-            $config = [
-                'field' => [
-                    'us.id user_store_id','us.user_id','us.user_name',
-                    's.id store_id','s.store_type','s.run_type','s.is_default','s.operational_model',
-                    's.consignee_name','s.consignee_mobile_phone','s.detail_address',
-                    's.province','s.city','s.area',
-                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
-                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
-                    'f.id factory_id','f.name factory_name','f.type factory_type',
-                ],'join' => [
-                    ['store s','s.id = us.store_id','left'],
-                    ['record r','r.id = s.foreign_id','left'],
-                    ['brand b','b.id = s.foreign_id','left'],
-                    ['factory f','f.id = us.factory_id','left'],
-                ],'where' => [
-                    ['us.status','=',0],
-                    ['us.user_id','=',$userId],
-                    ['s.status','=',0],
-                    ['s.id','=',$storeId],
-                    ['f.status','=',0],
-                    ['f.type','=',config('custom.type')],
-                ],
-            ];
-            $storeInfo = $model->getInfo($config);
-        }
-        $this->store = $storeInfo;
     }
 }

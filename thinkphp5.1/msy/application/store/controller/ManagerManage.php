@@ -10,24 +10,6 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
         $this->assign('currentStoreShopList',$this->_currentStoreShopList);
     }
 
-    //获取店铺门店列表
-    protected function getStoreShopList($storeId=0){
-        $shopList = [];
-        if($storeId){
-            $modelShop = new \app\store\model\Shop();
-            $config = [
-                'field' => [
-                    's.id','s.name',
-                ],'where' => [
-                    ['s.status','=',0],
-                    ['s.store_id','=',$storeId],
-                ],
-            ];
-            $shopList = $modelShop->getList($config);
-        }
-        $this->_currentStoreShopList =  $shopList;
-    }
-
     /**首页
      */
     public function index(){
@@ -134,6 +116,24 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
             $this->assign('list',$storeEmployeeList);
             return view('store_employee_list_tpl');
         }
+    }
+
+    //获取店铺门店列表
+    private function getStoreShopList($storeId=0){
+        $shopList = [];
+        if($storeId){
+            $modelShop = new \app\store\model\Shop();
+            $config = [
+                'field' => [
+                    's.id','s.name',
+                ],'where' => [
+                    ['s.status','=',0],
+                    ['s.store_id','=',$storeId],
+                ],
+            ];
+            $shopList = $modelShop->getList($config);
+        }
+        $this->_currentStoreShopList =  $shopList;
     }
 
     //获取门店员工列表
