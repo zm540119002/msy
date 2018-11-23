@@ -32,7 +32,7 @@
             btn:['确定','取消'],
             yes:function(index){
                 var storeId = $('.storeShopListLayer li.current').data('id');
-                var url = module + 'ManagerManage/manage/storeId/' +storeId;
+                var url = module + 'ManagerManage/manage/currentStoreId/' +storeId;
                 location.href = url;
             }
         });

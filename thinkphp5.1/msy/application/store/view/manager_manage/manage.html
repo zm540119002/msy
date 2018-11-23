@@ -116,7 +116,7 @@
 						<ul class="list">
 							<li class="no-data"><span>暂无数据</span></li>
 						</ul>
-						{notempty name='currentStore'}
+						{notempty name='store'}
 						<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
 						{/notempty}
 					</form>
@@ -127,11 +127,11 @@
 						<p class="emp_account_tipc">设定店铺的收货人地址手机号码（*用于顾客退换货时对接）</p>
 						<div class="input_item">
 							<input class="input-filed" type="text" name="consignee_name"
-								   value="{$currentStore.consignee_name}" placeholder="收货人姓名">
+								   value="{$store.consignee_name}" placeholder="收货人姓名">
 						</div>
 						<div>
 							<input class="input-filed" type="tel" name="consignee_mobile_phone"
-								   value="{$currentStore.consignee_mobile_phone}" placeholder="收货人手机号码">
+								   value="{$store.consignee_mobile_phone}" placeholder="收货人手机号码">
 						</div>
 						<div class="express-area area-box">
 							<a id="expressArea2" href="javascript:void(0)" class="f24 form-group box-flex">
@@ -142,7 +142,7 @@
 						</div>
 						<div>
 							<input class="input-filed" type="text" name="detail_address"
-								   value="{$currentStore.detail_address}" placeholder="详细地址">
+								   value="{$store.detail_address}" placeholder="详细地址">
 						</div>
 						<a href="javascript:void(0);" class="submit foot-btn">确定</a>
 					</form>
@@ -156,7 +156,7 @@
 						</div>
 						<p class="emp_account_tipc">门店运营员工账号</p>
 						<ul class="list"><li class="no-data"><span>暂无数据</span></li></ul>
-						{notempty name='currentStore'}
+						{notempty name='store'}
 						<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
 						{/notempty}
 					</form>
@@ -215,9 +215,9 @@
 		//页面初始化 
 		$('.content_main .section_content').eq(0).show();
 		// //省市区初始化
-        var province = '{$currentStore.province|default=""}';
-        var city = '{$currentStore.city|default=""}';
-        var area = '{$currentStore.area|default=""}';
+        var province = '{$store.province|default=""}';
+        var city = '{$store.city|default=""}';
+        var area = '{$store.area|default=""}';
 		var region = [];
 		if(province && city && area){
 			region.push(province);
