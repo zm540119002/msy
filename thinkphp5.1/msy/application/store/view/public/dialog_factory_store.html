@@ -11,7 +11,7 @@
         });
     });
     //选择管理店铺-确定
-    function switchManagerStore(){
+    function switchManagerStore(url){
         var content = $('#storeShopInfo').html();
         layer.open({
             title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
@@ -32,7 +32,7 @@
             btn:['确定','取消'],
             yes:function(index){
                 var storeId = $('.storeShopListLayer li.current').data('id');
-                var url = module + 'ManagerManage/manage/currentStoreId/' +storeId;
+                url = url+'/currentStoreId/' +storeId;
                 location.href = url;
             }
         });
