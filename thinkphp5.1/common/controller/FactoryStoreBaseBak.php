@@ -143,22 +143,4 @@ class FactoryStoreBase extends UserBase{
         $storeList = $model->getList($config);
         $this->_storeList = $storeList;
     }
-
-    //获取店铺门店列表
-    protected function getStoreShopList($storeId=0){
-        $shopList = [];
-        if($storeId){
-            $modelShop = new \app\store\model\Shop();
-            $config = [
-                'field' => [
-                    's.id','s.name',
-                ],'where' => [
-                    ['s.status','=',0],
-                    ['s.store_id','=',$storeId],
-                ],
-            ];
-            $shopList = $modelShop->getList($config);
-        }
-        return $shopList;
-    }
 }
