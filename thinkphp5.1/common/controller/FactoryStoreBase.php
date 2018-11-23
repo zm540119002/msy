@@ -10,10 +10,9 @@ class FactoryStoreBase extends UserBase{
         parent::__construct();
         //采购商店铺列表
         $this->getFactoryStoreList();
-        //缓存当前店铺ID
+        //获取当前店铺ID
         $currentStoreId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
         if($currentStoreId){
-            session('currentStoreId',$currentStoreId);
             $this->store = $this->getCurrentStoreInfo($this->user['id'],$currentStoreId);
         }else{
             $countStoreList = count($this->_storeList);
@@ -29,6 +28,8 @@ class FactoryStoreBase extends UserBase{
         }
         if(!empty($this->store)){
             $this->store['id'] = $this->store['store_id'];
+            //缓存当前店铺ID
+            session('currentStoreId',$this->store['store_id']);
         }
         $this->assign('store', $this->store);
     }
