@@ -263,25 +263,26 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                 }
                 return successMsg('成功');
             }
-        }else{
-            $shopId = input('shopId');
-            if(intval($shopId)){
-                $modelShop = new \app\store\model\Shop();
-                $config = [
-                    'field' => [
-                        's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone',
-                        's.operation_province','s.operation_city','s.operation_area','s.operation_address',
-                    ],'where' => [
-                        ['s.status','=',0],
-                        ['s.id','=',$shopId],
-                        ['s.store_id','=',$this->store['id']],
-                    ],
-                ];
-                $shopInfo = $modelShop->getInfo($config);
-                $this->assign('shopInfo',$shopInfo);
-            }
-            return $this->fetch();
         }
+//        else{
+//            $shopId = input('shopId');
+//            if(intval($shopId)){
+//                $modelShop = new \app\store\model\Shop();
+//                $config = [
+//                    'field' => [
+//                        's.id','s.name','s.logo_img','s.operation_mobile_phone','s.operation_fix_phone',
+//                        's.operation_province','s.operation_city','s.operation_area','s.operation_address',
+//                    ],'where' => [
+//                        ['s.status','=',0],
+//                        ['s.id','=',$shopId],
+//                        ['s.store_id','=',$this->store['id']],
+//                    ],
+//                ];
+//                $shopInfo = $modelShop->getInfo($config);
+//                $this->assign('shopInfo',$shopInfo);
+//            }
+//            return $this->fetch();
+//        }
     }
 
     /**编辑门店收货人地址
