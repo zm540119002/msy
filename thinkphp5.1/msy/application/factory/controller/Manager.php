@@ -1,13 +1,12 @@
 <?php
 namespace app\factory\controller;
 
-class Manager extends \common\controller\FactoryBase
-{
+class Manager extends \common\controller\FactoryBase{
     /**首页
      */
     public function index(){
         if(request()->isAjax()){
-            $modelManager = new \app\store\model\Manager();
+            $modelManager = new \app\factory\model\Manager();
             $list = $modelManager->getList($this->factory['id']);
             $this->assign('list',$list);
             return view('list_tpl');

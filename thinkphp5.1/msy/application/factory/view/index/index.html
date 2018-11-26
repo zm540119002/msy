@@ -6,13 +6,6 @@
 <article class="f24">
 	<section class="fixedtop top_nav_fixed">
 		{include file="template/header_menu_msy_factory.html" /}
-		<!--<div class="top_menu_box">
-			<div class="top_menu_list">
-				<a href="javascript:void(0);" class="current">供应商</a>
-				<a href="javascript:void(0);">云推客</a>
-				<a href="javascript:void(0);">美尚会</a>
-			</div>
-		</div>-->
 	</section>
 	<section class="slider_banner ">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
@@ -41,7 +34,7 @@
 	<section class="module-navigation separation-line ">
 		<div class="columns_flex f20 channel_nav mall_function_menu">
 			<a href="javascript:void(0);" class="deployed-deployment"><span class="union_purchase"></span>入驻部署</a>
-			<a href="javascript:void(0);" class="my-store"><span class="exclusive"></span>店长管理</a>
+			<a href="javascript:void(0);" class="my-store manager_manage"><span class="exclusive"></span>店长管理</a>
 			<a href="javascript:void(0);" class="store_run store-operation"><span class="classify"></span>店铺运营</a>
 			<a href="{:url('Order/index')}" class="order-management"><span class="purchasers"></span>订单客服</a>
 			<a href="javascript:void(0);" class="order-management-change"><span class="recharge"></span>财务结算</a>
@@ -54,12 +47,6 @@
 	<section class="entry_msy">
 		<a href="{:url('deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
 	</section>
-	<!--<section class="explain_nav">
-		<a href="javascript:void(0);">关于美尚云></a>
-		<a href="javascript:void(0);">厂商使用帮助></a>
-		<a href="javascript:void(0);">人才招聘></a>
-		<a href="javascript:void(0);">版权信息备案号</a>
-	</section>-->
 </article>
 {/block}
 {block name="common"}
@@ -124,7 +111,38 @@
 				}
 			});
 		});
-		
+
+		//店长管理
+		$('body').on('click','.manager_manage',function () {
+			var url = module + 'ManagerManage/manage';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1 && data.data=='no_login'){
+						loginDialog();
+					}else if(data.code==1 && data.data=='no_empower'){
+						dialog.error(data.msg);
+					}else{
+						$('#storeShopInfo').find('.store_list').empty().append(data);
+						switchManagerStore(url);
+					}
+				}
+			});
+		});
+
 		//店铺运营
 		$('body').on('click','.store-operation',function () {
 			var url = module + 'Operation/index';

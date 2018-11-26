@@ -11,7 +11,7 @@
         });
     });
     //选择管理店铺-确定
-    function switchManagerStore(){
+    function switchManagerStore(url){
         var content = $('#storeShopInfo').html();
         layer.open({
             title:['选择店家店铺进入','border-bottom:1px solid #d9d9d9;'],
@@ -25,14 +25,26 @@
             style: '',
             success:function(){
                 var winHeight=$(window).height();
+                var storeId='{:json_encode($store.store_id)}';
+                storeId = JSON.parse( storeId );
                 $('.storeShopListLayer .store_list').css('height',winHeight-120+'px');
                 $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
                 $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+                $.each($('.storeShopListLayer li'),function(){
+                    var currentId=$(this).data('id');
+                    if(storeId==currentId){
+                        $(this).addClass('current');
+                    }
+                })
             },
-            btn:['确定','取消'],
+            btn:['确定'],
             yes:function(index){
                 var storeId = $('.storeShopListLayer li.current').data('id');
-                var url = module + 'ManagerManage/manage/storeId/' +storeId;
+                url = url+'/currentStoreId/' +storeId;
+                if(!storeId){
+                    dialog.error('请选择一个店铺');
+                    return false;
+                }
                 location.href = url;
             }
         });
