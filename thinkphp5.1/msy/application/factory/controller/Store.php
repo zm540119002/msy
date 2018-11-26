@@ -102,6 +102,8 @@ class Store extends \common\controller\FactoryBase
                     ['user u','u.id = us.user_id','left'],
                 ],'where' => [
                     ['s.status','=',0],
+                    ['f.status','=',0],
+                    ['us.status','=',0],
                     ['s.factory_id','=',$this->factory['id']],
                     ['f.type','=',1],
                     ['us.type','in',[1,3]],
@@ -127,6 +129,7 @@ class Store extends \common\controller\FactoryBase
                     foreach ($userList as $user){
                         if($store['id'] == $user['id'] && $store['factory_id'] == $user['factory_id'] ){
                             $store['name'] = $user['name'];
+                            $store['user_store_id'] = $user['user_store_id'];
                             $store['mobile_phone'] = $user['mobile_phone'];
                         }
                     }

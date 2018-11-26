@@ -169,7 +169,7 @@ class Store extends Base {
 				['factory_id', '=', $factoryId],
 				['store_id', '=', $storeId],
 			];
-			$res = $modelUserStore->del($where,false);
+			$res = $modelUserStore->del($where);
 			if($res['status']==0){
 				return errorMsg('失败',$this->getError());
 			}
