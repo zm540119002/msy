@@ -116,8 +116,13 @@
 				dataType:'json',
 				success:function (data) {
 					_this.removeClass("nodisabled");
-					dialog.error(data.info);
-					return false;
+					if(data.status ==0){
+						dialog.error(data.info);
+						return false;
+					}else{
+						location.href = controller + 'manage';
+						history.go(-1);
+					}
 				},
 				error:function (xhr) {
 					dialog.error('Ajax错误'+xhr.status);
