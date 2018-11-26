@@ -173,7 +173,8 @@ class Store extends Base {
 			if($res['status']==0){
 				return errorMsg('失败',$this->getError());
 			}
-//			return successMsg($modelUserStore->getLastSql());
+			$postData['mobile_phone'] = '';
+			$postData['name'] = '';
 		}
 		return successMsg('成功！',$postData);
 	}
