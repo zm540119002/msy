@@ -23,7 +23,8 @@ class Store extends \common\controller\FactoryBase
                 ['record r','r.id = s.foreign_id','left'],
                 ['brand b','b.id = s.foreign_id','left']
             ],'field' => [
-                's.id','s.store_type','s.run_type','s.is_default','case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                's.id','s.store_type','s.run_type','s.is_default',
+                'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
                 'case s.store_type when 1 then r.short_name when 2 then b.name END as name','s.auth_status'
             ],
         ];
