@@ -95,10 +95,12 @@
 		pageSize:10
 	};
 	$(function () {
-		//没有默认店铺
-		var store_id = "{$store.id}";
-		if(store_id !== 'null'){
-//			//初始化
+		//有默认店铺
+		var store ={:json_encode($store.id)};
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
+			//初始化
 			postData.activityStatus = $('.category-tab li.current a').data('activity-status');
 			getPagingList(config,postData);
 		}

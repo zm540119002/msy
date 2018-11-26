@@ -78,11 +78,12 @@
 		pageType:'sort'
 	};
 	$(function () {
-		//没有默认店铺
-		var store_id = "{$store.id}";
-		if(store_id !== 'null'){
-			//初始化商品列表
-			getPagingList(config,postData);			
+		//有默认店铺
+		var store ={:json_encode($store.id)};
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
+			getPagingList(config,postData);
 		}
 		 //上移
         $('body').on('click','.up-btn',function(){

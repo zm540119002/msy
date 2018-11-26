@@ -77,7 +77,7 @@
 		<div class="app-view-wrapper">
 			<div class="app-view">
 				<div class="bodys-header">
-					{include file="public/switch_store_head" /}
+					{include file="public/switch_factory_store" /}
 					<div class="store_deploy_nav specific_type">
 						<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
 							<a href="{:url('Operation/index')}">
@@ -158,14 +158,15 @@
 	$(function () {
 		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
 		//有默认店铺
-		var store_id = {:json_encode($store.id)};
-		if(store_id){
+		var store ={:json_encode($store.id)};
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
 			getPagingList(config,postData);
 		}
 		var databaseContent=$('#databaseContent').html();
 		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
 			var _this=$(this);
-
 			layer.open({
 				title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
 				className:'databaseLayer',
@@ -228,7 +229,7 @@
 		})
 
 
-		//备份
+//		//备份
 		$('body').on('click','.backup',function () {
 			$.post(module+'Goods/backup',{},function (msg) {
 				if(msg.status == 0){
