@@ -158,10 +158,13 @@
 	$(function () {
 		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
 		//有默认店铺
-		var store_id = {:json_encode($store.id)};
-		if(store_id){
+		var store ={:json_encode($store.id)};
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
 			getPagingList(config,postData);
 		}
+
 		var databaseContent=$('#databaseContent').html();
 		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
 			var _this=$(this);

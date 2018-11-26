@@ -12,6 +12,7 @@ class Order extends \common\controller\UserBase
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
+
         //计算订单总价
         $modelGoods = new \app\purchase\model\Goods();
         $amount = 0;
@@ -27,8 +28,8 @@ class Order extends \common\controller\UserBase
             $goodsInfo = $info = $modelGoods->getInfo($config);;
             $goodsNum = intval($v['num']);
             $goodsList[$k]['price'] = $goodsInfo['sale_price'];
-            $totalPrice = $goodsInfo['sale_price'] * $goodsNum;
-            $amount += number_format($totalPrice, 2, '.', '');
+            $totalPrices = $goodsInfo['sale_price'] * $goodsNum;
+            $amount += number_format($totalPrices, 2, '.', '');
         }
         $modelOrder = new \app\purchase\model\Order();
         $modelOrderDetail = new \app\purchase\model\OrderDetail();
@@ -41,40 +42,39 @@ class Order extends \common\controller\UserBase
         $data = [];
         $data['sn'] = $orderSN;
         $data['user_id'] = $this->user['id'];
-//        $_POST['logistics_id'] = $logisticsId;
+//        $data['logistics_id'] = $logisticsId;
         $data['amount'] = $amount;//订单金额
         $data['actually_amount'] = $amount;//实际要支付的金额
         $data['create_time'] = time();
-        $res = $modelOrder->edit($data);
-        if (!$res['status']) {
+        $orderId = $modelOrder->allowField(true)->save($data);
+        if (!$orderId) {
             $modelOrder->rollback();
-            return errorMsg($res);
+            return errorMsg('失败',array('orderId' => $orderId));
         }
-        $orderId = $res['id'];
         //生成订单明细
-        foreach ($goodsList as $item) {
-            $data = [];
-            $data['order_sn'] = $orderSN;
-            $data['order_id'] = $orderId;
-            $data['price'] = $item['price'];
-            $data['num'] = $item['num'];
-            $data['goods_id'] = $item['goods_id'];
-            $data['user_id'] = $this->user['id'];
-            $res = $modelOrderDetail->edit($data);
-            if (!$res['status']) {
-                $modelLogistics->rollback();
-                return errorMsg($res);
-            }
+        $dataDetail = [];
+        foreach ($goodsList as $item=>$value) {
+            $dataDetail[$item]['order_sn'] = $orderSN;
+            $dataDetail[$item]['order_id'] = $orderId;
+            $dataDetail[$item]['price'] = $value['price'];
+            $dataDetail[$item]['num'] = $value['num'];
+            $dataDetail[$item]['goods_id'] = $value['goods_id'];
+            $dataDetail[$item]['user_id'] = $this->user['id'];
+        }
+        $res = $modelOrderDetail->allowField(true)->saveAll($dataDetail)->toArray();
+        if (!count($res)) {
+            $modelLogistics->rollback();
+            return errorMsg('失败');
         }
         $modelLogistics->commit();
-        return successMsg('生成订单成功', array('sn' => $orderSN));
+        return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
    //订单-结算页
     public function settlement()
     {
         $modelOrder = new \app\purchase\model\Order();
-        $orderSn = input('sn');
+        $orderSn = input('order_sn');
         $config = [
             'where' => [
                 ['o.status', '=', 0],
@@ -111,18 +111,18 @@ class Order extends \common\controller\UserBase
             ['id','=',$id],
         ];
         $res = $modelOrder->edit($data,$condition);
-        $sn = input('post.sn','','string');
+        $orderSn = input('post.order_sn','','string');
         if(false === $res){
            return errorMsg('失败');
         }
-        return successMsg('成功',array('sn'=>$sn));
+        return successMsg('成功',array('order_sn'=>$orderSn));
     }
 
     //确定订单
     public function pay()
     {
         $modelOrder = new \app\purchase\model\Order();
-        $orderSn = input('sn');
+        $orderSn = input('order_sn');
         $config = [
             'where' => [
                 ['o.status', '=', 0],

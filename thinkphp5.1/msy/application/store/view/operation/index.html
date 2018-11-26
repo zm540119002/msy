@@ -62,6 +62,16 @@
 {block name="script"}
 
 <script type="text/javascript">
+	$(function() {
+		//页面初始化
+		$('.content_main .section_content').eq(0).show();
+		var store = '{$store.id}';
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
+		
+		}
+	})
 
 </script>
 {/block}

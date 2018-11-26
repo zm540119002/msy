@@ -4,9 +4,9 @@ namespace app\purchase\controller;
 class Payment extends \common\controller\UserBase{
     //订单-支付
     public function orderPayment(){
-        if( !empty(input('sn')) && !empty(input('?pay_code'))){
+        if( !empty(input('order_sn')) && !empty(input('?pay_code'))){
             $modelOrder = new \app\purchase\model\Order();
-            $orderSn = input('sn','','string');
+            $orderSn = input('order_sn','','string');
             $config = [
                 'where' => [
                     ['o.status', '=', 0],
