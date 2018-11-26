@@ -304,7 +304,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
                 return errorMsg($validateShop->getError());
             }
             list($postData['consignee_province'],$postData['consignee_city'],$postData['consignee_area']) = $postData['region'];
-//            $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
+            $postData['logo_img'] = config('upload_dir.shop_logo_img').basename($postData['logo_img']);
             $where = [
                 ['id','=',$postData['shopId']],
                 ['store_id','=',$this->store['id']],

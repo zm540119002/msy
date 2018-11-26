@@ -803,6 +803,7 @@
 						return false;
 					}
 					postData.shopId = _this.data('id');
+					postData.logo_img = _this.find('img').attr('src');
 					postData.region = $('.shop_consignee_info .area_address').getArea();
 					var config = {
 						url:controller + 'editShopConsigneeAddress',
