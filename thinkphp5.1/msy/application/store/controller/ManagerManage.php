@@ -319,25 +319,6 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
             $this->assign('info',$postData);
             return view('shop_consignee_address_info_tpl');
         }
-//        else{
-//            $shopId = input('shopId');
-//            if(intval($shopId)){
-//                $modelShop = new \app\store\model\Shop();
-//                $config = [
-//                    'field' => [
-//                        's.id','s.name','s.logo_img','s.consignee_mobile_phone','s.consignee_name',
-//                        's.consignee_province','s.consignee_city','s.consignee_area','s.consignee_address',
-//                    ],'where' => [
-//                        ['s.status','=',0],
-//                        ['s.id','=',$shopId],
-//                        ['s.store_id','=',$this->store['id']],
-//                    ],
-//                ];
-//                $shopInfo = $modelShop->getInfo($config);
-//                $this->assign('shopInfo',$shopInfo);
-//            }
-//            return $this->fetch();
-//        }
     }
 
     /**删除店铺员工
