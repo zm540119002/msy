@@ -288,17 +288,12 @@
 					_this.removeClass("nodisabled");//删除防止重复提交
 					$('.loading').hide();
 					if(data.status == 0){
-						if(data.url){
-							location.href = data.url;
-						}else{
-							dialog.error(data.info);
-						}
+						dialog.error(data.info);
 					}else if(data.status == 1){
-						if(data.info=='isAjax'){
-							loginDialog();
-						}else{
-							location.href = module + 'Order/settlement/order_sn/' + data.order_sn;
-						}
+						location.href = module + 'Order/settlement/order_sn/' + data.order_sn;
+					}
+					if(data.code==1 && data.data=='no_login'){
+						loginDialog();
 					}
 				}
 			});
