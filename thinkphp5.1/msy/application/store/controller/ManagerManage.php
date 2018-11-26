@@ -293,7 +293,7 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
         if(request()->isAjax()){
             $postData = input('post.');
             if(!isset($postData['shopId']) || !intval($postData['shopId'])){//修改门店经营地址信息
-                return errorMsg('确实门店ID');
+                return errorMsg('缺少门店ID');
             }
             $postData['consignee_name'] = trim($postData['consignee_name']);
             $postData['consignee_mobile_phone'] = trim($postData['consignee_mobile_phone']);
@@ -303,37 +303,21 @@ class ManagerManage extends \common\controller\FactoryStoreBase{
             if(!$validateShop->scene('consignee_address')->check($postData)){
                 return errorMsg($validateShop->getError());
             }
-            $modelShop = new \app\store\model\Shop();
             list($postData['consignee_province'],$postData['consignee_city'],$postData['consignee_area']) = $postData['region'];
-            $postData['logo_img'] = moveImgFromTemp(config('upload_dir.shop_logo_img'),basename($postData['logo_img']));
+            $postData['logo_img'] = config('upload_dir.shop_logo_img').basename($postData['logo_img']);
             $where = [
                 ['id','=',$postData['shopId']],
                 ['store_id','=',$this->store['id']],
                 ['status','=',0],
             ];
+            $modelShop = new \app\store\model\Shop();
             $res = $modelShop->isUpdate(true)->save($postData,$where);
             if($res===false){
                 return errorMsg('失败',$modelShop->getError());
             }
-            return successMsg('成功',$postData);
-        }else{
-            $shopId = input('shopId');
-            if(intval($shopId)){
-                $modelShop = new \app\store\model\Shop();
-                $config = [
-                    'field' => [
-                        's.id','s.name','s.logo_img','s.consignee_mobile_phone','s.consignee_name',
-                        's.consignee_province','s.consignee_city','s.consignee_area','s.consignee_address',
-                    ],'where' => [
-                        ['s.status','=',0],
-                        ['s.id','=',$shopId],
-                        ['s.store_id','=',$this->store['id']],
-                    ],
-                ];
-                $shopInfo = $modelShop->getInfo($config);
-                $this->assign('shopInfo',$shopInfo);
-            }
-            return $this->fetch();
+            $postData['id'] = $postData['shopId'];
+            $this->assign('info',$postData);
+            return view('shop_consignee_address_info_tpl');
         }
     }
 
