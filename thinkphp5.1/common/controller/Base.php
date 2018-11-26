@@ -145,8 +145,7 @@ class Base extends \think\Controller{
         return $tempRelativePath . $fileName;
     }
 
-    /**
-     * 合成商品图片
+    /**合成商品图片
      *
      * @param array $config 合成图片参数
      * @return $img->path 合成图片的路径
