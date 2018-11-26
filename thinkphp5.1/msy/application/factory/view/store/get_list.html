@@ -78,7 +78,8 @@
 				content:setShopAccount,
 				btn:['确定','取消'],
 				success:function(){
-					copyDataByName(_this,$('.setShopAccountLayer .setShopForm'));
+					var dialogForm = $('.setShopAccountLayer .setShopForm');
+					copyDataByName(_this,dialogForm);
 					copyDataByClassName(_this,$('.setShopAccountLayer .set_top_info'));
 				},
 				yes:function(index){
