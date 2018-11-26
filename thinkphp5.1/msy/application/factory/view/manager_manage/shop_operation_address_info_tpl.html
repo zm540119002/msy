@@ -1,0 +1,21 @@
+{notempty name='info'}
+<li data-id="{$info.id}">
+	{empty name="info.logo_img"}
+	<img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+	{else /}
+	<img src="public_uploads/{$info.logo_img}" alt="" class="left">
+	{/empty}
+	<div class="info_r">
+		<div>
+			<span>{$info.name}</span>
+		</div>
+		<div>地址：<sapn>{$info.operation_address}</sapn></div>
+		<div>固话：<span>{$info.operation_fix_phone}</span></div>
+		<div>手机：<span>{$info.operation_mobile_phone}</span></div>
+		<div>
+			<i></i>
+			距离<span>500</span>km
+		</div>
+	</div>
+</li>
+{/notempty}

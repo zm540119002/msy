@@ -1,0 +1,820 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">{/block}
+{block name="content"}
+<!--省市区-->
+<section id="areaLayer" class="express-area-box" style="display:none;">
+	<header>
+		<h3>选择地区</h3>
+		<a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+		<a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+	</header>
+	<article id="areaBox">
+		<ul id="areaList" class="area-list"></ul>
+	</article>
+</section> 
+<div id="areaMask" class="mask"></div>
+<!--编辑线上店铺员工账号-->
+<section id="storeEmployeeSection" style="display:none;">
+	<form class="storeEmployeeForm">
+		<div class="account-field">
+			<span class="content-label">姓名</span>
+			<input type="text" class="" placeholder="姓名" name="name">
+		</div>
+		<div class="account-field">
+			<span class="content-label">手机号码</span>
+			<input type="tel" class="" placeholder="手机号码" name="mobile_phone">
+		</div>
+        {include file='public/permission_tpl' /}
+	</form>
+</section>
+<!--编辑门店员工账号-->
+<section id="shopEmployeeSection" style="display:none;">
+    <form class="shopEmployeeForm">
+        <div class="account-field">
+            <span class="content-label">姓名</span>
+            <input type="text" class="" placeholder="姓名" name="name">
+        </div>
+        <div class="account-field">
+            <span class="content-label">手机号码</span>
+            <input type="tel" class="" placeholder="手机号码" name="mobile_phone">
+        </div>
+        <div class="account-field">
+            <span class="content-label">所属门店</span>
+            <select name="shop_id">
+				{notempty name='currentStoreShopList'}
+				{volist name="currentStoreShopList" id="vo"}
+				<option value="{$vo.id}">{$vo.name}</option>
+				{/volist}
+				{/notempty}
+            </select>
+        </div>
+        {include file='public/permission_tpl' /}
+    </form>
+</section>
+<!--编辑门店收货人信息-->
+<section class="shopConsigneeInfo" id="shopConsigneeInfo" style="display:none;">
+	<form class="shop_consignee_info">
+		<p class="emp_account_tipc">设定门店收货人地址手机号码<br/>(用于门店用户代收货、调换货处理)</p>
+		<div class="input_item">
+			<label class="">门店名称：</label>
+			<input class="" type="text" name="shop_name" value="" >
+		</div>
+		<div class="express-area area-box">
+			<span class="content-label">收货人地址：</span>
+			<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+				<label class="form-label">所在地区：</label>
+				<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+				<input type="hidden" value="" class="area-address-name" data-key="">
+			</a>
+			<div>
+				<input class="input-filed" type="text" name="consignee_address" value="" placeholder="街道/小区/道/楼/门牌详细地址">
+			</div>
+		</div>
+		<div class="input_item">
+			<span class="content-label">收货人姓名：</span>
+			<input class="input-filed" type="text" name="consignee_name" value="" placeholder="姓名">
+		</div>
+		<div>
+			<span class="content-label">收货人手机号码：</span>
+			<input class="input-filed" type="tel" name="consignee_mobile_phone" value="" placeholder="业务手机号码">
+		</div>
+	</form>
+</section>
+<article class="f24">
+	<div class="top_header">
+		{include file='public/switch_factory_store' /}
+		<section class="specific_type store_deploy_nav">
+			<div class="columns_flex f20 l-r-sides store_deploy_bar">
+				<a href="javascript:void(0);" class="current" data-type="online">线上店铺店长管理</a>
+				<a href="javascript:void(0);" data-type="o2o">020门店店长管理</a>
+			</div>
+		</section>
+		<section class=" ">
+			<div class="columns_flex f20 l-r-sides top_empy_nav">
+				<a href="javascript:void(0);" class="current" data-type="0">店铺运营员工账号管理</a>
+				<a href="javascript:void(0);" data-type="1">设定商品退换收货人地址手机号码</a>
+			</div>
+			<div class="columns_flex f20 l-r-sides top_empy_nav hide">
+                <a href="javascript:void(0);" class="current" data-type="2">门店员工账号</a>
+                <a href="javascript:void(0);" data-type="3">门店经营地址</a>
+                <a href="javascript:void(0);" data-type="4">门店收货人地址手机号码</a>
+            </div>
+		</section>
+	</div>
+	<section class="f24 account-content-wrapper">
+		<div class="content-top content-mg-top">
+			<div class="content_main">
+				<!--店铺员工列表-->
+				<section class="section_content" id="storeEmployeeList">
+					<form class="storeEmployeeList">
+						<div class="search_module_bar">
+							<input type="button" class="search_btn left"/>
+							<input type="text" class="search_text left" placeholder="输入姓名/岗位/手机号搜索账号"/>
+						</div>
+						<p class="emp_account_tipc">线上店铺运营员工账号</p>
+						<ul class="list">
+							<li class="no-data"><span>暂无数据</span></li>
+						</ul>
+						{notempty name='store'}
+						<a href="javascript:void(0);" class="add_online_account foot-btn">新增线上店铺员工账号</a>
+						{/notempty}
+					</form>
+				</section>
+				<!--店铺退换货人地址手机-->
+				<section class="section_content" id="consigneeInfo">
+					<form class="consignee_info_form">
+						<p class="emp_account_tipc">设定店铺的收货人地址手机号码（*用于顾客退换货时对接）</p>
+						<div class="input_item">
+							<input class="input-filed" type="text" name="consignee_name"
+								   value="{$store.consignee_name}" placeholder="收货人姓名">
+						</div>
+						<div>
+							<input class="input-filed" type="tel" name="consignee_mobile_phone"
+								   value="{$store.consignee_mobile_phone}" placeholder="收货人手机号码">
+						</div>
+						<div class="express-area area-box">
+							<a id="expressArea2" href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">所在地区：</label>
+								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+								<input type="hidden" value="" class="area-address-name" data-key="">
+							</a>
+						</div>
+						<div>
+							<input class="input-filed" type="text" name="detail_address"
+								   value="{$store.detail_address}" placeholder="详细地址">
+						</div>
+						<a href="javascript:void(0);" class="submit foot-btn">确定</a>
+					</form>
+				</section>
+				<!--门店员工列表-->
+				<section class="section_content" id="shopEmployeeList">
+					<form class="shopEmployeeList">
+						<div class="search_module_bar">
+							<input type="button" class="search_btn left"/>
+							<input type="text" class="search_text left" placeholder="输入姓名/门店/手机号搜索账号"/>
+						</div>
+						<p class="emp_account_tipc">门店运营员工账号</p>
+						<ul class="list"><li class="no-data"><span>暂无数据</span></li></ul>
+						{notempty name='store'}
+						<a href="javascript:void(0);" class="add_store_account foot-btn">新增门店员工账号</a>
+						{/notempty}
+					</form>
+				</section>
+				<!--门店经营地址-->
+				<section class="section_content" id="shopAddressList">
+					<ul class="list"></ul>
+				</section>
+				<!--门店收货人地址手机-->
+				<section class="section_content" id="shopConsigneeList">
+					<ul class="list shop_list"></ul>
+				</section>
+			</div>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
+<script type="text/javascript">
+	//获取店铺员工账号列表
+	function getStoreEmployeeList() {
+		var config = {
+			url: controller + 'getStoreEmployeeList',
+			container: $('#storeEmployeeList').find('ul.list')
+		};
+		getList(config);
+	}
+	//获取门店员工账号列表
+	function getShopEmployeeList() {
+		var config = {
+			url: controller + 'getShopEmployeeList',
+			container: $('#shopEmployeeList').find('ul.list')
+		};
+		getList(config);
+	}
+	//获取门店经营地址列表
+	function getShopOperationList() {
+		var config = {
+			url: controller + 'getShopOperationAddressList',
+			container: $('#shopAddressList').find('ul.list')
+		};
+		getList(config);
+	}
+	//获取门店收货人地址列表
+	function getShopConsigneeList() {
+		var config = {
+			url: controller + 'getShopConsigneeAddressList',
+			container: $('#shopConsigneeList').find('ul.list')
+		};
+		getList(config);
+	}
+	$(function(){
+		//页面初始化 
+		$('.content_main .section_content').eq(0).show();
+		var store = '{$store.id}';
+		if(!store){
+			switchManagerStore(location.href);
+		}else{
+			//获取店铺员工账号列表
+			getStoreEmployeeList();
+		}
+		// //省市区初始化
+        var province = '{$store.province|default=""}';
+        var city = '{$store.city|default=""}';
+        var area = '{$store.area|default=""}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
+		}
+		//门店店长管理和店铺店长管理切换
+		$('body').on('click','.store_deploy_bar a',function(){
+			var typeId=$(this).data('type');
+			$(this).addClass('current').siblings().removeClass('current');
+			if(typeId=='online'){
+				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
+				$('.top_empy_nav a').removeClass('current');
+				$('.top_empy_nav a:first').addClass('current');
+				$('.content_main .section_content').hide();
+				$('.content_main section').eq(0).show();
+				//获取店铺员工账号列表
+				getStoreEmployeeList();
+			}else{
+				$('.top_empy_nav').hide().eq($(this).index()).css('display','flex');
+				$('.top_empy_nav a').removeClass('current');
+				$('.top_empy_nav').eq(1).find('a:first').addClass('current');
+				$('.content_main .section_content').hide();
+				$('.content_main').find('#shopEmployeeList').show();
+				//获取门店员工账号列表
+				getShopEmployeeList();
+			}
+		});
+		$('body').on('click','.top_empy_nav a',function(){
+			var typeId=$(this).data('type');
+			$(this).addClass('current').siblings().removeClass('current');
+			switch(typeId){
+				case 0:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#storeEmployeeList').show();
+					//获取店铺员工账号列表
+					getStoreEmployeeList();
+					break;
+				case 1:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#consigneeInfo').show();
+					break;
+				case 2:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#shopEmployeeList').show();
+					//获取门店员工账号列表
+					getShopEmployeeList();
+					break;
+				case 3:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#shopAddressList').show();
+					//获取门店经营地址列表
+					getShopOperationList();
+					break;
+				case 4:
+					$('.section_content').siblings().hide();
+					$('.content_main').find('#shopConsigneeList').show();
+					//获取门店收货人地址列表
+					getShopConsigneeList();
+					break;
+			}
+		});
+		//新增线上店铺员工账号
+		var storeEmployeeSection=$('#storeEmployeeSection').html();
+		$('body').on('click','.add_online_account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['新增线上店铺员工账号','border-bottom:1px solid #d9d9d9;'],
+				className:'employeeAccountLayer',
+				content:storeEmployeeSection,
+				type:1,
+				anim:'up',
+				style:'',
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					$('.employeeAccountLayer .storeEmployeeForm').css('height',winHeight-120+'px');
+				},
+				yes:function(index){
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					var postData=dialogForm.serializeObject();
+					var content='';
+					if(!postData.name){
+						content='请填写员工姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					var config = {
+						url:controller + 'editStoreEmployee',
+						postData:postData,
+						index:index,
+						container:$('#storeEmployeeList').find('ul.list')
+					};
+					dialogFormAdd(config);
+				}
+			});
+		});
+		//修改线上店铺员工账号
+		$('body').on('click','.storeEmployeeList .modify-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['修改线上店铺员工账号','border-bottom:1px solid #d9d9d9;'],
+				className:'employeeAccountLayer',
+				type:1,
+				anim:'up',
+				content:storeEmployeeSection,
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					dialogForm.css('height',winHeight-120+'px');
+					$('input[name="mobile_phone"]').attr('readonly','readonly');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
+				},
+				yes:function(index){
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					var postData=dialogForm.serializeObject();
+					var content='';
+					if(!postData.name){
+						content='请填写姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					postData.id = _this.data('id');
+					postData.user_store_id = _this.data('user_store_id');
+					var config = {
+						url:controller + 'editStoreEmployee',
+						postData:postData,
+						modifyObj:_this,
+						index:index
+					};
+					dialogFormEdit(config);
+				}
+			});
+		});
+		//删除线上店铺员工账号
+		$('body').on('click','.storeEmployeeList .delete-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['删除线上店铺员工账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
+				className:'employeeAccountLayer',
+				type:1,
+				anim:'up',
+				content:storeEmployeeSection,
+				btn:['确定','取消'],
+				success:function(){
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					var winHeight=$(window).height();
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					dialogForm.css('height',winHeight-120+'px');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
+				},
+				yes:function(index){
+					var postData = {};
+					postData.id = _this.data('id');
+					postData.user_store_id = _this.data('user_store_id');
+					postData.nodeIds = [];
+					var dialogForm = $('.employeeAccountLayer .storeEmployeeForm');
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					 var config = {
+					 	url:controller + 'delStoreEmployee',
+					 	postData:postData,
+					 	delObj:_this,
+					 	index:index
+					 };
+					 dialogFormDel(config);
+				}
+			});
+		});
+
+		//新增门店员工账号
+		var shopEmployeeSection=$('#shopEmployeeSection').html();
+		$('body').on('click','.shopEmployeeList .add_store_account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['新增门店员工账号','border-bottom:1px solid #d9d9d9;'],
+				className:'employeeAccountLayer',
+				content:shopEmployeeSection,
+				type:1,
+				anim:'up',
+				style:'',
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					$('.employeeAccountLayer .shopEmployeeForm').css('height',winHeight-120+'px');
+				},
+				yes:function(index){
+					var dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
+					var postData=dialogForm.serializeObject();
+					var content='';
+					if(!postData.name){
+						content='请填写员工姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					postData.shop_id = dialogForm.find('[name=shop_id]').val();
+					var config = {
+						url:controller + 'editShopEmployee',
+						postData:postData,
+						index:index,
+						container:$('#shopEmployeeList').find('ul.list')
+					};
+					dialogFormAdd(config);
+				}
+			});
+		});
+		//修改门店员工账号
+		$('body').on('click','.shopEmployeeList .modify-account',function(){
+			var dialogForm ;
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['修改门店员工账号','border-bottom:1px solid #d9d9d9;'],
+				className:'employeeAccountLayer',
+				type:1,
+				anim:'up',
+				content:shopEmployeeSection,
+				btn:['确定','取消'],
+				success:function(){
+					dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
+					var winHeight=$(window).height();
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					dialogForm.css('height',winHeight-120+'px');
+					$('input[name="mobile_phone"]').attr('readonly','readonly');
+					$('.shopEmployeeForm select[name="shop_id"]').addClass('disabled');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
+				},
+				yes:function(index){
+					var postData=$('.employeeAccountLayer .shopEmployeeForm').serializeObject();
+					var content='';
+					if(!postData.name){
+						content='请填写姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					postData.post = null;
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.post = $(this).data('id');
+						}
+					});
+					postData.duty = null;
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.duty = $(this).data('id');
+						}
+					});
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					postData.id = _this.data('id');
+					postData.user_shop_id = _this.data('user_shop_id');
+					var config = {
+						url:controller + 'editShopEmployee',
+						postData:postData,
+						modifyObj:_this,
+						index:index
+					};
+					dialogFormEdit(config);
+				}
+			});
+		});
+		//删除门店员工账号
+		$('body').on('click','.shopEmployeeList .delete-shop-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['删除门店员工账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
+				className:'employeeAccountLayer',
+				type:1,
+				anim:'up',
+				content:shopEmployeeSection,
+				btn:['确定','取消'],
+				success:function(){
+					var dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
+					var winHeight=$(window).height();
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					dialogForm.css('height',winHeight-120+'px');
+					copyDataByName(_this,dialogForm);
+					//岗位回显
+					$.each(dialogForm.find('ul.post').find('li'),function(){
+						if(_this.data('post')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//职务回显
+					$.each(dialogForm.find('ul.duty').find('li'),function(){
+						if(_this.data('duty')==$(this).data('id')){
+							$(this).addClass('current');
+						}
+					});
+					//授权回显
+					var nodeIds = [];
+					$.each(_this.find('[name=nodeIds]').find('option'),function(){
+						nodeIds.push(parseInt($(this).val()));
+					});
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if( $.inArray($(this).data('id'),nodeIds)>=0){
+							$(this).addClass('current');
+						}
+					});
+				},
+				yes:function(index){
+					var dialogForm = $('.employeeAccountLayer .shopEmployeeForm');
+					var postData = {};
+					postData.id = _this.data('id');
+					postData.user_shop_id = _this.data('user_shop_id');
+					postData.shop_id = dialogForm.find('[name=shop_id]').val();
+					postData.nodeIds = [];
+					$.each(dialogForm.find('ul.authentication').find('li'),function(){
+						if($(this).hasClass('current')){
+							postData.nodeIds.push($(this).data('id'));
+						}
+					});
+					var config = {
+						url:controller + 'delShopEmployee',
+						postData:postData,
+						delObj:_this,
+						index:index
+					};
+					dialogFormDel(config);
+				}
+			});
+		});
+		//设置店铺收货人信息
+		$('body').on('click','.submit',function(){
+			var postData=$('.consignee_info_form').serializeObject();
+			var areaAddress=$('.area-address-name').val();
+			var  content ='';
+			if(!postData.consignee_name){
+				content='请填写收货人姓名';
+			}else if(!register.phoneCheck(postData.consignee_mobile_phone)){
+				content='请填写手机号码';
+			}else if(!areaAddress){
+				content='请选择所在地区';
+			}else if(!postData.detail_address){
+				content='请填写地区详细地址';
+			}
+			if(content){
+				dialog.error(content);
+				return false;
+			}
+			
+			var _this = $(this);
+			_this.addClass("nodisabled");//防止重复提交
+			postData.region = $('.area-address-name').getArea();
+			$.ajax({
+				url:controller + "editStoreConsigneeInfo",
+				type:'post',
+				data:postData,
+				dataType:'json',
+				success:function (data) {
+					_this.removeClass("nodisabled");
+					dialog.error(data.info);
+				},
+				error:function (xhr) {
+					dialog.error('Ajax错误'+xhr.status);
+				}
+			});
+		});
+		//列表操作按钮
+		$('body').on('click','.list li',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$(this).find('.operate-btn').show();
+			$(this).siblings().find('.operate-btn').hide();
+		});
+		//岗位职务设置样式
+		$('body').on('click','.post_position li',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+		});
+		//账号授权设置样式
+		$('body').on('click','.account_authorization li',function(){
+			$(this).toggleClass('current');
+		});
+		//选择店铺样式
+		$('body').on('click','.storeShopListLayer li',function(){
+			$(this).parents('.store_list').find('li').removeClass('current');
+			$(this).addClass('current').siblings().removeClass('current');
+		});
+		//编辑门店经营地址
+		$('body').on('click','#shopAddressList li',function(){
+			var _this = $(this);
+			var url = controller + 'editShopOperationAddress' + '/shopId/' + _this.data('id');
+			location.href = url;
+		});
+		//门店收货人地址手机号码
+		var shopConsigneeInfo=$('#shopConsigneeInfo').html();
+		$('body').on('click','.shop_list li',function(){
+			var _this=$(this);
+			layer.open({
+				title:['设定门店收货人信息','border-bottom:1px solid #d9d9d9;'],
+				className:'shopConsigneeLayer',
+				content:shopConsigneeInfo,
+				type:1,
+				anim:'up',
+				style:'',
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					var dialogForm = $('.shopConsigneeLayer .shop_consignee_info');
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					dialogForm.css('height',winHeight-120+'px');
+					//省市区初始化
+					var province = _this.data('consignee_province');
+					var city = _this.data('consignee_city');
+					var area = _this.data('consignee_area');
+					var region = [];
+					region.push(province);
+					region.push(city);
+					region.push(area);
+					$('.shop_consignee_info .area_address').setArea(region);
+					copyDataByName(_this,dialogForm);
+				},
+				yes:function(index){
+					var dialogForm = $('.shopConsigneeLayer .shop_consignee_info');
+					var postData=dialogForm.serializeObject();
+					var areaAddress=$('.area-address-name').val();
+					var content='';
+					if(!areaAddress){
+						content='请选择所在地区';
+					}else if(!postData.consignee_address){
+						content='请填写地区详细地址';
+					}
+					else if(!postData.consignee_name){
+						content='请填写收货人姓名';
+					}else if(!register.phoneCheck(postData.consignee_mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					postData.shopId = _this.data('id');
+					postData.logo_img = _this.find('img').attr('src');
+					postData.region = $('.shop_consignee_info .area_address').getArea();
+					var config = {
+						url:controller + 'editShopConsigneeAddress',
+						postData:postData,
+						index:index,
+						modifyObj:_this
+					};
+					dialogFormEdit(config);
+				}
+			});
+		});
+	});
+</script>
+{/block}
