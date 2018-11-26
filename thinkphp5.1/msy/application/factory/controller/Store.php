@@ -89,19 +89,49 @@ class Store extends \common\controller\FactoryBase
             $modelStore = new \common\model\Store();
             $config = [
                 'field' => [
-                    's.id','s.store_type','s.run_type',
-                    'f.name factory_name','us.id user_store_id','u.name','u.mobile_phone',
-                ],'leftJoin' => [
-                    ['factory f','f.id = s.factory_id'],
-                    ['user_store us','s.id = us.store_id'],
-                    ['user u','u.id = us.user_id'],
+                    's.id','s.store_type','s.run_type','s.is_default','s.operational_model',
+                    'case s.store_type when 1 then r.logo_img when 2 then b.brand_img END as logo_img',
+                    'case s.store_type when 1 then r.short_name when 2 then b.name END as store_name',
+                    'u.mobile_phone','us.id user_store_id','us.factory_id','us.type','us.user_name name',
+                ],'join' => [
+                    ['factory f','f.id = s.factory_id','left'],
+                    ['record r','r.id = s.foreign_id','left'],
+                    ['brand b','b.id = s.foreign_id','left'],
+                    ['user_store us','s.id = us.store_id','left'],
+                    ['user u','u.id = us.user_id','left'],
                 ],'where' => [
                     ['s.status','=',0],
                     ['s.factory_id','=',$this->factory['id']],
+                    ['f.type','=',1],
+                    ['us.type','in',[1,3]],
                 ],
             ];
             $list = $modelStore->getList($config);
-            $this->assign('list',$list);
+            $storeList = [];
+            $userList = [];
+            if(!empty($list)){
+                foreach ($list as $item){
+                    if($item['type'] == 1){
+                        $item['name'] = '';
+                        $item['mobile_phone'] = '';
+                        array_push($storeList,$item);
+                    }
+                    if($item['type'] == 3){
+                        array_push($userList,$item);
+                    }
+                }
+            }
+            if(!empty($storeList) && !empty($userList)){
+                foreach ($storeList as &$store){
+                    foreach ($userList as $user){
+                        if($store['id'] == $user['id'] && $store['factory_id'] == $user['factory_id'] ){
+                            $store['name'] = $user['name'];
+                            $store['mobile_phone'] = $user['mobile_phone'];
+                        }
+                    }
+                }
+            }
+            $this->assign('list',$storeList);
             return view('list_tpl');
         }else{
             return $this->fetch();
