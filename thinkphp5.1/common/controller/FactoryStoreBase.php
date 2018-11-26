@@ -11,12 +11,12 @@ class FactoryStoreBase extends UserBase{
         //采购商店铺列表
         $this->getFactoryStoreList();
         //获取当前店铺ID
-        $sessionStoreId = session('currentStoreId','','factory_');
+        $sessionStoreId = session('currentStoreId','',config('custom.session_prefix'));
         $requestStoreId = (int)input('currentStoreId')?:(int)input('post.currentStoreId');
         if(($requestStoreId && $sessionStoreId!=$requestStoreId)){
-            session('currentStoreId',$requestStoreId,'factory_');
+            session('currentStoreId',$requestStoreId,config('custom.session_prefix'));
         }
-        $currentStoreId = session('currentStoreId','','factory_');
+        $currentStoreId = session('currentStoreId','',config('custom.session_prefix'));
         if($currentStoreId){
             $this->getCurrentStoreInfo($this->user['id'],$currentStoreId);
         }else{
@@ -38,7 +38,7 @@ class FactoryStoreBase extends UserBase{
         if(!empty($this->store)){
             $this->store['id'] = $this->store['store_id'];
             //缓存当前店铺ID
-            session('currentStoreId','','factory_',$this->store['store_id']);
+            session('currentStoreId','',config('custom.session_prefix'),$this->store['store_id']);
         }
         $this->assign('store', $this->store);
     }

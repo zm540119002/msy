@@ -16,6 +16,7 @@
 return [
     'title' => '美尚云',
     'type' => '1',
+    'session_prefix' => 'factory_',
     //微信公众号配置
     'wx_config' => array(
         //TODO: 修改这里配置为您自己申请的商户信息
