@@ -12,13 +12,13 @@
     </ul>
 </div>
 <form action="{:url('Payment/orderPayment')}" method="post">
-    <input type="hidden" name="sn" value="{$orderInfo.sn}"/>
+    <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
     <input type="hidden" name="pay_code" value="" class="pay_code"/>
     <input type="submit" value="支付" />
 </form>
 {/block}
 {block name="common"}
-<!--{include file="public/footer_menu" /}-->
+
 {/block}
 {block name="footer"}{/block}
 {block name="script"}

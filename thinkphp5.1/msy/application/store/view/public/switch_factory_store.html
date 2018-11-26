@@ -31,9 +31,20 @@
     $(function(){
         //切换店铺
         $('body').on('click','.switch-store',function(){
+//            var url = location.href;
+//            var arr = url.split("/");
+//            arr.remove(-2,-1);
+//            url = arr.join('/');
+//            switchManagerStore(url);
             var url = location.href;
             var arr = url.split("/");
-            arr.remove(-2,-1);
+            if($.inArray("currentStoreId", arr) != -1){
+                arr.remove(-2,-1);
+            }else{
+                var arr1 = arr[arr.length-1].split(".");
+                arr.pop();
+                arr.push(arr1[0]);
+            }
             url = arr.join('/');
             switchManagerStore(url);
         });
