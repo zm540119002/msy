@@ -12,7 +12,6 @@ class Order extends \common\controller\UserBase
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
-
         //计算订单总价
         $modelGoods = new \app\purchase\model\Goods();
         $amount = 0;
@@ -28,17 +27,17 @@ class Order extends \common\controller\UserBase
             $goodsInfo = $info = $modelGoods->getInfo($config);;
             $goodsNum = intval($v['num']);
             $goodsList[$k]['price'] = $goodsInfo['sale_price'];
+            $goodsList[$k]['store_id'] = $goodsInfo['store_id'];
             $totalPrices = $goodsInfo['sale_price'] * $goodsNum;
             $amount += number_format($totalPrices, 2, '.', '');
         }
         $modelOrder = new \app\purchase\model\Order();
         $modelOrderDetail = new \app\purchase\model\OrderDetail();
-        $modelLogistics = new \app\purchase\model\Logistics();
         //开启事务
         $modelOrder->startTrans();
         //订单编号
         $orderSN = generateSN();
-        //生成订单
+        //生成父订单
         $data = [];
         $data['sn'] = $orderSN;
         $data['user_id'] = $this->user['id'];
@@ -63,10 +62,10 @@ class Order extends \common\controller\UserBase
         }
         $res = $modelOrderDetail->allowField(true)->saveAll($dataDetail)->toArray();
         if (!count($res)) {
-            $modelLogistics->rollback();
+            $modelOrder->rollback();
             return errorMsg('失败');
         }
-        $modelLogistics->commit();
+        $modelOrder->commit();
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
@@ -103,22 +102,62 @@ class Order extends \common\controller\UserBase
         }
         $id = input('post.id',0,'int');
         $modelOrder = new \app\purchase\model\Order();
-        $data = [
-            'logistics_status' => 1,
-        ];
-        $condition = [
-            ['user_id','=',$this->user['id']],
-            ['id','=',$id],
-        ];
-        $res = $modelOrder->edit($data,$condition);
-        $orderSn = input('post.order_sn','','string');
-        if(false === $res){
-           return errorMsg('失败');
+        $orderInfo = $modelOrder-> find();
+        //确定是否需要拆分订单
+        $splitOrder = 1;
+        if(!$splitOrder){
+            $data = [
+                'logistics_status' => 1,
+                'store_id' => 1,
+            ];
+            $condition = [
+                ['user_id','=',$this->user['id']],
+                ['id','=',$id],
+            ];
+            $res = $modelOrder->allowField(true)->save($data,$condition);
+            if(false === $res){
+                return errorMsg('失败');
+            }
+        }else{//拆分订单
+            $modelOrder = new \app\purchase\model\Order();
+            $modelOrderDetail = new \app\purchase\model\OrderDetail();
+            //1、组装需要生成子订单的数据
+            $data = [
+
+            ];
+            //2、生成子订单
+            //开启事务
+            $modelOrder->startTrans();
+            $childOrders = $modelOrder->allowField(true)->saveAll($data);
+            if (!count($childOrders)) {
+                $modelOrder->rollback();
+                return errorMsg('失败');
+            }
+            //把子订单号添加到订单明细中
+            $goodsList = [];
+            foreach ($childOrders as $item=>$value) {
+                foreach ($goodsList as $item1=>$goodsInfo) {
+                    $data = [
+                        'child_order_id' => $value['id'],
+                    ];
+                    $condition = [
+                        ['father_order_id','=',$orderInfo['id']],
+                        ['goods_id','=',$goodsInfo['id']],
+                    ];
+                    $res = $modelOrder->allowField(true)->save($data,$condition);
+                    if(false === $res){
+                        return errorMsg('失败');
+                    }
+                }
+            }
+            $modelOrder->commit();
         }
+
+        $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
 
-    //确定订单
+    //支付
     public function pay()
     {
         $modelOrder = new \app\purchase\model\Order();
