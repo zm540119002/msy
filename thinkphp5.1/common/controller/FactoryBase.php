@@ -37,5 +37,4 @@ class FactoryBase extends UserBase{
         $modelUserFactory = new \common\model\UserFactory();
         return $modelUserFactory->setDefaultFactory($this->user['id'],config('custom.type'));
     }
-    
 }
