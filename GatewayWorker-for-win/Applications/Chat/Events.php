@@ -27,7 +27,6 @@ use \GatewayWorker\Lib\Gateway;
 
 class Events
 {
-   
    /**
     * 有消息时
     * @param int $client_id
