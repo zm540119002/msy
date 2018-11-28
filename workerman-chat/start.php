@@ -3,7 +3,7 @@
  * run with command 
  * php start.php start
  */
-echo 1234;exit;
+
 ini_set('display_errors', 'on');
 use Workerman\Worker;
 
