@@ -920,6 +920,16 @@ function get_client_ip() {
     return preg_match ( '/[\d\.]{7,15}/', $ip, $matches ) ? $matches [0] : '';
 }
 
+//取数组中重复数据
+function FetchRepeatMemberInArray($array) {
+    // 获取去掉重复数据的数组
+    $unique_arr = array_unique ( $array );
+    // 获取重复数据的数组
+    $repeat_arr = array_diff_assoc ( $array, $unique_arr );
+    return  $repeat_arr ? $repeat_arr : false;
+}
+
+
 
 
 
