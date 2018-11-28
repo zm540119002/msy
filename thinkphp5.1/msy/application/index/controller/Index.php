@@ -9,6 +9,7 @@ class Index extends Controller
     public function index()
     {
 //        return $this->request->param('aa');
+        echo 123;exit;
         return $this->fetch();
     }
 
