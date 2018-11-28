@@ -102,10 +102,10 @@ class Store extends \common\controller\FactoryBase
                     ['user u','u.id = us.user_id','left'],
                 ],'where' => [
                     ['s.status','=',0],
-                    ['f.status','=',0],
-                    ['us.status','=',0],
                     ['s.factory_id','=',$this->factory['id']],
+                    ['f.status','=',0],
                     ['f.type','=',1],
+                    ['us.status','=',0],
                     ['us.type','in',[1,3]],
                 ],
             ];
