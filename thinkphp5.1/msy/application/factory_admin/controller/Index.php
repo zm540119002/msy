@@ -1,5 +1,5 @@
 <?php
-namespace app\admin\controller;
+namespace app\factory_admin\controller;
 
 use think\Controller;
 
