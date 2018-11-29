@@ -57,22 +57,22 @@ class Goods extends Base {
 //            }
 //            $this->ajaxReturn($res);
 //        }else{
-            $modelGoodsCategory = new \app\weiya_customization_admin\model\GoodsCategory();
-
-//            所有商品分类
-            $allCategoryList = $modelGoodsCategory->getList();
-            $this->assign('allCategoryList',$allCategoryList);
-            //要修改的商品
-            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
-                $config = [
-                    'where' => [
-                        'g.status' => 0,
-                        'g.id'=>input('get.goodsId',0,'int'),
-                    ],
-                ];
-                $goodsInfo = $modelGoods->getInfo($config);
-                $this->assign('goodsInfo',$goodsInfo);
-            }
+//            $modelGoodsCategory = new \app\weiya_customization_admin\model\GoodsCategory();
+//
+////            所有商品分类
+//            $allCategoryList = $modelGoodsCategory->getList();
+//            $this->assign('allCategoryList',$allCategoryList);
+//            //要修改的商品
+//            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
+//                $config = [
+//                    'where' => [
+//                        'g.status' => 0,
+//                        'g.id'=>input('get.goodsId',0,'int'),
+//                    ],
+//                ];
+//                $goodsInfo = $modelGoods->getInfo($config);
+//                $this->assign('goodsInfo',$goodsInfo);
+//            }
             //单位
 //            $modelUnit = D('Unit');
 //            $unitList = $modelUnit->selectUnit();
