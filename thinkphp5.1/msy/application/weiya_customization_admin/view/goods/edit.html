@@ -48,71 +48,25 @@
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="name" value="{$goodsInfo.name}">
                             <input type="hidden" name="goodsId" value="{$goodsInfo.id}">
-                            <span class="dotted_bottom_gray dotted_bottom_c">商品零售价：</span>
-                            <input style="width: 200px; " class="inputboxadmin" name="price" value="{$goodsInfo.price}">
-                        </td>
-                    </tr>
-                    <tr class="radioProductType">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品类型：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            {empty name="goodsInfo"}
-                                <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1" checked="checked"><label for="">普通产品</label>
-                                {else /}
-                                {if condition="$goodsInfo.buy_type eq 1"}
-                                    <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1" checked="checked"><label for="">普通产品</label>
-                                    <else />
-                                    <input type="radio" name="discount"  class="radioItem" value="普通产品" data-buy_type="1"><label for="">普通产品</label>
-                            {/if}
-                            {/empty}
-                            {if condition="$goodsInfo.buy_type eq 2 "}
-                                <input type="radio" name="discount"  class="radioItem" value="促销产品" data-buy_type="2" checked="checked"><label for="">促销产品</label>
-                                {else /}
-                                <input type="radio" name="discount"  class="radioItem" value="促销产品" data-buy_type="2"><label for="">促销产品</label>
-                            {/if}
-                            {if condition="$goodsInfo.buy_type eq 3 "}
-                                <input type="radio" name="discount"  class="radioItem" value="微团购产品" data-buy_type="3" checked="checked"><label for="">微团购产品</label>
-                                {else /}
-                                <input type="radio" name="discount"  class="radioItem" value="微团购产品" data-buy_type="3"><label for="">微团购产品</label>
-                            {/if}
+                            <span class="dotted_bottom_gray dotted_bottom_c">批量价格：</span>
+                            <input style="width: 200px; " class="inputboxadmin" name="bulk_price" value="{$goodsInfo.bulk_price}">
                         </td>
                     </tr>
                     <tr class="radioTypeOption first">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品优惠价：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>样品价格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$goodsInfo.discount_price}">
-                        </td>
-                    </tr>
-                    <tr class="radioTypeOption">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>工作室特惠价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="special_price" value="{$goodsInfo.special_price}">
-                        </td>
-                    </tr>
-                    <tr class="radioTypeOption">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>商品优惠价：</td>
-                        <td class=dotted_bottom_gray width="25%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$goodsInfo.discount_price}">
-                            <span class="dotted_bottom_gray dotted_bottom_c">团购返现：</span>
-                            <input style="width: 200px;" class="inputboxadmin" name="cash_back" value="{$goodsInfo.cash_back}">
-                        </td>
-                    </tr>
-                    <tr class="commission">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>推客收益：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="referrer_commission" value="{$goodsInfo.referrer_commission}">
-                            <span class="dotted_bottom_gray dotted_bottom_c">代理收益：</span>
-                            <input style="width: 200px;" class="inputboxadmin" name="agency_commission" value="{$goodsInfo.agency_commission}">
-                            <span class="dotted_bottom_gray dotted_bottom_c">合伙人收益：</span>
-                            <input style="width: 200px;" class="inputboxadmin" name="partner_commission" value="{$goodsInfo.partner_commission}">
+                            <input style="width: 200px; " class="inputboxadmin" name="sample_price" value="{$goodsInfo.sample_price}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 200px;" class="inputboxadmin" name="specification" value="{$goodsInfo.specification}">
-                            <select name="">
-                                <option value="">盒</option>
-                                <option value="">瓶</option>
+                            <select name="specification_unit">
+                                <option value="">请选择单位</option>
+                                {volist name="unitList" id="unit"  key="k"}
+                                <option value="{$k}">{$unit}</option>
+                                {/volist}
                             </select>
                             <span class="dotted_bottom_gray dotted_bottom_c">商品库存：</span>
                             <input style="width: 200px; " class=inputboxadmin name="inventory"  value="{$goodsInfo.inventory}" >
@@ -121,13 +75,13 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>起订数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="specification" value="2000">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>样品购买限额：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="specification" value="10">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="">
                         </td>
                     </tr>
                     <tr>
@@ -310,9 +264,6 @@
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
-                if($('input[name=discount]').is(":checked")){
-                    postData.buy_type = $('input[type="radio"]:checked').data('buy_type');
-                }
 
                 //主图
                 postData.main_img = $('img.main_img').attr('src');
@@ -324,13 +275,12 @@
 
                 //简介
                 postData.intro = ueIntro.getContent();
-                postData.param = ueParam.getContent();
+                postData.parameters = ueParam.getContent();
                 postData.usage = ueUsage.getContent();
                 postData.notices = ueNotices.getContent();
-                console.log(postData);return;
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
-                        location.href = controller + '/edit';
+                        location.href = controller + 'edit';
                     });
                 });
             });

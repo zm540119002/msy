@@ -17,69 +17,74 @@ class Goods extends Base {
      * 审核
      */
     public function edit(){
-          $modelGoods = new \app\weiya_customization_admin\model\Goods();
-//        $model = D('Goods');
-//        if(IS_POST){
-//            if( isset($_POST['main_img']) && $_POST['main_img'] ){
-//                $_POST['main_img'] = moveImgFromTemp(C('GOODS_MAIN_IMG'),basename($_POST['main_img']));
-//            }
-//            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
-//                $detailArr = explode(',',I('post.detail_img','','string'));
-//                $tempArr = array();
-//                foreach ($detailArr as $item) {
-//                    if($item){
-//                        $tempArr[] = moveImgFromTemp(C('GOODS_DETAIL_IMG'),basename($item));
-//                    }
-//                }
-//                $_POST['detail_img'] = implode(',',$tempArr);
-//            }
-//            if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
-//                $where = array(
-//                    'g.id' => I('post.goodsId',0,'int'),
-//                );
-//                $goodsInfo = $model->selectGoods($where);
-//                $goodsInfo = $goodsInfo[0];
-//                //删除商品主图
-//                if($goodsInfo['main_img']){
-//                    $this->delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
-//                }
-//                if($goodsInfo['detail_img']){
-//                    //删除商品详情图
-//                    $oldImgArr = explode(',',$goodsInfo['detail_img']);
-//                    $newImgArr = explode(',',$_POST['detail_img']);
-//                    $this->delImgFromPaths($oldImgArr,$newImgArr);
-//                }
-//                $_POST['update_time'] = time();
-//                $res = $model->saveGoods();
-//            }else{//新增
-//                $_POST['create_time'] = time();
-//                $res = $model->addGoods();
-//            }
-//            $this->ajaxReturn($res);
-//        }else{
-//            $modelGoodsCategory = new \app\weiya_customization_admin\model\GoodsCategory();
-//
-////            所有商品分类
-//            $allCategoryList = $modelGoodsCategory->getList();
-//            $this->assign('allCategoryList',$allCategoryList);
-//            //要修改的商品
-//            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
-//                $config = [
-//                    'where' => [
-//                        'g.status' => 0,
-//                        'g.id'=>input('get.goodsId',0,'int'),
-//                    ],
-//                ];
-//                $goodsInfo = $modelGoods->getInfo($config);
-//                $this->assign('goodsInfo',$goodsInfo);
-//            }
+        $modelGoods = new \app\weiya_customization_admin\model\Goods();
+        if(request()->isPost()){
+            if( isset($_POST['main_img']) && $_POST['main_img'] ){
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['main_img']));
+            }
+            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
+                $detailArr = explode(',',input('post.detail_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
+                    }
+                }
+                $_POST['detail_img'] = implode(',',$tempArr);
+            }
+            if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
+                $config = [
+                    'g.id' => input('post.goodsId',0,'int'),
+                    'g.status' => 0,
+                ];
+                $goodsInfo = $modelGoods->getInfo($config);
+                //删除商品主图
+                if($goodsInfo['main_img']){
+                    delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
+                }
+                if($goodsInfo['detail_img']){
+                    //删除商品详情图
+                    $oldImgArr = explode(',',$goodsInfo['detail_img']);
+                    $newImgArr = explode(',',$_POST['detail_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+                $data['create_time'] = time();
+                $where = [
+                    'id'=>input('post.goodsId',0,'int')
+                ];
+                $result = $modelGoods -> allowField(true) -> save($data,$where);
+                if(false === $result){
+                    return errorMsg('失败');
+                }
+            }else{//新增
+                $data = $_POST;
+                $data['create_time'] = time();
+                $result = $modelGoods -> allowField(true) -> save($data);
+                if(!$result){
+                    return errorMsg('失败');
+                }
+            }
+            return successMsg('成功');
+        }else{
+           // 所有商品分类
+            $modelGoodsCategory = new \app\weiya_customization_admin\model\GoodsCategory();
+            $allCategoryList = $modelGoodsCategory->getList();
+            $this->assign('allCategoryList',$allCategoryList);
+            //要修改的商品
+            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
+                $config = [
+                    'where' => [
+                        'g.status' => 0,
+                        'g.id'=>input('get.goodsId',0,'int'),
+                    ],
+                ];
+                $goodsInfo = $modelGoods->getInfo($config);
+                $this->assign('goodsInfo',$goodsInfo);
+            }
             //单位
-//            $modelUnit = D('Unit');
-//            $unitList = $modelUnit->selectUnit();
-//            $this->assign('unitList',$unitList);
-
+            $this->assign('unitList',config('custom.unit'));
             return $this->fetch();
-//        }
+       }
     }
 
     /**
