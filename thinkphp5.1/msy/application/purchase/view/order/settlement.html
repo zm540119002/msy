@@ -17,7 +17,7 @@
             var orderId = {$info[0]['id']};
             var orderSn = "{$info[0]['sn']}";
             var postData = {};
-            postData.id = orderId;
+            postData.father_order_id = orderId;
             postData.order_sn = orderSn;
             _this.addClass("nodisabled");//防止重复提交
             var url = module + '/Order/confirmOrder';

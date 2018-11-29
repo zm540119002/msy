@@ -10,7 +10,7 @@ class Order extends \common\model\Base {
     protected $connection = 'db_config_common';
 	//表的别名
 	protected $alias = 'o';
-
+	
 	
 	
 }

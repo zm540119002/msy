@@ -8,10 +8,19 @@ class Order extends \common\controller\UserBase
         if (!request()->isPost()) {
             return errorMsg('请求方式错误');
         }
+        $modelOrder = new \app\purchase\model\Order();
+        $modelOrderDetail = new \app\purchase\model\OrderDetail();
         $goodsList = $_POST['goodsList'];
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
+//        $goodsList = [
+//            ['goods_id'=>13,'num'=>1],
+//            ['goods_id'=>14,'num'=>3],
+//            ['goods_id'=>15,'num'=>1],
+//            ['goods_id'=>16,'num'=>2],
+//            ['goods_id'=>17,'num'=>1],
+//        ];
         //计算订单总价
         $modelGoods = new \app\purchase\model\Goods();
         $amount = 0;
@@ -31,35 +40,37 @@ class Order extends \common\controller\UserBase
             $totalPrices = $goodsInfo['sale_price'] * $goodsNum;
             $amount += number_format($totalPrices, 2, '.', '');
         }
-        $modelOrder = new \app\purchase\model\Order();
-        $modelOrderDetail = new \app\purchase\model\OrderDetail();
+
         //开启事务
         $modelOrder->startTrans();
         //订单编号
         $orderSN = generateSN();
+        //组装父订单数组
+        $data = [
+                'sn' => $orderSN,
+                'user_id' => $this->user['id'],
+                'amount' => $amount,
+                'actually_amount' => $amount,
+                'create_time' =>  time(),
+        ];
         //生成父订单
-        $data = [];
-        $data['sn'] = $orderSN;
-        $data['user_id'] = $this->user['id'];
-//        $data['logistics_id'] = $logisticsId;
-        $data['amount'] = $amount;//订单金额
-        $data['actually_amount'] = $amount;//实际要支付的金额
-        $data['create_time'] = time();
-        $orderId = $modelOrder->allowField(true)->save($data);
-        if (!$orderId) {
+        $res = $modelOrder->allowField(true)->save($data);
+        if (!$res) {
             $modelOrder->rollback();
-            return errorMsg('失败',array('orderId' => $orderId));
+            return errorMsg('失败');
         }
-        //生成订单明细
+        $orderId = $modelOrder ->getAttr('id');
+        //组装订单明细
         $dataDetail = [];
         foreach ($goodsList as $item=>$value) {
-            $dataDetail[$item]['order_sn'] = $orderSN;
-            $dataDetail[$item]['order_id'] = $orderId;
+            $dataDetail[$item]['father_order_id'] = $orderId;
             $dataDetail[$item]['price'] = $value['price'];
             $dataDetail[$item]['num'] = $value['num'];
             $dataDetail[$item]['goods_id'] = $value['goods_id'];
             $dataDetail[$item]['user_id'] = $this->user['id'];
+            $dataDetail[$item]['store_id'] = $value['store_id'];
         }
+        //生成订单明细
         $res = $modelOrderDetail->allowField(true)->saveAll($dataDetail)->toArray();
         if (!count($res)) {
             $modelOrder->rollback();
@@ -80,7 +91,7 @@ class Order extends \common\controller\UserBase
                 ['o.sn', '=', $orderSn],
                 ['o.user_id', '=', $this->user['id']],
             ],'join' => [
-                ['order_detail od','od.order_sn = o.sn','left'],
+                ['order_detail od','od.father_order_id = o.id','left'],
                 ['goods g','g.id = od.goods_id','left']
             ],'field' => [
                 'o.id', 'o.sn', 'o.amount',
@@ -100,58 +111,38 @@ class Order extends \common\controller\UserBase
         if (!request()->isPost()) {
             return errorMsg('请求方式错误');
         }
-        $id = input('post.id',0,'int');
+        $fatherOrderId = input('post.father_order_id',0,'int');
         $modelOrder = new \app\purchase\model\Order();
-        $orderInfo = $modelOrder-> find();
-        //确定是否需要拆分订单
-        $splitOrder = 1;
-        if(!$splitOrder){
-            $data = [
-                'logistics_status' => 1,
-                'store_id' => 1,
-            ];
-            $condition = [
-                ['user_id','=',$this->user['id']],
-                ['id','=',$id],
-            ];
-            $res = $modelOrder->allowField(true)->save($data,$condition);
-            if(false === $res){
-                return errorMsg('失败');
-            }
-        }else{//拆分订单
-            $modelOrder = new \app\purchase\model\Order();
-            $modelOrderDetail = new \app\purchase\model\OrderDetail();
-            //1、组装需要生成子订单的数据
-            $data = [
 
-            ];
-            //2、生成子订单
-            //开启事务
-            $modelOrder->startTrans();
-            $childOrders = $modelOrder->allowField(true)->saveAll($data);
-            if (!count($childOrders)) {
-                $modelOrder->rollback();
-                return errorMsg('失败');
-            }
-            //把子订单号添加到订单明细中
-            $goodsList = [];
-            foreach ($childOrders as $item=>$value) {
-                foreach ($goodsList as $item1=>$goodsInfo) {
-                    $data = [
-                        'child_order_id' => $value['id'],
-                    ];
-                    $condition = [
-                        ['father_order_id','=',$orderInfo['id']],
-                        ['goods_id','=',$goodsInfo['id']],
-                    ];
-                    $res = $modelOrder->allowField(true)->save($data,$condition);
-                    if(false === $res){
-                        return errorMsg('失败');
-                    }
-                }
-            }
-            $modelOrder->commit();
+        $data = [
+            'order_status' => 1,
+        ];
+        $condition = [
+            ['user_id','=',$this->user['id']],
+            ['id','=',$fatherOrderId],
+        ];
+        $res = $modelOrder -> allowField(true) -> save($data,$condition);
+        if(false === $res){
+            return errorMsg('失败');
         }
+//        //根据订单号查询关联的商品
+//        $modelOrderDetail = new \app\purchase\model\OrderDetail();
+//        $config = [
+//            'where' => [
+//                ['od.status', '=', 0],
+//                ['od.father_order_id', '=', $fatherOrderId],
+//            ], 'field' => [
+//                'od.goods_id', 'od.price', 'od.num', 'od.store_id','od.father_order_id',
+//            ]
+//        ];
+//        $orderDetailList = $modelOrderDetail->getList($config);
+//        $modelOrderChild = new \app\purchase\model\OrderChild();
+//        //生成子订单
+//        $rse = $modelOrderChild -> createOrderChild($orderDetailList,$this->user['id']);
+//        if(!$rse['status']){
+//            $modelOrder->rollback();
+//            return errorMsg($modelOrder->getLastSql());
+//        }
 
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
@@ -187,6 +178,4 @@ class Order extends \common\controller\UserBase
         return $this->fetch();
 
     }
-
-
 }
