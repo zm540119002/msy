@@ -1,17 +1,17 @@
 {extend name="template/base_pc.html" /}
-<block name="css-customize">
-    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/myms/fenlei.css" />
-    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/myms/skin.css" />
-</block>
-<block name="content">
+{block name="css-customize"}
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+{/block}
+{block name="content"}
     <div class="page">
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:U('Goods/goodsManage')}" class="current"><span>管理</span></a></li>
-                    <li><a href="{:U('Goods/goodsEdit')}"><span>编辑</span></a></li>
-                    <li><a href="{:U('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
-                    <li><a href="{:U('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
+                    <li><a href="{:url('Goods/manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('Goods/edit')}"><span>编辑</span></a></li>
+                    <li><a href="{:url('Goods/onOffLine')}"><span>上下架</span></a></li>
+                    <li><a href="{:url('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -22,7 +22,7 @@
                         <tr>
                             <td class=dotted_bottom_gray height=40 width="11%" align=right>所属分类：</td>
                             <td class=dotted_bottom_gray width="58%" align=left>
-                                <include file="Public/categoryLinkage"/>
+                                {include file="goods_category/linkage_tpl" /}
                             </td>
                             <th>商品名称</th>
                             <td class="w160">
@@ -44,18 +44,18 @@
     <!-- 隐藏区 -->
     <div style="display:none">
         <div id="loading">
-            <div class='loading'><img src='PUBLIC_ADMIN_IMG/common/default/loading.gif' alt='loading'></div>
+            <div class='loading'><img src='public_admin_common_img/default/loading.gif' alt='loading'></div>
         </div>
     </div>
-</block>
+{/block}
 
-<block name="script">
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/categoryLinkage.js"></script>
+{block name="script"}
+    <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         //商品列表
         function getPage(currentPage) {
             $("#goodsList").html($('#loading').html());
-            var url = CONTROLLER+'/goodsList';
+            var url = controller+'/getList';
             var postData = $('#form1').serializeObject();
             postData.p = currentPage ? currentPage : 1;
             postData.pageSize = 10;
@@ -87,7 +87,7 @@
             //编辑
             $('body').on('click','.editGoods',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  CONTROLLER + '/goodsEdit/goodsId/' + _thisTr.data('id');
+                var url =  controller + '/goodsEdit/goodsId/' + _thisTr.data('id');
                 location.href = url;
             });
 
@@ -96,7 +96,7 @@
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
                 postData.goodsId = _thisTr.data('id');
-                var url =  CONTROLLER + '/goodsDel';
+                var url =  controller + '/goodsDel';
                 parent.layer.open({
                     btn: ['确定','取消'],//按钮
                     content:'删除你选中的商品吗？',
@@ -121,7 +121,7 @@
                     }
                 });
                 postData.goodsIds= goodsIds;
-                var url =  CONTROLLER + '/goodsDel';
+                var url =  controller + '/goodsDel';
                 if(goodsIds.length==0){
                     layer.tips('你还没有选择任何内容！','.btn',{
                         tips:[2,'#0d7eff'],
@@ -151,4 +151,4 @@
             })
         });
     </script>
-</block>
+{/block}

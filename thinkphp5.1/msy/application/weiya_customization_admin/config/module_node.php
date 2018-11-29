@@ -13,7 +13,7 @@ return [
         'goods'=>[
             'id'=>200,'name'=>'商品','type'=>2,
             'sub_menu' => [
-                ['id'=>201,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'mnage',],
+                ['id'=>201,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'manage',],
             ],
         ],
         'brand'=>[

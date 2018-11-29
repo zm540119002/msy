@@ -1,8 +1,9 @@
 {extend name="template/base_pc.html" /}
 
 {block name="css-customize"}
-    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/myms/fenlei.css" />
-    <link type="text/css" rel="stylesheet" href="PUBLIC_ADMIN_CSS/myms/skin.css" />
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+    <link type="text/css" rel="stylesheet" href="public_admin_common_css/base.css" />
 {/block}
 
 {block name="content"}
@@ -10,10 +11,10 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:U('Goods/goodsManage')}" ><span>管理</span></a></li>
-                    <li><a href="{:U('Goods/goodsEdit')}" class="current"><span>编辑</span></a></li>
-                    <li><a href="{:U('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
-                    <li><a href="{:U('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
+                    <li><a href="{:url('Goods/goodsManage')}" ><span>管理</span></a></li>
+                    <li><a href="{:url('Goods/goodsEdit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:url('Goods/goodsOnoffLine')}"><span>上下架</span></a></li>
+                    <li><a href="{:url('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -28,11 +29,12 @@
                             <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
                         </p>
                             <p class="showimg" id="showimg">图片上传大小请小于50k</p>
-                            <empty name="goodsInfo.main_img">
-                                <img  class="main_img" src="">
-                                <else />
-                                <img class="main_img" src="__ROOT__/Uploads/{$goodsInfo.main_img}">
-                            </empty>
+                            <img  class="main_img" src="">
+                            <!--<empty name="goodsInfo.main_img">-->
+                               <!---->
+                                <!--<else />-->
+                                <!--<img class="main_img" src="__ROOT__/Uploads/{$goodsInfo.main_img}">-->
+                            <!--</empty>-->
                         </td>
                     </tr>
                     <tr>
@@ -180,11 +182,11 @@
     </div>
 {/block}
 
-<block name="script">
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/Ueditor/ueditor.config.js"></script>
+{block name="script"}
+    <script type="text/javascript" src="public_admin_common_js/Ueditor/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/Ueditor/ueditor.all.js"></script>
-    <script type="text/javascript" charset="utf-8" src="PUBLIC_ADMIN_JS/common/Ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="public_admin_common_js/Ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="public_admin_common_js/Ueditor/lang/zh-cn/zh-cn.js"></script>
     <script src="http://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
@@ -195,7 +197,7 @@
         var ueNotices = UE.getEditor('notices');
     </script>
 
-    <script type="text/javascript" src="PUBLIC_ADMIN_JS/common/categoryLinkage.js"></script>
+    <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
             //单选商品类型
@@ -275,7 +277,7 @@
                 reader.onload = function(e){
                     $(".main_img").attr("src",e.target.result);
                     //提交
-                    $.post(CONTROLLER + '/uploadImgToTemp',{ img: e.target.result},function(msg){
+                    $.post(controller + '/uploadFileToTemp',{ img: e.target.result},function(msg){
                         if(msg.status == 1){
                             $(".main_img").attr("src",UPLOAD + msg.info)
                         }else{
@@ -309,18 +311,18 @@
                 postData.param = ueParam.getContent();
                 postData.usage = ueUsage.getContent();
                 postData.notices = ueNotices.getContent();
-
-                $.post(ACTION,postData,function(msg){
-                    dialog.msg(msg,'',function () {
-                        location.href = CONTROLLER + '/goodsEdit';
+                console.log(postData);return;
+                $.post(action,postData,function(data){
+                    dialog.msg(data,'',function () {
+                        location.href = controller + '/edit';
                     });
-                },'JSON');
+                });
             });
 
             //返回
             $('.button_save_black').click(function(){
-                location.href = CONTROLLER + '/goodsManage';
+                location.href = controller + '/manage';
             });
         });
     </script>
-</block>
+{/block}
