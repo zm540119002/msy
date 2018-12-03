@@ -28,7 +28,7 @@
 				<section id="setShopAccount" style="display:none;">
 					<div class="set_top_info">
 						<p>
-							<span class="span_text" name="store_name">XXX</span>机构官方旗舰店
+							<span class="span_text" name="store_name">XXX</span>
 						</p>
 						<p>
 							<span class="span_text" name="store_type">美尚会云店店铺</span>
@@ -86,7 +86,6 @@
 					var dialogForm = $('.setShopAccountLayer .setShopForm');
 					var postData=dialogForm.serializeObject();
 					postData.id = _this.data('id');
-					postData.user_store_id = _this.data('user_store_id');
 					var config = {
 						url:module + 'Store/setManager',
 						postData:postData,

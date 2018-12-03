@@ -14,5 +14,6 @@ return [
     'pay_QRcode' => 'pay_QRcode/',//场景图片
     'shop_logo_img' => 'shop/logo_img/',//场景图片
 
-    'weiya_goods' => 'weiya_goods/',//厂商商品图片
+    'weiya_goods' => 'weiya_goods/',//维雅定制商品图片
+    'weiya_project' => 'weiya_project/',//维雅定制项目图片
 ];
