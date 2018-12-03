@@ -1,0 +1,606 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<!--选择商品搞促销-->
+<section style="display: none" class="search-li">
+	<li data-goods-id="" >
+		<img src="" alt="" class="left"/>
+		<div class="promotional-g-right">
+			<span class="goods-name"></span>
+		</div>
+		<a href="javascript:void(0);" class="promotional-close-btn">X</a>
+	</li>
+</section>
+<section id="addsalesgoods" style="display:none;" class="f24">
+	<div class="content-box">
+		<span class="content-label">已选择促销商品</span>
+		<ul class="columns_flex l-r-sides promotional-goods-list">
+
+		</ul>
+		<div class="error_tipc"></div>
+		<form name="form1" id="form1">
+			<div class="columns_flex search-row-flex">
+				<input type="text" class="input-filed search-goods keyword" name="keyword" placeholder="搜索商品"/>
+				<input type="button" value="搜索" class="layer-search-btn search"/>
+			</div>
+		</form>
+		<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>
+		<div class="">
+			<ul class="columns_flex flex-both-side scroller-container" id="list">
+			</ul>
+		</div>
+	</div>
+</section>
+
+<section id="releaseFileContent" style="display: none;">
+	<div class="release-file">
+		<a href="javascript:void(0);" class="release-img" data-type="1">图片消息（最多9张图）</a>
+		<a href="javascript:void(0);" data-type="2">小视频（不超过10秒）</a>
+		<a href="javascript:void(0);" data-type="3">视频 （不超过3分钟）</a>
+		<a href="javascript:void(0);" data-type="4">文章（视频+文字+图片）</a>
+		<input type="hidden" class="release-goods-data" value="" data-num=""/>
+	</div>
+</section>
+<!--云推客发布图片消息-->
+<section id="cloudImgTwitter" style="display: none;">
+	<form class="releaseInfoForm">
+		<div class="twitter-release-content">
+			<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="消息文字..."></textarea>
+			<ul class="upload-picture-module multi-picture-module">
+			</ul>
+			<div class="error_tipc"></div>
+			<div class="release-news">
+				<span class="video-camera"></span>
+				<input class="camera-btn " type="file" id="file" capture="camera" data-num="9" multiple>
+				<input type="hidden"  class="msg-img">
+			</div>
+			<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
+			<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
+		</div>
+	</form>
+</section>
+<!--云推客发布视频消息-->
+<section id="cloudVideoTwitter" style="display: none;">
+	<form class="releaseInfoForm">
+		<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="视频说明文字..."></textarea>
+		<div class="error_tipc"></div>
+		<div class="upload-picture-module f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleVideo" name="" data-duration="">
+					<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+					<input type="hidden" name="msgfile" class="img" data-src="" value="">
+				</div>
+			</div>
+		</div>
+		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
+		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
+	</form>
+</section>
+<!--云推客发布文章-->
+<section id="cloudArticleTwitter" style="display: none;">
+	<p>*编辑完文字图片后再按发布</p>
+	<div class="error_tipc"></div>
+	<form class="releaseInfoForm">
+		<div class="separation-line columns_flex l-r-sides release-file-module ">
+			<div class="upload-picture-module f24">
+				<div>
+					<div class="picture-module">
+						<input type="file" class="uploadImg uploadSingleImg" name="">
+						<img class="upload_img" src="" alt="">
+						<input type="hidden" name="msgfile" class="img" data-src="" value="">
+					</div>
+					<p>上传配图</p>
+				</div>
+			</div>
+			<div>
+				<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+			</div>
+		</div>
+		<div class="separation-line columns_flex l-r-sides release-file-module ">
+			<div class="upload-picture-module f24">
+				<div>
+					<div class="picture-module">
+						<input type="file" class="uploadImg uploadSingleVideo" name="">
+						<video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+					</div>
+					<p>上传视频(可不选)</p>
+				</div>
+			</div>
+			<div>
+				<textarea name="msgText" class="twitter-text" rows="" cols="" placeholder="输入标题文字不超过28字"></textarea>
+			</div>
+		</div>
+		<a href="javascript:void(0);" class="link-store-goods" data-release-type="">设定链接的商家店铺商品（可选）></a>
+		<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
+	</form>
+	<div class="paragraph-module">
+		<textarea class="twitter-text" rows="" cols="" placeholder="段落文字粘贴..."></textarea>
+		<div class="upload-picture-module release-file-module f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg" name="">
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" class="img" data-src="" value="">
+				</div>
+				<p>上传插图（可选项，建议图片宽950像素）</p>
+			</div>
+		</div>
+	</div>
+	<a href="javascript:void(0);" class="insert-button">插入段落文字图片</a>
+</section>
+<!--段落文字图片-->
+<section id="paragraphLayer" style="display: none;">
+	<div class="paragraph-module">
+		<textarea class="twitter-text" rows="" cols="" placeholder="段落文字粘贴..."></textarea>
+		<div class="upload-picture-module release-file-module f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg" name="">
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" class="img" data-src="" value="">
+				</div>
+				<p>上传插图（可选项，建议图片宽950像素）</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<article class="f24">
+	<!--店铺运营头部-->
+	{include file="public/switch_factory_store" /}
+	<section class="bottomLine">
+		<nav class="columns_flex channel_nav manufacturer_nav">
+			<a href="{:url('Operation/index')}">
+				店铺提醒
+			</a>
+			<a href="{:url('Goods/manage')}">
+				店铺管理
+			</a>
+			<a href=""  class="current">
+				营销推广
+			</a>
+			<a href="javascript:void (0)">
+				官方活动
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type store-manage-type bottomLine">
+		<div class="columns_flex f20">
+			<a  href="javascript:void (0)" class="column_type current">场景</a>
+			<a >云推客</a>
+			<a href="javascript:void (0)">线上</a>
+			<a href="javascript:void (0)">线下</a>
+			<a href="javascript:void (0)">视频</a>
+			<a href="javascript:void (0)">直播</a>
+		</div>
+	</section>
+	<section class="content-padding twitter-release-content">
+		<div class="twitter_flex">
+			<div class="release-date">
+				<span>今天</span>
+			</div>
+			<div class="release-news">
+				<!--accept="image/*"   multiple属性是多选-->
+				<!--<span class="video-camera"></span>
+                <input class="camera-btn" type="file" id="file" multiple="" capture="camera" >-->
+				<a class="video-camera release-msg" href="javascript:void(0);"></a>
+			</div>
+		</div>
+		<div class="twitter_flex">
+			<div class="release-date">
+				<span>083月</span>
+			</div>
+			<div class="release-news">
+				<div class="news-item">
+					<div class="photo-frame">
+						<img class="common_default_img" src="public/static/common/img/icons/long.png" alt="">
+						<img class="common_default_img" src="public/static/common/img/banner/wt-banner1.jpg" alt="">
+						<img class="common_default_img" src="public/static/common/img/banner/wt-banner.jpg" alt="">
+					</div>
+					<div >
+						<p>这个产品挺好用的这个产品挺好用的这个产品挺好用的这个产品挺好用的</p>
+						<span>共<span>2</span>张</span>
+					</div>
+				</div>
+				<div class="news-item">
+					<div class="photo-frame">
+						<!--<img class="common_default_img" src="public/static/common/img/default/no_pic_100.jpg" alt="">-->
+						<img class="common_default_img" src="public/static/common/img/icons/long.png" alt="">
+						<img class="common_default_img" src="public/static/common/img/icons/long.png" alt="">
+					</div>
+					<div >
+						<p>这个产品挺好用的这个产品挺好用的这个产品挺好用的这个产品挺好用的</p>
+						<span>共<span>2</span>张</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="twitter_flex">
+			<div class="release-date">
+				<span>083月</span>
+			</div>
+			<div class="release-news">
+				<div class="news-item">
+					<div class="photo-frame">
+						<img class="common_default_img" src="public/static/common/img/banner/wt-banner1.jpg" alt="">
+						<img class="common_default_img" src="public/static/common/img/banner/wt-banner1.jpg" alt="">
+						<img class="common_default_img" src="public/static/common/img/banner/wt-banner.jpg" alt="">
+						<img class="common_default_img" src="public/static/common/img/banner/wt-banner1.jpg" alt="">
+					</div>
+					<div >
+						<p>这个产品挺好用的这个产品挺好用的这个产品挺好用的这个产品挺好用的</p>
+						<span>共<span>2</span>张</span>
+					</div>
+				</div>
+				<div class="news-item">
+					<div class="photo-frame">
+						<img class="common_default_img" src="public/static/common/img/icons/long.png" alt="">
+						<img class="common_default_img" src="public/static/common/img/icons/long.png" alt="">
+					</div>
+					<div >
+						<p>这个产品挺好用的这个产品挺好用的这个产品挺好用的这个产品挺好用的</p>
+						<span>共<span>2</span>张</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</article>
+{/block}
+{block name="common"}
+{include file="template/loading.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
+
+<script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:4,
+		pageType:'promotion'
+	};
+//	var config = {
+//		url:module+'promotion/getList',
+//		requestEnd:false,
+//		loadTrigger:false,
+//		currentPage:1,
+//		callBack:callBack,
+//		container1:$('.promotion-item .content-label')
+//	};
+//	var postData = {
+//		pageSize:10
+//	};
+//	$(function () {
+//		//没有默认店铺
+//		var notDefaultStore = "{$notDefaultStore|default=0}";
+//		if(notDefaultStore == 0){
+////			//初始化
+////			postData.activityStatus = $('.category-tab li.current a').data('activity-status');
+////			getPagingList(config,postData);
+//		}
+//
+//		//点击新建促销活动
+//		$('body').on('click','.addSalesActivity',function () {
+//			location.href = module + 'promotion/edit'
+//		});
+//
+//		//根据促销活动状态获取活动列表
+//		$('body').on('click','.category-tab li',function () {
+//			$(this).addClass('current').siblings().removeClass('current');
+//			postData.activityStatus = $(this).find('a').data('activity-status');
+//			config.currentPage = 1;
+//			config.requestEnd = false;
+//			getPagingList(config,postData);
+//		})
+//
+//		//删除促销活动
+//		$('body').on('click','.del-icons',function () {
+//			var _this = $(this);
+//			var postData = {};
+//			postData.id = _this.parent().data('id');
+//			$.post(module+'Promotion/del',postData,function (msg) {
+//				if(msg.status == 0){
+//					dialog.error(msg.info);
+//					return false;
+//				}
+//				_this.parents('.tag-item').remove();
+//				dialog.success(msg.info);
+//			})
+//		})
+//	});
+	$(function(){
+
+		//轮播
+//		var swiper1 = new Swiper('.swiper-container', {
+//			spaceBetween: 30,
+//			pagination: {
+//				el: '.swiper-pagination',
+//				clickable: true
+//			}
+//		});
+		// swiper('.swiper-focus-container');
+		var paragraphLayer=$('#paragraphLayer').html();
+		//添加段落文章和图片
+		$('body').on('click','.insert-button',function(){
+			$('.editDetailLayer .paragraph-module:last').after(paragraphLayer);
+		})
+		//推文类型弹窗
+		var releaseFile=$('#releaseFileContent').html();
+		$('body').on('click','.release-msg',function(){
+			var pageii = layer.open({
+				className:'releaseFileLayer',
+				content: releaseFile,
+				shadeClose:false,
+				success:function(){
+					var winHeight=$(window).height();
+					$('.twitter-release-content').css('height',winHeight-120+'px');
+					$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+				},
+				btn:['取消']
+			});
+		});
+		//发布推文选项
+		var releaseFlag = true;
+		$('body').on('click','.release-file a',function(){
+			var releaseType=$(this).data('type');
+			var num=$('.release-goods-data').data('num');
+			var opt={};
+			if(num==releaseType){
+			var goodsData=$('.release-goods-data').val();
+			}
+			if(releaseType==1){
+				var cloudTwitter=$('#cloudImgTwitter').html();
+				opt={
+					content:cloudTwitter,
+					title:'发图片消息',
+					msg:'请上传图片',
+					releaseType:releaseType,
+					goodsData:goodsData
+				}
+			}else if(releaseType==2){
+				var cloudTwitter=$('#cloudVideoTwitter').html();
+				opt={
+					content:cloudTwitter,
+					title:'发小视频',
+					msg:'请上传小视频',
+					duration:10,
+					releaseType:releaseType,
+					goodsData:goodsData
+				}
+			}else if(releaseType==3){
+				var cloudTwitter=$('#cloudVideoTwitter').html();
+				opt={
+					content:cloudTwitter,
+					title:'发视频',
+					msg:'请上传视频',
+					duration:180,
+					releaseType:releaseType,
+					goodsData:goodsData
+				}
+			}else{
+				var cloudTwitter=$('#cloudArticleTwitter').html();
+				opt={
+					content:cloudTwitter,
+					title:'发文章',
+					paragraphAttr:[],
+					releaseType:releaseType,
+					goodsData:goodsData
+				}
+			}
+			releaseFlag = false;
+			releaseFileLayer(opt,goodsData);
+		});
+		//发布弹窗
+		function releaseFileLayer(options){
+			layer.open({
+				title:[options.title,'border-bottom:1px solid #d9d9d9;'],
+				className:'editDetailLayer',
+				// type: 1,
+				content: options.content,
+				// anim: 'up',
+				success:function(){
+					var winHeight=$(window).height();
+					$('.editDetailLayer .layui-m-layercont').css('height',winHeight-120+'px');
+					$('.editDetailLayer .uploadSingleVideo').data('duration',options.duration);
+					$('.editDetailLayer .link-store-goods').data('release-type',options.releaseType);
+					$('.editDetailLayer .linked-goods-id').val(options.goodsData);
+					
+				},
+				btn:['发布','取消'],
+				yes:function(index){
+					var layermultiImgAttr=[];
+					//获取图片路径
+					$.each($('.editDetailLayer li'),function(i,val){
+						var _this=$(this);
+						var imgSrc=_this.find('img').attr('src');
+						layermultiImgAttr.push(imgSrc);
+					})
+					//获取文章段落和图片数据
+					options.paragraphAttr=[];
+					$.each($('.editDetailLayer .paragraph-module'),function(i,val){
+						var _this=$(this);
+						var mesObject={};
+						var mesText=_this.find('.twitter-text').val();
+						var mesImgSrc=_this.find('.img').val();
+						mesObject={
+							mesText:mesText,
+							mesImgSrc:mesImgSrc
+						}
+						options.paragraphAttr.push(mesObject);
+					})
+					$('.msg-img').val(layermultiImgAttr);
+					//序列化表单数据
+					var releaseFormData=$('.editDetailLayer .releaseInfoForm').serializeObject();
+					releaseFormData.img =  layermultiImgAttr;
+					releaseFormData.release_type =  options.releaseType;
+					var content='';
+					if(!releaseFormData.msgText){
+						content='请填写消息内容';
+					}else if(!releaseFormData.img){
+						content=options.msg;
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					$.ajax({
+						url:'edit',
+						type:'post',
+						data:releaseFormData,
+						success:function(data){
+
+						},
+						error:function(data){
+
+						}
+					});
+//					layer.close(index);
+				}
+			});
+		}
+
+		//链接商品
+		var addsalesgoods=$('#addsalesgoods').html();
+		$('body').on('click','.link-store-goods',function(){
+			var releaseType=$(this).data('release-type');
+			var goods = $('.editDetailLayer .linked-goods-id').val();
+			var pageii = layer.open({
+				title:['选择关联商品','border-bottom:1px solid #d9d9d9;'],
+				className:'addsalesgoodsLayer',
+				type: 1,
+				content:addsalesgoods,
+				anim: 'up',
+				success:function(){
+					var winHeight=$(window).height();
+					$('.content-box').css('height',winHeight-180+'px');
+
+					config.container = $('.addsalesgoodsLayer #list');  // container:$('.addsalesgoodsLayer #list')
+					//加载第一页
+					getPagingList(config,postData);
+					//回显也选择的产品
+					if(goods!=''){
+						selectedGoodsList(goods);
+					}
+					$('.addsalesgoodsLayer .scroller-container').on('scroll',function(){
+						var listHeight=$('.addsalesgoodsLayer #list').get(0).scrollHeight;
+						if(config.loadTrigger && $('.addsalesgoodsLayer .scroller-container').scrollTop()+$('.scroller-container ').height()>=listHeight){
+							getPagingList(config,postData);
+						}
+					});
+				},
+				yes:function(index){
+					var selectedLen=$('.addsalesgoodsLayer .promotional-goods-list li').length;
+					if(!selectedLen){
+						errorTipc('请添加商品！');
+						return false;
+					}
+					var selectedGoods = '';
+					var goodsName ='';
+					$('.addsalesgoodsLayer .promotional-goods-list li').each(function () {
+						goodsName = $(this).find('.goods-name').text();
+						var goodsId = $(this).data('goods-id');
+						selectedGoods += goodsId+',';
+					});
+					$(".editDetailLayer .linked-goods-id").val(selectedGoods);
+					$(".release-goods-data").val(selectedGoods).data('num',releaseType);
+					//设置分页请求默认值
+					config.requestEnd=false;
+					config.loadTrigger=false;
+					config.currentPage=1;
+					layer.close(index);
+				},
+				no:function () {
+					//设置分页请求默认值
+					config.requestEnd=false;
+					config.loadTrigger=false;
+					config.currentPage=1;
+				},
+				btn:['确定','取消']
+			});
+
+		});
+
+		//添加促销商品
+		$('body').on('click','a.goods',function(){
+			var selectedGoodsIds = [];
+			$('.addsalesgoodsLayer .promotional-goods-list li').each(function(){
+				var selectedGoodsId = $(this).data('goods-id');
+				selectedGoodsIds.push(selectedGoodsId);
+			});
+			var _this=$(this);
+			var goodsId=_this.data('id');
+			if($.inArray(goodsId, selectedGoodsIds) !== -1){
+				dialog.error('此商品已选择！');
+				return false;
+			}
+			var goodsName = _this.parent().find('.goods-name').text();
+			var goodsImgSrc = _this.find('img').attr('src');
+			var selectedLen = $('.addsalesgoodsLayer .promotional-goods-list li').length;
+			var html = $('.search-li').html();
+			if(!selectedLen){
+				$('.addsalesgoodsLayer .promotional-goods-list').append(html);
+			}else{
+				$('.addsalesgoodsLayer .promotional-goods-list li:last').after(html);
+			}
+			$('.addsalesgoodsLayer .promotional-goods-list li').attr('data-goods-id',goodsId);
+			$('.addsalesgoodsLayer .goods-name').text(goodsName);
+			$('.addsalesgoodsLayer .promotional-goods-list img').attr('src',goodsImgSrc);
+		});
+		//移除促销商品
+		$('body').on('click','.promotional-close-btn',function(){
+			var _this=$(this);
+			var promotionalId=_this.parent().data('goods-id');
+			$.each($('.all-goods-list a'),function(){
+				var _This=$(this);
+				if(_This.data('id')==promotionalId){
+					_This.removeClass('current');
+				}
+			})
+			_this.parent().remove();
+		});
+
+		//搜索商品
+		$('body').on('click','.addsalesgoodsLayer .search',function(){
+			var serializeData = $('.addsalesgoodsLayer #form1').serializeObject();
+			postData = Object.assign(postData,serializeData);
+			config.loadTrigger = false;
+			config.requestEnd  = false;
+			config.currentPage = 1;
+			getPagingList(config,postData);
+		});
+	});
+
+	//获取已选择的商品
+	function selectedGoodsList(selectedGoods) {
+		$("#list").html($('#loading').html());
+		var url = module+'goods/getTweetGoodsList';
+		var postData = {};
+		postData.goods = selectedGoods;
+		$.get(url, postData , function(data){
+			$('.promotional-goods-list').append(data);
+		});
+	}
+	//下拉加载
+	$('.scroller-container').on('scroll',function(){
+		var listHeight = document.getElementById('list').scrollHeight;
+		if(config.loadTrigger && $('.scroller-container ').scrollTop()+$('.scroller-container ').height()>=listHeight){
+			config.loadTrigger = false;
+			config.activityStatus = $('.category-tab li.current a').data('activity-status');
+			getPagingList(config,postData);
+		}
+	});
+</script>
+{/block}

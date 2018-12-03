@@ -4,8 +4,9 @@
 //上拉加载更多
 var loadTrigger = false;//加载触发器
 function getMore(url,config) {
-    $(window).on('scroll',function(){
-        if(loadTrigger && $(document).scrollTop()+$(window).height()>=$(document).height()){
+    $('.scroller-container').on('scroll',function(){
+        var listHeight=$('.scroller-container').get(0).scrollHeight;
+        if(loadTrigger &&  $('.scroller-container').scrollTop()+ $('.scroller-container').height()>=listHeight){
             loadTrigger = false;
             getPage(url,config);
         }
@@ -23,6 +24,24 @@ function getMoreLayer(url,config) {
         }
     });
 }
+
+//获取分页列表-商品页回调函数
+function goodsPullDownPagingCallBack(){
+    $('.loading').hide();
+    if(currentPage == 1){
+        $('#list li').remove();
+        $('#list').append(data);
+    }else{
+        $('#list li:last').after(data);
+    }
+    if($($.parseHTML(data)).length<_postData.pageSize){
+        requestEnd = true;
+    }
+    currentPage ++;
+    loadTrigger = true;
+    disableBtn();
+}
+
 //获取列表
 var currentPage = 1;//记录当前页
 var requestEnd = false;//请求结束标记

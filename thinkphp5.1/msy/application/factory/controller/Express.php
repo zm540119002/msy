@@ -9,7 +9,7 @@ namespace app\factory\controller;
 
 use app\factory\model\Express as ExpressModel;
 
-class Express extends StoreBase
+class Express extends \common\controller\StoreBase
 {
     private $express;
 

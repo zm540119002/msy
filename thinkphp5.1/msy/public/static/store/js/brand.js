@@ -95,7 +95,10 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        var _this = $(this);
+        _this.addClass("nodisabled");//防止重复提交
         $.post(controller+"record",postData,function(msg){
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }

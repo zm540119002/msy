@@ -1,14 +1,14 @@
 <?php
 namespace app\store\controller;
 
-class Role extends StoreBase
+class Role extends \common\controller\FactoryBase
 {
     /**首页
      */
     public function index(){
         $modelRole = new \app\store\model\Role();
         if(request()->isAjax()){
-            $info = $modelRole->edit($this->store['id']);
+            $info = $modelRole->edit($this->factory['id']);
             if($info['status']==0){
                 return $info;
             }
@@ -26,7 +26,7 @@ class Role extends StoreBase
      */
     public function  getList(){
         $modelRole = new \app\store\model\Role();
-        $list = $modelRole->getList($this->store['id']);
+        $list = $modelRole->getList($this->factory['id']);
         $this->assign('list',$list);
         return view('list_tpl');
     }
@@ -38,7 +38,7 @@ class Role extends StoreBase
             return errorMsg(config('custom.not_ajax'));
         }
         $modelRole = new \app\store\model\Role();
-        return $modelRole->del($this->store['id'],true);
+        return $modelRole->del($this->factory['id'],true);
     }
 
     /**获取角色权限列表
@@ -49,6 +49,9 @@ class Role extends StoreBase
         }
         $modelRoleNode = new \app\store\model\RoleNode();
         $list = $modelRoleNode->getList();
+        foreach($list as &$v){
+            $v['node_id']=intval($v['node_id']);
+        }
         return array_column($list,'node_id');
     }
 

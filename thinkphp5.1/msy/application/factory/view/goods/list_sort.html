@@ -7,9 +7,13 @@
     </div>
     <div class="td">
         {notempty name="vo.thumb_img"}
-        <img src="public_uploads/{$vo.thumb_img}" alt="" class="left goods-img">
+        <div class="left img_box">
+            <img src="public_uploads/{$vo.thumb_img}" alt="" class=" goods-img">
+        </div>
         {else /}
-        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+        <div class="left img_box">
+            <img src="public_img/default/no_pic_100.jpg" alt="" class="">
+        </div>
         {/notempty}
         <p class="classify-tag-name">{$vo.name}</p>
     </div>
@@ -21,6 +25,10 @@
 </li>
 {/volist}
 {else /}
+{if $page == 1}
+<li class=''>没有符合条件的记录！</li>
+{else /}
+{/if}
 {/notempty}
 
 

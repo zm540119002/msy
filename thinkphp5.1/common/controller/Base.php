@@ -18,11 +18,15 @@ class Base extends \think\Controller{
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
+        ini_set("display_errors","On");
+        error_reporting(E_ALL);
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
-            $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64']);
-            if(isset($fileName['status'])&& $fileName['status'] == 0){
-                return $fileName;
+            if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
+                $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64']);
+                if(isset($fileName['status'])&& $fileName['status'] == 0){
+                    return $fileName;
+                }
             }
             return successMsg($fileName);
         }
@@ -82,9 +86,6 @@ class Base extends \think\Controller{
             'data:video/3gp;base64',
             'data:video/flv;base64',
             'data:video/rmvb;base64',
-//            'data:video/3gp;base64',
-//            'image/jpg','image/jpeg','image/gif','image/png',
-//            'video/mp4','video/rm','video/mtv','video/wmv','video/avi','video/3gp','video/flv','video/rmvb',
         ];
         if(in_array($type,$array)){
             $ext = explode(';', $ext);
@@ -146,8 +147,7 @@ class Base extends \think\Controller{
         return $tempRelativePath . $fileName;
     }
 
-    /**
-     * 合成商品图片
+    /**合成商品图片
      *
      * @param array $config 合成图片参数
      * @return $img->path 合成图片的路径
@@ -226,5 +226,6 @@ class Base extends \think\Controller{
             'obj'    => $fun($path),
         ];
     }
+
 
 }

@@ -24,11 +24,14 @@
 {block name="content"}{/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
-{include file="template/forget_password_dialog.html" /}
+{include file="template/login_dialog.html" /}
 <!-- 页脚模块-->
 {block name="footer"}
 <footer class="f24">
-	<span class="icp_icon">Copyright 2017 维雅生物科技 粤ICP备14021421号</span>
+	<a href="http://www.miitbeian.gov.cn">
+		<span class="icp_icon">Copyright 广东美尚网络科技有限公司</span>
+		<span class="icp_icon">粤ICP备14021421号</span>
+	</a>
 </footer>
 {/block}
 <!--js基本插件-->
@@ -36,6 +39,7 @@
 <script type="text/javascript" src="public_js/public.js"></script>
 <script type="text/javascript" src="public_js/common.js"></script>
 <script type="text/javascript" src="public_js/dialog.js"></script>
+<script type="text/javascript" src="public_js/forbidscroll.js"></script>
 <!--自定义js-->
 {block name="script"}{/block}
 </body></html>

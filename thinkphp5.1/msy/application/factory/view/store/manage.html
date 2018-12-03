@@ -10,95 +10,97 @@
 		
 	</div>
 </section>
-<article class="f24">
-	{include file="public/store_deploy_head" /}
-	<section class="specific_type bottomLine">
-		<div class="columns_flex f20 l-r-sides">
-			<a href="{:url('record/preview')}">企业档案</a>
-			<a href="{:url('brand/manage')}">商标备案</a>
-			<a class="column_type current">开店申请</a>
-			<a href="{:url('Organize/index')}">组别角色</a>
-			<a href="{:url('Account/index')}">账号授权</a>
-		</div>
-	</section>
-	<section class="f24 apply-store-content">
-		<div class="thead-td">
-			<span class="cols">店铺名称</span>
-			<span class="cols">状态</span>
-			<span class="cols">备注</span>
-		</div>
-		<ul>
-            {notempty name="storeList"}
-			{volist name="storeList" id="vo"}
-			<li class="thead-td" data-id="{$vo.id}">
-				<div class="cols">
-					{notempty name="vo.img"}
-					<img class="left small_default_img" src="public_uploads/{$vo.img}" alt="">
-					{else /}
-					<img class="left small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
-					{/notempty}
-					<div class="store-type ">
-						<div>
-							{if $vo.store_type == 1 }
-							<span>{$vo.name}</span>官方旗舰店
-							{elseif $vo.store_type == 2/}
-							<span>{$vo.name}</span>品牌旗舰店
-							{else /}
-							{/if}
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_head" /}
+					<section class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}">管理员账号</a>
+							<a href="{:url('Record/preview')}">企业档案</a>
+							<a href="{:url('Brand/manage')}">商标备案</a>
+							<a href="{:url('Store/manage')}" class="current">开店申请</a>
+							<a href="{:url('Store/getList')}">店长账号</a>
 						</div>
-						{if $vo.run_type == 1 }
-						<p>B2B采购商城</p>
-						{elseif $vo.run_type == 2 /}
-						<p>B2B分成商城</p>
-						{elseif $vo.run_type == 3 /}
-						<p>B2C零售商城</p>
-						{else /}
-						{/if}
+					</section>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="f24 apply-store-content">
+								<div class="thead-td">
+									<span class="cols">店铺名称</span>
+									<span class="cols">状态</span>
+									<span class="cols">备注</span>
+								</div>
+								<ul>
+									{notempty name="storeList"}
+									{volist name="storeList" id="vo"}
+									<li class="thead-td" data-id="{$vo.id}">
+										<div class="cols">
+											{notempty name="vo.logo_img"}
+											<img class="left small_default_img" src="public_uploads/{$vo.logo_img}" alt="">
+											{else /}
+											<img class="left small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
+											{/notempty}
+											<div class="store-type ">
+												<div>
+													<span>{$vo.name}{$vo.store_type|getStoreType}</span>
+												</div>
+												<p>{$vo.run_type|getRunType}</p>
+											</div>
+										</div>
+										{if $vo.auth_status == -2 }
+										<div class="cols">
+											<span>未通过</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr reapply_store" href="javascript:void(0);"  data-id="{$vo.id}" data-set-status="0">重新申请></a>
+										</div>
+										{elseif $vo.auth_status == -1 /}
+										<div class="cols">
+											<span>已关闭</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr activate_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="0">激活店铺></a>
+										</div>
+										{elseif $vo.auth_status == 0 /}
+										<div class="cols">
+											<span>审核中</span>
+										</div>
+										<div class="cols">
+											<span>5个工作日</span>
+										</div>
+										{elseif $vo.auth_status == 1 /}
+										<div class="cols">
+											<span>建设中</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="-1">申请关店></a>
+										</div>
+										{elseif $vo.auth_status == 2 /}
+										<div class="cols">
+											<span>营业中</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}" data-set-status="-1">申请关店></a>
+										</div>
+										{else /}
+										{/if}
+									</li>
+									{/volist}
+									{else /}
+									<li><span>暂无店铺</span></li>
+									{/notempty}
+								</ul>
+							</section>
+						</div>
 					</div>
 				</div>
-				{if $vo.auth_status == -2 }
-				<div class="cols">
-					<span>未通过</span>
-				</div>
-				<div class="cols">
-					<a class="text-color-gr reapply_store" href="javascript:void(0);"  data-id="{$vo.id}" data-set-status="0">重新申请></a>
-				</div>
-				{elseif $vo.auth_status == -1 /}
-				<div class="cols">
-					<span>已关闭</span>
-				</div>
-				<div class="cols">
-					<a class="text-color-gr activate_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="0">激活店铺></a>
-				</div>
-				{elseif $vo.auth_status == 0 /}
-				<div class="cols">
-					<span>审核中</span>
-				</div>
-				<div class="cols">
-					<span>5个工作日</span>
-				</div>
-				{elseif $vo.auth_status == 1 /}
-				<div class="cols">
-					<span>建设中</span>
-				</div>
-				<div class="cols">
-					<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="-1">申请关店></a>
-				</div>
-				{elseif $vo.auth_status == 2 /}
-				<div class="cols">
-					<span>营业中</span>
-				</div>
-				<div class="cols">
-					<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}" data-set-status="-1">申请关店></a>
-				</div>
-				{else /}
-				{/if}
-			</li>
-			{/volist}
-			{else /}
-			<li><span>暂无店铺</span></li>
-			{/notempty}
-		</ul>
+			</div>
+		</div>
 	</section>
 </article>
 <a href="{:url('store/edit')}" class="apply-new-store f24 foot-btn">申请开新店</a>
@@ -190,7 +192,7 @@ function layerTipc(content,postData){
 				},
 				error:function (xhr) {
 					dialog.error('AJAX错误'+xhr);
-				},
+				}
 			});
 			layer.close(index);
 		},

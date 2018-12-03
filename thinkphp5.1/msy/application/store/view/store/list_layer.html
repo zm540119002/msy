@@ -1,0 +1,94 @@
+<section id="vendorInfoList" style="display:none;">
+    <ul class="vendorInfoList">
+        {volist name="storeList" id="vo"}
+        <li class="" data-id="{$vo.id}">
+            {if $vo.store_type == 1 }
+            <span>{$vo.name}</span>旗舰店
+            {elseif $vo.store_type == 2/}
+            <span>{$vo.name}</span>品牌旗舰店
+            {else /}
+            {/if}
+
+            {if $vo.run_type == 4 }
+            <p>美尚会云店</p>
+            {elseif $vo.run_type == 5 /}
+            <p>机构公众号内嵌式门店</p>
+            {else /}
+            {/if}
+        </li>
+        {/volist}
+    </ul>
+</section>
+<script type="text/javascript">
+    var vendorInfoList=$('#vendorInfoList').html();
+    $(function(){
+        //没有默认店铺
+        var notDefaultStore = "{$notDefaultStore|default=0}";
+        if(notDefaultStore == 1){
+            storeList();
+            return false;
+        }
+    })
+    //弹层 店铺
+    function storeList() {
+        layer.open({
+            type: 1,
+            title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
+            className:'vendorInfoLayer',
+            content:vendorInfoList,
+            anim: 'up',
+            btn:['确定','取消'],
+            success:function(){
+                var storeId=$('.storeId').val();
+                $('.vendorInfoLayer li').on('click',function(){
+                    var _this=$(this);
+                    _this.addClass('current').siblings().removeClass('current');
+                });
+                $.each($('.vendorInfoLayer li'),function(){
+                    var currentId=$(this).data('id');
+                    if(storeId==currentId){
+                        $(this).addClass('current');
+                    }
+                })
+            },
+            yes:function(index){
+                var isCurrent=$('.vendorInfoLayer li.current');
+                factoryLayerName=isCurrent.text();
+                factoryLayerId  =isCurrent.data('id');
+                $('.factoryId').val(factoryLayerId);
+                $('.vendor-name').text(factoryLayerName);
+                if(!factoryLayerId){
+                    dialog.error('请选择一个店铺');
+                    return false
+                }
+                var postData = {};
+                postData.id = factoryLayerId;
+                $.ajax({
+                    url: controller + 'setDefaultStore',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
+                        }
+                        if(info.status == 1){
+                            dialog.success(info.msg);
+                            location.reload();
+                        }
+                    },
+                    complete:function(){
+
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    },
+                });
+                layer.close(index);
+            }
+        })
+    }
+</script>

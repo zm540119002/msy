@@ -1,0 +1,302 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="practitioner_css/main.css">
+{/block}
+{block name="content"}
+<article class="scroll-wrapper f24">
+	<section class="fixedtop top_nav_fixed">
+		{include file="template/header_menu_msy_practitioner.html" /}
+		<div class="top_menu_box">
+			<div class="top_menu_list">
+				<a href="{:url(practitioner/Index/index)}" class="current">云推客</a>
+				<a href="javascript:void(0);">我是卖手</a>
+				<a href="javascript:void(0);">美容师创业</a>
+			</div>
+		</div>
+	</section>
+	<section class="slider_banner ">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_img/banner/home-banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/home-banner2.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="twitter-nav separation-line">
+		<nav class="columns_flex channel_nav mall_function_menu navigation_module">
+			<a href="" class="current">
+				<span class="union_purchase"></span>
+				云推客圈
+			</a>
+			<a href="">
+				<span class="exclusive"></span>
+				小视频
+			</a>
+			<a href="">
+				<span class="classify"></span>
+				视频
+			</a>
+			<a href="">
+				<span class="purchasers"></span>
+				直播
+			</a>
+			<a href="">
+				<span class="recharge"></span>
+				我的店铺
+			</a>
+		</nav>
+	</section>
+	<section class="separation-line content-padding">
+		<div class="columns_flex l-r-sides ">
+			<span>分享给B端采购商和从业人员的活动入口</span>
+			<a href="javascript:void(0);">更多B端活动入口 ></a>
+		</div>
+		<div class="cells_auto_fill multi_cell">
+			<a href="" class="items">
+				<img src="public_img/activity1.jpg" alt="">
+			</a>
+			<a href="" class="items">
+				<img src="public_img/activity2.jpg" alt="">
+			</a>
+			<a href="" class="items">
+				<img src="public_img/default/no_pic_100.jpg" alt="">
+			</a>
+		</div>
+	</section>
+	<section class="separation-line content-padding">
+		<div class="columns_flex l-r-sides ">
+			<span>可分享给C端消费者的活动入口</span>
+			<a href="javascript:void(0);">更多C端活动入口 ></a>
+		</div>
+		<div>
+			<img src="public_img/default/no_pic_1000.jpg" alt="" class="common_default_img">
+		</div>
+		<ul class="columns_flex activity-c-entry">
+			<li>
+				<a href="javascript:void(0);">
+					<img class="common_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="javascript:void(0);">
+					<img class="common_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+				</a>
+			</li>
+		</ul>
+	</section>
+	<section class="separation-line content-padding">
+		<div class="columns_flex l-r-sides ">
+			<span>你可能感兴趣的商家店铺</span>
+			<a href="javascript:void(0);">我的兴趣设置 ></a>
+		</div>
+		<div class="swiper-focus-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active care-slide-item">
+					<a href="" class="store-logo">
+						<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+					</a>
+					<p>sfsfsfsfsdfsfdfdsf</p>
+					<a href="javascript:void(0);" class="follow">+关注</a>
+				</div>
+				<div class="swiper-slide care-slide-item">
+					<a href="" class="store-logo">
+						<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+					</a>
+					<p>sfsfsfsfsdfsfdfdsf</p>
+					<a href="javascript:void(0);" class="follow">+关注</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--分类标签-->
+	<section></section>
+	<div class="focus-hot columns_flex">
+		<a href="javascript:void(0);" class="current">
+			精选推文
+		</a>
+		<a href="javascript:void(0);">
+			只看关注
+		</a>
+	</div>
+	<div class="separation-line">
+		<div class="follow-msg-item">
+			<div class="columns_flex l-r-sides focus-hot-head" >
+				<div class="">
+					<img src="public_img/default/no_pic_40.jpg" alt="" class="left">
+					<div>ppppppp</div>
+				</div>
+				<div>
+					<a href="javascript:void(0);" class="follow">关注</a>
+					<a href="javascript:void(0);" class="close-btn">X</a>
+				</div>
+			</div>
+			<div class="more-text-box">
+				<p class="more-text">店铺店铺店铺店铺店铺店铺店<a class="more"></a></p>
+			</div>
+			<div>
+				<img src="public_img/default/no_pic2_1000.jpg" alt="" class="common_default_img">
+			</div>
+			<div class="user-concern columns_flex">
+				<div class="row">
+					<i class="browse-records"></i>
+					<span>10000</span>人看过
+				</div>
+				<a href="" class="row">
+					<i class="comment"></i>
+					<span>评论</span>
+				</a>
+				<div class="row">
+					<i class="thumbs-up"></i>
+					<span>10000</span>
+				</div>
+			</div>
+		</div>
+		<div class="follow-msg-item">
+			<div class="columns_flex l-r-sides focus-hot-head" >
+				<div class="">
+					<img src="public_img/default/no_pic_40.jpg" alt="" class="left">
+					<div>ppppppp</div>
+				</div>
+				<div>
+					<a href="javascript:void(0);" class="follow">关注</a>
+					<a href="javascript:void(0);" class="close-btn">X</a>
+				</div>
+			</div>
+			<div class="more-text-box">
+				<p class="more-text">店铺店铺店铺店铺店铺<a class="more"></a></p>
+			</div>
+			<div>
+				<video class="follow-video-msg" src="practitioner_video/video1.mp4" autoplay="autoplay" width="" height="" controls="controls"></video>
+			</div>
+			<div class="user-concern columns_flex">
+				<div class="row">
+					<i class="browse-records"></i>
+					<span>10000</span>人看过
+				</div>
+				<a href="" class="row">
+					<i class="comment"></i>
+					<span>评论</span>
+				</a>
+				<div class="row">
+					<i class="thumbs-up"></i>
+					<span>10000</span>
+				</div>
+			</div>
+		</div>
+		<div class="follow-msg-item">
+			<div class="columns_flex article-msg">
+				<div>
+					<p>是非成败转头空，青山依旧在，惯看秋月春风。一壶浊酒喜相逢，古今多少事，滚滚长江东逝水，浪花淘尽英雄。</p>
+					<div class="user-concern columns_flex">
+						<div class="row">
+							<i class="browse-records"></i>
+							<span>10000</span>人看过
+						</div>
+						<div class="row">
+							<i class="thumbs-up"></i>
+							<span>10000</span>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img src="public_img/default/no_pic_100.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+		</div>
+		<div class="follow-msg-item">
+			<div class="columns_flex l-r-sides focus-hot-head" >
+				<div class="">
+					<img src="public_img/default/no_pic_40.jpg" alt="" class="left">
+					<div>ppppppp</div>
+				</div>
+				<div>
+					<a href="javascript:void(0);" class="follow">关注</a>
+					<a href="javascript:void(0);" class="close-btn">X</a>
+				</div>
+			</div>
+			<div class="more-text-box">
+				<p class="more-text">店铺店铺店铺店铺店铺店铺<a class="more"></a></p>
+			</div>
+			<div>
+				<img src="public_img/default/no_pic2_1000.jpg" alt="" class="common_default_img">
+			</div>
+			<div class="user-concern columns_flex">
+				<div class="row">
+					<span>已关注.巧妹九妇</span>
+				</div>
+				<div class="row">
+					<i class="browse-records"></i>
+					<span>10000</span>人看过
+				</div>
+				<a href="" class="row">
+					<i class="comment"></i>
+					<span>评论</span>
+				</a>
+				<div class="row">
+					<i class="thumbs-up"></i>
+					<span>10000</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</article>
+<section class="bottom_nav_fixed">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column current">
+				<a>
+					<span class="store"></span>
+					采购商
+				</a>
+			</li>
+			<li class="each_column">
+				<a>
+					<span class="practitioners"></span>
+					从业人员
+				</a>
+			</li>
+			<li class="each_column">
+				<a>
+					<span class="manufacturer"></span>
+					供应商
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_practitioner.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//轮播
+        var swiper1 = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		swiper('.swiper-focus-container');
+        $('.more-text-box').moreText({
+            mainCell:".more-text",
+            openBtn:'全部>'
+        });
+	});
+</script>
+{/block}

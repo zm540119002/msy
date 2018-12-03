@@ -580,7 +580,7 @@ var areaObject={
 		var areaKey=$('.area-address-name').data('key');
 		clockArea();
 		expressArea += district[p][c][d];
-		$("#expressArea .area_address").html(expressArea);
+		$(".express-area .area_address").html(expressArea);
 		if(!areaObject.provinceCityD.length){
 			
 			for(var i=0;i<arguments.length;i++){
@@ -604,7 +604,14 @@ var areaObject={
 		return areaName;
 	},
 	getArea:function(){
-		return areaObject.provinceCityD;
+		//return areaObject.provinceCityD.split(',');
+		
+		if(!areaObject.provinceCityD.length){
+			areaObject.provinceCityD.length=[];
+			return areaObject.provinceCityD
+		}
+		return areaObject.provinceCityD.substr(0, areaObject.provinceCityD.length - 1).split(',');
+		
 	}
 }
 /*关闭省市区选项*/
@@ -616,12 +623,12 @@ function clockArea() {
 
 $(function() {
 	/*打开省市区选项*/
-	$("#expressArea").click(function() {
+	$('body').on('click','.express-area a',function(){
 		$("#areaMask").fadeIn();
 		$("#areaLayer").show().animate({"bottom": 0});
 	});
 	/*关闭省市区选项*/
-	$("#areaMask, #closeArea").click(function() {
+	$('body').on('click','#areaMask, #closeArea',function(){
 		clockArea();
 	});
 	//加入到jquery对象空间下
@@ -633,6 +640,7 @@ $(function() {
 	$.fn.extend({
 		getArea:areaObject.getArea,
         setArea:function (options) {
+			//console.log(options);
             var address = areaObject.setArea(options);
             $(this).text(address);
         }

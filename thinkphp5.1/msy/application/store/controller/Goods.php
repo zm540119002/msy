@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Goods extends ShopBase
+class Goods extends \common\controller\FactoryStoreBase
 {
     /**
      * @return array|mixed
@@ -9,21 +9,27 @@ class Goods extends ShopBase
      */
     public function edit()
     {
-        $goodsModel = new \app\store\model\Goods;//商品扩展模型
+        $goodsModel = new \common\model\Goods;//商品扩展模型
         if(request()->isPost()){
-            return $result = $goodsModel -> edit($this->shop['id']);
+            return $result = $goodsModel -> edit($this->store['id'],$this->store['run_type']);
         }
-        $categoryModel = new \app\index_admin\model\GoodsCategory;
-        $where = [['parent_id_1','=',0]];
-        $platformCategory = $categoryModel->getList($where);
+        $categoryModel = new \common\model\GoodsCategory;
+        $config = [
+            'where' => [
+                ['parent_id_1','=',0]
+            ],
+        ];
+        $platformCategory = $categoryModel->getList($config);
         $this -> assign('platformCategory',$platformCategory);
-        if(input('?goods_id') && $this->shop['id']){
+        if(input('?goods_id') &&  $this->store){
             $goodsId= (int)input('goods_id');
-            $where = [
-               ['g.shop_id','=',$this->shop['id']],
-               ['g.id','=',$goodsId],
+            $config=[
+                'where'=>[
+                    ['g.store_id','=',$this->store['id']],
+                    ['g.id','=',$goodsId],
+                ],
             ];
-            $goodsInfo =  $goodsModel -> getInfo($where);
+            $goodsInfo =  $goodsModel -> getInfo($config);
             if(empty($goodsInfo)){
                 $this->error('此产品已下架');
             }
@@ -33,6 +39,28 @@ class Goods extends ShopBase
         }
         return $this->fetch();
     }
+    /**
+     * @return array|mixed
+     *商品删除
+     */
+    public function del()
+    {
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误');
+        }
+        $model = new \common\model\Goods;
+        $goodsId = (int)input('goods_id');
+        if(empty($goodsId) && !$goodsId){
+            $this -> error('此商品不存在');
+        }
+        if($this->store){
+            $condition=[
+                ['id','=',$goodsId],
+                ['store_id','=',$this->store['id']],
+            ];
+            return $model -> del($condition);
+        }
+    }
 
 
     /**
@@ -41,39 +69,36 @@ class Goods extends ShopBase
      */
     public function preview()
     {
-        $model = new \app\store\model\Goods;
+        $model = new \common\model\Goods;
         $goodsId = (int)input('goods_id');
         if(empty($goodsId) && !$goodsId){
             $this -> error('此商品不存在');
         }
-        if($this->shop['id']){
-            $where = [
-                ['g.id','=',$goodsId],
-                ['g.shop_id','=',$this->shop['id']],
+        if($this->store){
+            $config=[
+                'where'=>[
+                    ['g.id','=',$goodsId],
+                    ['g.store_id','=',$this->store['id']],
+                ],
             ];
-            $goodsInfo =  $model -> getInfo($where);
+            $goodsInfo =  $model -> getInfo($config);
             if(empty($goodsInfo)){
                 $this -> error('此商品不存在');
             }
-            $goodsInfo['main_img'] = explode(",",$goodsInfo['main_img']);
-            array_pop( $goodsInfo['main_img']);
-            $goodsInfo['details_img'] = explode(",",$goodsInfo['details_img']);
-            array_pop( $goodsInfo['details_img']);
+            $goodsInfo['main_img'] = explode(",",rtrim($goodsInfo['main_img'], ","));
+            $goodsInfo['details_img'] = explode(",",rtrim($goodsInfo['details_img'], ","));
             $this -> assign('goodsInfo',$goodsInfo);
-
-            //获取店铺的详情信息
-            $modelShop = new \app\store\model\Shop;
-            $shopInfo = $modelShop -> getShopInfo($this->store);
-            $this -> assign('storeInfo',$shopInfo);
         }
-
         return $this->fetch();
     }
 
     //生成商品二维码
+    /**
+     * @return array
+     */
     public function generateGoodsQRcode(){
         if(request()->isPost()){
-            $url = request()->domain().'/index.php/store/Goods/preview/goods_id/'.input('post.goods_id');
+            $url = request()->domain().'/index.php/factory/Goods/preview/goods_id/'.input('post.goods_id');
             $avatarPath = request()->domain().'/static/common/img/ucenter_logo.png';
             $newRelativePath = config('upload_dir.upload_path').'/';
             $shareQRCodes = createLogoQRcode($url,$avatarPath,$newRelativePath);
@@ -94,7 +119,6 @@ class Goods extends ShopBase
             ];
             return $this->compose($init);
         }
-
     }
 
 
@@ -105,19 +129,34 @@ class Goods extends ShopBase
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new\app\store\model\Goods;
-        $where = [
-            ['g.shop_id','=',$this->shop['id']],
-        ];
-        if($_GET['pageType'] == 'promotion' ){//促销
-            $where[] =  ['g.sale_type','=',0];
-        }
-        $file = [
-            'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
+        $model = new\common\model\Goods;
+        $config=[
+            'where'=>[
+                ['g.store_id','=',$this->store['id']],
+                ['g.status','=',0],
+            ],
+            'field'=>[
+                'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters'
+                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort'
+            ],
+            'order'=>[
+                'sort'=>'desc',
+                'line_num'=>'asc',
+                'id'=>'desc'
+            ],
         ];
-        $list = $model -> pageQuery($where,$file);
+        if($_GET['pageType'] == 'promotion' ) {//促销
+            $config['where'][] = ['g.sale_type', '=', 0];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $config['where'][] = ['name', 'like', '%'.trim($keyword).'%'];
+        }
+
+        $list = $model -> pageQuery($config);
+        $page = $list->getCurrentPage();
+        $this->assign('page',$page);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'promotion' ){//促销
@@ -140,88 +179,100 @@ class Goods extends ShopBase
 
     //商品管理展示页
     public function manage(){
-        if($this->store && $this->shop){
+        if($this->store){
             //查看本店商品是否存在备份文件
             //存储路径
-            $shopPath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.store_goods_backup');
+            $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
             //本厂商店铺备份文件
-            $modelShop = new \app\store\model\Shop;
-            $shopList = $modelShop -> getShopList($this -> store['id']);
-            foreach ( $shopList as &$shopInfo) {
-                $fileName = $shopPath.$shopInfo['id'].'.txt';
+            $modelStore = new \common\model\Store;
+
+            $config = [
+                'where'=>[
+                    ['factory_id','=',$this -> store['factory_id']]
+                ],
+            ];
+            $storeList = $modelStore -> getList($config);
+            foreach ( $storeList as &$storeInfo) {
+                $fileName = $storePath.$storeInfo['id'].'.txt';
                 if(file_exists($fileName)){
                     //本店铺商品备份文件名
-                    if($shopInfo['id'] == $this -> shop['id']){
+                    if($storeInfo['id'] == $this -> store['id']){
                         $backupTime = date("Y年m月d日 H:i:s",filemtime($fileName));
-                        $selfStore = $shopInfo;
-                        $selfshop['backup_time'] = $backupTime;
+                        $selfStore = $storeInfo;
+                        $selfStore['backup_time'] = $backupTime;
                         $this -> assign('selfStore',$selfStore);
                     }else{
                         //本厂商其他店铺商品备份文件
-                        $otherShop[] = $shopInfo;
-                        $this -> assign('otherStores',$otherShop);
+                        $otherStores[] = $storeInfo;
+                        $this -> assign('otherStores',$otherStores);
                     }
                 }
             }
-
         }
         return $this->fetch();
     }
     //设置商品排序
     public function setSort(){
-        if($this->store && $this->store) {
-            if (request()->isPost()) {
-                $data = input();
-                $model = new \app\store\model\Goods;
-                $result = $model->allowField(true)
-                    ->save($data, ['id' => $data['goodsId'], 'store_type' => $data['storeType']]);
-                if (false !== $result) {
-                    return successMsg('成功');
-                }
+        if (request()->isPost()) {
+            $data = input();
+            if(empty($data['sortData']) && !is_array($data['sortData'])){
+                return errorMsg('参数错误');
+            }
+            $model = new \common\model\Goods;
+            $result = $model->isUpdate(true)->saveAll($data['sortData']);
+            if (false !== $result) {
+                return successMsg('成功');
             }
         }
-        return $this -> fetch();
+        if($this->store) {
+            return $this -> fetch();
+        }
+
     }
     //上下架设置
     public function setShelf(){
-        if($this->store && $this->store) {
-            if (request()->isPost()) {
-                $data = input();
-                if(empty($data['goodsId']) && !(int)($data['goodsId'])){
-                    return errorMsg('参数错误');
-                }
-                $model = new \app\store\model\Goods;
-                $result = $model->allowField(true)
-                    ->save($data, ['id' => $data['goodsId'], 'shop_id' => $this->shop['id']]);
-                if (false !== $result) {
-                    return successMsg('成功');
-                }
+        if (request()->isPost()) {
+            $data = input();
+            $model = new \common\model\Goods;
+            $result = $model->allowField(true)
+                ->save($data, ['id' => $data['goodsId'], 'store_id' => $this->store['id']]);
+            if (false !== $result) {
+                return successMsg('成功');
             }
         }
-        return $this -> fetch();
+        if( $this->store) {
+            return $this -> fetch();
+        }
     }
 
     //设置商品库存
     public function setInventory(){
         if(request()->isPost()){
-            $model = new \app\store\model\Goods;
-            return $result = $model ->setInventory($this->shop['id']);
+            $model = new \common\model\Goods;
+            return $result = $model ->setInventory($this->store['id']);
         }
-        return $this -> fetch();
+        if($this->store) {
+            return $this -> fetch();
+        }
     }
 
     //商品备份
+    /**
+     * @return array
+     */
     public function backup(){
         if(request()->isPost()){
-            $model = new \app\store\model\Goods;
-            $where = [
-                ['shop_id','=',$this->shop['id']]
+            $model = new \common\model\Goods;
+            $config = [
+                'where'=>[
+                    ['store_id','=',$this->store['id']]
+                ],
+                'field'=>[
+                    'g.id,g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
+                        g.retail_price,g.retail_price,g.sale_price,g.settle_price'
+                ],
             ];
-            $field = [
-                'g.id,g.name,g.trait,thumb_img,g.main_img,g.goods_video,g.parameters,g.details_img,
-            g.retail_price,g.retail_price,g.sale_price,g.settle_price'
-            ];
-            $goodsList = $model -> getList($where,$field);
+            $goodsList = $model -> getList($config);
             $goodsList = json_encode($goodsList);
             $uploadPath = config('upload_dir.upload_path');
             if(!is_dir($uploadPath)){
@@ -231,12 +282,12 @@ class Goods extends ShopBase
             }
             $uploadPath = realpath($uploadPath);
             //存储路径
-            $shopPath = $uploadPath.'/'.config('upload_dir.store_goods_backup');
-            if(!mk_dir($shopPath)){
+            $storePath = $uploadPath.'/'.config('upload_dir.factory_goods_backup');
+            if(!mk_dir($storePath)){
                 return errorMsg('创建临时目录失败');
             }
             //按店Id为文件名保存数据
-            $fileName = $shopPath.$this->shop['id'].'.txt';
+            $fileName = $storePath.$this->store['id'].'.txt';
             file_put_contents($fileName,$goodsList);
             //创建时间
             $fileCreateTime = ['create_time'=>date("Y年m月d日 H:i:s",filemtime($fileName))];
@@ -249,15 +300,15 @@ class Goods extends ShopBase
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $shopId = (int)input('get.storeId');
-        $modelStore = new \app\store\model\Store;
-        if(!$modelStore -> checkStoreExist($shopId,$this -> store['id'])){
+        $storeId = (int)input('get.storeId');
+        $modelStore = new \common\model\Store;
+        if(!$modelStore -> checkStoreExist($storeId,$this -> store['factory_id'])){
             return errorMsg('不存在店铺');
         }
         //存储路径
-        $shopPath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.store_goods_backup');
-        $shopBackupFile = $shopPath.$this->shop['id'].'.txt';
-        $backup = file_get_contents($shopBackupFile);
+        $storePath = realpath(config('upload_dir.upload_path')).'/'.config('upload_dir.factory_goods_backup');
+        $storeBackupFile = $storePath.$this->store['id'].'.txt';
+        $backup = file_get_contents($storeBackupFile);
         $goodsListBackup = json_decode($backup,true);
         $pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
             input('get.pageSize',0,'int') : config('custom.default_page_size');
@@ -274,5 +325,58 @@ class Goods extends ShopBase
         $this -> assign('goodsListBackup',$goodsList);
         return $this -> fetch('list_backup');
     }
-    
+
+    //获取场景也选择商品
+    public function getSceneGoodsList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $selectedGoodsList = json_decode(input('get.goods'),true);
+        $goodsIds = [];
+        foreach ($selectedGoodsList as $key=>$goods){
+            $goodsIds[] = $goods['goods_id'];
+        }
+        $modelGoods = new \common\model\Goods;
+        $config = [
+            'where'=>[
+                ['id','in',$goodsIds]
+            ],
+            'field'=>[
+                'g.id,g.name,g.thumb_img,g.sale_price'
+            ],
+        ];
+        $goodsList = $modelGoods -> getList($config);
+        foreach ($goodsList as $k=>$v){
+            foreach ($selectedGoodsList as $kk=>$vv){
+                if($v['id'] == $vv['goods_id'] ){
+                    $goodsList[$k]['special'] = $vv['special'];
+                }
+            }
+        }
+        $this -> assign('list',$goodsList);
+        return $this -> fetch('list_scene_selected');
+    }
+
+    // 获取推文相关的商品
+    /**
+     * @return array|mixed
+     */
+    public function getTweetGoodsList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $goodsIds = explode(",",rtrim(input('get.goods'), ","));
+        $modelGoods = new \common\model\Goods;
+        $config = [
+            'where'=>[
+                ['id','in',$goodsIds]
+            ],
+            'field'=>[
+                'g.id,g.name,g.thumb_img,g.sale_price'
+            ],
+        ];
+        $goodsList = $modelGoods -> getList($config);
+        $this -> assign('list',$goodsList);
+        return $this -> fetch('list_tweet_selected');
+    }
 }

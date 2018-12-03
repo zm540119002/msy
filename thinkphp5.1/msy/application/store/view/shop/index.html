@@ -1,73 +1,215 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="store_css/main.css">
-{/block}
-{block name="title"}开店部署{/block}
+<link rel="stylesheet" href="store_css/main.css">{/block}
 {block name="content"}
-<article class="f24">
-	{include file="public/store_deploy_head" /}
-	<section class="specific_type bottomLine">
-		<div class="columns_flex f20 l-r-sides">
-			<a href="{:url('Record/preview')}">档案</a>
-			<a href="{:url('Brand/manage')}">商标</a>
-			<a href="{:url('Deploy/register')}">入驻</a>
-			<a href="{:url('Shop/manage')}">门店</a>
-			<a href="{:url('Organize/index')}">角色</a>
-			<a href="{:url('Account/index')}">账号</a>
+<!--设置店长-->
+<section id="entryShopInfo" style="display:none;">
+	<form class="entryShopForm">
+		<div class="account-field">
+			<input class="f20 store_name " type="text" placeholder="门店名称" name="shop_name">
 		</div>
-	</section>
-	<section class="f24 account-content-wrapper ">
-		<div class="account-top">
-			<!--<div>企业名称：<span>某某公司</span></div>
-			<p>管理员进行账户授权前请阅读以下角色类型与权限说明</p>-->
-			<dl>
-				<dt class="role-label">【操作提示】</dt>
-				<dd>
-					<p>这里是管理员中心，如你有多个供应商账号请先选切换相应帐号进行开店部署操作，管理员可先新增管理员帐号协助进行开店部署。</p>
-				</dd>
-			</dl>
-			<dl>
-				<dt class="role-label">企业档案：</dt>
-				<dd>
-					<p>开店前请先完善企业档案，选择所见所得和传统模式的编辑方式。</p>
-				</dd>
-			</dl>
-			<dl>
-				<dt class="role-label">商标备案：</dt>
-				<dd>
-					<p>为避免商标知识产权纠纷，凡宣称为商标者应提供商标的已注册/注册中的证明，非商标所有权的商户应提交商标拥有人的使用授权书，注意申请开通品牌官方旗舰店前需先进行商标备案。</p>
-				</dd>
-			</dl>
-			<dl>
-				<dt class="role-label">开店申请:</dt>
-				<dd>
-					<p>开店申请时需选择店铺类型（企业官方旗舰店或品牌官方旗舰店）和经营模式（采购、分成、零售经营模式，店铺分别出现在采购商城、分成商城和零售商城），企业官方旗舰店凭营业执照申请开通即可，品牌官方旗舰店凭营业执照和商标证（已注册或注册中商标证明，非商标所有人企业需递交商标使用授权证明）。官方旗舰店按店铺类型和经营模式组合的需要分别申请开通。</p>
-				</dd>
-			</dl>
-			<dl>
-				<dt class="role-label">组别角色:</dt>
-				<dd>
-					<p>设定企业的组织架构（仅设置与店铺运营和订单管理有关的部门人员），设定组别角色的默认权限；每当新开一家店铺后应及时更新组别角色对该店铺的经营管理权限。</p>
-				</dd>
-			</dl>
-			<dl>
-				<dt class="role-label">帐号授权：</dt>
-				<dd>
-					<p>总经理及助理按总经理组别，总监及助理按总监组别，其他类推。帐号授权可为店铺的运营、客服和财务业务设立供应商员工登陆帐号和角色授权。</p>
-				</dd>
-			</dl>
+		<div class="account-field">
+			<input class="f20 store_name input_disabled" type="text" placeholder="店长姓名" name="name">
+		</div>
+		<div class="account-field">
+			<input class="f20 store_mobile input_disabled" type="tel" placeholder="手机号码" name="mobile_phone">
+		</div>
+	</form>
+	<div class="error_tipc"></div>
+</section>
+<section style="display: none;" id="storeInfoList">
+	<li class="columns_flex l-r-sides">
+		<div>
+			<p>
+				<input class="input_size" type="text" value="" name="store_name" readonly="readonly">
+				<span>门店</span>
+			</p>
+			<div>
+				<span>店长:</span>
+				<input type="text" value="" name="name" readonly="readonly"/>
+			</div>
+			<div>
+				<span>手机号码:</span>
+				<input type="tel" value="" name="mobile_phone" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="operate-btn">
+			<a href="javascript:void(0);" class="modify-account">
+				<span></span>
+				修改
+			</a>
+			<a href="javascript:void(0);" class="delete-account">
+				<span></span>
+				删除
+			</a>
+		</div>
+	</li>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_head" /}
+					<section class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}">管理员</a>
+							<a href="{:url('Record/preview')}">档案</a>
+							<a href="{:url('Brand/manage')}">商标</a>
+							<a href="{:url('Store/manage')}">开店</a>
+							<a href="{:url('Store/getList')}">店铺</a>
+							<a href="{:url('Shop/index')}" class="current">门店</a>
+							<a href="javascript:void(0);">财务</a>
+						</div>
+					</section>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="columns_flex l-r-sides content-padding">
+								<div>
+									<img class="left" src="" alt="" />
+									<div>
+										<p><span>{$store.name|default=''}</span>{$store.store_type|getStoreType}</p>
+										<div>{$store.run_type|getRunType}</div>
+									</div>
+								</div>
+								<div>
+									{include file="public/switch_store_head_2" /}
+								</div>
+							</section>
+							<section class="f24 account-content-wrapper">
+								<ul class="list"></ul>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 </article>
+<a href="javascript:void(0);" class="foot-btn f24 entry_shop_info">录入线下门店信息</a>
 {/block}
-{block name="common"}
-{include file="template/footer_menu_msy_store.html" /}
-{include file="template/right_side_bar.html" /}
-{/block}
+{block name="common"}{/block}
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-$(function () {
-});
+	$(function(){
+		//页面初始化
+		var config = {
+			url: module + 'Shop/index'
+		};
+		//有默认店铺
+		var store_id = {:json_encode($store.id)};
+		if(store_id){
+			getList(config);
+		}
+		//录入门店信息
+		var entryShopInfo=$('#entryShopInfo').html();
+		$('body').on('click','.entry_shop_info',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['录入线下门店信息','border-bottom:1px solid #d9d9d9;'],
+				className:'entryShopInfoLayer',
+				content:entryShopInfo,
+				btn:['确定','取消'],
+				success:function () {
+				},
+				yes:function(index){
+					var dialogForm = $('.entryShopForm');
+					var postData = dialogForm.serializeObject();
+					var content='';
+					if(!postData.shop_name){
+						content='请填写门店名称';
+					}else if(!postData.name){
+						content='请填写店长姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					var config = {
+						url:module + 'Shop/edit',
+						postData:postData,
+						fromObj:dialogForm,
+						toObj:_this,
+						index:index
+					};
+					dialogFormAdd(config)
+				}
+			});
+		});
+		//修改门店信息
+		$('body').on('click','.modify-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['修改线下门店信息','border-bottom:1px solid #d9d9d9;'],
+				className:'setShopAccountLayer',
+				content:entryShopInfo,
+				btn:['确定','取消'],
+				success:function(){
+					var dialogForm = $('.setShopAccountLayer .entryShopForm');
+					copyDataByName(_this,dialogForm);
+				},
+				yes:function(index){
+					var dialogForm = $('.setShopAccountLayer .entryShopForm');
+					var postData=dialogForm.serializeObject();
+					var content='';
+					if(!postData.shop_name){
+						content='请填写门店名称';
+					}else if(!postData.name){
+						content='请填写店长姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					postData.shopId = _this.data('shop_id');
+					postData.userShopId = _this.data('user_shop_id');
+					var config = {
+						url:module + 'Shop/edit',
+						postData:postData,
+						modifyObj:_this,
+						index:index
+					};
+					dialogFormEdit(config);
+				}
+			});
+		});
+		//删除店长
+		$('body').on('click','.delete-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['删除线下门店信息','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
+				className:'setShopAccountLayer',
+				content:entryShopInfo,
+				btn:['确定','取消'],
+				success:function(){
+					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
+				},
+				yes:function(index){
+					var postData = {};
+					postData.shopId = _this.data('shop_id');
+					postData.userShopId = _this.data('user_shop_id');
+					var config = {
+						url:module + 'Shop/del',
+						postData:postData,
+						delObj:_this,
+						index:index
+					};
+					dialogFormDel(config);
+				}
+			});
+		});
+		$('body').on('click','.list li',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$(this).find('.operate-btn').show();
+			$(this).siblings().find('.operate-btn').hide();
+		});
+	});
 </script>
 {/block}

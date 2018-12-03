@@ -132,8 +132,7 @@ function data_auth_sign($data)
     return $sign;
 }
 
-/**
- * $this->error() 的Ajax格式
+/**$this->error() 的Ajax格式
  * @param $msg
  * @param string $extend
  * @return array
@@ -479,7 +478,7 @@ function arrayToXml($arr,$dom=null,$node=null,$root='xml',$cdata=false){
 //require_once(dirname(dirname(__FILE__)) . '/Component/WxpayAPI/lib/WxPay.Api.php');
 function makeSign($data){
     //获取微信支付秘钥
-    $key = C('WX_CONFIG')['KEY'];
+    $key = config('wx_config.key');
     // 去空
     $data=array_filter($data);
     //签名步骤一：按字典序排序参数
@@ -612,43 +611,38 @@ function createQRcode($url){
 }
 
 
-//生成带logo二维码
+//生成二维码 有$logo,生成带logo的二维码
 /**
  * @param $url 要跳转的url
- * @param $avatarPath 中间logo的图片路径
- * @param $newRelativePath 生成二维码图片保存路径
+ * @param $newRelativePath 生成二维码图片保存路径 相对路径
+ * @param $logo 中间logo的图片路径 绝对路径
  * @param string $eclevel
  * @param int $pixelPerPoint
  * @return array|string 返回二维码相对路径
  */
-function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pixelPerPoint = 8){
-    $QRcode = new \common\component\qrcode\qrcode();
-    $uploadPath =realpath( config('upload_dir.upload_path')) . '/';
+function createLogoQRcode($url,$newRelativePath,$logo=''){
+    $QRcode =  new \common\component\code\Qrcode();;
+    $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
-            return (errorMsg('创建Uploads目录失败'));
+            return errorMsg('创建Uploads目录失败');
         }
     }
-    $logo = $uploadPath.$avatarPath;
-    //没有带logo二维码保存路径
-    $tempPath =$uploadPath.config('upload_dir.temp_path');;
-    if(!mk_dir($tempPath)){
-        return (errorMsg('创建新目录失败'));
-    }
-    $noLogoFilename = $tempPath.'nologo'.time().'.png';
-    //带二维码保存路径
-    $newPath = $uploadPath . $newRelativePath;
+
+    //二维码图片保存路径
+    $newPath = $uploadPath . $newRelativePath; //绝对路经
     if(!mk_dir($newPath)){
-        return (errorMsg('创建新目录失败'));
+        return errorMsg('创建新目录失败');
     }
-
-    $filename = time().'.png';
-    $logoFilename = $newPath.$filename;
-
-    $QRcode->png($url, $noLogoFilename, $eclevel, $pixelPerPoint, 2);
-    if($logo !== FALSE)
+    //生产没有logo二维码图片
+    $filename = generateSN().'nologo.png';
+    $noLogoFile = $newPath.$filename;
+    $QRcode->png($url, $noLogoFile);
+    if(!empty($logo))
     {
-        $QR = imagecreatefromstring(file_get_contents($noLogoFilename));
+        $filename = generateSN().'withlogo.png';
+        $logoFile = $newPath.$filename;
+        $QR = imagecreatefromstring(file_get_contents($noLogoFile));
         $logo = imagecreatefromstring(file_get_contents($logo));
         if(imageistruecolor($logo)){
             imagetruecolortopalette($logo,false,65535);//解决颜色失真
@@ -662,11 +656,10 @@ function createLogoQRcode($url,$avatarPath,$newRelativePath,$eclevel = "H", $pix
         $logo_qr_height = $logo_height / $scale;
         $from_width = ($QR_width - $logo_qr_width) / 2;
         imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+        unlink($noLogoFile);
+        imagepng($QR,$logoFile);
     }
-    imagepng($QR,$logoFilename);
-    unlink($noLogoFilename);
     return $newRelativePath.$filename;
-
 }
 
 /**
@@ -913,6 +906,30 @@ function imgInfo($path)
         'obj'    => $fun($path),
     ];
 }
+//获取终端的ip
+function get_client_ip() {
+    if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
+        $ip = getenv('HTTP_CLIENT_IP');
+    } elseif(getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
+        $ip = getenv('HTTP_X_FORWARDED_FOR');
+    } elseif(getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
+        $ip = getenv('REMOTE_ADDR');
+    } elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return preg_match ( '/[\d\.]{7,15}/', $ip, $matches ) ? $matches [0] : '';
+}
+
+//取数组中重复数据
+function FetchRepeatMemberInArray($array) {
+    // 获取去掉重复数据的数组
+    $unique_arr = array_unique ( $array );
+    // 获取重复数据的数组
+    $repeat_arr = array_diff_assoc ( $array, $unique_arr );
+    return  $repeat_arr ? $repeat_arr : false;
+}
+
+
 
 
 

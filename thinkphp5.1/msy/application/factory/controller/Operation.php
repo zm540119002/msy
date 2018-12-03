@@ -1,10 +1,13 @@
 <?php
 namespace app\factory\controller;
 
-class Operation extends StoreBase
+class Operation extends \common\controller\FactoryStoreBase
 {
     //运营管理首页
     public function Index(){
+        if(request()->isAjax()){
+            return view('public/factory_store_list_tpl');
+        }
         return $this->fetch();
     }
     //店铺管理设置页
@@ -14,10 +17,11 @@ class Operation extends StoreBase
             if(empty($logoImg)){
                 return errorMsg('参数错误');
             }
-            $model = new \app\factory\model\Store();
+            $model = new \common\model\Store();
             $where = [
                 ['id','=', $this->store['id']]
             ];
+            $logoImg = moveImgFromTemp(config('upload_dir.factory_store'),basename($logoImg));
             $result = $model->where($where)->setField('logo_img',$logoImg);
             if(false == $result){
                 return errorMsg('优化失败');
@@ -27,5 +31,4 @@ class Operation extends StoreBase
         }
         return $this->fetch();
     }
-
 }

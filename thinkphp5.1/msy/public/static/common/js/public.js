@@ -137,6 +137,62 @@
 			});
         });
     };
+    //楼层导航
+    $.fn.scrollFloor=function(options){
+        var defaults={
+            floorNavMenu:'nav-floor',
+            floorContent:'floor-content',
+            floorContentChild:'floor',
+            activeClass:'active'
+        };
+        var settings=$.extend(defaults,options);
+        $(document).scroll(function(){
+                
+            var parentHeight=$('.'+settings.floorContent).height(),
+                parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
+                childHeight=$('.'+settings.floorContentChild).outerHeight(true),
+                docScrollTop=$(window).scrollTop();
+                result=docScrollTop-parentOffsetTop;//parentOffsetTop
+                n=Math.floor(result/childHeight);
+                console.log(childHeight);
+                if(result>=0&&n<=2){
+                    
+                    $('.'+settings.floorNavMenu).children().removeClass(settings.activeClass).eq(n).addClass(settings.activeClass);
+                }
+        });
+        $('.'+settings.floorNavMenu).children().on('click',function(){
+            var i=$(this).index();
+            var _this=$(this);
+            var floorId=$(this).data('floor');
+            //var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
+            //console.log($('.'+settings.floorContentChild).outerHeight(true)*i);
+            $.each($('.floor-label'),function(){
+                var floorScroll=$(this).attr('id');
+                var h=$(this).offset().top;
+                
+                if(floorId==floorScroll){
+                    _this.addClass('active').siblings().removeClass('active');
+                    var abc=h;
+                    $('body,html').animate({'scrollTop':abc+'px'},800);
+                }
+            });
+            //$('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
+        })
+    };
+
+    //获取url中的参数名就可以获取到参数的值
+    $.getUrlParam
+        = function(name)
+    {
+        var reg
+            = new RegExp("(^|&)"+
+            name +"=([^&]*)(&|$)");
+        var r
+            = window.location.search.substr(1).match(reg);
+        if (r!=null) return unescape(r[2]); return null;
+    }
+
+
 })(jQuery);
 
 //限制input、textarea字数
@@ -157,12 +213,7 @@ var maximumWord = function(obj,max){
 $.fn.tab = function(){
     $(this).addClass("current").siblings().removeClass("current");
 };
-$('.top_menu_list a').on('click',function(){
-    var index=$(this).index();
-        if(index>0){
-            dialog.error('功能正在开发中,暂未上线,敬请期待');
-        }
-});
+
 //选项卡切换
 function tab_down(tab_k, tab_con, tab_dz) {
     var $div_li = $(tab_k);
@@ -207,25 +258,6 @@ function checkShow(ele){
         }
     })
 }
-
-//全选
-$('body').on('click','.checkall,.check_all_2',function () {
-    var _thisChecked = $(this).prop("checked");
-    $.each($('.checkitem,.check_item_2'),function () {
-        $(this).prop('checked',_thisChecked);
-    });
-});
-//反选
-$('body').on('click','.checkitem,.check_item_2',function () {
-    var sign = true;
-    //一票否决
-    $.each($('.checkitem,.check_item_2'),function () {
-        if(!$(this).prop('checked')){
-            sign = false;
-        }
-    });
-    $('.checkall,.check_all_2').prop('checked',sign);
-});
 
 //滑动轮播
 function swipe(elemObj){
@@ -424,26 +456,151 @@ function isRolling(container){
     });
 }
 
-//忘记密码-弹窗
-function forgetPasswordDialog(content){
-    layer.open({
-        className:'forgetPasswordLayer',
-        content:content,
-        btn:['确定'],
-        yes:function(index){}
-    });
-}
+// 移除数组中的第二项
+//array.remove(1);
+// 移除数组中的倒数第二项
+//array.remove(-2);
+// 移除数组中的第二项和第三项（从第二项开始，删除2个元素）
+//array.remove(1,2);
+// 移除数组中的最后一项和倒数第二项（数组中的最后两项）
+//array.remove(-2,-1);
+Array.prototype.remove = function(from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+};
 
-//提交表单
-function submitForm(postData,postUrl){
-    $.post(postUrl,postData,function (data) {
-        if(data.status==0){
-            dialog.error(data.info);
-            return false;
-        }else if(data.status==1){
-            location.href = data.info;
+//获取列表
+function getList(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData?config.postData:{},
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(config.callBack){
+                config.callBack(config,data);
+            }else{
+                getListDefaultCallBack(config,data)
+            }
         }
     });
+}
+function getListDefaultCallBack(config,data) {
+    if(data.status==0){
+        dialog.error(data.info);
+    }else{
+        var container = config.container?config.container:$('ul.list');
+        container.empty().append(data);
+    }
+}
+
+//新增-表单提交
+function dialogFormAdd(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData,
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(config.callBack){
+                config.callBack(config,data);
+            }else{
+                dialogFormAddDefaultCallBack(config,data);
+            }
+        }
+    });
+}
+//新增-表单提交-默认回调
+function dialogFormAddDefaultCallBack(config,data) {
+    if(data.status == 0){
+        dialog.error(data.info);
+    }else{
+        var container = config.container?config.container:$('ul.list');
+        container.prepend(data);
+        container.find('.no-data').remove();
+        layer.close(config.index);
+    }
+}
+
+//修改-表单提交
+function dialogFormEdit(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData,
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(config.callBack){
+                config.callBack(config,data);
+            }else{
+                dialogFormEditDefaultCallBack(config,data);
+            }
+        }
+    });
+}
+//修改-表单提交-默认回调
+function dialogFormEditDefaultCallBack(config,data) {
+    if(data.status == 0){
+        dialog.error(data.info);
+    }else{
+        config.modifyObj.replaceWith(data);
+        layer.close(config.index);
+    }
+}
+
+//删除-表单提交
+function dialogFormDel(config) {
+    $.ajax({
+        url: config.url,
+        data: config.postData,
+        type: 'post',
+        beforeSend: function(xhr){
+            $('.loading').show();
+        },
+        error:function(xhr){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            $('.loading').hide();
+            if(config.callBack){
+                config.callBack(config,data);
+            }else{
+                dialogFormDelDefaultCallBack(config,data);
+            }
+        }
+    });
+}
+//删除-表单提交-默认回调
+function dialogFormDelDefaultCallBack(config,data) {
+    if(data.status == 0){
+        dialog.error(data.info);
+    }else{
+        config.delObj.remove();
+        layer.close(config.index);
+    }
 }
 
 //文档就绪
@@ -452,19 +609,39 @@ $(function(){
     $('body').on('click','.backTop',function(){
         $('body,html').animate({scrollTop:0+'px'},500);
     });
-
-    //忘记密码-触发弹窗
-    $('body').on('click','.forget_dialog',function(){
-        var sectionForgetPassword = $('#sectionForgetPassword').html();
-        forgetPasswordDialog(sectionForgetPassword);
+    //窗口滚动条滚动
+    $(window).on('scroll',function(){
+        var scrollTop=$(document).scrollTop();
+        if(scrollTop>=300){
+            $('.fixedtop').addClass('active');
+            $('.right_sidebar').show();
+        }else{
+            $('.right_sidebar').hide();
+        }
     });
-});
-
-$(window).on('scroll',function(){
-    var scrolltop=$(document).scrollTop();
-    if(scrolltop>=300){
-        $('.right_sidebar').show();
-    }else{
-        $('.right_sidebar').hide();
-    }
+    //未开发菜单点击提示
+    $('.top_menu_list .underdevelopment').on('click',function(){
+        var index=$(this).index();
+        if(index>0){
+            dialog.error('功能正在开发中,暂未上线,敬请期待');
+        }
+    });
+    //全选
+    $('body').on('click','.checkall,.check_all_2',function () {
+        var _thisChecked = $(this).prop("checked");
+        $.each($('.checkitem,.check_item_2'),function () {
+            $(this).prop('checked',_thisChecked);
+        });
+    });
+    //反选
+    $('body').on('click','.checkitem,.check_item_2',function () {
+        var sign = true;
+        //一票否决
+        $.each($('.checkitem,.check_item_2'),function () {
+            if(!$(this).prop('checked')){
+                sign = false;
+            }
+        });
+        $('.checkall,.check_all_2').prop('checked',sign);
+    });
 });

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+	<title>美尚网站</title>
+	<link rel="stylesheet" href="public_css/base.css">
+	<link rel="stylesheet" href="caihui_css/jquery.fullPage.css">
+	<style type="text/css">
+		header{
+			position:fixed;
+			left:0;
+			top:0;
+			z-index:99;
+			width:100%;
+			background:#000;
+			color:#fff;
+		}
+		.header_menu{
+			width:1200px;
+			height:48px;
+			line-height: 48px;
+			margin:0 auto;
+			overflow:hidden;
+		}
+		.header_menu a{
+			color:#fff;
+		}
+		.header_menu a.current {
+			border-bottom: 1px solid #fff;
+		}
+		.header_left{
+			width:300px;
+			float:left;
+		}
+		.header_right{
+			float:right;
+			width:500px;
+		}
+		.header_right li{
+			float:left;
+			width:100px;
+			text-align:center;
+		}
+		.section{
+            position:relative;
+            overflow:hidden;
+        }
+        .section1{
+            background:#fc6b6d url(caihui_img/pic1.png) no-repeat center;
+        }
+        .section2{
+            background: #fbbb4a url(caihui_img/pic2.png) no-repeat center;
+        }
+        .section3{
+            background: #5999cb url(caihui_img/pic3.png) no-repeat center;
+        }
+        .section4{
+            background: #5ac4c0 url(caihui_img/pic4.png) no-repeat center;
+        }
+        .arrow {
+            position: fixed;
+            left: 50%;
+            bottom: 30px;
+            z-index: 9999;
+            width: 83px;
+            height: 31px;
+            background-image: url(caihui_img/arrow.png);
+            cursor: pointer;
+            animation: 2s arrow infinite linear;
+            -webkit-animation: 2s arrow infinite linear;
+            -ms-animation: 2s arrow infinite linear;
+            -moz-animation: 2s arrow infinite linear;
+        }
+        .section_main {
+            position: relative;
+            width: 1200px;
+            height: 90%;
+            margin: 0 auto;
+        }
+        .section1-images {
+            position: relative;
+            height: 100%;
+        }
+        .d_b{
+            display:block;
+        }
+        .section1-3 { position: absolute; left: 0; bottom: 0; }
+        .section1-4 { position: absolute; bottom: 520px; left: -1px; width: 72px; height: 72px; background-image: url('../images/spread/section1_icon.png'); }
+        .section1-5 { position: absolute; bottom: 238px; left: 285px; width: 110px; height: 110px; background-image: url('../images/spread/section1_icon.png'); background-position: 0 -137px; }
+        .section1-6 { position: absolute; bottom: 150px; left: 370px; z-index: 9; width: 65px; height: 65px; background-image: url('../images/spread/section1_icon.png'); background-position: 0 -72px; }
+        .section1-7 { position: absolute; bottom: 175px; z-index: 8; left: 420px; width: 100px; height: 100px; background-image: url('../images/spread/section1_icon.png'); background-position: 0 -245px; }
+        .section1-8 { position: absolute; bottom: 100px; left: 550px; width: 120px; height: 165px; background-image: url('../images/spread/section1_icon.png'); background-position: 0 -346px; }
+        .section1-9 { position: absolute; bottom: 175px; left: 675px; width: 70px; height: 70px; background-image: url('../images/spread/section1_icon.png'); background-position: 0 -515px; }
+	</style>
+</head>
+<body>
+<header>
+	<div class="header_menu">
+		<div class="header_left">
+			<img src="" alt="">
+		</div>
+		<ul class="header_right">
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/index" >首页</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/goods">产品展示</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/about">关于我们</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/about1" class="current">关于美尚云</a></li>
+			<li><a href="{:Request::domain()}/index.php/mall/CaiHui/contact">联系方式</a></li>
+		</ul>
+	</div>
+</header>
+<div class="arrow"></div>
+<div id="fullpage" class="fullpage-wrapper">
+    <div class="section section1 fp-section">
+        <!--<div class="section_main">
+            <div class="section1-images">
+                <div class="section1-0">
+                    <img class="d_b" src="public/static/common/img/section1_phone.png" alt="">
+                </div>
+                <div class="section1-1"></div>
+                <div class="section1-2"></div>
+                <div class="section1-3"></div>
+                <div class="section1-4"></div>
+                <div class="section1-5"></div>
+            </div>
+        </div>-->
+    </div>
+    <div class="section section2 fp-section"></div>
+    <div class="section section3 fp-section"></div>
+    <div class="section section4 fp-section"></div>
+</div>
+<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="caihui_js/jquery.fullPage.min.js"></script>
+<script type="text/javascript"> 
+    $(function(){
+			// 动画配置
+			var _soft = 0;
+			var _action = true;
+			var animationObject = {
+				1: [
+					// 第一页
+					{
+						// Logo
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 大标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 小标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 手机
+						init: {
+							bottom: '-100px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						}
+					},
+					{
+						// 百分号
+						init: {
+							left: '-100px',
+							bottom: '650px',
+							opacity: 0
+						},
+						done: {
+							left: '-1px',
+							bottom: '520px',
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 熊仔
+						init: {
+							bottom: '150px',
+							opacity: 0
+						},
+						done: {
+							bottom: '238px',
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 购物车
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: '150px',
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 礼物
+						init: {
+							bottom: '75px',
+							opacity: 0
+						},
+						done: {
+							bottom: '175px',
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 花瓶
+						init: {
+							bottom: 0,
+							opacity: 0
+						},
+						done: {
+							bottom: '100px',
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 彩虹
+						init: {
+							bottom: '75px',
+							opacity: 0
+						},
+						done: {
+							bottom: '175px',
+							opacity: 1
+						},
+						time: 300
+					}
+				],
+				2: [
+					// 第二页
+					{
+						// 大标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 小标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 箱子
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						}
+					},
+					{
+						// 固定灯台
+						init:{},
+						done:{}
+					},
+					{
+						// 黑猫
+						init: {
+							bottom: '150px',
+							left: '100px',
+							opacity: 0
+						},
+						done: {
+							bottom: '360px',
+							left: '-20px',
+							opacity: 1
+						}
+					},
+					{
+						// 茶壶
+						init: {
+							bottom: '100px',
+							opacity: 0
+						},
+						done: {
+							bottom: '400px',
+							opacity: 1
+						}
+					},
+					{
+						// 招财猫
+						init: {
+							bottom: '100px',
+							left: '200px',
+							opacity: 0
+						},
+						done: {
+							bottom: '360px',
+							left: '320px',
+							opacity: 1
+						}
+					}
+				],
+				3: [
+					//第三页
+					{
+						// 大标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 小标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 支付宝
+						init: {},
+						done: {}
+					},
+					{
+						// 右手
+						init: {
+							bottom: '-200px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 左手
+						init: {
+							bottom: '-200px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						}
+					},
+					{
+						// 中手
+						init: {
+							bottom: '-200px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						}
+					},
+					{
+						// 上手
+						init: {
+							left: '130px',
+							bottom: '400px',
+							opacity: 0
+						},
+						done:{
+							left: '-20px',
+							bottom: '368px',
+							opacity: 1
+						}
+					}
+				],
+				4: [
+					//第四页
+					{
+						// 大标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 小标题
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						},
+						time: 300
+					},
+					{
+						// 手机
+						init: {
+							bottom: '50px',
+							opacity: 0
+						},
+						done: {
+							bottom: 0,
+							opacity: 1
+						}
+					},
+					{
+						// 软装
+						init: {
+							left: '300px',
+							opacity: 0
+						},
+						done: {
+							left: '405px',
+							opacity: 1
+						}
+					},
+					{
+						// 分销
+						init: {
+							bottom: '100px',
+							left: '250px',
+							opacity: 0
+						},
+						done: {
+							bottom: '50px',
+							left: '390px',
+							opacity: 1
+						}
+					},
+					{
+						// OEM
+						init: {
+							bottom: '140px',
+							left: '130px',
+							opacity: 0
+						},
+						done: {
+							bottom: '40px',
+							left: '30px',
+							opacity: 1
+						}
+					},
+					{
+						// 礼品
+						init: {
+							left: '200px',
+							opacity: 0
+						},
+						done: {
+							left: 0,
+							opacity: 1
+						}
+					},
+					{
+						// 对话框
+						init: {
+							bottom: '400px',
+							left: '250px',
+							opacity: 0
+						},
+						done: {
+							bottom: '510px',
+							left: '350px',
+							opacity: 1
+						}
+					}
+				]
+			};
+
+			function PageInit(){
+				// FullPage Init
+				$('#fullpage').fullpage({
+					verticalCentered: false,
+					scrollingSpeed: 500,
+					navigation: true,
+					continuousVertical: true,
+					afterRender: function(){
+						// 页面初始化完成后回调函数
+						animationInit(1);
+						animationAction(1);
+					},
+					onLeave: function(index,nextIndex , direction){
+						// 滚动前
+						animationStop(index);
+						animationInit(nextIndex);
+					},
+					afterLoad: function(anchorLink,index){
+						// 滚动完成后
+						animationAction(index);
+					}
+				});
+			}
+			function animationInit(_index){
+				var _arr = animationObject[_index];
+                console.log(_arr);
+				if(_arr){
+                   
+					for(var i = 0,len = _arr.length; i < len; i++){
+						var _o = _arr[i];
+						var _css = _o.init;
+						if(!$.isEmptyObject(_css)){
+                            console.log(1);
+							var _dom = $('.section' + _index + '-' + i);
+							if(_dom.length > 0){
+                                 console.log(2);
+								_dom.css(_css);
+							}
+						}
+					}
+				}
+			}
+
+			function animationAction(_index){
+				var _arr = animationObject[_index];
+				if(_soft === 0){
+					_action = true;
+				}
+				if(_action){
+					if(_arr){
+						var _len = _arr.length;
+
+						// 回调执行
+						if(_len > 0){
+							var _o = _arr[_soft];
+							
+							if(_o){
+								var _css = _o.done;
+								var _time = _o.time || 500;
+								var _dom = $('.section' + _index + '-' + _soft);
+								if(_dom.length > 0){
+									_dom.animate(_css,_time,function(){
+										_soft++;
+										animationAction(_index);
+									});
+								}
+							} else {
+								_soft = 0;
+							}
+						}
+
+						// 异步执行
+						/*for(var i = 0,len = _arr.length; i < len; i++){
+							var _o = _arr[i];
+							var _css = _o.done;
+							if(!$.isEmptyObject(_css)){
+								var _time = _o.time || 500;
+								var _dom = $('.section' + _index + '-' + i);
+								if(_dom.length > 0){
+									_dom.animate(_css,_time);
+								}
+							}
+						}*/
+					}
+				} else {
+					_action = true;
+					_soft = 0;
+				}
+			}
+
+			function animationStop(){
+				_action = false;
+			}
+
+			function init(){
+				PageInit();
+			}
+
+			$('.arrow').click(function(){
+				animationStop();
+				$.fn.fullpage.moveSectionDown();
+			});
+
+			$('.wlgc-wx').hover(function(){
+				$(this).find('.wx-qrcode').toggle();
+			});
+
+			// Init
+			init();
+
+			$(window).load(function(){
+				var $win_h = $(window).height();
+
+				var code_h = ($win_h / 2) - ($win_h*0.1);
+				
+				$('.qrcode').css({
+					top: code_h + 'px'
+				});
+			});
+		});
+
+</script>
+</body>
+</html>

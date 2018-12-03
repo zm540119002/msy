@@ -3,19 +3,21 @@ $(function(){
     tab_down('.loginNav li','.loginTab ','click');
 
     //登录 or 注册 or 重置密码
-    $('body').on('click','.loginBtn,.registerBtn,.forgetPasswordLayer .layui-m-layerbtn span',function(){
+    $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
         var postData = {};
         var content='';
-        var url = controller + method;
+        var url = domain+'index/UserCenter/'+method;
         if(method=='login'){//登录
-            postData = $('#formLogin').serializeObject();
+            postData = $('.loginLayer #formLogin').serializeObject();
         }else if(method=='register'){//注册
             postData = $('#formRegister').serializeObject();
-        }else{//重置密码
-            url = controller + 'forgetPassword';
-            postData = $('.forgetPasswordLayer #formReset').serializeObject();
+        }else if(method=='forgetPassword'){//重置密码
+            postData = $('.forgetPasswordLayer #formForgetPassword').serializeObject();
+        }else{
+            dialog.error('未知操作');
+            return false;
         }
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
@@ -30,22 +32,29 @@ $(function(){
         }else if(content){
             errorTipc(content);
             return false;
-        }else{   
-            submitForm(postData,url);
+        }else{
+            $.post(url,postData,function (data) {
+                if(data.status==0){
+                    dialog.error(data.info);
+                    return false;
+                }else if(data.status==1){
+                    location.href = data.info;
+                }
+            });
         }
     });
 
     //显示隐藏密码
-    var onOff = true;
+    //var onOff = true;
     $('body').on('click','.view-password',function(){
         var _this=$(this);
-        _this.toggleClass('active');
-        if(onOff){
+        //_this.toggleClass('active');
+        if(_this.prev().attr('type')=='password'){
             $('.login_item .password').attr('type','text');
-            onOff=false;
+            $('.view-password').addClass('active');
         }else{
             $('.login_item .password').attr('type','password');
-            onOff=true;
+            $('.view-password').removeClass('active');
         }
     });
 

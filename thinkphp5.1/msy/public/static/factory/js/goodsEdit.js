@@ -53,7 +53,10 @@ $(function(){
             }
         })
     });
-
+    //商品分类
+    $('body').on('click','.form_goods_type a',function () {
+        $(this).addClass('current').siblings().removeClass('current');
+    })
     //设置品类
     var categoryContent=$('#categoryContent').html();
     $('body').on('click','.set-category',function(){
@@ -176,7 +179,9 @@ $(function(){
         var category=$('.select-category').data('category-id');
         var categoryArray = category.split(',');
         var postData={};
+        var type = $('.goods-type.current').data('type');
         var postData=$('.addProductContent').serializeObject();
+        postData.type = type;
         postData.main_img = mainImg;
         postData.details_img=goodsDetail;
         postData.category_id_1=categoryArray[0];
@@ -186,6 +191,8 @@ $(function(){
             content='请填写商品名称';
         }else if(!postData.trait){
             content='请填写商品特点';
+        }else if(!postData.type){
+            content='请选择商品类型';
         }else if(!postData.sale_price){
             content='请填写优惠价';
         }else if(!isMoney(postData.sale_price)){
@@ -209,7 +216,10 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        var  _this = $(this);
+        _this.addClass("nodisabled");//防止重复提交
         $.post(controller+'edit',postData,function(msg){
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }
@@ -236,21 +246,26 @@ function uploadsImg(obj,tilt,className) {
         content:uploadSingleImgHtml,
         btn:['确定','取消'],
         success:function(){
-            var imgSrc=obj.siblings('.hidden_img').val();
+            var fileSrc=obj.siblings('.hidden_img').val();
             var echoedImg = '';
-            if(imgSrc.indexOf("uploads") == -1 && imgSrc != ''){
-                echoedImg= uploads+imgSrc;
+            if(fileSrc.indexOf("uploads") == -1 && fileSrc != ''){
+                echoedImg= uploads+fileSrc;
             }
             //显示图片
             $('.'+ className).find('img').attr('src',echoedImg);
             //赋值回
-            $('.'+ className).find('.img').val(imgSrc);
+            $('.'+ className).find('.img').val(fileSrc);
         },
         yes:function(index){
-            var layerImgSrc= $('.'+ className).find('.img').val();
-            obj.siblings('.hidden_img').val(layerImgSrc);
-            if(layerImgSrc.indexOf("data:") !=-1){
-                errorTipc('文件还没上传完毕')
+            var layerfileSrc= $('.'+ className).find('.img').val();
+            obj.siblings('.hidden_img').val(layerfileSrc);
+            var fileSrc = $('.'+ className).find('img').attr('src');
+            if(layerfileSrc=='' && fileSrc != ''){
+                errorTipc('文件还没上传完毕');
+                return false;
+            }
+            if(!uploadsSingleImgFlag){
+                errorTipc('文件还没上传完毕');
                 return false;
             }
             layer.close(index);
@@ -268,21 +283,21 @@ function uploadsVideo(obj,tilt,className) {
         content:uploadSingleVideoHtml,
         btn:['确定','取消'],
         success:function(){
-            var imgSrc=obj.siblings('.hidden_video').val();
+            var fileSrc=obj.siblings('.hidden_video').val();
             var echoedImg = '';
-            if(imgSrc.indexOf("uploads") == -1 && imgSrc != ''){
-                echoedImg= uploads+imgSrc;
+            if(fileSrc.indexOf("uploads") == -1 && fileSrc != ''){
+                echoedImg= uploads+fileSrc;
             }
             //显示图片
             $('.'+ className).find('video').attr('src',echoedImg);
             //赋值回
-            $('.'+ className).find('.img').val(imgSrc);
+            $('.'+ className).find('.img').val(fileSrc);
         },
         yes:function(index){
-            var layerImgSrc= $('.'+ className).find('.img').val();
-            console.log(layerImgSrc);
-            obj.siblings('.hidden_video').val(layerImgSrc);
-            if(layerImgSrc.indexOf("data:") !=-1){
+            var layerfileSrc= $('.'+ className).find('.img').val();
+            obj.siblings('.hidden_video').val(layerfileSrc);
+            var fileSrc = $('.'+ className).find('video').attr('src');
+            if(layerfileSrc=='' && fileSrc != ''){
                 errorTipc('文件还没上传完毕')
                 return false;
             }

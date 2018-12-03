@@ -2,7 +2,7 @@
 namespace app\factory\controller;
 use app\factory\model\Series as M;
 use common\controller\Base;
-class Series extends FactoryBase
+class Series extends \common\controller\FactoryBase
 {
     
     //系列编辑
@@ -16,7 +16,12 @@ class Series extends FactoryBase
                 return $model -> add($this->factory['id']);
             }
         }
-        $seriesList = $model -> getList([],[],['sort'=>'desc']);
+        $config = [
+            'order' => [
+                'sort'=>'desc'
+            ]
+        ];
+        $seriesList = $model -> getList($config);
         $this->assign('seriesList',$seriesList);
         return $this->fetch();
     }

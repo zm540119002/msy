@@ -8,4 +8,11 @@ return [
     'factory_brand' => 'factory_brand/',//厂商品牌图片
     'factory_record' => 'factory_record/',//厂商品牌图
     'factory_goods_backup' => 'factory_goods_backup/',//厂商商品备份
+    'factory_store' => 'factory_store/',//店铺图片
+    'factory_promotion' => 'factory_promotion/',//场景图片
+    'factory_tweet' => 'factory_tweet/',//场景图片
+    'pay_QRcode' => 'pay_QRcode/',//场景图片
+    'shop_logo_img' => 'shop/logo_img/',//场景图片
+
+    'weiya_goods' => 'weiya_goods/',//厂商商品图片
 ];

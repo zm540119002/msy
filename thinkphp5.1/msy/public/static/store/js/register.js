@@ -38,8 +38,10 @@ $(function(){
             content='请填写代办人姓名';
         }else if(!businessLicense){
             content='请上传企业营业执照照片';
-        }else if(!agentAuthorization){
-            content='请上传代办人企业授权信照片';
+        }
+        if(!uploadsSingleImgFlag ){
+            dialog.error('图片还没有上传完毕');
+            return false;
         }
         postData={
             id : id,
@@ -52,7 +54,10 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        var _this = $(this);
+        _this.addClass("nodisabled");
         $.post(controller + 'register',postData,function(msg){
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }
@@ -63,7 +68,7 @@ $(function(){
                 $('.apply-module:eq(2)').show();
                 $('.weui-flex-item:eq(0)').addClass('disabled');
                 $('.weui-flex-item:eq(1)').addClass('disabled');
-                dialog.success(msg.info,module+'Index/index');
+                dialog.success(msg.info,module+'Store/index');
             }
         });
     });

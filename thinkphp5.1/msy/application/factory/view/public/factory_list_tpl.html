@@ -1,5 +1,5 @@
 <section class="message-center-info f20" style="display:none;" id="factoryList">
-    <ul class="vendorInfoList">
+    <ul class="vendorInfoList can-scroll-wrap">
         {volist name='factoryList' id='vo'}
         <li data-id="{$vo.id}" class="{eq name='vo.is_default' value='1'}current{/eq}">
             <span>{$vo.name}</span>
@@ -15,14 +15,20 @@
             title:['选择供应商','border-bottom:1px solid #d9d9d9;'],
             className:'factoryListLayer',
             type: 1,
+            fixed:true,
+            // top:100,
+            shadeClose:false,
             content: factoryList,
             anim: 'up',
             style: '',
-            success:function(){
+            success:function(){   
                 var winHeight=$(window).height();
+                //$('html,body').addClass('scrollStyle');
                 $('.factoryListLayer .vendorInfoList').css('height',winHeight-120+'px');
+                $('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
             },
-            btn:['确定'],
+            btn:['确定','取消'],
             yes:function(index){
                 var postData = {};
                 postData.factoryId = $('.factoryListLayer li.current').data('id');
@@ -39,15 +45,23 @@
                         location.reload();
                     }
                 });
+                //$('html,body').removeClass('scrollStyle');
+            },
+            cancle:function(){
+                //$('html,body').removeClass('scrollStyle');
             }
         });
     }
     $(function () {
         var factory = '{:json_encode($factory)}';
-        //如果是多供应商
+        //如果是多供应商 没有默认
         if(factory === 'null'){
             setDefaultFactory();
         }
+        //选择-供应商|美容机构
+        $('body').on('click','.switch-factory',function(){
+            setDefaultFactory();
+        });
         //选择效果
         $('body').on('click','.factoryListLayer li',function(){
             $('.factoryListLayer li').removeClass('current');

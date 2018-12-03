@@ -13,6 +13,12 @@ class User extends \think\Validate
         'captcha'  => [
             'regex' => '/^\d{6}$/',
         ],
+        'name'  => [
+            'require', 'max' => 25,
+        ],
+        'nickname'  => [
+            'require', 'max' => 25,
+        ],
         'password'  => [
             'regex' => '/^[A-Za-z0-9]{6,16}$/',
         ],
@@ -23,6 +29,10 @@ class User extends \think\Validate
         'mobile_phone.require' => '手机号码必须！',
         'mobile_phone.mobile' => '请填写正确的手机号码！',
         'mobile_phone.unique' => '此号码已被注册！',
+        'name.require' => '姓名必须！',
+        'name.max' => '姓名超出长度！',
+        'nickname.require' => '昵称必须！',
+        'nickname.max' => '昵称超出长度！',
         'captcha.regex' => '验证码格式错误！',
         'password.regex' => '密码格式错误！',
     ];
@@ -45,6 +55,11 @@ class User extends \think\Validate
             'mobile_phone',
             'captcha',
             'password',
+        ],
+        //添加员工
+        'employee'  =>  [
+            'mobile_phone',
+            'name',
         ],
     ];
 

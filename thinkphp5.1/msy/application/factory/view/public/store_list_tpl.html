@@ -1,0 +1,121 @@
+<section id="vendorInfoList" style="display:none;">
+    <ul class="vendorInfoList">
+        {notempty name='factoryStoreList'}
+        {volist name="factoryStoreList" id="factory"}
+        <div><span>{$factory.factory_name}</span></div>
+        <ul data-id="{$factory.factory_id}">
+            {volist name="factory.storeList" id="storeInfo"}
+            <li data-id="{$storeInfo.store_id}">
+                {notempty name="storeInfo.logo_img"}
+                <img  class="store_logo left" src="public_uploads/{$storeInfo.logo_img|default=''}" />
+                {else /}
+                <img  class="store_logo left" src="public_img/default/no_pic_40.jpg" />
+                {/notempty}
+                <div>
+                    <p>
+                        <span>{$storeInfo.store_name}</span>{$storeInfo.store_type|getStoreType}
+                    </p>
+                    <p>
+                        <span>{$storeInfo.run_type|getRunType}</span>
+                        <span>.</span>
+                        {$storeInfo.operational_model|getOperationalModel}
+                    </p>
+                </div>
+            </li>
+            {/volist}
+        </ul>
+        {/volist}
+        {else /}
+        {/notempty}
+    </ul>
+</section>
+<script type="text/javascript">
+    var vendorInfoList=$('#vendorInfoList').html();
+    $(function(){
+        var no_empower = '{:json_encode($no_empower)}';
+        if(no_empower){
+            dialog.success('未授权',module+'index/index');
+            return false;
+        }
+
+        //如果没有默认店铺，则设置默认店铺
+        var store='{:json_encode($store)}';
+        if(store=== 'null'){
+            setDefaultStore();
+            return false;
+        }
+
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            setDefaultStore();
+        });
+    });
+    //弹层 店铺
+    function setDefaultStore(){
+        layer.open({
+            type: 1,
+            title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
+            className:'vendorInfoLayer',
+            content:vendorInfoList,
+            anim: 'up',
+            btn:['确定','取消'],
+            success:function(){
+                var winH=$(window).height();
+                var storeId='{:json_encode($store.store_id)}';
+                storeId = JSON.parse( storeId );
+                $('html,body').addClass('scrollStyle');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+                $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
+                $('.vendorInfoLayer li').on('click',function(){
+                    var _this=$(this);
+                    _this.addClass('current').siblings().removeClass('current');
+                });
+                $.each($('.vendorInfoLayer li'),function(){
+                    var currentId=$(this).data('id');
+                    if(storeId==currentId){
+                        $(this).addClass('current');
+                    }
+                })
+            },
+            yes:function(index){
+                var isCurrent=$('.vendorInfoLayer li.current');
+                layerName=isCurrent.text();
+                layerId  =isCurrent.data('id');
+                $('.factoryId').val(layerId);
+                $('.vendor-name').text(layerName);
+                if(!layerId){
+                    dialog.error('请选择一个店铺');
+                    return false
+                }
+                var postData = {};
+                postData.store_id = layerId;
+                $.ajax({
+                    url: module + 'store/selectStore',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
+                        }
+                        if(info.status == 1){
+                            dialog.success(info.msg, location.reload());
+                        }
+                    },
+                    complete:function(){
+
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    }
+                });
+                $('html,body').removeClass('scrollStyle');
+                layer.close(index);
+            }
+        });
+    }
+
+</script>

@@ -33,144 +33,64 @@
 <script type="text/javascript">
   $(function () {
 	  // 选择状态
-	  $('body').on('change','.select',function(){
-		  getPage(1,$(this).val());
-		  $('.auth_status').val($(this).val());
+	  $('body').on('change', '.select', function () {
+		  getPage();
 	  })
 	  //获取列表
 	  getPage();
 	  //搜索
-	  $('body').on('click','.search',function(){
+	  $('body').on('click', '.search', function () {
 		  getPage();
 	  })
-	  //审核商标申请资料
-	  $('body').on('click','.entry-audit',function(){
-		  _this = $(this);
-          var id = _this.parents('tr').data('id');
-		  $.ajax({
-			  url: module + 'Store/getInfo',
-			  data: {id:id},
-			  type: 'get',
-			  beforeSend: function(){
-				  //$('.loading').show();
+	  //审核操作
+	  $('body').on('click', '.audit', function () {
+		  var _this = $(this);
+		  var postData = {};
+		  postData.id=_this.parents('tr').data('id');
+		  postData.auth_status = _this.data('auth_status');
+		  layer.open({
+			  content :'是否操作',
+			  btn:['确定','取消'],
+			  end : function(){
+
 			  },
-			  success: function(data){
-				  if(data.status == 0){
-					  dialog.error(data.msg);
-					  return false;
-				  }
-				  layer.open({
-					  type:1,
-					  area: ['1500px','auto'],
-					  fix: true, //不固定
-					  maxmin: true,
-					  shade:0.4,
-					  tipsMore:true,
-					  title: '查看申请人资料',
-					  content: data,
-					  btn:['不通过','通过'],
-					  btn1:function(index){
-						  //不通过
-						  var postData = {};
-						  postData.auth_status = 2;
-						  postData.id  = id;
-						  $.post(module + 'Store/audit', postData , function(data){
-							  if(!data.status){
-								  dialog.error(data.info);
-								  return false;
-							  }
-							  _this.parents('tr').find('.auth-status').text('不通过');
-							  _this.removeClass('entry-audit').addClass('view').text('查看');
-							  dialog.success(data.info);
-						  });
+			  yes:function(index){
+				  $.ajax({
+					  url: controller+'audit',
+					  type: 'post',
+					  dataType: 'json',
+					  data: postData ,
+					  beforeSend:function(){
+						  //some js code
 					  },
-					  btn2:function(index){
-						  //通过
-						  var postData ={};
-						  postData.auth_status = 1;
-						  postData.id = id;
-						  $.post(module + 'Store/audit', postData , function(data){
-							  if(!data.status){
-								  dialog.error(data.info);
-								  return false;
-							  }
-							  _this.parents('tr').find('.auth-status').text('不通过');
-							  _this.removeClass('entry-audit').addClass('view').text('查看');
-							  dialog.success(data.info);
-						  });
+					  success: function(data){
+						  if(!data.status){
+							  dialog.error(data.info);
+							  return false;
+						  }
+						  dialog.success(data.info);
+					  },
+					  error: function(data){
+
 					  }
 				  });
-			  },
-			  complete:function(){
-
-			  },
-			  error:function (xhr) {
-				  dialog.error('AJAX错误'+xhr);
-			  },
-		  });
-	  });
-	  //查看商标申请资料
-	  $('body').on('click','.view',function(){
-		  var id = $(this).parents('tr').data('id');
-		  $.ajax({
-			  url: module + 'Store/getInfo',
-			  data: {id:id},
-			  type: 'get',
-			  beforeSend: function(){
-				  //$('.loading').show();
-			  },
-			  success: function(data){
-				  if(data.status == 0){
-					  dialog.error(data.msg);
-					  return false;
-				  }
-				  layer.open({
-					  type:1,
-					  area: ['1500px','auto'],
-					  fix: true, //不固定
-					  maxmin: true,
-					  shade:0.4,
-					  tipsMore:true,
-					  title: '查看申请人资料',
-					  content: data,
-					  btn:['关闭'],
-					  btn1:function(index){
-
-					  },
-				  });
-
-			  },
-			  complete:function(){
-
-			  },
-			  error:function (xhr) {
-				  dialog.error('AJAX错误'+xhr);
-			  },
-		  });
-	  });
-	  var maxImg = $('#maxImg').html();
-	  $('body').on('click','.audit-img',function(){
-		  var imgSrc=$(this).attr('src');
-		  layer.open({
-			  // type:1,
-			  title: '图片信息',
-			  fix:false,
-			  moveOut:true,
-			  content:maxImg,
-			  success:function(){
-				  $('.max-img').attr('src',imgSrc);
+				  layer.close(index)
 			  }
 		  })
 	  })
   })
   //获取商品列表
-  function getPage(currentPage,selectData) {
+  function getPage(currentPage) {
 	  $("#list").html($('#loading').html());
 	  var url = module+'Store/getList';
 	  var postData = $('#form1').serializeObject();
+	  var options=$(".select option:selected"); //获取选中的项
+	  var auth_status =  options.val();
+	  if(auth_status){
+		  postData.auth_status = options.val(); //拿到选中项的值
+	  }
 	  postData.page = currentPage ? currentPage : 1;
-	  postData.auth_status = selectData;
-	  postData.pageSize = 20;
+	  postData.pageSize = 2;
 	  $.get(url, postData , function(data){
 		  $('#list').html(data);
 	  });

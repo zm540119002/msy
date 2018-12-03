@@ -12,7 +12,7 @@ class Account extends \think\Model {
 	/**检查账号
 	 */
 	public function checkExist($userId,$factoryId){
-		$modelUserFactory = new \app\factory\model\UserFactory();
+		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['user_id','=',$userId],
 			['factory_id','=',$factoryId],
@@ -141,7 +141,7 @@ class Account extends \think\Model {
 		];
 		$info = $this->alias('u')->field($field)->where($where)->find();
 		//用户工厂关系表
-		$modelUserFactory = new \app\factory\model\UserFactory();
+		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['status', '<>', 2],
 			['user_id', '=', $id],
@@ -163,7 +163,7 @@ class Account extends \think\Model {
 
 	//获取列表
 	public function getList($factoryId){
-		$modelUserFactory = new \app\factory\model\UserFactory();
+		$modelUserFactory = new \common\model\UserFactory();
 		$where = [
 			['u.status','<>',2],
 			['uf.status','<>',2],
