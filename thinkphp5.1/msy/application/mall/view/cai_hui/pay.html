@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="UTF-8">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+	<title>结算</title>
+	<link rel="stylesheet" href="public_css/base.css">
+	<link rel="stylesheet" href="public_admin_common_js/need/layer.css">
+	<style type="text/css">
+		body{
+			font-size:14px;
+		}
+		.detail_content{
+			width:1000px;
+			margin:0 auto;
+		}
+		.buy,.pay{
+			background:#ff0000;
+			color:#fff;
+		}
+		.dt_item{
+			overflow:hidden;
+			margin:0 0 20px 0;
+		}
+		.quantity_wrapper a, .selected-number a {
+			border: 1px solid #d9d9d9;
+			width: 20px;
+			display: inline-block;
+			text-align: center;
+			font-size:14px;
+			float: left;
+			height: 20px;
+			color: #333;
+		}
+		.quantity_wrapper input, .selected-number input {
+			width: 20px;
+			border: 1px solid #d9d9d9;
+			text-align: center;
+			float: left;
+			height: 20px;
+			border-left: 0;
+			border-right: 0;
+			border-radius: 0;
+			margin-top: 0;
+		}
+		.dt_item_flex{
+			display:flex;
+			display:-webkit-flex;
+		}
+		.dt_item_flex .buy{
+			width:120px;
+			text-align: center;
+			margin:0 0 0 20px;
+		}
+		.d_left{
+			float:left;
+			width:350px;
+			border:1px solid #d9d9d9;
+		}
+		.d_left img{
+			width:100%;
+		}
+		.d_right{
+			margin:280px 0 0 380px;
+			width:600px;
+		}
+		.dt_top{
+			overflow:hidden;
+		}
+		.pay{
+			width:120px;
+			height:32px;
+			line-height: 32px;
+			text-align:center;
+			display:inline-block;
+		}
+		.pay_type a{
+			display:inline-block;
+			width:120px;
+			text-align: center;
+			height:32px;
+			line-height: 32px;
+			border:1px solid #d9d9d9;
+		}
+		.pay_type a.current{
+			background:green;
+			color:#fff;
+		}
+		.dt_item price{
+			color:#ff0000;
+			
+		}
+		.dt_item input.name,.dt_item input.mobile,.detail_address{
+			padding:10px 0;
+			border:1px solid #d9d9d9;
+		}
+		.weui_cell{
+			margin:0 0 15px 0;
+		}
+		.weui_cell select{
+			height:35px;
+		}
+		.h1{
+			font-size:18px;
+			font-weight:bold;
+			margin:0 0 10px 0;
+		}
+	</style>
+</head>
+<body>
+<div class="detail_content">
+	<form action="{:url('CaiHui/orderPayment')}" method="post">
+		<div class="dt_item">
+			<p class="h1">收货人信息</p>
+			<div class="dt_item">
+				<p>收货人姓名</p>
+				<input class="name" name="name" type="text" value="" placeholder="填写姓名"/>
+			</div>
+			<div class="dt_item">
+				<p>手机号码</p>
+				<input class="mobile" name="mobile" type="tel" value="" placeholder="填写手机号码"/>
+			</div>
+			<div>地址：</div>
+			<div class="weui_cells msy_cells weui_address">
+				<div class="weui_cell">
+					<select name="province" class="pca">
+						<option value="">省</option>
+					</select>
+					<select name="city" class="pca">
+						<option value="">市</option>
+					</select>
+					<select name="area" class="pca">
+						<option value="">县区</option>
+					</select>
+				</div>
+			</div>
+			<div>
+				<input class="detail_address" name="detail_address" type="text" value="" placeholder="填写详细地址"/>
+			</div>
+		</div>
+		<div class="dt_item">
+			<p>支付方式</p>
+			<div class="pay_type">
+				<a href="javascript:;" data-pay="1">微信支付</a>
+				<a href="javascript:;" data-pay="2">支付宝支付</a>
+				<a href="javascript:;" data-pay="3">银联支付</a>
+			</div>
+			<input type="hidden" name="pay_code" value="">
+			<input type="hidden" name="goods_id" value="{$goodsInfo.goods_id}">
+			<input type="hidden" name="goods_price" value="{$goodsInfo.price}">
+			<input type="hidden" name="goods_num" value="{$goodsInfo.num}">
+			<input type="hidden" name="amount" value="{$goodsInfo.amount}">
+		</div>
+		<div>
+			<span>产品单价:<price>{$goodsInfo.price}</price></span>
+			
+		</div>
+		<div>
+			<span>购买数量: {$goodsInfo.num}</span>
+		</div>
+		<div class="dt_item">
+			<span>应付总额:</span>
+			<span>￥<price>{$goodsInfo.amount}</price></span>
+		</div>
+		<input type="submit" value="立即结算" class="pay"/>
+	</form>
+
+</div>
+<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="public_js/province_city_area.js"></script>
+<script type="text/javascript" src="public_js/common.js"></script>
+<script type="text/javascript" src="public_admin_common_js/layer.js"></script>
+<script type="text/javascript" src="caihui_js/index.js"></script>
+
+ <script type="text/javascript">
+        //初始化
+//        var province = '{$company.province}';
+//        $('[name=province]').val(province);
+//        $('[name=province]').change();
+//        var city = '{$company.city}';
+//        $('[name=city]').val(city);
+//        $('[name=city]').change();
+//        var area = '{$company.area}';
+//        $('[name=area]').val(area);
+		$(function(){
+			$('.pay_type a').on('click',function(){
+				$(this).addClass('current').siblings().removeClass('current');
+				$('[name = pay_code]').val($(this).data('pay'));
+			})
+			$('.pay').on('click',function(){
+				var consignee=$('[name=name]').val();
+				var consignee_mobile=$('[name=mobile]').val();
+				var address=$('[name=detail_address]').val();
+				var payType=$('.pay_type a.current').data('pay');
+				var content='';
+				if(!consignee){
+					content='请输入收货人姓名';
+				}else if(!isMobilePhone(consignee_mobile)){
+					content='请输入正确的手机号码';
+				}else if(!address){
+					content='请输入你收货人地址';
+				}else if(!payType){
+					content='请选择支付方式';
+				}
+
+				if(content){
+					layer.open({
+						content:content,
+						time: 2
+					});
+					return false;
+				}
+
+				var postData = $('form').serializeObject();
+				postData.payType=$('.pay_type a.current').data('pay');
+				console.log(postData);
+			});
+			
+		})
+		
+    </script>
+</body>
+</html>

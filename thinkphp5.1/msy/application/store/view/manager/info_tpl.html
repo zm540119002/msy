@@ -1,0 +1,27 @@
+{notempty name='info'}
+<li class="columns_flex l-r-sides " data-id="{$info.id}"  data-user_factory_id="{$info.user_factory_id}">
+	<div class="list_left">
+		<div class="list_left_item">
+			<span class="list-label">姓名</span>
+			<input type="text" class="list-admin-name f20" name="name" value="{$info.name|default=''}" unselectable="on" onfocus="this.blur()">
+		</div>
+		<div class="list_left_item">
+			<span class="list-label">手机号码</span>
+			<input type="text" class="list-admin-mobile f20" name="mobile_phone" value="{$info.mobile_phone|default=''}" unselectable="on" onfocus="this.blur()">
+		</div>
+		<div class="list_left_item"><span class="list-label">账号类型</span><span class="">管理员</span></div>
+	</div>
+	<div class="operate-btn">
+		{if $factory.user_factory_type == 1}
+		<a href="javascript:void(0);" class="modify-account">
+			<span></span>
+			修改
+		</a>
+		<a href="javascript:void(0);" class="delete-account">
+			<span></span>
+			删除
+		</a>
+		{/if}
+	</div>
+</li>
+{/notempty}

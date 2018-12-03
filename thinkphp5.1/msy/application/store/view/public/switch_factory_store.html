@@ -1,0 +1,47 @@
+<section class="top_nav_fixed top_nav_store">
+    <div class="top_bar columns_flex l-r-sides ">
+        <div class="top_left">
+            {notempty name="store.logo_img"}
+            <img  class="store-logo-img left" src="public_uploads/{$store.logo_img|default=''}" />
+            {else /}
+            <img  class="store-logo-img left" src="public_img/default/no_pic_40.jpg" />
+            {/notempty}
+            <div>
+                <p>
+                    <span class="store-name">{$store.store_name}</span>
+                    <span class="store-type">{$store.store_type|getStoreType}</span>
+                </p>
+                <span class="run-type">{$store.run_type|getRunType}</span>
+            </div>
+        </div>
+        <div class="">
+            <div class=" columns_flex">
+                <a href="javascript:void(0);" class="shopping_cart top_icon"></a>
+                <a href="javascript:void(0);" class="personal_center top_icon"></a>
+                <a href="{:url('Index/index')}" class="home top_icon"></a>
+            </div>
+            {notempty name="factoryStoreList"}
+            <a href="javascript:void(0);" class="switch-store">切换我的店铺></a>
+            {/notempty}
+        </div>
+    </div>
+</section>
+{include file="public/dialog_factory_store" /}
+<script type="text/javascript">
+    $(function(){
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            var url = location.href;
+            var arr = url.split("/");
+            if($.inArray("currentStoreId", arr) != -1){
+                arr.remove(-2,-1);
+            }else{
+                var arr1 = arr[arr.length-1].split(".");
+                arr.pop();
+                arr.push(arr1[0]);
+            }
+            url = arr.join('/');
+            switchManagerStore(url);
+        });
+    });
+</script>

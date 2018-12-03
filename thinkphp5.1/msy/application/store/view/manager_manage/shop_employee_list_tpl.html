@@ -1,0 +1,10 @@
+{notempty name='list'}
+{volist name="list" id="info"}
+{include file="manager_manage/shop_employee_info_tpl" /}
+{/volist}
+{else /}
+{if $page == 1}
+<li class='no-data'>没有符合条件的记录！</li>
+{else /}
+{/if}
+{/notempty}

@@ -1,0 +1,246 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<!--创建登录账号-->
+<article id="addLoginAccount" style="display:none;">
+	<section class="f24 signIn-wrapper">
+		<div class="account-item">
+			<input type="text" placeholder="姓名" class="input-filed" name="name">
+		</div>
+		<div class="account-item">
+			<input type="tel" placeholder="手机号码" class="input-filed" name="mobile_phone">
+		</div>
+		<div class="account-item">
+			<a href="javascript:void(0);" class="content-label account-role">角色设置></a>
+		</div>
+		<div class="account-item">
+			<a href="javascript:void(0);" class="content-label organize-set">组织设置></a>
+		</div>
+	</section>
+</article>
+<article class="f24 page-container">
+	<section class="page-m-content">
+		
+				<div class="page-header">
+					{include file="public/switch_factory_head" /}
+					<div class="specific_type bottomLine">
+						<div class="columns_flex f20 l-r-sides">
+							<a href="{:url('Record/preview')}">企业档案</a>
+							<a href="{:url('Brand/manage')}">商标备案</a>
+							<a href="{:url('Store/manage')}">开店申请</a>
+							<a href="{:url('Organize/index')}">组别角色</a>
+							<a href="{:url('Account/index')}" class="column_type current">账号授权</a>
+						</div>
+					</div>
+				</div>
+				<div class="page-scroller">
+					<div class="f24 account-content-wrapper ">
+						<div class="search-bar columns_flex">
+							<input type="text" class="search-text" name="keyword"  placeholder="输入姓名、手机号码查询账号">
+							<input type="button" class="search-btn">
+						</div>
+						<div class="account-list-content">
+							<span class="title">采购商员工登陆账号列表</span>
+							<ul class="account-list"></ul>
+						</div>
+					</div>
+				</div>
+		<a href="javascript:void(0);" class="add-account foot-btn">新建采购商员工登陆账户</a>
+	</section>
+</article>
+<!--角色设置-->
+<section id="setRole" style="display: none;">
+	<section class="role-l-com">
+		<ul>
+			{include file="role/list_tpl" /}
+		</ul>
+	</section>
+</section>
+<!--组织设置-->
+<section id="setOrganize" style="display: none;">
+	{include file='organize/list_tpl' /}
+</section>
+<div id="organize_tpl" style="display:none;">
+	<ul data-id="" data-superior_id="" data-level="">
+		<li>
+			<span class="content-label"></span>
+			<div class="operate-box">
+				<a href="javascript:void(0);" class="btn edit">i</a>
+				<a href="javascript:void(0);" class="btn reduce">-</a>
+				<a href="javascript:void(0);" class="btn add">+</a>
+			</div>
+		</li>
+	</ul>
+</div>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="store_js/account.js"></script>
+<script type="text/javascript">
+	var setOrganize;
+	$(function(){
+		//页面初始化
+		$('#setRole').find('div').remove();
+		//定义新增用户角色
+		var userFactoryRoleIds = [];
+		//定义新增组织
+		var userFactoryOrganizeId = 0;
+		//获取组织列表
+		getOrganizeList();
+		//获取员工账号列表
+		getAccountList();
+
+		//查询
+		$('body').on('click','.search-btn',function(){
+			getAccountList();
+		});
+		//创建采购商员工登录账号
+		var addLoginAccount=$('#addLoginAccount').html();
+		$('body').on('click','.add-account',function(){
+			layer.open({
+				title:['新建采购商员工登陆账号','border-bottom:1px solid #d9d9d9;'],
+				className:'addCcountLayer',
+				type: 1,
+				content: addLoginAccount,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				success:function(){
+					var winHeight=$(window).height();
+					//$('html,body').addClass('scrollStyle');
+					$('.addCcountLayer .layui-m-layercont').css('height',winHeight-112+'px');
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					//先清空
+					userFactoryRoleIds = [];
+					userFactoryOrganizeId = 0;
+				},
+				btn:['确定','取消'],
+				yes:function(index){
+					var postData = {};
+					var content = '';
+					postData.name = $('.addCcountLayer').find('[name=name]').val();
+					postData.mobile_phone = $('.addCcountLayer').find('[name=mobile_phone]').val();
+					if(!postData.name){
+						content = '请输入姓名';
+					}else if(!isMobilePhone(postData.mobile_phone)){
+						content = '请输入正确的手机号码';
+					}else if(!userFactoryRoleIds.length){
+						content = '请设置角色';
+					}else if(!userFactoryOrganizeId){
+						content = '请设置组织';
+					}
+					if(content){
+						dialog.error(content);
+						return false;
+					}
+					//$('html,body').removeClass('scrollStyle');
+					postData.userFactoryRoleIds = userFactoryRoleIds;
+					postData.userFactoryOrganizeId = userFactoryOrganizeId;
+					$.post(action,postData,function(data){
+						if(data.status==0){
+							dialog.error(data.info);
+						}else{
+							$('ul.account-list').prepend(data);
+							$('ul.account-list').find('span.no-data').remove();
+							layer.close(index);
+						}
+					});
+				},
+				no:function(){
+					//$('html,body').removeClass('scrollStyle');
+				}
+			});
+		});
+		//角色设置
+		var setRole = $('#setRole').html();
+		$('body').on('click','.account-role',function(){
+			layer.open({
+				title:['角色设置','border-bottom:1px solid #d9d9d9;'],
+				className:'setRoleLayer',
+				type: 1,
+				content: setRole,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				success:function(){
+					var winHeight=$(window).height();
+					//$('.app-view').addClass('initial');
+					//$('html,body').addClass('scrollStyle');
+					$('.setRoleLayer ul').css('height',winHeight-112+'px');
+					//$('.setRoleLayer .layui-m-layercont').css({height:100+'%',position:'relative'});
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					$.each(userFactoryRoleIds,function(i,o){
+						$.each($('.setRoleLayer li'),function(){
+							if($(this).data('id')==o){
+								$(this).attr('class','current');
+							}
+						});
+					});
+				},
+				btn:['确定','取消'],
+				yes:function(index){
+					//先清空
+					userFactoryRoleIds = [];
+					$.each($('.setRoleLayer li'),function(){
+						if($(this).attr('class')=='current'){
+							userFactoryRoleIds.push($(this).data('id'));
+						}
+					});
+					//$('html,body').removeClass('scrollStyle');
+					//$('.app-view').removeClass('initial');
+					layer.close(index);
+				}
+			});
+		});
+		$('.setRoleLayer ul').on('scroll',function(){
+			$('.app-view').addClass('initial');
+		})
+		//组织设置
+		$('body').on('click','.organize-set',function(){
+			if(!setOrganize){
+				dialog.error('加载中，请稍等。。。');
+			}
+			layer.open({
+				title:['组织设置','border-bottom:1px solid #d9d9d9;'],
+				className:'setOrganizeLayer',
+				type: 1,
+				content: setOrganize,
+				anim: 'up',
+				style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;',
+				success:function(){
+					var winHeight=$(window).height();
+					//$('html,body').addClass('scrollStyle');
+					$('.setOrganizeLayer .layui-m-layercont').css({height:100+'%',position:'relative'});
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+					//回写
+					$.each($('.setOrganizeLayer').find('.organize ul'),function(){
+						if($(this).data('id')==userFactoryOrganizeId){
+							$(this).find('span:first').addClass('current');
+						}
+					});
+				},
+				btn:['确定','取消'],
+				yes:function(index){
+					userFactoryOrganizeId = $('.setOrganizeLayer').find('.organize').find('span.current').parent().parent().data('id');
+					//$('html,body').removeClass('scrollStyle');
+					layer.close(index);
+				}
+			});
+		});
+		//角色多选效果
+		$('body').on('click','.setRoleLayer li',function(){
+			$(this).toggleClass('current');
+		});
+		//组织单选效果
+		$('body').on('click','.setOrganizeLayer span',function(){
+			$(this).parents('.organize').find('span.content-label').removeClass('current');
+			$(this).toggleClass('current');
+		});
+	});
+</script>
+{/block}

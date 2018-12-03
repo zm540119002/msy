@@ -1,0 +1,204 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<section id="storeLayerTipc" style="display: none;">
+	<div>
+		<span class=""></span>
+		<p class="comfirm-text">确定要<span class="textTipc">激活</span>以下店铺？</p>
+		
+	</div>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_head" /}
+					<section class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}">管理员</a>
+							<a href="{:url('Record/preview')}">档案</a>
+							<a href="{:url('Brand/manage')}">商标</a>
+							<a href="{:url('Store/manage')}" class="current">开店</a>
+							<a href="{:url('Store/getList')}">店铺</a>
+							<a href="{:url('Shop/index')}">门店</a>
+							<a href="javascript:void(0);">财务</a>
+						</div>
+					</section>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="f24 apply-store-content">
+								<div class="thead-td">
+									<span class="cols">店铺名称</span>
+									<span class="cols">状态</span>
+									<span class="cols">备注</span>
+								</div>
+								<ul>
+									{notempty name="storeList"}
+									{volist name="storeList" id="vo"}
+									<li class="thead-td" data-id="{$vo.id}">
+										<div class="cols">
+											{notempty name="vo.logo_img"}
+											<img class="left small_default_img" src="public_uploads/{$vo.logo_img}" alt="">
+											{else /}
+											<img class="left small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
+											{/notempty}
+											<div class="store-type ">
+												<div>
+													<span>{$vo.name}{$vo.store_type|getStoreType}</span>
+												</div>
+												<p>{$vo.run_type|getRunType}</p>
+											</div>
+										</div>
+										{if $vo.auth_status == -2 }
+										<div class="cols">
+											<span>未通过</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr reapply_store" href="javascript:void(0);"  data-id="{$vo.id}" data-set-status="0">重新申请></a>
+										</div>
+										{elseif $vo.auth_status == -1 /}
+										<div class="cols">
+											<span>已关闭</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr activate_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="0">激活店铺></a>
+										</div>
+										{elseif $vo.auth_status == 0 /}
+										<div class="cols">
+											<span>审核中</span>
+										</div>
+										<div class="cols">
+											<span>5个工作日</span>
+										</div>
+										{elseif $vo.auth_status == 1 /}
+										<div class="cols">
+											<span>建设中</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}"  data-set-status="-1">申请关店></a>
+										</div>
+										{elseif $vo.auth_status == 2 /}
+										<div class="cols">
+											<span>营业中</span>
+										</div>
+										<div class="cols">
+											<a class="text-color-gr close_store" href="javascript:void(0);" data-id="{$vo.id}" data-set-status="-1">申请关店></a>
+										</div>
+										{else /}
+										{/if}
+									</li>
+									{/volist}
+									{else /}
+									<li><span>暂无店铺</span></li>
+									{/notempty}
+								</ul>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+<a href="{:url('Store/edit')}" class="apply-new-store foot-btn f24">申请开新店</a>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+	$(function(){
+		//激活店铺
+		$('body').on('click','.activate_store',function () {
+			var _this=$(this);
+			var text='激活';
+			var parent=_this.parents('.thead-td');
+			var html=parent.find('div:eq(0)').clone();
+			$('.comfirm-text').after(html);
+			$('.textTipc').text(text);
+			var storeLayerTipc=$('#storeLayerTipc').html();
+			var postData={};
+			postData.id=_this.data('id');
+			postData.auth_status=_this.data('set-status');
+			layerTipc(storeLayerTipc,postData);
+		});
+		// 重新申请店铺
+		$('body').on('click','.reapply_store',function () {
+			var _this=$(this);
+			var text='重新申请';
+			var parent=_this.parents('.thead-td');
+			var html=parent.find('div:eq(0)').clone();
+			$('.comfirm-text').after(html);
+			$('.textTipc').text(text);
+			var storeLayerTipc=$('#storeLayerTipc').html();
+			var postData={};
+			postData.id=_this.data('id');
+			postData.auth_status=_this.data('set-status');
+			layerTipc(storeLayerTipc,postData);
+		});
+		//关闭店铺
+		$('body').on('click','.close_store',function () {
+			var _this=$(this);
+			var text='关闭';
+			var parent=_this.parents('.thead-td');
+			var html=parent.find('div:eq(0)').clone();
+			$('.comfirm-text').after(html);
+			$('.textTipc').text(text);
+			var storeLayerTipc=$('#storeLayerTipc').html();
+			var postData={};
+			postData.id=_this.data('id');
+			postData.auth_status=_this.data('set-status');
+			layerTipc(storeLayerTipc,postData);
+		});
+	});
+function layerTipc(content,postData){
+	layer.open({
+		className:'storeTipcLayer',
+		content:content,
+		btn:['确定','取消'],
+		success:function(){
+			// layer.msg('的确很重要', {icon: 1});
+		},
+		yes:function(index){
+			$('.comfirm-text').next().remove();
+			$.ajax({
+				url: controller + 'setStoreStatus',
+				data: postData,
+				type: 'post',
+				beforeSend: function(){
+					//$('.loading').show();
+				},
+				success: function(msg){
+					if(msg.status == 0){
+						dialog.error(msg.info);
+						return false;
+					}
+					if(msg.status == 1){
+						//location.href = controller + 'manage';
+						dialog.success(msg.info,controller + 'manage');
+					}
+					//layer.close(index);
+				},
+				complete:function(){
+
+				},
+				error:function (xhr) {
+					dialog.error('AJAX错误'+xhr);
+				}
+			});
+			layer.close(index);
+		},
+		no:function(){
+			$('.comfirm-text').next().remove();
+		}
+	})
+}
+</script>
+{/block}
