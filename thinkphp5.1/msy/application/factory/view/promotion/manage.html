@@ -12,89 +12,97 @@
 	<div class="error_tipc"></div>
 </section>
 
-<article class="f24">
+<article class="f24 app-content">
 	<!--店铺运营头部-->
-	{include file="public/store_operation_head" /}
-	<section class="bottomLine">
-		<nav class="columns_flex channel_nav manufacturer_nav">
-			<a href="{:url('Operation/index')}">
-				店铺提醒
-			</a>
-			<a href="{:url('Goods/manage')}">
-				店铺管理
-			</a>
-			<a href=""  class="current">
-				营销推广
-			</a>
-			<a href="javascript:void (0)">
-				官方活动
-			</a>
-		</nav>
-	</section>
-	<section class="specific_type store-manage-type bottomLine">
-		<div class="columns_flex f20">
-			<a  href="javascript:void (0)" class="column_type current">场景</a>
-			<a >云推客</a>
-			<a href="javascript:void (0)">线上</a>
-			<a href="javascript:void (0)">线下</a>
-			<a href="javascript:void (0)">视频</a>
-			<a href="javascript:void (0)">直播</a>
-		</div>
-	</section>
-	<section class="content-marginLeft separation-line">
-		<div>
-			企业名称:
-			<span>达安有限公司</span>
-		</div>
-		<p>采购店铺提供产品给美容店家进行B2F联合采购</p>
-		<a href="javascript:void(0);" class="stroe-preview">采购店铺预览></a>
-		<a href="javascript:void(0);" class="addSalesActivity text-color-gr right-arrow">新建促销活动</a>
-	</section>
-	<section class="separation-line sales-promotion-content">
-		<div class="category-wrapper">
-			<div class="category-left-menu sort-left-menu">
-                <ul class="category-tab">
-                    <li class="current">
-                        <a href="javascript:void(0);" data-activity-status="1" class="activity-status">未结束</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-activity-status="0" class="activity-status">已结束</a>
-                    </li>
-                </ul>
-            </div>
-			<input type="hidden" value="1" class="isClick">
-			<div class="promotion-item" >
-				<p class="content-label">促销活动的修改、删除和排序</p>
-				<div class="classify-label-content " id="list">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_store" /}
+					<div class="store_deploy_nav specific_type">
+						<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
+							<a href="{:url('Operation/index')}">
+								店铺提醒
+							</a>
+							<a href="{:url('Goods/manage')}">
+								店铺管理
+							</a>
+							<a href=""  class="current">
+								营销推广
+							</a>
+							<a href="javascript:void (0)">
+								官方活动
+							</a>
+						</nav>
+					</div>
+					<div class="specific_type store-manage-type bottomLine">
+						<div class="columns_flex f20">
+							<a  href="javascript:void (0)" class="column_type current">场景</a>
+							<a href="{:url('Tweet/manage')}">推文</a>
+							<a href="javascript:void (0)">直播</a>
+						</div>
+					</div>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys" id="bodys">
+						<div class="separation-line sales-promotion-content">
+							<div class="category-wrapper">
+								<div class="category-left-menu sort-left-menu">
+									<ul class="category-tab">
+										<li class="current">
+											<a href="javascript:void(0);" data-activity-status="1" class="activity-status">未结束</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);" data-activity-status="0" class="activity-status">已结束</a>
+										</li>
+									</ul>
+								</div>
+								<input type="hidden" value="1" class="isClick">
+								<div class="promotion-item" >
+									<p class="content-label">促销活动的修改、删除和排序</p>
+									<div class="scroller-container " id="list">
 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="separation-line sales-promotion-content">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="separation-line sales-promotion-content">
-		
-	</section>
 </article>
+<a href="javascript:void(0);" class="addSalesActivity increase-commodity foot-btn f24">新建促销活动</a>
 {/block}
 {block name="common"}
 {include file="template/loading.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/paging.js"></script>
 <script type="text/javascript">
+	var config = {
+		url:module+'promotion/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		callBack:callBack,
+		container1:$('.promotion-item .content-label')
+	};
+	var postData = {
+		pageSize:10
+	};
 	$(function () {
-		//没有默认店铺
-		var notDefaultStore = "{$notDefaultStore|default=0}";
-		if(notDefaultStore == 0){
+		//有默认店铺
+		var store ={:json_encode($store.id)};
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
 			//初始化
-			var activityStatus=$('.category-tab li.current a').data('activity-status');
-			var config = {
-				activityStatus:activityStatus,//未结束
-			};
-			currentPage=1;
-			requestEnd=false;
-			var url = module+'promotion/getList';
-			getPage(url,config);
+			postData.activityStatus = $('.category-tab li.current a').data('activity-status');
+			getPagingList(config,postData);
 		}
 
 		//点击新建促销活动
@@ -105,14 +113,10 @@
 		//根据促销活动状态获取活动列表
 		$('body').on('click','.category-tab li',function () {
 			$(this).addClass('current').siblings().removeClass('current');
-			var activityStatus = $(this).find('a').data('activity-status');
-				var config = {
-					activityStatus:activityStatus,//未结束
-				};
-				currentPage=1;
-				requestEnd=false;
-				var url = module+'promotion/getList';
-				getPage(url,config);
+			postData.activityStatus = $(this).find('a').data('activity-status');
+			config.currentPage = 1;
+			config.requestEnd = false;
+			getPagingList(config,postData);
 		})
 
 		//删除促销活动
@@ -131,66 +135,29 @@
 		})
 	});
 
-	//获取列表
-	var currentPage = 1;//记录当前页
-	var requestEnd = false;//请求结束标记
-	function getPage(url,config) {
-		var postData = $.extend({},config);
-		postData.page = currentPage ? currentPage : 1;
-		postData.pageSize = postData.pageSize?postData.pageSize:7;
-		//请求结束标志
-		if(requestEnd){
-			dialog.error('没有更多啦');
-			loadTrigger = true;
-			return false;
-		}
-		$.ajax({
-			url: url,
-			data: postData,
-			type: 'get',
-			dataType:'json',
-			beforeSend: function(){
-				$('.loading').show();
-			},
-			error:function (xhr) {
-				$('.loading').hide();
-				dialog.error('AJAX错误');
-			},
-			success: function(data){
-				$('.loading').hide();
-				if(currentPage == 1){
-					if(config.activityStatus == 1){
-						$('.promotion-item .content-label').text('促销活动的修改、删除和排序');
-					}
-					if(config.activityStatus==0){
-						$('.promotion-item .content-label').text('已结束的促销活动');
-					}
-					$('#list .tag-item').remove();
-					$('#list').append(data);
-				}else{
-					$('#list .tag-item:last').after(data);
-				}
-				if($($.parseHTML(data)).length<postData.pageSize){
-					requestEnd = true;
-				}
-				currentPage ++;
-				loadTrigger = true;
+	//获取分页列表-商品页回调函数
+	function callBack(config,data){
+		$('.loading').hide();
+		if(config.currentPage == 1){
+			if(config.activityStatus == 1){
+				config.container1.text('促销活动的修改、删除和排序');
 			}
-		});
+			if(config.activityStatus==0){
+				config.container1.text('已结束的促销活动');
+			}
+			config.container.find('.tag-item').remove();
+			config.container.append(data);
+		}else{
+			config.container.find('.tag-item:last').after(data);
+		}
 	}
-
-	//上拉加载更多
-	var loadTrigger = false;//加载触发器
-	$('.classify-label-content ').on('scroll',function(){
+	//下拉加载
+	$('.scroller-container').on('scroll',function(){
 		var listHeight=document.getElementById('list').scrollHeight;
-		if(loadTrigger && $('.classify-label-content ').scrollTop()+$('.classify-label-content ').height()>=listHeight){
-			loadTrigger = false;
-			var activityStatus=$('.category-tab li.current a').data('activity-status');
-			var config = {
-				activityStatus:activityStatus,//活动状态
-			};
-			var url = module+'promotion/getList';
-			getPage(url,config)
+		if(config.loadTrigger && $('.scroller-container ').scrollTop()+$('.scroller-container ').height()>=listHeight){
+			config.loadTrigger = false;
+			config.activityStatus = $('.category-tab li.current a').data('activity-status');
+			getPagingList(config,postData);
 		}
 	});
 </script>

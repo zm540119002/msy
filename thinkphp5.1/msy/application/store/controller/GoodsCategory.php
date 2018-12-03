@@ -14,14 +14,15 @@ class GoodsCategory extends UserBase
     {
         if(request()->isGet()){
             $category_id_1=(int)input('get.category_id_1');
-            $model = new \app\index_admin\model\GoodsCategory;
-            $where = [
-                ['parent_id_1','=',$category_id_1]
+            $categoryModel = new \common\model\GoodsCategory;
+            $config = [
+                'where' => [
+                    ['parent_id_1','=',$category_id_1]
+                ],
             ];
-            $secondCategory = $model->getList($where);
+            $secondCategory = $categoryModel->getList($config);
             $this -> assign('secondCategory',$secondCategory);
             return $this->fetch('template/category_second.html');
         }
     }
-
 }

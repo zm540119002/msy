@@ -1,29 +1,29 @@
 <?php
 namespace app\store\controller;
-
-class Deploy extends \common\controller\UserBase{
-
-    //入驻部署首页
-    public function index(){
-        return $this->fetch();
-    }
-
+use common\controller\UserBase;
+use think\facade\Session;
+class Deploy extends UserBase
+{
     /**入驻登记
      */
-    public function register(){
-        $model = new \app\store\model\Store();
+    public function register()
+    {
+        $model = new \common\model\Factory();
         if(request()->isAjax()){
-            return $model -> edit($this -> user['id']);
+            return $model -> edit($this -> user['id'],config('custom.type'));
         }else{
             $mobilePhone = $this -> user['mobile_phone'];
             $this->assign('mobilePhone',$mobilePhone);
-            if(input('?store_id')){
-                $storeId = input('store_id');
-                $where = [
-                    ['id','=',$storeId],
+            if(input('?factory_id')){
+                $factoryId = input('factory_id');
+                $config = [
+                    'where' => [
+                        ['id','=',$factoryId],
+                        ['type','=',2],//美容店家类型
+                    ],
                 ];
-                $StoreInfo =  $model -> getInfo($where);
-                $this -> assign('StoreInfo',$StoreInfo);
+                $factoryInfo =  $model -> getInfo($config);
+                $this -> assign('factoryInfo',$factoryInfo);
             }
             return $this->fetch();
         }

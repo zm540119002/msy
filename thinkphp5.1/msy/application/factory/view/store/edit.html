@@ -11,6 +11,7 @@
         <div class="top_bar top-title">
             <span></span>
             <h2>申请开新店</h2>
+			{include file="public/home_page" /}
         </div>
     </section>
 	<div class="new-store-type applyNewStoreLayer">
@@ -27,14 +28,14 @@
 			<div class="new-store-item store-one">
 				<span class="content-label">1)选择店铺类型</span>
 				<div class="store-type-menu" data-store-type="type">
-					<a class="" href="javascript:void(0);" data-type="1">企业官方旗舰店</a>
-					<a href="javascript:void(0);" data-type="2">品牌官方旗舰店</a>
+					<a class="" href="javascript:void(0);" data-type="1">{:getStoreType(1)}</a>
+					<a href="javascript:void(0);" data-type="2">{:getStoreType(2)}</a>
 				</div>
 				<span class="content-label">2)设定经营模式</span>
 				<div class="store-type-menu" data-store-pattern="pattern">
-					<a class="" href="javascript:void(0);" data-pattern="1">B2B采购商城</a>
-					<a href="javascript:void(0);" data-pattern="2">B2B分成商城</a>
-					<a href="javascript:void(0);" data-pattern="3">B2B零售商城</a>
+					<a class="" href="javascript:void(0);" data-pattern="1">{:getRunType(1)}</a>
+					<a href="javascript:void(0);" data-pattern="2">{:getRunType(2)}</a>
+					<a href="javascript:void(0);" data-pattern="3">{:getRunType(3)}</a>
 				</div>
 				<a class="next-step step-btn" href="javascript:void(0);">下一步</a>
 			</div>
@@ -42,30 +43,32 @@
 				<ul class="">
 					<!--企业旗舰店-->
 					{notempty name="factoryStore"}
-					<li class="columns_flex store-list factory_store" data-foreign_id="{$factoryStore.id|default=''}">
+					<li class="columns_flex store-list factory_store" data-foreign_id="{$factoryStore.id|default=''}"
+						data-store_name="{$factoryStore.name|default=''}" data-store_logo="{$factoryStore.img|default=''}">
 						{notempty name="factoryStore.img"}
 						<img class="small_default_img" src="public_uploads/{$factoryStore.img|default=''}" alt="">
 						{else /}
 						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 						{/notempty}
 						<div>
-							<p>{$factoryStore.name}官方旗舰店</p>
-							<p class="run_type">B2C零售商城</p>
+							<p>{$factoryStore.name}{:getStoreType(1)}</p>
+							<p class="run_type"></p>
 						</div>
 					</li>
 					<!--品牌旗舰店-->
 					{/notempty}
 					{notempty name="brandStores"}
 					{volist name="brandStores" id="vo"}
-					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}" >
+					<li class="columns_flex store-list brand_stores" data-foreign_id="{$vo.id|default=''}"
+						data-store_name="{$vo.name|default=''}" data-store_logo="{$vo.img|default=''}">
 						{notempty name="vo.img"}
 						<img class="small_default_img" src="public_uploads/{$vo.img|default=''}" alt="">
 						{else /}
 						<img class="small_default_img" src="public_img/default/no_pic_40.jpg" alt="">
 						{/notempty}
 						<div>
-							<p>{$vo.name}品牌旗舰店</p>
-							<p class="run_type">B2C零售商城</p>
+							<p>{$vo.name}{:getStoreType(2)}</p>
+							<p class="run_type"></p>
 						</div>
 					</li>
 					{/volist}
@@ -171,26 +174,31 @@ $(function(){
 		
 		if(store_type ==1 ){
 			if($('.factory_store').hasClass('disabled')){
-				dialog.success('此店所有经营模式已开过',module+'Store/manage');
+				dialog.success('此经营模式已开过',module+'Store/manage');
 				return false;
 			}
 		}
 		if(store_type ==2){
 			if(selectedBLen==brandList.length){
-				dialog.success('此店所有经营模式已开过',module+'Store/manage');
+				dialog.success('此品牌店所有经营模式已开过',module+'Store/manage');
 				return false;
 			}
 		}
 		
 		if(storeList.hasClass('current')){
-			foreign_id=$('.applyNewStoreLayer .store-list.current').data('foreign_id');
+			foreign_id = $('.applyNewStoreLayer .store-list.current').data('foreign_id');
+			name	   = $('.applyNewStoreLayer .store-list.current').data('store_name');
+			logo_img   = $('.applyNewStoreLayer .store-list.current').data('store_logo');
 			postData.foreign_id = foreign_id;
+			postData.name = name;
+			postData.logo_img = logo_img;
 		}
 		else{
 			dialog.success('请选择店铺');
 			return false;
 		}
-		$(this).addClass('disabled');
+		var _this = $(this)
+		_this.addClass('disabled');
 		$.ajax({
 			url: controller + 'edit',
 			data: postData,
@@ -199,13 +207,13 @@ $(function(){
 				//$('.loading').show();
 			},
 			success: function(msg){
+				_this.removeClass("nodisabled");//防止重复提交
 				if(msg.status == 0){
 					dialog.error(msg.info);
 					return false;
 				}
 				if(msg.status == 1){
 					dialog.success(msg.info,module+'Store/manage');
-					return false;
 				}
 			},
 			complete:function(){

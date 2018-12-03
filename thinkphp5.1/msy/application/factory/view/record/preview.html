@@ -23,11 +23,11 @@
 		<div class="columns_flex">
 			<div>
 				{notempty name="recordInfo.logo_img"}
-				<img class="upload_img small_default_img" src="public_uploads/{$recordInfo.logo_img|default=''}" alt="">
+				<img class="upload_img small_default_img left" src="public_uploads/{$recordInfo.logo_img|default=''}" alt="">
 				{else /}
-				<img class="upload_img small_default_img" src="public_img/default/no_pic_100.jpg" alt="">
+				<img class="upload_img small_default_img left" src="public_img/default/no_pic_100.jpg" alt="" >
 				{/notempty}
-				<span>[{$recordInfo.name|default=''}]</span>
+				<span>[{$recordInfo.short_name|default=''}]</span>
 			</div>
 			<!--<a href="" class="enter">进入厂商确定预览&nbsp;></a>-->
 		</div>
@@ -65,8 +65,8 @@
 			</div>
 		</div>
 	</section>
-	<section class="separation-line">
-		<span class="content-label content-box">研发生产</span>
+	<section class="separation-line content-box">
+		<span class="content-label ">研发生产</span>
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				{volist name="recordInfo.rb_img" id="vo"}
@@ -77,6 +77,25 @@
 					{else /}
 					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
 					{/notempty}
+					</div>
+					<p>{$vo['fileText']}</p>
+				</div>
+				{/volist}
+			</div>
+		</div>
+	</section>
+	<section class="separation-line content-box">
+		<span class="content-label ">团队活动照片</span>
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="recordInfo.team_activity" id="vo"}
+				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
+						{notempty name="vo"}
+						<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
+						{else /}
+						<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+						{/notempty}
 					</div>
 					<p>{$vo['fileText']}</p>
 				</div>
@@ -124,7 +143,10 @@
 	</section>
 </article>
 {else /}
-<span>没有档案</span>
+<div class="f24 tipc_page no-archives">
+	<img src="public_img/no-archives.png" />
+	<a href="/index.php/factory/Index/index.html">返回首页</a>
+</div>
 {/notempty}
 <a href="{:url('record/edit')}" class="identifyNewGoods foot-btn f24">进入传统编辑模式></a>
 <div id="areaMask" class="mask"></div>
@@ -139,10 +161,17 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//初始化地址
-		var addressIndex=$('.area-address-name').val();
-		var areaAddressArr=addressIndex.split(',');
-		$('.area_address').setArea(areaAddressArr);
+		//省市区初始化
+		var province = '{$recordInfo.province|default=""}';
+		var city = '{$recordInfo.city|default=""}';
+		var area = '{$recordInfo.area|default=""}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
+		}
 		swiper('.swiper-container');
 		$('.more-text-box').moreText({
 			mainCell:".more-text",

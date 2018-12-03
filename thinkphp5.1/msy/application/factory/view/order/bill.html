@@ -69,27 +69,12 @@
 <script type="text/javascript">
 	$("#order").keydown(function(e) {
 		if (e.keyCode == 13) {
-			var order_sn = $.trim( $('#order').val() );
-			if(!order_sn){
-				alert('请输入订单号');
-				return false;
-			}
-			$.ajax({
-				type: 'POST',
-				url: "{:url('Order/getExpress')}",
-				data:{order_sn:order_sn},
-				dataType:'json',
-				success:function(e){
-					if(e.status==1){
-						$('#order_detail').empty().append(e.data);
-						$('.text_express').css({'display':'block'});
-					}else{
-						alert(e.info);
-					}
-
-				}
-			});
+			getOrderExpress();
 		}
+	});
+
+	$('.search_btn').click(function(){
+		getOrderExpress();
 	});
 
 	$('.text_express').click(function(){
@@ -108,7 +93,7 @@
 	$('#order_detail').on('click', '.del_express', function(){
 		var express_id = $(this).attr('data'), express=$(this);
 		if(!express_id){
-			alert('物流信息有误');
+			dialog.error('物流信息有误');
 			return false;
 		}
 		$.ajax({
@@ -119,9 +104,9 @@
 			success: function(e){
 				if(e.status==1){
 					express.parents('dl').empty().css('display', 'none');
-					alert(e.info);
+					dialog.success(e.info);
 				}else{
-					alert(e.info);
+					dialog.error(e.info);
 				}
 			}
 		})
@@ -131,7 +116,7 @@
 	$('#order_detail').on('click', '.update_express', function(){
 		var express_id = $(this).attr('data');
 		if(!express_id){
-			alert('物流信息有误');
+			dialog.error('物流信息有误');
 			return false;
 		}
 		$.ajax({
@@ -141,21 +126,21 @@
 			type: 'POST',
 			dataType: 'json',
 			success: function(e){
-				alert(e.info);
+				dialog.success(e.info);
 			}
 		})
 	});
 
 	//新增物流信息
 	$('.add_express').click(function(){
-		var express_name = $('#add_express_name').val(), express_code = $('#add_express_code').val()
+		var express_name = $('#add_express_name').val(), express_code = $('#add_express_code').val(),
 				order_id=$('#order_id').attr('data');
 		if(!express_name||!express_code){
-			alert('数据不正确');
+			dialog.error('数据不正确');
 			return false;
 		}
 		if(!order_id){
-			alert('订单数据有误');
+			dialog.error('订单数据有误');
 			return false;
 		}
 		$.ajax({
@@ -166,12 +151,37 @@
 			success: function(e){
 				if(e.status==1){
 					$('#order_detail').append(e.data);
-					alert(e.info);
+					dialog.success(e.info);
 				}else{
-					alert(e.info);
+					dialog.error(e.info);
 				}
 			}
 		});
 	});
+
+	function getOrderExpress()
+	{
+		var order_sn = $.trim( $('#order').val() );
+		if(!order_sn){
+			dialog.error('请输入订单号');
+			return false;
+		}
+		$.ajax({
+			type: 'POST',
+			url: "{:url('Order/getExpress')}",
+			data:{order_sn:order_sn},
+			dataType:'json',
+			success:function(e){
+				if(e.status==1){
+					$('#order_detail').empty().append(e.data);
+					$('.text_express').css({'display':'block'});
+					$('#order').val('');
+				}else{
+					dialog.error(e.info);
+				}
+
+			}
+		});
+	}
 </script>
 {/block}

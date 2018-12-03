@@ -9,7 +9,7 @@
         {notempty name="vo.thumb_img"}
         <img src="public_uploads/{$vo.thumb_img}" alt="" class="left goods-img">
         {else /}
-        <img src="public_img/default/no_pic_100.jpg" alt="" class="left">
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="">
         {/notempty}
         <p class="classify-tag-name">{$vo.name}</p>
     </div>
@@ -21,36 +21,10 @@
 </li>
 {/volist}
 {else /}
+{if $page == 1}
+<li class=''>没有符合条件的记录！</li>
+{else /}
+{/if}
 {/notempty}
-{block name="script"}
-<script type="text/javascript">
-    $(function(){
-        //上移
-        $('body').on('click','.up-btn',function(){
-            var _this=$(this);
-            var _thisLi = _this.parents('li');
-            //交换排序值
-            var _thisSortVal = _thisLi.find('input.sort').val();
-            _thisLi.find('input.sort').val(_thisLi.prev().find('input.sort').val());
-            _thisLi.prev().find('input.sort').val(_thisSortVal);
-            //交换位置
-            _thisLi.insertBefore(_thisLi.prev());
-            //禁用移动按钮
-            disableBtn();
-        });
-        //下移
-        $('body').on('click','.down-btn',function(){
-            var _this=$(this);
-            var _thisLi = _this.parents('li');
-            //交换排序值
-            var _thisSortVal = _thisLi.find('input.sort').val();
-            _thisLi.find('input.sort').val(_thisLi.next().find('input.sort').val());
-            _thisLi.next().find('input.sort').val(_thisSortVal);
-            //交换位置
-            _thisLi.insertAfter(_thisLi.next());
-            disableBtn();
-        });
-    });
-</script>
-{/block}
+
 

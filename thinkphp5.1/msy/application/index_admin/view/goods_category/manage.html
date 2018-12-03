@@ -52,17 +52,6 @@
 {block name="script"}
     <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
     <script type="text/javascript">
-        //获取列表
-        function getPage(currentPage) {
-            $("#list").html($('#loading').html());
-            var url = controller+'getList';
-            var postData = $('#form1').serializeObject();
-            postData.page = currentPage ? currentPage : 1;
-            postData.pageSize = 10;
-            $.get(url, postData , function(data){
-                $('#list').html(data);
-            });
-        }
         $(function(){
             //加载第一页
             getPage();

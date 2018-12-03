@@ -312,8 +312,7 @@ function date(format, timestamp) {
     });
 }
 
-/**
- * 表单转json对象
+/**表单转json对象
  */
 $.fn.serializeObject = function() {
     var o = {};
@@ -330,9 +329,17 @@ $.fn.serializeObject = function() {
     });
     return o;
 };
+//jquery 扩展
+$.extend({
+    isEmptyArray: function(arr) {
+        return (Array.prototype.isPrototypeOf(arr) && arr.length === 0)?true:false;
+    },
+    isEmptyObject: function(obj) {
+        return (Object.prototype.isPrototypeOf(obj) && Object.keys(obj).length === 0)?true:false;
+    }
+});
 
-/**
- * 将已序列化的表单数据转为Json对象
+/**将已序列化的表单数据转为Json对象
  * @param str
  * @returns {Object|*}
  */
@@ -407,7 +414,14 @@ function copyDataByName(fromObj,toObj) {
     $.each(toObj.find(':input'),function(){
         var name = $(this).attr('name');
         var val= fromObj.find('[name='+name+']').val();
-        val && $(this).val(val);
+        $(this).val(val);
+    });
+}
+function copyDataByClassName(fromObj,toObj){
+    $.each(toObj.find('.span_text'),function(){
+        var name = $(this).attr('name');
+        var val= fromObj.find('span[name='+name+']').text();
+        val && $(this).text(val);
     });
 }
 
@@ -421,10 +435,10 @@ function flushPage() {
 /**去除输入框空格 */
 function trim(str,is_global){
     var result;
-        result = str.replace(/(^\s+)|(\s+$)/g,"");
-        if(is_global.toLowerCase()=="g")
-        {
-            result = result.replace(/\s/g,"");
-        }
-        return result;
+    result = str.replace(/(^\s+)|(\s+$)/g,"");
+    if(is_global.toLowerCase()=="g")
+    {
+        result = result.replace(/\s/g,"");
+    }
+    return result;
 }

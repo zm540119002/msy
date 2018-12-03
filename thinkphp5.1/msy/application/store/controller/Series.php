@@ -2,7 +2,7 @@
 namespace app\store\controller;
 use app\store\model\Series as M;
 use common\controller\Base;
-class Series extends StoreBase
+class Series extends \common\controller\FactoryBase
 {
     
     //系列编辑
@@ -11,12 +11,17 @@ class Series extends StoreBase
         $model = new M();
         if(request()->isPost()){
             if(input('?post.series_id')){
-                return $model -> edit($this->store['id']);
+                return $model -> edit($this->factory['id']);
             }else{
-                return $model -> add($this->store['id']);
+                return $model -> add($this->factory['id']);
             }
         }
-        $seriesList = $model -> getList([],[],['sort'=>'desc']);
+        $config = [
+            'order' => [
+                'sort'=>'desc'
+            ]
+        ];
+        $seriesList = $model -> getList($config);
         $this->assign('seriesList',$seriesList);
         return $this->fetch();
     }
@@ -25,7 +30,7 @@ class Series extends StoreBase
     public function move(){
         $model = new M();
         if(request()->isPost()){
-            return $model -> move($this->store['id']);
+            return $model -> move($this->factory['id']);
         }
     }
 
@@ -36,7 +41,7 @@ class Series extends StoreBase
         $model = new M();
         if(request()->isPost()){
             if(input('?post.series_id')){
-                return $model -> del($this->store['id']);
+                return $model -> del($this->factory['id']);
             }
         }
     }

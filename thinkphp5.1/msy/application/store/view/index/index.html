@@ -4,37 +4,8 @@
 {/block}
 {block name="content"}
 <article class="f24">
-	<section class="top_nav_fixed">
-		<div class="top_bar columns_flex">
-			<div class="each_column">
-				<a class="qr-code">二维码</a>
-			</div>
-			<div class="each_column">
-				<a class="home">首页</a>
-			</div>
-			<div class="each_column top_search_module">
-				<input type="button" class="search_btn"/>
-				<input type="text" class="search_text" placeholder="美尚云搜索"/>
-			</div>
-			<div class="each_column">
-				<a class="shopping_cart">购物车</a>
-			</div>
-			<div class="each_column">
-				<a class="personal_center">我的</a>
-			</div>
-		</div>
-		<div class="top_menu_box">
-			<div class="top_menu_list">
-				<a href="javascript:void(0);">采购</a>
-				<a href="javascript:void(0);">分成</a>
-				<a href="javascript:void(0);" class="current">店家入驻</a>
-				<a href="javascript:void(0);">云推客</a>
-				<a href="javascript:void(0);">创业导师</a>
-				<a href="javascript:void(0);">找卖手</a>
-				<a href="javascript:void(0);">培训直播</a>
-				<a href="javascript:void(0);">美尚会</a>
-			</div>
-		</div>
+	<section class="fixedtop top_nav_fixed">
+		{include file="template/header_menu_msy_store.html" /}
 	</section>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
@@ -58,29 +29,24 @@
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 			</div>
-		</div>
+		</div>      
 	</section>
-	<section class="specific_type bottomLine">
-		<div class="columns_flex f20 l-r-sides">
-			<a href="{:url('Deploy/index')}" class="deployed-deployment">入驻部署</a>
-			<a href="{:url('Operation/index')}" class="store_run">运营</a>
-			<a href="{:url('Order/index')}" class="order-management">订单</a>
-			<a href="javascript:void(0);" class="order-management-change">结算</a>
-			<a href="javascript:void(0);" class="order-management-change">店务</a>
-			<a href="javascript:void(0);" class="my-store">我的店铺</a>
+	<section class="module-navigation separation-line ">
+		<div class="columns_flex f20 channel_nav store_organize_nav">
+			<a href="javascript:void(0);" class="deployed-deployment"><span class="union_purchase"></span>入驻部署</a>
+			<a href="javascript:void(0);" class="store_run manager_manage"><span class="exclusive"></span>店长管理</a>
+			<a href="javascript:void(0)" class="store-operation"><span class="classify"></span>店铺运营</a>
+			<a href="{:url('Order/index')}" class="order-management-change"><span class="purchasers"></span>订单客服</a>
+			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>财务结算</a>
 		</div>
 	</section>
 	<section class="message-center-info f20">
-		<p>欢迎来到美容机构管理中心，平台支持企业多店铺连锁经营管理。</p>
+		<p>欢迎来到美容机构管理中心</p>
+		<p>美尚云平台支持机构多店铺运营管理</p>
+		<a href="{:url('index/UserCenter/logout')}">测试退出</a>
 	</section>
-	<section>
+	<section class="entry_msy">
 		<a href="{:url('Deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
-	</section>
-	<section class="explain_nav">
-		<a href="javascript:void(0);">关于美尚云></a>
-		<a href="javascript:void(0);">厂商使用帮助></a>
-		<a href="javascript:void(0);">人才招聘></a>
-		<a href="javascript:void(0);">版权信息备案号</a>
 	</section>
 </article>
 {/block}
@@ -91,8 +57,11 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+{include file="public/dialog_factory_store" /}
 <script type="text/javascript">
 	$(function(){
+		var store='{:json_encode($store)}';
+
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
@@ -101,6 +70,115 @@
 				clickable: true
 			}
 		});
+		//入驻部署
+		$('body').on('click','.deployed-deployment',function () {
+			var url = module + 'Store/index';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1){
+						if(data.data == 'no_login'){
+							loginDialog();
+						}
+						if(data.data == 'no_factory_register'){
+							layer.open({
+								title:['提示'],
+								content:[data.msg],
+								btn:['确定',' 取消'],
+								yes:function () {
+									location.href= module + 'Deploy/register';
+								}
+							});
+						}
+					}else if(data.status==1){
+						location.href = url;
+					}else{
+
+					}
+				}
+			});
+		});
+
+		//店长管理
+		$('body').on('click','.manager_manage',function () {
+			var url = module + 'ManagerManage/manage';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1 && data.data=='no_login'){
+						loginDialog();
+					}else if(data.code==1 && data.data=='no_empower'){
+						dialog.error(data.msg);
+					}else{
+						$('#storeShopInfo').find('.store_list').empty().append(data);
+						switchManagerStore(url);
+					}
+				}
+			});
+		});
+
+		//店铺运营
+		$('body').on('click','.store-operation',function () {
+			var url = module + 'Operation/index';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1 ){
+						if(data.data == 'no_login'){
+							loginDialog();
+						}
+						if(data.data == 'no_empower'){
+							dialog.error(data.msg);
+						}
+
+					}else if(data.status==1){
+					}else{
+						$('#storeShopInfo').find('.store_list').empty().append(data);
+						switchManagerStore(url);
+					}
+				}
+			});
+		});
+
 	});
 </script>
 {/block}

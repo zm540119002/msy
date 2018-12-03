@@ -1,142 +1,3 @@
-// (function($){
-    // var deviceWidth=document.documentElement.clientWidth;
-    // var html =document.getElementsByTagName('html')[0];
-    // html.style.fontSize=deviceWidth/6.4+'px';
-
-    // $.fn.moreText = function(options){
-    //     var defaults = {
-    //         maxLength:50,
-    //         mainCell:".branddesc",
-    //         openBtn:'显示全部>',
-    //         closeBtn:'收起'
-    //     };
-    //     return this.each(function() {
-    //         var _this = $(this);
-
-    //         var opts = $.extend({},defaults,options);
-    //         var maxLength = opts.maxLength;
-    //         var TextBox = $(opts.mainCell,_this);
-    //         var openBtn = opts.openBtn;
-    //         var closeBtn = opts.closeBtn;
-
-    //         var countText = TextBox.html();
-    //         var newHtml = '';
-    //         if(countText.length > maxLength){
-    //             newHtml = countText.substring(0,maxLength)+'...<span class="more">'+openBtn+'</span>';
-    //         }else{
-    //             newHtml = countText;
-    //         }
-    //         TextBox.html(newHtml);
-    //         TextBox.on("click",".more",function(){
-    //             if($(this).text()==openBtn){
-    //                 TextBox.html(countText+' <span class="more">'+closeBtn+'</span>');
-    //             }else{
-    //                 TextBox.html(newHtml);
-    //             }
-    //         });
-    //     });
-    // };
-
-    //星星评分等级(5个img布局，有点重复)
-    // $.fn.setStar=function(options){
-    //     var defaults={
-    //         getFractionValue:1,
-    //         mainCell:".star_img img",
-    //         star:'/Public/img/common/star.png',
-    //         starRed:'/Public/img/common/starred.png'
-    //     };
-    //     if($.isNumeric(options)){
-    //         defaults.getFractionValue=options;
-    //     }
-    //     return this.each(function(){
-    //         //console.log($(this));
-    //         var _this=$(this);
-            
-    //         var opts=$.extend({},defaults,options); 
-    //         var starBox = $(opts.mainCell,_this);
-    //         var getFractionValue=opts.getFractionValue;
-    //         var star=opts.star;
-    //         var starRed=opts.starRed;
-    //         var starValue=parseInt(getFractionValue);
-
-    //         starBox.each(function(index){
-                	
-	// 			var prompt=['1分','2分','3分','4分','5分'];	//评价分数
-	// 			this.id=index;		//遍历img元素，设置单独的id
-    //             //console.log(this.id);
-	// 			starBox.attr('src',star);//空心星
-	// 			// _this.find('#'+getFractionValue).attr('src',starRed);		//当前的图片为实星
-	// 			// _this.find('#'+getFractionValue).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
-    //             _this.find('#'+(starValue-1)).attr('src',starRed);		//当前的图片为实星
-	// 			_this.find('#'+(starValue-1)).prevAll().attr('src',starRed);	//当前的前面星星为实星  prompt[getFractionValue]
-    //             $(this).parent().next('span').text(getFractionValue+'分');
-    //             $(this).parent().next('span').attr('data-score',getFractionValue);  
-	// 		});
-    //     });
-    // };
-    // $.fn.getStar=function(){
-    //      return this.find("span").attr('data-score');
-    // };
-
-    //星星评分（绝对定位布局）
-    //  $.fn.classStar=function(options){
-    //     var defaults={
-    //         getFractionValue:1,
-    //         mainCell:".real_star",
-    //         star:'public/admin-img/common/sellerCompany/star.png',
-    //         starRed:'public/admin-img/common/sellerCompany/starred.png'
-    //     };
-    //     if($.isNumeric(options)){
-    //         defaults.getFractionValue=options;
-    //     }
-    //     return this.each(function(){
-    //         //console.log($(this));
-    //         var _this=$(this);
-            
-    //         var opts=$.extend({},defaults,options); 
-    //         var starBox = $(opts.mainCell,_this);
-    //         var getFractionValue=opts.getFractionValue;
-    //         var star=opts.star;
-    //         var starRed=opts.starRed;
-    //         var starValue=parseInt(getFractionValue)*25;
-
-    //         starBox.each(function(index){             	
-	// 			// this.id=index;
-    //             $(this).css('width',starValue+'px');
-    //             $(this).parent().next('span').text(getFractionValue+'分');
-    //             $(this).parent().next('span').attr('data-score',getFractionValue);  
-	// 		});
-    //     });
-    // };
-    // $.fn.getClassStar=function(){
-    //      return this.find("span").attr('data-store');
-    // };
-
-    //进度条
-    // $.fn.getProgressBar=function(options){
-    //     var defaults={
-    //         getProgressValue:1,
-    //         mainCell:".real_star_progress"
-    //     };
-    //     if($.isNumeric(options)){
-    //         defaults.getProgressValue=options;
-    //     }
-    //     return this.each(function(){
-    //         // console.log($(this));
-    //         var _this=$(this);
-            
-    //         var opts=$.extend({},defaults,options); 
-    //         var progressBox = $(opts.mainCell,_this);
-    //         var getProgressValue=opts.getProgressValue;
-    //         var progressValue=parseInt(getProgressValue)*2.1;
-    //         progressBox.each(function(index){
-    //             // this.id=index;
-    //             $(this).css('width',progressValue+'px');
-	// 		});
-    //     });
-    // };
-// })(jQuery);
-
 //限制input、textarea字数
 var maximumWord =function(obj,max){
     var val=$(obj).val().length;
@@ -156,12 +17,7 @@ $.fn.tab = function(){
     alert(1);
     $(this).addClass("current").siblings().removeClass("current");
 };
-$('.top_menu_list a').on('click',function(){
-    var index=$(this).index();
-        if(index>0){
-            dialog.error('功能正在开发中,暂未上线,敬请期待');
-        }
-})
+
 //选项卡切换
 function tab_down(tab_k, tab_con, tab_dz) {
     var $div_li = $(tab_k);
@@ -206,54 +62,6 @@ function checkShow(ele){
         }
     })
 }
-
-//全选
-$('body').on('click','.checkall,.check_all_2',function () {
-    var _thisChecked = $(this).prop("checked");
-    $.each($('.checkitem,.check_item_2'),function () {
-        $(this).prop('checked',_thisChecked);
-    });
-});
-//反选
-$('body').on('click','.checkitem,.check_item_2',function () {
-    var sign = true;
-    //一票否决
-    $.each($('.checkitem,.check_item_2'),function () {
-        if(!$(this).prop('checked')){
-            sign = false;
-        }
-    });
-    $('.checkall,.check_all_2').prop('checked',sign);
-});
-//折叠
-$('body').on('click','.node_folding',function(){
-    var _this = $(this);
-    var status = _this.attr('status');
-    var _thisTbody = _this.parents('tbody');
-    if(status == 'open'){
-        _this.attr('status','close');
-        _thisTbody.find('[level=2]').show();
-    }else if(status == 'close'){
-        _this.attr('status','open');
-        _thisTbody.find('[level=2]').hide();
-    }
-});
-//复选-二级
-$('body').on('click','.check_item_2',function () {
-    var _thisTbody = $(this).parents('tbody');
-    if($(this).parents('tr').attr('level')=='1'){
-        _thisTbody.find('[level=2]').find('.check_item_2').prop('checked',$(this).prop('checked'));
-    }else if($(this).parents('tr').attr('level')=='2'){
-        var sign = true;
-        //一票否决
-        $.each(_thisTbody.find('[level=2]').find('.check_item_2'),function () {
-            if(!$(this).prop('checked')){
-                sign = false;
-            }
-        });
-        _thisTbody.find('[level=1]').find('.check_item_2').prop('checked',sign);
-    }
-});
 
 //滑动轮播
 function swipe(elemObj){
@@ -313,7 +121,7 @@ var addTimer = function(){
                 ctime:timeStamp2
             }
         );
-    }
+    };
 
     function go(opt) {
         for (var i = 0; i < list.length; i++) {
@@ -386,7 +194,7 @@ function isRolling(container){
     var button=document.getElementById('formLogin');
     button.addEventListener('click',function(){
        $('input').focus();
-    })
+    });
     container.on('touchstart', function(e){
         //console.log(e.changedTouches[0]);
         // startX = e.changedTouches[0].pageX;
@@ -427,15 +235,81 @@ function isRolling(container){
         // return false;
     });
 }
-//返回顶部
-$('body').on('click','.backTop',function(){
-    $('body,html').animate({scrollTop:0+'px'},500);
-});
-$(window).on('scroll',function(){
-    var scrolltop=$(document).scrollTop();
-    if(scrolltop>=300){
-        $('.right_sidebar').show();
-    }else{
-        $('.right_sidebar').hide();
-    }
+//获取列表
+function getPage(currentPage) {
+    $("#list").html($('#loading').html());
+    var url = controller+'getList';
+    var postData = $('#form1').serializeObject();
+    postData.page = currentPage ? currentPage : 1;
+    postData.pageSize = 10;
+    $.get(url, postData , function(data){
+        $('#list').html(data);
+    });
+}
+$(function () {
+    //返回顶部
+    $('body').on('click','.backTop',function(){
+        $('body,html').animate({scrollTop:0+'px'},500);
+    });
+    $('.top_menu_list .underdevelopment').on('click',function(){
+        var index=$(this).index();
+        if(index>0){
+            dialog.error('功能正在开发中,暂未上线,敬请期待');
+        }
+    });
+    //全选
+    $('body').on('click','.checkall,.check_all_2',function () {
+        var _thisChecked = $(this).prop("checked");
+        $.each($('.checkitem,.check_item_2'),function () {
+            $(this).prop('checked',_thisChecked);
+        });
+    });
+    //反选
+    $('body').on('click','.checkitem,.check_item_2',function () {
+        var sign = true;
+        //一票否决
+        $.each($('.checkitem,.check_item_2'),function () {
+            if(!$(this).prop('checked')){
+                sign = false;
+            }
+        });
+        $('.checkall,.check_all_2').prop('checked',sign);
+    });
+    //折叠
+    $('body').on('click','.node_folding',function(){
+        var _this = $(this);
+        var status = _this.attr('status');
+        var _thisTbody = _this.parents('tbody');
+        if(status == 'open'){
+            _this.attr('status','close');
+            _thisTbody.find('[level=2]').show();
+        }else if(status == 'close'){
+            _this.attr('status','open');
+            _thisTbody.find('[level=2]').hide();
+        }
+    });
+    //复选-二级
+    $('body').on('click','.check_item_2',function () {
+        var _thisTbody = $(this).parents('tbody');
+        if($(this).parents('tr').attr('level')=='1'){
+            _thisTbody.find('[level=2]').find('.check_item_2').prop('checked',$(this).prop('checked'));
+        }else if($(this).parents('tr').attr('level')=='2'){
+            var sign = true;
+            //一票否决
+            $.each(_thisTbody.find('[level=2]').find('.check_item_2'),function () {
+                if(!$(this).prop('checked')){
+                    sign = false;
+                }
+            });
+            _thisTbody.find('[level=1]').find('.check_item_2').prop('checked',sign);
+        }
+    });
+    $(window).on('scroll',function(){
+        var scrolltop=$(document).scrollTop();
+        if(scrolltop>=300){
+            $('.right_sidebar').show();
+        }else{
+            $('.right_sidebar').hide();
+        }
+    });
 });

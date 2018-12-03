@@ -14,19 +14,9 @@
             <li class="current">登录</li>
         </ul>
         <!--注册-->
-        <form class="loginTab hide" id="formRegister">
-            {include file="template/register_common.html" /}
-            <div class="login_item use-item ">
-                注册表示同意
-                <a href="javascript:void(0);" class="f06c use-attention"><<美尚平台使用须知>></a>
-            </div>
-            <a href="javascript:void(0);" class="registerBtn entry-button"  data-method="register">注册</a>
-        </form>
+        {include file="template/register_tpl.html" /}
         <!--登录-->
-        <form class="loginTab active" id="formLogin">
-            {include file="template/login_common.html" /}
-            <a href="javascript:void(0);" class="loginBtn entry-button"  data-method="login">登录</a>
-        </form>
+        {include file="template/login_tpl.html" /}
     </div>
     {include file="template/attention.html" /}
 </section>
@@ -36,5 +26,4 @@
 <script type="text/javascript">
     var send_sms = '{:url("sendSms")}';
 </script>
-<script type="text/javascript" src="public_js/login.js"></script>
 {/block}

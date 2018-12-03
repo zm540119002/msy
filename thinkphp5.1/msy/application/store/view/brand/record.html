@@ -31,7 +31,6 @@
 			<div class="apply-data-content">
 				<div class="apply-module">
 					<form class="trademarkform">
-
 						{notempty name="brandInfo"}
 						<input type="hidden" name="brand_id" value="{$brandInfo.id|default=''}">
 						{/notempty}
@@ -52,17 +51,17 @@
 							</div>
 							<div class="clear"></div>
 						</div>
-						<!--<div class="">
+						<div class="">
 							<a href="javascript:void(0);" class="trademark-type right-arrow">商标所属分类</a>
 							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.category_id_1|default=''}"/>
-						</div>-->
+						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>
 				</div>
 				<div class="apply-module hide">
-					<p class="f20 upload_st_logo"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+					<p class="f20 friend-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
 					<form class="trademarkform">
-						<ul class="upload-picture-module f24">
+						<ul class="upload-picture-module apply-data-picture f24">
 							<li>
 								<div class="picture-module">
 									<input type="file" class="uploadImg uploadSingleImg" name="">
@@ -71,7 +70,6 @@
 									{else /}
 									<img class="upload_img" src="" alt="">
 									{/notempty}
-
 									<input type="hidden" class="trademark-certificate img" value="{$brandInfo.certificate|default=''}" name="certificate"/>
 								</div>
 								<p>商标证书</p>

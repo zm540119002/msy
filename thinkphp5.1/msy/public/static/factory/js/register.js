@@ -26,6 +26,7 @@ $(function(){
     });
     //验证是否上传图片 与 提交申请
     $('body').on('click','.two-step',function(){
+        var _this = $(this);
         factoryFullName=trim($('.factoryFullName').val(),'g');
         agentName=trim($('.agentName').val(),'g');
         businessLicense=$('.business-license').val();
@@ -50,7 +51,13 @@ $(function(){
             dialog.error(content);
             return false;
         }
+        if(!uploadsSingleImgFlag ){
+            dialog.error('图片还没有上传完毕');
+            return false;
+        }
+        _this.addClass("nodisabled");//防止重复提交
         $.post(controller + 'register',postData,function(msg){
+            _this.removeClass("nodisabled");
             if(msg.status == 0){
                 dialog.error(msg.info);
             }
@@ -61,7 +68,7 @@ $(function(){
                 $('.apply-module:eq(2)').show();
                 $('.weui-flex-item:eq(0)').addClass('disabled');
                 $('.weui-flex-item:eq(1)').addClass('disabled');
-                dialog.success(msg.info,module+'Index/index');
+                dialog.success(msg.info,module+'Store/index');
             }
         });
     });

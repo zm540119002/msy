@@ -1,7 +1,7 @@
 <?php
 namespace app\store\controller;
 
-class Promotion extends ShopBase
+class Promotion extends \common\controller\FactoryStoreBase
 {
     //促销管理
     public function manage()
@@ -15,26 +15,36 @@ class Promotion extends ShopBase
      */
     public function edit()
     {
-        $model = new \app\store\model\Promotion;
+        $model = new \common\model\Promotion;
         if(request()->isPost()){
-            return $model -> edit($this->shop['id']);
+            return $model -> edit($this->store['id'],$this->store['run_type']);
         }
-        if(input('?id') && $this->shop['id']){
+        if(input('?id') && $this->store['id']){
             $promotionId = (int)input('id');
-            $where = [
-                ['p.id','=',$promotionId],
-                ['p.shop_id','=',$this->shop['id']],
+            $config = [
+                'where' => [
+                    ['p.id','=',$promotionId],
+                    ['p.store_id','=',$this->store['id']],
+                ],'field' => [
+                    'p.id','p.name','p.first_img','p.second_img','p.goods_ids','p.start_time','p.end_time','p.store_id'
+                ],
             ];
-            $file = [
-                'p.id,p.name,p.img,p.goods_id,p.promotion_price,p.start_time,p.end_time,g.thumb_img,g.name as goods_name'
-            ];
-            $join =[
-              ['goods g','g.id = p.goods_id'],
-            ];
-            $promotionInfo =  $model -> getInfo($where,$file,$join);
+            $promotionInfo =  $model -> getInfo($config);
             if(empty($promotionInfo)){
                 $this->error('此产品已下架');
             }
+            $modelGoods = new \common\model\Goods;
+            $goodsIds = explode(',',$promotionInfo['goods_ids']);
+            $config = [
+                'where' => [
+                    ['id','in',$goodsIds],
+                    ['sale_type','=',1],
+                ],'field' => [
+                    'g.id as goods_id,g.special',
+                ],
+            ];
+            $goodsList = $modelGoods -> getList($config);
+            $promotionInfo['goods'] = json_encode($goodsList);
             $this -> assign('promotionInfo',$promotionInfo);
         }
         return $this->fetch();
@@ -44,18 +54,34 @@ class Promotion extends ShopBase
      * 查出产商相关产品 分页查询
      */
     public function getList(){
-        $model = new \app\store\model\Promotion;
-        $where = [
-            ['p.shop_id','=',$this->shop['id']],
+        $model = new \common\model\Promotion;
+        $config=[
+            'where'=>[
+                ['p.store_id','=',$this->store['id']],
+            ],
+            'field'=>[
+                'p.id','p.name','p.goods_ids','p.start_time','p.end_time','p.create_time','p.sort',
+            ],
+            'order'=>[
+                'id'=>'desc','sort'=>'desc'
+            ],
         ];
-        $join = [
-            ['goods g','g.id = p.goods_id'],
-        ];
-        $field = array(
-            'p.id','p.name','p.img','p.goods_id','p.promotion_price','p.start_time','p.end_time','p.create_time','p.sort',
-            'g.name as goods_name','g.retail_price'
-        );
-        $list = $model -> pageQuery($where,$field,$join);
+        $activityStatus = (int)input('get.activityStatus');
+        if($activityStatus == 1){//未结束
+            $config['where'][] = ['p.end_time','>',time()];
+        }
+        if($activityStatus == 0){//已结束
+            $config['where'][] = ['p.end_time','<=',time()];
+        }
+
+        $keyword = input('get.keyword','');
+        if($keyword){
+            $config['where'][] = ['p.name', 'like', '%'.trim($keyword).'%'];
+        }
+
+        $list = $model -> pageQuery($config);
+        $page = $list->getCurrentPage();
+        $this->assign('page',$page);
         $this->assign('list',$list);
         if(isset($_GET['activityStatus'])){
             if($_GET['activityStatus'] == 1 ){//未结束
@@ -64,7 +90,6 @@ class Promotion extends ShopBase
             if($_GET['activityStatus'] == 0 ){//结束
                 return $this->fetch('list_over');
             }
-
         }
     }
 
@@ -74,8 +99,7 @@ class Promotion extends ShopBase
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $modelRole = new \app\store\model\Promotion();
-        return $modelRole->del($this->shop['id'],true);
+        $model = new \common\model\Promotion();
+        return $model->del($this->store['id'],true);
     }
-
 }

@@ -3,7 +3,7 @@ namespace common\lib;
 ini_set("display_errors", "on");
 //echo dirname(__DIR__) . '/aliyun-sms-php-sdk/api_sdk/vendor/autoload.php';
 //exit;
-require_once dirname(__DIR__) . '/aliyun-sms-php-sdk/api_sdk/vendor/autoload.php';
+require_once dirname(__DIR__) . '/component/sms/api_sdk/vendor/autoload.php';
 
 use Aliyun\Core\Config;
 use Aliyun\Core\Profile\DefaultProfile;

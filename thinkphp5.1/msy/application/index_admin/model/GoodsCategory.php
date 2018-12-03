@@ -7,7 +7,7 @@ class GoodsCategory extends \think\Model {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_factory';
+	protected $connection = 'db_config_common';
 
 	//编辑
 	public function edit(){
@@ -97,7 +97,7 @@ class GoodsCategory extends \think\Model {
 			->order($order)
 			->limit($limit)
 			->select();
-		return count($list)?$list->toArray():[];
+		return count($list)!=0?$list->toArray():[];
 	}
 
 	/**查找一条数据
