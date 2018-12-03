@@ -8,6 +8,10 @@ class Deploy extends UserBase
      */
     public function register()
     {
+
+        ini_set("display_errors","On");
+        error_reporting(E_ALL);
+
         $model = new \common\model\Factory();
         if(request()->isAjax()){
             return $model -> edit($this -> user['id'],config('custom.type'));
