@@ -19,18 +19,19 @@ class Goods extends Base {
     public function edit(){
         $modelGoods = new \app\weiya_customization_admin\model\Goods();
         if(request()->isPost()){
+            print_r(input());exit;
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['main_img']));
             }
-            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
-                $detailArr = explode(',',input('post.detail_img','','string'));
+            if( isset($_POST['details_img']) && $_POST['details_img'] ){
+                $detailArr = explode(',',input('post.details_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
                         $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
                     }
                 }
-                $_POST['detail_img'] = implode(',',$tempArr);
+                $_POST['details_img'] = implode(',',$tempArr);
             }
             if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
                 $config = [
@@ -71,11 +72,11 @@ class Goods extends Base {
             $allCategoryList = $modelGoodsCategory->getList();
             $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
-            if(input('?goodsId') && (int)input('goodsId')){
+            if(isset($_GET['goodsId']) && intval($_GET['goodsId'])){
                 $config = [
                     'where' => [
                         'g.status' => 0,
-                        'g.id'=>input('goodsId',0,'int'),
+                        'g.id'=>input('get.goodsId',0,'int'),
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
@@ -151,7 +152,7 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.minimum_order_quantity','g.minimum_sample_quantity',
-                'g.trait','g.main_img','g.parameters','g.detail_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
+                'g.trait','g.main_img','g.parameters','g.details_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
                 'g.category_id_2','g.category_id_3','gc1.name as category_name_1'
             ],
             'join' => [
@@ -162,14 +163,11 @@ class Goods extends Base {
                 'g.sort'=>'desc',
             ],
         ];
-        $goodsList = $modelGoods ->pageQuery($config)->toArray();
-        $this->assign('goodsList',$goodsList['data']);
-        if($_GET['type'] == 'project'){
-            return view('goods/goods_project_list_tpl');
-        }
-        if($_GET['type'] == 'manage'){
-            return view('goods/list_tpl');
-        }
+        $goodsList = $modelGoods ->pageQuery($config);
+        print_r($goodsList);exit;
+        $this->assign('goodsList',$goodsList);
+        $this->assign('pageList',$goodsList['pageList']);
+        return view('list_tpl');
     }
 
 

@@ -18,8 +18,6 @@ class Base extends \think\Controller{
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
-        ini_set("display_errors","On");
-        error_reporting(E_ALL);
         $postData = $_POST;
         if(is_string($postData['fileBase64'])){
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
