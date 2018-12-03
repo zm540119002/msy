@@ -2,8 +2,7 @@
 <li class="" data-id="{$info.id}">
 	<div>
 		<p>
-			<span name="store_name">{$info.factory_name|default=''}</span>
-			<span name="store_type">{$info.store_type|getStoreType}</span>
+			<span name="store_name">{$info.store_name}.{$info.store_type|getStoreType}</span>
 		</p>
 		<span name="type_name" >{$info.run_type|getRunType}</span>
 		<div>
