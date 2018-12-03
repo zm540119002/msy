@@ -2,7 +2,6 @@
 {block name="css-customize"}
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
-    <link type="text/css" rel="stylesheet" href="public_admin_common_css/promotion.css" />
 {/block}
 {block name="content"}
     <div class="page">
@@ -46,24 +45,7 @@
                             <input type="hidden" name="projectId" value="{$projectInfo.id}">
                         </td>
                     </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>项目零售价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="price" value="{$projectInfo.price}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>项目优惠价：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="discount_price" value="{$projectInfo.discount_price}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>闺蜜行价格：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="group_price" value="{$projectInfo.group_price}">
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -74,12 +56,6 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>耗时时间(分钟)：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 100px; " class="inputboxadmin" name="consume_time" value="{$projectInfo.consume_time}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>库存：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="inventory" value="{$projectInfo.inventory}">
                         </td>
                     </tr>
                     <tr>
@@ -136,24 +112,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目说明图：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <script id="explain" type="text/plain">
-                                {$projectInfo.explain_img|formatImg}
-                            </script>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目流程图:</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <!-- 加载编辑器的容器 -->
-                            <script id="flow" type="text/plain">
-                                {$projectInfo.flow_img|formatImg}
-                            </script>
-                        </td>
-                    </tr>
-                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>项目详情图:</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
@@ -187,8 +145,6 @@
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
     var ueIntro = UE.getEditor('intro');
-    var ueExplain = UE.getEditor('explain');
-    var ueFlow = UE.getEditor('flow');
     var ueDetail = UE.getEditor('detail');
 </script>
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
@@ -285,9 +241,9 @@
                 reader.onload = function(e){
                     $(".main_img").attr("src",e.target.result);
                     //提交
-                    $.post(controller + '/uploadFileToTemp',{ img: e.target.result},function(msg){
+                    $.post(controller + 'uploadFileToTemp',{ fileBase64: e.target.result},function(msg){
                         if(msg.status == 1){
-                            $(".main_img").attr("src",UPLOAD + msg.info)
+                            $(".main_img").attr("src",'/uploads/' + msg.info)
                         }else{
                             parent.layer.open({
                                 content:msg.info,
@@ -303,29 +259,17 @@
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
-                postData.goods = [];
-                var goodsEveryObj={};
-                $(".checked_good").each(function(){
-                    goodsEveryObj={
-                        goodsId:$(this).data('goodsid'),
-                        goodsNum:$(this).find('.goodsNum').val()
-                    };
-                    postData.goods.push(goodsEveryObj);
-                });
+//                postData.goods = [];
+//                var goodsEveryObj={};
+//                $(".checked_good").each(function(){
+//                    goodsEveryObj={
+//                        goodsId:$(this).data('goodsid'),
+//                        goodsNum:$(this).find('.goodsNum').val()
+//                    };
+//                    postData.goods.push(goodsEveryObj);
+//                });
                 //主图
                 postData.main_img = $('img.main_img').attr('src');
-                //说明图
-                postData.explain_img = '';
-                $.each($('#explain').find('iframe').contents().find('.view img'),function(){
-                    postData.explain_img += $(this).attr('src') + ',';
-
-                });
-                //流程图
-                postData.flow_img = '';
-                $.each($('#flow').find('iframe').contents().find('.view img'),function(){
-                    postData.flow_img += $(this).attr('src') + ',';
-
-                });
                 //详情图
                 postData.detail_img = '';
                 $.each($('#detail').find('iframe').contents().find('.view img'),function(){
@@ -334,9 +278,10 @@
                 });
                 //简介
                 postData.intro = ueIntro.getContent();
-                $.post(ACTION,postData,function(msg){
+                var url = module +'Project/edit';
+                $.post(url,postData,function(msg){
 
-                    dialog.msg(msg);
+//                    dialog.msg(msg);
                 });
             });
 

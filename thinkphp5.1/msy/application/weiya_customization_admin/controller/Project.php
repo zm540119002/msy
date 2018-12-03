@@ -17,29 +17,30 @@ class Project extends Base {
      * 审核
      */
     public function edit(){
-        $modelGoods = new \app\weiya_customization_admin\model\Project();
+        $model = new \app\weiya_customization_admin\model\Project();
+        $modelProjectGoods = new \app\weiya_customization_admin\model\ProjectGoods();
         if(request()->isPost()){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['main_img']));
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['main_img']));
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',input('post.detail_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
                     }
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
             $data = $_POST;
 
-            if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
+            if(isset($_POST['projectId']) && intval($_POST['projectId'])){//修改
                 $config = [
-                    'g.id' => input('post.goodsId',0,'int'),
+                    'g.id' => input('post.projectId',0,'int'),
                     'g.status' => 0,
                 ];
-                $goodsInfo = $modelGoods->getInfo($config);
+                $goodsInfo = $model->getInfo($config);
                 //删除商品主图
                 if($goodsInfo['main_img']){
                     delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
@@ -51,21 +52,38 @@ class Project extends Base {
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $where = [
-                    'id'=>input('post.goodsId',0,'int')
+                    'id'=>input('post.projectId',0,'int')
                 ];
                 $data['update_time'] = time();
-                $result = $modelGoods -> allowField(true) -> save($data,$where);
+                $result = $model -> allowField(true) -> save($data,$where);
                 if(false === $result){
                     return errorMsg('失败');
                 }
             }else{//新增
+                $model->startTrans();
                 $data = $_POST;
                 $data['create_time'] = time();
-                $result = $modelGoods -> allowField(true) -> save($data);
+                $result = $model -> allowField(true) -> save($data);
                 if(!$result){
+                    $model ->rollback();
+                    return errorMsg('失败');
+                }
+                $projectId = $model->getAttr('id');
+                $goodsIds = [
+                  '5','6','7','8'
+                ];
+
+                foreach ($goodsIds as $k=>$v){
+                    $projectGoods[$k]['project_id'] =  $projectId;
+                    $projectGoods[$k]['goods_id'] =  $v;
+                }
+                $result = $modelProjectGoods->allowField(true) -> saveAll($projectGoods);
+                if (!count($result)) {
+                    $model->rollback();
                     return errorMsg('失败');
                 }
             }
+            $model -> commit();
             return successMsg('成功');
         }else{
            // 所有商品分类
@@ -73,18 +91,16 @@ class Project extends Base {
             $allCategoryList = $modelGoodsCategory->getList();
             $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
-            if(input('?goodsId') && (int)input('goodsId')){
+            if(input('?projectId') && (int)input('projectId')){
                 $config = [
                     'where' => [
                         'g.status' => 0,
-                        'g.id'=>input('goodsId',0,'int'),
+                        'g.id'=>input('projectId',0,'int'),
                     ],
                 ];
-                $goodsInfo = $modelGoods->getInfo($config);
-                $this->assign('goodsInfo',$goodsInfo);
+                $projectInfo = $model->getInfo($config);
+                $this->assign('projectInfo',$projectInfo);
             }
-            //单位
-            $this->assign('unitList',config('custom.unit'));
             return $this->fetch();
        }
     }
