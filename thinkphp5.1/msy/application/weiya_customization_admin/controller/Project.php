@@ -3,7 +3,7 @@ namespace app\weiya_customization_admin\controller;
 
 /**供应商验证控制器基类
  */
-class Goods extends Base {
+class Project extends Base {
 
     /*
      *审核首页
@@ -17,7 +17,7 @@ class Goods extends Base {
      * 审核
      */
     public function edit(){
-        $modelGoods = new \app\weiya_customization_admin\model\Goods();
+        $modelGoods = new \app\weiya_customization_admin\model\Project();
         if(request()->isPost()){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['main_img']));
@@ -32,6 +32,8 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
+            $data = $_POST;
+
             if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
                 $config = [
                     'g.id' => input('post.goodsId',0,'int'),
@@ -48,10 +50,10 @@ class Goods extends Base {
                     $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
-                $data['create_time'] = time();
                 $where = [
                     'id'=>input('post.goodsId',0,'int')
                 ];
+                $data['update_time'] = time();
                 $result = $modelGoods -> allowField(true) -> save($data,$where);
                 if(false === $result){
                     return errorMsg('失败');
@@ -94,7 +96,6 @@ class Goods extends Base {
         $modelGoods = new \app\weiya_customization_admin\model\Goods();
         $where = array(
             'g.status' => 0,
-//            'g.on_off_line' => 1,
         );
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
             $where['g.category_id_1'] = input('get.category_id_1',0,'int');
@@ -111,47 +112,11 @@ class Goods extends Base {
                 'g.name' => array('like', '%' . trim($keyword) . '%'),
             );
         }
-        /**
-         *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-        `name` varchar(60) NOT NULL DEFAULT '' COMMENT '商品名称',
-        `bulk_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '批量价格',
-        `sample_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '样品价格',
-        `minimum_order_quantity` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单起订量',
-        `minimum_sample_quantity` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '样品起订量',
-        `specification` varchar(1000) NOT NULL DEFAULT '' COMMENT '商品规格',
-        `specification_unit` tinyint(3) NOT NULL DEFAULT '0' COMMENT '商品规格的单位',
-        `trait` varchar(60) NOT NULL DEFAULT '' COMMENT '商品特点',
-        `category_id_1` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类1',
-        `category_id_2` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类2',
-        `category_id_3` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类3',
-        `thumb_img` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图',
-        `main_img` varchar(2000) NOT NULL DEFAULT '' COMMENT '首焦图',
-        `goods_video` varchar(255) NOT NULL DEFAULT '' COMMENT '视频',
-        `parameters` varchar(1000) NOT NULL DEFAULT '' COMMENT '参数',
-        `details_img` varchar(255) NOT NULL DEFAULT '' COMMENT '详情图',
-        `tag` varchar(100) NOT NULL DEFAULT '' COMMENT '标签',
-        `shelf_status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '商品上下架标识位 1：下架 2：待审核 3 上架',
-        `rq_code_url` varchar(30) NOT NULL DEFAULT '' COMMENT '商品二维码图片',
-        `inventory` int(10) NOT NULL DEFAULT '0' COMMENT '库存',
-        `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-        `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
-        `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
-        `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态：0 ：启用 1：禁用 2：删除',
-         */
-        $field = [
-
-        ];
-        $join =[
-            ' left join goods_category gc1 on gc1.id = gb.category_id_1 ',
-            ' left join goods_category gc2 on gc2.id = gb.category_id_2 ',
-            ' left join goods_category gc3 on gc3.id = gb.category_id_3 ',
-        ];
-        $order = 'gb.sort, gb.id desc';
         $config = [
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.minimum_order_quantity','g.minimum_sample_quantity',
-                'g.trait','g.main_img','g.parameters','g.detail_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
+                'g.trait','g.main_img','g.parameters','g.details_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
                 'g.category_id_2','g.category_id_3','gc1.name as category_name_1'
             ],
             'join' => [
@@ -162,14 +127,10 @@ class Goods extends Base {
                 'g.sort'=>'desc',
             ],
         ];
-        $goodsList = $modelGoods ->pageQuery($config)->toArray();
-        $this->assign('goodsList',$goodsList['data']);
-        if($_GET['type'] == 'project'){
-            return view('goods/goods_project_list_tpl');
-        }
-        if($_GET['type'] == 'manage'){
-            return view('goods/list_tpl');
-        }
+        $goodsList = $modelGoods ->pageQuery($config);
+        $this->assign('goodsList',$goodsList);
+        $this->assign('pageList',$goodsList['pageList']);
+        return view('list_tpl');
     }
 
 
