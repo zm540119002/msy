@@ -35,6 +35,7 @@ $(function(){
             var type = _this.data('type');
             if(type == 'notupload'){
                 $(obj).find('.img').val(imgUrl);
+                console.log(1);
                 return false;
             }
             //提交
