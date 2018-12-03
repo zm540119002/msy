@@ -414,6 +414,7 @@ function copyDataByName(fromObj,toObj) {
     $.each(toObj.find(':input'),function(){
         var name = $(this).attr('name');
         var val= fromObj.find('[name='+name+']').val();
+        console.log(val);
         $(this).val(val);
     });
 }
