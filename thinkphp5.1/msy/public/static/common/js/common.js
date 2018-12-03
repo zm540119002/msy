@@ -414,6 +414,7 @@ function copyDataByName(fromObj,toObj) {
     $.each(toObj.find(':input'),function(){
         var name = $(this).attr('name');
         var val= fromObj.find('[name='+name+']').val();
+        console.log(val);
         $(this).val(val);
     });
 }
@@ -421,7 +422,8 @@ function copyDataByClassName(fromObj,toObj){
     $.each(toObj.find('.span_text'),function(){
         var name = $(this).attr('name');
         var val= fromObj.find('span[name='+name+']').text();
-        val && $(this).text(val);
+        console.log(val);
+        $(this).text(val);
     });
 }
 
