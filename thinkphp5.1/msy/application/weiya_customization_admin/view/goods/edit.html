@@ -3,7 +3,6 @@
 {block name="css-customize"}
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
-    <link type="text/css" rel="stylesheet" href="public_admin_common_css/base.css" />
 {/block}
 
 {block name="content"}
@@ -102,7 +101,7 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
                             <script id="intro" type="text/plain">
-                                {$goodsInfo.intro|htmlspecialchars_decode}
+                                {$goodsInfo.trait|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -110,7 +109,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品参数：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="param" type="text/plain">
-                                {$goodsInfo.param|htmlspecialchars_decode}
+                                {$goodsInfo.parameters|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -125,7 +124,6 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>使用说明：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="usage" type="text/plain">
-                                {$goodsInfo.usage|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -133,7 +131,6 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>注意事项：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="notices" type="text/plain">
-                                {$goodsInfo.notices|htmlspecialchars_decode}
                             </script>
                         </td>
                     </tr>
@@ -247,9 +244,9 @@
                 reader.onload = function(e){
                     $(".main_img").attr("src",e.target.result);
                     //提交
-                    $.post(controller + '/uploadFileToTemp',{ img: e.target.result},function(msg){
+                    $.post(controller + 'uploadFileToTemp',{ fileBase64: e.target.result},function(msg){
                         if(msg.status == 1){
-                            $(".main_img").attr("src",UPLOAD + msg.info)
+                            $(".main_img").attr("src",uploads + msg.info)
                         }else{
                             parent.layer.open({
                                 content:msg.info,
@@ -272,7 +269,6 @@
                 $.each($('iframe').contents().find('.view img'),function () {
                     postData.detail_img += $(this).attr('src') + ',';
                 });
-
                 //简介
                 postData.intro = ueIntro.getContent();
                 postData.parameters = ueParam.getContent();
@@ -280,7 +276,7 @@
                 postData.notices = ueNotices.getContent();
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
-                        location.href = controller + 'edit';
+                        //location.href = controller + 'edit';
                     });
                 });
             });
