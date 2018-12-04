@@ -52,7 +52,6 @@
 		{$list|raw}
 	</section>
 </article>
-
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy_store.html" /}
@@ -60,7 +59,6 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-
 <script type="text/javascript">
 $(function () {
 	$('.record').click(function () {
@@ -97,11 +95,8 @@ $(function () {
 				});
 			}
 		});
-
 	});
-
 });
-
 function doPrint() {
 	bdhtml=window.document.body.innerHTML;
 	sprnstr="<!--startprint-->"; //开始打印标识字符串有17个字符
@@ -112,6 +107,5 @@ function doPrint() {
 	window.print(); //调用浏览器的打印功能打印指定区域
 	window.document.body.innerHTML=bdhtml;//重新给页面内容赋值；
 }
-
 </script>
 {/block}
