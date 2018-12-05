@@ -6,7 +6,7 @@ class CustomerService extends \common\controller\UserBase{
      */
     public function index(){
         if(!request()->isAjax()){
-            return $this->success(123);
+            return successMsg(123);
         }else{
             return $this->fetch();
         }
@@ -16,7 +16,7 @@ class CustomerService extends \common\controller\UserBase{
      */
     public function beforeSale(){
         if(!request()->isAjax()){
-            return $this->success(123);
+            return successMsg(123);
         }else{
             return $this->fetch();
         }
@@ -26,7 +26,7 @@ class CustomerService extends \common\controller\UserBase{
      */
     public function afterSale(){
         if(!request()->isAjax()){
-            return $this->success(123);
+            return successMsg(123);
         }else{
             return $this->fetch();
         }
