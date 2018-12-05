@@ -39,7 +39,7 @@ class Order extends \common\controller\StoreBase
      */
     public function beforeSale()
     {
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**
