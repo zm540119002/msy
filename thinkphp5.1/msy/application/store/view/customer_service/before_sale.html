@@ -5,37 +5,47 @@
 </style>
 {/block}
 {block name="content"}
+<!--对话框列表模板-->
+<section id="chatListTpl" style="display:none;">
+    <li class="me">
+        <div class="avatar">
+            <img src="public/static/common/img/default/no_pic_40.jpg">
+        </div>
+        <div class="content">
+            <p class="author">(小猫咪)</p>
+            <div class="msg"></div>
+        </div>
+    </li>
+</section>
 <article class="f24">
-    <section class="top_nav_fixed">
-        <div class="top_bar columns_flex">
-            <div class="each_column">
-                <a class="personal_center">我的</a>
-            </div>
-            <div class="each_column top_search_module">
-                <input type="button" class="search_btn"/>
-                <input type="text" class="search_text" placeholder="美尚云搜索"/>
-            </div>
-            <div class="each_column">
-                <a class="home">首页</a>
-            </div>
+    <div class="mod_selection chat_selection">
+        <div class="nav">
+            <!--<div class="mod_selection_more">
+                <div class="tab-arrow"></div>
+            </div>-->
+            <ul class="mod_selection_nav">
+                <li>新对话</li>
+                <li class="">新对话</li>
+                <li class="active">新对话</li>
+            </ul>
         </div>
-    </section>
-    <section class="specific_type bottomLine">
-        <div class="columns_flex f20">
-            <a href="{:url('CustomerService/beforeSale')}" class="current">售前</a>
-            <a href="{:url('Order/index')}">打单</a>
-            <a href="{:url('Order/out')}">出仓</a>
-            <a href="{:url('Order/delivery')}">发货/完成</a>
-            <a href="{:url('Order/bill')}">填单</a>
-            <a href="{:url('CustomerService/afterSale')}">售后</a>
-        </div>
-    </section>
+    </div>
     <section class="f24 account-content-wrapper chat_content_wrapper">
-        
+        <div class="ws_chatMsg-panel flex1">
+            <div class="chatMsg-ct">
+                <ul class="clearfix chat_item"> </ul>
+                <ul class="clearfix chat_item hide"></ul>
+                <ul class="clearfix chat_item hide"></ul>
+            </div>
+        </div>
     </section>
 </article>
-
-
+<section class="bottom_nav_fixed">
+    <div class="bottom_flex">
+        <input class="send_out_text" type="text" name="" value="">
+        <input class="send_btn" type="button" value="发送">
+    </div>
+</section>
 {/block}
 {block name="common"}
 {include file="template/footer_menu_msy_store.html" /}
@@ -46,7 +56,25 @@
 
 <script type="text/javascript">
     $(function () {
-        
+        //对话窗口
+        $(".mod_selection_nav li").click(function(){
+              var index=$(this).index();
+              var moveX = $(this).offset().left+$(this).parent().scrollLeft();
+              var pageX = document.documentElement.clientWidth;
+              var blockWidth = $(this).width();
+              var left = moveX-(pageX/2)+(blockWidth/2);
+              $(".mod_selection_nav").animate({scrollLeft:left},400);
+              $(this).addClass("active").siblings().removeClass("active");
+              $('.chatMsg-ct .chat_item').hide().eq(index).show();
+        });
+        //聊天对话
+        var chatListTpl=$('#chatListTpl').html();
+        $('.send_btn').on('click',function(){
+            var index=$(".mod_selection_nav li.active").index();
+            var text=$(this).prev().val();
+            $('.chat_item').eq(index).append(chatListTpl);
+            $('.chat_item').eq(index).find('li:last').find('.msg').text(text);
+        })
     })
 
 </script>
