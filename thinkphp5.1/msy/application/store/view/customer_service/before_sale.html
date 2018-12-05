@@ -125,7 +125,6 @@
         //发送聊天内容
         var chatListTpl=$('#chatListTpl').html();
         $('body').on('click','.send_btn',function(){
-            // var key=$(".mod_selection_nav li.active").index();
             var text=$(this).prev().val();
             if(!text){
                 dialog.error('不能发送空内容！');
@@ -135,6 +134,5 @@
             $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
         });
     });
-
 </script>
 {/block}
