@@ -8,7 +8,7 @@ namespace app\store\controller;
 
 use app\store\model\Order as OrderModel;
 
-class Order extends \common\controller\StoreBase
+class Order extends \common\controller\UserBase
 {
     private  $order, $validate;
 
