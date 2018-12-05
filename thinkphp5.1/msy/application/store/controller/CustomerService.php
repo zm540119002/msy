@@ -11,12 +11,12 @@ class CustomerService extends \common\controller\UserBase{
     /**售前
      */
     public function beforeSale(){
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**售后
      */
     public function afterSale(){
-        return $this->fetch('index');
+        return $this->fetch();
     }
 }
