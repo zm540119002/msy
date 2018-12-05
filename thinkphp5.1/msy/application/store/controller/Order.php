@@ -8,7 +8,7 @@ namespace app\store\controller;
 
 use app\store\model\Order as OrderModel;
 
-class Order extends \common\controller\UserBase
+class Order extends \common\controller\StoreBase
 {
     private  $order, $validate;
 
@@ -39,7 +39,7 @@ class Order extends \common\controller\UserBase
      */
     public function beforeSale()
     {
-        return $this->fetch('index');
+        return $this->fetch();
     }
 
     /**
