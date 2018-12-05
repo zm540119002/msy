@@ -60,6 +60,7 @@
             }
             $('.chatLayer .chat_item').append(chatListTpl);
             $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
+            $(this).prev().val('');
         });
     });
 </script>
