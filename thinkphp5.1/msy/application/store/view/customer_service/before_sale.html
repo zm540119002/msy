@@ -66,6 +66,10 @@
         $('.send_btn').on('click',function(){
             var key=$(".mod_selection_nav li.active").index();
             var text=$(this).prev().val();
+            if(!text){
+                dialog.error('不能发空内容！');
+                return false;
+            }
             $('.chat_item').eq(key).append(chatListTpl);
             $('.chat_item').eq(key).find('li:last').find('.msg').text(text);
         });
