@@ -5,18 +5,27 @@ class CustomerService extends \common\controller\UserBase{
     /**首页
      */
     public function index(){
-        return $this->fetch();
+        if(!request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
     }
 
     /**售前
      */
     public function beforeSale(){
-        return $this->fetch();
+        if(!request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
     }
 
     /**售后
      */
     public function afterSale(){
-        return $this->fetch();
+        if(!request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
     }
 }
