@@ -1,21 +1,17 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
-<style type="text/css">
-    dl{background: #ccfdff;margin-bottom: 5px;padding:10px;border-radius:10px;}
-</style>
 {/block}
 {block name="content"}
 <!--对话框列表模板-->
 <section id="chatListTpl" style="display:none;">
     <li class="me">
         <div class="avatar">
-            <img src="public/static/common/img/default/no_pic_40.jpg">
+            <img src="public_img/default/no_pic_40.jpg">
         </div>
         <div class="content">
             <p class="author">(小猫咪)</p>
             <div class="msg"></div>
         </div>
-<<<<<<< HEAD
     </li>
 </section>
 <article class="f24">
@@ -38,19 +34,6 @@
                 <ul class="clearfix chat_item hide"></ul>
                 <ul class="clearfix chat_item hide"></ul>
             </div>
-=======
-    </section>
-    <section class="f24 account-content-wrapper ">
-        <div class="account-top">
-            <dl>
-                <dt class="role-label">售前</dt>
-                <dd>
-                    <p>```````</p>
-
-                </dd>
-            </dl>
->>>>>>> fa880b80ae074ae6f4fbb89587ffb2d93c4d5aa4
-        </div>
     </section>
 </article>
 <section class="bottom_nav_fixed">
@@ -61,7 +44,7 @@
 </section>
 {/block}
 {block name="common"}
-{include file="template/footer_menu_msy_store.html" /}
+<!--{include file="template/footer_menu_msy_store.html" /}-->
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
@@ -69,17 +52,16 @@
 
 <script type="text/javascript">
     $(function () {
-<<<<<<< HEAD
         //对话窗口
         $(".mod_selection_nav li").click(function(){
-              var index=$(this).index();
-              var moveX = $(this).offset().left+$(this).parent().scrollLeft();
-              var pageX = document.documentElement.clientWidth;
-              var blockWidth = $(this).width();
-              var left = moveX-(pageX/2)+(blockWidth/2);
-              $(".mod_selection_nav").animate({scrollLeft:left},400);
-              $(this).addClass("active").siblings().removeClass("active");
-              $('.chatMsg-ct .chat_item').hide().eq(index).show();
+            var index=$(this).index();
+            var moveX = $(this).offset().left+$(this).parent().scrollLeft();
+            var pageX = document.documentElement.clientWidth;
+            var blockWidth = $(this).width();
+            var left = moveX-(pageX/2)+(blockWidth/2);
+            $(".mod_selection_nav").animate({scrollLeft:left},400);
+            $(this).addClass("active").siblings().removeClass("active");
+            $('.chatMsg-ct .chat_item').hide().eq(index).show();
         });
         //聊天对话
         var chatListTpl=$('#chatListTpl').html();
@@ -88,11 +70,7 @@
             var text=$(this).prev().val();
             $('.chat_item').eq(index).append(chatListTpl);
             $('.chat_item').eq(index).find('li:last').find('.msg').text(text);
-=======
-        $('.record').click(function () {
-            //alert(1);
->>>>>>> fa880b80ae074ae6f4fbb89587ffb2d93c4d5aa4
-        })
+        });
     })
 
 </script>
