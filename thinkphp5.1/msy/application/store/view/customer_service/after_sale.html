@@ -1,0 +1,79 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<!--对话框列表模板-->
+<section id="chatListTpl" style="display:none;">
+    <li class="me">
+        <div class="avatar">
+            <img src="public_img/default/no_pic_40.jpg">
+        </div>
+        <div class="content">
+            <p class="author">(小猫咪)</p>
+            <div class="msg"></div>
+        </div>
+    </li>
+</section>
+<article class="f24">
+    <div class="mod_selection chat_selection">
+        <div class="nav">
+            <ul class="mod_selection_nav">
+                <li class="active">新对话</li>
+                <li class="">新对话</li>
+                <li >新对话</li>
+            </ul>
+        </div>
+    </div>
+    <section class="f24 account-content-wrapper chat_content_wrapper">
+        <div class="ws_chatMsg-panel flex1">
+            <div class="chatMsg-ct">
+                <ul class="clearfix chat_item"> </ul>
+                <ul class="clearfix chat_item hide"></ul>
+                <ul class="clearfix chat_item hide"></ul>
+            </div>
+        </div>
+    </section>
+</article>
+<section class="bottom_nav_fixed">
+    <div class="bottom_flex">
+        <input class="send_out_text" type="text" name="" value="">
+        <input class="send_btn" type="button" value="发送">
+    </div>
+</section>
+{/block}
+{block name="common"}
+<!--{include file="template/footer_menu_msy_store.html" /}-->
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+    $(function () {
+        //选择对话窗口
+        $(".mod_selection_nav li").click(function(){
+            var index=$(this).index();
+            var moveX = $(this).offset().left+$(this).parent().scrollLeft();
+            var pageX = document.documentElement.clientWidth;
+            var blockWidth = $(this).width();
+            var left = moveX-(pageX/2)+(blockWidth/2);
+            $(".mod_selection_nav").animate({scrollLeft:left},400);
+            $(this).addClass("active").siblings().removeClass("active");
+            $('.chatMsg-ct .chat_item').hide().eq(index).show();
+        });
+        //聊天对话
+        var chatListTpl=$('#chatListTpl').html();
+        $('.send_btn').on('click',function(){
+            var key=$(".mod_selection_nav li.active").index();
+            var text=$(this).prev().val();
+            if(!text){
+                dialog.error('不能发空内容！');
+                return false;
+            }
+            $('.chat_item').eq(key).append(chatListTpl);
+            $('.chat_item').eq(key).find('li:last').find('.msg').text(text);
+        });
+    })
+
+</script>
+{/block}
