@@ -36,7 +36,7 @@
 			<a href="javascript:void(0);" class="deployed-deployment"><span class="union_purchase"></span>入驻部署</a>
 			<a href="javascript:void(0);" class="store_run manager_manage"><span class="exclusive"></span>店长管理</a>
 			<a href="javascript:void(0)" class="store-operation"><span class="classify"></span>店铺运营</a>
-			<a href="{:url('Order/index')}" class="order-management-change"><span class="purchasers"></span>订单客服</a>
+			<a href="{:url('CustomerService/beforeSale')}" class="order-management-change"><span class="purchasers"></span>订单客服</a>
 			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>财务结算</a>
 		</div>
 	</section>
@@ -60,8 +60,6 @@
 {include file="public/dialog_factory_store" /}
 <script type="text/javascript">
 	$(function(){
-		var store='{:json_encode($store)}';
-
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
