@@ -1356,7 +1356,8 @@ background-position: 0 -27px;
 .layui-m-layerchild.uploadThumbnailLayer,
 .layui-m-layerchild.categoryContentLayer,
 .layui-m-layerchild.addsalesgoodsLayer,
-.layui-m-layerchild.storeListLayer{
+.layui-m-layerchild.storeListLayer,
+.layui-m-layerchild.chatLayer{
     position:fixed; 
     left:0; 
     top:0; 
@@ -2848,6 +2849,9 @@ input[type=text]::-webkit-focus-inner {
     padding:10px; 
     border-radius:10px;
 }
+.order-content-wrapper .list li{
+    background: #fff;
+}
 .print{
     background:#ff7aab; 
     color:white; 
@@ -3761,6 +3765,7 @@ select[name="nodeIds"]{
 }
 .others,
 .me,
+.chat_list,
 .time{
     display:flex;
 }
@@ -3991,4 +3996,22 @@ select[name="nodeIds"]{
     -webkit-transform: translate3d(0,-50%,0);
     transform: translate3d(0,-50%,0);
     height: auto;
+}
+.chatLayer ul{
+    padding:0 0.25rem 0.25rem;
+    margin:1rem 0 0;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.chatLayer .layui-m-layerbtn {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    width: 40px;
+}
+.chatLayer .layui-m-layerbtn span[type="1"]{
+    display:none;
+}
+.chat_hidden_list{
+    display:none;
 }

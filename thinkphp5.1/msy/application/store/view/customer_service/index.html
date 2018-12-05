@@ -2,6 +2,32 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
+<!--对话框列表模板-->
+<section id="chatListTpl" style="display:none;">
+    <li class="me">
+        <div class="avatar">
+            <img src="public_img/default/no_pic_40.jpg">
+        </div>
+        <div class="content">
+            <p class="author">(小猫咪)</p>
+            <div class="msg"></div>
+        </div>
+    </li>
+</section>
+<!--对话框弹窗-->
+<section id="chatLayerContainer">
+	<div class="ws_chatMsg-panel flex1">
+		<div class="chatMsg-ct">
+			<ul class="clearfix chat_item"></ul>
+		</div>
+	</div>
+	<div class="bottom_nav_fixed">
+		<div class="bottom_flex">
+			<input class="send_out_text" type="text" name="" value="">
+			<input class="send_btn" type="button" value="发送">
+		</div>
+	</div>
+</section>
 <article class="f24">
 	<section class="top_nav_fixed">
 		<div class="top_bar columns_flex">
@@ -28,28 +54,38 @@
 		</div>
 	</section>
 	<section class="f24 account-content-wrapper order-content-wrapper">
-		<div class="account-top">
-			{volist name="list" id="v"}
-			<dl>
-				<dt class="role-label"><strong>订单号：<span>{$v.order_sn}</span></strong></dt>
-				<dd>
-					<p>下单时间：{$v.create_time}</p>
-					<p>分类：购买商品 ??</p>
-					<p>支付状态：{$v.status}</p>
-					<p>订单状态：{$v.status_unpack}</p>
-					<p>总价：￥ {$v.pay_money} 元</p>
-					<p>收货人：{$v.consignee}</p>
-					<p>收货手机：{$v.phone}</p>
-					<p>订单来源：{$v.source}</p>
-					<p><strong>支付金额：￥ {$v.pay_money} 元</strong></p>
-					<p>支付方式：{$v.pay_method}</p>
-					<p>支付备注：{$v.remark}</p>
-					<div class="print" data="{$v.order_sn}" data_id="{$v.order_id}">打印订单</div>
-				</dd>
-			</dl>
-			{/volist}
-		</div>
-		{$list|raw}
+		<ul class="list">
+			<li class="chat_list" data-id="1">
+				<div class="avatar">
+					<img src="public_img/default/no_pic_40.jpg">
+				</div>
+				<div class="content">
+					<p class="author">(小猫咪)</p>
+					<div class="msg"></div>
+				</div>
+				<div class="chat_hidden_list"></div>
+			</li>
+			<li class="chat_list" data-id="2">
+				<div class="avatar">
+					<img src="public_img/default/no_pic_40.jpg">
+				</div>
+				<div class="content">
+					<p class="author">(小猫咪)</p>
+					<div class="msg"></div>
+				</div>
+				<div class="chat_hidden_list"></div>
+			</li>
+			<li class="chat_list" data-id="3">
+				<div class="avatar">
+					<img src="public_img/default/no_pic_40.jpg">
+				</div>
+				<div class="content">
+					<p class="author">(小猫咪)</p>
+					<div class="msg"></div>
+				</div>
+				<div class="chat_hidden_list"></div>
+			</li>
+		</ul>
 	</section>
 </article>
 {/block}
@@ -61,51 +97,44 @@
 {block name="script"}
 <script type="text/javascript">
 $(function () {
-	$('.record').click(function () {
-		//alert(1);
-	});
-	/**
-	$('.print').on('click', function(){
-		var order_id = $(this).attr('data');
+	//聊天对话框弹窗
+	var chatLayerContainer=$('#chatLayerContainer').html();
+	var chatListId;
+	$('body').on('click','.list li',function(){
+		var _this=$(this);
+		chatListId=$(this).data('id');
 		layer.open({
-			type: 1,
-			title: '订单管理'+order_id,
-			area: '80%',
-			closeBtn: 2,
-			shadeClose: true, //点击遮罩关闭
-			content: '<!--startprint--><dl><dt class="role-label"><strong>订单号：<span>20180507123456</span></strong></dt><dd><p>下单时间：2018-05-07 09:56:57</p><p>分类：购买商品</p><p>状态：新订单</p><p>总价：￥199.56元</p><p>收货人：张生</p><div class="print" data="1" onClick="doPrint()">打印商品订单</div></dd></dl><div>Ajax获取的订单内容</div><!--endprint-->'
-		});
-	});*/
-
-	$('.print').on('click', function(){
-		var order_sn = $(this).attr('data'),order_id = $(this).attr('data_id');
-		$.ajax({
-			url: "{:url('Order/getOrderDetail')}",
-			data: {order_id:order_id},
-			dataType: 'HTML',
-			type: 'POST',
-			success:function(e){
-				layer.open({
-					type: 1,
-					title: '订单管理'+order_sn,
-					area: '80%',
-					closeBtn: 2,
-					shadeClose: true, //点击遮罩关闭
-					content: '<!--startprint-->'+ e +'<!--endprint-->'
-				});
+			className:'chatLayer',
+			content:chatLayerContainer,
+			type:1,
+			anim:'up',
+			btn:['','关闭'],
+			success:function(){
+				var winH=$(document).height();
+				var chatListInfo=_this.find('.chat_hidden_list').html();
+				$('.chatLayer .chat_item').css('height',winH+'px');
+				$('.chatLayer .chat_item').html(chatListInfo);
+			},
+			no:function(){
+				var chatLayerList=$('.chatLayer .chat_item').html();
+				console.log(chatLayerList);
+				$('li[data-id='+chatListId+']').find('.chat_hidden_list').html(chatLayerList);
 			}
-		});
+		})
+	});
+	//发送聊天内容
+	var chatListTpl=$('#chatListTpl').html();
+	$('body').on('click','.send_btn',function(){
+		// var key=$(".mod_selection_nav li.active").index();
+		var text=$(this).prev().val();
+		if(!text){
+			dialog.error('不能发送空内容！');
+			return false;
+		}
+		$('.chatLayer .chat_item').append(chatListTpl);
+		$('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
 	});
 });
-function doPrint() {
-	bdhtml=window.document.body.innerHTML;
-	sprnstr="<!--startprint-->"; //开始打印标识字符串有17个字符
-	eprnstr="<!--endprint-->"; //结束打印标识字符串
-	prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); //从开始打印标识之后的内容
-	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
-	window.document.body.innerHTML=prnhtml; //把需要打印的指定内容赋给body.innerHTML
-	window.print(); //调用浏览器的打印功能打印指定区域
-	window.document.body.innerHTML=bdhtml;//重新给页面内容赋值；
-}
+
 </script>
 {/block}
