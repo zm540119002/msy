@@ -22,16 +22,24 @@
     </section>
     <section class="specific_type bottomLine">
         <div class="columns_flex f20">
-            <a href="{:url('store/CustomerService/beforeSale')}" class="current">售前</a>
-            <a href="{:url('store/Order/index')}">打单</a>
-            <a href="{:url('store/Order/out')}">出仓</a>
-            <a href="{:url('store/Order/delivery')}">发货/完成</a>
-            <a href="{:url('store/Order/bill')}">填单</a>
-            <a href="{:url('store/CustomerService/afterSale')}">售后</a>
+            <a href="{:url('CustomerService/beforeSale')}" class="current">售前</a>
+            <a href="{:url('Order/index')}">打单</a>
+            <a href="{:url('Order/out')}">出仓</a>
+            <a href="{:url('Order/delivery')}">发货/完成</a>
+            <a href="{:url('Order/bill')}">填单</a>
+            <a href="{:url('CustomerService/afterSale')}">售后</a>
         </div>
     </section>
-    <section class="f24 account-content-wrapper chat_content_wrapper">
-        
+    <section class="f24 account-content-wrapper ">
+        <div class="account-top">
+            <dl>
+                <dt class="role-label">售前</dt>
+                <dd>
+                    <p>```````</p>
+
+                </dd>
+            </dl>
+        </div>
     </section>
 </article>
 
@@ -46,7 +54,9 @@
 
 <script type="text/javascript">
     $(function () {
-        
+        $('.record').click(function () {
+            //alert(1);
+        })
     })
 
 </script>
