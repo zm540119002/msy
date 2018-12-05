@@ -1,5 +1,5 @@
 <?php
-namespace app\purchase\controller;
+namespace app\weiya_customization\controller;
 
 class Goods extends \common\controller\Base{
     /**首页
@@ -69,12 +69,11 @@ class Goods extends \common\controller\Base{
                 ],
             ];
             $info = $modelGoods->getInfo($config);
-            if(empty($info)){
-                return errorMsg('此商品已下架');
+            if($info){
+                $info['main_img'] = explode(',',(string)$info['main_img']);
+                $info['details_img'] = explode(',',(string)$info['details_img']);
+                $this->assign('info',$info);
             }
-            $info['main_img'] = explode(',',(string)$info['main_img']);
-            $info['details_img'] = explode(',',(string)$info['details_img']);
-            $this->assign('info',$info);
 
             $modelStore =  new \app\purchase\model\Store;
             $config = [
