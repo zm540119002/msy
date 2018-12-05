@@ -44,6 +44,7 @@
 		<p>欢迎来到美容机构管理中心</p>
 		<p>美尚云平台支持机构多店铺运营管理</p>
 		<a href="{:url('index/UserCenter/logout')}">测试退出</a>
+		{include file="template/customer_side.html" /}
 	</section>
 	<section class="entry_msy">
 		<a href="{:url('Deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
@@ -53,6 +54,7 @@
 {block name="common"}
 {include file="template/footer_menu_msy_store.html" /}
 {include file="template/right_side_bar.html" /}
+{include file="template/customer_layer.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -179,7 +181,7 @@
 
 		//订单客服
 		$('body').on('click','.order-management-change',function () {
-			var url = module + 'CustomerService/index';
+			var url = module + 'CustomerService/beforeSale';
 			var postData = {};
 			$.ajax({
 				url: url,
