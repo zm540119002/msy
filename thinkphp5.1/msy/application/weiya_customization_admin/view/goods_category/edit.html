@@ -8,8 +8,8 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('GoodsCategory/manage')}"><span>管理</span></a></li>
-                    <li><a href="{:url('GoodsCategory/edit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="{:url('manage')}"><span>管理</span></a></li>
+                    <li><a href="{:url('edit')}" class="current"><span>编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -271,16 +271,16 @@
                 reader.readAsDataURL(img);
                 reader.onload = function(e){
                     $(".img").attr("src",e.target.result);
-                    var postData = {img: e.target.result};
+                    var postData = {fileBase64: e.target.result};
                     postData.imgWidth = 190;
-                    var url = controller + 'uploadImgToTemp';
+                    var url = controller + 'uploadFileToTemp';
                     //提交
                     $.post(url,postData,function(msg){
                         if(msg.status == 1){
-                            $(".img").attr("src",UPLOAD + msg.info);
+                            $(".img").attr("src",'/uploads/' + msg.info);
                             $("[name=img]").val(msg.info);
                         }
-                        dialog.msgLocal(msg);
+                        dialog.success(msg.info);
                     },'json');
                 }
             });
