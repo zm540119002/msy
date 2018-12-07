@@ -58,7 +58,7 @@
         var url = controller+'/getList';
         var postData = $('#form1').serializeObject();
         postData.p = currentPage ? currentPage : 1;
-        postData.pageSize = 10;
+        postData.pageSize = 1;
         postData.type = 'manage';
 
         $.get(url, postData , function(data){
