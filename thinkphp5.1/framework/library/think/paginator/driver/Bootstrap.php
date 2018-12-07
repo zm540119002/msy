@@ -127,6 +127,17 @@ class Bootstrap extends Paginator
         }
     }
 
+//    /**
+//     * 生成一个可点击的按钮
+//     *
+//     * @param  string $url
+//     * @param  int    $page
+//     * @return string
+//     */
+//    protected function getAvailablePageWrapper($url, $page)
+//    {
+//        return '<li><a href="' . htmlentities($url) . '">' . $page . '</a></li>';
+//    }
     /**
      * 生成一个可点击的按钮
      *
@@ -134,10 +145,11 @@ class Bootstrap extends Paginator
      * @param  int    $page
      * @return string
      */
-    protected function getAvailablePageWrapper($url, $page)
+    protected function getAvailablePageWrapper($url,$page)
     {
-        return '<li><a href="' . htmlentities($url) . '">' . $page . '</a></li>';
+        return '<li><a href="javascript:void(0);" onclick="getPage('.$page.');">' . ($page) . '</a></li>';
     }
+
 
     /**
      * 生成一个禁用的按钮

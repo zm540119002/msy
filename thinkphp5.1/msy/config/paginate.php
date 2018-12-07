@@ -13,5 +13,7 @@
 // | 分页设置
 // +----------------------------------------------------------------------
 return [
-    'type'     => '\common\lib\Paginate',
+//    'type'     => '\common\lib\Paginate',
+    'type'     => 'bootstrap',
+    'var_page' => 'page',
 ];
