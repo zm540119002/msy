@@ -6,31 +6,30 @@ class GoodsCategory extends Base
     /**商品分类-管理
      */
     public function manage(){
-//        if(request()->isAjax()){
-//            $model = new \app\admin\model\GoodsCategory();
-//            $where = [
-//                'status' => 0,
-//            ];
-//            $level = input('level',0);
-//            if($level){
-//                $where['level'] = $level + 1;
-//            }
-//            $id = input('id',0);
-//            if($id){
-//                if($level==1){
-//                    $where['parent_id_1'] = $id;
-//                }
-//                if($level==2){
-//                    $where['parent_id_2'] = $id;
-//                }
-//            }
-//            $list = $model->where($where)->select();
-//            $this->assign('list',$list->toArray());
-//            return view('list_tpl');
-//        }else{
-//            return $this->fetch();
-//        }
-        return $this->fetch();
+        if(request()->isAjax()){
+            $model = new \app\admin\model\GoodsCategory();
+            $where = [
+                'status' => 0,
+            ];
+            $level = input('level',0);
+            if($level){
+                $where['level'] = $level + 1;
+            }
+            $id = input('id',0);
+            if($id){
+                if($level==1){
+                    $where['parent_id_1'] = $id;
+                }
+                if($level==2){
+                    $where['parent_id_2'] = $id;
+                }
+            }
+            $list = $model->where($where)->select();
+            $this->assign('list',$list->toArray());
+            return view('list_tpl');
+        }else{
+            return $this->fetch();
+        }
     }
 
     /**商品分类-编辑
