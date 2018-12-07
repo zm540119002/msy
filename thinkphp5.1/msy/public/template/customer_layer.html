@@ -44,12 +44,12 @@
                     $('.chatLayer .chat_item').css('height',winH+'px');
                     $('.chatLayer .chat_item').html(chatListInfo);
                     ws = new WebSocket("ws://msy.meishangyun.com:8282");
-                    console.log(ws);
                     // 服务端主动推送消息时会触发这里的onmessage
                     ws.onmessage = function(e){
                         // json数据转换成js对象
-                        var data = eval("("+e.data+")");
-                        console.log(data);return;
+                        console.log(123);
+                        console.log(e);
+                        return false;
                         var type = data.type || '';
                         switch(type){
                                 // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
