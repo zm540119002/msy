@@ -32,6 +32,7 @@
                             <a href="javascript:void(0);" class="editGoods">编辑</a>
                             | <a href="javascript:void(0);" class="delGoods">删除</a>
                             | <a href="javascript:void(0);" class="addRecommendGoods">添加推荐产品</a>
+                            <input type="hidden" value="" class="selectedTplList">
                         </td>
                         <td class="w96">
                             <a href="javascript:void(0);" class="online">上架</a>
@@ -55,7 +56,7 @@
     {/notempty}
 </div>
 <div class="pager" style="text-align: center;margin:30px 0 0 0">{$pageList}</div>
-
+{include file="public/add_goods_layer" /}
 
 
 

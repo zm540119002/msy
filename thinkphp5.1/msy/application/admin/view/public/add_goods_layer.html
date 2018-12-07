@@ -1,10 +1,10 @@
-<section style="display: none" class="search-li">
+<section style="display: none" class="tpl_list">
     <li data-goods-id="">
-        <img src="" alt="" class="left">
+        <!--<img src="" alt="" class="left">
         <div class="promotional-g-right">
             <span class="goods-name">美肤1111</span>
-        </div>
-        <a href="javascript:void(0);" class="promotional-close-btn">X</a>
+        </div>-->
+        <a href="javascript:void(0);" class="close-btn">X</a>
     </li>
 </section>
 <!--推荐产品容器-->
@@ -75,6 +75,20 @@
                     <a href="javascript:void(0);" class="add_goods">添加</a>
                 </div>
             </li>
+            <li data-id="4" class="">
+                <div class="list_item">
+                    <div>
+                        <img src="http://msy.meishangyun.com/uploads/factory_goods/2018120611453168290.jpeg" alt="" class="left">
+                        <p class="goods_name">美白美白真美白美丽美丽美丽</p>
+                    </div>
+                </div>
+                <div class="list_item">
+                    产品1
+                </div>
+                <div class="list_item">
+                    <a href="javascript:void(0);" class="add_goods">添加</a>
+                </div>
+            </li>
         </ul>
     </div>
 </section>
@@ -82,18 +96,25 @@
     $(function(){
         var recommendGoods=$('#recommendGoods').html();
         $('.addRecommendGoods').on('click',function(){
-            alert(1);
-            parent.layer.open({
+            var goods = $('.selectedTplList').val();
+            var _thisId=$(this).parents('tr').data('id');
+            console.log(_thisId);
+            layer.open({
                 title:['添加推荐产品'],
-                className:'addGoodsLayer',
+                skin: 'addGoodsLayer',
                 area: ['1200px', '800px'],
                 btn:['确定','取消'],
                 content:recommendGoods,
+                success:function(){
+                    if(goods!=''){
+                        selectedGoodsList(goods);
+                    }
+                },
                 yes:function(index){
                     var selectedGoodsArr=[];
-                    $('.layui-layer-content .selected_goods_list li').each(function () {
+                    $('.addGoodsLayer .selected_goods_list li').each(function () {
                         var id=$(this).data('goods-id');
-                        selectedGoodsArr.push(id);
+                        selectedGoodsArr.push([_thisId,id]);
                     });
                     console.log(selectedGoodsArr);
                     layer.close(index);
@@ -101,33 +122,33 @@
             });
         });
         //添加商品
-        console.log($('.add_goods'));
         $('body').on('click','.add_goods',function(){
-            alert(123);
             var selectedGoodsIds = [];
-            $('.layui-layer-content .selected_goods_list li').each(function(){
+            $('.addGoodsLayer .selected_goods_list li').each(function(){
                 var selectedGoodsId = $(this).data('goods-id');
                 selectedGoodsIds.push(selectedGoodsId);
             });
             var _this=$(this);
             var goodsId=_this.parents('li').data('id');
             if($.inArray(goodsId, selectedGoodsIds) !== -1){
-                layer.tips('此商品已选择过!'); 
+                layer.tips('此商品已选择过!','.add_goods',{
+                    tips:[3,'#ff0000'],
+                    time:2000
+                }); 
                 return false;
             }
             var goodsImgSrc=_this.find('img').attr('src');
-            var selectedLen=$('.layui-layer-content .selected_goods_list li').length;
-            var listHtml = _this.parents('li').find('.list_item:eq(0)').html();
-            var html='';
-                html+="<li data-goods-id="+goodsId+">";
-                html+=listHtml;
-                html+="<a href='javascript:void(0);' class='close-btn'>X</a>";
-                html+="</li>";
+            var selectedLen=$('.addGoodsLayer .selected_goods_list li').length;
+            var listDiv = _this.parents('li').find('.list_item:eq(0)').html();
+            var liTpl=$('.tpl_list').html();
                 if(!selectedLen){
-                    $('.selected_goods_list').append(html);
+                    $('.selected_goods_list').append(liTpl);
+                    $('.selected_goods_list li').append(listDiv);
                 }else{
-                    $('.selected_goods_list li:last').after(html);
+                    $('.selected_goods_list li:last').after(liTpl);
+                    $('.selected_goods_list li:last').append(listDiv);
                 }
+                $('.selected_goods_list li').attr('data-goods-id',goodsId);
         });
         //移除商品
         $('body').on('click','.close-btn',function(){
@@ -142,4 +163,14 @@
             _this.parent().remove();
         });
 	});
+    //获取已选择的商品
+    function selectedGoodsList(selectedGoods) {
+        $("#list").html($('#loading').html());
+        var url = module+'goods/getSceneGoodsList';
+        var postData = {};
+        postData.goods = selectedGoods;
+        $.get(url, postData , function(data){
+            $('.promotional-goods-list').append(data);
+        });
+    }
 </script>
