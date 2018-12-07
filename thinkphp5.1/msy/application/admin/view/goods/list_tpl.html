@@ -1,5 +1,5 @@
 <div class="search-result">
-    {notempty name='goodsList'}
+    {notempty name='list'}
         <table class="table tb-type2">
             <thead>
                 <tr class="thead">
@@ -16,18 +16,18 @@
                 </tr>
             </thead>
             <tbody>
-                {volist name="goodsList" id="vo"}
+                {volist name="list" id="vo"}
                     <tr class="hover edit" data-id="{$vo.id}">
                         <td class="w48"><input type="checkbox" class="checkitem" name="checkbox">
-                        <td class="w48 sort"><span title="" class="editable ">{$vo.sort}</span></td>
+                        <td class="w48 sort"><span title="" class="editable "></span></td>
                         <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
                         <td class="w10">
                             11111
                         </td>
-                        <td class="w10">{$vo.price}</td>
-                        <td class="w10">{$vo.special_price}</td>
-                        <td class="w5">{$vo.group_price}</td>
-                        <td class="w5">{$vo.inventory}</td>
+                        <td class="w10"></td>
+                        <td class="w10"></td>
+                        <td class="w5"></td>
+                        <td class="w5"></td>
                         <td class="w96">
                             <a href="javascript:void(0);" class="editGoods">编辑</a>
                             | <a href="javascript:void(0);" class="delGoods">删除</a>
@@ -55,8 +55,13 @@
         <table class='loading'>没有符合条件的记录！</table>
     {/notempty}
 </div>
+<<<<<<< HEAD
 <div class="pager" style="text-align: center;margin:30px 0 0 0">{$pageList}</div>
 {include file="public/add_goods_layer" /}
+=======
+{$list|raw}
+
+>>>>>>> 8e9c3b374b8d69913cf41a4cee3c9281b14ab980
 
 
 
