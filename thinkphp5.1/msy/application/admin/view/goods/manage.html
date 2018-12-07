@@ -35,7 +35,7 @@
                     </tbody>
                 </table>
             </form>
-            <div class="content" id="goodsList"></div>
+            <div class="content" id="list"></div>
         </div>
     </div>
 
@@ -52,21 +52,20 @@
     <script type="text/javascript">
         //商品列表
         function getPage(currentPage) {
-            $("#goodsList").html($('#loading').html());
+            $("#list").html($('#loading').html());
             var url = controller+'/getList';
             var postData = $('#form1').serializeObject();
             postData.p = currentPage ? currentPage : 1;
-            postData.pageSize = 10;
+            postData.pageSize = 2;
             postData.type = 'manage';
-
             $.get(url, postData , function(data){
-                $('#goodsList').html(data);
+                $('#list').html(data);
             });
         }
 
         $(function () {
             //加载第一页
-            getPage();
+            getPage(3);
 
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
@@ -101,7 +100,7 @@
                     content:'删除你选中的商品吗？',
                     yes:function (index) {
                         $.post(url,postData,function(msg){
-                            dialog.ifmsg(msg,'',function(){
+                            dialog.msg(msg,'',function(){
                                 _thisTr.remove();
                             });
                         });
@@ -132,7 +131,7 @@
                         btn: ['确定','取消'],//按钮
                         yes:function (index) {
                             $.post(url,postData,function(msg){
-                                dialog.ifmsg(msg,'',function () {
+                                dialog.msg(msg,'',function () {
                                     $("input[name='checkbox']").each(function(){
                                         if($(this).is(':checked')){
                                             $(this).parents('.edit').remove();

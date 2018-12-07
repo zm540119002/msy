@@ -140,12 +140,13 @@ class Goods extends Base {
                 'g.sort'=>'desc',
             ],
         ];
-        $goodsList = $modelGoods ->pageQuery($config)->toArray();
-        $this->assign('goodsList',$goodsList['data']);
+        $goodsList = $modelGoods ->pageQuery($config);
+        print_r($modelGoods->getLastSql());exit;
+
+        $this->assign('list',$goodsList);
         if($_GET['type'] == 'project'){
             return view('goods/goods_project_list_tpl');
         }
-
         if($_GET['type'] == 'manage'){
             return view('goods/list_tpl');
         }
