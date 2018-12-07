@@ -1,3 +1,20 @@
 2018-12-03 15:32:27 pid:10265 Workerman[start.php] start in DEBUG mode
 2018-12-04 09:22:04 pid:32149 Workerman[start.php] start in DEBUG mode
 2018-12-05 09:26:46 pid:10517 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
+2018-12-06 16:30:24 pid:15205 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
+2018-12-06 16:50:05 pid:15205 Workerman[start.php] stopping ...
+2018-12-06 16:50:05 pid:15205 Workerman[start.php] has been stopped
+2018-12-06 16:50:07 pid:16429 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
+2018-12-06 16:51:04 pid:16429 Workerman[start.php] stopping ...
+2018-12-06 16:51:04 pid:16429 Workerman[start.php] has been stopped
+2018-12-06 16:51:12 pid:16531 Workerman[/home/www/web/GatewayWorker/start.php] reload 
+2018-12-06 16:51:12 pid:16531 Workerman[/home/www/web/GatewayWorker/start.php] not run
+2018-12-06 16:51:17 pid:16536 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
+2018-12-06 16:52:37 pid:16667 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
+2018-12-06 16:53:22 pid:16667 Workerman[start.php] stopping ...
+2018-12-06 16:53:22 pid:16667 Workerman[start.php] has been stopped
+2018-12-06 16:53:40 pid:16748 Workerman[/home/www/web/GatewayWorker/start.php] stop 
+2018-12-06 16:53:40 pid:16748 Workerman[/home/www/web/GatewayWorker/start.php] not run
+2018-12-06 16:53:53 pid:16759 Workerman[/home/www/web/GatewayWorker/start.php] restart 
+2018-12-06 16:53:53 pid:16759 Workerman[/home/www/web/GatewayWorker/start.php] is stopping ...
+2018-12-06 16:53:53 pid:16759 Workerman[/home/www/web/GatewayWorker/start.php] stop success

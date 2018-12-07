@@ -10,5 +10,4 @@ class CustomerService extends \common\controller\Base{
             return $this->fetch();
         }
     }
-
 }

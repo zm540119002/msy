@@ -280,7 +280,7 @@
                             $(".img").attr("src",'/uploads/' + msg.info);
                             $("[name=img]").val(msg.info);
                         }
-                        dialog.success(msg.info);
+                        dialog.msgLocal(msg);
                     },'json');
                 }
             });

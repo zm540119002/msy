@@ -8,10 +8,8 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('Goods/manage')}" class="current"><span>管理</span></a></li>
-                    <li><a href="{:url('Goods/edit')}"><span>编辑</span></a></li>
-                    <li><a href="{:url('Goods/onOffLine')}"><span>上下架</span></a></li>
-                    <li><a href="{:url('Goods/commonImageEdit')}"><span>公共图片编辑</span></a></li>
+                    <li><a href="{:url('manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('edit')}"><span>编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -88,7 +86,7 @@
             //编辑
             $('body').on('click','.editGoods',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  controller + '/goodsEdit/goodsId/' + _thisTr.data('id');
+                var url =  controller + '/edit/goodsId/' + _thisTr.data('id');
                 location.href = url;
             });
 
@@ -96,8 +94,8 @@
             $('body').on('click','.delGoods',function(){
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
-                postData.goodsId = _thisTr.data('id');
-                var url =  controller + '/goodsDel';
+                postData.id = _thisTr.data('id');
+                var url =  controller + '/del';
                 parent.layer.open({
                     btn: ['确定','取消'],//按钮
                     content:'删除你选中的商品吗？',
@@ -121,8 +119,8 @@
                         goodsIds.push(_thisTr.data('id'));
                     }
                 });
-                postData.goodsIds= goodsIds;
-                var url =  controller + '/goodsDel';
+                postData.ids= goodsIds;
+                var url =  controller + '/del';
                 if(goodsIds.length==0){
                     layer.tips('你还没有选择任何内容！','.btn',{
                         tips:[2,'#0d7eff'],

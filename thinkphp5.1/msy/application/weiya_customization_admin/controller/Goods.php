@@ -9,6 +9,15 @@ class Goods extends Base {
      *审核首页
      */
     public function manage(){
+        // 所有项目分类
+        $model = new \app\weiya_customization_admin\model\GoodsCategory();
+        $config = [
+            'where'=>[
+                'status'=>0
+            ]
+        ];
+        $allCategoryList = $model->getList($config);
+        $this->assign('allCategoryList',$allCategoryList);
         return $this->fetch('manage');
     }
 
@@ -68,7 +77,12 @@ class Goods extends Base {
         }else{
            // 所有商品分类
             $modelGoodsCategory = new \app\weiya_customization_admin\model\GoodsCategory();
-            $allCategoryList = $modelGoodsCategory->getList();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $modelGoodsCategory->getList($config);
             $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
             if(input('?goodsId') && (int)input('goodsId')){
@@ -111,42 +125,6 @@ class Goods extends Base {
                 'g.name' => array('like', '%' . trim($keyword) . '%'),
             );
         }
-        /**
-         *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-        `name` varchar(60) NOT NULL DEFAULT '' COMMENT '商品名称',
-        `bulk_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '批量价格',
-        `sample_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '样品价格',
-        `minimum_order_quantity` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单起订量',
-        `minimum_sample_quantity` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '样品起订量',
-        `specification` varchar(1000) NOT NULL DEFAULT '' COMMENT '商品规格',
-        `specification_unit` tinyint(3) NOT NULL DEFAULT '0' COMMENT '商品规格的单位',
-        `trait` varchar(60) NOT NULL DEFAULT '' COMMENT '商品特点',
-        `category_id_1` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类1',
-        `category_id_2` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类2',
-        `category_id_3` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类3',
-        `thumb_img` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图',
-        `main_img` varchar(2000) NOT NULL DEFAULT '' COMMENT '首焦图',
-        `goods_video` varchar(255) NOT NULL DEFAULT '' COMMENT '视频',
-        `parameters` varchar(1000) NOT NULL DEFAULT '' COMMENT '参数',
-        `details_img` varchar(255) NOT NULL DEFAULT '' COMMENT '详情图',
-        `tag` varchar(100) NOT NULL DEFAULT '' COMMENT '标签',
-        `shelf_status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '商品上下架标识位 1：下架 2：待审核 3 上架',
-        `rq_code_url` varchar(30) NOT NULL DEFAULT '' COMMENT '商品二维码图片',
-        `inventory` int(10) NOT NULL DEFAULT '0' COMMENT '库存',
-        `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-        `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
-        `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
-        `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态：0 ：启用 1：禁用 2：删除',
-         */
-        $field = [
-
-        ];
-        $join =[
-            ' left join goods_category gc1 on gc1.id = gb.category_id_1 ',
-            ' left join goods_category gc2 on gc2.id = gb.category_id_2 ',
-            ' left join goods_category gc3 on gc3.id = gb.category_id_3 ',
-        ];
-        $order = 'gb.sort, gb.id desc';
         $config = [
             'where'=>$where,
             'field'=>[
@@ -172,5 +150,27 @@ class Goods extends Base {
         }
     }
 
-
+    /**
+     * @return array|mixed
+     * 删除
+     */
+    public function del(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+        $model = new \app\weiya_customization_admin\model\Goods();
+        $id = input('post.id/d');
+        if(input('?post.id') && $id){
+            $condition = [
+                ['id','=',$id]
+            ];
+        }
+        if(input('?post.ids')){
+            $ids = input('post.ids/a');
+            $condition = [
+                ['id','in',$ids]
+            ];
+        }
+        return $model->del($condition);
+    }
 }
