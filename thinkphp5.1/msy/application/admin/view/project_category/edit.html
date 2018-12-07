@@ -224,6 +224,19 @@
 {block name="footer"}{/block}
 {block name="script"}
     <script type="text/javascript">
+        //商品列表
+        function getPage(currentPage) {
+            $("#list").html($('#loading').html());
+            var url = controller+'/getList';
+            var postData = $('#form1').serializeObject();
+            postData.p = currentPage ? currentPage : 1;
+            postData.pageSize = 10;
+            postData.type = 'manage';
+
+            $.get(url, postData , function(data){
+                $('#list').html(data);
+            });
+        }
         $(function(){
             //确定
             $(".button_save_black_4").click(function(){
@@ -276,11 +289,10 @@
                     var url = controller + 'uploadFileToTemp';
                     //提交
                     $.post(url,postData,function(msg){
-                        if(msg.status == 1){
+                        dialog.msg(msg,'',function(){
                             $(".img").attr("src",'/uploads/' + msg.info);
                             $("[name=img]").val(msg.info);
-                        }
-                        dialog.msgLocal(msg);
+                        });
                     },'json');
                 }
             });
