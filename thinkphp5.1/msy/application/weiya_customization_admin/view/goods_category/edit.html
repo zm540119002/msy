@@ -237,10 +237,10 @@
                 }
                 var url = controller + 'edit';
                 $.post(url,postData,function(msg){
-                    dialog.msg(msg,'',function () {
+                    dialog.ifmsg(msg,'',function () {
                         location.href= window.history.go(-1);
                     });
-                },'json');
+                });
             });
 
             //一级、二级-联动
@@ -276,12 +276,11 @@
                     var url = controller + 'uploadFileToTemp';
                     //提交
                     $.post(url,postData,function(msg){
-                        if(msg.status == 1){
+                        dialog.ifmsg(msg,'',function () {
                             $(".img").attr("src",'/uploads/' + msg.info);
                             $("[name=img]").val(msg.info);
-                        }
-                        dialog.success(msg.info);
-                    },'json');
+                        });
+                    });
                 }
             });
         });
