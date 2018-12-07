@@ -101,7 +101,7 @@
                     content:'删除你选中的商品吗？',
                     yes:function (index) {
                         $.post(url,postData,function(msg){
-                            dialog.msg(msg,'',function(){
+                            dialog.ifmsg(msg,'',function(){
                                 _thisTr.remove();
                             });
                         });
@@ -112,18 +112,18 @@
             //批量删除数据
             $('body').on('click','.batchDel',function(){
                 var postData = {};
-                goodsIds = [];
+                ids = [];
                 $("input[name='checkbox']").each(function(){
                     var _thisTr = $(this).parents('tr');
                     if($(this).is(':checked')){
-                        goodsIds.push(_thisTr.data('id'));
+                        ids.push(_thisTr.data('id'));
                     }
                 });
-                postData.ids= goodsIds;
+                postData.ids= ids;
                 var url =  controller + '/del';
-                if(goodsIds.length==0){
-                    layer.tips('你还没有选择任何内容！','.btn',{
-                        tips:[2,'#0d7eff'],
+                if(ids.length==0){
+                    parent.layer.tips('你还没有选择任何内容！','.btn',{
+                        tips:[4,'#0d7eff'],
                         time:1500
                     });
                     return false;
@@ -132,17 +132,14 @@
                         btn: ['确定','取消'],//按钮
                         yes:function (index) {
                             $.post(url,postData,function(msg){
-                                if(msg.status == 0){
-                                    dialog.error(msg.message);
-                                }
-                                if(msg.status == 1){
+                                dialog.ifmsg(msg,'',function () {
                                     $("input[name='checkbox']").each(function(){
                                         if($(this).is(':checked')){
                                             $(this).parents('.edit').remove();
                                         }
                                     })
-                                }
-                            },'JSON');
+                                });
+                            });
                             parent.layer.close(index);
                         }
                     })

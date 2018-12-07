@@ -52,6 +52,19 @@
 {block name="script"}
     <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
     <script type="text/javascript">
+        //商品列表
+        function getPage(currentPage) {
+            $("#list").html($('#loading').html());
+            var url = controller+'/getList';
+            var postData = $('#form1').serializeObject();
+            postData.p = currentPage ? currentPage : 1;
+            postData.pageSize = 10;
+            postData.type = 'manage';
+
+            $.get(url, postData , function(data){
+                $('#list').html(data);
+            });
+        }
         $(function(){
             //加载第一页
             getPage();
