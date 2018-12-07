@@ -54,7 +54,6 @@
 <script type="text/javascript">
     //商品列表
     function getPage(currentPage) {
-        console.log(456);
         $("#list").html($('#loading').html());
         var url = controller+'/getList';
         var postData = $('#form1').serializeObject();
@@ -63,6 +62,7 @@
         postData.type = 'manage';
         $.get(url, postData , function(data){
             $('#list').html(data);
+            return;
         });
     }
     $(function(){
