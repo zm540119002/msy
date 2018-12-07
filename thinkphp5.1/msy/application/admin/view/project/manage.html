@@ -35,7 +35,7 @@
                     </tbody>
                 </table>
             </form>
-            <div class="content" id="projectList"></div>
+            <div class="content" id="list"></div>
         </div>
     </div>
 
@@ -52,21 +52,20 @@
     <script type="text/javascript">
         //商品列表
         function getPage(currentPage) {
-            $("#projectList").html($('#loading').html());
+            $("#list").html($('#loading').html());
             var url = controller+'/getList';
             var postData = $('#form1').serializeObject();
             postData.p = currentPage ? currentPage : 1;
             postData.pageSize = 10;
 
             $.get(url, postData , function(data){
-                $('#projectList').html(data);
+                $('#list').html(data);
             });
         }
 
         $(function () {
             //加载第一页
             getPage();
-
             //搜索
             $('#searchProject').click(function(){
                getPage();
