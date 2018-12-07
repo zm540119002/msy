@@ -9,6 +9,15 @@ class Project extends Base {
      *审核首页
      */
     public function manage(){
+        // 所有项目分类
+        $modelProjectCategory = new \app\weiya_customization_admin\model\ProjectCategory();
+        $config = [
+            'where'=>[
+                'status'=>0
+            ]
+        ];
+        $allCategoryList = $modelProjectCategory->getList($config);
+        $this->assign('allCategoryList',$allCategoryList);
         return $this->fetch('manage');
     }
 
@@ -18,7 +27,6 @@ class Project extends Base {
      */
     public function edit(){
         $model = new \app\weiya_customization_admin\model\Project();
-        $modelProjectGoods = new \app\weiya_customization_admin\model\ProjectGoods();
         if(request()->isPost()){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['main_img']));
@@ -60,7 +68,6 @@ class Project extends Base {
                     return errorMsg('失败');
                 }
             }else{//新增
-                $model->startTrans();
                 $data = $_POST;
                 $data['create_time'] = time();
                 $result = $model -> allowField(true) -> save($data);
@@ -68,27 +75,18 @@ class Project extends Base {
                     $model ->rollback();
                     return errorMsg('失败');
                 }
-                $projectId = $model->getAttr('id');
-                $goodsIds = [
-                  '5','6','7','8'
-                ];
 
-                foreach ($goodsIds as $k=>$v){
-                    $projectGoods[$k]['project_id'] =  $projectId;
-                    $projectGoods[$k]['goods_id'] =  $v;
-                }
-                $result = $modelProjectGoods->allowField(true) -> saveAll($projectGoods);
-                if (!count($result)) {
-                    $model->rollback();
-                    return errorMsg('失败');
-                }
             }
-            $model -> commit();
             return successMsg('成功');
         }else{
-           // 所有商品分类
-            $modelGoodsCategory = new \app\weiya_customization_admin\model\GoodsCategory();
-            $allCategoryList = $modelGoodsCategory->getList();
+           // 所有项目分类
+            $modelProjectCategory = new \app\weiya_customization_admin\model\ProjectCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $modelProjectCategory->getList($config);
             $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
             if(input('?projectId') && (int)input('projectId')){
@@ -109,7 +107,7 @@ class Project extends Base {
      *  分页查询
      */
     public function getList(){
-        $modelGoods = new \app\weiya_customization_admin\model\Goods();
+        $modelProject = new \app\weiya_customization_admin\model\Project();
         $where = array(
             'g.status' => 0,
         );
@@ -143,11 +141,35 @@ class Project extends Base {
                 'g.sort'=>'desc',
             ],
         ];
-        $goodsList = $modelGoods ->pageQuery($config);
+        $goodsList = $modelProject ->pageQuery($config);
         $this->assign('goodsList',$goodsList);
         $this->assign('pageList',$goodsList['pageList']);
         return view('list_tpl');
     }
 
+
+    /**
+     * @return array|mixed
+     * 删除
+     */
+    public function del(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+        $model = new \app\weiya_customization_admin\model\Project();
+        $id = input('post.id/d');
+        if(input('?post.id') && $id){
+            $condition = [
+                ['id','=',$id]
+            ];
+        }
+        if(input('?post.ids')){
+            $ids = input('post.ids/a');
+            $condition = [
+                ['id','in',$ids]
+            ];
+        }
+        return $model->del($condition);
+    }
 
 }

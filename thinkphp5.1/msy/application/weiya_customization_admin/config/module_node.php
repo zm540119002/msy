@@ -4,25 +4,20 @@
  */
 return [
     'menu' => [
-        'goods_category'=>[
-            'id'=>100,'name'=>'商品分类','type'=>2,
+        'goods'=>[
+            'id'=>100,'name'=>'商品','type'=>2,
             'sub_menu' => [
                 ['id'=>101,'name'=>'商品分类管理','display'=>1,'controller'=>'GoodsCategory','action'=>'manage',],
+                ['id'=>102,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'manage',],
             ],
         ],
-        'goods'=>[
-            'id'=>200,'name'=>'商品','type'=>2,
+        'project'=>[
+            'id'=>200,'name'=>'项目','type'=>2,
             'sub_menu' => [
-                ['id'=>201,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'manage',],
+                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
+                ['id'=>202,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
         ],
-        'brand'=>[
-            'id'=>300,'name'=>'品牌审核','type'=>2,
-            'sub_menu' => [
-                ['id'=>301,'name'=>'厂商品牌审核','display'=>1,'controller'=>'Brand','action'=>'auditManage',],
-            ],
-        ],
-
 
 
     ],
