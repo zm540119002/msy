@@ -1610,7 +1610,6 @@ class Query
             $class,
             'getCurrentPage',
         ], $config['var_page']);
-
         $page = $page < 1 ? 1 : $page;
 
         $config['path'] = isset($config['path']) ? $config['path'] : call_user_func([$class, 'getCurrentPath']);

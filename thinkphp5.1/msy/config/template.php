@@ -85,6 +85,10 @@ return [
         //彩绘js路径
         'caihui_css' => Request::domain() .'/static/caihui/css',
 
+        //后台
         'public_admin_pc' => Request::domain() .'/static/admin_pc',
+        'public_admin_pc_common_css' => Request::domain() .'/static/admin_pc/common/css',
+        'public_admin_pc_common_img' => Request::domain() .'/static/admin_pc/common/img',
+        'public_admin_pc_common_js' => Request::domain() .'/static/admin_pc/common/js',
     ],
 ];

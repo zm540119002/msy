@@ -51,11 +51,10 @@
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         //商品列表
-        function getPage(currentPage) {
+        function getPage(url,currentPage) {
             $("#list").html($('#loading').html());
-            var url = controller+'/getList';
             var postData = $('#form1').serializeObject();
-            postData.p = currentPage ? currentPage : 1;
+            postData.page = currentPage ? currentPage : 1;
             postData.pageSize = 2;
             postData.type = 'manage';
             $.get(url, postData , function(data){
@@ -65,18 +64,16 @@
 
         $(function () {
             //加载第一页
-            getPage(3);
-
+            var url = controller+'getList';
+            getPage(url);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
                 getPage();
             });
-
             //翻页
-            $('body').on('click','.pager a',function(){
-                getPage($(this).data('page'));
+            $('body').on('click','.pager2',function(){
+                getPage(url,$(this).data('page'));
             });
-
             //搜索
             $('#searchGoods').click(function(){
                getPage();

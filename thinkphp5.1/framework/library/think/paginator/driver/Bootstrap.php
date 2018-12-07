@@ -147,7 +147,8 @@ class Bootstrap extends Paginator
      */
     protected function getAvailablePageWrapper($url,$page)
     {
-        return '<li><a href="javascript:void(0);" onclick="getPage('.$page.');">' . ($page) . '</a></li>';
+//        return '<li><a href="javascript:void(0);" onclick="getPage('.$url.','.$page.');">' . ($page) . '</a></li>';
+        return '<li><a href="javascript:void(0);" class="pager2" data-page='.$page.'>' . ($page) . '</a></li>';
     }
 
 
