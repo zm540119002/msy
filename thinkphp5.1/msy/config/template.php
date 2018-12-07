@@ -84,5 +84,7 @@ return [
         'caihui_js' => Request::domain() .'/static/caihui/js',
         //彩绘js路径
         'caihui_css' => Request::domain() .'/static/caihui/css',
+
+        'public_admin_pc' => Request::domain() .'/static/admin_pc',
     ],
 ];

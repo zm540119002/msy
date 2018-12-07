@@ -252,7 +252,7 @@
                             });
                             return false;
                         }
-                    },'json');
+                    });
                 }
             });
 
@@ -273,8 +273,8 @@
                 postData.usage = ueUsage.getContent();
                 postData.notices = ueNotices.getContent();
                 $.post(action,postData,function(data){
-                    dialog.msg(data,'',function () {
-                        //location.href = controller + 'edit';
+                    dialog.ifmsg(data,'',function () {
+                        location.href = controller + 'edit';
                     });
                 });
             });

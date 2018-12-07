@@ -83,10 +83,10 @@
             $('body').on('click','.del',function(){
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
-                postData.projectId = _thisTr.data('id');
-                var url =  CONTROLLER + '/del';
+                postData.id = _thisTr.data('id');
+                var url =  controller + '/del';
                 $.post(url,postData,function(msg){
-                    dialog.msg(msg,'',function(){
+                    dialog.ifmsg(msg,'',function(){
                         _thisTr.remove();
                     });
                 });
@@ -94,6 +94,39 @@
 
             //批量删除
             $('body').on('click','.batchDel',function(){
+                var postData = {};
+                ids = [];
+                $("input[name='checkbox']").each(function(){
+                    var _thisTr = $(this).parents('tr');
+                    if($(this).is(':checked')){
+                        ids.push(_thisTr.data('id'));
+                    }
+                });
+                postData.ids= ids;
+                var url =  controller + '/del';
+                if(ids.length==0){
+                    layer.tips('你还没有选择任何内容！','.btn',{
+                        tips:[2,'#0d7eff'],
+                        time:1500
+                    });
+                    return false;
+                }else{
+                    parent.layer.confirm('删除你选中的商品吗？', {
+                        btn: ['确定','取消'],//按钮
+                        yes:function (index) {
+                            $.post(url,postData,function(msg){
+                                dialog.ifmsg(msg,'',function () {
+                                    $("input[name='checkbox']").each(function(){
+                                        if($(this).is(':checked')){
+                                            $(this).parents('.edit').remove();
+                                        }
+                                    })
+                                });
+                            });
+                            parent.layer.close(index);
+                        }
+                    })
+                }
             });
         });
     </script>

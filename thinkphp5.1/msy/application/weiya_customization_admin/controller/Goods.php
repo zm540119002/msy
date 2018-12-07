@@ -145,6 +145,7 @@ class Goods extends Base {
         if($_GET['type'] == 'project'){
             return view('goods/goods_project_list_tpl');
         }
+
         if($_GET['type'] == 'manage'){
             return view('goods/list_tpl');
         }
