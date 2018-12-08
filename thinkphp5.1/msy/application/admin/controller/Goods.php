@@ -142,10 +142,10 @@ class Goods extends Base {
         ];
         $goodsList = $modelGoods ->pageQuery($config);
         $this->assign('list',$goodsList);
-        if($_GET['type'] == 'project'){
+        if($_GET['pageType'] == 'project'){
             return view('goods/goods_project_list_tpl');
         }
-        if($_GET['type'] == 'manage'){
+        if($_GET['pageType'] == 'manage'){
             return view('goods/list_tpl');
         }
     }

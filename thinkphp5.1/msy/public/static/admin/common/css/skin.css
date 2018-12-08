@@ -1377,3 +1377,10 @@ filter:alpha(opacity:0);
     display:flex;
     display:-webkit-flex;
 }
+.scrollContainer{
+	overflow-y:auto;
+}
+body{
+	height:100%;
+	overflow:hidden;
+}
