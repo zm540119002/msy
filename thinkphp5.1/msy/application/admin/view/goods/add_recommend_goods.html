@@ -131,16 +131,34 @@
             });
             //添加
             $('body').on('click','.confirm_add',function(){
-                 var postData=[];
-                
+                var selectedIds=[];
+                var postData ={};
+                var _this=$(this);
                 $('.selected_goods_list li').each(function () {
                     var selectedGoods={};
                     var goodsSelectedId=$(this).data('goods-id');
-                    selectedGoods.id=id;
-                    selectedGoods.goodsSelectedId=goodsSelectedId;
-                    postData.push(selectedGoods);
+                    selectedGoods.goods_id=id;
+                    selectedGoods.recommend_goods_id=goodsSelectedId;
+                    selectedIds.push(selectedGoods);
                 });
-                console.log(postData);
+                postData.selectedIds=selectedIds;
+                var url = module+'goods/addRecommendGoods';
+//                _this.addClass("nodisabled");//防止重复提交
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        _this.removeClass("nodisabled");
+
+                    }
+                });
+
             })
             
         });

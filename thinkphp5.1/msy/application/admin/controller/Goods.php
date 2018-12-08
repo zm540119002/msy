@@ -191,7 +191,7 @@ class Goods extends Base {
     public function addRecommendGoods(){
         if(request()->isPost()){
             $model = new \app\admin\model\RecommendGoods();
-            $data = input('post.ids/a');
+            $data = input('post.selectedIds/a');
             $model -> saveAll($data);
         }else{
             if(!input('?id') || !input('id/d')){
