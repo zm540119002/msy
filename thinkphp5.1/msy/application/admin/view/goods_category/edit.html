@@ -237,7 +237,7 @@
                 }
                 var url = controller + 'edit';
                 $.post(url,postData,function(msg){
-                    dialog.ifmsg(msg,'',function () {
+                    dialog.msg(msg,'',function () {
                         location.href= window.history.go(-1);
                     });
                 });

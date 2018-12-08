@@ -272,7 +272,7 @@
                 postData.usage = ueUsage.getContent();
                 postData.notices = ueNotices.getContent();
                 $.post(action,postData,function(data){
-                    dialog.ifmsg(data,'',function () {
+                    dialog.msg(data,'',function () {
                         location.href = controller + 'edit';
                     });
                 });
