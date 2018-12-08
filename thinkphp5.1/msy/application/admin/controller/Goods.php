@@ -106,24 +106,20 @@ class Goods extends Base {
      */
     public function getList(){
         $modelGoods = new \app\admin\model\Goods();
-        $where = array(
-            'g.status' => 0,
-//            'g.on_off_line' => 1,
-        );
+        $where = [];
+        $where[] = ['g.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where['g.category_id_1'] = input('get.category_id_1',0,'int');
+            $where[] = ['g.category_id_1','=',input('get.category_id_1',0,'int')];
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where['g.category_id_2'] = input('get.category_id_2',0,'int');
+            $where[] = ['g.category_id_2','=',input('get.category_id_2',0,'int')];
         }
         if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where['g.category_id_3'] = input('get.category_id_3',0,'int');
+            $where[] = ['g.category_id_3','=',input('get.category_id_3',0,'int')];
         }
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where['_complex'] = array(
-                'g.name' => array('like', '%' . trim($keyword) . '%'),
-            );
+            $where[] = ['g.name','like', '%' . trim($keyword) . '%'];
         }
         $config = [
             'where'=>$where,
@@ -140,6 +136,7 @@ class Goods extends Base {
                 'g.sort'=>'desc',
             ],
         ];
+
         $goodsList = $modelGoods ->pageQuery($config);
         $this->assign('list',$goodsList);
         if($_GET['pageType'] == 'project'){

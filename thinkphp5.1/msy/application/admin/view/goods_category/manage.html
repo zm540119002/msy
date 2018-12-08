@@ -51,6 +51,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
+<script type="text/javascript" src="public_admin_pc/common/js/paging.js"></script>
 <script type="text/javascript">
     //商品列表
     var url = controller+'/getList';
@@ -65,9 +66,14 @@
         });
     }
     $(function(){
-
         //加载第一页
-        getPage();
+        var config = {
+            url:controller+'getList',
+        };
+        var getData = $('#form1').serializeObject();
+        getData.pageSize = 2;
+        getData.pageType = 'manage';
+        getPagingList(config,getData);
     });
 </script>
 {/block}
