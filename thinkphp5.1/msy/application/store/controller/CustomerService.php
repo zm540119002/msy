@@ -1,8 +1,7 @@
 <?php
 namespace app\store\controller;
 
-require_once dirname(__DIR__) . '../../../GatewayClient/Gateway.php';
-use GatewayClient\Gateway;
+use common\component\GatewayClient\Gateway;
 
 class CustomerService extends \common\controller\UserBase{
     /**售前
@@ -29,10 +28,10 @@ class CustomerService extends \common\controller\UserBase{
      */
     public function bindUid(){
         if(request()->isAjax()){
-            $postData = input('.post');
+            $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-            return successMsg(123);
+            return successMsg($postData);
         }else{
             return $this->fetch();
         }

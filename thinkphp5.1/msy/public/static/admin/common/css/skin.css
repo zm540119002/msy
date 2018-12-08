@@ -1316,6 +1316,18 @@ filter:alpha(opacity:0);
 	color:#fff;
 }
 /*添加产品弹窗*/
+.recommendGoods_content{
+	padding:0 0 0 20px;
+}
+.recommendGoods_content .content-label{
+	display:block;
+	padding:8px 0 8px 0;
+	margin:0 0 20px 0;
+	border-bottom:1px solid #d9d9d9;
+}
+.selected_goods_list{
+	padding:15px 0 0;
+}
 .thead_title{
 	border-bottom:1px solid #d9d9d9;
 }
@@ -1339,6 +1351,7 @@ filter:alpha(opacity:0);
 	padding:15px 0 0;
 }
 .add_layer_content .list li{
+	padding:20px 0;
 	border:none;
 	border-bottom:1px solid #d9d9d9;
 }
