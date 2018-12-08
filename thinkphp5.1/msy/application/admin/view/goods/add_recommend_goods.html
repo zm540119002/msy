@@ -115,7 +115,7 @@
                     $('.selected_goods_list li:last').after(liTpl);
                     $('.selected_goods_list li:last').append(listDiv);
                 }
-                $('.selected_goods_list li').attr('data-goods-id',goodsId);
+                $('.selected_goods_list li:last').attr('data-goods-id',goodsId);
             });
             //移除商品
             $('body').on('click','.close-btn',function(){
@@ -132,8 +132,9 @@
             //添加
             $('body').on('click','.confirm_add',function(){
                  var postData=[];
-                 var selectedGoods={};
+                
                 $('.selected_goods_list li').each(function () {
+                    var selectedGoods={};
                     var goodsSelectedId=$(this).data('goods-id');
                     selectedGoods.id=id;
                     selectedGoods.goodsSelectedId=goodsSelectedId;
