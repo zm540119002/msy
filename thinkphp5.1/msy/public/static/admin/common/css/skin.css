@@ -628,7 +628,7 @@ filter:alpha(opacity:0);
 .pagination li{
 	width:30px;
 	height:30px;
-	line-height: 30px;
+	/*line-height: 30px;*/
 	margin:0 5px;
 	float:left;
 }
@@ -1287,7 +1287,7 @@ filter:alpha(opacity:0);
 .pagination li{
 	width:30px;
 	height:30px;
-	line-height: 30px;
+	/*line-height: 30px;*/
 	margin:0 5px;
 	float:left;
 }
@@ -1383,4 +1383,8 @@ filter:alpha(opacity:0);
 body{
 	height:100%;
 	overflow:hidden;
+}
+ul.pagination{
+	width:650px;
+	text-indent: inherit;
 }
