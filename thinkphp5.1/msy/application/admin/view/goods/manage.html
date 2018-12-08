@@ -82,14 +82,14 @@
             });
 
             //编辑
-            $('body').on('click','.editGoods',function(){
+            $('body').on('click','.edit',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  controller + '/edit/goodsId/' + _thisTr.data('id');
+                var url =  controller + 'edit/id/' + _thisTr.data('id');
                 location.href = url;
             });
 
             //删除
-            $('body').on('click','.delGoods',function(){
+            $('body').on('click','.del',function(){
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
                 postData.id = _thisTr.data('id');
@@ -143,6 +143,12 @@
                     })
                 }
             })
+
+            $('body').on('click','.addRecommendGoods',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'addRecommendGoods/id/' + _thisTr.data('id');
+                location.href = url;
+            });
         });
     </script>
 {/block}

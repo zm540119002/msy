@@ -49,19 +49,42 @@
 
 {block name="script"}
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="public_admin_pc/common/js/paging.js"></script>
     <script type="text/javascript">
         $(function () {
             //加载第一页
-            getPage();
+            var config = {
+                url:controller+'getList',
+            };
+            var getData = $('#form1').serializeObject();
+            getData.pageSize = 2;
+            getData.pageType = 'manage';
+            getPagingList(config,getData);
+            //分类筛选
+            $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
+                var getData = $('#form1').serializeObject();
+                getData.pageSize = 2;
+                getData.pageType = 'manage';
+                getPagingList(config,getData);
+            });
+            //翻页
+            $('body').on('click','.pager2',function(){
+                config.currentPage = $(this).data('page');
+                getPagingList(config,getData);
+            });
             //搜索
-            $('#searchProject').click(function(){
-               getPage();
+            $('#searchGoods').click(function(){
+                config.currentPage = 0;
+                var getData = $('#form1').serializeObject();
+                getData.pageSize = 2;
+                getData.pageType = 'manage';
+                getPagingList(config,getData);
             });
 
             //编辑
-            $('body').on('click','.editProject',function(){
+            $('body').on('click','.edit',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  controller + '/edit/projectId/' + _thisTr.data('id');
+                var url =  controller + '/edit/id/' + _thisTr.data('id');
                 location.href = url;
             });
 
@@ -71,14 +94,20 @@
                 var postData = {};
                 postData.id = _thisTr.data('id');
                 var url =  controller + '/del';
-                $.post(url,postData,function(msg){
-                    dialog.ifmsg(msg,'',function(){
-                        _thisTr.remove();
-                    });
+                parent.layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:'删除你选中的商品吗？',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            dialog.msg(msg,'',function(){
+                                _thisTr.remove();
+                            });
+                        });
+                        parent.layer.close(index);
+                    }
                 });
             });
-
-            //批量删除
+            //批量删除数据
             $('body').on('click','.batchDel',function(){
                 var postData = {};
                 ids = [];
@@ -91,8 +120,8 @@
                 postData.ids= ids;
                 var url =  controller + '/del';
                 if(ids.length==0){
-                    layer.tips('你还没有选择任何内容！','.btn',{
-                        tips:[2,'#0d7eff'],
+                    parent.layer.tips('你还没有选择任何内容！','.btn',{
+                        tips:[4,'#0d7eff'],
                         time:1500
                     });
                     return false;
@@ -101,7 +130,7 @@
                         btn: ['确定','取消'],//按钮
                         yes:function (index) {
                             $.post(url,postData,function(msg){
-                                dialog.ifmsg(msg,'',function () {
+                                dialog.msg(msg,'',function () {
                                     $("input[name='checkbox']").each(function(){
                                         if($(this).is(':checked')){
                                             $(this).parents('.edit').remove();
@@ -113,7 +142,7 @@
                         }
                     })
                 }
-            });
+            })
         });
     </script>
 {/block}

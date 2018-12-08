@@ -52,9 +52,9 @@ class Goods extends Base {
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
 
-            if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
+            if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
-                    'g.id' => input('post.goodsId',0,'int'),
+                    'g.id' => input('post.id',0,'int'),
                     'g.status' => 0,
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
@@ -102,11 +102,11 @@ class Goods extends Base {
             $allCategoryList = $modelGoodsCategory->getList($config);
             $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
-            if(input('?goodsId') && (int)input('goodsId')){
+            if(input('?id') && (int)input('id')){
                 $config = [
                     'where' => [
                         'g.status' => 0,
-                        'g.id'=>input('goodsId',0,'int'),
+                        'g.id'=>input('id',0,'int'),
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
@@ -142,7 +142,7 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.minimum_order_quantity','g.minimum_sample_quantity',
-                'g.trait','g.main_img','g.parameters','g.detail_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
+                'g.trait','g.thumb_img','g.main_img','g.parameters','g.detail_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
                 'g.category_id_2','g.category_id_3','gc1.name as category_name_1'
             ],
             'join' => [
@@ -154,10 +154,10 @@ class Goods extends Base {
             ],
         ];
 
-        $goodsList = $modelGoods ->pageQuery($config);
-        $this->assign('list',$goodsList);
-        if($_GET['pageType'] == 'project'){
-            return view('goods/goods_project_list_tpl');
+        $list = $modelGoods ->pageQuery($config);
+        $this->assign('list',$list);
+        if($_GET['pageType'] == 'layer'){
+            return view('goods/list_layer_tpl');
         }
         if($_GET['pageType'] == 'manage'){
             return view('goods/list_tpl');
@@ -186,5 +186,20 @@ class Goods extends Base {
             ];
         }
         return $model->del($condition);
+    }
+
+    public function addRecommendGoods(){
+        if(request()->isPost()){
+            $model = new \app\admin\model\RecommendGoods();
+            $data = input('post.ids/a');
+            $model -> saveAll($data);
+        }else{
+            if(!input('?id') || !input('id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+            $id = input('id/d');
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
     }
 }
