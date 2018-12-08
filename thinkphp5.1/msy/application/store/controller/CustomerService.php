@@ -1,8 +1,7 @@
 <?php
 namespace app\store\controller;
 
-require_once dirname(__DIR__) . '../../../GatewayClient/Gateway.php';
-use GatewayClient\Gateway;
+use common\component\GatewayClient\Gateway;
 
 class CustomerService extends \common\controller\UserBase{
     /**售前
