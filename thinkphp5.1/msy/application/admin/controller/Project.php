@@ -28,18 +28,18 @@ class Project extends Base {
     public function edit(){
         $model = new \app\admin\model\Project();
         if(request()->isPost()){
-            if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['main_img']));
+            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
             }
-            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
-                $detailArr = explode(',',input('post.detail_img','','string'));
+            if( isset($_POST['main_img']) && $_POST['main_img'] ){
+                $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
                         $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
                     }
                 }
-                $_POST['detail_img'] = implode(',',$tempArr);
+                $_POST['main_img'] = implode(',',$tempArr);
             }
             $data = $_POST;
 
@@ -50,13 +50,13 @@ class Project extends Base {
                 ];
                 $goodsInfo = $model->getInfo($config);
                 //删除商品主图
-                if($goodsInfo['main_img']){
-                    delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
+                if($goodsInfo['thumb_img']){
+                    delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
                 }
-                if($goodsInfo['detail_img']){
+                if($goodsInfo['main_img']){
                     //删除商品详情图
-                    $oldImgArr = explode(',',$goodsInfo['detail_img']);
-                    $newImgArr = explode(',',$_POST['detail_img']);
+                    $oldImgArr = explode(',',$goodsInfo['main_img']);
+                    $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $where = [
