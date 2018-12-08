@@ -6,41 +6,42 @@
 {block name="content"}
     <section style="display: none" class="tpl_list">
         <li data-goods-id="">
-            <!--<img src="" alt="" class="left">
-            <div class="promotional-g-right">
-                <span class="goods-name">美肤1111</span>
+            <a href="javascript:void(0);" class="close-btn">X</a>           
+            <!--<div>
+                <img src="" alt="" class="left">
+                <p class="goods_name">aaabbb</p>
             </div>-->
-            <a href="javascript:void(0);" class="close-btn">X</a>
         </li>
     </section>
-    <!--推荐产品容器-->
-    <section id="recommendGoods">
-        <span class="content-label">已推荐产品</span>
-        <ul class="columns_flex selected_goods_list">
-
-        </ul>
-        <div class="error_tipc"></div>
-        <form name="form" id="form">
-            <div class="search_bar">
-                <span class="left">产品分类:</span>
-                {include file="goods_category/linkage_tpl" /}
-                <input type="text" class="search-goods keyword" name="keyword" placeholder="搜索产品">
-                <input type="button" value="搜索" class="layer-search-btn search">
-            </div>
-        </form>
-        <span class="content-label">所有产品(可以从下面商品中点击添加产品到已推荐产品)</span>
-        <div class="add_layer_content">
-            <div class="thead_title">
-                <span class="list_item">产品名称</span>
-                <span class="list_item">所属分类</span>
-                <span class="list_item">操作</span>
-            </div>
-            <ul class="scroller-container list" id="list">
+    <section class="recommendGoods_content">
+        <!--推荐产品容器-->
+        <div id="recommendGoods">
+            <span class="content-label">已推荐产品</span>
+            <ul class="columns_flex selected_goods_list">
 
             </ul>
+            <div class="error_tipc"></div>
+            <form name="form" id="form">
+                <div class="search_bar">
+                    <span class="left">产品分类:</span>
+                    {include file="goods_category/linkage_tpl" /}
+                    <input type="text" class="search-goods keyword" name="keyword" placeholder="搜索产品">
+                    <input type="button" value="搜索" class="layer-search-btn search">
+                </div>
+            </form>
+            <span class="content-label">所有产品(可以从下面商品中点击添加产品到已推荐产品)</span>
+            <div class="add_layer_content">
+                <div class="thead_title">
+                    <span class="list_item">产品名称</span>
+                    <span class="list_item">所属分类</span>
+                    <span class="list_item">操作</span>
+                </div>
+                <ul class="scroller-container list" id="list">
+
+                </ul>
+            </div>
         </div>
     </section>
-
     <!-- 隐藏区 -->
     <div style="display:none">
         <div id="loading">
