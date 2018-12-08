@@ -141,8 +141,6 @@ class Goods extends Base {
             ],
         ];
         $goodsList = $modelGoods ->pageQuery($config);
-        print_r($modelGoods->getLastSql());exit;
-
         $this->assign('list',$goodsList);
         if($_GET['type'] == 'project'){
             return view('goods/goods_project_list_tpl');
