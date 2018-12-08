@@ -28,8 +28,18 @@ class Goods extends Base {
     public function edit(){
         $modelGoods = new \app\admin\model\Goods();
         if(request()->isPost()){
+            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
+            }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['main_img']));
+                $detailArr = explode(',',input('post.main_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
+                    }
+                }
+                $_POST['main_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',input('post.detail_img','','string'));
@@ -41,6 +51,7 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
+
             if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
                 $config = [
                     'g.id' => input('post.goodsId',0,'int'),
@@ -48,8 +59,14 @@ class Goods extends Base {
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
                 //删除商品主图
+                if($goodsInfo['thumb_img']){
+                    delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                }
                 if($goodsInfo['main_img']){
-                    delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
+                    //删除商品详情图
+                    $oldImgArr = explode(',',$goodsInfo['main_img']);
+                    $newImgArr = explode(',',$_POST['main_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 if($goodsInfo['detail_img']){
                     //删除商品详情图

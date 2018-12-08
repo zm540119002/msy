@@ -53,18 +53,7 @@
 <script type="text/javascript" src="public_admin_common_js/goodsCategoryManage.js"></script>
 <script type="text/javascript" src="public_admin_pc/common/js/paging.js"></script>
 <script type="text/javascript">
-    //商品列表
-    var url = controller+'/getList';
-    function getPage(url,currentPage) {
-        $("#list").html($('#loading').html());
-        var postData = $('#form1').serializeObject();
-        postData.page = currentPage ? currentPage : 1;
-        postData.pageSize = 2;
-        postData.type = 'manage';
-        $.get(url, postData , function(data){
-            $('#list').html(data);
-        });
-    }
+
     $(function(){
         //加载第一页
         var config = {
