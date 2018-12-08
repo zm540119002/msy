@@ -142,9 +142,9 @@
                 //主图
                 postData.thumb_img = $('img.thumb_img').attr('src');
                 //详情图
-                postData.detail_img = '';
+                postData.main_img = '';
                 $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
-                    postData.detail_img += $(this).attr('src') + ',';
+                    postData.main_img += $(this).attr('src') + ',';
 
                 });
                 //简介

@@ -17,10 +17,7 @@
     <form name="form" id="form">
         <div class="search_bar">
             <span class="left">产品分类:</span>
-            <select name="">
-                <option value="">产品1</option>
-                <option value="">产品2</option>
-            </select>
+            {include file="goods_category/linkage_tpl" /}
             <input type="text" class="search-goods keyword" name="keyword" placeholder="搜索产品">
             <input type="button" value="搜索" class="layer-search-btn search">
         </div>
@@ -33,66 +30,12 @@
             <span class="list_item">操作</span>
         </div>
         <ul class="scroller-container list" id="list">
-            <li data-id="1" class="">
-                <div class="list_item">
-                    <div >
-                        <img src="http://msy.meishangyun.com/uploads/factory_goods/2018120611453168290.jpeg" alt="" class="left">
-                        <p class="goods_name">美肤美肤美肤美肤美肤美肤</p>
-                    </div>
-                </div>
-                <div class="list_item">
-                    产品1
-                </div>
-                <div class="list_item">
-                    <a href="javascript:void(0);" class="add_goods">添加</a>
-                </div>
-            </li>
-            <li data-id="2" class="">
-                <div class="list_item">
-                    <div>
-                        <img src="http://msy.meishangyun.com/uploads/factory_goods/2018120611453168290.jpeg" alt="" class="left">
-                        <p class="goods_name">美肤美肤美肤美肤美肤美肤11111</p>
-                    </div>
-                </div>
-                <div class="list_item">
-                    产品1
-                </div>
-                <div class="list_item">
-                    <a href="javascript:void(0);" class="add_goods">添加</a>
-                </div>
-            </li>
-            <li data-id="3" class="">
-                <div class="list_item">
-                    <div>
-                        <img src="http://msy.meishangyun.com/uploads/factory_goods/2018120611453168290.jpeg" alt="" class="left">
-                        <p class="goods_name">美白美白真美白阿阿阿阿阿</p>
-                    </div>
-                </div>
-                <div class="list_item">
-                    产品1
-                </div>
-                <div class="list_item">
-                    <a href="javascript:void(0);" class="add_goods">添加</a>
-                </div>
-            </li>
-            <li data-id="4" class="">
-                <div class="list_item">
-                    <div>
-                        <img src="http://msy.meishangyun.com/uploads/factory_goods/2018120611453168290.jpeg" alt="" class="left">
-                        <p class="goods_name">美白美白真美白美丽美丽美丽</p>
-                    </div>
-                </div>
-                <div class="list_item">
-                    产品1
-                </div>
-                <div class="list_item">
-                    <a href="javascript:void(0);" class="add_goods">添加</a>
-                </div>
-            </li>
+
         </ul>
     </div>
 </section>
-<script type="text/javascript"> 
+<!--<script type="text/javascript" src="public_admin_pc/common/js/categoryLinkage.js"></script>-->
+<script type="text/javascript">
     $(function(){
         var recommendGoods=$('#recommendGoods').html();
         $('.addRecommendGoods').on('click',function(){
@@ -102,10 +45,20 @@
             layer.open({
                 title:['添加推荐产品'],
                 skin: 'addGoodsLayer',
-                area: ['1400px', '800px'],
+                area: ['1000px', '400px'],
                 btn:['确定','取消'],
                 content:recommendGoods,
                 success:function(){
+                    var config = {
+                        url:module+'Goods/getList',
+                    };
+                    var postData = {
+                        pageSize:4,
+                        pageType:'layer'
+                    };
+                    config.container = $('.addGoodsLayer #list');  // container:$('.addsalesgoodsLayer #list')
+                    //加载第一页
+                    getPagingList(config,postData);
                     if(goods!=''){
                         selectedGoodsList(goods);
                     }
