@@ -312,4 +312,5 @@ $(function () {
             $('.right_sidebar').hide();
         }
     });
+
 });

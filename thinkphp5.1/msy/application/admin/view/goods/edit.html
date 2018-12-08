@@ -25,12 +25,11 @@
                             <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
                         </p>
                             <p class="showimg" id="showimg">图片上传大小请小于50k</p>
-                            <img  class="main_img" src="">
-                            <!--<empty name="goodsInfo.main_img">-->
-                               <!---->
-                                <!--<else />-->
-                                <!--<img class="main_img" src="__ROOT__/Uploads/{$goodsInfo.main_img}">-->
-                            <!--</empty>-->
+                            {empty name="goodsInfo.thumb_img"]
+                                <img  class="thumb_img" src="">
+                                {else /}
+                                <img class="thumb_img" src="public_uploads/{$goodsInfo.thumb_img}">
+                            {/empty}
                         </td>
                     </tr>
                     <tr>
@@ -111,25 +110,19 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>主图：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <script id="main_img" type="text/plain">
+                                {$goodsInfo.main_img|formatImg}
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品详情图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                              <script id="detail" type="text/plain">
                                 {$goodsInfo.detail_img|formatImg}
                             </script>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>使用说明：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <script id="usage" type="text/plain">
-                            </script>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>注意事项：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <script id="notices" type="text/plain">
-                            </script>
-                        </td>
                     </tr>
                     <tr>
                         <td width="11%"></td>
@@ -157,56 +150,12 @@
         var ueIntro = UE.getEditor('intro');
         var ueParam = UE.getEditor('param');
         var ueDetail = UE.getEditor('detail');
-        var ueUsage = UE.getEditor('usage');
-        var ueNotices = UE.getEditor('notices');
+        var ueNotices = UE.getEditor('main_img');
     </script>
 
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
-            //单选商品类型
-            $('.radioItem').change(function(){  
-                 if($(this).is(":checked")){
-                     var radioValue=$(this).data('buy_type');  
-                     console.log(radioValue);
-                     switch(radioValue){
-                        case 1:
-                        $('.radioTypeOption').hide();
-                        $('.radioTypeOption:first').show();
-                        break;
-                        case 2:
-                        $('.radioTypeOption').hide();
-                        $('.radioTypeOption:eq(1)').show();
-                        break;
-                        case 3:
-                        $('.radioTypeOption').hide();
-                        $('.radioTypeOption:last').show();
-                        break;
-                     }
-                 }
-            });
-
-            $('input[name="discount"]').each(function () {
-                if($(this).is(":checked")){
-                    var radioValue=$(this).val();
-                    switch(radioValue){
-                        case '普通产品':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:first').show();
-                            break;
-                        case '促销产品':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:eq(1)').show();
-                            break;
-                        case '微团购产品':
-                            $('.radioTypeOption').hide();
-                            $('.radioTypeOption:last').show();
-                            break;
-                    }
-                }
-            })
-
-
             //初始化所属分类
             var category_id_1 = '{$goodsInfo.category_id_1}';
             if(category_id_1){
@@ -239,11 +188,11 @@
                 reader.readAsDataURL(img);
 
                 reader.onload = function(e){
-                    $(".main_img").attr("src",e.target.result);
+                    $(".thumb_img").attr("src",e.target.result);
                     //提交
                     $.post(controller + 'uploadFileToTemp',{ fileBase64: e.target.result},function(msg){
                         if(msg.status == 1){
-                            $(".main_img").attr("src",uploads + msg.info)
+                            $(".thumb_img").attr("src",uploads + msg.info)
                         }else{
                             parent.layer.open({
                                 content:msg.info,
@@ -258,21 +207,24 @@
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
-
+                //缩略图
+                postData.thumb_img = $('img.thumb_img').attr('src');
                 //主图
-                postData.main_img = $('img.main_img').attr('src');
+                postData.main_img = '';
+                $.each($('#ueditor_2').contents().find('.view img'),function () {
+                    postData.main_img += $(this).attr('src') + ',';
+                });
                 //详情图
                 postData.detail_img = '';
-                $.each($('iframe').contents().find('.view img'),function () {
+                $.each($('#ueditor_3').contents().find('.view img'),function () {
                     postData.detail_img += $(this).attr('src') + ',';
                 });
                 //简介
                 postData.intro = ueIntro.getContent();
                 postData.parameters = ueParam.getContent();
-                postData.usage = ueUsage.getContent();
-                postData.notices = ueNotices.getContent();
                 $.post(action,postData,function(data){
-                    dialog.ifmsg(data,'',function () {
+                    dialog.msg(data,'',function () {
+                        return;
                         location.href = controller + 'edit';
                     });
                 });

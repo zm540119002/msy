@@ -112,5 +112,7 @@ $(document).ready(function(){
             }
         })
     })
+    var h = document.documentElement.clientHeight || document.body.clientHeight;
+    $('.Hui-article-box').css('height',(h-100)+'px').addClass('scrollContainer');
     
 });

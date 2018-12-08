@@ -247,30 +247,7 @@ function getPage(currentPage) {
     });
 }
 
-//获取列表
-function getPagingData(currentPage) {
-    $("#list").html($('#loading').html());
-    $.ajax({
-        url: config.url,
-        data: config.postData?config.postData:{},
-        type: 'get',
-        beforeSend: function(xhr){
-            $('.loading').show();
-        },
-        error:function(xhr){
-            $('.loading').hide();
-            dialog.error('AJAX错误');
-        },
-        success: function(data){
-            $('.loading').hide();
-            if(config.callBack){
-                config.callBack(config,data);
-            }else{
-                getListDefaultCallBack(config,data)
-            }
-        }
-    });
-}
+
 
 $(function () {
     //返回顶部
@@ -338,4 +315,6 @@ $(function () {
             $('.right_sidebar').hide();
         }
     });
+    var h = document.documentElement.clientHeight || document.body.clientHeight;
+    $('.Hui-article-box').css('height',(h-50)+'px').addClass('scrollContainer');
 });

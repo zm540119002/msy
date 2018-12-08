@@ -8,8 +8,8 @@
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('Project/manage')}" class="current"><span>管理</span></a></li>
-                    <li><a href="{:url('Project/edit')}"><span>编辑</span></a></li>
+                    <li><a href="{:url('manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('edit')}"><span>编辑</span></a></li>
                 </ul>
             </div>
         </div>
@@ -50,19 +50,6 @@
 {block name="script"}
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
-        //商品列表
-        function getPage(currentPage) {
-            $("#list").html($('#loading').html());
-            var url = controller+'/getList';
-            var postData = $('#form1').serializeObject();
-            postData.p = currentPage ? currentPage : 1;
-            postData.pageSize = 10;
-
-            $.get(url, postData , function(data){
-                $('#list').html(data);
-            });
-        }
-
         $(function () {
             //加载第一页
             getPage();

@@ -28,8 +28,18 @@ class Goods extends Base {
     public function edit(){
         $modelGoods = new \app\admin\model\Goods();
         if(request()->isPost()){
+            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
+            }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['main_img']));
+                $detailArr = explode(',',input('post.main_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
+                    }
+                }
+                $_POST['main_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',input('post.detail_img','','string'));
@@ -41,6 +51,7 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
+
             if(isset($_POST['goodsId']) && intval($_POST['goodsId'])){//修改
                 $config = [
                     'g.id' => input('post.goodsId',0,'int'),
@@ -48,8 +59,14 @@ class Goods extends Base {
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
                 //删除商品主图
+                if($goodsInfo['thumb_img']){
+                    delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                }
                 if($goodsInfo['main_img']){
-                    delImgFromPaths($goodsInfo['main_img'],$_POST['main_img']);
+                    //删除商品详情图
+                    $oldImgArr = explode(',',$goodsInfo['main_img']);
+                    $newImgArr = explode(',',$_POST['main_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 if($goodsInfo['detail_img']){
                     //删除商品详情图
@@ -106,24 +123,20 @@ class Goods extends Base {
      */
     public function getList(){
         $modelGoods = new \app\admin\model\Goods();
-        $where = array(
-            'g.status' => 0,
-//            'g.on_off_line' => 1,
-        );
+        $where = [];
+        $where[] = ['g.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where['g.category_id_1'] = input('get.category_id_1',0,'int');
+            $where[] = ['g.category_id_1','=',input('get.category_id_1',0,'int')];
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where['g.category_id_2'] = input('get.category_id_2',0,'int');
+            $where[] = ['g.category_id_2','=',input('get.category_id_2',0,'int')];
         }
         if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where['g.category_id_3'] = input('get.category_id_3',0,'int');
+            $where[] = ['g.category_id_3','=',input('get.category_id_3',0,'int')];
         }
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where['_complex'] = array(
-                'g.name' => array('like', '%' . trim($keyword) . '%'),
-            );
+            $where[] = ['g.name','like', '%' . trim($keyword) . '%'];
         }
         $config = [
             'where'=>$where,
@@ -140,12 +153,13 @@ class Goods extends Base {
                 'g.sort'=>'desc',
             ],
         ];
+
         $goodsList = $modelGoods ->pageQuery($config);
         $this->assign('list',$goodsList);
-        if($_GET['type'] == 'project'){
+        if($_GET['pageType'] == 'project'){
             return view('goods/goods_project_list_tpl');
         }
-        if($_GET['type'] == 'manage'){
+        if($_GET['pageType'] == 'manage'){
             return view('goods/list_tpl');
         }
     }

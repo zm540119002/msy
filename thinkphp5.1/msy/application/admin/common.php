@@ -9,7 +9,7 @@ function formatImg($str){
     $str = '';
     foreach ($arr as $item) {
         if($item){
-            $str .= '<img src="/Uploads/'.$item.'" />';
+            $str .= '<img src="/uploads/'.$item.'" />';
         }
     }
     return $str;

@@ -48,35 +48,37 @@
 {/block}
 
 {block name="script"}
-    <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="public_admin_pc/common/js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="public_admin_pc/common/js/paging.js"></script>
     <script type="text/javascript">
-        //商品列表
-        function getPage(url,currentPage) {
-            $("#list").html($('#loading').html());
-            var postData = $('#form1').serializeObject();
-            postData.page = currentPage ? currentPage : 1;
-            postData.pageSize = 2;
-            postData.type = 'manage';
-            $.get(url, postData , function(data){
-                $('#list').html(data);
-            });
-        }
-
         $(function () {
             //加载第一页
-            var url = controller+'getList';
-            getPage(url);
+            var config = {
+                url:controller+'getList',
+            };
+            var getData = $('#form1').serializeObject();
+            getData.pageSize = 2;
+            getData.pageType = 'manage';
+            getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
-                getPage();
+                var getData = $('#form1').serializeObject();
+                getData.pageSize = 2;
+                getData.pageType = 'manage';
+                getPagingList(config,getData);
             });
             //翻页
             $('body').on('click','.pager2',function(){
-                getPage(url,$(this).data('page'));
+                config.currentPage = $(this).data('page');
+                getPagingList(config,getData);
             });
             //搜索
             $('#searchGoods').click(function(){
-               getPage();
+                config.currentPage = 0;
+                var getData = $('#form1').serializeObject();
+                getData.pageSize = 2;
+                getData.pageType = 'manage';
+                getPagingList(config,getData);
             });
 
             //编辑
