@@ -29,7 +29,7 @@ class Project extends Base {
         $model = new \app\admin\model\Project();
         if(request()->isPost()){
             if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
             }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
@@ -42,10 +42,9 @@ class Project extends Base {
                 $_POST['main_img'] = implode(',',$tempArr);
             }
             $data = $_POST;
-
-            if(isset($_POST['projectId']) && intval($_POST['projectId'])){//修改
+            if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
-                    'g.id' => input('post.projectId',0,'int'),
+                    'g.id' => input('post.id',0,'int'),
                     'g.status' => 0,
                 ];
                 $goodsInfo = $model->getInfo($config);
@@ -60,7 +59,7 @@ class Project extends Base {
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $where = [
-                    'id'=>input('post.projectId',0,'int')
+                    'id'=>input('post.id',0,'int')
                 ];
                 $data['update_time'] = time();
                 $result = $model -> allowField(true) -> save($data,$where);
@@ -68,7 +67,6 @@ class Project extends Base {
                     return errorMsg('失败');
                 }
             }else{//新增
-                $data = $_POST;
                 $data['create_time'] = time();
                 $result = $model -> allowField(true) -> save($data);
                 if(!$result){
@@ -89,11 +87,11 @@ class Project extends Base {
             $allCategoryList = $modelProjectCategory->getList($config);
             $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
-            if(input('?projectId') && (int)input('projectId')){
+            if(input('?id') && (int)input('id')){
                 $config = [
                     'where' => [
                         'g.status' => 0,
-                        'g.id'=>input('projectId',0,'int'),
+                        'g.id'=>input('id',0,'int'),
                     ],
                 ];
                 $projectInfo = $model->getInfo($config);
@@ -108,43 +106,36 @@ class Project extends Base {
      */
     public function getList(){
         $modelProject = new \app\admin\model\Project();
-        $where = array(
-            'g.status' => 0,
-        );
+        $where = [];
+        $where[] = ['p.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where['g.category_id_1'] = input('get.category_id_1',0,'int');
+            $where[] = ['p.category_id_1','=',input('get.category_id_1',0,'int')];
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where['g.category_id_2'] = input('get.category_id_2',0,'int');
+            $where[] = ['p.category_id_2','=',input('get.category_id_2',0,'int')];
         }
         if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where['g.category_id_3'] = input('get.category_id_3',0,'int');
+            $where[] = ['p.category_id_3','=',input('get.category_id_3',0,'int')];
         }
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where['_complex'] = array(
-                'g.name' => array('like', '%' . trim($keyword) . '%'),
-            );
+            $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
         }
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.minimum_order_quantity','g.minimum_sample_quantity',
-                'g.trait','g.main_img','g.parameters','g.details_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
-                'g.category_id_2','g.category_id_3','gc1.name as category_name_1'
-            ],
-            'join' => [
-                ['goods_category gc1','gc1.id = g.category_id_1'],
+                'p.id','p.name','p.thumb_img','p.main_img','p.intro','p.shelf_status','p.sort','p.create_time','p.category_id_1',
             ],
             'order'=>[
-                'g.id'=>'asc',
-                'g.sort'=>'desc',
+                'p.id'=>'asc',
+                'p.sort'=>'desc',
             ],
         ];
-        $goodsList = $modelProject ->pageQuery($config);
-        $this->assign('goodsList',$goodsList);
-        $this->assign('pageList',$goodsList['pageList']);
-        return view('list_tpl');
+        $list = $modelProject ->pageQuery($config);
+        $this->assign('list',$list);
+        if($_GET['pageType'] == 'manage'){
+            return view('project/list_tpl');
+        }
     }
 
 
