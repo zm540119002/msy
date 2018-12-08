@@ -21,7 +21,7 @@ function getPagingList(config,getData) {
     config.callBack = config.callBack?config.callBack:commonCallBack;
     //要提交的数据
     getData = getData?getData:$('#form1').serializeObject();
-    getData.page = getData.page ? getData.page : 1;
+    getData.page = config.currentPage ? config.currentPage : 1;
     getData.pageSize = getData.pageSize ? getData.pageSize:2;
 
     $.ajax({
