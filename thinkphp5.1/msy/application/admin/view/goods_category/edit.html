@@ -278,7 +278,7 @@
                     $.post(url,postData,function(msg){
                         dialog.ifmsg(msg,'',function () {
                             $(".img").attr("src",'/uploads/' + msg.info);
-                            $("[name=img]").val(msg.info);
+                            $("[name=img]").val(msg.info)
                         });
                     });
                 }
