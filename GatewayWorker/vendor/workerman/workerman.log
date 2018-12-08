@@ -19,3 +19,6 @@
 2018-12-06 16:53:53 pid:16759 Workerman[/home/www/web/GatewayWorker/start.php] is stopping ...
 2018-12-06 16:53:53 pid:16759 Workerman[/home/www/web/GatewayWorker/start.php] stop success
 2018-12-08 09:51:59 pid:14779 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
+2018-12-08 14:03:31 pid:21558 Workerman[start.php] stopping ...
+2018-12-08 14:03:31 pid:21558 Workerman[start.php] has been stopped
+2018-12-08 14:03:32 pid:30138 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
