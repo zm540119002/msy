@@ -26,6 +26,8 @@
 </section>
 <script type="text/javascript">
     $(function () {
+        ws = new WebSocket("ws://msy.meishangyun.com:8282");
+        console.log(ws);
         //聊天对话框弹窗
         var chatLayerContainer=$('#chatLayerContainer').html();
         var chatListId;
@@ -43,7 +45,6 @@
                     var chatListInfo=_this.next('.chat_hidden_list').html();
                     $('.chatLayer .chat_item').css('height',winH+'px');
                     $('.chatLayer .chat_item').html(chatListInfo);
-                    ws = new WebSocket("ws://msy.meishangyun.com:8282");
                     // 服务端主动推送消息时会触发这里的onmessage
                     ws.onmessage = function(e){
                         // json数据转换成js对象
