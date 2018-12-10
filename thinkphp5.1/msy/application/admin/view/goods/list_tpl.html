@@ -7,11 +7,10 @@
                     <th>排序</th>
                     <th>商品名称</th>
                     <th>所属分类</th>
-                    <th>原价</th>
-                    <th>工作室特惠价</th>
-                    <th>团购价</th>
-                    <th>库存</th>
+                    <th>批量价格</th>
+                    <th>样品价格</th>
                     <th>操作</th>
+                    <th>状态</th>
                     <th>上下架设置</th>
                 </tr>
             </thead>
@@ -22,21 +21,24 @@
                         <td class="w48 sort"><span title="" class="editable "></span></td>
                         <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
                         <td class="w10">
-                            11111
+                            {$vo.category_name_1}
                         </td>
-                        <td class="w10"></td>
-                        <td class="w10"></td>
-                        <td class="w5"></td>
-                        <td class="w5"></td>
-                        <td class="w96">
+                        <td class="w5">{$vo.bulk_price}</td>
+                        <td class="w5">{$vo.sample_price}</td>
+                        <td class="w5">
                             <a href="javascript:void(0);" class="edit">编辑</a>
                             | <a href="javascript:void(0);" class="del">删除</a>
                             | <a href="javascript:void(0);" class="addRecommendGoods">添加推荐产品</a>
-                            <input type="hidden" value="" class="selectedTplList">
                         </td>
                         <td class="w96">
-                            <a href="javascript:void(0);" class="online">上架</a>
-                            | <a href="javascript:void(0);" class="offline">下架</a>
+                             <span>{$vo.shelf_status|getShelStatus}</span>
+                        </td>
+                        <td class="w96">
+                            {if ($vo.shelf_status == 1) or ($vo.shelf_status == 2)}
+                            <a href="javascript:void(0);" class="online" data-shelf-status="3">上架</a>
+                            {else /}
+                            <a href="javascript:void(0);" class="offline" data-shelf-status="1">下架</a>
+                            {/if}
                         </td>
                     </tr>
                 {/volist}

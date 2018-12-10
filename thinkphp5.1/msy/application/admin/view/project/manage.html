@@ -93,7 +93,7 @@
             //编辑
             $('body').on('click','.edit',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  controller + '/edit/id/' + _thisTr.data('id');
+                var url =  controller + 'edit/id/' + _thisTr.data('id');
                 location.href = url;
             });
 
@@ -152,6 +152,12 @@
                     })
                 }
             })
+
+            $('body').on('click','.addProjectGoods',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'addProjectGoods/id/' + _thisTr.data('id');
+                location.href = url;
+            });
         });
     </script>
 {/block}
