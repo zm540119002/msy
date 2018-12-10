@@ -172,7 +172,6 @@
 		  postData.shelf_status = shelf_status; //拿到选中项的值
 	  }
 	  postData.page = currentPage ? currentPage : 1;
-	  postData.pageSize = 2;
 	  $.get(url, postData , function(data){
 		  $('#list').html(data);
 	  });

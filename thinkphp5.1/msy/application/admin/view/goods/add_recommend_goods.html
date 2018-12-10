@@ -62,13 +62,11 @@
                 url:controller+'getList',
             };
             var getData = $('#form1').serializeObject();
-            getData.pageSize = 10;
             getData.pageType = 'layer';
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
                 var getData = $('#form1').serializeObject();
-                getData.pageSize = 10;
                 getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
@@ -81,7 +79,6 @@
             $('#searchGoods').click(function(){
                 config.currentPage = 0;
                 var getData = $('#form1').serializeObject();
-                getData.pageSize = 10;
                 getData.pageType = 'manage';
                 getPagingList(config,getData);
             });

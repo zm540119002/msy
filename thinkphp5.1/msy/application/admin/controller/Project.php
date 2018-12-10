@@ -166,6 +166,25 @@ class Project extends Base {
     }
 
     /**
+     * 上下架
+     */
+    public function setShelfStatus(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+        $model = new \app\admin\model\Project();
+        $id = input('post.id/d');
+        if(!input('?post.id') && !$id){
+            return errorMsg('失败');
+        }
+        $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
      * 添加项目相关商品
      * @return array|mixed
      * @throws \Exception
@@ -195,6 +214,16 @@ class Project extends Base {
             if(!input('?id') || !input('id/d')){
                 $this ->error('参数有误',url('manage'));
             }
+            // 所有商品分类
+            $model = new \app\admin\model\GoodsCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $model->getList($config);
+            $this->assign('allCategoryList',$allCategoryList);
+
             $id = input('id/d');
             $this->assign('id',$id);
             return $this->fetch();
