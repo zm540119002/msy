@@ -269,7 +269,6 @@ class Goods extends Base {
         }
         $projectId = input('get.projectId/d');
         $model = new \app\admin\model\ProjectGoods();
-
         $config = [
             'where' => [
                 ['pg.project_id','=',$projectId],
@@ -298,7 +297,6 @@ class Goods extends Base {
         }
         $goodsId = input('get.goodsId/d');
         $model = new \app\admin\model\RecommendGoods();
-
         $config = [
             'where' => [
                 ['rg.goods_id','=',$goodsId],
@@ -312,5 +310,32 @@ class Goods extends Base {
         $list = $model -> getList($config);
         $this->assign('list',$list);
         return view('goods/selected_list');
+    }
+
+    public function preview(){
+        if(!input('?id') || !input('id/d')){
+            $this ->error('参数有误');
+        }
+        $id = input('id/d');
+        $model = new \app\admin\model\Goods();
+        $config = [
+            'where'=>[
+                ['g.id','=',$id]
+            ],
+            'field'=>[
+                'g.id','g.name','g.headline','g.minimum_order_quantity','g.minimum_sample_quantity','g.bulk_price','g.sample_price',
+                'g.specification','g.specification','g.specification_unit','g.intro','g.parameters','g.main_img','g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
+                'g.detail_img','g.tag','gc1.name as category_name_1'
+            ],
+            'join' => [
+                ['goods_category gc1','gc1.id = g.category_id_1'],
+            ],
+        ];
+        $info = $model ->getInfo($config);
+        $info['main_img'] = explode(",",rtrim($info['main_img'], ","));
+        $info['detail_img'] = explode(",",rtrim($info['detail_img'], ","));
+        $info['tag'] = explode(",",rtrim($info['tag'], ","));
+        $this ->assign('info',$info);
+        return $this->fetch();
     }
 }

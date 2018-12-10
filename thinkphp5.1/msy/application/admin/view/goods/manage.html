@@ -93,6 +93,12 @@
                 var url =  controller + 'edit/id/' + _thisTr.data('id');
                 location.href = url;
             });
+            //编辑
+            $('body').on('click','.preview',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'preview/id/' + _thisTr.data('id');
+                location.href = url;
+            });
 
             //删除
             $('body').on('click','.del',function(){
