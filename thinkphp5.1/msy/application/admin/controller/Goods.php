@@ -113,7 +113,6 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
-                $goodsInfo['parameters'] = '<p>aaa</p>';
                 $this->assign('info',$goodsInfo);
             }
             //单位
