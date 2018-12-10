@@ -22,6 +22,7 @@
             </ul>
             <div class="error_tipc"></div>
             <form name="form" id="form">
+                <input type="hidden" name="pageType" value="layer"/>
                 <div class="search_bar">
                     <span class="left">产品分类:</span>
                     {include file="goods_category/linkage_tpl" /}
@@ -62,12 +63,10 @@
                 url:controller+'getList',
             };
             var getData = $('#form1').serializeObject();
-            getData.pageType = 'layer';
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
                 var getData = $('#form1').serializeObject();
-                getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
             //翻页
@@ -79,7 +78,6 @@
             $('#searchGoods').click(function(){
                 config.currentPage = 0;
                 var getData = $('#form1').serializeObject();
-                getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
 
