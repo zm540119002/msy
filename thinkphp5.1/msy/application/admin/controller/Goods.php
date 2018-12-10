@@ -82,9 +82,7 @@ class Goods extends Base {
                 $where = [
                     'id'=>input('post.id/d')
                 ];
-
                 $result = $modelGoods -> allowField(true) -> save($data,$where);
-                print_r(1111);exit;
                 if(false === $result){
                     return errorMsg('失败');
                 }
