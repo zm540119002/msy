@@ -38,7 +38,7 @@ class Events
     {
         Gateway::sendToClient($client_id, json_encode(array(
             'type'      => 'init',
-            'client_id' => $client_id,
+            'client_id' => $client_id
         )));
     }
     
@@ -50,11 +50,7 @@ class Events
    public static function onMessage($client_id, $message)
    {
         // 向所有人发送
-        Gateway::sendToAll($client_id, json_encode(array(
-            'type'      => 'msg',
-            'client_id' => $client_id,
-            'msy' => $message,
-        )));
+        Gateway::sendToAll("$client_id said: $message\r\n");
    }
    
    /**
@@ -64,9 +60,6 @@ class Events
    public static function onClose($client_id)
    {
        // 向所有人发送 
-       GateWay::sendToAll($client_id, json_encode(array(
-           'type'      => 'out',
-           'client_id' => $client_id,
-       )));
+       GateWay::sendToAll("$client_id logout\r\n");
    }
 }
