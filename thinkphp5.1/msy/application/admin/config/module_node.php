@@ -18,7 +18,5 @@ return [
                 ['id'=>202,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
         ],
-
-
     ],
 ];
