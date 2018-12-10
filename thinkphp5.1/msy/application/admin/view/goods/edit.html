@@ -106,7 +106,7 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
                             <script id="intro" type="text/plain">
-                                {$info.intro|htmlspecialchars_decode}
+                                
                             </script>
                         </td>
                     </tr>
@@ -163,8 +163,14 @@
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
+            var intro = '{$info.intro|raw}';
             var parameters = '{$info.parameters|raw}';
-            if(content){
+            if(intro){
+                ueIntro.ready(function() {
+                    ueIntro.setContent(intro);
+                });
+            }
+            if(parameters){
                 ueParam.ready(function() {
                     ueParam.setContent(parameters);
                 });
