@@ -73,18 +73,19 @@
                                 <option value="{$k}">{$unit}</option>
                                 {/volist}
                             </select>
+
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>起订数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="{$info.minimum_order_quantity}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>样品购买限额：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="{$info.minimum_sample_quantity}">
                         </td>
                     </tr>
                     <tr>
@@ -182,6 +183,14 @@
             ueDetail.ready(function() {
                 ueDetail.setContent($('#detailImg').val());
             });
+
+            //初始化所属分类
+            var category_id_1 = '{$info.category_id_1}';
+            if(category_id_1){
+                $('[name=category_id_1]').val(category_id_1);
+                $('[name=category_id_1]').change();
+            }
+
             //初始化所属分类
             var category_id_1 = '{$info.category_id_1}';
             if(category_id_1){
@@ -193,9 +202,9 @@
                 $('[name=category_id_2]').val(category_id_2);
                 $('[name=category_id_2]').change();
             }
-            var category_id_3 = '{$info.category_id_3}';
-            if(category_id_3){
-                $('[name=category_id_3]').val(category_id_3);
+            var specification_unit = '{$info.specification_unit}';
+            if(specification_unit){
+                $('[name=specification_unit]').val(specification_unit);
             }
 
             // 选择图片
@@ -250,8 +259,7 @@
                 postData.parameters = ueParam.getContent();
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
-                        return;
-                        location.href = controller + 'edit';
+                        location.href = controller + 'manage';
                     });
                 });
             });

@@ -15,6 +15,7 @@
         </div>
         <div class="main-content" id="mainContent">
             <form id="form1">
+                <input type="hidden" name="pageType" value="manage">
                 <table class="search-form search_product_type">
                     <tbody>
                         <tr>
@@ -56,12 +57,10 @@
                 url:controller+'getList',
             };
             var getData = $('#form1').serializeObject();
-            getData.pageType = 'manage';
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
                 var getData = $('#form1').serializeObject();
-                getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
             //翻页
@@ -83,7 +82,6 @@
             $('#searchGoods').click(function(){
                 config.currentPage = 0;
                 var getData = $('#form1').serializeObject();
-                getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
 
@@ -99,7 +97,7 @@
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
                 postData.id = _thisTr.data('id');
-                var url =  controller + '/del';
+                var url =  controller + 'del';
                 parent.layer.open({
                     btn: ['确定','取消'],//按钮
                     content:'删除你选中的商品吗？',

@@ -142,15 +142,6 @@
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
-//                postData.goods = [];
-//                var goodsEveryObj={};
-//                $(".checked_good").each(function(){
-//                    goodsEveryObj={
-//                        goodsId:$(this).data('goodsid'),
-//                        goodsNum:$(this).find('.goodsNum').val()
-//                    };
-//                    postData.goods.push(goodsEveryObj);
-//                });
                 //主图
                 postData.thumb_img = $('img.thumb_img').attr('src');
                 //详情图
@@ -163,8 +154,9 @@
                 postData.intro = ueIntro.getContent();
                 var url = module +'Project/edit';
                 $.post(url,postData,function(msg){
-                      return;
-//                    dialog.msg(msg);
+                    dialog.msg(msg,'',function () {
+                        location.href = controller + 'manage';
+                    });
                 });
             });
 

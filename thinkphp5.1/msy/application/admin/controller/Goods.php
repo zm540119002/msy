@@ -153,8 +153,8 @@ class Goods extends Base {
                 ['goods_category gc1','gc1.id = g.category_id_1'],
             ],
             'order'=>[
-                'g.id'=>'asc',
                 'g.sort'=>'desc',
+                'g.id'=>'desc',
             ],
         ];
         $list = $modelGoods ->pageQuery($config);
