@@ -77,7 +77,7 @@ class Goods extends Base {
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $data = $_POST;
-                $data['create_time'] = time();
+                $data['update_time'] = time();
                 $where = [
                     'id'=>input('post.id',0,'int')
                 ];
@@ -113,6 +113,7 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
+                $goodsInfo['parameters'] = '<p>aaa</p>';
                 $this->assign('info',$goodsInfo);
             }
             //单位

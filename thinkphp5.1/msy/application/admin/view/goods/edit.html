@@ -105,7 +105,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品参数：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="param" type="text/plain">
-                                {$info.parameters|htmlspecialchars_decode}
+
                             </script>
                         </td>
                     </tr>
@@ -138,7 +138,6 @@
         </div>
     </div>
 {/block}
-
 {block name="script"}
     <script type="text/javascript" src="public_admin_common_js/Ueditor/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->
@@ -152,10 +151,16 @@
         var ueDetail = UE.getEditor('detail');
         var ueNotices = UE.getEditor('main_img');
     </script>
-
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
+            var content = '{$info.parameters|raw}';
+            console.log(content);
+            if(content){
+                ueParam.ready(function() {
+                    ueParam.setContent(content);
+                });
+            }
             //初始化所属分类
             var category_id_1 = '{$info.category_id_1}';
             if(category_id_1){
@@ -222,7 +227,6 @@
                 //简介
                 postData.intro = ueIntro.getContent();
                 postData.parameters = ueParam.getContent();
-                console.log(postData);return;
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
                         return;
