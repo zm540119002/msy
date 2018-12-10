@@ -120,17 +120,15 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>主图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <script id="main_img" type="text/plain">
-                                {$info.main_img|formatImg}
-                            </script>
+                            <script id="main_img" type="text/plain"></script>
+                            <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品详情图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                             <script id="detail" type="text/plain">
-                                {$info.detail_img|formatImg}
-                            </script>
+                        <script id="detail" type="text/plain"></script>
+                        <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
                     </tr>
                     <tr>
                         <td width="11%"></td>
@@ -164,16 +162,26 @@
         $(function(){
             var intro = '{$info.intro|raw}';
             var parameters = '{$info.parameters|raw}';
+            //商品简介
             if(intro){
                 ueIntro.ready(function() {
                     ueIntro.setContent(intro);
                 });
             }
+            //商品参数
             if(parameters){
                 ueParam.ready(function() {
                     ueParam.setContent(parameters);
                 });
             }
+            //商品主图
+            ueNotices.ready(function() {
+                ueNotices.setContent($('#mainImg').val());
+            });
+            //商品详情图
+            ueDetail.ready(function() {
+                ueDetail.setContent($('#detailImg').val());
+            });
             //初始化所属分类
             var category_id_1 = '{$info.category_id_1}';
             if(category_id_1){
@@ -229,12 +237,12 @@
                 postData.thumb_img = $('img.thumb_img').attr('src');
                 //主图
                 postData.main_img = '';
-                $.each($('#ueditor_2').contents().find('.view img'),function () {
+                $.each($('#ueditor_3').contents().find('.view img'),function () {
                     postData.main_img += $(this).attr('src') + ',';
                 });
                 //详情图
                 postData.detail_img = '';
-                $.each($('#ueditor_3').contents().find('.view img'),function () {
+                $.each($('#ueditor_2').contents().find('.view img'),function () {
                     postData.detail_img += $(this).attr('src') + ',';
                 });
                 //简介

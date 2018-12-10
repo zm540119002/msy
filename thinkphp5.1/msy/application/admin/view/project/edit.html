@@ -52,7 +52,7 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
                             <script id="intro" type="text/plain">
-                                {$info.intro|htmlspecialchars_decode}
+                                
                             </script>
                         </td>
                     </tr>
@@ -61,8 +61,9 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
                             <script id="main_img" type="text/plain">
-                                {$info.main_img|formatImg}
+                                
                             </script>
+                            <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
                         </td>
                     </tr>
                     <tr>
@@ -94,6 +95,18 @@
 </script>
     <script type="text/javascript">
         $(function(){
+            var intro = '{$info.intro|raw}';
+            var parameters = '{$info.parameters|raw}';
+            //商品简介
+            if(intro){
+                ueIntro.ready(function() {
+                    ueIntro.setContent(intro);
+                });
+            }
+            //项目主图
+            main_img.ready(function() {
+                main_img.setContent($('#mainImg').val());
+            });
             // 选择图片
             $('#img').on('change',function(){
                 var img = event.target.files[0];
