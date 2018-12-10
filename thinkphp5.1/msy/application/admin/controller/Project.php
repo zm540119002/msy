@@ -44,8 +44,10 @@ class Project extends Base {
             $data = $_POST;
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
-                    'g.id' => input('post.id',0,'int'),
-                    'g.status' => 0,
+                    'where' => [
+                        'id' => input('post.id',0,'int'),
+                        'status' => 0,
+                    ],
                 ];
                 $goodsInfo = $model->getInfo($config);
                 //删除商品主图
@@ -90,12 +92,12 @@ class Project extends Base {
             if(input('?id') && (int)input('id')){
                 $config = [
                     'where' => [
-                        'g.status' => 0,
-                        'g.id'=>input('id',0,'int'),
+                        'status' => 0,
+                        'id'=>input('id',0,'int'),
                     ],
                 ];
                 $projectInfo = $model->getInfo($config);
-                $this->assign('projectInfo',$projectInfo);
+                $this->assign('info',$projectInfo);
             }
             return $this->fetch();
        }
