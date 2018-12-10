@@ -29,7 +29,7 @@ class Goods extends Base {
         $modelGoods = new \app\admin\model\Goods();
         if(request()->isPost()){
             if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
             }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
@@ -51,11 +51,13 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
-
+            
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
-                    'g.id' => input('post.id',0,'int'),
-                    'g.status' => 0,
+                    'where' => [
+                        'id' => input('post.id',0,'int'),
+                        'status' => 0,
+                    ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
                 //删除商品主图
@@ -74,9 +76,10 @@ class Goods extends Base {
                     $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
+                $data = $_POST;
                 $data['create_time'] = time();
                 $where = [
-                    'id'=>input('post.goodsId',0,'int')
+                    'id'=>input('post.id',0,'int')
                 ];
                 $result = $modelGoods -> allowField(true) -> save($data,$where);
                 if(false === $result){
@@ -110,7 +113,7 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
-                $this->assign('goodsInfo',$goodsInfo);
+                $this->assign('info',$goodsInfo);
             }
             //单位
             $this->assign('unitList',config('custom.unit'));
