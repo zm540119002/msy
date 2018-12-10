@@ -222,6 +222,7 @@
                 //简介
                 postData.intro = ueIntro.getContent();
                 postData.parameters = ueParam.getContent();
+                console.log(postData);return;
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
                         return;
