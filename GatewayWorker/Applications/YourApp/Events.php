@@ -38,7 +38,7 @@ class Events
     {
         Gateway::sendToClient($client_id, json_encode(array(
             'type'      => 'init',
-            'client_id' => $client_id
+            'client_id' => $client_id,
         )));
     }
     
