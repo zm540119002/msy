@@ -129,7 +129,7 @@ class Project extends Base {
                 'p.id','p.name','p.thumb_img','p.main_img','p.intro','p.shelf_status','p.sort','p.create_time','p.category_id_1',
             ],
             'order'=>[
-                'p.id'=>'asc',
+                'p.id'=>'desc',
                 'p.sort'=>'desc',
             ],
         ];
