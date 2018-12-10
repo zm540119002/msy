@@ -19,6 +19,7 @@
             <span class="content-label">已推荐产品</span>
             <a href="javascript:void(0);" class="confirm_add">确定添加</a>
             <ul class="columns_flex selected_goods_list" id="selected_list">
+
             </ul>
             <div class="error_tipc"></div>
             <form name="form" id="form">
@@ -59,7 +60,7 @@
             var id = {$id};
             //加载第一页
             var config = {
-                url:controller+'getList',
+                url:module+'goods/getList',
             };
             var getData = $('#form1').serializeObject();
             getData.pageSize = 10;
@@ -89,8 +90,8 @@
             //选择产品回显
             if(id){
                 $.ajax({
-                    url: module+'Goods/getRecommendGoods',
-                    data: {goodsId:id},
+                    url: module+'Goods/getProjectGoods',
+                    data: {projectId:id},
                     type: 'get',
                     beforeSend: function(){
                     },
@@ -102,7 +103,6 @@
                     }
                 });
             }
-
             //添加商品
             $('body').on('click','.add_goods',function(){
                 var selectedGoodsIds = [];
@@ -112,6 +112,8 @@
                 });
                 var _this=$(this);
                 var goodsId=_this.parents('li').data('id');
+                console.log(goodsId);
+                console.log(selectedGoodsIds);
                 if($.inArray(goodsId, selectedGoodsIds) !== -1){
                     layer.tips('此商品已选择过!','.add_goods',{
                         tips:[3,'#ff0000'],
@@ -152,8 +154,8 @@
                 $('.selected_goods_list li').each(function () {
                     var selectedGoods={};
                     var goodsSelectedId=$(this).data('goods-id');
-                    selectedGoods.goods_id=id;
-                    selectedGoods.recommend_goods_id=goodsSelectedId;
+                    selectedGoods.project_id=id;
+                    selectedGoods.goods_id=goodsSelectedId;
                     selectedIds.push(selectedGoods);
                 });
                 if($.isEmptyArray(selectedIds)){
@@ -161,7 +163,7 @@
                     return false;
                 }
                 postData.selectedIds = selectedIds;
-                var url = module+'Goods/addRecommendGoods';
+                var url = module+'project/addProjectGoods';
                 _this.addClass("nodisabled");//防止重复提交
                 $.ajax({
                     url: url,
@@ -175,12 +177,14 @@
                     success: function(data){
                         _this.removeClass("nodisabled");
                         dialog.msg(data,'',function () {
-                            var url =  module + 'Goods/manage';
+                            var url =  module + 'Project/manage';
                             location.href = url;
                         })
                     }
                 });
+
             })
+            
         });
     </script>
 {/block}

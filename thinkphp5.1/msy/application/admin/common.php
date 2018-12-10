@@ -77,6 +77,11 @@ function getUnitCN($num){
     return '';
 }
 
+
+//获取下上架类型
+function getShelStatus($num){
+    return $num?config('custom.shelf_status')[$num]:'';
+}
 /*开启底部购物车配置项
  */
 //function unlockingFooterCartConfig($arr){
