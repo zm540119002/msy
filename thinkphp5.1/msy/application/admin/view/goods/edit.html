@@ -49,7 +49,6 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>标题文案：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="headline" value="{$info.headline}">
-                            <input type="hidden" name="id" value="{$info.id}">
                         </td>
                     </tr>
                     <tr class="radioTypeOption first">
@@ -106,7 +105,7 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
                             <script id="intro" type="text/plain">
-                                {$info.intro|htmlspecialchars_decode}
+                                
                             </script>
                         </td>
                     </tr>
@@ -163,8 +162,14 @@
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
+            var intro = '{$info.intro|raw}';
             var parameters = '{$info.parameters|raw}';
-            if(content){
+            if(intro){
+                ueIntro.ready(function() {
+                    ueIntro.setContent(intro);
+                });
+            }
+            if(parameters){
                 ueParam.ready(function() {
                     ueParam.setContent(parameters);
                 });
@@ -237,6 +242,7 @@
                 postData.parameters = ueParam.getContent();
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
+                        return;
                         location.href = controller + 'edit';
                     });
                 });

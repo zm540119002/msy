@@ -55,7 +55,7 @@ class Goods extends Base {
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
                     'where' => [
-                        'id' => input('post.id',0,'int'),
+                        'id' => input('post.id/d'),
                         'status' => 0,
                     ],
                 ];
@@ -66,6 +66,7 @@ class Goods extends Base {
                 }
                 if($goodsInfo['main_img']){
                     //删除商品详情图
+
                     $oldImgArr = explode(',',$goodsInfo['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
@@ -79,7 +80,7 @@ class Goods extends Base {
                 $data = $_POST;
                 $data['update_time'] = time();
                 $where = [
-                    'id'=>input('post.id',0,'int')
+                    'id'=>input('post.id/d')
                 ];
                 $result = $modelGoods -> allowField(true) -> save($data,$where);
                 if(false === $result){
