@@ -50,7 +50,7 @@ class Events
    public static function onMessage($client_id, $message)
    {
         // 向所有人发送
-        Gateway::sendToAll("$client_id said: $message\r\n");
+//        Gateway::sendToAll("$client_id said: $message\r\n");
    }
    
    /**
@@ -60,6 +60,6 @@ class Events
    public static function onClose($client_id)
    {
        // 向所有人发送 
-       GateWay::sendToAll("$client_id logout\r\n");
+//       GateWay::sendToAll("$client_id logout\r\n");
    }
 }
