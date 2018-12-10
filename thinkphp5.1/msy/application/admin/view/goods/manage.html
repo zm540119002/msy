@@ -170,7 +170,7 @@
                     yes:function (index) {
                         $.post(url,postData,function(msg){
                             dialog.msg(msg,'',function(){
-
+                                _thisTr.find('.shelf-status').text(text);
                             });
                         });
                         parent.layer.close(index);

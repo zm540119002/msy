@@ -238,7 +238,6 @@
                 postData.parameters = ueParam.getContent();
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
-                        return;
                         location.href = controller + 'edit';
                     });
                 });
