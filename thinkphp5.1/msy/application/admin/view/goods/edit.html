@@ -163,11 +163,10 @@
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
-            var content = '{$info.parameters|raw}';
-            console.log(content);
+            var parameters = '{$info.parameters|raw}';
             if(content){
                 ueParam.ready(function() {
-                    ueParam.setContent(content);
+                    ueParam.setContent(parameters);
                 });
             }
             //初始化所属分类
