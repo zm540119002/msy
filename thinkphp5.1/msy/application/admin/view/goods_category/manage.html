@@ -60,7 +60,6 @@
             url:controller+'getList',
         };
         var getData = $('#form1').serializeObject();
-        getData.pageSize = 2;
         getData.pageType = 'manage';
         getPagingList(config,getData);
     });

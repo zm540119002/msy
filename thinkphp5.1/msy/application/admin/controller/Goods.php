@@ -241,6 +241,15 @@ class Goods extends Base {
             if(!input('?id') || !input('id/d')){
                 $this ->error('参数有误',url('manage'));
             }
+            // 所有商品分类
+            $model = new \app\admin\model\GoodsCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $model->getList($config);
+            $this->assign('allCategoryList',$allCategoryList);
             $id = input('id/d');
             $this->assign('id',$id);
             return $this->fetch();
