@@ -44,8 +44,10 @@ class Project extends Base {
             $data = $_POST;
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
-                    'g.id' => input('post.id',0,'int'),
-                    'g.status' => 0,
+                    'where' => [
+                        'id' => input('post.id',0,'int'),
+                        'status' => 0,
+                    ],
                 ];
                 $goodsInfo = $model->getInfo($config);
                 //删除商品主图
@@ -90,12 +92,12 @@ class Project extends Base {
             if(input('?id') && (int)input('id')){
                 $config = [
                     'where' => [
-                        'g.status' => 0,
-                        'g.id'=>input('id',0,'int'),
+                        'status' => 0,
+                        'id'=>input('id',0,'int'),
                     ],
                 ];
                 $projectInfo = $model->getInfo($config);
-                $this->assign('projectInfo',$projectInfo);
+                $this->assign('info',$projectInfo);
             }
             return $this->fetch();
        }
@@ -161,6 +163,42 @@ class Project extends Base {
             ];
         }
         return $model->del($condition);
+    }
+
+    /**
+     * 添加项目相关商品
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public function addProjectGoods(){
+        if(request()->isPost()){
+            $model = new \app\admin\model\ProjectGoods();
+            $data = input('post.selectedIds/a');
+            $condition = [
+                ['project_id','=',$data[0]['project_id']]
+            ];
+            $model->startTrans();
+            $rse = $model -> del($condition,$tag=false);
+            if(false === $rse){
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $res = $model->allowField(true)->saveAll($data)->toArray();
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $model -> commit();
+            return successMsg('成功');
+            
+        }else{
+            if(!input('?id') || !input('id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+            $id = input('id/d');
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
     }
 
 }

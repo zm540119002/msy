@@ -152,8 +152,33 @@
                         }
                     })
                 }
-            })
+            });
 
+            //上下架
+            $('body').on('click','.online,.offline',function(){
+                var _this = $(this);
+                var text = _this.text();
+                var shelf_status = _this.data('shelf-status');
+                var _thisTr = $(this).parents('tr');
+                var postData ={};
+                postData.id = _thisTr.data('id');
+                postData.shelf_status = shelf_status;
+                var url =  controller + 'setShelfStatus';
+                parent.layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:"是否"+text+'?',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            dialog.msg(msg,'',function(){
+
+                            });
+                        });
+                        parent.layer.close(index);
+                    }
+                });
+            });
+
+            //添加推荐商品
             $('body').on('click','.addRecommendGoods',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'addRecommendGoods/id/' + _thisTr.data('id');

@@ -24,10 +24,10 @@
                             <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
                         </p>
                             <p class="showimg" id="showimg">图片上传大小请小于50k</p>
-                            {empty name="projectInfo.main_img"}
+                            {empty name="info.thumb_img"}
                                 <img  class="thumb_img" src="">
                                 {else /}
-                                <img class="thumb_img" src="public_uploads/{$info.main_img}">
+                                <img class="thumb_img" src="public_uploads/{$info.thumb_img}">
                             {/empty}
                         </td>
                     </tr>
@@ -36,7 +36,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>项目名称：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name}">
-                            <input type="hidden" name="projectId" value="{$info.id}">
+                            <input type="hidden" name="id" value="{$info.id}">
                         </td>
                     </tr>
 

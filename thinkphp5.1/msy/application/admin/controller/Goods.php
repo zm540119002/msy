@@ -29,7 +29,7 @@ class Goods extends Base {
         $modelGoods = new \app\admin\model\Goods();
         if(request()->isPost()){
             if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
             }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
@@ -51,11 +51,13 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
-
+            
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
-                    'g.id' => input('post.id',0,'int'),
-                    'g.status' => 0,
+                    'where' => [
+                        'id' => input('post.id',0,'int'),
+                        'status' => 0,
+                    ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
                 //删除商品主图
@@ -74,9 +76,10 @@ class Goods extends Base {
                     $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
-                $data['create_time'] = time();
+                $data = $_POST;
+                $data['update_time'] = time();
                 $where = [
-                    'id'=>input('post.goodsId',0,'int')
+                    'id'=>input('post.id',0,'int')
                 ];
                 $result = $modelGoods -> allowField(true) -> save($data,$where);
                 if(false === $result){
@@ -110,7 +113,7 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
-                $this->assign('goodsInfo',$goodsInfo);
+                $this->assign('info',$goodsInfo);
             }
             //单位
             $this->assign('unitList',config('custom.unit'));
@@ -141,9 +144,9 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.minimum_order_quantity','g.minimum_sample_quantity',
-                'g.trait','g.thumb_img','g.main_img','g.parameters','g.detail_img','g.tag','g.shelf_status','g.create_time','g.category_id_1',
-                'g.category_id_2','g.category_id_3','gc1.name as category_name_1'
+                'g.id','g.name','g.bulk_price','g.sample_price',
+                'g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
+                'gc1.name as category_name_1'
             ],
             'join' => [
                 ['goods_category gc1','gc1.id = g.category_id_1'],
@@ -153,7 +156,6 @@ class Goods extends Base {
                 'g.sort'=>'desc',
             ],
         ];
-
         $list = $modelGoods ->pageQuery($config);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
@@ -188,11 +190,52 @@ class Goods extends Base {
         return $model->del($condition);
     }
 
+
+    /**
+     * 上下架
+     */
+    public function setShelfStatus(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+        $model = new \app\admin\model\Goods();
+        $id = input('post.id/d');
+        if(!input('?post.id') && !$id){
+             return errorMsg('失败');
+        }
+        $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
+     * 添加商品相关推荐商品
+     * @return array|mixed
+     * @throws \Exception
+     */
     public function addRecommendGoods(){
         if(request()->isPost()){
             $model = new \app\admin\model\RecommendGoods();
             $data = input('post.selectedIds/a');
-            $model -> saveAll($data);
+            $condition = [
+                ['goods_id','=',$data[0]['goods_id']]
+            ];
+            $model->startTrans();
+            $rse = $model -> del($condition,$tag=false);
+            if(false === $rse){
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $res = $model->allowField(true)->saveAll($data)->toArray();
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $model -> commit();
+            return successMsg('成功');
+
         }else{
             if(!input('?id') || !input('id/d')){
                 $this ->error('参数有误',url('manage'));
@@ -201,5 +244,63 @@ class Goods extends Base {
             $this->assign('id',$id);
             return $this->fetch();
         }
+    }
+
+    /***
+     * 获取项目相关商品
+     * @return array|\think\response\View
+     */
+    public function getProjectGoods(){
+        if(!request()->get()){
+            return errorMsg('参数有误');
+        }
+        if(!input('?get.projectId') || !input('get.projectId/d')){
+            return errorMsg('参数有误');
+        }
+        $projectId = input('get.projectId/d');
+        $model = new \app\admin\model\ProjectGoods();
+
+        $config = [
+            'where' => [
+                ['pg.project_id','=',$projectId],
+            ],'join' => [
+                ['goods g','g.id = pg.goods_id','left'],
+            ],'field' => [
+                'g.id','g.thumb_img','g.name',
+            ],
+
+        ];
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+        return view('goods/selected_list');
+    }
+
+    /**
+     * 获取 商品相关推荐商品
+     * @return array|\think\response\View
+     */
+    public function getRecommendGoods(){
+        if(!request()->get()){
+            return errorMsg('参数有误');
+        }
+        if(!input('?get.goodsId') || !input('get.goodsId/d')){
+            $this ->error('参数有误');
+        }
+        $goodsId = input('get.goodsId/d');
+        $model = new \app\admin\model\RecommendGoods();
+
+        $config = [
+            'where' => [
+                ['rg.goods_id','=',$goodsId],
+            ],'join' => [
+                ['goods g','g.id = rg.goods_id','left'],
+            ],'field' => [
+                'g.id','g.thumb_img','g.name',
+            ],
+
+        ];
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+        return view('goods/selected_list');
     }
 }
