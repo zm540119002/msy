@@ -49,7 +49,6 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>标题文案：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="headline" value="{$info.headline}">
-                            <input type="hidden" name="id" value="{$info.id}">
                         </td>
                     </tr>
                     <tr class="radioTypeOption first">
@@ -164,7 +163,7 @@
     <script type="text/javascript">
         $(function(){
             var parameters = '{$info.parameters|raw}';
-            if(content){
+            if(parameters){
                 ueParam.ready(function() {
                     ueParam.setContent(parameters);
                 });
@@ -237,6 +236,7 @@
                 postData.parameters = ueParam.getContent();
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
+                        return;
                         location.href = controller + 'edit';
                     });
                 });
