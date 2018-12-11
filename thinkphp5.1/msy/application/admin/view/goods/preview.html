@@ -40,7 +40,7 @@
                             <span class="hot left">热</span>
                             <p class="f28">{$info.headline}</p>
                         </div>
-                        <p>{$info.intro|htmlspecialchars_decode}/p>
+                        <p>{$info.intro|raw}/p>
                         <div class="tags_item columns_flex l-r-sides">
                             <div>
                                 {volist name="$info.tag" id="tag"}
@@ -112,7 +112,7 @@
             <div id="a" class="floor bottomLine">
                 <div>
                     <p>商品参数</p>
-                    <p>{$info.parameters|htmlspecialchars_decode}</p>
+                    <p>{$info.parameters|raw}</p>
                 </div>
             </div>
             <div id="b" class="floor bottomLine">
