@@ -599,7 +599,7 @@ function isPhoneSide()
 //生成不带二维码
 function createQRcode($url){
     //生成二维码图片
-    $object = new \common\component\qrcode\Qrcode();
+    $object = new \common\component\code\Qrcode();
     $qrcodePath = WEB_URL.'Public/images/qrcode/';//保存文件路径
     $fileName = time().'.png';//保存文件名
     $outFile = $qrcodePath.$fileName;
@@ -615,10 +615,8 @@ function createQRcode($url){
 /**
  * @param $url 要跳转的url
  * @param $newRelativePath 生成二维码图片保存路径 相对路径
- * @param $logo 中间logo的图片路径 绝对路径
- * @param string $eclevel
- * @param int $pixelPerPoint
- * @return array|string 返回二维码相对路径
+ * @param string $logo 中间logo的图片路径 绝对路径
+ * @return array|string
  */
 function createLogoQRcode($url,$newRelativePath,$logo=''){
     $QRcode =  new \common\component\code\Qrcode();;
@@ -635,7 +633,7 @@ function createLogoQRcode($url,$newRelativePath,$logo=''){
         return errorMsg('创建新目录失败');
     }
     //生产没有logo二维码图片
-    $filename = generateSN().'nologo.png';
+    $filename = generateSN(5).'nologo.png';
     $noLogoFile = $newPath.$filename;
     $QRcode->png($url, $noLogoFile);
     if(!empty($logo))

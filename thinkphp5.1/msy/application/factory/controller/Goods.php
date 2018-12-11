@@ -118,7 +118,7 @@ class Goods extends \common\controller\FactoryStoreBase
                 'qrcode'=>config('upload_dir.upload_path').'/'.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
             ];
-            return $this->compose($init);
+            return compose($init);
         }
     }
 
