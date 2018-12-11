@@ -16,4 +16,5 @@ return [
 
     'weiya_goods' => 'weiya_goods/',//维雅定制商品图片
     'weiya_project' => 'weiya_project/',//维雅定制项目图片
+    'weiya_goods_gategory' => 'weiya_goods_gategory/',//维雅定制项目图片
 ];
