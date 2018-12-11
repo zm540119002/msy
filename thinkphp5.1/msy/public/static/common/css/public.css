@@ -4006,7 +4006,7 @@ select[name="nodeIds"]{
     height:42px;
     line-height:42px;
     background: #fff;
-    border-bottom:1px solid #333;
+    border-bottom:1px solid #d9d9d9;
 }
 .nav-floor a{
     width:33.3%;
@@ -4014,8 +4014,7 @@ select[name="nodeIds"]{
     box-sizing: border-box;
 }
 .nav-floor a.active{
-    background: #000;
-    color:#fff;
+    color:#ff7bac;
 }
 .floor{
     /*height:600px;*/
