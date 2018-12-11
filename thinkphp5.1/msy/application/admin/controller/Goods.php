@@ -252,7 +252,7 @@ class Goods extends Base {
                 if(!empty($oldQRCodes)){
                     unlink($uploadPath.$oldQRCodes);
                 }
-                return successMsg('成功',$newQRCodes);
+                return successMsg($newQRCodes);
             }else{
                 return successMsg('失败',$res['info']);
             }
