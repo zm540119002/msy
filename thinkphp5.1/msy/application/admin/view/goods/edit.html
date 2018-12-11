@@ -118,7 +118,7 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品详情图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                        <script id="detail" type="text/plain"></script>
+                        <script id="detail_img" type="text/plain"></script>
                         <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
                     </tr>
                     <tr>
@@ -145,7 +145,7 @@
     <script type="text/javascript">
 //        var ueIntro = UE.getEditor('intro');
         var ueParam = UE.getEditor('param');
-        var ueDetail = UE.getEditor('detail');
+        var ueDetail = UE.getEditor('detail_img');
         var ueNotices = UE.getEditor('main_img');
     </script>
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
@@ -198,12 +198,13 @@
                 postData.thumb_img = $('img.thumb_img').attr('src');
                 //主图
                 postData.main_img = '';
-                $.each($('#ueditor_3').contents().find('.view img'),function () {
+                $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
                     postData.main_img += $(this).attr('src') + ',';
+
                 });
                 //详情图
                 postData.detail_img = '';
-                $.each($('#ueditor_2').contents().find('.view img'),function () {
+                $.each($('#detail_img').find('iframe').contents().find('.view img'),function () {
                     postData.detail_img += $(this).attr('src') + ',';
                 });
                 //简介
