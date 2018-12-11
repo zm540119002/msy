@@ -210,6 +210,43 @@ class Goods extends Base {
         return successMsg('成功');
     }
 
+    //生成商品二维码
+    /**
+     * @return array
+     */
+    public function generateGoodsQRcode(){
+        if(request()->isPost()){
+            $id = input('post.id/d');
+            $config = [
+                'where'=>[
+                    ['id','=',$id],
+                    ['status','=',0]
+                ]
+            ];
+            $model = new \app\admin\model\Goods();
+            $info = $model -> getInfo($config);
+            $url = request()->domain().'/index.php/admin/Goods/preview/id/'.$id;
+//            $avatarPath = request()->domain().'/static/common/img/ucenter_logo.png';
+            $newRelativePath = config('upload_dir.weiya_goods').'/';
+            $shareQRCodes = createLogoQRcode($url,$newRelativePath);
+            $init = [
+                'filename'=>'goods',   //保存目录  ./uploads/compose/goods....
+                'title'=>'ggg',
+                'type'=>'2222',
+                'slogan'=>"采购平台·省了即赚到！",
+                'name'=>$info['headline'],
+                'introduce'=>$info['intro'],
+                'money'=>'￥'.$info['bulk_price'].'元',
+                'logo'=>'./static/common/img/ucenter_logo.png', // 60*55px
+                'brand'=>config('upload_dir.upload_path').'/'.$info['thumb_img'], // 160*55
+                'goods'=>config('upload_dir.upload_path').'/'.$info['thumb_img'], // 460*534
+                'qrcode'=>config('upload_dir.upload_path').'/'.$shareQRCodes, // 120*120
+                'font'=>'./static/font/simhei.ttf',   //字体
+            ];
+            return compose($init);
+        }
+    }
+
     /**
      * 添加商品相关推荐商品
      * @return array|mixed

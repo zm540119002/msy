@@ -30,7 +30,7 @@
                         <div class="columns_flex l-r-sides">
                             <div>
                                 <span class="red">￥<price class="sale_price">{$info.bulk_price}</price></span>
-                                <span>25mlX5片/盒</span>
+                                <span>{$info.specification}</span>
                             </div>
                             <div>
                                 <a class="qrcode_share" href="javascript:void(0);"></a>
@@ -86,8 +86,8 @@
                 <li>
                     <div class="content-padding columns_flex l-r-sides">
                         <div>
-                            <p>起订数量:<span>{$info.minimum_order_quantity}盒</span></p>
-                            <p>采购数量(单位:盒)</p>
+                            <p>起订数量:<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></p>
+                            <p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
                         </div>
                         <div class="quantity_wrapper selected-number">
                             <a href="javascript:void(0);" class="greduce">-</a>
