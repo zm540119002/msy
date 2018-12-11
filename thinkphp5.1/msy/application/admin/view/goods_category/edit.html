@@ -284,14 +284,11 @@
                 reader.onload = function(e){
                     $(".img").attr("src",e.target.result);
                     var postData = {fileBase64: e.target.result};
-                    postData.imgWidth = 190;
                     var url = controller + 'uploadFileToTemp';
                     //提交
                     $.post(url,postData,function(msg){
-                        dialog.msg(msg,'',function () {
-                            $(".img").attr("src",'/uploads/' + msg.info);
-                            $("[name=img]").val(msg.info);
-                        });
+                        $(".img").attr("src",'/uploads/' + msg.info);
+                        $("[name=img]").val(msg.info);
                     });
                 }
             });
