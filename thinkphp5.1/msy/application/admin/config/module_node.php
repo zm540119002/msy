@@ -14,11 +14,9 @@ return [
         'project'=>[
             'id'=>200,'name'=>'项目','type'=>2,
             'sub_menu' => [
-                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
+//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
                 ['id'=>202,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
         ],
-
-
     ],
 ];

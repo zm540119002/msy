@@ -41,7 +41,6 @@
         $('.addRecommendGoods').on('click',function(){
             var goods = $('.selectedTplList').val();
             var _thisId=$(this).parents('tr').data('id');
-            console.log(_thisId);
             layer.open({
                 title:['添加推荐产品'],
                 skin: 'addGoodsLayer',
@@ -53,7 +52,6 @@
                         url:module+'Goods/getList',
                     };
                     var postData = {
-                        pageSize:4,
                         pageType:'layer'
                     };
                     config.container = $('.addGoodsLayer #list');  // container:$('.addsalesgoodsLayer #list')

@@ -15,6 +15,7 @@
         </div>
         <div class="main-content" id="mainContent">
             <form id="form1">
+                <input type="hidden" name="pageType" value="manage">
                 <table class="search-form search_product_type">
                     <tbody>
                         <tr>
@@ -56,14 +57,10 @@
                 url:controller+'getList',
             };
             var getData = $('#form1').serializeObject();
-            getData.pageSize = 2;
-            getData.pageType = 'manage';
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
                 var getData = $('#form1').serializeObject();
-                getData.pageSize = 2;
-                getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
             //翻页
@@ -85,8 +82,6 @@
             $('#searchGoods').click(function(){
                 config.currentPage = 0;
                 var getData = $('#form1').serializeObject();
-                getData.pageSize = 2;
-                getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
 
@@ -102,7 +97,7 @@
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
                 postData.id = _thisTr.data('id');
-                var url =  controller + '/del';
+                var url =  controller + 'del';
                 parent.layer.open({
                     btn: ['确定','取消'],//按钮
                     content:'删除你选中的商品吗？',
@@ -152,7 +147,37 @@
                     })
                 }
             })
-
+            //上下架
+            $('body').on('click','.set-shelf-status',function(){
+                var _this = $(this);
+                var text = _this.text();
+                var shelf_status = _this.data('shelf-status');
+                var _thisTr = $(this).parents('tr');
+                var postData ={};
+                postData.id = _thisTr.data('id');
+                postData.shelf_status = shelf_status;
+                var url =  controller + 'setShelfStatus';
+                parent.layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:"是否"+text+'?',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            dialog.msg(msg,'',function(){
+                                _thisTr.find('.shelf-status').text(text);
+                                if(shelf_status == 3){
+                                    _this.text('下架');
+                                    _this.data('shelf-status',1);
+                                }else{
+                                    _this.text('上架');
+                                    _this.data('shelf-status',3);
+                                }
+                            });
+                        });
+                        parent.layer.close(index);
+                    }
+                });
+            });
+            //去设置项目商品
             $('body').on('click','.addProjectGoods',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'addProjectGoods/id/' + _thisTr.data('id');

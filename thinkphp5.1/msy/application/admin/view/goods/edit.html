@@ -49,7 +49,6 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>标题文案：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="headline" value="{$info.headline}">
-                            <input type="hidden" name="id" value="{$info.id}">
                         </td>
                     </tr>
                     <tr class="radioTypeOption first">
@@ -74,18 +73,19 @@
                                 <option value="{$k}">{$unit}</option>
                                 {/volist}
                             </select>
+
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>起订数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="{$info.minimum_order_quantity}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>样品购买限额：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="{$info.minimum_sample_quantity}">
                         </td>
                     </tr>
                     <tr>
@@ -106,7 +106,7 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!-- 加载编辑器的容器 -->
                             <script id="intro" type="text/plain">
-                                {$info.intro|htmlspecialchars_decode}
+                                
                             </script>
                         </td>
                     </tr>
@@ -121,17 +121,15 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>主图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <script id="main_img" type="text/plain">
-                                {$info.main_img|formatImg}
-                            </script>
+                            <script id="main_img" type="text/plain"></script>
+                            <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品详情图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                             <script id="detail" type="text/plain">
-                                {$info.detail_img|formatImg}
-                            </script>
+                        <script id="detail" type="text/plain"></script>
+                        <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
                     </tr>
                     <tr>
                         <td width="11%"></td>
@@ -163,12 +161,36 @@
     <script type="text/javascript" src="public_admin_common_js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
+            var intro = '{$info.intro|raw}';
             var parameters = '{$info.parameters|raw}';
-            if(content){
+            //商品简介
+            if(intro){
+                ueIntro.ready(function() {
+                    ueIntro.setContent(intro);
+                });
+            }
+            //商品参数
+            if(parameters){
                 ueParam.ready(function() {
                     ueParam.setContent(parameters);
                 });
             }
+            //商品主图
+            ueNotices.ready(function() {
+                ueNotices.setContent($('#mainImg').val());
+            });
+            //商品详情图
+            ueDetail.ready(function() {
+                ueDetail.setContent($('#detailImg').val());
+            });
+
+            //初始化所属分类
+            var category_id_1 = '{$info.category_id_1}';
+            if(category_id_1){
+                $('[name=category_id_1]').val(category_id_1);
+                $('[name=category_id_1]').change();
+            }
+
             //初始化所属分类
             var category_id_1 = '{$info.category_id_1}';
             if(category_id_1){
@@ -180,9 +202,9 @@
                 $('[name=category_id_2]').val(category_id_2);
                 $('[name=category_id_2]').change();
             }
-            var category_id_3 = '{$info.category_id_3}';
-            if(category_id_3){
-                $('[name=category_id_3]').val(category_id_3);
+            var specification_unit = '{$info.specification_unit}';
+            if(specification_unit){
+                $('[name=specification_unit]').val(specification_unit);
             }
 
             // 选择图片
@@ -224,12 +246,12 @@
                 postData.thumb_img = $('img.thumb_img').attr('src');
                 //主图
                 postData.main_img = '';
-                $.each($('#ueditor_2').contents().find('.view img'),function () {
+                $.each($('#ueditor_3').contents().find('.view img'),function () {
                     postData.main_img += $(this).attr('src') + ',';
                 });
                 //详情图
                 postData.detail_img = '';
-                $.each($('#ueditor_3').contents().find('.view img'),function () {
+                $.each($('#ueditor_2').contents().find('.view img'),function () {
                     postData.detail_img += $(this).attr('src') + ',';
                 });
                 //简介
@@ -237,7 +259,7 @@
                 postData.parameters = ueParam.getContent();
                 $.post(action,postData,function(data){
                     dialog.msg(data,'',function () {
-                        location.href = controller + 'edit';
+                        location.href = controller + 'manage';
                     });
                 });
             });
