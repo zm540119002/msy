@@ -311,6 +311,10 @@ class Goods extends Base {
         return view('goods/selected_list');
     }
 
+    /**
+     * @return mixed
+     * 商品预览
+     */
     public function preview(){
         if(!input('?id') || !input('id/d')){
             $this ->error('参数有误');
