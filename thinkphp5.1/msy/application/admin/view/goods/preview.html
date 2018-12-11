@@ -1,7 +1,7 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
     <link type="text/css" rel="stylesheet" href="public_admin_common_css/fenlei.css" />
-    <link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />
+    <!--<link type="text/css" rel="stylesheet" href="public_admin_common_css/skin.css" />-->
 {/block}
 {block name="content"}
 <article class="f24">
@@ -59,7 +59,7 @@
                         <p class="top_b_text wk_notice separation">[每周采购须知] 美尚精选优质货源任你选！随时参团，享受超级划算的采购结算价格，周五统计订单后送达工厂按订单备货发货；VIP采购商会员额外享受5%返点福利。</p>
                         <div class="columns_flex l-r-sides separation">
                             <div class="mid_module_left">
-                                <img src="public/static/common/img/wy_dz.png" alt="">
+                                <img src="public_img/wy_dz.png" alt="">
                                 <div>
                                     <span class="left count-down-icons"></span>
                                     <div class="d-r">
@@ -109,15 +109,15 @@
             <a href="javascript:;" data-floor="c">评分评价</a>
         </nav>
         <div class="floor-content">
-            <div id="a" class="floor bottomLine">
-                <div>
-                    <p>商品参数</p>
+            <div id="a" class="floor">
+                <div class="floor_item">
+                    <p class="content-label">商品参数</p>
                     <p>{$info.parameters|raw}</p>
                 </div>
             </div>
-            <div id="b" class="floor bottomLine">
-                <div>
-                    <p>商品详情</p>
+            <div id="b" class="floor">
+                <div class="floor_item">
+                    <p class="content-label">商品详情</p>
                     {volist name="info.detail_img" id="detail_img"}
                     <div class="">
                         <img src="public_uploads/{$detail_img}" alt="" class="common_default_img">
@@ -126,7 +126,7 @@
                 </div>
             </div>
             <div id="c" class="floor">
-                <div>
+                <div class="floor_item">
                     <p>评分评价</p>
                     <div class="goods_star_score">
                         <div class="five_star">
@@ -158,7 +158,7 @@
                                         <span class="real_star"></span>
                                     </div>
                                 </div>
-                                <p>省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的</p>
+                                <p>物流挺快的，很适合我的皮肤，感觉蛮不错的！</p>
                                 <div class="cmt_att">
                                     <span class="img">
                                         <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
@@ -197,7 +197,7 @@
                                         <span class="real_star"></span>
                                     </div>
                                 </div>
-                                <p>省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的</p>
+                                <p>物流挺快的，很适合我的皮肤，感觉蛮不错的！下次介绍朋友来买</p>
                             </div>
                         </li>
                         <li>
@@ -216,7 +216,7 @@
                                         <span class="real_star"></span>
                                     </div>
                                 </div>
-                                <p>省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的省电费电费电费的</p>
+                                <p>感觉蛮不错的！值得买</p>
                             </div>
                         </li>
                         <li>
