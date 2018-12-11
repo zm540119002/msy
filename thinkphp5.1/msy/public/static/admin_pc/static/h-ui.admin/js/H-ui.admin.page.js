@@ -112,6 +112,13 @@ $(function(){
 	$(".nav-toggle").click(function(){
 		$(".Hui-aside").slideToggle();
 	});
+	$(".Hui-aside").on("click",".menu_dropdown dd li",function(){
+		$('.Hui-aside .menu_dropdown dd').show();
+		$(this).addClass('current');
+		if($(window).width()<768){
+			$(".Hui-aside").slideToggle();
+		}
+	});
 	$(".Hui-aside").on("click",".menu_dropdown dd li a",function(){
 		if($(window).width()<768){
 			$(".Hui-aside").slideToggle();
