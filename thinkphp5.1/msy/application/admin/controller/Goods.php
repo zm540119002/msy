@@ -28,9 +28,9 @@ class Goods extends Base {
     public function edit(){
         $modelGoods = new \app\admin\model\Goods();
         if(request()->isPost()){
-            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
-            }
+//            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+//                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['thumb_img']));
+//            }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
@@ -39,6 +39,8 @@ class Goods extends Base {
                         $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
                     }
                 }
+                //主图第一张为缩略图
+                $_POST['thumb_img'] = $tempArr[0];//
                 $_POST['main_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
