@@ -224,41 +224,37 @@ class Goods extends Base {
             ];
             $model = new \app\admin\model\Goods();
             $info = $model -> getInfo($config);
-            if(strlen($info['intro']) > 25){
-                $intro1 = substr($info['intro'],0,2);
-                $intro2 = substr($info['intro'],25,25);
-            }else{
-                $intro1 = $info['intro'];
-                $intro2 = '';
-            }
+            $oldQRCodes = $info['rq_code_url'];
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
             $url = request()->domain().'/index.php/admin/Goods/preview/id/'.$id;
-//            $avatarPath = request()->domain().'/static/common/img/ucenter_logo.png';
             $newRelativePath = config('upload_dir.weiya_goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
             $init = [
                 'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
                 'title'=>'维雅生物药妆',
                 'slogan'=>'领先的品牌定制平台',
-                'name'=> $info['name'],
+                'name'=> $info['headline'],
                 'specification'=> $info['specification'],
                 'money'=>'￥'.$info['bulk_price'].' 元',
-                'intro1'=>'adsgaghafh',
-                'intro2'=>'fgashfa',
                 'logo_img'=> request()->domain().'/static/common/img/ucenter_logo.png', // 460*534
-                'goods_img'=> request()->domain().'/'.$uploadPath.$info['thumb_img'], // 460*534
-                'qrcode'=>request()->domain().'/'.$uploadPath.$shareQRCodes, // 120*120
+                'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
+                'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
             ];
             $res =  $this->compose($init);
-            print_r($res);exit;
             if($res['status'] == 1){
-                unlink($uploadPath.$shareQRCodes);
-                $rse = $model->where(['id'=>$id])->setField(['rq_code_url'=>$res['info']]);
-                if(!$rse){
+                $newQRCodes = $res['info'];
+                $res= $model->where(['id'=>$id])->setField(['rq_code_url'=>$newQRCodes]);
+                if(!$res){
                     return errorMsg('失败');
                 }
-                return successMsg('成功');
+                unlink($uploadPath.$shareQRCodes);
+                if(!empty($oldQRCodes)){
+                    unlink($uploadPath.$oldQRCodes);
+                }
+                return successMsg('成功',$newQRCodes);
+            }else{
+                return successMsg('失败',$res['info']);
             }
         }
     }
@@ -417,11 +413,9 @@ class Goods extends Base {
         imagefill($im, 0, 0, $color);
         imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
         imagettftext($im, 16, 0, 100, 60, $text_color, $init['font'], $init['slogan']);   //标语
-        imagettftext($im, 12, 0, 20, 670, $text_color, $init['font'], $init['name']); //说明
-        imagettftext($im, 13, 0, 20, 700, $text_color, $init['font'], $init['money']); //金额
-        imagettftext($im, 8, 0,  20, 720, $text_color, $init['font'], $init['specification']); //规格
-        imagettftext($im, 10, 0, 20, 740, $text_color, $init['font'], $init['intro1']); //金额
-        imagettftext($im, 10, 0, 20, 760, $text_color, $init['font'], $init['intro2']); //金额
+        imagettftext($im, 15, 0, 20, 670, $text_color, $init['font'], $init['money']); //金额
+        imagettftext($im, 6, 0,  200, 670, $text_color, $init['font'], $init['specification']); //规格
+        imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name']); //说明
         imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 60, 55, $logoImg['width'], $logoImg['height'] );  //平台logo
         imagecopyresized($im, $goodsImg['obj'], 10, 106, 0, 0, 460, 534, $goodsImg['width'], $goodsImg['height']);  //商品
         imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维
