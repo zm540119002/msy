@@ -18,7 +18,21 @@ class GoodsCategory extends\common\model\Base {
 		if(!$validateGoodsCategory->scene('edit')->check($postData)){
 			return errorMsg($validateGoodsCategory->getError());
 		}
+		if( isset($postData['img']) && $postData['img'] ){
+			$postData['img'] = moveImgFromTemp(config('upload_dir.weiya_goods_gategory'),basename($postData['img']));
+		}
 		if($postData['id'] && intval($postData['id'])){
+			$config = [
+				'where' => [
+					'id' => $postData['id'],
+					'status' => 0,
+				],
+			];
+			$info = $this->getInfo($config);
+			//删除商品主图
+			if($info['img']){
+				delImgFromPaths($info['img'],$postData['img']);
+			}
 			$postData['update_time'] = time();
 			$this->isUpdate(true)->save($postData);
 		}else{

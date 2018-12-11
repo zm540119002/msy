@@ -191,7 +191,35 @@
             = window.location.search.substr(1).match(reg);
         if (r!=null) return unescape(r[2]); return null;
     }
-
+    //楼层
+    $.fn.scrollFloor=function(options){
+        var defaults={
+            floorNavMenu:'nav-floor',
+            floorContent:'floor-content',
+            floorContentChild:'floor',
+            activeClass:'active'
+        };
+        var settings=$.extend(defaults,options);
+        $(document).scroll(function(){
+                
+            var parentHeight=$('.'+settings.floorContent).height(),
+                parentOffsetTop=$('.'+settings.floorContent)[0].offsetTop,
+                childHeight=$('.'+settings.floorContentChild).outerHeight(true),
+                docScrollTop=$(window).scrollTop();
+                result=docScrollTop-parentOffsetTop;
+                n=Math.floor(result/childHeight);
+                console.log(n);
+                if(result>=0){
+                    
+                    $('.'+settings.floorNavMenu).children().removeClass(settings.activeClass).eq(n).addClass(settings.activeClass);
+                }
+        });
+        $('.'+settings.floorNavMenu).children().on('click',function(){
+            var i=$(this).index();
+            var scrollFloorH=$('.'+settings.floorContent)[0].offsetTop+$('.'+settings.floorContentChild).outerHeight(true)*i;
+            $('body,html').animate({'scrollTop':scrollFloorH+'px'},800);
+        })
+    }
 
 })(jQuery);
 

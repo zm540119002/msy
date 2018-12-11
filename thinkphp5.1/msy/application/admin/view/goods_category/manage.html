@@ -22,31 +22,10 @@
         </tbody>
     </table>
 </div>
-<div class="content">
-    <div class="search-result">
-        <table class="table tb-type2">
-            <thead>
-            <tr class="thead">
-                <th></th>
-                <th width="10%">排序</th>
-                <th width="20%">名称</th>
-                <th width="40%">备注</th>
-                <th width="20%">操作</th>
-            </tr>
-            </thead>
-            <tbody id="list"></tbody>
-            <tfoot>
-            <tr class="tfoot">
-                <td><input type="checkbox" class="check_all_2" id="check_all_2"></td>
-                <td id="batchAction" colspan="15">
-                    <span class="all_checkbox"><label for="check_all_2">全选</label></span>&nbsp;&nbsp;
-                    <a href="JavaScript:void(0);" class="batchDel" ><span>批量删除</span></a>
-                </td>
-            </tr>
-            </tfoot>
-        </table>
-    </div>
+<div class="content" id="list">
+
 </div>
+
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -62,6 +41,22 @@
         var getData = $('#form1').serializeObject();
         getData.pageType = 'manage';
         getPagingList(config,getData);
+
+        //翻页
+        $('body').on('click','.pager2',function(){
+            var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
+            var selectedPage=$(this).data('page');
+            if(selectedPage=='»'){
+                curIndex++;
+                selectedPage=curIndex;
+            }
+            if(selectedPage=='«'){
+                curIndex--;
+                selectedPage=curIndex;
+            }
+            config.currentPage = selectedPage;
+            getPagingList(config,getData);
+        });
     });
 </script>
 {/block}
