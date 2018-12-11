@@ -166,11 +166,13 @@
                 postData.id = _thisTr.data('id');
                 postData.shelf_status = shelf_status;
                 var url =  controller + 'setShelfStatus';
-                parent.layer.open({
+                _this.addClass("nodisabled");//防止重复提交
+                layer.open({
                     btn: ['确定','取消'],//按钮
                     content:"是否"+text+'?',
                     yes:function (index) {
                         $.post(url,postData,function(msg){
+                            _this.removeClass("nodisabled");
                             dialog.msg(msg,'',function(){
                                 _thisTr.find('.shelf-status').text(text);
                                 if(shelf_status == 3){
@@ -182,7 +184,7 @@
                                 }
                             });
                         });
-                        parent.layer.close(index);
+                        layer.close(index);
                     }
                 });
             });
@@ -196,19 +198,16 @@
 
             //生成二维码图片
             $('body').on('click','.generateQRcode',function(){
+                var _this = $(this);
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
                 postData.id = _thisTr.data('id');
                 var url =  controller + 'generateGoodsQRcode';
-                layer.open({
-                    btn: ['确定','取消'],//按钮
-                    content:'生成二维码？',
-                    yes:function (index) {
-                        $.post(url,postData,function(msg){
-
-                        });
-                        layer.close(index);
-                    }
+                _this.addClass("nodisabled");//防止重复提交
+                $.post(url,postData,function(msg){
+                    console.log(msg);
+                    _this.removeClass("nodisabled");//防止重复提交
+                    dialog.success('成功');
                 });
             });
         });
