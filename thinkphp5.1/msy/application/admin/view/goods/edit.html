@@ -73,7 +73,6 @@
                                 <option value="{$k}">{$unit}</option>
                                 {/volist}
                             </select>
-
                         </td>
                     </tr>
                     <tr>
@@ -86,6 +85,17 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>样品购买限额：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="{$info.minimum_sample_quantity}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>采购单位：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <select name="purchase_unit">
+                                <option value="">请选择单位</option>
+                                {volist name="unitList" id="unit"  key="k"}
+                                <option value="{$k}">{$unit}</option>
+                                {/volist}
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -205,6 +215,10 @@
             var specification_unit = '{$info.specification_unit}';
             if(specification_unit){
                 $('[name=specification_unit]').val(specification_unit);
+            }
+            var purchase_unit = '{$info.purchase_unit}';
+            if(purchase_unit){
+                $('[name=purchase_unit]').val(purchase_unit);
             }
 
             // 选择图片
