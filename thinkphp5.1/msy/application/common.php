@@ -66,6 +66,11 @@ function getDutyCn($num){
     }
     return $res;
 }
+
+//获取店铺合作类型
+function getUnit($num){
+    return $num?config('custom.unit')[$num]:'';
+}
 /*开启底部购物车配置项
  */
 function unlockingFooterCartConfig($arr){
