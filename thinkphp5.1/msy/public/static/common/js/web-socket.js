@@ -1,6 +1,10 @@
 console.log(123);
 // 服务端主动推送消息时会触发这里的onmessage
 ws = new WebSocket("ws://msy.meishangyun.com:8282");
+ws.onopen = function(){
+    console.log('open');
+    ws.send('hello');
+};
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
     switch(data.type){
@@ -36,10 +40,6 @@ ws.onmessage = function(e){
             // 当mvc框架调用GatewayClient发消息时直接alert出来
             console.log(data);
     }
-};
-ws.onopen = function(){
-    console.log('open');
-    ws.send('hello');
 };
 ws.onclose = function(e){
     console.log(e);
