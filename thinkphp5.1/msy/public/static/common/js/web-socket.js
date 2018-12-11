@@ -36,8 +36,12 @@ ws.onmessage = function(e){
                 }
             });
             break;
+        case 'msg':
+            console.log(data);
+            break;
         default :
             // 当mvc框架调用GatewayClient发消息时直接alert出来
+            console.log('default');
             console.log(data);
     }
 };
