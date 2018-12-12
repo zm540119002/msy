@@ -42,11 +42,14 @@ class CustomerService extends \common\controller\UserBase{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
-            $msg = [
-                'type' => 'msg',
-                'msg' => $postData['msg'],
-            ];
-            Gateway::sendToUid($postData['user_id'],json_encode($msg));
+            return successMsg(Gateway::$registerAddress);
+            if(Gateway::isUidOnline($this->user['id'])){
+                $msg = [
+                    'type' => 'msg',
+                    'msg' => $postData['msg'],
+                ];
+                Gateway::sendToUid($postData['user_id'],json_encode($msg));
+            }
             return successMsg($postData['user_id']);
         }else{
             return $this->fetch();
