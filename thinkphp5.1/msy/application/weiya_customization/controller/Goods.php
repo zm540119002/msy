@@ -110,6 +110,6 @@ class Goods extends \common\controller\Base{
         $model = new \app\weiya_customization\model\Goods();
         $list = $model->getList($config);
         $this->assign('list',$list);
-        
+        return view('goods/recommend_list_tpl');
     }
 }
