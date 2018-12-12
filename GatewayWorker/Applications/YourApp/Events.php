@@ -36,12 +36,10 @@ class Events
      */
     public static function onConnect($client_id)
     {
-        Gateway::bindUid($client_id,7);
-        $msg = Gateway::isUidOnline(7);
         Gateway::sendToClient($client_id, json_encode(array(
             'type'      => 'init',
             'client_id' => $client_id,
-            'msg' => $msg,
+            'msg' => '连接成功',
         )));
     }
     
