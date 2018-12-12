@@ -3,191 +3,276 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
-<section id="goodsvideoLayer" style="display: none;">
-	<div class="video-layer">
-		{notempty name="info.goods_video"}
-		<video width="" height="" class="" src="public_uploads/{$info.goods_video|default=''}"></video>
-		<a class="video-btn"></a>
-		{else /}
-		<video width="" height="" src=""></video>
-		<a class="video-btn"></a>
-		{/notempty}
-	</div>
-</section>
 <article class="f24">
-	<section class="top_nav_fixed">
-		<input type="hidden" class="goods_id" value="{$info.id|default=''}"/>
-		<input type="hidden" class="goods_thumb_img" value="public_uploads/{$info.thumb_img|default=''}"/>
-		<div class="top_bar top columns_flex">
-			{notempty name="info.goods_video"}
-			<div class="each_column">
-				<a href="javascript:void(0);" class=" goods-video top_icon">视频</a>
-			</div>
-			{else /}
-			{/notempty}
-			<div class="each_column">
-				<a href="javascript:void(0);" class="qr-d-code top_icon">商品二维码</a>
-			</div>
-			<div class="each_column top_search_module">
-				<input type="button" class="search_btn"/>
-				<input type="text" class="search_text top_icon" placeholder="搜索"/>
-			</div>
-			<div class="each_column">
-				<a href="javascript:void(0);" class="personal_center top_icon">我的</a>
-			</div>
-			{include file="public/home_page" /}
-		</div>
-	</section>
-	<section class="swiper_banner_wrapper">
+	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				{notempty name="info.main_img"}
 				{volist name="info.main_img" id="vo"}
-				<div class="swiper-slide">
+				<div class="swiper-slide swiper-slide-active">
 					<img src="public_uploads/{$vo}" alt="" class="common_default_img">
 				</div>
 				{/volist}
-				{/notempty}
 			</div>
 			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
 				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 			</div>
 		</div>
 	</section>
-	<section class="">
-		<ul class="list-item">
-			<li>
-				<div class="row-item-mgl">
-					<div class="columns_flex l-r-sides">
-						<div >
-                            <span class="retail-price pink f28">￥
-                                <price class="sale_price">{$info.sale_price}</price>
-                            </span>
-							<del>￥{$info.retail_price}</del>
-						</div>
-						<div class="popularity">
-							<a href="javascript:void(0);" class="fabulous left">赞</a>
-							<a href="javascript:void(0);" class="share ">分享</a>
-						</div>
-					</div>
-					<p class="goods_name">{$info.name}</p>
-					<div>12g*20条 /盒</div>
-					<p>{$info.trait}</p>
-				</div>
-				{if $info.sale_type = 1}
-				<div class="row-item-mgl">
-					<span class="content-label">促销活动</span>
-					<p class="text-color-ef">大优惠，路过不要错过大优惠，路过不要错过大优惠，路过不要错过大优惠，路过不要错过</p>
-				</div>
-				{/if}
-				<div class="row-item-mgl">
-					<div class="columns_flex l-r-sides">
-						<div class="specification">采购箱规格<span class="specification_num">50</span><span class="unit">盒/箱</span></div>
-						<div>
-							<span class="pink">￥<price>5</price>/箱</span>
-						</div>
-					</div>
-				</div>
-				<div class="row-item-mgl columns_flex l-r-sides">
-					<span>采购数量(箱)</span>
-					<div class="quantity_wrapper selected-number">
-						<a href="javascript:void(0);" class="greduce">-</a>
-						<input type="text" value="1" class="f24 gshopping_count">
-						<a href="javascript:void(0);" class="gplus">+</a>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="columns_flex l-r-sides">
-					<div class="">
-						<span class="count-down-icons left"></span>
-						<div class="right">
-							<p>本周联合采购截止日还剩</p>
+	<section class="module-navigation ">
+		<div >
+			<ul>
+				<li>
+					<div class="top_radius f20 top_module">
+						<div class="columns_flex l-r-sides">
 							<div>
-								<span>8</span>小时
-								<span>8</span>分
-								<span>8</span>秒
+								<span class="red">￥<price class="sale_price">{$info.bulk_price}</price></span>
+							</div>
+							<div>
+								<a class="qrcode_share" href="javascript:void(0);"></a>
+							</div>
+						</div>
+						<div>
+							<span class="hot left">热</span>
+							<p class="f28">{$info.headline}</p>
+						</div>
+						<p>{$info.specification}</p>
+						<p>{$info.intro|raw}</p>
+						<div class="tags_item columns_flex l-r-sides">
+							<div>
+								{volist name="$info.tag" id="tag"}
+								<span>{$tag}</span>
+								{/volist}
+							</div>
+							<div class="tags_item_r">
+								<a class="collection" href=""><span></span>收藏</a>
+								<a class="share" href=""><span></span>分享</a>
 							</div>
 						</div>
 					</div>
-					<a class="text-color-gr invite-friends">
-						<span class="icons"></span><span >邀好友参加</span>
-						
-					</a>
-				</div>
-			</li>
-			<li>
-				<div class="columns_flex l-r-sides">
-					<div class="rows rows-l">
-						<div class="">
-							{notempty name="storeInfo.logo_img"}
-							<img src="public_uploads/{$storeInfo.logo_img}" class=" store_logo left" alt="">							
-							{else /}
-							<img src="" class=" store_logo" alt="">
-							{/notempty}
+				</li>
+				<li>
+					<div class="content-padding">
+						<p class="top_b_text wk_notice separation">[每周采购须知] 美尚精选优质货源任你选！随时参团，享受超级划算的采购结算价格，周五统计订单后送达工厂按订单备货发货；VIP采购商会员额外享受5%返点福利。</p>
+						<div class="columns_flex l-r-sides separation">
+							<div class="mid_module_left">
+								<img src="public_img/wy_dz.png" alt="">
+								<div>
+									<span class="left count-down-icons"></span>
+									<div class="d-r">
+										<p class=" pink">品牌定制.周五截止</p>
+										<div class="end-text">168:00:00</div>
+									</div>
+								</div>
+							</div>
+							<div class="mid_module_right">
+								<span><span class="item end_time"></span>周五结单</span>
+								<span><span class="item factory"></span>品质工厂</span>
+							</div>
+						</div>
+						<div class="columns_flex l-r-sides">
+							<div>
+								我的品牌定制<span>xxxxx</span>
+							</div>
+							<div>
+								<a>设定></a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="content-padding columns_flex l-r-sides">
+						<div>
+							<p>起订数量:<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></p>
+							<p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
+						</div>
+						<div class="quantity_wrapper selected-number">
+							<a href="javascript:void(0);" class="greduce">-</a>
+							<input type="text" value="1" class="f24 gshopping_count">
+							<a href="javascript:void(0);" class="gplus">+</a>
 						</div>
 						<div>
-							<span class="store_name">{$storeInfo.name}{$storeInfo.store_type|getStoreType}</span>
-							<p class="store_run_type">美尚采购<span class="">.</span>联营</p>
+							<a class="" href="javascript:void(0);"></a>
 						</div>
 					</div>
-					<div class="follow-right rows">
-						<a href="javascript:void(0);" class="text-color-gr">+关注供应商</a>
-						<a class="text-color-gr go-shopping"><span class="icons"></span><span>进店逛逛</span></a>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</section>
-	<section class="scrollwrapper">
-		<div class="detail-nav columns_flex floor-nav nav-floor">
-			<a href="javascript:void(0);" class="scroll-nav active" data-floor="c">商品参数</a>
-			<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
-			<a href="javascript:void(0);" class="scroll-nav" data-floor="x">商品详情</a>
-			<a href="javascript:void(0);" class="scroll-nav" data-floor="f">评分评论</a>
+				</li>
+			</ul>
 		</div>
+	</section>
+	<div class="scrollwrapper">
+		<nav class="columns_flex detail-nav nav-floor">
+			<a href="javascript:;" data-floor="a">商品参数</a>
+			<a href="javascript:;" data-floor="b">商品详情</a>
+			<a href="javascript:;" data-floor="c">评分评价</a>
+		</nav>
 		<div class="floor-content">
-			<section class="scroll-floor floor1 floor">
-				<h3 id="c" class="floor-label">商品参数</h3>
-				{$info.parameters}
-			</section>
-			<!--<section class="scroll-floor floor2">
-				<h3>商品视频</h3>
-			</section>-->
-			<section class="scroll-floor floor2 floor">
-				<h3 id="x" class="floor-label">商品详情</h3>
-				<div class="details_img">
-					{notempty name="info.details_img"}
-					{volist name="info.details_img" id="vo"}
+			<div id="a" class="floor">
+				<div class="floor_item">
+					<p class="content-label">商品参数</p>
+					<p>{$info.parameters|raw}</p>
+				</div>
+			</div>
+			<div id="b" class="floor">
+				<div class="floor_item">
+					<p class="content-label">商品详情</p>
+					{volist name="info.detail_img" id="detail_img"}
 					<div class="">
-						<img src="public_uploads/{$vo}" alt="" class="common_default_img">
+						<img src="public_uploads/{$detail_img}" alt="" class="common_default_img">
 					</div>
 					{/volist}
-					{/notempty}
 				</div>
-			</section>
-			<section class="scroll-floor floor3 floor">
-				<h3 id="f" class="floor-label">评分评论</h3>
-				<div class="goods_star_score comment_star_module">
-					<div class="five_star">
-						<div class="star_img">
-							<img src="public_img/starred.png">
-							<img src="public_img/starred.png">
-							<img src="public_img/starred.png">
-							<img src="public_img/starred.png">
-							<img src="public_img/starred.png">
+			</div>
+			<div id="c" class="floor">
+				<div class="floor_item">
+					<p>评分评价</p>
+					<div class="goods_star_score">
+						<div class="five_star">
+							<div class="star_img">
+								<img src="__public__/images/mall/starred.png" id="0">
+								<img src="__public__/images/mall/starred.png" id="1">
+								<img src="__public__/images/mall/starred.png" id="2">
+								<img src="__public__/images/mall/star.png" id="3">
+								<img src="__public__/images/mall/star.png" id="4">
+							</div>
+							<span class="fraction" data-score="3.9">3.9分</span>
 						</div>
-						<span class="fraction" data-score="0">0分</span>
+						<a href="javascript:void(0);" class="comment_num">145人评论</a>
 					</div>
-					<a href="javascript:void(0);" class="comment_num">0人评论</a>
+					<ul class="sales_comment_wrapper">
+						<li>
+							<div class="bottomLine">
+								<div class="columns_flex l-r-sides">
+									<div>
+										<img src="" alt="">
+										<span>唛头</span>
+									</div>
+									<div>
+										2018-11-30 15:57:24
+									</div>
+								</div>
+								<div class="store_score_star five_star">
+									<div class="star_img empty_star">
+										<span class="real_star"></span>
+									</div>
+								</div>
+								<p>物流挺快的，很适合我的皮肤，感觉蛮不错的！</p>
+								<div class="cmt_att">
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18547/182/278954360/223852/645b0600/5a68751eN5b2a7ec3.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18469/190/289560078/350708/4a0feb19/5a68751eNd66e18a7.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18547/182/278954360/223852/645b0600/5a68751eN5b2a7ec3.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t15751/50/1870565986/337464/4a7b89cd/5a68751eNafe89f3b.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="bottomLine">
+								<div class="columns_flex l-r-sides">
+									<div>
+										<img src="" alt="">
+										<span>唛头</span>
+									</div>
+									<div>
+										2018-11-30 15:57:24
+									</div>
+								</div>
+								<div class="store_score_star five_star">
+									<div class="star_img empty_star">
+										<span class="real_star"></span>
+									</div>
+								</div>
+								<p>物流挺快的，很适合我的皮肤，感觉蛮不错的！下次介绍朋友来买</p>
+							</div>
+						</li>
+						<li>
+							<div class="bottomLine">
+								<div class="columns_flex l-r-sides">
+									<div>
+										<img src="" alt="">
+										<span>唛头</span>
+									</div>
+									<div>
+										2018-11-30 15:57:24
+									</div>
+								</div>
+								<div class="store_score_star five_star">
+									<div class="star_img empty_star">
+										<span class="real_star"></span>
+									</div>
+								</div>
+								<p>感觉蛮不错的！值得买</p>
+							</div>
+						</li>
+						<li>
+							<div class="bottomLine">
+								<div class="columns_flex l-r-sides">
+									<div>
+										<img src="" alt="">
+										<span>唛头</span>
+									</div>
+									<div>
+										2018-11-30 15:57:24
+									</div>
+								</div>
+								<div class="store_score_star five_star">
+									<div class="star_img empty_star">
+										<span class="real_star"></span>
+									</div>
+								</div>
+								<p>性价比很高，挺好用的，也不贵</p>
+							</div>
+						</li>
+					</ul>
 				</div>
-			</section>
+			</div>
 		</div>
-	</section>
+	</div>
 </article>
+<div class="mod_slider_mask" id="blackCover" style="display:none;"></div>
+<div class="mod_slider mod_slider_s1 mod_slider_viewer" id="evalLoopImg" style="display:none;height: 375px;">
+	<div class="inner">
+		<!--<ul>
+            <li>1111</li>
+        </ul>-->
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public/static/common/img/banner/home-banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public/static/common/img/banner/home-banner2.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public/static/common/img/banner/home-banner3.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public/static/common/img/banner/home-banner.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</div>
+</div>
 {/block}
 
 {block name="footer"}
@@ -199,66 +284,6 @@
 <script type="text/javascript">
 
 	$(function(){
-		var height=$('.detail-nav').height();
-		var offsetHeight=$('.detail-nav').offset().top;
-		$(window).on('scroll',function(){
-			var scrollHeight=$(document).scrollTop();
-			if(scrollHeight+height>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
-			}else {
-				$('.detail-nav').removeClass('top-fixed');
-			}
-		});
-		//商品二维码图片
-		$('body').on('click','.qr-d-code',function(){
-			var postData = {};
-            postData.goods_id = $('.goods_id').val();
-            postData.goods_thumb_img = $('.swiper-slide').eq(0).find('img').attr('src');
-            postData.goods_name = $('.goods_name').text();
-            postData.specification = $('.specification_num').text()+ $('.unit').text();
-            postData.sale_price = $('.sale_price').text();
-            postData.store_name = $('.store_name').text();
-            postData.store_logo = $('.store_logo').attr('src');
-            postData.store_run_type = $('.store_run_type').text();
-			$.post(module+'Goods/generateGoodsQRcode',postData,function (msg) {
-				if(msg.status == 1){
-					layer.open({
-						title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],
-						className:'qrCodePicLayer',
-						content:'<img src="'+msg.info+'" />'
-					})
-				}
-			})
-
-		});
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true,
-			},
-		});
-		//轮播视频
-		var goodsvideoLayer=$('#goodsvideoLayer').html();
-		$('body').on('click','.goods-video',function(){
-			layer.open({
-				className:'goodsvideoLayer',
-				content:goodsvideoLayer
-			})
-		});
-		$('body').on('click','.video-btn',function(){
-			$('.goodsvideoLayer video').get(0).play();
-		})
-		//星星评分等级
-		// var getFractionValue='{$aveScore}';
-		$('.five_star').setStar({
-			getFractionValue:4,
-            star:'public_img/star.png',
-            starRed:'public_img/starred.png'
-		});
-		$('.scrollwrapper').scrollFloor();
-
 		//立即购买或立即结算
 		$('body').on('click','.buy_now',function(){
 			_this = $(this);
