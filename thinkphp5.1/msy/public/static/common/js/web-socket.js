@@ -29,11 +29,11 @@ ws.onmessage = function(e){
                 success: function(msg){
                     $('.loading').hide();
                     if(msg.status==0){
-                        dialog.error(data.info);
+                        dialog.error(msg.info);
                     }else if(msg.code==1 && msg.data=='no_login'){
                         loginDialog();
                     }else{
-                        console.log(data);
+                        console.log(msg);
                     }
                 }
             });
