@@ -395,7 +395,6 @@
         </div>
     </div>
 </div>
-
 {/block}
 
 {block name="script"}
@@ -439,6 +438,14 @@
                     return false;
                 }
             });
+<<<<<<< HEAD
+            $('.five_star').setStar(2.9);
+            $('.scrollwrapper').scrollFloor();
+        });
+
+
+    </script>
+=======
             // 给相应楼层的a 设置 current, 取消其他链接的current
             var currentLink = menu.find('.active');
             if(currentId && currentLink.data('item') != currentId) {
@@ -467,4 +474,5 @@
     });
     // $('.scrollwrapper').scrollFloor();
 </script>
+>>>>>>> db50a8ea106150df32a8eff198233aa8b7ea5516
 {/block}

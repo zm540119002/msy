@@ -31,7 +31,7 @@
 								<span class="red">￥<price class="sale_price">{$info.bulk_price}</price></span>
 							</div>
 							<div>
-								<a class="qrcode_share" href="javascript:void(0);"></a>
+								<a class="qrcode_share"  href="javascript:void(0);"></a>
 							</div>
 						</div>
 						<div>
@@ -242,7 +242,14 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="new_select_wrap" id="recommendGoodsList">
+
+	</div>
+
+
 </article>
+
 <div class="mod_slider_mask" id="blackCover" style="display:none;"></div>
 <div class="mod_slider mod_slider_s1 mod_slider_viewer" id="evalLoopImg" style="display:none;height: 375px;">
 	<div class="inner">
@@ -282,8 +289,51 @@
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 
 <script type="text/javascript">
-
 	$(function(){
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		$('.five_star').setStar(2.9);
+		$('.scrollwrapper').scrollFloor();
+
+		//获取推荐商品
+		var url = module + 'Goods/getRecommendGoods';
+		var goodsId = {$info.id};
+		$.ajax({
+			url: url,
+			data: {goods_id:goodsId},
+			type: 'get',
+			beforeSend: function(){
+				$('.loading').show();
+			},
+			error:function(){
+				$('.loading').hide();
+				dialog.error('AJAX错误');
+			},
+			success: function(data){
+				console.log(data)
+				$('#recommendGoodsList').html(data);
+			}
+		});
+
+
 		//立即购买或立即结算
 		$('body').on('click','.buy_now',function(){
 			_this = $(this);

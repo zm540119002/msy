@@ -56,30 +56,60 @@ class Goods extends \common\controller\Base{
         }else{
             $goodsId = intval(input('goods_id'));
             if(!$goodsId){
-                return errorMsg('此商品已下架');
+                $this->error('此商品已下架');
             }
-            $modelGoods = new \app\weiya_customization\model\Goods();
+            $model = new \app\weiya_customization\model\Goods();
             $config =[
                 'where' => [
                     ['g.status', '=', 0],
+                    ['g.shelf_status', '=', 3],
                     ['g.id', '=', $goodsId],
-                ],'field' => [
-                    'g.id','g.name','g.sale_price','g.retail_price','g.main_img','g.parameters','g.trait',
-                    'g.thumb_img','g.details_img','g.tag','g.store_id'
                 ],
             ];
-            $info = $modelGoods->getInfo($config);
+            $info = $model->getInfo($config);
             if(empty($info)){
-                return errorMsg('此商品已下架');
+                $this->error('此商品已下架');
             }
-            if($info){
-                $info['main_img'] = explode(',',(string)$info['main_img']);
-                $info['detail_img'] = explode(',',(string)$info['details_img']);
-                $this->assign('info',$info);
-            }
-            $unlockingFooterCart = unlockingFooterCartConfig([0,1,2]);
+            $info['main_img'] = explode(',',(string)$info['main_img']);
+            $info['detail_img'] = explode(',',(string)$info['detail_img']);
+            $this->assign('info',$info);
+
+            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
+    }
+
+    public function getRecommendGoods(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $goodsId = input('get.goods_id/d');
+        //相关推荐商品
+        $config =[
+            'where' => [
+                ['rg.status', '=', 0],
+                ['rg.goods_id', '=', $goodsId],
+            ],'field'=>[
+                'rg.recommend_goods_id',
+            ]
+        ];
+        $modelRecommendGoods = new \app\weiya_customization\model\RecommendGoods();
+        $recommendGoodsIds = $modelRecommendGoods->getList($config);
+        $recommendGoodsIds = array_column($recommendGoodsIds,'recommend_goods_id');
+
+        $config =[
+            'where' => [
+                ['g.status', '=', 0],
+                ['g.shelf_status', '=', 3],
+                ['g.id', 'in', $recommendGoodsIds],
+            ],'field'=>[
+                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
+            ]
+        ];
+        $model = new \app\weiya_customization\model\Goods();
+        $list = $model->getList($config);
+        $this->assign('list',$list);
+        return view('goods/recommend_list_tpl');
     }
 }
