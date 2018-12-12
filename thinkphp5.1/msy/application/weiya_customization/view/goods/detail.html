@@ -23,8 +23,8 @@
 	</section>
 	<section class="module-navigation ">
 		<div >
-			<ul>
-				<li>
+			<ul class="goods_list">
+				<li data-id='1'>
 					<div class="top_radius f20 top_module">
 						<div class="columns_flex l-r-sides">
 							<div>
@@ -52,8 +52,6 @@
 							</div>
 						</div>
 					</div>
-				</li>
-				<li>
 					<div class="content-padding">
 						<p class="top_b_text wk_notice separation">[每周采购须知] 美尚精选优质货源任你选！随时参团，享受超级划算的采购结算价格，周五统计订单后送达工厂按订单备货发货；VIP采购商会员额外享受5%返点福利。</p>
 						<div class="columns_flex l-r-sides separation">
@@ -81,8 +79,6 @@
 							</div>
 						</div>
 					</div>
-				</li>
-				<li>
 					<div class="content-padding columns_flex l-r-sides">
 						<div>
 							<p>起订数量:<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></p>
@@ -90,7 +86,7 @@
 						</div>
 						<div class="quantity_wrapper selected-number">
 							<a href="javascript:void(0);" class="greduce">-</a>
-							<input type="text" value="1" class="f24 gshopping_count">
+							<input type="text" value="2000" class="f24 gshopping_count" data-sign="two">
 							<a href="javascript:void(0);" class="gplus">+</a>
 						</div>
 						<div>
@@ -294,6 +290,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/footerCart.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -326,7 +323,7 @@
 		var offsetHeight=$('.detail-nav').offset().top;
 				console.log(height);
 		$(window).scroll(function() {
-			// 完成一些操作
+			//滚动
 			var top = $(document).scrollTop();			
 			var currentId = '';
 			var top=$(document).scrollTop();
@@ -390,36 +387,36 @@
 			}
 		});
 		//加入购物车
-		$('body').on('click','.add_cart',function () {
-			var _this = $(this);
-			_this.addClass("nodisabled");//防止重复提交
-			var url = module + 'Cart/addCart';
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function(data){
-					_this.removeClass("nodisabled");//删除防止重复提交
-					$('.loading').hide();
-					if(data.status==0){
-						dialog.error(data.info);
-					}else if(data.code==1 && data.data=='no_login'){
-						loginDialog();
-					}else{
-//                       //加入购物车成功后的操作
+// 		$('body').on('click','.add_cart',function () {
+// 			var _this = $(this);
+// 			_this.addClass("nodisabled");//防止重复提交
+// 			var url = module + 'Cart/addCart';
+// 			var postData = {};
+// 			$.ajax({
+// 				url: url,
+// 				data: postData,
+// 				type: 'post',
+// 				beforeSend: function(xhr){
+// 					$('.loading').show();
+// 				},
+// 				error:function(xhr){
+// 					$('.loading').hide();
+// 					dialog.error('AJAX错误');
+// 				},
+// 				success: function(data){
+// 					_this.removeClass("nodisabled");//删除防止重复提交
+// 					$('.loading').hide();
+// 					if(data.status==0){
+// 						dialog.error(data.info);
+// 					}else if(data.code==1 && data.data=='no_login'){
+// 						loginDialog();
+// 					}else{
+// //                       //加入购物车成功后的操作
 
-					}
-				}
-			});
-		});
+// 					}
+// 				}
+// 			});
+// 		});
 	});
 
 
