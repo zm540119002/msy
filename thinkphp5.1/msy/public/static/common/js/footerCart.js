@@ -69,11 +69,10 @@ $(function () {
                     dialog.success(data.info);
                     var num = 0;
                     $.each(lis,function(){
-                        num += $(this).find('.gshopping_count').val();
+                        num += parseInt($(this).find('.gshopping_count').val());
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
-
-                    $('footer').find('.cart_num').text(postData.goodsList.num);
+                    $('footer').find('.cart_num').text(num);
                 }else{
 
                 }

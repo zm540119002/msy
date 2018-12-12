@@ -306,49 +306,6 @@
 				$('#recommendGoodsList').html(data);
 			}
 		});
-
-		//加入购物车
-// 		$('body').on('click','.add_cart',function () {
-// 			var _this = $(this);
-// 			_this.addClass("nodisabled");//防止重复提交
-// 			var url = module + 'Cart/addCart';
-// 			var postData = {};
-// 			$.ajax({
-// 				url: url,
-// 				data: postData,
-// 				type: 'post',
-// 				beforeSend: function(xhr){
-// 					$('.loading').show();
-// 				},
-// 				error:function(xhr){
-// 					$('.loading').hide();
-// 					dialog.error('AJAX错误');
-// 				},
-// 				success: function(data){
-// 					_this.removeClass("nodisabled");//删除防止重复提交
-// 					$('.loading').hide();
-// 					if(data.status==0){
-// 						dialog.error(data.info);
-// 					}else if(data.code==1 && data.data=='no_login'){
-// 						loginDialog();
-// 					}else{
-// //                       //加入购物车成功后的操作
-
-<<<<<<< HEAD
-					}
-				}
-			});
-		});
-
-
-=======
-// 					}
-// 				}
-// 			});
-// 		});
->>>>>>> 707805e0d06736bf54146538c8a553e7606ed1d4
 	});
-
-
 </script>
 {/block}
