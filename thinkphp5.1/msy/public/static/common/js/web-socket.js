@@ -41,6 +41,9 @@ ws.onmessage = function(e){
         case 'msg':
             console.log(data);
             break;
+        case 'end':
+            console.log(data);
+            break;
         default :
             // 当mvc框架调用GatewayClient发消息时直接alert出来
             console.log('default');
