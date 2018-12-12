@@ -59,6 +59,29 @@
                 dialog.error('不能发送空内容！');
                 return false;
             }
+            var user_id = 7;
+            var postData = {user_id:user_id,msg:text};
+            var url = module + 'CustomerService/sendMessage';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else{
+                        console.log(data);
+                    }
+                }
+            });
             $('.chatLayer .chat_item').append(chatListTpl);
             $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
             $(this).prev().val('');

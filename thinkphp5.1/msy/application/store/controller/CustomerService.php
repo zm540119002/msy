@@ -31,7 +31,23 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-            return successMsg($postData);
+            return successMsg($this->user['id']);
+        }else{
+            return $this->fetch();
+        }
+    }
+
+    /**发送消息
+     */
+    public function sendMessage(){
+        if(request()->isAjax()){
+            $postData = input('post.');
+            $msg = [
+                'type' => 'msg',
+                'msg' => $postData['msg'],
+            ];
+            Gateway::sendToUid($postData['user_id'],json_encode($msg));
+            return successMsg($postData['user_id']);
         }else{
             return $this->fetch();
         }
