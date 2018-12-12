@@ -49,7 +49,13 @@ class Events
     */
    public static function onMessage($client_id, $message)
    {
+       $data = [
+           'type'      => 'msg',
+           'client_id' => $client_id,
+           'msg' => $message,
+       ];
         // 向所有人发送
+        Gateway::sendToAll(json_encode($data));
 //        Gateway::sendToAll("$client_id said: $message\r\n");
    }
    
