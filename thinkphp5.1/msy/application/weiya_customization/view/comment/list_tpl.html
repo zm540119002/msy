@@ -1,14 +1,29 @@
 {notempty name='list'}
-{volist name="list" id="info"}
+{if $nextPage==2}
+<div class="goods_star_score"  >
+    <div class="five_star">
+        <div class="star_img">
+            <img src="__public__/images/mall/starred.png" id="0">
+            <img src="__public__/images/mall/starred.png" id="1">
+            <img src="__public__/images/mall/starred.png" id="2">
+            <img src="__public__/images/mall/star.png" id="3">
+            <img src="__public__/images/mall/star.png" id="4">
+        </div>
+        <span class="fraction" data-score="3.9">{$averageScore}分</span>
+    </div>
+    <a href="javascript:void(0);" class="comment_num">{$total}人评论</a>
+</div>
+<ul class="sales_comment_wrapper">
+    {volist name="list" id="info"}
     <li>
         <div class="bottomLine">
             <div class="columns_flex l-r-sides">
                 <div>
                     <img src="" alt="">
-                    <span>唛头</span>
+                    <span>{$info.name}</span>
                 </div>
                 <div>
-                    2018-11-30 15:57:24
+                    {$info.create_time}
                 </div>
             </div>
             <div class="store_score_star five_star">
@@ -16,7 +31,7 @@
                     <span class="real_star"></span>
                 </div>
             </div>
-            <p>物流挺快的，很适合我的皮肤，感觉蛮不错的！</p>
+            <p>{$info.content}</p>
             <div class="cmt_att">
                                     <span class="img">
                                         <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
@@ -39,7 +54,53 @@
             </div>
         </div>
     </li>
-{/volist}
-<a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多</a>
+    {/volist}
+    <li class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多</a></li>
+</ul>
 {else /}
+{volist name="list" id="info"}
+<li>
+    <div class="bottomLine">
+        <div class="columns_flex l-r-sides">
+            <div>
+                <img src="" alt="">
+                <span>唛头</span>
+            </div>
+            <div>
+                2018-11-30 15:57:24
+            </div>
+        </div>
+        <div class="store_score_star five_star">
+            <div class="star_img empty_star">
+                <span class="real_star"></span>
+            </div>
+        </div>
+        <p>物流挺快的，很适合我的皮肤，感觉蛮不错的！</p>
+        <div class="cmt_att">
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18547/182/278954360/223852/645b0600/5a68751eN5b2a7ec3.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18469/190/289560078/350708/4a0feb19/5a68751eNd66e18a7.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18547/182/278954360/223852/645b0600/5a68751eN5b2a7ec3.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+                                    <span class="img">
+                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t15751/50/1870565986/337464/4a7b89cd/5a68751eNafe89f3b.jpg!cc_100x100!q70.dpg" alt="">
+                                    </span>
+        </div>
+    </div>
+</li>
+{/volist}
+<li class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多</a></li>
+{/if}
+{else /}
+
 {/notempty}
