@@ -64,18 +64,14 @@ $(function () {
                     dialog.error(data.info);
                 }else if(data.code==1 && data.data=='no_login'){
 					loginDialog();
-				}
-                else if(data.status==1){
-                    dialog.success(data.info);
+				}else{
+                     dialog.success(data.info);
                     var num = 0;
                     $.each(lis,function(){
-                        num += $(this).find('.gshopping_count').val();
+                        num += parseInt($(this).find('.gshopping_count').val());
                     });
                     //parseInt($('footer').find('num').text())+parseInt(num)
-
-                    $('footer').find('.cart_num').text(postData.goodsList.num);
-                }else{
-
+                    $('footer').find('.cart_num').text(num);
                 }
             }
         });
