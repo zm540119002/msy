@@ -1,7 +1,7 @@
 <?php
 namespace app\weiya_customization\controller;
 
-class Goods extends \common\controller\Base{
+class Cart extends \common\controller\UserBase{
     /**首页
      */
     public function index(){
@@ -11,8 +11,24 @@ class Goods extends \common\controller\Base{
         }
     }
 
+    public function addCart(){
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误');
+        }
+        $goodsList = [
+            ['goods_id'=>13,'num'=>1],
+            ['goods_id'=>14,'num'=>3],
+            ['goods_id'=>15,'num'=>1],
+            ['goods_id'=>16,'num'=>2],
+            ['goods_id'=>17,'num'=>1],
+        ];
+        
+
+
+    }
+
     /**
-     * 查出产商相关产品 分页查询
+     * 分页查询
      */
     public function getList(){
         if(!request()->isGet()){
@@ -49,7 +65,7 @@ class Goods extends \common\controller\Base{
         }
     }
 
-    /**商品详情页
+    /**详情页
      */
     public function detail(){
         if(request()->isAjax()){
@@ -72,7 +88,6 @@ class Goods extends \common\controller\Base{
             }
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
-            $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
@@ -81,39 +96,4 @@ class Goods extends \common\controller\Base{
         }
     }
 
-    /**获取推荐商品
-     * @return array|\think\response\View
-     */
-    public function getRecommendGoods(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $goodsId = input('get.goods_id/d');
-        //相关推荐商品
-        $config =[
-            'where' => [
-                ['rg.status', '=', 0],
-                ['rg.goods_id', '=', $goodsId],
-            ],'field'=>[
-                'rg.recommend_goods_id',
-            ]
-        ];
-        $modelRecommendGoods = new \app\weiya_customization\model\RecommendGoods();
-        $recommendGoodsIds = $modelRecommendGoods->getList($config);
-        $recommendGoodsIds = array_column($recommendGoodsIds,'recommend_goods_id');
-
-        $config =[
-            'where' => [
-                ['g.status', '=', 0],
-                ['g.shelf_status', '=', 3],
-                ['g.id', 'in', $recommendGoodsIds],
-            ],'field'=>[
-                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
-            ]
-        ];
-        $model = new \app\weiya_customization\model\Goods();
-        $list = $model->getList($config);
-        $this->assign('list',$list);
-        return view('goods/recommend_list_tpl');
-    }
 }
