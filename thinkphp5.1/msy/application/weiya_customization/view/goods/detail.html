@@ -31,7 +31,7 @@
 								<span class="red">￥<price class="sale_price">{$info.bulk_price}</price></span>
 							</div>
 							<div>
-								<a class="qrcode_share" href="javascript:void(0);"></a>
+								<a class="qrcode_share"  href="javascript:void(0);"></a>
 							</div>
 						</div>
 						<div>
@@ -242,7 +242,52 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="new_select_wrap" id="">
+		<div class="mod-part-title">
+			<div class="mod-part-title-wrap">
+				<span class="icon-title left"></span>
+				<span class="title">推荐商品</span>
+				<span class="icon-title right"></span>
+			</div>
+		</div>
+		<ul class="columns_flex flex-both-side goods-content-list">
+			<li>
+				<a href="">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
+				<p class="text-intro">某某美白美颜护肤品肤品肤品肤品肤品肤品肤品肤品肤品</p>
+				<div class="columns_flex l-r-sides">
+					<span class="pink">￥<price>5000</price></span>
+					<a href="javascript:void(0);" class="shopping-cart">购物车</a>
+				</div>
+			</li>
+			<li>
+				<a href="">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
+				<p>某某美白美颜护肤品</p>
+				<div class="columns_flex l-r-sides">
+					<span class="pink">￥<price>5000</price></span>
+					<a href="javascript:void(0);" class="shopping-cart">购物车</a>
+				</div>
+			</li>
+			<li>
+				<a href="">
+					<img src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				</a>
+				<p>某某美白美颜护肤品</p>
+				<div class="columns_flex l-r-sides">
+					<span class="pink">￥<price>5000</price></span>
+					<a href="javascript:void(0);" class="shopping-cart">购物车</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+
 </article>
+
 <div class="mod_slider_mask" id="blackCover" style="display:none;"></div>
 <div class="mod_slider mod_slider_s1 mod_slider_viewer" id="evalLoopImg" style="display:none;height: 375px;">
 	<div class="inner">
@@ -282,8 +327,31 @@
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 
 <script type="text/javascript">
-
 	$(function(){
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		$('.five_star').setStar(2.9);
+		$('.scrollwrapper').scrollFloor();
+
+
 		//立即购买或立即结算
 		$('body').on('click','.buy_now',function(){
 			_this = $(this);
