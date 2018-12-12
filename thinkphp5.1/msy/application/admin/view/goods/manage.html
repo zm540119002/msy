@@ -207,7 +207,10 @@
                 $.post(url,postData,function(msg){
                     console.log(msg);
                     _this.removeClass("nodisabled");//防止重复提交
-                    dialog.success('成功');
+                    var imgSrc=uploads+msg.info
+                    layer.open({
+                        content:'<img src='+imgSrc+' />',
+                    })
                 });
             });
         });
