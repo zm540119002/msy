@@ -143,7 +143,7 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price',
+                'g.id','g.name','g.bulk_price','g.sample_price','g.sort',
                 'g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
                 'gc1.name as category_name_1'
             ],
