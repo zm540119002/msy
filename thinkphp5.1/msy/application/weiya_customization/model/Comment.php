@@ -1,9 +1,9 @@
 <?php
 namespace app\weiya_customization\model;
 
-class Cart extends \common\model\Base {
+class Comment extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'cart';
+	protected $table = 'comment';
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
