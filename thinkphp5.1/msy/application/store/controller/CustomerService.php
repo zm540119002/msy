@@ -31,10 +31,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-//            if(Gateway::isUidOnline($this->user['id'])){
-//                return successMsg($this->user['id']);
-//            }
-            return errorMsg('绑定失败');
+            return successMsg($this->user['id']);
         }else{
             return $this->fetch();
         }
@@ -45,11 +42,13 @@ class CustomerService extends \common\controller\UserBase{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
-            $msg = [
-                'type' => 'msg',
-                'msg' => $postData['msg'],
-            ];
-            Gateway::sendToUid($postData['user_id'],json_encode($msg));
+            if(Gateway::isUidOnline($this->user['id'])){
+                $msg = [
+                    'type' => 'msg',
+                    'msg' => $postData['msg'],
+                ];
+                Gateway::sendToUid($postData['user_id'],json_encode($msg));
+            }
             return successMsg($postData['user_id']);
         }else{
             return $this->fetch();
