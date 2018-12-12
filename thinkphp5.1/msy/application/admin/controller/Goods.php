@@ -4,7 +4,6 @@ namespace app\admin\controller;
 /**供应商验证控制器基类
  */
 class Goods extends Base {
-
     /*
      *审核首页
      */
