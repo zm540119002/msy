@@ -246,7 +246,6 @@ class Goods extends Base {
                 $newQRCodes = $res['info'];
                 $res= $model->where(['id'=>$id])->setField(['rq_code_url'=>$newQRCodes]);
                 if(false === $res){
-                    print_r($model->getLastSql());exit;
                     return errorMsg('失败');
                 }
                 unlink($uploadPath.$shareQRCodes);
