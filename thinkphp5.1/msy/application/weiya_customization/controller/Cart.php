@@ -15,15 +15,20 @@ class Cart extends \common\controller\UserBase{
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
-        $goodsList = [
-            ['goods_id'=>13,'num'=>1],
-            ['goods_id'=>14,'num'=>3],
-            ['goods_id'=>15,'num'=>1],
-            ['goods_id'=>16,'num'=>2],
-            ['goods_id'=>17,'num'=>1],
+        $userId = $this->user['id'];
+        $data = [
+            ['user_id'=>$userId,'foreign_id'=>13,'num'=>1],
+            ['user_id'=>$userId,'foreign_id'=>14,'num'=>3],
+            ['user_id'=>$userId,'foreign_id'=>15,'num'=>1],
+            ['user_id'=>$userId,'foreign_id'=>16,'num'=>2],
+            ['user_id'=>$userId,'foreign_id'=>17,'num'=>1],
         ];
-        
-
+        $model = new \app\weiya_customization\model\Cart();
+        $res = $model->allowField(true)->saveAll($data)->toArray();
+        if (!count($res)) {
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
 
     }
 
@@ -34,7 +39,7 @@ class Cart extends \common\controller\UserBase{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new \app\weiya_customization\model\Goods();
+        $model = new \app\weiya_customization\model\Cart();
         $config=[
             'where'=>[
             ],
@@ -74,7 +79,7 @@ class Cart extends \common\controller\UserBase{
             if(!$goodsId){
                 $this->error('此商品已下架');
             }
-            $model = new \app\weiya_customization\model\Goods();
+            $model = new \app\weiya_customization\model\Cart();
             $config =[
                 'where' => [
                     ['g.status', '=', 0],
