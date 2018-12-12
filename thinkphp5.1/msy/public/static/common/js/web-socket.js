@@ -26,11 +26,11 @@ ws.onmessage = function(e){
                     $('.loading').hide();
                     dialog.error('AJAX错误');
                 },
-                success: function(data){
+                success: function(msg){
                     $('.loading').hide();
-                    if(data.status==0){
+                    if(msg.status==0){
                         dialog.error(data.info);
-                    }else if(data.code==1 && data.data=='no_login'){
+                    }else if(msg.code==1 && msg.data=='no_login'){
                         loginDialog();
                     }else{
                         console.log(data);
@@ -39,6 +39,9 @@ ws.onmessage = function(e){
             });
             break;
         case 'msg':
+            console.log(data);
+            break;
+        case 'end':
             console.log(data);
             break;
         default :

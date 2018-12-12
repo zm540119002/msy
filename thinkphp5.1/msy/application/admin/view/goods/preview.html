@@ -412,15 +412,14 @@
         });
         $('.five_star').setStar(2.9);
         //楼层
-        // 滚动条发生滚动
-        var menu = $('#menu');						//获取菜单
-        var items = $('#content').find('.floor');	//获取项目
+        var menu = $('#menu');						
+        var items = $('#content').find('.floor');	
         var height=$('.detail-nav').height();
         var offsetHeight=$('.detail-nav').offset().top;
                 console.log(height);
         $(window).scroll(function() {
             // 完成一些操作
-            var top = $(document).scrollTop();			//滑动的距离
+            var top = $(document).scrollTop();			
             var currentId = '';
             var top=$(document).scrollTop();
             if(top>offsetHeight){
@@ -430,7 +429,7 @@
             }
             items.each(function(){
                 var m = $(this);
-                var itemTop = m.offset().top;			//获取每一个项目到顶部距离
+                var itemTop = m.offset().top;			
                 if(top + 43>= itemTop ){
                     //currentId = '#' + m.attr('id');
                     currentId = m.attr('id');
@@ -463,7 +462,7 @@
                     _this.removeClass('active');
                 } 
             });
-        })
+        });
     });
     // $('.scrollwrapper').scrollFloor();
 </script>
