@@ -245,6 +245,120 @@
                                 <p>性价比很高，挺好用的，也不贵</p>
                             </div>
                         </li>
+                        <li>
+                            <div class="bottomLine">
+                                <div class="columns_flex l-r-sides">
+                                    <div>
+                                        <img src="" alt="">
+                                        <span>唛头</span>
+                                    </div>
+                                    <div>
+                                        2018-11-30 15:57:24
+                                    </div>
+                                </div>
+                                <div class="store_score_star five_star">
+                                    <div class="star_img empty_star">
+                                        <span class="real_star"></span>
+                                    </div>
+                                </div>
+                                <p>性价比很高，挺好用的，也不贵</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="bottomLine">
+                                <div class="columns_flex l-r-sides">
+                                    <div>
+                                        <img src="" alt="">
+                                        <span>唛头</span>
+                                    </div>
+                                    <div>
+                                        2018-11-30 15:57:24
+                                    </div>
+                                </div>
+                                <div class="store_score_star five_star">
+                                    <div class="star_img empty_star">
+                                        <span class="real_star"></span>
+                                    </div>
+                                </div>
+                                <p>性价比很高，挺好用的，也不贵</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="bottomLine">
+                                <div class="columns_flex l-r-sides">
+                                    <div>
+                                        <img src="" alt="">
+                                        <span>唛头</span>
+                                    </div>
+                                    <div>
+                                        2018-11-30 15:57:24
+                                    </div>
+                                </div>
+                                <div class="store_score_star five_star">
+                                    <div class="star_img empty_star">
+                                        <span class="real_star"></span>
+                                    </div>
+                                </div>
+                                <p>性价比很高，挺好用的，也不贵</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="bottomLine">
+                                <div class="columns_flex l-r-sides">
+                                    <div>
+                                        <img src="" alt="">
+                                        <span>唛头</span>
+                                    </div>
+                                    <div>
+                                        2018-11-30 15:57:24
+                                    </div>
+                                </div>
+                                <div class="store_score_star five_star">
+                                    <div class="star_img empty_star">
+                                        <span class="real_star"></span>
+                                    </div>
+                                </div>
+                                <p>性价比很高，挺好用的，也不贵</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="bottomLine">
+                                <div class="columns_flex l-r-sides">
+                                    <div>
+                                        <img src="" alt="">
+                                        <span>唛头</span>
+                                    </div>
+                                    <div>
+                                        2018-11-30 15:57:24
+                                    </div>
+                                </div>
+                                <div class="store_score_star five_star">
+                                    <div class="star_img empty_star">
+                                        <span class="real_star"></span>
+                                    </div>
+                                </div>
+                                <p>性价比很高，挺好用的，也不贵</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="bottomLine">
+                                <div class="columns_flex l-r-sides">
+                                    <div>
+                                        <img src="" alt="">
+                                        <span>唛头</span>
+                                    </div>
+                                    <div>
+                                        2018-11-30 15:57:24
+                                    </div>
+                                </div>
+                                <div class="store_score_star five_star">
+                                    <div class="star_img empty_star">
+                                        <span class="real_star"></span>
+                                    </div>
+                                </div>
+                                <p>性价比很高，挺好用的，也不贵</p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -312,20 +426,16 @@
         $(window).scroll(function() {
             // 完成一些操作
             var top = $(document).scrollTop();			//滑动的距离
-        
             var currentId = '';
             var top=$(document).scrollTop();
-
-                    if(top>offsetHeight){
-                        $('.detail-nav').addClass('top-fixed');
-                    }else {
-                        $('.detail-nav').removeClass('top-fixed');
-                    }
-            //console.log(top);
+            if(top>offsetHeight){
+                $('.detail-nav').addClass('top-fixed');
+            }else {
+                $('.detail-nav').removeClass('top-fixed');
+            }
             items.each(function(){
                 var m = $(this);
                 var itemTop = m.offset().top;			//获取每一个项目到顶部距离
-            // console.log(itemTop);
                 if(top + 43>= itemTop ){
                     //currentId = '#' + m.attr('id');
                     currentId = m.attr('id');
@@ -353,14 +463,13 @@
             var id=_this.data('item');
             items.each(function(){
                 var m = $(this);
-                
                 if(m.attr('id')==id){
                     var itemTop = m.offset().top;
-                    _this.addClass('active');
+                    _this.addClass('active').siblings().removeClass('active');
                 console.log(itemTop);
-                var abc=itemTop-42;	
+                var scrollY=itemTop-40;	
                     $('html, body').animate({
-                        scrollTop: abc
+                        scrollTop: scrollY
                     },500);
                 }else{
                     _this.removeClass('active');

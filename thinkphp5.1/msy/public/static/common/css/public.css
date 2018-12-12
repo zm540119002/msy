@@ -4022,6 +4022,9 @@ select[name="nodeIds"]{
 .floor{
     /*height:600px;*/
 }
+.floor:nth-child(2) img{
+    vertical-align: middle;
+}
 .floor_item{
     padding:0.12rem;
     border-bottom:6px solid #d9d9d9;
