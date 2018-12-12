@@ -102,19 +102,26 @@
 		</div>
 	</section>
 	<div class="scrollwrapper">
-		<nav class="columns_flex detail-nav nav-floor">
+		<!--<nav class="columns_flex detail-nav nav-floor">
 			<a href="javascript:;" data-floor="a">商品参数</a>
 			<a href="javascript:;" data-floor="b">商品详情</a>
 			<a href="javascript:;" data-floor="c">评分评价</a>
-		</nav>
-		<div class="floor-content">
-			<div id="a" class="floor">
+		</nav>-->
+		<div id="menu">
+            <ul class="columns_flex detail-nav">
+                <li data-item="item1" ><a href="javascript:;" class="">商品参数</a></li>
+                <li data-item="item2" ><a href="javascript:;" class="">商品详情</a></li>
+                <li data-item="item3" ><a href="javascript:;" class="">评分评价</a></li>
+            </ul>
+        </div>
+		<div id="content" class="floor-content">
+			<div id="item1" class="floor">
 				<div class="floor_item">
 					<p class="content-label">商品参数</p>
 					<p>{$info.parameters|raw}</p>
 				</div>
 			</div>
-			<div id="b" class="floor">
+			<div id="item2" class="floor">
 				<div class="floor_item">
 					<p class="content-label">商品详情</p>
 					{volist name="info.detail_img" id="detail_img"}
@@ -124,7 +131,7 @@
 					{/volist}
 				</div>
 			</div>
-			<div id="c" class="floor">
+			<div id="item3" class="floor">
 				<div class="floor_item">
 					<p>评分评价</p>
 					<div class="goods_star_score">
