@@ -3997,7 +3997,8 @@ select[name="nodeIds"]{
 .sale_price{
     font-size:0.30rem;
 }
-.nav-floor{
+.nav-floor,
+#menu ul{
     /*position:fixed;
     left:0;
     top:0;*/
@@ -4008,12 +4009,14 @@ select[name="nodeIds"]{
     background: #fff;
     border-bottom:1px solid #d9d9d9;
 }
-.nav-floor a{
+.nav-floor a,
+#menu ul li{
     width:33.3%;
     text-align:center;
     box-sizing: border-box;
 }
-.nav-floor a.active{
+.nav-floor a.active,
+.detail-nav li.active a{
     color:#ff7bac;
 }
 .floor{
