@@ -143,7 +143,7 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price',
+                'g.id','g.name','g.bulk_price','g.sample_price','g.sort',
                 'g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
                 'gc1.name as category_name_1'
             ],
@@ -224,32 +224,37 @@ class Goods extends Base {
             ];
             $model = new \app\admin\model\Goods();
             $info = $model -> getInfo($config);
-            $intro = $info['intro'];
+            $oldQRCodes = $info['rq_code_url'];
+            $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
             $url = request()->domain().'/index.php/admin/Goods/preview/id/'.$id;
-//            $avatarPath = request()->domain().'/static/common/img/ucenter_logo.png';
             $newRelativePath = config('upload_dir.weiya_goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
             $init = [
                 'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
                 'title'=>'维雅生物药妆',
                 'slogan'=>'领先的品牌定制平台',
-                'name'=> $info['name'],
+                'name'=> $info['headline'],
                 'specification'=> $info['specification'],
                 'money'=>'￥'.$info['bulk_price'].' 元',
-                'intro1'=>$intro,
-                'intro2'=>'蕴含多种天然有机植物油脂，为肌肤提供多种',
                 'logo_img'=> request()->domain().'/static/common/img/ucenter_logo.png', // 460*534
-                'goods_img'=> request()->domain().'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], // 460*534
-                'qrcode'=>request()->domain().'/'.config('upload_dir.upload_path').'/'.$shareQRCodes, // 120*120
+                'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
+                'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
             ];
             $res =  $this->compose($init);
             if($res['status'] == 1){
-                $rse = $model->where(['id'=>$id])->setField(['rq_code_url'=>$res['info']]);
-                if(!$rse){
+                $newQRCodes = $res['info'];
+                $res= $model->where(['id'=>$id])->setField(['rq_code_url'=>$newQRCodes]);
+                if(!$res){
                     return errorMsg('失败');
                 }
-                return successMsg('成功');
+                unlink($uploadPath.$shareQRCodes);
+                if(!empty($oldQRCodes)){
+                    unlink($uploadPath.$oldQRCodes);
+                }
+                return successMsg($newQRCodes);
+            }else{
+                return successMsg('失败',$res['info']);
             }
         }
     }
@@ -395,21 +400,7 @@ class Goods extends Base {
      */
     public function compose(array $config=[])
     {
-        $init = [
-            'save_path'=>config('upload_dir.weiya_goods'),   //保存目录  ./uploads/compose/goods....
-            'title'=>'维雅生物药妆',
-            'slogan'=>'领先的品牌定制平台',
-            'name'=>'清爽净颜卸妆液（250ml）',
-            'specification'=>"（冻干粉200mg+溶媒10m+面膜25ml×5片+原液15ml）/盒",
-            'money'=>'￥68.56 元',
-            'intro1'=>'蕴含多种天然有机植物油脂，为肌肤提供多种',
-            'intro2'=>'蕴含多种天然有机植物油脂，为肌肤提供多种',
-            'logo_img'=> request()->domain().'/static/common/img/ucenter_logo.png', // 460*534
-            'goods_img'=> request()->domain().'/uploads/weiya_goods/1544408435366544.jpg', // 460*534
-            'qrcode'=>request()->domain().'/uploads/weiya_goods/2018121113470524412nologo.png', // 120*120
-            'font'=>'./static/font/simhei.ttf',   //字体
-        ];
-        $init = array_merge($init, $config);
+        $init = $config;
         $logoImg = $this->imgInfo($init['logo_img']);
         $goodsImg = $this->imgInfo($init['goods_img']);
         $qrcode = $this->imgInfo($init['qrcode']);
@@ -422,25 +413,23 @@ class Goods extends Base {
         imagefill($im, 0, 0, $color);
         imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
         imagettftext($im, 16, 0, 100, 60, $text_color, $init['font'], $init['slogan']);   //标语
-        imagettftext($im, 12, 0, 20, 670, $text_color, $init['font'], $init['name']); //说明
-        imagettftext($im, 13, 0, 20, 700, $text_color, $init['font'], $init['money']); //金额
-        imagettftext($im, 8, 0,  20, 720, $text_color, $init['font'], $init['specification']); //规格
-        imagettftext($im, 10, 0, 20, 740, $text_color, $init['font'], $init['intro1']); //金额
-        imagettftext($im, 10, 0, 20, 760, $text_color, $init['font'], $init['intro2']); //金额
+        imagettftext($im, 15, 0, 20, 670, $text_color, $init['font'], $init['money']); //金额
+        imagettftext($im, 6, 0,  200, 670, $text_color, $init['font'], $init['specification']); //规格
+        imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name']); //说明
         imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 60, 55, $logoImg['width'], $logoImg['height'] );  //平台logo
         imagecopyresized($im, $goodsImg['obj'], 10, 106, 0, 0, 460, 534, $goodsImg['width'], $goodsImg['height']);  //商品
         imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维
-        $dir = config('upload_dir.upload_path').'/'.$init['save_path'];
+        $dir = config('upload_dir.upload_path').'/'.$init['save_path'].'compose/';
         if(!is_dir($dir)){
             mkdir($dir, 0777, true);
         }
         $filename = generateSN(5).'.jpg';
-        $file = $dir.time().$filename;
+        $file = $dir.$filename;
         if( !imagejpeg($im, $file, 90) ){
             return errorMsg('合成图片失败');
         }
         imagedestroy($im);
-        return  successMsg($init['save_path'].$filename);
+        return  successMsg($init['save_path'].'compose/'.$filename);
     }
 
     private function imgInfo($path)
@@ -455,6 +444,7 @@ class Goods extends Base {
         }
         $type = image_type_to_extension($info[2], false);
         $fun = "imagecreatefrom{$type}";
+
         //返回图像信息
         if(!$fun) return false;
         return [

@@ -1401,3 +1401,9 @@ ul.pagination{
 	width:650px;
 	text-indent: inherit;
 }
+/*.menu-article li a.current{
+	color:#0066cc;
+}*/
+.Hui-aside .menu_dropdown li.current a, .menu_dropdown li.current a:hover {
+    color: #148cf1;
+}
