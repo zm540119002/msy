@@ -36,10 +36,12 @@ class Events
      */
     public static function onConnect($client_id)
     {
+        Gateway::bindUid($client_id,7);
+        $msg = Gateway::isUidOnline(7);
         Gateway::sendToClient($client_id, json_encode(array(
             'type'      => 'init',
             'client_id' => $client_id,
-            'msg' => '连接成功',
+            'msg' => $msg,
         )));
     }
     
@@ -56,7 +58,7 @@ class Events
            'msg' => $message,
        ];
         // 向所有人发送
-        Gateway::sendToAll(json_encode($data));
+//        Gateway::sendToAll(json_encode($data));
    }
    
    /**
@@ -72,7 +74,6 @@ class Events
            'msg' => '断开连接',
        ];
        // 向所有人发送
-       Gateway::sendToAll(json_encode($data));
-//       GateWay::sendToAll("$client_id logout\r\n");
+//       Gateway::sendToAll(json_encode($data));
    }
 }
