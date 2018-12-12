@@ -7,9 +7,7 @@ ws.onopen = function(e){
     ws.send('hello');
 };
 ws.onmessage = function(e){
-    console.log('message');
     var data =  JSON.parse(e.data);
-    console.log(data);
     var type = data.type || '';
     switch(type){
         case 'init':
