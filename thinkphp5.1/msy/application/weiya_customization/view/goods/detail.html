@@ -318,8 +318,59 @@
 			}
 		});
 		$('.five_star').setStar(2.9);
-		$('.scrollwrapper').scrollFloor();
+		// $('.scrollwrapper').scrollFloor();
+		//楼层
+		var menu = $('#menu');						
+		var items = $('#content').find('.floor');	
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+				console.log(height);
+		$(window).scroll(function() {
+			// 完成一些操作
+			var top = $(document).scrollTop();			
+			var currentId = '';
+			var top=$(document).scrollTop();
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;			
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+			});
 
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+			}
+		});
+		$('#menu li').on('click',function(){
+			var _this=$(this);
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+					var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+				console.log(itemTop);
+				var scrollY=itemTop-40;	
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+				}else{
+					_this.removeClass('active');
+				} 
+			});
+		});
 		//获取推荐商品
 		var url = module + 'Goods/getRecommendGoods';
 		var goodsId = {$info.id};
