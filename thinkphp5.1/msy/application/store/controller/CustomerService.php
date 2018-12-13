@@ -1,7 +1,8 @@
 <?php
 namespace app\store\controller;
 
-use common\component\GatewayClient\Gateway;
+//use common\component\GatewayClient\Gateway;
+use \GatewayWorker\Lib\Gateway;
 
 class CustomerService extends \common\controller\UserBase{
     /**售前

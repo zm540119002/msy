@@ -31,6 +31,7 @@ return [
     // 注册的根命名空间
     'root_namespace'         => [
         'common'  => '../../common/',
+        'GatewayWorker'  => '../../../../GatewayWorker/vendor/workerman/gateway-worker/src/',
     ],
     // 默认输出类型
     'default_return_type'    => 'html',
