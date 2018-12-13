@@ -23,23 +23,14 @@
 	</section>
 	<section class="module-navigation ">
 		<div >
-			<ul class="goods_list">
-				<li data-id='1'>
+			<ul>
+				<li>
 					<div class="top_radius f20 top_module">
-						<div class="columns_flex l-r-sides">
-							<div>
-								<span class="red">￥<price class="sale_price">{$info.bulk_price}</price></span>
-							</div>
-							<div>
-								<a class="qrcode_share"  href="javascript:void(0);"></a>
-							</div>
-						</div>
 						<div>
 							<span class="hot left">热</span>
-							<p class="f28">{$info.headline}</p>
+							<p class="f28">{$info.name}</p>
 						</div>
-						<p>{$info.specification}</p>
-						<p>{$info.intro|raw}</p>
+						<p>{$nfo.intro}</p>
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
 								{volist name="$info.tag" id="tag"}
@@ -52,6 +43,8 @@
 							</div>
 						</div>
 					</div>
+				</li>
+				<li>
 					<div class="content-padding">
 						<p class="top_b_text wk_notice separation">[每周采购须知] 美尚精选优质货源任你选！随时参团，享受超级划算的采购结算价格，周五统计订单后送达工厂按订单备货发货；VIP采购商会员额外享受5%返点福利。</p>
 						<div class="columns_flex l-r-sides separation">
@@ -79,95 +72,35 @@
 							</div>
 						</div>
 					</div>
-					<div class="content-padding columns_flex l-r-sides">
-						<div>
-							<p>起订数量:<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></p>
-							<p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
-						</div>
-						<div class="quantity_wrapper selected-number">
-							<a href="javascript:void(0);" class="greduce">-</a>
-							<input type="text" value="2000" class="f24 gshopping_count" data-sign="two">
-							<a href="javascript:void(0);" class="gplus">+</a>
-						</div>
-						<div>
-							<a class="" href="javascript:void(0);"></a>
-						</div>
-					</div>
 				</li>
 			</ul>
 		</div>
 	</section>
-	<div class="scrollwrapper">
-		<!--<nav class="columns_flex detail-nav nav-floor">
-			<a href="javascript:;" data-floor="a">商品参数</a>
-			<a href="javascript:;" data-floor="b">商品详情</a>
-			<a href="javascript:;" data-floor="c">评分评价</a>
-		</nav>-->
-		<div id="menu">
-            <ul class="columns_flex detail-nav">
-                <li data-item="item1" ><a href="javascript:;" class="">商品参数</a></li>
-                <li data-item="item2" ><a href="javascript:;" class="">商品详情</a></li>
-                <li data-item="item3" ><a href="javascript:;" class="">评分评价</a></li>
-            </ul>
-        </div>
-		<div id="content" class="floor-content">
-			<div id="item1" class="floor">
-				<div class="floor_item">
-					<p class="content-label">商品参数</p>
-					<p>{$info.parameters|raw}</p>
-				</div>
-			</div>
-			<div id="item2" class="floor">
-				<div class="floor_item">
-					<p class="content-label">商品详情</p>
-					{volist name="info.detail_img" id="detail_img"}
-					<div class="">
-						<img src="public_uploads/{$detail_img}" alt="" class="common_default_img">
+	<section class="content-padding content_main wy_list">
+		<ul class="goods_list list">
+			<li>
+				<img class="left" src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				<div class="list_r">
+					<p>美肤美肤美肤美肤美肤</p>
+					<div>单品规格<span>60g/盒</span></div>
+					<div>
+						<span>￥<price>38.00</price></span>
 					</div>
-					{/volist}
-				</div>
-			</div>
-			<div id="item3" class="floor">
-				<div class="floor_item" >
-					<p>评分评价</p>
-					<div id="commentList">
-
+					<div class="columns_flex l-r-sides">
+						<div>起订数量：<span>2000盒</span></div>
+						<a href="javascript:void(0);">样品购买</a>
+					</div>
+					<div class="quantity_wrapper selected-number">
+						<a href="javascript:void(0);" class="greduce">-</a>
+						<input type="text" value="1" class="f24 gshopping_count" data-sign="one">
+						<a href="javascript:void(0);" class="gplus">+</a>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+			</li>
+		</ul>
+	</section>
 </article>
-<div class="mod_slider_mask" id="blackCover" style="display:none;"></div>
-<div class="mod_slider mod_slider_s1 mod_slider_viewer" id="evalLoopImg" style="display:none;height: 375px;">
-	<div class="inner">
-		<!--<ul>
-            <li>1111</li>
-        </ul>-->
-		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<img src="public/static/common/img/banner/home-banner1.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public/static/common/img/banner/home-banner2.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public/static/common/img/banner/home-banner3.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public/static/common/img/banner/home-banner.jpg" alt="" class="common_default_img">
-				</div>
-			</div>
-			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-			</div>
-		</div>
-	</div>
-</div>
+
 {/block}
 
 {block name="footer"}
@@ -200,7 +133,7 @@
 				$('.detail-nav').removeClass('top-fixed');
 			}
 		});
-		
+		$('.five_star').setStar(2.9);
 		// $('.scrollwrapper').scrollFloor();
 		//楼层
 		var menu = $('#menu');						
@@ -263,49 +196,34 @@
 		};
 		var getData = {
 			pageSize:6,
-			goods_id:id
+			id:id
 		};
 		getPagingListByClick(config,getData);
 		//加载更多评论
 		$('body').on('click','.comment-next-page',function (){
 			var page = $(this).data('page');
-			var	pageIndex=parseInt(page)+1;
-			$(this).data('page',pageIndex);
 			config.currentPage = page;
 			getPagingListByClick(config,getData);
-			
-		
 		});
 
-		//获取推荐商品
-		var url = module + 'Goods/getRecommendGoods';
-		$.ajax({
-			url: url,
-			data: {goods_id:id},
-			type: 'get',
-			beforeSend: function(){
-				$('.loading').show();
-			},
-			error:function(){
-				$('.loading').hide();
-				dialog.error('AJAX错误');
-			},
-			success: function(data){
-				$('#recommendGoodsList').html(data);
-			}
-		});
+//		//获取推荐商品
+//		var url = module + 'Goods/getRecommendGoods';
+//		$.ajax({
+//			url: url,
+//			data: {goods_id:id},
+//			type: 'get',
+//			beforeSend: function(){
+//				$('.loading').show();
+//			},
+//			error:function(){
+//				$('.loading').hide();
+//				dialog.error('AJAX错误');
+//			},
+//			success: function(data){
+//				$('#recommendGoodsList').html(data);
+//			}
+//		});
 
-		//打开二维码
-		$('body').on('click','.qrcode_share',function (){
-			var rq_code_url = "{$info.rq_code_url}";
-			if(rq_code_url){
-				var imgSrc=uploads+rq_code_url;
-				layer.open({
-					skin:'shareqrCodeLayer',
-					content:'<img src='+imgSrc+' />',
-				})
-			}
-		});
 	});
 </script>
 {/block}

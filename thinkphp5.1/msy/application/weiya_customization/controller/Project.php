@@ -1,7 +1,7 @@
 <?php
 namespace app\weiya_customization\controller;
 
-class Goods extends \common\controller\Base{
+class Project extends \common\controller\Base{
     /**首页
      */
     public function index(){
@@ -18,7 +18,7 @@ class Goods extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new \app\weiya_customization\model\Goods();
+        $model = new \app\weiya_customization\model\Project();
         $config=[
             'where'=>[
             ],
@@ -56,14 +56,14 @@ class Goods extends \common\controller\Base{
         }else{
             $id = intval(input('id'));
             if(!$id){
-                $this->error('此商品已下架');
+                $this->error('此项目已下架');
             }
-            $model = new \app\weiya_customization\model\Goods();
+            $model = new \app\weiya_customization\model\Project();
             $config =[
                 'where' => [
-                    ['g.status', '=', 0],
-                    ['g.shelf_status', '=', 3],
-                    ['g.id', '=', $id],
+                    ['p.status', '=', 0],
+                    ['p.shelf_status', '=', 3],
+                    ['p.id', '=', $id],
                 ],
             ];
             $info = $model->getInfo($config);
@@ -71,7 +71,6 @@ class Goods extends \common\controller\Base{
                 $this->error('此商品已下架');
             }
             $info['main_img'] = explode(',',(string)$info['main_img']);
-            $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
@@ -110,7 +109,7 @@ class Goods extends \common\controller\Base{
                 'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
             ]
         ];
-        $model = new \app\weiya_customization\model\Goods();
+        $model = new \app\weiya_customization\model\Project();
         $list = $model->getList($config);
         $this->assign('list',$list);
         return view('goods/recommend_list_tpl');

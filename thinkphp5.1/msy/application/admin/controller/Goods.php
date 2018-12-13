@@ -35,9 +35,9 @@ class Goods extends Base {
                         $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
                     }
                 }
+                $_POST['main_img'] = implode(',',$tempArr);
                 //主图第一张为缩略图
                 $_POST['thumb_img'] = $tempArr[0];//
-                $_POST['main_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',input('post.detail_img','','string'));
