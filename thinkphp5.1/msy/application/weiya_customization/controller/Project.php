@@ -54,16 +54,16 @@ class Project extends \common\controller\Base{
     public function detail(){
         if(request()->isAjax()){
         }else{
-            $goodsId = intval(input('project_id'));
-            if(!$goodsId){
-                $this->error('此商品已下架');
+            $id = intval(input('id'));
+            if(!$id){
+                $this->error('此项目已下架');
             }
             $model = new \app\weiya_customization\model\Project();
             $config =[
                 'where' => [
                     ['p.status', '=', 0],
                     ['p.shelf_status', '=', 3],
-                    ['p.id', '=', $goodsId],
+                    ['p.id', '=', $id],
                 ],
             ];
             $info = $model->getInfo($config);

@@ -179,7 +179,7 @@
 <script type="text/javascript" src="public_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var goodsId = {$info.id};
+		var id = {$info.id};
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
@@ -263,7 +263,7 @@
 		};
 		var getData = {
 			pageSize:6,
-			goods_id:goodsId
+			goods_id:id
 		};
 		getPagingListByClick(config,getData);
 		//加载更多评论
@@ -277,7 +277,7 @@
 		var url = module + 'Goods/getRecommendGoods';
 		$.ajax({
 			url: url,
-			data: {goods_id:goodsId},
+			data: {goods_id:id},
 			type: 'get',
 			beforeSend: function(){
 				$('.loading').show();
