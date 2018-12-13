@@ -78,7 +78,7 @@
 		<ul class="goods_list list">
 			{notempty name="goodsList"}
 			{volist name="goodsList" id="info"}
-			<li>
+			<li data-id="{$info.id}">
 				{empty name="info.thumb_img"}
 				<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
 				{else /}
