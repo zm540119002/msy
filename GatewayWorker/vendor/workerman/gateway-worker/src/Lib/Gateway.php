@@ -15,7 +15,7 @@ namespace GatewayWorker\Lib;
 
 use Exception;
 use GatewayWorker\Protocols\GatewayProtocol;
-use Workerman\Connection\TcpConnection;
+//use Workerman\Connection\TcpConnection;
 
 /**
  * 数据发送相关
