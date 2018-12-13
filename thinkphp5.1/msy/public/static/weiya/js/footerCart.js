@@ -1,24 +1,37 @@
 $(function () {
     //计算商品列表总价
-    calculateTotalPrice();
+    //calculateTotalPrice();
     //加
     $('body').on('click','.gplus',function(){
+        var incrementObj={};
+        incrementObj.order_quantity=$('.order_quantity').text();
+        incrementObj.increase_quantity=$('.increase_quantity').val();
         //单个商品数量自加
-        goodsNumPlus($(this));
+        goodsNumPlus($(this),incrementObj);
         //计算商品列表总价
         calculateTotalPrice();
     });
 
     //减
     $('body').on('click','.greduce',function(){
+        var incrementObj={};
+        incrementObj.order_quantity=$('.order_quantity').text();
+        incrementObj.increase_quantity=$('.increase_quantity').val();
         //单个商品数量自减
-        goodsNumReduce($(this));
+        goodsNumReduce($(this),incrementObj);
         //计算商品列表总价
         calculateTotalPrice();
     });
 
     //购买数量.失去焦点
     $('body').on('blur','.gshopping_count',function(){
+        var buyNum=parseInt($(this).val());
+        var orderNum=parseInt($('.order_quantity').text());
+        if(buyNum<orderNum){
+             dialog.error('起订数量不能少于'+orderNum);
+             $(this).val(orderNum);
+             return false;
+        }
         //计算商品列表总价
         calculateTotalPrice();
     });
@@ -401,20 +414,17 @@ function calculateTotalPrice(){
 }
 
 //单个商品数量自减
-function goodsNumReduce(obj) {
+function goodsNumReduce(obj,opt) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
     num=parseInt(num);
     var sign=_li.find('.gshopping_count').data('sign');
-    if(num<2){
+    var orderQuantity=parseInt(opt.order_quantity);
+    if(num<=orderQuantity){
         return false;
     }
     if(sign=='two'){
-        if(num<=2000){
-            _li.find('.gshopping_count').val(num);
-            return false;
-        }
-        num=num-2000;
+        num=num-parseInt(opt.increase_quantity);
         _li.find('.gshopping_count').val(num);
     }else{
         _li.find('.gshopping_count').val(--num);
@@ -422,13 +432,13 @@ function goodsNumReduce(obj) {
 }
 
 //单个商品数量自加
-function goodsNumPlus(obj) {
+function goodsNumPlus(obj,opt) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
     num=parseInt(num);
     var sign=_li.find('.gshopping_count').data('sign');
     if(sign=='two'){
-        num=num+2000;
+        num=num+parseInt(opt.increase_quantity);
         _li.find('.gshopping_count').val(num);
     }else{
         _li.find('.gshopping_count').val(++num);

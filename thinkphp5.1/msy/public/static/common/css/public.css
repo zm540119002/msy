@@ -3261,10 +3261,11 @@ input[type=text]::-webkit-focus-inner {
 }
 .list li{
     border:1px solid #d9d9d9;
-    padding:0.25rem 0;
+    padding:0.25rem;
     margin:0 0 0.20rem 0;
     border-radius:4px;
     overflow:hidden;
+    background:#fff;
 }
 .list-item li{
     position:relative;
@@ -3437,7 +3438,10 @@ input[type=text]::-webkit-focus-inner {
 .content_main .list img{
     width: 1.5rem;
     height: 1.5rem;
-    margin:0 0 0 0.14rem;
+    /*margin:0 0 0 0.14rem;*/
+}
+.list_r{
+    margin:0 0 0 1.8rem;
 }
 .content_main .list .info_r{
     margin-left:1.82rem;
@@ -3807,6 +3811,7 @@ select[name="nodeIds"]{
 }
 .content_main {
     background: #f2f2f2;
+    padding-bottom:1rem;
 }
 .shopping-cart {
     width: 34px;

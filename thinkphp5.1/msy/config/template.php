@@ -84,6 +84,10 @@ return [
         'caihui_js' => Request::domain() .'/static/caihui/js',
         //彩绘js路径
         'caihui_css' => Request::domain() .'/static/caihui/css',
+        //维雅资源路径
+        'weiya_img' => Request::domain() .'/static/weiya/img',
+        'weiya_js' => Request::domain() .'/static/weiya/js',
+        'weiya_css' => Request::domain() .'/static/weiya/css',
 
         //后台
         'public_admin_pc' => Request::domain() .'/static/admin_pc',
