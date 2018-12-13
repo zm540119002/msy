@@ -36,11 +36,11 @@ class Events
      */
     public static function onConnect($client_id)
     {
-        Gateway::sendToClient($client_id, json_encode(array(
-            'type'      => 'init',
-            'client_id' => $client_id,
-            'msg' => 'connect is success',
-        )));
+//        Gateway::sendToClient($client_id, json_encode(array(
+//            'type'      => 'init',
+//            'client_id' => $client_id,
+//            'msg' => 'connect is success',
+//        )));
         $msg = [
             'type' => 'msg',
             'msg' => 'aaaaaaaaa',
