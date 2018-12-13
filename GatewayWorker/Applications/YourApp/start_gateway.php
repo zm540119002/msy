@@ -35,13 +35,13 @@ $gateway->startPort = 2900;
 $gateway->registerAddress = '127.0.0.1:1239';
 
 // 心跳间隔
-$gateway->pingInterval = 50;
-// 客户端是否需要发送心跳检测 0不需要1需要
-$gateway->pingNotResponseLimit = 0;
-// 服务端定时向客户端发送的数据
-$gateway->pingData = '{"type":"ping"}';
+//$gateway->pingInterval = 50;
+//// 客户端是否需要发送心跳检测 0不需要1需要
+//$gateway->pingNotResponseLimit = 0;
+//// 服务端定时向客户端发送的数据
+//$gateway->pingData = '{"type":"ping"}';
 
-/* */
+/*
 // 当客户端连接上来时，设置连接的onWebSocketConnect，即在websocket握手时的回调
 $gateway->onConnect = function($connection)
 {
@@ -57,7 +57,7 @@ $gateway->onConnect = function($connection)
         // var_dump($_GET, $_SERVER);
     };
 }; 
-
+*/
 // 如果不是在根目录启动，则运行runAll方法
 if(!defined('GLOBAL_START'))
 {
