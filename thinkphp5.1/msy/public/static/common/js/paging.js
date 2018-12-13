@@ -1,16 +1,14 @@
 //获取分页列表-公共回调函数
 function commonCallBack(config,data){
     if(config.currentPage == 1){
-        console.log(data);
-        // config.container.find('li').remove();
-        console.log(config.container);
+         config.container.find('li').remove();
         config.container.append(data);
         if(config.type=='sort'){
             config.disableBtn();
         }
     }else{
         if(config.type=='click'){
-            config.container.find('.comment-next-page').remove();
+            console.log(typeof data.length);
         }
         config.container.find('li:last').after(data);
         if(config.type=='sort'){

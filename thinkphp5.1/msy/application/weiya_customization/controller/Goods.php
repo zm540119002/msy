@@ -54,8 +54,8 @@ class Goods extends \common\controller\Base{
     public function detail(){
         if(request()->isAjax()){
         }else{
-            $goodsId = intval(input('goods_id'));
-            if(!$goodsId){
+            $id = intval(input('id'));
+            if(!$id){
                 $this->error('此商品已下架');
             }
             $model = new \app\weiya_customization\model\Goods();
@@ -63,7 +63,7 @@ class Goods extends \common\controller\Base{
                 'where' => [
                     ['g.status', '=', 0],
                     ['g.shelf_status', '=', 3],
-                    ['g.id', '=', $goodsId],
+                    ['g.id', '=', $id],
                 ],
             ];
             $info = $model->getInfo($config);

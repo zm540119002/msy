@@ -298,10 +298,10 @@ i{
 }
 .weixin_pay_nav{background: #ff6482;}
 /*评分评论*/
-.goods_star_score{display: flex;display: -webkit-flex;padding:0.15rem 0;justify-content:space-between;}
+.goods_star_score{display: flex;display: -webkit-flex;padding:0.15rem 0.12rem;justify-content:space-between;}
 .five_star img,.five_star1 img{width:18px;height:auto;}
 .five_star .star_img,.star_img1{float:left;}
-.five_star .fraction{width:42px;display:inline-block;text-align:center;margin-top:0.04rem;}
+.five_star .fraction{width:42px;display:inline-block;text-align:center;}
 .goods_star_score .comment_num{color:#f5911e;position:relative;margin-right:0.25rem;}
 .goods_star_score .comment_num::after{
     content:'';
@@ -4189,10 +4189,25 @@ select[name="nodeIds"]{
     border-bottom:6px solid #d9d9d9;
 }
 .floor:last-child .floor_item{
+    padding:0;
     border-bottom:none;
+}
+.floor:last-child .floor_item p{
+    padding:0.12rem 0 0 0.12rem;
 }
 .floor-content{
     /*margin:12px 0 0;*/
+}
+.layui-m-layer-shareqrCodeLayer img{
+    max-width:5rem;
+}
+.sales_comment_wrapper li{
+   
+    border-bottom:6px solid #d9d9d9;
+}
+.sales_comment_wrapper li:last-child{
+     padding:0.12rem;
+    border-bottom:none;
 }
 .cmt_att {
     white-space: nowrap;
@@ -4216,6 +4231,11 @@ select[name="nodeIds"]{
     height: auto;
     min-width: 68px;
     max-height: 68px;
+}
+.comment-next-page{
+    display: block;
+    text-align:center;
+    padding:.12rem 0;
 }
 .mod_slider_mask {
     position: fixed;
