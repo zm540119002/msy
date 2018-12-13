@@ -81,7 +81,9 @@
 					</div>
 					<div class="content-padding columns_flex l-r-sides">
 						<div>
-							<p>起订数量:<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></p>
+							<p>起订数量:<span class="order_quantity">{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
+							<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+							</p>
 							<p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
 						</div>
 						<div class="quantity_wrapper selected-number">
@@ -176,10 +178,12 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript" src="public_js/paging.js"></script>
-<script type="text/javascript" src="public_js/footerCart.js"></script>
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
 		var id = {$info.id};
+		var order_quantity={:json_encode($info.minimum_order_quantity)};
+		$('.gshopping_count').val(order_quantity);
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
