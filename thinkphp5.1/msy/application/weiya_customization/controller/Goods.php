@@ -13,15 +13,15 @@ class Goods extends \common\controller\Base{
 
     //分类相关的商品
     public function goodsWitchCategory(){
-        $id = intval(input('id'));
-        if(!$id){
+        $categoryId = intval(input('category_id'));
+        if(!$categoryId){
             $this->error('没有此分类');
         }
         $modelGoodsCategory = new \app\weiya_customization\model\GoodsCategory();
         $config =[
             'where' => [
                 ['gc.status', '=', 0],
-                ['gc.id', '=', $id],
+                ['gc.id', '=', $categoryId],
                 ['gc.level','=',1]
             ],
         ];
@@ -36,7 +36,7 @@ class Goods extends \common\controller\Base{
         $config =[
             'where' => [
                 ['g.status', '=', 0],
-                ['g.category_id_1', '=', $id],
+                ['g.category_id_1', '=', $categoryId],
                 ['g.shelf_status', '=', 3],
             ],'field'=>[
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
