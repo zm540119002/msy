@@ -49,7 +49,7 @@ class Project extends \common\controller\Base{
         }
     }
 
-    /**商品详情页
+    /**详情页
      */
     public function detail(){
         if(request()->isAjax()){
@@ -81,7 +81,8 @@ class Project extends \common\controller\Base{
                     ['pg.status', '=', 0],
                     ['pg.project_id', '=', $id],
                 ],'field'=>[
-                    'g.id ','g.headline','g.thumb_img','g.bulk_price'
+                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.minimum_sample_quantity','g.purchase_unit'
                 ],'join'=>[
                     ['goods g','g.id = pg.goods_id','left']
                 ]
@@ -101,31 +102,21 @@ class Project extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $goodsId = input('get.goods_id/d');
+        $id = input('get.id/d');
         //相关推荐商品
+        $modelRecommendGoods = new \app\weiya_customization\model\RecommendGoods();
         $config =[
             'where' => [
                 ['rg.status', '=', 0],
-                ['rg.goods_id', '=', $goodsId],
+                ['rg.goods_id', '=', $id],
             ],'field'=>[
-                'rg.recommend_goods_id',
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.minimum_sample_quantity','g.purchase_unit'
+            ],'join'=>[
+                ['goods g','g.id = rg.recommend_goods_id','left']
             ]
         ];
-        $modelRecommendGoods = new \app\weiya_customization\model\RecommendGoods();
-        $recommendGoodsIds = $modelRecommendGoods->getList($config);
-        $recommendGoodsIds = array_column($recommendGoodsIds,'recommend_goods_id');
-
-        $config =[
-            'where' => [
-                ['g.status', '=', 0],
-                ['g.shelf_status', '=', 3],
-                ['g.id', 'in', $recommendGoodsIds],
-            ],'field'=>[
-                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
-            ]
-        ];
-        $model = new \app\weiya_customization\model\Project();
-        $list = $model->getList($config);
+        $list= $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
         return view('goods/recommend_list_tpl');
     }

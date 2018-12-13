@@ -11,6 +11,45 @@ class Goods extends \common\controller\Base{
         }
     }
 
+    //分类相关的商品
+    public function goodsWitchCategory(){
+        $id = intval(input('id'));
+        if(!$id){
+            $this->error('没有此分类');
+        }
+        $modelGoodsCategory = new \app\weiya_customization\model\GoodsCategory();
+        $config =[
+            'where' => [
+                ['gc.status', '=', 0],
+                ['gc.id', '=', $id],
+                ['gc.level','=',1]
+            ],
+        ];
+        $info = $modelGoodsCategory->getInfo($config);
+        if(empty($info)){
+            $this->error('没有此分类');
+        }
+        $this->assign('info',$info);
+
+        //获取相关的商品
+        $model = new \app\weiya_customization\model\Goods();
+        $config =[
+            'where' => [
+                ['g.status', '=', 0],
+                ['g.category_id_1', '=', $id],
+                ['g.shelf_status', '=', 3],
+            ],'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.minimum_sample_quantity','g.purchase_unit'
+            ],
+        ];
+        $goodsList= $model->getList($config);
+        $this->assign('goodsList',$goodsList);
+        $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        return $this->fetch();
+    }
+
     /**
      * 查出产商相关产品 分页查询
      */
@@ -95,7 +134,8 @@ class Goods extends \common\controller\Base{
                 ['rg.status', '=', 0],
                 ['rg.goods_id', '=', $goodsId],
             ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification'
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.minimum_sample_quantity','g.purchase_unit'
             ],'join'=>[
                 ['goods g','g.id = rg.recommend_goods_id','left']
             ]
