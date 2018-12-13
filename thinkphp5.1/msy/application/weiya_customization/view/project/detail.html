@@ -3,6 +3,43 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
+<!--底部弹窗-->
+<section id="goodsInfoLayer" style="display:none;">
+    <ul class="bottom-layer-info goods_list">
+        <li>
+            <img src="" alt="" class="left">
+            <div>
+                <p>台湾原装进口 真世酵素纤丽果冻</p>
+            </div>
+        </li>
+        <li>
+            <div class="columns_flex l-r-sides">
+                <div >
+					<span class="red">￥<price>198.00</price></span>
+					<span>300ml/瓶</span>
+				</div>
+				<div>样品购买限额：<span>10</span></div>
+            </div>
+        </li>
+        <li>
+            <div class="columns_flex l-r-sides">
+                <span>采购数量(单位：瓶)</span>
+                <div class="quantity_wrapper selected-number">
+                    <a href="javascript:void(0);" class="greduce">-</a>
+                    <input type="text" value="1" class="f24 gshopping_count">
+					<input type="hidden" class="minimum_order_quantity" value="1">
+					<input type="hidden" class="increase_quantity" value="1">
+                    <a href="javascript:void(0);" class="gplus">+</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+	{include file="template/footer_menu.html" /}
+    <!--<div class="columns_flex l-r-sides bottom-layer-last">
+        <span class="pink">￥<price>0.00</price></span>
+        <a href="javascript:void(0);" class="bff6482 group_btn50 add-shopping-cart">加入采购车</a>
+    </div>-->
+</section>
 <article class="f24">
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
@@ -93,12 +130,17 @@
 						<span>￥<price>{$info.bulk_price}</price></span>
 					</div>
 					<div class="columns_flex l-r-sides">
-						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></div>
-						<a href="javascript:void(0);">样品购买</a>
+						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
+						</div>
+						<a href="javascript:void(0);" class="sample_purchase">样品购买
+							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
+						</a>
 					</div>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce">-</a>
-						<input type="text" value="1" class="f24 gshopping_count" data-sign="one">
+						<input type="text" value="{$info.minimum_order_quantity}" class="f24 gshopping_count" >
+						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
 						<a href="javascript:void(0);" class="gplus">+</a>
 					</div>
 				</div>
@@ -130,43 +172,6 @@
 				clickable: true
 			}
 		});
-		//获取评论
-		var config = {
-			url:module+'Comment/getList',
-			currentPage:1,
-			container:$('#commentList'),
-			type:'click'
-		};
-		var getData = {
-			pageSize:6,
-			id:id
-		};
-		getPagingListByClick(config,getData);
-		//加载更多评论
-		$('body').on('click','.comment-next-page',function (){
-			var page = $(this).data('page');
-			config.currentPage = page;
-			getPagingListByClick(config,getData);
-		});
-
-//		//获取推荐商品
-//		var url = module + 'Goods/getRecommendGoods';
-//		$.ajax({
-//			url: url,
-//			data: {goods_id:id},
-//			type: 'get',
-//			beforeSend: function(){
-//				$('.loading').show();
-//			},
-//			error:function(){
-//				$('.loading').hide();
-//				dialog.error('AJAX错误');
-//			},
-//			success: function(data){
-//				$('#recommendGoodsList').html(data);
-//			}
-//		});
-
 	});
 </script>
 {/block}

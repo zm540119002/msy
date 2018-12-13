@@ -4,8 +4,8 @@ $(function () {
     //加
     $('body').on('click','.gplus',function(){
         var incrementObj={};
-        incrementObj.order_quantity=$('.order_quantity').text();
-        incrementObj.increase_quantity=$('.increase_quantity').val();
+        incrementObj.order_quantity=$(this).siblings('.minimum_order_quantity').val();
+        incrementObj.increase_quantity=$(this).siblings('.increase_quantity').val();
         //单个商品数量自加
         goodsNumPlus($(this),incrementObj);
         //计算商品列表总价
@@ -15,8 +15,8 @@ $(function () {
     //减
     $('body').on('click','.greduce',function(){
         var incrementObj={};
-        incrementObj.order_quantity=$('.order_quantity').text();
-        incrementObj.increase_quantity=$('.increase_quantity').val();
+        incrementObj.order_quantity=$(this).siblings('.minimum_order_quantity').val();
+        incrementObj.increase_quantity=$(this).siblings('.increase_quantity').val();
         //单个商品数量自减
         goodsNumReduce($(this),incrementObj);
         //计算商品列表总价
@@ -26,7 +26,7 @@ $(function () {
     //购买数量.失去焦点
     $('body').on('blur','.gshopping_count',function(){
         var buyNum=parseInt($(this).val());
-        var orderNum=parseInt($('.order_quantity').text());
+        var orderNum=parseInt($(this).siblings('.minimum_order_quantity').val());
         if(buyNum<orderNum){
              dialog.error('起订数量不能少于'+orderNum);
              $(this).val(orderNum);
@@ -295,6 +295,24 @@ $(function () {
         }
         generateOrder(postData,groupBuyCallBack);
     });
+    //购物车弹窗
+    var goodsInfoLayer=$('#goodsInfoLayer').html();
+    var pageii;
+    $('.sample_purchase').on('click',function(){
+        pageii = layer.open({
+            className:'goodsInfoLayer',
+            content: goodsInfoLayer,
+            closeBtn:2,
+            shadeClose:false,
+            // fixed:false,
+            success:function(){
+                var winHeight=$(window).height();
+                // $('.twitter-release-content').css('height',winHeight-120+'px');
+                // $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+            },
+            btn:['取消']
+        });
+    });
 });
 
 //生成订单
@@ -397,10 +415,13 @@ function calculateTotalPrice(){
     }
     var isInt = true;
     var amount = 0;
-    $.each(_thisLis,function(){
+    $.each(_thisLis,function(index,val){
+        console.log(index);
         var _thisLi = $(this);
         var num = _thisLi.find('.gshopping_count').val();
+        alert(num);
         if(!isPosIntNumberOrZero(num)){
+            alert(123);
             isInt = false;
             return false;
         }
@@ -418,17 +439,13 @@ function goodsNumReduce(obj,opt) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
     num=parseInt(num);
-    var sign=_li.find('.gshopping_count').data('sign');
     var orderQuantity=parseInt(opt.order_quantity);
     if(num<=orderQuantity){
         return false;
     }
-    if(sign=='two'){
-        num=num-parseInt(opt.increase_quantity);
-        _li.find('.gshopping_count').val(num);
-    }else{
-        _li.find('.gshopping_count').val(--num);
-    }
+    num=num-parseInt(opt.increase_quantity);
+    _li.find('.gshopping_count').val(num);
+
 }
 
 //单个商品数量自加
@@ -436,11 +453,7 @@ function goodsNumPlus(obj,opt) {
     var _li = obj.parents('li');
     var num = _li.find('.gshopping_count').val();
     num=parseInt(num);
-    var sign=_li.find('.gshopping_count').data('sign');
-    if(sign=='two'){
-        num=num+parseInt(opt.increase_quantity);
-        _li.find('.gshopping_count').val(num);
-    }else{
-        _li.find('.gshopping_count').val(++num);
-    }
+    num=num+parseInt(opt.increase_quantity);
+    _li.find('.gshopping_count').val(num);
+
 }
