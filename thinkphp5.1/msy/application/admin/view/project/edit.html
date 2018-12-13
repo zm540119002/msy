@@ -18,21 +18,6 @@
                 <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                     <tbody>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目主图：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left><p>
-                            <input type="file" class="upload" id="img">
-                            <label class="uploadbtn" for="img" title="JPG,GIF,PNG"></label>
-                        </p>
-                            <p class="showimg" id="showimg">图片上传大小请小于50k</p>
-                            {empty name="info.thumb_img"}
-                                <img  class="thumb_img" src="">
-                                {else /}
-                                <img class="thumb_img" src="public_uploads/{$info.thumb_img}">
-                            {/empty}
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>项目名称：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name}">
@@ -106,45 +91,10 @@
             main_img.ready(function() {
                 main_img.setContent($('#mainImg').val());
             });
-            // 选择图片
-            $('#img').on('change',function(){
-                var img = event.target.files[0];
-                // 判断是否图片
-                if(!img){
-                    return false;
-                }
-                // 判断图片格式
-                if(!(img.type.indexOf('image')==0 && img.type && /\.(?:jpg|png|gif|jpeg)$/.test(img.name)) ){
-                    dialog.error('图片只能是jpg,jpeg,gif,png');
-                    return false;
-                }
-                var reader = new FileReader();
-                reader.readAsDataURL(img);
-
-                reader.onload = function(e){
-                    $(".thumb_img").attr("src",e.target.result);
-                    //提交
-                    $.post(controller + 'uploadFileToTemp',{ fileBase64: e.target.result},function(msg){
-                        if(msg.status == 1){
-                            $(".thumb_img").attr("src",'/uploads/' + msg.info)
-                        }else{
-                            parent.layer.open({
-                                content:msg.info,
-                                time:2
-                            });
-                            return false;
-                        }
-                    });
-                }
-            });
-
-
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
                 //主图
-                postData.thumb_img = $('img.thumb_img').attr('src');
-                //详情图
                 postData.main_img = '';
                 $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
                     postData.main_img += $(this).attr('src') + ',';
