@@ -7,9 +7,7 @@ function commonCallBack(config,data){
             config.disableBtn();
         }
     }else{
-        if(config.type=='click'){
-            config.container.find('.comment-next-page').remove();
-        }
+       
         config.container.find('li:last').after(data);
         if(config.type=='sort'){
             config.disableBtn();

@@ -200,7 +200,7 @@
 				$('.detail-nav').removeClass('top-fixed');
 			}
 		});
-		$('.five_star').setStar(2.9);
+		
 		// $('.scrollwrapper').scrollFloor();
 		//楼层
 		var menu = $('#menu');						
@@ -269,8 +269,12 @@
 		//加载更多评论
 		$('body').on('click','.comment-next-page',function (){
 			var page = $(this).data('page');
+			var	pageIndex=parseInt(page)+1;
+			$(this).data('page',pageIndex);
 			config.currentPage = page;
 			getPagingListByClick(config,getData);
+			
+		
 		});
 
 		//获取推荐商品
@@ -297,6 +301,7 @@
 			if(rq_code_url){
 				var imgSrc=uploads+rq_code_url;
 				layer.open({
+					skin:'shareqrCodeLayer',
 					content:'<img src='+imgSrc+' />',
 				})
 			}
