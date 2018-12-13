@@ -11,11 +11,9 @@
  * @link      http://www.workerman.net/
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace GatewayWorker\Lib;
+namespace common\component\GatewayClientTwo;
 
 use Exception;
-use GatewayWorker\Protocols\GatewayProtocol;
-use Workerman\Connection\TcpConnection;
 
 /**
  * 数据发送相关
