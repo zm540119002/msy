@@ -189,6 +189,40 @@
                 });
             });
 
+            ////设置为精选
+            $('body').on('click','.set_selection',function(){
+                var _this = $(this);
+                var text = _this.text();
+                var is_selection = _this.data('is-selection');
+                var _thisTr = $(this).parents('tr');
+                var postData ={};
+                postData.id = _thisTr.data('id');
+                postData.is_selection = is_selection;
+                var url =  controller + 'setSelection';
+                _this.addClass("nodisabled");//防止重复提交
+                layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:"是否"+text+'?',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            _this.removeClass("nodisabled");
+                            dialog.msg(msg,'',function(){
+                                if(is_selection == 1){
+                                    _thisTr.find('.is-selection').text('精选');
+                                    _this.text('取消为精选');
+                                    _this.data('is-selection',0);
+                                }else{
+                                    _thisTr.find('.is-selection').text('不为精选');
+                                    _this.text('设置为精选');
+                                    _this.data('is-selection',1);
+                                }
+                            });
+                        });
+                        layer.close(index);
+                    }
+                });
+            });
+
             //添加推荐商品
             $('body').on('click','.addRecommendGoods',function(){
                 var _thisTr = $(this).parents('tr');
@@ -212,6 +246,9 @@
                     })
                 });
             });
+
+
+
         });
     </script>
 {/block}
