@@ -35,21 +35,13 @@
 			<li>
 				<a href="javascript:void(0);">项目</a>
 			</li>
+			{notempty name="categoryList"}
+			{volist name="categoryList" id="info"}
 			<li>
-				<a href="javascript:void(0);">冻干粉</a>
+				<a href="javascript:void(0);" data-category-id="{$info.id}">{$info.name}</a>
 			</li>
-			<li>
-				<a href="javascript:void(0);">原液</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">面膜</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">喷雾</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">凝胶</a>
-			</li>
+			{/volist}
+			{/notempty}
 		</ul>
 	</section>
 	<section class="content_main content-padding">
@@ -85,54 +77,94 @@
 				<a class="news_more">更多</a>
 			</div>
 		</div>
-		<div class="floor-graphic-item">
-			<div class="graphic_item graphic_item_65">
-				<a href="">
+		<!--<div>-->
+			<!--<div class="floor-graphic-item">-->
+				<!--<div class="graphic_item graphic_item_65">-->
+					<!--<a href=""  data-project-id="{$projectList[0]['id']}">-->
+						<!--<div class="show-img">-->
+							<!--{empty name="projectList[0]['thumb_img']"}-->
+							<!--<img src="public_img/tk.png" alt="">-->
+							<!--{else /}-->
+							<!--<img src="public_uploads/{$projectList[0]['thumb_img']}" alt="">-->
+							<!--{/empty}-->
+						<!--</div>-->
+					<!--</a>-->
+				<!--</div>-->
+				<!--<div class="graphic_item graphic_item_35">-->
+					<!--<a href=""  data-project-id="{$projectList[0]['id']}">-->
+						<!--<div class="show-img">-->
+							<!--{empty name="projectList[1]['thumb_img']"}-->
+							<!--<img src="public_img/tk.png" alt="">-->
+							<!--{else /}-->
+							<!--<img src="public_uploads/{$projectList[1]['thumb_img']}" alt="">-->
+							<!--{/empty}-->
+						<!--</div>-->
+					<!--</a>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="floor-graphic-item">-->
+				<!--<div class="graphic_item graphic_item_35">-->
+					<!--<a href=""  data-project-id="{$projectList[0]['id']}">-->
+						<!--<div class="show-img">-->
+							<!--{empty name="projectList[2]['thumb_img']"}-->
+							<!--<img src="public_img/tk.png" alt="">-->
+							<!--{else /}-->
+							<!--<img src="public_uploads/{$projectList[2]['thumb_img']}" alt="">-->
+							<!--{/empty}-->
+						<!--</div>-->
+					<!--</a>-->
+				<!--</div>-->
+				<!--<div class="graphic_item graphic_item_65">-->
+					<!--<a href=""  data-project-id="{$projectList[3]['id']}">-->
+						<!--<div class="show-img">-->
+							<!--{empty name="projectList[0]['thumb_img']"}-->
+							<!--<img src="public_img/tk.png" alt="">-->
+							<!--{else /}-->
+							<!--<img src="public_uploads/{$projectList[3]['thumb_img']}" alt="">-->
+							<!--{/empty}-->
+						<!--</div>-->
+					<!--</a>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="floor-graphic-item">-->
+				<!--<div class="graphic_item graphic_item_50">-->
+					<!--<a href=""  data-project-id="{$projectList[4]['id']}">-->
+						<!--<div class="show-img">-->
+							<!--{empty name="projectList[0]['thumb_img']"}-->
+							<!--<img src="public_img/tk.png" alt="">-->
+							<!--{else /}-->
+							<!--<img src="public_uploads/{$projectList[4]['thumb_img']}" alt="">-->
+							<!--{/empty}-->
+						<!--</div>-->
+					<!--</a>-->
+				<!--</div>-->
+				<!--<div class="graphic_item graphic_item_50">-->
+					<!--<a href="">-->
+						<!--<div class="show-img">-->
+							<!--<img src="public/static/common/img/jx.png" alt="">-->
+						<!--</div>-->
+					<!--</a>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div>
+			{volist name="projectList" id="info" }
+			<div class="graphic_item graphic_item_65 img{$key}" >
+				<a href=""  data-project-id="{$info.id}">
 					<div class="show-img">
-						<img src="public/static/common/img/tk.png" alt="">
+						{empty name="info.thumb_img"}
+						<img src="public_img/tk.png" alt="">
+						{else /}
+						<img src="public_uploads/{$info.thumb_img}" alt="">
+						{/empty}
 					</div>
 				</a>
 			</div>
-			<div class="graphic_item graphic_item_35">
-				<a href="">
-					<div class="show-img">
-						<img src="public/static/common/img/jx.png" alt="">
-					</div>
-				</a>
-			</div>
+			{/volist}
+
 		</div>
-		<div class="floor-graphic-item">
-			<div class="graphic_item graphic_item_35">
-				<a href="">
-					<div class="show-img">
-						<img src="public/static/common/img/jx.png" alt="">
-					</div>
-				</a>
-			</div>
-			<div class="graphic_item graphic_item_65">
-				<a href="">
-					<div class="show-img">
-						<img src="public/static/common/img/tk.png" alt="">
-					</div>
-				</a>
-			</div>
-		</div>
-		<div class="floor-graphic-item">
-			<div class="graphic_item graphic_item_50">
-				<a href="">
-					<div class="show-img">
-						<img src="public/static/common/img/jx.png" alt="">
-					</div>
-				</a>
-			</div>
-			<div class="graphic_item graphic_item_50">
-				<a href="">
-					<div class="show-img">
-						<img src="public/static/common/img/jx.png" alt="">
-					</div>
-				</a>
-			</div>
-		</div>
+
 		<div class="new_select_wrap">
 			<div class="mod-part-title">
 				<div class="mod-part-title-wrap">
