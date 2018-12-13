@@ -23,8 +23,8 @@
 	</section>
 	<section class="module-navigation ">
 		<div >
-			<ul>
-				<li>
+			<ul class="goods_list">
+				<li data-id='1'>
 					<div class="top_radius f20 top_module">
 						<div class="columns_flex l-r-sides">
 							<div>
@@ -52,8 +52,6 @@
 							</div>
 						</div>
 					</div>
-				</li>
-				<li>
 					<div class="content-padding">
 						<p class="top_b_text wk_notice separation">[每周采购须知] 美尚精选优质货源任你选！随时参团，享受超级划算的采购结算价格，周五统计订单后送达工厂按订单备货发货；VIP采购商会员额外享受5%返点福利。</p>
 						<div class="columns_flex l-r-sides separation">
@@ -81,8 +79,6 @@
 							</div>
 						</div>
 					</div>
-				</li>
-				<li>
 					<div class="content-padding columns_flex l-r-sides">
 						<div>
 							<p>起订数量:<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></p>
@@ -90,7 +86,7 @@
 						</div>
 						<div class="quantity_wrapper selected-number">
 							<a href="javascript:void(0);" class="greduce">-</a>
-							<input type="text" value="1" class="f24 gshopping_count">
+							<input type="text" value="2000" class="f24 gshopping_count" data-sign="two">
 							<a href="javascript:void(0);" class="gplus">+</a>
 						</div>
 						<div>
@@ -132,131 +128,16 @@
 				</div>
 			</div>
 			<div id="item3" class="floor">
-				<div class="floor_item">
+				<div class="floor_item" >
 					<p>评分评价</p>
-					<div class="goods_star_score">
-						<div class="five_star">
-							<div class="star_img">
-								<img src="__public__/images/mall/starred.png" id="0">
-								<img src="__public__/images/mall/starred.png" id="1">
-								<img src="__public__/images/mall/starred.png" id="2">
-								<img src="__public__/images/mall/star.png" id="3">
-								<img src="__public__/images/mall/star.png" id="4">
-							</div>
-							<span class="fraction" data-score="3.9">3.9分</span>
-						</div>
-						<a href="javascript:void(0);" class="comment_num">145人评论</a>
+					<div id="commentList">
+
 					</div>
-					<ul class="sales_comment_wrapper">
-						<li>
-							<div class="bottomLine">
-								<div class="columns_flex l-r-sides">
-									<div>
-										<img src="" alt="">
-										<span>唛头</span>
-									</div>
-									<div>
-										2018-11-30 15:57:24
-									</div>
-								</div>
-								<div class="store_score_star five_star">
-									<div class="star_img empty_star">
-										<span class="real_star"></span>
-									</div>
-								</div>
-								<p>物流挺快的，很适合我的皮肤，感觉蛮不错的！</p>
-								<div class="cmt_att">
-                                    <span class="img">
-                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
-                                    </span>
-                                    <span class="img">
-                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18904/198/270164927/211601/b80fedbc/5a68751eNeae8fca5.jpg!cc_100x100!q70.dpg" alt="">
-                                    </span>
-                                    <span class="img">
-                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18547/182/278954360/223852/645b0600/5a68751eN5b2a7ec3.jpg!cc_100x100!q70.dpg" alt="">
-                                    </span>
-                                    <span class="img">
-                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18469/190/289560078/350708/4a0feb19/5a68751eNd66e18a7.jpg!cc_100x100!q70.dpg" alt="">
-                                    </span>
-                                    <span class="img">
-                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t18547/182/278954360/223852/645b0600/5a68751eN5b2a7ec3.jpg!cc_100x100!q70.dpg" alt="">
-                                    </span>
-                                    <span class="img">
-                                        <img src="https://img30.360buyimg.com/shaidan/s128x96_jfs/t15751/50/1870565986/337464/4a7b89cd/5a68751eNafe89f3b.jpg!cc_100x100!q70.dpg" alt="">
-                                    </span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="bottomLine">
-								<div class="columns_flex l-r-sides">
-									<div>
-										<img src="" alt="">
-										<span>唛头</span>
-									</div>
-									<div>
-										2018-11-30 15:57:24
-									</div>
-								</div>
-								<div class="store_score_star five_star">
-									<div class="star_img empty_star">
-										<span class="real_star"></span>
-									</div>
-								</div>
-								<p>物流挺快的，很适合我的皮肤，感觉蛮不错的！下次介绍朋友来买</p>
-							</div>
-						</li>
-						<li>
-							<div class="bottomLine">
-								<div class="columns_flex l-r-sides">
-									<div>
-										<img src="" alt="">
-										<span>唛头</span>
-									</div>
-									<div>
-										2018-11-30 15:57:24
-									</div>
-								</div>
-								<div class="store_score_star five_star">
-									<div class="star_img empty_star">
-										<span class="real_star"></span>
-									</div>
-								</div>
-								<p>感觉蛮不错的！值得买</p>
-							</div>
-						</li>
-						<li>
-							<div class="bottomLine">
-								<div class="columns_flex l-r-sides">
-									<div>
-										<img src="" alt="">
-										<span>唛头</span>
-									</div>
-									<div>
-										2018-11-30 15:57:24
-									</div>
-								</div>
-								<div class="store_score_star five_star">
-									<div class="star_img empty_star">
-										<span class="real_star"></span>
-									</div>
-								</div>
-								<p>性价比很高，挺好用的，也不贵</p>
-							</div>
-						</li>
-					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="new_select_wrap" id="recommendGoodsList">
-
-	</div>
-
-
 </article>
-
 <div class="mod_slider_mask" id="blackCover" style="display:none;"></div>
 <div class="mod_slider mod_slider_s1 mod_slider_viewer" id="evalLoopImg" style="display:none;height: 375px;">
 	<div class="inner">
@@ -294,9 +175,11 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="public_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
+		var goodsId = {$info.id};
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
@@ -326,7 +209,7 @@
 		var offsetHeight=$('.detail-nav').offset().top;
 				console.log(height);
 		$(window).scroll(function() {
-			// 完成一些操作
+			//滚动
 			var top = $(document).scrollTop();			
 			var currentId = '';
 			var top=$(document).scrollTop();
@@ -361,7 +244,6 @@
 				if(m.attr('id')==id){
 					var itemTop = m.offset().top;
 					_this.addClass('active').siblings().removeClass('active');
-				console.log(itemTop);
 				var scrollY=itemTop-40;	
 					$('html, body').animate({
 						scrollTop: scrollY
@@ -371,9 +253,28 @@
 				} 
 			});
 		});
+
+		//获取评论
+		var config = {
+			url:module+'Comment/getList',
+			currentPage:1,
+			container:$('#commentList'),
+			type:'click'
+		};
+		var getData = {
+			pageSize:6,
+			goods_id:goodsId
+		};
+		getPagingListByClick(config,getData);
+		//加载更多评论
+		$('body').on('click','.comment-next-page',function (){
+			var page = $(this).data('page');
+			config.currentPage = page;
+			getPagingListByClick(config,getData);
+		});
+
 		//获取推荐商品
 		var url = module + 'Goods/getRecommendGoods';
-		var goodsId = {$info.id};
 		$.ajax({
 			url: url,
 			data: {goods_id:goodsId},
@@ -389,39 +290,6 @@
 				$('#recommendGoodsList').html(data);
 			}
 		});
-		//加入购物车
-		$('body').on('click','.add_cart',function () {
-			var _this = $(this);
-			_this.addClass("nodisabled");//防止重复提交
-			var url = module + 'Cart/addCart';
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function(data){
-					_this.removeClass("nodisabled");//删除防止重复提交
-					$('.loading').hide();
-					if(data.status==0){
-						dialog.error(data.info);
-					}else if(data.code==1 && data.data=='no_login'){
-						loginDialog();
-					}else{
-//                       //加入购物车成功后的操作
-
-					}
-				}
-			});
-		});
 	});
-
-
 </script>
 {/block}

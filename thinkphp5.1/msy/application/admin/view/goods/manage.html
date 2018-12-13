@@ -205,7 +205,6 @@
                 var url =  controller + 'generateGoodsQRcode';
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(url,postData,function(msg){
-                    console.log(msg);
                     _this.removeClass("nodisabled");//防止重复提交
                     var imgSrc=uploads+msg.info
                     layer.open({
