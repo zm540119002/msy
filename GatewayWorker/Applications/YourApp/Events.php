@@ -42,9 +42,8 @@ class Events
             'msg' => 'connect is success',
         )));
         $msg = [
-            'type'      => 'init',
-            'client_id' => $client_id,
-            'msg' => 'connect is success',
+            'type' => 'msg',
+            'msg' => 'aaaaaaaaa',
         ];
         Gateway::bindUid($client_id, 7);
         if(Gateway::isUidOnline(7)){
