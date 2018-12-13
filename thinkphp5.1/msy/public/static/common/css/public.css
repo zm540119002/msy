@@ -73,7 +73,7 @@ body{
     border-bottom:none;
 }
 .red {
-    color: #ff0000;
+    color: #E60012;
 }
 .text-color-ef{
     color:#ef3535;
@@ -3736,6 +3736,9 @@ select[name="nodeIds"]{
     height:100%;
     border-radius:0;
 }
+.bottom-layer-info{
+    margin-bottom:1rem;
+}
 .bottom-layer-info li{
     padding:.15rem 0;
     border-bottom:1px solid #d9d9d9;
@@ -4125,7 +4128,17 @@ select[name="nodeIds"]{
     border-right:none;
 }
 .graphic_item_65{
+   float:left;
+   margin:0 0 0.14rem 0;
+}
+.img0,.img3{
     width:65%;
+}
+.img1,.img2{
+    width:35%;
+}
+.img4,.img5{
+    width:50%;
 }
 .graphic_item_50{
     width:50%;
