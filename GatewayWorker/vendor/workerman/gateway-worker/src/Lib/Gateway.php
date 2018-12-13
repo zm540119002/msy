@@ -34,7 +34,7 @@ class Gateway
      *
      * @var string|array
      */
-    public static $registerAddress = '127.0.0.1:1239';
+    public static $registerAddress = '127.0.0.1:1238';
 
     /**
      * 秘钥
@@ -1319,7 +1319,6 @@ class Gateway
                     continue;
                 }
             }
-            print_r('tcp://' . $register_address);exit;
             if (!$client) {
                 throw new Exception('Can not connect to tcp://' . $register_address . ' ' . $errmsg);
             }
