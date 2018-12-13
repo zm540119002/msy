@@ -41,6 +41,12 @@ class Events
             'client_id' => $client_id,
             'msg' => 'connect is success',
         )));
+        if(Gateway::isUidOnline(7)){
+            $msg = [
+                'type' => 'msg',
+                'msg' => 'aaaa',
+            ];
+        }
     }
     
    /**
