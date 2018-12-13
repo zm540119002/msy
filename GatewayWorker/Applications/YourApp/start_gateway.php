@@ -35,8 +35,10 @@ $gateway->startPort = 2900;
 $gateway->registerAddress = '127.0.0.1:1238';
 
 // 心跳间隔
-$gateway->pingInterval = 10;
-// 心跳数据
+$gateway->pingInterval = 50;
+// 客户端是否需要发送心跳检测 0不需要1需要
+$gateway->pingNotResponseLimit = 0;
+// 服务端定时向客户端发送的数据
 $gateway->pingData = '{"type":"ping"}';
 
 /* 
