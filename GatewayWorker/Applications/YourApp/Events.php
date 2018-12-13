@@ -39,7 +39,7 @@ class Events
         Gateway::sendToClient($client_id, json_encode(array(
             'type'      => 'init',
             'client_id' => $client_id,
-            'msg' => '连接成功',
+            'msg' => 'connect is success',
         )));
     }
     
@@ -69,7 +69,7 @@ class Events
        $data = [
            'type'      => 'end',
            'client_id' => $client_id,
-           'msg' => '连接断开',
+           'msg' => 'connect is close',
        ];
        // 向所有人发送
 //       Gateway::sendToAll(json_encode($data));

@@ -20,6 +20,17 @@ class Comment extends \common\controller\Base{
         }
         $model = new \app\weiya_customization\model\Comment();
         $goodsId = input('get.goods_id/d');
+        $page = (int)input('get.page');
+        if($page == 1){
+            $where = [
+                ['status','=',0],
+                ['goods_id','=',$goodsId],
+            ];
+            $averageScore = $model -> where($where)->avg('score');
+            $this ->assign('averageScore',$averageScore);
+            $total = $model -> where($where)->count('user_id');
+            $this ->assign('total',$total);
+        }
         $config=[
             'where'=>[
                 ['c.status','=',0],
@@ -37,7 +48,6 @@ class Comment extends \common\controller\Base{
         ];
         $list = $model -> pageQuery($config);
         $this->assign('list',$list);
-        $page = (int)input('get.page');
         $page++;
         $this ->assign('nextPage',$page);
         return $this->fetch('list_tpl');
@@ -102,9 +112,10 @@ class Comment extends \common\controller\Base{
                 ['g.shelf_status', '=', 3],
                 ['g.id', 'in', $recommendGoodsIds],
             ],'field'=>[
-                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
+               'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
             ]
         ];
+
         $model = new \app\weiya_customization\model\Comment();
         $list = $model->getList($config);
         $this->assign('list',$list);

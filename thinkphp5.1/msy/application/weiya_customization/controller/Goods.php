@@ -74,7 +74,6 @@ class Goods extends \common\controller\Base{
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
-
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();

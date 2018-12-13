@@ -1,7 +1,9 @@
 //获取分页列表-公共回调函数
 function commonCallBack(config,data){
     if(config.currentPage == 1){
-        config.container.find('li').remove();
+        console.log(data);
+        // config.container.find('li').remove();
+        console.log(config.container);
         config.container.append(data);
         if(config.type=='sort'){
             config.disableBtn();

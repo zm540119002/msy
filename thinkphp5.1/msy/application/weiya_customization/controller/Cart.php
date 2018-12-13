@@ -15,14 +15,14 @@ class Cart extends \common\controller\UserBase{
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
+        $data = input('post.goodsList/a');
+        if(empty($data)){
+            return errorMsg('没有数据');
+        }
         $userId = $this->user['id'];
-        $data = [
-            ['user_id'=>$userId,'foreign_id'=>13,'num'=>1],
-            ['user_id'=>$userId,'foreign_id'=>14,'num'=>3],
-            ['user_id'=>$userId,'foreign_id'=>15,'num'=>1],
-            ['user_id'=>$userId,'foreign_id'=>16,'num'=>2],
-            ['user_id'=>$userId,'foreign_id'=>17,'num'=>1],
-        ];
+        foreach ($data as $k=>&$value){
+            $data[$k]['user_id'] = $userId;
+        }
         $model = new \app\weiya_customization\model\Cart();
         $res = $model->allowField(true)->saveAll($data)->toArray();
         if (!count($res)) {

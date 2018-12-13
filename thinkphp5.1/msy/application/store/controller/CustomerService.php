@@ -42,7 +42,6 @@ class CustomerService extends \common\controller\UserBase{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
-            return successMsg(Gateway::$registerAddress);
             if(Gateway::isUidOnline($this->user['id'])){
                 $msg = [
                     'type' => 'msg',
