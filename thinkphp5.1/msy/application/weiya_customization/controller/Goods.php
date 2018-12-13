@@ -89,29 +89,18 @@ class Goods extends \common\controller\Base{
         }
         $goodsId = input('get.goods_id/d');
         //相关推荐商品
+        $modelRecommendGoods = new \app\weiya_customization\model\RecommendGoods();
         $config =[
             'where' => [
                 ['rg.status', '=', 0],
                 ['rg.goods_id', '=', $goodsId],
             ],'field'=>[
-                'rg.recommend_goods_id',
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification'
+            ],'join'=>[
+                ['goods g','g.id = rg.recommend_goods_id','left']
             ]
         ];
-        $modelRecommendGoods = new \app\weiya_customization\model\RecommendGoods();
-        $recommendGoodsIds = $modelRecommendGoods->getList($config);
-        $recommendGoodsIds = array_column($recommendGoodsIds,'recommend_goods_id');
-
-        $config =[
-            'where' => [
-                ['g.status', '=', 0],
-                ['g.shelf_status', '=', 3],
-                ['g.id', 'in', $recommendGoodsIds],
-            ],'field'=>[
-                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
-            ]
-        ];
-        $model = new \app\weiya_customization\model\Goods();
-        $list = $model->getList($config);
+        $list= $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
         return view('goods/recommend_list_tpl');
     }

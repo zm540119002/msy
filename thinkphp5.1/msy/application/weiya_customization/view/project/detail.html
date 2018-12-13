@@ -7,9 +7,9 @@
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				{volist name="info.main_img" id="vo"}
+				{volist name="info.main_img" id="main_img"}
 				<div class="swiper-slide swiper-slide-active">
-					<img src="public_uploads/{$vo}" alt="" class="common_default_img">
+					<img src="public_uploads/{$main_img}" alt="" class="common_default_img">
 				</div>
 				{/volist}
 			</div>
@@ -30,7 +30,7 @@
 							<span class="hot left">热</span>
 							<p class="f28">{$info.name}</p>
 						</div>
-						<p>{$nfo.intro}</p>
+						<p>{$info.intro}</p>
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
 								{volist name="$info.tag" id="tag"}
@@ -78,16 +78,22 @@
 	</section>
 	<section class="content-padding content_main wy_list">
 		<ul class="goods_list list">
+			{notempty name="goodsList"}
+			{volist name="goodsList" id="info"}
 			<li>
-				<img class="left" src="public/static/common/img/default/no_pic_100.jpg" alt="">
+				{empty name="info.thumb_img"}
+				<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+				{else /}
+				<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+				{/empty}
 				<div class="list_r">
-					<p>美肤美肤美肤美肤美肤</p>
-					<div>单品规格<span>60g/盒</span></div>
+					<p>{$info.headline}</p>
+					<div>单品规格<span>{$info.specification}</span></div>
 					<div>
-						<span>￥<price>38.00</price></span>
+						<span>￥<price>{$info.bulk_price}</price></span>
 					</div>
 					<div class="columns_flex l-r-sides">
-						<div>起订数量：<span>2000盒</span></div>
+						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></div>
 						<a href="javascript:void(0);">样品购买</a>
 					</div>
 					<div class="quantity_wrapper selected-number">
@@ -97,6 +103,8 @@
 					</div>
 				</div>
 			</li>
+			{/volist}
+			{/notempty}
 		</ul>
 	</section>
 </article>
