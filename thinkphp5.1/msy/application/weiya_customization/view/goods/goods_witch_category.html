@@ -7,11 +7,14 @@
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				{volist name="info.main_img" id="main_img"}
 				<div class="swiper-slide swiper-slide-active">
-					<img src="public_uploads/{$main_img}" alt="" class="common_default_img">
+					{empty name="info.img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img src="public_uploads/{$info.img}" alt="" class="common_default_img">
+					{/empty}
+
 				</div>
-				{/volist}
 			</div>
 			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
@@ -32,11 +35,6 @@
 						</div>
 						<p>{$info.intro}</p>
 						<div class="tags_item columns_flex l-r-sides">
-							<div>
-								{volist name="$info.tag" id="tag"}
-								<span>{$tag}</span>
-								{/volist}
-							</div>
 							<div class="tags_item_r">
 								<a class="collection" href=""><span></span>收藏</a>
 								<a class="share" href=""><span></span>分享</a>
@@ -117,7 +115,7 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript" src="public_js/paging.js"></script>
-<script type="text/javascript" src="weiya_js/footerCart.js"></script>
+<script type="text/javascript" src="public_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
 		var id = {$info.id};
@@ -130,6 +128,71 @@
 				clickable: true
 			}
 		});
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		$('.five_star').setStar(2.9);
+		// $('.scrollwrapper').scrollFloor();
+		//楼层
+		var menu = $('#menu');						
+		var items = $('#content').find('.floor');	
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+				console.log(height);
+		$(window).scroll(function() {
+			//滚动
+			var top = $(document).scrollTop();			
+			var currentId = '';
+			var top=$(document).scrollTop();
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;			
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+			});
+
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+			}
+		});
+		$('#menu li').on('click',function(){
+			var _this=$(this);
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+					var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+				var scrollY=itemTop-40;	
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+				}else{
+					_this.removeClass('active');
+				} 
+			});
+		});
+
 		//获取评论
 		var config = {
 			url:module+'Comment/getList',

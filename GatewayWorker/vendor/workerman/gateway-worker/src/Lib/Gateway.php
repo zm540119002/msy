@@ -1319,6 +1319,7 @@ class Gateway
                     continue;
                 }
             }
+            print_r('tcp://' . $register_address);exit;
             if (!$client) {
                 throw new Exception('Can not connect to tcp://' . $register_address . ' ' . $errmsg);
             }
