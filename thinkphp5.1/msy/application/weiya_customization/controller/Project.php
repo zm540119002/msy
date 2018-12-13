@@ -73,6 +73,21 @@ class Project extends \common\controller\Base{
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
+
+            //获取相关的商品
+            $modelProjectGoods = new \app\weiya_customization\model\ProjectGoods();
+            $config =[
+                'where' => [
+                    ['pg.status', '=', 0],
+                    ['pg.project_id', '=', $id],
+                ],'field'=>[
+                    'g.id ','g.headline','g.thumb_img','g.bulk_price'
+                ],'join'=>[
+                    ['goods g','g.id = pg.goods_id','left']
+                ]
+            ];
+            $goodsList= $modelProjectGoods->getList($config);
+            $this->assign('goodsList',$goodsList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
