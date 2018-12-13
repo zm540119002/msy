@@ -142,7 +142,7 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.sort',
+                'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
                 'g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
                 'gc1.name as category_name_1'
             ],
@@ -202,6 +202,25 @@ class Goods extends Base {
              return errorMsg('失败');
         }
         $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
+     * 设置精选
+     */
+    public function setSelection(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+        $model = new \app\admin\model\Goods();
+        $id = input('post.id/d');
+        if(!input('?post.id') && !$id){
+            return errorMsg('失败');
+        }
+        $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
         if(!$rse){
             return errorMsg('失败');
         }
