@@ -70,5 +70,5 @@ class Index extends \common\controller\Base{
         return $this->fetch();
     }
 
-    
+
 }
