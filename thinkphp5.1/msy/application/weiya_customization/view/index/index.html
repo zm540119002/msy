@@ -73,7 +73,7 @@
 				<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
 					<div class="show-img">
 						{empty name="info.thumb_img"}
-						<img src="public_img/tk.png" alt="">
+						<img src="public_img/no_pic_100.jpg" alt="">
 						{else /}
 						<img src="public_uploads/{$info.thumb_img}" alt="">
 						{/empty}
@@ -84,11 +84,17 @@
 		</div>
 		<div class="project_wrapper">
 			<ul>
-				<li>
-					<a href="">
-						<img src="" alt="">
+				{volist name="projectList" id="info" }
+				<li data-id="{$info.id}">
+					<a href="{:url('Project/detail',['id'=>$info.id])}">
+						{empty name="info.thumb_img"}
+						<img src="public_img/default/no_pic_100.jpg" alt="">
+						{else /}
+						<img src="public_uploads/{$info.thumb_img}" alt="">
+						{/empty}
 					</a>
 				</li>
+				{/volist}
 			</ul>
 		</div>
 		<div class="new_select_wrap">
