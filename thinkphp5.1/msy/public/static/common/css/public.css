@@ -4050,6 +4050,15 @@ select[name="nodeIds"]{
     display:flex;
     display:-webkit-flex;
 }
+.count_down_box{
+    padding:0.05rem 0.12rem;
+    background: #000;
+    color:#fff;
+    border-radius:0.5rem;
+}
+.mid_module_left .d-r{
+    margin:0 0 0 0.8rem;
+}
 .mid_module_right span.item{
     display:block;
     margin:0 auto;
@@ -4057,13 +4066,13 @@ select[name="nodeIds"]{
     height:0.80rem;
     background-image:url(../../common/img/icons/cut-off.png);
     background-repeat: no-repeat;
-    background-size:0.8rem 1.75rem;
+    background-size:0.7rem 1.55rem;
 }
 .mid_module_right span.end_time{
     background-position:0 0;
 }
 .mid_module_right span.factory{
-    background-position:0 -0.96rem;
+    background-position:0 -0.85rem;
 }
 .wk_notice{
     color:#1CAD99;
@@ -4130,6 +4139,17 @@ select[name="nodeIds"]{
 .graphic_item_65{
    float:left;
    margin:0 0 0.14rem 0;
+}
+.graphic_item_65 a{
+    display:block;
+    height:100%;
+}
+.goods_title{
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2; 
 }
 .img0,.img3{
     width:65%;
