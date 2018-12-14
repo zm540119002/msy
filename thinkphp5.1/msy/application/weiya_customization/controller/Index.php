@@ -70,7 +70,5 @@ class Index extends \common\controller\Base{
         return $this->fetch();
     }
 
-    public function company(){
-        return $this->fetch();
-    }
+    
 }
