@@ -275,7 +275,10 @@
                 });
                 //简介
                 postData.parameters = ueParam.getContent();
+                var _this = $(this);
+                _this.addClass("nodisabled");//防止重复提交
                 $.post(action,postData,function(data){
+                    _this.removeClass("nodisabled");//防止重复提交
                     dialog.msg(data,'',function () {
                         location.href = controller + 'manage';
                     });

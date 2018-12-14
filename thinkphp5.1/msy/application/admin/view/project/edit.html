@@ -121,7 +121,10 @@
 
                 });
                 var url = module +'Project/edit';
+                var _this = $(this);
+                _this.addClass("nodisabled");//防止重复提交
                 $.post(url,postData,function(msg){
+                    _this.removeClass("nodisabled");//
                     dialog.msg(msg,'',function () {
                         location.href = controller + 'manage';
                     });
