@@ -1,7 +1,9 @@
 <?php
 namespace app\store\controller;
 
-use common\component\GatewayClient\Gateway;
+require_once __DIR__ . '/../../../../../GatewayWorker/vendor/autoload.php';
+use \GatewayWorker\Lib\Gateway;
+//use common\component\GatewayClient\Gateway;
 
 class CustomerService extends \common\controller\UserBase{
     /**售前
