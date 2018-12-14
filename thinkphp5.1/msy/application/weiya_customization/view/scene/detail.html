@@ -3,18 +3,57 @@
 <link rel="stylesheet" href="factory_css/main.css">
 {/block}
 {block name="content"}
+<!--底部弹窗-->
+<section id="goodsInfoLayer" style="display:none;">
+	<div>
+		<img src="" alt="" class="left">
+		<div>
+			<p>台湾原装进口 真世酵素纤丽果冻</p>
+		</div>
+	</div>
+	<div>
+		<div class="columns_flex l-r-sides">
+			<div >
+				<span class="red">￥<price>198.00</price></span>
+				<span>300ml/瓶</span>
+			</div>
+			<div>样品购买限额：<span>10</span></div>
+		</div>
+	</div>
+	<ul class="bottom-layer-info goods_list">
+        <li>
+            <div class="columns_flex l-r-sides">
+                <span>采购数量(单位：瓶)</span>
+                <div class="quantity_wrapper selected-number">
+                    <a href="javascript:void(0);" class="greduce">-</a>
+                    <input type="text" value="1" class="f24 gshopping_count">
+					<input type="hidden" class="minimum_order_quantity" value="1">
+					<input type="hidden" class="increase_quantity" value="1">
+                    <a href="javascript:void(0);" class="gplus">+</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+	{include file="template/footer_menu.html" /}
+    <!--<div class="columns_flex l-r-sides bottom-layer-last">
+        <span class="pink">￥<price>0.00</price></span>
+        <a href="javascript:void(0);" class="bff6482 group_btn50 add-shopping-cart">加入采购车</a>
+    </div>-->
+</section>
 <article class="f24">
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
+				{notempty name="info.goods_video"}
 				<div class="swiper-slide swiper-slide-active">
-					{empty name="info.img"}
-					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
-					{else /}
-					<img src="public_uploads/{$info.img}" alt="" class="common_default_img">
-					{/empty}
-
+					<video  src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
 				</div>
+				{/notempty}
+				{volist name="info.main_img" id="main_img"}
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_uploads/{$main_img}" alt="" class="common_default_img">
+				</div>
+				{/volist}
 			</div>
 			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
@@ -96,12 +135,17 @@
 						<span>￥<price>{$info.bulk_price}</price></span>
 					</div>
 					<div class="columns_flex l-r-sides">
-						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span></div>
-						<a href="javascript:void(0);">样品购买</a>
+						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
+						</div>
+						<a href="javascript:void(0);" class="sample_purchase">样品购买
+							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
+						</a>
 					</div>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce">-</a>
-						<input type="text" value="1" class="f24 gshopping_count" data-sign="one">
+						<input type="text" value="{$info.minimum_order_quantity}" class="f24 gshopping_count" >
+						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
 						<a href="javascript:void(0);" class="gplus">+</a>
 					</div>
 				</div>
@@ -120,7 +164,7 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript" src="public_js/paging.js"></script>
-<script type="text/javascript" src="public_js/footerCart.js"></script>
+<script type="text/javascript" src="weiya_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
 		var id = {$info.id};
@@ -133,108 +177,6 @@
 				clickable: true
 			}
 		});
-		var height=$('.detail-nav').height();
-		var offsetHeight=$('.detail-nav').offset().top;
-		$(window).on('scroll',function(){
-			var scrollHeight=$(document).scrollTop();
-
-			if(scrollHeight>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
-			}else {
-				$('.detail-nav').removeClass('top-fixed');
-			}
-		});
-		$('.five_star').setStar(2.9);
-		// $('.scrollwrapper').scrollFloor();
-		//楼层
-		var menu = $('#menu');						
-		var items = $('#content').find('.floor');	
-		var height=$('.detail-nav').height();
-		var offsetHeight=$('.detail-nav').offset().top;
-				console.log(height);
-		$(window).scroll(function() {
-			//滚动
-			var top = $(document).scrollTop();			
-			var currentId = '';
-			var top=$(document).scrollTop();
-			if(top>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
-			}else {
-				$('.detail-nav').removeClass('top-fixed');
-			}
-			items.each(function(){
-				var m = $(this);
-				var itemTop = m.offset().top;			
-				if(top + 43>= itemTop ){
-					//currentId = '#' + m.attr('id');
-					currentId = m.attr('id');
-				} else {
-					return false;
-				}
-			});
-
-			// 给相应楼层的a 设置 current, 取消其他链接的current
-			var currentLink = menu.find('.active');
-			if(currentId && currentLink.data('item') != currentId) {
-				currentLink.removeClass('active');
-				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
-			}
-		});
-		$('#menu li').on('click',function(){
-			var _this=$(this);
-			var id=_this.data('item');
-			items.each(function(){
-				var m = $(this);
-				if(m.attr('id')==id){
-					var itemTop = m.offset().top;
-					_this.addClass('active').siblings().removeClass('active');
-				var scrollY=itemTop-40;	
-					$('html, body').animate({
-						scrollTop: scrollY
-					},500);
-				}else{
-					_this.removeClass('active');
-				} 
-			});
-		});
-
-		//获取评论
-		var config = {
-			url:module+'Comment/getList',
-			currentPage:1,
-			container:$('#commentList'),
-			type:'click'
-		};
-		var getData = {
-			pageSize:6,
-			id:id
-		};
-		getPagingListByClick(config,getData);
-		//加载更多评论
-		$('body').on('click','.comment-next-page',function (){
-			var page = $(this).data('page');
-			config.currentPage = page;
-			getPagingListByClick(config,getData);
-		});
-
-//		//获取推荐商品
-//		var url = module + 'Goods/getRecommendGoods';
-//		$.ajax({
-//			url: url,
-//			data: {goods_id:id},
-//			type: 'get',
-//			beforeSend: function(){
-//				$('.loading').show();
-//			},
-//			error:function(){
-//				$('.loading').hide();
-//				dialog.error('AJAX错误');
-//			},
-//			success: function(data){
-//				$('#recommendGoodsList').html(data);
-//			}
-//		});
-
 	});
 </script>
 {/block}
