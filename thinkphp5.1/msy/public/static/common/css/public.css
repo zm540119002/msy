@@ -4124,6 +4124,9 @@ select[name="nodeIds"]{
     overflow:hidden;
     margin:0 0 .20rem 0;
 }
+.scene_wrapper{
+    overflow:hidden;
+}
 .graphic_item{
     position:relative;
     height:2rem;
