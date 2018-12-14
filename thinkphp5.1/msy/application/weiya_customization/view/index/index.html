@@ -73,7 +73,7 @@
 				<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
 					<div class="show-img">
 						{empty name="info.thumb_img"}
-						<img src="public_img/no_pic_100.jpg" alt="">
+						<img src="public_img/default/no_pic_100.jpg" alt="">
 						{else /}
 						<img src="public_uploads/{$info.thumb_img}" alt="">
 						{/empty}
