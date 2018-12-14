@@ -22,7 +22,7 @@ class Goods extends Base {
 
     /**
      * @return array
-     * 审核
+     * 编辑
      */
     public function edit(){
         $modelGoods = new \app\admin\model\Goods();
@@ -49,6 +49,9 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
+            if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
+                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['goods_video']));
+            }
             
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
@@ -58,18 +61,18 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
-                //删除商品主图
-                if($goodsInfo['thumb_img']){
-                    delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                //删除旧视频
+                if($goodsInfo['goods_video']){
+                    delImgFromPaths($goodsInfo['goods_video'],$_POST['goods_video']);
                 }
                 if($goodsInfo['main_img']){
-                    //删除商品详情图
+                    //删除商品旧主图
                     $oldImgArr = explode(',',$goodsInfo['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 if($goodsInfo['detail_img']){
-                    //删除商品详情图
+                    //删除商品旧详情图
                     $oldImgArr = explode(',',$goodsInfo['detail_img']);
                     $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
@@ -143,12 +146,13 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
-                'gc1.name as category_name_1'
+                'g.thumb_img','g.shelf_status','g.create_time',
+//                'g.category_id_1',
+//                'gc1.name as category_name_1'
             ],
-            'join' => [
-                ['goods_category gc1','gc1.id = g.category_id_1'],
-            ],
+//            'join' => [
+//                ['goods_category gc1','gc1.id = g.category_id_1'],
+//            ],
             'order'=>[
                 'g.sort'=>'desc',
                 'g.id'=>'desc',
@@ -349,6 +353,35 @@ class Goods extends Base {
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
+
+    /***
+     * 获取项目相关商品
+     * @return array|\think\response\View
+     */
+    public function getSceneGoods(){
+        if(!request()->get()){
+            return errorMsg('参数有误');
+        }
+        if(!input('?get.sceneId') || !input('get.sceneId/d')){
+            return errorMsg('参数有误');
+        }
+        $sceneId = input('get.sceneId/d');
+        $model = new \app\admin\model\SceneGoods();
+        $config = [
+            'where' => [
+                ['sg.scene_id','=',$sceneId],
+            ],'join' => [
+                ['goods g','g.id = sg.goods_id','left'],
+            ],'field' => [
+                'g.id','g.thumb_img','g.name',
+            ],
+
+        ];
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+        return view('goods/selected_list');
+    }
+
 
     /**
      * 获取 商品相关推荐商品

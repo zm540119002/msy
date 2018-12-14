@@ -108,8 +108,12 @@
                                         <div>
                                             <div class="picture-module">
                                                 <input type="file" class="uploadImg uploadSingleVideo" name="">
+                                                {empty name="info.goods_video"}
                                                 <video class="upload_img upload-video" src="" autoplay="autoplay"></video>
-                                                <input type="hidden" class="layer-thumbnail-picture img" data-src="" value=""/>
+                                                {else /}
+                                                <video class="upload_img upload-video" src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
+                                                {/empty}
+                                                <input type="hidden" class="layer-thumbnail-picture img"  value="" name="goods_video"/>
                                             </div>
                                         </div>
                                     </div>

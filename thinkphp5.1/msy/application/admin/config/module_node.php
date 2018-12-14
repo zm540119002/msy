@@ -11,11 +11,18 @@ return [
                 ['id'=>102,'name'=>'商品管理','display'=>1,'controller'=>'Goods','action'=>'manage',],
             ],
         ],
-        'project'=>[
-            'id'=>200,'name'=>'项目','type'=>2,
+        'scene'=>[
+            'id'=>200,'name'=>'场景','type'=>2,
             'sub_menu' => [
 //                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
-                ['id'=>202,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
+                ['id'=>202,'name'=>'场景管理','display'=>1,'controller'=>'Scene','action'=>'manage',],
+            ],
+        ],
+        'project'=>[
+            'id'=>300,'name'=>'项目','type'=>2,
+            'sub_menu' => [
+//                ['id'=>201,'name'=>'项目分类管理','display'=>1,'controller'=>'ProjectCategory','action'=>'manage',],
+                ['id'=>301,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
         ],
     ],

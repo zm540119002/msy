@@ -38,7 +38,7 @@
 			{notempty name="categoryList"}
 			{volist name="categoryList" id="info"}
 			<li>
-				<a href="javascript:void(0);" data-category-id="{$info.id}">{$info.name}</a>
+				<a href="{:url('Goods/goodsWitchCategory',['category_id'=>$info.id])}" data-category-id="{$info.id}">{$info.name}</a>
 			</li>
 			{/volist}
 			{/notempty}
@@ -77,81 +77,10 @@
 				<a class="news_more">更多</a>
 			</div>
 		</div>
-		<!--<div>-->
-			<!--<div class="floor-graphic-item">-->
-				<!--<div class="graphic_item graphic_item_65">-->
-					<!--<a href=""  data-project-id="{$projectList[0]['id']}">-->
-						<!--<div class="show-img">-->
-							<!--{empty name="projectList[0]['thumb_img']"}-->
-							<!--<img src="public_img/tk.png" alt="">-->
-							<!--{else /}-->
-							<!--<img src="public_uploads/{$projectList[0]['thumb_img']}" alt="">-->
-							<!--{/empty}-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
-				<!--<div class="graphic_item graphic_item_35">-->
-					<!--<a href=""  data-project-id="{$projectList[0]['id']}">-->
-						<!--<div class="show-img">-->
-							<!--{empty name="projectList[1]['thumb_img']"}-->
-							<!--<img src="public_img/tk.png" alt="">-->
-							<!--{else /}-->
-							<!--<img src="public_uploads/{$projectList[1]['thumb_img']}" alt="">-->
-							<!--{/empty}-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
-			<!--</div>-->
-			<!--<div class="floor-graphic-item">-->
-				<!--<div class="graphic_item graphic_item_35">-->
-					<!--<a href=""  data-project-id="{$projectList[0]['id']}">-->
-						<!--<div class="show-img">-->
-							<!--{empty name="projectList[2]['thumb_img']"}-->
-							<!--<img src="public_img/tk.png" alt="">-->
-							<!--{else /}-->
-							<!--<img src="public_uploads/{$projectList[2]['thumb_img']}" alt="">-->
-							<!--{/empty}-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
-				<!--<div class="graphic_item graphic_item_65">-->
-					<!--<a href=""  data-project-id="{$projectList[3]['id']}">-->
-						<!--<div class="show-img">-->
-							<!--{empty name="projectList[0]['thumb_img']"}-->
-							<!--<img src="public_img/tk.png" alt="">-->
-							<!--{else /}-->
-							<!--<img src="public_uploads/{$projectList[3]['thumb_img']}" alt="">-->
-							<!--{/empty}-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
-			<!--</div>-->
-			<!--<div class="floor-graphic-item">-->
-				<!--<div class="graphic_item graphic_item_50">-->
-					<!--<a href=""  data-project-id="{$projectList[4]['id']}">-->
-						<!--<div class="show-img">-->
-							<!--{empty name="projectList[0]['thumb_img']"}-->
-							<!--<img src="public_img/tk.png" alt="">-->
-							<!--{else /}-->
-							<!--<img src="public_uploads/{$projectList[4]['thumb_img']}" alt="">-->
-							<!--{/empty}-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
-				<!--<div class="graphic_item graphic_item_50">-->
-					<!--<a href="">-->
-						<!--<div class="show-img">-->
-							<!--<img src="public/static/common/img/jx.png" alt="">-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
-			<!--</div>-->
-		<!--</div>-->
-
 		<div>
-			{volist name="projectList" id="info" }
+			{volist name="sceneList" id="info" }
 			<div class="graphic_item graphic_item_65 img{$key}" >
-				<a href=""  data-project-id="{$info.id}">
+				<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
 					<div class="show-img">
 						{empty name="info.thumb_img"}
 						<img src="public_img/tk.png" alt="">
@@ -174,36 +103,25 @@
 				</div>
 			</div>
 			<ul class="columns_flex flex-both-side goods-content-list" id="list">
-				<li>
-					<a href="">
+				{notempty name="goodsList"}
+				{volist name="goodsList" id="info"}
+				<li data-id="{$info.id}">
+					<a href="{:url('Goods/detail',['id'=>$info.id])}">
+						{empty name="info.thumb_img"}
 						<img src="public_img/default/no_pic_100.jpg" alt="">
+						{else /}
+						<img src="public_uploads/{$info.thumb_img}" alt="">
+						{/empty}
 					</a>
-					<p class="text-intro">某某美白美颜护肤品肤品肤品肤品肤品肤品肤品肤品肤品</p>
+					<p class="text-intro">{$info.headline}</p>
 					<div class="columns_flex l-r-sides">
-						<span class="pink">￥<price>5000</price></span>
+						<span class="pink">￥<price>{$info.bulk_price}</price></span>
 						<a href="javascript:void(0);" class="shopping-cart">购物车</a>
+
 					</div>
 				</li>
-				<li>
-					<a href="">
-						<img src="public_img/default/no_pic_100.jpg" alt="">
-					</a>
-					<p>某某美白美颜护肤品</p>
-					<div class="columns_flex l-r-sides">
-						<span class="pink">￥<price>5000</price></span>
-						<a href="javascript:void(0);" class="shopping-cart">购物车</a>
-					</div>
-				</li>
-				<li>
-					<a href="">
-						<img src="public_img/default/no_pic_100.jpg" alt="">
-					</a>
-					<p>某某美白美颜护肤品</p>
-					<div class="columns_flex l-r-sides">
-						<span class="pink">￥<price>5000</price></span>
-						<a href="javascript:void(0);" class="shopping-cart">购物车</a>
-					</div>
-				</li>
+				{/volist}
+				{/notempty}
 			</ul>
 		</div>
 	</section>
