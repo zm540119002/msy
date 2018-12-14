@@ -353,6 +353,35 @@ class Goods extends Base {
         return view('goods/selected_list');
     }
 
+    /***
+     * 获取项目相关商品
+     * @return array|\think\response\View
+     */
+    public function getSceneGoods(){
+        if(!request()->get()){
+            return errorMsg('参数有误');
+        }
+        if(!input('?get.sceneId') || !input('get.sceneId/d')){
+            return errorMsg('参数有误');
+        }
+        $sceneId = input('get.sceneId/d');
+        $model = new \app\admin\model\SceneGoods();
+        $config = [
+            'where' => [
+                ['sg.scene_id','=',$sceneId],
+            ],'join' => [
+                ['goods g','g.id = sg.goods_id','left'],
+            ],'field' => [
+                'g.id','g.thumb_img','g.name',
+            ],
+
+        ];
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+        return view('goods/selected_list');
+    }
+
+
     /**
      * 获取 商品相关推荐商品
      * @return array|\think\response\View
