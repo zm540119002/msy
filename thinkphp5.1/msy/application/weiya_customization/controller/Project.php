@@ -1,7 +1,7 @@
 <?php
 namespace app\weiya_customization\controller;
 
-class Goods extends \common\controller\Base{
+class Project extends \common\controller\Base{
     /**首页
      */
     public function index(){
@@ -11,45 +11,6 @@ class Goods extends \common\controller\Base{
         }
     }
 
-    //分类相关的商品
-    public function goodsWitchCategory(){
-        $categoryId = intval(input('category_id'));
-        if(!$categoryId){
-            $this->error('没有此分类');
-        }
-        $modelGoodsCategory = new \app\weiya_customization\model\GoodsCategory();
-        $config =[
-            'where' => [
-                ['gc.status', '=', 0],
-                ['gc.id', '=', $categoryId],
-                ['gc.level','=',1]
-            ],
-        ];
-        $info = $modelGoodsCategory->getInfo($config);
-        if(empty($info)){
-            $this->error('没有此分类');
-        }
-        $this->assign('info',$info);
-
-        //获取相关的商品
-        $model = new \app\weiya_customization\model\Goods();
-        $config =[
-            'where' => [
-                ['g.status', '=', 0],
-                ['g.category_id_1', '=', $categoryId],
-                ['g.shelf_status', '=', 3],
-            ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],
-        ];
-        $goodsList= $model->getList($config);
-        $this->assign('goodsList',$goodsList);
-        $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
-    }
-
     /**
      * 查出产商相关产品 分页查询
      */
@@ -57,7 +18,7 @@ class Goods extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new \app\weiya_customization\model\Goods();
+        $model = new \app\weiya_customization\model\Project();
         $config=[
             'where'=>[
             ],
@@ -88,21 +49,21 @@ class Goods extends \common\controller\Base{
         }
     }
 
-    /**商品详情页
+    /**详情页
      */
     public function detail(){
         if(request()->isAjax()){
         }else{
             $id = intval(input('id'));
             if(!$id){
-                $this->error('此商品已下架');
+                $this->error('此项目已下架');
             }
-            $model = new \app\weiya_customization\model\Goods();
+            $model = new \app\weiya_customization\model\Project();
             $config =[
                 'where' => [
-                    ['g.status', '=', 0],
-                    ['g.shelf_status', '=', 3],
-                    ['g.id', '=', $id],
+                    ['p.status', '=', 0],
+                    ['p.shelf_status', '=', 3],
+                    ['p.id', '=', $id],
                 ],
             ];
             $info = $model->getInfo($config);
@@ -110,9 +71,24 @@ class Goods extends \common\controller\Base{
                 $this->error('此商品已下架');
             }
             $info['main_img'] = explode(',',(string)$info['main_img']);
-            $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
+
+            //获取相关的商品
+            $modelProjectGoods = new \app\weiya_customization\model\ProjectGoods();
+            $config =[
+                'where' => [
+                    ['pg.status', '=', 0],
+                    ['pg.project_id', '=', $id],
+                ],'field'=>[
+                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                ],'join'=>[
+                    ['goods g','g.id = pg.goods_id','left']
+                ]
+            ];
+            $goodsList= $modelProjectGoods->getList($config);
+            $this->assign('goodsList',$goodsList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
@@ -126,13 +102,13 @@ class Goods extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $goodsId = input('get.goods_id/d');
+        $id = input('get.id/d');
         //相关推荐商品
         $modelRecommendGoods = new \app\weiya_customization\model\RecommendGoods();
         $config =[
             'where' => [
                 ['rg.status', '=', 0],
-                ['rg.goods_id', '=', $goodsId],
+                ['rg.goods_id', '=', $id],
             ],'field'=>[
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'

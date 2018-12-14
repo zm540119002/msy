@@ -22,7 +22,7 @@ class Goods extends Base {
 
     /**
      * @return array
-     * 审核
+     * 编辑
      */
     public function edit(){
         $modelGoods = new \app\admin\model\Goods();
@@ -35,9 +35,9 @@ class Goods extends Base {
                         $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
                     }
                 }
+                $_POST['main_img'] = implode(',',$tempArr);
                 //主图第一张为缩略图
                 $_POST['thumb_img'] = $tempArr[0];//
-                $_POST['main_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',input('post.detail_img','','string'));
@@ -49,6 +49,9 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
+            if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
+                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['goods_video']));
+            }
             
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
@@ -58,18 +61,18 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
-                //删除商品主图
-                if($goodsInfo['thumb_img']){
-                    delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                //删除旧视频
+                if($goodsInfo['goods_video']){
+                    delImgFromPaths($goodsInfo['goods_video'],$_POST['goods_video']);
                 }
                 if($goodsInfo['main_img']){
-                    //删除商品详情图
+                    //删除商品旧主图
                     $oldImgArr = explode(',',$goodsInfo['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 if($goodsInfo['detail_img']){
-                    //删除商品详情图
+                    //删除商品旧详情图
                     $oldImgArr = explode(',',$goodsInfo['detail_img']);
                     $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
@@ -142,7 +145,7 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.sort',
+                'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
                 'g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
                 'gc1.name as category_name_1'
             ],
@@ -202,6 +205,25 @@ class Goods extends Base {
              return errorMsg('失败');
         }
         $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
+     * 设置精选
+     */
+    public function setSelection(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+        $model = new \app\admin\model\Goods();
+        $id = input('post.id/d');
+        if(!input('?post.id') && !$id){
+            return errorMsg('失败');
+        }
+        $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
         if(!$rse){
             return errorMsg('失败');
         }

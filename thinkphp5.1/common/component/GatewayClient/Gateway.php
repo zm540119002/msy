@@ -36,7 +36,7 @@ class Gateway
      *
      * @var string|array
      */
-    public static $registerAddress = '127.0.0.1:1238';
+    public static $registerAddress = '127.0.0.1:1239';
 
     /**
      * 秘钥
@@ -54,7 +54,7 @@ class Gateway
      * 与Gateway是否是长链接
      * @var bool
      */
-    public static $persistentConnection = false;
+    public static $persistentConnection = true;
     
     /**
      * 向所有客户端连接(或者 client_id_array 指定的客户端连接)广播消息

@@ -47,6 +47,10 @@ class Comment extends \common\controller\Base{
             ],
         ];
         $list = $model -> pageQuery($config);
+        $list->each(function($item, $key){
+               $item['img'] =  explode(',',(string) $item['img']);
+
+        });
         $this->assign('list',$list);
         $page++;
         $this ->assign('nextPage',$page);
