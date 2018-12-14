@@ -3711,7 +3711,7 @@ select[name="nodeIds"]{
 .goods-content-list li{
     width:49%;
     /*padding:2%;*/
-    margin:0 0 .20rem 0;
+    margin:0 0 .12rem 0;
     background: #fff;
     border-radius:5px;
 }
