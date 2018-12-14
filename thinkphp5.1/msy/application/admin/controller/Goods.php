@@ -22,7 +22,7 @@ class Goods extends Base {
 
     /**
      * @return array
-     * 审核
+     * 编辑
      */
     public function edit(){
         $modelGoods = new \app\admin\model\Goods();
@@ -49,6 +49,9 @@ class Goods extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
+            if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
+                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['goods_video']));
+            }
             
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
@@ -58,18 +61,18 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
-                //删除商品主图
-                if($goodsInfo['thumb_img']){
-                    delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                //删除旧视频
+                if($goodsInfo['goods_video']){
+                    delImgFromPaths($goodsInfo['goods_video'],$_POST['goods_video']);
                 }
                 if($goodsInfo['main_img']){
-                    //删除商品详情图
+                    //删除商品旧主图
                     $oldImgArr = explode(',',$goodsInfo['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 if($goodsInfo['detail_img']){
-                    //删除商品详情图
+                    //删除商品旧详情图
                     $oldImgArr = explode(',',$goodsInfo['detail_img']);
                     $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);

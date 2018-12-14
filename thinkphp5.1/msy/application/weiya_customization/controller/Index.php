@@ -34,6 +34,22 @@ class Index extends \common\controller\Base{
         ];
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
+
+        //获取精选的6个项目
+        $modelGoods = new \app\weiya_customization\model\Goods();
+        $config =[
+            'where' => [
+                ['g.status', '=', 0],
+                ['g.is_selection', '=', 1],
+                ['g.shelf_status','=',3]
+            ], 'order'=>[
+                'g.sort'=>'desc',
+                'g.id'=>'desc'
+            ],  'limit'=>'6'
+
+        ];
+        $goodsList  = $modelGoods->getList($config);
+        $this ->assign('goodsList',$goodsList);
         return $this->fetch();
     }
 }
