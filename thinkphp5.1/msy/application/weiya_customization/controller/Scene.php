@@ -61,9 +61,9 @@ class Scene extends \common\controller\Base{
             $model = new\app\weiya_customization\model\Scene();
             $config =[
                 'where' => [
-                    ['p.status', '=', 0],
-                    ['p.shelf_status', '=', 3],
-                    ['p.id', '=', $id],
+                    ['status', '=', 0],
+                    ['shelf_status', '=', 3],
+                    ['id', '=', $id],
                 ],
             ];
             $info = $model->getInfo($config);
@@ -75,19 +75,19 @@ class Scene extends \common\controller\Base{
             $this->assign('info',$info);
 
             //获取相关的商品
-            $modelProjectGoods = new \app\weiya_customization\model\ProjectGoods();
+            $modelSceneGoods = new \app\weiya_customization\model\SceneGoods();
             $config =[
                 'where' => [
-                    ['pg.status', '=', 0],
-                    ['pg.project_id', '=', $id],
+                    ['sg.status', '=', 0],
+                    ['sg.scene_id', '=', $id],
                 ],'field'=>[
                     'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
                     'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
                 ],'join'=>[
-                    ['goods g','g.id = pg.goods_id','left']
+                    ['goods g','g.id = sg.goods_id','left']
                 ]
             ];
-            $goodsList= $modelProjectGoods->getList($config);
+            $goodsList= $modelSceneGoods->getList($config);
             $this->assign('goodsList',$goodsList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
