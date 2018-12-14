@@ -113,7 +113,7 @@
                                                 {else /}
                                                 <video class="upload_img upload-video" src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
                                                 {/empty}
-                                                <input type="hidden" class="layer-thumbnail-picture img"  value="" name="goods_video"/>
+                                                <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.goods_video}" name="goods_video"/>
                                             </div>
                                         </div>
                                     </div>
@@ -275,7 +275,10 @@
                 });
                 //简介
                 postData.parameters = ueParam.getContent();
+                var _this = $(this);
+                _this.addClass("nodisabled");//防止重复提交
                 $.post(action,postData,function(data){
+                    _this.removeClass("nodisabled");//防止重复提交
                     dialog.msg(data,'',function () {
                         location.href = controller + 'manage';
                     });
