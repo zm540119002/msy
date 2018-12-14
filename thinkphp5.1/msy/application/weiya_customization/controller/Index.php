@@ -9,8 +9,8 @@ class Index extends \common\controller\Base{
         $modelGoodsCategory = new \app\weiya_customization\model\GoodsCategory();
         $config =[
             'where' => [
-                ['gc.status', '=', 0],
-                ['gc.level','=',1]
+                ['status', '=', 0],
+                ['level','=',1]
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
@@ -19,13 +19,30 @@ class Index extends \common\controller\Base{
         ];
         $categoryList  = $modelGoodsCategory->getList($config);
         $this ->assign('categoryList',$categoryList);
-        //获取精选的6个项目
+
+        //获取精选的6个 场景
+        $modelScene = new \app\weiya_customization\model\Scene();
+        $config =[
+            'where' => [
+                ['status', '=', 0],
+                ['is_selection', '=', 1],
+                ['shelf_status','=',3]
+            ], 'order'=>[
+                'sort'=>'desc',
+                'id'=>'desc'
+            ],  'limit'=>'6'
+
+        ];
+        $sceneList  = $modelScene->getList($config);
+        $this ->assign('sceneList',$sceneList);
+
+        //获取精选的10个项目
         $modelProject = new \app\weiya_customization\model\Project();
         $config =[
             'where' => [
-                ['p.status', '=', 0],
-                ['p.is_selection', '=', 1],
-                ['p.shelf_status','=',3]
+                ['status', '=', 0],
+                ['is_selection', '=', 1],
+                ['shelf_status','=',3]
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
@@ -39,12 +56,12 @@ class Index extends \common\controller\Base{
         $modelGoods = new \app\weiya_customization\model\Goods();
         $config =[
             'where' => [
-                ['g.status', '=', 0],
-                ['g.is_selection', '=', 1],
-                ['g.shelf_status','=',3]
+                ['status', '=', 0],
+                ['is_selection', '=', 1],
+                ['shelf_status','=',3]
             ], 'order'=>[
-                'g.sort'=>'desc',
-                'g.id'=>'desc'
+                'sort'=>'desc',
+                'id'=>'desc'
             ],  'limit'=>'6'
 
         ];
@@ -52,4 +69,6 @@ class Index extends \common\controller\Base{
         $this ->assign('goodsList',$goodsList);
         return $this->fetch();
     }
+
+
 }

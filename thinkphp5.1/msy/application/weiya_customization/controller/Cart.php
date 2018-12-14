@@ -20,9 +20,12 @@ class Cart extends \common\controller\UserBase{
             return errorMsg('没有数据');
         }
         $userId = $this->user['id'];
-        foreach ($data as $k=>&$value){
-            $data[$k]['user_id'] = $userId;
-        }
+        $arr = [
+            'user_id' => $userId,
+        ];
+        array_walk($data, function (&$value, $key, $arr) {
+            $value = array_merge($value, $arr);
+        }, $arr);
         $model = new \app\weiya_customization\model\Cart();
         $res = $model->allowField(true)->saveAll($data)->toArray();
         if (!count($res)) {

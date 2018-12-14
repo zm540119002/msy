@@ -3,21 +3,9 @@ namespace app\admin\controller;
 
 /**供应商验证控制器基类
  */
-class Project extends Base {
-
-    /*
-     *审核首页
-     */
+class Scene extends Base {
+    
     public function manage(){
-        // 所有项目分类
-        $modelProjectCategory = new \app\admin\model\ProjectCategory();
-        $config = [
-            'where'=>[
-                'status'=>0
-            ]
-        ];
-        $allCategoryList = $modelProjectCategory->getList($config);
-        $this->assign('allCategoryList',$allCategoryList);
         return $this->fetch('manage');
     }
 
@@ -26,7 +14,7 @@ class Project extends Base {
      * 审核
      */
     public function edit(){
-        $model = new \app\admin\model\Project();
+        $model = new \app\admin\model\Scene();
         if(request()->isPost()){
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
@@ -40,6 +28,7 @@ class Project extends Base {
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
+
             }
             $data = $_POST;
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
@@ -50,7 +39,7 @@ class Project extends Base {
                     ],
                 ];
                 $info = $model->getInfo($config);
-                //删除商品主图
+                //删除就图片
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
@@ -79,15 +68,6 @@ class Project extends Base {
             }
             return successMsg('成功');
         }else{
-           // 所有项目分类
-            $modelProjectCategory = new \app\admin\model\ProjectCategory();
-            $config = [
-                'where'=>[
-                    'status'=>0
-                ]
-            ];
-            $allCategoryList = $modelProjectCategory->getList($config);
-            $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
             if(input('?id') && (int)input('id')){
                 $config = [
@@ -96,8 +76,8 @@ class Project extends Base {
                         'id'=>input('id',0,'int'),
                     ],
                 ];
-                $projectInfo = $model->getInfo($config);
-                $this->assign('info',$projectInfo);
+                $info = $model->getInfo($config);
+                $this->assign('info',$info);
             }
             return $this->fetch();
        }
@@ -107,36 +87,36 @@ class Project extends Base {
      *  分页查询
      */
     public function getList(){
-        $modelProject = new \app\admin\model\Project();
+        $model = new \app\admin\model\Scene();
         $where = [];
-        $where[] = ['p.status','=',0];
+        $where[] = ['s.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where[] = ['p.category_id_1','=',input('get.category_id_1',0,'int')];
+            $where[] = ['s.category_id_1','=',input('get.category_id_1',0,'int')];
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where[] = ['p.category_id_2','=',input('get.category_id_2',0,'int')];
+            $where[] = ['s.category_id_2','=',input('get.category_id_2',0,'int')];
         }
         if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where[] = ['p.category_id_3','=',input('get.category_id_3',0,'int')];
+            $where[] = ['s.category_id_3','=',input('get.category_id_3',0,'int')];
         }
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
+            $where[] = ['s.name','like', '%' . trim($keyword) . '%'];
         }
         $config = [
             'where'=>$where,
             'field'=>[
-                'p.id','p.name','p.thumb_img','p.main_img','p.intro','p.shelf_status','p.sort','p.create_time','p.category_id_1','p.is_selection'
+                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection'
             ],
             'order'=>[
-                'p.id'=>'desc',
-                'p.sort'=>'desc',
+                's.id'=>'desc',
+                's.sort'=>'desc',
             ],
         ];
-        $list = $modelProject ->pageQuery($config);
+        $list = $model ->pageQuery($config);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'manage'){
-            return view('project/list_tpl');
+            return view('list_tpl');
         }
     }
 
@@ -149,7 +129,7 @@ class Project extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\admin\model\Project();
+        $model = new \app\admin\model\Scene();
         $id = input('post.id/d');
         if(input('?post.id') && $id){
             $condition = [
@@ -172,7 +152,7 @@ class Project extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\admin\model\Project();
+        $model = new \app\admin\model\Scene();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
@@ -191,7 +171,7 @@ class Project extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\admin\model\Project();
+        $model = new \app\admin\model\Scene();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
@@ -208,15 +188,16 @@ class Project extends Base {
      * @return array|mixed
      * @throws \Exception
      */
-    public function addProjectGoods(){
+    public function addSceneGoods(){
         if(request()->isPost()){
-            $model = new \app\admin\model\ProjectGoods();
+            $model = new \app\admin\model\SceneGoods();
             $data = input('post.selectedIds/a');
             $condition = [
-                ['project_id','=',$data[0]['project_id']]
+                ['scene_id','=',$data[0]['scene_id']]
             ];
             $model->startTrans();
             $rse = $model -> del($condition,$tag=false);
+
             if(false === $rse){
                 $model->rollback();
                 return errorMsg('失败');

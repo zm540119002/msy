@@ -9,7 +9,7 @@ $(function () {
         //单个商品数量自加
         goodsNumPlus($(this),incrementObj);
         //计算商品列表总价
-        calculateTotalPrice();
+        calculateTotalPrice($(this));
     });
 
     //减
@@ -20,7 +20,7 @@ $(function () {
         //单个商品数量自减
         goodsNumReduce($(this),incrementObj);
         //计算商品列表总价
-        calculateTotalPrice();
+        calculateTotalPrice($(this));
     });
 
     //购买数量.失去焦点
@@ -33,7 +33,7 @@ $(function () {
              return false;
         }
         //计算商品列表总价
-        calculateTotalPrice();
+        calculateTotalPrice($(this));
     });
 
     //立即结算/立即购买
@@ -299,6 +299,7 @@ $(function () {
     var goodsInfoLayer=$('#goodsInfoLayer').html();
     var pageii;
     $('.sample_purchase').on('click',function(){
+        var _this=$(this);
         pageii = layer.open({
             className:'goodsInfoLayer',
             content: goodsInfoLayer,
@@ -307,6 +308,8 @@ $(function () {
             // fixed:false,
             success:function(){
                 var winHeight=$(window).height();
+                var goodsTitle=_this.parents('li').find('.goods_title').text();
+                $('.goodsInfoLayer .goods_title').text(goodsTitle);
                 // $('.twitter-release-content').css('height',winHeight-120+'px');
                 // $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
             },
@@ -408,29 +411,45 @@ function assemblyData(lis) {
 }
 
 //计算商品列表总价
-function calculateTotalPrice(){
-    var _thisLis = $('ul.goods_list').find('li')
+function calculateTotalPrice(obj){
+    var buyType=obj.data('type');
+    
     if(!$('footer').find('price').length){
         return false;
     }
     var isInt = true;
     var amount = 0;
-    $.each(_thisLis,function(index,val){
-        var _thisLi = $(this);
-        var num = _thisLi.find('.gshopping_count').val();
-        alert(num);
-        if(!isPosIntNumberOrZero(num)){
-            alert(123);
-            isInt = false;
-            return false;
-        }
-        amount += _thisLi.find('price').text() * num;
-    });
+    if(buyType=='sample'){
+        var _thisLis = $('.goodsInfoLayer ul.goods_list').find('li');
+        $.each(_thisLis,function(index,val){
+            var _thisLi = $(this);
+            var num = _thisLi.find('.gshopping_count').val();
+            if(!isPosIntNumberOrZero(num)){
+                isInt = false;
+                return false;
+            }
+            amount += _thisLi.find('price').text() * num;
+        });
+        $('.goodsInfoLayer footer').find('price').html(amount.toFixed(2));
+    }else{
+        var _thisLis = $('ul.goods_list').find('li');
+        $.each(_thisLis,function(index,val){
+            var _thisLi = $(this);
+            var num = _thisLi.find('.gshopping_count').val();
+            if(!isPosIntNumberOrZero(num)){
+                isInt = false;
+                return false;
+            }
+            amount += _thisLi.find('price').text() * num;
+        });
+        $('footer').find('price').html(amount.toFixed(2));
+    }
+    
     if(!isInt){
         dialog.error('购买数量为正整数');
         return false;
     }
-    $('footer').find('price').html(amount.toFixed(2));
+   
 }
 
 //单个商品数量自减

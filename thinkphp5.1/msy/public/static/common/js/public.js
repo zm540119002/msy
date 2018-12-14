@@ -334,6 +334,7 @@ function swiper(elemObj){
 }
 //活动倒计时
 function countDown(time,id){
+    console.log(id);
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
     var minute_elem = id.find('.minute');
@@ -357,7 +358,14 @@ function countDown(time,id){
         }
     }, 1000);
 }
-
+//获取每周五日期和时分秒
+function getWeek(i) {
+    var now = new Date();
+    var firstDay=new Date(now - (now .getDay() - 1 ) * 86400000);
+    firstDay.setDate(firstDay.getDate() + i);
+    mon = Number(firstDay.getMonth()) + 1;
+    return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+}
 var addTimer = function(){
     var list = [],callback,interval,opt,unix,iStartUp=0;
     return function(id,timeStamp1,timeStamp2){

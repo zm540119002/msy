@@ -121,19 +121,13 @@
 
                 });
 
-                var url = module +'Project/edit';
+                var url = module +'Scene/edit';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
                         location.href = controller + 'manage';
                     });
                 });
             });
-
-            //返回
-            $('.button_save_black').click(function(){
-                location.href = controller + '/manage';
-            });
-
             // 选择单图片
             $('body').on('change','.uploadSingleImg',function () {
                 var _this=$(this);
@@ -180,6 +174,10 @@
                         }
                     })
                 }
+            });
+            //返回
+            $('.button_save_black').click(function(){
+                location.href = controller + '/manage';
             });
 
         });

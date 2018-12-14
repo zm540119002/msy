@@ -60,20 +60,20 @@ class Goods extends Base {
                         'status' => 0,
                     ],
                 ];
-                $goodsInfo = $modelGoods->getInfo($config);
+                $info = $modelGoods->getInfo($config);
                 //删除旧视频
-                if($goodsInfo['goods_video']){
-                    delImgFromPaths($goodsInfo['goods_video'],$_POST['goods_video']);
+                if($info['goods_video']){
+                    delImgFromPaths($info['goods_video'],$_POST['goods_video']);
                 }
-                if($goodsInfo['main_img']){
+                if($info['main_img']){
                     //删除商品旧主图
-                    $oldImgArr = explode(',',$goodsInfo['main_img']);
+                    $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
-                if($goodsInfo['detail_img']){
+                if($info['detail_img']){
                     //删除商品旧详情图
-                    $oldImgArr = explode(',',$goodsInfo['detail_img']);
+                    $oldImgArr = explode(',',$info['detail_img']);
                     $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
@@ -146,12 +146,13 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
-                'gc1.name as category_name_1'
+                'g.thumb_img','g.shelf_status','g.create_time',
+//                'g.category_id_1',
+//                'gc1.name as category_name_1'
             ],
-            'join' => [
-                ['goods_category gc1','gc1.id = g.category_id_1'],
-            ],
+//            'join' => [
+//                ['goods_category gc1','gc1.id = g.category_id_1'],
+//            ],
             'order'=>[
                 'g.sort'=>'desc',
                 'g.id'=>'desc',
@@ -352,6 +353,35 @@ class Goods extends Base {
         $this->assign('list',$list);
         return view('goods/selected_list');
     }
+
+    /***
+     * 获取项目相关商品
+     * @return array|\think\response\View
+     */
+    public function getSceneGoods(){
+        if(!request()->get()){
+            return errorMsg('参数有误');
+        }
+        if(!input('?get.sceneId') || !input('get.sceneId/d')){
+            return errorMsg('参数有误');
+        }
+        $sceneId = input('get.sceneId/d');
+        $model = new \app\admin\model\SceneGoods();
+        $config = [
+            'where' => [
+                ['sg.scene_id','=',$sceneId],
+            ],'join' => [
+                ['goods g','g.id = sg.goods_id','left'],
+            ],'field' => [
+                'g.id','g.thumb_img','g.name',
+            ],
+
+        ];
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+        return view('goods/selected_list');
+    }
+
 
     /**
      * 获取 商品相关推荐商品
