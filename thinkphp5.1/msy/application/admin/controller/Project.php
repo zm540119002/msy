@@ -28,6 +28,9 @@ class Project extends Base {
     public function edit(){
         $model = new \app\admin\model\Project();
         if(request()->isPost()){
+            if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
+            }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
@@ -37,8 +40,6 @@ class Project extends Base {
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
-                //主图第一张为缩略图
-                $_POST['thumb_img'] = $tempArr[0];//
             }
             $data = $_POST;
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
@@ -48,14 +49,14 @@ class Project extends Base {
                         'status' => 0,
                     ],
                 ];
-                $goodsInfo = $model->getInfo($config);
+                $info = $model->getInfo($config);
                 //删除商品主图
-                if($goodsInfo['thumb_img']){
-                    delImgFromPaths($goodsInfo['thumb_img'],$_POST['thumb_img']);
+                if($info['thumb_img']){
+                    delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
-                if($goodsInfo['main_img']){
+                if($info['main_img']){
                     //删除商品详情图
-                    $oldImgArr = explode(',',$goodsInfo['main_img']);
+                    $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
