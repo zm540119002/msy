@@ -120,13 +120,11 @@
                     postData.main_img += $(this).attr('src') + ',';
 
                 });
-                console.log(postData);
-
                 var url = module +'Project/edit';
                 $.post(url,postData,function(msg){
-//                    dialog.msg(msg,'',function () {
-//                        location.href = controller + 'manage';
-//                    });
+                    dialog.msg(msg,'',function () {
+                        location.href = controller + 'manage';
+                    });
                 });
             });
 
