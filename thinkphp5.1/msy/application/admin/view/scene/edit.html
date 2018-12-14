@@ -121,7 +121,7 @@
 
                 });
 
-                var url = module +'Scene/edit';
+                var url = module +'Scene.php/edit';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
                         location.href = controller + 'manage';
@@ -177,7 +177,7 @@
             });
             //返回
             $('.button_save_black').click(function(){
-                location.href = controller + 'manage';
+                location.href = controller + '/manage';
             });
 
         });
