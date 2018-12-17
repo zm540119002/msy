@@ -213,6 +213,7 @@
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
+				postData.category_id = $('.nav_menu li.current').data('category-id');
 				getPagingList(config,postData);
 			}
 		});
