@@ -61,14 +61,16 @@ class Goods extends \common\controller\Base{
         $model = new \app\weiya_customization\model\Goods();
         $config=[
             'where'=>[
+                ['g.status', '=', 0],
+                ['g.shelf_status', '=', 3],
             ],
             'field'=>[
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
             'order'=>[
+                'is_selection'=>'desc',
                 'sort'=>'desc',
-                'line_num'=>'asc',
                 'id'=>'desc'
             ],
         ];
@@ -79,11 +81,12 @@ class Goods extends \common\controller\Base{
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
         }
+        
         $list = $model -> pageQuery($config);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'index' ){//店铺产品列表
-                return $this->fetch('list_tpl');
+            if($_GET['pageType'] == 'index' ){
+                return $this->fetch('list_index_tpl');
             }
         }
     }

@@ -93,34 +93,19 @@
 				<ul class="nav_menu">
 					{notempty name="categoryList"}
 					{volist name="categoryList" id="info"}
-					<li>
-						<a href="javascript:void(0);" data-category-id="{$info.id}" class="category_nav">{$info.name}</a>
+					<li data-category-id="{$info.id}" >
+						<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
 					</li>
 					{/volist}
 					{/notempty}
 				</ul>
 			</section>
-			<ul class="columns_flex flex-both-side goods-content-list" id="list">
-				{notempty name="goodsList"}
-				{volist name="goodsList" id="info"}
-				<li data-id="{$info.id}">
-					<a href="{:url('Goods/detail',['id'=>$info.id])}">
-						{empty name="info.thumb_img"}
-						<img src="public_img/default/no_pic_100.jpg" alt="">
-						{else /}
-						<img src="public_uploads/{$info.thumb_img}" alt="">
-						{/empty}
-					</a>
-					<p class="text-intro">{$info.headline}</p>
-					<div class="columns_flex l-r-sides">
-						<span class="pink">￥<price>{$info.bulk_price}</price></span>
-						<a href="javascript:void(0);" class="shopping-cart">购物车</a>
+			<div id="scroller-wrapper">
+				<ul class="columns_flex flex-both-side goods-content-list" id="list">
 
-					</div>
-				</li>
-				{/volist}
-				{/notempty}
-			</ul>
+				</ul>
+			</div>
+
 		</div>
 	</section>
 </article>
@@ -173,13 +158,13 @@
 		url:module+'Goods/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+
 	};
 	var postData = {
 		pageSize:6,
 		pageType:'index'
 	};
-
 	$(function(){
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
@@ -208,13 +193,31 @@
 				$('.news_list li').eq(len-1).after($('.news_list li').eq(0));
 			},500);
 		}
-
 		//初始化分类商品页面
 		getPagingList(config,postData);
-		
+
 		$('body').on('click','.nav_menu li',function(){
+			var _this = $(this);
 			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1,
+			};
+			postData.category_id = _this.data('category-id');
+			getPagingList(config,postData);
 		})
+
+		//下拉加载
+		$('#scroller-wrapper').on('scroll',function(){
+			var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
+			if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+				alert(1)
+//				config.loadTrigger = false;
+//				getPagingList(config,postData);
+			}
+		});
 
 	});
 </script>
