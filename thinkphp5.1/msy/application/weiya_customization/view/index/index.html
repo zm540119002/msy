@@ -212,9 +212,8 @@
 		//下拉加载
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				alert(1)
-//				config.loadTrigger = false;
-//				getPagingList(config,postData);
+				config.loadTrigger = false;
+				getPagingList(config,postData);
 			}
 		});
 
