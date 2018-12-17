@@ -4404,14 +4404,17 @@ select[name="nodeIds"]{
     color:#fff;
 }
 /*走进维雅介绍*/
+.cpy_text_item{
+    margin:0 0 0.08rem 0;
+}
 .cpy_text_item dt{
     padding:0.10rem 0;
     background: #E0E0E0;
 }
 .cpy_text_item dt span,
 .text_pink{
-    background:#EFB4B4;
-    color:#333;
+    /*background:#EFB4B4;
+    color:#333;*/
 }
 .text_pink{
     margin:0 0 0.12rem 0;
@@ -4421,6 +4424,7 @@ select[name="nodeIds"]{
     background: #ECECEC;
 }
 .cpy_mid_intro{
+    padding:0.20rem 0.12rem 0.18rem 0.12rem;
     background: #ececec;
 }
 .important_heading{
@@ -4431,6 +4435,7 @@ select[name="nodeIds"]{
 }
 .weiya_item h4{
     color:#0071BA;
+    font-size:0.28rem;
 }
 .weiya_item ul{
     padding:0.12rem;
