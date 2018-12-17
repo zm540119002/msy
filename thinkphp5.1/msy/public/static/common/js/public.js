@@ -334,7 +334,6 @@ function swiper(elemObj){
 }
 //活动倒计时
 function countDown(time,id){
-    console.log(id);
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
     var minute_elem = id.find('.minute');
@@ -361,10 +360,17 @@ function countDown(time,id){
 //获取每周五日期和时分秒
 function getWeek(i) {
     var now = new Date();
+    // console.log(now - (now .getDay() - 1 ) * 86400000);
     var firstDay=new Date(now - (now .getDay() - 1 ) * 86400000);
     firstDay.setDate(firstDay.getDate() + i);
     mon = Number(firstDay.getMonth()) + 1;
     return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+
+    // var endYear=new Date().getFullYear();
+    // var endMonth=new Date().getMonth();
+    // var endDay=new Date().getDate();
+    // var endTime2=new Date(endYear,endMonth,endDay);
+	// console.log(endTime2);
 }
 var addTimer = function(){
     var list = [],callback,interval,opt,unix,iStartUp=0;
