@@ -4139,8 +4139,8 @@ select[name="nodeIds"]{
 .nav_menu li{
     display: inline-block;
     width: 1.5rem;
-    height: .8rem;
-    line-height: .8rem;
+    height: .75rem;
+    line-height: .75rem;
     text-align: center;
     background-size: 100% 100%;
 }
