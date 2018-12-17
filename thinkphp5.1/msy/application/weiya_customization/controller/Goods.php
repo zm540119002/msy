@@ -63,9 +63,8 @@ class Goods extends \common\controller\Base{
             'where'=>[
             ],
             'field'=>[
-                'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.trait'
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
             'order'=>[
                 'sort'=>'desc',
@@ -73,8 +72,8 @@ class Goods extends \common\controller\Base{
                 'id'=>'desc'
             ],
         ];
-        if(input('?get.storeId') && (int)input('?get.storeId')){
-            $config['where'][] = ['g.store_id', '=', input('get.storeId')];
+        if(input('?get.category_id') && input('get.category_id/d')){
+            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
         }
         $keyword = input('get.keyword','');
         if($keyword) {
@@ -83,7 +82,7 @@ class Goods extends \common\controller\Base{
         $list = $model -> pageQuery($config);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'store' ){//店铺产品列表
+            if($_GET['pageType'] == 'index' ){//店铺产品列表
                 return $this->fetch('list_tpl');
             }
         }
