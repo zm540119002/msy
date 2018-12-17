@@ -360,12 +360,15 @@ function countDown(time,id){
 //获取每周五日期和时分秒
 function getWeek(i) {
     var now = new Date();
-    // console.log(now - (now .getDay() - 1 ) * 86400000);
-    var firstDay=new Date(now - (now .getDay() - 1 ) * 86400000);
+    var firstDay=new Date(now - (now .getDay() - 1 )* 24*3600*1000);
     firstDay.setDate(firstDay.getDate() + i);
-    mon = Number(firstDay.getMonth()) + 1;
-    return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
-
+    //日期
+    //mon = Number(firstDay.getMonth())+1;
+    //准确年月日
+    mon = Number(firstDay.getMonth());
+    //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+    return new Date(now.getFullYear(),mon,firstDay.getDate());
+    //当天00：00：00
     // var endYear=new Date().getFullYear();
     // var endMonth=new Date().getMonth();
     // var endDay=new Date().getDate();

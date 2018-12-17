@@ -3706,7 +3706,7 @@ select[name="nodeIds"]{
 }
 .goods-content-list {
     flex-wrap: wrap;
-    padding:0 0 0.8rem 0;
+    padding:0 0 0.35rem 0;
 }
 .goods-content-list li{
     width:49%;
@@ -4409,6 +4409,9 @@ select[name="nodeIds"]{
 }
 .customer_sidebar a{
     color:#fff;
+}
+.end_more{
+    text-align:center;
 }
 /*走进维雅介绍*/
 .cpy_text_item{
