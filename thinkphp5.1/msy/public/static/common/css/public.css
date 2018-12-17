@@ -4145,7 +4145,17 @@ select[name="nodeIds"]{
     background-color:#ff6482;
 }
 .weiya_item .top_title{
-    line-height:50px;
+    line-height:42px;
+    padding:0.30rem 0.12rem 0 0.12rem;
+}
+.top_title img{
+    width:30%;
+}
+.intro_title{
+    color:#ED0000;
+}
+.top_title .cpy_name{
+    margin:0 0 0 0.12rem;
 }
 .weiya_item.hide{
     display:none;
@@ -4156,9 +4166,12 @@ select[name="nodeIds"]{
     margin:0 0 .20rem 0;
 }
 .dynamic_img a{
-    width:30%;
+    width:31%;
     margin:0 3% 0.10rem 0;
     border:1px solid #d9d9d9;
+}
+.dynamic_img a:last-child{
+    margin-right:0;
 }
 .dynamic_img a img{
     max-width:100%;
@@ -4414,6 +4427,9 @@ select[name="nodeIds"]{
 }
 .weiya_item h4{
     color:#0071BA;
+}
+.weiya_item ul{
+    padding:0.12rem;
 }
 .title1{
     display: block;
