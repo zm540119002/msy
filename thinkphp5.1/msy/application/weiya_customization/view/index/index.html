@@ -27,20 +27,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="">
-		<ul class="nav_menu">
-			<li class="current">
-				<a href="javascript:void(0);">精选</a>
-			</li>
-			{notempty name="categoryList"}
-			{volist name="categoryList" id="info"}
-			<li>
-				<a href="{:url('Goods/goodsWitchCategory',['category_id'=>$info.id])}" data-category-id="{$info.id}">{$info.name}</a>
-			</li>
-			{/volist}
-			{/notempty}
-		</ul>
-	</section>
+
 	<section class="content_main content-padding">
 		<div>
 			<div class="scroll_news">
@@ -102,13 +89,17 @@
 			</ul>
 		</div>
 		<div class="new_select_wrap">
-			<div class="mod-part-title">
-				<div class="mod-part-title-wrap">
-					<span class="icon-title left"></span>
-					<span class="title">推荐商品</span>
-					<span class="icon-title right"></span>
-				</div>
-			</div>
+			<section class="">
+				<ul class="nav_menu">
+					{notempty name="categoryList"}
+					{volist name="categoryList" id="info"}
+					<li>
+						<a href="javascript:void(0);" data-category-id="{$info.id}" class="category_nav">{$info.name}</a>
+					</li>
+					{/volist}
+					{/notempty}
+				</ul>
+			</section>
 			<ul class="columns_flex flex-both-side goods-content-list" id="list">
 				{notempty name="goodsList"}
 				{volist name="goodsList" id="info"}
