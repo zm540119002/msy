@@ -248,7 +248,7 @@ class Goods extends Base {
             $info = $model -> getInfo($config);
             $oldQRCodes = $info['rq_code_url'];
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-            $url = request()->domain().'/index.php/admin/Goods/preview/id/'.$id;
+            $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$id;
             $newRelativePath = config('upload_dir.weiya_goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
             $init = [
