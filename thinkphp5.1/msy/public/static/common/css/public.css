@@ -4217,7 +4217,7 @@ select[name="nodeIds"]{
     width:50%;
 }
 .img1,.img3{
-    margin-right:0;
+    border-right:0;
 }
 .graphic_item_50{
     width:50%;
