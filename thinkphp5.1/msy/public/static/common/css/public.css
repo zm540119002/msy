@@ -4123,7 +4123,7 @@ select[name="nodeIds"]{
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
-    background-color: #fff;
+    /*background-color: #fff;*/
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
     /*padding-bottom: .4rem;
@@ -4135,6 +4135,14 @@ select[name="nodeIds"]{
     position:fixed;
     left:0;
     top:0;
+}
+.nav_menu li{
+    display: inline-block;
+    width: 1.5rem;
+    height: .8rem;
+    line-height: .8rem;
+    text-align: center;
+    background-size: 100% 100%;
 }
 .nav_menu a{
     position:relative;
