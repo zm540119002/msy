@@ -3709,16 +3709,19 @@ select[name="nodeIds"]{
     padding:0 0 0.8rem 0;
 }
 .goods-content-list li{
-    width:44%;
-    padding:2%;
-    margin:0 0 .20rem 0;
+    width:49%;
+    /*padding:2%;*/
+    margin:0 0 .12rem 0;
     background: #fff;
     border-radius:5px;
+}
+.goods-content-list li a{
+    display:block;
 }
 .goods-content-list li img{
     display: block;
     margin:0 auto;
-    max-width:120px;
+    width:100%;
 }
 .goods-content-list li p{
     height:42px;
