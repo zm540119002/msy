@@ -4199,6 +4199,7 @@ select[name="nodeIds"]{
     display:block;
     height:100%;
 }
+
 .goods_title{
     overflow:hidden; 
     text-overflow:ellipsis;
@@ -4214,6 +4215,9 @@ select[name="nodeIds"]{
 }
 .img4,.img5{
     width:50%;
+}
+.img1,.img3{
+    margin-right:0;
 }
 .graphic_item_50{
     width:50%;
