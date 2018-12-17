@@ -4428,7 +4428,23 @@ select[name="nodeIds"]{
     background: #ececec;
 }
 .important_heading{
+    margin: 0.14rem 0 0.10rem;
     color:#0071BA;
+    font-size:0.27rem;
+}
+.important_first_heading{
+    margin-top:0.08rem;
+    margin-bottom:0;
+}
+.important_last_heading{
+    margin-top:0;
+}
+.develop_item h4{
+    margin:0.12rem 0 0;
+}
+.develop_item .base{
+    margin-top:0;
+    margin-bottom:0.15rem;
 }
 .cpy_img_default img{
     width:100%;
@@ -4441,11 +4457,13 @@ select[name="nodeIds"]{
     padding:0.12rem;
 }
 .title1{
+    width:75%;
     display: block;
     background: #0071BA;
     color:#fff;
-    border-radius:10px;
-    margin:0.12rem 0;
+    border-radius:7px;
+    margin:0.12rem 0 0.18rem;
+    text-align:center;
 }
 .module_item{
     padding:0.12rem;
