@@ -3709,16 +3709,19 @@ select[name="nodeIds"]{
     padding:0 0 0.8rem 0;
 }
 .goods-content-list li{
-    width:44%;
-    padding:2%;
-    margin:0 0 .20rem 0;
+    width:49%;
+    /*padding:2%;*/
+    margin:0 0 .12rem 0;
     background: #fff;
     border-radius:5px;
+}
+.goods-content-list li a{
+    display:block;
 }
 .goods-content-list li img{
     display: block;
     margin:0 auto;
-    max-width:120px;
+    width:100%;
 }
 .goods-content-list li p{
     height:42px;
@@ -4191,10 +4194,10 @@ select[name="nodeIds"]{
     -webkit-line-clamp:2; 
 }
 .img0,.img3{
-    width:65%;
+    width:60%;
 }
 .img1,.img2{
-    width:35%;
+    width:40%;
 }
 .img4,.img5{
     width:50%;
@@ -4418,4 +4421,8 @@ select[name="nodeIds"]{
     color:#fff;
     border-radius:10px;
     margin:0.12rem 0;
+}
+.module_item{
+    padding:0.12rem;
+    border-bottom:5px solid #d9d9d9;
 }

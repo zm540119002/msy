@@ -26,6 +26,7 @@ class Goods extends \common\controller\Base{
             ],
         ];
         $info = $modelGoodsCategory->getInfo($config);
+        $info['tag'] = explode(',',(string)$info['tag']);
         if(empty($info)){
             $this->error('没有此分类');
         }
