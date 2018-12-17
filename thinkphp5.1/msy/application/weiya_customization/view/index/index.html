@@ -194,6 +194,8 @@
 			},500);
 		}
 		//初始化分类商品页面
+		$('.nav_menu li:eq(0)').addClass('current');
+		postData.category_id = $('.nav_menu li.current').data('category-id');
 		getPagingList(config,postData);
 
 		$('body').on('click','.nav_menu li',function(){

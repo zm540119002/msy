@@ -16,7 +16,5 @@
 return [
     'title' => '维雅定制',
     'default_page_size'=>10,
-
-    
 ];
 

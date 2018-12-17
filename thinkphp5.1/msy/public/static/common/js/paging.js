@@ -42,7 +42,8 @@ function getPagingList(config,postData) {
     postData.pageSize = postData.pageSize ? postData.pageSize:4;
     //请求结束标志
     if(config.requestEnd){
-        dialog.error('没有更多啦');
+        $('.end_more').remove();
+        config.container.after('<div class="end_more">已到底部，没有更多数据</div>')
         config.loadTrigger = true;
         return false;
     }
@@ -59,6 +60,7 @@ function getPagingList(config,postData) {
         },
         success: function(data){
             $('.loading').hide();
+            $('.end_more').remove();
             config.callBack(config,data);
             if($($.parseHTML(data)).length<postData.pageSize){
                 config.requestEnd = true;
