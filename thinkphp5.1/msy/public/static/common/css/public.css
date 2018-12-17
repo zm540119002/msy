@@ -4119,6 +4119,12 @@ select[name="nodeIds"]{
     padding:0.20rem;
     background: #4D4D4D;
 }
+.nav_menu.top-fixed{
+    width:100%;
+    position:fixed;
+    left:0;
+    top:0;
+}
 .nav_menu a{
     position:relative;
     color:#fff;
