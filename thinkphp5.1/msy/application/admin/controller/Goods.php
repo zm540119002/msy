@@ -131,7 +131,7 @@ class Goods extends Base {
      *  分页查询
      */
     public function getList(){
-        $modelGoods = new \app\admin\model\Goods();
+        $model = new \app\admin\model\Goods();
         $where = [];
         $where[] = ['g.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
@@ -163,7 +163,7 @@ class Goods extends Base {
                 'g.id'=>'desc',
             ],
         ];
-        $list = $modelGoods ->pageQuery($config);
+        $list = $model ->pageQuery($config);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
             return view('goods/list_layer_tpl');
