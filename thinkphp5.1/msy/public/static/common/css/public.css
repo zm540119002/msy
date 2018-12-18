@@ -4076,7 +4076,7 @@ select[name="nodeIds"]{
     display:-webkit-flex;
 }
 .count_down_box{
-    padding:0.05rem 0.12rem;
+    padding:0.05rem 0.18rem 0.05rem 0.12rem;
     background: #000;
     color:#fff;
     border-radius:0.5rem;
