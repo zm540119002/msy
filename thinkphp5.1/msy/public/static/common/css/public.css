@@ -4251,7 +4251,7 @@ select[name="nodeIds"]{
     display:-webkit-box; 
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2; 
-    margin:0 0 0.08rem 0;
+    margin:0 0 0.20rem 0;
 }
 .img0,.img3{
     width:60%;
