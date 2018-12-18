@@ -3999,7 +3999,7 @@ select[name="nodeIds"]{
 }
 .product_intro{
     margin:0.18rem 0;
-    line-height:30px;
+    /*line-height:30px;*/
 }
 /*打印订单*/
 .print_orders{
