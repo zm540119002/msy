@@ -814,7 +814,7 @@ color: #ed6d00;
 .top_radius .hot{
     display:inline-block;
     padding:0.05rem 0.12rem;
-    margin:0 .14rem 0 0;
+    margin:0.05rem .14rem 0 0;
     background:#E60012;
     color:#fff;
     border-radius:5px;
@@ -3840,7 +3840,7 @@ select[name="nodeIds"]{
     background: #fff;
 }
 .scroll_news .news_tit{
-    width:1.60rem;
+    width:1.68rem;
     height:.6rem;
     position:absolute;
     top:.17rem;
@@ -4178,7 +4178,7 @@ select[name="nodeIds"]{
 }
 .weiya_menu{
     background: #fff;
-    border-bottom:1px solid #d9d9d9;
+    border-bottom:5px solid #d9d9d9;
 }
 .weiya_menu li a{
     color:#333;
@@ -4251,7 +4251,7 @@ select[name="nodeIds"]{
     display:-webkit-box; 
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2; 
-    margin:0 0 0.08rem 0;
+    margin:0 0 0.20rem 0;
 }
 .img0,.img3{
     width:60%;
@@ -4305,7 +4305,10 @@ select[name="nodeIds"]{
     vertical-align: -6px;
 }
 .sale_price{
-    font-size:0.30rem;
+    font-size:0.42rem;
+}
+.project_p_item{
+    margin:0 0 0.12rem 0;
 }
 .nav-floor,
 #menu ul{
@@ -4497,7 +4500,7 @@ select[name="nodeIds"]{
     font-size:0.27rem;
 }
 .important_first_heading{
-    margin-top:0.08rem;
+    margin-top:0.12rem;
     margin-bottom:0;
 }
 .important_last_heading{
@@ -4526,10 +4529,13 @@ select[name="nodeIds"]{
     background: #0071BA;
     color:#fff;
     border-radius:7px;
-    margin:0.12rem 0 0.18rem;
+    margin:0.12rem 0 0.20rem;
     text-align:center;
 }
 .module_item{
     padding:0.12rem;
     border-bottom:5px solid #d9d9d9;
+}
+.cpy_p_text{
+    margin:0 0 0.20rem 0;
 }
