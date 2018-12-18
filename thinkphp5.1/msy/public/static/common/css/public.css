@@ -809,7 +809,7 @@ color: #ed6d00;
     
 }
 .top_radius p{
-    line-height:22px;
+    /*line-height:22px;*/
 }
 .top_radius .hot{
     display:inline-block;
@@ -837,7 +837,7 @@ color: #ed6d00;
     
 }
 .tags_item{
-    padding:0 0 .12rem 0;
+    padding:0 0 0 0;
     border-bottom:1px solid #d9d9d9;
 }
 .tags_item span{
@@ -3902,16 +3902,18 @@ select[name="nodeIds"]{
 }
 .mod-part-title .mod-part-title-wrap .icon-title {
     display: block;
-    height: .21333rem;
+    height: .2rem;
     width: .66667rem;
 }
 .mod-part-title .mod-part-title-wrap .icon-title.left {
     background: url(../../common/img/icons/icon_left.png) 0 0 no-repeat;
-    background-size: contain;
+    background-size:0.5rem auto;
+    background-position:center;
 }
 .mod-part-title .mod-part-title-wrap .icon-title.right {
     background: url(../../common/img/icons/icon_right.png) 0 0 no-repeat;
-    background-size: contain;
+    background-size:0.5rem auto;
+    background-position:center;
 }
 .mod-part-title .mod-part-title-wrap .title {
     display: block;
@@ -3986,6 +3988,13 @@ select[name="nodeIds"]{
 }
 .project_wrapper li img{
     width:100%;
+}
+.specification_text{
+    margin:0.14rem 0 0;
+}
+.product_intro{
+    margin:0.18rem 0;
+    line-height:18px;
 }
 /*打印订单*/
 .print_orders{
@@ -4316,6 +4325,9 @@ select[name="nodeIds"]{
 .floor_item{
     padding:0.12rem;
     border-bottom:6px solid #d9d9d9;
+}
+#item1 .floor_item p{
+    line-height:20px;
 }
 .floor:last-child .floor_item{
     padding:0;
