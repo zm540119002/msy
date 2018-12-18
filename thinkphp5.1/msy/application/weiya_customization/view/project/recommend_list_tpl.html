@@ -9,7 +9,7 @@
 <ul class="columns_flex flex-both-side goods-content-list">
     {volist name="list" id="info"}
     <li data-id="{$info.goods_id}">
-        <a href="javascript:void(0);">
+        <a href="{:url('detail',['goods_id'=>$info.id])}">
             {empty name="info.thumb_img"}
             <img src="public_img/default/no_pic_100.jpg" alt="">
             {else /}
