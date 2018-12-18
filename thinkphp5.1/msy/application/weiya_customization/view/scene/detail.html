@@ -123,11 +123,13 @@
 			{notempty name="goodsList"}
 			{volist name="goodsList" id="info"}
 			<li data-id="{$info.id}">
-				{empty name="info.thumb_img"}
-				<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
-				{else /}
-				<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
-				{/empty}
+				<a href="{:url('Goods/detail',['id'=>$info.id])}">
+					{empty name="info.thumb_img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					{/empty}
+				</a>
 				<div class="list_r">
 					<p>{$info.headline}</p>
 					<div>单品规格<span>{$info.specification}</span></div>
