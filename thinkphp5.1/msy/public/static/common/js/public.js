@@ -340,6 +340,7 @@ function countDown(time,id){
     var second_elem = id.find('.second');
     var end_time = new Date(time).getTime(),//月份是实际月份-1
         sys_second = (end_time-new Date().getTime())/1000;
+        console.log(sys_second);
     var timer = setInterval(function(){
         if (sys_second > 1) {
             sys_second -= 1;
