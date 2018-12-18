@@ -4128,22 +4128,22 @@ select[name="nodeIds"]{
     background: #fff;
 }
 .nav_menu{
-    /*display:flex;
+    display:flex;
     display:-webkit-flex;
-    justify-content: space-between;*/
-    /*padding:0.20rem;*/
+    justify-content: space-between;
+    /*padding:0.20rem;
     background: #4D4D4D;
     position: relative;
     /*width: 6.4rem;*/
-    white-space: nowrap;
+    /*white-space: nowrap;
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: hidden;*/
     /*background-color: #fff;*/
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
+    /*box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;*/
     /*padding-bottom: .4rem;
     padding-right: 1rem;*/
-    left: 0;
+    /*left: 0;*/
 }
 .nav_menu.top-fixed{
     width:100%;
@@ -4151,14 +4151,14 @@ select[name="nodeIds"]{
     left:0;
     top:0;
 }
-.nav_menu li{
+/*.nav_menu li{
     display: inline-block;
     width: 1.5rem;
     height: .75rem;
     line-height: .75rem;
     text-align: center;
     background-size: 100% 100%;
-}
+}*/
 .nav_menu a{
     position:relative;
     color:#fff;
