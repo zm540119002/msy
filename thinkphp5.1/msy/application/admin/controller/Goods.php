@@ -87,7 +87,7 @@ class Goods extends Base {
                     return errorMsg('失败');
                 }
                 $data['id'] = input('post.id/d');
-                $this->generateGoodsQRcode($data);
+                $this->generateQRcode($data);
             }else{//新增
                 $data = $_POST;
                 $data['create_time'] = time();
@@ -97,7 +97,7 @@ class Goods extends Base {
                 }
                 $data['id'] = $modelGoods->getAttr('id');
 
-                $this->generateGoodsQRcode($data);
+                $this->generateQRcode($data);
             }
             return successMsg('成功');
         }else{
@@ -240,7 +240,7 @@ class Goods extends Base {
     /**
      * @return array
      */
-    public function generateGoodsQRcode($info){
+    public function generateQRcode($info){
         $oldQRCodes = $info['rq_code_url'];
         $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
         $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$info['id'];
@@ -288,7 +288,7 @@ class Goods extends Base {
     /**
      * @return array
      */
-    public function generateGoodsQRcode1(){
+    public function generateGoodsQRcode(){
         if(request()->isPost()){
             $id = input('post.id/d');
             $config = [

@@ -260,7 +260,7 @@
                 var _thisTr = $(this).parents('tr');
                 var postData = {};
                 postData.id = _thisTr.data('id');
-                var url =  controller + 'generateGoodsQRcode1';
+                var url =  controller + 'generateGoodsQRcode';
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(url,postData,function(msg){
                     _this.removeClass("nodisabled");//防止重复提交
