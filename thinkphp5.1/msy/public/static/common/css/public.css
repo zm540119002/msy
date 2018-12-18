@@ -4289,7 +4289,7 @@ select[name="nodeIds"]{
     display:block;
     width:45%;
 }
-.wy_list li img{
+.wy_list .list li img{
     width:100%;
 }
 .qrcode_share{
