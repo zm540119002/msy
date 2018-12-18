@@ -3437,11 +3437,11 @@ input[type=text]::-webkit-focus-inner {
 }
 .content_main .list img{
     width: 1.5rem;
-    height: 1.5rem;
+    /*height: 1.5rem;*/
     /*margin:0 0 0 0.14rem;*/
 }
 .list_r{
-    margin:0 0 0 1.8rem;
+    margin:0 0 0 2.8rem;
 }
 .content_main .list .info_r{
     margin-left:1.82rem;
@@ -4250,6 +4250,7 @@ select[name="nodeIds"]{
     display:-webkit-box; 
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2; 
+    margin:0 0 0.08rem 0;
 }
 .img0,.img3{
     width:60%;
@@ -4282,10 +4283,10 @@ select[name="nodeIds"]{
     height:100%;
 }
 .wy_list .list li{
-    padding:0.18rem;
+    padding:0.12rem;
     border:none;
 }
-.wy_list li a{
+.wy_list li .p_img{
     display:block;
     width:45%;
 }
