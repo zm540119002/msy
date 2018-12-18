@@ -2915,8 +2915,8 @@ input[type=text]::-webkit-focus-inner {
 }
 .count-down-icons{
     display:block;
-    width:42px;
-    height:42px;
+    width:0.80rem;
+    height:0.80rem;
     background-image:url(../../common/img/icons/pay_time.png);
     background-repeat: no-repeat;
     background-position:center;
@@ -4085,6 +4085,7 @@ select[name="nodeIds"]{
     background: #000;
     color:#fff;
     border-radius:0.5rem;
+    font-size:0.20rem;
 }
 .mid_module_left .d-r{
     margin:0 0 0 0.8rem;
