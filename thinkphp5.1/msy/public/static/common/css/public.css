@@ -4178,7 +4178,7 @@ select[name="nodeIds"]{
 }
 .weiya_menu{
     background: #fff;
-    border-bottom:1px solid #d9d9d9;
+    border-bottom:5px solid #d9d9d9;
 }
 .weiya_menu li a{
     color:#333;
@@ -4497,7 +4497,7 @@ select[name="nodeIds"]{
     font-size:0.27rem;
 }
 .important_first_heading{
-    margin-top:0.08rem;
+    margin-top:0.12rem;
     margin-bottom:0;
 }
 .important_last_heading{
@@ -4526,10 +4526,13 @@ select[name="nodeIds"]{
     background: #0071BA;
     color:#fff;
     border-radius:7px;
-    margin:0.12rem 0 0.18rem;
+    margin:0.12rem 0 0.20rem;
     text-align:center;
 }
 .module_item{
     padding:0.12rem;
     border-bottom:5px solid #d9d9d9;
+}
+.cpy_p_text{
+    margin:0 0 0.20rem 0;
 }
