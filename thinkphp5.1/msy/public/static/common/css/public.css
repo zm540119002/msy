@@ -4307,6 +4307,9 @@ select[name="nodeIds"]{
 .sale_price{
     font-size:0.42rem;
 }
+.project_p_item{
+    margin:0 0 0.12rem 0;
+}
 .nav-floor,
 #menu ul{
     /*position:fixed;
