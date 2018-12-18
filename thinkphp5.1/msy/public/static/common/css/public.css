@@ -3727,6 +3727,9 @@ select[name="nodeIds"]{
     height:42px;
     margin:.25rem 0 .10rem;
 }
+.p_bottom{
+    padding:0 0.10rem;
+}
 .classify-recommond-nav .top_menu_box a{
     padding:0 3px;
 }
