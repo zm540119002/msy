@@ -212,14 +212,32 @@
 		})
 
 		//下拉加载
+		var offsetHeight=$('.nav_menu').offset().top;
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
 				postData.category_id = $('.nav_menu li.current').data('category-id');
 				getPagingList(config,postData);
 			}
+			//滚动
+			var top = $(document).scrollTop();			
+			var currentId = '';
+			var top=$(document).scrollTop();
+			if(top>offsetHeight){
+				$('.nav_menu').addClass('top-fixed');
+			}else {
+				$('.nav_menu').removeClass('top-fixed');
+			}
 		});
-
+		//导航左右滑动
+		 $(".nav_menu li").click(function(){
+              var moveX = $(this).offset().left+$(this).parent().scrollLeft();
+              var pageX = document.documentElement.clientWidth;
+              var blockWidth = $(this).width();
+              var left = moveX-(pageX/2)+(blockWidth/2);
+              $(".nav_menu").animate({scrollLeft:left},400);
+              $(this).addClass("current").siblings().removeClass("current");
+         })
 	});
 </script>
 {/block}

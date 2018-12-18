@@ -43,7 +43,7 @@ function getPagingList(config,postData) {
     //请求结束标志
     if(config.requestEnd){
         $('.end_more').remove();
-        config.container.after('<div class="end_more">已到底部，没有更多数据</div>')
+        config.container.after('<div class="end_more">已到底部，加载完！</div>')
         config.loadTrigger = true;
         return false;
     }
