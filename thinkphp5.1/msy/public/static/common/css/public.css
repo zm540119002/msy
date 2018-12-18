@@ -38,6 +38,7 @@ body{
 .f20{font-size:0.20rem;}
 .f22{font-size:0.22rem;}
 .f24{font-size:0.24rem;}
+.f26{font-size:0.26rem;}
 .f28{font-size:0.28rem;}
 .left{
     float:left;
@@ -3998,7 +3999,7 @@ select[name="nodeIds"]{
 }
 .product_intro{
     margin:0.18rem 0;
-    line-height:18px;
+    line-height:30px;
 }
 /*打印订单*/
 .print_orders{
@@ -4538,4 +4539,19 @@ select[name="nodeIds"]{
 }
 .cpy_p_text{
     margin:0 0 0.20rem 0;
+}
+.contact_info_item{
+    padding:0 0 0.25rem 0.12rem;
+    border-bottom:1px solid #d9d9d9;
+
+}
+.contact_info_item .c_top{
+    padding:0 0 0.20rem 0;
+    border-bottom:1px solid #d9d9d9;
+}
+.c_top p:first-child{
+    margin:0 0 0.15rem 0;
+}
+.c_mobile p:first-child{
+    margin:0.12rem 0 0.15rem 0;
 }
