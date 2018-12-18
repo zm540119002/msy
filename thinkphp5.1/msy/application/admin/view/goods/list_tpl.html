@@ -16,21 +16,27 @@
                 </tr>
             </thead>
             <tbody>
-                {volist name="list" id="vo"}
-                    <tr class="hover" data-id="{$vo.id}">
+                {volist name="list" id="info"}
+                    <tr class="hover" data-id="{$info.id}">
                         <td class="w48"><input type="checkbox" class="checkitem" name="checkbox">
-                        <td class="w48 sort"><span title="" class="editable ">{$vo.sort}</span></td>
-                        <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
+                        <td class="w48 sort"><span title="" class="editable ">{$info.sort}</span></td>
+                        <td class="w50pre name"><span title="" class="editable ">{$info.name}</span></td>
 
-                        <td class="w5">{$vo.bulk_price}</td>
-                        <td class="w5">{$vo.sample_price}</td>
+                        <td class="w5">{$info.bulk_price}</td>
+                        <td class="w5">{$info.sample_price}</td>
                         <td class="w5">
                             <a href="javascript:void(0);" class="edit">编辑</a>
                             | <a href="javascript:void(0);" class="del">删除</a>
                             | <a href="javascript:void(0);" class="addRecommendGoods">添加推荐产品</a>
-                            | <a href="javascript:void(0);" class="generateQRcode">生成二维码图片</a>
+                            {notempty name="info.rq_code_url"}
+                            | <a href="javascript:void(0);" class="ckQRcode" data-img-src="{$info.rq_code_url}">查看二维码图片</a>
+                            {else/}
+                            | <a href="javascript:void(0);" class="generateQRcode" data-img-src="{$info.rq_code_url}">生成二维码图片</a>
+                            {/notempty}
+
+
                             | <a href="javascript:void(0);" class="preview">预览</a>
-                            {if $vo.is_selection == 0}
+                            {if $info.is_selection == 0}
                             | <a href="javascript:void(0);" class="set_selection" data-is-selection="1">设置为精选</a>
                             {else /}
                             | <a href="javascript:void(0);" class="set_selection" data-is-selection="0">取消为精选</a>
@@ -38,18 +44,18 @@
 
                         </td>
                         <td class="w96 is-selection">
-                            {if $vo.is_selection == 1}
+                            {if $info.is_selection == 1}
                             <span>精选</span>
                             {else /}
                             <span>不为精选</span>
                             {/if}
                         </td>
                         <td class="w96 shelf-status">
-                             <span>{$vo.shelf_status|getShelStatus}</span>
+                             <span>{$info.shelf_status|getShelStatus}</span>
                         </td>
 
                         <td class="w96">
-                            {if ($vo.shelf_status == 1) or ($vo.shelf_status == 2)}
+                            {if ($info.shelf_status == 1) or ($info.shelf_status == 2)}
                             <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="3">上架</a>
                             {else /}
                             <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="1">下架</a>
