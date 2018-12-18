@@ -4282,7 +4282,15 @@ select[name="nodeIds"]{
     height:100%;
 }
 .wy_list .list li{
+    padding:0.18rem;
     border:none;
+}
+.wy_list li a{
+    display:block;
+    width:45%;
+}
+.wy_list li img{
+    width:100%;
 }
 .qrcode_share{
     display:inline-block;
