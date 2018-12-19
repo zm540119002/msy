@@ -7,7 +7,7 @@
     }
     $.fn.moreText = function(options){
         var defaults = {
-            maxLength:50,
+            maxLength:110,
             mainCell:".branddesc",
             openBtn:'显示全部>',
             closeBtn:'收起'
@@ -334,13 +334,13 @@ function swiper(elemObj){
 }
 //活动倒计时
 function countDown(time,id){
-    console.log(id);
     var day_elem = id.find('.day');
     var hour_elem = id.find('.hour');
     var minute_elem = id.find('.minute');
     var second_elem = id.find('.second');
     var end_time = new Date(time).getTime(),//月份是实际月份-1
         sys_second = (end_time-new Date().getTime())/1000;
+        console.log(sys_second);
     var timer = setInterval(function(){
         if (sys_second > 1) {
             sys_second -= 1;
@@ -354,17 +354,28 @@ function countDown(time,id){
             $(second_elem).text(second<10?"0"+second:second);//计算秒
         } else {
             clearInterval(timer);
-            $('.count_down_box').html('<span>本次活动已结束</span>');
+            countDown(getWeek(5),$('#countDownBox'));
+            // $('.count_down_box').html('<span>本次活动已结束</span>');
         }
     }, 1000);
 }
 //获取每周五日期和时分秒
 function getWeek(i) {
     var now = new Date();
-    var firstDay=new Date(now - (now .getDay() - 1 ) * 86400000);
+    var firstDay=new Date(now - (now .getDay() - 1 )* 24*3600*1000);
     firstDay.setDate(firstDay.getDate() + i);
-    mon = Number(firstDay.getMonth()) + 1;
-    return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+    //日期
+    //mon = Number(firstDay.getMonth())+1;
+    //准确年月日
+    mon = Number(firstDay.getMonth());
+    //return now.getFullYear() + "/" + mon + "/" + firstDay.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+    return new Date(now.getFullYear(),mon,firstDay.getDate());
+    //当天00：00：00
+    // var endYear=new Date().getFullYear();
+    // var endMonth=new Date().getMonth();
+    // var endDay=new Date().getDate();
+    // var endTime2=new Date(endYear,endMonth,endDay);
+	// console.log(endTime2);
 }
 var addTimer = function(){
     var list = [],callback,interval,opt,unix,iStartUp=0;

@@ -14,7 +14,7 @@ class Index extends \common\controller\Base{
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
-            ],  'limit'=>'5'
+            ],  'limit'=>'7'
 
         ];
         $categoryList  = $modelGoodsCategory->getList($config);
@@ -25,9 +25,9 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['is_selection', '=', 1],
                 ['shelf_status','=',3]
             ], 'order'=>[
+                'is_selection'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'
@@ -41,9 +41,9 @@ class Index extends \common\controller\Base{
         $config =[
             'where' => [
                 ['status', '=', 0],
-                ['is_selection', '=', 1],
                 ['shelf_status','=',3]
             ], 'order'=>[
+                'is_selection'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'6'

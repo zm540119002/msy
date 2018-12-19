@@ -86,6 +86,8 @@ class Goods extends Base {
                 if(false === $result){
                     return errorMsg('失败');
                 }
+                $data['id'] = input('post.id/d');
+                $this->generateQRcode($data);
             }else{//新增
                 $data = $_POST;
                 $data['create_time'] = time();
@@ -93,6 +95,9 @@ class Goods extends Base {
                 if(!$result){
                     return errorMsg('失败');
                 }
+                $data['id'] = $modelGoods->getAttr('id');
+
+                $this->generateQRcode($data);
             }
             return successMsg('成功');
         }else{
@@ -126,7 +131,7 @@ class Goods extends Base {
      *  分页查询
      */
     public function getList(){
-        $modelGoods = new \app\admin\model\Goods();
+        $model = new \app\admin\model\Goods();
         $where = [];
         $where[] = ['g.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
@@ -146,7 +151,7 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time',
+                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
             ],
@@ -158,7 +163,7 @@ class Goods extends Base {
                 'g.id'=>'desc',
             ],
         ];
-        $list = $modelGoods ->pageQuery($config);
+        $list = $model ->pageQuery($config);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
             return view('goods/list_layer_tpl');
@@ -235,6 +240,54 @@ class Goods extends Base {
     /**
      * @return array
      */
+    public function generateQRcode($info){
+        $oldQRCodes = $info['rq_code_url'];
+        $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
+        $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$info['id'];
+        $newRelativePath = config('upload_dir.weiya_goods');
+        $shareQRCodes = createLogoQRcode($url,$newRelativePath);
+        if(mb_strlen( $info['headline'], 'utf-8')>20){
+            $name1 =  mb_substr( $info['headline'], 0, 20, 'utf-8' ) ;
+            $name2 =  mb_substr( $info['headline'], 20, 20, 'utf-8' ) ;
+        }else{
+            $name1 = $info['headline'];
+            $name2 = '';
+        }
+        $init = [
+            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
+            'title'=>'维雅生物药妆',
+            'slogan'=>'领先的品牌定制平台',
+            'name1'=> $name1,
+            'name2'=> $name2,
+            'specification'=> $info['specification'],
+            'money'=>'￥'.$info['bulk_price'].' 元',
+            'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
+            'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
+            'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
+            'font'=>'./static/font/simhei.ttf',   //字体
+        ];
+        $res =  $this->compose($init);
+        if($res['status'] == 1){
+            $newQRCodes = $res['info'];
+            $model = new \app\admin\model\Goods();
+            $res= $model->where(['id'=>$info['id']])->setField(['rq_code_url'=>$newQRCodes]);
+            if(false === $res){
+                return errorMsg('失败');
+            }
+            unlink($uploadPath.$shareQRCodes);
+            if(!empty($oldQRCodes)){
+                unlink($uploadPath.$oldQRCodes);
+            }
+            return successMsg($newQRCodes);
+        }else{
+            return successMsg('失败',$res['info']);
+        }
+    }
+
+    //生成商品二维码
+    /**
+     * @return array
+     */
     public function generateGoodsQRcode(){
         if(request()->isPost()){
             $id = input('post.id/d');
@@ -248,17 +301,25 @@ class Goods extends Base {
             $info = $model -> getInfo($config);
             $oldQRCodes = $info['rq_code_url'];
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-            $url = request()->domain().'/index.php/admin/Goods/preview/id/'.$id;
+            $url = request()->domain().'/index.php/weiya_customization/Goods/detail/id/'.$id;
             $newRelativePath = config('upload_dir.weiya_goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
+            if(mb_strlen( $info['headline'], 'utf-8')>20){
+                $name1 =  mb_substr( $info['headline'], 0, 20, 'utf-8' ) ;
+                $name2 =  mb_substr( $info['headline'], 20, 20, 'utf-8' ) ;
+            }else{
+                $name1 = $info['headline'];
+                $name2 = '';
+            }
             $init = [
                 'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
                 'title'=>'维雅生物药妆',
                 'slogan'=>'领先的品牌定制平台',
-                'name'=> $info['headline'],
+                'name1'=> $name1,
+                'name2'=> $name2,
                 'specification'=> $info['specification'],
                 'money'=>'￥'.$info['bulk_price'].' 元',
-                'logo_img'=> request()->domain().'/static/common/img/ucenter_logo.png', // 460*534
+                'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
                 'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
@@ -460,14 +521,17 @@ class Goods extends Base {
         }
         $im = imagecreatetruecolor(480, 780);  //图片大小
         $color = imagecolorallocate($im, 240, 255, 255);
-        $text_color = imagecolorallocate($im, 0, 0, 0);
+        $text_color = imagecolorallocate($im, 87, 87, 87);
+        $text_color1 = imagecolorallocate($im, 137, 137, 137);
+        $red_color = imagecolorallocate($im, 230, 0, 18);
         imagefill($im, 0, 0, $color);
         imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
-        imagettftext($im, 16, 0, 100, 60, $text_color, $init['font'], $init['slogan']);   //标语
-        imagettftext($im, 15, 0, 20, 670, $text_color, $init['font'], $init['money']); //金额
-        imagettftext($im, 6, 0,  200, 670, $text_color, $init['font'], $init['specification']); //规格
-        imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name']); //说明
-        imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 60, 55, $logoImg['width'], $logoImg['height'] );  //平台logo
+        imagettftext($im, 16, 0, 100, 60, $text_color1, $init['font'], $init['slogan']);   //标语
+        imagettftext($im, 15, 0, 20, 670, $red_color, $init['font'], $init['money']); //金额
+        imagettftext($im, 9, 0,  150, 670, $text_color, $init['font'], $init['specification']); //规格
+        imagettftext($im, 12, 0, 20, 700, $text_color, $init['font'], $init['name1']); //说明
+        imagettftext($im, 12, 0, 20, 730, $text_color, $init['font'], $init['name2']); //说明
+        imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 90, 60, $logoImg['width'], $logoImg['height'] );  //平台logo
         imagecopyresized($im, $goodsImg['obj'], 10, 106, 0, 0, 460, 534, $goodsImg['width'], $goodsImg['height']);  //商品
         imagecopyresized($im, $qrcode['obj'], 350, 650, 0, 0, 120, 120, $qrcode['width'], $qrcode['height'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'].'compose/';

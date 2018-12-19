@@ -1,9 +1,7 @@
 <?php
 namespace app\store\controller;
 
-require_once __DIR__ . '/../../../../../GatewayWorker/vendor/autoload.php';
-use \GatewayWorker\Lib\Gateway;
-//use common\component\GatewayClient\Gateway;
+use common\component\GatewayClient\Gateway;
 
 class CustomerService extends \common\controller\UserBase{
     /**售前
@@ -26,7 +24,7 @@ class CustomerService extends \common\controller\UserBase{
         }
     }
 
-    /**售后
+    /**绑定
      */
     public function bindUid(){
         if(request()->isAjax()){

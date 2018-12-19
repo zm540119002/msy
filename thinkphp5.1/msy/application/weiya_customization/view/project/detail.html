@@ -66,9 +66,9 @@
 					<div class="top_radius f20 top_module">
 						<div>
 							<span class="hot left">热</span>
-							<p class="f28">{$info.name}</p>
+							<p class="title_name f28">{$info.name}</p>
 						</div>
-						<p>{$info.intro}</p>
+						<p class="product_intro">{$info.intro}</p>
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
 								{volist name="$info.tag" id="tag"}
@@ -84,7 +84,7 @@
 				</li>
 				<li>
 					<div class="content-padding">
-						<p class="top_b_text wk_notice separation">[每周采购须知] 美尚精选优质货源任你选！随时参团，享受超级划算的采购结算价格，周五统计订单后送达工厂按订单备货发货；VIP采购商会员额外享受5%返点福利。</p>
+						<p class="top_b_text wk_notice separation">[品牌定制须知] 品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。</p>
 						<div class="columns_flex l-r-sides separation">
 							<div class="mid_module_left">
 								<img src="public_img/wy_dz.png" alt="">
@@ -124,18 +124,20 @@
 			{notempty name="goodsList"}
 			{volist name="goodsList" id="info"}
 			<li data-id="{$info.id}">
-				{empty name="info.thumb_img"}
-				<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
-				{else /}
-				<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
-				{/empty}
+				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
+					{empty name="info.thumb_img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					{/empty}
+				</a>
 				<div class="list_r">
 					<p class="goods_title">{$info.headline}</p>
-					<div>单品规格<span>{$info.specification}</span></div>
-					<div>
+					<!--<div><span>{$info.specification}</span></div>-->
+					<div class="project_p_item">
 						<span>￥<price>{$info.bulk_price}</price></span>
 					</div>
-					<div class="columns_flex l-r-sides">
+					<div class="columns_flex l-r-sides project_p_item">
 						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
 						</div>
 						<a href="javascript:void(0);" class="sample_purchase" >样品购买

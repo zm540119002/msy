@@ -62,7 +62,7 @@
                                             {else /}
                                             <img class="upload_img " src="public_uploads/{$info.thumb_img}" />
                                             {/empty}
-                                            <input type="hidden" class="layer-thumbnail-picture img" data-src="" value="" name="thumb_img"/>
+                                            <input type="hidden" class="layer-thumbnail-picture img" value="{$info.thumb_img}" name="thumb_img"/>
                                         </div>
                                         <!--<p>企业营业执照</p>-->
                                     </div>
@@ -120,9 +120,11 @@
                     postData.main_img += $(this).attr('src') + ',';
 
                 });
-
                 var url = module +'Project/edit';
+                var _this = $(this);
+                _this.addClass("nodisabled");//防止重复提交
                 $.post(url,postData,function(msg){
+                    _this.removeClass("nodisabled");//
                     dialog.msg(msg,'',function () {
                         location.href = controller + 'manage';
                     });

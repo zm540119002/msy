@@ -27,23 +27,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="">
-		<ul class="nav_menu">
-			<li class="current">
-				<a href="javascript:void(0);">精选</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">项目</a>
-			</li>
-			{notempty name="categoryList"}
-			{volist name="categoryList" id="info"}
-			<li>
-				<a href="{:url('Goods/goodsWitchCategory',['category_id'=>$info.id])}" data-category-id="{$info.id}">{$info.name}</a>
-			</li>
-			{/volist}
-			{/notempty}
-		</ul>
-	</section>
+
 	<section class="content_main content-padding">
 		<div>
 			<div class="scroll_news">
@@ -83,12 +67,19 @@
 			{/volist}
 		</div>
 		<div class="project_wrapper">
+			<div class="mod-part-title">
+				<div class="mod-part-title-wrap">
+					<span class="icon-title left"></span>
+					<span class="title">精选项目</span>
+					<span class="icon-title right"></span>
+				</div>
+			</div>
 			<ul>
 				{volist name="projectList" id="info" }
 				<li data-id="{$info.id}">
 					<a href="{:url('Project/detail',['id'=>$info.id])}">
 						{empty name="info.thumb_img"}
-						<img src="public_img/default/no_pic_100.jpg" alt="">
+						<img src="public_img/default/no_pic_1000.jpg" alt="">
 						{else /}
 						<img src="public_uploads/{$info.thumb_img}" alt="">
 						{/empty}
@@ -98,34 +89,23 @@
 			</ul>
 		</div>
 		<div class="new_select_wrap">
-			<div class="mod-part-title">
-				<div class="mod-part-title-wrap">
-					<span class="icon-title left"></span>
-					<span class="title">推荐商品</span>
-					<span class="icon-title right"></span>
-				</div>
-			</div>
-			<ul class="columns_flex flex-both-side goods-content-list" id="list">
-				{notempty name="goodsList"}
-				{volist name="goodsList" id="info"}
-				<li data-id="{$info.id}">
-					<a href="{:url('Goods/detail',['id'=>$info.id])}">
-						{empty name="info.thumb_img"}
-						<img src="public_img/default/no_pic_100.jpg" alt="">
-						{else /}
-						<img src="public_uploads/{$info.thumb_img}" alt="">
-						{/empty}
-					</a>
-					<p class="text-intro">{$info.headline}</p>
-					<div class="columns_flex l-r-sides">
-						<span class="pink">￥<price>{$info.bulk_price}</price></span>
-						<a href="javascript:void(0);" class="shopping-cart">购物车</a>
+			<section class="">
+				<ul class="nav_menu">
+					{notempty name="categoryList"}
+					{volist name="categoryList" id="info"}
+					<li data-category-id="{$info.id}" >
+						<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
+					</li>
+					{/volist}
+					{/notempty}
+				</ul>
+			</section>
+			<div id="scroller-wrapper">
+				<ul class="columns_flex flex-both-side goods-content-list" id="list">
 
-					</div>
-				</li>
-				{/volist}
-				{/notempty}
-			</ul>
+				</ul>
+			</div>
+
 		</div>
 	</section>
 </article>
@@ -171,7 +151,20 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
+
 <script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'index'
+	};
 	$(function(){
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
@@ -190,7 +183,6 @@
 			move(i);
 		},2200);
 		function move(i){
-
 			var h=$('.news_item').height();
 			var offsetY=h*i;
 			$('.news_list').get(0).style.transform="translate3d(0,-"+offsetY+"px,0)";
@@ -200,8 +192,43 @@
 				$('.news_list').get(0).style.transition="none 0s ease 0s";
 				$('.news_list li').eq(len-1).after($('.news_list li').eq(0));
 			},500);
-
 		}
+		//初始化分类商品页面
+		$('.nav_menu li:eq(0)').addClass('current');
+		postData.category_id = $('.nav_menu li.current').data('category-id');
+		getPagingList(config,postData);
+
+		$('body').on('click','.nav_menu li',function(){
+			var _this = $(this);
+			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1,
+			};
+			postData.category_id = _this.data('category-id');
+			getPagingList(config,postData);
+		})
+
+		//下拉加载
+		var offsetHeight=$('.nav_menu').offset().top;
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				postData.category_id = $('.nav_menu li.current').data('category-id');
+				getPagingList(config,postData);
+			}
+			//滚动
+			var top = $(document).scrollTop();			
+			var currentId = '';
+			var top=$(document).scrollTop();
+			if(top>offsetHeight){
+				$('.nav_menu').addClass('top-fixed');
+			}else {
+				$('.nav_menu').removeClass('top-fixed');
+			}
+		});
 	});
 </script>
 {/block}
