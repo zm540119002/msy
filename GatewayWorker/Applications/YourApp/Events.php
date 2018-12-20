@@ -56,8 +56,8 @@ class Events
            'client_id' => $client_id,
            'msg' => $message,
        ];
-        // 向所有人发送
-//        Gateway::sendToAll(json_encode($data));
+       // 向所有人发送
+       Gateway::sendToAll(json_encode($data));
    }
    
    /**
