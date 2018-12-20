@@ -24,14 +24,15 @@ class CustomerService extends \common\controller\UserBase{
         }
     }
 
-    /**绑定
+    /**绑定用户ID
      */
     public function bindUid(){
         if(request()->isAjax()){
             $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-            return successMsg($this->user['id']);
+            $postData['user_id'] = $this->user['id'];
+            return successMsg($postData);
         }else{
             return $this->fetch();
         }
