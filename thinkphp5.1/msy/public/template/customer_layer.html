@@ -70,8 +70,8 @@
                 dialog.error('不能发送空内容！');
                 return false;
             }
-            var user_id = 17;
-            var postData = {user_id:user_id,msg:text};
+            var to_user_id = 17;
+            var postData = {to_user_id:to_user_id,msg:text};
             var url = module + 'CustomerService/sendMessage';
             $.ajax({
                 url: url,
