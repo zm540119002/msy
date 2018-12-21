@@ -12,7 +12,7 @@ if(ws.readyState){
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
     var type = data.type || '';
-    console,log(data);
+    console.log(data);
     switch(type){
         case 'init':
             // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
