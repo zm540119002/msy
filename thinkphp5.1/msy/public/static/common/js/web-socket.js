@@ -2,9 +2,13 @@ console.log(123);
 // 服务端主动推送消息时会触发这里的onmessage
 ws = new WebSocket("ws://msy.meishangyun.com:8282");
 console.log(ws);
+console.log(ws.readyState);
 ws.onopen = function(e){
     console.log('open');
 };
+if(ws.readyState){
+
+}
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
     var type = data.type || '';
