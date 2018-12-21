@@ -39,7 +39,7 @@ class Events
         $data = [
             'type'      => 'init',
             'client_id' => $client_id,
-            'msg' => 'connect is success',
+            'msg' => 'Your ClientId is :' .$client_id . ',Connect is success!',
         ];
         Gateway::sendToClient($client_id, json_encode($data));
     }
@@ -57,7 +57,7 @@ class Events
            'msg' => $message,
        ];
        // 向所有人发送
-       Gateway::sendToAll(json_encode($data));
+       //Gateway::sendToAll(json_encode($data));
    }
    
    /**
@@ -73,6 +73,6 @@ class Events
            'msg' => 'connect is close',
        ];
        // 向所有人发送
-//       Gateway::sendToAll(json_encode($data));
+       //Gateway::sendToAll(json_encode($data));
    }
 }

@@ -9,6 +9,17 @@
             <div class="msg"></div>
         </div>
     </li>
+</section><!--对话框列表模板-->
+<section id="chatListOtherTpl" style="display:none;">
+    <li class="others">
+        <div class="avatar">
+            <img src="public_img/default/no_pic_40.jpg">
+        </div>
+        <div class="content">
+            <p class="author">(小猫咪)</p>
+            <div class="msg"></div>
+        </div>
+    </li>
 </section>
 <!--对话框弹窗-->
 <section id="chatLayerContainer" style="display:none;">
@@ -49,7 +60,7 @@
                     var chatLayerList=$('.chatLayer .chat_item').html();
                     $('.chat_hidden_list').html(chatLayerList);
                 }
-            })
+            });
         });
         //发送聊天内容
         var chatListTpl=$('#chatListTpl').html();
@@ -59,7 +70,7 @@
                 dialog.error('不能发送空内容！');
                 return false;
             }
-            var user_id = 7;
+            var user_id = 17;
             var postData = {user_id:user_id,msg:text};
             var url = module + 'CustomerService/sendMessage';
             $.ajax({
@@ -77,8 +88,6 @@
                     $('.loading').hide();
                     if(data.status==0){
                         dialog.error(data.info);
-                    }else{
-                        console.log(data);
                     }
                 }
             });

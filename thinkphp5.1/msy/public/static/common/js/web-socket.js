@@ -1,7 +1,6 @@
 console.log(123);
 // 服务端主动推送消息时会触发这里的onmessage
 ws = new WebSocket("ws://msy.meishangyun.com:8282");
-console.log(ws);
 ws.onopen = function(e){
     console.log('open');
 };
@@ -31,25 +30,15 @@ ws.onmessage = function(e){
                         dialog.error(msg.info);
                     }else if(msg.code==1 && msg.data=='no_login'){
                         loginDialog();
-                    }else{
-                        //绑定成功
-                        var sendMsg = {
-                            'type':'msg',
-                            'client_id':msg.info.client_id,
-                            'user_id':msg.info.user_id,
-                            'client_msg':'Hello World!'
-                        };
-                        sendMsg = JSON.stringify(sendMsg);
-                        ws.send(sendMsg);
                     }
                 }
             });
             break;
         case 'msg':
-            console.log(data);
-            break;
-        case 'end':
-            console.log(data);
+            $('.chatLayer .chat_item').append($('#chatListOtherTpl').html());
+            $('.chatLayer .chat_item').find('li:last').find('.msg').text(data.msg);
+            console.log($('.chatLayer .chat_item'));
+            console.log(data.msg);
             break;
         default :
             console.log('default');
