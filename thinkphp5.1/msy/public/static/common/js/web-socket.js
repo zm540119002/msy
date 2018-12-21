@@ -30,17 +30,14 @@ ws.onmessage = function(e){
                         dialog.error(msg.info);
                     }else if(msg.code==1 && msg.data=='no_login'){
                         loginDialog();
-                    }else{
-                        console.log(data);
                     }
                 }
             });
             break;
         case 'msg':
-            console.log(data);
-            break;
-        case 'end':
-            console.log(data);
+            $('.chatLayer .chat_item').append($('#chatListOtherTpl').html());
+            $('.chatLayer .chat_item').find('li:last').find('.msg').text(data.msg);
+            console.log(data.msg);
             break;
         default :
             console.log('default');
