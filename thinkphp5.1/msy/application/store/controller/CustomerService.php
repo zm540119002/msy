@@ -42,7 +42,7 @@ class CustomerService extends \common\controller\UserBase{
      */
     public function sendMessage(){
         if(request()->isAjax()){
-            Gateway::$registerAddress = '127.0.0.1:1239';
+            return successMsg(Gateway::$registerAddress);
             $postData = input('post.');
             if(Gateway::isUidOnline($this->user['id'])){
                 $msg = [
