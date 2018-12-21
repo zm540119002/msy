@@ -7,7 +7,6 @@ ws.onopen = function(e){
 ws.onmessage = function(e){
     var data =  JSON.parse(e.data);
     var type = data.type || '';
-    console.log(data);
     switch(type){
         case 'init':
             // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
@@ -32,6 +31,7 @@ ws.onmessage = function(e){
                     }else if(msg.code==1 && msg.data=='no_login'){
                         loginDialog();
                     }else{
+                        console.log(data);
                         //绑定成功
                         // var sendMsg = {
                         //     'type':'msg',
