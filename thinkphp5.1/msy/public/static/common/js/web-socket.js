@@ -1,6 +1,6 @@
 console.log(123);
 // 服务端主动推送消息时会触发这里的onmessage
-ws = new WebSocket("ws://0.0.0.0:8282");
+ws = new WebSocket("ws://msy.meishangyun.com:8282");
 console.log(ws);
 console.log(ws.readyState);
 ws.onopen = function(e){
