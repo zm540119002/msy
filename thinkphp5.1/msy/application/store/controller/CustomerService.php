@@ -47,7 +47,7 @@ class CustomerService extends \common\controller\UserBase{
                     'type' => 'msg',
                     'msg' => $postData['msg'],
                 ];
-                Gateway::sendToUid($postData['user_id'],json_encode($msg));
+                Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
             }else{
                 return successMsg('发送失败！');
             }
