@@ -50,7 +50,6 @@ class CustomerService extends \common\controller\UserBase{
                 ];
                 Gateway::sendToUid($postData['user_id'],json_encode($msg));
             }
-
             return successMsg($postData['user_id']);
         }else{
             return $this->fetch();
