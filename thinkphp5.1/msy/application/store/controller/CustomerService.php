@@ -42,15 +42,14 @@ class CustomerService extends \common\controller\UserBase{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
-            if(Gateway::isUidOnline($this->user['id'])){
-                $msg = [
-                    'type' => 'msg',
-                    'msg' => $postData['msg'],
-                ];
-                Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
-            }else{
-                return successMsg('发送失败！');
+            if(!Gateway::isUidOnline($this->user['id'])){
+                return successMsg('对方未在线！');
             }
+            $msg = [
+                'type' => 'msg',
+                'msg' => $postData['msg'],
+            ];
+            Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
         }
     }
 }
