@@ -31,10 +31,9 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-            $postData['user_id'] = $this->user['id'];
-            return successMsg($postData);
-        }else{
-            return $this->fetch();
+            if(!Gateway::isUidOnline($this->user['id'])){
+                return successMsg('绑定失败！');
+            }
         }
     }
 
@@ -50,7 +49,6 @@ class CustomerService extends \common\controller\UserBase{
                 ];
                 Gateway::sendToUid($postData['user_id'],json_encode($msg));
             }
-            return successMsg($postData['user_id']);
         }else{
             return $this->fetch();
         }
