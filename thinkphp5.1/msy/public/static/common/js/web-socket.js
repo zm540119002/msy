@@ -37,14 +37,14 @@ ws.onmessage = function(e){
                         loginDialog();
                     }else{
                         //绑定成功
-                        var sendMsg = {
-                            'type':'msg',
-                            'client_id':msg.info.client_id,
-                            'user_id':msg.info.user_id,
-                            'client_msg':'Hello World!'
-                        };
-                        sendMsg = JSON.stringify(sendMsg);
-                        ws.send(sendMsg);
+                        // var sendMsg = {
+                        //     'type':'msg',
+                        //     'client_id':msg.info.client_id,
+                        //     'user_id':msg.info.user_id,
+                        //     'client_msg':'Hello World!'
+                        // };
+                        // sendMsg = JSON.stringify(sendMsg);
+                        // ws.send(sendMsg);
                     }
                 }
             });
