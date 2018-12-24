@@ -73,9 +73,9 @@
                 });
                 break;
             case 'msg':
-                var _li = $('#chatListOtherTpl');
-                _li.find('.msg').text(data.msg);
-                $('#chatLayerContainer .chat_item').append(_li.html());
+                var chatListOtherTpl = $('#chatListOtherTpl');
+                chatListOtherTpl.find('.msg').text(data.msg);
+                $('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
                 break;
             default :
                 console.log('default');
