@@ -36,8 +36,8 @@ ws.onmessage = function(e){
             });
             break;
         case 'msg':
+            $('#chatListOtherTpl').find('.msg').text(data.msg);
             $('.chatLayer .chat_item').append($('#chatListOtherTpl').html());
-            $('.chatLayer .chat_item').find('li:last').find('.msg').text(data.msg);
             break;
         default :
             console.log('default');
