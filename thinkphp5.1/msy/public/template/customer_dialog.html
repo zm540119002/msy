@@ -113,8 +113,8 @@
         //发送聊天内容
         var chatListTpl=$('#chatListTpl').html();
         $('body').on('click','.send_btn',function(){
-            var text=$(this).prev().val();
-            if(!text){
+            var _this=$(this).prev();
+            if(!_this.val()){
                 dialog.error('不能发送空内容！');
                 return false;
             }
@@ -137,9 +137,9 @@
                     if(data.status==0){
                         dialog.error(data.info);
                     }else if(data.status==1){
-                        chatListTpl.find('.msg').text(data.msg);
+                        chatListTpl.find('.msg').text(data.info);
                         $('.chatLayer .chat_item').append(chatListTpl);
-                        $(this).prev().val('');
+                        _this.val('');
                     }else {
                         //发送未成功
                     }
