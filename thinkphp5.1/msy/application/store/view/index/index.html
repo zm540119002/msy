@@ -105,13 +105,10 @@
 						}
 					}else if(data.status==1){
 						location.href = url;
-					}else{
-
 					}
 				}
 			});
 		});
-
 		//店长管理
 		$('body').on('click','.manager_manage',function () {
 			console.log(123);
@@ -143,7 +140,6 @@
 				}
 			});
 		});
-
 		//店铺运营
 		$('body').on('click','.store-operation',function () {
 			var url = module + 'Operation/index';
@@ -170,7 +166,6 @@
 						if(data.data == 'no_empower'){
 							dialog.error(data.msg);
 						}
-
 					}else if(data.status==1){
 					}else{
 						$('#storeShopInfo').find('.store_list').empty().append(data);
@@ -179,7 +174,6 @@
 				}
 			});
 		});
-
 		//订单客服
 		$('body').on('click','.order-management-change',function () {
 			var url = module + 'CustomerClient/beforeSale';
