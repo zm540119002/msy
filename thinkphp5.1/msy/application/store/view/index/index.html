@@ -54,7 +54,9 @@
 {block name="common"}
 {include file="template/footer_menu_msy_store.html" /}
 {include file="template/right_side_bar.html" /}
+{notempty name='user'}
 {include file="template/customer_layer.html" /}
+{/notempty}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
