@@ -182,7 +182,7 @@
 
 		//订单客服
 		$('body').on('click','.order-management-change',function () {
-			var url = 'store/CustomerClient/beforeSale';
+			var url = module + 'CustomerClient/beforeSale';
 			var postData = {};
 			$.ajax({
 				url: url,
