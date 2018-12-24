@@ -1,5 +1,5 @@
 <?php
-namespace app\store\controller;
+namespace app\index\controller;
 
 use common\component\GatewayClient\Gateway;
 
