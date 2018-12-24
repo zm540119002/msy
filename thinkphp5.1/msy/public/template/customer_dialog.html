@@ -75,7 +75,7 @@
                 break;
             case 'msg':
                 $('#chatListOtherTpl').find('.msg').text(data.msg);
-                $('.chatLayer .chat_item').append($('#chatListOtherTpl').html());
+                $('.chat_hidden_list').append($('#chatListOtherTpl').html());
                 break;
             default :
                 console.log('default');
