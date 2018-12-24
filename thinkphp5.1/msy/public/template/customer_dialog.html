@@ -36,7 +36,6 @@
     </div>
 </section>
 <script type="text/javascript">
-    console.log(123);
     // 服务端主动推送消息时会触发这里的onmessage
     ws = new WebSocket("ws://msy.meishangyun.com:8282");
     ws.onopen = function(e){
@@ -74,8 +73,9 @@
                 });
                 break;
             case 'msg':
-                $('#chatListOtherTpl').find('.msg').text(data.msg);
-                $('.chat_hidden_list').append($('#chatListOtherTpl').html());
+                var _li = $('#chatListOtherTpl');
+                _li.find('.msg').text(data.msg);
+                $('#chatLayerContainer .chat_item').append(_li.html());
                 break;
             default :
                 console.log('default');
@@ -89,27 +89,24 @@
     };
     $(function () {
         //聊天对话框弹窗
-        var content = $('#chatLayerContainer').html();
         var chatListId;
         $('body').on('click','.customer_btn',function(){
-            console.log($('#chatLayerContainer').html());
             var _this=$(this);
             chatListId=$(this).data('id');
             layer.open({
                 className:'chatLayer',
-                content:content,
+                content:$('#chatLayerContainer').html(),
                 type:1,
                 anim:'up',
                 btn:['','关闭'],
                 success:function(){
                     var winH=$(document).height();
-                    var chatListInfo=_this.next('.chat_hidden_list').html();
                     $('.chatLayer .chat_item').css('height',winH+'px');
-                    $('.chatLayer .chat_item').html(chatListInfo);
+                    $('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
                 },
                 no:function(){
                     var chatLayerList=$('.chatLayer .chat_item').html();
-                    $('.chat_hidden_list').html(chatLayerList);
+                    $('#chatLayerContainer .chat_item').html(chatLayerList);
                 }
             });
         });
@@ -139,12 +136,15 @@
                     $('.loading').hide();
                     if(data.status==0){
                         dialog.error(data.info);
+                    }else if(data.status==1){
+                        $('.chatLayer .chat_item').append(chatListTpl);
+                        $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
+                        $(this).prev().val('');
+                    }else {
+                        //发送未成功
                     }
                 }
             });
-            $('.chatLayer .chat_item').append(chatListTpl);
-            $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
-            $(this).prev().val('');
         });
     });
 </script>
