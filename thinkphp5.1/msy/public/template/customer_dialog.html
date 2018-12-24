@@ -106,8 +106,7 @@
                     $('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
                 },
                 no:function(){
-                    var chatLayerList=$('.chatLayer .chat_item').html();
-                    $('#chatLayerContainer .chat_item').html(chatLayerList);
+                    $('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
                 }
             });
         });
