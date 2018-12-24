@@ -75,7 +75,7 @@
                 break;
             case 'msg':
                 $('#chatListOtherTpl').find('.msg').text(data.msg);
-                $('#chatLayerContainer .chat_item').append($('#chatListOtherTpl').html());
+                $('.chatLayer .chat_item').append($('#chatListOtherTpl').html());
                 break;
             default :
                 console.log('default');
@@ -89,6 +89,7 @@
     };
     $(function () {
         //聊天对话框弹窗
+        var content = $('#chatLayerContainer').html();
         var chatListId;
         $('body').on('click','.customer_btn',function(){
             console.log($('#chatLayerContainer').html());
@@ -96,7 +97,7 @@
             chatListId=$(this).data('id');
             layer.open({
                 className:'chatLayer',
-                content:$('#chatLayerContainer').html(),
+                content:content,
                 type:1,
                 anim:'up',
                 btn:['','关闭'],
