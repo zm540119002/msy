@@ -60,7 +60,7 @@
 				// Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
 				// 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
 				var postData = {client_id: data.client_id};
-				var url = 'index/CustomerService/bindUid';
+				var url = domain + 'index/CustomerService/bindUid';
 				$.ajax({
 					url: url,
 					data: postData,
@@ -131,7 +131,7 @@
 			}
 			var to_user_id = 17;
 			var postData = {to_user_id:to_user_id,msg:_this.val()};
-			var url = 'index/CustomerService/sendMessage';
+			var url = domain + 'index/CustomerService/sendMessage';
 			$.ajax({
 				url: url,
 				data: postData,
