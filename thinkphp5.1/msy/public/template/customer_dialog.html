@@ -91,6 +91,7 @@
         //聊天对话框弹窗
         var chatListId;
         $('body').on('click','.customer_btn',function(){
+            console.log($('#chatLayerContainer').html());
             var _this=$(this);
             chatListId=$(this).data('id');
             layer.open({
