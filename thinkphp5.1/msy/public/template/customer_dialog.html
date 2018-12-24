@@ -111,8 +111,8 @@
             });
         });
         //发送聊天内容
-        var chatListTpl=$('#chatListTpl').html();
         $('body').on('click','.send_btn',function(){
+            var chatListTpl = $('#chatListTpl');
             var _this=$(this).prev();
             if(!_this.val()){
                 dialog.error('不能发送空内容！');
@@ -137,9 +137,8 @@
                     if(data.status==0){
                         dialog.error(data.info);
                     }else if(data.status==1){
-                        console.log(2222);
                         chatListTpl.find('.msg').text(data.info);
-                        $('.chatLayer .chat_item').append(chatListTpl);
+                        $('.chatLayer .chat_item').append(chatListTpl.html());
                         _this.val('');
                     }else {
                         //发送未成功
