@@ -34,6 +34,7 @@ class CustomerService extends \common\controller\UserBase{
             if(!Gateway::isUidOnline($this->user['id'])){
                 return successMsg('绑定失败！');
             }
+            return successMsg('绑定成功！',['user_id'=>$this->user['id'],'avatar'=>$this->user['avatar'],]);
         }
     }
 

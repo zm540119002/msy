@@ -30,6 +30,7 @@ ws.onmessage = function(e){
                         dialog.error(msg.info);
                     }else if(msg.code==1 && msg.data=='no_login'){
                         loginDialog();
+                    }else if(msg.status==1){
                     }
                 }
             });
