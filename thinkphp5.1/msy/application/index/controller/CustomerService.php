@@ -25,7 +25,7 @@ class CustomerService extends \common\controller\UserBase{
         if(request()->isAjax()){
             $postData = input('post.');
             if(!Gateway::isUidOnline($this->user['id'])){
-                return successMsg('对方未在线！');
+                return errorMsg('对方未在线！');
             }
             $msg = [
                 'type' => 'msg',
