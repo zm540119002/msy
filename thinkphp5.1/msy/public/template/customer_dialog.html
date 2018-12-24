@@ -5,7 +5,7 @@
             <img src="public_img/default/no_pic_40.jpg">
         </div>
         <div class="content">
-            <p class="author">(小猫咪)</p>
+            <p class="author">(我)</p>
             <div class="msg"></div>
         </div>
     </li>
@@ -35,9 +35,7 @@
         </div>
     </div>
 </section>
-<script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
-    console.log(123);
     // 服务端主动推送消息时会触发这里的onmessage
     ws = new WebSocket("ws://msy.meishangyun.com:8282");
     ws.onopen = function(e){
@@ -75,8 +73,10 @@
                 });
                 break;
             case 'msg':
-                $('#chatListOtherTpl').find('.msg').text(data.msg);
-                $('#chatLayerContainer .chat_item').append($('#chatListOtherTpl').html());
+                var chatListOtherTpl = $('#chatListOtherTpl');
+                chatListOtherTpl.find('.msg').text(data.msg);
+                $('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
+                $('.chatLayer .chat_item').append(chatListOtherTpl.html());
                 break;
             default :
                 console.log('default');
@@ -90,39 +90,36 @@
     };
     $(function () {
         //聊天对话框弹窗
-        var chatLayerContainer=$('#chatLayerContainer').html();
         var chatListId;
         $('body').on('click','.customer_btn',function(){
             var _this=$(this);
             chatListId=$(this).data('id');
             layer.open({
                 className:'chatLayer',
-                content:chatLayerContainer,
+                content:$('#chatLayerContainer').html(),
                 type:1,
                 anim:'up',
                 btn:['','关闭'],
                 success:function(){
                     var winH=$(document).height();
-                    var chatListInfo=_this.next('.chat_hidden_list').html();
                     $('.chatLayer .chat_item').css('height',winH+'px');
-                    $('.chatLayer .chat_item').html(chatListInfo);
+                    $('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
                 },
                 no:function(){
-                    var chatLayerList=$('.chatLayer .chat_item').html();
-                    $('.chat_hidden_list').html(chatLayerList);
+                    $('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
                 }
             });
         });
         //发送聊天内容
-        var chatListTpl=$('#chatListTpl').html();
         $('body').on('click','.send_btn',function(){
-            var text=$(this).prev().val();
-            if(!text){
+            var chatListTpl = $('#chatListTpl');
+            var _this=$(this).prev();
+            if(!_this.val()){
                 dialog.error('不能发送空内容！');
                 return false;
             }
             var to_user_id = 17;
-            var postData = {to_user_id:to_user_id,msg:text};
+            var postData = {to_user_id:to_user_id,msg:_this.val()};
             var url = module + 'CustomerService/sendMessage';
             $.ajax({
                 url: url,
@@ -139,12 +136,17 @@
                     $('.loading').hide();
                     if(data.status==0){
                         dialog.error(data.info);
+                    }else if(data.status==1){
+                        var chatListTpl = $('#chatListTpl');
+                        chatListTpl.find('.msg').text(_this.val());
+                        $('.chatLayer .chat_item').append(chatListTpl.html());
+                        _this.val('');
+                    }else{
+                        //发送未成功
+                        dialog.error(data.info);
                     }
                 }
             });
-            $('.chatLayer .chat_item').append(chatListTpl);
-            $('.chatLayer .chat_item').find('li:last').find('.msg').text(text);
-            $(this).prev().val('');
         });
     });
 </script>

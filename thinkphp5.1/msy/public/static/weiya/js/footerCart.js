@@ -441,7 +441,6 @@ function calculateTotalPrice(obj){
                 return false;
             }
             amount += _thisLi.find('price').text() * num;
-            console.log(amount);
         });
         $('footer').find('price').html(amount.toFixed(2));
     }

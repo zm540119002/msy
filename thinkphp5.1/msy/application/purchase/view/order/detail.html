@@ -102,7 +102,8 @@
         $(function(){
             //跳转到地址列表，更换地址
             $('body').on('click','.changeAddress',function () {
-                var orderId = {$info.id};
+                //var orderId = {$info.id};
+                var orderId = 1;
                 var url = module + '/Address/list';
                 if(orderId){
                     url += '/orderId/'+orderId;
