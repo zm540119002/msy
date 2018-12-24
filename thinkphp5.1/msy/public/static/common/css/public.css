@@ -4469,6 +4469,7 @@ select[name="nodeIds"]{
 }
 .customer_sidebar a{
     color:#fff;
+    font-size:0.24rem;
 }
 .end_more{
     text-align:center;
