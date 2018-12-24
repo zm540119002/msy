@@ -24,16 +24,17 @@ class CustomerService extends \common\controller\UserBase{
         }
     }
 
-    /**绑定
+    /**绑定用户ID
      */
     public function bindUid(){
         if(request()->isAjax()){
             $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-            return successMsg($this->user['id']);
-        }else{
-            return $this->fetch();
+            if(!Gateway::isUidOnline($this->user['id'])){
+                return successMsg('绑定失败！');
+            }
+            return successMsg('绑定成功！',['user_id'=>$this->user['id'],'avatar'=>$this->user['avatar'],]);
         }
     }
 
@@ -42,16 +43,14 @@ class CustomerService extends \common\controller\UserBase{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
-            if(Gateway::isUidOnline($this->user['id'])){
-                $msg = [
-                    'type' => 'msg',
-                    'msg' => $postData['msg'],
-                ];
-                Gateway::sendToUid($postData['user_id'],json_encode($msg));
+            if(!Gateway::isUidOnline($this->user['id'])){
+                return successMsg('对方未在线！');
             }
-            return successMsg($postData['user_id']);
-        }else{
-            return $this->fetch();
+            $msg = [
+                'type' => 'msg',
+                'msg' => $postData['msg'],
+            ];
+            Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
         }
     }
 }

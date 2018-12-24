@@ -9,6 +9,17 @@
             <div class="msg"></div>
         </div>
     </li>
+</section><!--对话框列表模板-->
+<section id="chatListOtherTpl" style="display:none;">
+    <li class="others">
+        <div class="avatar">
+            <img src="public_img/default/no_pic_40.jpg">
+        </div>
+        <div class="content">
+            <p class="author">(小猫咪)</p>
+            <div class="msg"></div>
+        </div>
+    </li>
 </section>
 <!--对话框弹窗-->
 <section id="chatLayerContainer" style="display:none;">
@@ -24,18 +35,68 @@
         </div>
     </div>
 </section>
-<script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
+    console.log(123);
+    // 服务端主动推送消息时会触发这里的onmessage
+    ws = new WebSocket("ws://msy.meishangyun.com:8282");
+    ws.onopen = function(e){
+        console.log('open');
+    };
+    ws.onmessage = function(e){
+        var data =  JSON.parse(e.data);
+        var type = data.type || '';
+        switch(type){
+            case 'init':
+                // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
+                // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
+                var postData = {client_id: data.client_id};
+                var url = module + 'CustomerService/bindUid';
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(xhr){
+                        $('.loading').show();
+                    },
+                    error:function(xhr){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(msg){
+                        $('.loading').hide();
+                        if(msg.status==0){
+                            dialog.error(msg.info);
+                        }else if(msg.code==1 && msg.data=='no_login'){
+                            loginDialog();
+                        }else if(msg.status==1){
+                        }
+                    }
+                });
+                break;
+            case 'msg':
+                $('#chatListOtherTpl').find('.msg').text(data.msg);
+                $('#chatLayerContainer .chat_item').append($('#chatListOtherTpl').html());
+                break;
+            default :
+                console.log('default');
+        }
+    };
+    ws.onerror = function (e) {
+        console.log('error');
+    };
+    ws.onclose = function(e){
+        console.log('close');
+    };
     $(function () {
         //聊天对话框弹窗
-        var chatLayerContainer=$('#chatLayerContainer').html();
         var chatListId;
         $('body').on('click','.customer_btn',function(){
+            console.log($('#chatLayerContainer').html());
             var _this=$(this);
             chatListId=$(this).data('id');
             layer.open({
                 className:'chatLayer',
-                content:chatLayerContainer,
+                content:$('#chatLayerContainer').html(),
                 type:1,
                 anim:'up',
                 btn:['','关闭'],
@@ -49,7 +110,7 @@
                     var chatLayerList=$('.chatLayer .chat_item').html();
                     $('.chat_hidden_list').html(chatLayerList);
                 }
-            })
+            });
         });
         //发送聊天内容
         var chatListTpl=$('#chatListTpl').html();
@@ -59,8 +120,8 @@
                 dialog.error('不能发送空内容！');
                 return false;
             }
-            var user_id = 7;
-            var postData = {user_id:user_id,msg:text};
+            var to_user_id = 17;
+            var postData = {to_user_id:to_user_id,msg:text};
             var url = module + 'CustomerService/sendMessage';
             $.ajax({
                 url: url,
@@ -77,8 +138,6 @@
                     $('.loading').hide();
                     if(data.status==0){
                         dialog.error(data.info);
-                    }else{
-                        console.log(data);
                     }
                 }
             });
