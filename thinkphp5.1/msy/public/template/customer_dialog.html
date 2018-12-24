@@ -119,7 +119,7 @@
                 return false;
             }
             var to_user_id = 17;
-            var postData = {to_user_id:to_user_id,msg:text};
+            var postData = {to_user_id:to_user_id,msg:_this.val()};
             var url = module + 'CustomerService/sendMessage';
             $.ajax({
                 url: url,
