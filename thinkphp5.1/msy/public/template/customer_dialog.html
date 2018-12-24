@@ -76,6 +76,7 @@
                 var chatListOtherTpl = $('#chatListOtherTpl');
                 chatListOtherTpl.find('.msg').text(data.msg);
                 $('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
+                $('.chatLayer .chat_item').append(chatListOtherTpl.html());
                 break;
             default :
                 console.log('default');
