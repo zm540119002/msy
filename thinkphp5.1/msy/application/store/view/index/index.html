@@ -45,7 +45,7 @@
 		<p>美尚云平台支持机构多店铺运营管理</p>
 		<a href="{:url('index/UserCenter/logout')}">退出</a>
 		<br/>
-		<a href="{:url('index/CustomerTest/index')}">客服测试</a>
+		<a href="{:url('index/CustomerClient/index')}">客服测试</a>
 	</section>
 	<section class="entry_msy">
 		<a href="{:url('Deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
@@ -182,7 +182,7 @@
 
 		//订单客服
 		$('body').on('click','.order-management-change',function () {
-			var url = module + 'CustomerService/beforeSale';
+			var url = module + 'CustomerClient/beforeSale';
 			var postData = {};
 			$.ajax({
 				url: url,
