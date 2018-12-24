@@ -137,7 +137,7 @@
                     if(data.status==0){
                         dialog.error(data.info);
                     }else if(data.status==1){
-                        chatListTpl.find('.msg').text(data.info);
+                        chatListTpl.find('.msg').text(_this.val());
                         $('.chatLayer .chat_item').append(chatListTpl.html());
                         _this.val('');
                     }else {
