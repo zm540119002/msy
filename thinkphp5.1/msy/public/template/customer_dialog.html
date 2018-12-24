@@ -89,14 +89,13 @@
     };
     $(function () {
         //聊天对话框弹窗
-        var chatLayerContainer=$('#chatLayerContainer').html();
         var chatListId;
         $('body').on('click','.customer_btn',function(){
             var _this=$(this);
             chatListId=$(this).data('id');
             layer.open({
                 className:'chatLayer',
-                content:chatLayerContainer,
+                content:$('#chatLayerContainer').html(),
                 type:1,
                 anim:'up',
                 btn:['','关闭'],
