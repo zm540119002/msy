@@ -51,7 +51,6 @@
 	ws.onopen = function(e){
 		console.log('open');
 	};
-	var from_user_id = 0;
 	ws.onmessage = function(e){
 		var data =  JSON.parse(e.data);
 		var type = data.type || '';
@@ -78,8 +77,6 @@
 							dialog.error(msg.info);
 						}else if(msg.code==1 && msg.data=='no_login'){
 							loginDialog();
-						}else if(msg.status==1){
-							from_user_id = msg.user_id;
 						}
 					}
 				});
@@ -131,7 +128,7 @@
 				return false;
 			}
 			var to_user_id = 17;
-			var postData = {from_user_id:from_user_id,to_user_id:to_user_id,msg:_this.val()};
+			var postData = {to_user_id:to_user_id,msg:_this.val()};
 			var url = domain + 'index/CustomerService/sendMessage';
 			$.ajax({
 				url: url,
