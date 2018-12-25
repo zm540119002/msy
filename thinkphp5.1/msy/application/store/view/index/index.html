@@ -73,6 +73,7 @@
 		//客服
 		$('body').on('click','.customer_client',function () {
 			var url = domain + 'index/CustomerClient/index';
+			console.log(url);
 			var postData = {};
 			$.ajax({
 				url: url,
