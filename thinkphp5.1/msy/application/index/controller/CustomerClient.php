@@ -6,7 +6,7 @@ class CustomerClient extends \common\controller\UserBase{
     public function index(){
         if(request()->isAjax()){
             $this->assign('user_id',$this->user['id']);
-            $this->success('成功');
+            $this->error('成功');
         }else{
             return $this->fetch();
         }
