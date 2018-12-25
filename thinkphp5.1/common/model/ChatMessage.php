@@ -14,11 +14,10 @@ class ChatMessage extends Base {
 	/**编辑
 	 */
 	public function edit($data){
-		$modelUser = new \common\model\User();
-		$res = $modelUser->isUpdate(false)->save($data);
+		$res = $this->isUpdate(false)->save($data);
 		if($res===false){
 			return errorMsg('失败',$this->getError());
 		}
-		return successMsg('成功！',['id'=>$this->getAttr('id')]);
+		return successMsg('成功！');
 	}
 }
