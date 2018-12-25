@@ -111,7 +111,6 @@
 		});
 		//店长管理
 		$('body').on('click','.manager_manage',function () {
-			console.log(123);
 			var url = module + 'ManagerManage/manage';
 			var postData = {};
 			$.ajax({
@@ -166,7 +165,6 @@
 						if(data.data == 'no_empower'){
 							dialog.error(data.msg);
 						}
-					}else if(data.status==1){
 					}else{
 						$('#storeShopInfo').find('.store_list').empty().append(data);
 						switchManagerStore(url);
