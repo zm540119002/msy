@@ -70,7 +70,7 @@
 				clickable: true
 			}
 		});
-		//客服测试
+		//客服
 		$('body').on('click','.customer_client',function () {
 			var url = domain + 'index/CustomerClient/index';
 			var postData = {};
@@ -92,7 +92,7 @@
 					}else if(data.code==1 && data.data=='no_login'){
 						loginDialog();
 					}else if(data.status==1){
-						console.log(data.info);
+						location.href = url;
 					}
 				}
 			});
