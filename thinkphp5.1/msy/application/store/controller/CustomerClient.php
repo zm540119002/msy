@@ -23,9 +23,9 @@ class CustomerClient extends \common\controller\UserBase{
                 ],
             ];
             $list = $modelChatMessage->getList($config);
-            print_r($list);exit;
-            $this->assign('list',$list);
-            return view('list_tpl');
+//            print_r($list);exit;
+//            $this->assign('list',$list);
+//            return view('list_tpl');
             return $this->fetch();
         }
     }
