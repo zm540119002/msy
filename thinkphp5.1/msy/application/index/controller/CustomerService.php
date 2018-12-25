@@ -4,7 +4,6 @@ namespace app\index\controller;
 use common\component\GatewayClient\Gateway;
 
 class CustomerService extends \common\controller\UserBase{
-
     /**绑定用户ID
      */
     public function bindUid(){
@@ -15,7 +14,6 @@ class CustomerService extends \common\controller\UserBase{
             return successMsg('绑定成功！');
         }
     }
-
     /**发送消息
      */
     public function sendMessage(){
