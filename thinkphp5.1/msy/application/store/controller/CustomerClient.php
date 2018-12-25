@@ -6,7 +6,7 @@ class CustomerClient extends \common\controller\UserBase{
      */
     public function beforeSale(){
         if(request()->isAjax()){
-            return successMsg(123);
+            return successMsg('成功');
         }else{
             return $this->fetch();
         }
@@ -16,7 +16,7 @@ class CustomerClient extends \common\controller\UserBase{
      */
     public function afterSale(){
         if(request()->isAjax()){
-            return successMsg(123);
+            return successMsg('成功');
         }else{
             return $this->fetch();
         }
