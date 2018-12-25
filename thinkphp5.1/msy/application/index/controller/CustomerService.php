@@ -12,10 +12,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-            if(!Gateway::isUidOnline($this->user['id'])){
-                return successMsg('绑定失败！');
-            }
-            return successMsg('绑定成功！',['user_id'=>$this->user['id']]);
+            return successMsg('绑定成功！');
         }
     }
 
@@ -24,15 +21,24 @@ class CustomerService extends \common\controller\UserBase{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
-            if(!Gateway::isUidOnline($postData['to_user_id'])){
-                return errorMsg('对方未在线！');
-            }
-            $msg = [
-                'type' => 'msg',
-                'msg' => $postData['msg'],
+            $modelChatMessage = new \common\model\ChatMessage();
+            $saveData = [
+                'from_id' => $this->user['id'],
+                'to_id' => $postData['to_user_id'],
+                'content' => $postData['msg'],
+                'create_time' => time(),
             ];
-            Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
-            return successMsg($postData);
+            $info = $modelChatMessage->edit($saveData);
+            if($info['status']==0){
+                return errorMsg('发送失败！');
+            }
+            if(Gateway::isUidOnline($postData['to_user_id'])){
+                $msg = [
+                    'type' => 'msg',
+                    'msg' => $postData['msg'],
+                ];
+                Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
+            }
             return successMsg('发送成功！');
         }
     }
