@@ -20,9 +20,9 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.read','=',0],
                     ['cm.to_id','=',$this->user['id']],
                 ]
-//                ,'whereOr' => [
-//                    ['cm.from_id','=',$this->user['id']],
-//                ]
+                ,'whereOr' => [
+                    ['cm.from_id','=',$this->user['id']],
+                ]
                 ,'order' => [
                     'cm.create_time'=>'asc',
                 ],
@@ -50,6 +50,14 @@ class CustomerClient extends \common\controller\UserBase{
                         $fromUser['messages'][] = [
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
+                            'who' => 'others',
+                        ] ;
+                    }
+                    if($fromUser['from_id']==$message['to_id']){
+                        $fromUser['messages'][] = [
+                            'content' => $message['content'],
+                            'create_time' => $message['create_time'],
+                            'who' => 'me',
                         ] ;
                     }
                 }
