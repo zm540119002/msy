@@ -32,10 +32,16 @@ class CustomerClient extends \common\controller\UserBase{
                             'to_id' => $message['to_id'],
                             'name' => $message['name'],
                             'avatar' => $message['avatar'],
-                            'message' => [
-                                'content' => $message['content'],
-                                'create_time' => $message['create_time'],
-                            ],
+                        ] ;
+                    }
+                }
+            }
+            foreach ($fromUserList as &$fromUser){
+                foreach ($list as $message){
+                    if($fromUser['from_id']==$message['from_id']){
+                        $fromUser['message'][] = [
+                            'content' => $message['content'],
+                            'create_time' => $message['create_time'],
                         ] ;
                     }
                 }
