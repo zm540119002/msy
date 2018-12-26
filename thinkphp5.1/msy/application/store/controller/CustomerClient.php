@@ -6,8 +6,6 @@ class CustomerClient extends \common\controller\UserBase{
      */
     public function beforeSale(){
         if(request()->isAjax()){
-            return successMsg('成功');
-        }else{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
@@ -35,6 +33,7 @@ class CustomerClient extends \common\controller\UserBase{
             }
             $this->assign('list',$fromUserList);
             return view('list_tpl');
+        }else{
             return $this->fetch();
         }
     }
