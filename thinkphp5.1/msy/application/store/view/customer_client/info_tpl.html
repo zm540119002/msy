@@ -1,7 +1,11 @@
 {notempty name='info'}
 <li class="chat_list">
 	<div class="avatar">
+		{empty name="info.avatar"}
 		<img src="public_img/default/no_pic_40.jpg">
+		{else /}
+		<img src="public_uploads/{$info.avatar}">
+		{/empty}
 	</div>
 	<div class="content">
 		<p class="author">{$info.name}</p>
@@ -16,7 +20,11 @@
 					{volist name="info.messages" id="message"}
 					<li class="others">
 						<div class="avatar">
+							{empty name="info.avatar"}
 							<img src="public_img/default/no_pic_40.jpg">
+							{else /}
+							<img src="public_uploads/{$info.avatar}">
+							{/empty}
 						</div>
 						<div class="content">
 							<p class="author">{$info.name}</p>
