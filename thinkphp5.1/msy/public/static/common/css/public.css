@@ -4441,6 +4441,7 @@ select[name="nodeIds"]{
     display:none;
 }
 .chatLayer ul{
+    height:495px;
     padding:0 0.25rem 0.25rem;
     margin:1rem 0 0;
     overflow-y:auto;
