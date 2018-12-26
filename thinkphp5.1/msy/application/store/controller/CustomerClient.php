@@ -22,7 +22,7 @@ class CustomerClient extends \common\controller\UserBase{
                 ],'whereOr' => [
                     ['cm.from_id','=',$this->user['id']],
                 ],'order' => [
-                    'cm.from_id','cm.to_id','cm.create_time'=>'asc',
+                    'cm.create_time'=>'asc',
                 ],
             ];
             $list = $modelChatMessage->getList($config);
