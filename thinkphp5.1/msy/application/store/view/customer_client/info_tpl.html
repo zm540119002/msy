@@ -1,12 +1,47 @@
 {notempty name='info'}
-<li class="chat_list" data-from_id="{$info.from_id}">
+<li class="chat_list">
 	<div class="avatar">
+		{empty name="info.avatar"}
 		<img src="public_img/default/no_pic_40.jpg">
+		{else /}
+		<img src="public_uploads/{$info.avatar}">
+		{/empty}
 	</div>
 	<div class="content">
-		<p class="author">(小猫咪1)</p>
+		<p class="author">{$info.name}</p>
 		<div class="msg"></div>
 	</div>
-	<div class="chat_hidden_list"></div>
+	<!--对话框弹窗-->
+	<section class="chatLayerContainer">
+		<div class="ws_chatMsg-panel flex1">
+			<div class="chatMsg-ct">
+				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
+					{notempty name='info'}
+					{volist name="info.messages" id="message"}
+					<li class="others">
+						<div class="avatar">
+							{empty name="info.avatar"}
+							<img src="public_img/default/no_pic_40.jpg">
+							{else /}
+							<img src="public_uploads/{$info.avatar}">
+							{/empty}
+						</div>
+						<div class="content">
+							<p class="author">{$info.name}</p>
+							<div class="msg">{$message.content}</div>
+						</div>
+					</li>
+					{/volist}
+					{/notempty}
+				</ul>
+			</div>
+		</div>
+		<div class="bottom_nav_fixed">
+			<div class="bottom_flex">
+				<input class="send_out_text" type="text" name="" value="">
+				<input class="send_btn" type="button" value="发送">
+			</div>
+		</div>
+	</section>
 </li>
 {/notempty}
