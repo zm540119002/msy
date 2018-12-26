@@ -82,7 +82,6 @@
         $('body').on('click','.list li',function(){
             var _this=$(this);
             var chatLayerContainer=_this.find('.chatLayerContainer').html();
-            chatListId=$(this).data('id');
             layer.open({
                 className:'chatLayer',
                 content:chatLayerContainer,
