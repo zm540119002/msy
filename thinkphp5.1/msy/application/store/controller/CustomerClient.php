@@ -29,10 +29,7 @@ class CustomerClient extends \common\controller\UserBase{
             foreach ($fromUserIds as $fromUserId){
                 foreach ($list as $message){
                     if($fromUserId==$message['from_id']){
-                        $fromUserList[$fromUserId][] = [
-                            'content' => $message['content'],
-                            'create_time' => $message['create_time'],
-                        ];
+                        $fromUserList[$fromUserId][] = $message;
                     }
                 }
             }
