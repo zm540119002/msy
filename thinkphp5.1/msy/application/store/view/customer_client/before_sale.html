@@ -59,7 +59,7 @@
                     <div class="msg"></div>
                 </div>
                 <!--对话框弹窗-->
-                <section id="chatLayerContainer">
+                <section class="chatLayerContainer">
                     <div class="ws_chatMsg-panel flex1">
                         <div class="chatMsg-ct">
                             <ul class="clearfix chat_item"></ul>
@@ -86,10 +86,10 @@
 <script type="text/javascript">
     $(function () {
         //聊天对话框弹窗
-        var chatLayerContainer=$('#chatLayerContainer').html();
         var chatListId;
         $('body').on('click','.list li',function(){
             var _this=$(this);
+            var chatLayerContainer=_this.find('.chatLayerContainer').html();
             chatListId=$(this).data('id');
             layer.open({
                 className:'chatLayer',
