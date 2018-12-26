@@ -27,7 +27,7 @@ class CustomerClient extends \common\controller\UserBase{
             foreach ($fromUserIds as $fromUserId){
                 foreach ($list as $message){
                     if($fromUserId==$message['from_id']){
-                        $fromUserList[$fromUserId] = [
+                        $fromUserList[] = [
                             'from_id' => $message['from_id'],
                             'to_id' => $message['to_id'],
                             'name' => $message['name'],
