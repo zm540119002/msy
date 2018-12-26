@@ -106,7 +106,7 @@
                 dialog.error('不能发送空内容！');
                 return false;
             }
-            var to_user_id = 17;
+            var to_user_id = 22;
             var postData = {to_user_id:to_user_id,msg:_this.val()};
             var url = domain + 'index/CustomerService/sendMessage';
             $.ajax({
