@@ -83,7 +83,6 @@
                 return false;
             }
             var to_user_id = _this.parents('.chatLayer').find('ul').data('from_id');
-            console.log(to_user_id);return;
             var postData = {to_user_id:to_user_id,msg:_this.val()};
             var url = domain + 'index/CustomerService/sendMessage';
             $.ajax({
