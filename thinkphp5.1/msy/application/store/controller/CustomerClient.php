@@ -18,13 +18,21 @@ class CustomerClient extends \common\controller\UserBase{
                 ],'where' => [
                     ['u.status','=',0],
                     ['cm.status','=',0],
-                    ['cm.to_id','=',$this->user['id']],
                     ['cm.type','=',1],
+                    ['cm.read','=',0],
+                    ['cm.to_id','=',$this->user['id']],
                 ],
             ];
             $list = $modelChatMessage->getList($config);
-            $fromUserList = array_unique(array_column($list,'from_id'));
-//            print_r($fromUserList);exit;
+            $fromUserIds = array_unique(array_column($list,'from_id'));
+            $fromUserList = [];
+            foreach ($fromUserIds as $fromUserId){
+                foreach ($list as $message){
+                    if($fromUserId==$message['from_id'])
+                    $fromUserList[$fromUserId]['content'] = $message['content'];
+                }
+            }
+            print_r($fromUserList);exit;
 //            $this->assign('list',$list);
 //            return view('list_tpl');
             return $this->fetch();
