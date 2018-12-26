@@ -11,7 +11,7 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
-                    'cm.from_id','cm.to_id','cm.content',
+                    'cm.from_id','cm.to_id','cm.content','cm.create_time',
                     'u.name',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
@@ -28,8 +28,12 @@ class CustomerClient extends \common\controller\UserBase{
             $fromUserList = [];
             foreach ($fromUserIds as $fromUserId){
                 foreach ($list as $message){
-                    if($fromUserId==$message['from_id'])
-                    $fromUserList[$fromUserId]['content'][] = $message['content'];
+                    if($fromUserId==$message['from_id']){
+                        $fromUserList[$fromUserId][] = [
+                            'content' => $message['content'],
+                            'create_time' => $message['create_time'],
+                        ];
+                    }
                 }
             }
             print_r($fromUserList);exit;
