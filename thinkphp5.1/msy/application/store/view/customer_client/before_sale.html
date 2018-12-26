@@ -76,7 +76,6 @@
         });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
-            var chatListTpl = $('#chatListTpl');
             var _this=$(this).prev();
             if(!_this.val()){
                 dialog.error('不能发送空内容！');
@@ -103,7 +102,7 @@
                     }else if(data.status==1){
                         var chatListTpl = $('#chatListTpl');
                         chatListTpl.find('.msg').text(_this.val());
-                        $('.chatLayer .layui-m-layercont').append(chatListTpl.html());
+                        $('.chatLayer .chat_item').append(chatListTpl.html());
                         _this.val('');
                     }
                 }
