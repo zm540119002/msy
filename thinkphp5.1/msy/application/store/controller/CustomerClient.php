@@ -33,7 +33,7 @@ class CustomerClient extends \common\controller\UserBase{
             $fromUserList = [];
             foreach ($fromUserIds as $fromUserId){
                 foreach ($list as $message){
-                    if($fromUserId==$message['from_id']){
+                    if($fromUserId==$message['from_id'] && $message['from_id']!=$this->user['id']){
                         $fromUserList[] = [
                             'from_id' => $message['from_id'],
                             'to_id' => $message['to_id'],
@@ -48,6 +48,8 @@ class CustomerClient extends \common\controller\UserBase{
                 foreach ($list as $message){
                     if($fromUser['from_id']==$message['from_id']){
                         $fromUser['messages'][] = [
+                            'name' => $message['name'],
+                            'avatar' => $message['avatar'],
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
                             'who' => 'others',
@@ -55,6 +57,8 @@ class CustomerClient extends \common\controller\UserBase{
                     }
                     if($fromUser['from_id']==$message['to_id']){
                         $fromUser['messages'][] = [
+                            'name' => $this->user['name'],
+                            'avatar' => $this->user['avatar'],
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
                             'who' => 'me',
