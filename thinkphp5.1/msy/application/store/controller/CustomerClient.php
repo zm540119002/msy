@@ -32,6 +32,10 @@ class CustomerClient extends \common\controller\UserBase{
                             'to_id' => $message['to_id'],
                             'name' => $message['name'],
                             'avatar' => $message['avatar'],
+                            'message' => [
+                                'content' => $message['content'],
+                                'create_time' => $message['create_time'],
+                            ],
                         ] ;
                     }
                 }
