@@ -6,6 +6,7 @@ class CustomerClient extends \common\controller\UserBase{
      */
     public function beforeSale(){
         if(request()->isAjax()){
+            print_r($this->user);exit;
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
