@@ -1,5 +1,5 @@
 {notempty name='info'}
-<li class="chat_list" data-from_id="{$info.from_id}">
+<li class="chat_list">
 	<div class="avatar">
 		<img src="public_img/default/no_pic_40.jpg">
 	</div>
@@ -11,7 +11,7 @@
 	<section class="chatLayerContainer">
 		<div class="ws_chatMsg-panel flex1">
 			<div class="chatMsg-ct">
-				<ul class="clearfix chat_item">
+				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
 					{notempty name='info'}
 					{volist name="info.messages" id="message"}
 					<li class="others">
