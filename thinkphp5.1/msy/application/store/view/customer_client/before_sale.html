@@ -72,6 +72,11 @@
 {block name="script"}
 <script type="text/javascript">
     $(function () {
+        //页面初始化
+        var config = {
+            url: action
+        };
+        getList(config);
         //聊天对话框弹窗
         var chatListId;
         $('body').on('click','.list li',function(){
