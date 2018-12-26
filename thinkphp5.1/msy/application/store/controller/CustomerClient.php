@@ -33,6 +33,7 @@ class CustomerClient extends \common\controller\UserBase{
                             'name' => $message['name'],
                             'avatar' => $message['avatar'],
                         ] ;
+                        break;
                     }
                 }
             }
