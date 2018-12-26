@@ -68,6 +68,37 @@
                     var winH=$(document).height();
                     $('.chatLayer .chat_item').css('height',winH+'px');
                     $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+                    var postData = {};
+                    postData.from_id = _this.find('ul').data('from_id');
+                    postData.messageIds = [];
+                    $.each(_this.find('li.others'),function(){
+                        postData.messageIds.push($(this).data('id'));
+                    });
+                    console.log(postData);return;
+                    var url = domain + 'index/CustomerService/setRead';
+                    $.ajax({
+                        url: url,
+                        data: postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                dialog.error(data.info);
+                            }else if(data.status==1){
+                                var chatListTpl = $('#chatListTpl');
+                                chatListTpl.find('.msg').text(_this.val());
+                                $('.chatLayer .chat_item').append(chatListTpl.html());
+                                _this.val('');
+                            }
+                        }
+                    });
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
