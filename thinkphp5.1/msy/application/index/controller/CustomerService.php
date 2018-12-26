@@ -50,7 +50,7 @@ class CustomerService extends \common\controller\UserBase{
                 ['cm.status','=',0],
                 ['cm.read','=',0],
                 ['cm.from_id','=',$postData['from_id']],
-                ['cm.id','in',$postData['messageId']],
+                ['cm.id','in',$postData['messageIds']],
             ];
             return errorMsg('设置已读出错',$where);
             $res = $modelChatMessage->where($where)->setField('read',1);
