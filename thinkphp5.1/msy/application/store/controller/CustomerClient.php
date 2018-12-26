@@ -39,14 +39,13 @@ class CustomerClient extends \common\controller\UserBase{
             foreach ($fromUserList as &$fromUser){
                 foreach ($list as $message){
                     if($fromUser['from_id']==$message['from_id']){
-                        $fromUser['message'][] = [
+                        $fromUser['messages'][] = [
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
                         ] ;
                     }
                 }
             }
-            print_r($fromUserList);exit;
             $this->assign('list',$fromUserList);
             return view('list_tpl');
         }else{
