@@ -103,7 +103,7 @@
                     }else if(data.status==1){
                         var chatListTpl = $('#chatListTpl');
                         chatListTpl.find('.msg').text(_this.val());
-                        $('.chatLayer .chat_item').append(chatListTpl.html());
+                        $('.chatLayer .layui-m-layercont').append(chatListTpl.html());
                         _this.val('');
                     }
                 }
