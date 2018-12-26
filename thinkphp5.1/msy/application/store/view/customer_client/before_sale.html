@@ -67,7 +67,7 @@
                 success:function(){
                     var winH=$(document).height();
                     $('.chatLayer .chat_item').css('height',winH+'px');
-                    $('.chatLayer .chat_item').html(chatLayerContainer.html());
+                    $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
