@@ -29,13 +29,12 @@ class CustomerClient extends \common\controller\UserBase{
             foreach ($fromUserIds as $fromUserId){
                 foreach ($list as $message){
                     if($fromUserId==$message['from_id']){
-                        $fromUserList[$fromUserId][] = $message;
+                        $fromUserList[$fromUserId][] = $message ;
                     }
                 }
             }
-            print_r($fromUserList);exit;
-//            $this->assign('list',$list);
-//            return view('list_tpl');
+            $this->assign('list',$fromUserList);
+            return view('list_tpl');
             return $this->fetch();
         }
     }
