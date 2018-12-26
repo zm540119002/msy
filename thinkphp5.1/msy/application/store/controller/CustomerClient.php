@@ -10,7 +10,7 @@ class CustomerClient extends \common\controller\UserBase{
             $config = [
                 'field' => [
                     'cm.from_id','cm.to_id','cm.content','cm.create_time',
-                    'u.name',
+                    'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
                 ],'where' => [
@@ -27,10 +27,16 @@ class CustomerClient extends \common\controller\UserBase{
             foreach ($fromUserIds as $fromUserId){
                 foreach ($list as $message){
                     if($fromUserId==$message['from_id']){
-                        $fromUserList[$fromUserId][] = $message ;
+                        $fromUserList[] = [
+                            'from_id' => $message['from_id'],
+                            'to_id' => $message['to_id'],
+                            'name' => $message['name'],
+                            'avatar' => $message['avatar'],
+                        ] ;
                     }
                 }
             }
+            print_r($fromUserList);exit;
             $this->assign('list',$fromUserList);
             return view('list_tpl');
         }else{
