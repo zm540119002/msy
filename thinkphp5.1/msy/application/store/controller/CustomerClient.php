@@ -19,6 +19,8 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.type','=',1],
                     ['cm.read','=',0],
                     ['cm.to_id','=',$this->user['id']],
+                ],'whereOr' => [
+                    ['cm.from_id','=',$this->user['id']],
                 ],
             ];
             $list = $modelChatMessage->getList($config);
@@ -47,6 +49,7 @@ class CustomerClient extends \common\controller\UserBase{
                     }
                 }
             }
+            print_r($list);exit;
             $this->assign('list',$fromUserList);
             return view('list_tpl');
         }else{
