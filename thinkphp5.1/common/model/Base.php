@@ -32,6 +32,7 @@ class Base extends \think\Model {
 			}
 		}
 		$list = $_model->select();
+		return $_model->getLastSql();
 		return count($list)!=0?$list->toArray():[];
 	}
 
