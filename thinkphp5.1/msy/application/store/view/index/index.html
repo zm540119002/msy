@@ -45,7 +45,7 @@
 		<p>美尚云平台支持机构多店铺运营管理</p>
 		<a href="{:url('index/UserCenter/logout')}">退出</a>
 		<br/>
-		<a href="{:url('index/CustomerClient/index')}">客服测试</a>
+		<a href="javascript:void(0);" class="customer_client">客服测试</a>
 	</section>
 	<section class="entry_msy">
 		<a href="{:url('Deploy/register')}" class="account_entry right-arrow f20">还未入驻？免费入驻美尚云生态圈平台</a>
@@ -69,6 +69,34 @@
 				el: '.swiper-pagination',
 				clickable: true
 			}
+		});
+		//客服
+		$('body').on('click','.customer_client',function () {
+			var url = domain + 'index/CustomerClient/index';
+			console.log(url);
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.code==0){
+						dialog.error(data.msg);
+					}else if(data.code==1 && data.data=='no_login'){
+						loginDialog();
+					}else{
+						location.href = url;
+					}
+				}
+			});
 		});
 		//入驻部署
 		$('body').on('click','.deployed-deployment',function () {
