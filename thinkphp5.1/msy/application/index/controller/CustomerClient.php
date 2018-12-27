@@ -22,6 +22,10 @@ class CustomerClient extends \common\controller\UserBase{
                         ['cm.from_id', '=',$this->user['id'],'or'],
                         ['cm.to_id', '=',17],
                     ],
+                ],'where' => [
+                    ['name', 'like', '%aaa%'],
+                ],'where' => [
+                    ['name', 'like', '%222%'],
                 ],'order' => [
                     'cm.create_time'=>'asc',
                 ],
