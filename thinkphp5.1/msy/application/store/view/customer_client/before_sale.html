@@ -55,19 +55,30 @@
         getList(config);
         //聊天对话框弹窗
         var chatListId;
-        var timeOutEvent=0;//定时器  
+        var touchY = 0;
+        var longClick =0;
         $('.list li').on({
             touchstart:function(){
-                timeOutEvent = setTimeout("longPress()",500);   
-                return false;  
+                longClick=0;
+                timeOutEvent = setTimeout(function(){
+                    //此处为长按事件-----在此显示遮罩层及删除按钮
+                    longClick=1;//假如长按，则设置为1
+                },500);
+                var touch = e.touches[0];
+                touchY = touch.clientY;
             },
             touchmove:function(){
-                 clearTimeout(timeOutEvent);//清除定时器   
-                    timeOutEvent = 0;  
+                clearTimeout(timeOutEvent);
+                timeOutEvent = 0;
+                var touch = e.touches[0]
+                if(Math.abs(touch.clientY - touchY) < 10){
+                    e.preventDefault();
+                }
+
             },
             touchend:function(){
                 clearTimeout(timeOutEvent);//清除定时器   
-                if(timeOutEvent!=0){   
+                if(timeOutEvent!=0&& self.longClick==0){   
                     //这里写要执行的内容（尤如onclick事件）   
                     alert("你这是点击，不是长按");   
                     var _this=$(this);
@@ -159,10 +170,10 @@
         // });
     });
     //真正长按后应该执行的内容   
-    function longPress(){   
-        timeOutEvent = 0;   
-        //执行长按要执行的内容，如弹出菜单   
-        alert("长按事件触发发");   
-    }
+    // function longPress(){   
+    //     timeOutEvent = 0;   
+    //     //执行长按要执行的内容，如弹出菜单   
+    //     alert("长按事件触发发");   
+    // }
 </script>
 {/block}
