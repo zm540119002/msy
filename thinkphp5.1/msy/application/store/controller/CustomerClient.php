@@ -20,7 +20,7 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.to_read','=',0],
                     [
 //                        'cm.from_id|cm.to_id', ['=',$this->user['id']],
-                        'cm.from_id|cm.to_id', ['=',88],['=',66],
+                        'cm.from_id|cm.to_id', ['=',88],
                         'cm.to_id', ['=',55],
                     ],
                 ],'order' => [
