@@ -47,10 +47,10 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
             $where = [
-                ['cm.status','=',0],
-                ['cm.read','=',0],
-                ['cm.from_id','=',$postData['from_id']],
-                ['cm.id','in',$postData['messageIds']],
+                ['status','=',0],
+                ['from_read','=',0],
+                ['from_id','=',$postData['from_id']],
+                ['id','in',$postData['messageIds']],
             ];
             $res = $modelChatMessage->where($where)->setField('read',1);
             return errorMsg('设置已读出错',$modelChatMessage->getLastSql());
