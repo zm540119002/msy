@@ -32,6 +32,7 @@ class CustomerClient extends \common\controller\UserBase{
                 ],
             ];
             $list = $modelChatMessage->getList($config);
+            print_r($list);exit;
             $fromUserIds = array_unique(array_column($list,'from_id'));
             $fromUserList = [];
             foreach ($fromUserIds as $fromUserId){
