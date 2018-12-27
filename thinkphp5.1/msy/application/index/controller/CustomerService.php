@@ -53,13 +53,14 @@ class CustomerService extends \common\controller\UserBase{
             ];
             $whereOr = [
                 [
-                    ['from_id','=',$this->user['id']], ['to_id','=',$postData['from_id']],
+                    ['from_id','=',$this->user['id']],
+                    ['to_id','=',$postData['from_id']],
                 ],[
-                    ['from_id','=',$postData['from_id']],['to_id','=',$this->user['id']],
+                    ['from_id','=',$postData['from_id']],
+                    ['to_id','=',$this->user['id']],
                 ],
             ];
             $res = $modelChatMessage->where($where)->whereOr($whereOr)->setField('to_read',1);
-            return errorMsg($modelChatMessage->getLastSql());
             if($res==false){
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
             }
