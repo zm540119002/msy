@@ -19,13 +19,16 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.type','=',1],
                     ['cm.to_read','=',0],
                     [
-                        'cm.from_id|cm.to_id', ['=',$this->user['id']],
+//                        'cm.from_id|cm.to_id', ['=',$this->user['id']],
+                        'cm.from_id|cm.to_id', ['=',88],['=',66],
+                        'cm.to_id', ['=',55],
                     ],
                 ],'order' => [
                     'cm.create_time'=>'asc',
                 ],
             ];
             $list = $modelChatMessage->getList($config);
+            print_r($modelChatMessage->getLastSql());exit;
             $fromUserIds = array_unique(array_column($list,'from_id'));
             $fromUserList = [];
             foreach ($fromUserIds as $fromUserId){
