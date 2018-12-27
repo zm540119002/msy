@@ -52,7 +52,7 @@ class CustomerService extends \common\controller\UserBase{
                 ['from_id','=',$postData['from_id']],
                 ['id','in',$postData['messageIds']],
             ];
-            $res = $modelChatMessage->where($where)->setField('read',1);
+            $res = $modelChatMessage->where($where)->setField('from_read',1);
             return errorMsg('设置已读出错',$modelChatMessage->getLastSql());
             if($res==false){
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
