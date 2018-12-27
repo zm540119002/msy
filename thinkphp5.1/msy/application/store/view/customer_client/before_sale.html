@@ -64,16 +64,16 @@
                     //此处为长按事件-----在此显示遮罩层及删除按钮
                     longClick=1;//假如长按，则设置为1
                 },500);
-                var touch = e.touches[0];
-                touchY = touch.clientY;
+                // var touch = e.touches[0];
+                // touchY = touch.clientY;
             },
             touchmove:function(){
                 clearTimeout(timeOutEvent);
                 timeOutEvent = 0;
-                var touch = e.touches[0]
-                if(Math.abs(touch.clientY - touchY) < 10){
-                    e.preventDefault();
-                }
+                // var touch = e.touches[0]
+                // if(Math.abs(touch.clientY - touchY) < 10){
+                //     e.preventDefault();
+                // }
 
             },
             touchend:function(){
@@ -81,23 +81,23 @@
                 if(timeOutEvent!=0&& self.longClick==0){   
                     //这里写要执行的内容（尤如onclick事件）   
                     alert("你这是点击，不是长按");   
-                    var _this=$(this);
-                    var chatLayerContainer=_this.find('.chatLayerContainer');
-                    layer.open({
-                        className:'chatLayer',
-                        content:chatLayerContainer,
-                        type:1,
-                        anim:'up',
-                        btn:['','关闭'],
-                        success:function(){
-                            var winH=$(document).height();
-                            $('.chatLayer .chat_item').css('height',winH+'px');
-                            $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
-                        },
-                        no:function(){
-                            chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
-                        }
-                    });
+                    // var _this=$(this);
+                    // var chatLayerContainer=_this.find('.chatLayerContainer');
+                    // layer.open({
+                    //     className:'chatLayer',
+                    //     content:chatLayerContainer,
+                    //     type:1,
+                    //     anim:'up',
+                    //     btn:['','关闭'],
+                    //     success:function(){
+                    //         var winH=$(document).height();
+                    //         $('.chatLayer .chat_item').css('height',winH+'px');
+                    //         $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+                    //     },
+                    //     no:function(){
+                    //         chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
+                    //     }
+                    // });
                 }   
                 return false;  
             }
