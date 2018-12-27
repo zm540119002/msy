@@ -19,13 +19,19 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.type','=',1],
                     ['cm.to_read','=',0],
                     ['cm.from_id','=',$this->user['id']],
+                    [
+                        ['cm.from_id','=',$this->user['id']],
+                    ],
+                    [
+                        ['cm.to_id','=',$this->user['id']],
+                    ],
                 ],'whereOr' => [
 //                    [
 //                        ['cm.from_id','=',$this->user['id']],
 //                    ],
-                    [
-                        ['cm.to_id','=',$this->user['id']],
-                    ],
+//                    [
+//                        ['cm.to_id','=',$this->user['id']],
+//                    ],
 
                 ],'order' => [
                     'cm.create_time'=>'asc',
