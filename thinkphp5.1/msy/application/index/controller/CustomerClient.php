@@ -6,6 +6,14 @@ class CustomerClient extends \common\controller\UserBase{
     public function index(){
         if(request()->isAjax()){
             $modelChatMessage = new \common\model\ChatMessage();
+            $map1 = [
+                ['cm.from_id', '=',$this->user['id']],
+                ['cm.to_id', '=',17],
+            ];
+            $map2 = [
+                ['cm.from_id', '=',17],
+                ['cm.to_id', '=',$this->user['id']],
+            ];
             $config = [
                 'field' => [
                     'cm.id','cm.from_id','cm.to_id','cm.content','cm.create_time',
@@ -23,10 +31,7 @@ class CustomerClient extends \common\controller\UserBase{
 //                        ['cm.to_id', '=',17],
                     ],
                 ],'whereOr' => [
-                    ['cm.from_id', '=',$this->user['id']],
-                    ['cm.to_id', '=',17],
-                    ['cm.from_id', '=',17],
-                    ['cm.to_id', '=',$this->user['id']],
+                    $map1,$map2
                 ],'order' => [
                     'cm.create_time'=>'asc',
                 ],
