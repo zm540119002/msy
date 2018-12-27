@@ -13,13 +13,14 @@ class CustomerClient extends \common\controller\UserBase{
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
                 ],
-//                'where' => 'u.status = 0 AND cm.status = 0 AND cm.type = 1 AND cm.to_read = 0 ' .
+//                'where' => 'u.status = 0 and cm.status = 0 and cm.type = 1 and cm.to_read = 0 ' .
 //                    'and (cm.from_id = ' .$this->user['id'] . ' and cm.to_id = 17) ' .
 //                    'or ( cm.from_id = 17' . ' and cm.to_id = ' .$this->user['id'] . ')'
 //                ,
-                'where' => ['u.status = 0 AND cm.status = 0 AND cm.type = 1 AND cm.to_read = 0 ' .
+                'where' => 'u.status = :u.status and cm.status = :cm.status and cm.type = :cm.type and cm.to_read = 0 ' .
                     'and (cm.from_id = ' .$this->user['id'] . ' and cm.to_id = 17) ' .
-                    'or ( cm.from_id = 17' . ' and cm.to_id = ' .$this->user['id'] . ')']
+                    'or ( cm.from_id = 17' . ' and cm.to_id = ' .$this->user['id'] . ')',
+                ['u.status'=>0,'cm.status'=>0,'cm.type'=>1,]
                 ,
                 'order' => [
                     'cm.create_time'=>'asc',
