@@ -178,7 +178,8 @@
     //     alert("长按事件触发发");   
     // }
 </script>
-<script>    
+<script>   
+window.onload=function(){ 
 var touchY = 0;
 var longClick =0;
 $(".chat_list").on({
@@ -209,5 +210,6 @@ $(".chat_list").on({
         return false;
     }
 });
+}
 </script>
 {/block}
