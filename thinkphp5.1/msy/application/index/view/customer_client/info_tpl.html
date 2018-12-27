@@ -1,0 +1,15 @@
+{notempty name='info'}
+<li class="{$info.who}" data-id="{$info.id}">
+	<div class="avatar">
+		{empty name="info.avatar"}
+		<img src="public_img/default/no_pic_40.jpg">
+		{else /}
+		<img src="public_uploads/{$info.avatar}">
+		{/empty}
+	</div>
+	<div class="content">
+		<p class="author">{$info.name}</p>
+		<div class="msg">{$info.content}</div>
+	</div>
+</li>
+{/notempty}

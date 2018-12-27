@@ -33,7 +33,7 @@
 <section id="chatLayerContainer" style="display:none;">
 	<div class="ws_chatMsg-panel flex1">
 		<div class="chatMsg-ct">
-			<ul class="clearfix chat_item"></ul>
+			<ul class="clearfix chat_item list"></ul>
 		</div>
 	</div>
 	<div class="bottom_nav_fixed">
@@ -102,11 +102,17 @@
 		console.log('close');
 	};
 	$(function () {
+		//页面初始化
+		var postData = {
+		};
+		var config = {
+			url: action,
+			postData: postData
+		};
+		getList(config);
 		//聊天对话框弹窗
-		var chatListId;
 		$('body').on('click','.customer_btn',function(){
 			var _this=$(this);
-			chatListId=$(this).data('id');
 			layer.open({
 				className:'chatLayer',
 				content:$('#chatLayerContainer').html(),
