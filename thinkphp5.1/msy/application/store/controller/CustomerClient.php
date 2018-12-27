@@ -17,13 +17,14 @@ class CustomerClient extends \common\controller\UserBase{
                     ['u.status','=',0],
                     ['cm.status','=',0],
                     ['cm.type','=',1],
-                    ['cm.to_read','=',0],
                 ],'whereOr' => [
                     [
                         ['cm.from_id','=',$this->user['id']],
+                        ['cm.to_read','=',0],
                     ],
                     [
                         ['cm.to_id','=',$this->user['id']],
+                        ['cm.to_read','=',0],
                     ],
 
                 ],'order' => [
