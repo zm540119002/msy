@@ -4063,6 +4063,14 @@ select[name="nodeIds"]{
 .content .msg{
     background: #fff;
 }
+.chat_list{
+    position:relative;
+}
+.chat_list .detele_chat{
+    position:absolute;
+    right:0.15rem;
+    color:#ff0000;
+}
 .bottom_flex{
     display:flex;
     display:-webkit-flex;
