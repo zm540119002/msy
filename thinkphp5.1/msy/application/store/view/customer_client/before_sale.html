@@ -55,24 +55,42 @@
         getList(config);
         //聊天对话框弹窗
         var chatListId;
-        $('body').on('click','.list li',function(){
-            var _this=$(this);
-            var chatLayerContainer=_this.find('.chatLayerContainer');
-            layer.open({
-                className:'chatLayer',
-                content:chatLayerContainer,
-                type:1,
-                anim:'up',
-                btn:['','关闭'],
-                success:function(){
-                    var winH=$(document).height();
-                    $('.chatLayer .chat_item').css('height',winH+'px');
-                    $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
-                },
-                no:function(){
-                    chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
-                }
-            });
+        var timeOutEvent=0;//定时器  
+        $('.list li').on({
+            touchstart:function(){
+                timeOutEvent = setTimeout("longPress()",500);   
+                return false;  
+            },
+            touchmove:function(){
+                 clearTimeout(timeOutEvent);//清除定时器   
+                    timeOutEvent = 0;  
+            },
+            touchend:function(){
+                clearTimeout(timeOutEvent);//清除定时器   
+                if(timeOutEvent!=0){   
+                    //这里写要执行的内容（尤如onclick事件）   
+                    alert("你这是点击，不是长按");   
+                    var _this=$(this);
+                    var chatLayerContainer=_this.find('.chatLayerContainer');
+                    layer.open({
+                        className:'chatLayer',
+                        content:chatLayerContainer,
+                        type:1,
+                        anim:'up',
+                        btn:['','关闭'],
+                        success:function(){
+                            var winH=$(document).height();
+                            $('.chatLayer .chat_item').css('height',winH+'px');
+                            $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+                        },
+                        no:function(){
+                            chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
+                        }
+                    });
+                }   
+                return false;  
+            }
+           
         });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
@@ -140,5 +158,11 @@
             });
         });
     });
+    //真正长按后应该执行的内容   
+    function longPress(){   
+        timeOutEvent = 0;   
+        //执行长按要执行的内容，如弹出菜单   
+        alert("长按事件触发发");   
+    }
 </script>
 {/block}
