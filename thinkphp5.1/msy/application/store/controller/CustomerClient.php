@@ -20,7 +20,7 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.to_read','=',0],
                     [
 //                        'cm.from_id|cm.to_id', ['=',$this->user['id']],'or',
-                        ['cm.from_id','cm.to_id'], ['=',$this->user['id']],'or',
+                        ['cm.from_id','cm.to_id',['=',$this->user['id']]],'or',
                     ],
                 ],'order' => [
                     'cm.create_time'=>'asc',
