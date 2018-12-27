@@ -11,7 +11,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             // client_id与uid绑定
             Gateway::bindUid($postData['client_id'], $this->user['id']);
-            return successMsg('绑定成功！');
+            return successMsg('成功！');
         }
     }
     /**发送消息
@@ -28,7 +28,7 @@ class CustomerService extends \common\controller\UserBase{
             ];
             $info = $modelChatMessage->edit($saveData);
             if($info['status']==0){
-                return errorMsg('发送失败！');
+                return errorMsg('失败！');
             }
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $msg = [
@@ -37,7 +37,27 @@ class CustomerService extends \common\controller\UserBase{
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
             }
-            return successMsg('发送成功！');
+            return successMsg('成功！');
+        }
+    }
+    /**设置消息已读
+     */
+    public function setMessageRead(){
+        if(request()->isAjax()){
+            $postData = input('post.');
+            $modelChatMessage = new \common\model\ChatMessage();
+            $where = [
+                ['cm.status','=',0],
+                ['cm.read','=',0],
+                ['cm.from_id','=',$postData['from_id']],
+                ['cm.id','in',$postData['messageIds']],
+            ];
+            $res = $modelChatMessage->where($where)->setField('read',1);
+            return errorMsg('设置已读出错',$modelChatMessage->getLastSql());
+            if($res==false){
+                return errorMsg('设置已读出错',$modelChatMessage->getError());
+            }
+            return successMsg('成功！');
         }
     }
 }

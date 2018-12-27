@@ -9,7 +9,7 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
-                    'cm.from_id','cm.to_id','cm.content','cm.create_time',
+                    'cm.id','cm.from_id','cm.to_id','cm.content','cm.create_time',
                     'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
@@ -19,6 +19,10 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.type','=',1],
                     ['cm.read','=',0],
                     ['cm.to_id','=',$this->user['id']],
+                ],'whereOr' => [
+                    ['cm.from_id','=',$this->user['id']],
+                ],'order' => [
+                    'cm.create_time'=>'asc',
                 ],
             ];
             $list = $modelChatMessage->getList($config);
@@ -26,7 +30,7 @@ class CustomerClient extends \common\controller\UserBase{
             $fromUserList = [];
             foreach ($fromUserIds as $fromUserId){
                 foreach ($list as $message){
-                    if($fromUserId==$message['from_id']){
+                    if($fromUserId==$message['from_id'] && $message['from_id']!=$this->user['id']){
                         $fromUserList[] = [
                             'from_id' => $message['from_id'],
                             'to_id' => $message['to_id'],
@@ -41,8 +45,22 @@ class CustomerClient extends \common\controller\UserBase{
                 foreach ($list as $message){
                     if($fromUser['from_id']==$message['from_id']){
                         $fromUser['messages'][] = [
+                            'id' => $message['id'],
+                            'name' => $message['name'],
+                            'avatar' => $message['avatar'],
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
+                            'who' => 'others',
+                        ] ;
+                    }
+                    if($fromUser['from_id']==$message['to_id']){
+                        $fromUser['messages'][] = [
+                            'id' => $message['id'],
+                            'name' => $this->user['name'],
+                            'avatar' => $this->user['avatar'],
+                            'content' => $message['content'],
+                            'create_time' => $message['create_time'],
+                            'who' => 'me',
                         ] ;
                     }
                 }
