@@ -25,8 +25,6 @@ class CustomerClient extends \common\controller\UserBase{
                 ],'whereOr' => [
                     ['cm.from_id', '=',17],
                     ['cm.to_id', '=',$this->user['id']],
-                ],'where' => [
-                    ['name', 'like', '%222%'],
                 ],'order' => [
                     'cm.create_time'=>'asc',
                 ],
