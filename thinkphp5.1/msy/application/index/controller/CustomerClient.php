@@ -6,33 +6,16 @@ class CustomerClient extends \common\controller\UserBase{
     public function index(){
         if(request()->isAjax()){
             $modelChatMessage = new \common\model\ChatMessage();
-            $map1 = [
-                ['cm.from_id', '=',$this->user['id']],
-                ['cm.to_id', '=',17],
-            ];
-            $map2 = [
-                ['cm.from_id', '=',17],
-                ['cm.to_id', '=',$this->user['id']],
-            ];
             $config = [
                 'field' => [
                     'cm.id','cm.from_id','cm.to_id','cm.content','cm.create_time',
                     'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
-                ],'where' => [
-                    ['u.status','=',0],
-                    ['cm.status','=',0],
-                    ['cm.type','=',1],
-                    ['cm.to_read','=',0],
-                    [
-//                        'cm.from_id&cm.to_id', ['=',$this->user['id']],
-//                        ['cm.from_id', '=',$this->user['id']],
-//                        ['cm.to_id', '=',17],
-                    ],
-                ],'whereOr' => [
-                    $map1,$map2
-                ],'order' => [
+                ],'where' => 'u.status = 0 AND cm.status = 0 AND cm.type = 1 AND cm.to_read = 0 ' .
+                    'and (cm.from_id = ' .$this->user['id'] . ' and cm.to_id = 17) ' .
+                    'or ( cm.from_id = 17' . ' and cm.to_id = ' .$this->user['id'] . ')'
+                ,'order' => [
                     'cm.create_time'=>'asc',
                 ],
             ];
