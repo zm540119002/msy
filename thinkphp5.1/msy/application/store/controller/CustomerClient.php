@@ -21,8 +21,6 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.from_id','=',$this->user['id']],
                     [
                         ['cm.from_id','=',$this->user['id']],
-                    ],
-                    [
                         ['cm.to_id','=',$this->user['id']],
                     ],
                 ],'whereOr' => [
