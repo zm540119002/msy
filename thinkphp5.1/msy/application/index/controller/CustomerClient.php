@@ -20,47 +20,14 @@ class CustomerClient extends \common\controller\UserBase{
                 ],'limit' => 20,
             ];
             $list = $modelChatMessage->getList($config);
-            print_r($list);exit;
-            $fromUserIds = array_unique(array_column($list,'from_id'));
-            $fromUserList = [];
-            foreach ($fromUserIds as $fromUserId){
-                foreach ($list as $message){
-                    if($fromUserId==$message['from_id'] && $message['from_id']!=$this->user['id']){
-                        $fromUserList[] = [
-                            'from_id' => $message['from_id'],
-                            'to_id' => $message['to_id'],
-                            'name' => $message['name'],
-                            'avatar' => $message['avatar'],
-                        ] ;
-                        break;
-                    }
+            foreach ($list as &$message){
+                if($this->user['id']==$message['from_id']){
+                    $message['who'] = 'others';
+                }else{
+                    $message['who'] = 'me';
                 }
             }
-            foreach ($fromUserList as &$fromUser){
-                foreach ($list as $message){
-                    if($fromUser['from_id']==$message['from_id']){
-                        $fromUser['messages'][] = [
-                            'id' => $message['id'],
-                            'name' => $message['name'],
-                            'avatar' => $message['avatar'],
-                            'content' => $message['content'],
-                            'create_time' => $message['create_time'],
-                            'who' => 'others',
-                        ] ;
-                    }
-                    if($fromUser['from_id']==$message['to_id']){
-                        $fromUser['messages'][] = [
-                            'id' => $message['id'],
-                            'name' => $this->user['name'],
-                            'avatar' => $this->user['avatar'],
-                            'content' => $message['content'],
-                            'create_time' => $message['create_time'],
-                            'who' => 'me',
-                        ] ;
-                    }
-                }
-            }
-            $this->assign('list',$fromUserList);
+            $this->assign('list',$list);
             return view('list_tpl');
         }else{
             return $this->fetch();
