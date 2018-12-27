@@ -12,15 +12,15 @@ class CustomerClient extends \common\controller\UserBase{
                     'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
-                ],'where' => 'u.status = 0 and cm.status = 0 and cm.type = 1 and cm.to_read = 0 ' .
+                ],'where' => 'u.status = 0 and cm.status = 0 and cm.type = 1 ' .
                     'and (cm.from_id = ' .$this->user['id'] . ' and cm.to_id = 17) ' .
                     'or ( cm.from_id = 17' . ' and cm.to_id = ' .$this->user['id'] . ')'
                 ,'order' => [
                     'cm.create_time'=>'asc',
-                ],
+                ],'limit' => 10,
             ];
             $list = $modelChatMessage->getList($config);
-            print_r($modelChatMessage->getLastSql());exit;
+            print_r($list);exit;
             $fromUserIds = array_unique(array_column($list,'from_id'));
             $fromUserList = [];
             foreach ($fromUserIds as $fromUserId){
