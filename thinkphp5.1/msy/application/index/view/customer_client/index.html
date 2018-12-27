@@ -102,11 +102,17 @@
 		console.log('close');
 	};
 	$(function () {
+		//页面初始化
+		var postData = {
+		};
+		var config = {
+			url: action,
+			postData: postData
+		};
+		getList(config);
 		//聊天对话框弹窗
-		var chatListId;
 		$('body').on('click','.customer_btn',function(){
 			var _this=$(this);
-			chatListId=$(this).data('id');
 			layer.open({
 				className:'chatLayer',
 				content:$('#chatLayerContainer').html(),
