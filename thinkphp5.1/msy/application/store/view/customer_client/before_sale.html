@@ -55,7 +55,55 @@
         getList(config);
         //聊天对话框弹窗
         var chatListId;
-       
+        var touchY = 0;
+        var longClick =0;
+        // $('.chat_list').on({
+        //     touchstart:function(){
+        //         longClick=0;
+        //         timeOutEvent = setTimeout(function(){
+        //             //此处为长按事件-----在此显示遮罩层及删除按钮
+        //             longClick=1;//假如长按，则设置为1
+        //             alert(2222);
+        //         },500);
+        //         // var touch = e.touches[0];
+        //         // touchY = touch.clientY;
+        //     },
+        //     touchmove:function(){
+        //         clearTimeout(timeOutEvent);
+        //         timeOutEvent = 0;
+        //         // var touch = e.touches[0]
+        //         // if(Math.abs(touch.clientY - touchY) < 10){
+        //         //     e.preventDefault();
+        //         // }
+
+        //     },
+        //     touchend:function(){
+        //         clearTimeout(timeOutEvent);//清除定时器   
+        //         if(timeOutEvent!=0&& self.longClick==0){   
+        //             //这里写要执行的内容（尤如onclick事件）   
+        //             alert("你这是点击，不是长按");   
+        //             // var _this=$(this);
+        //             // var chatLayerContainer=_this.find('.chatLayerContainer');
+        //             // layer.open({
+        //             //     className:'chatLayer',
+        //             //     content:chatLayerContainer,
+        //             //     type:1,
+        //             //     anim:'up',
+        //             //     btn:['','关闭'],
+        //             //     success:function(){
+        //             //         var winH=$(document).height();
+        //             //         $('.chatLayer .chat_item').css('height',winH+'px');
+        //             //         $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+        //             //     },
+        //             //     no:function(){
+        //             //         chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
+        //             //     }
+        //             // });
+        //         }   
+        //         return false;  
+        //     }
+           
+        //});
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
             var _this=$(this).prev();
@@ -122,60 +170,43 @@
         //     });
         // });
     });
-     var touchY = 0;
-        var longClick =0;
-        $('.chat_list').on({
-            touchstart:function(){
-                longClick=0;
-                timeOutEvent = setTimeout(function(){
-                    //此处为长按事件-----在此显示遮罩层及删除按钮
-                    longClick=1;//假如长按，则设置为1
-                    alert(2222);
-                },500);
-                // var touch = e.touches[0];
-                // touchY = touch.clientY;
-            },
-            touchmove:function(){
-                clearTimeout(timeOutEvent);
-                timeOutEvent = 0;
-                // var touch = e.touches[0]
-                // if(Math.abs(touch.clientY - touchY) < 10){
-                //     e.preventDefault();
-                // }
-
-            },
-            touchend:function(){
-                clearTimeout(timeOutEvent);//清除定时器   
-                if(timeOutEvent!=0&& self.longClick==0){   
-                    //这里写要执行的内容（尤如onclick事件）   
-                    alert("你这是点击，不是长按");   
-                    // var _this=$(this);
-                    // var chatLayerContainer=_this.find('.chatLayerContainer');
-                    // layer.open({
-                    //     className:'chatLayer',
-                    //     content:chatLayerContainer,
-                    //     type:1,
-                    //     anim:'up',
-                    //     btn:['','关闭'],
-                    //     success:function(){
-                    //         var winH=$(document).height();
-                    //         $('.chatLayer .chat_item').css('height',winH+'px');
-                    //         $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
-                    //     },
-                    //     no:function(){
-                    //         chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
-                    //     }
-                    // });
-                }   
-                return false;  
-            }
-           
-        });
     //真正长按后应该执行的内容   
     // function longPress(){   
     //     timeOutEvent = 0;   
     //     //执行长按要执行的内容，如弹出菜单   
     //     alert("长按事件触发发");   
     // }
+</script>
+<script>    
+var touchY = 0;
+var longClick =0;
+$(".chat_list").on({
+    touchstart: function(e){
+        longClick=0;
+        timeOutEvent = setTimeout(function(){
+            //此处为长按事件-----在此显示遮罩层及删除按钮
+            longClick=1;//假如长按，则设置为1
+            alert(2);
+        },500);
+        // var touch = e.touches[0];
+        // touchY = touch.clientY;
+    },
+    touchmove: function(){
+        clearTimeout(timeOutEvent);
+        timeOutEvent = 0;
+        // var touch = e.touches[0]
+        // if(Math.abs(touch.clientY - touchY) < 10){
+        //     e.preventDefault();
+        // }
+    },
+    touchend: function(e){
+        clearTimeout(timeOutEvent);
+        if(timeOutEvent!=0 && self.longClick==0){//点击
+           //此处为点击事件----在此处添加跳转详情页
+           alert(1);
+        }
+        return false;
+    }
+});
 </script>
 {/block}
