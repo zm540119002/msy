@@ -42,18 +42,25 @@ class CustomerService extends \common\controller\UserBase{
     }
     /**设置消息已读
      */
-    public function setMessageRead(){
+    public function setToMessageRead(){
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
             $where = [
                 ['status','=',0],
-                ['from_read','=',0],
-                ['from_id','=',$postData['from_id']],
+                ['to_read','=',0],
                 ['id','in',$postData['messageIds']],
             ];
-            $res = $modelChatMessage->where($where)->setField('read',1);
-            return errorMsg('设置已读出错',$modelChatMessage->getLastSql());
+            $whereOr = [
+                [
+                    ['from_id','=',$this->user['id']],
+                    ['to_id','=',$postData['from_id']],
+                ],[
+                    ['from_id','=',$postData['from_id']],
+                    ['to_id','=',$this->user['id']],
+                ],
+            ];
+            $res = $modelChatMessage->where($where)->whereOr($whereOr)->setField('to_read',1);
             if($res==false){
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
             }

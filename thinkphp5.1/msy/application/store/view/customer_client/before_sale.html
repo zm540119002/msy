@@ -71,10 +71,10 @@
                     var postData = {};
                     postData.from_id = _this.find('ul').data('from_id');
                     postData.messageIds = [];
-                    $.each(_this.find('li.others'),function(){
+                    $.each(_this.find('li'),function(){
                         postData.messageIds.push($(this).data('id'));
                     });
-                    var url = domain + 'index/CustomerService/setMessageRead';
+                    var url = domain + 'index/CustomerService/setToMessageRead';
                     $.ajax({
                         url: url,
                         data: postData,

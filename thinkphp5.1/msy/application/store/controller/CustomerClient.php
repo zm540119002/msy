@@ -17,7 +17,7 @@ class CustomerClient extends \common\controller\UserBase{
                     ['u.status','=',0],
                     ['cm.status','=',0],
                     ['cm.type','=',1],
-                    ['cm.read','=',0],
+                    ['cm.to_read','=',0],
                     ['cm.to_id','=',$this->user['id']],
                 ],'whereOr' => [
                     ['cm.from_id','=',$this->user['id']],
@@ -71,7 +71,6 @@ class CustomerClient extends \common\controller\UserBase{
             return $this->fetch();
         }
     }
-
     /**售后
      */
     public function afterSale(){
