@@ -22,9 +22,9 @@ class CustomerClient extends \common\controller\UserBase{
             $list = $modelChatMessage->getList($config);
             foreach ($list as &$message){
                 if($this->user['id']==$message['from_id']){
-                    $message['who'] = 'others';
-                }else{
                     $message['who'] = 'me';
+                }else{
+                    $message['who'] = 'others';
                 }
             }
             $this->assign('list',$list);
