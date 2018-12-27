@@ -127,36 +127,36 @@
             });
         });
         //删除
-        $('body').on('click','.detele_chat',function(){
-            var _thisLi=$(this).parent();
-            var postData = {};
-            postData.from_id = _thisLi.find('ul').data('from_id');
-            postData.messageIds = [];
-            $.each(_thisLi.find('li'),function(){
-                postData.messageIds.push($(this).data('id'));
-            });
-            var url = domain + 'index/CustomerService/setToMessageRead';
-            $.ajax({
-                url: url,
-                data: postData,
-                type: 'post',
-                beforeSend: function(xhr){
-                    $('.loading').show();
-                },
-                error:function(xhr){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    if(data.status==0){
-                        dialog.error(data.info);
-                    }else{
-                        _thisLi.remove();
-                    }
-                }
-            });
-        });
+        // $('body').on('click','.detele_chat',function(){
+        //     var _thisLi=$(this).parent();
+        //     var postData = {};
+        //     postData.from_id = _thisLi.find('ul').data('from_id');
+        //     postData.messageIds = [];
+        //     $.each(_thisLi.find('li'),function(){
+        //         postData.messageIds.push($(this).data('id'));
+        //     });
+        //     var url = domain + 'index/CustomerService/setToMessageRead';
+        //     $.ajax({
+        //         url: url,
+        //         data: postData,
+        //         type: 'post',
+        //         beforeSend: function(xhr){
+        //             $('.loading').show();
+        //         },
+        //         error:function(xhr){
+        //             $('.loading').hide();
+        //             dialog.error('AJAX错误');
+        //         },
+        //         success: function(data){
+        //             $('.loading').hide();
+        //             if(data.status==0){
+        //                 dialog.error(data.info);
+        //             }else{
+        //                 _thisLi.remove();
+        //             }
+        //         }
+        //     });
+        // });
     });
     //真正长按后应该执行的内容   
     function longPress(){   
