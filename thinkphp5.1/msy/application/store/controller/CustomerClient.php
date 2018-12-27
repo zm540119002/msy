@@ -21,7 +21,7 @@ class CustomerClient extends \common\controller\UserBase{
                     [
 //                        'cm.from_id|cm.to_id', ['=',$this->user['id']],
                         'cm.from_id|cm.to_id', ['=',88],
-                        'cm.to_id', ['=',55],
+                        'cm.content', ['like','11'],
                     ],
                 ],'order' => [
                     'cm.create_time'=>'asc',
