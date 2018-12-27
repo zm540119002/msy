@@ -20,7 +20,7 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.to_read','=',0],
                     [
                         'cm.from_id', ['=',$this->user['id']],'or',
-                        'cm.to_id',['=',$this->user['id']],'and',
+                        ['cm.to_id','=',$this->user['id']],
                     ],
                 ],'whereOr' => [
 //                    [
