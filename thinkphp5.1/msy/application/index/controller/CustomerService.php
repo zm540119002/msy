@@ -42,6 +42,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData['name'] = $this->user['name'];
             $postData['avatar'] = $this->user['avatar'];
             $postData['id'] = $res['id'];
+            print_r($postData);exit;
             $this->assign('info',$postData);
             return view('customer_client/info_tpl');
         }
