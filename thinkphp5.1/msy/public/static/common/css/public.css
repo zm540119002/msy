@@ -4066,6 +4066,18 @@ select[name="nodeIds"]{
 .chat_list.new_msg{
     border-color:#ff0000;
 }
+.customer_btn.twinkle{
+    -webkit-animation:twinkling 1s infinite ease-in-out
+}
+@-webkit-keyframes twinkling{    /*透明度由0到1*/
+    0%{
+        opacity:0; /*透明度为0*/
+        }
+    100%{
+        opacity:1; /*透明度为1*/
+
+    }
+}
 .others,
 .me,
 .chat_list,
