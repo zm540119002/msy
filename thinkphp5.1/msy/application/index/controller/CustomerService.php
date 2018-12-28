@@ -27,8 +27,9 @@ class CustomerService extends \common\controller\UserBase{
                 'create_time' => time(),
             ];
             $info = $modelChatMessage->edit($saveData);
+            print_r($info);exit;
             if($info['status']==0){
-                return errorMsg('失败！');
+                return errorMsg('保存失败！');
             }
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $msg = [
