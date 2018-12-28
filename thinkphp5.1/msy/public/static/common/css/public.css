@@ -4060,17 +4060,21 @@ select[name="nodeIds"]{
     color: #fff;
     text-align: center;
 }
-.customer_sidebar a .news_num{
+.customer_sidebar a span{
     position: absolute;
     top: 0.15rem;
-    right:0;
+    right:0.12rem;
     /*border: 1px solid #ff0000;*/
-    border-radius: 100%;
-    width: 50%;
-    background: #ff0000;
-    color: #fff;
-    text-align: center;
+   
     font-size:0.24rem;
+}
+.customer_sidebar a span.news_num{
+    width:50%;
+    right:-0.10rem;
+    top:-0.12rem;
+    background:#ff0000;
+    color:#fff;
+    border-radius:100%;
 }
 .author{
     margin:0 0 0 0.20rem;
@@ -4518,14 +4522,14 @@ select[name="nodeIds"]{
     right:0.2rem;
     width:0.65rem;
     height:0.65rem;
-    line-height:0;
+    /*line-height:0;*/
     border-radius:50%;
     text-align:center;
     background: #FF7BAC;
     
 }
 .customer_sidebar a{
-    position:relative;
+    /*position:relative;*/
     color:#fff;
     font-size:0.24rem;
 }
