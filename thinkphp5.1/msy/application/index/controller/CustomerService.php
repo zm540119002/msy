@@ -36,8 +36,9 @@ class CustomerService extends \common\controller\UserBase{
                     'msg' => $postData['msg'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
+                return successMsg('成功！');
             }
-            return successMsg('成功！');
+            return errorMsg('失败！');
         }
     }
     /**设置消息已读
