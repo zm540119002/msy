@@ -4049,6 +4049,11 @@ select[name="nodeIds"]{
 .avatar{
     position:relative;
 }
+.avatar .news_num{
+    position:absolute;
+    top:0;
+    right:0;
+}
 .others,
 .me,
 .chat_list,
