@@ -39,7 +39,7 @@ class CustomerService extends \common\controller\UserBase{
                 $postData['send_sign'] = 1;
             }
             $postData['who'] = 'me';
-            $postData['name'] = $this->user['name'];
+            $postData['name'] = '(我)';
             $postData['avatar'] = $this->user['avatar'];
             $postData['id'] = $res['id'];
             $this->assign('info',$postData);
