@@ -31,7 +31,7 @@ class CustomerClient extends \common\controller\UserBase{
                     $unreadCount++;
                 }
             }
-            print_r($list);exit;
+            print_r($unreadCount);exit;
             $this->assign('unreadCount',$unreadCount);
             $this->assign('list',$list);
             return view('list_tpl');
