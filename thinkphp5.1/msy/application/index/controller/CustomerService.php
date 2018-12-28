@@ -73,4 +73,30 @@ class CustomerService extends \common\controller\UserBase{
             return successMsg('成功！');
         }
     }
+    /**删除
+     */
+    public function delMessage(){
+        if(request()->isAjax()){
+            $postData = input('post.');
+            $modelChatMessage = new \common\model\ChatMessage();
+            $where = [
+                ['status','=',0],
+                ['id','in',$postData['messageIds']],
+            ];
+            $whereOr = [
+                [
+                    ['from_id','=',$this->user['id']],
+                    ['to_id','=',$postData['from_id']],
+                ],[
+                    ['from_id','=',$postData['from_id']],
+                    ['to_id','=',$this->user['id']],
+                ],
+            ];
+            $res = $modelChatMessage->where($where)->whereOr($whereOr)->setField('status',2);
+            if($res==false){
+                return errorMsg('删除失败！',$modelChatMessage->getError());
+            }
+            return successMsg('删除成功！');
+        }
+    }
 }

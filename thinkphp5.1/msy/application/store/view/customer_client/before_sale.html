@@ -61,8 +61,34 @@
                 success:function(){
                     var winH=$(document).height();
                     $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
-                    //去掉数字，表示信息已读
-                    _this.find('.news_num').text('');
+                    //设置信息已读
+                    var postData = {};
+                    postData.from_id = _this.find('ul').data('from_id');
+                    postData.messageIds = [];
+                    $.each(_this.find('li.unread'),function(){
+                        postData.messageIds.push($(this).data('id'));
+                    });
+                    var url = domain + 'index/CustomerService/setToMessageRead';
+                    $.ajax({
+                        url: url,
+                        data: postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                dialog.error(data.info);
+                            }else{
+                                _this.find('.news_num').text('');
+                            }
+                        }
+                    });
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
@@ -111,7 +137,7 @@
             $.each(_thisLi.find('li'),function(){
                 postData.messageIds.push($(this).data('id'));
             });
-            var url = domain + 'index/CustomerService/setToMessageRead';
+            var url = domain + 'index/CustomerService/delMessage';
             $.ajax({
                 url: url,
                 data: postData,

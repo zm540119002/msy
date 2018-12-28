@@ -1,0 +1,13 @@
+<li class="{$message.who} {if $message.read == 0}unread{/if}" data-id="{$message.id}">
+	<div class="avatar">
+		{empty name="info.avatar"}
+		<img src="public_img/default/no_pic_40.jpg">
+		{else /}
+		<img src="public_uploads/{$message.avatar}">
+		{/empty}
+	</div>
+	<div class="content">
+		<p class="author">{$message.name}</p>
+		<div class="msg">{$message.content}</div>
+	</div>
+</li>
