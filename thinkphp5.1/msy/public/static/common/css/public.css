@@ -4049,8 +4049,7 @@ select[name="nodeIds"]{
 .avatar{
     position:relative;
 }
-.avatar .news_num,
-.customer_sidebar .news_num{
+.avatar .news_num{
     position: absolute;
     top: -0.15rem;
     right: -0.12rem;
@@ -4060,6 +4059,18 @@ select[name="nodeIds"]{
     background: #ff0000;
     color: #fff;
     text-align: center;
+}
+.customer_sidebar .news_num{
+    position: absolute;
+    top: 0.15rem;
+    right:0;
+    /*border: 1px solid #ff0000;*/
+    border-radius: 100%;
+    width: 50%;
+    background: #ff0000;
+    color: #fff;
+    text-align: center;
+    font-size:0.24rem;
 }
 .author{
     margin:0 0 0 0.20rem;
