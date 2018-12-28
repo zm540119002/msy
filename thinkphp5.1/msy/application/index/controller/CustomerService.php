@@ -28,7 +28,7 @@ class CustomerService extends \common\controller\UserBase{
             ];
             $res = $modelChatMessage->edit($saveData);
             if($res['status']==0){
-                return errorMsg($res);
+                return errorMsg('保存失败！',$res);
             }
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $msg = [
