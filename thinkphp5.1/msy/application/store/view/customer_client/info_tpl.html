@@ -20,7 +20,7 @@
 				<ul class="clearfix chat_item" data-from_id="{$info.from_id}">
 					{notempty name='info'}
 					{volist name="info.messages" id="message"}
-					<li class="{$message.who}" data-id="{$message.id}">
+					<li class="{$message.who} unread" data-id="{$message.id}">
 						<div class="avatar">
 							{empty name="info.avatar"}
 							<img src="public_img/default/no_pic_40.jpg">

@@ -111,7 +111,7 @@
             $.each(_thisLi.find('li'),function(){
                 postData.messageIds.push($(this).data('id'));
             });
-            var url = domain + 'index/CustomerService/setToMessageRead';
+            var url = domain + 'index/CustomerService/delMessage';
             $.ajax({
                 url: url,
                 data: postData,
