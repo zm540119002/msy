@@ -4046,6 +4046,9 @@ select[name="nodeIds"]{
     margin:0 0 .5rem 0;
     border:none;
 }
+.avatar{
+    position:relative;
+}
 .others,
 .me,
 .chat_list,
