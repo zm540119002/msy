@@ -23,7 +23,7 @@ class CustomerService extends \common\controller\UserBase{
             $saveData = [
                 'from_id' => $this->user['id'],
                 'to_id' => $postData['to_user_id'],
-                'content' => $postData['msg'],
+                'content' => $postData['content'],
                 'create_time' => time(),
             ];
             $res = $modelChatMessage->edit($saveData);
@@ -42,7 +42,6 @@ class CustomerService extends \common\controller\UserBase{
             $postData['name'] = $this->user['name'];
             $postData['avatar'] = $this->user['avatar'];
             $postData['id'] = $res['id'];
-            print_r($postData);exit;
             $this->assign('info',$postData);
             return view('customer_client/info_tpl');
         }

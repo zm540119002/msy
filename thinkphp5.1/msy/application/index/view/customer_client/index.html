@@ -137,7 +137,7 @@
 				return false;
 			}
 			var to_user_id = 17;
-			var postData = {to_user_id:to_user_id,msg:_this.val()};
+			var postData = {to_user_id:to_user_id,content:_this.val()};
 			var url = domain + 'index/CustomerService/sendMessage';
 			$.ajax({
 				url: url,
