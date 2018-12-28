@@ -41,7 +41,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData['who'] = 'others';
             $postData['id'] = $res['id'];
             $this->assign('info',$postData);
-            return view('info_tpl');
+            return view('customer_client/info_tpl');
         }
     }
     /**设置消息已读
