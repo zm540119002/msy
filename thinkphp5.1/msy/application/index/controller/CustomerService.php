@@ -23,7 +23,7 @@ class CustomerService extends \common\controller\UserBase{
             $saveData = [
                 'from_id' => $this->user['id'],
                 'to_id' => $postData['to_user_id'],
-                'contentd' => $postData['msg'],
+                'content' => $postData['msg'],
                 'create_time' => time(),
             ];
             $res = $modelChatMessage->edit($saveData);
@@ -36,9 +36,12 @@ class CustomerService extends \common\controller\UserBase{
                     'msg' => $postData['msg'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
-                return successMsg('成功！');
+                $postData['send_sign'] = 1;
             }
-            return errorMsg('失败！');
+            $postData['who'] = 'others';
+            $postData['id'] = $res['id'];
+            $this->assign('info',$postData);
+            return view('info_tpl');
         }
     }
     /**设置消息已读
