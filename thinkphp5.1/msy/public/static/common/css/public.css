@@ -4053,7 +4053,7 @@ select[name="nodeIds"]{
     position: absolute;
     top: -0.15rem;
     right: -0.12rem;
-    border: 1px solid #ff0000;
+    /*border: 1px solid #ff0000;*/
     border-radius: 100%;
     width: 50%;
     background: #ff0000;
