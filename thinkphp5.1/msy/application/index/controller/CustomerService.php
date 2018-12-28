@@ -38,7 +38,7 @@ class CustomerService extends \common\controller\UserBase{
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 $postData['send_sign'] = 1;
             }
-            $postData['who'] = 'others';
+            $postData['who'] = 'me';
             $postData['name'] = $this->user['name'];
             $postData['avatar'] = $this->user['avatar'];
             $postData['id'] = $res['id'];
