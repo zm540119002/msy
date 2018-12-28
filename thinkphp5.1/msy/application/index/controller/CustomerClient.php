@@ -27,7 +27,7 @@ class CustomerClient extends \common\controller\UserBase{
                 }else{
                     $message['who'] = 'others';
                 }
-                if($message['read']==0){
+                if($message['from_read']==0){
                     $unreadCount++;
                 }
             }
