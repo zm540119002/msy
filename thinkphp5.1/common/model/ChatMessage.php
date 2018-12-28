@@ -18,6 +18,6 @@ class ChatMessage extends Base {
 		if($res===false){
 			return errorMsg('失败',$this->getError());
 		}
-		return successMsg($this->getAttr('id'));
+		return successMsg('成功！',['id'=>$this->getAttr('id')]);
 	}
 }
