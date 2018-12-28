@@ -33,7 +33,7 @@ class CustomerService extends \common\controller\UserBase{
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $msg = [
                     'type' => 'msg',
-                    'msg' => $postData['msg'],
+                    'content' => $postData['content'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 $postData['send_sign'] = 1;

@@ -80,7 +80,7 @@
                 return false;
             }
             var to_user_id = _this.parents('.chatLayer').find('ul').data('from_id');
-            var postData = {to_user_id:to_user_id,msg:_this.val()};
+            var postData = {to_user_id:to_user_id,content:_this.val()};
             var url = domain + 'index/CustomerService/sendMessage';
             $.ajax({
                 url: url,
@@ -97,10 +97,8 @@
                     $('.loading').hide();
                     if(data.status==0){
                         dialog.error(data.info);
-                    }else if(data.status==1){
-                        var chatListTpl = $('#chatListTpl');
-                        chatListTpl.find('.msg').text(_this.val());
-                        $('.chatLayer .chat_item').append(chatListTpl.html());
+                    }else{
+                        $('.chatLayer .chat_item').append(data);
                         _this.val('');
                     }
                 }
