@@ -23,13 +23,12 @@ class CustomerService extends \common\controller\UserBase{
             $saveData = [
                 'from_id' => $this->user['id'],
                 'to_id' => $postData['to_user_id'],
-                'content' => $postData['msg'],
+                'contentd' => $postData['msg'],
                 'create_time' => time(),
             ];
-            $info = $modelChatMessage->edit($saveData);
-            print_r($info);exit;
-            if($info['status']==0){
-                return errorMsg('保存失败！');
+            $res = $modelChatMessage->edit($saveData);
+            if($res['status']==0){
+                return errorMsg('保存失败！',$res);
             }
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $msg = [
