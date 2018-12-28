@@ -4044,6 +4044,7 @@ select[name="nodeIds"]{
 }
 .chatMsg-ct li{
     margin:0 0 .5rem 0;
+    border:none;
 }
 .others,
 .me,
