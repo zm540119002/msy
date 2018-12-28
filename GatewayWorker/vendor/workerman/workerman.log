@@ -31,3 +31,11 @@
 2018-12-28 09:35:34 pid:14765 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
 2018-12-28 09:43:38 pid:14866 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
 2018-12-28 09:56:15 pid:14936 Workerman[/home/www/web/GatewayWorker/start.php] start in DEBUG mode
+2018-12-28 10:52:14 pid:16120 Workerman[/home/www/web/GatewayWorker/start.php] start in DAEMON mode
+2018-12-28 10:52:21 pid:16125 Workerman[/home/www/web/GatewayWorker/start.php] stop 
+2018-12-28 10:52:21 pid:16125 Workerman[/home/www/web/GatewayWorker/start.php] not run
+2018-12-28 10:52:24 pid:16126 Workerman[/home/www/web/GatewayWorker/start.php] start in DAEMON mode
+2018-12-28 10:52:33 pid:16129 Workerman[/home/www/web/GatewayWorker/start.php] stop 
+2018-12-28 10:52:33 pid:16129 Workerman[/home/www/web/GatewayWorker/start.php] not run
+2018-12-28 10:52:43 pid:16130 Workerman[/home/www/web/GatewayWorker/start.php] start in DAEMON mode
+2018-12-28 10:53:21 pid:16153 Workerman[/home/www/web/GatewayWorker/start.php] start in DAEMON mode
