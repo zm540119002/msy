@@ -61,6 +61,8 @@
                 success:function(){
                     var winH=$(document).height();
                     $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+                    //去掉数字，表示信息已读
+                    _this.find('.news_num').text('');
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
