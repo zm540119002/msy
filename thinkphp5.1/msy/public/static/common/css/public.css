@@ -4063,6 +4063,9 @@ select[name="nodeIds"]{
 .author{
     margin:0 0 0 0.20rem;
 }
+.chat_list.new_msg{
+    border-color:#ff0000;
+}
 .others,
 .me,
 .chat_list,
