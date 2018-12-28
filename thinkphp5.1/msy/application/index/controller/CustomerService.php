@@ -39,6 +39,8 @@ class CustomerService extends \common\controller\UserBase{
                 $postData['send_sign'] = 1;
             }
             $postData['who'] = 'others';
+            $postData['name'] = $this->user['name'];
+            $postData['avatar'] = $this->user['avatar'];
             $postData['id'] = $res['id'];
             $this->assign('info',$postData);
             return view('customer_client/info_tpl');
