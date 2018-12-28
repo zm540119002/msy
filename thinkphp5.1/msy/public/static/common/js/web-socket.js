@@ -34,7 +34,7 @@ ws.onmessage = function(e){
             });
             break;
         case 'msg':
-            on_message_call_back();
+            on_message_call_back(data);
             break;
         default :
             console.log('default');

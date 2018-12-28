@@ -36,7 +36,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-	function on_message_call_back() {
+	function on_message_call_back(data) {
 		var chatListOtherTpl = $('#chatListOtherTpl');
 		chatListOtherTpl.find('.msg').text(data.content);
 		$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
