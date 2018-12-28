@@ -4043,7 +4043,7 @@ select[name="nodeIds"]{
     display:none;
 }
 .chatMsg-ct li{
-    margin:0 0 .5rem 0;
+    margin:0 0 .10rem 0;
     border:none;
 }
 .avatar{
