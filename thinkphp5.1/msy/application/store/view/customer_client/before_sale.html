@@ -3,16 +3,6 @@
 {/block}
 {block name="content"}
 <!--对话框列表模板-->
-<section id="chatListTpl" style="display:none;">
-    <li class="me">
-        <div class="avatar">
-            <img src="public_img/default/no_pic_40.jpg">
-        </div>
-        <div class="content">
-            <div class="msg"></div>
-        </div>
-    </li>
-</section>
 <section id="chatListOtherTpl" style="display:none;">
     <li class="others">
         <div class="avatar">
@@ -46,6 +36,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" src="public_js/web-socket.js"></script>
 <script type="text/javascript">
     $(function () {
         //页面初始化
