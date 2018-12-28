@@ -16,8 +16,8 @@ class ChatMessage extends Base {
 	public function edit($data){
 		$res = $this->isUpdate(false)->save($data);
 		if($res===false){
-			return errorMsg('失败',$this->getError());
+			return errorMsg('失败',[$this->getError()]);
 		}
-		return successMsg('成功！');
+		return successMsg('成功！',['id'=>$this->getAttr('id')]);
 	}
 }

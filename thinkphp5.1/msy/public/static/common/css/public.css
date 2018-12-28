@@ -4053,18 +4053,46 @@ select[name="nodeIds"]{
     position: absolute;
     top: -0.15rem;
     right: -0.12rem;
-    border: 1px solid #ff0000;
+    /*border: 1px solid #ff0000;*/
     border-radius: 100%;
     width: 50%;
     background: #ff0000;
     color: #fff;
     text-align: center;
 }
+.customer_sidebar a span{
+    position: absolute;
+    top: 0.15rem;
+    right:0.12rem;
+    /*border: 1px solid #ff0000;*/
+   
+    font-size:0.24rem;
+}
+.customer_sidebar a span.news_num{
+    width:50%;
+    right:-0.10rem;
+    top:-0.12rem;
+    background:#ff0000;
+    color:#fff;
+    border-radius:100%;
+}
 .author{
     margin:0 0 0 0.20rem;
 }
 .chat_list.new_msg{
     border-color:#ff0000;
+}
+.customer_btn.twinkle{
+    -webkit-animation:twinkling 1s infinite ease-in-out
+}
+@-webkit-keyframes twinkling{    /*透明度由0到1*/
+    0%{
+        opacity:0; /*透明度为0*/
+        }
+    100%{
+        opacity:1; /*透明度为1*/
+
+    }
 }
 .others,
 .me,
@@ -4494,13 +4522,14 @@ select[name="nodeIds"]{
     right:0.2rem;
     width:0.65rem;
     height:0.65rem;
-    line-height:0;
+    /*line-height:0;*/
     border-radius:50%;
     text-align:center;
     background: #FF7BAC;
     
 }
 .customer_sidebar a{
+    /*position:relative;*/
     color:#fff;
     font-size:0.24rem;
 }

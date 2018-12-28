@@ -3,16 +3,6 @@
 {/block}
 {block name="content"}
 <!--对话框列表模板-->
-<section id="chatListTpl" style="display:none;">
-    <li class="me">
-        <div class="avatar">
-            <img src="public_img/default/no_pic_40.jpg">
-        </div>
-        <div class="content">
-            <div class="msg"></div>
-        </div>
-    </li>
-</section>
 <section id="chatListOtherTpl" style="display:none;">
     <li class="others">
         <div class="avatar">
@@ -47,6 +37,11 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
+    function on_message_call_back(data) {
+    }
+</script>
+<script type="text/javascript" src="public_js/web-socket.js"></script>
+<script type="text/javascript">
     $(function () {
         //页面初始化
         var config = {
@@ -66,6 +61,36 @@
                 success:function(){
                     var winH=$(document).height();
                     $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
+                    //设置信息已读
+                    var postData = {};
+                    postData.from_id = _this.find('ul').data('from_id');
+                    postData.messageIds = [];
+                    $.each(_this.find('li.unread'),function(){
+                        postData.messageIds.push($(this).data('id'));
+                    });
+                    if(postData.messageIds.length){
+                        var url = domain + 'index/CustomerService/setToMessageRead';
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(xhr){
+                                $('.loading').show();
+                            },
+                            error:function(xhr){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(data.status==0){
+                                    dialog.error(data.info);
+                                }else{
+                                    _this.find('.news_num').text('');
+                                }
+                            }
+                        });
+                    }
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
@@ -80,7 +105,7 @@
                 return false;
             }
             var to_user_id = _this.parents('.chatLayer').find('ul').data('from_id');
-            var postData = {to_user_id:to_user_id,msg:_this.val()};
+            var postData = {to_user_id:to_user_id,content:_this.val()};
             var url = domain + 'index/CustomerService/sendMessage';
             $.ajax({
                 url: url,
@@ -97,10 +122,8 @@
                     $('.loading').hide();
                     if(data.status==0){
                         dialog.error(data.info);
-                    }else if(data.status==1){
-                        var chatListTpl = $('#chatListTpl');
-                        chatListTpl.find('.msg').text(_this.val());
-                        $('.chatLayer .chat_item').append(chatListTpl.html());
+                    }else{
+                        $('.chatLayer .chat_item').append(data);
                         _this.val('');
                     }
                 }
@@ -116,7 +139,7 @@
             $.each(_thisLi.find('li'),function(){
                 postData.messageIds.push($(this).data('id'));
             });
-            var url = domain + 'index/CustomerService/setToMessageRead';
+            var url = domain + 'index/CustomerService/delMessage';
             $.ajax({
                 url: url,
                 data: postData,

@@ -23,21 +23,27 @@ class CustomerService extends \common\controller\UserBase{
             $saveData = [
                 'from_id' => $this->user['id'],
                 'to_id' => $postData['to_user_id'],
-                'content' => $postData['msg'],
+                'content' => $postData['content'],
                 'create_time' => time(),
             ];
-            $info = $modelChatMessage->edit($saveData);
-            if($info['status']==0){
-                return errorMsg('失败！');
-            }
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $msg = [
                     'type' => 'msg',
-                    'msg' => $postData['msg'],
+                    'content' => $postData['content'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
+                $saveData['send_sign'] = 1;
             }
-            return successMsg('成功！');
+            $res = $modelChatMessage->edit($saveData);
+            if($res['status']==0){
+                return errorMsg('保存失败！',$res);
+            }
+            $postData['who'] = 'me';
+            $postData['name'] = $this->user['name'];
+            $postData['avatar'] = $this->user['avatar'];
+            $postData['id'] = $res['id'];
+            $this->assign('info',$postData);
+            return view('customer_client/info_tpl');
         }
     }
     /**设置消息已读
@@ -65,6 +71,32 @@ class CustomerService extends \common\controller\UserBase{
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
             }
             return successMsg('成功！');
+        }
+    }
+    /**删除
+     */
+    public function delMessage(){
+        if(request()->isAjax()){
+            $postData = input('post.');
+            $modelChatMessage = new \common\model\ChatMessage();
+            $where = [
+                ['status','=',0],
+                ['id','in',$postData['messageIds']],
+            ];
+            $whereOr = [
+                [
+                    ['from_id','=',$this->user['id']],
+                    ['to_id','=',$postData['from_id']],
+                ],[
+                    ['from_id','=',$postData['from_id']],
+                    ['to_id','=',$this->user['id']],
+                ],
+            ];
+            $res = $modelChatMessage->where($where)->whereOr($whereOr)->setField('status',2);
+            if($res==false){
+                return errorMsg('删除失败！',$modelChatMessage->getError());
+            }
+            return successMsg('删除成功！');
         }
     }
 }

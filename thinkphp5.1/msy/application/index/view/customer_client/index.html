@@ -4,20 +4,6 @@
 {/block}
 {block name="content"}
 <!--对话框列表模板-->
-<section id="chatListTpl" style="display:none;">
-	<li class="me">
-		<div class="avatar">
-			{empty name="user.avatar"}
-			<img src="public_img/default/no_pic_40.jpg">
-			{else /}
-			<img src="public_uploads/{$user.avatar}">
-			{/empty}
-		</div>
-		<div class="content">
-			<div class="msg"></div>
-		</div>
-	</li>
-</section><!--对话框列表模板-->
 <section id="chatListOtherTpl" style="display:none;">
 	<li class="others">
 		<div class="avatar">
@@ -50,57 +36,15 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-	// 服务端主动推送消息时会触发这里的onmessage
-	ws = new WebSocket("ws://msy.meishangyun.com:8282");
-	ws.onopen = function(e){
-		console.log('open');
-	};
-	ws.onmessage = function(e){
-		var data =  JSON.parse(e.data);
-		var type = data.type || '';
-		switch(type){
-			case 'init':
-				// Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
-				// 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
-				var postData = {client_id: data.client_id};
-				var url = domain + 'index/CustomerService/bindUid';
-				$.ajax({
-					url: url,
-					data: postData,
-					type: 'post',
-					beforeSend: function(xhr){
-						$('.loading').show();
-					},
-					error:function(xhr){
-						$('.loading').hide();
-						dialog.error('AJAX错误');
-					},
-					success: function(msg){
-						$('.loading').hide();
-						if(msg.status==0){
-							dialog.error(msg.info);
-						}else if(msg.code==1 && msg.data=='no_login'){
-							loginDialog();
-						}
-					}
-				});
-				break;
-			case 'msg':
-				var chatListOtherTpl = $('#chatListOtherTpl');
-				chatListOtherTpl.find('.msg').text(data.msg);
-				$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
-				$('.chatLayer .chat_item').append(chatListOtherTpl.html());
-				break;
-			default :
-				console.log('default');
-		}
-	};
-	ws.onerror = function (e) {
-		console.log('error');
-	};
-	ws.onclose = function(e){
-		console.log('close');
-	};
+	function on_message_call_back(data) {
+		var chatListOtherTpl = $('#chatListOtherTpl');
+		chatListOtherTpl.find('.msg').text(data.content);
+		$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
+		$('.chatLayer .chat_item').append(chatListOtherTpl.html());
+	}
+</script>
+<script type="text/javascript" src="public_js/web-socket.js"></script>
+<script type="text/javascript">
 	$(function () {
 		//页面初始化
 		var postData = {
@@ -121,7 +65,6 @@
 				btn:['','关闭'],
 				success:function(){
 					var winH=$(document).height();
-					$('.chatLayer .chat_item').css('height',winH+'px');
 					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
 				},
 				no:function(){
@@ -138,7 +81,7 @@
 				return false;
 			}
 			var to_user_id = 17;
-			var postData = {to_user_id:to_user_id,msg:_this.val()};
+			var postData = {to_user_id:to_user_id,content:_this.val()};
 			var url = domain + 'index/CustomerService/sendMessage';
 			$.ajax({
 				url: url,
@@ -155,10 +98,8 @@
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
-					}else if(data.status==1){
-						var chatListTpl = $('#chatListTpl');
-						chatListTpl.find('.msg').text(_this.val());
-						$('.chatLayer .chat_item').append(chatListTpl.html());
+					}else{
+						$('.chatLayer .chat_item').append(data);
 						_this.val('');
 					}
 				}
