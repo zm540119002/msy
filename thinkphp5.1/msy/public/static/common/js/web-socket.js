@@ -34,10 +34,7 @@ ws.onmessage = function(e){
             });
             break;
         case 'msg':
-            var chatListOtherTpl = $('#chatListOtherTpl');
-            chatListOtherTpl.find('.msg').text(data.content);
-            $('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
-            $('.chatLayer .chat_item').append(chatListOtherTpl.html());
+            on_message_call_back();
             break;
         default :
             console.log('default');
