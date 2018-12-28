@@ -65,7 +65,6 @@ class CustomerClient extends \common\controller\UserBase{
                     }
                 }
             }
-            print_r($fromUserList);exit;
             $this->assign('list',$fromUserList);
             return view('list_tpl');
         }else{
