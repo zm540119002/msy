@@ -4053,12 +4053,24 @@ select[name="nodeIds"]{
     position: absolute;
     top: -0.15rem;
     right: -0.12rem;
-    border: 1px solid #ff0000;
+    /*border: 1px solid #ff0000;*/
     border-radius: 100%;
     width: 50%;
     background: #ff0000;
     color: #fff;
     text-align: center;
+}
+.customer_sidebar a .news_num{
+    position: absolute;
+    top: 0.15rem;
+    right:0;
+    /*border: 1px solid #ff0000;*/
+    border-radius: 100%;
+    width: 50%;
+    background: #ff0000;
+    color: #fff;
+    text-align: center;
+    font-size:0.24rem;
 }
 .author{
     margin:0 0 0 0.20rem;
@@ -4513,6 +4525,7 @@ select[name="nodeIds"]{
     
 }
 .customer_sidebar a{
+    position:relative;
     color:#fff;
     font-size:0.24rem;
 }
