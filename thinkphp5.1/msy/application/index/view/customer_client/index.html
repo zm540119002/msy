@@ -155,10 +155,8 @@
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
-					}else if(data.status==1){
-						var chatListTpl = $('#chatListTpl');
-						chatListTpl.find('.msg').text(_this.val());
-						$('.chatLayer .chat_item').append(chatListTpl.html());
+					}else{
+						$('.chatLayer .chat_item').append(data);
 						_this.val('');
 					}
 				}
