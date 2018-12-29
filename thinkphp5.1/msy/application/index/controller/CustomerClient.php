@@ -20,18 +20,13 @@ class CustomerClient extends \common\controller\UserBase{
                 ],'limit' => 20,
             ];
             $list = $modelChatMessage->getList($config);
-            $unreadCount = 0;
             foreach ($list as &$message){
                 if($this->user['id']==$message['from_id']){
                     $message['who'] = 'me';
                 }else{
                     $message['who'] = 'others';
                 }
-                if($message['from_read']==0){
-                    $unreadCount++;
-                }
             }
-            $this->assign('unreadCount',$unreadCount);
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
