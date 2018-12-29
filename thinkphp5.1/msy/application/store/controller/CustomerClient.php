@@ -53,6 +53,7 @@ class CustomerClient extends \common\controller\UserBase{
                             'avatar' => $message['avatar'],
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
+                            'to_read' => $message['to_read'],
                             'who' => 'others',
                         ] ;
                     }
@@ -66,12 +67,12 @@ class CustomerClient extends \common\controller\UserBase{
                             'avatar' => $this->user['avatar'],
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
+                            'to_read' => $message['to_read'],
                             'who' => 'me',
                         ] ;
                     }
                 }
             }
-            print_r($fromUserList);exit;
             $this->assign('list',$fromUserList);
             return view('list_tpl');
         }else{
