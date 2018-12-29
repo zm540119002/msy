@@ -67,7 +67,6 @@ class CustomerService extends \common\controller\UserBase{
                 ],
             ];
             $res = $modelChatMessage->where($where)->whereOr($whereOr)->setField('to_read',1);
-            print_r($modelChatMessage->getLastSql());exit;
             if($res==false){
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
             }
