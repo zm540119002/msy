@@ -40,6 +40,7 @@ class CustomerClient extends \common\controller\UserBase{
                     }
                 }
             }
+            print_r($fromUserList);exit;
             foreach ($fromUserList as &$fromUser){
                 $unreadNum = 0;
                 foreach ($list as $message){
