@@ -68,7 +68,6 @@
                     $.each(_this.find('li.unread'),function(){
                         postData.messageIds.push($(this).data('id'));
                     });
-                    console.log(postData);return;
                     if(!postData.messageIds.length){
                         return false;
                     }
