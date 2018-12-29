@@ -40,14 +40,13 @@ class CustomerClient extends \common\controller\UserBase{
                     }
                 }
             }
-            print_r($fromUserList);exit;
             foreach ($fromUserList as &$fromUser){
-                $unreadNum = 0;
+                $fromUser['unreadNum'] = 0;
                 foreach ($list as $message){
-                    if($message['to_read']==0){
-                        $unreadNum ++;
-                    }
                     if($fromUser['from_id']==$message['from_id']){
+                        if($message['to_read']==0){
+                            $fromUser['unreadNum'] ++;
+                        }
                         $fromUser['messages'][] = [
                             'id' => $message['id'],
                             'name' => $message['name'],
@@ -58,6 +57,9 @@ class CustomerClient extends \common\controller\UserBase{
                         ] ;
                     }
                     if($fromUser['from_id']==$message['to_id']){
+                        if($message['to_read']==0){
+                            $fromUser['unreadNum'] ++;
+                        }
                         $fromUser['messages'][] = [
                             'id' => $message['id'],
                             'name' => $this->user['name'],
@@ -68,7 +70,6 @@ class CustomerClient extends \common\controller\UserBase{
                         ] ;
                     }
                 }
-                $fromUser['unreadNum'] = $unreadNum;
             }
             $this->assign('list',$fromUserList);
             return view('list_tpl');
