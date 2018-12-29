@@ -7,7 +7,7 @@
 		{else /}
 		<img src="public_uploads/{$info.avatar}">
 		{/empty}
-		<span class="news_num">{$info.unreadNum}</span>
+		<span class="news_num">{$info.unreadNum|''}</span>
 	</div>
 	<div class="content">
 		<p class="author">{$info.name}</p>
