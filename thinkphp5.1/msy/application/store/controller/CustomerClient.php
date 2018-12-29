@@ -9,7 +9,7 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
-                    'cm.id','cm.from_id','cm.to_id','cm.content','cm.create_time',
+                    'cm.id','cm.from_id','cm.to_id','cm.to_read','cm.content','cm.create_time',
                     'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
@@ -17,13 +17,12 @@ class CustomerClient extends \common\controller\UserBase{
                     ['u.status','=',0],
                     ['cm.status','=',0],
                     ['cm.type','=',1],
-                    ['cm.to_read','=',0],
                     [
                         'cm.from_id|cm.to_id', ['=',$this->user['id']],
                     ],
                 ],'order' => [
                     'cm.create_time'=>'asc',
-                ],
+                ],'limit' => 20,
             ];
             $list = $modelChatMessage->getList($config);
             $fromUserIds = array_unique(array_column($list,'from_id'));
@@ -42,24 +41,33 @@ class CustomerClient extends \common\controller\UserBase{
                 }
             }
             foreach ($fromUserList as &$fromUser){
+                $fromUser['unreadNum'] = 0;
                 foreach ($list as $message){
                     if($fromUser['from_id']==$message['from_id']){
+                        if($message['to_read']==0){
+                            $fromUser['unreadNum'] ++;
+                        }
                         $fromUser['messages'][] = [
                             'id' => $message['id'],
                             'name' => $message['name'],
                             'avatar' => $message['avatar'],
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
+                            'to_read' => $message['to_read'],
                             'who' => 'others',
                         ] ;
                     }
                     if($fromUser['from_id']==$message['to_id']){
+                        if($message['to_read']==0){
+                            $fromUser['unreadNum'] ++;
+                        }
                         $fromUser['messages'][] = [
                             'id' => $message['id'],
                             'name' => $this->user['name'],
                             'avatar' => $this->user['avatar'],
                             'content' => $message['content'],
                             'create_time' => $message['create_time'],
+                            'to_read' => $message['to_read'],
                             'who' => 'me',
                         ] ;
                     }
