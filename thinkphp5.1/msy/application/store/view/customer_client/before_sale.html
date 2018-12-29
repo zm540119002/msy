@@ -68,29 +68,31 @@
                     $.each(_this.find('li.unread'),function(){
                         postData.messageIds.push($(this).data('id'));
                     });
-                    if(postData.messageIds.length){
-                        var url = domain + 'index/CustomerService/setToMessageRead';
-                        $.ajax({
-                            url: url,
-                            data: postData,
-                            type: 'post',
-                            beforeSend: function(xhr){
-                                $('.loading').show();
-                            },
-                            error:function(xhr){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                $('.loading').hide();
-                                if(data.status==0){
-                                    dialog.error(data.info);
-                                }else{
-                                    _this.find('.news_num').text('');
-                                }
-                            }
-                        });
+                    console.log(postData);return;
+                    if(!postData.messageIds.length){
+                        return false;
                     }
+                    var url = domain + 'index/CustomerService/setToMessageRead';
+                    $.ajax({
+                        url: url,
+                        data: postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                dialog.error(data.info);
+                            }else{
+                                _this.find('.news_num').text('');
+                            }
+                        }
+                    });
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
