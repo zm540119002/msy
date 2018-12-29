@@ -9,7 +9,7 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
-                    'cm.id','cm.from_id','cm.to_id','cm.content','cm.create_time',
+                    'cm.id','cm.from_id','cm.to_id','cm.to_read','cm.content','cm.create_time',
                     'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
@@ -41,7 +41,11 @@ class CustomerClient extends \common\controller\UserBase{
                 }
             }
             foreach ($fromUserList as &$fromUser){
+                $unreadNum = 0;
                 foreach ($list as $message){
+                    if($message['to_read']==0){
+                        $unreadNum ++;
+                    }
                     if($fromUser['from_id']==$message['from_id']){
                         $fromUser['messages'][] = [
                             'id' => $message['id'],
@@ -63,6 +67,7 @@ class CustomerClient extends \common\controller\UserBase{
                         ] ;
                     }
                 }
+                $fromUser['unreadNum'] = $unreadNum;
             }
             $this->assign('list',$fromUserList);
             return view('list_tpl');
