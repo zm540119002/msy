@@ -58,9 +58,6 @@ class CustomerClient extends \common\controller\UserBase{
                         ] ;
                     }
                     if($fromUser['from_id']==$message['to_id']){
-                        if($message['to_read']==0){
-                            $fromUser['unreadNum'] ++;
-                        }
                         $fromUser['messages'][] = [
                             'id' => $message['id'],
                             'name' => $this->user['name'],

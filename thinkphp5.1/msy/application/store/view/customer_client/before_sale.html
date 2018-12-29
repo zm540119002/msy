@@ -65,7 +65,7 @@
                     var postData = {};
                     postData.from_id = _this.find('ul').data('from_id');
                     postData.messageIds = [];
-                    $.each(_this.find('li.unread'),function(){
+                    $.each(_this.find('li.others.unread'),function(){
                         postData.messageIds.push($(this).data('id'));
                     });
                     if(!postData.messageIds.length){
