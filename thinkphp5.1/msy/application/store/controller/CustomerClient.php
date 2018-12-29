@@ -17,13 +17,12 @@ class CustomerClient extends \common\controller\UserBase{
                     ['u.status','=',0],
                     ['cm.status','=',0],
                     ['cm.type','=',1],
-                    ['cm.to_read','=',0],
                     [
                         'cm.from_id|cm.to_id', ['=',$this->user['id']],
                     ],
                 ],'order' => [
                     'cm.create_time'=>'asc',
-                ],
+                ],'limit' => 20,
             ];
             $list = $modelChatMessage->getList($config);
             $fromUserIds = array_unique(array_column($list,'from_id'));
