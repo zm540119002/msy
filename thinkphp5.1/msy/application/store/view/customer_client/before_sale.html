@@ -88,12 +88,7 @@
                             if(data.status==0){
                                 dialog.error(data.info);
                             }else{
-                                //成功
-                                console.log(_this.find('li.others.unread'));
                                 _this.find('.news_num').text('');
-//                               $.each($('.chatLayer li.others.unread'),function(){
-//                                   $(this).attr('class','others read');
-//                               });
                                 $('.chatLayer li.others.unread').removeClass('unread').addClass('read');
                             }
                         }
