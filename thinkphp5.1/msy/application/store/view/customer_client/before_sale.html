@@ -90,6 +90,9 @@
                             }else{
                                 //成功
                                 _this.find('.news_num').text('');
+                                _this.find('li.others.unread').removeClass(function() {
+                                    console.log($(this).attr('class'));
+                                });
                                 _this.find('li.others.unread').removeClass('unread').addClass('read');
                             }
                         }
