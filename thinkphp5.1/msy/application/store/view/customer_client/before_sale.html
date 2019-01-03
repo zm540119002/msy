@@ -41,6 +41,8 @@
         $.each($('.chatLayerContainer').find('ul'),function(){
             var _this = $(this);
             if(_this.data('from_id')==data.from_id){
+                var num = _this.parents('li').find('span.news_num').text();
+                _this.parents('li').find('span.news_num').text(++num);
                 var chatListOtherTpl = $('#chatListOtherTpl');
                 chatListOtherTpl.find('.msg').text(data.content);
                 _this.append(chatListOtherTpl.html());
