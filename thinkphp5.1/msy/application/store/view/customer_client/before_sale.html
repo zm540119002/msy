@@ -94,7 +94,7 @@
                                     $(this).removeClass('unread').addClass('read');
                                     console.log($(this).attr('class'));
                                 });
-                                _this.find('li.others.unread').removeClass('unread').addClass('read');
+                                _this.find('li.others.unread').attr('class','others read');
                             }
                         }
                     });
