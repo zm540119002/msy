@@ -22,7 +22,7 @@ class CustomerClient extends \common\controller\UserBase{
                     ],
                 ],'order' => [
                     'cm.create_time'=>'asc',
-                ],'limit' => 20,
+                ],'limit' => 200,
             ];
             $list = $modelChatMessage->getList($config);
             $fromUserIds = array_unique(array_column($list,'from_id'));
