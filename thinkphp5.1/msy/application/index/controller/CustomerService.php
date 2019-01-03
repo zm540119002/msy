@@ -26,6 +26,10 @@ class CustomerService extends \common\controller\UserBase{
                 'content' => $postData['content'],
                 'create_time' => time(),
             ];
+            $res = $modelChatMessage->edit($saveData);
+            if($res['status']==0){
+                return errorMsg('保存失败！',$res);
+            }
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $msg = [
                     'type' => 'msg',
@@ -33,13 +37,10 @@ class CustomerService extends \common\controller\UserBase{
                     'from_id' => $this->user['id'],
                     'from_name' => $this->user['name'],
                     'avatar' => $this->user['avatar'],
+                    'id' => $res['id'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
                 $saveData['send_sign'] = 1;
-            }
-            $res = $modelChatMessage->edit($saveData);
-            if($res['status']==0){
-                return errorMsg('保存失败！',$res);
             }
             $postData['who'] = 'me';
             $postData['name'] = $this->user['name'];

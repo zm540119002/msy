@@ -40,13 +40,18 @@
     function on_message_call_back(data) {
         $.each($('.chatLayerContainer').find('ul'),function(){
             var _this = $(this);
+            var _li = $('#chatListOtherTpl').html();
             if(_this.data('from_id')==data.from_id){
-                var chatListOtherTpl = $('#chatListOtherTpl');
-                chatListOtherTpl.find('.msg').text(data.content);
-                chatListOtherTpl.find('.author').text(data.from_name);
-                chatListOtherTpl.find('img').attr('src',data.avatar);
-                _this.append(chatListOtherTpl.html());
+                _li.find('.msg').text(data.content);
+                _li.find('.author').text(data.from_name);
+                _li.find('.author').text(data.from_name);
+                _li.attr('data_id',data.id);
+                if(data.avatar){
+                    _li.find('img').attr('src',data.avatar);
+                }
+                _this.append(_li);
                 if($('.chatLayer ').length){
+                    console.log('dialog');
                     $('.chatLayer .chat_item').append(chatListOtherTpl.html());
                 }else{
                     var num = _this.parents('li').find('span.news_num').text();
