@@ -89,11 +89,12 @@
                                 dialog.error(data.info);
                             }else{
                                 //成功
+                                console.log(_this);
                                 _this.find('.news_num').text('');
-//                                $.each(_this.find('li.others.unread'),function(){
-//                                    $(this).attr('class','others read');
-//                                });
-//                                _this.find('li.others.unread').removeClass('unread').addClass('read');
+                               $.each(_this.find('li.others.unread'),function(){
+                                   $(this).attr('class','others read');
+                               });
+                               _this.find('li.others.unread').removeClass('unread').addClass('read');
                             }
                         }
                     });
