@@ -93,11 +93,7 @@
 //                                $.each(_this.find('li.others.unread'),function(){
 //                                    $(this).attr('class','others read');
 //                                });
-                                _this.find('li.others.unread').removeClass(function() {
-                                    console.log($(this).attr('class'));
-                                    $(this).attr('class','others read');
-                                });
-//                                _this.find('li.others.unread').removeClass('unread').addClass('read');
+                                _this.find('li.others.unread').removeClass('unread').addClass('read');
                             }
                         }
                     });
