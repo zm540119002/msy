@@ -38,7 +38,15 @@
 {block name="script"}
 <script type="text/javascript">
     function on_message_call_back(data) {
-        console.log(data);
+        $.each($('.chatLayerContainer').find('ul'),function(){
+            var _this = $(this);
+            if(_this.data('from_id')==data.from_id){
+                var chatListOtherTpl = $('#chatListOtherTpl');
+                chatListOtherTpl.find('.msg').text(data.content);
+                _this.append(chatListOtherTpl.html());
+                $('.chatLayer .chat_item').append(chatListOtherTpl.html());
+            }
+        });
     }
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
