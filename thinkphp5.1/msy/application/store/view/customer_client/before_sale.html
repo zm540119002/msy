@@ -51,12 +51,12 @@
                 }
                 if($('.chatLayer ').length){
                     console.log('dialog');
-                    chatListOtherTpl.find('li').addClass('read');
+                    chatListOtherTpl.find('li').attr('class','others read');
                     $('.chatLayer .chat_item').append(chatListOtherTpl.html());
                 }else{
                     var num = _this.parents('li').find('span.news_num').text();
                     _this.parents('li').find('span.news_num').text(++num);
-                    chatListOtherTpl.find('li').addClass('unread');
+                    chatListOtherTpl.find('li').attr('class','others unread');
                 }
                 _this.append(chatListOtherTpl.html());
             }
