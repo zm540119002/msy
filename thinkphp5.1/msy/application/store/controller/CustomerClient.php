@@ -22,7 +22,7 @@ class CustomerClient extends \common\controller\UserBase{
                     ],
                 ],'order' => [
                     'cm.create_time'=>'asc',
-                ],'limit' => 20,
+                ],'limit' => 200,
             ];
             $list = $modelChatMessage->getList($config);
             $fromUserIds = array_unique(array_column($list,'from_id'));
@@ -58,9 +58,6 @@ class CustomerClient extends \common\controller\UserBase{
                         ] ;
                     }
                     if($fromUser['from_id']==$message['to_id']){
-                        if($message['to_read']==0){
-                            $fromUser['unreadNum'] ++;
-                        }
                         $fromUser['messages'][] = [
                             'id' => $message['id'],
                             'name' => $this->user['name'],
