@@ -79,9 +79,9 @@
                     setToMessageRead(_this);
                 },
                 no:function(){
+                    chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
                     //设置信息已读
                     setToMessageRead(_this);
-                    chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
                 }
             });
         });
