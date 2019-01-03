@@ -67,7 +67,6 @@
                     postData.messageIds = [];
                     $.each(_this.find('li.others.unread'),function(){
                         postData.messageIds.push($(this).data('id'));
-                        $(this).removeClass('unread').addClass('read');
                     });
                     if(!postData.messageIds.length){
                         return false;
