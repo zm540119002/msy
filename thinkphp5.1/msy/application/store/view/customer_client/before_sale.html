@@ -40,16 +40,16 @@
     function on_message_call_back(data) {
         $.each($('.chatLayerContainer').find('ul'),function(){
             var _this = $(this);
-            var _li = $('#chatListOtherTpl').html();
             if(_this.data('from_id')==data.from_id){
-                _li.find('.msg').text(data.content);
-                _li.find('.author').text(data.from_name);
-                _li.find('.author').text(data.from_name);
-                _li.attr('data_id',data.id);
+                var chatListOtherTpl = $('#chatListOtherTpl');
+                console.log(chatListOtherTpl);
+                chatListOtherTpl.find('.msg').text(data.content);
+                chatListOtherTpl.find('.author').text(data.from_name);
+                chatListOtherTpl.find('.author').text(data.from_name);
                 if(data.avatar){
-                    _li.find('img').attr('src',data.avatar);
+                    chatListOtherTpl.find('img').attr('src',data.avatar);
                 }
-                _this.append(_li);
+                _this.append(chatListOtherTpl.html());
                 if($('.chatLayer ').length){
                     console.log('dialog');
                     $('.chatLayer .chat_item').append(chatListOtherTpl.html());
