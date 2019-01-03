@@ -43,6 +43,8 @@
             if(_this.data('from_id')==data.from_id){
                 var chatListOtherTpl = $('#chatListOtherTpl');
                 chatListOtherTpl.find('.msg').text(data.content);
+                chatListOtherTpl.find('.author').text(data.from_name);
+                chatListOtherTpl.find('img').attr('src',data.avatar);
                 _this.append(chatListOtherTpl.html());
                 if($('.chatLayer ').length){
                     $('.chatLayer .chat_item').append(chatListOtherTpl.html());
