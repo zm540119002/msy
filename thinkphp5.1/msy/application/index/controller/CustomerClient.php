@@ -16,7 +16,7 @@ class CustomerClient extends \common\controller\UserBase{
                     'and (cm.from_id = ' .$this->user['id'] . ' and cm.to_id = 17) ' .
                     'or ( cm.from_id = 17' . ' and cm.to_id = ' .$this->user['id'] . ')'
                 ,'order' => [
-                    'cm.create_time'=>'desc',
+                    'cm.create_time'=>'asc',
                 ],'limit' => config('custom.chat_page_size'),
             ];
             $list = $modelChatMessage->getList($config);
