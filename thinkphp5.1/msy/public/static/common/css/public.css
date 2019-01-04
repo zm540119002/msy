@@ -4088,7 +4088,8 @@ select[name="nodeIds"]{
     border-radius:5px;
 }
 .chat_item .me .content{
-    margin:0 0.20rem 0 0;    
+    margin:0 0.20rem 0 0; 
+    background:#22AC38;   
 }
 .chat_list.new_msg{
     border-color:#ff0000;
