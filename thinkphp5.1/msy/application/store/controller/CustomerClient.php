@@ -20,7 +20,7 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.to_id','=',$this->user['id']],
                 ],'group' => 'cm.from_id'
                 ,'order' => [
-                    'cm.create_time'=>'asc',
+                    'cm.create_time'=>'desc',
                 ],
             ];
             $fromUserList = $modelChatMessage->getList($config);
