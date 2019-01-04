@@ -101,6 +101,7 @@
             $.each(obj.find('li.others.unread'),function(){
                 postData.messageIds.push($(this).data('id'));
             });
+            console.log(postData);
             if(!postData.messageIds.length){
                 return false;
             }
