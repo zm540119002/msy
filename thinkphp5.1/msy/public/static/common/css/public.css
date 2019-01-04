@@ -4077,8 +4077,9 @@ select[name="nodeIds"]{
     color:#fff;
     border-radius:100%;
 }
-.author{
+.chat_item .content{
     margin:0 0 0 0.20rem;
+    background:#fff;
 }
 .chat_list.new_msg{
     border-color:#ff0000;
