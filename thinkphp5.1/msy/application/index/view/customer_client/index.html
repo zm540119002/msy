@@ -100,6 +100,7 @@
 						dialog.error(data.info);
 					}else{
 						$('.chatLayer .chat_item').append(data);
+						$('.chatLayer .chat_item').scrollTop(100);
 						_this.val('');
 					}
 				}
