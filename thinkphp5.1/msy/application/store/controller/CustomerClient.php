@@ -40,7 +40,7 @@ class CustomerClient extends \common\controller\UserBase{
             }
             foreach ($fromUserList as &$fromUser){
                 $fromUser['unreadNum'] = 0;
-                foreach ($fromUser['messages'] as $message){
+                foreach ($fromUser['messages'] as &$message){
                     if($message['to_read']==0){
                         $fromUser['unreadNum'] ++;
                     }
