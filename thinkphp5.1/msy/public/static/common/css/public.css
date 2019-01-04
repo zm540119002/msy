@@ -4086,6 +4086,7 @@ select[name="nodeIds"]{
     margin:0 0 0 0.20rem;
     background:#fff;
     border-radius:5px;
+    color:#333;
 }
 .chat_item .me .content{
     margin:0 0.20rem 0 0; 
