@@ -39,7 +39,7 @@ class CustomerClient extends \common\controller\UserBase{
                         'cm.create_time'=>'asc',
                     ],'limit' => 10,
                 ];
-                $fromUser['messages'][] = $modelChatMessage->getList($config);
+                $fromUser['messages'] = $modelChatMessage->getList($config);
             }
             print_r($fromUserList);exit;
             $config = [
