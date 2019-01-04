@@ -9,6 +9,24 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
+                    'cm.from_id','u.name','u.avatar',
+                ],'join' => [
+                    ['common.user u','u.id = cm.from_id','left'],
+                ],'where' => [
+                    ['u.status','=',0],
+                    ['cm.status','=',0],
+                    ['cm.type','=',1],
+                    ['cm.to_id','=',$this->user['id']],
+                ],'group' => 'cm.from_id',
+            ];
+            $list = $modelChatMessage->getList($config);
+            print_r($list);exit;
+            $fromUserIds = array_unique(array_column($list,'from_id'));
+            $fromUserList = [];
+            foreach ($fromUserIds as $fromUserId){
+            }
+            $config = [
+                'field' => [
                     'cm.id','cm.from_id','cm.to_id','cm.to_read','cm.content','cm.create_time',
                     'u.name','u.avatar',
                 ],'join' => [

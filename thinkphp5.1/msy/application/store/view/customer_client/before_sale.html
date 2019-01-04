@@ -50,7 +50,6 @@
                     chatListOtherTpl.find('img').attr('src',data.avatar);
                 }
                 if($('.chatLayer ').length){
-                    console.log('dialog');
                     chatListOtherTpl.find('li').attr('class','others read');
                     $('.chatLayer .chat_item').append(chatListOtherTpl.html());
                 }else{
