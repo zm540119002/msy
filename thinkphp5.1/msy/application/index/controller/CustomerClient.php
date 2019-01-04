@@ -27,6 +27,7 @@ class CustomerClient extends \common\controller\UserBase{
                     $message['who'] = 'others';
                 }
             }
+            print_r($modelChatMessage->getLastSql());exit;
             $this->assign('list',$list);
             return view('list_tpl');
         }else{
