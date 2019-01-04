@@ -9,7 +9,8 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
-                    'cm.from_id','u.name','u.avatar',
+                    'cm.from_id','cm.to_id',
+                    'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
                 ],'where' => [
@@ -19,12 +20,28 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.to_id','=',$this->user['id']],
                 ],'group' => 'cm.from_id',
             ];
-            $list = $modelChatMessage->getList($config);
-            print_r($list);exit;
-            $fromUserIds = array_unique(array_column($list,'from_id'));
-            $fromUserList = [];
-            foreach ($fromUserIds as $fromUserId){
+            $fromUserList = $modelChatMessage->getList($config);
+            foreach ($fromUserList as &$fromUser){
+                $config = [
+                    'field' => [
+                        'cm.id','cm.from_id','cm.to_id','cm.to_read','cm.content','cm.create_time',
+                        'u.name','u.avatar',
+                    ],'join' => [
+                        ['common.user u','u.id = cm.from_id','left'],
+                    ],'where' => [
+                        ['u.status','=',0],
+                        ['cm.status','=',0],
+                        ['cm.type','=',1],
+                        [
+                            'cm.from_id|cm.to_id', ['=',$this->user['id']],
+                        ],
+                    ],'order' => [
+                        'cm.create_time'=>'asc',
+                    ],'limit' => 10,
+                ];
+                $fromUser['messages'][] = $modelChatMessage->getList($config);
             }
+            print_r($fromUserList);exit;
             $config = [
                 'field' => [
                     'cm.id','cm.from_id','cm.to_id','cm.to_read','cm.content','cm.create_time',
