@@ -100,7 +100,7 @@
 						dialog.error(data.info);
 					}else{
 						$('.chatLayer .chat_item').append(data);
-						$('.chatLayer .chat_item').scrollTop(300);
+						$('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item').height());
 						_this.val('');
 					}
 				}
