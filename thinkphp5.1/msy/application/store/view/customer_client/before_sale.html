@@ -38,6 +38,29 @@
 {block name="script"}
 <script type="text/javascript">
     function on_message_call_back(data) {
+        $.each($('.chatLayerContainer').find('ul'),function(){
+            var _this = $(this);
+            if(_this.data('from_id')==data.from_id){
+                var chatListOtherTpl = $('#chatListOtherTpl');
+                chatListOtherTpl.find('.msg').text(data.content);
+                chatListOtherTpl.find('.author').text(data.from_name);
+                chatListOtherTpl.find('.author').text(data.from_name);
+                chatListOtherTpl.find('li').attr('data-id',data.id);
+                if(data.avatar){
+                    chatListOtherTpl.find('img').attr('src',data.avatar);
+                }
+                if($('.chatLayer ').length){
+                    console.log('dialog');
+                    chatListOtherTpl.find('li').attr('class','others read');
+                    $('.chatLayer .chat_item').append(chatListOtherTpl.html());
+                }else{
+                    var num = _this.parents('li').find('span.news_num').text();
+                    _this.parents('li').find('span.news_num').text(++num);
+                    chatListOtherTpl.find('li').attr('class','others unread');
+                }
+                _this.append(chatListOtherTpl.html());
+            }
+        });
     }
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
@@ -62,43 +85,49 @@
                     var winH=$(document).height();
                     $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
                     //设置信息已读
-                    var postData = {};
-                    postData.from_id = _this.find('ul').data('from_id');
-                    postData.messageIds = [];
-                    $.each(_this.find('li.others.unread'),function(){
-                        postData.messageIds.push($(this).data('id'));
-                    });
-                    if(!postData.messageIds.length){
-                        return false;
-                    }
-                    var url = domain + 'index/CustomerService/setToMessageRead';
-                    $.ajax({
-                        url: url,
-                        data: postData,
-                        type: 'post',
-                        beforeSend: function(xhr){
-                            $('.loading').show();
-                        },
-                        error:function(xhr){
-                            $('.loading').hide();
-                            dialog.error('AJAX错误');
-                        },
-                        success: function(data){
-                            $('.loading').hide();
-                            if(data.status==0){
-                                dialog.error(data.info);
-                            }else{
-                                _this.find('.news_num').text('');
-                                $('.chatLayer li.others.unread').removeClass('unread').addClass('read');
-                            }
-                        }
-                    });
+                    setToMessageRead(_this);
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
+                    //设置信息已读
+                    setToMessageRead(_this);
                 }
             });
         });
+        //设置信息已读
+        function setToMessageRead(obj){
+            var postData = {};
+            postData.from_id = obj.find('ul').data('from_id');
+            postData.messageIds = [];
+            $.each(obj.find('li.others.unread'),function(){
+                postData.messageIds.push($(this).data('id'));
+            });
+            if(!postData.messageIds.length){
+                return false;
+            }
+            var url = domain + 'index/CustomerService/setToMessageRead';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else{
+                        obj.find('span.news_num').text('');
+                        $('.chatLayer li.others.unread').removeClass('unread').addClass('read');
+                    }
+                }
+            });
+        }
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
             var _this=$(this).prev();
