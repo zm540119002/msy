@@ -18,7 +18,10 @@ class CustomerClient extends \common\controller\UserBase{
                     ['cm.status','=',0],
                     ['cm.type','=',1],
                     ['cm.to_id','=',$this->user['id']],
-                ],'group' => 'cm.from_id',
+                ],'group' => 'cm.from_id'
+                ,'order' => [
+                    'cm.create_time'=>'asc',
+                ],
             ];
             $fromUserList = $modelChatMessage->getList($config);
             foreach ($fromUserList as &$fromUser){
