@@ -51,6 +51,7 @@
                 }
                 if($('.chatLayer ').length){
                     var postData = {};
+                    postData.from_id = data.from_id;
                     postData.messageIds = [];
                     postData.messageIds.push(data.id);
                     var url = domain + 'index/CustomerService/setToMessageRead';
