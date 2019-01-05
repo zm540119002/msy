@@ -38,7 +38,7 @@ class CustomerClient extends \common\controller\UserBase{
                     'count(id) num',
                 ],'where' =>
                     'status = 0 and type = 1 and read = 0 ' .
-                    'and (from_id = 17 and cm.to_id = ' . $this->user['id'] . ') '
+                    'and (from_id = 17 and to_id = ' . $this->user['id'] . ') '
                 ,
             ];
             $unreadCount = $modelChatMessage->getList($config);
