@@ -6,6 +6,9 @@ class CustomerClient extends \common\controller\UserBase{
     public function index(){
         if(request()->isAjax()){
             $modelChatMessage = new \common\model\ChatMessage();
+            $aa = $modelChatMessage->pageQuery();
+            print_r($aa);
+            exit;
             $config = [
                 'field' => [
                     'cm.id','cm.from_id','cm.to_id','cm.content','cm.from_read','cm.create_time',
@@ -19,15 +22,15 @@ class CustomerClient extends \common\controller\UserBase{
                     'cm.create_time'=>'asc',
                 ],'limit' => config('custom.chat_page_size'),
             ];
-            $list = $modelChatMessage->getList($config);
-            foreach ($list as &$message){
+            $messages = $modelChatMessage->getList($config);
+            foreach ($messages as &$message){
                 if($this->user['id']==$message['from_id']){
                     $message['who'] = 'me';
                 }else{
                     $message['who'] = 'others';
                 }
             }
-            $this->assign('list',$list);
+            $this->assign('list',$messages);
             return view('list_tpl');
         }else{
             return $this->fetch();

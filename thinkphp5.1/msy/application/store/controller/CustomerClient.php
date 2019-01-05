@@ -39,11 +39,11 @@ class CustomerClient extends \common\controller\UserBase{
                 $fromUser['messages'] = $modelChatMessage->getList($config);
             }
             foreach ($fromUserList as &$fromUser){
-                $fromUser['unreadNum'] = 0;
+                $fromUser['unreadCount'] = 0;
                 foreach ($fromUser['messages'] as &$message){
                     if($fromUser['from_id']==$message['from_id']){
                         if($message['to_read']==0){
-                            $fromUser['unreadNum'] ++;
+                            $fromUser['unreadCount'] ++;
                         }
                         $message['who'] = 'others';
                     }else{
