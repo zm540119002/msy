@@ -35,15 +35,15 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
-                    'count(id) unreadCount',
+                    'count(id) num',
                 ],'where' =>
                     'status = 0 and type = 1 and to_read = 0 ' .
                     'and (from_id = 17 and cm.to_id = ' . $this->user['id'] . ') '
                 ,
             ];
             $unreadCount = $modelChatMessage->getList($config);
-            print_r($unreadCount['unreadCount']);exit;
-            $this->assign('unreadCount',$unreadCount['unreadCount']);
+            print_r($unreadCount);exit;
+            $this->assign('unreadCount',$unreadCount['num']);
             return $this->fetch();
         }
     }
