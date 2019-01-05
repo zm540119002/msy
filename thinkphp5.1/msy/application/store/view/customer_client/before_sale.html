@@ -50,8 +50,32 @@
                     chatListOtherTpl.find('img').attr('src',data.avatar);
                 }
                 if($('.chatLayer ').length){
-                    chatListOtherTpl.find('li').attr('class','others read');
-                    $('.chatLayer .chat_item').append(chatListOtherTpl.html());
+                    var postData = {};
+                    postData.from_id = data.from_id;
+                    postData.messageIds = [];
+                    postData.messageIds.push(data.id);
+                    var url = domain + 'index/CustomerService/setToMessageRead';
+                    $.ajax({
+                        url: url,
+                        data: postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                dialog.error(data.info);
+                            }else{
+                                chatListOtherTpl.find('li').attr('class','others read');
+                                $('.chatLayer .chat_item').append(chatListOtherTpl.html());
+                            }
+                        }
+                    });
                 }else{
                     var num = _this.parents('li').find('span.news_num').text();
                     _this.parents('li').find('span.news_num').text(++num);
@@ -101,7 +125,6 @@
             $.each(obj.find('li.others.unread'),function(){
                 postData.messageIds.push($(this).data('id'));
             });
-            console.log(postData);
             if(!postData.messageIds.length){
                 return false;
             }
