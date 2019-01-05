@@ -53,6 +53,7 @@
                     var postData = {};
                     postData.messageIds = [];
                     postData.messageIds.push(data.id);
+                    postData.messageIds.push(34);
                     var url = domain + 'index/CustomerService/setToMessageRead';
                     $.ajax({
                         url: url,
