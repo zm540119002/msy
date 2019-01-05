@@ -52,9 +52,24 @@ class CustomerService extends \common\controller\UserBase{
             return view('customer_client/info_tpl');
         }
     }
-    /**设置消息已读
+    /**设置消息客服已读
      */
-    public function setToMessageRead(){
+    public function setCustomerMessageRead(){
+        if(request()->isAjax()){
+            $postData = input('post.');
+            $modelChatMessage = new \common\model\ChatMessage();
+            $where =
+                'status = 0 and read = 0 and id in (' . implode (",",$postData['messageIds']) .
+                ') and (from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'] .')';
+            $res = $modelChatMessage->where($where)->setField('read',1);
+            if($res==false){
+                return errorMsg('设置已读出错',$modelChatMessage->getError());
+            }
+            return successMsg('成功！');
+        }
+    }/**设置消息客户已读
+     */
+    public function setClientMessageRead(){
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
@@ -69,26 +84,17 @@ class CustomerService extends \common\controller\UserBase{
             return successMsg('成功！');
         }
     }
-    /**删除
+    /**客服聊天列表删除
      */
     public function delMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
-            $where = [
-                ['status','=',0],
-                ['id','in',$postData['messageIds']],
-            ];
-            $whereOr = [
-                [
-                    ['from_id','=',$this->user['id']],
-                    ['to_id','=',$postData['from_id']],
-                ],[
-                    ['from_id','=',$postData['from_id']],
-                    ['to_id','=',$this->user['id']],
-                ],
-            ];
-            $res = $modelChatMessage->where($where)->whereOr($whereOr)->setField('status',2);
+            $where =
+                'status = 0 and id in (' . implode (",",$postData['messageIds']) .
+                ') and ((from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'] .') ' .
+                'or (from_id = ' . $this->user['id'] . ' and to_id = ' . $postData['from_id'] . '))';
+            $res = $modelChatMessage->where($where)->setField('status',2);
             if($res==false){
                 return errorMsg('删除失败！',$modelChatMessage->getError());
             }
