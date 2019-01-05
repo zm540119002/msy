@@ -17,6 +17,7 @@ return [
     'title' => '美尚云',
     'error_login' => '您还未登录平台，请先登录！',
     'default_page_size' => 5,//默认每页显示记录数
+    'chat_page_size' => 20,//默认每页显示记录数
     'not_ajax' => '请用AJAX方式访问！',//不是AJAX
     'not_post' => '请用POST方式访问！',//不是POST
     'not_get' => '请用GET方式访问！',//不是GET

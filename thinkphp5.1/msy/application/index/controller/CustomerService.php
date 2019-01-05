@@ -26,6 +26,9 @@ class CustomerService extends \common\controller\UserBase{
                 'content' => $postData['content'],
                 'create_time' => time(),
             ];
+            if(Gateway::isUidOnline($postData['to_user_id'])){
+                $saveData['send_sign'] = 1;
+            }
             $res = $modelChatMessage->edit($saveData);
             if($res['status']==0){
                 return errorMsg('保存失败！',$res);
@@ -40,7 +43,6 @@ class CustomerService extends \common\controller\UserBase{
                     'id' => $res['id'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
-                $saveData['send_sign'] = 1;
             }
             $postData['who'] = 'me';
             $postData['name'] = $this->user['name'];

@@ -50,7 +50,6 @@
                     chatListOtherTpl.find('img').attr('src',data.avatar);
                 }
                 if($('.chatLayer ').length){
-                    console.log('dialog');
                     chatListOtherTpl.find('li').attr('class','others read');
                     $('.chatLayer .chat_item').append(chatListOtherTpl.html());
                 }else{
@@ -102,6 +101,7 @@
             $.each(obj.find('li.others.unread'),function(){
                 postData.messageIds.push($(this).data('id'));
             });
+            console.log(postData);
             if(!postData.messageIds.length){
                 return false;
             }

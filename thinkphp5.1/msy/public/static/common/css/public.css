@@ -4036,6 +4036,9 @@ select[name="nodeIds"]{
     padding:0 0.12rem;
 }
 /*订单客服售前*/
+.layui-m-layerchild.chatLayer{
+    background:#f2f2f2;
+}
 .chat_content_wrapper{
     padding-top:1rem;
 }
@@ -4043,8 +4046,11 @@ select[name="nodeIds"]{
     display:none;
 }
 .chatMsg-ct li{
+    padding-left:0.15rem;
+    padding-right:0.15rem;
     margin:0 0 .10rem 0;
     border:none;
+    background:none;
 }
 .avatar{
     position:relative;
@@ -4076,8 +4082,15 @@ select[name="nodeIds"]{
     color:#fff;
     border-radius:100%;
 }
-.author{
+.chat_item .content{
     margin:0 0 0 0.20rem;
+    background:#fff;
+    border-radius:5px;
+    color:#333;
+}
+.chat_item .me .content{
+    margin:0 0.20rem 0 0; 
+    background:#22AC38;   
 }
 .chat_list.new_msg{
     border-color:#ff0000;
@@ -4110,7 +4123,7 @@ select[name="nodeIds"]{
     justify-content: center;
 }
 .content .msg{
-    background: #fff;
+    
 }
 .chat_list{
     position:relative;
@@ -4497,9 +4510,12 @@ select[name="nodeIds"]{
 .chatLayerContainer{
     display:none;
 }
+.ws_chatMsg-panel{
+    background:#f2f2f2;
+}
 .chatLayer ul{
     height:495px;
-    padding:0 0.25rem 0.25rem;
+    padding:0 0.15rem 0.15rem;
     margin:1rem 0 0;
     overflow-y:auto;
     overflow-x:hidden;
