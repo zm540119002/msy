@@ -4036,6 +4036,9 @@ select[name="nodeIds"]{
     padding:0 0.12rem;
 }
 /*订单客服售前*/
+.layui-m-layerchild.chatLayer{
+    background:#f2f2f2;
+}
 .chat_content_wrapper{
     padding-top:1rem;
 }
@@ -4043,7 +4046,66 @@ select[name="nodeIds"]{
     display:none;
 }
 .chatMsg-ct li{
-    margin:0 0 .5rem 0;
+    padding-left:0.15rem;
+    padding-right:0.15rem;
+    margin:0 0 .10rem 0;
+    border:none;
+    background:none;
+}
+.avatar{
+    position:relative;
+}
+.avatar .news_num{
+    position: absolute;
+    top: -0.15rem;
+    right: -0.12rem;
+    /*border: 1px solid #ff0000;*/
+    border-radius: 100%;
+    width: 50%;
+    background: #ff0000;
+    color: #fff;
+    text-align: center;
+}
+.customer_sidebar a span{
+    position: absolute;
+    top: 0.15rem;
+    right:0.12rem;
+    /*border: 1px solid #ff0000;*/
+   
+    font-size:0.24rem;
+}
+.customer_sidebar a span.news_num{
+    width:50%;
+    right:-0.10rem;
+    top:-0.12rem;
+    background:#ff0000;
+    color:#fff;
+    border-radius:100%;
+}
+.chat_item .content{
+    margin:0 0 0 0.20rem;
+    background:#fff;
+    border-radius:5px;
+    color:#333;
+}
+.chat_item .me .content{
+    margin:0 0.20rem 0 0; 
+    background:#22AC38;   
+}
+.chat_list.new_msg{
+    border-color:#ff0000;
+}
+.customer_btn.twinkle{
+    -webkit-animation:twinkling 1s infinite ease-in-out
+}
+@-webkit-keyframes twinkling{    /*透明度由0到1*/
+    0%{
+        opacity:0; /*透明度为0*/
+        }
+    100%{
+        opacity:1; /*透明度为1*/
+
+    }
 }
 .others,
 .me,
@@ -4061,7 +4123,15 @@ select[name="nodeIds"]{
     justify-content: center;
 }
 .content .msg{
-    background: #fff;
+    
+}
+.chat_list{
+    position:relative;
+}
+.chat_list .detele_chat{
+    position:absolute;
+    right:0.15rem;
+    color:#ff0000;
 }
 .bottom_flex{
     display:flex;
@@ -4437,8 +4507,15 @@ select[name="nodeIds"]{
     transform: translate3d(0,-50%,0);
     height: auto;
 }
+.chatLayerContainer{
+    display:none;
+}
+.ws_chatMsg-panel{
+    background:#f2f2f2;
+}
 .chatLayer ul{
-    padding:0 0.25rem 0.25rem;
+    height:495px;
+    padding:0 0.15rem 0.15rem;
     margin:1rem 0 0;
     overflow-y:auto;
     overflow-x:hidden;
@@ -4459,16 +4536,18 @@ select[name="nodeIds"]{
     position:fixed;
     bottom:2.8rem;
     right:0.2rem;
-    width:0.5rem;
-    height:0.5rem;
-    line-height:0.5rem;
+    width:0.65rem;
+    height:0.65rem;
+    /*line-height:0;*/
     border-radius:50%;
     text-align:center;
     background: #FF7BAC;
     
 }
 .customer_sidebar a{
+    /*position:relative;*/
     color:#fff;
+    font-size:0.24rem;
 }
 .end_more{
     text-align:center;

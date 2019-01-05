@@ -17,6 +17,7 @@ return [
     'title' => '美尚云',
     'error_login' => '您还未登录平台，请先登录！',
     'default_page_size' => 5,//默认每页显示记录数
+    'chat_page_size' => 20,//默认每页显示记录数
     'not_ajax' => '请用AJAX方式访问！',//不是AJAX
     'not_post' => '请用POST方式访问！',//不是POST
     'not_get' => '请用GET方式访问！',//不是GET
@@ -42,15 +43,13 @@ return [
     ],'operational_model'=>[
         '1'=>'美尚联营',
         '2'=>'商户自营',
-    ],
-    'unit'=>[
+    ],'unit'=>[
         '1'=>'个',
         '2'=>'支',
         '3'=>'瓶',
         '4'=>'盒',
         '5'=>'箱',
-    ],
-    'shelf_status'=>[
+    ],'shelf_status'=>[
         '1'=>'下架',
         '2'=>'待审核',
         '3'=>'上架',
