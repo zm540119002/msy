@@ -59,7 +59,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
             $where =
-                'status = 0 and read = 0 and id in (' . implode (",",$postData['messageIds']) .
+                '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
                 ') and from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'];
             $res = $modelChatMessage->where($where)->setField('read',1);
             if($res==false){
@@ -74,7 +74,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
             $where =
-                'status = 0 and read = 0 and id in (' . implode (",",$postData['messageIds']) .
+                '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
                 ') and from_id = 17 and to_id = ' . $postData['from_id'];
             $res = $modelChatMessage->where($where)->setField('read',1);
             if($res==false){
