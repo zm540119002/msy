@@ -42,6 +42,7 @@ class CustomerClient extends \common\controller\UserBase{
                 ,
             ];
             $unreadCount = $modelChatMessage->getList($config);
+            print_r($unreadCount);exit;
             $this->assign('unreadCount',$unreadCount);
             return $this->fetch();
         }
