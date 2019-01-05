@@ -22,7 +22,6 @@ class CustomerClient extends \common\controller\UserBase{
                 ,
             ];
             $fromUserList = $modelChatMessage->getList($config);
-            $fromUserList = array_reverse($fromUserList);
             foreach ($fromUserList as &$fromUser){
                 $config = [
                     'field' => [
@@ -37,7 +36,7 @@ class CustomerClient extends \common\controller\UserBase{
                         'cm.create_time'=>'desc',
                     ],'limit' => config('custom.chat_page_size'),
                 ];
-                $fromUser['messages'] = $modelChatMessage->getList($config);
+                $fromUser['messages'] = array_reverse($modelChatMessage->getList($config));
             }
             foreach ($fromUserList as &$fromUser){
                 $fromUser['unreadCount'] = 0;
