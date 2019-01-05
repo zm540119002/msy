@@ -86,7 +86,7 @@ class CustomerService extends \common\controller\UserBase{
     }
     /**客服聊天列表删除
      */
-    public function delMessage(){
+    public function delCustomerMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();

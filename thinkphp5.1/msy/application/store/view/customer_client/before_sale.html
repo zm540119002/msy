@@ -193,7 +193,7 @@
             $.each(_thisLi.find('li'),function(){
                 postData.messageIds.push($(this).data('id'));
             });
-            var url = domain + 'index/CustomerService/delMessage';
+            var url = domain + 'index/CustomerService/delCustomerMessage';
             $.ajax({
                 url: url,
                 data: postData,
