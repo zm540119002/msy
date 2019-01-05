@@ -37,7 +37,7 @@ class CustomerClient extends \common\controller\UserBase{
                 'field' => [
                     'count(id) num',
                 ],'where' =>
-                    'status = 0 and type = 1 and to_read = 0 ' .
+                    'status = 0 and type = 1 and read = 0 ' .
                     'and (from_id = 17 and cm.to_id = ' . $this->user['id'] . ') '
                 ,
             ];
