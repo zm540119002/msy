@@ -73,8 +73,8 @@ class CustomerService extends \common\controller\UserBase{
 //                ],
 //            ];
             $where = 'status = 0 and to_read = 0 and id in (' . implode (",",$postData['messageIds']) .
-                ') and ((cm.from_id = ' . $postData['from_id'] . ' and cm.to_id = ' . $this->user['id'] .') ' .
-                'or ( cm.from_id = ' . $this->user['id'] . ' and cm.to_id = ' . $postData['from_id'] . '))';
+                ') and ((from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'] .') ' .
+                'or (from_id = ' . $this->user['id'] . ' and to_id = ' . $postData['from_id'] . '))';
             $res = $modelChatMessage->where($where)->setField('to_read',1);
             if($res==false){
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
