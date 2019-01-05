@@ -6,9 +6,6 @@ class CustomerClient extends \common\controller\UserBase{
     public function index(){
         if(request()->isAjax()){
             $modelChatMessage = new \common\model\ChatMessage();
-            $aa = $modelChatMessage->pageQuery();
-            print_r($aa);
-            exit;
             $config = [
                 'field' => [
                     'cm.id','cm.from_id','cm.to_id','cm.content','cm.from_read','cm.create_time',
