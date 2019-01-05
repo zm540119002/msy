@@ -12,7 +12,8 @@ class CustomerClient extends \common\controller\UserBase{
                     'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
-                ],'where' => 'u.status = 0 and cm.status = 0 and cm.type = 1 ' .
+                ],'where' =>
+                    'u.status = 0 and cm.status = 0 and cm.type = 1 ' .
                     'and ((cm.from_id = ' .$this->user['id'] . ' and cm.to_id = 17) ' .
                     'or ( cm.from_id = 17' . ' and cm.to_id = ' .$this->user['id'] . '))'
                 ,'order' => [

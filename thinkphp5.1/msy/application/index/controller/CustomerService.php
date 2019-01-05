@@ -58,21 +58,8 @@ class CustomerService extends \common\controller\UserBase{
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
-//            $where = [
-//                ['status','=',0],
-//                ['to_read','=',0],
-//                ['id','in',$postData['messageIds']],
-//            ];
-//            $whereOr = [
-//                [
-//                    ['from_id','=',$this->user['id']],
-//                    ['to_id','=',$postData['from_id']],
-//                ],[
-//                    ['from_id','=',$postData['from_id']],
-//                    ['to_id','=',$this->user['id']],
-//                ],
-//            ];
-            $where = 'status = 0 and to_read = 0 and id in (' . implode (",",$postData['messageIds']) .
+            $where =
+                'status = 0 and to_read = 0 and id in (' . implode (",",$postData['messageIds']) .
                 ') and ((from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'] .') ' .
                 'or (from_id = ' . $this->user['id'] . ' and to_id = ' . $postData['from_id'] . '))';
             $res = $modelChatMessage->where($where)->setField('to_read',1);
