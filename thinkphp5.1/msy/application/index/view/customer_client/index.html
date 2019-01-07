@@ -67,12 +67,12 @@
 					var winH=$(document).height();
 					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
 					//设置信息已读
-					setClientMessageRead(_this);
+					setClientMessageRead($('#chatLayerContainer'));
 				},
 				no:function(){
 					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
 					//设置信息已读
-					setClientMessageRead(_this);
+					setClientMessageRead($('#chatLayerContainer'));
 				}
 			});
 		});
