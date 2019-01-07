@@ -168,8 +168,8 @@
                     setMessageRead(_this);
                     //聊天框滚动条置底
                     chatDialogSetBottom();
+                    //下拉加载
                     $('.chatLayer .chat_item').on('scroll',function(){
-                        var listHeight=$('.chatLayer .chat_item')[0].scrollHeight;
                         if($('.chatLayer .chat_item').scrollTop()==0){
                            console.log(1);
                         }
