@@ -14,6 +14,9 @@
         </div>
     </li>
 </section>
+<div style="display:none" id="chat_list">
+    {include file="customer_client/info_tpl" /}
+</div>
 {include file="public/switch_factory_store" /}
 <section class="specific_type separation-line">
     <div class="columns_flex f20 l-r-sides">
@@ -38,7 +41,7 @@
 {block name="script"}
 <script type="text/javascript">
     function on_message_call_back(data) {
-        var html = '{include file="info_tpl.html" /}';
+        var html = $('#chat_list').html();
         console.log(html);
         //找到聊天列表标志，默认未找到
         var find_sign = false;
