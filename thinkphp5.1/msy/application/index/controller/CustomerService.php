@@ -78,6 +78,7 @@ class CustomerService extends \common\controller\UserBase{
                 '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
                 ') and from_id = ' . $this->user['id'] . ' and to_id = ' . $postData['from_id'];
             $res = $modelChatMessage->where($where)->setField('read',1);
+            print_r($modelChatMessage->getLastSql());
             if($res==false){
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
             }
