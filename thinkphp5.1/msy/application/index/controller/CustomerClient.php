@@ -8,7 +8,7 @@ class CustomerClient extends \common\controller\UserBase{
             $modelChatMessage = new \common\model\ChatMessage();
             $config = [
                 'field' => [
-                    'cm.id','cm.from_id','cm.to_id','cm.content','cm.create_time',
+                    'cm.id','cm.from_id','cm.to_id','cm.read','cm.content','cm.create_time',
                     'u.name','u.avatar',
                 ],'join' => [
                     ['common.user u','u.id = cm.from_id','left'],
