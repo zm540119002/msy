@@ -22,7 +22,6 @@ class CustomerClient extends \common\controller\UserBase{
                 ,
             ];
             $fromUserList = $modelChatMessage->getList($config);
-            print_r($modelChatMessage->getLastSql());exit;
             foreach ($fromUserList as &$fromUser){
                 $config = [
                     'field' => [
