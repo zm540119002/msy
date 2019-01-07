@@ -281,15 +281,7 @@
                 }
             });
         });
-        $(window).on('scroll',function(){
-            var listHeight=$('.chatLayer .chat_item')[0].scrollHeight;
-            alert(123);
-            if(config.loadTrigger && $('.chatLayer .chat_item').scrollTop()+ $('.chatLayer .chat_item').height()>=listHeight){
-                console.log(123);
-                config.loadTrigger = false;
-                getPagingList(config,postData);
-            }
-        });
+       
     });
     //上拉加载
     var config = {
@@ -298,6 +290,14 @@
 		loadTrigger:false,
 		currentPage:1,
 	};
-	
+	 $(window).on('scroll',function(){
+            var listHeight=$('.chatLayer .chat_item')[0].scrollHeight;
+            alert(123);
+            if(config.loadTrigger && $('.chatLayer .chat_item').scrollTop()+ $('.chatLayer .chat_item').height()>=listHeight){
+                console.log(123);
+                config.loadTrigger = false;
+                getPagingList(config,postData);
+            }
+        });
 </script>
 {/block}
