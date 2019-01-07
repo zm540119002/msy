@@ -210,6 +210,11 @@
                 }
             });
         }
+        //发送文本获取焦点
+        $('body').on('focus','.send_out_text',function(){
+            //聊天框滚动条置底
+            chatDialogSetBottom();
+        });
         //发送聊天内容
         $('body').on('click','.send_btn',function(){
             var _this=$(this).prev();
