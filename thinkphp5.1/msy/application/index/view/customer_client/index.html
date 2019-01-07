@@ -5,7 +5,7 @@
 {block name="content"}
 <!--对话框列表模板-->
 <section id="chatListOtherTpl" style="display:none;">
-	<li class="others">
+	<li class="others unread">
 		<div class="avatar">
 			<img src="public_img/default/no_pic_40.jpg">
 		</div>
@@ -39,8 +39,46 @@
 	function on_message_call_back(data) {
 		var chatListOtherTpl = $('#chatListOtherTpl');
 		chatListOtherTpl.find('.msg').text(data.content);
-		$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
-		$('.chatLayer .chat_item').append(chatListOtherTpl.html());
+		chatListOtherTpl.find('.author').text(data.from_name);
+		chatListOtherTpl.find('.author').text(data.from_name);
+		chatListOtherTpl.find('li').attr('data-id',data.id);
+		if(data.avatar){
+			chatListOtherTpl.find('img').attr('src',data.avatar);
+		}
+		//已打开聊天框
+		if($('.chatLayer ').length) {
+			var postData = {};
+			postData.from_id = data.from_id;
+			postData.messageIds = [];
+			postData.messageIds.push(data.id);
+			var url = domain + 'index/CustomerService/setMessageRead';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function (xhr) {
+					$('.loading').show();
+				},
+				error: function (xhr) {
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function (data) {
+					$('.loading').hide();
+					if (data.status == 0) {
+						dialog.error(data.info);
+					} else {
+						chatListOtherTpl.find('li').attr('class', 'others read');
+						$('.chatLayer .chat_item').append(chatListOtherTpl.html());
+					}
+				}
+			});
+		}else{
+			//未打开聊天框
+			var num = $('span.news_num').text();
+			$('span.news_num').text(++num);
+			$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());
+		}
 	}
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
@@ -66,12 +104,50 @@
 				success:function(){
 					var winH=$(document).height();
 					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
+					//设置信息已读
+					setMessageRead($('#chatLayerContainer'));
 				},
 				no:function(){
 					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
+					//设置信息已读
+					setMessageRead($('#chatLayerContainer'));
 				}
 			});
 		});
+		//设置信息已读
+		function setMessageRead(obj) {
+			var postData = {};
+			postData.messageIds = [];
+			$.each(obj.find('li.others.unread'), function () {
+				postData.messageIds.push($(this).data('id'));
+				postData.from_id = $(this).data('from_id');
+			});
+			if (!postData.messageIds.length) {
+				return false;
+			}
+			var url = domain + 'index/CustomerService/setMessageRead';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function (xhr) {
+					$('.loading').show();
+				},
+				error: function (xhr) {
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function (data) {
+					$('.loading').hide();
+					if (data.status == 0) {
+						dialog.error(data.info);
+					} else {
+						$('span.news_num').text('');
+						$('.chatLayer li.others.unread').removeClass('unread').addClass('read');
+					}
+				}
+			});
+		}
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');

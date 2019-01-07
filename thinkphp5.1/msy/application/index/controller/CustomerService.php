@@ -20,11 +20,12 @@ class CustomerService extends \common\controller\UserBase{
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
+            $msgCreateTime = time();
             $saveData = [
                 'from_id' => $this->user['id'],
                 'to_id' => $postData['to_user_id'],
                 'content' => $postData['content'],
-                'create_time' => time(),
+                'create_time' => $msgCreateTime,
             ];
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $saveData['send_sign'] = 1;
@@ -40,6 +41,7 @@ class CustomerService extends \common\controller\UserBase{
                     'from_id' => $this->user['id'],
                     'from_name' => $this->user['name'],
                     'avatar' => $this->user['avatar'],
+                    'create_time' => date('Y-m-d H:i',$msgCreateTime),
                     'id' => $res['id'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
@@ -47,36 +49,21 @@ class CustomerService extends \common\controller\UserBase{
             $postData['who'] = 'me';
             $postData['name'] = $this->user['name'];
             $postData['avatar'] = $this->user['avatar'];
+            $postData['create_time'] = $msgCreateTime;
             $postData['id'] = $res['id'];
             $this->assign('info',$postData);
             return view('customer_client/info_tpl');
         }
     }
-    /**设置消息客服已读
+    /**设置消息已读
      */
-    public function setCustomerMessageRead(){
+    public function setMessageRead(){
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
             $where =
                 '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
                 ') and from_id = ' . $postData['from_id'] . ' and to_id = ' . $this->user['id'];
-            $res = $modelChatMessage->where($where)->setField('read',1);
-            if($res==false){
-                return errorMsg('设置已读出错',$modelChatMessage->getError());
-            }
-            return successMsg('成功！');
-        }
-    }
-    /**设置消息客户已读
-     */
-    public function setClientMessageRead(){
-        if(request()->isAjax()){
-            $postData = input('post.');
-            $modelChatMessage = new \common\model\ChatMessage();
-            $where =
-                '`status` = 0 and `read` = 0 and id in (' . implode (",",$postData['messageIds']) .
-                ') and from_id = 17 and to_id = ' . $postData['from_id'];
             $res = $modelChatMessage->where($where)->setField('read',1);
             if($res==false){
                 return errorMsg('设置已读出错',$modelChatMessage->getError());
