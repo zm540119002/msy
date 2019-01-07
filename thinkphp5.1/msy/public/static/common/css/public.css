@@ -4149,6 +4149,7 @@ select[name="nodeIds"]{
 .bottom_flex .send_out_text{
     width:85%;
     padding:0.12rem 0;
+    text-indent:0.12rem;
 }
 .bottom_flex .send_btn{
     width:15%;
