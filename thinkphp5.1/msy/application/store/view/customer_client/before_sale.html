@@ -29,7 +29,7 @@
             <div class="ws_chatMsg-panel flex1">
                 <div class="chatMsg-ct">
                     <ul class="clearfix chat_item" data-from_id="{$info.from_id}">
-                        <li class="{$message.who}{if $message.read} read{else /} unread{/if}" data-id="{$message.id}">
+                        <li class="others unread" data-id="{$message.id}">
                             <div class="avatar">
                                 <img src="public_img/default/no_pic_40.jpg">
                             </div>
@@ -130,7 +130,7 @@
             //未找到聊天列表，则新增一个
             var chatListTpl = $('#chatListTpl');
             console.log(data);
-            chatListTpl.find('.author').text(data.name);
+            chatListTpl.find('.author').text(data.from_name);
             chatListTpl.find('.msg').text(data.content);
             chatListTpl.find('.create_time').text(data.create_time);
             chatListTpl.find('ul').attr('data-from_id',data.from_id);
