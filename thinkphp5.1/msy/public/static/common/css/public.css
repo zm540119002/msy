@@ -4052,6 +4052,9 @@ select[name="nodeIds"]{
     border:none;
     background:none;
 }
+.chatMsg-ct li.others{
+    margin-bottom:0.35rem;
+}
 .avatar{
     position:relative;
 }
