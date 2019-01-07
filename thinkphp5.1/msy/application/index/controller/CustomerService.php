@@ -19,6 +19,9 @@ class CustomerService extends \common\controller\UserBase{
     public function sendMessage(){
         if(request()->isAjax()){
             $postData = input('post.');
+            if($this->user['id']==$postData['to_user_id']){
+                return errorMsg('不能发给自己！');
+            }
             $modelChatMessage = new \common\model\ChatMessage();
             $msgCreateTime = time();
             $saveData = [
