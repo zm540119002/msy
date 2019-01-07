@@ -11,6 +11,7 @@
 		</div>
 		<div class="content">
 			<p class="author"></p>
+			<p class="create_time"></p>
 			<div class="msg"></div>
 		</div>
 	</li>
@@ -40,8 +41,9 @@
 		var chatListOtherTpl = $('#chatListOtherTpl');
 		chatListOtherTpl.find('.msg').text(data.content);
 		chatListOtherTpl.find('.author').text(data.from_name);
-		chatListOtherTpl.find('.author').text(data.from_name);
+		chatListOtherTpl.find('.create_time').text(data.create_time);
 		chatListOtherTpl.find('li').attr('data-id',data.id);
+		chatListOtherTpl.find('li').attr('data-from_id',data.from_id);
 		if(data.avatar){
 			chatListOtherTpl.find('img').attr('src',data.avatar);
 		}
@@ -70,6 +72,8 @@
 					} else {
 						chatListOtherTpl.find('li').attr('class', 'others read');
 						$('.chatLayer .chat_item').append(chatListOtherTpl.html());
+						//聊天框滚动条置底
+						chatDialogSetBottom();
 					}
 				}
 			});
@@ -106,6 +110,8 @@
 					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
 					//设置信息已读
 					setMessageRead($('#chatLayerContainer'));
+					//聊天框滚动条置底
+					chatDialogSetBottom();
 				},
 				no:function(){
 					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
@@ -148,6 +154,11 @@
 				}
 			});
 		}
+		//发送文本获取焦点
+		$('body').on('focus','.send_out_text',function(){
+			//聊天框滚动条置底
+			chatDialogSetBottom();
+		});
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');
@@ -176,7 +187,8 @@
 						dialog.error(data.info);
 					}else{
 						$('.chatLayer .chat_item').append(data);
-						$('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item').height());
+						//聊天框滚动条置底
+						chatDialogSetBottom();
 						_this.val('');
 					}
 				}

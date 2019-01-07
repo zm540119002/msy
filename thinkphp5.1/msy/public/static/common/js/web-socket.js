@@ -38,6 +38,7 @@ ws.onmessage = function(e){
             break;
         default :
             console.log('default');
+            break;
     }
 };
 ws.onerror = function (e) {
