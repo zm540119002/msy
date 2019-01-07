@@ -281,7 +281,7 @@
                 }
             });
         });
-        $('.chatLayer .chat_item').on('scroll',function(){
+        $(window).on('scroll',function(){
             var listHeight=$('.chatLayer .chat_item')[0].scrollHeight;
             alert(123);
             if(config.loadTrigger && $('.chatLayer .chat_item').scrollTop()+ $('.chatLayer .chat_item').height()>=listHeight){
