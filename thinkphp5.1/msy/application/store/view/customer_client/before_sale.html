@@ -247,9 +247,10 @@
                         chatDialogSetBottom();
                     }
                     $('.chatLayer .chat_item').on('scroll',function(){
+                         console.log(123);
                         var listHeight=$('.chatLayer .chat_item')[0].scrollHeight;
                         if(config.loadTrigger && $('.chatLayer .chat_item').scrollTop()+ $('.chatLayer .chat_item').height()==listHeight){
-                            console.log(123);
+                           
                             config.loadTrigger = false;
                             getPagingList(config,postData);
                         }
