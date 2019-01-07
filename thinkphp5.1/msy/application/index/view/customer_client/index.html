@@ -110,7 +110,7 @@
 					setMessageRead($('#chatLayerContainer'));
 				},
 				no:function(){
-					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
+					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').scrollHeight);
 					//设置信息已读
 					setMessageRead($('#chatLayerContainer'));
 				}
