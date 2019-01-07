@@ -40,7 +40,7 @@
 		var chatListOtherTpl = $('#chatListOtherTpl');
 		chatListOtherTpl.find('.msg').text(data.content);
 		chatListOtherTpl.find('.author').text(data.from_name);
-		chatListOtherTpl.find('.author').text(data.from_name);
+		chatListOtherTpl.find('.create_time').text(data.create_time);
 		chatListOtherTpl.find('li').attr('data-id',data.id);
 		if(data.avatar){
 			chatListOtherTpl.find('img').attr('src',data.avatar);
