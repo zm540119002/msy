@@ -40,9 +40,9 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
+    var html = $('#chat_list').html();
+    console.log(html);
     function on_message_call_back(data) {
-        var html = $('#chat_list').html();
-        console.log(html);
         //找到聊天列表标志，默认未找到
         var find_sign = false;
         $.each($('.chatLayerContainer').find('ul'),function(){
