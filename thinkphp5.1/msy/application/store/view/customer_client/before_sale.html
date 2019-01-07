@@ -234,6 +234,7 @@
                     }else{
                         $('.chatLayer .chat_item').append(data);
                         _this.val('');
+                        $('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item')[0].scrollHeight);
                     }
                 }
             });
