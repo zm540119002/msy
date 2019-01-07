@@ -4057,6 +4057,10 @@ select[name="nodeIds"]{
 }
 .avatar{
     position:relative;
+    max-width:50px;
+}
+.avatar img{
+    width:100%;
 }
 .avatar .news_num{
     position: absolute;
