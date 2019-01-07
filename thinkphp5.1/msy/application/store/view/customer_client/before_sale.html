@@ -80,8 +80,8 @@
                     var num = _this.parents('li').find('span.news_num').text();
                     _this.parents('li').find('span.news_num').text(++num);
                     chatListOtherTpl.find('li').attr('class','others unread');
+                    _this.append(chatListOtherTpl.html());
                 }
-                _this.append(chatListOtherTpl.html());
             }
         });
     }
