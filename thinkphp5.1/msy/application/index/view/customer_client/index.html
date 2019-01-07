@@ -77,14 +77,14 @@
 			});
 		});
 		//设置信息已读
-		function setClientMessageRead(obj){
+		function setClientMessageRead(obj) {
 			var postData = {};
 			postData.from_id = obj.find('ul').data('from_id');
 			postData.messageIds = [];
-			$.each(obj.find('li.others.unread'),function(){
+			$.each(obj.find('li.others.unread'), function () {
 				postData.messageIds.push($(this).data('id'));
 			});
-			if(!postData.messageIds.length){
+			if (!postData.messageIds.length) {
 				return false;
 			}
 			var url = domain + 'index/CustomerService/setClientMessageRead';
@@ -92,23 +92,24 @@
 				url: url,
 				data: postData,
 				type: 'post',
-				beforeSend: function(xhr){
+				beforeSend: function (xhr) {
 					$('.loading').show();
 				},
-				error:function(xhr){
+				error: function (xhr) {
 					$('.loading').hide();
 					dialog.error('AJAX错误');
 				},
-				success: function(data){
+				success: function (data) {
 					$('.loading').hide();
-					if(data.status==0){
+					if (data.status == 0) {
 						dialog.error(data.info);
-					}else{
+					} else {
 						obj.find('span.news_num').text('');
 						$('.chatLayer li.others.unread').removeClass('unread').addClass('read');
 					}
 				}
 			});
+		}
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');
