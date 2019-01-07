@@ -19,7 +19,6 @@
         <a href="javascript:void(0);" class="detele_chat">删除</a>
         <div class="avatar">
             <img src="public_img/default/no_pic_40.jpg">
-            {/empty}
             <span class="news_num">1</span>
         </div>
         <div class="content">
@@ -33,11 +32,7 @@
                     <ul class="clearfix chat_item" data-from_id="{$info.from_id}">
                         <li class="{$message.who}{if $message.read} read{else /} unread{/if}" data-id="{$message.id}">
                             <div class="avatar">
-                                {empty name="info.avatar"}
                                 <img src="public_img/default/no_pic_40.jpg">
-                                {else /}
-                                <img src="public_uploads/{$message.avatar}">
-                                {/empty}
                             </div>
                             <div class="content">
                                 <p class="author">{$message.name}{$message.create_time|date='Y-m-d H:i'}</p>
@@ -130,14 +125,15 @@
                     msgListOtherTpl.find('li').attr('class','others unread');
                     _this.append(msgListOtherTpl.html());
                 }
-            }else{
-                //未找到聊天列表，则新增一个
-                var chatListTpl = $('#chatListTpl');
-                console.log(data);
-                chatListTpl.find('.author').text(data.name);
-                $('ul.list').append(chatListTpl.html());
             }
         });
+        if(!find_sign){
+            //未找到聊天列表，则新增一个
+            var chatListTpl = $('#chatListTpl');
+            console.log(data);
+            chatListTpl.find('.author').text(data.name);
+            $('ul.list').append(chatListTpl.html());
+        }
     }
 </script>
 <script type="text/javascript" src="public_js/web-socket.js"></script>
