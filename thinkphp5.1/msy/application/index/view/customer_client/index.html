@@ -72,6 +72,8 @@
 					} else {
 						chatListOtherTpl.find('li').attr('class', 'others read');
 						$('.chatLayer .chat_item').append(chatListOtherTpl.html());
+						//聊天框滚动条置底
+						chatDialogSetBottom();
 					}
 				}
 			});
@@ -108,6 +110,8 @@
 					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
 					//设置信息已读
 					setMessageRead($('#chatLayerContainer'));
+					//聊天框滚动条置底
+					chatDialogSetBottom();
 				},
 				no:function(){
 					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
@@ -178,7 +182,8 @@
 						dialog.error(data.info);
 					}else{
 						$('.chatLayer .chat_item').append(data);
-						$('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item')[0].scrollHeight);
+						//聊天框滚动条置底
+						chatDialogSetBottom();
 						_this.val('');
 					}
 				}
