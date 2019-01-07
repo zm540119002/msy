@@ -41,7 +41,7 @@ class CustomerService extends \common\controller\UserBase{
                     'from_id' => $this->user['id'],
                     'from_name' => $this->user['name'],
                     'avatar' => $this->user['avatar'],
-                    'create_time' => $msgCreateTime,
+                    'create_time' => date('Y-m-d H:i',$msgCreateTime),
                     'id' => $res['id'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
@@ -49,6 +49,7 @@ class CustomerService extends \common\controller\UserBase{
             $postData['who'] = 'me';
             $postData['name'] = $this->user['name'];
             $postData['avatar'] = $this->user['avatar'];
+            $postData['create_time'] = $msgCreateTime;
             $postData['id'] = $res['id'];
             $this->assign('info',$postData);
             return view('customer_client/info_tpl');
