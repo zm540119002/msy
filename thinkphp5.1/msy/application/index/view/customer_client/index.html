@@ -45,6 +45,7 @@
 		if(data.avatar){
 			chatListOtherTpl.find('img').attr('src',data.avatar);
 		}
+		//已打开聊天框
 		if($('.chatLayer ').length) {
 			var postData = {};
 			postData.from_id = data.from_id;
@@ -73,6 +74,7 @@
 				}
 			});
 		}else{
+			//未打开聊天框
 			var num = $('span.news_num').text();
 			$('span.news_num').text(++num);
 			$('#chatLayerContainer .chat_item').append(chatListOtherTpl.html());

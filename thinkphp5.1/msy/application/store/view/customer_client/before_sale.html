@@ -38,9 +38,15 @@
 {block name="script"}
 <script type="text/javascript">
     function on_message_call_back(data) {
+        var html = '{include file="customer_client/info_tpl.html" /}';
+        console.log(html);
+        //找到聊天列表标志，默认未找到
+        var find_sign = false;
         $.each($('.chatLayerContainer').find('ul'),function(){
             var _this = $(this);
+            //找到聊天列表
             if(_this.data('from_id')==data.from_id){
+                find_sign = true;
                 var chatListOtherTpl = $('#chatListOtherTpl');
                 chatListOtherTpl.find('.msg').text(data.content);
                 chatListOtherTpl.find('.author').text(data.from_name);
@@ -49,6 +55,7 @@
                 if(data.avatar){
                     chatListOtherTpl.find('img').attr('src',data.avatar);
                 }
+                //已打开聊天框
                 if($('.chatLayer ').length){
                     var postData = {};
                     postData.from_id = data.from_id;
@@ -77,11 +84,16 @@
                         }
                     });
                 }else{
+                    //未打开聊天框
                     var num = _this.parents('li').find('span.news_num').text();
                     _this.parents('li').find('span.news_num').text(++num);
                     chatListOtherTpl.find('li').attr('class','others unread');
                     _this.append(chatListOtherTpl.html());
                 }
+            }else{
+                //未找到聊天列表，则新增一个
+                var html = '{include file="customer_client/info_tpl.html" /}';
+                console.log(html);
             }
         });
     }
