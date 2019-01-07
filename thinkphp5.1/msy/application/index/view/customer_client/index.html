@@ -66,12 +66,49 @@
 				success:function(){
 					var winH=$(document).height();
 					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
+					//设置信息已读
+					setClientMessageRead(_this);
 				},
 				no:function(){
 					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
+					//设置信息已读
+					setClientMessageRead(_this);
 				}
 			});
 		});
+		//设置信息已读
+		function setClientMessageRead(obj){
+			var postData = {};
+			postData.from_id = obj.find('ul').data('from_id');
+			postData.messageIds = [];
+			$.each(obj.find('li.others.unread'),function(){
+				postData.messageIds.push($(this).data('id'));
+			});
+			if(!postData.messageIds.length){
+				return false;
+			}
+			var url = domain + 'index/CustomerService/setClientMessageRead';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else{
+						obj.find('span.news_num').text('');
+						$('.chatLayer li.others.unread').removeClass('unread').addClass('read');
+					}
+				}
+			});
 		//发送聊天内容
 		$('body').on('click','.send_btn',function(){
 			var chatListTpl = $('#chatListTpl');
