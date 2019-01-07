@@ -135,6 +135,7 @@
                 var chatListTpl = $('#chatListTpl');
                 console.log(data);
                 chatListTpl.find('.author').text(data.name);
+                $('ul.list').append(chatListTpl.html());
             }
         });
     }
