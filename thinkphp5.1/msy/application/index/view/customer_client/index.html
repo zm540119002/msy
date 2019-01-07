@@ -79,10 +79,10 @@
 		//设置信息已读
 		function setClientMessageRead(obj) {
 			var postData = {};
-			postData.from_id = obj.find('ul').data('from_id');
 			postData.messageIds = [];
 			$.each(obj.find('li.others.unread'), function () {
 				postData.messageIds.push($(this).data('id'));
+				postData.from_id = $(this).data('from_id');
 			});
 			if (!postData.messageIds.length) {
 				return false;
