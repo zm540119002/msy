@@ -67,17 +67,17 @@
 					var winH=$(document).height();
 					$('.chatLayer .chat_item').html($('#chatLayerContainer .chat_item').html());
 					//设置信息已读
-					setClientMessageRead($('#chatLayerContainer'));
+					setMessageRead($('#chatLayerContainer'));
 				},
 				no:function(){
 					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
 					//设置信息已读
-					setClientMessageRead($('#chatLayerContainer'));
+					setMessageRead($('#chatLayerContainer'));
 				}
 			});
 		});
 		//设置信息已读
-		function setClientMessageRead(obj) {
+		function setMessageRead(obj) {
 			var postData = {};
 			postData.messageIds = [];
 			$.each(obj.find('li.others.unread'), function () {
@@ -87,7 +87,7 @@
 			if (!postData.messageIds.length) {
 				return false;
 			}
-			var url = domain + 'index/CustomerService/setClientMessageRead';
+			var url = domain + 'index/CustomerService/setMessageRead';
 			$.ajax({
 				url: url,
 				data: postData,

@@ -54,7 +54,7 @@
                     postData.from_id = data.from_id;
                     postData.messageIds = [];
                     postData.messageIds.push(data.id);
-                    var url = domain + 'index/CustomerService/setCustomerMessageRead';
+                    var url = domain + 'index/CustomerService/setMessageRead';
                     $.ajax({
                         url: url,
                         data: postData,
@@ -108,17 +108,17 @@
                     var winH=$(document).height();
                     $('.chatLayer .layui-m-layercont').html(chatLayerContainer.html());
                     //设置信息已读
-                    setCustomerMessageRead(_this);
+                    setMessageRead(_this);
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
                     //设置信息已读
-                    setCustomerMessageRead(_this);
+                    setMessageRead(_this);
                 }
             });
         });
         //设置信息已读
-        function setCustomerMessageRead(obj){
+        function setMessageRead(obj){
             var postData = {};
             postData.from_id = obj.find('ul').data('from_id');
             postData.messageIds = [];
@@ -128,7 +128,7 @@
             if(!postData.messageIds.length){
                 return false;
             }
-            var url = domain + 'index/CustomerService/setCustomerMessageRead';
+            var url = domain + 'index/CustomerService/setMessageRead';
             $.ajax({
                 url: url,
                 data: postData,
