@@ -25,11 +25,12 @@ class CustomerClient extends \common\controller\UserBase{
             foreach ($fromUserList as &$fromUser){
                 $config = [
                     'field' => [
-                        'cm.id','cm.from_id','cm.to_id','cm.to_read','cm.content','cm.create_time',
+                        'cm.id','cm.from_id','cm.to_id','cm.read','cm.content','cm.create_time',
                         'u.name','u.avatar',
                     ],'join' => [
                         ['common.user u','u.id = cm.from_id','left'],
-                    ],'where' => 'u.status = 0 and cm.status = 0 and cm.type = 1 ' .
+                    ],'where' =>
+                        'u.status = 0 and cm.status = 0 and cm.type = 1 ' .
                         'and ((cm.from_id = ' . $fromUser['from_id'] . ' and cm.to_id = ' . $this->user['id'] .') ' .
                         'or ( cm.from_id = ' . $this->user['id'] . ' and cm.to_id = ' . $fromUser['from_id'] . '))'
                     ,'order' => [
@@ -42,7 +43,7 @@ class CustomerClient extends \common\controller\UserBase{
                 $fromUser['unreadCount'] = 0;
                 foreach ($fromUser['messages'] as &$message){
                     if($fromUser['from_id']==$message['from_id']){
-                        if($message['to_read']==0){
+                        if($message['read']==0){
                             $fromUser['unreadCount'] ++;
                         }
                         $message['who'] = 'others';
