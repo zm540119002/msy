@@ -23,7 +23,6 @@
         </div>
         <div class="content">
             <p class="author"></p>
-            <div class="msg"></div>
         </div>
         <!--对话框弹窗-->
         <section class="chatLayerContainer">
@@ -35,7 +34,8 @@
                                 <img src="public_img/default/no_pic_40.jpg">
                             </div>
                             <div class="content">
-                                <p class="author">{$message.name}{$message.create_time|date='Y-m-d H:i'}</p>
+                                <p class="author">{$message.name}</p>
+                                <p class="create_time">{$message.create_time|date='Y-m-d H:i'}</p>
                                 <div class="msg">{$message.content}</div>
                             </div>
                         </li>
@@ -85,7 +85,6 @@
                 var msgListOtherTpl = $('#msgListOtherTpl');
                 msgListOtherTpl.find('.msg').text(data.content);
                 msgListOtherTpl.find('.author').text(data.from_name);
-                msgListOtherTpl.find('.author').text(data.from_name);
                 msgListOtherTpl.find('li').attr('data-id',data.id);
                 if(data.avatar){
                     msgListOtherTpl.find('img').attr('src',data.avatar);
@@ -132,6 +131,13 @@
             var chatListTpl = $('#chatListTpl');
             console.log(data);
             chatListTpl.find('.author').text(data.name);
+            chatListTpl.find('.msg').text(data.content);
+            chatListTpl.find('.create_time').text(data.create_time);
+            chatListTpl.find('ul').attr('data-from_id',data.from_id);
+            chatListTpl.find('ul li').attr('data-id',data.id);
+            if(data.avatar){
+                msgListOtherTpl.find('img').attr('src',data.avatar);
+            }
             $('ul.list').append(chatListTpl.html());
         }
     }

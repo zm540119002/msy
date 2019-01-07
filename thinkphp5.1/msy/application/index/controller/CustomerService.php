@@ -20,11 +20,12 @@ class CustomerService extends \common\controller\UserBase{
         if(request()->isAjax()){
             $postData = input('post.');
             $modelChatMessage = new \common\model\ChatMessage();
+            $msgCreateTime = time();
             $saveData = [
                 'from_id' => $this->user['id'],
                 'to_id' => $postData['to_user_id'],
                 'content' => $postData['content'],
-                'create_time' => time(),
+                'create_time' => $msgCreateTime,
             ];
             if(Gateway::isUidOnline($postData['to_user_id'])){
                 $saveData['send_sign'] = 1;
@@ -40,6 +41,7 @@ class CustomerService extends \common\controller\UserBase{
                     'from_id' => $this->user['id'],
                     'from_name' => $this->user['name'],
                     'avatar' => $this->user['avatar'],
+                    'create_time' => $msgCreateTime,
                     'id' => $res['id'],
                 ];
                 Gateway::sendToUid($postData['to_user_id'],json_encode($msg));
