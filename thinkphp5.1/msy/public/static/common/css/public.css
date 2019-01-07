@@ -4516,7 +4516,7 @@ select[name="nodeIds"]{
 }
 .chatLayer ul{
     height:560px;
-    padding:0 0.15rem 0.15rem;
+    padding:0 0.15rem 0;
     margin:1rem 0 0;
     overflow-y:auto;
     overflow-x:hidden;
