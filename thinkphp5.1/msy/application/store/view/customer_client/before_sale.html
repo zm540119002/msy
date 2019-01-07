@@ -237,6 +237,7 @@
                     dialog.error('AJAX错误');
                 },
                 success: function(data){
+                    console.log(data);
                     $('.loading').hide();
                     if(data.status==0){
                         dialog.error(data.info);
@@ -249,11 +250,11 @@
                     $('.chatLayer .chat_item').on('scroll',function(){
                          console.log(123);
                         var listHeight=$('.chatLayer .chat_item')[0].scrollHeight;
-                        if(config.loadTrigger && $('.chatLayer .chat_item').scrollTop()+ $('.chatLayer .chat_item').height()==listHeight){
+                        // if(config.loadTrigger && $('.chatLayer .chat_item').scrollTop()+ $('.chatLayer .chat_item').height()==listHeight){
                            
-                            config.loadTrigger = false;
-                            getPagingList(config,postData);
-                        }
+                        //     config.loadTrigger = false;
+                        //     getPagingList(config,postData);
+                        // }
                     });
                 }
             });
