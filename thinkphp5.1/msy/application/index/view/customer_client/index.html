@@ -110,7 +110,7 @@
 					setMessageRead($('#chatLayerContainer'));
 				},
 				no:function(){
-					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').scrollHeight);
+					$('#chatLayerContainer .chat_item').html($('.chatLayer .chat_item').html());
 					//设置信息已读
 					setMessageRead($('#chatLayerContainer'));
 				}
@@ -178,7 +178,7 @@
 						dialog.error(data.info);
 					}else{
 						$('.chatLayer .chat_item').append(data);
-						$('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item').height());
+						$('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item')[0].scrollHeight);
 						_this.val('');
 					}
 				}
