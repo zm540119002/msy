@@ -22,6 +22,7 @@ class CustomerClient extends \common\controller\UserBase{
                 ,
             ];
             $fromUserList = $modelChatMessage->getList($config);
+            print_r($fromUserList);exit;
             foreach ($fromUserList as &$fromUser){
                 $config = [
                     'field' => [
