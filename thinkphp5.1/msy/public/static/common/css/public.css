@@ -4562,6 +4562,11 @@ select[name="nodeIds"]{
 .end_more{
     text-align:center;
 }
+.create_time{
+    display:block;
+    text-align:center;
+    font-size:0.12rem;
+}
 /*走进维雅介绍*/
 .cpy_text_item{
     margin:0 0 0.08rem 0;
