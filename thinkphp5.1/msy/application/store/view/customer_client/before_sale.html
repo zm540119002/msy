@@ -6,7 +6,7 @@
 <section id="msgListOtherTpl" style="display:none;">
     <li class="others">
         <div class="avatar">
-            <img src="public_img/default/no_pic_40.jpg">
+            <img src="public_img/default/chat_head.jpg">
         </div>
         <div class="content">
             <p class="author"></p>
@@ -18,7 +18,7 @@
     <li class="chat_list">
         <a href="javascript:void(0);" class="detele_chat">删除</a>
         <div class="avatar">
-            <img src="public_img/default/no_pic_40.jpg">
+            <img src="public_img/default/chat_head.jpg">
             <span class="news_num">1</span>
         </div>
         <div class="content">
@@ -31,7 +31,7 @@
                     <ul class="clearfix chat_item">
                         <li class="others unread">
                             <div class="avatar">
-                                <img src="public_img/default/no_pic_40.jpg">
+                                <img src="public_img/default/chat_head.jpg">
                             </div>
                             <div class="content">
                                 <p class="author"></p>
@@ -168,6 +168,12 @@
                     setMessageRead(_this);
                     //聊天框滚动条置底
                     chatDialogSetBottom();
+                    //下拉加载
+                    $('.chatLayer .chat_item').on('scroll',function(){
+                        if($('.chatLayer .chat_item').scrollTop()==0){
+                           console.log(1);
+                        }
+                    });
                 },
                 no:function(){
                     chatLayerContainer.find('ul').html($('.chatLayer .chat_item').html());
@@ -282,13 +288,7 @@
             });
         });
     });
-    //上拉加载
-	$('.chatLayer .chat_item').on('scroll',function(){
-		var listHeight=$('.chatLayer .chat_item')[0].scrollHeight;
-		if(config.loadTrigger && $('.chatLayer .chat_item').scrollTop()+ $('.chatLayer .chat_item').height()>=listHeight){
-			config.loadTrigger = false;
-			getPagingList(config,postData);
-		}
-	});
+
+	
 </script>
 {/block}
