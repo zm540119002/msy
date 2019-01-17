@@ -649,6 +649,10 @@ function dialogFormDelDefaultCallBack(config,data) {
         layer.close(config.index);
     }
 }
+//聊天框滚动条置底
+function chatDialogSetBottom() {
+    $('.chatLayer .chat_item').scrollTop($('.chatLayer .chat_item')[0].scrollHeight);
+}
 
 //文档就绪
 $(function(){

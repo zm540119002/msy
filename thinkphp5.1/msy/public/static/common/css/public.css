@@ -4046,14 +4046,20 @@ select[name="nodeIds"]{
     display:none;
 }
 .chatMsg-ct li{
-    padding-left:0.15rem;
-    padding-right:0.15rem;
-    margin:0 0 .10rem 0;
+    padding:0.10rem 0.15rem;
+    margin:0 0 .15rem 0;
     border:none;
     background:none;
 }
+.chatMsg-ct li.others{
+    margin-bottom:0.35rem;
+}
 .avatar{
     position:relative;
+    max-width:40px;
+}
+.avatar img{
+    width:100%;
 }
 .avatar .news_num{
     position: absolute;
@@ -4087,6 +4093,7 @@ select[name="nodeIds"]{
     background:#fff;
     border-radius:5px;
     color:#333;
+    padding:0.08rem;
 }
 .chat_item .me .content{
     margin:0 0.20rem 0 0; 
@@ -4142,6 +4149,7 @@ select[name="nodeIds"]{
 .bottom_flex .send_out_text{
     width:85%;
     padding:0.12rem 0;
+    text-indent:0.12rem;
 }
 .bottom_flex .send_btn{
     width:15%;
@@ -4514,11 +4522,13 @@ select[name="nodeIds"]{
     background:#f2f2f2;
 }
 .chatLayer ul{
-    height:495px;
-    padding:0 0.15rem 0.15rem;
+    height:560px;
+    padding:0 0.15rem 0;
     margin:1rem 0 0;
     overflow-y:auto;
     overflow-x:hidden;
+    border-top: 1px solid #d9d9d9;
+    box-shadow: 1px 2px 3px 0;
 }
 .chatLayer .layui-m-layerbtn {
     position: absolute;
@@ -4551,6 +4561,11 @@ select[name="nodeIds"]{
 }
 .end_more{
     text-align:center;
+}
+.create_time{
+    display:block;
+    text-align:center;
+    font-size:0.12rem;
 }
 /*走进维雅介绍*/
 .cpy_text_item{
