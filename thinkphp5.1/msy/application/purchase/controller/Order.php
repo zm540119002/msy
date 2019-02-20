@@ -14,13 +14,13 @@ class Order extends \common\controller\UserBase
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
-//        $goodsList = [
-//            ['goods_id'=>13,'num'=>1],
-//            ['goods_id'=>14,'num'=>3],
-//            ['goods_id'=>15,'num'=>1],
-//            ['goods_id'=>16,'num'=>2],
-//            ['goods_id'=>17,'num'=>1],
-//        ];
+        $goodsList = [
+            ['goods_id'=>13,'num'=>1],
+            ['goods_id'=>14,'num'=>3],
+            ['goods_id'=>15,'num'=>1],
+            ['goods_id'=>16,'num'=>2],
+            ['goods_id'=>17,'num'=>1],
+        ];
         //计算订单总价
         $modelGoods = new \app\purchase\model\Goods();
         $amount = 0;
@@ -147,6 +147,14 @@ class Order extends \common\controller\UserBase
         $orderSn = input('post.order_sn','','string');
         return successMsg('成功',array('order_sn'=>$orderSn));
     }
+    //订单-详情页
+    public function detail()
+    {
+        $unlockingFooterCart = unlockingFooterCartConfig([0,1,2]);
+        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        return $this->fetch();
+
+    }
 
     //支付
     public function pay()
@@ -170,12 +178,5 @@ class Order extends \common\controller\UserBase
         return $this->fetch();
     }
 
-    //订单-详情页
-    public function detail()
-    {
-        $unlockingFooterCart = unlockingFooterCartConfig([0,1,2]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this->fetch();
 
-    }
 }
