@@ -858,7 +858,7 @@ price{
     width: 0.82rem;
     height: 0.785rem;
     margin:0 auto .05rem;
-    background-image:url(../../common/img/icons/store_purchase_type.png);
+    background-image:url(../../common/img/icons/mch_home_icons.png);
     background-repeat: no-repeat;
     background-size:0.785rem 3.99rem;
 }
@@ -907,16 +907,16 @@ color: #ed6d00;
 .module-navigation {
     position: relative;
     z-index: 5;
-    width: 100%;
-    margin-top: -.5rem;
+    width:96%;
+    margin:-.5rem auto 0;
     background: transparent;
 }
 .module-navigation .channel_nav,
 .top_radius{
-    background: #F7F8F8;
+    background: #fff;
     border: 1px solid transparent;
-    border-radius: 20px 20px 0 0;
-    padding-top: .15rem;
+    border-radius:5px 5px 0 0;
+    padding-top:.15rem;
 }
 .top_radius .product_tit{
     
@@ -1147,7 +1147,7 @@ background-position: 0 -27px;
     /*height: 25px;*/
     height:0.42rem;
     margin:0 auto;
-    background-image: url(../../common/img/icons/public_icons.png);
+    background-image: url(../../common/img/icons/public_bottom_icons.png);
     background-repeat: no-repeat;
     /*background-size: 30px 345px;*/
     background-size: 0.48rem 6.5rem;
