@@ -1,0 +1,34 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 notice_wrapper">
+	<section class="header_title separation-line" >
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">品牌定制须知</h2>
+	</section>
+    <section class="notice_banner">
+		<img src="public_img/notice_01.jpg" alt="">
+	</section>
+    <section class="content_main weiya_content">
+		<p>
+			<img src="public_img/notice_02.jpg" alt="">
+		</p>
+		<p>
+			<img src="public_img/notice_03.jpg" alt="">
+		</p>
+		<p>
+			<img src="public_img/notice_04.jpg" alt="">
+		</p>
+		<p>
+			<img src="public_img/notice_05.jpg" alt="">
+		</p>
+    </section>
+</article>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="index_js/jump_login.js"></script>
+{/block}
