@@ -1,0 +1,108 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">维雅资讯</h2>
+	</section>
+	<section class="content_main weiya_content">
+		<div class="weiya_item ">
+			<ul id="list" class="info_list">
+
+			</ul>
+		</div>
+	</section>
+</article>
+<div class="big_img">
+	<section class="enlarge_img">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				
+			</div>
+		</div>      
+	</section>
+</div>
+{/block}
+{block name="common"}
+{include file="template/footer_menu.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	var config = {
+		url:module+'Information/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'list_tpl'
+	};
+	$(function(){
+		//初始化分类商品页面
+		getPagingList(config,postData);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
+		//查看文本
+		$('.more-text-box').moreText({
+			mainCell:".more-text",
+			openBtn:'显示全部>'
+		});
+		//放大图片
+		$("#list").on("click", ".info_img img",function() {
+			var imgBox = $(this).parents(".info_img").find("img");
+			var i = $(imgBox).index(this);
+			console.log(i);
+			$(".big_img .swiper-wrapper").html("");
+			console.log(imgBox.length);
+			for(var j = 0 ,c = imgBox.length; j < c ;j++){
+				console.log(imgBox.eq(j).attr("src"));
+				$(".big_img .swiper-wrapper").append('<div class="swiper-slide"><img src="' + imgBox.eq(j).attr("src") + '" / ></div>');
+			}			
+			// mySwiper.updateSlidesSize();swiper-slide-active
+			// mySwiper.updatePagination();
+			$(".big_img").css({
+				"z-index": 1001,
+				"opacity": "1"
+			});
+			//mySwiper.slideTo(i, 0, false);
+			/*调起大图*/
+			var mySwiper = new Swiper('.swiper-container', {
+				// loop:true,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true
+				}
+			})
+			$(".big_img .swiper-wrapper").find('div').eq(0).removeClass('swiper-slide-active');
+			$(".big_img .swiper-wrapper").find('div').eq(1).removeClass('swiper-slide-next');
+			$(".big_img .swiper-wrapper").find('div').eq(i).addClass('swiper-slide-active');
+			$(".big_img .swiper-wrapper").find('div').eq(i+1).addClass('swiper-slide-next');
+			return false;
+		});
+		$(".big_img").on("click",function() {
+			$('.swiper-wrapper').find('.swiper-slide').remove();
+			$('.swiper-pagination').find('.swiper-pagination-bullet').remove();
+			$('.swiper-notification').remove();
+			$(this).css({
+				"z-index": "-1",
+				"opacity": "0"
+			});
+
+		});  
+	});
+</script>
+{/block}
