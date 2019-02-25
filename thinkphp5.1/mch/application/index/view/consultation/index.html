@@ -1,0 +1,140 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 article_main_content">
+	<section class="navigate">
+		<ul class="nav_menu weiya_menu service_menu">
+            <li class="current">
+                <a href="{:url('Consultation/index')}">定制需求留言</a>
+            </li>
+            <li>
+                <a href="{:url('OnlineService/index')}">在线客服咨询</a>
+            </li>
+        </ul>
+	</section>
+    <section class="content_main">
+        <div class="weiya_item">
+			<div class="content-padding msg_item msg_top_item">
+				<div class="m_l c_mobile">
+					<p>品牌定制顾问</p>
+					<div class="c_m_l">
+						<p><span class="name first f_n">朱田</span><a href="tel:13660613163">13059156679</a></p>
+						<p><span class="name f_n">宫学莹</span><a href="tel:13711326631">13711326631</a></p>
+					</div>
+				</div>
+				<div class="m_l c_mobile">
+					<p>品牌定制客服</p>
+					<div class="c_m_l">
+						<p><span class="name first">叶雯雯</span><a href="tel:18820019781">18820019781</a></p>
+						<p><span class="name">监督热线</span><a href="tel:18820019781">13710651399</a></p>
+					</div>
+				</div>
+			</div>
+            <div class="msg_content">
+                <form class="message_form">
+                    <div class="msg_item">
+                        <input class="input-filed" type="text" name="name" value="" placeholder="你的姓名">
+                    </div>
+                    <div class="msg_item">
+                        <input class="input-filed" type="tel" name="mobile" value="" placeholder="手机号码">
+                    </div>
+                    <div class="msg_item">
+                        <textarea class="input-filed leaving_msg" name="message" rows="" cols="" placeholder="留言文字..."></textarea>
+                    </div>
+                </form>
+                <a href="javascript:void(0);" class="submit_msg">递交留言</a>
+            </div>
+        </div>
+    </section>
+</article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class="foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">药妆定制</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Company/index')}">
+					<span class="practitioners f_icon"></span>
+					<span class="f_txt">走进维雅</span>
+				</a>
+			</li>
+			<li class="each_column current">
+				<a href="{:url('Consultation/index')}">
+					<span class="business f_icon"></span>
+					<span class="f_txt">业务咨询</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="javascript:void(0)" class="my_cart" data-jump_url="{:url('Cart/index')}">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Mine/index')}">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="index_js/jump_login.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//查看文本
+		$('.more-text-box').moreText({
+			mainCell:".more-text",
+			openBtn:'显示全部>'
+		});
+		//递交留言
+		$('.submit_msg').on('click',function(){
+			var postData=$('.message_form').serializeObject();
+			var content='';
+			if(!postData.name){
+				content='请填写你的姓名';
+			}else if(!register.phoneCheck(postData.mobile)){
+				content='请填写正确的手机号码';
+			}else if(!postData.message){
+				content='请填写你的留言';
+			}
+			if(content){
+				dialog.error(content);
+				return false;
+			}
+			var url = module+'Consultation/addNeedsMessage';
+			$.ajax({
+				type:'post',
+				url:url,
+				data:postData,
+				success:function(data){
+					 if(data.status){
+						 dialog.success(data.info);
+						 setTimeout(function(){
+							var url =  module + 'Consultation/index';
+							location.href = url;
+						 },3000);
+						 //return false;
+					 }
+					dialog.error(data.info);
+				},
+				error:function(xhr){
+					dialog.error(xhr);
+				}
+			});
+		});
+
+	});
+</script>
+{/block}
