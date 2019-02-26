@@ -5,6 +5,7 @@ class Base extends \common\controller\UserBaseAdmin{
     public function __construct(){
         parent::__construct();
         //菜单
+        print_r($this->user);exit;
         if($this->user['role_id']==1){
             $node = new \common\lib\Node();
             $allDisplayMenu = $node->getAllDisplayNode();
