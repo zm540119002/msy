@@ -443,7 +443,7 @@ var addTimer = function(){
             if(hour<10){
                 hour = "0"+ hour;
             }
-            //return day + ":" +hour + ":" +min + ":" +sec + ":"+ms;
+            //return day + ":" +hour +  ":" +min + ":" +sec + ":"+ms;
             return [day,hour,min,sec]
         }else{
 　　　　　　//若否，就是已经到截止时间了  
@@ -633,7 +633,7 @@ function dialogFormDel(config) {
         success: function(data){
             $('.loading').hide();
             if(config.callBack){
-                config.callBack(config,data);
+                config.callBack(config,data); 
             }else{
                 dialogFormDelDefaultCallBack(config,data);
             }
