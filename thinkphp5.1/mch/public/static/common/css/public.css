@@ -1194,6 +1194,9 @@ background-position: 0 -27px;
     /*background-position:0 -54px;*/
     background-position:0 -6rem;
 }
+.foot_nav_bar .current a span.cart{
+    background-position:-0.02rem -4.26rem;
+}
 .foot_nav_bar .current a span.business{
     /*background-position:0 -54px;*/
     background-position:0 -2.46rem;
