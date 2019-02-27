@@ -1,22 +1,10 @@
 {extend name="template/base.html" /}
 {block name="content"}
-
 <article class="f24">
-	<ul class="nav_menu">
-		<li data-category-id="51" class="current">
-			<a href="javascript:void(0);" class="category_nav">加盟套餐</a>
-		</li>
-		<li data-category-id="44">
-			<a href="javascript:void(0);" class="category_nav">仪器选配</a>
-		</li>
-		<li data-category-id="45">
-			<a href="javascript:void(0);" class="category_nav">开店装修</a>
-		</li>
-	</ul>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				<!--{notempty name="info.goods_video"}
+				{notempty name="info.goods_video"}
 				<div class="swiper-slide swiper-slide-active">
 					<video  src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
 				</div>
@@ -25,14 +13,11 @@
 				<div class="swiper-slide swiper-slide-active">
 					<img src="public_img/banner/cy_top_banner.jpg" alt="" class="common_default_img">
 				</div>
-				{/volist}-->
-				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/banner/cy_top_banner.jpg" alt="" class="common_default_img">
-				</div>
+				{/volist}
 			</div>
 		</div>
 	</section>
-	<section class="content-padding content_main wy_list" style="background:#F9CD33;">
+	<section class="content-padding content_main wy_list" style="background:url(public_uploads/{$info.background_img});">
 		<div class="">
 			<div class="columns_flex l-r-sides count_down_module">
 				<div class="mid_module_left">
@@ -56,30 +41,45 @@
 				</div>
 			</div>
 		</div>
-		<div class="apply_item">
-			<span class="content-label">产品体验方案</span>
-			<a href="">
-				<img src="public_img/apply.jpg" alt="">
-			</a>
-		</div>
-		<div class="apply_item">
-			<span class="content-label">中心店加盟方案</span>
-			<a href="">
-				<img src="public_img/apply1.jpg" alt="">
-			</a>
-			<a href="">
-				<img src="public_img/apply2.jpg" alt="">
-			</a>
-		</div>
-		<div class="apply_item">
-			<span class="content-label">工作室加盟方案</span>
-			<a href="">
-				<img src="public_img/apply3.jpg" alt="">
-			</a>
-			<a href="">
-				<img src="public_img/apply4.jpg" alt="">
-			</a>
-		</div>
+		<ul class="goods_list list">
+			{notempty name="goodsList"}
+			{volist name="goodsList" id="info"}
+			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
+				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
+					{empty name="info.thumb_img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					{/empty}
+				</a>
+				<div class="list_r">
+					<p class="text-intro">{$info.headline}</p>
+					<!--<div>单品规格<span>{$info.specification}</span></div>-->
+					<div>
+						<span class="red">￥<price>{$info.bulk_price}</price></span>
+					</div>
+					<div class="columns_flex l-r-sides">
+						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
+						</div>
+						<!--<a href="javascript:void(0);" class="sample_purchase">样品购买
+							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
+						</a>-->
+					</div>
+					<div class="columns_flex l-r-sides separation_item">
+						<a href="javascript:;" class="set_brand right-arrow">设定我的品牌：<span class="brand_name" data-id=""></span></a>
+					</div>
+					<div class="quantity_wrapper selected-number">
+						<a href="javascript:void(0);" class="greduce">-</a>
+						<input type="text" value="0" class="f24 gshopping_count" >
+						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+						<a href="javascript:void(0);" class="gplus">+</a>
+					</div>
+				</div>
+			</li>
+			{/volist}
+			{/notempty}
+		</ul>
 	</section>
 </article>
 
