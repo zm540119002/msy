@@ -4912,6 +4912,7 @@ ul.message_list{
     max-width:100%;
 }
 .scene_wrapper{
+    margin:0.12rem 0 0;
     overflow:hidden;
 }
 .graphic_item{
