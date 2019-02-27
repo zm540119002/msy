@@ -27,7 +27,7 @@ class Index extends \common\controller\Base{
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
-            ],  'limit'=>'6'
+            ],  'limit'=>'11'
 
         ];
         $sceneList  = $modelScene->getList($config);
