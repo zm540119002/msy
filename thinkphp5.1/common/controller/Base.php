@@ -8,9 +8,7 @@ class Base extends \think\Controller{
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
-        $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
-                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
-        $this->host = $http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+        $this->host = http_type() . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
             (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
@@ -20,11 +18,11 @@ class Base extends \think\Controller{
             if(empty($weiXinUserInfo)){
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
+                print_r($weiXinUserInfo);exit;
                 session('weiXinUserInfo',$weiXinUserInfo);
             }
             $this -> assign('weiXinUserInfo',$weiXinUserInfo);
         }
-
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
