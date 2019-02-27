@@ -239,7 +239,7 @@
 		});
 
 		//下拉加载
-		var offsetHeight=$('.nav_menu').offset().top;
+		//var offsetHeight=$('.nav_menu').offset().top;
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
@@ -247,12 +247,12 @@
 				getPagingList(config,postData);
 			}
 			//滚动
-			var top=$(document).scrollTop();
-			if(top>offsetHeight){
-				$('.nav_menu').addClass('top-fixed');
-			}else {
-				$('.nav_menu').removeClass('top-fixed');
-			}
+			// var top=$(document).scrollTop();
+			// if(top>offsetHeight){
+			// 	$('.nav_menu').addClass('top-fixed');
+			// }else {
+			// 	$('.nav_menu').removeClass('top-fixed');
+			// }
 		});
 
 		$('body').on('click','.my_cart',function () {

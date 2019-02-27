@@ -139,7 +139,7 @@
                 <span class="complete"></span>
                 已完成
             </a>
-            <a href="javascript:void(0)" class="person-td order_manage" data-jump_url="{:url('Order/manage',['order_status'=>4])}">
+            <a href="javascript:void(0)" class="person-td order_manage" data-jump_url="{:url('Order/manage',['order_status'=>0])}">
                 <span class="complete"></span>
                 全部
             </a>
@@ -150,7 +150,7 @@
 	<nav class=" foot_nav_bar">
 		<ul class="columns_flex">
 			<li class="each_column">
-				<a href="javascript:void(0)">
+				<a href="{:url('Index/index')}">
 					<span class="store f_icon"></span>
 					<span class="f_txt">美创会</span>
 				</a>
@@ -168,7 +168,7 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart">
+				<a href="javascript:void(0)" class="my_cart" data-jump_url="{:url('Cart/index1')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
