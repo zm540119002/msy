@@ -4943,13 +4943,13 @@ ul.message_list{
     -webkit-line-clamp:2; 
     margin:0 0 0.20rem 0;
 }
-.img0,.img3{
-    width:60%;
+.img0,.img1,.img2{
+    width:30%;
 }
-.img1,.img2{
+/*.img1,.img2{
     width:40%;
-}
-.img4,.img5{
+}*/
+.img3,.img4,.img5{
     width:50%;
 }
 .img1,.img3{
