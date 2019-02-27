@@ -167,7 +167,11 @@ class UserCenter extends Base {
 		);
 		$field = array(
 			'id','name','nickname','mobile_phone','status','type','password','avatar',
+<<<<<<< HEAD
+			'sex','salt','birthday','last_login_time','role_id'
+=======
 			'sex','salt','birthday','last_login_time','role_id',
+>>>>>>> aaa354cbadd0d3b9b6fe662acfde503ef753e187
 		);
 		$user = $this->field($field)->where($where)->find();
 		if(!count($user)) {
@@ -181,7 +185,7 @@ class UserCenter extends Base {
 
 	/**设置登录session
 	 */
-	private function _setSession($user){
+	public function _setSession($user){
 		$user = array_merge($user,array('rand' => create_random_str(10, 0),));
 		session('user', $user);
 		session('user_sign', data_auth_sign($user));

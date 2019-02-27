@@ -1194,6 +1194,9 @@ background-position: 0 -27px;
     /*background-position:0 -54px;*/
     background-position:0 -6rem;
 }
+.foot_nav_bar .current a span.cart{
+    background-position:-0.02rem -4.26rem;
+}
 .foot_nav_bar .current a span.business{
     /*background-position:0 -54px;*/
     background-position:0 -2.46rem;
@@ -4909,6 +4912,7 @@ ul.message_list{
     max-width:100%;
 }
 .scene_wrapper{
+    margin:0.12rem 0 0;
     overflow:hidden;
 }
 .graphic_item{
@@ -4940,18 +4944,18 @@ ul.message_list{
     -webkit-line-clamp:2; 
     margin:0 0 0.20rem 0;
 }
-.img0,.img3{
-    width:60%;
+.img0,.img1,.img2{
+    width:33.33333%;
 }
-.img1,.img2{
+/*.img1,.img2{
     width:40%;
-}
-.img4,.img5{
+}*/
+.img3,.img4,.img5,.img6,.img7,.img8,.img9,.img10{
     width:50%;
 }
-.img1,.img3{
+/*.img1,.img3{
     border-right:0;
-}
+}*/
 .graphic_item_50{
     width:50%;
 }

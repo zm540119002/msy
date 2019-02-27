@@ -2,11 +2,11 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-<article class="f24">
+<article class="f24 content_main">
 	<section class="fixedtop top_nav_fixed">
 		<div class="top_bar columns_flex l-r-sides">
 			<div class="each_column">
-				<a class="home">首页</a>
+				<a class="home top_hidden">首页</a>
 			</div>
 			<div class="each_column top_search_module">
 				<input type="button" class="search_btn"/>
@@ -54,7 +54,7 @@
 			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>平台合伙人</a>
 		</div>
 	</section>
-	<section class="content_main">
+	<section class="">
 		<div class="content-padding">
 			<div>
 				<div class="scroll_news">
@@ -159,8 +159,8 @@
 					<span class="f_txt">工作室</span>
 				</a>
 			</li>
-			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart">
+			<li class="each_column ">
+				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
@@ -180,7 +180,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-
+<script type="text/javascript" src="index_js/jump_login.js"></script>
 <script type="text/javascript">
 	var config = {
 		url:module+'Goods/getList',
@@ -239,7 +239,7 @@
 		});
 
 		//下拉加载
-		var offsetHeight=$('.nav_menu').offset().top;
+		//var offsetHeight=$('.nav_menu').offset().top;
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
@@ -247,12 +247,12 @@
 				getPagingList(config,postData);
 			}
 			//滚动
-			var top=$(document).scrollTop();
-			if(top>offsetHeight){
-				$('.nav_menu').addClass('top-fixed');
-			}else {
-				$('.nav_menu').removeClass('top-fixed');
-			}
+			// var top=$(document).scrollTop();
+			// if(top>offsetHeight){
+			// 	$('.nav_menu').addClass('top-fixed');
+			// }else {
+			// 	$('.nav_menu').removeClass('top-fixed');
+			// }
 		});
 
 		$('body').on('click','.my_cart',function () {
