@@ -10,7 +10,7 @@ class Jssdk {
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
-    $this->path = __DIR__ . 'Jssdk.php/';
+    $this->path = __DIR__ . 'Jssdk.class.php/';
     $data = json_decode($this->get_php_file("access_token.php"));
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
@@ -27,12 +27,14 @@ class Jssdk {
       $access_token = $data->access_token;
     }
     $this -> access_token = $access_token;
+
+//    $this->getAccessToken();
   }
 
   /**
    * @return array
    * 获取接口调用的信息包
-   *
+   * 
    */
   public function getSignPackage() {
     $jsapiTicket = $this->getJsApiTicket();
@@ -224,15 +226,15 @@ class Jssdk {
     if (!isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
-      header("Location: $url");
+      Header("Location: $url");
       exit();
     } else {
       //获取code码，以获取openid
       $code = $_GET['code'];
       session('code1',$code);
-      $data = $this->GetOpenidFromMp($code);
+      $data = $this->getOpenidFromMp($code);
       return $data['openid'];
     }
   }
@@ -240,13 +242,11 @@ class Jssdk {
 
   //通过code换取网页授权access_token与openid
   public function GetAccessTokenAndOpenid(){
-    print_r(123);
-    print_r($_GET);
-    exit;
+
     if ( !isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode('https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
       Header("Location: $url");
       exit();
@@ -279,10 +279,10 @@ class Jssdk {
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
     curl_setopt($ch, CURLOPT_HEADER, FALSE);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    if( config('wx_config.curl_proxy_host') != "0.0.0.0"
-        && config('wx_config.curl_proxy_port') != 0){
-      curl_setopt($ch,CURLOPT_PROXY, config('wx_config.curl_proxy_host'));
-      curl_setopt($ch,CURLOPT_PROXYPORT, config('wx_config.curl_proxy_port'));
+    if(C('WX_CONFIG')['CURL_PROXY_HOST'] != "0.0.0.0"
+        && C('WX_CONFIG')['CURL_PROXY_PORT'] != 0){
+      curl_setopt($ch,CURLOPT_PROXY, C('WX_CONFIG')['CURL_PROXY_HOST']);
+      curl_setopt($ch,CURLOPT_PROXYPORT, C('WX_CONFIG')['CURL_PROXY_PORT']);
     }
     //运行curl，结果以jason形式返回
     $res = curl_exec($ch);
@@ -438,7 +438,7 @@ class Jssdk {
   //获取用户基本信息（OAuth2 授权的 Access Token 获取 未关注用户，Access Token为临时获取）
   public function oauth2_get_user_info($access_token, $openid)
   {
-
+    
     $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
