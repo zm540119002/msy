@@ -4946,6 +4946,7 @@ ul.message_list{
 .img0,.img1,.img2{
     width:33.3%;
     margin-right:0.12rem;
+    border:none;
 }
 /*.img1,.img2{
     width:40%;
