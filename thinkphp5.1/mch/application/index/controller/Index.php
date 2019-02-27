@@ -17,7 +17,7 @@ class Index extends \common\controller\Base{
         ];
         $categoryList  = $modelGoodsCategory->getList($config);
         $this ->assign('categoryList',$categoryList);
-        //获取精选的6个 场景
+        //获取精选的10个 场景
         $modelScene = new \app\index\model\Scene();
         $config =[
             'where' => [
