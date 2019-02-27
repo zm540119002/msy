@@ -12,6 +12,14 @@ class Cart extends \common\controller\UserBase{
             return $this->fetch();
         }
     }
+     public function manage(){
+        if(request()->isAjax()){
+        }else{
+            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            return $this->fetch();
+        }
+    }
 
     /**
      * @return array

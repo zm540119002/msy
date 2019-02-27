@@ -2,7 +2,24 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-<article class="f24">
+<article class="f24 content_main">
+	<section class="fixedtop top_nav_fixed">
+		<div class="top_bar columns_flex l-r-sides">
+			<div class="each_column">
+				<a class="home top_hidden">首页</a>
+			</div>
+			<div class="each_column top_search_module">
+				<input type="button" class="search_btn"/>
+				<input type="text" class="search_text" placeholder="产品"/>
+			</div>
+			<div class="each_column">
+				<a class="shopping_cart top_icon">购物车</a>
+			</div>
+			<div class="each_column">
+				<a class="personal_center top_icon">我的</a>
+			</div>
+		</div>
+	</section>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -28,12 +45,22 @@
 			</div>
 		</div>
 	</section>
-	<section class="content_main">
+	<section class="module-navigation separation-line ">
+		<div class="columns_flex f20 channel_nav store_organize_nav">
+			<a href="{:url('store/Store/index')}" class="deployed-deployment"><span class="union_purchase"></span>美创商城</a>
+			<a href="javascript:void(0);" class="store_run"><span class="exclusive"></span>全国美创会</a>
+			<a href="{:url('store/Operation/index')}" class="order-management"><span class="classify"></span>创业导师</a>
+			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>创业美容师</a>
+			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>平台合伙人</a>
+		</div>
+	</section>
+	<section class="">
 		<div class="content-padding">
 			<div>
 				<div class="scroll_news">
 					<a class="news_tit">
-						<img src="public_img/wy_logo.png" alt="">
+						美创会头条
+						<!--<img src="public_img/wy_logo.png" alt="">-->
 					</a>
 					<div class="news_list_wrapper">
 						<ul class="news_list j_scroll_news">
@@ -52,6 +79,33 @@
 					<a class="news_more" href="javascript:void(0)">更多</a>
 				</div>
 			</div>
+			<!--优惠广告入口-->
+			<section class="slider_banner">
+				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide swiper-slide-active">
+							<img src="public_img/banner/home-banner1.jpg" alt="" class="common_default_img">
+						</div>
+						<div class="swiper-slide ">
+							<img src="public_img/banner/home-banner2.jpg" alt="" class="common_default_img">
+						</div>
+						<div class="swiper-slide ">
+							<img src="public_img/banner/home-banner3.jpg" alt="" class="common_default_img">
+						</div>
+						<div class="swiper-slide ">
+							<img src="public_img/banner/home-banner4.jpg" alt="" class="common_default_img">
+						</div>
+					</div>
+					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+							aria-label="Go to slide 1"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+						<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+					</div>
+				</div>
+			</section>
+			<!--优惠广告入口end-->
 			<div class="scene_wrapper">
 				{volist name="sceneList" id="info" }
 				<div class="graphic_item graphic_item_65 img{$key}" >
@@ -71,43 +125,16 @@
 				<div class="mod-part-title">
 					<div class="mod-part-title-wrap">
 						<span class="icon-title left"></span>
-						<span class="title">精选项目</span>
+						<span class="title">科技美肤精选</span>
 						<span class="icon-title right"></span>
 					</div>
 				</div>
-				<ul>
-					{volist name="projectList" id="info" }
-					<li data-id="{$info.id}">
-						<a href="{:url('Project/detail',['id'=>$info.id])}">
-							{empty name="info.thumb_img"}
-							<img src="public_img/default/no_pic_1000.jpg" alt="">
-							{else /}
-							<img src="public_uploads/{$info.thumb_img}" alt="">
-							{/empty}
-						</a>
-					</li>
-					{/volist}
-				</ul>
-			</div>
-		</div>
-		<div class="new_select_wrap">
-			<section class="">
-				<ul class="nav_menu">
-					{notempty name="categoryList"}
-					{volist name="categoryList" id="info"}
-					<li data-category-id="{$info.id}" >
-						<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
-					</li>
-					{/volist}
-					{/notempty}
-				</ul>
-			</section>
-			<div id="scroller-wrapper" class="list_wrapper">
-				<ul class="columns_flex flex-both-side goods-content-list" id="list">
+				<div id="scroller-wrapper" class="list_wrapper">
+					<ul class="columns_flex flex-both-side goods-content-list" id="list">
 
-				</ul>
+					</ul>
+				</div>
 			</div>
-
 		</div>
 	</section>
 </article>
@@ -117,23 +144,23 @@
 			<li class="each_column current">
 				<a href="javascript:void(0)">
 					<span class="store f_icon"></span>
-					<span class="f_txt">药妆定制</span>
+					<span class="f_txt">美创会</span>
 				</a>
 			</li>
 			<li class="each_column">
 				<a href="{:url('Company/index')}">
 					<span class="practitioners f_icon"></span>
-					<span class="f_txt">走进维雅</span>
+					<span class="f_txt">中心店</span>
 				</a>
 			</li>
 			<li class="each_column">
 				<a href="{:url('Consultation/index')}">
 					<span class="business f_icon"></span>
-					<span class="f_txt">业务咨询</span>
+					<span class="f_txt">工作室</span>
 				</a>
 			</li>
-			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart">
+			<li class="each_column ">
+				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
@@ -153,7 +180,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
-
+<script type="text/javascript" src="index_js/jump_login.js"></script>
 <script type="text/javascript">
 	var config = {
 		url:module+'Goods/getList',
@@ -212,7 +239,7 @@
 		});
 
 		//下拉加载
-		var offsetHeight=$('.nav_menu').offset().top;
+		//var offsetHeight=$('.nav_menu').offset().top;
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
@@ -220,12 +247,12 @@
 				getPagingList(config,postData);
 			}
 			//滚动
-			var top=$(document).scrollTop();
-			if(top>offsetHeight){
-				$('.nav_menu').addClass('top-fixed');
-			}else {
-				$('.nav_menu').removeClass('top-fixed');
-			}
+			// var top=$(document).scrollTop();
+			// if(top>offsetHeight){
+			// 	$('.nav_menu').addClass('top-fixed');
+			// }else {
+			// 	$('.nav_menu').removeClass('top-fixed');
+			// }
 		});
 
 		$('body').on('click','.my_cart',function () {

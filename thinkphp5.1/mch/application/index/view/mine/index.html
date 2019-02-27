@@ -77,13 +77,33 @@
                 </span>
                 消息
             </a>
-            <a href="{:url('Notice/index')}" class="person-td">
-                <span class="notice"></span>
-                定制须知
-            </a>
             <a href="javascript:void(0)" class="person-td my_collection"  data-jump_url="{:url('Collection/index')}">
                 <span class="collec"></span>
                 我的收藏
+            </a>
+            <a href="{:url('Notice/index')}" class="person-td">
+                <span class="notice"></span>
+                二维码
+            </a>
+        </div>
+    </section>
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="javascript:void(0)" class="person-td my_brand"  data-jump_url="{:url('Brand/index')}">
+                <span class="brand"></span>
+                代金券
+            </a>
+            <a href="javascript:void(0)" class="person-td recharge" data-jump_url="{:url('Wallet/recharge')}">
+                <span class="charge"></span>
+                采购充值
+            </a>
+            <a href="{:url('Report/index')}" class="person-td">
+                <span class="presentation"></span>
+                采购钱包
+            </a>
+            <a href="{:url('Report/index')}" class="person-td">
+                <span class="presentation"></span>
+                收益钱包
             </a>
         </div>
     </section>
@@ -95,22 +115,18 @@
             </a>
             <a href="javascript:void(0)" class="person-td address_manage" data-jump_url="{:url('Address/manage')}">
                 <span class="addr"></span>
-                收货人地址
-            </a>
-            <a href="javascript:void(0)" class="person-td recharge" data-jump_url="{:url('Wallet/recharge')}">
-                <span class="charge"></span>
-                采购充值
+                收货地址
             </a>
             <a href="javascript:void(0)" class="person-td order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>1])}">
                 <span class="wait_pay"></span>
                 待付款
             </a>
-        </div>
-        <div class="flex_item">
             <a href="javascript:void(0)" class="person-td order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>2])}">
                 <span class="wait_recevie"></span>
                 待收货
             </a>
+        </div>
+        <div class="flex_item">
             <a href="javascript:void(0)" class="person-td order_manage" data-jump_url="{:url('Order/manage',['order_status'=>3])}">
                 <span class="commit"></span>
                 待评价
@@ -123,17 +139,9 @@
                 <span class="complete"></span>
                 已完成
             </a>
-        </div>
-    </section>
-    <section class="separation-line">
-        <div class="flex_item">
-            <a href="javascript:void(0)" class="person-td my_brand"  data-jump_url="{:url('Brand/index')}">
-                <span class="brand"></span>
-                我的品牌
-            </a>
-            <a href="{:url('Report/index')}" class="person-td">
-                <span class="presentation"></span>
-                我的报告
+            <a href="javascript:void(0)" class="person-td order_manage" data-jump_url="{:url('Order/manage',['order_status'=>0])}">
+                <span class="complete"></span>
+                全部
             </a>
         </div>
     </section>
@@ -144,29 +152,29 @@
 			<li class="each_column">
 				<a href="{:url('Index/index')}">
 					<span class="store f_icon"></span>
-					<span class="f_txt">药妆定制</span>
+					<span class="f_txt">美创会</span>
 				</a>
 			</li>
-			<li class="each_column ">
+			<li class="each_column">
 				<a href="{:url('Company/index')}">
 					<span class="practitioners f_icon"></span>
-					<span class="f_txt">走进维雅</span>
+					<span class="f_txt">中心店</span>
 				</a>
 			</li>
 			<li class="each_column">
 				<a href="{:url('Consultation/index')}">
 					<span class="business f_icon"></span>
-					<span class="f_txt">业务咨询</span>
+					<span class="f_txt">工作室</span>
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart" data-jump_url="{:url('Cart/index')}">
+				<a href="javascript:void(0)" class="my_cart" data-jump_url="{:url('Cart/manage')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
 				</a>
 			</li>
 			<li class="each_column current">
-				<a href="">
+				<a href="{:url('Mine/index')}">
 					<span class="my f_icon"></span>
 					<span class="f_txt">我的</span>
 				</a>

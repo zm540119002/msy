@@ -858,7 +858,7 @@ price{
     width: 0.82rem;
     height: 0.785rem;
     margin:0 auto .05rem;
-    background-image:url(../../common/img/icons/store_purchase_type.png);
+    background-image:url(../../common/img/icons/mch_home_icons.png);
     background-repeat: no-repeat;
     background-size:0.785rem 3.99rem;
 }
@@ -907,16 +907,16 @@ color: #ed6d00;
 .module-navigation {
     position: relative;
     z-index: 5;
-    width: 100%;
-    margin-top: -.5rem;
+    width:96%;
+    margin:-.5rem auto 0;
     background: transparent;
 }
 .module-navigation .channel_nav,
 .top_radius{
-    background: #F7F8F8;
+    background: #fff;
     border: 1px solid transparent;
-    border-radius: 20px 20px 0 0;
-    padding-top: .15rem;
+    border-radius:5px 5px 0 0;
+    padding-top:.15rem;
 }
 .top_radius .product_tit{
     
@@ -1147,7 +1147,7 @@ background-position: 0 -27px;
     /*height: 25px;*/
     height:0.42rem;
     margin:0 auto;
-    background-image: url(../../common/img/icons/public_icons.png);
+    background-image: url(../../common/img/icons/public_bottom_icons.png);
     background-repeat: no-repeat;
     /*background-size: 30px 345px;*/
     background-size: 0.48rem 6.5rem;
@@ -1193,6 +1193,9 @@ background-position: 0 -27px;
 .foot_nav_bar .current a span.my{
     /*background-position:0 -54px;*/
     background-position:0 -6rem;
+}
+.foot_nav_bar .current a span.cart{
+    background-position:-0.02rem -4.26rem;
 }
 .foot_nav_bar .current a span.business{
     /*background-position:0 -54px;*/
@@ -4909,6 +4912,7 @@ ul.message_list{
     max-width:100%;
 }
 .scene_wrapper{
+    margin:0.12rem 0 0;
     overflow:hidden;
 }
 .graphic_item{
@@ -4940,18 +4944,18 @@ ul.message_list{
     -webkit-line-clamp:2; 
     margin:0 0 0.20rem 0;
 }
-.img0,.img3{
-    width:60%;
+.img0,.img1,.img2{
+    width:33.33333%;
 }
-.img1,.img2{
+/*.img1,.img2{
     width:40%;
-}
-.img4,.img5{
+}*/
+.img3,.img4,.img5,.img6,.img7,.img8,.img9,.img10{
     width:50%;
 }
-.img1,.img3{
+/*.img1,.img3{
     border-right:0;
-}
+}*/
 .graphic_item_50{
     width:50%;
 }
