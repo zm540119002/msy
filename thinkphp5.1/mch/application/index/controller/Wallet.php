@@ -7,7 +7,12 @@ class Wallet extends \common\controller\UserBase{
     public function index(){
         return $this->fetch();
     }
-
+    public function rechargeDetail(){
+        if (request()->isAjax()) {
+        } else {
+            return $this->fetch();
+        }
+    }
     /**登录
      */
     public function login(){

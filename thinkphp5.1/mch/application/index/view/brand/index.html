@@ -2,108 +2,67 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-<!--增加商标-->
-<section class="add_brand_tpl bg-eae pt-5" style="display:none;">
-    <form method="post" class="bg-fff brand_form">
-        <!--<input type="hidden" class="" name="address_id" value="" />-->
-        <!--<div class="box-flex clearfixed">
-            <select name="type" class="input-filed">
-                <option value="">商标类别</option>
-                {volist name="Think.config.custom.brand_type" id="brand_type"}
-                <option value="{$k}">{$brand_type}</option>
-                {/volist}
-            </select>
-        </div>-->
-        <div class="box-flex clearfixed">
-            <input type="text" name="name" class="input-filed" placeholder="商标名称" value="">
-        </div>
-        <div class="upload-picture-module box-flex f24">
-			<div>
-				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg" >
-					<img class="upload_img" src="" alt="">
-					<input type="hidden" name="logo" class="img" data-src="" value=""/>
-				</div>
-			</div>
-            <div class="brand_txt">商标logo</div>
-		</div>
-        <div class="upload-picture-module box-flex f24">
-			<div>
-				<div class="picture-module">
-					<input type="file" class="uploadImg uploadSingleImg">
-					<img class="upload_img" src="" alt="">
-					<input type="hidden" name="certificate" class="img" data-src="" value=""/>
-				</div>
-			</div>
-            <div class="brand_txt">
-                商标证或受理通知书
-            </div>
-		</div>
-        <div class="upload-picture-module f24">
-			<div>
-				<div class="picture-module">
-					<!--<input type="file" class="uploadImg uploadSingleImg">-->
-					<img class="upload_img" src="public_img/brand_template_img.jpg" alt="">
-					<!--<input type="hidden" name="authorization" class="img" data-src="" value=""/>-->
-				</div>
-			</div>
-            <div class="brand_txt example">
-                <p>如非自有商标需所有权者授权</p>
-                <a href="public_img/brand_template_img.jpg" download="brand_template_img.jpg" class="template_btn pink">商品授权书样板></a>
-            </div>
-		</div>
-    </form>
-</section>
 <article class="f24">
 	<section class="header_title separation-line">
         <a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
-		<h2 class="f24">设定品牌</h2>
+		<h2 class="f24">代金券</h2>
 	</section>
-	<ul class="brand_list list">
-        {notempty name="list"}
-        {volist name="list" id="info"}
-        <li data-id="{$info.id}">
-            <div class="list_top_item">
+    <section class="cash_coupon_wapper">
+        <div class="cash_coupon">
+            <a href="javascript:void(0);" class="current">待领的代金券</a>
+            <a href="javascript:void(0);">已领的代金券</a>
+        </div>
+        <ul class="cash_coupon_item">
+            <li class="columns_flex">
                 <div>
-                    {empty name="info.logo"}
-                    <img src="public_img/default/no_pic_40.jpg" alt="" class="left brand_logo" />
-                    {else /}
-                    <img src="public_uploads/{$info.logo}" alt="" class="left brand_logo" />
-                    {/empty}
-                    <input type="text" class="brand_name input_width" name="name" value="{$info.name}" unselectable="on" onfocus="this.blur()"/>
-                    <input type="hidden" class="brand_logo" name="logo" value="{$info.logo}"/>
-                    <input type="hidden" class="" name="certificate" value="{$info.certificate}"/>
-                    <input type="hidden" class="" name="authorization" value="{$info.authorization}"/>
-                </div>
-            </div>
-            <div class="columns_flex l-r-sides list_bottom_item">
-                <div>
-                    {if $info.is_default}
-                    <a href="javascript:void(0);" class="edit_default myswitched" data-default="">
-                        <span></span>
-                        默认商标
-                    </a>
-                    {else /}
-                    <a href="javascript:void(0);" class="edit_default" data-default="">
-                        <span></span>
-                        默认商标
-                    </a>
-                    {/if}
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
                 </div>
                 <div>
-                    <a href="javascript:void(0);" class="edit_brand">修改</a>
-                    <a href="javascript:void(0);" class="delete_brand">删除</a>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <a href="javascript:void(0);" class="receive">立即领取</a>
                 </div>
-            </div>
-        </li>
-        {/volist}
-        {else /}
-        <li class="no_data">
-            暂无可选商标
-        </li>
-        {/notempty}
-    </ul>
-    <a href="javascript:void(0);" class="add_brand">增加商标</a>
+            </li>
+            <li class="columns_flex">
+                <div>
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
+                </div>
+                <div>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <a href="javascript:void(0);" class="receive">立即领取</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="cash_coupon_item">
+            <li class="columns_flex">
+                <div>
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
+                </div>
+                <div>
+                    <span class="item">领取日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                </div>
+            </li>
+            <li class="columns_flex">
+                <div>
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
+                </div>
+                <div>
+                    <span class="item">领取日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                </div>
+            </li>
+        </ul>
+    </section>
 </article>
 {/block}
 {block name="common"}
