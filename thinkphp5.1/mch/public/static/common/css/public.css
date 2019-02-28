@@ -5694,6 +5694,9 @@ ul.info_list li{
 .cash_coupon_item{
     margin:0 0.15rem 0 0.15rem;
 }
+.cash_coupon_item.hide{
+    display:none;
+}
 .cash_coupon_item .big{
     font-size:0.40rem;
 }
@@ -5706,6 +5709,14 @@ ul.info_list li{
     background: #C7AA53;
     color:#fff;
     border-radius:4px;
+}
+.wallet_item{
+    background: #fff;
+    margin:0 0.15rem 0 0.15rem;
+}
+.text_center{
+    text-align: center;
+    color:#0066cc;
 }
 .cash_coupon_item li div{
     width:50%;

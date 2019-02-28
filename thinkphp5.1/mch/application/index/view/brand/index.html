@@ -36,7 +36,7 @@
                 </div>
             </li>
         </ul>
-        <ul class="cash_coupon_item">
+        <ul class="cash_coupon_item hide">
             <li class="columns_flex">
                 <div>
                     <span class="item big">500<span>元</span></span>
@@ -73,181 +73,11 @@
 <script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
 $(function(){
-    var page_type='operate_btn';
-    //增加商标
-    var addBrandInfo=$('.add_brand_tpl').html();
-    $('body').on('click','.add_brand',function () {
-        layer.open({
-            title:['增加商标','border-bottom:1px solid #d9d9d9;'],
-            type:1,
-            anim:'up',
-            className:'setBrandLayer',
-            content:addBrandInfo,
-            btn:['确定','取消'],
-            success:function(){
-                
-            },
-            yes:function(index){
-                var postData  = $(".setBrandLayer .brand_form").serializeObject();
-                var brandTpl=$('.brandListTpl').html();
-                postData.page_type='operate_btn';
-                var content='';
-                if(!postData.name){
-                    content='请填写商标名称';
-                }else if(!postData.logo){
-                    content='请上传商标logo';
-                }else if(!postData.certificate){
-                    content='请上传商标证或受理通知书';
-                }
-                if(content){
-                    dialog.error(content);
-                    return false;
-                }
-                var config = {
-                    url:module + 'Brand/edit',
-                    postData:postData,
-                    index:index
-                };
-                dialogFormAdd(config);
-            
-            }
-        });
-    });
-    //修改商标
-    $('body').on('click','.edit_brand',function(){
-        var _this=$(this).parents('.list li');
-        layer.open({
-            title:['修改商标','border-bottom:1px solid #d9d9d9;'],
-            type:1,
-            anim:'up',
-            className:'setBrandLayer',
-            content:addBrandInfo,
-            btn:['确定','取消'],
-            success:function(){
-                copyDataByName(_this,$('.setBrandLayer .brand_form'));
-                var brand_logo=_this.find('input[name="logo"]').val();
-                var trademark_certificate=_this.find('input[name="certificate"]').val();
-                var trademark_authorization=_this.find('input[name="authorization"]').val();
-                $('.setBrandLayer').find('input[name="logo"]').prev().attr('src',uploads+brand_logo);
-                $('.setBrandLayer').find('input[name="certificate"]').prev().attr('src',uploads+trademark_certificate);
-                $('.setBrandLayer').find('input[name="authorization"]').prev().attr('src',uploads+trademark_authorization);
-            },
-            yes:function(index){
-                var postData  = $(".setBrandLayer .brand_form").serializeObject();
-                var brandTpl=$('.brandListTpl').html();
-                postData.page_type='operate_btn';
-                var content='';
-                if(!postData.name){
-                    content='请填写商标名称';
-                }else if(!postData.logo){
-                    content='请上传商标logo';
-                }else if(!postData.certificate){
-                    content='请上传商标证或受理通知书';
-                }
-                if(content){
-                    dialog.error(content);
-                    return false;
-                }
-                postData.id = _this.data('id');
-                var config = {
-                    url:module + 'Brand/edit',
-                    postData:postData,
-                    modifyObj:_this,
-                    index:index
-                };
-                dialogFormEdit(config);
-            }
-        });
-    });
-    //删除商标
-    $('body').on('click','.delete_brand',function (){
-        var _This=$(this);
-        var postData = {};
-        var ids = [];
-        var id = _This.parents('li').data('id');
-        ids.push(id);
-        postData.ids =ids;
-        var url = module + 'Brand/del'
-        _This.addClass("nodisabled");//防止重复提交
-        layer.open({
-            title:['删除商标','border-bottom:1px solid #d9d9d9;'],
-            content:'确定删除商标吗？',
-            btn:['确定','取消'],
-            yes:function(index){
-                $.ajax({
-						url: url,
-						data: postData,
-						type: 'post',
-						beforeSend: function(){
-							$('.loading').show();
-						},
-						error:function(){
-							$('.loading').hide();
-							dialog.error('AJAX错误');
-						},
-						success: function(data){
-							$('.loading').hide();
-							_This.removeClass("nodisabled");//防止重复提交
-							if(data.status==0){
-								dialog.error(data.info);
-							}else {
-								_This.parents('li').remove();
-								if(!$('.list li').length){
-									var html=$('.no_collection').html();
-									$('.list').append(html);
-								}
-							}
-						}
-					});
-                //_this.parents('li').remove();
-                layer.close(index);
-            }
-        })
-    });
-    //设置默认商标
-    $('body').on('click','.edit_default',function (){
-        var _This=$(this);
-        if(_This.hasClass('myswitched')){
-            _This.removeClass('myswitched');
-            _This.attr('data-default',0);
-        }else{
-            _This.addClass('myswitched');
-            _This.parents('li').siblings().find('.edit_default').removeClass('myswitched');
-            _This.attr('data-default',1);
-            var id=_This.parents('li').data('id');
-            var is_default=_This.data('default');
-            var postData = {
-                id:id,
-                is_default:is_default
-            };
-             _This.removeClass("nodisabled");//防止重复提交
-            var url = module + 'Brand/setDefault';
-            $.ajax({
-                url: url,
-                data: postData,
-                type: 'post',
-                beforeSend: function(){
-                    $('.loading').show();
-                },
-                error:function(){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    _This.removeClass("nodisabled");//防止重复提交
-                    if(data.status==0){
-                        dialog.error(data.info);
-                    }else {
-                    }
-                }
-            });
-        }
-    });
-    //设置样式
-    if($('.input_width').length){
-        changeInputLen($('.input_width'));
-    }
+    $('.cash_coupon a').on('click',function(){
+        $(this).addClass('current').siblings().removeClass('current');
+        $('.cash_coupon_item').hide().eq($(this).index()).show();
+    })
+    //cash_coupon_item
 })
 </script>
 {/block}
