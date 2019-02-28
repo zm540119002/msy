@@ -194,8 +194,7 @@ class Jssdk {
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
-
-
+  
   function getJson($url){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -224,7 +223,7 @@ class Jssdk {
     if (!isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode(http_type().$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
       header("Location: $url");
       exit();
@@ -242,7 +241,7 @@ class Jssdk {
     if ( !isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
-      $baseUrl = urlencode(http_type().$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+      $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateUrlForCode($baseUrl);
       Header("Location: $url");
       exit();
