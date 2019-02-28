@@ -23,7 +23,7 @@ class Base extends \think\Controller{
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
                 session('weiXinUserInfo',$weiXinUserInfo);
             }
-            $this -> assign('weiXinUserInfo',$weiXinUserInfo);
+            $this->assign('weiXinUserInfo',$weiXinUserInfo);
         }
     }
     //返回图片临时相对路径
