@@ -1,0 +1,2566 @@
+---------------------------------------------------------------
+[ 2019-03-02T02:12:56+08:00 ] 47.92.155.0 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.080549s][吞吐率：12.41req/s] [内存消耗：4,240.28kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D))',
+  'host' => 'mch.meishangyun.com',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:02+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.101116s][吞吐率：9.89req/s] [内存消耗：4,241.98kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:06+08:00 ] 14.18.29.116 GET /index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1
+[ info ] mch.meishangyun.com/index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1 [运行时间：0.097028s][吞吐率：10.31req/s] [内存消耗：3,962.87kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageSize' => '10',
+  'pageType' => 'index',
+  'category_id' => '',
+  'page' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/goods/list_index_tpl.html [ array (
+  0 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:11+08:00 ] 14.18.29.116 GET /static/common/js/swiper.min.js.map
+[ info ] mch.meishangyun.com/static/common/js/swiper.min.js.map [运行时间：0.030245s][吞吐率：33.06req/s] [内存消耗：1,656.10kb] [文件加载：56]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'cache-control' => 'no-cache',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:21+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.115520s][吞吐率：8.66req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:21+08:00 ] 14.18.29.116 GET /?a748=fy!_1551489261772348356
+[ info ] mch.meishangyun.com/?a748=fy!_1551489261772348356 [运行时间：0.156237s][吞吐率：6.40req/s] [内存消耗：4,242.63kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => '*/*',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'a748' => 'fy!_1551489261772348356',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:22+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.149421s][吞吐率：6.69req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:27+08:00 ] 14.18.29.116 GET /static/common/js/swiper.min.js.map
+[ info ] mch.meishangyun.com/static/common/js/swiper.min.js.map [运行时间：0.054958s][吞吐率：18.20req/s] [内存消耗：1,656.10kb] [文件加载：56]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'cache-control' => 'no-cache',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:14:27+08:00 ] 14.18.29.116 GET /index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1
+[ info ] mch.meishangyun.com/index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1 [运行时间：0.143395s][吞吐率：6.97req/s] [内存消耗：3,963.43kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageSize' => '10',
+  'pageType' => 'index',
+  'category_id' => '',
+  'page' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/goods/list_index_tpl.html [ array (
+  0 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:23:25+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.090771s][吞吐率：11.02req/s] [内存消耗：4,242.05kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3573.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=ln2ag5bhsldgi8pqeiio0cm6l3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:23:25+08:00 ] 14.18.29.116 GET /index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1
+[ info ] mch.meishangyun.com/index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1 [运行时间：0.105184s][吞吐率：9.51req/s] [内存消耗：3,963.02kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3573.0 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=ln2ag5bhsldgi8pqeiio0cm6l3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageSize' => '10',
+  'pageType' => 'index',
+  'category_id' => '',
+  'page' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/goods/list_index_tpl.html [ array (
+  0 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:23:26+08:00 ] 14.18.29.116 GET /static/common/js/swiper.min.js.map
+[ info ] mch.meishangyun.com/static/common/js/swiper.min.js.map [运行时间：0.062388s][吞吐率：16.03req/s] [内存消耗：1,656.10kb] [文件加载：56]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'cache-control' => 'no-cache',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=ln2ag5bhsldgi8pqeiio0cm6l3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:07+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.096577s][吞吐率：10.35req/s] [内存消耗：4,242.20kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:11+08:00 ] 14.18.29.116 GET /static/common/js/swiper.min.js.map
+[ info ] mch.meishangyun.com/static/common/js/swiper.min.js.map [运行时间：0.055752s][吞吐率：17.94req/s] [内存消耗：1,656.00kb] [文件加载：56]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'no-cache',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:11+08:00 ] 14.18.29.116 GET /index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1
+[ info ] mch.meishangyun.com/index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1 [运行时间：0.141872s][吞吐率：7.05req/s] [内存消耗：3,963.61kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageSize' => '10',
+  'pageType' => 'index',
+  'category_id' => '',
+  'page' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/goods/list_index_tpl.html [ array (
+  0 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:20+08:00 ] 14.18.29.116 GET /index_admin
+[ info ] mch.meishangyun.com/index_admin [运行时间：0.046611s][吞吐率：21.45req/s] [内存消耗：2,196.70kb] [文件加载：74]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/framework/tpl/dispatch_jump.tpl [ array (
+  0 => 'code',
+  1 => 'msg',
+  2 => 'data',
+  3 => 'url',
+  4 => 'wait',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:23+08:00 ] 14.18.29.116 GET /ucenter/UserCenter/login_admin.html
+[ info ] mch.meishangyun.com/ucenter/UserCenter/login_admin.html [运行时间：0.031971s][吞吐率：31.28req/s] [内存消耗：2,003.26kb] [文件加载：66]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/ucenter/view/user_center/login_admin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:42+08:00 ] 14.18.29.116 POST /index.php/ucenter/UserCenter/login_admin
+[ info ] mch.meishangyun.com/index.php/ucenter/UserCenter/login_admin [运行时间：0.069761s][吞吐率：14.33req/s] [内存消耗：3,980.73kb] [文件加载：81]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'content-length' => '40',
+  'accept' => '*/*',
+  'origin' => 'http://mch.meishangyun.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://mch.meishangyun.com/ucenter/UserCenter/login_admin.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+)
+[ info ] [ PARAM ] array (
+  'mobile_phone' => '18664368697',
+  'password' => '123456',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:47+08:00 ] 14.18.29.116 POST /index.php/ucenter/UserCenter/login_admin
+[ info ] mch.meishangyun.com/index.php/ucenter/UserCenter/login_admin [运行时间：0.032907s][吞吐率：30.39req/s] [内存消耗：4,158.34kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'content-length' => '40',
+  'accept' => '*/*',
+  'origin' => 'http://mch.meishangyun.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://mch.meishangyun.com/ucenter/UserCenter/login_admin.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+)
+[ info ] [ PARAM ] array (
+  'mobile_phone' => '18664368697',
+  'password' => '111111',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:47+08:00 ] 14.18.29.116 GET /index_admin
+[ info ] mch.meishangyun.com/index_admin [运行时间：0.017347s][吞吐率：57.65req/s] [内存消耗：2,195.57kb] [文件加载：73]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/ucenter/UserCenter/login_admin.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/index/index.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:33:47+08:00 ] 14.18.29.116 GET /index_admin/Index/welcome.html
+[ info ] mch.meishangyun.com/index_admin/Index/welcome.html [运行时间：0.016701s][吞吐率：59.88req/s] [内存消耗：2,115.77kb] [文件加载：71]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/index/welcome.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:34:05+08:00 ] 14.18.29.116 GET /index_admin/GoodsCategory/manage.html
+[ info ] mch.meishangyun.com/index_admin/GoodsCategory/manage.html [运行时间：0.028559s][吞吐率：35.02req/s] [内存消耗：2,218.33kb] [文件加载：73]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods_category/manage.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:34:05+08:00 ] 14.18.29.116 GET /index.php/index_admin/GoodsCategory/getList?pageType=manage&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/GoodsCategory/getList?pageType=manage&page=1&pageSize=10 [运行时间：0.065902s][吞吐率：15.17req/s] [内存消耗：4,082.72kb] [文件加载：93]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/GoodsCategory/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods_category/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\GoodsCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/GoodsCategory.php:4]
+---------------------------------------------------------------
+[ 2019-03-02T09:34:05+08:00 ] 14.18.29.116 GET /static/common/img/default/tv-expandable.gif
+[ info ] mch.meishangyun.com/static/common/img/default/tv-expandable.gif [运行时间：0.027533s][吞吐率：36.32req/s] [内存消耗：1,656.63kb] [文件加载：56]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/static/index_admin/css/fenlei.css',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:34:12+08:00 ] 14.18.29.116 GET /index_admin/GoodsCategory/manage.html
+[ info ] mch.meishangyun.com/index_admin/GoodsCategory/manage.html [运行时间：0.042911s][吞吐率：23.30req/s] [内存消耗：2,218.30kb] [文件加载：73]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods_category/manage.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:34:12+08:00 ] 14.18.29.116 GET /index.php/index_admin/GoodsCategory/getList?pageType=manage&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/GoodsCategory/getList?pageType=manage&page=1&pageSize=10 [运行时间：0.095580s][吞吐率：10.46req/s] [内存消耗：4,082.72kb] [文件加载：93]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/GoodsCategory/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods_category/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\GoodsCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/GoodsCategory.php:4]
+---------------------------------------------------------------
+[ 2019-03-02T09:34:12+08:00 ] 14.18.29.116 GET /static/common/img/default/tv-expandable.gif
+[ info ] mch.meishangyun.com/static/common/img/default/tv-expandable.gif [运行时间：0.051422s][吞吐率：19.45req/s] [内存消耗：1,656.63kb] [文件加载：56]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/static/index_admin/css/fenlei.css',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:34:12+08:00 ] 14.18.29.116 GET /index_admin/Goods/manage.html
+[ info ] mch.meishangyun.com/index_admin/Goods/manage.html [运行时间：0.100432s][吞吐率：9.96req/s] [内存消耗：4,161.92kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/manage.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'allCategoryList',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\GoodsCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/GoodsCategory.php:4]
+---------------------------------------------------------------
+[ 2019-03-02T09:34:12+08:00 ] 14.18.29.116 GET /index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.091102s][吞吐率：10.98req/s] [内存消耗：4,122.82kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Goods/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:34:20+08:00 ] 14.18.29.116 GET /index.php/index_admin/Goods/getList?pageType=manage&category_id_1=53&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Goods/getList?pageType=manage&category_id_1=53&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.059296s][吞吐率：16.86req/s] [内存消耗：4,124.05kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Goods/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '53',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:34:23+08:00 ] 14.18.29.116 GET /index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.098682s][吞吐率：10.13req/s] [内存消耗：4,122.88kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Goods/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:37:02+08:00 ] 14.18.29.116 GET /index_admin
+[ info ] mch.meishangyun.com/index_admin [运行时间：0.068196s][吞吐率：14.66req/s] [内存消耗：2,196.13kb] [文件加载：73]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/ucenter/UserCenter/login_admin.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/index/index.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:37:02+08:00 ] 14.18.29.116 GET /index_admin/Index/welcome.html
+[ info ] mch.meishangyun.com/index_admin/Index/welcome.html [运行时间：0.035447s][吞吐率：28.21req/s] [内存消耗：2,116.55kb] [文件加载：71]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/index/welcome.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:37:09+08:00 ] 14.18.29.116 GET /index_admin/Scene/manage.html
+[ info ] mch.meishangyun.com/index_admin/Scene/manage.html [运行时间：0.036323s][吞吐率：27.53req/s] [内存消耗：2,322.09kb] [文件加载：76]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/scene/manage.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [8]未定义变量: allCategoryList[/home/www/web/thinkphp5.1/mch/runtime/temp/c721f3da2dcd0a24697ca96a27b614c3.php:41]
+[ error ] [8]未定义变量: allCategoryList[/home/www/web/thinkphp5.1/mch/runtime/temp/c721f3da2dcd0a24697ca96a27b614c3.php:41]
+[ error ] [8]未定义变量: allCategoryList[/home/www/web/thinkphp5.1/mch/runtime/temp/c721f3da2dcd0a24697ca96a27b614c3.php:41]
+---------------------------------------------------------------
+[ 2019-03-02T09:37:10+08:00 ] 14.18.29.116 GET /index.php/index_admin/Scene/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Scene/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.100003s][吞吐率：10.00req/s] [内存消耗：4,254.76kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Scene/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/scene/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:38:29+08:00 ] 14.18.29.116 GET /index_admin/Goods/manage.html
+[ info ] mch.meishangyun.com/index_admin/Goods/manage.html [运行时间：0.092436s][吞吐率：10.82req/s] [内存消耗：4,161.88kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/manage.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'allCategoryList',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\GoodsCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/GoodsCategory.php:4]
+---------------------------------------------------------------
+[ 2019-03-02T09:38:29+08:00 ] 14.18.29.116 GET /index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.121452s][吞吐率：8.23req/s] [内存消耗：4,122.79kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Goods/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:38:38+08:00 ] 14.18.29.116 GET /index_admin/Project/manage.html
+[ info ] mch.meishangyun.com/index_admin/Project/manage.html [运行时间：0.112882s][吞吐率：8.86req/s] [内存消耗：4,301.22kb] [文件加载：94]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/project/manage.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'allCategoryList',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\ProjectCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/ProjectCategory.php:4]
+---------------------------------------------------------------
+[ 2019-03-02T09:38:39+08:00 ] 14.18.29.116 GET /index.php/index_admin/Project/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Project/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.093915s][吞吐率：10.65req/s] [内存消耗：4,434.20kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Project/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/project/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:38:41+08:00 ] 14.18.29.116 GET /index_admin/Scene/manage.html
+[ info ] mch.meishangyun.com/index_admin/Scene/manage.html [运行时间：0.043237s][吞吐率：23.13req/s] [内存消耗：2,322.12kb] [文件加载：76]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/scene/manage.html [ array (
+  0 => 'allDisplayMenu',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [8]未定义变量: allCategoryList[/home/www/web/thinkphp5.1/mch/runtime/temp/c721f3da2dcd0a24697ca96a27b614c3.php:41]
+[ error ] [8]未定义变量: allCategoryList[/home/www/web/thinkphp5.1/mch/runtime/temp/c721f3da2dcd0a24697ca96a27b614c3.php:41]
+[ error ] [8]未定义变量: allCategoryList[/home/www/web/thinkphp5.1/mch/runtime/temp/c721f3da2dcd0a24697ca96a27b614c3.php:41]
+---------------------------------------------------------------
+[ 2019-03-02T09:38:41+08:00 ] 14.18.29.116 GET /index.php/index_admin/Scene/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Scene/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.107862s][吞吐率：9.27req/s] [内存消耗：4,254.76kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Scene/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/scene/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:38:43+08:00 ] 14.18.29.116 GET /index_admin/Project/manage.html
+[ info ] mch.meishangyun.com/index_admin/Project/manage.html [运行时间：0.103593s][吞吐率：9.65req/s] [内存消耗：4,074.97kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/project/manage.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'allCategoryList',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\ProjectCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/ProjectCategory.php:4]
+---------------------------------------------------------------
+[ 2019-03-02T09:38:44+08:00 ] 14.18.29.116 GET /index.php/index_admin/Project/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Project/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.102155s][吞吐率：9.79req/s] [内存消耗：4,242.16kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Project/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/project/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:53:52+08:00 ] 183.61.51.65 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.260465s][吞吐率：3.84req/s] [内存消耗：2,252.99kb] [文件加载：69]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML; like Gecko) Mobile/12F70 MicroMessenger/6.1.5 NetType/WIFI',
+  'accept' => '*/*',
+  'host' => 'mch.meishangyun.com',
+  'pragma' => 'no-cache',
+  'connection' => 'Keep-Alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+---------------------------------------------------------------
+[ 2019-03-02T09:53:56+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.220119s][吞吐率：4.54req/s] [内存消耗：2,253.20kb] [文件加载：69]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 MicroMessenger/6.5.2.501 NetType/WIFI WindowsWechat QBCore/3.43.901.400 QQBrowser/9.0.2524.400',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-us;q=0.6,en;q=0.5;q=0.4',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+---------------------------------------------------------------
+[ 2019-03-02T09:55:23+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.233633s][吞吐率：4.28req/s] [内存消耗：2,253.20kb] [文件加载：69]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 MicroMessenger/6.5.2.501 NetType/WIFI WindowsWechat QBCore/3.43.901.400 QQBrowser/9.0.2524.400',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-us;q=0.6,en;q=0.5;q=0.4',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+---------------------------------------------------------------
+[ 2019-03-02T09:56:30+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.126062s][吞吐率：7.93req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:56:36+08:00 ] 14.18.29.116 GET /static/common/js/swiper.min.js.map
+[ info ] mch.meishangyun.com/static/common/js/swiper.min.js.map [运行时间：0.056796s][吞吐率：17.61req/s] [内存消耗：1,656.10kb] [文件加载：56]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'cache-control' => 'no-cache',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:56:36+08:00 ] 14.18.29.116 GET /index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1
+[ info ] mch.meishangyun.com/index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1 [运行时间：0.115174s][吞吐率：8.68req/s] [内存消耗：3,963.43kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageSize' => '10',
+  'pageType' => 'index',
+  'category_id' => '',
+  'page' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/goods/list_index_tpl.html [ array (
+  0 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:57:15+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.141041s][吞吐率：7.09req/s] [内存消耗：2,253.20kb] [文件加载：69]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 MicroMessenger/6.5.2.501 NetType/WIFI WindowsWechat QBCore/3.43.901.400 QQBrowser/9.0.2524.400',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-us;q=0.6,en;q=0.5;q=0.4',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+---------------------------------------------------------------
+[ 2019-03-02T09:57:51+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.093738s][吞吐率：10.67req/s] [内存消耗：4,241.16kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:57:55+08:00 ] 14.18.29.116 GET /index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1
+[ info ] mch.meishangyun.com/index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1 [运行时间：0.069907s][吞吐率：14.30req/s] [内存消耗：3,962.07kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=6sdi3r8ms1lf42fk5qr1tvp9n6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageSize' => '10',
+  'pageType' => 'index',
+  'category_id' => '',
+  'page' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/goods/list_index_tpl.html [ array (
+  0 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:57:59+08:00 ] 14.18.29.116 GET /
+[ info ] mch.meishangyun.com/ [运行时间：0.052168s][吞吐率：19.17req/s] [内存消耗：4,241.78kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=6sdi3r8ms1lf42fk5qr1tvp9n6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T09:57:59+08:00 ] 14.18.29.116 GET /index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1
+[ info ] mch.meishangyun.com/index.php/index/Goods/getList?pageSize=10&pageType=index&category_id=&page=1 [运行时间：0.129286s][吞吐率：7.73req/s] [内存消耗：3,962.07kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=6sdi3r8ms1lf42fk5qr1tvp9n6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageSize' => '10',
+  'pageType' => 'index',
+  'category_id' => '',
+  'page' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/goods/list_index_tpl.html [ array (
+  0 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:08:41+08:00 ] 14.18.29.116 GET /index_admin/Goods/manage.html
+[ info ] mch.meishangyun.com/index_admin/Goods/manage.html [运行时间：0.110094s][吞吐率：9.08req/s] [内存消耗：4,161.87kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/manage.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'allCategoryList',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\GoodsCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/GoodsCategory.php:4]
+---------------------------------------------------------------
+[ 2019-03-02T10:08:41+08:00 ] 14.18.29.116 GET /index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10
+[ info ] mch.meishangyun.com/index.php/index_admin/Goods/getList?pageType=manage&category_id_1=&category_id_2=&category_id_3=&keyword=&page=1&pageSize=10 [运行时间：0.111114s][吞吐率：9.00req/s] [内存消耗：4,122.79kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Goods/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'pageType' => 'manage',
+  'category_id_1' => '',
+  'category_id_2' => '',
+  'category_id_3' => '',
+  'keyword' => '',
+  'page' => '1',
+  'pageSize' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/list_tpl.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:08:43+08:00 ] 14.18.29.116 GET /index_admin/Goods/edit.html
+[ info ] mch.meishangyun.com/index_admin/Goods/edit.html [运行时间：0.100283s][吞吐率：9.97req/s] [内存消耗：4,225.16kb] [文件加载：93]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mch.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://mch.meishangyun.com/index_admin/Goods/manage.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=c23uecfuu5diaq90i6541mvft3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index_admin/view/goods/edit.html [ array (
+  0 => 'allDisplayMenu',
+  1 => 'allCategoryList',
+  2 => 'unitList',
+) ]
+[ info ] [ LOG ] INIT File
+[ error ] [2048]Declaration of app\index_admin\model\GoodsCategory::edit() should be compatible with common\model\Base::edit($data, $condition = Array)[/home/www/web/thinkphp5.1/mch/application/index_admin/model/GoodsCategory.php:49]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:26]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:55]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:62]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:68]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:74]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:80]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:86]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:92]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:98]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:115]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:121]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:140]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:152]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:168]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:175]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:247]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:265]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:270]
+[ error ] [8]未定义变量: info[/home/www/web/thinkphp5.1/mch/runtime/temp/4e6d599d2216457b211ce4a12b32ec05.php:276]
+---------------------------------------------------------------
+[ 2019-03-02T10:13:05+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.081891s][吞吐率：12.21req/s] [内存消耗：4,242.09kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=ln2ag5bhsldgi8pqeiio0cm6l3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:13:20+08:00 ] 183.61.51.65 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.202305s][吞吐率：4.94req/s] [内存消耗：2,252.99kb] [文件加载：69]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML; like Gecko) Mobile/12F70 MicroMessenger/6.1.5 NetType/WIFI',
+  'accept' => '*/*',
+  'host' => 'mcs.meishangyun.com',
+  'pragma' => 'no-cache',
+  'connection' => 'Keep-Alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+---------------------------------------------------------------
+[ 2019-03-02T10:13:56+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.099776s][吞吐率：10.02req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:14:19+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.121386s][吞吐率：8.24req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:14:24+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.107509s][吞吐率：9.30req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:14:29+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.107549s][吞吐率：9.30req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:14:38+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.032892s][吞吐率：30.40req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:14:53+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.093128s][吞吐率：10.74req/s] [内存消耗：4,242.30kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=ln2ag5bhsldgi8pqeiio0cm6l3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:14:55+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.120113s][吞吐率：8.33req/s] [内存消耗：4,242.30kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=ln2ag5bhsldgi8pqeiio0cm6l3',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:15:24+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.119377s][吞吐率：8.38req/s] [内存消耗：4,242.00kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=0i9qde1sipgdcug1t7nnp4ha46',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /home/www/web/thinkphp5.1/mch/application/index/view/index/index.html [ array (
+  0 => 'categoryList',
+  1 => 'sceneList',
+  2 => 'projectList',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-03-02T10:15:37+08:00 ] 14.18.29.116 GET /
+[ info ] mcs.meishangyun.com/ [运行时间：0.484747s][吞吐率：2.06req/s] [内存消耗：2,253.36kb] [文件加载：69]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'upgrade-insecure-requests' => '1',
+  'cookie' => 'PHPSESSID=u7u9sjmbit1to9t4dis9k058s5',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_1_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16D57 MicroMessenger/7.0.3(0x17000321) NetType/WIFI Language/zh_CN',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+---------------------------------------------------------------
+[ 2019-03-02T10:15:37+08:00 ] 14.18.29.116 GET /?a748=fy!_1551492937258995339
+[ info ] mcs.meishangyun.com/?a748=fy!_1551492937258995339 [运行时间：0.623560s][吞吐率：1.60req/s] [内存消耗：2,254.00kb] [文件加载：69]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'mcs.meishangyun.com',
+  'accept' => '*/*',
+  'connection' => 'keep-alive',
+  'cookie' => 'PHPSESSID=u7u9sjmbit1to9t4dis9k058s5',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_1_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16D57 MicroMessenger/7.0.3(0x17000321) NetType/WIFI Language/zh_CN',
+  'accept-language' => 'zh-cn',
+  'referer' => 'http://mcs.meishangyun.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'a748' => 'fy!_1551492937258995339',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 30758400,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
