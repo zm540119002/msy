@@ -26,6 +26,7 @@ class Goods extends Base {
      * 编辑
      */
     public function edit(){
+
         $modelGoods = new \app\index_admin\model\Goods();
         if(request()->isPost()){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
@@ -53,7 +54,17 @@ class Goods extends Base {
             if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
                 $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['goods_video']));
             }
-            
+
+            // 选中的店铺类型 十进制
+            $bolong_to  = 0;
+            $belong_tos = input('post.bolong_to/a');
+            foreach($belong_tos as $k => $v){
+                if ($v) {
+                    $bolong_to += pow(2,$k);
+                }
+            }
+            $_POST['bolong_to'] = $bolong_to;
+
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
                     'where' => [
@@ -80,8 +91,6 @@ class Goods extends Base {
                 }
                 $data = $_POST;
                 $data['update_time'] = time();
-                $data['store_type']   = isset($_POST['store_type']) ? $_POST['store_type'] : 0;
-                $data['central_type'] = isset($_POST['central_type']) ? $_POST['central_type'] : 0;
                 $where = [
                     'id'=>input('post.id/d')
                 ];
