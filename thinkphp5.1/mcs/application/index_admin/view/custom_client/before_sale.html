@@ -1,0 +1,306 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="footer"}{/block}
+{block name="content"}
+<!--模板 start-->
+<section id="customItemTpl" style="display:none">
+    <li class="custom_item" data-from_id="">
+        <a href="javascript:void(0);" class="delete_chat">删除</a>
+        <div class="avatar">
+            <img src="public_img/default/chat_head.jpg">
+            <span class="news_num"></span>
+        </div>
+        <div class="content">
+            <p class="author"></p>
+        </div>
+    </li>
+</section>
+<section id="messageListTpl" style="display:none;">
+    <ul class="clearfix message_list" data-from_id="">
+        <li><span class="create_time"></span></li>
+        <li class="message_item others unread" data-id="">
+            <div class="avatar">
+                <img src="public_img/default/chat_head.jpg">
+            </div>
+            <div class="content">
+                <div class="msg"></div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!--模板 end-->
+<section class="f24 chat_content"></section>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    var loginSign = '{$loginSign|default=""}';
+    function on_init_call_back(data){
+        // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
+        // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
+        var postData = {client_id: data.client_id};
+        var url = domain + 'index/CustomerService/bindUid';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(msg){
+                $('.loading').hide();
+                if(msg.status==0){
+                    dialog.error(msg.info);
+                }else if(msg.code==1){
+                    //已登录
+                }
+            }
+        });
+    }
+    function on_msg_call_back(data) {
+        var messageUl = $('#messageListTpl').find('ul').clone();
+        messageUl.find('.message_item').attr('data-id',data.id);
+        messageUl.find('.msg').text(data.content);
+        messageUl.find('.create_time').text(data.create_time);
+        if(data.avatar){
+            messageUl.find('img').attr('src',uploads+data.avatar);
+        }
+        //在聊天列表里找到标记
+        var find_sign = false;
+        $.each($('ul.message_list'),function(){
+            var _thisMessageUl = $(this);
+            //如果是已登录用户
+            if(data.from_id && _thisMessageUl.data('from_id')==data.from_id){
+                find_sign = true;
+                if(_thisMessageUl.hasClass('current')){
+                    //当前聊天框，设置消息为已读
+                    if(!data.id){
+                        return false;
+                    }
+                    var postData = {};
+                    postData.from_id = data.from_id;
+                    postData.messageIds = [];
+                    postData.messageIds.push(data.id);
+                    var url = domain + 'index/CustomerService/setMessageRead';
+                    $.ajax({
+                        url: url,
+                        data: postData,
+                        type: 'post',
+                        beforeSend: function(xhr){
+                            $('.loading').show();
+                        },
+                        error:function(xhr){
+                            $('.loading').hide();
+                            dialog.error('AJAX错误');
+                        },
+                        success: function(data){
+                            $('.loading').hide();
+                            if(data.status==0){
+                                dialog.error(data.info);
+                            }else{
+                                //聊天框滚动条置底
+                                messageSetBottom();
+                                messageUl.find('.message_item').removeClass('unread').addClass('read');
+                                _thisMessageUl.append(messageUl.html());
+                            }
+                        }
+                    });
+                }else{
+                    //非当前聊天框，提示有新消息
+                    $.each($('li.custom_item'),function(){
+                        var _thisCustomLi = $(this);
+                        var num = _thisCustomLi.find('span.news_num').text();
+                        if(data.from_id && _thisCustomLi.data('from_id')==data.from_id){
+                            _thisCustomLi.find('span.news_num').text(++num);
+                            _thisMessageUl.append(messageUl.html());
+                        }
+                        if(data.from_client_id && _thisCustomLi.data('from_client_id')==data.from_client_id){
+                            _thisCustomLi.find('span.news_num').text(++num);
+                            _thisMessageUl.append(messageUl.html());
+                        }
+                    });
+                }
+            }else if(data.from_client_id && _thisMessageUl.data('from_client_id')==data.from_client_id){
+                //如果是游客
+                find_sign = true;
+                _thisMessageUl.append(messageUl.html());
+                if(!_thisMessageUl.hasClass('current')){
+                    //非当前聊天框，提示有新消息
+                    $.each($('li.custom_item'),function(){
+                        var _thisCustomLi = $(this);
+                        if(_thisCustomLi.data('from_client_id')==data.from_client_id){
+                            var num = _thisCustomLi.find('span.news_num').text();
+                            _thisCustomLi.find('span.news_num').text(++num);
+                        }
+                    });
+                }else{
+                    //聊天框滚动条置底
+                    messageSetBottom();
+                }
+            }
+        });
+        //聊天列表里未找到，则追加
+        if(!find_sign){
+            //追加客户
+            var customLi = $('#customItemTpl').find('li').clone();
+            data.from_id && customLi.attr('data-from_id',data.from_id);
+            data.from_client_id && customLi.attr('data-from_client_id',data.from_client_id);
+            customLi.find('.author').text(data.from_name);
+            customLi.find('span.news_num').text(1);
+            $('ul.custom_list').append(customLi);
+            //追加消息
+            data.from_id && messageUl.attr('data-from_id',data.from_id);
+            data.from_client_id && messageUl.attr('data-from_client_id',data.from_client_id);
+            $('div.chatMsg-ct').append(messageUl);
+        }
+    }
+    //聊天框滚动条置底
+	function messageSetBottom() {
+		$('.message_list.current').scrollTop($('.message_list.current')[0].scrollHeight);
+	}
+</script>
+<script type="text/javascript" src="public_js/web-socket.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //页面初始化
+        var config = {
+            url: action,
+            container:$('section.chat_content')
+        };
+        getList(config);
+        //切换聊天对象
+        $('body').on('click','li.custom_item',function(){
+            var _thisCustomLi=$(this);
+            _thisCustomLi.find('span.news_num').text('');
+            _thisCustomLi.addClass('current').siblings().removeClass('current');
+            $('.chat_main_wrapper .message_list').removeClass('current').eq(_thisCustomLi.index()).addClass('current');
+            var curLength=$('ul.message_list.current').find('li').length;
+            if(curLength){
+                //聊天框滚动条置底
+                messageSetBottom();
+            }
+            var postData = {};
+            postData.messageIds = [];
+            postData.from_id = _thisCustomLi.data('from_id');
+            $.each($('ul.message_list'),function(){
+                var _thisMessageUl = $(this);
+                if(postData.from_id==_thisMessageUl.data('from_id')){
+                    $.each(_thisMessageUl.find('li.message_item.others.unread'),function(){
+                        if($(this).data('id')){
+                            $(this).removeClass('unread').addClass('read');
+                            postData.messageIds.push($(this).data('id'));
+                        }
+                    });
+                }
+            });
+            //设置信息已读
+            setMessageRead(_thisCustomLi,postData);
+        });
+        //发送聊天内容
+        $('body').on('click','.send_btn',function(){
+            var _this = $(this);
+            //当前聊天对象
+            var _currentUl = $('ul.message_list.current');
+            var content = _this.prev().val();
+            if(!content){
+                dialog.error('不能发送空内容！');
+                return false;
+            }
+            var postData = {content:content};
+            var to_user_id = _currentUl.data('from_id');
+            if(to_user_id){
+                postData.to_user_id = to_user_id;
+            }else{
+                var to_client_id = _currentUl.data('from_client_id');
+                if(to_client_id){
+                    postData.to_client_id = to_client_id;
+                }else{
+                    dialog.error('请选择聊天对象！');
+                    return false;
+                }
+            }
+            var url = domain + 'index/CustomerService/sendMessage';
+             $.ajax({
+                 url: url,
+                 data: postData,
+                 type: 'post',
+                 beforeSend: function(xhr){
+                     $('.loading').show();
+                 },
+                 error:function(xhr){
+                     $('.loading').hide();
+                     dialog.error('AJAX错误');
+                 },
+                 success: function(data){
+                     $('.loading').hide();
+                     if(data.status==0){
+                         dialog.error(data.info);
+                     }else{
+                         _currentUl.append(data);
+                         _this.prev().val('');
+                         //聊天框滚动条置底
+                         messageSetBottom();
+                     }
+                 }
+             });
+        });
+        //删除
+        $('body').on('click','.delete_chat',function(e){
+            e.stopPropagation();
+            var _thisCustomLi=$(this).parent();
+            var postData = {};
+            postData.from_id = _thisCustomLi.find('ul').data('from_id');
+            postData.messageIds = [];
+            $.each(_thisCustomLi.find('li'),function(){
+                if($(this).data('id')){
+                    postData.messageIds.push($(this).data('id'));
+                }
+            });
+            var url = domain + 'index/CustomerService/delCustomerMessage';
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else{
+                        _thisCustomLi.remove();
+                    }
+                }
+            });
+        });
+        //搜索聊天客户
+        $('body').on('click','.search_btn', function() {
+            var searchText=$(this).next().val();
+            if(!searchText){
+                dialog.error('请输入名字搜索');
+                return false;
+            }
+            $('.chat_left .chat_list').each(function(index,val){
+                var _this=$(this);
+                var name=_this.find('.customer_name').text();
+                if(searchText==name){
+                    _this.show().siblings().hide();
+                    $('.list').find('.no_info').hide();
+                    return false;
+                }else{
+                    _this.hide();
+                    $('.list .no_info').remove();
+                    $('.list').empty().append('<li class="no_info">暂无此人</li>');
+                }
+            });
+        });
+    });
+</script>
+{/block}
