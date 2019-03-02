@@ -8,6 +8,7 @@ class Goods extends Base {
      *审核首页
      */
     public function manage(){
+
         // 所有项目分类
         $model = new \app\index_admin\model\GoodsCategory();
         $config = [
@@ -79,9 +80,12 @@ class Goods extends Base {
                 }
                 $data = $_POST;
                 $data['update_time'] = time();
+                $data['store_type']   = isset($_POST['store_type']) ? 0 : $_POST['store_type'];
+                $data['central_type'] = isset($_POST['central_type']) ? 0 : $_POST['central_type'];
                 $where = [
                     'id'=>input('post.id/d')
                 ];
+
                 $result = $modelGoods -> allowField(true) -> save($data,$where);
                 if(false === $result){
                     return errorMsg('失败');
@@ -100,6 +104,7 @@ class Goods extends Base {
                 $list[] = $data;
                 $this->generateQRcode($list);
             }
+
             return successMsg('成功');
         }else{
            // 所有商品分类
@@ -122,6 +127,7 @@ class Goods extends Base {
                 $goodsInfo = $modelGoods->getInfo($config);
                 $this->assign('info',$goodsInfo);
             }
+
             //单位
             $this->assign('unitList',config('custom.unit'));
             return $this->fetch();
