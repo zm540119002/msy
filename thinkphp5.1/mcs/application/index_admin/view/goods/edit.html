@@ -28,9 +28,10 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>店铺类别：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
+
                             <div class="type_item">
-                                <input type="checkbox" name="store_type" value="1">中心店
-                                <input type="checkbox" name="store_type" value="2">工作室
+                                <input type="checkbox" name="store_type" value="">中心店
+                                <input type="checkbox" name="store_type" value="">工作室
                             </div>
                         </td>
                     </tr>
@@ -308,7 +309,9 @@
                 var typeArr=[];
                 $.each($('.type_item input[type="checkbox"]'),function(){
                     if($(this).is(":checked")){
-                        typeArr.push(parseInt($(this).val()));    
+                        typeArr.push(1);    
+                    }else{
+                        typeArr.push(0);
                     }
                 })
                 postData.typeArr=typeArr;
