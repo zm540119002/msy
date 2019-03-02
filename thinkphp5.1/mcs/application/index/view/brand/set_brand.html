@@ -1,0 +1,287 @@
+<!--增加商标-->
+<section class="add_brand_tpl bg-eae pt-5" style="display:none;">
+    <form method="post" class="bg-fff brand_form">
+        <!--<input type="hidden" class="" name="address_id" value="" />-->
+        <div class="box-flex clearfixed">
+            <input type="text" name="name" class="input-filed" placeholder="商标名称(只限第三类)" value="">
+        </div>
+        <!--<div class="box-flex clearfixed">
+            <select name="type" class="input-filed">
+                <option value="">商标类别</option>
+                {volist name="Think.config.custom.brand_type" id="brand_type"}
+                <option value="{$key}">{$brand_type}</option>
+                {/volist}
+            </select>
+        </div>-->
+        <div class="upload-picture-module box-flex f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg" >
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" name="logo" class="img" data-src="" value=""/>
+				</div>
+			</div>
+            <div class="brand_txt">商标logo</div>
+		</div>
+        <div class="upload-picture-module box-flex f24">
+			<div>
+				<div class="picture-module">
+					<input type="file" class="uploadImg uploadSingleImg">
+					<img class="upload_img" src="" alt="">
+					<input type="hidden" name="certificate" class="img" data-src="" value=""/>
+				</div>
+			</div>
+            <div class="brand_txt">
+                商标证或受理通知书
+            </div>
+		</div>
+        <div class="upload-picture-module f24">
+			<div>
+				<div class="picture-module">
+					<!--<input type="file" class="uploadImg uploadSingleImg">-->
+					<img class="upload_img" src="public_img/brand_template_img.jpg" alt="">
+					<!--<input type="hidden" name="authorization" class="img" data-src="" value=""/>-->
+				</div>
+			</div>
+            <div class="brand_txt example">
+                <p>如非自有商标需所有权者授权</p>
+                <a href="public_img/brand_template_img.jpg" download="brand_template_img.jpg" class="template_btn pink">商品授权书样板></a>
+            </div>
+		</div>
+    </form>
+</section>
+<!--设定品牌列表-->
+<section class="brand_list_layer" style="display:none;">
+    <ul class="list brand_list" id="">
+        
+    </ul>
+    <a href="javascript:void(0);" class="add_brand">增加商标</a>
+</section>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript">
+    //设置品牌弹窗
+    function brandLayer(obj) {
+        var brand_list_layer=$('.brand_list_layer').html();
+        layer.open({
+            title:['设定品牌','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'setBrandLayer brandLayer',
+            content:brand_list_layer,
+            btn:['确定'],
+            success:function(){
+                var winH=$(window).height();
+                $('.setBrandLayer .layui-m-layercont').css('height',winH-100+'px');
+                var url = module + 'Brand/getList';
+                var postData = {};
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(xhr){
+                        $('.loading').show();
+                    },
+                    error:function(xhr){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误！');
+                    },
+                    success: function(data){
+                        $('.setBrandLayer').find('.list').html(data);
+                        $('.setBrandLayer').find('.list').attr('id',obj.id);
+                        $.each($('.setBrandLayer li'),function(){
+                            var _this=$(this);
+                            var layer_brand_name=_this.find('.brand_name').val();
+                            if(layer_brand_name==obj.brand_name){
+                                _this.addClass('current').siblings().removeClass('current');
+                            }
+                        })
+                        cancleFixedLayer();
+                    }
+                });
+                //
+               
+                    
+               
+            },
+            yes:function(index){
+                $.each($('.setBrandLayer li'),function(){
+                    var _this=$(this);
+                    if(_this.hasClass('current')){
+                        var brandName=_this.find('input[name="name"]').val();
+                        var brand_id=_this.data('id');
+                        var backId=$('.setBrandLayer').find('.list').attr('id');
+                        $('#'+backId).find('.brand_name').text(brandName).data('id',brand_id);
+                    }
+                })
+                layer.close(index);
+            }
+        })
+    }
+    $(function(){
+        //设置品牌
+        $('body').on('click','.set_brand',function () {
+            var url = module + 'Brand/index';
+            var id=$(this).parents('li').attr('id');
+            var brand_name=$(this).find('.brand_name').text();
+            var brand_li_id = {
+                id:id,
+                brand_name:brand_name
+            };
+            var postData = {};
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误！');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0){
+                        dialog.error(data.info);
+                    }else if(data.code==1){
+                        if(data.data == 'no_login'){
+                            loginDialog();
+                            loginBackFunctionParameter.id =id;
+                            loginBackFunction = brandLayer;
+                        }
+                    }else if(data.status==1){
+
+                    }else{
+                        brandLayer(brand_li_id);
+                    }
+                }
+            });
+        });
+
+        //增加商标
+        var addBrandInfo=$('.add_brand_tpl').html();
+        $('body').on('click','.add_brand',function () {
+            layer.open({
+                title:['增加商标','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
+                className:'setBrandLayer',
+                content:addBrandInfo,
+                btn:['确定','取消'],
+                success:function(){
+
+                },
+                yes:function(index){
+                    var postData  = $(".setBrandLayer .brand_form").serializeObject();
+                    //var brandTpl=$('.brandListTpl').html();
+                    var content='';
+                    if(!postData.name){
+                        content='请填写商标名称';
+                    }
+                    // else if(!postData.type){
+                    //     content='请选择商标类别';
+                    // }
+                    else if(!postData.logo){
+                        content='请上传商标logo';
+                    }else if(!postData.certificate){
+                        content='请上传商标证或受理通知书';
+                    }else if(!postData.authorization){
+                        content='请上传商标所有权者授权书';
+                    }
+                    if(content){
+                        dialog.error(content);
+                        return false;
+                    }
+                    var config = {
+                        url:module + 'Brand/edit',
+                        postData:postData,
+                        index:index
+                    };
+                    dialogFormAdd(config);
+                    //添加或修改地址
+                }
+            });
+        });
+        //修改商标
+        $('body').on('click','.edit_brand',function(event){
+            event.stopPropagation();
+            var _this=$(this).parents('.list li');
+            layer.open({
+                title:['修改商标','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
+                className:'setBrandLayer',
+                content:addBrandInfo,
+                btn:['确定','取消'],
+                success:function(){
+                    copyDataByName(_this,$('.setBrandLayer .brand_form'));
+                    var logo=_this.find('input[name="logo"]').val();
+                    var certificate=_this.find('input[name="certificate"]').val();
+                    var authorization=_this.find('input[name="authorization"]').val();
+                    $('.setBrandLayer').find('input[name="logo"]').prev().attr('src',uploads+logo);
+                    $('.setBrandLayer').find('input[name="certificate"]').prev().attr('src',uploads+certificate);
+                    $('.setBrandLayer').find('input[name="authorization"]').prev().attr('src',uploads+authorization);
+                },
+                yes:function(index){
+                    var postData  = $(".setBrandLayer .brand_form").serializeObject();
+                    postData.id = _this.data('id');
+                    var brandTpl=$('.brandListTpl').html();
+                    var content='';
+                    if(!postData.name){
+                        content='请填写商标名称';
+                    }else if(!postData.type){
+                        content='请选择商标类别';
+                    }else if(!postData.logo){
+                        content='请上传商标logo';
+                    }else if(!postData.certificate){
+                        content='请上传商标证或受理通知书';
+                    }else if(!postData.authorization){
+                        content='请上传商标所有权者授权书';
+                    }
+                    if(content){
+                        dialog.error(content);
+                        return false;
+                    }
+                   
+                    postData.id = _this.data('id');
+                    var config = {
+                        url:module + 'Brand/edit',
+                        postData:postData,
+                        modifyObj:_this,
+                        index:index
+                    };
+                    dialogFormEdit(config);
+                   
+                }
+            });
+        });
+        //设定品牌
+        $('body').on('click','.setBrandLayer li',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            // var brandName=$(this).find('input[name="name"]').val();
+            // var brand_id=$(this).data('id');
+            // var backId=$('.setBrandLayer').find('.list').attr('id');
+            // $('#'+backId).find('.brand_name').text(brandName).data('id',brand_id);
+            // setTimeout(function(){
+            //     layer.closeAll();
+            // },1000)
+            return false;
+        });
+        //删除商标
+        $('body').on('click','.delete_brand',function (event) {
+            event.stopPropagation();
+            var _this=$(this);
+            layer.open({
+                title:['删除商标','border-bottom:1px solid #d9d9d9;'],
+                content:'确定删除商标吗？',
+                btn:['确定','取消'],
+                yes:function(index){
+                    _this.parents('li').remove();
+                    layer.close(index);
+                }
+            })
+        });
+        
+    })
+
+</script>
