@@ -32,7 +32,6 @@
                                 {volist name="$Think.config.custom.belong_to" id ='vo'}
                                 <input type="checkbox" name="bolong_to" value="">{$vo}
                                 {/volist}
-
                             </div>
                         </td>
                     </tr>
@@ -310,7 +309,9 @@
                 var typeArr=[];
                 $.each($('.type_item input[type="checkbox"]'),function(){
                     if($(this).is(":checked")){
-                        typeArr.push(parseInt($(this).val()));    
+                        typeArr.push(1);    
+                    }else{
+                        typeArr.push(0);
                     }
                 })
                 postData.typeArr=typeArr;
