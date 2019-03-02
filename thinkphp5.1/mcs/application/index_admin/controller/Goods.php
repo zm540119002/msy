@@ -80,8 +80,8 @@ class Goods extends Base {
                 }
                 $data = $_POST;
                 $data['update_time'] = time();
-                $data['store_type']   = isset($_POST['store_type']) ? 0 : $_POST['store_type'];
-                $data['central_type'] = isset($_POST['central_type']) ? 0 : $_POST['central_type'];
+                $data['store_type']   = isset($_POST['store_type']) ? $_POST['store_type'] : 0;
+                $data['central_type'] = isset($_POST['central_type']) ? $_POST['central_type'] : 0;
                 $where = [
                     'id'=>input('post.id/d')
                 ];
