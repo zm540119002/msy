@@ -29,8 +29,12 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>店铺类别：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
-                                {volist name="$Think.config.custom.belong_to" id ='vo'}
-                                <input type="checkbox" name="bolong_to" value="">{$vo}
+                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
+                                    {if ($info.belong_to[$k-1])}
+                                        <input type="checkbox" name="bolong_to" value="" checked="checked">{$vo}
+                                    {else /}
+                                        <input type="checkbox" name="bolong_to" value="">{$vo}
+                                    {/if}
                                 {/volist}
                             </div>
                         </td>
@@ -306,17 +310,17 @@
                 });
                 //简介
                 postData.parameters = ueParam.getContent();
-                var typeArr=[];
+                var belong_to=[];
                 $.each($('.type_item input[type="checkbox"]'),function(){
                     if($(this).is(":checked")){
-                        typeArr.push(1);    
+                        belong_to.push(1);
                     }else{
-                        typeArr.push(0);
+                        belong_to.push(0);
                     }
                 })
-                postData.typeArr=typeArr;
-                console.log(typeArr);
-                return false;
+                postData.belong_to=belong_to;
+                //console.log(typeArr);
+                //return false;
                 var content='';
                 if(!postData.name){
                     content='请填写商品名称';
