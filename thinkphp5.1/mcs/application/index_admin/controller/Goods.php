@@ -402,7 +402,6 @@ class Goods extends Base {
         }
         $id = input('id/d');
         $model = new \app\index_admin\model\Goods();
-        print_r($id);
         $config = [
             'where'=>[
                 ['g.id','=',$id]
@@ -418,7 +417,6 @@ class Goods extends Base {
 //            ],
         ];
         $info = $model ->getInfo($config);
-        print_r($model->getLastSql());exit;
         $info['main_img'] = explode(",",rtrim($info['main_img'], ","));
         $info['detail_img'] = explode(",",rtrim($info['detail_img'], ","));
         $info['tag'] = explode(",",rtrim($info['tag'], ","));
