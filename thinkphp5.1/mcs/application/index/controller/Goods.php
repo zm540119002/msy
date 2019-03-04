@@ -55,6 +55,7 @@ class Goods extends \common\controller\Base{
      * 查出产商相关产品 分页查询
      */
     public function getList(){
+
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
@@ -76,6 +77,9 @@ class Goods extends \common\controller\Base{
         ];
         if(input('?get.category_id') && input('get.category_id/d')){
             $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+        }
+        if(input('get.belong_to/d')){
+            $config['where'][] = ['g.belong_to', '=', input('get.belong_to/d')];
         }
         $keyword = input('get.keyword','');
         if($keyword) {
