@@ -1,93 +1,101 @@
-{extend name="template/admin_pc/base.html" /}
-{block name="css-customize"}
-    <link type="text/css" rel="stylesheet" href="index_admin_css/fenlei.css" />
-    <link type="text/css" rel="stylesheet" href="index_admin_css/skin.css" />
-{/block}
+<?php /*a:3:{s:67:"D:\web\thinkphp5.1\mch\application/index_admin/view\goods\edit.html";i:1551065534;s:27:"template/admin_pc/base.html";i:1551083825;s:83:"D:\web\thinkphp5.1\mch\application/index_admin/view\goods_category\linkage_tpl.html";i:1551065534;}*/ ?>
+<!DOCTYPE HTML>
+<html><head>
+    
+    <link type="text/css" rel="stylesheet" href="http://mch.new.com/static/index_admin/css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="http://mch.new.com/static/index_admin/css/skin.css" />
 
-{block name="content"}
+    <link type="text/css" rel="stylesheet" href="http://mch.new.com/static/index_admin/css/fenlei.css" />
+    <link type="text/css" rel="stylesheet" href="http://mch.new.com/static/index_admin/css/skin.css" />
+    <!--前置自定义js-->
+    
+    <script type="text/javascript" src="http://mch.new.com/static/common/js/jquery/jquery-1.9.1.min.js"></script>
+</head><body>
+
     <div class="page">
         <div class="fixed-bar">
             <div class="item-title">
                 <ul class="tab-base">
-                    <li><a href="{:url('manage')}" ><span>管理</span></a></li>
-                    <li><a href="{:url('edit')}" class="current"><span>编辑</span></a></li>
+                    <li><a href="<?php echo url('manage'); ?>" ><span>管理</span></a></li>
+                    <li><a href="<?php echo url('edit'); ?>" class="current"><span>编辑</span></a></li>
                 </ul>
             </div>
         </div>
         <div style="margin-top:15px;">
             <form id="form1">
-                <input type="hidden" name="id" value="{$info.id}">
+                <input type="hidden" name="id" value="<?php echo htmlentities($info['id']); ?>">
                 <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                     <tbody>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>所属分类：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            {include file="goods_category/linkage_tpl" /}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>店铺类别：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <div class="type_item">
-                                <input type="checkbox" name="bolong_to" value="">中心店
-                                <input type="checkbox" name="bolong_to" value="">工作室
-                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
-                                    {if ($info.belong_to[$k-1])}
-                                        <input type="checkbox" name="bolong_to" value="" checked="checked">{$vo}
-                                    {else /}
-                                        <input type="checkbox" name="bolong_to" value="">{$vo}
-                                    {/if}
-                                {/volist}
-                            </div>
+                            <select name="category_id_1" class="selectbox">
+    <option value="">一级分类</option>
+</select>
+<select name="category_id_2" class="selectbox">
+    <option value="">二级分类</option>
+</select>
+<select name="category_id_3" class="selectbox">
+    <option value="">三级分类</option>
+</select>
+<!-- 隐藏区 -->
+<div style="display:none">
+    <select id="allCategoryListTemp">
+        <?php if(is_array($allCategoryList) || $allCategoryList instanceof \think\Collection || $allCategoryList instanceof \think\Paginator): $i = 0; $__LIST__ = $allCategoryList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+            <option value="<?php echo htmlentities($vo['id']); ?>" level="<?php echo htmlentities($vo['level']); ?>" parent_id_1="<?php echo htmlentities($vo['parent_id_1']); ?>"
+                    parent_id_2="<?php echo htmlentities($vo['parent_id_2']); ?>"><?php echo htmlentities($vo['name']); ?></option>
+        <?php endforeach; endif; else: echo "" ;endif; ?>
+    </select>
+</div>
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品名称：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name}">
+                            <input style="width: 200px; " class="inputboxadmin" name="name" value="<?php echo htmlentities($info['name']); ?>">
 
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>标题文案：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="headline" value="{$info.headline}">
+                            <input style="width: 200px; " class="inputboxadmin" name="headline" value="<?php echo htmlentities($info['headline']); ?>">
                         </td>
                     </tr>
                     <tr class="radioTypeOption first">
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>批量价格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="bulk_price" value="{$info.bulk_price}">
+                            <input style="width: 200px; " class="inputboxadmin" name="bulk_price" value="<?php echo htmlentities($info['bulk_price']); ?>">
                         </td>
                     </tr>
                     <tr class="radioTypeOption first">
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>样品价格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="sample_price" value="{$info.sample_price}">
+                            <input style="width: 200px; " class="inputboxadmin" name="sample_price" value="<?php echo htmlentities($info['sample_price']); ?>">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="specification" value="{$info.specification}">
+                            <input style="width: 200px;" class="inputboxadmin" name="specification" value="<?php echo htmlentities($info['specification']); ?>">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>起订数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="<?php echo htmlentities($info['minimum_order_quantity']); ?>">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>起订递增数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="increase_quantity" value="{$info.increase_quantity}">
+                            <input style="width: 200px;" class="inputboxadmin" name="increase_quantity" value="<?php echo htmlentities($info['increase_quantity']); ?>">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>样品购买限额：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="{$info.minimum_sample_quantity}">
+                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="<?php echo htmlentities($info['minimum_sample_quantity']); ?>">
                         </td>
                     </tr>
                     <tr>
@@ -95,22 +103,22 @@
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <select name="purchase_unit">
                                 <option value="">请选择单位</option>
-                                {volist name="unitList" id="unit"  key="k"}
-                                <option value="{$k}">{$unit}</option>
-                                {/volist}
+                                <?php if(is_array($unitList) || $unitList instanceof \think\Collection || $unitList instanceof \think\Paginator): $k = 0; $__LIST__ = $unitList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$unit): $mod = ($k % 2 );++$k;?>
+                                <option value="<?php echo htmlentities($k); ?>"><?php echo htmlentities($unit); ?></option>
+                                <?php endforeach; endif; else: echo "" ;endif; ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort}">
+                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="<?php echo htmlentities($info['sort']); ?>">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$info.tag}">
+                            <input style="width: 200px; " class="inputboxadmin" name="tag" value="<?php echo htmlentities($info['tag']); ?>">
                             多个标签请用逗号分隔，例如：正品保障,纳晶水光
                         </td>
                     </tr>
@@ -124,12 +132,12 @@
                                         <div>
                                             <div class="picture-module">
                                                 <input type="file" class="uploadImg uploadSingleVideo" name="">
-                                                {empty name="info.goods_video"}
+                                                <?php if(empty($info['goods_video']) || (($info['goods_video'] instanceof \think\Collection || $info['goods_video'] instanceof \think\Paginator ) && $info['goods_video']->isEmpty())): ?>
                                                 <video class="upload_img upload-video" src="" autoplay="autoplay"></video>
-                                                {else /}
-                                                <video class="upload_img upload-video" src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
-                                                {/empty}
-                                                <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.goods_video}" name="goods_video"/>
+                                                <?php else: ?>
+                                                <video class="upload_img upload-video" src="http://mch.new.com/uploads/<?php echo htmlentities($info['goods_video']); ?>" autoplay="autoplay"></video>
+                                                <?php endif; ?>
+                                                <input type="hidden" class="layer-thumbnail-picture img"  value="<?php echo htmlentities($info['goods_video']); ?>" name="goods_video"/>
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +149,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品简介：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
-                                <textarea class="project_description" name="intro" >{$info.intro}</textarea>
+                                <textarea class="project_description" name="intro" ><?php echo htmlentities($info['intro']); ?></textarea>
                             </div>
                         </td>
                     </tr>
@@ -157,14 +165,14 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>主图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="main_img" type="text/plain"></script>
-                            <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
+                            <input id="mainImg" type="hidden" value="<?php echo htmlentities(formatImg($info['main_img'])); ?>">
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品详情图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                         <script id="detail_img" type="text/plain"></script>
-                        <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
+                        <input id="detailImg" type="hidden" value="<?php echo htmlentities(formatImg($info['detail_img'])); ?>">
                     </tr>
                     <tr>
                         <td width="11%"></td>
@@ -179,12 +187,26 @@
             </form>
         </div>
     </div>
-{/block}
-{block name="script"}
-    <script type="text/javascript" src="hui_lib/Ueditor/ueditor.config.js"></script>
+
+
+<footer class="f24">
+    <a href="http://www.miitbeian.gov.cn">
+        <span class="icp_icon">Copyright@广东维雅生物科技有限公司</span>
+        <span class="icp_icon">粤ICP备18130945号-1</span>
+    </a>
+</footer>
+
+<script type="text/javascript" src="http://mch.new.com/static/common/js/public.js"></script>
+<script type="text/javascript" src="http://mch.new.com/static/common/js/common.js"></script>
+<script type="text/javascript" src="http://mch.new.com/static/h-ui.lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="http://mch.new.com/static/common_admin/js/dialog.js"></script>
+<script type="text/javascript" src="http://mch.new.com/static/common_admin/js/paging.js"></script>
+<!--自定义js-->
+
+    <script type="text/javascript" src="http://mch.new.com/static/h-ui.lib/Ueditor/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
-    <script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="http://mch.new.com/static/h-ui.lib/Ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://mch.new.com/static/h-ui.lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
     <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
@@ -219,10 +241,10 @@
             autoFloatEnabled: true
         });
     </script>
-    <script type="text/javascript" src="index_admin_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="http://mch.new.com/static/index_admin/js/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
-            var parameters = '{$info.parameters|raw}';
+            var parameters = '<?php echo $info['parameters']; ?>';
             //商品参数
             if(parameters){
                 ueParam.ready(function() {
@@ -240,18 +262,18 @@
             });
 
             //初始化所属分类
-            var category_id_1 = '{$info.category_id_1}';
+            var category_id_1 = '<?php echo htmlentities($info['category_id_1']); ?>';
             if(category_id_1){
                 $('[name=category_id_1]').val(category_id_1);
                 $('[name=category_id_1]').change();
             }
-            var category_id_2 = '{$info.category_id_2}';
+            var category_id_2 = '<?php echo htmlentities($info['category_id_2']); ?>';
             if(category_id_2){
                 $('[name=category_id_2]').val(category_id_2);
                 $('[name=category_id_2]').change();
             }
 
-            var purchase_unit = '{$info.purchase_unit}';
+            var purchase_unit = '<?php echo htmlentities($info['purchase_unit']); ?>';
             if(purchase_unit){
                 $('[name=purchase_unit]').val(purchase_unit);
             }
@@ -312,31 +334,7 @@
                 });
                 //简介
                 postData.parameters = ueParam.getContent();
-<<<<<<< HEAD
-                var typeArr=[];
-                // $.each($('.type_item input[type="checkbox"]'),function(){
-                //     if($(this).is(":checked")){
-                //         typeArr.push(1);    
-                //     }else{
-                //         typeArr.push(0);
-                //     }
-                // })
-                // postData.typeArr=typeArr;
-                console.log(postData);
-                return false;
-=======
-                var belong_to=[];
-                $.each($('.type_item input[type="checkbox"]'),function(){
-                    if($(this).is(":checked")){
-                        belong_to.push(1);
-                    }else{
-                        belong_to.push(0);
-                    }
-                })
-                postData.belong_to=belong_to;
-                //console.log(typeArr);
-                //return false;
->>>>>>> 9998510f965fc43e7d84ad3d725fa6df083df471
+
                 var content='';
                 if(!postData.name){
                     content='请填写商品名称';
@@ -359,12 +357,10 @@
                 }else if(!postData.detail_img){
                     content='请上传商品详情图';
                 }
-                
                 if(content){
                     dialog.error(content);
                     return false;
                 }
-                
 
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
@@ -378,4 +374,14 @@
 
         });
     </script>
-{/block}
+
+<script type="text/javascript">
+    var domain = '<?php echo request()->domain(); ?>'+'/'+'index.php/';
+    var module = domain + '<?php echo request()->module(); ?>/';
+    var controller = module + '<?php echo request()->controller(); ?>/';
+    var action = controller + '<?php echo request()->action(); ?>';
+    var uploads = '<?php echo request()->domain(); ?>'+'/uploads/';
+    $(function(){
+    });
+</script>
+</body></html>

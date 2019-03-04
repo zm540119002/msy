@@ -26,7 +26,6 @@ class Goods extends Base {
      * 编辑
      */
     public function edit(){
-
         $modelGoods = new \app\index_admin\model\Goods();
         if(request()->isPost()){
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
@@ -56,14 +55,15 @@ class Goods extends Base {
             }
 
             // 选中的店铺类型 十进制
-            $bolong_to  = 0;
-            $belong_tos = input('post.bolong_to/a');
+            $belong_to  = 0;
+            $belong_tos = input('post.belong_to/a');
             foreach($belong_tos as $k => $v){
                 if ($v) {
-                    $bolong_to += pow(2,$k);
+                    $belong_to += pow(2,$k);
                 }
             }
-            $_POST['bolong_to'] = $bolong_to;
+
+            $_POST['belong_to'] = $belong_to;
 
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
@@ -134,6 +134,10 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
+
+                // 选中的店铺
+                $goodsInfo['belong_to'] = strrev(decbin($goodsInfo['belong_to']));
+
                 $this->assign('info',$goodsInfo);
             }
 

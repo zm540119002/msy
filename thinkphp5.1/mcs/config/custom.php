@@ -79,8 +79,9 @@ return [
         '3'=>'护肤',
     ],
     /**商品归属 参考连接 https://blog.csdn.net/ztchun/article/details/82356664
-     * 二进制位表示归属,个数相加的和表示多选; 例：1+2=3; 表示同时选择了'中心店','工作室;
-     *  sql 查询语句  Select * from seller where card_status & 2; 查询所有选择了2的商品.
+     * 使用二进制来保存店铺的类型.
+     * key为值,个数相加的和表示选中的类型; 例：1+2=3; 表示同时选择了'中心店','工作室;
+     * sql 查询语句  Select * from seller where card_status & 2; 查询所有选择了2的商品.
      */
    'belong_to'=>[
         '1' => '中心店',
