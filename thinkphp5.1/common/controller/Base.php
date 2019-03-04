@@ -16,15 +16,15 @@ class Base extends \think\Controller{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weiXinUserInfo =  session('weiXinUserInfo');
-            if(empty($weiXinUserInfo)){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo',$weiXinUserInfo);
-            }
-            $this->assign('weiXinUserInfo',$weiXinUserInfo);
-        }
+//        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+//            $weiXinUserInfo =  session('weiXinUserInfo');
+//            if(empty($weiXinUserInfo)){
+//                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+//                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+//                session('weiXinUserInfo',$weiXinUserInfo);
+//            }
+//            $this->assign('weiXinUserInfo',$weiXinUserInfo);
+//        }
     }
     //返回图片临时相对路径
     public function uploadFileToTemp(){
