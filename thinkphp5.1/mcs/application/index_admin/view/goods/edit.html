@@ -31,9 +31,9 @@
                             <div class="type_item">
                                 {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
                                     {if ($info.belong_to[$k-1])}
-                                        <input type="checkbox" name="bolong_to" value="" checked="checked">{$vo}
+                                        <input type="checkbox" name="bolong_to" value="1" checked="checked">{$vo}
                                     {else /}
-                                        <input type="checkbox" name="bolong_to" value="">{$vo}
+                                        <input type="checkbox" name="bolong_to" value="1">{$vo}
                                     {/if}
                                 {/volist}
                             </div>
@@ -310,17 +310,10 @@
                 });
                 //简介
                 postData.parameters = ueParam.getContent();
-                var belong_to=[];
-                $.each($('.type_item input[type="checkbox"]'),function(){
-                    if($(this).is(":checked")){
-                        belong_to.push(1);
-                    }else{
-                        belong_to.push(0);
-                    }
-                })
-                postData.belong_to=belong_to;
                 var content='';
-                if(!postData.name){
+                if(!postData.bolong_to){
+                    content='请选择店铺类别';
+                }else if(!postData.name){
                     content='请填写商品名称';
                 }else if(!postData.headline){
                     content='请填写商品标题文案';
@@ -347,7 +340,6 @@
                     return false;
                 }
                 
-
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(action,postData,function(data){
