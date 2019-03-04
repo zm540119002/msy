@@ -320,6 +320,7 @@ $.fn.serializeObject = function() {
     var a = $(this)
         .not('checkbox')
         .serializeArray();
+    //解决checkbox未选中时，没有序列化到对象中的代码
     var checkboxes = $(this).find('input[type=checkbox]');
     if(checkboxes.length){
         $.each(checkboxes, function () {
