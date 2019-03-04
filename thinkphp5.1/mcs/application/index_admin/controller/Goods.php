@@ -28,7 +28,6 @@ class Goods extends Base {
     public function edit(){
         $modelGoods = new \app\index_admin\model\Goods();
         if(request()->isPost()){
-            return errorMsg('ccc');
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
