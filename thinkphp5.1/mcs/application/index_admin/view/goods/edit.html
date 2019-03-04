@@ -28,10 +28,19 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>店铺类别：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-
                             <div class="type_item">
+<<<<<<< HEAD
                                 <input type="checkbox" name="bolong_to" value="">中心店
                                 <input type="checkbox" name="bolong_to" value="">工作室
+=======
+                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
+                                    {if ($info.belong_to[$k-1])}
+                                        <input type="checkbox" name="bolong_to" value="" checked="checked">{$vo}
+                                    {else /}
+                                        <input type="checkbox" name="bolong_to" value="">{$vo}
+                                    {/if}
+                                {/volist}
+>>>>>>> 9998510f965fc43e7d84ad3d725fa6df083df471
                             </div>
                         </td>
                     </tr>
@@ -306,6 +315,7 @@
                 });
                 //简介
                 postData.parameters = ueParam.getContent();
+<<<<<<< HEAD
                 var typeArr=[];
                 // $.each($('.type_item input[type="checkbox"]'),function(){
                 //     if($(this).is(":checked")){
@@ -317,6 +327,19 @@
                 // postData.typeArr=typeArr;
                 console.log(postData);
                 return false;
+=======
+                var belong_to=[];
+                $.each($('.type_item input[type="checkbox"]'),function(){
+                    if($(this).is(":checked")){
+                        belong_to.push(1);
+                    }else{
+                        belong_to.push(0);
+                    }
+                })
+                postData.belong_to=belong_to;
+                //console.log(typeArr);
+                //return false;
+>>>>>>> 9998510f965fc43e7d84ad3d725fa6df083df471
                 var content='';
                 if(!postData.name){
                     content='请填写商品名称';

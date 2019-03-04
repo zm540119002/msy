@@ -53,7 +53,18 @@ class Goods extends Base {
             if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
                 $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['goods_video']));
             }
-            
+
+            // 选中的店铺类型 十进制
+            $belong_to  = 0;
+            $belong_tos = input('post.belong_to/a');
+            foreach($belong_tos as $k => $v){
+                if ($v) {
+                    $belong_to += pow(2,$k);
+                }
+            }
+
+            $_POST['belong_to'] = $belong_to;
+
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
                     'where' => [
@@ -80,8 +91,6 @@ class Goods extends Base {
                 }
                 $data = $_POST;
                 $data['update_time'] = time();
-                $data['store_type']   = isset($_POST['store_type']) ? $_POST['store_type'] : 0;
-                $data['central_type'] = isset($_POST['central_type']) ? $_POST['central_type'] : 0;
                 $where = [
                     'id'=>input('post.id/d')
                 ];
@@ -125,6 +134,10 @@ class Goods extends Base {
                     ],
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
+
+                // 选中的店铺
+                $goodsInfo['belong_to'] = strrev(decbin($goodsInfo['belong_to']));
+
                 $this->assign('info',$goodsInfo);
             }
 
