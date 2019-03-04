@@ -187,23 +187,22 @@
 <section class="bottom_nav_fixed bottom_white">
 	<nav class=" foot_nav_bar">
 		<ul class="columns_flex">
-			<li class="each_column current">
-				<a href="javascript:void(0)">
+			<li class="each_column">
+				<a href="{:url('Index/index')}">
 					<span class="store f_icon"></span>
 					<span class="f_txt">美创会</span>
 				</a>
 			</li>
 			<li class="each_column">
 				<!--{:url('Company/index')}-->
-				<!-- 后面再分类 -->
-				<a href="{:url('CenterStore/index')}">
-					<span class="practitioners f_icon"></span>
+				<a href="{:url('CenterStore/index')}" >
+					<span class="practitioners f_icon "></span>
 					<span class="f_txt">中心店</span>
 				</a>
 			</li>
-			<li class="each_column">
+			<li class="each_column current">
 				<!--{:url('Consultation/index')}-->
-				<a  href="{:url('Studio/index')}">
+				<a href="javascript:void(0)">
 					<span class="business f_icon"></span>
 					<span class="f_txt">工作室</span>
 				</a>
@@ -240,7 +239,7 @@
 	var postData = {
 		pageSize:10,
 		pageType:'index',
-		belong_to:1
+		belong_to:2
 	};
 	$(function(){
 		//轮播
