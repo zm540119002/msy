@@ -314,21 +314,53 @@ function date(format, timestamp) {
 
 /**表单转json对象
  */
+
 $.fn.serializeObject = function() {
     var o = {};
+    var temp={};
     var a = this.serializeArray();
+    var $radio = $('input[type=radio],input[type=checkbox]', this);
+    console.log($radio.length);
+    $.each($radio, function () {
+        if (!temp.hasOwnProperty(this.name)) {
+            if ($("input[name='" + this.name + "']:checked").length == 0) {
+                temp[this.name] = "";
+                //console.log(1);
+                a.push({name: this.name, value: ""});
+            }
+        }
+    });
     $.each(a, function(index,val) {
+        console.log(index);
         if (o[this.name]) {
             if (!o[this.name].push) {
                 o[this.name] = [ o[this.name] ];
             }
             o[this.name].push(this.value || '');
+           
         } else {
+           
             o[this.name] = this.value || '';
         }
     });
     return o;
 };
+// $.fn.serializeObject = function() {
+//     var temp = {};
+//     var a = this.serializeArray();
+    // var $radio = $('input[type=radio],input[type=checkbox]', this);
+    // console.log($radio.length);
+    // $.each($radio, function () {
+    //     if (!temp.hasOwnProperty(this.name)) {
+    //         if ($("input[name='" + this.name + "']:checked").length == 0) {
+    //             temp[this.name] = "";
+    //             //console.log(1);
+    //             a.push({name: this.name, value: ""});
+    //         }
+    //     }
+    // });
+//     return a;
+// };
 //jquery 扩展
 $.extend({
     isEmptyArray: function(arr) {
