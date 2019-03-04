@@ -26,14 +26,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>店铺类别：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品归属：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
                                 {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
                                     {if ($info.belong_to[$k-1])}
-                                        <input type="checkbox" name="belong_to" value="1" checked="checked">{$vo}
+                                        <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
                                     {else /}
-                                        <input type="checkbox" name="belong_to" value="1">{$vo}
+                                        <input type="checkbox" name="belong_to" value="">{$vo}
                                     {/if}
                                 {/volist}
                             </div>
@@ -295,7 +295,8 @@
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
-                
+//                console.log(postData);
+                return;
                 //缩略图
 //                postData.thumb_img = $('img.thumb_img').attr('src');
                 //主图
@@ -318,17 +319,7 @@
                     content='请填写商品名称';
                 }else if(!postData.headline){
                     content='请填写商品标题文案';
-                }
-//                else if(!postData.bulk_price){
-//                    content='请填写批量价格';
-//                }else if(!isMoney(postData.bulk_price)){
-//                    content='价格格式有误';
-//                }else if(!postData.sample_price){
-//                    content='请填写样品价格';
-//                }else if(!isMoney(postData.sample_price)){
-//                    content='样品价格格式有误';
-//                }
-                else if(!postData.specification){
+                }else if(!postData.specification){
                     content='请填写商品规格';
                 }else if(!postData.main_img){
                     content='请上传主图';
@@ -344,6 +335,7 @@
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(action,postData,function(data){
+                    return false;
                     _this.removeClass("nodisabled");//防止重复提交
                     dialog.msg(data,'',function () {
                         location.href = controller + 'manage';

@@ -316,28 +316,38 @@ function date(format, timestamp) {
  */
 
 $.fn.serializeObject = function() {
-    console.log(123);
     var o = {};
-    var temp={};
-    var a = this.serializeArray();
-    var $radio = $('input[type=radio],input[type=checkbox]', this);
-    $.each($radio, function () {
-        if (!temp.hasOwnProperty(this.name)) {
-            if ($("input[name='" + this.name + "']:checked").length == 0) {
-                temp[this.name] = "";
-                a.push({name: this.name, value: ""});
+    var a = $(this)
+        .not('checkbox')
+        .serializeArray();
+    var checkboxes = $(this).find('input[type=checkbox]');
+    if(checkboxes.length){
+        $.each(checkboxes, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                if($(this).prop('checked')) {
+                    o[this.name].push('1');
+                }else{
+                    o[this.name].push('0');
+                }
+            }else{
+                if($(this).prop('checked')){
+                    o[this.name] = '1';
+                }else{
+                    o[this.name] = '0';
+                }
             }
-        }
-    });
+        });
+    }
     $.each(a, function(index,val) {
         if (o[this.name]) {
             if (!o[this.name].push) {
-                o[this.name] = [ o[this.name] ];
+                o[this.name] = [o[this.name]];
             }
             o[this.name].push(this.value || '');
-           
-        } else {
-           
+        }else{
             o[this.name] = this.value || '';
         }
     });
