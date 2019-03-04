@@ -31,15 +31,9 @@
                             <div class="type_item">
                                 {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
                                     {if ($info.belong_to[$k-1])}
-<<<<<<< HEAD
-                                        <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
+                                        <input type="checkbox" name="belong_to" value="1" checked="checked">{$vo}
                                     {else /}
-                                        <input type="checkbox" name="belong_to" value="">{$vo}
-=======
-                                        <input type="checkbox" name="bolong_to" value="1" checked="checked">{$vo}
-                                    {else /}
-                                        <input type="checkbox" name="bolong_to" value="1">{$vo}
->>>>>>> e7f625397a4356ecb76d3f7e4c16a84843b46857
+                                        <input type="checkbox" name="belong_to" value="1">{$vo}
                                     {/if}
                                 {/volist}
                             </div>
