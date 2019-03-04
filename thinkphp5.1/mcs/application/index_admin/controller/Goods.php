@@ -416,6 +416,7 @@ class Goods extends Base {
             ],
         ];
         $info = $model ->getInfo($config);
+        print_r($info);exit;
         $info['main_img'] = explode(",",rtrim($info['main_img'], ","));
         $info['detail_img'] = explode(",",rtrim($info['detail_img'], ","));
         $info['tag'] = explode(",",rtrim($info['tag'], ","));
