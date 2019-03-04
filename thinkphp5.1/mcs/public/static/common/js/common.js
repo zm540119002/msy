@@ -316,6 +316,7 @@ function date(format, timestamp) {
  */
 
 $.fn.serializeObject = function() {
+    console.log(123);
     var o = {};
     var temp={};
     var a = this.serializeArray();
