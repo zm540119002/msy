@@ -42,13 +42,13 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="{:url('Company/index')}">
+				<a href="{:url('CenterStore/index')}">
 					<span class="practitioners f_icon"></span>
 					<span class="f_txt">中心店</span>
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="{:url('Consultation/index')}">
+				<a  href="{:url('Studio/index')}">
 					<span class="business f_icon"></span>
 					<span class="f_txt">工作室</span>
 				</a>
@@ -98,5 +98,19 @@
 			}
 		});
 	});
+
+	// 新零售商品获取配置
+	var config_1 = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData_1 = {
+		pageSize:10,
+		pageType:'index',
+		is_selection:1
+	};
+
 </script>
 {/block}
