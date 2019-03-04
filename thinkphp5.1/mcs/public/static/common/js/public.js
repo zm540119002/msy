@@ -249,6 +249,14 @@ function changeInputLen(obj){
     var textLength=obj.val().length;
     obj.css('width',textLength*15+'px');
 }
+//数组是否为零
+function isArrayZero(arr){
+    var sum=0;
+    for(var i=0;i<arr.length;i++){
+        sum+=arr[i];
+    }
+    return sum?true:false;
+}
 //选项卡切换
 function tab_down(tab_k, tab_con, tab_dz) {
     var $div_li = $(tab_k);

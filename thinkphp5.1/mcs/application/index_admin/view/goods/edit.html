@@ -320,7 +320,9 @@
                 })
                 postData.belong_to=belong_to;
                 var content='';
-                if(!postData.name){
+                if(!isArrayZero(postData.belong_to)){
+                    content='请选择店铺类别';
+                }else if(!postData.name){
                     content='请填写商品名称';
                 }else if(!postData.headline){
                     content='请填写商品标题文案';
@@ -347,7 +349,6 @@
                     return false;
                 }
                 
-
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(action,postData,function(data){
