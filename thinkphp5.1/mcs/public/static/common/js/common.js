@@ -318,7 +318,7 @@ function date(format, timestamp) {
 $.fn.serializeObject = function() {
     var o = {};
     var a = $(this)
-        .not('checkbox')
+        .not('input[type=checkbox]')
         .serializeArray();
     //解决checkbox未选中时，没有序列化到对象中的代码
     var checkboxes = $(this).find('input[type=checkbox]');
