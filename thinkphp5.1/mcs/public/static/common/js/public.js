@@ -249,7 +249,7 @@ function changeInputLen(obj){
     var textLength=obj.val().length;
     obj.css('width',textLength*15+'px');
 }
-//数组是否为零
+//数组总和是否为零
 function isArrayZero(arr){
     var sum=0;
     for(var i=0;i<arr.length;i++){
