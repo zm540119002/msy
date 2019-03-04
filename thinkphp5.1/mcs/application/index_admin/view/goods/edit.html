@@ -310,7 +310,6 @@
                 });
                 //简介
                 postData.parameters = ueParam.getContent();
-<<<<<<< HEAD
                 var typeArr=[];
                 // $.each($('.type_item input[type="checkbox"]'),function(){
                 //     if($(this).is(":checked")){
@@ -321,8 +320,6 @@
                 // })
                 // postData.typeArr=typeArr;
                 console.log(postData);
-                return false;
-=======
                 var belong_to=[];
                 $.each($('.type_item input[type="checkbox"]'),function(){
                     if($(this).is(":checked")){
@@ -332,9 +329,6 @@
                     }
                 })
                 postData.belong_to=belong_to;
-                //console.log(typeArr);
-                //return false;
->>>>>>> 9998510f965fc43e7d84ad3d725fa6df083df471
                 var content='';
                 if(!postData.name){
                     content='请填写商品名称';
