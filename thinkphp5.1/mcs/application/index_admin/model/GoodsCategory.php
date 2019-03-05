@@ -34,6 +34,15 @@ class GoodsCategory extends\common\model\Base {
 				delImgFromPaths($info['img'],$postData['img']);
 			}
 			$postData['update_time'] = time();
+			if(!$postData['parent_id_1'] && !$postData['parent_id_2']){
+				$postData['level'] = 1;
+			}
+			if($postData['parent_id_1'] && !$postData['parent_id_2']){
+				$postData['level'] = 2;
+			}
+			if($postData['parent_id_1'] && $postData['parent_id_2']){
+				$postData['level'] = 3;
+			}
 			$this->isUpdate(true)->save($postData);
 		}else{
 			unset($postData['id']);
