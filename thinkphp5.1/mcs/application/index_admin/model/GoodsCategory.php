@@ -22,6 +22,7 @@ class GoodsCategory extends\common\model\Base {
 			$postData['img'] = moveImgFromTemp(config('upload_dir.weiya_goods_gategory'),basename($postData['img']));
 		}
 		if($postData['id'] && intval($postData['id'])){
+			print_r($postData);exit;
 			$config = [
 				'where' => [
 					'id' => $postData['id'],
