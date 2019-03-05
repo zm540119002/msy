@@ -590,6 +590,10 @@ price{
     /*border-bottom:1px solid #9fa0a0;*/
     padding:10px 0 0;
 }
+.app_top_bar {
+    padding-left:10px;
+    padding-right:10px;
+}
 .top_bar h2{
     text-align: center;
     font-size: 0.24rem;
@@ -6030,6 +6034,7 @@ ul.info_list li{
 .big_img .swiper-slide img{max-width:100%;max-height: 80%;margin:0 auto;}
 .big_img .swiper-pagination2{position: absolute; top:0.2rem;text-align: center;width: 100%;}
 .big_img .swiper-pagination2 span{margin:0 0.05rem;}
+.swiper-list-wrapper a img{width:100%;}
 /*评价*/
 .score_review_item{
     border-bottom:1px solid #d9d9d9;
@@ -6105,4 +6110,16 @@ div.no_data{
     width: 20px;
     height: 42px;
     z-index: 999;
+}
+.tag_item_box {
+    margin:0.20rem 0.15rem 0 0.15rem;
+}
+.tag_item li{
+    width:49%;
+}
+.tag_item li img{
+    width:100%;
+}
+.app_wrapper{
+    padding:0 0 0.8rem 0;
 }
