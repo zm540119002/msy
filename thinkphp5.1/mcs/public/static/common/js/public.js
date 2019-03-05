@@ -320,7 +320,7 @@ function swipe(elemObj){
 function swiper(elemObj){
     var swiper = new Swiper(elemObj, {
             slidesPerView: 5,
-            spaceBetween: 50,
+            spaceBetween:30,
             // init: false,
             pagination: {
             el: '.swiper-pagination',
