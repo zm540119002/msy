@@ -44,6 +44,9 @@ class Project extends Base {
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
+            // 选中的店铺类型 十进制
+            $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
+
             $data = $_POST;
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
@@ -103,6 +106,8 @@ class Project extends Base {
                     ],
                 ];
                 $projectInfo = $model->getInfo($config);
+                // 选中的店铺
+                $projectInfo['belong_to'] = strrev(decbin($projectInfo['belong_to']));
                 $this->assign('info',$projectInfo);
             }
             return $this->fetch();

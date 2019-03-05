@@ -22,7 +22,20 @@
                             </div>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品归属：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <div class="type_item">
+                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
+                                {if ($info.belong_to[$k-1])}
+                                <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
+                                {else /}
+                                <input type="checkbox" name="belong_to" value="">{$vo}
+                                {/if}
+                                {/volist}
+                            </div>
+                        </td>
+                    </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
