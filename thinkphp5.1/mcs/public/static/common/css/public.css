@@ -590,6 +590,10 @@ price{
     /*border-bottom:1px solid #9fa0a0;*/
     padding:10px 0 0;
 }
+.app_top_bar {
+    padding-left:10px;
+    padding-right:10px;
+}
 .top_bar h2{
     text-align: center;
     font-size: 0.24rem;
@@ -852,6 +856,21 @@ price{
     text-align:center;
     color:#555;
 }
+/*.channel_nav a.current:before{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: -20px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    content: "";
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: center;
+    transition: all 0.5s;
+    margin-left: -15px;
+}*/
 .supply-nav a{width:33%;}
 .channel_nav a span{
     display:block;
@@ -879,13 +898,13 @@ price{
     bottom: -20px;
     display: inline-block;
     height: 30px;
-    width: 30px;
+    width:16px;
     background-color: #ff7aab;
     content: "";
     transform: scale3d(1, 0.05, 1);
     transform-origin: center;
     transition: all 0.5s;
-    margin-left: -15px;
+    margin-left: -8px;
 }
 .store_deploy_bar>a.current:before{
     background-color: #fff;
@@ -942,6 +961,10 @@ color: #ed6d00;
 .module-navigation .top_radius.top_module{
     padding-right:0.20rem;
     border-bottom:6px solid #d9d9d9;
+}
+.top_detail_module.module-navigation {
+    width:100%;
+    margin:0;
 }
 .separation{
     padding:0 0 .15rem 0;
@@ -4849,13 +4872,13 @@ ul.message_list{
     bottom: -20px;
     display: inline-block;
     height: 30px;
-    width: 30px;
+    width:16px;
     background-color: #fff;
     content: "";
     transform: scale3d(1, 0.05, 1);
     transform-origin: center;
     transition: all 0.5s;
-    margin-left: -15px;
+    margin-left: -8px;
 }
 .weiya_menu{
     background: #fff;
@@ -6015,6 +6038,7 @@ ul.info_list li{
 .big_img .swiper-slide img{max-width:100%;max-height: 80%;margin:0 auto;}
 .big_img .swiper-pagination2{position: absolute; top:0.2rem;text-align: center;width: 100%;}
 .big_img .swiper-pagination2 span{margin:0 0.05rem;}
+.swiper-list-wrapper a img{width:100%;}
 /*评价*/
 .score_review_item{
     border-bottom:1px solid #d9d9d9;
@@ -6090,4 +6114,16 @@ div.no_data{
     width: 20px;
     height: 42px;
     z-index: 999;
+}
+.tag_item_box {
+    margin:0.20rem 0.15rem 0 0.15rem;
+}
+.tag_item li{
+    width:49%;
+}
+.tag_item li img{
+    width:100%;
+}
+.app_wrapper{
+    padding:0 0 0.8rem 0;
 }

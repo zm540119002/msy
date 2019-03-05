@@ -14,7 +14,7 @@ class Scene extends Base {
      * 审核
      */
     public function edit(){
-        p($_POST);die;
+
         $model = new \app\index_admin\model\Scene();
         if(request()->isPost()){
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
@@ -34,8 +34,11 @@ class Scene extends Base {
                 $_POST['main_img'] = implode(',',$tempArr);
 
             }
+            $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
             $data = $_POST;
+
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
+
                 $config = [
                     'where' => [
                         'id' => input('post.id',0,'int'),
@@ -84,6 +87,10 @@ class Scene extends Base {
                     ],
                 ];
                 $info = $model->getInfo($config);
+
+                // 选中的店铺
+                $info['belong_to'] = strrev(decbin($info['belong_to']));
+
                 $this->assign('info',$info);
             }
             return $this->fetch();
