@@ -852,6 +852,21 @@ price{
     text-align:center;
     color:#555;
 }
+/*.channel_nav a.current:before{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: -20px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    content: "";
+    transform: scale3d(1, 0.05, 1);
+    transform-origin: center;
+    transition: all 0.5s;
+    margin-left: -15px;
+}*/
 .supply-nav a{width:33%;}
 .channel_nav a span{
     display:block;
@@ -879,13 +894,13 @@ price{
     bottom: -20px;
     display: inline-block;
     height: 30px;
-    width: 30px;
+    width:16px;
     background-color: #ff7aab;
     content: "";
     transform: scale3d(1, 0.05, 1);
     transform-origin: center;
     transition: all 0.5s;
-    margin-left: -15px;
+    margin-left: -8px;
 }
 .store_deploy_bar>a.current:before{
     background-color: #fff;
@@ -4849,13 +4864,13 @@ ul.message_list{
     bottom: -20px;
     display: inline-block;
     height: 30px;
-    width: 30px;
+    width:16px;
     background-color: #fff;
     content: "";
     transform: scale3d(1, 0.05, 1);
     transform-origin: center;
     transition: all 0.5s;
-    margin-left: -15px;
+    margin-left: -8px;
 }
 .weiya_menu{
     background: #fff;
