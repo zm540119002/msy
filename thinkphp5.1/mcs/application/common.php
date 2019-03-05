@@ -148,20 +148,6 @@ function saveImageFromHttp($url,$savePath) {
 }
 
 /**
- * 将二进制转换为十进制的值
- * @param array $val
- */
-function convertBinaryToDecimalValue($belong_tos){
-    $belong_to = 0;
-    foreach ($belong_tos as $k => $v) {
-        if ($v) {
-            $belong_to += pow(2, $k);
-        }
-    }
-    return $belong_to;
-}
-
-/**
  * 函数：操作菜单列表生成树状
  * @param array $items 菜单数组
  * @return array $tree 菜单树
