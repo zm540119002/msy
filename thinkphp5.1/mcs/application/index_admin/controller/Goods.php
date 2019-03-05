@@ -17,6 +17,7 @@ class Goods extends Base {
             ]
         ];
         $allCategoryList = $model->getList($config);
+
         $this->assign('allCategoryList',$allCategoryList);
         return $this->fetch('manage');
     }
@@ -55,15 +56,15 @@ class Goods extends Base {
             }
 
             // 选中的店铺类型 十进制
-            $belong_to  = 0;
-            $belong_tos = input('post.belong_to/a');
+/*            $belong_to  = 0;
+            $belong_tos = input('post.belong_to/d');
             foreach($belong_tos as $k => $v){
                 if ($v) {
                     $belong_to += pow(2,$k);
                 }
-            }
-
-            $_POST['belong_to'] = $belong_to;
+            }*/
+            //$_POST['belong_to'] = $belong_to;
+            $_POST['belong_to'] = convertBinaryToDecimalValue(input('post.belong_to/a'));
 
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
