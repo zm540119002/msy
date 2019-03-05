@@ -35,6 +35,7 @@ class GoodsCategory extends\common\model\Base {
 			}
 			$postData['update_time'] = time();
 			$this->isUpdate(true)->save($postData);
+			print_r($this->getLastSql());exit;
 		}else{
 			unset($postData['id']);
 			$postData['create_time'] = time();
