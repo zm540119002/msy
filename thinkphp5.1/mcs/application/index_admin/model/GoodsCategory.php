@@ -22,7 +22,6 @@ class GoodsCategory extends\common\model\Base {
 			$postData['img'] = moveImgFromTemp(config('upload_dir.weiya_goods_gategory'),basename($postData['img']));
 		}
 		if($postData['id'] && intval($postData['id'])){
-			print_r($postData);exit;
 			$config = [
 				'where' => [
 					'id' => $postData['id'],
@@ -35,6 +34,15 @@ class GoodsCategory extends\common\model\Base {
 				delImgFromPaths($info['img'],$postData['img']);
 			}
 			$postData['update_time'] = time();
+			if(!$postData['parent_id_1'] && !$postData['parent_id_2']){
+				$postData['level'] = 1;
+			}
+			if($postData['parent_id_1'] && !$postData['parent_id_2']){
+				$postData['level'] = 2;
+			}
+			if($postData['parent_id_1'] && $postData['parent_id_2']){
+				$postData['level'] = 3;
+			}
 			$this->isUpdate(true)->save($postData);
 			print_r($this->getLastSql());exit;
 		}else{
