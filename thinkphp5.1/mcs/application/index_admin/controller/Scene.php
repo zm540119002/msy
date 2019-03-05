@@ -14,6 +14,7 @@ class Scene extends Base {
      * 审核
      */
     public function edit(){
+        p($_POST);die;
         $model = new \app\index_admin\model\Scene();
         if(request()->isPost()){
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){

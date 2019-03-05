@@ -112,9 +112,27 @@
 			</section>
 			<!--优惠广告入口end-->
 			<div class="scene_wrapper">
-				<!--{volist name="sceneList" id="info" }
-				<div class="graphic_item graphic_item_65 img{$key}" >
-					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
+
+				{foreach $sceneLists as $k => $list}
+
+					{volist name="list" id="info" key="key" }
+
+						{if $key-1%$k==0 OR $key-1==0 }
+							<div class="columns_flex l-r-sides">
+						{/if}
+							333
+
+						{if $key-1%$k==0 && $key-1!=0 }
+							</div>
+						{/if}
+					{/volist}
+				{/foreach}
+
+
+
+                                <!--<div class="graphic_item graphic_item_65 img{$key}" >-->
+
+<!--					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
 						<div class="show-img">
 							{empty name="info.thumb_img"}
 							<img src="public_img/default/no_pic_100.jpg" alt="">
@@ -122,16 +140,18 @@
 							<img src="public_uploads/{$info.thumb_img}" alt="">
 							{/empty}
 						</div>
-					</a>
-				</div>
-				{/volist}-->
-				<div class="columns_flex l-r-sides">
+					</a>-->
+
+
+	<!--			</div>-->
+
+		<!--		<div class="columns_flex l-r-sides">
 					<a href="{:url('Scene/jiameng')}" class="graphic_item">
 						<img src="public_img/jiameng.jpg" alt="">
 					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/yiqi.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/kaidian.jpg" alt="">
 					</a>
@@ -139,7 +159,7 @@
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/qs.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/lk.jpg" alt="">
 					</a>
@@ -147,7 +167,7 @@
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/sk.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/hl.jpg" alt="">
 					</a>
@@ -155,7 +175,7 @@
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/xly.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/xlr.jpg" alt="">
 					</a>
@@ -163,11 +183,11 @@
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/jujia.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/wz.jpg" alt="">
 					</a>
-				</div>
+				</div>-->
 			</div>
 			<div class="project_wrapper">
 				<div class="mod-part-title">
