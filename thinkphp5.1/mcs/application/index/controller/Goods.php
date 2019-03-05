@@ -81,6 +81,9 @@ class Goods extends \common\controller\Base{
         if(input('get.belong_to/d')){
             $config['where'][] = ['g.belong_to', '=', input('get.belong_to/d')];
         }
+        if(input('get.is_selection/d')){
+            $config['where'][] = ['g.is_selection', '=', input('get.is_selection/d')];
+        }
         $keyword = input('get.keyword','');
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];

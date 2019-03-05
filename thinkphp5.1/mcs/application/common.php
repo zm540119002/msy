@@ -146,3 +146,57 @@ function saveImageFromHttp($url,$savePath) {
         }
     }
 }
+
+/**
+ * 将二进制转换为十进制的值
+ * @param array $val
+ */
+function convertBinaryToDecimalValue($belong_tos){
+    $belong_to = 0;
+    foreach ($belong_tos as $k => $v) {
+        if ($v) {
+            $belong_to += pow(2, $k);
+        }
+    }
+    return $belong_to;
+}
+
+/**
+ * 函数：操作菜单列表生成树状
+ * @param array $items 菜单数组
+ * @return array $tree 菜单树
+ */
+function get_menu_tree($items, $id = 'id', $pid = 'parent_id_1', $son = 'children') {
+    $tree = array();
+    $tmpMap = array();
+
+    foreach ($items as $item) {
+        $tmpMap[$item[$id]] = $item;
+    }
+
+    foreach ($items as $item) {
+        if (isset($tmpMap[$item[$pid]])) {
+            $tmpMap[$item[$pid]][$son][] = &$tmpMap[$item[$id]];
+        } else {
+            $tree[] = &$tmpMap[$item[$id]];
+        }
+    }
+    return $tree;
+}
+
+//传递数据以易于阅读的样式格式化后输出
+function p($data){
+    // 定义样式
+    $str='<pre style="display: block;padding: 9.5px;margin: 44px 0 0 0;font-size: 13px;line-height: 1.42857;color: #333;word-break: break-all;word-wrap: break-word;background-color: #F5F5F5;border: 1px solid #CCC;border-radius: 4px;">';
+    // 如果是boolean或者null直接显示文字；否则print
+    if (is_bool($data)) {
+        $show_data=$data ? 'true' : 'false';
+    }elseif (is_null($data)) {
+        $show_data='null';
+    }else{
+        $show_data=print_r($data,true);
+    }
+    $str.=$show_data;
+    $str.='</pre>';
+    echo $str;
+}
