@@ -44,12 +44,10 @@ class GoodsCategory extends\common\model\Base {
 				$postData['level'] = 3;
 			}
 			$this->isUpdate(true)->save($postData);
-			print_r($this->getLastSql());exit;
 		}else{
 			unset($postData['id']);
 			$postData['create_time'] = time();
 			$this->save($postData);
-			print_r($this->getLastSql());exit;
 		}
 		if(!$this->getAttr('id')){
 			return errorMsg('失败',$this->getError());
