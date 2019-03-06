@@ -25,13 +25,19 @@ class CenterStore extends \common\controller\Base{
                 ['shelf_status','=',3],
                 ['is_selection','=',1],
             ], 'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc'
+                'group'=>'desc',
+                'id'=>'desc',
+                'sort'=>'desc'
             ],  'limit'=>'11'
 
         ];
+
+        // 这里
         $sceneList  = $modelScene->getList($config);
-        $this ->assign('sceneList',$sceneList);
+
+        $sceneLists = sceneRatingList($sceneList);
+
+        $this ->assign('sceneLists',$sceneLists);
 
         //获取精选的10个项目
         $modelProject = new \app\index\model\Project();

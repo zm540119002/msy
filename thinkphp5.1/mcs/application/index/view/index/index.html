@@ -2,26 +2,26 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-<article class="f24 app_wrapper">
+<article class="f24 content_main">
 	<section class="fixedtop top_nav_fixed">
-		<div class="top_bar app_top_bar columns_flex l-r-sides">
-			<!--<div class="each_column">
+		<div class="top_bar columns_flex l-r-sides">
+			<div class="each_column">
 				<a class="home top_hidden">首页</a>
-			</div>-->
+			</div>
 			<div class="each_column top_search_module">
 				<input type="button" class="search_btn"/>
 				<input type="text" class="search_text" placeholder="产品"/>
 			</div>
-			<!--<div class="each_column">
+			<div class="each_column">
 				<a class="shopping_cart top_icon">购物车</a>
 			</div>
 			<div class="each_column">
 				<a class="personal_center top_icon">我的</a>
-			</div>-->
+			</div>
 		</div>
 	</section>
 	<section class="slider_banner">
-		<div class="swiper-container swiper-top-container swiper-container-horizontal swiper-container-ios">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
 					<img src="public_img/banner/mch_banner.jpg" alt="" class="common_default_img">
@@ -45,121 +45,141 @@
 			</div>
 		</div>
 	</section>
+	<section class="module-navigation separation-line ">
+		<div class="columns_flex f20 channel_nav store_organize_nav">
+			<a href="" class="deployed-deployment"><span class="union_purchase"></span>美创商城</a>
+			<a href="javascript:void(0);" class="store_run"><span class="exclusive"></span>全国美创会</a>
+			<a href="{:url('store/Operation/index')}" class="order-management"><span class="classify"></span>创业导师</a>
+			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>创业美容师</a>
+			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>平台合伙人</a>
+		</div>
+	</section>
 	<section class="">
-		<div class="tag_item_box">
-			<ul class="tag_item columns_flex l-r-sides">
-				<li>
-					<a>
-						<img src="public_img/home_tag.jpg" alt="">
-					</a>
-				</li>
-				<li>
-					<a>
-						<img src="public_img/home_tag1.jpg" alt="">
-					</a>
-				</li>
-			</ul>
-			<ul class="tag_item columns_flex l-r-sides">
-				<li>
-					<a>
-						<img src="public_img/home_tag2.jpg" alt="">
-					</a>
-				</li>
-				<li>
-					<a>
-						<img src="public_img/home_tag3.jpg" alt="">
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="content-padding separation-line">
-			<span class="content-label content-box">产品1</span>
-			<div class="swiper-container swiper-container-horizontal swiper-container-ios swiper-list-wrapper">
-				<div class="swiper-wrapper " style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-					<div class="swiper-slide swiper-slide-active" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品1</p>
-					</div>
-					<div class="swiper-slide swiper-slide-next" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product1.jpg">
-						</a>
-						<p>产品2</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product2.jpg">
-						</a>
-						<p>产品3</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product2.jpg">
-						</a>
-						<p>产品4</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品5</p>
-					</div>
-				</div>
-			</div>
+		<div class="content-padding">
 			<div>
-				<div>
-					<a>
-						<img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+				<div class="scroll_news">
+					<a class="news_tit">
+						美创会头条
+						<!--<img src="public_img/wy_logo.png" alt="">-->
 					</a>
-				</div>
-				<p>产品产品产品产品产品产品产品</p>
-			</div>
-		</div>
-		<div class="content-padding separation-line">
-			<span class="content-label content-box">产品1</span>
-			<div class="swiper-container swiper-container-horizontal swiper-container-ios swiper-list-wrapper">
-				<div class="swiper-wrapper " style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-					<div class="swiper-slide swiper-slide-active" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品1</p>
+					<div class="news_list_wrapper">
+						<ul class="news_list j_scroll_news">
+							<li class="news_item">
+								<a>
+									<span class="red">最新</span>维雅品牌定制平台正式上线啦！
+								</a>
+							</li>
+							<li class="news_item">
+								<a>
+									<span class="red">hot</span>利润为王,品牌定制是捷径！
+								</a>
+							</li>
+						</ul>
 					</div>
-					<div class="swiper-slide swiper-slide-next" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product1.jpg">
-						</a>
-						<p>产品2</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product2.jpg">
-						</a>
-						<p>产品3</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product1.jpg">
-						</a>
-						<p>产品4</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品5</p>
-					</div>
+					<a class="news_more" href="javascript:void(0)">更多</a>
 				</div>
 			</div>
-			<div>
-				<div>
-					<a>
-						<img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+			<!--优惠广告入口-->
+			<section class="slider_banner">
+				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide swiper-slide-active">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
+						<div class="swiper-slide ">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
+						<div class="swiper-slide ">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
+					</div>
+					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+							aria-label="Go to slide 1"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+						<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+					</div>
+				</div>
+			</section>
+			<!--优惠广告入口end-->
+			<div class="scene_wrapper">
+				<!--{volist name="sceneList" id="info" }
+				<div class="graphic_item graphic_item_65 img{$key}" >
+					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
+						<div class="show-img">
+							{empty name="info.thumb_img"}
+							<img src="public_img/default/no_pic_100.jpg" alt="">
+							{else /}
+							<img src="public_uploads/{$info.thumb_img}" alt="">
+							{/empty}
+						</div>
 					</a>
 				</div>
-				<p>产品产品产品产品产品产品产品</p>
+				{/volist}-->
+				<div class="columns_flex l-r-sides">
+					<a href="{:url('Scene/jiameng')}" class="graphic_item">
+						<img src="public_img/jiameng.jpg" alt="">
+					</a>
+					<a href="" class="graphic_item">
+						<img src="public_img/yiqi.jpg" alt="">
+					</a>
+					<a href="" class="graphic_item">
+						<img src="public_img/kaidian.jpg" alt="">
+					</a>
+				</div>
+				<div class="columns_flex l-r-sides">
+					<a href="" class="graphic_item">
+						<img src="public_img/qs.jpg" alt="">
+					</a>
+					<a href="" class="graphic_item">
+						<img src="public_img/lk.jpg" alt="">
+					</a>
+				</div>
+				<div class="columns_flex l-r-sides">
+					<a href="" class="graphic_item">
+						<img src="public_img/sk.jpg" alt="">
+					</a>
+					<a href="" class="graphic_item">
+						<img src="public_img/hl.jpg" alt="">
+					</a>
+				</div>
+				<div class="columns_flex l-r-sides">
+					<a href="" class="graphic_item">
+						<img src="public_img/xly.jpg" alt="">
+					</a>
+					<a href="" class="graphic_item">
+						<img src="public_img/xlr.jpg" alt="">
+					</a>
+				</div>
+				<div class="columns_flex l-r-sides">
+					<a href="" class="graphic_item">
+						<img src="public_img/jujia.jpg" alt="">
+					</a>
+					<a href="" class="graphic_item">
+						<img src="public_img/wz.jpg" alt="">
+					</a>
+				</div>
+			</div>
+			<div class="project_wrapper">
+				<div class="mod-part-title">
+					<div class="mod-part-title-wrap">
+						<span class="icon-title left"></span>
+						<span class="title">科技美肤精选</span>
+						<span class="icon-title right"></span>
+					</div>
+				</div>
+				<div id="scroller-wrapper" class="list_wrapper">
+					<ul class="columns_flex flex-both-side goods-content-list" id="list">
+
+					</ul>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -230,7 +250,7 @@
 	};
 	$(function(){
 		//轮播
-		var swiper = new Swiper('.swiper-top-container', {
+		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
 			autoplay:true,
 			pagination: {
@@ -238,17 +258,24 @@
 				clickable: true
 			}
 		});
-		//产品轮播
-		var swiper = new Swiper('.swiper-list-wrapper', {
-			slidesPerView:2.5,
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-		
+		//新闻滚动
+		var len=$('.news_list li').length;
+		var timer=setInterval(function(){
+			var i=0;
+			i++;
+			move(i);
+		},2200);
+		function move(i){
+			var h=$('.news_item').height();
+			var offsetY=h*i;
+			$('.news_list').get(0).style.transform="translate3d(0,-"+offsetY+"px,0)";
+			$('.news_list').get(0).style.transition="transform 500ms ease-in-out 0s";
+			setTimeout(function(){
+				$('.news_list').get(0).style.transform="translate3d(0,0,0)";
+				$('.news_list').get(0).style.transition="none 0s ease 0s";
+				$('.news_list li').eq(len-1).after($('.news_list li').eq(0));
+			},500);
+		}
 		//初始化分类商品页面
 		$('.nav_menu li:eq(0)').addClass('current');
 		postData.category_id = $('.nav_menu li.current').data('category-id');

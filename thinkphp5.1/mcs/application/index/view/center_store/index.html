@@ -24,16 +24,16 @@
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/banner/mch_banner.jpg" alt="" class="common_default_img">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
 				</div>
 				<div class="swiper-slide ">
-					<img src="public_img/banner/mch_banner.jpg" alt="" class="common_default_img">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
 				</div>
 				<div class="swiper-slide ">
-					<img src="public_img/banner/mch_banner.jpg" alt="" class="common_default_img">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
 				</div>
 				<div class="swiper-slide ">
-					<img src="public_img/banner/mch_banner.jpg" alt="" class="common_default_img">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
 				</div>
 			</div>
 			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
@@ -112,9 +112,21 @@
 			</section>
 			<!--优惠广告入口end-->
 			<div class="scene_wrapper">
-				<!--{volist name="sceneList" id="info" }
-				<div class="graphic_item graphic_item_65 img{$key}" >
-					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
+
+				{volist name="sceneLists" id="lists" }
+					{volist name="lists" id="list" }
+					<div class="columns_flex l-r-sides" >
+						{volist name="list" id="vo" }
+						<a href="" class="graphic_item">
+							<img src="public_uploads/{$vo.thumb_img}" alt="">
+						</a>
+						{/volist}
+					</div>
+					{/volist}
+				{/volist}
+                                <!--<div class="graphic_item graphic_item_65 img{$key}" >-->
+
+<!--					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">
 						<div class="show-img">
 							{empty name="info.thumb_img"}
 							<img src="public_img/default/no_pic_100.jpg" alt="">
@@ -122,24 +134,26 @@
 							<img src="public_uploads/{$info.thumb_img}" alt="">
 							{/empty}
 						</div>
-					</a>
-				</div>
-				{/volist}-->
-				<div class="columns_flex l-r-sides">
+					</a>-->
+
+
+	<!--			</div>-->
+
+		<!--		<div class="columns_flex l-r-sides">
 					<a href="{:url('Scene/jiameng')}" class="graphic_item">
 						<img src="public_img/jiameng.jpg" alt="">
 					</a>
-					<a href="" class="graphic_item">
+					<a href="{:url('Scene/yiqi')}" class="graphic_item">
 						<img src="public_img/yiqi.jpg" alt="">
-					</a>	
-					<a href="" class="graphic_item">
+					</a>
+					<a href="{:url('Scene/kaidian')}" class="graphic_item">
 						<img src="public_img/kaidian.jpg" alt="">
 					</a>
 				</div>
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/qs.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/lk.jpg" alt="">
 					</a>
@@ -147,7 +161,7 @@
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/sk.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/hl.jpg" alt="">
 					</a>
@@ -155,7 +169,7 @@
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/xly.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/xlr.jpg" alt="">
 					</a>
@@ -163,11 +177,11 @@
 				<div class="columns_flex l-r-sides">
 					<a href="" class="graphic_item">
 						<img src="public_img/jujia.jpg" alt="">
-					</a>	
+					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/wz.jpg" alt="">
 					</a>
-				</div>
+				</div>-->
 			</div>
 			<div class="project_wrapper">
 				<div class="mod-part-title">
