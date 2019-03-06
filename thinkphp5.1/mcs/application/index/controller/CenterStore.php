@@ -34,54 +34,9 @@ class CenterStore extends \common\controller\Base{
 
         // 这里
         $sceneList  = $modelScene->getList($config);
-        $sceneLists = array();
-        $i = 0;
-        $j = 0;
-/*        foreach($sceneList as $v){
-            if($v['group']==3){
-                if(count($sceneLists[3][$i])==3){
-                    $i ++;
-                }
-                $sceneLists[3][$i][] = $v;
-            }elseif($v['group']==2){
-                if(count($sceneLists[2][$j])==2){
-                    $j ++;
-                }
-                $sceneLists[2][$j][] = $v;
-            }
-        }*/
 
+        $sceneLists = sceneRatingList($sceneList);
 
- /*       p($sceneLists);
-        exit;*/
-        $i = 0;
-        foreach($sceneList as $k => $v){
-
-            $j = count($sceneLists[$v['group']][$i]);
-
-            if (count($sceneLists[$v['group']][$j])==$v['group']){
-                $j++;
-            }
-            //$sceneLists[$v['group']][]= $v;
-            $sceneLists[$v['group']][$j][] = $v;
-
-        }
-
-
-        p($sceneLists);die;
-        exit;
-        echo 0%3;
-        echo 3%3;
-        echo 6%3;
-        exit;
- /*       for($i=0;$i<100;$i++){
-
-            echo $i.','.$i%2;
-            echo '<br/>';
-        }
-        //echo 4%3;
-        exit;*/
-        //p($sceneLists);exit;
         $this ->assign('sceneLists',$sceneLists);
 
         //获取精选的10个项目

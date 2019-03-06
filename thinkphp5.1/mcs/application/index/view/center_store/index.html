@@ -113,23 +113,17 @@
 			<!--优惠广告入口end-->
 			<div class="scene_wrapper">
 
-				{foreach $sceneLists as $k => $list}
-
-					{volist name="list" id="info" key="key" }
-
-						{if $key-1%$k==0 OR $key-1==0 }
-							<div class="columns_flex l-r-sides">
-						{/if}
-							333
-
-						{if $key-1%$k==0 && $key-1!=0 }
-							</div>
-						{/if}
+				{volist name="sceneLists" id="lists" }
+					{volist name="lists" id="list" }
+					<div class="columns_flex l-r-sides" >
+						{volist name="list" id="vo" }
+						<a href="" class="graphic_item">
+							<img src="public_uploads/{$vo.thumb_img}" alt="">
+						</a>
+						{/volist}
+					</div>
 					{/volist}
-				{/foreach}
-
-
-
+				{/volist}
                                 <!--<div class="graphic_item graphic_item_65 img{$key}" >-->
 
 <!--					<a href="{:url('Scene/detail',['id'=>$info.id])}"  data-id="{$info.id}">

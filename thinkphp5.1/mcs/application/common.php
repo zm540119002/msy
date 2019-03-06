@@ -148,10 +148,23 @@ function saveImageFromHttp($url,$savePath) {
 }
 
 /**
- * 函数：操作菜单列表生成树状
- * @param array $items 菜单数组
- * @return array $tree 菜单树
+ * 场景按组分类
+ * @param $list
+ * @return array
  */
+function sceneRatingList($list){
+    $sceneLists = array();
+    foreach($list as $k => $v){
+        $i = (count($sceneLists[$v['group']])) ? count($sceneLists[$v['group']]) : 1;
+        if (count($sceneLists[$v['group']][$i])==$v['group']){
+            $i++;
+        }
+        $sceneLists[$v['group']][$i][] = $v;
+    }
+    return $sceneLists;
+}
+
+
 function get_menu_tree($items, $id = 'id', $pid = 'parent_id_1', $son = 'children') {
     $tree = array();
     $tmpMap = array();
