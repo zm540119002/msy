@@ -3,13 +3,13 @@
 
 <article class="f24">
 	<ul class="nav_menu">
-		<li data-category-id="51" class="current">
+		<li data-category-id="51" >
 			<a href="javascript:void(0);" class="category_nav">加盟套餐</a>
 		</li>
-		<li data-category-id="44">
+		<li data-category-id="44" >
 			<a href="javascript:void(0);" class="category_nav">仪器选配</a>
 		</li>
-		<li data-category-id="45">
+		<li data-category-id="45" class="current">
 			<a href="javascript:void(0);" class="category_nav">开店装修</a>
 		</li>
 	</ul>
@@ -22,17 +22,17 @@
 				</div>
 				{/notempty}
 				{volist name="info.main_img" id="main_img"}
-				<div class="swiper-slide swiper-slide-active">
+				<div ssssclass="swiper-slide swiper-slide-active">
 					<img src="public_img/banner/cy_top_banner.jpg" alt="" class="common_default_img">
 				</div>
 				{/volist}-->
 				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/banner/cy_top_banner.jpg" alt="" class="common_default_img">
+					<img src="public_img/banner/kaidian-banner.jpg" alt="" class="common_default_img">
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="content-padding content_main wy_list" style="background:#F9CD33;">
+	<section class="content-padding content_main wy_list" style="background:#BCC5D8;">
 		<div class="">
 			<div class="columns_flex l-r-sides count_down_module">
 				<div class="mid_module_left">
@@ -56,30 +56,53 @@
 				</div>
 			</div>
 		</div>
-		<div class="apply_item">
-			<span class="content-label">产品体验方案</span>
-			<a href="">
-				<img src="public_img/apply.jpg" alt="">
-			</a>
-		</div>
-		<div class="apply_item">
-			<span class="content-label">中心店加盟方案</span>
-			<a href="">
-				<img src="public_img/apply1.jpg" alt="">
-			</a>
-			<a href="">
-				<img src="public_img/apply2.jpg" alt="">
-			</a>
-		</div>
-		<!--<div class="apply_item">
-			<span class="content-label">工作室加盟方案</span>
-			<a href="">
-				<img src="public_img/apply3.jpg" alt="">
-			</a>
-			<a href="">
-				<img src="public_img/apply4.jpg" alt="">
-			</a>
-		</div>-->
+		<!--产品列表-->
+		<ul class="goods_list list">
+			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
+				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
+					{empty name="info.thumb_img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					{/empty}
+				</a>
+				<div class="list_r">
+					<p class="text-intro">产品产品产品产品产品产品产品</p>
+					<div>
+						<span class="red">￥<price>500.00</price></span>
+					</div>
+					<div class="quantity_wrapper selected-number">
+						<a href="javascript:void(0);" class="greduce">-</a>
+						<input type="text" value="0" class="f24 gshopping_count" >
+						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+						<a href="javascript:void(0);" class="gplus">+</a>
+					</div>
+				</div>
+			</li>
+			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
+				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
+					{empty name="info.thumb_img"}
+					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+					{else /}
+					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+					{/empty}
+				</a>
+				<div class="list_r">
+					<p class="text-intro">产品产品产品产品产品产品产品</p>
+					<div>
+						<span class="red">￥<price>500.00</price></span>
+					</div>
+					<div class="quantity_wrapper selected-number">
+						<a href="javascript:void(0);" class="greduce">-</a>
+						<input type="text" value="0" class="f24 gshopping_count" >
+						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+						<a href="javascript:void(0);" class="gplus">+</a>
+					</div>
+				</div>
+			</li>
+		</ul>
 	</section>
 </article>
 
