@@ -24,10 +24,11 @@ class CenterStore extends \common\controller\Base{
                 ['status', '=', 0],
                 ['shelf_status','=',3],
                 ['is_selection','=',1],
+                ['belong_to','=',1],
             ], 'order'=>[
                 'group'=>'desc',
+                'sort'=>'desc',
                 'id'=>'desc',
-                'sort'=>'desc'
             ],  'limit'=>'11'
 
         ];
