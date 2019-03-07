@@ -23,8 +23,7 @@ class CenterStore extends \common\controller\Base{
             'where' => [
                 ['status', '=', 0],
                 ['shelf_status','=',3],
-                //['is_selection','=',1],
-                ['belong_to','=',1],
+                ['belong_to','exp','& 1'],
             ], 'order'=>[
                 'row_number'=>'desc',
                 'sort'=>'desc',
