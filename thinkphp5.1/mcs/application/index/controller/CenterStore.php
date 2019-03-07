@@ -59,6 +59,7 @@ class CenterStore extends \common\controller\Base{
 
     /**
      * 默认二级场景页
+     * 需要所属组的各场景的名，场景信息，场景下的商品，场景下的活动
      */
     public function detail(){
         if(request()->isAjax()){
