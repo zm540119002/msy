@@ -28,7 +28,7 @@ class Scene extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
