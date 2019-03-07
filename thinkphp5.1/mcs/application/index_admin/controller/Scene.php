@@ -50,6 +50,9 @@ class Scene extends Base {
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
+                if($info['logo_img']){
+                    delImgFromPaths($info['logo_img'],$_POST['logo_img']);
+                }
                 if($info['background_img']){
                     delImgFromPaths($info['background_img'],$_POST['background_img']);
                 }

@@ -85,6 +85,26 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>品牌LOGO：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        {empty name="info.logo_img"}
+                                        <img class="upload_img" src="">
+                                        {else /}
+                                        <img class="upload_img " src="public_uploads/{$info.logo_img}" />
+                                        {/empty}
+                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.logo_img}" name="logo_img"/>
+                                    </div>
+                                    <!--<p>企业营业执照</p>-->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>背景颜色：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
@@ -99,18 +119,16 @@
                                         {/empty}
                                         <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.background_img}" name="background_img"/>
                                     </div>
-                                    <!--<p>企业营业执照</p>-->
                                 </div>
                             </div>
                         </td>
                     </tr>
-
-                    <tr>
+                   <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>项目主图:</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <!-- 加载编辑器的容器 -->
+                            <!--<p> 加载编辑器的容器 </p>-->
                             <script id="main_img" type="text/plain">
-                                
+
                             </script>
                             <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
                         </td>
@@ -141,16 +159,7 @@
 <script type="text/javascript">
     var main_img = UE.getEditor('main_img', {
         toolbars: [
-            [  'fullscreen', 'source', '|', 'undo', 'redo', '|',
-                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-                'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-                'directionalityltr', 'directionalityrtl', 'indent', '|',
-                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-                'anchor', '|', 'emotion', 'scrawl',   'webapp', 'pagebreak', 'template', 'background', '|',
-                'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-                'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-                'print', 'preview', 'searchreplace', 'drafts', 'help']
+            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
         ],
         autoHeightEnabled: true,
         autoFloatEnabled: true

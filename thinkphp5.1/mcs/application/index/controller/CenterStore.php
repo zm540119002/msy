@@ -26,16 +26,16 @@ class CenterStore extends \common\controller\Base{
                 //['is_selection','=',1],
                 ['belong_to','=',1],
             ], 'order'=>[
-                'group'=>'desc',
+                'row_number'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc',
             ],  'limit'=>'11'
 
         ];
 
-        // 这里
         $sceneList  = $modelScene->getList($config);
 
+        // 场景按行个数分组
         $sceneLists = sceneRatingList($sceneList);
 
         $this ->assign('sceneLists',$sceneLists);
@@ -59,16 +59,16 @@ class CenterStore extends \common\controller\Base{
 
     /**
      * 默认二级场景页
-     * 需要所属组的各场景的名，场景信息，场景下的商品，场景下的活动
+     * 需要同组的各场景的名，场景信息，场景下的商品，场景下的活动
      */
     public function detail(){
         if(request()->isAjax()){
         }else{
             $id = intval(input('id'));
-            $id = 61;
             if(!$id){
                 $this->error('此项目已下架');
             }
+            // 场景信息
             $model = new\app\index\model\Scene();
             $config =[
                 'where' => [
@@ -77,17 +77,27 @@ class CenterStore extends \common\controller\Base{
                     ['id', '=', $id],
                 ],
             ];
-
             $css = (input('css'));
             $this->assign('css',$css);
-            $info = $model->getInfo($config);
-            if(empty($info)){
+            $scene = $model->getInfo($config);
+            if(empty($scene)){
                 $this->error('此项目已下架');
             }
+            $scene['main_img'] = explode(',',(string)$scene['main_img']);
+            $scene['tag'] = explode(',',(string)$scene['tag']);
+            $this->assign('scene',$scene);
 
-            $info['main_img'] = explode(',',(string)$info['main_img']);
-            $info['tag'] = explode(',',(string)$info['tag']);
-            $this->assign('infos',$info);
+            // 同组的各场景的名
+            $config = [
+                'where' => [
+                    ['group','=',$scene['group']],
+                ],
+                'order' => [
+                    'sort' => 'desc',
+                ],
+            ];
+            $sceneList = $model->getList($config);
+            $this->assign('sceneList',$sceneList);
 
             //获取相关的商品
             $modelSceneGoods = new \app\index\model\SceneGoods();
@@ -102,10 +112,13 @@ class CenterStore extends \common\controller\Base{
                     ['goods g','g.id = sg.goods_id','left']
                 ]
             ];
+
             $goodsList= $modelSceneGoods->getList($config);
+
             $this->assign('goodsList',$goodsList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
             return $this->fetch();
         }
     }

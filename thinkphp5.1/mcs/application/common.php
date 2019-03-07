@@ -148,18 +148,18 @@ function saveImageFromHttp($url,$savePath) {
 }
 
 /**
- * 场景按组分类
+ * 场景按行个数分组
  * @param $list
  * @return array
  */
 function sceneRatingList($list){
     $sceneLists = array();
     foreach($list as $k => $v){
-        $i = (count($sceneLists[$v['group']])) ? count($sceneLists[$v['group']]) : 1;
-        if (count($sceneLists[$v['group']][$i])==$v['group']){
+        $i = (count($sceneLists[$v['row_number']])) ? count($sceneLists[$v['row_number']]) : 1;
+        if (count($sceneLists[$v['row_number']][$i])==$v['row_number']){
             $i++;
         }
-        $sceneLists[$v['group']][$i][] = $v;
+        $sceneLists[$v['row_number']][$i][] = $v;
     }
     return $sceneLists;
 }
