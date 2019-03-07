@@ -112,12 +112,11 @@
 			</section>
 
 			<div class="scene_wrapper">
-
 				{volist name="sceneLists" id="lists" }
 					{volist name="lists" id="list" }
 					<div class="columns_flex l-r-sides" >
 						{volist name="list" id="vo" }
-						<a href="{:url($vo.template,['id'=>$vo.id])}" class="graphic_item">
+						<a href="{:url(request()->controller().'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
 							<img src="public_uploads/{$vo.thumb_img}" alt="">
 						</a>
 						{/volist}

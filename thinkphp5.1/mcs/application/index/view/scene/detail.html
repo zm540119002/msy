@@ -4,12 +4,12 @@
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				{notempty name="info.goods_video"}
+				{notempty name="infos.goods_video"}
 				<div class="swiper-slide swiper-slide-active">
-					<video  src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
+					<video  src="public_uploads/{$infos.goods_video}" autoplay="autoplay"></video>
 				</div>
 				{/notempty}
-				{volist name="info.main_img" id="main_img"}
+				{volist name="infos.main_img" id="main_img"}
 				<div class="swiper-slide swiper-slide-active">
 					<img src="public_img/banner/cy_top_banner.jpg" alt="" class="common_default_img">
 				</div>
@@ -102,7 +102,7 @@
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var id = '{$info.id}';
+		var id = '{$infos.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		//查看文本
