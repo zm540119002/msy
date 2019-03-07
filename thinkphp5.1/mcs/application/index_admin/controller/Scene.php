@@ -123,10 +123,11 @@ class Scene extends Base {
                 's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection'
             ],
             'order'=>[
-                's.id'=>'desc',
                 's.sort'=>'desc',
+                's.id'=>'desc',
             ],
         ];
+
         $list = $model ->pageQuery($config);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'manage'){
