@@ -58,7 +58,7 @@ class CenterStore extends \common\controller\Base{
 
     /**
      * 默认二级场景页
-     * 需要同组的各场景的名，场景信息，场景下的商品，场景下的活动
+     * 需要同组的各场景的名，场景信息，场景下的商品，场景下的方案
      */
     public function detail(){
         if(request()->isAjax()){
@@ -115,6 +115,24 @@ class CenterStore extends \common\controller\Base{
             $goodsList= $modelSceneGoods->getList($config);
 
             $this->assign('goodsList',$goodsList);
+
+            // 获取场景下的方案
+            $modelSceneScheme = new \app\index\model\SceneScheme();
+            $config = [
+                'where' => [
+                    ['ss.status', '=', 0],
+                    ['ss.scene_id', '=', $id],
+                ],'field'=>[
+                    '*'
+                ],'join'=>[
+                    ['scheme s','s.id = ss.scheme_id','left']
+                ]
+            ];
+
+            $schemeList= $modelSceneScheme->getList($config);
+            //p($schemeList);die;
+            $this->assign('schemeList',$schemeList);
+
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
