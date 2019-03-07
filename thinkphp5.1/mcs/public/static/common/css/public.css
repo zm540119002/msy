@@ -4666,6 +4666,9 @@ ul.message_list{
 .mid_module_left .d-r{
     margin:0 0 0 0.8rem;
 }
+.mid_module_left img{
+    max-width:88%;
+}
 .mid_module_right span.item{
     display:block;
     margin:0 auto;
