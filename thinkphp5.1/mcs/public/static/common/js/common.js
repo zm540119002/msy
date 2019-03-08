@@ -470,9 +470,12 @@ function isWeiXin(){
 }
 
 function sum(arr) {
-    var s = 0;
-    for (var i=arr.length-1; i>=0; i--) {
-        s += arr[i];
+    var len = arr.length;
+    if(len == 0){
+        return 0;
+    } else if (len == 1){
+        return arr[0];
+    } else {
+        return arr[0] + sum(arr.slice(1));
     }
-    return s;
 }
