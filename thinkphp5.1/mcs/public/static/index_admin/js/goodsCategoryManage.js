@@ -11,38 +11,40 @@ $(document).ready(function(){
             postData.id = _thisTr.data('id');
             postData.parent_id_1 = _thisTr.data('parent-id-1');
             //异步加载子分类
+/*            console.log(postData);
+            return true;*/
             $.ajax({
                 url: 'manage',
-                type:'post',
-                data:postData,
-                dataType: 'html',
-                error: function(){
-                    dialog.error('AJAX错误。。。');
-                },
-                success: function(data){
-                    _thisTr.after(data);
-                }
-            });
-        }else if(status == 'close'){
-            _this.attr('status','open');
-            if(_thisTr.data('level') == 1){
-                _thisTr.nextUntil('[data-level=1]').remove();
-            }else if(_thisTr.data('level') == 2){
-                _thisTr.nextUntil('[data-level!=3]').remove();
-                _thisTr.nextAll('[data-level=0]').remove();
-            }
-        }
-    });
+        type:'post',
+        data:postData,
+        dataType: 'html',
+        error: function(){
+        dialog.error('AJAX错误。。。');
+    },
+    success: function(data){
+        _thisTr.after(data);
+    }
+});
+}else if(status == 'close'){
+    _this.attr('status','open');
+    if(_thisTr.data('level') == 1){
+        _thisTr.nextUntil('[data-level=1]').remove();
+    }else if(_thisTr.data('level') == 2){
+        _thisTr.nextUntil('[data-level!=3]').remove();
+        _thisTr.nextAll('[data-level=0]').remove();
+    }
+}
+});
 
-    //编辑 or 新增下级
-    $('body').on('click','.a-edit,.a-add',function(){
-        var _this = $(this);
-        var _thisTr = _this.parents('tr');
-        var url = controller + 'edit';
-        url += '/id/' + _thisTr.data('id');
-        url += '/operate/' + _this.data('operate');
-        location.href = url;
-    });
+//编辑 or 新增下级
+$('body').on('click','.a-edit,.a-add',function(){
+    var _this = $(this);
+    var _thisTr = _this.parents('tr');
+    var url = controller + 'edit';
+    url += '/id/' + _thisTr.data('id');
+    url += '/operate/' + _this.data('operate');
+    location.href = url;
+});
 
     //删除
     $('body').on('click','.a-del',function(){
