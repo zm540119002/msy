@@ -6,6 +6,7 @@ namespace app\index_admin\controller;
 class Scene extends Base {
     
     public function manage(){
+
         return $this->fetch('manage');
     }
 
@@ -123,7 +124,7 @@ class Scene extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection'
+                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection','s.type'
             ],
             'order'=>[
                 's.sort'=>'desc',
@@ -202,7 +203,101 @@ class Scene extends Base {
     }
 
     /**
-     * 添加项目相关商品
+     * 添加场景下相关的商品分类
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public function addSceneSort(){
+        if(request()->isPost()){
+            $model = new \app\index_admin\model\SceneGoods();
+            $data = input('post.selectedIds/a');
+            $condition = [
+                ['scene_id','=',$data[0]['scene_id']]
+            ];
+            $model->startTrans();
+            $rse = $model -> del($condition,$tag=false);
+
+            if(false === $rse){
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $res = $model->allowField(true)->saveAll($data)->toArray();
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $model -> commit();
+            return successMsg('成功');
+
+        }else{
+            if(!input('?id') || !input('id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+            // 所有商品分类
+            $model = new \app\index_admin\model\GoodsCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $model->getList($config);
+            $this->assign('allCategoryList',$allCategoryList);
+
+            $id = input('id/d');
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 添加场景下相关的项目
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public function addSceneProject(){
+        if(request()->isPost()){
+            $model = new \app\index_admin\model\SceneGoods();
+            $data = input('post.selectedIds/a');
+            $condition = [
+                ['scene_id','=',$data[0]['scene_id']]
+            ];
+            $model->startTrans();
+            $rse = $model -> del($condition,$tag=false);
+
+            if(false === $rse){
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $res = $model->allowField(true)->saveAll($data)->toArray();
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $model -> commit();
+            return successMsg('成功');
+
+        }else{
+            if(!input('?id') || !input('id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+            // 所有商品分类
+            $model = new \app\index_admin\model\GoodsCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $model->getList($config);
+            $this->assign('allCategoryList',$allCategoryList);
+
+            $id = input('id/d');
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 添加场景下相关的商品
      * @return array|mixed
      * @throws \Exception
      */
