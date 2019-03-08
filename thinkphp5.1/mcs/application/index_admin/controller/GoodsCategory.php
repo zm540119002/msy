@@ -80,7 +80,14 @@ class GoodsCategory extends Base
         ];
         $list = $model->pageQuery($config);
         $this->assign('list',$list);
-        return $this->fetch('list_tpl');
+
+        if($_GET['pageType'] == 'layer'){
+
+            return view('goods_category/list_layer_tpl');
+
+        }else {
+            return $this->fetch('list_tpl');
+        }
     }
 
     /**商品分类-删除

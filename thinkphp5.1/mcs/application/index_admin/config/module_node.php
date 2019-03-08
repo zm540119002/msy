@@ -20,16 +20,21 @@ return [
             'sub_menu' => [
                 ['id'=>301,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
-        ],'information'=>[
-            'id'=>400,'name'=>'资讯','type'=>2,
+        ],'scheme'=>[
+            'id'=>400,'name'=>'方案','type'=>2,
             'sub_menu' => [
-                ['id'=>401,'name'=>'资讯管理','display'=>1,'controller'=>'Information','action'=>'manage',],
+                ['id'=>401,'name'=>'方案管理','display'=>1,'controller'=>'scheme','action'=>'manage',],
+            ],
+        ],'information'=>[
+            'id'=>500,'name'=>'资讯','type'=>2,
+            'sub_menu' => [
+                ['id'=>501,'name'=>'资讯管理','display'=>1,'controller'=>'Information','action'=>'manage',],
             ],
         ],'customer'=>[
-            'id'=>500,'name'=>'客服','type'=>2,
+            'id'=>600,'name'=>'客服','type'=>2,
             'sub_menu' => [
-                ['id'=>501,'name'=>'售前','display'=>1,'controller'=>'custom_client','action'=>'beforeSale',],
-                ['id'=>502,'name'=>'售后','display'=>1,'controller'=>'custom_client','action'=>'afterSale',],
+                ['id'=>601,'name'=>'售前','display'=>1,'controller'=>'custom_client','action'=>'beforeSale',],
+                ['id'=>602,'name'=>'售后','display'=>1,'controller'=>'custom_client','action'=>'afterSale',],
             ],
         ],
     ],

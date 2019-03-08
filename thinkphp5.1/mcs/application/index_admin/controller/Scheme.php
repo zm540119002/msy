@@ -1,12 +1,15 @@
 <?php
 namespace app\index_admin\controller;
 
-/**供应商验证控制器基类
+/**
+ * 方案类
  */
-class Scene extends Base {
-    
-    public function manage(){
+class Scheme extends Base {
 
+    /*
+     *审核首页
+     */
+    public function manage(){
         return $this->fetch('manage');
     }
 
@@ -15,31 +18,29 @@ class Scene extends Base {
      * 审核
      */
     public function edit(){
-
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Project();
         if(request()->isPost()){
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
             }
-            if(  isset($_POST['background_img']) && $_POST['background_img'] ){
-                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['background_img']));
+            if(  isset($_POST['main_img']) && $_POST['main_img'] ){
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['main_img']));
             }
-            if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $detailArr = explode(',',input('post.main_img','','string'));
+            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
+                $detailArr = explode(',',input('post.detail_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
                     }
                 }
-                $_POST['main_img'] = implode(',',$tempArr);
-
+                $_POST['detail_img'] = implode(',',$tempArr);
             }
+            // 选中的店铺类型 十进制
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
+
             $data = $_POST;
-
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
-
                 $config = [
                     'where' => [
                         'id' => input('post.id',0,'int'),
@@ -47,20 +48,17 @@ class Scene extends Base {
                     ],
                 ];
                 $info = $model->getInfo($config);
-                //删除就图片
+                //删除商品主图
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
-                if($info['logo_img']){
-                    delImgFromPaths($info['logo_img'],$_POST['logo_img']);
-                }
-                if($info['background_img']){
-                    delImgFromPaths($info['background_img'],$_POST['background_img']);
-                }
                 if($info['main_img']){
+                    delImgFromPaths($info['main_img'],$_POST['main_img']);
+                }
+                if($info['detail_img']){
                     //删除商品详情图
-                    $oldImgArr = explode(',',$info['main_img']);
-                    $newImgArr = explode(',',$_POST['main_img']);
+                    $oldImgArr = explode(',',$info['detail_img']);
+                    $newImgArr = explode(',',$_POST['detail_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $where = [
@@ -82,6 +80,15 @@ class Scene extends Base {
             }
             return successMsg('成功');
         }else{
+           // 所有项目分类
+            $modelProjectCategory = new \app\index_admin\model\ProjectCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $modelProjectCategory->getList($config);
+            $this->assign('allCategoryList',$allCategoryList);
             //要修改的商品
             if(input('?id') && (int)input('id')){
                 $config = [
@@ -90,12 +97,10 @@ class Scene extends Base {
                         'id'=>input('id',0,'int'),
                     ],
                 ];
-                $info = $model->getInfo($config);
-
+                $projectInfo = $model->getInfo($config);
                 // 选中的店铺
-                $info['belong_to'] = strrev(decbin($info['belong_to']));
-
-                $this->assign('info',$info);
+                $projectInfo['belong_to'] = strrev(decbin($projectInfo['belong_to']));
+                $this->assign('info',$projectInfo);
             }
             return $this->fetch();
        }
@@ -105,39 +110,40 @@ class Scene extends Base {
      *  分页查询
      */
     public function getList(){
-        $model = new \app\index_admin\model\Scene();
+        $modelProject = new \app\index_admin\model\Project();
         $where = [];
-        $where[] = ['s.status','=',0];
+        $where[] = ['p.status','=',0];
         if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where[] = ['s.category_id_1','=',input('get.category_id_1',0,'int')];
+            $where[] = ['p.category_id_1','=',input('get.category_id_1',0,'int')];
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where[] = ['s.category_id_2','=',input('get.category_id_2',0,'int')];
+            $where[] = ['p.category_id_2','=',input('get.category_id_2',0,'int')];
         }
         if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where[] = ['s.category_id_3','=',input('get.category_id_3',0,'int')];
+            $where[] = ['p.category_id_3','=',input('get.category_id_3',0,'int')];
         }
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where[] = ['s.name','like', '%' . trim($keyword) . '%'];
+            $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
         }
         $config = [
             'where'=>$where,
             'field'=>[
-                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection','s.type'
+                'p.id','p.name','p.thumb_img','p.main_img','p.intro','p.shelf_status','p.sort','p.create_time','p.category_id_1','p.is_selection'
             ],
             'order'=>[
-                's.sort'=>'desc',
-                's.id'=>'desc',
+                'p.id'=>'desc',
+                'p.sort'=>'desc',
             ],
         ];
-
-        $list = $model ->pageQuery($config);
+        $list = $modelProject ->pageQuery($config);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'manage'){
-            return view('list_tpl');
+            return view('project/list_tpl');
         }
     }
+
+
     /**
      * @return array|mixed
      * 删除
@@ -146,7 +152,7 @@ class Scene extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Project();
         $id = input('post.id/d');
         if(input('?post.id') && $id){
             $condition = [
@@ -169,7 +175,7 @@ class Scene extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Project();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
@@ -188,7 +194,7 @@ class Scene extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scene();
+        $model = new \app\index_admin\model\Project();
         $id = input('post.id/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
@@ -201,116 +207,19 @@ class Scene extends Base {
     }
 
     /**
-     * 添加场景下相关的商品分类
+     * 添加项目相关商品
      * @return array|mixed
      * @throws \Exception
      */
-    public function addSceneSort(){
+    public function addProjectGoods(){
         if(request()->isPost()){
-            $model = new \app\index_admin\model\SceneGoods();
+            $model = new \app\index_admin\model\ProjectGoods();
             $data = input('post.selectedIds/a');
             $condition = [
-                ['scene_id','=',$data[0]['scene_id']]
+                ['project_id','=',$data[0]['project_id']]
             ];
             $model->startTrans();
             $rse = $model -> del($condition,$tag=false);
-
-            if(false === $rse){
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $res = $model->allowField(true)->saveAll($data)->toArray();
-            if (!count($res)) {
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $model -> commit();
-            return successMsg('成功');
-
-        }else{
-
-            if(!input('?id') || !input('id/d')){
-                $this ->error('参数有误',url('manage'));
-            }
-            // 所有商品分类
-            $model = new \app\index_admin\model\GoodsCategory();
-            $config = [
-                'where'=>[
-                    'status'=>0
-                ]
-            ];
-            $allCategoryList = $model->getList($config);
-
-            $this->assign('allCategoryList',$allCategoryList);
-
-            $id = input('id/d');
-            $this->assign('id',$id);
-            return $this->fetch();
-        }
-    }
-
-    /**
-     * 添加场景下相关的项目
-     * @return array|mixed
-     * @throws \Exception
-     */
-    public function addSceneProject(){
-        if(request()->isPost()){
-            $model = new \app\index_admin\model\SceneGoods();
-            $data = input('post.selectedIds/a');
-            $condition = [
-                ['scene_id','=',$data[0]['scene_id']]
-            ];
-            $model->startTrans();
-            $rse = $model -> del($condition,$tag=false);
-
-            if(false === $rse){
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $res = $model->allowField(true)->saveAll($data)->toArray();
-            if (!count($res)) {
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $model -> commit();
-            return successMsg('成功');
-
-        }else{
-            if(!input('?id') || !input('id/d')){
-                $this ->error('参数有误',url('manage'));
-            }
-            // 所有商品分类
-            $model = new \app\index_admin\model\GoodsCategory();
-            $config = [
-                'where'=>[
-                    'status'=>0
-                ]
-            ];
-            $allCategoryList = $model->getList($config);
-            $this->assign('allCategoryList',$allCategoryList);
-
-            $id = input('id/d');
-            $this->assign('id',$id);
-            return $this->fetch();
-        }
-    }
-
-    /**
-     * 添加场景下相关的商品
-     * @return array|mixed
-     * @throws \Exception
-     */
-    public function addSceneGoods(){
-        if(request()->isPost()){
-            $model = new \app\index_admin\model\SceneGoods();
-            $data = input('post.selectedIds/a');
-            $condition = [
-                ['scene_id','=',$data[0]['scene_id']]
-            ];
-            $model->startTrans();
-            $rse = $model -> del($condition,$tag=false);
-
             if(false === $rse){
                 $model->rollback();
                 return errorMsg('失败');

@@ -6,7 +6,7 @@
 
 		{volist name="sceneList" id="info"}
 			<li data-category-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
-				<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
+				<a href="{:url(request()->controller().'/'.$info.template,['id'=>$info.id])}" class="category_nav">{$info.name}</a>
 			</li>
 		{/volist}
 
@@ -48,6 +48,19 @@
 				</div>
 			</div>
 		</div>
+		<!--方案列表-->
+		{notempty name="schemeList"}
+			{volist name="schemeList" id="info"}
+				<div class="apply_item">
+					{if !empty($info.name)}
+						<span class="content-label">{$info.name}</span>
+					{/if}
+					<a href="{$info.id}">
+						<img src="public_uploads/{$info.thumb_img}" alt="">
+					</a>
+				</div>
+			{/volist}
+		{/notempty}
 		<!--产品列表-->
 		{notempty name="goodsList"}
 		<ul class="goods_list list">
