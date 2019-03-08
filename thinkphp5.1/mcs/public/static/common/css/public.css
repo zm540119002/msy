@@ -6130,3 +6130,69 @@ div.no_data{
 .app_wrapper{
     padding:0 0 0.8rem 0;
 }
+.mod_selection{
+    position:relative;
+}
+.mod_selection .nav {
+    position: absolute;
+    top: -56px;
+    height: .8rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-bottom: 1px solid #c1c1c1;
+}
+.chat_selection .nav{
+    top:0;
+}
+.mod_selection_nav{
+    position: relative;
+    width:6.4rem;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    background-color: #fff;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: .4rem;
+    padding-right: 1rem;
+    left:0;
+}
+.mod_selection_nav li{
+    display:inline-block;
+    width:1.5rem;
+    height:.8rem;
+    line-height:.8rem;
+    text-align:center;
+    background-size:100% 100%;
+}
+.mod_selection_nav li.active{
+    color:#ff0000;
+}
+.mod_selection_more{
+    position: absolute;
+    width: 1rem;
+    height:.8rem;
+    line-height:.8rem;
+    text-align: center;
+    background: #fff;
+    border-left: 1px solid #c1c1c1;
+    z-index: 10;
+    right: 0;
+    top: 0;
+    font-size: .26667rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.mod-selection-more .tab-arrow {
+    width: .4rem;
+    height: .21333rem;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAARBAMAAABOcrPPAAAAGFBMV…7gqJ1ggZCAHSQvmCFEECII+YEkQBIgCZAESAIkAZIAw7/CBxB2EIrc6F0aAAAAAElFTkSuQmCC) no-repeat;
+    background-size: contain;
+}
