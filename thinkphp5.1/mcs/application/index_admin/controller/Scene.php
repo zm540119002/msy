@@ -36,6 +36,18 @@ class Scene extends Base {
 
             }
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
+
+            // 后面改进
+            if(isset($_POST['type']) &&$_POST['type']){
+                switch($_POST['type']){
+                    case 2:$template = 'sort'   ;break;
+                    case 3:$template = 'project';break;
+                    default:
+                        $template = 'detail';
+                }
+                $_POST['template'] = $template;
+            }
+
             $data = $_POST;
 
             if(isset($_POST['id']) && intval($_POST['id'])){//修改

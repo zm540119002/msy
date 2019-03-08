@@ -42,9 +42,9 @@
                             <div class="type_item">
                                 {volist name=":config('custom.scene_type')" id ='vo' key="k"}
                                     {if $info.type==$k }
-                                    <input type="radio" name="type" value="" checked="checked">{$vo}
+                                    <input type="radio" name="type" value="{$k}" checked="checked">{$vo}
                                     {else /}
-                                    <input type="radio" name="type" value="">{$vo}
+                                    <input type="radio" name="type" value="{$k}">{$vo}
                                     {/if}
                                 {/volist}
                             </div>
