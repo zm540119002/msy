@@ -23,7 +23,9 @@ class Studio extends \common\controller\Base{
             'where' => [
                 ['status', '=', 0],
                 ['shelf_status','=',3],
-                ['is_selection','=',1],
+                //['is_selection','=',1],
+                ['belong_to','exp','& 2'],
+
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
@@ -31,7 +33,10 @@ class Studio extends \common\controller\Base{
 
         ];
         $sceneList  = $modelScene->getList($config);
-        $this ->assign('sceneList',$sceneList);
+        // 场景按行个数分组
+        $sceneLists = sceneRatingList($sceneList);
+
+        $this ->assign('sceneLists',$sceneLists);
 
         //获取精选的10个项目
         $modelProject = new \app\index\model\Project();
@@ -40,6 +45,7 @@ class Studio extends \common\controller\Base{
                 ['status', '=', 0],
                 ['shelf_status','=',3],
                 ['is_selection','=',1],
+
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
@@ -48,5 +54,14 @@ class Studio extends \common\controller\Base{
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
         return $this->fetch();
+    }
+
+    /**
+     * 默认二级场景页
+     * 需要同组的各场景的名，场景信息，场景下的商品，场景下的活动
+     * 先调用中心店的控制器，后期如不同再分离
+     */
+    public function detail(){
+        return CenterStore::detail();
     }
 }

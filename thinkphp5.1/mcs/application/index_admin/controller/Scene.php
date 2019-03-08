@@ -6,6 +6,7 @@ namespace app\index_admin\controller;
 class Scene extends Base {
     
     public function manage(){
+
         return $this->fetch('manage');
     }
 
@@ -28,13 +29,25 @@ class Scene extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
 
             }
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
+
+            // 后面改进
+            if(isset($_POST['type']) &&$_POST['type']){
+                switch($_POST['type']){
+                    case 2:$template = 'sort'   ;break;
+                    case 3:$template = 'project';break;
+                    default:
+                        $template = 'detail';
+                }
+                $_POST['template'] = $template;
+            }
+
             $data = $_POST;
 
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
@@ -49,6 +62,9 @@ class Scene extends Base {
                 //删除就图片
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
+                }
+                if($info['logo_img']){
+                    delImgFromPaths($info['logo_img'],$_POST['logo_img']);
                 }
                 if($info['background_img']){
                     delImgFromPaths($info['background_img'],$_POST['background_img']);
@@ -120,21 +136,20 @@ class Scene extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection'
+                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection','s.type'
             ],
             'order'=>[
-                's.id'=>'desc',
                 's.sort'=>'desc',
+                's.id'=>'desc',
             ],
         ];
+
         $list = $model ->pageQuery($config);
         $this->assign('list',$list);
         if($_GET['pageType'] == 'manage'){
             return view('list_tpl');
         }
     }
-
-
     /**
      * @return array|mixed
      * 删除
@@ -198,7 +213,103 @@ class Scene extends Base {
     }
 
     /**
-     * 添加项目相关商品
+     * 添加场景下相关的商品分类
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public function addSceneSort(){
+        if(request()->isPost()){
+            $model = new \app\index_admin\model\SceneGoods();
+            $data = input('post.selectedIds/a');
+            $condition = [
+                ['scene_id','=',$data[0]['scene_id']]
+            ];
+            $model->startTrans();
+            $rse = $model -> del($condition,$tag=false);
+
+            if(false === $rse){
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $res = $model->allowField(true)->saveAll($data)->toArray();
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $model -> commit();
+            return successMsg('成功');
+
+        }else{
+
+            if(!input('?id') || !input('id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+            // 所有商品分类
+            $model = new \app\index_admin\model\GoodsCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $model->getList($config);
+
+            $this->assign('allCategoryList',$allCategoryList);
+
+            $id = input('id/d');
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 添加场景下相关的项目
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public function addSceneProject(){
+        if(request()->isPost()){
+            $model = new \app\index_admin\model\SceneGoods();
+            $data = input('post.selectedIds/a');
+            $condition = [
+                ['scene_id','=',$data[0]['scene_id']]
+            ];
+            $model->startTrans();
+            $rse = $model -> del($condition,$tag=false);
+
+            if(false === $rse){
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $res = $model->allowField(true)->saveAll($data)->toArray();
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $model -> commit();
+            return successMsg('成功');
+
+        }else{
+            if(!input('?id') || !input('id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+            // 所有商品分类
+            $model = new \app\index_admin\model\GoodsCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $model->getList($config);
+            $this->assign('allCategoryList',$allCategoryList);
+
+            $id = input('id/d');
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 添加场景下相关的商品
      * @return array|mixed
      * @throws \Exception
      */

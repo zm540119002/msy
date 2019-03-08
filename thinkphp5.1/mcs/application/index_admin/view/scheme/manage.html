@@ -206,7 +206,6 @@
                 });
             });
 
-
             // 去设置场景下的商品分类
             $('body').on('click','.addSceneSort',function(){
                 var _thisTr = $(this).parents('tr');
@@ -219,12 +218,13 @@
                 var url =  controller + 'addSceneProject/id/' + _thisTr.data('id');
                 location.href = url;
             });
-            // 去设置项目商品
+            //去设置场景下的商品
             $('body').on('click','.addProjectGoods',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'addSceneGoods/id/' + _thisTr.data('id');
                 location.href = url;
             });
+
         });
     </script>
 {/block}
