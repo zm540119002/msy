@@ -58,12 +58,7 @@
                             <input style="width: 200px; " class="inputboxadmin" name="bulk_price" value="{$info.bulk_price}">
                         </td>
                     </tr>
-                    <tr class="radioTypeOption first">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>样品价格：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="sample_price" value="{$info.sample_price}">
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -82,12 +77,7 @@
                             <input style="width: 200px;" class="inputboxadmin" name="increase_quantity" value="{$info.increase_quantity}">
                         </td>
                     </tr>
-                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>样品购买限额：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px;" class="inputboxadmin" name="minimum_sample_quantity" value="{$info.minimum_sample_quantity}">
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>采购单位：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -311,7 +301,7 @@
                 //简介
                 postData.parameters = ueParam.getContent();
                 var content='';
-                if(!postData.belong_to){
+                if(!sum(postData.belong_to)){
                     content='请选择店铺类别';
                 }else if(!postData.name){
                     content='请填写商品名称';
@@ -322,10 +312,6 @@
                     content='请填写批量价格';
                 }else if(!isMoney(postData.bulk_price)){
                     content='价格格式有误';
-                }else if(!postData.sample_price){
-                    content='请填写样品价格';
-                }else if(!isMoney(postData.sample_price)){
-                    content='样品价格格式有误';
                 }
                 else if(!postData.specification){
                     content='请填写商品规格';
