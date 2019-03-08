@@ -468,3 +468,11 @@ function isWeiXin(){
         return false;
     }
 }
+
+function sum(arr) {
+    var s = 0;
+    for (var i=arr.length-1; i>=0; i--) {
+        s += arr[i];
+    }
+    return s;
+}
