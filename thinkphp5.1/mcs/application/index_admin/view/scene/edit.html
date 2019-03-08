@@ -15,7 +15,7 @@
                 <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                     <tbody>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目名称：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景名称：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
                                 <textarea class="project_description" name="name" >{$info.name}</textarea>
@@ -23,7 +23,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>项目归属：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>场景归属：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
                                 {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
@@ -37,20 +37,34 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>场景类型：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <div class="type_item">
+                                {volist name=":config('custom.scene_type')" id ='vo' key="k"}
+                                    {if $info.type==$k }
+                                    <input type="radio" name="type" value="{$k}" checked="checked">{$vo}
+                                    {else /}
+                                    <input type="radio" name="type" value="{$k}">{$vo}
+                                    {/if}
+                                {/volist}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort}">
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>一行的场景数量：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景的数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="group" value="{$info.group|default=2}">
+                            <input style="width: 100px; " class="inputboxadmin" name="row_number" value="{$info.row_number|default=2}">
+                             该场景所属的行有多少个场景
                         </td>
                     </tr>
-
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目简介：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景简介：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
                                 <textarea class="project_description" name="intro" >{$info.intro}</textarea>
@@ -124,7 +138,7 @@
                         </td>
                     </tr>
                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目主图:</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景主图:</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!--<p> 加载编辑器的容器 </p>-->
                             <script id="main_img" type="text/plain">

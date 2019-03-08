@@ -24,7 +24,7 @@ class Studio extends \common\controller\Base{
                 ['status', '=', 0],
                 ['shelf_status','=',3],
                 //['is_selection','=',1],
-                ['belong_to','=',2],
+                ['belong_to','exp','& 2'],
 
             ], 'order'=>[
                 'sort'=>'desc',
@@ -45,6 +45,7 @@ class Studio extends \common\controller\Base{
                 ['status', '=', 0],
                 ['shelf_status','=',3],
                 ['is_selection','=',1],
+
             ], 'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
