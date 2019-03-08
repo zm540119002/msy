@@ -138,8 +138,6 @@ class Scene extends Base {
             return view('list_tpl');
         }
     }
-
-
     /**
      * @return array|mixed
      * 删除
@@ -230,6 +228,7 @@ class Scene extends Base {
             return successMsg('成功');
 
         }else{
+
             if(!input('?id') || !input('id/d')){
                 $this ->error('参数有误',url('manage'));
             }
@@ -241,6 +240,7 @@ class Scene extends Base {
                 ]
             ];
             $allCategoryList = $model->getList($config);
+
             $this->assign('allCategoryList',$allCategoryList);
 
             $id = input('id/d');

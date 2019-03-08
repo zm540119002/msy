@@ -6,7 +6,7 @@
 
 		{volist name="sceneList" id="info"}
 			<li data-category-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
-				<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
+				<a href="{:url(request()->controller().'/'.$info.template,['id'=>$info.id])}" class="category_nav">{$info.name}</a>
 			</li>
 		{/volist}
 
