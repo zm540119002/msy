@@ -334,7 +334,6 @@ $.fn.serializeObject = function() {
     var checkboxes = $(this).find('input[type=checkbox]');
     if(checkboxes.length){
         $.each(checkboxes, function () {
-            console.log(o);
             if (o[this.name]) {
                 if (!o[this.name].push) {
                     o[this.name] = [o[this.name]];
