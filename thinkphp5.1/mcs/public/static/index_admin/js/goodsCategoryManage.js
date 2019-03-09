@@ -14,7 +14,7 @@ $(document).ready(function(){
 /*            console.log(postData);
             return true;*/
             $.ajax({
-                url: 'manage',
+                url: controller +'manage',
         type:'post',
         data:postData,
         dataType: 'html',
@@ -22,7 +22,7 @@ $(document).ready(function(){
         dialog.error('AJAX错误。。。');
     },
     success: function(data){
-        alert(1);
+        alert(123);
         _thisTr.after(data);
     }
 });
