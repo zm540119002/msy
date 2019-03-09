@@ -104,7 +104,7 @@
 
 	$(function(){
 		//初始化场景商品页面
-		postData.scene_id = $('.nav_menu li').data('scene-id');
+		postData.scene_id = $('.nav_menu li.current').data('scene-id');
 
 		getPagingList(config,postData);
 
