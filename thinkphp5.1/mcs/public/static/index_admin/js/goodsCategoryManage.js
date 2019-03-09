@@ -22,7 +22,7 @@ $(document).ready(function(){
         dialog.error('AJAX错误。。。');
     },
     success: function(data){
-        alert(123);
+        console.log(controller +'manage');
         _thisTr.after(data);
     }
 });
