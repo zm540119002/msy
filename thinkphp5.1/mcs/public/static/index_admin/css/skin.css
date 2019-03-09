@@ -623,12 +623,12 @@ filter:alpha(opacity:0);
 .purchase_level_default{max-width:190px;margin:15px 0;}
 .pagination{
 	width:580px;
-	margin:0 auto;
+	margin:0 auto 15px;
 }
 .pagination li{
 	width:30px;
-	height:30px;
-	line-height: 30px;
+	height:32px;
+	line-height: 32px;
 	margin:0 5px;
 	float:left;
 }
@@ -695,6 +695,9 @@ a img {
 em, cite, th {
 	font-style: normal;
 	font-weight: normal;
+}
+footer.f24{
+	text-align:center;
 }
 table {
 	border-collapse: collapse;
