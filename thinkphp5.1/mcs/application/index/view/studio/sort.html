@@ -1,0 +1,102 @@
+{extend name="template/base.html" /}
+{block name="content"}
+
+<article class="f24">
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					{volist name="$scene.main_img" id="info"}
+					<img src="public_uploads/{$info}" alt="" class="common_default_img">
+					{/volist}
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content-padding content_main wy_list">
+
+		<!--分类列表-->
+		<div class="mod_selection">
+            <div class="nav">
+                <ul class="mod_selection_nav">
+					{volist name="$categoryList" id="info"}
+					<li data-category-id="{$info.id}" >
+						<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
+					</li>
+					{/volist}
+                </ul>
+            </div>
+        </div>
+
+		<!--产品列表-->
+		<div id="scroller-wrapper" class="list_wrapper">
+			<ul class="goods_list list" id="list">
+
+			</ul>
+		</div>
+	</section>
+</article>
+
+{/block}
+{block name="common"}
+    {include file="brand/set_brand" /}
+	{include file="public/sample_layer" /}
+{/block}
+{block name="footer"}
+	{include file="template/footer_menu.html" /}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="index_js/footerCart.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var id = '{$info.id}';
+		var date=getWeek();
+		countDown(date,$('#countDownBox'));
+		//查看文本
+		$('.wk_notice').moreText({
+			mainCell:".more-text",
+			openBtn:'展开'
+		});
+		$(".mod_selection_nav li").click(function(){
+			var moveX = $(this).offset().left+$(this).parent().scrollLeft();
+			var pageX = document.documentElement.clientWidth;//设备的宽度
+			var blockWidth = $(this).width();
+			var left = moveX-(pageX/2)+(blockWidth/2);
+			$(".mod_selection_nav").animate({scrollLeft:left},400);
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+	});
+
+	// 获取分类下的商品
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'sort'
+	};
+	$(function(){
+		//初始化分类商品页面
+		$('.mod_selection_nav li:eq(0)').addClass('current');
+		postData.category_id = $('.mod_selection_nav li.current').data('category-id');
+		getPagingList(config,postData);
+
+		$('body').on('click','.mod_selection_nav li',function(){
+			var _this = $(this);
+			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1
+			};
+			postData.category_id = _this.data('category-id');
+			getPagingList(config,postData);
+		});
+	});
+</script>
+{/block}
