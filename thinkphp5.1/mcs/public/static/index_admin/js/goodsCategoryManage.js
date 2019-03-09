@@ -4,6 +4,8 @@ $(document).ready(function(){
         var _this = $(this);
         var status = _this.attr('status');
         var _thisTr = _this.parents('tr');
+
+
         if(status == 'open'){
             _this.attr('status','close');
             var postData = {};
@@ -11,15 +13,15 @@ $(document).ready(function(){
             postData.id = _thisTr.data('id');
             postData.parent_id_1 = _thisTr.data('parent-id-1');
             //异步加载子分类
-/*            console.log(postData);
-            return true;*/
+
+            var url = controller + 'manage';
             $.ajax({
-                url: 'manage',
+                url: url,
         type:'post',
         data:postData,
         dataType: 'html',
         error: function(){
-        dialog.error('AJAX错误。。。');
+            dialog.error('AJAX错误。。。');
     },
     success: function(data){
         _thisTr.after(data);
@@ -114,5 +116,5 @@ $('body').on('click','.a-edit,.a-add',function(){
             }
         })
     })
-    
+
 });
