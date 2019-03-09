@@ -1,0 +1,93 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="f24 after_sale_wrapper">
+	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">申请售后</h2>
+	</section>
+	<section class="commodity_evaluation">
+		<div class="content-padding separation-line">
+			<span class="content-label">申请售后类型</span>
+			<ul class="option_list" data-option_type="1">
+				<li>商品调换</li>
+				<li>退货退款</li>
+				<li>仅退款</li>
+			</ul>
+			<span class="content-label">申请售后原因</span>
+			<ul class="option_list" data-option_type="2">
+				<li>不满意</li>
+				<li>质量问题</li>
+				<li>物流问题</li>
+				<li>收到商品损坏</li>
+				<li>配送有误</li>
+				<li>其他原因</li>
+			</ul>
+			<span class="content-label">售后问题描述</span>
+			<textarea rows="" cols="" class="text_description" placeholder="请填写售后问题"></textarea>
+			<span class="content-label">上传相关图片</span>
+			<p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+			<div class="upload-picture-module f24">
+				<div>
+					<div class="picture-module">
+						<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="">
+						<img class="upload_img" src="" alt="">
+						<input type="hidden" class="business-license img"  value=""/>
+					</div>
+				</div>
+			</div>
+			<form class="">
+				<ul class="upload-picture-module multi-picture-module f24"></ul>
+			</form>
+			<div class="error_tipc"></div>
+		</div>
+		<div class="content-padding ">
+			<span class="content-label">商品退回方式</span>
+			<ul class="option_list" data-option_type="1">
+				<li>快递至维雅</li>
+				<li>物流至维雅</li>
+				<li>不需要退回</li>
+			</ul>
+			<span class="content-label">运费承担方</span>
+			<ul class="option_list" data-option_type="1">
+				<li>用户承担运费</li>
+				<li>维雅承担运费</li>
+				<li>协商承担运费</li>
+			</ul>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.option_list li').on('click',function(){
+			var type=$(this).parents('.option_list').data('option_type');
+			if(type==1){
+				$(this).toggleClass('current').siblings().removeClass('current');
+			}else{
+				$(this).toggleClass('current');
+			}
+		});
+		//提交评价
+		$('body').on('click','.submit',function () {
+            var postData={};
+            var content='';
+            // if(!postData.voucher){
+            //     content='请上传转账凭证';
+            // }
+            // if(content){
+            //     dialog.error(content);
+            //     return false;
+            // }
+            var url =  module + 'Mine/index';
+            location.href = url;
+        });
+	});
+</script>
+{/block}
