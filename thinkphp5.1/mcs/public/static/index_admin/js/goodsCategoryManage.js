@@ -22,6 +22,7 @@ $(document).ready(function(){
         dialog.error('AJAX错误。。。');
     },
     success: function(data){
+        alert(1);
         _thisTr.after(data);
     }
 });
