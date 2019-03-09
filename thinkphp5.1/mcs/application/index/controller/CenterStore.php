@@ -142,7 +142,7 @@ class CenterStore extends \common\controller\Base{
 
     /**
      * 二级场景页 -分类
-     * 需要场景信息，场景下的商品分类，商品分类下的商品
+     * 需要场景信息，场景下的商品分类，商品分类下的商品-ajax获取
      */
     public function sort(){
         if(request()->isAjax()){
@@ -188,7 +188,7 @@ class CenterStore extends \common\controller\Base{
             $this->assign('categoryList',$categoryList);
 
             // 场景下的首商品分类的商品
-            $goodsList = array();
+/*            $goodsList = array();
             if($categoryList){
                 $category = reset($categoryList);
                 $modelGoods = new \app\index\model\Goods();
@@ -206,7 +206,7 @@ class CenterStore extends \common\controller\Base{
                 $goodsList= $modelGoods->getList($config);
             }
 
-            $this->assign('goodsList',$goodsList);
+            $this->assign('goodsList',$goodsList);*/
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -217,7 +217,7 @@ class CenterStore extends \common\controller\Base{
 
     /**
      * 二级场景页 -项目
-     * 需要场景信息，场景下的项目信息(商品，介绍，视频)
+     * 需要场景信息，场景下的项目信息4个(商品，介绍，视频)
      */
     public function project(){
         if(request()->isAjax()){
