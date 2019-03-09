@@ -187,23 +187,25 @@ class CenterStore extends \common\controller\Base{
             $categoryList = $modelSceneGoodsCategory->getList($config);
             $this->assign('categoryList',$categoryList);
 
-            $category = reset($categoryList);
-
             // 场景下的首商品分类的商品
-            $modelGoods = new \app\index\model\Goods();
-            $config = [
-                'where' => [
-                    ['status', '=', 0],
-                    ['category_id_1', '=', $category['id']],
-                ],'field'=>[
-                    'id ','headline','thumb_img','bulk_price','specification','minimum_order_quantity',
-                    'minimum_sample_quantity','increase_quantity','purchase_unit'
-                ],'order'=> [
-                    'sort'=>'desc'
-                ]
-            ];
+            $goodsList = array();
+            if($categoryList){
+                $category = reset($categoryList);
+                $modelGoods = new \app\index\model\Goods();
+                $config = [
+                    'where' => [
+                        ['status', '=', 0],
+                        ['category_id_1', '=', $category['id']],
+                    ],'field'=>[
+                        'id ','headline','thumb_img','bulk_price','specification','minimum_order_quantity',
+                        'minimum_sample_quantity','increase_quantity','purchase_unit'
+                    ],'order'=> [
+                        'sort' => 'desc'
+                    ]
+                ];
+                $goodsList= $modelGoods->getList($config);
+            }
 
-            $goodsList= $modelGoods->getList($config);
             $this->assign('goodsList',$goodsList);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
