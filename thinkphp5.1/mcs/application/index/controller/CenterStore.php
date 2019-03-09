@@ -217,7 +217,7 @@ class CenterStore extends \common\controller\Base{
 
     /**
      * 二级场景页 -项目
-     * 需要场景信息，场景下的项目信息(商品，介绍，视频)
+     * 需要场景信息，场景下的项目信息4个(商品，介绍，视频)
      */
     public function project(){
         if(request()->isAjax()){

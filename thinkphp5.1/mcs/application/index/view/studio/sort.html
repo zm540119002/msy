@@ -89,5 +89,33 @@
                     $(this).addClass("active").siblings().removeClass("active");
 		});
 	});
+
+	// 获取分类下的商品
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	$(function(){
+		//初始化分类商品页面
+		$('.nav_menu li:eq(0)').addClass('current');
+		postData.category_id = $('.nav_menu li.current').data('category-id');
+		getPagingList(config,postData);
+
+		$('body').on('click','.nav_menu li',function(){
+			var _this = $(this);
+			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1
+			};
+			postData.category_id = _this.data('category-id');
+			getPagingList(config,postData);
+		});
+	});
 </script>
+
 {/block}
