@@ -64,4 +64,22 @@ class Studio extends \common\controller\Base{
     public function detail(){
         return CenterStore::detail();
     }
+
+    /**
+     * 默认二级场景页
+     * 需要场景信息，场景下的商品分类，商品分类下的商品
+     * 先调用中心店的控制器，后期如不同再分离
+     */
+    public function sort(){
+        return CenterStore::sort();
+    }
+
+    /**
+     * 默认二级场景页
+     * 需要场景信息，场景下的项目信息(商品，介绍，视频)
+     * 先调用中心店的控制器，后期如不同再分离
+     */
+    public function project(){
+        return CenterStore::project();
+    }
 }
