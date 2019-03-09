@@ -1,0 +1,198 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="nav">我的订单{/block}
+{block name="content"}
+<!--订单状态标签-->
+<section class="order_operate_btn-list" style="display:none;">
+    <!--1:待付款-->
+    <a href="javascript:void(0);" class="cancel_order">取消订单</a>
+    <a href="{:url('Order/toPay',['order_sn'=>$info.sn])}">去支付</a>
+
+    <!--2:待收货-->
+    <a href="javascript:void(0);" class="confirm_receive">确认收货</a>
+
+    <!--3:待评价-->
+    <a href="javascript:void(0);" class="apply_after_sales">申请售后</a>
+    <a href="javascript:void(0);" class="to_evaluate">评价</a>
+
+    <!--4:已完成-->
+    <a href="javascript:void(0);" class="see_evaluation">查看评价</a>
+    <a href="javascript:void(0);" class="purchase_again">再次购买</a>
+    <!--5:已取消-->
+    <a href="javascript:void(0);" class="order_canceled">已取消</a>
+    <!--6:售后-->
+    <a href="javascript:void(0);" class="">售后</a>
+</section>
+
+<article class="f24 ">
+    <section class="header_title separation-line">
+        <a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">我的订单</h2>
+	</section>
+    <section class="order_main_wrapper">
+        <nav>
+            <ul class="menu_nav">
+                <li>
+                    <a href="{:url('order/manage')}" data-order_status="0">全部</a>
+                </li>
+                <li>
+                    <a href="{:url('order/manage',['order_status'=>1])}" data-order_status="1">待付款</a>
+                </li>
+                <li>
+                    <a href="{:url('order/manage',['order_status'=>2])}" data-order_status="2">待收货</a>
+                </li>
+                <li>
+                    <a href="{:url('order/manage',['order_status'=>3])}" data-order_status="3">待评价</a>
+                </li>
+                <li>
+                    <a href="{:url('order/manage',['order_status'=>6])}" data-order_status="6">售后</a>
+                </li>
+                <li>
+                    <a href="{:url('order/manage',['order_status'=>4])}" data-order_status="4">已完成</a>
+                </li>
+
+            </ul>
+        </nav>
+        <ul class="order_list list" id="list">
+
+        </ul>
+    </section>
+</article>
+{/block}
+{block name="footer"}
+{include file="template/footer_menu.html" /}
+{/block}
+
+{block name="script"}
+    <script type="text/javascript" src="index_js/footerCart.js"></script>
+    <script type="text/javascript">
+        var config = {
+            url:module+'Order/getList',
+            requestEnd:false,
+            loadTrigger:false,
+            currentPage:1,
+
+        };
+        var postData = {
+            pageSize:4,
+            pageType:'list_tpl'
+        };
+        $(function(){
+            var order_status={:json_encode($order_status)};
+            order_status=parseInt(order_status);
+            if(isNaN(order_status)){
+                $('.menu_nav li:first').addClass('current');
+            }else {
+                $.each($('.menu_nav li'),function () {
+                    var li_order_status = $(this).find('a').data('order_status');
+                    if(li_order_status==order_status){
+                        $(this).addClass('current');
+                    }
+                });
+            }
+
+            if(order_status){
+                postData.order_status = order_status;
+            }
+            getPagingList(config,postData);
+
+            //下拉加载
+            $(window).on('scroll',function(){
+                if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+                    config.loadTrigger = false;
+                    getPagingList(config,postData);
+                }
+            });
+
+            //取消订单
+            $('body').on('click','.cancel_order',function () {
+                var _this = $(this);
+                var _thisTr =_this.parents('li');
+                var id = _thisTr.data('id');
+                var postData ={
+                    id:id,
+                    order_status:5
+                };
+                var url = module+'Order/setOrderStatus';
+                layer.open({
+                    content:'确定取消订单？',
+                    btn:['确定','取消'],
+                    yes:function(index){
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(){
+                                $('.loading').show();
+                            },
+                            error:function(){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(!data.status){
+                                    dialog.error(data.info);
+                                    return false;
+                                }
+                                if(data.status){
+                                    _thisTr.remove();
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                })
+             });
+            //确认收货
+            $('body').on('click','.confirm_receive',function () {
+                var _this = $(this);
+                var _thisTr =_this.parents('li');
+                var id = _thisTr.data('id');
+                var postData ={
+                    id:id,
+                    order_status:3
+                };
+                var url = module+'Order/setOrderStatus';
+                layer.open({
+                    content:'确定收货？',
+                    btn:['确定','取消'],
+                    yes:function(index){
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(){
+                                $('.loading').show();
+                            },
+                            error:function(){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(data.status){
+                                    location.href =module +'Order/manage/order_status/'+ 3;
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                })
+            });
+            //去评价
+            $('body').on('click','.to_evaluate',function () {
+                location.href =module +'Comment/index';
+            });
+            //查看评论
+            $('body').on('click','.see_evaluation',function () {
+
+            });
+            //申请售后
+            $('body').on('click','.apply_after_sales',function () {
+                location.href =module +'AfterSale/index';
+            });
+        });
+    </script>
+{/block}

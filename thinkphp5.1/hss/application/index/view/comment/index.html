@@ -1,0 +1,95 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 after_sale_wrapper">
+	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">商品评价</h2>
+	</section>
+	<section class="commodity_evaluation">
+		<div class="content-padding score_review_item">
+			<div class="">
+				<span class="my_scoring left">描述相符</span>
+				<div class="my_score_star">
+					<div class="star_score star_img left">
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+						<a href="javascript:void(0);" data-show="">
+							<img src="public_img/star.png" />
+						</a>
+					</div>
+					<span class="fraction my_fraction " data-score=""></span>
+				</div>
+			</div>
+		</div>
+		<div class="content-padding">
+			<span class="content-label">评价描述</span>
+			<textarea class="text_description" rows="" cols="" placeholder="说说该商品的优点和美中不足的地方吧，你的评价能帮助其他想购买的朋友哦！"></textarea>
+			<span class="content-label">评价可以附带上传商品图片</span>
+			<div class="upload-picture-module f24">
+				<div>
+					<div class="picture-module">
+						<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="">
+						<img class="upload_img" src="" alt="">
+						<input type="hidden" class="business-license img"  value=""/>
+					</div>
+				</div>
+			</div>
+			<form class="">
+				<ul class="upload-picture-module multi-picture-module f24"></ul>
+			</form>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//点击星星评分
+		$('body').on('click','.star_score a',function(){
+			var star='public_img/star.png';
+			var starRed='public_img/starred.png';
+			var prompt=['1分','2分','3分','4分','5分'];
+			var starId=$(this).index();
+			$.each($('.star_score img'),function(){
+				$(this).attr('src',star);//遍历img元素为空心星
+			})
+			$(this).find('img').attr('src',starRed);
+			$(this).prevAll().find('img').attr('src',starRed);
+			$(this).parent().next('.fraction').text(prompt[starId]);
+			$(this).parent().next('.fraction').attr('data-score',starId+1);
+		});
+		//提交评价
+		$('body').on('click','.submit',function () {
+            var postData={};
+            var content='';
+            // if(!postData.voucher){
+            //     content='请上传转账凭证';
+            // }
+            // if(content){
+            //     dialog.error(content);
+            //     return false;
+            // }
+            var url =  module + 'Mine/index';
+            location.href = url;
+        });
+	});
+</script>
+{/block}

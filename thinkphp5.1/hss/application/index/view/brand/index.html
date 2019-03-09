@@ -1,0 +1,83 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="header_title separation-line">
+        <a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">代金券</h2>
+	</section>
+    <section class="cash_coupon_wapper">
+        <div class="cash_coupon">
+            <a href="javascript:void(0);" class="current">待领的代金券</a>
+            <a href="javascript:void(0);">已领的代金券</a>
+        </div>
+        <ul class="cash_coupon_item">
+            <li class="columns_flex">
+                <div>
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
+                </div>
+                <div>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <a href="javascript:void(0);" class="receive">立即领取</a>
+                </div>
+            </li>
+            <li class="columns_flex">
+                <div>
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
+                </div>
+                <div>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <a href="javascript:void(0);" class="receive">立即领取</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="cash_coupon_item hide">
+            <li class="columns_flex">
+                <div>
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
+                </div>
+                <div>
+                    <span class="item">领取日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                </div>
+            </li>
+            <li class="columns_flex">
+                <div>
+                    <span class="item big">500<span>元</span></span>
+                    <span class="item">某某<span>代金券</span></span>
+                </div>
+                <div>
+                    <span class="item">领取日期</span>
+                    <span class="item">2019年2月28日</span>
+                    <span class="item">失效日期</span>
+                    <span class="item">2019年2月28日</span>
+                </div>
+            </li>
+        </ul>
+    </section>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.cash_coupon a').on('click',function(){
+        $(this).addClass('current').siblings().removeClass('current');
+        $('.cash_coupon_item').hide().eq($(this).index()).show();
+    })
+    //cash_coupon_item
+})
+</script>
+{/block}
