@@ -696,7 +696,10 @@ em, cite, th {
 	font-style: normal;
 	font-weight: normal;
 }
-footer.f24{
+footer a{
+	display:block;
+	width:300px;
+	margin:0 auto;
 	text-align:center;
 }
 table {
