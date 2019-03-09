@@ -4461,8 +4461,8 @@ select[name="nodeIds"]{
     position:relative;
 }
 .mod_selection .nav {
-    position: absolute;
-    top: -56px;
+    /*position: absolute;
+    top: -56px;*/
     height: .8rem;
     overflow: hidden;
     box-sizing: border-box;
@@ -6134,8 +6134,8 @@ div.no_data{
     position:relative;
 }
 .mod_selection .nav {
-    position: absolute;
-    top: -56px;
+    /*position: absolute;
+    top: -56px;*/
     height: .8rem;
     overflow: hidden;
     box-sizing: border-box;
