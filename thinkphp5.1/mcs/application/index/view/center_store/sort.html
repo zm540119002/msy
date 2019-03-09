@@ -17,27 +17,18 @@
 
 		<div class="mod_selection">
             <div class="nav">
-                <!--<div class="mod_selection_more">
-                    <div class="tab-arrow"></div>
-                </div>-->
                 <ul class="mod_selection_nav">
 					{volist name="$categoryList" id="info"}
-                    <li>卸妆</li>
-                    <li>洁肤</li>
-                    <li>调肤</li>
-                    <li>精华</li>
-                    <li>乳霜</li>
-                    <li>喷雾</li>
-                    <li>美白</li>
-                    <li>保湿</li>
-                    <li>祛痘</li>
-                    <li>舒敏</li>
+                    <li>{$info.name}</li>
 					{/volist}
                 </ul>
             </div>
         </div>
+
 		<!--产品列表-->
+		{notempty name="goodsList"}
 		<ul class="goods_list list">
+			{volist name="goodsList" id="info"}
 			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
 				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
 					{empty name="info.thumb_img"}
@@ -47,9 +38,9 @@
 					{/empty}
 				</a>
 				<div class="list_r">
-					<p class="text-intro">产品产品产品产品产品产品产品</p>
+					<p class="text-intro">{$info.headline}</p>
 					<div>
-						<span class="red">￥<price>500.00</price></span>
+						<span class="red">￥<price>{$info.bulk_price}</price></span>
 					</div>
 					<div class="quantity_wrapper selected-number">
 						<a href="javascript:void(0);" class="greduce">-</a>
@@ -60,29 +51,10 @@
 					</div>
 				</div>
 			</li>
-			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
-				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
-					{empty name="info.thumb_img"}
-					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
-					{else /}
-					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
-					{/empty}
-				</a>
-				<div class="list_r">
-					<p class="text-intro">产品产品产品产品产品产品产品</p>
-					<div>
-						<span class="red">￥<price>500.00</price></span>
-					</div>
-					<div class="quantity_wrapper selected-number">
-						<a href="javascript:void(0);" class="greduce">-</a>
-						<input type="text" value="0" class="f24 gshopping_count" >
-						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
-						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
-						<a href="javascript:void(0);" class="gplus">+</a>
-					</div>
-				</div>
-			</li>
+			{/volist}
 		</ul>
+		{/notempty}
+
 	</section>
 </article>
 
