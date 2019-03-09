@@ -1,0 +1,318 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<!--个人信息-->
+<section class="user_info_content" style="display:none;">
+    <ul>
+        <li class="columns_flex l-r-sides">
+            <div>
+            <span>头像</span>
+            </div>
+            <div class="upload-picture-module box-flex f24">
+                <div>
+                    <div class="picture-module">
+                        <input type="file" class="editAvatar uploadImg">
+                        <img class="upload_img" src="" alt="">
+                        <input type="hidden" name="logo" class="img" data-src="" value=""/>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <a href="javascript:;" class="right-arrow nick_btn">
+                <span >昵称</span>
+                <span class="user_name"></span>
+                <input type="hidden" class="old_name" value="{$user.name}">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" id="" class="set_wallet_psd right-arrow" data-type="set">设置钱包支付密码</a>
+        </li>
+        <li>
+            <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
+        </li>
+    </ul>
+</section>
+<!--昵称信息-->
+<section class="nick_content" style="display:none;">
+    <div>
+        <input type="text" name="" class="input-filed user_name">
+
+    </div>
+</section>
+<article class="person-center-wrapper f24">
+    <section class="separation-line columns_flex l-r-sides flex_item">
+        {empty name="user"}
+        <div class="user_top">
+            <a href="javascript:void(0);" id="login_dialog">
+               <img src="public_img/default/head_50.png" alt="">
+               注册登录
+           </a>
+        </div>
+        {else /}
+        <div class="user_top_item user_info_list">
+            {empty name="user.avatar"}
+            <img src="public_img/default/chat_head.jpg" class="left user_header">
+            {else /}
+            <img src="public_uploads/{$user.avatar}" class="left user_header">
+            {/empty}
+            <div class="user_info_r">
+                <p class="user_name">{$user.name}</p>
+                <p class="user_mobile">{$user.mobile_phone}</p>
+            </div>
+        </div>
+        <!--<a href="javascript:void(0);" id="logout_dialog" class="sign_out">
+            退出>
+        </a>-->
+        <a href="javascript:void(0);" class="customer_info">
+            <img src="public_img/modify.png" alt="">
+        </a>
+        {/empty}
+
+    </section>
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="javascript:void(0)" class="person-td my_message" data-jump_url="{:url('MessageCenter/index')}">
+                <span class="my-msg">
+                    <i class="num"></i>
+                </span>
+                消息
+            </a>
+            <a href="javascript:void(0)" class="person-td my_collection"  data-jump_url="{:url('Collection/index')}">
+                <span class="collec"></span>
+                我的收藏
+            </a>
+            <a href="{:url('Notice/index')}" class="person-td">
+                <span class="notice"></span>
+                二维码
+            </a>
+        </div>
+    </section>
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="javascript:void(0)" class="person-td my_brand"  data-jump_url="{:url('Brand/index')}">
+                <span class="brand"></span>
+                代金券
+            </a>
+            <a href="javascript:void(0)" class="person-td recharge" data-jump_url="{:url('Wallet/recharge')}">
+                <span class="charge"></span>
+                采购充值
+            </a>
+            <a href="{:url('Report/index')}" class="person-td">
+                <span class="pur_wallet"></span>
+                采购钱包
+            </a>
+            <a href="{:url('Report/index')}" class="person-td">
+                <span class="s_wallet"></span>
+                收益钱包
+            </a>
+        </div>
+    </section>
+    <section class="separation-line">
+        <div class="flex_item">
+            <a href="javascript:void(0)" class="person-td my_cart"  data-jump_url="{:url('Cart/index')}">
+                <span class="cart"></span>
+                采购车
+            </a>
+            <a href="javascript:void(0)" class="person-td address_manage" data-jump_url="{:url('Address/manage')}">
+                <span class="addr"></span>
+                收货地址
+            </a>
+            <a href="javascript:void(0)" class="person-td order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>1])}">
+                <span class="wait_pay"></span>
+                待付款
+            </a>
+            <a href="javascript:void(0)" class="person-td order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>2])}">
+                <span class="wait_recevie"></span>
+                待收货
+            </a>
+        </div>
+        <div class="flex_item">
+            <a href="javascript:void(0)" class="person-td order_manage" data-jump_url="{:url('Order/manage',['order_status'=>3])}">
+                <span class="commit"></span>
+                待评价
+            </a>
+            <a href="javascript:void(0)" class="person-td order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>6])}">
+                <span class="after_s"></span>
+                售后
+            </a>
+            <a href="javascript:void(0)" class="person-td order_manage" data-jump_url="{:url('Order/manage',['order_status'=>4])}">
+                <span class="complete"></span>
+                已完成
+            </a>
+            <a href="javascript:void(0)" class="person-td order_manage" data-jump_url="{:url('Order/manage',['order_status'=>0])}">
+                <span class="all"></span>
+                全部
+            </a>
+        </div>
+    </section>
+</article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">美创会</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Company/index')}">
+					<span class="practitioners f_icon"></span>
+					<span class="f_txt">中心店</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Consultation/index')}">
+					<span class="business f_icon"></span>
+					<span class="f_txt">工作室</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="javascript:void(0)" class="my_cart" data-jump_url="{:url('Cart/manage')}">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column current">
+				<a href="{:url('Mine/index')}">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+{include file="template/wallet_pay_dialog.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="index_js/jump_login.js"></script>
+<script type="text/javascript" src="public_js/wallet.js"></script>
+<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
+<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var mobile=$('.user_mobile').text();
+        $('.user_mobile').text(mobileNHide(mobile));
+        //个人信息
+        var user_info_content=$('.user_info_content').html();
+        $('body').on('click','.customer_info',function () {
+            var _this=$(this);
+            layer.open({
+                title:['个人信息','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
+                className:'userInfoLayer',
+                content:user_info_content,
+                btn:['确定'],
+                success:function(){
+                    var user_header=_this.prev().find('.user_header').attr('src');
+                    var user_name=_this.prev().find('.user_name').text();
+                    $('.userInfoLayer').find('.upload_img').attr('src',user_header);
+                    $('.userInfoLayer .user_name').text(user_name);
+                },
+                yes:function(index){
+                    layer.close(index);
+                }
+            });
+        });
+
+        var uploadsSingleImgFlag = true; //上传单图片成功标识位
+        // 选择头像图片
+        $('body').on('change','.editAvatar',function () {
+            var _this=$(this);
+            uploadsSingleImgFlag = false;
+            var img = event.target.files[0];
+            var uploadfileSize=img.size/1024/1024;
+            var obj=$(this).parent();
+            // 判断是否图片
+            if(!img){
+                return false;
+            }
+            // 判断图片格式
+            var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
+            if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
+                dialog.error('请上传：jpg、jpeg、png、gif格式图片');
+                return false;
+            }
+            if(uploadfileSize>1){
+                dialog.error('图片大小不能超过1M');
+                return false;
+            }
+            var reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = function(e){
+                var imgUrl=e.target.result;
+                $(obj).addClass('active');
+                var postData = {fileBase64: e.target.result};
+                // postData.imgWidth = 145;
+                // postData.imgHeight = 100;
+                $(obj).find('img').attr('src',imgUrl);
+                var type = _this.data('type');
+                if(type == 'notupload'){
+                    $(obj).find('.img').val(imgUrl);
+                    return false;
+                }
+                //提交
+                $.post(module+"Mine/editAvatar",postData,function(data){
+                    if(data.status == 1){
+                        uploadsSingleImgFlag = true;
+                        $(obj).find('.img').val(data.avatar);
+                        dialog.success(data.info);
+                        $('.user_info_list').find('.user_header').attr('src',uploads+data.avatar);
+                    }else{
+                        dialog.error(data.info)
+                    }
+                })
+            }
+        });
+        //昵称修改
+        var nick_content=$('.nick_content').html();
+         $('body').on('click','.nick_btn',function () {
+            var _this=$(this);
+            layer.open({
+                title:['昵称','border-bottom:1px solid #d9d9d9;'],
+                type:1,
+                anim:'up',
+                className:'nickInfoLayer',
+                content:nick_content,
+                btn:['确定'],
+                success:function(){
+                    var user_name=_this.find('.user_name').text();
+                    $('.nickInfoLayer .user_name').val(user_name);
+                },
+                yes:function(index){
+                  var user_name=  $('.nickInfoLayer .user_name').val();
+                  $('.userInfoLayer').find('.user_name').text(user_name);
+                   var  postData = {
+                       name:user_name
+                   }
+                    var old_name =   $('.userInfoLayer ').find('.old_name').val();
+                    if(old_name !== user_name){
+                        //提交
+                        $.post(module+"Mine/editName",postData,function(data){
+                            if(data.status == 1){
+                                dialog.success(data.info);
+                                $('.user_info_list').find('.user_name').text(data.name);
+                                $('.userInfoLayer ').find('.old_name').val(data.name);
+                            }else{
+                                dialog.error(data.info)
+                            }
+                        })
+                    }
+
+                  layer.close(index);
+                }
+            });
+        });
+        //设置钱包支付密码
+        $('body').on('click','.set_wallet_psd',function () {
+            var type=$(this).data('type');
+            forgetWalletPasswordDialog(type);
+        });
+       
+    })
+</script>
+{/block}
