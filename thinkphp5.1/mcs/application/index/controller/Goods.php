@@ -88,9 +88,10 @@ class Goods extends \common\controller\Base{
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
         }
-        
+
         $list = $model -> pageQuery($config);
         $this->assign('list',$list);
+
         if(isset($_GET['pageType'])){
 
             // 排列的数量不同

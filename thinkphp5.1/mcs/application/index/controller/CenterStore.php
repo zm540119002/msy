@@ -99,7 +99,7 @@ class CenterStore extends \common\controller\Base{
             $this->assign('sceneList',$sceneList);
 
             //获取相关的商品
-            $modelSceneGoods = new \app\index\model\SceneGoods();
+/*            $modelSceneGoods = new \app\index\model\SceneGoods();
             $config = [
                 'where' => [
                     ['sg.status', '=', 0],
@@ -114,7 +114,7 @@ class CenterStore extends \common\controller\Base{
 
             $goodsList= $modelSceneGoods->getList($config);
 
-            $this->assign('goodsList',$goodsList);
+            $this->assign('goodsList',$goodsList);*/
 
             // 获取场景下的方案
             $modelSceneScheme = new \app\index\model\SceneScheme();
@@ -217,7 +217,7 @@ class CenterStore extends \common\controller\Base{
 
     /**
      * 二级场景页 -项目
-     * 需要场景信息，场景下的项目信息4个(商品，介绍，视频)
+     * 需要场景id，场景下的项目信息4个(商品-ajax获取，介绍，视频)
      */
     public function project(){
         if(request()->isAjax()){
@@ -226,7 +226,7 @@ class CenterStore extends \common\controller\Base{
             if(!$id){
                 $this->error('此项目已下架');
             }
-            // 场景信息
+            // 场景信息 这组需不需要???
             $model = new\app\index\model\Scene();
             $config =[
                 'where' => [
@@ -235,56 +235,68 @@ class CenterStore extends \common\controller\Base{
                     ['id', '=', $id],
                 ],
             ];
-            $css = (input('css'));
-            $this->assign('css',$css);
+
             $scene = $model->getInfo($config);
             if(empty($scene)){
                 $this->error('此项目已下架');
             }
-            $scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['tag'] = explode(',',(string)$scene['tag']);
-            $this->assign('scene',$scene);
 
-            // 场景下的商品分类
-            $modelSceneGoodsCategory = new \app\index\model\SceneGoodsCategory();
+            // 场景下的项目信息 -4个
+            $modelSceneProject = new \app\index\model\SceneProject();
             $config = [
                 'where'  => [
-                    ['gc.status', '=', 0],
-                    ['sgc.scene_id', '=', $id],
+                    ['p.status', '=', 0],
+                    ['p.shelf_status', '=', 1],
+                    ['p.audit', '=', 1],
+                    ['p.belong_to', '=', $scene['belong_to']],
+                    ['sp.scene_id', '=', $id],
                 ],'field'=> [
-                    'gc.id ','gc.name',
+                    'p.id ','p.name','thumb_img','main_img','intro','detail_img'
                 ],'join' => [
-                    ['goods_category gc','gc.id = sgc.goods_category_id','left']
+                    ['project p','sp.project_id = p.id','left']
                 ],'order'=> [
-                    'gc.sort'=>'desc'
-                ]
+                    'p.sort'=>'desc'
+                ],'limit' =>4,
             ];
-            $categoryList = $modelSceneGoodsCategory->getList($config);
-            $this->assign('categoryList',$categoryList);
-
-            $category = reset($categoryList);
-
-            // 场景下的首商品分类的商品
-            $modelGoods = new \app\index\model\Goods();
-            $config = [
-                'where' => [
-                    ['status', '=', 0],
-                    ['category_id_1', '=', $category['id']],
-                ],'field'=>[
-                    'id ','headline','thumb_img','bulk_price','specification','minimum_order_quantity',
-                    'minimum_sample_quantity','increase_quantity','purchase_unit'
-                ],'order'=> [
-                    'sort'=>'desc'
-                ]
-            ];
-
-            $goodsList= $modelGoods->getList($config);
-            $this->assign('goodsList',$goodsList);
+            $projectList = $modelSceneProject->getList($config);
+            $this->assign('projectList',$projectList);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
-
             return $this->fetch();
         }
     }
+
+    // 场景下的商品
+    public function getList(){
+
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+
+        $id =  intval(input('get.scene_id/d',''));
+        if(!$id){
+            $this->error('此项目已下架');
+        }
+
+        $modelSceneGoods = new \app\index\model\SceneGoods();
+        $config = [
+            'where' => [
+                ['sg.status', '=', 0],
+                ['sg.scene_id', '=', $id],
+            ],'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],'join'=>[
+                ['goods g','g.id = sg.goods_id','left']
+            ]
+        ];
+
+        $list = $modelSceneGoods -> pageQuery($config);
+        $this->assign('list',$list);
+
+        return $this->fetch('list_goods_tpl');
+
+    }
+
 }
