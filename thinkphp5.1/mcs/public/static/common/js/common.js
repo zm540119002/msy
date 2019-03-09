@@ -326,7 +326,7 @@ $.fn.serializeObject = function() {
         $.each(checkboxes, function () {
             if (o[this.name]) {
                 if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
+                    // o[this.name] = [o[this.name]];
                 }
                 if($(this).prop('checked')) {
                     o[this.name].push('1');
