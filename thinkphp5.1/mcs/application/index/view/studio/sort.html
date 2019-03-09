@@ -99,11 +99,11 @@
 	};
 	$(function(){
 		//初始化分类商品页面
-		$('.nav_menu li:eq(0)').addClass('current');
-		postData.category_id = $('.nav_menu li.current').data('category-id');
+		$('.mod_selection_nav li:eq(0)').addClass('current');
+		postData.category_id = $('.mod_selection_nav li.current').data('category-id');
 		getPagingList(config,postData);
 
-		$('body').on('click','.nav_menu li',function(){
+		$('body').on('click','.mod_selection_nav li',function(){
 			var _this = $(this);
 			$(this).addClass('current').siblings().removeClass('current');
 			config = {
