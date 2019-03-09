@@ -20,17 +20,24 @@
             <div class="nav">
                 <ul class="mod_selection_nav">
 					{volist name="$categoryList" id="info"}
-                    <li>{$info.name}</li>
+					<li data-category-id="{$info.id}" >
+						<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
+					</li>
 					{/volist}
                 </ul>
             </div>
         </div>
 
 		<!--产品列表-->
-		{notempty name="goodsList"}
+		<div id="scroller-wrapper" class="list_wrapper">
+			<ul class="columns_flex flex-both-side goods-content-list" id="list">
+
+			</ul>
+		</div>
+<!--		{notempty name="goodsList"}
 		<ul class="goods_list list">
 			{volist name="goodsList" id="info"}
-			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
+			<li data-id="{$info.id}">
 				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
 					{empty name="info.thumb_img"}
 					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
@@ -54,7 +61,7 @@
 			</li>
 			{/volist}
 		</ul>
-		{/notempty}
+		{/notempty}-->
 
 	</section>
 </article>
@@ -80,13 +87,44 @@
 			mainCell:".more-text",
 			openBtn:'展开'
 		});
-		 $(".mod_selection_nav li").click(function(){
-                    var moveX = $(this).offset().left+$(this).parent().scrollLeft();
-                    var pageX = document.documentElement.clientWidth;//设备的宽度
-                    var blockWidth = $(this).width();
-                    var left = moveX-(pageX/2)+(blockWidth/2);
-                    $(".mod_selection_nav").animate({scrollLeft:left},400);
-                    $(this).addClass("active").siblings().removeClass("active");
+		$(".mod_selection_nav li").click(function(){
+			var moveX = $(this).offset().left+$(this).parent().scrollLeft();
+			var pageX = document.documentElement.clientWidth;//设备的宽度
+			var blockWidth = $(this).width();
+			var left = moveX-(pageX/2)+(blockWidth/2);
+			$(".mod_selection_nav").animate({scrollLeft:left},400);
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+	});
+
+	// 获取分类下的商品
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'index'
+	};
+	$(function(){
+		//初始化分类商品页面
+		$('.mod_selection_nav li:eq(0)').addClass('current');
+		postData.category_id = $('.mod_selection_nav li.current').data('category-id');
+		getPagingList(config,postData);
+
+		$('body').on('click','.mod_selection_nav li',function(){
+			var _this = $(this);
+			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1
+			};
+			postData.category_id = _this.data('category-id');
+			getPagingList(config,postData);
 		});
 	});
 </script>

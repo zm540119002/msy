@@ -104,6 +104,7 @@
 		getPagingList(config,postData);
 
 		$('body').on('click','.mod_selection_nav li',function(){
+			alert(1111);
 			var _this = $(this);
 			$(this).addClass('current').siblings().removeClass('current');
 			config = {

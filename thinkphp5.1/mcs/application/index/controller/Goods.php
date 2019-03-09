@@ -92,8 +92,11 @@ class Goods extends \common\controller\Base{
         $list = $model -> pageQuery($config);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'index' ){
-                return $this->fetch('list_index_tpl');
+
+            // 排列的数量不同
+            switch($_GET['pageType']){
+                case 'index': return $this->fetch('list_index_tpl'); break;  // 一行两个
+                case 'sort' : return $this->fetch('list_sort_tpl'); break;   // 一行一个
             }
         }
     }
