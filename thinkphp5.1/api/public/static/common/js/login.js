@@ -97,7 +97,7 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var url = 'https://api.meishangyun.com/api/UserCenter/'+method;
+        var url = domain+'api/UserCenter/'+method;
         // console.log(url);
         // return false;
         var postForm = null;
