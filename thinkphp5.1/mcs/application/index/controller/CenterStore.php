@@ -216,49 +216,53 @@ class CenterStore extends \common\controller\Base{
     }
 
     /**
-     * 二级场景页 -项目
-     * 需要场景id，场景下的项目信息4个(商品-ajax获取，介绍，视频)
+     * 二级场景页 -只作为入口不关联场景
+     * 项目 中心店，工作室
+     * 项目信息4个暂定(名称，logo,商品-ajax获取，介绍，视频)
      */
     public function project(){
         if(request()->isAjax()){
         }else{
-            $id = intval(input('id'));
-            if(!$id){
-                $this->error('此项目已下架');
-            }
-            // 场景信息 这组需不需要???
-            $model = new\app\index\model\Scene();
-            $config =[
-                'where' => [
-                    ['status', '=', 0],
-                    ['shelf_status', '=', 3],
-                    ['id', '=', $id],
-                ],
-            ];
-
-            $scene = $model->getInfo($config);
-            if(empty($scene)){
-                $this->error('此项目已下架');
-            }
-
-            // 场景下的项目信息 -4个
-            $modelSceneProject = new \app\index\model\SceneProject();
+            // 项目信息 -4个
+            $modelProject = new \app\index\model\Project();
             $config = [
                 'where'  => [
-                    ['p.status', '=', 0],
-                    ['p.shelf_status', '=', 1],
-                    ['p.audit', '=', 1],
-                    ['p.belong_to', '=', $scene['belong_to']],
-                    ['sp.scene_id', '=', $id],
+                    ['status', '=', 0],
+                    ['shelf_status', '=', 1],
+                    ['audit', '=', 1],
+                    ['belong_to','exp','& 1'],
                 ],'field'=> [
-                    'p.id ','p.name','thumb_img','main_img','intro','detail_img'
-                ],'join' => [
-                    ['project p','sp.project_id = p.id','left']
+                    'id ','name','thumb_img','main_img','intro','detail_img','create_time','update_time','video'
                 ],'order'=> [
-                    'p.sort'=>'desc'
+                    'sort'=>'desc'
                 ],'limit' =>4,
             ];
-            $projectList = $modelSceneProject->getList($config);
+
+            $projectList = $modelProject->getList($config);
+
+            if (empty($projectList)) {
+                $this->error('此项目已下架');
+            }
+
+            // 有项目id OR 默认项目id
+            $project_id = intval(input('get.project_id/d'));
+            $project = array();
+            if($project_id){
+                foreach($projectList as $k => $v){
+                    if ($v['id']==$project_id){
+                        $project = $v;
+                        $projectList[$k]['current'] = true;
+                        break;
+                    }
+                }
+            }
+
+            if( empty($project) ){
+                $project = reset($projectList);
+                $projectList[key($projectList)]['current'] = true;
+            }
+
+            $this->assign('project',$project);
             $this->assign('projectList',$projectList);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
@@ -274,8 +278,8 @@ class CenterStore extends \common\controller\Base{
             return errorMsg('请求方式错误');
         }
 
-        $id =  intval(input('get.scene_id/d',''));
-        if(!$id){
+        $scene_id =  intval(input('get.scene_id/d',''));
+        if(!$scene_id){
             $this->error('此项目已下架');
         }
 
@@ -283,7 +287,7 @@ class CenterStore extends \common\controller\Base{
         $config = [
             'where' => [
                 ['sg.status', '=', 0],
-                ['sg.scene_id', '=', $id],
+                ['sg.scene_id', '=', $scene_id],
             ],'field'=>[
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'

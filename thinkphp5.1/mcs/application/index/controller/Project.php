@@ -18,29 +18,39 @@ class Project extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new \app\index\model\Project();
+        $model = new \app\index\model\ProjectGoods();
         $config=[
             'where'=>[
+                ['pg.status','=',1]
             ],
             'field'=>[
                 'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
                 g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
                 g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.trait'
             ],
+            'join'=>[
+                ['goods g','g.id = sg.goods_id','left']
+            ],
             'order'=>[
                 'sort'=>'desc',
                 'line_num'=>'asc',
-                'id'=>'desc'
             ],
         ];
         if(input('?get.storeId') && (int)input('?get.storeId')){
             $config['where'][] = ['g.store_id', '=', input('get.storeId')];
         }
+        if(input('?get.belong_to') && (int)input('?get.belong_to')){
+            $config['where'][] = ['g.belong_to', '=', input('get.belong_to')];
+        }
+        if(input('?get.project_id') && (int)input('?get.project_id')){
+            $config['where'][] = ['pg.project_id', '=', input('get.project_id')];
+        }
         $keyword = input('get.keyword','');
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
         }
-        $list = $model -> pageQuery($config);
+        //$list = $model -> pageQuery($config);
+        p($config);die;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'store' ){//店铺产品列表
