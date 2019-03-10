@@ -98,6 +98,8 @@ $(function(){
         var _this = $(this);
         var method = _this.data('method');
         var url = domain+'ucenter/UserCenter/'+method;
+        // console.log(url);
+        // return false;
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login' || method=='login_admin'){//登录
@@ -236,6 +238,37 @@ $(function(){
             success:function(){
             },
             btn:['确定']
+        });
+    });
+
+    $('body').on('click','.my_cart,.address_manage,.recharge,.order_manage,.my_brand,.my_message,.my_collection,.my_bottom_cart',function () {
+        var jump_url = $(this).data('jump_url');
+        loginBackFunctionParameter.jump_url = jump_url;
+        var url = module+'Brand/index';
+        var postData = {};
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }else if(data.code==1){
+                    if(data.data == 'no_login'){
+                        loginDialog();
+                    }
+                }else{
+                    location.href = jump_url;
+                }
+            }
         });
     });
 });
