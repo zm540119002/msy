@@ -130,7 +130,7 @@ class CenterStore extends \common\controller\Base{
             ];
 
             $schemeList= $modelSceneScheme->getList($config);
-            //p($schemeList);die;
+
             $this->assign('schemeList',$schemeList);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);

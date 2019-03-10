@@ -63,6 +63,7 @@ class Studio extends \common\controller\Base{
      */
     public function detail(){
         return CenterStore::detail();
+
     }
 
     /**
