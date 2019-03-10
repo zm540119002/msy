@@ -12,6 +12,10 @@
 // [ 应用入口文件 ]
 namespace think;
 
+// 定义常量
+define('LOGIN_JS', __DIR__ . '/app/');
+echo LOGIN_JS;
+
 // 加载基础文件
 require __DIR__ . '/../../framework/base.php';
 
