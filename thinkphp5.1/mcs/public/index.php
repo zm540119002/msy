@@ -13,8 +13,8 @@
 namespace think;
 
 // 定义常量
-define('LOGIN_JS', '/static/common/js');
-echo LOGIN_JS;
+define('API_JS', 'https://api.meishangyun.com/static/common/js');
+echo API_JS;
 
 // 加载基础文件
 require __DIR__ . '/../../framework/base.php';
