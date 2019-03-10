@@ -42,6 +42,9 @@ class Mine extends \common\controller\Base{
         }
         $modelUser = new \common\model\User();
         $user = session('user');
+        if(empty($user)){
+            return errorMsg('未登录');
+        }
         $newName = preg_replace('# #','',input('post.name'));
         $user['avatar'] = $newName;
         $result = $modelUser->edit($user,true);
