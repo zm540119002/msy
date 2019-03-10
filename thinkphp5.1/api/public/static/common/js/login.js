@@ -24,7 +24,7 @@ function loginDialog(){
 }
 //退出-弹窗触发
 function logoutDialog(){
-    var url = domain+'ucenter/UserCenter/logout';
+    var url = domain+'api/UserCenter/logout';
     layer.open({
         content:'是否退出？',
         btn:['确定','取消'],
