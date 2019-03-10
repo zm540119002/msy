@@ -5,7 +5,7 @@
 	<ul class="nav_menu">
 
 		{volist name="sceneList" id="info"}
-			<li data-category-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
+			<li data-scene-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
 				<a href="{:url(request()->controller().'/'.$info.template,['id'=>$info.id])}" class="category_nav">{$info.name}</a>
 			</li>
 		{/volist}
@@ -62,35 +62,10 @@
 			{/volist}
 		{/notempty}
 		<!--产品列表-->
-		{notempty name="goodsList"}
-		<ul class="goods_list list">
-			{volist name="goodsList" id="info"}
-			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
-				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
-					{empty name="info.thumb_img"}
-					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
-					{else /}
-					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
-					{/empty}
-				</a>
-				<div class="list_r">
-					<p class="text-intro">{$info.headline}</p>
-					<div>
-						<span class="red">￥<price>{$info.bulk_price}</price></span>
-					</div>
-					<div class="quantity_wrapper selected-number">
-						<a href="javascript:void(0);" class="greduce">-</a>
-						<input type="text" value="0" class="f24 gshopping_count" >
-						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
-						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
-						<a href="javascript:void(0);" class="gplus">+</a>
-					</div>
-				</div>
-			</li>
+		<ul class="goods_list list" id="list">
 
-			{/volist}
 		</ul>
-		{/notempty}
+
 	</section>
 </article>
 
@@ -115,6 +90,36 @@
 			mainCell:".more-text",
 			openBtn:'展开'
 		});
+	});
+	// 获取分类下的商品
+	var config = {
+		url:module+'CenterStore/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10
+	};
+
+	$(function(){
+		//初始化场景商品页面
+		postData.scene_id = $('.nav_menu li.current').data('scene-id');
+
+		getPagingList(config,postData);
+
+/*		$('body').on('click','.goods_list li',function(){
+			var _this = $(this);
+
+			config = {
+				url:url,
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1
+			};
+			postData.scene_id = _this.data('category-id');
+			getPagingList(config,postData);
+		});*/
 	});
 </script>
 {/block}

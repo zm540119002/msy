@@ -6196,3 +6196,10 @@ div.no_data{
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAARBAMAAABOcrPPAAAAGFBMV…7gqJ1ggZCAHSQvmCFEECII+YEkQBIgCZAESAIkAZIAw7/CBxB2EIrc6F0aAAAAAElFTkSuQmCC) no-repeat;
     background-size: contain;
 }
+.project_item.hide{
+    display: none;
+}
+.p_video_item li{
+    padding:0.15rem;
+    border-bottom:1px solid #d9d9d9;
+}
