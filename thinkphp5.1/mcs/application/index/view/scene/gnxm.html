@@ -81,7 +81,9 @@
 		</ul>
 	</section>
 	<section class="project_item hide">
-		<p></p>
+		<p>
+			<img src="" alt="">
+		</p>
 	</section>
 	<section class="project_item hide">
 		<div class="content-padding">
@@ -127,7 +129,7 @@
 			mainCell:".more-text",
 			openBtn:'展开'
 		});
-		 $(".mod_selection_nav li").click(function(){
+		$(".mod_selection_nav li").click(function(){
                     var moveX = $(this).offset().left+$(this).parent().scrollLeft();
                     var pageX = document.documentElement.clientWidth;//设备的宽度
                     var blockWidth = $(this).width();
@@ -135,6 +137,10 @@
                     $(".mod_selection_nav").animate({scrollLeft:left},400);
                     $(this).addClass("active").siblings().removeClass("active");
 		});
+		$('.detail-nav li').on('click',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$('.project_item').hide().eq($(this).index()).show();
+		})
 	});
 </script>
 {/block}
