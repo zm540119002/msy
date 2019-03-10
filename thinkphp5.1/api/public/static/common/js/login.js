@@ -97,7 +97,7 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var url = domain+'ucenter/UserCenter/'+method;
+        var url = domain+'api/UserCenter/'+method;
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login' || method=='login_admin'){//登录
