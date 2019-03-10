@@ -5,7 +5,7 @@ namespace common\controller;
  */
 class UserBase extends Base{
     protected $user = null;
-    protected $loginUrl = 'ucenter/UserCenter/login';//登录URL
+    protected $loginUrl = '/api/UserCenter/login';//登录URL
     protected $indexUrl = 'index/Index/index';//登录URL
     
     public function __construct(){
