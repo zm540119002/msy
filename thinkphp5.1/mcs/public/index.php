@@ -13,7 +13,7 @@
 namespace think;
 
 // 定义常量
-define('LOGIN_JS', __DIR__ . '/app/');
+define('LOGIN_JS', Request::domain() .'/static/common/js');
 echo LOGIN_JS;
 
 // 加载基础文件
