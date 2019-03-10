@@ -12,6 +12,10 @@
 // [ 应用入口文件 ]
 namespace think;
 
+// 定义常量
+define('API_JS', 'https://api.meishangyun.com/static/common/js');
+echo API_JS;
+
 // 加载基础文件
 require __DIR__ . '/../../framework/base.php';
 
