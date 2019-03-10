@@ -1,0 +1,26 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+    <li data-id="{$info.id}">
+        <a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
+            {empty name="info.thumb_img"}
+            <img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+            {else /}
+            <img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+            {/empty}
+        </a>
+        <div class="list_r">
+            <p class="text-intro">{$info.headline}</p>
+            <div>
+                <span class="red">￥<price>{$info.bulk_price}</price></span>
+            </div>
+            <div class="quantity_wrapper selected-number">
+                <a href="javascript:void(0);" class="greduce">-</a>
+                <input type="text" value="0" class="f24 gshopping_count" >
+                <input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+                <input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+                <a href="javascript:void(0);" class="gplus">+</a>
+            </div>
+        </div>
+    </li>
+{/volist}
+{/notempty}

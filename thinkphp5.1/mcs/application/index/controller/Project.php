@@ -12,28 +12,25 @@ class Project extends \common\controller\Base{
     }
 
     /**
-     * 查出产商相关产品 分页查询
+     * 查询项目下的商品 分页查询
      */
-    public function getList(){
+    public function getGoodsList(){
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
         $model = new \app\index\model\ProjectGoods();
         $config=[
             'where'=>[
-                ['pg.status','=',1]
+                ['pg.status','=',0]
             ],
             'field'=>[
-                'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.trait'
+                'g.*'
             ],
             'join'=>[
-                ['goods g','g.id = sg.goods_id','left']
+                ['goods g','g.id = pg.goods_id','left']
             ],
             'order'=>[
                 'sort'=>'desc',
-                'line_num'=>'asc',
             ],
         ];
         if(input('?get.storeId') && (int)input('?get.storeId')){
@@ -45,16 +42,18 @@ class Project extends \common\controller\Base{
         if(input('?get.project_id') && (int)input('?get.project_id')){
             $config['where'][] = ['pg.project_id', '=', input('get.project_id')];
         }
+
         $keyword = input('get.keyword','');
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
         }
-        //$list = $model -> pageQuery($config);
-        p($config);die;
+        $list = $model -> pageQuery($config);
+
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'store' ){//店铺产品列表
-                return $this->fetch('list_tpl');
+            // 排列的数量不同
+            switch($_GET['pageType']){
+                case 'column_1' : return $this->fetch('list_column_1_tpl'); break;   // 一行一个
             }
         }
     }

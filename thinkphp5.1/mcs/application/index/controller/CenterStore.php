@@ -67,6 +67,7 @@ class CenterStore extends \common\controller\Base{
             if(!$id){
                 $this->error('此项目已下架');
             }
+
             // 场景信息
             $model = new\app\index\model\Scene();
             $config =[
@@ -245,13 +246,14 @@ class CenterStore extends \common\controller\Base{
             }
 
             // 有项目id OR 默认项目id
-            $project_id = intval(input('get.project_id/d'));
+            $project_id = intval(input('param.pid/d'));
+
             $project = array();
             if($project_id){
                 foreach($projectList as $k => $v){
                     if ($v['id']==$project_id){
                         $project = $v;
-                        $projectList[$k]['current'] = true;
+                        $projectList[$k]['current'] = 'current';
                         break;
                     }
                 }
@@ -259,7 +261,7 @@ class CenterStore extends \common\controller\Base{
 
             if( empty($project) ){
                 $project = reset($projectList);
-                $projectList[key($projectList)]['current'] = true;
+                $projectList[key($projectList)]['current'] = 'current';
             }
 
             $this->assign('project',$project);
@@ -272,7 +274,7 @@ class CenterStore extends \common\controller\Base{
     }
 
     // 场景下的商品
-    public function getList(){
+    public function getGoodsList(){
 
         if(!request()->isGet()){
             return errorMsg('请求方式错误');

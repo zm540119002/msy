@@ -10,8 +10,8 @@
 			</div>-->
 			<ul class="mod_selection_nav">
 				{volist name="$projectList" id="info"}
-				<li data-project-id="{$info.id}" >
-					<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
+				<li data-project-id="{$info.id}" class="{$info.current}">
+					<a href="{:url(request()->controller().'/'.request()->action(),['pid'=>$info.id])}" class="category_nav">{$info.name}</a>
 				</li>
 				{/volist}
 
@@ -113,25 +113,25 @@
 		// 项目切换
 	});
 
-	// 获取分类下的商品
+	// 获取项目下的商品
 	var config = {
-		url:module+'Project/getList',
+		url:module+'Project/getGoodsList',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1
 	};
 	var postData = {
 		pageSize:10,
-		pageType:'sort',
+		pageType:'column_1',
 		belong_to:1
 	};
 	$(function(){
 		//初始化分类商品页面
-		$('.mod_selection_nav li:eq(0)').addClass('current');
+		//$('.mod_selection_nav li:eq(0)').addClass('current');
 		postData.project_id = $('.mod_selection_nav li.current').data('project-id');
 		getPagingList(config,postData);
 
-		$('body').on('click','.mod_selection_nav li',function(){
+/*		$('body').on('click','.mod_selection_nav li',function(){
 			var _this = $(this);
 			$(this).addClass('current').siblings().removeClass('current');
 			config = {
@@ -142,7 +142,8 @@
 			};
 			postData.project_id = _this.data('project-id');
 			getPagingList(config,postData);
-		});
+		});*/
+
 	});
 
 </script>
