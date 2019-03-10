@@ -98,6 +98,8 @@ $(function(){
         var _this = $(this);
         var method = _this.data('method');
         var url = domain+'api/UserCenter/'+method;
+        console.log(url);
+        return false;
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login' || method=='login_admin'){//登录
