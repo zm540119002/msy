@@ -109,15 +109,14 @@
 
 	// 获取项目下的商品
 	var config = {
-		url:module+'Project/getGoodsList',
+		//url:module+'Project/getGoodsList',
+		url:module+'Goods/getProjectGoodsList',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1
 	};
 	var postData = {
-		pageSize:10,
-		pageType:'column_1',
-		belong_to:1
+		pageSize:10
 	};
 	$(function(){
 		//初始化分类商品页面

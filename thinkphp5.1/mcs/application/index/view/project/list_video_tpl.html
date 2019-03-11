@@ -1,10 +1,10 @@
 {notempty name="list"}
 {volist name="list" id="info"}
     <li>
-        <video src=""></video>
+        <video src="{$info.video}"></video>
         <div>
-            <p>视频名称</p>
-            <p>2019-3-10 18:24</p>
+            <p>{$info.name}</p>
+            <p>{$info.update_time}</p>
         </div>
     </li>
 {/volist}
