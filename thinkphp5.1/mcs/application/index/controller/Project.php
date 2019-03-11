@@ -21,10 +21,11 @@ class Project extends \common\controller\Base{
         $model = new \app\index\model\ProjectGoods();
         $config=[
             'where'=>[
-                ['pg.status','=',0]
+                ['pg.status','=',0],
             ],
             'field'=>[
-                'g.*'
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
             'join'=>[
                 ['goods g','g.id = pg.goods_id','left']
@@ -57,6 +58,45 @@ class Project extends \common\controller\Base{
             }
         }
     }
+
+    /**
+     * 查询项目下的相关视频 分页查询 暂时先随机
+     */
+    public function getVideoList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $model = new \app\index\model\Project();
+        $config=[
+            'where'=>[
+                ['status','=',0],
+                ['shelf_status','=',1],
+                ['audit','=',1],
+            ],
+            'field'=>[
+               'id','name','update_time','video'
+            ],
+            'order'=>[
+                'sort'=>'desc',
+            ],
+        ];
+
+        if(input('?get.belong_to') && (int)input('?get.belong_to')){
+            $config['where'][] = ['belong_to', '=', input('get.belong_to')];
+        }
+
+
+        $list = $model -> pageQuery($config);
+
+        $this->assign('list',$list);
+        if(isset($_GET['pageType'])){
+            // 排列的数量不同
+            switch($_GET['pageType']){
+                case 'column_1' : return $this->fetch('list_video_tpl'); break;   // 一行一个
+            }
+        }
+    }
+
 
     /**详情页
      */

@@ -63,14 +63,8 @@
 
 		<div>
 			<h3>相关视频</h3>
-			<ul class="p_video_item">
-				<li>
-					<video src=""></video>
-					<div>
-						<p>视频名称</p>
-						<p>2019-3-10 18:24</p>
-					</div>
-				</li>
+			<ul class="p_video_item" id="videos">
+
 			</ul>
 		</div>
 	</section>
@@ -143,6 +137,39 @@
 			postData.project_id = _this.data('project-id');
 			getPagingList(config,postData);
 		});*/
+
+	});
+
+	var config_1 = {
+		url:module+'Project/getVideoList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		container: $("#videos")
+	};
+	var postData_1 = {
+		pageSize:10,
+		pageType:'column_1',
+		belong_to:1
+	};
+	$(function(){
+		//初始化分类商品页面
+		//$('.mod_selection_nav li:eq(0)').addClass('current');
+		//postData_1.project_id = $('.mod_selection_nav li.current').data('project-id');
+		getPagingList(config_1,postData_1);
+
+		/*		$('body').on('click','.mod_selection_nav li',function(){
+		 var _this = $(this);
+		 $(this).addClass('current').siblings().removeClass('current');
+		 config = {
+		 url:module+'Goods/getList',
+		 requestEnd:false,
+		 loadTrigger:false,
+		 currentPage:1
+		 };
+		 postData.project_id = _this.data('project-id');
+		 getPagingList(config,postData);
+		 });*/
 
 	});
 
