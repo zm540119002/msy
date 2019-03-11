@@ -26,12 +26,12 @@ class Base extends \think\Controller{
 //            $this->assign('weiXinUserInfo',$weiXinUserInfo);
 //        }
     }
-    //返回图片临时相对路径
     public function uploadFileToTemp(){
         $postData = $_POST;
+        $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         if(is_string($postData['fileBase64'])){
             if(strpos($postData['fileBase64'],'data:image') !==false || strpos($postData['fileBase64'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64']);
+                $fileName =  $this ->_uploadSingleFileToTemp($postData['fileBase64'],$savePath);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
@@ -43,7 +43,7 @@ class Base extends \think\Controller{
             foreach ($postData['fileBase64'] as $k=>$file){
                 //判断是否为base64编码图片
                 if(strpos($file,'data:image') !==false || strpos($file,'data:video') !== false){
-                    $fileName = $this ->_uploadSingleFileToTemp($file);
+                    $fileName = $this ->_uploadSingleFileToTemp($file,$savePath);
                     if(isset($fileName['status'])&& $fileName['status'] == 0){
                         return $fileName;
                     }
@@ -57,12 +57,13 @@ class Base extends \think\Controller{
     }
     //返回图片临时相对路,上传多张图片带描述
     public function uploadMultiFileToTempWithDes(){
+        $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');
         $files = $_POST['imgsWithDes'];
         $filesNew = [];
         foreach ($files as $k=>$file){
             //判断是否为base64编码图片
             if(strpos($file['fileSrc'],'data:image') !==false || strpos($file['fileSrc'],'data:video') !== false){
-                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc']);
+                $fileName =  $this ->_uploadSingleFileToTemp($file['fileSrc'],$savePath);
                 if(isset($fileName['status'])&& $fileName['status'] == 0){
                     return $fileName;
                 }
@@ -76,7 +77,12 @@ class Base extends \think\Controller{
     }
 
     //上传单个data64位文件
-    private function _uploadSingleFileToTemp($fileBase64){
+    /**
+     * @param $fileBase64 上传文件的Base64字符源
+     * @param $savePath 保存路径
+     * @return array|string
+     */
+    public function _uploadSingleFileToTemp($fileBase64,$savePath){
         // 获取图片
         list($type, $data) = explode(',', $fileBase64);
         // 判断文件类型
@@ -99,6 +105,13 @@ class Base extends \think\Controller{
             $ext = explode(';', $ext);
             $ext = '.'.$ext[0];
         }
+
+        if($fileType == 'data:image'){
+            if(!getimagesize($fileBase64)){
+                return errorMsg('不是图片文件');
+            }
+        }
+
         if(!$ext){
             return errorMsg('不支持此文件格式');
         }
@@ -129,7 +142,8 @@ class Base extends \think\Controller{
         }
         $uploadPath = $uploadPath . '/' ;
         //临时相对路径
-        $tempRelativePath = config('upload_dir.temp_path');
+        $tempRelativePath = $savePath;
+
         //存储路径
         $storePath = $uploadPath . $tempRelativePath;
         if(!mk_dir($storePath)){
@@ -139,13 +153,12 @@ class Base extends \think\Controller{
         $fileName = generateSN(5) . $ext;
         //带存储路径的文件名
         $photo = $storePath . $fileName;
-
         // 生成文件
         $returnData = file_put_contents($photo, base64_decode($data), true);
         if(false === $returnData){
             return errorMsg('保存文件失败');
         }
-      //压缩文件
+        //压缩文件
         if( isset($_POST['imgWidth']) || isset($_POST['imgHeight']) ){
             $imgWidth = isset($_POST['imgWidth']) ? intval($_POST['imgWidth']) : 150;
             $imgHeight = isset($_POST['imgHeight']) ? intval($_POST['imgHeight']) : 150;
@@ -154,7 +167,6 @@ class Base extends \think\Controller{
         }
         return $tempRelativePath . $fileName;
     }
-
   
 
 
