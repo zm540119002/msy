@@ -1,7 +1,8 @@
 <?php
 namespace app\index\controller;
 class Studio extends \common\controller\Base{
-    /**首页
+    /**
+     * 获取工作室的场景&&商品
      */
     public function index(){
         //获取商品的分类
@@ -54,32 +55,5 @@ class Studio extends \common\controller\Base{
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
         return $this->fetch();
-    }
-
-    /**
-     * 默认二级场景页
-     * 需要同组的各场景的名，场景信息，场景下的商品，场景下的活动
-     * 先调用中心店的控制器，后期如不同再分离
-     */
-    public function detail(){
-        return CenterStore::detail();
-    }
-
-    /**
-     * 默认二级场景页
-     * 需要场景信息，场景下的商品分类，商品分类下的商品
-     * 先调用中心店的控制器，后期如不同再分离
-     */
-    public function sort(){
-        return CenterStore::sort();
-    }
-
-    /**
-     * 默认二级场景页
-     * 需要场景信息，场景下的项目信息(商品，介绍，视频)
-     * 先调用中心店的控制器，后期如不同再分离
-     */
-    public function project(){
-        return CenterStore::project();
     }
 }
