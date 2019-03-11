@@ -109,6 +109,7 @@ class Scene extends Base {
 
                 $this->assign('info',$info);
             }
+
             return $this->fetch();
        }
     }
@@ -136,7 +137,7 @@ class Scene extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection','s.type'
+                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection','s.type','s.belong_to'
             ],
             'order'=>[
                 's.sort'=>'desc',
@@ -145,6 +146,8 @@ class Scene extends Base {
         ];
 
         $list = $model ->pageQuery($config);
+
+        $info['belong_to'] = strrev(decbin($list['belong_to']));
         $this->assign('list',$list);
         if($_GET['pageType'] == 'manage'){
             return view('list_tpl');
