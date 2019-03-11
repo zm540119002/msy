@@ -10,6 +10,7 @@ class UserCenter extends \think\Controller{
             return $modelUser->login($postData);
         } else {
             return $this->fetch();
+            
         }
     }
     /**后台登录
