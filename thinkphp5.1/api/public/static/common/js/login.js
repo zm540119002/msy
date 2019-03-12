@@ -99,6 +99,7 @@ $(function(){
         var method = _this.data('method');
         var url = domain+'ucenter/UserCenter/'+method;
         console.log(url);
+        return false;
         var postForm = null;
         var loginSign = 'dialog';
         if(method=='login' || method=='login_admin'){//登录
@@ -144,7 +145,6 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
