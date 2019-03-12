@@ -171,7 +171,6 @@
                         $.post(url,postData,function(msg){
                             _this.removeClass("nodisabled");
                             dialog.msg(msg,'',function(){
-                                alert(msg);
                                 _thisTr.find('.shelf-status').text(text);
                                 if(shelf_status == 3){
                                     _this.text('下架');

@@ -81,5 +81,23 @@
             }
 
         });
+        $('body').on('click','.button_save_black_4',function(){
+            var url = module +'Scene/edit';
+            var postData=[];
+            $.each($('.table .check_item_2'),function(){
+                var _this=$(this);
+                if(_this.prop('checked')){
+                    var id=_this.parents('tr').data('id');
+                    postData.push(id);
+                }
+            })
+            console.log(postData);return false;
+            $.post(url,postData,function(msg){
+                dialog.msg(msg,'',function () {
+                    location.href = controller + 'manage';
+                });
+            });
+        })
+        
     </script>
 {/block}
