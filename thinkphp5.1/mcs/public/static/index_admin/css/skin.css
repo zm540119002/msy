@@ -978,7 +978,7 @@ h6 {
 }
 /* table
 ------------------------------------------------------------------- */
-ul.pagination{
+.content ul.pagination{
 	text-indent: inherit;
 }
 .table {
