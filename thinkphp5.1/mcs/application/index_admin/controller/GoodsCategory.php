@@ -139,29 +139,4 @@ class GoodsCategory extends Base
         return $model->del($condition);
     }
 
-    /**
-     * 获取该分类下的子类 无操作
-     */
-    public function getSubclass(){
-        $model = new \app\index_admin\model\GoodsCategory();
-        $where = [
-            'status' => 0,
-        ];
-        $level = input('level',0);
-        if($level){
-            $where['level'] = $level + 1;
-        }
-        $id = input('id',0);
-        if($id){
-            if($level==1){
-                $where['parent_id_1'] = $id;
-            }
-            if($level==2){
-                $where['parent_id_2'] = $id;
-            }
-        }
-        $list = $model->where($where)->select();
-        $this->assign('list',$list->toArray());
-        return view('list_child_tpl');
-    }
 }
