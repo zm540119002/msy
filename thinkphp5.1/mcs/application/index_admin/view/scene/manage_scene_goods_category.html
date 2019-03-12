@@ -1,0 +1,85 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <section style="display: none" class="tpl_list">
+        <li data-goods-id="">
+            <a href="javascript:void(0);" class="close-btn">X</a>           
+            <!--<div>
+                <img src="" alt="" class="left">
+                <p class="goods_name">aaabbb</p>
+            </div>-->
+        </li>
+    </section>
+    <section class="recommendGoods_content">
+        <!--推荐产品容器-->
+        <div id="recommendGoods">
+            <span class="content-label">添加商品分类</span>
+            <a href="javascript:void(0);" class="confirm_add">确定添加</a>
+            <div class="add_layer_content">
+                <ul class="scroller-container list" id="list">
+                    <div class="search-result">
+                        <table class="table tb-type2">
+                            <thead>
+                            <tr class="thead">
+                                <th width="10%">排序</th>
+                                <th width="20%">名称</th>
+                                <th width="40%">说明</th>
+                                <th width="40%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            {notempty name='sceneCategoryList'}
+                            {volist name="sceneCategoryList" id="vo"}
+                            <tr class="hover" data-level="{$vo.level}" data-id="{$vo.id}" data-parent-id-1="{$vo.parent_id_1}">
+                                <td class="w5">{$vo.sort|default=''}</td>
+                                <td class="w5">{$vo.name|default=''}</td>
+                                <td class="w5">{$vo.remark|default=''}</td>
+                                <td class="w5"><a class="del" href="javascript:void(0);">删除</a></td>
+                            </tr>
+                            {/volist}
+                            {else/}
+                            {/notempty}
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='index_admin_img/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+{/block}
+
+{block name="script"}
+    <script type="text/javascript">
+        //删除
+        $('body').on('click','.del',function(){
+            var _thisTr = $(this).parents('tr');
+            var postData= {};
+            postData.id       = _thisTr.data('id');
+            var url =  controller + 'delSceneGoodsCategory';
+            layer.open({
+                btn: ['确定','取消'],//按钮
+                content:'删除你选中的分类吗？',
+                yes:function (index) {
+                    $.post(url,postData,function(msg){
+                        dialog.msg(msg,'',function(){
+                            _thisTr.remove();
+                        });
+                    });
+                    layer.close(index);
+                }
+            });
+        });
+        //添加
+        $('body').on('click','.confirm_add',function(){
+
+        })
+    </script>
+{/block}

@@ -217,10 +217,13 @@ class Scene extends Base {
 
     /**
      * 添加场景下相关的商品分类
+     * 功能：查询 OR 提交
+     * 查询：选择添加的分类 && 已有的分类
      * @return array|mixed
      * @throws \Exception
      */
     public function addSceneSort(){
+
         if(request()->isPost()){
             $model = new \app\index_admin\model\SceneGoods();
             $data = input('post.selectedIds/a');
@@ -243,12 +246,30 @@ class Scene extends Base {
             return successMsg('成功');
 
         }else{
-
-            if(!input('?id') || !input('id/d')){
+            // 查询
+            if(!$id = input('id/d')){
                 $this ->error('参数有误',url('manage'));
             }
+
             // 所有商品分类
-            $model = new \app\index_admin\model\GoodsCategory();
+            $model = new \app\index_admin\model\SceneGoodsCategory();
+            $config = [
+                'where'=>[
+                    'gc.status'=>0
+                ],'field' => [
+                    'gc.name','gc.sort','gc.remark'
+                ],'join' => [
+                    ['goods_category gc','sgc.goods_category_id=gc.id','left']
+                ]
+            ];
+            $sceneCategoryList = $model->getList($config);
+
+
+
+
+
+            // 所有商品分类
+/*            $model = new \app\index_admin\model\GoodsCategory();
             $config = [
                 'where'=>[
                     'status'=>0
@@ -256,9 +277,9 @@ class Scene extends Base {
             ];
             $allCategoryList = $model->getList($config);
 
-            $this->assign('allCategoryList',$allCategoryList);
+            $this->assign('allCategoryList',$allCategoryList);*/
+            $this->assign('sceneCategoryList',$sceneCategoryList);
 
-            $id = input('id/d');
             $this->assign('id',$id);
             return $this->fetch();
         }
@@ -356,6 +377,60 @@ class Scene extends Base {
             $this->assign('id',$id);
             return $this->fetch();
         }
+    }
+
+
+    /**
+     * 场景下的商品分类
+     */
+    public function manageSceneGoodsCategory(){
+        // 查询
+        if(!$id = input('id/d')){
+            $this ->error('参数有误',url('manage'));
+        }
+
+        $model = new \app\index_admin\model\SceneGoodsCategory();
+        $config = [
+            'where'=>[
+                'gc.status'=>0
+            ],'field' => [
+                'sgc.id','gc.name','gc.sort','gc.remark'
+            ],'join'  => [
+                ['goods_category gc','sgc.goods_category_id=gc.id','left']
+            ],'order' => [
+                'sort'=> 'desc'
+            ]
+        ];
+        $sceneCategoryList = $model->getList($config);
+        $this->assign('sceneCategoryList',$sceneCategoryList);
+
+        $this->assign('id',$id);
+        return $this->fetch();
+    }
+
+
+    /**
+     * 删除场景的商品分类
+     */
+    public function delSceneGoodsCategory(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id = input('post.id/d');
+
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $model = new \app\index_admin\model\SceneGoodsCategory();
+
+        $condition = [
+            ['id','=',$id],
+        ];
+
+        return $model->del($condition,false);
+
     }
 
 }

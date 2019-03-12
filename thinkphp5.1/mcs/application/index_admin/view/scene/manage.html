@@ -213,9 +213,9 @@
 
 
             // 去设置场景下的商品分类
-            $('body').on('click','.addSceneSort',function(){
+            $('body').on('click','.manageSceneGoodsCategory',function(){
                 var _thisTr = $(this).parents('tr');
-                var url =  controller + 'addSceneSort/id/' + _thisTr.data('id');
+                var url =  controller + 'manageSceneGoodsCategory/id/' + _thisTr.data('id');
                 location.href = url;
             });
             // 去设置场景下的项目
