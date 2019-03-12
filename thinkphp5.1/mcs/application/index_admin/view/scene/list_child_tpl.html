@@ -2,9 +2,14 @@
 {volist name="list" id="vo"}
 <tr class="hover" data-level="{$vo.level}" data-id="{$vo.id}" data-parent-id-1="{$vo.parent_id_1}">
     <td class="w5">
-        <input type="checkbox" class="check_item_2">
+        {if !empty($vo.pid)}
+            <input type="checkbox" name="category" class="check_item_2" checked>
+        {else/}
+            <input type="checkbox" name="category" class="check_item_2">
+        {/if}
+
         {if condition="($vo.level eq 1) or ($vo.level eq 2)"}
-        <span class="folding" status="open"></span>
+            <span class="folding" status="open"></span>
         {/if}
     </td>
     <td class="w5">{$vo.sort|default=''}</td>

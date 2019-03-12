@@ -4,7 +4,7 @@ namespace app\index_admin\controller;
 /**供应商验证控制器基类
  */
 class Scene extends Base {
-    
+
     public function manage(){
 
         return $this->fetch('manage');
@@ -247,9 +247,10 @@ class Scene extends Base {
 
         }else{
             // 查询
-            if(!$id = input('id/d')){
+       /*     if(!$id = input('id/d')){
                 $this ->error('参数有误',url('manage'));
-            }
+            }*/
+       $id = 1;
 
             // 所有商品分类
             $model = new \app\index_admin\model\SceneGoodsCategory();
@@ -358,7 +359,7 @@ class Scene extends Base {
             }
             $model -> commit();
             return successMsg('成功');
-            
+
         }else{
             if(!input('?id') || !input('id/d')){
                 $this ->error('参数有误',url('manage'));
@@ -388,11 +389,22 @@ class Scene extends Base {
         if(!$id = input('id/d')){
             $this ->error('参数有误',url('manage'));
         }
+        $sceneModel = new \app\index_admin\model\Scene();
+
+        $config = [
+            'where'=>[
+                ['id','=',$id],
+            ],'field'=>[
+                'id','name'
+            ]
+        ];
+        $scene = $sceneModel->getInfo($config);
+        $this->assign('scene',$scene);
 
         $model = new \app\index_admin\model\SceneGoodsCategory();
         $config = [
             'where'=>[
-                'gc.status'=>0
+                ['gc.status','=',0],
             ],'field' => [
                 'sgc.id','gc.name','gc.sort','gc.remark'
             ],'join'  => [
@@ -405,7 +417,46 @@ class Scene extends Base {
         $this->assign('sceneCategoryList',$sceneCategoryList);
 
         $this->assign('id',$id);
+
         return $this->fetch();
+    }
+
+    /**
+     * 获取所有一级OR该分类的子级分类-并勾选中已选择的分类
+     */
+    public function getCategory(){
+
+        //$level= input('post.level/d');
+        $id   = input('post.id/d');
+
+        if ($id){
+            $where = ['gc.parent_id_1', '=', $id];
+            $view  = 'list_child_tpl';
+
+        }else{
+            $where = ['gc.level','=',1];
+            $view  = 'list_layer_tpl';
+
+        }
+
+        $model = new \app\index_admin\model\GoodsCategory();
+        $config = [
+            'where' => [
+                ['gc.status','=', 0],
+            ],'field'=> [
+                'gc.id','gc.name','gc.level','gc.parent_id_1','gc.parent_id_2','gc.remark','gc.sort','gc.img','sgc.id pid'
+            ],'join' => [
+                ['scene_goods_category sgc','gc.id=sgc.goods_category_id','left']
+            ],'order'=> [
+                'gc.sort' => 'desc'
+            ]
+        ];
+        $config['where'][] = $where;
+
+        $list = $model->getlist($config);
+        $this->assign('list',$list);
+
+        return view($view);
     }
 
 
