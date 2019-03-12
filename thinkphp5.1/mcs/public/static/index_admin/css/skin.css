@@ -978,6 +978,9 @@ h6 {
 }
 /* table
 ------------------------------------------------------------------- */
+ul.pagination{
+	text-indent: inherit;
+}
 .table {
 	clear: both;
 	width: 100%;
