@@ -78,11 +78,12 @@
                 btn: ['确定','取消'],//按钮
                 content:'删除你选中的分类吗？',
                 yes:function (index) {
+                     $(this).addClass('nodisabled');
                     $.ajax({
                         url:url,
                         data:postData,
                         beforeSend:function(){
-                            $(this).addClass('nodisabled');
+                           
                         },
                         success:function(msg){
                             dialog.msg(msg,'',function(){
