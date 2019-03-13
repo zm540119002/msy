@@ -101,13 +101,14 @@
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function () {
                     //console.log(msg);
-                    // var index = parent.layer.getFrameIndex(window.name);
-                    // alert(controller);
-                    // parent.layer.close(index);
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
                     
-                    location.href = controller + 'manageSceneGoodsCategory/id/'+postData.scene_id;
-                    //location.replace(location.href);
+                    
                 });
+                alert(1);
+                location.href = controller + 'manage';
+                    location.replace(location.href);
             });
         })
         
