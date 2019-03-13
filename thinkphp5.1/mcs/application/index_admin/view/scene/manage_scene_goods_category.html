@@ -76,13 +76,21 @@
                 btn: ['确定','取消'],//按钮
                 content:'删除你选中的分类吗？',
                 yes:function (index) {
-                    $.post(url,postData,function(msg){
-                        dialog.msg(msg,'',function(){
-                            _thisTr.remove();
-                            
-                            $("#count").html($("#count").html()-1);
-                        });
-                    });
+                    $('.table .del').addClass('disabled');
+                    $.ajax({
+                        url:url,
+                        data:postData,
+                        beforeSend:function(){
+
+                        },
+                        success:function(){
+                            dialog.msg(msg,'',function(){
+                                _thisTr.remove();
+                                $("#count").html($("#count").html()-1);
+                            });
+                            $('.table .del').removeClass('disabled');
+                        }
+                    })
                     layer.close(index);
                 }
             });
