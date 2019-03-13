@@ -1,0 +1,36 @@
+{notempty name='list'}
+<div class="search-result">
+    <table class="table tb-type2">
+        <thead>
+        <tr class="thead">
+            <th></th>
+            <th width="10%">排序</th>
+            <th width="20%">名称</th>
+            <th width="40%">说明</th>
+        </tr>
+        </thead>
+        <tbody >
+        {notempty name='list'}
+        {volist name="list" id="vo"}
+        <tr class="hover" data-level="{$vo.level}" data-id="{$vo.id}" data-parent-id-1="{$vo.parent_id_1}">
+            <td class="w5">
+                <input type="checkbox" class="check_item_2">
+                {if condition="($vo.level eq 1) or ($vo.level eq 2)"}
+                <span class="folding" status="open"></span>
+                {/if}
+            </td>
+            <td class="w5">{$vo.sort|default=''}</td>
+            <td class="w5">{$vo.name|default=''}</td>
+            <td class="w5">{$vo.remark|default=''}</td>
+        </tr>
+        {/volist}
+        {else/}
+        {/notempty}
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+{/notempty}
+
+
