@@ -102,9 +102,9 @@
                 dialog.msg(msg,'',function () {
                     //console.log(msg);
                     var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);
-                    location.replace(controller + 'manage');
-                    //location.href = controller + 'manage';
+                    //parent.layer.close(index);
+                    location.href = controller + 'manage';
+                     location.replace(location.href);
                 });
             });
         })
