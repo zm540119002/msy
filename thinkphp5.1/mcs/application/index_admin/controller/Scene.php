@@ -216,17 +216,45 @@ class Scene extends Base {
     }
 
     /**
-     * 添加场景下相关的商品分类
-     * 功能：查询 OR 提交
-     * 查询：选择添加的分类 && 已有的分类
-     * @return array|mixed
-     * @throws \Exception
+     * 添加OR修改场景下相关的商品分类
+     *
      */
-    public function addSceneSort(){
+    public function editSceneSort(){
 
         if(request()->isPost()){
-            $model = new \app\index_admin\model\SceneGoods();
-            $data = input('post.selectedIds/a');
+
+            $cat_ids  = input('post.ids');
+            $scene_id = input('post.scene_id/d');
+
+            if ($scene_id){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            if ($cat_ids){
+                foreach($cat_ids as $k => $v){
+                    if ((int)$v){
+                        $where = ['scene_id'=>$scene_id,'goods_category_id'=>$v];
+                        $data = [
+                            'where' => [
+                                ['scene_id','=',$scene_id],
+                                ['goods_category_id','=',$v],
+                            ]
+                        ];
+
+                        $model = new \app\index_admin\model\SceneGoodsCategory();
+                        p($data);
+                        exit;
+                        $model->del($data);
+                        echo $model->getLastSql();
+                        exit;
+                        $result = $model -> allowField(true) -> save($data['where']);
+                        echo $model->getLastSql();
+                    }
+                }
+            }
+            exit;
+            return successMsg('成功');
+
             $condition = [
                 ['scene_id','=',$data[0]['scene_id']]
             ];
@@ -246,40 +274,11 @@ class Scene extends Base {
             return successMsg('成功');
 
         }else{
-            // 查询
-       /*     if(!$id = input('id/d')){
+
+            // 后面的页面需要场景id
+            if(!$id = input('param.id/d')){
                 $this ->error('参数有误',url('manage'));
-            }*/
-       $id = 1;
-
-            // 所有商品分类
-            $model = new \app\index_admin\model\SceneGoodsCategory();
-            $config = [
-                'where'=>[
-                    'gc.status'=>0
-                ],'field' => [
-                    'gc.name','gc.sort','gc.remark'
-                ],'join' => [
-                    ['goods_category gc','sgc.goods_category_id=gc.id','left']
-                ]
-            ];
-            $sceneCategoryList = $model->getList($config);
-
-
-
-
-
-            // 所有商品分类
-/*            $model = new \app\index_admin\model\GoodsCategory();
-            $config = [
-                'where'=>[
-                    'status'=>0
-                ]
-            ];
-            $allCategoryList = $model->getList($config);
-
-            $this->assign('allCategoryList',$allCategoryList);*/
-            $this->assign('sceneCategoryList',$sceneCategoryList);
+            }
 
             $this->assign('id',$id);
             return $this->fetch();
@@ -422,15 +421,19 @@ class Scene extends Base {
     }
 
     /**
-     * 获取所有一级OR该分类的子级分类-并勾选中已选择的分类
+     * 获取所有一级OR该分类的子级分类 && 所有已选择的分类
      */
     public function getCategory(){
 
-        //$level= input('post.level/d');
-        $id   = input('post.id/d');
+        $scene_id= input('param.id/d');
+        $cat_id  = input('param.cat_id/d');
 
-        if ($id){
-            $where = ['gc.parent_id_1', '=', $id];
+        if (!$scene_id){
+            $this ->error('参数有误',url('manage'));
+        }
+
+        if ($cat_id){
+            $where = ['gc.parent_id_1', '=', $cat_id];
             $view  = 'list_child_tpl';
 
         }else{
@@ -439,22 +442,42 @@ class Scene extends Base {
 
         }
 
-        $model = new \app\index_admin\model\GoodsCategory();
+        $goodsCategoryModel = new \app\index_admin\model\GoodsCategory();
         $config = [
             'where' => [
-                ['gc.status','=', 0],
+                ['status','=', 0],
             ],'field'=> [
-                'gc.id','gc.name','gc.level','gc.parent_id_1','gc.parent_id_2','gc.remark','gc.sort','gc.img','sgc.id pid'
-            ],'join' => [
-                ['scene_goods_category sgc','gc.id=sgc.goods_category_id','left']
+                'id','name','level','parent_id_1','parent_id_2','remark','sort','img'
             ],'order'=> [
-                'gc.sort' => 'desc'
+                'sort' => 'desc'
             ]
         ];
         $config['where'][] = $where;
+        $list = $goodsCategoryModel->getlist($config);
 
-        $list = $model->getlist($config);
+        $sceneGoodsCategoryModel = new \app\index_admin\model\SceneGoodsCategory();
+        $config = [
+            'where' => [
+                ['scene_id','=', $scene_id],
+            ],'field'=> [
+                'goods_category_id'
+            ]
+        ];
+        $sceneCategoryList = $sceneGoodsCategoryModel->getlist($config);
+
+        if ($sceneCategoryList){
+            $sceneCategoryList = array_column($sceneCategoryList,'goods_category_id');
+            // 取出交差值的数组
+            foreach($list as $k => $v){
+                if ( in_array($v['id'],$sceneCategoryList) ){
+                    $list[$k]['scene'] = 1;
+                }
+
+            }
+        }
+
         $this->assign('list',$list);
+        $this->assign('sceneCategoryList',$sceneCategoryList);
 
         return view($view);
     }
