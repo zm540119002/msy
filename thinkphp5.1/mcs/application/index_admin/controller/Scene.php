@@ -229,6 +229,8 @@ class Scene extends Base {
             if ($scene_id){
                 $this ->error('参数有误',url('manage'));
             }
+            p($cat_ids);
+            exit;
 
             if ($cat_ids){
                 foreach($cat_ids as $k => $v){

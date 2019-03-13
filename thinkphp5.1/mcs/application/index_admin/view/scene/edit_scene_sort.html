@@ -98,7 +98,7 @@
             });
 
             postData.ids = ids;
-            $.post(url,ids,function(msg){
+            $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function () {
                     console.log(msg);
                     //location.href = controller + 'manage';
