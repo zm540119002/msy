@@ -2,10 +2,10 @@
 {volist name="list" id="vo"}
 <tr class="hover" data-level="{$vo.level}" data-id="{$vo.id}" data-parent-id-1="{$vo.parent_id_1}">
     <td class="w5">
-        {if !empty($vo.pid)}
-            <input type="checkbox" name="category" class="check_item_2" checked>
+        {if !empty($vo.scene)}
+            <input type="checkbox" class="check_item_2" checked disabled>
         {else/}
-            <input type="checkbox" name="category" class="check_item_2">
+            <input type="checkbox" class="check_item_2">
         {/if}
 
         {if condition="($vo.level eq 1) or ($vo.level eq 2)"}
