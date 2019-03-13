@@ -7,7 +7,7 @@ class GoodsCategory extends\common\model\Base {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_mcs';
+	protected $connection = 'db_config_sjds';
 	// 别名
 	protected $alias = 'gc';
 

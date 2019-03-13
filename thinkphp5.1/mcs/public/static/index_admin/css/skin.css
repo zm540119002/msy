@@ -246,6 +246,9 @@ h6 {
 	position: relative;
 	left: -20px;
 }
+.nodisabled{
+    pointer-events: none;
+}
 .fixed-empty {
 	height: 20px !important;
 }
