@@ -84,6 +84,7 @@ class Base extends \think\Model {
 			['status', '=', 0],
 		];
 		$where = array_merge($where,$condition);
+
 		if($tag){//标记删除
 			$result = $this->where($where)->setField('status',2);
 		}else{
