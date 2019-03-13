@@ -76,7 +76,7 @@
                 btn: ['确定','取消'],//按钮
                 content:'删除你选中的分类吗？',
                 yes:function (index) {
-                    $('.table .del').addClass('disabled');
+                    $('.table .del').addClass('nodisabled');
                     $.ajax({
                         url:url,
                         data:postData,
@@ -88,7 +88,7 @@
                                 _thisTr.remove();
                                 $("#count").html($("#count").html()-1);
                             });
-                            $('.table .del').removeClass('disabled');
+                            $('.table .del').removeClass('nodisabled');
                         }
                     })
                     layer.close(index);
