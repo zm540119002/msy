@@ -1,0 +1,102 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <section style="display: none" class="tpl_list">
+        <li data-goods-id="">
+            <a href="javascript:void(0);" class="close-btn">X</a>           
+            <!--<div>
+                <img src="" alt="" class="left">
+                <p class="goods_name">aaabbb</p>
+            </div>-->
+        </li>
+    </section>
+    <section class="">
+        <!--推荐产品容器-->
+        <div>
+            <nav class="breadcrumb">
+                <i class="Hui-iconfont">&#xe67f;</i>场景管理 <span class="c-gray en">&gt;</span>{$scene.name} <span class="c-gray en">&gt;</span>分类列表
+                <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+                    <i class="Hui-iconfont">&#xe68f;</i>
+                </a>
+            </nav>
+            <div class="page-container">
+                <div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l">
+				<a class="btn btn-primary radius" id="add-scene-sort" data-id="{$scene.id}" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i> 添加商品分类</a>
+			</span>
+                    <span class="r">共有数据：<strong>{:count($sceneCategoryList)}</strong> 条
+			</span>
+                </div>
+                <div class="mt-20">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                        <tr class="text-c">
+                            <th width="10%">排序</th>
+                            <th width="20%">名称</th>
+                            <th width="40%">说明</th>
+                            <th width="40%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        {notempty name='sceneCategoryList'}
+                        {volist name="sceneCategoryList" id="vo"}
+                        <tr class="hover" data-level="{$vo.level}" data-id="{$vo.id}" data-parent-id-1="{$vo.parent_id_1}">
+                            <td class="w5">{$vo.sort|default=''}</td>
+                            <td class="w5">{$vo.name|default=''}</td>
+                            <td class="w5">{$vo.remark|default=''}</td>
+                            <td class="w5"><a class="del" href="javascript:void(0);" title="删除"><i class="Hui-iconfont"></i></a></td>
+                        </tr>
+                        {/volist}
+                        {else/}
+                        {/notempty}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='index_admin_img/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+{/block}
+
+{block name="script"}
+    <script type="text/javascript">
+        //删除
+        $('body').on('click','.del',function(){
+            var _thisTr = $(this).parents('tr');
+            var postData= {};
+            postData.id       = _thisTr.data('id');
+            var url =  controller + 'delSceneGoodsCategory';
+            layer.open({
+                btn: ['确定','取消'],//按钮
+                content:'删除你选中的分类吗？',
+                yes:function (index) {
+                    $.post(url,postData,function(msg){
+                        dialog.msg(msg,'',function(){
+                            _thisTr.remove();
+                        });
+                    });
+                    layer.close(index);
+                }
+            });
+        });
+        // 关联商品分类
+        $("#add-scene-sort").click(function () {
+            var id  = $(this).data('id');
+            var url = controller + 'editSceneSort/'+'id/'+id;
+            var index = layer.open({
+                type: 2,
+                title: '关联商品分类',
+                content: url,
+                id: 1
+            });
+
+            layer.full(index);
+        });
+    </script>
+{/block}
