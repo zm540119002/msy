@@ -83,7 +83,7 @@
                         beforeSend:function(){
 
                         },
-                        success:function(){
+                        success:function(msg){
                             dialog.msg(msg,'',function(){
                                 _thisTr.remove();
                                 $("#count").html($("#count").html()-1);
