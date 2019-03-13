@@ -87,7 +87,7 @@
             var url = module +'Scene/editSceneSort';
             var postData={};
             var ids  = [];
-            //postData.scene_id = $('#list').data('id');
+            postData.scene_id = $('#list').data('id');
 
             $.each($('.table .check_item_2'),function(){
                 var _this=$(this);
@@ -100,7 +100,10 @@
             postData.ids = ids;
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function () {
-                    console.log(msg);
+                    //console.log(msg);
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    //location.replace(location.href);
                     //location.href = controller + 'manage';
                 });
             });

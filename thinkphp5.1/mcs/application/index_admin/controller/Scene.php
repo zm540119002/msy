@@ -223,56 +223,25 @@ class Scene extends Base {
 
         if(request()->isPost()){
 
-            $cat_ids  = input('post.ids');
+            $cat_ids  = input('post.ids/a');
             $scene_id = input('post.scene_id/d');
 
-            if ($scene_id){
+            if (!$scene_id){
                 $this ->error('参数有误',url('manage'));
             }
-            p($cat_ids);
-            exit;
 
             if ($cat_ids){
                 foreach($cat_ids as $k => $v){
                     if ((int)$v){
-                        $where = ['scene_id'=>$scene_id,'goods_category_id'=>$v];
-                        $data = [
-                            'where' => [
-                                ['scene_id','=',$scene_id],
-                                ['goods_category_id','=',$v],
-                            ]
-                        ];
+                        $data = ['scene_id'=>$scene_id,'goods_category_id'=>$v];
 
+                        // 先删后增 -保证唯一
                         $model = new \app\index_admin\model\SceneGoodsCategory();
-                        p($data);
-                        exit;
-                        $model->del($data);
-                        echo $model->getLastSql();
-                        exit;
-                        $result = $model -> allowField(true) -> save($data['where']);
-                        echo $model->getLastSql();
+                        $model -> where($data)->delete();
+                        $model -> allowField(true) -> save($data);
                     }
                 }
             }
-            exit;
-            return successMsg('成功');
-
-            $condition = [
-                ['scene_id','=',$data[0]['scene_id']]
-            ];
-            $model->startTrans();
-            $rse = $model -> del($condition,$tag=false);
-
-            if(false === $rse){
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $res = $model->allowField(true)->saveAll($data)->toArray();
-            if (!count($res)) {
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $model -> commit();
             return successMsg('成功');
 
         }else{
