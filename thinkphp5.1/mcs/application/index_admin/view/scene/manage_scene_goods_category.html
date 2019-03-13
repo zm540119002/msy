@@ -73,7 +73,7 @@
             var postData= {};
             postData.id = _thisTr.data('id');
             var url =  controller + 'delSceneGoodsCategory';
-            $(this).addClass('nodisabled');
+            
             layer.open({
                 btn: ['确定','取消'],//按钮
                 content:'删除你选中的分类吗？',
@@ -82,7 +82,7 @@
                         url:url,
                         data:postData,
                         beforeSend:function(){
-
+                            $(this).addClass('nodisabled');
                         },
                         success:function(msg){
                             dialog.msg(msg,'',function(){
