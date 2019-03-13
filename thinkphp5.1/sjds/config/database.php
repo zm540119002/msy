@@ -62,10 +62,10 @@ return [
         'charset'     => 'utf8',// 数据库编码默认采用utf8
     ],
     //数据库配置
-    'db_config_mcs' => [
+    'db_config_sjds' => [
         'type'        => 'mysql',// 数据库类型
         'hostname'    => '127.0.0.1',// 服务器地址
-        'database'    => 'mcs',// 数据库名
+        'database'    => 'sjds',// 数据库名
         'username'    => 'root',// 数据库用户名
         'password'    => 'msy',// 数据库密码
         'charset'     => 'utf8',// 数据库编码默认采用utf8
