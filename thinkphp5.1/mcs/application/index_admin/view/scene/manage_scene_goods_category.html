@@ -24,7 +24,7 @@
 				<a class="btn btn-primary radius" id="add-scene-sort" data-id="{$scene.id}" href="javascript:;">
 				<i class="Hui-iconfont">&#xe600;</i> 添加商品分类</a>
 			</span>
-                    <span class="r">共有数据：<strong>{:count($sceneCategoryList)}</strong> 条
+                    <span class="r">共有数据：<strong id="count">{:count($sceneCategoryList)}</strong> 条
 			</span>
                 </div>
                 <div class="mt-20">
@@ -79,6 +79,8 @@
                     $.post(url,postData,function(msg){
                         dialog.msg(msg,'',function(){
                             _thisTr.remove();
+                            
+                            $("#count").html($("#count").html()-1);
                         });
                     });
                     layer.close(index);
