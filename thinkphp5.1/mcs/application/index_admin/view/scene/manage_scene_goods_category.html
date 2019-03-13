@@ -68,22 +68,36 @@
     <script type="text/javascript">
         //删除
         $('body').on('click','.del',function(){
-            var _thisTr = $(this).parents('tr');
+            var _this=$(this);
+            var _thisTr = _this.parents('tr');
             var postData= {};
-            postData.id       = _thisTr.data('id');
+            postData.id = _thisTr.data('id');
             var url =  controller + 'delSceneGoodsCategory';
+             $(this).addClass('nodisabled');
             layer.open({
                 btn: ['确定','取消'],//按钮
                 content:'删除你选中的分类吗？',
                 yes:function (index) {
-                    $.post(url,postData,function(msg){
-                        dialog.msg(msg,'',function(){
-                            _thisTr.remove();
-                            
-                            $("#count").html($("#count").html()-1);
-                        });
-                    });
-                    layer.close(index);
+                    $.ajax({
+                        url:url,
+                        data:postData,
+                        beforeSend:function(){
+                           
+                        },
+                        success:function(msg){
+                            dialog.msg(msg,'',function(){
+                                _thisTr.remove();
+                                $("#count").html($("#count").html()-1);
+                            });
+                            //_this.removeClass('nodisabled');
+                            layer.close(index);
+                        },
+                        
+                    })
+                },
+                cancel:function(){
+                    alert(1);
+                    _this.removeClass('nodisabled');
                 }
             });
         });
