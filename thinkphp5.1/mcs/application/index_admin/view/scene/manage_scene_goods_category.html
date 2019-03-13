@@ -79,9 +79,8 @@
                     $.post(url,postData,function(msg){
                         dialog.msg(msg,'',function(){
                             _thisTr.remove();
-                            var count = $("#count").html();
-                            count = count--;
-                            console.log(count);
+                            
+                            $("#count").html($("#count").html()-1);
                         });
                     });
                     layer.close(index);
