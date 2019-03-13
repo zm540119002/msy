@@ -1,0 +1,110 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <section style="display: none" class="tpl_list">
+        <li data-goods-id="">
+            <a href="javascript:void(0);" class="close-btn">X</a>           
+            <!--<div>
+                <img src="" alt="" class="left">
+                <p class="goods_name">aaabbb</p>
+            </div>-->
+        </li>
+    </section>
+    <section class="recommendGoods_content">
+        <!--推荐产品容器-->
+        <div id="recommendGoods">
+            <div class="add_layer_content">
+                <ul class="scroller-container list" id="list" data-id="{$id}">
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='index_admin_img/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <a href="javascript:void(0);"><input class="button_save_black_4" value="保存" type="button"</a>
+    </div>
+{/block}
+
+{block name="script"}
+    <script type="text/javascript">
+        $(function () {
+            //加载第一页
+            var config = {
+                url:module+'scene/getCategory',
+            };
+            var getData = {
+                id:$('#list').data('id')
+            };
+            getPagingList(config,getData);
+        });
+
+        //折叠
+        $('body').on('click','.folding',function(){
+            var _this = $(this);
+            var status = _this.attr('status');
+            var _thisTr = _this.parents('tr');
+
+            if(status == 'open'){
+                _this.attr('status','close');
+                var postData = {};
+                postData.level = _thisTr.data('level');
+                postData.cat_id = _thisTr.data('id');
+                postData.id = $('#list').data('id');
+                //异步加载子分类
+                var url = module+'scene/' + 'getCategory';
+                $.ajax({
+                    url: url,
+                    type:'post',
+                    data:postData,
+                    dataType: 'html',
+                    error: function(){
+                        dialog.error('AJAX错误。。。');
+                    },
+                    success: function(data){
+                        _thisTr.after(data);
+                    }
+                });
+            }else if(status == 'close'){
+                _this.attr('status','open');
+                if(_thisTr.data('level') == 1){
+                    _thisTr.nextUntil('[data-level=1]').remove();
+                }else if(_thisTr.data('level') == 2){
+                    _thisTr.nextUntil('[data-level!=3]').remove();
+                    _thisTr.nextAll('[data-level=0]').remove();
+                }
+            }
+
+        });
+        // 提交选中分类
+        $('body').on('click','.button_save_black_4',function(){
+            var url = module +'Scene/editSceneSort';
+            var postData={};
+            var ids  = [];
+            //postData.scene_id = $('#list').data('id');
+
+            $.each($('.table .check_item_2'),function(){
+                var _this=$(this);
+                if(_this.prop('checked') && !_this.prop('disabled')){
+                    var id=_this.parents('tr').data('id');
+                    ids.push(id);
+                }
+            });
+
+            postData.ids = ids;
+            $.post(url,postData,function(msg){
+                dialog.msg(msg,'',function () {
+                    console.log(msg);
+                    //location.href = controller + 'manage';
+                });
+            });
+        })
+        
+    </script>
+{/block}
