@@ -1,0 +1,116 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<section class="no_cart_data" style="display:none;">
+	<li class="no_data">
+		<img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt="">
+	</li>
+</section>
+<article class="f24">
+	<section class="shopping_header_title header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2>购物车</h2>
+	</section>
+	<ul class="cart_goods_list" id="list">
+	</ul>
+	<section id="no_data">
+		<div class="cart_data_empty">
+			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
+		</div>
+	</section>
+	<div class="project_wrapper">
+		<div class="mod-part-title">
+			<div class="mod-part-title-wrap">
+				<span class="icon-title left"></span>
+				<span class="title">新零售精选</span>
+				<span class="icon-title right"></span>
+			</div>
+		</div>
+		<div id="scroller-wrapper" class="list_wrapper">
+			<ul class="columns_flex flex-both-side goods-content-list" id="list">
+
+			</ul>
+		</div>
+	</div>
+</article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">美创会</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('CenterStore/index')}">
+					<span class="practitioners f_icon"></span>
+					<span class="f_txt">中心店</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a  href="{:url('Studio/index')}">
+					<span class="business f_icon"></span>
+					<span class="f_txt">工作室</span>
+				</a>
+			</li>
+			<li class="each_column current">
+				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column ">
+				<a href="{:url('Mine/index')}">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="index_js/footerCart.js"></script>
+<script type="text/javascript" src="index_js/cart.js"></script>
+<script type="text/javascript">
+	var config = {
+		url:module+'Cart/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:20,
+		pageType:'index'
+	};
+	$(function(){
+		//初始化分类商品页面
+		getPagingList(config,postData);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
+	});
+
+	// 新零售商品获取配置
+	var config_1 = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData_1 = {
+		pageSize:10,
+		pageType:'index',
+		is_selection:1
+	};
+
+</script>
+{/block}
