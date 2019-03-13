@@ -100,11 +100,9 @@
             postData.ids = ids;
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function () {
-                    //console.log(msg);
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);
-                    //location.replace(location.href);
-                    //location.href = controller + 'manage';
+                    // 提交后关闭，然后刷新父窗口
+                    layer.close(layer.index);
+                    window.parent.location.reload();
                 });
             });
         })
