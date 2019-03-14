@@ -5,33 +5,11 @@
             <div class="item-title">
                 <ul class="tab-base">
                     <li><a href="{:url('manage')}" class="current"><span>管理</span></a></li>
-                    <li><a href="{:url('edit')}"><span>编辑</span></a></li>
+                    <li><a href="{:url('edit')}"><span>增加</span></a></li>
                 </ul>
             </div>
         </div>
         <div class="main-content" id="mainContent">
-            <form id="form1">
-                <input type="hidden" name="pageType" value="manage">
-                <table class="search-form search_product_type">
-                    <tbody>
-                        <tr>
-                            <td class=dotted_bottom_gray height=40 width="11%" align=right>所属分类：</td>
-                            <td class=dotted_bottom_gray width="58%" align=left>
-                                {include file="goods_category/linkage_tpl" /}
-                            </td>
-                            <th>项目名称</th>
-                            <td class="w160">
-                                <input class="text product_management_name" type="text" name="keyword" value="">
-                            </td>
-                            <td class="w70 tc">
-                                <label class="submit-border">
-                                    <input type="button" id="searchProject" class="submit product_search_btn" value="搜索">
-                                </label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
             <div class="content" id="list"></div>
         </div>
     </div>
@@ -51,8 +29,9 @@
             var config = {
                 url:controller+'getList',
             };
-            var getData = $('#form1').serializeObject();
-            getPagingList(config,getData);
+            //var getData = $('#form1').serializeObject();
+            //getPagingList(config,getData);
+            getPagingList(config);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
                 var getData = $('#form1').serializeObject();
@@ -145,26 +124,29 @@
             //上下架
             $('body').on('click','.set-shelf-status',function(){
                 var _this = $(this);
-                var text = _this.text();
+                var text = _this.attr('title');
                 var shelf_status = _this.data('shelf-status');
                 var _thisTr = $(this).parents('tr');
                 var postData ={};
                 postData.id = _thisTr.data('id');
                 postData.shelf_status = shelf_status;
-                var url =  controller + 'setShelfStatus';
+                var url =  controller + 'setInfo';
                 layer.open({
                     btn: ['确定','取消'],//按钮
                     content:"是否"+text+'?',
                     yes:function (index) {
                         $.post(url,postData,function(msg){
                             dialog.msg(msg,'',function(){
-                                _thisTr.find('.shelf-status').text(text);
+
                                 if(shelf_status == 3){
-                                    _this.text('下架');
+                                    _thisTr.find(".shelf-status").html('<span class="label label-success radius">已发布</span>');
                                     _this.data('shelf-status',1);
+                                    _this.attr('title','下架');
                                 }else{
-                                    _this.text('上架');
+                                    _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
+
                                     _this.data('shelf-status',3);
+                                    _this.attr('title','发布');
                                 }
                             });
                         });
@@ -172,6 +154,34 @@
                     }
                 });
             });
+
+            // 上下架状态设置
+
+            function shelf_status(){
+                var _this = $('#set-shelf-status');
+                var shelf_status = _this.data('shelf-status');
+                var _thisTr = _this.parents('tr');
+                console.log(shelf_status);
+                return false;
+                if(shelf_status == 3){
+                    _thisTr.find(".shelf-status").html('<span class="label label-success radius">已发布</span>');
+                    _this.data('shelf-status',1);
+                    _this.attr('title','下架');
+                }else{
+                    _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
+
+                    _this.data('shelf-status',3);
+                    _this.attr('title','发布');
+                }
+            }
+            $(document).ready(function(){
+                //var _this = $('#set-shelf-status');
+                var shelf_status = $('#set-shelf-status').data('shelf-status');
+                console.log(shelf_status);
+                return false;
+                //shelf_status();
+            });
+
             ////设置为精选
             $('body').on('click','.set_selection',function(){
                 var _this = $(this);
