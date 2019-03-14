@@ -121,20 +121,49 @@ class Scheme extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Project();
-        $id = input('post.id/d');
-        if(input('?post.id') && $id){
+        $model = new \app\index_admin\model\Scheme();
+
+        $config = array();
+        if($id=input('post.id/d')){
             $condition = [
                 ['id','=',$id]
             ];
+            $config = [
+                'where' => [
+                    ['id','=',$id]
+                ],'field' => [
+                    'thumb_img'
+                ]
+            ];
         }
+
         if(input('?post.ids')){
             $ids = input('post.ids/a');
+            $config = [
+                'where' => [
+                    ['id','in',$ids]
+                ],'field' => [
+                    'thumb_img'
+                ]
+            ];
             $condition = [
                 ['id','in',$ids]
             ];
         }
-        return $model->del($condition);
+
+        $list = $model->getList($config);
+        $result = $model->del($config['where'],false);
+
+        if($result){
+            //删除商品主图
+            foreach($list as $k => $v){
+                if($v['thumb_img']){
+                    delImg($v['thumb_img']);
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**

@@ -66,46 +66,53 @@
 
                 layer.open({
                     btn: ['确定','取消'],//按钮
-                    content:'删除你选中的方案吗？',
+                    content:'确定要删除该方案？',
                     yes:function (index) {
                         $.post(url,postData,function(msg){
-                            dialog.msg(msg,'',function(){
-                                _thisTr.remove();
-                            });
+                            if(msg.status){
+                                dialog.msg(msg,'',function(){
+                                    _thisTr.remove();
+                                });
+                            }
                         });
                         layer.close(index);
                     }
                 });
             });
-            //批量删除数据
+            //批量删除数据 已用
             $('body').on('click','.batchDel',function(){
                 var postData = {};
                 ids = [];
-                $("input[name='checkbox']").each(function(){
+
+                $("input[name='checkbox']:checked").each(function(){
                     var _thisTr = $(this).parents('tr');
-                    if($(this).is(':checked')){
-                        ids.push(_thisTr.data('id'));
-                    }
+                    ids.push(_thisTr.data('id'));
                 });
+
                 postData.ids= ids;
                 var url =  controller + '/del';
+
                 if(ids.length==0){
-                    layer.tips('你还没有选择任何内容！','.btn',{
+                    layer.tips('请选择要删除的方案！','.btn',{
                         tips:[4,'#0d7eff'],
                         time:1500
                     });
                     return false;
                 }else{
-                    layer.confirm('删除你选中的商品吗？', {
+                    layer.confirm('确定要删除选中的方案？', {
                         btn: ['确定','取消'],//按钮
                         yes:function (index) {
                             $.post(url,postData,function(msg){
                                 dialog.msg(msg,'',function () {
-                                    $("input[name='checkbox']").each(function(){
-                                        if($(this).is(':checked')){
-                                            $(this).parents('.edit').remove();
-                                        }
-                                    })
+                                    if(msg.status){
+                                 /*       $.each(ids, function(i,val){
+                                            $('tr[data-id='+val+']').remove();
+                                        });*/
+
+                                        $("input[name='checkbox']:checked").each(function(){
+                                            $(this).parents('tr').remove();
+                                         });
+                                    }
                                 });
                             });
                             layer.close(index);
@@ -172,7 +179,7 @@
             }
             // 增加 OR 编辑 完
 
-            // 放大图片
+            // 打开原图
             $('body').on('click','.product-thumb',function(){
                 var index = layer.open({
                     area: 'auto',
