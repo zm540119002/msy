@@ -107,13 +107,14 @@ class Scheme extends Base {
     }
 
     /**
-     *  分页查询
+     *  分页查询 -ajax
      */
     public function getList(){
-        $modelProject = new \app\index_admin\model\Project();
+
+        $modelProject = new \app\index_admin\model\Scheme();
         $where = [];
-        $where[] = ['p.status','=',0];
-        if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
+        //$where[] = ['audit','=',0];
+/*        if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
             $where[] = ['p.category_id_1','=',input('get.category_id_1',0,'int')];
         }
         if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
@@ -125,22 +126,21 @@ class Scheme extends Base {
         $keyword = input('get.keyword','','string');
         if($keyword){
             $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
-        }
+        }*/
         $config = [
-            'where'=>$where,
+            //'where'=>$where,
             'field'=>[
-                'p.id','p.name','p.thumb_img','p.main_img','p.intro','p.shelf_status','p.sort','p.create_time','p.category_id_1','p.is_selection'
+                'id','name','thumb_img','sort','shelf_status'
             ],
             'order'=>[
-                'p.id'=>'desc',
-                'p.sort'=>'desc',
+                'sort'=>'desc',
             ],
         ];
         $list = $modelProject ->pageQuery($config);
         $this->assign('list',$list);
-        if($_GET['pageType'] == 'manage'){
-            return view('project/list_tpl');
-        }
+        //return $list;
+        return view('list_tpl');
+
     }
 
 
@@ -200,6 +200,36 @@ class Scheme extends Base {
             return errorMsg('失败');
         }
         $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
+     * 单值设置
+     */
+    public function setInfo(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $info= array();
+        // 上下架
+        if ($shelf_status = input('post.shelf_status/d')){
+            $shelf_status = $shelf_status==1 ? 3 : 1 ;
+
+            $info = ['shelf_status'=>$shelf_status];
+        }
+
+        $model = new \app\index_admin\model\Scheme();
+        $rse = $model->where(['id'=>$id])->setField($info);
+
         if(!$rse){
             return errorMsg('失败');
         }
