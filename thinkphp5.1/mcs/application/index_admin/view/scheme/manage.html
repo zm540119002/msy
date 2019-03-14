@@ -31,7 +31,7 @@
             };
             //var getData = $('#form1').serializeObject();
             //getPagingList(config,getData);
-            getPagingList(config);
+            //getPagingList(config);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
                 var getData = $('#form1').serializeObject();
@@ -174,7 +174,10 @@
                     _this.attr('title','发布');
                 }
             }
-           
+            //var _this = $('#set-shelf-status');
+            var shelf_status = $('#set-shelf-status').data('shelf-status');
+            console.log($('#set-shelf-status').data('shelf-status'));
+            return false;
             //shelf_status();
 
             ////设置为精选
@@ -231,11 +234,5 @@
             });
 
         });
-        window.onload=function(){
-             //var _this = $('#set-shelf-status');
-            var shelf_status = $('#set-shelf-status').data('shelf-status');
-            console.log($('#set-shelf-status').data('shelf-status'));
-            return false;
-        }
     </script>
 {/block}
