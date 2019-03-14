@@ -1,0 +1,234 @@
+[ 2018-09-06T15:17:08+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.319018s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.321019s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.009000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.009000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-09-06T15:18:07+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.1670s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898380' LIMIT 1   [ RunTime:0.0650s ]
+
+[ 2018-09-06T15:18:14+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0020s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898380' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:18:24+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898380' LIMIT 1   [ RunTime:0.0000s ]
+
+[ 2018-09-06T15:19:12+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0040s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898380' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:22:17+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898380' LIMIT 1   [ RunTime:0.0000s ]
+
+[ 2018-09-06T15:22:19+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898380' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:24:02+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898381' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:24:09+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0020s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898381' LIMIT 1   [ RunTime:0.0000s ]
+
+[ 2018-09-06T15:24:09+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0070s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898381' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:24:10+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0020s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898381' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:24:11+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0020s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898381' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:24:12+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0210s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898381' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-09-06T15:24:12+08:00 ] 127.0.0.1 /index.php/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 22 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 119 行.
+NOTIC: [8] curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 138 行.
+NOTIC: [8] Trying to get property of non-object D:\web\thinkphp3.2\web\all\Component\WxpayAPI\Jssdk.class.php 第 94 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0080s ]
+SQL: SELECT `id`,`name`,`nickname`,`mobile_phone`,`status`,`type`,`password`,`avatar`,`sex`,`salt`,`birthday`,`last_login_time` FROM `user` WHERE `status` = 0 AND `name` = '13679898381' LIMIT 1   [ RunTime:0.0000s ]
+
