@@ -20,9 +20,11 @@
             <td class="w48 sort"><span title="" class="editable ">{$vo.sort}</span></td>
             <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
             <td class="w96">
-                <a href="javascript:void(0);">
-                    <img width="100" class="product-thumb" src="public_uploads/{$vo.thumb_img}" alt='loading'>
-                </a>
+                {if $vo.thumb_img}
+                    <a href="javascript:void(0);">
+                        <img width="100" class="product-thumb" src="public_uploads/{$vo.thumb_img}" alt='loading'>
+                    </a>
+                {/if}
             </td>
             <td class="w96 shelf-status">
                 {if $vo.shelf_status == 1}
