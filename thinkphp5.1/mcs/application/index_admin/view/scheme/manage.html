@@ -174,13 +174,11 @@
                     _this.attr('title','发布');
                 }
             }
-            $(document).ready(function(){
-                //var _this = $('#set-shelf-status');
-                var shelf_status = $('#set-shelf-status').data('shelf-status');
-                console.log(shelf_status);
-                return false;
-                //shelf_status();
-            });
+            //var _this = $('#set-shelf-status');
+            var shelf_status = $('#set-shelf-status').data('shelf-status');
+            console.log($('#set-shelf-status'));
+            return false;
+            //shelf_status();
 
             ////设置为精选
             $('body').on('click','.set_selection',function(){
