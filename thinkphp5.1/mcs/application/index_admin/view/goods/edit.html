@@ -323,10 +323,10 @@
                 }else if(!postData.detail_img){
                     content='请上传商品详情图';
                 }
-//                if(content){
-//                    dialog.error(content);
-//                    return false;
-//                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
 
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
