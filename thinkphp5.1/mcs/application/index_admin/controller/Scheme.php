@@ -14,37 +14,45 @@ class Scheme extends Base {
     }
 
     /**
+     * (查询 :增加 OR 修改) OR 提交
      * @return array
-     * 审核
      */
     public function edit(){
-        $model = new \app\index_admin\model\Project();
-        if(request()->isPost()){
-            if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['thumb_img']));
-            }
-            if(  isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($_POST['main_img']));
-            }
-            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
-                $detailArr = explode(',',input('post.detail_img','','string'));
-                $tempArr = array();
-                foreach ($detailArr as $item) {
-                    if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_project'),basename($item));
-                    }
-                }
-                $_POST['detail_img'] = implode(',',$tempArr);
-            }
-            // 选中的店铺类型 十进制
-            $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
 
-            $data = $_POST;
-            if(isset($_POST['id']) && intval($_POST['id'])){//修改
+        if(!request()->isPost()){
+            //要修改的商品
+            if($id = input('param.id/d')){
+                $model = new \app\index_admin\model\Scheme();
+                $config = [
+                    'where' => [
+                        ['id','=',$id]
+                    ],
+                ];
+                $info = $model->getInfo($config);
+
+                // 选中的店铺
+                $this->assign('info',$info);
+            }
+            return $this->fetch();
+
+        }else{
+
+            if(!input('param.name/s')){
+                return errorMsg('失败');
+            }
+
+            if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['thumb_img']));
+            }
+            $model = new \app\index_admin\model\Scheme();
+
+            $where = array();
+            $data  = $_POST;
+
+            if($id = input('param.id/d')){
                 $config = [
                     'where' => [
                         'id' => input('post.id',0,'int'),
-                        'status' => 0,
                     ],
                 ];
                 $info = $model->getInfo($config);
@@ -52,58 +60,19 @@ class Scheme extends Base {
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
-                if($info['main_img']){
-                    delImgFromPaths($info['main_img'],$_POST['main_img']);
-                }
-                if($info['detail_img']){
-                    //删除商品详情图
-                    $oldImgArr = explode(',',$info['detail_img']);
-                    $newImgArr = explode(',',$_POST['detail_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
-                $where = [
-                    'id'=>input('post.id',0,'int')
-                ];
-                $data['update_time'] = time();
-                $result = $model -> allowField(true) -> save($data,$where);
-                if(false === $result){
-                    return errorMsg('失败');
-                }
-            }else{//新增
-                $data['create_time'] = time();
-                $result = $model -> allowField(true) -> save($data);
-                if(!$result){
-                    $model ->rollback();
-                    return errorMsg('失败');
-                }
+                $where = ['id'=>$id];
+            }
 
+            $result = $model -> allowField(true) -> save($data,$where);
+
+            if($result){
+                return successMsg('成功');
+
+            }else{
+                $model ->rollback();
+                return errorMsg('失败');
             }
-            return successMsg('成功');
-        }else{
-           // 所有项目分类
-            $modelProjectCategory = new \app\index_admin\model\ProjectCategory();
-            $config = [
-                'where'=>[
-                    'status'=>0
-                ]
-            ];
-            $allCategoryList = $modelProjectCategory->getList($config);
-            $this->assign('allCategoryList',$allCategoryList);
-            //要修改的商品
-            if(input('?id') && (int)input('id')){
-                $config = [
-                    'where' => [
-                        'status' => 0,
-                        'id'=>input('id',0,'int'),
-                    ],
-                ];
-                $projectInfo = $model->getInfo($config);
-                // 选中的店铺
-                $projectInfo['belong_to'] = strrev(decbin($projectInfo['belong_to']));
-                $this->assign('info',$projectInfo);
-            }
-            return $this->fetch();
-       }
+        }
     }
 
     /**

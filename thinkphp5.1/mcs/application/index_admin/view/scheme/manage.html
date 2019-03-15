@@ -5,7 +5,7 @@
             <div class="item-title">
                 <ul class="tab-base">
                     <li><a href="{:url('manage')}" class="current"><span>管理</span></a></li>
-                    <li><a href="{:url('edit')}"><span>增加</span></a></li>
+                    <li><a href="javascript:void(0);" class="add"><span>增加</span></a></li>
                 </ul>
             </div>
         </div>
@@ -29,8 +29,6 @@
             var config = {
                 url:controller+'getList',
             };
-            //var getData = $('#form1').serializeObject();
-            //getPagingList(config,getData);
             getPagingList(config);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
@@ -59,22 +57,16 @@
                 getPagingList(config,getData);
             });
 
-            //编辑
-            $('body').on('click','.edit',function(){
-                var _thisTr = $(this).parents('tr');
-                var url =  controller + 'edit/id/' + _thisTr.data('id');
-                location.href = url;
-            });
-
-            //删除
+            //删除 已用
             $('body').on('click','.del',function(){
                 var _thisTr = $(this).parents('tr');
-                var postData = {};
+                var postData= {};
                 postData.id = _thisTr.data('id');
-                var url =  controller + 'del';
+                var url     =  controller + 'del';
+
                 layer.open({
                     btn: ['确定','取消'],//按钮
-                    content:'删除你选中的商品吗？',
+                    content:'删除你选中的方案吗？',
                     yes:function (index) {
                         $.post(url,postData,function(msg){
                             dialog.msg(msg,'',function(){
@@ -121,7 +113,7 @@
                     })
                 }
             })
-            //上下架
+            //上下架 已用
             $('body').on('click','.set-shelf-status',function(){
                 var _this = $(this);
                 var text = _this.attr('title');
@@ -137,16 +129,17 @@
                     yes:function (index) {
                         $.post(url,postData,function(msg){
                             dialog.msg(msg,'',function(){
+                                if(msg.status){
+                                    if(shelf_status == 3){
+                                        _thisTr.find(".shelf-status").html('<span class="label label-success radius">已发布</span>');
+                                        _this.data('shelf-status',1);
+                                        _this.attr('title','下架');
+                                    }else{
+                                        _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
 
-                                if(shelf_status == 3){
-                                    _thisTr.find(".shelf-status").html('<span class="label label-success radius">已发布</span>');
-                                    _this.data('shelf-status',1);
-                                    _this.attr('title','下架');
-                                }else{
-                                    _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
-
-                                    _this.data('shelf-status',3);
-                                    _this.attr('title','发布');
+                                        _this.data('shelf-status',3);
+                                        _this.attr('title','发布');
+                                    }
                                 }
                             });
                         });
@@ -155,85 +148,40 @@
                 });
             });
 
-            // 上下架状态设置
-
-            function shelf_status(){
-                var _this = $('#set-shelf-status');
-                var shelf_status = _this.data('shelf-status');
-                var _thisTr = _this.parents('tr');
-                console.log(shelf_status);
-                return false;
-                if(shelf_status == 3){
-                    _thisTr.find(".shelf-status").html('<span class="label label-success radius">已发布</span>');
-                    _this.data('shelf-status',1);
-                    _this.attr('title','下架');
-                }else{
-                    _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
-
-                    _this.data('shelf-status',3);
-                    _this.attr('title','发布');
-                }
+            // 增加 OR 编辑
+            $('body').on('click','.add',function(){
+                var config  = {};
+                config.title= '增加方案';
+                config.url  = controller + 'edit';
+                edit(config);
+            });
+            $('body').on('click','.edit',function(){
+                var _thisTr = $(this).parents('tr');
+                var config  = {};
+                config.title= '编辑方案';
+                config.url  =  controller + 'edit/id/' + _thisTr.data('id');
+                edit(config);
+            });
+            function edit(config){
+                var index = layer.open({
+                    type: 2,
+                    title: config.title,
+                    content: config.url
+                });
+                layer.full(index);
             }
-            //var _this = $('#set-shelf-status');
-            var shelf_status = $('#set-shelf-status').data('shelf-status');
-            console.log($('#set-shelf-status'));
-            console.log($('#set-shelf-status').data('shelf-status'));
-            //return false;
-            //shelf_status();
+            // 增加 OR 编辑 完
 
-            ////设置为精选
-            $('body').on('click','.set_selection',function(){
-                var _this = $(this);
-                var text = _this.text();
-                var is_selection = _this.data('is-selection');
-                var _thisTr = $(this).parents('tr');
-                var postData ={};
-                postData.id = _thisTr.data('id');
-                postData.is_selection = is_selection;
-                var url =  controller + 'setSelection';
-                _this.addClass("nodisabled");//防止重复提交
-                layer.open({
-                    btn: ['确定','取消'],//按钮
-                    content:"是否"+text+'?',
-                    yes:function (index) {
-                        $.post(url,postData,function(msg){
-                            _this.removeClass("nodisabled");
-                            dialog.msg(msg,'',function(){
-                                if(is_selection == 1){
-                                    _thisTr.find('.is-selection').text('精选');
-                                    _this.text('取消为精选');
-                                    _this.data('is-selection',0);
-                                }else{
-                                    _thisTr.find('.is-selection').text('不为精选');
-                                    _this.text('设置为精选');
-                                    _this.data('is-selection',1);
-                                }
-                            });
-                        });
-                        layer.close(index);
-                    }
+            // 放大图片
+            $('body').on('click','.product-thumb',function(){
+                var index = layer.open({
+                    area: 'auto',
+                    offset: 'auto',
+                    type: 2,
+                    content: $(this).attr('src')
                 });
-            });
-
-            // 去设置场景下的商品分类
-            $('body').on('click','.addSceneSort',function(){
-                var _thisTr = $(this).parents('tr');
-                var url =  controller + 'addSceneSort/id/' + _thisTr.data('id');
-                location.href = url;
-            });
-            // 去设置场景下的项目
-            $('body').on('click','.addSceneProject',function(){
-                var _thisTr = $(this).parents('tr');
-                var url =  controller + 'addSceneProject/id/' + _thisTr.data('id');
-                location.href = url;
-            });
-            //去设置场景下的商品
-            $('body').on('click','.addProjectGoods',function(){
-                var _thisTr = $(this).parents('tr');
-                var url =  controller + 'addSceneGoods/id/' + _thisTr.data('id');
-                location.href = url;
-            });
-
+                layer.full(index);
+            })
         });
     </script>
 {/block}
