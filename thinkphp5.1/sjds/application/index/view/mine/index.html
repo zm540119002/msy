@@ -193,10 +193,6 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
-        var a = {};
-        console.log(a.prototype);  //undefined
-        console.log(a.__proto__);  //Object {}
-        var mobile=$('.user_mobile').text();
         $('.user_mobile').text(mobileNHide(mobile));
         //个人信息
         var user_info_content=$('.user_info_content').html();
