@@ -207,6 +207,7 @@ class Goods extends Base {
                 ['id','in',$ids]
             ];
         }
+
         return $model->del($condition);
     }
 

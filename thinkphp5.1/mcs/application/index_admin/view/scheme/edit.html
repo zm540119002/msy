@@ -60,19 +60,17 @@
    /*         main_img.ready(function() {
                 main_img.setContent($('#mainImg').val());
             });*/
-            //确定
+
+            // 提交信息
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
 
                 if(!postData.name){
                     content='方案名称不能为空';
-                }
-                if(content){
                     dialog.error(content);
                     return false;
                 }
 
-                //主图
                 var url = module +'Scheme/edit';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
