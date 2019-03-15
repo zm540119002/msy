@@ -27,15 +27,15 @@
         </td>
         <td class="w96 shelf-status">
             {if $vo.shelf_status == 1}
-            <span class="label label-success radius">已发布</span>
+            <span class="label label-defaunt radius">已下架</span>
             <!--  <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="3">上架</a>-->
             {else /}
-            <span class="label label-defaunt radius">已下架</span>
+            <span class="label label-success radius">已发布</span>
             <!-- <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="1">下架</a>-->
             {/if}
         </td>
         <td class="w96">
-            <a href="javascript:void(0);" data-shelf-status="{$vo.shelf_status}" class="set-shelf-status" style="text-decoration:none" title="{$vo.shelf_status==1 ? '下架': '发布';}"><i class="Hui-iconfont"></i></a>
+            <a href="javascript:void(0);" data-shelf-status="{$vo.shelf_status}" class="set-shelf-status" style="text-decoration:none" title="{$vo.shelf_status==1 ? '发布': '下架';}"><i class="Hui-iconfont"></i></a>
             <a href="javascript:void(0);" class="edit" style="text-decoration:none" title="编辑"><i class="Hui-iconfont"></i></a>
             <a href="javascript:void(0);" class="del"  style="text-decoration:none" title="删除"><i class="Hui-iconfont"></i></a>
         </td>
