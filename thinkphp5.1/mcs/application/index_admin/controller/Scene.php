@@ -393,6 +393,7 @@ class Scene extends Base {
                 'sort'=> 'desc'
             ]
         ];
+
         $sceneCategoryList = $model->getList($condition);
         $this->assign('sceneCategoryList',$sceneCategoryList);
 

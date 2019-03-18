@@ -122,7 +122,7 @@
 			$(this).addClass('nodisabled');
 			layer.open({
 				btn: ['确定','取消'],//按钮
-				content:'取消关联选中的方案吗？',
+				content:'取消关联选中的方案'+' 编号'+postData.id+'？',
 				yes:function (index) {
 					$.ajax({
 						url:url,

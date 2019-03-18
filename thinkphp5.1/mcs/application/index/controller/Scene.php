@@ -153,7 +153,7 @@ class Scene extends \common\controller\Base{
                     ['ss.status', '=', 0],
                     ['ss.scene_id', '=', $id],
                 ],'field'=>[
-                    's.id','s.name','s.thumb_img'
+                    's.id','s.name','s.thumb_img','ss.show_name'
                 ],'join'=>[
                     ['scheme s','s.id = ss.scheme_id','left']
                 ]
