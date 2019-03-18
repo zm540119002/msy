@@ -120,6 +120,7 @@ class Scene extends \common\controller\Base{
             $config = [
                 'where' => [
                     ['group','=',$scene['group']],
+                    ['group','>',0],
                 ],
                 'order' => [
                     'sort' => 'desc',
