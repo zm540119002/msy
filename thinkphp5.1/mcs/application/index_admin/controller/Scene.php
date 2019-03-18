@@ -11,25 +11,46 @@ class Scene extends Base {
     }
 
     /**
+     * (查询 :增加 OR 修改) OR 提交 做
      * @return array
-     * 审核
      */
     public function edit(){
 
         $model = new \app\index_admin\model\Scene();
-        if(request()->isPost()){
+        if(!request()->isPost()){
+            if($id = input('param.id/d')){
+                $model = new \app\index_admin\model\Scene();
+                $config = [
+                    'where' => [
+                        ['id','=',$id]
+                    ],
+                ];
+                $info = $model->getInfo($config);
+                // 选中的店铺
+                $info['belong_to'] = strrev(decbin($info['belong_to']));
+                $this->assign('info',$info);
+            }
+            return $this->fetch();
+
+        }
+        else{
+
+            if(!input('param.name/s')){
+                return errorMsg('失败');
+            }
+
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['thumb_img']));
             }
             if(  isset($_POST['background_img']) && $_POST['background_img'] ){
-                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['background_img']));
+                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['background_img']));
             }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
@@ -38,7 +59,7 @@ class Scene extends Base {
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
 
             // 后面改进
-            if(isset($_POST['type']) &&$_POST['type']){
+            if( isset($_POST['type'])&&$_POST['type'] ){
                 switch($_POST['type']){
                     case 2:$template = 'sort'   ;break;
                     case 3:$template = 'project';break;
@@ -49,17 +70,17 @@ class Scene extends Base {
             }
 
             $data = $_POST;
+            $data['update_time'] = time();
 
-            if(isset($_POST['id']) && intval($_POST['id'])){//修改
+            if(isset($_POST['id']) && intval($_POST['id'])){ //修改
 
                 $config = [
                     'where' => [
                         'id' => input('post.id',0,'int'),
-                        'status' => 0,
                     ],
                 ];
                 $info = $model->getInfo($config);
-                //删除就图片
+                //删除旧图片
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
@@ -78,12 +99,12 @@ class Scene extends Base {
                 $where = [
                     'id'=>input('post.id',0,'int')
                 ];
-                $data['update_time'] = time();
                 $result = $model -> allowField(true) -> save($data,$where);
                 if(false === $result){
                     return errorMsg('失败');
                 }
-            }else{//新增
+            }
+            else{//新增
                 $data['create_time'] = time();
                 $result = $model -> allowField(true) -> save($data);
                 if(!$result){
@@ -93,25 +114,37 @@ class Scene extends Base {
 
             }
             return successMsg('成功');
-        }else{
-            //要修改的商品
-            if(input('?id') && (int)input('id')){
-                $config = [
-                    'where' => [
-                        'status' => 0,
-                        'id'=>input('id',0,'int'),
-                    ],
-                ];
-                $info = $model->getInfo($config);
-
-                // 选中的店铺
-                $info['belong_to'] = strrev(decbin($info['belong_to']));
-
-                $this->assign('info',$info);
-            }
-
-            return $this->fetch();
        }
+    }
+
+    /**
+     * 单字段设置
+     */
+    public function setInfo(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $info= array();
+        // 上下架
+        if ($shelf_status = input('post.shelf_status/d')){
+            $shelf_status = $shelf_status==1 ? 3 : 1 ;
+
+            $info = ['shelf_status'=>$shelf_status];
+        }
+
+        $model = new \app\index_admin\model\Scene();
+        $rse = $model->where(['id'=>$id])->setField($info);
+
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
     }
 
     /**
@@ -149,10 +182,11 @@ class Scene extends Base {
 
         $info['belong_to'] = strrev(decbin($list['belong_to']));
         $this->assign('list',$list);
-        if($_GET['pageType'] == 'manage'){
+        //if($_GET['pageType'] == 'manage'){
             return view('list_tpl');
-        }
+        //}
     }
+
     /**
      * @return array|mixed
      * 删除
@@ -163,6 +197,8 @@ class Scene extends Base {
         }
         $model = new \app\index_admin\model\Scene();
         $id = input('post.id/d');
+
+        $condition = array();
         if(input('?post.id') && $id){
             $condition = [
                 ['id','=',$id]
@@ -175,44 +211,6 @@ class Scene extends Base {
             ];
         }
         return $model->del($condition);
-    }
-
-    /**
-     * 上下架
-     */
-    public function setShelfStatus(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-        $model = new \app\index_admin\model\Scene();
-        $id = input('post.id/d');
-        if(!input('?post.id') && !$id){
-            return errorMsg('失败');
-        }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
-        if(!$rse){
-            return errorMsg('失败');
-        }
-        return successMsg('成功');
-    }
-
-    /**
-     * 设置精选
-     */
-    public function setSelection(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-        $model = new \app\index_admin\model\Scene();
-        $id = input('post.id/d');
-        if(!input('?post.id') && !$id){
-            return errorMsg('失败');
-        }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
-        if(!$rse){
-            return errorMsg('失败');
-        }
-        return successMsg('成功');
     }
 
     /**
@@ -349,7 +347,6 @@ class Scene extends Base {
             return $this->fetch();
         }
     }
-
 
     /**
      * 场景下的商品分类

@@ -20,7 +20,7 @@ class Scheme extends Base {
     public function edit(){
 
         if(!request()->isPost()){
-            //要修改的商品
+            //要修改的方案
             if($id = input('param.id/d')){
                 $model = new \app\index_admin\model\Scheme();
                 $config = [
@@ -30,12 +30,12 @@ class Scheme extends Base {
                 ];
                 $info = $model->getInfo($config);
 
-                // 选中的店铺
                 $this->assign('info',$info);
             }
             return $this->fetch();
 
-        }else{
+        }
+        else{
 
             if(!input('param.name/s')){
                 return errorMsg('失败');
@@ -76,6 +76,36 @@ class Scheme extends Base {
     }
 
     /**
+     * 单字段设置
+     */
+    public function setInfo(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $info= array();
+        // 上下架
+        if ($shelf_status = input('post.shelf_status/d')){
+            $shelf_status = $shelf_status==1 ? 3 : 1 ;
+
+            $info = ['shelf_status'=>$shelf_status];
+        }
+
+        $model = new \app\index_admin\model\Scheme();
+        $rse = $model->where(['id'=>$id])->setField($info);
+
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
      *  分页查询 -ajax
      */
     public function getList(){
@@ -103,7 +133,7 @@ class Scheme extends Base {
             ],
             'order'=>[
                 'sort'=>'desc',
-                'id'=>'asc',
+                'id'=>'desc',
             ],
         ];
         $list = $modelProject ->pageQuery($config);
@@ -159,36 +189,6 @@ class Scheme extends Base {
         }
 
         return $result;
-    }
-
-    /**
-     * 单字段设置
-     */
-    public function setInfo(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-
-        $id  = input('post.id/d');
-        if (!$id){
-            return errorMsg('失败');
-        }
-
-        $info= array();
-        // 上下架
-        if ($shelf_status = input('post.shelf_status/d')){
-            $shelf_status = $shelf_status==1 ? 3 : 1 ;
-
-            $info = ['shelf_status'=>$shelf_status];
-        }
-
-        $model = new \app\index_admin\model\Scheme();
-        $rse = $model->where(['id'=>$id])->setField($info);
-
-        if(!$rse){
-            return errorMsg('失败');
-        }
-        return successMsg('成功');
     }
 
 
