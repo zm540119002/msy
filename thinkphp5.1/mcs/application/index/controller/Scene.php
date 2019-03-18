@@ -152,7 +152,7 @@ class Scene extends \common\controller\Base{
                 'where' => [
                     ['ss.status', '=', 0],
                     ['ss.shelf_status', '=', 3],
-                    ['ss.scene_id', '=', $id],
+                    ['s.scene_id', '=', $id],
                 ],'field'=>[
                     's.id','s.name','s.thumb_img','ss.show_name'
                 ],'join'=>[
