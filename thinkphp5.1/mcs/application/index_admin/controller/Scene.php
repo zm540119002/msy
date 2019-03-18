@@ -153,28 +153,30 @@ class Scene extends Base {
     public function getList(){
         $model = new \app\index_admin\model\Scene();
         $where = [];
-        $where[] = ['s.status','=',0];
-        if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where[] = ['s.category_id_1','=',input('get.category_id_1',0,'int')];
+        $where[] = ['status','=',0];
+        if(isset($_GET['belong_to']) && intval($_GET['belong_to'])){
+            $where[] = ['belong_to','=',input('get.belong_to',0,'int')];
         }
-        if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where[] = ['s.category_id_2','=',input('get.category_id_2',0,'int')];
+        if(isset($_GET['type']) && intval($_GET['type'])){
+            $where[] = ['type','=',input('get.type',0,'int')];
         }
-        if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where[] = ['s.category_id_3','=',input('get.category_id_3',0,'int')];
+        if(isset($_GET['shelf-status']) && intval($_GET['shelf-status'])){
+            $where[] = ['shelf_status','=',input('get.shelf-status',0,'int')];
         }
+
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where[] = ['s.name','like', '%' . trim($keyword) . '%'];
+            $where[] = ['name','like', '%' . trim($keyword) . '%'];
         }
+
         $config = [
             'where'=>$where,
             'field'=>[
-                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection','s.type','s.belong_to'
+                'id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','type','belong_to'
             ],
             'order'=>[
-                's.sort'=>'desc',
-                's.id'=>'desc',
+                'sort'=>'desc',
+                'id'=>'desc',
             ],
         ];
 
@@ -201,16 +203,36 @@ class Scene extends Base {
         $condition = array();
         if(input('?post.id') && $id){
             $condition = [
-                ['id','=',$id]
+                'where' => [
+                    ['id','=',$id]
+                ],'field' => [
+                    'thumb_img','main_img','background_img','logo_img'
+                ]
             ];
         }
         if(input('?post.ids')){
             $ids = input('post.ids/a');
             $condition = [
-                ['id','in',$ids]
+                'where' => [
+                    ['id','in',$ids]
+                ],'field' => [
+                    'thumb_img','main_img','background_img','logo_img'
+                ]
             ];
         }
-        return $model->del($condition);
+        // 删除图片
+        $list  = $model->getList($condition);
+        $result= $model->del($condition['where'],false);
+        if($result){
+            //删除商品主图
+            foreach($list as $k => $v){
+                if($v){
+                    delImg($v);
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**

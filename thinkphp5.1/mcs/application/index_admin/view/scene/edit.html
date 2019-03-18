@@ -197,9 +197,9 @@
                 if(!postData.name){
                     content='场景名称不能为空';
                 }else if(!parseInt(sum(postData.belong_to))){
-                    content='场景归属不能为空';
+                    content='至少要选择一个场景归属';
                 }else if(!postData.row_number){
-                    content='至少要选择一个场景';
+                    content='场景数量不能为空';
                 }else if(!postData.group){
                     content='场景分组不能为空';
                 }else if(!postData.thumb_img){

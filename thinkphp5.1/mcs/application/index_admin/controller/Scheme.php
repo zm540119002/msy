@@ -154,9 +154,9 @@ class Scheme extends Base {
         }
         $model = new \app\index_admin\model\Scheme();
 
-        $config = array();
+        $condition = array();
         if($id=input('post.id/d')){
-            $config = [
+            $condition = [
                 'where' => [
                     ['id','=',$id]
                 ],'field' => [
@@ -167,7 +167,7 @@ class Scheme extends Base {
 
         if(input('?post.ids')){
             $ids = input('post.ids/a');
-            $config = [
+            $condition = [
                 'where' => [
                     ['id','in',$ids]
                 ],'field' => [
@@ -176,14 +176,14 @@ class Scheme extends Base {
             ];
         }
 
-        $list = $model->getList($config);
-        $result = $model->del($config['where'],false);
+        $list = $model->getList($condition);
+        $result = $model->del($condition['where'],false);
 
         if($result){
-            //删除商品主图
+            //删除商品的所有的图片
             foreach($list as $k => $v){
-                if($v['thumb_img']){
-                    delImg($v['thumb_img']);
+                if($v){
+                    delImg($v);
                 }
             }
         }
