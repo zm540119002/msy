@@ -203,7 +203,7 @@ class Scene extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','type','belong_to'
+                'id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','type','belong_to','group'
             ],
             'order'=>[
                 'sort'=>'desc',
