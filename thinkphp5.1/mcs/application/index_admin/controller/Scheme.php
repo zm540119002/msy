@@ -145,7 +145,7 @@ class Scheme extends Base {
         }else{
             $view = 'list_tpl';
         }
-        
+
         return view($view);
 
     }
