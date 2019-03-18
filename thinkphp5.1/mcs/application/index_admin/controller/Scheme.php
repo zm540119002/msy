@@ -139,7 +139,14 @@ class Scheme extends Base {
         $list = $modelProject ->pageQuery($config);
         $this->assign('list',$list);
 
-        return view('list_tpl');
+        $pageType = input('param.pageType/s');
+        if( $pageType ){
+            $view = $pageType;
+        }else{
+            $view = 'list_tpl';
+        }
+        
+        return view($view);
 
     }
 
