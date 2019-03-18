@@ -32,7 +32,7 @@
                         <thead>
                         <tr class="text-c">
                             <th width="10%">排序</th>
-                            <th width="20%">名称</th>
+                            <th width="20%">分类名称</th>
                             <th width="40%">说明</th>
                             <th width="40%">操作</th>
                         </tr>
@@ -81,6 +81,7 @@
                     $.ajax({
                         url:url,
                         data:postData,
+                        method:'post',
                         beforeSend:function(){
                            
                         },

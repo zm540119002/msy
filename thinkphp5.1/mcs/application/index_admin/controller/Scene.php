@@ -380,20 +380,21 @@ class Scene extends Base {
         }
         $sceneModel = new \app\index_admin\model\Scene();
 
-        $config = [
+        $condition = [
             'where'=>[
                 ['id','=',$id],
             ],'field'=>[
                 'id','name'
             ]
         ];
-        $scene = $sceneModel->getInfo($config);
+        $scene = $sceneModel->getInfo($condition);
         $this->assign('scene',$scene);
 
         $model = new \app\index_admin\model\SceneGoodsCategory();
-        $config = [
+        $condition = [
             'where'=>[
                 ['gc.status','=',0],
+                ['sgc.scene_id','=',$id],
             ],'field' => [
                 'sgc.id','gc.name','gc.sort','gc.remark'
             ],'join'  => [
@@ -402,9 +403,9 @@ class Scene extends Base {
                 'sort'=> 'desc'
             ]
         ];
-        $sceneCategoryList = $model->getList($config);
+        $sceneCategoryList = $model->getList($condition);
         $this->assign('sceneCategoryList',$sceneCategoryList);
-
+        //p($sceneCategoryList);
         $this->assign('id',$id);
 
         return $this->fetch();
