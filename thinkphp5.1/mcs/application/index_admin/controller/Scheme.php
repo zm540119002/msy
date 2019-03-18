@@ -127,7 +127,9 @@ class Scheme extends Base {
             $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
         }*/
         $config = [
-            //'where'=>$where,
+            'where'=>[
+                ['status','=',0]
+            ],
             'field'=>[
                 'id','name','thumb_img','sort','shelf_status'
             ],
@@ -138,7 +140,7 @@ class Scheme extends Base {
         ];
         $list = $modelProject ->pageQuery($config);
         $this->assign('list',$list);
-
+  
         $pageType = input('param.pageType/s');
         if( $pageType ){
             $view = $pageType;
@@ -184,7 +186,7 @@ class Scheme extends Base {
         }
 
         $list = $model->getList($condition);
-        $result = $model->del($condition['where'],false);
+        $result = $model->del($condition['where']);
 
         if($result){
             //删除商品的所有的图片

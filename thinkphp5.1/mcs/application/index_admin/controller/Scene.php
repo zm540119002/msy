@@ -231,14 +231,15 @@ class Scene extends Base {
         $model = new \app\index_admin\model\Scene();
         $id = input('post.id/d');
 
+        // 软删除
         $condition = array();
         if(input('?post.id') && $id){
             $condition = [
                 'where' => [
                     ['id','=',$id]
-                ],'field' => [
+                ],/*'field' => [
                     'thumb_img','main_img','background_img','logo_img'
-                ]
+                ]*/
             ];
         }
         if(input('?post.ids')){
@@ -246,13 +247,16 @@ class Scene extends Base {
             $condition = [
                 'where' => [
                     ['id','in',$ids]
-                ],'field' => [
+                ],/*'field' => [
                     'thumb_img','main_img','background_img','logo_img'
-                ]
+                ]*/
             ];
         }
+
+        return $model->del($condition['where']);
+
         // 删除图片
-        $list  = $model->getList($condition);
+/*        $list  = $model->getList($condition);
         $result= $model->del($condition['where'],false);
         if($result){
             //删除商品主图
@@ -263,7 +267,7 @@ class Scene extends Base {
             }
         }
 
-        return $result;
+        return $result;*/
     }
 
     /**
