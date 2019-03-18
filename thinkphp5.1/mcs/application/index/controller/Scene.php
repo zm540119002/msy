@@ -151,8 +151,8 @@ class Scene extends \common\controller\Base{
             $config = [
                 'where' => [
                     ['ss.status', '=', 0],
-                    ['ss.shelf_status', '=', 3],
-                    ['s.scene_id', '=', $id],
+                    ['ss.scene_id', '=', $id],
+                    ['s.shelf_status', '=', 3],
                 ],'field'=>[
                     's.id','s.name','s.thumb_img','ss.show_name'
                 ],'join'=>[
