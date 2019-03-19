@@ -151,7 +151,7 @@ class Project extends Base {
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
             $model = new \app\index_admin\model\Project();
-
+            return  $_FILES;
             if(isset($_POST['id']) && $id = input('post.id/d')){//修改
                 $config = [
                     'where' => [
