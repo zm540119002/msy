@@ -188,6 +188,7 @@ class Scheme extends Base {
         $model = new \app\index_admin\model\Scheme();
 
         $condition = array();
+        $where     = array();
         if($id=input('post.id/d')){
             $condition = [
                 'where' => [
@@ -195,6 +196,9 @@ class Scheme extends Base {
                 ],'field' => [
                     'thumb_img'
                 ]
+            ];
+            $where = [
+                ['scheme_id','=',$id]
             ];
         }
 
@@ -207,10 +211,28 @@ class Scheme extends Base {
                     'thumb_img'
                 ]
             ];
+            $where = [
+                ['scheme_id','in',$ids]
+            ];
         }
 
         $list = $model->getList($condition);
-        $result = $model->del($condition['where']);
+
+        // 事务
+        $model->startTrans();
+
+        try {
+            $result= $model->del($condition['where']);
+            $model = new \app\index_admin\model\SceneScheme();
+            $model->del($where,false);
+
+            $model->commit();
+
+        } catch (\Exception $e) {
+            // 回滚事务
+            $model->rollback();
+            return errorMsg('失败');
+        }
 
         if($result){
             //删除商品的所有的图片
