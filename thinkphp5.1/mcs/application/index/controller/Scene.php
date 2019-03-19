@@ -1,6 +1,9 @@
 <?php
 namespace app\index\controller;
 
+/**
+ * 场景控制器
+ */
 class Scene extends \common\controller\Base{
     /**首页
      */
