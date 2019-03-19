@@ -83,6 +83,8 @@
 				selectedPage=curIndex;
 			}
 			config.currentPage = selectedPage;
+
+			var getData = $('#form1').serializeObject();
 			getPagingList(config,getData);
 		});
 		//搜索
