@@ -134,6 +134,10 @@ class Project extends Base {
             if(  isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['main_img']));
             }
+
+            if( isset($_POST['video']) && $_POST['video'] ){
+                $_POST['video'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['video']));
+            }
             /*            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                             $detailArr = explode(',',input('post.detail_img','','string'));
                             $tempArr = array();
@@ -151,7 +155,7 @@ class Project extends Base {
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
             $model = new \app\index_admin\model\Project();
-            return  $_FILES;
+
             if(isset($_POST['id']) && $id = input('post.id/d')){//修改
                 $config = [
                     'where' => [
@@ -166,12 +170,15 @@ class Project extends Base {
                 if(false === $result){
                     return errorMsg('失败');
                 }
-                //删除旧图片
+                //删除旧文件
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
                 if($info['main_img']){
                     delImgFromPaths($info['main_img'],$_POST['main_img']);
+                }
+                if($info['video']){
+                    delImgFromPaths($info['video'],$_POST['video']);
                 }
 //                if($info['detail_img']){
 //                    //删除商品详情图
