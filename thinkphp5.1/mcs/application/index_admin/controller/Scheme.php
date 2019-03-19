@@ -126,7 +126,7 @@ class Scheme extends Base {
         if($keyword){
             $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
         }*/
-        $config = [
+        $condition = [
             'where'=>[
                 ['status','=',0]
             ],
@@ -138,7 +138,31 @@ class Scheme extends Base {
                 'id'=>'desc',
             ],
         ];
-        $list = $modelProject ->pageQuery($config);
+        $list = $modelProject ->pageQuery($condition);
+
+        // 标记该场景下的方案
+        if($scene_id = input('param.id/d')){
+            $sceneSchemeModel = new \app\index_admin\model\SceneScheme();
+            $condition = [
+                'where' => [
+                    ['scene_id','=', $scene_id],
+                ],'field'=> [
+                    'scheme_id'
+                ]
+            ];
+            $sceneScheme = $sceneSchemeModel->getlist($condition);
+
+            if ($sceneScheme){
+                $schemeIds = array_column($sceneScheme,'scheme_id');
+                // 取出交差值的数组
+                foreach($list as $k => $v){
+                    if ( in_array($v['id'],$schemeIds) ){
+                        $list[$k]['scene'] = 1;
+                    }
+                }
+            }
+        }
+
         $this->assign('list',$list);
   
         $pageType = input('param.pageType/s');

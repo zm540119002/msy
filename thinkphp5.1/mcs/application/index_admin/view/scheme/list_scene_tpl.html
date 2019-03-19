@@ -13,7 +13,13 @@
     <tbody>
     {volist name="list" id="vo"}
     <tr class="hover" data-id="{$vo.id}">
-        <td class="w48"><input type="checkbox" class="checkitem" name="checkbox">
+        <td class="w48">
+            {if !empty($vo.scene)}
+                <input type="checkbox" class="checkitem" name="checkbox" checked disabled>
+            {else/}
+                <input type="checkbox" class="checkitem" name="checkbox">
+            {/if}
+        </td>
         <td class="w48"><span title="" class="editable">{$vo.id}</span></td>
         <td class="w48 sort"><span title="" class="editable ">{$vo.sort}</span></td>
         <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
