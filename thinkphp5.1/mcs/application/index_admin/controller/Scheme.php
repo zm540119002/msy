@@ -46,32 +46,32 @@ class Scheme extends Base {
             }
             $model = new \app\index_admin\model\Scheme();
 
-            $where = array();
             $data  = $_POST;
-
             if($id = input('param.id/d')){
+                // 编辑
                 $config = [
                     'where' => [
                         'id' => input('post.id',0,'int'),
                     ],
                 ];
                 $info = $model->getInfo($config);
+                $result = $model -> allowField(true) -> save($data,['id'=>$id]);
+                if($result===false){
+                    return errorMsg('失败');
+                }
                 //删除商品主图
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
-                $where = ['id'=>$id];
+
+            }else{ // 增加
+                $result = $model -> allowField(true) -> save($data);
+                if(!$result){
+                    return errorMsg('失败');
+                }
             }
 
-            $result = $model -> allowField(true) -> save($data,$where);
-
-            if($result===false){
-                $model ->rollback();
-                return errorMsg('失败');
-
-            }else{
-                return successMsg('成功');
-            }
+            return successMsg('成功');
         }
     }
 
@@ -175,7 +175,6 @@ class Scheme extends Base {
         return view($view);
 
     }
-
 
     /**
      * @return array|mixed

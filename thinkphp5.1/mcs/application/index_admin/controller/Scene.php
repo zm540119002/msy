@@ -72,13 +72,12 @@ class Scene extends Base {
 
             $data = $_POST;
             $data['update_time'] = time();
+            $data['audit'] = 1; // 暂时没有审核，先固定
 
-            if(isset($_POST['id']) && intval($_POST['id'])){ //修改
+            if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
                 $config = [
-                    'where' => [
-                        'id' => input('post.id',0,'int'),
-                    ],
+                    'where' => ['id' => $id,],
                 ];
                 $info = $model->getInfo($config);
                 //删除旧图片
@@ -98,7 +97,7 @@ class Scene extends Base {
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
                 $where = [
-                    'id'=>input('post.id',0,'int')
+                    'id'=>$id
                 ];
                 $result = $model -> allowField(true) -> save($data,$where);
                 if(false === $result){
@@ -109,7 +108,6 @@ class Scene extends Base {
                 $data['create_time'] = time();
                 $result = $model -> allowField(true) -> save($data);
                 if(!$result){
-                    $model ->rollback();
                     return errorMsg('失败');
                 }
 
