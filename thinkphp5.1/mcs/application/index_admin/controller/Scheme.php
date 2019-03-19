@@ -46,32 +46,32 @@ class Scheme extends Base {
             }
             $model = new \app\index_admin\model\Scheme();
 
-            $where = array();
             $data  = $_POST;
-
             if($id = input('param.id/d')){
+                // 编辑
                 $config = [
                     'where' => [
                         'id' => input('post.id',0,'int'),
                     ],
                 ];
                 $info = $model->getInfo($config);
+                $result = $model -> allowField(true) -> save($data,['id'=>$id]);
+                if($result===false){
+                    return errorMsg('失败');
+                }
                 //删除商品主图
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
-                $where = ['id'=>$id];
+
+            }else{ // 增加
+                $result = $model -> allowField(true) -> save($data);
+                if(!$result){
+                    return errorMsg('失败');
+                }
             }
 
-            $result = $model -> allowField(true) -> save($data,$where);
-
-            if($result===false){
-                $model ->rollback();
-                return errorMsg('失败');
-
-            }else{
-                return successMsg('成功');
-            }
+            return successMsg('成功');
         }
     }
 
@@ -126,7 +126,7 @@ class Scheme extends Base {
         if($keyword){
             $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
         }*/
-        $config = [
+        $condition = [
             'where'=>[
                 ['status','=',0]
             ],
@@ -138,7 +138,31 @@ class Scheme extends Base {
                 'id'=>'desc',
             ],
         ];
-        $list = $modelProject ->pageQuery($config);
+        $list = $modelProject ->pageQuery($condition);
+
+        // 标记该场景下的方案
+        if($scene_id = input('param.id/d')){
+            $sceneSchemeModel = new \app\index_admin\model\SceneScheme();
+            $condition = [
+                'where' => [
+                    ['scene_id','=', $scene_id],
+                ],'field'=> [
+                    'scheme_id'
+                ]
+            ];
+            $sceneScheme = $sceneSchemeModel->getlist($condition);
+
+            if ($sceneScheme){
+                $schemeIds = array_column($sceneScheme,'scheme_id');
+                // 取出交差值的数组
+                foreach($list as $k => $v){
+                    if ( in_array($v['id'],$schemeIds) ){
+                        $list[$k]['scene'] = 1;
+                    }
+                }
+            }
+        }
+
         $this->assign('list',$list);
   
         $pageType = input('param.pageType/s');
@@ -152,7 +176,6 @@ class Scheme extends Base {
 
     }
 
-
     /**
      * @return array|mixed
      * 删除
@@ -164,6 +187,7 @@ class Scheme extends Base {
         $model = new \app\index_admin\model\Scheme();
 
         $condition = array();
+        $where     = array();
         if($id=input('post.id/d')){
             $condition = [
                 'where' => [
@@ -171,6 +195,9 @@ class Scheme extends Base {
                 ],'field' => [
                     'thumb_img'
                 ]
+            ];
+            $where = [
+                ['scheme_id','=',$id]
             ];
         }
 
@@ -183,10 +210,28 @@ class Scheme extends Base {
                     'thumb_img'
                 ]
             ];
+            $where = [
+                ['scheme_id','in',$ids]
+            ];
         }
 
         $list = $model->getList($condition);
-        $result = $model->del($condition['where']);
+
+        // 事务
+        $model->startTrans();
+
+        try {
+            $result= $model->del($condition['where']);
+            $model = new \app\index_admin\model\SceneScheme();
+            $model->del($where,false);
+
+            $model->commit();
+
+        } catch (\Exception $e) {
+            // 回滚事务
+            $model->rollback();
+            return errorMsg('失败');
+        }
 
         if($result){
             //删除商品的所有的图片

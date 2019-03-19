@@ -34,9 +34,11 @@ $('body').on('click','.del',function(){
         content:'确定要删除'+title+' 编号'+postData.id+'？',
         yes:function (index) {
             $.post(url,postData,function(msg){
-                dialog.msg(msg,'',function(){
-                    _thisTr.remove();
-                });
+                if(msg.status){
+                    dialog.msg(msg,'',function(){
+                        _thisTr.remove();
+                    });
+                }
             });
             layer.close(index);
         }

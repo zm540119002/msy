@@ -217,9 +217,11 @@
                 var url = module +'Scene/edit';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
-                        // 提交后关闭，然后刷新父窗口
-                        layer.close(layer.index);
-                        window.parent.location.reload();
+                        if(msg.status){
+                            // 提交后关闭，然后刷新父窗口
+                            layer.close(layer.index);
+                            window.parent.location.reload();
+                        }
                     });
                 });
 
