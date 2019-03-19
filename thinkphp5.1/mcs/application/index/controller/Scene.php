@@ -120,6 +120,7 @@ class Scene extends \common\controller\Base{
             $config = [
                 'where' => [
                     ['group','=',$scene['group']],
+                    ['group','>',0],
                 ],
                 'order' => [
                     'sort' => 'desc',
@@ -152,8 +153,9 @@ class Scene extends \common\controller\Base{
                 'where' => [
                     ['ss.status', '=', 0],
                     ['ss.scene_id', '=', $id],
+                    ['s.shelf_status', '=', 3],
                 ],'field'=>[
-                    's.id','s.name','s.thumb_img'
+                    's.id','s.name','s.thumb_img','ss.show_name'
                 ],'join'=>[
                     ['scheme s','s.id = ss.scheme_id','left']
                 ]
