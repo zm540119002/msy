@@ -2,7 +2,7 @@
 {block name="content"}
     <section style="display: none" class="tpl_list">
         <li data-goods-id="">
-            <a href="javascript:void(0);" class="close-btn">X</a>           
+            <a href="javascript:void(0);" class="close-btn">X</a>
             <!--<div>
                 <img src="" alt="" class="left">
                 <p class="goods_name">aaabbb</p>
@@ -27,8 +27,8 @@
         </div>
     </div>
 
-    <div class="cl pd-5 bg-1 bk-gray mt-20">
-        <a href="javascript:void(0);"><input class="button_save_black_4" value="保存" type="button"</a>
+    <div class="cl pd-5 bg-1 bk-gray mt-20" style="padding-top: 50px;">
+        <a href="javascript:void(0);"><input class="button_save_black_4" value="保存" type="button"></a>
     </div>
 {/block}
 
@@ -37,7 +37,7 @@
         $(function () {
             //加载第一页
             var config = {
-                url:module+'scene/getCategory',
+                url:module+'scene/getCategory'
             };
             var getData = {
                 id:$('#list').data('id')
@@ -106,6 +106,6 @@
                 });
             });
         })
-        
+
     </script>
 {/block}

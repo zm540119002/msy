@@ -1,6 +1,5 @@
 ﻿{extend name="template/admin_pc/base.html" /}
 {block name="content"}
-
 <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 方案管理
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
@@ -8,7 +7,7 @@
 <div class="page-container">
     <div class="cl pd-5 bg-1 bk-gray">
 			<span class="l">
-				<a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60">
+				<a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60" title="方案" id="title">
 				<i class="Hui-iconfont"></i> 添加方案</a>
 			</span>
         <!-- 先不要 -->
@@ -20,6 +19,7 @@
 
 {/block}
 {block name="script"}
+<script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
 <script type="text/javascript">
 	$(function () {
 		//加载第一页
@@ -41,6 +41,8 @@
 				selectedPage=curIndex;
 			}
 			config.currentPage = selectedPage;
+
+			var getData = $('#form1').serializeObject();
 			getPagingList(config,getData);
 		});
 		//搜索
@@ -49,131 +51,6 @@
 			var getData = $('#form1').serializeObject();
 			getPagingList(config,getData);
 		});
-
-		//删除
-		$('body').on('click','.del',function(){
-			var _thisTr = $(this).parents('tr');
-			var postData= {};
-			postData.id = _thisTr.data('id');
-			var url     =  controller + 'del';
-
-			layer.open({
-				btn: ['确定','取消'],//按钮
-				content:'确定要删除该方案？',
-				yes:function (index) {
-					$.post(url,postData,function(msg){
-						if(msg.status){
-							dialog.msg(msg,'',function(){
-								_thisTr.remove();
-							});
-						}
-					});
-					layer.close(index);
-				}
-			});
-		});
-		//批量删除数据
-		$('body').on('click','.batchDel',function(){
-			var postData = {};
-			ids = [];
-
-			var checked = $("input[name='checkbox']:checked");
-
-			checked.each(function(){
-				var _thisTr = $(this).parents('tr');
-				ids.push(_thisTr.data('id'));
-			});
-
-			postData.ids= ids;
-			var url =  controller + '/del';
-
-			if(ids.length==0){
-				layer.tips('请选择要删除的方案！','.btn',{
-					tips:[4,'#0d7eff'],
-					time:1500
-				});
-				return false;
-			}else{
-				layer.confirm('确定要删除选中的方案？', {
-					btn: ['确定','取消'],//按钮
-					yes:function (index) {
-						$.post(url,postData,function(msg){
-							dialog.msg(msg,'',function () {
-								if(msg.status){
-									/*       $.each(ids, function(i,val){
-									 $('tr[data-id='+val+']').remove();
-									 });*/
-
-									//$("input[name='checkbox']:checked").each(function(){
-									checked.each(function(){
-										$(this).parents('tr').remove();
-									});
-								}
-							});
-						});
-						layer.close(index);
-					}
-				})
-			}
-		})
-		//上下架
-		$('body').on('click','.set-shelf-status',function(){
-			var _this = $(this);
-			var text = _this.attr('title');
-			var shelf_status = _this.data('shelf-status');
-			var _thisTr = $(this).parents('tr');
-			var postData ={};
-			postData.id = _thisTr.data('id');
-			postData.shelf_status = shelf_status;
-			var url =  controller + 'setInfo';
-			layer.open({
-				btn: ['确定','取消'],//按钮
-				content:"是否"+text+'?',
-				yes:function (index) {
-					$.post(url,postData,function(msg){
-						dialog.msg(msg,'',function(){
-							if(msg.status){
-								if(shelf_status == 3){
-									_thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
-									_this.data('shelf-status',1);
-									_this.attr('title','发布');
-
-								}else{
-									_thisTr.find(".shelf-status").html('<span class="label label-success radius">已发布</span>');
-									_this.data('shelf-status',3);
-									_this.attr('title','下架');
-								}
-							}
-						});
-					});
-					layer.close(index);
-				}
-			});
-		});
-
-		// 增加 OR 编辑
-		$('body').on('click','.add',function(){
-			var config  = {};
-			config.title= '添加方案';
-			config.url  = controller + 'edit';
-			edit(config);
-		});
-		$('body').on('click','.edit',function(){
-			var _thisTr = $(this).parents('tr');
-			var config  = {};
-			config.title= '编辑方案';
-			config.url  =  controller + 'edit/id/' + _thisTr.data('id');
-			edit(config);
-		});
-		function edit(config){
-			var index = layer.open({
-				type: 2,
-				title: config.title,
-				content: config.url
-			});
-			layer.full(index);
-		}
-		// 增加 OR 编辑 完
 
 		// 打开原图
 		$('body').on('click','.product-thumb',function(){
