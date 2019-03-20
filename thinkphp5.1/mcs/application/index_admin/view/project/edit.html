@@ -91,7 +91,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>项目视频：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
-                                <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传视频(mp4、rmvb、avi、ts格式视频)</p>
+                                <p class="f20 picture-tipc-box"><span class="c-red">*</span> 仅支持大小在10M内，mp4、rmvb、avi、ts格式的视频</p>
                                 <form>
                                     <div class="upload-picture-module f24">
                                         <div>
@@ -254,12 +254,18 @@
                 if(!video){
                     return false;
                 }
+
                 // 判断视频格式
                 var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
                 if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
-                    // dialog.error('请上传：mp4、rmvb、avi、ts格式图片');
+                    dialog.error('只支持：mp4、rmvb、avi、ts格式的视频');
                     return false;
                 }
+                if( (video.size/1024/1024)>10){
+                    dialog.error('视频大小不能超过10M !');
+                    return false;
+                 }
+
                 var reader = new FileReader();
                 reader.readAsDataURL(video);
                 reader.onload = function(e){
@@ -273,6 +279,8 @@
                         return false;
                     }
                     $.post(controller+"uploadFileToTemp",postData,function(msg){
+                        console.log(msg);
+                        return false;
                         if(msg.status == 1){
                             uploadsSingleVideoFlag = true;
                             $(obj).find('.img').val(msg.info);
