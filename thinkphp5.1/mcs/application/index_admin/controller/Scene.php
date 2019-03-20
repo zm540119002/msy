@@ -79,6 +79,15 @@ class Scene extends Base {
                 $config = [
                     'where' => ['id' => $id,],
                 ];
+
+                $where = [
+                    'id'=>$id
+                ];
+                $result = $model -> allowField(true) -> save($data,$where);
+                if(false === $result){
+                    return errorMsg('失败');
+                }
+
                 $info = $model->getInfo($config);
                 //删除旧图片
                 if($info['thumb_img']){
@@ -96,13 +105,7 @@ class Scene extends Base {
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
-                $where = [
-                    'id'=>$id
-                ];
-                $result = $model -> allowField(true) -> save($data,$where);
-                if(false === $result){
-                    return errorMsg('失败');
-                }
+
             }
             else{//新增
                 $data['create_time'] = time();
