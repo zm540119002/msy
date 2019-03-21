@@ -99,6 +99,12 @@
                 getData.pageType = 'manage';
                 getPagingList(config,getData);
             });
+            // 预览
+            $('body').on('click','.preview',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'preview/id/' + _thisTr.data('id');
+                location.href = url;
+            });
 
             ////设置为精选
             $('body').on('click','.set_selection',function(){
