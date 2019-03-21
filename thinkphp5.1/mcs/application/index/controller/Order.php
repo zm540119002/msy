@@ -117,8 +117,8 @@ class Order extends \common\controller\UserBase
                 $modelOrder->rollback();
                 return errorMsg('失败');
             }
-            //根据订单号查询关联的购物车的商品 删除
-            $modelOrderDetail = new \app\index\model\OrderDetail();
+            //根据订单号查询关联的购物车的商品 删除  支付后 回调再删除
+   /*         $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
                 'where' => [
                     ['od.status', '=', 0],
@@ -140,7 +140,7 @@ class Order extends \common\controller\UserBase
                     $modelOrder->rollback();
                     return errorMsg('删除失败');
                 }
-            }
+            }*/
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
