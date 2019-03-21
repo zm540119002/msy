@@ -236,7 +236,7 @@ class Goods extends Base {
         $info= array();
         // 上下架
         if (input('?shelf_status')){
-            $shelf_status = input('post.shelf_status/d')==1 ? 3 : 1 ;
+            $shelf_status = input('post.shelf_status/d')==3 ? 1 : 3 ;
 
             $info = ['shelf_status'=>$shelf_status];
         }
