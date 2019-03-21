@@ -65,23 +65,7 @@ class Goods extends Base {
                         'status' => 0,
                     ],
                 ];
-                $info = $modelGoods->getInfo($config);
-                //删除旧视频
-                if($info['goods_video']){
-                    delImgFromPaths($info['goods_video'],$_POST['goods_video']);
-                }
-                if($info['main_img']){
-                    //删除商品旧主图
-                    $oldImgArr = explode(',',$info['main_img']);
-                    $newImgArr = explode(',',$_POST['main_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
-                if($info['detail_img']){
-                    //删除商品旧详情图
-                    $oldImgArr = explode(',',$info['detail_img']);
-                    $newImgArr = explode(',',$_POST['detail_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
+
                 $data = $_POST;
                 $data['update_time'] = time();
                 $where = [
@@ -92,6 +76,23 @@ class Goods extends Base {
                 if(false === $result){
                     return errorMsg('失败');
                 }
+
+                $info = $modelGoods->getInfo($config);
+                // 删除旧文件
+                if($info['goods_video']){
+                    delImgFromPaths($info['goods_video'],$_POST['goods_video']);
+                }
+                if($info['main_img']){
+                    $oldImgArr = explode(',',$info['main_img']);
+                    $newImgArr = explode(',',$_POST['main_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+                if($info['detail_img']){
+                    $oldImgArr = explode(',',$info['detail_img']);
+                    $newImgArr = explode(',',$_POST['detail_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+
                 $data['id'] = input('post.id/d');
                 $list[] = $data;
                 $this->generateQRcode($list);
