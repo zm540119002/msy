@@ -338,6 +338,7 @@ class Order extends \common\controller\UserBase
         $data = [
             'order_status' => $orderStatus,
         ];
+
         $rse = $model->where($where)->setField($data);
         if(!$rse){
             return errorMsg('失败');
@@ -390,7 +391,7 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id','=',$item['id']]
                 ],
                 'field'=>[
-                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
+                    'od.goods_id','od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                     'g.name','g.thumb_img',
                 ],
                 'join'=>[
