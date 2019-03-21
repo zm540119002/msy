@@ -117,7 +117,7 @@ class Order extends \common\controller\UserBase
                 $modelOrder->rollback();
                 return errorMsg('失败');
             }
-            //根据订单号查询关联的购物车的商品 删除  支付后 回调再删除
+            //根据订单号查询关联的购物车的商品 删除  订单待付款后再删除
    /*         $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
                 'where' => [
