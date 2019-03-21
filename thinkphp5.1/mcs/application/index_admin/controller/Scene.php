@@ -192,8 +192,8 @@ class Scene extends Base {
         if(isset($_GET['type']) && intval($_GET['type'])){
             $where[] = ['type','=',input('get.type',0,'int')];
         }
-        if(isset($_GET['shelf-status']) && intval($_GET['shelf-status'])){
-            $where[] = ['shelf_status','=',input('get.shelf-status',0,'int')];
+        if(isset($_GET['shelf_status']) && intval($_GET['shelf_status'])){
+            $where[] = ['shelf_status','=',input('get.shelf_status',0,'int')];
         }
 
         $keyword = input('get.keyword','','string');

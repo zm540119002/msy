@@ -1,56 +1,41 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="content"}
-    <nav class="breadcrumb">
-        <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理
-        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
-    </nav>
-    <div class="page-container">
-        <div class="cl pd-5 bg-1 bk-gray">
-                <span class="l">
-                    <a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60" title="商品" id="title">
-                    <i class="Hui-iconfont"></i> 添加商品</a>
-                </span>
-            <!-- 先不要 -->
-            <!--  <span class="r">共有数据：<strong id="count">4</strong> 条</span>-->
-        </div>
-        <div class="main-content mt-20" id="mainContent">
-            <div class="navbar-default mb-20">
-                <form id="form1" >
-                    <div class="form-group">
-                        {include file="goods_category/linkage_tpl" /}
-                    </div>
-                    <div class="form-group">
-                        <select name="belong_to" class="form-control">
-                            <option value="" selected="selected">归属</option>
-                            {foreach $Think.config.custom.belong_to as $k => $vo}
-                            <option value="{$k}">{$vo}</option>
-                            {/foreach}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select name="shelf_status" class="form-control">
-                            <option value="" selected="selected">上下架</option>
-                            <option value="3">上架</option>
-                            <option value="1">下架</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">关键词</label>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" name="keyword" value="" placeholder="搜索词"  class="form-control input-order-id">
-                        </div>
-                    </div>
-                    <!--排序规则-->
-                    <input type="button" id="searchGoods" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
-                    <input type="hidden" name="pageType" value="manage"/>
-                </form>
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title">
+                <ul class="tab-base">
+                    <li><a href="{:url('manage')}" class="current"><span>管理</span></a></li>
+                    <li><a href="{:url('edit')}"><span>编辑</span></a></li>
+                </ul>
             </div>
+        </div>
+        <div class="main-content" id="mainContent">
+            <form id="form1">
+                <input type="hidden" name="pageType" value="manage"/>
+                <table class="search-form search_product_type">
+                    <tbody>
+                        <tr>
+                            <td class=dotted_bottom_gray height=40 width="11%" align=right>所属分类：</td>
+                            <td class=dotted_bottom_gray width="58%" align=left>
+                                {include file="goods_category/linkage_tpl" /}
+                            </td>
+                            <th>商品名称</th>
+                            <td class="w160">
+                                <input class="text product_management_name" type="text" name="keyword" value="">
+                            </td>
+                            <td class="w70 tc">
+                                <label class="submit-border">
+                                    <input type="button" id="searchGoods" class="submit product_search_btn" value="搜索">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
             <div class="content" id="list"></div>
         </div>
-
     </div>
+
     <!-- 隐藏区 -->
     <div style="display:none">
         <div id="loading">
@@ -60,15 +45,13 @@
 {/block}
 {block name="script"}
     <script type="text/javascript" src="index_admin_js/categoryLinkage.js"></script>
-    <script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
     <script type="text/javascript">
         $(function () {
             //加载第一页
             var config = {
-                url:controller+'getList'
+                url:controller+'getList',
             };
             var getData = $('#form1').serializeObject();
-
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
@@ -100,6 +83,111 @@
                 getPagingList(config,getData);
             });
 
+            //编辑
+            $('body').on('click','.edit',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'edit/id/' + _thisTr.data('id');
+                location.href = url;
+            });
+            //编辑
+            $('body').on('click','.preview',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'preview/id/' + _thisTr.data('id');
+                location.href = url;
+            });
+
+            //删除
+            $('body').on('click','.del',function(){
+                var _thisTr = $(this).parents('tr');
+                var postData = {};
+                postData.id = _thisTr.data('id');
+                var url =  controller + 'del';
+                layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:'删除你选中的商品吗？',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            dialog.msg(msg,'',function(){
+                                _thisTr.remove();
+                            });
+                        });
+                        layer.close(index);
+                    }
+                });
+            });
+            //批量删除数据
+            $('body').on('click','.batchDel',function(){
+                var postData = {};
+                ids = [];
+                $("input[name='checkbox']").each(function(){
+                    var _thisTr = $(this).parents('tr');
+                    if($(this).is(':checked')){
+                        ids.push(_thisTr.data('id'));
+                    }
+                });
+                postData.ids= ids;
+                var url =  controller + '/del';
+                if(ids.length==0){
+                    layer.tips('你还没有选择任何内容！','.btn',{
+                        tips:[4,'#0d7eff'],
+                        time:1500
+                    });
+                    return false;
+                }else{
+                    layer.confirm('删除你选中的商品吗？', {
+                        btn: ['确定','取消'],//按钮
+                        yes:function (index) {
+                            $.post(url,postData,function(msg){
+                                dialog.msg(msg,'',function () {
+                                    $("input[name='checkbox']").each(function(){
+                                        if($(this).is(':checked')){
+                                            $(this).parents('.edit').remove();
+                                        }
+                                    })
+                                });
+                            });
+                            layer.close(index);
+                        }
+                    })
+                }
+            });
+
+
+
+
+            //上下架
+            $('body').on('click','.set-shelf-status',function(){
+                var _this = $(this);
+                var text = _this.text();
+                var shelf_status = _this.data('shelf-status');
+                var _thisTr = $(this).parents('tr');
+                var postData ={};
+                postData.id = _thisTr.data('id');
+                postData.shelf_status = shelf_status;
+                var url =  controller + 'setShelfStatus';
+                _this.addClass("nodisabled");//防止重复提交
+                layer.open({
+                    btn: ['确定','取消'],//按钮
+                    content:"是否"+text+'?',
+                    yes:function (index) {
+                        $.post(url,postData,function(msg){
+                            _this.removeClass("nodisabled");
+                            dialog.msg(msg,'',function(){
+                                _thisTr.find('.shelf-status').text(text);
+                                if(shelf_status == 3){
+                                    _this.text('下架');
+                                    _this.data('shelf-status',1);
+                                }else{
+                                    _this.text('上架');
+                                    _this.data('shelf-status',3);
+                                }
+                            });
+                        });
+                        layer.close(index);
+                    }
+                });
+            });
+
             ////设置为精选
             $('body').on('click','.set_selection',function(){
                 var _this = $(this);
@@ -109,8 +197,7 @@
                 var postData ={};
                 postData.id = _thisTr.data('id');
                 postData.is_selection = is_selection;
-                var url =  controller + 'setInfo';
-
+                var url =  controller + 'setSelection';
                 _this.addClass("nodisabled");//防止重复提交
                 layer.open({
                     btn: ['确定','取消'],//按钮
