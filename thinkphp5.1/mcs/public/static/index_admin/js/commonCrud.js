@@ -10,7 +10,7 @@ $('body').on('click','.add',function(){
 $('body').on('click','.edit',function(){
     var _thisTr = $(this).parents('tr');
     var config  = {};
-    config.title= '编辑'+title;
+    config.title= title+'编辑';
     config.url  =  controller + 'edit/id/' + _thisTr.data('id');
     edit(config);
 });
@@ -100,7 +100,7 @@ $('body').on('click','.set-shelf-status',function(){
     var url =  controller + 'setInfo';
     layer.open({
         btn: ['确定','取消'],//按钮
-        content:"是否"+text+'?',
+        content:text+' ?',
         yes:function (index) {
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function(){

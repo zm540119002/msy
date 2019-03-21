@@ -124,7 +124,7 @@
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                             <div class="upload-picture-module f24">
                                 <div>
-                                    <div class="picture-module">
+                                    <div class="picture-module" style="background:url(public_uploads/{$info.background_img});">
                                         <input type="file" class="uploadImg uploadSingleImg" name="">
                                         {empty name="info.background_img"}
                                         <img class="upload_img" src="">
@@ -219,7 +219,6 @@
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
                         if(msg.status){
-                            console.log(33333);
                             // 提交后关闭，然后刷新父窗口
                             var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
                             parent.layer.close(index);
