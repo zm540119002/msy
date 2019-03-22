@@ -80,9 +80,9 @@
 		$('body').on('click','.submit',function () {
 			var score=$('.my_fraction').data('score');
 			var commenText=$('.text_description').val();
+			var commentImg=[];
 			$.each($('.multi-picture-module li'),function(){
 				var _this=$(this);
-				var commentImg=[];
 				commentImg.push(_this.find('img').attr('src'));
 			})
 		    var postData={};
