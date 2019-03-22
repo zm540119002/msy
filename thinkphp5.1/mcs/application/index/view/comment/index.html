@@ -78,6 +78,7 @@
 		});
 		//提交评价
 		$('body').on('click','.submit',function () {
+			$('.my_fraction').data('score','');
 			var score=$('.my_fraction').data('score');
 			var commenText=$('.text_description').val();
 			var commentImg=[];
