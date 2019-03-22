@@ -32,20 +32,12 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('login')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
-<<<<<<< HEAD
 			$user = $this->loginCheck($data['mobile_phone']);
 			if(empty($user)){
 				return errorMsg('账号不存在');
 			}elseif ($user['status'] ==1){
                 return errorMsg('账号异常');
             }
-=======
-			$res = $this->loginCheck($data['mobile_phone']);
-  
-			if($res){
-				return errorMsg($res);
-			}
->>>>>>> 7b22d83f38148379e9ce2f9dd29f2fee5ae1f055
 			return $this->_login($data['mobile_phone'],$data['password']);
 		}else{
 			return errorMsg('登录信息不完善！');
