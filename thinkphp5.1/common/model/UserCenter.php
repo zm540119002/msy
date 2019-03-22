@@ -99,8 +99,9 @@ class UserCenter extends Base {
             }
 			$saveData['salt'] = create_random_str(10,0);//盐值
 			$saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
+            return $saveData;
 			if(empty($user)){
-                $response = $this->isUpdate(false)->save($saveData);
+                $response = $this->save($saveData);
             }else{
                 $where = array(
                     'status' => 0,
