@@ -97,17 +97,20 @@ class UserCenter extends Base {
             if($user['status']==1){
                 return errorMsg('账号异常，请申诉');
             }
-			$saveData['salt'] = create_random_str(10,0);//盐值
-			$saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
-            return $saveData;
+
 			if(empty($user)){
+                $saveData['salt'] = create_random_str(10,0);//盐值
+                $saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
+                $saveData['mobile_phone'] = $data['mobile_phone'];
                 $response = $this->save($saveData);
             }else{
                 $where = array(
                     'status' => 0,
                     'mobile_phone' => $data['mobile_phone'],
                 );
-                $response = $this->where($where)->update($saveData,$where);
+                $updateData['salt'] = create_random_str(10,0);//盐值
+                $updateData['password'] = md5($updateData['salt'] . $data['password']);//加密
+                $response = $this->where($where)->update($updateData,$where);
             }
 			if(!$response){
 				return errorMsg('失败！');
