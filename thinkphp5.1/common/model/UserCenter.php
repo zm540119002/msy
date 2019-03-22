@@ -33,7 +33,7 @@ class UserCenter extends Base {
 				return errorMsg($validateUser->getError());
 			}
 			$res = $this->loginCheck($data['mobile_phone']);
-            return $res;
+  
 			if($res){
 				return errorMsg($res);
 			}
