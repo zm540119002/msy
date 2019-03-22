@@ -54,13 +54,12 @@
 
 		{notempty name="$project.video"}
 		<div class="content-padding">
-			<video width="" height="" controls src="{$project.video}">
+			<video width="" height="" controls src="public_uploads/{$project.video}">
 			</video>
 			<p>{$project.name}项目培训</p>
 			<p>{$project.update_time}</p>
 		</div>
 		{/notempty}
-
 		<div>
 			<h3>相关视频</h3>
 			<ul class="p_video_item" id="videos">

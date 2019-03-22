@@ -1,21 +1,13 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="content"}
     <div class="page">
-        <div class="fixed-bar">
-            <div class="item-title">
-                <ul class="tab-base">
-                    <li><a href="{:url('manage')}" ><span>管理</span></a></li>
-                    <li><a href="{:url('edit')}" class="current"><span>编辑</span></a></li>
-                </ul>
-            </div>
-        </div>
         <div style="margin-top:15px;">
             <form id="form1">
                 <input type="hidden" name="id" value="{$info.id}">
                 <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                     <tbody>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景名称：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景名称：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
                                 <textarea class="project_description" name="name" >{$info.name}</textarea>
@@ -23,7 +15,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>场景归属：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景归属：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
                                 {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
@@ -37,7 +29,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>场景类型：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景类型：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
                                 {volist name=":config('custom.scene_type')" id ='vo' key="k"}
@@ -47,24 +39,25 @@
                                     <input type="radio" name="type" value="{$k}">{$vo}
                                     {/if}
                                 {/volist}
+                                <span class="c-red">*</span>类型为项目时，品牌LOGO、场景主图将不在前台显示 !
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort}">
+                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景的数量：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景的数量：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 100px; " class="inputboxadmin" name="row_number" value="{$info.row_number|default=2}">
                              该场景所属的行有多少个场景
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景分组：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景分组：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 100px; " class="inputboxadmin" name="group" value="{$info.group|default=1}">
                             第几组二级场景
@@ -86,7 +79,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>缩略图：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>缩略图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                                 <div class="upload-picture-module f24">
@@ -106,7 +99,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>品牌LOGO：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>品牌LOGO：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                             <div class="upload-picture-module f24">
@@ -131,9 +124,9 @@
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                             <div class="upload-picture-module f24">
                                 <div>
-                                    <div class="picture-module">
+                                    <div class="picture-module" style="background:url(public_uploads/{$info.background_img});">
                                         <input type="file" class="uploadImg uploadSingleImg" name="">
-                                        {empty name="info.thumb_img"}
+                                        {empty name="info.background_img"}
                                         <img class="upload_img" src="">
                                         {else /}
                                         <img class="upload_img " src="public_uploads/{$info.background_img}" />
@@ -145,7 +138,7 @@
                         </td>
                     </tr>
                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>场景主图:</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景主图:</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <!--<p> 加载编辑器的容器 </p>-->
                             <script id="main_img" type="text/plain">
@@ -159,7 +152,6 @@
                         <td height=60 width="50%" align=center>
                             <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
                             &nbsp;&nbsp;
-                            <input class="button_save_black" name="add0" value="返回" type="button">
                         </td>
                     </tr>
                     </tbody>
@@ -192,7 +184,7 @@
             main_img.ready(function() {
                 main_img.setContent($('#mainImg').val());
             });
-            //确定
+            // 表单认证
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
                 //主图
@@ -202,12 +194,39 @@
 
                 });
 
+                var content='';
+                if(!postData.name){
+                    content='场景名称不能为空';
+                }else if(!parseInt(sum(postData.belong_to))){
+                    content='至少要选择一个场景归属';
+                }else if(!postData.row_number){
+                    content='场景数量不能为空';
+                }else if(!postData.group){
+                    content='场景分组不能为空';
+                }else if(!postData.thumb_img){
+                    content='缩略图不能为空';
+                }else if(!postData.logo_img){
+                    content='品牌LOGO不能为空';
+                }else if(!postData.main_img){
+                    content='场景主图不能为空';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+
                 var url = module +'Scene/edit';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
-                        location.href = controller + 'manage';
+                        if(msg.status){
+                            // 提交后关闭，然后刷新父窗口
+                            var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                            //window.parent.location.reload();
+                        }
                     });
                 });
+
             });
             // 选择单图片
             $('body').on('change','.uploadSingleImg',function () {
@@ -259,6 +278,15 @@
             //返回
             $('.button_save_black').click(function(){
                 location.href = controller + '/manage';
+            });
+
+            $('document').ready(function(){
+                // 选择默认值
+                var i = '{$info.id}';
+                if(!i.length){
+                    $("input[name='belong_to']:first").attr('checked','checked');
+                    $("input[name='type']:first").attr('checked','checked');
+                }
             });
 
         });

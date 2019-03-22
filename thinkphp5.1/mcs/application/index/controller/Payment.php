@@ -158,9 +158,6 @@ class Payment extends \common\controller\UserBase{
 
    //支付完跳转的页面
     public function payComplete(){
-        $arr = $_GET;
-        $model = new \common\component\payment\alipay\alipay;
-        $result = $model->check($arr);
         return $this->fetch();
     }
     //取消支付完跳转的页面

@@ -21,8 +21,8 @@
             <div class="page-container">
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
 			<span class="l">
-				<a class="btn btn-primary radius" id="add-scene-sort" data-id="{$scene.id}" href="javascript:;">
-				<i class="Hui-iconfont">&#xe600;</i> 添加商品分类</a>
+				<a class="btn btn-primary radius" id="edit-scene-sort" data-id="{$scene.id}" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i> 关联商品分类</a>
 			</span>
                     <span class="r">共有数据：<strong id="count">{:count($sceneCategoryList)}</strong> 条
 			</span>
@@ -32,7 +32,7 @@
                         <thead>
                         <tr class="text-c">
                             <th width="10%">排序</th>
-                            <th width="20%">名称</th>
+                            <th width="20%">分类名称</th>
                             <th width="40%">说明</th>
                             <th width="40%">操作</th>
                         </tr>
@@ -81,6 +81,7 @@
                     $.ajax({
                         url:url,
                         data:postData,
+                        method:'post',
                         beforeSend:function(){
                            
                         },
@@ -101,7 +102,7 @@
             });
         });
         // 关联商品分类
-        $("#add-scene-sort").click(function () {
+        $("#edit-scene-sort").click(function () {
             var id  = $(this).data('id');
             var url = controller + 'editSceneSort/'+'id/'+id;
             var index = layer.open({

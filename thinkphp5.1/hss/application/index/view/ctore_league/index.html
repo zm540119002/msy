@@ -47,10 +47,10 @@
 	</section>
 	<section class="module-navigation separation-line ">
 		<div class="columns_flex f20 channel_nav store_organize_nav">
-			<a href="" class="deployed-deployment current"><span class="union_purchase"></span>采购商城</a>
+			<a href="javascript:void(0);" class="deployed-deployment current"><span class="union_purchase"></span>采购商城</a>
 			<a href="javascript:void(0);" class="store_run"><span class="exclusive"></span>入驻设置</a>
 			<a href="{:url('store/Operation/index')}" class="order-management"><span class="classify"></span>创客管理</a>
-			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>订单管理</a>
+			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>签约工作室</a>
 			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>C端商城</a>
 		</div>
 	</section>
@@ -60,8 +60,6 @@
 			<div>
 				<div class="scroll_news">
 					<a class="news_tit">
-						美创会头条
-						<!--<img src="public_img/wy_logo.png" alt="">-->
 					</a>
 					<div class="news_list_wrapper">
 						<ul class="news_list j_scroll_news">
@@ -110,18 +108,18 @@
 					</div>
 				</div>
 			</section>
-			<!--优惠广告入口end-->
+
 			<div class="scene_wrapper">
 				{volist name="sceneLists" id="lists" }
-				{volist name="lists" id="list" }
-				<div class="columns_flex l-r-sides" >
-					{volist name="list" id="vo" }
-					<a href="{:url(request()->controller().'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
-						<img src="public_uploads/{$vo.thumb_img}" alt="">
-					</a>
+					{volist name="lists" id="list" }
+					<div class="columns_flex l-r-sides" >
+						{volist name="list" id="vo" }
+						<a href="{:url(request()->controller().'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
+							<img src="public_uploads/{$vo.thumb_img}" alt="">
+						</a>
+						{/volist}
+					</div>
 					{/volist}
-				</div>
-				{/volist}
 				{/volist}
 			</div>
 			<div class="project_wrapper">
@@ -147,24 +145,22 @@
 			<li class="each_column">
 				<a href="{:url('Index/index')}">
 					<span class="store f_icon"></span>
-					<span class="f_txt">美创会</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<!--{:url('Company/index')}-->
-				<a href="{:url('CenterStore/index')}" >
-					<span class="practitioners f_icon "></span>
-					<span class="f_txt">中心店</span>
+					<span class="f_txt">采购商城</span>
 				</a>
 			</li>
 			<li class="each_column current">
-				<!--{:url('Consultation/index')}-->
-				<a href="javascript:void(0)">
-					<span class="business f_icon"></span>
-					<span class="f_txt">工作室</span>
+				<a href="javascript:void(0)" >
+					<span class="practitioners f_icon "></span>
+					<span class="f_txt">StoreLeague</span>
 				</a>
 			</li>
-			<li class="each_column ">
+			<li class="each_column">
+				<a href="{:url('CityPartner/index')}">
+					<span class="business f_icon"></span>
+					<span class="f_txt">城市合伙人</span>
+				</a>
+			</li>
+			<li class="each_column">
 				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
 					<span class="cart f_icon"></span>
 					<span class="f_txt">采购车</span>
@@ -195,7 +191,7 @@
 	var postData = {
 		pageSize:10,
 		pageType:'index',
-		belong_to:2
+		belong_to:1
 	};
 	$(function(){
 		//轮播

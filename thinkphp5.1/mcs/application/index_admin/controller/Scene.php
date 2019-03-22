@@ -1,7 +1,8 @@
 <?php
 namespace app\index_admin\controller;
 
-/**供应商验证控制器基类
+/**
+ * 场景控制器基类
  */
 class Scene extends Base {
 
@@ -11,25 +12,46 @@ class Scene extends Base {
     }
 
     /**
+     * (查询 :增加 OR 修改) OR 提交 做
      * @return array
-     * 审核
      */
     public function edit(){
 
         $model = new \app\index_admin\model\Scene();
-        if(request()->isPost()){
+        if(!request()->isPost()){
+            if($id = input('param.id/d')){
+                $model = new \app\index_admin\model\Scene();
+                $config = [
+                    'where' => [
+                        ['id','=',$id]
+                    ],
+                ];
+                $info = $model->getInfo($config);
+                // 选中的店铺
+                $info['belong_to'] = strrev(decbin($info['belong_to']));
+                $this->assign('info',$info);
+            }
+            return $this->fetch();
+
+        }
+        else{
+
+            if(!input('param.name/s')){
+                return errorMsg('失败');
+            }
+
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['thumb_img']));
             }
             if(  isset($_POST['background_img']) && $_POST['background_img'] ){
-                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($_POST['background_img']));
+                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['background_img']));
             }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_scene'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
@@ -38,7 +60,7 @@ class Scene extends Base {
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
 
             // 后面改进
-            if(isset($_POST['type']) &&$_POST['type']){
+            if( isset($_POST['type'])&&$_POST['type'] ){
                 switch($_POST['type']){
                     case 2:$template = 'sort'   ;break;
                     case 3:$template = 'project';break;
@@ -49,17 +71,25 @@ class Scene extends Base {
             }
 
             $data = $_POST;
+            $data['update_time'] = time();
+            $data['audit'] = 1; // 暂时没有审核，先固定
 
-            if(isset($_POST['id']) && intval($_POST['id'])){//修改
+            if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
                 $config = [
-                    'where' => [
-                        'id' => input('post.id',0,'int'),
-                        'status' => 0,
-                    ],
+                    'where' => ['id' => $id,],
                 ];
+
+                $where = [
+                    'id'=>$id
+                ];
+                $result = $model -> allowField(true) -> save($data,$where);
+                if(false === $result){
+                    return errorMsg('失败');
+                }
+
                 $info = $model->getInfo($config);
-                //删除就图片
+                //删除旧图片
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
@@ -75,43 +105,78 @@ class Scene extends Base {
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
-                $where = [
-                    'id'=>input('post.id',0,'int')
-                ];
-                $data['update_time'] = time();
-                $result = $model -> allowField(true) -> save($data,$where);
-                if(false === $result){
-                    return errorMsg('失败');
-                }
-            }else{//新增
+
+            }
+            else{//新增
                 $data['create_time'] = time();
                 $result = $model -> allowField(true) -> save($data);
                 if(!$result){
-                    $model ->rollback();
                     return errorMsg('失败');
                 }
 
             }
             return successMsg('成功');
-        }else{
-            //要修改的商品
-            if(input('?id') && (int)input('id')){
-                $config = [
-                    'where' => [
-                        'status' => 0,
-                        'id'=>input('id',0,'int'),
-                    ],
-                ];
-                $info = $model->getInfo($config);
-
-                // 选中的店铺
-                $info['belong_to'] = strrev(decbin($info['belong_to']));
-
-                $this->assign('info',$info);
-            }
-
-            return $this->fetch();
        }
+    }
+
+    /**
+     * 单字段设置
+     */
+    public function setInfo(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $info= array();
+        // 上下架
+        if ($shelf_status = input('post.shelf_status/d')){
+            $shelf_status = $shelf_status==1 ? 3 : 1 ;
+
+            $info = ['shelf_status'=>$shelf_status];
+        }
+
+        $model = new \app\index_admin\model\Scene();
+        $rse = $model->where(['id'=>$id])->setField($info);
+
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
+     * 单字段设置 scene_scheme 表
+     */
+    public function setSceneSchemeInfo(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $info= array();
+
+        if ($show_name = input('post.show_name/d')){
+            $show_name = $show_name==1 ? 2 : 1 ;
+
+            $info = ['show_name'=>$show_name];
+        }
+
+        $model = new \app\index_admin\model\SceneScheme();
+        $rse = $model->where(['id'=>$id])->setField($info);
+
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
     }
 
     /**
@@ -120,28 +185,30 @@ class Scene extends Base {
     public function getList(){
         $model = new \app\index_admin\model\Scene();
         $where = [];
-        $where[] = ['s.status','=',0];
-        if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where[] = ['s.category_id_1','=',input('get.category_id_1',0,'int')];
+        $where[] = ['status','=',0];
+        if(isset($_GET['belong_to']) && intval($_GET['belong_to'])){
+            $where[] = ['belong_to','=',input('get.belong_to',0,'int')];
         }
-        if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where[] = ['s.category_id_2','=',input('get.category_id_2',0,'int')];
+        if(isset($_GET['type']) && intval($_GET['type'])){
+            $where[] = ['type','=',input('get.type',0,'int')];
         }
-        if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where[] = ['s.category_id_3','=',input('get.category_id_3',0,'int')];
+        if(isset($_GET['shelf_status']) && intval($_GET['shelf_status'])){
+            $where[] = ['shelf_status','=',input('get.shelf_status',0,'int')];
         }
+
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where[] = ['s.name','like', '%' . trim($keyword) . '%'];
+            $where[] = ['name','like', '%' . trim($keyword) . '%'];
         }
+
         $config = [
             'where'=>$where,
             'field'=>[
-                's.id','s.name','s.thumb_img','s.main_img','s.intro','s.shelf_status','s.sort','s.create_time','s.is_selection','s.type','s.belong_to'
+                'id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','type','belong_to','group'
             ],
             'order'=>[
-                's.sort'=>'desc',
-                's.id'=>'desc',
+                'sort'=>'desc',
+                'id'=>'desc',
             ],
         ];
 
@@ -149,10 +216,11 @@ class Scene extends Base {
 
         $info['belong_to'] = strrev(decbin($list['belong_to']));
         $this->assign('list',$list);
-        if($_GET['pageType'] == 'manage'){
+        //if($_GET['pageType'] == 'manage'){
             return view('list_tpl');
-        }
+        //}
     }
+
     /**
      * @return array|mixed
      * 删除
@@ -161,99 +229,76 @@ class Scene extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scene();
+
         $id = input('post.id/d');
+
+        // 软删除
+        $condition = array();
+        $where     = array();
         if(input('?post.id') && $id){
             $condition = [
-                ['id','=',$id]
+                'where' => [
+                    ['id','=',$id]
+                ],/*'field' => [
+                    'thumb_img','main_img','background_img','logo_img'
+                ]*/
+            ];
+            $where = [
+                ['scene_id','=',$id]
             ];
         }
         if(input('?post.ids')){
             $ids = input('post.ids/a');
             $condition = [
-                ['id','in',$ids]
+                'where' => [
+                    ['id','in',$ids]
+                ],/*'field' => [
+                    'thumb_img','main_img','background_img','logo_img'
+                ]*/
             ];
-        }
-        return $model->del($condition);
-    }
 
-    /**
-     * 上下架
-     */
-    public function setShelfStatus(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
+            $where = [
+                ['scene_id','in',$ids]
+            ];
+
         }
-        $model = new \app\index_admin\model\Scene();
-        $id = input('post.id/d');
-        if(!input('?post.id') && !$id){
+        // 删除关联记录，暂时没有好的方法先这样做.
+        $model = new \app\index_admin\model\SceneScheme();
+
+        // 事务
+        $model->startTrans();
+
+        try {
+            $model->del($where,false);
+            $model = new \app\index_admin\model\SceneGoods();
+            $model->del($where,false);
+            $model = new \app\index_admin\model\SceneGoodsCategory();
+            $model->del($where,false);
+            $model = new \app\index_admin\model\Scene();
+            $result= $model->del($condition['where']);
+
+            $model->commit();
+            return $result;
+
+        } catch (\Exception $e) {
+            // 回滚事务
+            $model->rollback();
             return errorMsg('失败');
         }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
-        if(!$rse){
-            return errorMsg('失败');
-        }
-        return successMsg('成功');
-    }
 
-    /**
-     * 设置精选
-     */
-    public function setSelection(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-        $model = new \app\index_admin\model\Scene();
-        $id = input('post.id/d');
-        if(!input('?post.id') && !$id){
-            return errorMsg('失败');
-        }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
-        if(!$rse){
-            return errorMsg('失败');
-        }
-        return successMsg('成功');
-    }
-
-    /**
-     * 添加OR修改场景下相关的商品分类
-     *
-     */
-    public function editSceneSort(){
-
-        if(request()->isPost()){
-
-            $cat_ids  = input('post.ids/a');
-            $scene_id = input('post.scene_id/d');
-
-            if (!$scene_id){
-                $this ->error('参数有误',url('manage'));
-            }
-
-            if ($cat_ids){
-                foreach($cat_ids as $k => $v){
-                    if ((int)$v){
-                        $data = ['scene_id'=>$scene_id,'goods_category_id'=>$v];
-
-                        // 先删后增 -保证唯一
-                        $model = new \app\index_admin\model\SceneGoodsCategory();
-                        $model -> where($data)->delete();
-                        $model -> allowField(true) -> save($data);
-                    }
+        // 删除图片
+/*        $list  = $model->getList($condition);
+        $result= $model->del($condition['where'],false);
+        if($result){
+            //删除商品主图
+            foreach($list as $k => $v){
+                if($v){
+                    delImg($v);
                 }
             }
-            return successMsg('成功');
-
-        }else{
-
-            // 后面的页面需要场景id
-            if(!$id = input('param.id/d')){
-                $this ->error('参数有误',url('manage'));
-            }
-
-            $this->assign('id',$id);
-            return $this->fetch();
         }
+
+        return $result;*/
     }
 
     /**
@@ -350,7 +395,6 @@ class Scene extends Base {
         }
     }
 
-
     /**
      * 场景下的商品分类
      */
@@ -361,20 +405,21 @@ class Scene extends Base {
         }
         $sceneModel = new \app\index_admin\model\Scene();
 
-        $config = [
+        $condition = [
             'where'=>[
                 ['id','=',$id],
             ],'field'=>[
                 'id','name'
             ]
         ];
-        $scene = $sceneModel->getInfo($config);
+        $scene = $sceneModel->getInfo($condition);
         $this->assign('scene',$scene);
 
         $model = new \app\index_admin\model\SceneGoodsCategory();
-        $config = [
+        $condition = [
             'where'=>[
                 ['gc.status','=',0],
+                ['sgc.scene_id','=',$id],
             ],'field' => [
                 'sgc.id','gc.name','gc.sort','gc.remark'
             ],'join'  => [
@@ -383,12 +428,181 @@ class Scene extends Base {
                 'sort'=> 'desc'
             ]
         ];
-        $sceneCategoryList = $model->getList($config);
+
+        $sceneCategoryList = $model->getList($condition);
         $this->assign('sceneCategoryList',$sceneCategoryList);
 
         $this->assign('id',$id);
 
         return $this->fetch();
+    }
+
+    /**
+     * 修改场景下的商品分类
+     *
+     */
+    public function editSceneSort(){
+
+        if(request()->isPost()){
+
+            $cat_ids  = input('post.ids/a');
+            $scene_id = input('post.scene_id/d');
+
+            if (!$scene_id){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            if ($cat_ids){
+                foreach($cat_ids as $k => $v){
+                    if ((int)$v){
+                        $data = ['scene_id'=>$scene_id,'goods_category_id'=>$v];
+
+                        // 先删后增 -保证唯一
+                        $model = new \app\index_admin\model\SceneGoodsCategory();
+                        $model -> where($data)->delete();
+                        $model -> allowField(true) -> save($data);
+                    }
+                }
+            }
+            return successMsg('成功');
+
+        }else{
+
+            // 后面的页面需要场景id
+            if(!$id = input('param.id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 取消场景的商品分类
+     */
+    public function delSceneGoodsCategory(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id = input('post.id/d');
+
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $model = new \app\index_admin\model\SceneGoodsCategory();
+
+        $condition = [
+            ['id','=',$id],
+        ];
+
+        return $model->del($condition,false);
+
+    }
+
+    /**
+     * 场景下的方案
+     */
+    public function manageSceneScheme(){
+        // 查询
+        if(!$id = input('id/d')){
+            $this ->error('参数有误',url('manage'));
+        }
+        $sceneModel = new \app\index_admin\model\Scene();
+
+        $condition = [
+            'where'=>[
+                ['id','=',$id],
+            ],'field'=>[
+                'id','name'
+            ]
+        ];
+        $scene = $sceneModel->getInfo($condition);
+        $this->assign('scene',$scene);
+
+        $model = new \app\index_admin\model\SceneScheme();
+        $condition = [
+            'where'=>[
+                ['ss.status','=',0],
+                ['ss.scene_id','=',$id],
+            ],'field' => [
+                's.id scheme_id','s.name','s.thumb_img','s.sort','s.shelf_status','ss.id ','ss.show_name'
+            ],'join'  => [
+                ['scheme s','ss.scheme_id=s.id','left']
+            ],'order' => [
+                'sort'=> 'desc'
+            ]
+        ];
+        $list = $model->pageQuery($condition);
+        $this->assign('list',$list);
+        //return $list;
+        //return view();
+        return $this->fetch();
+    }
+
+    /**
+     * 修改场景下的方案
+     */
+    public function editSceneScheme(){
+
+        if(request()->isPost()){
+
+            $ids  = input('post.ids/a');
+            $scene_id = input('post.scene_id/d');
+
+            if (!$scene_id){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            if ($ids){
+                foreach($ids as $k => $v){
+                    if ((int)$v){
+                        $data = ['scene_id'=>$scene_id,'scheme_id'=>$v];
+
+                        // 先删后增 -保证唯一
+                        $model = new \app\index_admin\model\SceneScheme();
+                        $model -> where($data)->delete();
+                        $model -> allowField(true) -> save($data);
+                    }
+                }
+            }
+            return successMsg('成功');
+
+        }else{
+
+            // 后面的页面需要场景id
+            if(!$id = input('param.id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 取消关联的方案
+     */
+    public function delSceneScheme(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id = input('post.id/d');
+
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $model = new \app\index_admin\model\SceneScheme();
+
+        $condition = [
+            ['id','=',$id],
+        ];
+
+        return $model->del($condition,false);
     }
 
     /**
@@ -454,28 +668,6 @@ class Scene extends Base {
     }
 
 
-    /**
-     * 删除场景的商品分类
-     */
-    public function delSceneGoodsCategory(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
 
-        $id = input('post.id/d');
-
-        if (!$id){
-            return errorMsg('失败');
-        }
-
-        $model = new \app\index_admin\model\SceneGoodsCategory();
-
-        $condition = [
-            ['id','=',$id],
-        ];
-
-        return $model->del($condition,false);
-
-    }
 
 }

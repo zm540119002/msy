@@ -58,7 +58,6 @@ $(function () {
         var incrementObj={};
         incrementObj.order_quantity=$(this).siblings('.minimum_order_quantity').val();
         incrementObj.increase_quantity=$(this).siblings('.increase_quantity').val();
-        console.log(incrementObj);
         //单个商品数量自加
         goodsNumPlus($(this),incrementObj);
         //计算商品列表总价

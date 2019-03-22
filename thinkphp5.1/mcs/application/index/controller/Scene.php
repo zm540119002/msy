@@ -1,6 +1,9 @@
 <?php
 namespace app\index\controller;
 
+/**
+ * 场景控制器
+ */
 class Scene extends \common\controller\Base{
     /**首页
      */
@@ -120,6 +123,7 @@ class Scene extends \common\controller\Base{
             $config = [
                 'where' => [
                     ['group','=',$scene['group']],
+                    ['group','>',0],
                 ],
                 'order' => [
                     'sort' => 'desc',
@@ -152,8 +156,9 @@ class Scene extends \common\controller\Base{
                 'where' => [
                     ['ss.status', '=', 0],
                     ['ss.scene_id', '=', $id],
+                    ['s.shelf_status', '=', 3],
                 ],'field'=>[
-                    's.id','s.name','s.thumb_img'
+                    's.id','s.name','s.thumb_img','ss.show_name'
                 ],'join'=>[
                     ['scheme s','s.id = ss.scheme_id','left']
                 ]
@@ -258,7 +263,7 @@ class Scene extends \common\controller\Base{
             $config = [
                 'where'  => [
                     ['status', '=', 0],
-                    ['shelf_status', '=', 1],
+                    ['shelf_status', '=', 3],
                     ['audit', '=', 1],
                     ['belong_to','exp','& 1'],
                 ],'field'=> [

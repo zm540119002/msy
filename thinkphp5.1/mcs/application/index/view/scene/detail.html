@@ -52,10 +52,10 @@
 		{notempty name="schemeList"}
 			{volist name="schemeList" id="info"}
 				<div class="apply_item">
-					{if !empty($info.name)}
+					{if $info.show_name==1}
 						<span class="content-label">{$info.name}</span>
 					{/if}
-					<a href="{$info.id}">
+					<a data-id="{$info.id}">
 						<img src="public_uploads/{$info.thumb_img}" alt="">
 					</a>
 				</div>
