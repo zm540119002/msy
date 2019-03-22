@@ -18,14 +18,7 @@ class UserCenter extends Base {
 		$field = [
 			'status',
 		];
-		$returnData = '';
 		$user = $this->where($where)->field($field)->find();
-//		if(!$user){
-//			$returnData = '账号不存在';
-//		}elseif($user['status']==1){
-//			$returnData = '账号异常，请申诉';
-//		}
-
 		return $user;
 	}
 
