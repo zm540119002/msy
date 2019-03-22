@@ -41,12 +41,13 @@
 				<div class="upload-picture-module f24">
 					<div>
 						<div class="picture-module">
-							<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="">
+							<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="0">
 							<img class="upload_img" src="" alt="">
 							<input type="hidden" class="business-license img"  value=""/>
 						</div>
 					</div>
 				</div>
+				<ul class="upload-picture-module multi-picture-module"></ul>
 			</div>
 		</form>
 	</section>
@@ -77,8 +78,28 @@
 		});
 		//提交评价
 		$('body').on('click','.submit',function () {
+			$('.my_fraction').data('score','');
+			var score=$('.my_fraction').data('score');
+			var commenText=$('.text_description').val();
+			$.each($('.multi-picture-module li'),function(){
+				var _this=$(this);
+				var commentImg=[];
+				commentImg.push(_this.find('img').attr('src'));
+			})
+		    var postData={};
+			postData.score=score;
+			postData.commenText=commenText;
+			postData.commentImg=commentImg;
+			console.log(postData);
+			return false;
+			$.ajax({
+				url:,
+				type:'post',
+				data:postData,
+				success:function(){
 
-
+				}
+			})
             var url =  module + 'Mine/index';
             location.href = url;
         });

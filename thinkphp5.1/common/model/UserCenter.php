@@ -18,14 +18,8 @@ class UserCenter extends Base {
 		$field = [
 			'status',
 		];
-		$returnData = '';
 		$user = $this->where($where)->field($field)->find();
-		if(!$user){
-			$returnData = '账号不存在';
-		}elseif($user['status']==1){
-			$returnData = '账号异常，请申诉';
-		}
-		return $returnData;
+		return $user;
 	}
 
 	/**登录
@@ -38,10 +32,12 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('login')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
-			$res = $this->loginCheck($data['mobile_phone']);
-			if($res){
-				return errorMsg($res);
-			}
+			$user = $this->loginCheck($data['mobile_phone']);
+			if(empty($user)){
+				return errorMsg('账号不存在');
+			}elseif ($user['status'] ==1){
+                return errorMsg('账号异常');
+            }
 			return $this->_login($data['mobile_phone'],$data['password']);
 		}else{
 			return errorMsg('登录信息不完善！');
@@ -74,8 +70,8 @@ class UserCenter extends Base {
 		if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 			return errorMsg('验证码错误，请重新获取验证码！');
 		}
-		$res = $this->registerCheck($data['mobile_phone']);
-		if($res){
+		$user = $this->registerCheck($data['mobile_phone']);
+		if($user){
 			return errorMsg('该手机号码已被注册，请更换手机号码，谢谢！');
 		}
 		$validateUser = new \common\validate\User();
@@ -99,19 +95,27 @@ class UserCenter extends Base {
 			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 				return errorMsg('验证码错误，请重新获取验证码！');
 			}
-			$res = $this->loginCheck($data['mobile_phone']);
-			if($res){
-				return errorMsg($res);
-			}
-			$saveData['salt'] = create_random_str(10,0);//盐值
-			$saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
-			$where = array(
-				'status' => 0,
-				'mobile_phone' => $data['mobile_phone'],
-			);
-			$response = $this->where($where)->update($saveData,$where);
+            $user = $this->loginCheck($data['mobile_phone']);
+            if($user['status']==1){
+                return errorMsg('账号异常，请申诉');
+            }
+
+			if(empty($user)){
+                $saveData['salt'] = create_random_str(10,0);//盐值
+                $saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
+                $saveData['mobile_phone'] = $data['mobile_phone'];
+                $response = $this->save($saveData);
+            }else{
+                $where = array(
+                    'status' => 0,
+                    'mobile_phone' => $data['mobile_phone'],
+                );
+                $updateData['salt'] = create_random_str(10,0);//盐值
+                $updateData['password'] = md5($updateData['salt'] . $data['password']);//加密
+                $response = $this->where($where)->update($updateData,$where);
+            }
 			if(!$response){
-				return errorMsg('重置失败！');
+				return errorMsg('失败！');
 			}
 			return $this->_login($data['mobile_phone'],$data['password']);
 		}

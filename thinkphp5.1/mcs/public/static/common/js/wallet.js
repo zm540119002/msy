@@ -156,8 +156,9 @@ function forgetWalletPasswordDialog(opt){
                         layer.closeAll();
                         return false;
                     }else{
-                        layer.closeAll();
-                        walletPayDialog();
+                        dialog.success(data.info,module + 'Wallet/recharge');
+       /*                 layer.closeAll();
+                        walletPayDialog();*/
                     }
                 }
                 if(!data.status){
