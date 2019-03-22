@@ -1,6 +1,9 @@
 <?php
 namespace app\index\controller;
 
+/**
+ * 场景控制器
+ */
 class Scene extends \common\controller\Base{
     /**首页
      */
@@ -260,7 +263,7 @@ class Scene extends \common\controller\Base{
             $config = [
                 'where'  => [
                     ['status', '=', 0],
-                    ['shelf_status', '=', 1],
+                    ['shelf_status', '=', 3],
                     ['audit', '=', 1],
                     ['belong_to','exp','& 1'],
                 ],'field'=> [

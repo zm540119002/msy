@@ -39,6 +39,7 @@
                                     <input type="radio" name="type" value="{$k}">{$vo}
                                     {/if}
                                 {/volist}
+                                <span class="c-red">*</span>类型为项目时，品牌LOGO、场景主图将不在前台显示 !
                             </div>
                         </td>
                     </tr>
@@ -123,9 +124,9 @@
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                             <div class="upload-picture-module f24">
                                 <div>
-                                    <div class="picture-module">
+                                    <div class="picture-module" style="background:url(public_uploads/{$info.background_img});">
                                         <input type="file" class="uploadImg uploadSingleImg" name="">
-                                        {empty name="info.thumb_img"}
+                                        {empty name="info.background_img"}
                                         <img class="upload_img" src="">
                                         {else /}
                                         <img class="upload_img " src="public_uploads/{$info.background_img}" />
@@ -217,9 +218,12 @@
                 var url = module +'Scene/edit';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
-                        // 提交后关闭，然后刷新父窗口
-                        layer.close(layer.index);
-                        window.parent.location.reload();
+                        if(msg.status){
+                            // 提交后关闭，然后刷新父窗口
+                            var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                            //window.parent.location.reload();
+                        }
                     });
                 });
 

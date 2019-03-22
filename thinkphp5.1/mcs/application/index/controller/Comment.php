@@ -1,6 +1,9 @@
 <?php
 namespace app\index\controller;
 
+/**
+ * 评价
+ */
 class Comment extends \common\controller\Base{
     /**首页
      */
@@ -11,6 +14,13 @@ class Comment extends \common\controller\Base{
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
+    }
+
+    /**
+     *
+     */
+    public function add(){
+
     }
 
     /**

@@ -72,14 +72,22 @@ class Scene extends Base {
 
             $data = $_POST;
             $data['update_time'] = time();
+            $data['audit'] = 1; // 暂时没有审核，先固定
 
-            if(isset($_POST['id']) && intval($_POST['id'])){ //修改
+            if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
                 $config = [
-                    'where' => [
-                        'id' => input('post.id',0,'int'),
-                    ],
+                    'where' => ['id' => $id,],
                 ];
+
+                $where = [
+                    'id'=>$id
+                ];
+                $result = $model -> allowField(true) -> save($data,$where);
+                if(false === $result){
+                    return errorMsg('失败');
+                }
+
                 $info = $model->getInfo($config);
                 //删除旧图片
                 if($info['thumb_img']){
@@ -97,19 +105,12 @@ class Scene extends Base {
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
-                $where = [
-                    'id'=>input('post.id',0,'int')
-                ];
-                $result = $model -> allowField(true) -> save($data,$where);
-                if(false === $result){
-                    return errorMsg('失败');
-                }
+
             }
             else{//新增
                 $data['create_time'] = time();
                 $result = $model -> allowField(true) -> save($data);
                 if(!$result){
-                    $model ->rollback();
                     return errorMsg('失败');
                 }
 
@@ -191,8 +192,8 @@ class Scene extends Base {
         if(isset($_GET['type']) && intval($_GET['type'])){
             $where[] = ['type','=',input('get.type',0,'int')];
         }
-        if(isset($_GET['shelf-status']) && intval($_GET['shelf-status'])){
-            $where[] = ['shelf_status','=',input('get.shelf-status',0,'int')];
+        if(isset($_GET['shelf_status']) && intval($_GET['shelf_status'])){
+            $where[] = ['shelf_status','=',input('get.shelf_status',0,'int')];
         }
 
         $keyword = input('get.keyword','','string');
@@ -228,11 +229,12 @@ class Scene extends Base {
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scene();
+
         $id = input('post.id/d');
 
         // 软删除
         $condition = array();
+        $where     = array();
         if(input('?post.id') && $id){
             $condition = [
                 'where' => [
@@ -240,6 +242,9 @@ class Scene extends Base {
                 ],/*'field' => [
                     'thumb_img','main_img','background_img','logo_img'
                 ]*/
+            ];
+            $where = [
+                ['scene_id','=',$id]
             ];
         }
         if(input('?post.ids')){
@@ -251,9 +256,35 @@ class Scene extends Base {
                     'thumb_img','main_img','background_img','logo_img'
                 ]*/
             ];
-        }
 
-        return $model->del($condition['where']);
+            $where = [
+                ['scene_id','in',$ids]
+            ];
+
+        }
+        // 删除关联记录，暂时没有好的方法先这样做.
+        $model = new \app\index_admin\model\SceneScheme();
+
+        // 事务
+        $model->startTrans();
+
+        try {
+            $model->del($where,false);
+            $model = new \app\index_admin\model\SceneGoods();
+            $model->del($where,false);
+            $model = new \app\index_admin\model\SceneGoodsCategory();
+            $model->del($where,false);
+            $model = new \app\index_admin\model\Scene();
+            $result= $model->del($condition['where']);
+
+            $model->commit();
+            return $result;
+
+        } catch (\Exception $e) {
+            // 回滚事务
+            $model->rollback();
+            return errorMsg('失败');
+        }
 
         // 删除图片
 /*        $list  = $model->getList($condition);

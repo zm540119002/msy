@@ -117,8 +117,8 @@ class Order extends \common\controller\UserBase
                 $modelOrder->rollback();
                 return errorMsg('失败');
             }
-            //根据订单号查询关联的购物车的商品 删除
-            $modelOrderDetail = new \app\index\model\OrderDetail();
+            //根据订单号查询关联的购物车的商品 删除  订单待付款后再删除
+   /*         $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
                 'where' => [
                     ['od.status', '=', 0],
@@ -140,7 +140,7 @@ class Order extends \common\controller\UserBase
                     $modelOrder->rollback();
                     return errorMsg('删除失败');
                 }
-            }
+            }*/
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
@@ -195,7 +195,7 @@ class Order extends \common\controller\UserBase
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $payOpenId =  session('pay_open_id');
             if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
+                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
             }
@@ -338,6 +338,7 @@ class Order extends \common\controller\UserBase
         $data = [
             'order_status' => $orderStatus,
         ];
+
         $rse = $model->where($where)->setField($data);
         if(!$rse){
             return errorMsg('失败');
@@ -390,7 +391,7 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id','=',$item['id']]
                 ],
                 'field'=>[
-                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
+                    'od.goods_id','od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                     'g.name','g.thumb_img',
                 ],
                 'join'=>[

@@ -6203,3 +6203,6 @@ div.no_data{
     padding:0.15rem;
     border-bottom:1px solid #d9d9d9;
 }
+.project_item video,.project_item p img{
+    width:100%;
+}
