@@ -78,7 +78,7 @@ class Payment extends \common\controller\UserBase{
             if($walletInfo['amount'] < $orderInfo['actually_amount']){
                 $modelOrder->rollback();
                 //返回状态给微信服务器
-                return errorMsg('余额不够',['code'=>2]);
+                return errorMsg('余额不足，请先充值',['code'=>2]);
             }
             $modelOrder ->startTrans();
             $modelWalletDetail = new \app\index\model\WalletDetail();

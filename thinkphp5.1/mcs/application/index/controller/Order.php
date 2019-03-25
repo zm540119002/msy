@@ -194,8 +194,6 @@ class Order extends \common\controller\UserBase
     public function toPay()
     {
 
-        //echo $this->user['id'];
-        //exit;
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             //$payOpenId =  session('pay_open_id');
             // 微信支付有问题 暂不用
