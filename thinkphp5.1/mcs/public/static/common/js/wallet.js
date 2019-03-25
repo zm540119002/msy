@@ -158,7 +158,7 @@ function forgetWalletPasswordDialog(opt,jump_url){
                         dialog.success('设置成功');
 
                         if(jump_url){
-                            setTimeout(jumpUrl,2000);
+                            setTimeout(jumpUrl,1000);
                             function jumpUrl() {
                                 location.href = jump_url;
                             }
