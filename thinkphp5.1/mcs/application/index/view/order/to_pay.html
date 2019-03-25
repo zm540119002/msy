@@ -130,7 +130,7 @@
             var voucher=$('.bankTransferLayer').find('.img').val();
             postData.voucher=voucher;
             var content='';
-            console.log(voucher);
+
             if(!postData.voucher){
                 content='请上传转账凭证';
             }
@@ -146,6 +146,8 @@
         $('body').on('click','.set_wallet_psd',function () {
             var type=$(this).data('type');
             var url = window.location.href;
+            console.log(url);
+            return false;
             forgetWalletPasswordDialog(type,url);
 
         });
