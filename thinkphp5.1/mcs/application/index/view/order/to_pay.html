@@ -145,8 +145,8 @@
         //设置钱包支付密码
         $('body').on('click','.set_wallet_psd',function () {
             var type=$(this).data('type');
-
-            forgetWalletPasswordDialog(type,window.location.pathname);
+            var url = window.location.href;
+            forgetWalletPasswordDialog(type,url);
 
         });
     });
