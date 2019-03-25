@@ -67,9 +67,9 @@ class UserCenter extends Base {
 		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
 		$data['captcha'] = trim($data['captcha']);
-/*		if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
+		if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
 			return errorMsg('验证码错误，请重新获取验证码！');
-		}*/
+		}
 		$user = $this->registerCheck($data['mobile_phone']);
 		if($user){
 			return errorMsg('该手机号码已被注册，请更换手机号码，谢谢！');
