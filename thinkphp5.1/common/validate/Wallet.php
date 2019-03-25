@@ -12,6 +12,7 @@ class Wallet extends \think\Validate
         ],
         'captcha'  => [
             'regex' => '/^\d{6}$/',
+            'require',
         ],
         'name'  => [
             'require', 'max' => 25,
@@ -21,6 +22,7 @@ class Wallet extends \think\Validate
         ],
         'password'  => [
             'regex' => '^\d{6}$',
+            'require'
         ],
     ];
     
@@ -34,7 +36,9 @@ class Wallet extends \think\Validate
         'nickname.require' => '昵称必须！',
         'nickname.max' => '昵称超出长度！',
         'captcha.regex' => '验证码格式错误！',
+        'captcha.require' => '验证码格式错误！',
         'password.regex' => '密码格式错误！',
+        'password.require' => '密码格式错误！',
     ];
 
     //验证场景

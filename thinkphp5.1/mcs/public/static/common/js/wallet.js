@@ -80,7 +80,7 @@ $(function(){
 })
 
 //忘记钱包支付密码-弹窗触发
-function forgetWalletPasswordDialog(opt){
+function forgetWalletPasswordDialog(opt,jump_url){
     var content = $('#WalletPasswordHtml').html();
     layer.open({
         title:['重置/设置支付密码','border-bottom:1px solid #d9d9d9;'],
@@ -138,7 +138,7 @@ function forgetWalletPasswordDialog(opt){
                 password=password+$(oLis[i]).val();
             }
             postData.password = password;
-            console.log(postData)
+
             if(!register.vfyCheck(postData.captcha)){
                 content = "请输入正确的验证码";
             }else if(!postData.password&&postData.password.length<6){
@@ -148,23 +148,33 @@ function forgetWalletPasswordDialog(opt){
                 dialog.error(content);
                 return false;
             }
+
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
                 if(data.status){
                     //成功后弹出支付密码框
                     if(opt=='set'){
                         layer.closeAll();
+                        dialog.success('设置成功');
+
+                        if(jump_url){
+                            setTimeout(jumpUrl,1000);
+                            function jumpUrl() {
+                                location.href = jump_url;
+                            }
+                        }
+
                         return false;
                     }else{
-                        dialog.success(data.info,module + 'Wallet/recharge');
-       /*                 layer.closeAll();
-                        walletPayDialog();*/
+                        //dialog.success(data.info,module + 'Wallet/recharge');
+                        layer.closeAll();
+                        walletPayDialog();
                     }
                 }
                 if(!data.status){
                     dialog.success(data.info);
                 }
-            },'JSON')
+            },'JSON');
         }
     });
 }

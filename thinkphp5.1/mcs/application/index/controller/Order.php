@@ -119,7 +119,7 @@ class Order extends \common\controller\UserBase
                 return errorMsg('失败');
             }
             //根据订单号查询关联的购物车的商品 删除  订单待付款后再删除
-   /*         $modelOrderDetail = new \app\index\model\OrderDetail();
+            $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
                 'where' => [
                     ['od.status', '=', 0],
@@ -141,7 +141,7 @@ class Order extends \common\controller\UserBase
                     $modelOrder->rollback();
                     return errorMsg('删除失败');
                 }
-            }*/
+            }
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
@@ -194,8 +194,6 @@ class Order extends \common\controller\UserBase
     public function toPay()
     {
 
-        //echo $this->user['id'];
-        //exit;
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             //$payOpenId =  session('pay_open_id');
             // 微信支付有问题 暂不用
