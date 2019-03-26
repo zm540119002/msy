@@ -10,42 +10,6 @@ class Scene extends \common\controller\Base{
             return $this->fetch();
         }
     }
-    public function jiameng(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function yiqi(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function kaidian(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function qingsongtuoke(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function liukeshicao(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function suokefanglue(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
     /**
      * 查出产商相关产品 分页查询
      */
