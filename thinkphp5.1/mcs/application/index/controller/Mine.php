@@ -6,18 +6,19 @@ class Mine extends \common\controller\Base{
     public function index(){
         $user = session('user');
         $this->assign('user',$user);
-
-        $model = new \app\index\model\Wallet();;
-        $condition = [
-            'where' => [
-                ['user_id','=',$user['id']]
-            ],'field' => [
-                'id','amount',
-            ]
-        ];
-        $wallet = $model->getInfo($condition);
+        $wallet = array();
+        if($user){
+            $model = new \app\index\model\Wallet();;
+            $condition = [
+                'where' => [
+                    ['user_id','=',$user['id']]
+                ],'field' => [
+                    'id','amount',
+                ]
+            ];
+            $wallet = $model->getInfo($condition);
+        }
         $this->assign('wallet',$wallet);
-
         return $this->fetch();
     }
 
