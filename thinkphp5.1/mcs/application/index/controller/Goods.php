@@ -84,6 +84,9 @@ class Goods extends \common\controller\Base{
         if(input('get.is_selection/d')){
             $config['where'][] = ['g.is_selection', '=', input('get.is_selection/d')];
         }
+        if(input('?get.is_recommend')){
+            $config['where'][] = ['g.is_recommend', '=', input('get.is_recommend/d')];
+        }
         $keyword = input('get.keyword','');
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
@@ -96,8 +99,11 @@ class Goods extends \common\controller\Base{
 
             // 排列的数量不同
             switch($_GET['pageType']){
-                case 'index': return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
-                case 'sort' : return $this->fetch('list_goods_one_column_tpl'); break;   // 一行一个
+                case 'index': return $this->fetch('list_index_tpl'); break;
+                case 'center':
+                case 'studio':
+                case 'cart'  : return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
+                case 'scene' : return $this->fetch('list_goods_one_column_tpl'); break;   // 一行一个
             }
         }
     }

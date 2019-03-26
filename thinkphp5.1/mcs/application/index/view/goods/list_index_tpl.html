@@ -1,0 +1,49 @@
+<!--{notempty name="list"}
+{volist name="list" id="info"}
+    <li data-id="{$info.id}">
+        <a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
+            {empty name="info.thumb_img"}
+            <img class="left" src="public_img/default/no_pic_100.jpg" alt="">
+            {else /}
+            <img class="left" src="public_uploads/{$info.thumb_img}" alt="">
+            {/empty}
+        </a>
+        <div class="list_r">
+            <p class="text-intro">{$info.headline}</p>
+            <div>
+                <span class="red">￥<price>{$info.bulk_price}</price></span>
+            </div>
+            <div class="quantity_wrapper selected-number">
+                <a href="javascript:void(0);" class="greduce">-</a>
+                <input type="text" value="0" class="f24 gshopping_count" >
+                <input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+                <input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
+                <a href="javascript:void(0);" class="gplus">+</a>
+            </div>
+        </div>
+    </li>
+{/volist}
+{/notempty}-->
+
+{notempty name="list"}
+<div class="swiper-container swiper-container-horizontal swiper-container-ios swiper-list-wrapper">
+    <div class="swiper-wrapper " style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+        {volist name="list" id="info"}
+        <div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
+            <a>
+                <img src="public_uploads/{$info.thumb_img}">
+            </a>
+            <p>{$info.headline}</p>
+        </div>
+        {/volist}
+    </div>
+</div>
+<div>
+    <div>
+        <a>
+            <img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+        </a>
+    </div>
+    <p>产品产品产品产品产品产品产品</p>
+</div>
+{/notempty}
