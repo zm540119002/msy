@@ -62,7 +62,7 @@ return [
         'charset'     => 'utf8',// 数据库编码默认采用utf8
     ],
     //数据库配置
-    'db_config_sjds' => [
+    'db_config_1' => [
         'type'        => 'mysql',// 数据库类型
         'hostname'    => '127.0.0.1',// 服务器地址
         'database'    => 'sjds',// 数据库名
