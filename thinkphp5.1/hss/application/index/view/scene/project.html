@@ -1,0 +1,175 @@
+{extend name="template/base.html" /}
+{block name="content"}
+
+<article class="f24">
+	<!-- 头部导航条 -->
+	<div class="mod_selection">
+		<nav class="nav">
+			<!--<div class="mod_selection_more">
+				<div class="tab-arrow"></div>
+			</div>-->
+			<ul class="mod_selection_nav">
+				{volist name="$projectList" id="info"}
+				<li data-project-id="{$info.id}" class="{$info.current}">
+					<a href="{:url(request()->controller().'/'.request()->action(),['pid'=>$info.id])}" class="category_nav">{$info.name}</a>
+				</li>
+				{/volist}
+
+			</ul>
+		</nav>
+	</div>
+	<!-- 项目logo -->
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_uploads/{$info.thumb_img}" alt="" class="common_default_img">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- 项目信息 -->
+	<div id="menu">
+		<ul class="columns_flex detail-nav">
+			<li data-item="item1"><a href="javascript:;" class="">项目产品</a></li>
+			<li data-item="item2"><a href="javascript:;" class="">项目介绍</a></li>
+			<li data-item="item3"><a href="javascript:;" class="">项目培训</a></li>
+		</ul>
+	</div>
+	<!-- 项目商品列表 -->
+	<section class="content-padding content_main project_item">
+		<!--产品列表-->
+		<ul class="goods_list list" id="list">
+
+		</ul>
+	</section>
+	<!-- 项目介绍 -->
+	<section class="project_item hide">
+		<p>
+			<img src="public_uploads/{$project.main_img}" alt="">
+		</p>
+	</section>
+	<!-- 项目培训 -->
+	<section class="project_item hide">
+
+		{notempty name="$project.video"}
+		<div class="content-padding">
+			<video width="" height="" controls src="public_uploads/{$project.video}">
+			</video>
+			<p>{$project.name}项目培训</p>
+			<p>{$project.update_time}</p>
+		</div>
+		{/notempty}
+		<div>
+			<h3>相关视频</h3>
+			<ul class="p_video_item" id="videos">
+
+			</ul>
+		</div>
+	</section>
+</article>
+
+{/block}
+{block name="common"}
+    {include file="brand/set_brand" /}
+	{include file="public/sample_layer" /}
+{/block}
+{block name="footer"}
+	{include file="template/footer_menu.html" /}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="index_js/footerCart.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var id = '{$info.id}';
+		var date=getWeek();
+		countDown(date,$('#countDownBox'));
+		//查看文本
+		$('.wk_notice').moreText({
+			mainCell:".more-text",
+			openBtn:'展开'
+		});
+		$(".mod_selection_nav li").click(function(){
+                    var moveX = $(this).offset().left+$(this).parent().scrollLeft();
+                    var pageX = document.documentElement.clientWidth;//设备的宽度
+                    var blockWidth = $(this).width();
+                    var left = moveX-(pageX/2)+(blockWidth/2);
+                    $(".mod_selection_nav").animate({scrollLeft:left},400);
+                    $(this).addClass("active").siblings().removeClass("active");
+		});
+		// 项目信息切换
+		$('.detail-nav li').on('click',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$('.project_item').hide().eq($(this).index()).show();
+		})
+		// 项目切换
+	});
+
+	// 获取项目下的商品
+	var config = {
+		//url:module+'Project/getGoodsList',
+		url:module+'Goods/getProjectGoodsList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10
+	};
+	$(function(){
+		//初始化分类商品页面
+		//$('.mod_selection_nav li:eq(0)').addClass('current');
+		postData.project_id = $('.mod_selection_nav li.current').data('project-id');
+		getPagingList(config,postData);
+
+/*		$('body').on('click','.mod_selection_nav li',function(){
+			var _this = $(this);
+			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1
+			};
+			postData.project_id = _this.data('project-id');
+			getPagingList(config,postData);
+		});*/
+
+	});
+
+	var config_1 = {
+		url:module+'Project/getVideoList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		container: $("#videos")
+	};
+	var postData_1 = {
+		pageSize:10,
+		pageType:'column_1',
+		belong_to:1
+	};
+	$(function(){
+		//初始化分类商品页面
+		//$('.mod_selection_nav li:eq(0)').addClass('current');
+		//postData_1.project_id = $('.mod_selection_nav li.current').data('project-id');
+		getPagingList(config_1,postData_1);
+
+		/*		$('body').on('click','.mod_selection_nav li',function(){
+		 var _this = $(this);
+		 $(this).addClass('current').siblings().removeClass('current');
+		 config = {
+		 url:module+'Goods/getList',
+		 requestEnd:false,
+		 loadTrigger:false,
+		 currentPage:1
+		 };
+		 postData.project_id = _this.data('project-id');
+		 getPagingList(config,postData);
+		 });*/
+
+	});
+
+</script>
+{/block}

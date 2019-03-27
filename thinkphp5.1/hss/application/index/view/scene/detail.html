@@ -1,37 +1,38 @@
 {extend name="template/base.html" /}
 {block name="content"}
+
 <article class="f24">
+	<ul class="nav_menu">
+
+		{volist name="sceneList" id="info"}
+			<li data-scene-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
+				<a href="{:url(request()->controller().'/'.$info.template,['id'=>$info.id])}" class="category_nav">{$info.name}</a>
+			</li>
+		{/volist}
+
+	</ul>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
-				{notempty name="infos.goods_video"}
 				<div class="swiper-slide swiper-slide-active">
-					<video  src="public_uploads/{$infos.goods_video}" autoplay="autoplay"></video>
+
+					{volist name="$scene.main_img" id="info"}
+					<img src="public_uploads/{$info}" alt="" class="common_default_img">
+					{/volist}
+
 				</div>
-				{/notempty}
-				{volist name="infos.main_img" id="main_img"}
-				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/banner/cy_top_banner.jpg" alt="" class="common_default_img">
-				</div>
-				{/volist}
 			</div>
 		</div>
 	</section>
-	<section class="content-padding content_main wy_list" style="background:url(public_uploads/{$info.background_img});">
+	<section class="content-padding content_main wy_list" style="background:url(public_uploads/{$scene.background_img});">
 		<div class="">
-			<div class="top_b_text wk_notice separation">
-				<p class="more-text">
-				<span class="intro_title">[品牌定制须知]</span>
-				品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。
-				</p>
-			</div>
 			<div class="columns_flex l-r-sides count_down_module">
 				<div class="mid_module_left">
-					<img src="public_img/wy_dz.png" alt="">
+					<img src="public_uploads/{$scene.logo_img}" alt="">
 					<div>
 						<span class="left count-down-icons"></span>
 						<div class="d-r">
-							<p class="friday_end">品牌定制<span>.</span>周五截止</p>
+							<p class="friday_end">每周采购<span>.</span>周五截止</p>
 							<div id="countDownBox" class="count_down_box">
 								<span class="day"></span>天
 								<span class="hour"></span>小时
@@ -47,45 +48,24 @@
 				</div>
 			</div>
 		</div>
-		<ul class="goods_list list">
-			{notempty name="goodsList"}
-			{volist name="goodsList" id="info"}
-			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
-				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
-					{empty name="info.thumb_img"}
-					<img class="left" src="public_img/default/no_pic_100.jpg" alt="">
-					{else /}
-					<img class="left" src="public_uploads/{$info.thumb_img}" alt="">
-					{/empty}
-				</a>
-				<div class="list_r">
-					<p class="text-intro">{$info.headline}</p>
-					<!--<div>单品规格<span>{$info.specification}</span></div>-->
-					<div>
-						<span class="red">￥<price>{$info.bulk_price}</price></span>
-					</div>
-					<div class="columns_flex l-r-sides">
-						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
-						</div>
-						<!--<a href="javascript:void(0);" class="sample_purchase">样品购买
-							<input type="hidden" class="" value="{$info.minimum_sample_quantity}">
-						</a>-->
-					</div>
-					<div class="columns_flex l-r-sides separation_item">
-						<a href="javascript:;" class="set_brand right-arrow">设定我的品牌：<span class="brand_name" data-id=""></span></a>
-					</div>
-					<div class="quantity_wrapper selected-number">
-						<a href="javascript:void(0);" class="greduce">-</a>
-						<input type="text" value="0" class="f24 gshopping_count" >
-						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
-						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
-						<a href="javascript:void(0);" class="gplus">+</a>
-					</div>
+		<!--方案列表-->
+		{notempty name="schemeList"}
+			{volist name="schemeList" id="info"}
+				<div class="apply_item">
+					{if $info.show_name==1}
+						<span class="content-label">{$info.name}</span>
+					{/if}
+					<a data-id="{$info.id}">
+						<img src="public_uploads/{$info.thumb_img}" alt="">
+					</a>
 				</div>
-			</li>
 			{/volist}
-			{/notempty}
+		{/notempty}
+		<!--产品列表-->
+		<ul class="goods_list list" id="list">
+
 		</ul>
+
 	</section>
 </article>
 
@@ -102,7 +82,7 @@
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var id = '{$infos.id}';
+		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		//查看文本
@@ -110,6 +90,23 @@
 			mainCell:".more-text",
 			openBtn:'展开'
 		});
+	});
+	// 获取该场景下的商品
+	var config = {
+		url:module+'Goods/getSceneGoodsList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10
+	};
+
+	$(function(){
+		//初始化场景商品页面
+		postData.scene_id = $('.nav_menu li.current').data('scene-id');
+
+		getPagingList(config,postData);
 	});
 </script>
 {/block}

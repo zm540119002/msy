@@ -7,7 +7,6 @@
 </section>
 <article class="f24">
 	<section class="shopping_header_title header_title separation-line">
-		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
 		<h2>购物车</h2>
 	</section>
 	<ul class="cart_goods_list" id="list">
@@ -26,7 +25,7 @@
 			</div>
 		</div>
 		<div id="scroller-wrapper" class="list_wrapper">
-			<ul class="columns_flex flex-both-side goods-content-list" id="list">
+			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList">
 
 			</ul>
 		</div>
@@ -38,19 +37,19 @@
 			<li class="each_column">
 				<a href="{:url('Index/index')}">
 					<span class="store f_icon"></span>
-					<span class="f_txt">采购商城</span>
+					<span class="f_txt">美创社</span>
 				</a>
 			</li>
 			<li class="each_column">
-				<a href="{:url('StoreLeague/index')}">
+				<a href="{:url('CenterStore/index')}">
 					<span class="practitioners f_icon"></span>
-					<span class="f_txt">加盟店家</span>
+					<span class="f_txt">中心店</span>
 				</a>
 			</li>
 			<li class="each_column">
-				<a  href="{:url('CityPartner/index')}">
+				<a  href="{:url('Studio/index')}">
 					<span class="business f_icon"></span>
-					<span class="f_txt">城市合伙人</span>
+					<span class="f_txt">工作室</span>
 				</a>
 			</li>
 			<li class="each_column current">
@@ -99,18 +98,31 @@
 		});
 	});
 
+
 	// 新零售商品获取配置
 	var config_1 = {
 		url:module+'Goods/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+		container:$("#goodsList")
 	};
 	var postData_1 = {
 		pageSize:10,
 		pageType:'index',
 		is_selection:1
 	};
+	$(function(){
+		//初始化分类商品页面
+		getPagingList(config_1,postData_1);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config_1.loadTrigger = false;
+				getPagingList(config_1,postData_1);
+			}
+		});
+	});
 
 </script>
 {/block}
