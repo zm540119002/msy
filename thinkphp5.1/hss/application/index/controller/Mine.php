@@ -4,7 +4,21 @@ namespace app\index\controller;
 class Mine extends \common\controller\Base{
     //我的首页
     public function index(){
-        $this->assign('user',session('user'));
+        $user = session('user');
+        $this->assign('user',$user);
+        $wallet = array();
+        if($user){
+            $model = new \app\index\model\Wallet();;
+            $condition = [
+                'where' => [
+                    ['user_id','=',$user['id']]
+                ],'field' => [
+                    'id','amount',
+                ]
+            ];
+            $wallet = $model->getInfo($condition);
+        }
+        $this->assign('wallet',$wallet);
         return $this->fetch();
     }
 

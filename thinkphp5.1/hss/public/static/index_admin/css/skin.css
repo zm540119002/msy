@@ -246,6 +246,9 @@ h6 {
 	position: relative;
 	left: -20px;
 }
+.nodisabled{
+    pointer-events: none;
+}
 .fixed-empty {
 	height: 20px !important;
 }
@@ -978,6 +981,9 @@ h6 {
 }
 /* table
 ------------------------------------------------------------------- */
+.content ul.pagination{
+	text-indent: inherit;
+}
 .table {
 	clear: both;
 	width: 100%;
@@ -1292,7 +1298,7 @@ filter:alpha(opacity:0);
 }
 .pagination li{
 	width:30px;
-	height:30px;
+	height:36px;
 	line-height: 30px;
 	margin:0 5px;
 	float:left;

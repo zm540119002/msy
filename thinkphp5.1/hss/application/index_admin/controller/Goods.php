@@ -34,7 +34,7 @@ class Goods extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
@@ -46,13 +46,13 @@ class Goods extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
                     }
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
-                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['goods_video']));
+                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['goods_video']));
             }
 
             // 选中的店铺类型 十进制
@@ -65,23 +65,7 @@ class Goods extends Base {
                         'status' => 0,
                     ],
                 ];
-                $info = $modelGoods->getInfo($config);
-                //删除旧视频
-                if($info['goods_video']){
-                    delImgFromPaths($info['goods_video'],$_POST['goods_video']);
-                }
-                if($info['main_img']){
-                    //删除商品旧主图
-                    $oldImgArr = explode(',',$info['main_img']);
-                    $newImgArr = explode(',',$_POST['main_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
-                if($info['detail_img']){
-                    //删除商品旧详情图
-                    $oldImgArr = explode(',',$info['detail_img']);
-                    $newImgArr = explode(',',$_POST['detail_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
+
                 $data = $_POST;
                 $data['update_time'] = time();
                 $where = [
@@ -92,6 +76,23 @@ class Goods extends Base {
                 if(false === $result){
                     return errorMsg('失败');
                 }
+
+                $info = $modelGoods->getInfo($config);
+                // 删除旧文件
+                if($info['goods_video']){
+                    delImgFromPaths($info['goods_video'],$_POST['goods_video']);
+                }
+                if($info['main_img']){
+                    $oldImgArr = explode(',',$info['main_img']);
+                    $newImgArr = explode(',',$_POST['main_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+                if($info['detail_img']){
+                    $oldImgArr = explode(',',$info['detail_img']);
+                    $newImgArr = explode(',',$_POST['detail_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+
                 $data['id'] = input('post.id/d');
                 $list[] = $data;
                 $this->generateQRcode($list);
@@ -145,17 +146,24 @@ class Goods extends Base {
      */
     public function getList(){
         $model = new \app\index_admin\model\Goods();
-        $where = [];
+
         $where[] = ['g.status','=',0];
-        if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where[] = ['g.category_id_1','=',input('get.category_id_1',0,'int')];
+        if($category_id_1 = input('category_id_1/d')){
+            $where[] = ['g.category_id_1','=',$category_id_1];
         }
-        if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where[] = ['g.category_id_2','=',input('get.category_id_2',0,'int')];
+        if($category_id_2 = input('category_id_2/d')){
+            $where[] = ['g.category_id_2','=',$category_id_2];
         }
-        if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where[] = ['g.category_id_3','=',input('get.category_id_3',0,'int')];
+        if($category_id_3 = input('category_id_3/d')){
+            $where[] = ['g.category_id_3','=',$category_id_3];
         }
+        if($belong_to = input('belong_to/d')){ // 经过特别处理
+            $where[] = ['g.belong_to','=',$belong_to];
+        }
+        if($shelf_status = input('shelf_status/d')){
+            $where[] = ['g.shelf_status','=',$shelf_status];
+        }
+
         $keyword = input('get.keyword','','string');
         if($keyword){
             $where[] = ['g.name','like', '%' . trim($keyword) . '%'];
@@ -164,7 +172,7 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url'
+                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
             ],
@@ -176,7 +184,9 @@ class Goods extends Base {
                 'g.id'=>'desc',
             ],
         ];
+
         $list = $model ->pageQuery($config);
+
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
             return view('goods/list_layer_tpl');
@@ -207,47 +217,45 @@ class Goods extends Base {
                 ['id','in',$ids]
             ];
         }
+
         return $model->del($condition);
     }
 
-
     /**
-     * 上下架
+     * 单字段设置
      */
-    public function setShelfStatus(){
+    public function setInfo(){
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Goods();
-        $id = input('post.id/d');
-        if(!input('?post.id') && !$id){
-             return errorMsg('失败');
+
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
         }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['shelf_status'=>input('post.shelf_status/d')]);
+
+        $info= array();
+        // 上下架
+        if (input('?shelf_status')){
+            $shelf_status = input('post.shelf_status/d')==3 ? 1 : 3 ;
+
+            $info = ['shelf_status'=>$shelf_status];
+        }
+        // 精选
+        if (input('?is_selection')){
+            //$is_selection = $is_selection==1 ? 0 : 1 ;
+            $info = ['is_selection'=>input('post.is_selection/d')];
+        }
+
+        $model = new \app\index_admin\model\Goods();
+        $rse = $model->where(['id'=>$id])->setField($info);
+
         if(!$rse){
             return errorMsg('失败');
         }
         return successMsg('成功');
     }
 
-    /**
-     * 设置精选
-     */
-    public function setSelection(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-        $model = new \app\index_admin\model\Goods();
-        $id = input('post.id/d');
-        if(!input('?post.id') && !$id){
-            return errorMsg('失败');
-        }
-        $rse = $model->where(['id'=>input('post.id/d')])->setField(['is_selection'=>input('post.is_selection/d')]);
-        if(!$rse){
-            return errorMsg('失败');
-        }
-        return successMsg('成功');
-    }
     /*
      * 添加商品相关推荐商品
      * @return array|mixed

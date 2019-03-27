@@ -2,7 +2,7 @@
 {volist name="list" id="info"}
 <li data-id="{$info.id}" data-cart_id="{$info.cart_id}" data-buy_type="{$info.buy_type}"  data-brand_id="{$info.brand_id}" data-brand_name="{$info.brand_name}">
     <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
-    <a  href="" class="cart_goods_img">
+    <a  href="{:url('Goods/detail',['id'=>$info.id])}" class="cart_goods_img">
         {empty name="info.thumb_img"}
         <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
         {else /}

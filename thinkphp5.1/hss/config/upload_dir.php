@@ -14,10 +14,20 @@ return [
     'pay_QRcode' => 'pay_QRcode/',//场景图片
     'shop_logo_img' => 'shop/logo_img/',//场景图片
 
+    // 后期确定没有在使用后再删掉 这组配置
     'weiya_goods' => 'weiya_goods/',//维雅定制商品图片
     'weiya_project' => 'weiya_project/',//维雅定制项目图片
     'weiya_scene' => 'weiya_scene/',//维雅定制项目图片
     'weiya_information' => 'weiya_information/',//维雅定制项目图片
     'weiya_goods_gategory' => 'weiya_goods_gategory/',//维雅定制项目图片
-    'user_avatar' => 'user_avatar/',//用户头像目录
+
+
+    'mcs_goods' => 'mcs_goods/',        //商品图片
+    'mcs_project' => 'mcs_project/',    //项目图片
+    'mcs_scene' => 'mcs_scene/',        //场景图片
+    'mcs_scheme' => 'mcs_scheme/',      //方案图片
+    'mcs_information' => 'mcs_information/',    // ??
+    'mcs_goods_gategory' => 'mcs_goods_gategory/',//商品分类图片
+    'user_avatar' => 'user_avatar/',    //用户头像目录
 ];
+

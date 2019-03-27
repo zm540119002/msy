@@ -6,27 +6,19 @@
 
 {block name="content"}
     <div class="page">
-        <div class="fixed-bar">
-            <div class="item-title">
-                <ul class="tab-base">
-                    <li><a href="{:url('manage')}" ><span>管理</span></a></li>
-                    <li><a href="{:url('edit')}" class="current"><span>编辑</span></a></li>
-                </ul>
-            </div>
-        </div>
         <div style="margin-top:15px;">
             <form id="form1">
                 <input type="hidden" name="id" value="{$info.id}">
                 <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                     <tbody>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>所属分类：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>所属分类：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             {include file="goods_category/linkage_tpl" /}
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品归属：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品归属：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
                                 {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
@@ -40,27 +32,28 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>商品名称：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品名称：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="name" value="{$info.name}">
 
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>标题文案：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>文案标题：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
                             <input style="width: 200px; " class="inputboxadmin" name="headline" value="{$info.headline}">
                         </td>
                     </tr>
                     <tr class="radioTypeOption first">
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>批量价格：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>批量价格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="bulk_price" value="{$info.bulk_price}">
+                            <input style="width: 200px; " class="inputboxadmin" name="bulk_price" value="{$info.bulk_price|default='0.01'}">
+                            设置为最低价方便测试
                         </td>
                     </tr>
 
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>商品规格：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品规格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 200px;" class="inputboxadmin" name="specification" value="{$info.specification}">
                         </td>
@@ -106,7 +99,7 @@
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品视频：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
-                                <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传视频(mp4、rmvb、avi、ts格式视频)</p>
+                                <p class="f20 picture-tipc-box"><span class="c-red">*</span> 仅支持大小在10M内，mp4、rmvb、avi、ts格式的视频</p>
                                 <form>
                                     <div class="upload-picture-module f24">
                                         <div>
@@ -142,14 +135,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>主图：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>主图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <script id="main_img" type="text/plain"></script>
                             <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>商品详情图：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品详情图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                         <script id="detail_img" type="text/plain"></script>
                         <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
@@ -256,9 +249,15 @@
                 // 判断视频格式
                 var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
                 if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
-                    // dialog.error('请上传：mp4、rmvb、avi、ts格式图片');
+                    dialog.error('请上传：mp4、rmvb、avi、ts格式图片');
                     return false;
                 }
+                if( (video.size/1024/1024)>10){
+                    dialog.error('视频大小不能超过10M !');
+                    return false;
+                }
+
+
                 var reader = new FileReader();
                 reader.readAsDataURL(video);
                 reader.onload = function(e){
@@ -323,18 +322,30 @@
                 }else if(!postData.detail_img){
                     content='请上传商品详情图';
                 }
-//                if(content){
-//                    dialog.error(content);
-//                    return false;
-//                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(action,postData,function(data){
                     _this.removeClass("nodisabled");//防止重复提交
                     dialog.msg(data,'',function () {
-                        location.href = controller + 'manage';
+                        // 提交后关闭，不刷新 保持要搜索的参数
+                        var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                        parent.layer.close(index);
+                        //window.parent.location.reload();
                     });
                 });
+            });
+
+            $('document').ready(function(){
+                // 选择默认值
+                var i = '{$info.id}';
+                if(!i.length){
+                    $("input[name='belong_to']:first").attr('checked','checked');
+                }
             });
 
         });

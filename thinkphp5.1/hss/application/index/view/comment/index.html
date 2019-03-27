@@ -8,48 +8,48 @@
 		<h2 class="f24">商品评价</h2>
 	</section>
 	<section class="commodity_evaluation">
-		<div class="content-padding score_review_item">
-			<div class="">
-				<span class="my_scoring left">描述相符</span>
-				<div class="my_score_star">
-					<div class="star_score star_img left">
-						<a href="javascript:void(0);" data-show="">
-							<img src="public_img/star.png" />
-						</a>
-						<a href="javascript:void(0);" data-show="">
-							<img src="public_img/star.png" />
-						</a>
-						<a href="javascript:void(0);" data-show="">
-							<img src="public_img/star.png" />
-						</a>
-						<a href="javascript:void(0);" data-show="">
-							<img src="public_img/star.png" />
-						</a>
-						<a href="javascript:void(0);" data-show="">
-							<img src="public_img/star.png" />
-						</a>
-					</div>
-					<span class="fraction my_fraction " data-score=""></span>
-				</div>
-			</div>
-		</div>
-		<div class="content-padding">
-			<span class="content-label">评价描述</span>
-			<textarea class="text_description" rows="" cols="" placeholder="说说该商品的优点和美中不足的地方吧，你的评价能帮助其他想购买的朋友哦！"></textarea>
-			<span class="content-label">评价可以附带上传商品图片</span>
-			<div class="upload-picture-module f24">
-				<div>
-					<div class="picture-module">
-						<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="">
-						<img class="upload_img" src="" alt="">
-						<input type="hidden" class="business-license img"  value=""/>
+		<form id="form1">
+			<div class="content-padding score_review_item">
+				<div class="">
+					<span class="my_scoring left">描述相符</span>
+					<div class="my_score_star">
+						<div class="star_score star_img left">
+							<a href="javascript:void(0);" data-show="">
+								<img src="public_img/star.png" />
+							</a>
+							<a href="javascript:void(0);" data-show="">
+								<img src="public_img/star.png" />
+							</a>
+							<a href="javascript:void(0);" data-show="">
+								<img src="public_img/star.png" />
+							</a>
+							<a href="javascript:void(0);" data-show="">
+								<img src="public_img/star.png" />
+							</a>
+							<a href="javascript:void(0);" data-show="">
+								<img src="public_img/star.png" />
+							</a>
+						</div>
+						<span class="fraction my_fraction " data-score=""></span>
 					</div>
 				</div>
 			</div>
-			<form class="">
-				<ul class="upload-picture-module multi-picture-module f24"></ul>
-			</form>
-		</div>
+			<div class="content-padding">
+				<span class="content-label">评价描述</span>
+				<textarea class="text_description" rows="" cols="" name="content"  placeholder="说说该商品的优点和美中不足的地方吧，你的评价能帮助其他想购买的朋友哦！"></textarea>
+				<span class="content-label">评价可以附带上传商品图片</span>
+				<div class="upload-picture-module f24">
+					<div>
+						<div class="picture-module">
+							<input type="file" class="uploadMultiImg" id="file" name="" accept="image/*" multiple="" data-num="0">
+							<img class="upload_img" src="" alt="">
+							<input type="hidden" class="business-license img"  value=""/>
+						</div>
+					</div>
+				</div>
+				<ul class="upload-picture-module multi-picture-module"></ul>
+			</div>
+		</form>
 	</section>
 </article>
 {/block}
@@ -78,17 +78,32 @@
 		});
 		//提交评价
 		$('body').on('click','.submit',function () {
-            var postData={};
-            var content='';
-            // if(!postData.voucher){
-            //     content='请上传转账凭证';
-            // }
-            // if(content){
-            //     dialog.error(content);
-            //     return false;
-            // }
-            var url =  module + 'Mine/index';
-            location.href = url;
+			//$('.my_fraction').data('score','');
+			var score=$('.my_fraction').attr('data-score');
+			var commentText=$('.text_description').val();
+			var commentImg=[];
+			$.each($('.multi-picture-module li'),function(){
+				var _this=$(this);
+				commentImg.push(_this.find('img').attr('src'));
+			});
+		    var postData={};
+			postData.score=score;
+			postData.commentText=commentText;
+			postData.commentImg=commentImg;
+
+			var url = module+'Comment/add';
+			console.log(postData);
+			return false;
+			$.ajax({
+				url:url,
+				type:'post',
+				data:postData,
+				success:function(){
+
+				}
+			});
+            //var url =  module + 'Mine/index';
+            //location.href = url;
         });
 	});
 </script>
