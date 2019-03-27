@@ -1,0 +1,143 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 content_main">
+	<section class="">
+		<!-- 商品列表 -->
+		<div class="content-padding separation-line">
+			<div class="swiper-container swiper-container-horizontal swiper-container-ios swiper-list-wrapper">
+				<div class="swiper-wrapper " style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+					{volist name="goods" id="info"}
+					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
+						<a>
+							<img src="public_uploads/{$info.thumb_img}">
+						</a>
+						<p>{$info.name}</p>
+					</div>
+					{/volist} 
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="scroller-wrapper" class="list_wrapper">
+		<ul class="columns_flex flex-both-side goods-content-list" id="list">
+
+		</ul>
+	</div>
+</article>
+<!-- 尾部导航栏 -->
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'index',
+		belong_to:1
+	};
+	$(function(){
+		//轮播
+		var swiper = new Swiper('.swiper-top-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		//产品轮播
+		var swiper = new Swiper('.swiper-list-wrapper', {
+			slidesPerView:2.5,
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		
+		//初始化分类商品页面
+		$('.nav_menu li:eq(0)').addClass('current');
+		postData.category_id = $('.nav_menu li.current').data('category-id');
+		getPagingList(config,postData);
+
+		$('body').on('click','.nav_menu li',function(){
+			var _this = $(this);
+			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1
+			};
+			postData.category_id = _this.data('category-id');
+			getPagingList(config,postData);
+		});
+
+		//下拉加载
+		//var offsetHeight=$('.nav_menu').offset().top;
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				postData.category_id = $('.nav_menu li.current').data('category-id');
+				getPagingList(config,postData);
+			}
+			//滚动
+			// var top=$(document).scrollTop();
+			// if(top>offsetHeight){
+			// 	$('.nav_menu').addClass('top-fixed');
+			// }else {
+			// 	$('.nav_menu').removeClass('top-fixed');
+			// }
+		});
+
+		$('body').on('click','.my_cart',function () {
+			var url = module + 'Cart/index';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误！');
+				},
+				success: function(data){
+
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1){
+						if(data.data == 'no_login'){
+							loginDialog();
+						}
+					}else if(data.status==1){
+
+					}else{
+						location.href = url;
+					}
+				}
+			});
+		});
+		/**
+		 *查看更多资讯
+		 */
+		$('body').on('click','.news_more',function () {
+			location.href = module + 'Information/index';
+		})
+	});
+</script>
+{/block}
