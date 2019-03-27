@@ -28,7 +28,6 @@ class Scene extends Base {
                 ];
                 $info = $model->getInfo($config);
                 // 选中的店铺
-                $info['belong_to'] = strrev(decbin($info['belong_to']));
                 $this->assign('info',$info);
             }
             return $this->fetch();
@@ -41,23 +40,22 @@ class Scene extends Base {
             }
 
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
             }
             if(  isset($_POST['background_img']) && $_POST['background_img'] ){
-                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['background_img']));
+                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['background_img']));
             }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.scheme'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
 
             }
-            $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
 
             // 后面改进
             if( isset($_POST['type'])&&$_POST['type'] ){
@@ -186,9 +184,6 @@ class Scene extends Base {
         $model = new \app\index_admin\model\Scene();
         $where = [];
         $where[] = ['status','=',0];
-        if(isset($_GET['belong_to']) && intval($_GET['belong_to'])){
-            $where[] = ['belong_to','=',input('get.belong_to',0,'int')];
-        }
         if(isset($_GET['type']) && intval($_GET['type'])){
             $where[] = ['type','=',input('get.type',0,'int')];
         }
@@ -214,11 +209,10 @@ class Scene extends Base {
 
         $list = $model ->pageQuery($config);
 
-        $info['belong_to'] = strrev(decbin($list['belong_to']));
         $this->assign('list',$list);
-        //if($_GET['pageType'] == 'manage'){
-            return view('list_tpl');
-        //}
+
+        return view('list_tpl');
+
     }
 
     /**

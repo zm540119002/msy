@@ -15,20 +15,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景归属：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <div class="type_item">
-                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
-                                {if ($info.belong_to[$k-1])}
-                                <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
-                                {else /}
-                                <input type="checkbox" name="belong_to" value="">{$vo}
-                                {/if}
-                                {/volist}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景类型：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
@@ -197,8 +183,6 @@
                 var content='';
                 if(!postData.name){
                     content='场景名称不能为空';
-                }else if(!parseInt(sum(postData.belong_to))){
-                    content='至少要选择一个场景归属';
                 }else if(!postData.row_number){
                     content='场景数量不能为空';
                 }else if(!postData.group){

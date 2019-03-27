@@ -18,14 +18,6 @@
 		<div class="navbar-default mb-20">
 			<form id="form1" >
 				<div class="form-group">
-					<select name="belong_to" class="form-control">
-						<option value="">归属</option>
-						{foreach $Think.config.custom.belong_to as $k => $vo}
-						<option value="{$k}">{$vo}</option>
-						{/foreach}
-					</select>
-				</div>
-				<div class="form-group">
 					<select name="type" class="form-control">
 						<option value="">类别</option>
 						{foreach $Think.config.custom.scene_type as $k => $vo}
