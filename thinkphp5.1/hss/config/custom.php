@@ -86,4 +86,12 @@ return [
         '2' => '分类',
         '3' => '项目',
     ],
+    /**
+     * 标记 -关联表类型
+     */
+    'relation_type' => [
+        'scene'    => 1,
+        'project'  => 2,
+        'promotion'=> 3,
+    ],
 ];

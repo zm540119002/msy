@@ -2,13 +2,20 @@
 namespace app\index_admin\controller;
 
 /**
- * 方案类
+ * 方案控制器
  */
 class Scheme extends Base {
 
-    /*
-     *审核首页
-     */
+    protected $obj;
+
+    protected $beforeActionList = [
+        'currentModelClass'  =>  ['only'=>'edit,setInfo,getList'],
+    ];
+
+    protected  function currentModelClass(){
+        $this->obj = new \app\index_admin\model\Scheme();
+    }
+
     public function manage(){
         return $this->fetch();
     }
@@ -18,57 +25,44 @@ class Scheme extends Base {
      * @return array
      */
     public function edit(){
+        $model = $this->obj;
 
         if(!request()->isPost()){
             //要修改的方案
             if($id = input('param.id/d')){
-                $model = new \app\index_admin\model\Scheme();
-                $config = [
-                    'where' => [
-                        ['id','=',$id]
-                    ],
-                ];
-                $info = $model->getInfo($config);
-
+                $condition = ['where' => [['id','=',$id]]];
+                $info = $model->getInfo($condition);
                 $this->assign('info',$info);
             }
             return $this->fetch();
 
         }
         else{
-
-            if(!input('param.name/s')){
-                return errorMsg('失败');
-            }
+            // 基础处理
+            if(!input('param.name/s')) return errorMsg('失败');
 
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
             }
-            $model = new \app\index_admin\model\Scheme();
 
             $data  = $_POST;
             if($id = input('param.id/d')){
                 // 编辑
-                $config = [
-                    'where' => [
-                        'id' => input('post.id',0,'int'),
-                    ],
-                ];
-                $info = $model->getInfo($config);
-                $result = $model -> allowField(true) -> save($data,['id'=>$id]);
-                if($result===false){
-                    return errorMsg('失败');
-                }
-                //删除商品主图
+                $condition = ['where' => ['id' => $id,]];
+
+                $info  = $model->getInfo($condition);
+                $result= $model->edit($data,$condition['where']);
+                if(!$result['status']) return $result;
+
+                // 删除旧文件
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
 
-            }else{ // 增加
-                $result = $model -> allowField(true) -> save($data);
-                if(!$result){
-                    return errorMsg('失败');
-                }
+            }else{
+                // 增加
+                $result = $model->edit($data);
+                if(!$result['status']) return $result;
             }
 
             return successMsg('成功');
@@ -79,14 +73,11 @@ class Scheme extends Base {
      * 单字段设置
      */
     public function setInfo(){
-        if(!request()->isPost()){
+        if(!request()->isAjax() && !request()->isPost()){
             return config('custom.not_post');
         }
 
-        $id  = input('post.id/d');
-        if (!$id){
-            return errorMsg('失败');
-        }
+        if(!$id=input('post.id/d')) return errorMsg('失败');
 
         $info= array();
         // 上下架
@@ -96,12 +87,10 @@ class Scheme extends Base {
             $info = ['shelf_status'=>$shelf_status];
         }
 
-        $model = new \app\index_admin\model\Scheme();
-        $rse = $model->where(['id'=>$id])->setField($info);
+        $rse  = $this->obj->where(['id'=>$id])->setField($info);
 
-        if(!$rse){
-            return errorMsg('失败');
-        }
+        if(!$rse) return errorMsg('失败');
+
         return successMsg('成功');
     }
 
@@ -110,37 +99,19 @@ class Scheme extends Base {
      */
     public function getList(){
 
-        $modelProject = new \app\index_admin\model\Scheme();
-        //$where = [];
-        //$where[] = ['audit','=',0];
-/*        if(isset($_GET['category_id_1']) && intval($_GET['category_id_1'])){
-            $where[] = ['p.category_id_1','=',input('get.category_id_1',0,'int')];
-        }
-        if(isset($_GET['category_id_2']) && intval($_GET['category_id_2'])){
-            $where[] = ['p.category_id_2','=',input('get.category_id_2',0,'int')];
-        }
-        if(isset($_GET['category_id_3']) && intval($_GET['category_id_3'])){
-            $where[] = ['p.category_id_3','=',input('get.category_id_3',0,'int')];
-        }
-        $keyword = input('get.keyword','','string');
-        if($keyword){
-            $where[] = ['p.name','like', '%' . trim($keyword) . '%'];
-        }*/
-        $condition = [
-            'where'=>[
-                ['status','=',0]
-            ],
-            'field'=>[
-                'id','name','thumb_img','sort','shelf_status'
-            ],
-            'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc',
-            ],
-        ];
-        $list = $modelProject ->pageQuery($condition);
+        $where[] = ['status','=',0];
+        // 条件
+        $keyword = input('get.keyword/s');
+        if($keyword) $where[] = ['name','like', '%' . trim($keyword) . '%'];
 
-        // 标记该场景下的方案
+        $condition = [
+            'where'=>$where,
+            'field'=>['id','name','thumb_img','sort','shelf_status'],
+            'order'=>['sort'=>'desc', 'id'=>'desc',],
+        ];
+        $list = $this->obj->pageQuery($condition);
+
+        // 其它业务 -标记场景下的方案
         if($scene_id = input('param.id/d')){
             $sceneSchemeModel = new \app\index_admin\model\SceneScheme();
             $condition = [
@@ -177,45 +148,35 @@ class Scheme extends Base {
     }
 
     /**
-     * @return array|mixed
      * 删除
      */
     public function del(){
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index_admin\model\Scheme();
+
+        if(!input('?post.id')&&!input('?post.ids'))  return errorMsg('失败');
 
         $condition = array();
         $where     = array();
         if($id=input('post.id/d')){
             $condition = [
-                'where' => [
-                    ['id','=',$id]
-                ],'field' => [
-                    'thumb_img'
-                ]
+                'where' => [['id','=',$id]],
+                //'field' => ['thumb_img']
             ];
-            $where = [
-                ['scheme_id','=',$id]
-            ];
+            $where = [['scheme_id','=',$id]];
         }
 
-        if(input('?post.ids')){
-            $ids = input('post.ids/a');
+        if($ids = input('post.ids/a')){
             $condition = [
-                'where' => [
-                    ['id','in',$ids]
-                ],'field' => [
-                    'thumb_img'
-                ]
+                'where' => [['id','in',$ids]],
+                //'field' => ['thumb_img']
             ];
-            $where = [
-                ['scheme_id','in',$ids]
-            ];
+            $where = [['scheme_id','in',$ids]];
         }
 
-        $list = $model->getList($condition);
+        $model = new \app\index_admin\model\Scheme();
+        //$list = $model->getList($condition);
 
         // 事务
         $model->startTrans();
@@ -233,14 +194,14 @@ class Scheme extends Base {
             return errorMsg('失败');
         }
 
-        if($result){
+/*        if($result){
             //删除商品的所有的图片
             foreach($list as $k => $v){
                 if($v){
                     delImg($v);
                 }
             }
-        }
+        }*/
 
         return $result;
     }

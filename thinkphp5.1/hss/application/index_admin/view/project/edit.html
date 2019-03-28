@@ -15,20 +15,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>项目归属：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <div class="type_item">
-                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
-                                {if ($info.belong_to[$k-1])}
-                                <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
-                                {else /}
-                                <input type="checkbox" name="belong_to" value="">{$vo}
-                                {/if}
-                                {/volist}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
@@ -142,6 +128,7 @@
 <script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
 <script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
 <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
+<script type="text/javascript" src="index_admin_js/uploadSingleImg.js"></script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
 
@@ -154,9 +141,6 @@
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
 
-//                console.log(postData);
-//                return false;
-
                 //主图
                 postData.detail_img = '';
                 $.each($('#detail_img').find('iframe').contents().find('.view img'),function(){
@@ -166,8 +150,6 @@
                 var content='';
                 if(!postData.name){
                     content='项目名称不能为空';
-                }else if(!parseInt(sum(postData.belong_to))){
-                    content='至少要选择一个项目归属';
                 }else if(!postData.thumb_img){
                     content='缩略图不能为空';
                 }else if(!postData.main_img){
@@ -194,54 +176,6 @@
                         }
                     });
                 });
-            });
-
-            // 选择单图片
-            $('body').on('change','.uploadSingleImg',function () {
-                var _this=$(this);
-                uploadsSingleImgFlag = false;
-                var img = event.target.files[0];
-                var uploadfileSize=img.size/1024/1024;
-                var obj=$(this).parent();
-                // 判断是否图片
-                if(!img){
-                    return false;
-                }
-                // 判断图片格式
-                var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
-                if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
-                    dialog.error('请上传：jpg、jpeg、png、gif格式图片');
-                    return false;
-                }
-                if(uploadfileSize>1){
-                    dialog.error('图片大小不能超过1M');
-                    return false;
-                }
-                var reader = new FileReader();
-                reader.readAsDataURL(img);
-                reader.onload = function(e){
-                    var imgUrl=e.target.result;
-                    $(obj).addClass('active');
-                    var postData = {fileBase64: e.target.result};
-                    // postData.imgWidth = 145;
-                    // postData.imgHeight = 100;
-                    $(obj).find('img').attr('src',imgUrl);
-                    var type = _this.data('type');
-                    if(type == 'notupload'){
-                        $(obj).find('.img').val(imgUrl);
-                        console.log(1);
-                        return false;
-                    }
-                    //提交
-                    $.post(controller+"uploadFileToTemp",postData,function(msg){
-                        if(msg.status == 1){
-                            uploadsSingleImgFlag = true;
-                            $(obj).find('.img').val(msg.info);
-                        }else{
-                            dialog.error(msg.info)
-                        }
-                    })
-                }
             });
 
             // 选择单视频
@@ -289,14 +223,6 @@
                         }
                     })
 
-                }
-            });
-
-            $('document').ready(function(){
-                // 选择默认值
-                var i = '{$info.id}';
-                if(!i.length){
-                    $("input[name='belong_to']:first").attr('checked','checked');
                 }
             });
 
