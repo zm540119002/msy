@@ -40,21 +40,21 @@
 	<section class="">
 		<div class="content-padding">
 			<!--优惠广告入口-->
-			<section class="slider_banner">
+			<section class="slider_banner swiper-list-wrapper">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide swiper-slide-active">
-							<a href="">
+						<div class="swiper-slide">
+							<a href="{:url('promotion/index')}">
 								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
 							</a>
 						</div>
-						<div class="swiper-slide ">
-							<a href="">
+						<div class="swiper-slide">
+							<a href="{:url('promotion/index')}">
 								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
 							</a>
 						</div>
-						<div class="swiper-slide ">
-							<a href="">
+						<div class="swiper-slide">
+							<a href="{:url('promotion/index')}">
 								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
 							</a>
 						</div>
@@ -155,17 +155,7 @@
 	};
 	$(function(){
 		//轮播
-		var swiper = new Swiper('.swiper-top-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-		//产品轮播
-		var swiper = new Swiper('.swiper-list-wrapper', {
-			slidesPerView:2.5,
+		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
 			autoplay:true,
 			pagination: {

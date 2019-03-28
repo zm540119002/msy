@@ -1,0 +1,239 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <div class="page">
+        <div style="margin-top:15px;">
+            <form id="form1">
+                <input type="hidden" name="id" value="{$info.id}">
+                <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
+                    <tbody>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>促销名称：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <div class= width="89%" align=left>
+                                <textarea class="project_description" name="name" >{$info.name}</textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>促销简介：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <div class= width="89%" align=left>
+                                <textarea class="project_description" name="intro" >{$info.intro}</textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>缩略图：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                                <div class="upload-picture-module f24">
+                                    <div>
+                                        <div class="picture-module">
+                                            <input type="file" class="uploadImg uploadSingleImg" name="">
+                                             {empty name="info.thumb_img"}
+                                            <img class="upload_img" src="">
+                                            {else /}
+                                            <img class="upload_img " src="public_uploads/{$info.thumb_img}" />
+                                            {/empty}
+                                            <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="thumb_img"/>
+                                        </div>
+                                        <!--<p>企业营业执照</p>-->
+                                    </div>
+                                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>品牌LOGO：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        {empty name="info.logo_img"}
+                                        <img class="upload_img" src="">
+                                        {else /}
+                                        <img class="upload_img " src="public_uploads/{$info.logo_img}" />
+                                        {/empty}
+                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.logo_img}" name="logo_img"/>
+                                    </div>
+                                    <!--<p>企业营业执照</p>-->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>背景颜色：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module" style="background:url(public_uploads/{$info.background_img});">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        {empty name="info.background_img"}
+                                        <img class="upload_img" src="">
+                                        {else /}
+                                        <img class="upload_img " src="public_uploads/{$info.background_img}" />
+                                        {/empty}
+                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.background_img}" name="background_img"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                   <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>促销主图:</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <!--<p> 加载编辑器的容器 </p>-->
+                            <script id="main_img" type="text/plain">
+
+                            </script>
+                            <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="11%"></td>
+                        <td height=60 width="50%" align=center>
+                            <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
+                            &nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{/block}
+
+{block name="script"}
+<!-- 配置文件 -->
+<script type="text/javascript" src="hui_lib/Ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var main_img = UE.getEditor('main_img', {
+        toolbars: [
+            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
+        ],
+        autoHeightEnabled: true,
+        autoFloatEnabled: true
+    });
+</script>
+    <script type="text/javascript">
+        $(function(){
+            //项目主图
+            main_img.ready(function() {
+                main_img.setContent($('#mainImg').val());
+            });
+            // 表单认证
+            $('.button_save_black_4').on('click',function(){
+                var postData = $('#form1').serializeObject();
+                //主图
+                postData.main_img = '';
+                $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
+                    postData.main_img += $(this).attr('src') + ',';
+
+                });
+
+                var content='';
+                if(!postData.name){
+                    content='促销名称不能为空';
+                }else if(!postData.thumb_img){
+                    content='缩略图不能为空';
+                }else if(!postData.logo_img){
+                    content='品牌LOGO不能为空';
+                }else if(!postData.main_img){
+                    content='促销主图不能为空';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+
+                var url = module +'Scene/edit';
+                $.post(url,postData,function(msg){
+                    dialog.msg(msg,'',function () {
+                        if(msg.status){
+                            // 提交后关闭，然后刷新父窗口
+                            var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                            //window.parent.location.reload();
+                        }
+                    });
+                });
+
+            });
+            // 选择单图片
+            $('body').on('change','.uploadSingleImg',function () {
+                var _this=$(this);
+                uploadsSingleImgFlag = false;
+                var img = event.target.files[0];
+                var uploadfileSize=img.size/1024/1024;
+                var obj=$(this).parent();
+                // 判断是否图片
+                if(!img){
+                    return false;
+                }
+
+                // 判断图片格式
+                var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
+                if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
+                    dialog.error('请上传：jpg、jpeg、png、gif格式图片');
+                    return false;
+                }
+                if(uploadfileSize>1){
+                    dialog.error('图片大小不能超过1M');
+                    return false;
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(img);
+                reader.onload = function(e){
+                    var imgUrl=e.target.result;
+                    $(obj).addClass('active');
+                    var postData = {fileBase64: e.target.result};
+                    // postData.imgWidth = 145;
+                    // postData.imgHeight = 100;
+                    $(obj).find('img').attr('src',imgUrl);
+                    var type = _this.data('type');
+                    if(type == 'notupload'){
+                        $(obj).find('.img').val(imgUrl);
+                        console.log(1);
+                        return false;
+                    }
+                    //提交
+                    $.post(controller+"uploadFileToTemp",postData,function(msg){
+                        if(msg.status == 1){
+                            uploadsSingleImgFlag = true;
+                            $(obj).find('.img').val(msg.info);
+                        }else{
+                            dialog.error(msg.info)
+                        }
+                    })
+                }
+            });
+            //返回
+            $('.button_save_black').click(function(){
+                location.href = controller + '/manage';
+            });
+
+            $('document').ready(function(){
+                // 选择默认值
+                var i = '{$info.id}';
+                if(!i.length){
+                    $("input[name='belong_to']:first").attr('checked','checked');
+                    $("input[name='type']:first").attr('checked','checked');
+                }
+            });
+
+        });
+    </script>
+{/block}
