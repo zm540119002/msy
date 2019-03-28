@@ -6,7 +6,7 @@ namespace app\index\controller;
  */
 class Promotion extends \common\controller\Base{
 
-    public function index(){
+    public function detail(){
         return $this->fetch();
     }
 }
