@@ -60,7 +60,6 @@
 					</div>
 				</div>
 			</section>
-
 			<div class="scene_wrapper">
 				{volist name="sceneLists" id="lists"}
 					{volist name="lists" id="list" }
@@ -84,7 +83,6 @@
 				</div>
 				<div id="scroller-wrapper" class="list_wrapper">
 					<ul class="columns_flex flex-both-side goods-content-list" id="list">
-
 					</ul>
 				</div>
 			</div>
@@ -101,7 +99,6 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<!-- 后面再分类 -->
 				<a href="{:url('StoreLeague/index')}">
 					<span class="practitioners f_icon"></span>
 					<span class="f_txt">加盟店家</span>
@@ -128,8 +125,6 @@
 		</ul>
 	</nav>
 </section>
-{/block}
-{block name="common"}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -206,7 +201,6 @@
 					dialog.error('AJAX错误！');
 				},
 				success: function(data){
-
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
@@ -222,12 +216,11 @@
 				}
 			});
 		});
-		/**
-		 *查看更多资讯
+		/**查看更多资讯
 		 */
 		$('body').on('click','.news_more',function () {
 			location.href = module + 'Information/index';
-		})
+		});
 	});
 </script>
 {/block}
