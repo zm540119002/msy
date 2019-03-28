@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-class CenterStore extends \common\controller\Base{
+class StoreLeague extends \common\controller\Base{
     /**首页
      */
     public function index(){
