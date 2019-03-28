@@ -68,7 +68,6 @@
 					</div>
 				</div>
 			</section>
-
 			<div class="scene_wrapper">
 				{volist name="sceneLists" id="lists" }
 					{volist name="lists" id="list" }
@@ -109,7 +108,6 @@
 				</a>
 			</li>
 			<li class="each_column">
-				<!-- 后面再分类 -->
 				<a href="{:url('StoreLeague/index')}">
 					<span class="practitioners f_icon"></span>
 					<span class="f_txt">加盟店家</span>
@@ -240,8 +238,7 @@
 				}
 			});
 		});
-		/**
-		 *查看更多资讯
+		/**查看更多资讯
 		 */
 		$('body').on('click','.news_more',function () {
 			location.href = module + 'Information/index';
