@@ -30,7 +30,7 @@ class Index extends \common\controller\Base{
                 ['status', '=', 0],
                 ['shelf_status','=',3],
             ],
-            'field'=>['id','name','thumb_img','row_number'],
+            'field'=>['id','name','thumb_img','template','row_number'],
             'order'=>['row_number'=>'desc', 'sort'=>'desc', 'id'=>'desc',],
             'limit'=>'11'
 
@@ -39,7 +39,7 @@ class Index extends \common\controller\Base{
 
         // 场景按行个数分组
         $sceneLists = sceneRatingList($sceneList);
-        
+
         $this ->assign('sceneLists',$sceneLists);
 
         return $this->fetch();
