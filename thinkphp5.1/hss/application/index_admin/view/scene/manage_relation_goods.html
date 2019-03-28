@@ -54,9 +54,10 @@
     <script type="text/javascript">
         $(function () {
             var id = {$id};
+            var relation = {$relation};
             //加载第一页
             var config = {
-                url:module+'goods/getList',
+                url:module+'goods/getList'
             };
             var getData = $('#form1').serializeObject();
             getPagingList(config,getData);
@@ -77,11 +78,11 @@
                 getPagingList(config,getData);
             });
 
-            //选择产品回显
+            // 显示已关联的商品
             if(id){
                 $.ajax({
-                    url: module+'Goods/getSceneGoods',
-                    data: {sceneId:id},
+                    url: module+'Goods/getRelationGoods',
+                    data: {id:id,relation:relation},
                     type: 'get',
                     beforeSend: function(){
                     },
@@ -93,7 +94,7 @@
                     }
                 });
             }
-            //添加商品
+            // 选择商品
             $('body').on('click','.add_goods',function(){
                 var selectedGoodsIds = [];
                 $('.selected_goods_list li').each(function(){
@@ -134,7 +135,7 @@
                 })
                 _this.parent().remove();
             });
-            //添加
+            // 提交添加
             $('body').on('click','.confirm_add',function(){
                 var selectedIds=[];
                 var postData ={};
@@ -151,7 +152,9 @@
                     return false;
                 }
                 postData.selectedIds = selectedIds;
-                var url = module+'Scene/addSceneGoods';
+                postData.relation    = relation;
+                var url = module+'Goods/addRelationGoods';
+
                 _this.addClass("nodisabled");//防止重复提交
                 $.ajax({
                     url: url,
@@ -165,8 +168,7 @@
                     success: function(data){
                         _this.removeClass("nodisabled");
                         dialog.msg(data,'',function () {
-                            var url =  module + 'Scene/manage';
-                            location.href = url;
+                            history.go(-1);
                         })
                     }
                 });

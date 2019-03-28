@@ -77,12 +77,10 @@
 			getPagingList(config,getData);
 		});
 
-		// 去设置促销商品
-		$('body').on('click','.addGoods',function(){
+		// 管理关联的商品
+		$('body').on('click','.relationGoods',function(){
 			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'addGoods/id/' + _thisTr.data('id');
-			console.log(url);
-			return false;
+			var url =  controller + 'manageRelationGoods/id/' + _thisTr.data('id');
 			location.href = url;
 		});
 

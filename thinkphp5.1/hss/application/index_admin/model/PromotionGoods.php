@@ -13,5 +13,5 @@ class PromotionGoods extends \common\model\Base {
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_1';
 	// 别名
-	protected $alias = 's';
+	protected $alias = 'pg';
 }

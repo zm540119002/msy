@@ -27,10 +27,8 @@
         <td class="w96 shelf-status">
             {if $vo.shelf_status == 1}
             <span class="label label-defaunt radius">已下架</span>
-            <!--  <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="3">上架</a>-->
             {else /}
             <span class="label label-success radius">已发布</span>
-            <!-- <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="1">下架</a>-->
             {/if}
         </td>
         <td class="w96">
@@ -43,7 +41,7 @@
             <!-- | <a href="javascript:void(0);" class="addSceneProject">添加项目</a>-->
             {/case}
             {default /}
-            <a href="javascript:void(0);" class="addProjectGoods">关联商品</a>
+            <a href="javascript:void(0);" class="relationGoods">关联商品</a>
             | <a href="javascript:void(0);" class="manageSceneScheme">关联方案</a>
             {/switch}
         </td>

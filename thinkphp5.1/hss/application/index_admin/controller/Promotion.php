@@ -6,6 +6,16 @@ namespace app\index_admin\controller;
  */
 class Promotion extends Base {
 
+    protected $obj;
+
+    protected $beforeActionList = [
+        'currentModelClass'  =>  ['only'=>'edit,setInfo,getList'],
+    ];
+
+    protected  function currentModelClass(){
+        $this->obj = new \app\index_admin\model\Promotion();
+    }
+
     public function manage(){
 
         return $this->fetch('manage');
@@ -16,28 +26,19 @@ class Promotion extends Base {
      * @return array
      */
     public function edit(){
-
-        $model = new \app\index_admin\model\Scene();
+        $model = $this->obj;
         if(!request()->isPost()){
             if($id = input('param.id/d')){
-                $model = new \app\index_admin\model\Scene();
-                $config = [
-                    'where' => [
-                        ['id','=',$id]
-                    ],
-                ];
-                $info = $model->getInfo($config);
-                // 选中的店铺
+                $condition = ['where' => [['id','=',$id]]];
+                $info = $model->getInfo($condition);
                 $this->assign('info',$info);
             }
             return $this->fetch();
 
         }
         else{
-
-            if(!input('param.name/s')){
-                return errorMsg('失败');
-            }
+            // 基础处理
+            if(!input('param.name/s')) return errorMsg('失败');
 
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
@@ -54,52 +55,35 @@ class Promotion extends Base {
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
-
             }
 
             $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 
-            if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
+            if(isset($_POST['id']) && $id=input('post.id/d')){
+                // 编辑
+                $condition = ['where' => ['id' => $id,]];
 
-                $config = [
-                    'where' => ['id' => $id,],
-                ];
+                $info  = $model->getInfo($condition);
+                $result= $model->edit($data,$condition['where']);
+                if(!$result['status']) return $result;
 
-                $where = [
-                    'id'=>$id
-                ];
-                $result = $model -> allowField(true) -> save($data,$where);
-                if(false === $result){
-                    return errorMsg('失败');
-                }
-
-                $info = $model->getInfo($config);
                 //删除旧图片
-                if($info['thumb_img']){
-                    delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
-                }
-                if($info['logo_img']){
-                    delImgFromPaths($info['logo_img'],$_POST['logo_img']);
-                }
-                if($info['background_img']){
-                    delImgFromPaths($info['background_img'],$_POST['background_img']);
-                }
+                if($info['thumb_img']) delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
+                if($info['logo_img']) delImgFromPaths($info['logo_img'],$_POST['logo_img']);
+                if($info['background_img']) delImgFromPaths($info['background_img'],$_POST['background_img']);
                 if($info['main_img']){
                     //删除商品详情图
                     $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
-
             }
             else{//新增
                 $data['create_time'] = time();
-                $result = $model -> allowField(true) -> save($data);
-                if(!$result){
-                    return errorMsg('失败');
-                }
+                $result = $model->edit($data);
+                if(!$result['status']) return $result;
 
             }
             return successMsg('成功');
@@ -114,9 +98,7 @@ class Promotion extends Base {
             return config('custom.not_post');
         }
 
-        if (!$id  = input('post.id/d')){
-            return errorMsg('失败');
-        }
+        if(!$id=input('post.id/d')) return errorMsg('失败');
 
         $info= array();
         // 上下架
@@ -126,12 +108,10 @@ class Promotion extends Base {
             $info = ['shelf_status'=>$shelf_status];
         }
 
-        $model = new \app\index_admin\model\Promotion();
-        $rse = $model->where(['id'=>$id])->setField($info);
+        $rse  = $this->obj->where(['id'=>$id])->setField($info);
 
-        if(!$rse){
-            return errorMsg('失败');
-        }
+        if(!$rse) return errorMsg('失败');
+
         return successMsg('成功');
     }
 
@@ -139,7 +119,7 @@ class Promotion extends Base {
      *  分页查询
      */
     public function getList(){
-        $model = new \app\index_admin\model\Promotion();
+        $model = $this->obj;
         $where = [];
         $where[] = ['status','=',0];
         // 上下架
@@ -147,23 +127,17 @@ class Promotion extends Base {
             $where[] = ['shelf_status','=',input('get.shelf_status',0,'int')];
         }
 
-        $keyword = input('get.keyword','','string');
-        if($keyword){
-            $where[] = ['name','like', '%' . trim($keyword) . '%'];
-        }
+        $keyword = input('get.keyword/s');
+        if($keyword) $where[] = ['name','like', '%' . trim($keyword) . '%'];
+
 
         $config = [
             'where'=>$where,
-            'field'=>[
-                'id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection'
-            ],
-            'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc',
-            ],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection'],
+            'order'=>['sort'=>'desc', 'id'=>'desc',],
         ];
 
-        $list = $model ->pageQuery($config);
+        $list = $model->pageQuery($config);
 
         $this->assign('list',$list);
 
@@ -180,9 +154,7 @@ class Promotion extends Base {
             return config('custom.not_post');
         }
 
-        if(!input('?post.id') && !input('?post.id')){
-            return errorMsg('失败');
-        }
+        if(!input('?post.id')&&!input('?post.ids'))  return errorMsg('失败');
 
         if($id = input('post.id/d')){
             $condition = ['where' => [['id','=',$id]],];
@@ -215,43 +187,15 @@ class Promotion extends Base {
         }
     }
 
-    /**
-     * 添加促销商品
-     * @return array|mixed
-     * @throws \Exception
-     */
-    public function addGoods(){
-        if(request()->isPost()){
-            $model = new \app\index_admin\model\PromotionGoods();
-            $data = input('post.selectedIds/a');
-            $condition = [
-                ['promotion_id','=',$data[0]['promotion_id']]
-            ];
-            $model->startTrans();
-            $rse = $model -> del($condition,$tag=false);
+    // 管理类别下的商品
+    public function manageRelationGoods(){
+        // 暂时先全部写在商品分类里
+        GoodsCategory::getGoodsCategory();
+        $this->assign('relation',config('custom.relation_type.promotion'));
 
-            if(false === $rse){
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $res = $model->allowField(true)->saveAll($data)->toArray();
-            if (!count($res)) {
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $model -> commit();
-            return successMsg('成功');
-
-        }else{
-            if(!input('?id') || !input('id/d')){
-                $this ->error('参数有误',url('manage'));
-            }
-
-            $id = input('id/d');
-            $this->assign('id',$id);
-            return $this->fetch();
-        }
+        return $this->fetch();
     }
+
 
 
 }
