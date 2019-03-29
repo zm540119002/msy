@@ -59,9 +59,7 @@ class Scene extends \common\controller\Base{
         if(request()->isAjax()){
         }else{
             $id = intval(input('id'));
-            if(!$id){
-                $this->error('此项目已下架');
-            }
+            if(!$id) $this->error('此项目已下架');
 
             // 场景信息
             $model = new\app\index\model\Scene();
@@ -185,27 +183,6 @@ class Scene extends \common\controller\Base{
             ];
             $categoryList = $modelSceneGoodsCategory->getList($config);
             $this->assign('categoryList',$categoryList);
-
-            // 场景下的首商品分类的商品
-            /*            $goodsList = array();
-                        if($categoryList){
-                            $category = reset($categoryList);
-                            $modelGoods = new \app\index\model\Goods();
-                            $config = [
-                                'where' => [
-                                    ['status', '=', 0],
-                                    ['category_id_1', '=', $category['id']],
-                                ],'field'=>[
-                                    'id ','headline','thumb_img','bulk_price','specification','minimum_order_quantity',
-                                    'minimum_sample_quantity','increase_quantity','purchase_unit'
-                                ],'order'=> [
-                                    'sort' => 'desc'
-                                ]
-                            ];
-                            $goodsList= $modelGoods->getList($config);
-                        }
-
-                        $this->assign('goodsList',$goodsList);*/
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);

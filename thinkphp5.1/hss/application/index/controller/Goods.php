@@ -147,7 +147,7 @@ class Goods extends \common\controller\Base{
 
         $list = $model -> getList($config);
         $this->assign('list',$list);
-        
+
         return $this->fetch('list_goods_one_column_tpl');
     }
 
@@ -211,82 +211,6 @@ class Goods extends \common\controller\Base{
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
-    }
-
-    // 查询场景下的商品
-    public function getSceneGoodsList(){
-
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-
-        $scene_id =  intval(input('get.scene_id/d',''));
-        if(!$scene_id){
-            $this->error('此项目已下架');
-        }
-
-        $modelSceneGoods = new \app\index\model\SceneGoods();
-        $config = [
-            'where' => [
-                ['sg.status', '=', 0],
-                ['sg.scene_id', '=', $scene_id],
-            ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],'join'=>[
-                ['goods g','g.id = sg.goods_id','left']
-            ]
-        ];
-
-        $list = $modelSceneGoods -> pageQuery($config);
-        $this->assign('list',$list);
-
-        return $this->fetch('list_goods_one_column_tpl');
-
-    }
-
-    /**
-     * 查询项目下的商品 分页查询
-     */
-    public function getProjectGoodsList(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $model = new \app\index\model\ProjectGoods();
-        $config=[
-            'where'=>[
-                ['pg.status','=',0],
-            ],
-            'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],
-            'join'=>[
-                ['goods g','g.id = pg.goods_id','left']
-            ],
-            'order'=>[
-                'sort'=>'desc',
-            ],
-        ];
-        if(input('?get.storeId') && (int)input('?get.storeId')){
-            $config['where'][] = ['g.store_id', '=', input('get.storeId')];
-        }
-        if(input('?get.belong_to') && (int)input('?get.belong_to')){
-            $config['where'][] = ['g.belong_to', '=', input('get.belong_to')];
-        }
-        if(input('?get.project_id') && (int)input('?get.project_id')){
-            $config['where'][] = ['pg.project_id', '=', input('get.project_id')];
-        }
-
-        $keyword = input('get.keyword','');
-        if($keyword) {
-            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
-        }
-        $list = $model -> pageQuery($config);
-
-        $this->assign('list',$list);
-
-        return $this->fetch('list_goods_one_column_tpl');
     }
 
     /**获取推荐商品
