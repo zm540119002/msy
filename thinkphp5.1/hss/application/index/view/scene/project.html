@@ -120,7 +120,7 @@
 	$(function(){
 		//初始化分类商品页面
 		//$('.mod_selection_nav li:eq(0)').addClass('current');
-		postData.project_id = $('.mod_selection_nav li.current').data('project-id');
+		postData.id = $('.mod_selection_nav li.current').data('project-id');
 		getPagingList(config,postData);
 
 /*		$('body').on('click','.mod_selection_nav li',function(){
