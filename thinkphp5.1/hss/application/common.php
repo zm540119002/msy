@@ -169,3 +169,25 @@ function get_menu_tree($items, $id = 'id', $pid = 'parent_id_1', $son = 'childre
     }
     return $tree;
 }
+
+/**
+ * 图片展示处理 现暂时没有其它的默认图片，到时按目录区分默认图片
+ * 返回默认，记录日志......
+ */
+function show_img_handle($img_url){
+
+    if(!empty($img_url)){
+        // 根目录
+        $serverInfo = request()->server();
+        $uploads = config('upload_dir.upload_path');
+        $url     = "{$serverInfo['DOCUMENT_ROOT']}/{$uploads}/{$img_url}";
+
+        if(is_file($url)){
+            $uploads = config('template.tpl_replace_string.public_uploads');
+            return $uploads.'/'.$img_url;
+        }
+    }
+
+    $uploads = config('template.tpl_replace_string.public_img');
+    return $uploads.'/default/no_pic_100.jpg';
+}
