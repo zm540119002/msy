@@ -114,6 +114,20 @@
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
+	var a = [];
+	for (var i = 0; i < 10; i++) {
+		a[i] = function () {
+			console.log(i);
+		};
+	}
+	a[6](); // 10
+	a = [];
+	for (let i = 0; i < 10; i++) {
+		a[i] = function () {
+			console.log(i);
+		};
+	}
+	a[6](); // 6
 	var config = {
 		url:module+'Goods/getList',
 		requestEnd:false,
