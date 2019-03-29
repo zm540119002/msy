@@ -2,14 +2,14 @@
 {block name="content"}
 
 <nav class="breadcrumb">
-	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 场景管理
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 促销管理
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
     <div class="cl pd-5 bg-1 bk-gray">
 			<span class="l">
-				<a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60" title="场景" id="title">
-				<i class="Hui-iconfont"></i> 添加场景</a>
+				<a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60" title="促销" id="title">
+				<i class="Hui-iconfont"></i> 添加促销</a>
 			</span>
         <!-- 先不要 -->
       <!--  <span class="r">共有数据：<strong id="count">4</strong> 条</span>-->
@@ -17,15 +17,6 @@
 	<div class="main-content mt-20" id="mainContent">
 		<div class="navbar-default mb-20">
 			<form id="form1" >
-				<div class="form-group">
-					<select name="type" class="form-control">
-						<option value="">类别</option>
-						{foreach $Think.config.custom.scene_type as $k => $vo}
-						<option value="{$k}">{$vo}</option>
-						{/foreach}
-					</select>
-				</div>
-
 				<div class="form-group">
 					<select name="shelf_status" class="form-control">
 						<option value="" selected="selected">上下架</option>
@@ -42,7 +33,7 @@
 					</div>
 				</div>
 				<!--排序规则-->
-				<input type="button" id="search" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
+				<input type="button" id="searchScene" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
 			</form>
 		</div>
 		<div class="content" id="list"></div>
@@ -80,24 +71,12 @@
 			getPagingList(config,getData);
 		});
 		//搜索
-		$('#search').click(function(){
+		$('#searchScene').click(function(){
 			//config.currentPage = 0;
 			var getData = $('#form1').serializeObject();
 			getPagingList(config,getData);
 		});
 
-		// 去设置场景下的商品分类
-		$('body').on('click','.manageSceneGoodsCategory',function(){
-			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'manageSceneGoodsCategory/id/' + _thisTr.data('id');
-			location.href = url;
-		});
-		// 去设置场景下的方案
-		$('body').on('click','.manageSceneScheme',function(){
-			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'manageSceneScheme/id/' + _thisTr.data('id');
-			location.href = url;
-		});
 		// 管理关联的商品
 		$('body').on('click','.relationGoods',function(){
 			var _thisTr = $(this).parents('tr');

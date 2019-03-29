@@ -23,7 +23,7 @@
                 <div class="search_bar">
                     <span class="left">产品分类:</span>
                     {include file="goods_category/linkage_tpl" /}
-                    <input type="text" class="search-goods keyword" name="keyword" placeholder="搜索产品">
+                    <input type="text" class="search-goods keyword" name="keyword"  placeholder="搜索产品">
                     <input type="button" value="搜索" class="layer-search-btn search" id="searchGoods">
                 </div>
             </form>
@@ -54,9 +54,10 @@
     <script type="text/javascript">
         $(function () {
             var id = {$id};
+            var relation = {$relation};
             //加载第一页
             var config = {
-                url:module+'goods/getList',
+                url:module+'goods/getList'
             };
             var getData = $('#form1').serializeObject();
             getPagingList(config,getData);
@@ -77,11 +78,11 @@
                 getPagingList(config,getData);
             });
 
-            //选择产品回显
+            // 显示已关联的商品
             if(id){
                 $.ajax({
-                    url: module+'Goods/getProjectGoods',
-                    data: {projectId:id},
+                    url: module+'Goods/getRelationGoods',
+                    data: {id:id,relation:relation},
                     type: 'get',
                     beforeSend: function(){
                     },
@@ -93,7 +94,7 @@
                     }
                 });
             }
-            //添加商品
+            // 选择商品
             $('body').on('click','.add_goods',function(){
                 var selectedGoodsIds = [];
                 $('.selected_goods_list li').each(function(){
@@ -102,8 +103,6 @@
                 });
                 var _this=$(this);
                 var goodsId=_this.parents('li').data('id');
-                console.log(goodsId);
-                console.log(selectedGoodsIds);
                 if($.inArray(goodsId, selectedGoodsIds) !== -1){
                     layer.tips('此商品已选择过!','.add_goods',{
                         tips:[3,'#ff0000'],
@@ -136,7 +135,7 @@
                 })
                 _this.parent().remove();
             });
-            //添加
+            // 提交添加
             $('body').on('click','.confirm_add',function(){
                 var selectedIds=[];
                 var postData ={};
@@ -144,7 +143,7 @@
                 $('.selected_goods_list li').each(function () {
                     var selectedGoods={};
                     var goodsSelectedId=$(this).data('goods-id');
-                    selectedGoods.project_id=id;
+                    selectedGoods.promotion_id=id;
                     selectedGoods.goods_id=goodsSelectedId;
                     selectedIds.push(selectedGoods);
                 });
@@ -153,7 +152,9 @@
                     return false;
                 }
                 postData.selectedIds = selectedIds;
-                var url = module+'project/addProjectGoods';
+                postData.relation    = relation;
+                var url = module+'Goods/addRelationGoods';
+
                 _this.addClass("nodisabled");//防止重复提交
                 $.ajax({
                     url: url,
@@ -167,8 +168,7 @@
                     success: function(data){
                         _this.removeClass("nodisabled");
                         dialog.msg(data,'',function () {
-                            var url =  module + 'Project/manage';
-                            location.href = url;
+                            history.go(-1);
                         })
                     }
                 });
