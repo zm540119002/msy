@@ -133,6 +133,7 @@ class Scene extends \common\controller\Base{
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $this->assign('relation',config('custom.relation_type.scene'));
 
             return $this->fetch();
         }
@@ -264,6 +265,7 @@ class Scene extends \common\controller\Base{
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $this->assign('relation',config('custom.relation_type.project'));
             return $this->fetch();
         }
     }
