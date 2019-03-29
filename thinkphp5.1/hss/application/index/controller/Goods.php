@@ -147,7 +147,7 @@ class Goods extends \common\controller\Base{
 
         $list = $model -> getList($config);
         $this->assign('list',$list);
-        return view('goods/list_goods_one_column_tpl');
+        return view('list_goods_one_column_tpl');
     }
 
     /**商品详情页
