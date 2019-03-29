@@ -23,7 +23,7 @@
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
-					<img src="{:show_img_handle($info.thumb_img)}" alt="" class="common_default_img">
+					<img src="{:show_img_handle($project.thumb_img)}" alt="" class="common_default_img">
 				</div>
 			</div>
 		</div>
@@ -115,27 +115,12 @@
 	};
 	var postData = {
 		pageSize:10,
-		relation:'{$relation}'
+		relation:'{$relation}',
+		id:'{$project.id}'
 	};
 	$(function(){
 		//初始化分类商品页面
-		//$('.mod_selection_nav li:eq(0)').addClass('current');
-		postData.id = '{$project.id}';
 		getPagingList(config,postData);
-
-/*		$('body').on('click','.mod_selection_nav li',function(){
-			var _this = $(this);
-			$(this).addClass('current').siblings().removeClass('current');
-			config = {
-				url:module+'Goods/getList',
-				requestEnd:false,
-				loadTrigger:false,
-				currentPage:1
-			};
-			postData.project_id = _this.data('project-id');
-			getPagingList(config,postData);
-		});*/
-
 	});
 
 	var config_1 = {
@@ -151,22 +136,9 @@
 	};
 	$(function(){
 		//初始化分类商品页面
-		//$('.mod_selection_nav li:eq(0)').addClass('current');
-		//postData_1.project_id = $('.mod_selection_nav li.current').data('project-id');
+
 		getPagingList(config_1,postData_1);
 
-		/*		$('body').on('click','.mod_selection_nav li',function(){
-		 var _this = $(this);
-		 $(this).addClass('current').siblings().removeClass('current');
-		 config = {
-		 url:module+'Goods/getList',
-		 requestEnd:false,
-		 loadTrigger:false,
-		 currentPage:1
-		 };
-		 postData.project_id = _this.data('project-id');
-		 getPagingList(config,postData);
-		 });*/
 
 	});
 
