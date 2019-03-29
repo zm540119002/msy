@@ -120,6 +120,8 @@
 			console.log(i);
 		};
 	}
+	a[0](); // 10
+	a[3](); // 10
 	a[6](); // 10
 	console.log(a);
 	a = [];
@@ -128,7 +130,9 @@
 			console.log(i);
 		};
 	}
-	a[6](); // 6
+	a[0](); // 10
+	a[3](); // 10
+	a[6](); // 10
 	console.log(a);
 	var config = {
 		url:module+'Goods/getList',
