@@ -13,43 +13,6 @@ class Scene extends \common\controller\Base{
             return $this->fetch();
         }
     }
-    public function jiameng(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function yiqi(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function kaidian(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function qingsongtuoke(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function liukeshicao(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function suokefanglue(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-
     /**
      * 查出产商相关产品 分页查询
      */
@@ -252,7 +215,6 @@ class Scene extends \common\controller\Base{
 
     /**
      * 二级场景页 -只作为入口不关联场景
-     * 项目 中心店，工作室
      * 项目信息4个暂定(名称，logo,商品-ajax获取，介绍，视频)
      */
     public function project(){
@@ -265,7 +227,6 @@ class Scene extends \common\controller\Base{
                     ['status', '=', 0],
                     ['shelf_status', '=', 3],
                     ['audit', '=', 1],
-                    ['belong_to','exp','& 1'],
                 ],'field'=> [
                     'id ','name','thumb_img','main_img','intro','detail_img','create_time','update_time','video'
                 ],'order'=> [
