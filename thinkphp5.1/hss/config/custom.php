@@ -87,7 +87,7 @@ return [
         '3' => '项目',
     ],
     /**
-     * 标记 -关联表类型
+     * 标记 -关联表类型 goods
      */
     'relation_type' => [
         'scene'    => 1,
