@@ -151,7 +151,8 @@ class Goods extends \common\controller\Base{
         return $this->fetch('list_goods_one_column_tpl');
     }
 
-    /**商品详情页
+    /**
+     * 商品详情页
      */
     public function detail(){
         if(request()->isAjax()){
