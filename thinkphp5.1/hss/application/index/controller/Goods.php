@@ -102,6 +102,54 @@ class Goods extends \common\controller\Base{
         }
     }
 
+    /***
+     * 获取各关联表下的商品 -通用方法
+     * @return array|\think\response\View
+     */
+    public function getRelationGoods(){
+        if(!request()->isGet()){
+            return errorMsg('参数有误');
+        }
+        if(!$id = input('get.id/d')) return errorMsg('参数有误');
+
+        $relation = input('get.relation/d');
+        // custom.php relation_type
+        switch($relation){
+            case config('custom.relation_type.scene'):
+                $model = new \app\index\model\SceneGoods();
+                $field_id = 'sg.scene_id';
+                $goods_id = 'sg.goods_id';
+                break;
+            case config('custom.relation_type.project'):
+                $model = new \app\index\model\ProjectGoods();
+                $field_id = 'pg.project_id';
+                $goods_id = 'pg.goods_id';
+                break;
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index\model\PromotionGoods();
+                $field_id = 'pg.promotion_id';
+                $goods_id = 'pg.goods_id';
+                break;
+            default:
+                return errorMsg('参数有误');
+        }
+
+        $config = [
+            'where' => [
+                [$field_id,'=',$id], ['g.status','=', 0], ['g.shelf_status','=', 3],
+            ],'join' => [
+                ['goods g','g.id = '.$goods_id,'left'],
+            ],'field' => [
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],
+        ];
+
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+        return view('goods/list_goods_one_column_tpl');
+    }
+
     /**商品详情页
      */
     public function detail(){

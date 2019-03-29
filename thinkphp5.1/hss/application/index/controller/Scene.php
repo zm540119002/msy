@@ -133,6 +133,7 @@ class Scene extends \common\controller\Base{
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $this->assign('relation',config('custom.relation_type.promotion'));
 
             return $this->fetch();
         }

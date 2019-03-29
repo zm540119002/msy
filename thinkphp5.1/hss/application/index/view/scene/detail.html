@@ -93,13 +93,14 @@
 	});
 	// 获取该场景下的商品
 	var config = {
-		url:module+'Goods/getSceneGoodsList',
+		url:module+'Goods/getRelationGoods',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1
 	};
 	var postData = {
-		pageSize:10
+		pageSize:10,
+		relation:{$relation}
 	};
 
 	$(function(){

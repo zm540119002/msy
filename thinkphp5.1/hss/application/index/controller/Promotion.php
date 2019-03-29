@@ -7,6 +7,7 @@ namespace app\index\controller;
 class Promotion extends \common\controller\Base{
 
     public function detail(){
+        $this->assign('relation',config('custom.relation_type.promotion'));
         return $this->fetch();
     }
 }
