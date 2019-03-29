@@ -59,9 +59,7 @@ class Scene extends \common\controller\Base{
         if(request()->isAjax()){
         }else{
             $id = intval(input('id'));
-            if(!$id){
-                $this->error('此项目已下架');
-            }
+            if(!$id) $this->error('此项目已下架');
 
             // 场景信息
             $model = new\app\index\model\Scene();

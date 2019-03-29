@@ -2,33 +2,24 @@
 {block name="content"}
 
 <article class="f24">
-	<ul class="nav_menu">
-
-		{volist name="sceneList" id="info"}
-			<li data-scene-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
-				<a href="{:url(request()->controller().'/'.$info.template,['id'=>$info.id])}" class="category_nav">{$info.name}</a>
-			</li>
-		{/volist}
-
-	</ul>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
 
-					{volist name="$scene.main_img" id="info"}
-					<img src="{:show_img_handle($info)}" alt="" class="common_default_img">
+					{volist name="$info.main_img" id="vo"}
+					<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
 					{/volist}
 
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="content-padding content_main wy_list" style="background:url({:show_img_handle($scene.background_img)});">
+	<section class="content-padding content_main wy_list" style="background:url({:show_img_handle($info.background_img)});">
 		<div class="">
 			<div class="columns_flex l-r-sides count_down_module">
 				<div class="mid_module_left">
-					<img src="{:show_img_handle($scene.logo_img)}" alt="">
+					<img src="{:show_img_handle($info.logo_img)}" alt="">
 					<div>
 						<span class="left count-down-icons"></span>
 						<div class="d-r">
@@ -48,19 +39,7 @@
 				</div>
 			</div>
 		</div>
-		<!--方案列表-->
-		{notempty name="schemeList"}
-			{volist name="schemeList" id="info"}
-				<div class="apply_item">
-					{if $info.show_name==1}
-						<span class="content-label">{$info.name}</span>
-					{/if}
-					<a data-id="{$info.id}">
-						<img src="{:show_img_handle($info.thumb_img)}" alt="">
-					</a>
-				</div>
-			{/volist}
-		{/notempty}
+
 		<!--产品列表-->
 		<ul class="goods_list list" id="list">
 
@@ -71,8 +50,7 @@
 
 {/block}
 {block name="common"}
-    {include file="brand/set_brand" /}
-	{include file="public/sample_layer" /}
+
 {/block}
 {block name="footer"}
 	{include file="template/footer_menu.html" /}
@@ -100,13 +78,12 @@
 	};
 	var postData = {
 		pageSize:10,
-		relation:{$relation}
+		relation:'{$relation}'
 	};
 
 	$(function(){
-		//初始化场景商品页面
-		postData.id = $('.nav_menu li.current').data('scene-id');
-
+		//初始化商品页面
+		postData.id = '{$info.id}';
 		getPagingList(config,postData);
 	});
 </script>

@@ -100,12 +100,12 @@
 	};
 	var postData = {
 		pageSize:10,
-		relation:{$relation}
+		relation:'{$relation}'
 	};
 
 	$(function(){
 		//初始化场景商品页面
-		postData.id = $('.nav_menu li.current').data('scene-id');
+		postData.id = '{$scene.id}';
 
 		getPagingList(config,postData);
 	});

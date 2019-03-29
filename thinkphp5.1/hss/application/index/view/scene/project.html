@@ -115,12 +115,12 @@
 	};
 	var postData = {
 		pageSize:10,
-		relation:{$relation}
+		relation:'{$relation}'
 	};
 	$(function(){
 		//初始化分类商品页面
 		//$('.mod_selection_nav li:eq(0)').addClass('current');
-		postData.id = $('.mod_selection_nav li.current').data('project-id');
+		postData.id = '{$project}';
 		getPagingList(config,postData);
 
 /*		$('body').on('click','.mod_selection_nav li',function(){
@@ -147,8 +147,7 @@
 	};
 	var postData_1 = {
 		pageSize:10,
-		pageType:'column_1',
-		belong_to:1
+		pageType:'column_1'
 	};
 	$(function(){
 		//初始化分类商品页面
