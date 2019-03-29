@@ -9,17 +9,13 @@
 					<video  src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
 				</div>
 				{/notempty}
-				{empty name="info.main_img"}
-				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/default/no_pic_100.jpg" alt="">
-				</div>
-				{else /}
+
 				{volist name="info.main_img" id="main_img"}
 				<div class="swiper-slide swiper-slide-active">
-					<img src="public_uploads/{$main_img}" alt="" class="common_default_img">
+					<img src="{:show_img_handle($main_img)}" alt="" class="common_default_img">
 				</div>
 				{/volist}
-				{/empty}
+
 			</div>
 			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
@@ -138,7 +134,7 @@
 					<p class="content-label">商品详情</p>
 					{volist name="info.detail_img" id="detail_img"}
 					<div class="">
-						<img src="public_uploads/{$detail_img}" alt="" class="common_default_img">
+						<img src="{:show_img_handle($detail_img)}" alt="" class="common_default_img">
 					</div>
 					{/volist}
 				</div>
@@ -351,7 +347,7 @@
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		//设置分数
-		var averageScore = {$averageScore};
+		var averageScore = '{$averageScore}';
 		$('.five_star').setStar(parseFloat(averageScore));
 		//收藏
 		$('body').on('click','.collection',function(){
