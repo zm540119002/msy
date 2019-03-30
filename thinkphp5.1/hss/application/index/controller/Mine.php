@@ -19,8 +19,8 @@ class Mine extends \common\controller\Base{
             $wallet = $model->getInfo($condition);
         }
         $this->assign('wallet',$wallet);
-
-        $res = basename('app\index\controller\Mine');
+        p(__CLASS__);
+        $res = basename(__CLASS__);
         $this->assign('class',$res);
         p($res);
         exit;
