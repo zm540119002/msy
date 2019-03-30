@@ -1,6 +1,9 @@
 <?php
 namespace app\index\controller;
 
+/**
+ * 收藏控制器
+ */
 class Collection extends \common\controller\UserBase{
     /**首页
      */
@@ -42,7 +45,7 @@ class Collection extends \common\controller\UserBase{
         ];
         $result = $model -> isUpdate(false) -> save($data);
         if($result){
-            return successMsg('已成功收藏');
+            return successMsg('收藏成功');
         }else{
             return errorMsg('收藏失败');
         }
