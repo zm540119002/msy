@@ -20,7 +20,7 @@ class Mine extends \common\controller\Base{
         }
         $this->assign('wallet',$wallet);
         p(__CLASS__);
-        $res = basename(__CLASS__);
+        $res = dirname('/www/mywebsite/images/');
         $this->assign('class',$res);
         p($res);
         exit;
