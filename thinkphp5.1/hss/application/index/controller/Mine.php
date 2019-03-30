@@ -19,11 +19,8 @@ class Mine extends \common\controller\Base{
             $wallet = $model->getInfo($condition);
         }
         $this->assign('wallet',$wallet);
-        p(__CLASS__);
-        $res = basename('/www/mywebsite/images/');
-        $this->assign('class',$res);
-        p($res);
-        exit;
+        $this->assign('class',basename(__CLASS__).'/');
+
         return $this->fetch();
     }
 
