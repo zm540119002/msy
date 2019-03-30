@@ -22,7 +22,8 @@ class Mine extends \common\controller\Base{
 
         $res = basename('app\index\controller\Mine');
         $this->assign('class',$res);
-
+        p($res);
+        exit;
         return $this->fetch();
     }
 
