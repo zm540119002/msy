@@ -41,12 +41,15 @@ class Index extends \common\controller\Base{
         $this ->assign('sceneLists',$sceneLists);
 
         // 底部菜单
-        $this->assign('currentPage',true);
+        $footer_menu = config('custom.footer_menu');
+        $footer_menu[1]['currentPage'] = 'current';
+        $this->assign('footer_menu',$footer_menu);
 
         return $this->fetch();
     }
 
     public function test(){
+        echo request()->action();
         if(request()->isAjax()){
         }else{
             return $this->fetch();
