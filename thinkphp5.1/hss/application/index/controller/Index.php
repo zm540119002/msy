@@ -45,4 +45,12 @@ class Index extends \common\controller\Base{
 
         return $this->fetch();
     }
+
+    public function test(){
+        echo basename();
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
 }
