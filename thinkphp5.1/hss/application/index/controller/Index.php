@@ -41,9 +41,7 @@ class Index extends \common\controller\Base{
         $this ->assign('sceneLists',$sceneLists);
 
         // 底部菜单
-        $footer_menu = config('custom.footer_menu');
-        $footer_menu[1]['currentPage'] = 'current';
-        $this->assign('footer_menu',$footer_menu);
+        $this->assign('currentPage',1);
 
         return $this->fetch();
     }

@@ -2,10 +2,10 @@
     <nav class=" foot_nav_bar">
         <ul class="columns_flex">
             {volist name="Think.config.custom.footer_menu" id="vo" key="k" }
-            <li class="each_column ">
+            <li class="each_column {if $k==$currentPage}current{/if}">
                 <a {$vo.a}>
                     <span class="{$vo.icon} f_icon"></span>
-                    <span class="f_txt">{$k}</span>
+                    <span class="f_txt">{$vo.name}</span>
                 </a>
             </li>
             {/volist}
