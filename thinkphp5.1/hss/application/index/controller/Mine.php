@@ -22,6 +22,7 @@ class Mine extends \common\controller\Base{
 
         p(__CLASS__);
         $res = str_replace('\\','/',__CLASS__);
+        $res = 'app/index/controller/Mine';
         $controller = basename($res);
         //$res = substr(__CLASS__,strrpos(__CLASS__,'\\'));
         p($controller);
