@@ -1,0 +1,21 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 content_main">
+	<div id="app">
+		{{ message }}
+	</div>
+</article>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: 'Hello Vue!'
+		}
+	})
+</script>
+{/block}
