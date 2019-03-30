@@ -21,7 +21,12 @@ class Cart extends \common\controller\UserBase{
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            $this->assign('class',basename(__CLASS__));
+
+            // 底部菜单
+            $footer_menu = config('custom.footer_menu');
+            $footer_menu[4]['class'] = 'current';
+            $this->assign('footer_menu',$footer_menu);
+
             return $this->fetch();
         }
     }

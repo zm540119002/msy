@@ -20,14 +20,25 @@ class Mine extends \common\controller\Base{
         }
         $this->assign('wallet',$wallet);
 
-        $this->assign('class',basename(__CLASS__));
+        p(__CLASS__);
+        $res = str_replace('\\','/',__CLASS__);
+        $res = 'app/index/controller/Mine';
+        $controller = basename($res);
+        //$res = substr(__CLASS__,strrpos(__CLASS__,'\\'));
+        p($controller);
+        exit;
+        // 底部菜单
+        $footer_menu = config('custom.footer_menu');
+        $footer_menu[5]['a'] = 'href=javascript:void(0)';
+        $footer_menu[5]['class'] = 'current';
+        $this->assign('footer_menu',$footer_menu);
 
         return $this->fetch();
     }
 
     //修改头像
     public function editAvatar(){
-        
+
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
