@@ -22,36 +22,36 @@ return [
      * 底部菜单 :采购商场，加盟店家，城市合伙人，采购车，我
      * name,a,icon,controller
      */
-    'bottom_menu' => [
+    'footer_menu' => [
         '1' => [
             'name' => '采购商场',
             'a'    => 'href='.url('Index/index'),
             'icon' => 'store',
-            'class'=> 'Index',
+            'controller'=> 'Index',
         ],
         '2' => [
             'name' => '加盟店家',
             'a'    => 'href='.url('StoreLeague/index'),
             'icon' => 'practitioners',
-            'class'=> 'StoreLeague',
+            'controller'=> 'StoreLeague',
         ],
         '3' => [
             'name' => '城市合伙人',
             'a'    => 'href='.url('Business/index'),
             'icon' => 'business',
-            'class'=> 'Business',
+            'controller'=> 'Business',
         ],
         '4' => [
             'name' => '采购车',
-            'a'    => 'href='.url('Cart/index'),
+            'a'    => 'href=javascript:void(0) class=my_bottom_cart data-jump_url='.url('Cart/manage'),
             'icon' => 'cart',
-            'class'=> 'Cart',
+            'controller'=> 'Cart',
         ],
         '5' => [
             'name' => '我',
-            'a'    => 'href=javascript:void(0) class=my_bottom_cart data-jump_url='.url('Mine/index'),
+            'a'    => 'href='.url('Mine/index'),
             'icon' => 'my',
-            'class'=> 'Mine',
+            'controller'=> 'Mine',
         ],
     ],
 ];

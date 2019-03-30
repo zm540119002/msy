@@ -39,10 +39,12 @@ class Index extends \common\controller\Base{
 
         // 场景按行个数分组
         $sceneLists = sceneRatingList($sceneList);
-
         $this ->assign('sceneLists',$sceneLists);
-        $this->assign('class',basename(__CLASS__).'/');
-        $this->assign('class','Index');
+
+        // 底部菜单
+        $footer_menu = config('custom.footer_menu');
+        $footer_menu[1]['class'] = 'current';
+        $this->assign('footer_menu',$footer_menu);
 
         return $this->fetch();
     }
