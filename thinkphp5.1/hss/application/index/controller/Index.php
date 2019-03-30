@@ -40,13 +40,14 @@ class Index extends \common\controller\Base{
         $sceneLists = sceneRatingList($sceneList);
         $this ->assign('sceneLists',$sceneLists);
 
-        // 底部菜单
-        $this->assign('currentPage',true);
+        // 底部菜单，见配置文件custom.footer_menu
+        $this->assign('currentPage',request()->controller().'/'.request()->action());
 
         return $this->fetch();
     }
 
     public function test(){
+        echo request()->action();
         if(request()->isAjax()){
         }else{
             return $this->fetch();

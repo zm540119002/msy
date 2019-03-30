@@ -23,35 +23,30 @@ return [
      * name,a,icon,controller
      */
     'footer_menu' => [
-        '1' => [
+        'Index/index' => [
             'name' => '采购商场',
             'a'    => 'href='.url('Index/index'),
             'icon' => 'store',
-            'controller'=> 'Index',
         ],
-        '2' => [
+        'StoreLeague/index' => [
             'name' => '加盟店家',
             'a'    => 'href='.url('StoreLeague/index'),
             'icon' => 'practitioners',
-            'controller'=> 'StoreLeague',
         ],
-        '3' => [
+        'Business/index' => [
             'name' => '城市合伙人',
             'a'    => 'href='.url('Business/index'),
             'icon' => 'business',
-            'controller'=> 'Business',
         ],
-        '4' => [
+        'Cart/manage' => [
             'name' => '采购车',
             'a'    => 'href=javascript:void(0) class=my_bottom_cart data-jump_url='.url('Cart/manage'),
             'icon' => 'cart',
-            'controller'=> 'Cart',
         ],
-        '5' => [
+        'Mine/index' => [
             'name' => '我',
             'a'    => 'href='.url('Mine/index'),
             'icon' => 'my',
-            'controller'=> 'Mine',
         ],
     ],
 ];
