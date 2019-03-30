@@ -73,20 +73,7 @@
 		</div>
 	</section>
 </article>
-<section class="bottom_nav_fixed bottom_white">
-	<nav class=" foot_nav_bar">
-		<ul class="columns_flex">
-			{volist name="footer_menu" id="vo"}
-			<li class="each_column {$vo.class}">
-				<a {$vo.a}>
-					<span class="{$vo.icon} f_icon"></span>
-					<span class="f_txt">{$vo.name}</span>
-				</a>
-			</li>
-			{/volist}
-		</ul>
-	</nav>
-</section>
+{include file="template/footer_project.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
