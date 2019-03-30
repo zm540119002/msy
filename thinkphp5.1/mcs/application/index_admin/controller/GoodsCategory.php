@@ -165,4 +165,22 @@ class GoodsCategory extends Base
         }
     }
 
+    // 获取所有分类 关联表用
+    public function getGoodsCategory(){
+        if(!$id = input('id/d')){
+            $this ->error('参数有误');
+        }
+        $model = new \app\index_admin\model\GoodsCategory();
+        $config = [
+            'where'=>[
+                'status'=>0
+            ]
+        ];
+
+        $allCategoryList = $model->getList($config);
+        $this->assign('allCategoryList',$allCategoryList);
+
+        $this->assign('id',$id);
+    }
+
 }

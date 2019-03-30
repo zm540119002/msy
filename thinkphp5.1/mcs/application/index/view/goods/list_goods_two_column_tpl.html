@@ -2,11 +2,7 @@
 {volist name="list" id="info"}
 <li data-id="{$info.id}">
     <a href="{:url('Goods/detail',['id'=>$info.id])}">
-        {empty name="info.thumb_img"}
-        <img src="public_img/default/no_pic_100.jpg" alt="">
-        {else /}
-        <img src="public_uploads/{$info.thumb_img}" alt="">
-        {/empty}
+        <img src="{:show_img_handle($info.thumb_img)}" alt="">
     </a>
     <div class="p_bottom">
         <p class="text-intro title_name">{$info.headline}</p>

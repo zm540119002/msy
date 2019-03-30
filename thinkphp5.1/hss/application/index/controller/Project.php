@@ -140,29 +140,4 @@ class Project extends \common\controller\Base{
         }
     }
 
-    /**获取推荐商品
-     * @return array|\think\response\View
-     */
-    public function getRecommendGoods(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $id = input('get.id/d');
-        //相关推荐商品
-        $modelRecommendGoods = new \app\index\model\RecommendGoods();
-        $config =[
-            'where' => [
-                ['rg.status', '=', 0],
-                ['rg.goods_id', '=', $id],
-            ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],'join'=>[
-                ['goods g','g.id = rg.recommend_goods_id','left']
-            ]
-        ];
-        $list= $modelRecommendGoods->getList($config);
-        $this->assign('list',$list);
-        return view('goods/recommend_list_tpl');
-    }
 }

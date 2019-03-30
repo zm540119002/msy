@@ -7,7 +7,6 @@ class Index extends \common\controller\Base{
      * 促销列表，场景列表，商品列表 -ajax
      */
     public function index(){
-
         // 促销列表 7个
         $modelPromotion = new \app\index\model\Promotion();
         $condition =[
@@ -39,9 +38,18 @@ class Index extends \common\controller\Base{
 
         // 场景按行个数分组
         $sceneLists = sceneRatingList($sceneList);
-
         $this ->assign('sceneLists',$sceneLists);
 
+        // 底部菜单，见配置文件custom.footer_menu
+        $this->assign('currentPage',request()->controller().'/'.request()->action());
+
         return $this->fetch();
+    }
+
+    public function test(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
     }
 }

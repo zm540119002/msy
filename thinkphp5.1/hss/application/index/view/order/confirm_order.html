@@ -88,11 +88,7 @@
                 {volist name="orderGoodsList" id="info"}
                 <li id="li-id-{$key}" data-order_detail_id="{$info.order_detail_id}">
                     <a href="{:url('Goods/detail',['id'=>$info.goods_id])}">
-                        {notempty name="info.thumb_img"}
-                        <img data-img="" data-isloaded="" src="public_uploads/{$info.thumb_img}" alt="" class="c_img left" />
-                        {else /}
-
-                        {/notempty}
+                        <img data-img="" data-isloaded="" src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img left" />
                     </a>
                     <div class="g_order_r">
                         <p class="headline">{$info.headline}</p>
