@@ -20,7 +20,7 @@ return [
 
     /**
      * 底部菜单 :采购商场，加盟店家，城市合伙人，采购车，我
-     * name,a,icon,controller
+     * name,a,icon
      */
     'footer_menu' => [
         'Index/index' => [
