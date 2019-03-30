@@ -27,20 +27,7 @@ class Mine extends \common\controller\Base{
 
     //修改头像
     public function editAvatar(){
-
-        $backtrace = debug_backtrace();
-        //p($backtrace);
-        $backtrace = array_shift($backtrace);
-        p($backtrace);
-        exit;
-        $request= request();
-        $module_name=$request->module();
-        $controller_name=$request->controller();
-        $action=$request->action();
-        p($request);
-
-        exit;
-
+        
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
