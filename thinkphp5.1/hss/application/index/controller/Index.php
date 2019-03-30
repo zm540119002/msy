@@ -49,9 +49,6 @@ class Index extends \common\controller\Base{
     }
 
     public function test(){
-        echo $_SERVER['REQUEST_URI'];
-        echo basename($_SERVER['REQUEST_URI']);
-        echo request()->action();
         if(request()->isAjax()){
         }else{
             return $this->fetch();
