@@ -3,11 +3,7 @@
 <li data-goods_id="{$info.goods_id}" data-id="{$info.id}">
     <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
     <a  href="{:url('Goods/detail',['id'=>$info.goods_id])}" class="cart_goods_img">
-        {empty name="info.thumb_img"}
-        <img src="public_img/default/no_pic_100.jpg" alt="" class="c_img">
-        {else /}
-        <img src="public_uploads/{$info.thumb_img}" alt="" class="c_img">
-        {/empty}
+        <img src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img">
     </a>
     <div class="cart_list_r">
         <p>{$info.headline}</p>

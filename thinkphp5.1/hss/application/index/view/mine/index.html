@@ -157,42 +157,21 @@
     </section>
 </article>
 <section class="bottom_nav_fixed bottom_white">
-	<nav class=" foot_nav_bar">
-		<ul class="columns_flex">
-			<li class="each_column">
-				<a href="{:url('Index/index')}">
-					<span class="store f_icon"></span>
-					<span class="f_txt">美创社</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a href="{:url('CenterStore/index')}">
-					<span class="practitioners f_icon"></span>
-					<span class="f_txt">中心店</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a href="{:url('Studio/index')}">
-					<span class="business f_icon"></span>
-					<span class="f_txt">工作室</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a href="javascript:void(0)" class="my_cart" data-jump_url="{:url('Cart/manage')}">
-					<span class="cart f_icon"></span>
-					<span class="f_txt">采购车</span>
-				</a>
-			</li>
-			<li class="each_column current">
-				<a href="{:url('Mine/index')}">
-					<span class="my f_icon"></span>
-					<span class="f_txt">我的</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
+    <nav class=" foot_nav_bar">
+        <ul class="columns_flex">
+            {volist name="footer_menu" id="vo"}
+            <li class="each_column {$vo.class}">
+                <a {$vo.a}>
+                    <span class="{$vo.icon} f_icon"></span>
+                    <span class="f_txt">{$vo.name}</span>
+                </a>
+            </li>
+            {/volist}
+        </ul>
+    </nav>
 </section>
 {/block}
+
 {block name="common"}
 {include file="template/wallet_pay_dialog.html" /}
 {/block}
