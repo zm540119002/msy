@@ -236,7 +236,8 @@ class Scene extends Base {
 
     // 管理类别下的商品
     public function manageRelationGoods(){
-        // 暂时先全部写在商品分类里
+
+        // 获取所有的分类 -暂时先全部写在商品分类控制器里
         GoodsCategory::getGoodsCategory();
         $this->assign('relation',config('custom.relation_type.scene'));
 
@@ -290,6 +291,7 @@ class Scene extends Base {
         }
     }
 
+    // 到时看下需不需要整合在一起 start
     /**
      * 场景下的商品分类
      */
@@ -432,8 +434,7 @@ class Scene extends Base {
         ];
         $list = $model->pageQuery($condition);
         $this->assign('list',$list);
-        //return $list;
-        //return view();
+
         return $this->fetch();
     }
 
@@ -499,6 +500,8 @@ class Scene extends Base {
 
         return $model->del($condition,false);
     }
+
+    // 到时看下需不需要整合在一起 end
 
     /**
      * 获取所有一级OR该分类的子级分类 && 所有已选择的分类

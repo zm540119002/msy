@@ -151,15 +151,14 @@ class Goods extends \common\controller\Base{
         return $this->fetch('list_goods_one_column_tpl');
     }
 
-    /**商品详情页
+    /**
+     * 商品详情页
      */
     public function detail(){
         if(request()->isAjax()){
         }else{
-            $id = intval(input('id'));
-            if(!$id){
-                $this->error('此商品已下架');
-            }
+            // 商品基础处理
+            if(!$id=input('id/d')) $this->error('此商品已下架');
             $model = new \app\index\model\Goods();
             $config =[
                 'where' => [
@@ -169,13 +168,13 @@ class Goods extends \common\controller\Base{
                 ],
             ];
             $info = $model->getInfo($config);
-            if(empty($info)){
-                $this->error('此商品已下架');
-            }
+            if(empty($info)) $this->error('此商品已下架');
+
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
+
 
             $modelComment = new \app\index\model\Comment();
             $where = [
@@ -187,6 +186,7 @@ class Goods extends \common\controller\Base{
             $this ->assign('averageScore',$averageScore);
             $total = $modelComment -> where($where)->count('user_id');
             $this ->assign('total',$total);
+
 
             //登录判断是否已收藏
             $user = session('user');

@@ -257,105 +257,50 @@ class Goods extends Base {
         return successMsg('成功');
     }
 
-    /*
-     * 添加商品相关推荐商品
-     * @return array|mixed
-     * @throws \Exception
+    /**
+     * 增加各关联表下的商品 -通用方法
      */
-    public function addRecommendGoods(){
-        if(request()->isPost()){
-            $model = new \app\index_admin\model\RecommendGoods();
-            $data = input('post.selectedIds/a');
-            $condition = [
-                ['goods_id','=',$data[0]['goods_id']]
-            ];
-            $model->startTrans();
-            $rse = $model -> del($condition,$tag=false);
-            if(false === $rse){
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $res = $model->allowField(true)->saveAll($data)->toArray();
-            if (!count($res)) {
-                $model->rollback();
-                return errorMsg('失败');
-            }
-            $model -> commit();
-            return successMsg('成功');
-
-        }else{
-            if(!input('?id') || !input('id/d')){
-                $this ->error('参数有误',url('manage'));
-            }
-            // 所有商品分类
-            $model = new \app\index_admin\model\GoodsCategory();
-            $config = [
-                'where'=>[
-                    'status'=>0
-                ]
-            ];
-            $allCategoryList = $model->getList($config);
-            $this->assign('allCategoryList',$allCategoryList);
-            $id = input('id/d');
-            $this->assign('id',$id);
-            return $this->fetch();
+    public function addRelationGoods(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
         }
-    }
 
-    /***
-     * 获取项目相关商品
-     * @return array|\think\response\View
-     */
-    public function getProjectGoods(){
-        if(!request()->get()){
-            return errorMsg('参数有误');
-        }
-        if(!input('?get.projectId') || !input('get.projectId/d')){
-            return errorMsg('参数有误');
-        }
-        $projectId = input('get.projectId/d');
-        $model = new \app\index_admin\model\ProjectGoods();
-        $config = [
-            'where' => [
-                ['pg.project_id','=',$projectId],
-            ],'join' => [
-                ['goods g','g.id = pg.goods_id','left'],
-            ],'field' => [
-                'g.id','g.thumb_img','g.name',
-            ],
+        if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
 
-        ];
-        $list = $model -> getList($config);
-        $this->assign('list',$list);
-        return view('goods/selected_list');
-    }
+        $relation=input('post.relation/d');
 
-    /***
-     * 获取项目相关商品
-     * @return array|\think\response\View
-     */
-    public function getSceneGoods(){
-        if(!request()->get()){
-            return errorMsg('参数有误');
+        // custom.php relation_type
+        switch($relation){
+            case config('custom.relation_type.scene'):
+                $model = new \app\index_admin\model\SceneGoods();
+                $condition = [['scene_id','=',$data[0]['scene_id']]];
+                break;
+            case config('custom.relation_type.project'):
+                $model = new \app\index_admin\model\ProjectGoods();
+                $condition = [['project_id','=',$data[0]['project_id']]];
+                break;
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index_admin\model\PromotionGoods();
+                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
+                break;
+            default:
+                return errorMsg('参数有误');
         }
-        if(!input('?get.sceneId') || !input('get.sceneId/d')){
-            return errorMsg('参数有误');
-        }
-        $sceneId = input('get.sceneId/d');
-        $model = new \app\index_admin\model\SceneGoods();
-        $config = [
-            'where' => [
-                ['sg.scene_id','=',$sceneId],
-            ],'join' => [
-                ['goods g','g.id = sg.goods_id','left'],
-            ],'field' => [
-                'g.id','g.thumb_img','g.name',
-            ],
 
-        ];
-        $list = $model -> getList($config);
-        $this->assign('list',$list);
-        return view('goods/selected_list');
+        $model->startTrans();
+        $rse = $model -> del($condition,false);
+
+        if(false === $rse){
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $res = $model->allowField(true)->saveAll($data)->toArray();
+        if (!count($res)) {
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $model -> commit();
+        return successMsg('成功');
     }
 
     /***
@@ -406,50 +351,49 @@ class Goods extends Base {
         return view('goods/selected_list');
     }
 
-    /**
-     * 增加各关联表下的商品 -通用方法
+    /*
+     * 添加商品相关推荐商品
+     * @return array|mixed
+     * @throws \Exception
      */
-    public function addRelationGoods(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
+    public function addRecommendGoods(){
+        if(request()->isPost()){
+            $model = new \app\index_admin\model\RecommendGoods();
+            $data = input('post.selectedIds/a');
+            $condition = [
+                ['goods_id','=',$data[0]['goods_id']]
+            ];
+            $model->startTrans();
+            $rse = $model -> del($condition,$tag=false);
+            if(false === $rse){
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $res = $model->allowField(true)->saveAll($data)->toArray();
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+            $model -> commit();
+            return successMsg('成功');
+
+        }else{
+            if(!input('?id') || !input('id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+            // 所有商品分类
+            $model = new \app\index_admin\model\GoodsCategory();
+            $config = [
+                'where'=>[
+                    'status'=>0
+                ]
+            ];
+            $allCategoryList = $model->getList($config);
+            $this->assign('allCategoryList',$allCategoryList);
+            $id = input('id/d');
+            $this->assign('id',$id);
+            return $this->fetch();
         }
-
-        if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
-
-        $relation=input('post.relation/d');
-
-        // custom.php relation_type
-        switch($relation){
-            case config('custom.relation_type.scene'):
-                $model = new \app\index_admin\model\SceneGoods();
-                $condition = [['scene_id','=',$data[0]['scene_id']]];
-                break;
-            case config('custom.relation_type.project'):
-                $model = new \app\index_admin\model\ProjectGoods();
-                $condition = [['project_id','=',$data[0]['project_id']]];
-                break;
-            case config('custom.relation_type.promotion'):
-                $model = new \app\index_admin\model\PromotionGoods();
-                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
-                break;
-            default:
-                return errorMsg('参数有误');
-        }
-
-        $model->startTrans();
-        $rse = $model -> del($condition,false);
-
-        if(false === $rse){
-            $model->rollback();
-            return errorMsg('失败');
-        }
-        $res = $model->allowField(true)->saveAll($data)->toArray();
-        if (!count($res)) {
-            $model->rollback();
-            return errorMsg('失败');
-        }
-        $model -> commit();
-        return successMsg('成功');
     }
 
     /**获取推荐商品
