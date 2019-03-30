@@ -21,7 +21,7 @@ class Mine extends \common\controller\Base{
         $this->assign('wallet',$wallet);
 
         p(__CLASS__);
-        $res = str_replace('/','\\',__CLASS__);
+        $res = str_replace('\\','/',__CLASS__);
         $controller = basename($res);
         //$res = substr(__CLASS__,strrpos(__CLASS__,'\\'));
         p($controller);
