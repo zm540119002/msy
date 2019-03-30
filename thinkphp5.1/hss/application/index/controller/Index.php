@@ -41,7 +41,7 @@ class Index extends \common\controller\Base{
         $this ->assign('sceneLists',$sceneLists);
 
         // 底部菜单，当前页为配置文件custom.footer_menu索引
-        $this->assign('currentPage','Index/index');
+        $this->assign('currentPage',request()->controller().'/'.request()->action());
 
         return $this->fetch();
     }
