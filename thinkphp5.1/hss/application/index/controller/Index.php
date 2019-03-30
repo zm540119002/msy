@@ -7,7 +7,6 @@ class Index extends \common\controller\Base{
      * 促销列表，场景列表，商品列表 -ajax
      */
     public function index(){
-
         // 促销列表 7个
         $modelPromotion = new \app\index\model\Promotion();
         $condition =[
@@ -50,7 +49,8 @@ class Index extends \common\controller\Base{
     }
 
     public function test(){
-        echo basename();
+        echo $_SERVER['REQUEST_URI'];
+        echo basename($_SERVER['REQUEST_URI']);
         if(request()->isAjax()){
         }else{
             return $this->fetch();
