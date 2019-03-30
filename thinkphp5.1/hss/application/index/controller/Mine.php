@@ -20,7 +20,7 @@ class Mine extends \common\controller\Base{
         }
         $this->assign('wallet',$wallet);
 
-        $res = basename(__CLASS__);
+        $res = basename('app\index\controller\Mine');
         $this->assign('class',$res);
 
         return $this->fetch();
