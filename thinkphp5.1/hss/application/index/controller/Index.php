@@ -40,7 +40,7 @@ class Index extends \common\controller\Base{
         $sceneLists = sceneRatingList($sceneList);
         $this ->assign('sceneLists',$sceneLists);
 
-        // 底部菜单，当前页为配置文件custom.footer_menu索引
+        // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
 
         return $this->fetch();
