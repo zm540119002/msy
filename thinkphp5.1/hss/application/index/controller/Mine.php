@@ -27,7 +27,7 @@ class Mine extends \common\controller\Base{
 
     //修改头像
     public function editAvatar(){
-        
+
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
