@@ -41,6 +41,7 @@ class Index extends \common\controller\Base{
         $sceneLists = sceneRatingList($sceneList);
 
         $this ->assign('sceneLists',$sceneLists);
+        $this->assign('class',basename(__CLASS__));
 
         return $this->fetch();
     }

@@ -21,6 +21,7 @@ class Cart extends \common\controller\UserBase{
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $this->assign('class',basename(__CLASS__));
             return $this->fetch();
         }
     }
