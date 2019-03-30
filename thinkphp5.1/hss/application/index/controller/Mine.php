@@ -22,6 +22,7 @@ class Mine extends \common\controller\Base{
         //$this->assign('class',basename(__CLASS__).'/');
         $this->assign('class',basename(__CLASS__).'/');
         $res = basename('app\index\controller\Mine\\');
+        $res = pathinfo(__CLASS__);
         p($res);
         exit;
         return $this->fetch();
