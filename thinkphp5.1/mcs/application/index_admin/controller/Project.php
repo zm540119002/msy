@@ -26,7 +26,7 @@ class Project extends Base {
      */
     public function edit(){
         $model = $this->obj;
-
+        return $model;
         if(!request()->isPost()){
             //要修改的方案
             if($id = input('param.id/d')){
