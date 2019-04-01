@@ -49,6 +49,9 @@ class Scene extends Base {
             if( isset($_POST['logo_img']) && $_POST['logo_img'] ){
                 $_POST['logo_img'] = moveImgFromTemp(config('upload_dir.scene'),$_POST['logo_img']);
             }
+            if( isset($_POST['background_img']) && $_POST['background_img'] ){
+                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scene'),$_POST['background_img']);
+            }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
