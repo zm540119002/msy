@@ -5,20 +5,23 @@ class Studio extends \common\controller\Base{
      * 获取工作室的场景&&商品
      */
     public function index(){
-        //获取商品的分类
-        $modelGoodsCategory = new \app\index\model\GoodsCategory();
-        $config =[
+
+        // 促销列表 7个
+        $modelPromotion = new \app\index\model\Promotion();
+        $condition =[
             'where' => [
                 ['status', '=', 0],
-                ['level','=',1]
-            ], 'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc'
-            ],  'limit'=>'7'
+                ['shelf_status','=',3],
+                ['thumb_img','<>',''],
+            ],
+            'field'=>['id','name','thumb_img'],
+            'order'=>['sort'=>'desc', 'id'=>'desc',],
+            'limit'=>'7'
         ];
-        $categoryList  = $modelGoodsCategory->getList($config);
-        $this ->assign('categoryList',$categoryList);
-        //获取精选的10个 场景
+        $promotionList  = $modelPromotion->getList($condition);
+        $this ->assign('promotionList',$promotionList);
+
+        //获取设置的11个 场景
         $modelScene = new \app\index\model\Scene();
         $config =[
             'where' => [
@@ -36,28 +39,10 @@ class Studio extends \common\controller\Base{
         $sceneList  = $modelScene->getList($config);
         // 场景按行个数分组
         $sceneLists = sceneRatingList($sceneList);
-
         $this ->assign('sceneLists',$sceneLists);
-
-        //获取精选的10个项目
-        $modelProject = new \app\index\model\Project();
-        $config =[
-            'where' => [
-                ['status', '=', 0],
-                ['shelf_status','=',3],
-                ['is_selection','=',1],
-
-            ], 'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc'
-            ],  'limit'=>'11'
-        ];
-        $projectList  = $modelProject->getList($config);
-        $this ->assign('projectList',$projectList);
 
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
-
         return $this->fetch();
     }
 }

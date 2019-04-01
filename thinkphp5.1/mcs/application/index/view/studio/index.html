@@ -85,21 +85,13 @@
 			<section class="slider_banner">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide swiper-slide-active">
-							<a href="">
-								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+						{volist name="promotionList" id="vo"}
+						<div class="swiper-slide">
+							<a href="{:url('promotion/detail',['id'=>$vo.id])}">
+								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
 							</a>
 						</div>
-						<div class="swiper-slide ">
-							<a href="">
-								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
-							</a>
-						</div>
-						<div class="swiper-slide ">
-							<a href="">
-								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
-							</a>
-						</div>
+						{/volist}
 					</div>
 					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
@@ -117,7 +109,7 @@
 				<div class="columns_flex l-r-sides" >
 					{volist name="list" id="vo" }
 					<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
-						<img src="public_uploads/{$vo.thumb_img}" alt="">
+						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
 					</a>
 					{/volist}
 				</div>
