@@ -32,6 +32,8 @@ class Scene extends Base {
             if($id = input('param.id/d')){
                 $condition = ['where' => [['id','=',$id]]];
                 $info = $model->getInfo($condition);
+                // 选中的店铺
+                $info['belong_to'] = strrev(decbin($info['belong_to']));
                 $this->assign('info',$info);
             }
             return $this->fetch();
@@ -69,7 +71,7 @@ class Scene extends Base {
                 }
                 $_POST['template'] = $template;
             }
-
+            $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
             $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
@@ -144,15 +146,15 @@ class Scene extends Base {
         $where[] = ['status','=',0];
         // 条件
         if(isset($_GET['type'])&&$type=input('get.type/d'))  $where[] = ['type','=',$type];
-
         if(isset($_GET['shelf_status'])&&$shelf_status=input('get.shelf_status/d'))  $where[] = ['shelf_status','=',$shelf_status];
+        if(isset($_GET['belong_to'])&&$belong_to=input('get.belong_to/d'))  $where[] = ['belong_to','=',$belong_to];
 
         $keyword = input('get.keyword/s');
         if($keyword) $where[] = ['name','like', '%' . trim($keyword) . '%'];
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','type','group'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','type','belong_to','group'],
             'order'=>['sort'=>'desc', 'id'=>'desc',],
         ];
 

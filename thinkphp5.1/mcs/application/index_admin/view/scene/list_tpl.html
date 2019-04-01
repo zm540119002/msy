@@ -37,27 +37,27 @@
             <span class="label label-defaunt radius">已下架</span>
             <!--  <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="3">上架</a>-->
             {else /}
-            <span class="label label-success radius">已发布</span>
+            <span class="label label-success radius">已上架</span>
             <!-- <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="1">下架</a>-->
             {/if}
         </td>
         <td class="w96">
             {switch $vo.type }
             {case 2}
-            <a href="javascript:void(0);" class="manageSceneGoodsCategory">关联商品分类</a>
+            <a href="javascript:void(0);" class="manageSceneGoodsCategory">添加商品分类</a>
             {/case}
             {case 3}
             <!-- 项目没 -->
             <!-- | <a href="javascript:void(0);" class="addSceneProject">添加项目</a>-->
             {/case}
             {default /}
-            <a href="javascript:void(0);" class="relationGoods">关联商品</a>
-            | <a href="javascript:void(0);" class="manageSceneScheme">关联方案</a>
+            <a href="javascript:void(0);" class="relationGoods">添加商品</a>
+            | <a href="javascript:void(0);" class="manageSceneScheme">添加方案</a>
             {/switch}
         </td>
         <td class="w96">
            <!-- 先不做<a href="javascript:void(0);" class="preview">预览</a>-->
-            <a href="javascript:void(0);" data-shelf-status="{$vo.shelf_status}" class="set-shelf-status" style="text-decoration:none" title="{$vo.shelf_status==1 ? '发布': '下架';}"><i class="Hui-iconfont"></i></a>
+            <a href="javascript:void(0);" data-shelf-status="{$vo.shelf_status}" class="set-shelf-status" style="text-decoration:none" title="{$vo.shelf_status==1 ? '上架': '下架';}"><i class="Hui-iconfont"></i></a>
             <a href="javascript:void(0);" class="edit" style="text-decoration:none" title="编辑"><i class="Hui-iconfont"></i></a>
             <a href="javascript:void(0);" class="del"  style="text-decoration:none" title="删除"><i class="Hui-iconfont"></i></a>
             <!-- 暂时不用
