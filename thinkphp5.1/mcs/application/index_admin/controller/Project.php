@@ -58,7 +58,7 @@ class Project extends Base {
             if(isset($_POST['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
-                return $data;
+
                 $info  = $model->getInfo($condition);
                 $result= $model->edit($data,$condition['where']);
                 if(!$result['status']) return $result;
@@ -76,14 +76,8 @@ class Project extends Base {
 
             } else{
                 //新增
-                //$data['create_time'] = time();
-                $data['video'] = "mcs_project/2019031917390004798.mp4";
-
-                $model = new \app\index_admin\model\Project();
-                //return $data;
-                $result = $model->allowField(true) -> save($data);
-
-                return $model->getList();
+                $data['create_time'] = time();
+                $result = $model->edit($data);
                 if(!$result['status']) return $result;
 
             }
