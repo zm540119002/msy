@@ -19,11 +19,16 @@ class Mine extends \common\controller\Base{
             $wallet = $model->getInfo($condition);
         }
         $this->assign('wallet',$wallet);
+
+        // 底部菜单，见配置文件custom.footer_menu
+        $this->assign('currentPage',request()->controller().'/'.request()->action());
+
         return $this->fetch();
     }
 
     //修改头像
     public function editAvatar(){
+
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }

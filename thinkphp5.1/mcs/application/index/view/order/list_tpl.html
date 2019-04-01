@@ -5,11 +5,7 @@
                 {volist name="info.goods_list" id="goods_info"}
                 <div class="order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"
                      data-brand_id="{$goods_info.brand_id}"  data-brand_name="{$goods_info.brand_name}"  >
-                        {empty name="goods_info.thumb_img"}
-                        <img src="public_img/default/no_pic_100.jpg" class="left">
-                        {else /}
-                        <img src="public_uploads/{$goods_info.thumb_img}" class="left">
-                        {/empty}
+                        <img src="{:show_img_handle($goods_info.thumb_img)}" class="left">
                     <div class="order_top_r">
                        <!-- <p>编号：{$goods_info.sn}</p>-->
                         <p>{$goods_info.name}</p>

@@ -3836,9 +3836,14 @@ input[type=text]::-webkit-focus-inner {
     margin-top:3rem;
 }
 .content_main .list img{
+    width:100%;
     /*width: 1.5rem;*/
     /*height: 1.5rem;*/
     /*margin:0 0 0 0.14rem;*/
+}
+.list .p_img{
+    display:block;
+    width:45%;
 }
 .list_r{
     margin:0.08rem 0 0 2.8rem;

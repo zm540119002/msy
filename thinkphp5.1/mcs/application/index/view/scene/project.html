@@ -23,7 +23,7 @@
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
-					<img src="public_uploads/{$info.thumb_img}" alt="" class="common_default_img">
+					<img src="{:show_img_handle($project.thumb_img)}" alt="" class="common_default_img">
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 	<!-- 项目介绍 -->
 	<section class="project_item hide">
 		<p>
-			<img src="public_uploads/{$project.main_img}" alt="">
+			<img src="{:show_img_handle($project.main_img)}" alt="">
 		</p>
 	</section>
 	<!-- 项目培训 -->
@@ -54,7 +54,7 @@
 
 		{notempty name="$project.video"}
 		<div class="content-padding">
-			<video width="" height="" controls src="public_uploads/{$project.video}">
+			<video width="" height="" controls src="{:show_img_handle($project.video)}">
 			</video>
 			<p>{$project.name}项目培训</p>
 			<p>{$project.update_time}</p>
@@ -108,34 +108,19 @@
 
 	// 获取项目下的商品
 	var config = {
-		//url:module+'Project/getGoodsList',
-		url:module+'Goods/getProjectGoodsList',
+		url:module+'Goods/getRelationGoods',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1
 	};
 	var postData = {
-		pageSize:10
+		pageSize:10,
+		relation:'{$relation}',
+		id:'{$project.id}'
 	};
 	$(function(){
 		//初始化分类商品页面
-		//$('.mod_selection_nav li:eq(0)').addClass('current');
-		postData.project_id = $('.mod_selection_nav li.current').data('project-id');
 		getPagingList(config,postData);
-
-/*		$('body').on('click','.mod_selection_nav li',function(){
-			var _this = $(this);
-			$(this).addClass('current').siblings().removeClass('current');
-			config = {
-				url:module+'Goods/getList',
-				requestEnd:false,
-				loadTrigger:false,
-				currentPage:1
-			};
-			postData.project_id = _this.data('project-id');
-			getPagingList(config,postData);
-		});*/
-
 	});
 
 	var config_1 = {
@@ -147,27 +132,13 @@
 	};
 	var postData_1 = {
 		pageSize:10,
-		pageType:'column_1',
-		belong_to:1
+		pageType:'column_1'
 	};
 	$(function(){
 		//初始化分类商品页面
-		//$('.mod_selection_nav li:eq(0)').addClass('current');
-		//postData_1.project_id = $('.mod_selection_nav li.current').data('project-id');
+
 		getPagingList(config_1,postData_1);
 
-		/*		$('body').on('click','.mod_selection_nav li',function(){
-		 var _this = $(this);
-		 $(this).addClass('current').siblings().removeClass('current');
-		 config = {
-		 url:module+'Goods/getList',
-		 requestEnd:false,
-		 loadTrigger:false,
-		 currentPage:1
-		 };
-		 postData.project_id = _this.data('project-id');
-		 getPagingList(config,postData);
-		 });*/
 
 	});
 
