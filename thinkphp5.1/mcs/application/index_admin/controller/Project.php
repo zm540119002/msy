@@ -41,14 +41,14 @@ class Project extends Base {
         }else{
             // 基础处理
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.project'),basename($_POST['thumb_img']));
             }
             if(  isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['main_img']));
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.project'),basename($_POST['main_img']));
             }
 
             if( isset($_POST['video']) && $_POST['video'] ){
-                $_POST['video'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['video']));
+                $_POST['video'] = moveImgFromTemp(config('upload_dir.project'),basename($_POST['video']));
             }
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
             $data = $_POST;
