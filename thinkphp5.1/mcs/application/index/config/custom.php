@@ -14,28 +14,28 @@
 // +----------------------------------------------------------------------
 
 return [
-    'title' => '黑森森',
+    'title' => '美创社',
     'module_type' => 1,//模块类型
     'default_page_size'=>10,
 
     /**
-     * 底部菜单 :采购商场，加盟店家，城市合伙人，采购车，我
+     * 底部菜单 :美创社，中心店，工作室，采购车，我
      * name,a,icon
      */
     'footer_menu' => [
-        'Index/index' => [
-            'name' => '采购商场',
+/*        'Index/index' => [
+            'name' => '美创社',
             'a'    => 'href='.url('Index/index'),
             'icon' => 'store',
-        ],
-        'StoreLeague/index' => [
-            'name' => '加盟店家',
-            'a'    => 'href='.url('StoreLeague/index'),
+        ],*/
+        'CenterStore/index' => [
+            'name' => '中心店',
+            'a'    => 'href='.url('CenterStore/index'),
             'icon' => 'practitioners',
         ],
-        'Business/index' => [
-            'name' => '城市合伙人',
-            'a'    => 'href='.url('Business/index'),
+        'Studio/index' => [
+            'name' => '工作室',
+            'a'    => 'href='.url('Studio/index'),
             'icon' => 'business',
         ],
         'Cart/manage' => [

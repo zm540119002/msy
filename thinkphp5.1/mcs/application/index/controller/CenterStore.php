@@ -54,6 +54,10 @@ class CenterStore extends \common\controller\Base{
         ];
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
+
+        // 底部菜单，见配置文件custom.footer_menu
+        $this->assign('currentPage',request()->controller().'/'.request()->action());
+
         return $this->fetch();
     }
 }
