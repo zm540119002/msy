@@ -76,9 +76,11 @@ class Project extends Base {
 
             } else{
                 //新增
-                $data['create_time'] = time();
-                return $data;
-                //$result = $model->allowField(true) -> save($data);
+                //$data['create_time'] = time();
+                $data['video'] = "mcs_project/2019031917390004798.mp4";
+
+                //return $data;
+                $result = $model->allowField(true) -> save($data);
 
                 return $model->getList();
                 if(!$result['status']) return $result;
