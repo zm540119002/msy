@@ -27,13 +27,13 @@ class Brand extends \common\controller\UserBase{
             $data = input('post.');
             $model = new  \app\index\model\Brand();
             if( isset($_POST['logo']) && $_POST['logo'] ){
-                $data['logo'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['logo']));
+                $data['logo'] = moveImgFromTemp(config('upload_dir.goods'),basename($_POST['logo']));
             }
             if( isset($_POST['certificate']) && $_POST['certificate'] ){
-                $data['certificate'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['certificate']));
+                $data['certificate'] = moveImgFromTemp(config('upload_dir.goods'),basename($_POST['certificate']));
             }
             if( isset($_POST['authorization']) && $_POST['authorization'] ){
-                $data['authorization'] = moveImgFromTemp(config('upload_dir.weiya_goods'),basename($_POST['authorization']));
+                $data['authorization'] = moveImgFromTemp(config('upload_dir.goods'),basename($_POST['authorization']));
             }
             if(input('?post.id') && !empty(input('post.id')) ){
                 //开启事务

@@ -41,17 +41,17 @@ class Promotion extends Base {
             if(!input('param.name/s')) return errorMsg('失败');
 
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.promotion'),basename($_POST['thumb_img']));
             }
             if(  isset($_POST['background_img']) && $_POST['background_img'] ){
-                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['background_img']));
+                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.promotion'),basename($_POST['background_img']));
             }
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.promotion'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);

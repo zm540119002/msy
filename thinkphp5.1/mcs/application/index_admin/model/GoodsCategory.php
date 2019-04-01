@@ -19,7 +19,7 @@ class GoodsCategory extends\common\model\Base {
 			return errorMsg($validateGoodsCategory->getError());
 		}
 		if( isset($postData['img']) && $postData['img'] ){
-			$postData['img'] = moveImgFromTemp(config('upload_dir.weiya_goods_gategory'),basename($postData['img']));
+			$postData['img'] = moveImgFromTemp(config('upload_dir.goods_gategory'),basename($postData['img']));
 		}
 		if($postData['id'] && intval($postData['id'])){
 			$config = [
