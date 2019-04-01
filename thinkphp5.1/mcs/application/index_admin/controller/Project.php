@@ -79,6 +79,7 @@ class Project extends Base {
                 //$data['create_time'] = time();
                 $data['video'] = "mcs_project/2019031917390004798.mp4";
 
+                $model = new \app\index_admin\model\Project();
                 //return $data;
                 $result = $model->allowField(true) -> save($data);
 
