@@ -77,8 +77,9 @@ class Project extends Base {
             } else{
                 //新增
                 $data['create_time'] = time();
-                return $data;
-                $result = $model->edit($data);
+
+                $result = $model->allowField(true) -> save($data);
+
                 return $model->getLastSql();
                 if(!$result['status']) return $result;
 
