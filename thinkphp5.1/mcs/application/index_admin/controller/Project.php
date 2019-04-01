@@ -26,7 +26,7 @@ class Project extends Base {
      */
     public function edit(){
         $model = $this->obj;
-        return $model;
+
         if(!request()->isPost()){
             //要修改的方案
             if($id = input('param.id/d')){
@@ -80,7 +80,7 @@ class Project extends Base {
 
                 //$result = $model->allowField(true) -> save($data);
 
-                return $model;
+                return $model->getList();
                 if(!$result['status']) return $result;
 
             }
