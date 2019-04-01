@@ -54,7 +54,7 @@ class Project extends Base {
             $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
-            return $data;
+
             if(isset($_POST['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
@@ -78,6 +78,7 @@ class Project extends Base {
                 //新增
                 $data['create_time'] = time();
                 $result = $model->edit($data);
+                return $model->getLastSql();
                 if(!$result['status']) return $result;
 
             }
