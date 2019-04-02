@@ -28,7 +28,9 @@ class CenterStore extends \common\controller\Base{
                 ['status', '=', 0],
                 ['shelf_status','=',3],
                 ['belong_to','exp','& 1'],
-            ], 'order'=>[
+            ],
+            'field'=> ['id','name','row_number','thumb_img','template'],
+            'order'=> [
                 'row_number'=>'desc',
                 'sort'=>'desc',
                 'id'=>'desc',

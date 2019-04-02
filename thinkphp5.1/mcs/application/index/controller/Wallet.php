@@ -1,6 +1,9 @@
 <?php
 namespace app\index\controller;
 
+/**
+ * 钱包控制器类
+ */
 class Wallet extends \common\controller\UserBase{
     /**首页
      */

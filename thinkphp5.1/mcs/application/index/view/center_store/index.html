@@ -108,8 +108,8 @@
 					{volist name="lists" id="list" }
 					<div class="columns_flex l-r-sides" >
 						{volist name="list" id="vo" }
-						<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
-							<img src="{:show_img_handle($vo.thumb_img)}" alt="">
+						<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item" title="{$vo.name}">
+							<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
 						</a>
 						{/volist}
 					</div>
