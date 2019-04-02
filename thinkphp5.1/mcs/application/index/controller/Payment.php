@@ -25,6 +25,8 @@ class Payment extends \common\controller\UserBase{
             $this -> error('支付不能为0');
         }
         // 统一支持域名
+        echo "https://www.worldview.com.cn/index/Payment/orderPayment/order_sn/{$orderInfo['sn']}/system_id/2/pay_code/1";
+        exit;
         $this->redirect("https://www.worldview.com.cn/index/Payment/orderPayment/order_sn/{$orderInfo['sn']}/system_id/2/pay_code/1");
         exit;
         $payInfo = [
