@@ -21,7 +21,7 @@ class Information extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.weiya_information'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.information'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);

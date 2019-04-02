@@ -60,7 +60,6 @@
 			<div>
 				<div class="scroll_news">
 					<a class="news_tit">
-						美创会头条
 						<!--<img src="public_img/wy_logo.png" alt="">-->
 					</a>
 					<div class="news_list_wrapper">
@@ -85,13 +84,21 @@
 			<section class="slider_banner">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
-						{volist name="promotionList" id="vo"}
-						<div class="swiper-slide">
-							<a href="{:url('promotion/detail',['id'=>$vo.id])}">
-								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
+						<div class="swiper-slide swiper-slide-active">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
 							</a>
 						</div>
-						{/volist}
+						<div class="swiper-slide ">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
+						<div class="swiper-slide ">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
 					</div>
 					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
@@ -108,8 +115,8 @@
 				{volist name="lists" id="list" }
 				<div class="columns_flex l-r-sides" >
 					{volist name="list" id="vo" }
-					<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
+					<a href="{:url(request()->controller().'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
+						<img src="public_uploads/{$vo.thumb_img}" alt="">
 					</a>
 					{/volist}
 				</div>
@@ -133,12 +140,46 @@
 		</div>
 	</section>
 </article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">采购商城</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('StoreLeague/index')}" >
+					<span class="practitioners f_icon "></span>
+					<span class="f_txt">加盟店家</span>
+				</a>
+			</li>
+			<li class="each_column current">
+				<a href="javascript:void(0)">
+					<span class="business f_icon"></span>
+					<span class="f_txt">城市合伙人</span>
+				</a>
+			</li>
+			<li class="each_column ">
+				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Mine/index')}">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
 {/block}
 {block name="common"}
 {/block}
-{block name="footer"}
-{include file="template/footer_project.html" /}
-{/block}
+{block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
@@ -151,8 +192,7 @@
 	var postData = {
 		pageSize:10,
 		pageType:'index',
-		belong_to:2,
-		is_selection:1
+		belong_to:2
 	};
 	$(function(){
 		//轮播

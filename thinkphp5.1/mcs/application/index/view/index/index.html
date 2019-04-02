@@ -43,7 +43,7 @@
 					{volist name="goods" id="info"}
 					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
 						<a>
-							<img src="public_uploads/{$info.thumb_img}">
+							<img src="{:show_img_handle($info.thumb_img)}">
 						</a>
 						<p>{$info.name}</p>
 					</div>
@@ -149,7 +149,9 @@
 {/block}
 {block name="common"}
 {/block}
-{block name="footer"}{/block}
+{block name="footer"}
+{include file="template/footer_project.html" /}
+{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
