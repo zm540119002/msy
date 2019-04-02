@@ -29,8 +29,9 @@ class Studio extends \common\controller\Base{
                 ['shelf_status','=',3],
                 //['is_selection','=',1],
                 ['belong_to','exp','& 2'],
-
-            ], 'order'=>[
+            ],
+            'field'=> ['id','name','row_number','thumb_img','template'],
+            'order'=>[
                 'sort'=>'desc',
                 'id'=>'desc'
             ],  'limit'=>'11'
