@@ -236,7 +236,7 @@ class Scene extends \common\controller\Base{
             $projectList = $modelProject->getList($condition);
 
             if (empty($projectList)) {
-                $this->error('此项目已下架');
+                $this->error('暂时还没有项目，请耐心等待！');
             }
 
             // 有项目id OR 默认项目id
