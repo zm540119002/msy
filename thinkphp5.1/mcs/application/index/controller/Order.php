@@ -196,11 +196,11 @@ class Order extends \common\controller\UserBase
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $payOpenId =  session('pay_open_id');
             // 微信支付有问题 暂不用
-            if(empty($payOpenId)){
+/*            if(empty($payOpenId)){
                 $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
-            }
+            }*/
         }
         $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn');
