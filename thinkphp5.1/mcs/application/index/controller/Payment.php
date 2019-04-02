@@ -7,6 +7,7 @@ class Payment extends \common\controller\UserBase{
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
             $this -> error('参数错误');
         }
+
         $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn','','string');
         $config = [
@@ -23,6 +24,9 @@ class Payment extends \common\controller\UserBase{
         if($orderInfo['actually_amount']<=0){
             $this -> error('支付不能为0');
         }
+        // 统一支持域名
+        $this->redirect("https://www.worldview.com.cn/index/Payment/orderPayment/order_sn/{$orderInfo['sn']}/system_id/2/pay_code/1");
+        exit;
         $payInfo = [
             'sn'=>$orderInfo['sn'],
             'actually_amount'=>$orderInfo['actually_amount'],
@@ -35,6 +39,7 @@ class Payment extends \common\controller\UserBase{
         //微信支付
         if($payCode == 1){
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
+            // https://www.worldview.com.cn/index/Order/toPay/order_sn/20190330152253985523556396075162
             \common\component\payment\weixin\weixinpay::wxPay($payInfo);
         }
         //支付宝支付
