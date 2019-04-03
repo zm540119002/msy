@@ -187,7 +187,7 @@ class Goods extends Base {
         ];
 
         $list = $model ->pageQuery($config);
-
+        return $model->getLastSql();
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
             return view('goods/list_layer_tpl');
