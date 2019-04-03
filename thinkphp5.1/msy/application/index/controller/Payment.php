@@ -52,7 +52,6 @@ class Payment extends \think\Controller {
     //订单-支付
     public function orderPayment(){
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
-            return 11;
             $this -> error('参数错误');
         }
         $orderSn = input('order_sn','','string');
@@ -99,7 +98,6 @@ class Payment extends \think\Controller {
         //微信支付
         if($payCode == 1){
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
-            print_r($payInfo);exit;
             \common\component\payment\weixin\weixinPay::wxPay($payInfo);
         }
         //支付宝支付
