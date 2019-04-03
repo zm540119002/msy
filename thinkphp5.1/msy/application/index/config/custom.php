@@ -22,15 +22,11 @@ return [
     'system_id'=>[
         '1'=>[
             'db'=>'db_config_weiya',
-            'success_url'=>'https://http://www.worldview.com.cn/index/Order/manage/order_status/2',
-            'cancel_url'=>'db_config_weiya',
-            'fail_url'=>'db_config_weiya',
+            'jump_url'=>'https://http://www.worldview.com.cn/index/Order/manage/order_status/2',
             ],
         '2'=>[
             'db'=>'db_config_mcs',
-            'success_url'=>'db_config_weiya',
-            'cancel_url'=>'db_config_weiya',
-            'fail_url'=>'db_config_weiya',
+            'jump_url'=>'db_config_weiya',
         ],
     ]
 

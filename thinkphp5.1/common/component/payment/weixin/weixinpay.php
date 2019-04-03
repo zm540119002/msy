@@ -35,7 +35,7 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $payInfo['return_url'] = $payInfo['return_url']?:url('Index/index');
+        $payInfo['success_url'] = $payInfo['return_url']?:url('Index/index');
         $tools = new \JsApiPay();
         $openId = session('pay_open_id');
         $input = new \WxPayUnifiedOrder();
@@ -63,11 +63,13 @@ class weixinpay{
                         'getBrandWCPayRequest',$jsApiParameters,
                         function(res){
                             if(res.err_msg == "get_brand_wcpay_request:ok"){
-                                dialog.success('支付成功！',"{$payInfo['return_url']}");
+                                dialog.success('支付成功！',"{$payInfo['success_url']}");
                             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                dialog.success('取消支付！',"{$payInfo['return_url']}");
+                                  window.history.go(-1);
+                                return false;
+                                dialog.success('取消支付！', window.history.go(-1));
                             }else{
-                                dialog.success('支付失败！',"{$payInfo['return_url']}");
+                                dialog.success('支付失败！',"{$payInfo['fail_url']}");
                             }
                         }
                     );

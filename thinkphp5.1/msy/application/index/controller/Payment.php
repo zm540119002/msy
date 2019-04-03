@@ -11,8 +11,7 @@ class Payment extends \common\controller\Base {
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
-        print_r( config('custom.system_id')[$systemId]);exit;
-        $modelOrder ->connection = config('custom.system_id')[$systemId];
+        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
         $orderSn = input('order_sn');
         $config = [
             'where' => [
@@ -38,7 +37,7 @@ class Payment extends \common\controller\Base {
 
         //钱包
         $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->connection = config('custom.system_id')[$systemId];
+        $modelWallet ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -64,9 +63,7 @@ class Payment extends \common\controller\Base {
             'system_id' =>$systemId,
         ];
         $modelOrder = new \app\index\model\Order();
-
         $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-
         $config = [
             'where' => [
                 ['o.status', '=', 0],
@@ -82,19 +79,15 @@ class Payment extends \common\controller\Base {
             $this -> error('支付不能为0');
         }
 
-        //维雅平台支付
-        if($systemId == 1){
-//            if ($orderInfo['order_status'] > 1) {
-//                return errorMsg('订单支付',['code'=>1]);
-//            }
-
-        }
+        $jump_url =config('custom.system_id')[$systemId]['jump_url'];
+        $return_url = config('wx_config.return_url');
         $attach = json_encode($attach);
         $payInfo = [
             'sn'=>$orderInfo['sn'],
             'actually_amount'=>$orderInfo['actually_amount'],
-            'return_url' => 'https://msy.meishuangyun.com/index/Payment/payComplete?jump_url=',
-            'notify_url'=>'https://msy.meishuangyun.com/index/Payment/notifyBcak',
+            'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+            'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+            'notify_url'=>config('wx_config.notify_url'),
             'attach'=>$attach
         ];
         $payCode = input('pay_code','0','int');
