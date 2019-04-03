@@ -66,7 +66,6 @@ class JsApiPay
 	 */
 	public function GetJsApiParameters($UnifiedOrderResult)
 	{
-	    print_r($UnifiedOrderResult);exit;
 		if(!array_key_exists("appid", $UnifiedOrderResult)
 		|| !array_key_exists("prepay_id", $UnifiedOrderResult)
 		|| $UnifiedOrderResult['prepay_id'] == "")
@@ -82,6 +81,7 @@ class JsApiPay
 		$jsapi->SetSignType("MD5");
 		$jsapi->SetPaySign($jsapi->MakeSign());
 		$parameters = json_encode($jsapi->GetValues());
+		print_r($parameters);exit;
 		return $parameters;
 	}
 	
