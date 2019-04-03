@@ -24,6 +24,7 @@ class Payment extends \think\Controller {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
+        print_r($orderInfo);exit;
         $this->assign('orderInfo', $orderInfo);
         //钱包
         $modelWallet = new \app\index\model\Wallet();
