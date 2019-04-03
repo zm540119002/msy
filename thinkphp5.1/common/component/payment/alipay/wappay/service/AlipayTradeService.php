@@ -100,6 +100,7 @@ class AlipayTradeService {
 		$aop->postCharset = $this->charset;
 		$aop->format= $this->format;
 		$aop->signType=$this->signtype;
+         echo $request;
          exit;
 		// 开启页面信息输出
 		$aop->debugInfo=true;
