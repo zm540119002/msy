@@ -4,7 +4,7 @@ namespace app\index\controller;
 
 use function GuzzleHttp\Promise\inspect;
 
-class Payment extends \think\Controller {
+class Payment extends \common\controller\Base {
     //去支付
     public function toPay()
     {
@@ -98,7 +98,7 @@ class Payment extends \think\Controller {
         //微信支付
         if($payCode == 1){
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
-            \common\component\payment\weixin\weixinPay::wxPay($payInfo);
+            \common\component\payment\weixin\weixinpay::wxPay($payInfo);
         }
         //支付宝支付
         if($payCode == 2){
