@@ -2,6 +2,8 @@
 namespace app\index\controller;
 //class Payment extends \common\controller\Base{
 
+use function GuzzleHttp\Promise\inspect;
+
 class Payment extends \think\Controller {
     //去支付
     public function toPay()
@@ -24,23 +26,24 @@ class Payment extends \think\Controller {
         $orderInfo = $modelOrder->getInfo($config);
         $this->assign('orderInfo', $orderInfo);
         //钱包
-//        $modelWallet = new \app\index\model\Wallet();
-//        $modelWallet ->connection = config('custom.system_id')[$systemId];
-//        $config = [
-//            'where' => [
-//                ['status', '=', 0],
-//                ['user_id', '=', $orderInfo['user_id']],
-//            ],'field' => [
-//                'id','amount',
-//            ],
-//        ];
-//        $walletInfo = $modelWallet->getInfo($config);
-//        $this->assign('walletInfo', $walletInfo);
+        $modelWallet = new \app\index\model\Wallet();
+        $modelWallet ->connection = config('custom.system_id')[$systemId];
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $orderInfo['user_id']],
+            ],'field' => [
+                'id','amount',
+            ],
+        ];
+        $walletInfo = $modelWallet->getInfo($config);
+        $this->assign('walletInfo', $walletInfo);
         return $this->fetch();
     }
 
     //订单-支付
     public function orderPayment(){
+        return input();
         //微信支付
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
             $this -> error('参数错误');
