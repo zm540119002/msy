@@ -53,7 +53,6 @@ class Payment extends \common\controller\Base {
 
     //订单-支付
     public function orderPayment(){
-        print_r(input());exit;
 //        if( empty(input('order_sn')) || empty(input('?pay_code'))){
 //            $this -> error('参数错误');
 //        }
@@ -76,6 +75,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
+        print_r($orderInfo);exit;
         if($orderInfo['actually_amount']<=0){
             $this -> error('支付不能为0');
         }
