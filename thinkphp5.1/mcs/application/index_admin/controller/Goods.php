@@ -181,6 +181,7 @@ class Goods extends Base {
 //            ],
             'order'=>[
                 'g.sort'=>'desc',
+                'g.number'=>'desc',
                 'g.id'=>'desc',
             ],
         ];
