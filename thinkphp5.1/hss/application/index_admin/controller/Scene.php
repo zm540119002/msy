@@ -439,6 +439,36 @@ class Scene extends Base {
     }
 
     /**
+     * 单字段设置 scene_scheme 表 暂时先放在这里
+     */
+    public function setSceneSchemeInfo(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $info= array();
+
+        if ($show_name = input('post.show_name/d')){
+            $show_name = $show_name==1 ? 2 : 1 ;
+
+            $info = ['show_name'=>$show_name];
+        }
+
+        $model = new \app\index_admin\model\SceneScheme();
+        $rse = $model->where(['id'=>$id])->setField($info);
+
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+    }
+
+    /**
      * 修改场景下的方案
      */
     public function editSceneScheme(){
