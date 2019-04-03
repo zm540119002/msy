@@ -8,6 +8,14 @@ class Payment extends \think\Controller {
     //去支付
     public function toPay()
     {
+        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+            $payOpenId =  session('pay_open_id');
+            if(empty($payOpenId)){
+                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $payOpenId  = $tools->getOpenid();
+                session('pay_open_id',$payOpenId);
+            }
+        }
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
@@ -90,15 +98,6 @@ class Payment extends \think\Controller {
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                print_r($payOpenId);exit;
-                session('pay_open_id',$payOpenId);
-            }
-            print_r(session('pay_open_id'));exit;
-
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
             print_r($payInfo);exit;
             \common\component\payment\weixin\weixinPay::wxPay($payInfo);
