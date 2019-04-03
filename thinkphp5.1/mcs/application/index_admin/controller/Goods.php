@@ -133,6 +133,17 @@ class Goods extends Base {
                 $goodsInfo['belong_to'] = strrev(decbin($goodsInfo['belong_to']));
 
                 $this->assign('info',$goodsInfo);
+
+            }else{
+
+                $condition = [
+                    'order'=>[
+                        'number'=>'desc',
+                    ],
+                ];
+                $goodsInfo = $modelGoods->getInfo($condition);
+
+                $this->assign('last_number',$goodsInfo['number']+1);
             }
 
             //单位
