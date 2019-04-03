@@ -12,39 +12,39 @@ class Project extends \common\controller\Base{
     }
 
     /**
-     * 查出产商相关产品 分页查询
+     * 查询项目下的相关视频 分页查询 暂时先随机
      */
-    public function getList(){
+    public function getVideoList(){
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
         $model = new \app\index\model\Project();
         $config=[
             'where'=>[
+                ['status','=',0],
+                ['shelf_status','=',1],
+                ['audit','=',1],
             ],
             'field'=>[
-                'g.id,g.sale_price,g.sale_type,g.shelf_status,g.create_time,g.update_time,g.inventory,
-                g.name,g.retail_price,g.trait,g.category_id_1,g.category_id_2,g.category_id_3,
-                g.thumb_img,g.goods_video,g.main_img,g.details_img,g.tag,g.parameters,g.sort,g.trait'
+               'id','name','update_time','video'
             ],
             'order'=>[
                 'sort'=>'desc',
-                'line_num'=>'asc',
-                'id'=>'desc'
             ],
         ];
-        if(input('?get.storeId') && (int)input('?get.storeId')){
-            $config['where'][] = ['g.store_id', '=', input('get.storeId')];
+
+        if(input('?get.belong_to') && (int)input('?get.belong_to')){
+            $config['where'][] = ['belong_to', '=', input('get.belong_to')];
         }
-        $keyword = input('get.keyword','');
-        if($keyword) {
-            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
-        }
+
+
         $list = $model -> pageQuery($config);
+
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'store' ){//店铺产品列表
-                return $this->fetch('list_tpl');
+            // 排列的数量不同
+            switch($_GET['pageType']){
+                case 'column_1' : return $this->fetch('list_video_tpl'); break;   // 一行一个
             }
         }
     }
@@ -140,29 +140,4 @@ class Project extends \common\controller\Base{
         }
     }
 
-    /**获取推荐商品
-     * @return array|\think\response\View
-     */
-    public function getRecommendGoods(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $id = input('get.id/d');
-        //相关推荐商品
-        $modelRecommendGoods = new \app\index\model\RecommendGoods();
-        $config =[
-            'where' => [
-                ['rg.status', '=', 0],
-                ['rg.goods_id', '=', $id],
-            ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],'join'=>[
-                ['goods g','g.id = rg.recommend_goods_id','left']
-            ]
-        ];
-        $list= $modelRecommendGoods->getList($config);
-        $this->assign('list',$list);
-        return view('goods/recommend_list_tpl');
-    }
 }

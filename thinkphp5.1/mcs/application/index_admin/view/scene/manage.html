@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<!--排序规则-->
-				<input type="button" id="searchScene" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
+				<input type="button" id="search" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
 			</form>
 		</div>
 		<div class="content" id="list"></div>
@@ -88,7 +88,7 @@
 			getPagingList(config,getData);
 		});
 		//搜索
-		$('#searchScene').click(function(){
+		$('#search').click(function(){
 			//config.currentPage = 0;
 			var getData = $('#form1').serializeObject();
 			getPagingList(config,getData);
@@ -106,10 +106,10 @@
 			var url =  controller + 'manageSceneScheme/id/' + _thisTr.data('id');
 			location.href = url;
 		});
-		// 去设置项目商品
-		$('body').on('click','.addProjectGoods',function(){
+		// 管理关联的商品
+		$('body').on('click','.relationGoods',function(){
 			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'addSceneGoods/id/' + _thisTr.data('id');
+			var url =  controller + 'manageRelationGoods/id/' + _thisTr.data('id');
 			location.href = url;
 		});
 

@@ -50,4 +50,9 @@ return [
      */
     'sslcert_path' => __DIR__.'/../../../common/component/payment/weixin/cert/apiclient_cert.pem',
     'sslkey_path' => __DIR__.'/../../../common/component/payment/weixin/cert/apiclient_key.pem',
+
+    /**
+     * 统一支付网关
+     */
+    'unified_order_gateway' => 'https://msy.meishangyun.com/index/Payment/orderPayment',
 ];

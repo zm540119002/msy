@@ -7,7 +7,7 @@ class GoodsCategory extends\common\model\Base {
 	// 设置主键
 	protected $pk = 'id';
 	// 设置当前模型的数据库连接
-	protected $connection = 'db_config_mcs';
+	protected $connection = 'db_config_1';
 	// 别名
 	protected $alias = 'gc';
 
@@ -19,7 +19,7 @@ class GoodsCategory extends\common\model\Base {
 			return errorMsg($validateGoodsCategory->getError());
 		}
 		if( isset($postData['img']) && $postData['img'] ){
-			$postData['img'] = moveImgFromTemp(config('upload_dir.weiya_goods_gategory'),basename($postData['img']));
+			$postData['img'] = moveImgFromTemp(config('upload_dir.goods_gategory'),basename($postData['img']));
 		}
 		if($postData['id'] && intval($postData['id'])){
 			$config = [

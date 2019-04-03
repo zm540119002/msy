@@ -88,25 +88,77 @@ class Goods extends \common\controller\Base{
         if($keyword) {
             $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
         }
-        
+
         $list = $model -> pageQuery($config);
         $this->assign('list',$list);
+
         if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'index' ){
-                return $this->fetch('list_index_tpl');
+
+            // 排列的数量不同
+            switch($_GET['pageType']){
+                case 'index': return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
+                case 'sort' : return $this->fetch('list_goods_one_column_tpl'); break;   // 一行一个
             }
         }
     }
 
-    /**商品详情页
+    /***
+     * 获取各关联表下的商品 -通用方法
+     * @return array|\think\response\View
+     */
+    public function getRelationGoods(){
+        if(!request()->isGet()){
+            return errorMsg('参数有误');
+        }
+        if(!$id = input('get.id/d')) return errorMsg('参数有误');
+
+        $relation = input('get.relation/d');
+        // custom.php relation_type
+        switch($relation){
+            case config('custom.relation_type.scene'):
+                $model = new \app\index\model\SceneGoods();
+                $field_id = 'sg.scene_id';
+                $goods_id = 'sg.goods_id';
+                break;
+            case config('custom.relation_type.project'):
+                $model = new \app\index\model\ProjectGoods();
+                $field_id = 'pg.project_id';
+                $goods_id = 'pg.goods_id';
+                break;
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index\model\PromotionGoods();
+                $field_id = 'pg.promotion_id';
+                $goods_id = 'pg.goods_id';
+                break;
+            default:
+                return errorMsg('参数有误');
+        }
+
+        $config = [
+            'where' => [
+                [$field_id,'=',$id], ['g.status','=', 0], ['g.shelf_status','=', 3],
+            ],'join' => [
+                ['goods g','g.id = '.$goods_id,'left'],
+            ],'field' => [
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],
+        ];
+
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+
+        return $this->fetch('list_goods_one_column_tpl');
+    }
+
+    /**
+     * 商品详情页
      */
     public function detail(){
         if(request()->isAjax()){
         }else{
-            $id = intval(input('id'));
-            if(!$id){
-                $this->error('此商品已下架');
-            }
+            // 商品基础处理
+            if(!$id=input('id/d')) $this->error('此商品已下架');
             $model = new \app\index\model\Goods();
             $config =[
                 'where' => [
@@ -116,13 +168,13 @@ class Goods extends \common\controller\Base{
                 ],
             ];
             $info = $model->getInfo($config);
-            if(empty($info)){
-                $this->error('此商品已下架');
-            }
+            if(empty($info)) $this->error('此商品已下架');
+
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
+
 
             $modelComment = new \app\index\model\Comment();
             $where = [
@@ -134,6 +186,7 @@ class Goods extends \common\controller\Base{
             $this ->assign('averageScore',$averageScore);
             $total = $modelComment -> where($where)->count('user_id');
             $this ->assign('total',$total);
+
 
             //登录判断是否已收藏
             $user = session('user');

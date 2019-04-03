@@ -635,11 +635,12 @@ function ajaxReturn($msg,$status = -1,$data = []){;
 }
 
 /**从临时目录里移动文件到新的目录
- * @param $newRelativePath 新相对路径
- * @param $filename 文件名
+ * @param $filename string 文件名
+ * @param $newRelativePath string 新相对路径
  * @return string 返回相对文件路径
  */
 function moveImgFromTemp($newRelativePath,$filename){
+
     //上传文件公共路径
     $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
     if(!is_dir($uploadPath)){
@@ -647,25 +648,44 @@ function moveImgFromTemp($newRelativePath,$filename){
             return errorMsg('创建Uploads目录失败');
         }
     }
-    //临时相对路径
-    $tempRelativePath = config('upload_dir.temp_path');
-    //旧路径
-    $tempPath = $uploadPath . $tempRelativePath;
-    if(!is_dir($tempPath)){
-        return errorMsg('临时目录不存在！');
+
+    // 上传的相对路径不一致
+    if(strpos($filename,config('upload_dir.upload_path'))){
+        $oldFiles = dirname($uploadPath).$filename;
+
+    }else{
+        $oldFiles = $uploadPath.$filename;
+
     }
-    //旧文件
-    $tempFile = $tempPath . $filename;
+    // 旧文件 有直接用 ，没有就设置
+    if(is_file($oldFiles)){
+        $tempFile = $oldFiles;
+        $filename = basename($filename);
+
+    }else{
+        //临时相对路径
+        $tempRelativePath = config('upload_dir.temp_path');
+        $tempPath = $uploadPath . $tempRelativePath;
+        if(!is_dir($tempPath)){
+            return errorMsg('临时目录不存在！');
+        }
+        $filename = basename($filename);
+        $tempFile = $tempPath . $filename;
+
+    }
 
     //新路径
-    $newPath = $uploadPath . $newRelativePath;
+    $newPath = $uploadPath  . $newRelativePath;
+
     if(!mk_dir($newPath)){
         return errorMsg('创建新目录失败！');
     }
+
     //新文件
     $newFile = $newPath . $filename;
+
     //重命名文件
-    if(file_exists($tempFile)){//临时文件存在则移动
+    if(is_file($tempFile)){//临时文件存在则移动
         if(!rename($tempFile,$newFile)){
             return errorMsg('重命名文件失败！');
         }
@@ -919,6 +939,22 @@ function setSession($user){
     return $jumpUrl?:url('index/Index/index');
 }
 
+//传递数据以易于阅读的样式格式化后输出
+function p($data){
+    // 定义样式
+    $str='<pre style="display: block;padding: 9.5px;margin: 44px 0 0 0;font-size: 13px;line-height: 1.42857;color: #333;word-break: break-all;word-wrap: break-word;background-color: #F5F5F5;border: 1px solid #CCC;border-radius: 4px;">';
+    // 如果是boolean或者null直接显示文字；否则print
+    if (is_bool($data)) {
+        $show_data=$data ? 'true' : 'false';
+    }elseif (is_null($data)) {
+        $show_data='null';
+    }else{
+        $show_data=print_r($data,true);
+    }
+    $str.=$show_data;
+    $str.='</pre>';
+    echo $str;
+}
 
 
 

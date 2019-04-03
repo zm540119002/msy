@@ -78,29 +78,32 @@
 		});
 		//提交评价
 		$('body').on('click','.submit',function () {
-			var score=$('.my_fraction').data('score');
-			var commenText=$('.text_description').val();
+			//$('.my_fraction').data('score','');
+			var score=$('.my_fraction').attr('data-score');
+			var commentText=$('.text_description').val();
+			var commentImg=[];
 			$.each($('.multi-picture-module li'),function(){
 				var _this=$(this);
-				var commentImg=[];
 				commentImg.push(_this.find('img').attr('src'));
-			})
+			});
 		    var postData={};
 			postData.score=score;
-			postData.commenText=commenText;
+			postData.commentText=commentText;
 			postData.commentImg=commentImg;
+
+			var url = module+'Comment/add';
 			console.log(postData);
 			return false;
 			$.ajax({
-				url:,
+				url:url,
 				type:'post',
 				data:postData,
 				success:function(){
 
 				}
-			})
-            var url =  module + 'Mine/index';
-            location.href = url;
+			});
+            //var url =  module + 'Mine/index';
+            //location.href = url;
         });
 	});
 </script>

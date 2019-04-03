@@ -13,45 +13,9 @@ class Scene extends \common\controller\Base{
             return $this->fetch();
         }
     }
-    public function jiameng(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function yiqi(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function kaidian(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function qingsongtuoke(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function liukeshicao(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
-    public function suokefanglue(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
 
     /**
-     * 查出产商相关产品 分页查询
+     * 分页查询
      */
     public function getList(){
         if(!request()->isGet()){
@@ -96,9 +60,7 @@ class Scene extends \common\controller\Base{
         if(request()->isAjax()){
         }else{
             $id = intval(input('id'));
-            if(!$id){
-                $this->error('此项目已下架');
-            }
+            if(!$id) $this->error('此项目已下架');
 
             // 场景信息
             $model = new\app\index\model\Scene();
@@ -124,6 +86,7 @@ class Scene extends \common\controller\Base{
                 'where' => [
                     ['group','=',$scene['group']],
                     ['group','>',0],
+                    ['belong_to','=',$scene['belong_to']],
                 ],
                 'order' => [
                     'sort' => 'desc',
@@ -170,6 +133,7 @@ class Scene extends \common\controller\Base{
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $this->assign('relation',config('custom.relation_type.scene'));
 
             return $this->fetch();
         }
@@ -222,27 +186,6 @@ class Scene extends \common\controller\Base{
             $categoryList = $modelSceneGoodsCategory->getList($config);
             $this->assign('categoryList',$categoryList);
 
-            // 场景下的首商品分类的商品
-            /*            $goodsList = array();
-                        if($categoryList){
-                            $category = reset($categoryList);
-                            $modelGoods = new \app\index\model\Goods();
-                            $config = [
-                                'where' => [
-                                    ['status', '=', 0],
-                                    ['category_id_1', '=', $category['id']],
-                                ],'field'=>[
-                                    'id ','headline','thumb_img','bulk_price','specification','minimum_order_quantity',
-                                    'minimum_sample_quantity','increase_quantity','purchase_unit'
-                                ],'order'=> [
-                                    'sort' => 'desc'
-                                ]
-                            ];
-                            $goodsList= $modelGoods->getList($config);
-                        }
-
-                        $this->assign('goodsList',$goodsList);*/
-
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
@@ -258,30 +201,45 @@ class Scene extends \common\controller\Base{
     public function project(){
         if(request()->isAjax()){
         }else{
-            // 项目信息 -4个
+
+            $project_id= input('param.pid/d');
+            $scene_id  = input('param.id/d');
+            if(!$project_id && !$scene_id){
+                $this->error('此项目已下架');
+            }
+            // 子查询 求 belong_to
             $modelProject = new \app\index\model\Project();
-            $config = [
+            if($project_id){
+                $sql = $modelProject->where('id','=',$project_id)->field('belong_to')->buildSql();
+
+            }else{
+                $modelScene = new \app\index\model\Scene();
+                $sql = $modelScene->where('id','=',$scene_id)->field('belong_to')->buildSql();
+
+            }
+
+            // 项目信息 -4个
+
+            $condition = [
                 'where'  => [
                     ['status', '=', 0],
                     ['shelf_status', '=', 3],
                     ['audit', '=', 1],
-                    ['belong_to','exp','& 1'],
+                    ['belong_to', 'exp', "& $sql"],
                 ],'field'=> [
                     'id ','name','thumb_img','main_img','intro','detail_img','create_time','update_time','video'
                 ],'order'=> [
                     'sort'=>'desc'
-                ],'limit' =>4,
+                ],'limit' =>7,
             ];
 
-            $projectList = $modelProject->getList($config);
+            $projectList = $modelProject->getList($condition);
 
             if (empty($projectList)) {
-                $this->error('此项目已下架');
+                $this->error('暂时还没有项目，请耐心等待！');
             }
 
             // 有项目id OR 默认项目id
-            $project_id = intval(input('param.pid/d'));
-
             $project = array();
             if($project_id){
                 foreach($projectList as $k => $v){
@@ -303,33 +261,9 @@ class Scene extends \common\controller\Base{
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $this->assign('relation',config('custom.relation_type.project'));
             return $this->fetch();
         }
     }
 
-    /**获取推荐商品
-     * @return array|\think\response\View
-     */
-    public function getRecommendGoods(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $id = input('get.id/d');
-        //相关推荐商品
-        $modelRecommendGoods = new \app\index\model\RecommendGoods();
-        $config =[
-            'where' => [
-                ['rg.status', '=', 0],
-                ['rg.goods_id', '=', $id],
-            ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],'join'=>[
-                ['goods g','g.id = rg.recommend_goods_id','left']
-            ]
-        ];
-        $list= $modelRecommendGoods->getList($config);
-        $this->assign('list',$list);
-        return view('goods/recommend_list_tpl');
-    }
 }

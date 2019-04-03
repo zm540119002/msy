@@ -119,7 +119,7 @@ class Order extends \common\controller\UserBase
                 return errorMsg('失败');
             }
             //根据订单号查询关联的购物车的商品 删除  订单待付款后再删除
-   /*         $modelOrderDetail = new \app\index\model\OrderDetail();
+            $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
                 'where' => [
                     ['od.status', '=', 0],
@@ -141,7 +141,7 @@ class Order extends \common\controller\UserBase
                     $modelOrder->rollback();
                     return errorMsg('删除失败');
                 }
-            }*/
+            }
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
             return successMsg('成功',array('order_sn'=>$orderSn));
@@ -190,23 +190,21 @@ class Order extends \common\controller\UserBase
 
 
     }
-    //支付
+
+    // 订单支付
     public function toPay()
     {
-
-        //echo $this->user['id'];
-        //exit;
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            //$payOpenId =  session('pay_open_id');
+/*        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+            $payOpenId =  session('pay_open_id');
             // 微信支付有问题 暂不用
-/*            if(empty($payOpenId)){
+            if(empty($payOpenId)){
                 $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
-            }*/
-        }
+            }
+        }*/
         $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn');
+        $orderSn = input('order_sn/s');
         $config = [
             'where' => [
                 ['o.status', '=', 0],
@@ -219,7 +217,7 @@ class Order extends \common\controller\UserBase
         ];
         $orderInfo = $modelOrder->getInfo($config);
         $this->assign('orderInfo', $orderInfo);
-        //钱包
+        // 钱包余额
         $modelWallet = new \app\index\model\Wallet();
         $config = [
             'where' => [
@@ -230,8 +228,7 @@ class Order extends \common\controller\UserBase
             ],
         ];
         $walletInfo = $modelWallet->getInfo($config);
-/*        p($walletInfo);
-        exit;*/
+
         $this->assign('walletInfo', $walletInfo);
         $this->assign('user',$this->user);
         return $this->fetch();

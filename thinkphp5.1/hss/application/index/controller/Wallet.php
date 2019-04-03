@@ -29,6 +29,7 @@ class Wallet extends \common\controller\UserBase{
     /**忘记密码 /注册
      */
     public function forgetPassword(){
+
         if (request()->isAjax()) {
             $model = new \app\index\model\Wallet();;
             $postData = input('post.');
@@ -45,15 +46,53 @@ class Wallet extends \common\controller\UserBase{
     public function recharge(){
         if (request()->isAjax()) {
         } else {
-            if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-                $payOpenId =  session('pay_open_id');
-                if(empty($payOpenId)){
-                    $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
-                    $payOpenId  = $tools->getOpenid();
-                    session('pay_open_id',$payOpenId);
+            $model = new \app\index\model\Wallet();;
+            $condition = [
+                'where' => [
+                    ['user_id', '=', $this->user['id']]
+                ], 'field' => [
+                    'id', 'amount',
+                ]
+            ];
+            $wallet = $model->getInfo($condition);
+            if(empty($wallet)){ // 返回钱包开通页
+                return redirect('Mine/index');
+
+            }else{
+                $this->assign('wallet',$wallet);
+
+                if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+                    $payOpenId =  session('pay_open_id');
+                    if(empty($payOpenId)){
+                        $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
+                        $payOpenId  = $tools->getOpenid();
+                        session('pay_open_id',$payOpenId);
+                    }
                 }
+                return $this->fetch();
             }
-            return $this->fetch();
+
         }
     }
+
+    /**
+     * 是否已设置钱包
+     */
+    public function getWalletInfo(){
+        if (request()->isAjax()) {
+            $model = new \app\index\model\Wallet();;
+            $condition = [
+                'where' => [
+                    ['user_id', '=', $this->user['id']]
+                ], 'field' => [
+                    'id', 'amount',
+                ]
+            ];
+            if ($model->getInfo($condition)) {
+                return successMsg('成功');
+            }
+        }
+        return errorMsg('失败');
+    }
+
 }

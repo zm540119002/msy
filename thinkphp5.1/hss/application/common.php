@@ -170,19 +170,24 @@ function get_menu_tree($items, $id = 'id', $pid = 'parent_id_1', $son = 'childre
     return $tree;
 }
 
-//传递数据以易于阅读的样式格式化后输出
-function p($data){
-    // 定义样式
-    $str='<pre style="display: block;padding: 9.5px;margin: 44px 0 0 0;font-size: 13px;line-height: 1.42857;color: #333;word-break: break-all;word-wrap: break-word;background-color: #F5F5F5;border: 1px solid #CCC;border-radius: 4px;">';
-    // 如果是boolean或者null直接显示文字；否则print
-    if (is_bool($data)) {
-        $show_data=$data ? 'true' : 'false';
-    }elseif (is_null($data)) {
-        $show_data='null';
-    }else{
-        $show_data=print_r($data,true);
+/**
+ * 图片展示处理 现暂时没有其它的默认图片，到时按目录区分默认图片
+ * 返回默认，记录日志......
+ */
+function show_img_handle($img_url){
+
+    if(!empty($img_url)){
+        // 根目录
+        $serverInfo = request()->server();
+        $uploads = config('upload_dir.upload_path');
+        $url     = "{$serverInfo['DOCUMENT_ROOT']}/{$uploads}/{$img_url}";
+
+        if(is_file($url)){
+            $uploads = config('template.tpl_replace_string.public_uploads');
+            return $uploads.'/'.$img_url;
+        }
     }
-    $str.=$show_data;
-    $str.='</pre>';
-    echo $str;
+
+    $uploads = config('template.tpl_replace_string.public_img');
+    return $uploads.'/default/no_pic_100.jpg';
 }

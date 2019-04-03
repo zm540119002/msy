@@ -1,21 +1,13 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="content"}
     <div class="page">
-        <div class="fixed-bar">
-            <div class="item-title">
-                <ul class="tab-base">
-                    <li><a href="{:url('manage')}" ><span>管理</span></a></li>
-                    <li><a href="{:url('edit')}" class="current"><span>编辑</span></a></li>
-                </ul>
-            </div>
-        </div>
         <div style="margin-top:15px;">
-            <form id="form1">
+            <form id="form1" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="{$info.id}">
                 <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                     <tbody>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目名称：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目名称：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
                                 <textarea class="project_description" name="name" >{$info.name}</textarea>
@@ -23,34 +15,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><font color="#FF0000">*</font>项目归属：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <div class="type_item">
-                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
-                                {if ($info.belong_to[$k-1])}
-                                <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
-                                {else /}
-                                <input type="checkbox" name="belong_to" value="">{$vo}
-                                {/if}
-                                {/volist}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort}">
+                            <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
                         </td>
                     </tr>
-
-                    <tr>
+<!--                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>项目简介：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class= width="89%" align=left>
                                 <textarea class="project_description" name="intro" >{$info.intro}</textarea>
                             </div>
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
@@ -59,7 +36,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>缩略图：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>缩略图：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                                 <div class="upload-picture-module f24">
@@ -73,47 +50,67 @@
                                             {/empty}
                                             <input type="hidden" class="layer-thumbnail-picture img" value="{$info.thumb_img}" name="thumb_img"/>
                                         </div>
-                                        <!--<p>企业营业执照</p>-->
                                     </div>
                                 </div>
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>广告图：</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目介绍：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                             <div class="upload-picture-module f24">
                                 <div>
                                     <div class="picture-module">
                                         <input type="file" class="uploadImg uploadSingleImg" name="">
-                                        {empty name="info.thumb_img"}
+                                        {empty name="info.main_img"}
                                         <img class="upload_img" src="">
                                         {else /}
                                         <img class="upload_img " src="public_uploads/{$info.main_img}" />
                                         {/empty}
                                         <input type="hidden" class="layer-thumbnail-picture img" value="{$info.main_img}" name="main_img"/>
                                     </div>
-                                    <!--<p>企业营业执照</p>-->
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>详情图:</td>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>项目视频：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <!-- 加载编辑器的容器 -->
+                            <div class= width="89%" align=left>
+                                <p class="f20 picture-tipc-box"><span class="c-red">*</span> 仅支持大小在10M内，mp4、rmvb、avi、ts格式的视频</p>
+                                <form>
+                                    <div class="upload-picture-module f24">
+                                        <div>
+                                            <div class="picture-module">
+                                                <input type="file" class="uploadImg uploadSingleVideo" name="">
+                                                {empty name="info.video"}
+                                                <video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+                                                {else /}
+                                                <video class="upload_img upload-video" src="public_uploads/{$info.video}" autoplay="autoplay"></video>
+                                                {/empty}
+                                                <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.video}" name="video"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+<!--                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目介绍:</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            &lt;!&ndash; 加载编辑器的容器 &ndash;&gt;
                             <script id="detail_img" type="text/plain">
                                 
                             </script>
                             <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td width="11%"></td>
                         <td height=60 width="50%" align=center>
                             <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
                             &nbsp;&nbsp;
-                            <input class="button_save_black" name="add0" value="返回" type="button">
                         </td>
                     </tr>
                     </tbody>
@@ -124,98 +121,108 @@
 {/block}
 
 {block name="script"}
+
 <!-- 配置文件 -->
 <script type="text/javascript" src="hui_lib/Ueditor/ueditor.config.js"></script>
 <!-- 编辑器源码文件 -->
 <script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
 <script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
 <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
+<script type="text/javascript" src="index_admin_js/uploadSingleImg.js"></script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
-    var detail_img_obj = UE.getEditor('detail_img', {
-        toolbars: [
-            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
-        ],
-        autoHeightEnabled: true,
-        autoFloatEnabled: true
-    });
+
 </script>
     <script type="text/javascript">
         $(function(){
             //项目主图
-            detail_img_obj.ready(function() {
-                detail_img_obj.setContent($('#detailImg').val());
-            });
+
             //确定
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
+
                 //主图
                 postData.detail_img = '';
                 $.each($('#detail_img').find('iframe').contents().find('.view img'),function(){
                     postData.detail_img += $(this).attr('src') + ',';
 
                 });
+                var content='';
+                if(!postData.name){
+                    content='项目名称不能为空';
+                }else if(!postData.thumb_img){
+                    content='缩略图不能为空';
+                }else if(!postData.main_img){
+                    content='项目介绍不能为空';
+                }/*else if(!postData.video){
+                    content='项目视频不能为空';
+                }*/
+
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+
                 var url = module +'Project/edit';
                 var _this = $(this);
                 _this.addClass("nodisabled");//防止重复提交
                 $.post(url,postData,function(msg){
                     _this.removeClass("nodisabled");//
                     dialog.msg(msg,'',function () {
-                        location.href = controller + 'manage';
+                        if(msg.status){
+                            // 提交后关闭，然后刷新父窗口
+                            layer.close(layer.index);
+                            window.parent.location.reload();
+                        }
                     });
                 });
             });
 
-            //返回
-            $('.button_save_black').click(function(){
-                location.href = controller + '/manage';
-            });
-
-            // 选择单图片
-            $('body').on('change','.uploadSingleImg',function () {
-                var _this=$(this);
-                uploadsSingleImgFlag = false;
-                var img = event.target.files[0];
-                var uploadfileSize=img.size/1024/1024;
+            // 选择单视频
+            $('body').on('change','.uploadSingleVideo',function () {
+                _this = $(this);
+                uploadsSingleVideoFlag = false;
+                var video = event.target.files[0];
                 var obj=$(this).parent();
-                // 判断是否图片
-                if(!img){
+                // 判断是否视频
+                if(!video){
                     return false;
                 }
-                // 判断图片格式
-                var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
-                if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
-                    dialog.error('请上传：jpg、jpeg、png、gif格式图片');
+
+                // 判断视频格式
+                var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
+                if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
+                    dialog.error('只支持：mp4、rmvb、avi、ts格式的视频');
                     return false;
                 }
-                if(uploadfileSize>1){
-                    dialog.error('图片大小不能超过1M');
+                if( (video.size/1024/1024)>10){
+                    dialog.error('视频大小不能超过10M !');
                     return false;
-                }
+                 }
+
                 var reader = new FileReader();
-                reader.readAsDataURL(img);
+                reader.readAsDataURL(video);
                 reader.onload = function(e){
-                    var imgUrl=e.target.result;
-                    $(obj).addClass('active');
                     var postData = {fileBase64: e.target.result};
-                    // postData.imgWidth = 145;
-                    // postData.imgHeight = 100;
-                    $(obj).find('img').attr('src',imgUrl);
+                    var videoUrl=e.target.result;
+                    $(obj).find('video').attr('src',videoUrl);
+                    //提交
                     var type = _this.data('type');
                     if(type == 'notupload'){
-                        $(obj).find('.img').val(imgUrl);
-                        console.log(1);
+                        $(obj).find('.img').val(videoUrl);
                         return false;
                     }
-                    //提交
                     $.post(controller+"uploadFileToTemp",postData,function(msg){
+                        console.log(msg);
+                        return false;
                         if(msg.status == 1){
-                            uploadsSingleImgFlag = true;
+                            uploadsSingleVideoFlag = true;
                             $(obj).find('.img').val(msg.info);
                         }else{
                             dialog.error(msg.info)
                         }
                     })
+
                 }
             });
 

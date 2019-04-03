@@ -22,12 +22,13 @@ return [
     'weiya_goods_gategory' => 'weiya_goods_gategory/',//维雅定制项目图片
 
 
-    'mcs_goods' => 'mcs_goods/',        //商品图片
-    'mcs_project' => 'mcs_project/',    //项目图片
-    'mcs_scene' => 'mcs_scene/',        //场景图片
-    'mcs_scheme' => 'mcs_scheme/',      //方案图片
-    'mcs_information' => 'mcs_information/',    // ??
-    'mcs_goods_gategory' => 'mcs_goods_gategory/',//商品分类图片
+    'goods' => 'mcs_goods/',        //商品图片
+    'project' => 'mcs_project/',    //项目图片
+    'scene' => 'mcs_scene/',        //场景图片
+    'scheme' => 'mcs_scheme/',      //方案图片
+    'promotion' => 'mcs_promotion/',//促销图片
+    'information' => 'mcs_information/',    // ??
+    'goods_gategory' => 'mcs_goods_gategory/',//商品分类图片
     'user_avatar' => 'user_avatar/',    //用户头像目录
 ];
 

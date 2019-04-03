@@ -6,7 +6,6 @@
         fileList = $(this).get(0).files;
         num=file.data('num');//限制个数
         if(num==0){ //0代表无限制个数
-            console.log(1);
             uploadPic(fileList[0],0,fileList.length);
         }else{
             uploadPic(fileList[0],0,num);

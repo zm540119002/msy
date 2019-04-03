@@ -4,6 +4,18 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
+
+        // 还没有做好，暂时不显示
+        $this->redirect('CenterStore/index');
+        exit;
+
+        // 商品
+        $model = new \app\index\model\Goods();
+
+        $goods = $model->getList();
+        $this->assign('goods',$goods);
+
+
         //获取商品的分类
         $modelGoodsCategory = new \app\index\model\GoodsCategory();
         $config =[
@@ -46,6 +58,10 @@ class Index extends \common\controller\Base{
         ];
         $projectList  = $modelProject->getList($config);
         $this ->assign('projectList',$projectList);
+
+        // 底部菜单，见配置文件custom.footer_menu
+        $this->assign('currentPage',request()->controller().'/'.request()->action());
+
         return $this->fetch();
     }
 }

@@ -12,6 +12,7 @@ class User extends \think\Validate
         ],
         'captcha'  => [
             'regex' => '/^\d{6}$/',
+            'require',
         ],
         'name'  => [
             'require', 'max' => 25,
@@ -21,6 +22,7 @@ class User extends \think\Validate
         ],
         'password'  => [
             'regex' => '/^[A-Za-z0-9]{6,16}$/',
+            'require',
         ],
     ];
     
@@ -34,7 +36,9 @@ class User extends \think\Validate
         'nickname.require' => '昵称必须！',
         'nickname.max' => '昵称超出长度！',
         'captcha.regex' => '验证码格式错误！',
+        'captcha.require' => '验证码格式错误！',
         'password.regex' => '密码格式错误！',
+        'password.require' => '密码格式错误！',
     ];
 
     //验证场景

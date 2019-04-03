@@ -47,21 +47,23 @@
                     <!--<span class="selected"></span>-->
                     <!--<span class="wx"></span>-->
                 <!--</li>-->
-                {if $walletInfo.amount >= $orderInfo.amount}
+
                 <li data-paycode="4" >
-                {else /}
-                <li data-paycode="4">
-                {/if}
-
-                    <!--<input type="checkbox" checked="checked" class=""/>-->
                     <span class="selected"></span>
-                    {notempty name="walletInfo"}
-                    钱包支付 <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
-                    {else /}
-                    <span class="wx set_wallet_psd">开通钱包</span>
-                    {/notempty}
-
+                    {if $walletInfo}
+                    钱包支付
+                    <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
+                    <a href="{:url('Wallet/recharge')}">
+                    余额充值
+                    </a>
+                    {else/}
+                    钱包支付
+                    <a href="javascript:void(0);" data-type="set" class="set_wallet_psd">
+                    开通钱包
+                    </a>
+                    {/if}
                 </li>
+
             </ul>
         </div>
         <p>*线下银行转账/现金支付需将证据拍照上传</p>
@@ -104,6 +106,7 @@
                 walletPayCallBack = orderPayment;
                 walletPayCallBackParameter = $('#pay_info').serializeObject();
                 walletPayDialog();
+
                 return false
             }
         });
@@ -127,7 +130,7 @@
             var voucher=$('.bankTransferLayer').find('.img').val();
             postData.voucher=voucher;
             var content='';
-            console.log(voucher);
+
             if(!postData.voucher){
                 content='请上传转账凭证';
             }
@@ -142,7 +145,10 @@
         //设置钱包支付密码
         $('body').on('click','.set_wallet_psd',function () {
             var type=$(this).data('type');
-            forgetWalletPasswordDialog(type);
+            var url = window.location.href;
+
+            forgetWalletPasswordDialog(type,url);
+
         });
     });
 </script>

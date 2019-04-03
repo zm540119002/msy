@@ -38,39 +38,16 @@
 		</div>
 		<!-- 商品列表 -->
 		<div class="content-padding separation-line">
-			<span class="content-label content-box">产品1</span>
 			<div class="swiper-container swiper-container-horizontal swiper-container-ios swiper-list-wrapper">
 				<div class="swiper-wrapper " style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-					<div class="swiper-slide swiper-slide-active" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品1</p>
-					</div>
-					<div class="swiper-slide swiper-slide-next" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product1.jpg">
-						</a>
-						<p>产品2</p>
-					</div>
+					{volist name="goods" id="info"}
 					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
 						<a>
-							<img src="public_img/product2.jpg">
+							<img src="{:show_img_handle($info.thumb_img)}">
 						</a>
-						<p>产品3</p>
+						<p>{$info.name}</p>
 					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product2.jpg">
-						</a>
-						<p>产品4</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品5</p>
-					</div>
+					{/volist} 
 				</div>
 			</div>
 			<div>
@@ -172,7 +149,9 @@
 {/block}
 {block name="common"}
 {/block}
-{block name="footer"}{/block}
+{block name="footer"}
+{include file="template/footer_project.html" /}
+{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">

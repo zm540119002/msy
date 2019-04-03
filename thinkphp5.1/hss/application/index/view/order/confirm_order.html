@@ -3,7 +3,7 @@
 {block name="content"}
     <article class="f24 fill_order_wrapper">
         <section class="header_title separation-line">
-            <a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+            <a href="javascript:void(0);" class="back_prev_page"></a>
             <h2 class="f24">提交订单</h2>
         </section>
         <div id="address_info">
@@ -88,11 +88,7 @@
                 {volist name="orderGoodsList" id="info"}
                 <li id="li-id-{$key}" data-order_detail_id="{$info.order_detail_id}">
                     <a href="{:url('Goods/detail',['id'=>$info.goods_id])}">
-                        {notempty name="info.thumb_img"}
-                        <img data-img="" data-isloaded="" src="public_uploads/{$info.thumb_img}" alt="" class="c_img left" />
-                        {else /}
-
-                        {/notempty}
+                        <img data-img="" data-isloaded="" src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img left" />
                     </a>
                     <div class="g_order_r">
                         <p class="headline">{$info.headline}</p>
@@ -107,12 +103,6 @@
                         <div class="">购买类型：<span>样品购买</span></div>
                         {else /}
                         {/if}
-                        <div class="columns_flex">
-                            已设定品牌：<span class="brand_name" data-id="{$info.brand_id}">{$info.brand_name}</span>
-                        </div>
-                        <div>
-                             <a href="javascript:;" class="set_brand">设定品牌></a>
-                        </div>
                     </div>
                 </li>
                 {/volist}

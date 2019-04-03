@@ -1,0 +1,263 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+{/block}
+{block name="content"}
+<article class="f24 content_main">
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+                      aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="module-navigation separation-line ">
+		<div class="columns_flex f20 channel_nav store_organize_nav">
+			<a href="javascript:void(0);" class="deployed-deployment current"><span class="union_purchase"></span>采购商城</a>
+			<a href="javascript:void(0);" class="store_run"><span class="exclusive"></span>入驻设置</a>
+			<a href="{:url('store/Operation/index')}" class="order-management"><span class="classify"></span>创客管理</a>
+			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>签约工作室</a>
+			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>C端商城</a>
+		</div>
+	</section>
+	<section class="">
+		<div class="content-padding">
+			{/*  暂时不用
+			<div>
+				<div class="scroll_news">
+					<a class="news_tit">
+					</a>
+					<div class="news_list_wrapper">
+						<ul class="news_list j_scroll_news">
+							<li class="news_item">
+								<a>
+									<span class="red">最新</span>维雅品牌定制平台正式上线啦！
+								</a>
+							</li>
+							<li class="news_item">
+								<a>
+									<span class="red">hot</span>利润为王,品牌定制是捷径！
+								</a>
+							</li>
+						</ul>
+					</div>
+					<a class="news_more" href="javascript:void(0)">更多</a>
+				</div>
+			</div>
+			*/}
+			<!--优惠广告入口-->
+			<section class="slider_banner">
+				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide swiper-slide-active">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
+						<div class="swiper-slide ">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
+						<div class="swiper-slide ">
+							<a href="">
+								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+							</a>
+						</div>
+					</div>
+					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+							aria-label="Go to slide 1"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+						<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+					</div>
+				</div>
+			</section>
+
+			<div class="scene_wrapper">
+				{volist name="sceneLists" id="lists" }
+					{volist name="lists" id="list" }
+					<div class="columns_flex l-r-sides" >
+						{volist name="list" id="vo" }
+						<a href="{:url(request()->controller().'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
+							<img src="public_uploads/{$vo.thumb_img}" alt="">
+						</a>
+						{/volist}
+					</div>
+					{/volist}
+				{/volist}
+			</div>
+			<div class="project_wrapper">
+				<div class="mod-part-title">
+					<div class="mod-part-title-wrap">
+						<span class="icon-title left"></span>
+						<span class="title">科技美肤精选</span>
+						<span class="icon-title right"></span>
+					</div>
+				</div>
+				<div id="scroller-wrapper" class="list_wrapper">
+					<ul class="columns_flex flex-both-side goods-content-list" id="list">
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+<section class="bottom_nav_fixed bottom_white">
+	<nav class=" foot_nav_bar">
+		<ul class="columns_flex">
+			<li class="each_column">
+				<a href="{:url('Index/index')}">
+					<span class="store f_icon"></span>
+					<span class="f_txt">采购商城</span>
+				</a>
+			</li>
+			<li class="each_column current">
+				<a href="javascript:void(0)" >
+					<span class="practitioners f_icon "></span>
+					<span class="f_txt">加盟店</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('CityPartner/index')}">
+					<span class="business f_icon"></span>
+					<span class="f_txt">城市合伙人</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
+					<span class="cart f_icon"></span>
+					<span class="f_txt">采购车</span>
+				</a>
+			</li>
+			<li class="each_column">
+				<a href="{:url('Mine/index')}">
+					<span class="my f_icon"></span>
+					<span class="f_txt">我的</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'index',
+		belong_to:1
+	};
+	$(function(){
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		//初始化分类商品页面
+		$('.nav_menu li:eq(0)').addClass('current');
+		postData.category_id = $('.nav_menu li.current').data('category-id');
+		getPagingList(config,postData);
+
+		$('body').on('click','.nav_menu li',function(){
+			var _this = $(this);
+			$(this).addClass('current').siblings().removeClass('current');
+			config = {
+				url:module+'Goods/getList',
+				requestEnd:false,
+				loadTrigger:false,
+				currentPage:1
+			};
+			postData.category_id = _this.data('category-id');
+			getPagingList(config,postData);
+		});
+
+		//下拉加载
+		//var offsetHeight=$('.nav_menu').offset().top;
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				postData.category_id = $('.nav_menu li.current').data('category-id');
+				getPagingList(config,postData);
+			}
+			//滚动
+			// var top=$(document).scrollTop();
+			// if(top>offsetHeight){
+			// 	$('.nav_menu').addClass('top-fixed');
+			// }else {
+			// 	$('.nav_menu').removeClass('top-fixed');
+			// }
+		});
+
+		$('body').on('click','.my_cart',function () {
+			var url = module + 'Cart/index';
+			var postData = {};
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(xhr){
+					$('.loading').show();
+				},
+				error:function(xhr){
+					$('.loading').hide();
+					dialog.error('AJAX错误！');
+				},
+				success: function(data){
+
+					$('.loading').hide();
+					if(data.status==0){
+						dialog.error(data.info);
+					}else if(data.code==1){
+						if(data.data == 'no_login'){
+							loginDialog();
+						}
+					}else if(data.status==1){
+
+					}else{
+						location.href = url;
+					}
+				}
+			});
+		});
+		/**
+		 *查看更多资讯
+		 */
+		$('body').on('click','.news_more',function () {
+			location.href = module + 'Information/index';
+		})
+	});
+</script>
+{/block}

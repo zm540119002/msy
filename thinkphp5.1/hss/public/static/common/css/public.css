@@ -3836,9 +3836,14 @@ input[type=text]::-webkit-focus-inner {
     margin-top:3rem;
 }
 .content_main .list img{
+    width:100%;
     /*width: 1.5rem;*/
     /*height: 1.5rem;*/
     /*margin:0 0 0 0.14rem;*/
+}
+.list .p_img{
+    display:block;
+    width:45%;
 }
 .list_r{
     margin:0.08rem 0 0 2.8rem;
@@ -6195,4 +6200,14 @@ div.no_data{
     height: .21333rem;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAARBAMAAABOcrPPAAAAGFBMV…7gqJ1ggZCAHSQvmCFEECII+YEkQBIgCZAESAIkAZIAw7/CBxB2EIrc6F0aAAAAAElFTkSuQmCC) no-repeat;
     background-size: contain;
+}
+.project_item.hide{
+    display: none;
+}
+.p_video_item li{
+    padding:0.15rem;
+    border-bottom:1px solid #d9d9d9;
+}
+.project_item video,.project_item p img{
+    width:100%;
 }

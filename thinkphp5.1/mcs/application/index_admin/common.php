@@ -5,6 +5,7 @@ function onOffLine($number) {
 }
 
 function formatImg($str){
+
     $arr = explode(',',$str);
     $str = '';
     foreach ($arr as $item) {

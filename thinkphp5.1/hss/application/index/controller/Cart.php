@@ -4,6 +4,8 @@ namespace app\index\controller;
 class Cart extends \common\controller\UserBase{
     /**首页
      */
+
+    // 有结算页面
     public function index(){
         if(request()->isAjax()){
         }else{
@@ -12,11 +14,17 @@ class Cart extends \common\controller\UserBase{
             return $this->fetch();
         }
     }
-     public function manage(){
+
+    // 导航页-没有结算
+    public function manage(){
         if(request()->isAjax()){
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
+            // 底部菜单，见配置文件custom.footer_menu
+            $this->assign('currentPage',request()->controller().'/'.request()->action());
+
             return $this->fetch();
         }
     }

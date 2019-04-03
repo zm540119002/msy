@@ -4,12 +4,31 @@ namespace app\index\controller;
 class Mine extends \common\controller\Base{
     //我的首页
     public function index(){
-        $this->assign('user',session('user'));
+        $user = session('user');
+        $this->assign('user',$user);
+        $wallet = array();
+        if($user){
+            $model = new \app\index\model\Wallet();;
+            $condition = [
+                'where' => [
+                    ['user_id','=',$user['id']]
+                ],'field' => [
+                    'id','amount',
+                ]
+            ];
+            $wallet = $model->getInfo($condition);
+        }
+        $this->assign('wallet',$wallet);
+
+        // 底部菜单，见配置文件custom.footer_menu
+        $this->assign('currentPage',request()->controller().'/'.request()->action());
+
         return $this->fetch();
     }
 
     //修改头像
     public function editAvatar(){
+
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }

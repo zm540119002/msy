@@ -4,170 +4,79 @@
 {block name="content"}
 <article class="f24 content_main">
 	<section class="slider_banner">
-		<div class="">
-			<img src="public_img/banner/mch_banner.jpg" alt="" class="common_default_img">
+		<div class="swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="module-navigation separation-line ">
+		<div class="columns_flex f20 channel_nav store_organize_nav">
+			<a href="javascript:void(0);" class="deployed-deployment current"><span class="union_purchase"></span>采购商城</a>
+			<a href="javascript:void(0);" class="store_run"><span class="exclusive"></span>众创空间</a>
+			<a href="{:url('store/Operation/index')}" class="order-management"><span class="classify"></span>加盟店家</a>
+			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>城市合伙人</a>
+			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>平台推客</a>
 		</div>
 	</section>
 	<section class="">
-		<div class="tag_item_box">
-			<ul class="tag_item columns_flex l-r-sides">
-				<li>
-					<a>
-						<img src="public_img/home_tag.jpg" alt="">
-					</a>
-				</li>
-				<li>
-					<a>
-						<img src="public_img/home_tag1.jpg" alt="">
-					</a>
-				</li>
-			</ul>
-			<ul class="tag_item columns_flex l-r-sides">
-				<li>
-					<a>
-						<img src="public_img/home_tag2.jpg" alt="">
-					</a>
-				</li>
-				<li>
-					<a>
-						<img src="public_img/home_tag3.jpg" alt="">
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="content-padding separation-line">
-			<span class="content-label content-box">产品1</span>
-			<div class="swiper-container swiper-container-horizontal swiper-container-ios swiper-list-wrapper">
-				<div class="swiper-wrapper " style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-					<div class="swiper-slide swiper-slide-active" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品1</p>
+		<div class="content-padding">
+			<!--优惠广告入口-->
+			<section class="slider_banner swiper-list-wrapper">
+				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+					<div class="swiper-wrapper">
+						{volist name="promotionList" id="vo"}
+						<div class="swiper-slide">
+							<a href="{:url('promotion/detail',['id'=>$vo.id])}">
+								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
+							</a>
+						</div>
+						{/volist}
 					</div>
-					<div class="swiper-slide swiper-slide-next" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product1.jpg">
-						</a>
-						<p>产品2</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product2.jpg">
-						</a>
-						<p>产品3</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product2.jpg">
-						</a>
-						<p>产品4</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品5</p>
+					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+							aria-label="Go to slide 1"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+						<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 					</div>
 				</div>
+			</section>
+			<div class="scene_wrapper">
+				{volist name="sceneLists" id="lists"}
+					{volist name="lists" id="list" }
+					<div class="columns_flex l-r-sides" >
+						{volist name="list" id="vo" }
+						<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
+							<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+						</a>
+						{/volist}
+					</div>
+					{/volist}
+				{/volist}
 			</div>
-			<div>
-				<div>
-					<a>
-						<img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
-					</a>
-				</div>
-				<p>产品产品产品产品产品产品产品</p>
-			</div>
-		</div>
-		<div class="content-padding separation-line">
-			<span class="content-label content-box">产品1</span>
-			<div class="swiper-container swiper-container-horizontal swiper-container-ios swiper-list-wrapper">
-				<div class="swiper-wrapper " style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-					<div class="swiper-slide swiper-slide-active" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品1</p>
-					</div>
-					<div class="swiper-slide swiper-slide-next" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product1.jpg">
-						</a>
-						<p>产品2</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product2.jpg">
-						</a>
-						<p>产品3</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product1.jpg">
-						</a>
-						<p>产品4</p>
-					</div>
-					<div class="swiper-slide" style="width: 177.5px; margin-right: 20px;">
-						<a>
-							<img src="public_img/product.jpg">
-						</a>
-						<p>产品5</p>
+			<div class="project_wrapper">
+				<div class="mod-part-title">
+					<div class="mod-part-title-wrap">
+						<span class="icon-title left"></span>
+						<span class="title">黑森森精选</span>
+						<span class="icon-title right"></span>
 					</div>
 				</div>
-			</div>
-			<div>
-				<div>
-					<a>
-						<img class="common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
-					</a>
+				<div id="scroller-wrapper" class="list_wrapper">
+					<ul class="columns_flex flex-both-side goods-content-list" id="list">
+					</ul>
 				</div>
-				<p>产品产品产品产品产品产品产品</p>
 			</div>
 		</div>
 	</section>
 </article>
-<section class="bottom_nav_fixed bottom_white">
-	<nav class=" foot_nav_bar">
-		<ul class="columns_flex">
-			<li class="each_column current">
-				<a href="javascript:void(0)">
-					<span class="store f_icon"></span>
-					<span class="f_txt">采购商城</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<!-- 后面再分类 -->
-				<a href="{:url('StoreLeague/index')}">
-					<span class="practitioners f_icon"></span>
-					<span class="f_txt">加盟店家</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a  href="{:url('CityPartner/index')}">
-					<span class="business f_icon"></span>
-					<span class="f_txt">城市合伙人</span>
-				</a>
-			</li>
-			<li class="each_column ">
-				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
-					<span class="cart f_icon"></span>
-					<span class="f_txt">采购车</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a href="{:url('Mine/index')}">
-					<span class="my f_icon"></span>
-					<span class="f_txt">我的</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-</section>
 {/block}
-{block name="common"}
+{block name="footer"}
+{include file="template/footer_project.html" /}
 {/block}
-{block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">
@@ -179,22 +88,11 @@
 	};
 	var postData = {
 		pageSize:10,
-		pageType:'index',
-		belong_to:1
+		pageType:'index'
 	};
 	$(function(){
 		//轮播
-		var swiper = new Swiper('.swiper-top-container', {
-			spaceBetween: 30,
-			autoplay:true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
-		});
-		//产品轮播
-		var swiper = new Swiper('.swiper-list-wrapper', {
-			slidesPerView:2.5,
+		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
 			autoplay:true,
 			pagination: {
@@ -253,7 +151,6 @@
 					dialog.error('AJAX错误！');
 				},
 				success: function(data){
-
 					$('.loading').hide();
 					if(data.status==0){
 						dialog.error(data.info);
@@ -269,12 +166,11 @@
 				}
 			});
 		});
-		/**
-		 *查看更多资讯
+		/**查看更多资讯
 		 */
 		$('body').on('click','.news_more',function () {
 			location.href = module + 'Information/index';
-		})
+		});
 	});
 </script>
 {/block}

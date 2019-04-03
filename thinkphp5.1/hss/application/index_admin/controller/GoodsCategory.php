@@ -114,6 +114,10 @@ class GoodsCategory extends Base
             $condition = [
                 ['id','in',$ids]
             ];
+            $where = [
+                ['goods_category_id','in',$ids]
+            ];
+
         }elseif($level == 2){
             $config = [
                 'where' => [
@@ -129,39 +133,54 @@ class GoodsCategory extends Base
             $condition = [
                 ['id','in',$ids]
             ];
+            $where = [
+                ['goods_category_id','in',$ids]
+            ];
+
         }elseif($level == 3){
             $condition = [
                 ['id', '=',$id]
             ];
+            $where = [
+                ['goods_category_id', '=',$id]
+            ];
         }else{
             return errorMsg('失败');
         }
-        return $model->del($condition);
+
+        // 事务
+        $model->startTrans();
+        try {
+            $result= $model->del($condition);
+            $model = new \app\index_admin\model\SceneGoodsCategory();
+            $model->del($where,false);
+
+            $model->commit();
+            return $result;
+
+        } catch (\Exception $e) {
+            // 回滚事务
+            $model->rollback();
+            return errorMsg('失败');
+        }
     }
 
-    /**
-     * 获取该分类下的子类 无操作
-     */
-    public function getSubclass(){
+    // 获取所有分类 关联表用
+    public function getGoodsCategory(){
+        if(!$id = input('id/d')){
+            $this ->error('参数有误');
+        }
         $model = new \app\index_admin\model\GoodsCategory();
-        $where = [
-            'status' => 0,
+        $config = [
+            'where'=>[
+                'status'=>0
+            ]
         ];
-        $level = input('level',0);
-        if($level){
-            $where['level'] = $level + 1;
-        }
-        $id = input('id',0);
-        if($id){
-            if($level==1){
-                $where['parent_id_1'] = $id;
-            }
-            if($level==2){
-                $where['parent_id_2'] = $id;
-            }
-        }
-        $list = $model->where($where)->select();
-        $this->assign('list',$list->toArray());
-        return view('list_child_tpl');
+
+        $allCategoryList = $model->getList($config);
+        $this->assign('allCategoryList',$allCategoryList);
+
+        $this->assign('id',$id);
     }
+
 }

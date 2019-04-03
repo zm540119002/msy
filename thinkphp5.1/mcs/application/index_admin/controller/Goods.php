@@ -34,7 +34,7 @@ class Goods extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.goods'),basename($item));
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
@@ -46,13 +46,13 @@ class Goods extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.goods'),basename($item));
                     }
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
-                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['goods_video']));
+                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.goods'),basename($_POST['goods_video']));
             }
 
             // 选中的店铺类型 十进制
@@ -148,6 +148,7 @@ class Goods extends Base {
         $model = new \app\index_admin\model\Goods();
 
         $where[] = ['g.status','=',0];
+        $where[] = ['g.shelf_status','=', 3];
         if($category_id_1 = input('category_id_1/d')){
             $where[] = ['g.category_id_1','=',$category_id_1];
         }
@@ -256,6 +257,100 @@ class Goods extends Base {
         return successMsg('成功');
     }
 
+    /**
+     * 增加各关联表下的商品 -通用方法
+     */
+    public function addRelationGoods(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
+
+        $relation=input('post.relation/d');
+
+        // custom.php relation_type
+        switch($relation){
+            case config('custom.relation_type.scene'):
+                $model = new \app\index_admin\model\SceneGoods();
+                $condition = [['scene_id','=',$data[0]['scene_id']]];
+                break;
+            case config('custom.relation_type.project'):
+                $model = new \app\index_admin\model\ProjectGoods();
+                $condition = [['project_id','=',$data[0]['project_id']]];
+                break;
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index_admin\model\PromotionGoods();
+                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
+                break;
+            default:
+                return errorMsg('参数有误');
+        }
+
+        $model->startTrans();
+        $rse = $model -> del($condition,false);
+
+        if(false === $rse){
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $res = $model->allowField(true)->saveAll($data)->toArray();
+        if (!count($res)) {
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $model -> commit();
+        return successMsg('成功');
+    }
+
+    /***
+     * 获取各关联表下的商品 -通用方法
+     * @return array|\think\response\View
+     */
+    public function getRelationGoods(){
+        if(!request()->get()){
+            return errorMsg('参数有误');
+        }
+        if(!$id = input('get.id/d')){
+            return errorMsg('参数有误');
+        };
+        $relation = input('get.relation/d');
+        // custom.php relation_type
+        switch($relation){
+            case config('custom.relation_type.scene'):
+                $model = new \app\index_admin\model\SceneGoods();
+                $field_id = 'sg.scene_id';
+                $goods_id = 'sg.goods_id';
+                break;
+            case config('custom.relation_type.project'):
+                $model = new \app\index_admin\model\ProjectGoods();
+                $field_id = 'pg.project_id';
+                $goods_id = 'pg.goods_id';
+                break;
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index_admin\model\PromotionGoods();
+                $field_id = 'pg.promotion_id';
+                $goods_id = 'pg.goods_id';
+                break;
+            default:
+                return errorMsg('参数有误');
+        }
+
+        $config = [
+            'where' => [
+                [$field_id,'=',$id],['g.status','=', 0], ['g.shelf_status','=', 3]
+            ],'join' => [
+                ['goods g','g.id = '.$goods_id,'left'],
+            ],'field' => [
+                'g.id','g.thumb_img','g.name',
+            ],
+        ];
+
+        $list = $model -> getList($config);
+        $this->assign('list',$list);
+        return view('goods/selected_list');
+    }
+
     /*
      * 添加商品相关推荐商品
      * @return array|mixed
@@ -299,62 +394,6 @@ class Goods extends Base {
             $this->assign('id',$id);
             return $this->fetch();
         }
-    }
-
-    /***
-     * 获取项目相关商品
-     * @return array|\think\response\View
-     */
-    public function getProjectGoods(){
-        if(!request()->get()){
-            return errorMsg('参数有误');
-        }
-        if(!input('?get.projectId') || !input('get.projectId/d')){
-            return errorMsg('参数有误');
-        }
-        $projectId = input('get.projectId/d');
-        $model = new \app\index_admin\model\ProjectGoods();
-        $config = [
-            'where' => [
-                ['pg.project_id','=',$projectId],
-            ],'join' => [
-                ['goods g','g.id = pg.goods_id','left'],
-            ],'field' => [
-                'g.id','g.thumb_img','g.name',
-            ],
-
-        ];
-        $list = $model -> getList($config);
-        $this->assign('list',$list);
-        return view('goods/selected_list');
-    }
-
-    /***
-     * 获取项目相关商品
-     * @return array|\think\response\View
-     */
-    public function getSceneGoods(){
-        if(!request()->get()){
-            return errorMsg('参数有误');
-        }
-        if(!input('?get.sceneId') || !input('get.sceneId/d')){
-            return errorMsg('参数有误');
-        }
-        $sceneId = input('get.sceneId/d');
-        $model = new \app\index_admin\model\SceneGoods();
-        $config = [
-            'where' => [
-                ['sg.scene_id','=',$sceneId],
-            ],'join' => [
-                ['goods g','g.id = sg.goods_id','left'],
-            ],'field' => [
-                'g.id','g.thumb_img','g.name',
-            ],
-
-        ];
-        $list = $model -> getList($config);
-        $this->assign('list',$list);
-        return view('goods/selected_list');
     }
 
     /**获取推荐商品

@@ -7,7 +7,6 @@
 </section>
 <article class="f24">
 	<section class="shopping_header_title header_title separation-line">
-		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
 		<h2>购物车</h2>
 	</section>
 	<ul class="cart_goods_list" id="list">
@@ -26,53 +25,19 @@
 			</div>
 		</div>
 		<div id="scroller-wrapper" class="list_wrapper">
-			<ul class="columns_flex flex-both-side goods-content-list" id="list">
+			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList">
 
 			</ul>
 		</div>
 	</div>
 </article>
-<section class="bottom_nav_fixed bottom_white">
-	<nav class=" foot_nav_bar">
-		<ul class="columns_flex">
-			<li class="each_column">
-				<a href="{:url('Index/index')}">
-					<span class="store f_icon"></span>
-					<span class="f_txt">采购商城</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a href="{:url('StoreLeague/index')}">
-					<span class="practitioners f_icon"></span>
-					<span class="f_txt">加盟店家</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a  href="{:url('CityPartner/index')}">
-					<span class="business f_icon"></span>
-					<span class="f_txt">城市合伙人</span>
-				</a>
-			</li>
-			<li class="each_column current">
-				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
-					<span class="cart f_icon"></span>
-					<span class="f_txt">采购车</span>
-				</a>
-			</li>
-			<li class="each_column ">
-				<a href="{:url('Mine/index')}">
-					<span class="my f_icon"></span>
-					<span class="f_txt">我的</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-</section>
 {/block}
 {block name="common"}
-
+{include file="template/wallet_pay_dialog.html" /}
 {/block}
-{block name="footer"}{/block}
+{block name="footer"}
+{include file="template/footer_project.html" /}
+{/block}
 {block name="script"}
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript" src="index_js/cart.js"></script>
@@ -99,18 +64,31 @@
 		});
 	});
 
+
 	// 新零售商品获取配置
 	var config_1 = {
 		url:module+'Goods/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+		container:$("#goodsList")
 	};
 	var postData_1 = {
 		pageSize:10,
 		pageType:'index',
 		is_selection:1
 	};
+	$(function(){
+		//初始化分类商品页面
+		getPagingList(config_1,postData_1);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config_1.loadTrigger = false;
+				getPagingList(config_1,postData_1);
+			}
+		});
+	});
 
 </script>
 {/block}
