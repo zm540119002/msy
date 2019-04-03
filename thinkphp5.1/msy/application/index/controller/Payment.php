@@ -10,7 +10,7 @@ class Payment extends \think\Controller {
     {
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
-        $this->assign('systemId', $systemId);
+        $this->assign('system_id', $systemId);
         $modelOrder ->connection = config('custom.system_id')[$systemId];
         $orderSn = input('order_sn');
         $config = [
