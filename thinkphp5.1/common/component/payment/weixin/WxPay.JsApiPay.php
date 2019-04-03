@@ -81,7 +81,6 @@ class JsApiPay
 		$jsapi->SetSignType("MD5");
 		$jsapi->SetPaySign($jsapi->MakeSign());
 		$parameters = json_encode($jsapi->GetValues());
-		print_r($parameters);exit;
 		return $parameters;
 	}
 	
