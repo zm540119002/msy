@@ -190,20 +190,21 @@ class Order extends \common\controller\UserBase
 
 
     }
-    //支付
+
+    // 订单支付
     public function toPay()
     {
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+/*        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $payOpenId =  session('pay_open_id');
             // 微信支付有问题 暂不用
-/*            if(empty($payOpenId)){
+            if(empty($payOpenId)){
                 $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
-            }*/
-        }
+            }
+        }*/
         $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn');
+        $orderSn = input('order_sn/s');
         $config = [
             'where' => [
                 ['o.status', '=', 0],
@@ -216,7 +217,7 @@ class Order extends \common\controller\UserBase
         ];
         $orderInfo = $modelOrder->getInfo($config);
         $this->assign('orderInfo', $orderInfo);
-        //钱包
+        // 钱包余额
         $modelWallet = new \app\index\model\Wallet();
         $config = [
             'where' => [
