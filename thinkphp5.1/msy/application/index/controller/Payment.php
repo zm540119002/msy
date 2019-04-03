@@ -24,18 +24,18 @@ class Payment extends \think\Controller {
         $orderInfo = $modelOrder->getInfo($config);
         $this->assign('orderInfo', $orderInfo);
         //钱包
-        $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->connection = config('custom.system_id')[$systemId];
-        $config = [
-            'where' => [
-                ['status', '=', 0],
-                ['user_id', '=', $orderInfo['user_id']],
-            ],'field' => [
-                'id','amount',
-            ],
-        ];
-        $walletInfo = $modelWallet->getInfo($config);
-        $this->assign('walletInfo', $walletInfo);
+//        $modelWallet = new \app\index\model\Wallet();
+//        $modelWallet ->connection = config('custom.system_id')[$systemId];
+//        $config = [
+//            'where' => [
+//                ['status', '=', 0],
+//                ['user_id', '=', $orderInfo['user_id']],
+//            ],'field' => [
+//                'id','amount',
+//            ],
+//        ];
+//        $walletInfo = $modelWallet->getInfo($config);
+//        $this->assign('walletInfo', $walletInfo);
         return $this->fetch();
     }
 
