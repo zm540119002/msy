@@ -11,6 +11,7 @@ class Payment extends \common\controller\Base {
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
+        print_r( config('custom.system_id')[$systemId]);exit;
         $modelOrder ->connection = config('custom.system_id')[$systemId];
         $orderSn = input('order_sn');
         $config = [
@@ -63,7 +64,7 @@ class Payment extends \common\controller\Base {
             'system_id' =>$systemId,
         ];
         $modelOrder = new \app\index\model\Order();
-        print_r( config('custom.system_id')[$systemId]);exit;
+
         $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
 
         $config = [
