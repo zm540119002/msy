@@ -72,7 +72,7 @@ class AlipayTradeService {
 	 * @return $response 支付宝返回的信息
  	*/
 	function wapPay($builder,$return_url,$notify_url) {
-	
+
 		$biz_content=$builder->getBizContent();
 		//打印业务参数
 		$this->writeLog($biz_content);
@@ -100,17 +100,21 @@ class AlipayTradeService {
 		$aop->postCharset = $this->charset;
 		$aop->format= $this->format;
 		$aop->signType=$this->signtype;
+
 		// 开启页面信息输出
 		$aop->debugInfo=true;
 		if($ispage)
 		{
+
 			$result = $aop->pageExecute($request,"post");
 			echo $result;
 		}
 		else 
 		{
+
 			$result = $aop->Execute($request);
 		}
+
         
 		//打开后，将报文写入log文件
 		$this->writeLog("response: ".var_export($result,true));

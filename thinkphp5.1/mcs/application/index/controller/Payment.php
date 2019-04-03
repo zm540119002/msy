@@ -141,7 +141,7 @@ class Payment extends \common\controller\UserBase{
             'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
         ];
         $payCode = input('pay_code','0','int');
-        //微信支付
+/*        //微信支付
         if($payCode == 1){
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/recharge";
             \common\component\payment\weixin\weixinpay::wxPay($payInfo);
@@ -157,7 +157,25 @@ class Payment extends \common\controller\UserBase{
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/unionBack/type/recharge";
             $model = new \common\component\payment\unionpay\unionpay;
             $model->unionPay($payInfo);
+        }*/
+
+        switch($payCode){
+            case config('custom.pay_type.WeChat') : // 微信支付   统一支付网关
+                $this->redirect(config('wx_config.unified_order_gateway')."/order_sn/{$payInfo['sn']}/system_id/2/pay_code/1");
+                break;
+            case config('custom.pay_type.Alipay') : // 支付宝支付
+                $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
+                $model = new \common\component\payment\alipay\alipay;
+                $model->aliPay($payInfo);
+                break;
+            case config('custom.pay_type.UnionPay') : // 银联支付
+                $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/unionBack/type/order";
+                $model = new \common\component\payment\unionpay\unionpay;
+                $model->unionPay($payInfo);
+                break;
         }
+
+
     }
 
    //支付完跳转的页面

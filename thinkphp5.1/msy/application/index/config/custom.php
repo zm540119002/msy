@@ -15,4 +15,14 @@
 
 return [
     'title' => '美尚云',
+
+    /***
+     * 根据系统号连接不同数据库
+     */
+    'system_id'=>[
+        '1'=>'db_config_weiya',
+        '2'=>'db_config_mcs',
+    ]
 ];
+
+

@@ -100,7 +100,7 @@ return [
     //数据库配置-商城
     'db_config_weiya' => [
         'type'        => 'mysql',// 数据库类型
-        'hostname'    => '127.0.0.1',// 服务器地址
+        'hostname'    => '47.106.79.38',// 服务器地址
         'database'    => 'weiya',// 数据库名
         'username'    => 'root',// 数据库用户名
         'password'    => 'msy',// 数据库密码
