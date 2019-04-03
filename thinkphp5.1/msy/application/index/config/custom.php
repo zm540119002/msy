@@ -26,7 +26,7 @@ return [
             ],
         '2'=>[
             'db'=>'db_config_mcs',
-            'jump_url'=>'db_config_weiya',
+            'jump_url'=>'',
         ],
     ]
 
