@@ -9,6 +9,7 @@ class Payment extends \think\Controller {
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('systemId', $systemId);
+        $modelOrder ->connection = config('custom.system_id')[$systemId];
         $orderSn = input('order_sn');
         $config = [
             'where' => [
@@ -24,6 +25,7 @@ class Payment extends \think\Controller {
         $this->assign('orderInfo', $orderInfo);
         //钱包
         $modelWallet = new \app\index\model\Wallet();
+        $modelWallet ->connection = config('custom.system_id')[$systemId];
         $config = [
             'where' => [
                 ['status', '=', 0],
