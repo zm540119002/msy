@@ -75,13 +75,14 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
-        print_r($orderInfo);exit;
         if($orderInfo['actually_amount']<=0){
             $this -> error('支付不能为0');
         }
 
         $jump_url =config('custom.system_id')[$systemId]['jump_url'];
         $return_url = config('wx_config.return_url');
+        print_r($jump_url);
+        print_r($return_url);
         $attach = json_encode($attach);
         $payInfo = [
             'sn'=>$orderInfo['sn'],
@@ -91,6 +92,7 @@ class Payment extends \common\controller\Base {
             'notify_url'=>config('wx_config.notify_url'),
             'attach'=>$attach
         ];
+        print_r($payInfo);exit;
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
