@@ -16,7 +16,6 @@ class Payment extends \think\Controller {
                 session('pay_open_id',$payOpenId);
             }
         }
-        print_r($payOpenId);exit;
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
