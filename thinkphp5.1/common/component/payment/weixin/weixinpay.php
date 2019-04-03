@@ -188,6 +188,7 @@ EOF;
      * H5 微信支付
      */
     public static function h5_pay($payInfo){
+        print_r($payInfo);exit;
         //统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
         //使用统一支付接口
         $input = new \WxPayUnifiedOrder();
@@ -202,7 +203,7 @@ EOF;
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
-        $url = $url.'&redirect_url='.$payInfo['return_url'];//拼接支付完成后跳转的页面redirect_url
+        $url = $url.'&redirect_url='.$payInfo['success_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
