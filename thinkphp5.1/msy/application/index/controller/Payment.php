@@ -51,9 +51,9 @@ class Payment extends \common\controller\Base {
 
     //订单-支付
     public function orderPayment(){
-        if( empty(input('order_sn')) || empty(input('?pay_code'))){
-            $this -> error('参数错误');
-        }
+//        if( empty(input('order_sn')) || empty(input('?pay_code'))){
+//            $this -> error('参数错误');
+//        }
         $orderSn = input('order_sn','','string');
         $systemId = input('system_id',0,'int');
         //自定义参数，微信支付回调原样返回
