@@ -100,7 +100,8 @@ class AlipayTradeService {
 		$aop->postCharset = $this->charset;
 		$aop->format= $this->format;
 		$aop->signType=$this->signtype;
-
+         echo $request;
+         exit;
 		// 开启页面信息输出
 		$aop->debugInfo=true;
 		if($ispage)
@@ -112,8 +113,7 @@ class AlipayTradeService {
 		{
 			$result = $aop->Execute($request);
 		}
-        echo $request;
-         exit;
+
         
 		//打开后，将报文写入log文件
 		$this->writeLog("response: ".var_export($result,true));
