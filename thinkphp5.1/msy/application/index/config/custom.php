@@ -20,9 +20,20 @@ return [
      * 根据系统号连接不同数据库
      */
     'system_id'=>[
-        '1'=>'db_config_weiya',
-        '2'=>'db_config_mcs',
+        '1'=>[
+            'db'=>'db_config_weiya',
+            'success_url'=>'https://http://www.worldview.com.cn/index/Order/manage/order_status/2',
+            'cancel_url'=>'db_config_weiya',
+            'fail_url'=>'db_config_weiya',
+            ],
+        '2'=>[
+            'db'=>'db_config_mcs',
+            'success_url'=>'db_config_weiya',
+            'cancel_url'=>'db_config_weiya',
+            'fail_url'=>'db_config_weiya',
+        ],
     ]
+
 ];
 
 
