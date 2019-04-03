@@ -86,10 +86,8 @@ class Payment extends \think\Controller {
                 'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
                 'attach'=>$attach
             ];
-            print_r($payInfo);
         }
         $payCode = input('pay_code','0','int');
-        print_r($payCode);exit;
         //微信支付
         if($payCode == 1){
             $payOpenId =  session('pay_open_id');
@@ -98,6 +96,7 @@ class Payment extends \think\Controller {
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
             }
+            print_r(session('pay_open_id'));exit;
 
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
             print_r($payInfo);exit;
