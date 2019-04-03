@@ -35,7 +35,7 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $payInfo['success_url'] = $payInfo['return_url']?:url('Index/index');
+        $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
         $tools = new \JsApiPay();
         $openId = session('pay_open_id');
         $input = new \WxPayUnifiedOrder();
@@ -202,7 +202,7 @@ EOF;
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
-        $url = $url.'&redirect_url='.$payInfo['return_url'];//拼接支付完成后跳转的页面redirect_url
+        $url = $url.'&redirect_url='.$payInfo['success_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
