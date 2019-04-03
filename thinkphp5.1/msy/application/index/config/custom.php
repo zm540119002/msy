@@ -26,7 +26,7 @@ return [
             ],
         '2'=>[
             'db'=>'db_config_mcs',
-            'jump_url'=>'',
+            'jump_url'=>'https://mcs.meiishangyun.com/index/Order/manage/order_status/2',
         ],
     ]
 
