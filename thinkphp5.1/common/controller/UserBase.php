@@ -5,8 +5,8 @@ namespace common\controller;
  */
 class UserBase extends Base{
     protected $user = null;
-    protected $loginUrl = 'ucenter/UserCenter/login';//登录URL
-    protected $indexUrl = 'index/Index/index';//登录URL
+    protected $loginUrl = 'https://api.meishangyun.com/ucenter/UserCenter/login';//登录页
+    protected $indexUrl = 'index/Index/index';//平台首页
     
     public function __construct(){
         parent::__construct();
@@ -16,7 +16,7 @@ class UserBase extends Base{
             if (request()->isAjax()) {
                 $this->success('异步登录失败',url($this->indexUrl),'no_login',0);
             }else{
-                $this->error(config('custom.error_login'),url($this->loginUrl));
+                $this->error(config('custom.error_login'),$this->loginUrl);
             }
         }
     }

@@ -2,13 +2,24 @@
 namespace app\index\controller;
 //class Payment extends \common\controller\Base{
 
-class Payment extends \think\Controller {
+use function GuzzleHttp\Promise\inspect;
+
+class Payment extends \common\controller\Base {
     //去支付
     public function toPay()
     {
+        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+            $payOpenId =  session('pay_open_id');
+            if(empty($payOpenId)){
+                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $payOpenId  = $tools->getOpenid();
+                session('pay_open_id',$payOpenId);
+            }
+        }
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
-        $this->assign('systemId', $systemId);
+        $this->assign('system_id', $systemId);
+        $modelOrder ->connection = config('custom.system_id')[$systemId];
         $orderSn = input('order_sn');
         $config = [
             'where' => [
@@ -24,6 +35,7 @@ class Payment extends \think\Controller {
         $this->assign('orderInfo', $orderInfo);
         //钱包
         $modelWallet = new \app\index\model\Wallet();
+        $modelWallet ->connection = config('custom.system_id')[$systemId];
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -39,18 +51,16 @@ class Payment extends \think\Controller {
 
     //订单-支付
     public function orderPayment(){
-        //微信支付
-        if( empty(input('order_sn')) || empty(input('?pay_code'))){
-            $this -> error('参数错误');
-        }
+//        if( empty(input('order_sn')) || empty(input('?pay_code'))){
+//            $this -> error('参数错误');
+//        }
         $orderSn = input('order_sn','','string');
         $systemId = input('system_id',0,'int');
         //自定义参数，微信支付回调原样返回
         $attach = [
-            'system_Id' =>$systemId,
+            'system_id' =>$systemId,
         ];
         $modelOrder = new \app\index\model\Order();
-
         $modelOrder ->connection = config('custom.system_id')[$systemId];
 
         $config = [
@@ -87,15 +97,8 @@ class Payment extends \think\Controller {
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
-            \common\component\payment\weixin\weixinPay::wxPay($payInfo);
+            \common\component\payment\weixin\weixinpay::wxPay($payInfo);
         }
         //支付宝支付
         if($payCode == 2){

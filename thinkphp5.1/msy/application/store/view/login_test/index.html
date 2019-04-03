@@ -1,0 +1,21 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	欢迎登录页面
+</article>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+{include file="public/dialog_factory_store" /}
+<script type="text/javascript">
+	$(function(){
+
+	});
+</script>
+{/block}
