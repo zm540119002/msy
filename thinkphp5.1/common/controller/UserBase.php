@@ -5,7 +5,7 @@ namespace common\controller;
  */
 class UserBase extends Base{
     protected $user = null;
-    protected $loginUrl = 'ucenter/UserCenter/login';//登录页
+    protected $loginUrl = 'https://api.meishangyun.com/ucenter/UserCenter/login';//登录页
     protected $indexUrl = 'index/Index/index';//平台首页
     
     public function __construct(){
