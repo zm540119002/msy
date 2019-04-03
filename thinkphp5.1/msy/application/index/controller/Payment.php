@@ -43,8 +43,7 @@ class Payment extends \think\Controller {
 
     //订单-支付
     public function orderPayment(){
-        print_r(input())
-;exit;        //微信支付
+   //微信支付
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
             $this -> error('参数错误');
         }
@@ -52,10 +51,9 @@ class Payment extends \think\Controller {
         $systemId = input('system_id',0,'int');
         //自定义参数，微信支付回调原样返回
         $attach = [
-            'system_Id' =>$systemId,
+            'system_id' =>$systemId,
         ];
         $modelOrder = new \app\index\model\Order();
-
         $modelOrder ->connection = config('custom.system_id')[$systemId];
 
         $config = [
@@ -69,6 +67,7 @@ class Payment extends \think\Controller {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
+        print_r($orderInfo);exit;
         if($orderInfo['actually_amount']<=0){
             $this -> error('支付不能为0');
         }
