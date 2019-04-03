@@ -21,8 +21,8 @@ return [
     'key' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 
     //TODO:公众号支付回调函数
-    'call_back_url'  => "CallBack/notifyUrl",
-    'call_back_url_business'  => "http://".$_SERVER['HTTP_HOST']."/Business/CallBack/notifyUrl",
+    'notify_url'  => "https://msy.meishuangyun.com/index/Payment/notifyBcak",
+    'return_url'  => "https://msy.meishuangyun.com/index/Payment/payComplete/",
     /**
      * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0
      * 本例程通过curl使用HTTP POST方法，此处可修改代理服务器，
