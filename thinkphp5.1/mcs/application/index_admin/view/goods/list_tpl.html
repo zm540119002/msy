@@ -18,9 +18,9 @@
             </thead>
             <tbody>
                 {volist name="list" id="info"}
-                    <tr class="hover" data-id="{$info.number}">
+                    <tr class="hover" data-id="{$info.id}">
                         <td class="w48"><input type="checkbox" class="checkitem" name="checkbox">
-                        <td class="w48"><span title="">{$info.id}</span></td>
+                        <td class="w48"><span title="">{$info.number}</span></td>
                         <td class="w48 sort"><span title="" class="editable ">{$info.sort}</span></td>
                         <td class="w50pre name"><span title="" class="editable ">{$info.name}</span></td>
                         <td class="w5">{$info.bulk_price}</td>
