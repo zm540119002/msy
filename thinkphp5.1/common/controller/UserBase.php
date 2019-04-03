@@ -12,11 +12,12 @@ class UserBase extends Base{
         parent::__construct();
         //判断是否登录
         $this->user = checkLogin();
+        $this->loginUrl = str_replace('/index.php','',url($this->loginUrl));
         if (!$this->user) {
             if (request()->isAjax()) {
                 $this->success('您还未登录平台，请先登录！',url($this->indexUrl),'no_login',0);
             }else{
-                $this->error('您还未登录平台，请先登录！',str_replace('/index.php','',$this->loginUrl));
+                $this->error('您还未登录平台，请先登录！',$this->loginUrl);
             }
         }
     }
