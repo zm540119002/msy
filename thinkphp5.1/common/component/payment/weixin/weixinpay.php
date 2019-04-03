@@ -35,7 +35,7 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $payInfo['success_url'] = $payInfo['return_url']?:url('Index/index');
+        $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
         $tools = new \JsApiPay();
         $openId = session('pay_open_id');
         $input = new \WxPayUnifiedOrder();
