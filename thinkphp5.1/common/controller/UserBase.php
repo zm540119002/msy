@@ -16,7 +16,7 @@ class UserBase extends Base{
             if (request()->isAjax()) {
                 $this->success('异步登录失败',url($this->indexUrl),'no_login',0);
             }else{
-                $this->error(config('custom.error_login'),url($this->loginUrl));
+                $this->error(config('custom.error_login'),$this->loginUrl);
             }
         }
     }
