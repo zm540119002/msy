@@ -105,15 +105,13 @@ class AlipayTradeService {
 		$aop->debugInfo=true;
 		if($ispage)
 		{
-		    echo 1111;
-            exit;
+
 			$result = $aop->pageExecute($request,"post");
 			echo $result;
 		}
 		else 
 		{
-		    echo 22222;
-            exit;
+
 			$result = $aop->Execute($request);
 		}
 
