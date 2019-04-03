@@ -93,6 +93,7 @@ class Payment extends \think\Controller {
             $payOpenId =  session('pay_open_id');
             if(empty($payOpenId)){
                 $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                print_r($tools);exit;
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
             }
