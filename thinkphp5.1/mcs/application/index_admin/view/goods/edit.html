@@ -85,7 +85,7 @@
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>商品编号：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 100px; " class="inputboxadmin" name="number" value="{$info.number}">
+                            <input style="width: 100px; " class="inputboxadmin" name="number" value="{$info.number|default=$last_number}">
                         </td>
                     </tr>
                     <tr>
