@@ -1,0 +1,319 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<section id="goodsvideoLayer" style="display: none;">
+	<div class="video-layer">
+		{notempty name="goodsInfo.goods_video"}
+		<video width="" height="" class="" src="public_uploads/{$goodsInfo.goods_video|default=''}"></video>
+		<a class="video-btn"></a>
+		{else /}
+		<video width="" height="" src=""></video>
+		<a class="video-btn"></a>
+		{/notempty}
+	</div>
+</section>
+<article class="f24">
+	<section class="top_nav_fixed">
+		<input type="hidden" class="goods_id" value="{$goodsInfo.id|default=''}"/>
+		<input type="hidden" class="goods_thumb_img" value="public_uploads/{$goodsInfo.thumb_img|default=''}"/>
+		<div class="top_bar top columns_flex">
+			{notempty name="goodsInfo.goods_video"}
+			<div class="each_column">
+				<a href="javascript:void(0);" class=" goods-video">视频</a>
+			</div>
+			{else /}
+			{/notempty}
+			<div class="each_column">
+				<a href="javascript:void(0);" class="qr-d-code">商品二维码</a>
+			</div>
+			<div class="each_column top_search_module">
+				<input type="button" class="search_btn"/>
+				<input type="text" class="search_text" placeholder="搜索"/>
+			</div>
+			<div class="each_column">
+				<a href="javascript:void(0);" class="personal_center ">我的</a>
+			</div>
+			{include file="public/home_page" /}
+		</div>
+	</section>
+	<section class="">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{notempty name="goodsInfo.main_img"}
+				{volist name="goodsInfo.main_img" id="vo"}
+				<div class="swiper-slide">
+					<img src="public_uploads/{$vo}" alt="" class="common_default_img">
+				</div>
+				{/volist}
+				{/notempty}
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="">
+		<ul class="list-item">
+			<li>
+				<div class="row-item-mgl">
+					<div class="columns_flex l-r-sides">
+						<div >
+                            <span class="retail-price pink f28">￥
+                                <price class="sale_price">{$goodsInfo.sale_price}</price>
+                            </span>
+							<del>￥{$goodsInfo.retail_price}</del>
+						</div>
+						<div class="popularity">
+							<a href="javascript:void(0);" class="fabulous left">赞</a>
+							<a href="javascript:void(0);" class="share ">分享</a>
+						</div>
+					</div>
+					<p class="goods_name">{$goodsInfo.name}</p>
+					<div>12g*20条 /盒</div>
+					<p>{$goodsInfo.trait}</p>
+				</div>
+				{if $gooddsInfo.sale_type = 1}
+				<div class="row-item-mgl">
+					<span class="content-label">促销活动</span>
+					<p class="text-color-ef">大优惠，路过不要错过大优惠，路过不要错过大优惠，路过不要错过大优惠，路过不要错过</p>
+				</div>
+				{/if}
+				<div class="row-item-mgl">
+					<div class="columns_flex l-r-sides">
+						<div class="specification">采购箱规格<span class="specification_num">50</span><span class="unit">盒/箱</span></div>
+						<div>
+							<span class="pink">￥<price>5</price>/箱</span>
+						</div>
+					</div>
+				</div>
+				<div class="row-item-mgl columns_flex l-r-sides">
+					<span>采购数量(箱)</span>
+					<div class="quantity_wrapper selected-number">
+						<a href="javascript:void(0);" class="greduce">-</a>
+						<input type="text" value="1" class="f24 gshopping_count">
+						<a href="javascript:void(0);" class="gplus">+</a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="columns_flex l-r-sides">
+					<div class="">
+						<span class="count-down-icons left"></span>
+						<div class="right">
+							<p>本周联合采购截止日还剩</p>
+							<div>
+								<span>8</span>小时
+								<span>8</span>分
+								<span>8</span>秒
+							</div>
+						</div>
+					</div>
+					<a class="text-color-gr invite-friends">
+						<span class="icons"></span><span >邀好友参加</span>
+						
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="columns_flex l-r-sides">
+					<div class="rows rows-l">
+						<div class="">
+							{notempty name="storeInfo.logo_img"}
+							<img src="public_uploads/{$storeInfo.logo_img}" class=" store_logo left" alt="">							
+							{else /}
+							<img src="" class=" store_logo" alt="">
+							{/notempty}
+						</div>
+						<div>
+							{if $storeInfo.store_type == 1 }
+							<span class="store_name">{$storeInfo.store_name}官方旗舰店</span>
+							{elseif $storeInfo.store_type == 2/}
+							<span class="store_name">{$storeInfo.store_name}品牌旗舰店</span>
+							{else /}
+							{/if}
+							<p class="store_run_type">采购商自营</p>
+						</div>
+					</div>
+					<div class="follow-right rows">
+						<a href="javascript:void(0);" class="text-color-gr">+关注采购商</a>
+						<a class="text-color-gr go-shopping"><span class="icons"></span><span>进店逛逛</span></a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<section class="scrollwrapper">
+		<div class="detail-nav columns_flex floor-nav nav-floor">
+			<a href="javascript:void(0);" class="scroll-nav active" data-floor="c">商品参数</a>
+			<!--<a href="javascript:void(0);" class="scroll-nav" id="s">商品视频</a>-->
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="x">商品详情</a>
+			<a href="javascript:void(0);" class="scroll-nav" data-floor="f">评分评论</a>
+		</div>
+		<div class="floor-content">
+			<section class="scroll-floor floor1 floor">
+				<h3 id="c" class="floor-label">商品参数</h3>
+				{$goodsInfo.parameters}
+			</section>
+			<!--<section class="scroll-floor floor2">
+				<h3>商品视频</h3>
+			</section>-->
+			<section class="scroll-floor floor2 floor">
+				<h3 id="x" class="floor-label">商品详情</h3>
+				<div class="details_img">
+					{notempty name="goodsInfo.details_img"}
+					{volist name="goodsInfo.details_img" id="vo"}
+					<div class="">
+						<img src="public_uploads/{$vo}" alt="" class="common_default_img">
+					</div>
+					{/volist}
+					{/notempty}
+				</div>
+			</section>
+			<section class="scroll-floor floor3 floor">
+				<h3 id="f" class="floor-label">评分评论</h3>
+				<div class="goods_star_score comment_star_module">
+					<div class="five_star">
+						<div class="star_img">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+							<img src="public_img/starred.png">
+						</div>
+						<span class="fraction" data-score="0">0分</span>
+					</div>
+					<a href="javascript:void(0);" class="comment_num">0人评论</a>
+				</div>
+			</section>
+		</div>
+	</section>
+</article>
+<div class="foot-btn"><a href="{:url('Goods/edit',['goods_id'=>$goodsInfo.id])}" class="group_btn50 f24">修改</a>
+<a href="javascript:;" class="goods-del group_btn50 f24">删除</a></div>
+
+{/block}
+{block name="common"}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<!--<script type="text/javascript" src="public_js/jquery.scroll.floor.js"></script>-->
+
+<script type="text/javascript">
+
+	$(function(){
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+			if(scrollHeight+height>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		//商品二维码图片
+		$('body').on('click','.qr-d-code',function(){
+			var postData = {};
+            postData.goods_id = $('.goods_id').val();
+            postData.goods_thumb_img = $('.swiper-slide').eq(0).find('img').attr('src');
+            postData.goods_name = $('.goods_name').text();
+            postData.specification = $('.specification_num').text()+ $('.unit').text();
+            postData.sale_price = $('.sale_price').text();
+            postData.store_name = $('.store_name').text();
+            postData.store_logo = $('.store_logo').attr('src');
+            postData.store_run_type = $('.store_run_type').text();
+			$.post(module+'Goods/generateGoodsQRcode',postData,function (msg) {
+				if(msg.status == 1){
+					layer.open({
+						title:['保存图片分享给好友','border-bottom:1px solid #d9d9d9;'],
+						className:'qrCodePicLayer',
+						content:'<img src="'+msg.info+'" />'
+					})
+				}
+			})
+
+		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+		});
+		//轮播视频
+		var goodsvideoLayer=$('#goodsvideoLayer').html();
+		$('body').on('click','.goods-video',function(){
+			layer.open({
+				className:'goodsvideoLayer',
+				content:goodsvideoLayer
+			})
+		});
+		$('body').on('click','.video-btn',function(){
+			$('.goodsvideoLayer video').get(0).play();
+		})
+		//星星评分等级
+		$('.five_star').setStar({
+			getFractionValue:4,
+            star:'public_img/star.png',
+            starRed:'public_img/starred.png'
+		});
+		$('.scrollwrapper').scrollFloor();
+
+		//删除商品
+		$('body').on('click','.goods-del',function(){
+			var postData = {};
+			postData.goods_id = {$goodsInfo.id};
+			layer.open({
+				className:'storeTipcLayer',
+				content:'确定要删除？',
+				btn:['确定','取消'],
+				success:function(){
+					// layer.msg('的确很重要', {icon: 1});
+				},
+				yes:function(index){
+					$('.comfirm-text').next().remove();
+					$.ajax({
+						url: module + 'Goods/del',
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+							//$('.loading').show();
+						},
+						success: function(msg){
+							if(msg.status == 0){
+								dialog.error(msg.info);
+								return false;
+							}
+							if(msg.status == 1){
+								dialog.success(msg.info,controller + 'manage');
+							}
+							//layer.close(index);
+						},
+						complete:function(){
+
+						},
+						error:function (xhr) {
+							dialog.error('AJAX错误'+xhr);
+						}
+					});
+					layer.close(index);
+				},
+				no:function(){
+					$('.comfirm-text').next().remove();
+				}
+			})
+		});
+	});
+
+
+
+</script>
+{/block}

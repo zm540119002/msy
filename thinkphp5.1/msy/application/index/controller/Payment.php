@@ -8,17 +8,10 @@ class Payment extends \common\controller\Base {
     //去支付
     public function toPay()
     {
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-        }
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
+        print_r( config('custom.system_id')[$systemId]);exit;
         $modelOrder ->connection = config('custom.system_id')[$systemId];
         $orderSn = input('order_sn');
         $config = [
@@ -33,6 +26,16 @@ class Payment extends \common\controller\Base {
         ];
         $orderInfo = $modelOrder->getInfo($config);
         $this->assign('orderInfo', $orderInfo);
+
+        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+            $payOpenId =  session('pay_open_id');
+            if(empty($payOpenId)){
+                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $payOpenId  = $tools->getOpenid();
+                session('pay_open_id',$payOpenId);
+            }
+        }
+
         //钱包
         $modelWallet = new \app\index\model\Wallet();
         $modelWallet ->connection = config('custom.system_id')[$systemId];
@@ -61,7 +64,8 @@ class Payment extends \common\controller\Base {
             'system_id' =>$systemId,
         ];
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->connection = config('custom.system_id')[$systemId];
+
+        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
 
         $config = [
             'where' => [
@@ -83,17 +87,16 @@ class Payment extends \common\controller\Base {
 //            if ($orderInfo['order_status'] > 1) {
 //                return errorMsg('订单支付',['code'=>1]);
 //            }
-            $attach = json_encode($attach);
-            $payInfo = [
-                'sn'=>$orderInfo['sn'],
-                'actually_amount'=>$orderInfo['actually_amount'],
-                'return_url' => $this->host.url('payComplete'),
-                'cancel_url' => $this->host.url('payCancel'),
-                'fail_url' => $this->host.url('payFail'),
-                'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
-                'attach'=>$attach
-            ];
+
         }
+        $attach = json_encode($attach);
+        $payInfo = [
+            'sn'=>$orderInfo['sn'],
+            'actually_amount'=>$orderInfo['actually_amount'],
+            'return_url' => 'https://msy.meishuangyun.com/index/Payment/payComplete?jump_url=',
+            'notify_url'=>'https://msy.meishuangyun.com/index/Payment/notifyBcak',
+            'attach'=>$attach
+        ];
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){

@@ -1,0 +1,45 @@
+{notempty name='info'}
+<li class="columns_flex l-r-sides" data-id="{$info.id}"  data-user_shop_id="{$info.user_shop_id}" data-post="{$info.post}" data-duty="{$info.duty}">
+	<div style="display:none;">
+		<select name="nodeIds">
+			{volist name='$info.nodeIds' id='node'}
+			<option value="{$node}"></option>
+			{/volist}
+		</select>
+	</div>
+	<div>
+		<p>
+			<span>姓名</span>
+			<input class="input_size" type="text" value="{$info.name|default=''}" name="name" readonly="readonly">
+		</p>
+		<div>
+			<span>手机号码:</span>
+			<input type="tel" value="{$info.mobile_phone|default=''}" name="mobile_phone" readonly="readonly"/>
+		</div>
+		<div class="list_s_item">
+			<span class="content-label left">所属门店:</span>
+			<select name="shop_id">
+				{notempty name='currentStoreShopList'}
+				{volist name="currentStoreShopList" id="vo"}
+				<option value="{$vo.id}" {if ($info.shop_id == $vo.id)}selected{/if}>{$vo.name}</option>
+				{/volist}
+				{/notempty}
+			</select>
+		</div>
+		<div>
+			<span>岗位职务:</span>
+			<input type="text" value="{$info.post|getPostCn}.{$info.duty|getDutyCn}" name="position" readonly="readonly"/>
+		</div>
+	</div>
+	<div class="operate-btn">
+		<a href="javascript:void(0);" class="modify-account">
+			<span></span>
+			修改
+		</a>
+		<a href="javascript:void(0);" class="delete-account delete-shop-account">
+			<span></span>
+			删除
+		</a>
+	</div>
+</li>
+{/notempty}

@@ -1,0 +1,179 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+{notempty name="recordInfo"}
+<article class="f24">
+	<section>
+		<div>
+			{notempty name="recordInfo.company_img"}
+			<img src="public_uploads/{$recordInfo.company_img|default=''}" alt="" class="common_default_img">
+			{else /}
+			<img src="public_img/default/no_pic_100.jpg" alt="" class="common_default_img">
+			{/notempty}
+
+		</div>
+	</section>
+	<section class="separation-line company-preview-top content-box">
+		<div class="columns_flex">
+			<div>企业名称:<span>{$recordInfo.name|default=''}</span></div>
+			<a><i></i>收藏厂商店铺</a>
+		</div>
+		<div class="columns_flex">
+			<div>
+				{notempty name="recordInfo.logo_img"}
+				<img class="upload_img small_default_img left" src="public_uploads/{$recordInfo.logo_img|default=''}" alt="">
+				{else /}
+				<img class="upload_img small_default_img left" src="public_img/default/no_pic_100.jpg" alt="" >
+				{/notempty}
+				<span>[{$recordInfo.short_name|default=''}]</span>
+			</div>
+			<!--<a href="" class="enter">进入厂商确定预览&nbsp;></a>-->
+		</div>
+	</section>
+	<section class="separation-line content-box">
+		<div>
+			<span class="content-label">企业简介</span>
+			<div class="more-text-box">
+				<p class="more-text">{$recordInfo.introduction|default=''}</p>
+			</div>
+		</div>
+		<div class="">
+			<span class="address-label">地址：</span>
+			<input  type="hidden" class="provinces area-address-name" value="{$recordInfo.provinces|default=''}">
+			<input  type="hidden" class="detail_address" value="{$recordInfo.detail_address|default=''}">
+			<span class="area_address"></span><span>{$recordInfo.detail_address|default=''}</span>
+		</div>
+	</section>
+	<section class="separation-line content-box">
+		<span class="content-label">企业视频</span>
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="recordInfo.factory_video" id="vo"}
+				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
+					{notempty name="vo"}
+					<video src="public_uploads/{$vo['fileSrc']}" preload="meta" controls="controls" class="common_default_img"></video>
+					{else /}
+					<video src="" preload="meta" controls="controls" class="common_default_img"></video>
+					{/notempty}
+					</div>
+					<p>{$vo['fileText']}</p>
+				</div>
+				{/volist}
+			</div>
+		</div>
+	</section>
+	<section class="separation-line content-box">
+		<span class="content-label ">研发生产</span>
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="recordInfo.rb_img" id="vo"}
+				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
+					{notempty name="vo"}
+					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
+					{else /}
+					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+					{/notempty}
+					</div>
+					<p>{$vo['fileText']}</p>
+				</div>
+				{/volist}
+			</div>
+		</div>
+	</section>
+	<section class="separation-line content-box">
+		<span class="content-label ">团队活动照片</span>
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="recordInfo.team_activity" id="vo"}
+				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
+						{notempty name="vo"}
+						<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
+						{else /}
+						<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+						{/notempty}
+					</div>
+					<p>{$vo['fileText']}</p>
+				</div>
+				{/volist}
+			</div>
+		</div>
+	</section>
+	<section class="separation-line content-box ">
+		<span class="content-label">执照资质</span>
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="recordInfo.license" id="vo"}
+				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
+					{notempty name="vo"}
+					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
+					{else /}
+					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+					{/notempty}
+					</div>
+					<p>{$vo['fileText']}</p>
+				</div>
+				{/volist}
+			</div>
+		</div>
+	</section>
+	<section class="separation-line content-box">
+		<span class="content-label">专利荣誉</span>
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="recordInfo.glory_img" id="vo"}
+				<div class="swiper-slide ">
+					<div class="swiper-cols-img">
+					{notempty name="vo"}
+					<img src="public_uploads/{$vo['fileSrc']}" class="common_default_img"/>
+					{else /}
+					<img src="public_img/default/no_pic_100.jpg" class="common_default_img"/>
+					{/notempty}
+					</div>
+					<p>{$vo['fileText']}</p>
+				</div>
+				{/volist}
+			</div>
+		</div>
+	</section>
+</article>
+{else /}
+<span>没有档案</span>
+{/notempty}
+<a href="{:url('record/edit')}" class="identifyNewGoods foot-btn f24">进入传统编辑模式></a>
+<div id="areaMask" class="mask"></div>
+
+{/block}
+{block name="common"}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//省市区初始化
+		var province = '{$recordInfo.province|default=""}';
+		var city = '{$recordInfo.city|default=""}';
+		var area = '{$recordInfo.area|default=""}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
+		}
+		swiper('.swiper-container');
+		$('.more-text-box').moreText({
+			mainCell:".more-text",
+			openBtn:'显示全部>'
+		});
+	})
+</script>
+{/block}

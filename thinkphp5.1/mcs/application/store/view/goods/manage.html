@@ -1,0 +1,259 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<section class="f24" id="databaseContent" style="display:none;">
+	<nav class="goods-database-nav">
+		<ul class="columns_flex">
+			<li class="current">选择源文件</li>
+			<li>选择性复制</li>
+		</ul>
+	</nav>
+	<div class="database-item">
+		<ul class="goods-store-content">
+			{notempty name="selfStore"}
+			<li class="columns_flex" data-store-id="{$selfStore.id}">
+				<div>
+					{notempty name="selfStore.img"}
+					<img src="public_uploads/{$selfStore.img}" alt="" class="">
+					{else /}
+					<img src="public_img/default/no_pic_40.jpg" alt="">
+					{/notempty}
+				</div>
+				<div>
+					<p>本店铺商品数据备份</p>
+					<p><span>日期：{$selfStore.backup_time}</span></p>
+				</div>
+			</li>
+			{/notempty}
+		</ul>
+		<ul class="goods-store-content">
+			{notempty name="otherStores"}
+			{volist name="otherStores" id="vo"}
+			<li class="columns_flex l-r-sides" data-store-id="{$vo.id}">
+				<div>
+					{notempty name="vo.img"}
+					<img src="public_uploads/{$vo.img}" alt="" class="small_default_img">
+					{else /}
+					<img src="public_img/default/no_pic_40.jpg" alt="">
+					{/notempty}
+				</div>
+				<div>
+					<span >{$vo.name}</span>
+					<span >{$vo.store_type|getStoreType}</span>
+					<p>{$vo.run_type|getRunType}</p>
+				</div>
+				<div class="">
+				{if $vo.auth_status == -2 }
+					<span>未通过</span>
+				{elseif $vo.auth_status == -1 /}
+					<span>已关闭</span>
+				{elseif $vo.auth_status == 0 /}
+					<span>审核中</span>
+				{elseif $vo.auth_status == 1 /}
+					<span>建设中</span>
+				{elseif $vo.auth_status == 2 /}
+					<span>营业中</span>
+				{else /}
+				{/if}
+				</div>
+			</li>
+			{/volist}
+			{/notempty}
+		</ul>
+		<div class="error_tipc"></div>
+		<a href="javascript:void(0);" class="next-step step">下一步</a>
+	</div>
+	<div class="database-item hide">
+		<ul class="goods-database-content scroll-list-content" id="listLayer">
+
+		</ul>
+		<div class="error_tipc"></div>
+	</div>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_store"  /}
+					<div class="separation-line store_deploy_nav specific_type">
+						<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
+							<a href="{:url('Operation/index')}">
+								店铺提醒
+							</a>
+							<a href="javascript:void(0);" class="current">
+								店铺管理
+							</a>
+							<a href="{:url('Promotion/manage')}">
+								营销推广
+							</a>
+							<a href="javascript:void(0);">
+								官方活动
+							</a>
+						</nav>
+					</div>
+					<div class="specific_type store-manage-type">
+						<div class="columns_flex f20">
+							<a href="{:url('Operation/set')}">设置</a>
+							<a class="column_type current">商品</a>
+							<a href="{:url('Goods/setSort')}">排序</a>
+							<a href="{:url('Goods/setInventory')}">入仓</a>
+							<a href="{:url('Goods/setShelf')}">上架</a>
+							<a>卡券</a>
+						</div>
+					</div>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys" id="bodys">
+						<div class="content-wrapper">
+							<div class="scroller-wrapper" id="scroller-wrapper">
+								<div class="columns_flex backups-content ">
+									<div>
+										<span class="func-icons"></span>
+										<span>功能推荐</span>
+									</div>
+									<div class="backups-right">
+										<a href="javascript:void(0);" class="gr backup">备份本店铺商品数据</a>
+										{notempty name="selfStore"}
+										<p>上次备份日期:<span class="backup-time">{$selfStore.backup_time}</span></p>
+										{else /}
+										<p>上次备份日期:<span class="backup-time">从未备份</span></p>
+										{/notempty}
+										<a href="javascript:void(0);" class="gr copy-store">复制商品数据到本店铺</a>
+									</div>
+								</div>
+								<ul class="columns_flex flex-both-side " id="list">
+								</ul>
+								{include file="template/loading.html" /}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>
+{/block}
+<!--{block name="common"}
+{include file="template/loading.html" /}
+{/block}-->
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:6,
+		pageType:'manage'
+	};
+	$(function () {
+		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
+		//有默认店铺
+		var store ={:json_encode($store.id)};
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
+			getPagingList(config,postData);
+		}
+
+		var databaseContent=$('#databaseContent').html();
+		$('body').on('click','.copy-store,.databaseLayer .goods-database-nav li:eq(0)',function(){
+			var _this=$(this);
+
+			layer.open({
+				title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
+				className:'databaseLayer',
+				content:databaseContent,
+				success:function(){
+					var oLi=$('.databaseLayer .goods-database-nav li:eq(0)')
+					if(oLi.hasClass('current')){
+						oLi.addClass('disabled');
+					}
+					isRolling($('.databaseLayer'));
+				}
+			})
+		});
+		$('body').on('click','.next-step',function(){
+			var _this=$(this);
+			var oLi = $('.databaseLayer .goods-store-content li');
+			var storeId  = $('.databaseLayer .goods-store-content li.current').data('store-id');
+			if(oLi.hasClass('current')){
+				layer.open({
+					title:['复制商品数据到本店铺','border-bottom:1px solid #d9d9d9;'],
+					className:'databaseLayer',
+					content:databaseContent,
+					success:function(){
+						$('body').addClass('scrollfixed');
+//						$('.databaseLayer .goods-database-nav li:eq(0)').removeClass('disabled');
+						if(_this.hasClass('step')){
+							$('.databaseLayer .goods-database-nav li').eq(1).addClass('current').siblings().removeClass('current');
+							$('.databaseLayer .database-item').hide().eq(1).show();
+						}
+						requestEndLayer=false;
+						currentPageLayer=1;
+						var url = module + 'Goods/getBackup';
+						var config = {
+							storeId:storeId,
+							pageSize:4
+						};
+						getPageLayer(url,config);
+						loadTriggerLayer = false;
+						getMoreLayer(url,config);
+						isRolling($('.goods-database-nav,.databaseLayer h3'));
+					},
+					yes:function(index){
+						$('body').removeClass('scrollfixed');
+						layer.close(index);
+					},
+					btn:['确定']
+				})
+			}else{
+				errorTipc('请选择源文件');
+			}
+		});
+		$('body').on('click','.databaseLayer .goods-store-content li',function(){
+			var _this=$(this);
+				_this.addClass('current').siblings().removeClass('current');
+				_this.parent().siblings().find('li').removeClass('current');
+		});
+		$('body').on('click','.databaseLayer .goods-database-content li',function(){
+			var _this=$(this);
+				_this.toggleClass('current');
+		})
+
+
+		//备份
+		$('body').on('click','.backup',function () {
+			$.post(module+'Goods/backup',{},function (msg) {
+				if(msg.status == 0){
+					dialog.error(msg.info);
+					return false;
+				}
+				$('.backup-time').text(msg.create_time);
+				dialog.success(msg.info);
+			})
+		});
+		//下拉加载
+		$('#scroller-wrapper').on('scroll',function(){
+
+			$('.app-view').css({overflowX:'initial',overflowY:'initial'});
+			var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
+			if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
+
+	});
+
+</script>
+{/block}

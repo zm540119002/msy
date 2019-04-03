@@ -1,0 +1,21 @@
+{notempty name='info'}
+<li class="columns_flex l-r-sides" data-id="{$info.id}">
+	<div>
+		<p>
+			<span name="store_name">{$info.store_name}.{$info.store_type|getStoreType}</span>
+		</p>
+		<span name="store_type" >{$info.run_type|getRunType}</span>
+		<div>
+			<span>店长:</span>
+			<input type="text" value="{$info.name|default=''}" name="name" readonly="readonly" unselectable="on" onfocus="this.blur()"/>
+		</div>
+		<div>
+			<span>手机号码:</span>
+			<input type="tel" value="{$info.mobile_phone|default=''}" name="mobile_phone" readonly="readonly" unselectable="on" onfocus="this.blur()"/>
+		</div>
+	</div>
+	<div>
+		<a href="javascript:void(0);" class="text-color-gr set_shopowner">设置店长</a>
+	</div>
+</li>
+{/notempty}

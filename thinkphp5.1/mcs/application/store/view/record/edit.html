@@ -1,0 +1,290 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+
+<!--省市区-->
+<section id="areaLayer" class="express-area-box" style="display:none;">
+	<header>
+		<h3>选择地区</h3>
+		<a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
+		<a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+	</header>
+	<article id="areaBox">
+		<ul id="areaList" class="area-list"></ul>
+	</article>
+</section>
+<!--视频-->
+<section id="companyVideoList" style="display: none;">
+	<p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传视频(格式为)</p>
+	<form class="">
+		<ul class="upload-picture-module multi-picture-module f24"></ul>
+	</form>
+	<div class="error_tipc"></div>
+	<div class="upload-picture-module f24">
+		<div>
+			<div class="picture-module">
+				<input type="file" class="uploadImg uploadVideoDescribe" name="" accept="video/*"  >
+			</div>
+		</div>
+	</div>
+</section>
+<!--编辑企业简介-->
+<section id="editGoodsParameter" style="display: none;">
+	<div>
+		<textarea name="" id="" cols="30" rows="10" placeholder="企业简介" class="editGoodsText"></textarea>
+	</div>
+</section>
+<!--上传企业照片-->
+<section id="uploadCompanyPic" style="display: none;">
+	<p class="f20 friend-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+	<form class="">
+		<ul class="upload-picture-module multi-picture-moduleDes f24"></ul>
+	</form>
+	<div class="error_tipc"></div>
+	<div class="upload-picture-module margin-left f24">
+		<div>
+			<div class="picture-module">
+				<input type="file" class="uploadImg uploadImgDescribe " name="" accept="image/*" multiple>
+			</div>
+		</div>
+	</div>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<form class="addProductContent qualificationContent app-view">
+				{notempty name="recordInfo"}
+				<input type="hidden" name="record_id" value="{$recordInfo.id|default=''}">
+				{/notempty}
+				<div class="upload-company-map f24">
+					<div>
+						<div class="picture-module company-picture-module active">
+							<input type="file" class="uploadImg uploadSingleImg" name="">
+							{notempty name="recordInfo.company_img"}
+							<img class="upload_img common_default_img" src="public_uploads/{$recordInfo.company_img|default=''}" alt="">
+							{else /}
+							<img class="upload_img common_default_img" src="public_img/default/upload-company-img.jpg" alt="">
+							{/notempty}
+							<input type="hidden" class="business-license img" value="{$recordInfo.company_img|default=''}" name="company_img"/>
+						</div>
+						<!--<p>企业营业执照</p>-->
+					</div>
+				</div>
+				<ul class="content-marginLeft">
+					<li>
+						企业全称：<span>{$factoryName}</span>
+					</li>
+					<li>
+						<input type="text" class="detail-address" value="{$recordInfo.short_name|default=''}" placeholder="填写企业简称" name="short_name">
+					</li>
+					<li>
+						<div class="logo-license">
+							<div class="half">
+								<a class="logo" id="logox">
+									{notempty name="recordInfo.logo_img"}
+									<img src="public_uploads/{$recordInfo.logo_img|default=''}" />
+									{else /}
+									<img src="public_img/default/company-logo.jpg" />
+									{/notempty}
+									<input type="hidden" class="logo-src" name="logo_img" value="{$recordInfo.logo_img|default=''}">
+								</a>
+								<p class="f24">企业标志</p>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="editGoodsParameter right-arrow">编辑企业简介</a>
+						<input type="hidden" class="company-introduce" value="{$recordInfo.introduction|default=''}" name="introduction"/>
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="companyVideoList right-arrow">上传企业宣传视频</a>
+						<input type="hidden" class="company-video" value="" name="factory_video" data-src="{$recordInfo.factory_video|default=''}">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传研发生产照片</a>
+						<input type="hidden" class="development-picture" data-src="{$recordInfo.rb_img|default=''}" value="" name="rb_img">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadDeveloPic uploadCompanyPic right-arrow">上传团队活动照片</a>
+						<input type="hidden" class="team_activity" data-src="{$recordInfo.team_activity|default=''}" value="" name="team_activity">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadLicensePic uploadCompanyPic right-arrow">上传企业执照资质照片</a>
+						<input type="hidden" class="license-picture" data-src="{$recordInfo.license|default=''}" value="" name="license">
+					</li>
+					<li class="">
+						<a href="javascript:void(0);" class="uploadHonorPic uploadCompanyPic right-arrow">上传企业专利荣誉照片</a>
+						<input type="hidden" class="honor-picture" data-src="{$recordInfo.glory_img|default=''}" value="" name="glory_img">
+					</li>
+					<li>
+						<div class="express-area area-box">
+							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">所在地区：</label>
+								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+								<input type="hidden" value="" class="area-address-name" data-key="">
+							</a>
+						</div>
+					</li>
+					<li>
+						<input type="text" class="detail-address" value="{$recordInfo.detail_address|default=''}" placeholder="填写详细地址" name="detail_address" >
+					</li>
+				</ul>
+			</form>
+		</div>
+		<a href="javascript:void(0);" class="identifyNewGoods foot-btn f24">确定</a>
+	</section>
+</article>
+
+<div id="areaMask" class="mask"></div>
+
+
+{/block}
+{block name="common"}
+{include file="template/clip_img.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swipe.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="public_js/uploadMultiImg.js"></script>
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
+<script type="text/javascript" src="public_js/hammer.js"></script>
+<script type="text/javascript" src="public_js/iscroll-zoom.js"></script>
+<script type="text/javascript" src="public_js/jquery.photoClip.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		//省市区初始化
+		var province = '{$recordInfo.province|default=""}';
+		var city = '{$recordInfo.city|default=""}';
+		var area = '{$recordInfo.area|default=""}';
+		var region = [];
+		if(province && city && area){
+			region.push(province);
+			region.push(city);
+			region.push(area);
+			$('.area_address').setArea(region);
+		}
+		//编辑企业简介
+		var editGoodsParameter=$('#editGoodsParameter').html();
+		$('body').on('click','.editGoodsParameter',function(){
+			layer.open({
+				title:['编辑企业简介','border-bottom:1px solid #d9d9d9;'],
+				className:'editParameterLayer',
+				type:1,
+				content:editGoodsParameter,
+				btn:['确定','取消'],
+				success:function(){
+					var winHeight=$(window).height();
+					$('html,body').addClass('scrollStyle');
+                	$('.editParameterLayer .layui-m-layercont').css('height',winHeight-112+'px');
+					var goodsParameter=$('.company-introduce').val();
+					$('.editParameterLayer .editGoodsText').val(goodsParameter);
+					$('.layui-m-layer .layui-m-layermain').addClass('arrow-bottom');
+                	$('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+				},
+				yes:function(index){
+					var editGoodsText=$('.editParameterLayer .editGoodsText').val();
+					$('.company-introduce').val(editGoodsText);
+					$('html,body').removeClass('scrollStyle');
+					layer.close(index);
+				},
+				no:function(){
+					$('html,body').removeClass('scrollStyle');
+				}
+			})
+		});
+
+		//提交档案信息
+		$('body').on('click','.identifyNewGoods',function(){
+			var area_address =$('.area-address-name').getArea();
+			var postData={};
+			postData=$('.qualificationContent').serializeObject();
+			var rb_img = $('.development-picture').data('src');
+			postData.rb_img = rb_img;
+			var license=$('.license-picture').data('src');
+			postData.license = license;
+			var glory_img=$('.honor-picture').data('src');
+			postData.glory_img = glory_img;
+			var factory_video=$('.company-video').data('src');
+			postData.factory_video = factory_video;
+			var team_activity=$('.team_activity').data('src');
+			postData.team_activity = team_activity;
+			var  content =''
+			if(!postData.company_img){
+				content='请上传企业形象图片';
+			}else if(!postData.short_name){
+				content='请填写企业简称';
+			}else if(postData.short_name.length>8){
+				content='简称不能超过8位';
+			}else if(!postData.logo_img){
+				content='请上传企业标志图';
+			}else if(!postData.introduction){
+				content='请填写企业简介';
+			}else if(!postData.rb_img||postData.rb_img==0){
+				content='请上传研发生产图片';
+			}else if(!postData.team_activity||postData.team_activity==0){
+				content='请上传团队活动图片';
+			}else if(!postData.license||postData.license==0){
+				content='请上传执照资质图片';
+			}else if(!postData.glory_img||postData.glory_img==0){
+				content='请上传专利荣誉图片';
+			}else if(!area_address){
+				content='请选择所在的省市区';
+			}else if(!postData.detail_address){
+				content='请填写详细地址';
+			}
+			if(content){
+				dialog.error(content);
+				return false;
+			}
+			postData.province = area_address[0];
+			postData.city = area_address[1];
+			postData.area = area_address[2];
+			if(!uploadsSingleImgFlag ){
+				dialog.error('图片还没有上传完毕');
+				return false;
+			}
+			if(!uploadsSingleVideoFlag){
+				dialog.error('视频还没有上传完毕');
+				return false;
+			}
+			if(!uploadsClipImgFlag){
+				dialog.error('企业标志图片还没有上传完毕');
+				return false;
+			}
+
+			var _this = $(this);
+			_this.addClass("nodisabled");//防止重复提交
+			$.ajax({
+				url:controller + "edit",
+				type:'post',
+				data:postData,
+				dataType:'json',
+				success:function (data) {
+					_this.removeClass("nodisabled");
+
+					if(data.status == 0){
+						dialog.error(data.info);
+						return false;
+					}else if(data.status == 1){
+						dialog.success(data.info,controller+'preview');
+					}
+				},
+				error:function (xhr) {
+					dialog.error('Ajax错误'+xhr.status);
+				},
+			})
+		})
+	});
+	window.onload=function(){
+        setTimeout(function() {  
+            window.scrollTo(0, 1)  
+        }, 0);  
+    }; 
+</script>
+{/block}

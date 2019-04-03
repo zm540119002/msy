@@ -1,0 +1,81 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="title"}入驻部署{/block}
+{block name="content"}
+<article class="f24 app_wrapper">
+	<div class="top_header">
+		{include file="public/switch_factory_head" /}
+		<section class="specific_type bottomLine store_deploy_nav">
+			<div class="columns_flex f20 l-r-sides ">
+				<a href="{:url('Manager/index')}">管理员</a>
+				<a href="{:url('Record/preview')}">档案</a>
+				<a href="{:url('Brand/manage')}">商标</a>
+				<a href="{:url('Store/manage')}" >开店</a>
+				<a href="{:url('Store/getList')}">店铺</a>
+				<a href="{:url('Shop/index')}">门店</a>
+				<a href="javascript:void(0);">财务</a>
+			</div>
+		</section>
+	</div>
+	<section class="f24 account-content-wrapper ">
+		<div class="account-top">
+			<!--<div>企业名称：<span>某某公司</span></div>
+			<p>管理员进行账户授权前请阅读以下角色类型与权限说明</p>-->
+			<dl>
+				<dt class="role-label">管理员操作提示：</dt>
+				<dd>
+					<p>管理员账号：可先新增管理员账号协助进行入驻部署。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">机构档案：</dt>
+				<dd>
+					<p>请先完善采购商档案，选择所见所得和传统模式的编辑方式。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">商标备案：</dt>
+				<dd>
+					<p>为避免商标知识产权纠纷，凡宣称为商标者应提供商标的已注册/注册中的证明，非商标所有权的商户应提交商标拥有人的使用授权书，注意申请开通品牌官方旗舰店前需先进行商标备案。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">店家入驻:</dt>
+				<dd>
+					<p>线下美容店家入驻可申请美尚会云店店铺和采购商公众号内嵌式门店店铺，采购商旗舰店凭营业执照申请开通即可，品牌旗舰店凭营业执照和商标证（已注册或注册中商标证明，非商标所有人机构需递交商标使用授权证明）。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">店铺店长:</dt>
+				<dd>
+					<p>设置线上店铺的店长账号。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">门店店长:</dt>
+				<dd>
+					<p>录入线下门店名称，设置门店店长。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">店铺财务:</dt>
+				<dd>
+					<p>设置线上店铺的财务结算人员的账号。</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+$(function () {
+});
+</script>
+{/block}

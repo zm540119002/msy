@@ -1,0 +1,93 @@
+<section id="vendorInfoList" style="display:none;">
+    <ul class="vendorInfoList">
+        {volist name="storeList" id="vo"}
+        <li class="" data-id="{$vo.id}">
+            <p class="store-type">  <span class="store-name">{$vo.name}</span>{$vo.store_type|getStoreType}</p>
+            <p class="run-type">{$vo.run_type|getRunType}</p>
+        </li>
+        {/volist}
+    </ul>
+</section>
+<script type="text/javascript">
+    var vendorInfoList=$('#vendorInfoList').html();
+    $(function(){
+        //如果没有默认店铺，则设置默认店铺
+        var store='{:json_encode($store)}';
+        if(store === 'null'){
+            setDefaultStore();
+            return false;
+        }
+        //切换店铺
+        $('body').on('click','.switch-store',function(){
+            setDefaultStore();
+        });
+
+    });
+    //弹层 店铺
+    function setDefaultStore(){
+        layer.open({
+            type: 1,
+            title:['请选择关联的店铺','border-bottom:1px solid #d9d9d9'],
+            className:'vendorInfoLayer',
+            content:vendorInfoList,
+            anim: 'up',
+            btn:['确定','取消'],
+            success:function(){
+                var winH=$(window).height();
+                var storeId='{:json_encode($store.id)}';
+                storeId = JSON.parse( storeId );
+                $('html,body').addClass('scrollStyle');
+                $('.layui-m-layermain .layui-m-layersection').addClass('bottom-layer');
+                $('.vendorInfoLayer .vendorInfoList').css('height',(winH-115)+'px');
+                $('.vendorInfoLayer li').on('click',function(){
+                    var _this=$(this);
+                    _this.addClass('current').siblings().removeClass('current');
+                });
+                $.each($('.vendorInfoLayer li'),function(){
+                    var currentId=$(this).data('id');
+                    if(storeId==currentId){
+                        $(this).addClass('current');
+                    }
+                })
+            },
+            yes:function(index){
+                var isCurrent=$('.vendorInfoLayer li.current');
+                factoryLayerName=isCurrent.text();
+                factoryLayerId  =isCurrent.data('id');
+                $('.factoryId').val(factoryLayerId);
+                $('.vendor-name').text(factoryLayerName);
+                if(!factoryLayerId){
+                    dialog.error('请选择一个店铺');
+                    return false
+                }
+                var postData = {};
+                postData.id = factoryLayerId;
+                $.ajax({
+                    url: controller + 'setDefaultStore',
+                    data: postData,
+                    type: 'post',
+                    beforeSend: function(){
+                        //$('.loading').show();
+                    },
+                    success: function(info){
+                        if(info.status == 0){
+                            dialog.error(info.msg);
+                            return false;
+                        }
+                        if(info.status == 1){
+                            dialog.success(info.msg, location.reload());
+                        }
+                    },
+                    complete:function(){
+
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误'+xhr);
+                    }
+                });
+                $('html,body').removeClass('scrollStyle');
+                layer.close(index);
+            }
+        });
+    }
+</script>
