@@ -49,5 +49,7 @@ return [
             'icon' => 'my',
         ],
     ],
+
+    'pay_gateway'=>'https://msy.meishangyun.com/index/Payment/toPay/system_id/2/order_sn/'
 ];
 

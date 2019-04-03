@@ -22,7 +22,7 @@ return [
     'system_id'=>[
         '1'=>[
             'db'=>'db_config_weiya',
-            'jump_url'=>'https://http://www.worldview.com.cn/index/Order/manage/order_status/2',
+            'jump_url'=>'https://www.worldview.com.cn/index/Order/manage/order_status/2',
             ],
         '2'=>[
             'db'=>'db_config_mcs',
