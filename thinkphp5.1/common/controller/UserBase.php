@@ -5,7 +5,7 @@ namespace common\controller;
  */
 class UserBase extends Base{
     protected $user = null;
-    protected $loginUrl = 'https://api.meishangyun.com/ucenter/UserCenter/login';//登录页
+    protected $loginUrl = 'ucenter/UserCenter/login';//登录页
     protected $indexUrl = 'index/Index/index';//平台首页
     
     public function __construct(){
@@ -16,7 +16,7 @@ class UserBase extends Base{
             if (request()->isAjax()) {
                 $this->success('您还未登录平台，请先登录！',url($this->indexUrl),'no_login',0);
             }else{
-                $this->error('您还未登录平台，请先登录！',$this->loginUrl);
+                $this->error('您还未登录平台，请先登录！',str_replace('/index.php','',$this->loginUrl));
             }
         }
     }
