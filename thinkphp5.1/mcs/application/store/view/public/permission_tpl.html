@@ -1,0 +1,27 @@
+<div class="account-field account_position">
+	<span class="content-label">设置岗位</span>
+	<ul class="post_position post">
+		{volist name="post" id="vo"}
+		<li class="col" data-id="{$vo.id}">{$vo.name}</li>
+		{/volist}
+	</ul>
+</div>
+<div class="account-field account_position">
+	<span class="content-label">设置职务</span>
+	<ul class="post_position duty">
+		{volist name='duty' id='vo'}
+		<li class="col" data-id="{$vo.id}">{$vo.name}</li>
+		{/volist}
+	</ul>
+</div>
+<span class="content-label">账号授权：</span>
+{volist name='authentication' id='vo'}
+<div class="account-field account_position" data-id="{$vo.id}">
+	<span class="content-label">{$vo.name}</span>
+	<ul class="account_authorization authentication">
+		{volist name='vo.nodes' id='node'}
+		<li class="col" data-id="{$node.id}">{$node.name}</li>
+		{/volist}
+	</ul>
+</div>
+{/volist}

@@ -1,0 +1,122 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="public_css/mobiscroll.css">
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<!--选择商品搞促销-->
+<section style="display: none" class="search-li">
+<li data-goods-id="" >
+	<img src="" alt="" class="left"/>
+	<div class="promotional-g-right">
+		<span class="goods-name"></span>
+		<span class="special-price">特价</span>
+		<input type="text" class="special" placeholder="填写价格">
+	</div>
+	<a href="javascript:void(0);" class="promotional-close-btn">X</a>
+</li>
+</section>
+<section id="addsalesgoods" style="display:none;" class="f24">
+	<div class="content-box">
+		<span class="content-label">已选择促销商品</span>
+		<ul class="columns_flex l-r-sides promotional-goods-list">
+
+		</ul>
+		<div class="error_tipc"></div>
+		<form name="form1" id="form1">
+			<div class="columns_flex search-row-flex">
+				<input type="text" class="input-filed search-goods keyword" name="keyword" placeholder="搜索商品"/>
+				<input type="button" value="搜索" class="layer-search-btn search"/>
+			</div>
+		</form>
+		<span class="content-label">所有商品(可以从下面商品中点击添加商品到已促销商品)</span>
+		<div class="">
+			<ul class="columns_flex flex-both-side scroller-container" id="list">
+			</ul>
+		</div>
+	</div>
+</section>
+<article class="f24">
+	<section class="bottomLine">
+		<div class="top_bar top-title">
+			<h2>新建促销活动</h2>
+		</div>
+	</section>
+	<section class="content-box">
+		<form class="addSalesPromotionForm">
+			{notempty name="promotionInfo"}
+			<input type="hidden" class="promotion_id" value="{$promotionInfo.id|default=''}"  name="id">
+			{/notempty}
+			<div class="content-row-list">
+				<span class="content-label">第1：填写促销活动名称</span>
+				<input type="text" name="name" value="{$promotionInfo.name|default=''}" placeholder="促销活动名称" class="sales-promotion-name input-filed f24">
+			</div>
+			<div class="content-row-list">
+				<span class="content-label">第2：上传促销活动图片</span>
+				
+				<div class="upload-company-map columns_flex l-r-sides f24">
+					<div class="promotion-img-item">
+						<p>一级页面广告图</p>
+						<div class="picture-module company-picture-module active">
+							<input type="file" class="uploadImg uploadSingleImg" name="">
+							{notempty name="$promotionInfo.first_img"}
+							<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.first_img|default=''}" alt="">
+							{else /}
+							<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+							{/notempty}
+							<input type="hidden" class="img" value="{$promotionInfo.first_img|default=''}" name="first_img">
+						</div>
+					</div>
+					<div class="promotion-img-item">
+						<p>二级页面首焦图</p>
+						<div class="picture-module company-picture-module active">
+							<input type="file" class="uploadImg uploadSingleImg" name="">
+							{notempty name="$promotionInfo.second_img"}
+							<img class="upload_img common_default_img" src="public_uploads/{$promotionInfo.second_img|default=''}" alt="">
+							{else /}
+							<img class="upload_img common_default_img" src="public_img/default/no_pic_1000.jpg" alt="">
+							{/notempty}
+							<input type="hidden" class="img" value="{$promotionInfo.second_img|default=''}" name="second_img">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content-row-list">
+				<span class="content-label">第3：促销活动图片链接到商品</span>
+				<a href="javascript:void(0);" class="linked-goods green-small-btn">链接商品</a>
+				<input type="hidden" value="{$promotionInfo.goods|default=''}" class="linked-goods-id" name="goods">
+			</div>
+			<div class="content-row-list">
+				<p>第5：促销活动特价期限（促销活动自动上架和下架）</p>
+				<span class="content-label">起始时间</span>
+				<input name="start_time" id="startTime" readonly="" class="input-filed f24" type="text" placeholder="选择起始时间" value=""/>
+				<span class="content-label">结束时间</span>
+				<input name="end_time" id="endTime" readonly="" class="input-filed f24" type="text" placeholder="选择结束时间" value=""/>
+			</div>
+		</form>
+	</section>
+</article>
+<a href="javascript:void(0);" class="addSalesPromotion foot-btn f24">确定</a>
+
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	var startTime = "{$promotionInfo.start_time}";
+	var endTime = "{$promotionInfo.end_time}";
+	if(startTime){
+		startTime =  date("Y-m-d H:i",startTime);
+		$('#startTime').val(startTime);
+	}
+	if(endTime){
+		endTime =  date("Y-m-d H:i",endTime);
+		$('#endTime').val(endTime);
+	}
+</script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="public_js/mobiscroll.js"></script>
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript" src="store_js/promotion.js"></script>
+{/block}

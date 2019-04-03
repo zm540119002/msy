@@ -1,0 +1,77 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<section class="htmleaf-container" style="display: none;">
+	<div id="clipArea">
+		<div class="photo-clip-view" >
+			<div class="photo-clip-moveLayer" >
+				<div class="photo-clip-rotateLayer"></div>
+			</div>
+		</div>
+		<div class="photo-clip-mask">
+			<div class="photo-clip-mask-left"></div>
+			<div class="photo-clip-mask-right" ></div>
+			<div class="photo-clip-mask-top" ></div>
+			<div class="photo-clip-mask-bottom" ></div>
+			<div class="photo-clip-area" ></div>
+		</div>
+		<a href="javascript:void(0);" class="photoClip-close ">X</a>
+	</div>
+	<div class="foot-use f28">
+		<div class="uploader1 blue">
+			<input type="button" name="file" class="button" value="打开图片">
+			<input id="file" type="file" onchange="javascript:void(0);" accept="image/*" multiple="" />
+		</div>
+		<button id="clipBtn">截取</button>
+	</div>
+	<div id="view" class="photoview" ></div>
+</section>
+<article class="f24 app-content">
+	<!--店铺运营头部-->
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				{include file="public/switch_factory_store" /}
+				<section class="bottomLine store_deploy_nav specific_type">
+					<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
+						<a href="javascript:void(0);" class="current">
+							店铺提醒
+						</a>
+						<a href="{:url('Operation/set')}">
+							店铺管理
+						</a>
+						<a href="{:url('Promotion/manage')}">
+							营销推广
+						</a>
+						<a href="javascript:void(0)">
+							官方活动
+						</a>
+					</nav>
+				</section>
+			</div>
+		</div>
+	</section>
+</article>
+
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+	$(function() {
+		//页面初始化
+		$('.content_main .section_content').eq(0).show();
+		var store = '{$store.id}';
+		if (!store) {
+			switchManagerStore(location.href);
+		} else {
+		
+		}
+	})
+
+</script>
+{/block}

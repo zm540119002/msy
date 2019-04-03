@@ -1,0 +1,83 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_head" /}
+					<section class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}">管理员</a>
+							<a href="{:url('Record/preview')}">档案</a>
+							<a href="{:url('Brand/manage')}" class="current">商标</a>
+							<a href="{:url('Store/manage')}">开店</a>
+							<a href="{:url('Store/getList')}">店铺</a>
+							<a href="{:url('Shop/index')}">门店</a>
+							<a href="javascript:void(0);">财务</a>
+						</div>
+					</section>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="trademark-module">
+								<div class="thead-td">
+									<span class="cols">图形</span>
+									<span class="cols">名称</span>
+									<span class="cols">状态</span>
+									<span class="cols">备注</span>
+								</div>
+								<ul class="trademark-info">
+									{notempty name="brandList"}
+									{volist name="brandList" id="vo"}
+										<li class="">
+											<div class="cols">
+												{notempty name="vo.brand_img"}
+												<img class="trade-logo" src="public_uploads/{$vo.brand_img}" />
+												{else /}
+												<img class="trade-logo" src="" />
+												{/notempty}
+											</div>
+											<div class="cols">
+												<span class="trade-name">{$vo.name}</span>
+											</div>
+											<div class="cols">
+											{if  $vo.auth_status == 0}<span>待审核</span>
+											{elseif $vo.auth_status == 1 /}已备案
+											{elseif $vo.auth_status == 2 /}审核不通过<a href="{:url('Brand/record',['brand_id' => $vo['id']])}" class="recordation">重新备案></a>
+											{else /}
+											{/if}
+											</div>
+											<div class="cols">
+												<a href="">修改图片</a>
+											</div>
+										</li>
+									{/volist}
+									{else /}
+										<li>暂无商标</li>
+									{/notempty}
+								</ul>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+<a href="{:url('Brand/record')}" class="foot-btn f24">进行新的商标备案</a>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+<script type="text/javascript">
+
+</script>
+{/block}

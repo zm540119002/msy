@@ -1,0 +1,157 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<!--新建标签-->
+<section id="addTagForm" style="display:none;">
+	<form>
+		<input type="text" placeholder="填写排序号" class="layer-tag-num" value=""/>
+		<input type="text" placeholder="填写标签名称" class="layer-tag-name" value=""/>
+	</form>
+	<div class="error_tipc"></div>
+</section>
+
+<article class="f24 ">
+	<!--店铺运营头部-->
+	<section class="">
+		<div class="">
+			<div class="">
+				{include file="public/switch_factory_store" /}
+				<div class="bottomLine store_deploy_nav specific_type">
+					<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
+						<a href="{:url('Operation/index')}">
+							店铺提醒
+						</a>
+						<a href="{:url('Goods/manage')}">
+							店铺管理
+						</a>
+						<a href=""  class="current">
+							营销推广
+						</a>
+						<a href="javascript:void (0)">
+							官方活动
+						</a>
+					</nav>
+				</div>
+				<div class="specific_type store-manage-type bottomLine">
+					<div class="columns_flex f20">
+						<a  href="javascript:void (0)" class="column_type current">场景</a>
+						<a href="javascript:void (0)">推文</a>
+						<a href="javascript:void (0)">直播</a>
+					</div>
+				</div>
+
+				<div class="separation-line sales-promotion-content">
+					<div class="category-wrapper">
+						<div class="category-left-menu sort-left-menu">
+							<ul class="category-tab">
+								<li class="current">
+									<a href="javascript:void(0);" data-activity-status="1" class="activity-status">未结束</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" data-activity-status="0" class="activity-status">已结束</a>
+								</li>
+							</ul>
+						</div>
+						<input type="hidden" value="1" class="isClick">
+						<div class="promotion-item" >
+							<p class="content-label">促销活动的修改、删除和排序</p>
+							<div class="scroller-container " id="list">
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="separation-line sales-promotion-content">
+				</div>
+			</div>
+		</div>
+	</section>
+	<a href="javascript:void(0);" class="addSalesActivity increase-commodity foot-btn f24">新建促销活动</a>
+</article>
+{/block}
+{block name="common"}
+{include file="template/loading.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/paging.js"></script>
+<script type="text/javascript">
+	var config = {
+		url:module+'promotion/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		callBack:callBack,
+		container1:$('.promotion-item .content-label')
+	};
+	var postData = {
+		pageSize:10
+	};
+	$(function () {
+		//没有默认店铺
+		var store_id = "{$store.id}";
+		if(store_id !== 'null'){
+//			//初始化
+			postData.activityStatus = $('.category-tab li.current a').data('activity-status');
+			getPagingList(config,postData);
+		}
+
+		//点击新建促销活动
+		$('body').on('click','.addSalesActivity',function () {
+			location.href = module + 'promotion/edit'
+		});
+
+		//根据促销活动状态获取活动列表
+		$('body').on('click','.category-tab li',function () {
+			$(this).addClass('current').siblings().removeClass('current');
+			postData.activityStatus = $(this).find('a').data('activity-status');
+			config.currentPage = 1;
+			config.requestEnd = false;
+			getPagingList(config,postData);
+		})
+
+		//删除促销活动
+		$('body').on('click','.del-icons',function () {
+			var _this = $(this);
+			var postData = {};
+			postData.id = _this.parent().data('id');
+			$.post(module+'Promotion/del',postData,function (msg) {
+				if(msg.status == 0){
+					dialog.error(msg.info);
+					return false;
+				}
+				_this.parents('.tag-item').remove();
+				dialog.success(msg.info);
+			})
+		})
+	});
+
+	//获取分页列表-商品页回调函数
+	function callBack(config,data){
+		$('.loading').hide();
+		if(config.currentPage == 1){
+			if(config.activityStatus == 1){
+				config.container1.text('促销活动的修改、删除和排序');
+			}
+			if(config.activityStatus==0){
+				config.container1.text('已结束的促销活动');
+			}
+			config.container.find('.tag-item').remove();
+			config.container.append(data);
+		}else{
+			config.container.find('.tag-item:last').after(data);
+		}
+	}
+	//下拉加载
+	$('.scroller-container').on('scroll',function(){
+		var listHeight=document.getElementById('list').scrollHeight;
+		if(config.loadTrigger && $('.scroller-container ').scrollTop()+$('.scroller-container ').height()>=listHeight){
+			config.loadTrigger = false;
+			config.activityStatus = $('.category-tab li.current a').data('activity-status');
+			getPagingList(config,postData);
+		}
+	});
+</script>
+{/block}

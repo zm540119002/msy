@@ -1,0 +1,148 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="title"}开店部署{/block}
+{block name="content"}
+<section id="groupRole" style="display: none;">
+	<div class="groupRole-box">
+		<input class="role-name input-filed" type="text" name="" value="" placeholder="请输入组别名称">
+	</div>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				{include file="public/switch_factory_head" /}
+				<div class="specific_type bottomLine">
+					<div class="columns_flex f20 l-r-sides">
+						<a href="{:url('Record/preview')}">企业档案</a>
+						<a href="{:url('Brand/manage')}">商标备案</a>
+						<a href="{:url('Store/manage')}">开店申请</a>
+						<a href="{:url('Organize/index')}" class="column_type current">组别角色</a>
+						<a href="{:url('Account/index')}">账号授权</a>
+					</div>
+				</div>
+				<div class="f24 ">
+					<div class="page-bd">
+						<nav class="apply-data-nav">
+							<ul id="status " class="status f24 weui-flex group-role-nav">
+								<li class="weui-flex-item current"><a href="{:url('Organize/index')}"><span class="ogranzi"></span><em></em>组织</a></li>
+								<li class="weui-flex-item"><a href="{:url('Role/index')}"><span class="role"></span><em></em>角色</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				{include file='organize/list_tpl' /}
+				<p class="f20 content-box group-role-tipc">说明：这里仅构建与企业云端店铺经营直接相关的业务组织架构，点击    键可增加所在部门的分支/部门；点击部门框可修改名称；消除部门框内容相同于删除该部门；如正在删除的部门有分支部门，请先删除其分支部门再删除该部门；建议企业部门的级别不超过5级，企业部门设置完成后再按下一步。</p>
+			</div>
+		</div>
+	</section>
+</article>
+<div id="organize_tpl" style="display:none;">
+	<ul data-id="" data-superior_id="" data-level="">
+		<li>
+			<span class="content-label"></span>
+			<div class="operate-box">
+				<a href="javascript:void(0);" class="btn edit">i</a>
+				<a href="javascript:void(0);" class="btn reduce">-</a>
+				<a href="javascript:void(0);" class="btn add">+</a>
+			</div>
+		</li>
+	</ul>
+</div>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_factory.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="store_js/account.js"></script>
+<script type="text/javascript">
+$(function () {
+	//新增下级
+	$('body').on('click','.add',function(){
+		var _this = $(this);
+		layer.open({
+			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],
+			className:'groupRoleLayer',
+			shadeClose:false,
+			content:$('#groupRole').html(),
+			btn:['确定','取消'],
+			yes:function (index) {
+				var postData = {};
+				postData.organize_id = _this.parent().parent().parent().data('id');
+				postData.level = _this.parent().parent().parent().data('level');
+				postData.name = $('div.groupRoleLayer').find('input').val();
+				$.post(action,postData,function(data){
+					_this.parent().after(data);
+					layer.close(index);
+				});
+			}
+		});
+	});
+	//修改
+	$('body').on('click','.edit',function(){
+		var _this = $(this);
+		var _thisSpan = _this.parent().prev();
+		var name = _thisSpan.text();
+		layer.open({
+			title:['填写组别名称','border-bottom:1px solid #d9d9d9;'],
+			className:'groupRoleLayer',
+			content:$('#groupRole').html(),
+			shadeClose:false,
+			btn:['确定','取消'],
+			success:function(){
+				$('div.groupRoleLayer').find('input').val(name);
+			},
+			yes:function (index) {
+				var postData = {};
+				postData.id = _this.parent().parent().parent().data('id');
+				postData.name = $('div.groupRoleLayer').find('input').val();
+				$.post(action,postData,function(data){
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}else{
+						_thisSpan.text(postData.name);
+						layer.close(index);
+					}
+				});
+			}
+		});
+	});
+	//删除
+	$('body').on('click','.reduce',function(){
+		var _this = $(this);
+		layer.open({
+			content: '您确定要删除吗？'
+			,btn: ['确定', '取消']
+			,yes: function(index){
+				var postData = {};
+				var _thisUl = _this.parent().parent().parent();
+				postData.id = [];
+				postData.id.push(_thisUl.data('id'));
+				$.each(_thisUl.find('ul'),function(){
+					if($(this).data('id')){
+						postData.id.push($(this).data('id'));
+					}
+				});
+				var url = controller + 'del';
+				$.post(url,postData,function(data){
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}else if(data.status==1){
+						_thisUl.remove();
+						layer.close(index);
+					}
+				});
+			}
+		});
+	});
+	//初始化
+	getOrganizeList();
+});
+</script>
+{/block}

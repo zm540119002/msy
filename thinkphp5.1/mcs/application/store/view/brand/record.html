@@ -1,0 +1,113 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<!--商标所属分类-->
+<section id="edittradeMark" style="display:none;">
+	<p><span class="friend-tipc">*注意</span>：商标分类至少选择1个,最多只能选择3个</p>
+	<ul class="vendorInfoList">
+		{volist name="categoryList" id="vo"}
+		<li data-id="{$vo.id}">{$vo.name}</li>
+		{/volist}
+	</ul>
+</section>
+<article class="f24">
+	<section class="bottomLine">
+		<div class="top_bar top-title">
+			<span></span>
+			<h2>进行商标备案</h2>
+			{include file="public/home_page" /}
+		</div>
+	</section>
+	<section>
+		<div id="wizard" class="page-bd">
+			<nav class="apply-data-nav trademark-nav">
+				<ul id="status " class="status f24 weui-flex">
+					<li class="weui-flex-item current"><span class="base_info"></span><em></em>商标名称</li>
+					<li class="weui-flex-item "><span class="upload-prove"></span><em></em>上传资料</li>
+				</ul>
+			</nav>
+			<div class="apply-data-content">
+				<div class="apply-module">
+					<form class="trademarkform">
+						{notempty name="brandInfo"}
+						<input type="hidden" name="brand_id" value="{$brandInfo.id|default=''}">
+						{/notempty}
+						<div class="apply-items">
+							<input type="text" class="trademark-name" name="name" value="{$brandInfo.name|default=''}" placeholder="商标名称">
+						</div>
+						<div class="logo-license">
+							<div class="half">
+								<a class="logo" id="logox">
+									{notempty name="brandInfo.brand_img"}
+									<img id="" src="public_uploads/{$brandInfo.brand_img|default=''}" />
+									{else /}
+									<img src="public_img/default/no_pic_40.jpg" />
+									{/notempty}
+									<input type="hidden" class="logo-src" name="brand_img" value="{$brandInfo.brand_img|default=''}">
+								</a>
+								<p class="f24">上传商标</p>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="">
+							<a href="javascript:void(0);" class="trademark-type right-arrow">商标所属分类</a>
+							<input type="hidden" class="trademark-info"  value="" data-trademark="{$brandInfo.category_id_1|default=''}"/>
+						</div>
+						<a href="javascript:void(0);" class="one-step step">下一步</a>
+					</form>
+				</div>
+				<div class="apply-module hide">
+					<p class="f20 friend-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+					<form class="trademarkform">
+						<ul class="upload-picture-module apply-data-picture f24">
+							<li>
+								<div class="picture-module">
+									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="brandInfo.certificate"}
+									<img class="upload_img" src="public_uploads/{$brandInfo.certificate|default=''}" alt="">
+									{else /}
+									<img class="upload_img" src="" alt="">
+									{/notempty}
+									<input type="hidden" class="trademark-certificate img" value="{$brandInfo.certificate|default=''}" name="certificate"/>
+								</div>
+								<p>商标证书</p>
+							</li>
+							<li>
+								<div class="picture-module">
+									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="brandInfo.certificate"}
+									<img class="upload_img" src="public_uploads/{$brandInfo.authorization|default=''}" alt="">
+									{else /}
+									<img class="upload_img" src="" alt="">
+									{/notempty}
+									<input type="hidden" class="trademark-authorization img" value="{$brandInfo.authorization|default=''}" name="authorization"/>
+								</div>
+								<p>商标授权书<br/>(非所有权者需递交)</p>
+							</li>
+						</ul>
+						<a href="javascript:void(0);" class="two-step step">确定递交</a>
+					</form>
+				</div>
+			</div>
+		</div>
+		<p class="trademark-tipc">商标备案需递交商标证书(已注册或受理的通知书),非商标所有权申请方还需商标授权书,请准备好材料提前拍照以备上传</p>
+	</section>
+</article>
+
+{/block}
+{block name="common"}
+{include file="template/clip_img.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/hammer.js"></script>
+<script type="text/javascript" src="public_js/iscroll-zoom.js"></script>
+<script type="text/javascript" src="public_js/jquery.photoClip.js"></script>
+<script type="text/javascript" src="store_js/brand.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript">
+
+</script>
+{/block}

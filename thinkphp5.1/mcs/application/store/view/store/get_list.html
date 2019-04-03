@@ -1,0 +1,113 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">{/block}
+{block name="content"}
+<section id="storeLayerTipc" style="display: none;">
+	<div>
+		<span class=""></span>
+		<p class="comfirm-text">确定要<span class="textTipc">激活</span>以下店铺？</p>
+	</div>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_head" /}
+					<section class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}">管理员</a>
+							<a href="{:url('Record/preview')}">档案</a>
+							<a href="{:url('Brand/manage')}">商标</a>
+							<a href="{:url('Store/manage')}">开店</a>
+							<a href="{:url('Store/getList')}" class="current">店铺</a>
+							<a href="{:url('Shop/index')}">门店</a>
+							<a href="javascript:void(0);">财务</a>
+						</div>
+					</section>
+				</div>
+				<!--设置店长-->
+				<section id="setShopAccount" style="display:none;">
+					<div class="set_top_info">
+						<p>
+							<span class="span_text" name="store_name">XXX</span>
+						</p>
+						<p>
+							<span class="span_text" name="store_type">美尚会云店店铺</span>
+						</p>
+					</div>
+					<form class="setShopForm">
+						<div class="account-field">
+							<input type="text" class="shopper_name f20" placeholder="店长姓名" name="name">
+						</div>
+						<div class="account-field">
+							<input type="tel" class="shopper_mobile f20" placeholder="手机号码" name="mobile_phone">
+						</div>
+					</form>
+					<div class="error_tipc"></div>
+				</section>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="f24 account-content-wrapper">
+								<ul class="list-item list"></ul>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function(){
+		//页面初始化
+		var config = {
+			url: module + 'Store/getList'
+		};
+		getList(config);
+		//设置店长
+		var setShopAccount=$('#setShopAccount').html();
+		$('body').on('click','.set_shopowner',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['设置线上店铺店长','border-bottom:1px solid #d9d9d9;color:#0066cc;'],
+				className:'setShopAccountLayer',
+				content:setShopAccount,
+				btn:['确定','取消'],
+				success:function(){
+					copyDataByName(_this,$('.setShopAccountLayer .setShopForm'));
+					copyDataByClassName(_this,$('.setShopAccountLayer .set_top_info'));
+				},
+				yes:function(index){
+					var dialogForm = $('.setShopAccountLayer .setShopForm');
+					var postData=dialogForm.serializeObject();
+					postData.id = _this.data('id');
+					var config = {
+						url:module + 'Store/setManager',
+						postData:postData,
+						fromObj:dialogForm,
+						toObj:_this,
+						callBack:setManagerCallBack,
+						index:index
+					};
+					dialogFormEdit(config);
+				}
+			});
+		});
+	});
+	//设置店长回调
+	function setManagerCallBack(config,data) {
+		if(data.status == 0){
+			dialog.error(data.info);
+		}else{
+			copyDataByName(config.fromObj,config.toObj);
+			layer.close(config.index);
+		}
+	}
+</script>
+{/block}

@@ -1,0 +1,78 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+
+{/block}
+{block name="content"}
+<!--新建标签-->
+<section id="addTagForm" style="display:none;">
+	<form>
+		<input type="text" placeholder="填写标签名称" class="layer-tag-name" value=""/>
+	</form>
+</section>
+<!--标签列表模板-->
+
+<article class="f24">
+	<section class="">
+		<nav class="columns_flex channel_nav manufacturer_nav supply-nav">
+			<a href="" class="current">
+				<span class="exclusive"></span>
+				采购供应联营
+			</a>
+			<a href="">
+				<span class="classify"></span>
+				分成供应联营
+			</a>
+			<a href="">
+				<span class="purchasers"></span>
+				零售供应联营
+			</a>
+		</nav>
+	</section>
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20">
+			<a class="column_type current">分类标签</a>
+			<a>商品管理</a>
+			<a>上架管理</a>
+		</div>
+	</section>
+	<section>
+		<div>
+			<a class="add-type-tag"><span class="add-icons">新建商品分类标签</span></a>
+			<div class="scroller-container">
+				<input type="hidden" value="1" class="isClick"/>
+				{empty name="seriesList"}
+					<p class="set-tag-tipc">未设置标签</p>
+				{else /}
+				{/empty}
+				{volist name="seriesList" id="vo"}
+					<div class="columns_flex tag-item first-tag">
+						<span class="classify-tag-name">{$vo.name}</span>
+						<span class="classify-operate-btn">
+							<a href="javascript:void(0);" class="edit-icons">编辑</a>
+							<a href="javascript:void(0);" class="del-icons">删除</a>
+							<a href="javascript:void(0);" class="up-btn " data-move="0">上移</a>
+							<a href="javascript:void(0);" class="down-btn " data-move="1">下移</a>
+						</span>
+						<input type="hidden" value="" class="sort" data-tag-id="{$vo.sort}">
+						<input type="hidden" value="" class="series_id" data-series-id="{$vo.id}">
+					</div>
+				{/volist}
+
+			</div>
+		</div>
+	</section>
+</article>
+
+{/block}
+{block name="common"}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="store_js/manageTag.js"></script>
+<script type="text/javascript">
+	$(function(){
+	});
+</script>
+{/block}

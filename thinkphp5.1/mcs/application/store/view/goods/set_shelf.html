@@ -1,0 +1,138 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_store" /}
+					<div class="store_deploy_nav specific_type">
+						<nav class="columns_flex channel_nav manufacturer_nav store_deploy_bar">
+							<a href="{:url('Operation/index')}">
+								店铺提醒
+							</a>
+							<a href="javascript:void(0);" class="current">
+								店铺管理
+							</a>
+							<a href="{:url('Promotion/manage')}">
+								营销推广
+							</a>
+							<a href="javascript:void(0);">
+								官方活动
+							</a>
+						</nav>
+					</div>
+					<div class="specific_type store-manage-type ">
+						<div class="columns_flex f20">
+							<a href="{:url('Operation/set')}">设置</a>
+							<a class="" href="{:url('Goods/manage')}">商品</a>
+							<a href="{:url('Goods/setSort')}">排序</a>
+							<a href="{:url('Goods/setInventory')}">入仓</a>
+							<a class="column_type current">上架</a>
+							<a>卡券</a>
+						</div>
+					</div>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys" id="bodys">
+						<div class="content-wrapper">
+							<div class="scroller-wrapper" id="scroller-wrapper">
+								<ul class="columns_flex flex-both-side scroller-container" id="list">
+								</ul>
+								{include file="template/loading.html" /}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+<!--<a href="{:url('goods/edit')}" class="increase-commodity foot-btn f24">增加商品</a>-->
+{/block}
+<!--{block name="common"}
+
+{/block}-->
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/paging.js"></script>
+
+<script type="text/javascript">
+	var config = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:6,
+		pageType:'shelf'
+	};
+	$(function () {
+
+		//没有默认店铺
+		var store_id = "{$store.id}";
+		if(store_id !== 'null'){
+			//初始化商品列表
+			getPagingList(config,postData);
+		}
+
+		//上下架
+		$('body').on('click','.shelf',function(){
+			var shelfStatus=$(this).data('shelf');
+			var _this = $(this);
+			var storeType=$('.channel_nav a.current').data('type');
+			var goodsId = $(this).parents('li').data('id');
+			var postData ={};
+			postData.goodsId = goodsId;
+			postData.shelf_status = shelfStatus;
+			postData.storeType = storeType;
+			var url = module+'goods/setShelf';
+			_this.addClass("nodisabled");//防止重复提交
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				dataType:'json',
+				beforeSend: function(){
+				},
+				error:function (xhr) {
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					_this.removeClass("nodisabled");
+					if(data.status == 1){
+						if(shelfStatus==2){
+							_this.removeClass('shelf').addClass('apply-shelf').text('已申请');
+						}else{
+							_this.data('shelf',2);
+							_this.addClass('up-shelf').text('上架');
+						}
+					}
+				}
+			});
+		})
+	});
+	//下拉加载
+	// $(window).on('scroll',function(){
+	// 	if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+	// 		config.loadTrigger = false;
+	// 		getPagingList(config,postData);
+	// 	}
+	// });
+
+	$('#scroller-wrapper').on('scroll',function(){
+		console.log(1);
+		$('.app-view').css({overflowX:'initial',overflowY:'initial'});
+		var listHeight=document.getElementById('scroller-wrapper').scrollHeight;
+		if(config.loadTrigger && $('#scroller-wrapper').scrollTop()+$('#scroller-wrapper').height()>=listHeight){
+			config.loadTrigger = false;
+			getPagingList(config,postData);
+		}
+	});
+
+</script>
+{/block}

@@ -1,0 +1,168 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">{/block}
+{block name="content"}
+<section id="storeLayerTipc" style="display: none;">
+	<div>
+		<span class=""></span>
+		<p class="comfirm-text">确定要<span class="textTipc">激活</span>以下店铺？</p>
+	</div>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_head" /}
+					<section class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}" class="current">管理员</a>
+							<a href="{:url('Record/preview')}">档案</a>
+							<a href="{:url('Brand/manage')}">商标</a>
+							<a href="{:url('Store/manage')}">开店</a>
+							<a href="{:url('Store/getList')}">店铺</a>
+							<a href="{:url('Shop/index')}">门店</a>
+							<a href="javascript:void(0);">财务</a>
+						</div>
+					</section>
+				</div>
+				<!--添加管理员账号-->
+				<section id="addAdminAccount" style="display:none;">
+					<form class="addAdminForm">
+						<div class="account-field">
+							<input type="text" class="admin-name f20 input_disabled" placeholder="姓名" name="name">
+						</div>
+						<div class="account-field">
+							<input type="tel" class="admin-mobile f20 input_disabled" placeholder="手机号码" name="mobile_phone">
+						</div>
+					</form>
+					<div class="error_tipc"></div>
+				</section>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="f24 account-content-wrapper admin-account-wrapper">
+								<div class="account-list-content">
+									<ul class="account-list admin-account-list list"></ul>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+{if $factory.user_factory_type == 1}
+<a href="javascript:void(0);" class="addManageAccount foot-btn f24">新增管理员账号</a>
+{/if}
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function(){
+		//页面初始化
+		var config = {
+			url: module + 'Manager/index'
+		};
+		getList(config);
+		//新增管理员账号
+		var addAdminAccount=$('#addAdminAccount').html();
+		$('body').on('click','.addManageAccount',function(){
+			layer.open({
+				title:['新增管理员账号','border-bottom:1px solid #d9d9d9;'],
+				className:'addAdminLayer',
+				content:addAdminAccount,
+				btn:['确定','取消'],
+				success:function () {
+				},
+				yes:function(index){
+					var postData = $('.addAdminForm').serializeObject();
+					var content='';
+					if(!postData.name){
+						content='请填写姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					var config = {
+						url:module + 'Manager/edit',
+						postData:postData,
+						index:index
+					};
+					dialogFormAdd(config);
+				}
+			});
+		});
+		//修改管理员账号
+		$('body').on('click','.modify-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['修改账号','border-bottom:1px solid #d9d9d9;'],
+				className:'addAdminLayer',
+				content:addAdminAccount,
+				btn:['确定','取消'],
+				success:function(){
+					var dialogForm = $('.addAdminLayer .addAdminForm');
+					copyDataByName(_this,dialogForm);
+				},
+				yes:function(index){
+					var postData=$('.addAdminForm').serializeObject();
+					var content='';
+					if(!postData.name){
+						content='请填写姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					postData.id = _this.data('id');
+					postData.userFactoryId = _this.data('user_factory_id');
+					var config = {
+						url:module + 'Manager/edit',
+						postData:postData,
+						modifyObj:_this,
+						index:index
+					};
+					dialogFormEdit(config);
+				}
+			});
+		});
+		//删除管理员账号
+		$('body').on('click','.delete-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['删除账号','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
+				className:'addAdminLayer',
+				content:addAdminAccount,
+				btn:['确定','取消'],
+				success:function(){
+					copyDataByName(_this,$('.addAdminLayer .addAdminForm'));
+				},
+				yes:function(index){
+					var postData = {};
+					postData.userFactoryId = _this.data('user_factory_id');
+					var config = {
+						url:module + 'Manager/del',
+						postData:postData,
+						delObj:_this,
+						index:index
+					};
+					dialogFormDel(config);
+				}
+			});
+		});
+		$('body').on('click','.list li',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$(this).find('.operate-btn').show();
+			$(this).siblings().find('.operate-btn').hide();
+		});
+	});
+</script>
+{/block}
