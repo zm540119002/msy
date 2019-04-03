@@ -44,6 +44,7 @@ class Payment extends \think\Controller {
     //订单-支付
     public function orderPayment(){
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
+            return 11;
             $this -> error('参数错误');
         }
         $orderSn = input('order_sn','','string');
@@ -72,6 +73,7 @@ class Payment extends \think\Controller {
 
         //维雅平台支付
         if($systemId == 1){
+            return 22;
 //            if ($orderInfo['order_status'] > 1) {
 //                return errorMsg('订单支付',['code'=>1]);
 //            }
