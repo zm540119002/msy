@@ -1,0 +1,34 @@
+
+{notempty name='list'}
+{volist name="list" id="vo"}
+<li data-id="{$vo.id}">
+    <a class="product-square-box">
+        {notempty name="vo.thumb_img"}
+        <img src="public_uploads/{$vo.thumb_img}" alt="" class="product-square-img">
+        {else /}
+        <img src="public_img/default/no_pic_100.jpg" alt="" class="product-square-img">
+        {/notempty}
+    </a>
+    <p class="product-title text-intro">{$vo.name}</p>
+    <div class="columns_flex two-flex">
+        <div class="pink">
+            ￥<price>{$vo.sale_price}</price>
+        </div>
+        {notempty name="vo.shelf_status"}
+        {if $vo.shelf_status == 1 }
+        <a href="javascript:void(0);" class="shelf small-btn up-shelf"  data-shelf="2">上架</a>
+        {elseif $vo.shelf_status == 2 /}
+        <a href="javascript:void(0);" class="small-btn apply-shelf" disabled="disabled">已申请</a>
+        {elseif $vo.shelf_status == 3 /}
+        <a href="javascript:void(0);" class="shelf small-btn down-shelf" data-shelf="1">下架</a>
+        {/if}
+        {/notempty}
+    </div>
+</li>
+{/volist}
+{else /}
+{if $page == 1}
+<li class='no-record'>没有符合条件的记录！</li>
+{else /}
+{/if}
+{/notempty}

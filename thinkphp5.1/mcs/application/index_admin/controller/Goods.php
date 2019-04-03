@@ -171,7 +171,7 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
+                'g.id','g.name','g.number','g.bulk_price','g.sample_price','g.sort','g.is_selection',
                 'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
@@ -181,6 +181,7 @@ class Goods extends Base {
 //            ],
             'order'=>[
                 'g.sort'=>'desc',
+                'g.number'=>'desc',
                 'g.id'=>'desc',
             ],
         ];

@@ -1,0 +1,72 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="title"}开店部署{/block}
+{block name="content"}
+<article class="f24">
+	{include file="public/switch_factory_head" /}
+	<section class="specific_type bottomLine">
+		<div class="columns_flex f20 l-r-sides">
+			<a href="{:url('Record/preview')}">企业档案</a>
+			<a href="{:url('Brand/manage')}">商标备案</a>
+			<a href="{:url('Store/manage')}">开店申请</a>
+			<a href="{:url('Organize/index')}">组别角色</a>
+			<a href="{:url('Account/index')}">账号授权</a>
+		</div>
+	</section>
+	<section class="f24 account-content-wrapper ">
+		<div class="account-top">
+			<!--<div>企业名称：<span>某某公司</span></div>
+			<p>管理员进行账户授权前请阅读以下角色类型与权限说明</p>-->
+			<dl>
+				<dt class="role-label">【操作提示】</dt>
+				<dd>
+					<p>这里是管理员中心，如你有多个采购商账号请先选切换相应帐号进行开店部署操作，管理员可先新增管理员帐号协助进行开店部署。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">企业档案：</dt>
+				<dd>
+					<p>开店前请先完善企业档案，选择所见所得和传统模式的编辑方式。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">商标备案：</dt>
+				<dd>
+					<p>为避免商标知识产权纠纷，凡宣称为商标者应提供商标的已注册/注册中的证明，非商标所有权的商户应提交商标拥有人的使用授权书，注意申请开通品牌官方旗舰店前需先进行商标备案。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">开店申请:</dt>
+				<dd>
+					<p>开店申请时需选择店铺类型（企业官方旗舰店或品牌官方旗舰店）和经营模式（采购、分成、零售经营模式，店铺分别出现在采购商城、分成商城和零售商城），企业官方旗舰店凭营业执照申请开通即可，品牌官方旗舰店凭营业执照和商标证（已注册或注册中商标证明，非商标所有人企业需递交商标使用授权证明）。官方旗舰店按店铺类型和经营模式组合的需要分别申请开通。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">组别角色:</dt>
+				<dd>
+					<p>设定企业的组织架构（仅设置与店铺运营和订单管理有关的部门人员），设定组别角色的默认权限；每当新开一家店铺后应及时更新组别角色对该店铺的经营管理权限。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="role-label">帐号授权：</dt>
+				<dd>
+					<p>总经理及助理按总经理组别，总监及助理按总监组别，其他类推。帐号授权可为店铺的运营、客服和财务业务设立采购商员工登陆帐号和角色授权。</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/footer_menu_msy_factory.html" /}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+$(function () {
+});
+</script>
+{/block}
