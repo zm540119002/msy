@@ -4719,3 +4719,17 @@ select[name="nodeIds"]{
 .pay_nav li.current .selected{
      background-position:0 -0.46rem;
 }
+.bank_transfer{
+    padding:0.15rem 0 0;
+    margin:0.15rem 0 0;
+    border-top:1px solid #d9d9d9;
+}
+.bank_transfer::after{
+    top:54%;
+}
+.bankTransferLayer .upload-picture-module{
+    display:block;
+}
+.bankTransferLayer .upload-picture-module .picture-module{
+    margin:0 auto;
+}
