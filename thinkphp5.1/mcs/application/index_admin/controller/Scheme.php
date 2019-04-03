@@ -101,6 +101,7 @@ class Scheme extends Base {
 
         $where[] = ['status','=',0];
         // 条件
+        if(isset($_GET['shelf_status'])&&$shelf_status=input('get.shelf_status/d'))  $where[] = ['shelf_status','=',$shelf_status];
         $keyword = input('get.keyword/s');
         if($keyword) $where[] = ['name','like', '%' . trim($keyword) . '%'];
 

@@ -32,6 +32,8 @@ class Project extends Base {
             if($id = input('param.id/d')){
                 $condition = ['where' => [['id','=',$id]]];
                 $info = $model->getInfo($condition);
+                // 选中的店铺
+                $info['belong_to'] = strrev(decbin($info['belong_to']));
                 $this->assign('info',$info);
             }
             return $this->fetch();
@@ -39,16 +41,16 @@ class Project extends Base {
         }else{
             // 基础处理
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.project'),basename($_POST['thumb_img']));
             }
             if(  isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['main_img']));
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.project'),basename($_POST['main_img']));
             }
 
             if( isset($_POST['video']) && $_POST['video'] ){
-                $_POST['video'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['video']));
+                $_POST['video'] = moveImgFromTemp(config('upload_dir.project'),basename($_POST['video']));
             }
-
+            $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
             $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
@@ -120,7 +122,7 @@ class Project extends Base {
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','video'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','belong_to','video'],
             'order'=>['id'=>'desc', 'sort'=>'desc',],
         ];
         $list = $this->obj->pageQuery($condition);

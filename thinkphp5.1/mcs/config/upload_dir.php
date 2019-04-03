@@ -26,6 +26,7 @@ return [
     'project' => 'mcs_project/',    //项目图片
     'scene' => 'mcs_scene/',        //场景图片
     'scheme' => 'mcs_scheme/',      //方案图片
+    'promotion' => 'mcs_promotion/',//促销图片
     'information' => 'mcs_information/',    // ??
     'goods_gategory' => 'mcs_goods_gategory/',//商品分类图片
     'user_avatar' => 'user_avatar/',    //用户头像目录

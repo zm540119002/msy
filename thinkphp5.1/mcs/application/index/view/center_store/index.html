@@ -85,21 +85,13 @@
 			<section class="slider_banner">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide swiper-slide-active">
-							<a href="">
-								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
+						{volist name="promotionList" id="vo"}
+						<div class="swiper-slide">
+							<a href="{:url('promotion/detail',['id'=>$vo.id])}">
+								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
 							</a>
 						</div>
-						<div class="swiper-slide ">
-							<a href="">
-								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
-							</a>
-						</div>
-						<div class="swiper-slide ">
-							<a href="">
-								<img src="public_img/banner/xianshi.jpg" alt="" class="common_default_img">
-							</a>
-						</div>
+						{/volist}
 					</div>
 					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
@@ -116,8 +108,8 @@
 					{volist name="lists" id="list" }
 					<div class="columns_flex l-r-sides" >
 						{volist name="list" id="vo" }
-						<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
-							<img src="public_uploads/{$vo.thumb_img}" alt="">
+						<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item" title="{$vo.name}">
+							<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
 						</a>
 						{/volist}
 					</div>
@@ -141,48 +133,12 @@
 		</div>
 	</section>
 </article>
-<section class="bottom_nav_fixed bottom_white">
-	<nav class=" foot_nav_bar">
-		<ul class="columns_flex">
-			<li class="each_column">
-				<a href="{:url('Index/index')}">
-					<span class="store f_icon"></span>
-					<span class="f_txt">美创社</span>
-				</a>
-			</li>
-			<li class="each_column current">
-				<!--{:url('Company/index')}-->
-				<a href="javascript:void(0)" >
-					<span class="practitioners f_icon "></span>
-					<span class="f_txt">中心店</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<!--{:url('Consultation/index')}-->
-				<a href="{:url('Studio/index')}">
-					<span class="business f_icon"></span>
-					<span class="f_txt">工作室</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a href="javascript:void(0)" class="my_bottom_cart" data-jump_url="{:url('Cart/manage')}">
-					<span class="cart f_icon"></span>
-					<span class="f_txt">采购车</span>
-				</a>
-			</li>
-			<li class="each_column">
-				<a href="{:url('Mine/index')}">
-					<span class="my f_icon"></span>
-					<span class="f_txt">我的</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-</section>
 {/block}
 {block name="common"}
 {/block}
-{block name="footer"}{/block}
+{block name="footer"}
+{include file="template/footer_project.html" /}
+{/block}
 {block name="script"}
 <script type="text/javascript" src="public_js/swiper.min.js"></script>
 <script type="text/javascript">

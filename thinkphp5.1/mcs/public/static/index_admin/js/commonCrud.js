@@ -108,7 +108,7 @@ $('body').on('click','.set-shelf-status',function(){
                         if(shelf_status == 3){
                             _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
                             _this.data('shelf-status',1);
-                            _this.attr('title','发布');
+                            _this.attr('title','上架');
 
                         }else{
                             _thisTr.find(".shelf-status").html('<span class="label label-success radius">已发布</span>');
