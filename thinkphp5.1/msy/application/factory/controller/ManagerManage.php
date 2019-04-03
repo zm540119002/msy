@@ -2,10 +2,6 @@
 namespace app\factory\controller;
 
 class ManagerManage extends \common\controller\FactoryStoreBase{
-    public function __construct(){
-        parent::__construct();
-    }
-
     /**首页
      */
     public function index(){
