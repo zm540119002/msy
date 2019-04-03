@@ -188,7 +188,6 @@ EOF;
      * H5 微信支付
      */
     public static function h5_pay($payInfo){
-        print_r($payInfo);exit;
         //统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
         //使用统一支付接口
         $input = new \WxPayUnifiedOrder();
