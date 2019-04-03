@@ -4651,3 +4651,70 @@ select[name="nodeIds"]{
 .c_mobile p:first-child{
     margin:0.12rem 0 0.15rem 0;
 }
+/*结算订单*/
+.pay_form,.recharge_form{
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+}
+.recharge_form{
+    height:0.8rem;
+    line-height:0.8rem;
+    border-top:1px solid #ccc;
+}
+.recharge_form span,
+.recharge_form input{
+    display: block;
+    width:50%;
+    float:left;
+}
+.recharge_form input[type="submit"]{
+    height:100%;
+    background: #FF7BAC;
+    color:#fff;
+}
+.pay_amount_item{
+    background:#fff;
+}
+.pay_form input[type="submit"]{
+    width:100%;
+    display: block;
+    padding:0.20rem 0;
+    background: #EC77A3;
+    color:#fff;
+}
+.pay_nav li{
+    height:0.68rem;
+    line-height:0.68rem;
+    background: #fff;
+    padding:0 0 0 0.25rem;
+    margin:0 0 0.25rem 0;
+    border-radius:4px;
+}
+.pay_nav li input{
+    float:left;
+    width:0.35rem;
+    height:0.35rem;
+    margin:0 0.12rem 0 0;
+    border:1px solid #575757;
+    border-radius: 100%;
+}
+.pay_nav li .selected{
+    width:0.40rem;
+    height:0.40rem;
+    float:left;
+    margin:0.15rem 0.12rem 0 0;
+    background-image: url(../../common/img/icons/pay_selected_icons.png);
+    background-repeat: no-repeat;
+    background-size: 0.42rem .85rem;
+    background-position:0 0;
+}
+.pay_nav li.current,
+.recharge_m_list li.current{
+    background:#009A3E;
+    color:#fff;
+}
+.pay_nav li.current .selected{
+     background-position:0 -0.46rem;
+}
