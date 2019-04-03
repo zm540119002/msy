@@ -73,7 +73,6 @@ class Payment extends \think\Controller {
 
         //维雅平台支付
         if($systemId == 1){
-            return 22;
 //            if ($orderInfo['order_status'] > 1) {
 //                return errorMsg('订单支付',['code'=>1]);
 //            }
@@ -87,6 +86,7 @@ class Payment extends \think\Controller {
                 'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
                 'attach'=>$attach
             ];
+            print_r($payInfo);exit;
         }
         $payCode = input('pay_code','0','int');
         //微信支付
