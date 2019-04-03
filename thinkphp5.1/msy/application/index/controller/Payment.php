@@ -43,8 +43,8 @@ class Payment extends \think\Controller {
 
     //订单-支付
     public function orderPayment(){
-        return input();
-        //微信支付
+        print_r(input())
+;exit;        //微信支付
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
             $this -> error('参数错误');
         }
