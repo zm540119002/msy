@@ -67,7 +67,6 @@ class Payment extends \think\Controller {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
-        print_r($orderInfo);exit;
         if($orderInfo['actually_amount']<=0){
             $this -> error('支付不能为0');
         }
