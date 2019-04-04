@@ -148,7 +148,7 @@ class Goods extends Base {
         $model = new \app\index_admin\model\Goods();
 
         $where[] = ['g.status','=',0];
-        $where[] = ['g.shelf_status','=', 3];
+
         if($category_id_1 = input('category_id_1/d')){
             $where[] = ['g.category_id_1','=',$category_id_1];
         }

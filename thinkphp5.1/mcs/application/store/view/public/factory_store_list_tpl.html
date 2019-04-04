@@ -1,0 +1,27 @@
+{notempty name='factoryStoreList'}
+    {volist name="factoryStoreList" id="factory"}
+    <div><span>{$factory.factory_name}</span></div>
+    <ul data-id="{$factory.factory_id}">
+        {volist name="factory.storeList" id="storeInfo"}
+        <li data-id="{$storeInfo.store_id}">
+            {notempty name="storeInfo.logo_img"}
+            <img  class="store_logo left" src="public_uploads/{$storeInfo.logo_img|default=''}" />
+            {else /}
+            <img  class="store_logo left" src="public_img/default/no_pic_40.jpg" />
+            {/notempty}
+            <div>
+                <p>
+                    <span>{$storeInfo.store_name}</span>{$storeInfo.store_type|getStoreType}
+                </p>
+                <p>
+                    <span>{$storeInfo.run_type|getRunType}</span>
+                    <span>.</span>
+                    {$storeInfo.operational_model|getOperationalModel}
+                </p>
+            </div>
+        </li>
+        {/volist}
+    </ul>
+    {/volist}
+{else /}
+{/notempty}

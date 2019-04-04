@@ -30,7 +30,7 @@ return [
         ],*/
         'CenterStore/index' => [
             'name' => '中心店',
-            'a'    => 'href='.url('CenterStore/index'),
+            'a'    => 'href='.url('Store/Index/index'),
             'icon' => 'practitioners',
         ],
         'Studio/index' => [
@@ -49,5 +49,7 @@ return [
             'icon' => 'my',
         ],
     ],
+
+    'pay_gateway'=>'https://msy.meishangyun.com/index/Payment/toPay/system_id/2/order_sn/'
 ];
 

@@ -1,0 +1,98 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">
+{/block}
+{block name="content"}
+<article class="f24">
+	<section class="bottomLine">
+		<div class="top_bar top-title">
+			<span></span>
+			<h2>入驻申请</h2>
+			{include file="public/home_page" /}
+		</div>
+	</section>
+	<section>
+		<div id="wizard" class="page-bd">
+			<nav class="apply-data-nav">
+				<ul id="status " class="status f24 weui-flex">
+					<li class="weui-flex-item switch-item current"><span class="base_info"></span><em></em>机构信息</li>
+					<li class="weui-flex-item switch-item "><span class="upload-prove"></span><em></em>上传材料</li>
+					<li class="weui-flex-item "><span class="opening"></span>开通账号</li>
+				</ul>
+			</nav>
+			<div class="apply-data-content">
+				<div class="apply-module ">
+					<form class="">
+						{notempty name="factoryInfo"}
+						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
+						{/notempty}
+						<div class="apply-items">
+							<input type="text" class="factoryFullName " name="" value="{$factoryInfo.name|default=''}" placeholder="企业全称(与营业执照相同)">
+						</div>
+						<div class="apply-items">
+							<input type="text" class="agentName " name="" value="{$factoryInfo.agent|default=''}" placeholder="代办人姓名">
+						</div>
+						<div>
+							手机号码
+							<span>{$mobilePhone}</span>
+							(已验证)
+						</div>
+						<a href="javascript:void(0);" class="one-step step">下一步</a>
+						<p class="upload-data-explain f20">申请入驻需要递交企业营业执照（加盖公章）、代办人企业介绍信（含代办人姓名和手机号码信息），请准备好材料提前拍照以备在线上传照片</p>
+					</form>
+				</div>
+				<div class="apply-module hide">
+					<p class="f20"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+					<form>
+						<ul class="upload-picture-module apply-data-picture f24">
+							<li>
+								<div class="picture-module">
+									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="factoryInfo.business_license"}
+									<img class="upload_img" src="public_uploads/{$factoryInfo.business_license|default=''}" alt="">
+									{else /}
+									<img class="upload_img" src="public_img/default/no_pic_100.jpg" alt="">
+									{/notempty}
+
+									<input type="hidden" class="business-license img" value="{$factoryInfo.business_license|default=''}"/>
+								</div>
+								<p>企业营业执照</p>
+							</li>
+							<li>
+								<div class="picture-module">
+									<input type="file" class="uploadImg uploadSingleImg" name="">
+									{notempty name="factoryInfo.auth_letter"}
+									<img class="upload_img" src="public_uploads/{$factoryInfo.auth_letter|default=''}"  alt="">
+									{else /}
+									<img class="upload_img" src="public_img/default/no_pic_100.jpg"  alt="">
+									{/notempty}
+									<input type="hidden" class="agent-authorization img" value="{$factoryInfo.auth_letter|default=''}"/>
+								</div>
+								<p>企业介绍信</p>
+							</li>
+						</ul>
+						<a href="javascript:void(0);" class="two-step step">提交申请</a>
+					</form>
+				</div>
+				<div class="apply-module hide">
+					<div class="success-tipc">
+						<p>恭喜,已开通采购商入驻账号!</p>
+						<p>请到入驻部署进行管理。</p>
+					</div>
+					<a href="javascript:void(0);" class="three-step cofirm-btn step">确定</a>
+				</div>
+			</div>
+		</div>
+		<a href="" class="joint_instruction">免费入驻及自营联营说明</a>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/right_side_bar.html" /}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/swipe.js"></script>
+<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="store_js/register.js"></script>
+{/block}

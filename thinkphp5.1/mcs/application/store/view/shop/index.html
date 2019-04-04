@@ -1,0 +1,215 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="store_css/main.css">{/block}
+{block name="content"}
+<!--设置店长-->
+<section id="entryShopInfo" style="display:none;">
+	<form class="entryShopForm">
+		<div class="account-field">
+			<input class="f20 store_name " type="text" placeholder="门店名称" name="shop_name">
+		</div>
+		<div class="account-field">
+			<input class="f20 store_name input_disabled" type="text" placeholder="店长姓名" name="name">
+		</div>
+		<div class="account-field">
+			<input class="f20 store_mobile input_disabled" type="tel" placeholder="手机号码" name="mobile_phone">
+		</div>
+	</form>
+	<div class="error_tipc"></div>
+</section>
+<section style="display: none;" id="storeInfoList">
+	<li class="columns_flex l-r-sides">
+		<div>
+			<p>
+				<input class="input_size" type="text" value="" name="store_name" readonly="readonly">
+				<span>门店</span>
+			</p>
+			<div>
+				<span>店长:</span>
+				<input type="text" value="" name="name" readonly="readonly"/>
+			</div>
+			<div>
+				<span>手机号码:</span>
+				<input type="tel" value="" name="mobile_phone" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="operate-btn">
+			<a href="javascript:void(0);" class="modify-account">
+				<span></span>
+				修改
+			</a>
+			<a href="javascript:void(0);" class="delete-account">
+				<span></span>
+				删除
+			</a>
+		</div>
+	</li>
+</section>
+<article class="f24 app-content">
+	<section class="app-shell">
+		<div class="app-view-wrapper">
+			<div class="app-view">
+				<div class="bodys-header">
+					{include file="public/switch_factory_head" /}
+					<section class="specific_type bottomLine store_deploy_nav">
+						<div class="columns_flex f20 l-r-sides store_deploy_bar">
+							<a href="{:url('Manager/index')}">管理员</a>
+							<a href="{:url('Record/preview')}">档案</a>
+							<a href="{:url('Brand/manage')}">商标</a>
+							<a href="{:url('Store/manage')}">开店</a>
+							<a href="{:url('Store/getList')}">店铺</a>
+							<a href="{:url('Shop/index')}" class="current">门店</a>
+							<a href="javascript:void(0);">财务</a>
+						</div>
+					</section>
+				</div>
+				<div class="page-wrap">
+					<div class="bodys bodys_short" id="bodys">
+						<div class="content-wrapper">
+							<section class="columns_flex l-r-sides content-padding">
+								<div>
+									<img class="left" src="" alt="" />
+									<div>
+										<p><span>{$store.name|default=''}</span>{$store.store_type|getStoreType}</p>
+										<div>{$store.run_type|getRunType}</div>
+									</div>
+								</div>
+								<div>
+									{include file="public/switch_store_head_2" /}
+								</div>
+							</section>
+							<section class="f24 account-content-wrapper">
+								<ul class="list"></ul>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+<a href="javascript:void(0);" class="foot-btn f24 entry_shop_info">录入线下门店信息</a>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function(){
+		//页面初始化
+		var config = {
+			url: module + 'Shop/index'
+		};
+		//有默认店铺
+		var store_id = {:json_encode($store.id)};
+		if(store_id){
+			getList(config);
+		}
+		//录入门店信息
+		var entryShopInfo=$('#entryShopInfo').html();
+		$('body').on('click','.entry_shop_info',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['录入线下门店信息','border-bottom:1px solid #d9d9d9;'],
+				className:'entryShopInfoLayer',
+				content:entryShopInfo,
+				btn:['确定','取消'],
+				success:function () {
+				},
+				yes:function(index){
+					var dialogForm = $('.entryShopForm');
+					var postData = dialogForm.serializeObject();
+					var content='';
+					if(!postData.shop_name){
+						content='请填写门店名称';
+					}else if(!postData.name){
+						content='请填写店长姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					var config = {
+						url:module + 'Shop/edit',
+						postData:postData,
+						fromObj:dialogForm,
+						toObj:_this,
+						index:index
+					};
+					dialogFormAdd(config)
+				}
+			});
+		});
+		//修改门店信息
+		$('body').on('click','.modify-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['修改线下门店信息','border-bottom:1px solid #d9d9d9;'],
+				className:'setShopAccountLayer',
+				content:entryShopInfo,
+				btn:['确定','取消'],
+				success:function(){
+					var dialogForm = $('.setShopAccountLayer .entryShopForm');
+					copyDataByName(_this,dialogForm);
+				},
+				yes:function(index){
+					var dialogForm = $('.setShopAccountLayer .entryShopForm');
+					var postData=dialogForm.serializeObject();
+					var content='';
+					if(!postData.shop_name){
+						content='请填写门店名称';
+					}else if(!postData.name){
+						content='请填写店长姓名';
+					}else if(!register.phoneCheck(postData.mobile_phone)){
+						content='请填写手机号码';
+					}
+					if(content){
+						errorTipc(content);
+						return false;
+					}
+					postData.shopId = _this.data('shop_id');
+					postData.userShopId = _this.data('user_shop_id');
+					var config = {
+						url:module + 'Shop/edit',
+						postData:postData,
+						modifyObj:_this,
+						index:index
+					};
+					dialogFormEdit(config);
+				}
+			});
+		});
+		//删除店长
+		$('body').on('click','.delete-account',function(){
+			var _this=$(this).parents('.list li');
+			layer.open({
+				title:['删除线下门店信息','border-bottom:1px solid #d9d9d9;color:#ff0000;'],
+				className:'setShopAccountLayer',
+				content:entryShopInfo,
+				btn:['确定','取消'],
+				success:function(){
+					copyDataByName(_this,$('.setShopAccountLayer .entryShopForm'));
+				},
+				yes:function(index){
+					var postData = {};
+					postData.shopId = _this.data('shop_id');
+					postData.userShopId = _this.data('user_shop_id');
+					var config = {
+						url:module + 'Shop/del',
+						postData:postData,
+						delObj:_this,
+						index:index
+					};
+					dialogFormDel(config);
+				}
+			});
+		});
+		$('body').on('click','.list li',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$(this).find('.operate-btn').show();
+			$(this).siblings().find('.operate-btn').hide();
+		});
+	});
+</script>
+{/block}

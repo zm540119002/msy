@@ -20,9 +20,16 @@ return [
      * 根据系统号连接不同数据库
      */
     'system_id'=>[
-        '1'=>'db_config_weiya',
-        '2'=>'db_config_mcs',
+        '1'=>[
+            'db'=>'db_config_weiya',
+            'jump_url'=>'https://www.worldview.com.cn/index/Order/manage/order_status/2',
+            ],
+        '2'=>[
+            'db'=>'db_config_mcs',
+            'jump_url'=>'https://mcs.meiishangyun.com/index/Order/manage/order_status/2',
+        ],
     ]
+
 ];
 
 

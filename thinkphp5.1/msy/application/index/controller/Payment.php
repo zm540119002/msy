@@ -8,18 +8,10 @@ class Payment extends \common\controller\Base {
     //去支付
     public function toPay()
     {
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-        }
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
-        $modelOrder ->connection = config('custom.system_id')[$systemId];
+        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
         $orderSn = input('order_sn');
         $config = [
             'where' => [
@@ -32,10 +24,25 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
+
+        if(empty($orderInfo) OR !$orderInfo['amount']){
+            $this->error('订单不存在或金额不能为0 !');
+        }
+
         $this->assign('orderInfo', $orderInfo);
+
+        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+            $payOpenId =  session('pay_open_id');
+            if(empty($payOpenId)){
+                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $payOpenId  = $tools->getOpenid();
+                session('pay_open_id',$payOpenId);
+            }
+        }
+
         //钱包
         $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->connection = config('custom.system_id')[$systemId];
+        $modelWallet ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -61,8 +68,7 @@ class Payment extends \common\controller\Base {
             'system_id' =>$systemId,
         ];
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->connection = config('custom.system_id')[$systemId];
-
+        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
             'where' => [
                 ['o.status', '=', 0],
@@ -78,22 +84,17 @@ class Payment extends \common\controller\Base {
             $this -> error('支付不能为0');
         }
 
-        //维雅平台支付
-        if($systemId == 1){
-//            if ($orderInfo['order_status'] > 1) {
-//                return errorMsg('订单支付',['code'=>1]);
-//            }
-            $attach = json_encode($attach);
-            $payInfo = [
-                'sn'=>$orderInfo['sn'],
-                'actually_amount'=>$orderInfo['actually_amount'],
-                'return_url' => $this->host.url('payComplete'),
-                'cancel_url' => $this->host.url('payCancel'),
-                'fail_url' => $this->host.url('payFail'),
-                'notify_url'=>$this->host."/index/".config('wx_config.call_back_url'),
-                'attach'=>$attach
-            ];
-        }
+        $jump_url =config('custom.system_id')[$systemId]['jump_url'];
+        $return_url = config('wx_config.return_url');
+        $attach = json_encode($attach);
+        $payInfo = [
+            'sn'=>$orderInfo['sn'],
+            'actually_amount'=>$orderInfo['actually_amount'],
+            'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+            'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+            'notify_url'=>config('wx_config.notify_url'),
+            'attach'=>$attach
+        ];
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
@@ -208,9 +209,6 @@ class Payment extends \common\controller\Base {
 
    //支付完跳转的页面
     public function payComplete(){
-        $arr = $_GET;
-        $model = new \common\component\payment\alipay\alipay;
-        $result = $model->check($arr);
         return $this->fetch();
     }
     //取消支付完跳转的页面
