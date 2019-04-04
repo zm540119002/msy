@@ -10,7 +10,7 @@
 	{block name="css-customize"}{/block}
 	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
-		var domain = '{:request()->domain()}'+'/'+'index.php/';
+		var domain = '{:request()->domain()}'+'/';
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
@@ -24,7 +24,7 @@
 {block name="content"}{/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
-{include file="template/login_dialog.html" /}
+{include file="../../api/public/template/login_dialog.html" /}
 <!-- 页脚模块-->
 {block name="footer"}
 <footer class="f24">
@@ -40,6 +40,7 @@
 <script type="text/javascript" src="public_js/common.js"></script>
 <script type="text/javascript" src="public_js/dialog.js"></script>
 <script type="text/javascript" src="public_js/forbidscroll.js"></script>
+<script type="text/javascript" src="api_common_js/login.js"></script>
 <!--自定义js-->
 {block name="script"}{/block}
 </body></html>
