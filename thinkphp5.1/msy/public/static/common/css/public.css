@@ -112,6 +112,9 @@ body{
 .input_item{
     margin:0 0 0.18rem 0;
 }
+#formLogin{
+    padding:0.25rem;
+}
 /*头部样式*/
 .header{
     width: 100%;
