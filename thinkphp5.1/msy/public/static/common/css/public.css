@@ -1227,6 +1227,9 @@ background-position: 0 -27px;
 .forgetPasswd_item .input_txt3,.login_item .input_txt3{
     /*padding-left:1rem;*/
 }
+.loginTab {
+    padding:0 0.25rem;
+}
 .mesg_code {
     /*position: absolute;*/
     width: 1.3rem;
