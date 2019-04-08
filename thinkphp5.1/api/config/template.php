@@ -30,7 +30,7 @@ return [
     // 标签库标签结束标记
     'taglib_end'   => '}',
     'tpl_replace_string' => [
-        //common  资源路径
+        //common  资源路径，此处不能命名成common_js，与下面的api_common_js冲突
         'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
         'public_img' => Request::domain() .'/static/common/img',
