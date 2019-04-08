@@ -91,7 +91,7 @@ $(function(){
     });
     //返回登录-事件
     $('body').on('click','.back_login',function(){
-        $(this).parents().remove();
+        $(this).parents('.layui-m-layer').remove();
     });
 });
 $(function(){
