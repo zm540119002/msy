@@ -53,7 +53,7 @@ function logoutDialog(){
 }
 //忘记密码-弹窗触发
 function forgetPasswordDialog(){
-    var content = $('#sectionForgetPassword').html();
+    var content = $('#formRegister').html();
     layer.open({
         className:'forgetPasswordLayer',
         content:content,
