@@ -14,7 +14,7 @@ function loginDialog(){
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
-            fixedLayer123();
+            fixedLayer();
         },
         yes:function(index){
             cancleFixedLayer();
