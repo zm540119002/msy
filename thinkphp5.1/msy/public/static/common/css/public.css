@@ -1221,11 +1221,14 @@ background-position: 0 -27px;
      background-position:15px -7px;
 }
 .use-item.hide{display: none;}
-.use-attention,.forget_password{
+.use-attention,.forget_password,.back_login{
     color:#3FA9F5;
 }
 .forgetPasswd_item .input_txt3,.login_item .input_txt3{
     /*padding-left:1rem;*/
+}
+.loginTab {
+    padding:0 0.25rem;
 }
 .mesg_code {
     /*position: absolute;*/
@@ -1395,7 +1398,7 @@ background-position: 0 -27px;
 .right_sidebar a.backTop{
    background: #3f3a39;
 }
-.bomb_box{
+.layui-m-layer .forgetPasswordLayer .layui-m-layercont{
     position:relative;
     padding:0 .25rem;
 }

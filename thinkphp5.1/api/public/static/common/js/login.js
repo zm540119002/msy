@@ -89,6 +89,10 @@ $(function(){
     $('body').on('click','.forget_dialog',function(){
         forgetPasswordDialog();
     });
+    //返回登录-事件
+    $('body').on('click','.back_login',function(){
+        $(this).parents('.layui-m-layer').remove();
+    });
 });
 $(function(){
     //登录 / 注册-切换
