@@ -703,7 +703,7 @@ function mobileNHide(param){
 //固定弹窗不滚动
 var winScrollTop;
 function fixedLayer(){
-    console.log(1);
+    alert(1);
     winScrollTop = $(document).scrollTop();//获取当前滚动条位置
     $("body").addClass("flexd");//设置绝对定位，此时不操作的话底层页面回到最初位置
     $("body").css("top",-winScrollTop);//设置top属性确保屏幕显示滚动条的当前位置
