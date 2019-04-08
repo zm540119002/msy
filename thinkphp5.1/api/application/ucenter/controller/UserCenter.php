@@ -32,17 +32,6 @@ class UserCenter extends \think\Controller{
             return $modelUser->register($postData);
         }
     }
-    /**忘记密码
-     */
-    public function forgetPassword(){
-        if (request()->isAjax()) {
-            $modelUser = new \common\model\UserCenter();
-            $postData = input('post.');
-            return $modelUser->resetPassword($postData);
-        } else {
-            return $this->fetch();
-        }
-    }
     //退出
     public function logout(){
         session(null);
