@@ -233,9 +233,7 @@ textarea.text_description{
     -ms-transform: translateY(0);
     transform: translateY(0);
 }
-#formLogin{
-    padding:0.25rem;
-}
+
 /******轮播样式***********/
 /*#slider,#slider1{
     width: 100%;
