@@ -135,7 +135,7 @@ $(function(){
                         loginDialog();
                     }
                 }else{
-                    loginBackFunction(data);
+                    loginBackFunction();
                 }
             }
         });
