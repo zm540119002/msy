@@ -18,6 +18,7 @@ function loginDialog(){
         },
         yes:function(index){
             cancleFixedLayer();
+            $('.loginTab').eq(0).show();
             layer.close(index);
         }
     });
