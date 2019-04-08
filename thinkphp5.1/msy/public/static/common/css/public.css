@@ -4736,3 +4736,73 @@ select[name="nodeIds"]{
 .bankTransferLayer .upload-picture-module .picture-module{
     margin:0 auto;
 }
+.layui-m-layer-shareqrCodeLayer .layui-m-layercont{
+    padding:10px;
+}
+.goodsInfoLayer .layui-m-layerbtn,
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn,
+.loginLayer .layui-m-layerbtn,
+.forgetPasswordLayer .layui-m-layerbtn{
+    position:absolute;
+    top:-25px;
+    right:0;
+    width:40px;
+}
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn{
+    border-radius: 100%;
+    height: 40px;
+    line-height: 40px;
+    right: -10px;
+    top:-14px;
+}
+.goodsInfoLayer .layui-m-layerbtn,
+.loginLayer .layui-m-layerbtn,
+.forgetPasswordLayer .layui-m-layerbtn,
+.brandLayer .layui-m-layerbtn,
+.userInfoLayer .layui-m-layerbtn{
+    width:0.5rem;
+    height:0.5rem;
+    line-height:0.5rem;
+    border-radius: 100%;
+    background-image:url(../../common/img/icons/layer_close.png);
+    background-size:0.5rem;
+    background-position:center;
+    top:-32px;
+    background-color:transparent;
+    border-top:none;
+}
+.loginLayer .layui-m-layerbtn,
+.forgetPasswordLayer .layui-m-layerbtn,
+.payPasswordLayer .layui-m-layerbtn span[type="0"],
+.forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
+    background-image:url(../../common/img/icons/close_btn.png);
+    background-repeat:no-repeat;
+    background-size: 0.25rem auto;
+    top:3px;
+    right:0;
+}
+.payPasswordLayer .layui-m-layerbtn span[type="0"],
+.forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
+    top: -2.82rem;
+    right: 0;
+    width: 20px;
+    border-right: none;
+    position: absolute;
+    display: block;
+    height:16px;
+}
+.forgetWalletPasswordLayer .layui-m-layerbtn span[type="0"]{
+    top:-4.08rem;
+    /*right: -286px;*/
+}
+.layui-m-layer-shareqrCodeLayer .layui-m-layerbtn span{
+    color:#575757;
+}
+.forgetPasswordLayer .layui-m-layerbtn span[yes]{
+    background: transparent;
+}
+.goodsInfoLayer .bottom-layer-last{
+    height:40px;
+    line-height:40px;
+    margin-bottom:0;
+}
