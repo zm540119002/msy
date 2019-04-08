@@ -7,7 +7,7 @@ function loginDialog(){
         type:1,
         shadeClose:false,
         content:content,
-        title:['登录','border-bottom:1px solid #d9d9d9;'],
+        // title:['登录','border-bottom:1px solid #d9d9d9;'],
         btn:[''],
         success:function(indexs,i){
             tab_down('.loginNav li','.loginTab .login_wrap','click');
