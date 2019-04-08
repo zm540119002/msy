@@ -1,16 +1,15 @@
 //登录-弹窗触发
 function loginDialog(){
-    var content=$('#dialLogin').html();
+    var content=$('.userInfoWrapper').html();
     window.scrollTo(0,0);
     layer.open({
         className:'loginLayer',
         type:1,
         shadeClose:false,
         content:content,
-        title:['登录','border-bottom:1px solid #d9d9d9;'],
         btn:[''],
         success:function(indexs,i){
-            tab_down('.loginNav li','.loginTab .login_wrap','click');
+            tab_down('.loginNav li','.loginTab','click');
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
@@ -18,6 +17,7 @@ function loginDialog(){
         },
         yes:function(index){
             cancleFixedLayer();
+            $('.loginTab').eq(0).show();
             layer.close(index);
         }
     });
@@ -51,26 +51,6 @@ function logoutDialog(){
         }
     });
 }
-//忘记密码-弹窗触发
-function forgetPasswordDialog(){
-    var content = $('#formRegister').html();
-    layer.open({
-        className:'forgetPasswordLayer',
-        content:content,
-        type:1,
-        shadeClose:false,
-        btn:[''],
-        success:function(){
-            $('.login_item .password').attr('type','password');
-            $('.view-password').removeClass('active');
-            fixedLayer();
-        },
-        yes:function(index){
-            cancleFixedLayer();
-            layer.close(index);
-        }
-    });
-}
 var loginBackFunctionParameter = {};
 var loginBackFunction = function(parameter){
     location.href = parameter.jump_url;
@@ -85,54 +65,21 @@ $(function(){
     $('body').on('click','#logout_dialog',function(){
         logoutDialog();
     });
-    //忘记密码-弹窗事件
-    $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog();
-    });
     //返回登录-事件
     $('body').on('click','.back_login',function(){
         $(this).parents('.layui-m-layer').remove();
     });
 });
 $(function(){
-    //登录 / 注册-切换
-    tab_down('.loginNav li','.loginTab ','click');
     //登录 or 注册 or 重置密码
-    $('body').on('click','.loginBtn,.registerBtn,.comfirmBtn',function(){
+    tab_down('.loginNav li','.loginTab ','click');
+    $('body').on('click','.loginBtn,.registerBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
         var url = domain+'ucenter/UserCenter/'+method;
-        // console.log(url);
+        var postData = _this.parents('form').serializeObject();
+        // console.log(postData);
         // return false;
-        var postForm = null;
-        var loginSign = 'dialog';
-        if(method=='login' || method=='login_admin'){//登录
-            if($('.loginLayer #formLogin').length){//弹框登录
-                postForm = $('.loginLayer #formLogin');
-            }else{//页面登录
-                loginSign = 'page';
-                postForm = $('#formLogin');
-            }
-        }else if(method=='register'){//注册
-            if($('.loginLayer #formRegister').length){//弹框注册
-                postForm = $('.loginLayer #formRegister');
-            }else{//页面注册
-                loginSign = 'page';
-                postForm = $('#formRegister');
-            }
-        }else if(method=='forgetPassword'){//重置密码
-            if($('.forgetPasswordLayer  #formForgetPassword').length){//弹框重置密码
-                postForm = $('.forgetPasswordLayer #formForgetPassword');
-            }else{//页面重置密码
-                loginSign = 'page';
-                postForm = $('#formForgetPassword');
-            }
-        }
-        if(!postForm){
-            dialog.error('未知操作');
-            return false;
-        }
-        var postData = postForm.serializeObject();
         var content='';
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
@@ -149,16 +96,11 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
-                    if(loginSign=='page'){
-                        // location.href = data.info;
-                    }else if(loginSign=='dialog'){
-                         $('.layui-m-layer').remove();
-                    }
+                    $('.layui-m-layer').remove();
                     loginBackFunctionParameter.jump_url = data.info;
                     loginBackFunction(loginBackFunctionParameter);
                 }
@@ -166,7 +108,6 @@ $(function(){
         }
     });
     //显示隐藏密码
-    //var onOff = true;
     $('body').on('click','.view-password',function(){
         var _this=$(this);
         //_this.toggleClass('active');

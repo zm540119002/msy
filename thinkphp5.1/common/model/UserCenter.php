@@ -9,19 +9,6 @@ class UserCenter extends Base {
 	// 设置当前模型的数据库连接
 	protected $connection = 'db_config_common';
 
-	/**登录-账号检查
-	 */
-	public function loginCheck($mobilePhone){
-		$where = [
-			['mobile_phone','=',$mobilePhone],
-		];
-		$field = [
-			'status',
-		];
-		$user = $this->where($where)->field($field)->find();
-		return $user;
-	}
-
 	/**登录
 	 */
 	public function login($data){
@@ -32,11 +19,13 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('login')->check($data)) {
 				return errorMsg($validateUser->getError());
 			}
-			$user = $this->loginCheck($data['mobile_phone']);
+			$user = $this->_accountStatusCheck($data['mobile_phone']);
 			if(empty($user)){
 				return errorMsg('账号不存在');
 			}elseif ($user['status'] ==1){
-                return errorMsg('账号异常');
+                return errorMsg('账户已禁用');
+            }elseif ($user['status'] ==2){
+                return errorMsg('账号已删除');
             }
 			return $this->_login($data['mobile_phone'],$data['password']);
 		}else{
@@ -46,13 +35,12 @@ class UserCenter extends Base {
 
 	/**注册-账号检查
 	 */
-	public function registerCheck($mobilePhone){
+	private function _registerCheck($mobilePhone){
 		$where = [
 			['mobile_phone','=',$mobilePhone],
-			['status','<>',2],
 		];
 		$field = [
-			'id','name','nickname',
+			'id','name','nickname','status',
 		];
 		$user = $this->where($where)->field($field)->find();
 		if(!$user){
@@ -64,62 +52,38 @@ class UserCenter extends Base {
 	/**注册
 	 */
 	public function register($data){
-		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
-		$data['captcha'] = trim($data['captcha']);
-		if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
+
+		$saveData['name'] = trim($data['name']);
+		$saveData['salt'] = create_random_str(10,0);//盐值;
+		$saveData['mobile_phone'] = trim($data['mobile_phone']);
+		$saveData['password'] = md5($saveData['salt'] . $data['password']);
+		$saveData['captcha'] = trim($data['captcha']);
+		if(!$this->_checkCaptcha($saveData['mobile_phone'],$saveData['captcha'])){
 			return errorMsg('验证码错误，请重新获取验证码！');
 		}
-		$user = $this->registerCheck($data['mobile_phone']);
-		if($user){
-			return errorMsg('该手机号码已被注册，请更换手机号码，谢谢！');
-		}
+		$user = $this->_registerCheck($saveData['mobile_phone']);
 		$validateUser = new \common\validate\User();
-		if(!$validateUser->scene('register')->check($data)) {
-			return errorMsg($validateUser->getError());
-		}
-		if(!$this->_register($data['mobile_phone'],$data['password'])){
-			return errorMsg('注册失败');
-		}
-		return $this->_login($data['mobile_phone'],$data['password']);
-	}
-
-	/**重置密码
-	 */
-	public function resetPassword($data){
-		$validateUser = new \common\validate\User();
-		if(!$validateUser->scene('resetPassword')->check($data)){
-			return errorMsg($validateUser->getError());
-		}
-		if($data['mobile_phone'] && $data['captcha']){
-			if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
-				return errorMsg('验证码错误，请重新获取验证码！');
+		if(empty($user)){//未注册，则注册账号
+			if(!$validateUser->scene('register')->check($data)) {
+				return errorMsg($validateUser->getError());
 			}
-            $user = $this->loginCheck($data['mobile_phone']);
-            if($user['status']==1){
-                return errorMsg('账号异常，请申诉');
-            }
-
-			if(empty($user)){
-                $saveData['salt'] = create_random_str(10,0);//盐值
-                $saveData['password'] = md5($saveData['salt'] . $data['password']);//加密
-                $saveData['mobile_phone'] = $data['mobile_phone'];
-                $response = $this->save($saveData);
-            }else{
-                $where = array(
-                    'status' => 0,
-                    'mobile_phone' => $data['mobile_phone'],
-                );
-                $updateData['salt'] = create_random_str(10,0);//盐值
-                $updateData['password'] = md5($updateData['salt'] . $data['password']);//加密
-                $response = $this->where($where)->update($updateData,$where);
-            }
-			if(!$response){
-				return errorMsg('失败！');
+			if(!$this->_register($saveData)){
+				return errorMsg('注册失败');
 			}
-			return $this->_login($data['mobile_phone'],$data['password']);
+		}elseif ($user['status'] ==1){
+			return errorMsg('账户已禁用');
+		}elseif ($user['status'] ==2){
+			return errorMsg('账号已删除');
+		}else{//已注册，正常，则修改密码
+			if(!$validateUser->scene('resetPassword')->check($saveData)){
+				return errorMsg($validateUser->getError());
+			}
+			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData['password'])){
+				return errorMsg('重置密码失败');
+			}
 		}
-		return errorMsg('资料缺失！');
+		return $this->_login($saveData['mobile_phone'],$saveData['password']);
 	}
 
 	/**登录
@@ -136,18 +100,40 @@ class UserCenter extends Base {
 
 	/**注册
 	 */
-	private function _register($mobilePhone,$passWord){
-		$data['mobile_phone'] = $mobilePhone;
-		$salt = create_random_str(10,0);
-		$data['salt'] = $salt;//盐值;
-		$data['password'] = md5($salt . $passWord);//加密;
-		$data['name'] = '游客';
-		$data['create_time'] = time();
-		$this->save($data);
-		if(!$this->getAttr('id')){
+	private function _register($saveData){
+		$saveData['create_time'] = time();
+		$res = $this->isUpdate(false)->save($saveData);
+		if(false === $res){
 			return false;
 		}
 		return true;
+	}
+
+	/**重置密码
+	 */
+	private function _resetPassword($mobilePhone,$saveData){
+		$where = array(
+			'mobile_phone' => $mobilePhone,
+		);
+		$saveData['update_time'] = time();
+		$res = $this->isUpdate(true)->where($where)->save($saveData);
+		if(false === $res){
+			return false;
+		}
+		return true;
+	}
+
+	/**账号状态检查
+	 */
+	private function _accountStatusCheck($mobilePhone){
+		$where = [
+			['mobile_phone','=',$mobilePhone],
+		];
+		$field = [
+			'status',
+		];
+		$user = $this->where($where)->field($field)->find();
+		return $user;
 	}
 
 	/**更新-最后登录时间
