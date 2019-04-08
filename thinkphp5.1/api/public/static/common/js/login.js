@@ -10,7 +10,7 @@ function loginDialog(){
         // title:['登录','border-bottom:1px solid #d9d9d9;'],
         btn:[''],
         success:function(indexs,i){
-            tab_down('.loginNav li','.loginLayer .loginTab','click');
+            tab_down('.loginNav li','.loginTab','click');
             $('.layui-m-layershade').on('touchmove',function(e){
                 event.preventDefault();
             });
