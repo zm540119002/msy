@@ -7,7 +7,6 @@ function loginDialog(){
         type:1,
         shadeClose:false,
         content:content,
-        // title:['登录','border-bottom:1px solid #d9d9d9;'],
         btn:[''],
         success:function(indexs,i){
             tab_down('.loginNav li','.loginTab','click');
@@ -52,26 +51,6 @@ function logoutDialog(){
         }
     });
 }
-//忘记密码-弹窗触发
-function forgetPasswordDialog(){
-    var content = $('#formRegister').html();
-    layer.open({
-        className:'forgetPasswordLayer',
-        content:content,
-        type:1,
-        shadeClose:false,
-        btn:[''],
-        success:function(){
-            $('.login_item .password').attr('type','password');
-            $('.view-password').removeClass('active');
-            fixedLayer();
-        },
-        yes:function(index){
-            cancleFixedLayer();
-            layer.close(index);
-        }
-    });
-}
 var loginBackFunctionParameter = {};
 var loginBackFunction = function(parameter){
     location.href = parameter.jump_url;
@@ -85,10 +64,6 @@ $(function(){
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
         logoutDialog();
-    });
-    //忘记密码-弹窗事件
-    $('body').on('click','.forget_dialog',function(){
-        forgetPasswordDialog();
     });
     //返回登录-事件
     $('body').on('click','.back_login',function(){
@@ -134,7 +109,6 @@ $(function(){
         }
     });
     //显示隐藏密码
-    //var onOff = true;
     $('body').on('click','.view-password',function(){
         var _this=$(this);
         //_this.toggleClass('active');
