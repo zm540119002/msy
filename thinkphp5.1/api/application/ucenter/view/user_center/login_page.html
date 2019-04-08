@@ -5,14 +5,18 @@
 {block name="common"}
 <section class="userInfoWrapper">
     <div class="f24 bomb_box">
-        <div class="ucenter_logo">
-            <img src="common_img/ucenter_logo.png" alt="">
-        </div>
         <ul class="loginNav">
-            <li >注册</li>
             <li class="current">登录</li>
+            <li >注册</li>
         </ul>
         {include file="template/login_tpl.html" /}
     </div>
 </section>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function(){
+        $('.userInfoWrapper').find('.forget_password,.resetpas,.back_login').hide();
+    })
+</script>
 {/block}
