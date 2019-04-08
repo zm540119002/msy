@@ -107,6 +107,40 @@ $(function(){
             });
         }
     });
+
+    //异步登录验证
+    $('body').on('click','.async_login',function () {
+        var jump_url = $(this).data('jump_url');
+        loginBackFunctionParameter.jump_url = jump_url;
+        var postData = {};
+        $.ajax({
+            url: jump_url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0){
+                    dialog.error(data.info);
+                }else if(data.code==1){
+                    if(data.data == 'no_login'){
+                        loginDialog();
+                    }
+                }else{
+                    if(jump_url){
+                        location.href = jump_url;
+                    }
+                }
+            }
+        });
+    });
+
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
         var _this=$(this);
