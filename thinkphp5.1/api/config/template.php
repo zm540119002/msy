@@ -31,9 +31,9 @@ return [
     'taglib_end'   => '}',
     'tpl_replace_string' => [
         //common  资源路径
-        'common_js' => Request::domain() .'/static/common/js',
-        'common_css' => Request::domain() .'/static/common/css',
-        'common_img' => Request::domain() .'/static/common/img',
+        'public_js' => Request::domain() .'/static/common/js',
+        'public_css' => Request::domain() .'/static/common/css',
+        'public_img' => Request::domain() .'/static/common/img',
         //api    资源路径
         'api_common_js' => 'https://api.meishangyun.com/static/common/js',
         'api_common_css' => 'https://api.meishangyun.com/static/common/css',
