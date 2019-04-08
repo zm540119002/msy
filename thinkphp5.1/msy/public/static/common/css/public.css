@@ -1395,7 +1395,7 @@ background-position: 0 -27px;
 .right_sidebar a.backTop{
    background: #3f3a39;
 }
-.layui-m-laye .forgetPasswordLayer .layui-m-layercont{
+.layui-m-layer .forgetPasswordLayer .layui-m-layercont{
     position:relative;
     padding:0 .25rem;
 }
