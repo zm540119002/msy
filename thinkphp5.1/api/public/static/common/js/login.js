@@ -78,8 +78,8 @@ $(function(){
         var method = _this.data('method');
         var url = domain+'ucenter/UserCenter/'+method;
         var postData = _this.parents('form').serializeObject();
-        console.log(postData);
-        return false;
+        // console.log(postData);
+        // return false;
         var content='';
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
@@ -96,7 +96,6 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
