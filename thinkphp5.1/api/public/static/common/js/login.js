@@ -98,6 +98,7 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
+                return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
