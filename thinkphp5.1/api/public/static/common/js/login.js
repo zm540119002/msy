@@ -135,7 +135,7 @@ $(function(){
                         loginDialog();
                     }
                     if(data.data=='no_empower'){
-                        dialog.error(data.info);
+                        dialog.error(data.msg);
                     }
                 }else{
                     loginBackFunctionParameter.jump_url = jump_url;
