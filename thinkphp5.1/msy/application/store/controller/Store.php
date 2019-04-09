@@ -1,6 +1,6 @@
 <?php
 namespace app\store\controller;
-class Store extends \think\Controller{
+class Store extends \common\controller\FactoryBase{
     //开店部署首页
     public function index(){
         if(request()->isAjax()){
