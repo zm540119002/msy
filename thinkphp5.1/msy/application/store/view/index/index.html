@@ -84,33 +84,33 @@
 			}
 		});
 		//客服
-		$('body').on('click','.customer_client',function () {
-			var url = domain + 'index/CustomerClient/index';
-			console.log(url);
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function(data){
-					$('.loading').hide();
-					if(data.code==0){
-						dialog.error(data.msg);
-					}else if(data.code==1 && data.data=='no_login'){
-						loginDialog();
-					}else{
-						location.href = url;
-					}
-				}
-			});
-		});
+//		$('body').on('click','.customer_client',function () {
+//			var url = domain + 'index/CustomerClient/index';
+//			console.log(url);
+//			var postData = {};
+//			$.ajax({
+//				url: url,
+//				data: postData,
+//				type: 'post',
+//				beforeSend: function(xhr){
+//					$('.loading').show();
+//				},
+//				error:function(xhr){
+//					$('.loading').hide();
+//					dialog.error('AJAX错误');
+//				},
+//				success: function(data){
+//					$('.loading').hide();
+//					if(data.code==0){
+//						dialog.error(data.msg);
+//					}else if(data.code==1 && data.data=='no_login'){
+//						loginDialog();
+//					}else{
+//						location.href = url;
+//					}
+//				}
+//			});
+//		});
 //		//入驻部署
 //		$('body').on('click','.deployed-deployment',function () {
 //			var url = module + 'Store/index';
@@ -152,12 +152,12 @@
 //		});
 		//店长管理
 		$('body').on('click','.manager_manage',function () {
-			loginBackFunction = function(){
-				console.log(123);
-				return false;
-				$('#storeShopInfo').find('.store_list').empty().append(data);
-				switchManagerStore(url);
-			};
+//			loginBackFunction = function(){
+//				console.log(123);
+//				return false;
+//				$('#storeShopInfo').find('.store_list').empty().append(data);
+//				switchManagerStore(url);
+//			};
 //			var url = module + 'ManagerManage/manage';
 //			var postData = {};
 //			$.ajax({
