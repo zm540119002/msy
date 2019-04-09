@@ -152,8 +152,9 @@
 //		});
 		//店长管理
 		$('body').on('click','a.manager_manage',function () {
+			console.log(3);
 			loginBackFunction = function(){
-				console.log(3);
+				console.log(4);
 				$('#storeShopInfo').find('.store_list').empty().append(loginBackFunctionParameter.data);
 				switchManagerStore(loginBackFunctionParameter.jump_url);
 			};

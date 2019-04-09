@@ -106,6 +106,7 @@ $(function(){
                     $('.layui-m-layer').remove();
                     console.log(1);
                     loginBackFunctionParameter.jump_url = data.info;
+                    loginBackFunctionParameter.data = data;
                     loginBackFunction();
                 }
             });
