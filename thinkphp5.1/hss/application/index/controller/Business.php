@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-class StoreLeague extends \common\controller\UserBase {
+class Business extends \common\controller\UserBase {
 
     public function __construct(){
         parent::__construct();
