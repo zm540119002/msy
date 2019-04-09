@@ -152,9 +152,8 @@
 //		});
 		//店长管理
 		$('body').on('click','a.manager_manage',function () {
-			console.log(3);
 			loginBackFunction = function(){
-				console.log(4);
+				console.log(loginBackFunctionParameter);
 				$('#storeShopInfo').find('.store_list').empty().append(loginBackFunctionParameter.data);
 				switchManagerStore(loginBackFunctionParameter.jump_url);
 			};
