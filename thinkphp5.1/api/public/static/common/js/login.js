@@ -141,6 +141,7 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
+                    console.log(1);
                     loginBackFunctionParameter.jump_url = jump_url;
                     loginBackFunction();
                 }
