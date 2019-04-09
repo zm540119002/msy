@@ -141,7 +141,7 @@ $(function(){
                     if(data.data=='no_factory_register'){
                         location.href = data.url;
                     }
-                }else if(data.status==1){
+                }else{
                     loginBackFunctionParameter.jump_url = jump_url;
                     loginBackFunctionParameter.data = data;
                     loginBackFunction();
