@@ -137,6 +137,9 @@ $(function(){
                     if(data.data=='no_empower'){
                         dialog.error(data.msg);
                     }
+                    if(data.data=='no_factory_register'){
+                        location.href = data.url;
+                    }
                 }else{
                     loginBackFunctionParameter.jump_url = jump_url;
                     loginBackFunction();
