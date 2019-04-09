@@ -142,7 +142,7 @@ $(function(){
                     }
                 }else{
                     loginBackFunctionParameter.jump_url = jump_url;
-                    loginBackFunction();
+                    loginBackFunction(loginBackFunctionParameter);
                 }
             }
         });
