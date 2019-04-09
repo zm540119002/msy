@@ -39,11 +39,15 @@
 			<a href="javascript:void(0);" class="store_run manager_manage async_login" data-jump_url="{:url('ManagerManage/manage')}">
 				<span class="exclusive"></span>店长管理
 			</a>
-			<a href="javascript:void(0)" class="store-operation"><span class="classify"></span>店铺运营</a>
-			<a href="javascript:void(0);" class="order-management-change async_login" data-jump_url="{:url('Operation/index')}">
+			<a href="javascript:void(0)" class="store-operation async_login" data-jump_url="{:url('Operation/index')}">
+				<span class="classify"></span>店铺运营
+			</a>
+			<a href="javascript:void(0);" class="order-management-change async_login" data-jump_url="{:url('index/CustomerClient/index')}">
 				<span class="purchasers"></span>订单客服
 			</a>
-			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>财务结算</a>
+			<a href="javascript:void(0);" class="my-store async_login" data-jump_url="{:url('index/CustomerClient/index')}">
+				<span class="recharge"></span>财务结算
+			</a>
 		</div>
 	</section>
 	<section class="message-center-info f20">
@@ -79,140 +83,13 @@
 				clickable: true
 			}
 		});
-		//客服
-		$('body').on('click','.customer_client',function () {
-			var url = domain + 'index/CustomerClient/index';
-			console.log(url);
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function(data){
-					$('.loading').hide();
-					if(data.code==0){
-						dialog.error(data.msg);
-					}else if(data.code==1 && data.data=='no_login'){
-						loginDialog();
-					}else{
-						location.href = url;
-					}
-				}
-			});
-		});
-//		//入驻部署
-//		$('body').on('click','.deployed-deployment',function () {
-//			var url = module + 'Store/index';
-//			var postData = {};
-//			$.ajax({
-//				url: url,
-//				data: postData,
-//				type: 'post',
-//				beforeSend: function(xhr){
-//					$('.loading').show();
-//				},
-//				error:function(xhr){
-//					$('.loading').hide();
-//					dialog.error('AJAX错误');
-//				},
-//				success: function(data){
-//					$('.loading').hide();
-//					if(data.status==0){
-//						dialog.error(data.info);
-//					}else if(data.code==1){
-//						if(data.data == 'no_login'){
-//							loginDialog();
-//						}
-//						if(data.data == 'no_factory_register'){
-//							layer.open({
-//								title:['提示'],
-//								content:[data.msg],
-//								btn:['确定',' 取消'],
-//								yes:function () {
-//									location.href= module + 'Deploy/register';
-//								}
-//							});
-//						}
-//					}else if(data.status==1){
-//						location.href = url;
-//					}
-//				}
-//			});
-//		});
 		//店长管理
-		$('body').on('click','.manager_manage',function () {
-			loginBackFunction = function(){
-				console.log(123);
-				return false;
-				$('#storeShopInfo').find('.store_list').empty().append(data);
-				switchManagerStore(url);
-			};
-//			var url = module + 'ManagerManage/manage';
-//			var postData = {};
-//			$.ajax({
-//				url: url,
-//				data: postData,
-//				type: 'post',
-//				beforeSend: function(xhr){
-//					$('.loading').show();
-//				},
-//				error:function(xhr){
-//					$('.loading').hide();
-//					dialog.error('AJAX错误');
-//				},
-//				success: function(data){
-//					$('.loading').hide();
-//					if(data.status==0){
-//						dialog.error(data.info);
-//					}else if(data.code==1 && data.data=='no_login'){
-//						loginDialog();
-//					}else if(data.code==1 && data.data=='no_empower'){
-//						dialog.error(data.msg);
-//					}else{
-//						loginBackFunction();
-//					}
-//				}
-//			});
+		$('body').on('click','a.manager_manage',function () {
+//			loginBackFunction = function(){
+//				$('#storeShopInfo').find('.store_list').empty().append(loginBackFunctionParameter.data);
+//				switchManagerStore(loginBackFunctionParameter.jump_url);
+//			};
 		});
-		//店铺运营
-//		$('body').on('click','.store-operation',function () {
-//			var url = module + 'Operation/index';
-//			var postData = {};
-//			$.ajax({
-//				url: url,
-//				data: postData,
-//				type: 'post',
-//				beforeSend: function(xhr){
-//					$('.loading').show();
-//				},
-//				error:function(xhr){
-//					$('.loading').hide();
-//					dialog.error('AJAX错误');
-//				},
-//				success: function(data){
-//					$('.loading').hide();
-//					if(data.status==0){
-//						dialog.error(data.info);
-//					}else if(data.code==1 ){
-//						if(data.data == 'no_login'){
-//							loginDialog();
-//						}
-//						if(data.data == 'no_empower'){
-//							dialog.error(data.msg);
-//						}
-//					}else{
-//						loginBackFunction();
-//					}
-//				}
-//			});
-//		});
 	});
 </script>
 {/block}
