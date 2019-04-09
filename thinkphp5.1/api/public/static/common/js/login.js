@@ -98,7 +98,7 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return false;
+                // return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
@@ -145,7 +145,6 @@ $(function(){
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
         var _this=$(this);
-        //_this.toggleClass('active');
         if(_this.prev().attr('type')=='password'){
             $('.login_item .password').attr('type','text');
             $('.view-password').addClass('active');
