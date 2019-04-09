@@ -104,6 +104,7 @@ $(function(){
                     return false;
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
+                    console.log(1);
                     loginBackFunctionParameter.jump_url = data.info;
                     loginBackFunction();
                 }
@@ -128,6 +129,7 @@ $(function(){
             },
             success: function(data){
                 $('.loading').hide();
+                console.log(2);
                 if(data.status==0){
                     dialog.error(data.info);
                 }else if(data.code==1){
