@@ -51,11 +51,12 @@ function logoutDialog(){
         }
     });
 }
+/**异步登录回调函数
+*/
 var loginBackFunctionParameter = {};
-var loginBackFunction = function(parameter){
-    if(parameter.jump_url){
-        location.href = parameter.jump_url;
-    }
+var loginBackFunction = function(){
+    loginBackFunctionParameter.jump_url ?loginBackFunctionParameter.jump_url:action;
+    location.href = loginBackFunctionParameter.jump_url;
 };
 $(function(){
     //登录-弹窗事件
@@ -71,8 +72,7 @@ $(function(){
     $('body').on('click','.back_login',function(){
         $(this).parents('.layui-m-layer').remove();
     });
-});
-$(function(){
+
     //登录 or 注册 or 重置密码
     tab_down('.loginNav li','.loginTab ','click');
     $('body').on('click','.loginBtn,.registerBtn',function(){
@@ -105,7 +105,7 @@ $(function(){
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
                     loginBackFunctionParameter.jump_url = data.info;
-                    loginBackFunction(loginBackFunctionParameter);
+                    loginBackFunction();
                 }
             });
         }
@@ -114,7 +114,6 @@ $(function(){
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
-        loginBackFunctionParameter.jump_url = jump_url;
         var postData = {};
         $.ajax({
             url: jump_url,
@@ -136,6 +135,7 @@ $(function(){
                         loginDialog();
                     }
                 }else{
+                    loginBackFunctionParameter.jump_url = jump_url;
                     loginBackFunction();
                 }
             }
