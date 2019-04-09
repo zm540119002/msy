@@ -105,7 +105,6 @@ $(function(){
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
                     loginBackFunctionParameter.jump_url = data.info;
-                    loginBackFunctionParameter.data = data;
                     loginBackFunction();
                 }
             });
@@ -143,7 +142,6 @@ $(function(){
                     }
                 }else{
                     loginBackFunctionParameter.jump_url = jump_url;
-                    loginBackFunctionParameter.data = data;
                     loginBackFunction();
                 }
             }
