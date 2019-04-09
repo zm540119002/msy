@@ -128,7 +128,6 @@ $(function(){
             },
             success: function(data){
                 $('.loading').hide();
-                console.log(1);
                 if(data.status==0){
                     dialog.error(data.info);
                 }else if(data.code==1){
@@ -143,6 +142,7 @@ $(function(){
                     }
                 }else{
                     loginBackFunctionParameter.jump_url = jump_url;
+                    loginBackFunctionParameter.data = data;
                     loginBackFunction();
                 }
             }
