@@ -30,12 +30,14 @@ return [
         ],
         'StoreLeague/index' => [
             'name' => '加盟店家',
-            'a'    => 'href='.url('StoreLeague/index'),
+            //'a'    => 'href='.url('StoreLeague/index'),
+            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('StoreLeague/index'),
             'icon' => 'practitioners',
         ],
         'Business/index' => [
             'name' => '城市合伙人',
-            'a'    => 'href='.url('Business/index'),
+            //'a'    => 'href='.url('Business/index'),
+            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Business/index'),
             'icon' => 'business',
         ],
         'Cart/manage' => [
