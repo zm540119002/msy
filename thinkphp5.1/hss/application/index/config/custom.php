@@ -40,7 +40,7 @@ return [
         ],
         'Cart/manage' => [
             'name' => '采购车',
-            'a'    => 'href=javascript:void(0) class=my_bottom_cart async_login data-jump_url='.url('Cart/manage'),
+            'a'    => "href=javascript:void(0) class='my_bottom_cart async_login' data-jump_url=".url('Cart/manage'),
             'icon' => 'cart',
         ],
         'Mine/index' => [
