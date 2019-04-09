@@ -147,7 +147,13 @@
 //			});
 //		});
 		//店长管理
-//		$('body').on('click','.manager_manage',function () {
+		$('body').on('click','.manager_manage',function () {
+			loginBackFunction = function(){
+				console.log(123);
+				return false;
+				$('#storeShopInfo').find('.store_list').empty().append(data);
+				switchManagerStore(url);
+			};
 //			var url = module + 'ManagerManage/manage';
 //			var postData = {};
 //			$.ajax({
@@ -174,7 +180,7 @@
 //					}
 //				}
 //			});
-//		});
+		});
 		//店铺运营
 //		$('body').on('click','.store-operation',function () {
 //			var url = module + 'Operation/index';
