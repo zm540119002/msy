@@ -134,6 +134,7 @@ $(function(){
                 if(data.status==0){
                     dialog.error(data.info);
                 }else if(data.code==1){
+                    console.log(6);
                     if(data.data == 'no_login'){
                         loginDialog();
                     }
@@ -144,6 +145,7 @@ $(function(){
                         location.href = data.url;
                     }
                 }else{
+                    console.log(5);
                     loginBackFunctionParameter.jump_url = jump_url;
                     loginBackFunctionParameter.data = data;
                     loginBackFunction();
