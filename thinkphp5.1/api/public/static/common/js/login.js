@@ -96,11 +96,10 @@ $(function(){
             return false;
         }else{
             var url = domain + 'ucenter/UserCenter/' + method;
-            var url2 = window.location.protocol + '/' + document.domain + '/' + 'ucenter/UserCenter/' + method;
             // console.log(domain);
             // console.log(url);
             // return false;
-            $.post(url2,postData,function (data) {
+            $.post(url,postData,function (data) {
                 return false;
                 if(data.status==0){
                     dialog.error(data.info);
