@@ -69,11 +69,6 @@ $(function(){
     $('body').on('click','#logout_dialog',function(){
         logoutDialog();
     });
-    //返回登录-事件
-    $('body').on('click','.back_login',function(){
-        $(this).parents('.layui-m-layer').remove();
-    });
-
     //登录 or 注册 or 重置密码
     tab_down('.loginNav li','.loginTab ','click');
     $('body').on('click','.loginBtn,.registerBtn',function(){
