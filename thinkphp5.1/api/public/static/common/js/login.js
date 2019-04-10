@@ -79,7 +79,7 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var url = domain + 'ucenter/UserCenter/'+method;
+        var url = domain + 'ucenter/UserCenter/' + method;
         var postData = _this.parents('form').serializeObject();
         // console.log(postData);
         // return false;
