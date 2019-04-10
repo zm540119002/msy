@@ -5,6 +5,10 @@ class Index extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        return $this->fetch();
+        if (request()->isAjax()) {
+        } else {
+            print_r(request());
+            return $this->fetch();
+        }
     }
 }
