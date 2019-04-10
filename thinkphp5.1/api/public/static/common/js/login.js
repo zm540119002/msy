@@ -95,10 +95,10 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
-            var url = domain + 'ucenter/UserCenter/' + method;
-            location.href = url;
-            console.log(url);
-            return false;
+            var url2 = domain + 'ucenter/UserCenter/' + method;
+            var url = 'https://msy.meishangyun.com/ucenter/UserCenter/' + method;
+            // console.log(url);
+            // return false;
             $.post(url,postData,function (data) {
                 return false;
                 if(data.status==0){
