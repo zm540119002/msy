@@ -80,8 +80,8 @@ $(function(){
         var _this = $(this);
         var method = _this.data('method');
         var url = domain + 'ucenter/UserCenter/' + method;
-        console.log(url);
-        return false;
+        // console.log(url);
+        // return false;
         var postData = _this.parents('form').serializeObject();
         var content='';
         if(!register.phoneCheck(postData.mobile_phone)){
@@ -99,14 +99,14 @@ $(function(){
             return false;
         }else{
             $.post(url,postData,function (data) {
-                return false;
+                // return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
                 }else if(data.status==1){
                     $('.layui-m-layer').remove();
-                    loginBackFunctionParameter.jump_url = data.info;
-                    loginBackFunction();
+                    // loginBackFunctionParameter.jump_url = data.info;
+                    // loginBackFunction();
                 }
             });
         }
