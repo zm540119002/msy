@@ -62,7 +62,7 @@ var loginBackFunction = function(){
 $(function(){
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
-        // loginBackFunction =flushPage;
+        loginBackFunction =flushPage;
         loginDialog();
     });
     //退出-弹窗事件
