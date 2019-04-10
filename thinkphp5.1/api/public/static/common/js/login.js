@@ -79,7 +79,9 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var url = domain + 'ucenter/UserCenter/' + method;
+        var url = domain + '/ucenter/UserCenter/' + method;
+        console.log(url);
+        return false;
         var postData = _this.parents('form').serializeObject();
         var content='';
         if(!register.phoneCheck(postData.mobile_phone)){
