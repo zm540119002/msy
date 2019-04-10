@@ -1,0 +1,32 @@
+{extend name="template/base.html" /}
+{block name="css-customize"}
+
+{/block}
+{block name="content"}
+<article class="f24">
+    <section class="shopping_header_title header_title separation-line">
+		<h2>城市合伙人申请</h2>
+	</section>
+	<section>
+		<div id="wizard" class="page-bd">
+			{include file="public/registered_layer" /}
+			<p>申请成为黑森森城市合伙人，分享头部皮肤管理事业财富。</p>
+			<p>请先查询拟申请的城市是否有空缺，如有空缺可填写资料，在线支付城市合伙人订金￥5000.00，黑森森城市合伙人资格审核通过后再补交资格余款，如不通过订金将7天内无息退回；资格款项将转存入合伙人采购账户，用于采购结算专用。</p>
+			<dl>
+				<dt>黑森森城市合伙人资格政策：</dt>
+				<dd>一类城市合伙人：按区域位于中国1线城市或2线城市的申请人，其黑森森城市合伙人资格款29.8万元；</dd>
+				<dd>二类城市合伙人：按区域位于中国3线城市或4线城市的申请人，其黑森森城市合伙人资格款19.8万元；</dd>
+				<dd>三类城市合伙人：按区域位于中国5线城市或5线以下城市的申请人，其黑森森城市合伙人资格款9.8万元。</dd>
+			</dl>
+		</div>
+	</section>
+</article>
+<footer class="f24 group_cart_nav">
+	<div class="group_btn100 bottom_item">
+		<a href="javascript:void(0);" class="address_create"><span class="s_i"></span>开始申请黑森森城市合伙人</a>
+	</div>
+</footer>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}

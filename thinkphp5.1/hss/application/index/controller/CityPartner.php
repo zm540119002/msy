@@ -1,7 +1,31 @@
 <?php
 namespace app\index\controller;
-class CityPartner extends \common\controller\Base{
 
+/**
+ * 城市合伙人控制器
+ */
+class CityPartner extends \common\controller\UserBase {
+
+    /**
+     * 首页
+     */
+    public function index(){
+        if(request()->isAjax()){
+        }else{
+            // 底部菜单，见配置文件custom.footer_menu
+            $this->assign('currentPage',request()->controller().'/'.request()->action());
+
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 合伙人申请
+     */
+    public function registered(){
+
+        return $this->fetch();
+    }
 
     public function getSigningInfo(){
         $province_id = 1;
