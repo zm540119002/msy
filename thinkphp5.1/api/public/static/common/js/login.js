@@ -96,6 +96,7 @@ $(function(){
             return false;
         }else{
             var url = domain + 'ucenter/UserCenter/' + method;
+            location.href = url;
             console.log(url);
             return false;
             $.post(url,postData,function (data) {
