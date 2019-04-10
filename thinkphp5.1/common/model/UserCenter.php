@@ -74,7 +74,7 @@ class UserCenter extends Base {
 				return errorMsg('注册失败');
 			}
 		}elseif ($user['status'] ==1){
-			return errorMsg('账户已禁用');
+			return errorMsg('账号已禁用');
 		}elseif ($user['status'] ==2){
 			return errorMsg('账号已删除');
 		}else{//已注册，正常，则修改密码
@@ -91,8 +91,23 @@ class UserCenter extends Base {
 	/**登录
 	 */
 	private function _login($mobilePhone,$password){
-		$user = $this->_get($mobilePhone,$password);
-		if(!$user){
+		if(!$mobilePhone) {
+			return false;
+		}
+		$where = array(
+			'status' => 0,
+			'mobile_phone' => $mobilePhone,
+		);
+		$field = array(
+			'id','name','nickname','mobile_phone','status','type','password','avatar',
+			'sex','salt','birthday','last_login_time','role_id',
+		);
+		$user = $this->field($field)->where($where)->find();
+		$user = $user->toArray();
+		if(!count($user)) {
+			return errorMsg('账号不存在,请重新输入！');
+		}
+		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
 			return errorMsg('密码错误,请重新输入！');
 		}
 		//更新最后登录时间
@@ -145,30 +160,6 @@ class UserCenter extends Base {
 			'id' => $userId,
 		);
 		$this->where($where)->setField('last_login_time', time());
-	}
-
-	/**获取登录信息
-	 */
-	private function _get($mobilePhone,$password){
-		if(!$mobilePhone) {
-			return false;
-		}
-		$where = array(
-			'status' => 0,
-			'mobile_phone' => $mobilePhone,
-		);
-		$field = array(
-			'id','name','nickname','mobile_phone','status','type','password','avatar',
-			'sex','salt','birthday','last_login_time','role_id'
-		);
-		$user = $this->field($field)->where($where)->find();
-		if(!count($user)) {
-			return false;
-		}
-		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
-			return false;
-		}
-		return $user->toArray();
 	}
 
 	/**设置登录session
