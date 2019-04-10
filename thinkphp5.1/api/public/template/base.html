@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="public_js/login.js"></script>
 	<script type="text/javascript">
 //		var domain = '{:request()->domain()}/';
-		var domain = document.domain;
+		var domain = window.location.protocol + '/' + document.domain;
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
