@@ -23,13 +23,15 @@ class UserCenter extends Base {
 			if(empty($user)){
 				return errorMsg('账号不存在');
 			}elseif ($user['status'] ==1){
-                return errorMsg('账户已禁用');
+                return errorMsg('账号已禁用');
             }elseif ($user['status'] ==2){
                 return errorMsg('账号已删除');
             }
 			return $this->_login($data['mobile_phone'],$data['password']);
-		}else{
-			return errorMsg('登录信息不完善！');
+		}elseif(!$data['mobile_phone'] && $data['password']){
+			return errorMsg('请填写手机号码！');
+		}elseif($data['mobile_phone'] && !$data['password']){
+			return errorMsg('请填写密码！');
 		}
 	}
 
