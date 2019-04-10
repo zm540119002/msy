@@ -7,7 +7,6 @@ class UserCenter extends \think\Controller{
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
-            return 123;
             return $modelUser->login($postData);
         } else {
             return $this->fetch('login_page');
