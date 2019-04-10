@@ -78,12 +78,9 @@ $(function(){
     tab_down('.loginNav li','.loginTab ','click');
     $('body').on('click','.loginBtn,.registerBtn',function(){
         var _this = $(this);
-        var method = _this.data('method');
-        var url = domain+'ucenter/UserCenter/'+method;
         var postData = _this.parents('form').serializeObject();
-        // console.log(postData);
-        // return false;
         var content='';
+        var method = _this.data('method');
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && method!='login_admin' && !register.vfyCheck(postData.captcha)){
@@ -98,8 +95,8 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
+            var url = domain + 'ucenter/UserCenter/' + method;
             $.post(url,postData,function (data) {
-                // return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
@@ -111,7 +108,6 @@ $(function(){
             });
         }
     });
-
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
@@ -148,7 +144,6 @@ $(function(){
             }
         });
     });
-
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
         var _this=$(this);

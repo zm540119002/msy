@@ -27,6 +27,7 @@
 			url:controller+'getList'
 		};
         var getData = $('#form1').serializeObject();
+		getData.shelf_status = 3;
 		getPagingList(config);
 		//翻页
 		$('body').on('click','.pager2',function(){

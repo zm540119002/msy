@@ -1,85 +1,32 @@
 <?php
 namespace app\index\controller;
-class Studio extends \common\controller\Base{
-    /**首页
-     */
-    public function index(){
-        //获取商品的分类
-        $modelGoodsCategory = new \app\index\model\GoodsCategory();
-        $config =[
-            'where' => [
-                ['status', '=', 0],
-                ['level','=',1]
-            ], 'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc'
-            ],  'limit'=>'7'
-        ];
-        $categoryList  = $modelGoodsCategory->getList($config);
-        $this ->assign('categoryList',$categoryList);
-        //获取精选的10个 场景
-        $modelScene = new \app\index\model\Scene();
-        $config =[
-            'where' => [
-                ['status', '=', 0],
-                ['shelf_status','=',3],
-                //['is_selection','=',1],
-                ['belong_to','exp','& 2'],
+class CityPartner extends \common\controller\Base{
 
-            ], 'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc'
-            ],  'limit'=>'11'
 
-        ];
-        $sceneList  = $modelScene->getList($config);
-        // 场景按行个数分组
-        $sceneLists = sceneRatingList($sceneList);
+    public function getSigningInfo(){
+        $province_id = 1;
+        $city_id = 1;
+        if(!$province_id OR !$city_id){
+            return errorMsg('请求数据不能为空');
 
-        $this ->assign('sceneLists',$sceneLists);
+        }else{
+            // 到时看下需不需要按补齐尾款的时间来判断
+            $model = new \app\index\model\CityPartner;
 
-        //获取精选的10个项目
-        $modelProject = new \app\index\model\Project();
-        $config =[
-            'where' => [
-                ['status', '=', 0],
-                ['shelf_status','=',3],
-                ['is_selection','=',1],
+            $condition = [
+                'where'=>[
+                    ['status',['=', 2], ['=', 3],'OR'],
+                ],
+                'field'=>['id'],
+            ];
 
-            ], 'order'=>[
-                'sort'=>'desc',
-                'id'=>'desc'
-            ],  'limit'=>'11'
-        ];
-        $projectList  = $modelProject->getList($config);
-        $this ->assign('projectList',$projectList);
-        return $this->fetch();
-    }
+            $res = $model->getInfo($condition);
 
-    /**
-     * 默认二级场景页
-     * 需要同组的各场景的名，场景信息，场景下的商品，场景下的活动
-     * 先调用中心店的控制器，后期如不同再分离
-     */
-    public function detail(){
-        return CenterStore::detail();
-    }
+            p($model->getLastSql());
+            exit;
 
-    /**
-     * 默认二级场景页
-     * 需要场景信息，场景下的商品分类，商品分类下的商品
-     * 先调用中心店的控制器，后期如不同再分离
-     */
-    public function sort(){
-        return CenterStore::sort();
-    }
+            return true;
+        }
 
-    /**
-     * 默认二级场景页
-     * 需要场景信息，场景下的项目信息(商品，介绍，视频)
-     * 先调用中心店的控制器，后期如不同再分离
-     */
-    public function project(){
-        return CenterStore::project();
     }
 }

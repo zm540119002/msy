@@ -3,7 +3,7 @@ namespace app\store\controller;
 
 class LoginTest extends \common\controller\FactoryStoreBase
 {
-    public function idnex(){
+    public function index(){
         if(request()->isAjax()){
         }else{
             return $this->fetch();
