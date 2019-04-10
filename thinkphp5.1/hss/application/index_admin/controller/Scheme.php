@@ -106,7 +106,7 @@ class Scheme extends Base {
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','sort','shelf_status'],
+            'field'=>['id','name','remark','thumb_img','sort','shelf_status'],
             'order'=>['sort'=>'desc', 'id'=>'desc',],
         ];
         $list = $this->obj->pageQuery($condition);
