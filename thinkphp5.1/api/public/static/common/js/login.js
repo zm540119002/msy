@@ -55,8 +55,9 @@ function logoutDialog(){
 */
 var loginBackFunctionParameter = {};
 var loginBackFunction = function(){
-    loginBackFunctionParameter.jump_url ?loginBackFunctionParameter.jump_url:action;
-    location.href = loginBackFunctionParameter.jump_url;
+    loginBackFunctionParameter.jump_url ?
+        location.href = loginBackFunctionParameter.jump_url :
+        location.href = action;
 };
 $(function(){
     //登录-弹窗事件
