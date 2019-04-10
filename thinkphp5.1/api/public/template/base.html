@@ -13,6 +13,7 @@
 	<script type="text/javascript">
 //		var domain = '{:request()->domain()}/';
 		var domain = document.domain;
+console.log(domain);
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
