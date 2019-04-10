@@ -28,10 +28,6 @@ class UserCenter extends Base {
                 return errorMsg('账号已删除');
             }
 			return $this->_login($data['mobile_phone'],$data['password']);
-		}elseif(!$data['mobile_phone'] && $data['password']){
-			return errorMsg('请填写手机号码！');
-		}elseif($data['mobile_phone'] && !$data['password']){
-			return errorMsg('请填写密码！');
 		}
 	}
 
@@ -91,8 +87,14 @@ class UserCenter extends Base {
 	/**登录
 	 */
 	private function _login($mobilePhone,$password){
-		if(!$mobilePhone) {
-			return false;
+		if(!$mobilePhone && !$password) {
+			return errorMsg('请填写手机号码及密码！');
+		}
+		if(!$mobilePhone && $password) {
+			return errorMsg('请填写手机号码！');
+		}
+		if(!$mobilePhone && !$password){
+			return errorMsg('请填写密码！');
 		}
 		$where = array(
 			'status' => 0,
