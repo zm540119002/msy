@@ -96,13 +96,7 @@ $(function(){
             return false;
         }else{
             var url = domain + 'ucenter/UserCenter/' + method;
-            var url2 = 'https://msy.meishangyun.com/ucenter/UserCenter/' + method;
-            console.log(url);
-            console.log(url2);
-            return false;
             $.post(url,postData,function (data) {
-                console.log(url);
-                return false;
                 if(data.status==0){
                     dialog.error(data.info);
                     return false;
