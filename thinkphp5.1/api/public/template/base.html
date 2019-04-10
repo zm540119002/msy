@@ -12,10 +12,10 @@
 	<script type="text/javascript" src="public_js/login.js"></script>
 	<script type="text/javascript">
 		var domain = window.location.protocol + '/' + document.domain + '/';
+		var uploads = domain + 'uploads/';
 		var module = domain + '{:request()->module()}/';
 		var controller = module + '{:request()->controller()}/';
 		var action = controller + '{:request()->action()}';
-		var uploads = domain + 'uploads/';
 	</script>
 	<!--前置自定义js-->
 	{block name="pre-script"}{/block}
