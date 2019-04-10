@@ -31,20 +31,37 @@ class UserCenter extends Base {
 		}
 	}
 
-	/**注册-账号检查
+	/**登录
 	 */
-	private function _registerCheck($mobilePhone){
-		$where = [
-			['mobile_phone','=',$mobilePhone],
-		];
-		$field = [
-			'id','name','nickname','status',
-		];
-		$user = $this->where($where)->field($field)->find();
-		if(!$user){
-			return false;
+	private function _login($mobilePhone,$password){
+		if(!$mobilePhone && !$password) {
+			return errorMsg('请填写手机号码及密码！');
 		}
-		return $user;
+		if(!$mobilePhone && $password) {
+			return errorMsg('请填写手机号码！');
+		}
+		if(!$mobilePhone && !$password){
+			return errorMsg('请填写密码！');
+		}
+		$where = array(
+			'status' => 0,
+			'mobile_phone' => $mobilePhone,
+		);
+		$field = array(
+			'id','name','nickname','mobile_phone','status','type','password','avatar',
+			'sex','salt','birthday','last_login_time','role_id',
+		);
+		$user = $this->field($field)->where($where)->find();
+		$user = $user->toArray();
+		if(!count($user)) {
+			return errorMsg('账号不存在,请重新输入！');
+		}
+		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
+			return errorMsg('密码错误,请重新输入！');
+		}
+		//更新最后登录时间
+		$this->_setLastLoginTimeById($user['id']);
+		return successMsg($this->_setSession($user));
 	}
 
 	/**注册
@@ -84,39 +101,6 @@ class UserCenter extends Base {
 		return $this->_login($saveData['mobile_phone'],$saveData['password']);
 	}
 
-	/**登录
-	 */
-	private function _login($mobilePhone,$password){
-		if(!$mobilePhone && !$password) {
-			return errorMsg('请填写手机号码及密码！');
-		}
-		if(!$mobilePhone && $password) {
-			return errorMsg('请填写手机号码！');
-		}
-		if(!$mobilePhone && !$password){
-			return errorMsg('请填写密码！');
-		}
-		$where = array(
-			'status' => 0,
-			'mobile_phone' => $mobilePhone,
-		);
-		$field = array(
-			'id','name','nickname','mobile_phone','status','type','password','avatar',
-			'sex','salt','birthday','last_login_time','role_id',
-		);
-		$user = $this->field($field)->where($where)->find();
-		$user = $user->toArray();
-		if(!count($user)) {
-			return errorMsg('账号不存在,请重新输入！');
-		}
-		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
-			return errorMsg('密码错误,请重新输入！');
-		}
-		//更新最后登录时间
-		$this->_setLastLoginTimeById($user['id']);
-		return successMsg($this->_setSession($user));
-	}
-
 	/**注册
 	 */
 	private function _register($saveData){
@@ -126,6 +110,22 @@ class UserCenter extends Base {
 			return false;
 		}
 		return true;
+	}
+
+	/**注册-账号检查
+	 */
+	private function _registerCheck($mobilePhone){
+		$where = [
+			['mobile_phone','=',$mobilePhone],
+		];
+		$field = [
+			'id','name','nickname','status',
+		];
+		$user = $this->where($where)->field($field)->find();
+		if(!$user){
+			return false;
+		}
+		return $user;
 	}
 
 	/**重置密码
