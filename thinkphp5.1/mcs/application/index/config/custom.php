@@ -30,7 +30,7 @@ return [
         ],*/
         'CenterStore/index' => [
             'name' => '中心店',
-            'a'    => 'href='.url('Store/Index/index'),
+            'a'    => 'href='.url('CenterStore/index'),
             'icon' => 'practitioners',
         ],
         'Studio/index' => [
