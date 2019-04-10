@@ -96,9 +96,9 @@ $(function(){
             return false;
         }else{
             var url = domain + 'ucenter/UserCenter/' + method;
-            console.log(domain);
-            console.log(url);
-            return false;
+            // console.log(domain);
+            // console.log(url);
+            // return false;
             $.post(url,postData,function (data) {
                 return false;
                 if(data.status==0){
