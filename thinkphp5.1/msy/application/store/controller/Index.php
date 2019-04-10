@@ -7,7 +7,8 @@ class Index extends \common\controller\Base{
     public function index(){
         if (request()->isAjax()) {
         } else {
-            print_r(request());
+            print_r(request()->rootUrl());
+            print_r(request()->domain());
             return $this->fetch();
         }
     }
