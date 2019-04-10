@@ -2,10 +2,6 @@
 namespace app\index\controller;
 class Business extends \common\controller\UserBase {
 
-    public function __construct(){
-        parent::__construct();
-    }
-
     /**首页
      */
     public function index(){
