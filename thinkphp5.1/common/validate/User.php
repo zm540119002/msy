@@ -38,7 +38,7 @@ class User extends \think\Validate
         'captcha.regex' => '验证码格式错误！',
         'captcha.require' => '验证码格式错误！',
         'password.regex' => '密码格式错误！',
-        'password.require' => '密码格式错误！',
+        'password.require' => '密码必须！',
     ];
 
     //验证场景
