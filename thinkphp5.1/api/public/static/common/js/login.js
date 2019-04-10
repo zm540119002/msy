@@ -78,13 +78,9 @@ $(function(){
     tab_down('.loginNav li','.loginTab ','click');
     $('body').on('click','.loginBtn,.registerBtn',function(){
         var _this = $(this);
-        var method = _this.data('method');
-        var url = domain + 'ucenter/UserCenter/' + method;
-        console.log(domain);
-        console.log(url);
-        return false;
         var postData = _this.parents('form').serializeObject();
         var content='';
+        var method = _this.data('method');
         if(!register.phoneCheck(postData.mobile_phone)){
             content='请输入正确手机号码';
         }else if(method!='login' && method!='login_admin' && !register.vfyCheck(postData.captcha)){
@@ -99,6 +95,10 @@ $(function(){
             errorTipc(content);
             return false;
         }else{
+            var url = domain + 'ucenter/UserCenter/' + method;
+            console.log(domain);
+            console.log(url);
+            return false;
             $.post(url,postData,function (data) {
                 return false;
                 if(data.status==0){
