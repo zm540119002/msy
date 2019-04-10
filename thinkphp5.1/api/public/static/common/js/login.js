@@ -79,7 +79,7 @@ $(function(){
     $('body').on('click','.loginBtn,.registerBtn',function(){
         var _this = $(this);
         var method = _this.data('method');
-        var url = domain+'ucenter/UserCenter/'+method;
+        var url = domain + 'ucenter/UserCenter/'+method;
         var postData = _this.parents('form').serializeObject();
         // console.log(postData);
         // return false;
@@ -111,7 +111,6 @@ $(function(){
             });
         }
     });
-
     //异步登录验证
     $('body').on('click','.async_login',function () {
         var jump_url = $(this).data('jump_url');
@@ -148,7 +147,6 @@ $(function(){
             }
         });
     });
-
     //显示隐藏密码
     $('body').on('click','.view-password',function(){
         var _this=$(this);
