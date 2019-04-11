@@ -55,6 +55,7 @@ class Scene extends \common\controller\Base{
     /**
      * 二级场景页 -场景(默认)
      * 需要同组的各场景的名，场景信息，场景下的商品，场景下的方案
+     * 没有图片 暂时隐藏 后期待确定后再删除 code=1， detail_img.html 文件 sql 三处
      */
     public function detail(){
         if(request()->isAjax()){
@@ -77,7 +78,8 @@ class Scene extends \common\controller\Base{
             if(empty($scene)){
                 $this->error('此项目已下架');
             }
-            $scene['main_img'] = explode(',',(string)$scene['main_img']);
+            // code=1
+            //$scene['main_img'] = explode(',',(string)$scene['main_img']);
             $scene['tag'] = explode(',',(string)$scene['tag']);
             $this->assign('scene',$scene);
 
@@ -93,24 +95,6 @@ class Scene extends \common\controller\Base{
             ];
             $sceneList = $model->getList($config);
             $this->assign('sceneList',$sceneList);
-
-            //获取相关的商品
-            /*            $modelSceneGoods = new \app\index\model\SceneGoods();
-                        $config = [
-                            'where' => [
-                                ['sg.status', '=', 0],
-                                ['sg.scene_id', '=', $id],
-                            ],'field'=>[
-                                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-                            ],'join'=>[
-                                ['goods g','g.id = sg.goods_id','left']
-                            ]
-                        ];
-
-                        $goodsList= $modelSceneGoods->getList($config);
-
-                        $this->assign('goodsList',$goodsList);*/
 
             // 获取场景下的方案
             $modelSceneScheme = new \app\index\model\SceneScheme();
@@ -141,11 +125,13 @@ class Scene extends \common\controller\Base{
     /**
      * 二级场景页 -分类
      * 需要场景信息，场景下的商品分类，商品分类下的商品-ajax获取
+     * 没有图片 暂时隐藏 后期待确定后再删除 code=1， sort.html 文件 sql 三处
      */
     public function sort(){
         if(request()->isAjax()){
         }else{
             $id = intval(input('id'));
+            $cid= intval(input('cid'));
             if(!$id){
                 $this->error('此项目已下架');
             }
@@ -164,7 +150,8 @@ class Scene extends \common\controller\Base{
             if(empty($scene)){
                 $this->error('此项目已下架');
             }
-            $scene['main_img'] = explode(',',(string)$scene['main_img']);
+            // code=1
+            //$scene['main_img'] = explode(',',(string)$scene['main_img']);
             $scene['tag'] = explode(',',(string)$scene['tag']);
             $this->assign('scene',$scene);
 
@@ -175,7 +162,7 @@ class Scene extends \common\controller\Base{
                     ['gc.status', '=', 0],
                     ['sgc.scene_id', '=', $id],
                 ],'field'=> [
-                    'gc.id ','gc.name',
+                    'gc.id ','gc.name','gc.img',
                 ],'join' => [
                     ['goods_category gc','gc.id = sgc.goods_category_id','left']
                 ],'order'=> [
@@ -185,10 +172,18 @@ class Scene extends \common\controller\Base{
             $categoryList = $modelSceneGoodsCategory->getList($config);
             $this->assign('categoryList',$categoryList);
 
+            // 选中的分类
+            if(!$cid){
+                $categoryInfo = reset($categoryList);
+                $cid = $categoryInfo['id'];
+            }
+            $this->assign('cid',$cid);
+            $this->assign('id',$id);
+
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
-            return $this->fetch();
+            return $this->fetch('sort_img');
         }
     }
 
