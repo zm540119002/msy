@@ -1,15 +1,23 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 {/block}
-{block name="content"}{/block}
+{block name="content"}
+<a href="javascript:void(0);" class="login">
+    <span class="recharge"></span>登录
+</a>
+{/block}
 {block name="common"}
     {include file="../../api/public/template/login_dialog.html" /}
 {/block}
+<footer class="f24"></footer>
 {block name="script"}
 <script type="text/javascript">
     $(function(){
         $('.userInfoWrapper').find('.forget_password,.resetpas,.back_login').hide();
         loginDialog();
+        $('bod').on('click','.login',function(){
+            loginDialog();
+        });
     })
 </script>
 {/block}
