@@ -93,7 +93,7 @@ class Order extends \common\controller\UserBase
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
-    //确定订单 //订单-详情页
+    // 订单确认页
     public function confirmOrder()
     {
         if (request()->isPost()) {
@@ -189,7 +189,8 @@ class Order extends \common\controller\UserBase
 
 
     }
-    //支付
+
+    // 支付
     public function toPay()
     {
         $orderSn = input('order_sn/s');
