@@ -4,15 +4,6 @@
 {/block}
 {block name="content"}
     <div class="page">
-        <div class="fixed-bar">
-            <div class="item-title">
-                <ul class="tab-base">
-                    <li><a href="{:url('manage')}"><span>管理</span></a></li>
-                    <li><a href="{:url('edit')}" class="current"><span>编辑</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="fixed-empty"></div>
         <div align=center style="margin-top:15px;">
             <table id=table5 border=0 cellspacing=0 cellpadding=0 width="100%" class="edit_common_item">
                 <tbody class="edit_common_tr">
@@ -255,6 +246,7 @@
             //确定
             $(".button_save_black_4").click(function(){
                 var postData = $('#form1').serializeObject();
+
                 postData.level = 1;
                 if(postData.parent_id_1){
                     postData.level = 2;
@@ -265,7 +257,12 @@
                 var url = controller + 'edit';
                 $.post(url,postData,function(msg){
                     dialog.msg(msg,'',function () {
-                        location.href= window.history.go(-1);
+
+                        //location.href= window.history.go(-1);
+                        //location.href= window.history.back(-1);
+                        // 提交后关闭，然后刷新父窗口
+                        layer.close(layer.index);
+                        window.parent.location.reload();
                     });
                 });
             });
