@@ -28,6 +28,10 @@ return [
             'db'=>'db_config_mcs',
             'jump_url'=>'https://mcs.meiishangyun.com/index/Order/manage/order_status/2',
         ],
+        '3'=>[
+            'db'=>'db_config_hss',
+            'jump_url'=>'https://hss.meiishangyun.com/index/Order/manage/order_status/2',
+        ],
     ]
 
 ];
