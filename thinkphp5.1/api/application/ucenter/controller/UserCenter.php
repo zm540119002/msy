@@ -17,8 +17,6 @@ class UserCenter extends \think\Controller{
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
             return $modelUser->login($postData);
-        } else {
-            return $this->fetch();
         }
     }
     /**注册
