@@ -2,9 +2,7 @@
 {block name="css-customize"}
 {/block}
 {block name="content"}
-<a href="javascript:void(0);" class="login">
-    <span class="recharge"></span>登录
-</a>
+<a href="javascript:void(0);" class="login">登录</a>
 {/block}
 {block name="common"}
     {include file="../../api/public/template/login_dialog.html" /}
@@ -15,7 +13,8 @@
     $(function(){
         $('.userInfoWrapper').find('.forget_password,.resetpas,.back_login').hide();
         loginDialog();
-        $('bod').on('click','.login',function(){
+        //登录-弹窗事件
+        $('body').on('click','.login',function(){
             loginDialog();
         });
     })
