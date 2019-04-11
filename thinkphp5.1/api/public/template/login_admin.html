@@ -30,7 +30,7 @@
 <div class="loginWraper">
     <div class="loginBox">
         <h2 class="welcome">欢迎登录</h2>
-        {include file="template/login_tpl.html" /}
+        {include file="../../api/public/template/login_dialog.html" /}
     </div>
 </div>
 <footer class="f24 bottom_footer">
@@ -50,12 +50,17 @@
 <script type="text/javascript" src="public_js/common.js"></script>
 <script type="text/javascript" src="common_admin_js/dialog.js"></script>
 <script type="text/javascript">
-    var domain = '{:request()->domain()}'+'/'+'index.php/';
+    var domain = '{:request()->domain()}/';
+    var uploads = domain + 'uploads/';
     var module = domain + '{:request()->module()}/';
     var controller = module + '{:request()->controller()}/';
     var action = controller + '{:request()->action()}';
-    var uploads = '{:request()->domain()}'+'/uploads/';
     $(function(){
+        loginDialog();
+        //登录-弹窗事件
+        $('body').on('click','.login',function(){
+            loginDialog();
+        });
     });
 </script>
 </body></html>
