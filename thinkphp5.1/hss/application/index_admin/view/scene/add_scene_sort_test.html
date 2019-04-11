@@ -12,7 +12,7 @@
     <section class="recommendGoods_content">
         <!--推荐产品容器-->
         <div id="recommendGoods">
-            <span class="content-label">已推荐产品</span>
+            <span class="content-label">已添加商品分类</span>
             <a href="javascript:void(0);" class="confirm_add">确定添加</a>
             <ul class="selected_goods_list" id="selected_list">
 
@@ -22,16 +22,14 @@
                 <input type="hidden" name="pageType" value="layer"/>
                 <div class="search_bar">
                     <span class="left">产品分类:</span>
-                    {include file="goods_category/linkage_tpl" /}
                     <input type="text" class="search-goods keyword" name="keyword"  placeholder="搜索产品">
                     <input type="button" value="搜索" class="layer-search-btn search" id="searchGoods">
                 </div>
             </form>
-            <span class="content-label">所有产品(可以从下面商品中点击添加产品到已推荐产品)</span>
+            <span class="content-label">所有商品分类</span>
             <div class="add_layer_content">
                 <div class="thead_title">
-                    <span class="list_item">产品名称</span>
-                    <span class="list_item">所属分类</span>
+                    <span class="list_item">商品分类</span>
                     <span class="list_item">操作</span>
                 </div>
                 <ul class="scroller-container list" id="list">
@@ -54,13 +52,11 @@
     <script type="text/javascript">
         $(function () {
             var id = {$id};
-            var relation = {$relation};
             //加载第一页
             var config = {
-                url:module+'goods/getList'
+                url:module+'goodsCategory/getList',
             };
             var getData = $('#form1').serializeObject();
-            getData.shelf_status = 3;
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
@@ -78,24 +74,45 @@
                 var getData = $('#form1').serializeObject();
                 getPagingList(config,getData);
             });
+        });
 
-            // 显示已关联的商品
-            if(id){
+        //折叠
+        $('body').on('click','.folding',function(){
+            var _this = $(this);
+            var status = _this.attr('status');
+            var _thisTr = _this.parents('tr');
+
+            if(status == 'open'){
+                _this.attr('status','close');
+                var postData = {};
+                postData.level = _thisTr.data('level');
+                postData.id = _thisTr.data('id');
+                postData.parent_id_1 = _thisTr.data('parent-id-1');
+                //异步加载子分类
+                var url = module+'GoodsCategory/' + 'getSubclass';
                 $.ajax({
-                    url: module+'Goods/getRelationGoods',
-                    data: {id:id,relation:relation},
-                    type: 'get',
-                    beforeSend: function(){
+                    url: url,
+                    type:'post',
+                    data:postData,
+                    dataType: 'html',
+                    error: function(){
+                        dialog.error('AJAX错误。。。');
                     },
-                    error:function (xhr) {
-                        dialog.error('AJAX错误');
-                    },
-                    success: function(data){
-                        $('#selected_list').html(data)
+                    success: function(data){
+                        _thisTr.after(data);
                     }
                 });
+            }else if(status == 'close'){
+                _this.attr('status','open');
+                if(_thisTr.data('level') == 1){
+                    _thisTr.nextUntil('[data-level=1]').remove();
+                }else if(_thisTr.data('level') == 2){
+                    _thisTr.nextUntil('[data-level!=3]').remove();
+                    _thisTr.nextAll('[data-level=0]').remove();
+                }
             }
-            // 选择商品
+
+            //添加商品
             $('body').on('click','.add_goods',function(){
                 var selectedGoodsIds = [];
                 $('.selected_goods_list li').each(function(){
@@ -136,7 +153,7 @@
                 })
                 _this.parent().remove();
             });
-            // 提交添加
+            //添加
             $('body').on('click','.confirm_add',function(){
                 var selectedIds=[];
                 var postData ={};
@@ -144,7 +161,7 @@
                 $('.selected_goods_list li').each(function () {
                     var selectedGoods={};
                     var goodsSelectedId=$(this).data('goods-id');
-                    selectedGoods.promotion_id=id;
+                    selectedGoods.scene_id=id;
                     selectedGoods.goods_id=goodsSelectedId;
                     selectedIds.push(selectedGoods);
                 });
@@ -153,9 +170,7 @@
                     return false;
                 }
                 postData.selectedIds = selectedIds;
-                postData.relation    = relation;
-                var url = module+'Goods/addRelationGoods';
-
+                var url = module+'Scene/addSceneGoods';
                 _this.addClass("nodisabled");//防止重复提交
                 $.ajax({
                     url: url,
@@ -169,13 +184,13 @@
                     success: function(data){
                         _this.removeClass("nodisabled");
                         dialog.msg(data,'',function () {
-                            history.go(-1);
+                            var url =  module + 'Scene/manage';
+                            location.href = url;
                         })
                     }
                 });
 
             })
-            
         });
     </script>
 {/block}

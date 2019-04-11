@@ -54,13 +54,11 @@
     <script type="text/javascript">
         $(function () {
             var id = {$id};
-            var relation = {$relation};
             //加载第一页
             var config = {
-                url:module+'goods/getList'
+                url:module+'goods/getList',
             };
             var getData = $('#form1').serializeObject();
-            getData.shelf_status = 3;
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
@@ -79,11 +77,11 @@
                 getPagingList(config,getData);
             });
 
-            // 显示已关联的商品
+            //选择产品回显
             if(id){
                 $.ajax({
-                    url: module+'Goods/getRelationGoods',
-                    data: {id:id,relation:relation},
+                    url: module+'Goods/getSceneGoods',
+                    data: {sceneId:id},
                     type: 'get',
                     beforeSend: function(){
                     },
@@ -95,7 +93,7 @@
                     }
                 });
             }
-            // 选择商品
+            //添加商品
             $('body').on('click','.add_goods',function(){
                 var selectedGoodsIds = [];
                 $('.selected_goods_list li').each(function(){
@@ -136,7 +134,7 @@
                 })
                 _this.parent().remove();
             });
-            // 提交添加
+            //添加
             $('body').on('click','.confirm_add',function(){
                 var selectedIds=[];
                 var postData ={};
@@ -144,7 +142,7 @@
                 $('.selected_goods_list li').each(function () {
                     var selectedGoods={};
                     var goodsSelectedId=$(this).data('goods-id');
-                    selectedGoods.promotion_id=id;
+                    selectedGoods.scene_id=id;
                     selectedGoods.goods_id=goodsSelectedId;
                     selectedIds.push(selectedGoods);
                 });
@@ -153,9 +151,7 @@
                     return false;
                 }
                 postData.selectedIds = selectedIds;
-                postData.relation    = relation;
-                var url = module+'Goods/addRelationGoods';
-
+                var url = module+'Scene/addSceneGoods';
                 _this.addClass("nodisabled");//防止重复提交
                 $.ajax({
                     url: url,
@@ -169,7 +165,8 @@
                     success: function(data){
                         _this.removeClass("nodisabled");
                         dialog.msg(data,'',function () {
-                            history.go(-1);
+                            var url =  module + 'Scene/manage';
+                            location.href = url;
                         })
                     }
                 });

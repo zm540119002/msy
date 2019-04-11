@@ -25,6 +25,7 @@
                                     <input type="radio" name="type" value="{$k}">{$vo}
                                     {/if}
                                 {/volist}
+                                <span class="c-red">*</span>类型为项目时，品牌LOGO、场景主图将不在前台显示 !
                             </div>
                         </td>
                     </tr>
@@ -84,6 +85,55 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>品牌LOGO：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        {empty name="info.logo_img"}
+                                        <img class="upload_img" src="">
+                                        {else /}
+                                        <img class="upload_img " src="public_uploads/{$info.logo_img}" />
+                                        {/empty}
+                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.logo_img}" name="logo_img"/>
+                                    </div>
+                                    <!--<p>企业营业执照</p>-->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>背景颜色：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module" style="background:url(public_uploads/{$info.background_img});">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        {empty name="info.background_img"}
+                                        <img class="upload_img" src="">
+                                        {else /}
+                                        <img class="upload_img " src="public_uploads/{$info.background_img}" />
+                                        {/empty}
+                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.background_img}" name="background_img"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                   <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>场景主图:</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <!--<p> 加载编辑器的容器 </p>-->
+                            <script id="main_img" type="text/plain">
+
+                            </script>
+                            <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
+                        </td>
+                    </tr>
+                    <tr>
                         <td width="11%"></td>
                         <td height=60 width="50%" align=center>
                             <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
@@ -140,6 +190,10 @@
                     content='场景分组不能为空';
                 }else if(!postData.thumb_img){
                     content='缩略图不能为空';
+                }else if(!postData.logo_img){
+                    content='品牌LOGO不能为空';
+                }else if(!postData.main_img){
+                    content='场景主图不能为空';
                 }
                 if(content){
                     dialog.error(content);
