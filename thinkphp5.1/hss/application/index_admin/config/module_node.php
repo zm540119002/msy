@@ -15,12 +15,14 @@ return [
             'sub_menu' => [
                 ['id'=>202,'name'=>'场景管理','display'=>1,'controller'=>'Scene','action'=>'manage',],
             ],
-        ],'project'=>[
+        ],
+/*        'project'=>[
             'id'=>300,'name'=>'项目','type'=>2,
             'sub_menu' => [
                 ['id'=>301,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
             ],
-        ],'scheme'=>[
+        ],*/
+        'scheme'=>[
             'id'=>400,'name'=>'方案','type'=>2,
             'sub_menu' => [
                 ['id'=>401,'name'=>'方案管理','display'=>1,'controller'=>'scheme','action'=>'manage',],

@@ -23,6 +23,8 @@ class Scene extends Base {
 
     /**
      * (查询 :增加 OR 修改) OR 提交 做
+     * // 没有图片 暂时隐藏 后期待确定后再删除 code=1， edit_img.html 文件 sql 三处
+     *
      * @return array
      */
     public function edit(){
@@ -40,8 +42,8 @@ class Scene extends Base {
         else{
             // 基础处理
             if(!input('param.name/s')) return errorMsg('失败');
-
-            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+            // code=1
+/*            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
             }
             if( isset($_POST['background_img']) && $_POST['background_img'] ){
@@ -57,7 +59,7 @@ class Scene extends Base {
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
 
-            }
+            }*/
 
             // 后面改进
             if( isset($_POST['type'])&&$_POST['type'] ){
@@ -79,11 +81,14 @@ class Scene extends Base {
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
 
-                $info  = $model->getInfo($condition);
+                // code=1
+                ///$info  = $model->getInfo($condition);
+
                 $result= $model->edit($data,$condition['where']);
                 if(!$result['status']) return $result;
 
-                //删除旧文件
+                // code=1
+/*                //删除旧文件
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
@@ -98,7 +103,7 @@ class Scene extends Base {
                     $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
-                }
+                }*/
 
             }
             else{//新增
