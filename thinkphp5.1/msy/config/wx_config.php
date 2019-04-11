@@ -21,7 +21,7 @@ return [
     'key' => 'Pq8YLYz7llOp09v9KdeFZ373cey37Iub',
 
     //TODO:公众号支付回调函数
-    'notify_url'  => "https://msy.meishangyun.com/index/Payment/notifyBcak",
+    'notify_url'  => "https://msy.meishangyun.com/index/Payment/wxPayNotifyCallBack",
     'return_url'  => "https://msy.meishangyun.com/index/Payment/payComplete/",
     /**
      * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0

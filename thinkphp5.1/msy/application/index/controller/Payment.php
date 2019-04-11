@@ -98,7 +98,7 @@ class Payment extends \common\controller\Base {
         $payCode = input('pay_code','0','int');
         //微信支付
         if($payCode == 1){
-            $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/weixinBack/type/order";
+            $payInfo['notify_url'] = config('wx_config.notify_url');
             \common\component\payment\weixin\weixinpay::wxPay($payInfo);
         }
         //支付宝支付
@@ -218,6 +218,14 @@ class Payment extends \common\controller\Base {
     //支付失败完跳转的页面
     public function payFail(){
         return $this->fetch();
+    }
+
+    public function wxPayNotifyCallBack(){
+        $xml = file_get_contents('php://input');
+        file_put_contents('./xml.json',$xml);
+        $data = xmlToArray($xml);
+        file_put_contents('./array.json',$data);
+        exit;
     }
 
 }
