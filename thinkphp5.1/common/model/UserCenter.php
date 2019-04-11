@@ -44,9 +44,6 @@ class UserCenter extends Base {
 		);
 		$user = $this->field($field)->where($where)->find();
 		$user = $user->toArray();
-		if(!count($user)) {
-			return errorMsg('账号不存在,请重新输入！');
-		}
 		if($password && !slow_equals($user['password'],md5($user['salt'].$password))){
 			return errorMsg('密码错误,请重新输入！');
 		}
