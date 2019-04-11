@@ -192,6 +192,11 @@ class Order extends \common\controller\UserBase
     //支付
     public function toPay()
     {
+        $orderSn = input('order_sn/s');
+        $url = config('custom.pay_gateway');
+
+        return $this->redirect($url.$orderSn);
+
 /*        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $payOpenId =  session('pay_open_id');
             if(empty($payOpenId)){
