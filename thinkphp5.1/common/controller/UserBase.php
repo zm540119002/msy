@@ -16,7 +16,9 @@ class UserBase extends Base{
             if(request()->isAjax()){
                 $this->success('您还未登录平台，请先登录！',url($this->indexUrl),'no_login',0);
             }else{
-                $this->error('您还未登录平台，请先登录！',str_replace('/index.php','',url($this->loginUrl)));
+//                $this->error('您还未登录平台，请先登录！',str_replace('/index.php','',url($this->loginUrl)));
+                echo $this->fetch('template/login_tpl.html');
+                exit;
             }
         }
     }
