@@ -85,7 +85,7 @@ class Payment extends \common\controller\Base {
             //$this -> error('支付的金额不能为零');
             return successMsg('支付的金额不能为零');
         }
-        return $config;
+
         $jump_url =config('custom.system_id')[$systemId]['jump_url'];
         $return_url = config('wx_config.return_url');
         $attach = json_encode($attach);
@@ -99,7 +99,7 @@ class Payment extends \common\controller\Base {
             'attach'=>$attach
         ];
         $payCode = input('pay_code','0','int');
-
+        return $payCode;
         switch($payCode){
             case 1 : // 微信支付
                 $payInfo['notify_url'] = config('wx_config.notify_url');
@@ -160,10 +160,10 @@ class Payment extends \common\controller\Base {
                 return successMsg('成功');
                 break;
         }
-
+        p($msg);
+        exit;
         if(isset($msg)){
             return successMsg($msg);
-
         }
     }
 
