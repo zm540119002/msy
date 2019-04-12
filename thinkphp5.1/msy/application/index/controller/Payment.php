@@ -230,11 +230,11 @@ class Payment extends \common\controller\Base {
     public function notifyUrl(){
 
         $xml = file_get_contents('php://input');
-        $xml = 222222;
+        //$xml = 222222;
         file_put_contents('./xml1.json',$xml);
 
         $data = xmlToArray($xml);
-        $data = 4444;
+        //$data = 4444;
         file_put_contents('./array1.json',$data);
         echo 2222;
         exit;
