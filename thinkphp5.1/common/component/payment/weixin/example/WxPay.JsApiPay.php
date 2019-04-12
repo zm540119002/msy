@@ -71,7 +71,7 @@ class JsApiPay
 		|| $UnifiedOrderResult['prepay_id'] == "")
 		{
 
-			throw new WxPayException("参数错误");
+			throw new WxPayException("参数错误111111");
 		}
 		echo 111111;
         exit;
