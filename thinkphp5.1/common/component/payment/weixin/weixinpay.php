@@ -24,7 +24,7 @@ class weixinpay{
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
-            weixinpay::getJSAPI($payInfo);
+            return weixinpay::getJSAPI($payInfo);
         }
     }
 
@@ -95,11 +95,11 @@ class weixinpay{
             </script>
 EOF;
             echo  $html;
+            //return true;
         } catch(\Exception $e) {
 
-            p($e->getMessage());
-            exit;
-            \Log::ERROR(json_encode($e));
+            //\Log::ERROR(json_encode($e));
+            return $e->getMessage();
         }
 
 
