@@ -9,6 +9,8 @@ class Payment extends \common\controller\Base {
     // 确定支付页
     public function toPay()
     {
+        $this->wxPayNotifyCallBack();
+        exit;
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
@@ -59,7 +61,6 @@ class Payment extends \common\controller\Base {
 
     // 支付处理
     public function orderPayment(){
-        file_put_contents('./xml.json','11111');
 //        if( empty(input('order_sn')) || empty(input('?pay_code'))){
 //            $this -> error('参数错误');
 //        }
@@ -227,10 +228,11 @@ class Payment extends \common\controller\Base {
         return $this->fetch();
     }
 
-    //public function wxPayNotifyCallBack(){
-    public function notifyUrl(){
+    public function wxPayNotifyCallBack(){
+        
         $xml = file_get_contents('php://input');
         file_put_contents('./xml.json',$xml);
+
         $data = xmlToArray($xml);
         file_put_contents('./array.json',$data);
         exit;
