@@ -102,8 +102,9 @@ class Payment extends \common\controller\Base {
         switch($payCode){
             case 1 : // 微信支付
                 $payInfo['notify_url'] = config('wx_config.notify_url');
-                //$wxPay = new \common\component\payment\weixin\weixinpay;
-                \common\component\payment\weixin\weixinpay::wxPay($payInfo);
+                $wxPay = new \common\component\payment\weixin\weixinpay;
+                $msg   = $wxPay->wxPay($payInfo);
+                //\common\component\payment\weixin\weixinpay::wxPay($payInfo);
                 break;
             case 2 : // 支付宝
                 $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
