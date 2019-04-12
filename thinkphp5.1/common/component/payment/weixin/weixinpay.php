@@ -8,6 +8,7 @@
 
 namespace common\component\payment\weixin;
 require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
+//require_once(dirname(__FILE__) . '/lib/WxPay.Exception.php');
 require_once(dirname(__FILE__)  . '/WxPay.JsApiPay.php');
 require_once(dirname(__FILE__)  . '/WxPay.NativePay.php');
 require_once(dirname(__FILE__)  . '/log.php');
@@ -36,8 +37,7 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         try{
-            p(get_included_files());
-            exit;
+            //throw new \WxPayException($UnifiedOrderResult['err_code_des']);
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
             $input = new \WxPayUnifiedOrder();
@@ -98,7 +98,7 @@ class weixinpay{
             </script>
 EOF;
             echo  $html;
-        } catch(Exception $e) {
+        } catch(\WxPayException $e) {
             //return 3333333;
             p(json_encode($e));
             exit;
