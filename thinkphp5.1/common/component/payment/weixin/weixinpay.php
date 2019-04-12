@@ -36,6 +36,8 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         try{
+            p(get_included_files());
+            exit;
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
             $input = new \WxPayUnifiedOrder();
@@ -51,7 +53,7 @@ class weixinpay{
             $input->SetTrade_type("JSAPI");				                  //支付类型
             $input->SetOpenid(session('pay_open_id'));					  //用户openID
             $order = \WxPayApi::unifiedOrder($input);	                  //统一下单
- /*           p($order);
+/*            p($order);
             exit;*/
 
             $tools = new \JsApiPay();
@@ -97,6 +99,7 @@ class weixinpay{
 EOF;
             echo  $html;
         } catch(Exception $e) {
+            //return 3333333;
             p(json_encode($e));
             exit;
             Log::ERROR(json_encode($e));

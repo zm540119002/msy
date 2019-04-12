@@ -32,9 +32,9 @@ return [
     'taglib_end'   => '}',
     'tpl_replace_string' => [
         //api    资源路径
-        'api_common_js' => 'https://api.meishangyun.com/static/common/js',
-        'api_common_css' => 'https://api.meishangyun.com/static/common/css',
-        'api_common_img' => 'https://api.meishangyun.com/static/common/img',
+        'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
+        'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
+        'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
         //公共资源路径
         'public_img' => Request::domain() .'/static/common/img',
         'public_js' => Request::domain() .'/static/common/js',
