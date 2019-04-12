@@ -226,7 +226,8 @@ class Payment extends \common\controller\Base {
         return $this->fetch();
     }
 
-    public function wxPayNotifyCallBack(){
+    //public function wxPayNotifyCallBack(){
+    public function notifyUrl(){
 
         $xml = file_get_contents('php://input');
         file_put_contents('./xml.json',$xml);
