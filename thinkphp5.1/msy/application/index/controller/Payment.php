@@ -160,8 +160,7 @@ class Payment extends \common\controller\Base {
                 break;
         }
         if(isset($msg)){
-            echo $msg;
-            //$this -> error($msg);
+            $this -> error($msg);
         }
     }
 
@@ -227,7 +226,8 @@ class Payment extends \common\controller\Base {
         return $this->fetch();
     }
 
-    public function wxPayNotifyCallBack(){
+    //public function wxPayNotifyCallBack(){
+    public function notifyUrl(){
         $xml = file_get_contents('php://input');
         file_put_contents('./xml.json',$xml);
         $data = xmlToArray($xml);
