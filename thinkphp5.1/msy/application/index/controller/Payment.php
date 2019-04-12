@@ -102,9 +102,9 @@ class Payment extends \common\controller\Base {
         //微信支付
         if($payCode == 1){
             $payInfo['notify_url'] = config('wx_config.notify_url');
-            $wsPay = new \common\component\payment\weixin\weixinpay;
-            $wsPay->wxPay($payInfo);
-            //\common\component\payment\weixin\weixinpay::wxPay($payInfo);
+            //$wsPay = new \common\component\payment\weixin\weixinpay;
+            //$wsPay->wxPay($payInfo);
+            \common\component\payment\weixin\weixinpay::wxPay($payInfo);
         }
         //支付宝支付
         if($payCode == 2){
