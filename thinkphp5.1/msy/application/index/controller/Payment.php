@@ -234,6 +234,7 @@ class Payment extends \common\controller\Base {
 
         $data = xmlToArray($xml);
         file_put_contents('./array.json',$data);
+        echo 2222;
         exit;
     }
 
