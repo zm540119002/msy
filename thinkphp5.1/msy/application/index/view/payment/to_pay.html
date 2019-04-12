@@ -109,7 +109,9 @@
             }
             var postData = $('#pay_info').serializeObject();
             var url = module + 'Payment/orderPayment';
-            $.post(url,postData,function(msg){
+            $.post(url,postData,function(data){
+                console.log(data);
+                return false;
                 dialog.msg(msg,'',function () {
              /*       if(msg.status){
                         // 提交后关闭，然后刷新父窗口
