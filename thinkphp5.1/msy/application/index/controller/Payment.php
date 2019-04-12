@@ -9,8 +9,6 @@ class Payment extends \common\controller\Base {
     // 确定支付页
     public function toPay()
     {
-        $this->wxPayNotifyCallBack();
-        exit;
         $modelOrder = new \app\index\model\Order();
         $systemId = input('system_id',0,'int');
         $this->assign('system_id', $systemId);
@@ -229,7 +227,7 @@ class Payment extends \common\controller\Base {
     }
 
     public function wxPayNotifyCallBack(){
-        
+
         $xml = file_get_contents('php://input');
         file_put_contents('./xml.json',$xml);
 
