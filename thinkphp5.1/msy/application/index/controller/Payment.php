@@ -233,6 +233,7 @@ class Payment extends \common\controller\Base {
         file_put_contents('./xml.json',$xml);
 
         $data = xmlToArray($xml);
+        $data = 4444;
         file_put_contents('./array.json',$data);
         echo 2222;
         exit;
