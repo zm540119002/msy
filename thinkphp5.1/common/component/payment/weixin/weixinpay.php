@@ -96,7 +96,7 @@ class weixinpay{
                 callpay();
             </script>
 EOF;
-            return $html;
+            echo $html;
             //return true;
         } catch(\Exception $e) {
 
