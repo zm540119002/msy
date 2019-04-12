@@ -160,10 +160,10 @@ class Payment extends \common\controller\Base {
                 return successMsg('成功');
                 break;
         }
-
+        p($msg);
+        exit;
         if(isset($msg)){
             return successMsg($msg);
-
         }
     }
 
