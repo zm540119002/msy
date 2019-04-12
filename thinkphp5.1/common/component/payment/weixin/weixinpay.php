@@ -22,9 +22,10 @@ class weixinpay{
         if (!isPhoneSide()) {//pc端微信扫码支付
             weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
-            weixinpay::h5_pay($payInfo);
+            //weixinpay::h5_pay($payInfo);
+            return weixinpay::getJSAPI($payInfo);
         }else{//微信浏览器(手机端)
-            weixinpay::getJSAPI($payInfo);
+            return weixinpay::getJSAPI($payInfo);
         }
     }
 
@@ -36,6 +37,7 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
+
         try{
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
@@ -94,12 +96,12 @@ class weixinpay{
                 callpay();
             </script>
 EOF;
-            echo  $html;
+            return $html;
+            //return true;
         } catch(\Exception $e) {
 
-            p($e->getMessage());
-            exit;
-            \Log::ERROR(json_encode($e));
+            //\Log::ERROR(json_encode($e));
+            return $e->getMessage();
         }
 
 
