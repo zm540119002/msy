@@ -38,6 +38,12 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
 
+        // 测试用
+        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+        $payOpenId  = $tools->getOpenid();
+        session('pay_open_id',$payOpenId);
+
+
         try{
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
