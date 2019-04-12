@@ -303,9 +303,7 @@
 //                console.log(sum(postData.belong_to));
 //                console.log(sum(postData.belong_to));return false;
                 var content='';
-                if(!sum(postData.belong_to)){
-                    content='请选择店铺类别';
-                }else if(!postData.name){
+                if(!postData.name){
                     content='请填写商品名称';
                 }else if(!postData.headline){
                     content='请填写商品标题文案';
@@ -339,15 +337,6 @@
                     });
                 });
             });
-
-            $('document').ready(function(){
-                // 选择默认值
-                var i = '{$info.id}';
-                if(!i.length){
-                    $("input[name='belong_to']:first").attr('checked','checked');
-                }
-            });
-
         });
     </script>
 {/block}
