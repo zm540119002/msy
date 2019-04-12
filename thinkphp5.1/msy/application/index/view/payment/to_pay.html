@@ -109,6 +109,10 @@
             }
 
             var url = module + 'Payment/orderPayment';
+            console.log(postData);
+            return false;
+
+
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function () {
                     if(msg.status){
