@@ -109,33 +109,16 @@
             }
             var postData = $('#pay_info').serializeObject();
             var url = module + 'Payment/orderPayment';
-            $.ajax({
-                url: url,
-                data: postData,
-                type: 'post',
-                beforeSend: function(xhr){
-                    $('.loading').show();
-                },
-                error:function(xhr){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误！');
-                },
-                success: function(data){
-                    dialog.error(data.info);
-        /*            if(data.status==0){
-                        dialog.error(data.info);
-                    }else if(data.code==1){
-                        if(data.data == 'no_login'){
-                            loginDialog();
-                        }
-                    }else if(data.status==1){
-
-                    }else{
-                        location.href = url;
+            $.post(url,postData,function(msg){
+                dialog.msg(msg,'',function () {
+             /*       if(msg.status){
+                        // 提交后关闭，然后刷新父窗口
+                        var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                        parent.layer.close(index);
+                        //window.parent.location.reload();
                     }*/
-                }
+                });
             });
-
         });
 
         $('body').on('click','.forget_wallet_password',function () {
