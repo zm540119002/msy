@@ -59,6 +59,7 @@ class Payment extends \common\controller\Base {
 
     // 支付处理
     public function orderPayment(){
+        file_put_contents('./xml.json','11111');
 //        if( empty(input('order_sn')) || empty(input('?pay_code'))){
 //            $this -> error('参数错误');
 //        }
