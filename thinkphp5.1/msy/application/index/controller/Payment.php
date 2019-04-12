@@ -160,7 +160,8 @@ class Payment extends \common\controller\Base {
                 break;
         }
         if(isset($msg)){
-            $this -> error($msg);
+            echo $msg;
+            //$this -> error($msg);
         }
     }
 
