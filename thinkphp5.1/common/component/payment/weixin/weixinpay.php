@@ -95,7 +95,7 @@ class weixinpay{
             </script>
 EOF;
             echo  $html;
-        } catch(WxPayException $e) {
+        } catch(Exception $e) {
             p(json_encode($e));
             exit;
             Log::ERROR(json_encode($e));

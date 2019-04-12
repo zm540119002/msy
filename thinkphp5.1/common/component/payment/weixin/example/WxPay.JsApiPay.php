@@ -73,6 +73,8 @@ class JsApiPay
 
 			throw new WxPayException("参数错误");
 		}
+		echo 111111;
+        exit;
 		$jsapi = new WxPayJsApiPay();
 		$jsapi->SetAppid($UnifiedOrderResult["appid"]);
 		$timeStamp = time();
