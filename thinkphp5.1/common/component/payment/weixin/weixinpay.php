@@ -36,6 +36,8 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         try{
+            p(get_included_files());
+            exit;
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
             $input = new \WxPayUnifiedOrder();
@@ -96,7 +98,7 @@ class weixinpay{
             </script>
 EOF;
             echo  $html;
-        } catch(WxPayException $e) {
+        } catch(Exception $e) {
             //return 3333333;
             p(json_encode($e));
             exit;
