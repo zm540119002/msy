@@ -107,7 +107,7 @@
                 walletPayDialog();
                 return false
             }
-
+            var postData = $('#pay_info').serializeObject();
             var url = module + 'Payment/orderPayment';
             console.log(postData);
             return false;
