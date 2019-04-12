@@ -71,10 +71,8 @@ class JsApiPay
 		|| $UnifiedOrderResult['prepay_id'] == "")
 		{
 
-			throw new WxPayException("参数错误111111");
+			throw new WxPayException("参数错误");
 		}
-		echo 111111;
-        exit;
 		$jsapi = new WxPayJsApiPay();
 		$jsapi->SetAppid($UnifiedOrderResult["appid"]);
 		$timeStamp = time();
