@@ -51,8 +51,8 @@ class weixinpay{
             $input->SetTrade_type("JSAPI");				                  //支付类型
             $input->SetOpenid(session('pay_open_id'));					  //用户openID
             $order = \WxPayApi::unifiedOrder($input);	                  //统一下单
-            p($order);
-            exit;
+ /*           p($order);
+            exit;*/
 
             $tools = new \JsApiPay();
             $jsApiParameters = $tools->GetJsApiParameters($order);
