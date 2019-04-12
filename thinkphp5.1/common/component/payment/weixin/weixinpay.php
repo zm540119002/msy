@@ -97,7 +97,7 @@ EOF;
             echo  $html;
         } catch(\Exception $e) {
 
-            \Log::ERROR(json_encode($e));
+            //\Log::ERROR(json_encode($e));
             return $e->getMessage();
         }
 
