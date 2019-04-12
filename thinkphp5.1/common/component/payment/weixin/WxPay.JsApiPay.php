@@ -66,13 +66,14 @@ class JsApiPay
 	 */
 	public function GetJsApiParameters($UnifiedOrderResult)
 	{
+	    p(new WxPayException);
+        exit;
 		if(!array_key_exists("appid", $UnifiedOrderResult)
 		|| !array_key_exists("prepay_id", $UnifiedOrderResult)
 		|| $UnifiedOrderResult['prepay_id'] == "")
 		{
 			//throw new WxPayException("参数错误");
-			//throw new WxPayException($UnifiedOrderResult['err_code_des']);
-			return new WxPayException($UnifiedOrderResult['err_code_des']);
+			throw new WxPayException($UnifiedOrderResult['err_code_des']);
 		}
 
 		$jsapi = new WxPayJsApiPay();
