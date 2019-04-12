@@ -59,6 +59,7 @@ class Payment extends \common\controller\Base {
 
     // 支付处理
     public function orderPayment(){
+        file_put_contents('./xml.json','11111');
 //        if( empty(input('order_sn')) || empty(input('?pay_code'))){
 //            $this -> error('参数错误');
 //        }
@@ -82,8 +83,7 @@ class Payment extends \common\controller\Base {
         ];
         $orderInfo = $modelOrder->getInfo($config);
         if($orderInfo['actually_amount']<=0){
-            //$this -> error('支付的金额不能为零');
-            return successMsg('支付的金额不能为零');
+            $this -> error('支付的金额不能为零');
         }
 
         $jump_url =config('custom.system_id')[$systemId]['jump_url'];
@@ -105,7 +105,7 @@ class Payment extends \common\controller\Base {
                 $payInfo['notify_url'] = config('wx_config.notify_url');
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $msg   = $wxPay->wxPay($payInfo);
-                //\common\component\payment\weixin\weixinpay::wxPay($payInfo);
+
                 break;
             case 2 : // 支付宝
                 $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
@@ -161,7 +161,7 @@ class Payment extends \common\controller\Base {
                 break;
         }
         if(isset($msg)){
-            return successMsg($msg);
+            $this -> error($msg);
         }
     }
 
@@ -227,7 +227,8 @@ class Payment extends \common\controller\Base {
         return $this->fetch();
     }
 
-    public function wxPayNotifyCallBack(){
+    //public function wxPayNotifyCallBack(){
+    public function notifyUrl(){
         $xml = file_get_contents('php://input');
         file_put_contents('./xml.json',$xml);
         $data = xmlToArray($xml);
