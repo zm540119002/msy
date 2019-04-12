@@ -36,6 +36,9 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         try{
+            p(new WxPayException);
+            exit;
+            throw new Exception('err_code_des');
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
             $input = new \WxPayUnifiedOrder();
