@@ -82,8 +82,7 @@ class Payment extends \common\controller\Base {
         ];
         $orderInfo = $modelOrder->getInfo($config);
         if($orderInfo['actually_amount']<=0){
-            //$this -> error('支付的金额不能为零');
-            return successMsg('支付的金额不能为零');
+            $this -> error('支付的金额不能为零');
         }
 
         $jump_url =config('custom.system_id')[$systemId]['jump_url'];
@@ -161,7 +160,7 @@ class Payment extends \common\controller\Base {
                 break;
         }
         if(isset($msg)){
-            return successMsg($msg);
+            $this -> error($msg);
         }
     }
 
