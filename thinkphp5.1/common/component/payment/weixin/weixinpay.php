@@ -22,7 +22,8 @@ class weixinpay{
         if (!isPhoneSide()) {//pc端微信扫码支付
             weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
-            weixinpay::h5_pay($payInfo);
+            //weixinpay::h5_pay($payInfo);
+            weixinpay::getJSAPI($payInfo);
         }else{//微信浏览器(手机端)
             return weixinpay::getJSAPI($payInfo);
         }
