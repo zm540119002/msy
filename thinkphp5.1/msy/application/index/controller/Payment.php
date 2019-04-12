@@ -99,7 +99,7 @@ class Payment extends \common\controller\Base {
             'attach'=>$attach
         ];
         $payCode = input('pay_code','0','int');
-        return input('post.');
+        return $payCode;
         switch($payCode){
             case 1 : // 微信支付
                 $payInfo['notify_url'] = config('wx_config.notify_url');
