@@ -95,7 +95,7 @@ class weixinpay{
             </script>
 EOF;
             echo  $html;
-        } catch(\Exception $e) {
+        } catch(\WxPayException $e) {
 
             p($e);
             exit;
