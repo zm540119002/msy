@@ -85,7 +85,7 @@ class Payment extends \common\controller\Base {
             //$this -> error('支付的金额不能为零');
             return successMsg('支付的金额不能为零');
         }
-        
+
         $jump_url =config('custom.system_id')[$systemId]['jump_url'];
         $return_url = config('wx_config.return_url');
         $attach = json_encode($attach);
