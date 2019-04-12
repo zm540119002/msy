@@ -232,6 +232,7 @@ class Payment extends \common\controller\Base {
         $xml = file_get_contents('php://input');
         $xml = 333333333;
         file_put_contents('./xml.json',$xml);
+        file_put_contents('./xml1.json',$xml);
 
         $data = xmlToArray($xml);
         $data = 4444;
