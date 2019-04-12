@@ -36,7 +36,7 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         try{
-            echo dirname(__FILE__) . '/lib/WxPay.Api.php';
+            p(get_included_files());
             exit;
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
