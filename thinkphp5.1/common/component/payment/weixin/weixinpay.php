@@ -36,6 +36,8 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
+        p(33333);
+        exit;
         try{
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
 
