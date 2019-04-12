@@ -110,8 +110,8 @@
             var postData = $('#pay_info').serializeObject();
             var url = module + 'Payment/orderPayment';
             $.post(url,postData,function(data){
-/*                console.log(data);
-                return false;*/
+                console.log(data);
+                return false;
                 dialog.error(data.info);
      /*           if(data.status==0){
                     dialog.error(data.info);
