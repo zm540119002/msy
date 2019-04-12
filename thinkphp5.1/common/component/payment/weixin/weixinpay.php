@@ -42,6 +42,7 @@ class weixinpay{
             $input->SetBody('美尚云');					                  //商品名称
             $input->SetAttach($payInfo['attach']);			              //附加参数,可填可不填,填写的话,里边字符串不能出现空格
             $input->SetOut_trade_no($payInfo['sn']);			          //订单号
+            $input->SetProduct_id($payInfo['product']);			          //商品ID
             $input->SetTotal_fee($payInfo['actually_amount'] * 100);	  //支付金额,单位:分
             $input->SetTime_start(date("YmdHis"));		                  //支付发起时间
             $input->SetTime_expire(date("YmdHis", time() + 600));         //支付超时
@@ -271,5 +272,33 @@ EOF;
         // 这句file_put_contents是用来查看服务器返回的退款结果 测试完可以删除了
         //file_put_contents(APP_ROOT.'/Api/wxpay/logs/log3.txt',arrayToXml($result),FILE_APPEND);
         return $result;
+    }
+
+    public function orderQuery(){
+        if(isset($_REQUEST["transaction_id"]) && $_REQUEST["transaction_id"] != ""){
+            try {
+                $transaction_id = $_REQUEST["transaction_id"];
+                $input = new WxPayOrderQuery();
+                $input->SetTransaction_id($transaction_id);
+                $config = new WxPayConfig();
+                printf_info(WxPayApi::orderQuery($config, $input));
+            } catch(Exception $e) {
+                Log::ERROR(json_encode($e));
+            }
+            exit();
+        }
+
+        if(isset($_REQUEST["out_trade_no"]) && $_REQUEST["out_trade_no"] != ""){
+            try{
+                $out_trade_no = $_REQUEST["out_trade_no"];
+                $input = new WxPayOrderQuery();
+                $input->SetOut_trade_no($out_trade_no);
+                $config = new WxPayConfig();
+                printf_info(WxPayApi::orderQuery($config, $input));
+            } catch(Exception $e) {
+                Log::ERROR(json_encode($e));
+            }
+            exit();
+        }
     }
 }

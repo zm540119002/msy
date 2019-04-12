@@ -89,6 +89,7 @@ class Payment extends \common\controller\Base {
         $attach = json_encode($attach);
         $payInfo = [
             'sn'=>$orderInfo['sn'],
+            'product'=>$orderInfo['id'],
             'actually_amount'=>$orderInfo['actually_amount'],
             'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
             'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
