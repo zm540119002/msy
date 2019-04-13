@@ -1,13 +1,13 @@
 {notempty name="list"}
 {volist name="list" id="info"}
     <li data-id="{$info.id}" data-order_sn="{$info.sn}">
+            <p>编号：{$info.sn}</p>
             <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
                 {volist name="info.goods_list" id="goods_info"}
                 <div class="order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"
                      data-brand_id="{$goods_info.brand_id}"  data-brand_name="{$goods_info.brand_name}"  >
                         <img src="{:show_img_handle($goods_info.thumb_img)}" class="left">
                     <div class="order_top_r">
-                        <p>编号：{$goods_info.sn}</p>
                         <p>{$goods_info.name}</p>
                         <p>￥<price>{$goods_info.price}</price></p>
                         <p>X<span class="num">{$goods_info.num}</span></p>
