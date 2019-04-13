@@ -264,7 +264,7 @@ EOF;
         return $result;
     }
 
-    //订单查询
+    // 订单查询
     public static function wxOrderQuery($orderSn,$transactionId){
         $input = new \WxPayRefund();
         $input->SetOut_trade_no($orderSn);			//自己的订单号
@@ -276,7 +276,37 @@ EOF;
         return $result;
     }
 
-    public function orderQuery(){
+
+    // 微信支付回调
+    public function wxNotify(){
+
+        try {
+            //获取通知的数据
+            //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+            //$xml = file_get_contents('php://input');
+            $xml = file_get_contents('./xml1.json');
+            $result = \WxPayResults::Init($xml);
+        } catch (\WxPayException $e){
+            $msg = $e->errorMessage();
+            return false;
+        }
+        p($result);die;
+
+
+        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+        //$xml = file_get_contents('php://input');
+        $WxPayNotifyReply = new \WxPayNotifyReply();
+        //第一：格式化xml并验证签名
+        try {
+            $result = \WxPayResults::Init($xml);
+        } catch (\WxPayException $e) {
+            $msg = $e->errorMessage();
+            return false;
+        }
+
+
+        return false;
+        //$order = \WxPayApi::notify($callback);
         if(isset($_REQUEST["transaction_id"]) && $_REQUEST["transaction_id"] != ""){
             try {
                 $transaction_id = $_REQUEST["transaction_id"];

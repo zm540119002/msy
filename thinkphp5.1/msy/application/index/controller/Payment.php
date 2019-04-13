@@ -229,6 +229,33 @@ class Payment extends \common\controller\Base {
     //public function wxPayNotifyCallBack(){
     public function notifyUrl(){
 
+        $wxPay = new \common\component\payment\weixin\weixinpay;
+        $msg   = $wxPay->wxNotify();
+
+        //$res = \WxPayApi::notify(null,$msg);
+        exit;
+
+
+
+        $wxPay = new \common\component\payment\weixin\weixinpay;
+        $msg   = $wxPay->wxNotify();
+
+
+        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+
+        $WxPayNotifyReply = new \WxPayNotifyReply();
+//第一：格式化xml并验证签名
+        try {
+            $result = \WxPayResults::Init($xml);
+        } catch (\WxPayException $e) {
+            $msg = $e->errorMessage();
+            $WxPayNotifyReply->SetReturn_code("FAIL");
+            $WxPayNotifyReply->SetReturn_msg($msg);
+            WxpayApi::replyNotify($WxPayNotifyReply->ToXml());
+            exit;
+        }
+
+
         $xml = file_get_contents('php://input');
         //$xml = 222222;
         file_put_contents('./xml1.json',$xml);
