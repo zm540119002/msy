@@ -226,45 +226,51 @@ class Payment extends \common\controller\Base {
         return $this->fetch();
     }
 
+
+    // 微信支付回调处理
+    /*
+     * 回调处理，修改信息，通知，记录日志
+     * */
     //public function wxPayNotifyCallBack(){
     public function notifyUrl(){
 
         $wxPay = new \common\component\payment\weixin\weixinpay;
-        $msg   = $wxPay->wxNotify();
+        $data  = $wxPay->wxNotify();
 
-        //$res = \WxPayApi::notify(null,$msg);
-        exit;
-
-
-
-        $wxPay = new \common\component\payment\weixin\weixinpay;
-        $msg   = $wxPay->wxNotify();
-
-
-        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-
-        $WxPayNotifyReply = new \WxPayNotifyReply();
-//第一：格式化xml并验证签名
-        try {
-            $result = \WxPayResults::Init($xml);
-        } catch (\WxPayException $e) {
-            $msg = $e->errorMessage();
-            $WxPayNotifyReply->SetReturn_code("FAIL");
-            $WxPayNotifyReply->SetReturn_msg($msg);
-            WxpayApi::replyNotify($WxPayNotifyReply->ToXml());
-            exit;
+        if($data){
+            $attach = json_decode($data['attach'],true);
+            $this->setOrderPayStatus($attach['system_id'],$data['out_trade_no']);
         }
+    }
 
 
-        $xml = file_get_contents('php://input');
-        //$xml = 222222;
-        file_put_contents('./xml1.json',$xml);
 
-        $data = xmlToArray($xml);
-        //$data = 4444;
-        file_put_contents('./array1.json',$data);
-        echo 2222;
-        exit;
+    /**
+     * 更新订单支付成功状态
+     * @param $systemId int 平台代码
+     * @param $orderSn string 订单号
+     */
+    private function setOrderPayStatus($systemId,$orderSn){
+        $modelOrder = new \app\index\model\Order();
+        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
+        $condition = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $orderSn],
+                ['o.order_status', '=', 1],
+            ],'field' => [
+                'o.id',
+            ],
+        ];
+        $data = ['order_status'=>2];
+        $res = $modelOrder->save($condition,$data);
+        if($res){
+            echo 1;
+        }else{
+            \think\facade\Log::init(['path' => './logs/wx/']);
+            \think\facade\Log::error($modelOrder->getLastSql());
+            \think\facade\Log::save();
+        }
     }
 
 }

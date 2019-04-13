@@ -277,60 +277,55 @@ EOF;
     }
 
 
-    // 微信支付回调
+    // 微信支付回调认证
     public function wxNotify(){
 
         try {
             //获取通知的数据
             //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
             //$xml = file_get_contents('php://input');
-            $xml = file_get_contents('./xml1.json');
-            $result = \WxPayResults::Init($xml);
+            $xml  = file_get_contents('./xml1.json');
+            $data = \WxPayResults::Init($xml);
+            if(!$this->Queryorder($data)){
+                //$msg = "订单查询失败";
+                return false;
+            }
         } catch (\WxPayException $e){
-            $msg = $e->errorMessage();
+            //$msg = $e->errorMessage();
+            // 记录日志
+            //\think\facade\Log::init(['path' => '../logs/wx/']);
+            \think\facade\Log::init(['path' => './logs/wx/']);
+            \think\facade\Log::error($e);
+            \think\facade\Log::save();
+
             return false;
         }
-        p($result);die;
+        return $data;
 
+    }
 
-        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-        //$xml = file_get_contents('php://input');
-        $WxPayNotifyReply = new \WxPayNotifyReply();
-        //第一：格式化xml并验证签名
-        try {
-            $result = \WxPayResults::Init($xml);
-        } catch (\WxPayException $e) {
-            $msg = $e->errorMessage();
-            return false;
+    //查询订单
+    public function queryOrder($data)
+    {
+        $input = new \WxPayOrderQuery();
+        $input->SetTransaction_id($data['transaction_id']);
+        $input->SetOut_trade_no($data['out_trade_no']);
+        $result = \WxPayApi::orderQuery( $input);
+
+        if(array_key_exists("return_code", $result)
+            && array_key_exists("result_code", $result)
+            && $result["return_code"] == "SUCCESS"
+            && $result["result_code"] == "SUCCESS")
+        {
+            return true;
         }
 
-
+        //Log::DEBUG("query:" . json_encode($result));
+        // 记录日志
+        //\think\facade\Log::init(['path' => '../logs/wx/']);
+        \think\facade\Log::init(['path' => './logs/wx/']);
+        \think\facade\Log::error($result);
+        \think\facade\Log::save();
         return false;
-        //$order = \WxPayApi::notify($callback);
-        if(isset($_REQUEST["transaction_id"]) && $_REQUEST["transaction_id"] != ""){
-            try {
-                $transaction_id = $_REQUEST["transaction_id"];
-                $input = new WxPayOrderQuery();
-                $input->SetTransaction_id($transaction_id);
-                $config = new WxPayConfig();
-                printf_info(WxPayApi::orderQuery($config, $input));
-            } catch(Exception $e) {
-                Log::ERROR(json_encode($e));
-            }
-            exit();
-        }
-
-        if(isset($_REQUEST["out_trade_no"]) && $_REQUEST["out_trade_no"] != ""){
-            try{
-                $out_trade_no = $_REQUEST["out_trade_no"];
-                $input = new WxPayOrderQuery();
-                $input->SetOut_trade_no($out_trade_no);
-                $config = new WxPayConfig();
-                printf_info(WxPayApi::orderQuery($config, $input));
-            } catch(Exception $e) {
-                Log::ERROR(json_encode($e));
-            }
-            exit();
-        }
     }
 }
