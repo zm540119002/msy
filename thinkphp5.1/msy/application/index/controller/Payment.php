@@ -59,7 +59,6 @@ class Payment extends \common\controller\Base {
 
     // 支付处理
     public function orderPayment(){
-        return 123;
 //        if( empty(input('order_sn')) || empty(input('?pay_code'))){
 //            $this -> error('参数错误');
 //        }

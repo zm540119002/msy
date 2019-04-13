@@ -85,9 +85,8 @@
 <script type="text/javascript">
     $(function(){
         $('body').on('click','form',function () {
-            console.log(123);
             var url = "{:url('Payment/orderPayment')}";
-            var postData = {};
+            var postData = $('#pay_info').serializeObject();;
             $.ajax({
                 url: url,
                 data: postData,
