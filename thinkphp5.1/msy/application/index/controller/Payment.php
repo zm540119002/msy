@@ -59,7 +59,6 @@ class Payment extends \common\controller\Base {
 
     // 支付处理
     public function orderPayment(){
-        file_put_contents('./xml.json','11111');
 //        if( empty(input('order_sn')) || empty(input('?pay_code'))){
 //            $this -> error('参数错误');
 //        }
@@ -229,10 +228,15 @@ class Payment extends \common\controller\Base {
 
     //public function wxPayNotifyCallBack(){
     public function notifyUrl(){
+
         $xml = file_get_contents('php://input');
-        file_put_contents('./xml.json',$xml);
+        //$xml = 222222;
+        file_put_contents('./xml1.json',$xml);
+
         $data = xmlToArray($xml);
-        file_put_contents('./array.json',$data);
+        //$data = 4444;
+        file_put_contents('./array1.json',$data);
+        echo 2222;
         exit;
     }
 
