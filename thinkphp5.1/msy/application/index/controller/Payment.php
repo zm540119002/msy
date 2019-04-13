@@ -229,18 +229,6 @@ class Payment extends \common\controller\Base {
     //public function wxPayNotifyCallBack(){
     public function notifyUrl(){
 
-        try {
-            //获取通知的数据
-            //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-            //$xml = file_get_contents('php://input');
-            $xml = file_get_contents('./xml1.json');
-            $result = \WxPayResults::Init($xml);
-        } catch (\WxPayException $e){
-            $msg = $e->errorMessage();
-            return false;
-        }
-        p($result);die;
-        exit;
 
 
         $res = \WxPayApi::notify(null,$msg);

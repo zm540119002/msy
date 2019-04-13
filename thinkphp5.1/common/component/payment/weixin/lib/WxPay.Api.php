@@ -406,6 +406,20 @@ class WxPayApi
  	 */
 	public static function notify($callback, &$msg)
 	{
+
+        try {
+            //获取通知的数据
+            //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+            //$xml = file_get_contents('php://input');
+            $xml = file_get_contents('./xml1.json');
+            $result = \WxPayResults::Init($xml);
+        } catch (\WxPayException $e){
+            $msg = $e->errorMessage();
+            return false;
+        }
+        p($result);die;
+
+
         if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             # 如果没有数据，直接返回失败
             return false;
