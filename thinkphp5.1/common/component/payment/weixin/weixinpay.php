@@ -283,8 +283,8 @@ EOF;
         try {
             //获取通知的数据
             //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-            //$xml = file_get_contents('php://input');
-            $xml  = file_get_contents('./xml1.json');
+            $xml = file_get_contents('php://input');
+            //$xml  = file_get_contents('./xml1.json');
             $data = \WxPayResults::Init($xml);
             if(!$this->Queryorder($data)){
                 //$msg = "订单查询失败";
@@ -295,7 +295,7 @@ EOF;
             // 记录日志
             //\think\facade\Log::init(['path' => '../logs/wx/']);
             \think\facade\Log::init(['path' => './logs/wx/']);
-            \think\facade\Log::error($e);
+            \think\facade\Log::error('',$e);
             \think\facade\Log::save();
 
             return false;
@@ -324,8 +324,25 @@ EOF;
         // 记录日志
         //\think\facade\Log::init(['path' => '../logs/wx/']);
         \think\facade\Log::init(['path' => './logs/wx/']);
-        \think\facade\Log::error($result);
+        \think\facade\Log::error('wxQueryOrder',$result);
         \think\facade\Log::save();
         return false;
     }
+
+
+    // 成功返回
+    public function successReturn(){
+        echo '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
+        return true;
+    }
+
+    // 失败返回
+    public function errorReturn($dataSn='',$error='签名错误',$type='订单'){
+        \Think\Log::write($type . '支付失败：' . $dataSn . "\r\n失败原因：" . $error, 'NOTIC');
+        echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
+        return false;
+    }
+
+
+
 }

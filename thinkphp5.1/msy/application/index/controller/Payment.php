@@ -236,10 +236,19 @@ class Payment extends \common\controller\Base {
 
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-
+/*        p($data);
+        exit;*/
         if($data){
             $attach = json_decode($data['attach'],true);
-            $this->setOrderPayStatus($attach['system_id'],$data['out_trade_no']);
+            $order['system_id'] = $attach['system_id'];
+            $order['sn'] = $data['out_trade_no'];
+            $order['actually_amount'] = $data['total_fee']/100;
+            $order['payment_code'] = 0;
+            $order['pay_sn'] = $data['transaction_id'];
+
+            $this->setOrderPayStatus($order);
+
+            //return $wxPay->successReturn();
         }
     }
 
@@ -250,27 +259,56 @@ class Payment extends \common\controller\Base {
      * @param $systemId int 平台代码
      * @param $orderSn string 订单号
      */
-    private function setOrderPayStatus($systemId,$orderSn){
+    private function setOrderPayStatus($info){
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
+        $modelOrder ->connection = config('custom.system_id')[$info['system_id']]['db'];
         $condition = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.order_status', '=', 1],
-            ],'field' => [
-                'o.id',
-            ],
+                ['status', '=', 0],
+                ['sn', '=', $info['sn']],
+                ['order_status', '=', 1],
+            ]
         ];
-        $data = ['order_status'=>2];
-        $res = $modelOrder->save($condition,$data);
-        if($res){
-            echo 1;
-        }else{
-            \think\facade\Log::init(['path' => './logs/wx/']);
-            \think\facade\Log::error($modelOrder->getLastSql());
-            \think\facade\Log::save();
+
+        $orderInfo = $modelOrder->getInfo($condition);
+        if($orderInfo){
+
+            // 金额判断
+            if($orderInfo['amount']!=$info['actually_amount']){
+                $msg = '回调的金额和订单的金额不符';
+
+            }else{
+                $data = [
+                    'order_status'=>2,                              // 订单状态
+                    'actually_amount'=>$info['actually_amount'],    // 实际支付金额
+                    'payment_time'=>time(),
+                    'payment_code'=>$info['payment_code'],          // 支付方式
+                    'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+                ];
+                $result = $modelOrder -> allowField(true) -> save($data,$condition);
+                if(!$result){
+                    $msg = '订单支付更新失败';
+
+                }else{
+                    echo 'SUCCESS';
+                }
+                \think\facade\Log::init(['path' => './logs/wx1/']);
+                //\think\facade\Log::error($msg,$info);
+                \think\facade\Log::error($info);
+                \think\facade\Log::save();
+            }
+
+            // 记录日志
+            if(isset($msg)){
+                \think\facade\Log::init(['path' => './logs/pay/']);
+                //\think\facade\Log::error($msg,$info);
+                \think\facade\Log::error($msg,$info);
+                \think\facade\Log::error($msg,$modelOrder->getLastSql());
+                \think\facade\Log::save();
+            }
         }
+
     }
+
 
 }
