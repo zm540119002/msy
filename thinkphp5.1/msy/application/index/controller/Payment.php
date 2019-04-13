@@ -232,7 +232,6 @@ class Payment extends \common\controller\Base {
      * 回调处理，修改信息，通知，记录日志
      * */
     public function wxPayNotifyCallBack(){
-    //public function notifyUrl(){
 
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
@@ -294,9 +293,7 @@ class Payment extends \common\controller\Base {
             // 记录日志
             if(isset($msg)){
                 \think\facade\Log::init(['path' => './logs/pay/']);
-                //\think\facade\Log::error($msg,$info);
                 \think\facade\Log::error($msg,$info);
-                \think\facade\Log::error($msg,$modelOrder->getLastSql());
                 \think\facade\Log::save();
             }
         }

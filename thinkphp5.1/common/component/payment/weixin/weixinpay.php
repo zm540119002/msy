@@ -294,8 +294,8 @@ EOF;
             //$msg = $e->errorMessage();
             // 记录日志
             //\think\facade\Log::init(['path' => '../logs/wx/']);
-            \think\facade\Log::init(['path' => './logs/wx/']);
-            \think\facade\Log::error('',$e);
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信支付回调',$e);
             \think\facade\Log::save();
 
             return false;
@@ -323,8 +323,8 @@ EOF;
         //Log::DEBUG("query:" . json_encode($result));
         // 记录日志
         //\think\facade\Log::init(['path' => '../logs/wx/']);
-        \think\facade\Log::init(['path' => './logs/wx/']);
-        \think\facade\Log::error('wxQueryOrder',$result);
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error('微信支付后订单查询',$result);
         \think\facade\Log::save();
         return false;
     }
