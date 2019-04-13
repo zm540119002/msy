@@ -330,19 +330,6 @@ EOF;
     }
 
 
-    // 成功返回
-    public function successReturn(){
-        echo '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
-        return true;
-    }
-
-    // 失败返回
-    public function errorReturn($dataSn='',$error='签名错误',$type='订单'){
-        \Think\Log::write($type . '支付失败：' . $dataSn . "\r\n失败原因：" . $error, 'NOTIC');
-        echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
-        return false;
-    }
-
 
 
 }

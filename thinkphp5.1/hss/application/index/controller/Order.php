@@ -413,7 +413,7 @@ class Order extends \common\controller\UserBase
             $item['goods_num'] = $goodsNum;
             return $item;
         });
-        
+
         $currentPage = input('get.page/d');
         $this->assign('currentPage',$currentPage);
         $this->assign('list',$list);
