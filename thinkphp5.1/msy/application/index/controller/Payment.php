@@ -229,9 +229,10 @@ class Payment extends \common\controller\Base {
     //public function wxPayNotifyCallBack(){
     public function notifyUrl(){
 
+        $wxPay = new \common\component\payment\weixin\weixinpay;
+        $msg   = $wxPay->wxNotify();
 
-
-        $res = \WxPayApi::notify(null,$msg);
+        //$res = \WxPayApi::notify(null,$msg);
         exit;
 
 

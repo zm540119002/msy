@@ -280,9 +280,18 @@ EOF;
     // 微信支付回调
     public function wxNotify(){
 
+        try {
+            //获取通知的数据
+            //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+            //$xml = file_get_contents('php://input');
+            $xml = file_get_contents('./xml1.json');
+            $result = \WxPayResults::Init($xml);
+        } catch (\WxPayException $e){
+            $msg = $e->errorMessage();
+            return false;
+        }
+        p($result);die;
 
-
-        return call_user_func($result);
 
         $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
         //$xml = file_get_contents('php://input');
