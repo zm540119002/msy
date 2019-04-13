@@ -160,8 +160,6 @@ class Payment extends \common\controller\Base {
                 break;
         }
         if(isset($msg)){
-            echo $this->fetch('../../api/public/template/login_page.html');
-            exit;
             $this -> error($msg);
         }
     }
