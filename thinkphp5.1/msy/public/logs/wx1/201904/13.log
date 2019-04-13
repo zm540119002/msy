@@ -1,0 +1,74 @@
+---------------------------------------------------------------
+[ 2019-04-13T16:23:29+08:00 ] 58.251.80.56 POST /index/Payment/notifyUrl
+[ info ] msy.meishangyun.com/index/Payment/notifyUrl [运行时间：0.522294s][吞吐率：1.91req/s] [内存消耗：4,358.35kb] [文件加载：87]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '840',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] array (
+  'system_id' => '3',
+  'sn' => '20190413100030674312081935182097',
+  'actually_amount' => 0.01,
+  'payment_code' => 0,
+  'pay_sn' => '4200000282201904131899163922',
+)
+---------------------------------------------------------------
+[ 2019-04-13T16:23:37+08:00 ] 58.251.80.48 POST /index/Payment/notifyUrl
+[ info ] msy.meishangyun.com/index/Payment/notifyUrl [运行时间：0.287609s][吞吐率：3.48req/s] [内存消耗：4,358.31kb] [文件加载：87]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '840',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] array (
+  'system_id' => '3',
+  'sn' => '20190413162325758887993593857929',
+  'actually_amount' => 0.01,
+  'payment_code' => 0,
+  'pay_sn' => '4200000259201904135178530673',
+)
