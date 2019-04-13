@@ -236,8 +236,7 @@ class Payment extends \common\controller\Base {
 
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-/*        p($data);
-        exit;*/
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $order['system_id'] = $attach['system_id'];
@@ -247,8 +246,6 @@ class Payment extends \common\controller\Base {
             $order['pay_sn'] = $data['transaction_id'];
 
             $this->setOrderPayStatus($order);
-
-            //return $wxPay->successReturn();
         }
     }
 
