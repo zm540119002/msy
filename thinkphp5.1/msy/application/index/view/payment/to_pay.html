@@ -65,12 +65,12 @@
             </ul>
         </div>
         <p>*线下银行转账/现金支付需将证据拍照上传</p>
-        <a href="javascript:void(0);" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>
-        <form action="javascript:void(0);" method="post" class="pay_form" id="pay_info">
+        <a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>
+        <form action="{:url('Payment/orderPayment')}" method="post" class="pay_form" id="pay_info">
             <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
             <input type="hidden" name="system_id" value="{$system_id}" class="system_id"/>
-            <input type="button" value="立即支付" class="pay_btn"/>
+            <input type="submit" value="立即支付" class="pay_btn"/>
         </form>
     </section>
 </article>
@@ -84,39 +84,6 @@
 <script type="text/javascript" src="api_common_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
     $(function(){
-        $('body').on('click','form',function () {
-            var url = "{:url('Payment/orderPayment')}";
-            var postData = $('#pay_info').serializeObject();;
-            $.ajax({
-                url: url,
-                data: postData,
-                type: 'post',
-                beforeSend: function(){
-                    $('.loading').show();
-                },
-                error:function(){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    if(data.status){
-                        dialog.success(data.info,module + 'Payment/payComplete');
-                    }
-                    if(!data.status){
-                        if(data.code == 1){
-                            dialog.success(data.info,module+'Order/manage');
-                        }else if(data.code == 2){
-                            //余额不足
-                            dialog.success(data.info);
-                        }else{
-                            dialog.error('失败');
-                        }
-
-                    }
-                }
-            });
-        });
         //如果是微信浏览器
         if(isWeiXin()){
             $('#alipay').remove();
