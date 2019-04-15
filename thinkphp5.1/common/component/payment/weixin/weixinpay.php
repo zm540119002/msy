@@ -333,20 +333,20 @@ EOF;
     public function refundOrder($data){
 
         try {
-            if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+
                 $payOpenId =  session('pay_open_id');
                 if(empty($payOpenId)){
                     $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                     $payOpenId  = $tools->getOpenid();
                     session('pay_open_id',$payOpenId);
                 }
-            }
+            
 
             $input = new \WxPayRefund();
             $input->SetTransaction_id($data['pay_sn']);
             $input->SetOut_refund_no($data['sn']);
             $input->SetTotal_fee($data['actually_amount'] * 100);
-            $input->SetRefund_fee($data['wallet_pay'] * 100);
+            $input->SetRefund_fee($data['actually_amount'] * 100);
             $input->SetOp_user_id(session('pay_open_id'));
             list($res,$list) =  \WxPayApi::refund( $input);
 
