@@ -3937,6 +3937,7 @@ select[name="nodeIds"]{
 .mod_selection .nav {
     position: absolute;
     top: -56px;
+    top: 0;
     height: .8rem;
     overflow: hidden;
     box-sizing: border-box;
