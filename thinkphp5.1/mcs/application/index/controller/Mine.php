@@ -28,7 +28,6 @@ class Mine extends \common\controller\Base{
 
     //修改头像
     public function editAvatar(){
-
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
@@ -45,12 +44,13 @@ class Mine extends \common\controller\Base{
         }
         $user['avatar'] = $newAvatar;
         $modelUser = new \common\model\User();
-        $result = $modelUser->edit($user,true);
-        if($result['status'] == 0){
+        $result = $modelUser->allowField(['avatar'])->save($user, ['id' => $user['id']]);
+        if(!$result){
             return errorMsg('失败');
         }
         //删除旧详情图
         delImgFromPaths($oldAvatar,$newAvatar);
+        setSession($user);
         return successMsg('成功',['avatar'=>$newAvatar]);
     }
 
@@ -61,15 +61,13 @@ class Mine extends \common\controller\Base{
         }
         $modelUser = new \common\model\User();
         $user = session('user');
-        if(empty($user)){
-            return errorMsg('未登录');
-        }
         $newName = preg_replace('# #','',input('post.name'));
-        $user['avatar'] = $newName;
-        $result = $modelUser->edit($user,true);
-        if($result['status'] == 0){
+        $user['name'] = $newName;
+        $result = $modelUser->allowField(['name'])->save($user, ['id' => $user['id']]);
+        if(!$result){
             return errorMsg('失败');
         }
+        setSession($user);
         return successMsg('成功',['name'=>$newName]);
     }
 }
