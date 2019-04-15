@@ -50,7 +50,7 @@
 					<div class="bodys bodys_short" id="bodys">
 						<div class="content-wrapper">
 							<section class="f24 account-content-wrapper">
-								<ul class="list-item" id="list"></ul>
+								<ul class="list-item list"></ul>
 							</section>
 						</div>
 					</div>
@@ -69,7 +69,7 @@
 		var config = {
 			url: module + 'Store/getList'
 		};
-		getPagingList(config);
+		getList(config);
 		//设置店长
 		var setShopAccount=$('#setShopAccount').html();
 		$('body').on('click','.set_shopowner',function(){
