@@ -1,19 +1,10 @@
 {extend name="../../api/public/template/base.html" /}
 {block name="css-customize"}
-<link type="text/css" rel="stylesheet" href="api_common_css/fenlei_admin.css"/>
-<link type="text/css" rel="stylesheet" href="api_common_css/skin_admin.css"/>
-<link rel="stylesheet" type="text/css" href="hui_admin_css/H-ui.admin.css"/>
-<link rel="stylesheet" type="text/css" href="hui_css/H-ui.css"/>
-<link rel="stylesheet" type="text/css" href="hui_lib/Hui-iconfont/1.0.8/iconfont.css"/>
-<link rel="stylesheet" type="text/css" href="hui_admin_skin/default/skin.css" id="skin"/>
-<link rel="stylesheet" type="text/css" href="hui_admin_css/style.css"/>
-{/block}
-{block name="suffix-script"}
-<script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="api_common_js/dialog_admin.js"></script>
-<script type="text/javascript" src="api_common_js/paging_admin.js"></script>
-<script type="text/javascript" src="hui_js/H-ui.js"></script>
-<script type="text/javascript" src="hui_admin_js/H-ui.admin.js"></script>
 {/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
+<!-- 后置自定义js -->
+{block name="suffix-script"}
+<script type="text/javascript" src="api_common_js/dialog_admin.js"></script>
+<script type="text/javascript" src="api_common_js/paging_admin.js"></script>
+{/block}
