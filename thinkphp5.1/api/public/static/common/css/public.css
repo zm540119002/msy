@@ -4440,7 +4440,8 @@ select[name="nodeIds"]{
 }
 .mod_selection .nav {
     position: absolute;
-    top: -56px;
+    /*top: -56px;*/
+    top: 0px;
     height: .8rem;
     overflow: hidden;
     box-sizing: border-box;
@@ -4464,7 +4465,7 @@ select[name="nodeIds"]{
 }
 .mod_selection_nav li{
     display:inline-block;
-    width:1.5rem;
+    /*width:1.5rem;*/
     height:.8rem;
     line-height:.8rem;
     text-align:center;
