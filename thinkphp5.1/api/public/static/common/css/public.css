@@ -861,7 +861,8 @@ price{
     width: 0.82rem;
     height: 0.785rem;
     margin:0 auto .05rem;
-    background-image:url(../../common/img/icons/store_purchase_type.png);
+    /*background-image:url(../../common/img/icons/store_purchase_type.png);*/
+    background-image:url(../img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
     background-size:0.785rem 3.99rem;
 }
