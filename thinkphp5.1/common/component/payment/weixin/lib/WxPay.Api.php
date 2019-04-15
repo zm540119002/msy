@@ -162,7 +162,7 @@ class WxPayApi
 		$result = WxPayResults::Init($response);
 		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
-		return $result;
+		return array($result,$inputObj);
 	}
 	
 	/**

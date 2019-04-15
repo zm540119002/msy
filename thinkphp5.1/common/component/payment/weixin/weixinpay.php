@@ -348,7 +348,12 @@ EOF;
             $input->SetTotal_fee($data['actually_amount'] * 100);
             $input->SetRefund_fee($data['wallet_pay'] * 100);
             $input->SetOp_user_id(session('pay_open_id'));
-            return \WxPayApi::refund( $input);
+            $res =  \WxPayApi::refund( $input);
+
+
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error(array('微信申请退款: ',json_encode($res)));
+            \think\facade\Log::save();
 
         } catch (\WxPayException $e){
 
