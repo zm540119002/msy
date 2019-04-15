@@ -294,8 +294,8 @@ EOF;
             //$msg = $e->errorMessage();
             // 记录日志
             //\think\facade\Log::init(['path' => '../logs/wx/']);
-            \think\facade\Log::init(['path' => './logs/wx/']);
-            \think\facade\Log::error('',$e);
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信支付回调',$e);
             \think\facade\Log::save();
 
             return false;
@@ -323,25 +323,12 @@ EOF;
         //Log::DEBUG("query:" . json_encode($result));
         // 记录日志
         //\think\facade\Log::init(['path' => '../logs/wx/']);
-        \think\facade\Log::init(['path' => './logs/wx/']);
-        \think\facade\Log::error('wxQueryOrder',$result);
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error('微信支付后订单查询',$result);
         \think\facade\Log::save();
         return false;
     }
 
-
-    // 成功返回
-    public function successReturn(){
-        echo '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
-        return true;
-    }
-
-    // 失败返回
-    public function errorReturn($dataSn='',$error='签名错误',$type='订单'){
-        \Think\Log::write($type . '支付失败：' . $dataSn . "\r\n失败原因：" . $error, 'NOTIC');
-        echo '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名失败]]></return_msg></xml>';
-        return false;
-    }
 
 
 

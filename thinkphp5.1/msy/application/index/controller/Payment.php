@@ -231,13 +231,11 @@ class Payment extends \common\controller\Base {
     /*
      * 回调处理，修改信息，通知，记录日志
      * */
-    //public function wxPayNotifyCallBack(){
-    public function notifyUrl(){
+    public function wxPayNotifyCallBack(){
 
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-/*        p($data);
-        exit;*/
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $order['system_id'] = $attach['system_id'];
@@ -247,8 +245,6 @@ class Payment extends \common\controller\Base {
             $order['pay_sn'] = $data['transaction_id'];
 
             $this->setOrderPayStatus($order);
-
-            //return $wxPay->successReturn();
         }
     }
 
@@ -292,18 +288,12 @@ class Payment extends \common\controller\Base {
                 }else{
                     echo 'SUCCESS';
                 }
-                \think\facade\Log::init(['path' => './logs/wx1/']);
-                //\think\facade\Log::error($msg,$info);
-                \think\facade\Log::error($info);
-                \think\facade\Log::save();
             }
 
             // 记录日志
             if(isset($msg)){
                 \think\facade\Log::init(['path' => './logs/pay/']);
-                //\think\facade\Log::error($msg,$info);
                 \think\facade\Log::error($msg,$info);
-                \think\facade\Log::error($msg,$modelOrder->getLastSql());
                 \think\facade\Log::save();
             }
         }

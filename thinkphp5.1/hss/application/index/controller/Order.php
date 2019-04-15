@@ -396,7 +396,7 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id','=',$item['id']]
                 ],
                 'field'=>[
-                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
+                    'od.goods_id','od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                     'g.name','g.thumb_img',
                 ],
                 'join'=>[
@@ -413,6 +413,7 @@ class Order extends \common\controller\UserBase
             $item['goods_num'] = $goodsNum;
             return $item;
         });
+
         $currentPage = input('get.page/d');
         $this->assign('currentPage',$currentPage);
         $this->assign('list',$list);
