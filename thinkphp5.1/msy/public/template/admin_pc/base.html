@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="public_css/base.css">
 	<link rel="stylesheet" href="public_css/public.css">
 	{block name="css-customize"}{/block}
-	<script type="text/javascript" src="public_js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		var domain = '{:request()->domain()}'+'/'+'index.php/';
 		var module = domain + '{:request()->module()}/';
@@ -35,11 +35,11 @@
 </footer>
 {/block}
 <!--js基本插件-->
-<script type="text/javascript" src="public_js/layer.mobile/layer.js"></script>
-<script type="text/javascript" src="public_js/public.js"></script>
-<script type="text/javascript" src="public_js/common.js"></script>
-<script type="text/javascript" src="public_js/dialog.js"></script>
-<script type="text/javascript" src="public_js/forbidscroll.js"></script>
+<script type="text/javascript" src="api_common_js/layer.mobile/layer.js"></script>
+<script type="text/javascript" src="api_common_js/public.js"></script>
+<script type="text/javascript" src="api_common_js/common.js"></script>
+<script type="text/javascript" src="api_common_js/dialog.js"></script>
+<script type="text/javascript" src="api_common_js/forbidscroll.js"></script>
 <!--自定义js-->
 {block name="script"}{/block}
 </body></html>
