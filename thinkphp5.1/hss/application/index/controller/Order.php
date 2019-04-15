@@ -364,7 +364,10 @@ class Order extends \common\controller\UserBase
                 $type = \common\component\payment\weixin\weixinpay::refundOrder($orderInfo);;
                 break;
         }
-        p($type);
+ 
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error(array('微信申请退款: ',json_encode($type)));
+        \think\facade\Log::save();
         exit;
         if(!$type){
             return errorMsg('失败');
