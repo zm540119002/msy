@@ -283,8 +283,8 @@ EOF;
         try {
             //获取通知的数据
             //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-            //$xml = file_get_contents('php://input');
-            $xml  = file_get_contents('./xml1.json');
+            $xml = file_get_contents('php://input');
+            //$xml  = file_get_contents('./xml1.json');
             $data = \WxPayResults::Init($xml);
             if(!$this->Queryorder($data)){
                 //$msg = "订单查询失败";
@@ -294,8 +294,8 @@ EOF;
             //$msg = $e->errorMessage();
             // 记录日志
             //\think\facade\Log::init(['path' => '../logs/wx/']);
-            \think\facade\Log::init(['path' => './logs/wx/']);
-            \think\facade\Log::error($e);
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信支付回调',$e);
             \think\facade\Log::save();
 
             return false;
@@ -323,9 +323,13 @@ EOF;
         //Log::DEBUG("query:" . json_encode($result));
         // 记录日志
         //\think\facade\Log::init(['path' => '../logs/wx/']);
-        \think\facade\Log::init(['path' => './logs/wx/']);
-        \think\facade\Log::error($result);
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error('微信支付后订单查询',$result);
         \think\facade\Log::save();
         return false;
     }
+
+
+
+
 }
