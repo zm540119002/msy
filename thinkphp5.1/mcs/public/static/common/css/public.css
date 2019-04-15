@@ -5061,9 +5061,9 @@ ul.message_list{
 }
 .nav-floor a,
 #menu ul li{
-    width:33.3%;
+    /*width:33.3%;
     text-align:center;
-    box-sizing: border-box;
+    box-sizing: border-box;*/
 }
 #menu ul li.active{
     background: #d9d9d9;
