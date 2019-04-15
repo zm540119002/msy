@@ -251,7 +251,7 @@ class Payment extends \common\controller\Base {
 
 
     /**
-     * 更新订单支付成功状态
+     * 更新订单支付成功后的信息
      * @param $systemId int 平台代码
      * @param $orderSn string 订单号
      */
