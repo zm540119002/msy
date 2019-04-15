@@ -235,6 +235,7 @@ class Order extends \common\controller\UserBase
         $this->assign('user',$this->user);
         return $this->fetch();
     }
+
     //订单管理
     public function manage(){
         if(input('?order_status')){
@@ -328,23 +329,50 @@ class Order extends \common\controller\UserBase
      * 设置状态
      */
     public function setOrderStatus(){
+
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index\model\Order();
+
+
+
         $id = input('post.id/d');
+        $orderStatus = input('post.order_status/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
         }
-        $where=[
-            ['id','=',$id],
-            ['user_id','=',$this->user['id']],
+
+        $where = [
+            'where' => [
+                ['id','=',$id],
+                ['user_id','=',$this->user['id']],
+            ]
         ];
-        $orderStatus = input('post.order_status/d');
+        $model = new \app\index\model\Order();
+        $orderInfo = $model->getInfo($where);
+
+        $type = true;
+        switch($orderStatus){
+            case 3 : // 确定收货
+                $where['order_status'] = 2;
+                break;
+            case 5 : // 取消订单
+                $where['order_status'] = 1;
+                break;
+            case 7 : // 申请退款
+                $where['order_status'] = 2;
+                $type = \common\component\payment\weixin\weixinpay::refundOrder($orderInfo);;
+                break;
+        }
+
+        if(!$type){
+            return errorMsg('失败');
+        }
+
         $data = [
             'order_status' => $orderStatus,
         ];
-        $rse = $model->where($where)->setField($data);
+        $rse = $model->where($where['where'])->setField($data);
         if(!$rse){
             return errorMsg('失败');
         }
@@ -422,6 +450,14 @@ class Order extends \common\controller\UserBase
             $this->fetch($pageType);
         }
         return $this->fetch('list_tpl');
+    }
+
+
+
+    private function refundOrder($orderInfo){
+
+
+        \common\component\payment\weixin\weixinpay::wxPay($orderInfo);
     }
 
 
