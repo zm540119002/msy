@@ -225,8 +225,7 @@ class Jssdk {
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
       $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
-        p($_SERVER['REQUEST_URI']);
-        exit;
+
       header("Location: $url");
       exit();
     } else {

@@ -1,7 +1,6 @@
 <?php
 namespace app\index\controller;
-//class Order extends \common\controller\UserBase
-class Order extends \common\controller\Base
+class Order extends \common\controller\UserBase
 {
     //生成订单
     public function generate()
@@ -331,27 +330,24 @@ class Order extends \common\controller\Base
      */
     public function setOrderStatus(){
 
-        if(!request()->isGet()){
-            return config('custom.not_get');
+        if(!request()->isPost()){
+            return config('custom.not_post');
         }
 
 
 
-        $id = input('get.id/d');
-        $orderStatus = input('get.order_status/d');
-        //$sn = input('get.sn');
-/*        if(!input('?get.id') && !$id){
+        $id = input('post.id/d');
+        $orderStatus = input('post.order_status/d');
+        if(!input('?post.id') && !$id){
             return errorMsg('失败');
-        }*/
-        $where = [];
-        if($id){
-            $where['where'][] = ['id','=',$id];
         }
 
-/*        if($sn){
-            $where['where'][] = ['sn','=',$sn];
-        }*/
-
+        $where = [
+            'where' => [
+                ['id','=',$id],
+                ['user_id','=',$this->user['id']],
+            ]
+        ];
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
 
@@ -364,6 +360,22 @@ class Order extends \common\controller\Base
                 $where['order_status'] = 1;
                 break;
             case 7 : // 申请退款
+
+                $curl = new \common\component\curl\Curl();
+                $curl->get();
+
+
+                $orderSn = input('order_sn/s');
+                $url = config('custom.pay_gateway');
+
+                return $this->redirect('https://msy.meishangyun.com/index/Order/wxRefund',$orderSn);
+
+
+
+
+                p();
+
+
                 $where['order_status'] = 2;
                 $type = \common\component\payment\weixin\weixinpay::refundOrder($orderInfo);;
                 break;
