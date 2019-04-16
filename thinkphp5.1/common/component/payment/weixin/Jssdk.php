@@ -211,7 +211,7 @@ class Jssdk {
 
   /**
    *
-   * 通过跳转获取用户的openid，跳转流程如下：
+   * 通过跳转获取用户的openid，跳转流程如下： 需要get请求调用
    * 1、设置自己需要调回的url及其其他参数，跳转到微信服务器https://open.weixin.qq.com/connect/oauth2/authorize
    * 2、微信服务处理完成之后会跳转回用户redirect_uri地址，此时会带上一些参数，如：code
    *
@@ -225,18 +225,9 @@ class Jssdk {
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
       $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
-        \think\facade\Log::init(['path' => './logs/pay/']);
-        \think\facade\Log::error(array('微信申请退款111: ',json_encode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])));
-        \think\facade\Log::error(array('微信申请退款111: ',json_encode($url)));
-        \think\facade\Log::save();
-        exit;
       header("Location: $url");
       exit();
     } else {
-        \think\facade\Log::init(['path' => './logs/pay/']);
-        \think\facade\Log::error(array('微信申请退款111: ',5555));
-        \think\facade\Log::save();
-        exit;
       //获取code码，以获取openid
       $code = $_GET['code'];
       $data = $this->GetOpenidFromMp($code);

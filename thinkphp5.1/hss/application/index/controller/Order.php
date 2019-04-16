@@ -330,15 +330,15 @@ class Order extends \common\controller\UserBase
      */
     public function setOrderStatus(){
 
-        if(!request()->isPost()){
-            return config('custom.not_post');
+        if(!request()->isGet()){
+            return config('custom.not_get');
         }
 
 
 
-        $id = input('post.id/d');
-        $orderStatus = input('post.order_status/d');
-        if(!input('?post.id') && !$id){
+        $id = input('get.id/d');
+        $orderStatus = input('get.order_status/d');
+        if(!input('?get.id') && !$id){
             return errorMsg('失败');
         }
 
