@@ -364,6 +364,7 @@ class Order extends \common\controller\UserBase
                 $type = \common\component\payment\weixin\weixinpay::refundOrder($orderInfo);;
                 break;
         }
+        p($type);
 
         exit;
         if(!$type){
