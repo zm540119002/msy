@@ -29,7 +29,8 @@ class Payment extends \common\controller\Base {
         if(empty($orderInfo) OR !$orderInfo['amount']){
             $this->error('订单不存在或金额不能为0 !');
         }
-
+        echo 11111;
+        exit;
         $this->assign('orderInfo', $orderInfo);
 
         //if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
