@@ -32,7 +32,7 @@ class Payment extends \common\controller\Base {
 
         $this->assign('orderInfo', $orderInfo);
 
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+        //if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             //$payOpenId =  session('pay_open_id');
             $payOpenId =  array();
             if(empty($payOpenId)){
@@ -40,7 +40,7 @@ class Payment extends \common\controller\Base {
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
             }
-        }
+        //}
 
         //钱包
         $modelWallet = new \app\index\model\Wallet();
