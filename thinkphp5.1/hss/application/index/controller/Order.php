@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 //class Order extends \common\controller\UserBase
-class Order
+class Order extends \common\controller\Base
 {
     //生成订单
     public function generate()
