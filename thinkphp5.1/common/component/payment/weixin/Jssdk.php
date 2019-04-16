@@ -229,7 +229,7 @@ class Jssdk {
         \think\facade\Log::error(array('微信申请退款111: ',json_encode($baseUrl)));
         \think\facade\Log::error(array('微信申请退款111: ',json_encode($url)));
         \think\facade\Log::save();
-        exit;
+        //exit;
       header("Location: $url");
       exit();
     } else {
