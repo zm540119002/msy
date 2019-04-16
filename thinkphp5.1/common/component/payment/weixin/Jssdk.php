@@ -233,6 +233,9 @@ class Jssdk {
       header("Location: $url");
       exit();
     } else {
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error(array('微信申请退款111: ',json_encode(2222)));
+        \think\facade\Log::save();
       //获取code码，以获取openid
       $code = $_GET['code'];
       $data = $this->GetOpenidFromMp($code);
