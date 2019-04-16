@@ -5,9 +5,10 @@
 	<title>{block name="title"}{$Think.config.custom.title}{/block}</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-
-	<script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" href="api_common_css/base.css">
+	<link rel="stylesheet" href="api_common_css/public.css">
 	{block name="css-customize"}{/block}
+	<script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="api_common_js/login.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	<script type="text/javascript">
@@ -30,17 +31,19 @@
 {block name="footer"}
 <footer class="f24">
 	<a href="http://www.miitbeian.gov.cn">
-		<span class="icp_icon">Copyright@广东维雅生物科技有限公司</span>
-		<span class="icp_icon">粤ICP备18130945号-1</span>
+		<span class="icp_icon">Copyright@广东美尚网络科技有限公司</span>
+		<span class="icp_icon">粤ICP备14021421号-2 </span>
 	</a>
 </footer>
 {/block}
 
 <!--js基本插件-->
-<script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="api_common_js/public.js"></script>
 <script type="text/javascript" src="api_common_js/common.js"></script>
 <script type="text/javascript" src="api_common_js/forbidscroll.js"></script>
+<script type="text/javascript" src="api_common_js/layer.mobile/layer.js"></script>
+<script type="text/javascript" src="api_common_js/dialog_index.js"></script>
+<script type="text/javascript" src="api_common_js/paging_index.js"></script>
 <!-- 后置自定义js -->
 {block name="suffix-script"}{/block}
 <!-- 自定义js -->
