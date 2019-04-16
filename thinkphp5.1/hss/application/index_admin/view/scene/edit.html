@@ -98,38 +98,13 @@
 {/block}
 
 {block name="script"}
-<!-- 配置文件 -->
-<script type="text/javascript" src="hui_lib/Ueditor/ueditor.config.js"></script>
-<!-- 编辑器源码文件 -->
-<script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
-<script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
-<script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
 <script type="text/javascript" src="api_common_js/admin/uploadSingleImg.js"></script>
-<!-- 实例化编辑器 -->
-<script type="text/javascript">
-    var main_img = UE.getEditor('main_img', {
-        toolbars: [
-            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
-        ],
-        autoHeightEnabled: true,
-        autoFloatEnabled: true
-    });
-</script>
     <script type="text/javascript">
         $(function(){
-            //项目主图
-            main_img.ready(function() {
-                main_img.setContent($('#mainImg').val());
-            });
             // 表单认证
             $('.button_save_black_4').on('click',function(){
                 var postData = $('#form1').serializeObject();
-                //主图
-                postData.main_img = '';
-                $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
-                    postData.main_img += $(this).attr('src') + ',';
 
-                });
 
                 var content='';
                 if(!postData.name){
