@@ -352,7 +352,7 @@ EOF;
 
 
             \think\facade\Log::init(['path' => './logs/pay/']);
-            \think\facade\Log::error(array('微信申请退款111: ',json_encode($res),$list));
+            \think\facade\Log::error(array('微信申请退款成功: ',json_encode($res),$list));
             \think\facade\Log::save();
 
         } catch (\WxPayException $e){
@@ -361,7 +361,7 @@ EOF;
             // 记录日志
             //\think\facade\Log::init(['path' => '../logs/wx/']);
             \think\facade\Log::init(['path' => './logs/pay/']);
-            \think\facade\Log::error(array('微信申请退款: '.$e->errorMessage(),json_encode($data)));
+            \think\facade\Log::error(array('微信申请退款失败: '.$e->errorMessage(),json_encode($data)));
             \think\facade\Log::save();
 
             return false;
