@@ -1,7 +1,8 @@
 <?php
 namespace app\index\controller;
-//class Order extends \common\controller\UserBase
-class Order
+
+// 订单统一处理类
+class Order extends \common\controller\Base
 {
     //生成订单
     public function generate()
@@ -339,19 +340,16 @@ class Order
 
         $id = input('get.id/d');
         $orderStatus = input('get.order_status/d');
-        //$sn = input('get.sn');
-/*        if(!input('?get.id') && !$id){
+        if(!input('?get.id') && !$id){
             return errorMsg('失败');
-        }*/
-        $where = [];
-        if($id){
-            $where['where'][] = ['id','=',$id];
         }
 
-/*        if($sn){
-            $where['where'][] = ['sn','=',$sn];
-        }*/
-
+        $where = [
+            'where' => [
+                ['id','=',$id],
+                ['user_id','=',$this->user['id']],
+            ]
+        ];
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
 

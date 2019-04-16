@@ -211,7 +211,7 @@ class Jssdk {
 
   /**
    *
-   * 通过跳转获取用户的openid，跳转流程如下： 需要get请求调用
+   * 通过跳转获取用户的openid，跳转流程如下：
    * 1、设置自己需要调回的url及其其他参数，跳转到微信服务器https://open.weixin.qq.com/connect/oauth2/authorize
    * 2、微信服务处理完成之后会跳转回用户redirect_uri地址，此时会带上一些参数，如：code
    *
@@ -225,6 +225,8 @@ class Jssdk {
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
       $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
+        p($_SERVER['REQUEST_URI']);
+        exit;
       header("Location: $url");
       exit();
     } else {
@@ -253,6 +255,30 @@ class Jssdk {
     }
   }
 
+    /**
+     *
+     * 通过跳转获取用户的openid，跳转流程如下：
+     * 1、设置自己需要调回的url及其其他参数，跳转到微信服务器https://open.weixin.qq.com/connect/oauth2/authorize
+     * 2、微信服务处理完成之后会跳转回用户redirect_uri地址，此时会带上一些参数，如：code
+     *
+     * @return 用户的openid
+     */
+    public function getWxUserOpenid($redirect_uri='')
+    {
+            if($redirect_uri){
+                $baseUrl = $redirect_uri ? $redirect_uri : $baseUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+            }else{
+                $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+            }
+
+            $url = $this->__CreateOauthUrlForCode(urlencode('http://'.$baseUrl));
+            p($_SERVER['REQUEST_URI']);
+            exit;
+            header("Location: $url");
+            exit();
+
+    }
 
   /**
    *

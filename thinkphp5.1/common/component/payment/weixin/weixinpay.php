@@ -333,14 +333,12 @@ EOF;
     public function refundOrder($data){
 
         try {
-
                 $payOpenId =  session('pay_open_id');
                 if(empty($payOpenId)){
                     $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                     $payOpenId  = $tools->getOpenid();
                     session('pay_open_id',$payOpenId);
                 }
-            
 
             $input = new \WxPayRefund();
             $input->SetTransaction_id($data['pay_sn']);
