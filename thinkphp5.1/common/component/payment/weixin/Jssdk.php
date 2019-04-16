@@ -226,16 +226,17 @@ class Jssdk {
       $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
         \think\facade\Log::init(['path' => './logs/pay/']);
-        \think\facade\Log::error(array('微信申请退款111: ',json_encode($baseUrl)));
+        \think\facade\Log::error(array('微信申请退款111: ',json_encode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])));
         \think\facade\Log::error(array('微信申请退款111: ',json_encode($url)));
         \think\facade\Log::save();
-        //exit;
+        exit;
       header("Location: $url");
       exit();
     } else {
         \think\facade\Log::init(['path' => './logs/pay/']);
-        \think\facade\Log::error(array('微信申请退款111: ',json_encode(2222)));
+        \think\facade\Log::error(array('微信申请退款111: ',5555));
         \think\facade\Log::save();
+        exit;
       //获取code码，以获取openid
       $code = $_GET['code'];
       $data = $this->GetOpenidFromMp($code);
