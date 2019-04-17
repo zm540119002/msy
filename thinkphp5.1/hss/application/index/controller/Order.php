@@ -350,7 +350,7 @@ class Order extends \common\controller\UserBase
         ];
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
-
+        $orderInfo['sn'] = '20190412165817072127354168476713';
         $type = true;
         switch($orderStatus){
             case 3 : // 确定收货
@@ -363,7 +363,7 @@ class Order extends \common\controller\UserBase
                 // system_id,order_sn
                 $curl = new \common\component\curl\Curl();
                 $res = $curl->post('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
-                p(json_decode($res));
+                p($res);
                 exit;
                 return $this->redirect('https://msy.meishangyun.com/index/Order/wxRefund',$orderSn);
 

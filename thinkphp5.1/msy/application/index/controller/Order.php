@@ -18,7 +18,7 @@ class Order
         $orderSn = input('order_sn');
 
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
-            return json_encode(errorMsg('订单不存在或金额不能为0 !'));
+            return errorJson('订单不存在或金额不能为0 !');
         };
         // 各方式退款
         switch($orderInfo['payment_code']){
@@ -76,9 +76,9 @@ class Order
             \think\facade\Log::error(array('微信申请退款失败: '.$e->errorMessage(),json_encode($data)));
             \think\facade\Log::save();
 
-            return false;
+            return errorJson($e->errorMessage());
         }
-        return true;
+        return successJson();
 
     }
 
