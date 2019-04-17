@@ -16,9 +16,7 @@ class Order
 
         $systemId= input('system_id/d');
         $orderSn = input('order_sn');
-        p($systemId);
-        p($orderSn);
-        exit;
+
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
             return errorMsg('订单不存在或金额不能为0 !');
         };
