@@ -2,8 +2,7 @@
 namespace app\index\controller;
 
 // 订单统一处理类
-//class Order extends \common\controller\Base
-class Order
+class Order extends \common\controller\Base
 {
 
 
@@ -87,7 +86,6 @@ class Order
 
 
     private function getWxOpenid(){
-        $payOpenId =  session('pay_open_id');
         if(empty(session('pay_open_id'))){
             $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $payOpenId  = $tools->getOpenid();
