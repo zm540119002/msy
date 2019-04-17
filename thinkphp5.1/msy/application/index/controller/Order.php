@@ -92,10 +92,6 @@ class Order
             $payOpenId  = $tools->getOpenid();
             session('pay_open_id',$payOpenId);
         }
-        \think\facade\Log::init(['path' => './logs/pay/']);
-        \think\facade\Log::error(array('微信申请退款失败: '.$payOpenId));
-        \think\facade\Log::save();
-
         return $payOpenId;
     }
 

@@ -352,6 +352,9 @@ class Jssdk {
     $urlObj["scope"] = "snsapi_base";
     $urlObj["state"] = "STATE"."#wechat_redirect";
     $bizString = $this->ToUrlParams($urlObj);
+      \think\facade\Log::init(['path' => './logs/pay/']);
+      \think\facade\Log::error(json_encode($bizString));
+      \think\facade\Log::save();
     return "https://open.weixin.qq.com/connect/oauth2/authorize?".$bizString;
   }
   /**
