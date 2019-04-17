@@ -333,14 +333,12 @@ EOF;
     public function refundOrder($data){
 
         try {
-
                 $payOpenId =  session('pay_open_id');
                 if(empty($payOpenId)){
                     $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                     $payOpenId  = $tools->getOpenid();
                     session('pay_open_id',$payOpenId);
                 }
-            
 
             $input = new \WxPayRefund();
             $input->SetTransaction_id($data['pay_sn']);
@@ -352,7 +350,7 @@ EOF;
 
 
             \think\facade\Log::init(['path' => './logs/pay/']);
-            \think\facade\Log::error(array('微信申请退款111: ',json_encode($res),$list));
+            \think\facade\Log::error(array('微信申请退款成功: ',json_encode($res),$list));
             \think\facade\Log::save();
 
         } catch (\WxPayException $e){
@@ -361,7 +359,7 @@ EOF;
             // 记录日志
             //\think\facade\Log::init(['path' => '../logs/wx/']);
             \think\facade\Log::init(['path' => './logs/pay/']);
-            \think\facade\Log::error(array('微信申请退款: '.$e->errorMessage(),json_encode($data)));
+            \think\facade\Log::error(array('微信申请退款失败: '.$e->errorMessage(),json_encode($data)));
             \think\facade\Log::save();
 
             return false;

@@ -360,10 +360,27 @@ class Order extends \common\controller\UserBase
                 $where['order_status'] = 1;
                 break;
             case 7 : // 申请退款
+
+                $curl = new \common\component\curl\Curl();
+                $curl->get();
+
+
+                $orderSn = input('order_sn/s');
+                $url = config('custom.pay_gateway');
+
+                return $this->redirect('https://msy.meishangyun.com/index/Order/wxRefund',$orderSn);
+
+
+
+
+                p();
+
+
                 $where['order_status'] = 2;
                 $type = \common\component\payment\weixin\weixinpay::refundOrder($orderInfo);;
                 break;
         }
+        p($type);
 
         exit;
         if(!$type){

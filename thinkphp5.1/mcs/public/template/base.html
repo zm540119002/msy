@@ -1,8 +1,8 @@
 {extend name="../../api/public/template/base.html" /}
+
+{block name="css-customize"}
+<link rel="stylesheet" href="public_css/project_public.css">
+{/block}
+
 <!-- 公共模块-->
 {block name="common"}{/block}
-<!-- 后置自定义js -->
-{block name="suffix-script"}
-<script type="text/javascript" src="api_common_js/dialog_index.js"></script>
-<script type="text/javascript" src="api_common_js/paging_index.js"></script>
-{/block}

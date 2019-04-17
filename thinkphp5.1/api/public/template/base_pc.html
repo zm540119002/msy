@@ -5,11 +5,17 @@
 	<title>{block name="title"}{$Think.config.custom.title}{/block}</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="api_common_css/base.css">
-	<link rel="stylesheet" href="api_common_css/public.css">
+
+	<link type="text/css" rel="stylesheet" href="index_admin_css/fenlei.css"/>
+	<link type="text/css" rel="stylesheet" href="index_admin_css/skin.css"/>
+	<link rel="stylesheet" type="text/css" href="hui_admin_css/H-ui.admin.css"/>
+	<link rel="stylesheet" type="text/css" href="hui_css/H-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="hui_lib/Hui-iconfont/1.0.8/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="hui_admin_skin/default/skin.css" id="skin"/>
+	<link rel="stylesheet" type="text/css" href="hui_admin_css/style.css"/>
 
 	{block name="css-customize"}{/block}
-	<script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="api_common_js/login.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	<script type="text/javascript">
@@ -37,18 +43,17 @@
 	</a>
 </footer>
 {/block}
-
+<!-- 自定义js -->
+{block name="script"}{/block}
 <!--js基本插件-->
 <script type="text/javascript" src="api_common_js/public.js"></script>
 <script type="text/javascript" src="api_common_js/common.js"></script>
-<script type="text/javascript" src="api_common_js/forbidscroll.js"></script>
-<script type="text/javascript" src="api_common_js/layer.mobile/layer.js"></script>
-<script type="text/javascript" src="api_common_js/dialog_index.js"></script>
-<script type="text/javascript" src="api_common_js/paging_index.js"></script>
-
+<script type="text/javascript" src="api_common_js/admin/dialog.js"></script>
+<script type="text/javascript" src="api_common_js/admin/paging.js"></script>
+<script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="hui_js/H-ui.js"></script>
+<script type="text/javascript" src="hui_admin_js/H-ui.admin.js"></script>
+<script type="text/javascript" src="hui_lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <!-- 后置自定义js -->
 {block name="suffix-script"}{/block}
-<!-- 自定义js -->
-{block name="script"}{/block}
-
 </body></html>
