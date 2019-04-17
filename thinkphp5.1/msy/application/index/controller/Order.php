@@ -5,9 +5,6 @@ namespace app\index\controller;
 class Order extends \common\controller\Base
 {
 
-
-
-
     /**
      * system_id,order_sn
      */
@@ -54,33 +51,15 @@ class Order extends \common\controller\Base
      * @return bool
      */
     private function wxRefundOrder($data){
+        
+            $wxPay = new \common\component\payment\weixin\weixinpay;
+            if(!$result = $wxPay->refundOrder($data)){
+                return errorJson($wxPay->msg);
 
-        try {
+            }else{
+                return successJson($result);
+            }
 
-            $input = new \WxPayRefund();
-            $input->SetTransaction_id($data['pay_sn']);
-            $input->SetOut_refund_no($data['sn']);
-            $input->SetTotal_fee($data['actually_amount'] * 100);
-            $input->SetRefund_fee($data['actually_amount'] * 100);
-            $input->SetOp_user_id(session('pay_open_id'));
-            list($res,$list) =  \WxPayApi::refund( $input);
-
-            \think\facade\Log::init(['path' => './logs/pay/']);
-            \think\facade\Log::error(array('微信申请退款成功: ',json_encode($res),$list));
-            \think\facade\Log::save();
-
-        } catch (\WxPayException $e){
-
-            //$msg = $e->errorMessage();
-            // 记录日志
-            //\think\facade\Log::init(['path' => '../logs/wx/']);
-            \think\facade\Log::init(['path' => './logs/pay/']);
-            \think\facade\Log::error(array('微信申请退款失败: '.$e->errorMessage(),json_encode($data)));
-            \think\facade\Log::save();
-
-            return errorJson($e->errorMessage());
-        }
-        return successJson();
 
     }
 
