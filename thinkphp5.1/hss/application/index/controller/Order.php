@@ -360,14 +360,11 @@ class Order extends \common\controller\UserBase
                 $where['order_status'] = 1;
                 break;
             case 7 : // 申请退款
-
+                // system_id,order_sn
                 $curl = new \common\component\curl\Curl();
-                $curl->get();
-
-
-                $orderSn = input('order_sn/s');
-                $url = config('custom.pay_gateway');
-
+                $res = $curl->post('https://msy.meishangyun.com/index/Order/refundOrder',['system_id'=>2,'order_sn'=>$orderInfo['sn']]);
+                p($res);
+                exit;
                 return $this->redirect('https://msy.meishangyun.com/index/Order/wxRefund',$orderSn);
 
 

@@ -16,7 +16,6 @@ class Order extends \common\controller\Base
         $systemId= input('system_id/d');
         $orderSn = input('order_sn');
 
-
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
             return errorMsg('订单不存在或金额不能为0 !');
         };
@@ -38,7 +37,7 @@ class Order extends \common\controller\Base
                 ['o.status', '=', 0],
                 ['o.sn', '=', $orderSn],
             ],'field' => [
-                'o.id', 'o.pay_sn','o.sn', 'o.amount','o.actually_amount',
+                'o.id', 'o.pay_sn','o.sn', 'o.amount','o.actually_amount','payment_code',
                 'o.user_id',
             ],
         ];
@@ -53,16 +52,15 @@ class Order extends \common\controller\Base
     private function wxRefundOrder($data){
 
         try {
-
+            $pay_open_id = $this->getWxOpenid();
 
             $input = new \WxPayRefund();
             $input->SetTransaction_id($data['pay_sn']);
             $input->SetOut_refund_no($data['sn']);
             $input->SetTotal_fee($data['actually_amount'] * 100);
             $input->SetRefund_fee($data['actually_amount'] * 100);
-            $input->SetOp_user_id(session('pay_open_id'));
+            $input->SetOp_user_id($pay_open_id);
             list($res,$list) =  \WxPayApi::refund( $input);
-
 
             \think\facade\Log::init(['path' => './logs/pay/']);
             \think\facade\Log::error(array('微信申请退款成功: ',json_encode($res),$list));
@@ -79,18 +77,19 @@ class Order extends \common\controller\Base
 
             return false;
         }
+        return true;
 
     }
 
 
     private function getWxOpenid(){
-        //$payOpenId =  session('pay_open_id');
+        $payOpenId =  session('pay_open_id');
         if(empty(session('pay_open_id'))){
             $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $payOpenId  = $tools->getOpenid();
             session('pay_open_id',$payOpenId);
         }
-        //return $payOpenId;
+        return $payOpenId;
     }
 
 
