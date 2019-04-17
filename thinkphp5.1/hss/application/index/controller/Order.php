@@ -350,7 +350,7 @@ class Order extends \common\controller\UserBase
         ];
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
-        $orderInfo['sn'] = '20190412170757362998811738229639';
+        //$orderInfo['sn'] = '20190412170757362998811738229639';
         $type = true;
         switch($orderStatus){
             case 3 : // 确定收货
@@ -363,24 +363,13 @@ class Order extends \common\controller\UserBase
                 // system_id,order_sn
                 $curl = new \common\component\curl\Curl();
                 $res = $curl->get('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
+                if(!$res['status']){
+                    $type = false;
+                }
 
-                p($res);
-                exit;
-                return $this->redirect('https://msy.meishangyun.com/index/Order/wxRefund',$orderSn);
-
-
-
-
-                p();
-
-
-                $where['order_status'] = 2;
-                $type = \common\component\payment\weixin\weixinpay::refundOrder($orderInfo);;
                 break;
         }
-        p($type);
 
-        exit;
         if(!$type){
             return errorMsg('失败');
         }

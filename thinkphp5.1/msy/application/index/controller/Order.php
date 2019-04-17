@@ -16,14 +16,18 @@ class Order extends \common\controller\Base
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
             return errorJson('订单不存在或金额不能为0 !');
         };
-        \think\facade\Log::init(['path' => './logs/pay/']);
-        \think\facade\Log::error(array('微信申请退款失败112: '));
-        \think\facade\Log::save();
+
         // 各方式退款
         switch($orderInfo['payment_code']){
             case 1 : // 微信支付
-                $this->getWxOpenid();
-                return $this->wxRefundOrder($orderInfo);
+                $wxPay = new \common\component\payment\weixin\weixinpay;
+                if(!$result = $wxPay->refundOrder($orderInfo)){
+                    return errorJson($wxPay->msg);
+
+                }else{
+                    return successJson($result);
+                }
+
                 break;
         }
         return errorJson('失败');
@@ -43,33 +47,6 @@ class Order extends \common\controller\Base
             ],
         ];
         return $modelOrder->getInfo($config);
-    }
-
-    // 申请退款
-    /**
-     * @param $data array 订单信息
-     * @return bool
-     */
-    private function wxRefundOrder($data){
-        
-            $wxPay = new \common\component\payment\weixin\weixinpay;
-            if(!$result = $wxPay->refundOrder($data)){
-                return errorJson($wxPay->msg);
-
-            }else{
-                return successJson($result);
-            }
-
-
-    }
-
-
-    private function getWxOpenid(){
-        if(empty(session('pay_open_id'))){
-            $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            $payOpenId  = $tools->getOpenid();
-            session('pay_open_id',$payOpenId);
-        }
     }
 
 

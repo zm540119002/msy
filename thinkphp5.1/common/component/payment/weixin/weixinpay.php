@@ -330,11 +330,11 @@ EOF;
         return false;
     }
 
-    // 申请退款
+    // 确定退款
     public function refundOrder($data){
 
         try {
-
+            $this->getWxOpenid();
             $input = new \WxPayRefund();
             $input->SetTransaction_id($data['pay_sn']);
             $input->SetOut_refund_no($data['sn']);
@@ -349,8 +349,29 @@ EOF;
 
             return false;
         }
-        return $result;
 
+        // 结果处理
+        if(array_key_exists("return_code", $result) && array_key_exists("result_code", $result) && $result["return_code"] == "SUCCESS" && $result["result_code"] == "SUCCESS") {
+            return $result;
+
+        }else{
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信退款失败: ',$result['err_code_des']);
+            \think\facade\Log::error($data);
+            \think\facade\Log::save();
+
+            return false;
+        }
+
+    }
+
+
+    private function getWxOpenid(){
+        if(empty(session('pay_open_id'))){
+            $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $payOpenId  = $tools->getOpenid();
+            session('pay_open_id',$payOpenId);
+        }
     }
 
 
