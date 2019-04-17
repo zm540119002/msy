@@ -2,7 +2,8 @@
 namespace app\index\controller;
 
 // 订单统一处理类
-class Order extends \common\controller\Base
+//class Order extends \common\controller\Base
+class Order
 {
 
 
