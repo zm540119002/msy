@@ -52,7 +52,7 @@ class Order
      * @return bool
      */
     private function wxRefundOrder($data){
-
+        return successJson();
         try {
 
             $input = new \WxPayRefund();
