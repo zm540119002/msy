@@ -346,7 +346,10 @@ EOF;
         } catch (\WxPayException $e){
 
             $this->msg = $e->errorMessage();
-
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信退款失败: ',$this->msg);
+            \think\facade\Log::error($data);
+            \think\facade\Log::save();
             return false;
         }
 
