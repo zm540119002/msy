@@ -1,0 +1,547 @@
+---------------------------------------------------------------
+[ 2019-04-16T14:13:24+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713 [运行时间：0.202459s][吞吐率：4.94req/s] [内存消耗：4,002.45kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 8.1.0; Mi Note 3 Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/044606 Mobile Safari/537.36 MMWEBID/9642 MicroMessenger/7.0.3.1400(0x2700033D) Process/tools NetType/WIFI Language/zh_CN',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,image/wxpic,image/sharpp,image/apng,image/tpg,*/*;q=0.8',
+  'referer' => 'https://hss.meishangyun.com/index/order/manage/order_status/1.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,en-US;q=0.9',
+  'cookie' => 'PHPSESSID=gm5r6s7laao4j4bleddml8vkl6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:14:46+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713 [运行时间：0.188751s][吞吐率：5.30req/s] [内存消耗：4,002.41kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 8.1.0; Mi Note 3 Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/044606 Mobile Safari/537.36 MMWEBID/9642 MicroMessenger/7.0.3.1400(0x2700033D) Process/tools NetType/WIFI Language/zh_CN',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,image/wxpic,image/sharpp,image/apng,image/tpg,*/*;q=0.8',
+  'referer' => 'https://hss.meishangyun.com/index/order/manage/order_status/1.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,en-US;q=0.9',
+  'cookie' => 'PHPSESSID=gm5r6s7laao4j4bleddml8vkl6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:14:53+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190412161744305943509379557589
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190412161744305943509379557589 [运行时间：0.234409s][吞吐率：4.27req/s] [内存消耗：4,002.41kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 8.1.0; Mi Note 3 Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/044606 Mobile Safari/537.36 MMWEBID/9642 MicroMessenger/7.0.3.1400(0x2700033D) Process/tools NetType/WIFI Language/zh_CN',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,image/wxpic,image/sharpp,image/apng,image/tpg,*/*;q=0.8',
+  'referer' => 'https://hss.meishangyun.com/index/order/manage/order_status/1.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,en-US;q=0.9',
+  'cookie' => 'PHPSESSID=gm5r6s7laao4j4bleddml8vkl6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412161744305943509379557589"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412161744305943509379557589&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:15:29+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713 [运行时间：0.180439s][吞吐率：5.54req/s] [内存消耗：4,002.39kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 8.1.0; Mi Note 3 Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/044606 Mobile Safari/537.36 MMWEBID/9642 MicroMessenger/7.0.3.1400(0x2700033D) Process/tools NetType/WIFI Language/zh_CN',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,image/wxpic,image/sharpp,image/apng,image/tpg,*/*;q=0.8',
+  'referer' => 'https://hss.meishangyun.com/index/order/manage/order_status/1.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,en-US;q=0.9',
+  'cookie' => 'PHPSESSID=gm5r6s7laao4j4bleddml8vkl6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:33:19+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713 [运行时间：0.178643s][吞吐率：5.60req/s] [内存消耗：4,003.80kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 8.1.0; Mi Note 3 Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/044606 Mobile Safari/537.36 MMWEBID/9642 MicroMessenger/7.0.3.1400(0x2700033D) Process/tools NetType/WIFI Language/zh_CN',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,image/wxpic,image/sharpp,image/apng,image/tpg,*/*;q=0.8',
+  'referer' => 'https://hss.meishangyun.com/index/Order/manage/order_status/1.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,en-US;q=0.9',
+  'cookie' => 'PHPSESSID=gm5r6s7laao4j4bleddml8vkl6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190412165817072127354168476713&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:33:20+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713?code=061eEUgh2RuyiB0Agbgh2diMgh2eEUgy&state=STATE
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713?code=061eEUgh2RuyiB0Agbgh2diMgh2eEUgy&state=STATE [运行时间：0.156018s][吞吐率：6.41req/s] [内存消耗：4,001.75kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 8.1.0; Mi Note 3 Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/044606 Mobile Safari/537.36 MMWEBID/9642 MicroMessenger/7.0.3.1400(0x2700033D) Process/tools NetType/WIFI Language/zh_CN',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,image/wxpic,image/sharpp,image/apng,image/tpg,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,en-US;q=0.9',
+  'cookie' => 'PHPSESSID=gm5r6s7laao4j4bleddml8vkl6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'code' => '061eEUgh2RuyiB0Agbgh2diMgh2eEUgy',
+  'state' => 'STATE',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '2222',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:33:26+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713?code=061eEUgh2RuyiB0Agbgh2diMgh2eEUgy&state=STATE
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190412165817072127354168476713?code=061eEUgh2RuyiB0Agbgh2diMgh2eEUgy&state=STATE [运行时间：0.171384s][吞吐率：5.83req/s] [内存消耗：4,001.87kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 8.1.0; Mi Note 3 Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/044606 Mobile Safari/537.36 MMWEBID/9642 MicroMessenger/7.0.3.1400(0x2700033D) Process/tools NetType/WIFI Language/zh_CN',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,image/wxpic,image/sharpp,image/apng,image/tpg,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,en-US;q=0.9',
+  'cookie' => 'PHPSESSID=gm5r6s7laao4j4bleddml8vkl6',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'code' => '061eEUgh2RuyiB0Agbgh2diMgh2eEUgy',
+  'state' => 'STATE',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '2222',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:35:52+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190416141858925228157825435557
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190416141858925228157825435557 [运行时间：0.197984s][吞吐率：5.05req/s] [内存消耗：4,002.83kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Order/confirmOrder/order_sn/20190416141858925228157825435557',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416141858925228157825435557"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416141858925228157825435557&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:36:05+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871 [运行时间：0.177099s][吞吐率：5.65req/s] [内存消耗：4,002.45kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Order/confirmOrder/order_sn/20190416143602482518315179262871',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416143602482518315179262871"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416143602482518315179262871&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:36:11+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871 [运行时间：0.157833s][吞吐率：6.34req/s] [内存消耗：4,002.45kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Order/confirmOrder/order_sn/20190416143602482518315179262871',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416143602482518315179262871"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416143602482518315179262871&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:36:24+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871 [运行时间：0.169577s][吞吐率：5.90req/s] [内存消耗：4,002.20kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Order/manage/order_status/1.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416143602482518315179262871"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416143602482518315179262871&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
+---------------------------------------------------------------
+[ 2019-04-16T14:41:19+08:00 ] 14.18.29.116 GET /index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871
+[ info ] msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/20190416143602482518315179262871 [运行时间：0.158754s][吞吐率：6.30req/s] [内存消耗：4,002.52kb] [文件加载：82]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Order/manage/order_status/1.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(access_token.php): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:149]
+[ error ] [8]Trying to get property of non-object[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:15]
+[ error ] [8]curl_setopt(): CURLOPT_SSL_VERIFYHOST no longer accepts the value 1, value 2 will be used instead[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:134]
+[ error ] [8]Undefined property: stdClass::$access_token[/home/www/web/thinkphp5.1/common/component/payment/weixin/Jssdk.php:20]
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"http:\\/\\/msy.meishangyun.com\\/index\\/Payment\\/toPay\\/system_id\\/3\\/order_sn\\/20190416143602482518315179262871"',
+)
+[ error ] array (
+  0 => '微信申请退款111: ',
+  1 => '"https:\\/\\/open.weixin.qq.com\\/connect\\/oauth2\\/authorize?appId=wx9eee7ee8c2ae57dc&redirect_uri=http%3A%2F%2Fmsy.meishangyun.com%2Findex%2FPayment%2FtoPay%2Fsystem_id%2F3%2Forder_sn%2F20190416143602482518315179262871&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"',
+)
