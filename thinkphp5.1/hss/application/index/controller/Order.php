@@ -363,7 +363,7 @@ class Order extends \common\controller\UserBase
                 // system_id,order_sn
                 $curl = new \common\component\curl\Curl();
                 $res = $curl->post('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
-                p($res);
+                p(json_decode($res));
                 exit;
                 return $this->redirect('https://msy.meishangyun.com/index/Order/wxRefund',$orderSn);
 

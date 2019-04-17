@@ -18,7 +18,7 @@ class Order
         $orderSn = input('order_sn');
 
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
-            return errorMsg('订单不存在或金额不能为0 !');
+            return json_encode(errorMsg('订单不存在或金额不能为0 !'));
         };
         // 各方式退款
         switch($orderInfo['payment_code']){
