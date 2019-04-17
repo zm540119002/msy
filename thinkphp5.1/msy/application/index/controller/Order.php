@@ -20,6 +20,9 @@ class Order
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
             return errorJson('订单不存在或金额不能为0 !');
         };
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error(array('微信申请退款失败112: '));
+        \think\facade\Log::save();
         // 各方式退款
         switch($orderInfo['payment_code']){
             case 1 : // 微信支付
