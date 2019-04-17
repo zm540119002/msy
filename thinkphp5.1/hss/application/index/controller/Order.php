@@ -362,7 +362,7 @@ class Order extends \common\controller\UserBase
             case 7 : // 申请退款
                 // system_id,order_sn
                 $curl = new \common\component\curl\Curl();
-                $res = $curl->post('https://msy.meishangyun.com/index/Order/refundOrder',['system_id'=>3,'order_sn'=>$orderInfo['sn']]);
+                $res = $curl->post('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
                 p($res);
                 exit;
                 return $this->redirect('https://msy.meishangyun.com/index/Order/wxRefund',$orderSn);

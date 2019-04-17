@@ -15,7 +15,7 @@ class Order extends \common\controller\Base
 
         $systemId= input('system_id/d');
         $orderSn = input('order_sn');
-
+        return array($systemId,$orderSn);
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
             return errorMsg('订单不存在或金额不能为0 !');
         };
