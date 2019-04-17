@@ -363,8 +363,8 @@ class Order extends \common\controller\UserBase
                 // system_id,order_sn
                 $curl = new \common\component\curl\Curl();
                 $res = $curl->get('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
-                p($res);
-                exit;
+/*                p($res);
+                exit;*/
                 $res = json_decode($res,true);
                 if(!$res['status']){
                     $type = false;
