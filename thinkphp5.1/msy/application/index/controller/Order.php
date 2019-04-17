@@ -24,7 +24,10 @@ class Order
         switch($orderInfo['payment_code']){
             case 1 : // 微信支付
                 $this->getWxOpenid();
-                return $this->wxRefundOrder($orderInfo);
+                \think\facade\Log::init(['path' => './logs/pay/']);
+                \think\facade\Log::error(array('微信申请退款失败: '.session('pay_open_id')));
+                \think\facade\Log::save();
+                //return $this->wxRefundOrder($orderInfo);
                 break;
         }
         return errorJson('失败');
@@ -52,7 +55,7 @@ class Order
      * @return bool
      */
     private function wxRefundOrder($data){
-   
+
         try {
 
             $input = new \WxPayRefund();
