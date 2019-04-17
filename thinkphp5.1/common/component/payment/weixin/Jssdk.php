@@ -225,7 +225,9 @@ class Jssdk {
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
       $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
       $url = $this->__CreateOauthUrlForCode($baseUrl);
-
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error(array('微信申请退款成功: ','http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+        \think\facade\Log::save();
       header("Location: $url");
       exit();
     } else {
