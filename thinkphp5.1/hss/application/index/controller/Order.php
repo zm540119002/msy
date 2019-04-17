@@ -350,7 +350,7 @@ class Order extends \common\controller\UserBase
         ];
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
-        $orderInfo['sn'] = '20190412165817072127354168476713';
+        $orderInfo['sn'] = '20190412170757362998811738229639';
         $type = true;
         switch($orderStatus){
             case 3 : // 确定收货

@@ -23,10 +23,11 @@ class Order
         // 各方式退款
         switch($orderInfo['payment_code']){
             case 1 : // 微信支付
+                $this->getWxOpenid();
                 return $this->wxRefundOrder($orderInfo);
                 break;
         }
-        return false;
+        return errorJson('失败');
     }
 
     private function orderInfo($systemId,$orderSn){
@@ -53,14 +54,13 @@ class Order
     private function wxRefundOrder($data){
 
         try {
-            $pay_open_id = $this->getWxOpenid();
 
             $input = new \WxPayRefund();
             $input->SetTransaction_id($data['pay_sn']);
             $input->SetOut_refund_no($data['sn']);
             $input->SetTotal_fee($data['actually_amount'] * 100);
             $input->SetRefund_fee($data['actually_amount'] * 100);
-            $input->SetOp_user_id($pay_open_id);
+            $input->SetOp_user_id(session('pay_open_id'));
             list($res,$list) =  \WxPayApi::refund( $input);
 
             \think\facade\Log::init(['path' => './logs/pay/']);
