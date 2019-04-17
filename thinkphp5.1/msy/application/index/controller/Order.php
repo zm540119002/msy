@@ -23,9 +23,9 @@ class Order
         // 各方式退款
         switch($orderInfo['payment_code']){
             case 1 : // 微信支付
-                $penid = $this->getWxOpenid();
+                $this->getWxOpenid();
                 \think\facade\Log::init(['path' => './logs/pay/']);
-                \think\facade\Log::error(array('微信申请退款失败: '.$penid));
+                \think\facade\Log::error(array('微信申请退款失败: '.session('pay_open_id')));
                 \think\facade\Log::save();
                 return successJson();
                 //return $this->wxRefundOrder($orderInfo);
@@ -94,7 +94,6 @@ class Order
             $payOpenId  = $tools->getOpenid();
             session('pay_open_id',$payOpenId);
         }
-        return $payOpenId;
     }
 
 
