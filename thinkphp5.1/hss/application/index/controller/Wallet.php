@@ -2,6 +2,23 @@
 namespace app\index\controller;
 
 class Wallet extends \common\controller\UserBase{
+
+
+    public function __construct(){
+        parent::__construct();
+
+        // 判断是否已开通钱包,后面改进此方法
+        if( in_array(request()->action(),['recharge']) ){
+
+            if(!$this->getWalletInfo()){
+                $this->redirect('walletOpening');
+                exit;
+            }
+        }
+
+    }
+
+
     /**首页
      */
     public function index(){
@@ -13,6 +30,12 @@ class Wallet extends \common\controller\UserBase{
             return $this->fetch();
         }
     }
+
+    // 开通钱包
+    public function walletOpening(){
+        return $this->fetch();
+    }
+
     /**登录
      */
     public function login(){
@@ -44,6 +67,7 @@ class Wallet extends \common\controller\UserBase{
      * 钱包充值页面
      */
     public function recharge(){
+
         if (request()->isAjax()) {
         } else {
             $model = new \app\index\model\Wallet();;
@@ -76,23 +100,26 @@ class Wallet extends \common\controller\UserBase{
     }
 
     /**
-     * 是否已设置钱包
+     * 获取钱包信息
      */
     public function getWalletInfo(){
-        if (request()->isAjax()) {
-            $model = new \app\index\model\Wallet();;
-            $condition = [
-                'where' => [
-                    ['user_id', '=', $this->user['id']]
-                ], 'field' => [
-                    'id', 'amount',
-                ]
-            ];
-            if ($model->getInfo($condition)) {
-                return successMsg('成功');
-            }
+
+        $model = new \app\index\model\Wallet();;
+        $condition = [
+            'where' => [
+                ['user_id', '=', $this->user['id']]
+            ], 'field' => [
+                'id', 'amount',
+            ]
+        ];
+
+        if (!$model->getInfo($condition)) {
+            return false;
+
+        }else{
+            return true;
         }
-        return errorMsg('失败');
+
     }
 
 }
