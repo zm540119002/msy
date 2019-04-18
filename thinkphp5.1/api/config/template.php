@@ -40,7 +40,5 @@ return [
         'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
         //上传路径
         'public_uploads' => Request::domain() .'/uploads',
-
-
     ],
 ];
