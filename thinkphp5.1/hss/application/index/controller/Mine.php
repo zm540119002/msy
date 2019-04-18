@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 class Mine extends \common\controller\Base{
+
     //我的首页
     public function index(){
         $user = session('user');
