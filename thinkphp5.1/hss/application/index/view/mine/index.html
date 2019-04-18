@@ -87,25 +87,17 @@
             </a>
         </div>
     </section>
+    <!-- 钱包模块 -->
     <section class="separation-line">
         <div class="flex_item">
             <a href="javascript:void(0)" class="person-td async_login my_brand"  data-jump_url="{:url('Brand/index')}">
                 <span class="brand"></span>
                 代金券
             </a>
-
-            {if empty($wallet)}
-            <a href="javascript:void(0)" class="person-td async_login deposit" data-jump_url="{:url('Wallet/recharge')}" data-type="set">
+            <a href="javascript:void(0)" class="person-td async_login recharge" data-jump_url="{:url('Wallet/recharge')}">
                 <span class="charge"></span>
-                开通钱包
+                采购充值
             </a>
-            {else /}
-                <a href="javascript:void(0)" class="person-td async_login recharge" data-jump_url="{:url('Wallet/recharge')}">
-                    <span class="charge"></span>
-                    采购充值
-                </a>
-            {/if}
-
             <a href="javascript:void(0)" class="person-td">
                 <span class="pur_wallet"></span>
                 采购钱包
@@ -114,7 +106,6 @@
                 <span class="s_wallet"></span>
                 收益钱包
             </a>
-
         </div>
     </section>
     <section class="separation-line">
