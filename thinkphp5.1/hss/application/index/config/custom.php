@@ -52,6 +52,7 @@ return [
         ],
     ],
 
-    'pay_gateway'=>'https://msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/'
+    'pay_gateway'=>'https://msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/',
+    'pay_center'=>'https://msy.meishangyun.com/index/',
 ];
 
