@@ -34,9 +34,9 @@ class Wallet extends \common\model\Base {
             return errorMsg($validate->getError());
         }
         if($data['user_id'] && $data['captcha']){
-/*            if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
+            if(!$this->_checkCaptcha($data['mobile_phone'],$data['captcha'])){
                 return errorMsg('验证码错误，请重新获取验证码！');
-            }*/
+            }
             $wallet = $this->getWalletInfo($data['user_id']);
 
             $where = [];
