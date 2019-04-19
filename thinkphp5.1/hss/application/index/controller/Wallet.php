@@ -11,7 +11,8 @@ class Wallet extends \common\controller\UserBase{
 
             $model = new \app\index\model\Wallet();;
             if(!$wallet = $model->getWalletInfo($this->user['id'])){
-                return redirect('walletOpening');
+                $this->redirect('walletOpening');
+                exit;
             }
 
             $this->assign('wallet',$wallet);
