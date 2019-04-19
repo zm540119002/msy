@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;" id="" class="set_wallet_psd right-arrow">设置钱包支付密码</a>
+            <a href="javascript:;" class="right-arrow set_wallet">设置钱包支付密码</a>
         </li>
         <li>
             <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
@@ -94,7 +94,7 @@
                 <span class="brand"></span>
                 代金券
             </a>
-            <a href="javascript:void(0)" class="person-td async_login11" data-jump_url="{:url('Wallet/recharge')}">
+            <a href="{:url('Wallet/recharge')}" class="person-td">
                 <span class="charge"></span>
                 采购充值
             </a>
@@ -102,7 +102,7 @@
                 <span class="pur_wallet"></span>
                 采购钱包
             </a>
-            <a href="{:url('Report/index')}" class="person-td">
+            <a href="{:url('Report/index')}" class="person-td recharge">
                 <span class="s_wallet"></span>
                 收益钱包
             </a>
@@ -274,13 +274,6 @@
                 }
             });
         });
-        //设置钱包支付密码
-        $('body').on('click','.set_wallet_psd',function () {
-            var type=$(this).data('type');
-            forgetWalletPasswordDialog(type);
-        });
-
-
     })
 </script>
 {/block}

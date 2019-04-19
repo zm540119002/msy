@@ -1,44 +1,28 @@
 
-$('.async_login11').on('click',aa);
+//设置钱包支付密码
+/*$('body').on('click','.set_wallet',function () {
+    walletBasicEvent();
+});
 
+$('body').on('click','.set_wallet',function () {
+    walletBasicEvent();
+});*/
 
+$(".set_wallet").click(walletBasicEvent);
 
+//$(".set_wallet").click(walletBasicEvent);
 
+// 钱包基础事件
+function walletBasicEvent(){
+    var data = {jump_url:$(this).data('jump_url')};
 
-
-
-
-
-// 增加设置||重置钱包
-
-// var loginBackFunctionParam = {};
-// function loginBackFunction(){
-//     var res = forgetWalletPasswordDialog();
-//
-//     if(res){
-//         location.href = loginBackFunctionParam.jump_url
-//     }
-//     return false;
-// }
-
-function aa(){
-
-    loginBackFunction = bbb;
-    async_verify($(this));
-    //var jump_url = $(this).data('jump_url');
-
-    //console.log($(this));
-    //console.log(jump_url);
+    loginBackFunction = forgetWalletPasswordDialog(data);
+    async_verify(data);
 }
-
-function bbb(){
-    console.log(11111);
-}
-
-
 
 // 设置||忘记钱包支付密码-弹窗触发
-function forgetWalletPasswordDialog(){
+function forgetWalletPasswordDialog(info){
+
     var content = $('#WalletPasswordHtml').html();
     layer.open({
         title:['重置/设置支付密码','border-bottom:1px solid #d9d9d9;'],
@@ -97,7 +81,7 @@ function forgetWalletPasswordDialog(){
             }
             postData.password = password;
 
-            if(!register.vfyCheck(postData.captcha)){
+/*            if(!register.vfyCheck(postData.captcha)){
                 content = "请输入正确的验证码";
             }else if(!postData.password&&postData.password.length<6){
                 content = "请输入6位数字的密码";
@@ -105,14 +89,23 @@ function forgetWalletPasswordDialog(){
             if(content){
                 dialog.error(content);
                 return false;
-            }
+            }*/
 
             var url = module+'Wallet/forgetPassword';
             $.post(url,postData,function (data) {
                 if(data.status){
                     layer.closeAll();
                     dialog.success('设置成功');
-                    return true;
+                    console.log(info.jump_url);
+                    if(typeof(info.jump_url) !== "undefined"){
+                        console.log(1);
+                        //location.href = info.jump_url;
+
+                    }else{
+                        console.log(2);
+                        //return true;
+                    }
+                    return false;
                 }
                 if(!data.status){
                     dialog.success(data.info);

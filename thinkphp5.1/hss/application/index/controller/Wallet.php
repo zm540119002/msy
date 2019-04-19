@@ -19,11 +19,13 @@ class Wallet extends \common\controller\UserBase{
     }
 
 
-    /**首页
+    /**
+     * 首页
      */
     public function index(){
         return $this->fetch();
     }
+
     public function rechargeDetail(){
         if (request()->isAjax()) {
         } else {
@@ -31,12 +33,18 @@ class Wallet extends \common\controller\UserBase{
         }
     }
 
-    // 开通钱包
+    /**
+     * 开通钱包页
+     */
     public function walletOpening(){
+        $user = session('user');
+        $this->assign('user',$user);
+
         return $this->fetch();
     }
 
-    /**登录
+    /**
+     * 登录
      */
     public function login(){
         if (request()->isAjax()) {
@@ -49,7 +57,8 @@ class Wallet extends \common\controller\UserBase{
         }
     }
     
-    /**忘记密码 /注册
+    /**
+     * 设置||重置密码
      */
     public function forgetPassword(){
 
