@@ -38,6 +38,10 @@ class Wallet extends \common\controller\UserBase{
         if (request()->isAjax()) {
         } else {
 
+            $url = config('custom.pay_center');
+
+            return $this->redirect($url.request()->controller().'/'.request()->action());
+
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $payOpenId =  session('pay_open_id');
             if(empty($payOpenId)){
