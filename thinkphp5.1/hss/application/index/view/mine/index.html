@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;" id="" class="set_wallet_psd right-arrow" data-type="set">设置钱包支付密码</a>
+            <a href="javascript:;" class="right-arrow set_wallet">设置钱包支付密码</a>
         </li>
         <li>
             <a href="javascript:;" id="logout_dialog" class="sign_out right-arrow">退出</a>
@@ -87,14 +87,14 @@
             </a>
         </div>
     </section>
-    <!-- 钱包模块 -->
+    <!-- 钱包管理 -->
     <section class="separation-line">
         <div class="flex_item">
             <a href="javascript:void(0)" class="person-td async_login my_brand"  data-jump_url="{:url('Brand/index')}">
                 <span class="brand"></span>
                 代金券
             </a>
-            <a href="javascript:void(0)" class="person-td async_login recharge" data-jump_url="{:url('Wallet/recharge')}">
+            <a href="{:url('Wallet/recharge')}" class="person-td">
                 <span class="charge"></span>
                 采购充值
             </a>
@@ -102,10 +102,11 @@
                 <span class="pur_wallet"></span>
                 采购钱包
             </a>
-            <a href="{:url('Report/index')}" class="person-td">
+            <a href="{:url('Report/index')}" class="person-td recharge">
                 <span class="s_wallet"></span>
                 收益钱包
             </a>
+
         </div>
     </section>
     <section class="separation-line">
@@ -270,32 +271,6 @@
                     }
 
                   layer.close(index);
-                }
-            });
-        });
-        //设置钱包支付密码
-        $('body').on('click','.set_wallet_psd',function () {
-            var type=$(this).data('type');
-            forgetWalletPasswordDialog(type);
-        });
-
-        // 首次使用钱包 -设置密码
-        $('body').on('click','.deposit',function () {
-            var url = module + 'Wallet/getWalletInfo';
-            $.ajax({
-                url: url,
-                type: 'post',
-                success: function(data){
-                    if(data.status){
-                        location.href = $(".deposit").data('jump_url');
-
-                    }else{
-                        var obj = $(".deposit");
-                        var type= obj.data('type');
-                        var url = obj.data('jump_url');
-                        forgetWalletPasswordDialog(type,url);
-                    }
-
                 }
             });
         });
