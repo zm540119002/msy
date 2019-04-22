@@ -19,7 +19,7 @@ class Wallet extends \common\model\Base {
             ['user_id','=',$uid],
         ];
         $field = [
-            'id','status','amount'
+            'id','user_id','status','amount','password'
         ];
         return $this->where($where)->field($field)->find();
     }
@@ -58,6 +58,8 @@ class Wallet extends \common\model\Base {
             if(!$response){
                 return errorMsg('支付密码设置失败！');
             }
+            // 清除旧记录
+            session(config('app.app_name'), null);
             return $response;
         }
         return errorMsg('资料缺失！');

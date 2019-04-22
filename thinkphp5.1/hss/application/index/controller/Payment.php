@@ -1,6 +1,9 @@
 <?php
 namespace app\index\controller;
 class Payment extends \common\controller\UserBase{
+
+
+
     //订单-支付
     public function orderPayment(){
         //微信支付
@@ -107,27 +110,36 @@ class Payment extends \common\controller\UserBase{
         }
     }
 
-    //充值-支付
+    /**
+     * 充值支付 -生成充值订单，跳转到支付页
+     */
     public function rechargePayment(){
-        //微信支付
-        if( empty(input('amount')) ||  empty(input('?pay_code'))){
+
+        $amount = input('amount/f');
+        $payCode= input('pay_code/d');
+
+        if( !$amount || !$payCode ){
             $this -> error('参数错误');
         }
-        $model = new \app\index\model\WalletDetail();
-        $amount = input('amount/f');
+
         //生成充值明细
         $WalletDetailSn = generateSN();
         $data = [
             'sn'=>$WalletDetailSn,
             'user_id'=>$this->user['id'],
             'amount'=>$amount,
-            'create_time'=>time()
+            'create_time'=>time(),
+            'payment_code'=>$payCode,
         ];
-        $res = $model->isUpdate(false)->save($data);
+        $model= new \app\index\model\WalletDetail();
+        $res  = $model->isUpdate(false)->save($data);
         if(!$res){
-            $this -> error('生成充值明细失败');
+            $this -> error('充值失败');
         }
-        //支付信息
+
+
+
+/*        //支付信息
         $payInfo = [
             'sn'=>$WalletDetailSn,
             'actually_amount'=>$amount,
@@ -153,7 +165,45 @@ class Payment extends \common\controller\UserBase{
             $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/unionBack/type/recharge";
             $model = new \common\component\payment\unionpay\unionpay;
             $model->unionPay($payInfo);
+        }*/
+    }
+
+
+    /**
+     * 确定充值页
+     */
+    public function rechargePay(){
+
+        $systemId = input('system_id/d');
+        $sn  = input('order_sn/s');
+
+        if( !$systemId || !$sn ){
+            $this -> error('参数错误');
         }
+
+        $model = new \app\index\model\WalletDetail();
+
+        $this->assign('system_id', $systemId);
+        $model ->connection = config('custom.system_id')[$systemId]['db'];
+
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['sn', '=', $sn],
+                ['recharge_status', '=', 0],
+            ],'field' => [
+                '*'
+            ],
+        ];
+        $rechargeInfo = $model->getInfo($config);
+
+        if(empty($rechargeInfo) OR !$rechargeInfo['amount']){
+            $this->error('充值记录不存在或金额不能为0 !');
+        }
+
+        $this->assign('rechargeInfo', $rechargeInfo);
+
+        return $this->fetch();
     }
 
    //支付完跳转的页面
