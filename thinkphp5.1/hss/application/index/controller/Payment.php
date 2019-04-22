@@ -203,7 +203,7 @@ class Payment extends \common\controller\UserBase{
 
         $this->assign('rechargeInfo', $rechargeInfo);
 
-        return $this->fetch();
+        return $this->fetch('pay');
     }
 
    //支付完跳转的页面
