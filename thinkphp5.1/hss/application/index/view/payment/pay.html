@@ -1,17 +1,17 @@
 {extend name="template/base.html" /}
 {block name="content"}
 
-<div class="f24 pay_wrapper">
-    <div>
-        <img src="" alt="">
+<div class="f24 pay_wrapper content-padding">
+    <div class="msy-logo">
+        <img src="api_common_img/ucenter_logo.png" alt="">
         <p>向美尚云支付</p>
     </div>
-    <div>
+    <div class="money-box">
         <span>金额</span>
-        <div>¥<price>20000.00</price></div>
+        <div class="f28">¥<price>20000.00</price></div>
 
     </div>
-    <a href="javascript:void(0);">支付</a>
+    <a href="javascript:void(0);" class="pay">支付</a>
 </div>
 {/block}
 {block name="common"}
