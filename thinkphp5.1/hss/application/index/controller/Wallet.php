@@ -1,21 +1,19 @@
 <?php
 namespace app\index\controller;
 
-class Wallet extends \common\controller\UserBase{
+class Wallet extends Base {
 
     public function __construct(){
         parent::__construct();
 
         // 判断是否已开通钱包,后面改进此方法
         if( in_array(request()->action(),['recharge']) ){
-
-            $model = new \app\index\model\Wallet();;
-            if(!$wallet = $model->getWalletInfo($this->user['id'])){
+            if(empty($this->wallet['password'])){
                 $this->redirect('walletOpening');
                 exit;
             }
 
-            $this->assign('wallet',$wallet);
+            $this->assign('wallet',$this->wallet);
         }
 
     }
@@ -38,21 +36,48 @@ class Wallet extends \common\controller\UserBase{
         if (request()->isAjax()) {
         } else {
 
-            $url = config('custom.pay_center');
+            //$url = config('custom.pay_center');
 
-            return $this->redirect($url.request()->controller().'/'.request()->action());
-
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-        }
+            //return $this->redirect($url.request()->controller().'/'.request()->action());
         return $this->fetch();
-
         }
+    }
+
+    /**
+     * 充值支付 -生成充值订单，跳转到支付页
+     */
+    public function rechargeOrder(){
+
+        $amount = input('amount/f');
+        $payCode= input('pay_code/d');
+
+        if( !$amount || !$payCode ){
+            $this -> error('参数错误');
+        }
+
+        //生成充值明细
+        $WalletDetailSn = generateSN();
+        $data = [
+            'sn'=>$WalletDetailSn,
+            'user_id'=>$this->user['id'],
+            'amount'=>$amount,
+            'create_time'=>time(),
+            'payment_code'=>$payCode,
+        ];
+        $model= new \app\index\model\WalletDetail();
+        $res  = $model->isUpdate(false)->save($data);
+        if(!$res){
+            $this -> error('充值失败');
+        }
+
+        $url = config('custom.pay_recharge');
+
+        $this->redirect('index/Payment/rechargePay',['system_id'=>3,'order_sn'=>$WalletDetailSn]);
+
+        //return $this->redirect('Payment/rechargePay/system_id/3/order_sn/'.$WalletDetailSn);
+        //return $this->redirect($url.$WalletDetailSn);
+
+
     }
 
     /**
@@ -64,22 +89,6 @@ class Wallet extends \common\controller\UserBase{
             return $this->fetch();
         }
     }
-
-
-
-    /**
-     * 登录 不需要 2019-4-19 张
-     */
-/*    public function login(){
-        if (request()->isAjax()) {
-            $model = new \app\index\model\Wallet();;
-            $postData = input('post.');
-            $postData['user_id'] = $this->user['id'];
-            return $model->login($postData);
-        } else {
-            return $this->fetch();
-        }
-    }*/
     
     /**
      * 设置||重置支付密码
