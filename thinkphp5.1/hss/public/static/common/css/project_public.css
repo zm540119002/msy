@@ -5706,6 +5706,8 @@ ul.info_list li{
 }
 .pay_money_wrapper .pay{
     display: block;
+    padding:0.12rem 0;
+    margin:0.25rem 0 0;
     background: #22AC38;
     color:#fff;
     text-align:center;
@@ -6227,7 +6229,7 @@ div.no_data{
 }
 .msy-logo img{
     display:block;
-    width:18%;
+    width:50%;
     margin:0 auto;
 }
 .msy-logo p{
