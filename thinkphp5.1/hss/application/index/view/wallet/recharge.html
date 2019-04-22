@@ -28,8 +28,11 @@
     <section class="recharge_amount_item content-padding">
         <div class="columns_flex l-r-sides">
             <span>账户充值</span>
-            <span><a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('rechargeDetail')}"></a>
-                充值记录</span>
+            <span>
+                <a href="javascript:void(0);" class="async_login" data-jump_url="{:url('rechargeDetail')}">
+                   充值记录>
+                </a>
+            </span>
         </div>
         <ul class="recharge_m_list">
             {volist name=":config('custom.recharge_amount')" id="vo"}

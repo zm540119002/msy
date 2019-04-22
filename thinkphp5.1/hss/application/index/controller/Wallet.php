@@ -117,16 +117,18 @@ class Wallet extends Base {
                 ['user_id','=',$this->user['id']],
             ],
             'field'=>[
-                'id','sn','type','recharge_status','amount','payment_code','payment_time',
+                'id','sn','type','recharge_status','amount','payment_code','create_time','payment_time',
             ],
         ];
 
-        $type = input('type/d');
-        if($type)  $condition['where'][] = ['type','=',$type];
+        if( $type=input('type/d') )  $condition['where'][] = ['type','=',$type];
 
         $model = new \app\index\model\WalletDetail();
-        $data = $model->getList($condition);
-        $this->assign('data',$data);
+        $list = $model->getList($condition);
+
+        $this->assign('list',$list);
+        return $this->fetch('list_tpl');
+        //$this->assign('data',$data);
     }
 
 

@@ -13,23 +13,10 @@
             <span>备注说明</span>
         </div>
 
-        <ul class="order_list list" id="list">
+        <ul class="record_item" id="list">
 
         </ul>
-        <ul class="record_item ">
-            <li class="columns_flex l-r-sides">
-                <span>8000.00</span>
-                <span>线下支付充值</span>
-                <span>2019-2-28</span>
-                <span>成功</span>
-            </li>
-             <li class="columns_flex l-r-sides">
-                <span>8000.00</span>
-                <span>线下支付充值</span>
-                <span>2019-2-28</span>
-                <span class="audited">待审核</span>
-            </li>
-        </ul>
+
     </section>
 </article>
 {/block}
@@ -41,7 +28,28 @@
 <script type="text/javascript" src="api_common_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
     $(function(){
-       
+        var config = {
+            url:module+'Wallet/detailList',
+            requestEnd:false,
+            loadTrigger:false,
+            currentPage:1
+        };
+        var postData = {
+            pageSize:4,
+            type:1
+        };
+
+        // 初始化列表
+        getPagingList(config,postData);
+
+        //下拉加载
+/*        $(window).on('scroll',function(){
+            if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+                config.loadTrigger = false;
+                postData.category_id = $('.nav_menu li.current').data('category-id');
+                getPagingList(config,postData);
+            }
+        });*/
     });
 </script>
 {/block}
