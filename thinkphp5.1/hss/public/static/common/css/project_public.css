@@ -5701,6 +5701,9 @@ ul.info_list li{
     background: #f2f2f2;
     padding:0 0 1rem 0;
 }
+.pay_money_wrapper{
+    background:#f2f2f2;
+}
 .pay_money_wrapper .pay{
     display: block;
     background: #22AC38;
