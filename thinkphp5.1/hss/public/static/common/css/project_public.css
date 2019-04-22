@@ -6225,10 +6225,11 @@ div.no_data{
     padding:0.15rem;
     background: #fff;
 }
-/*.msy-logo img{
-    width:auto;
+.msy-logo img{
+    display:block;
+    width:18%;
     margin:0 auto;
-}*/
+}
 .msy-logo p{
     text-align: center;
 }
