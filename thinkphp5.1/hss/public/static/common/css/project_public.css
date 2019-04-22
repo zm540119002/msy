@@ -6224,6 +6224,7 @@ div.no_data{
     width:100%;
 }
 .money-box{
+    margin:0.15rem 0 0;
     padding:0.15rem;
     background: #fff;
 }
