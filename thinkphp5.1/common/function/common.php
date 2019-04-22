@@ -677,6 +677,7 @@ function moveImgFromTemp($newRelativePath,$filename){
         $oldFiles = $uploadPath.$filename;
 
     }
+
     // 旧文件 有直接用 ，没有就设置
     if(is_file($oldFiles)){
         $tempFile = $oldFiles;

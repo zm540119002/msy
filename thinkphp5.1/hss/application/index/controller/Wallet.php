@@ -109,7 +109,7 @@ class Wallet extends Base {
     /**
      * 钱包明细页
      */
-    public function Detail(){
+    public function detailList(){
 
         $condition = [
             'where'=>[
@@ -121,9 +121,12 @@ class Wallet extends Base {
             ],
         ];
 
+        $type = input('type/d');
+        if($type)  $condition['where'][] = ['type','=',$type];
+
         $model = new \app\index\model\WalletDetail();
-        $data = $model->getList();
-        $this->assign('');
+        $data = $model->getList($condition);
+        $this->assign('data',$data);
     }
 
 

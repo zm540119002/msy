@@ -34,7 +34,7 @@ class Goods extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),$item);
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
@@ -46,13 +46,13 @@ class Goods extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.mcs_scheme'),$item);
                     }
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
-                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),basename($_POST['goods_video']));
+                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.mcs_scheme'),$_POST['goods_video']);
             }
 
             // 选中的店铺类型 十进制
