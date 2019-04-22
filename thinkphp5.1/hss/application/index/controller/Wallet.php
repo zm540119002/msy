@@ -106,6 +106,26 @@ class Wallet extends Base {
         }
     }
 
+    /**
+     * 钱包明细页
+     */
+    public function Detail(){
+
+        $condition = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',$this->user['id']],
+            ],
+            'field'=>[
+                'id','sn','type','recharge_status','amount','payment_code','payment_time',
+            ],
+        ];
+
+        $model = new \app\index\model\WalletDetail();
+        $data = $model->getList();
+        $this->assign('');
+    }
+
 
 
 }
