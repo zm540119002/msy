@@ -5711,6 +5711,7 @@ ul.info_list li{
     background: #22AC38;
     color:#fff;
     text-align:center;
+    border-radius:4px;
 }
 .recharge_wallet_item{
     padding:0.12rem 0.12rem 0.15rem 0.20rem;
