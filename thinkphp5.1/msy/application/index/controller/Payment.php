@@ -44,48 +44,6 @@ class Payment extends \common\controller\Base {
                     $model = new \common\component\payment\unionpay\unionpay;
                     $model->unionPay($payInfo);
                     break;
-                case 4 : // 钱包
-                    if ($orderInfo['order_status'] > 1) {
-                        return errorMsg('订单已处理',['code'=>1]);
-                    }
-                    $modelWallet = new \app\index\model\Wallet();
-                    $config = [
-                        'where'=>[
-                            ['status', '=', 0],
-                            ['user_id', '=', $this->user['id']],
-                        ]
-                    ];
-                    $walletInfo = $modelWallet->getInfo($config);
-                    if($walletInfo['amount'] < $orderInfo['actually_amount']){
-                        $modelOrder->rollback();
-                        //返回状态给微信服务器
-                        return errorMsg('余额不够',['code'=>2]);
-                    }
-                    $modelOrder ->startTrans();
-                    $modelWalletDetail = new \app\index\model\WalletDetail();
-                    $orderInfo['pay_sn'] = generateSN();
-                    $orderInfo['payment_time'] = time();
-                    $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
-                    if(!$res['status'] ){
-                        $modelOrder->rollback();
-                        //返回状态给微信服务器
-                        return errorMsg('失败');
-                    }
-                    $data = [
-                        'payment_code'=>4,
-                        'pay_sn'=> $orderInfo['pay_sn'],
-                        'payment_time'=> $orderInfo['payment_time'],
-                        'order_sn'=> $orderInfo['sn'],
-                    ];
-                    $res = $modelOrder->orderHandle($data, $orderInfo);
-                    if(!$res['status']){
-                        $modelOrder->rollback();
-                        //返回状态给微信服务器
-                        return errorMsg('失败');
-                    }
-                    $modelOrder->commit();
-                    return successMsg('成功');
-                    break;
             }
             if(isset($msg)){
                 $this -> error($msg);
