@@ -35,7 +35,7 @@
     function jsApiCall()
     {
         WeixinJSBridge.invoke(
-            'getBrandWCPayRequest', $jsApiParameters,
+            'getBrandWCPayRequest', '{$jsApiParameters}',
             function(res){
                 if(res.err_msg == "get_brand_wcpay_request:ok"){
                     dialog.success('支付成功！',"{$payInfo['success_url']}");
