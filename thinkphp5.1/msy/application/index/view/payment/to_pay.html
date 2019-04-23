@@ -66,25 +66,27 @@
         $('body').on('click','.pay_btn',function () {
             if(isWeiXin()){
                 callpay();
-            }
-            $.ajax({
-                url: action,
-                data: {},
-                type: 'post',
-                beforeSend: function(){
-                    $('.loading').show();
-                },
-                error:function(){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    if(data.status){
-                        location.reload();
+            }else{
+                $.ajax({
+                    url: action,
+                    data: {},
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status){
+                            location.reload();
+                        }
                     }
-                }
-            });
+                });
+            }
+
         })
     });
 </script>
