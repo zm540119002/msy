@@ -35,7 +35,7 @@
             currentPage:1
         };
         var postData = {
-            pageSize:4,
+            pageSize:10,
             type:1
         };
 
@@ -43,13 +43,13 @@
         getPagingList(config,postData);
 
         //下拉加载
-/*        $(window).on('scroll',function(){
+        $(window).on('scroll',function(){
             if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
                 config.loadTrigger = false;
-                postData.category_id = $('.nav_menu li.current').data('category-id');
+                //postData.category_id = $('.nav_menu li.current').data('category-id');
                 getPagingList(config,postData);
             }
-        });*/
+        });
     });
 </script>
 {/block}

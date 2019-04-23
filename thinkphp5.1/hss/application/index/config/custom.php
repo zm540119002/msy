@@ -65,15 +65,15 @@ return [
           'code' => 1,
           'name' => '微信支付',
         ],
-        'alipay' => [
+        'Alipay' => [
             'code' => 2,
             'name' => '支付宝',
         ],
-        'unionPay' => [
+        'UnionPay' => [
             'code' => 3,
             'name' => '银联支付',
         ],
-        'offlinePay' => [
+        'OfflinePay' => [
             'code' => 4,
             'name' => '线下支付',
         ],
