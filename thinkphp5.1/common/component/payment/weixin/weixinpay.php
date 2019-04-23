@@ -38,8 +38,6 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $payOpenId  = $tools->getOpenid();
         try{
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
             $input = new \WxPayUnifiedOrder();
