@@ -60,6 +60,12 @@
                     <!--<span class="selected"></span>-->
                     <!--<span class="wx"></span>-->
                 <!--</li>-->
+                <li data-paycode="4">
+                    线下支付
+                    <!--<input type="checkbox" class=""/>-->
+                    <span class="selected"></span>
+                    <span class="wx"></span>
+                </li>
             </ul>
         </div>
         <div class="bank_transfer_item">
@@ -115,7 +121,7 @@
         var banksTransferTpl=$('.bank_transfer_tpl').html();
         $('body').on('click','.bank_transfer',function () {
             layer.open({
-                title:['转账凭证','border-bottom:1px solid #d9d9d9;'],
+                title:['线下支付','border-bottom:1px solid #d9d9d9;'],
                 type:1,
                 anim:'up',
                 className:'bankTransferLayer',
