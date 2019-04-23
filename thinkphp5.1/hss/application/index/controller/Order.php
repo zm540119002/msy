@@ -93,7 +93,7 @@ class Order extends \common\controller\UserBase
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
-    //确定订单 //订单-详情页
+    // 订单确认页
     public function confirmOrder()
     {
         if (request()->isPost()) {
@@ -189,17 +189,23 @@ class Order extends \common\controller\UserBase
 
 
     }
-    //支付
+
+    // 支付
     public function toPay()
     {
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+        $orderSn = input('order_sn/s');
+        $url = config('custom.pay_gateway');
+
+        return $this->redirect($url.$orderSn);
+
+/*        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $payOpenId =  session('pay_open_id');
             if(empty($payOpenId)){
                 $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
                 $payOpenId  = $tools->getOpenid();
                 session('pay_open_id',$payOpenId);
             }
-        }
+        }*/
         $modelOrder = new \app\index\model\Order();
         $orderSn = input('order_sn');
         $config = [
@@ -229,6 +235,7 @@ class Order extends \common\controller\UserBase
         $this->assign('user',$this->user);
         return $this->fetch();
     }
+
     //订单管理
     public function manage(){
         if(input('?order_status')){
@@ -322,23 +329,58 @@ class Order extends \common\controller\UserBase
      * 设置状态
      */
     public function setOrderStatus(){
+
         if(!request()->isPost()){
             return config('custom.not_post');
         }
-        $model = new \app\index\model\Order();
+
+
+
         $id = input('post.id/d');
+        $orderStatus = input('post.order_status/d');
         if(!input('?post.id') && !$id){
             return errorMsg('失败');
         }
-        $where=[
-            ['id','=',$id],
-            ['user_id','=',$this->user['id']],
+
+        $where = [
+            'where' => [
+                ['id','=',$id],
+                ['user_id','=',$this->user['id']],
+            ]
         ];
-        $orderStatus = input('post.order_status/d');
+        $model = new \app\index\model\Order();
+        $orderInfo = $model->getInfo($where);
+        //$orderInfo['sn'] = '20190412170757362998811738229639';
+        $type = true;
+        switch($orderStatus){
+            case 3 : // 确定收货
+                $where['order_status'] = 2;
+                break;
+            case 5 : // 取消订单
+                $where['order_status'] = 1;
+                break;
+            case 7 : // 申请退款
+                // system_id,order_sn
+                $curl = new \common\component\curl\Curl();
+                $res = $curl->get('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
+/*                p($res);
+                exit;*/
+                $res = json_decode($res,true);
+                if(!$res['status']){
+                    $type = false;
+                }
+
+                break;
+        }
+
+        if(!$type){
+            return errorMsg('失败');
+        }
+
         $data = [
             'order_status' => $orderStatus,
         ];
-        $rse = $model->where($where)->setField($data);
+        $rse = $model->where($where['where'])->setField($data);
         if(!$rse){
             return errorMsg('失败');
         }
@@ -390,7 +432,7 @@ class Order extends \common\controller\UserBase
                     ['od.father_order_id','=',$item['id']]
                 ],
                 'field'=>[
-                    'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
+                    'od.goods_id','od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                     'g.name','g.thumb_img',
                 ],
                 'join'=>[
@@ -407,6 +449,7 @@ class Order extends \common\controller\UserBase
             $item['goods_num'] = $goodsNum;
             return $item;
         });
+
         $currentPage = input('get.page/d');
         $this->assign('currentPage',$currentPage);
         $this->assign('list',$list);
@@ -415,6 +458,14 @@ class Order extends \common\controller\UserBase
             $this->fetch($pageType);
         }
         return $this->fetch('list_tpl');
+    }
+
+
+
+    private function refundOrder($orderInfo){
+
+
+        \common\component\payment\weixin\weixinpay::wxPay($orderInfo);
     }
 
 

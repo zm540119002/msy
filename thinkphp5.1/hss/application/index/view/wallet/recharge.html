@@ -3,6 +3,19 @@
 <!--转账凭证弹窗-->
 <section class="bank_transfer_tpl" style="display:none;">
     <form id="bankTransfer">
+        <p>1、线下办理银行汇款转账（底单拍照备用）</p>
+        <div class="bank_transfer_item">
+            <span class="content-label">银行转账</span>
+            <p>收款单位：广东美尚网络科技有限公司</p>
+            <p>开户银行：广州市华景新城支行</p>
+            <p>银行账户：XXXXXXXXXXXXXXXXXXXXXXXX</p>
+            <!--<a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>-->
+        </div>
+        <p>2、在下方输入已办理的汇款转账金额（或者现金交易金额）</p>
+        <div class="bank_transfer_item">
+            <span>¥</span>
+            <input type="text" placeholder="请输入金额">
+        </div>
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
@@ -13,42 +26,30 @@
 			</div>
 		</div>
         <p>上传转账汇款凭证(截屏或拍照)，以便通知客服人员及时进行账户人工充值，以免影响采购结算</p>
-        <a href="javascript:;" class="entry_btn">确定</a>
+        <a href="javascript:;" class="entry_btn">确定递交</a>
     </form>
 </section>
 <article class="f24 pay_wrapper">
     <section class="header_title separation-line">
         <a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
-		<h2 class="f24">采购充值</h2>
+		<h2 class="f24">账户充值详情</h2>
 	</section>
     <section class="recharge_wallet_item">
-        <span class="content-label">采购钱包余额</span>
+        <span class="content-label">账户余额</span>
         <div class="wallet_balance">¥<span> {$wallet.amount}</span></div>
     </section>
     <section class="recharge_amount_item content-padding">
         <div class="columns_flex l-r-sides">
-            <span>选择充值金额</span>
-            <span>充值记录></span>
+            <span>账户充值</span>
+            <span><a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('rechargeDetail')}"></a>
+                充值记录</span>
         </div>
         <ul class="recharge_m_list">
+            {volist name=":config('custom.recharge_amount')" id="vo"}
             <li>
-                <span>1000</span>元
+                <span>{$vo}</span>元
             </li>
-            <li>
-                <span>5000</span>元
-            </li>
-            <li>
-                <span>10000</span>元
-            </li>
-            <li>
-                <span>20000</span>元
-            </li>
-            <li>
-                <span>50000</span>元
-            </li>
-            <li>
-                <span>100000</span>元
-            </li>
+            {/volist}
         </ul>
     </section>
     <section class="content-padding ">
@@ -66,22 +67,22 @@
                     <!--<input type="checkbox" class=""/>-->
                     <span class="selected"></span>
                     <span class="wx"></span>
-                <!--</li>-->
+                </li>
                 <!--<li data-paycode="3">银联支付-->
                     <!--&lt;!&ndash;<input type="checkbox" class=""/>&ndash;&gt;-->
                     <!--<span class="selected"></span>-->
                     <!--<span class="wx"></span>-->
                 <!--</li>-->
+                <li data-paycode="4" class="underline-pay">
+                    线下支付
+                    <!--<input type="checkbox" class=""/>-->
+                    <span class="selected"></span>
+                    <span class="wx"></span>
+                </li>
             </ul>
         </div>
-        <div class="bank_transfer_item">
-            <span class="content-label">银行转账</span>
-            <p>收款单位：广东美尚网络科技有限公司</p>
-            <p>开户银行：广州市华景新城支行</p>
-            <p>银行账户：XXXXXXXXXXXXXXXXXXXXXXXX</p>
-            <a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>
-        </div>
-        <form action="{:url('Payment/rechargePayment')}" method="post" class="recharge_form">
+        
+        <form action="{:url('Wallet/rechargeOrder')}" method="post" class="recharge_form">
             <input type="hidden" name="amount" value=""/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
             <span class="red">￥<price>0.00</price></span>
@@ -95,7 +96,7 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/uploadImgToTemp.js"></script>
+<script type="text/javascript" src="api_common_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
     $(function(){
         $('.pay_nav li').on('click',function(){
@@ -125,9 +126,9 @@
         });
         //转账凭证
         var banksTransferTpl=$('.bank_transfer_tpl').html();
-        $('body').on('click','.bank_transfer',function () {
+        $('body').on('click','.underline-pay',function () {
             layer.open({
-                title:['转账凭证','border-bottom:1px solid #d9d9d9;'],
+                title:['线下支付','border-bottom:1px solid #d9d9d9;'],
                 type:1,
                 anim:'up',
                 className:'bankTransferLayer',

@@ -156,6 +156,7 @@ class WxPayApi
 		
 		$inputObj->SetSign();//签名
 		$xml = $inputObj->ToXml();
+
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = self::postXmlCurl($xml, $url, true, $timeOut);
 		$result = WxPayResults::Init($response);
@@ -406,11 +407,16 @@ class WxPayApi
  	 */
 	public static function notify($callback, &$msg)
 	{
-		//获取通知的数据
-		//$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-		$xml = file_get_contents('php://input');
+        if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
+            # 如果没有数据，直接返回失败
+            return false;
+        }
 		//如果返回成功则验证签名
 		try {
+            //获取通知的数据
+            //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+            $xml = file_get_contents('php://input');
+
 			$result = WxPayResults::Init($xml);
 		} catch (WxPayException $e){
 			$msg = $e->errorMessage();
@@ -519,7 +525,7 @@ class WxPayApi
 	 * @throws WxPayException
 	 */
 	private static function postXmlCurl($xml, $url, $useCert = false, $second = 30)
-	{		
+	{
 		$ch = curl_init();
 		//设置超时
 		curl_setopt($ch, CURLOPT_TIMEOUT, $second);
@@ -545,9 +551,9 @@ class WxPayApi
 			//设置证书
 			//使用证书：cert 与 key 分别属于两个.pem文件
 			curl_setopt($ch,CURLOPT_SSLCERTTYPE,'PEM');
-			curl_setopt($ch,CURLOPT_SSLCERT, WxPayConfig::SSLCERT_PATH);
+			curl_setopt($ch,CURLOPT_SSLCERT, dirname(dirname(__FILE__)).WxPayConfig::SSLCERT_PATH);
 			curl_setopt($ch,CURLOPT_SSLKEYTYPE,'PEM');
-			curl_setopt($ch,CURLOPT_SSLKEY, WxPayConfig::SSLKEY_PATH);
+			curl_setopt($ch,CURLOPT_SSLKEY, dirname(dirname(__FILE__)).WxPayConfig::SSLKEY_PATH);
 		}
 		//post提交方式
 		curl_setopt($ch, CURLOPT_POST, TRUE);

@@ -163,6 +163,26 @@ function successMsg($msg, $extend = '')
     return $return;
 }
 
+function errorJson($msg,$extend = '')
+{
+    $return = array(
+        'status' => false,
+        'info' => $msg
+    );
+    is_array($extend) && ($return = array_merge($return, $extend));
+    return json_encode($return);
+}
+
+function successJson($msg='成功',$extend = '')
+{
+    $return = array(
+        'status' => true,
+        'info' => $msg
+    );
+    is_array($extend) && ($return = array_merge($return, $extend));
+    return json_encode($return);
+}
+
 /**
  * Compares two strings $a and $b in length-constant time.
  * @param $a
@@ -657,6 +677,7 @@ function moveImgFromTemp($newRelativePath,$filename){
         $oldFiles = $uploadPath.$filename;
 
     }
+
     // 旧文件 有直接用 ，没有就设置
     if(is_file($oldFiles)){
         $tempFile = $oldFiles;

@@ -50,7 +50,7 @@
 {/block}
 
 {block name="script"}
-    <script type="text/javascript" src="index_admin_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function () {
             var id = {$id};
@@ -60,6 +60,7 @@
                 url:module+'goods/getList'
             };
             var getData = $('#form1').serializeObject();
+            getData.shelf_status = 3;
             getPagingList(config,getData);
             //分类筛选
             $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {

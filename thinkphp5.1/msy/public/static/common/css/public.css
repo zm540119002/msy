@@ -749,7 +749,7 @@ i{
     width: 0.82rem;
     height: 0.785rem;
     margin:0 auto .05rem;
-    background-image:url(../../common/img/icons/store_purchase_type.png);
+    background-image:url(../img/icons/store_purchase_type.png);
     background-repeat: no-repeat;
     background-size:0.785rem 3.99rem;
 }
@@ -3937,6 +3937,7 @@ select[name="nodeIds"]{
 .mod_selection .nav {
     position: absolute;
     top: -56px;
+    top: 0;
     height: .8rem;
     overflow: hidden;
     box-sizing: border-box;
@@ -4683,7 +4684,8 @@ select[name="nodeIds"]{
 .pay_amount_item{
     background:#fff;
 }
-.pay_form input[type="submit"]{
+.pay_form input[type="submit"],
+.pay_form input[type="button"]{
     width:100%;
     display: block;
     padding:0.20rem 0;

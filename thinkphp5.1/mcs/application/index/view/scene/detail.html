@@ -56,7 +56,7 @@
 						<span class="content-label">{$info.name}</span>
 					{/if}
 					<a data-id="{$info.id}">
-						<img src="{:show_img_handle($info.thumb_img)}" alt="{$info.name}">
+						<img class="common_default_img" src="{:show_img_handle($info.thumb_img)}" alt="{$info.name}">
 					</a>
 				</div>
 			{/volist}
@@ -78,7 +78,7 @@
 	{include file="template/footer_menu.html" /}
 {/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/swiper.min.js"></script>
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){

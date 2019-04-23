@@ -32,17 +32,12 @@ return [
     'taglib_end'   => '}',
     'tpl_replace_string' => [
         //api    资源路径
-        'api_common_js' => 'https://api.meishangyun.com/static/common/js',
-        'api_common_css' => 'https://api.meishangyun.com/static/common/css',
-        'api_common_img' => 'https://api.meishangyun.com/static/common/img',
+        'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
+        'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
+        'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
         //公共资源路径
         'public_img' => Request::domain() .'/static/common/img',
-        'public_js' => Request::domain() .'/static/common/js',
         'public_css' => Request::domain() .'/static/common/css',
-        'public_hui_admin' => Request::domain() .'/static/admin/hadmin',
-        'public_admin_common_js' => Request::domain() .'/static/admin/common/js',
-        'public_admin_common_css' => Request::domain() .'/static/admin/common/css',
-        'public_admin_common_img' => Request::domain() .'/static/admin/common/img',
         //美尚平台首页资源路径
         'index_img' => Request::domain() .'/static/index/img',
         'index_js' => Request::domain() .'/static/index/js',
@@ -54,32 +49,15 @@ return [
         'store_img' => Request::domain() .'/static/store/img',
         'store_js' => Request::domain() .'/static/store/js',
         'store_css' => Request::domain() .'/static/store/css',
-        'store_admin_img' => Request::domain() .'/static/store_admin/img',
-        'store_admin_js' => Request::domain() .'/static/store_admin/js',
-        'store_admin_css' => Request::domain() .'/static/store_admin/css',
         //供应商资源路径
         'factory_img' => Request::domain() .'/static/factory/img',
         'factory_js' => Request::domain() .'/static/factory/js',
         'factory_css' => Request::domain() .'/static/factory/css',
-        'factory_admin_img' => Request::domain() .'/static/factory_admin/img',
-        'factory_admin_js' => Request::domain() .'/static/factory_admin/js',
-        'factory_admin_css' => Request::domain() .'/static/factory_admin/css',
-        //从业人员资源路径
-        'practitioner_img' => Request::domain() .'/static/practitioner/img',
-        'practitioner_js' => Request::domain() .'/static/practitioner/js',
-        'practitioner_css' => Request::domain() .'/static/practitioner/css',
-        'practitioner_video' => Request::domain() .'/static/practitioner/video',
-        'practitioner_admin_img' => Request::domain() .'/static/practitioner_admin/img',
-        'practitioner_admin_js' => Request::domain() .'/static/practitioner_admin/js',
-        'practitioner_admin_css' => Request::domain() .'/static/practitioner_admin/css',
         //商城资源路径
         'mall_img' => Request::domain() .'/static/mall/img',
         'mall_js' => Request::domain() .'/static/mall/js',
         'mall_css' => Request::domain() .'/static/mall/css',
         'mall_video' => Request::domain() .'/static/mall/video',
-        'mall_admin_img' => Request::domain() .'/static/mall_admin/img',
-        'mall_admin_js' => Request::domain() .'/static/mall_admin/js',
-        'mall_admin_css' => Request::domain() .'/static/mall_admin/css',
         //公共上传路径
         'public_uploads' => Request::domain() .'/uploads',
         //彩绘图片路径

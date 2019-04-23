@@ -15,6 +15,14 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>备注：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <div class= width="89%" align=left>
+                                <textarea class="project_description" name="remark" >{$info.remark}</textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
@@ -54,7 +62,7 @@
 {/block}
 
 {block name="script"}
-<script type="text/javascript" src="index_admin_js/uploadSingleImg.js"></script>
+<script type="text/javascript" src="api_common_js/admin/uploadSingleImg.js"></script>
 <script type="text/javascript">
         $(function(){
             //项目主图

@@ -8,11 +8,13 @@
 
 namespace common\component\payment\weixin;
 require_once(dirname(__FILE__) . '/lib/WxPay.Api.php');
+//require_once(dirname(__FILE__) . '/lib/WxPay.Exception.php');
 require_once(dirname(__FILE__)  . '/WxPay.JsApiPay.php');
 require_once(dirname(__FILE__)  . '/WxPay.NativePay.php');
 require_once(dirname(__FILE__)  . '/log.php');
 
 class weixinpay{
+    public $msg = '';
     /**支付端判断
      * @param $payInfo
      * @param $backUrl
@@ -22,8 +24,9 @@ class weixinpay{
             weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             weixinpay::h5_pay($payInfo);
+
         }else{//微信浏览器(手机端)
-            weixinpay::getJSAPI($payInfo);
+            return weixinpay::getJSAPI($payInfo);
         }
     }
 
@@ -35,63 +38,33 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
-        $tools = new \JsApiPay();
-        $openId = session('pay_open_id');
-        $input = new \WxPayUnifiedOrder();
-        $input->SetBody('美尚云');					//商品名称
-        $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
-        $input->SetOut_trade_no($payInfo['sn']);			//订单号
-        $input->SetTotal_fee($payInfo['actually_amount'] * 100);			//支付金额,单位:分
-        $input->SetTime_start(date("YmdHis"));		//支付发起时间
-        $input->SetTime_expire(date("YmdHis", time() + 600));//支付超时
-        $input->SetGoods_tag("test3");
-        $input->SetNotify_url($payInfo['notify_url']);//支付回调验证地址
-        $input->SetTrade_type("JSAPI");				//支付类型
-        $input->SetOpenid($openId);					//用户openID
-        $order = \WxPayApi::unifiedOrder($input);	//统一下单
-        $jsApiParameters = $tools->GetJsApiParameters($order);
-        return $jsApiParameters;
-        $html = <<<EOF
-			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
-			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
-			<script type="text/javascript" src="/static/common/js/dialog.js"></script>
-            <script type="text/javascript">
-                //调用微信JS api 支付
-                function jsApiCall()
-                {
-                    WeixinJSBridge.invoke(
-                        'getBrandWCPayRequest',$jsApiParameters,
-                        function(res){
-                            if(res.err_msg == "get_brand_wcpay_request:ok"){
-                                dialog.success('支付成功！',"{$payInfo['success_url']}");
-                            }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                  window.history.go(-1);
-                                return false;
-                                dialog.success('取消支付！', window.history.go(-1));
-                            }else{
-                                dialog.success('支付失败！',"{$payInfo['fail_url']}");
-                            }
-                        }
-                    );
-                }
-                function callpay()
-                {
-                    if (typeof WeixinJSBridge == "undefined"){
-                        if( document.addEventListener ){
-                            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-                        }else if (document.attachEvent){
-                            document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-                        }
-                    }else{
-                        jsApiCall();
-                    }
-                }
-                callpay();
-            </script>
-EOF;
-        echo  $html;
+        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+        $payOpenId  = $tools->getOpenid();
+        try{
+            $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
+            $input = new \WxPayUnifiedOrder();
+            $input->SetBody('美尚云');					                  //商品名称
+            $input->SetAttach($payInfo['attach']);			              //附加参数,可填可不填,填写的话,里边字符串不能出现空格
+            $input->SetOut_trade_no($payInfo['sn']);			          //订单号
+            $input->SetProduct_id($payInfo['product']);			          //商品ID
+            $input->SetTotal_fee($payInfo['actually_amount'] * 100);	  //支付金额,单位:分
+            $input->SetTime_start(date("YmdHis"));		                  //支付发起时间
+            $input->SetTime_expire(date("YmdHis", time() + 600));         //支付超时
+            $input->SetGoods_tag("test3");
+            $input->SetNotify_url($payInfo['notify_url']);                //支付回调验证地址
+            $input->SetTrade_type("JSAPI");				                  //支付类型
+            $input->SetOpenid($payOpenId);					  //用户openID
+            $order = \WxPayApi::unifiedOrder($input);	                  //统一下单
+            $tools = new \JsApiPay();
+            $jsApiParameters = $tools->GetJsApiParameters($order);
+            return $jsApiParameters;
+            //return true;
+        } catch(\Exception $e) {
+            //\Log::ERROR(json_encode($e));
+            return $e->getMessage();
+        }
+
+
     }
 
     /**生成支付代码 扫码支付
@@ -251,7 +224,7 @@ EOF;
         return $result;
     }
 
-    //订单查询
+    // 订单查询
     public static function wxOrderQuery($orderSn,$transactionId){
         $input = new \WxPayRefund();
         $input->SetOut_trade_no($orderSn);			//自己的订单号
@@ -262,4 +235,108 @@ EOF;
         //file_put_contents(APP_ROOT.'/Api/wxpay/logs/log3.txt',arrayToXml($result),FILE_APPEND);
         return $result;
     }
+
+
+    // 微信支付回调认证
+    public function wxNotify(){
+
+        try {
+            //获取通知的数据
+            //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+            $xml = file_get_contents('php://input');
+            //$xml  = file_get_contents('./xml1.json');
+            $data = \WxPayResults::Init($xml);
+            if(!$this->Queryorder($data)){
+                //$msg = "订单查询失败";
+                return false;
+            }
+        } catch (\WxPayException $e){
+            //$msg = $e->errorMessage();
+            // 记录日志
+            //\think\facade\Log::init(['path' => '../logs/wx/']);
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信支付回调',$e);
+            \think\facade\Log::save();
+
+            return false;
+        }
+        return $data;
+
+    }
+
+    //查询订单
+    public function queryOrder($data)
+    {
+        $input = new \WxPayOrderQuery();
+        $input->SetTransaction_id($data['transaction_id']);
+        $input->SetOut_trade_no($data['out_trade_no']);
+        $result = \WxPayApi::orderQuery( $input);
+
+        if(array_key_exists("return_code", $result)
+            && array_key_exists("result_code", $result)
+            && $result["return_code"] == "SUCCESS"
+            && $result["result_code"] == "SUCCESS")
+        {
+            return true;
+        }
+
+        //Log::DEBUG("query:" . json_encode($result));
+        // 记录日志
+        //\think\facade\Log::init(['path' => '../logs/wx/']);
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error('微信支付后订单查询',$result);
+        \think\facade\Log::save();
+        return false;
+    }
+
+    // 确定退款
+    public function refundOrder($data){
+
+        try {
+            $this->getWxOpenid();
+            $input = new \WxPayRefund();
+            $input->SetTransaction_id($data['pay_sn']);
+            $input->SetOut_refund_no($data['sn']);
+            $input->SetTotal_fee($data['actually_amount'] * 100);
+            $input->SetRefund_fee($data['actually_amount'] * 100);
+            $input->SetOp_user_id(session('pay_open_id'));
+            $result =  \WxPayApi::refund( $input);
+
+        } catch (\WxPayException $e){
+
+            $this->msg = $e->errorMessage();
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信退款失败: ',$this->msg);
+            \think\facade\Log::error($data);
+            \think\facade\Log::save();
+            return false;
+        }
+
+        // 结果处理
+        if(array_key_exists("return_code", $result) && array_key_exists("result_code", $result) && $result["return_code"] == "SUCCESS" && $result["result_code"] == "SUCCESS") {
+            return $result;
+
+        }else{
+            \think\facade\Log::init(['path' => './logs/pay/']);
+            \think\facade\Log::error('微信退款失败: ',$result['err_code_des']);
+            \think\facade\Log::error($data);
+            \think\facade\Log::save();
+
+            return false;
+        }
+
+    }
+
+
+    private function getWxOpenid(){
+        if(empty(session('pay_open_id'))){
+            $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $payOpenId  = $tools->getOpenid();
+            session('pay_open_id',$payOpenId);
+        }
+    }
+
+
+
+
 }

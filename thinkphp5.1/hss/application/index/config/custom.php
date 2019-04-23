@@ -30,14 +30,14 @@ return [
         ],
         'StoreLeague/index' => [
             'name' => '加盟店家',
-            'a'    => 'href='.url('StoreLeague/index'),
-            //'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('StoreLeague/index'),
+            //'a'    => 'href='.url('StoreLeague/index'),
+            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('StoreLeague/index'),
             'icon' => 'practitioners',
         ],
-        'Business/index' => [
+        'CityPartner/index' => [
             'name' => '城市合伙人',
-            'a'    => 'href='.url('Business/index'),
-            //'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Business/index'),
+            //'a'    => 'href='.url('Business/index'),
+            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('CityPartner/index'),
             'icon' => 'business',
         ],
         'Cart/manage' => [
@@ -51,5 +51,11 @@ return [
             'icon' => 'my',
         ],
     ],
+    // 充值金额
+    'recharge_amount'=>[5000,10000,20000,30000,50000,80000],
+
+    // 支付链接
+    'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/',
+    'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/rechargePay/system_id/3/order_sn/',
 ];
 

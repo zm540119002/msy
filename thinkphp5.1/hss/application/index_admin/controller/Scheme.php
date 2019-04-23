@@ -101,12 +101,13 @@ class Scheme extends Base {
 
         $where[] = ['status','=',0];
         // 条件
-        $keyword = input('get.keyword/s');
-        if($keyword) $where[] = ['name','like', '%' . trim($keyword) . '%'];
+        if($shelf_status=input('get.shelf_status/d'))  $where[] = ['shelf_status','=',$shelf_status];
+
+        if($keyword=input('get.keyword/s')) $where[] = ['name','like', '%' . trim($keyword) . '%'];
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','sort','shelf_status'],
+            'field'=>['id','name','remark','thumb_img','sort','shelf_status'],
             'order'=>['sort'=>'desc', 'id'=>'desc',],
         ];
         $list = $this->obj->pageQuery($condition);

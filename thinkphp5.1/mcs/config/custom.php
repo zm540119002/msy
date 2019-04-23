@@ -98,6 +98,15 @@ return [
     /**
      * 标记 -关联表类型 goods
      */
+    'relation_type' => [
+        'scene'    => 1,
+        'project'  => 2,
+        'promotion'=> 3,
+    ],
+
+    /**
+     * 交易方式
+     */
     'pay_type' => [
         'WeChat'  => 1,
         'Alipay'  => 2,
@@ -105,8 +114,6 @@ return [
         'Wallet'  => 3,
     ],
 
-    /**
-     * 交易方式
-     */
+
 
 ];

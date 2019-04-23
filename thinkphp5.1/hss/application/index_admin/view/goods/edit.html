@@ -17,7 +17,7 @@
                             {include file="goods_category/linkage_tpl" /}
                         </td>
                     </tr>
-                    <tr>
+<!--                    <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品归属：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
                             <div class="type_item">
@@ -30,7 +30,7 @@
                                 {/volist}
                             </div>
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品名称：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
@@ -200,7 +200,7 @@
             autoFloatEnabled: true
         });
     </script>
-    <script type="text/javascript" src="index_admin_js/categoryLinkage.js"></script>
+    <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function(){
             var parameters = '{$info.parameters|raw}';
@@ -303,9 +303,7 @@
 //                console.log(sum(postData.belong_to));
 //                console.log(sum(postData.belong_to));return false;
                 var content='';
-                if(!sum(postData.belong_to)){
-                    content='请选择店铺类别';
-                }else if(!postData.name){
+                if(!postData.name){
                     content='请填写商品名称';
                 }else if(!postData.headline){
                     content='请填写商品标题文案';
@@ -339,15 +337,6 @@
                     });
                 });
             });
-
-            $('document').ready(function(){
-                // 选择默认值
-                var i = '{$info.id}';
-                if(!i.length){
-                    $("input[name='belong_to']:first").attr('checked','checked');
-                }
-            });
-
         });
     </script>
 {/block}

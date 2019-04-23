@@ -54,9 +54,7 @@
 		<p>欢迎来到美容机构管理中心</p>
 		<p>美尚云平台支持机构多店铺运营管理</p>
 		<br/>
-		<a href="{:url('index/UserCenter/logout')}">退出</a>
-		<br/><br/>
-		<a href="javascript:void(0);" class="customer_client">客服测试</a>
+		<a href="javascript:void(0);" id="logout_dialog">退出</a>
 		<br/><br/>
 		<a href="{:url('LoginTest/index')}">登录测试</a>
 	</section>
@@ -70,8 +68,8 @@
 {include file="template/right_side_bar.html" /}
 {/block}
 {block name="footer"}{/block}
-{block name="pre-script"}
-<script type="text/javascript" src="public_js/swiper.min.js"></script>
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 {include file="public/dialog_factory_store" /}
 <script type="text/javascript">
 	$(function(){
@@ -83,140 +81,14 @@
 				clickable: true
 			}
 		});
-		//客服
-		$('body').on('click','.customer_client',function () {
-			var url = domain + 'index/CustomerClient/index';
-			console.log(url);
-			var postData = {};
-			$.ajax({
-				url: url,
-				data: postData,
-				type: 'post',
-				beforeSend: function(xhr){
-					$('.loading').show();
-				},
-				error:function(xhr){
-					$('.loading').hide();
-					dialog.error('AJAX错误');
-				},
-				success: function(data){
-					$('.loading').hide();
-					if(data.code==0){
-						dialog.error(data.msg);
-					}else if(data.code==1 && data.data=='no_login'){
-						loginDialog();
-					}else{
-						location.href = url;
-					}
-				}
-			});
-		});
-//		//入驻部署
-//		$('body').on('click','.deployed-deployment',function () {
-//			var url = module + 'Store/index';
-//			var postData = {};
-//			$.ajax({
-//				url: url,
-//				data: postData,
-//				type: 'post',
-//				beforeSend: function(xhr){
-//					$('.loading').show();
-//				},
-//				error:function(xhr){
-//					$('.loading').hide();
-//					dialog.error('AJAX错误');
-//				},
-//				success: function(data){
-//					$('.loading').hide();
-//					if(data.status==0){
-//						dialog.error(data.info);
-//					}else if(data.code==1){
-//						if(data.data == 'no_login'){
-//							loginDialog();
-//						}
-//						if(data.data == 'no_factory_register'){
-//							layer.open({
-//								title:['提示'],
-//								content:[data.msg],
-//								btn:['确定',' 取消'],
-//								yes:function () {
-//									location.href= module + 'Deploy/register';
-//								}
-//							});
-//						}
-//					}else if(data.status==1){
-//						location.href = url;
-//					}
-//				}
-//			});
-//		});
 		//店长管理
-		$('body').on('click','.manager_manage',function () {
-			loginBackFunction = function(){
-				console.log(123);
-				return false;
-				$('#storeShopInfo').find('.store_list').empty().append(data);
-				switchManagerStore(url);
-			};
-//			var url = module + 'ManagerManage/manage';
-//			var postData = {};
-//			$.ajax({
-//				url: url,
-//				data: postData,
-//				type: 'post',
-//				beforeSend: function(xhr){
-//					$('.loading').show();
-//				},
-//				error:function(xhr){
-//					$('.loading').hide();
-//					dialog.error('AJAX错误');
-//				},
-//				success: function(data){
-//					$('.loading').hide();
-//					if(data.status==0){
-//						dialog.error(data.info);
-//					}else if(data.code==1 && data.data=='no_login'){
-//						loginDialog();
-//					}else if(data.code==1 && data.data=='no_empower'){
-//						dialog.error(data.msg);
-//					}else{
-//						loginBackFunction();
-//					}
-//				}
-//			});
+		$('body').on('click','a.manager_manage',function () {
+//			loginBackFunctionParameter.jump_url = action;
+//			loginBackFunction = function(){
+//				$('#storeShopInfo').find('.store_list').empty().append(loginBackFunctionParameter.data);
+//				switchManagerStore(loginBackFunctionParameter.jump_url);
+//			};
 		});
-		//店铺运营
-//		$('body').on('click','.store-operation',function () {
-//			var url = module + 'Operation/index';
-//			var postData = {};
-//			$.ajax({
-//				url: url,
-//				data: postData,
-//				type: 'post',
-//				beforeSend: function(xhr){
-//					$('.loading').show();
-//				},
-//				error:function(xhr){
-//					$('.loading').hide();
-//					dialog.error('AJAX错误');
-//				},
-//				success: function(data){
-//					$('.loading').hide();
-//					if(data.status==0){
-//						dialog.error(data.info);
-//					}else if(data.code==1 ){
-//						if(data.data == 'no_login'){
-//							loginDialog();
-//						}
-//						if(data.data == 'no_empower'){
-//							dialog.error(data.msg);
-//						}
-//					}else{
-//						loginBackFunction();
-//					}
-//				}
-//			});
-//		});
 	});
 </script>
 {/block}

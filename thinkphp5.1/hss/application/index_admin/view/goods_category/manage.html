@@ -5,7 +5,7 @@
         <div class="item-title">
             <ul class="tab-base">
                 <li><a href="{:url('manage')}" class="current"><span>管理</span></a></li>
-                <li><a href="{:url('edit')}" ><span>编辑</span></a></li>
+                <li><a href="javascript:void(0);" class="add" title="分类" id="title"><span>添加</span></a></li>
             </ul>
         </div>
     </div>
@@ -25,7 +25,8 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
-<script type="text/javascript" src="index_admin_js/goodsCategoryManage.js"></script>
+<script type="text/javascript" src="api_common_js/admin/goodsCategoryManage.js"></script>
+<script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
 <script type="text/javascript">
 
     $(function(){

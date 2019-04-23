@@ -25,6 +25,7 @@ class Cart extends \common\controller\UserBase{
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
 
+            //return $this->fetch('index');
             return $this->fetch();
         }
     }
