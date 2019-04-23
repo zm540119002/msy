@@ -252,12 +252,16 @@
         $(function(){
 
 
+            $('.pay_nav li').on('click',function(){
+                console.log(222222);
+                return false;
+            });
+
 
             $('.pay_nav li').on('click',function(){
-                console.log(444444);
-                return false;
 
-                $('.bankTransferLayer').addClass('current').siblings().removeClass('current');
+                $('.settlementmethod').find('.pay_nav').val();
+                $(this).addClass('current').siblings().removeClass('current');
                 var pay_code = $(this).data('paycode');
                 $(this).find('input[type="checkbox"]').prop('checked',true);
                 $('.pay_code').val(pay_code);
