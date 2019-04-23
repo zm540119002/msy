@@ -91,30 +91,28 @@ class Payment extends \common\controller\Base {
                 $this -> error($msg);
             }
         }else{
-//            $modelOrder = new \app\index\model\Order();
-//            $systemId = input('system_id',0,'int');
-//            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-//            $orderSn = input('order_sn');
-//            $config = [
-//                'where' => [
-//                    ['o.status', '=', 0],
-//                    ['o.sn', '=', $orderSn],
-//                ],'field' => [
-//                    'o.id', 'o.sn', 'o.amount',
-//                    'o.user_id',
-//                ],
-//            ];
-//            $orderInfo = $modelOrder->getInfo($config);
-//            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
-//                $this->error('订单不存在或金额不能为0 !');
-//            }
-//            $this->assign('orderInfo', $orderInfo);
+            $modelOrder = new \app\index\model\Order();
+            $systemId = input('system_id',0,'int');
+            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
+            $orderSn = input('order_sn');
+            $config = [
+                'where' => [
+                    ['o.status', '=', 0],
+                    ['o.sn', '=', $orderSn],
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.amount','actually_amount',
+                    'o.user_id',
+                ],
+            ];
+            $orderInfo = $modelOrder->getInfo($config);
+            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
+                $this->error('订单不存在或金额不能为0 !');
+            }
+            $this->assign('orderInfo', $orderInfo);
             //判断为微信支付，并且为微信浏览器
-            //if($orderInfo['paymentCode'] ==1 && isWxBrowser()){
-            if(isWxBrowser()){
+            if($orderInfo['paymentCode'] ==1 && isWxBrowser()){
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
-                $systemId = 1;
                 $attach = [
                     'system_id' =>$systemId,
                 ];
@@ -127,11 +125,10 @@ class Payment extends \common\controller\Base {
                     $payOpenId  = $tools->getOpenid();
                     session('open_id',$payOpenId);
                 }
-
                 $payInfo = [
-                    'sn'=>generateSN(),
-                    'product'=>5,
-                    'actually_amount'=>0.01,
+                    'sn'=>$orderInfo['sn'],
+                    'product'=>$orderInfo['id'],
+                    'actually_amount'=>$orderInfo['actually_amount'],
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
