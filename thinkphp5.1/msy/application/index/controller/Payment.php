@@ -113,7 +113,6 @@ class Payment extends \common\controller\Base {
             if($orderInfo['paymentCode'] ==1 && isWxBrowser()){
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
-                $systemId = 1;
                 $attach = [
                     'system_id' =>$systemId,
                 ];
