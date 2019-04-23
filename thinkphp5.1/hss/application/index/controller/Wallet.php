@@ -86,7 +86,7 @@ class Wallet extends Base {
             case config('custom.pay_code.WeChatPay.code') :
 
                 $url = config('custom.pay_recharge').$walletDetailSn;
-                //return successMsg($url);
+                return successMsg($url);
                 return successMsg(request()->domain().url('/index/Payment/rechargePay', ['system_id'=>3,'order_sn'=>$walletDetailSn]));
 
                 break;
