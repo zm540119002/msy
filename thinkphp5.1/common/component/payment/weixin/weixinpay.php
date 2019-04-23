@@ -39,7 +39,6 @@ class weixinpay{
      */
     public static function getJSAPI($payInfo){
         try{
-            print_r($payInfo) ;exit;
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
             $input = new \WxPayUnifiedOrder();
             $input->SetBody('美尚云');					                  //商品名称
