@@ -14,7 +14,7 @@ class Order extends \common\controller\Base
         $orderSn = input('order_sn');
 
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
-            return errorJson('订单不存在或金额不能为0 !');
+            return errorMsg('订单不存在或金额不能为0 !');
         };
 
         // 各方式退款
@@ -22,15 +22,15 @@ class Order extends \common\controller\Base
             case 1 : // 微信支付
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 if(!$result = $wxPay->refundOrder($orderInfo)){
-                    return errorJson($wxPay->msg);
+                    return errorMsg($wxPay->msg);
 
                 }else{
-                    return successJson($result);
+                    return successMsg($result);
                 }
 
                 break;
         }
-        return errorJson('失败');
+        return errorMsg('失败');
     }
 
     private function orderInfo($systemId,$orderSn){
