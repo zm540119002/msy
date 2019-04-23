@@ -11,7 +11,7 @@
         <span>金额</span>
         <div class="f28">¥<price>{$orderInfo.actually_amount}</price></div>
     </div>
-    {if isWxBrowser}
+    {if $isWxBrowser}
     <a href="javascript:void(0);" class="pay_btn">支付</a>
     {else /}
     <form action="{:url('Payment/orderPayment')}" method="post" class="pay_form" id="pay_info">
