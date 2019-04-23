@@ -38,8 +38,6 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $payOpenId  = $tools->getOpenid();
         try{
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
             $input = new \WxPayUnifiedOrder();
@@ -53,7 +51,7 @@ class weixinpay{
             $input->SetGoods_tag("test3");
             $input->SetNotify_url($payInfo['notify_url']);                //支付回调验证地址
             $input->SetTrade_type("JSAPI");				                  //支付类型
-            $input->SetOpenid($payOpenId);					  //用户openID
+            $input->SetOpenid($payInfo['open_id']);					  //用户openID
             $order = \WxPayApi::unifiedOrder($input);	                  //统一下单
             $tools = new \JsApiPay();
             $jsApiParameters = $tools->GetJsApiParameters($order);
