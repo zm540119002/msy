@@ -252,6 +252,16 @@
         $(function(){
 
 
+            // 做到这里
+            $('body').on('click','.settlementmethod .pay_nav li',function(){
+                $(this).addClass('current').siblings().removeClass('current');
+                var pay_code = $(this).data('paycode');
+                $(this).find('input[type="checkbox"]').prop('checked',true);
+                $('.pay_code').val(pay_code);
+            });
+
+
+
             $('.settlementmethod .pay_nav li').on('click',function(){
                 console.log(222222);
                 return false;
