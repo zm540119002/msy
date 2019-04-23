@@ -68,7 +68,7 @@
                     <!--<span class="selected"></span>-->
                     <!--<span class="wx"></span>-->
                 <!--</li>-->
-                <li data-paycode="4">
+                <li data-paycode="4" class="underline-pay">
                     线下支付
                     <!--<input type="checkbox" class=""/>-->
                     <span class="selected"></span>
@@ -121,7 +121,7 @@
         });
         //转账凭证
         var banksTransferTpl=$('.bank_transfer_tpl').html();
-        $('body').on('click','.bank_transfer',function () {
+        $('body').on('click','.underline-pay',function () {
             layer.open({
                 title:['线下支付','border-bottom:1px solid #d9d9d9;'],
                 type:1,
