@@ -7,7 +7,7 @@ class Wallet extends Base {
         parent::__construct();
 
         // 判断是否已开通钱包,后面改进此方法
-        if( in_array(request()->action(),['recharge']) ){
+        if( in_array(request()->action(),['index']) ){
             if(empty($this->wallet['password'])){
                 $this->redirect('walletOpening');
                 exit;
@@ -29,9 +29,9 @@ class Wallet extends Base {
     }
 
     /**
-     * 钱包充值页面
+     * 钱包详情页面
      */
-    public function recharge(){
+    public function index(){
 
         if (request()->isAjax()) {
         } else {
@@ -39,45 +39,67 @@ class Wallet extends Base {
             //$url = config('custom.pay_center');
 
             //return $this->redirect($url.request()->controller().'/'.request()->action());
-        return $this->fetch();
+        return $this->fetch('recharge');
         }
     }
 
     /**
-     * 充值支付 -生成充值订单，跳转到支付页
+     * 充值支付 -生成充值订单,再处理各支付方式的业务 ajax
      */
     public function rechargeOrder(){
+
+        if(!request()->isAjax()){
+            return errorMsg('参数错误');
+        }
 
         $amount = input('amount/f');
         $payCode= input('pay_code/d');
 
         if( !$amount || !$payCode ){
-            $this -> error('参数错误');
+            return errorMsg('参数错误');
         }
 
         //生成充值明细
-        $WalletDetailSn = generateSN();
+        $walletDetailSn = generateSN();
         $data = [
-            'sn'=>$WalletDetailSn,
+            'sn'=>$walletDetailSn,
             'user_id'=>$this->user['id'],
             'amount'=>$amount,
             'create_time'=>time(),
             'payment_code'=>$payCode,
         ];
+
+        // 线下汇款凭证
+        if( isset($_POST['voucher']) && $_POST['voucher'] ){
+            $data['voucher_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['voucher']);
+        }
+
         $model= new \app\index\model\WalletDetail();
         $res  = $model->isUpdate(false)->save($data);
         if(!$res){
-            $this -> error('充值失败');
+            return errorMsg('充值失败');
+
         }
 
-        $url = config('custom.pay_recharge');
+        // 各付款方式的处理
+        switch($payCode){
+            case config('custom.pay_code.WeChatPay.code') :
 
-        $this->redirect('index/Payment/rechargePay',['system_id'=>3,'order_sn'=>$WalletDetailSn]);
+                $url = config('custom.pay_recharge').$walletDetailSn;
+                return successMsg($url);
+                return successMsg(request()->domain().url('/index/Payment/rechargePay', ['system_id'=>3,'order_sn'=>$walletDetailSn]));
 
-        //return $this->redirect('Payment/rechargePay/system_id/3/order_sn/'.$WalletDetailSn);
-        //return $this->redirect($url.$WalletDetailSn);
-
-
+                break;
+            case config('custom.pay_code.Alipay.code') :
+                break;
+            case config('custom.pay_code.UnionPay.code') :
+                break;
+            case config('custom.pay_code.OfflinePay.code') :
+                // 更新状态
+                $model->edit(['recharge_status'=>1],['sn'=>$walletDetailSn]);
+                return successMsg('成功');
+                break;
+        }
     }
 
     /**
@@ -117,16 +139,20 @@ class Wallet extends Base {
                 ['user_id','=',$this->user['id']],
             ],
             'field'=>[
-                'id','sn','type','recharge_status','amount','payment_code','payment_time',
+                'id','sn','type','recharge_status','amount','payment_code','create_time','payment_time',
             ],
+            'order'=>[
+                'create_time'=>'desc'
+            ]
         ];
 
-        $type = input('type/d');
-        if($type)  $condition['where'][] = ['type','=',$type];
+        if( $type=input('type/d') )  $condition['where'][] = ['type','=',$type];
 
         $model = new \app\index\model\WalletDetail();
-        $data = $model->getList($condition);
-        $this->assign('data',$data);
+        $list = $model->pageQuery($condition);
+
+        $this->assign('list',$list);
+        return $this->fetch('list_tpl');
     }
 
 

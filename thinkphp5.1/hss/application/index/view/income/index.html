@@ -1,0 +1,41 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="f24">
+	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">收益账户详情</h2>
+	</section>
+	<section class="recharge_wallet_item">
+		<div class="columns_flex l-r-sides">
+			<span>账户充值</span>
+			<span>
+                <a href="javascript:void(0);" class="async_login" data-jump_url="{:url('rechargeDetail')}">
+                   收益记录>
+                </a>
+            </span>
+		</div>
+		<div class="wallet_balance">¥<span> {$wallet.amount}</span></div>
+	</section>
+	<section class="content-padding">
+		<ul class="record_item" id="list">
+			<li class="columns_flex l-r-sides">
+				<span>收益管理</span>
+			</li>
+			<li class="columns_flex l-r-sides">
+				<span>111111</span>
+			</li>
+			<li class="columns_flex l-r-sides">
+				<span>111111</span>
+			</li>
+		</ul>
+
+	</section>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+
+{/block}

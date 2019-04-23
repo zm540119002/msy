@@ -3,6 +3,19 @@
 <!--转账凭证弹窗-->
 <section class="bank_transfer_tpl" style="display:none;">
     <form id="bankTransfer">
+        <p>1、线下办理银行汇款转账（底单拍照备用）</p>
+        <div class="bank_transfer_item">
+            <span class="content-label">汇款转账账号</span>
+            <p>收款单位：广东美尚网络科技有限公司</p>
+            <p>开户银行：广州市华景新城支行</p>
+            <p>银行账户：XXXXXXXXXXXXXXXXXXXXXXXX</p>
+            <!--<a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>-->
+        </div>
+        <p>2、在下方输入已办理的汇款转账金额（或者现金交易金额）</p>
+        <div class="bank_transfer_item">
+            <span>¥</span>
+            <input type="text" name="transfer_amount" placeholder="请输入金额" value="">
+        </div>
         <div class="upload-picture-module f24">
 			<div>
 				<div class="picture-module">
@@ -13,7 +26,7 @@
 			</div>
 		</div>
         <p>上传转账汇款凭证(截屏或拍照)，以便通知客服人员及时进行账户人工充值，以免影响采购结算</p>
-        <a href="javascript:;" class="entry_btn">确定</a>
+        <a href="javascript:;" class="entry_btn">确定递交</a>
     </form>
 </section>
 <article class="f24 pay_wrapper">
@@ -28,8 +41,11 @@
     <section class="recharge_amount_item content-padding">
         <div class="columns_flex l-r-sides">
             <span>账户充值</span>
-            <span><a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('rechargeDetail')}"></a>
-                充值记录</span>
+            <span>
+                <a href="javascript:void(0);" class="async_login" data-jump_url="{:url('rechargeDetail')}">
+                   充值记录>
+                </a>
+            </span>
         </div>
         <ul class="recharge_m_list">
             {volist name=":config('custom.recharge_amount')" id="vo"}
@@ -59,21 +75,21 @@
                     <!--&lt;!&ndash;<input type="checkbox" class=""/>&ndash;&gt;-->
                     <!--<span class="selected"></span>-->
                     <!--<span class="wx"></span>-->
-                <!--</li>-->
+                <!--</li>--> 
+                <li data-paycode="4" class="underline-pay">
+                    线下支付
+                    <!--<input type="checkbox" class=""/>-->
+                    <span class="selected"></span>
+                    <span class="wx"></span>
+                </li>
             </ul>
         </div>
-        <div class="bank_transfer_item">
-            <span class="content-label">银行转账</span>
-            <p>收款单位：广东美尚网络科技有限公司</p>
-            <p>开户银行：广州市华景新城支行</p>
-            <p>银行账户：XXXXXXXXXXXXXXXXXXXXXXXX</p>
-            <a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>
-        </div>
-        <form action="{:url('Wallet/rechargeOrder')}" method="post" class="recharge_form">
+
+        <form action="{:url('Wallet/rechargeOrder')}" method="post" class="recharge_form" id="form">
             <input type="hidden" name="amount" value=""/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
             <span class="red">￥<price>0.00</price></span>
-            <input type="submit" value="充值支付" class="pay_btn"/>
+            <input type="button" value="充值支付" class="pay_btn"/>
         </form>
     </section>
 </article>
@@ -86,6 +102,9 @@
 <script type="text/javascript" src="api_common_js/uploadImgToTemp.js"></script>
 <script type="text/javascript">
     $(function(){
+
+        var url   =  module + 'Wallet/rechargeOrder';
+
         $('.pay_nav li').on('click',function(){
             $(this).addClass('current').siblings().removeClass('current');
             var pay_code = $(this).data('paycode');
@@ -106,37 +125,77 @@
                 dialog.error('充值金额不能为0');
                 return false;
             }
-            if(!pay_code){
+            if(!pay_code || pay_code==4){ // pay_code==4 临时用
                 dialog.error('请选择支付方式');
                 return false;
             }
+
+            var postData = $('#form').serializeObject();
+
+            $.post(url,postData,function(data){
+                if(data.status){
+                    location.href = data.info;
+
+                }else{
+                    dialog.error('充值提交失败!');
+                }
+            });
+
         });
-        //转账凭证
+
+
+        // 线下汇款弹窗
         var banksTransferTpl=$('.bank_transfer_tpl').html();
-        $('body').on('click','.bank_transfer',function () {
+        $('body').on('click','.underline-pay',function () {
             layer.open({
-                title:['转账凭证','border-bottom:1px solid #d9d9d9;'],
+                title:['线下支付','border-bottom:1px solid #d9d9d9;'],
                 type:1,
                 anim:'up',
                 className:'bankTransferLayer',
                 content:banksTransferTpl
             })
         });
+
+        // 线下汇款提交
         $('body').on('click','.entry_btn',function () {
             var postData={};
-            var voucher=$('.bankTransferLayer').find('.img').val();
+            var voucher = $('.bankTransferLayer').find('.img').val();
+            var amount  = $('.bankTransferLayer').find('input[name=transfer_amount]').val();
             postData.voucher=voucher;
+            postData.amount=amount;
+            postData.pay_code=4;
+
             var content='';
-            console.log(voucher);
-            if(!postData.voucher){
-                content='请上传转账凭证';
+            if(!voucher){
+                content = '请上传转账凭证';
+            }
+            if(!amount || !isMoney(amount)){
+                content = '请输入汇款的金额';
             }
             if(content){
                 dialog.error(content);
                 return false;
             }
-            var url =  module + 'Mine/index';
-            location.href = url;
+
+            var _this = $(this);
+            _this.addClass("nodisabled");//防止重复提交
+            $.post(url,postData,function(data){
+                _this.removeClass("nodisabled");//防止重复提交
+
+                if(data.status){
+                    layer.open({
+                        content:'材料已提交! 平台客服将核实款项',
+                        btn:['确定'],
+                        shadeClose:false,
+                        yes:function(index){
+                            location.href = module + 'Wallet/rechargeDetail';
+                        }
+                    });
+
+                }else{
+                    dialog.error('材料提交失败! 请稍后再试或联系客服');
+                }
+            });
         });
     });
 </script>
