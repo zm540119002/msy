@@ -5,7 +5,7 @@ namespace app\index\controller;
 use function GuzzleHttp\Promise\inspect;
 
 class Payment extends \common\controller\Base {
-    //去支付
+    //订单去支付
     public function toPay()
     {
         $modelOrder = new \app\index\model\Order();
@@ -17,7 +17,6 @@ class Payment extends \common\controller\Base {
             'where' => [
                 ['o.status', '=', 0],
                 ['o.sn', '=', $orderSn],
-//                ['o.user_id', '=', $this->user['id']],
             ],'field' => [
                 'o.id', 'o.sn', 'o.amount',
                 'o.user_id',
@@ -55,6 +54,9 @@ class Payment extends \common\controller\Base {
         $this->assign('walletInfo', $walletInfo);
         return $this->fetch();
     }
+
+
+    //去支付
 
     //订单-支付
     public function orderPayment(){
