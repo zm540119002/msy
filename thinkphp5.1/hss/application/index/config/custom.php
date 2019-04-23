@@ -51,8 +51,11 @@ return [
             'icon' => 'my',
         ],
     ],
+    // 充值金额
+    'recharge_amount'=>[5000,10000,20000,30000,50000,80000],
 
-    'pay_gateway'=>'https://msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/',
-    'pay_center'=>'https://msy.meishangyun.com/index/',
+    // 支付链接
+    'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay/system_id/3/order_sn/',
+    'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/rechargePay/system_id/3/order_sn/',
 ];
 

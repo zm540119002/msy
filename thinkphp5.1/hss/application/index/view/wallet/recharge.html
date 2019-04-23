@@ -19,37 +19,24 @@
 <article class="f24 pay_wrapper">
     <section class="header_title separation-line">
         <a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
-		<h2 class="f24">采购充值</h2>
+		<h2 class="f24">账户充值详情</h2>
 	</section>
     <section class="recharge_wallet_item">
-        <span class="content-label">采购钱包余额</span>
+        <span class="content-label">账户余额</span>
         <div class="wallet_balance">¥<span> {$wallet.amount}</span></div>
     </section>
     <section class="recharge_amount_item content-padding">
         <div class="columns_flex l-r-sides">
-            <span>选择充值金额</span>
+            <span>账户充值</span>
             <span><a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('rechargeDetail')}"></a>
                 充值记录</span>
         </div>
         <ul class="recharge_m_list">
+            {volist name=":config('custom.recharge_amount')" id="vo"}
             <li>
-                <span>1000</span>元
+                <span>{$vo}</span>元
             </li>
-            <li>
-                <span>5000</span>元
-            </li>
-            <li>
-                <span>10000</span>元
-            </li>
-            <li>
-                <span>20000</span>元
-            </li>
-            <li>
-                <span>50000</span>元
-            </li>
-            <li>
-                <span>100000</span>元
-            </li>
+            {/volist}
         </ul>
     </section>
     <section class="content-padding ">
@@ -82,7 +69,7 @@
             <p>银行账户：XXXXXXXXXXXXXXXXXXXXXXXX</p>
             <a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>
         </div>
-        <form action="{:url('Payment/rechargePayment')}" method="post" class="recharge_form">
+        <form action="{:url('Wallet/rechargeOrder')}" method="post" class="recharge_form">
             <input type="hidden" name="amount" value=""/>
             <input type="hidden" name="pay_code" value="" class="pay_code"/>
             <span class="red">￥<price>0.00</price></span>

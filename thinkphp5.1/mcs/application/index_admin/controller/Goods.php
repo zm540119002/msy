@@ -29,12 +29,13 @@ class Goods extends Base {
     public function edit(){
         $modelGoods = new \app\index_admin\model\Goods();
         if(request()->isPost()){
+
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.goods'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.goods'),$item);
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
@@ -46,13 +47,13 @@ class Goods extends Base {
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.goods'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.goods'),$item);
                     }
                 }
                 $_POST['detail_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['goods_video']) && $_POST['goods_video'] ){
-                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.goods'),basename($_POST['goods_video']));
+                $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.goods'),$_POST['goods_video']);
             }
 
             // 选中的店铺类型 十进制
