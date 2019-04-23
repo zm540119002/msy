@@ -121,8 +121,8 @@ class Payment extends \common\controller\Base {
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'];
                 $return_url = config('wx_config.return_url');
-//                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-//                $payOpenId  = $tools->getOpenid();
+                $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $payOpenId  = $tools->getOpenid();
                 $payInfo = [
                     'sn'=>generateSN(),
                     'product'=>5,
@@ -130,7 +130,8 @@ class Payment extends \common\controller\Base {
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
-                    'attach'=>$attach
+                    'attach'=>$attach,
+                    'payOpenId'=>$payOpenId,
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay->wxPay($payInfo);
