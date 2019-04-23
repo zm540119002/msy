@@ -7,7 +7,7 @@ class Wallet extends Base {
         parent::__construct();
 
         // 判断是否已开通钱包,后面改进此方法
-        if( in_array(request()->action(),['recharge']) ){
+        if( in_array(request()->action(),['index']) ){
             if(empty($this->wallet['password'])){
                 $this->redirect('walletOpening');
                 exit;
@@ -29,9 +29,9 @@ class Wallet extends Base {
     }
 
     /**
-     * 钱包充值页面
+     * 钱包详情页面
      */
-    public function recharge(){
+    public function index(){
 
         if (request()->isAjax()) {
         } else {
@@ -44,7 +44,7 @@ class Wallet extends Base {
     }
 
     /**
-     * 充值支付 -生成充值订单，跳转到支付页
+     * 充值支付 -生成充值订单,再处理各支付方式的业务
      */
     public function rechargeOrder(){
 
@@ -64,10 +64,31 @@ class Wallet extends Base {
             'create_time'=>time(),
             'payment_code'=>$payCode,
         ];
+
+        // 线下汇款凭证
+        if( isset($_POST['certificate_img']) && $_POST['certificate_img'] ){
+            $data['certificate_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['certificate_img']);
+        }
+
         $model= new \app\index\model\WalletDetail();
         $res  = $model->isUpdate(false)->save($data);
         if(!$res){
             $this -> error('充值失败');
+        }
+
+
+        // 付款方式的处理
+        switch($payCode){
+            case config('custom.weChatPay.code') :
+                break;
+            case config('custom.alipay.code') :
+                break;
+            case config('custom.unionPay.code') :
+                break;
+            case config('custom.offlinePay.code') :
+
+
+                break;
         }
 
         $url = config('custom.pay_recharge');
