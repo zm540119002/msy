@@ -40,6 +40,7 @@ class weixinpay{
     public static function getJSAPI($payInfo){
         $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $payOpenId  = $tools->getOpenid();
+        return $payOpenId.'8888888';
         try{
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
             $input = new \WxPayUnifiedOrder();
