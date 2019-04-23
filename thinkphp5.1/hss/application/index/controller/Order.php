@@ -182,7 +182,7 @@ class Order extends \common\controller\UserBase
             }
             $this->assign('defaultAddress', $defaultAddress);
             $this->assign('addressList', $addressList);
-            $unlockingFooterCart = unlockingFooterCartConfig([11]);
+            $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
