@@ -137,7 +137,7 @@ function data_auth_sign($data)
  * @param string $extend
  * @return array
  */
-function errorMsg($msg, $extend = '')
+function errorMsg($msg='失败', $extend = '')
 {
     $return = array(
         'status' => 0,
@@ -153,7 +153,7 @@ function errorMsg($msg, $extend = '')
  * @param string $extend
  * @return array
  */
-function successMsg($msg, $extend = '')
+function successMsg($msg='成功', $extend = '')
 {
     $return = array(
         'status' => 1,
@@ -161,26 +161,6 @@ function successMsg($msg, $extend = '')
     );
     is_array($extend) && ($return = array_merge($return, $extend));
     return $return;
-}
-
-function errorJson($msg,$extend = '')
-{
-    $return = array(
-        'status' => false,
-        'info' => $msg
-    );
-    is_array($extend) && ($return = array_merge($return, $extend));
-    return json_encode($return);
-}
-
-function successJson($msg='成功',$extend = '')
-{
-    $return = array(
-        'status' => true,
-        'info' => $msg
-    );
-    is_array($extend) && ($return = array_merge($return, $extend));
-    return json_encode($return);
 }
 
 /**
