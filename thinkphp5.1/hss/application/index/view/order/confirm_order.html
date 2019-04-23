@@ -6,13 +6,9 @@
     <div class="f24 pay_wrapper">
         <section class="header_title separation-line">
             <a href="javascript:void(0);" class="back_prev_page"></a>
-            <h2 class="f24">结算支付</h2>
+            <h2 class="f24">选择支付方式</h2>
         </section>
-        <section class="pay_amount_item content-padding">
-            <div>订单金额：<span class="red">￥<price>{$orderInfo.amount}</price></span></div>
-        </section>
-        <section class="content-padding ">
-            <p class="content-label">选择支付方式</p>
+        <section>
             <div>
                 <ul class="pay_nav">
                     <li data-paycode="1">
@@ -33,30 +29,12 @@
                         <!--<span class="wx"></span>-->
                     <!--</li>-->
 
-                    <li data-paycode="4" >
-                        <span class="selected"></span>
-                        {if $walletInfo}
-                        钱包支付
-                        <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
-                        <a href="{:url('Wallet/recharge')}">
-                        余额充值
-                        </a>
-                        {else/}
-                        钱包支付
-                        <a href="javascript:void(0);" data-type="set" class="set_wallet_psd">
-                        开通钱包
-                        </a>
-                        {/if}
-                    </li>
-
                 </ul>
             </div>
-            <p>*线下银行转账/现金支付需将证据拍照上传</p>
-            <a href="javascript:;" class="bank_transfer right-arrow ">银行转账支付后将凭证拍照发给平台客服</a>
             <form action="{:config('custom.pay_gateway').$orderInfo.sn}" method="post" class="pay_form" id="pay_info">
                 <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
                 <input type="hidden" name="pay_code" value="" class="pay_code"/>
-                <input type="submit" value="立即支付" class="pay_btn"/>
+                <input type="submit" value="立即结算" class="pay_btn"/>
             </form>
         </section>
     </div>
@@ -268,10 +246,30 @@
 {/block}
 {block name="script"}
     <script src="api_common_js/jquery.area.js"></script>
-    <script type="text/javascript" src="index_js/footerCart.js"></script>
+
     <script type="text/javascript">
         var addressList={:json_encode($addressList)};
         $(function(){
+
+
+
+            $('.pay_nav li').on('click',function(){
+                console.log(444444);
+                return false;
+
+                $('.bankTransferLayer').addClass('current').siblings().removeClass('current');
+                var pay_code = $(this).data('paycode');
+                $(this).find('input[type="checkbox"]').prop('checked',true);
+                $('.pay_code').val(pay_code);
+            });
+            $('.recharge_m_list li').on('click',function(){
+                $(this).addClass('current').siblings().removeClass('current');
+                var rechargeMoney = $(this).find('span').text();
+                $('.recharge_form price').text(rechargeMoney);
+                $('input[name="amount"]').val(rechargeMoney);
+            });
+
+
             $('.edit_operate').find('.address_edit').hide();
             if(!$.isEmptyObject(addressList)){
                 var data=$('.address_info .consigneeInfo').serializeObject();
@@ -348,16 +346,24 @@
             //结算
             var settlementMethod=$('.settlementMethod').html();
             $('body').on('click','.confirm_order',function(){
-                layer.open({
+/*                layer.open({
                     title:['选择结算方式','border-bottom:1px solid #d9d9d9;'],
                     type:1,
                     anim:'up',
                     className:'settlementmethod bankTransferLayer',
                     content:settlementMethod
-                })
+                })*/
+                layer.open({
+                    type: 1
+                    ,anim: 'up'
+                    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+                    className:'settlementmethod bankTransferLayer',
+                    content: settlementMethod
+                });
             })
             
-        })
+        });
+
         //新增和修改地址弹窗
         var addressInfo=$('.section-address').html();
         function addressLayer(title,data){
