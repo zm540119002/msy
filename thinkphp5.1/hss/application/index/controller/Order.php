@@ -170,7 +170,7 @@ class Order extends \common\controller\UserBase
             ];
             $orderGoodsList = $modelOrder->getList($config);
             $this ->assign('orderGoodsList',$orderGoodsList);
-            //p($orderGoodsList);
+
             //地址
             $modelAddress =  new \common\model\Address();
             $config = [
@@ -193,6 +193,7 @@ class Order extends \common\controller\UserBase
 
             $this->assign('defaultAddress', $defaultAddress);
             $this->assign('addressList', $addressList);
+
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
@@ -343,6 +344,7 @@ class Order extends \common\controller\UserBase
             default:
 
         }
+
         $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this->fetch();
