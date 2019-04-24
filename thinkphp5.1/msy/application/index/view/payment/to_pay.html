@@ -91,6 +91,8 @@
         }
 
         $('body').on('click','.pay_btn',function () {
+            callpay();
+            return false;
             var payment_code = '{$orderinfo.payment_code}';
             if(payment_code != 1){
                 return false;
