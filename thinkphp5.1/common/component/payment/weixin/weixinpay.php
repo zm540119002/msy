@@ -38,10 +38,8 @@ class weixinpay{
      * @param  string   $total_fee  金额
      */
     public static function getJSAPI($payInfo){
-
         try{
             $payInfo['success_url'] = $payInfo['success_url']?:url('Index/index');
-
             $input = new \WxPayUnifiedOrder();
             $input->SetBody('美尚云');					                  //商品名称
             $input->SetAttach($payInfo['attach']);			              //附加参数,可填可不填,填写的话,里边字符串不能出现空格
@@ -53,54 +51,13 @@ class weixinpay{
             $input->SetGoods_tag("test3");
             $input->SetNotify_url($payInfo['notify_url']);                //支付回调验证地址
             $input->SetTrade_type("JSAPI");				                  //支付类型
-            $input->SetOpenid(session('pay_open_id'));					  //用户openID
+            $input->SetOpenid($payInfo['payOpenId']);					  //用户openID
             $order = \WxPayApi::unifiedOrder($input);	                  //统一下单
-
             $tools = new \JsApiPay();
             $jsApiParameters = $tools->GetJsApiParameters($order);
-            $html = <<<EOF
-			<script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
-			<script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
-			<script type="text/javascript" src="/static/common/js/dialog.js"></script>
-            <script type="text/javascript">
-                //调用微信JS api 支付
-                function jsApiCall()
-                {
-                    WeixinJSBridge.invoke(
-                        'getBrandWCPayRequest',$jsApiParameters,
-                        function(res){
-                            if(res.err_msg == "get_brand_wcpay_request:ok"){
-                                dialog.success('支付成功！',"{$payInfo['success_url']}");
-                            }else if(res.err_msg == "get_brand_wcpay_request:cancel"){ 
-                                  window.history.go(-1);
-                                return false;
-                                dialog.success('取消支付！', window.history.go(-1));
-                            }else{
-                                dialog.success('支付失败！',"{$payInfo['fail_url']}");
-                            }
-                        }
-                    );
-                }
-                function callpay()
-                {
-                    if (typeof WeixinJSBridge == "undefined"){
-                        if( document.addEventListener ){
-                            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-                        }else if (document.attachEvent){
-                            document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-                        }
-                    }else{
-                        jsApiCall();
-                    }
-                }
-                callpay();
-            </script>
-EOF;
-            echo $html;
+            return $jsApiParameters;
             //return true;
         } catch(\Exception $e) {
-
             //\Log::ERROR(json_encode($e));
             return $e->getMessage();
         }
