@@ -184,6 +184,20 @@ class Order extends \common\controller\UserBase
             $this->assign('addressList', $addressList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
+            //钱包
+            $modelWallet = new \app\index\model\Wallet();
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['user_id', '=', $this->user['id']],
+                ],'field' => [
+                    'id','amount',
+                ],
+            ];
+            $walletInfo = $modelWallet->getInfo($config);
+            $this->assign('walletInfo', $walletInfo);
+
             return $this->fetch();
         }
 
@@ -192,11 +206,30 @@ class Order extends \common\controller\UserBase
 
     // 确定订单支付 增加支付方式 到时再把 generate,confirmOrder,confirmOrderPay 合并成一个方法
     public function confirmOrderPay(){
-        $sn = input();
-        $payCode = input();
+        if (!request()->isPost()) {
+            return errorMsg('请求方式错误');
+        }
 
+        $sn = input('sn/s');
+        $payCode = input('pay_code/d');
 
+        if( !$sn&&!$payCode){
+            return errorMsg('提交参数错误');
+        }
 
+        $modelOrder = new \app\index\model\Order();
+        $where = [
+            'where' => [
+                ['status', '=', 0],
+                ['sn', '=', $sn],
+                ['user_id', '=', $this->user['id']],
+            ]
+        ];
+
+        $result = $modelOrder->edit(['payment_code'=>$payCode],$where);
+        if($result===false){
+            return errorMsg('订单提交失败');
+        }
 
         // 各付款方式的处理
         switch($payCode){

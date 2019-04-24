@@ -11,11 +11,21 @@
         <section>
             <div>
                 <ul class="pay_nav">
-                    <li data-paycode="4" >
+                    <!-- 待优化 -->
+                    {if !empty($walletInfo) && $walletInfo.amount>0}
+                    <li data-paycode="4">
                         <span class="selected"></span>
                         钱包支付
                         <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
                     </li>
+                    {else /}
+                    <li data-paycode="4" class="disabled">
+                        <span class="selected"></span>
+                        钱包支付
+                        <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
+                    </li>
+                    {/if}
+
                     <li data-paycode="1">
                         微信支付
                         <span class="selected"></span>
@@ -262,22 +272,6 @@
                 $('.pay_code').val(pay_code);
             });
 
-            $('.pay_nav li').on('click',function(){
-
-                $('.settlementmethod').find('.pay_nav').val();
-                $(this).addClass('current').siblings().removeClass('current');
-                var pay_code = $(this).data('paycode');
-                $(this).find('input[type="checkbox"]').prop('checked',true);
-                $('.pay_code').val(pay_code);
-            });
-            $('.recharge_m_list li').on('click',function(){
-                $(this).addClass('current').siblings().removeClass('current');
-                var rechargeMoney = $(this).find('span').text();
-                $('.recharge_form price').text(rechargeMoney);
-                $('input[name="amount"]').val(rechargeMoney);
-            });
-
-
             $('.edit_operate').find('.address_edit').hide();
             if(!$.isEmptyObject(addressList)){
                 var data=$('.address_info .consigneeInfo').serializeObject();
@@ -375,20 +369,22 @@
             $('body').on('click','.submit_btn',function () {
                 var pay_code = $('input[name=pay_code]').val();
                 var sn = $('input[name=order_sn]').val();
-                if(!pay_code){ // pay_code==4 临时用
+                if(!pay_code){
                     dialog.error('请选择支付方式');
                     return false;
                 }
 
-                var postData = $('#form').serializeObject();
-                console.log(postData);
-                return false;
+                var postData = {};
+                postData.pay_code = pay_code;
+                postData.sn       = sn;
+/*                console.log(postData);
+                return false;*/
                 $.post(url,postData,function(data){
                     if(data.status){
                         location.href = data.info;
 
                     }else{
-                        dialog.error('充值提交失败!');
+                        dialog.error('结算提交失败!');
                     }
                 });
 
