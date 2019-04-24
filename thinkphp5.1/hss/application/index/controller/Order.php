@@ -184,6 +184,20 @@ class Order extends \common\controller\UserBase
             $this->assign('addressList', $addressList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
+            //钱包
+            $modelWallet = new \app\index\model\Wallet();
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['user_id', '=', $this->user['id']],
+                ],'field' => [
+                    'id','amount',
+                ],
+            ];
+            $walletInfo = $modelWallet->getInfo($config);
+            $this->assign('walletInfo', $walletInfo);
+
             return $this->fetch();
         }
 
@@ -192,31 +206,32 @@ class Order extends \common\controller\UserBase
 
     // 确定订单支付 增加支付方式 到时再把 generate,confirmOrder,confirmOrderPay 合并成一个方法
     public function confirmOrderPay(){
-        $sn = input();
-        $payCode = input();
-
-
-
-
-        // 各付款方式的处理
-        switch($payCode){
-            case config('custom.pay_code.WeChatPay.code') :
-
-                $url = config('custom.pay_recharge').$sn;
-                return successMsg($url);
-                return successMsg(request()->domain().url('/index/Payment/rechargePay', ['system_id'=>3,'order_sn'=>$sn]));
-
-                break;
-            case config('custom.pay_code.Alipay.code') :
-                break;
-            case config('custom.pay_code.UnionPay.code') :
-                break;
-            case config('custom.pay_code.OfflinePay.code') :
-                // 更新状态
-                $model->edit(['recharge_status'=>1],['sn'=>$sn]);
-                return successMsg('成功');
-                break;
+        if (!request()->isPost()) {
+            return errorMsg('请求方式错误');
         }
+
+        $sn = input('sn/s');
+        $payCode = input('pay_code/d');
+
+        if( !$sn&&!$payCode){
+            return errorMsg('提交参数错误');
+        }
+
+        $modelOrder = new \app\index\model\Order();
+        $where = [
+            'where' => [
+                ['status', '=', 0],
+                ['sn', '=', $sn],
+                ['user_id', '=', $this->user['id']],
+            ]
+        ];
+
+        $result = $modelOrder->edit(['payment_code'=>$payCode],$where);
+        if($result===false){
+            return errorMsg('订单提交失败');
+        }
+        $url = config('custom.pay_recharge').$sn;
+        return successMsg($url);
     }
 
     // 支付
