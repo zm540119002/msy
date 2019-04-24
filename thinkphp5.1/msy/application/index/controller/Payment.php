@@ -7,20 +7,20 @@ use function GuzzleHttp\Promise\inspect;
 class Payment extends \common\controller\Base {
 
     // 确定支付页
-
     public function toPay()
     {
         if(request()->isPost()){
+            $postData = input('post.');
+            $systemId = $postData['system_id'];
+            $orderSn = $postData['order_sn'];
             $modelOrder = new \app\index\model\Order();
-            $systemId = input('post.system_id',0,'int');
             $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-            $orderSn = input('post.order_sn',null,'sting');
             $config = [
                 'where' => [
                     ['o.status', '=', 0],
                     ['o.sn', '=', $orderSn],
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','o.actually_amount',
+                    'o.id', 'o.sn', 'o.amount','o.actually_amount','payment_code',
                     'o.user_id',
                 ],
             ];
@@ -45,7 +45,7 @@ class Payment extends \common\controller\Base {
                 'attach'=>$attach,
                 'payOpenId'=>$payOpenId,
             ];
-            switch(2){
+            switch($orderInfo['payment_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
