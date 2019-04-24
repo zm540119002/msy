@@ -122,7 +122,7 @@ class Payment extends \common\controller\Base {
                     ['o.status', '=', 0],
                     ['o.sn', '=', $orderSn],
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','actually_amount',
+                    'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
                     'o.user_id',
                 ],
             ];
@@ -132,7 +132,7 @@ class Payment extends \common\controller\Base {
             }
             $this->assign('orderInfo', $orderInfo);
             //判断为微信支付，并且为微信浏览器
-            if($orderInfo['paymentCode'] ==1 && isWxBrowser()){
+            if($orderInfo['payment_code'] ==1 && isWxBrowser()){
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
                 $attach = [
