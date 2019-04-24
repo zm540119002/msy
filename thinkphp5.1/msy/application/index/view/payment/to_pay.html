@@ -68,10 +68,10 @@
             if(isWeiXin()){
                 callpay();
             }else{
-                alert(1);return false;
+                var postData = $('#pay_info').serializeObject();
                 $.ajax({
                     url: action,
-                    data: {},
+                    data: postData,
                     type: 'post',
                     beforeSend: function(){
                         $('.loading').show();
