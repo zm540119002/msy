@@ -70,7 +70,6 @@ class weixinpay{
      */
     public static function pc_pay($payInfo)
     {
-        print_r($payInfo);exit;
         $input = new \WxPayUnifiedOrder();
         $input->SetBody("美尚云"); // 商品描述
         $input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
@@ -83,7 +82,7 @@ class weixinpay{
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
-        return 222;
+        print_r($code_url);exit;
         return $code_url;
         $html = <<<EOF
             <head>
