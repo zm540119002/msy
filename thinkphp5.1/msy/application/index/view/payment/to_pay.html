@@ -17,7 +17,8 @@
     <form action="{:url('Payment/toPay')}" method="post" class="pay_form" id="pay_info">
         <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
         <input type="hidden" name="system_id" value="{$system_id}" class="system_id"/>
-        <input type="submit" value="立即支付" class="pay_btn"/>
+        <!--<input type="submit" value="立即支付" class="pay_btn"/>-->
+        <input type="button" value="立即支付" class="pay_btn"/>
     </form>
     {/if}
 </div>
@@ -61,6 +62,8 @@
                 jsApiCall();
             }
         }
+
+
         $('body').on('click','.pay_btn',function () {
             if(isWeiXin()){
                 callpay();
@@ -70,6 +73,7 @@
                     url: action,
                     data: postData,
                     type: 'post',
+                    async: false,
                     beforeSend: function(){
                         $('.loading').show();
                     },
