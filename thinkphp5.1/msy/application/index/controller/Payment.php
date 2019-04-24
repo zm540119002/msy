@@ -130,7 +130,7 @@ class Payment extends \common\controller\Base {
             //判断为微信支付
             if($orderInfo['payment_code'] ==1){
                 if (!isPhoneSide()) {
-                    echo 1
+                    echo 1;
                     //pc端
                     $this->assign('browser_type',1);
                 }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
