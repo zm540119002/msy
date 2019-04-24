@@ -83,7 +83,7 @@ class weixinpay{
         $url2 = $result["code_url"];
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
         print_r($code_url);
-        return $code_url;
+        return 122;
 //        $html = <<<EOF
 //            <head>
 //               <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
