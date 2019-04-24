@@ -342,8 +342,8 @@ $(function () {
                 if(data.status == 0){
 
                 }else if(data.status == 1){
-                    location.href = module + 'Order/toPay/order_sn/' + data.order_sn;
-
+                    paymentMethod();
+                    //location.href = module + 'Order/toPay/order_sn/' + data.order_sn;
                 }
             }
         });
@@ -380,7 +380,7 @@ $(function () {
         generateOrder(postData,_This);
     });
 
-    //购物车弹窗 样品购买
+    // 购物车弹窗 样品购买
     var goodsInfoLayer=$('#goodsInfoLayer').html();
     var pageii;
     $('.sample_purchase').on('click',function(){
@@ -419,6 +419,39 @@ $(function () {
         var orderSn =  $('#order_sn').val();
         location.href = module + 'Order/toPay/order_sn/' + orderSn;
     });
+
+    // 选择支付方式
+    $('body').on('click','.settlementmethod .pay_nav li',function(){
+        $(this).addClass('current').siblings().removeClass('current');
+        var pay_code = $(this).data('paycode');
+        $(this).find('input[type="checkbox"]').prop('checked',true);
+        $('.pay_code').val(pay_code);
+    });
+
+    // 结算订单处理 增加支付方式
+    $('body').on('click','.settlement_btn',function () {
+        var pay_code = $('input[name=pay_code]').val();
+        var sn = $('input[name=order_sn]').val();
+        if(!pay_code){
+            dialog.error('请选择支付方式');
+            return false;
+        }
+
+        var postData = {};
+        postData.pay_code = pay_code;
+        postData.sn       = sn;
+
+        $.post(url,postData,function(data){
+            if(data.status){
+                location.href = data.info;
+
+            }else{
+                dialog.error('结算提交失败!');
+            }
+        });
+
+    });
+
     //一键分享转发 微信分享提示图
     $('body').on('click','.share',function(){
         $('.mcover').show();
@@ -429,6 +462,18 @@ $(function () {
     });
 
 });
+
+// 支付方式弹窗
+function paymentMethod(){
+    var settlementMethod=$('.settlementMethod').html();
+    layer.open({
+        type: 1
+        ,anim: 'up'
+        ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+        className:'settlementmethod bankTransferLayer',
+        content: settlementMethod
+    });
+}
 
 //生成订单
 function generateOrder(postData,obj) {
