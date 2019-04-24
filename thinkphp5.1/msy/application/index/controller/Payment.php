@@ -157,9 +157,9 @@ class Payment extends \common\controller\Base {
                 $jsApiParameters   = $wxPay->wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
 
-                p($payInfo);
+/*                p($payInfo);
                 p($jsApiParameters);
-                exit;
+                exit;*/
 
 
 
