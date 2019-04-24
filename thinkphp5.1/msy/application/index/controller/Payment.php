@@ -108,27 +108,29 @@ class Payment extends \common\controller\Base {
                 $this -> error($msg);
             }
         }else{
-            $modelOrder = new \app\index\model\Order();
-            $systemId = input('system_id',0,'int');
-            $this->assign('system_id',$systemId);
-            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-            $orderSn = input('order_sn');
-            $config = [
-                'where' => [
-                    ['o.status', '=', 0],
-                    ['o.sn', '=', $orderSn],
-                ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
-                    'o.user_id',
-                ],
-            ];
-            $orderInfo = $modelOrder->getInfo($config);
-            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
-                $this->error('订单不存在或金额不能为0 !');
-            }
-            $this->assign('orderInfo', $orderInfo);
+//            $modelOrder = new \app\index\model\Order();
+//            $systemId = input('system_id',0,'int');
+//            $this->assign('system_id',$systemId);
+//            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
+//            $orderSn = input('order_sn');
+//            $config = [
+//                'where' => [
+//                    ['o.status', '=', 0],
+//                    ['o.sn', '=', $orderSn],
+//                ],'field' => [
+//                    'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
+//                    'o.user_id',
+//                ],
+//            ];
+//            $orderInfo = $modelOrder->getInfo($config);
+//            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
+//                $this->error('订单不存在或金额不能为0 !');
+//            }
+//            $this->assign('orderInfo', $orderInfo);
             //判断为微信支付，并且为微信浏览器
-            if($orderInfo['payment_code'] ==1 && isWxBrowser()){
+            //if($orderInfo['payment_code'] ==1 && isWxBrowser()){
+            if( isWxBrowser()){
+                $systemId =2;
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
                 $attach = [
