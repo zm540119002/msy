@@ -130,7 +130,7 @@ class Payment extends \common\controller\Base {
             //判断为微信支付，并且为微信浏览器
             //if($orderInfo['payment_code'] ==1 && isWxBrowser()){
             if( isWxBrowser()){
-                $systemId =2;
+                $systemId =3;
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
                 $attach = [
