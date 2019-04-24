@@ -230,26 +230,8 @@ class Order extends \common\controller\UserBase
         if($result===false){
             return errorMsg('订单提交失败');
         }
-
-        // 各付款方式的处理
-        switch($payCode){
-            case config('custom.pay_code.WeChatPay.code') :
-
-                $url = config('custom.pay_recharge').$sn;
-                return successMsg($url);
-                return successMsg(request()->domain().url('/index/Payment/rechargePay', ['system_id'=>3,'order_sn'=>$sn]));
-
-                break;
-            case config('custom.pay_code.Alipay.code') :
-                break;
-            case config('custom.pay_code.UnionPay.code') :
-                break;
-            case config('custom.pay_code.OfflinePay.code') :
-                // 更新状态
-                $model->edit(['recharge_status'=>1],['sn'=>$sn]);
-                return successMsg('成功');
-                break;
-        }
+        $url = config('custom.pay_recharge').$sn;
+        return successMsg($url);
     }
 
     // 支付

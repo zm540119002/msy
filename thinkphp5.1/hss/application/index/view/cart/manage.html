@@ -11,11 +11,11 @@
 	</section>
 	<ul class="cart_goods_list" id="list">
 	</ul>
-	<section id="no_data">
+<!--	<section id="no_data">
 		<div class="cart_data_empty">
 			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
 		</div>
-	</section>
+	</section>-->
 	<div class="project_wrapper">
 		<div class="mod-part-title">
 			<div class="mod-part-title-wrap">
@@ -53,7 +53,7 @@
 		pageType:'index'
 	};
 	$(function(){
-		//初始化分类商品页面
+		// 初始化购物车商品
 		getPagingList(config,postData);
 		//下拉加载
 		$(window).on('scroll',function(){
