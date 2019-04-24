@@ -42,6 +42,7 @@
             </div>
             <form  method="post" class="pay_form" id="pay_info">
                 <input type="hidden" name="order_id" value="{$orderGoodsList[0]['id']}"/>
+                <input type="hidden" name="order_sn" value="{$orderGoodsList[0]['sn']}"/>
                 <input type="hidden" name="pay_code" value="" class="pay_code"/>
                 <input type="button" value="立即结算" class="settlement_btn"/>
             </form>

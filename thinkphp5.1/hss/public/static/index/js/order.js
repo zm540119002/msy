@@ -31,7 +31,8 @@ $(function () {
         var area=$('.consigneeInfo input[name="area"]').val();
         var detail_address=$('.consigneeInfo input[name="layer_detail_address"]').val();
         var orderId  = $('.order_id').val();
-        var pay_code = $('.pay_code').val();
+        var orderSn  = $('.order_sn').val();
+        var payCode = $('.pay_code').val();
         var addressId= $('.address_id').val();
         var orderArr =[];
         $.each($('.goods_order_item li'),function () {
@@ -51,7 +52,8 @@ $(function () {
         }
         var postData ={
             order_id:orderId,
-            pay_code:pay_code,
+            order_sn:orderSn,
+            pay_code:payCode,
             consignee:consignee,
             mobile:mobile,
             province:province,

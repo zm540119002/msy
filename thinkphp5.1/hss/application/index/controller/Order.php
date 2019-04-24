@@ -170,7 +170,7 @@ class Order extends \common\controller\UserBase
             ];
             $orderGoodsList = $modelOrder->getList($config);
             $this ->assign('orderGoodsList',$orderGoodsList);
-
+            //p($orderGoodsList);
             //地址
             $modelAddress =  new \common\model\Address();
             $config = [
@@ -187,6 +187,10 @@ class Order extends \common\controller\UserBase
                     break;
                 }
             }
+            if(empty($defaultAddress)){
+                $defaultAddress = reset($addressList);
+            }
+
             $this->assign('defaultAddress', $defaultAddress);
             $this->assign('addressList', $addressList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
