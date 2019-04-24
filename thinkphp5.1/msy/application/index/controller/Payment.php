@@ -14,6 +14,7 @@ class Payment extends \common\controller\Base {
             $modelOrder = new \app\index\model\Order();
             $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
             $orderSn = input('post.order_sn',null,'sting');
+            print_r($orderSn);exit;
             $config = [
                 'where' => [
                     ['o.status', '=', 0],
