@@ -33,7 +33,7 @@
 <script type="text/javascript">
 
     $(function(){
-        var payment_code = '{$orderinfo.payment_code}';
+        var payment_code = '{$orderInfo.payment_code}';
         //调用微信JS api 支付
         if(isWeiXin()&&payment_code == 1){
             function jsApiCall()
@@ -91,7 +91,7 @@
         }
 
         $('body').on('click','.pay_btn',function () {
-            var payment_code = '{$orderinfo.payment_code}';
+            var payment_code = '{$orderInfo.payment_code}';
             console.log(payment_code);
             if(payment_code != 1){
                 return false;
