@@ -39,7 +39,7 @@
             function jsApiCall()
             {
                 WeixinJSBridge.invoke(
-                    'getBrandWCPayRequest',JSON.parse('{result|raw}'),
+                    'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
                     function(res){
                         if(res.err_msg == "get_brand_wcpay_request:ok"){
                             dialog.success('支付成功！',"{$payInfo['success_url']}");
@@ -71,7 +71,7 @@
         //微信pc端扫码支付
         function payGQcode(){
             console.log(2222);
-            var code_url = "{$resultl}";
+            var code_url = "{$jsApiParameters}";
             console.log(code_url);
             if(code_url){
                 var imgSrc=uploads+code_url;
