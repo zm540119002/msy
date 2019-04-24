@@ -135,6 +135,12 @@ class Payment extends \common\controller\Base {
                     $this ->assign('browser_type',2);
                 }else{//微信浏览器(手机端)
                     $this ->assign('browser_type',3);
+                    $payOpenId = session('open_id');
+                    if(!$payOpenId){
+                        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                        $payOpenId  = $tools->getOpenid();
+                        session('open_id',$payOpenId);
+                    }
                 }
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
@@ -144,12 +150,7 @@ class Payment extends \common\controller\Base {
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'];
                 $return_url = config('wx_config.return_url');
-                $payOpenId = session('open_id');
-                if(!$payOpenId){
-                    $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                    $payOpenId  = $tools->getOpenid();
-                    session('open_id',$payOpenId);
-                }
+
                 $payInfo = [
                     'sn'=>$orderInfo['sn'],
                     'product'=>$orderInfo['id'],
