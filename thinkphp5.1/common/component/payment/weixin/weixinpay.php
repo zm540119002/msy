@@ -84,26 +84,25 @@ class weixinpay{
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
         print_r($code_url);
         return $code_url;
-        exit;
-        $html = <<<EOF
-            <head>
-               <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
-			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/layer.mobile/layer.js"></script>
-			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/dialog.js"></script>	
-            </head>
-            <body>
-                    <script type="text/javascript">
-                        $(function(){
-                          layer.open({
-                                title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
-                                className:'',
-                                content:'<img src="/uploads/{$code_url}">'
-                         })
-                     });
-                </script>
-            <body>
-EOF;
-        echo  $html;
+//        $html = <<<EOF
+//            <head>
+//               <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
+//			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/layer.mobile/layer.js"></script>
+//			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/dialog.js"></script>
+//            </head>
+//            <body>
+//                    <script type="text/javascript">
+//                        $(function(){
+//                          layer.open({
+//                                title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
+//                                className:'',
+//                                content:'<img src="/uploads/{$code_url}">'
+//                         })
+//                     });
+//                </script>
+//            <body>
+//EOF;
+//        echo  $html;
     }
 
     //生成支付二维码
