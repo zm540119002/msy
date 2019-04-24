@@ -26,9 +26,26 @@ class Payment extends \common\controller\Base {
             ];
             $orderInfo = $modelOrder->getInfo($config);
             if(empty($orderInfo) OR !$orderInfo['actually_amount']){
-                $this->error('订单不存在或金额不能为0 !');
+                return errorMsg('订单不存在或金额不能为0',['code'=>1]);
             }
-            switch($orderInfo['paymentCode']){
+            $attach = [
+                'system_id' =>$systemId,
+            ];
+            $attach = json_encode($attach);
+            $jump_url =config('custom.system_id')[$systemId]['jump_url'];
+            $return_url = config('wx_config.return_url');
+            $payOpenId = session('open_id');
+            $payInfo = [
+                'sn'=>$orderInfo['sn'],
+                'product'=>$orderInfo['id'],
+                'actually_amount'=>$orderInfo['actually_amount'],
+                'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+                'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+                'notify_url'=>config('wx_config.notify_url'),
+                'attach'=>$attach,
+                'payOpenId'=>$payOpenId,
+            ];
+            switch(2){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
@@ -52,7 +69,7 @@ class Payment extends \common\controller\Base {
                     $config = [
                         'where'=>[
                             ['status', '=', 0],
-                            ['user_id', '=', $this->user['id']],
+                            ['user_id', '=', $orderInfo['user_id']],
                         ]
                     ];
                     $walletInfo = $modelWallet->getInfo($config);
@@ -93,6 +110,7 @@ class Payment extends \common\controller\Base {
         }else{
             $modelOrder = new \app\index\model\Order();
             $systemId = input('system_id',0,'int');
+            $this->assign('system_id',$systemId);
             $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
             $orderSn = input('order_sn');
             $config = [
@@ -100,7 +118,7 @@ class Payment extends \common\controller\Base {
                     ['o.status', '=', 0],
                     ['o.sn', '=', $orderSn],
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','actually_amount',
+                    'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
                     'o.user_id',
                 ],
             ];
@@ -110,7 +128,7 @@ class Payment extends \common\controller\Base {
             }
             $this->assign('orderInfo', $orderInfo);
             //判断为微信支付，并且为微信浏览器
-            if($orderInfo['paymentCode'] ==1 && isWxBrowser()){
+            if($orderInfo['payment_code'] ==1 && isWxBrowser()){
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
                 $attach = [
