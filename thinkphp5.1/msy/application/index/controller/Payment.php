@@ -20,7 +20,7 @@ class Payment extends \common\controller\Base {
                     ['o.status', '=', 0],
                     ['o.sn', '=', $orderSn],
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','o.actually_amount',
+                    'o.id', 'o.sn', 'o.amount','o.actually_amount','payment_code',
                     'o.user_id',
                 ],
             ];
@@ -45,7 +45,7 @@ class Payment extends \common\controller\Base {
                 'attach'=>$attach,
                 'payOpenId'=>$payOpenId,
             ];
-            switch(2){
+            switch($orderInfo['payment_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
