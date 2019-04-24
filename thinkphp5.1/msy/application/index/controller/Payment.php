@@ -2,6 +2,7 @@
 namespace app\index\controller;
 //class Payment extends \common\controller\Base{
 
+use function Couchbase\passthruEncoder;
 use function GuzzleHttp\Promise\inspect;
 
 class Payment extends \common\controller\Base {
@@ -142,7 +143,6 @@ class Payment extends \common\controller\Base {
                     //微信浏览器(手机端)
                     $this->assign('browser_type',3);
                 }
-                exit;
                 //自定义参数，微信支付回调原样返回
                 $attach = [
                     'system_id' =>$systemId,
@@ -168,6 +168,7 @@ class Payment extends \common\controller\Base {
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $result   = $wxPay->wxPay($payInfo);
+                print_r($result);exit;
                 $this -> assign('result',$result);
             }
             return $this->fetch();
