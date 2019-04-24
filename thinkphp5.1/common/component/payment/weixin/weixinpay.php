@@ -85,9 +85,9 @@ class weixinpay{
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
         $html = <<<EOF
             <head>
-               <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
-			   <script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
-			   <script type="text/javascript" src="/static/common/js/dialog.js"></script>	
+               <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
+			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/layer.mobile/layer.js"></script>
+			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/js/dialog.js"></script>	
             </head>
             <body>
                     <script type="text/javascript">
@@ -177,9 +177,9 @@ EOF;
         $url = $url.'&redirect_url='.$payInfo['success_url'];//拼接支付完成后跳转的页面redirect_url
         $html = <<<EOF
             <head>
-               <script type="text/javascript" src="/static/common/js/jquery/jquery-1.9.1.min.js"></script>
-			   <script type="text/javascript" src="/static/common/js/layer.mobile/layer.js"></script>
-			   <script type="text/javascript" src="/static/common/js/dialog.js"></script>	
+               <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
+			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/layer.mobile/layer.js"></script>
+			   <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/dialog.js"></script>	
             </head>
             <body>
                  <a class="weixin_pay_h5" href="javascript:void(0);"></a>
