@@ -7,12 +7,12 @@ use function GuzzleHttp\Promise\inspect;
 class Payment extends \common\controller\Base {
 
     // 确定支付页
-
     public function toPay()
     {
         if(request()->isPost()){
-            $modelOrder = new \app\index\model\Order();
+            print_r(input('post.'));exit;
             $systemId = input('post.system_id',0,'int');
+            $modelOrder = new \app\index\model\Order();
             $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
             $orderSn = input('post.order_sn',null,'sting');
             $config = [
