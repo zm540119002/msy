@@ -10,7 +10,6 @@ class Payment extends \common\controller\Base {
     public function toPay()
     {
         if(request()->isPost()){
-            print_r(input('post.'));exit;
             $systemId = input('post.system_id',0,'int');
             $modelOrder = new \app\index\model\Order();
             $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
@@ -24,7 +23,9 @@ class Payment extends \common\controller\Base {
                     'o.user_id',
                 ],
             ];
+            print_r($config);
             $orderInfo = $modelOrder->getInfo($config);
+            print_r($orderInfo);exit;
             if(empty($orderInfo) OR !$orderInfo['actually_amount']){
                 return errorMsg('订单不存在或金额不能为0',['code'=>1]);
             }
