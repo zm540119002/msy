@@ -127,9 +127,18 @@ class Payment extends \common\controller\Base {
                 $this->error('订单不存在或金额不能为0 !');
             }
             $this->assign('orderInfo', $orderInfo);
-            //判断为微信支付，并且为微信浏览器
-            if($orderInfo['payment_code'] ==1 && isWxBrowser()){
-                $this->assign('isWxBrowser',1);
+            //判断为微信支付
+            if($orderInfo['payment_code'] ==1){
+                if (!isPhoneSide()) {
+                    //pc端
+                    $this->assign('browser_type',1);
+                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
+                    ///手机端非微信浏览器
+                    $this->assign('browser_type',2);
+                }else{
+                    //微信浏览器(手机端)
+                    $this->assign('browser_type',3);
+                }
                 //自定义参数，微信支付回调原样返回
                 $attach = [
                     'system_id' =>$systemId,
@@ -154,8 +163,8 @@ class Payment extends \common\controller\Base {
                     'payOpenId'=>$payOpenId,
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
-                $jsApiParameters   = $wxPay->wxPay($payInfo);
-                $this -> assign('jsApiParameters',$jsApiParameters);
+                $result   = $wxPay->wxPay($payInfo);
+                $this -> assign('result',$result);
             }
             return $this->fetch();
         }

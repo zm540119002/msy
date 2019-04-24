@@ -24,7 +24,6 @@ class weixinpay{
             weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
             weixinpay::h5_pay($payInfo);
-
         }else{//微信浏览器(手机端)
             return weixinpay::getJSAPI($payInfo);
         }
@@ -83,6 +82,7 @@ class weixinpay{
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
+        return $code_url;
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
