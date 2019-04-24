@@ -159,7 +159,7 @@ class Payment extends \common\controller\Base {
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
                     'attach'=>$attach,
-                    //'payOpenId'=>$payOpenId,
+                    'payOpenId'=>$payOpenId,
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay->wxPay($payInfo);
