@@ -70,11 +70,24 @@
 
         //微信pc端扫码支付
         function payGQcode(){
-            layer.open({
-                title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
-                className:'',
-                content:'<img src="/uploads/{$result}">'
-            })
+            var code_url = "{$resultl}";
+            if(code_url){
+                var imgSrc=uploads+code_url;
+                var scrollTop;
+                layer.open({
+                    title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
+                    skin:'shareqrCodeLayer',
+                    content:'<img src='+imgSrc+' />',
+                    btn:['X'],
+                    success:function(){
+                        fixedLayer();
+                    },
+                    yes:function(index){
+                        cancleFixedLayer();
+                        layer.close(index);
+                    }
+                })
+            }
         }
 
         $('body').on('click','.pay_btn',function () {
