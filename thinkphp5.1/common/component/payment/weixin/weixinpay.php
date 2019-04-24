@@ -21,9 +21,9 @@ class weixinpay{
      */
     public static function wxPay($payInfo){
         if (!isPhoneSide()) {//pc端微信扫码支付
-            weixinpay::pc_pay($payInfo);
+            return weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
-            weixinpay::h5_pay($payInfo);
+            return weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
             return weixinpay::getJSAPI($payInfo);
         }
@@ -71,19 +71,19 @@ class weixinpay{
     public static function pc_pay($payInfo)
     {
         echo 5555;
-//        $input = new \WxPayUnifiedOrder();
-//        $input->SetBody("美尚云"); // 商品描述
-//        $input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
-//        $input->SetOut_trade_no($payInfo['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
-//        $input->SetTotal_fee($payInfo['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
-//        $input->SetNotify_url($payInfo['notify_url']); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
-//        $input->SetTrade_type("NATIVE"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
-//        $input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
-//        $notify = new \NativePay();
-//        $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
-//        $url2 = $result["code_url"];
-//        $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
-        return 122;
+        $input = new \WxPayUnifiedOrder();
+        $input->SetBody("美尚云"); // 商品描述
+        $input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
+        $input->SetOut_trade_no($payInfo['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
+        $input->SetTotal_fee($payInfo['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
+        $input->SetNotify_url($payInfo['notify_url']); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
+        $input->SetTrade_type("NATIVE"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
+        $input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
+        $notify = new \NativePay();
+        $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
+        $url2 = $result["code_url"];
+        $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
+        return $code_url;
 //        $html = <<<EOF
 //            <head>
 //               <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
