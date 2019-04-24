@@ -190,6 +190,35 @@ class Order extends \common\controller\UserBase
 
     }
 
+    // 确定订单支付 增加支付方式 到时再把 generate,confirmOrder,confirmOrderPay 合并成一个方法
+    public function confirmOrderPay(){
+        $sn = input();
+        $payCode = input();
+
+
+
+
+        // 各付款方式的处理
+        switch($payCode){
+            case config('custom.pay_code.WeChatPay.code') :
+
+                $url = config('custom.pay_recharge').$sn;
+                return successMsg($url);
+                return successMsg(request()->domain().url('/index/Payment/rechargePay', ['system_id'=>3,'order_sn'=>$sn]));
+
+                break;
+            case config('custom.pay_code.Alipay.code') :
+                break;
+            case config('custom.pay_code.UnionPay.code') :
+                break;
+            case config('custom.pay_code.OfflinePay.code') :
+                // 更新状态
+                $model->edit(['recharge_status'=>1],['sn'=>$sn]);
+                return successMsg('成功');
+                break;
+        }
+    }
+
     // 支付
     public function toPay()
     {

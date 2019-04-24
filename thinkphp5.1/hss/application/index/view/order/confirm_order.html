@@ -11,30 +11,32 @@
         <section>
             <div>
                 <ul class="pay_nav">
+                    <li data-paycode="4" >
+                        <span class="selected"></span>
+                        钱包支付
+                        <span class="wx">余额：￥<price>{$walletInfo.amount}</price></span>
+                    </li>
                     <li data-paycode="1">
                         微信支付
-                        <!--<input type="checkbox" checked="checked" class=""/>-->
                         <span class="selected"></span>
                         <span class="wx"></span>
                     </li>
                     <li data-paycode="2" id="alipay">
                         支付宝支付
-                        <!--<input type="checkbox" class=""/>-->
                         <span class="selected"></span>
                         <span class="wx"></span>
                     </li>
-                    <!--<li data-paycode="3">银联支付-->
-                        <!--&lt;!&ndash;<input type="checkbox" class=""/>&ndash;&gt;-->
-                        <!--<span class="selected"></span>-->
-                        <!--<span class="wx"></span>-->
-                    <!--</li>-->
-
+                    <li data-paycode="3">
+                        银联支付
+                        <span class="selected"></span>
+                        <span class="wx"></span>
+                    </li>
                 </ul>
             </div>
-            <form action="{:config('custom.pay_gateway').$orderInfo.sn}" method="post" class="pay_form" id="pay_info">
-                <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
+            <form  method="post" class="pay_form" id="pay_info">
+                <input type="hidden" name="order_sn" value="{$orderGoodsList[0]['sn']}"/>
                 <input type="hidden" name="pay_code" value="" class="pay_code"/>
-                <input type="submit" value="立即结算" class="pay_btn"/>
+                <input type="button" value="立即结算" class="submit_btn"/>
             </form>
         </section>
     </div>
@@ -260,14 +262,6 @@
                 $('.pay_code').val(pay_code);
             });
 
-
-
-            $('.settlementmethod .pay_nav li').on('click',function(){
-                console.log(222222);
-                return false;
-            });
-
-
             $('.pay_nav li').on('click',function(){
 
                 $('.settlementmethod').find('.pay_nav').val();
@@ -375,6 +369,30 @@
                     content: settlementMethod
                 });
             })
+
+            // 提交订单 增加支付方式
+            var url   =  module + 'Order/confirmOrderPay';
+            $('body').on('click','.submit_btn',function () {
+                var pay_code = $('input[name=pay_code]').val();
+                var sn = $('input[name=order_sn]').val();
+                if(!pay_code){ // pay_code==4 临时用
+                    dialog.error('请选择支付方式');
+                    return false;
+                }
+
+                var postData = $('#form').serializeObject();
+                console.log(postData);
+                return false;
+                $.post(url,postData,function(data){
+                    if(data.status){
+                        location.href = data.info;
+
+                    }else{
+                        dialog.error('充值提交失败!');
+                    }
+                });
+
+            });
             
         });
 
