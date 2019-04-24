@@ -82,6 +82,7 @@ class weixinpay{
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
         $code_url = createLogoQRcode($url2,config('upload_dir.pay_QRcode'));
+        return 222;
         return $code_url;
         $html = <<<EOF
             <head>
