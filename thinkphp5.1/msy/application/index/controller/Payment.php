@@ -10,7 +10,7 @@ class Payment extends \common\controller\Base {
     public function toPay()
     {
         if(request()->isPost()){
-            $postData = input('post.');
+            $postData = input('post./a');
             print_r($postData);exit;
             $systemId = input('system_id',0,'int');
             $modelOrder = new \app\index\model\Order();
