@@ -97,26 +97,30 @@ class Order extends \common\controller\UserBase
     public function confirmOrder()
     {
         if (request()->isPost()) {
-            $fatherOrderId = input('post.father_order_id',0,'int');
+            $fatherOrderId = input('post.order_id',0,'int');
             $modelOrder = new \app\index\model\Order();
             $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
+            $data['payment_code'] = $data['pay_code'];
             $condition = [
                 ['user_id','=',$this->user['id']],
                 ['id','=',$fatherOrderId],
             ];
+
             $res = $modelOrder -> allowField(true) -> save($data,$condition);
+
             if(false === $res){
                 $modelOrder ->rollback();
                 return errorMsg('失败');
             }
-            $modelOrderDetail = new \app\index\model\OrderDetail();
+
+/*            $modelOrderDetail = new \app\index\model\OrderDetail();
             $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
             if (!count($res)) {
                 $modelOrder->rollback();
                 return errorMsg('失败');
-            }
+            }*/
             //根据订单号查询关联的购物车的商品 删除
             $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
@@ -143,7 +147,10 @@ class Order extends \common\controller\UserBase
             }
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
-            return successMsg('成功',array('order_sn'=>$orderSn));
+
+            $url = config('custom.pay_recharge').$orderSn;
+            return successMsg($url);
+
         }else{
             $modelOrder = new \app\index\model\Order();
             $orderSn = input('order_sn');
@@ -201,37 +208,6 @@ class Order extends \common\controller\UserBase
             return $this->fetch();
         }
 
-
-    }
-
-    // 确定订单支付 增加支付方式 到时再把 generate,confirmOrder,confirmOrderPay 合并成一个方法
-    public function confirmOrderPay(){
-        if (!request()->isPost()) {
-            return errorMsg('请求方式错误');
-        }
-
-        $sn = input('sn/s');
-        $payCode = input('pay_code/d');
-
-        if( !$sn&&!$payCode){
-            return errorMsg('提交参数错误');
-        }
-
-        $modelOrder = new \app\index\model\Order();
-        $where = [
-            'where' => [
-                ['status', '=', 0],
-                ['sn', '=', $sn],
-                ['user_id', '=', $this->user['id']],
-            ]
-        ];
-
-        $result = $modelOrder->edit(['payment_code'=>$payCode],$where);
-        if($result===false){
-            return errorMsg('订单提交失败');
-        }
-        $url = config('custom.pay_recharge').$sn;
-        return successMsg($url);
     }
 
     // 支付

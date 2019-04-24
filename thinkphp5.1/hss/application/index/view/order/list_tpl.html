@@ -29,7 +29,7 @@
                     {if $info.order_status == 1}
                     <!--1:待付款-->
                     <a href="javascript:void(0);" class="cancel_order" title="取消订单">取消订单</a>
-                    <a href="{:config('custom.pay_gateway').$info.sn}">去支付</a>
+                    <a href="javascript:void(0);" class="confirm_order" title="订单支付">去支付</a>
                     {elseif $info.order_status == 2 }
                     <!--2:待收货-->
                     <a href="javascript:void(0);" class="refund_application" title="申请退款">申请退款</a>

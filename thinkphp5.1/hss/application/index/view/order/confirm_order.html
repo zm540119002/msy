@@ -1,56 +1,9 @@
 {extend name="template/base.html" /}
 {block name="nav">提交订单{/block}
 {block name="content"}
-<!--结算方式模板-->
-<section class="settlementMethod" style="display:none;">
-    <div class="f24 pay_wrapper">
-        <section class="header_title separation-line">
-            <a href="javascript:void(0);" class="back_prev_page"></a>
-            <h2 class="f24">选择结算方式</h2>
-        </section>
-        <section>
-            <div>
-                <ul class="pay_nav">
-                    <!-- 待优化 -->
-                    {if !empty($walletInfo) && $walletInfo.amount>0}
-                    <li data-paycode="4">
-                        <span class="selected"></span>
-                        钱包支付
-                        <span class="wx">余额：￥<price>{$walletInfo.amount|default=0}</price></span>
-                    </li>
-                    {else /}
-                    <li data-paycode="4" class="disabled">
-                        <span class="selected"></span>
-                        钱包支付
-                        <span class="wx">余额：￥<price>{$walletInfo.amount|default=0}</price></span>
-                    </li>
-                    {/if}
 
-                    <li data-paycode="1">
-                        微信支付
-                        <span class="selected"></span>
-                        <span class="wx"></span>
-                    </li>
-                    <li data-paycode="2" id="alipay">
-                        支付宝支付
-                        <span class="selected"></span>
-                        <span class="wx"></span>
-                    </li>
-                    <li data-paycode="3">
-                        银联支付
-                        <span class="selected"></span>
-                        <span class="wx"></span>
-                    </li>
-                </ul>
-            </div>
-            <form  method="post" class="pay_form" id="pay_info">
-                <input type="hidden" name="order_sn" value="{$orderGoodsList[0]['sn']}"/>
-                <input type="hidden" name="pay_code" value="" class="pay_code"/>
-                <input type="button" value="立即结算" class="submit_btn"/>
-            </form>
-        </section>
-    </div>
-</section>
+{include file="template/settlement_method.html" /}
+
     <article class="f24 fill_order_wrapper">
         <section class="header_title separation-line">
             <a href="javascript:void(0);" class="back_prev_page"></a>
@@ -258,20 +211,10 @@
 {/block}
 {block name="script"}
     <script src="api_common_js/jquery.area.js"></script>
-
+    <script type="text/javascript" src="index_js/order.js"></script>
     <script type="text/javascript">
         var addressList={:json_encode($addressList)};
         $(function(){
-
-
-            // 做到这里
-            $('body').on('click','.settlementmethod .pay_nav li',function(){
-                $(this).addClass('current').siblings().removeClass('current');
-                var pay_code = $(this).data('paycode');
-                $(this).find('input[type="checkbox"]').prop('checked',true);
-                $('.pay_code').val(pay_code);
-            });
-
             $('.edit_operate').find('.address_edit').hide();
             if(!$.isEmptyObject(addressList)){
                 var data=$('.address_info .consigneeInfo').serializeObject();
@@ -345,50 +288,7 @@
 					$(this).attr('data-off',1);
 				}
 			});
-            //结算
-            var settlementMethod=$('.settlementMethod').html();
-            $('body').on('click','.confirm_order',function(){
-/*                layer.open({
-                    title:['选择结算方式','border-bottom:1px solid #d9d9d9;'],
-                    type:1,
-                    anim:'up',
-                    className:'settlementmethod bankTransferLayer',
-                    content:settlementMethod
-                })*/
-                layer.open({
-                    type: 1
-                    ,anim: 'up'
-                    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-                    className:'settlementmethod bankTransferLayer',
-                    content: settlementMethod
-                });
-            })
 
-            // 提交订单 增加支付方式
-            var url   =  module + 'Order/confirmOrderPay';
-            $('body').on('click','.submit_btn',function () {
-                var pay_code = $('input[name=pay_code]').val();
-                var sn = $('input[name=order_sn]').val();
-                if(!pay_code){
-                    dialog.error('请选择支付方式');
-                    return false;
-                }
-
-                var postData = {};
-                postData.pay_code = pay_code;
-                postData.sn       = sn;
-
-                $.post(url,postData,function(data){
-                    if(data.status){
-                        location.href = data.info;
-
-                    }else{
-                        dialog.error('结算提交失败!');
-                    }
-                });
-
-            });
-            
         });
 
         //新增和修改地址弹窗
