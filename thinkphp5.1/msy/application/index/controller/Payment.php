@@ -10,12 +10,11 @@ class Payment extends \common\controller\Base {
     public function toPay()
     {
         if(request()->isPost()){
-            $postData = input('post./a');
-            print_r($postData);exit;
-            $systemId = input('system_id',0,'int');
+            $postData = input('post.');
+            $systemId = $postData['system_id'];
+            $orderSn = $postData['order_sn'];
             $modelOrder = new \app\index\model\Order();
             $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-            $orderSn = input('order_sn',null,'sting');
             print_r($orderSn);
             $config = [
                 'where' => [
