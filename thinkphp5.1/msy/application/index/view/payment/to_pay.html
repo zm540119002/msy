@@ -92,10 +92,12 @@
 
         $('body').on('click','.pay_btn',function () {
             var payment_code = '{$orderinfo.payment_code}';
+            console.log(payment_code);
             if(payment_code != 1){
                 return false;
             }
             var browser_type = '{$browser_type}';
+            console.log(browser_type);
             if(browser_type == 1){
                 payGQcode();
             }else if(browser_type == 3){
