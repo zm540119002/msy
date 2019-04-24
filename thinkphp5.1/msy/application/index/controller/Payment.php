@@ -144,9 +144,9 @@ class Payment extends \common\controller\Base {
                     session('open_id',$payOpenId);
                 }
                 $payInfo = [
-                    'sn'=>$orderInfo['sn'],
-                    'product'=>$orderInfo['id'],
-                    'actually_amount'=>$orderInfo['actually_amount'],
+                    'sn'=>generateSN(),
+                    'product'=>5,
+                    'actually_amount'=>0.01,
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
