@@ -71,7 +71,6 @@
         //微信pc端扫码支付
         function payGQcode(){
             var code_url = "{$jsApiParameters}";
-            console.log(code_url);
             if(code_url){
                 var imgSrc=uploads+code_url;
                 var scrollTop;
@@ -93,7 +92,6 @@
 
         $('body').on('click','.pay_btn',function () {
             var payment_code = '{$orderInfo.payment_code}';
-            console.log(payment_code);
             if(payment_code != 1){
                 return false;
             }
