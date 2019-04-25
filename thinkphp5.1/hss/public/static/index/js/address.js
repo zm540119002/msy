@@ -1,7 +1,14 @@
 
 $(function(){
     $('.edit_operate').find('.address_edit').hide();
-
+    if(!$.isEmptyObject(addressList)){
+        var data=$('.address_info .consigneeInfo').serializeObject();
+        var region = [];
+        region.push(data.province);
+        region.push(data.city);
+        region.push(data.area);
+        $('.list_area_address').setArea(region);
+    }
     //添加收货人地址
     $('body').on('click','.add_address_1',function () {
         var title='添加新的收货地址';
