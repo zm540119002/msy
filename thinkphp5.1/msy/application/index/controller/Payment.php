@@ -178,11 +178,11 @@ class Payment extends \common\controller\Base {
         $model ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $sn],
+                ['status', '=', 0],
+                ['sn', '=', $sn],
             ],'field' => [
-                'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
-                'o.user_id',
+                'id', 'sn', 'amount','actually_amount','payment_code',
+                'user_id',
             ],
         ];
         return  $model->getInfo($config);
@@ -198,11 +198,11 @@ class Payment extends \common\controller\Base {
         $model ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $sn],
+                ['status', '=', 0],
+                ['sn', '=', $sn],
             ],'field' => [
-                'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
-                'o.user_id',
+                'id', 'sn', 'amount','actually_amount','payment_code',
+                'user_id',
             ],
         ];
         return  $model->getInfo($config);
