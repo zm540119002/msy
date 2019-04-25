@@ -18,8 +18,13 @@ $(function(){
     // 选择地址
     $('body').on('click','.select_address',function () {
         // 获取地址列表
-        var url = controller + 'replaceOneGoodsToCart';
-        $.ajax({
+        var url = module + 'Address/edit';
+            var config  = {};
+            config.title= '添加'+'ssss';
+            config.url  = url;
+            edit(config);
+
+/*        $.ajax({
             url: url,
             data: postData,
             type: 'post',
@@ -36,9 +41,11 @@ $(function(){
                     dialog.error(data.info);
                 }
             }
-        });
+        });*/
 
 
+
+/*
         var delivery_address=$('.delivery_address').html();
         layer.open({
             title:['选择收货地址','border-bottom:1px solid #d9d9d9;'],
@@ -78,8 +85,10 @@ $(function(){
                 addressLayer('添加新的收货地址');
                 layer.close(index);
             }
-        })
+        })*/
     });
+
+
     //修改地址
     $('body').on('click','.address_edit',function () {
         var title='修改地址';
@@ -98,6 +107,17 @@ $(function(){
     });
 
 });
+
+function edit(config){
+    var index = layer.open({
+        type: 2,
+        title: config.title,
+        content: config.url
+    });
+    console.log(index);
+    return false;
+    layer.full(index);
+}
 
 //新增和修改地址弹窗
 var addressInfo=$('.section-address').html();
