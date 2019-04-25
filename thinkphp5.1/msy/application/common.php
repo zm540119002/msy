@@ -69,3 +69,13 @@ function unlockingFooterCartConfig($arr){
     }
     return $tempArr;
 }
+/*开启底部购物车配置项
+ */
+function unlockingFooterCartConfigTest($arr){
+    $footerCartConfig = config('footer_menu_test.menu');
+    $tempArr = array();
+    foreach ($arr as $val) {
+        $tempArr['menu'][] = $footerCartConfig[$val];
+    }
+    return $tempArr;
+}
