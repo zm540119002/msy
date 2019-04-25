@@ -3,7 +3,7 @@ $(function(){
     $('.edit_operate').find('.address_edit').hide();
 
     //添加收货人地址
-    $('body').on('click','.add_address',function () {
+    $('body').on('click','.add_address_1',function () {
         var title='添加新的收货地址';
         addressLayer(title);
     });
@@ -96,12 +96,12 @@ $(function(){
             $(this).attr('data-off',1);
         }
     });
-
 });
 
 //新增和修改地址弹窗
-var addressInfo=$('.section-address').html();
+
 function addressLayer(title,data){
+    var addressInfo=$('.section-address').html();
     layer.open({
         title:[title,'border-bottom:1px solid #d9d9d9;'],
         type:1,
