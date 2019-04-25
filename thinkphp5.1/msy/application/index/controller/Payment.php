@@ -161,16 +161,7 @@ class Payment extends \common\controller\Base {
                     'notify_url'=>config('wx_config.notify_url'),
                     'attach'=>$attach,
                     'payOpenId'=>$payOpenId,
-                ];$payInfo2 = [
-                    'sn'=>$info['sn'],
-                    'product'=>$info['id'],
-                    'actually_amount'=>$info['actually_amount'],
-                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
-                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
-                    'notify_url'=>config('wx_config.notify_url'),
-                    'attach'=>$attach,
                 ];
-
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
@@ -183,7 +174,11 @@ class Payment extends \common\controller\Base {
                 print_r($aa);
                 print_r($unlockingFooterCart);
 //                $this->assign('payInfo',json_encode($aa));
-                $this->assign('payInfo',$attach);
+                $response = [
+                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+                ];
+                $this->assign('payInfo',json_encode($response));
 //                $this->assign('success_url',$payInfo['success_url']);
 //                $this->assign('fail_url',$payInfo['fail_url']);
                 //$this->assign('payInfo',json_encode($payInfo));
