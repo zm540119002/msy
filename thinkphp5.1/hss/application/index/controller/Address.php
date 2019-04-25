@@ -137,5 +137,8 @@ class Address extends \common\controller\UserBase {
     }
 
     //
+    public function getData(){
+
+    }
 
 }
