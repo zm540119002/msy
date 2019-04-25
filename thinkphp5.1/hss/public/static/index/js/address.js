@@ -18,12 +18,29 @@ $(function(){
     // 选择地址
     $('body').on('click','.select_address',function () {
         // 获取地址列表
-        var url = module + 'Address/getData';
-            var config  = {};
-            config.title= '添加'+'ssss';
-            config.url  = url;
-            edit(config);
+        $.ajax({
+            url: module + 'Address/getData',
+            data: '',
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                layer.open({
+                    type:1,
+                    title: '收货地址 ',
+                    className:'addressListLayer',
+                    content: data,
+                    success:function(){
 
+                    }
+                });
+            }
+        });
        
 
 
@@ -90,41 +107,6 @@ $(function(){
     });
 
 });
-
-function edit(config){
-    var index = layer.open({
-        type: 2,
-        title: config.title,
-        content: config.url,
-        success:function(){
-            $.ajax({
-                url: config.url,
-                data: '',
-                type: 'post',
-                beforeSend: function(){
-                    $('.loading').show();
-                },
-                error:function(){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-
-      /*              console.log(data);
-                    return false;*/
-
-                    $('.loading').hide();
-                    if(data.status==0) {
-                        dialog.error(data.info);
-                    }
-                }
-            });
-        }
-    });
-    console.log(index);
-    return false;
-    //layer.full(index);
-}
 
 //新增和修改地址弹窗
 var addressInfo=$('.section-address').html();
