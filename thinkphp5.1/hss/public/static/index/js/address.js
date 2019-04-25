@@ -33,7 +33,7 @@ $(function(){
                 layer.open({
                     type:1,
                     title: '收货地址 ',
-                    className:'addressListLayer',
+                    className:'addressLayer',
                     content: data,
                     style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
                     success:function(){
