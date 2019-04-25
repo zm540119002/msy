@@ -25,7 +25,6 @@ class weixinpay{
             return weixinpay::pc_pay($payInfo);
         }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
             //手机端非微信浏览器
-            print_r(555555);exit;
             return weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
             return weixinpay::getJSAPI($payInfo);
@@ -178,6 +177,7 @@ class weixinpay{
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
         $url = $url.'&redirect_url='.$payInfo['success_url'];//拼接支付完成后跳转的页面redirect_url
+        print_r($url);exit;
         $html = <<<EOF
             <head>
                <script type="text/javascript" src="https://api.worldview.com.cn/static/common/js/jquery/jquery-1.9.1.min.js"></script>
