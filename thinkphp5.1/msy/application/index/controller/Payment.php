@@ -198,6 +198,7 @@ class Payment extends \common\controller\Base {
     private function getWalletDetailInfo($systemId,$sn){
         $model = new \app\index\model\WalletDetail();
         $model ->connection = config('custom.system_id')[$systemId]['db'];
+        print_r($model);exit;
         $config = [
             'where' => [
                 ['status', '=', 0],
