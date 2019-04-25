@@ -119,7 +119,7 @@ function edit(config){
     });
     console.log(index);
     return false;
-    layer.full(index);
+    //layer.full(index);
 }
 
 //新增和修改地址弹窗
