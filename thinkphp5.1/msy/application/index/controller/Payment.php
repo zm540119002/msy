@@ -40,9 +40,8 @@ class Payment extends \common\controller\Base {
                 'notify_url'=>config('wx_config.notify_url'),
                 'attach'=>$attach,
             ];
-           print_r($info);exit;
-            switch($info['payment_code']){
 
+            switch($info['payment_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
