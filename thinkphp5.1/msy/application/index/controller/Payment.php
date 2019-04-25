@@ -203,7 +203,7 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id', 'sn', 'amount','actually_amount','payment_code',
+                'id', 'sn', 'amount','payment_code',
                 'user_id',
             ],
         ];
