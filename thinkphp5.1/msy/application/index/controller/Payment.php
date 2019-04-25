@@ -1,11 +1,7 @@
 <?php
 namespace app\index\controller;
-//class Payment extends \common\controller\Base{
-
-use function GuzzleHttp\Promise\inspect;
 
 class Payment extends \common\controller\Base {
-
     // 确定支付页
     public function toPay()
     {
@@ -117,7 +113,7 @@ class Payment extends \common\controller\Base {
             if(!in_array($paymentType,config('custom.payment_types'))){
                 $this->error('提交的支付类型数据有误 !');
             }
-            $sn = input('order_sn','','string');
+            $sn = input('sn','','string');
             switch($paymentType){
                 case 1 : // 订单
                     $info = $this->getOrderInfo($systemId,$sn);
@@ -129,7 +125,7 @@ class Payment extends \common\controller\Base {
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
-            $this->assign('orderInfo', $info);
+            $this->assign('info', $info);
             //判断为微信支付，并且为微信浏览器
             if($info['payment_code'] ==1){
                 if (!isPhoneSide()) {//pc端微信扫码支付
@@ -182,11 +178,11 @@ class Payment extends \common\controller\Base {
         $model ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $sn],
+                ['status', '=', 0],
+                ['sn', '=', $sn],
             ],'field' => [
-                'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
-                'o.user_id',
+                'id', 'sn', 'amount','actually_amount','payment_code',
+                'user_id',
             ],
         ];
         return  $model->getInfo($config);
@@ -202,11 +198,11 @@ class Payment extends \common\controller\Base {
         $model ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $sn],
+                ['status', '=', 0],
+                ['sn', '=', $sn],
             ],'field' => [
-                'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
-                'o.user_id',
+                'id', 'sn', 'amount','actually_amount','payment_code',
+                'user_id',
             ],
         ];
         return  $model->getInfo($config);
