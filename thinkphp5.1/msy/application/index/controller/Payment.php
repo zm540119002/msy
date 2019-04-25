@@ -114,17 +114,14 @@ class Payment extends \common\controller\Base {
                 $this->error('提交的支付类型数据有误 !');
             }
             $sn = input('sn','','string');
-            print_r($sn);
             switch($paymentType){
                 case 1 : // 订单
                     $info = $this->getOrderInfo($systemId,$sn);
-                    print_r($info);
                     break;
                 case 2 : // 充值
                     $info = $this->getWalletDetailInfo($systemId,$sn);
                     break;
             }
-            print_r($info);exit;
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
