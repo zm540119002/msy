@@ -197,6 +197,7 @@ class Payment extends \common\controller\Base {
      * 获取订单信息
      */
     private function getWalletDetailInfo($systemId,$sn){
+        echo 666;
         $model = new \app\index\model\WalletDetail();
         $model ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
