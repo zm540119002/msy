@@ -114,9 +114,11 @@ class Payment extends \common\controller\Base {
                 $this->error('提交的支付类型数据有误 !');
             }
             $sn = input('order_sn','','string');
+            print_r($sn);
             switch($paymentType){
                 case 1 : // 订单
                     $info = $this->getOrderInfo($systemId,$sn);
+                    print_r($info);
                     break;
                 case 2 : // 充值
                     $info = $this->getWalletDetailInfo($systemId,$sn);
