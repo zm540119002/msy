@@ -1,11 +1,7 @@
 <?php
 namespace app\index\controller;
-//class Payment extends \common\controller\Base{
-
-use function GuzzleHttp\Promise\inspect;
 
 class Payment extends \common\controller\Base {
-
     // 确定支付页
     public function toPay()
     {
@@ -126,6 +122,7 @@ class Payment extends \common\controller\Base {
                     $info = $this->getWalletDetailInfo($systemId,$sn);
                     break;
             }
+            print_r($info);exit;
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
