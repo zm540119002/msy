@@ -132,7 +132,7 @@ class Payment extends \common\controller\Base {
                 if (!isPhoneSide()) {//pc端微信扫码支付
                     $this ->assign('browser_type',1);
                 }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
-                    echo 222;exit;
+                    return $this->fetch();
 //                    //手机端非微信浏览器
 //                    $this ->assign('browser_type',2);
                 }else{//微信浏览器(手机端)
