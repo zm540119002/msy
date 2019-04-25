@@ -22,8 +22,29 @@ $(function(){
             var config  = {};
             config.title= '添加'+'ssss';
             config.url  = url;
-            edit(config);
-
+            configs.content='';
+            $.ajax({
+                url: config.url,
+                data: '',
+                type: 'post',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    // $('.loading').hide();
+                    // if(data.status==0) {
+                    //     dialog.error(data.info);
+                    // }
+                    //$('.addressListLayer .layui-m-layercont').append(data);
+                    console.log(data);
+                    configs.content=data;
+                    edit(config);
+                }
+            });
        
 
 
@@ -96,28 +117,9 @@ function edit(config){
         type:1,
         title: config.title,
         className:'addressListLayer',
-        // content: config.url,
+        content: config.content,
         success:function(){
-            $.ajax({
-                url: config.url,
-                data: '',
-                type: 'post',
-                beforeSend: function(){
-                    $('.loading').show();
-                },
-                error:function(){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    // $('.loading').hide();
-                    // if(data.status==0) {
-                    //     dialog.error(data.info);
-                    // }
-                    $('.addressListLayer .layui-m-layercont').append(data);
-                    console.log(data);
-                }
-            });
+            
         }
     });
     console.log(index);
