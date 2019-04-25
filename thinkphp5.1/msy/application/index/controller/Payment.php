@@ -167,6 +167,7 @@ class Payment extends \common\controller\Base {
                     'actually_amount'=>$info['actually_amount'],
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+                    'notify_url'=>config('wx_config.notify_url'),
                 ];
 
                 $wxPay = new \common\component\payment\weixin\weixinpay;
