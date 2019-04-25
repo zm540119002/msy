@@ -165,7 +165,7 @@ class Payment extends \common\controller\Base {
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
-                $this->assign('payInfo',$payInfo);
+                $this->assign('payInfo',json_encode($payInfo));
             }
             return $this->fetch();
         }
@@ -213,7 +213,6 @@ class Payment extends \common\controller\Base {
 
    //支付完跳转的页面
     public function payComplete(){
-        print_r(input('jump_url'));
         return $this->fetch();
     }
     //取消支付完跳转的页面
