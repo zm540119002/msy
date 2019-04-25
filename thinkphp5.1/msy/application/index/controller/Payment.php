@@ -210,6 +210,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $model->getInfo($config);
+        print_r($model->getInfo($config));
         echo $model->getLastSql();
         return  $model->getInfo($config);
     }
