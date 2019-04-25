@@ -166,7 +166,7 @@ class Payment extends \common\controller\Base {
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
                 print_r(array($payInfo));
-                $this->assign('payInfo',json_encode(array($payInfo)));
+                $this->assign('payInfo',json_encode(array('info'=>$payInfo)));
 //                $this->assign('success_url',$payInfo['success_url']);
 //                $this->assign('fail_url',$payInfo['fail_url']);
                 //$this->assign('payInfo',json_encode($payInfo));
