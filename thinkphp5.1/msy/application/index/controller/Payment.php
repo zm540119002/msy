@@ -169,6 +169,7 @@ class Payment extends \common\controller\Base {
                 array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
                 array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
                 array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
+                print_r($unlockingFooterCart);
                 $this->assign('payInfo',json_encode($unlockingFooterCart));
 //                $this -> assign('payInfo',json_encode($payInfo));
 //                $this->assign('success_url',$payInfo['success_url']);
