@@ -12,40 +12,41 @@ class Payment extends \common\controller\Base {
         if(request()->isPost()){
             $postData = input('post.');
             $systemId = $postData['system_id'];
-            $orderSn = $postData['order_sn'];
-            $modelOrder = new \app\index\model\Order();
-            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-            $config = [
-                'where' => [
-                    ['o.status', '=', 0],
-                    ['o.sn', '=', $orderSn],
-                ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','o.actually_amount','payment_code',
-                    'o.user_id',
-                ],
-            ];
-            $orderInfo = $modelOrder->getInfo($config);
-            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
-                return errorMsg('订单不存在或金额不能为0',['code'=>1]);
+            $paymentType = $postData['payment_type'];
+            $sn = $postData['sn'];
+            if(!in_array($paymentType,config('custom.payment_types'))){
+                $this->error('提交的支付类型数据有误 !');
+            }
+            switch($paymentType){
+                case 1 : // 订单
+                    $info = $this->getOrderInfo($systemId,$sn);
+                    break;
+                case 2 : // 充值
+                    $info = $this->getWalletDetailInfo($systemId,$sn);
+                    break;
+            }
+            if(empty($info) OR !$info['actually_amount']){
+                $this->error('订单不存在或金额不能为0 !');
             }
             $attach = [
                 'system_id' =>$systemId,
+                'payment_type'=>$paymentType
             ];
             $attach = json_encode($attach);
             $jump_url =config('custom.system_id')[$systemId]['jump_url'];
             $return_url = config('wx_config.return_url');
             $payOpenId = session('open_id');
             $payInfo = [
-                'sn'=>$orderInfo['sn'],
-                'product'=>$orderInfo['id'],
-                'actually_amount'=>$orderInfo['actually_amount'],
+                'sn'=>$info['sn'],
+                'product'=>$info['id'],
+                'actually_amount'=>$info['actually_amount'],
                 'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                 'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 'notify_url'=>config('wx_config.notify_url'),
                 'attach'=>$attach,
                 'payOpenId'=>$payOpenId,
             ];
-            switch($orderInfo['payment_code']){
+            switch($info['payment_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
@@ -62,91 +63,101 @@ class Payment extends \common\controller\Base {
                     $model->unionPay($payInfo);
                     break;
                 case 4 : // 钱包
-                    if ($orderInfo['order_status'] > 1) {
-                        return errorMsg('订单已处理',['code'=>1]);
-                    }
-                    $modelWallet = new \app\index\model\Wallet();
-                    $config = [
-                        'where'=>[
-                            ['status', '=', 0],
-                            ['user_id', '=', $orderInfo['user_id']],
-                        ]
-                    ];
-                    $walletInfo = $modelWallet->getInfo($config);
-                    if($walletInfo['amount'] < $orderInfo['actually_amount']){
-                        $modelOrder->rollback();
-                        //返回状态给微信服务器
-                        return errorMsg('余额不够',['code'=>2]);
-                    }
-                    $modelOrder ->startTrans();
-                    $modelWalletDetail = new \app\index\model\WalletDetail();
-                    $orderInfo['pay_sn'] = generateSN();
-                    $orderInfo['payment_time'] = time();
-                    $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
-                    if(!$res['status'] ){
-                        $modelOrder->rollback();
-                        //返回状态给微信服务器
-                        return errorMsg('失败');
-                    }
-                    $data = [
-                        'payment_code'=>4,
-                        'pay_sn'=> $orderInfo['pay_sn'],
-                        'payment_time'=> $orderInfo['payment_time'],
-                        'order_sn'=> $orderInfo['sn'],
-                    ];
-                    $res = $modelOrder->orderHandle($data, $orderInfo);
-                    if(!$res['status']){
-                        $modelOrder->rollback();
-                        //返回状态给微信服务器
-                        return errorMsg('失败');
-                    }
-                    $modelOrder->commit();
-                    return successMsg('成功');
+//                    if ($orderInfo['order_status'] > 1) {
+//                        return errorMsg('订单已处理',['code'=>1]);
+//                    }
+//                    $modelWallet = new \app\index\model\Wallet();
+//                    $config = [
+//                        'where'=>[
+//                            ['status', '=', 0],
+//                            ['user_id', '=', $orderInfo['user_id']],
+//                        ]
+//                    ];
+//                    $walletInfo = $modelWallet->getInfo($config);
+//                    if($walletInfo['amount'] < $orderInfo['actually_amount']){
+//                        $modelOrder->rollback();
+//                        //返回状态给微信服务器
+//                        return errorMsg('余额不够',['code'=>2]);
+//                    }
+//                    $modelOrder ->startTrans();
+//                    $modelWalletDetail = new \app\index\model\WalletDetail();
+//                    $orderInfo['pay_sn'] = generateSN();
+//                    $orderInfo['payment_time'] = time();
+//                    $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
+//                    if(!$res['status'] ){
+//                        $modelOrder->rollback();
+//                        //返回状态给微信服务器
+//                        return errorMsg('失败');
+//                    }
+//                    $data = [
+//                        'payment_code'=>4,
+//                        'pay_sn'=> $orderInfo['pay_sn'],
+//                        'payment_time'=> $orderInfo['payment_time'],
+//                        'order_sn'=> $orderInfo['sn'],
+//                    ];
+//                    $res = $modelOrder->orderHandle($data, $orderInfo);
+//                    if(!$res['status']){
+//                        $modelOrder->rollback();
+//                        //返回状态给微信服务器
+//                        return errorMsg('失败');
+//                    }
+//                    $modelOrder->commit();
+//                    return successMsg('成功');
                     break;
             }
             if(isset($msg)){
                 $this -> error($msg);
             }
         }else{
-            $modelOrder = new \app\index\model\Order();
             $systemId = input('system_id',0,'int');
             $this->assign('system_id',$systemId);
-            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-            $orderSn = input('order_sn');
-            $config = [
-                'where' => [
-                    ['o.status', '=', 0],
-                    ['o.sn', '=', $orderSn],
-                ],'field' => [
-                    'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
-                    'o.user_id',
-                ],
-            ];
-            $orderInfo = $modelOrder->getInfo($config);
-            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
+            //1:订单支付 2：充值支付
+            $paymentType = input('payment_type',0,'int');
+            $this->assign('payment_type',$paymentType);
+            if(!in_array($paymentType,config('custom.payment_types'))){
+                $this->error('提交的支付类型数据有误 !');
+            }
+            $sn = input('order_sn','','string');
+            switch($paymentType){
+                case 1 : // 订单
+                    $info = $this->getOrderInfo($systemId,$sn);
+                    break;
+                case 2 : // 充值
+                    $info = $this->getWalletDetailInfo($systemId,$sn);
+                    break;
+            }
+            if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
-            $this->assign('orderInfo', $orderInfo);
+            $this->assign('orderInfo', $info);
             //判断为微信支付，并且为微信浏览器
-            if($orderInfo['payment_code'] ==1 && isWxBrowser()){
+            if($info['payment_code'] ==1){
+                if (!isPhoneSide()) {//pc端微信扫码支付
+                    $this ->assign('browser_type',1);
+                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
+                    $this ->assign('browser_type',2);
+                }else{//微信浏览器(手机端)
+                    $this ->assign('browser_type',3);
+                    $payOpenId = session('open_id');
+                    if(!$payOpenId){
+                        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                        $payOpenId  = $tools->getOpenid();
+                        session('open_id',$payOpenId);
+                    }
+                }
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
                 $attach = [
                     'system_id' =>$systemId,
+                    'payment_type'=>$paymentType
                 ];
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'];
                 $return_url = config('wx_config.return_url');
-                $payOpenId = session('open_id');
-                if(!$payOpenId){
-                    $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                    $payOpenId  = $tools->getOpenid();
-                    session('open_id',$payOpenId);
-                }
                 $payInfo = [
-                    'sn'=>$orderInfo['sn'],
-                    'product'=>$orderInfo['id'],
-                    'actually_amount'=>$orderInfo['actually_amount'],
+                    'sn'=>$info['sn'],
+                    'product'=>$info['id'],
+                    'actually_amount'=>$info['actually_amount'],
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
@@ -154,11 +165,51 @@ class Payment extends \common\controller\Base {
                     'payOpenId'=>$payOpenId,
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
-                $jsApiParameters   = $wxPay->wxPay($payInfo);
+                $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
             }
             return $this->fetch();
         }
+    }
+
+    /**
+     * @param $systemId
+     * @return array|\PDOStatement|string|\think\Model|null
+     * 获取订单信息
+     */
+    private function getOrderInfo($systemId,$sn){
+        $model = new \app\index\model\Order();
+        $model ->connection = config('custom.system_id')[$systemId]['db'];
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $sn],
+            ],'field' => [
+                'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
+                'o.user_id',
+            ],
+        ];
+        return  $model->getInfo($config);
+    }
+
+    /**
+     * @param $systemId
+     * @return array|\PDOStatement|string|\think\Model|null
+     * 获取订单信息
+     */
+    private function getWalletDetailInfo($systemId,$sn){
+        $model = new \app\index\model\WalletDetail();
+        $model ->connection = config('custom.system_id')[$systemId]['db'];
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.sn', '=', $sn],
+            ],'field' => [
+                'o.id', 'o.sn', 'o.amount','actually_amount','payment_code',
+                'o.user_id',
+            ],
+        ];
+        return  $model->getInfo($config);
     }
 
 
