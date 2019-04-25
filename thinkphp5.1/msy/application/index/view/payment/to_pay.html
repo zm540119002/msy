@@ -88,10 +88,6 @@
 
     $(function(){
         $('body').on('click','.pay_btn',function () {
-            var payment_code = '{$info.payment_code}';
-            // if(payment_code != 1){
-            //     return false;
-            // }
             var browser_type = '{$browser_type}';
             if(browser_type == 1){
                 payGQcode();
