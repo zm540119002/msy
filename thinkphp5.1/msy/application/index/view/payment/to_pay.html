@@ -32,10 +32,10 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
+    var payInfo = JSON.parse('{$payInfo|raw}');
     //微信内部浏览器
     function jsApiCall()
     {
-        var payInfo = JSON.parse('{$payInfo|raw}');
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
             function(res){
