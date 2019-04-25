@@ -32,7 +32,7 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-    var payInfo = JSON.parse('{$payInfo}');
+    var payInfo = JSON.parse('{$payInfo|raw}');
     console.log(payInfo);
     //微信内部浏览器
     function jsApiCall()
