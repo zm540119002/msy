@@ -163,6 +163,8 @@ class Payment extends \common\controller\Base {
                     'payOpenId'=>$payOpenId,
                 ];$payInfo2 = [
                     'sn'=>$info['sn'],
+                    'product'=>$info['id'],
+                    'actually_amount'=>$info['actually_amount'],
                 ];
 
                 $wxPay = new \common\component\payment\weixin\weixinpay;
