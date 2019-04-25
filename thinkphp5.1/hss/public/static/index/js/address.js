@@ -41,7 +41,7 @@ $(function(){
                     // }
                     //$('.addressListLayer .layui-m-layercont').append(data);
                     console.log(data);
-                    configs.content=data;
+                    config.content=data;
                     edit(config);
                 }
             });
