@@ -30,7 +30,6 @@ class Payment extends \common\controller\Base {
             ];
             $attach = json_encode($attach);
             $jump_url =config('custom.system_id')[$systemId]['jump_url'];
-            print_r($jump_url);exit;
             $return_url = config('wx_config.return_url');
             $payInfo = [
                 'sn'=>$info['sn'],
@@ -152,6 +151,7 @@ class Payment extends \common\controller\Base {
                 ];
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'];
+                print_r($jump_url);exit;
                 $return_url = config('wx_config.return_url');
                 $payInfo = [
                     'sn'=>$info['sn'],
