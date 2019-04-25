@@ -7,6 +7,7 @@ class Payment extends \common\controller\Base {
     {
         if(request()->isPost()){
             $postData = input('post.');
+            print_r($postData);exit;
             $systemId = $postData['system_id'];
             $paymentType = $postData['payment_type'];
             $sn = $postData['sn'];
