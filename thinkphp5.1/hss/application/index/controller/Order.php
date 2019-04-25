@@ -148,7 +148,7 @@ class Order extends \common\controller\UserBase
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
 
-            $url = config('custom.pay_recharge').$orderSn;
+            $url = config('custom.pay_gateway').$orderSn;
             return successMsg($url);
 
         }else{
