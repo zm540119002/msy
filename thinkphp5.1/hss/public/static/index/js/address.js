@@ -114,7 +114,7 @@ function edit(config){
                     // if(data.status==0) {
                     //     dialog.error(data.info);
                     // }
-                    $('.addressListLayer').append(data);
+                    $('.addressListLayer .layui-m-layercont').append(data);
                     console.log(data);
                 }
             });
