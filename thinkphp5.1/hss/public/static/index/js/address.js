@@ -18,7 +18,7 @@ $(function(){
     // 选择地址
     $('body').on('click','.select_address',function () {
         // 获取地址列表
-        var url = module + 'Address/edit';
+        var url = module + 'Address/getData';
             var config  = {};
             config.title= '添加'+'ssss';
             config.url  = url;
@@ -109,6 +109,10 @@ function edit(config){
                     dialog.error('AJAX错误');
                 },
                 success: function(data){
+
+      /*              console.log(data);
+                    return false;*/
+
                     $('.loading').hide();
                     if(data.status==0) {
                         dialog.error(data.info);
