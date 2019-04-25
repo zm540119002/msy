@@ -1,8 +1,3 @@
-{extend name="template/base.html" /}
-{block name="css-customize"}
-
-{/block}
-{block name="content"}
 <!--添加收货人信息-->
 <section class="section-address bg-eae pt-5" style="display:none;">
     <form action='#' method="post" class="bg-fff address_form">
@@ -80,6 +75,7 @@
     </div>
     {/volist}
 </section>
+
 <!--选择地区弹层-->
 <section id="areaLayer" class="express-area-box" style="display:none;">
     <header>
@@ -91,12 +87,6 @@
         <ul id="areaList" class="area-list"></ul>
     </article>
 </section>
-{/block}
-{block name="footer"}
 
-{/block}
 
-{block name="script"}
-    <script src="index_js/jquery.area.js"></script>
-    <script type="text/javascript" src="index_js/address.js"></script>
-{/block}
+
