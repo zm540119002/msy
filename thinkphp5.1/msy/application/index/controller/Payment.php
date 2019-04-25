@@ -209,6 +209,7 @@ class Payment extends \common\controller\Base {
                 'user_id',
             ],
         ];
+        $model->getInfo($config);
         print_r($model->getLastSql());
         return  $model->getInfo($config);
     }
