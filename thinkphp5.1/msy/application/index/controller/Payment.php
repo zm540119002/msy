@@ -125,7 +125,7 @@ class Payment extends \common\controller\Base {
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
-            $this->assign('orderInfo', $info);
+            $this->assign('info', $info);
             //判断为微信支付，并且为微信浏览器
             if($info['payment_code'] ==1){
                 if (!isPhoneSide()) {//pc端微信扫码支付
