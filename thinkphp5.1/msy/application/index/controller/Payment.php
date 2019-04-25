@@ -119,7 +119,6 @@ class Payment extends \common\controller\Base {
                     $info = $this->getOrderInfo($systemId,$sn);
                     break;
                 case 2 : // 充值
-                    echo 111;
                     $info = $this->getWalletDetailInfo($systemId,$sn);
                     break;
             }
@@ -197,7 +196,6 @@ class Payment extends \common\controller\Base {
      * 获取订单信息
      */
     private function getWalletDetailInfo($systemId,$sn){
-        echo 666;
         $model = new \app\index\model\WalletDetail();
         $model ->connection = config('custom.system_id')[$systemId]['db'];
         $config = [
@@ -205,12 +203,10 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id', 'sn', 'amount','payment_code',
+                'id', 'sn', 'amount','actually_amount','payment_code',
                 'user_id',
             ],
         ];
-        $model->getInfo($config);
-        print_r($model->getLastSql());
         return  $model->getInfo($config);
     }
 
