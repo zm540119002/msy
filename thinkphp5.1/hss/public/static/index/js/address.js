@@ -24,24 +24,7 @@ $(function(){
             config.url  = url;
             edit(config);
 
-/*        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function(){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.status==0) {
-                    dialog.error(data.info);
-                }
-            }
-        });*/
+       
 
 
 
@@ -112,7 +95,27 @@ function edit(config){
     var index = layer.open({
         type: 2,
         title: config.title,
-        content: config.url
+        content: config.url,
+        success:function(){
+            $.ajax({
+                url: config.url,
+                data: '',
+                type: 'post',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(data.status==0) {
+                        dialog.error(data.info);
+                    }
+                }
+            });
+        }
     });
     console.log(index);
     return false;
