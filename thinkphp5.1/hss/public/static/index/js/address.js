@@ -93,9 +93,9 @@ $(function(){
 
 function edit(config){
     var index = layer.open({
-        type: 2,
+        type:1,
         title: config.title,
-        content: config.url,
+        // content: config.url,
         success:function(){
             $.ajax({
                 url: config.url,
@@ -109,10 +109,11 @@ function edit(config){
                     dialog.error('AJAX错误');
                 },
                 success: function(data){
-                    $('.loading').hide();
-                    if(data.status==0) {
-                        dialog.error(data.info);
-                    }
+                    // $('.loading').hide();
+                    // if(data.status==0) {
+                    //     dialog.error(data.info);
+                    // }
+                    console.log(data);
                 }
             });
         }
