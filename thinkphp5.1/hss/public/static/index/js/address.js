@@ -14,8 +14,31 @@ $(function(){
         var title='添加新的收货地址';
         addressLayer(title);
     });
-    //选择地址
+
+    // 选择地址
     $('body').on('click','.select_address',function () {
+        // 获取地址列表
+        var url = controller + 'replaceOneGoodsToCart';
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                if(data.status==0) {
+                    dialog.error(data.info);
+                }
+            }
+        });
+
+
         var delivery_address=$('.delivery_address').html();
         layer.open({
             title:['选择收货地址','border-bottom:1px solid #d9d9d9;'],
