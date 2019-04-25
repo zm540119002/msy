@@ -1,14 +1,7 @@
 
 $(function(){
     $('.edit_operate').find('.address_edit').hide();
-    if(!$.isEmptyObject(addressList)){
-        var data=$('.address_info .consigneeInfo').serializeObject();
-        var region = [];
-        region.push(data.province);
-        region.push(data.city);
-        region.push(data.area);
-        $('.list_area_address').setArea(region);
-    }
+
     //添加收货人地址
     $('body').on('click','.add_address',function () {
         var title='添加新的收货地址';
@@ -29,10 +22,10 @@ $(function(){
                 $('.loading').hide();
                 dialog.error('AJAX错误');
             },
+
             success: function(data){
                 layer.open({
                     type:1,
-                    title: '收货地址 ',
                     className:'addressLayer',
                     content: data,
                     style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
@@ -42,9 +35,6 @@ $(function(){
                 });
             }
         });
-       
-
-
 
 /*
         var delivery_address=$('.delivery_address').html();
