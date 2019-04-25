@@ -165,23 +165,11 @@ class Payment extends \common\controller\Base {
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
-                $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1]);
-                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
-                array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
-                array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
-                $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
-                $aa = array('info'=>array($attach));
-                print_r($aa);
-                print_r($unlockingFooterCart);
-//                $this->assign('payInfo',json_encode($aa));
                 $response = [
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 ];
                 $this->assign('payInfo',json_encode($response));
-//                $this->assign('success_url',$payInfo['success_url']);
-//                $this->assign('fail_url',$payInfo['fail_url']);
-                //$this->assign('payInfo',json_encode($payInfo));
             }
             return $this->fetch();
         }
