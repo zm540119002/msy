@@ -120,11 +120,8 @@ class Payment extends \common\controller\Base {
                     break;
                 case 2 : // 充值
                     $info = $this->getWalletDetailInfo($systemId,$sn);
-                    echo 55;
-                    print_r($info);
                     break;
             }
-            print_r($info);exit;
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
@@ -209,9 +206,6 @@ class Payment extends \common\controller\Base {
                 'user_id',
             ],
         ];
-        $info = $model->getInfo($config);
-        print_r($info);
-        echo $model->getLastSql();
         return  $model->getInfo($config);
     }
 
