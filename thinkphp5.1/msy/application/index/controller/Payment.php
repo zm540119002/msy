@@ -160,7 +160,7 @@ class Payment extends \common\controller\Base {
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
                     'attach'=>$attach,
-                    'payOpenId'=>$payOpenId,
+                    'open_id'=>$payOpenId,
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
@@ -216,6 +216,7 @@ class Payment extends \common\controller\Base {
 
    //支付完跳转的页面
     public function payComplete(){
+        print_r(input('jump_url'));
         return $this->fetch();
     }
     //取消支付完跳转的页面
