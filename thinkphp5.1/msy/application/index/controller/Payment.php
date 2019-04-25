@@ -217,7 +217,8 @@ class Payment extends \common\controller\Base {
 
    //支付完跳转的页面
     public function payComplete(){
-        print_r(input('jump_url'));
+        $jump_url = input('jump_url');
+        $this->assign('jump_url',$jump_url);
         return $this->fetch();
     }
     //取消支付完跳转的页面
