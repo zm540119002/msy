@@ -109,22 +109,7 @@ class weixinpay{
     //生成支付二维码
     public static function payQRcode($url,$logo=''){
         //生成二维码图片
-//        $object = new \common\component\code\Qrcode();
-//        $qrcodePath = config('uploads');//保存文件路径
-//        $fileName = time().'.png';//保存文件名
-//        $outFile = $qrcodePath.$fileName;
-//        $level = 'L'; //容错级别
-//        $size = 10; //生成图片大小
-//        $frameSize = 2; //边框像素
-//        $saveAndPrint = true;
-//        $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
-//        return $fileName;
-
-
-        //include 'phpqrcode.php';
-
         $object = new \common\component\code\Qrcode();
-//        $value = 'http://www.cnblogs.com/txw1958/'; //二维码内容
         $value =$url; //二维码内容
         $errorCorrectionLevel = 'L';//容错级别
         $matrixPointSize = 6;//生成图片大小
@@ -134,7 +119,6 @@ class weixinpay{
        //生成二维码图片
         $object->png($value, $outFile, $errorCorrectionLevel, $matrixPointSize, 2,$saveandprint=false);
         $QR = $outFile;//已经生成的原始二维码图
-
         if (!empty($logo)) {
             $QR = imagecreatefromstring(file_get_contents($QR));
             $logo = imagecreatefromstring(file_get_contents($logo));
