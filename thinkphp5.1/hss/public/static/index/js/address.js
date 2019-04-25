@@ -22,7 +22,7 @@ $(function(){
             var config  = {};
             config.title= '添加'+'ssss';
             config.url  = url;
-            configs.content='';
+            config.content='';
             $.ajax({
                 url: config.url,
                 data: '',
