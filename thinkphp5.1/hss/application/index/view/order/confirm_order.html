@@ -48,8 +48,6 @@
             {/notempty}
         </div>
 
-        {include file="template/address_list.html" /}
-
         <section class="goods_order_form">
             <input type="hidden" value="{$orderGoodsList[0]['id']}" class="order_id">
             <input type="hidden" value="{$orderGoodsList[0]['sn']}" class="order_sn">
@@ -90,10 +88,7 @@
 {include file="template/footer_menu.html" /}
 {/block}
 {block name="script"}
-    <script src="api_common_js/jquery.area.js"></script>
     <script type="text/javascript" src="index_js/order.js"></script>
-    <script type="text/javascript">
-        var addressList={:json_encode($addressList)};
-    </script>
+    <script src="api_common_js/jquery.area.js"></script>
     <script type="text/javascript" src="index_js/address.js"></script>
 {/block}
