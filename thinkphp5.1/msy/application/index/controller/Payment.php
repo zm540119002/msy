@@ -120,6 +120,8 @@ class Payment extends \common\controller\Base {
                     break;
                 case 2 : // 充值
                     $info = $this->getWalletDetailInfo($systemId,$sn);
+                    echo 55;
+                    print_r($info);
                     break;
             }
             print_r($info);exit;
