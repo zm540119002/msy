@@ -182,7 +182,8 @@ class Payment extends \common\controller\Base {
                 $aa = array('info'=>array($attach));
                 print_r($aa);
                 print_r($unlockingFooterCart);
-                $this->assign('payInfo',json_encode($aa));
+//                $this->assign('payInfo',json_encode($aa));
+                $this->assign('payInfo',$attach);
 //                $this->assign('success_url',$payInfo['success_url']);
 //                $this->assign('fail_url',$payInfo['fail_url']);
                 //$this->assign('payInfo',json_encode($payInfo));
