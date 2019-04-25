@@ -113,7 +113,7 @@ class Payment extends \common\controller\Base {
             if(!in_array($paymentType,config('custom.payment_types'))){
                 $this->error('提交的支付类型数据有误 !');
             }
-            $sn = input('order_sn','','string');
+            $sn = input('sn','','string');
             print_r($sn);
             switch($paymentType){
                 case 1 : // 订单
