@@ -19,7 +19,7 @@ $(function(){
     $('body').on('click','.select_address',function () {
         // 获取地址列表
         $.ajax({
-            url: module + 'Address/getData',
+            url: module + 'Address/getList',
             data: '',
             type: 'post',
             beforeSend: function(){
@@ -35,6 +35,7 @@ $(function(){
                     title: '收货地址 ',
                     className:'addressLayer',
                     content: data,
+                    style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
                     success:function(){
 
                     }
