@@ -137,8 +137,15 @@ class Address extends \common\controller\UserBase {
     }
 
     //
-    public function getData(){
+    public function getList(){
 
+
+        $model= new \common\model\Address();
+        $data = $model->getDataList($this->user['id']);
+
+        $this->assign('data',$data);
+
+        return view('edit');
     }
 
 }
