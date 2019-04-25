@@ -131,8 +131,9 @@ class Payment extends \common\controller\Base {
             if($info['payment_code'] ==1){
                 if (!isPhoneSide()) {//pc端微信扫码支付
                     $this ->assign('browser_type',1);
-                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
-                    $this ->assign('browser_type',2);
+                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
+//                    //手机端非微信浏览器
+//                    $this ->assign('browser_type',2);
                 }else{//微信浏览器(手机端)
                     $this ->assign('browser_type',3);
                     $payOpenId = session('open_id');
