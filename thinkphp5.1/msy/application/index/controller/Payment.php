@@ -170,7 +170,7 @@ class Payment extends \common\controller\Base {
                 array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
                 array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
                 $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
-                $aa = array('aa'=>array('info'=>$payInfo));
+                $aa = array('info'=>array($payInfo));
                 print_r($aa);
                 print_r($unlockingFooterCart);
                 $this->assign('payInfo',json_encode($aa));
