@@ -165,7 +165,10 @@ class Payment extends \common\controller\Base {
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
-                $this->assign('payInfo',json_encode($payInfo));
+
+                $this->assign('success_url',$payInfo['success_url']);
+                $this->assign('fail_url',$payInfo['fail_url']);
+                //$this->assign('payInfo',json_encode($payInfo));
             }
             return $this->fetch();
         }
