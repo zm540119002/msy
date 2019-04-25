@@ -32,15 +32,16 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-    $(function(){
-        //微信内部浏览器
-        function jsApiCall()
-        {
-            WeixinJSBridge.invoke(
+    var payInfo = JSON.parse('{$payInfo|raw}');
+    console.log(payInfo);
+    //微信内部浏览器
+    function jsApiCall()
+    {
+        WeixinJSBridge.invoke(
                 'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok"){
-                        dialog.success('支付成功！','{$success_url}');
+                        dialog.success('支付成功！',payInfo.success_url);
                     }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
                         window.history.go(-1);
                         return false;
@@ -49,44 +50,44 @@
                         dialog.success('支付失败！','{$fail_url}');
                     }
                 }
-            );
+        );
+    }
+    function callpay()
+    {
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }else{
+            jsApiCall();
         }
-        function callpay()
-        {
-            if (typeof WeixinJSBridge == "undefined"){
-                if( document.addEventListener ){
-                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-                }else if (document.attachEvent){
-                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+    }
+
+    //微信pc端扫码支付
+    function payGQcode(){
+        var code_url = "{$jsApiParameters}";
+        if(code_url){
+            var imgSrc=uploads+code_url;
+            var scrollTop;
+            layer.open({
+                title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
+                skin:'shareqrCodeLayer',
+                content:'<img src='+imgSrc+' />',
+                btn:['X'],
+                success:function(){
+                    fixedLayer();
+                },
+                yes:function(index){
+                    cancleFixedLayer();
+                    layer.close(index);
                 }
-            }else{
-                jsApiCall();
-            }
+            })
         }
-
-        //微信pc端扫码支付
-        function payGQcode(){
-            var code_url = "{$jsApiParameters}";
-            if(code_url){
-                var imgSrc=uploads+code_url;
-                var scrollTop;
-                layer.open({
-                    title:['微信支付二维码','border-bottom:1px solid #d9d9d9'],
-                    skin:'shareqrCodeLayer',
-                    content:'<img src='+imgSrc+' />',
-                    btn:['X'],
-                    success:function(){
-                        fixedLayer();
-                    },
-                    yes:function(index){
-                        cancleFixedLayer();
-                        layer.close(index);
-                    }
-                })
-            }
-        }
-
+    }
+    $(function(){
         $('body').on('click','.pay_btn',function () {
             var browser_type = '{$browser_type}';
             if(browser_type == 1){
