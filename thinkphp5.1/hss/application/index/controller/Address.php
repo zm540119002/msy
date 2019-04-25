@@ -137,7 +137,7 @@ class Address extends \common\controller\UserBase {
     }
 
     //
-    public function getData(){
+    public function getList(){
 
 
         $model= new \common\model\Address();
