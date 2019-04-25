@@ -160,23 +160,16 @@ class Payment extends \common\controller\Base {
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
                     'attach'=>$attach,
-                    'payOpenId'=>$payOpenId,
+                    'open_id'=>$payOpenId,
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
-                $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1]);
-                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
-                array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
-                array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
-                $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
-                $aa = array('info'=>array($payInfo));
-                print_r($aa);
-                print_r($unlockingFooterCart);
-                $this->assign('payInfo',json_encode($unlockingFooterCart));
-//                $this->assign('success_url',$payInfo['success_url']);
-//                $this->assign('fail_url',$payInfo['fail_url']);
-                //$this->assign('payInfo',json_encode($payInfo));
+                $response = [
+                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+                ];
+                $this->assign('payInfo',json_encode($response));
             }
             return $this->fetch();
         }
@@ -224,6 +217,8 @@ class Payment extends \common\controller\Base {
 
    //支付完跳转的页面
     public function payComplete(){
+        $jump_url = input('jump_url');
+        $this->assign('jump_url',$jump_url);
         return $this->fetch();
     }
     //取消支付完跳转的页面
