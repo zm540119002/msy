@@ -176,6 +176,7 @@ class weixinpay{
         $input->SetTrade_type("MWEB");				//支付类型
         $order2 = \WxPayApi::unifiedOrder($input);	//统一下单
         $url = $order2['mweb_url'];
+        print_r($url);exit;
         $url = $url.'&redirect_url='.$payInfo['success_url'];//拼接支付完成后跳转的页面redirect_url
         print_r($url);exit;
         $html = <<<EOF
