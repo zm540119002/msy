@@ -95,6 +95,7 @@ function edit(config){
     var index = layer.open({
         type:1,
         title: config.title,
+        className:'addressListLayer',
         // content: config.url,
         success:function(){
             $.ajax({
@@ -113,6 +114,7 @@ function edit(config){
                     // if(data.status==0) {
                     //     dialog.error(data.info);
                     // }
+                    $('.addressListLayer').append(data);
                     console.log(data);
                 }
             });
