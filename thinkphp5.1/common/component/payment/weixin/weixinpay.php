@@ -20,10 +20,12 @@ class weixinpay{
      * @param $backUrl
      */
     public static function wxPay($payInfo){
-        print_r($payInfo);exit;
+
         if (!isPhoneSide()) {//pc端微信扫码支付
             return weixinpay::pc_pay($payInfo);
-        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
+        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
+            //手机端非微信浏览器
+            echo 55;exit;
             return weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
             return weixinpay::getJSAPI($payInfo);
