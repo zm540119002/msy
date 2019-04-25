@@ -7,7 +7,6 @@ class Payment extends \common\controller\Base {
     {
         if(request()->isPost()){
             $postData = input('post.');
-            print_r($postData);exit;
             $systemId = $postData['system_id'];
             $paymentType = $postData['payment_type'];
             $sn = $postData['sn'];
@@ -32,7 +31,6 @@ class Payment extends \common\controller\Base {
             $attach = json_encode($attach);
             $jump_url =config('custom.system_id')[$systemId]['jump_url'];
             $return_url = config('wx_config.return_url');
-            $payOpenId = session('open_id');
             $payInfo = [
                 'sn'=>$info['sn'],
                 'product'=>$info['id'],
@@ -41,8 +39,8 @@ class Payment extends \common\controller\Base {
                 'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 'notify_url'=>config('wx_config.notify_url'),
                 'attach'=>$attach,
-                'payOpenId'=>$payOpenId,
             ];
+            print_r($payInfo);exit;
             switch($info['payment_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
