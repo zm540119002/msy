@@ -7,28 +7,27 @@ use function GuzzleHttp\Promise\inspect;
 class Payment extends \common\controller\Base {
 
     // 确定支付页
-
     public function toPay()
     {
         if(request()->isPost()){
-//            $modelOrder = new \app\index\model\Order();
-//            $systemId = input('post.system_id',0,'int');
-//            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
-//            $orderSn = input('post.order_sn',null,'sting');
-//            $config = [
-//                'where' => [
-//                    ['o.status', '=', 0],
-//                    ['o.sn', '=', $orderSn],
-//                ],'field' => [
-//                    'o.id', 'o.sn', 'o.amount','o.actually_amount',
-//                    'o.user_id',
-//                ],
-//            ];
-//            $orderInfo = $modelOrder->getInfo($config);
-//            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
-//                return errorMsg('订单不存在或金额不能为0',['code'=>1]);
-//            }
-            $systemId = 1;
+            $postData = input('post.');
+            $systemId = $postData['system_id'];
+            $orderSn = $postData['order_sn'];
+            $modelOrder = new \app\index\model\Order();
+            $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
+            $config = [
+                'where' => [
+                    ['o.status', '=', 0],
+                    ['o.sn', '=', $orderSn],
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.amount','o.actually_amount','payment_code',
+                    'o.user_id',
+                ],
+            ];
+            $orderInfo = $modelOrder->getInfo($config);
+            if(empty($orderInfo) OR !$orderInfo['actually_amount']){
+                return errorMsg('订单不存在或金额不能为0',['code'=>1]);
+            }
             $attach = [
                 'system_id' =>$systemId,
             ];
@@ -37,19 +36,16 @@ class Payment extends \common\controller\Base {
             $return_url = config('wx_config.return_url');
             $payOpenId = session('open_id');
             $payInfo = [
-                //'sn'=>$orderInfo['sn'],
-                //'product'=>$orderInfo['id'],
-                //'actually_amount'=>$orderInfo['actually_amount'],
-                'sn'=>generateSN(),
-                'product'=>5,
-                'actually_amount'=>0.01,
+                'sn'=>$orderInfo['sn'],
+                'product'=>$orderInfo['id'],
+                'actually_amount'=>$orderInfo['actually_amount'],
                 'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                 'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 'notify_url'=>config('wx_config.notify_url'),
                 'attach'=>$attach,
                 'payOpenId'=>$payOpenId,
             ];
-            switch(2){
+            switch($orderInfo['payment_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
@@ -132,7 +128,20 @@ class Payment extends \common\controller\Base {
             }
             $this->assign('orderInfo', $orderInfo);
             //判断为微信支付，并且为微信浏览器
-            if($orderInfo['payment_code'] ==1 && isWxBrowser()){
+            if($orderInfo['payment_code'] ==1){
+                if (!isPhoneSide()) {//pc端微信扫码支付
+                    $this ->assign('browser_type',1);
+                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
+                    $this ->assign('browser_type',2);
+                }else{//微信浏览器(手机端)
+                    $this ->assign('browser_type',3);
+                    $payOpenId = session('open_id');
+                    if(!$payOpenId){
+                        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                        $payOpenId  = $tools->getOpenid();
+                        session('open_id',$payOpenId);
+                    }
+                }
                 $this->assign('isWxBrowser',1);
                 //自定义参数，微信支付回调原样返回
                 $attach = [
@@ -141,12 +150,7 @@ class Payment extends \common\controller\Base {
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'];
                 $return_url = config('wx_config.return_url');
-                $payOpenId = session('open_id');
-                if(!$payOpenId){
-                    $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                    $payOpenId  = $tools->getOpenid();
-                    session('open_id',$payOpenId);
-                }
+
                 $payInfo = [
                     'sn'=>$orderInfo['sn'],
                     'product'=>$orderInfo['id'],
@@ -158,9 +162,8 @@ class Payment extends \common\controller\Base {
                     'payOpenId'=>$payOpenId,
                 ];
                 $wxPay = new \common\component\payment\weixin\weixinpay;
-                $jsApiParameters   = $wxPay->wxPay($payInfo);
+                $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
-
             }
             return $this->fetch();
         }
