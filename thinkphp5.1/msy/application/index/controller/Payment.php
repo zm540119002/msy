@@ -6,6 +6,7 @@ class Payment extends \common\controller\Base {
     public function toPay()
     {
         if(request()->isPost()){
+            print_r(input());exit;
             $postData = input('post.');
             $systemId = $postData['system_id'];
             $paymentType = $postData['payment_type'];
@@ -208,7 +209,7 @@ class Payment extends \common\controller\Base {
         ];
         return  $model->getInfo($config);
     }
-    
+
    //支付完跳转的页面
     public function payComplete(){
         return $this->fetch();
