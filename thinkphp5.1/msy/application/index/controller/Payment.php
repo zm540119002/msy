@@ -247,8 +247,12 @@ class Payment extends \common\controller\Base {
             $order['actually_amount'] = $data['total_fee']/100;
             $order['payment_code'] = 0;
             $order['pay_sn'] = $data['transaction_id'];
+            if($attach['payment_type'] == 1){
+                $this->setOrderPayStatus($order);
+            }elseif($attach['payment_type'] == 2){
+                $this->setWalletDetaiPayStatus($order);
+            }
 
-            $this->setOrderPayStatus($order);
         }
     }
 
@@ -272,7 +276,6 @@ class Payment extends \common\controller\Base {
 
         $orderInfo = $modelOrder->getInfo($condition);
         if($orderInfo){
-
             // 金额判断
             if($orderInfo['amount']!=$info['actually_amount']){
                 $msg = '回调的金额和订单的金额不符';
@@ -301,7 +304,55 @@ class Payment extends \common\controller\Base {
                 \think\facade\Log::save();
             }
         }
+    }
+    /**
+     * 更新充值支付成功后的信息
+     * @param $systemId int 平台代码
+     * @param $orderSn string 订单号
+     */
+    private function setRechargePayStatus($info){
+        $modelWalletDetail= new \app\index\model\WalletDetail();
+        $modelWalletDetail ->connection = config('custom.system_id')[$info['system_id']]['db'];
+        $modelWallet = new \app\index\model\Wallet();
+        $modelWallet ->connection = config('custom.system_id')[$info['system_id']]['db'];
+        $condition = [
+            'where' => [
+                ['status', '=', 0],
+                ['sn', '=', $info['sn']],
+                ['recharge_status', '=', 1],
+            ]
+        ];
 
+        $walletDetailInfo = $modelWalletDetail->getInfo($condition);
+        if($walletDetailInfo){
+            // 金额判断
+            if($walletDetailInfo['amount']!=$info['actually_amount']){
+                $msg = '回调的金额和订单的金额不符';
+
+            }else{
+                $data = [
+                    'recharge_status'=>2,                              // 订单状态
+                    'actually_amount'=>$info['actually_amount'],    // 实际支付金额
+                    'payment_time'=>time(),
+                    'payment_code'=>$info['payment_code'],          // 支付方式
+                    'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+                ];
+                $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
+                if(!$result){
+                    $msg = '订单支付更新失败';
+
+                }else{
+                    echo 'SUCCESS';
+                }
+            }
+
+            // 记录日志
+            if(isset($msg)){
+                \think\facade\Log::init(['path' => './logs/pay/']);
+                \think\facade\Log::error($msg,$info);
+                \think\facade\Log::save();
+            }
+        }
     }
 
 
