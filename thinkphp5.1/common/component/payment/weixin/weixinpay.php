@@ -57,7 +57,6 @@ class weixinpay{
             $tools = new \JsApiPay();
             $jsApiParameters = $tools->GetJsApiParameters($order);
             return $jsApiParameters;
-            //return true;
         } catch(\Exception $e) {
             //\Log::ERROR(json_encode($e));
             return $e->getMessage();
