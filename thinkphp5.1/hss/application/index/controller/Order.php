@@ -278,6 +278,7 @@ class Order extends \common\controller\UserBase
         $config=[
             'where'=>[
                 ['o.status', '=', 0],
+                ['o.order_status', '<>', 0],
                 ['o.user_id', '=', $this->user['id']],
                 ['o.sn', '=', $orderSn],
             ],
@@ -316,15 +317,16 @@ class Order extends \common\controller\UserBase
         }
         $info['goods_list'] = $goodsList;
         $info['goods_num'] = $goodsNum;
+
         $this->assign('info',$info);
-        $configFooter = [];
+
+        // 底部按钮
+        // 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
         switch ($info['order_status'])
         {
-            /*
-             * 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
-             */
             case "1":
-                $configFooter = [5];
+                //$configFooter = [5];
+                $configFooter = [0,111,11];
                 break;
             case "2":
                 $configFooter = [12];
@@ -342,7 +344,7 @@ class Order extends \common\controller\UserBase
                 $configFooter = [];
                 break;
             default:
-
+                $configFooter = [];
         }
 
         $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
