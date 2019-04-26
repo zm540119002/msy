@@ -249,8 +249,8 @@ class Payment extends \common\controller\Base {
             }elseif($attach['payment_type'] == 2){
                 $this->setRechargePayStatus($order);
             }
-
         }
+
     }
 
     /**
