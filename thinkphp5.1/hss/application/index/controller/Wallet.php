@@ -65,6 +65,7 @@ class Wallet extends Base {
             'sn'=>$walletDetailSn,
             'user_id'=>$this->user['id'],
             'amount'=>$amount,
+            'actually_amount'=>$amount, // 还没有其它的业务 暂时先用$amount
             'create_time'=>time(),
             'payment_code'=>$payCode,
         ];

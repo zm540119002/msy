@@ -31,7 +31,7 @@ class Address extends Base{
      * 获取地址列表
      * @param int $user_id 用户id
      */
-	public function getDataList($user_id){
+	public function getDataList($user_id,$id=''){
         $condition = [
             'where' => [
                 ['a.status', '=', 0],
@@ -39,7 +39,17 @@ class Address extends Base{
             ],
         ];
 
-        return $this ->getList($condition);
+        if($id!=''){
+            $condition['where'][] = ['a.id','=', $id];
+            return $this->getInfo($condition);
+
+        }else{
+            return $this ->getList($condition);
+        }
+
+
+
+
 
         if($address && $default){
             $addressList = [];
