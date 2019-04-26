@@ -2,7 +2,10 @@
 namespace app\index\controller;
 
 class Payment extends \common\controller\Base {
-    // 确定支付页
+
+    /**
+     * @return mixed // 确定支付页
+     */
     public function toPay()
     {
         if(request()->isPost()){
@@ -57,48 +60,6 @@ class Payment extends \common\controller\Base {
                     $model = new \common\component\payment\unionpay\unionpay;
                     $model->unionPay($payInfo);
                     break;
-                case 4 : // 钱包
-//                    if ($orderInfo['order_status'] > 1) {
-//                        return errorMsg('订单已处理',['code'=>1]);
-//                    }
-//                    $modelWallet = new \app\index\model\Wallet();
-//                    $config = [
-//                        'where'=>[
-//                            ['status', '=', 0],
-//                            ['user_id', '=', $orderInfo['user_id']],
-//                        ]
-//                    ];
-//                    $walletInfo = $modelWallet->getInfo($config);
-//                    if($walletInfo['amount'] < $orderInfo['actually_amount']){
-//                        $modelOrder->rollback();
-//                        //返回状态给微信服务器
-//                        return errorMsg('余额不够',['code'=>2]);
-//                    }
-//                    $modelOrder ->startTrans();
-//                    $modelWalletDetail = new \app\index\model\WalletDetail();
-//                    $orderInfo['pay_sn'] = generateSN();
-//                    $orderInfo['payment_time'] = time();
-//                    $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
-//                    if(!$res['status'] ){
-//                        $modelOrder->rollback();
-//                        //返回状态给微信服务器
-//                        return errorMsg('失败');
-//                    }
-//                    $data = [
-//                        'payment_code'=>4,
-//                        'pay_sn'=> $orderInfo['pay_sn'],
-//                        'payment_time'=> $orderInfo['payment_time'],
-//                        'order_sn'=> $orderInfo['sn'],
-//                    ];
-//                    $res = $modelOrder->orderHandle($data, $orderInfo);
-//                    if(!$res['status']){
-//                        $modelOrder->rollback();
-//                        //返回状态给微信服务器
-//                        return errorMsg('失败');
-//                    }
-//                    $modelOrder->commit();
-//                    return successMsg('成功');
-                    break;
             }
             if(isset($msg)){
                 $this -> error($msg);
@@ -106,7 +67,7 @@ class Payment extends \common\controller\Base {
         }else{
             $systemId = input('system_id',0,'int');
             $this->assign('system_id',$systemId);
-            //1:订单支付 2：充值支付
+            //$paymentType 1:订单支付 2：充值支付
             $paymentType = input('payment_type',0,'int');
             $this->assign('payment_type',$paymentType);
             if(!in_array($paymentType,config('custom.payment_types'))){
@@ -131,9 +92,8 @@ class Payment extends \common\controller\Base {
                 if (!isPhoneSide()) {//pc端微信扫码支付
                     $this ->assign('browser_type',1);
                 }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
+                    //手机端非微信浏览器
                     return $this->fetch();
-//                    //手机端非微信浏览器
-//                    $this ->assign('browser_type',2);
                 }else{//微信浏览器(手机端)
                     $this ->assign('browser_type',3);
                     $payOpenId = session('open_id');
@@ -174,7 +134,6 @@ class Payment extends \common\controller\Base {
             return $this->fetch();
         }
     }
-
     /**
      * @param $systemId
      * @return array|\PDOStatement|string|\think\Model|null
@@ -194,11 +153,10 @@ class Payment extends \common\controller\Base {
         ];
         return  $model->getInfo($config);
     }
-
-    /**
-     * @param $systemId
+    /**获取订单信息
+     * @param $systemId 平台系统id 根据此参数连接数据库
+     * @param $sn 订单sn
      * @return array|\PDOStatement|string|\think\Model|null
-     * 获取订单信息
      */
     private function getWalletDetailInfo($systemId,$sn){
         $model = new \app\index\model\WalletDetail();
@@ -251,13 +209,9 @@ class Payment extends \common\controller\Base {
                 $this->setRechargePayStatus($order);
             }
         }
-
     }
-
     /**
-     * 更新订单支付成功后的信息
-     * @param $systemId int 平台代码
-     * @param $orderSn string 订单号
+     * @param $info 回调信息
      */
     private function setOrderPayStatus($info){
         $modelOrder = new \app\index\model\Order();
@@ -303,12 +257,9 @@ class Payment extends \common\controller\Base {
         }
         echo 'SUCCESS';
     }
-    //写支付回调 error信息
 
     /**
-     * 更新充值支付成功后的信息
-     * @param $systemId int 平台代码
-     * @param $orderSn string 订单号
+     * @param $info 回调信息
      */
     private function setRechargePayStatus($info){
         $modelWalletDetail= new \app\index\model\WalletDetail();
@@ -372,7 +323,7 @@ class Payment extends \common\controller\Base {
 
     }
     /**
-     * @param $path 保存路径
+     * 支付订单 错误日志记录
      * @param $msg 错误信息
      * @param $info 订单信息
      */
@@ -381,5 +332,4 @@ class Payment extends \common\controller\Base {
         \think\facade\Log::error($msg,$info);
         \think\facade\Log::save();
     }
-
 }
