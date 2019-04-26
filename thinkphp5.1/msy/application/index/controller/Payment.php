@@ -232,6 +232,7 @@ class Payment extends \common\controller\Base {
     // 微信支付回调处理
     /*
      * 回调处理，修改信息，通知，记录日志
+     * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
         $wxPay = new \common\component\payment\weixin\weixinpay;
