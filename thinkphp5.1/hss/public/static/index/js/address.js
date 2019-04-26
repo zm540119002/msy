@@ -6,9 +6,7 @@ $(function(){
     $(document).ready(function() {
         var data=$('.address_info .consigneeInfo').serializeObject();
 
-        if(data.length==0){
-            console.log(data);
-            return false;
+        if(!$.isEmptyObject(data)){
             var region = [];
             region.push(data.province);
             region.push(data.city);
