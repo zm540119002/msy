@@ -273,7 +273,6 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($condition);
-        print_r($orderInfo);
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
@@ -287,12 +286,9 @@ class Payment extends \common\controller\Base {
         }
         $data = [
             'order_status'=>2,                              // 订单状态
-            'actually_amount'=>$info['actually_amount'],    // 实际支付金额
             'payment_time'=>time(),
-            'payment_code'=>$info['payment_code'],          // 支付方式
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
         ];
-        print_r($data);exit;
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -344,10 +340,15 @@ class Payment extends \common\controller\Base {
         $modelWalletDetail ->startTrans();
         $data = [
             'recharge_status'=>2,                              // 订单状态
-            'actually_amount'=>$info['actually_amount'],    // 实际支付金额
             'payment_time'=>time(),
-            'payment_code'=>$info['payment_code'],          // 支付方式
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+        ];
+        $condition = [
+            'where' => [
+                ['status', '=', 0],
+                ['sn', '=', $info['sn']],
+                ['recharge_status', '=', 1],
+            ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
         if(!$result){
