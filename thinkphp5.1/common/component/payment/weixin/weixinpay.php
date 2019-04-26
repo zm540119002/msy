@@ -227,7 +227,7 @@ EOF;
             //获取通知的数据
             //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
             $xml = file_get_contents('php://input');
-            file_put_contents('a.tex',$xml);
+            file_put_contents('a.json',$xml);
             return false;
             //$xml  = file_get_contents('./xml1.json');
             $data = \WxPayResults::Init($xml);
