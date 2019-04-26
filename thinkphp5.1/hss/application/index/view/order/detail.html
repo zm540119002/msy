@@ -57,6 +57,8 @@
 
         {if $info.order_status == 1}
             {include file="template/address_info.html" /}
+            {include file="template/settlement_method.html" /}
+
         {else /}
             <!-- 物流信息 -->
             <div class="separation-line content-padding">
@@ -108,8 +110,6 @@
 {/block}
 
 {block name="script"}
-
-<script type="text/javascript" src="index_js/footerCart.js"></script>
 
 <script type="text/javascript" src="index_js/order.js"></script>
 <script src="public_js/jquery.area.js"></script>
