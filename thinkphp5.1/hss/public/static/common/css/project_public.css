@@ -5604,7 +5604,7 @@ ul.info_list li{
 }
 .addressLayer .layui-m-layercont,
 .setBrandLayer .layui-m-layercont{
-    height:450px;
+    height:600px;
     overflow-x:hidden;
     overflow-y:auto;
 }
