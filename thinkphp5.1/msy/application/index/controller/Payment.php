@@ -273,7 +273,6 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($condition);
-        print_r($orderInfo);exit;
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
@@ -292,7 +291,15 @@ class Payment extends \common\controller\Base {
             'payment_code'=>$info['payment_code'],          // 支付方式
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
         ];
+        $condition = [
+            'where' => [
+                ['status', '=', 0],
+                ['sn', '=', $info['sn']],
+                ['order_status', '=', 1],
+            ],
+        ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition);
+        print_r($result);exit;
         if(!$result){
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
