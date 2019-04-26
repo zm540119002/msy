@@ -114,7 +114,6 @@ class Order extends \common\controller\UserBase
                 $modelOrder ->rollback();
                 return errorMsg('失败');
             }
-
 /*            $modelOrderDetail = new \app\index\model\OrderDetail();
             $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
             if (!count($res)) {
@@ -163,7 +162,7 @@ class Order extends \common\controller\UserBase
                     ['order_detail od','od.father_order_id = o.id','left'],
                     ['goods g','g.id = od.goods_id','left']
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount',
+                    'o.id', 'o.sn', 'o.amount','o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address',
                     'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type','od.brand_id','od.brand_name','od.id as order_detail_id',
                     'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
                 ],
@@ -171,28 +170,23 @@ class Order extends \common\controller\UserBase
             $orderGoodsList = $modelOrder->getList($config);
             $this ->assign('orderGoodsList',$orderGoodsList);
 
-            //地址
-            $modelAddress =  new \common\model\Address();
-            $config = [
-                'where' => [
-                    ['a.status', '=', 0],
-                    ['a.user_id', '=', $this->user['id']],
-                ],
-            ];
-            $addressList = $modelAddress ->getList($config);
-            $defaultAddress = [];
-            foreach ($addressList as &$addressInfo){
-                if($addressInfo['is_default'] == 1){
-                    $defaultAddress = $addressInfo;
-                    break;
-                }
-            }
-            if(empty($defaultAddress)){
-                $defaultAddress = reset($addressList);
-            }
+            // 显示地址
+            $orderInfo = reset($orderGoodsList);
+            if( !empty($orderInfo['mobile']) && !empty($orderInfo['consignee']) ){
+                $addressInfo = $orderInfo;
 
-            $this->assign('defaultAddress', $defaultAddress);
-            $this->assign('addressList', $addressList);
+            }else{
+                $modelAddress =  new \common\model\Address();
+
+                $condition = [
+                    'where' => [
+                        ['a.user_id','=',$this->user['id']],
+                        ['a.is_default','=',1]
+                    ]
+                ];
+                $addressInfo = $modelAddress->getAddressDataList($condition,'info');
+            }
+            $this->assign('defaultAddress', $addressInfo);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);

@@ -136,15 +136,24 @@ class Address extends \common\controller\UserBase {
 
     }
 
-    //
-    public function getList(){
+    /**
+     * 获取地址列表  弹窗
+     */
+    public function _popGetList(){
 
         $model= new \common\model\Address();
-        $data = $model->getDataList($this->user['id']);
+
+        $condition = [
+            'where' => [
+                ['a.user_id','=',$this->user['id']],
+            ]
+        ];
+        $data = $model->getAddressDataList($condition);
 
         $this->assign('addressList',$data);
 
-        return $this->fetch();
+        return $this->fetch('pop_list');
     }
+
 
 }

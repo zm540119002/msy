@@ -1,25 +1,36 @@
 
 $(function(){
     $('.edit_operate').find('.address_edit').hide();
-    if(!$.isEmptyObject(addressList)){
+
+    // id转换成字符地址
+    $(document).ready(function() {
         var data=$('.address_info .consigneeInfo').serializeObject();
         var region = [];
         region.push(data.province);
         region.push(data.city);
         region.push(data.area);
         $('.list_area_address').setArea(region);
-    }
-    //添加收货人地址
+    });
+
+    // 添加收货地址
     $('body').on('click','.add_address_1',function () {
         var title='添加新的收货地址';
         addressLayer(title);
     });
 
-    // 选择地址
+    // 修改地址
+    $('body').on('click','.address_edit',function () {
+        var title='修改地址';
+        var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
+
+        addressLayer(title,data);
+    });
+
+    // 显示地址列表&&选择地址
     $('body').on('click','.select_address',function () {
-        // 获取地址列表
+        var url = module + 'Address/_popGetList';
         $.ajax({
-            url: module + 'Address/getList',
+            url: url,
             data: '',
             type: 'post',
             beforeSend: function(){
@@ -37,63 +48,27 @@ $(function(){
                     content: data,
                     style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
                     success:function(){
+                        $(".item_addr .consigneeInfo").each(function(){
+                            var _this = $(this);
+                            var province = _this.find('input[name="province"]').val();
+                            var city     = _this.find('input[name="city"]').val();
+                            var area     = _this.find('input[name="area"]').val();
 
+                            var region = [];
+                            region.push(province);
+                            region.push(city);
+                            region.push(area);
+                            _this.prev().find('span').setArea(region);
+                        });
+                        intProvince();
                     }
                 });
             }
         });
 
-/*
-        var delivery_address=$('.delivery_address').html();
-        layer.open({
-            title:['选择收货地址','border-bottom:1px solid #d9d9d9;'],
-            type:1,
-            anim:'up',
-            className:'addressLayer',
-            content:delivery_address,
-            btn:['新增收货地址'],
-            success:function(){
-                $('.addressLayer .item_info').each(function(index,val){
-                    //省市区初始化
-                    var _this=$(this);
-                    var data=_this.find('.consigneeInfo').serializeObject();
-                    var region = [];
-                    region.push(data.province);
-                    region.push(data.city);
-                    region.push(data.area);
-                    _this.find('.area_address').setArea(region);
-                    $('.addressLayer').find('.select_address').hide();
-                    $('.edit_operate').find('.address_edit').show();
-                    _this.on('click',function(){
-                        _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-                        var data=_this.parents('.item_addr').clone();
-                        $('#address_info').find('.item_addr').remove();
-                        $('#address_info').append(data);
-                        $('#address_info').find('.select_address').show();
-                        $('#address_info').find('.address_edit').hide();
-                        setTimeout(function(){
-                            layer.closeAll();
-                        },1000)
-                        return false;
-                    })
-                });
-
-            },
-            yes:function(index){
-                addressLayer('添加新的收货地址');
-                layer.close(index);
-            }
-        })*/
     });
 
-
-    //修改地址
-    $('body').on('click','.address_edit',function () {
-        var title='修改地址';
-        var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
-        addressLayer(title,data);
-    });
-    //设定默认地址
+    // 设置默认地址
     $('body').on('click','.myswitch',function(){
         if($(this).hasClass('myswitched')){
             $(this).removeClass('myswitched');
@@ -103,10 +78,28 @@ $(function(){
             $(this).attr('data-off',1);
         }
     });
+
+    // 选中地址 修改id,收货人,手机,地址
+    $('body').on('click','.addressLayer .item_info',function(){
+        var _this = $(this);
+        _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+        var data = _this.clone();
+
+        $('#address_info').find('.select_address').show();
+
+        $('#address_info .item_info').replaceWith(data);
+
+        $('#address_info').find('.address_edit').hide();
+
+        setTimeout(function(){
+            layer.closeAll();
+        },1000);
+        return false;
+    })
 });
 
-//新增和修改地址弹窗
 
+//新增和修改地址弹窗
 function addressLayer(title,data){
     var addressInfo=$('.section-address').html();
     layer.open({
@@ -117,6 +110,7 @@ function addressLayer(title,data){
         content:addressInfo,
         btn:['保存','关闭'],
         success:function(){
+            // 写入显示数据
             if(data){
                 $ ('input[name="consignee"]').val(data.layer_consignee);
                 $ ('input[name="mobile"]').val(data.layer_mobile);
@@ -135,8 +129,11 @@ function addressLayer(title,data){
 
         },
         yes:function(index){
+            $('.section-address').empty();
             var area_address =$('.addressLayer .area-address-name').getArea();
             var postData  = $(".addressLayer .address_form").serializeObject();
+            //$('.section-address').html(addressInfo);
+
             var content='';
             if(!postData.consignee){
                 content='请填写收货人姓名';
@@ -151,6 +148,7 @@ function addressLayer(title,data){
                 dialog.error(content);
                 return false;
             }
+
             postData.is_default = $('.addressLayer .myswitch').attr('data-off');
             postData.province = area_address[0];
             postData.city = area_address[1];

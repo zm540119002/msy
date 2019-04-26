@@ -1,8 +1,4 @@
-{extend name="template/base.html" /}
-{block name="css-customize"}
 
-{/block}
-{block name="content"}
 <!--添加收货人信息-->
 <section class="section-address bg-eae pt-5" style="display:none;">
     <form action='#' method="post" class="bg-fff address_form">
@@ -39,6 +35,7 @@
         </div>
     </form>
 </section>
+
 <!--地址列表-->
 <section class="delivery_address">
     <section class="header_title separation-line">
@@ -80,22 +77,9 @@
     </div>
     {/volist}
 </section>
-<!--选择地区弹层-->
-<section id="areaLayer" class="express-area-box" style="display:none;">
-    <header>
-        <h3>选择地区</h3>
-        <a id="backUp" class="back" href="javascript:void(0)" title="返回" style="display: none;"></a>
-        <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-    </header>
-    <article id="areaBox">
-        <ul id="areaList" class="area-list"></ul>
-    </article>
-</section>
-{/block}
-{block name="footer"}
 
-{/block}
 
+<<<<<<< HEAD:thinkphp5.1/hss/application/index/view/address/get_list.html
 {block name="script"}
     <script src="api_common_js/jquery.area.js"></script>
     <script type="text/javascript" src="index_js/address.js"></script>
@@ -105,3 +89,6 @@
         })
     </script>
 {/block}
+=======
+
+>>>>>>> 2995e620ecfa92116c92c8c0c1a1a7cd6bba34b3:thinkphp5.1/hss/application/index/view/address/pop_list.html
