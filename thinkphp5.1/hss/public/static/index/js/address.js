@@ -1,21 +1,55 @@
 
 $(function(){
     $('.edit_operate').find('.address_edit').hide();
-    if(!$.isEmptyObject(addressList)){
-        var data=$('.address_info .consigneeInfo').serializeObject();
-        var region = [];
-        region.push(data.province);
-        region.push(data.city);
-        region.push(data.area);
-        $('.list_area_address').setArea(region);
-    }
+
     //添加收货人地址
-    $('body').on('click','.add_address',function () {
+    $('body').on('click','.add_address_1',function () {
         var title='添加新的收货地址';
         addressLayer(title);
     });
-    //选择地址
+
+    // 选择地址
     $('body').on('click','.select_address',function () {
+        // 获取地址列表
+        $.ajax({
+            url: module + 'Address/getList',
+            data: '',
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+
+            success: function(data){
+                layer.open({
+                    type:1,
+                    className:'addressLayer',
+                    content: data,
+                    style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
+                    success:function(){
+
+                        // 写入对应的地址信息
+                        $(".item_addr .consigneeInfo").each(function(){
+                            var _this = $(this);
+                            var province = _this.find('input[name="province"]').val();
+                            var city     = _this.find('input[name="city"]').val();
+                            var area     = _this.find('input[name="area"]').val();
+
+                            var region = [];
+                            region.push(province);
+                            region.push(city);
+                            region.push(area);
+                            _this.prev().find('span').setArea(region);
+                        });
+                    }
+                });
+            }
+        });
+
+/*
         var delivery_address=$('.delivery_address').html();
         layer.open({
             title:['选择收货地址','border-bottom:1px solid #d9d9d9;'],
@@ -55,14 +89,17 @@ $(function(){
                 addressLayer('添加新的收货地址');
                 layer.close(index);
             }
-        })
+        })*/
     });
+
+
     //修改地址
     $('body').on('click','.address_edit',function () {
         var title='修改地址';
         var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
         addressLayer(title,data);
     });
+
     //设定默认地址
     $('body').on('click','.myswitch',function(){
         if($(this).hasClass('myswitched')){
@@ -73,12 +110,11 @@ $(function(){
             $(this).attr('data-off',1);
         }
     });
-
 });
 
 //新增和修改地址弹窗
-var addressInfo=$('.section-address').html();
 function addressLayer(title,data){
+    var addressInfo=$('.section-address').html();
     layer.open({
         title:[title,'border-bottom:1px solid #d9d9d9;'],
         type:1,

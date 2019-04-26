@@ -5,21 +5,22 @@
 <section class="weixin-pc-pay" style="display:none;">
 
 </section>
-<div class="f24 content-padding">
+<div class="f24 content-padding pay_money_wrapper">
     <div class="msy-logo">
-        <img src="api_common_img/ucenter_logo.png" alt="">
+        <img src="api_common_img/msy_logo.png" alt="">
         <p>向美尚云支付</p>
     </div>
     <div class="money-box">
         <span>金额</span>
-        <div class="f28">¥<price>{$orderInfo.actually_amount}</price></div>
+        <div class="f28">¥<price>{$info.actually_amount}</price></div>
     </div>
     {if $browser_type}
-    <a href="javascript:void(0);" class="pay_btn">支付</a>
+    <a href="javascript:void(0);" class="pay pay_btn">支付</a>
     {else /}
     <form action="{:url('Payment/toPay')}" method="post" class="pay_form" id="pay_info">
-        <input type="hidden" name="order_sn" value="{$orderInfo.sn}"/>
-        <input type="hidden" name="system_id" value="{$system_id}" class="system_id"/>
+        <input type="hidden" name="sn" value="{$info.sn}"/>
+        <input type="hidden" name="system_id" value="{$system_id}" />
+        <input type="hidden" name="payment_type" value="{$payment_type}" />
         <input type="submit" value="立即支付" class="pay_btn"/>
     </form>
     {/if}
@@ -31,22 +32,23 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
+    var payInfo = JSON.parse('{$payInfo|raw}');
     //微信内部浏览器
     function jsApiCall()
     {
         WeixinJSBridge.invoke(
-            'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
-            function(res){
-                if(res.err_msg == "get_brand_wcpay_request:ok"){
-                    dialog.success('支付成功！',"{$payInfo['success_url']}");
-                }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
-                    window.history.go(-1);
-                    return false;
-                    dialog.success('取消支付！', window.history.go(-1));
-                }else{
-                    dialog.success('支付失败！',"{$payInfo['fail_url']}");
+                'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
+                function(res){
+                    if(res.err_msg == "get_brand_wcpay_request:ok"){
+                        dialog.success('支付成功！',payInfo.success_url);
+                    }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                        window.history.go(-1);
+                        return false;
+                        dialog.success('取消支付！', window.history.go(-1));
+                    }else{
+                        dialog.success('支付失败！',payInfo.$fail_url);
+                    }
                 }
-            }
         );
     }
     function callpay()
@@ -84,15 +86,9 @@
             })
         }
     }
-
     $(function(){
         $('body').on('click','.pay_btn',function () {
-            var payment_code = '{$orderInfo.payment_code}';
-            if(payment_code != 1){
-                return false;
-            }
             var browser_type = '{$browser_type}';
-            console.log(browser_type);
             if(browser_type == 1){
                 payGQcode();
             }else if(browser_type == 3){

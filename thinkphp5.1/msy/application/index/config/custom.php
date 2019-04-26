@@ -26,13 +26,20 @@ return [
             ],
         '2'=>[
             'db'=>'db_config_mcs',
-            'jump_url'=>'https://mcs.meiishangyun.com/index/Order/manage/order_status/2',
+            'jump_url'=>'https://mcs.meishangyun.com/index/Order/manage/order_status/2',
         ],
         '3'=>[
             'db'=>'db_config_hss',
-            'jump_url'=>'https://hss.meiishangyun.com/index/Order/manage/order_status/2',
+            'jump_url'=>'https://hss.meishangyun.com/index/Order/manage/order_status/2',
         ],
-    ]
+    ],
+    /**
+     * 支付方式 1： 订单支付 2：充值支付
+     */
+    'payment_types'=>[
+        'order'=>1,
+        'recharge'=>2
+    ],
 
 ];
 

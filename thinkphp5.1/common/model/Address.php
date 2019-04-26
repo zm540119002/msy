@@ -27,4 +27,34 @@ class Address extends Base{
           
 	}
 
+    /**
+     * 获取地址列表
+     * @param int $user_id 用户id
+     */
+	public function getDataList($user_id){
+        $condition = [
+            'where' => [
+                ['a.status', '=', 0],
+                ['a.user_id','=', $user_id],
+            ],
+        ];
+
+        return $this ->getList($condition);
+
+        if($address && $default){
+            $addressList = [];
+            foreach ($address as $key => $Info){
+                if($Info['is_default'] == 1){
+                    $addressList['default'] = $address[$key];
+                    break;
+                }
+            }
+            $addressList['list'] = $address;
+            return $addressList;
+
+        }else{
+            return $address;
+        }
+    }
+
 }

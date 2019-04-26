@@ -20,9 +20,11 @@ class weixinpay{
      * @param $backUrl
      */
     public static function wxPay($payInfo){
+
         if (!isPhoneSide()) {//pc端微信扫码支付
             return weixinpay::pc_pay($payInfo);
-        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){//手机端非微信浏览器
+        }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
+            //手机端非微信浏览器
             return weixinpay::h5_pay($payInfo);
         }else{//微信浏览器(手机端)
             return weixinpay::getJSAPI($payInfo);
@@ -50,12 +52,11 @@ class weixinpay{
             $input->SetGoods_tag("test3");
             $input->SetNotify_url($payInfo['notify_url']);                //支付回调验证地址
             $input->SetTrade_type("JSAPI");				                  //支付类型
-            $input->SetOpenid($payInfo['payOpenId']);					  //用户openID
+            $input->SetOpenid($payInfo['open_id']);					  //用户openID
             $order = \WxPayApi::unifiedOrder($input);	                  //统一下单
             $tools = new \JsApiPay();
             $jsApiParameters = $tools->GetJsApiParameters($order);
             return $jsApiParameters;
-            //return true;
         } catch(\Exception $e) {
             //\Log::ERROR(json_encode($e));
             return $e->getMessage();
@@ -72,12 +73,12 @@ class weixinpay{
     {
         $input = new \WxPayUnifiedOrder();
         $input->SetBody("美尚云"); // 商品描述
-        $input->SetAttach("weixin"); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
+        $input->SetAttach($payInfo['attach']); // 附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
         $input->SetOut_trade_no($payInfo['sn']); // 商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
         $input->SetTotal_fee($payInfo['actually_amount']*100); // 订单总金额，单位为分，详见支付金额
         $input->SetNotify_url($payInfo['notify_url']); // 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
         $input->SetTrade_type("NATIVE"); // 交易类型   取值如下：JSAPI，NATIVE，APP，详细说明见参数规定    NATIVE--原生扫码支付
-        $input->SetProduct_id("123456789"); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
+        $input->SetProduct_id($payInfo['product']); // 商品ID trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
         $notify = new \NativePay();
         $result = $notify->GetPayUrl($input); // 获取生成二维码的地址
         $url2 = $result["code_url"];
@@ -107,22 +108,7 @@ class weixinpay{
     //生成支付二维码
     public static function payQRcode($url,$logo=''){
         //生成二维码图片
-//        $object = new \common\component\code\Qrcode();
-//        $qrcodePath = config('uploads');//保存文件路径
-//        $fileName = time().'.png';//保存文件名
-//        $outFile = $qrcodePath.$fileName;
-//        $level = 'L'; //容错级别
-//        $size = 10; //生成图片大小
-//        $frameSize = 2; //边框像素
-//        $saveAndPrint = true;
-//        $object->png($url, $outFile, $level, $size, $frameSize,$saveAndPrint);
-//        return $fileName;
-
-
-        //include 'phpqrcode.php';
-
         $object = new \common\component\code\Qrcode();
-//        $value = 'http://www.cnblogs.com/txw1958/'; //二维码内容
         $value =$url; //二维码内容
         $errorCorrectionLevel = 'L';//容错级别
         $matrixPointSize = 6;//生成图片大小
@@ -132,7 +118,6 @@ class weixinpay{
        //生成二维码图片
         $object->png($value, $outFile, $errorCorrectionLevel, $matrixPointSize, 2,$saveandprint=false);
         $QR = $outFile;//已经生成的原始二维码图
-
         if (!empty($logo)) {
             $QR = imagecreatefromstring(file_get_contents($QR));
             $logo = imagecreatefromstring(file_get_contents($logo));
@@ -164,7 +149,7 @@ class weixinpay{
         //使用统一支付接口
         $input = new \WxPayUnifiedOrder();
         $input->SetBody('美尚云');					//商品名称
-        $input->SetAttach('weixin');					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
+        $input->SetAttach($payInfo['attach']);					//附加参数,可填可不填,填写的话,里边字符串不能出现空格
         $input->SetOut_trade_no($payInfo['sn']);			//订单号
         $input->SetTotal_fee($payInfo['actually_amount'] *100);			//支付金额,单位:分
         $input->SetTime_start(date("YmdHis"));		//支付发起时间

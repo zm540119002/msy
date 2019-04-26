@@ -8,84 +8,29 @@ $(function () {
             type: 1
             ,anim: 'up'
             ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-            className:'settlementmethod bankTransferLayer',
+            className:'settlementMethod bankTransferLayer',
             content: settlementMethod
         });
     });
 
     // 选择支付方式
-    $('body').on('click','.settlementmethod .pay_nav li',function(){
+    $('body').on('click','.settlementMethod .pay_nav li',function(){
         $(this).addClass('current').siblings().removeClass('current');
         var pay_code = $(this).data('paycode');
         $(this).find('input[type="checkbox"]').prop('checked',true);
         $('.pay_code').val(pay_code);
     });
 
-    // 提交订单
-    $('body').on('click','.settlement_btn',function () {
-        _this = $(this);
-        var consignee=$('.consigneeInfo input[name="layer_consignee"]').val();
-        var mobile=$('.consigneeInfo input[name="layer_mobile"]').val();
-        var province=$('.consigneeInfo input[name="province"]').val();
-        var city=$('.consigneeInfo input[name="city"]').val();
-        var area=$('.consigneeInfo input[name="area"]').val();
-        var detail_address=$('.consigneeInfo input[name="layer_detail_address"]').val();
-        var orderId  = $('.order_id').val();
-        var orderSn  = $('.order_sn').val();
-        var payCode = $('.pay_code').val();
-        var addressId= $('.address_id').val();
-        var orderArr =[];
-        $.each($('.goods_order_item li'),function () {
-            _this = $(this);
-            var order_detail_id = _this.data('order_detail_id');
-            var brand_id = _this.find('.brand_name').data('id');
-            var brand_name = _this.find('.brand_name').text();
-            orderArr.push({
-                id:order_detail_id,
-                brand_id:brand_id,
-                brand_name:brand_name,
-            });
-        })
-        if(!addressId){
-            dialog.error('请选择收货地址');
-            return false;
-        }
-        var postData ={
-            order_id:orderId,
-            order_sn:orderSn,
-            pay_code:payCode,
-            consignee:consignee,
-            mobile:mobile,
-            province:province,
-            city:city,
-            area:area,
-            detail_address:detail_address,
-            orderDetail:orderArr
-        };
-        _this.addClass("nodisabled");//防止重复提交
-        var url = module + 'Order/confirmOrder';
-        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function(){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                _this.removeClass("nodisabled");//删除防止重复提交
-                $('.loading').hide();
-                if(data.status){
-                    location.href = data.info;
 
-                }else{
-                    dialog.error('结算提交失败!');
-                }
-            }
-        });
+    // 提交订单带地址
+    $('body').on('click','.settlement_btn',function () {
+
+        var postData = {};
+        postData = addAddress(postData);
+
+        _this = $(this);
+        _this.addClass("nodisabled");//防止重复提交
+        submitOrders(_this,postData);
     });
 
     //再次购买
@@ -120,4 +65,56 @@ $(function () {
     });
 
 });
+
+// 增加订单收货地址信息
+function addAddress(postData) {
+    var addressId= $('.address_id').val();
+    if(!addressId){
+        dialog.error('请选择收货地址');
+        return false;
+    }
+
+    postData.consignee= $('.consigneeInfo input[name="layer_consignee"]').val();
+    postData.mobile   = $('.consigneeInfo input[name="layer_mobile"]').val();
+    postData.province = $('.consigneeInfo input[name="province"]').val();
+    postData.city     = $('.consigneeInfo input[name="city"]').val();
+    postData.area     = $('.consigneeInfo input[name="area"]').val();
+    postData.detail_address = $('.consigneeInfo input[name="layer_detail_address"]').val();
+    postData.address_id = addressId;
+
+    return postData;
+}
+
+// 提交订单
+function submitOrders(_this,postData){
+
+    postData.order_id = $('.order_id').val();
+    postData.order_sn = $('.order_sn').val();
+    postData.pay_code = $('.pay_code').val();
+
+    var url = module + 'Order/confirmOrder';
+
+    $.ajax({
+        url: url,
+        data: postData,
+        type: 'post',
+        beforeSend: function(){
+            $('.loading').show();
+        },
+        error:function(){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            _this.removeClass("nodisabled");//删除防止重复提交
+            $('.loading').hide();
+            if(data.status){
+                location.href = data.info;
+
+            }else{
+                dialog.error('结算提交失败!');
+            }
+        }
+    });
+}
 
