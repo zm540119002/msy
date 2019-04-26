@@ -229,20 +229,17 @@ class Payment extends \common\controller\Base {
     public function payFail(){
         return $this->fetch();
     }
-
-
     // 微信支付回调处理
     /*
      * 回调处理，修改信息，通知，记录日志
      * */
     public function wxPayNotifyCallBack(){
-
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-
         if($data){
             $attach = json_decode($data['attach'],true);
             $order['system_id'] = $attach['system_id'];
+            $order['payment_type'] = $attach['payment_type'];
             $order['sn'] = $data['out_trade_no'];
             $order['actually_amount'] = $data['total_fee']/100;
             $order['payment_code'] = 0;
@@ -250,13 +247,11 @@ class Payment extends \common\controller\Base {
             if($attach['payment_type'] == 1){
                 $this->setOrderPayStatus($order);
             }elseif($attach['payment_type'] == 2){
-                $this->setWalletDetaiPayStatus($order);
+                $this->setRechargePayStatus($order);
             }
 
         }
     }
-
-
 
     /**
      * 更新订单支付成功后的信息
@@ -271,40 +266,39 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $info['sn']],
                 ['order_status', '=', 1],
-            ]
+            ],'field' => [
+                'id', 'sn', 'amount','payment_code','actually_amount',
+                'user_id','order_status'
+            ],
         ];
-
         $orderInfo = $modelOrder->getInfo($condition);
-        if($orderInfo){
-            // 金额判断
-            if($orderInfo['amount']!=$info['actually_amount']){
-                $msg = '回调的金额和订单的金额不符';
-
-            }else{
-                $data = [
-                    'order_status'=>2,                              // 订单状态
-                    'actually_amount'=>$info['actually_amount'],    // 实际支付金额
-                    'payment_time'=>time(),
-                    'payment_code'=>$info['payment_code'],          // 支付方式
-                    'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
-                ];
-                $result = $modelOrder -> allowField(true) -> save($data,$condition);
-                if(!$result){
-                    $msg = '订单支付更新失败';
-
-                }else{
-                    echo 'SUCCESS';
-                }
-            }
-
-            // 记录日志
-            if(isset($msg)){
-                \think\facade\Log::init(['path' => './logs/pay/']);
-                \think\facade\Log::error($msg,$info);
-                \think\facade\Log::save();
-            }
+        if(empty($orderInfo)){
+            return $this->writeLog("数据库没有此订单",$info);
         }
+        //此订单回调已处理过
+        if($orderInfo['order_status']>=2){
+            echo 'SUCCESS';
+            die;
+        }
+        if($orderInfo['amount']!=$info['actually_amount']){
+            return $this->writeLog("订单支付回调的金额和订单的金额不符",$info);
+        }
+        $data = [
+            'order_status'=>2,                              // 订单状态
+            'actually_amount'=>$info['actually_amount'],    // 实际支付金额
+            'payment_time'=>time(),
+            'payment_code'=>$info['payment_code'],          // 支付方式
+            'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+        ];
+        $result = $modelOrder -> allowField(true) -> save($data,$condition);
+        if(!$result){
+            $info['mysql_error'] = $modelOrder->getError();
+            return $this->writeLog("订单支付更新失败",$info);
+        }
+        echo 'SUCCESS';
     }
+    //写支付回调 error信息
+
     /**
      * 更新充值支付成功后的信息
      * @param $systemId int 平台代码
@@ -320,40 +314,61 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $info['sn']],
                 ['recharge_status', '=', 1],
-            ]
+            ],'field' => [
+                'id', 'sn', 'amount','payment_code','type','actually_amount',
+                'user_id',
+            ],
         ];
-
         $walletDetailInfo = $modelWalletDetail->getInfo($condition);
-        if($walletDetailInfo){
-            // 金额判断
-            if($walletDetailInfo['amount']!=$info['actually_amount']){
-                $msg = '回调的金额和订单的金额不符';
-
-            }else{
-                $data = [
-                    'recharge_status'=>2,                              // 订单状态
-                    'actually_amount'=>$info['actually_amount'],    // 实际支付金额
-                    'payment_time'=>time(),
-                    'payment_code'=>$info['payment_code'],          // 支付方式
-                    'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
-                ];
-                $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
-                if(!$result){
-                    $msg = '订单支付更新失败';
-
-                }else{
-                    echo 'SUCCESS';
-                }
-            }
-
-            // 记录日志
-            if(isset($msg)){
-                \think\facade\Log::init(['path' => './logs/pay/']);
-                \think\facade\Log::error($msg,$info);
-                \think\facade\Log::save();
-            }
+        if(empty($walletDetailInfo)){
+            return $this->writeLog("数据库没有此订单",$info);
         }
-    }
+        //此订单回调已处理过
+        if($walletDetailInfo['order_status']>=2){
+            echo 'SUCCESS';
+            die;
+        }
+        if($walletDetailInfo['amount']!=$info['actually_amount']){
+            return $this->writeLog("订单支付回调的金额和订单的金额不符",$info);
+        }
+        $modelWalletDetail ->startTrans();
+        $data = [
+            'recharge_status'=>2,                              // 订单状态
+            'actually_amount'=>$info['actually_amount'],    // 实际支付金额
+            'payment_time'=>time(),
+            'payment_code'=>$info['payment_code'],          // 支付方式
+            'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+        ];
+        $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
+        if(!$result){
+            $modelWalletDetail ->rollback();
+            $info['mysql_error'] = $modelWalletDetail->getError();
+            return $this->writeLog('充值订单支付更新失败',$info);
+        }
+        //充值到钱包表
+        $where = [
+            ['user_id', '=', $walletDetailInfo['user_id']],
+        ];
+        $res = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
+        if($res === false){
+            $modelWallet->rollback();
+            $info['mysql_error'] = $modelWallet->getError();
+            //返回状态给微信服务器
+            return $this->writeLog('充值订单支付更新失败',$info);
+        }
+        $modelWalletDetail->commit();//提交事务
+        echo 'SUCCESS';
 
+    }
+    /**
+     * @param $path 保存路径
+     * @param $msg 错误信息
+     * @param $info 订单信息
+     */
+    private function writeLog($msg='',$info=[]){
+        \think\facade\Log::init(['path' => './logs/pay/']);
+        \think\facade\Log::error($msg,$info);
+        \think\facade\Log::save();
+    }
 
 }
