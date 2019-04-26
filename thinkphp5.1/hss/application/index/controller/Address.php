@@ -149,32 +149,5 @@ class Address extends \common\controller\UserBase {
         return $this->fetch('pop_list');
     }
 
-    /**
-     * 获取地址详细信息 弹窗
-     */
-    public function _popGetInfo(){
-
-
-        if(!request()->isAjax()){
-            return errorMsg('请求失败');
-        }
-
-        $id = input('address_id/d');
-        if(!$id){
-            return errorMsg('参数错误');
-        }
-
-
-        $model= new \common\model\Address();
-        $data = $model->getDataList($this->user['id'],$id);
-
-        $this->assign('addressList',$data);
-
-        return $this->fetch('pop_info');
-
-
-
-    }
-
 
 }

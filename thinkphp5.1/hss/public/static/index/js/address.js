@@ -2,22 +2,13 @@
 $(function(){
     $('.edit_operate').find('.address_edit').hide();
 
-    //添加收货地址
+    // 添加收货地址
     $('body').on('click','.add_address_1',function () {
         var title='添加新的收货地址';
         addressLayer(title);
     });
 
     // 修改地址
-/*    $('body').on('click','.address_edit',function () {
-        var title='修改地址';
-        var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
-/!*        console.log(data);
-        return false;*!/
-        addressLayer(title,data);
-    });*/
-
-    // 显示地址信息
     $('body').on('click','.address_edit',function () {
         var title='修改地址';
         var data=$(this).parents('.item_addr').find('.consigneeInfo').serializeObject();
@@ -25,32 +16,50 @@ $(function(){
         addressLayer(title,data);
     });
 
-    // 显示地址列表
+    // 显示地址列表&&选择地址
     $('body').on('click','.select_address',function () {
 
         var url = module + 'Address/_popGetList';
+        $.ajax({
+            url: url,
+            data: '',
+            type: 'post',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function(){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
 
-        popBackFunction = getAddressList();
-        pop(url);
+            success: function(data){
+                layer.open({
+                    type:1,
+                    className:'addressLayer',
+                    content: data,
+                    style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
+                    success:function(){
+                        $(".item_addr .consigneeInfo").each(function(){
+                            var _this = $(this);
+                            var province = _this.find('input[name="province"]').val();
+                            var city     = _this.find('input[name="city"]').val();
+                            var area     = _this.find('input[name="area"]').val();
 
-        function getAddressList(){
-            $(".item_addr .consigneeInfo").each(function(){
-                var _this = $(this);
-                var province = _this.find('input[name="province"]').val();
-                var city     = _this.find('input[name="city"]').val();
-                var area     = _this.find('input[name="area"]').val();
+                            var region = [];
+                            region.push(province);
+                            region.push(city);
+                            region.push(area);
+                            _this.prev().find('span').setArea(region);
+                        });
+                        intProvince();
+                    }
+                });
+            }
+        });
 
-                var region = [];
-                region.push(province);
-                region.push(city);
-                region.push(area);
-                _this.prev().find('span').setArea(region);
-            });
-            intProvince();
-        }
     });
 
-    // 设定默认地址
+    // 设置默认地址
     $('body').on('click','.myswitch',function(){
         if($(this).hasClass('myswitched')){
             $(this).removeClass('myswitched');
@@ -62,37 +71,22 @@ $(function(){
     });
 
     // 选中地址
+    $('body').on('click','.delivery_address .item_info',function(){
+        var _this = $(this);
+        _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+        var data=_this.parents('.item_addr').clone();
+        $('#address_info').find('.item_addr').remove();
+        $('#address_info').append(data);
+        $('#address_info').find('.select_address').show();
+        $('#address_info').find('.address_edit').hide();
+        setTimeout(function(){
+            layer.closeAll();
+        },1000);
+        //return false;
+    })
 });
 
-// 弹窗
-function pop(url,data){
-    $.ajax({
-        url: url,
-        data: data ? data : '',
-        type: 'post',
-        beforeSend: function(){
-            $('.loading').show();
-        },
-        error:function(){
-            $('.loading').hide();
-            dialog.error('AJAX错误');
-        },
 
-        success: function(data){
-            layer.open({
-                type:1,
-                className:'addressLayer',
-                content: data,
-                style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
-                success:function(){
-                    if(popBackFunction && $.isFunction(popBackFunction) ){
-                        popBackFunction();
-                    }
-                }
-            });
-        }
-    });
-}
 
 //新增和修改地址弹窗
 function addressLayer(title,data){
