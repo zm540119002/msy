@@ -2,6 +2,16 @@
 $(function(){
     $('.edit_operate').find('.address_edit').hide();
 
+    // id转换成字符地址
+    $(document).ready(function() {
+        var data=$('.address_info .consigneeInfo').serializeObject();
+        var region = [];
+        region.push(data.province);
+        region.push(data.city);
+        region.push(data.area);
+        $('.list_area_address').setArea(region);
+    });
+
     // 添加收货地址
     $('body').on('click','.add_address_1',function () {
         var title='添加新的收货地址';
@@ -18,7 +28,6 @@ $(function(){
 
     // 显示地址列表&&选择地址
     $('body').on('click','.select_address',function () {
-
         var url = module + 'Address/_popGetList';
         $.ajax({
             url: url,
@@ -74,27 +83,20 @@ $(function(){
     $('body').on('click','.addressLayer .item_info',function(){
         var _this = $(this);
         _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-/*        _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-        var data=_this.find('.item_info').clone();*/
         var data = _this.clone();
-        console.log(data);
-        //return false;
-        //$('#address_info').find('.item_info').empty();
-
 
         $('#address_info').find('.select_address').show();
-        //$('#address_info .item_info').append(data);
+
         $('#address_info .item_info').replaceWith(data);
-        //$('#address_info').find('.item_info').remove();
 
         $('#address_info').find('.address_edit').hide();
+
         setTimeout(function(){
             layer.closeAll();
         },1000);
         return false;
     })
 });
-
 
 
 //新增和修改地址弹窗

@@ -29,41 +29,16 @@ class Address extends Base{
 
     /**
      * 获取地址列表
-     * @param int $user_id 用户id
      */
-	public function getDataList($user_id,$id=''){
-        $condition = [
-            'where' => [
-                ['a.status', '=', 0],
-                ['a.user_id','=', $user_id],
-            ],
-        ];
+	public function getAddressDataList($condition=[],$type='list'){
 
-        if($id!=''){
-            $condition['where'][] = ['a.id','=', $id];
-            return $this->getInfo($condition);
+        $condition['where'][] = ['a.status', '=', 0];
 
-        }else{
+        if($type=='list'){
             return $this ->getList($condition);
-        }
-
-
-
-
-
-        if($address && $default){
-            $addressList = [];
-            foreach ($address as $key => $Info){
-                if($Info['is_default'] == 1){
-                    $addressList['default'] = $address[$key];
-                    break;
-                }
-            }
-            $addressList['list'] = $address;
-            return $addressList;
 
         }else{
-            return $address;
+            return $this->getInfo($condition);
         }
     }
 
