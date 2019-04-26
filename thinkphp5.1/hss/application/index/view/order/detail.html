@@ -54,24 +54,26 @@
 
             </div>
         </div>
-        <!-- 物流信息 -->
-<!--        <div class="separation-line content-padding">
-            <div>
-                <span>{$info.consignee}</span>
-                <span>{$info.mobile}</span>
-            </div>
-            <div>
-                <span>收货地址：</span>
-                <span>{$info.province}{$info.city}{$info.area}{$info.detail_address}</span>
-            </div>
-            <div>
-                <span>备注：</span>
-                <span>{$info.remark}</span>
-            </div>
-        </div>-->
 
-        {include file="template/address_info.html" /}
-
+        {if $info.order_status == 1}
+            {include file="template/address_info.html" /}
+        {else /}
+            <!-- 物流信息 -->
+            <div class="separation-line content-padding">
+                <div>
+                    <span>{$info.consignee}</span>
+                    <span>{$info.mobile}</span>
+                </div>
+                <div>
+                    <span>收货地址：</span>
+                    <span>{$info.province}{$info.city}{$info.area}{$info.detail_address}</span>
+                </div>
+                <div>
+                    <span>备注：</span>
+                    <span>{$info.remark}</span>
+                </div>
+            </div>
+        {/if}
 
         <!-- 订单商品信息 -->
         <div class="content-padding bottom_padding">
