@@ -107,6 +107,7 @@ $(function(){
 //新增和修改地址弹窗
 function addressLayer(title,data){
     var addressInfo=$('.section-address').html();
+
     layer.open({
         title:[title,'border-bottom:1px solid #d9d9d9;'],
         type:1,

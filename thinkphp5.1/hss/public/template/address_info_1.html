@@ -1,24 +1,24 @@
 <div id="address_info">
-    {notempty name="addressInfo"}
+    {notempty name="defaultAddress"}
     <div class="item_addr address_info" >
         <div class="ia-l"></div>
         <div class="item_info">
-            <input type="hidden" value=" {$addressInfo.id}" class="address_id">
+            <input type="hidden" value=" {$defaultAddress.id}" class="address_id">
             <div class="mt_new">
-                <span class="consignee">{$addressInfo.consignee}</span>
-                <span class="mobile">{$addressInfo.mobile}</span>
+                <span class="consignee">{$defaultAddress.consignee}</span>
+                <span class="mobile">{$defaultAddress.mobile}</span>
             </div>
-            <p class=""><span class="list_area_address"></span><span class="detail_address">{$addressInfo.detail_address}</span></p>
-            <!--<input type="hidden" class="area-address-name" value="" data-province=" {$addressInfo.province}" data-city="{$addressInfo.city}" data-area="{$addressInfo.area}">-->
+            <p class=""><span class="list_area_address"></span><span class="detail_address">{$defaultAddress.detail_address}</span></p>
+            <!--<input type="hidden" class="area-address-name" value="" data-province=" {$defaultAddress.province}" data-city="{$defaultAddress.city}" data-area="{$defaultAddress.area}">-->
             <form style="display:none;" class="consigneeInfo">
-                <input type="hidden" class="" name="province" value="{$addressInfo.province}" />
-                <input type="hidden" class="" name="city" value="{$addressInfo.city}" />
-                <input type="hidden" class="" name="area" value="{$addressInfo.area}" />
-                <input type="hidden" class="" name="layer_id" value="{$addressInfo.id}" />
-                <input type="hidden" class="" name="layer_consignee" value="{$addressInfo.consignee}" />
-                <input type="hidden" class="" name="layer_mobile" value="{$addressInfo.mobile}" />
-                <input type="hidden" class="" name="layer_detail_address" value="{$addressInfo.detail_address}" />
-                <input type="hidden" class="" name="is_default" value="{$addressInfo.is_default}" />
+                <input type="hidden" class="" name="province" value="{$defaultAddress.province}" />
+                <input type="hidden" class="" name="city" value="{$defaultAddress.city}" />
+                <input type="hidden" class="" name="area" value="{$defaultAddress.area}" />
+                <input type="hidden" class="" name="layer_id" value="{$defaultAddress.id}" />
+                <input type="hidden" class="" name="layer_consignee" value="{$defaultAddress.consignee}" />
+                <input type="hidden" class="" name="layer_mobile" value="{$defaultAddress.mobile}" />
+                <input type="hidden" class="" name="layer_detail_address" value="{$defaultAddress.detail_address}" />
+                <input type="hidden" class="" name="is_default" value="{$defaultAddress.is_default}" />
             </form>
         </div>
         <div class="edit_operate">

@@ -170,23 +170,9 @@ class Order extends \common\controller\UserBase
             $orderGoodsList = $modelOrder->getList($config);
             $this ->assign('orderGoodsList',$orderGoodsList);
 
-            // 显示地址
             $orderInfo = reset($orderGoodsList);
-            if( !empty($orderInfo['mobile']) && !empty($orderInfo['consignee']) ){
-                $addressInfo = $orderInfo;
-
-            }else{
-                $modelAddress =  new \common\model\Address();
-
-                $condition = [
-                    'where' => [
-                        ['a.user_id','=',$this->user['id']],
-                        ['a.is_default','=',1]
-                    ]
-                ];
-                $addressInfo = $modelAddress->getAddressDataList($condition,'info');
-            }
-            $this->assign('defaultAddress', $addressInfo);
+            // 显示地址
+            $this->getOrderAddressInfo($orderInfo);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -313,6 +299,9 @@ class Order extends \common\controller\UserBase
         $info['goods_num'] = $goodsNum;
 
         $this->assign('info',$info);
+
+        // 显示的地址信息
+        $this->getOrderAddressInfo($info);
 
         // 底部按钮
         // 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
@@ -480,6 +469,27 @@ class Order extends \common\controller\UserBase
             $this->fetch($pageType);
         }
         return $this->fetch('list_tpl');
+    }
+
+    // 获取订单地址的默认值
+    private function getOrderAddressInfo($orderInfo){
+
+        // 显示地址
+        if( !empty($orderInfo['mobile']) && !empty($orderInfo['consignee']) ){
+            $addressInfo = $orderInfo;
+
+        }else{
+            $modelAddress =  new \common\model\Address();
+
+            $condition = [
+                'where' => [
+                    ['a.user_id','=',$this->user['id']],
+                    ['a.is_default','=',1]
+                ]
+            ];
+            $addressInfo = $modelAddress->getAddressDataList($condition,'info');
+        }
+        $this->assign('addressInfo', $addressInfo);
     }
 
 
