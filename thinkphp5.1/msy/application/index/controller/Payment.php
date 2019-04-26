@@ -273,6 +273,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($condition);
+        print_r($orderInfo);exit;
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
