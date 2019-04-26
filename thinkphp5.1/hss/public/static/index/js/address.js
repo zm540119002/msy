@@ -5,15 +5,20 @@ $(function(){
     // id转换成字符地址
     $(document).ready(function() {
         var data=$('.address_info .consigneeInfo').serializeObject();
-        var region = [];
-        region.push(data.province);
-        region.push(data.city);
-        region.push(data.area);
-        $('.list_area_address').setArea(region);
+
+        if(data.length==0){
+            console.log(data);
+            return false;
+            var region = [];
+            region.push(data.province);
+            region.push(data.city);
+            region.push(data.area);
+            $('.list_area_address').setArea(region);
+        }
     });
 
     // 添加收货地址
-    $('body').on('click','.add_address_1',function () {
+    $('body').on('click','.add_address,.add_address_1',function () {
         var title='添加新的收货地址';
         addressLayer(title);
     });
