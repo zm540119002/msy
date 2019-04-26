@@ -70,19 +70,28 @@ $(function(){
         }
     });
 
-    // 选中地址
-    $('body').on('click','.delivery_address .item_info',function(){
+    // 选中地址 修改id,收货人,手机,地址
+    $('body').on('click','.addressLayer .item_info',function(){
         var _this = $(this);
         _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
-        var data=_this.parents('.item_addr').clone();
-        $('#address_info').find('.item_addr').remove();
-        $('#address_info').append(data);
+/*        _this.parents('.item_addr').addClass('active').siblings().removeClass('active');
+        var data=_this.find('.item_info').clone();*/
+        var data = _this.clone();
+        console.log(data);
+        //return false;
+        //$('#address_info').find('.item_info').empty();
+
+
         $('#address_info').find('.select_address').show();
+        //$('#address_info .item_info').append(data);
+        $('#address_info .item_info').replaceWith(data);
+        //$('#address_info').find('.item_info').remove();
+
         $('#address_info').find('.address_edit').hide();
         setTimeout(function(){
             layer.closeAll();
         },1000);
-        //return false;
+        return false;
     })
 });
 
@@ -137,6 +146,7 @@ function addressLayer(title,data){
                 dialog.error(content);
                 return false;
             }
+
             postData.is_default = $('.addressLayer .myswitch').attr('data-off');
             postData.province = area_address[0];
             postData.city = area_address[1];

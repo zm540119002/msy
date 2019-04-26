@@ -108,13 +108,14 @@ class Order extends \common\controller\UserBase
                 ['id','=',$fatherOrderId],
             ];
 
+
             $res = $modelOrder -> allowField(true) -> save($data,$condition);
 
             if(false === $res){
                 $modelOrder ->rollback();
                 return errorMsg('失败');
             }
-
+            //return $data;
 /*            $modelOrderDetail = new \app\index\model\OrderDetail();
             $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
             if (!count($res)) {
