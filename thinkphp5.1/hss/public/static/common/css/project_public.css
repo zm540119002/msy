@@ -4043,6 +4043,9 @@ input[type=text]::-webkit-focus-inner {
     background-position: 2px -54px;
 }
 .set_default_item .myswitched{background-position: 2px -17px;}
+.addressLayer .delivery_address{
+    padding-bottom:0;
+}
 .delivery_address{padding:0 0 1.5rem;}
 .fill_order_wrapper{
     padding:0 0 0.8rem 0;
