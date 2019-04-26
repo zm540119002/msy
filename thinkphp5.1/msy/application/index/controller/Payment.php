@@ -291,6 +291,7 @@ class Payment extends \common\controller\Base {
             'payment_code'=>$info['payment_code'],          // 支付方式
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
         ];
+        print_r($data);exit;
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -299,7 +300,6 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition);
-        print_r($result);exit;
         if(!$result){
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
