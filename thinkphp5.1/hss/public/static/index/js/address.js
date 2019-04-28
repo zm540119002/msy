@@ -218,9 +218,7 @@ function addressLayer(title,data){
         no:function(){
             //$('.edit_operate').find('.address_edit').hide();
             //layer.closeAll();
-
-            $(this).parents('.layui-m-layer').remove();
-
+            
         }
     })
 }
