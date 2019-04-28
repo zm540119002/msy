@@ -11,7 +11,7 @@ $(function(){
             region.push(data.province);
             region.push(data.city);
             region.push(data.area);
-            $('.list_area_address').setArea(region);
+            $(".list_area_address").setArea(region);
         }
     });
 
@@ -51,7 +51,7 @@ $(function(){
                     content: data,
                     style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:10px 0; border:none;',
                     success:function(){
-                        $(".item_addr .consigneeInfo").each(function(){
+                        $(".delivery_address .consigneeInfo").each(function(){
                             var _this = $(this);
                             var province = _this.find('input[name="province"]').val();
                             var city     = _this.find('input[name="city"]').val();
@@ -63,7 +63,6 @@ $(function(){
                             region.push(area);
                             _this.prev().find('span').setArea(region);
                         });
-                        intProvince();
                     }
                 });
             }
@@ -103,9 +102,8 @@ $(function(){
 
 
 //新增和修改地址弹窗
+var addressInfo=$('.section-address').html();
 function addressLayer(title,data){
-    var addressInfo=$('.section-address').html();
-
     layer.open({
         title:[title,'border-bottom:1px solid #d9d9d9;'],
         type:1,
@@ -115,6 +113,7 @@ function addressLayer(title,data){
         btn:['保存','关闭'],
         success:function(){
             // 写入显示数据
+
             if(data){
                 $ ('input[name="consignee"]').val(data.layer_consignee);
                 $ ('input[name="mobile"]').val(data.layer_mobile);
@@ -129,15 +128,14 @@ function addressLayer(title,data){
                     $('.addressLayer .myswitch').addClass('myswitched');
                     $('.addressLayer .myswitch').attr('data-off',1);
                 }
+
             }
 
         },
         yes:function(index){
             // 获取参数用
-            $('.section-address').empty();
             var area_address =$('.addressLayer .area-address-name').getArea();
             var postData  = $(".addressLayer .address_form").serializeObject();
-            $('.section-address').html(addressInfo);
 
             var content='';
             if(!postData.consignee){
@@ -207,6 +205,7 @@ function addressLayer(title,data){
                             })
                         }
                         layer.closeAll();
+
                     }
                 }
             });
