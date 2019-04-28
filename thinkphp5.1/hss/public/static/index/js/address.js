@@ -133,10 +133,11 @@ function addressLayer(title,data){
 
         },
         yes:function(index){
+            // 获取参数用
             $('.section-address').empty();
             var area_address =$('.addressLayer .area-address-name').getArea();
             var postData  = $(".addressLayer .address_form").serializeObject();
-            //$('.section-address').html(addressInfo);
+            $('.section-address').html(addressInfo);
 
             var content='';
             if(!postData.consignee){

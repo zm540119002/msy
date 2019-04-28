@@ -18,15 +18,6 @@ class Address extends Base{
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_common';
 
-	/**
-	 * 编辑 新增和修改
-	 * @param string $userId
-	 * @return array
-	 */
-	public function editAddress($userId=''){
-          
-	}
-
     /**
      * 获取地址列表
      */
