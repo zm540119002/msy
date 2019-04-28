@@ -483,7 +483,7 @@ class Order extends \common\controller\UserBase
 
             $condition = [
                 'where' => [
-                    ['a.is_default','=',1]
+                    ['is_default','=',1]
                 ]
             ];
             $addressInfo = $modelAddress->getInfo($condition);
