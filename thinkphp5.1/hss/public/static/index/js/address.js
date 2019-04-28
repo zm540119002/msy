@@ -100,12 +100,11 @@ $(function(){
     })
 
     // 关闭层
-    $('body').on('click','.close_layer_pop',function(){
-        layer.close(layer.index);
+    $('body').on('click','.addressLayer .close_layer_pop',function(){
+        $(this).parents('.layui-m-layer').remove();
     });
 
 });
-
 
 //新增和修改地址弹窗
 var addressInfo=$('.section-address').html();
@@ -217,8 +216,11 @@ function addressLayer(title,data){
             });
         },
         no:function(){
-            $('.edit_operate').find('.address_edit').hide();
-            layer.closeAll();
+            //$('.edit_operate').find('.address_edit').hide();
+            //layer.closeAll();
+
+            $(this).parents('.layui-m-layer').remove();
+
         }
     })
 }
