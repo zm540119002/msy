@@ -142,13 +142,7 @@ class Address extends \common\controller\UserBase {
     public function _popGetList(){
 
         $model= new \common\model\Address();
-
-        $condition = [
-            'where' => [
-                ['a.user_id','=',$this->user['id']],
-            ]
-        ];
-        $data = $model->getAddressDataList($condition);
+        $data = $model->getList();
 
         $this->assign('addressList',$data);
 

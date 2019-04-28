@@ -483,12 +483,12 @@ class Order extends \common\controller\UserBase
 
             $condition = [
                 'where' => [
-                    ['a.user_id','=',$this->user['id']],
                     ['a.is_default','=',1]
                 ]
             ];
-            $addressInfo = $modelAddress->getAddressDataList($condition,'info');
+            $addressInfo = $modelAddress->getInfo($condition);
         }
+
         $this->assign('addressInfo', $addressInfo);
     }
 

@@ -98,6 +98,12 @@ $(function(){
         },1000);
         return false;
     })
+
+    // 关闭层
+    $('body').on('click','.close_layer_pop',function(){
+        layer.close(layer.index);
+    });
+
 });
 
 
