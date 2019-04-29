@@ -302,7 +302,8 @@ class Payment extends \common\controller\Base {
             'where' => [
                 ['status', '=', 0],
                 ['sn', '=', $info['sn']],
-                ['recharge_status', '=', 1],
+                ['recharge_status', '=', 0],
+                //['recharge_status', '=', 1],
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
