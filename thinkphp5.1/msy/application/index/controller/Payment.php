@@ -264,6 +264,10 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
+        p($modelOrder->getLastSql());
+        p($condition);
+        p($result);
+        exit;
 
         echo 'SUCCESS';
     }
