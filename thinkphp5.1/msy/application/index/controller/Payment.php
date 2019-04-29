@@ -110,7 +110,7 @@ class Payment extends \common\controller\Base {
                     'payment_type'=>$paymentType
                 ];
                 $attach = json_encode($attach);
-                $jump_url =config('custom.system_id')[$systemId][$paymentType]['jump_url'];
+                $jump_url =config('custom.system_id')[$systemId]['jump_url'][$paymentType];
                 $return_url = config('wx_config.return_url');
                 $payInfo = [
                     'sn'=>$info['sn'],
@@ -127,6 +127,10 @@ class Payment extends \common\controller\Base {
                 $this -> assign('jsApiParameters',$jsApiParameters);
                 $response = [
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+                ];
+                $response = [
+                    'success_url' => $jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 ];
                 $this->assign('payInfo',json_encode($response));
