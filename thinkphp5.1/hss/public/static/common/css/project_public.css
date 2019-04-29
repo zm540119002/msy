@@ -88,6 +88,9 @@ body{
     background:#FF7BAC;
     color: #fff;
 }
+.group_cart_nav.cart_bottom_column{
+    bottom:0.88rem;
+}
 .content-box,.content-padding{
     padding:0.20rem 0.15rem;
 }
@@ -197,6 +200,19 @@ textarea.text_description{
     background: url("../../common/img/icons/back.png") no-repeat center;
     background-size:0.15rem auto;
 }
+.close_layer_pop {
+    position: absolute;
+    left: 0;
+    top: 0.06rem;
+    width: 0.25rem;
+    height: 0.5rem;
+    display: block;
+    margin-left: 5px;
+    background: url(../../common/img/icons/layer_icon.png) no-repeat center;
+    background-size: 3.5rem auto;
+    background-position: 0 -32px;
+}
+
 .set{
     width: 40px;
     height: 42px;
@@ -4043,6 +4059,9 @@ input[type=text]::-webkit-focus-inner {
     background-position: 2px -54px;
 }
 .set_default_item .myswitched{background-position: 2px -17px;}
+.addressLayer .delivery_address{
+    padding-bottom:0;
+}
 .delivery_address{padding:0 0 1.5rem;}
 .fill_order_wrapper{
     padding:0 0 0.8rem 0;
@@ -5601,7 +5620,7 @@ ul.info_list li{
 }
 .addressLayer .layui-m-layercont,
 .setBrandLayer .layui-m-layercont{
-    height:450px;
+    height:600px;
     overflow-x:hidden;
     overflow-y:auto;
 }

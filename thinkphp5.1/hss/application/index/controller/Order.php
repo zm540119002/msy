@@ -115,13 +115,7 @@ class Order extends \common\controller\UserBase
                 return errorMsg('失败');
             }
 
-/*            $modelOrderDetail = new \app\index\model\OrderDetail();
-            $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
-            if (!count($res)) {
-                $modelOrder->rollback();
-                return errorMsg('失败');
-            }*/
-            //根据订单号查询关联的购物车的商品 删除
+            //根据订单号查询关联的购物车的商品
             $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
                 'where' => [
@@ -153,7 +147,7 @@ class Order extends \common\controller\UserBase
 
         }else{
             $modelOrder = new \app\index\model\Order();
-            $orderSn = input('order_sn');
+            $orderSn = input('order_sn/s');
             $config = [
                 'where' => [
                     ['o.status', '=', 0],
@@ -163,52 +157,26 @@ class Order extends \common\controller\UserBase
                     ['order_detail od','od.father_order_id = o.id','left'],
                     ['goods g','g.id = od.goods_id','left']
                 ],'field' => [
-                    'o.id', 'o.sn', 'o.amount',
+                    'o.id', 'o.sn', 'o.amount','o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address',
                     'o.user_id', 'od.goods_id','od.num','od.price','od.buy_type','od.brand_id','od.brand_name','od.id as order_detail_id',
                     'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
                 ],
             ];
             $orderGoodsList = $modelOrder->getList($config);
+            if(empty($orderGoodsList)){
+                $this->error('没有找到该订单');
+            }
+
             $this ->assign('orderGoodsList',$orderGoodsList);
 
-            //地址
-            $modelAddress =  new \common\model\Address();
-            $config = [
-                'where' => [
-                    ['a.status', '=', 0],
-                    ['a.user_id', '=', $this->user['id']],
-                ],
-            ];
-            $addressList = $modelAddress ->getList($config);
-            $defaultAddress = [];
-            foreach ($addressList as &$addressInfo){
-                if($addressInfo['is_default'] == 1){
-                    $defaultAddress = $addressInfo;
-                    break;
-                }
-            }
-            if(empty($defaultAddress)){
-                $defaultAddress = reset($addressList);
-            }
-
-            $this->assign('defaultAddress', $defaultAddress);
-            $this->assign('addressList', $addressList);
+            $orderInfo = reset($orderGoodsList);
+            // 显示地址
+            $this->getOrderAddressInfo($orderInfo);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
-            //钱包
-            $modelWallet = new \app\index\model\Wallet();
-            $config = [
-                'where' => [
-                    ['status', '=', 0],
-                    ['user_id', '=', $this->user['id']],
-                ],'field' => [
-                    'id','amount',
-                ],
-            ];
-            $walletInfo = $modelWallet->getInfo($config);
-            $this->assign('walletInfo', $walletInfo);
+            $this->assignWalletInfo();
 
             return $this->fetch();
         }
@@ -274,7 +242,7 @@ class Order extends \common\controller\UserBase
     public function detail()
     {
         $model = new \app\index\model\Order();
-        $orderSn = input('order_sn');
+        $orderSn = input('order_sn/s');
         $config=[
             'where'=>[
                 ['o.status', '=', 0],
@@ -294,6 +262,11 @@ class Order extends \common\controller\UserBase
             ]
         ];
         $info = $model->getInfo($config);
+
+        if(empty($info)){
+            $this->error('没有找到该订单');
+        }
+
         $info =  $info!=0?$info->toArray():[];
         $modelOrderDetail = new \app\index\model\OrderDetail();
         $config=[
@@ -311,14 +284,23 @@ class Order extends \common\controller\UserBase
 
         ];
         $goodsList = $modelOrderDetail -> getList($config);
-        $goodsNum = 0;
+
+        $info['goods_list']= $goodsList;
+        $info['goods_num'] = array_sum(array_column($goodsList,'num'));
+
+
+/*        $goodsNum = 0;
         foreach ($goodsList as &$goods){
             $goodsNum+=$goods['num'];
         }
         $info['goods_list'] = $goodsList;
-        $info['goods_num'] = $goodsNum;
+        $info['goods_num'] = $goodsNum;*/
+/*        p($info);
+        exit;*/
+        $this->assign('orderInfo',$info);
 
-        $this->assign('info',$info);
+        // 显示的地址信息
+        $this->getOrderAddressInfo($info);
 
         // 底部按钮
         // 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
@@ -486,6 +468,44 @@ class Order extends \common\controller\UserBase
             $this->fetch($pageType);
         }
         return $this->fetch('list_tpl');
+    }
+
+    // 获取订单地址的默认值
+    private function getOrderAddressInfo($orderInfo){
+
+        // 显示地址
+        if( !empty($orderInfo['mobile']) && !empty($orderInfo['consignee']) ){
+            $addressInfo = $orderInfo;
+
+        }else{
+            $modelAddress =  new \common\model\Address();
+
+            $condition = [
+                'where' => [
+                    ['is_default','=',1]
+                ]
+            ];
+            $addressInfo = $modelAddress->getInfo($condition);
+        }
+
+        $this->assign('addressInfo', $addressInfo);
+    }
+
+    // 获取钱包余额
+    private function assignWalletInfo(){
+        //钱包
+        $modelWallet = new \app\index\model\Wallet();
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ],'field' => [
+                'id','amount',
+            ],
+        ]; // 做到这里
+        $walletInfo = $modelWallet->getInfo($config);
+
+        $this->assign('walletInfo', $walletInfo);
     }
 
 

@@ -7,6 +7,10 @@
 </section>
 <div class="f24 content-padding pay_money_wrapper">
     <div class="msy-logo">
+        <p>订单编号</p>
+        <p>{$info.sn}</p>
+    </div>
+    <div class="msy-logo">
         <img src="api_common_img/msy_logo.png" alt="">
         <p>向美尚云支付</p>
     </div>
@@ -40,11 +44,12 @@
                 'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok"){
+           /*             location.href = payInfo.success_url;
+                        return true;*/
                         dialog.success('支付成功！',payInfo.success_url);
                     }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
-                        window.history.go(-1);
+
                         return false;
-                        dialog.success('取消支付！', window.history.go(-1));
                     }else{
                         dialog.success('支付失败！',payInfo.$fail_url);
                     }
@@ -66,7 +71,7 @@
     }
 
     //微信pc端扫码支付
-    function payGQcode(){
+    function weixinPayCode(){
         var code_url = "{$jsApiParameters}";
         if(code_url){
             var imgSrc=uploads+code_url;
@@ -90,7 +95,7 @@
         $('body').on('click','.pay_btn',function () {
             var browser_type = '{$browser_type}';
             if(browser_type == 1){
-                payGQcode();
+                weixinPayCode();
             }else if(browser_type == 3){
                 callpay();
             }else {

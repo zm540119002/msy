@@ -4,6 +4,7 @@ class Address extends \common\controller\UserBase {
     //增加修改地址页面
     public function edit(){
         $model = new \common\model\Address();
+        $model->useGlobalScope(false)->select();
         $userId = $this->user['id'];
         if(request()->isPost()){
             $data = input('post.');
@@ -48,6 +49,7 @@ class Address extends \common\controller\UserBase {
                     ],
                 ];
                 $addressList = $model -> getList($config);
+                $addressList = $model -> getList();
                 if(empty($addressList)){
                     $data['is_default'] = 1;
                 }
@@ -103,13 +105,14 @@ class Address extends \common\controller\UserBase {
     //地址列表
     public function manage(){
         $model = new \common\model\Address();
-        $config = [
+/*        $config = [
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
             ],
         ];
-        $addressList = $model -> getList($config);
+        $addressList = $model -> getList($config);*/
+        $addressList = $model -> getList();
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -124,10 +127,10 @@ class Address extends \common\controller\UserBase {
         $id = input('post.address_id',0,'int');
         $model = new \common\model\Address();
         $condition = [
-            ['user_id','=',$this->user['id']],
             ['id','=',$id],
         ];
         $result = $model -> del($condition);
+
         if($result['status']){
             return successMsg('删除成功');
         }else{
@@ -136,15 +139,25 @@ class Address extends \common\controller\UserBase {
 
     }
 
-    //
-    public function getList(){
+    /**
+     * 获取地址列表  弹窗
+     */
+    public function _popGetList(){
 
         $model= new \common\model\Address();
-        $data = $model->getDataList($this->user['id']);
+
+        $condition = [
+            'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+
+        $data = $model->getList($condition);
 
         $this->assign('addressList',$data);
 
-        return $this->fetch();
+        return $this->fetch('pop_list');
     }
+
 
 }

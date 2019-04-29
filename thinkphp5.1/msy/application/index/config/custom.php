@@ -22,15 +22,24 @@ return [
     'system_id'=>[
         '1'=>[
             'db'=>'db_config_weiya',
-            'jump_url'=>'https://www.worldview.com.cn/index/Order/manage/order_status/2',
+            'jump_url'=>[
+                1 => 'https://www.worldview.com.cn/index/Order/manage/order_status/2',
+                2 => 'https://www.worldview.com.cn/index/Order/manage/order_status/2',
             ],
+        ],
         '2'=>[
             'db'=>'db_config_mcs',
-            'jump_url'=>'https://mcs.meishangyun.com/index/Order/manage/order_status/2',
+            'jump_url'=>[
+                1 => 'https://mcs.meishangyun.com/index/Order/manage/order_status/2',
+                2 => 'https://mcs.meishangyun.com/index/Wallet/index',
+            ],
         ],
         '3'=>[
             'db'=>'db_config_hss',
-            'jump_url'=>'https://hss.meishangyun.com/index/Order/manage/order_status/2',
+            'jump_url'=>[
+                1 => 'https://hss.meishangyun.com/index/Order/manage/order_status/2',
+                2 => 'https://hss.meishangyun.com/index/Wallet/index',
+            ],
         ],
     ],
     /**

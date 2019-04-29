@@ -19,6 +19,7 @@ return [
     // 模板路径
     'view_path'    => '',
     // 模板后缀
+    'tpl_cache' => false, // 是否开启模板编译缓存,设为false则每次都会重新编译
     'view_suffix'  => 'html',
     // 模板文件名分隔符
     'view_depr'    => DIRECTORY_SEPARATOR,

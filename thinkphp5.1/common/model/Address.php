@@ -18,43 +18,11 @@ class Address extends Base{
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_common';
 
-	/**
-	 * 编辑 新增和修改
-	 * @param string $userId
-	 * @return array
-	 */
-	public function editAddress($userId=''){
-          
-	}
-
-    /**
-     * 获取地址列表
-     * @param int $user_id 用户id
-     */
-	public function getDataList($user_id){
-        $condition = [
-            'where' => [
-                ['a.status', '=', 0],
-                ['a.user_id','=', $user_id],
-            ],
-        ];
-
-        return $this ->getList($condition);
-
-        if($address && $default){
-            $addressList = [];
-            foreach ($address as $key => $Info){
-                if($Info['is_default'] == 1){
-                    $addressList['default'] = $address[$key];
-                    break;
-                }
-            }
-            $addressList['list'] = $address;
-            return $addressList;
-
-        }else{
-            return $address;
-        }
+    // 定义全局的查询条件 测试中，看需不需要使用 2019-04-28
+    protected function base($query)
+    {
+        $user = session('user');
+        $query->where('status','=',0);
+        $query->where('user_id',$user['id']);
     }
-
 }
