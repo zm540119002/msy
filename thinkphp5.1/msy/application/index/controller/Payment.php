@@ -207,6 +207,9 @@ class Payment extends \common\controller\Base {
             $order['actually_amount'] = $data['total_fee']/100;
             $order['payment_code'] = 0;
             $order['pay_sn'] = $data['transaction_id'];
+            p($attach);
+            p($order);
+            exit;
             if($attach['payment_type'] == 1){
                 $this->setOrderPayStatus($order);
             }elseif($attach['payment_type'] == 2){
@@ -259,8 +262,7 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
-        p($result);
-        exit;
+
         echo 'SUCCESS';
     }
 
