@@ -231,7 +231,7 @@ EOF;
 
             //file_put_contents('./array.json',json_encode($xml));
 
-            $xml = json_decode(file_get_contents('./array.json'));
+            $xml = json_decode(file_get_contents('./array.json'),true);
             p($xml);
 
             exit;
