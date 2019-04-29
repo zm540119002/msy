@@ -203,8 +203,9 @@ class Payment extends \common\controller\Base {
     public function wxPayNotifyCallBack($data){
         //$wxPay = new \common\component\payment\weixin\weixinpay;
         //$data  = $wxPay->wxNotify();
+        $attach = $data;
         if($data){
-            $attach = json_decode($data['attach'],true);
+            //$attach = json_decode($data['attach'],true);
             $order['system_id'] = $attach['system_id'];
             $order['payment_type'] = $attach['payment_type'];
             $order['sn'] = $data['out_trade_no'];
