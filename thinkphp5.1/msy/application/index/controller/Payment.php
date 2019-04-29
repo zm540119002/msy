@@ -274,7 +274,7 @@ class Payment extends \common\controller\Base {
         $modelWalletDetail= new \app\index\model\WalletDetail();
         $modelWalletDetail ->connection = config('custom.system_id')[2]['db'];
         $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->connection = config('custom.system_id')[$info['system_id']]['db'];
+        $modelWallet ->connection = config('custom.system_id')[2]['db'];
         p($modelWalletDetail->getConfig());
         p($modelWallet->getConfig());
         exit;
