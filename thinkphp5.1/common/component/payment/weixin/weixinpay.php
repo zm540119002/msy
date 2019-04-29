@@ -227,8 +227,8 @@ EOF;
             //获取通知的数据
             //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
             $xml = file_get_contents('php://input');
-/*            $xml = "<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
-<attach><![CDATA[{\"system_id\":\"3\",\"payment_type\":\"1\"}]]></attach>
+            $xml = "<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
+<attach><![CDATA[{\"system_id\":\"3\",\"payment_type\":\"2\"}]]></attach>
 <bank_type><![CDATA[CFT]]></bank_type>
 <cash_fee><![CDATA[1]]></cash_fee>
 <fee_type><![CDATA[CNY]]></fee_type>
@@ -245,7 +245,7 @@ EOF;
 <trade_type><![CDATA[JSAPI]]></trade_type>
 <transaction_id><![CDATA[4200000311201904262051197191]]></transaction_id>
 </xml>
-            ";*/
+            ";
             $data = \WxPayResults::Init($xml);
             if(!$this->Queryorder($data)){
                 //$msg = "订单查询失败";
