@@ -329,6 +329,7 @@ class Payment extends \common\controller\Base {
             return $this->writeLog('充值订单支付更新失败',$info);
         }
         $modelWalletDetail->commit();//提交事务
+        p($modelWalletDetail->getConfig());
         p($modelWallet->getConfig());
         p($info);
         p($modelWallet->getLastSql());
