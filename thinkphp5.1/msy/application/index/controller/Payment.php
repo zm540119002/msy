@@ -275,9 +275,9 @@ class Payment extends \common\controller\Base {
         $modelWallet = new \app\index\model\Wallet();
         $modelWallet ->connection = config('custom.system_id')[$info['system_id']]['db'];
 
-        p($modelWalletDetail);
+/*        p($modelWalletDetail);
         p($modelWallet);
-        exit;
+        exit;*/
         $condition = [
             'where' => [
                 ['status', '=', 0],
