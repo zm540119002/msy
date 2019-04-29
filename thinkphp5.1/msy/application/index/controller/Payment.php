@@ -330,6 +330,7 @@ class Payment extends \common\controller\Base {
         }
         $modelWalletDetail->commit();//提交事务
         p($modelWallet->getConfig());
+        p($info);
         p($modelWallet->getLastSql());
         p($res);
         p($walletDetailInfo);
