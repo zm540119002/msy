@@ -232,12 +232,13 @@ EOF;
             //file_put_contents('./array.json',json_encode($xml));
 
             $xml = file_get_contents('./array.json');
-            p($xml);
 
-            exit;
 
 
             $data = \WxPayResults::Init($xml);
+            p($data);
+
+            exit;
             if(!$this->Queryorder($data)){
                 //$msg = "订单查询失败";
                 return false;
