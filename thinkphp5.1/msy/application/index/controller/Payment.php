@@ -240,7 +240,7 @@ class Payment extends \common\controller\Base {
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
-  
+
         //此订单回调已处理过
         if($orderInfo['order_status']>=2){
             echo 'SUCCESS';
@@ -266,10 +266,6 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
-        p($modelOrder->getLastSql());
-        p($condition);
-        p($result);
-        exit;
 
         echo 'SUCCESS';
     }
