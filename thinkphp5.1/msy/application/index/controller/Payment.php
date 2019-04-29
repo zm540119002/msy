@@ -129,10 +129,10 @@ class Payment extends \common\controller\Base {
                     'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 ];
-/*                $response = [
+                $response = [
                     'success_url' => $jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
-                ];*/
+                ];
                 $this->assign('payInfo',json_encode($response));
             }
             return $this->fetch();
