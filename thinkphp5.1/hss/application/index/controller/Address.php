@@ -4,6 +4,7 @@ class Address extends \common\controller\UserBase {
     //增加修改地址页面
     public function edit(){
         $model = new \common\model\Address();
+        $model->useGlobalScope(false)->select();
         $userId = $this->user['id'];
         if(request()->isPost()){
             $data = input('post.');
@@ -48,6 +49,7 @@ class Address extends \common\controller\UserBase {
                     ],
                 ];
                 $addressList = $model -> getList($config);
+                $addressList = $model -> getList();
                 if(empty($addressList)){
                     $data['is_default'] = 1;
                 }
@@ -103,13 +105,14 @@ class Address extends \common\controller\UserBase {
     //地址列表
     public function manage(){
         $model = new \common\model\Address();
-        $config = [
+/*        $config = [
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
             ],
         ];
-        $addressList = $model -> getList($config);
+        $addressList = $model -> getList($config);*/
+        $addressList = $model -> getList();
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -124,10 +127,10 @@ class Address extends \common\controller\UserBase {
         $id = input('post.address_id',0,'int');
         $model = new \common\model\Address();
         $condition = [
-            ['user_id','=',$this->user['id']],
             ['id','=',$id],
         ];
         $result = $model -> del($condition);
+
         if($result['status']){
             return successMsg('删除成功');
         }else{
@@ -144,11 +147,12 @@ class Address extends \common\controller\UserBase {
         $model= new \common\model\Address();
 
         $condition = [
-            'where' => [
-                ['a.user_id','=',$this->user['id']],
+            'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
             ]
         ];
-        $data = $model->getAddressDataList($condition);
+
+        $data = $model->getList($condition);
 
         $this->assign('addressList',$data);
 

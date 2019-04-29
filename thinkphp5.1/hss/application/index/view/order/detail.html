@@ -13,39 +13,40 @@
         <div class="separation-line content-padding">
             <div>
                 <span>订单号&nbsp;</span>
-                <input type="hidden" id="order_sn" value="{$info.sn}"/>
-                <span>{$info.sn}</span>
+                <input type="hidden" class="order_sn" value="{$orderInfo.sn}"/>
+                <input type="hidden" class="order_id" value="{$orderInfo.id}"/>
+                <span>{$orderInfo.sn}</span>
             </div>
             <div>
                 <span>下单日期&nbsp;</span>
-                <span>{$info.create_time}</span>
+                <span>{$orderInfo.create_time}</span>
             </div>
             <div>
                 <span>商品&nbsp;</span>
-                <span>共{$info.goods_num}件</span>
+                <span>共{$orderInfo.goods_num}件</span>
             </div>
             <div>
                 <span>金额&nbsp;</span>
-                <span>￥<price>{$info.amount}</price></span>
+                <span>￥<price>{$orderInfo.amount}</price></span>
             </div>
             <div>
                 <span>状态：</span>
-                {if $info.order_status == 1}
+                {if $orderInfo.order_status == 1}
                 <!--1:待付款-->
                 <span>待付款</span>
-                {elseif $info.order_status == 2 }
+                {elseif $orderInfo.order_status == 2 }
                 <!--2:待收货-->
                 <span>待收货</span>
-                {elseif $info.order_status == 3 }
+                {elseif $orderInfo.order_status == 3 }
                 <!--3:待评价-->
                 <span>待评价</span>
-                {elseif $info.order_status == 4 }
+                {elseif $orderInfo.order_status == 4 }
                 <!--4:已完成-->
                 <span>已完成</span>
-                {elseif $info.order_status == 5 }
+                {elseif $orderInfo.order_status == 5 }
                 <!--5:已取消-->
                 <span>已取消</span>
-                {elseif $info.order_status == 6}
+                {elseif $orderInfo.order_status == 6}
                 <!--6:售后-->
                 <span>售后</span>
                 {else /}
@@ -55,7 +56,7 @@
             </div>
         </div>
 
-        {if $info.order_status == 1}
+        {if $orderInfo.order_status == 1}
             {include file="template/address_info.html" /}
             {include file="template/settlement_method.html" /}
 
@@ -63,16 +64,16 @@
             <!-- 物流信息 -->
             <div class="separation-line content-padding">
                 <div>
-                    <span>{$info.consignee}</span>
-                    <span>{$info.mobile}</span>
+                    <span>{$orderInfo.consignee}</span>
+                    <span>{$orderInfo.mobile}</span>
                 </div>
                 <div>
                     <span>收货地址：</span>
-                    <span>{$info.province}{$info.city}{$info.area}{$info.detail_address}</span>
+                    <span>{$orderInfo.province}{$orderInfo.city}{$orderInfo.area}{$orderInfo.detail_address}</span>
                 </div>
                 <div>
                     <span>备注：</span>
-                    <span>{$info.remark}</span>
+                    <span>{$orderInfo.remark}</span>
                 </div>
             </div>
         {/if}
@@ -81,7 +82,7 @@
         <div class="content-padding bottom_padding">
             <ul>
                 <li>
-                    {volist name="info.goods_list" id="goods_info"}
+                    {volist name="orderInfo.goods_list" id="goods_info"}
                             <div class="columns_flex order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"
                                  data-brand_id="{$goods_info.brand_id}" data-brand_name="{$goods_info.brand_name}">
                                 <div class="list_left_img">

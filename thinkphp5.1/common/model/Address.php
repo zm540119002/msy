@@ -18,19 +18,11 @@ class Address extends Base{
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_common';
 
-    /**
-     * 获取地址列表
-     */
-	public function getAddressDataList($condition=[],$type='list'){
-
-        $condition['where'][] = ['a.status', '=', 0];
-
-        if($type=='list'){
-            return $this ->getList($condition);
-
-        }else{
-            return $this->getInfo($condition);
-        }
+    // 定义全局的查询条件 测试中，看需不需要使用 2019-04-28
+    protected function base($query)
+    {
+        $user = session('user');
+        $query->where('status','=',0);
+        $query->where('user_id',$user['id']);
     }
-
 }

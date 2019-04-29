@@ -114,13 +114,8 @@ class Order extends \common\controller\UserBase
                 $modelOrder ->rollback();
                 return errorMsg('失败');
             }
-/*            $modelOrderDetail = new \app\index\model\OrderDetail();
-            $res = $modelOrderDetail -> isUpdate(true)-> saveAll($data['orderDetail']);
-            if (!count($res)) {
-                $modelOrder->rollback();
-                return errorMsg('失败');
-            }*/
-            //根据订单号查询关联的购物车的商品 删除
+
+            //根据订单号查询关联的购物车的商品
             $modelOrderDetail = new \app\index\model\OrderDetail();
             $config = [
                 'where' => [
@@ -152,7 +147,7 @@ class Order extends \common\controller\UserBase
 
         }else{
             $modelOrder = new \app\index\model\Order();
-            $orderSn = input('order_sn');
+            $orderSn = input('order_sn/s');
             $config = [
                 'where' => [
                     ['o.status', '=', 0],
@@ -168,6 +163,10 @@ class Order extends \common\controller\UserBase
                 ],
             ];
             $orderGoodsList = $modelOrder->getList($config);
+            if(empty($orderGoodsList)){
+                $this->error('没有找到该订单');
+            }
+
             $this ->assign('orderGoodsList',$orderGoodsList);
 
             $orderInfo = reset($orderGoodsList);
@@ -177,18 +176,7 @@ class Order extends \common\controller\UserBase
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
-            //钱包
-            $modelWallet = new \app\index\model\Wallet();
-            $config = [
-                'where' => [
-                    ['status', '=', 0],
-                    ['user_id', '=', $this->user['id']],
-                ],'field' => [
-                    'id','amount',
-                ],
-            ];
-            $walletInfo = $modelWallet->getInfo($config);
-            $this->assign('walletInfo', $walletInfo);
+            $this->assignWalletInfo();
 
             return $this->fetch();
         }
@@ -254,7 +242,7 @@ class Order extends \common\controller\UserBase
     public function detail()
     {
         $model = new \app\index\model\Order();
-        $orderSn = input('order_sn');
+        $orderSn = input('order_sn/s');
         $config=[
             'where'=>[
                 ['o.status', '=', 0],
@@ -274,6 +262,11 @@ class Order extends \common\controller\UserBase
             ]
         ];
         $info = $model->getInfo($config);
+
+        if(empty($info)){
+            $this->error('没有找到该订单');
+        }
+
         $info =  $info!=0?$info->toArray():[];
         $modelOrderDetail = new \app\index\model\OrderDetail();
         $config=[
@@ -291,14 +284,20 @@ class Order extends \common\controller\UserBase
 
         ];
         $goodsList = $modelOrderDetail -> getList($config);
-        $goodsNum = 0;
+
+        $info['goods_list']= $goodsList;
+        $info['goods_num'] = array_sum(array_column($goodsList,'num'));
+
+
+/*        $goodsNum = 0;
         foreach ($goodsList as &$goods){
             $goodsNum+=$goods['num'];
         }
         $info['goods_list'] = $goodsList;
-        $info['goods_num'] = $goodsNum;
-
-        $this->assign('info',$info);
+        $info['goods_num'] = $goodsNum;*/
+/*        p($info);
+        exit;*/
+        $this->assign('orderInfo',$info);
 
         // 显示的地址信息
         $this->getOrderAddressInfo($info);
@@ -483,13 +482,30 @@ class Order extends \common\controller\UserBase
 
             $condition = [
                 'where' => [
-                    ['a.user_id','=',$this->user['id']],
-                    ['a.is_default','=',1]
+                    ['is_default','=',1]
                 ]
             ];
-            $addressInfo = $modelAddress->getAddressDataList($condition,'info');
+            $addressInfo = $modelAddress->getInfo($condition);
         }
+
         $this->assign('addressInfo', $addressInfo);
+    }
+
+    // 获取钱包余额
+    private function assignWalletInfo(){
+        //钱包
+        $modelWallet = new \app\index\model\Wallet();
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ],'field' => [
+                'id','amount',
+            ],
+        ]; // 做到这里
+        $walletInfo = $modelWallet->getInfo($config);
+
+        $this->assign('walletInfo', $walletInfo);
     }
 
 
