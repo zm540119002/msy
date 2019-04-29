@@ -311,7 +311,8 @@ class Payment extends \common\controller\Base {
                 //['recharge_status', '=', 1],
             ]
         ];
-        $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
+        //$result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
+        $result = true;
         if(!$result){
             $modelWalletDetail ->rollback();
             $info['mysql_error'] = $modelWalletDetail->getError();
