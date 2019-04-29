@@ -314,7 +314,6 @@ class Payment extends \common\controller\Base {
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
-        $result = true;
         if(!$result){
             $modelWalletDetail ->rollback();
             $info['mysql_error'] = $modelWalletDetail->getError();
@@ -325,7 +324,6 @@ class Payment extends \common\controller\Base {
             ['user_id', '=', $walletDetailInfo['user_id']],
         ];
         $res = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
-        $res = true;
         if($res === false){
             $modelWallet->rollback();
             $info['mysql_error'] = $modelWallet->getError();
@@ -333,13 +331,7 @@ class Payment extends \common\controller\Base {
             return $this->writeLog('充值订单支付更新失败',$info);
         }
         $modelWalletDetail->commit();//提交事务
-        p($modelWalletDetail->getConfig());
-        p($modelWallet->getConfig());
-        p($info);
-        p($modelWallet->getLastSql());
-        p($res);
-        p($walletDetailInfo);
-        exit;
+
         echo 'SUCCESS';
 
     }
