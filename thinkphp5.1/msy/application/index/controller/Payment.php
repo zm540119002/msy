@@ -274,6 +274,10 @@ class Payment extends \common\controller\Base {
         $modelWalletDetail ->connection = config('custom.system_id')[$info['system_id']]['db'];
         $modelWallet = new \app\index\model\Wallet();
         $modelWallet ->connection = config('custom.system_id')[$info['system_id']]['db'];
+
+        p($modelWalletDetail->getConfig());
+        p($modelWallet->getConfig());
+        exit;
         $condition = [
             'where' => [
                 ['status', '=', 0],
