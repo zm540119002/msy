@@ -139,4 +139,8 @@ class Base extends \think\Model {
 	protected function createUserSN(){
 		 return 'msy_' . create_random_str(9,3);
 	}
+
+	public function setConnection($config){
+	    $this->connection = $config;
+    }
 }

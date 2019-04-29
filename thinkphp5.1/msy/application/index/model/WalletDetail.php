@@ -14,8 +14,4 @@ class WalletDetail extends \common\model\Base
 
     public $cc = '';
 
-    public function sss(){
-
-    }
-
 }

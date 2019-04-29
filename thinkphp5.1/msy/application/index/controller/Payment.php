@@ -272,9 +272,12 @@ class Payment extends \common\controller\Base {
     private function setRechargePayStatus($info){
 
         $modelWalletDetail= new \app\index\model\WalletDetail();
-        $modelWalletDetail ->connection = config('custom.system_id')[2]['db'];
+        //$modelWalletDetail ->connection = config('custom.system_id')[2]['db'];
+        $modelWalletDetail ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+
         $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->connection = config('custom.system_id')[2]['db'];
+        //$modelWallet ->connection = config('custom.system_id')[2]['db'];
+        $modelWallet ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         p($modelWalletDetail->getConfig());
         p($modelWallet->getConfig());
         exit;
