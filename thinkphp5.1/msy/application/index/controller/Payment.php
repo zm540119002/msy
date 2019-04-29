@@ -270,11 +270,14 @@ class Payment extends \common\controller\Base {
      * @param $info 回调信息
      */
     private function setRechargePayStatus($info){
+
         $modelWalletDetail= new \app\index\model\WalletDetail();
         $modelWalletDetail ->connection = config('custom.system_id')[$info['system_id']]['db'];
         $modelWallet = new \app\index\model\Wallet();
         $modelWallet ->connection = config('custom.system_id')[$info['system_id']]['db'];
-
+        p($modelWalletDetail->getConfig());
+        p($modelWallet->getConfig());
+        exit;
 
         $list = $modelWalletDetail->getList();
         $aa = $modelWallet->getList();
