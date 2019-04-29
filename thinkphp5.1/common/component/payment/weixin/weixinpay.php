@@ -226,13 +226,13 @@ EOF;
         try {
             //获取通知的数据
             //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-            $xml = file_get_contents('php://input');
+            //$xml = file_get_contents('php://input');
 
 
 /*            file_put_contents('./array2.json',json_encode($xml));
             exit;*/
 
-            //$xml = json_decode(file_get_contents('./array2.json'),true);
+            $xml = json_decode(file_get_contents('./array2.json'),true);
 
             $data = \WxPayResults::Init($xml);
 
