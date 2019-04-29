@@ -237,9 +237,9 @@ EOF;
 
 
             $data = \WxPayResults::Init($xml);
-            p($data);
+/*            p($data);
 
-            exit;
+            exit;*/
             if(!$this->Queryorder($data)){
                 //$msg = "订单查询失败";
                 return false;
