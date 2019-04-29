@@ -65,6 +65,7 @@ class Payment extends \common\controller\Base {
                 $this -> error($msg);
             }
         }else{
+
             $systemId = input('system_id',0,'int');
             $this->assign('system_id',$systemId);
             //$paymentType 1:订单支付 2：充值支付
@@ -85,6 +86,9 @@ class Payment extends \common\controller\Base {
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
+
+            $this->wxPayNotifyCallBack($info);
+            exit;
 
             $this->assign('info', $info);
             //判断为微信支付，并且为微信浏览器
@@ -196,9 +200,9 @@ class Payment extends \common\controller\Base {
      * 回调处理，修改信息，通知，记录日志
      * wxPayNotifyCallBack
      * */
-    public function wxPayNotifyCallBack(){
-        $wxPay = new \common\component\payment\weixin\weixinpay;
-        $data  = $wxPay->wxNotify();
+    public function wxPayNotifyCallBack($data){
+        //$wxPay = new \common\component\payment\weixin\weixinpay;
+        //$data  = $wxPay->wxNotify();
         if($data){
             $attach = json_decode($data['attach'],true);
             $order['system_id'] = $attach['system_id'];
@@ -207,9 +211,7 @@ class Payment extends \common\controller\Base {
             $order['actually_amount'] = $data['total_fee']/100;
             $order['payment_code'] = 0;
             $order['pay_sn'] = $data['transaction_id'];
-/*            p($attach);
-            p($order);
-            exit;*/
+
             if($attach['payment_type'] == 1){
                 $this->setOrderPayStatus($order);
             }elseif($attach['payment_type'] == 2){
