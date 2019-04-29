@@ -233,7 +233,7 @@ EOF;
             exit;*/
 
             //$xml = json_decode(file_get_contents('./array2.json'),true);
-            $xml = json_decode(file_get_contents('./array2.json'),true);
+            $xml = json_decode(file_get_contents('./array.json'),true);
             echo 11111;
             //exit;
             $data = \WxPayResults::Init($xml);
