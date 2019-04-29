@@ -203,8 +203,7 @@ class Payment extends \common\controller\Base {
     public function wxPayNotifyCallBack(){
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-        p($data);
-        exit;
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $order['system_id'] = $attach['system_id'];
@@ -225,9 +224,6 @@ class Payment extends \common\controller\Base {
      * @param $info 回调信息
      */
     private function setOrderPayStatus($info){
-
-        echo 11111;
-        exit;
         $modelOrder = new \app\index\model\Order();
         $modelOrder ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         $condition = [
@@ -244,7 +240,7 @@ class Payment extends \common\controller\Base {
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
-        p($modelOrder->getLastSql());
+  
         //此订单回调已处理过
         if($orderInfo['order_status']>=2){
             echo 'SUCCESS';
