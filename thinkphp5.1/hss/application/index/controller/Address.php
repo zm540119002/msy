@@ -145,7 +145,14 @@ class Address extends \common\controller\UserBase {
     public function _popGetList(){
 
         $model= new \common\model\Address();
-        $data = $model->getList();
+
+        $condition = [
+            'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+
+        $data = $model->getList($condition);
 
         $this->assign('addressList',$data);
 
