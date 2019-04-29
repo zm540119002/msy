@@ -223,6 +223,9 @@ class Payment extends \common\controller\Base {
      * @param $info 回调信息
      */
     private function setOrderPayStatus($info){
+
+        echo 11111;
+        exit;
         $modelOrder = new \app\index\model\Order();
         $modelOrder ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         $condition = [
@@ -239,6 +242,7 @@ class Payment extends \common\controller\Base {
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
+        p($modelOrder->getLastSql());
         //此订单回调已处理过
         if($orderInfo['order_status']>=2){
             echo 'SUCCESS';
