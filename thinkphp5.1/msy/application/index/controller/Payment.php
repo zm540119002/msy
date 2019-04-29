@@ -145,7 +145,7 @@ class Payment extends \common\controller\Base {
      */
     private function getOrderInfo($systemId,$sn){
         $model = new \app\index\model\Order();
-        $model ->connection = config('custom.system_id')[$systemId]['db'];
+        $model ->setConnection(config('custom.system_id')[$systemId]['db']);
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -164,7 +164,7 @@ class Payment extends \common\controller\Base {
      */
     private function getWalletDetailInfo($systemId,$sn){
         $model = new \app\index\model\WalletDetail();
-        $model ->connection = config('custom.system_id')[$systemId]['db'];
+        $model ->setConnection(config('custom.system_id')[$systemId]['db']);
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -222,7 +222,7 @@ class Payment extends \common\controller\Base {
      */
     private function setOrderPayStatus($info){
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->connection = config('custom.system_id')[$info['system_id']]['db'];
+        $modelOrder ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -272,24 +272,10 @@ class Payment extends \common\controller\Base {
     private function setRechargePayStatus($info){
 
         $modelWalletDetail= new \app\index\model\WalletDetail();
-        //$modelWalletDetail ->connection = config('custom.system_id')[2]['db'];
         $modelWalletDetail ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
-
         $modelWallet = new \app\index\model\Wallet();
-        //$modelWallet ->connection = config('custom.system_id')[2]['db'];
         $modelWallet ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
-        p($modelWalletDetail->getConfig());
-        p($modelWallet->getConfig());
-        exit;
 
-        $list = $modelWalletDetail->getList();
-        $aa = $modelWallet->getList();
-        p($list);
-        p($aa);
-        exit;
-/*        p($modelWalletDetail);
-        p($modelWallet);
-        exit;*/
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -327,7 +313,7 @@ class Payment extends \common\controller\Base {
                 //['recharge_status', '=', 1],
             ]
         ];
-        //$result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
+        $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
         $result = true;
         if(!$result){
             $modelWalletDetail ->rollback();
@@ -338,7 +324,7 @@ class Payment extends \common\controller\Base {
         $where = [
             ['user_id', '=', $walletDetailInfo['user_id']],
         ];
-        //$res = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
+        $res = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
         $res = true;
         if($res === false){
             $modelWallet->rollback();

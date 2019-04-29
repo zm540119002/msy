@@ -140,6 +140,7 @@ class Base extends \think\Model {
 		 return 'msy_' . create_random_str(9,3);
 	}
 
+	// 设置数据库配置
 	public function setConnection($config){
 	    $this->connection = $config;
     }
