@@ -13,7 +13,6 @@ class Wallet extends Base {
                 exit;
             }
 
-            $this->assign('wallet',$this->wallet);
         }
 
     }
@@ -36,10 +35,21 @@ class Wallet extends Base {
         if (request()->isAjax()) {
         } else {
 
-            //$url = config('custom.pay_center');
+            $model = new \app\index\model\Wallet();
+            $condition = [
+                'where' => [
+                    ['user_id','=',$this->user['id']],
+                    ['status','=',0]
+                ],
+                'field' => [
+                    'id','user_id','status','amount','password','salt'
+                ],
+            ];
 
-            //return $this->redirect($url.request()->controller().'/'.request()->action());
-        return $this->fetch('recharge');
+            $wallet= $model->getInfo($condition);
+            $this->assign('wallet',$wallet);
+
+            return $this->fetch('recharge');
         }
     }
 

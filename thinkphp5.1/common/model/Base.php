@@ -24,6 +24,7 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
+
 		$_config = array_merge($_config,$config);
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
