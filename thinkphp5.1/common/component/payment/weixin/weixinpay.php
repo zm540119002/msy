@@ -229,7 +229,8 @@ EOF;
             $xml = file_get_contents('php://input');
 
 
-            //file_put_contents('./array.json',json_encode($xml));
+            file_put_contents('./array2.json',json_encode($xml));
+            exit;
 
             $xml = json_decode(file_get_contents('./array.json'),true);
 
