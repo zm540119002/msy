@@ -232,7 +232,8 @@ EOF;
 /*            file_put_contents('./array2.json',json_encode($xml));
             exit;*/
 
-            $xml = json_decode(file_get_contents('./array2.json'),true);
+            //$xml = json_decode(file_get_contents('./array2.json'),true);
+            $xml = json_decode(file_get_contents('./array1.json'),true);
 
             $data = \WxPayResults::Init($xml);
 

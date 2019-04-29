@@ -303,7 +303,7 @@ class Payment extends \common\controller\Base {
         }
         $modelWalletDetail ->startTrans();
         $data = [
-            'recharge_status'=>2,                              // 订单状态
+            'recharge_status'=>2,                           // 订单状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
         ];
