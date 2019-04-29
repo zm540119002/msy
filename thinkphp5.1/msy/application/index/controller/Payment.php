@@ -207,9 +207,9 @@ class Payment extends \common\controller\Base {
             $order['actually_amount'] = $data['total_fee']/100;
             $order['payment_code'] = 0;
             $order['pay_sn'] = $data['transaction_id'];
-            p($attach);
+/*            p($attach);
             p($order);
-            exit;
+            exit;*/
             if($attach['payment_type'] == 1){
                 $this->setOrderPayStatus($order);
             }elseif($attach['payment_type'] == 2){
@@ -290,7 +290,7 @@ class Payment extends \common\controller\Base {
             return $this->writeLog("数据库没有此订单",$info);
         }
         //此订单回调已处理过
-        if($walletDetailInfo['order_status']>=2){
+        if($walletDetailInfo['recharge_status']>=2){
             echo 'SUCCESS';
             die;
         }
