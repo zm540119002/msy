@@ -335,7 +335,7 @@ class Payment extends \common\controller\Base {
      */
     private function writeLog($msg='',$info=[]){
         \think\facade\Log::init(['path' => './logs/pay/']);
-        \think\facade\Log::error($msg,$info);
+        \think\facade\Log::error($msg,json_encode($info));
         \think\facade\Log::save();
     }
 }

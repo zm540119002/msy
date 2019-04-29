@@ -211,7 +211,7 @@ EOF;
     public static function wxOrderQuery($orderSn,$transactionId){
         $input = new \WxPayRefund();
         $input->SetOut_trade_no($orderSn);			//自己的订单号
-        $input->SetTransaction_id($transactionId);  	//微信官方生成的订单流水号，在支付成功中有返回
+        $input->SetTransaction_id($transactionId);  //微信官方生成的订单流水号，在支付成功中有返回
         $result = \WxPayApi::orderQuery($input);	//退款操作
 
         // 这句file_put_contents是用来查看服务器返回的退款结果 测试完可以删除了
