@@ -281,7 +281,7 @@ class Payment extends \common\controller\Base {
                 //['recharge_status', '=', 1],
                 ['recharge_status', '=', 0],
             ],'field' => [
-                'id', 'sn', 'amount','payment_code','type','actually_amount',
+                'id', 'sn', 'amount','payment_code','type','actually_amount','recharge_status',
                 'user_id',
             ],
         ];
