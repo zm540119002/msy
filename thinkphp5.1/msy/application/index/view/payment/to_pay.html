@@ -42,8 +42,7 @@
                     if(res.err_msg == "get_brand_wcpay_request:ok"){
                         dialog.success('支付成功！',payInfo.success_url);
                     }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
-                        //$(this).parents('.layui-m-layer').remove();
-                        //window.history.go(-1);
+
                         return false;
                     }else{
                         dialog.success('支付失败！',payInfo.$fail_url);
