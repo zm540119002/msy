@@ -274,7 +274,8 @@ class Payment extends \common\controller\Base {
             'where' => [
                 ['status', '=', 0],
                 ['sn', '=', $info['sn']],
-                ['recharge_status', '=', 1],
+                //['recharge_status', '=', 1],
+                ['recharge_status', '=', 0],
             ],'field' => [
                 'id', 'sn', 'amount','payment_code','type','actually_amount',
                 'user_id',
