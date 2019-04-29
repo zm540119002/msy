@@ -1,0 +1,3632 @@
+---------------------------------------------------------------
+[ 2019-04-29T10:29:20+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.318862s][吞吐率：3.14req/s] [内存消耗：4,342.08kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:29:38+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.317090s][吞吐率：3.15req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:29:52+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.284137s][吞吐率：3.52req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:30:23+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.284038s][吞吐率：3.52req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:31:30+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270371s][吞吐率：3.70req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:31:46+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.281686s][吞吐率：3.55req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:32:02+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.297840s][吞吐率：3.36req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:32:07+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270336s][吞吐率：3.70req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:32:23+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.269133s][吞吐率：3.72req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:32:33+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.290347s][吞吐率：3.44req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:32:39+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.286550s][吞吐率：3.49req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:33:09+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.279573s][吞吐率：3.58req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:33:23+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.282270s][吞吐率：3.54req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:35:34+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.285832s][吞吐率：3.50req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:36:11+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.279381s][吞吐率：3.58req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:43:24+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.304600s][吞吐率：3.28req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:45:35+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.326687s][吞吐率：3.06req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:46:12+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.336015s][吞吐率：2.98req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:59:09+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.258829s][吞吐率：3.86req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:59:24+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.298132s][吞吐率：3.35req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T10:59:40+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.275307s][吞吐率：3.63req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:00:11+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.287830s][吞吐率：3.47req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:03:11+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.267381s][吞吐率：3.74req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:03:25+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.285035s][吞吐率：3.51req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:05:36+08:00 ] 140.207.54.80 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.282435s][吞吐率：3.54req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:06:13+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.263936s][吞吐率：3.79req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:13:12+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.305634s][吞吐率：3.27req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:14:41+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.256422s][吞吐率：3.90req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:14:57+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.292110s][吞吐率：3.42req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:15:12+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.294305s][吞吐率：3.40req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:15:43+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.330912s][吞吐率：3.02req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:18:43+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.265608s][吞吐率：3.76req/s] [内存消耗：4,342.09kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:24:59+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.279573s][吞吐率：3.58req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:25:15+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.303744s][吞吐率：3.29req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:25:30+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.292797s][吞吐率：3.42req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:26:01+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.271032s][吞吐率：3.69req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:28:45+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.493022s][吞吐率：2.03req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:29:02+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.303792s][吞吐率：3.29req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:33:13+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.284608s][吞吐率：3.51req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:33:26+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.299865s][吞吐率：3.33req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:35:37+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.271140s][吞吐率：3.69req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:36:14+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.272952s][吞吐率：3.66req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:39:04+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.320042s][吞吐率：3.12req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:42:15+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.301078s][吞吐率：3.32req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:42:31+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.275243s][吞吐率：3.63req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:42:47+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.278322s][吞吐率：3.59req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:43:18+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.324002s][吞吐率：3.09req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:46:19+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.305564s][吞吐率：3.27req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:48:29+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.263318s][吞吐率：3.80req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:48:46+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.290548s][吞吐率：3.44req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:48:46+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.250982s][吞吐率：3.98req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:49:01+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.311873s][吞吐率：3.21req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:49:32+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.305414s][吞吐率：3.27req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:52:32+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.244787s][吞吐率：4.09req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:56:20+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.313448s][吞吐率：3.19req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T11:59:05+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.273484s][吞吐率：3.66req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:01:23+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.303861s][吞吐率：3.29req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:01:39+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.351980s][吞吐率：2.84req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:01:54+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.314325s][吞吐率：3.18req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:02:11+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.276106s][吞吐率：3.62req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:02:25+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.273961s][吞吐率：3.65req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:02:26+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.276004s][吞吐率：3.62req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:02:33+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270493s][吞吐率：3.70req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:02:42+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.266293s][吞吐率：3.76req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:03:13+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.296190s][吞吐率：3.38req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:03:14+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.264255s][吞吐率：3.78req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:03:27+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.295615s][吞吐率：3.38req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:05:26+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.283085s][吞吐率：3.53req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:05:39+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.331144s][吞吐率：3.02req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:06:14+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.297045s][吞吐率：3.37req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:06:16+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.252732s][吞吐率：3.96req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:15:27+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.264218s][吞吐率：3.78req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:16:15+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.300500s][吞吐率：3.33req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:16:20+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.338490s][吞吐率：2.95req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:18:47+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.294119s][吞吐率：3.40req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:22:34+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.284859s][吞吐率：3.51req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:29:06+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.312528s][吞吐率：3.20req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:33:15+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.309718s][吞吐率：3.23req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:35:28+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.291836s][吞吐率：3.43req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:36:15+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.283962s][吞吐率：3.52req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:46:21+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.302578s][吞吐率：3.30req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:48:48+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.289835s][吞吐率：3.45req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:52:34+08:00 ] 140.207.54.80 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.320607s][吞吐率：3.12req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T12:59:07+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.277335s][吞吐率：3.61req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:03:29+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.286132s][吞吐率：3.49req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:05:30+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.274145s][吞吐率：3.65req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:05:40+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.283840s][吞吐率：3.52req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:06:16+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.273054s][吞吐率：3.66req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:06:16+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.321540s][吞吐率：3.11req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:16:23+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.289301s][吞吐率：3.46req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:22:35+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.355140s][吞吐率：2.82req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:33:16+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.277917s][吞吐率：3.60req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:35:31+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.271822s][吞吐率：3.68req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:36:18+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.317361s][吞吐率：3.15req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:38:47+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.276432s][吞吐率：3.62req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:39:03+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.275685s][吞吐率：3.63req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:39:18+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.291399s][吞吐率：3.43req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:39:49+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.296077s][吞吐率：3.38req/s] [内存消耗：4,343.82kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:40:32+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.325548s][吞吐率：3.07req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:40:48+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.300166s][吞吐率：3.33req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:41:04+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270237s][吞吐率：3.70req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:41:34+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.304261s][吞吐率：3.29req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:42:50+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.255956s][吞吐率：3.91req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:44:36+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270465s][吞吐率：3.70req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:48:49+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.281861s][吞吐率：3.55req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:52:51+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.288204s][吞吐率：3.47req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:54:37+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.314543s][吞吐率：3.18req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T13:59:08+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.269731s][吞吐率：3.71req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:00:38+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.304598s][吞吐率：3.28req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:00:54+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.252532s][吞吐率：3.96req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:01:09+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.274132s][吞吐率：3.65req/s] [内存消耗：4,343.25kb] [文件加载：86]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:02:42+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.252730s][吞吐率：3.96req/s] [内存消耗：4,423.70kb] [文件加载：87]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:02:58+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.262385s][吞吐率：3.81req/s] [内存消耗：4,423.70kb] [文件加载：87]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:03:13+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.257441s][吞吐率：3.88req/s] [内存消耗：4,423.70kb] [文件加载：87]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:03:44+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.313355s][吞吐率：3.19req/s] [内存消耗：4,423.70kb] [文件加载：87]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:18:06+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.036078s][吞吐率：27.72req/s] [内存消耗：3,329.71kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:20:09+08:00 ] 58.251.80.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.018867s][吞吐率：53.00req/s] [内存消耗：2,739.77kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调

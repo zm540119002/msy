@@ -24,6 +24,7 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
+
 		$_config = array_merge($_config,$config);
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
@@ -139,4 +140,9 @@ class Base extends \think\Model {
 	protected function createUserSN(){
 		 return 'msy_' . create_random_str(9,3);
 	}
+
+	// 设置数据库配置
+	public function setConnection($config){
+	    $this->connection = $config;
+    }
 }
