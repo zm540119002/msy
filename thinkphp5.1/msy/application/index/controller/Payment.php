@@ -65,7 +65,7 @@ class Payment extends \common\controller\Base {
                 $this -> error($msg);
             }
         }else{
-            
+
             $systemId = input('system_id',0,'int');
             $this->assign('system_id',$systemId);
             //$paymentType 1:订单支付 2：充值支付

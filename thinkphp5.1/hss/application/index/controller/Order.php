@@ -322,6 +322,9 @@ class Order extends \common\controller\UserBase
         // 显示的地址信息
         $this->getOrderAddressInfo($info);
 
+        // 钱包余额
+        $this->assignWalletInfo();
+
         // 底部按钮
         // 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
         switch ($info['order_status'])
