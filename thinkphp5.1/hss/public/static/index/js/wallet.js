@@ -108,6 +108,7 @@ function walletPayDialog(postData) {
         success:function(indexs,i){
             //钱包密码
             var oLis=$('.payPasswordLayer input.password_item');
+            $('.payPasswordLayer li').eq(0).find('input[type="password"]').focus();
             for(var i = 0;i<oLis.length;i++){
                 var obj=oLis[i];
                 $(obj).data('index',i);
@@ -160,7 +161,6 @@ function walletPayDialog(postData) {
             postData.password = password;
             var url = module+'Wallet/checkWallet';
             $.post(url,postData,function (data) {
-                //dialog.msg(data.info);
 
                 if(!data.status){
                     dialog.success(data.info);
