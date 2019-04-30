@@ -162,6 +162,95 @@ class Wallet extends Base {
         return $this->fetch('list_tpl');
     }
 
+    /**
+     * 钱包支付处理
+     * 验证用户，更新余额,更新订单信息，清除购物车商品，
+     * ajax
+     */
+    public function checkWallet(){
+        if (request()->isAjax()) {
+            $password = input('password/s');
+            $user_id  = $this->user['id'];
+            if(empty($password)){
+                return errorMsg('密码格式错误!');
+            }
+
+            $modelWallet = new \app\index\model\Wallet();;
+
+            $wallet = $modelWallet->checkWalletUser($user_id,$password);
+            if(!$wallet){
+                return errorMsg('密码有误，请重新输入!');
+            }
+
+            // 更新订单状态并清除订单里购物车里的商品
+            $fatherOrderId = input('post.order_id',0,'int');
+            if(!$fatherOrderId){
+                return errorMsg('订单支付失败!');
+            }
+
+            $modelOrder = new \app\index\model\Order();
+            $condition = [
+                'where' => [
+                    ['user_id','=',$user_id],
+                    ['id','=',$fatherOrderId],
+                    ['order_status','<',2],
+                ]
+            ];
+
+            $orderInfo  = $modelOrder->getInfo($condition);
+            if(!$orderInfo){
+                return errorMsg('订单已支付',['code'=>1]);
+            }
+
+            if($orderInfo['actually_amount']>$wallet['amount']){
+                return errorMsg('钱包余额不足，请选择其它的支付方式!',['code'=>2]);
+            }
+
+            // 生成订单明细&&更新钱包余额
+            $modelOrder ->startTrans();
+            $modelWalletDetail = new \app\index\model\WalletDetail();
+            $orderInfo['pay_sn'] = generateSN();
+            $orderInfo['payment_time'] = time();
+            $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
+            if(!$res['status'] ){
+                $modelOrder->rollback();
+                //返回状态
+                return errorMsg('失败');
+            }
+            // 更新订单信息
+            $data = input('post.');
+            $data['payment_code'] = $data['pay_code'];
+            $data['pay_sn'] = $orderInfo['pay_sn'];
+            $data['payment_time'] = time();
+            $data['order_sn'] = $orderInfo['sn'];
+
+            $res = $modelOrder->orderHandle($data, $orderInfo);
+            if(!$res['status']){
+                $modelOrder->rollback();
+                //返回状态
+                return errorMsg('失败');
+            }
+
+            // 删除订单关联的购物车的商品
+            if(false !== $res){
+                $modelCart = new \app\index\model\Cart();
+                $res = $modelCart->clearCartGoodsByOrder($fatherOrderId,$user_id);
+            }
+
+            if(false === $res){
+                $modelOrder ->rollback();
+                return errorMsg('失败');
+            }
+
+            $modelOrder -> commit();
+
+            $url = url('Order/manage',['order_status'=>2],true,true);
+            return successMsg('支付成功',['url' =>$url]);
+
+        } else {
+            return $this->fetch();
+        }
+    }
 
 
 }

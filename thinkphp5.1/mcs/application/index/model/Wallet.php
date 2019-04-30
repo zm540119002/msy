@@ -11,7 +11,8 @@ class Wallet extends \common\model\Base {
 	//表的别名
 	protected $alias = 'w';
 
-	/**登录-账号检查
+	/**
+     * 登录-账号检查
 	 */
 	public function loginCheck($uid){
 		$where = [
@@ -24,7 +25,8 @@ class Wallet extends \common\model\Base {
 		return $wallet;
 	}
 
-	/**登录
+	/**
+     * 登录
 	 */
 	public function login($data){
 		//		$validateUser = new \common\validate\User();
@@ -45,7 +47,8 @@ class Wallet extends \common\model\Base {
 		}
 	}
 
-	/**注册-账号检查
+	/**
+     * 注册-账号检查
 	 */
 	public function registerCheck($mobilePhone){
 		$where = [
@@ -62,7 +65,8 @@ class Wallet extends \common\model\Base {
 		return $wallet;
 	}
 
-	/**注册
+	/**
+     * 注册
 	 */
 	public function register($data){
 		$data['mobile_phone'] = trim($data['mobile_phone']);
@@ -85,7 +89,8 @@ class Wallet extends \common\model\Base {
 		return $this->_login($data);
 	}
 
-	/**重置密码
+	/**
+     * 重置密码
 	 */
 	public function resetPassword($data){
 		$validate = new \common\validate\Wallet();
@@ -120,7 +125,8 @@ class Wallet extends \common\model\Base {
 		return errorMsg('资料缺失！');
 	}
 
-	/**登录
+	/**
+     * 登录
 	 */
 	private function _login($data){
 		$wallet = $this->_get($data);
@@ -131,7 +137,8 @@ class Wallet extends \common\model\Base {
 		return successMsg(json_encode($data));
 	}
 
-	/**注册
+	/**
+     * 注册
 	 */
 	private function _register($data){
 		$salt = create_random_str(10,0);
@@ -145,7 +152,8 @@ class Wallet extends \common\model\Base {
 		return true;
 	}
 
-	/**更新-最后登录时间
+	/**
+     * 更新-最后登录时间
 	 */
 	private function _setLastLoginTimeById($walletId){
 		$where = array(
@@ -154,7 +162,8 @@ class Wallet extends \common\model\Base {
 		$this->where($where)->setField('last_login_time', time());
 	}
 
-	/**获取登录信息
+	/**
+     * 获取登录信息
 	 */
 	private function _get($data){
 		if(!$data['user_id']) {
@@ -174,7 +183,8 @@ class Wallet extends \common\model\Base {
 		return $wallet->toArray();
 	}
 	
-	/**检查验证码
+	/**
+     * 检查验证码
 	 */
 	private function _checkCaptcha($mobilePhone,$captcha){
 		return session('captcha_' . $mobilePhone) == $captcha ;

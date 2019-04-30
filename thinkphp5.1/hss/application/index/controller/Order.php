@@ -97,9 +97,8 @@ class Order extends \common\controller\UserBase
     public function confirmOrder()
     {
         if (request()->isPost()) {
+            // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
-            $modelOrder = new \app\index\model\Order();
-            $modelOrder ->startTrans();
             $data = input('post.');
             $data['order_status'] = 1;
             $data['payment_code'] = $data['pay_code'];
@@ -108,36 +107,19 @@ class Order extends \common\controller\UserBase
                 ['id','=',$fatherOrderId],
             ];
 
+            $modelOrder = new \app\index\model\Order();
+            $modelOrder ->startTrans();
             $res = $modelOrder -> allowField(true) -> save($data,$condition);
+
+            //根据订单号查询关联的购物车的商品
+            if(false !== $res){
+                $model = new \app\index\model\Cart();
+                $res = $model->clearCartGoodsByOrder($fatherOrderId,$this->user['id']);
+            }
 
             if(false === $res){
                 $modelOrder ->rollback();
                 return errorMsg('失败');
-            }
-
-            //根据订单号查询关联的购物车的商品
-            $modelOrderDetail = new \app\index\model\OrderDetail();
-            $config = [
-                'where' => [
-                    ['od.status', '=', 0],
-                    ['od.father_order_id', '=', $fatherOrderId],
-                ], 'field' => [
-                    'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id',
-                ]
-            ];
-            $orderDetailList = $modelOrderDetail->getList($config);
-            $model = new \app\index\model\Cart();
-            foreach ($orderDetailList as &$orderDetailInfo){
-                $condition = [
-                    ['user_id','=',$this->user['id']],
-                    ['foreign_id','=',$orderDetailInfo['goods_id']],
-                    ['buy_type','in',$orderDetailInfo['buy_type']],
-                ];
-                $result = $model -> del($condition,false);
-                if(!$result['status']){
-                    $modelOrder->rollback();
-                    return errorMsg('删除失败');
-                }
             }
 
             $modelOrder -> commit();
@@ -152,10 +134,10 @@ class Order extends \common\controller\UserBase
                     $url = config('custom.pay_gateway').$orderSn;
                     break;
 
-                // 本地处理
+                // 本地处理 没用到
                 case config('custom.pay_code.walletPay.code') :
-
-                    $url = '';
+                    \app\index\controller\Wallet::
+                    $url = url('Payment/orderPayment',['order_sn'=>$orderSn]);
                     break;
             }
 
@@ -183,6 +165,7 @@ class Order extends \common\controller\UserBase
             if(empty($orderGoodsList)){
                 $this->error('没有找到该订单');
             }
+
 
             $this ->assign('orderGoodsList',$orderGoodsList);
 

@@ -27,10 +27,19 @@ $(function () {
 
         var postData = {};
         postData = addAddress(postData);
+        postData.order_id = $('.order_id').val();
+        postData.order_sn = $('.order_sn').val();
+        postData.pay_code = $('.pay_code').val();
 
-        _this = $(this);
-        _this.addClass("nodisabled");//防止重复提交
-        submitOrders(_this,postData);
+        // 钱包支付 加载wallet.js文件
+        if(postData.pay_code==4){
+            walletPayDialog(postData);
+            return false
+
+        }else{
+            _this = $(this);
+            submitOrders(_this,postData);
+        }
     });
 
     //再次购买
@@ -64,6 +73,11 @@ $(function () {
         generateOrder(postData,_This);
     });
 
+    // 付款
+    $('body').on('click','.forget_wallet_password',function () {
+        forgetWalletPasswordDialog()
+    });
+
 });
 
 // 增加订单收货地址信息
@@ -85,14 +99,11 @@ function addAddress(postData) {
     return postData;
 }
 
-// 提交订单
+
+// 其它支付方式提交订单
 function submitOrders(_this,postData){
-
-    postData.order_id = $('.order_id').val();
-    postData.order_sn = $('.order_sn').val();
-    postData.pay_code = $('.pay_code').val();
-
     var url = module + 'Order/confirmOrder';
+    _this.addClass("nodisabled");//防止重复提交
 
     $.ajax({
         url: url,
