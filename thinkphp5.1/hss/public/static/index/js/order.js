@@ -119,10 +119,11 @@ function submitOrders(_this,postData){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
-                location.href = data.info;
+                location.href = data.url;
 
             }else{
-                dialog.error('结算提交失败!');
+                dialog.success(data.info);
+                //dialog.error('结算提交失败!');
             }
         }
     });

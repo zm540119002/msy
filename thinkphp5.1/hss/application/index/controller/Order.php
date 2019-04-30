@@ -99,17 +99,29 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
+
+
+            $modelOrder = new \app\index\model\Order();
+            $condition = [
+                'where' => [
+                    ['user_id','=',$this->user['id']],
+                    ['id','=',$fatherOrderId],
+                    ['order_status','=',0],
+                ]
+            ];
+
+            $orderInfo  = $modelOrder->getInfo($condition);
+
+            if(!$orderInfo){
+                return errorMsg('订单已支付',['code'=>1]);
+            }
+
             $data = input('post.');
             $data['order_status'] = 1;
             $data['payment_code'] = $data['pay_code'];
-            $condition = [
-                ['user_id','=',$this->user['id']],
-                ['id','=',$fatherOrderId],
-            ];
 
-            $modelOrder = new \app\index\model\Order();
             $modelOrder ->startTrans();
-            $res = $modelOrder -> allowField(true) -> save($data,$condition);
+            $res = $modelOrder -> allowField(true) -> save($data,$condition['where']);
 
             //根据订单号查询关联的购物车的商品
             if(false !== $res){
@@ -142,7 +154,7 @@ class Order extends \common\controller\UserBase
             }
 
 
-            return successMsg($url);
+            return successMsg( '成功',['url'=>$url]);
 
         }else{
             $modelOrder = new \app\index\model\Order();
