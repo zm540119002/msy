@@ -92,16 +92,16 @@ class Wallet extends Base {
 
         }
 
-        // 各付款方式的处理
+        // 各充值方式的处理
         switch($payCode){
-            case config('custom.pay_code.WeChatPay.code') :
-            case config('custom.pay_code.Alipay.code') :
-            case config('custom.pay_code.UnionPay.code') :
+            case config('custom.recharge_code.WeChatPay.code') :
+            case config('custom.recharge_code.Alipay.code') :
+            case config('custom.recharge_code.UnionPay.code') :
                 $url = config('custom.pay_recharge').$walletDetailSn;
                 return successMsg($url);
                 break;
 
-            case config('custom.pay_code.OfflinePay.code') :
+            case config('custom.recharge_code.OfflinePay.code') :
                 // 更新状态
                 $model->edit(['recharge_status'=>1],['sn'=>$walletDetailSn]);
                 return successMsg('成功');

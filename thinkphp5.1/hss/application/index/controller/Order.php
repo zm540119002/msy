@@ -139,10 +139,27 @@ class Order extends \common\controller\UserBase
                     return errorMsg('删除失败');
                 }
             }
+
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
 
-            $url = config('custom.pay_gateway').$orderSn;
+            // 各支付方式的处理方式 //做到这里
+            switch($data['pay_code']){
+                // 支付中心处理
+                case config('custom.pay_code.WeChatPay.code') :
+                case config('custom.pay_code.Alipay.code') :
+                case config('custom.pay_code.UnionPay.code') :
+                    $url = config('custom.pay_gateway').$orderSn;
+                    break;
+
+                // 本地处理
+                case config('custom.pay_code.walletPay.code') :
+
+                    $url = '';
+                    break;
+            }
+
+
             return successMsg($url);
 
         }else{
@@ -188,6 +205,9 @@ class Order extends \common\controller\UserBase
     {
         $orderSn = input('order_sn/s');
         $url = config('custom.pay_gateway');
+
+        p($orderSn);
+        exit;
 
         return $this->redirect($url.$orderSn);
 
@@ -397,7 +417,6 @@ class Order extends \common\controller\UserBase
         return successMsg('成功');
     }
 
-
     /**
      * @return array|mixed
      * 查出产商相关产品 分页查询
@@ -506,14 +525,6 @@ class Order extends \common\controller\UserBase
         $walletInfo = $modelWallet->getInfo($config);
 
         $this->assign('walletInfo', $walletInfo);
-    }
-
-
-
-    private function refundOrder($orderInfo){
-
-
-        \common\component\payment\weixin\weixinpay::wxPay($orderInfo);
     }
 
 
