@@ -31,18 +31,17 @@ class Order extends \common\controller\Base
             ],
         ];
         $data =  $modelOrder->getList($config);
-        p($data);
-        exit;
+
         foreach($data as $k => $orderInfo){
             // 各方式退款
             switch($orderInfo['payment_code']){
                 case 1 : // 微信支付
                     $wxPay = new \common\component\payment\weixin\weixinpay;
                     if(!$result = $wxPay->refundOrder($orderInfo)){
-                        return errorMsg($wxPay->msg);
+                        //return errorMsg($wxPay->msg);
 
                     }else{
-                        return successMsg($result);
+                        //return successMsg($result);
                     }
 
                     break;
