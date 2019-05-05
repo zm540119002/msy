@@ -17,8 +17,8 @@ class Order extends \common\controller\Base
             return errorMsg('订单不存在或金额不能为0 !');
         };
 
-        //$modelOrder = new \app\index\model\Order();
-        $modelOrder = new \app\index\model\WalletDetail();
+        $modelOrder = new \app\index\model\Order();
+        //$modelOrder = new \app\index\model\WalletDetail();
         $modelOrder -> setConnection(config('custom.system_id')[3]['db']);
 
         $config = [
