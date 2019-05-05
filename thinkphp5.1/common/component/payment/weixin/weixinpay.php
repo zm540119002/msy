@@ -282,8 +282,7 @@ EOF;
 
     // 确定退款
     public function refundOrder($data){
-        p($data);
-        exit;
+
         try {
             $this->getWxOpenid();
             $input = new \WxPayRefund();
