@@ -18,7 +18,7 @@ class Order extends \common\controller\Base
         };
 
         //$modelOrder = new \app\index\model\Order();
-        $modelOrder = new \app\index\model\Wallet();
+        $modelOrder = new \app\index\model\WalletDetail();
         $modelOrder -> setConnection(config('custom.system_id')[3]['db']);
 
         $config = [
