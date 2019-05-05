@@ -36,7 +36,7 @@ class Order extends \common\controller\Base
     private function orderInfo($systemId,$orderSn){
 
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
+        $modelOrder -> setConnection(config('custom.system_id')[$systemId]['db']);
         $config = [
             'where' => [
                 ['o.status', '=', 0],

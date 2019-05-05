@@ -394,7 +394,7 @@ class Order extends \common\controller\UserBase
 /*                p($res);
                 exit;*/
                 $res = json_decode($res,true);
-                if(!$res['status']){
+                if(!$res['status'] || $res==null){
                     $type = false;
                 }
 
