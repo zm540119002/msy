@@ -170,6 +170,7 @@ function walletPayDialog(postData) {
                     layer.close(index);
                     layer.open({
                         content : data.info,
+                        shadeClose:false,
                         btn: '确定',
                         yes : function(){
                             //if(data.url){

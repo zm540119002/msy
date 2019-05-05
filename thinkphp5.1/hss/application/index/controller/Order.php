@@ -145,12 +145,6 @@ class Order extends \common\controller\UserBase
                 case config('custom.pay_code.UnionPay.code') :
                     $url = config('custom.pay_gateway').$orderSn;
                     break;
-
-                // 本地处理 没用到
-                case config('custom.pay_code.walletPay.code') :
-                    \app\index\controller\Wallet::
-                    $url = url('Payment/orderPayment',['order_sn'=>$orderSn]);
-                    break;
             }
 
 
