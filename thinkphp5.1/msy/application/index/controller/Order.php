@@ -31,8 +31,7 @@ class Order extends \common\controller\Base
             ],
         ];
         $data =  $modelOrder->getList($config);
-        p($data);
-        exit;
+
         foreach($data as $k => $orderInfo){
             // 各方式退款
             switch($orderInfo['payment_code']){
