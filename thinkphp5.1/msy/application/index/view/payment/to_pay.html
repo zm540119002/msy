@@ -44,6 +44,9 @@
                 'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok"){
+                        console.log(333333);
+                        return  false;
+
                         location.href = payInfo.success_url;
                         return true;
                         dialog.success('支付成功！',payInfo.success_url);
@@ -53,6 +56,8 @@
                     }else{
                         dialog.success('支付失败！',payInfo.$fail_url);
                     }
+                    console.log(22222);
+                    return  false;
                 }
         );
     }
