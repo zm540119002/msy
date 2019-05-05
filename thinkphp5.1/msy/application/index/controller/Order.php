@@ -23,12 +23,12 @@ class Order extends \common\controller\Base
 
         $config = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.pay_sn', '<>', ''],
-                ['o.payment_code', '=', 1],
+                ['status', '=', 0],
+                ['pay_sn', '<>', ''],
+                ['payment_code', '=', 1],
             ],'field' => [
-                'o.id', 'o.pay_sn','o.sn', 'o.amount','o.actually_amount','payment_code',
-                'o.user_id',
+                'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
+                'user_id',
             ],
         ];
         $data =  $modelOrder->getList($config);
