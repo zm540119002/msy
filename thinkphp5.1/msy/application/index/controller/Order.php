@@ -16,8 +16,7 @@ class Order extends \common\controller\Base
         if(!$orderInfo = $this->orderInfo($systemId,$orderSn)){
             return errorMsg('订单不存在或金额不能为0 !');
         };
-        p($orderInfo);
-        exit;
+
         // 各方式退款
         switch($orderInfo['payment_code']){
             case 1 : // 微信支付
