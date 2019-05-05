@@ -36,6 +36,7 @@ class Scene extends Base {
                 $info = $model->getInfo($condition);
                 $this->assign('info',$info);
             }
+
             return $this->fetch();
 
         }
@@ -157,8 +158,8 @@ class Scene extends Base {
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','type','group'],
-            'order'=>['sort'=>'desc', 'id'=>'desc',],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','type'],
+            'order'=>['id'=>'asc',],
         ];
 
         $list = $this->obj->pageQuery($condition);

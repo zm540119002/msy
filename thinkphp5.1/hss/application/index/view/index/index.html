@@ -2,14 +2,31 @@
 {block name="content"}
 <article class="f24 content_main">
 	<section class="slider_banner">
-		<div class="swiper-container-horizontal swiper-container-ios">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
 					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
 				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+					  aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 			</div>
 		</div>
 	</section>
+
 	<!-- 暂时不需要
 		<section class="module-navigation separation-line ">
 		<div class="columns_flex f20 channel_nav store_organize_nav">
@@ -23,27 +40,19 @@
 	-->
 	<section class="">
 		<div class="content-padding">
-			<!--优惠广告入口-->
+			<!-- 开放日 -->
 			<section class="slider_banner swiper-list-wrapper">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
-						{volist name="promotionList" id="vo"}
 						<div class="swiper-slide">
-							<a href="{:url('promotion/detail',['id'=>$vo.id])}">
+							<a href="#">
 								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
 							</a>
 						</div>
-						{/volist}
-					</div>
-					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
-							aria-label="Go to slide 1"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-						<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 					</div>
 				</div>
 			</section>
+
 			<div class="scene_wrapper">
 				{volist name="sceneLists" id="lists"}
 					{volist name="lists" id="list" }
@@ -57,6 +66,7 @@
 					{/volist}
 				{/volist}
 			</div>
+
 			<div class="project_wrapper">
 				<div class="mod-part-title">
 					<div class="mod-part-title-wrap">
