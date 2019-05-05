@@ -117,8 +117,7 @@ class Payment extends \common\controller\Base {
                     'sn'=>$info['sn'],
                     'product'=>$info['id'],
                     'actually_amount'=>$info['actually_amount'],
-                    //'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
-                    'success_url' => $jump_url,
+                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                     'notify_url'=>config('wx_config.notify_url'),
                     'attach'=>$attach,
@@ -128,7 +127,7 @@ class Payment extends \common\controller\Base {
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
                 $response = [
-                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+                    'success_url' => $jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 ];
 /*                $response = [
