@@ -18,20 +18,38 @@ class Order extends \common\controller\Base
         };
 
         $modelOrder = new \app\index\model\Order();
-        //$modelOrder = new \app\index\model\WalletDetail();
+        $walletDetail = new \app\index\model\WalletDetail();
         $modelOrder -> setConnection(config('custom.system_id')[3]['db']);
 
-        $config = [
-            'where' => [
-                ['status', '=', 0],
-                ['pay_sn', '<>', ''],
-                ['payment_code', '=', 1],
-            ],'field' => [
-                'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
-                'user_id',
-            ],
-        ];
-        $data =  $modelOrder->getList($config);
+
+        if($systemId==1){
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['order_status', '=', 2],
+                    ['pay_sn', '<>', ''],
+                    ['payment_code', '=', 1],
+                ],'field' => [
+                    'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
+                    'user_id',
+                ],
+            ];
+            $data =  $modelOrder->getList($config);
+        }else{
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['pay_sn', '<>', ''],
+                    ['payment_code', '=', 1],
+                ],'field' => [
+                    'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
+                    'user_id',
+                ],
+            ];
+            $data =  $walletDetail->getList($config);
+
+        }
+
 
         foreach($data as $k => $orderInfo){
             // 各方式退款
