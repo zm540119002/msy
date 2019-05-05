@@ -23,7 +23,7 @@ class Order extends \common\controller\Base
         $config = [
             'where' => [
                 ['o.status', '=', 0],
-                ['o.pay_an', '<>', ''],
+                ['o.pay_sn', '<>', ''],
                 ['o.payment_code', '=', 1],
             ],'field' => [
                 'o.id', 'o.pay_sn','o.sn', 'o.amount','o.actually_amount','payment_code',
