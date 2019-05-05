@@ -17,19 +17,39 @@ class Order extends \common\controller\Base
             return errorMsg('订单不存在或金额不能为0 !');
         };
 
-        // 各方式退款
-        switch($orderInfo['payment_code']){
-            case 1 : // 微信支付
-                $wxPay = new \common\component\payment\weixin\weixinpay;
-                if(!$result = $wxPay->refundOrder($orderInfo)){
-                    return errorMsg($wxPay->msg);
+        $modelOrder = new \app\index\model\Order();
+        $modelOrder -> setConnection(config('custom.system_id')[3]['db']);
 
-                }else{
-                    return successMsg($result);
-                }
+        $config = [
+            'where' => [
+                ['o.status', '=', 0],
+                ['o.pay_an', '<>', ''],
+                ['o.payment_code', '=', 1],
+            ],'field' => [
+                'o.id', 'o.pay_sn','o.sn', 'o.amount','o.actually_amount','payment_code',
+                'o.user_id',
+            ],
+        ];
+        $data =  $modelOrder->getList($config);
+        p($data);
+        exit;
+        foreach($data as $k => $orderInfo){
+            // 各方式退款
+            switch($orderInfo['payment_code']){
+                case 1 : // 微信支付
+                    $wxPay = new \common\component\payment\weixin\weixinpay;
+                    if(!$result = $wxPay->refundOrder($orderInfo)){
+                        return errorMsg($wxPay->msg);
 
-                break;
+                    }else{
+                        return successMsg($result);
+                    }
+
+                    break;
+            }
         }
+
+
         return errorMsg('失败');
     }
 

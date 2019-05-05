@@ -302,8 +302,7 @@ EOF;
             \think\facade\Log::save();
             return false;
         }
-        p($result);
-        exit;
+
         // 结果处理
         if(array_key_exists("return_code", $result) && array_key_exists("result_code", $result) && $result["return_code"] == "SUCCESS" && $result["result_code"] == "SUCCESS") {
             return $result;
