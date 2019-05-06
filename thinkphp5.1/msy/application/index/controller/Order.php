@@ -17,26 +17,64 @@ class Order extends \common\controller\Base
             return errorMsg('订单不存在或金额不能为0 !');
         };
 
-        // 各方式退款
-        switch($orderInfo['payment_code']){
-            case 1 : // 微信支付
-                $wxPay = new \common\component\payment\weixin\weixinpay;
-                if(!$result = $wxPay->refundOrder($orderInfo)){
-                    return errorMsg($wxPay->msg);
+        $modelOrder = new \app\index\model\Order();
+        $walletDetail = new \app\index\model\WalletDetail();
+        $modelOrder -> setConnection(config('custom.system_id')[3]['db']);
 
-                }else{
-                    return successMsg($result);
-                }
 
-                break;
+        if($systemId==1){
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['order_status', '=', 2],
+                    ['pay_sn', '<>', ''],
+                    ['payment_code', '=', 1],
+                ],'field' => [
+                    'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
+                    'user_id',
+                ],
+            ];
+            $data =  $modelOrder->getList($config);
+        }else{
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['pay_sn', '<>', ''],
+                    ['payment_code', '=', 1],
+                ],'field' => [
+                    'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
+                    'user_id',
+                ],
+            ];
+            $data =  $walletDetail->getList($config);
+
         }
+
+
+        foreach($data as $k => $orderInfo){
+            // 各方式退款
+            switch($orderInfo['payment_code']){
+                case 1 : // 微信支付
+                    $wxPay = new \common\component\payment\weixin\weixinpay;
+                    if(!$result = $wxPay->refundOrder($orderInfo)){
+                        //return errorMsg($wxPay->msg);
+
+                    }else{
+                        //return successMsg($result);
+                    }
+
+                    break;
+            }
+        }
+
+
         return errorMsg('失败');
     }
 
     private function orderInfo($systemId,$orderSn){
 
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->connection = config('custom.system_id')[$systemId]['db'];
+        $modelOrder -> setConnection(config('custom.system_id')[$systemId]['db']);
         $config = [
             'where' => [
                 ['o.status', '=', 0],

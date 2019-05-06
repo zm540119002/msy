@@ -22,6 +22,7 @@ class Base extends \common\controller\UserBase{
             }
             session(config('app.app_name'), $wallet);
         }
+        session(config('app.app_name'), null);
         $this->wallet = $wallet;
     }
 }

@@ -9,11 +9,27 @@
             <div>
                 <ul class="pay_nav">
                     <!-- 待优化 -->
-                    {if !empty($walletInfo) && $walletInfo.amount>0}
+                    {if !empty($walletInfo) && $walletInfo.amount>=$orderGoodsList[0]['amount']}
                     <li data-paycode="4">
                         <span class="selected"></span>
                         钱包支付
                         <span class="wx">余额：￥<price>{$walletInfo.amount|default=0}</price></span>
+
+                        <section id="walletPay" style="display:none;">
+                            <div class="payment_password">
+                                <ul class="payment_password_list" id="wrap">
+                                    <li class=""><input class="password_item" type="password" name="key" placeholder="-" data-index=""></li>
+                                    <li class=""><input class="password_item" type="password" name="key" placeholder="-" data-index=""></li>
+                                    <li class=""><input class="password_item" type="password" name="key" placeholder="-" data-index=""></li>
+                                    <li class=""><input class="password_item" type="password" name="key" placeholder="-" data-index=""></li>
+                                    <li class=""><input class="password_item" type="password" name="key" placeholder="-" data-index=""></li>
+                                    <li class=""><input class="password_item" type="password" name="key" placeholder="-" data-index=""></li>
+                                </ul>
+                                <div class="login_item">
+                                    <a href="javascript:void(0);" class="forget_wallet_password">忘记支付密码/设置密码</a>
+                                </div>
+                            </div>
+                        </section>
                     </li>
                     {else /}
                     <li data-paycode="4" class="disabled">

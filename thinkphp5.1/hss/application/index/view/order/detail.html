@@ -69,7 +69,14 @@
                 </div>
                 <div>
                     <span>收货地址：</span>
-                    <span>{$orderInfo.province}{$orderInfo.city}{$orderInfo.area}{$orderInfo.detail_address}</span>
+                    <span class="list_area_address"></span> <span>{$orderInfo.detail_address}</span>
+                    <div class="address_info" style="display:none;" >
+                        <form class="consigneeInfo">
+                            <input type="hidden" class="" name="province" value="{$orderInfo.province}" />
+                            <input type="hidden" class="" name="city" value="{$orderInfo.city}" />
+                            <input type="hidden" class="" name="area" value="{$orderInfo.area}" />
+                        </form>
+                    </div>
                 </div>
                 <div>
                     <span>备注：</span>
@@ -112,7 +119,13 @@
 
 {block name="script"}
 
-<script type="text/javascript" src="index_js/order.js"></script>
-<script src="public_js/jquery.area.js"></script>
+<script type="text/javascript" src="index_js/pay.js"></script>
+<script type="text/javascript" src="api_common_js/wallet.js"></script>
+<script src="api_common_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/address.js"></script>
+<script type="text/javascript">
+    //初始化订单金额
+    amount = "{$orderInfo['amount']}";
+    $('footer').find('.amount').text(amount);
+</script>
 {/block}

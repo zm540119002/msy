@@ -2,6 +2,7 @@
 {block name="content"}
 <!--转账凭证弹窗-->
 <section class="bank_transfer_tpl" style="display:none;">
+    <a href="javascript:void(0);" class="close_layer_pop"></a>
     <form id="bankTransfer">
         <p>1、线下办理银行汇款转账（底单拍照备用）</p>
         <div class="bank_transfer_item">
@@ -117,6 +118,11 @@
             $('.recharge_form price').text(rechargeMoney);
             $('input[name="amount"]').val(rechargeMoney);
         });
+        // 关闭层   做到这里
+        $('body').on('click','.close_layer_pop',function(){
+            $(this).parents('.layui-m-layer').remove();
+        });
+
         //充值支付
         $('body').on('click','.pay_btn',function () {
             var pay_code = $('input[name=pay_code]').val();
