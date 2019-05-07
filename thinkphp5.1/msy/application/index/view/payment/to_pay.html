@@ -44,9 +44,9 @@
                 'getBrandWCPayRequest',JSON.parse('{$jsApiParameters|raw}'),
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok"){
-           /*             location.href = payInfo.success_url;
-                        return true;*/
-                        dialog.success('支付成功！',payInfo.success_url);
+                        location.href = payInfo.success_url;
+                        return true;
+                        //dialog.success('支付成功！',payInfo.success_url);
                     }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
 
                         return false;

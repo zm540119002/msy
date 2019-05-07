@@ -65,6 +65,7 @@ class Payment extends \common\controller\Base {
                 $this -> error($msg);
             }
         }else{
+
             $systemId = input('system_id',0,'int');
             $this->assign('system_id',$systemId);
             //$paymentType 1:订单支付 2：充值支付
@@ -126,7 +127,7 @@ class Payment extends \common\controller\Base {
                 $jsApiParameters   = $wxPay::wxPay($payInfo);
                 $this -> assign('jsApiParameters',$jsApiParameters);
                 $response = [
-                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+                    'success_url' => $jump_url,
                     'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
                 ];
 /*                $response = [
@@ -145,7 +146,7 @@ class Payment extends \common\controller\Base {
      */
     private function getOrderInfo($systemId,$sn){
         $model = new \app\index\model\Order();
-        $model ->connection = config('custom.system_id')[$systemId]['db'];
+        $model ->setConnection(config('custom.system_id')[$systemId]['db']);
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -164,7 +165,7 @@ class Payment extends \common\controller\Base {
      */
     private function getWalletDetailInfo($systemId,$sn){
         $model = new \app\index\model\WalletDetail();
-        $model ->connection = config('custom.system_id')[$systemId]['db'];
+        $model ->setConnection(config('custom.system_id')[$systemId]['db']);
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -199,6 +200,7 @@ class Payment extends \common\controller\Base {
     public function wxPayNotifyCallBack(){
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $order['system_id'] = $attach['system_id'];
@@ -207,6 +209,7 @@ class Payment extends \common\controller\Base {
             $order['actually_amount'] = $data['total_fee']/100;
             $order['payment_code'] = 0;
             $order['pay_sn'] = $data['transaction_id'];
+
             if($attach['payment_type'] == 1){
                 $this->setOrderPayStatus($order);
             }elseif($attach['payment_type'] == 2){
@@ -219,7 +222,7 @@ class Payment extends \common\controller\Base {
      */
     private function setOrderPayStatus($info){
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->connection = config('custom.system_id')[$info['system_id']]['db'];
+        $modelOrder ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -234,6 +237,7 @@ class Payment extends \common\controller\Base {
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
+
         //此订单回调已处理过
         if($orderInfo['order_status']>=2){
             echo 'SUCCESS';
@@ -259,6 +263,7 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
+
         echo 'SUCCESS';
     }
 
@@ -266,10 +271,12 @@ class Payment extends \common\controller\Base {
      * @param $info 回调信息
      */
     private function setRechargePayStatus($info){
+
         $modelWalletDetail= new \app\index\model\WalletDetail();
-        $modelWalletDetail ->connection = config('custom.system_id')[$info['system_id']]['db'];
+        $modelWalletDetail ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->connection = config('custom.system_id')[$info['system_id']]['db'];
+        $modelWallet ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -277,7 +284,7 @@ class Payment extends \common\controller\Base {
                 //['recharge_status', '=', 1],
                 ['recharge_status', '=', 0],
             ],'field' => [
-                'id', 'sn', 'amount','payment_code','type','actually_amount',
+                'id', 'sn', 'amount','payment_code','type','actually_amount','recharge_status',
                 'user_id',
             ],
         ];
@@ -286,7 +293,7 @@ class Payment extends \common\controller\Base {
             return $this->writeLog("数据库没有此订单",$info);
         }
         //此订单回调已处理过
-        if($walletDetailInfo['order_status']>=2){
+        if($walletDetailInfo['recharge_status']>=2){
             echo 'SUCCESS';
             die;
         }
@@ -295,7 +302,7 @@ class Payment extends \common\controller\Base {
         }
         $modelWalletDetail ->startTrans();
         $data = [
-            'recharge_status'=>2,                              // 订单状态
+            'recharge_status'=>2,                           // 订单状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
         ];
@@ -325,6 +332,7 @@ class Payment extends \common\controller\Base {
             return $this->writeLog('充值订单支付更新失败',$info);
         }
         $modelWalletDetail->commit();//提交事务
+
         echo 'SUCCESS';
 
     }

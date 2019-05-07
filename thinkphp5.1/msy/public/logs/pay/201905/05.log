@@ -1,0 +1,720 @@
+---------------------------------------------------------------
+[ 2019-05-05T10:20:07+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：8.728781s][吞吐率：0.11req/s] [内存消耗：4,586.60kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:20:20+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：17.545562s][吞吐率：0.06req/s] [内存消耗：4,586.56kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:20:24+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：22.201311s][吞吐率：0.05req/s] [内存消耗：4,586.56kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:29:26+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：2.318325s][吞吐率：0.43req/s] [内存消耗：4,586.56kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:29:31+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：6.801375s][吞吐率：0.15req/s] [内存消耗：4,586.56kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:30:50+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：2.370691s][吞吐率：0.42req/s] [内存消耗：4,586.56kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:30:54+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：6.757756s][吞吐率：0.15req/s] [内存消耗：4,586.56kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:47:53+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：1.635054s][吞吐率：0.61req/s] [内存消耗：4,600.02kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '368',
+  'pay_sn' => '4200000288201904133776746771',
+  'sn' => '20190413100938359260811855301780',
+  'amount' => '0.04',
+  'actually_amount' => '0.04',
+  'payment_code' => '1',
+  'user_id' => '17',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:47:56+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：4.613816s][吞吐率：0.22req/s] [内存消耗：4,597.64kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '430',
+  'pay_sn' => '4200000333201904251558944553',
+  'sn' => '20190425154157481571254779333395',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:47:57+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：5.807388s][吞吐率：0.17req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '431',
+  'pay_sn' => '4200000337201904256560980198',
+  'sn' => '20190425154657787051038413832300',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:47:59+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：7.014719s][吞吐率：0.14req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '432',
+  'pay_sn' => '4200000318201904253382317921',
+  'sn' => '20190425160044582932703968222414',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:00+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：8.207715s][吞吐率：0.12req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '433',
+  'pay_sn' => '4200000322201904252300930465',
+  'sn' => '20190425160252912197870575962457',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:01+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：9.101357s][吞吐率：0.11req/s] [内存消耗：4,597.64kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '439',
+  'pay_sn' => '4200000322201904259849130551',
+  'sn' => '20190425172029763440160062696035',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:01+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：9.539773s][吞吐率：0.10req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '441',
+  'pay_sn' => '4200000317201904261845578021',
+  'sn' => '20190426103856654596608045972069',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:02+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：9.999154s][吞吐率：0.10req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '442',
+  'pay_sn' => '4200000315201904267415228106',
+  'sn' => '20190426105300475314943636808057',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:02+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：10.808221s][吞吐率：0.09req/s] [内存消耗：4,597.61kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:06+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：13.855484s][吞吐率：0.07req/s] [内存消耗：4,600.02kb] [文件加载：92]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904012 MicroMessenger/6.7.3 Language/zh_CN webview/15570209757366520 webdebugger port/18869',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=eiotn2ra3tgrhrj7nfvugolcg1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '368',
+  'pay_sn' => '4200000288201904133776746771',
+  'sn' => '20190413100938359260811855301780',
+  'amount' => '0.04',
+  'actually_amount' => '0.04',
+  'payment_code' => '1',
+  'user_id' => '17',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:07+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：15.255458s][吞吐率：0.07req/s] [内存消耗：4,597.64kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '430',
+  'pay_sn' => '4200000333201904251558944553',
+  'sn' => '20190425154157481571254779333395',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:08+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：15.642654s][吞吐率：0.06req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '431',
+  'pay_sn' => '4200000337201904256560980198',
+  'sn' => '20190425154657787051038413832300',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:08+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：16.034090s][吞吐率：0.06req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '432',
+  'pay_sn' => '4200000318201904253382317921',
+  'sn' => '20190425160044582932703968222414',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:08+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：16.407461s][吞吐率：0.06req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '433',
+  'pay_sn' => '4200000322201904252300930465',
+  'sn' => '20190425160252912197870575962457',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:09+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：16.989434s][吞吐率：0.06req/s] [内存消耗：4,597.64kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '439',
+  'pay_sn' => '4200000322201904259849130551',
+  'sn' => '20190425172029763440160062696035',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:09+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：17.370737s][吞吐率：0.06req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '441',
+  'pay_sn' => '4200000317201904261845578021',
+  'sn' => '20190426103856654596608045972069',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:10+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：17.752570s][吞吐率：0.06req/s] [内存消耗：4,593.89kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '442',
+  'pay_sn' => '4200000315201904267415228106',
+  'sn' => '20190426105300475314943636808057',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '16',
+)
+---------------------------------------------------------------
+[ 2019-05-05T10:48:10+08:00 ] 14.18.29.116 GET /index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Order/refundOrder/system_id/3/order_sn/20190429142820563954132215265327 [运行时间：18.547185s][吞吐率：0.05req/s] [内存消耗：4,597.61kb] [文件加载：92]
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 微信退款失败: 
+[ error ] array (
+  'id' => '459',
+  'pay_sn' => '4200000310201904296954161331',
+  'sn' => '20190429103152494500790225123868',
+  'amount' => '0.01',
+  'actually_amount' => '0.01',
+  'payment_code' => '1',
+  'user_id' => '48',
+)

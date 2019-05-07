@@ -3674,7 +3674,8 @@ input[type=text]::-webkit-focus-inner {
     width:50%;
     float:left;
 }
-.recharge_form input[type="submit"]{
+.recharge_form input[type="submit"],
+.recharge_form .pay_btn{
     height:100%;
     background: #FF7BAC;
     color:#fff;
@@ -6257,4 +6258,11 @@ div.no_data{
 }
 .msy-logo p{
     text-align: center;
+}
+.hot_news_wrapper{
+    padding:0.15rem;
+    background: #fff;
+}
+.customer_list span{
+    color:#C7AA53;
 }

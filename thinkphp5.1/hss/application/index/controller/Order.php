@@ -97,53 +97,58 @@ class Order extends \common\controller\UserBase
     public function confirmOrder()
     {
         if (request()->isPost()) {
+            // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
+
+
             $modelOrder = new \app\index\model\Order();
-            $modelOrder ->startTrans();
+            $condition = [
+                'where' => [
+                    ['user_id','=',$this->user['id']],
+                    ['id','=',$fatherOrderId],
+                    ['order_status','=',0],
+                ]
+            ];
+
+            $orderInfo  = $modelOrder->getInfo($condition);
+
+            if(!$orderInfo){
+                return errorMsg('订单已支付',['code'=>1]);
+            }
+
             $data = input('post.');
             $data['order_status'] = 1;
             $data['payment_code'] = $data['pay_code'];
-            $condition = [
-                ['user_id','=',$this->user['id']],
-                ['id','=',$fatherOrderId],
-            ];
 
-            $res = $modelOrder -> allowField(true) -> save($data,$condition);
+            $modelOrder ->startTrans();
+            $res = $modelOrder -> allowField(true) -> save($data,$condition['where']);
+
+            //根据订单号查询关联的购物车的商品
+            if(false !== $res){
+                $model = new \app\index\model\Cart();
+                $res = $model->clearCartGoodsByOrder($fatherOrderId,$this->user['id']);
+            }
 
             if(false === $res){
                 $modelOrder ->rollback();
                 return errorMsg('失败');
             }
 
-            //根据订单号查询关联的购物车的商品
-            $modelOrderDetail = new \app\index\model\OrderDetail();
-            $config = [
-                'where' => [
-                    ['od.status', '=', 0],
-                    ['od.father_order_id', '=', $fatherOrderId],
-                ], 'field' => [
-                    'od.goods_id','od.buy_type','od.price', 'od.num', 'od.store_id','od.father_order_id','od.user_id',
-                ]
-            ];
-            $orderDetailList = $modelOrderDetail->getList($config);
-            $model = new \app\index\model\Cart();
-            foreach ($orderDetailList as &$orderDetailInfo){
-                $condition = [
-                    ['user_id','=',$this->user['id']],
-                    ['foreign_id','=',$orderDetailInfo['goods_id']],
-                    ['buy_type','in',$orderDetailInfo['buy_type']],
-                ];
-                $result = $model -> del($condition,false);
-                if(!$result['status']){
-                    $modelOrder->rollback();
-                    return errorMsg('删除失败');
-                }
-            }
             $modelOrder -> commit();
             $orderSn = input('post.order_sn','','string');
 
-            $url = config('custom.pay_gateway').$orderSn;
-            return successMsg($url);
+            // 各支付方式的处理方式 //做到这里
+            switch($data['pay_code']){
+                // 支付中心处理
+                case config('custom.pay_code.WeChatPay.code') :
+                case config('custom.pay_code.Alipay.code') :
+                case config('custom.pay_code.UnionPay.code') :
+                    $url = config('custom.pay_gateway').$orderSn;
+                    break;
+            }
+
+
+            return successMsg( '成功',['url'=>$url]);
 
         }else{
             $modelOrder = new \app\index\model\Order();
@@ -167,6 +172,7 @@ class Order extends \common\controller\UserBase
                 $this->error('没有找到该订单');
             }
 
+
             $this ->assign('orderGoodsList',$orderGoodsList);
 
             $orderInfo = reset($orderGoodsList);
@@ -188,6 +194,9 @@ class Order extends \common\controller\UserBase
     {
         $orderSn = input('order_sn/s');
         $url = config('custom.pay_gateway');
+
+        p($orderSn);
+        exit;
 
         return $this->redirect($url.$orderSn);
 
@@ -302,6 +311,9 @@ class Order extends \common\controller\UserBase
         // 显示的地址信息
         $this->getOrderAddressInfo($info);
 
+        // 钱包余额
+        $this->assignWalletInfo();
+
         // 底部按钮
         // 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
         switch ($info['order_status'])
@@ -376,7 +388,7 @@ class Order extends \common\controller\UserBase
 /*                p($res);
                 exit;*/
                 $res = json_decode($res,true);
-                if(!$res['status']){
+                if(!$res['status'] || $res==null){
                     $type = false;
                 }
 
@@ -396,7 +408,6 @@ class Order extends \common\controller\UserBase
         }
         return successMsg('成功');
     }
-
 
     /**
      * @return array|mixed
@@ -506,14 +517,6 @@ class Order extends \common\controller\UserBase
         $walletInfo = $modelWallet->getInfo($config);
 
         $this->assign('walletInfo', $walletInfo);
-    }
-
-
-
-    private function refundOrder($orderInfo){
-
-
-        \common\component\payment\weixin\weixinpay::wxPay($orderInfo);
     }
 
 

@@ -12,14 +12,14 @@ class Wallet extends \common\model\Base {
 	protected $alias = 'w';
 
     /**
-     * 账号检查
+     * 获取账号信息
      */
     public function getWalletInfo($uid){
         $where = [
             ['user_id','=',$uid],
         ];
         $field = [
-            'id','user_id','status','amount','password'
+            'id','user_id','status','amount','password','salt'
         ];
         return $this->where($where)->field($field)->find();
     }
@@ -63,6 +63,20 @@ class Wallet extends \common\model\Base {
             return $response;
         }
         return errorMsg('资料缺失！');
+    }
+
+    /**
+     * 验证用户
+     */
+    public function checkWalletUser($user_id,$password){
+
+        $wallet = $this->getWalletInfo($user_id);
+
+        if( !$wallet || (!slow_equals($wallet['password'],md5($wallet['salt'].$password))) ){
+            return false;
+        }
+
+        return $wallet;
     }
 
 
