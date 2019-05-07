@@ -6291,11 +6291,11 @@ div.no_data{
 }
 .franchise_ul span{
     display:inline-block;
-    width:0.45rem;
-    height:0.45rem;
+    width:0.85rem;
+    height:0.85rem;
     background-image:url(../../common/img/icons/apply-icons.png);
     background-repeat: no-repeat;
-    background-size:0.35rem 2.18rem;
+    background-size: 0.65rem 2.5rem;
 }
 .applay_p_item{
     padding:0.15rem;
