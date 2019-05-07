@@ -134,24 +134,6 @@ function saveImageFromHttp($url,$savePath) {
     }
 }
 
-/**
- * 场景按行个数分组
- * @param $list
- * @return array
- */
-function sceneRatingList($list){
-    $sceneLists = array();
-    foreach($list as $k => $v){
-        $i = (count($sceneLists[$v['row_number']])) ? count($sceneLists[$v['row_number']]) : 1;
-        if (count($sceneLists[$v['row_number']][$i])==$v['row_number']){
-            $i++;
-        }
-        $sceneLists[$v['row_number']][$i][] = $v;
-    }
-    return $sceneLists;
-}
-
-
 function get_menu_tree($items, $id = 'id', $pid = 'parent_id_1', $son = 'children') {
     $tree = array();
     $tmpMap = array();
@@ -173,8 +155,11 @@ function get_menu_tree($items, $id = 'id', $pid = 'parent_id_1', $son = 'childre
 /**
  * 图片展示处理 现暂时没有其它的默认图片，到时按目录区分默认图片
  * 返回默认，记录日志......
+ * @param $img_url string 图片路径
+ * @param bool $show_default 图片不存在时,是否输出默认图片
+ * @return string || ''
  */
-function show_img_handle($img_url){
+function show_img_handle($img_url,$show_default=true){
 
     if(!empty($img_url)){
         // 根目录
@@ -188,6 +173,11 @@ function show_img_handle($img_url){
         }
     }
 
-    $uploads = config('template.tpl_replace_string.public_img');
-    return $uploads.'/default/no_pic_100.jpg';
+    if($show_default){
+        $uploads = config('template.tpl_replace_string.public_img');
+        return $uploads.'/default/no_pic_100.jpg';
+
+    }else{
+        return '';
+    }
 }

@@ -22,23 +22,20 @@ class Index extends \common\controller\Base{
         $promotionList  = $modelPromotion->getList($condition);
         $this ->assign('promotionList',$promotionList);
 
-        //获取精选的10个 场景
+        // 场景列表 11个
         $modelScene = new \app\index\model\Scene();
         $condition =[
             'where' => [
                 ['status', '=', 0],
                 ['shelf_status','=',3],
             ],
-            'field'=>['id','name','thumb_img','template','row_number'],
-            'order'=>['row_number'=>'desc', 'sort'=>'desc', 'id'=>'desc',],
+            'field'=>['id','name','thumb_img','display_type'],
+            'order'=>['sort'=>'desc', 'id'=>'asc',],
             'limit'=>'11'
 
         ];
         $sceneList  = $modelScene->getList($condition);
-
-        // 场景按行个数分组
-        $sceneLists = sceneRatingList($sceneList);
-        $this ->assign('sceneLists',$sceneLists);
+        $this ->assign('sceneList',$sceneList);
 
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());

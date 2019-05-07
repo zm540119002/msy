@@ -2,14 +2,31 @@
 {block name="content"}
 <article class="f24 content_main">
 	<section class="slider_banner">
-		<div class="swiper-container-horizontal swiper-container-ios">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
 					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
 				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
+				</div>
+				<div class="swiper-slide ">
+					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+					  aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 			</div>
 		</div>
 	</section>
+
 	<!-- 暂时不需要
 		<section class="module-navigation separation-line ">
 		<div class="columns_flex f20 channel_nav store_organize_nav">
@@ -23,28 +40,20 @@
 	-->
 	<section class="">
 		<div class="content-padding">
-			<!--优惠广告入口-->
+			<!-- 开放日 -->
 			<section class="slider_banner swiper-list-wrapper">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
-						{volist name="promotionList" id="vo"}
 						<div class="swiper-slide">
-							<a href="{:url('promotion/detail',['id'=>$vo.id])}">
+							<a href="#">
 								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
 							</a>
 						</div>
-						{/volist}
-					</div>
-					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
-							aria-label="Go to slide 1"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-						<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 					</div>
 				</div>
 			</section>
-			<div class="scene_wrapper">
+			<!-- 招商  暂时没有数据暂不展示--->
+<!--			<div class="scene_wrapper">
 				<div class="columns_flex l-r-sides" >
 					<a href="" class="graphic_item">
 						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
@@ -56,8 +65,9 @@
 						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
 					</a>
 				</div>
-			</div>
-			<div class="hot_news_wrapper">	
+			</div>-->
+			<!-- 快报  暂时没有数据暂不展示-->
+		<!--	<div class="hot_news_wrapper">
 				<div class="scroll_news">
 					<a class="news_tit">
 						<img src="public_img/wy_logo.png" alt="">
@@ -66,13 +76,13 @@
 						<ul class="news_list j_scroll_news">
 							<li class="news_item">
 								<a>
-									<!--<span class="red">最新</span>-->
+									&lt;!&ndash;<span class="red">最新</span>&ndash;&gt;
 									黑森森快报正式上线啦！
 								</a>
 							</li>
 							<li class="news_item">
 								<a>
-									<!--<span class="red">hot</span>-->
+									&lt;!&ndash;<span class="red">hot</span>&ndash;&gt;
 									黑森森合作联盟上线啦！
 								</a>
 							</li>
@@ -94,19 +104,36 @@
 						<span>[咨询城市合伙人]</span>
 					</div>
 				</div>
-			</div>
+			</div>-->
 			<div class="scene_wrapper">
-				{volist name="sceneLists" id="lists"}
-					{volist name="lists" id="list" }
-					<div class="columns_flex l-r-sides" >
-						{volist name="list" id="vo" }
-						<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
-							<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
-						</a>
-						{/volist}
-					</div>
-					{/volist}
+					{php}
+						$s=0;
+						$t=1;
+					{/php}
+				{volist name="sceneList" id="vo"}
+					{if $s==0 }
+						<div class="columns_flex l-r-sides" >
+					{/if}
+
+					{php}
+					++$s;
+					$row = config("custom.scene_arrangement.$t");
+					{/php}
+
+					<a href="{:url('Scene'.'/'.$vo.display_type,['id'=>$vo.id])}" class="graphic_item">
+						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+					</a>
+
+					{if $row==$s}
+						</div>
+						{php}
+							++$t;
+							$t = config("custom.scene_arrangement.$t") ? $t :  'default' ;
+							$s = 0;
+						{/php}
+					{/if}
 				{/volist}
+				</div>
 			</div>
 			<div class="project_wrapper">
 				<div class="mod-part-title">
