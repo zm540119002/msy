@@ -6266,3 +6266,18 @@ div.no_data{
 .customer_list span{
     color:#C7AA53;
 }
+/*加盟店家*/
+.franchise_ul li a{
+    display: block;
+    padding:0.15rem;
+    color:#fff;
+}
+.franchise_ul li:nth-of-type(1){
+    background: #3FA9F5;
+}
+.franchise_ul li:nth-of-type(2){
+    background: #FF931E;
+}
+.franchise_ul li:nth-of-type(3){
+    background: #C7AA53;
+}
