@@ -55,7 +55,6 @@ class Scene extends \common\controller\Base{
     /**
      * 二级场景页 -场景(默认)
      * 需要同组的各场景的名，场景信息，场景下的商品，场景下的方案
-     * 没有图片 暂时隐藏 后期待确定后再删除 code=1， detail_img.html 文件 sql 三处
      */
     public function detail(){
         if(request()->isAjax()){
@@ -118,8 +117,6 @@ class Scene extends \common\controller\Base{
 
             $this->assign('schemeList',$schemeList);
 
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
             $this->assign('relation',config('custom.relation_type.scene'));
 
             return $this->fetch();
@@ -135,29 +132,11 @@ class Scene extends \common\controller\Base{
         if(request()->isAjax()){
         }else{
             $id = intval(input('id'));
-            $cid= intval(input('cid'));
             if(!$id){
                 $this->error('此项目已下架');
             }
             // 场景信息
-            $model = new\app\index\model\Scene();
-            $config =[
-                'where' => [
-                    ['status', '=', 0],
-                    ['shelf_status', '=', 3],
-                    ['id', '=', $id],
-                ],
-            ];
-            $css = (input('css'));
-            $this->assign('css',$css);
-            $scene = $model->getInfo($config);
-            if(empty($scene)){
-                $this->error('此项目已下架');
-            }
-            // code=1
-            //$scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['tag'] = explode(',',(string)$scene['tag']);
-            $this->assign('scene',$scene);
+            $this->displayScene($id);
 
             // 场景下的商品分类
             $modelSceneGoodsCategory = new \app\index\model\SceneGoodsCategory();
@@ -176,75 +155,51 @@ class Scene extends \common\controller\Base{
             $categoryList = $modelSceneGoodsCategory->getList($config);
             $this->assign('categoryList',$categoryList);
 
-            // 选中的分类
-            if(!$cid){
-                $categoryInfo = reset($categoryList);
-                $cid = $categoryInfo['id'];
-            }
-            $this->assign('cid',$cid);
-            $this->assign('id',$id);
-
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-
             return $this->fetch('sort_img');
         }
     }
 
     /**
-     * 二级场景页 -只作为入口不关联场景
-     * 项目信息4个暂定(名称，logo,商品-ajax获取，介绍，视频)
+     * 场景信息页 -项目
+     * @return mixed
      */
     public function project(){
         if(request()->isAjax()){
         }else{
-            // 项目信息 -4个
-            $modelProject = new \app\index\model\Project();
-            $config = [
-                'where'  => [
-                    ['status', '=', 0],
-                    ['shelf_status', '=', 3],
-                    ['audit', '=', 1],
-                ],'field'=> [
-                    'id ','name','thumb_img','main_img','intro','detail_img','create_time','update_time','video'
-                ],'order'=> [
-                    'sort'=>'desc'
-                ],'limit' =>4,
-            ];
-
-            $projectList = $modelProject->getList($config);
-
-            if (empty($projectList)) {
+            $id = intval(input('id'));
+            if(!$id){
                 $this->error('此项目已下架');
             }
+            // 场景信息
+            $this->displayScene($id);
 
-            // 有项目id OR 默认项目id
-            $project_id = intval(input('param.pid/d'));
-
-            $project = array();
-            if($project_id){
-                foreach($projectList as $k => $v){
-                    if ($v['id']==$project_id){
-                        $project = $v;
-                        $projectList[$k]['current'] = 'current';
-                        break;
-                    }
-                }
-            }
-
-            if( empty($project) ){
-                $project = reset($projectList);
-                $projectList[key($projectList)]['current'] = 'current';
-            }
-
-            $this->assign('project',$project);
-            $this->assign('projectList',$projectList);
-
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            $this->assign('relation',config('custom.relation_type.project'));
             return $this->fetch();
         }
     }
+
+    // 输出场景信息
+    private function displayScene($id){
+        $model = new\app\index\model\Scene();
+        $config =[
+            'where' => [
+                ['status', '=', 0],
+                ['shelf_status', '=', 3],
+                ['id', '=', $id],
+            ],
+        ];
+        $scene = $model->getInfo($config);
+        if(empty($scene)){
+            $this->error('此项目已下架');
+        }
+
+        $scene['tag'] = explode('|',(string)$scene['tag']);
+        $scene['main_img'] = explode(',',(string)$scene['main_img']);
+        $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;
+
+        $this->assign('scene',$scene);
+    }
+
+
+
 
 }

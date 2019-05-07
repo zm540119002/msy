@@ -119,8 +119,8 @@
 
 	</section>
 </article>
-
 {/block}
+
 {block name="common"}
     {include file="brand/set_brand" /}
 	{include file="public/sample_layer" /}
@@ -143,7 +143,7 @@
 		})
 
 	});
-	// 获取该场景下的商品
+	// 获取该场景下的内容
 	var config = {
 		url:module+'Goods/getRelationGoods',
 		requestEnd:false,
@@ -156,7 +156,7 @@
 	};
 
 	$(function(){
-		//初始化场景商品页面
+		//初始化场景信息
 		postData.id = '{$scene.id}';
 
 		getPagingList(config,postData);
