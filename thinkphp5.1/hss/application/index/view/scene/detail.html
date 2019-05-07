@@ -35,7 +35,12 @@
 			<ul>
 				<li>
 					<div class="top_radius f20 top_module">
-						<div class="sss"></div>
+						<div>
+							<div class="title">
+								{$scene.title}
+							</div>
+							<div class="intro"></div>
+						</div>
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
 								{volist name="$scene.tag" id="tag"}
@@ -135,8 +140,9 @@
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 
+		// 后加载简介
 		$('document').ready(function(){
-			$('.sss').html("{$scene.intro|raw}");
+			$('.intro').html("{$scene.intro|raw}");
 		})
 
 	});

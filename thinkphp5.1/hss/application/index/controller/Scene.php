@@ -67,7 +67,7 @@ class Scene extends \common\controller\Base{
             $model = new\app\index\model\Scene();
             $condition =[
                 'field' => [
-                    'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type'
+                    'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type','ss.title'
                 ], 'where' => [
                     ['s.status', '=', 0],
                     ['s.shelf_status', '=', 3],

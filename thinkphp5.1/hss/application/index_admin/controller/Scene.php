@@ -29,9 +29,16 @@ class Scene extends Base {
      */
     public function edit(){
         $model = $this->obj;
+
         if(!request()->isPost()){
             if($id = input('param.id/d')){
-                $condition = ['where' => [['id','=',$id]]];
+                $condition = [
+                    'field' => [
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','display_type','type','tag_category','title','background_img'
+                    ], 'where' => [
+                        ['id','=',$id]
+                    ],
+                ];
                 $info = $model->getInfo($condition);
                 $info['intro'] = htmlspecialchars_decode($info['intro']);
 
