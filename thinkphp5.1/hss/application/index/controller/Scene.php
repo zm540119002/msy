@@ -67,7 +67,7 @@ class Scene extends \common\controller\Base{
             $model = new\app\index\model\Scene();
             $condition =[
                 'field' => [
-                    'ss.id','ss.name','ss.main_img','ss.intro','ss.tag_category','ss.display_type'
+                    'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type'
                 ], 'where' => [
                     ['s.status', '=', 0],
                     ['s.shelf_status', '=', 3],
@@ -91,14 +91,15 @@ class Scene extends \common\controller\Base{
                     break;
                 }
             }
-
+            $scene['tag'] = explode('|',(string)$scene['tag']);
             $scene['main_img'] = explode(',',(string)$scene['main_img']);
-            //$scene['tag'] = explode(',',(string)$scene['tag']);
+            $scene['intro'] = htmlspecialchars_decode($scene['intro']);
+
             $this->assign('sceneList',$sceneList);
             $this->assign('scene',$scene);
 
 
-            // 获取场景下的方案  aj获取
+            // 获取场景下的方案
             $modelSceneScheme = new \app\index\model\SceneScheme();
             $config = [
                 'where' => [
@@ -120,7 +121,7 @@ class Scene extends \common\controller\Base{
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             $this->assign('relation',config('custom.relation_type.scene'));
 
-            return $this->fetch('detail_img');
+            return $this->fetch();
         }
     }
 
