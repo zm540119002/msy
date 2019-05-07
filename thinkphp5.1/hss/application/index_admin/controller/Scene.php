@@ -68,7 +68,8 @@ class Scene extends Base {
             $data['intro'] = htmlspecialchars(input('intro/s'));
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
-
+            p($data);
+            exit;
             if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
                 // 编辑
