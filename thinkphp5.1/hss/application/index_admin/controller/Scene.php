@@ -151,12 +151,11 @@ class Scene extends Base {
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','type'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','type','display_type'],
             'order'=>['id'=>'asc',],
         ];
 
         $list = $this->obj->pageQuery($condition);
-
         $this->assign('list',$list);
 
         return view('list_tpl');

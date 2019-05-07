@@ -6259,3 +6259,10 @@ div.no_data{
 .msy-logo p{
     text-align: center;
 }
+.hot_news_wrapper{
+    padding:0.15rem;
+    background: #fff;
+}
+.customer_list span{
+    color:#C7AA53;
+}
