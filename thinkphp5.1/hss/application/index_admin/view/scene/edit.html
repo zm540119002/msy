@@ -204,6 +204,8 @@
             var content='';
             if(!postData.name){
                 content='场景名称不能为空';
+            }else if(!postData.title){
+                content='场景标题不能为空';
             }else if(!parseInt(postData.tag_category)){
                 content='标签类别不能为空';
             }else if(!postData.thumb_img){

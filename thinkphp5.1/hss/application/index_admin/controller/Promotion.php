@@ -27,58 +27,83 @@ class Promotion extends Base {
      */
     public function edit(){
         $model = $this->obj;
+
         if(!request()->isPost()){
             if($id = input('param.id/d')){
-                $condition = ['where' => [['id','=',$id]]];
+                $condition = [
+                    'field' => [
+                        'id','title','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img'
+                    ], 'where' => [
+                        ['id','=',$id]
+                    ],
+                ];
                 $info = $model->getInfo($condition);
+                $info['intro'] = htmlspecialchars_decode($info['intro']);
+
                 $this->assign('info',$info);
             }
+
             return $this->fetch();
 
         }
         else{
-            // 基础处理
-            if(!input('param.name/s')) return errorMsg('失败');
 
-            if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
+            // 基础处理
+            if(!input('param.title/s')) return errorMsg('失败');
+
+            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['thumb_img']);
             }
-            if(  isset($_POST['background_img']) && $_POST['background_img'] ){
-                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['background_img']));
-            }
+            /*            if( isset($_POST['background_img']) && $_POST['background_img'] ){
+                            $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['background_img']);
+                        }*/
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.scheme'),$item);
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
+
             }
 
             $data = $_POST;
+            $data['intro'] = htmlspecialchars(addslashes(input('intro/s')));
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 
-            if(isset($_POST['id']) && $id=input('post.id/d')){
-                // 编辑
-                $condition = ['where' => ['id' => $id,]];
+            if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
-                $info  = $model->getInfo($condition);
+                // 编辑
+                $condition = [
+                    'where' => ['id' => $id,],
+                    'field' => ['thumb_img,logo_img,background_img,main_img','intro']
+                ];
+
+                $info = $model->getinfo($condition);
+
                 $result= $model->edit($data,$condition['where']);
                 if(!$result['status']) return $result;
 
-                //删除旧图片
-                if($info['thumb_img']) delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
-                if($info['logo_img']) delImgFromPaths($info['logo_img'],$_POST['logo_img']);
-                if($info['background_img']) delImgFromPaths($info['background_img'],$_POST['background_img']);
+                //删除旧文件
+                if($info['thumb_img']){
+                    delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
+                }
+                if($info['logo_img']){
+                    delImgFromPaths($info['logo_img'],$_POST['logo_img']);
+                }
+                if($info['background_img']){
+                    delImgFromPaths($info['background_img'],$_POST['background_img']);
+                }
                 if($info['main_img']){
                     //删除商品详情图
                     $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
+
             }
             else{//新增
                 $data['create_time'] = time();
@@ -87,7 +112,7 @@ class Promotion extends Base {
 
             }
             return successMsg('成功');
-       }
+        }
     }
 
     /**
@@ -133,8 +158,8 @@ class Promotion extends Base {
 
         $config = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection'],
-            'order'=>['sort'=>'desc', 'id'=>'desc',],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time'],
+            'order'=>['id'=>'asc',],
         ];
 
         $list = $model->pageQuery($config);
