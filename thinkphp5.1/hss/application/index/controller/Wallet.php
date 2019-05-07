@@ -9,22 +9,14 @@ class Wallet extends Base {
         // 判断是否已开通钱包,后面改进此方法
         if( in_array(request()->action(),['index']) ){
             if(empty($this->wallet['password'])){
-                $this->redirect('walletOpening');
+                // 开通钱包
+                $this->assign('user',$this->user);
+                echo $this->fetch('wallet_opening');
                 exit;
             }
 
         }
 
-    }
-
-    /**
-     * 开通钱包页
-     */
-    public function walletOpening(){
-        $user = session('user');
-        $this->assign('user',$user);
-
-        return $this->fetch();
     }
 
     /**

@@ -18,6 +18,7 @@ function forgetWalletPasswordDialog(info){
         shadeClose:false,
         btn:['确定',''],
         success:function(){
+
             //钱包密码
             var oLis=$('.forgetWalletPasswordLayer input.password_item');
             for(var i = 0;i<oLis.length;i++){
@@ -81,9 +82,17 @@ function forgetWalletPasswordDialog(info){
             $.post(url,postData,function (data) {
                 if(data.status){
                     layer.closeAll();
-                    dialog.success('设置成功',info.jump_url);
+                    layer.open({
+                        content : '设置成功',
+                        time : 1,
+                        skin: 'msg',
+                        end : function(){
+                            if(info.jump_url){
+                                location.href=info.jump_url;
+                            }
+                        }
+                    });
                     return true;
-
                 }
                 if(!data.status){
                     dialog.success(data.info);
