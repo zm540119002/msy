@@ -6267,6 +6267,10 @@ div.no_data{
     color:#C7AA53;
 }
 /*加盟店家*/
+.franchise_ul li{
+    margin:0 0 0.15rem 0;
+    border-radius:4px;
+}
 .franchise_ul li a{
     display: block;
     padding:0.15rem;
@@ -6280,4 +6284,21 @@ div.no_data{
 }
 .franchise_ul li:nth-of-type(3){
     background: #C7AA53;
+}
+.franchise_ul li a::after{
+    border-bottom-color: #fff;
+    border-left-color: #fff;
+}
+.franchise_ul span{
+    display:inline-block;
+    width:0.45rem;
+    height:0.45rem;
+    background-image:url(../../common/img/icons/detail_icons.png);
+    background-repeat: no-repeat;
+    background-size:0.35rem 2.18rem;
+}
+.applay_p_item{
+    padding:0.15rem;
+    background: #fff;
+    border-radius:4px;
 }

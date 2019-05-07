@@ -61,7 +61,6 @@ class Scene extends \common\controller\Base{
         }else{
             $id = intval(input('id'));
             if(!$id) $this->error('此项目已下架');
-
             // 场景信息
             $model = new\app\index\model\Scene();
             $condition =[
@@ -93,10 +92,11 @@ class Scene extends \common\controller\Base{
             $scene['tag'] = explode('|',(string)$scene['tag']);
             $scene['main_img'] = explode(',',(string)$scene['main_img']);
             $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;
-            //var_dump($scene);
-            //exit;
+
+
+            $this->assign('info',$scene);
+
             $this->assign('sceneList',$sceneList);
-            $this->assign('scene',$scene);
 
 
             // 获取场景下的方案
@@ -112,8 +112,12 @@ class Scene extends \common\controller\Base{
                     ['scheme s','s.id = ss.scheme_id','left']
                 ]
             ];
-
             $schemeList= $modelSceneScheme->getList($config);
+
+            // 套餐下的商品总价 单个
+            foreach($schemeList as $k => $v){
+                $schemeList[$k]['amount'] = 9000;
+            }
 
             $this->assign('schemeList',$schemeList);
 
