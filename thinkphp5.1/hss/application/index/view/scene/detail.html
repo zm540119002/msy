@@ -68,7 +68,7 @@
 								<div>
 									<span class="left count-down-icons"></span>
 									<div class="d-r">
-										<p class="friday_end">品牌定制<span>.</span>周五截止</p>
+										<p class="friday_end">每天<span>.</span>联合采购</p>
 										<div id="countDownBox" class="count_down_box">
 											<span class="day"></span>天
 											<span class="hour"></span>小时
@@ -106,12 +106,14 @@
 		{notempty name="schemeList"}
 			{volist name="schemeList" id="info"}
 				<div class="apply_item">
-					{if $info.show_name==1}
-						<span class="content-label">{$info.name}</span>
-					{/if}
-					<a data-id="{$info.id}">
+					<div>
+						<div>¥<price>9800</price></div>
+						<p>加盟店拓客产品采购套餐</p>
+						<a data-id="{$info.id}" >立即进入</a>
+					</div>
+					<div>
 						<img src="{:show_img_handle($info.thumb_img)}" alt="{$info.name}">
-					</a>
+					</div>
 				</div>
 			{/volist}
 		{/notempty}
