@@ -6267,6 +6267,9 @@ div.no_data{
     color:#C7AA53;
 }
 /*加盟店家*/
+.franchise_ul li{
+    margin:0 0 0.15rem 0;
+}
 .franchise_ul li a{
     display: block;
     padding:0.15rem;
