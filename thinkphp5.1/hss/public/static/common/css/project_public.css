@@ -6289,6 +6289,14 @@ div.no_data{
     border-bottom-color: #fff;
     border-left-color: #fff;
 }
+.franchise_ul span{
+    display:inline-block;
+    width:0.45rem;
+    height:0.45rem;
+    background-image:url(../../common/img/icons/detail_icons.png);
+    background-repeat: no-repeat;
+    background-size:0.35rem 2.18rem;
+}
 .applay_p_item{
     padding:0.15rem;
     background: #fff;
