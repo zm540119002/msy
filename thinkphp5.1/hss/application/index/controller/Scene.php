@@ -67,7 +67,7 @@ class Scene extends \common\controller\Base{
             $model = new\app\index\model\Scene();
             $condition =[
                 'field' => [
-                    'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type'
+                    'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type','ss.title'
                 ], 'where' => [
                     ['s.status', '=', 0],
                     ['s.shelf_status', '=', 3],
@@ -93,8 +93,9 @@ class Scene extends \common\controller\Base{
             }
             $scene['tag'] = explode('|',(string)$scene['tag']);
             $scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['intro'] = htmlspecialchars_decode($scene['intro']);
-
+            $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;
+            //var_dump($scene);
+            //exit;
             $this->assign('sceneList',$sceneList);
             $this->assign('scene',$scene);
 
