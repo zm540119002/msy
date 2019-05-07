@@ -6281,3 +6281,8 @@ div.no_data{
 .franchise_ul li:nth-of-type(3){
     background: #C7AA53;
 }
+.applay_p_item{
+    padding:0.15rem;
+    background: #fff;
+    border-radius:4px;
+}
