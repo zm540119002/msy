@@ -21,6 +21,9 @@
 						{notempty name="factoryInfo"}
 						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
 						{/notempty}
+                        <div class="apply-items">
+							<input type="text" class="name " name="" value="{$factoryInfo.name|default=''}" placeholder="店家名称">
+						</div>
 						<div class="apply-items">
 							<input type="text" class="name " name="" value="{$factoryInfo.name|default=''}" placeholder="姓名">
 						</div>
