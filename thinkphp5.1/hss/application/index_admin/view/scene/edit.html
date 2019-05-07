@@ -21,9 +21,9 @@
 
                             {foreach $Think.config.custom.scene_type as $k => $vo }
                             {if $info.display_type==$k }
-                            <input type="radio" name="type" value="{$k}" checked="checked">{$vo}
+                            <input type="radio" name="display_type" value="{$k}" checked="checked">{$vo}
                             {else /}
-                            <input type="radio" name="type" value="{$k}">{$vo}
+                            <input type="radio" name="display_type" value="{$k}">{$vo}
                             {/if}
                             {/foreach}
 
