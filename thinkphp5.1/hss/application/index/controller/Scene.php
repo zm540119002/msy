@@ -93,8 +93,9 @@ class Scene extends \common\controller\Base{
             }
             $scene['tag'] = explode('|',(string)$scene['tag']);
             $scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['intro'] = htmlspecialchars_decode($scene['intro']);
-
+            $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;
+            //var_dump($scene);
+            //exit;
             $this->assign('sceneList',$sceneList);
             $this->assign('scene',$scene);
 
