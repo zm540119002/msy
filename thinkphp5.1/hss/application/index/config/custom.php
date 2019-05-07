@@ -57,7 +57,7 @@ return [
     // 支付链接 充值链接
     'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=',
     'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=2&sn=',
-    'pay_franchise'=>'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=3&sn=',
+    'pay_franchise'=>'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
 
     // 支付方式 1 微信 2：支付宝 3：网银 4:钱包
     'pay_code' => [
@@ -96,6 +96,22 @@ return [
         'OfflinePay' => [
             'code' => 4,
             'name' => '线下支付',
+        ],
+    ],
+
+    // 支付单的类型 1 订单 2：充值 3：加盟
+    'pay_type' => [
+        'orderPay' => [
+            'code' => 1,
+            'name' => '微信支付',
+        ],
+        'rechargePay' => [
+            'code' => 2,
+            'name' => '支付宝',
+        ],
+        'franchisePay' => [
+            'code' => 3,
+            'name' => '银联支付',
         ],
     ],
 

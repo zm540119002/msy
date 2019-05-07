@@ -13,11 +13,18 @@ class Franchise extends \common\controller\UserBase{
         }
     }
 
+    /**
+     * 申请加盟
+     * @return array|mixed
+     * @throws \think\exception\PDOException
+     *
+     */
     public function applyFranchise()
     {
         if(request()->isAjax()){
-            $model = new \app\index\model\Franchise();
-            $data = [
+            $modelFranchise = new \app\index\model\Franchise();
+            $modelFranchise -> startTrans();
+            $postData = [
                 'name'=>'ygb',
                 'mobile'=>'18664368697',
                 'province'=>'1',
@@ -25,13 +32,28 @@ class Franchise extends \common\controller\UserBase{
                 'detail_address'=>'hhhhhhh',
                 'franchise_fee' =>'0.01',
             ];
-            $data['sn'] = generateSN();
-            $result  = $model->isUpdate(false)->save($data);
+            $sn = generateSN(); //内部支付编号
+            $postData['sn'] = $sn;
+            $result  = $modelFranchise->isUpdate(false)->save($postData);
             if(!$result){
-                return e('成功',['url'=>config('custom.pay_franchise')]);
-            }else{
-                return successMsg('成功',['url'=>config('custom.pay_franchise')]);
+                $modelFranchise ->rollback();
+                return errorMsg('失败');
             }
+            $modelPay = new \app\index\model\pay();
+            $data = [
+                'sn' => $sn,
+                'actually_amount' => $postData['franchise_fee'],
+                'user_id' => $this->user['id'],
+                'payment_code' => $this->user['id'],
+                'type' => config('custom.pay_type')['franchisePay']['code'],
+            ];
+            $result  = $modelPay->isUpdate(false)->save($data);
+            if(!$result){
+                $modelPay ->rollback();
+                return errorMsg('失败');
+            }
+            $modelFranchise -> commit();
+            return successMsg('成功',['url'=>config('custom.pay_franchise')]);
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
